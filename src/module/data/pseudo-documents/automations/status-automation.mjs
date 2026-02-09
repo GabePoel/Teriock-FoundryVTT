@@ -8,6 +8,7 @@ import CritAutomation from "./crit-automation.mjs";
 const { fields } = foundry.data;
 
 /**
+ * @param {Teriock.Parameters.Condition.ConditionKey} status
  * @param {"apply"|"remove"|"toggle"|"inclde"} relation
  * @param {boolean} target
  * @param {boolean} executor
@@ -58,7 +59,8 @@ export default class StatusAutomation extends CritAutomation {
   /** @inheritDoc */
   get _formPaths() {
     const paths = ["status", "relation"];
-    if (this.relation === "include") paths.push(...["target", "executor"]);
+    if (this.relation === "include" && !this.isPassive)
+      paths.push(...["target", "executor"]);
     return paths;
   }
 

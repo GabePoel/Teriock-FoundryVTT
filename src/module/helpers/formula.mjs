@@ -100,6 +100,31 @@ export function upgradeIndeterministicFormula(value, delta) {
 }
 
 /**
+ * Transform a formula indeterministically.
+ * @param {string} value
+ * @param {string} delta
+ * @param {number} mode
+ * @returns {string}
+ */
+export function manipulateFormula(value, delta, mode) {
+  switch (mode) {
+    case CONST.ACTIVE_EFFECT_MODES.ADD:
+      return addFormula(value, delta);
+    case CONST.ACTIVE_EFFECT_MODES.MULTIPLY:
+      return multiplyFormula(value, delta);
+    case CONST.ACTIVE_EFFECT_MODES.UPGRADE:
+      return upgradeIndeterministicFormula(value, delta);
+    case CONST.ACTIVE_EFFECT_MODES.DOWNGRADE:
+      return downgradeIndeterministicFormula(value, delta);
+    case CONST.ACTIVE_EFFECT_MODES.OVERRIDE:
+      return delta;
+    case CONST.ACTIVE_EFFECT_MODES.CUSTOM:
+      return boostFormula(value, delta);
+  }
+  return value;
+}
+
+/**
  * Check if a formula would exist.
  * @param {string|number} formula
  * @returns {boolean}

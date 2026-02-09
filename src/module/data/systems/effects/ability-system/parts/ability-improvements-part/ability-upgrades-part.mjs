@@ -15,10 +15,10 @@ export default (Base) => {
   return (
     /**
      * @extends {AbilitySystem}
-     * @implements {AbilityImprovementsPartInterface}
+     * @implements {AbilityUpgradesPartInterface}
      * @mixin
      */
-    class AbilityImprovementsPart extends Base {
+    class AbilityUpgradesPart extends Base {
       /** @inheritDoc */
       static defineSchema() {
         const schema = super.defineSchema();

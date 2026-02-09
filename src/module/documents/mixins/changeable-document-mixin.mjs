@@ -108,7 +108,11 @@ export default function ChangeableDocumentMixin(Base) {
        * @returns {boolean}
        */
       get _canChange() {
-        return !this.parent || this.parent._embeddedPreparation;
+        return (
+          !this.parent ||
+          !["Actor", "Item"].includes(this.parent.documentName) ||
+          this.parent._embeddedPreparation
+        );
       }
 
       /** @type {Teriock.Changes.ChangeTree} */

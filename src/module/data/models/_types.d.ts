@@ -10,4 +10,10 @@ declare global {
       raw: number;
     }
   }
+
+  namespace Teriock.Options {
+    export type EvaluationOptions = Teriock.Fields.FormulaDerivationOptions & {
+      rollData?: object;
+    };
+  }
 }

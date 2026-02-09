@@ -1,4 +1,4 @@
-import { TeriockFolder } from "../../../documents/_module.mjs";
+import { TeriockActor, TeriockFolder } from "../../../documents/_module.mjs";
 
 /** <schema> Transformation configuration */
 export type TransformationField = {
@@ -63,4 +63,19 @@ export type CombatExpirationTiming = {
   time: "start" | "end";
   /** <schema> What is the trigger for this effect expiring? */
   trigger: "turn" | "combat" | "action";
+};
+
+/** <schema> Who is the individual triggers the combat expiration? */
+export type CombatExpirationIndividual = {
+  /** <schema> Relationship to the individual that triggers expirations. */
+  type: CombatExpirationSourceType;
+  /** <schema> The specific {@link TeriockActor} that triggers expirations. */
+  source?: UUID<TeriockActor>;
+};
+
+/** Data that defines a combat expiration */
+export type CombatExpiration = {
+  who: CombatExpirationIndividual;
+  what: CombatExpirationMethod;
+  when: CombatExpirationTiming;
 };

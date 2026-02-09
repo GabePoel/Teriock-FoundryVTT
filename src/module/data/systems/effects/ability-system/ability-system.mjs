@@ -22,7 +22,7 @@ import * as parts from "./parts/_module.mjs";
  * @mixes AbilityGeneralPart
  * @mixes AbilityHierarchyPart
  * @mixes AbilityImpactsPart
- * @mixes AbilityImprovementsPart
+ * @mixes AbilityUpgradesPart
  * @mixes AbilityPanelPart
  * @mixes ConsumableSystem
  * @mixes HierarchySystem

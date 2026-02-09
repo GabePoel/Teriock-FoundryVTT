@@ -113,12 +113,10 @@ export default class EvaluationModel extends EmbeddedDataModel {
 
   /**
    * Derive value of formula internally.
-   * @param {Teriock.Fields.FormulaDerivationOptions} [options]
+   * @param {Teriock.Options.EvaluationOptions} [options]
    * @returns {number}
    */
-  #evaluate(
-    options = /** @type {Teriock.Fields.FormulaDerivationOptions} */ {},
-  ) {
+  #evaluate(options = /** @type {Teriock.Options.EvaluationOptions} */ {}) {
     options = {
       ...this._derivationOptions,
       ...options,
@@ -134,7 +132,9 @@ export default class EvaluationModel extends EmbeddedDataModel {
       needsEval = true;
     }
     if (needsEval && !options.skipRollData) {
-      value = TeriockRoll.minValue(formula, this.getRollData());
+      let rollData = options.rollData;
+      if (!rollData) rollData = this.getRollData();
+      value = TeriockRoll.minValue(formula, rollData);
     }
     if (typeof options.max === "number") {
       value = Math.min(value, options.max);
@@ -156,7 +156,7 @@ export default class EvaluationModel extends EmbeddedDataModel {
 
   /**
    * Derive value of formula.
-   * @param {Teriock.Fields.FormulaDerivationOptions} [options]
+   * @param {Teriock.Options.EvaluationOptions} [options]
    */
   evaluate(options = {}) {
     this._value = this.#evaluate(options);

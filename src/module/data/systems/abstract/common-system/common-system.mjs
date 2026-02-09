@@ -83,6 +83,16 @@ export default class CommonSystem extends AccessDataMixin(TypeDataModel) {
   }
 
   /**
+   * The automations that are active right now.
+   * @returns {BaseAutomation[]}
+   */
+  get activeAutomations() {
+    const automations =
+      /** @type {BaseAutomation[]} */ this.automations.contents;
+    return automations.filter((a) => a.active);
+  }
+
+  /**
    * The color that this should be displayed with.
    * @returns {string|null}
    */

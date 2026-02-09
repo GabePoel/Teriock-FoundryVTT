@@ -4,6 +4,9 @@ import BaseAutomation from "./base-automation.mjs";
 
 const { fields } = foundry.data;
 
+/**
+ * @property {Teriock.Changes.QualifiedChangeData[]} changes
+ */
 export default class ChangesAutomation extends BaseAutomation {
   /** @inheritDoc */
   static get LABEL() {

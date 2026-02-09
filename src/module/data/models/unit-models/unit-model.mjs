@@ -1,3 +1,4 @@
+import { multiplyFormula } from "../../../helpers/formula.mjs";
 import { makeIconClass } from "../../../helpers/utils.mjs";
 import EvaluationModel from "../evaluation-model.mjs";
 
@@ -85,8 +86,8 @@ export default class UnitModel extends EvaluationModel {
   }
 
   /** @inheritDoc */
-  static defineSchema() {
-    const schema = super.defineSchema();
+  static defineSchema(options) {
+    const schema = super.defineSchema(options);
     Object.assign(schema, {
       unit: new fields.StringField({
         label: "Unit",
@@ -108,6 +109,22 @@ export default class UnitModel extends EvaluationModel {
       return `${this.formula} ${this.symbol}`;
     }
     return this.text;
+  }
+
+  /**
+   * The conversion factor for the chosen unit.
+   * @returns {number}
+   */
+  get conversion() {
+    const unitType = this.unitType;
+    if (unitType === "zero") return 0;
+    if (unitType === "infinite") return Infinity;
+    else {
+      return (
+        this.constructor.finiteChoiceEntries.find((e) => e.id === this.unit)
+          .conversion || 1
+      );
+    }
   }
 
   /** @inheritDoc */
@@ -136,6 +153,18 @@ export default class UnitModel extends EvaluationModel {
       ],
     );
     return group;
+  }
+
+  /** @inheritDoc */
+  get formula() {
+    const unitType = this.unitType;
+    if (unitType === "zero") return "0";
+    if (unitType === "infinite") return "9".repeat(32);
+    else {
+      const conversion = this.conversion;
+      if (conversion === 1) return super.formula;
+      else return multiplyFormula(super.formula, conversion.toString());
+    }
   }
 
   /**
@@ -201,12 +230,7 @@ export default class UnitModel extends EvaluationModel {
     const unitType = this.unitType;
     if (unitType === "zero") return 0;
     if (unitType === "infinite") return Infinity;
-    else {
-      const conversion =
-        this.constructor.finiteChoiceEntries.find((e) => e.id === this.unit)
-          .conversion || 1;
-      return value * conversion;
-    }
+    else return value;
   }
 
   /**

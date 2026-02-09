@@ -1,7 +1,11 @@
 import { pseudoHooks } from "../../../../../../constants/system/pseudo-hooks.mjs";
-import { pureUuid } from "../../../../../../helpers/resolve.mjs";
 import { FormulaField, RecordField } from "../../../../../fields/_module.mjs";
 import { builders } from "../../../../../fields/helpers/_module.mjs";
+import {
+  AbilityMacroAutomation,
+  ChangesAutomation,
+  StatusAutomation,
+} from "../../../../../pseudo-documents/automations/_module.mjs";
 import {
   qualifyChange,
   scaleChange,
@@ -54,27 +58,26 @@ export default (Base) => {
         super.migrateData(data);
       }
 
+      /**
+       * The automations that are active right now.
+       * @returns {BaseAutomation[]}
+       */
+      get activeAutomations() {
+        if (this.maneuver !== "passive") return [];
+        return super.activeAutomations;
+      }
+
       /** @inheritDoc */
       get changes() {
         const changes = super.changes;
-        if (this.maneuver === "passive") {
-          if (this.impacts.base.changes.length > 0) {
-            changes.push(...this.impacts.base.changes);
-          }
-          if (
-            this.parent.system.competence.proficient &&
-            this.impacts.proficient.changes.length > 0
-          ) {
-            changes.push(...this.impacts.proficient.changes);
-          }
-          if (
-            this.parent.system.competence.fluent &&
-            this.impacts.fluent.changes.length > 0
-          ) {
-            changes.push(...this.impacts.fluent.changes);
-          }
-          changes.push(...this.pseudoHookChanges);
-        }
+        const changesAutomations =
+          /** @type {ChangesAutomation[]} */ this.activeAutomations.filter(
+            (a) => a.type === ChangesAutomation.TYPE,
+          );
+        changesAutomations.forEach((a) => {
+          changes.push(...a.changes);
+        });
+        changes.push(...this.pseudoHookChanges);
         return changes;
       }
 
@@ -83,19 +86,23 @@ export default (Base) => {
        * @returns {Teriock.Changes.QualifiedChangeData[]}
        */
       get pseudoHookChanges() {
-        return Object.entries(this.impacts.macros).map(
-          ([safeUuid, pseudoHook]) => {
+        const macroAutomations =
+          /** @type {AbilityMacroAutomation[]} */ this.activeAutomations.filter(
+            (a) => a.type === AbilityMacroAutomation.TYPE,
+          );
+        return macroAutomations
+          .filter((a) => a.relation === "pseudoHook")
+          .map((a) => {
             return {
-              key: `system.hookedMacros.${pseudoHook}`,
+              key: `system.hookedMacros.${a.pseudoHook}`,
               mode: 2,
               priority: 5,
               qualifier: "1",
               target: "Actor",
               time: "normal",
-              value: pureUuid(safeUuid),
+              value: a.macro,
             };
-          },
-        );
+          });
       }
 
       /** @inheritDoc */
@@ -103,6 +110,15 @@ export default (Base) => {
         super.prepareBaseData();
         this.impacts.boosts =
           /** @type {Record<Teriock.Parameters.Consequence.RollConsequenceKey, string>} */ {};
+        const statusAutomations =
+          /** @type {StatusAutomation[]} */ this.activeAutomations.filter(
+            (a) => a.type === StatusAutomation.TYPE,
+          );
+        statusAutomations.forEach((a) => {
+          if (a.relation === "include") {
+            this.parent.statuses.add(a.status);
+          }
+        });
       }
 
       /** @inheritDoc */

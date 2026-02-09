@@ -4,8 +4,11 @@ import {
 } from "../../../../applications/dialogs/select-document-dialog.mjs";
 import {
   ChangesAutomation,
+  CombatExpirationAutomation,
+  DurationAutomation,
   RollAutomation,
   StatusAutomation,
+  TransformationAutomation,
 } from "../../../../data/pseudo-documents/automations/_module.mjs";
 import { TeriockRoll } from "../../../../dice/_module.mjs";
 import { TeriockFolder } from "../../../../documents/_module.mjs";
@@ -13,12 +16,12 @@ import {
   addFormula,
   boostFormula,
   formulaExists,
+  manipulateFormula,
 } from "../../../../helpers/formula.mjs";
 import { ApplyEffectHandler } from "../../../../helpers/interaction/button-handlers/apply-effect-handlers.mjs";
 import { RollRollableTakeHandler } from "../../../../helpers/interaction/button-handlers/rollable-takes-handlers.mjs";
 import { FeatHandler } from "../../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
 import standardDamageCommand from "../../../../helpers/interaction/commands/standard-damage-command.mjs";
-import { upgradeTransformation } from "../../../../helpers/utils.mjs";
 
 /**
  * @param {typeof AbilityExecutionConstructor} Base
@@ -157,6 +160,7 @@ export default function AbilityExecutionChatPart(Base) {
        * @returns {Promise<object>}
        */
       async generateConsequence(crit = false) {
+        // Get statuses from automations
         const statusAutomations = this.#getCritAutomations(
           StatusAutomation,
           crit,
@@ -165,11 +169,25 @@ export default function AbilityExecutionChatPart(Base) {
           .filter((a) => a.relation === "include")
           .map((a) => a.status);
 
-        //const durationAutomations = this.#getCritAutomations(
-        //  DurationAutomation,
-        //  crit,
-        //);
+        // Mutate duration with automations
+        const durationAutomations = this.#getCritAutomations(
+          DurationAutomation,
+          crit,
+        );
+        let durationFormula = this.source.system.duration.formula;
+        durationAutomations.forEach((a) => {
+          const formula = a.duration.formula;
+          durationFormula = manipulateFormula(durationFormula, formula, a.mode);
+        });
+        let durationValue = await TeriockRoll.getValue(
+          durationFormula,
+          this.rollData,
+        );
+        if (durationValue > Number("9".repeat(30))) {
+          durationValue = undefined;
+        }
 
+        // Get changes from automations
         const changesAutomations = this.#getCritAutomations(
           ChangesAutomation,
           crit,
@@ -182,69 +200,89 @@ export default function AbilityExecutionChatPart(Base) {
           c.value = this._heightenString(c.value);
         });
 
-        let seconds = this.mergeImpactsNumber("duration");
-        const interval = this.source.system.impacts.heightened.duration;
-        if (interval) seconds = Math.round(seconds / interval) * interval;
-        const expirations = this.mergeImpactsExpiration("expiration", crit);
-        expirations.normal.combat.who.source = this.actor?.uuid;
-        //let changes = foundry.utils.deepClone(
-        //  this.mergeImpactsChanges("changes"),
-        //);
-        //changes = changes.map((c) => {
-        //  c.value = this._heightenString(c.value);
-        //  return c;
-        //});
+        // Get combat expiration from automations
+        /** @type {Partial<CombatExpiration>} */
+        const combatExpiration = {};
+        const combatExpirationAutomations = this.#getCritAutomations(
+          CombatExpirationAutomation,
+          crit,
+        );
+        combatExpirationAutomations.forEach((a) => {
+          Object.assign(
+            combatExpiration,
+            foundry.utils.deepClone({
+              what: a.what,
+              when: a.when,
+              who: a.who,
+            }),
+          );
+          combatExpiration.who.source = this.actor?.uuid;
+        });
+
+        // TODO: Have abilities get their pseudoHooks from automations
         changes.push(...this.source.system.pseudoHookChanges);
-        const transformation =
-          this.mergeImpactsTransformation("transformation");
-        const folderUuids = transformation.uuids.filter((uuid) =>
-          uuid.includes("Folder"),
+
+        // Get transformation from automations
+        const transformationAutomations = this.#getCritAutomations(
+          TransformationAutomation,
+          crit,
         );
-        const nonFolderUuids = Array.from(
-          transformation.uuids.filter((uuid) => !uuid.includes("Folder")),
-        );
-        for (const folderUuid of folderUuids) {
-          nonFolderUuids.push(
-            ...(await TeriockFolder.getContents(folderUuid, {
-              types: ["species"],
-            })),
+        /** @type {Partial<TransformationConfigurationField>} */
+        const transformation = { enabled: !!transformationAutomations.length };
+        if (transformation.enabled) {
+          transformationAutomations.forEach((a) => {
+            Object.assign(transformation, a.transformation);
+          });
+          const folderUuids = transformation.uuids.filter((uuid) =>
+            uuid.includes("Folder"),
           );
-        }
-        //noinspection JSValidateTypes
-        transformation.uuids = nonFolderUuids;
-        if (!crit) {
-          const choices = transformation.uuids.map((uuid) =>
-            fromUuidSync(uuid),
+          const nonFolderUuids = Array.from(
+            transformation.uuids.filter((uuid) => !uuid.includes("Folder")),
           );
-          if (transformation.select) {
-            let chosen;
-            if (transformation.multiple) {
-              chosen = await selectDocumentsDialog(choices, {
-                hint: "Please one or more select species to transform into.",
-                title: "Select Species",
-                tooltipAsync: true,
-                openable: true,
-              });
-            } else {
-              chosen = [
-                await selectDocumentDialog(choices, {
-                  hint: "Please select a species to transform into.",
+          for (const folderUuid of folderUuids) {
+            nonFolderUuids.push(
+              ...(await TeriockFolder.getContents(folderUuid, {
+                types: ["species"],
+              })),
+            );
+          }
+          //noinspection JSValidateTypes
+          transformation.uuids = nonFolderUuids;
+          if (!crit) {
+            const choices = transformation.uuids.map((uuid) =>
+              fromUuidSync(uuid),
+            );
+            if (transformation.select) {
+              let chosen;
+              if (transformation.multiple) {
+                chosen = await selectDocumentsDialog(choices, {
+                  hint: "Please one or more select species to transform into.",
                   title: "Select Species",
                   tooltipAsync: true,
                   openable: true,
-                }),
-              ];
-            }
-            if (chosen) {
-              //noinspection JSValidateTypes
-              transformation.uuids = chosen.map((s) => s.uuid);
+                });
+              } else {
+                chosen = [
+                  await selectDocumentDialog(choices, {
+                    hint: "Please select a species to transform into.",
+                    title: "Select Species",
+                    tooltipAsync: true,
+                    openable: true,
+                  }),
+                ];
+              }
+              if (chosen) {
+                //noinspection JSValidateTypes
+                transformation.uuids = chosen.map((s) => s.uuid);
+              }
             }
           }
         }
+
         return {
           changes: [],
           duration: {
-            seconds: seconds,
+            seconds: durationValue,
           },
           img: this.source.img,
           name: `${this.source.name} Effect`,
@@ -255,7 +293,7 @@ export default function AbilityExecutionChatPart(Base) {
             critical: crit,
             deleteOnExpire: true,
             expirations: {
-              combat: expirations.normal.combat,
+              combat: combatExpiration,
               conditions: {
                 absent: Array.from(
                   this.source.system.duration.conditions.absent,
@@ -278,135 +316,6 @@ export default function AbilityExecutionChatPart(Base) {
           },
           type: "consequence",
         };
-      }
-
-      /**
-       * @param {string} property
-       * @returns {EffectChangeData[]}
-       */
-      mergeImpactsChanges(property) {
-        const method = (a, b) => [...a, ...b];
-        return this.mergeImpacts(property, method);
-      }
-
-      /**
-       * Merge impact expirations.
-       * @param {string} property
-       * @param {boolean} [crit]
-       * @returns {AbilityExpirations}
-       */
-      mergeImpactsExpiration(property, crit = false) {
-        /**
-         * @param {AbilityExpirations} a
-         * @returns {AbilityExpirations}
-         */
-        function baseMethod(a) {
-          a = foundry.utils.deepClone(a);
-          if (a.doesExpire && crit && a.changeOnCrit) {
-            a.normal = a.crit;
-          }
-          return a;
-        }
-
-        /**
-         * This handles all the crit considerations. All combat expirations will be compressed into `normal`.
-         * @param {AbilityExpirations} a
-         * @param {AbilityExpirations} b
-         * @returns {AbilityExpirations}
-         */
-        function method(a, b) {
-          b = foundry.utils.deepClone(b);
-          if (b.doesExpire && crit && b.changeOnCrit) {
-            b.normal = b.crit;
-          }
-          let c = a;
-          if (b.doesExpire) {
-            c = foundry.utils.mergeObject(a, b);
-          }
-          return c;
-        }
-
-        return this.mergeImpacts(property, method, { baseMethod });
-      }
-
-      /**
-       * Merge impact rolls.
-       * @param {string} property
-       * @returns {Record<Teriock.Parameters.Consequence.RollConsequenceKey, string>}
-       */
-      mergeImpactsRolls(property) {
-        const method = (a, b) => foundry.utils.mergeObject(a, b);
-        const rollData = this.rollData;
-        const heightened = this.heightened;
-
-        /**
-         * @param {Record<Teriock.Parameters.Consequence.RollConsequenceKey, string>} a
-         * @param {Record<Teriock.Parameters.Consequence.RollConsequenceKey, string>} b
-         * @returns {Record<Teriock.Parameters.Consequence.RollConsequenceKey, string>}
-         */
-        function heightenedMethod(a, b) {
-          const c = foundry.utils.deepClone(a);
-          for (const [key, value] of Object.entries(b)) {
-            const rollRoll = new TeriockRoll(value, rollData);
-            rollRoll.alter(heightened, 0, { multiplyNumeric: true });
-            c[key] = addFormula(a[key] || "", rollRoll.formula);
-          }
-          return c;
-        }
-
-        return this.mergeImpacts(property, method, { heightenedMethod });
-      }
-
-      /**
-       * Merge impact transformations.
-       * @param {string} property
-       * @returns {TransformationConfigurationField}
-       */
-      mergeImpactsTransformation(property) {
-        /**
-         * @param {TransformationConfigurationField} a
-         */
-        function baseMethod(a) {
-          const b = foundry.utils.deepClone(a);
-          if (b.useFolder && b.uuid) {
-            //noinspection JSValidateTypes
-            b.uuids = new Set([b.uuid]);
-          }
-          return b;
-        }
-
-        /**
-         * @param {TransformationConfigurationField} a
-         * @param {TransformationConfigurationField} b
-         * @returns {TransformationConfigurationField}
-         */
-        function method(a, b) {
-          a = foundry.utils.deepClone(a);
-          b = foundry.utils.deepClone(b);
-          let newUuids = Array.from(b.uuids);
-          if (b.useFolder && b.uuid) {
-            newUuids = [b.uuid];
-          }
-          let c = a;
-          if (b.enabled) {
-            c = {
-              enabled: b.enabled || a.enabled,
-              image: b.image || a.image,
-              select: b.select || a.select,
-              multiple: b.multiple || a.multiple,
-              level: upgradeTransformation(b.level, a.level),
-              uuids: new Set([...Array.from(a.uuids), ...newUuids]),
-              useFolder: a.useFolder || b.useFolder,
-              uuid: b.uuid || a.uuid,
-              resetHp: b.resetHp,
-              resetMp: b.resetMp,
-              suppression: b.suppression,
-            };
-          }
-          return c;
-        }
-
-        return this.mergeImpacts(property, method, { baseMethod });
       }
     }
   );

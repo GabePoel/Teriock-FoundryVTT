@@ -4,6 +4,7 @@ import { pureUuid, safeUuid } from "../../../../helpers/resolve.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
 import { FormulaField, TextField } from "../../../fields/_module.mjs";
 import { qualifiedChangeField } from "../../../fields/helpers/builders.mjs";
+import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import {
   qualifyChange,
   scaleChange,
@@ -32,6 +33,15 @@ export default class PropertySystem extends mix(
   mixins.HierarchySystemMixin,
   mixins.RevelationSystemMixin,
 ) {
+  /** @inheritDoc */
+  static get _automationTypes() {
+    return [
+      automations.ChangesAutomation,
+      automations.CheckAutomation,
+      automations.RollAutomation,
+    ];
+  }
+
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {

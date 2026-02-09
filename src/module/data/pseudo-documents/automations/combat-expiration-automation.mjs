@@ -3,6 +3,11 @@ import CritAutomation from "./crit-automation.mjs";
 
 const { fields } = foundry.data;
 
+/**
+ * @property {CombatExpirationIndividual} who
+ * @property {CombatExpirationMethod} what
+ * @property {CombatExpirationTiming} when
+ */
 export default class CombatExpirationAutomation extends CritAutomation {
   /** @inheritDoc */
   static get LABEL() {

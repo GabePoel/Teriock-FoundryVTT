@@ -49,7 +49,7 @@ declare global {
       heightened: string;
       /**
        * <schema> Description of any improvement that makes this ability better than it would otherwise be
-       * (not to be confused with {@link AbilityImprovementsPart})
+       * (not to be confused with {@link AbilityUpgradesPart})
        */
       improvement: string;
       /** <schema> This ability's interaction */

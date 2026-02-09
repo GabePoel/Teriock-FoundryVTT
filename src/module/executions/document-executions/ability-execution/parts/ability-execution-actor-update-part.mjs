@@ -69,7 +69,9 @@ export default function AbilityExecutionActorUpdatePart(Base) {
           if (this.costs.gp > 0 && !this.options.noGp) {
             await this.actor.system.takePay(this.costs.gp);
           }
-          await this.actor.update(this.updates);
+          if (Object.keys(this.updates).length > 0) {
+            await this.actor.update(this.updates);
+          }
         }
       }
     }

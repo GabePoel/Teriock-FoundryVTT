@@ -1,4 +1,4 @@
-export default interface AbilityImprovementsPartInterface {
+export default interface AbilityUpgradesPartInterface {
   /** <schema> Attributes that this ability upgrades */
   upgrades: UpgradesConfig;
 }

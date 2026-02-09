@@ -84,6 +84,16 @@ export default class BaseAutomation extends TypedPseudoDocument {
   }
 
   /**
+   * Whether this is passive or not.
+   * @returns {boolean}
+   */
+  get isPassive() {
+    if (this.document.type === "ability") {
+      return this.parent["maneuver"] === "passive";
+    } else return this.document.type === "property";
+  }
+
+  /**
    * Forms that go into the simple editor for this impact.
    * @returns {Promise<string>}
    */
