@@ -8,6 +8,10 @@ declare global {
       wither?: boolean;
       source?: TeriockArmament;
     };
+
+    export interface ArmamentExecutionInterface {
+      get source(): TeriockArmament;
+    }
   }
 }
 

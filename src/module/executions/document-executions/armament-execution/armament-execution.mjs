@@ -1,4 +1,3 @@
-import { selectDocumentsDialog } from "../../../applications/dialogs/select-document-dialog.mjs";
 import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
 import {
   makeDamageDrainTypePanels,
@@ -7,6 +6,9 @@ import {
 import { buttonHandlers } from "../../../helpers/interaction/_module.mjs";
 import BaseDocumentExecution from "../base-document-execution/base-document-execution.mjs";
 
+/**
+ * @implements {Teriock.Execution.ArmamentExecutionInterface}
+ */
 export default class ArmamentExecution extends BaseDocumentExecution {
   /**
    * @param {Teriock.Execution.ArmamentExecutionOptions} options
@@ -73,6 +75,14 @@ export default class ArmamentExecution extends BaseDocumentExecution {
       }
       this.buttons.push(...makeDamageTypeButtons(roll));
     }
+    for (const property of this.source.properties) {
+      const newButtons = [];
+      property.system.activeAutomations.forEach((a) =>
+        newButtons.push(...a.buttons),
+      );
+      this.buttons.push(...newButtons);
+    }
+    await super._buildButtons();
   }
 
   /** @inheritDoc */
@@ -96,28 +106,7 @@ export default class ArmamentExecution extends BaseDocumentExecution {
 
   /** @inheritDoc */
   async _postExecute() {
-    const onUseIds = Array.from(this.source.system.onUse);
-    const onUseAbilities = /** @type {TeriockAbility[]} */ onUseIds
-      .map((id) => this.source.effects.get(id))
-      .filter((a) => a);
-    if (onUseAbilities.length > 0) {
-      const usedAbilities = await selectDocumentsDialog(onUseAbilities, {
-        hint: `${this.source.name} has abilities that can activate on use. Select which activate`,
-        title: "Activate Abilities",
-      });
-      for (const ability of usedAbilities) {
-        if (ability.system.consumable && this.source.system.consumable) {
-          if (
-            ability.system.quantity !== 1 &&
-            this.source.isOwner &&
-            !this.source.inCompendium
-          ) {
-            await this.source.setFlag("teriock", "dontConsume", true);
-          }
-        }
-        await ability.use();
-      }
-    }
+    await super._postExecute();
     await this.actor?.hookCall("useArmament", { execution: this });
   }
 
