@@ -14,7 +14,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     flags:
       teriock:
         category: combat
@@ -22,6 +22,24 @@ effects:
     img: systems/teriock/src/icons/abilities/necromancy-rotator-fluency.webp
     name: Necromancy Rotator Fluency
     system:
+      automations:
+        f025905e157ac261:
+          _id: f025905e157ac261
+          changes:
+            - key: system.competence.raw
+              mode: 4
+              priority: 10
+              qualifier: '@key.necromancyRotators'
+              target: ability
+              time: fluency
+              value: '2'
+          competencies:
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       class: necromancer
       competence:
         raw: 0
@@ -41,16 +59,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        proficient:
-          changes:
-            - key: system.competence.raw
-              mode: 4
-              priority: 10
-              qualifier: '@key.necromancyRotators'
-              target: ability
-              time: fluency
-              value: '2'
       interaction: manifest
       maneuver: passive
       overview:

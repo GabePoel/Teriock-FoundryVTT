@@ -15,7 +15,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.10.0
     effects:
       - _id: KnQDlnnflul93qRp
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/battle-charge.webp
         name: Battle Charge
         system:
@@ -87,7 +87,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/battle-cry.webp
         name: Battle Cry
         system:
@@ -136,11 +136,52 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
         name: Battle Cry Aura
         system:
           _sup: nexadyGUfB7SpX5J
+          automations:
+            b4960732f0b9ed9f:
+              _id: b4960732f0b9ed9f
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              executor: false
+              heighten:
+                - 1
+                - 0
+              relation: include
+              status: frightened
+              target: false
+              type: status
+            d635eb44dba086dd:
+              _id: d635eb44dba086dd
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 1
+                - 0
+              type: combatExpiration
+              what:
+                roll: 2d4kh1
+                threshold: 4
+                type: rolled
+              when:
+                skip: 0
+                time: start
+                trigger: turn
+              who:
+                type: target
           class: berserker
           competence:
             raw: 0
@@ -168,31 +209,6 @@ items:
           featSaveAttribute: int
           form: normal
           grantOnly: false
-          impacts:
-            base:
-              expiration:
-                changeOnCrit: false
-                doesExpire: true
-                normal:
-                  combat:
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: rolled
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                    who:
-                      type: target
-              rolls:
-                endCon: 2d4
-              statuses:
-                - frightened
-            macros:
-              Compendium_teriock_execution_Macro_c172c60521a75122: preExecution
-              Compendium_teriock_execution_Macro_selfFearPreExecu: preExecution
-              Compendium_teriock_execution_Macro_tNkUejVshZd2Etms: preExecution
           interaction: feat
           maneuver: active
           overview:
@@ -222,11 +238,41 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
         name: Battle Cry Resistance
         system:
           _sup: nexadyGUfB7SpX5J
+          automations:
+            8f623097f9f2a087:
+              _id: 8f623097f9f2a087
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              hex: false
+              type: resist
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.protections.resistances.statuses
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: frightened
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
           class: berserker
           competence:
             raw: 0
@@ -249,16 +295,6 @@ items:
           featSaveAttribute: mov
           form: normal
           grantOnly: false
-          impacts:
-            base:
-              changes:
-                - key: system.protections.resistances.statuses
-                  mode: 2
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: frightened
           interaction: manifest
           maneuver: active
           overview:
@@ -285,7 +321,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/beastly-strength.webp
         name: Beastly Strength
         system:
@@ -341,7 +377,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/dense-intelligence.webp
         name: Dense Intelligence
         system:
@@ -387,7 +423,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/giant-strength.webp
         name: Giant Strength
         system:
@@ -442,7 +478,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
         name: Improved Armor Piercing
         system:
@@ -492,7 +528,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/improved-strength.webp
         name: Improved Strength
         system:
@@ -546,7 +582,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/knockback.webp
         name: Knockback
         system:
@@ -601,7 +637,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
         name: Melee Damage Boost
         system:
@@ -662,7 +698,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/no-hands.webp
         name: No Hands
         system:
@@ -706,7 +742,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
@@ -752,7 +788,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
@@ -798,7 +834,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/normal-sneak.webp
         name: Normal Sneak
         system:
@@ -844,10 +880,34 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/trample.webp
         name: Trample
         system:
+          automations:
+            1728b3a84ea27844:
+              _id: 1728b3a84ea27844
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: common
+            29b275994cf9f5b1:
+              _id: 29b275994cf9f5b1
+              competencies:
+                - 0
+                - 1
+                - 2
+              formula: 1d6
+              heighten:
+                - 1
+                - 0
+              merge: true
+              roll: damage
+              type: roll
           competence:
             raw: 0
           delivery:
@@ -866,12 +926,6 @@ items:
           featSaveAttribute: mov
           form: normal
           grantOnly: false
-          impacts:
-            base:
-              common:
-                - standardDamage
-              rolls:
-                damage: 1d6
           interaction: attack
           maneuver: reactive
           overview:
@@ -929,7 +983,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.10.0
     effects:
       - _id: 1keJAxX1vkfTL8Wl
         _key: >-
@@ -939,7 +993,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -960,7 +1014,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: icons/creatures/abilities/mouth-teeth-long-red.webp
         name: Biting
         system:
@@ -980,7 +1034,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -1021,7 +1075,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.10.0
     effects:
       - _id: LwntE76DWV8LsMYk
         _key: >-
@@ -1031,7 +1085,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -1052,7 +1106,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -1092,7 +1146,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.10.0
     effects:
       - _id: glS8ZuPVjwh592mc
         _key: >-
@@ -1102,7 +1156,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -1123,7 +1177,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -1143,7 +1197,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/properties/prehensile.webp
         name: Prehensile
         system:
@@ -1184,7 +1238,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.10.0
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/icons/body-parts/hardened-hide.webp
     name: Hardened Hide
@@ -1215,7 +1269,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.10.0
     effects:
       - _id: JEzZm0Zsu2BPorbK
         _key: >-
@@ -1225,23 +1279,33 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/properties/av0.webp
         name: AV0
         system:
+          automations:
+            parameterChanges:
+              _id: parameterChanges
+              changes:
+                - key: system.piercing.raw
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: parent
+                  time: normal
+                  value: '1'
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 0
+                - 1
+              type: changes
           competence:
             raw: 0
           description: <p>An item with this property is always @L[Keyword:AV0]{AV0}.</p>
           form: intrinsic
-          impacts:
-            changes:
-              - key: system.piercing.raw
-                mode: 4
-                priority: 10
-                qualifier: '1'
-                target: parent
-                time: normal
-                value: '1'
           revealed: true
         type: property
       - _id: e03touG9itgei9l2
@@ -1252,7 +1316,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:

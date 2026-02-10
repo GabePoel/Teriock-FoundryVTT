@@ -15,7 +15,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.10.0
     effects:
       - _id: awi8XU4KnjV4EQpm
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/beastly-strength.webp
         name: Beastly Strength
         system:
@@ -81,7 +81,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/dense-intelligence.webp
         name: Dense Intelligence
         system:
@@ -127,10 +127,29 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/fire-damage-immunity.webp
         name: Fire Damage Immunity
         system:
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.protections.immunities.damageTypes
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: fire
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
           competence:
             raw: 0
           delivery:
@@ -151,16 +170,6 @@ items:
           featSaveAttribute: mov
           form: normal
           grantOnly: false
-          impacts:
-            base:
-              changes:
-                - key: system.protections.immunities.damageTypes
-                  mode: 2
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: fire
           interaction: manifest
           maneuver: passive
           overview:
@@ -185,7 +194,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/giant-strength.webp
         name: Giant Strength
         system:
@@ -240,10 +249,28 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/hide.webp
         name: Hide
         system:
+          automations:
+            0b0d1426453abb55:
+              _id: 0b0d1426453abb55
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              executor: false
+              heighten:
+                - 1
+                - 0
+              relation: apply
+              status: hidden
+              target: false
+              type: status
           class: thief
           competence:
             raw: 0
@@ -263,18 +290,6 @@ items:
           featSaveAttribute: mov
           form: normal
           grantOnly: false
-          impacts:
-            base:
-              rolls:
-                hide: 1d20 + (2 * @snk)
-              startStatuses:
-                - hidden
-            fluent:
-              rolls:
-                hide: 1d20 + (2 * @snk) + @f
-            proficient:
-              rolls:
-                hide: 1d20 + (2 * @snk) + @p
           interaction: manifest
           limitation: <p>In sunlight only.</p>
           maneuver: active
@@ -327,10 +342,40 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/holy-damage-resistance.webp
         name: Holy Damage Resistance
         system:
+          automations:
+            8f623097f9f2a087:
+              _id: 8f623097f9f2a087
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              hex: false
+              type: resist
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.protections.resistances.damageTypes
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: holy
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
           competence:
             raw: 0
           delivery:
@@ -351,16 +396,6 @@ items:
           featSaveAttribute: mov
           form: normal
           grantOnly: false
-          impacts:
-            base:
-              changes:
-                - key: system.protections.resistances.damageTypes
-                  mode: 2
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: holy
           interaction: manifest
           maneuver: passive
           overview:
@@ -385,7 +420,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
         name: Improved Armor Piercing
         system:
@@ -435,7 +470,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/improved-strength.webp
         name: Improved Strength
         system:
@@ -489,7 +524,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
         name: Melee Damage Boost
         system:
@@ -550,10 +585,36 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/natural-unbreachability.webp
         name: Natural Unbreachability
         system:
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.av.bonus
+                  mode: 4
+                  priority: 10
+                  qualifier: '@av'
+                  target: body
+                  time: normal
+                  value: '1'
+                - key: system.props
+                  mode: 2
+                  priority: 10
+                  qualifier: '@av'
+                  target: body
+                  time: normal
+                  value: unbreachable
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
           class: veteran
           competence:
             raw: 0
@@ -573,23 +634,6 @@ items:
           featSaveAttribute: mov
           form: normal
           grantOnly: false
-          impacts:
-            base:
-              changes:
-                - key: system.av.bonus
-                  mode: 4
-                  priority: 10
-                  qualifier: '@av'
-                  target: body
-                  time: normal
-                  value: '1'
-                - key: system.props
-                  mode: 2
-                  priority: 10
-                  qualifier: '@av'
-                  target: body
-                  time: normal
-                  value: unbreachable
           interaction: manifest
           maneuver: passive
           overview:
@@ -616,7 +660,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
@@ -662,7 +706,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
@@ -708,7 +752,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/normal-sneak.webp
         name: Normal Sneak
         system:
@@ -754,10 +798,41 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/regenerating.webp
         name: Regenerating
         system:
+          automations:
+            1728b3a84ea27844:
+              _id: 1728b3a84ea27844
+              common:
+                - heal
+                - revive
+                - bag
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: common
+            dbb9db6fc4ee7177:
+              _id: dbb9db6fc4ee7177
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 1
+                - 0
+              macro: Compendium.teriock.execution.Macro.e95a90ea3d657b96
+              pseudoHook: turnStart
+              relation: pseudoHook
+              type: abilityMacro
           competence:
             raw: 0
           delivery:
@@ -780,11 +855,6 @@ items:
           featSaveAttribute: mov
           form: special
           grantOnly: false
-          impacts:
-            macros:
-              Compendium_teriock_execution_Macro_Fxodz6ZFE3MOjEON: turnStart
-              Compendium_teriock_execution_Macro_e95a90ea3d657b96: turnStart
-              Compendium_teriock_execution_Macro_rgnTurnStart0000: turnStart
           interaction: manifest
           maneuver: passive
           overview:
@@ -818,7 +888,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/stationary-invisibility.webp
         name: Stationary Invisibility
         system:
@@ -864,7 +934,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/stealth.webp
         name: Stealth
         system:
@@ -929,10 +999,29 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/unconsciousness-immunity.webp
         name: Unconsciousness Immunity
         system:
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.protections.immunities.statuses
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: unconscious
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
           competence:
             raw: 0
           delivery:
@@ -953,16 +1042,6 @@ items:
           featSaveAttribute: mov
           form: normal
           grantOnly: false
-          impacts:
-            base:
-              changes:
-                - key: system.protections.immunities.statuses
-                  mode: 2
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: unconscious
           interaction: manifest
           maneuver: passive
           overview:
@@ -1019,7 +1098,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.10.0
     effects:
       - _id: LwntE76DWV8LsMYk
         _key: >-
@@ -1029,7 +1108,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -1050,7 +1129,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -1090,7 +1169,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.10.0
     folder: c8142ec7ec7ecbbd
     img: systems/teriock/src/icons/body-parts/thick-hide.webp
     name: Thick Hide
@@ -1121,7 +1200,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.10.0
     effects:
       - _id: FAUPXdLk1A1fD0k8
         _key: >-
@@ -1131,7 +1210,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -1152,7 +1231,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -1172,7 +1251,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/properties/prehensile.webp
         name: Prehensile
         system:
@@ -1192,7 +1271,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -1232,7 +1311,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.10.0
     effects:
       - _id: Wez1JXmo9LjBU1oA
         _key: >-
@@ -1242,7 +1321,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -1262,7 +1341,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -1305,7 +1384,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.10.0
     effects:
       - _id: 1keJAxX1vkfTL8Wl
         _key: >-
@@ -1315,7 +1394,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -1336,7 +1415,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: icons/creatures/abilities/mouth-teeth-long-red.webp
         name: Biting
         system:
@@ -1356,7 +1435,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:

@@ -122,13 +122,87 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.21
+      systemVersion: 0.9.26
     flags:
       teriock:
         dontConsume: false
     img: systems/teriock/src/icons/abilities/light-ray.webp
     name: Light Ray
     system:
+      automations:
+        747b3e9c9b617af6:
+          _id: 747b3e9c9b617af6
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          executor: false
+          heighten:
+            - 1
+            - 0
+          relation: include
+          status: lighted
+          target: true
+          type: status
+        800c70e6560525a8:
+          _id: 800c70e6560525a8
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: (@h)d4[magic holy]
+          heighten:
+            - 1
+          merge: true
+          roll: damage
+          type: roll
+        d5717000e99ee582:
+          _id: d5717000e99ee582
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: combatExpiration
+          what:
+            roll: 2d4kh1
+            threshold: 4
+            type: forced
+          when:
+            skip: 0
+            time: end
+            trigger: turn
+          who:
+            type: executor
+        d635eb44dba086dd:
+          _id: d635eb44dba086dd
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+          heighten:
+            - 1
+            - 0
+          type: combatExpiration
+          what:
+            roll: 2d4kh1
+            threshold: 4
+            type: forced
+          when:
+            skip: 0
+            time: end
+            trigger: turn
+          who:
+            type: target
       class: lifeMage
       competence:
         raw: 0
@@ -152,43 +226,6 @@ effects:
       form: normal
       grantOnly: false
       heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic holy]]] @L[Core:Damage]{damage}\_as well.</p>"
-      impacts:
-        base:
-          expiration:
-            changeOnCrit: true
-            crit:
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: forced
-                when:
-                  skip: 0
-                  time: end
-                  trigger: turn
-                who:
-                  type: executor
-            doesExpire: true
-            normal:
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: forced
-                when:
-                  skip: 0
-                  time: end
-                  trigger: turn
-                who:
-                  type: target
-          statuses:
-            - lighted
-        heightened:
-          rolls:
-            damage: 1d4[magic holy]
-        macros:
-          Compendium_teriock_execution_Macro_BJdPDE0aULbyEKrB: preExecution
-          Compendium_teriock_execution_Macro_a4ee85386d246e23: preExecution
       interaction: attack
       maneuver: active
       piercing:
@@ -218,10 +255,23 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.10.0
     img: systems/teriock/src/icons/abilities/medicine-ball.webp
     name: Medicine Ball
     system:
+      automations:
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          common:
+            - heal
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: common
       class: lifeMage
       competence:
         raw: 0
@@ -276,10 +326,25 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.10.0
     img: systems/teriock/src/icons/abilities/resurrect.webp
     name: Resurrect
     system:
+      automations:
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          common:
+            - heal
+            - revive
+            - bag
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: common
       class: lifeMage
       competence:
         raw: 0

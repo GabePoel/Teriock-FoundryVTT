@@ -15,7 +15,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.10.0
     effects:
       - _id: x1avJWcMKxI0T4fe
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/ayla-binding-strike.webp
         name: Ayla Binding Strike
         system:
@@ -89,7 +89,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/beastly-strength.webp
         name: Beastly Strength
         system:
@@ -145,7 +145,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/bumbling.webp
         name: Bumbling
         system:
@@ -191,11 +191,30 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/ethereal-senses.webp
         name: Ethereal Senses
         system:
           _sup: mJUKOpbFh6Qw3mAa
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.senses.ethereal
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '120'
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
           competence:
             raw: 0
           delivery:
@@ -218,16 +237,6 @@ items:
           featSaveAttribute: mov
           form: normal
           grantOnly: false
-          impacts:
-            base:
-              changes:
-                - key: system.senses.ethereal
-                  mode: 4
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: '120'
           interaction: manifest
           maneuver: passive
           overview:
@@ -254,10 +263,63 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/fierce-natural-weapons.webp
         name: Fierce Natural Weapons
         system:
+          automations:
+            29b275994cf9f5b1:
+              _id: 29b275994cf9f5b1
+              competencies:
+                - 0
+                - 1
+                - 2
+              formula: 1d12
+              heighten:
+                - 1
+                - 0
+              merge: true
+              roll: damage
+              type: roll
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.damage.base.raw
+                  mode: 4
+                  priority: 10
+                  qualifier: '@prop.weapon'
+                  target: body
+                  time: normal
+                  value: 1d12
+                - key: system.damage.base.raw
+                  mode: 4
+                  priority: 10
+                  qualifier: '@prop.bashing'
+                  target: body
+                  time: normal
+                  value: 1d12
+                - key: system.piercing.raw
+                  mode: 4
+                  priority: 10
+                  qualifier: '@prop.weapon'
+                  target: body
+                  time: normal
+                  value: '2'
+                - key: system.piercing.raw
+                  mode: 4
+                  priority: 10
+                  qualifier: '@prop.bashing'
+                  target: body
+                  time: normal
+                  value: '2'
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
           competence:
             raw: 0
           delivery:
@@ -276,39 +338,6 @@ items:
           featSaveAttribute: mov
           form: normal
           grantOnly: false
-          impacts:
-            base:
-              changes:
-                - key: system.damage.base.raw
-                  mode: 4
-                  priority: 10
-                  qualifier: '@prop.weapon'
-                  target: body
-                  time: normal
-                  value: 1d10
-                - key: system.piercing.raw
-                  mode: 4
-                  priority: 10
-                  qualifier: '@prop.weapon'
-                  target: body
-                  time: normal
-                  value: '1'
-                - key: system.damage.base.raw
-                  mode: 4
-                  priority: 10
-                  qualifier: '@prop.bashing'
-                  target: body
-                  time: normal
-                  value: 1d10
-                - key: system.piercing.raw
-                  mode: 4
-                  priority: 10
-                  qualifier: '@prop.bashing'
-                  target: body
-                  time: normal
-                  value: '1'
-              rolls:
-                damage: 1d12
           interaction: manifest
           maneuver: passive
           overview:
@@ -336,7 +365,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/giant-strength.webp
         name: Giant Strength
         system:
@@ -392,7 +421,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/greater-undead.webp
         name: Greater Undead
         system:
@@ -438,10 +467,25 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/hack.webp
         name: Hack
         system:
+          automations:
+            d873eb939c3b5951:
+              _id: d873eb939c3b5951
+              competencies:
+                - 0
+                - 1
+                - 2
+              hacks:
+                - arm
+                - leg
+              heighten:
+                - 1
+                - 0
+              reverse: false
+              type: hacks
           class: berserker
           competence:
             raw: 0
@@ -462,11 +506,6 @@ items:
           featSaveAttribute: mov
           form: normal
           grantOnly: false
-          impacts:
-            base:
-              hacks:
-                - arm
-                - leg
           interaction: attack
           limitation: <p>@L[Category:Body parts]{Body parts} only.</p>
           maneuver: active
@@ -503,7 +542,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
         name: Healing Sensitivity
         system:
@@ -557,7 +596,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/high-intelligence.webp
         name: High Intelligence
         system:
@@ -603,7 +642,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
         name: Improved Armor Piercing
         system:
@@ -653,7 +692,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/improved-strength.webp
         name: Improved Strength
         system:
@@ -707,10 +746,69 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/jumpstart-zombify.webp
         name: Jumpstart Zombify
         system:
+          automations:
+            72ce567009179bea:
+              _id: 72ce567009179bea
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              duration:
+                raw: '@h * 3600'
+                unit: second
+              heighten:
+                - 1
+              mode: 5
+              type: duration
+            838ba57012685987:
+              _id: 838ba57012685987
+              competencies:
+                - 2
+              crit:
+                - 0
+                - 1
+              duration:
+                raw: '3600'
+                unit: second
+              heighten:
+                - 1
+                - 0
+              mode: 5
+              type: duration
+            NPWpKFGYaHcADPNW:
+              _id: NPWpKFGYaHcADPNW
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 0
+                - 1
+              transformation:
+                level: greater
+                multiple: false
+                resetHp: true
+                resetMp: false
+                select: false
+                suppression:
+                  bodyParts: false
+                  equipment: false
+                  fluencies: true
+                  ranks: true
+                useFolder: false
+                uuids:
+                  - Compendium.teriock.species.Item.b3708edf8c3c5c9f
+              type: transformation
           competence:
             raw: 0
           costs:
@@ -740,29 +838,7 @@ items:
           grantOnly: false
           heightened: >-
             <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-            effect increases by 1 hour. The overall duration is rounded to the
-            nearest hour.</p>
-          impacts:
-            base:
-              transformation:
-                enabled: true
-                level: greater
-                multiple: false
-                resetHp: true
-                resetMp: false
-                select: false
-                suppression:
-                  bodyParts: false
-                  equipment: false
-                  fluencies: true
-                  ranks: true
-                useFolder: false
-                uuids:
-                  - Compendium.teriock.species.Item.b3708edf8c3c5c9f
-            fluent:
-              duration: 3600
-            heightened:
-              duration: 3600
+            effect increases by 1 hour.</p>
           interaction: attack
           maneuver: active
           overview:
@@ -797,11 +873,30 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/magical-durability.webp
         name: Magical Durability
         system:
           _sup: mJUKOpbFh6Qw3mAa
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.protections.immunities.damageTypes
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: mundane
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
           competence:
             raw: 0
           delivery:
@@ -822,16 +917,6 @@ items:
           featSaveAttribute: mov
           form: special
           grantOnly: false
-          impacts:
-            base:
-              changes:
-                - key: system.protections.immunities.damageTypes
-                  mode: 2
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: mundane
           interaction: manifest
           maneuver: passive
           overview:
@@ -856,11 +941,37 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/mana-drain-touch.webp
         name: Mana Drain Touch
         system:
           _sup: mJUKOpbFh6Qw3mAa
+          automations:
+            157afc517847f562:
+              _id: 157afc517847f562
+              competencies:
+                - 0
+                - 1
+                - 2
+              formula: 1d8[mana]
+              heighten:
+                - 1
+                - 0
+              merge: true
+              roll: drain
+              type: roll
+            1728b3a84ea27844:
+              _id: 1728b3a84ea27844
+              common:
+                - revitalize
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: common
           competence:
             raw: 0
           delivery:
@@ -883,10 +994,6 @@ items:
           featSaveAttribute: mov
           form: special
           grantOnly: false
-          impacts:
-            base:
-              rolls:
-                drain: 1d8[mana]
           interaction: attack
           maneuver: active
           piercing:
@@ -923,7 +1030,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
         name: Melee Damage Boost
         system:
@@ -984,10 +1091,36 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/monstrous-strength.webp
         name: Monstrous Strength
         system:
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.damage.all.raw
+                  mode: 0
+                  priority: 100
+                  qualifier: and(@dmg, @range.melee)
+                  target: armament
+                  time: normal
+                  value: '1'
+                - key: system.piercing.av0
+                  mode: 4
+                  priority: 10
+                  qualifier: '@range.melee'
+                  target: armament
+                  time: normal
+                  value: 'true'
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
           competence:
             raw: 0
           delivery:
@@ -1006,23 +1139,6 @@ items:
           featSaveAttribute: mov
           form: special
           grantOnly: false
-          impacts:
-            base:
-              changes:
-                - key: system.damage.all.raw
-                  mode: 0
-                  priority: 100
-                  qualifier: and(@dmg, @range.melee)
-                  target: armament
-                  time: normal
-                  value: '1'
-                - key: system.piercing.raw
-                  mode: 4
-                  priority: 10
-                  qualifier: '@range.melee'
-                  target: armament
-                  time: normal
-                  value: '1'
           interaction: manifest
           maneuver: passive
           overview:
@@ -1053,7 +1169,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
@@ -1099,7 +1215,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
@@ -1145,10 +1261,41 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/regenerating.webp
         name: Regenerating
         system:
+          automations:
+            1728b3a84ea27844:
+              _id: 1728b3a84ea27844
+              common:
+                - heal
+                - revive
+                - bag
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: common
+            dbb9db6fc4ee7177:
+              _id: dbb9db6fc4ee7177
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 1
+                - 0
+              macro: Compendium.teriock.execution.Macro.e95a90ea3d657b96
+              pseudoHook: turnStart
+              relation: pseudoHook
+              type: abilityMacro
           competence:
             raw: 0
           delivery:
@@ -1171,11 +1318,6 @@ items:
           featSaveAttribute: mov
           form: special
           grantOnly: false
-          impacts:
-            macros:
-              Compendium_teriock_execution_Macro_Fxodz6ZFE3MOjEON: turnStart
-              Compendium_teriock_execution_Macro_e95a90ea3d657b96: turnStart
-              Compendium_teriock_execution_Macro_rgnTurnStart0000: turnStart
           interaction: manifest
           maneuver: passive
           overview:
@@ -1209,7 +1351,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/shattering-armor.webp
         name: Shattering Armor
         system:
@@ -1265,7 +1407,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/shattering-grip.webp
         name: Shattering Grip
         system:
@@ -1318,10 +1460,36 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/slay.webp
         name: Slay
         system:
+          automations:
+            1728b3a84ea27844:
+              _id: 1728b3a84ea27844
+              common:
+                - bag
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: common
+            29b275994cf9f5b1:
+              _id: 29b275994cf9f5b1
+              competencies:
+                - 0
+                - 1
+                - 2
+              formula: 5[lethal]
+              heighten:
+                - 1
+                - 0
+              merge: true
+              roll: damage
+              type: roll
           class: assassin
           competence:
             raw: 0
@@ -1349,10 +1517,6 @@ items:
           featSaveAttribute: mov
           form: normal
           grantOnly: false
-          impacts:
-            base:
-              rolls:
-                damage: 5[lethal]
           interaction: manifest
           maneuver: reactive
           overview:
@@ -1388,10 +1552,43 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/spirit-bury.webp
         name: Spirit Bury
         system:
+          automations:
+            6a329470043b61f6:
+              _id: 6a329470043b61f6
+              competencies:
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              duration:
+                raw: '600'
+                unit: second
+              heighten:
+                - 1
+                - 0
+              mode: 5
+              type: duration
+            72ce567009179bea:
+              _id: 72ce567009179bea
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              duration:
+                raw: '@h * 3600'
+                unit: second
+              heighten:
+                - 1
+              mode: 5
+              type: duration
           class: necromancer
           competence:
             raw: 0
@@ -1418,13 +1615,7 @@ items:
           grantOnly: false
           heightened: >-
             <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-            effect increases by 1 hour. The overall duration is rounded to the
-            nearest hour.</p>
-          impacts:
-            heightened:
-              duration: 3600
-            proficient:
-              duration: 600
+            effect increases by 1 hour.</p>
           interaction: attack
           maneuver: active
           overview:
@@ -1453,7 +1644,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/supernatural-strength.webp
         name: Supernatural Strength
         system:
@@ -1507,11 +1698,37 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/undead-mind.webp
         name: Undead Mind
         system:
           _sup: mJUKOpbFh6Qw3mAa
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.protections.immunities.statuses
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: frightened
+                - key: system.protections.immunities.statuses
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: charmed
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
           competence:
             raw: 0
           delivery:
@@ -1534,23 +1751,6 @@ items:
           featSaveAttribute: mov
           form: special
           grantOnly: false
-          impacts:
-            base:
-              changes:
-                - key: system.protections.immunities.statuses
-                  mode: 2
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: frightened
-                - key: system.protections.immunities.statuses
-                  mode: 2
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: charmed
           interaction: manifest
           maneuver: passive
           overview:
@@ -1577,35 +1777,14 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/undying-durability.webp
         name: Undying Durability
         system:
           _sup: mJUKOpbFh6Qw3mAa
-          competence:
-            raw: 0
-          delivery:
-            base: self
-          duration:
-            dawn: false
-            description: Always Active
-            raw: '0'
-            stationary: false
-            unit: unlimited
-          effectTypes:
-            - immunity
-          elements:
-            - necromancy
-          executionTime: passive
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: special
-          grantOnly: false
-          impacts:
-            base:
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
               changes:
                 - key: system.protections.immunities.statuses
                   mode: 2
@@ -1628,6 +1807,36 @@ items:
                   target: Actor
                   time: normal
                   value: poisoned
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          effectTypes:
+            - immunity
+          elements:
+            - necromancy
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          grantOnly: false
           interaction: manifest
           maneuver: passive
           overview:
@@ -1699,7 +1908,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.10.0
     folder: 1444272ba695c166
     img: systems/teriock/src/icons/body-parts/reinforced-hide.webp
     name: Reinforced Hide

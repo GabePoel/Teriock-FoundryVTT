@@ -12,10 +12,29 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.21
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/properties/mithril.webp
     name: Mithril
     system:
+      automations:
+        parameterChanges:
+          _id: parameterChanges
+          changes:
+            - key: item.system.weight.raw
+              mode: 1
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '0.5'
+            - key: item.system.minStr.raw
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '-1'
+          type: changes
       competence:
         raw: 0
       description: >-
@@ -24,22 +43,6 @@ effects:
         and are @L[Property:Unbreachable]{unbreachable} if they are
         @L[Category:Armor]{armor}.</p>
       form: intrinsic
-      impacts:
-        changes:
-          - key: system.weight.raw
-            mode: 1
-            priority: 10
-            qualifier: '1'
-            target: parent
-            time: normal
-            value: '0.5'
-          - key: system.minStr.raw
-            mode: 2
-            priority: 10
-            qualifier: '1'
-            target: parent
-            time: normal
-            value: '-1'
       revealed: true
     type: property
   - _id: UAvVqDL2VXNALNoX
@@ -72,26 +75,36 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.21
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/properties/unbreachable.webp
     name: Unbreachable
     system:
       _sup: c7e6ac1b9d2cc5ba
+      automations:
+        parameterChanges:
+          _id: parameterChanges
+          changes:
+            - key: system.av.bonus
+              mode: 4
+              priority: 10
+              qualifier: '@av'
+              target: parent
+              time: normal
+              value: '1'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 0
+            - 1
+          type: changes
       competence:
         raw: 0
       description: >-
         <p>@L[Category:Armor]{Armor} that's <b>[[lookup name style=lc]]</b> has
         its @L[Core:Armor Class]{AV} increased by 1.</p>
       form: intrinsic
-      impacts:
-        changes:
-          - key: system.av.bonus
-            mode: 4
-            priority: 10
-            qualifier: '@av'
-            target: parent
-            time: normal
-            value: '1'
       revealed: true
     type: property
 img: systems/teriock/src/icons/properties/mithril.webp

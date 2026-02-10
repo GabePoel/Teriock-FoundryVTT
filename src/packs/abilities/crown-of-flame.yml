@@ -12,10 +12,43 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.21
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/crown-of-flame.webp
     name: Crown of Flame
     system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.light.dim
+              mode: 4
+              priority: 3
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '0.01'
+            - key: system.light.color
+              mode: 5
+              priority: 3
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '#E01B24'
+            - key: system.light.animation.type
+              mode: 5
+              priority: 3
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: sunburst
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       class: flameMage
       competence:
         raw: 0
@@ -44,30 +77,6 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.light.dim
-              mode: 4
-              priority: 3
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '0.01'
-            - key: system.light.color
-              mode: 5
-              priority: 3
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '#E01B24'
-            - key: system.light.animation.type
-              mode: 5
-              priority: 3
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: sunburst
       interaction: manifest
       maneuver: active
       overview:
@@ -96,11 +105,37 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.21
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/burning-touch.webp
     name: Burning Touch
     system:
       _sup: 5b0849eece36c49e
+      automations:
+        29b275994cf9f5b1:
+          _id: 29b275994cf9f5b1
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: 1d6[fire magic]
+          heighten:
+            - 1
+            - 0
+          merge: true
+          roll: damage
+          type: roll
+        800c70e6560525a8:
+          _id: 800c70e6560525a8
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: (@h)d6[magic fire]
+          heighten:
+            - 1
+          merge: true
+          roll: damage
+          type: roll
       class: flameMage
       competence:
         raw: 0
@@ -131,13 +166,6 @@ effects:
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage}.</p>
-      impacts:
-        base:
-          rolls:
-            damage: 1d6[fire magic]
-        heightened:
-          rolls:
-            damage: 1d6[magic fire]
       interaction: attack
       maneuver: active
       piercing:
@@ -167,11 +195,37 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.21
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/inferno-aura.webp
     name: Inferno Aura
     system:
       _sup: 5b0849eece36c49e
+      automations:
+        29b275994cf9f5b1:
+          _id: 29b275994cf9f5b1
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: 1d6[magic fire]
+          heighten:
+            - 1
+            - 0
+          merge: true
+          roll: damage
+          type: roll
+        800c70e6560525a8:
+          _id: 800c70e6560525a8
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: (@h)d6[magic fire]
+          heighten:
+            - 1
+          merge: true
+          roll: damage
+          type: roll
       class: flameMage
       competence:
         raw: 0
@@ -205,13 +259,6 @@ effects:
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage}.</p>
-      impacts:
-        base:
-          rolls:
-            damage: 1d6[magic fire]
-        heightened:
-          rolls:
-            damage: 1d6[magic fire]
       interaction: feat
       maneuver: active
       piercing:

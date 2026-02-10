@@ -15,7 +15,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.10.0
     effects:
       - _id: UXrCRev5lPG54oXO
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/infertile.webp
         name: Infertile
         system:
@@ -70,7 +70,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/normal-intelligence.webp
         name: Normal Intelligence
         system:
@@ -116,7 +116,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
@@ -162,7 +162,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
@@ -208,7 +208,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/normal-sneak.webp
         name: Normal Sneak
         system:
@@ -254,7 +254,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/normal-strength.webp
         name: Normal Strength
         system:
@@ -300,10 +300,72 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/snare-tag.webp
         name: Snare Tag
         system:
+          automations:
+            5d57231066693cee:
+              _id: 5d57231066693cee
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              executor: false
+              heighten:
+                - 1
+                - 0
+              relation: include
+              status: snared
+              target: false
+              type: status
+            d5717000e99ee582:
+              _id: d5717000e99ee582
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 1
+              heighten:
+                - 1
+                - 0
+              type: combatExpiration
+              what:
+                roll: 2d4kh1
+                threshold: 4
+                type: rolled
+              when:
+                skip: 1
+                time: end
+                trigger: turn
+              who:
+                type: target
+            d635eb44dba086dd:
+              _id: d635eb44dba086dd
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+              heighten:
+                - 1
+                - 0
+              type: combatExpiration
+              what:
+                roll: 2d4kh1
+                threshold: 4
+                type: rolled
+              when:
+                skip: 0
+                time: end
+                trigger: turn
+              who:
+                type: target
           competence:
             raw: 0
           delivery:
@@ -326,39 +388,6 @@ items:
           featSaveAttribute: mov
           form: normal
           grantOnly: false
-          impacts:
-            base:
-              expiration:
-                changeOnCrit: true
-                crit:
-                  combat:
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: rolled
-                    when:
-                      skip: 1
-                      time: end
-                      trigger: turn
-                    who:
-                      type: target
-                doesExpire: true
-                normal:
-                  combat:
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: rolled
-                    when:
-                      skip: 0
-                      time: end
-                      trigger: turn
-                    who:
-                      type: target
-              rolls:
-                endCon: 2d4
-              statuses:
-                - snared
           interaction: attack
           maneuver: active
           piercing:
@@ -385,10 +414,29 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/thin-soul.webp
         name: Thin Soul
         system:
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.deathBag.pull
+                  mode: 4
+                  priority: 5
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '15'
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
           competence:
             raw: 0
           delivery:
@@ -407,16 +455,6 @@ items:
           featSaveAttribute: mov
           form: flaw
           grantOnly: false
-          impacts:
-            base:
-              changes:
-                - key: system.deathBag.pull
-                  mode: 4
-                  priority: 5
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: '15'
           interaction: manifest
           limitation: <p>Outside Teriock and Amon only.</p>
           maneuver: passive
@@ -442,7 +480,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/webling-elder-sorcery.webp
         name: Webling Elder Sorcery
         system:
@@ -492,10 +530,22 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/webling-mobility.webp
         name: Webling Mobility
         system:
+          automations:
+            8f623097f9f2a087:
+              _id: 8f623097f9f2a087
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              hex: false
+              type: resist
           competence:
             raw: 0
           delivery:
@@ -544,10 +594,24 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/webling-vulnerability.webp
         name: Webling Vulnerability
         system:
+          automations:
+            29b275994cf9f5b1:
+              _id: 29b275994cf9f5b1
+              competencies:
+                - 0
+                - 1
+                - 2
+              formula: 1d6[magic psychic]
+              heighten:
+                - 1
+                - 0
+              merge: true
+              roll: damage
+              type: roll
           competence:
             raw: 0
           delivery:
@@ -569,10 +633,6 @@ items:
           featSaveAttribute: mov
           form: flaw
           grantOnly: false
-          impacts:
-            base:
-              rolls:
-                damage: 1d6[magic psychic]
           interaction: manifest
           maneuver: reactive
           overview:
@@ -634,7 +694,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.10.0
     effects:
       - _id: 1keJAxX1vkfTL8Wl
         _key: >-
@@ -644,7 +704,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -665,7 +725,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: icons/creatures/abilities/mouth-teeth-long-red.webp
         name: Biting
         system:
@@ -685,7 +745,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -726,7 +786,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.10.0
     effects:
       - _id: LwntE76DWV8LsMYk
         _key: >-
@@ -736,7 +796,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -757,7 +817,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -797,7 +857,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.10.0
     effects:
       - _id: FAUPXdLk1A1fD0k8
         _key: >-
@@ -807,7 +867,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -828,7 +888,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -848,7 +908,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/properties/prehensile.webp
         name: Prehensile
         system:
@@ -868,7 +928,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:

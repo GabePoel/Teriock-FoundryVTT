@@ -15,7 +15,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.10.0
     effects:
       - _id: gZv29nWYjS9Snf3S
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/all-elder-sorcery-words.webp
         name: All Elder Sorcery Words
         system:
@@ -294,7 +294,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/battle-cry.webp
         name: Battle Cry
         system:
@@ -347,11 +347,52 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
         name: Battle Cry Aura
         system:
           _sup: 8viOrYTUXkTD8qtM
+          automations:
+            b4960732f0b9ed9f:
+              _id: b4960732f0b9ed9f
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              executor: false
+              heighten:
+                - 1
+                - 0
+              relation: include
+              status: frightened
+              target: false
+              type: status
+            d635eb44dba086dd:
+              _id: d635eb44dba086dd
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 1
+                - 0
+              type: combatExpiration
+              what:
+                roll: 2d4kh1
+                threshold: 4
+                type: rolled
+              when:
+                skip: 0
+                time: start
+                trigger: turn
+              who:
+                type: target
           class: berserker
           competence:
             raw: 0
@@ -379,31 +420,6 @@ items:
           featSaveAttribute: int
           form: normal
           grantOnly: false
-          impacts:
-            base:
-              expiration:
-                changeOnCrit: false
-                doesExpire: true
-                normal:
-                  combat:
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: rolled
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                    who:
-                      type: target
-              rolls:
-                endCon: 2d4
-              statuses:
-                - frightened
-            macros:
-              Compendium_teriock_execution_Macro_c172c60521a75122: preExecution
-              Compendium_teriock_execution_Macro_selfFearPreExecu: preExecution
-              Compendium_teriock_execution_Macro_tNkUejVshZd2Etms: preExecution
           interaction: feat
           maneuver: active
           overview:
@@ -433,11 +449,41 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
         name: Battle Cry Resistance
         system:
           _sup: 8viOrYTUXkTD8qtM
+          automations:
+            8f623097f9f2a087:
+              _id: 8f623097f9f2a087
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              hex: false
+              type: resist
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.protections.resistances.statuses
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: frightened
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
           class: berserker
           competence:
             raw: 0
@@ -460,16 +506,6 @@ items:
           featSaveAttribute: mov
           form: normal
           grantOnly: false
-          impacts:
-            base:
-              changes:
-                - key: system.protections.resistances.statuses
-                  mode: 2
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: frightened
           interaction: manifest
           maneuver: active
           overview:
@@ -496,7 +532,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/battle-roar.webp
         name: Battle Roar
         system:
@@ -543,11 +579,52 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/battle-roar-aura.webp
         name: Battle Roar Aura
         system:
           _sup: yMeSsADnJZ89F4tO
+          automations:
+            b4960732f0b9ed9f:
+              _id: b4960732f0b9ed9f
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              executor: true
+              heighten:
+                - 1
+                - 0
+              relation: include
+              status: frightened
+              target: false
+              type: status
+            d635eb44dba086dd:
+              _id: d635eb44dba086dd
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 1
+                - 0
+              type: combatExpiration
+              what:
+                roll: 2d4kh1
+                threshold: 4
+                type: rolled
+              when:
+                skip: 0
+                time: start
+                trigger: turn
+              who:
+                type: target
           competence:
             raw: 0
           costs:
@@ -574,31 +651,6 @@ items:
           featSaveAttribute: int
           form: normal
           grantOnly: false
-          impacts:
-            base:
-              expiration:
-                changeOnCrit: false
-                doesExpire: true
-                normal:
-                  combat:
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: rolled
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                    who:
-                      type: target
-              rolls:
-                endCon: 2d4
-              statuses:
-                - frightened
-            macros:
-              Compendium_teriock_execution_Macro_c172c60521a75122: preExecution
-              Compendium_teriock_execution_Macro_selfFearPreExecu: preExecution
-              Compendium_teriock_execution_Macro_tNkUejVshZd2Etms: preExecution
           interaction: feat
           maneuver: active
           overview:
@@ -626,7 +678,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/beastly-strength.webp
         name: Beastly Strength
         system:
@@ -682,10 +734,31 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/dragon-elder-sorcery.webp
         name: Dragon Elder Sorcery
         system:
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.competence.raw
+                  mode: 4
+                  priority: 10
+                  qualifier: >-
+                    or(@key.innateElderSorcery, @key.elderSorceryAdept,
+                    @key.dragonSnapcast)
+                  target: ability
+                  time: fluency
+                  value: '2'
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
           competence:
             raw: 0
           delivery:
@@ -704,18 +777,6 @@ items:
           featSaveAttribute: mov
           form: special
           grantOnly: false
-          impacts:
-            base:
-              changes:
-                - key: system.competence.raw
-                  mode: 4
-                  priority: 10
-                  qualifier: >-
-                    or(@key.innateElderSorcery, @key.elderSorceryAdept,
-                    @key.dragonSnapcast)
-                  target: ability
-                  time: fluency
-                  value: '2'
           interaction: manifest
           maneuver: passive
           overview:
@@ -762,10 +823,29 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/dragon-sight.webp
         name: Dragon Sight
         system:
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.senses.truth
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: Infinity
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
           competence:
             raw: 0
           delivery:
@@ -786,16 +866,6 @@ items:
           featSaveAttribute: mov
           form: special
           grantOnly: false
-          impacts:
-            base:
-              changes:
-                - key: system.senses.truth
-                  mode: 4
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: Infinity
           interaction: manifest
           maneuver: passive
           overview:
@@ -824,11 +894,37 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/elder-sorcery-adept.webp
         name: Elder Sorcery Adept
         system:
           _sup: CdIWGoS9WFpsbRHa
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.adept.enabled
+                  mode: 4
+                  priority: 10
+                  qualifier: '@es'
+                  target: ability
+                  time: normal
+                  value: 'true'
+                - key: system.adept.amount
+                  mode: 4
+                  priority: 10
+                  qualifier: '@es'
+                  target: ability
+                  time: normal
+                  value: '1'
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
           competence:
             raw: 0
           delivery:
@@ -847,23 +943,6 @@ items:
           featSaveAttribute: mov
           form: special
           grantOnly: false
-          impacts:
-            base:
-              changes:
-                - key: system.adept.enabled
-                  mode: 4
-                  priority: 10
-                  qualifier: '@es'
-                  target: ability
-                  time: normal
-                  value: 'true'
-                - key: system.adept.amount
-                  mode: 4
-                  priority: 10
-                  qualifier: '@es'
-                  target: ability
-                  time: normal
-                  value: '1'
           interaction: manifest
           maneuver: passive
           overview:
@@ -888,7 +967,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         flags:
           teriock:
             dontConsume: false
@@ -981,11 +1060,30 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/ethereal-senses.webp
         name: Ethereal Senses
         system:
           _sup: tLZliqgFT6YqimYE
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.senses.ethereal
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '120'
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
           competence:
             raw: 0
           delivery:
@@ -1008,16 +1106,6 @@ items:
           featSaveAttribute: mov
           form: normal
           grantOnly: false
-          impacts:
-            base:
-              changes:
-                - key: system.senses.ethereal
-                  mode: 4
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: '120'
           interaction: manifest
           maneuver: passive
           overview:
@@ -1044,7 +1132,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/extreme-intelligence.webp
         name: Extreme Intelligence
         system:
@@ -1090,10 +1178,46 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/flying.webp
         name: Flying
         system:
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.speedAdjustments.fly
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '2'
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
+            f025905e157ac261:
+              _id: f025905e157ac261
+              changes:
+                - key: system.speedAdjustments.fly
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '3'
+              competencies:
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
           class: corsair
           competence:
             raw: 0
@@ -1115,25 +1239,6 @@ items:
           featSaveAttribute: mov
           form: normal
           grantOnly: false
-          impacts:
-            base:
-              changes:
-                - key: system.speedAdjustments.fly
-                  mode: 4
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: '2'
-            proficient:
-              changes:
-                - key: system.speedAdjustments.fly
-                  mode: 4
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: '3'
           interaction: manifest
           maneuver: passive
           overview:
@@ -1159,7 +1264,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/giant-strength.webp
         name: Giant Strength
         system:
@@ -1215,7 +1320,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
         name: Improved Armor Piercing
         system:
@@ -1265,10 +1370,39 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/improved-healing-factor.webp
         name: Improved Healing Factor
         system:
+          automations:
+            1728b3a84ea27844:
+              _id: 1728b3a84ea27844
+              common:
+                - heal
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: common
+            b13e025d8fcf09cc:
+              _id: b13e025d8fcf09cc
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 1
+                - 0
+              macro: Compendium.teriock.execution.Macro.ba4c50b6d32fe62c
+              pseudoHook: turnStart
+              relation: pseudoHook
+              type: abilityMacro
           competence:
             raw: 0
           delivery:
@@ -1293,11 +1427,6 @@ items:
           featSaveAttribute: mov
           form: special
           grantOnly: false
-          impacts:
-            macros:
-              Compendium_teriock_execution_Macro_ba4c50b6d32fe62c: turnStart
-              Compendium_teriock_execution_Macro_imHngFcrTurnStar: turnStart
-              Compendium_teriock_execution_Macro_yYxed3JjyS2O1lzN: turnStart
           interaction: manifest
           limitation: <p>Only in vicinity of lair.</p>
           maneuver: passive
@@ -1326,10 +1455,23 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/improved-revitalizing-factor.webp
         name: Improved Revitalizing Factor
         system:
+          automations:
+            1728b3a84ea27844:
+              _id: 1728b3a84ea27844
+              common:
+                - revitalize
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: common
           competence:
             raw: 0
           delivery:
@@ -1381,7 +1523,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/improved-strength.webp
         name: Improved Strength
         system:
@@ -1435,7 +1577,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/innate-elder-sorcery.webp
         name: Innate Elder Sorcery
         system:
@@ -1503,7 +1645,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/instant-identify-sight.webp
         name: Instant Identify Sight
         system:
@@ -1563,7 +1705,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/lumbering.webp
         name: Lumbering
         system:
@@ -1609,7 +1751,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
         name: Melee Damage Boost
         system:
@@ -1670,10 +1812,23 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/mithril-dragon-breath.webp
         name: Mithril Dragon Breath
         system:
+          automations:
+            800c70e6560525a8:
+              _id: 800c70e6560525a8
+              competencies:
+                - 0
+                - 1
+                - 2
+              formula: (2 * @h)d10[magic]
+              heighten:
+                - 1
+              merge: true
+              roll: damage
+              type: roll
           competence:
             raw: 0
           costs:
@@ -1701,10 +1856,6 @@ items:
             <p>For each additional @L[Core:MP]{MP} spent, deal an additional
             [[/damage 2d10[magic]]] @L[Core:Damage]{damage}. Additionally, the
             @L[Core:Range]{range} of this increases by 5 feet.</p>
-          impacts:
-            heightened:
-              rolls:
-                damage: 2d10[magic]
           interaction: feat
           maneuver: active
           piercing:
@@ -1733,10 +1884,36 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/monstrous-strength.webp
         name: Monstrous Strength
         system:
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.damage.all.raw
+                  mode: 0
+                  priority: 100
+                  qualifier: and(@dmg, @range.melee)
+                  target: armament
+                  time: normal
+                  value: '1'
+                - key: system.piercing.av0
+                  mode: 4
+                  priority: 10
+                  qualifier: '@range.melee'
+                  target: armament
+                  time: normal
+                  value: 'true'
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
           competence:
             raw: 0
           delivery:
@@ -1755,23 +1932,6 @@ items:
           featSaveAttribute: mov
           form: special
           grantOnly: false
-          impacts:
-            base:
-              changes:
-                - key: system.damage.all.raw
-                  mode: 0
-                  priority: 100
-                  qualifier: and(@dmg, @range.melee)
-                  target: armament
-                  time: normal
-                  value: '1'
-                - key: system.piercing.raw
-                  mode: 4
-                  priority: 10
-                  qualifier: '@range.melee'
-                  target: armament
-                  time: normal
-                  value: '1'
           interaction: manifest
           maneuver: passive
           overview:
@@ -1802,10 +1962,29 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/night-vision.webp
         name: Night Vision
         system:
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.senses.dark
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '120'
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
           competence:
             raw: 0
           delivery:
@@ -1826,16 +2005,6 @@ items:
           featSaveAttribute: mov
           form: normal
           grantOnly: false
-          impacts:
-            base:
-              changes:
-                - key: system.senses.dark
-                  mode: 4
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: '120'
           interaction: manifest
           maneuver: passive
           overview:
@@ -1860,7 +2029,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/scouting.webp
         name: Scouting
         system:
@@ -1919,7 +2088,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/shattering-armor.webp
         name: Shattering Armor
         system:
@@ -1975,7 +2144,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/shattering-grip.webp
         name: Shattering Grip
         system:
@@ -2028,7 +2197,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/speed.webp
         name: Speed
         system:
@@ -2074,7 +2243,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/supernatural-strength.webp
         name: Supernatural Strength
         system:
@@ -2128,11 +2297,30 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/true-sight.webp
         name: True Sight
         system:
           _sup: NxGExbn8uZKqezEy
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.senses.truth
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: Infinity
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
           competence:
             raw: 0
           delivery:
@@ -2153,16 +2341,6 @@ items:
           featSaveAttribute: mov
           form: special
           grantOnly: false
-          impacts:
-            base:
-              changes:
-                - key: system.senses.truth
-                  mode: 4
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: Infinity
           interaction: manifest
           maneuver: passive
           overview:
@@ -2196,10 +2374,36 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/veteran-adept.webp
         name: Veteran Adept
         system:
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.adept.enabled
+                  mode: 5
+                  priority: 10
+                  qualifier: '@class.veteran'
+                  target: ability
+                  time: normal
+                  value: 'true'
+                - key: system.adept.amount
+                  mode: 4
+                  priority: 10
+                  qualifier: '@class.veteran'
+                  target: ability
+                  time: normal
+                  value: '1'
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
           competence:
             raw: 0
           delivery:
@@ -2218,23 +2422,6 @@ items:
           featSaveAttribute: mov
           form: special
           grantOnly: false
-          impacts:
-            base:
-              changes:
-                - key: system.adept.enabled
-                  mode: 5
-                  priority: 10
-                  qualifier: '@class.veteran'
-                  target: ability
-                  time: normal
-                  value: 'true'
-                - key: system.adept.amount
-                  mode: 4
-                  priority: 10
-                  qualifier: '@class.veteran'
-                  target: ability
-                  time: normal
-                  value: '1'
           interaction: manifest
           maneuver: passive
           overview:
@@ -2294,7 +2481,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.10.0
     effects:
       - _id: Hr20HQz6r7lBW379
         _key: >-
@@ -2304,7 +2491,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -2324,7 +2511,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/properties/prehensile.webp
         name: Prehensile
         system:
@@ -2344,23 +2531,33 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/properties/unblockable.webp
         name: Unblockable
         system:
+          automations:
+            parameterChanges:
+              _id: parameterChanges
+              changes:
+                - key: system.piercing.raw
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: parent
+                  time: normal
+                  value: '2'
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 0
+                - 1
+              type: changes
           competence:
             raw: 0
           description: <p>An item with this property is always @L[Keyword:UB]{UB}.</p>
           form: intrinsic
-          impacts:
-            changes:
-              - key: system.piercing.raw
-                mode: 4
-                priority: 10
-                qualifier: '1'
-                target: parent
-                time: normal
-                value: '2'
           revealed: true
         type: property
       - _id: OUPQaoxPVraoeodh
@@ -2371,7 +2568,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -2414,7 +2611,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.10.0
     effects:
       - _id: j5OCoQExiifYlXXK
         _key: >-
@@ -2424,10 +2621,43 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/brace.webp
         name: Brace
         system:
+          automations:
+            2af889aff0b661bc:
+              _id: 2af889aff0b661bc
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 1
+                - 0
+              macro: Compendium.teriock.execution.Macro.0ea7be85a8217ccd
+              pseudoHook: effectApplication
+              relation: pseudoHook
+              type: abilityMacro
+            e97f2827a0c6277f:
+              _id: e97f2827a0c6277f
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 1
+                - 0
+              macro: Compendium.teriock.execution.Macro.6e203038c142a0a0
+              pseudoHook: movement
+              relation: pseudoHook
+              type: abilityMacro
           class: veteran
           competence:
             raw: 0
@@ -2447,12 +2677,6 @@ items:
           featSaveAttribute: mov
           form: normal
           grantOnly: false
-          impacts:
-            macros:
-              Compendium_teriock_execution_Macro_0Gb7QPmgAotusvVQ: effectApplication
-              Compendium_teriock_execution_Macro_0ea7be85a8217ccd: effectApplication
-              Compendium_teriock_execution_Macro_6e203038c142a0a0: movement
-              Compendium_teriock_execution_Macro_RCqX2d4YKWXd6o1i: movement
           interaction: manifest
           maneuver: active
           overview:
@@ -2487,7 +2711,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/improvised-armor-and-shields.webp
         name: Improvised Armor and Shields
         system:
@@ -2547,11 +2771,24 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/instant-awaken.webp
         name: Instant Awaken
         system:
           _sup: shn8qx3LbBe4ktYg
+          automations:
+            1728b3a84ea27844:
+              _id: 1728b3a84ea27844
+              common:
+                - awaken
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: common
           competence:
             raw: 0
           delivery:
@@ -2598,7 +2835,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/partner-awaken.webp
         name: Partner Awaken
         system:
@@ -2652,11 +2889,24 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/reactive-awaken.webp
         name: Reactive Awaken
         system:
           _sup: shn8qx3LbBe4ktYg
+          automations:
+            1728b3a84ea27844:
+              _id: 1728b3a84ea27844
+              common:
+                - awaken
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: common
           competence:
             raw: 0
           delivery:
@@ -2735,7 +2985,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.10.0
     effects:
       - _id: nEWl3ZXUcMWe83ed
         _key: >-
@@ -2745,7 +2995,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         flags:
           teriock:
             category: combat
@@ -2815,7 +3065,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         flags:
           teriock:
             category: support
@@ -2823,6 +3073,50 @@ items:
         img: systems/teriock/src/icons/abilities/sentry.webp
         name: Sentry
         system:
+          automations:
+            8f623097f9f2a087:
+              _id: 8f623097f9f2a087
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              hex: false
+              type: resist
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.protections.resistances.other
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: Being Surprised (Braced, Fortified Areas, Guard Duty)
+                - key: system.protections.resistances.other
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: Frightened (Braced, Fortified Areas, Guard Duty)
+                - key: system.protections.resistances.other
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: Mediator Tradecrafts (Braced, Fortified Areas, Guard Duty)
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
           class: veteran
           competence:
             raw: 0
@@ -2847,30 +3141,6 @@ items:
           featSaveAttribute: mov
           form: normal
           grantOnly: false
-          impacts:
-            base:
-              changes:
-                - key: system.protections.resistances.other
-                  mode: 2
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: Being Surprised (Braced, Fortified Areas, Guard Duty)
-                - key: system.protections.resistances.other
-                  mode: 2
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: Frightened (Braced, Fortified Areas, Guard Duty)
-                - key: system.protections.resistances.other
-                  mode: 2
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: Mediator Tradecrafts (Braced, Fortified Areas, Guard Duty)
           interaction: manifest
           maneuver: passive
           overview:
@@ -2942,7 +3212,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.10.0
     effects:
       - _id: v0Xb1GopbJqrtB0N
         _key: >-
@@ -2952,7 +3222,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         flags:
           teriock:
             category: combat
@@ -2960,6 +3230,25 @@ items:
         img: systems/teriock/src/icons/abilities/improved-brace.webp
         name: Improved Brace
         system:
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: flags.teriockEffect.braceDieSize
+                  mode: 5
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '10'
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
           class: veteran
           competence:
             raw: 0
@@ -2982,18 +3271,6 @@ items:
           featSaveAttribute: mov
           form: normal
           grantOnly: false
-          impacts:
-            base:
-              changes:
-                - key: flags.teriockEffect.braceDieSize
-                  mode: 5
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: '10'
-              rolls:
-                tempHp: 1d6
           interaction: manifest
           maneuver: passive
           overview:
@@ -3030,7 +3307,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         flags:
           teriock:
             category: support
@@ -3128,7 +3405,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.10.0
     effects:
       - _id: JjurmQdVGDd2qISi
         _key: >-
@@ -3138,11 +3415,28 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/bodyguard-backup.webp
         name: Bodyguard Backup
         system:
           _sup: WPnSLdXPauH6iDwJ
+          automations:
+            da50003e1d5a6f3e:
+              _id: da50003e1d5a6f3e
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 1
+                - 0
+              macro: Compendium.teriock.execution.Macro.4bd2e8ab01c2430b
+              pseudoHook: rollFeatSave
+              relation: pseudoHook
+              type: abilityMacro
           class: veteran
           competence:
             raw: 0
@@ -3162,10 +3456,6 @@ items:
           featSaveAttribute: mov
           form: normal
           grantOnly: false
-          impacts:
-            macros:
-              Compendium_teriock_execution_Macro_4bd2e8ab01c2430b: rollFeatSave
-              Compendium_teriock_execution_Macro_U3eabIvCln4vwrrO: rollFeatSave
           interaction: manifest
           maneuver: reactive
           overview:
@@ -3201,11 +3491,52 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/bodyguard-taunt.webp
         name: Bodyguard Taunt
         system:
           _sup: WPnSLdXPauH6iDwJ
+          automations:
+            6cebaedf0c5c1507:
+              _id: 6cebaedf0c5c1507
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              executor: false
+              heighten:
+                - 1
+                - 0
+              relation: include
+              status: goaded
+              target: true
+              type: status
+            d635eb44dba086dd:
+              _id: d635eb44dba086dd
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 1
+                - 0
+              type: combatExpiration
+              what:
+                roll: 2d4kh1
+                threshold: 4
+                type: forced
+              when:
+                skip: 0
+                time: start
+                trigger: turn
+              who:
+                type: executor
           class: veteran
           competence:
             raw: 0
@@ -3225,28 +3556,6 @@ items:
           featSaveAttribute: mov
           form: normal
           grantOnly: false
-          impacts:
-            base:
-              expiration:
-                changeOnCrit: false
-                doesExpire: true
-                normal:
-                  combat:
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: forced
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                    who:
-                      type: executor
-              statuses:
-                - goaded
-            macros:
-              Compendium_teriock_execution_Macro_0636b5e3f7412cfc: preExecution
-              Compendium_teriock_execution_Macro_R54099tFLeLMmBAw: preExecution
           interaction: manifest
           maneuver: reactive
           overview:
@@ -3281,7 +3590,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/bodyguard-training.webp
         name: Bodyguard Training
         system:
@@ -3330,10 +3639,47 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/fortify-area.webp
         name: Fortify Area
         system:
+          automations:
+            a678f22a0f730677:
+              _id: a678f22a0f730677
+              competencies:
+                - 2
+              formula: 1d10 + (@f)d10
+              heighten:
+                - 1
+                - 0
+              merge: true
+              roll: gainTempHp
+              type: roll
+            eb15e1b671a010f5:
+              _id: eb15e1b671a010f5
+              competencies:
+                - 0
+                - 1
+                - 2
+              formula: 1d10
+              heighten:
+                - 1
+                - 0
+              merge: true
+              roll: gainTempHp
+              type: roll
+            fc2613f22401a088:
+              _id: fc2613f22401a088
+              competencies:
+                - 1
+                - 2
+              formula: 1d10 + (@p)d10
+              heighten:
+                - 1
+                - 0
+              merge: true
+              roll: gainTempHp
+              type: roll
           class: veteran
           competence:
             raw: 0
@@ -3353,16 +3699,6 @@ items:
           featSaveAttribute: mov
           form: normal
           grantOnly: false
-          impacts:
-            base:
-              rolls:
-                gainTempHp: 1d10
-            fluent:
-              rolls:
-                gainTempHp: 1d10 + (@f)d10
-            proficient:
-              rolls:
-                gainTempHp: 1d10 + (@p)d10
           interaction: manifest
           maneuver: slow
           overview:
@@ -3401,10 +3737,34 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/tumble.webp
         name: Tumble
         system:
+          automations:
+            d635eb44dba086dd:
+              _id: d635eb44dba086dd
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 1
+                - 0
+              type: combatExpiration
+              what:
+                roll: 2d4kh1
+                threshold: 4
+                type: rolled
+              when:
+                skip: 0
+                time: start
+                trigger: turn
+              who:
+                type: executor
           class: veteran
           competence:
             raw: 0
@@ -3430,25 +3790,6 @@ items:
           featSaveAttribute: mov
           form: normal
           grantOnly: false
-          impacts:
-            base:
-              expiration:
-                changeOnCrit: false
-                doesExpire: true
-                normal:
-                  combat:
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: rolled
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                    who:
-                      type: executor
-              rolls:
-                endCon: 2d4
           interaction: manifest
           maneuver: reactive
           overview:
@@ -3485,10 +3826,36 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/unbreachability.webp
         name: Unbreachability
         system:
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.av.bonus
+                  mode: 4
+                  priority: 10
+                  qualifier: '@av'
+                  target: equipment
+                  time: normal
+                  value: '1'
+                - key: system.props
+                  mode: 2
+                  priority: 10
+                  qualifier: '@av'
+                  target: body
+                  time: normal
+                  value: unbreachable
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
           class: veteran
           competence:
             raw: 0
@@ -3508,23 +3875,6 @@ items:
           featSaveAttribute: mov
           form: normal
           grantOnly: false
-          impacts:
-            base:
-              changes:
-                - key: system.av.bonus
-                  mode: 4
-                  priority: 10
-                  qualifier: '@av'
-                  target: equipment
-                  time: normal
-                  value: '1'
-                - key: system.props
-                  mode: 2
-                  priority: 10
-                  qualifier: '@av'
-                  target: body
-                  time: normal
-                  value: unbreachable
           interaction: manifest
           maneuver: passive
           overview:
@@ -3581,7 +3931,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.10.0
     effects:
       - _id: PioQvKwJDZKIYNi3
         _key: >-
@@ -3591,7 +3941,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         flags:
           teriock:
             category: support
@@ -3644,7 +3994,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         flags:
           teriock:
             category: combat
@@ -3703,11 +4053,30 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/master-armor-smith.webp
         name: Master Armor Smith
         system:
           _sup: PioQvKwJDZKIYNi3
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.tradecrafts.blacksmith.score
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '2'
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
           class: veteran
           competence:
             raw: 0
@@ -3727,16 +4096,6 @@ items:
           featSaveAttribute: mov
           form: normal
           grantOnly: false
-          impacts:
-            base:
-              changes:
-                - key: system.tradecrafts.blacksmith.score
-                  mode: 4
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: '2'
           interaction: manifest
           maneuver: passive
           overview:
@@ -3765,7 +4124,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/runic-armor.webp
         name: Runic Armor
         system:
@@ -3858,7 +4217,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.10.0
     effects:
       - _id: yPQpetAtdE8PVczz
         _key: >-
@@ -3868,25 +4227,35 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/properties/dragon-scale.webp
         name: Dragon Scale
         system:
+          automations:
+            parameterChanges:
+              _id: parameterChanges
+              changes:
+                - key: system.av.bonus
+                  mode: 4
+                  priority: 10
+                  qualifier: '@av'
+                  target: parent
+                  time: normal
+                  value: '2'
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 0
+                - 1
+              type: changes
           competence:
             raw: 0
           description: >-
             <p>@L[Category:Armor]{Armor} that's <b>[[lookup name style=lc]]</b>
             has its @L[Core:Armor Class]{AV} increased by 2.</p>
           form: intrinsic
-          impacts:
-            changes:
-              - key: system.av.bonus
-                mode: 4
-                priority: 10
-                qualifier: '@av'
-                target: parent
-                time: normal
-                value: '2'
           revealed: true
         type: property
     folder: 997cd433ccad17d7
@@ -3919,7 +4288,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.10.0
     effects:
       - _id: SYvOGA0zFKDDkfHP
         _key: >-
@@ -3929,7 +4298,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: icons/creatures/abilities/mouth-teeth-long-red.webp
         name: Biting
         system:
@@ -3949,23 +4318,33 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/properties/unblockable.webp
         name: Unblockable
         system:
+          automations:
+            parameterChanges:
+              _id: parameterChanges
+              changes:
+                - key: system.piercing.raw
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: parent
+                  time: normal
+                  value: '2'
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 0
+                - 1
+              type: changes
           competence:
             raw: 0
           description: <p>An item with this property is always @L[Keyword:UB]{UB}.</p>
           form: intrinsic
-          impacts:
-            changes:
-              - key: system.piercing.raw
-                mode: 4
-                priority: 10
-                qualifier: '1'
-                target: parent
-                time: normal
-                value: '2'
           revealed: true
         type: property
       - _id: 1pPKK7kUYTui3aQd
@@ -3976,7 +4355,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -4019,7 +4398,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.10.0
     effects:
       - _id: LwntE76DWV8LsMYk
         _key: >-
@@ -4029,7 +4408,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -4050,7 +4429,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -4090,7 +4469,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.10.0
     effects:
       - _id: 4tKZWhHPGEJoR7dR
         _key: >-
@@ -4100,11 +4479,63 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/defensive-martial-arts.webp
         name: Defensive Martial Arts
         system:
           _sup: 8e9roKoeCSmTjbbo
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.bv.raw
+                  mode: 4
+                  priority: 10
+                  qualifier: '@prop.handy'
+                  target: body
+                  time: normal
+                  value: '1'
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
+            f025905e157ac261:
+              _id: f025905e157ac261
+              changes:
+                - key: system.bv.raw
+                  mode: 4
+                  priority: 10
+                  qualifier: '@prop.handy'
+                  target: body
+                  time: normal
+                  value: '2'
+              competencies:
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
+            f7da3b5e1992a724:
+              _id: f7da3b5e1992a724
+              changes:
+                - key: system.bv.raw
+                  mode: 4
+                  priority: 10
+                  qualifier: '@prop.handy'
+                  target: body
+                  time: normal
+                  value: '3'
+              competencies:
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
           competence:
             raw: 0
           delivery:
@@ -4123,34 +4554,6 @@ items:
           featSaveAttribute: mov
           form: normal
           grantOnly: false
-          impacts:
-            base:
-              changes:
-                - key: system.bv.raw
-                  mode: 4
-                  priority: 10
-                  qualifier: '@prop.handy'
-                  target: body
-                  time: normal
-                  value: '1'
-            fluent:
-              changes:
-                - key: system.bv.raw
-                  mode: 4
-                  priority: 10
-                  qualifier: '@prop.handy'
-                  target: body
-                  time: normal
-                  value: '3'
-            proficient:
-              changes:
-                - key: system.bv.raw
-                  mode: 4
-                  priority: 10
-                  qualifier: '@prop.handy'
-                  target: body
-                  time: normal
-                  value: '2'
           interaction: manifest
           limitation: <p>While wearing @L[Category:Armor]{armor} only.</p>
           maneuver: passive
@@ -4187,7 +4590,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/warrior-techniques.webp
         name: Warrior Techniques
         system:

@@ -13,10 +13,29 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/properties/ammunition.webp
     name: Ammunition
     system:
+      automations:
+        parameterChanges:
+          _id: parameterChanges
+          changes:
+            - key: item.system.range.melee
+              mode: 5
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: 'false'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 0
+            - 1
+          type: changes
       competence:
         raw: 0
       description: >-
@@ -24,15 +43,6 @@ effects:
         requires some sort of [[lookup name style=lc]] (arrows, rocks, darts,
         etc.) to @L[Category:Attack abilities]{attack} with.</p>
       form: intrinsic
-      impacts:
-        changes:
-          - key: system.range.melee
-            mode: 5
-            priority: 10
-            qualifier: '1'
-            target: parent
-            time: normal
-            value: 'false'
       revealed: true
     type: property
   - _id: loading000000000
@@ -62,11 +72,30 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/properties/ranged.webp
     name: Ranged
     system:
       _sup: bx7jrk8upXfasWFw
+      automations:
+        parameterChanges:
+          _id: parameterChanges
+          changes:
+            - key: item.system.range.ranged
+              mode: 5
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: 'true'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 0
+            - 1
+          type: changes
       competence:
         raw: 0
       description: >-
@@ -81,15 +110,6 @@ effects:
         Interaction]{attack roll}. You can't attack a target beyond the weapon's
         long range.</p>
       form: intrinsic
-      impacts:
-        changes:
-          - key: system.range.ranged
-            mode: 5
-            priority: 10
-            qualifier: '1'
-            target: parent
-            time: normal
-            value: 'true'
       revealed: true
     type: property
   - _id: wep0000000000000

@@ -60,11 +60,58 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.10.0
     img: systems/teriock/src/icons/abilities/cremate.webp
     name: Cremate
     system:
       _sup: 7dbf0f42e843d563
+      automations:
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          common:
+            - bag
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: common
+        3a62dd96319ca135:
+          _id: 3a62dd96319ca135
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          executor: false
+          heighten:
+            - 1
+            - 0
+          relation: apply
+          status: burned
+          target: false
+          type: status
+        5e9e1d2033fe152a:
+          _id: 5e9e1d2033fe152a
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          executor: false
+          heighten:
+            - 1
+            - 0
+          relation: apply
+          status: ruined
+          target: false
+          type: status
       class: flameMage
       competence:
         raw: 0
@@ -97,11 +144,6 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      impacts:
-        base:
-          startStatuses:
-            - burned
-            - ruined
       interaction: attack
       maneuver: active
       piercing:
@@ -130,11 +172,28 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.10.0
     img: systems/teriock/src/icons/abilities/minor-weapon-enchantment.webp
     name: Minor Weapon Enchantment
     system:
       _sup: 7dbf0f42e843d563
+      automations:
+        72ce567009179bea:
+          _id: 72ce567009179bea
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          duration:
+            raw: '@h * 3600'
+            unit: second
+          heighten:
+            - 1
+          mode: 5
+          type: duration
       class: flameMage
       competence:
         raw: 0
@@ -166,11 +225,7 @@ effects:
       grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 1 hour. The overall duration is rounded to the
-        nearest hour.</p>
-      impacts:
-        heightened:
-          duration: 3600
+        effect increases by 1 hour.</p>
       interaction: manifest
       maneuver: slow
       overview:

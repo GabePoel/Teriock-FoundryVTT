@@ -12,10 +12,36 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/iron-dragonfly-breath.webp
     name: Iron Dragonfly Breath
     system:
+      automations:
+        800c70e6560525a8:
+          _id: 800c70e6560525a8
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: (2 * @h)d10[magic]
+          heighten:
+            - 1
+          merge: true
+          roll: damage
+          type: roll
+        d873eb939c3b5951:
+          _id: d873eb939c3b5951
+          competencies:
+            - 0
+            - 1
+            - 2
+          hacks:
+            - arm
+            - leg
+          heighten:
+            - 1
+            - 0
+          type: hacks
       competence:
         raw: 0
       costs:
@@ -45,14 +71,6 @@ effects:
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/damage 2d10[magic]]] @L[Core:Damage]{damage}. Additionally, the
         @L[Core:Range]{range} of this increases by 5 feet.</p>
-      impacts:
-        base:
-          hacks:
-            - arm
-            - leg
-        heightened:
-          rolls:
-            damage: 2d10[magic]
       interaction: feat
       maneuver: active
       piercing:

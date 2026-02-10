@@ -12,10 +12,43 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/fire-body.webp
     name: Fire Body
     system:
+      automations:
+        29b275994cf9f5b1:
+          _id: 29b275994cf9f5b1
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: 1d4[fire magic]
+          heighten:
+            - 1
+            - 0
+          merge: true
+          roll: damage
+          type: roll
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: >-
+                !body__system.damage.base.raw__exists__null__system.damage.base.raw
+              mode: 2
+              priority: 30
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: 1d4[fire magic]
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       competence:
         raw: 0
       delivery:
@@ -34,18 +67,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.damage.base.raw
-              mode: 2
-              priority: 30
-              qualifier: '@dmg'
-              target: body
-              time: normal
-              value: 1d4[fire magic]
-          rolls:
-            damage: 1d4[fire magic]
       interaction: manifest
       maneuver: passive
       overview:

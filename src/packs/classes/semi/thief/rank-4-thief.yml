@@ -39,10 +39,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        proficient:
-          rolls:
-            endCon: 3d4
       interaction: manifest
       maneuver: reactive
       overview:
@@ -91,13 +87,51 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     flags:
       teriock:
         category: support
     img: systems/teriock/src/icons/abilities/death-grip.webp
     name: Death Grip
     system:
+      automations:
+        8f623097f9f2a087:
+          _id: 8f623097f9f2a087
+          bonus: '0'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          hex: false
+          type: resist
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.protections.resistances.effects
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: stealing
+            - key: system.protections.resistances.abilities
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: Unglue
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       class: thief
       competence:
         raw: 0
@@ -119,23 +153,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.protections.resistances.effects
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: stealing
-            - key: system.protections.resistances.abilities
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: Unglue
       interaction: manifest
       maneuver: passive
       overview:
@@ -274,13 +291,37 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     flags:
       teriock:
         category: combat
     img: systems/teriock/src/icons/abilities/disruption-ball.webp
     name: Disruption Ball
     system:
+      automations:
+        d635eb44dba086dd:
+          _id: d635eb44dba086dd
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: combatExpiration
+          what:
+            roll: 2d4kh1
+            threshold: 4
+            type: rolled
+          when:
+            skip: 0
+            time: end
+            trigger: turn
+          who:
+            type: target
       class: thief
       competence:
         raw: 0
@@ -315,25 +356,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          expiration:
-            changeOnCrit: false
-            doesExpire: true
-            normal:
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 0
-                  time: end
-                  trigger: turn
-                who:
-                  type: target
-          rolls:
-            endCon: 2d4
       interaction: attack
       maneuver: reactive
       overview:
@@ -371,13 +393,31 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     flags:
       teriock:
         category: support
     img: systems/teriock/src/icons/abilities/hide-other.webp
     name: Hide Other
     system:
+      automations:
+        0b0d1426453abb55:
+          _id: 0b0d1426453abb55
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          executor: false
+          heighten:
+            - 1
+            - 0
+          relation: apply
+          status: hidden
+          target: false
+          type: status
       class: thief
       competence:
         raw: 0
@@ -401,18 +441,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          rolls:
-            hide: 1d20 + @snk
-          startStatuses:
-            - hidden
-        fluent:
-          rolls:
-            hide: 1d20 + @snk + @f
-        proficient:
-          rolls:
-            hide: 1d20 + @snk + @p
       interaction: attack
       maneuver: active
       overview:

@@ -392,32 +392,13 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/construct-mind.webp
     name: Construct Mind
     system:
-      competence:
-        raw: 0
-      delivery:
-        base: self
-      duration:
-        dawn: false
-        description: Always Active
-        raw: '0'
-        stationary: false
-        unit: unlimited
-      effectTypes:
-        - immunity
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      grantOnly: false
-      impacts:
-        base:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
           changes:
             - key: system.protections.immunities.statuses
               mode: 2
@@ -447,6 +428,34 @@ effects:
               target: Actor
               time: normal
               value: allured
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      effectTypes:
+        - immunity
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
       interaction: manifest
       maneuver: passive
       overview:
@@ -472,10 +481,36 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/fire-ball.webp
     name: Fire Ball
     system:
+      automations:
+        29b275994cf9f5b1:
+          _id: 29b275994cf9f5b1
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: 1d4[magic fire]
+          heighten:
+            - 1
+            - 0
+          merge: true
+          roll: damage
+          type: roll
+        800c70e6560525a8:
+          _id: 800c70e6560525a8
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: (@h)d4[magic fire]
+          heighten:
+            - 1
+          merge: true
+          roll: damage
+          type: roll
       class: flameMage
       competence:
         raw: 0
@@ -503,13 +538,6 @@ effects:
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/damage 1d4[magic fire]]] @L[Core:Damage]{damage}.</p>
-      impacts:
-        base:
-          rolls:
-            damage: 1d4[magic fire]
-        heightened:
-          rolls:
-            damage: 1d4[magic fire]
       interaction: attack
       maneuver: active
       piercing:
@@ -706,10 +734,26 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.10.0
     img: systems/teriock/src/icons/abilities/golem-reactivation.webp
     name: Golem Reactivation
     system:
+      automations:
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          common:
+            - heal
+            - revitalize
+            - revive
+            - bag
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: common
       competence:
         raw: 0
       delivery:
@@ -1224,10 +1268,29 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/magical-durability.webp
     name: Magical Durability
     system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.protections.immunities.damageTypes
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: mundane
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       competence:
         raw: 0
       delivery:
@@ -1248,16 +1311,6 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.protections.immunities.damageTypes
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: mundane
       interaction: manifest
       maneuver: passive
       overview:
@@ -1458,10 +1511,36 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/monstrous-strength.webp
     name: Monstrous Strength
     system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.damage.all.raw
+              mode: 0
+              priority: 100
+              qualifier: and(@dmg, @range.melee)
+              target: armament
+              time: normal
+              value: '1'
+            - key: system.piercing.av0
+              mode: 4
+              priority: 10
+              qualifier: '@range.melee'
+              target: armament
+              time: normal
+              value: 'true'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       competence:
         raw: 0
       delivery:
@@ -1480,23 +1559,6 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.damage.all.raw
-              mode: 0
-              priority: 100
-              qualifier: and(@dmg, @range.melee)
-              target: armament
-              time: normal
-              value: '1'
-            - key: system.piercing.raw
-              mode: 4
-              priority: 10
-              qualifier: '@range.melee'
-              target: armament
-              time: normal
-              value: '1'
       interaction: manifest
       maneuver: passive
       overview:
@@ -1778,10 +1840,29 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/spell-immunity.webp
     name: Spell Immunity
     system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.protections.immunities.other
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: Spells
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       competence:
         raw: 0
       delivery:
@@ -1805,16 +1886,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.protections.immunities.other
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: Spells
       interaction: manifest
       maneuver: passive
       overview:
@@ -1946,10 +2017,29 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/unconsciousness-immunity.webp
     name: Unconsciousness Immunity
     system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.protections.immunities.statuses
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: unconscious
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       competence:
         raw: 0
       delivery:
@@ -1970,16 +2060,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.protections.immunities.statuses
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: unconscious
       interaction: manifest
       maneuver: passive
       overview:

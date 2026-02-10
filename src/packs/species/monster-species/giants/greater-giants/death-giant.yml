@@ -68,10 +68,43 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/crown-of-fear.webp
     name: Crown of Fear
     system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.light.dim
+              mode: 4
+              priority: 3
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '0.01'
+            - key: system.light.color
+              mode: 5
+              priority: 3
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '#9141AC'
+            - key: system.light.animation.type
+              mode: 5
+              priority: 3
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: sunburst
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       class: necromancer
       competence:
         raw: 0
@@ -98,30 +131,6 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.light.dim
-              mode: 4
-              priority: 3
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '0.01'
-            - key: system.light.color
-              mode: 5
-              priority: 3
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '#9141AC'
-            - key: system.light.animation.type
-              mode: 5
-              priority: 3
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: sunburst
       interaction: manifest
       maneuver: active
       overview:
@@ -150,11 +159,64 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.21
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/fear-aura.webp
     name: Fear Aura
     system:
       _sup: HL5E1D7opmLmLr5C
+      automations:
+        800c70e6560525a8:
+          _id: 800c70e6560525a8
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: (@h)d4[magic terror]
+          heighten:
+            - 1
+          merge: true
+          roll: damage
+          type: roll
+        b4960732f0b9ed9f:
+          _id: b4960732f0b9ed9f
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          executor: true
+          heighten:
+            - 1
+            - 0
+          relation: include
+          status: frightened
+          target: false
+          type: status
+        d635eb44dba086dd:
+          _id: d635eb44dba086dd
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: combatExpiration
+          what:
+            roll: 2d4kh1
+            threshold: 4
+            type: rolled
+          when:
+            skip: 0
+            time: end
+            trigger: turn
+          who:
+            type: target
       class: necromancer
       competence:
         raw: 0
@@ -187,34 +249,6 @@ effects:
       form: normal
       grantOnly: false
       heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic terror]]] @L[Core:Damage]{damage}\_as well.</p>"
-      impacts:
-        base:
-          expiration:
-            changeOnCrit: false
-            doesExpire: true
-            normal:
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 0
-                  time: end
-                  trigger: turn
-                who:
-                  type: target
-          rolls:
-            endCon: 2d4
-          statuses:
-            - frightened
-        heightened:
-          rolls:
-            damage: 1d4[magic terror]
-        macros:
-          Compendium_teriock_execution_Macro_c172c60521a75122: preExecution
-          Compendium_teriock_execution_Macro_selfFearPreExecu: preExecution
-          Compendium_teriock_execution_Macro_tNkUejVshZd2Etms: preExecution
       interaction: feat
       maneuver: active
       piercing:
@@ -239,11 +273,85 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.21
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/fear-touch.webp
     name: Fear Touch
     system:
       _sup: HL5E1D7opmLmLr5C
+      automations:
+        800c70e6560525a8:
+          _id: 800c70e6560525a8
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: (@h)d4[magic terror]
+          heighten:
+            - 1
+          merge: true
+          roll: damage
+          type: roll
+        b4960732f0b9ed9f:
+          _id: b4960732f0b9ed9f
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          executor: true
+          heighten:
+            - 1
+            - 0
+          relation: include
+          status: frightened
+          target: false
+          type: status
+        d5717000e99ee582:
+          _id: d5717000e99ee582
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: combatExpiration
+          what:
+            roll: 2d4kh1
+            threshold: 4
+            type: rolled
+          when:
+            skip: 1
+            time: end
+            trigger: turn
+          who:
+            type: target
+        d635eb44dba086dd:
+          _id: d635eb44dba086dd
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+          heighten:
+            - 1
+            - 0
+          type: combatExpiration
+          what:
+            roll: 2d4kh1
+            threshold: 4
+            type: rolled
+          when:
+            skip: 0
+            time: end
+            trigger: turn
+          who:
+            type: target
       class: necromancer
       competence:
         raw: 0
@@ -272,46 +380,6 @@ effects:
       form: normal
       grantOnly: false
       heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic terror]]] @L[Core:Damage]{damage}\_as well.</p>"
-      impacts:
-        base:
-          expiration:
-            changeOnCrit: true
-            crit:
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 1
-                  time: end
-                  trigger: turn
-                who:
-                  type: target
-            doesExpire: true
-            normal:
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 0
-                  time: end
-                  trigger: turn
-                who:
-                  type: target
-          rolls:
-            endCon: 2d4
-          statuses:
-            - frightened
-        heightened:
-          rolls:
-            damage: 1d4[magic terror]
-        macros:
-          Compendium_teriock_execution_Macro_c172c60521a75122: preExecution
-          Compendium_teriock_execution_Macro_selfFearPreExecu: preExecution
-          Compendium_teriock_execution_Macro_tNkUejVshZd2Etms: preExecution
       interaction: attack
       maneuver: active
       piercing:
@@ -553,10 +621,36 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/monstrous-strength.webp
     name: Monstrous Strength
     system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.damage.all.raw
+              mode: 0
+              priority: 100
+              qualifier: and(@dmg, @range.melee)
+              target: armament
+              time: normal
+              value: '1'
+            - key: system.piercing.av0
+              mode: 4
+              priority: 10
+              qualifier: '@range.melee'
+              target: armament
+              time: normal
+              value: 'true'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       competence:
         raw: 0
       delivery:
@@ -575,23 +669,6 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.damage.all.raw
-              mode: 0
-              priority: 100
-              qualifier: and(@dmg, @range.melee)
-              target: armament
-              time: normal
-              value: '1'
-            - key: system.piercing.raw
-              mode: 4
-              priority: 10
-              qualifier: '@range.melee'
-              target: armament
-              time: normal
-              value: '1'
       interaction: manifest
       maneuver: passive
       overview:

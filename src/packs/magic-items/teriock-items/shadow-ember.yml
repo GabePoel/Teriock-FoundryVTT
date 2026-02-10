@@ -116,10 +116,93 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.21
+      systemVersion: 0.10.0
     img: systems/teriock/src/icons/abilities/duel.webp
     name: Duel
     system:
+      automations:
+        4229c8d4dbb8e1e7:
+          _id: 4229c8d4dbb8e1e7
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          macro: Compendium.teriock.execution.Macro.4fa8d68bc853e6ae
+          pseudoHook: preExecution
+          relation: pseudoHook
+          type: abilityMacro
+        52f4d0b87363b1c1:
+          _id: 52f4d0b87363b1c1
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          executor: false
+          heighten:
+            - 1
+            - 0
+          relation: apply
+          status: dueling
+          target: false
+          type: status
+        6f7374b1f63be8d9:
+          _id: 6f7374b1f63be8d9
+          competencies:
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: useAbilities
+        747b3e9c9b617af6:
+          _id: 747b3e9c9b617af6
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          executor: false
+          heighten:
+            - 1
+            - 0
+          relation: include
+          status: lighted
+          target: false
+          type: status
+        d635eb44dba086dd:
+          _id: d635eb44dba086dd
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: combatExpiration
+          what:
+            roll: 2d4kh1
+            threshold: 4
+            type: forced
+          when:
+            skip: 0
+            time: end
+            trigger: turn
+          who:
+            type: executor
       class: duelist
       competence:
         raw: 0
@@ -139,33 +222,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          expiration:
-            changeOnCrit: false
-            doesExpire: true
-            normal:
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: forced
-                when:
-                  skip: 0
-                  time: end
-                  trigger: turn
-                who:
-                  type: executor
-          startStatuses:
-            - dueling
-          statuses:
-            - lighted
-        macros:
-          Compendium_teriock_execution_Macro_4fa8d68bc853e6ae: preExecution
-          Compendium_teriock_execution_Macro_joj6xtjHNn2lD67k: preExecution
-        proficient:
-          abilityButtonNames:
-            - Move
       interaction: manifest
       maneuver: active
       overview:
@@ -281,11 +337,6 @@ effects:
         @L[Core:Heightening]{heightened} up to the user's @L[Core:Proficiency
         Bonus]{proficiency bonus}. Neither of these cost any @L[Core:MP].</p>
       form: flaw
-      impacts:
-        macros:
-          Compendium_teriock_execution_Macro_67106022ce003c86: use
-          Compendium_teriock_execution_Macro_shadowEmberImplo: equipmentShatter
-          Compendium_teriock_maintenance_Macro_jVgmJz7eQseesnZe: equipmentShatter
       revealed: true
     type: property
   - _id: ZpS051RhVoapWJDU
@@ -295,10 +346,36 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.10.0
     img: systems/teriock/src/icons/abilities/slay.webp
     name: Slay
     system:
+      automations:
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          common:
+            - bag
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: common
+        29b275994cf9f5b1:
+          _id: 29b275994cf9f5b1
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: 5[lethal]
+          heighten:
+            - 1
+            - 0
+          merge: true
+          roll: damage
+          type: roll
       class: assassin
       competence:
         raw: 0
@@ -326,10 +403,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          rolls:
-            damage: 5[lethal]
       interaction: manifest
       limitation: <p>With @L[Equipment:Dagger]{daggers} only.</p>
       maneuver: reactive
@@ -383,10 +456,27 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.21
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/weapons-mastery.webp
     name: Weapons Mastery
     system:
+      automations:
+        6204ffb1aaa405ed:
+          _id: 6204ffb1aaa405ed
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          macro: Compendium.teriock.execution.Macro.090fd08ae26477da
+          pseudoHook: execution
+          relation: pseudoHook
+          type: abilityMacro
       class: assassin
       competence:
         raw: 0
@@ -406,10 +496,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        macros:
-          Compendium_teriock_execution_Macro_090fd08ae26477da: execution
-          Compendium_teriock_execution_Macro_BGmnfUMxPw2BZeCI: execution
       interaction: manifest
       limitation: <p>With @L[Equipment:Saber]{sabers} only.</p>
       maneuver: passive

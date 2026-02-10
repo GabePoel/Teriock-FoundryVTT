@@ -13,10 +13,30 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.10.0
     img: systems/teriock/src/icons/abilities/avoid.webp
     name: Avoid
     system:
+      automations:
+        66d7d1b1f15fe392:
+          _id: 66d7d1b1f15fe392
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: useAbilities
+        6f7374b1f63be8d9:
+          _id: 6f7374b1f63be8d9
+          competencies:
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: useAbilities
       class: ranger
       competence:
         raw: 0
@@ -38,14 +58,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          abilityButtonNames:
-            - Stand Up
-            - Drop Prone
-        proficient:
-          abilityButtonNames:
-            - Move
       interaction: manifest
       maneuver: reactive
       overview:
@@ -193,10 +205,23 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/species-lore.webp
     name: Species Lore
     system:
+      automations:
+        fc88a9817ac8a299:
+          _id: fc88a9817ac8a299
+          bonus: '0'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          tradecraft: hunter
+          type: check
       class: ranger
       competence:
         raw: 0
@@ -223,10 +248,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          checks:
-            - hunter
       interaction: manifest
       maneuver: active
       overview:
@@ -265,10 +286,48 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/spell-turning-weapons.webp
     name: Spell Turning Weapons
     system:
+      automations:
+        8f623097f9f2a087:
+          _id: 8f623097f9f2a087
+          bonus: '0'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          hex: false
+          type: resist
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.props
+              mode: 2
+              priority: 10
+              qualifier: '@prop.weapon'
+              target: equipment
+              time: normal
+              value: spellTurning
+            - key: system.spellTurning
+              mode: 5
+              priority: 10
+              qualifier: '@prop.weapon'
+              target: equipment
+              time: normal
+              value: 'true'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       class: ranger
       competence:
         raw: 0
@@ -290,23 +349,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.props
-              mode: 2
-              priority: 10
-              qualifier: '@prop.weapon'
-              target: equipment
-              time: normal
-              value: spellTurning
-            - key: system.spellTurning
-              mode: 5
-              priority: 10
-              qualifier: '@prop.weapon'
-              target: equipment
-              time: normal
-              value: 'true'
       interaction: manifest
       maneuver: passive
       overview:

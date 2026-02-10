@@ -12,10 +12,22 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.21
+      systemVersion: 0.10.0
     img: systems/teriock/src/icons/abilities/formlock.webp
     name: Formlock
     system:
+      automations:
+        72ce567009179bea:
+          _id: 72ce567009179bea
+          competencies:
+            - 0
+            - 1
+            - 2
+          duration:
+            raw: '@h * 3600'
+          heighten:
+            - 1
+          type: duration
       competence:
         raw: 0
       costs:
@@ -44,11 +56,7 @@ effects:
       grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 1 hour. The overall duration is rounded to the
-        nearest hour.</p>
-      impacts:
-        heightened:
-          duration: 3600
+        effect increases by 1 hour.</p>
       interaction: attack
       maneuver: active
       piercing:
@@ -74,11 +82,30 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.21
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/formbound.webp
     name: Formbound
     system:
       _sup: 3c304286ddb8dc50
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.protections.immunities.transformation
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: effects
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       competence:
         raw: 0
       delivery:
@@ -99,16 +126,6 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.protections.immunities.transformation
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: effects
       interaction: manifest
       maneuver: passive
       overview:

@@ -12,10 +12,47 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/ice-blast-aura.webp
     name: Ice Blast Aura
     system:
+      automations:
+        29b275994cf9f5b1:
+          _id: 29b275994cf9f5b1
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: 1d4[magic ice]
+          heighten:
+            - 1
+            - 0
+          merge: true
+          roll: damage
+          type: roll
+        d635eb44dba086dd:
+          _id: d635eb44dba086dd
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: combatExpiration
+          what:
+            roll: 2d4kh1
+            threshold: 4
+            type: rolled
+          when:
+            skip: 0
+            time: start
+            trigger: turn
+          who:
+            type: target
       class: paladin
       competence:
         raw: 0
@@ -47,26 +84,6 @@ effects:
       featSaveAttribute: unp
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          expiration:
-            changeOnCrit: false
-            doesExpire: true
-            normal:
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 0
-                  time: start
-                  trigger: turn
-                who:
-                  type: target
-          rolls:
-            damage: 1d4[magic ice]
-            endCon: 2d4
       interaction: feat
       maneuver: active
       piercing:

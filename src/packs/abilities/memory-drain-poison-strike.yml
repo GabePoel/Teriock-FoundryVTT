@@ -12,10 +12,59 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/memory-drain-poison-strike.webp
     name: Memory Drain Poison Strike
     system:
+      automations:
+        157afc517847f562:
+          _id: 157afc517847f562
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: 1d6[memory]
+          heighten:
+            - 1
+            - 0
+          merge: true
+          roll: drain
+          type: roll
+        42c1a8a5aeb16ded:
+          _id: 42c1a8a5aeb16ded
+          competencies:
+            - 1
+            - 2
+          formula: 1d8[memory]
+          heighten:
+            - 1
+            - 0
+          merge: true
+          roll: drain
+          type: roll
+        743730f25f256b10:
+          _id: 743730f25f256b10
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          relation: include
+          status: poisoned
+          type: status
+        b2b2c506da712b40:
+          _id: b2b2c506da712b40
+          competencies:
+            - 2
+          formula: 1d10[memory]
+          heighten:
+            - 1
+            - 0
+          merge: true
+          roll: drain
+          type: roll
       competence:
         raw: 0
       delivery:
@@ -40,18 +89,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          rolls:
-            drain: 1d6[memory]
-          statuses:
-            - poisoned
-        fluent:
-          rolls:
-            drain: 1d10[memory]
-        proficient:
-          rolls:
-            drain: 1d8[memory]
       interaction: attack
       maneuver: active
       overview:

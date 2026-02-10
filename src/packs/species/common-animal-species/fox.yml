@@ -13,10 +13,29 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/advanced-hearing.webp
     name: Advanced Hearing
     system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.senses.hearing
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '30'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       competence:
         raw: 0
       delivery:
@@ -40,16 +59,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.senses.hearing
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '30'
       interaction: manifest
       maneuver: passive
       overview:
@@ -184,10 +193,25 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/hack.webp
     name: Hack
     system:
+      automations:
+        d873eb939c3b5951:
+          _id: d873eb939c3b5951
+          competencies:
+            - 0
+            - 1
+            - 2
+          hacks:
+            - arm
+            - leg
+          heighten:
+            - 1
+            - 0
+          reverse: false
+          type: hacks
       class: berserker
       competence:
         raw: 0
@@ -208,11 +232,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          hacks:
-            - arm
-            - leg
       interaction: attack
       limitation: <p>@L[Category:Biting equipment]{Biting items} only.</p>
       maneuver: active
@@ -248,10 +267,28 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/hide.webp
     name: Hide
     system:
+      automations:
+        0b0d1426453abb55:
+          _id: 0b0d1426453abb55
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          executor: false
+          heighten:
+            - 1
+            - 0
+          relation: apply
+          status: hidden
+          target: false
+          type: status
       class: thief
       competence:
         raw: 0
@@ -271,18 +308,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          rolls:
-            hide: 1d20 + (2 * @snk)
-          startStatuses:
-            - hidden
-        fluent:
-          rolls:
-            hide: 1d20 + (2 * @snk) + @f
-        proficient:
-          rolls:
-            hide: 1d20 + (2 * @snk) + @p
       interaction: manifest
       maneuver: active
       overview:
@@ -332,10 +357,34 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/impale.webp
     name: Impale
     system:
+      automations:
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: common
+        d873eb939c3b5951:
+          _id: d873eb939c3b5951
+          competencies:
+            - 0
+            - 1
+            - 2
+          hacks:
+            - body
+          heighten:
+            - 1
+            - 0
+          reverse: false
+          type: hacks
       class: corsair
       competence:
         raw: 0
@@ -356,12 +405,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          common:
-            - standardDamage
-          hacks:
-            - body
       interaction: attack
       limitation: <p>@L[Category:Biting equipment]{Biting items} only.</p>
       maneuver: active
@@ -523,11 +566,30 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/scent-seeing.webp
     name: Scent Seeing
     system:
       _sup: HBM401DXuNGPGDVk
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.senses.smell
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '10'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       class: berserker
       competence:
         raw: 0
@@ -552,16 +614,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.senses.smell
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '10'
       interaction: manifest
       maneuver: passive
       overview:
@@ -656,10 +708,36 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/vitals-hack.webp
     name: Vitals Hack
     system:
+      automations:
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: common
+        d873eb939c3b5951:
+          _id: d873eb939c3b5951
+          competencies:
+            - 0
+            - 1
+            - 2
+          hacks:
+            - ear
+            - mouth
+            - nose
+          heighten:
+            - 1
+            - 0
+          reverse: false
+          type: hacks
       class: archer
       competence:
         raw: 0
@@ -682,14 +760,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          common:
-            - standardDamage
-          hacks:
-            - ear
-            - mouth
-            - nose
       interaction: attack
       limitation: <p>@L[Category:Biting equipment]{Biting items} only.</p>
       maneuver: active

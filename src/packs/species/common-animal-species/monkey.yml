@@ -67,11 +67,30 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/agile.webp
     name: Agile
     system:
       _sup: TD2cB7JW2R1GjEPs
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.speedAdjustments.difficultTerrain
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '3'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       competence:
         raw: 0
       delivery:
@@ -92,16 +111,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.speedAdjustments.difficultTerrain
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '3'
       interaction: manifest
       limitation: <p>Forest terrain only.</p>
       maneuver: passive
@@ -183,11 +192,47 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/climbing.webp
     name: Climbing
     system:
       _sup: szGTrJXqG8lPAypK
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.speedAdjustments.climb
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '2'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
+        f025905e157ac261:
+          _id: f025905e157ac261
+          changes:
+            - key: system.speedAdjustments.climb
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '3'
+          competencies:
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       competence:
         raw: 0
       delivery:
@@ -208,25 +253,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.speedAdjustments.climb
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '2'
-        proficient:
-          changes:
-            - key: system.speedAdjustments.climb
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '3'
       interaction: manifest
       maneuver: passive
       overview:
@@ -292,10 +318,25 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/hack.webp
     name: Hack
     system:
+      automations:
+        d873eb939c3b5951:
+          _id: d873eb939c3b5951
+          competencies:
+            - 0
+            - 1
+            - 2
+          hacks:
+            - arm
+            - leg
+          heighten:
+            - 1
+            - 0
+          reverse: false
+          type: hacks
       class: berserker
       competence:
         raw: 0
@@ -316,11 +357,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          hacks:
-            - arm
-            - leg
       interaction: attack
       limitation: <p>@L[Category:Biting equipment]{Biting items} only.</p>
       maneuver: active
@@ -356,10 +392,34 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/impale.webp
     name: Impale
     system:
+      automations:
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: common
+        d873eb939c3b5951:
+          _id: d873eb939c3b5951
+          competencies:
+            - 0
+            - 1
+            - 2
+          hacks:
+            - body
+          heighten:
+            - 1
+            - 0
+          reverse: false
+          type: hacks
       class: corsair
       competence:
         raw: 0
@@ -380,12 +440,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          common:
-            - standardDamage
-          hacks:
-            - body
       interaction: attack
       limitation: <p>@L[Category:Biting equipment]{Biting items} only.</p>
       maneuver: active
@@ -414,11 +468,61 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/leaping.webp
     name: Leaping
     system:
       _sup: szGTrJXqG8lPAypK
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.speedAdjustments.leapVertical
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '1'
+            - key: system.speedAdjustments.leapHorizontal
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '2'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
+        f025905e157ac261:
+          _id: f025905e157ac261
+          changes:
+            - key: system.speedAdjustments.leapVertical
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '2'
+            - key: system.speedAdjustments.leapHorizontal
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '3'
+          competencies:
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       class: assassin
       competence:
         raw: 0
@@ -440,39 +544,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.speedAdjustments.leapVertical
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '1'
-            - key: system.speedAdjustments.leapHorizontal
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '2'
-        proficient:
-          changes:
-            - key: system.speedAdjustments.leapVertical
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '2'
-            - key: system.speedAdjustments.leapHorizontal
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '3'
       interaction: manifest
       maneuver: passive
       overview:
@@ -820,10 +891,36 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/vitals-hack.webp
     name: Vitals Hack
     system:
+      automations:
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: common
+        d873eb939c3b5951:
+          _id: d873eb939c3b5951
+          competencies:
+            - 0
+            - 1
+            - 2
+          hacks:
+            - ear
+            - mouth
+            - nose
+          heighten:
+            - 1
+            - 0
+          reverse: false
+          type: hacks
       class: archer
       competence:
         raw: 0
@@ -846,14 +943,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          common:
-            - standardDamage
-          hacks:
-            - ear
-            - mouth
-            - nose
       interaction: attack
       limitation: <p>@L[Category:Biting equipment]{Biting items} only.</p>
       maneuver: active

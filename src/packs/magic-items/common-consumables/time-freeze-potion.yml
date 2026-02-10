@@ -94,11 +94,24 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.10.0
     img: systems/teriock/src/icons/abilities/prethaw.webp
     name: Prethaw
     system:
       _sup: 00Jx8eBDx8jdp0uV
+      automations:
+        d9532d73bad6587b:
+          _id: d9532d73bad6587b
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          relation: remove
+          status: frozen
+          type: end
       competence:
         raw: 0
       delivery:
@@ -121,10 +134,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          endStatuses:
-            - frozen
       interaction: manifest
       maneuver: active
       overview:
@@ -188,10 +197,34 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/smash-time-freeze-potion.webp
     name: Smash Time Freeze Potion
     system:
+      automations:
+        d635eb44dba086dd:
+          _id: d635eb44dba086dd
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: combatExpiration
+          what:
+            roll: 2d4kh1
+            threshold: 4
+            type: rolled
+          when:
+            skip: 0
+            time: start
+            trigger: action
+          who:
+            type: target
       competence:
         raw: 0
       costs:
@@ -219,25 +252,6 @@ effects:
       featSaveAttribute: unp
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          expiration:
-            changeOnCrit: false
-            doesExpire: true
-            normal:
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 0
-                  time: start
-                  trigger: action
-                who:
-                  type: target
-          rolls:
-            endCon: 2d4
       interaction: feat
       maneuver: active
       piercing:

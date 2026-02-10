@@ -15,7 +15,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.10.0
     effects:
       - _id: EQ09R0K1lNNAl9ZG
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/beastly-strength.webp
         name: Beastly Strength
         system:
@@ -81,10 +81,29 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/dark-vision.webp
         name: Dark Vision
         system:
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.senses.dark
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '60'
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
           competence:
             raw: 0
           delivery:
@@ -105,16 +124,6 @@ items:
           featSaveAttribute: mov
           form: normal
           grantOnly: false
-          impacts:
-            base:
-              changes:
-                - key: system.senses.dark
-                  mode: 4
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: '60'
           interaction: manifest
           maneuver: passive
           overview:
@@ -139,10 +148,29 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/flame-magic-hexseal.webp
         name: Flame Magic Hexseal
         system:
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.protections.hexseals.elements
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: flame
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
           competence:
             raw: 0
           delivery:
@@ -166,16 +194,6 @@ items:
           featSaveAttribute: mov
           form: special
           grantOnly: false
-          impacts:
-            base:
-              changes:
-                - key: system.protections.hexseals.elements
-                  mode: 2
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: flame
           interaction: manifest
           maneuver: passive
           overview:
@@ -201,7 +219,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/giant-strength.webp
         name: Giant Strength
         system:
@@ -256,7 +274,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
         name: Improved Armor Piercing
         system:
@@ -306,7 +324,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/improved-strength.webp
         name: Improved Strength
         system:
@@ -360,10 +378,29 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/magical-durability.webp
         name: Magical Durability
         system:
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.protections.immunities.damageTypes
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: mundane
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
           competence:
             raw: 0
           delivery:
@@ -384,16 +421,6 @@ items:
           featSaveAttribute: mov
           form: special
           grantOnly: false
-          impacts:
-            base:
-              changes:
-                - key: system.protections.immunities.damageTypes
-                  mode: 2
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: mundane
           interaction: manifest
           maneuver: passive
           overview:
@@ -418,10 +445,41 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/mana-regenerating.webp
         name: Mana Regenerating
         system:
+          automations:
+            1728b3a84ea27844:
+              _id: 1728b3a84ea27844
+              common:
+                - revitalize
+                - revive
+                - bag
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: common
+            560676267c7929da:
+              _id: 560676267c7929da
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 1
+                - 0
+              macro: Compendium.teriock.execution.Macro.b8b1ce53fc5fc3b7
+              pseudoHook: turnStart
+              relation: pseudoHook
+              type: abilityMacro
           competence:
             raw: 0
           delivery:
@@ -444,11 +502,6 @@ items:
           featSaveAttribute: mov
           form: special
           grantOnly: false
-          impacts:
-            macros:
-              Compendium_teriock_execution_Macro_YvCU8G4UE4a8QEQB: turnStart
-              Compendium_teriock_execution_Macro_b8b1ce53fc5fc3b7: turnStart
-              Compendium_teriock_execution_Macro_manaRgnTurnStart: turnStart
           interaction: manifest
           limitation: >-
             <p>Can only @L[Core:Revitalizing]{revitalize} @L[Core:Hit Points and
@@ -485,7 +538,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
         name: Melee Damage Boost
         system:
@@ -546,7 +599,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
@@ -592,7 +645,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
@@ -638,7 +691,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/normal-sneak.webp
         name: Normal Sneak
         system:
@@ -684,7 +737,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/take-amorphous-elemental-form.webp
         name: Take Amorphous Elemental Form
         system:
@@ -742,7 +795,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/take-humanoid-elemental-form.webp
         name: Take Humanoid Elemental Form
         system:
@@ -797,10 +850,29 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/unconsciousness-immunity.webp
         name: Unconsciousness Immunity
         system:
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.protections.immunities.statuses
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: unconscious
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
           competence:
             raw: 0
           delivery:
@@ -821,16 +893,6 @@ items:
           featSaveAttribute: mov
           form: normal
           grantOnly: false
-          impacts:
-            base:
-              changes:
-                - key: system.protections.immunities.statuses
-                  mode: 2
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: unconscious
           interaction: manifest
           maneuver: passive
           overview:
@@ -887,7 +949,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.10.0
     effects:
       - _id: l0uzxUxLi5NfMRNz
         _key: >-
@@ -897,11 +959,63 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/bellows.webp
         name: Bellows
         system:
           _sup: cirogt3aILQXokIv
+          automations:
+            e2acdae28ea38f62:
+              _id: e2acdae28ea38f62
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 1
+                - 0
+              macro: Compendium.teriock.execution.Macro.cd1820f5e1a2f6fd
+              pseudoHook: useAbility
+              relation: pseudoHook
+              type: abilityMacro
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.boosts.damage
+                  mode: 2
+                  priority: 10
+                  qualifier: '@spell'
+                  target: ability
+                  time: normal
+                  value: '1'
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
+            e789ee5e109ebecd:
+              _id: e789ee5e109ebecd
+              changes:
+                - key: system.boosts.damage
+                  mode: 2
+                  priority: 10
+                  qualifier: '@spell'
+                  target: ability
+                  time: normal
+                  value: '@h'
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+              type: changes
           class: flameMage
           competence:
             raw: 0
@@ -934,28 +1048,6 @@ items:
             <p>For each additional @L[Core:MP]{MP} spent, the next
             @L[Category:Spells]{spell} you cast is @L[Keyword:Boosted]{boosted}
             again.</p>
-          impacts:
-            base:
-              changes:
-                - key: system.impacts.boosts.damage
-                  mode: 2
-                  priority: 10
-                  qualifier: '@spell'
-                  target: ability
-                  time: normal
-                  value: '1'
-            heightened:
-              changes:
-                - key: system.impacts.boosts.damage
-                  mode: 2
-                  priority: 10
-                  qualifier: '@spell'
-                  target: ability
-                  time: normal
-                  value: '@h'
-            macros:
-              Compendium_teriock_execution_Macro_3ggAKA5UMx4YqKni: useAbility
-              Compendium_teriock_execution_Macro_cd1820f5e1a2f6fd: useAbility
           interaction: manifest
           maneuver: active
           overview:
@@ -984,11 +1076,37 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/burning-touch.webp
         name: Burning Touch
         system:
           _sup: zoqmIHCIZ7OiK29D
+          automations:
+            29b275994cf9f5b1:
+              _id: 29b275994cf9f5b1
+              competencies:
+                - 0
+                - 1
+                - 2
+              formula: 1d6[fire magic]
+              heighten:
+                - 1
+                - 0
+              merge: true
+              roll: damage
+              type: roll
+            800c70e6560525a8:
+              _id: 800c70e6560525a8
+              competencies:
+                - 0
+                - 1
+                - 2
+              formula: (@h)d6[magic fire]
+              heighten:
+                - 1
+              merge: true
+              roll: damage
+              type: roll
           class: flameMage
           competence:
             raw: 0
@@ -1019,13 +1137,6 @@ items:
           heightened: >-
             <p>For each additional @L[Core:MP]{MP} spent, deal an additional
             [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage}.</p>
-          impacts:
-            base:
-              rolls:
-                damage: 1d6[fire magic]
-            heightened:
-              rolls:
-                damage: 1d6[magic fire]
           interaction: attack
           maneuver: active
           piercing:
@@ -1056,7 +1167,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         flags:
           teriock:
             dontConsume: false
@@ -1200,11 +1311,61 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/control-and-resist-fire.webp
         name: Control and Resist Fire
         system:
           _sup: cirogt3aILQXokIv
+          automations:
+            29b275994cf9f5b1:
+              _id: 29b275994cf9f5b1
+              competencies:
+                - 0
+                - 1
+                - 2
+              formula: 1d4[fire magic]
+              heighten:
+                - 1
+                - 0
+              merge: true
+              roll: damage
+              type: roll
+            8f623097f9f2a087:
+              _id: 8f623097f9f2a087
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              hex: false
+              type: resist
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.damage.all.raw
+                  mode: 2
+                  priority: 30
+                  qualifier: '@dmg'
+                  target: armament
+                  time: normal
+                  value: 1d4[fire magic]
+                - key: system.protections.resistances.damageTypes
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: fire
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
           class: flameMage
           competence:
             raw: 0
@@ -1235,25 +1396,6 @@ items:
           featSaveAttribute: mov
           form: special
           grantOnly: false
-          impacts:
-            base:
-              changes:
-                - key: system.damage.all.raw
-                  mode: 2
-                  priority: 30
-                  qualifier: '@dmg'
-                  target: armament
-                  time: normal
-                  value: 1d4[fire magic]
-                - key: system.protections.resistances.damageTypes
-                  mode: 2
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: fire
-              rolls:
-                damage: 1d4[fire magic]
           interaction: manifest
           maneuver: active
           overview:
@@ -1283,11 +1425,44 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/crown-of-flame.webp
         name: Crown of Flame
         system:
           _sup: cirogt3aILQXokIv
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.light.dim
+                  mode: 4
+                  priority: 3
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '0.01'
+                - key: system.light.color
+                  mode: 5
+                  priority: 3
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '#E01B24'
+                - key: system.light.animation.type
+                  mode: 5
+                  priority: 3
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: sunburst
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
           class: flameMage
           competence:
             raw: 0
@@ -1316,30 +1491,6 @@ items:
           featSaveAttribute: mov
           form: special
           grantOnly: false
-          impacts:
-            base:
-              changes:
-                - key: system.light.dim
-                  mode: 4
-                  priority: 3
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: '0.01'
-                - key: system.light.color
-                  mode: 5
-                  priority: 3
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: '#E01B24'
-                - key: system.light.animation.type
-                  mode: 5
-                  priority: 3
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: sunburst
           interaction: manifest
           maneuver: active
           overview:
@@ -1369,7 +1520,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         flags:
           teriock:
             dontConsume: false
@@ -1462,7 +1613,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/flame-elder-sorcery.webp
         name: Flame Elder Sorcery
         system:
@@ -1512,7 +1663,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/flame-elder-sorcery-words.webp
         name: Flame Elder Sorcery Words
         system:
@@ -1596,10 +1747,62 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/flame-rotators.webp
         name: Flame Rotators
         system:
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.magic.maxRotators.raw
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '@rank.mag - 1'
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
+            f025905e157ac261:
+              _id: f025905e157ac261
+              changes:
+                - key: system.magic.maxRotators.raw
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: 2 * (@rank.mag - 1)
+              competencies:
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
+            f7da3b5e1992a724:
+              _id: f7da3b5e1992a724
+              changes:
+                - key: system.magic.maxRotators.raw
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: 2 * (@rank.mag - 1) + @p
+              competencies:
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
           class: flameMage
           competence:
             raw: 0
@@ -1619,34 +1822,6 @@ items:
           featSaveAttribute: mov
           form: normal
           grantOnly: false
-          impacts:
-            base:
-              changes:
-                - key: system.magic.maxRotators.raw
-                  mode: 4
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: '@rank.mag - 1'
-            fluent:
-              changes:
-                - key: system.magic.maxRotators.raw
-                  mode: 4
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: 2 * (@rank.mag - 1) + @p
-            proficient:
-              changes:
-                - key: system.magic.maxRotators.raw
-                  mode: 4
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: 2 * (@rank.mag - 1)
           interaction: manifest
           maneuver: passive
           overview:
@@ -1697,11 +1872,37 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/inferno-aura.webp
         name: Inferno Aura
         system:
           _sup: zoqmIHCIZ7OiK29D
+          automations:
+            29b275994cf9f5b1:
+              _id: 29b275994cf9f5b1
+              competencies:
+                - 0
+                - 1
+                - 2
+              formula: 1d6[magic fire]
+              heighten:
+                - 1
+                - 0
+              merge: true
+              roll: damage
+              type: roll
+            800c70e6560525a8:
+              _id: 800c70e6560525a8
+              competencies:
+                - 0
+                - 1
+                - 2
+              formula: (@h)d6[magic fire]
+              heighten:
+                - 1
+              merge: true
+              roll: damage
+              type: roll
           class: flameMage
           competence:
             raw: 0
@@ -1735,13 +1936,6 @@ items:
           heightened: >-
             <p>For each additional @L[Core:MP]{MP} spent, deal an additional
             [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage}.</p>
-          impacts:
-            base:
-              rolls:
-                damage: 1d6[magic fire]
-            heightened:
-              rolls:
-                damage: 1d6[magic fire]
           interaction: feat
           maneuver: active
           piercing:
@@ -1769,7 +1963,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/melting-grasp.webp
         name: Melting Grasp
         system:
@@ -1828,7 +2022,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/rupture-mark.webp
         name: Rupture Mark
         system:
@@ -1918,7 +2112,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.10.0
     effects:
       - _id: qFaYIwzJ0DUft3x0
         _key: >-
@@ -1928,7 +2122,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/properties/burning.webp
         name: Burning
         system:
@@ -1950,7 +2144,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -1970,7 +2164,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -2013,7 +2207,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.10.0
     effects:
       - _id: CaTTWTstOULxfkrp
         _key: >-
@@ -2023,7 +2217,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         flags:
           teriock:
             category: combat
@@ -2076,11 +2270,58 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/cremate.webp
         name: Cremate
         system:
           _sup: CaTTWTstOULxfkrp
+          automations:
+            1728b3a84ea27844:
+              _id: 1728b3a84ea27844
+              common:
+                - bag
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: common
+            3a62dd96319ca135:
+              _id: 3a62dd96319ca135
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              executor: false
+              heighten:
+                - 1
+                - 0
+              relation: apply
+              status: burned
+              target: false
+              type: status
+            5e9e1d2033fe152a:
+              _id: 5e9e1d2033fe152a
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              executor: false
+              heighten:
+                - 1
+                - 0
+              relation: apply
+              status: ruined
+              target: false
+              type: status
           class: flameMage
           competence:
             raw: 0
@@ -2113,11 +2354,6 @@ items:
           featSaveAttribute: mov
           form: special
           grantOnly: false
-          impacts:
-            base:
-              startStatuses:
-                - burned
-                - ruined
           interaction: attack
           maneuver: active
           piercing:
@@ -2147,7 +2383,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         flags:
           teriock:
             category: support
@@ -2156,30 +2392,9 @@ items:
         img: systems/teriock/src/icons/abilities/expanded-flame-elder-sorcery.webp
         name: Expanded Flame Elder Sorcery
         system:
-          class: flameMage
-          competence:
-            raw: 0
-          delivery:
-            base: self
-          duration:
-            dawn: false
-            description: Instant
-            raw: '0'
-            stationary: false
-            unit: instant
-          elderSorcery: true
-          elements:
-            - flame
-          executionTime: passive
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: int
-          form: special
-          grantOnly: false
-          impacts:
-            proficient:
+          automations:
+            f025905e157ac261:
+              _id: f025905e157ac261
               changes:
                 - key: system.competence.raw
                   mode: 4
@@ -2202,6 +2417,35 @@ items:
                   target: ability
                   time: fluency
                   value: '2'
+              competencies:
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
+          class: flameMage
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
+          elderSorcery: true
+          elements:
+            - flame
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: int
+          form: special
+          grantOnly: false
           interaction: feat
           maneuver: passive
           overview:
@@ -2255,11 +2499,28 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/minor-weapon-enchantment.webp
         name: Minor Weapon Enchantment
         system:
           _sup: CaTTWTstOULxfkrp
+          automations:
+            72ce567009179bea:
+              _id: 72ce567009179bea
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              duration:
+                raw: '@h * 3600'
+                unit: second
+              heighten:
+                - 1
+              mode: 5
+              type: duration
           class: flameMage
           competence:
             raw: 0
@@ -2291,11 +2552,7 @@ items:
           grantOnly: false
           heightened: >-
             <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-            effect increases by 1 hour. The overall duration is rounded to the
-            nearest hour.</p>
-          impacts:
-            heightened:
-              duration: 3600
+            effect increases by 1 hour.</p>
           interaction: manifest
           maneuver: slow
           overview:
@@ -2362,7 +2619,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.10.0
     effects:
       - _id: wKxfL6pzdYHJceL0
         _key: >-
@@ -2372,10 +2629,36 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/fire-ball.webp
         name: Fire Ball
         system:
+          automations:
+            29b275994cf9f5b1:
+              _id: 29b275994cf9f5b1
+              competencies:
+                - 0
+                - 1
+                - 2
+              formula: 1d4[magic fire]
+              heighten:
+                - 1
+                - 0
+              merge: true
+              roll: damage
+              type: roll
+            800c70e6560525a8:
+              _id: 800c70e6560525a8
+              competencies:
+                - 0
+                - 1
+                - 2
+              formula: (@h)d4[magic fire]
+              heighten:
+                - 1
+              merge: true
+              roll: damage
+              type: roll
           class: flameMage
           competence:
             raw: 0
@@ -2403,13 +2686,6 @@ items:
           heightened: >-
             <p>For each additional @L[Core:MP]{MP} spent, deal an additional
             [[/damage 1d4[magic fire]]] @L[Core:Damage]{damage}.</p>
-          impacts:
-            base:
-              rolls:
-                damage: 1d4[magic fire]
-            heightened:
-              rolls:
-                damage: 1d4[magic fire]
           interaction: attack
           maneuver: active
           piercing:
@@ -2440,10 +2716,36 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/flame-ray.webp
         name: Flame Ray
         system:
+          automations:
+            29b275994cf9f5b1:
+              _id: 29b275994cf9f5b1
+              competencies:
+                - 0
+                - 1
+                - 2
+              formula: 1d8[fire magic]
+              heighten:
+                - 1
+                - 0
+              merge: true
+              roll: damage
+              type: roll
+            800c70e6560525a8:
+              _id: 800c70e6560525a8
+              competencies:
+                - 0
+                - 1
+                - 2
+              formula: (@h)d8[fire magic]
+              heighten:
+                - 1
+              merge: true
+              roll: damage
+              type: roll
           class: flameMage
           competence:
             raw: 0
@@ -2471,13 +2773,6 @@ items:
           heightened: >-
             <p>For each additional @L[Core:MP]{MP} spent, deal an additional
             [[/damage 1d8[fire magic]]] @L[Core:Damage]{damage}.</p>
-          impacts:
-            base:
-              rolls:
-                damage: 1d8[fire magic]
-            heightened:
-              rolls:
-                damage: 1d8[fire magic]
           interaction: attack
           maneuver: active
           piercing:
@@ -2508,11 +2803,60 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/ignite.webp
         name: Ignite
         system:
           _sup: LbLjjWiopqGfltmW
+          automations:
+            72ce567009179bea:
+              _id: 72ce567009179bea
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              duration:
+                raw: '@h * 3600'
+                unit: second
+              heighten:
+                - 1
+              mode: 5
+              type: duration
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.light.dim
+                  mode: 4
+                  priority: 5
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '10'
+                - key: system.light.color
+                  mode: 5
+                  priority: 5
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '#C64600'
+                - key: system.light.animation.type
+                  mode: 5
+                  priority: 5
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: torch
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
           class: flameMage
           competence:
             raw: 0
@@ -2536,34 +2880,7 @@ items:
           grantOnly: false
           heightened: >-
             <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-            effect increases by 1 hour. The overall duration is rounded to the
-            nearest hour.</p>
-          impacts:
-            base:
-              changes:
-                - key: system.light.dim
-                  mode: 4
-                  priority: 5
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: '10'
-                - key: system.light.color
-                  mode: 5
-                  priority: 5
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: '#C64600'
-                - key: system.light.animation.type
-                  mode: 5
-                  priority: 5
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: torch
-            heightened:
-              duration: 3600
+            effect increases by 1 hour.</p>
           interaction: manifest
           maneuver: active
           overview:
@@ -2595,34 +2912,14 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/light.webp
         name: Light
         system:
           _sup: LbLjjWiopqGfltmW
-          class: flameMage
-          competence:
-            raw: 0
-          delivery:
-            base: cone
-          duration:
-            dawn: false
-            description: 1 Minute
-            raw: '1'
-            stationary: false
-            unit: minute
-          elements:
-            - flame
-          executionTime: a1
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          grantOnly: false
-          impacts:
-            base:
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
               changes:
                 - key: system.light.bright
                   mode: 4
@@ -2659,6 +2956,35 @@ items:
                   target: Actor
                   time: normal
                   value: '60'
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: changes
+          class: flameMage
+          competence:
+            raw: 0
+          delivery:
+            base: cone
+          duration:
+            dawn: false
+            description: 1 Minute
+            raw: '1'
+            stationary: false
+            unit: minute
+          elements:
+            - flame
+          executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
           interaction: manifest
           maneuver: active
           overview:
@@ -2688,7 +3014,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/mage-light.webp
         name: Mage Light
         system:
@@ -2737,7 +3063,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/self-detonate.webp
         name: Self Detonate
         system:
@@ -2847,7 +3173,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.10.0
     effects:
       - _id: QEczhwfNaJmkOSOw
         _key: >-
@@ -2857,7 +3183,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         flags:
           teriock:
             category: combat
@@ -2918,7 +3244,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/bombastic-casting.webp
         name: Bombastic Casting
         system:
@@ -2978,7 +3304,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         flags:
           teriock:
             category: support
@@ -3049,7 +3375,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/sudden-casting.webp
         name: Sudden Casting
         system:
@@ -3143,7 +3469,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.10.0
     effects:
       - _id: NGCuRUaVtXnxAbRe
         _key: >-
@@ -3153,10 +3479,36 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/arcane-ray.webp
         name: Arcane Ray
         system:
+          automations:
+            29b275994cf9f5b1:
+              _id: 29b275994cf9f5b1
+              competencies:
+                - 0
+                - 1
+                - 2
+              formula: 1d4[magic]
+              heighten:
+                - 1
+                - 0
+              merge: true
+              roll: damage
+              type: roll
+            800c70e6560525a8:
+              _id: 800c70e6560525a8
+              competencies:
+                - 0
+                - 1
+                - 2
+              formula: (@h)d4[magic]
+              heighten:
+                - 1
+              merge: true
+              roll: damage
+              type: roll
           competence:
             raw: 0
           delivery:
@@ -3181,13 +3533,6 @@ items:
           heightened: >-
             <p>For each additional @L[Core:MP]{MP} spent, deal an additional
             [[/damage 1d4[magic]]] @L[Core:Damage]{damage}.</p>
-          impacts:
-            base:
-              rolls:
-                damage: 1d4[magic]
-            heightened:
-              rolls:
-                damage: 1d4[magic]
           interaction: attack
           maneuver: active
           piercing:
@@ -3218,7 +3563,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.25
+          systemVersion: 0.10.0
         img: systems/teriock/src/icons/abilities/staff-touch.webp
         name: Staff Touch
         system:

@@ -85,7 +85,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.10.0
     flags:
       teriock:
         category: combat
@@ -93,6 +93,36 @@ effects:
     img: systems/teriock/src/icons/abilities/duel-swap.webp
     name: Duel Swap
     system:
+      automations:
+        52f4d0b87363b1c1:
+          _id: 52f4d0b87363b1c1
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          executor: false
+          heighten:
+            - 1
+            - 0
+          relation: apply
+          status: dueling
+          target: false
+          type: status
+        e9c69ec96993ccc5:
+          _id: e9c69ec96993ccc5
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          relation: remove
+          status: dueling
+          type: end
       class: duelist
       competence:
         raw: 0
@@ -117,12 +147,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          endStatuses:
-            - dueling
-          startStatuses:
-            - dueling
       interaction: manifest
       maneuver: active
       overview:

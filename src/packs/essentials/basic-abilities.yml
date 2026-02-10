@@ -132,13 +132,30 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     flags:
       teriock:
         dontConsume: false
     img: systems/teriock/src/icons/abilities/attempt-check.webp
     name: Attempt Check
     system:
+      automations:
+        dfc94b68c5ea79ff:
+          _id: dfc94b68c5ea79ff
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          macro: Compendium.teriock.execution.Macro.3dc3eae66ffb6cab
+          pseudoHook: execution
+          relation: pseudoHook
+          type: abilityMacro
       basic: true
       competence:
         raw: 0
@@ -158,14 +175,6 @@ effects:
       featSaveAttribute: mov
       form: intrinsic
       grantOnly: false
-      impacts:
-        base:
-          rolls:
-            check: d20
-        macros:
-          Compendium_teriock_execution_Macro_3dc3eae66ffb6cab: execution
-          Compendium_teriock_execution_Macro_PGg9Nnkx6IflvYUm: execution
-          Compendium_teriock_execution_Macro_attemptCheckExec: execution
       interaction: manifest
       maneuver: active
       overview:
@@ -197,13 +206,31 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     flags:
       teriock:
         dontConsume: false
     img: systems/teriock/src/icons/abilities/attempt-hide.webp
     name: Attempt Hide
     system:
+      automations:
+        0b0d1426453abb55:
+          _id: 0b0d1426453abb55
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          executor: false
+          heighten:
+            - 1
+            - 0
+          relation: apply
+          status: hidden
+          target: false
+          type: status
       basic: true
       competence:
         raw: 0
@@ -223,19 +250,6 @@ effects:
       featSaveAttribute: mov
       form: intrinsic
       grantOnly: false
-      impacts:
-        base:
-          rolls:
-            hide: 1d20 + (2 * @snk)
-            perceive: 10 + @per
-          startStatuses:
-            - hidden
-        fluent:
-          rolls:
-            hide: 1d20 + (2 * @snk) + @f
-        proficient:
-          rolls:
-            hide: 1d20 + (2 * @snk) + @p
       interaction: manifest
       maneuver: active
       overview:
@@ -275,13 +289,30 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     flags:
       teriock:
         dontConsume: false
     img: systems/teriock/src/icons/abilities/attune.webp
     name: Attune
     system:
+      automations:
+        2658c60cfa32dff4:
+          _id: 2658c60cfa32dff4
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          macro: Compendium.teriock.execution.Macro.83d395b5b3bbdd0f
+          pseudoHook: preExecution
+          relation: pseudoHook
+          type: abilityMacro
       basic: true
       competence:
         raw: 0
@@ -304,11 +335,6 @@ effects:
       featSaveAttribute: mov
       form: intrinsic
       grantOnly: false
-      impacts:
-        macros:
-          Compendium_teriock_execution_Macro_83d395b5b3bbdd0f: preExecution
-          Compendium_teriock_execution_Macro_BwnMZZRk69x3211Q: preExecution
-          Compendium_teriock_execution_Macro_attunePreExecuti: preExecution
       interaction: manifest
       maneuver: active
       overview:
@@ -335,13 +361,24 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     flags:
       teriock:
         dontConsume: false
     img: systems/teriock/src/icons/abilities/basic-attack.webp
     name: Basic Attack
     system:
+      automations:
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: common
       basic: true
       competence:
         raw: 0
@@ -364,10 +401,6 @@ effects:
       featSaveAttribute: mov
       form: intrinsic
       grantOnly: false
-      impacts:
-        base:
-          common:
-            - standardDamage
       interaction: attack
       maneuver: active
       overview:
@@ -504,7 +537,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.10.0
     flags:
       teriock:
         dontConsume: false
@@ -539,6 +572,9 @@ effects:
       range:
         raw: Your Item's Range
         unit: ft
+      requirements: >-
+        <p>The item you're using to @L[Core:Block Interaction]{block} has the
+        @L[Property:Blocking]{blocking property}.</p>
       results:
         fail: <p>The @L[Core:Attack Interaction]{attack's} effect applies.</p>
         save: >-
@@ -618,13 +654,31 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     flags:
       teriock:
         dontConsume: false
     img: systems/teriock/src/icons/abilities/burn.webp
     name: Burn
     system:
+      automations:
+        3a62dd96319ca135:
+          _id: 3a62dd96319ca135
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          executor: false
+          heighten:
+            - 1
+            - 0
+          relation: apply
+          status: burned
+          target: false
+          type: status
       basic: true
       competence:
         raw: 0
@@ -646,10 +700,6 @@ effects:
       featSaveAttribute: mov
       form: intrinsic
       grantOnly: false
-      impacts:
-        base:
-          startStatuses:
-            - burned
       interaction: attack
       maneuver: active
       overview:
@@ -786,13 +836,30 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     flags:
       teriock:
         dontConsume: false
     img: systems/teriock/src/icons/abilities/deattune.webp
     name: Deattune
     system:
+      automations:
+        244a565f5dc3a467:
+          _id: 244a565f5dc3a467
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          macro: Compendium.teriock.execution.Macro.5c41a904e97fdaa4
+          pseudoHook: execution
+          relation: pseudoHook
+          type: abilityMacro
       basic: true
       competence:
         raw: 0
@@ -812,11 +879,6 @@ effects:
       featSaveAttribute: mov
       form: intrinsic
       grantOnly: false
-      impacts:
-        macros:
-          Compendium_teriock_execution_Macro_5c41a904e97fdaa4: execution
-          Compendium_teriock_execution_Macro_ARwwvQ4JsEm4MicQ: execution
-          Compendium_teriock_execution_Macro_deattuneExecutio: execution
       interaction: manifest
       maneuver: slow
       overview:
@@ -908,13 +970,30 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     flags:
       teriock:
         dontConsume: false
     img: systems/teriock/src/icons/abilities/disbelieve.webp
     name: Disbelieve
     system:
+      automations:
+        d378ed0d0403af9c:
+          _id: d378ed0d0403af9c
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          macro: Compendium.teriock.execution.Macro.d91c0c5ced0c6a58
+          pseudoHook: preExecution
+          relation: pseudoHook
+          type: abilityMacro
       basic: true
       competence:
         raw: 0
@@ -939,17 +1018,6 @@ effects:
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, the DC of the [[lookup
         name]] decreases by 2.</p>
-      impacts:
-        base:
-          rolls:
-            endCon: 2d4
-        heightened:
-          rolls:
-            damage: 1d4[magic holy]
-        macros:
-          Compendium_teriock_execution_Macro_5Gvsoxg0CvvGNUeA: preExecution
-          Compendium_teriock_execution_Macro_d91c0c5ced0c6a58: preExecution
-          Compendium_teriock_execution_Macro_disbelievePreExe: preExecution
       interaction: feat
       maneuver: active
       overview:
@@ -1030,13 +1098,31 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     flags:
       teriock:
         dontConsume: false
     img: systems/teriock/src/icons/abilities/drop-prone.webp
     name: Drop Prone
     system:
+      automations:
+        8941220db1fa8721:
+          _id: 8941220db1fa8721
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          executor: false
+          heighten:
+            - 1
+            - 0
+          relation: apply
+          status: prone
+          target: false
+          type: status
       basic: true
       competence:
         raw: 0
@@ -1058,10 +1144,6 @@ effects:
       featSaveAttribute: mov
       form: intrinsic
       grantOnly: false
-      impacts:
-        base:
-          startStatuses:
-            - prone
       interaction: manifest
       maneuver: active
       overview:
@@ -1084,13 +1166,38 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.10.0
     flags:
       teriock:
         dontConsume: false
     img: systems/teriock/src/icons/abilities/first-aid.webp
     name: First Aid
     system:
+      automations:
+        06acda516847cfdb:
+          _id: 06acda516847cfdb
+          bonus: '0'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          tradecraft: herbalist
+          type: check
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          common:
+            - awaken
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: common
       basic: true
       competence:
         raw: 0
@@ -1112,14 +1219,10 @@ effects:
       featSaveAttribute: mov
       form: intrinsic
       grantOnly: false
-      impacts:
-        base:
-          checks:
-            - herbalist
       interaction: manifest
       maneuver: active
       overview:
-        base: <p>Make a DC 10 @L[Tradecraft:Herbalist]{herbalist check}.</p>
+        base: <p>Make a DC 10 [[/tc herbalist]]{herbalist check}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -1141,13 +1244,26 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.10.0
     flags:
       teriock:
         dontConsume: false
     img: systems/teriock/src/icons/abilities/force-revert.webp
     name: Force Revert
     system:
+      automations:
+        ebf9c2749a0ef8c2:
+          _id: ebf9c2749a0ef8c2
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          relation: remove
+          status: transformed
+          type: end
       basic: true
       competence:
         raw: 0
@@ -1172,10 +1288,6 @@ effects:
       featSaveAttribute: mov
       form: intrinsic
       grantOnly: false
-      impacts:
-        base:
-          endStatuses:
-            - transformed
       interaction: attack
       maneuver: active
       piercing:
@@ -1253,13 +1365,24 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     flags:
       teriock:
         dontConsume: false
     img: systems/teriock/src/icons/abilities/knockout-attack.webp
     name: Knockout Attack
     system:
+      automations:
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: common
       basic: true
       competence:
         raw: 0
@@ -1283,10 +1406,6 @@ effects:
       featSaveAttribute: mov
       form: intrinsic
       grantOnly: false
-      impacts:
-        base:
-          common:
-            - standardDamage
       interaction: attack
       maneuver: active
       overview:
@@ -1318,13 +1437,54 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     flags:
       teriock:
         dontConsume: false
     img: systems/teriock/src/icons/abilities/melee-dodge.webp
     name: Melee Dodge
     system:
+      automations:
+        96383c76a745415d:
+          _id: 96383c76a745415d
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          executor: false
+          heighten:
+            - 1
+            - 0
+          relation: include
+          status: meleeDodging
+          target: false
+          type: status
+        d635eb44dba086dd:
+          _id: d635eb44dba086dd
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: combatExpiration
+          what:
+            roll: 2d4kh1
+            threshold: 4
+            type: forced
+          when:
+            skip: 0
+            time: start
+            trigger: turn
+          who:
+            type: executor
       basic: true
       competence:
         raw: 0
@@ -1347,25 +1507,6 @@ effects:
       featSaveAttribute: mov
       form: intrinsic
       grantOnly: false
-      impacts:
-        base:
-          expiration:
-            changeOnCrit: false
-            doesExpire: true
-            normal:
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: forced
-                when:
-                  skip: 0
-                  time: start
-                  trigger: turn
-                who:
-                  type: executor
-          statuses:
-            - meleeDodging
       interaction: manifest
       maneuver: active
       overview:
@@ -1393,13 +1534,54 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     flags:
       teriock:
         dontConsume: false
     img: systems/teriock/src/icons/abilities/missile-dodge.webp
     name: Missile Dodge
     system:
+      automations:
+        858320f85f928105:
+          _id: 858320f85f928105
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          executor: false
+          heighten:
+            - 1
+            - 0
+          relation: include
+          status: missileDodging
+          target: false
+          type: status
+        d635eb44dba086dd:
+          _id: d635eb44dba086dd
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: combatExpiration
+          what:
+            roll: 2d4kh1
+            threshold: 4
+            type: forced
+          when:
+            skip: 0
+            time: start
+            trigger: turn
+          who:
+            type: executor
       basic: true
       competence:
         raw: 0
@@ -1422,25 +1604,6 @@ effects:
       featSaveAttribute: mov
       form: intrinsic
       grantOnly: false
-      impacts:
-        base:
-          expiration:
-            changeOnCrit: false
-            doesExpire: true
-            normal:
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: forced
-                when:
-                  skip: 0
-                  time: start
-                  trigger: turn
-                who:
-                  type: executor
-          statuses:
-            - missileDodging
       interaction: manifest
       maneuver: active
       overview:
@@ -1523,13 +1686,30 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     flags:
       teriock:
         dontConsume: false
     img: systems/teriock/src/icons/abilities/off-hand-attack.webp
     name: Off-Hand Attack
     system:
+      automations:
+        5c4af74c89487194:
+          _id: 5c4af74c89487194
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          macro: Compendium.teriock.execution.Macro.29b994da873c13a9
+          pseudoHook: execution
+          relation: pseudoHook
+          type: abilityMacro
       basic: true
       competence:
         raw: 0
@@ -1549,11 +1729,6 @@ effects:
       featSaveAttribute: mov
       form: intrinsic
       grantOnly: false
-      impacts:
-        macros:
-          Compendium_teriock_execution_Macro_29b994da873c13a9: execution
-          Compendium_teriock_execution_Macro_UMWD9THHhyukfBNM: execution
-          Compendium_teriock_execution_Macro_offHandAtkExecut: execution
       interaction: manifest
       maneuver: reactive
       overview:
@@ -1588,13 +1763,30 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     flags:
       teriock:
         dontConsume: false
     img: systems/teriock/src/icons/abilities/opportunity-attack.webp
     name: Opportunity Attack
     system:
+      automations:
+        f43dfff69004e843:
+          _id: f43dfff69004e843
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          macro: Compendium.teriock.execution.Macro.4864770a8b8e747b
+          pseudoHook: execution
+          relation: pseudoHook
+          type: abilityMacro
       basic: true
       competence:
         raw: 0
@@ -1614,11 +1806,6 @@ effects:
       featSaveAttribute: mov
       form: intrinsic
       grantOnly: false
-      impacts:
-        macros:
-          Compendium_teriock_execution_Macro_4864770a8b8e747b: execution
-          Compendium_teriock_execution_Macro_OCGHKTqnI04j1L3h: execution
-          Compendium_teriock_execution_Macro_opAtkExecution00: execution
       interaction: manifest
       maneuver: reactive
       overview:
@@ -1649,13 +1836,38 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.10.0
     flags:
       teriock:
         dontConsume: false
     img: systems/teriock/src/icons/abilities/pay-gold.webp
     name: Pay Gold
     system:
+      automations:
+        32520e32fd3b4c52:
+          _id: 32520e32fd3b4c52
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          relation: remove
+          status: hollied
+          type: end
+        5fade7b6596f9b62:
+          _id: 5fade7b6596f9b62
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          relation: remove
+          status: terrored
+          type: end
       basic: true
       competence:
         raw: 0
@@ -1682,11 +1894,6 @@ effects:
       featSaveAttribute: mov
       form: intrinsic
       grantOnly: false
-      impacts:
-        base:
-          endStatuses:
-            - hollied
-            - terrored
       interaction: manifest
       maneuver: active
       overview:
@@ -1797,10 +2004,6 @@ effects:
       featSaveAttribute: per
       form: intrinsic
       grantOnly: false
-      impacts:
-        base:
-          rolls:
-            perceive: 1d20 + (2 * @per)
       interaction: feat
       maneuver: active
       piercing:
@@ -1827,13 +2030,37 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     flags:
       teriock:
         dontConsume: false
     img: systems/teriock/src/icons/abilities/power-through.webp
     name: Power Through
     system:
+      automations:
+        d635eb44dba086dd:
+          _id: d635eb44dba086dd
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: combatExpiration
+          what:
+            roll: 2d4kh1
+            threshold: 4
+            type: forced
+          when:
+            skip: 0
+            time: end
+            trigger: turn
+          who:
+            type: everyone
       basic: true
       competence:
         raw: 0
@@ -1859,23 +2086,6 @@ effects:
       featSaveAttribute: mov
       form: intrinsic
       grantOnly: false
-      impacts:
-        base:
-          expiration:
-            changeOnCrit: false
-            doesExpire: true
-            normal:
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: forced
-                when:
-                  skip: 0
-                  time: end
-                  trigger: turn
-                who:
-                  type: everyone
       interaction: manifest
       maneuver: active
       overview:
@@ -2286,13 +2496,42 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.10.0
     flags:
       teriock:
         dontConsume: false
     img: systems/teriock/src/icons/abilities/self-revert.webp
     name: Self Revert
     system:
+      automations:
+        cda05a53dd9b13b8:
+          _id: cda05a53dd9b13b8
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          macro: Compendium.teriock.execution.Macro.66118e00b87f9946
+          pseudoHook: preExecution
+          relation: pseudoHook
+          type: abilityMacro
+        ebf9c2749a0ef8c2:
+          _id: ebf9c2749a0ef8c2
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          relation: remove
+          status: transformed
+          type: end
       basic: true
       competence:
         raw: 0
@@ -2312,14 +2551,6 @@ effects:
       featSaveAttribute: int
       form: intrinsic
       grantOnly: false
-      impacts:
-        base:
-          endStatuses:
-            - transformed
-        macros:
-          Compendium_teriock_execution_Macro_66118e00b87f9946: preExecution
-          Compendium_teriock_execution_Macro_dc0XWbqZgw04rJn5: preExecution
-          Compendium_teriock_execution_Macro_selfRevertPreExe: preExecution
       interaction: feat
       maneuver: active
       overview:
@@ -2347,13 +2578,26 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.10.0
     flags:
       teriock:
         dontConsume: false
     img: systems/teriock/src/icons/abilities/stand-up.webp
     name: Stand Up
     system:
+      automations:
+        3d7fd86e8b76943d:
+          _id: 3d7fd86e8b76943d
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          relation: remove
+          status: prone
+          type: end
       basic: true
       competence:
         raw: 0
@@ -2375,10 +2619,6 @@ effects:
       featSaveAttribute: mov
       form: intrinsic
       grantOnly: false
-      impacts:
-        base:
-          endStatuses:
-            - prone
       interaction: manifest
       maneuver: active
       overview:
@@ -2401,10 +2641,28 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/start-wisping.webp
     name: Start Wisping
     system:
+      automations:
+        c2109f984c16d47e:
+          _id: c2109f984c16d47e
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          executor: false
+          heighten:
+            - 1
+            - 0
+          relation: apply
+          status: wisping
+          target: false
+          type: status
       basic: true
       competence:
         raw: 0
@@ -2424,10 +2682,6 @@ effects:
       featSaveAttribute: mov
       form: intrinsic
       grantOnly: false
-      impacts:
-        base:
-          startStatuses:
-            - wisping
       interaction: manifest
       maneuver: active
       overview:

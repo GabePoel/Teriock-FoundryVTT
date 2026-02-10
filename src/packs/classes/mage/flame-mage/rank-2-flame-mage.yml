@@ -13,11 +13,63 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.21
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/bellows.webp
     name: Bellows
     system:
       _sup: cirogt3aILQXokIv
+      automations:
+        e2acdae28ea38f62:
+          _id: e2acdae28ea38f62
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          macro: Compendium.teriock.execution.Macro.cd1820f5e1a2f6fd
+          pseudoHook: useAbility
+          relation: pseudoHook
+          type: abilityMacro
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.boosts.damage
+              mode: 2
+              priority: 10
+              qualifier: '@spell'
+              target: ability
+              time: normal
+              value: '1'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
+        e789ee5e109ebecd:
+          _id: e789ee5e109ebecd
+          changes:
+            - key: system.boosts.damage
+              mode: 2
+              priority: 10
+              qualifier: '@spell'
+              target: ability
+              time: normal
+              value: '@h'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+          type: changes
       class: flameMage
       competence:
         raw: 0
@@ -50,28 +102,6 @@ effects:
         <p>For each additional @L[Core:MP]{MP} spent, the next
         @L[Category:Spells]{spell} you cast is @L[Keyword:Boosted]{boosted}
         again.</p>
-      impacts:
-        base:
-          changes:
-            - key: system.impacts.boosts.damage
-              mode: 2
-              priority: 10
-              qualifier: '@spell'
-              target: ability
-              time: normal
-              value: '1'
-        heightened:
-          changes:
-            - key: system.impacts.boosts.damage
-              mode: 2
-              priority: 10
-              qualifier: '@spell'
-              target: ability
-              time: normal
-              value: '@h'
-        macros:
-          Compendium_teriock_execution_Macro_3ggAKA5UMx4YqKni: useAbility
-          Compendium_teriock_execution_Macro_cd1820f5e1a2f6fd: useAbility
       interaction: manifest
       maneuver: active
       overview:
@@ -99,11 +129,37 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/burning-touch.webp
     name: Burning Touch
     system:
       _sup: zoqmIHCIZ7OiK29D
+      automations:
+        29b275994cf9f5b1:
+          _id: 29b275994cf9f5b1
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: 1d6[fire magic]
+          heighten:
+            - 1
+            - 0
+          merge: true
+          roll: damage
+          type: roll
+        800c70e6560525a8:
+          _id: 800c70e6560525a8
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: (@h)d6[magic fire]
+          heighten:
+            - 1
+          merge: true
+          roll: damage
+          type: roll
       class: flameMage
       competence:
         raw: 0
@@ -134,13 +190,6 @@ effects:
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage}.</p>
-      impacts:
-        base:
-          rolls:
-            damage: 1d6[fire magic]
-        heightened:
-          rolls:
-            damage: 1d6[magic fire]
       interaction: attack
       maneuver: active
       piercing:
@@ -312,11 +361,62 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/control-and-resist-fire.webp
     name: Control and Resist Fire
     system:
       _sup: cirogt3aILQXokIv
+      automations:
+        29b275994cf9f5b1:
+          _id: 29b275994cf9f5b1
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: 1d4[fire magic]
+          heighten:
+            - 1
+            - 0
+          merge: true
+          roll: damage
+          type: roll
+        8f623097f9f2a087:
+          _id: 8f623097f9f2a087
+          bonus: '0'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          hex: false
+          type: resist
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.damage.all.raw
+              mode: 2
+              priority: 30
+              qualifier: '@dmg'
+              target: armament
+              time: normal
+              value: 1d4[fire magic]
+            - key: system.protections.resistances.damageTypes
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: fire
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       class: flameMage
       competence:
         raw: 0
@@ -347,25 +447,6 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.damage.all.raw
-              mode: 2
-              priority: 30
-              qualifier: '@dmg'
-              target: armament
-              time: normal
-              value: 1d4[fire magic]
-            - key: system.protections.resistances.damageTypes
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: fire
-          rolls:
-            damage: 1d4[fire magic]
       interaction: manifest
       maneuver: active
       overview:
@@ -394,11 +475,44 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/crown-of-flame.webp
     name: Crown of Flame
     system:
       _sup: cirogt3aILQXokIv
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.light.dim
+              mode: 4
+              priority: 3
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '0.01'
+            - key: system.light.color
+              mode: 5
+              priority: 3
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '#E01B24'
+            - key: system.light.animation.type
+              mode: 5
+              priority: 3
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: sunburst
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       class: flameMage
       competence:
         raw: 0
@@ -427,30 +541,6 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.light.dim
-              mode: 4
-              priority: 3
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '0.01'
-            - key: system.light.color
-              mode: 5
-              priority: 3
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '#E01B24'
-            - key: system.light.animation.type
-              mode: 5
-              priority: 3
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: sunburst
       interaction: manifest
       maneuver: active
       overview:
@@ -700,10 +790,62 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/flame-rotators.webp
     name: Flame Rotators
     system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.magic.maxRotators.raw
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '@rank.mag - 1'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
+        f025905e157ac261:
+          _id: f025905e157ac261
+          changes:
+            - key: system.magic.maxRotators.raw
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: 2 * (@rank.mag - 1)
+          competencies:
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
+        f7da3b5e1992a724:
+          _id: f7da3b5e1992a724
+          changes:
+            - key: system.magic.maxRotators.raw
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: 2 * (@rank.mag - 1) + @p
+          competencies:
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       class: flameMage
       competence:
         raw: 0
@@ -723,34 +865,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.magic.maxRotators.raw
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '@rank.mag - 1'
-        fluent:
-          changes:
-            - key: system.magic.maxRotators.raw
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: 2 * (@rank.mag - 1) + @p
-        proficient:
-          changes:
-            - key: system.magic.maxRotators.raw
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: 2 * (@rank.mag - 1)
       interaction: manifest
       maneuver: passive
       overview:
@@ -798,11 +912,37 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/inferno-aura.webp
     name: Inferno Aura
     system:
       _sup: zoqmIHCIZ7OiK29D
+      automations:
+        29b275994cf9f5b1:
+          _id: 29b275994cf9f5b1
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: 1d6[magic fire]
+          heighten:
+            - 1
+            - 0
+          merge: true
+          roll: damage
+          type: roll
+        800c70e6560525a8:
+          _id: 800c70e6560525a8
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: (@h)d6[magic fire]
+          heighten:
+            - 1
+          merge: true
+          roll: damage
+          type: roll
       class: flameMage
       competence:
         raw: 0
@@ -836,13 +976,6 @@ effects:
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage}.</p>
-      impacts:
-        base:
-          rolls:
-            damage: 1d6[magic fire]
-        heightened:
-          rolls:
-            damage: 1d6[magic fire]
       interaction: feat
       maneuver: active
       piercing:

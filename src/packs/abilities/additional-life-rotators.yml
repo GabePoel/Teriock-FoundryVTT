@@ -60,11 +60,28 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.10.0
     img: systems/teriock/src/icons/abilities/minor-item-enchantment.webp
     name: Minor Item Enchantment
     system:
       _sup: 6b9c057fc7cf8e78
+      automations:
+        72ce567009179bea:
+          _id: 72ce567009179bea
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          duration:
+            raw: '@h * 3600'
+            unit: second
+          heighten:
+            - 1
+          mode: 5
+          type: duration
       class: lifeMage
       competence:
         raw: 0
@@ -96,11 +113,7 @@ effects:
       grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 1 hour. The overall duration is rounded to the
-        nearest hour.</p>
-      impacts:
-        heightened:
-          duration: 3600
+        effect increases by 1 hour.</p>
       interaction: manifest
       maneuver: slow
       overview:
@@ -135,11 +148,60 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/swift-sleep-aura.webp
     name: Swift Sleep Aura
     system:
       _sup: 6b9c057fc7cf8e78
+      automations:
+        1c16bc58d6a930a0:
+          _id: 1c16bc58d6a930a0
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: (@h)d8
+          heighten:
+            - 1
+          merge: true
+          roll: sleep
+          type: roll
+        a394fca7e6444945:
+          _id: a394fca7e6444945
+          competencies:
+            - 2
+          formula: (@f)d8
+          heighten:
+            - 1
+            - 0
+          merge: true
+          roll: sleep
+          type: roll
+        e1c7d7174b360e93:
+          _id: e1c7d7174b360e93
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: 1d8
+          heighten:
+            - 1
+            - 0
+          merge: true
+          roll: sleep
+          type: roll
+        ebd880725105dde4:
+          _id: ebd880725105dde4
+          competencies:
+            - 1
+            - 2
+          formula: (@p)d8
+          heighten:
+            - 1
+            - 0
+          merge: true
+          roll: sleep
+          type: roll
       class: lifeMage
       competence:
         raw: 0
@@ -173,19 +235,6 @@ effects:
         <p>For each additional @L[Core:MP]{MP} spent, roll an additional
         [[/sleep 1d8]]. Target is also @L[Keyword:Resistance]{resistant} to
         being @L[Keyword:Awaken]{awakened}.</p>
-      impacts:
-        base:
-          rolls:
-            sleep: 1d8
-        fluent:
-          rolls:
-            sleep: (@f)d8
-        heightened:
-          rolls:
-            sleep: 1d8
-        proficient:
-          rolls:
-            sleep: (@p)d8
       interaction: feat
       maneuver: active
       overview:

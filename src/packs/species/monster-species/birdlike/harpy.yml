@@ -58,10 +58,46 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/flying.webp
     name: Flying
     system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.speedAdjustments.fly
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '2'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
+        f025905e157ac261:
+          _id: f025905e157ac261
+          changes:
+            - key: system.speedAdjustments.fly
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '3'
+          competencies:
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       class: corsair
       competence:
         raw: 0
@@ -83,25 +119,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.speedAdjustments.fly
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '2'
-        proficient:
-          changes:
-            - key: system.speedAdjustments.fly
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '3'
       interaction: manifest
       maneuver: passive
       overview:
@@ -126,10 +143,39 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.21
+      systemVersion: 0.10.0
     img: systems/teriock/src/icons/abilities/improved-healing-factor.webp
     name: Improved Healing Factor
     system:
+      automations:
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          common:
+            - heal
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: common
+        b13e025d8fcf09cc:
+          _id: b13e025d8fcf09cc
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          macro: Compendium.teriock.execution.Macro.ba4c50b6d32fe62c
+          pseudoHook: turnStart
+          relation: pseudoHook
+          type: abilityMacro
       competence:
         raw: 0
       delivery:
@@ -154,11 +200,6 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      impacts:
-        macros:
-          Compendium_teriock_execution_Macro_ba4c50b6d32fe62c: turnStart
-          Compendium_teriock_execution_Macro_imHngFcrTurnStar: turnStart
-          Compendium_teriock_execution_Macro_yYxed3JjyS2O1lzN: turnStart
       interaction: manifest
       maneuver: passive
       overview:
@@ -410,10 +451,29 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/swimming.webp
     name: Swimming
     system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.speedAdjustments.swim
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '3'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       class: corsair
       competence:
         raw: 0
@@ -433,16 +493,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.speedAdjustments.swim
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '3'
       interaction: manifest
       maneuver: passive
       overview:

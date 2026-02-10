@@ -12,10 +12,46 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/missile-dodge.webp
     name: Missile Dodge
     system:
+      automations:
+        858320f85f928105:
+          _id: 858320f85f928105
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          relation: include
+          status: missileDodging
+          type: status
+        d635eb44dba086dd:
+          _id: d635eb44dba086dd
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: combatExpiration
+          what:
+            roll: 2d4kh1
+            threshold: 4
+            type: forced
+          when:
+            skip: 0
+            time: start
+            trigger: turn
+          who:
+            type: executor
       basic: true
       competence:
         raw: 0
@@ -38,25 +74,6 @@ effects:
       featSaveAttribute: mov
       form: intrinsic
       grantOnly: false
-      impacts:
-        base:
-          expiration:
-            changeOnCrit: false
-            doesExpire: true
-            normal:
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: forced
-                when:
-                  skip: 0
-                  time: start
-                  trigger: turn
-                who:
-                  type: executor
-          statuses:
-            - missileDodging
       interaction: manifest
       maneuver: active
       overview:

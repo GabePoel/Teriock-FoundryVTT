@@ -58,32 +58,13 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/construct-mind.webp
     name: Construct Mind
     system:
-      competence:
-        raw: 0
-      delivery:
-        base: self
-      duration:
-        dawn: false
-        description: Always Active
-        raw: '0'
-        stationary: false
-        unit: unlimited
-      effectTypes:
-        - immunity
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      grantOnly: false
-      impacts:
-        base:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
           changes:
             - key: system.protections.immunities.statuses
               mode: 2
@@ -113,6 +94,34 @@ effects:
               target: Actor
               time: normal
               value: allured
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      effectTypes:
+        - immunity
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
       interaction: manifest
       maneuver: passive
       overview:
@@ -138,10 +147,24 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/constructed-body.webp
     name: Constructed Body
     system:
+      automations:
+        29b275994cf9f5b1:
+          _id: 29b275994cf9f5b1
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: 1d10
+          heighten:
+            - 1
+            - 0
+          merge: true
+          roll: damage
+          type: roll
       competence:
         raw: 0
       delivery:
@@ -160,10 +183,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          rolls:
-            damage: 1d10
       improvement: >-
         <p>Your @L[Equipment:Anchor]{anchor} counts as part of your body, it has
         no minimum @L[Core:Strength]{strength} requirement, and you may
@@ -359,10 +378,46 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/flying.webp
     name: Flying
     system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.speedAdjustments.fly
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '2'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
+        f025905e157ac261:
+          _id: f025905e157ac261
+          changes:
+            - key: system.speedAdjustments.fly
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '3'
+          competencies:
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       class: corsair
       competence:
         raw: 0
@@ -384,25 +439,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.speedAdjustments.fly
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '2'
-        proficient:
-          changes:
-            - key: system.speedAdjustments.fly
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '3'
       interaction: manifest
       maneuver: passive
       overview:
@@ -583,10 +619,36 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/natural-unbreachability.webp
     name: Natural Unbreachability
     system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.av.bonus
+              mode: 4
+              priority: 10
+              qualifier: '@av'
+              target: body
+              time: normal
+              value: '1'
+            - key: system.props
+              mode: 2
+              priority: 10
+              qualifier: '@av'
+              target: body
+              time: normal
+              value: unbreachable
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       class: veteran
       competence:
         raw: 0
@@ -606,23 +668,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.av.bonus
-              mode: 4
-              priority: 10
-              qualifier: '@av'
-              target: body
-              time: normal
-              value: '1'
-            - key: system.props
-              mode: 2
-              priority: 10
-              qualifier: '@av'
-              target: body
-              time: normal
-              value: unbreachable
       interaction: manifest
       maneuver: passive
       overview:
@@ -840,10 +885,29 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/spell-immunity.webp
     name: Spell Immunity
     system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.protections.immunities.other
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: Spells
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       competence:
         raw: 0
       delivery:
@@ -867,16 +931,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.protections.immunities.other
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: Spells
       interaction: manifest
       maneuver: passive
       overview:
@@ -900,10 +954,29 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.25
+      systemVersion: 0.9.26
     img: icons/skills/trades/profession-sailing-ship.webp
     name: Talented Mariner
     system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.tradecrafts.mariner.score
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '1'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       competence:
         raw: 0
       delivery:
@@ -922,16 +995,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.tradecrafts.mariner.score
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '1'
       interaction: manifest
       maneuver: passive
       overview:

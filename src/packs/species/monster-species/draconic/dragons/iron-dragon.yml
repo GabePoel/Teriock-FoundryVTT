@@ -332,11 +332,52 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.21
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
     name: Battle Cry Aura
     system:
       _sup: pkZcaTHoyI7CfsLD
+      automations:
+        b4960732f0b9ed9f:
+          _id: b4960732f0b9ed9f
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          executor: false
+          heighten:
+            - 1
+            - 0
+          relation: include
+          status: frightened
+          target: false
+          type: status
+        d635eb44dba086dd:
+          _id: d635eb44dba086dd
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: combatExpiration
+          what:
+            roll: 2d4kh1
+            threshold: 4
+            type: rolled
+          when:
+            skip: 0
+            time: start
+            trigger: turn
+          who:
+            type: target
       class: berserker
       competence:
         raw: 0
@@ -363,31 +404,6 @@ effects:
       featSaveAttribute: int
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          expiration:
-            changeOnCrit: false
-            doesExpire: true
-            normal:
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 0
-                  time: start
-                  trigger: turn
-                who:
-                  type: target
-          rolls:
-            endCon: 2d4
-          statuses:
-            - frightened
-        macros:
-          Compendium_teriock_execution_Macro_c172c60521a75122: preExecution
-          Compendium_teriock_execution_Macro_selfFearPreExecu: preExecution
-          Compendium_teriock_execution_Macro_tNkUejVshZd2Etms: preExecution
       interaction: feat
       maneuver: active
       overview:
@@ -414,11 +430,42 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
     name: Battle Cry Resistance
     system:
       _sup: pkZcaTHoyI7CfsLD
+      automations:
+        8f623097f9f2a087:
+          _id: 8f623097f9f2a087
+          bonus: '0'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          hex: false
+          type: resist
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.protections.resistances.statuses
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: frightened
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       class: berserker
       competence:
         raw: 0
@@ -441,16 +488,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.protections.resistances.statuses
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: frightened
       interaction: manifest
       maneuver: active
       overview:
@@ -521,11 +558,52 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.21
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/battle-roar-aura.webp
     name: Battle Roar Aura
     system:
       _sup: HVqtjGw6jwJnYRZa
+      automations:
+        b4960732f0b9ed9f:
+          _id: b4960732f0b9ed9f
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          executor: true
+          heighten:
+            - 1
+            - 0
+          relation: include
+          status: frightened
+          target: false
+          type: status
+        d635eb44dba086dd:
+          _id: d635eb44dba086dd
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: combatExpiration
+          what:
+            roll: 2d4kh1
+            threshold: 4
+            type: rolled
+          when:
+            skip: 0
+            time: start
+            trigger: turn
+          who:
+            type: target
       competence:
         raw: 0
       costs:
@@ -551,31 +629,6 @@ effects:
       featSaveAttribute: int
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          expiration:
-            changeOnCrit: false
-            doesExpire: true
-            normal:
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 0
-                  time: start
-                  trigger: turn
-                who:
-                  type: target
-          rolls:
-            endCon: 2d4
-          statuses:
-            - frightened
-        macros:
-          Compendium_teriock_execution_Macro_c172c60521a75122: preExecution
-          Compendium_teriock_execution_Macro_selfFearPreExecu: preExecution
-          Compendium_teriock_execution_Macro_tNkUejVshZd2Etms: preExecution
       interaction: feat
       maneuver: active
       overview:
@@ -655,10 +708,36 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/berserker-adept.webp
     name: Berserker Adept
     system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.adept.enabled
+              mode: 5
+              priority: 10
+              qualifier: '@class.berserker'
+              target: ability
+              time: normal
+              value: 'true'
+            - key: system.adept.amount
+              mode: 4
+              priority: 10
+              qualifier: '@class.berserker'
+              target: ability
+              time: normal
+              value: '1'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       competence:
         raw: 0
       delivery:
@@ -677,23 +756,6 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.adept.enabled
-              mode: 5
-              priority: 10
-              qualifier: '@class.berserker'
-              target: ability
-              time: normal
-              value: 'true'
-            - key: system.adept.amount
-              mode: 4
-              priority: 10
-              qualifier: '@class.berserker'
-              target: ability
-              time: normal
-              value: '1'
       interaction: manifest
       maneuver: passive
       overview:
@@ -718,10 +780,31 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/dragon-elder-sorcery.webp
     name: Dragon Elder Sorcery
     system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.competence.raw
+              mode: 4
+              priority: 10
+              qualifier: >-
+                or(@key.innateElderSorcery, @key.elderSorceryAdept,
+                @key.dragonSnapcast)
+              target: ability
+              time: fluency
+              value: '2'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       competence:
         raw: 0
       delivery:
@@ -740,18 +823,6 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.competence.raw
-              mode: 4
-              priority: 10
-              qualifier: >-
-                or(@key.innateElderSorcery, @key.elderSorceryAdept,
-                @key.dragonSnapcast)
-              target: ability
-              time: fluency
-              value: '2'
       interaction: manifest
       maneuver: passive
       overview:
@@ -796,10 +867,29 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/dragon-sight.webp
     name: Dragon Sight
     system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.senses.truth
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: Infinity
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       competence:
         raw: 0
       delivery:
@@ -820,16 +910,6 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.senses.truth
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: Infinity
       interaction: manifest
       maneuver: passive
       overview:
@@ -857,11 +937,37 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/elder-sorcery-adept.webp
     name: Elder Sorcery Adept
     system:
       _sup: vRy22yWDNwiJdBLA
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.adept.enabled
+              mode: 4
+              priority: 10
+              qualifier: '@es'
+              target: ability
+              time: normal
+              value: 'true'
+            - key: system.adept.amount
+              mode: 4
+              priority: 10
+              qualifier: '@es'
+              target: ability
+              time: normal
+              value: '1'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       competence:
         raw: 0
       delivery:
@@ -880,23 +986,6 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.adept.enabled
-              mode: 4
-              priority: 10
-              qualifier: '@es'
-              target: ability
-              time: normal
-              value: 'true'
-            - key: system.adept.amount
-              mode: 4
-              priority: 10
-              qualifier: '@es'
-              target: ability
-              time: normal
-              value: '1'
       interaction: manifest
       maneuver: passive
       overview:
@@ -1010,11 +1099,30 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/ethereal-senses.webp
     name: Ethereal Senses
     system:
       _sup: pa3s8jn9w2SKGRGz
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.senses.ethereal
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '120'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       competence:
         raw: 0
       delivery:
@@ -1037,16 +1145,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.senses.ethereal
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '120'
       interaction: manifest
       maneuver: passive
       overview:
@@ -1117,10 +1215,46 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/flying.webp
     name: Flying
     system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.speedAdjustments.fly
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '2'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
+        f025905e157ac261:
+          _id: f025905e157ac261
+          changes:
+            - key: system.speedAdjustments.fly
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '3'
+          competencies:
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       class: corsair
       competence:
         raw: 0
@@ -1142,25 +1276,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.speedAdjustments.fly
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '2'
-        proficient:
-          changes:
-            - key: system.speedAdjustments.fly
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '3'
       interaction: manifest
       maneuver: passive
       overview:
@@ -1289,10 +1404,39 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.21
+      systemVersion: 0.10.0
     img: systems/teriock/src/icons/abilities/improved-healing-factor.webp
     name: Improved Healing Factor
     system:
+      automations:
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          common:
+            - heal
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: common
+        b13e025d8fcf09cc:
+          _id: b13e025d8fcf09cc
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          macro: Compendium.teriock.execution.Macro.ba4c50b6d32fe62c
+          pseudoHook: turnStart
+          relation: pseudoHook
+          type: abilityMacro
       competence:
         raw: 0
       delivery:
@@ -1317,11 +1461,6 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      impacts:
-        macros:
-          Compendium_teriock_execution_Macro_ba4c50b6d32fe62c: turnStart
-          Compendium_teriock_execution_Macro_imHngFcrTurnStar: turnStart
-          Compendium_teriock_execution_Macro_yYxed3JjyS2O1lzN: turnStart
       interaction: manifest
       limitation: <p>Only in vicinity of lair.</p>
       maneuver: passive
@@ -1349,10 +1488,23 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.10.0
     img: systems/teriock/src/icons/abilities/improved-revitalizing-factor.webp
     name: Improved Revitalizing Factor
     system:
+      automations:
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          common:
+            - revitalize
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: common
       competence:
         raw: 0
       delivery:
@@ -1580,10 +1732,37 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/iron-dragon-breath.webp
     name: Iron Dragon Breath
     system:
+      automations:
+        800c70e6560525a8:
+          _id: 800c70e6560525a8
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: (2 * @h)d10[magic]
+          heighten:
+            - 1
+          merge: true
+          roll: damage
+          type: roll
+        d873eb939c3b5951:
+          _id: d873eb939c3b5951
+          competencies:
+            - 0
+            - 1
+            - 2
+          hacks:
+            - arm
+            - leg
+          heighten:
+            - 1
+            - 0
+          reverse: false
+          type: hacks
       competence:
         raw: 0
       costs:
@@ -1613,14 +1792,6 @@ effects:
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/damage 2d10[magic]]] @L[Core:Damage]{damage}. Additionally, the
         @L[Core:Range]{range} of this increases by 5 feet.</p>
-      impacts:
-        base:
-          hacks:
-            - arm
-            - leg
-        heightened:
-          rolls:
-            damage: 2d10[magic]
       interaction: feat
       maneuver: active
       piercing:
@@ -1754,10 +1925,36 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/monstrous-strength.webp
     name: Monstrous Strength
     system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.damage.all.raw
+              mode: 0
+              priority: 100
+              qualifier: and(@dmg, @range.melee)
+              target: armament
+              time: normal
+              value: '1'
+            - key: system.piercing.av0
+              mode: 4
+              priority: 10
+              qualifier: '@range.melee'
+              target: armament
+              time: normal
+              value: 'true'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       competence:
         raw: 0
       delivery:
@@ -1776,23 +1973,6 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.damage.all.raw
-              mode: 0
-              priority: 100
-              qualifier: and(@dmg, @range.melee)
-              target: armament
-              time: normal
-              value: '1'
-            - key: system.piercing.raw
-              mode: 4
-              priority: 10
-              qualifier: '@range.melee'
-              target: armament
-              time: normal
-              value: '1'
       interaction: manifest
       maneuver: passive
       overview:
@@ -1822,10 +2002,29 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/night-vision.webp
     name: Night Vision
     system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.senses.dark
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '120'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       competence:
         raw: 0
       delivery:
@@ -1846,16 +2045,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.senses.dark
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '120'
       interaction: manifest
       maneuver: passive
       overview:
@@ -2142,11 +2331,30 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/true-sight.webp
     name: True Sight
     system:
       _sup: cNHbme5k1J3wnQy8
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.senses.truth
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: Infinity
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       competence:
         raw: 0
       delivery:
@@ -2167,16 +2375,6 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.senses.truth
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: Infinity
       interaction: manifest
       maneuver: passive
       overview:

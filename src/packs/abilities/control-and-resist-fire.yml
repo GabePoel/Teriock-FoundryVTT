@@ -12,10 +12,59 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/control-and-resist-fire.webp
     name: Control and Resist Fire
     system:
+      automations:
+        29b275994cf9f5b1:
+          _id: 29b275994cf9f5b1
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: 1d4[fire magic]
+          heighten:
+            - 1
+            - 0
+          merge: true
+          roll: damage
+          type: roll
+        8f623097f9f2a087:
+          _id: 8f623097f9f2a087
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: resist
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.damage.all.raw
+              mode: 2
+              priority: 30
+              qualifier: '@dmg'
+              target: armament
+              time: normal
+              value: 1d4[fire magic]
+            - key: system.protections.resistances.damageTypes
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: fire
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       class: flameMage
       competence:
         raw: 0
@@ -46,25 +95,6 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.damage.all.raw
-              mode: 2
-              priority: 30
-              qualifier: '@dmg'
-              target: armament
-              time: normal
-              value: 1d4[fire magic]
-            - key: system.protections.resistances.damageTypes
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: fire
-          rolls:
-            damage: 1d4[fire magic]
       interaction: manifest
       maneuver: active
       overview:

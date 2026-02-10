@@ -12,10 +12,69 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/forcefield.webp
     name: Forcefield
     system:
+      automations:
+        d635eb44dba086dd:
+          _id: d635eb44dba086dd
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: combatExpiration
+          what:
+            roll: 2d4kh1
+            threshold: 4
+            type: forced
+          when:
+            skip: 0
+            time: start
+            trigger: turn
+          who:
+            type: executor
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.defense.ac
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '1'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
+        e789ee5e109ebecd:
+          _id: e789ee5e109ebecd
+          changes:
+            - key: system.defense.ac
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '@h'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+          type: changes
       competence:
         raw: 0
       costs:
@@ -45,40 +104,6 @@ effects:
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, add 1 to the amount your
         @L[Core:Armor Class]{AC} increases by.</p>
-      impacts:
-        base:
-          changes:
-            - key: system.defense.ac
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '1'
-          expiration:
-            changeOnCrit: false
-            doesExpire: true
-            normal:
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: forced
-                when:
-                  skip: 0
-                  time: start
-                  trigger: turn
-                who:
-                  type: executor
-        heightened:
-          changes:
-            - key: system.defense.ac
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '@h'
       interaction: manifest
       maneuver: reactive
       overview:

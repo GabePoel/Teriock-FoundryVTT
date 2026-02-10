@@ -14,7 +14,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     flags:
       teriock:
         category: support
@@ -22,6 +22,25 @@ effects:
     img: systems/teriock/src/icons/abilities/gamesman.webp
     name: Gamesman
     system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.tradecrafts.hunter.score
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '2'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       class: archer
       competence:
         raw: 0
@@ -41,16 +60,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.tradecrafts.hunter.score
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '2'
       interaction: manifest
       maneuver: passive
       overview:
@@ -79,7 +88,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     flags:
       teriock:
         category: combat
@@ -87,6 +96,30 @@ effects:
     img: systems/teriock/src/icons/abilities/misdirect.webp
     name: Misdirect
     system:
+      automations:
+        d635eb44dba086dd:
+          _id: d635eb44dba086dd
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: combatExpiration
+          what:
+            roll: 2d4kh1
+            threshold: 4
+            type: rolled
+          when:
+            skip: 0
+            time: end
+            trigger: turn
+          who:
+            type: target
       class: archer
       competence:
         raw: 0
@@ -109,25 +142,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          expiration:
-            changeOnCrit: false
-            doesExpire: true
-            normal:
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 0
-                  time: end
-                  trigger: turn
-                who:
-                  type: target
-          rolls:
-            endCon: 2d4
       interaction: block
       maneuver: reactive
       piercing:
@@ -157,7 +171,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.10.0
     img: systems/teriock/src/icons/abilities/slay.webp
     name: Slay
     system:
@@ -165,6 +179,32 @@ effects:
       adept:
         amount: 1
         enabled: true
+      automations:
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          common:
+            - bag
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: common
+        29b275994cf9f5b1:
+          _id: 29b275994cf9f5b1
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: 5[lethal]
+          heighten:
+            - 1
+            - 0
+          merge: true
+          roll: damage
+          type: roll
       class: assassin
       competence:
         raw: 0
@@ -192,10 +232,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          rolls:
-            damage: 5[lethal]
       interaction: manifest
       limitation: >-
         <p>Only usable against one species, as specified when you use <a

@@ -13,10 +13,29 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.23
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/drink-potion-of-bones.webp
     name: Drink Potion of Bones
     system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.transformation.img
+              mode: 5
+              priority: 30
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: icons/magic/death/undead-skeleton-energy-green.webp
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       competence:
         raw: 0
       costs:
@@ -42,26 +61,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.transformation.img
-              mode: 5
-              priority: 30
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: icons/magic/death/undead-skeleton-energy-green.webp
-          transformation:
-            enabled: true
-            resetHp: false
-            suppression:
-              bodyParts: false
-              equipment: false
-              fluencies: false
-              ranks: false
-            uuids:
-              - Compendium.teriock.species.Item.73c6ad85b7235b4e
       interaction: manifest
       maneuver: active
       overview:
@@ -153,13 +152,27 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.21
+      systemVersion: 0.9.26
     flags:
       teriock:
         dontConsume: false
     img: systems/teriock/src/icons/abilities/smash-potion-of-bones.webp
     name: Smash Potion of Bones
     system:
+      automations:
+        b4960732f0b9ed9f:
+          _id: b4960732f0b9ed9f
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          relation: include
+          status: frightened
+          target: true
+          type: status
       competence:
         raw: 0
       costs:
@@ -190,13 +203,6 @@ effects:
       featSaveAttribute: int
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          statuses:
-            - frightened
-        macros:
-          Compendium_teriock_execution_Macro_3ttAYecC0nfqceqo: preExecution
-          Compendium_teriock_execution_Macro_827a3a70caac2109: preExecution
       interaction: manifest
       maneuver: active
       piercing:

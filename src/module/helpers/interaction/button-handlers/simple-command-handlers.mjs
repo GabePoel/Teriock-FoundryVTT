@@ -167,10 +167,9 @@ export class ResistHandler extends CommandButtonHandlerBuilder(resistCommand) {
   /**
    * @inheritDoc
    * @param {boolean} [hex]
-   * @param {number} [threshold]
    */
-  static buildButton(hex, threshold) {
-    return super.buildButton({ hex, threshold });
+  static buildButton(hex) {
+    return super.buildButton({ hex });
   }
 }
 

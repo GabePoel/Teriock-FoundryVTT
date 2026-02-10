@@ -12,11 +12,23 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.20
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/properties/shattered.webp
     name: Shattered
     system:
       applyIfShattered: true
+      automations:
+        parameterChanges:
+          _id: parameterChanges
+          changes:
+            - key: item.system.shattered
+              mode: 5
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: 'true'
+          type: changes
       competence:
         raw: 0
       description: >-
@@ -30,15 +42,6 @@ effects:
         possible to repair items that are [[lookup name style=lc]], if your
         @L[Core:Game Master]{GM} allows it.</p>
       form: intrinsic
-      impacts:
-        changes:
-          - key: system.shattered
-            mode: 5
-            priority: 10
-            qualifier: '1'
-            target: parent
-            time: normal
-            value: 'true'
       revealed: true
     type: property
 img: systems/teriock/src/icons/properties/shattered.webp

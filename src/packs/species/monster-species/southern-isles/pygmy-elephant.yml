@@ -452,10 +452,72 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/snare.webp
     name: Snare
     system:
+      automations:
+        5d57231066693cee:
+          _id: 5d57231066693cee
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          executor: false
+          heighten:
+            - 1
+            - 0
+          relation: include
+          status: snared
+          target: false
+          type: status
+        d5717000e99ee582:
+          _id: d5717000e99ee582
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: combatExpiration
+          what:
+            roll: 2d4kh1
+            threshold: 4
+            type: rolled
+          when:
+            skip: 1
+            time: end
+            trigger: turn
+          who:
+            type: target
+        d635eb44dba086dd:
+          _id: d635eb44dba086dd
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+          heighten:
+            - 1
+            - 0
+          type: combatExpiration
+          what:
+            roll: 2d4kh1
+            threshold: 4
+            type: rolled
+          when:
+            skip: 0
+            time: end
+            trigger: turn
+          who:
+            type: target
       class: ranger
       competence:
         raw: 0
@@ -479,39 +541,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          expiration:
-            changeOnCrit: true
-            crit:
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 1
-                  time: end
-                  trigger: turn
-                who:
-                  type: target
-            doesExpire: true
-            normal:
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 0
-                  time: end
-                  trigger: turn
-                who:
-                  type: target
-          rolls:
-            endCon: 2d4
-          statuses:
-            - snared
       interaction: attack
       limitation: <p>@L[Category:Trunks]{Trunks} only.</p>
       maneuver: active
@@ -538,10 +567,34 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/trample.webp
     name: Trample
     system:
+      automations:
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: common
+        29b275994cf9f5b1:
+          _id: 29b275994cf9f5b1
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: 1d6
+          heighten:
+            - 1
+            - 0
+          merge: true
+          roll: damage
+          type: roll
       competence:
         raw: 0
       delivery:
@@ -560,12 +613,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          common:
-            - standardDamage
-          rolls:
-            damage: 1d6
       interaction: attack
       maneuver: reactive
       overview:
@@ -598,10 +645,27 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.21
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/weapons-mastery.webp
     name: Weapons Mastery
     system:
+      automations:
+        6204ffb1aaa405ed:
+          _id: 6204ffb1aaa405ed
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          macro: Compendium.teriock.execution.Macro.090fd08ae26477da
+          pseudoHook: execution
+          relation: pseudoHook
+          type: abilityMacro
       class: assassin
       competence:
         raw: 0
@@ -621,11 +685,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        macros:
-          Compendium_teriock_execution_Macro_090fd08ae26477da: execution
-          Compendium_teriock_execution_Macro_BGmnfUMxPw2BZeCI: execution
-          Compendium_teriock_execution_Macro_wepsMasyExecutio: execution
       interaction: manifest
       limitation: <p>@L[Category:Trunks]{Trunks} only.</p>
       maneuver: passive

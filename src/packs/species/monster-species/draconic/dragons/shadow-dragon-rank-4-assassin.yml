@@ -14,11 +14,24 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.10.0
     img: systems/teriock/src/icons/abilities/active-bow-out.webp
     name: Active Bow Out
     system:
       _sup: in6Jh6JD4Ay5BnMS
+      automations:
+        e9c69ec96993ccc5:
+          _id: e9c69ec96993ccc5
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          relation: remove
+          status: dueling
+          type: end
       class: duelist
       competence:
         raw: 0
@@ -40,10 +53,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          endStatuses:
-            - dueling
       interaction: manifest
       maneuver: active
       overview:
@@ -74,7 +83,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     flags:
       teriock:
         category: support
@@ -82,6 +91,25 @@ effects:
     img: systems/teriock/src/icons/abilities/informant.webp
     name: Informant
     system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.tradecrafts.innkeeper.score
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '2'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       class: assassin
       competence:
         raw: 0
@@ -101,16 +129,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.tradecrafts.innkeeper.score
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '2'
       interaction: manifest
       maneuver: passive
       overview:

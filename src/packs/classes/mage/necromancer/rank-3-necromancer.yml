@@ -190,7 +190,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.21
+      systemVersion: 0.9.26
     flags:
       teriock:
         category: support
@@ -198,30 +198,9 @@ effects:
     img: systems/teriock/src/icons/abilities/expanded-necromancy-elder-sorcery.webp
     name: Expanded Necromancy Elder Sorcery
     system:
-      class: necromancer
-      competence:
-        raw: 0
-      delivery:
-        base: self
-      duration:
-        dawn: false
-        description: Instant
-        raw: '0'
-        stationary: false
-        unit: instant
-      elderSorcery: true
-      elements:
-        - necromancy
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: int
-      form: special
-      grantOnly: false
-      impacts:
-        proficient:
+      automations:
+        f025905e157ac261:
+          _id: f025905e157ac261
           changes:
             - key: system.competence.raw
               mode: 4
@@ -244,6 +223,35 @@ effects:
               target: ability
               time: fluency
               value: '2'
+          competencies:
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
+      class: necromancer
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      elderSorcery: true
+      elements:
+        - necromancy
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: int
+      form: special
+      grantOnly: false
       interaction: feat
       maneuver: passive
       overview:
@@ -419,13 +427,31 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     flags:
       teriock:
         category: combat
     img: systems/teriock/src/icons/abilities/necromancy-rotator-fluency.webp
     name: Necromancy Rotator Fluency
     system:
+      automations:
+        f025905e157ac261:
+          _id: f025905e157ac261
+          changes:
+            - key: system.competence.raw
+              mode: 4
+              priority: 10
+              qualifier: '@key.necromancyRotators'
+              target: ability
+              time: fluency
+              value: '2'
+          competencies:
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       class: necromancer
       competence:
         raw: 0
@@ -445,16 +471,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        proficient:
-          changes:
-            - key: system.competence.raw
-              mode: 4
-              priority: 10
-              qualifier: '@key.necromancyRotators'
-              target: ability
-              time: fluency
-              value: '2'
       interaction: manifest
       maneuver: passive
       overview:

@@ -1,9 +1,9 @@
 import { ResistHandler } from "../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
-import ThresholdAutomation from "./threshold-automation.mjs";
+import BaseAutomation from "./base-automation.mjs";
 
 const { fields } = foundry.data;
 
-export default class ResistAutomation extends ThresholdAutomation {
+export default class ResistAutomation extends BaseAutomation {
   /** @inheritDoc */
   static get LABEL() {
     return "Resistance Save";

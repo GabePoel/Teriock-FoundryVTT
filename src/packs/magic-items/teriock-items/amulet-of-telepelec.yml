@@ -14,10 +14,27 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.10.0
     img: systems/teriock/src/icons/abilities/circle-of-protection.webp
     name: Circle of Protection
     system:
+      automations:
+        72ce567009179bea:
+          _id: 72ce567009179bea
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          duration:
+            raw: '@h * 86400'
+            unit: second
+          heighten:
+            - 1
+          mode: 5
+          type: duration
       class: paladin
       competence:
         raw: 0
@@ -47,11 +64,7 @@ effects:
       grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 24 hours. The overall duration is rounded to the
-        nearest 24 hours.</p>
-      impacts:
-        heightened:
-          duration: 86400
+        effect increases by 24 hours.</p>
       interaction: manifest
       maneuver: slow
       overview:
@@ -108,29 +121,6 @@ effects:
         raw: 0
       description: <p>This item glows blue in the presence of evil.</p>
       form: normal
-      impacts:
-        changes:
-          - key: system.light.dim
-            mode: 4
-            priority: 4
-            qualifier: '1'
-            target: Actor
-            time: normal
-            value: '1'
-          - key: system.light.color
-            mode: 5
-            priority: 4
-            qualifier: '1'
-            target: Actor
-            time: normal
-            value: '#3584E4'
-          - key: system.light.animation.type
-            mode: 5
-            priority: 4
-            qualifier: '1'
-            target: Actor
-            time: normal
-            value: starlight
       revealed: true
     type: property
   - _id: 823nqH198nACfJpj
@@ -343,10 +333,43 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.10.0
     img: systems/teriock/src/icons/abilities/spirit-bury.webp
     name: Spirit Bury
     system:
+      automations:
+        6a329470043b61f6:
+          _id: 6a329470043b61f6
+          competencies:
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          duration:
+            raw: '600'
+            unit: second
+          heighten:
+            - 1
+            - 0
+          mode: 5
+          type: duration
+        72ce567009179bea:
+          _id: 72ce567009179bea
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          duration:
+            raw: '@h * 3600'
+            unit: second
+          heighten:
+            - 1
+          mode: 5
+          type: duration
       class: necromancer
       competence:
         raw: 0
@@ -373,13 +396,7 @@ effects:
       grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 1 hour. The overall duration is rounded to the
-        nearest hour.</p>
-      impacts:
-        heightened:
-          duration: 3600
-        proficient:
-          duration: 600
+        effect increases by 1 hour.</p>
       interaction: attack
       maneuver: active
       overview:

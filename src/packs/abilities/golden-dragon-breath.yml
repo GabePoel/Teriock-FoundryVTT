@@ -12,10 +12,23 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/golden-dragon-breath.webp
     name: Golden Dragon Breath
     system:
+      automations:
+        800c70e6560525a8:
+          _id: 800c70e6560525a8
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: (2 * @h)d10[magic spiritual]
+          heighten:
+            - 1
+          merge: true
+          roll: damage
+          type: roll
       competence:
         raw: 0
       costs:
@@ -43,10 +56,6 @@ effects:
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/damage 2d10[magic spiritual]]] @L[Core:Damage]{damage}. Additionally,
         the @L[Core:Range]{range} of this increases by 5 feet.</p>
-      impacts:
-        heightened:
-          rolls:
-            damage: 2d10[magic spiritual]
       interaction: feat
       maneuver: active
       piercing:

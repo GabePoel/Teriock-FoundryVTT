@@ -12,10 +12,54 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.10.0
     img: systems/teriock/src/icons/abilities/ignite.webp
     name: Ignite
     system:
+      automations:
+        72ce567009179bea:
+          _id: 72ce567009179bea
+          competencies:
+            - 0
+            - 1
+            - 2
+          duration:
+            raw: '@h * 3600'
+          heighten:
+            - 1
+          type: duration
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.light.dim
+              mode: 4
+              priority: 5
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '10'
+            - key: system.light.color
+              mode: 5
+              priority: 5
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '#C64600'
+            - key: system.light.animation.type
+              mode: 5
+              priority: 5
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: torch
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       class: flameMage
       competence:
         raw: 0
@@ -39,34 +83,7 @@ effects:
       grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 1 hour. The overall duration is rounded to the
-        nearest hour.</p>
-      impacts:
-        base:
-          changes:
-            - key: system.light.dim
-              mode: 4
-              priority: 5
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '10'
-            - key: system.light.color
-              mode: 5
-              priority: 5
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '#C64600'
-            - key: system.light.animation.type
-              mode: 5
-              priority: 5
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: torch
-        heightened:
-          duration: 3600
+        effect increases by 1 hour.</p>
       interaction: manifest
       maneuver: active
       overview:

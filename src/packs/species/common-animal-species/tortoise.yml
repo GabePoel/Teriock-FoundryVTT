@@ -13,10 +13,43 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.21
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/brace.webp
     name: Brace
     system:
+      automations:
+        2af889aff0b661bc:
+          _id: 2af889aff0b661bc
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          macro: Compendium.teriock.execution.Macro.0ea7be85a8217ccd
+          pseudoHook: effectApplication
+          relation: pseudoHook
+          type: abilityMacro
+        e97f2827a0c6277f:
+          _id: e97f2827a0c6277f
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          macro: Compendium.teriock.execution.Macro.6e203038c142a0a0
+          pseudoHook: movement
+          relation: pseudoHook
+          type: abilityMacro
       class: veteran
       competence:
         raw: 0
@@ -36,14 +69,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        macros:
-          Compendium_teriock_execution_Macro_0Gb7QPmgAotusvVQ: effectApplication
-          Compendium_teriock_execution_Macro_0ea7be85a8217ccd: effectApplication
-          Compendium_teriock_execution_Macro_6e203038c142a0a0: movement
-          Compendium_teriock_execution_Macro_RCqX2d4YKWXd6o1i: movement
-          Compendium_teriock_execution_Macro_braceApplication: effectApplication
-          Compendium_teriock_execution_Macro_braceMovement000: movement
       interaction: manifest
       maneuver: active
       overview:
@@ -345,10 +370,36 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/unbreachability.webp
     name: Unbreachability
     system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.av.bonus
+              mode: 4
+              priority: 10
+              qualifier: '@av'
+              target: equipment
+              time: normal
+              value: '1'
+            - key: system.props
+              mode: 2
+              priority: 10
+              qualifier: '@av'
+              target: body
+              time: normal
+              value: unbreachable
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       class: veteran
       competence:
         raw: 0
@@ -368,23 +419,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.av.bonus
-              mode: 4
-              priority: 10
-              qualifier: '@av'
-              target: equipment
-              time: normal
-              value: '1'
-            - key: system.props
-              mode: 2
-              priority: 10
-              qualifier: '@av'
-              target: body
-              time: normal
-              value: unbreachable
       interaction: manifest
       maneuver: passive
       overview:

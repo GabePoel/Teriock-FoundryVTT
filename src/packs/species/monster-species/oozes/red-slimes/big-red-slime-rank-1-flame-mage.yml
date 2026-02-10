@@ -14,10 +14,36 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/fire-ball.webp
     name: Fire Ball
     system:
+      automations:
+        29b275994cf9f5b1:
+          _id: 29b275994cf9f5b1
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: 1d4[magic fire]
+          heighten:
+            - 1
+            - 0
+          merge: true
+          roll: damage
+          type: roll
+        800c70e6560525a8:
+          _id: 800c70e6560525a8
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: (@h)d4[magic fire]
+          heighten:
+            - 1
+          merge: true
+          roll: damage
+          type: roll
       class: flameMage
       competence:
         raw: 0
@@ -45,13 +71,6 @@ effects:
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/damage 1d4[magic fire]]] @L[Core:Damage]{damage}.</p>
-      impacts:
-        base:
-          rolls:
-            damage: 1d4[magic fire]
-        heightened:
-          rolls:
-            damage: 1d4[magic fire]
       interaction: attack
       maneuver: active
       piercing:
@@ -81,10 +100,36 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/flame-ray.webp
     name: Flame Ray
     system:
+      automations:
+        29b275994cf9f5b1:
+          _id: 29b275994cf9f5b1
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: 1d8[fire magic]
+          heighten:
+            - 1
+            - 0
+          merge: true
+          roll: damage
+          type: roll
+        800c70e6560525a8:
+          _id: 800c70e6560525a8
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: (@h)d8[fire magic]
+          heighten:
+            - 1
+          merge: true
+          roll: damage
+          type: roll
       class: flameMage
       competence:
         raw: 0
@@ -112,13 +157,6 @@ effects:
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/damage 1d8[fire magic]]] @L[Core:Damage]{damage}.</p>
-      impacts:
-        base:
-          rolls:
-            damage: 1d8[fire magic]
-        heightened:
-          rolls:
-            damage: 1d8[fire magic]
       interaction: attack
       maneuver: active
       piercing:
@@ -148,11 +186,60 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.10.0
     img: systems/teriock/src/icons/abilities/ignite.webp
     name: Ignite
     system:
       _sup: LbLjjWiopqGfltmW
+      automations:
+        72ce567009179bea:
+          _id: 72ce567009179bea
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          duration:
+            raw: '@h * 3600'
+            unit: second
+          heighten:
+            - 1
+          mode: 5
+          type: duration
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.light.dim
+              mode: 4
+              priority: 5
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '10'
+            - key: system.light.color
+              mode: 5
+              priority: 5
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '#C64600'
+            - key: system.light.animation.type
+              mode: 5
+              priority: 5
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: torch
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       class: flameMage
       competence:
         raw: 0
@@ -176,34 +263,7 @@ effects:
       grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 1 hour. The overall duration is rounded to the
-        nearest hour.</p>
-      impacts:
-        base:
-          changes:
-            - key: system.light.dim
-              mode: 4
-              priority: 5
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '10'
-            - key: system.light.color
-              mode: 5
-              priority: 5
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '#C64600'
-            - key: system.light.animation.type
-              mode: 5
-              priority: 5
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: torch
-        heightened:
-          duration: 3600
+        effect increases by 1 hour.</p>
       interaction: manifest
       maneuver: active
       overview:
@@ -233,34 +293,14 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/light.webp
     name: Light
     system:
       _sup: LbLjjWiopqGfltmW
-      class: flameMage
-      competence:
-        raw: 0
-      delivery:
-        base: cone
-      duration:
-        dawn: false
-        description: 1 Minute
-        raw: '1'
-        stationary: false
-        unit: minute
-      elements:
-        - flame
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      impacts:
-        base:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
           changes:
             - key: system.light.bright
               mode: 4
@@ -297,6 +337,35 @@ effects:
               target: Actor
               time: normal
               value: '60'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
+      class: flameMage
+      competence:
+        raw: 0
+      delivery:
+        base: cone
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
+      elements:
+        - flame
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
       interaction: manifest
       maneuver: active
       overview:

@@ -68,10 +68,29 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/dark-vision.webp
     name: Dark Vision
     system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.senses.dark
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '60'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       competence:
         raw: 0
       delivery:
@@ -92,16 +111,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.senses.dark
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '60'
       interaction: manifest
       maneuver: passive
       overview:
@@ -229,10 +238,39 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.21
+      systemVersion: 0.10.0
     img: systems/teriock/src/icons/abilities/improved-healing-factor.webp
     name: Improved Healing Factor
     system:
+      automations:
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          common:
+            - heal
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: common
+        b13e025d8fcf09cc:
+          _id: b13e025d8fcf09cc
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          macro: Compendium.teriock.execution.Macro.ba4c50b6d32fe62c
+          pseudoHook: turnStart
+          relation: pseudoHook
+          type: abilityMacro
       competence:
         raw: 0
       delivery:
@@ -257,11 +295,6 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      impacts:
-        macros:
-          Compendium_teriock_execution_Macro_ba4c50b6d32fe62c: turnStart
-          Compendium_teriock_execution_Macro_imHngFcrTurnStar: turnStart
-          Compendium_teriock_execution_Macro_yYxed3JjyS2O1lzN: turnStart
       interaction: manifest
       maneuver: passive
       overview:
@@ -445,10 +478,36 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/monstrous-strength.webp
     name: Monstrous Strength
     system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.damage.all.raw
+              mode: 0
+              priority: 100
+              qualifier: and(@dmg, @range.melee)
+              target: armament
+              time: normal
+              value: '1'
+            - key: system.piercing.av0
+              mode: 4
+              priority: 10
+              qualifier: '@range.melee'
+              target: armament
+              time: normal
+              value: 'true'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       competence:
         raw: 0
       delivery:
@@ -467,23 +526,6 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.damage.all.raw
-              mode: 0
-              priority: 100
-              qualifier: and(@dmg, @range.melee)
-              target: armament
-              time: normal
-              value: '1'
-            - key: system.piercing.raw
-              mode: 4
-              priority: 10
-              qualifier: '@range.melee'
-              target: armament
-              time: normal
-              value: '1'
       interaction: manifest
       maneuver: passive
       overview:
@@ -513,10 +555,36 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/natural-unbreachability.webp
     name: Natural Unbreachability
     system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.av.bonus
+              mode: 4
+              priority: 10
+              qualifier: '@av'
+              target: body
+              time: normal
+              value: '1'
+            - key: system.props
+              mode: 2
+              priority: 10
+              qualifier: '@av'
+              target: body
+              time: normal
+              value: unbreachable
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       class: veteran
       competence:
         raw: 0
@@ -536,23 +604,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.av.bonus
-              mode: 4
-              priority: 10
-              qualifier: '@av'
-              target: body
-              time: normal
-              value: '1'
-            - key: system.props
-              mode: 2
-              priority: 10
-              qualifier: '@av'
-              target: body
-              time: normal
-              value: unbreachable
       interaction: manifest
       maneuver: passive
       overview:
@@ -863,10 +914,54 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.21
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/treeform-self.webp
     name: Treeform Self
     system:
+      automations:
+        3589354747a48db0:
+          _id: 3589354747a48db0
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          macro: Compendium.teriock.execution.Macro.ce7e68b1e3f9dd74
+          pseudoHook: takeDamage
+          relation: pseudoHook
+          type: abilityMacro
+        AjiJDtn4fs82jWgF:
+          _id: AjiJDtn4fs82jWgF
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 0
+            - 1
+          transformation:
+            level: minor
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            useFolder: false
+            uuids:
+              - Compendium.teriock.species.Item.85b3b9fb528f2775
+          type: transformation
       competence:
         raw: 0
       delivery:
@@ -889,28 +984,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.transformation.img
-              mode: 5
-              priority: 40
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: icons/environment/wilderness/tree-ash.webp
-          statuses:
-            - transformed
-        macros:
-          Compendium_teriock_execution_Macro_632686276259b5e1: effectApplication
-          Compendium_teriock_execution_Macro_S0lpUCEi8F1xp6h4: effectApplication
-          Compendium_teriock_execution_Macro_ce7e68b1e3f9dd74: takeDamage
-          Compendium_teriock_execution_Macro_e9384568b1d873cc: effectExpiration
-          Compendium_teriock_execution_Macro_h08D6cBKJ37Rz8UD: takeDamage
-          Compendium_teriock_execution_Macro_j5Jp2JxJu7C9TUIL: effectExpiration
-          Compendium_teriock_execution_Macro_treeformBallAppl: effectApplication
-          Compendium_teriock_execution_Macro_treeformBallDmg0: takeDamage
-          Compendium_teriock_execution_Macro_treeformBallExpi: effectExpiration
       interaction: manifest
       maneuver: active
       piercing:

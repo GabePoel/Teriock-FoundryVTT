@@ -123,10 +123,36 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/lightning-ray.webp
     name: Lightning Ray
     system:
+      automations:
+        29b275994cf9f5b1:
+          _id: 29b275994cf9f5b1
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: 1d6[magic]
+          heighten:
+            - 1
+            - 0
+          merge: true
+          roll: damage
+          type: roll
+        800c70e6560525a8:
+          _id: 800c70e6560525a8
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: (@h)d6[magic]
+          heighten:
+            - 1
+          merge: true
+          roll: damage
+          type: roll
       class: stormMage
       competence:
         raw: 0
@@ -155,13 +181,6 @@ effects:
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/damage 1d6[magic]]] @L[Core:Damage]{damage}.</p>
-      impacts:
-        base:
-          rolls:
-            damage: 1d6[magic]
-        heightened:
-          rolls:
-            damage: 1d6[magic]
       interaction: attack
       maneuver: active
       piercing:
@@ -189,11 +208,30 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/properties/ranged.webp
     name: Ranged
     system:
       _sup: 2dXH2jxURSr7hRYp
+      automations:
+        parameterChanges:
+          _id: parameterChanges
+          changes:
+            - key: item.system.range.ranged
+              mode: 5
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: 'true'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 0
+            - 1
+          type: changes
       competence:
         raw: 0
       description: >-
@@ -208,15 +246,6 @@ effects:
         Interaction]{attack roll}. You can't attack a target beyond the weapon's
         long range.</p>
       form: intrinsic
-      impacts:
-        changes:
-          - key: system.range.ranged
-            mode: 5
-            priority: 10
-            qualifier: '1'
-            target: parent
-            time: normal
-            value: 'true'
       revealed: true
     type: property
   - _id: 3ZP0r8x7Ibw7Q5MN
@@ -309,10 +338,36 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/thunderbolt.webp
     name: Thunderbolt
     system:
+      automations:
+        29b275994cf9f5b1:
+          _id: 29b275994cf9f5b1
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: 1d10[magic]
+          heighten:
+            - 1
+            - 0
+          merge: true
+          roll: damage
+          type: roll
+        800c70e6560525a8:
+          _id: 800c70e6560525a8
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: (@h)d10[magic]
+          heighten:
+            - 1
+          merge: true
+          roll: damage
+          type: roll
       competence:
         raw: 0
       delivery:
@@ -342,13 +397,6 @@ effects:
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/damage 1d10[magic]]] @L[Core:Damage]{damage}.</p>
-      impacts:
-        base:
-          rolls:
-            damage: 1d10[magic]
-        heightened:
-          rolls:
-            damage: 1d10[magic]
       interaction: attack
       maneuver: active
       piercing:

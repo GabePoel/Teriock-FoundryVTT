@@ -32,23 +32,33 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/properties/unblockable.webp
     name: Unblockable
     system:
+      automations:
+        parameterChanges:
+          _id: parameterChanges
+          changes:
+            - key: system.piercing.raw
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: parent
+              time: normal
+              value: '2'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 0
+            - 1
+          type: changes
       competence:
         raw: 0
       description: <p>An item with this property is always @L[Keyword:UB]{UB}.</p>
       form: intrinsic
-      impacts:
-        changes:
-          - key: system.piercing.raw
-            mode: 4
-            priority: 10
-            qualifier: '1'
-            target: parent
-            time: normal
-            value: '2'
       revealed: true
     type: property
   - _id: R3yNLzV8KTpNE1RH

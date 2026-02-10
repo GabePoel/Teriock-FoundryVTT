@@ -74,10 +74,84 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/ice-ball.webp
     name: Ice Ball
     system:
+      automations:
+        09ed285450c5de7b:
+          _id: 09ed285450c5de7b
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          executor: false
+          heighten:
+            - 1
+            - 0
+          relation: include
+          status: frozen
+          target: false
+          type: status
+        800c70e6560525a8:
+          _id: 800c70e6560525a8
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: (@h)d4[magic ice]
+          heighten:
+            - 1
+          merge: true
+          roll: damage
+          type: roll
+        d5717000e99ee582:
+          _id: d5717000e99ee582
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: combatExpiration
+          what:
+            roll: 2d4kh1
+            threshold: 4
+            type: rolled
+          when:
+            skip: 1
+            time: start
+            trigger: action
+          who:
+            type: target
+        d635eb44dba086dd:
+          _id: d635eb44dba086dd
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+          heighten:
+            - 1
+            - 0
+          type: combatExpiration
+          what:
+            roll: 2d4kh1
+            threshold: 4
+            type: rolled
+          when:
+            skip: 0
+            time: start
+            trigger: action
+          who:
+            type: target
       class: stormMage
       competence:
         raw: 0
@@ -106,42 +180,6 @@ effects:
       form: normal
       grantOnly: false
       heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic ice]]] @L[Core:Damage]{damage}\_as well.</p>"
-      impacts:
-        base:
-          expiration:
-            changeOnCrit: true
-            crit:
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 1
-                  time: start
-                  trigger: action
-                who:
-                  type: target
-            doesExpire: true
-            normal:
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 0
-                  time: start
-                  trigger: action
-                who:
-                  type: target
-          rolls:
-            endCon: 2d4
-          statuses:
-            - frozen
-        heightened:
-          rolls:
-            damage: 1d4[magic ice]
       interaction: attack
       maneuver: active
       piercing:
@@ -280,10 +318,36 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/lightning-ray.webp
     name: Lightning Ray
     system:
+      automations:
+        29b275994cf9f5b1:
+          _id: 29b275994cf9f5b1
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: 1d6[magic]
+          heighten:
+            - 1
+            - 0
+          merge: true
+          roll: damage
+          type: roll
+        800c70e6560525a8:
+          _id: 800c70e6560525a8
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: (@h)d6[magic]
+          heighten:
+            - 1
+          merge: true
+          roll: damage
+          type: roll
       class: stormMage
       competence:
         raw: 0
@@ -312,13 +376,6 @@ effects:
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/damage 1d6[magic]]] @L[Core:Damage]{damage}.</p>
-      impacts:
-        base:
-          rolls:
-            damage: 1d6[magic]
-        heightened:
-          rolls:
-            damage: 1d6[magic]
       interaction: attack
       maneuver: active
       piercing:
@@ -346,11 +403,28 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.10.0
     img: systems/teriock/src/icons/abilities/simple-illusion-creation.webp
     name: Simple Illusion Creation
     system:
       _sup: XGWcDOE95PgdyWli
+      automations:
+        72ce567009179bea:
+          _id: 72ce567009179bea
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          duration:
+            raw: '@h * 3600'
+            unit: second
+          heighten:
+            - 1
+          mode: 5
+          type: duration
       class: stormMage
       competence:
         raw: 0
@@ -376,11 +450,7 @@ effects:
       grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 1 hour. The overall duration is rounded to the
-        nearest hour.</p>
-      impacts:
-        heightened:
-          duration: 3600
+        effect increases by 1 hour.</p>
       interaction: manifest
       maneuver: active
       overview:

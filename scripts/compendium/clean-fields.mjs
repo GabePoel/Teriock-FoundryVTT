@@ -161,6 +161,7 @@ function cleanEquipment(doc) {
  */
 function cleanProperty(doc) {
   cleanActiveEffect(doc);
+  delete doc.system.impacts;
   if (!doc.system.applyIfDampened) delete doc.system.applyIfDampened;
   if (!doc.system.applyIfShattered) delete doc.system.applyIfShattered;
   if (!doc.system.modifiesActor) delete doc.system.modifiesActor;
@@ -219,27 +220,6 @@ function cleanAbility(doc) {
   delete doc.system.secret;
   delete doc.system.prepared;
   if (doc.system.effectTypes) delete doc.system.effects;
-}
-
-/**
- * @param {AbilityImpact} impact
- */
-function cleanAbilityImpact(impact) {
-  if (impact.expiration) {
-    if (!impact.expiration.changeOnCrit) {
-      delete impact.expiration.crit;
-    }
-    if (!impact.expiration.doesExpire) {
-      delete impact.expiration;
-    }
-  }
-  if (!impact.duration) {
-    delete impact.duration;
-  }
-  if (!impact.transformation?.enabled) {
-    delete impact.transformation;
-  }
-  if (!impact.noTemplate) delete impact.noTemplate;
 }
 
 /**

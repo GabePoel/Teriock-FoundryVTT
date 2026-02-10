@@ -14,10 +14,36 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/burning-touch.webp
     name: Burning Touch
     system:
+      automations:
+        29b275994cf9f5b1:
+          _id: 29b275994cf9f5b1
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: 1d6[fire magic]
+          heighten:
+            - 1
+            - 0
+          merge: true
+          roll: damage
+          type: roll
+        800c70e6560525a8:
+          _id: 800c70e6560525a8
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: (@h)d6[magic fire]
+          heighten:
+            - 1
+          merge: true
+          roll: damage
+          type: roll
       class: flameMage
       competence:
         raw: 0
@@ -51,13 +77,6 @@ effects:
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage}.</p>
-      impacts:
-        base:
-          rolls:
-            damage: 1d6[fire magic]
-        heightened:
-          rolls:
-            damage: 1d6[magic fire]
       interaction: attack
       maneuver: active
       piercing:
@@ -94,29 +113,6 @@ effects:
         raw: 0
       description: <p>This item glows red in the presence of good.</p>
       form: normal
-      impacts:
-        changes:
-          - key: system.light.dim
-            mode: 4
-            priority: 4
-            qualifier: '1'
-            target: Actor
-            time: normal
-            value: '1'
-          - key: system.light.color
-            mode: 5
-            priority: 4
-            qualifier: '1'
-            target: Actor
-            time: normal
-            value: '#E01B24'
-          - key: system.light.animation.type
-            mode: 5
-            priority: 4
-            qualifier: '1'
-            target: Actor
-            time: normal
-            value: starlight
       revealed: true
     type: property
   - _id: 2YscVV39H19iMP5j
@@ -151,10 +147,36 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.10.0
     img: systems/teriock/src/icons/abilities/slay.webp
     name: Slay
     system:
+      automations:
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          common:
+            - bag
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: common
+        29b275994cf9f5b1:
+          _id: 29b275994cf9f5b1
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: 5[lethal]
+          heighten:
+            - 1
+            - 0
+          merge: true
+          roll: damage
+          type: roll
       class: assassin
       competence:
         raw: 0
@@ -185,10 +207,6 @@ effects:
         amount: 1
         enabled: true
       grantOnly: false
-      impacts:
-        base:
-          rolls:
-            damage: 5[lethal]
       interaction: manifest
       limitation: <p>Trolls only.</p>
       maneuver: reactive
@@ -242,10 +260,27 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.21
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/weapons-mastery.webp
     name: Weapons Mastery
     system:
+      automations:
+        6204ffb1aaa405ed:
+          _id: 6204ffb1aaa405ed
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          macro: Compendium.teriock.execution.Macro.090fd08ae26477da
+          pseudoHook: execution
+          relation: pseudoHook
+          type: abilityMacro
       class: assassin
       competence:
         raw: 0
@@ -268,10 +303,6 @@ effects:
         amount: 1
         enabled: true
       grantOnly: false
-      impacts:
-        macros:
-          Compendium_teriock_execution_Macro_090fd08ae26477da: execution
-          Compendium_teriock_execution_Macro_BGmnfUMxPw2BZeCI: execution
       interaction: manifest
       limitation: <p>@L[Equipment:Longsword]{Longswords} only.</p>
       maneuver: passive

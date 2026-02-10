@@ -12,10 +12,42 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.22
+      systemVersion: 0.10.0
     img: systems/teriock/src/icons/abilities/jumpstart-zombify.webp
     name: Jumpstart Zombify
     system:
+      automations:
+        72ce567009179bea:
+          _id: 72ce567009179bea
+          competencies:
+            - 0
+            - 1
+            - 2
+          duration:
+            raw: '@h * 3600'
+          heighten:
+            - 1
+          type: duration
+        838ba57012685987:
+          _id: 838ba57012685987
+          competencies:
+            - 2
+          duration:
+            raw: '3600'
+          heighten:
+            - 1
+            - 0
+          type: duration
+        NPWpKFGYaHcADPNW:
+          _id: NPWpKFGYaHcADPNW
+          transformation:
+            level: greater
+            suppression:
+              bodyParts: false
+              equipment: false
+            uuids:
+              - Compendium.teriock.species.Item.b3708edf8c3c5c9f
+          type: transformation
       competence:
         raw: 0
       costs:
@@ -45,22 +77,7 @@ effects:
       grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 1 hour. The overall duration is rounded to the
-        nearest hour.</p>
-      impacts:
-        base:
-          transformation:
-            enabled: true
-            level: greater
-            suppression:
-              bodyParts: false
-              equipment: false
-            uuids:
-              - Compendium.teriock.species.Item.b3708edf8c3c5c9f
-        fluent:
-          duration: 3600
-        heightened:
-          duration: 3600
+        effect increases by 1 hour.</p>
       interaction: attack
       maneuver: active
       overview:

@@ -33,7 +33,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/properties/blocking.webp
     name: Blocking
     system:
@@ -41,8 +41,8 @@ effects:
         raw: 0
       description: >-
         <p>An item with the <b>[[lookup name style=lc]]</b> property can be used
-        for @L[Ability:Block Cone]{Block Cone}. It also does not have any
-        @L[Core:Block Interaction]{block penalty}.</p>
+        for @L[Ability:Block Cone]{Block Cone} and @L[Ability:Block Ally]{Block
+        Ally}.</p>
       form: intrinsic
       revealed: true
     type: property
@@ -53,10 +53,29 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/properties/cumbersome.webp
     name: Cumbersome
     system:
+      automations:
+        parameterChanges:
+          _id: parameterChanges
+          changes:
+            - key: system.encumbranceLevel
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '1'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 0
+            - 1
+          type: changes
       competence:
         raw: 0
       description: >-
@@ -70,15 +89,6 @@ effects:
         they would have been @L[Condition:Encumbered]{heavily encumbered}
         otherwise, they are rendered @L[Condition:Immobile]{immobile}.</p>
       form: flaw
-      impacts:
-        changes:
-          - key: system.encumbranceLevel
-            mode: 2
-            priority: 10
-            qualifier: '1'
-            target: Actor
-            time: normal
-            value: '1'
       modifiesActor: true
       revealed: true
     type: property

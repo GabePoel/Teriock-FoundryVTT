@@ -13,10 +13,28 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/blinding-poison-strike.webp
     name: Blinding Poison Strike
     system:
+      automations:
+        18537e76761a45dc:
+          _id: 18537e76761a45dc
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          executor: false
+          heighten:
+            - 1
+            - 0
+          relation: include
+          status: blind
+          target: false
+          type: status
       competence:
         raw: 0
       delivery:
@@ -38,10 +56,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          statuses:
-            - blind
       interaction: attack
       limitation: <p>@L[Category:Biting equipment]{Biting items} only.</p>
       maneuver: active
@@ -158,10 +172,36 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/enhanced-leaping.webp
     name: Enhanced Leaping
     system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.speedAdjustments.leapVertical
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '3'
+            - key: system.speedAdjustments.leapHorizontal
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '4'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       competence:
         raw: 0
       delivery:
@@ -182,23 +222,6 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.speedAdjustments.leapVertical
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '3'
-            - key: system.speedAdjustments.leapHorizontal
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '4'
       interaction: manifest
       maneuver: passive
       overview:
@@ -357,10 +380,41 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.21
+      systemVersion: 0.10.0
     img: systems/teriock/src/icons/abilities/outsider-regenerating.webp
     name: Outsider Regenerating
     system:
+      automations:
+        0dcb1d92ba258b15:
+          _id: 0dcb1d92ba258b15
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          macro: Compendium.teriock.execution.Macro.03c0c78b0de6d0bf
+          pseudoHook: turnStart
+          relation: pseudoHook
+          type: abilityMacro
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          common:
+            - heal
+            - revive
+            - bag
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: common
       competence:
         raw: 0
       delivery:
@@ -383,11 +437,6 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      impacts:
-        macros:
-          Compendium_teriock_execution_Macro_03c0c78b0de6d0bf: turnStart
-          Compendium_teriock_execution_Macro_5ObHOfAGjqqdVKPH: turnStart
-          Compendium_teriock_execution_Macro_outsiderRgnTurnS: turnStart
       interaction: manifest
       limitation: <p>In sunlight only.</p>
       maneuver: passive

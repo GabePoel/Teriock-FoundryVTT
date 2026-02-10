@@ -12,10 +12,41 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/drink-overslow-potion.webp
     name: Drink Overslow Potion
     system:
+      automations:
+        ca0696ba7cfc9ec1:
+          _id: ca0696ba7cfc9ec1
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          relation: include
+          status: slowed
+          type: status
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.attributes.int.value
+              mode: 2
+              priority: 40
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '-2'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       competence:
         raw: 0
       costs:
@@ -39,18 +70,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.attributes.int.value
-              mode: 2
-              priority: 40
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '-2'
-          statuses:
-            - slowed
       interaction: manifest
       maneuver: active
       overview:
@@ -80,11 +99,52 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/overslow-blood.webp
     name: Overslow Blood
     system:
       _sup: 8e0e1abf7af46ec3
+      automations:
+        ca0696ba7cfc9ec1:
+          _id: ca0696ba7cfc9ec1
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          executor: false
+          heighten:
+            - 1
+            - 0
+          relation: include
+          status: slowed
+          target: false
+          type: status
+        d635eb44dba086dd:
+          _id: d635eb44dba086dd
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: combatExpiration
+          what:
+            roll: 2d4kh1
+            threshold: 4
+            type: rolled
+          when:
+            skip: 0
+            time: end
+            trigger: turn
+          who:
+            type: target
       competence:
         raw: 0
       delivery:
@@ -108,27 +168,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          expiration:
-            changeOnCrit: false
-            doesExpire: true
-            normal:
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 0
-                  time: end
-                  trigger: turn
-                who:
-                  type: target
-          rolls:
-            endCon: 2d4
-          statuses:
-            - slowed
       interaction: feat
       maneuver: reactive
       piercing:

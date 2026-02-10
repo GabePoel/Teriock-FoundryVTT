@@ -13,10 +13,43 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/brace.webp
     name: Brace
     system:
+      automations:
+        2af889aff0b661bc:
+          _id: 2af889aff0b661bc
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          macro: Compendium.teriock.execution.Macro.0ea7be85a8217ccd
+          pseudoHook: effectApplication
+          relation: pseudoHook
+          type: abilityMacro
+        e97f2827a0c6277f:
+          _id: e97f2827a0c6277f
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          macro: Compendium.teriock.execution.Macro.6e203038c142a0a0
+          pseudoHook: movement
+          relation: pseudoHook
+          type: abilityMacro
       class: veteran
       competence:
         raw: 0
@@ -36,14 +69,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        macros:
-          Compendium_teriock_execution_Macro_0Gb7QPmgAotusvVQ: effectApplication
-          Compendium_teriock_execution_Macro_0ea7be85a8217ccd: effectApplication
-          Compendium_teriock_execution_Macro_6e203038c142a0a0: movement
-          Compendium_teriock_execution_Macro_RCqX2d4YKWXd6o1i: movement
-          Compendium_teriock_execution_Macro_braceApplication: effectApplication
-          Compendium_teriock_execution_Macro_braceMovement000: movement
       interaction: manifest
       maneuver: active
       overview:
@@ -77,10 +102,80 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/earthbind-touch.webp
     name: Earthbind Touch
     system:
+      automations:
+        0b65894b82470568:
+          _id: 0b65894b82470568
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          executor: false
+          heighten:
+            - 1
+            - 0
+          relation: include
+          status: immobilized
+          target: false
+          type: status
+        5812b63d828a0227:
+          _id: 5812b63d828a0227
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          executor: false
+          heighten:
+            - 1
+            - 0
+          relation: include
+          status: grounded
+          target: false
+          type: status
+        800c70e6560525a8:
+          _id: 800c70e6560525a8
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: (@h)d4[magic vine]
+          heighten:
+            - 1
+          merge: true
+          roll: damage
+          type: roll
+        d635eb44dba086dd:
+          _id: d635eb44dba086dd
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: combatExpiration
+          what:
+            roll: 2d4kh1
+            threshold: 4
+            type: rolled
+          when:
+            skip: 0
+            time: start
+            trigger: turn
+          who:
+            type: target
       class: natureMage
       competence:
         raw: 0
@@ -107,31 +202,6 @@ effects:
       form: normal
       grantOnly: false
       heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic vine]]] @L[Core:Damage]{damage}\_as well.</p>"
-      impacts:
-        base:
-          expiration:
-            changeOnCrit: false
-            doesExpire: true
-            normal:
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 0
-                  time: start
-                  trigger: turn
-                who:
-                  type: target
-          rolls:
-            endCon: 2d4
-          statuses:
-            - grounded
-            - immobilized
-        heightened:
-          rolls:
-            damage: 1d4[magic vine]
       interaction: attack
       maneuver: active
       piercing:

@@ -32,11 +32,30 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.21
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/properties/ranged.webp
     name: Ranged
     system:
       _sup: 61fbeeda5169ef73
+      automations:
+        parameterChanges:
+          _id: parameterChanges
+          changes:
+            - key: item.system.range.ranged
+              mode: 5
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: 'true'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 0
+            - 1
+          type: changes
       competence:
         raw: 0
       description: >-
@@ -51,15 +70,6 @@ effects:
         Interaction]{attack roll}. You can't attack a target beyond the weapon's
         long range.</p>
       form: intrinsic
-      impacts:
-        changes:
-          - key: system.range.ranged
-            mode: 5
-            priority: 10
-            qualifier: '1'
-            target: parent
-            time: normal
-            value: 'true'
       revealed: true
     type: property
 img: systems/teriock/src/icons/properties/thrown.webp

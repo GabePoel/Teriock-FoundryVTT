@@ -12,10 +12,36 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/soul-drain.webp
     name: Soul Drain
     system:
+      automations:
+        157afc517847f562:
+          _id: 157afc517847f562
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: 1d4[mana]
+          heighten:
+            - 1
+            - 0
+          merge: true
+          roll: drain
+          type: roll
+        5a4f84f598422701:
+          _id: 5a4f84f598422701
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: (@h)d4[mana]
+          heighten:
+            - 1
+          merge: true
+          roll: drain
+          type: roll
       competence:
         raw: 0
       costs:
@@ -45,13 +71,6 @@ effects:
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/drain 1d4[mana]]] @L[Category:Drain types]{drain}.</p>
-      impacts:
-        base:
-          rolls:
-            drain: 1d4[mana]
-        heightened:
-          rolls:
-            drain: 1d4[mana]
       interaction: attack
       maneuver: active
       piercing:

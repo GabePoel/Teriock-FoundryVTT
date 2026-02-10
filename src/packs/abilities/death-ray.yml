@@ -12,10 +12,48 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.10.0
     img: systems/teriock/src/icons/abilities/death-ray.webp
     name: Death Ray
     system:
+      automations:
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          common:
+            - bag
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: common
+        3b974a93d7736980:
+          _id: 3b974a93d7736980
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: 2d6
+          heighten:
+            - 1
+            - 0
+          merge: true
+          roll: kill
+          type: roll
+        71e51b18552837f1:
+          _id: 71e51b18552837f1
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: (@h)d6
+          heighten:
+            - 1
+          merge: true
+          roll: kill
+          type: roll
       class: necromancer
       competence:
         raw: 0
@@ -43,13 +81,6 @@ effects:
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, roll an additional [[/kill
         1d6]].</p>
-      impacts:
-        base:
-          rolls:
-            kill: 2d6
-        heightened:
-          rolls:
-            kill: 1d6
       interaction: attack
       maneuver: active
       piercing:

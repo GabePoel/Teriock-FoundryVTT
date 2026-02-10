@@ -60,11 +60,28 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.21
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/bodyguard-backup.webp
     name: Bodyguard Backup
     system:
       _sup: 96a3ad260a44b6d0
+      automations:
+        da50003e1d5a6f3e:
+          _id: da50003e1d5a6f3e
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          macro: Compendium.teriock.execution.Macro.4bd2e8ab01c2430b
+          pseudoHook: rollFeatSave
+          relation: pseudoHook
+          type: abilityMacro
       class: veteran
       competence:
         raw: 0
@@ -84,9 +101,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        macros:
-          Compendium_teriock_execution_Macro_4bd2e8ab01c2430b: rollFeatSave
       interaction: manifest
       maneuver: reactive
       overview:
@@ -121,11 +135,52 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.21
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/bodyguard-taunt.webp
     name: Bodyguard Taunt
     system:
       _sup: 96a3ad260a44b6d0
+      automations:
+        6cebaedf0c5c1507:
+          _id: 6cebaedf0c5c1507
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          executor: false
+          heighten:
+            - 1
+            - 0
+          relation: include
+          status: goaded
+          target: true
+          type: status
+        d635eb44dba086dd:
+          _id: d635eb44dba086dd
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: combatExpiration
+          what:
+            roll: 2d4kh1
+            threshold: 4
+            type: forced
+          when:
+            skip: 0
+            time: start
+            trigger: turn
+          who:
+            type: executor
       class: veteran
       competence:
         raw: 0
@@ -145,27 +200,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          expiration:
-            changeOnCrit: false
-            doesExpire: true
-            normal:
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: forced
-                when:
-                  skip: 0
-                  time: start
-                  trigger: turn
-                who:
-                  type: executor
-          statuses:
-            - goaded
-        macros:
-          Compendium_teriock_execution_Macro_0636b5e3f7412cfc: preExecution
       interaction: manifest
       maneuver: reactive
       overview:

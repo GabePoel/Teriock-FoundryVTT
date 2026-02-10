@@ -120,7 +120,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     flags:
       teriock:
         category: combat
@@ -128,6 +128,25 @@ effects:
     img: systems/teriock/src/icons/abilities/improved-brace.webp
     name: Improved Brace
     system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: flags.teriockEffect.braceDieSize
+              mode: 5
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '10'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       class: veteran
       competence:
         raw: 0
@@ -150,18 +169,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: flags.teriockEffect.braceDieSize
-              mode: 5
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '10'
-          rolls:
-            tempHp: 1d6
       interaction: manifest
       maneuver: passive
       overview:
@@ -263,11 +270,30 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/master-armor-smith.webp
     name: Master Armor Smith
     system:
       _sup: 4nSggnGkZh1QjAZx
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.tradecrafts.blacksmith.score
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '2'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       class: veteran
       competence:
         raw: 0
@@ -287,16 +313,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.tradecrafts.blacksmith.score
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '2'
       interaction: manifest
       maneuver: passive
       overview:
@@ -449,13 +465,58 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     flags:
       teriock:
         category: support
     img: systems/teriock/src/icons/abilities/sentry.webp
     name: Sentry
     system:
+      automations:
+        8f623097f9f2a087:
+          _id: 8f623097f9f2a087
+          bonus: '0'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          hex: false
+          type: resist
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.protections.resistances.other
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: Being Surprised (Braced, Fortified Areas, Guard Duty)
+            - key: system.protections.resistances.other
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: Frightened (Braced, Fortified Areas, Guard Duty)
+            - key: system.protections.resistances.other
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: Mediator Tradecrafts (Braced, Fortified Areas, Guard Duty)
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       class: veteran
       competence:
         raw: 0
@@ -480,30 +541,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.protections.resistances.other
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: Being Surprised (Braced, Fortified Areas, Guard Duty)
-            - key: system.protections.resistances.other
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: Frightened (Braced, Fortified Areas, Guard Duty)
-            - key: system.protections.resistances.other
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: Mediator Tradecrafts (Braced, Fortified Areas, Guard Duty)
       interaction: manifest
       maneuver: passive
       overview:

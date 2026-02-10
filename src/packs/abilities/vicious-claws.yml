@@ -12,10 +12,36 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.21
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/vicious-claws.webp
     name: Vicious Claws
     system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.competence.raw
+              mode: 4
+              priority: 10
+              qualifier: or(@key.offensiveMartialArts, @key.hindClaws)
+              target: ability
+              time: fluency
+              value: '2'
+            - key: system.piercing.av0
+              mode: 5
+              priority: 10
+              qualifier: or(@prop.handy, @key.foot)
+              target: body
+              time: normal
+              value: 'true'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       competence:
         raw: 0
       delivery:
@@ -34,23 +60,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.competence.raw
-              mode: 4
-              priority: 10
-              qualifier: or(@key.offensiveMartialArts, @key.hindClaws)
-              target: ability
-              time: fluency
-              value: '2'
-            - key: system.piercing.raw
-              mode: 4
-              priority: 10
-              qualifier: or(@prop.handy, @key.foot)
-              target: body
-              time: normal
-              value: '1'
       interaction: manifest
       maneuver: passive
       overview:
@@ -78,11 +87,99 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.21
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/offensive-martial-arts.webp
     name: Offensive Martial Arts
     system:
       _sup: 639f4a31cbb018a1
+      automations:
+        29b275994cf9f5b1:
+          _id: 29b275994cf9f5b1
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: 1d4
+          heighten:
+            - 1
+            - 0
+          merge: true
+          roll: damage
+          type: roll
+        3f7fa7707643426f:
+          _id: 3f7fa7707643426f
+          competencies:
+            - 2
+          formula: 1d8
+          heighten:
+            - 1
+            - 0
+          merge: true
+          roll: damage
+          type: roll
+        5e4d195ed81a10cc:
+          _id: 5e4d195ed81a10cc
+          competencies:
+            - 1
+            - 2
+          formula: 1d6
+          heighten:
+            - 1
+            - 0
+          merge: true
+          roll: damage
+          type: roll
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.damage.base.raw
+              mode: 4
+              priority: 10
+              qualifier: '@prop.handy'
+              target: body
+              time: normal
+              value: 1d4
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
+        f025905e157ac261:
+          _id: f025905e157ac261
+          changes:
+            - key: system.damage.base.raw
+              mode: 4
+              priority: 10
+              qualifier: '@prop.handy'
+              target: body
+              time: normal
+              value: 1d6
+          competencies:
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
+        f7da3b5e1992a724:
+          _id: f7da3b5e1992a724
+          changes:
+            - key: system.damage.base.raw
+              mode: 4
+              priority: 10
+              qualifier: '@prop.handy'
+              target: body
+              time: normal
+              value: 1d8
+          competencies:
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       competence:
         raw: 0
       delivery:
@@ -101,40 +198,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.damage.base.raw
-              mode: 4
-              priority: 10
-              qualifier: '@prop.handy'
-              target: body
-              time: normal
-              value: 1d4
-          rolls:
-            damage: 1d4
-        fluent:
-          changes:
-            - key: system.damage.base.raw
-              mode: 4
-              priority: 10
-              qualifier: '@prop.handy'
-              target: body
-              time: normal
-              value: 1d8
-          rolls:
-            damage: 1d8
-        proficient:
-          changes:
-            - key: system.damage.base.raw
-              mode: 4
-              priority: 10
-              qualifier: '@prop.handy'
-              target: body
-              time: normal
-              value: 1d6
-          rolls:
-            damage: 1d6
       interaction: manifest
       maneuver: passive
       overview:

@@ -127,11 +127,30 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/intimidating-presence.webp
     name: Intimidating Presence
     system:
       _sup: dbJPDVq2wmgowY99
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.tradecrafts.enforcer.score
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '2'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: changes
       class: berserker
       competence:
         raw: 0
@@ -151,16 +170,6 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.tradecrafts.enforcer.score
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '2'
       interaction: manifest
       maneuver: passive
       overview:
@@ -186,11 +195,42 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/terrify.webp
     name: Terrify
     system:
       _sup: dbJPDVq2wmgowY99
+      automations:
+        29b275994cf9f5b1:
+          _id: 29b275994cf9f5b1
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: 1d4[psychic]
+          heighten:
+            - 1
+            - 0
+          merge: true
+          roll: damage
+          type: roll
+        b4960732f0b9ed9f:
+          _id: b4960732f0b9ed9f
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          executor: false
+          heighten:
+            - 1
+            - 0
+          relation: include
+          status: frightened
+          target: false
+          type: status
       class: berserker
       competence:
         raw: 0
@@ -212,12 +252,6 @@ effects:
       featSaveAttribute: int
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          rolls:
-            damage: 1d4[psychic]
-          statuses:
-            - frightened
       interaction: feat
       maneuver: active
       piercing:

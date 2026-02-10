@@ -12,10 +12,36 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/abilities/chain-lightning.webp
     name: Chain Lightning
     system:
+      automations:
+        29b275994cf9f5b1:
+          _id: 29b275994cf9f5b1
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: 1d8[magic]
+          heighten:
+            - 1
+            - 0
+          merge: true
+          roll: damage
+          type: roll
+        800c70e6560525a8:
+          _id: 800c70e6560525a8
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: (@h)d8[magic]
+          heighten:
+            - 1
+          merge: true
+          roll: damage
+          type: roll
       competence:
         raw: 0
       costs:
@@ -54,13 +80,6 @@ effects:
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/damage 1d8[magic]]] @L[Core:Damage]{damage}. The cascade also
         executes an additional time.</p>
-      impacts:
-        base:
-          rolls:
-            damage: 1d8[magic]
-        heightened:
-          rolls:
-            damage: 1d8[magic]
       interaction: attack
       maneuver: active
       piercing:

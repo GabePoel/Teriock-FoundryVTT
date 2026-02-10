@@ -12,10 +12,22 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.20
+      systemVersion: 0.9.26
     img: systems/teriock/src/icons/properties/glued.webp
     name: Glued
     system:
+      automations:
+        parameterChanges:
+          _id: parameterChanges
+          changes:
+            - key: item.system.glued
+              mode: 5
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: 'true'
+          type: changes
       competence:
         raw: 0
       description: >-
@@ -25,15 +37,6 @@ effects:
         that would steal it} from the creature's body (even if the creature is
         dead).</p>
       form: intrinsic
-      impacts:
-        changes:
-          - key: system.glued
-            mode: 5
-            priority: 10
-            qualifier: '1'
-            target: parent
-            time: normal
-            value: 'true'
       revealed: true
     type: property
 img: systems/teriock/src/icons/properties/glued.webp
