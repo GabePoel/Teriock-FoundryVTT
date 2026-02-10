@@ -18,7 +18,7 @@ const command = {
   args: ["attribute"],
   primary,
   label: (options) =>
-    `${TERIOCK.options.attribute[options?.attribute]?.LABEL || "Feat"} Save`,
+    `${TERIOCK.options.attribute[options?.attribute]?.label || "Feat"} Save`,
   icon: (options) =>
     TERIOCK.options.attribute[options?.attribute]?.icon || "star",
   id: "feat",

@@ -4,7 +4,7 @@ import { TeriockRoll } from "../../../dice/_module.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
 import {
   makeDamageDrainTypePanels,
-  makeDamageTypeButtons,
+  makeDamageTypeButtons
 } from "../../html.mjs";
 import { TakeRollableTakeHandler } from "../button-handlers/rollable-takes-handlers.mjs";
 import { formulaCommand } from "./abstract-command.mjs";
@@ -27,7 +27,7 @@ async function abstractTakeOperation(actor, options) {
     else await take.apply(actor, amount);
     return;
   }
-  const flavor = `Roll ${take.LABEL}`;
+  const flavor = `Roll ${take.label}`;
   if (options.boost) formula = await boostDialog(formula);
   const roll = new TeriockRoll(formula, actor?.getRollData() || {}, { flavor });
   if (options.crit) roll.alter(2, 0, { multiplyNumeric: false });
