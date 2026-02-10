@@ -5,12 +5,12 @@ const { MeasuredTemplate } = foundry.canvas.placeables;
 /**
  * @property {MeasuredTemplateDocument} document
  */
-export default class TeriockMeasuredTemplate extends MeasuredTemplate {
+export default class AbilityTemplate extends MeasuredTemplate {
   /**
    * A factory method to create an AbilityTemplate instance using provided data from an Activity instance.
    * @param {AbilityExecution} execution - The roll config to construct the template from.
    * @param {object} [options={}] - Options to modify the created template.
-   * @returns {TeriockMeasuredTemplate|null} The template objects, or null if the item does not produce a template.
+   * @returns {AbilityTemplate|null} The template objects, or null if the item does not produce a template.
    */
   static fromExecution(execution, options = {}) {
     const templateShape =
