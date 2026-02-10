@@ -1,7 +1,6 @@
 export { default as ArmamentSystemMixin } from "./armament-system-mixin/armament-system-mixin.mjs";
 export { default as AttunableSystemMixin } from "./attunable-system-mixin/attunable-system-mixin.mjs";
 export { default as ConsumableSystemMixin } from "./consumable-system-mixin/consumable-system-mixin.mjs";
-export { default as ExecutableSystemMixin } from "./executable-system-mixin/executable-system-mixin.mjs";
 export { default as HierarchySystemMixin } from "./hierarchy-system-mixin/hierarchy-system-mixin.mjs";
 export { default as PiercingSystemMixin } from "./piercing-system-mixin/piercing-system-mixin.mjs";
 export { default as CompetenceDisplaySystemMixin } from "./competence-display-system-mixin.mjs";

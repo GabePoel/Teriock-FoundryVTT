@@ -31,11 +31,17 @@ export default (Base) => {
           this.document.system.constructor.automationTypes,
           (a) => a.LABEL,
         );
-        const choice = await selectDialog(choices, {
-          title: "Add Automation",
-          hint: "Please select an automation type.",
-          icon: TERIOCK.display.icons.document.automation,
-        });
+        if (Object.keys(choices).length === 0) return;
+        let choice;
+        if (Object.keys(choices).length === 1) {
+          choice = Object.keys(choices)[0];
+        } else {
+          choice = await selectDialog(choices, {
+            title: "Add Automation",
+            hint: "Please select an automation type.",
+            icon: TERIOCK.display.icons.document.automation,
+          });
+        }
         if (!choice) return;
         await BaseAutomation.create(
           { type: choice },
@@ -51,7 +57,9 @@ export default (Base) => {
        */
       static async _onDeleteAutomation(_event, target) {
         const id = target.dataset.id;
-        const automation = this.document.system.automations.get(id);
+        const automation =
+          /** @type {BaseAutomation} */
+          this.document.system.automations.get(id);
         await automation.delete();
       }
 

@@ -1,10 +1,7 @@
-import {
-  addFormula,
-  formulaExists
-} from "../../../helpers/formula.mjs";
+import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
 import {
   makeDamageDrainTypePanels,
-  makeDamageTypeButtons
+  makeDamageTypeButtons,
 } from "../../../helpers/html.mjs";
 import { TakeRollableTakeHandler } from "../../../helpers/interaction/button-handlers/rollable-takes-handlers.mjs";
 import BaseDocumentExecution from "../base-document-execution/base-document-execution.mjs";

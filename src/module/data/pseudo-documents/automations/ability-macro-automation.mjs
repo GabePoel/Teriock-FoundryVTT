@@ -2,8 +2,11 @@ import { abilityPseudoHooks } from "../../../constants/system/pseudo-hooks.mjs";
 import CritAutomation from "./crit-automation.mjs";
 import { MacroAutomationMixin } from "./mixins/_module.mjs";
 
-const { fields } = foundry.data;
-
+//noinspection JSClosureCompilerSyntax
+/**
+ * @extends {CritAutomation}
+ * @mixes MacroAutomation
+ */
 export default class AbilityMacroAutomation extends MacroAutomationMixin(
   CritAutomation,
 ) {
@@ -13,14 +16,8 @@ export default class AbilityMacroAutomation extends MacroAutomationMixin(
   }
 
   /** @inheritDoc */
-  static defineSchema() {
-    return Object.assign(super.defineSchema(), {
-      pseudoHook: new fields.StringField({
-        choices: abilityPseudoHooks,
-        label: "Hook",
-        hint: "The hook that executes this macro when fired.",
-      }),
-    });
+  static get _pseudoHookChoices() {
+    return abilityPseudoHooks;
   }
 
   /** @inheritDoc */

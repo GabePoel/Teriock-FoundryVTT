@@ -69,7 +69,7 @@ export default class AbilityExecution extends AbilityExecutionChatPart(
 
   /** @inheritDoc */
   async _postExecute() {
-    await this.executePseudoHookMacros("execution");
+    await super._postExecute();
     await this.actor?.hookCall("useAbility", { execution: this });
   }
 

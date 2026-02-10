@@ -1,12 +1,16 @@
+export const commonPseudoHooks = {
+  execution: "Executing This",
+  preExecution: "Before Executing This",
+};
+
 export const abilityPseudoHooks = {
+  ...commonPseudoHooks,
   documentChat: "Document Sharing to Chat",
   documentDuplicate: "Document Duplication",
   effectApplication: "Effect Application",
   effectExpiration: "Effect Expiration",
-  execution: "Ability Execution",
   movement: "Movement",
   postUpdate: "Actor Post-updating",
-  preExecution: "Ability Pre-execution",
   deathBagPull: "Pull From Death Bag",
   rollFeatSave: "Rolling a Feat Save",
   rollImmunity: "Rolling an Immunity Save",
@@ -56,6 +60,7 @@ export const propertyPseudoHooks = {
 export const unsortedPseudoHooks = foundry.utils.mergeObject(
   abilityPseudoHooks,
   propertyPseudoHooks,
+  commonPseudoHooks,
 );
 
 export const pseudoHooks = Object.fromEntries(

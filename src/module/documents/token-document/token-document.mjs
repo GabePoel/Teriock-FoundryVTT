@@ -128,10 +128,10 @@ export default class TeriockTokenDocument extends mix(
 
   /**
    * Rescale the src if this has a token ring.
-   * @returns {number}
+   * @returns {boolean}
    */
   get rescale() {
-    return this.ring.enabled;
+    return !!this.ring.enabled;
   }
 
   /** @inheritDoc */

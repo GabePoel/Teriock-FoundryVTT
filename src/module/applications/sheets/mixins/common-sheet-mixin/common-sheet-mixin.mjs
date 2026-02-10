@@ -23,7 +23,6 @@ export default function CommonSheetMixin(Base) {
      * @mixes ImpactsTabsCommonSheetPart
      * @mixes InteractionCommonSheetPart
      * @mixes LockingCommonSheetPart
-     * @mixes MacroCommonSheetPart
      * @mixes MenuCommonSheetPart
      * @mixes StatDiceCommonSheetPart
      * @mixes ToggleCommonSheetPart
@@ -41,7 +40,6 @@ export default function CommonSheetMixin(Base) {
       parts.ImpactsTabsCommonSheetPart,
       parts.InteractionCommonSheetPart,
       parts.LockingCommonSheetPart,
-      parts.MacroCommonSheetPart,
       parts.MenuCommonSheetPart,
       parts.StatDiceCommonSheetPart,
       parts.ToggleCommonSheetPart,

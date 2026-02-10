@@ -1,6 +1,6 @@
 import { TeriockDialog } from "../../../../applications/api/_module.mjs";
 import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
-import { TeriockAbilityTemplate } from "../../../../canvas/placeables/_module.mjs";
+import { TeriockMeasuredTemplate } from "../../../../canvas/placeables/_module.mjs";
 import { TeriockRoll } from "../../../../dice/_module.mjs";
 import { createDialogFieldset } from "../../../../helpers/html.mjs";
 import { dedent } from "../../../../helpers/string.mjs";
@@ -177,8 +177,6 @@ export default function AbilityExecutionGetInputPart(Base) {
             this.targets.add(target);
           }
         }
-        this.flags.noTemplate =
-          this.flags.noTemplate || this.mergeImpactsBool("noTemplate");
         if (
           this.source.system.isAoe &&
           !this.flags.noTemplate &&
@@ -221,9 +219,12 @@ export default function AbilityExecutionGetInputPart(Base) {
             },
           });
           if (placeTemplate) {
-            const abilityTemplate = TeriockAbilityTemplate.fromExecution(this, {
-              distance: distance,
-            });
+            const abilityTemplate = TeriockMeasuredTemplate.fromExecution(
+              this,
+              {
+                distance: distance,
+              },
+            );
             await abilityTemplate?.drawPreview();
           }
         }

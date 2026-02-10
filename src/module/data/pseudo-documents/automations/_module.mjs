@@ -4,6 +4,7 @@ export { default as ChangesAutomation } from "./changes-automation.mjs";
 export { default as CheckAutomation } from "./check-automation.mjs";
 export { default as CombatExpirationAutomation } from "./combat-expiration-automation.mjs";
 export { default as CommonImpactsAutomation } from "./common-impacts-automation.mjs";
+export { default as CommonMacroAutomation } from "./common-macro-automation.mjs";
 export { default as DurationAutomation } from "./duration-automation.mjs";
 export { default as FeatAutomation } from "./feat-automation.mjs";
 export { default as HacksAutomation } from "./hacks-automation.mjs";

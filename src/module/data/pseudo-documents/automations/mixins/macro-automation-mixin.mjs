@@ -9,16 +9,34 @@ const { fields } = foundry.data;
  * @constructor
  */
 export default function MacroAutomationMixin(Base) {
+  //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @property {UUID<TeriockMacro>} macro
+     * @extends {BaseAutomation}
+     * @mixin
      * @property {"button"|"pseudoHook"} relation
      * @property {Teriock.Parameters.Shared.AbilityPseudoHook} pseudoHook
+     * @property {UUID<TeriockMacro>} macro
      */
     class MacroAutomation extends Base {
       /** @inheritDoc */
       static get LABEL() {
         return "Macro";
+      }
+
+      /**
+       * Viable pseudo-hook choices.
+       * @returns {Record<string, string>}
+       */
+      static get _pseudoHookChoices() {
+        return pseudoHooks;
+      }
+
+      /** @inheritDoc */
+      static get metadata() {
+        return Object.assign(super.metadata, {
+          macro: true,
+        });
       }
 
       /** @inheritDoc */
@@ -38,7 +56,7 @@ export default function MacroAutomationMixin(Base) {
             hint: "Whether this macro can be run as a button from the chat message or hooks into some other behavior.",
           }),
           pseudoHook: new fields.StringField({
-            choices: pseudoHooks,
+            choices: this._pseudoHookChoices,
             label: "Hook",
             hint: "The hook that executes this macro when fired.",
           }),
@@ -56,7 +74,7 @@ export default function MacroAutomationMixin(Base) {
 
       /** @inheritDoc */
       get buttons() {
-        if (this.relation === "button") {
+        if (this.relation === "button" || !this.hasMacro) {
           return [
             ExecuteMacroHandler.buildButton(this.macro, {
               proficient: this.document?.system.competence?.proficient,
@@ -66,6 +84,14 @@ export default function MacroAutomationMixin(Base) {
         } else {
           return [];
         }
+      }
+
+      /**
+       * Convenience helper to check if this has a macro.
+       * @returns {boolean}
+       */
+      get hasMacro() {
+        return this.macro && !!fromUuidSync(this.macro);
       }
     }
   );

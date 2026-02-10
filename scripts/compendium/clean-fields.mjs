@@ -174,13 +174,7 @@ function cleanAbility(doc) {
 
   // Clean Impacts
   if (doc.system.impacts) {
-    if (doc.system.impacts.base) cleanAbilityImpact(doc.system.impacts.base);
-    if (doc.system.impacts.proficient)
-      cleanAbilityImpact(doc.system.impacts.proficient);
-    if (doc.system.impacts.fluent)
-      cleanAbilityImpact(doc.system.impacts.fluent);
-    if (doc.system.impacts.heightened)
-      cleanAbilityImpact(doc.system.impacts.heightened);
+    delete doc.system.impacts;
   }
 
   // Clean Costs

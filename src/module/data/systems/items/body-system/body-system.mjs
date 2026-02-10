@@ -14,12 +14,10 @@ import BaseItemSystem from "../base-item-system/base-item-system.mjs";
  * @extends {BaseItemSystem}
  * @implements {Teriock.Models.BodySystemInterface}
  * @mixes ConsumableSystem
- * @mixes ExecutableSystem
  * @mixes WikiSystem
  */
 export default class BodySystem extends mix(
   BaseItemSystem,
-  mixins.ExecutableSystemMixin,
   mixins.WikiSystemMixin,
   mixins.ArmamentSystemMixin,
 ) {

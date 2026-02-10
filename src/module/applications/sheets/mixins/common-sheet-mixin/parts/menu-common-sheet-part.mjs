@@ -6,7 +6,7 @@ export default (Base) => {
     /**
      * @extends {TeriockDocumentSheet}
      * @mixin
-     * @property {TeriockCommon} document
+     * @property {GenericCommon} document
      */
     class MenuCommonSheetPart extends Base {
       constructor(...args) {
@@ -43,6 +43,17 @@ export default (Base) => {
       async _onRender(context, options) {
         await super._onRender(context, options);
         this._activateMenu();
+      }
+
+      /** @inheritDoc */
+      async _prepareContext(options = {}) {
+        const context = await super._prepareContext(options);
+        if (
+          (this.document.system.constructor._automationTypes || []).length > 0
+        ) {
+          context.canHaveAutomations = true;
+        }
+        return context;
       }
     }
   );

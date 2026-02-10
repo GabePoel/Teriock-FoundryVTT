@@ -94,8 +94,6 @@ export default (Base) => {
         let out;
         if (["ActiveEffect", "Item", "Actor"].includes(dropData.type)) {
           out = await this._onDropChild(event, dropData);
-        } else if (dropData.type === "Macro") {
-          out = await this._onDropMacro(event, dropData);
         } else if (dropData.type === "JournalEntryPage") {
           out = await this._onDropJournalEntryPage(event, dropData);
         }
@@ -143,25 +141,6 @@ export default (Base) => {
           };
           await this.document.update(updateData);
           return fromUuidSync(dropData.uuid);
-        }
-      }
-
-      /**
-       * Handles dropping of macros.
-       * @param {Teriock.Sheet.EmbedDragEvent} _event - The drop event.
-       * @param {Teriock.Sheet.DropData<TeriockMacro>} dropData - The document drop data.
-       * @returns {Promise<TeriockMacro|void>} Promise that resolves to the created document if successful.
-       */
-      async _onDropMacro(_event, dropData) {
-        if (this.document.system.macros) {
-          const macroUuids = Array.from(this.document.system.macros);
-          if (dropData.uuid) {
-            macroUuids.push(dropData.uuid);
-            const updateData = {
-              "system.macros": macroUuids,
-            };
-            await this.document.update(updateData);
-          }
         }
       }
 

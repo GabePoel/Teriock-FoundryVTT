@@ -6,16 +6,32 @@ applyButton.label = "Apply Lighted";
 const token = actor?.defaultToken?.document || actor;
 
 function modifyData(data) {
+  const uuid = token.uuid || actor.uuid;
   const effectObject = JSON.parse(data);
-  effectObject.description = "<ul>";
-  effectObject.changes.push({
-    key: "system.conditionInformation.lighted.trackers",
-    value: token.uuid || actor.uuid,
-    mode: 2,
-    priority: 10,
-  });
-  effectObject.description += `<li>Lighted to @UUID[${token.uuid}]{${token.name}}</li>`;
-  effectObject.description += "</ul>";
+  if (uuid) {
+    effectObject.changes.push({
+      key: "system.conditionInformation.lighted.trackers",
+      value: tm.resolve.safeUuid(uuid),
+      mode: 2,
+      priority: 10,
+    });
+    effectObject.system.associations = [
+      {
+        title: "Lighted With Respect To",
+        icon: TERIOCK.options.document.creature.icon,
+        cards: [
+          {
+            name: token.name || actor.name,
+            img: token.imageLive || actor.img,
+            uuid: uuid,
+            rescale: !!token.rescale,
+            id: token.id || actor.id,
+            type: "base",
+          },
+        ],
+      },
+    ];
+  }
   return JSON.stringify(effectObject);
 }
 

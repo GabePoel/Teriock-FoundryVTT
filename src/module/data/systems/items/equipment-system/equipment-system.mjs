@@ -32,7 +32,6 @@ const { fields } = foundry.data;
  * @mixes EquipmentStoragePart
  * @mixes EquipmentSuppressionPart
  * @mixes EquipmentWieldingPart
- * @mixes ExecutableSystem
  * @mixes WikiSystem
  */
 export default class EquipmentSystem extends mix(
@@ -40,7 +39,6 @@ export default class EquipmentSystem extends mix(
   mixins.ArmamentSystemMixin,
   mixins.AttunableSystemMixin,
   mixins.ConsumableSystemMixin,
-  mixins.ExecutableSystemMixin,
   mixins.WikiSystemMixin,
   parts.EquipmentDamagePart,
   parts.EquipmentIdentificationPart,

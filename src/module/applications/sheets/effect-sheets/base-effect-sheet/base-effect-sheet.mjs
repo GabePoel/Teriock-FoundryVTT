@@ -43,6 +43,12 @@ export default class BaseEffectSheet extends mix(
   }
 
   /** @inheritDoc */
+  async _onDropChild(event, dropData) {
+    if (dropData.type !== "ActiveEffect") return;
+    return super._onDropChild(event, dropData);
+  }
+
+  /** @inheritDoc */
   async _prepareContext(options = {}) {
     const context = await super._prepareContext(options);
     Object.assign(context, {

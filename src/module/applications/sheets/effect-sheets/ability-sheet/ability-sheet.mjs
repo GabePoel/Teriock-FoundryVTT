@@ -8,13 +8,11 @@ import abilityContextMenus from "./helpers/ability-context-menus.mjs";
  * {@link TeriockAbility} sheet.
  * @property {TeriockAbility} document
  * @extends {BaseEffectSheet}
- * @mixes PassiveSheet
  * @mixes UseButtonSheet
  * @mixes WikiButtonSheet
  */
 export default class AbilitySheet extends mix(
   BaseEffectSheet,
-  mixins.PassiveSheetMixin,
   mixins.UseButtonSheetMixin,
   mixins.WikiButtonSheetMixin,
 ) {

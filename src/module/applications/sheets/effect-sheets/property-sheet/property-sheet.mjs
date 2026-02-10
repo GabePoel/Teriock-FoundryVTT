@@ -7,12 +7,10 @@ import BaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
  * {@link TeriockProperty} sheet.
  * @property {TeriockProperty} document
  * @extends {BaseEffectSheet}
- * @mixes PassiveSheet
  * @mixes WikiButtonSheet
  */
 export default class PropertySheet extends mix(
   BaseEffectSheet,
-  mixins.PassiveSheetMixin,
   mixins.WikiButtonSheetMixin,
 ) {
   /**

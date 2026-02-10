@@ -68,10 +68,6 @@ export default (Base) => {
           }
         }
 
-        // Set base duration
-        this.impacts.base.duration =
-          this.duration.unitType === "finite" ? this.duration.value : 0;
-
         // Compute changes
         let applyChanges = this.maneuver === "passive";
         for (const status of this.duration.conditions.present) {

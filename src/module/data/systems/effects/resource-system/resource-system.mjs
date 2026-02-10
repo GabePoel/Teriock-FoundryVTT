@@ -1,4 +1,6 @@
+import { BaseDocumentExecution } from "../../../../executions/document-executions/_module.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
+import { CommonMacroAutomation } from "../../../pseudo-documents/automations/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
 
@@ -8,15 +10,18 @@ import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
  * @extends {BaseEffectSystem}
  * @implements {Teriock.Models.ResourceSystemInterface}
  * @mixes ConsumableSystem
- * @mixes ExecutableSystem
  * @mixes RevelationSystem
  */
 export default class ResourceSystem extends mix(
   BaseEffectSystem,
-  mixins.ExecutableSystemMixin,
   mixins.ConsumableSystemMixin,
   mixins.RevelationSystemMixin,
 ) {
+  /** @inheritDoc */
+  static get _automationTypes() {
+    return [CommonMacroAutomation];
+  }
+
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
@@ -52,6 +57,13 @@ export default class ResourceSystem extends mix(
       ],
     });
     return parts;
+  }
+
+  /** @inheritDoc */
+  async _use(options = {}) {
+    options.source = this.parent;
+    const execution = new BaseDocumentExecution(options);
+    await execution.execute();
   }
 
   /** @inheritDoc */

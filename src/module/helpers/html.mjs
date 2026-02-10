@@ -2,7 +2,6 @@ import { TeriockTextEditor } from "../applications/ux/_module.mjs";
 import { documentOptions } from "../constants/options/document-options.mjs";
 import { ApplyStatusHandler } from "./interaction/button-handlers/simple-command-handlers.mjs";
 import { getImage } from "./path.mjs";
-import { toTitleCase } from "./string.mjs";
 
 /**
  * A helper method for constructing an HTML button based on given parameters.
@@ -186,59 +185,6 @@ export async function makeDamageDrainTypePanels(roll) {
 }
 
 /**
- * Remove trailing lines from HTML.
- * @param {string} html
- * @returns {string}
- */
-export function trimTrailingLinesHTML(html) {
-  const box = document.createElement("div");
-  box.innerHTML = html;
-  const isBlank = (n) => {
-    if (n.nodeType === 3) {
-      return !n.nodeValue.replace(/\u00A0/g, " ").trim();
-    }
-    if (n.nodeType === 1) {
-      if (n.matches("br")) {
-        return true;
-      }
-      if (n.matches("p,div")) {
-        const txt = n.textContent.replace(/\u00A0/g, " ").trim();
-        return !txt || n.classList.contains("mw-empty-elt");
-      }
-    }
-    return false;
-  };
-  while (box.lastChild && isBlank(box.lastChild)) {
-    box.removeChild(box.lastChild);
-  }
-  if (box.querySelector("p")) {
-    return box.querySelector("p").innerHTML.trim();
-  }
-  return box.innerHTML.trim();
-}
-
-/**
- * Turn spans into normal text.
- * @param {string} html
- * @returns {string}
- */
-export function removeSpansFromHTML(html) {
-  const d = document.createElement("div");
-  d.innerHTML = html;
-  d.querySelectorAll("span").forEach((s) => s.replaceWith(...s.childNodes));
-  return d.innerHTML;
-}
-
-/**
- * Make HTML more tidy.
- * @param {string} html
- * @returns {string}
- */
-export function tidyHTML(html) {
-  return trimTrailingLinesHTML(removeSpansFromHTML(html));
-}
-
-/**
  * Get the panel for an attribute.
  * @param {Teriock.Parameters.Actor.Attribute} attribute
  * @returns {Promise<Teriock.MessageData.MessagePanel>}
@@ -324,21 +270,6 @@ export async function classPanel(className) {
   });
 }
 
-/**
- * Parse a string of HTML as an element.
- * @param {string} htmlString
- * @returns {HTMLElement}
- */
-export function safeParseHTML(htmlString) {
-  htmlString = htmlString || "";
-  let htmlElement = foundry.utils.parseHTML(htmlString);
-  if (!(htmlElement instanceof HTMLElement)) {
-    htmlElement = document.createElement("div");
-    htmlElement.innerHTML = htmlString;
-  }
-  return htmlElement;
-}
-
 //noinspection JSUnusedGlobalSymbols
 /**
  * Unpack the consequence of the "apply effect" button.
@@ -372,69 +303,6 @@ export function packEffectButton(execution, consequence, options = {}) {
       button.dataset[useType] = JSON.stringify(consequence);
     }
   }
-}
-
-/**
- * Add trackers to the roll config.
- * @param {AbilityExecution} execution
- * @param {string} key
- * @param {UUID<TeriockTokenDocument|TeriockActor>[]} uuids
- * @returns {Promise<void>}
- */
-export async function addTrackersToExecution(execution, key, uuids) {
-  let titleString = toTitleCase(key) + " To";
-  if (key === "frightened") {
-    titleString = "Frightened Of";
-  }
-  if (key === "dueling") {
-    titleString = "Dueling With";
-  }
-  const buttons = execution.buttons;
-  const button = buttons.find((b) => b.dataset.action === "apply-effect");
-  if (button) {
-    for (const useType of ["normal", "crit"]) {
-      if (button.dataset[useType]) {
-        /** @type {TeriockConsequence} */
-        const effectObject = JSON.parse(button.dataset[useType]);
-        /** @type {Teriock.MessageData.MessageAssociation} */
-        const association = {
-          title: titleString,
-          icon: TERIOCK.options.document.creature.icon,
-          cards: [],
-        };
-        for (const uuid of uuids) {
-          effectObject.system.impacts.changes.push({
-            key: `system.conditionInformation.${key}.trackers`,
-            value: uuid,
-            mode: 2,
-            priority: 10,
-          });
-          const doc = fromUuidSync(uuid);
-          association.cards.push({
-            name: doc.name,
-            img: doc.texture?.src,
-            uuid: uuid,
-            rescale: doc.rescale,
-            id: doc.id,
-            type: "base",
-          });
-        }
-        effectObject.system.associations.push(association);
-        button.dataset[useType] = JSON.stringify(effectObject);
-      }
-    }
-  }
-}
-
-/**
- * Add a tracker to roll config.
- * @param {AbilityExecution} execution
- * @param {string} tracker
- * @param {UUID<TeriockTokenDocument|TeriockActor>} uuid
- * @returns {Promise<void>}
- */
-export async function addTrackerToExecution(execution, tracker, uuid) {
-  await addTrackersToExecution(execution, tracker, [uuid]);
 }
 
 /**

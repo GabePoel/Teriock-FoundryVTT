@@ -1,7 +1,4 @@
-import {
-  getRollIcon,
-  makeIconClass
-} from "../../utils.mjs";
+import { getRollIcon, makeIconClass } from "../../utils.mjs";
 import commands from "../commands/_module.mjs";
 import AbstractButtonHandler from "./abstract-button-handler.mjs";
 

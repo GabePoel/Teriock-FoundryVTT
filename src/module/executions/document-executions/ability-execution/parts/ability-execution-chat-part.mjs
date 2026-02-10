@@ -1,13 +1,14 @@
 import {
   selectDocumentDialog,
-  selectDocumentsDialog
+  selectDocumentsDialog,
 } from "../../../../applications/dialogs/select-document-dialog.mjs";
+import { conditionDialog } from "../../../../applications/dialogs/select-token-dialog.mjs";
 import {
   ChangesAutomation,
   CombatExpirationAutomation,
   DurationAutomation,
   StatusAutomation,
-  TransformationAutomation
+  TransformationAutomation,
 } from "../../../../data/pseudo-documents/automations/_module.mjs";
 import { TeriockRoll } from "../../../../dice/_module.mjs";
 import { TeriockFolder } from "../../../../documents/_module.mjs";
@@ -16,6 +17,7 @@ import { ApplyEffectHandler } from "../../../../helpers/interaction/button-handl
 import { RollRollableTakeHandler } from "../../../../helpers/interaction/button-handlers/rollable-takes-handlers.mjs";
 import { FeatHandler } from "../../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
 import standardDamageCommand from "../../../../helpers/interaction/commands/standard-damage-command.mjs";
+import { safeUuid } from "../../../../helpers/resolve.mjs";
 
 /**
  * @param {typeof AbilityExecutionConstructor} Base
@@ -27,102 +29,100 @@ export default function AbilityExecutionChatPart(Base) {
      * @mixin
      */
     class AbilityExecutionChat extends Base {
-      /**
-       * Get all active automations of a given type.
-       * @template T
-       * @param {T} automation
-       * @param {boolean} crit
-       * @returns {T[]}
-       */
-      #getCritAutomations(automation, crit) {
-        const automations =
-          /** @type {CritAutomation[]} */ this.activeAutomations;
-        return automations.filter(
-          (a) =>
-            a.type === automation.TYPE &&
-            ((crit && a.crit?.has(1)) || (!crit && a.crit?.has(0))),
-        );
-      }
+      /** @type {Record<string, Teriock.MessageData.MessageAssociation[]>} */
+      #associationMap;
 
-      /** @inheritDoc */
-      async _buildButtons() {
-        // Build feat save button
-        if (this.source.system.interaction === "feat") {
-          this.buttons.push(
-            FeatHandler.buildButton(
-              this.source.system.featSaveAttribute,
-              this.rolls[0].total,
+      /** @type {Record<string, Teriock.Changes.QualifiedChangeData[]>} */
+      #trackerMap;
+
+      /**
+       * @param {Teriock.MessageData.MessageAssociation} association
+       * @param {string} key
+       */
+      #addAssociationToMap(association, key) {
+        const associations = this.#associationMap[key];
+        const existing = associations.find(
+          (a) => a.title === association.title,
+        );
+        if (!existing) {
+          associations.push(association);
+        } else {
+          existing.cards.push(
+            ...association.cards.filter(
+              (c) => !existing.cards.map((e) => e.uuid).includes(c.uuid),
             ),
           );
         }
+      }
 
-        // Build apply effects button
-        if (
-          (this.mergeImpactsNumber("duration") > 0 ||
-            this.source.system.duration.unit !== "instant") &&
-          this.source.system.maneuver !== "passive"
-        ) {
-          const normalEffectData = await this.generateConsequence();
-          const critEffectData = await this.generateConsequence(true);
-          this.buttons.push(
-            ApplyEffectHandler.buildButton(normalEffectData, {
-              secondaryData: critEffectData,
-              sustainingAbility: this.source,
-              bonusSubs: new Set(this.source.subs.map((s) => s.uuid)),
-            }),
-          );
-        }
-
-        // Add armament to standard damage button
-        const standardDamageButton = this.buttons.find(
-          (b) => b.dataset?.action === standardDamageCommand.id,
+      /**
+       * @param {Teriock.Changes.QualifiedChangeData[]} trackers
+       * @param {string} key
+       */
+      #addTrackersToMap(trackers, key) {
+        this.#trackerMap[key].push(
+          ...trackers.filter(
+            (t) => !this.#trackerMap[key].map((e) => e.value).includes(t.value),
+          ),
         );
-        if (standardDamageButton && this.armament) {
-          standardDamageButton.dataset.armament = this.armament.uuid;
-        }
-
-        // Add all pre-defined buttons
-        await super._buildButtons();
-
-        // Replace `@h` with heighten amount in all rolls
-        this.buttons
-          .filter((b) => b.dataset?.action === RollRollableTakeHandler.ACTION)
-          .forEach((b) => {
-            b.dataset.formula = this._heightenString(b.dataset.formula);
-          });
       }
 
-      /** @inheritDoc */
-      async _buildTags() {
-        if (this.source.system.interaction === "attack" && this.ub) {
-          this.tags.push("Unblockable");
+      /**
+       * @param {StatusAutomation} automation
+       * @param {UUID<TeriockTokenDocument|TeriockActor>[]} uuids
+       */
+      #attachTrackedStatusAutomationUuids(automation, uuids) {
+        /** @type {Teriock.MessageData.MessageAssociation} */
+        const association = {
+          title: `${TERIOCK.index.conditions[automation.status]} With Respect To`,
+          icon: TERIOCK.options.document.creature.icon,
+          cards: uuids.map((uuid) => this.#generateAssociationCard(uuid)),
+        };
+        const trackers = uuids.map((uuid) =>
+          this.#generateConditionTracker(automation.status, uuid),
+        );
+        if (automation.crit.has(0)) {
+          this.#addAssociationToMap(association, "normal");
+          this.#addTrackersToMap(trackers, "normal");
         }
-        if (this.warded) {
-          this.tags.push("Warded");
-        }
-        if (this.vitals) {
-          this.tags.push("Vitals");
-        }
-        if (this.heightened > 0) {
-          this.tags.push(
-            `Heightened ${this.heightened} Time${this.heightened === 1 ? "" : "s"}`,
-          );
-        }
-        if (this.costs.mp > 0) {
-          this.tags.push(`${this.costs.mp} MP Spent`);
-        }
-        if (this.costs.hp > 0) {
-          this.tags.push(`${this.costs.hp} HP Spent`);
-        }
-        if (this.costs.gp > 0) {
-          this.tags.push(`${this.costs.gp} ₲ Spent`);
+        if (automation.crit.has(1)) {
+          this.#addAssociationToMap(association, "crit");
+          this.#addTrackersToMap(trackers, "crit");
         }
       }
 
-      /** @inheritDoc */
-      async _createChatMessage() {
-        await this.executePseudoHookMacros("preExecution");
-        await super._createChatMessage();
+      /**
+       * Generate an association card.
+       * @param {UUID<TeriockTokenDocument|TeriockActor>} uuid
+       * @returns {Teriock.MessageData.MessageAssociationCard}
+       */
+      #generateAssociationCard(uuid) {
+        const doc = fromUuidSync(uuid);
+        return {
+          name: doc.name,
+          img: doc.imageLive || doc.img,
+          uuid,
+          rescale: doc.rescale,
+          id: doc.id,
+          type: "base",
+        };
+      }
+
+      /**
+       * Generate a condition tracker.
+       * @param {Teriock.Parameters.Condition.ConditionKey} status
+       * @param {UUID<TeriockTokenDocument|TeriockActor>} uuid
+       * @returns {Teriock.Changes.QualifiedChangeData}
+       */
+      #generateConditionTracker(status, uuid) {
+        return {
+          key: `system.conditionInformation.${status}.trackers`,
+          value: safeUuid(uuid),
+          mode: 2,
+          priority: 10,
+          target: "Actor",
+          qualifier: "1",
+        };
       }
 
       /**
@@ -130,35 +130,77 @@ export default function AbilityExecutionChatPart(Base) {
        * @param {boolean} crit
        * @returns {Promise<object>}
        */
-      async generateConsequence(crit = false) {
-        // Get statuses from automations
-        const statusAutomations = this.#getCritAutomations(
-          StatusAutomation,
-          crit,
-        );
-        const statuses = statusAutomations
-          .filter((a) => a.relation === "include")
-          .map((a) => a.status);
+      async #generateConsequence(crit = false) {
+        return {
+          changes: [],
+          duration: {
+            seconds: await this.#generateConsequenceDuration(crit),
+          },
+          img: this.source.img,
+          name: `${this.source.name} Effect`,
+          statuses: this.#generateConsequenceStatuses(crit),
+          system: {
+            associations: [],
+            blocks: this.source.system.panelParts.blocks,
+            critical: crit,
+            deleteOnExpire: true,
+            expirations: {
+              combat: this.#generateConsequenceCombatExpiration(crit),
+              conditions: {
+                absent: Array.from(
+                  this.source.system.duration.conditions.absent,
+                ),
+                present: Array.from(
+                  this.source.system.duration.conditions.present,
+                ),
+              },
+              movement: this.source.system.duration.stationary,
+              dawn: this.source.system.duration.dawn,
+              sustained: this.source.system.sustained,
+              description: this.source.system.endCondition,
+            },
+            heightened: this.heightened,
+            impacts: {
+              changes: this.#generateConsequenceChanges(crit),
+            },
+            source: this.source.uuid,
+            transformation: this.#generateConsequenceTransformation(crit),
+          },
+          type: "consequence",
+        };
+      }
 
-        // Mutate duration with automations
-        const durationAutomations = this.#getCritAutomations(
-          DurationAutomation,
-          crit,
-        );
-        let durationFormula = this.source.system.duration.formula;
-        durationAutomations.forEach((a) => {
-          const formula = a.duration.formula;
-          durationFormula = manipulateFormula(durationFormula, formula, a.mode);
-        });
-        let durationValue = await TeriockRoll.getValue(
-          durationFormula,
-          this.rollData,
-        );
-        if (durationValue > Number("9".repeat(30))) {
-          durationValue = undefined;
+      /**
+       * Generate associations for both crit and normal consequences.
+       * @returns {Promise<void>}
+       */
+      async #generateConsequenceAssociations() {
+        this.#associationMap = { crit: [], normal: [] };
+        this.#trackerMap = { crit: [], normal: [] };
+        const statusAutomations =
+          /** @type {StatusAutomation[]} */ this.activeAutomations.filter(
+            (a) => a.type === StatusAutomation.TYPE,
+          );
+        const targetAutomations = statusAutomations.filter((a) => a.target);
+        for (const a of targetAutomations) {
+          const uuids = await conditionDialog(a.status);
+          this.#attachTrackedStatusAutomationUuids(a, uuids);
         }
+        const executorAutomations = statusAutomations.filter((a) => a.executor);
+        for (const a of executorAutomations) {
+          const uuid =
+            this.actor.defaultToken?.document?.uuid || this.actor?.uuid;
+          if (uuid) {
+            this.#attachTrackedStatusAutomationUuids(a, [uuid]);
+          }
+        }
+      }
 
-        // Get changes from automations
+      /**
+       * @param {boolean} crit
+       * @returns {object[]}
+       */
+      #generateConsequenceChanges(crit = false) {
         const changesAutomations = this.#getCritAutomations(
           ChangesAutomation,
           crit,
@@ -170,8 +212,15 @@ export default function AbilityExecutionChatPart(Base) {
         changes.forEach((c) => {
           c.value = this._heightenString(c.value);
         });
+        changes.push(...this.source.system.pseudoHookChanges);
+        return changes;
+      }
 
-        // Get combat expiration from automations
+      /**
+       * @param {boolean} crit
+       * @returns {Partial<CombatExpiration>}
+       */
+      #generateConsequenceCombatExpiration(crit = false) {
         /** @type {Partial<CombatExpiration>} */
         const combatExpiration = {};
         const combatExpirationAutomations = this.#getCritAutomations(
@@ -189,11 +238,52 @@ export default function AbilityExecutionChatPart(Base) {
           );
           combatExpiration.who.source = this.actor?.uuid;
         });
+        return combatExpiration;
+      }
 
-        // TODO: Have abilities get their pseudoHooks from automations
-        changes.push(...this.source.system.pseudoHookChanges);
+      /**
+       * @param {boolean} crit
+       * @returns {Promise<number>}
+       */
+      async #generateConsequenceDuration(crit = false) {
+        const durationAutomations = this.#getCritAutomations(
+          DurationAutomation,
+          crit,
+        );
+        let durationFormula = this.source.system.duration.formula;
+        durationAutomations.forEach((a) => {
+          const formula = a.duration.formula;
+          durationFormula = manipulateFormula(durationFormula, formula, a.mode);
+        });
+        let durationValue = await TeriockRoll.getValue(
+          durationFormula,
+          this.rollData,
+        );
+        if (durationValue > Number("9".repeat(30))) {
+          durationValue = undefined;
+        }
+        return durationValue;
+      }
 
-        // Get transformation from automations
+      /**
+       * @param {boolean} crit
+       * @returns {Teriock.Parameters.Consequence.RollConsequenceKey[]}
+       */
+      #generateConsequenceStatuses(crit = false) {
+        const statusAutomations = this.#getCritAutomations(
+          StatusAutomation,
+          crit,
+        );
+        return statusAutomations
+          .filter((a) => a.relation === "include")
+          .map((a) => a.status);
+      }
+
+      /**
+       * @param {boolean} crit
+       * @returns {Promise<Partial<TransformationConfigurationField>>}
+       */
+      async #generateConsequenceTransformation(crit = false) {
         const transformationAutomations = this.#getCritAutomations(
           TransformationAutomation,
           crit,
@@ -249,44 +339,107 @@ export default function AbilityExecutionChatPart(Base) {
             }
           }
         }
+        return transformation;
+      }
 
-        return {
-          changes: [],
-          duration: {
-            seconds: durationValue,
-          },
-          img: this.source.img,
-          name: `${this.source.name} Effect`,
-          statuses: Array.from(statuses),
-          system: {
-            associations: [],
-            blocks: this.source.system.panelParts.blocks,
-            critical: crit,
-            deleteOnExpire: true,
-            expirations: {
-              combat: combatExpiration,
-              conditions: {
-                absent: Array.from(
-                  this.source.system.duration.conditions.absent,
-                ),
-                present: Array.from(
-                  this.source.system.duration.conditions.present,
-                ),
-              },
-              movement: this.source.system.duration.stationary,
-              dawn: this.source.system.duration.dawn,
-              sustained: this.source.system.sustained,
-              description: this.source.system.endCondition,
-            },
-            heightened: this.heightened,
-            impacts: {
-              changes: changes,
-            },
-            source: this.source.uuid,
-            transformation: transformation,
-          },
-          type: "consequence",
-        };
+      /**
+       * Get all active automations of a given type.
+       * @template T
+       * @param {T} automation
+       * @param {boolean} crit
+       * @returns {T[]}
+       */
+      #getCritAutomations(automation, crit) {
+        const automations =
+          /** @type {CritAutomation[]} */ this.activeAutomations;
+        return automations.filter(
+          (a) =>
+            a.type === automation.TYPE &&
+            ((crit && a.crit?.has(1)) || (!crit && a.crit?.has(0))),
+        );
+      }
+
+      /** @inheritDoc */
+      async _buildButtons() {
+        // Build feat save button
+        if (this.source.system.interaction === "feat") {
+          this.buttons.push(
+            FeatHandler.buildButton(
+              this.source.system.featSaveAttribute,
+              this.rolls[0].total,
+            ),
+          );
+        }
+
+        // Build apply effects button
+        if (
+          this.source.system.duration.unit !== "instant" &&
+          this.source.system.maneuver !== "passive"
+        ) {
+          const normalEffectData = await this.#generateConsequence(false);
+          const critEffectData = await this.#generateConsequence(true);
+          await this.#generateConsequenceAssociations();
+          normalEffectData.system.associations = this.#associationMap["normal"];
+          normalEffectData.system.impacts.changes.push(
+            ...this.#trackerMap["normal"],
+          );
+          critEffectData.system.associations = this.#associationMap["crit"];
+          critEffectData.system.impacts.changes.push(
+            ...this.#trackerMap["crit"],
+          );
+          this.buttons.push(
+            ApplyEffectHandler.buildButton(normalEffectData, {
+              secondaryData: critEffectData,
+              sustainingAbility: this.source,
+              bonusSubs: new Set(this.source.subs.map((s) => s.uuid)),
+            }),
+          );
+        }
+
+        // Add armament to standard damage button
+        const standardDamageButton = this.buttons.find(
+          (b) => b.dataset?.action === standardDamageCommand.id,
+        );
+        if (standardDamageButton && this.armament) {
+          standardDamageButton.dataset.armament = this.armament.uuid;
+        }
+
+        // Add all pre-defined buttons
+        await super._buildButtons();
+
+        // Replace `@h` with heighten amount in all rolls
+        this.buttons
+          .filter((b) => b.dataset?.action === RollRollableTakeHandler.ACTION)
+          .forEach((b) => {
+            b.dataset.formula = this._heightenString(b.dataset.formula);
+          });
+      }
+
+      /** @inheritDoc */
+      async _buildTags() {
+        if (this.source.system.interaction === "attack" && this.ub) {
+          this.tags.push("Unblockable");
+        }
+        if (this.warded) {
+          this.tags.push("Warded");
+        }
+        if (this.vitals) {
+          this.tags.push("Vitals");
+        }
+        if (this.heightened > 0) {
+          this.tags.push(
+            `Heightened ${this.heightened} Time${this.heightened === 1 ? "" : "s"}`,
+          );
+        }
+        if (this.costs.mp > 0) {
+          this.tags.push(`${this.costs.mp} MP Spent`);
+        }
+        if (this.costs.hp > 0) {
+          this.tags.push(`${this.costs.hp} HP Spent`);
+        }
+        if (this.costs.gp > 0) {
+          this.tags.push(`${this.costs.gp} ₲ Spent`);
+        }
       }
     }
   );

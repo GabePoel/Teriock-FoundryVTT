@@ -1,7 +1,4 @@
-import { selectDialog } from "../../../../applications/dialogs/select-dialog.mjs";
-import { pseudoHooks } from "../../../../constants/system/pseudo-hooks.mjs";
 import { AbilityExecution } from "../../../../executions/document-executions/_module.mjs";
-import { safeUuid } from "../../../../helpers/resolve.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
@@ -21,7 +18,7 @@ import * as parts from "./parts/_module.mjs";
  * @mixes AbilityDurationPart
  * @mixes AbilityGeneralPart
  * @mixes AbilityHierarchyPart
- * @mixes AbilityImpactsPart
+ * @mixes AbilityAutomationsPart
  * @mixes AbilityUpgradesPart
  * @mixes AbilityPanelPart
  * @mixes ConsumableSystem
@@ -45,7 +42,7 @@ export default class AbilitySystem extends mix(
   parts.AbilityDurationPart,
   parts.AbilityGeneralPart,
   parts.AbilityHierarchyPart,
-  parts.AbilityImpactsPart,
+  parts.AbilityAutomationsPart,
   parts.AbilityImprovementsPart,
   parts.AbilityPanelPart,
   parts.AbilityRankPart,
@@ -451,23 +448,6 @@ export default class AbilitySystem extends mix(
   }
 
   /**
-   * Change a macro's run hook.
-   * @param {UUID<TeriockMacro>} uuid
-   * @returns {Promise<void>}
-   */
-  async changeMacroRunHook(uuid) {
-    const pseudoHook = await selectDialog(pseudoHooks, {
-      label: "Event",
-      hint: "Please select an event that triggers this macro to run.",
-      title: "Select Event",
-      initial: this.impacts.macros[safeUuid(uuid)],
-    });
-    const updateData = {};
-    updateData[`system.impacts.macros.${safeUuid(uuid)}`] = pseudoHook;
-    await this.parent.update(updateData);
-  }
-
-  /**
    * Cause all consequences this is sustaining to expire.
    * @param {boolean} force - Force consequences to expire even if this isn't suppressed.
    */
@@ -525,16 +505,5 @@ export default class AbilitySystem extends mix(
       });
     }
     return rollData;
-  }
-
-  /**
-   * Unlink a macro.
-   * @param {UUID<TeriockMacro>} uuid
-   * @returns {Promise<void>}
-   */
-  async unlinkMacro(uuid) {
-    const updateData = {};
-    updateData[`system.impacts.macros.-=${safeUuid(uuid)}`] = null;
-    await this.parent.update(updateData);
   }
 }

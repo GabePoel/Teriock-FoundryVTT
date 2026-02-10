@@ -5,6 +5,7 @@ import { dotJoin } from "../../../../helpers/string.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
 import { TextField } from "../../../fields/_module.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
+import { CommonMacroAutomation } from "../../../pseudo-documents/automations/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
 
@@ -19,7 +20,6 @@ const { fields } = foundry.data;
  *
  * @extends {BaseEffectSystem}
  * @implements {Teriock.Models.FluencySystemInterface}
- * @mixes ExecutableSystem
  * @mixes CompetenceDisplaySystem
  * @mixes RevelationSystem
  * @mixes ThresholdSystem
@@ -27,12 +27,16 @@ const { fields } = foundry.data;
  */
 export default class FluencySystem extends mix(
   BaseEffectSystem,
-  mixins.ExecutableSystemMixin,
   mixins.WikiSystemMixin,
   mixins.RevelationSystemMixin,
   mixins.ThresholdSystemMixin,
   mixins.CompetenceDisplaySystemMixin,
 ) {
+  /** @inheritDoc */
+  static get _automationTypes() {
+    return [CommonMacroAutomation];
+  }
+
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {

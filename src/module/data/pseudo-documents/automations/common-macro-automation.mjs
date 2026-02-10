@@ -1,4 +1,4 @@
-import { propertyPseudoHooks } from "../../../constants/system/pseudo-hooks.mjs";
+import { commonPseudoHooks } from "../../../constants/system/pseudo-hooks.mjs";
 import BaseAutomation from "./base-automation.mjs";
 import { MacroAutomationMixin } from "./mixins/_module.mjs";
 
@@ -7,16 +7,16 @@ import { MacroAutomationMixin } from "./mixins/_module.mjs";
  * @extends {BaseAutomation}
  * @mixes MacroAutomation
  */
-export default class PropertyMacroAutomation extends MacroAutomationMixin(
+export default class CommonMacroAutomation extends MacroAutomationMixin(
   BaseAutomation,
 ) {
   /** @inheritDoc */
   static get TYPE() {
-    return "propertyMacro";
+    return "commonMacro";
   }
 
   /** @inheritDoc */
   static get _pseudoHookChoices() {
-    return propertyPseudoHooks;
+    return commonPseudoHooks;
   }
 }

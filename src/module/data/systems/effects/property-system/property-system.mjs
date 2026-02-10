@@ -1,15 +1,7 @@
-import { selectDialog } from "../../../../applications/dialogs/select-dialog.mjs";
-import { propertyPseudoHooks } from "../../../../constants/system/pseudo-hooks.mjs";
-import { safeUuid } from "../../../../helpers/resolve.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
 import { FormulaField, TextField } from "../../../fields/_module.mjs";
-import { qualifiedChangeField } from "../../../fields/helpers/builders.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import { PropertyMacroAutomation } from "../../../pseudo-documents/automations/_module.mjs";
-import {
-  qualifyChange,
-  scaleChange,
-} from "../../../shared/migrations/migrate-changes.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
 
@@ -79,17 +71,6 @@ export default class PropertySystem extends mix(
       damageType: new fields.StringField({ initial: "" }),
       extraDamage: new FormulaField({ deterministic: false }),
       form: new fields.StringField({ initial: "normal" }),
-      impacts: new fields.SchemaField({
-        changes: new fields.ArrayField(qualifiedChangeField(), {
-          label: "Changes",
-          hint: "Changes made to the target equipment as part of the property's ongoing effects.",
-        }),
-        macros: new fields.TypedObjectField(
-          new fields.StringField({
-            choices: propertyPseudoHooks,
-          }),
-        ),
-      }),
       improvement: new TextField({
         initial: "",
         label: "Improvement",
@@ -113,19 +94,6 @@ export default class PropertySystem extends mix(
         data,
         "form",
         foundry.utils.getProperty(data, "propertyType"),
-      );
-    }
-
-    // Impact migration
-    if (foundry.utils.hasProperty(data, "applies")) {
-      data.impacts = foundry.utils.getProperty(data, "applies");
-      foundry.utils.deleteProperty(data, "applies");
-    }
-
-    // Changes migration
-    if (data.impacts?.changes) {
-      data.impacts.changes = data.impacts.changes.map((c) =>
-        scaleChange(qualifyChange(c)),
       );
     }
     return super.migrateData(data);
@@ -249,23 +217,6 @@ export default class PropertySystem extends mix(
     });
   }
 
-  /**
-   * Change a macro's run hook.
-   * @param {UUID<TeriockMacro>} uuid
-   * @returns {Promise<void>}
-   */
-  async changeMacroRunHook(uuid) {
-    const pseudoHook = await selectDialog(propertyPseudoHooks, {
-      label: "Event",
-      hint: "Please select an event that triggers this macro to run.",
-      title: "Select Event",
-      initial: this.impacts.macros[safeUuid(uuid)],
-    });
-    const updateData = {};
-    updateData[`system.impacts.macros.${safeUuid(uuid)}`] = pseudoHook;
-    await this.parent.update(updateData);
-  }
-
   /** @inheritDoc */
   getLocalRollData() {
     return {
@@ -276,16 +227,5 @@ export default class PropertySystem extends mix(
       [`damage.type.${this.damageType.toLowerCase()}`]: 1,
       "damage.extra": this.extraDamage,
     };
-  }
-
-  /**
-   * Unlink a macro.
-   * @param {UUID<TeriockMacro>} uuid
-   * @returns {Promise<void>}
-   */
-  async unlinkMacro(uuid) {
-    const updateData = {};
-    updateData[`system.impacts.macros.-=${safeUuid(uuid)}`] = null;
-    await this.parent.update(updateData);
   }
 }

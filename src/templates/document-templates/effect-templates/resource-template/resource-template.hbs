@@ -1,12 +1,16 @@
 <div class="{{cssClass}} tsheet-page">
-  <div class="ab-sheet-everything">
-    <div class="ab-sheet-top">
-      {{> (template "document-templates/shared/header.hbs")}}
-      <div class="ab-bars">
-        {{> (template "document-templates/shared/consumable-bar.hbs")}}
+  {{#if (eq tab "overview")}}
+    <div class="ab-sheet-everything">
+      <div class="ab-sheet-top">
+        {{> (template "document-templates/shared/header.hbs")}}
+        <div class="ab-bars">
+          {{> (template "document-templates/shared/consumable-bar.hbs")}}
+        </div>
       </div>
+      {{> (template "document-templates/shared/simple-menu.hbs")}}
     </div>
-    {{> (template "document-templates/shared/simple-menu.hbs")}}
-    {{> (template "document-templates/shared/macros.hbs")}}
-  </div>
+  {{/if}}
+  {{#if (eq tab "impacts")}}
+    {{> (template "document-templates/shared/automations-tab.hbs")}}
+  {{/if}}
 </div>

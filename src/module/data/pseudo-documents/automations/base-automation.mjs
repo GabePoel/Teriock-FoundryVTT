@@ -8,10 +8,14 @@ const { fields } = foundry.data;
  * @implements {Teriock.Models.BaseAutomationInterface}
  */
 export default class BaseAutomation extends TypedPseudoDocument {
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @returns {{ documentName: "Automation", macro: boolean }}
+   */
   static get metadata() {
     return Object.assign(super.metadata, {
       documentName: "Automation",
+      macro: false,
     });
   }
 
