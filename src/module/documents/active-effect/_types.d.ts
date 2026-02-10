@@ -6,7 +6,7 @@ declare module "./effect.mjs" {
   export default interface TeriockActiveEffect
     extends Teriock.Documents.Interface<Teriock.Documents.NullDocument> {
     disabled: boolean;
-    parent: TeriockParent;
+    parent: GenericParent;
     sheet: BaseEffectSheet;
     system: BaseEffectSystem;
 

@@ -206,7 +206,9 @@ export default class EquipmentSystem extends mix(
       /** @type {Teriock.Execution.EquipmentExecutionOptions} */
       super.parseEvent(event);
     Object.assign(options, {
-      secret: event.shiftKey,
+      secret: game.settings.get("teriock", "secretEquipment")
+        ? !event.shiftKey
+        : event.shiftKey,
     });
     return options;
   }

@@ -4,6 +4,10 @@ declare global {
       secret?: boolean;
       twoHanded?: boolean;
     };
+
+    export interface EquipmentExecutionInterface {
+      get source(): TeriockEquipment;
+    }
   }
 }
 
