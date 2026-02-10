@@ -1,23 +1,17 @@
 import {
   selectDocumentDialog,
-  selectDocumentsDialog,
+  selectDocumentsDialog
 } from "../../../../applications/dialogs/select-document-dialog.mjs";
 import {
   ChangesAutomation,
   CombatExpirationAutomation,
   DurationAutomation,
-  RollAutomation,
   StatusAutomation,
-  TransformationAutomation,
+  TransformationAutomation
 } from "../../../../data/pseudo-documents/automations/_module.mjs";
 import { TeriockRoll } from "../../../../dice/_module.mjs";
 import { TeriockFolder } from "../../../../documents/_module.mjs";
-import {
-  addFormula,
-  boostFormula,
-  formulaExists,
-  manipulateFormula,
-} from "../../../../helpers/formula.mjs";
+import { manipulateFormula } from "../../../../helpers/formula.mjs";
 import { ApplyEffectHandler } from "../../../../helpers/interaction/button-handlers/apply-effect-handlers.mjs";
 import { RollRollableTakeHandler } from "../../../../helpers/interaction/button-handlers/rollable-takes-handlers.mjs";
 import { FeatHandler } from "../../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
@@ -85,29 +79,6 @@ export default function AbilityExecutionChatPart(Base) {
         );
         if (standardDamageButton && this.armament) {
           standardDamageButton.dataset.armament = this.armament.uuid;
-        }
-
-        // Add merged roll automation buttons
-        const rollAutomations =
-          /** @type {RollAutomation[]} */ this.activeAutomations.filter(
-            (a) => a.type === RollAutomation.TYPE,
-          );
-        const mergeRollAutomations = rollAutomations.filter((a) => a.merge);
-        const rollTypes = new Set(mergeRollAutomations.map((a) => a.roll));
-        for (const rollType of rollTypes) {
-          let formula = "";
-          mergeRollAutomations
-            .filter((a) => a.roll === rollType)
-            .forEach((a) => (formula = addFormula(formula, a.formula)));
-          const boostAmount = this.source.system.boosts[rollType];
-          if (formulaExists(boostAmount)) {
-            formula = boostFormula(formula, boostAmount);
-          }
-          if (formula && TERIOCK.options.take[rollType]) {
-            this.buttons.push(
-              RollRollableTakeHandler.buildButton(rollType, formula),
-            );
-          }
         }
 
         // Add all pre-defined buttons

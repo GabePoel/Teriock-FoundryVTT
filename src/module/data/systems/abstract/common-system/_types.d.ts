@@ -15,6 +15,8 @@ declare global {
     export interface CommonSystemInterface {
       /** <schema> Automations */
       automations: TypeCollection<ID<BaseAutomation>, BaseAutomation>;
+      /** <base> Boosts formulas by roll type */
+      boosts: Record<Teriock.Parameters.Consequence.RollConsequenceKey, string>;
       /** <schema> Journal entry page only accessible to GM */
       gmNotes: UUID<TeriockJournalEntryPage>;
 

@@ -199,9 +199,11 @@ export function sortObject(obj) {
 
 /**
  * Map the values of an object.
- * @param {Record<string, any>} obj
- * @param {(any) => any} fn
- * @returns {Record<string, any>}
+ * @template T
+ * @template U
+ * @param {Record<string, T>} obj
+ * @param {(T) => U} fn
+ * @returns {Record<string, U>}
  */
 export function objectMap(obj, fn) {
   return Object.fromEntries(Object.entries(obj).map(([k, v]) => [k, fn(v)]));

@@ -1,4 +1,7 @@
-import { getRollIcon, makeIconClass } from "../../utils.mjs";
+import {
+  getRollIcon,
+  makeIconClass
+} from "../../utils.mjs";
 import commands from "../commands/_module.mjs";
 import AbstractButtonHandler from "./abstract-button-handler.mjs";
 
@@ -13,15 +16,18 @@ export class RollRollableTakeHandler extends AbstractButtonHandler {
    * @inheritDoc
    * @param {string} rollType
    * @param {string} formula
+   * @param {object} [options]
+   * @param {boolean} [options.merge]
    * @returns {Teriock.UI.HTMLButtonConfig}
    */
-  static buildButton(rollType, formula) {
+  static buildButton(rollType, formula, options = { merge: true }) {
     const button = super.buildButton();
     button.icon = makeIconClass(getRollIcon(formula), "button");
     button.label = `Roll ${TERIOCK.options.take[rollType].label}`;
     button.dataset.type = rollType;
     button.dataset.formula = formula;
     button.dataset.tooltip = formula;
+    if (options.merge) button.dataset.merge = "true";
     return button;
   }
 

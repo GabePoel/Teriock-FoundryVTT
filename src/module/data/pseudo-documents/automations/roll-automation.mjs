@@ -1,3 +1,4 @@
+import { RollRollableTakeHandler } from "../../../helpers/interaction/button-handlers/rollable-takes-handlers.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 import BaseAutomation from "./base-automation.mjs";
 
@@ -50,5 +51,14 @@ export default class RollAutomation extends BaseAutomation {
     const paths = ["roll", "formula", "merge"];
     if (this.roll === "other") paths.push("title");
     return paths;
+  }
+
+  /** @inheritDoc */
+  get buttons() {
+    return [
+      RollRollableTakeHandler.buildButton(this.roll, this.formula, {
+        merge: this.merge,
+      }),
+    ];
   }
 }

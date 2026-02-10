@@ -85,13 +85,6 @@ export default (Base) => {
       }
 
       /** @inheritDoc */
-      prepareBaseData() {
-        super.prepareBaseData();
-        this.boosts =
-          /** @type {Record<Teriock.Parameters.Consequence.RollConsequenceKey, string>} */ {};
-      }
-
-      /** @inheritDoc */
       prepareDerivedData() {
         const keys = Object.keys(TERIOCK.options.consequence.rolls);
         for (const impact of [

@@ -309,6 +309,8 @@ export default class ChildSystem extends UsableDataMixin(CommonSystem) {
     super.prepareBaseData();
     this.qualifiers.suppressed.evaluate();
     this.qualifiers.ephemeral.evaluate();
+    this.boosts =
+      /** @type {Record<Teriock.Parameters.Consequence.RollConsequenceKey, string>} */ {};
   }
 
   /** @inheritDoc */

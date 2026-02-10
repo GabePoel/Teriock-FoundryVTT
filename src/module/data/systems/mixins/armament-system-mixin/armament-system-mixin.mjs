@@ -209,6 +209,7 @@ export default function ArmamentSystemMixin(Base) {
           super.parseEvent(event);
         Object.assign(options, {
           crit: event.altKey,
+          deals: Array.from(this.deals),
         });
         return options;
       }
@@ -216,6 +217,10 @@ export default function ArmamentSystemMixin(Base) {
       /** @inheritDoc */
       prepareBaseData() {
         super.prepareBaseData();
+
+        // What this deals
+        /** @type {Set<Record<Teriock.Parameters.Consequence.RollConsequenceKey>} */
+        this.deals = new Set(["damage"]);
 
         // Properties
         const properties =

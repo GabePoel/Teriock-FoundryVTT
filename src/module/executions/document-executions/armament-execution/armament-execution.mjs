@@ -1,9 +1,12 @@
-import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
+import {
+  addFormula,
+  formulaExists
+} from "../../../helpers/formula.mjs";
 import {
   makeDamageDrainTypePanels,
-  makeDamageTypeButtons,
+  makeDamageTypeButtons
 } from "../../../helpers/html.mjs";
-import { buttonHandlers } from "../../../helpers/interaction/_module.mjs";
+import { TakeRollableTakeHandler } from "../../../helpers/interaction/button-handlers/rollable-takes-handlers.mjs";
 import BaseDocumentExecution from "../base-document-execution/base-document-execution.mjs";
 
 /**
@@ -17,17 +20,9 @@ export default class ArmamentExecution extends BaseDocumentExecution {
     options = /** @type {Teriock.Execution.ArmamentExecutionOptions} */ {},
   ) {
     super(options);
-    const {
-      crit = false,
-      damage = true,
-      drain = false,
-      wither = false,
-      bonusDamage = "",
-    } = options;
+    const { crit = false, deals = ["damage"], bonusDamage = "" } = options;
     this.crit = crit;
-    this.damage = damage;
-    this.drain = drain;
-    this.wither = wither;
+    this.deals = new Set(deals);
     this.bonusDamage = bonusDamage;
     if (options.formula === undefined) {
       this.formula = this.source.system.damage.base.formula;
@@ -37,50 +32,35 @@ export default class ArmamentExecution extends BaseDocumentExecution {
   crit = false;
 
   /** @inheritDoc */
-  get flavor() {
-    if (this.damage && !this.drain && !this.wither) {
-      return "Damage Roll";
-    } else if (this.drain && !this.damage && !this.wither) {
-      return "Drain Roll";
-    } else if (this.wither && !this.damage && !this.drain) {
-      return "Wither Roll";
+  get activeAutomations() {
+    const automations = super.activeAutomations;
+    for (const property of this.source.properties) {
+      automations.push(...property.system.activeAutomations);
     }
-    return "Harm Roll";
+    return automations;
+  }
+
+  /** @inheritDoc */
+  get flavor() {
+    if (this.deals.size === 1) {
+      return `${TERIOCK.options.take[Array.from(this.deals)[0]].label} Roll`;
+    } else {
+      return "Multi-Effect Roll";
+    }
   }
 
   /** @inheritDoc */
   async _buildButtons() {
     if (this.rolls.length > 0) {
       const roll = this.rolls[0];
-      if (this.damage) {
+      for (const rollType of this.deals) {
         this.buttons.push(
-          buttonHandlers["take-rollable-take"].buildButton(
-            "damage",
-            roll.total,
-          ),
+          TakeRollableTakeHandler.buildButton(rollType, roll.total),
         );
       }
-      if (this.drain) {
-        this.buttons.push(
-          buttonHandlers["take-rollable-take"].buildButton("drain", roll.total),
-        );
+      if (this.deals.has("damage")) {
+        this.buttons.push(...makeDamageTypeButtons(roll));
       }
-      if (this.wither) {
-        this.buttons.push(
-          buttonHandlers["take-rollable-take"].buildButton(
-            "wither",
-            roll.total,
-          ),
-        );
-      }
-      this.buttons.push(...makeDamageTypeButtons(roll));
-    }
-    for (const property of this.source.properties) {
-      const newButtons = [];
-      property.system.activeAutomations.forEach((a) =>
-        newButtons.push(...a.buttons),
-      );
-      this.buttons.push(...newButtons);
     }
     await super._buildButtons();
   }
