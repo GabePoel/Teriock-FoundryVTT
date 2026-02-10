@@ -4,7 +4,7 @@ import { TeriockRoll } from "../../../dice/_module.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
 import {
   makeDamageDrainTypePanels,
-  makeDamageTypeButtons
+  makeDamageTypeButtons,
 } from "../../html.mjs";
 import { TakeRollableTakeHandler } from "../button-handlers/rollable-takes-handlers.mjs";
 import { formulaCommand } from "./abstract-command.mjs";

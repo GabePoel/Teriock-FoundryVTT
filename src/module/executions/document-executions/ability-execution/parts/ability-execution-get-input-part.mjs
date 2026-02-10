@@ -40,11 +40,14 @@ export default function AbilityExecutionGetInputPart(Base) {
        * @returns {Promise<void>}
        */
       async _getCostInput() {
+        const promptGp =
+          this.source.system.costs.gp.type === "variable" && !this.options.noGp;
+        const promptHp =
+          this.source.system.costs.hp.type === "variable" && !this.options.noHp;
+        const promptMp =
+          this.source.system.costs.mp.type === "variable" && !this.options.noMp;
         const dialogs = [];
-        if (
-          this.source.system.costs.mp.type === "variable" &&
-          !this.options.noMp
-        ) {
+        if (promptMp) {
           let mpDescription = this.source.system.costs.mp.value.variable;
           if (this.source.system.adept.enabled) {
             mpDescription +=
@@ -69,10 +72,7 @@ export default function AbilityExecutionGetInputPart(Base) {
         } else {
           this.costs.mp = await this.#determineCost("mp");
         }
-        if (
-          this.source.system.costs.hp.type === "variable" &&
-          !this.options.noHp
-        ) {
+        if (promptHp) {
           const hpDescription = await TeriockTextEditor.enrichHTML(
             this.source.system.costs.hp.value.variable,
           );
@@ -88,10 +88,7 @@ export default function AbilityExecutionGetInputPart(Base) {
         } else {
           this.costs.hp = await this.#determineCost("hp");
         }
-        if (
-          this.source.system.costs.gp.type === "variable" &&
-          !this.options.noGp
-        ) {
+        if (promptGp) {
           const gpDescription = await TeriockTextEditor.enrichHTML(
             this.source.system.costs.gp.value.variable,
           );
@@ -136,8 +133,12 @@ export default function AbilityExecutionGetInputPart(Base) {
             ok: {
               label: "Confirm",
               callback: (_event, button) => {
-                for (const cost of ["hp", "mp", "gp"]) {
-                  if (this.source.system.costs[cost].type === "variable") {
+                for (const [cost, toggle] of Object.entries({
+                  hp: promptHp,
+                  mp: promptMp,
+                  gp: promptGp,
+                })) {
+                  if (toggle) {
                     this.costs[cost] = Number(
                       button.form.elements.namedItem(cost).value,
                     );

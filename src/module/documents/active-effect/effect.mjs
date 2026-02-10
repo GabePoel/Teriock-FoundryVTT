@@ -1,5 +1,8 @@
 import { documentTypes } from "../../constants/system/document-types.mjs";
-import { ChildSettingsModel } from "../../data/models/settings-models/_module.mjs";
+import {
+  AbilitySettingsModel,
+  ChildSettingsModel,
+} from "../../data/models/settings-models/_module.mjs";
 import { secondsToReadable } from "../../helpers/unit.mjs";
 import { mix } from "../../helpers/utils.mjs";
 import TeriockItem from "../item/item.mjs";
@@ -49,6 +52,7 @@ export default class TeriockActiveEffect extends mix(
 
   /** @inheritDoc */
   get _settingsFlagsDataModel() {
+    if (this.type === "ability") return AbilitySettingsModel;
     return ChildSettingsModel;
   }
 

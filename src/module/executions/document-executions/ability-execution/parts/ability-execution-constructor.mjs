@@ -24,14 +24,22 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
     }
     let {
       armament = defaultArmament,
-      noHeighten = false,
-      noTemplate = false,
+      noHeighten = !this.source.getSetting("promptHeighten"),
+      noTemplate = !this.source.getSetting("promptTemplate"),
+      noGp = !this.source.getSetting("promptCostGp"),
+      noHp = !this.source.getSetting("promptCostHp"),
+      noMp = !this.source.getSetting("promptCostMp"),
       warded = this.source.system.warded,
       piercing = /** @type {PiercingModel} */ this.source.system.piercing.clone(),
       sb = this.actor?.system.offense.sb || 0,
       attackPenalty = "0",
       vitals = this.source.system.targets.has("vitals"),
     } = options;
+    Object.assign(this.options, {
+      noMp: noMp,
+      noGp: noGp,
+      noHp: noHp,
+    });
     this.armament = armament;
     if (this.armament && this.source.system.isContact) {
       if (

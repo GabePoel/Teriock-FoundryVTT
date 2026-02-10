@@ -1,7 +1,4 @@
-import {
-  copyRank,
-  getRank
-} from "../../../../../helpers/fetch.mjs";
+import { copyRank, getRank } from "../../../../../helpers/fetch.mjs";
 import { getImage } from "../../../../../helpers/path.mjs";
 import { newDocumentDialog } from "../../../../dialogs/_module.mjs";
 import {
@@ -10,7 +7,7 @@ import {
   selectClassDialog,
   selectEquipmentTypeDialog,
   selectPropertyDialog,
-  selectTradecraftDialog
+  selectTradecraftDialog,
 } from "../../../../dialogs/select-dialog.mjs";
 import { selectDocumentDialog } from "../../../../dialogs/select-document-dialog.mjs";
 
