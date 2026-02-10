@@ -16,6 +16,7 @@ export default (Base) => {
      * @mixin
      */
     class ActorDeathBagPart extends Base {
+      /** @inheritDoc */
       static defineSchema() {
         const schema = super.defineSchema();
         Object.assign(schema, {

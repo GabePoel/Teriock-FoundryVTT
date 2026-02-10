@@ -3,6 +3,7 @@ import ChildSettingsModel from "./child-settings-model.mjs";
 const { fields } = foundry.data;
 
 export default class AbilitySettingsModel extends ChildSettingsModel {
+  /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       promptCostGp: new fields.BooleanField({
