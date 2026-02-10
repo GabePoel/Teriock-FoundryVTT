@@ -15,6 +15,7 @@ export default function SidebarMixin(Base) {
         "templates/sidebar/document-partial.hbs",
       );
 
+      /** @inheritDoc */
       async _onRender(context, options) {
         await super._onRender(context, options);
         if (game.settings.get("teriock", "sidebarTooltips")) {
