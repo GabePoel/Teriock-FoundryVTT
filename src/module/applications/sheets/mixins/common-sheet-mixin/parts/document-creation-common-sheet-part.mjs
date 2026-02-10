@@ -1,4 +1,7 @@
-import { copyRank, getRank } from "../../../../../helpers/fetch.mjs";
+import {
+  copyRank,
+  getRank
+} from "../../../../../helpers/fetch.mjs";
 import { getImage } from "../../../../../helpers/path.mjs";
 import { newDocumentDialog } from "../../../../dialogs/_module.mjs";
 import {
@@ -7,7 +10,7 @@ import {
   selectClassDialog,
   selectEquipmentTypeDialog,
   selectPropertyDialog,
-  selectTradecraftDialog,
+  selectTradecraftDialog
 } from "../../../../dialogs/select-dialog.mjs";
 import { selectDocumentDialog } from "../../../../dialogs/select-document-dialog.mjs";
 
@@ -49,6 +52,7 @@ export default (Base) => {
         };
         if (decision === "import") {
           const out = await selectAbilityDialog();
+          if (!out) return;
           obj = out.toObject();
           if (out.sup?.type === "wrapper") {
             obj["_stats.compendiumSource"] = out.sup.uuid;
@@ -157,6 +161,7 @@ export default (Base) => {
         };
         if (decision === "import") {
           const out = await selectPropertyDialog();
+          if (!out) return;
           obj = out.toObject();
           if (out.sup?.type === "wrapper") {
             obj["_stats.compendiumSource"] = out.sup.uuid;
