@@ -65,16 +65,6 @@ export function getRollIcon(rollFormula) {
 }
 
 /**
- * Maximum of two transformation levels.
- * @param {Teriock.Parameters.Shared.TransformationLevel} l1
- * @param {Teriock.Parameters.Shared.TransformationLevel} l2
- * @returns {Teriock.Parameters.Shared.TransformationLevel}
- */
-export function upgradeTransformation(l1, l2) {
-  return l1 === "minor" || (l1 === "full" && l2 === "greater") ? l2 : l1;
-}
-
-/**
  * Make fields fancy.
  * @param {Teriock.Sheet.DisplayField[]} displayFields
  * @returns {Teriock.Sheet.FancyDisplayField[]}
@@ -106,33 +96,6 @@ export function fancifyFields(displayFields) {
       };
     })
     .filter((f) => f.visible);
-}
-
-//noinspection JSUnusedGlobalSymbols
-/**
- * Merge two objects and their arrays.
- * @param {object} original
- * @param {object} other
- * @returns {object}
- */
-export function deepMerge(original, other) {
-  const out = foundry.utils.deepClone(original);
-  for (const [k, v] of Object.entries(other)) {
-    const v1 = foundry.utils.deepClone(v);
-    if (k in out) {
-      const v0 = out[k];
-      if (Array.isArray(v0) && Array.isArray(v1)) {
-        v0.push(...v1);
-      } else if (typeof v0 === "object" && typeof v1 === "object") {
-        out[k] = deepMerge(out[v0], other[v1]);
-      } else {
-        out[k] = v1;
-      }
-    } else {
-      out[k] = v1;
-    }
-  }
-  return out;
 }
 
 /**

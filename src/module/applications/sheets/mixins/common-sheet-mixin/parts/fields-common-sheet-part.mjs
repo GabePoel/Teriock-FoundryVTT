@@ -61,45 +61,6 @@ export default (Base) => {
       }
 
       /**
-       * Adds a key to a record field with validation.
-       * @param {string} name - The field name.
-       * @param {string} key - The key to add.
-       * @param {Array} allowedKeys - Array of allowed keys.
-       * @returns {Promise<void>}
-       */
-      async _addToRecordField(name, key, allowedKeys = []) {
-        const existing = foundry.utils.getProperty(this.document, name);
-        const copy = foundry.utils.deepClone(existing) || {};
-        const updateData = {};
-        // Remove invalid keys
-        Object.keys(copy).forEach((k) => {
-          if (k !== key && !allowedKeys.includes(k)) {
-            updateData[`${name}.-=${k}`] = null;
-          }
-        });
-        updateData[`${name}.${key}`] = null;
-        await this.document.update(updateData);
-      }
-
-      /**
-       * Cleans a record field by removing invalid keys.
-       * @param {string} name - The field name.
-       * @param {Array} allowedKeys - Array of allowed keys to keep.
-       * @returns {Promise<void>}
-       */
-      async _cleanRecordField(name, allowedKeys = []) {
-        const existing = foundry.utils.getProperty(this.document, name);
-        const copy = foundry.utils.deepClone(existing) || {};
-        const updateData = {};
-        Object.keys(copy).forEach((k) => {
-          if (!allowedKeys.includes(k)) {
-            updateData[`${name}.-=${k}`] = null;
-          }
-        });
-        await this.document.update(updateData);
-      }
-
-      /**
        * Increment forwards.
        * @param {PointerEvent} _event
        * @param {HTMLElement} target
@@ -121,7 +82,6 @@ export default (Base) => {
       async _onRender(context, options) {
         await super._onRender(context, options);
         this._setupUpdateHandlers();
-        this._setupRecordFieldHandlers();
         this._setupChangeHandlers();
         this._setupIncrementHandlers();
       }
@@ -176,40 +136,6 @@ export default (Base) => {
             });
           },
         );
-      }
-
-      /**
-       * Sets up handlers for record field components.
-       * Configures multi-select inputs and remove buttons for record fields.
-       */
-      _setupRecordFieldHandlers() {
-        this.element
-          .querySelectorAll(".teriock-record-field")
-          .forEach((container) => {
-            const select = container.querySelector("select");
-            if (!select) return;
-            const name = container.getAttribute("name");
-            const allowedKeys = Array.from(select.options)
-              .map((option) => option.value)
-              .filter((value) => value !== "");
-            select.addEventListener("input", async () => {
-              await this._addToRecordField(name, select.value, allowedKeys);
-            });
-            container.querySelectorAll(".remove").forEach((btn) => {
-              btn.addEventListener("click", async (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                const target = /** @type {HTMLElement} */ e.currentTarget;
-                const closest =
-                  /** @type {HTMLElement} */ target.closest(".tag");
-                const key = closest.dataset.key;
-                await this._cleanRecordField(
-                  name,
-                  allowedKeys.filter((k) => k !== key),
-                );
-              });
-            });
-          });
       }
 
       /**
