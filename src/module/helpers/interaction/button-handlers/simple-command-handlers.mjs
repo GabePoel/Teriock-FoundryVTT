@@ -106,10 +106,12 @@ export class TradecraftCheckHandler extends CommandButtonHandlerBuilder(
   /**
    * @inheritDoc
    * @param {Teriock.Parameters.Fluency.Tradecraft} tradecraft
-   * @param {number} [threshold]
+   * @param {object} [options]
+   * @param {number} [options.threshold]
+   * @param {number|string} [options.bonus]
    */
-  static buildButton(tradecraft, threshold) {
-    const button = super.buildButton({ tradecraft, threshold });
+  static buildButton(tradecraft, { threshold, bonus }) {
+    const button = super.buildButton({ bonus, threshold, tradecraft });
     button.label = button.label.replace("Check", "").trim();
     return button;
   }
@@ -166,10 +168,12 @@ export class ToggleStatusHandler extends CommandButtonHandlerBuilder(
 export class ResistHandler extends CommandButtonHandlerBuilder(resistCommand) {
   /**
    * @inheritDoc
-   * @param {boolean} [hex]
+   * @param {object} [options]
+   * @param {boolean} [options.hex]
+   * @param {number|string} [options.bonus]
    */
-  static buildButton(hex) {
-    return super.buildButton({ hex });
+  static buildButton({ bonus, hex }) {
+    return super.buildButton({ bonus, hex });
   }
 }
 
@@ -180,9 +184,11 @@ export class FeatHandler extends CommandButtonHandlerBuilder(featCommand) {
   /**
    * @inheritDoc
    * @param {Teriock.Parameters.Actor.Attribute} attribute
-   * @param {number} [threshold]
+   * @param {object} [options]
+   * @param {number|string} [options.bonus]
+   * @param {number} [options.threshold]
    */
-  static buildButton(attribute, threshold) {
-    return super.buildButton({ attribute, threshold });
+  static buildButton(attribute, { bonus, threshold }) {
+    return super.buildButton({ attribute, bonus, threshold });
   }
 }

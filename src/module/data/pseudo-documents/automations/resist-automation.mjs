@@ -1,9 +1,9 @@
 import { ResistHandler } from "../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
-import BaseAutomation from "./base-automation.mjs";
+import ThresholdAutomation from "./threshold-automation.mjs";
 
 const { fields } = foundry.data;
 
-export default class ResistAutomation extends BaseAutomation {
+export default class ResistAutomation extends ThresholdAutomation {
   /** @inheritDoc */
   static get LABEL() {
     return "Resistance Save";
@@ -16,21 +16,28 @@ export default class ResistAutomation extends BaseAutomation {
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(super.defineSchema(), {
+    const schema = Object.assign(super.defineSchema(), {
       hex: new fields.BooleanField({
         label: "Hexproof",
         hint: "Whether this is a hexproof roll.",
       }),
     });
+    delete schema.threshold;
+    return schema;
   }
 
   /** @inheritDoc */
   get _formPaths() {
-    return [...super._formPaths, "hex"];
+    return ["hex", "bonus"];
   }
 
   /** @inheritDoc */
   get buttons() {
-    return [ResistHandler.buildButton(this.hex, this.threshold)];
+    return [
+      ResistHandler.buildButton({
+        bonus: this.bonus,
+        hex: this.hex,
+      }),
+    ];
   }
 }
