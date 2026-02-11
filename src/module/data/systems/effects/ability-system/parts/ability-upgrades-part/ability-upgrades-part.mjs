@@ -21,8 +21,7 @@ export default (Base) => {
     class AbilityUpgradesPart extends Base {
       /** @inheritDoc */
       static defineSchema() {
-        const schema = super.defineSchema();
-        Object.assign(schema, {
+        return Object.assign(super.defineSchema(), {
           upgrades: new fields.SchemaField({
             competence: new fields.SchemaField({
               attribute: attributeField(),
@@ -51,7 +50,6 @@ export default (Base) => {
             }),
           }),
         });
-        return schema;
       }
 
       /** @inheritDoc */

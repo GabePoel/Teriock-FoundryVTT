@@ -17,14 +17,12 @@ export default (Base) => {
     class AbilityDurationPart extends Base {
       /** @inheritDoc */
       static defineSchema() {
-        const schema = super.defineSchema();
-        Object.assign(schema, {
+        return Object.assign(super.defineSchema(), {
           duration: new EvaluationField({
             model: DurationModel,
             label: "Duration",
           }),
         });
-        return schema;
       }
 
       /** @inheritDoc */

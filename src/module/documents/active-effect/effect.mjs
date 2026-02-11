@@ -1,8 +1,4 @@
 import { documentTypes } from "../../constants/system/document-types.mjs";
-import {
-  AbilitySettingsModel,
-  ChildSettingsModel,
-} from "../../data/models/settings-models/_module.mjs";
 import { secondsToReadable } from "../../helpers/unit.mjs";
 import { mix } from "../../helpers/utils.mjs";
 import TeriockItem from "../item/item.mjs";
@@ -17,9 +13,7 @@ const { ActiveEffect } = foundry.documents;
  * @mixes BaseDocument
  * @mixes ChildDocument
  * @mixes CommonDocument
- * @mixes HierarchyDocument
  * @mixes RetrievalDocument
- * @mixes SettingsDocument
  * @property {Teriock.Documents.EffectModel} system
  * @property {Teriock.Documents.EffectType} type
  * @property {ID<TeriockActiveEffect>} _id
@@ -33,13 +27,12 @@ export default class TeriockActiveEffect extends mix(
   mixins.CommonDocumentMixin,
   mixins.ChildDocumentMixin,
   mixins.RetrievalDocumentMixin,
-  mixins.SettingsDocumentMixin,
 ) {
   /** @inheritDoc */
   static get documentMetadata() {
-    const metadata = super.documentMetadata;
-    metadata.types = Object.keys(documentTypes.effects);
-    return metadata;
+    return Object.assign(super.documentMetadata, {
+      types: Object.keys(documentTypes.effects),
+    });
   }
 
   /** @inheritDoc */
@@ -48,12 +41,6 @@ export default class TeriockActiveEffect extends mix(
       data.type = "consequence";
     }
     return super.migrateData(data);
-  }
-
-  /** @inheritDoc */
-  get _settingsFlagsDataModel() {
-    if (this.type === "ability") return AbilitySettingsModel;
-    return ChildSettingsModel;
   }
 
   /**

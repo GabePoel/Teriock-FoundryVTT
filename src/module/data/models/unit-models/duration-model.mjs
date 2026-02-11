@@ -36,8 +36,7 @@ export default class DurationModel extends TimeUnitModel {
 
   /** @inheritDoc */
   static defineSchema() {
-    const schema = super.defineSchema();
-    Object.assign(schema, {
+    return Object.assign(super.defineSchema(), {
       conditions: new fields.SchemaField({
         present: new fields.SetField(
           new fields.StringField({ choices: TERIOCK.index.conditions }),
@@ -67,7 +66,6 @@ export default class DurationModel extends TimeUnitModel {
         hint: "Optional description that overrides the default duration text.",
       }),
     });
-    return schema;
   }
 
   /** @inheritDoc */

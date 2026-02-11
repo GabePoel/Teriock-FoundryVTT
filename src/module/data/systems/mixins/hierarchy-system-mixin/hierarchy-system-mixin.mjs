@@ -15,8 +15,7 @@ export default function HierarchySystemMixin(Base) {
     class HierarchySystem extends Base {
       /** @inheritDoc */
       static defineSchema() {
-        const schema = super.defineSchema();
-        Object.assign(schema, {
+        return Object.assign(super.defineSchema(), {
           _sup: new fields.DocumentIdField({
             nullable: true,
             required: false,
@@ -26,7 +25,6 @@ export default function HierarchySystemMixin(Base) {
             required: false,
           }),
         });
-        return schema;
       }
 
       /** @inheritDoc */

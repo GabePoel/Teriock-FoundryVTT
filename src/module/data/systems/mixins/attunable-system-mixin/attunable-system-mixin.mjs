@@ -15,14 +15,12 @@ export default function AttunableSystemMixin(Base) {
     class AttunableSystem extends Base {
       /** @inheritDoc */
       static defineSchema() {
-        const schema = super.defineSchema();
-        Object.assign(schema, {
+        return Object.assign(super.defineSchema(), {
           tier: new EvaluationField({
             deterministic: true,
             min: 0,
           }),
         });
-        return schema;
       }
 
       /**

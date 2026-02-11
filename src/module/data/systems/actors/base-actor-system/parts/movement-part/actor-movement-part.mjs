@@ -15,8 +15,7 @@ export default (Base) => {
     class ActorMovementPart extends Base {
       /** @inheritDoc */
       static defineSchema() {
-        const schema = super.defineSchema();
-        Object.assign(schema, {
+        return Object.assign(super.defineSchema(), {
           speedAdjustments: new fields.SchemaField({
             climb: speedField(1, "Climb"),
             crawl: speedField(1, "Crawl"),
@@ -31,7 +30,6 @@ export default (Base) => {
             walk: speedField(3, "Walk"),
           }),
         });
-        return schema;
       }
 
       /** @inheritDoc */

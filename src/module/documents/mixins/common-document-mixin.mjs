@@ -6,6 +6,7 @@ import {
   EmbedCardDocumentMixin,
   HierarchyDocumentMixin,
   PanelDocumentMixin,
+  SettingsDocumentMixin,
 } from "./_module.mjs";
 
 /**
@@ -17,17 +18,20 @@ export default function CommonDocumentMixin(Base) {
   return (
     /**
      * @extends ClientDocument
-     * @mixes EmbedCardDocument
-     * @mixes PanelDocument
      * @mixes ChangeableDocument
+     * @mixes EmbedCardDocument
+     * @mixes HierarchyDocument
+     * @mixes PanelDocument
+     * @mixes SettingsDocument
      * @mixin
      */
     class CommonDocument extends mix(
       Base,
+      ChangeableDocumentMixin,
+      EmbedCardDocumentMixin,
       HierarchyDocumentMixin,
       PanelDocumentMixin,
-      EmbedCardDocumentMixin,
-      ChangeableDocumentMixin,
+      SettingsDocumentMixin,
     ) {
       /** @inheritDoc */
       static get documentMetadata() {
@@ -37,6 +41,11 @@ export default function CommonDocumentMixin(Base) {
           typed: true,
         });
         return metadata;
+      }
+
+      /** @inheritDoc */
+      get _settingsFlagsDataModel() {
+        return this.system._settingsFlagsDataModel;
       }
 
       /**

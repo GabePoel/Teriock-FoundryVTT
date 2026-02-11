@@ -17,11 +17,9 @@ export default function PiercingSystemMixin(Base) {
     class PiercingSystem extends Base {
       /** @inheritDoc */
       static defineSchema() {
-        const schema = super.defineSchema();
-        Object.assign(schema, {
+        return Object.assign(super.defineSchema(), {
           piercing: new fields.EmbeddedDataField(PiercingModel),
         });
-        return schema;
       }
 
       /** @inheritDoc */

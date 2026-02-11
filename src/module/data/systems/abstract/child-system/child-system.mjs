@@ -1,5 +1,6 @@
 import { fancifyFields, makeIcon } from "../../../../helpers/utils.mjs";
 import { EvaluationField, TextField } from "../../../fields/_module.mjs";
+import { ChildSettingsModel } from "../../../models/settings-models/_module.mjs";
 import { UsableDataMixin } from "../../../shared/mixins/_module.mjs";
 import CommonSystem from "../common-system/common-system.mjs";
 
@@ -16,8 +17,7 @@ const { ImagePopout } = foundry.applications.apps;
 export default class ChildSystem extends UsableDataMixin(CommonSystem) {
   /** @inheritDoc */
   static defineSchema() {
-    const schema = super.defineSchema();
-    Object.assign(schema, {
+    return Object.assign(super.defineSchema(), {
       font: new fields.StringField({
         initial: "",
         label: "Font",
@@ -42,7 +42,11 @@ export default class ChildSystem extends UsableDataMixin(CommonSystem) {
         }),
       }),
     });
-    return schema;
+  }
+
+  /** @inheritDoc */
+  get _settingsFlagsDataModel() {
+    return ChildSettingsModel;
   }
 
   /**

@@ -1,5 +1,6 @@
 import { dotJoin, prefix } from "../../../../helpers/string.mjs";
 import { makeIcon, mix } from "../../../../helpers/utils.mjs";
+import { ActorSettingsModel } from "../../../models/settings-models/_module.mjs";
 import { CommonSystem } from "../../abstract/_module.mjs";
 import * as parts from "./parts/_module.mjs";
 
@@ -73,6 +74,11 @@ export default class BaseActorSystem extends mix(
       childMacroTypes: [],
       visibleTypes: ["power", "rank", "species"],
     });
+  }
+
+  /** @inheritDoc */
+  get _settingsFlagsDataModel() {
+    return ActorSettingsModel;
   }
 
   /** @inheritDoc */

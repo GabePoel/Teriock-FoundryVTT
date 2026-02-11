@@ -15,11 +15,9 @@ export default (Base) => {
     class ActorDisplayPart extends Base {
       /** @inheritDoc */
       static defineSchema() {
-        const schema = super.defineSchema();
-        Object.assign(schema, {
+        return Object.assign(super.defineSchema(), {
           notes: new fields.HTMLField({ initial: "" }),
         });
-        return schema;
       }
 
       /** @inheritDoc */

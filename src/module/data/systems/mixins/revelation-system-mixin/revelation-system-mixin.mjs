@@ -23,8 +23,7 @@ export default function RevelationSystemMixin(Base) {
 
       /** @inheritDoc */
       static defineSchema() {
-        const schema = super.defineSchema();
-        Object.assign(schema, {
+        return Object.assign(super.defineSchema(), {
           revealed: new fields.BooleanField({
             hint: "Whether this has been revealed from an identify or other.",
             initial: true,
@@ -33,7 +32,6 @@ export default function RevelationSystemMixin(Base) {
             required: false,
           }),
         });
-        return schema;
       }
 
       /** @inheritDoc */

@@ -1,5 +1,4 @@
 import { documentTypes } from "../../constants/system/_module.mjs";
-import { ActorSettingsModel } from "../../data/models/settings-models/_module.mjs";
 import { systemPath } from "../../helpers/path.mjs";
 import { pureUuid, resolveDocument } from "../../helpers/resolve.mjs";
 import { toCamelCase } from "../../helpers/string.mjs";
@@ -15,10 +14,8 @@ const { Actor } = foundry.documents;
  * @extends {ClientDocument}
  * @mixes BaseDocument
  * @mixes CommonDocument
- * @mixes HierarchyDocument
  * @mixes ParentDocument
  * @mixes RetrievalDocument
- * @mixes SettingsDocument
  * @property {TypeCollection<GenericActiveEffect, GenericActiveEffect>} effects
  * @property {TypeCollection<GenericItem, GenericItem>} items
  * @property {Teriock.Documents.ActorModel} system
@@ -34,13 +31,12 @@ export default class TeriockActor extends mix(
   mixins.CommonDocumentMixin,
   mixins.ParentDocumentMixin,
   mixins.RetrievalDocumentMixin,
-  mixins.SettingsDocumentMixin,
 ) {
   /** @inheritDoc */
   static get documentMetadata() {
-    const metadata = super.documentMetadata;
-    metadata.types = Object.keys(documentTypes.actors);
-    return metadata;
+    return Object.assign(super.documentMetadata, {
+      types: Object.keys(documentTypes.actors),
+    });
   }
 
   /**
@@ -80,11 +76,6 @@ export default class TeriockActor extends mix(
     return foundry.utils.deepClone(
       SIZE_DEFINITIONS.find((d) => d.max === sizeDefinitionMax),
     );
-  }
-
-  /** @inheritDoc */
-  get _settingsFlagsDataModel() {
-    return ActorSettingsModel;
   }
 
   /**

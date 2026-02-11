@@ -17,11 +17,9 @@ export default function UsableDataMixin(Base) {
     class UsableData extends Base {
       /** @inheritDoc */
       static defineSchema(...args) {
-        const schema = super.defineSchema(...args);
-        Object.assign(schema, {
+        return Object.assign(super.defineSchema(...args), {
           competence: new fields.EmbeddedDataField(CompetenceModel),
         });
-        return schema;
       }
 
       /** @inheritDoc */

@@ -1,5 +1,4 @@
 import { documentTypes } from "../../constants/system/document-types.mjs";
-import { ChildSettingsModel } from "../../data/models/settings-models/_module.mjs";
 import { mix } from "../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
 
@@ -13,10 +12,8 @@ const { Item } = foundry.documents;
  * @mixes BaseDocument
  * @mixes ChildDocument
  * @mixes CommonDocument
- * @mixes HierarchyDocument
  * @mixes ParentDocument
  * @mixes RetrievalDocument
- * @mixes SettingsDocument
  * @property {TypeCollection<ID<GenericActiveEffect>, GenericActiveEffect>} effects
  * @property {Teriock.Documents.ItemModel | WrapperSystem} system
  * @property {Teriock.Documents.ItemType} type
@@ -32,18 +29,12 @@ export default class TeriockItem extends mix(
   mixins.ChildDocumentMixin,
   mixins.ParentDocumentMixin,
   mixins.RetrievalDocumentMixin,
-  mixins.SettingsDocumentMixin,
 ) {
   /** @inheritDoc */
   static get documentMetadata() {
-    const metadata = super.documentMetadata;
-    metadata.types = Object.keys(documentTypes.items);
-    return metadata;
-  }
-
-  /** @inheritDoc */
-  get _settingsFlagsDataModel() {
-    return ChildSettingsModel;
+    return Object.assign(super.documentMetadata, {
+      types: Object.keys(documentTypes.items),
+    });
   }
 
   /**

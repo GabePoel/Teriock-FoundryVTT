@@ -21,8 +21,7 @@ export default (Base) => {
     class EquipmentDamagePart extends Base {
       /** @inheritDoc */
       static defineSchema() {
-        const schema = super.defineSchema();
-        Object.assign(schema, {
+        return Object.assign(super.defineSchema(), {
           damage: new fields.SchemaField({
             base: new EvaluationField({
               deterministic: false,
@@ -35,7 +34,6 @@ export default (Base) => {
             types: new fields.SetField(new fields.StringField()),
           }),
         });
-        return schema;
       }
 
       /** @inheritDoc */

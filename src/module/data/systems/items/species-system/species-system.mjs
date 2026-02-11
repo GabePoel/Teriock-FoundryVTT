@@ -52,8 +52,7 @@ export default class SpeciesSystem extends mix(
 
   /** @inheritDoc */
   static defineSchema() {
-    const schema = super.defineSchema();
-    Object.assign(schema, {
+    return Object.assign(super.defineSchema(), {
       adult: new fields.NumberField({ initial: 0, min: 0 }),
       appearance: new TextField({ label: "Appearance" }),
       attributeIncrease: new TextField({ label: "Attribute increase" }),
@@ -95,7 +94,6 @@ export default class SpeciesSystem extends mix(
         required: false,
       }),
     });
-    return schema;
   }
 
   /** @inheritDoc */

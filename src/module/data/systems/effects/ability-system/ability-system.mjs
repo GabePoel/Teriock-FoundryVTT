@@ -1,5 +1,6 @@
 import { AbilityExecution } from "../../../../executions/document-executions/_module.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
+import { AbilitySettingsModel } from "../../../models/settings-models/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
@@ -90,6 +91,11 @@ export default class AbilitySystem extends mix(
       usable: true,
       visibleTypes: ["ability"],
     });
+  }
+
+  /** @inheritDoc */
+  get _settingsFlagsDataModel() {
+    return AbilitySettingsModel;
   }
 
   /** @inheritDoc */

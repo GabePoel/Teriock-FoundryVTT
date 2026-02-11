@@ -20,8 +20,7 @@ export default (Base) => {
     class ActorCapacitiesPart extends Base {
       /** @inheritDoc */
       static defineSchema() {
-        const schema = super.defineSchema();
-        Object.assign(schema, {
+        return Object.assign(super.defineSchema(), {
           size: new fields.SchemaField({
             number: new EvaluationField({
               blank: "3",
@@ -43,7 +42,6 @@ export default (Base) => {
             }),
           }),
         });
-        return schema;
       }
 
       /**
@@ -72,6 +70,9 @@ export default (Base) => {
         super.migrateData(data);
       }
 
+      /**
+       * Prepare carrying capacity from STR.
+       */
       #prepareCarryingCapacity() {
         const factor = 65 + 20 * this.attributes.str.score;
         this.carryingCapacity = {
@@ -82,20 +83,20 @@ export default (Base) => {
         };
       }
 
+      /**
+       * Prepare encumbrance level from current weight carried.
+       */
       #prepareEncumbrance() {
         let el = 0;
-        if (this.weight.carried >= this.carryingCapacity.light.value) {
-          el = 1;
-        }
-        if (this.weight.carried >= this.carryingCapacity.heavy.value) {
-          el = 2;
-        }
-        if (this.weight.carried >= this.carryingCapacity.max.value) {
-          el = 3;
-        }
+        if (this.weight.carried >= this.carryingCapacity.light) el = 1;
+        if (this.weight.carried >= this.carryingCapacity.heavy) el = 2;
+        if (this.weight.carried >= this.carryingCapacity.max) el = 3;
         this.encumbranceLevel = Math.min(this.encumbranceLevel + el, 3);
       }
 
+      /**
+       * Prepare total currency value and weight.
+       */
       #prepareMoney() {
         const totalValue = Object.keys(TERIOCK.options.currency).reduce(
           (sum, key) => {
@@ -117,6 +118,9 @@ export default (Base) => {
         this.weight.money = roundTo(totalWeight, 2);
       }
 
+      /**
+       * Prepare the amount of weight being carried.
+       */
       #prepareWeightCarried() {
         let equipmentWeight = 0;
         for (const e of this.parent.equipment) {

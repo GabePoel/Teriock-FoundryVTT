@@ -18,8 +18,7 @@ export default (Base) => {
     class AbilityGeneralPart extends Base {
       /** @inheritDoc */
       static defineSchema() {
-        const schema = super.defineSchema();
-        Object.assign(schema, {
+        return Object.assign(super.defineSchema(), {
           basic: new fields.BooleanField({
             initial: false,
             label: "Basic",
@@ -225,7 +224,6 @@ export default (Base) => {
             label: "Warded",
           }),
         });
-        return schema;
       }
 
       /** @inheritDoc */

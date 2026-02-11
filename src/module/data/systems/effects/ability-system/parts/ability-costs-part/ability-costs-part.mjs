@@ -21,8 +21,7 @@ export default (Base) => {
     class AbilityCostsPart extends Base {
       /** @inheritDoc */
       static defineSchema() {
-        const schema = super.defineSchema();
-        Object.assign(schema, {
+        return Object.assign(super.defineSchema(), {
           adept: costAdjustment("Adept"),
           costs: new fields.SchemaField({
             verbal: new fields.BooleanField({
@@ -51,7 +50,6 @@ export default (Base) => {
           }),
           gifted: costAdjustment("Gifted"),
         });
-        return schema;
       }
 
       /** @inheritDoc */

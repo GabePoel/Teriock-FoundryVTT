@@ -66,6 +66,7 @@ export default class ConditionSystem extends mix(
     return ["description"];
   }
 
+  /** @inheritDoc */
   get embedIcons() {
     return [
       {

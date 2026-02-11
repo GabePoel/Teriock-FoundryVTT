@@ -49,8 +49,7 @@ export default class FluencySystem extends mix(
 
   /** @inheritDoc */
   static defineSchema() {
-    const schema = super.defineSchema();
-    Object.assign(schema, {
+    return Object.assign(super.defineSchema(), {
       field: new fields.StringField({
         initial: "artisan",
         label: "Field",
@@ -67,7 +66,6 @@ export default class FluencySystem extends mix(
         initial: { raw: 2 },
       }),
     });
-    return schema;
   }
 
   /** @inheritDoc */

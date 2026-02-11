@@ -27,8 +27,7 @@ export default function StatGiverSystemMixin(Base) {
 
       /** @inheritDoc */
       static defineSchema() {
-        const schema = super.defineSchema();
-        Object.assign(schema, {
+        return Object.assign(super.defineSchema(), {
           statDice: new fields.SchemaField({
             hp: new fields.EmbeddedDataField(HpPoolModel, {
               label: "HP Dice",
@@ -40,7 +39,6 @@ export default function StatGiverSystemMixin(Base) {
             }),
           }),
         });
-        return schema;
       }
 
       /** @inheritDoc */

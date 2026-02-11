@@ -19,7 +19,6 @@ export default (Base) => {
     class ActorTradecraftsPart extends Base {
       /** @inheritDoc */
       static defineSchema() {
-        const schema = super.defineSchema();
         const tradecrafts = {};
         Object.entries(TERIOCK.index.tradecrafts).forEach(
           ([key, value]) =>
@@ -30,8 +29,9 @@ export default (Base) => {
               model: TradecraftModel,
             })),
         );
-        schema.tradecrafts = new SchemaField(tradecrafts);
-        return schema;
+        return Object.assign(super.defineSchema(), {
+          tradecrafts: new SchemaField(tradecrafts),
+        });
       }
 
       /** @inheritDoc */

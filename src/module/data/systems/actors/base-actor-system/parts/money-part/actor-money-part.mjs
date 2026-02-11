@@ -15,8 +15,7 @@ export default (Base) => {
     class ActorMoneyPart extends Base {
       /** @inheritDoc */
       static defineSchema() {
-        const schema = super.defineSchema();
-        Object.assign(schema, {
+        return Object.assign(super.defineSchema(), {
           interestRate: new fields.NumberField({
             initial: 1,
             integer: false,
@@ -38,7 +37,6 @@ export default (Base) => {
             total: currencyField("Total Money", false),
           }),
         });
-        return schema;
       }
 
       /** @inheritDoc */
@@ -54,15 +52,11 @@ export default (Base) => {
         return rollData;
       }
 
-      /** @inheritDoc */
-      prepareDerivedData() {
-        super.prepareDerivedData();
-      }
-
       /**
        * Actor pays money.
        * @param {number} amount - The amount of gold-equivalent money to pay.
        * @param {Teriock.Parameters.Actor.PayMode} mode - Exact change or the closest denomination, rounded up.
+       * @returns {Promise<void>}
        */
       async takePay(amount, mode) {
         const data = {

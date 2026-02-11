@@ -19,7 +19,6 @@ export default (Base) => {
     class ActorAttributesPart extends Base {
       /** @inheritDoc */
       static defineSchema() {
-        const schema = super.defineSchema();
         const attributes = {};
         Object.entries(TERIOCK.index.attributes).forEach(
           ([key, value]) =>
@@ -31,8 +30,9 @@ export default (Base) => {
               score: -3,
             })),
         );
-        schema.attributes = new SchemaField(attributes);
-        return schema;
+        return Object.assign(super.defineSchema(), {
+          attributes: new SchemaField(attributes),
+        });
       }
 
       /**

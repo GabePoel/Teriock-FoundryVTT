@@ -83,6 +83,13 @@ export default class CommonSystem extends AccessDataMixin(TypeDataModel) {
   }
 
   /**
+   * @returns {typeof EmbeddedDataModel|null}
+   */
+  get _settingsFlagsDataModel() {
+    return null;
+  }
+
+  /**
    * The automations that are active right now.
    * @returns {BaseAutomation[]}
    */

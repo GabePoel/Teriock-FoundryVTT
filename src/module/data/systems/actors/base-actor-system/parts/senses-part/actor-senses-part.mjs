@@ -17,8 +17,7 @@ export default (Base) => {
     class ActorSensesPart extends Base {
       /** @inheritDoc */
       static defineSchema() {
-        const schema = super.defineSchema();
-        Object.assign(schema, {
+        return Object.assign(super.defineSchema(), {
           senses: new fields.SchemaField({
             blind: senseField(0, "Blind Fighting"),
             dark: senseField(0, "Dark Vision"),
@@ -45,7 +44,6 @@ export default (Base) => {
             }),
           }),
         });
-        return schema;
       }
 
       /** @inheritDoc */

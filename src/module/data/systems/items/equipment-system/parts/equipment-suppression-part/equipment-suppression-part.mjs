@@ -18,8 +18,7 @@ export default (Base) => {
     class EquipmentSuppressionPart extends Base {
       /** @inheritDoc */
       static defineSchema() {
-        const schema = super.defineSchema();
-        Object.assign(schema, {
+        return Object.assign(super.defineSchema(), {
           dampened: new fields.BooleanField({
             initial: false,
             label: "Dampened",
@@ -29,7 +28,6 @@ export default (Base) => {
             label: "Shattered",
           }),
         });
-        return schema;
       }
 
       /** @inheritDoc */

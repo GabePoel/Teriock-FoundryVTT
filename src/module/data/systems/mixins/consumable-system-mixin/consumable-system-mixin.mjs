@@ -23,8 +23,7 @@ export default function ConsumableSystemMixin(Base) {
 
       /** @inheritDoc */
       static defineSchema() {
-        const schema = super.defineSchema();
-        Object.assign(schema, {
+        return Object.assign(super.defineSchema(), {
           consumable: new fields.BooleanField({
             initial: true,
             label: "Consumable",
@@ -41,7 +40,6 @@ export default function ConsumableSystemMixin(Base) {
             min: 0,
           }),
         });
-        return schema;
       }
 
       /** @inheritDoc */

@@ -19,8 +19,7 @@ export default (Base) => {
     class EquipmentWieldingPart extends Base {
       /** @inheritDoc */
       static defineSchema() {
-        const schema = super.defineSchema();
-        Object.assign(schema, {
+        return Object.assign(super.defineSchema(), {
           equipped: new fields.BooleanField({
             initial: false,
             label: "Equipped",
@@ -35,7 +34,6 @@ export default (Base) => {
             min: -3,
           }),
         });
-        return schema;
       }
 
       /**

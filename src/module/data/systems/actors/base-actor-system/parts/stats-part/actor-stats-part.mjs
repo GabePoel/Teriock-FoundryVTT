@@ -21,8 +21,7 @@ export default (Base) => {
     class ActorStatsPart extends Base {
       /** @inheritDoc */
       static defineSchema() {
-        const schema = super.defineSchema();
-        Object.assign(schema, {
+        return Object.assign(super.defineSchema(), {
           hp: new fields.SchemaField({
             max: new fields.NumberField({ initial: 1 }),
             min: new fields.NumberField({ initial: 0 }),
@@ -46,7 +45,6 @@ export default (Base) => {
             value: 20,
           }),
         });
-        return schema;
       }
 
       /** @inheritDoc */

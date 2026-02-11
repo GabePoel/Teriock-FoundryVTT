@@ -5,8 +5,7 @@ const { fields } = foundry.data;
 export default class TokenSettingsModel extends EmbeddedDataModel {
   /** @inheritDoc */
   static defineSchema() {
-    const schema = super.defineSchema();
-    Object.assign(schema, {
+    return Object.assign(super.defineSchema(), {
       autoColoration: new fields.BooleanField({
         label: "Automatic Coloration",
         initial: true,
@@ -53,6 +52,5 @@ export default class TokenSettingsModel extends EmbeddedDataModel {
         hint: "Automatically change this token's vision range.",
       }),
     });
-    return schema;
   }
 }

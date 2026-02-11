@@ -16,11 +16,11 @@ export default function TransformationSystemMixin(Base) {
     class TransformationSystem extends Base {
       /** @inheritDoc */
       static defineSchema() {
-        const schema = super.defineSchema();
-        schema.transformation = transformationField({
-          implementation: true,
+        return Object.assign(super.defineSchema(), {
+          transformation: transformationField({
+            implementation: true,
+          }),
         });
-        return schema;
       }
 
       /**

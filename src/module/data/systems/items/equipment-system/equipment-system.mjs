@@ -77,8 +77,7 @@ export default class EquipmentSystem extends mix(
 
   /** @inheritDoc */
   static defineSchema() {
-    const schema = super.defineSchema();
-    Object.assign(schema, {
+    return Object.assign(super.defineSchema(), {
       consumable: new fields.BooleanField({
         initial: false,
         label: "Consumable",
@@ -106,7 +105,6 @@ export default class EquipmentSystem extends mix(
         label: "Price",
       }),
     });
-    return schema;
   }
 
   /** @inheritDoc */

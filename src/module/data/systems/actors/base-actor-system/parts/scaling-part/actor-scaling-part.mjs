@@ -15,8 +15,7 @@ export default (Base) => {
     class ActorScalingPart extends Base {
       /** @inheritDoc */
       static defineSchema() {
-        const schema = super.defineSchema();
-        Object.assign(schema, {
+        return Object.assign(super.defineSchema(), {
           scaling: new fields.SchemaField({
             lvl: new fields.NumberField({
               initial: 1,
@@ -31,7 +30,6 @@ export default (Base) => {
             }),
           }),
         });
-        return schema;
       }
 
       /**

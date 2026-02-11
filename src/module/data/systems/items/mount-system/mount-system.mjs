@@ -29,8 +29,7 @@ export default class MountSystem extends mix(
 
   /** @inheritDoc */
   static defineSchema() {
-    const schema = super.defineSchema();
-    Object.assign(schema, {
+    return Object.assign(super.defineSchema(), {
       mountType: new fields.StringField({
         initial: "Mount Type",
         required: false,
@@ -44,7 +43,6 @@ export default class MountSystem extends mix(
         label: "Flaws",
       }),
     });
-    return schema;
   }
 
   /** @inheritDoc */
@@ -52,6 +50,7 @@ export default class MountSystem extends mix(
     return ["system.description", "system.flaws"];
   }
 
+  /** @inheritDoc */
   get embedIcons() {
     return [
       ...super.embedIcons.filter(

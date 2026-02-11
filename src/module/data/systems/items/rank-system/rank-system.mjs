@@ -42,8 +42,7 @@ export default class RankSystem extends mix(
 
   /** @inheritDoc */
   static defineSchema() {
-    const schema = super.defineSchema();
-    Object.assign(schema, {
+    return Object.assign(super.defineSchema(), {
       archetype: new fields.StringField({
         initial: "everyman",
         label: "Archetype",
@@ -81,7 +80,6 @@ export default class RankSystem extends mix(
         min: 0,
       }),
     });
-    return schema;
   }
 
   /** @inheritDoc */
@@ -140,6 +138,7 @@ export default class RankSystem extends mix(
     return suppressed;
   }
 
+  /** @inheritDoc */
   get messageBars() {
     return [
       {

@@ -20,8 +20,7 @@ export default (Base) => {
     class ActorProtectionsPart extends Base {
       /** @inheritDoc */
       static defineSchema() {
-        const schema = super.defineSchema();
-        Object.assign(schema, {
+        return Object.assign(super.defineSchema(), {
           protections: new fields.SchemaField({
             resistances: protectionField("are resistant to"),
             immunities: protectionField("are immune to"),
@@ -29,7 +28,6 @@ export default (Base) => {
             hexseals: protectionField("are hexseal against"),
           }),
         });
-        return schema;
       }
 
       /**

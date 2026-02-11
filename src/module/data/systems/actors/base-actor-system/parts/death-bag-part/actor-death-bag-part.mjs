@@ -18,8 +18,7 @@ export default (Base) => {
     class ActorDeathBagPart extends Base {
       /** @inheritDoc */
       static defineSchema() {
-        const schema = super.defineSchema();
-        Object.assign(schema, {
+        return Object.assign(super.defineSchema(), {
           deathBag: new fields.SchemaField({
             pull: new FormulaField({
               initial: "10",
@@ -35,7 +34,6 @@ export default (Base) => {
             }),
           }),
         });
-        return schema;
       }
 
       /**

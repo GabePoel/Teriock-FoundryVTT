@@ -87,8 +87,7 @@ export default class UnitModel extends EvaluationModel {
 
   /** @inheritDoc */
   static defineSchema(options) {
-    const schema = super.defineSchema(options);
-    Object.assign(schema, {
+    return Object.assign(super.defineSchema(options), {
       unit: new fields.StringField({
         label: "Unit",
         required: false,
@@ -97,7 +96,6 @@ export default class UnitModel extends EvaluationModel {
         hint: "The unit of the this value.",
       }),
     });
-    return schema;
   }
 
   /**

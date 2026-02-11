@@ -22,8 +22,7 @@ export default (Base) => {
     class ActorCombatPart extends Base {
       /** @inheritDoc */
       static defineSchema() {
-        const schema = super.defineSchema();
-        Object.assign(schema, {
+        return Object.assign(super.defineSchema(), {
           combat: new fields.SchemaField({
             attackPenalty: new fields.NumberField({
               initial: 0,
@@ -52,7 +51,6 @@ export default (Base) => {
             blocker: new fields.DocumentIdField({ nullable: true }),
           }),
         });
-        return schema;
       }
 
       /**

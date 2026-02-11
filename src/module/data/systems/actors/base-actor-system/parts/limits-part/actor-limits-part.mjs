@@ -17,8 +17,7 @@ export default (Base) => {
     class ActorLimitsPart extends Base {
       /** @inheritDoc */
       static defineSchema() {
-        const schema = super.defineSchema();
-        Object.assign(schema, {
+        return Object.assign(super.defineSchema(), {
           magic: new fields.SchemaField({
             maxRotators: new EvaluationField({
               deterministic: true,
@@ -26,7 +25,6 @@ export default (Base) => {
             }),
           }),
         });
-        return schema;
       }
 
       /** @inheritDoc */

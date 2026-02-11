@@ -15,8 +15,7 @@ export default (Base) => {
     class ActorAutomationPart extends Base {
       /** @inheritDoc */
       static defineSchema() {
-        const schema = super.defineSchema();
-        Object.assign(schema, {
+        return Object.assign(super.defineSchema(), {
           transformation: new fields.SchemaField({
             primary: new fields.DocumentIdField({
               nullable: true,
@@ -24,7 +23,6 @@ export default (Base) => {
             }),
           }),
         });
-        return schema;
       }
 
       /**

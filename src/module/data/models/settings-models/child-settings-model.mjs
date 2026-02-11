@@ -7,13 +7,9 @@ import EmbeddedDataModel from "../embedded-data-model.mjs";
 export default class ChildSettingsModel extends EmbeddedDataModel {
   /** @inheritDoc */
   static defineSchema() {
-    const schema = super.defineSchema();
-    Object.assign(schema, {
+    return Object.assign(super.defineSchema(), {
       sheetBlockChildSize: blockSizeField(),
-      sheetBlockChildGapless: blockGaplessField({
-        initial: false,
-      }),
+      sheetBlockChildGapless: blockGaplessField({ initial: false }),
     });
-    return schema;
   }
 }
