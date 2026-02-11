@@ -88,14 +88,16 @@
                 action=(path @root/TERIOCK.options.character.protectionMap category "action")
               )
             }}
+          {{/each}}
+          {{#each protection.abilities as |ability|}}
             {{> (template "ui-templates/block.hbs")
               (object
                 uuid=(ruleUuid "Keyword" (path @root/TERIOCK.options.character.protectionMap category "text"))
                 makeTooltip=true
                 usable=true
-                img=(getIconKey "effect-types" powerSource)
-                title=(path @root/TERIOCK.options.ability.powerSources powerSource)
-                subtitle="Power source"
+                img=(getIconKey "abilities" (toCamelCase ability))
+                title=ability
+                subtitle="Ability"
                 text=(path @root/TERIOCK.options.character.protectionMap category "text")
                 action=(path @root/TERIOCK.options.character.protectionMap category "action")
               )
