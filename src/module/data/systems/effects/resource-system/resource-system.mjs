@@ -1,6 +1,6 @@
 import { BaseDocumentExecution } from "../../../../executions/document-executions/_module.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
-import { CommonMacroAutomation } from "../../../pseudo-documents/automations/_module.mjs";
+import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
 
@@ -19,7 +19,13 @@ export default class ResourceSystem extends mix(
 ) {
   /** @inheritDoc */
   static get _automationTypes() {
-    return [CommonMacroAutomation];
+    return [
+      automations.CheckAutomation,
+      automations.CommonImpactsAutomation,
+      automations.CommonMacroAutomation,
+      automations.HacksAutomation,
+      automations.RollAutomation,
+    ];
   }
 
   /** @inheritDoc */

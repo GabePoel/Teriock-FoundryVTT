@@ -32,6 +32,9 @@ export default class PropertySystem extends mix(
   static get _automationTypes() {
     return [
       automations.ChangesAutomation,
+      automations.CheckAutomation,
+      automations.CommonImpactsAutomation,
+      automations.HacksAutomation,
       automations.PropertyMacroAutomation,
       automations.RollAutomation,
     ];
