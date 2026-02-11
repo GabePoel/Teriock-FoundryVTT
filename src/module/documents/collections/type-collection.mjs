@@ -3,7 +3,8 @@ const { Collection } = foundry.utils;
 //noinspection JSClosureCompilerSyntax,JSUnresolvedReference
 /**
  * @inheritDoc
- * @template K, V
+ * @template K
+ * @template V
  * @extends {Collection<ID<K>, V>}
  */
 export default class TypeCollection extends Collection {

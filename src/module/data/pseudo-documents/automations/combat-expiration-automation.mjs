@@ -37,7 +37,13 @@ export default class CombatExpirationAutomation extends CritAutomation {
       paths.push(...["what.roll", "what.threshold"]);
     }
     paths.push(
-      ...["when.time", "when.trigger", "who.type", ...super._formPaths],
+      ...[
+        "when.time",
+        "when.trigger",
+        "when.skip",
+        "who.type",
+        ...super._formPaths,
+      ],
     );
     return paths;
   }
