@@ -68,6 +68,28 @@ export default (Base) => {
       }
 
       /** @inheritDoc */
+      get color() {
+        return TERIOCK.options.ability.form[this.form].color;
+      }
+
+      /**
+       * A string representing the elements for this ability.
+       * @returns {string}
+       */
+      get elementString() {
+        if (this.elements.size === 0) {
+          return "Celestial";
+        } else if (this.elements.size === 1) {
+          return Array.from(this.elements)[0];
+        } else {
+          const elements = Array.from(this.elements).sort((a, b) =>
+            a.localeCompare(b),
+          );
+          return `${elements.slice(0, -1).join(", ")}${this.elements.size > 2 ? "," : ""} and ${elements.at(-1)}`;
+        }
+      }
+
+      /** @inheritDoc */
       getLocalRollData() {
         const data = super.getLocalRollData();
         Object.assign(data, {

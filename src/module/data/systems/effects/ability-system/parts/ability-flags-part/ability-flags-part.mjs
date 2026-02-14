@@ -37,14 +37,6 @@ export default (Base) => {
             initial: "",
             label: "With Elder Sorcery...",
           }),
-          grantOnly: new fields.BooleanField({
-            initial: false,
-            label: "Granter Only",
-          }),
-          grantOnlyText: new TextField({
-            initial: "",
-            label: "Granter Only",
-          }),
           invoked: new fields.BooleanField({
             initial: false,
             label: "Invoked",
@@ -83,6 +75,18 @@ export default (Base) => {
         });
       }
 
+      /**
+       * If this is a true basic ability.
+       * @returns {boolean}
+       */
+      get isBasic() {
+        return (
+          this.basic &&
+          this.parent.parent.name === "Basic Abilities" &&
+          this.parent.inCompendium
+        );
+      }
+
       /** @inheritDoc */
       getLocalRollData() {
         const data = super.getLocalRollData();
@@ -98,21 +102,13 @@ export default (Base) => {
           invoked: Number(this.invoked),
           elderSorcery: Number(this.elderSorcery),
           es: Number(this.elderSorcery),
-          grantOnly: Number(this.grantOnly),
         });
-        return data;
-      }
-
-      /** @inheritDoc */
-      prepareDerivedData() {
-        super.prepareDerivedData();
-
-        // Add granting text
-        if (this.grantOnly) {
-          this.grantOnlyText = `This ability can only be used with @UUID[${this.parent.parent.uuid}].`;
-        } else {
-          this.grantOnlyText = "";
+        if (this.parent.parent?.type === "rank") {
+          const rank = /** @type {TeriockRank} */ this.parent.parent;
+          data[`class.${rank.system.className.slice(0, 3).toLowerCase()}`] = 1;
+          data[`class.${rank.system.className}`] = 1;
         }
+        return data;
       }
     }
   );

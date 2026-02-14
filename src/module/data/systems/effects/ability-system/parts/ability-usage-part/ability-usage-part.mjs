@@ -4,7 +4,7 @@ import { RangeModel } from "../../../../../models/unit-models/_module.mjs";
 const { fields } = foundry.data;
 
 /**
- * Ability interaction part.
+ * Ability usage part: delivery, timing, interaction, targets, range, expansion.
  * @param {typeof AbilitySystem} Base
  */
 export default (Base) => {
@@ -12,10 +12,10 @@ export default (Base) => {
   return (
     /**
      * @extends {AbilitySystem}
-     * @implements {Teriock.Models.AbilityInteractionPartInterface}
+     * @implements {Teriock.Models.AbilityUsagePartInterface}
      * @mixin
      */
-    class AbilityInteractionPart extends Base {
+    class AbilityUsagePart extends Base {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
@@ -97,6 +97,28 @@ export default (Base) => {
         super.migrateData(data);
       }
 
+      /**
+       * Whether this has an area of effect.
+       * @returns {boolean}
+       */
+      get isAoe() {
+        return (
+          this.delivery.base === "aura" ||
+          this.delivery.base === "cone" ||
+          this.expansion.type === "detonate"
+        );
+      }
+
+      /**
+       * Whether this requires contact with a target.
+       * @returns {boolean}
+       */
+      get isContact() {
+        return ["armor", "bite", "hand", "item", "shield", "weapon"].includes(
+          this.delivery.base,
+        );
+      }
+
       /** @inheritDoc */
       getLocalRollData() {
         const data = super.getLocalRollData();
@@ -129,12 +151,6 @@ export default (Base) => {
             [`expansion.attr.${this.expansion.featSaveAttribute}`]: 1,
             [`expansion.range`]: this.expansion.range.value,
           });
-        }
-        // Add class
-        if (this.parent.parent?.type === "rank") {
-          const rank = /** @type {TeriockRank} */ this.parent.parent;
-          data[`class.${rank.system.className.slice(0, 3).toLowerCase()}`] = 1;
-          data[`class.${rank.system.className}`] = 1;
         }
         // Add targets
         for (const target of this.targets) {

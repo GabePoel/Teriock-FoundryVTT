@@ -18,8 +18,9 @@ import * as parts from "./parts/_module.mjs";
  * @mixes AbilityAutomationsPart
  * @mixes AbilityCostsPart
  * @mixes AbilityDurationPart
- * @mixes AbilityInteractionPart
+ * @mixes AbilityEquipmentPart
  * @mixes AbilityFlagsPart
+ * @mixes AbilityUsagePart
  * @mixes AbilityHierarchyPart
  * @mixes AbilityOverviewPart
  * @mixes AbilityPanelPart
@@ -46,8 +47,9 @@ export default class AbilitySystem extends mix(
   parts.AbilityAutomationsPart,
   parts.AbilityCostsPart,
   parts.AbilityDurationPart,
-  parts.AbilityInteractionPart,
+  parts.AbilityEquipmentPart,
   parts.AbilityFlagsPart,
+  parts.AbilityUsagePart,
   parts.AbilityHierarchyPart,
   parts.AbilityImprovementsPart,
   parts.AbilityOverviewPart,
@@ -104,11 +106,6 @@ export default class AbilitySystem extends mix(
   /** @inheritDoc */
   get _settingsFlagsDataModel() {
     return AbilitySettingsModel;
-  }
-
-  /** @inheritDoc */
-  get color() {
-    return TERIOCK.options.ability.form[this.form].color;
   }
 
   /** @inheritDoc */
@@ -228,23 +225,6 @@ export default class AbilitySystem extends mix(
     ];
   }
 
-  /**
-   * A string representing the elements for this ability.
-   * @returns {string}
-   */
-  get elementString() {
-    if (this.elements.size === 0) {
-      return "Celestial";
-    } else if (this.elements.size === 1) {
-      return Array.from(this.elements)[0];
-    } else {
-      const elements = Array.from(this.elements).sort((a, b) =>
-        a.localeCompare(b),
-      );
-      return `${elements.slice(0, -1).join(", ")}${this.elements.size > 2 ? "," : ""} and ${elements.at(-1)}`;
-    }
-  }
-
   /** @inheritDoc */
   get embedIcons() {
     let icons = super.embedIcons.filter(
@@ -280,40 +260,6 @@ export default class AbilitySystem extends mix(
         ] ?? this.executionTime;
     }
     return parts;
-  }
-
-  /**
-   * Whether this has an area of effect.
-   * @returns {boolean}
-   */
-  get isAoe() {
-    return (
-      this.delivery.base === "aura" ||
-      this.delivery.base === "cone" ||
-      this.expansion === "detonate"
-    );
-  }
-
-  /**
-   * If this is a true basic ability.
-   * @returns {boolean}
-   */
-  get isBasic() {
-    return (
-      this.basic &&
-      this.parent.parent.name === "Basic Abilities" &&
-      this.parent.inCompendium
-    );
-  }
-
-  /**
-   * Whether this requires contact with a target.
-   * @returns {boolean}
-   */
-  get isContact() {
-    return ["armor", "bite", "hand", "item", "shield", "weapon"].includes(
-      this.delivery.base,
-    );
   }
 
   /** @inheritDoc */
@@ -368,38 +314,6 @@ export default class AbilitySystem extends mix(
       nameAddition = ` (${additions.join(", ")})`;
     }
     return this.parent.name + nameAddition;
-  }
-
-  /**
-   * On use icon.
-   * @returns {Teriock.EmbedData.EmbedIcon}
-   */
-  get onUseIcon() {
-    return {
-      icon: this.parent.isOnUse ? "bolt" : "bolt-slash",
-      action: "toggleOnUseDoc",
-      tooltip: this.parent.isOnUse ? "Activates Only on Use" : "Always Active",
-      condition: this.parent.isOwner,
-      callback: async () => {
-        const onUseSet = this.parent.parent.system.onUse;
-        if (onUseSet.has(this.parent.id)) {
-          onUseSet.delete(this.parent.id);
-        } else {
-          onUseSet.add(this.parent.id);
-        }
-        await this.parent.parent.update({
-          "system.onUse": Array.from(onUseSet),
-        });
-      },
-    };
-  }
-
-  /** @inheritDoc */
-  get tagIcon() {
-    if (this.parent.elder?.type === "equipment" && this.parent.isOnUse) {
-      return this.onUseIcon;
-    }
-    return super.tagIcon;
   }
 
   /**

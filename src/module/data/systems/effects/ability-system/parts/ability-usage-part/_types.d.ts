@@ -3,7 +3,7 @@ import { EvaluationModel } from "../../../../../models/_module.mjs";
 
 declare global {
   namespace Teriock.Models {
-    export interface AbilityInteractionPartInterface {
+    export interface AbilityUsagePartInterface {
       /** <schema> This ability's delivery */
       delivery: DeliveryConfig;
       /** <schema> This ability's execution time */

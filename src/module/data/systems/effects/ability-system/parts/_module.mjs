@@ -1,7 +1,8 @@
 export { default as AbilityCostsPart } from "./ability-costs-part/ability-costs-part.mjs";
 export { default as AbilityDurationPart } from "./ability-duration-part/ability-duration-part.mjs";
-export { default as AbilityInteractionPart } from "./ability-interaction-part/ability-interaction-part.mjs";
+export { default as AbilityEquipmentPart } from "./ability-equipment-part/ability-equipment-part.mjs";
 export { default as AbilityFlagsPart } from "./ability-flags-part/ability-flags-part.mjs";
+export { default as AbilityUsagePart } from "./ability-usage-part/ability-usage-part.mjs";
 export { default as AbilityOverviewPart } from "./ability-overview-part/ability-overview-part.mjs";
 export { default as AbilityResultsPart } from "./ability-results-part/ability-results-part.mjs";
 export { default as AbilityTagsPart } from "./ability-tags-part/ability-tags-part.mjs";

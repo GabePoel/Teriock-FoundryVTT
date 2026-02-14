@@ -1,20 +1,16 @@
 declare global {
   namespace Teriock.Models {
     export interface AbilityFlagsPartInterface {
-      /** <schema> What class this ability is associated with */
-      class: Teriock.Parameters.Rank.RankClass;
       /** <schema> If this is a basic ability */
       basic: boolean;
+      /** <schema> What class this ability is associated with */
+      class: Teriock.Parameters.Rank.RankClass;
       /** <schema> If this ability is consumable */
       consumable: boolean;
       /** <schema> If this ability is considered to be Elder Sorcery */
       elderSorcery: boolean;
       /** <schema> Wording of this ability's Elder Sorcery incant */
       elderSorceryIncant: string;
-      /** <schema> Can only be used with the item that grants it. */
-      grantOnly: boolean;
-      /** <derived> Text describing this being granted. */
-      grantOnlyText: string;
       /** <schema> If this ability is invoked */
       invoked: boolean;
       /** <schema> If this ability is a ritual */
