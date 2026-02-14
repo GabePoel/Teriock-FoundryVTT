@@ -1,5 +1,9 @@
 import "./ability-costs-part/_types";
 import "./ability-duration-part/_types";
-import "./ability-general-part/_types";
+import "./ability-interaction-part/_types";
+import "./ability-flags-part/_types";
 import "./ability-impacts-part/_types";
+import "./ability-overview-part/_types";
+import "./ability-results-part/_types";
+import "./ability-tags-part/_types";
 import "./ability-upgrades-part/_types";

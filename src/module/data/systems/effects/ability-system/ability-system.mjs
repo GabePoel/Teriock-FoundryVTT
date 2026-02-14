@@ -15,13 +15,17 @@ import * as parts from "./parts/_module.mjs";
  *
  * @extends {BaseEffectSystem}
  * @implements {Teriock.Models.AbilitySystemInterface}
- * @MIXES AbilityCostsPart
- * @mixes AbilityDurationPart
- * @mixes AbilityGeneralPart
- * @mixes AbilityHierarchyPart
  * @mixes AbilityAutomationsPart
- * @mixes AbilityUpgradesPart
+ * @mixes AbilityCostsPart
+ * @mixes AbilityDurationPart
+ * @mixes AbilityInteractionPart
+ * @mixes AbilityFlagsPart
+ * @mixes AbilityHierarchyPart
+ * @mixes AbilityOverviewPart
  * @mixes AbilityPanelPart
+ * @mixes AbilityResultsPart
+ * @mixes AbilityTagsPart
+ * @mixes AbilityUpgradesPart
  * @mixes ConsumableSystem
  * @mixes HierarchySystem
  * @mixes PiercingSystem
@@ -39,14 +43,18 @@ export default class AbilitySystem extends mix(
   mixins.RevelationSystemMixin,
   mixins.ThresholdSystemMixin,
   mixins.WikiSystemMixin,
+  parts.AbilityAutomationsPart,
   parts.AbilityCostsPart,
   parts.AbilityDurationPart,
-  parts.AbilityGeneralPart,
+  parts.AbilityInteractionPart,
+  parts.AbilityFlagsPart,
   parts.AbilityHierarchyPart,
-  parts.AbilityAutomationsPart,
   parts.AbilityImprovementsPart,
+  parts.AbilityOverviewPart,
   parts.AbilityPanelPart,
   parts.AbilityRankPart,
+  parts.AbilityResultsPart,
+  parts.AbilityTagsPart,
 ) {
   /** @inheritDoc */
   static get _automationTypes() {
