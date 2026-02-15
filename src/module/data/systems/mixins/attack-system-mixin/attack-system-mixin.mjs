@@ -6,12 +6,12 @@ const { fields } = foundry.data;
 /**
  * @param {typeof ChildSystem} Base
  */
-export default function PiercingSystemMixin(Base) {
+export default function AttackSystemMixin(Base) {
   //noinspection JSClosureCompilerSyntax
   return (
     /**
      * @extends {ChildSystem}
-     * @implements {Teriock.Models.PiercingSystemInterface}
+     * @implements {Teriock.Models.AttackSystemInterface}
      * @mixin
      */
     class PiercingSystem extends Base {
@@ -19,6 +19,11 @@ export default function PiercingSystemMixin(Base) {
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           piercing: new fields.EmbeddedDataField(PiercingModel),
+          warded: new fields.BooleanField({
+            initial: false,
+            label: "Warded",
+            nullable: false,
+          }),
         });
       }
 
@@ -30,12 +35,11 @@ export default function PiercingSystemMixin(Base) {
 
       /** @inheritDoc */
       getLocalRollData() {
-        const data = super.getLocalRollData();
-        Object.assign(data, {
+        return Object.assign(super.getLocalRollData(), {
           av0: Number(this.piercing.av0),
           ub: Number(this.piercing.ub),
+          warded: Number(this.warded),
         });
-        return data;
       }
     }
   );

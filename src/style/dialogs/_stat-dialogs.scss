@@ -1,0 +1,54 @@
+@use "../mixins";
+
+.heal-dialog {
+  .heal-dialog-hacks {
+    .hack-marker-box {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      height: 28px;
+      justify-content: center;
+    }
+  }
+
+  .heal-dialog-dice {
+    .die-box {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      height: 28px;
+      justify-content: center;
+    }
+  }
+}
+
+.stat-header {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: start;
+
+  .stat-bar {
+    width: 100%;
+  }
+
+  .ab-profile-img {
+    align-items: center;
+    display: flex;
+    height: 4em;
+    max-height: 4em;
+    max-width: 4em;
+    min-height: 4em;
+    min-width: 4em;
+    width: 4em;
+    @include mixins.image-border(4px, 0.3, 6px);
+    @include mixins.warm-image-container-background;
+
+    img {
+      @include mixins.warm-drop-shadow;
+      @include mixins.image-position;
+      border: none;
+    }
+  }
+}

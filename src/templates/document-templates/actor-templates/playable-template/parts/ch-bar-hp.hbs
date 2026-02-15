@@ -1,0 +1,57 @@
+<div class="character-hit-bar-container character-bar-container">
+  <div class="character-hit-bar character-bar toutline">
+    <div
+      class="character-bar-left"
+      style="width: {{bars.hp.remaining}}%;"
+    ></div>
+    <div
+      class="character-bar-temp"
+      style="width: {{bars.hp.temp}}%; {{barTempHide
+        system.hp.value
+        system.hp.max
+        system.hp.temp
+      }}"
+    ></div>
+    <div
+      class="character-bar-lost"
+      style="width: {{bars.hp.lost}}%;"
+    ></div>
+    <div
+      class="character-bar-morganti"
+      style="width: {{bars.hp.morganti}}%;"
+    ></div>
+  </div>
+  <div class="character-bar-overlay">
+    <div class="character-bar-overlay-row character-hit-bar-overlay-row">
+      {{numberInput
+        system.hp.value
+        name="system.hp.value"
+        max=system.hp.max
+        min=system.hp.min
+        class="thover-soft character-bar-overlay-left character-bar-overlay-label"
+        dataset=(object tooltip="Current HP")
+        disabled=(not takeStatButtons)
+      }}
+      <div class="character-bar-overlay-max character-bar-overlay-label" data-tooltip="Maximum HP">
+        <span>/ {{system.hp.max}} +</span>
+      </div>
+      {{formInput
+        systemFields.hp.fields.temp
+        value=system.hp.temp
+        classes="thover-soft character-bar-overlay-temp character-bar-overlay-label"
+        dataset=(object tooltip="Temporary HP")
+        disabled=(not takeStatButtons)
+      }}
+    </div>
+    {{#if takeStatButtons}}
+      <div
+        class="take-harm-button thover take-damage-button"
+        data-action="takeRollable"
+        data-tooltip="Take Damage"
+        data-type="damage"
+      >
+        <i class="fa-fw fa-light fa-{{TERIOCK.display.icons.effect.damage}}"></i>
+      </div>
+    {{/if}}
+  </div>
+</div>

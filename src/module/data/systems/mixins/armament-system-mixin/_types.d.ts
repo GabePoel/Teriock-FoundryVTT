@@ -51,8 +51,6 @@ declare global {
       spellTurning: boolean;
       /** <schema> Vitals */
       vitals: boolean;
-      /** <base> Warded */
-      warded: boolean;
     }
   }
 }

@@ -1,6 +1,14 @@
 <form class="dialog-form standard-form heal-dialog">
+  <div class="stat-header">
+    <div class="ab-profile-img timage" data-tooltip="{{name}}">
+      <img src="{{img}}" alt="">
+    </div>
+    <div class="stat-bar">
+      {{> (template "document-templates/actor-templates/playable-template/parts/ch-bar-hp.hbs")}}
+    </div>
+  </div>
   <p class="hint">Click on the hacks you want to heal{{#if (not noDice)}}
-    and the hit dice you want to spend. You are at {{system.hp.value}} / {{system.hp.max}} HP.{{/if}}</p>
+    and the hit dice you want to spend.{{/if}}</p>
   <fieldset class="heal-dialog-hacks">
     <legend>Hacks</legend>
     {{> (template "document-templates/actor-templates/playable-template/parts/ch-hack-box.hbs") }}

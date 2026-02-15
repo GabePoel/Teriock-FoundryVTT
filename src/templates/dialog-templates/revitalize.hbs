@@ -1,9 +1,13 @@
 <form class="dialog-form standard-form heal-dialog">
-  <p class="hint">Click on the mana dice you want to spend. You are at
-    {{system.mp.value}}
-    /
-    {{system.mp.max}}
-    MP.</p>
+  <div class="stat-header">
+    <div class="ab-profile-img timage" data-tooltip="{{name}}">
+      <img src="{{img}}" alt="">
+    </div>
+    <div class="stat-bar">
+      {{> (template "document-templates/actor-templates/playable-template/parts/ch-bar-mp.hbs")}}
+    </div>
+  </div>
+  <p class="hint">Click on the mana dice you want to spend.</p>
   <fieldset class="heal-dialog-dice">
     <legend>Mana Dice</legend>
     <div class="tgrid g7">

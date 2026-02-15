@@ -88,12 +88,11 @@ export default class TeriockStatManager extends HackStatMixin(
   /** @inheritDoc */
   async _prepareContext(options = {}) {
     const context = await super._prepareContext(options);
-    context.forHarm = this._forHarm;
-    context.forHarmField = this._forHarmField;
-    context.consumeStatDice = this._consumeStatDice;
-    context.consumeStatDiceField = this._consumeStatDiceField;
-    context.system = this.document.system;
-    context.uuid = this.document.uuid;
-    return context;
+    return Object.assign(context, {
+      forHarm: this._forHarm,
+      forHarmField: this._forHarmField,
+      consumeStatDice: this._consumeStatDice,
+      consumeStatDiceField: this._consumeStatDiceField,
+    });
   }
 }

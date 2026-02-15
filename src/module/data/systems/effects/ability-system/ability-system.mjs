@@ -38,9 +38,9 @@ import * as parts from "./parts/_module.mjs";
  */
 export default class AbilitySystem extends mix(
   BaseEffectSystem,
+  mixins.AttackSystemMixin,
   mixins.ConsumableSystemMixin,
   mixins.HierarchySystemMixin,
-  mixins.PiercingSystemMixin,
   mixins.CompetenceDisplaySystemMixin,
   mixins.RevelationSystemMixin,
   mixins.WikiSystemMixin,

@@ -8,7 +8,7 @@ import {
   DefenseModel,
   RangeModel,
 } from "../../../models/_module.mjs";
-import { PiercingSystemMixin } from "../_module.mjs";
+import { AttackSystemMixin } from "../_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -24,7 +24,7 @@ export default function ArmamentSystemMixin(Base) {
      * @mixes PiercingSystem
      * @mixin
      */
-    class ArmamentSystem extends PiercingSystemMixin(Base) {
+    class ArmamentSystem extends AttackSystemMixin(Base) {
       /** @inheritDoc */
       static get metadata() {
         return foundry.utils.mergeObject(super.metadata, {
@@ -112,11 +112,6 @@ export default function ArmamentSystemMixin(Base) {
             label: "Vitals",
             nullable: false,
           }),
-          warded: new fields.BooleanField({
-            initial: false,
-            label: "Warded",
-            nullable: false,
-          }),
         });
       }
 
@@ -185,6 +180,8 @@ export default function ArmamentSystemMixin(Base) {
       getLocalRollData() {
         const data = super.getLocalRollData();
         Object.assign(data, {
+          ap: this.attackPenalty.value,
+          hit: this.hit.value,
           armament: 1,
           dmg: this.damage.base.formula,
           range: this.range.long.formula,
@@ -193,11 +190,8 @@ export default function ArmamentSystemMixin(Base) {
           "range.ranged": Number(this.range.ranged),
           av: this.av.value,
           bv: this.bv.value,
-          hit: this.hit.value,
-          ap: this.attackPenalty.value,
           style: this.fightingStyle,
           [`style.${this.fightingStyle}`]: 1,
-          warded: Number(this.warded),
           spellTurning: Number(this.spellTurning),
         });
         for (const type of this.damage.types) {

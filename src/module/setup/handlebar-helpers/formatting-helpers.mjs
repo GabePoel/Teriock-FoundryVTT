@@ -33,10 +33,10 @@ export default function registerFormattingHelpers() {
     return elementClass(elements);
   });
 
-  Handlebars.registerHelper("hackFill", function (stat) {
-    const min = stat?.min || 0;
-    const max = stat?.max || 0;
-    const value = stat?.value || 0;
+  Handlebars.registerHelper("hackFill", (part) => {
+    const min = part?.min || 0;
+    const max = part?.max || 0;
+    const value = part?.value || 0;
     if (value === min) {
       return "solid";
     } else if (value === max) {

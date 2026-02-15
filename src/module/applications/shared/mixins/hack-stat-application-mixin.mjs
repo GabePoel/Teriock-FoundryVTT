@@ -82,6 +82,36 @@ export default function HackStatApplicationMixin(Base) {
           });
       }
 
+      /** @inheritDoc */
+      async _prepareContext(options = {}) {
+        const context = await super._prepareContext(options);
+        return Object.assign(context, {
+          bars: {
+            hp: this._prepareStatContext(this.document.system.hp),
+            mp: this._prepareStatContext(this.document.system.mp),
+          },
+        });
+      }
+
+      /**
+       * Widths of stats.
+       * @param {object} stat
+       * @returns {{remaining, lost, temp, morganti}}
+       */
+      _prepareStatContext(stat) {
+        const total = stat.max + stat.temp + stat.morganti;
+        const remaining = Math.round((stat.value / total) * 100);
+        const morganti = Math.round((stat.morganti / total) * 100);
+        const temp = Math.round((stat.temp / total) * 100);
+        const lost = 100 - remaining - morganti - temp;
+        return {
+          remaining,
+          lost,
+          temp,
+          morganti,
+        };
+      }
+
       /**
        * Unrolls a stat die.
        * @param {PointerEvent} _event - The event object.

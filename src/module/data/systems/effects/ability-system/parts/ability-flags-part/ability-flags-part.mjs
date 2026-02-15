@@ -68,10 +68,6 @@ export default (Base) => {
           sustaining: new fields.SetField(
             new fields.DocumentUUIDField({ type: "ActiveEffect" }),
           ),
-          warded: new fields.BooleanField({
-            initial: false,
-            label: "Warded",
-          }),
         });
       }
 

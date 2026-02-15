@@ -58,13 +58,13 @@ export default class TeriockHealManager extends TeriockStatManager {
   static async _onRollStatDie(event, target) {
     const statDie = this._getStatDie(target);
     if (this._forHarm) {
-      const takeHandler = new buttonHandlers["roll-rollable-takes"](
+      const takeHandler = new buttonHandlers["roll-rollable-take"](
         event,
         target,
       );
       takeHandler.dataset = {
         type: "damage",
-        formula: `${statDie.formula}[holy]`,
+        formula: statDie.formula.replace("hp", "holy"),
       };
       await takeHandler.secondaryAction();
     } else {

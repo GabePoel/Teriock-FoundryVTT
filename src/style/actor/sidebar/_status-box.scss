@@ -11,167 +11,170 @@
     flex-direction: column;
     gap: 1em;
     width: 100%;
+  }
+}
 
-    .character-bar-container {
-      box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
-      position: relative;
+.character-bar-container {
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+  position: relative;
 
-      .character-bar {
-        border-radius: 6px;
-        display: flex;
-        flex-direction: row;
-        height: 3em;
-        overflow: hidden;
+  .character-bar {
+    border-radius: 6px;
+    display: flex;
+    flex-direction: row;
+    height: 3em;
+    overflow: hidden;
 
-        &.character-hit-bar {
-          border: 2px solid colors.$hp-red;
+    &.character-hit-bar {
+      border: 2px solid colors.$hp-red;
 
-          .character-bar-left {
-            background-color: colors.$hp-red;
-          }
+      .character-bar-left {
+        background-color: colors.$hp-red;
+      }
 
-          .character-bar-temp {
-            background-image: repeating-linear-gradient(
-              135deg,
-              colors.$hp-red 0px,
-              colors.$hp-red 2px,
-              colors.$hp-red-dark 2px,
-              colors.$hp-red-dark 8px
-                /* gap between lines: 2px line + 6px gap */
-            );
-            border-right: 2px solid colors.$hp-red;
-          }
+      .character-bar-temp {
+        background-image: repeating-linear-gradient(
+          135deg,
+          colors.$hp-red 0px,
+          colors.$hp-red 2px,
+          colors.$hp-red-dark 2px,
+          colors.$hp-red-dark 8px /* gap between lines: 2px line + 6px gap */
+        );
+        border-right: 2px solid colors.$hp-red;
+      }
 
-          .character-bar-lost {
-            background: linear-gradient(
-              90deg,
-              colors.$hp-red-faint,
-              colors.$hp-red-darkest
-            );
-          }
+      .character-bar-lost {
+        background: linear-gradient(
+          90deg,
+          colors.$hp-red-faint,
+          colors.$hp-red-darkest
+        );
+      }
 
-          .character-bar-morganti {
-            background: linear-gradient(90deg, black, colors.$hp-red-drawer);
-          }
-        }
+      .character-bar-morganti {
+        background: linear-gradient(90deg, black, colors.$hp-red-drawer);
+      }
+    }
 
-        &.character-mana-bar {
-          border: 2px solid colors.$mp-blue;
+    &.character-mana-bar {
+      border: 2px solid colors.$mp-blue;
 
-          .character-bar-left {
-            background-color: colors.$mp-blue;
-          }
+      .character-bar-left {
+        background-color: colors.$mp-blue;
+      }
 
-          .character-bar-temp {
-            background-image: repeating-linear-gradient(
-              135deg,
-              colors.$mp-blue 0px,
-              colors.$mp-blue 2px,
-              colors.$mp-blue-dark 2px,
-              colors.$mp-blue-dark 8px
-                /* gap between lines: 2px line + 6px gap */
-            );
-            border-right: 2px solid colors.$mp-blue;
-          }
+      .character-bar-temp {
+        background-image: repeating-linear-gradient(
+          135deg,
+          colors.$mp-blue 0px,
+          colors.$mp-blue 2px,
+          colors.$mp-blue-dark 2px,
+          colors.$mp-blue-dark 8px /* gap between lines: 2px line + 6px gap */
+        );
+        border-right: 2px solid colors.$mp-blue;
+      }
 
-          .character-bar-lost {
-            background: linear-gradient(
-              90deg,
-              colors.$mp-blue-faint,
-              colors.$mp-blue-darkest
-            );
-          }
+      .character-bar-lost {
+        background: linear-gradient(
+          90deg,
+          colors.$mp-blue-faint,
+          colors.$mp-blue-darkest
+        );
+      }
 
-          .character-bar-morganti {
-            background: linear-gradient(90deg, black, colors.$mp-blue-drawer);
-          }
-        }
+      .character-bar-morganti {
+        background: linear-gradient(90deg, black, colors.$mp-blue-drawer);
+      }
+    }
 
-        &.character-wither-bar {
-          border: 2px solid colors.$wp-grey;
+    &.character-wither-bar {
+      border: 2px solid colors.$wp-grey;
 
-          .character-bar-left {
-            background-color: colors.$wp-grey;
-          }
+      .character-bar-left {
+        background-color: colors.$wp-grey;
+      }
 
-          .character-bar-temp {
-            background-image: repeating-linear-gradient(
-              135deg,
-              colors.$wp-grey 0px,
-              colors.$wp-grey 2px,
-              colors.$wp-grey-dark 2px,
-              colors.$wp-grey-dark 8px
-                /* gap between lines: 2px line + 6px gap */
-            );
-            border-right: 2px solid colors.$wp-grey;
-          }
+      .character-bar-temp {
+        background-image: repeating-linear-gradient(
+          135deg,
+          colors.$wp-grey 0px,
+          colors.$wp-grey 2px,
+          colors.$wp-grey-dark 2px,
+          colors.$wp-grey-dark 8px /* gap between lines: 2px line + 6px gap */
+        );
+        border-right: 2px solid colors.$wp-grey;
+      }
 
-          .character-bar-lost {
-            background: linear-gradient(
-              90deg,
-              colors.$wp-grey-faint,
-              colors.$wp-grey-darkest
-            );
-          }
-        }
+      .character-bar-lost {
+        background: linear-gradient(
+          90deg,
+          colors.$wp-grey-faint,
+          colors.$wp-grey-darkest
+        );
+      }
+    }
 
-        .character-bar-left {
-          flex: none;
-          height: 3em;
-        }
+    .character-bar-left {
+      flex: none;
+      height: 3em;
+    }
 
-        .character-bar-temp {
-          flex: none;
-          height: 3em;
-        }
+    .character-bar-temp {
+      flex: none;
+      height: 3em;
+    }
 
-        .character-bar-lost {
-          flex: none;
-          height: 3em;
+    .character-bar-lost {
+      flex: none;
+      height: 3em;
+    }
+  }
+
+  .character-bar-overlay {
+    align-content: center;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    .character-bar-overlay-row {
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+      justify-content: start;
+
+      input {
+        border: none;
+        color: var(--color-light-2);
+        margin-inline: 2px;
+        padding-inline: 2px;
+
+        &[disabled] {
+          cursor: unset;
+          user-select: none;
         }
       }
 
-      .character-bar-overlay {
-        align-content: center;
-        bottom: 0;
-        left: 0;
-        position: absolute;
-        right: 0;
-        top: 0;
+      .character-bar-overlay-label {
+        align-items: center;
+        background-color: transparent;
+        box-shadow: none;
+        display: flex;
+        flex: none;
+        font-size: 1.5em;
+        height: var(--input-height);
+      }
 
-        .character-bar-overlay-row {
-          align-items: center;
-          display: flex;
-          flex-direction: row;
-          justify-content: start;
+      .character-bar-overlay-left {
+        margin-left: 0.25em;
+        text-align: right;
+        width: 2em;
+      }
 
-          input {
-            border: none;
-            margin-inline: 2px;
-            padding-inline: 2px;
-          }
-
-          .character-bar-overlay-label {
-            align-items: center;
-            background-color: transparent;
-            box-shadow: none;
-            display: flex;
-            flex: none;
-            font-size: 1.5em;
-            height: var(--input-height);
-          }
-
-          .character-bar-overlay-left {
-            margin-left: 0.25em;
-            text-align: right;
-            width: 2em;
-          }
-
-          .character-bar-overlay-temp {
-            text-align: left;
-            width: 2em;
-          }
-        }
+      .character-bar-overlay-temp {
+        text-align: left;
+        width: 2em;
       }
     }
   }
