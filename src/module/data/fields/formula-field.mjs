@@ -1,4 +1,4 @@
-import { TeriockRoll } from "../../dice/_module.mjs";
+import { BaseRoll } from "../../dice/rolls/_module.mjs";
 import {
   addFormula,
   boostFormula,
@@ -77,7 +77,7 @@ export default class FormulaField extends EnhancedStringField {
   /** @inheritdoc */
   _validateType(value) {
     if (this.deterministic) {
-      const roll = new TeriockRoll(value, {});
+      const roll = new BaseRoll(value, {});
       if (!roll.isDeterministic) {
         throw new Error(`must not contain dice terms: ${value}`);
       }

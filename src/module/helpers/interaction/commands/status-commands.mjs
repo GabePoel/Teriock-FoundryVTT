@@ -2,7 +2,7 @@ import { icons } from "../../../constants/display/icons.mjs";
 
 /**
  * @param {TeriockActor} actor
- * @param {Teriock.Interactions.StatusOptions} options
+ * @param {Teriock.Interaction.StatusOptions} options
  * @returns {Promise<void>}
  */
 async function apply(actor, options = {}) {
@@ -13,7 +13,7 @@ async function apply(actor, options = {}) {
 
 /**
  * @param {TeriockActor} actor
- * @param {Teriock.Interactions.StatusOptions} options
+ * @param {Teriock.Interaction.StatusOptions} options
  * @returns {Promise<void>}
  */
 async function remove(actor, options = {}) {
@@ -24,7 +24,7 @@ async function remove(actor, options = {}) {
 
 /**
  * @param {TeriockActor} actor
- * @param {Teriock.Interactions.StatusOptions} options
+ * @param {Teriock.Interaction.StatusOptions} options
  * @returns {Promise<void>}
  */
 async function toggle(actor, options = {}) {
@@ -35,7 +35,7 @@ async function toggle(actor, options = {}) {
 
 /**
  * Apply status command
- * @type {Teriock.Interactions.CommandEntry}
+ * @type {Teriock.Interaction.CommandEntry}
  */
 export const applyStatusCommand = {
   args: ["status"],
@@ -51,7 +51,7 @@ export const applyStatusCommand = {
 
 /**
  * Remove status command
- * @type {Teriock.Interactions.CommandEntry}
+ * @type {Teriock.Interaction.CommandEntry}
  */
 export const removeStatusCommand = {
   args: ["status"],
@@ -67,7 +67,7 @@ export const removeStatusCommand = {
 
 /**
  * Toggle status command
- * @type {Teriock.Interactions.CommandEntry}
+ * @type {Teriock.Interaction.CommandEntry}
  */
 export const toggleStatusCommand = {
   args: ["status"],

@@ -31,7 +31,7 @@ import type TeriockHotbar from "../applications/ui/hotbar.mjs";
 declare global {
   // Definition for writing macros.
   let actor: TeriockActor;
-  let scope: Teriock.RollOptions.MacroScope;
+  let scope: Teriock.Rolls.MacroScope;
 
   const game: TeriockGame & {
     actors: TeriockActors;

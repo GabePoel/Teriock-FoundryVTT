@@ -1,11 +1,11 @@
-import { TeriockRoll } from "../../dice/_module.mjs";
+import { BaseRoll } from "../../dice/rolls/_module.mjs";
 import { roundTo } from "../../helpers/unit.mjs";
 import { FormulaField } from "../fields/_module.mjs";
 import EmbeddedDataModel from "./embedded-data-model.mjs";
 
 /**
  * Model that improves functionality and ergonomics of formula fields.
- * @property {string} raw - String corresponding to the formula.
+ * @property {Teriock.System.FormulaString} raw - String corresponding to the formula.
  */
 export default class EvaluationModel extends EmbeddedDataModel {
   constructor(
@@ -90,8 +90,8 @@ export default class EvaluationModel extends EmbeddedDataModel {
    */
   get nonZero() {
     return (
-      TeriockRoll.minValue(this.formula) !== 0 &&
-      TeriockRoll.maxValue(this.formula) !== 0
+      BaseRoll.minValue(this.formula) !== 0 &&
+      BaseRoll.maxValue(this.formula) !== 0
     );
   }
 
@@ -134,7 +134,7 @@ export default class EvaluationModel extends EmbeddedDataModel {
     if (needsEval && !options.skipRollData) {
       let rollData = options.rollData;
       if (!rollData) rollData = this.getRollData();
-      value = TeriockRoll.minValue(formula, rollData);
+      value = BaseRoll.minValue(formula, rollData);
     }
     if (typeof options.max === "number") {
       value = Math.min(value, options.max);

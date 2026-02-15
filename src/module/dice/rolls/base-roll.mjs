@@ -1,11 +1,11 @@
-import { systemPath } from "../helpers/path.mjs";
-import Booster from "./booster.mjs";
-import { selectWeightedMaxFaceDie } from "./helpers.mjs";
+import { systemPath } from "../../helpers/path.mjs";
+import Booster from "../booster.mjs";
+import { selectWeightedMaxFaceDie } from "../helpers.mjs";
 
 const { Roll } = foundry.dice;
 
 /** @inheritDoc */
-export default class TeriockRoll extends Roll {
+export default class BaseRoll extends Roll {
   /** @inheritDoc */
   static CHAT_TEMPLATE = systemPath("templates/ui-templates/roll.hbs");
 
@@ -98,7 +98,7 @@ export default class TeriockRoll extends Roll {
    * @returns {Promise<number>}
    */
   static async getValue(formula, data, options = {}) {
-    const roll = new TeriockRoll(formula, data, options);
+    const roll = new BaseRoll(formula, data, options);
     await roll.evaluate({ allowStrings: true });
     return roll.total;
   }
@@ -110,7 +110,7 @@ export default class TeriockRoll extends Roll {
    * @returns {number}
    */
   static maxValue(formula, data = {}) {
-    const maxRoll = new TeriockRoll(formula + " + 0", data);
+    const maxRoll = new BaseRoll(formula + " + 0", data);
     return maxRoll.evaluateSync({ allowStrings: true, maximize: true }).total;
   }
 
@@ -133,13 +133,22 @@ export default class TeriockRoll extends Roll {
    * @returns {number}
    */
   static minValue(formula, data = {}) {
-    const minRoll = new TeriockRoll(formula + " + 0", data);
+    const minRoll = new BaseRoll(formula + " + 0", data);
     return minRoll.evaluateSync({ allowStrings: true, minimize: true }).total;
   }
 
   /**
+   * Parse an event into usable roll or execution options.
+   * @param {PointerEvent} _event
+   * @returns {object}
+   */
+  static parseEvent(_event) {
+    return {};
+  }
+
+  /**
    * Reset all rolls recursively.
-   * @param {TeriockRoll} roll
+   * @param {BaseRoll} roll
    */
   static resetFormulas(roll) {
     for (const term of roll.terms) {
@@ -163,7 +172,7 @@ export default class TeriockRoll extends Roll {
   get success() {
     if (typeof this.threshold === "number") {
       const comparisonFormula = `${this.comparison}(${this.total}, ${this.threshold})`;
-      const comparisonRoll = new TeriockRoll(comparisonFormula, {});
+      const comparisonRoll = new BaseRoll(comparisonFormula, {});
       comparisonRoll.evaluateSync();
       return Boolean(comparisonRoll.total);
     }
@@ -211,7 +220,7 @@ export default class TeriockRoll extends Roll {
   /**
    * Boost this roll in place.
    * @param {object} [options]
-   * @returns {Promise<TeriockRoll>}
+   * @returns {Promise<BaseRoll>}
    */
   async boost(options = {}) {
     const clone = this.clone({ evaluated: true });
@@ -221,11 +230,11 @@ export default class TeriockRoll extends Roll {
     }
     const die = selectWeightedMaxFaceDie(clone.dice);
     die._number += 1;
-    const dieRoll = new TeriockRoll(die.formula);
+    const dieRoll = new BaseRoll(die.formula);
     await dieRoll.evaluate();
     die.results.push(dieRoll.dice[0].results.at(-1));
-    TeriockRoll.resetFormulas(clone);
-    return /** @type {TeriockRoll} */ TeriockRoll.fromTerms(
+    BaseRoll.resetFormulas(clone);
+    return /** @type {BaseRoll} */ BaseRoll.fromTerms(
       [
         new Booster({
           fn: "b",
@@ -242,22 +251,22 @@ export default class TeriockRoll extends Roll {
    * @inheritDoc
    * @param {object} [options]
    * @param {boolean} [options.evaluated]
-   * @returns {TeriockRoll}
+   * @returns {BaseRoll}
    */
   clone(options = {}) {
     const { evaluated } = options;
     if (evaluated) {
-      return /** @type {TeriockRoll} */ TeriockRoll.fromData(
+      return /** @type {BaseRoll} */ BaseRoll.fromData(
         foundry.utils.deepClone(this.toJSON()),
       );
     }
-    return /** @type {TeriockRoll} */ super.clone();
+    return /** @type {BaseRoll} */ super.clone();
   }
 
   /**
    * Deboost this roll in place.
    * @param {object} [options]
-   * @returns {Promise<TeriockRoll>}
+   * @returns {Promise<BaseRoll>}
    */
   async deboost(options = {}) {
     const clone = this.clone({ evaluated: true });
@@ -268,8 +277,8 @@ export default class TeriockRoll extends Roll {
     const die = selectWeightedMaxFaceDie(clone.dice);
     die._number = Math.max(0, die._number - 1);
     die.results.pop();
-    TeriockRoll.resetFormulas(clone);
-    return /** @type {TeriockRoll} */ TeriockRoll.fromTerms(
+    BaseRoll.resetFormulas(clone);
+    return /** @type {BaseRoll} */ BaseRoll.fromTerms(
       [
         new Booster({
           fn: "db",

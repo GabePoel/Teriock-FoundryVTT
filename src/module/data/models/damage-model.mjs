@@ -1,4 +1,4 @@
-import { TeriockRoll } from "../../dice/_module.mjs";
+import { BaseRoll } from "../../dice/rolls/_module.mjs";
 import { formulaExists } from "../../helpers/formula.mjs";
 import EvaluationModel from "./evaluation-model.mjs";
 
@@ -18,7 +18,7 @@ export default class DamageModel extends EvaluationModel {
    */
   addTypes(newTypes) {
     if (formulaExists(this.raw)) {
-      const roll = new TeriockRoll(this.raw);
+      const roll = new BaseRoll(this.raw);
       const terms = roll.terms.filter(
         (t) => !t.isDeterministic && !isNaN(Number(t.expression)),
       );

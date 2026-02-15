@@ -1,4 +1,4 @@
-import { makeCommonRollOptions } from "../../../../../helpers/rolling.mjs";
+import { ThresholdRoll } from "../../../../../dice/rolls/_module.mjs";
 
 //noinspection JSClosureCompilerSyntax
 /**
@@ -28,9 +28,7 @@ export default (Base) =>
      * @returns {Promise<void>}
      */
     static async _onRollFeatSave(event, target) {
-      const attribute = target.dataset.attribute;
-      const options = makeCommonRollOptions(event);
-      await this.actor.system.rollFeatSave(attribute, options);
+      await this.actor.system.rollFeatSave(target.dataset.attribute, { event });
     }
 
     /**
@@ -40,9 +38,9 @@ export default (Base) =>
      * @returns {Promise<void>}
      */
     static async _onRollHexproof(event, target) {
-      const options = protectionOptions(event, target);
-      options.hex = true;
-      await this.actor.system.rollResistance(options);
+      await this.actor.system.rollResistance(
+        Object.assign(protectionOptions(event, target), { hex: true }),
+      );
     }
 
     /**
@@ -52,9 +50,9 @@ export default (Base) =>
      * @returns {Promise<void>}
      */
     static async _onRollHexseal(event, target) {
-      const options = protectionOptions(event, target);
-      options.hex = true;
-      await this.actor.system.rollImmunity(options);
+      await this.actor.system.rollImmunity(
+        Object.assign(protectionOptions(event, target), { hex: true }),
+      );
     }
 
     /**
@@ -64,8 +62,7 @@ export default (Base) =>
      * @returns {Promise<void>}
      */
     static async _onRollImmunity(event, target) {
-      const options = protectionOptions(event, target);
-      await this.actor.system.rollImmunity(options);
+      await this.actor.system.rollImmunity(protectionOptions(event, target));
     }
 
     /**
@@ -75,8 +72,7 @@ export default (Base) =>
      * @returns {Promise<void>}
      */
     static async _onRollResistance(event, target) {
-      const options = protectionOptions(event, target);
-      await this.actor.system.rollResistance(options);
+      await this.actor.system.rollResistance(protectionOptions(event, target));
     }
 
     /** @inheritDoc */
@@ -103,8 +99,6 @@ function protectionOptions(event, target) {
   const img = target.querySelector("img");
   const block = target.closest(".teriock-block");
   const options = {
-    advantage: event.altKey,
-    disadvantage: event.shiftKey,
     wrappers: [
       block?.querySelector(".teriock-block-title")?.textContent || "",
       block?.querySelector(".teriock-block-subtitle")?.textContent || "",
@@ -113,5 +107,5 @@ function protectionOptions(event, target) {
   if (img?.src) {
     options.image = img.src;
   }
-  return options;
+  return Object.assign(options, ThresholdRoll.parseEvent(event));
 }

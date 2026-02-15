@@ -4,7 +4,7 @@ import { pureUuid } from "../../resolve.mjs";
 
 /**
  * @param {TeriockActor} actor
- * @param {Teriock.Interactions.StandardDamageOptions} options
+ * @param {Teriock.Interaction.StandardDamageOptions} options
  * @returns {Promise<void>}
  */
 async function primary(actor, options = {}) {
@@ -27,7 +27,7 @@ async function primary(actor, options = {}) {
 
 /**
  * @param {TeriockActor} actor
- * @param {Teriock.Interactions.StandardDamageOptions} options
+ * @param {Teriock.Interaction.StandardDamageOptions} options
  * @returns {Promise<void>}
  */
 async function secondary(actor, options = {}) {
@@ -54,7 +54,7 @@ async function secondary(actor, options = {}) {
 
 /**
  * Standard damage command
- * @type {Teriock.Interactions.CommandEntry}
+ * @type {Teriock.Interaction.CommandEntry}
  */
 const command = {
   aliases: ["sd", "standard"],

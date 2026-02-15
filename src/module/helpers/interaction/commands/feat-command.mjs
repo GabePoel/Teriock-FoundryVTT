@@ -2,7 +2,7 @@ import { thresholdCommand } from "./abstract-command.mjs";
 
 /**
  * @param {TeriockActor} actor
- * @param {Teriock.Interactions.FeatOptions} options
+ * @param {Teriock.Interaction.FeatOptions} options
  */
 async function primary(actor, options = {}) {
   const attribute = options.attribute || "mov";
@@ -11,7 +11,7 @@ async function primary(actor, options = {}) {
 
 /**
  * Feat command
- * @type {Teriock.Interactions.CommandEntry}
+ * @type {Teriock.Interaction.CommandEntry}
  */
 const command = {
   ...thresholdCommand,

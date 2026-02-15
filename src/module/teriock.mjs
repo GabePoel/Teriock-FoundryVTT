@@ -386,7 +386,7 @@ foundry.helpers.Hooks.once("init", function () {
   // ==============
 
   CONFIG.Dice.rolls.length = 0;
-  CONFIG.Dice.rolls.push(dice.TeriockRoll);
+  CONFIG.Dice.rolls.push(...[dice.rolls.BaseRoll, dice.rolls.ThresholdRoll]);
   CONFIG.Dice.termTypes.FunctionTerm = dice.FunctionTerm;
   for (const category of Object.values(dice.functions)) {
     for (const [k, v] of Object.entries(category)) {
@@ -415,7 +415,7 @@ foundry.helpers.Hooks.once("init", function () {
     JournalEntry: documents.TeriockJournalEntry,
     JournalEntryPage: documents.TeriockJournalEntryPage,
     JournalEntryCategory: documents.TeriockJournalEntryCategory,
-    Roll: dice.TeriockRoll,
+    Roll: dice.rolls.BaseRoll,
     data: data,
     packs: new documents.collections.TeriockPacks(),
   };

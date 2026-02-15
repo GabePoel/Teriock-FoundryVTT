@@ -1,4 +1,4 @@
-import { TeriockRoll } from "../../dice/_module.mjs";
+import { BaseRoll } from "../../dice/rolls/_module.mjs";
 import { TeriockChatMessage } from "../../documents/_module.mjs";
 import { addFormula, formulaExists } from "../../helpers/formula.mjs";
 
@@ -43,7 +43,7 @@ export default class BaseExecution {
   /** @type {boolean} */
   proficient = false;
 
-  /** @type {TeriockRoll[]} */
+  /** @type {BaseRoll[]} */
   rolls = [];
 
   /** @type {string[]} */
@@ -151,7 +151,7 @@ export default class BaseExecution {
   async _buildRolls() {
     if (formulaExists(this.formula)) {
       this.rolls.push(
-        new TeriockRoll(this.formula, this.rollData, this.rollOptions),
+        new BaseRoll(this.formula, this.rollData, this.rollOptions),
       );
     }
   }
@@ -165,7 +165,7 @@ export default class BaseExecution {
   /**
    * Create a chat message from this execution.
    * @param {object} [options]
-   * @param {Teriock.RollOptions.RollMode} [options.rollMode]
+   * @param {Teriock.Rolls.RollMode} [options.rollMode]
    * @returns {Promise<void>}
    */
   async _createChatMessage(options = {}) {

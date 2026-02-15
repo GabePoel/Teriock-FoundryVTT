@@ -2,7 +2,7 @@ import { thresholdCommand } from "./abstract-command.mjs";
 
 /**
  * @param {TeriockActor} actor
- * @param {Teriock.Interactions.UseAbilityOptions} options
+ * @param {Teriock.Interaction.UseAbilityOptions} options
  * @returns {Promise<void>}
  */
 async function primary(actor, options = {}) {
@@ -12,8 +12,7 @@ async function primary(actor, options = {}) {
     return;
   }
   await actor.useAbility(abilityName, {
-    advantage: options.advantage,
-    disadvantage: options.disadvantage,
+    edge: options.edge,
     bonus: options.bonus,
     threshold: options.threshold,
   });
@@ -21,7 +20,7 @@ async function primary(actor, options = {}) {
 
 /**
  * Use ability command
- * @type {Teriock.Interactions.CommandEntry}
+ * @type {Teriock.Interaction.CommandEntry}
  */
 const command = {
   ...thresholdCommand,

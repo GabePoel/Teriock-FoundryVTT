@@ -2,7 +2,7 @@ import { TeriockActor } from "../documents/_module.mjs";
 import { take } from "../constants/options/_module.mjs";
 
 declare global {
-  namespace Teriock.Interactions {
+  namespace Teriock.Interaction {
     export type TakeKey = keyof typeof take;
 
     export type InteractionEntry = {
@@ -21,11 +21,26 @@ declare global {
       formula?: boolean;
     };
 
+    export type UseOptions = {
+      event?: PointerEvent;
+    };
+
+    /**
+     * Options for generic threshold rolls.
+     */
     export type ThresholdOptions = {
-      advantage?: boolean;
-      disadvantage?: boolean;
-      bonus?: string | number;
+      /** Some bonus to add to the roll */
+      bonus?: Teriock.System.FormulaString;
+      /** Proficiency and fluency */
+      competence?: Teriock.System.CompetenceLevel;
+      /** Positive for advantage, negative for disadvantage */
+      edge?: Teriock.System.EdgeLevel;
+      /** A formula to use other than the default one */
+      formula?: Teriock.System.FormulaString;
+      /** A threshold the roll needs to meet */
       threshold?: number;
+      /** The comparison operation `c(roll, threshold)` */
+      comparison?: Teriock.Fields.ComparisonCheck;
     };
 
     export type TradecraftOptions = ThresholdOptions & {

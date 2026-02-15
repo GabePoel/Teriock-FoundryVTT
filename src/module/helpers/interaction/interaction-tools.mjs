@@ -38,7 +38,7 @@ export function interpretArguments(argArr, command) {
 
 /**
  * Get a value from a specified property of an interaction.
- * @param {Teriock.Interactions.CommandEntry} interaction
+ * @param {Teriock.Interaction.CommandEntry} interaction
  * @param {string} property
  * @param {object} options
  * @returns {string}
@@ -51,7 +51,7 @@ export function getInteractionEntryValue(interaction, property, options) {
 
 /**
  * Build a button handler from a command entry.
- * @param {Teriock.Interactions.CommandEntry} command
+ * @param {Teriock.Interaction.CommandEntry} command
  * @returns {typeof AbstractButtonHandler}
  */
 export function CommandButtonHandlerBuilder(command) {
@@ -76,21 +76,21 @@ export function CommandButtonHandlerBuilder(command) {
 
       /** @inheritDoc */
       async primaryAction() {
-        const options = foundry.utils.deepClone(this.commonRollOptions);
-        Object.assign(options, this.critRollOptions);
-        Object.assign(options, this.dataset);
         for (const actor of this.actors) {
-          await command.primary(actor, options);
+          await command.primary(
+            actor,
+            Object.assign({ event: this.event }, this.dataset),
+          );
         }
       }
 
       /** @inheritDoc */
       async secondaryAction() {
-        const options = foundry.utils.deepClone(this.commonRollOptions);
-        Object.assign(options, this.critRollOptions);
-        Object.assign(options, this.dataset);
         for (const actor of this.actors) {
-          await command.secondary(actor, options);
+          await command.secondary(
+            actor,
+            Object.assign({ event: this.event }, this.dataset),
+          );
         }
       }
     }

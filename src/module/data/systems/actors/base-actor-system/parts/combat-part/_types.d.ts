@@ -29,7 +29,7 @@ export default interface ActorCombatPartInterface {
     cc: number;
   };
   /** <schema> Initiative */
-  initiative: string;
+  initiative: Teriock.System.FormulaString;
   /** <schema> Offense */
   offense: {
     /** <schema> Style bonus */

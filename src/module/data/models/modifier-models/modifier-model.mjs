@@ -1,6 +1,9 @@
 import { toCamelCase, toTitleCase } from "../../../helpers/string.mjs";
-import { makeIconClass } from "../../../helpers/utils.mjs";
-import { UsableDataMixin } from "../../shared/mixins/_module.mjs";
+import { makeIconClass, mix } from "../../../helpers/utils.mjs";
+import {
+  ThresholdDataMixin,
+  UsableDataMixin,
+} from "../../shared/mixins/_module.mjs";
 import EvaluationModel from "../evaluation-model.mjs";
 
 const { fields } = foundry.data;
@@ -11,7 +14,11 @@ const { fields } = foundry.data;
  * @extends EvaluationModel
  * @implements {Teriock.Models.ModifierModelInterface}
  */
-export default class ModifierModel extends UsableDataMixin(EvaluationModel) {
+export default class ModifierModel extends mix(
+  EvaluationModel,
+  UsableDataMixin,
+  ThresholdDataMixin,
+) {
   /** @inheritDoc */
   static defineSchema(options = {}) {
     const { score = 0 } = options;

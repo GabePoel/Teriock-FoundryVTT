@@ -127,7 +127,7 @@ export default class TeriockMacro extends mix(
    */
   static async makeGeneralUseMacro(doc) {
     const command = dedent(`
-    await game.teriock.Macro.useDocumentGeneral("${doc.name}", { actor, type: "${doc.type}", event: event })`);
+    await game.teriock.Macro.useDocumentGeneral("${doc.name}", { actor, type: "${doc.type}", event })`);
     const macroData = {
       name: `Use ${doc.name}`,
       type: "script",
@@ -192,15 +192,8 @@ export default class TeriockMacro extends mix(
     }
     for (const a of actors) {
       const doc = await this.getDocument(a, name, type);
-      if (doc) {
-        const useOptions = {
-          actor: a,
-        };
-        if (event) {
-          Object.assign(useOptions, doc.system.parseEvent(event));
-        }
-        await doc.system.use(useOptions);
-      } else {
+      if (doc) await doc.system.use({ actor: a, event });
+      else {
         ui.notifications.warn(
           `${a.name} has no ${type ? TERIOCK.options.document[type].name.toLowerCase() : "document"} called ${name}.`,
         );
@@ -211,22 +204,12 @@ export default class TeriockMacro extends mix(
   /**
    * Get a document from its UUID and use it.
    * @param {UUID<TeriockChild>} uuid
-   * @param {object} [options]
-   * @param {PointerEvent} [options.event]
+   * @param {Teriock.Interaction.UseOptions} [options]
    * @returns {Promise<void>}
    */
-  static async useDocumentLinked(uuid, options) {
-    const { event } = options.event;
+  static async useDocumentLinked(uuid, options = {}) {
     const doc = await fromUuid(uuid);
-    if (doc) {
-      const useOptions = {
-        actor: doc.actor,
-      };
-      if (event) {
-        Object.assign(useOptions, doc.system.parseEvent(event));
-      }
-      await doc.system.use(useOptions);
-    }
+    if (doc) await doc.system.use(Object.assign(options, { actor: doc.actor }));
   }
 
   /** @inheritDoc */

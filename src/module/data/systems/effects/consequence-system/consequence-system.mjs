@@ -2,6 +2,7 @@ import { inCombatExpirationDialog } from "../../../../applications/dialogs/_modu
 import { getRollIcon, mix } from "../../../../helpers/utils.mjs";
 import { builders } from "../../../fields/helpers/_module.mjs";
 import { migrateHierarchy } from "../../../shared/migrations/migrate-hierarchy.mjs";
+import { ThresholdDataMixin } from "../../../shared/mixins/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
 
@@ -18,7 +19,7 @@ const { fields } = foundry.data;
 export default class ConsequenceSystem extends mix(
   BaseEffectSystem,
   mixins.HierarchySystemMixin,
-  mixins.TransformationSystemMixin,
+  ThresholdDataMixin,
 ) {
   /** @inheritDoc */
   static get metadata() {

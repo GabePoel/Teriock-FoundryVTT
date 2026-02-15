@@ -1,7 +1,6 @@
 const data = /** @type {Teriock.HookData.UseAbility} */ scope.data;
 const options = {
-  advantage: data.execution.advantage,
-  disadvantage: data.execution.disadvantage,
+  edge: data.execution.edge,
   actor: data.execution.actor,
   noHeighten: true,
 };

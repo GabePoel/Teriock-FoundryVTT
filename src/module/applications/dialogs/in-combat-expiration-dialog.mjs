@@ -1,4 +1,4 @@
-import { TeriockRoll } from "../../dice/_module.mjs";
+import { BaseRoll } from "../../dice/rolls/_module.mjs";
 import { TeriockChatMessage } from "../../documents/_module.mjs";
 import { makeIconClass } from "../../helpers/utils.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
@@ -81,7 +81,7 @@ export default async function inCombatExpirationDialog(
             label: "Roll",
             default: true,
             callback: async (_event, button) => {
-              const expirationRoll = new TeriockRoll(
+              const expirationRoll = new BaseRoll(
                 button.form.elements.namedItem("roll").value,
                 effect.actor.getRollData(),
                 {

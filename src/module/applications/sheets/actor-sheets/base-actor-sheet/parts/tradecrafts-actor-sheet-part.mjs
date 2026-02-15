@@ -21,15 +21,9 @@ export default (Base) =>
      * @returns {Promise<void>}
      */
     static async _onRollTradecraft(event, target) {
-      const tradecraft = target.dataset.tradecraft;
-      const options = {};
-      if (event.altKey) {
-        options.advantage = true;
-      }
-      if (event.shiftKey) {
-        options.disadvantage = true;
-      }
-      await this.actor.system.rollTradecraft(tradecraft, options);
+      await this.actor.system.rollTradecraft(target.dataset.tradecraft, {
+        event,
+      });
     }
 
     /** @inheritDoc */

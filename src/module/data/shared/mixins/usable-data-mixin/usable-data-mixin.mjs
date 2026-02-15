@@ -32,6 +32,15 @@ export default function UsableDataMixin(Base) {
       }
 
       /**
+       * Parse an event into usable roll or execution options for this type.
+       * @param {PointerEvent} _event
+       * @returns {Teriock.Execution.DocumentExecutionOptions}
+       */
+      static parseEvent(_event) {
+        return {};
+      }
+
+      /**
        * An icon that represents using this.
        * @returns {string}
        */
@@ -64,11 +73,26 @@ export default function UsableDataMixin(Base) {
       }
 
       /**
+       * Parse an event into usable roll or execution options for this instance.
+       * @param {PointerEvent} event
+       * @returns {Teriock.Execution.DocumentExecutionOptions}
+       */
+      parseEvent(event) {
+        return Object.assign(this.constructor.parseEvent(event), {
+          source: this.parent,
+        });
+      }
+
+      /**
        * Uses this, including all hook and pseudo-hook calls.
-       * @param {object} options
+       * @param {Teriock.Interaction.UseOptions} options
        * @returns {Promise<void>}
        */
       async use(options = {}) {
+        if (options.event) {
+          Object.assign(options, this.parseEvent(options.event));
+          delete options.event;
+        }
         await this._use(options);
       }
     }

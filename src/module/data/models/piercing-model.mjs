@@ -6,6 +6,7 @@ const { fields } = foundry.data;
 /**
  * Model for common implementation of piercing settings.
  * @implements {Teriock.Models.ScaleModelInterface}
+ * @property {Teriock.System.PiercingLevel} raw
  */
 export default class PiercingModel extends EmbeddedDataModel {
   /** @inheritDoc */

@@ -1,4 +1,4 @@
-import { TeriockRoll } from "../../../../dice/_module.mjs";
+import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { formulaExists } from "../../../../helpers/formula.mjs";
 import { toTitleCase } from "../../../../helpers/string.mjs";
 
@@ -21,7 +21,7 @@ export default function AbilityExecutionActorUpdatePart(Base) {
           this.source.system.interaction === "attack" &&
           formulaExists(this.attackPenaltyFormula)
         ) {
-          const attackPenaltyRoll = new TeriockRoll(
+          const attackPenaltyRoll = new BaseRoll(
             this.attackPenaltyFormula,
             this.rollData,
           );

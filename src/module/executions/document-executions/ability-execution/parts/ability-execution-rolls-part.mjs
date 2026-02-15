@@ -1,4 +1,4 @@
-import { TeriockRoll } from "../../../../dice/_module.mjs";
+import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 
 /**
  * @param {typeof AbilityExecutionConstructor} Base
@@ -69,18 +69,18 @@ export default function AbilityExecutionRollsPart(Base) {
               }
             }
             this.rolls.push(
-              new TeriockRoll(this.formula, this.rollData, rollOptions),
+              new BaseRoll(this.formula, this.rollData, rollOptions),
             );
           }
           if (this.rolls.length === 0) {
             this.rolls.push(
-              new TeriockRoll(this.formula, this.rollData, generalRollOptions),
+              new BaseRoll(this.formula, this.rollData, generalRollOptions),
             );
           }
         } else if (this.source.system.interaction === "feat") {
           styles.total.icon = "star";
           this.rolls.push(
-            new TeriockRoll(this.formula, this.rollData, {
+            new BaseRoll(this.formula, this.rollData, {
               flavor: this.flavor,
               targets: Array.from(this.targets),
               styles: styles,
@@ -88,7 +88,7 @@ export default function AbilityExecutionRollsPart(Base) {
           );
         } else if (this.source.system.interaction === "block") {
           this.rolls.push(
-            new TeriockRoll(this.formula, this.rollData, {
+            new BaseRoll(this.formula, this.rollData, {
               flavor: this.flavor,
               styles: styles,
               targets: Array.from(this.targets),
@@ -97,7 +97,7 @@ export default function AbilityExecutionRollsPart(Base) {
         } else if (this.source.system.interaction === "manifest") {
           if (this.targets.size > 0) {
             this.rolls.push(
-              new TeriockRoll("0", this.rollData, {
+              new BaseRoll("0", this.rollData, {
                 flavor: this.flavor,
                 hideRoll: true,
                 styles: styles,

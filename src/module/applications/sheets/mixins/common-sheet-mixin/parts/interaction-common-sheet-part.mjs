@@ -57,12 +57,7 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       static async _onRollThis(event) {
-        const options = event?.altKey
-          ? { advantage: true }
-          : event?.shiftKey
-            ? { disadvantage: true }
-            : {};
-        await this.document.use(options);
+        await this.document.use({ event });
       }
     }
   );

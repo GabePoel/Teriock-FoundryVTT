@@ -31,13 +31,7 @@ export default class TradecraftModel extends ModifierModel {
       options,
     };
     await this.actor.hookCall("rollTradecraft", data);
-    if (data.cancel) {
-      return;
-    }
-    options = {
-      ...options,
-      tradecraft: data.tradecraft,
-    };
-    await this._use(options);
+    if (data.cancel) return;
+    await super.use(Object.assign(options, { tradecraft: data.tradecraft }));
   }
 }

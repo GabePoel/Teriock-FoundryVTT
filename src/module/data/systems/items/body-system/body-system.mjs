@@ -1,4 +1,4 @@
-import { TeriockRoll } from "../../../../dice/_module.mjs";
+import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { dotJoin, prefix, suffix } from "../../../../helpers/string.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
 import * as mixins from "../../mixins/_module.mjs";
@@ -111,7 +111,7 @@ export default class BodySystem extends mix(
   prepareSpecialData() {
     for (const damageOption of ["base"]) {
       const key = `damage.${damageOption}.raw`;
-      const damageRoll = new TeriockRoll(foundry.utils.getProperty(this, key));
+      const damageRoll = new BaseRoll(foundry.utils.getProperty(this, key));
       damageRoll.terms.forEach((term) => {
         const flavorParts = new Set([
           ...term.flavor

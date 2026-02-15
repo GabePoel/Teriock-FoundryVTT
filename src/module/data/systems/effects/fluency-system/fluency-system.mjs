@@ -6,6 +6,7 @@ import { mix } from "../../../../helpers/utils.mjs";
 import { TextField } from "../../../fields/_module.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
 import { CommonMacroAutomation } from "../../../pseudo-documents/automations/_module.mjs";
+import * as shared from "../../../shared/mixins/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
 
@@ -29,8 +30,8 @@ export default class FluencySystem extends mix(
   BaseEffectSystem,
   mixins.WikiSystemMixin,
   mixins.RevelationSystemMixin,
-  mixins.ThresholdSystemMixin,
   mixins.CompetenceDisplaySystemMixin,
+  shared.ThresholdDataMixin,
 ) {
   /** @inheritDoc */
   static get _automationTypes() {

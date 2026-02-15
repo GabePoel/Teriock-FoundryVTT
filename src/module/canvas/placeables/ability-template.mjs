@@ -1,4 +1,4 @@
-import { TeriockRoll } from "../../dice/_module.mjs";
+import { BaseRoll } from "../../dice/rolls/_module.mjs";
 
 const { MeasuredTemplate } = foundry.canvas.placeables;
 
@@ -22,7 +22,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
     if (!source) {
       return null;
     }
-    let distance = TeriockRoll.meanValue(
+    let distance = BaseRoll.meanValue(
       execution.source.system.range.formula,
       execution.rollData,
     );

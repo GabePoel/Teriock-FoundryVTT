@@ -2,6 +2,7 @@ import { AbilityExecution } from "../../../../executions/document-executions/_mo
 import { mix } from "../../../../helpers/utils.mjs";
 import { AbilitySettingsModel } from "../../../models/settings-models/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
+import * as shared from "../../../shared/mixins/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
 import * as parts from "./parts/_module.mjs";
@@ -42,7 +43,6 @@ export default class AbilitySystem extends mix(
   mixins.PiercingSystemMixin,
   mixins.CompetenceDisplaySystemMixin,
   mixins.RevelationSystemMixin,
-  mixins.ThresholdSystemMixin,
   mixins.WikiSystemMixin,
   parts.AbilityAutomationsPart,
   parts.AbilityCostsPart,
@@ -57,6 +57,7 @@ export default class AbilitySystem extends mix(
   parts.AbilityRankPart,
   parts.AbilityResultsPart,
   parts.AbilityTagsPart,
+  shared.ThresholdDataMixin,
 ) {
   /** @inheritDoc */
   static get _automationTypes() {

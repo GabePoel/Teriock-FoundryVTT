@@ -116,9 +116,6 @@ export default (Base) =>
      * @returns {Promise<void>}
      */
     static async _onUseAbility(event, target) {
-      await this.document.useAbility(target.dataset.ability, {
-        advantage: event.altKey,
-        disadvantage: event.shiftKey,
-      });
+      await this.document.useAbility(target.dataset.ability, { event });
     }
   };

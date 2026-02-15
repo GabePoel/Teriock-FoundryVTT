@@ -120,7 +120,7 @@ export default function ChildDocumentMixin(Base) {
 
       /**
        * Does whatever the default roll/execution for this document is.
-       * @param {object} options
+       * @param {Teriock.Interaction.UseOptions} options
        * @returns {Promise<void>}
        */
       async use(options = {}) {

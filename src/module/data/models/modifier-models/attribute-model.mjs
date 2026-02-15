@@ -38,13 +38,7 @@ export default class AttributeModel extends ModifierModel {
       options,
     };
     await this.actor.hookCall("rollFeatSave", data);
-    if (data.cancel) {
-      return;
-    }
-    options = {
-      ...options,
-      attribute: data.attribute,
-    };
-    await this._use(options);
+    if (data.cancel) return;
+    await super.use(Object.assign(options, { attribute: data.attribute }));
   }
 }

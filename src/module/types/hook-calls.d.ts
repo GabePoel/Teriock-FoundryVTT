@@ -18,15 +18,15 @@ declare global {
 
     export type RollFeatSave = Teriock.HookData.BaseHookData & {
       attribute: Teriock.Parameters.Actor.Attribute;
-      options: Teriock.RollOptions.CommonRoll;
+      options: Teriock.Interaction.ThresholdOptions;
     };
 
     export type RollProtection = Teriock.HookData.BaseHookData & {
-      options: Teriock.RollOptions.CommonRoll;
+      options: Teriock.Interaction.ThresholdOptions;
     };
 
     export type RollTradecraft = Teriock.HookData.BaseHookData & {
-      options: Teriock.RollOptions.CommonRoll;
+      options: Teriock.Interaction.ThresholdOptions;
       tradecraft: Teriock.Parameters.Fluency.Tradecraft;
     };
 

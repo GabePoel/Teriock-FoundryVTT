@@ -37,7 +37,7 @@ export interface NumberCost {
   type: CostType;
   value: {
     static: number;
-    formula: string;
+    formula: Teriock.System.FormulaString;
     variable: string;
   };
 }

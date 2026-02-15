@@ -1,6 +1,6 @@
 import { boostDialog } from "../../../applications/dialogs/_module.mjs";
 import { takeOptions } from "../../../constants/options/take-options.mjs";
-import { TeriockRoll } from "../../../dice/_module.mjs";
+import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
 import {
   makeDamageDrainTypePanels,
@@ -12,24 +12,21 @@ import { formulaCommand } from "./abstract-command.mjs";
 /**
  * An abstract primary take function.
  * @param {TeriockActor} actor
- * @param {Teriock.Interactions.TakeOptions} options
+ * @param {Teriock.Interaction.TakeOptions} options
  */
 async function abstractTakeOperation(actor, options) {
   let formula = options.formula || "0";
   const type = options.type || "damage";
   const take = TERIOCK.options.take[type];
   if (options.apply) {
-    const amount = await TeriockRoll.getValue(
-      formula,
-      actor?.getRollData() || {},
-    );
+    const amount = await BaseRoll.getValue(formula, actor?.getRollData() || {});
     if (options.reverse) await take.reverse(actor, amount);
     else await take.apply(actor, amount);
     return;
   }
   const flavor = `Roll ${take.label}`;
   if (options.boost) formula = await boostDialog(formula);
-  const roll = new TeriockRoll(formula, actor?.getRollData() || {}, { flavor });
+  const roll = new BaseRoll(formula, actor?.getRollData() || {}, { flavor });
   if (options.crit) roll.alter(2, 0, { multiplyNumeric: false });
   await roll.evaluate();
   const buttons = [TakeRollableTakeHandler.buildButton(type, roll.total)];
@@ -52,9 +49,9 @@ async function abstractTakeOperation(actor, options) {
 
 /**
  * Build a take function.
- * @param {Teriock.Interactions.TakeKey} type
+ * @param {Teriock.Interaction.TakeKey} type
  * @param {"primary" | "secondary"} operation
- * @returns {function(actor: TeriockActor, options: Teriock.Interactions.TakeOptions): Promise<void>}
+ * @returns {function(actor: TeriockActor, options: Teriock.Interaction.TakeOptions): Promise<void>}
  */
 function takeOperationFactory(type, operation) {
   return async function (actor, options) {

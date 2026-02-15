@@ -1,6 +1,6 @@
 /**
  * @param {TeriockActor} actor
- * @param {Teriock.Interactions.HackOptions} options
+ * @param {Teriock.Interaction.HackOptions} options
  * @returns {Promise<void>}
  */
 async function takeHack(actor, options = {}) {
@@ -10,7 +10,7 @@ async function takeHack(actor, options = {}) {
 
 /**
  * @param {TeriockActor} actor
- * @param {Teriock.Interactions.HackOptions} options
+ * @param {Teriock.Interaction.HackOptions} options
  * @returns {Promise<void>}
  */
 async function takeUnhack(actor, options = {}) {
@@ -20,7 +20,7 @@ async function takeUnhack(actor, options = {}) {
 
 /**
  * Hack command
- * @type {Teriock.Interactions.CommandEntry}
+ * @type {Teriock.Interaction.CommandEntry}
  */
 export const hackCommand = {
   args: ["part"],
@@ -33,7 +33,7 @@ export const hackCommand = {
 
 /**
  * Unhack command
- * @type {Teriock.Interactions.CommandEntry}
+ * @type {Teriock.Interaction.CommandEntry}
  */
 export const unhackCommand = {
   args: ["part"],

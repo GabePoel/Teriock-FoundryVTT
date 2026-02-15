@@ -10,7 +10,7 @@ import {
   StatusAutomation,
   TransformationAutomation,
 } from "../../../../data/pseudo-documents/automations/_module.mjs";
-import { TeriockRoll } from "../../../../dice/_module.mjs";
+import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { TeriockFolder } from "../../../../documents/_module.mjs";
 import { manipulateFormula } from "../../../../helpers/formula.mjs";
 import { ApplyEffectHandler } from "../../../../helpers/interaction/button-handlers/apply-effect-handlers.mjs";
@@ -255,7 +255,7 @@ export default function AbilityExecutionChatPart(Base) {
           const formula = a.duration.formula;
           durationFormula = manipulateFormula(durationFormula, formula, a.mode);
         });
-        let durationValue = await TeriockRoll.getValue(
+        let durationValue = await BaseRoll.getValue(
           durationFormula,
           this.rollData,
         );

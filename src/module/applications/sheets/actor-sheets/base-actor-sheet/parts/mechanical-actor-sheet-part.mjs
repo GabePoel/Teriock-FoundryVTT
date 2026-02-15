@@ -43,21 +43,7 @@ export default (Base) =>
       event.stopPropagation();
       const id = target.dataset.id;
       const item = this.document.items.get(id);
-      if (item) {
-        const options = {
-          secret: game.settings.get("teriock", "secretEquipment"),
-        };
-        if (event.altKey) {
-          options.advantage = true;
-        }
-        if (event.shiftKey) {
-          options.disadvantage = true;
-        }
-        if (event.ctrlKey) {
-          options.twoHanded = true;
-        }
-        await item.use(options);
-      }
+      if (item) await item.use({ event });
     }
 
     /**

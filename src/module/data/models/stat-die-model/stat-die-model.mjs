@@ -1,6 +1,6 @@
 import { TeriockDialog } from "../../../applications/api/_module.mjs";
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
-import { TeriockRoll } from "../../../dice/_module.mjs";
+import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
 import { dedent } from "../../../helpers/string.mjs";
 import { getRollIcon, makeIconClass } from "../../../helpers/utils.mjs";
@@ -103,10 +103,10 @@ export default class StatDieModel extends EmbeddedDataModel {
 
   /**
    * String representing this die.
-   * @returns {Teriock.RollOptions.PolyhedralDie}
+   * @returns {Teriock.Rolls.PolyhedralDie}
    */
   get polyhedral() {
-    return /** @type {Teriock.RollOptions.PolyhedralDie} */ `d${this.faces}`;
+    return /** @type {Teriock.Rolls.PolyhedralDie} */ `d${this.faces}`;
   }
 
   /**
@@ -168,7 +168,7 @@ export default class StatDieModel extends EmbeddedDataModel {
     if (proceed) {
       const panels = this.parent.panels;
       await TeriockTextEditor.enrichPanels(panels);
-      const roll = new TeriockRoll(
+      const roll = new BaseRoll(
         this.formula,
         {},
         {

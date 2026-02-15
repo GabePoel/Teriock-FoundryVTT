@@ -8,7 +8,7 @@ Object.values(tradecraftOptions).forEach((fieldOption) => {
 
 /**
  * @param {TeriockActor} actor
- * @param {Teriock.Interactions.TradecraftOptions} options
+ * @param {Teriock.Interaction.TradecraftOptions} options
  */
 async function primary(actor, options = {}) {
   const tradecraft = options.tradecraft || "artist";
@@ -17,7 +17,7 @@ async function primary(actor, options = {}) {
 
 /**
  * Tradecraft command
- * @type {Teriock.Interactions.CommandEntry}
+ * @type {Teriock.Interaction.CommandEntry}
  */
 const command = {
   ...thresholdCommand,

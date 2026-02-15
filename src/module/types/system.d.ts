@@ -22,5 +22,34 @@ declare global {
       /** Force even subs to keep their `_id`. May cause `_id` collisions. */
       keepSubIds?: boolean;
     };
+
+    /**
+     * Something's competency level specifies if it's proficient or fluent.
+     * - `0`: Neither proficient nor fluent
+     * - `1`: Proficient
+     * - `2`: Fluent
+     */
+    export type CompetenceLevel = 0 | 1 | 2;
+
+    /**
+     * Something's piercing level specifies if it's AV0 or UB.
+     * - `0`: Neither AV0 nor UB
+     * - `1`: AV0
+     * - `2`: UB
+     */
+    export type PiercingLevel = 0 | 1 | 2;
+
+    /**
+     * Something's edge level specifies if it has advantage or disadvantage.
+     * - `-1`: Disadvantage
+     * - `0`: Neither advantage nor disadvantage
+     * - `1`: Advantage
+     */
+    export type EdgeLevel = -1 | 0 | 1;
+
+    /**
+     * A string that can be used in a roll formula.
+     */
+    export type FormulaString = string;
   }
 }

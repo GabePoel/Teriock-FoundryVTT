@@ -26,13 +26,6 @@ export default class AbstractButtonHandler extends InteractionHandler {
       this.tokens = this.targetedTokens;
       this.actors = this.targetedActors;
     }
-    this.commonRollOptions = {
-      advantage: event.altKey,
-      disadvantage: event.shiftKey,
-    };
-    this.critRollOptions = {
-      crit: event.altKey,
-    };
   }
 
   /**

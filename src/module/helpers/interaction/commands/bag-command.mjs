@@ -10,7 +10,7 @@ async function primary(actor) {
 
 /**
  * Bag command
- * @type {Teriock.Interactions.CommandEntry}
+ * @type {Teriock.Interaction.CommandEntry}
  */
 const command = {
   icon: icons.ui.deathBag,

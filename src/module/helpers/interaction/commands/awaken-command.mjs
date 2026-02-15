@@ -10,7 +10,7 @@ async function primary(actor) {
 
 /**
  * Awaken command
- * @type {Teriock.Interactions.CommandEntry}
+ * @type {Teriock.Interaction.CommandEntry}
  */
 const command = {
   icon: icons.effect.awaken,

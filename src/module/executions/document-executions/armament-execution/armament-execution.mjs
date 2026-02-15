@@ -13,9 +13,7 @@ export default class ArmamentExecution extends BaseDocumentExecution {
   /**
    * @param {Teriock.Execution.ArmamentExecutionOptions} options
    */
-  constructor(
-    options = /** @type {Teriock.Execution.ArmamentExecutionOptions} */ {},
-  ) {
+  constructor(options = {}) {
     super(options);
     const { crit = false, deals = ["damage"], bonusDamage = "" } = options;
     this.crit = crit;

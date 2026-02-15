@@ -52,7 +52,7 @@ export class TakeRollableTakeHandler extends AbstractButtonHandler {
 
   /**
    * @inheritDoc
-   * @param {Teriock.Interactions.TakeKey} rollType
+   * @param {Teriock.Interaction.TakeKey} rollType
    * @param {number} amount
    */
   static buildButton(rollType, amount) {

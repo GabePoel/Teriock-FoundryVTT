@@ -1,3 +1,4 @@
+import { ThresholdRoll } from "../../../../../../dice/rolls/_module.mjs";
 import {
   ImmunityExecution,
   ResistanceExecution,
@@ -82,11 +83,12 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       async rollResistance(options = {}) {
+        if (options.event) {
+          Object.assign(options, ThresholdRoll.parseEvent(options.event));
+        }
         const data = { options };
         await this.parent.hookCall("rollResistance", data);
-        if (data.cancel) {
-          return;
-        }
+        if (data.cancel) return;
         options.actor = this.parent;
         const execution = new ResistanceExecution(options);
         await execution.execute();

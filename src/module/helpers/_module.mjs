@@ -4,7 +4,6 @@ export * as html from "./html.mjs";
 export * as interaction from "./interaction/_module.mjs";
 export * as maintenance from "./maintenance/_module.mjs";
 export * as path from "./path.mjs";
-export * as rolling from "./rolling.mjs";
 export * as resolve from "./resolve.mjs";
 export * as sort from "./sort.mjs";
 export * as string from "./string.mjs";

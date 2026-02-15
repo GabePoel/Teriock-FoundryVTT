@@ -65,6 +65,13 @@ export default (Base) => {
         return super.migrateData(data);
       }
 
+      /** @inheritDoc */
+      static parseEvent(event) {
+        return Object.assign(super.parseEvent(event), {
+          twoHanded: event.altKey,
+        });
+      }
+
       /**
        * If this has a two-handed damage attack.
        * @returns {boolean}
@@ -100,20 +107,6 @@ export default (Base) => {
           "dmg.2h": this.damage.twoHanded.formula,
         });
         return data;
-      }
-
-      /**
-       * @inheritDoc
-       * @returns {Teriock.Execution.EquipmentExecutionOptions}
-       */
-      parseEvent(event) {
-        const options =
-          /** @type {Teriock.Execution.EquipmentExecutionOptions} */
-          super.parseEvent(event);
-        Object.assign(options, {
-          twoHanded: event.ctrlKey,
-        });
-        return options;
       }
 
       /** @inheritDoc */

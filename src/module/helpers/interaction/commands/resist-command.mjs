@@ -3,7 +3,7 @@ import { thresholdCommand } from "./abstract-command.mjs";
 
 /**
  * @param {TeriockActor} actor
- * @param {Teriock.Interactions.ResistOptions} options
+ * @param {Teriock.Interaction.ResistOptions} options
  * @returns {Promise<void>}
  */
 async function primary(actor, options = {}) {
@@ -12,7 +12,7 @@ async function primary(actor, options = {}) {
 
 /**
  * Resist command
- * @type {Teriock.Interactions.CommandEntry}
+ * @type {Teriock.Interaction.CommandEntry}
  */
 const command = {
   ...thresholdCommand,

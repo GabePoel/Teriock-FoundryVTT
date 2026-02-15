@@ -37,7 +37,7 @@ const commandArray = [
   useAbilityCommand,
 ];
 
-/** @type {Record<string, Teriock.Interactions.CommandEntry>} */
+/** @type {Record<string, Teriock.Interaction.CommandEntry>} */
 const commands = {};
 
 for (const entry of commandArray) {

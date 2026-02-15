@@ -1,4 +1,4 @@
-import { TeriockRoll } from "../../dice/_module.mjs";
+import { BaseRoll } from "../../dice/rolls/_module.mjs";
 
 /**
  * Mixin for a document that can be changed by a {@link TeriockActiveEffect}.
@@ -143,7 +143,7 @@ export default function ChangeableDocumentMixin(Base) {
           if (!change.key || !change.qualifier) continue;
           let shouldApply = change.qualifier === "1";
           if (!shouldApply) {
-            shouldApply = !!TeriockRoll.minValue(
+            shouldApply = !!BaseRoll.minValue(
               change.qualifier,
               this.system.getLocalRollData(),
             );

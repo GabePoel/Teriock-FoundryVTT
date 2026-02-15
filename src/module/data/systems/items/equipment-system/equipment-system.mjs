@@ -108,6 +108,15 @@ export default class EquipmentSystem extends mix(
   }
 
   /** @inheritDoc */
+  static parseEvent(event) {
+    return Object.assign(super.parseEvent(event), {
+      secret: game.settings.get("teriock", "secretEquipment")
+        ? !event.shiftKey
+        : event.shiftKey,
+    });
+  }
+
+  /** @inheritDoc */
   get color() {
     if (this.isOverCapacity) {
       return TERIOCK.display.colors.red;
@@ -191,22 +200,6 @@ export default class EquipmentSystem extends mix(
       data[`class.${equipmentClass}`] = 1;
     }
     return data;
-  }
-
-  /**
-   * @inheritDoc
-   * @returns {Teriock.Execution.EquipmentExecutionOptions}
-   */
-  parseEvent(event) {
-    const options =
-      /** @type {Teriock.Execution.EquipmentExecutionOptions} */
-      super.parseEvent(event);
-    Object.assign(options, {
-      secret: game.settings.get("teriock", "secretEquipment")
-        ? !event.shiftKey
-        : event.shiftKey,
-    });
-    return options;
   }
 
   /** @inheritDoc */

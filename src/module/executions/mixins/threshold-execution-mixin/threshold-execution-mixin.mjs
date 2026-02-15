@@ -18,16 +18,14 @@ export default function ThresholdExecutionMixin(Base) {
         super(options);
         const {
           threshold,
-          advantage = false,
-          disadvantage = false,
-          formula = "1d20",
+          formula = undefined,
+          edge = 0,
           bonus = "",
           comparison = "gte",
         } = options;
+        this.edge = edge;
         this.threshold = threshold;
-        this.advantage = advantage;
         this.formula = formula;
-        this.disadvantage = disadvantage;
         this.bonus = `${bonus}`;
         this.comparison = comparison;
       }
@@ -46,10 +44,11 @@ export default function ThresholdExecutionMixin(Base) {
        * @returns {Promise<void>}
        */
       async _prepareBaseFormula() {
-        if (this.advantage && !this.disadvantage) {
-          this.formula = "2d20kh1";
-        } else if (this.disadvantage && !this.advantage) {
-          this.formula = "2d20kl1";
+        if (!this.formula) {
+          let suffix = "";
+          if (this.edge > 0) suffix = "kh1";
+          if (this.edge < 0) suffix = "kl1";
+          this.formula = `${1 + Math.abs(this.edge)}d20${suffix}`;
         }
       }
 

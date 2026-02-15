@@ -120,6 +120,16 @@ export default function ArmamentSystemMixin(Base) {
         });
       }
 
+      /**
+       * @inheritDoc
+       * @returns {Teriock.Execution.ArmamentExecutionOptions}
+       */
+      static parseEvent(event) {
+        return Object.assign(super.parseEvent(event), {
+          crit: event.ctrlKey,
+        });
+      }
+
       /** @inheritDoc */
       get displayFields() {
         return [
@@ -204,14 +214,9 @@ export default function ArmamentSystemMixin(Base) {
        * @returns {Teriock.Execution.ArmamentExecutionOptions}
        */
       parseEvent(event) {
-        const options =
-          /** @type {Teriock.Execution.ArmamentExecutionOptions} */
-          super.parseEvent(event);
-        Object.assign(options, {
-          crit: event.altKey,
+        return Object.assign(super.parseEvent(event), {
           deals: Array.from(this.deals),
         });
-        return options;
       }
 
       /** @inheritDoc */

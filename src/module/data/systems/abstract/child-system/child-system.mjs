@@ -10,7 +10,7 @@ const { ImagePopout } = foundry.applications.apps;
 //noinspection JSClosureCompilerSyntax
 /**
  * Data model shared by items and effects.
- * @extends {Teriock.Models.CommonSystemInterface}
+ * @extends {CommonSystem}
  * @mixes UsableData
  * @implements {Teriock.Models.ChildSystemInterface}
  */
@@ -75,7 +75,7 @@ export default class ChildSystem extends UsableDataMixin(CommonSystem) {
           if (relative?.actor) {
             options.actor = relative.actor;
           }
-          await this.parent.use(options);
+          await this.use(options);
         },
       },
     });
@@ -297,17 +297,6 @@ export default class ChildSystem extends UsableDataMixin(CommonSystem) {
     };
   }
 
-  /**
-   * Parse an event into usable roll data.
-   * @param {PointerEvent} _event
-   * @returns {Teriock.Execution.DocumentExecutionOptions}
-   */
-  parseEvent(_event) {
-    return {
-      source: this.parent,
-    };
-  }
-
   /** @inheritDoc */
   prepareBaseData() {
     super.prepareBaseData();
@@ -328,7 +317,7 @@ export default class ChildSystem extends UsableDataMixin(CommonSystem) {
           this.parent.type.slice(1),
         [this.parent],
       );
-      await this._use(options);
+      await super.use(options);
     }
   }
 }

@@ -1,5 +1,5 @@
 import { iconStyles } from "../constants/display/_module.mjs";
-import { TeriockRoll } from "../dice/_module.mjs";
+import { BaseRoll } from "../dice/rolls/_module.mjs";
 
 /**
  * Creates an HTML icon using Font Awesome classes.
@@ -49,7 +49,7 @@ export function makeIconClass(icon, ...styles) {
  */
 export function getRollIcon(rollFormula) {
   const polyhedralDice = [4, 6, 8, 10, 12, 20];
-  const roll = new TeriockRoll(rollFormula, {});
+  const roll = new BaseRoll(rollFormula, {});
   const dice = roll.dice;
   dice.sort((a, b) => b.faces - a.faces);
   for (const die of dice) {

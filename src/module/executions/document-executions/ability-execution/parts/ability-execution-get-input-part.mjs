@@ -1,7 +1,7 @@
 import { TeriockDialog } from "../../../../applications/api/_module.mjs";
 import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
 import { AbilityTemplate } from "../../../../canvas/placeables/_module.mjs";
-import { TeriockRoll } from "../../../../dice/_module.mjs";
+import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { createDialogFieldset } from "../../../../helpers/html.mjs";
 import { dedent } from "../../../../helpers/string.mjs";
 import { makeIconClass } from "../../../../helpers/utils.mjs";
@@ -24,7 +24,7 @@ export default function AbilityExecutionGetInputPart(Base) {
         if (this.source.system.costs[stat].type === "static") {
           return this.source.system.costs[stat].value.static;
         } else if (this.source.system.costs[stat].type === "formula") {
-          const roll = new TeriockRoll(
+          const roll = new BaseRoll(
             this.source.system.costs[stat].value.formula,
             this.rollData,
           );

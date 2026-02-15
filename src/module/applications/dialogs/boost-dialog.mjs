@@ -1,4 +1,4 @@
-import { TeriockRoll } from "../../dice/_module.mjs";
+import { BaseRoll } from "../../dice/rolls/_module.mjs";
 import { makeIconClass } from "../../helpers/utils.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
 
@@ -78,7 +78,7 @@ export default async function boostDialog(rollFormula, options = {}) {
               "crit",
             );
           const crit = critButton.checked;
-          const roll = new TeriockRoll(updatedFormula, {});
+          const roll = new BaseRoll(updatedFormula, {});
           if (crit) {
             roll.alter(2, 0, { multiplyNumeric: false });
           }

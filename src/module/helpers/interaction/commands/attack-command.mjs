@@ -1,6 +1,6 @@
 /**
  * @param {TeriockActor} actor
- * @param {Teriock.Interactions.UseAbilityOptions} options
+ * @param {Teriock.Interaction.UseAbilityOptions} options
  * @returns {Promise<void>}
  */
 async function primary(actor, options = {}) {
@@ -9,7 +9,7 @@ async function primary(actor, options = {}) {
 
 /**
  * Attack command
- * @type {Teriock.Interactions.CommandEntry}
+ * @type {Teriock.Interaction.CommandEntry}
  */
 const command = {
   icon: () => TERIOCK.options.document.ability.icon,

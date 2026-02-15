@@ -590,15 +590,14 @@ export default class TeriockActor extends mix(
   /**
    * Uses an ability by name.
    * @param {string} abilityName - The name of the ability to use.
-   * @param {Teriock.RollOptions.CommonRoll} [options] - Options for using the ability.
+   * @param {Teriock.Execution.AbilityExecutionOptions} [options] - Options for using the ability.
    * @returns {Promise<void>}
    */
   async useAbility(abilityName, options = {}) {
     const abilities = await this.allAbilities();
     const ability = abilities.find((i) => i.name === abilityName);
-    options.actor = this;
     if (ability) {
-      await ability.use(options);
+      await ability.use(Object.assign(options, { actor: this }));
     } else {
       ui.notifications.warn(`${this.name} does not have ${abilityName}.`);
     }

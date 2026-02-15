@@ -50,8 +50,6 @@ export class StandardDamageHandler extends CommandButtonHandlerBuilder(
 ) {
   constructor(...args) {
     super(...args);
-    this.commonRollOptions.twoHanded = this.event.ctrlKey;
-    this.commonRollOptions.secret = !this.event.shiftKey;
     this.actors = this.selectedActors;
   }
 }
