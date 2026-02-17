@@ -10,6 +10,14 @@ export default function AccessDataMixin(Base) {
      */
     class AccessData extends Base {
       /**
+       * Paths to forms to display in the editor.
+       * @returns {string[]}
+       */
+      get _formPaths() {
+        return [];
+      }
+
+      /**
        * This data model's actor.
        * @returns {GenericActor}
        */
@@ -26,11 +34,55 @@ export default function AccessDataMixin(Base) {
       }
 
       /**
+       * Path to this data model.
+       * @returns {string}
+       */
+      get localPath() {
+        return this.schema.fieldPath;
+      }
+
+      /**
        * The UUID of this data model's document.
        * @returns {string}
        */
       get uuid() {
         return this.document.uuid;
+      }
+
+      /**
+       * Forms that go into a simple editor for this data model.
+       * @returns {Promise<HTMLDivElement>}
+       */
+      async _getEditorForms() {
+        const group = document.createElement("div");
+        group.classList.add("teriock-form-container");
+        this._makeFormGroups(this._formPaths).forEach((fg) => group.append(fg));
+        return group;
+      }
+
+      /**
+       * Make form groups from specified field paths.
+       * @param {string[]} paths
+       * @returns {HTMLDivElement[]}
+       */
+      _makeFormGroups(paths) {
+        return paths.map((p) =>
+          this.schema.getField(p).toFormGroup(
+            { rootId: foundry.utils.randomID() },
+            {
+              name: `${this.localPath}.${p}`,
+              value: foundry.utils.getProperty(this, p),
+            },
+          ),
+        );
+      }
+
+      /**
+       * A simple editor for this data model.
+       * @returns {Promise<HTMLDivElement>}
+       */
+      async getEditor() {
+        return this._getEditorForms();
       }
 
       /**

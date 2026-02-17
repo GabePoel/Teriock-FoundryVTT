@@ -86,7 +86,12 @@ export default class UnitModel extends EvaluationModel {
   }
 
   /** @inheritDoc */
-  static defineSchema(options) {
+  static defineSchema(
+    options = {
+      label: "Quantity",
+      hint: "The quantity of the specified unit.",
+    },
+  ) {
     return Object.assign(super.defineSchema(options), {
       unit: new fields.StringField({
         label: "Unit",
@@ -96,6 +101,11 @@ export default class UnitModel extends EvaluationModel {
         hint: "The unit of the this value.",
       }),
     });
+  }
+
+  /** @inheritDoc */
+  get _formPaths() {
+    return ["unit", "raw"];
   }
 
   /**
@@ -128,29 +138,6 @@ export default class UnitModel extends EvaluationModel {
   /** @inheritDoc */
   get currentValue() {
     return this.#convert(super.currentValue);
-  }
-
-  /**
-   * Form group representing this unit.
-   * @returns {HTMLDivElement}
-   */
-  get formGroup() {
-    const group = document.createElement("div");
-    group.classList.add("teriock-form-container");
-    group.append(
-      ...[
-        ...this._formGroups(["unit"]),
-        this.schema.fields.raw.toFormGroup(
-          {
-            rootId: foundry.utils.randomID(),
-            label: "Quantity",
-            hint: "How many of the specified unit.",
-          },
-          { name: `${this.schema.fieldPath}.raw`, value: this.raw },
-        ),
-      ],
-    );
-    return group;
   }
 
   /** @inheritDoc */
@@ -232,22 +219,6 @@ export default class UnitModel extends EvaluationModel {
   }
 
   /**
-   * Make form groups from specified field paths.
-   * @param {string[]} paths
-   */
-  _formGroups(paths) {
-    return paths.map((p) =>
-      this.schema.getField(p).toFormGroup(
-        { rootId: foundry.utils.randomID() },
-        {
-          name: `${this.schema.fieldPath}.${p}`,
-          value: foundry.utils.getProperty(this, p),
-        },
-      ),
-    );
-  }
-
-  /**
    * Convert the current to a given unit.
    * @param {string} unit
    * @returns {number}
@@ -266,7 +237,7 @@ export default class UnitModel extends EvaluationModel {
    * @returns {Promise<void>}
    */
   async updateDialog() {
-    const group = this.formGroup;
+    const group = await this.getEditor();
     const document = this.document;
     const dialog = new UnitDialog({
       buttons: [

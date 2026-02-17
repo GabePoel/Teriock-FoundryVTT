@@ -33,11 +33,12 @@ import * as parts from "./parts/_module.mjs";
  * @mixes PiercingSystem
  * @mixes CompetenceDisplaySystem
  * @mixes RevelationSystem
- * @mixes ThresholdSystem
+ * @mixes ThresholdData
  * @mixes WikiSystem
  */
 export default class AbilitySystem extends mix(
   BaseEffectSystem,
+  shared.ThresholdDataMixin,
   mixins.AttackSystemMixin,
   mixins.ConsumableSystemMixin,
   mixins.HierarchySystemMixin,
@@ -57,7 +58,6 @@ export default class AbilitySystem extends mix(
   parts.AbilityRankPart,
   parts.AbilityResultsPart,
   parts.AbilityTagsPart,
-  shared.ThresholdDataMixin,
 ) {
   /** @inheritDoc */
   static get _automationTypes() {

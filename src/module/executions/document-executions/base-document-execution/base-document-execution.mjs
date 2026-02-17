@@ -18,12 +18,6 @@ export default class BaseDocumentExecution extends BaseExecution {
     if (options.actor === undefined) {
       this._actor = options.source.actor || null;
     }
-    if (options.proficient === undefined) {
-      this.proficient = options.source.system.competence.proficient;
-    }
-    if (options.fluent === undefined) {
-      this.fluent = options.source.system.competence.fluent;
-    }
     this.automations = this.source.system.automations.contents;
   }
 
@@ -158,6 +152,19 @@ export default class BaseDocumentExecution extends BaseExecution {
   async _createChatMessage() {
     await this._executePseudoHookMacros("preExecution");
     await super._createChatMessage();
+  }
+
+  /**
+   * @inheritDoc
+   * @param {Teriock.Execution.DocumentExecutionOptions} options
+   */
+  _determineCompetence(options) {
+    if (options.proficient === undefined) {
+      this.proficient = options.source.system.competence.proficient;
+    }
+    if (options.fluent === undefined) {
+      this.fluent = options.source.system.competence.fluent;
+    }
   }
 
   /**

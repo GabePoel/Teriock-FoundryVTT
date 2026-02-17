@@ -26,8 +26,8 @@ export default class ChangesAutomation extends BaseAutomation {
   }
 
   /** @inheritDoc */
-  async _getEditorForms() {
-    return foundry.applications.handlebars.renderTemplate(
+  async getEditor() {
+    const html = await foundry.applications.handlebars.renderTemplate(
       systemPath("templates/document-templates/shared/changes.hbs"),
       {
         changesPath: `${this.fieldPath}.${this.id}.changes`,
@@ -38,5 +38,6 @@ export default class ChangesAutomation extends BaseAutomation {
         TERIOCK,
       },
     );
+    return /** @type {HTMLDivElement} */ foundry.utils.parseHTML(html);
   }
 }

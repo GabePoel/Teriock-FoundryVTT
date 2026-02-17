@@ -1,4 +1,3 @@
-import { boostDialog } from "../../../applications/dialogs/_module.mjs";
 import { icons } from "../../../constants/display/icons.mjs";
 import { pureUuid } from "../../resolve.mjs";
 
@@ -18,11 +17,11 @@ async function primary(actor, options = {}) {
     );
     return;
   }
-  await attacker.use({
-    secret: true,
-    crit: options.crit || false,
-    twoHanded: options.twoHanded || false,
-  });
+  await attacker.use(
+    Object.assign(options, {
+      showDialog: game.settings.get("teriock", "showRollDialogs"),
+    }),
+  );
 }
 
 /**
@@ -41,15 +40,11 @@ async function secondary(actor, options = {}) {
     );
     return;
   }
-  let formula = attacker.system.damage.base.formula;
-  if (options.twoHanded && attacker.system.hasTwoHandedAttack) {
-    formula = attacker.system.damage.twoHanded.formula;
-  }
-  formula = await boostDialog(formula, { crit: options.crit || false });
-  await attacker.use({
-    secret: true,
-    formula,
-  });
+  await attacker.use(
+    Object.assign(options, {
+      showDialog: !game.settings.get("teriock", "showRollDialogs"),
+    }),
+  );
 }
 
 /**

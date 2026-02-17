@@ -14,6 +14,16 @@ export default class TradecraftModel extends ModifierModel {
   }
 
   /** @inheritDoc */
+  get name() {
+    return TERIOCK.index.tradecrafts[this.key];
+  }
+
+  /** @inheritDoc */
+  get useText() {
+    return `${this.name} Check`;
+  }
+
+  /** @inheritDoc */
   async _use(options) {
     options = {
       tradecraft: this.key,

@@ -1,4 +1,3 @@
-import { addFormula } from "../../../helpers/formula.mjs";
 import { attributePanel } from "../../../helpers/html.mjs";
 import BaseExecution from "../../base-execution/base-execution.mjs";
 import { ThresholdExecutionMixin } from "../../mixins/_module.mjs";
@@ -18,18 +17,8 @@ export default class FeatSaveExecution extends ThresholdExecutionMixin(
   ) {
     super(options);
     this.attribute = options.attribute;
-    if (this.actor) {
-      if (options.proficient === undefined) {
-        this.proficient =
-          this.actor.system.attributes[options.attribute].competence.proficient;
-      }
-      if (options.fluent === undefined) {
-        this.fluent =
-          this.actor.system.attributes[options.attribute].competence.fluent;
-      }
-      if (options.bonus === undefined) {
-        this.bonus = this.actor.system.attributes[options.attribute].formula;
-      }
+    if (this.actor && options.bonus === undefined) {
+      this.bonus = this.actor.system.attributes[options.attribute].formula;
     }
   }
 
@@ -51,9 +40,19 @@ export default class FeatSaveExecution extends ThresholdExecutionMixin(
     this.panels = [await attributePanel(this.attribute)];
   }
 
-  /** @inheritDoc */
-  async _prepareFormula() {
-    await super._prepareFormula();
-    this.formula = addFormula(this.formula, `@att.${this.attribute}`);
+  /**
+   * @inheritDoc
+   * @param {Teriock.Execution.FeatSaveExecutionOptions} options
+   */
+  _determineCompetence(options) {
+    if (!this.actor) return;
+    if (options.proficient === undefined) {
+      this.proficient =
+        this.actor.system.attributes[options.attribute].competence.proficient;
+    }
+    if (options.fluent === undefined) {
+      this.fluent =
+        this.actor.system.attributes[options.attribute].competence.fluent;
+    }
   }
 }

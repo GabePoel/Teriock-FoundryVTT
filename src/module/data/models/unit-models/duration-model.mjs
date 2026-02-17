@@ -68,19 +68,15 @@ export default class DurationModel extends TimeUnitModel {
     });
   }
 
-  /** @inheritDoc */
-  get formGroup() {
-    const group = super.formGroup;
-    group.append(
-      ...this._formGroups([
-        "conditions.present",
-        "conditions.absent",
-        "stationary",
-        "dawn",
-        "description",
-      ]),
-    );
-    return group;
+  get _formPaths() {
+    return [
+      ...super._formPaths,
+      "conditions.present",
+      "conditions.absent",
+      "stationary",
+      "dawn",
+      "description",
+    ];
   }
 
   /** @inheritDoc */

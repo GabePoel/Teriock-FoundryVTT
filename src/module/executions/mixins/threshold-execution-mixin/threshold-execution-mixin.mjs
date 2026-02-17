@@ -1,4 +1,6 @@
+import { TeriockDialog } from "../../../applications/api/_module.mjs";
 import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
+import { makeIconClass } from "../../../helpers/utils.mjs";
 
 /**
  * Mixin for executions involving a d20 roll.
@@ -22,12 +24,14 @@ export default function ThresholdExecutionMixin(Base) {
           edge = 0,
           bonus = "",
           comparison = "gte",
+          showDialog = false,
         } = options;
         this.edge = edge;
         this.threshold = threshold;
         this.formula = formula;
         this.bonus = `${bonus}`;
         this.comparison = comparison;
+        this.showDialog = showDialog;
       }
 
       /** @inheritDoc */
@@ -37,6 +41,14 @@ export default function ThresholdExecutionMixin(Base) {
           threshold: this.threshold,
           comparison: this.comparison,
         };
+      }
+
+      /** @inheritDoc */
+      async _getInput() {
+        if (this.showDialog) {
+          await this._showRollDialog();
+        }
+        await super._getInput();
       }
 
       /**
@@ -59,6 +71,50 @@ export default function ThresholdExecutionMixin(Base) {
         if (formulaExists(this.bonus)) {
           this.formula = addFormula(this.formula, this.bonus);
         }
+      }
+
+      /**
+       * Show a dialog to configure basic roll options.
+       * @returns {Promise<void>}
+       * @private
+       */
+      async _showRollDialog() {
+        await TeriockDialog.wait({
+          window: {
+            title: "Roll Options",
+            icon: makeIconClass("dice-d20", "title"),
+          },
+          modal: true,
+          content:
+            "<p>Would you like to roll with advantage or disadvantage?</p>",
+          buttons: [
+            {
+              action: "disadvantage",
+              icon: makeIconClass("dice-d20", "button"),
+              label: "Roll with Disadvantage",
+              callback: () => {
+                this.edge = -1;
+              },
+            },
+            {
+              action: "normal",
+              default: true,
+              icon: makeIconClass("dice-d20", "button"),
+              label: "Roll Normally",
+              callback: () => {
+                this.edge = 0;
+              },
+            },
+            {
+              action: "advantage",
+              icon: makeIconClass("dice-d20", "button"),
+              label: "Roll with Advantage",
+              callback: () => {
+                this.edge = 1;
+              },
+            },
+          ],
+        });
       }
     }
   );

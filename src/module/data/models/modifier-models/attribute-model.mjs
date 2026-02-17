@@ -6,8 +6,18 @@ export default class AttributeModel extends ModifierModel {
   passive;
 
   /** @inheritDoc */
+  get name() {
+    return TERIOCK.index.attributesFull[this.key];
+  }
+
+  /** @inheritDoc */
   get quickValue() {
     return 2 * this.score + this.competence.bonus;
+  }
+
+  /** @inheritDoc */
+  get useText() {
+    return `${this.name} Save`;
   }
 
   /** @inheritDoc */

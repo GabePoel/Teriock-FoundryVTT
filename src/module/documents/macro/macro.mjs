@@ -192,7 +192,12 @@ export default class TeriockMacro extends mix(
     }
     for (const a of actors) {
       const doc = await this.getDocument(a, name, type);
-      if (doc) await doc.system.use({ actor: a, event });
+      if (doc)
+        await doc.system.use({
+          actor: a,
+          event,
+          showDialog: game.settings.get("teriock", "showRollDialogs"),
+        });
       else {
         ui.notifications.warn(
           `${a.name} has no ${type ? TERIOCK.options.document[type].name.toLowerCase() : "document"} called ${name}.`,
@@ -209,7 +214,13 @@ export default class TeriockMacro extends mix(
    */
   static async useDocumentLinked(uuid, options = {}) {
     const doc = await fromUuid(uuid);
-    if (doc) await doc.system.use(Object.assign(options, { actor: doc.actor }));
+    if (doc)
+      await doc.system.use(
+        Object.assign(options, {
+          actor: doc.actor,
+          showDialog: game.settings.get("teriock", "showRollDialogs"),
+        }),
+      );
   }
 
   /** @inheritDoc */

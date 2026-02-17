@@ -91,7 +91,7 @@ export default (Base) => {
           context.automationEntries = await Promise.all(
             automations.map(async (automation) => {
               const formEditor = await automation.getEditor();
-              return { automation, formEditor };
+              return { automation, formEditor: formEditor.outerHTML };
             }),
           );
         }

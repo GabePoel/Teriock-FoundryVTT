@@ -17,28 +17,16 @@ export default class TradecraftCheckExecution extends TradecraftExecutionMixin(
   ) {
     super(options);
     this._tradecraft = options.tradecraft;
-    if (this.actor) {
-      if (options.proficient === undefined) {
-        this.proficient =
-          this.actor.system.tradecrafts[
-            options.tradecraft
-          ].competence.proficient;
-      }
-      if (options.fluent === undefined) {
-        this.fluent =
-          this.actor.system.tradecrafts[options.tradecraft].competence.fluent;
-      }
-      if (options.bonus === undefined) {
-        this.bonus = this.actor.system.tradecrafts[options.tradecraft].formula;
-      }
+    if (this.actor && options.bonus === undefined) {
+      this.bonus = this.actor.system.tradecrafts[options.tradecraft].formula;
     }
   }
 
   /** @inheritDoc */
   get rollOptions() {
-    const options = super.rollOptions;
-    options.targets = Array.from(game.user.targets);
-    return options;
+    return Object.assign(super.rollOptions, {
+      targets: Array.from(game.user.targets),
+    });
   }
 
   /** @inheritDoc */
@@ -49,5 +37,21 @@ export default class TradecraftCheckExecution extends TradecraftExecutionMixin(
   /** @inheritDoc */
   async _buildPanels() {
     this.panels.push(await tradecraftPanel(this.tradecraft));
+  }
+
+  /**
+   * @inheritDoc
+   * @param {Teriock.Execution.TradecraftExecutionOptions} options
+   */
+  _determineCompetence(options) {
+    if (!this.actor) return;
+    if (options.proficient === undefined) {
+      this.proficient =
+        this.actor.system.tradecrafts[options.tradecraft].competence.proficient;
+    }
+    if (options.fluent === undefined) {
+      this.fluent =
+        this.actor.system.tradecrafts[options.tradecraft].competence.fluent;
+    }
   }
 }

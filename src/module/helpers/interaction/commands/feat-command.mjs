@@ -5,6 +5,17 @@ import { thresholdCommand } from "./abstract-command.mjs";
  * @param {Teriock.Interaction.FeatOptions} options
  */
 async function primary(actor, options = {}) {
+  options.showDialog = game.settings.get("teriock", "showRollDialogs");
+  const attribute = options.attribute || "mov";
+  await actor.system.rollFeatSave(attribute, options);
+}
+
+/**
+ * @param {TeriockActor} actor
+ * @param {Teriock.Interaction.FeatOptions} options
+ */
+async function secondary(actor, options = {}) {
+  options.showDialog = !game.settings.get("teriock", "showRollDialogs");
   const attribute = options.attribute || "mov";
   await actor.system.rollFeatSave(attribute, options);
 }
@@ -16,12 +27,13 @@ async function primary(actor, options = {}) {
 const command = {
   ...thresholdCommand,
   args: ["attribute"],
-  primary,
-  label: (options) =>
-    `${TERIOCK.options.attribute[options?.attribute]?.label || "Feat"} Save`,
   icon: (options) =>
     TERIOCK.options.attribute[options?.attribute]?.icon || "star",
   id: "feat",
+  label: (options) =>
+    `${TERIOCK.options.attribute[options?.attribute]?.label || "Feat"} Save`,
+  primary,
+  secondary,
 };
 
 export default command;

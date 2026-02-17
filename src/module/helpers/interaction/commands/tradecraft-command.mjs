@@ -11,6 +11,17 @@ Object.values(tradecraftOptions).forEach((fieldOption) => {
  * @param {Teriock.Interaction.TradecraftOptions} options
  */
 async function primary(actor, options = {}) {
+  options.showDialog = game.settings.get("teriock", "showRollDialogs");
+  const tradecraft = options.tradecraft || "artist";
+  await actor.system.rollTradecraft(tradecraft, options);
+}
+
+/**
+ * @param {TeriockActor} actor
+ * @param {Teriock.Interaction.TradecraftOptions} options
+ */
+async function secondary(actor, options = {}) {
+  options.showDialog = !game.settings.get("teriock", "showRollDialogs");
   const tradecraft = options.tradecraft || "artist";
   await actor.system.rollTradecraft(tradecraft, options);
 }
@@ -28,6 +39,7 @@ const command = {
   label: (options) =>
     `${allOptions[options?.tradecraft || "artist"].name} Check`,
   primary,
+  secondary,
 };
 
 export default command;

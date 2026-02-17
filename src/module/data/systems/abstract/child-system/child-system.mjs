@@ -71,11 +71,18 @@ export default class ChildSystem extends UsableDataMixin(CommonSystem) {
     Object.assign(embedActions, {
       useDoc: {
         primary: async (event, relative) => {
-          const options = this.parseEvent(event);
-          if (relative?.actor) {
-            options.actor = relative.actor;
-          }
-          await this.use(options);
+          await this.use({
+            event,
+            actor: relative?.actor,
+            showDialog: game.settings.get("teriock", "showRollDialogs"),
+          });
+        },
+        secondary: async (event, relative) => {
+          await this.use({
+            event,
+            actor: relative?.actor,
+            showDialog: !game.settings.get("teriock", "showRollDialogs"),
+          });
         },
       },
     });
@@ -213,7 +220,9 @@ export default class ChildSystem extends UsableDataMixin(CommonSystem) {
         {
           name: this.useText,
           icon: makeIcon(this.useIcon, "contextMenu"),
-          callback: this.use.bind(this),
+          callback: async () => {
+            await this.use();
+          },
           condition: this.isUsable,
           group: "usage",
         },

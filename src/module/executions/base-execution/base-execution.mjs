@@ -23,6 +23,7 @@ export default class BaseExecution {
     this.fluent = fluent;
     this._rollData = rollData;
     this._rollOptions = rollOptions;
+    this._determineCompetence(options);
   }
 
   /** @type {Teriock.UI.HTMLButtonConfig[]} */
@@ -174,6 +175,12 @@ export default class BaseExecution {
     TeriockChatMessage.applyRollMode(chatData, rollMode);
     this.message = await TeriockChatMessage.create(chatData);
   }
+
+  /**
+   * Determine this execution's competence.
+   * @param {Teriock.Execution.BaseExecutionOptions} _options
+   */
+  _determineCompetence(_options) {}
 
   /**
    * Evaluate all rolls.

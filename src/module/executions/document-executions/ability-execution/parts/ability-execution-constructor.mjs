@@ -11,84 +11,20 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
   /**
    * @param {Teriock.Execution.AbilityExecutionOptions} options
    */
-  constructor(
-    options = /** @type {Teriock.Execution.AbilityExecutionOptions} */ {},
-  ) {
+  constructor(options = {}) {
     super(options);
-    /** @type {TeriockArmament|null} */
-    let defaultArmament = null;
-    if (this.actor && this.source.system.interaction === "attack") {
-      defaultArmament = this.actor.system.primaryAttacker;
-    } else if (this.actor && this.source.system.interaction === "block") {
-      defaultArmament = this.actor.system.primaryBlocker;
-    }
-    let {
-      armament = defaultArmament,
-      noHeighten = !this.source.getSetting("promptHeighten"),
-      noTemplate = !this.source.getSetting("promptTemplate"),
-      noGp = !this.source.getSetting("promptCostGp"),
-      noHp = !this.source.getSetting("promptCostHp"),
-      noMp = !this.source.getSetting("promptCostMp"),
-      warded = this.source.system.warded,
-      piercing = /** @type {PiercingModel} */ this.source.system.piercing.clone(),
-      sb = this.actor?.system.offense.sb || 0,
-      attackPenalty = "0",
-      vitals = this.source.system.targets.has("vitals"),
-    } = options;
-    Object.assign(this.options, {
-      noMp: noMp,
-      noGp: noGp,
-      noHp: noHp,
-    });
-    this.armament = armament;
-    if (this.armament && this.source.system.isContact) {
-      if (
-        options.warded === undefined &&
-        this.armament.system.warded &&
-        ["attack", "block"].includes(this.source.system.interaction)
-      ) {
-        warded = true;
-      }
-      piercing.raw = Math.max(
-        piercing.raw,
-        this.armament.system.piercing.raw,
-        this.actor?.system.offense.piercing.raw,
-      );
-      if (
-        options.vitals === undefined &&
-        this.source.system.interaction === "attack" &&
-        this.armament.system.vitals
-      ) {
-        vitals = true;
-      }
-    }
-    if (options.attackPenalty === undefined) {
-      if (this.source.system.interaction === "attack") {
-        if (this.source.system.isContact && this.armament) {
-          attackPenalty = this.armament.system.attackPenalty.formula;
-        } else {
-          attackPenalty = "-3";
-        }
-      }
-    }
-    this.flags = {
-      noHeighten: noHeighten,
-      noTemplate: noTemplate,
-    };
-    this.warded = warded;
-    if (this.actor) {
-      this.executor = this.actor.defaultToken;
-    }
-    this.costs = {
-      hp: 0,
-      mp: 0,
-      gp: 0,
-    };
-    this.sb = sb;
-    this.piercing = piercing;
-    this.attackPenaltyFormula = attackPenalty;
+    const sys = this.source.system;
+    this.armament =
+      options.armament ?? this.#determineDefaultArmament(sys.interaction);
+    this.#initializeFlags(options);
+    this.#initializeCosts(options);
+    this.sb = options.sb ?? this.actor?.system.offense.sb ?? 0;
+    this.piercing = this.#resolvePiercing(options, sys);
+    this.warded = this.#resolveWarded(options, sys);
+    this.vitals = this.#resolveVitals(options, sys);
+    this.attackPenaltyFormula = this.#resolveAttackPenalty(options, sys);
+    this.executor = this.actor?.defaultToken ?? null;
     this.attackPenalty = 0;
-    this.vitals = vitals;
     this.targets = new Set();
   }
 
@@ -119,6 +55,104 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
    */
   get source() {
     return super.source;
+  }
+
+  /**
+   * Logic to pick armament based on interaction type.
+   * @param {string} interaction - The interaction type (e.g., 'attack', 'block').
+   * @returns {TeriockArmament|null}
+   */
+  #determineDefaultArmament(interaction) {
+    if (!this.actor) return null;
+    if (interaction === "attack") return this.actor.system.primaryAttacker;
+    if (interaction === "block") return this.actor.system.primaryBlocker;
+    return null;
+  }
+
+  /**
+   * Syncs cost options and initializes cost tracking.
+   * @param {Teriock.Execution.AbilityExecutionOptions} options
+   */
+  #initializeCosts(options) {
+    Object.assign(this.options, {
+      noMp: options.noMp ?? !this.source.getSetting("promptCostMp"),
+      noGp: options.noGp ?? !this.source.getSetting("promptCostGp"),
+      noHp: options.noHp ?? !this.source.getSetting("promptCostHp"),
+    });
+    this.costs = { hp: 0, mp: 0, gp: 0 };
+  }
+
+  /**
+   * Handles UI/Prompting flags.
+   * @param {Teriock.Execution.AbilityExecutionOptions} options
+   */
+  #initializeFlags(options) {
+    this.flags = {
+      noHeighten:
+        options.noHeighten ?? !this.source.getSetting("promptHeighten"),
+      noTemplate:
+        options.noTemplate ?? !this.source.getSetting("promptTemplate"),
+    };
+  }
+
+  /**
+   * Determines the formula for attack penalties.
+   * @param {Teriock.Execution.AbilityExecutionOptions} options
+   * @param {AbilitySystem} sys - The source system data.
+   * @returns {string}
+   */
+  #resolveAttackPenalty(options, sys) {
+    if (options.attackPenalty !== undefined) return options.attackPenalty;
+    if (sys.interaction !== "attack") return "0";
+
+    return sys.isContact && this.armament
+      ? this.armament.system.attackPenalty.formula
+      : "-3";
+  }
+
+  /**
+   * Resolves piercing by comparing source, armament, and actor offense.
+   * @param {Teriock.Execution.AbilityExecutionOptions} options
+   * @param {AbilitySystem} sys - The source system data.
+   * @returns {PiercingModel}
+   */
+  #resolvePiercing(options, sys) {
+    const piercing = options.piercing?.clone() ?? sys.piercing.clone();
+    if (this.armament && sys.isContact) {
+      piercing.raw = Math.max(
+        piercing.raw,
+        this.armament.system.piercing.raw,
+        this.actor?.system.offense.piercing.raw || 0,
+      );
+    }
+    return piercing;
+  }
+
+  /**
+   * Determines if vitals are being targeted.
+   * @param {Teriock.Execution.AbilityExecutionOptions} options
+   * @param {AbilitySystem} sys - The source system data.
+   * @returns {boolean}
+   */
+  #resolveVitals(options, sys) {
+    if (options.vitals !== undefined) return options.vitals;
+    const armamentVitals =
+      this.armament?.system.vitals && sys.interaction === "attack";
+    return sys.isContact && armamentVitals ? true : sys.targets.has("vitals");
+  }
+
+  /**
+   * Determines if the execution is warded.
+   * @param {Teriock.Execution.AbilityExecutionOptions} options
+   * @param {AbilitySystem} sys - The source system data.
+   * @returns {boolean}
+   */
+  #resolveWarded(options, sys) {
+    if (options.warded !== undefined) return options.warded;
+    const armamentWarded =
+      this.armament?.system.warded &&
+      ["attack", "block"].includes(sys.interaction);
+    return sys.isContact && armamentWarded ? true : !!sys.warded;
   }
 
   /**

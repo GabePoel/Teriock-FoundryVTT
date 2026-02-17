@@ -11,11 +11,31 @@ async function primary(actor, options = {}) {
     ui.notifications.warn("No ability name provided.");
     return;
   }
-  await actor.useAbility(abilityName, {
-    edge: options.edge,
-    bonus: options.bonus,
-    threshold: options.threshold,
-  });
+  await actor.useAbility(
+    abilityName,
+    Object.assign(options, {
+      showDialog: game.settings.get("teriock", "showRollDialogs"),
+    }),
+  );
+}
+
+/**
+ * @param {TeriockActor} actor
+ * @param {Teriock.Interaction.UseAbilityOptions} options
+ * @returns {Promise<void>}
+ */
+async function secondary(actor, options = {}) {
+  const abilityName = options.ability;
+  if (!abilityName) {
+    ui.notifications.warn("No ability name provided.");
+    return;
+  }
+  await actor.useAbility(
+    abilityName,
+    Object.assign(options, {
+      showDialog: !game.settings.get("teriock", "showRollDialogs"),
+    }),
+  );
 }
 
 /**
@@ -31,6 +51,7 @@ const command = {
   label: (options) =>
     options?.ability ? `Use ${options.ability}` : "Use Ability",
   primary,
+  secondary,
 };
 
 export default command;

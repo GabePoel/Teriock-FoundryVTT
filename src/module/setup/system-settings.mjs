@@ -2,6 +2,14 @@ export function registerSettings() {
   //noinspection JSValidateJSDoc
   /** @type {Record<string, Partial<SettingConfig>>} */
   const settings = /** @type {Record<string, Partial<SettingConfig>>} */ {
+    showRollDialogs: {
+      config: true,
+      default: true,
+      hint: "If enabled, a dialog will be shown before making most rolls.",
+      name: "Show Roll Dialogs",
+      scope: "client",
+      type: Boolean,
+    },
     confirmStatDiceRerolls: {
       config: true,
       default: true,

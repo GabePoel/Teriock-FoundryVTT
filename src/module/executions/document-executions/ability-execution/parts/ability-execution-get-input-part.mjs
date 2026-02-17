@@ -158,6 +158,7 @@ export default function AbilityExecutionGetInputPart(Base) {
 
       /** @inheritDoc */
       async _getInput() {
+        await super._getInput();
         await this._getCostInput();
         await this._getTargetInput();
       }
@@ -226,6 +227,12 @@ export default function AbilityExecutionGetInputPart(Base) {
             await abilityTemplate?.drawPreview();
           }
         }
+      }
+
+      /** @inheritDoc */
+      async _showRollDialog() {
+        if (this.source.system.interaction !== "attack") return;
+        await super._showRollDialog();
       }
     }
   );

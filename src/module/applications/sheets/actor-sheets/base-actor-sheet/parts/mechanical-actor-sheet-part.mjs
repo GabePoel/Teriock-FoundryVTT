@@ -11,7 +11,7 @@ export default (Base) =>
     static DEFAULT_OPTIONS = {
       actions: {
         deathBagPull: this.#onDeathBagPull,
-        quickUse: this.#onQuickUse,
+        quickUse: this._onQuickUse,
         toggleCondition: this.#onToggleCondition,
         increaseCover: this.#onIncreaseCover,
       },
@@ -34,19 +34,6 @@ export default (Base) =>
     }
 
     /**
-     * Quickly uses an item with optional modifiers.
-     * @param {PointerEvent} event - The event object.
-     * @param {HTMLElement} target - The target element.
-     * @returns {Promise<void>}
-     */
-    static async #onQuickUse(event, target) {
-      event.stopPropagation();
-      const id = target.dataset.id;
-      const item = this.document.items.get(id);
-      if (item) await item.use({ event });
-    }
-
-    /**
      * Toggles a condition.
      * @param {PointerEvent} event - The event object.
      * @param {HTMLElement} target - The target element.
@@ -56,6 +43,35 @@ export default (Base) =>
       event.stopPropagation();
       const conditionKey = target.dataset.condition;
       await this.document.toggleStatusEffect(conditionKey);
+    }
+
+    /**
+     * Quickly uses an item with optional modifiers.
+     * @param {PointerEvent} event - The event object.
+     * @param {HTMLElement} target - The target element.
+     * @returns {Promise<void>}
+     * @this MechanicalActorSheetPart
+     */
+    static async _onQuickUse(event, target) {
+      await this.#onQuickUse(
+        event,
+        target,
+        game.settings.get("teriock", "showRollDialogs"),
+      );
+    }
+
+    /**
+     * Quickly uses an item with optional modifiers.
+     * @param {PointerEvent} event - The event object.
+     * @param {HTMLElement} target - The target element.
+     * @param {boolean} showDialog - Whether to show a dialog.
+     * @returns {Promise<void>}
+     */
+    async #onQuickUse(event, target, showDialog) {
+      event.stopPropagation();
+      const id = target.dataset.id;
+      const item = this.document.items.get(id);
+      if (item) await item.use({ event, showDialog });
     }
 
     /** @inheritDoc */
@@ -69,5 +85,14 @@ export default (Base) =>
             async () => await this.document.system.decreaseCover(),
           );
         });
+      this.element.querySelectorAll("[data-action=quickUse]").forEach((el) => {
+        el.addEventListener("contextmenu", async (ev) => {
+          await this.#onQuickUse(
+            ev,
+            el,
+            !game.settings.get("teriock", "showRollDialogs"),
+          );
+        });
+      });
     }
   };

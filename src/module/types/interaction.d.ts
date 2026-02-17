@@ -31,16 +31,18 @@ declare global {
     export type ThresholdOptions = {
       /** Some bonus to add to the roll */
       bonus?: Teriock.System.FormulaString;
+      /** The comparison operation `c(roll, threshold)` */
+      comparison?: Teriock.Fields.ComparisonCheck;
       /** Proficiency and fluency */
       competence?: Teriock.System.CompetenceLevel;
       /** Positive for advantage, negative for disadvantage */
       edge?: Teriock.System.EdgeLevel;
       /** A formula to use other than the default one */
       formula?: Teriock.System.FormulaString;
+      /** Whether to show a roll dialog */
+      showDialog?: boolean;
       /** A threshold the roll needs to meet */
       threshold?: number;
-      /** The comparison operation `c(roll, threshold)` */
-      comparison?: Teriock.Fields.ComparisonCheck;
     };
 
     export type TradecraftOptions = ThresholdOptions & {

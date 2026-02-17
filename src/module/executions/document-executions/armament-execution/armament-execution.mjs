@@ -1,3 +1,4 @@
+import { boostDialog } from "../../../applications/dialogs/_module.mjs";
 import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
 import {
   makeDamageDrainTypePanels,
@@ -19,6 +20,7 @@ export default class ArmamentExecution extends BaseDocumentExecution {
     this.crit = crit;
     this.deals = new Set(deals);
     this.bonusDamage = bonusDamage;
+    this.showDialog = options.showDialog;
     if (options.formula === undefined) {
       this.formula = this.source.system.damage.base.formula;
     }
@@ -77,6 +79,15 @@ export default class ArmamentExecution extends BaseDocumentExecution {
         roll.alter(2, 0, { multiplyNumeric: false });
       }
     }
+  }
+
+  /** @inheritDoc */
+  async _getInput() {
+    if (this.showDialog && formulaExists(this.formula)) {
+      this.formula = await boostDialog(this.formula, { crit: this.crit });
+      this.crit = false;
+    }
+    await super._getInput();
   }
 
   /** @inheritDoc */

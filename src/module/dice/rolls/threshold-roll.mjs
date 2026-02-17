@@ -8,8 +8,11 @@ export default class ThresholdRoll extends BaseRoll {
    * @returns {Teriock.Interaction.ThresholdOptions}
    */
   static parseEvent(event) {
-    return {
-      edge: Number(event.altKey ?? false) - Number(event.shiftKey ?? false),
-    };
+    const out = {};
+    if (!event) return out;
+    if (event.altKey || event.shiftKey) out.showDialog = false;
+    out.edge =
+      Number(event?.altKey || false) - Number(event?.shiftKey || false);
+    return out;
   }
 }

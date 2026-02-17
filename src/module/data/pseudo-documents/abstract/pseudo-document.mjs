@@ -91,6 +91,11 @@ export default class PseudoDocument extends EmbeddedDataModel {
     return this.constructor.LABEL;
   }
 
+  /** @inheritDoc */
+  get localPath() {
+    return `${this.fieldPath}.${this.id}`;
+  }
+
   /**
    * The UUID of this pseudo-document.
    * @returns {string}

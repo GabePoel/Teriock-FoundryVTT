@@ -40,14 +40,6 @@ export default class BaseAutomation extends TypedPseudoDocument {
   }
 
   /**
-   * Paths to forms to display in the editor.
-   * @returns {string[]}
-   */
-  get _formPaths() {
-    return [];
-  }
-
-  /**
    * Whether this is active and should be included in the overall effect.
    * @returns {boolean}
    */
@@ -95,33 +87,5 @@ export default class BaseAutomation extends TypedPseudoDocument {
     if (this.document.type === "ability") {
       return this.parent["maneuver"] === "passive";
     } else return this.document.type === "property";
-  }
-
-  /**
-   * Forms that go into the simple editor for this impact.
-   * @returns {Promise<string>}
-   */
-  async _getEditorForms() {
-    let html = "";
-    for (const fp of this._formPaths) {
-      const field = this.schema.getField(fp);
-      const formGroup = field.toFormGroup(
-        { rootId: this.uuid },
-        {
-          name: `${this.fieldPath}.${this.id}.${fp}`,
-          value: foundry.utils.getProperty(this, fp),
-        },
-      );
-      html += formGroup.outerHTML;
-    }
-    return html;
-  }
-
-  /**
-   * A simple editor for this impact.
-   * @returns {Promise<string>}
-   */
-  async getEditor() {
-    return this._getEditorForms();
   }
 }

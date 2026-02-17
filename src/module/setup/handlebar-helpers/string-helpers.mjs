@@ -80,7 +80,9 @@ export default function registerStringHelpers() {
   });
 
   Handlebars.registerHelper("ruleUuid", (namespace, pageName) => {
-    return `Compendium.teriock.rules.JournalEntry.${toId(namespace, { hash: true })}.JournalEntryPage.${toId(pageName, { hash: true })}`;
+    const nsId = toId(namespace, { hash: false });
+    const pnId = toId(pageName, { hash: false });
+    return `Compendium.teriock.rules.JournalEntry.${nsId}.JournalEntryPage.${pnId}`;
   });
 
   Handlebars.registerHelper("escapeAttr", function (html) {

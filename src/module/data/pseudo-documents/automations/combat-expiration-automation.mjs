@@ -36,15 +36,10 @@ export default class CombatExpirationAutomation extends CritAutomation {
     if (this.what.type === "rolled") {
       paths.push(...["what.roll", "what.threshold"]);
     }
-    paths.push(
-      ...[
-        "when.time",
-        "when.trigger",
-        "when.skip",
-        "who.type",
-        ...super._formPaths,
-      ],
-    );
+    if (this.what.type !== "none") {
+      paths.push(...["when.time", "when.trigger", "when.skip", "who.type"]);
+    }
+    paths.push(...super._formPaths);
     return paths;
   }
 }

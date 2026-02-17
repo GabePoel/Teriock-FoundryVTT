@@ -4,6 +4,7 @@ declare global {
       bonusDamage?: Teriock.System.FormulaString;
       crit?: boolean;
       deals?: Teriock.Parameters.Consequence.RollConsequenceKey[];
+      showDialog?: boolean;
       source?: TeriockArmament;
     };
 

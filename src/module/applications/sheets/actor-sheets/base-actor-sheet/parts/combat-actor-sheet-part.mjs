@@ -114,8 +114,43 @@ export default (Base) =>
      * @param {PointerEvent} event
      * @param {HTMLElement} target
      * @returns {Promise<void>}
+     * @this CombatActorSheetPart
      */
     static async _onUseAbility(event, target) {
-      await this.document.useAbility(target.dataset.ability, { event });
+      await this.#onUseAbility(
+        event,
+        target,
+        game.settings.get("teriock", "showRollDialogs"),
+      );
+    }
+
+    /**
+     * Use the specified ability.
+     * @param {PointerEvent} event
+     * @param {HTMLElement} target
+     * @param {boolean} showDialog - Whether to show a dialog.
+     * @returns {Promise<void>}
+     */
+    async #onUseAbility(event, target, showDialog) {
+      await this.document.useAbility(target.dataset.ability, {
+        event,
+        showDialog,
+      });
+    }
+
+    /** @inheritDoc */
+    async _onRender(context, options) {
+      await super._onRender(context, options);
+      this.element
+        .querySelectorAll("[data-action=useAbility]")
+        .forEach((el) => {
+          el.addEventListener("contextmenu", async (ev) => {
+            await this.#onUseAbility(
+              ev,
+              el,
+              !game.settings.get("teriock", "showRollDialogs"),
+            );
+          });
+        });
     }
   };
