@@ -15,6 +15,7 @@ import { formulaCommand } from "./abstract-command.mjs";
  * @param {Teriock.Interaction.TakeOptions} options
  */
 async function abstractTakeOperation(actor, options) {
+  options = cleanDataset(options);
   let formula = options.formula || "0";
   const type = options.type || "damage";
   const take = TERIOCK.options.take[type];
@@ -56,12 +57,13 @@ async function abstractTakeOperation(actor, options) {
 function takeOperationFactory(type, operation) {
   return async function (actor, options) {
     options.type = type;
+    delete options.boost;
     if (operation === "primary") {
-      delete options.boost;
+      options.boost = game.settings.get("teriock", "showRollDialogs");
       delete options.reverse;
     }
     if (operation === "secondary") {
-      options.boost = true;
+      options.boost = !game.settings.get("teriock", "showRollDialogs");
       options.reverse = true;
     }
     return abstractTakeOperation(actor, options);
@@ -83,3 +85,22 @@ const rollableTakeCommands = Object.entries(takeOptions).map(([type, take]) => {
 });
 
 export default rollableTakeCommands;
+
+/**
+ * Clean a dataset of boolean values.
+ * @param {DOMStringMap} dataset
+ * @returns {object}
+ */
+function cleanDataset(dataset) {
+  const options = {};
+  for (const [key, value] of Object.entries(dataset)) {
+    if (value === "true") {
+      options[key] = true;
+    } else if (value === "false") {
+      options[key] = false;
+    } else {
+      options[key] = value;
+    }
+  }
+  return options;
+}
