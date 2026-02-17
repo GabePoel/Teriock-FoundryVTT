@@ -285,26 +285,8 @@ export default class BaseMessageSystem extends TypeDataModel {
    */
   async alterMessageHTML(htmlElement) {
     htmlElement.classList.add("teriock");
-
-    let autoCollapse;
-    const defaultCollapse = game.settings.get(
-      "teriock",
-      "defaultPanelCollapseState",
-    );
-    if (defaultCollapse === "closed") {
-      autoCollapse = true;
-    } else if (defaultCollapse === "open") {
-      autoCollapse = false;
-    } else {
-      autoCollapse =
-        this.parent.timestamp <
-        Date.now() -
-          game.settings.get("teriock", "automaticPanelCollapseTime") *
-            60 *
-            1000;
-    }
-
-    TeriockItem.bindPanelListeners(htmlElement, { collapseAll: autoCollapse });
+    TeriockItem.bindPanelListeners(htmlElement);
+    this.collapsePanels(htmlElement);
 
     // Add an extra content div at the start of message-content if it exists
     if (this.extraContent) {
@@ -422,9 +404,7 @@ export default class BaseMessageSystem extends TypeDataModel {
             name: "Boost",
             icon: makeIcon(TERIOCK.display.icons.roll.boost, "contextMenu"),
             callback: async () => {
-              const boostedRoll = /** @type {TeriockRoll} */ await roll.boost(
-                roll.options,
-              );
+              const boostedRoll = await roll.boost(roll.options);
               await boostedRoll.toMessage({
                 speaker: TeriockChatMessage.getSpeaker(),
                 system: {
@@ -440,8 +420,7 @@ export default class BaseMessageSystem extends TypeDataModel {
             name: "Deboost",
             icon: makeIcon(TERIOCK.display.icons.roll.deboost, "contextMenu"),
             callback: async () => {
-              const deboostedRoll =
-                /** @type {TeriockRoll} */ await roll.deboost(roll.options);
+              const deboostedRoll = await roll.deboost(roll.options);
               await deboostedRoll.toMessage({
                 speaker: TeriockChatMessage.getSpeaker(),
                 system: {
@@ -460,5 +439,33 @@ export default class BaseMessageSystem extends TypeDataModel {
         },
       );
     }
+  }
+
+  /**
+   * Auto-collapse panels.
+   * @param {HTMLLIElement} htmlElement
+   */
+  collapsePanels(htmlElement) {
+    let autoCollapse;
+    const defaultCollapse = game.settings.get(
+      "teriock",
+      "defaultPanelCollapseState",
+    );
+    if (defaultCollapse === "closed") {
+      autoCollapse = true;
+    } else if (defaultCollapse === "open") {
+      autoCollapse = false;
+    } else {
+      autoCollapse =
+        this.parent.timestamp <
+        Date.now() -
+          game.settings.get("teriock", "automaticPanelCollapseTime") *
+            60 *
+            1000;
+    }
+    TeriockItem.toggleCollapse(htmlElement, {
+      autoCollapse: true,
+      collapseAll: autoCollapse,
+    });
   }
 }

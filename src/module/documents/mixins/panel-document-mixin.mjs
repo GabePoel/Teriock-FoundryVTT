@@ -23,12 +23,8 @@ export default function PanelDocumentMixin(Base) {
       /**
        * Bind listeners to collapse panel elements.
        * @param {HTMLElement} element
-       * @param {object} [options]
-       * @param {boolean} [options.collapseAll]
-       * @param {boolean} [options.collapsePanel]
-       * @param {boolean} [options.collapseAssociation]
        */
-      static bindPanelListeners(element, options = {}) {
+      static bindPanelListeners(element) {
         element
           .querySelectorAll("[data-action='toggle-collapse']")
           .forEach((el) => {
@@ -38,24 +34,40 @@ export default function PanelDocumentMixin(Base) {
               const collapsable =
                 /** @type {HTMLElement} */ target.closest(".collapsable");
               collapsable.classList.toggle("collapsed");
+              collapsable.dataset.noAutoToggle = "true";
             });
           });
+      }
+
+      /**
+       * Toggle collapse state of panel elements.
+       * @param {HTMLElement} element
+       * @param {object} [options]
+       * @param {boolean} [options.autoCollapse]
+       * @param {boolean} [options.collapseAll]
+       * @param {boolean} [options.collapsePanel]
+       * @param {boolean} [options.collapseAssociation]
+       */
+      static toggleCollapse(element, options = {}) {
+        const selector = options.autoCollapse
+          ? "collapsable:not([data-no-auto-toggle])"
+          : "collapsable";
         if (options.collapsePanel) {
           element
-            .querySelectorAll(".teriock-panel.collapsable")
+            .querySelectorAll(`.teriock-panel.${selector}`)
             .forEach((el) => {
               el.classList.toggle("collapsed", true);
             });
         }
         if (options.collapseAssociation) {
           element
-            .querySelectorAll(".teriock-panel-association.collapsable")
+            .querySelectorAll(`.teriock-panel-association.${selector}`)
             .forEach((el) => {
               el.classList.toggle("collapsed", true);
             });
         }
         if (options.collapseAll) {
-          element.querySelectorAll(".collapsable").forEach((el) => {
+          element.querySelectorAll(`.${selector}`).forEach((el) => {
             el.classList.toggle("collapsed", true);
           });
         }

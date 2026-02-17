@@ -29,4 +29,15 @@ export default class TeriockChatLog extends ChatLog {
       },
     ];
   }
+
+  /** @inheritDoc */
+  updateTimestamps() {
+    super.updateTimestamps();
+    for (const li of /** @type {NodeListOf<HTMLLIElement>} */ document.querySelectorAll(
+      ".chat-message[data-message-id]",
+    )) {
+      const message = game.messages.get(li.dataset.messageId);
+      message.system.collapsePanels(li);
+    }
+  }
 }
