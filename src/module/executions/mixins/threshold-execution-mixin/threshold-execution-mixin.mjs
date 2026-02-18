@@ -28,7 +28,7 @@ export default function ThresholdExecutionMixin(Base) {
           edge = 0,
           bonus = "",
           comparison = "gte",
-          showDialog = false,
+          showDialog = game.settings.get("teriock", "showRollDialogs"),
         } = options;
         this.edge = edge;
         this.threshold = threshold;
