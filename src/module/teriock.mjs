@@ -402,7 +402,14 @@ foundry.helpers.Hooks.once("init", function () {
   // ==============
 
   CONFIG.Dice.rolls.length = 0;
-  CONFIG.Dice.rolls.push(...[dice.rolls.BaseRoll, dice.rolls.ThresholdRoll]);
+  CONFIG.Dice.rolls.push(
+    ...[
+      dice.rolls.BaseRoll,
+      dice.rolls.ThresholdRoll,
+      dice.rolls.TakeRoll,
+      dice.rolls.HarmRoll,
+    ],
+  );
   CONFIG.Dice.termTypes.FunctionTerm = dice.FunctionTerm;
   for (const category of Object.values(dice.functions)) {
     for (const [k, v] of Object.entries(category)) {

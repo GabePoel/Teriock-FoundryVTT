@@ -33,6 +33,9 @@ declare global {
       threshold?: number | null;
       comparison?: Teriock.Fields.ComparisonCheck;
     };
+    export type TakeRollOptions = Teriock.Dice.RollOptions & {
+      take?: Teriock.Parameters.Consequence.RollConsequenceKey;
+    };
   }
 }
 

@@ -10,6 +10,7 @@ const { JournalEntryPage } = foundry.documents;
  * @extends {ClientDocument}
  * @extends {JournalEntryPage}
  * @mixes BaseDocument
+ * @mixes PanelDocument
  */
 export default class TeriockJournalEntryPage extends mix(
   JournalEntryPage,
@@ -25,6 +26,7 @@ export default class TeriockJournalEntryPage extends mix(
     return {
       ...super.panelParts,
       image:
+        this.system?.img ||
         this.getFlag("teriock", "journalImage") ||
         getImage("powers", "Learned Elder Sorceries"),
       icon: this.getFlag("teriock", "journalIcon") || "book",

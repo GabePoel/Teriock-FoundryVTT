@@ -10,7 +10,7 @@ export default class BaseRoll extends Roll {
   static CHAT_TEMPLATE = systemPath("templates/ui-templates/roll.hbs");
 
   /**
-   * @param {string} formula
+   * @param {Teriock.System.FormulaString} formula
    * @param {object} data
    * @param {Teriock.Dice.RollOptions} options
    */
@@ -309,5 +309,37 @@ export default class BaseRoll extends Roll {
       allowInteractive,
       ...options,
     });
+  }
+
+  /**
+   * Buttons that are created by this roll.
+   * @returns {Promise<Teriock.UI.HTMLButtonConfig[]>}
+   */
+  async getButtons() {
+    return [];
+  }
+
+  /**
+   * Panels that are created by this roll.
+   * @returns {Promise<Teriock.MessageData.MessagePanel[]>}
+   */
+  async getPanels() {
+    return [];
+  }
+
+  /** @inheritDoc */
+  async toMessage(messageData = {}, { rollMode, create = true } = {}) {
+    const buttons = await this.getButtons();
+    const panels = await this.getPanels();
+    messageData = foundry.utils.mergeObject(
+      {
+        system: {
+          panels: panels,
+          buttons: buttons,
+        },
+      },
+      messageData,
+    );
+    return super.toMessage(messageData, { rollMode, create });
   }
 }

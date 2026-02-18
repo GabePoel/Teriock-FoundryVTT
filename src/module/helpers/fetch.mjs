@@ -95,7 +95,7 @@ export async function copyRank(classKey, number) {
  * @param {string} type
  * @returns {Promise<Record<string, TeriockJournalEntryPage>>}
  */
-async function getHarmTypes(type) {
+export async function getHarmTypes(type) {
   const damageTypeSourceUuids = game.settings.get(
     "teriock",
     `${type}TypeSources`,
