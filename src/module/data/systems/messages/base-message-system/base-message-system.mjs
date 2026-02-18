@@ -11,16 +11,16 @@ import {
   associationsField,
   blocksField,
 } from "../../../fields/helpers/builders.mjs";
+import { BaseSystem } from "../../abstract/_module.mjs";
 
 const { fields } = foundry.data;
-const { TypeDataModel } = foundry.abstract;
 
 //noinspection JSClosureCompilerSyntax
 /**
  * @implements {Teriock.Models.BaseMessageSystemInterface}
  * @implements {Teriock.Data.BaseMessageData}
  */
-export default class BaseMessageSystem extends TypeDataModel {
+export default class BaseMessageSystem extends BaseSystem {
   //noinspection JSValidateJSDoc
   /**
    * @inheritDoc

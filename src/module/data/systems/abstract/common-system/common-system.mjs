@@ -1,40 +1,25 @@
 import { TeriockJournalEntry } from "../../../../documents/_module.mjs";
 import { quickAddAssociation } from "../../../../helpers/html.mjs";
 import { toCamelCase, toTitleCase } from "../../../../helpers/string.mjs";
-import { PseudoCollectionField } from "../../../fields/_module.mjs";
-import { BaseAutomation } from "../../../pseudo-documents/automations/_module.mjs";
+import { mix } from "../../../../helpers/utils.mjs";
 import { AccessDataMixin } from "../../../shared/mixins/_module.mjs";
+import { AutomatableSystemMixin } from "../../mixins/_module.mjs";
+import BaseSystem from "../base-system.mjs";
 
-const { TypeDataModel } = foundry.abstract;
 const { fields } = foundry.data;
 
 //noinspection JSClosureCompilerSyntax
 /**
- * @extends {TypeDataModel}
+ * @extends {BaseSystem}
  * @mixes AccessData
+ * @mixes AutomatableSystem
  * @implements {Teriock.Models.CommonSystemInterface}
  */
-export default class CommonSystem extends AccessDataMixin(TypeDataModel) {
-  /**
-   * Array of the types of automations that this document can have.
-   * @returns {(typeof BaseAutomation)[]}
-   */
-  static get _automationTypes() {
-    return [];
-  }
-
-  /**
-   * The types of automations that this document can have.
-   * @returns {Record<string, BaseAutomation>}
-   */
-  static get automationTypes() {
-    return Object.fromEntries(
-      this._automationTypes
-        .map((a) => [a.TYPE, a])
-        .sort((a, b) => a[1].LABEL.localeCompare(b[1].LABEL)),
-    );
-  }
-
+export default class CommonSystem extends mix(
+  BaseSystem,
+  AccessDataMixin,
+  AutomatableSystemMixin,
+) {
   /**
    * Metadata.
    * @returns {Teriock.Documents.ModelMetadata}
@@ -70,16 +55,13 @@ export default class CommonSystem extends AccessDataMixin(TypeDataModel) {
    * @returns {DataSchema}
    */
   static defineSchema() {
-    return {
-      automations: new PseudoCollectionField(BaseAutomation, {
-        types: this.automationTypes,
-      }),
+    return Object.assign(super.defineSchema(), {
       gmNotes: new fields.DocumentUUIDField({
         required: false,
         nullable: true,
         initial: null,
       }),
-    };
+    });
   }
 
   /**

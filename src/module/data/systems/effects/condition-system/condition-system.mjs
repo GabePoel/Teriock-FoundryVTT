@@ -23,6 +23,7 @@ const { fields } = foundry.data;
 export default class ConditionSystem extends mix(
   BaseEffectSystem,
   mixins.WikiSystemMixin,
+  mixins.TransformationSystemMixin,
   ThresholdDataMixin,
 ) {
   /** @inheritDoc */

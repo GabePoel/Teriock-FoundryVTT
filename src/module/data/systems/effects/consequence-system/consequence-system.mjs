@@ -19,6 +19,7 @@ const { fields } = foundry.data;
 export default class ConsequenceSystem extends mix(
   BaseEffectSystem,
   mixins.HierarchySystemMixin,
+  mixins.TransformationSystemMixin,
   ThresholdDataMixin,
 ) {
   /** @inheritDoc */
