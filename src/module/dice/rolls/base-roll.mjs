@@ -204,6 +204,8 @@ export default class BaseRoll extends Roll {
     context.hideRoll = this.hideRoll;
     context.id = this.id;
     if (context.hasThreshold) {
+      context.styles.total.classes = "";
+      context.styles.total.tooltip = "";
       if (this.success) {
         context.styles.total.classes += " success";
         context.styles.total.tooltip += "Success";

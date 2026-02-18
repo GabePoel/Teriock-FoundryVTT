@@ -23,6 +23,16 @@ export default class TradecraftCheckExecution extends TradecraftExecutionMixin(
   }
 
   /** @inheritDoc */
+  get icon() {
+    return TERIOCK.display.icons.tradecraft[this.tradecraft];
+  }
+
+  /** @inheritDoc */
+  get name() {
+    return `${TERIOCK.index.tradecrafts[this.tradecraft]} Check`;
+  }
+
+  /** @inheritDoc */
   get rollOptions() {
     return Object.assign(super.rollOptions, {
       targets: Array.from(game.user.targets),

@@ -36,6 +36,16 @@ export default class FeatSaveExecution extends ThresholdExecutionMixin(
   }
 
   /** @inheritDoc */
+  get icon() {
+    return TERIOCK.display.icons.attribute[this.attribute];
+  }
+
+  /** @inheritDoc */
+  get name() {
+    return `${TERIOCK.index.attributesFull[this.attribute]} Feat Save`;
+  }
+
+  /** @inheritDoc */
   async _buildPanels() {
     this.panels = [await attributePanel(this.attribute)];
   }

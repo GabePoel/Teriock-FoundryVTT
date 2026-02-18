@@ -16,6 +16,16 @@ export default function AbilityExecutionGetInputPart(Base) {
      * @mixin
      */
     class AbilityExecutionGetInput extends Base {
+      /** @inheritDoc */
+      get icon() {
+        return TERIOCK.display.icons.document.ability;
+      }
+
+      /** @inheritDoc */
+      get name() {
+        return this.source.system.nameString;
+      }
+
       /**
        * @param {string} stat
        * @returns {Promise<number>}

@@ -1,5 +1,6 @@
 import { UseAbilityHandler } from "../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
 import { getImage } from "../../../helpers/path.mjs";
+import { toTitleCase } from "../../../helpers/string.mjs";
 import { ThresholdExecutionMixin } from "../../mixins/_module.mjs";
 import ImmunityExecution from "../immunity-execution/immunity-execution.mjs";
 
@@ -33,6 +34,16 @@ export default class ResistanceSaveExecution extends ThresholdExecutionMixin(
   /** @inheritDoc */
   get flavor() {
     return "Resistance Save";
+  }
+
+  /** @inheritDoc */
+  get icon() {
+    return TERIOCK.display.icons.effect.protection;
+  }
+
+  /** @inheritDoc */
+  get name() {
+    return `${toTitleCase(this.rule)} Save`;
   }
 
   /** @inheritDoc */
