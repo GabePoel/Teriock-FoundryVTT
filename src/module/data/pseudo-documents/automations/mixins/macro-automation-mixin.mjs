@@ -1,10 +1,10 @@
 import { pseudoHooks } from "../../../../constants/system/pseudo-hooks.mjs";
 import { ExecuteMacroHandler } from "../../../../helpers/interaction/button-handlers/execute-macro-handlers.mjs";
+import LabelAutomationMixin from "./label-automation-mixin.mjs";
 
 const { fields } = foundry.data;
 
 /**
- *
  * @param {typeof BaseAutomation} Base
  * @constructor
  */
@@ -17,8 +17,9 @@ export default function MacroAutomationMixin(Base) {
      * @property {"button"|"pseudoHook"} relation
      * @property {Teriock.Parameters.Shared.AbilityPseudoHook} pseudoHook
      * @property {UUID<TeriockMacro>} macro
+     * @property {string} title
      */
-    class MacroAutomation extends Base {
+    class MacroAutomation extends LabelAutomationMixin(Base) {
       /** @inheritDoc */
       static get LABEL() {
         return "Macro";
@@ -41,26 +42,31 @@ export default function MacroAutomationMixin(Base) {
 
       /** @inheritDoc */
       static defineSchema() {
-        return Object.assign(super.defineSchema(), {
+        const schema = Object.assign(super.defineSchema(), {
           macro: new fields.DocumentUUIDField({
             type: "Macro",
             label: "Macro",
           }),
-          relation: new fields.StringField({
-            choices: {
-              button: "Button",
-              pseudoHook: "Hook",
-            },
-            initial: "button",
-            label: "Relation",
-            hint: "Whether this macro can be run as a button from the chat message or hooks into some other behavior.",
-          }),
-          pseudoHook: new fields.StringField({
-            choices: this._pseudoHookChoices,
-            label: "Hook",
-            hint: "The hook that executes this macro when fired.",
-          }),
         });
+        if (Object.keys(this._pseudoHookChoices).length > 0) {
+          Object.assign(schema, {
+            relation: new fields.StringField({
+              choices: {
+                button: "Button",
+                pseudoHook: "Hook",
+              },
+              initial: "button",
+              label: "Relation",
+              hint: "Whether this macro can be run as a button from the chat message or hooks into other behavior.",
+            }),
+            pseudoHook: new fields.StringField({
+              choices: this._pseudoHookChoices,
+              label: "Hook",
+              hint: "The hook that executes this macro when fired.",
+            }),
+          });
+        }
+        return schema;
       }
 
       /** @inheritDoc */
@@ -68,18 +74,24 @@ export default function MacroAutomationMixin(Base) {
         const paths = ["macro", "relation"];
         if (this.relation === "pseudoHook") {
           paths.push("pseudoHook");
+        } else {
+          paths.push("title");
         }
         return paths;
       }
 
       /** @inheritDoc */
       get buttons() {
-        if (this.relation === "button" || !this.hasMacro) {
+        if (this.relation !== "pseudoHook" && this.hasMacro) {
           return [
-            ExecuteMacroHandler.buildButton(this.macro, {
-              proficient: this.document?.system.competence?.proficient,
-              fluent: this.document?.system.competence?.fluent,
-            }),
+            ExecuteMacroHandler.buildButton(
+              this.macro,
+              {
+                proficient: this.document?.system.competence?.proficient,
+                fluent: this.document?.system.competence?.fluent,
+              },
+              { label: this.title },
+            ),
           ];
         } else {
           return [];

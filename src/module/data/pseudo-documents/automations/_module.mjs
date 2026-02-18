@@ -1,6 +1,8 @@
 export { default as AbilityMacroAutomation } from "./ability-macro-automation.mjs";
 export { default as BaseAutomation } from "./base-automation.mjs";
 export { default as ChangesAutomation } from "./changes-automation.mjs";
+export { default as ChatMacroAutomation } from "./chat-macro-automation.mjs";
+export { default as ChatStatusAutomation } from "./chat-status-automation.mjs";
 export { default as CheckAutomation } from "./check-automation.mjs";
 export { default as CombatExpirationAutomation } from "./combat-expiration-automation.mjs";
 export { default as CommonImpactsAutomation } from "./common-impacts-automation.mjs";
@@ -12,5 +14,6 @@ export { default as PropertyMacroAutomation } from "./property-macro-automation.
 export { default as ResistAutomation } from "./resist-automation.mjs";
 export { default as RollAutomation } from "./roll-automation.mjs";
 export { default as StatusAutomation } from "./status-automation.mjs";
+export { default as TakeAutomaton } from "./take-automation.mjs";
 export { default as TransformationAutomation } from "./transformation-automation.mjs";
 export { default as UseAbilitiesAutomation } from "./use-abilities-automation.mjs";

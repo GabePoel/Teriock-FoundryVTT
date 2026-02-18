@@ -1,16 +1,18 @@
 import { RollRollableTakeHandler } from "../../../helpers/interaction/button-handlers/rollable-takes-handlers.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 import BaseAutomation from "./base-automation.mjs";
+import { LabelAutomationMixin } from "./mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
  * @property {Teriock.Parameters.Consequence.RollConsequenceKey} roll
  * @property {string} formula
- * @property {string} name
  * @property {boolean} merge
  */
-export default class RollAutomation extends BaseAutomation {
+export default class RollAutomation extends LabelAutomationMixin(
+  BaseAutomation,
+) {
   /** @inheritDoc */
   static get LABEL() {
     return "Roll";
@@ -34,10 +36,6 @@ export default class RollAutomation extends BaseAutomation {
         label: "Formula",
         hint: "The formula to use for the roll.",
       }),
-      title: new fields.StringField({
-        label: "Title",
-        hint: "The text to display on the roll button.",
-      }),
       merge: new fields.BooleanField({
         label: "Merge",
         hint: "Whether to merge this roll with other valid rolls of the same type that have merging enabled.",
@@ -48,8 +46,9 @@ export default class RollAutomation extends BaseAutomation {
 
   /** @inheritDoc */
   get _formPaths() {
-    const paths = ["roll", "formula", "merge"];
-    if (this.roll === "other") paths.push("title");
+    const paths = ["roll", "formula"];
+    if (!this.merge) paths.push("title");
+    paths.push("merge");
     return paths;
   }
 
@@ -57,6 +56,7 @@ export default class RollAutomation extends BaseAutomation {
   get buttons() {
     return [
       RollRollableTakeHandler.buildButton(this.roll, this.formula, {
+        label: this.title,
         merge: this.merge,
       }),
     ];
