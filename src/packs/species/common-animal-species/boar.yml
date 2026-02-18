@@ -303,7 +303,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.26
+      systemVersion: 0.10.2
     img: systems/teriock/src/icons/abilities/defy-death.webp
     name: Defy Death
     system:
@@ -348,8 +348,6 @@ effects:
         raw: '1'
         stationary: false
         unit: minute
-      effectTypes:
-        - resistance
       executionTime: r1
       expansion:
         featSaveAttribute: mov
@@ -885,13 +883,15 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.26
+      systemVersion: 0.10.2
     img: systems/teriock/src/icons/abilities/trample.webp
     name: Trample
     system:
       automations:
         1728b3a84ea27844:
           _id: 1728b3a84ea27844
+          common:
+            - standardDamage
           competencies:
             - 0
             - 1
@@ -937,8 +937,8 @@ effects:
         base: >-
           <p>If you use [[lookup name]] on a @L[Category:Creatures]{creature} at
           least one @L[Core:Size]{size category} smaller than you, add [[/damage
-          1d6]] @L[Core:Damage]{damage} to its @L[Core:Standard Damage]{standard
-          damage}.</p>
+          1d6]] @L[Core:Damage]{damage} to its @L[Core:Standard and Critical
+          Damage]{standard damage}.</p>
       piercing:
         raw: 2
       powerSources:
@@ -947,8 +947,8 @@ effects:
         raw: Your Weapon's Range
         unit: ft
       results:
-        critHit: <p>Deal @L[Core:Critical Damage]{critical damage}.</p>
-        hit: <p>Deal @L[Core:Standard Damage]{standard damage}.</p>
+        critHit: <p>Deal @L[Core:Standard and Critical Damage]{critical damage}.</p>
+        hit: <p>Deal @L[Core:Standard and Critical Damage]{standard damage}.</p>
       revealed: true
       targets:
         - creature

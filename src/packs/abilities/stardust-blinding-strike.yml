@@ -1,0 +1,94 @@
+_id: 259640b5a397bdbc
+_key: '!items!259640b5a397bdbc'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.10.2
+effects:
+  - _id: 259640b5a397bdbc
+    _key: '!items.effects!259640b5a397bdbc.259640b5a397bdbc'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.10.2
+    img: systems/teriock/src/icons/abilities/stardust-blinding-strike.webp
+    name: Stardust Blinding Strike
+    system:
+      automations:
+        18537e76761a45dc:
+          _id: 18537e76761a45dc
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          relation: include
+          status: blind
+          type: status
+        d635eb44dba086dd:
+          _id: d635eb44dba086dd
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: combatExpiration
+          what:
+            roll: 2d4kh1
+            threshold: 4
+            type: rolled
+          when:
+            skip: 0
+            time: end
+            trigger: turn
+          who:
+            type: target
+      competence:
+        raw: 0
+      delivery:
+        base: weapon
+        package: strike
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
+      endCondition: >-
+        <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
+        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: attack
+      maneuver: active
+      overview:
+        base: <p>Target is @L[Condition:Blind]{blinded}.</p>
+      piercing:
+        raw: 2
+      powerSources:
+        - magical
+      range:
+        raw: Your Weapon's Range
+        unit: ft
+      revealed: true
+      targets:
+        - creature
+    type: ability
+img: systems/teriock/src/icons/abilities/stardust-blinding-strike.webp
+name: Stardust Blinding Strike
+type: wrapper
