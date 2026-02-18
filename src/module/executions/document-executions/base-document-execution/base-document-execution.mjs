@@ -125,7 +125,7 @@ export default class BaseDocumentExecution extends BaseExecution {
       formulasByRollType[rollType] = formula;
     });
 
-    // Apply boosts from source document
+    // Apply boosts from the source document
     this.buttons.push(
       ...Object.entries(formulasByRollType).map(([rollType, formula]) =>
         RollRollableTakeHandler.buildButton(rollType, formula),

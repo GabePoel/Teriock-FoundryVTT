@@ -396,7 +396,7 @@ export default function AbilityExecutionChatPart(Base) {
           );
         }
 
-        // Add armament to standard damage button
+        // Add armament to the standard damage button
         const standardDamageButton = this.buttons.find(
           (b) => b.dataset?.action === standardDamageCommand.id,
         );

@@ -1,7 +1,7 @@
 import { toTitleCase } from "../../../../helpers/string.mjs";
 import { makeIcon, mix } from "../../../../helpers/utils.mjs";
 import { bindCommonActions } from "../../../shared/_module.mjs";
-import { TeriockContextMenu, TeriockTextEditor } from "../../../ux/_module.mjs";
+import { TeriockTextEditor } from "../../../ux/_module.mjs";
 import { ConfigButtonSheetMixin, IndexButtonSheetMixin } from "../_module.mjs";
 import * as parts from "./parts/_module.mjs";
 

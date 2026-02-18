@@ -33,7 +33,6 @@ Object.assign(globalThis, {
     string: helpers.string,
     unit: helpers.unit,
     utils: helpers.utils,
-    rolling: helpers.rolling,
   },
 });
 

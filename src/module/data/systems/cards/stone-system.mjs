@@ -22,7 +22,6 @@ export default class StoneSystem extends BaseCardSystem {
       !foundry.utils.hasProperty(data, "faces") ||
       Object.keys(foundry.utils.getProperty(data, "faces")[0]).length === 0
     ) {
-      console.log("No Faces!");
       this.parent.updateSource({
         faces: [
           {
