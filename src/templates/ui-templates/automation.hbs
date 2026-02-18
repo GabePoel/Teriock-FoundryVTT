@@ -41,68 +41,70 @@
           </button>
         </div>
       {{/if}}
-      <div class="teriock-automation-header-button-group">
-        <button
-          id="{{automation.uuid}}.base"
-          data-action="setToggle"
-          data-type="number"
-          data-term="0"
-          {{#if (has automation.competencies 0)}}
-          data-present="true"
-          data-tooltip="Always Applies"
-          {{else}}
-          data-tooltip="Doesn't Always Apply"
-          {{/if}}
-          data-path="{{automation.fieldPath}}.{{automation.id}}.competencies"
-          name="_source.{{automation.fieldPath}}.{{automation.id}}.competencies"
-        >
-          {{makeIcon @root/TERIOCK.display.icons.competence.none (ifThen
-            (has automation.competencies 0)
-            "solid"
-            "regular"
-          )}}
-        </button>
-        <button
-          id="{{automation.uuid}}.proficient"
-          data-action="setToggle"
-          data-type="number"
-          data-term="1"
-          {{#if (has automation.competencies 1)}}
-          data-present="true"
-          data-tooltip="Applies if Proficient"
-          {{else}}
-          data-tooltip="Doesn't Apply if Proficient"
-          {{/if}}
-          data-path="{{automation.fieldPath}}.{{automation.id}}.competencies"
-          name="_source.{{automation.fieldPath}}.{{automation.id}}.competencies"
-        >
-          {{makeIcon @root/TERIOCK.display.icons.competence.proficient (ifThen
-            (has automation.competencies 1)
-            "solid"
-            "regular"
-          )}}
-        </button>
-        <button
-          id="{{automation.uuid}}.fluent"
-          data-action="setToggle"
-          data-type="number"
-          data-term="2"
-          {{#if (has automation.competencies 2)}}
-          data-present="true"
-          data-tooltip="Applies if Fluent"
-          {{else}}
-          data-tooltip="Doesn't Apply if Fluent"
-          {{/if}}
-          data-path="{{automation.fieldPath}}.{{automation.id}}.competencies"
-          name="_source.{{automation.fieldPath}}.{{automation.id}}.competencies"
-        >
-          {{makeIcon @root/TERIOCK.display.icons.competence.fluent (ifThen
-            (has automation.competencies 2)
-            "solid"
-            "regular"
-          )}}
-        </button>
-      </div>
+      {{#if @root/system.competence}}
+        <div class="teriock-automation-header-button-group">
+          <button
+            id="{{automation.uuid}}.base"
+            data-action="setToggle"
+            data-type="number"
+            data-term="0"
+            {{#if (has automation.competencies 0)}}
+            data-present="true"
+            data-tooltip="Always Applies"
+            {{else}}
+            data-tooltip="Doesn't Always Apply"
+            {{/if}}
+            data-path="{{automation.fieldPath}}.{{automation.id}}.competencies"
+            name="_source.{{automation.fieldPath}}.{{automation.id}}.competencies"
+          >
+            {{makeIcon @root/TERIOCK.display.icons.competence.none (ifThen
+              (has automation.competencies 0)
+              "solid"
+              "regular"
+            )}}
+          </button>
+          <button
+            id="{{automation.uuid}}.proficient"
+            data-action="setToggle"
+            data-type="number"
+            data-term="1"
+            {{#if (has automation.competencies 1)}}
+            data-present="true"
+            data-tooltip="Applies if Proficient"
+            {{else}}
+            data-tooltip="Doesn't Apply if Proficient"
+            {{/if}}
+            data-path="{{automation.fieldPath}}.{{automation.id}}.competencies"
+            name="_source.{{automation.fieldPath}}.{{automation.id}}.competencies"
+          >
+            {{makeIcon @root/TERIOCK.display.icons.competence.proficient (ifThen
+              (has automation.competencies 1)
+              "solid"
+              "regular"
+            )}}
+          </button>
+          <button
+            id="{{automation.uuid}}.fluent"
+            data-action="setToggle"
+            data-type="number"
+            data-term="2"
+            {{#if (has automation.competencies 2)}}
+            data-present="true"
+            data-tooltip="Applies if Fluent"
+            {{else}}
+            data-tooltip="Doesn't Apply if Fluent"
+            {{/if}}
+            data-path="{{automation.fieldPath}}.{{automation.id}}.competencies"
+            name="_source.{{automation.fieldPath}}.{{automation.id}}.competencies"
+          >
+            {{makeIcon @root/TERIOCK.display.icons.competence.fluent (ifThen
+              (has automation.competencies 2)
+              "solid"
+              "regular"
+            )}}
+          </button>
+        </div>
+      {{/if}}
       {{#if automation.canHeighten}}
         <div class="teriock-automation-header-button-group">
           <button

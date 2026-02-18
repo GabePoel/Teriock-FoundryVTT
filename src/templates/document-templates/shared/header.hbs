@@ -7,7 +7,7 @@
     <img
       class="profile-img"
       src="{{img}}"
-      data-edit="img"
+      data-edit="{{imgPath}}"
       alt=""
       {{#if editable}}data-action="editImage"{{/if}}
       data-openable="true"
@@ -34,15 +34,17 @@
       />
     </label>
   </div>
-  <div
-    class="ab-competence thover"
-    style="color: var(--color-text-subtle);"
-    data-tooltip="{{system.competence.description}}"
-    {{#if editable}}
-    data-action="increment"
-    {{/if}}
-    data-path="system.competence.raw"
-  >
-    <i class="{{system.competence.iconClass}}"></i>
-  </div>
+  {{#if system.competence}}
+    <div
+      class="ab-competence thover"
+      style="color: var(--color-text-subtle);"
+      data-tooltip="{{system.competence.description}}"
+      {{#if editable}}
+      data-action="increment"
+      {{/if}}
+      data-path="system.competence.raw"
+    >
+      <i class="{{system.competence.iconClass}}"></i>
+    </div>
+  {{/if}}
 </div>

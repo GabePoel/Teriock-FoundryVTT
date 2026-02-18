@@ -1,5 +1,4 @@
-import { toTitleCase } from "../../../../helpers/string.mjs";
-import { makeIcon, mix } from "../../../../helpers/utils.mjs";
+import { mix } from "../../../../helpers/utils.mjs";
 import { bindCommonActions } from "../../../shared/_module.mjs";
 import { TeriockTextEditor } from "../../../ux/_module.mjs";
 import { ConfigButtonSheetMixin, IndexButtonSheetMixin } from "../_module.mjs";
@@ -20,7 +19,7 @@ export default function CommonSheetMixin(Base) {
      * @mixes FieldsCommonSheetPart
      * @mixes GmNotesCommonSheetPart
      * @mixes ImageEditingCommonSheetPart
-     * @mixes ImpactsTabsCommonSheetPart
+     * @mixes AutomationsTabsCommonSheetPart
      * @mixes InteractionCommonSheetPart
      * @mixes LockingCommonSheetPart
      * @mixes MenuCommonSheetPart
@@ -32,18 +31,19 @@ export default function CommonSheetMixin(Base) {
     class CommonSheet extends mix(
       Base,
       ConfigButtonSheetMixin,
+      parts.ConnectionCommonSheetPart,
       parts.DragDropCommonSheetPart,
       parts.DocumentCreationCommonSheetPart,
       parts.FieldsCommonSheetPart,
       parts.GmNotesCommonSheetPart,
       parts.ImageEditingCommonSheetPart,
-      parts.ImpactsTabsCommonSheetPart,
+      parts.AutomationsTabsCommonSheetPart,
       parts.InteractionCommonSheetPart,
       parts.LockingCommonSheetPart,
       parts.MenuCommonSheetPart,
       parts.StatDiceCommonSheetPart,
       parts.ToggleCommonSheetPart,
-      parts.ImpactsCommonSheetPart,
+      parts.AutomationsCommonSheetPart,
       IndexButtonSheetMixin,
     ) {
       /** @type {Partial<ApplicationConfiguration>} */
@@ -85,67 +85,6 @@ export default function CommonSheetMixin(Base) {
         const uuid = target.dataset.uuid;
         const doc = await fromUuid(uuid);
         await doc.sheet.render(true);
-      }
-
-      /**
-       * Connects event handlers to elements matching a selector.
-       * @param {string} selector - The CSS selector for elements to connect.
-       * @param {string} eventType - The event type to listen for.
-       * @param {Function} handler - The event handler function.
-       */
-      _connect(selector, eventType, handler) {
-        this.element.querySelectorAll(selector).forEach((el) =>
-          el.addEventListener(eventType, (e) => {
-            e.stopPropagation();
-            e.preventDefault();
-            handler(e);
-          }),
-        );
-      }
-
-      /**
-       * Build and connect context menu entries that update this document from some object.
-       * @param {string} cssClass - The CSS class for elements to attach the menu to.
-       * @param {object} obj - Object with keys, names, and icons.
-       * @param {string} path - Path of document to update.
-       * @param {string} eventName - The event name to trigger the menu.
-       */
-      _connectBuildContextMenu(cssClass, obj, path, eventName) {
-        this._connectContextMenu(
-          cssClass,
-          Object.entries(obj).map(([k, v]) => {
-            return {
-              name: v.name || toTitleCase(k),
-              icon: makeIcon(v.icon, "contextMenu"),
-              callback: async () => {
-                await this.document.update({ [path]: k });
-              },
-            };
-          }),
-          eventName,
-        );
-      }
-
-      /**
-       * Creates a context menu for elements.
-       * @param {string} cssClass - The CSS class for elements to attach the menu to.
-       * @param {object[]} menuItems - The context menu items.
-       * @param {string} eventName - The event name to trigger the menu.
-       * @param {"up"|"down"} [direction] - Direction for the context menu to expand.
-       * @returns {ContextMenu} The created context menu.
-       */
-      _connectContextMenu(cssClass, menuItems, eventName, direction) {
-        return /** @type {ContextMenu} */ new TeriockContextMenu(
-          this.element,
-          cssClass,
-          menuItems,
-          {
-            eventName,
-            jQuery: false,
-            fixed: false,
-            forceDirection: direction,
-          },
-        );
       }
 
       /**
@@ -207,20 +146,22 @@ export default function CommonSheetMixin(Base) {
           enriched: {},
           fields: this.document.schema.fields,
           flags: this.document.flags,
+          hasMenu: true,
           id: this.document.id,
           img: this.document.img,
+          imgPath: "img",
           isGM: game.user.isGM,
           limited: this.document.limited,
           metadata: this.document.metadata,
           name: this.document.name,
           owner: this.document.isOwner,
           settings: this.settings,
+          sheetId: this.id,
           source: this.document._source,
           system: this.document.system,
           systemFields: this.document.system.schema.fields,
           systemSource: this.document.system._source,
           uuid: this.document.uuid,
-          sheetId: this.id,
         });
         return context;
       }

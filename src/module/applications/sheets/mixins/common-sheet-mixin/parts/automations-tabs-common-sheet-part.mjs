@@ -8,7 +8,7 @@ export default (Base) => {
      * @mixin
      * @property {TeriockCommon} document
      */
-    class ImpactsTabsCommonSheetPart extends Base {
+    class AutomationsTabsCommonSheetPart extends Base {
       /** @type {Partial<ApplicationConfiguration>} */
       static DEFAULT_OPTIONS = {
         actions: {

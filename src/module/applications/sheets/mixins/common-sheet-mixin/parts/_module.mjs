@@ -1,12 +1,13 @@
+export { default as AutomationsCommonSheetPart } from "./automations-common-sheet-part.mjs";
+export { default as AutomationsTabsCommonSheetPart } from "./automations-tabs-common-sheet-part.mjs";
+export { default as ConnectionCommonSheetPart } from "./connection-common-sheet-part.mjs";
 export { default as DocumentCreationCommonSheetPart } from "./document-creation-common-sheet-part.mjs";
 export { default as DragDropCommonSheetPart } from "./drag-drop-common-sheet-part.mjs";
 export { default as FieldsCommonSheetPart } from "./fields-common-sheet-part.mjs";
 export { default as GmNotesCommonSheetPart } from "./gm-notes-common-sheet-part.mjs";
 export { default as ImageEditingCommonSheetPart } from "./image-editing-common-sheet-part.mjs";
-export { default as ImpactsTabsCommonSheetPart } from "./impacts-tabs-common-sheet-part.mjs";
 export { default as InteractionCommonSheetPart } from "./interaction-common-sheet-part.mjs";
 export { default as LockingCommonSheetPart } from "./locking-common-sheet-part.mjs";
 export { default as MenuCommonSheetPart } from "./menu-common-sheet-part.mjs";
 export { default as StatDiceCommonSheetPart } from "./stat-dice-common-sheet-part.mjs";
 export { default as ToggleCommonSheetPart } from "./toggle-common-sheet-part.mjs";
-export { default as ImpactsCommonSheetPart } from "./automations-common-sheet-part.mjs";
