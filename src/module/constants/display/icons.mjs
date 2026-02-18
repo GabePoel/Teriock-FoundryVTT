@@ -327,6 +327,7 @@ export const icons = {
     shareText: "comment-lines",
     show: "eye",
     stone: "circle",
+    tag: "tag",
     time: "clock",
     toggle: "toggle-large-on",
     undo: "rotate-left",

@@ -89,14 +89,15 @@ export default class AbilitySystem extends mix(
       passive: true,
       preservedProperties: [
         "system.adept",
+        "system.competence",
         "system.consumable",
         "system.gifted",
         "system.grantOnly",
         "system.improvement",
         "system.limitation",
         "system.maxQuantity",
-        "system.competence",
         "system.quantity",
+        "system.tag",
       ],
       type: "ability",
       usable: true,
@@ -292,6 +293,10 @@ export default class AbilitySystem extends mix(
   /** @inheritDoc */
   get nameString() {
     const additions = [];
+    let suffix = "";
+    if (this.tag && this.tag.length > 0) {
+      suffix = `: ${this.tag}`;
+    }
     if (this.adept.enabled) {
       additions.push("Adept");
     }
@@ -314,7 +319,7 @@ export default class AbilitySystem extends mix(
     if (additions.length > 0) {
       nameAddition = ` (${additions.join(", ")})`;
     }
-    return this.parent.name + nameAddition;
+    return this.parent.name.trim() + suffix + nameAddition;
   }
 
   /**

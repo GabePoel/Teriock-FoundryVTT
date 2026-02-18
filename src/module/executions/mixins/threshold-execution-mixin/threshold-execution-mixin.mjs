@@ -137,7 +137,10 @@ export default function ThresholdExecutionMixin(Base) {
         });
         const content = document.createElement("div");
         content.classList.add("teriock-form-container");
-        const bonusFormGroup = bonusField.toFormGroup({}, { name: "bonus" });
+        const bonusFormGroup = bonusField.toFormGroup(
+          {},
+          { name: "bonus", placeholder: "0" },
+        );
         content.append(...[competenceFormGroup, bonusFormGroup]);
         await TeriockDialog.wait({
           window: {

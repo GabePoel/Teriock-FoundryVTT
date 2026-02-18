@@ -50,10 +50,11 @@ export default class PropertySystem extends mix(
       namespace: "Property",
       passive: true,
       preservedProperties: [
+        "system.competence",
         "system.hierarchy",
         "system.improvement",
         "system.limitation",
-        "system.competence",
+        "system.tag",
       ],
       type: "property",
       visibleTypes: ["property"],
@@ -85,6 +86,10 @@ export default class PropertySystem extends mix(
       modifiesActor: new fields.BooleanField({
         initial: false,
         label: "Modifies Actor",
+      }),
+      tag: new fields.StringField({
+        initial: "",
+        label: "Tag",
       }),
     });
   }
@@ -185,6 +190,10 @@ export default class PropertySystem extends mix(
   /** @inheritDoc */
   get nameString() {
     const additions = [];
+    let suffix = "";
+    if (this.tag && this.tag.length > 0) {
+      suffix = `: ${this.tag}`;
+    }
     if (this.limitation && this.limitation.length > 0) {
       additions.push("Limited");
     }
@@ -198,7 +207,7 @@ export default class PropertySystem extends mix(
     if (additions.length > 0) {
       nameAddition = ` (${additions.join(", ")})`;
     }
-    return this.parent.name + nameAddition;
+    return this.parent.name.trim() + suffix + nameAddition;
   }
 
   /** @inheritDoc */

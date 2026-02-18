@@ -8,16 +8,16 @@
   }}
   {{formBox
     (formInput
-      systemFields.damageType value=system.damageType disabled=(not editable)
+      systemFields.damageType value=system.damageType disabled=(not editable) placeholder="No Damage Type"
     )
-    unselected=(ifThen (not (exists system.damageType)) "No Damage Type" "")
     tooltip="Damage Type"
     icon=TERIOCK.display.icons.ui.damage
   }}
   {{formBox
-    (ifThen disabled "Disabled" "Enabled")
-    icon=(ifThen disabled "xmark" "check")
-    tooltip="Disabled?"
-    action=(ifThen editable "toggleDisabledThis")
+    (formInput
+      systemFields.tag value=system.tag disabled=(not editable) placeholder="No Tag"
+    )
+    tooltip="Tag"
+    icon=TERIOCK.display.icons.ui.tag
   }}
 </div>

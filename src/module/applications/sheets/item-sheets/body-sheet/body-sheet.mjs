@@ -1,5 +1,5 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
-import { mix } from "../../../../helpers/utils.mjs";
+import { makeIconClass, mix } from "../../../../helpers/utils.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseItemSheet from "../base-item-sheet.mjs";
 
@@ -21,7 +21,7 @@ export default class BodySheet extends mix(
   static DEFAULT_OPTIONS = {
     classes: ["body"],
     window: {
-      icon: documentOptions.body.icon,
+      icon: makeIconClass(documentOptions.body.icon, "title"),
     },
   };
 

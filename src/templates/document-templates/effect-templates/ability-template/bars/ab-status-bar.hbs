@@ -7,9 +7,10 @@
     classes=(ifThen editable "ability-type-box" "")
   }}
   {{formBox
-    (ifThen disabled "Disabled" "Enabled")
-    icon=(ifThen disabled "xmark" "check")
-    tooltip="Disabled?"
-    action=(ifThen editable "toggleDisabledThis")
+    (formInput
+      systemFields.tag value=system.tag disabled=(not editable) placeholder="No Tag"
+    )
+    tooltip="Tag"
+    icon=TERIOCK.display.icons.ui.tag
   }}
 </div>

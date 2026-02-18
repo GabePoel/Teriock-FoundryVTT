@@ -1,4 +1,4 @@
-const { fields: foundryFields } = foundry.data;
+const { fields } = foundry.data;
 
 /**
  * Ability tags part.
@@ -16,22 +16,26 @@ export default (Base) => {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          effectTypes: new foundryFields.SetField(
-            new foundryFields.StringField({
+          effectTypes: new fields.SetField(
+            new fields.StringField({
               choices: TERIOCK.index.effectTypes,
             }),
           ),
-          elements: new foundryFields.SetField(
-            new foundryFields.StringField({
+          elements: new fields.SetField(
+            new fields.StringField({
               choices: TERIOCK.index.elements,
             }),
           ),
-          form: new foundryFields.StringField({ initial: "normal" }),
-          powerSources: new foundryFields.SetField(
-            new foundryFields.StringField({
+          form: new fields.StringField({ initial: "normal" }),
+          powerSources: new fields.SetField(
+            new fields.StringField({
               choices: TERIOCK.index.powerSources,
             }),
           ),
+          tag: new fields.StringField({
+            initial: "",
+            label: "Tag",
+          }),
         });
       }
 
