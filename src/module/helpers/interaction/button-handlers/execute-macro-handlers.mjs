@@ -8,13 +8,15 @@ export class ExecuteMacroHandler extends AbstractButtonHandler {
   /**
    * @inheritDoc
    * @param {UUID<TeriockMacro>} uuid
-   * @param {object} [data]
+   * @param {object} data
+   * @param {object} [options]
+   * @param {object} [options.label]
    */
-  static buildButton(uuid, data = {}) {
+  static buildButton(uuid, data = {}, options = {}) {
     const button = super.buildButton();
     button.icon = makeIconClass(icons.document.macro, "button");
     const macro = fromUuidSync(uuid);
-    button.label = macro.name;
+    button.label = options.label || macro.name;
     button.dataset.uuid = uuid;
     button.dataset.use = JSON.stringify(data);
     return button;
