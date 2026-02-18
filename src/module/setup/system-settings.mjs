@@ -1,3 +1,5 @@
+const { fields } = foundry.data;
+
 export function registerSettings() {
   //noinspection JSValidateJSDoc
   /** @type {Record<string, Partial<SettingConfig>>} */
@@ -219,6 +221,26 @@ export function registerSettings() {
       name: "Developer Mode",
       scope: "world",
       type: Boolean,
+    },
+    damageTypeSources: {
+      config: true,
+      default: ["Compendium.teriock.rules.JournalEntry.damage0000000000"],
+      hint: "Journals that contain damage types that can be referenced when building damage rolls.",
+      name: "Damage Type Sources",
+      scope: "world",
+      type: new fields.SetField(
+        new fields.DocumentUUIDField({ type: "JournalEntry" }),
+      ),
+    },
+    drainTypeSources: {
+      config: true,
+      default: ["Compendium.teriock.rules.JournalEntry.drain00000000000"],
+      hint: "Journals that contain drain types that can be referenced when building drain rolls.",
+      name: "Drain Type Sources",
+      scope: "world",
+      type: new fields.SetField(
+        new fields.DocumentUUIDField({ type: "JournalEntry" }),
+      ),
     },
   };
   for (const [key, data] of Object.entries(settings)) {

@@ -51,5 +51,10 @@ declare global {
      * A string that can be used in a roll formula.
      */
     export type FormulaString = string;
+
+    /**
+     * A string that represents an image's file path.
+     */
+    export type ImageString = string;
   }
 }
