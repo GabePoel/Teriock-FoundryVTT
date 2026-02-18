@@ -17,9 +17,9 @@ export default function ChildDocumentMixin(Base) {
     class ChildDocument extends Base {
       /** @inheritDoc */
       static get documentMetadata() {
-        const metadata = super.documentMetadata;
-        metadata.child = true;
-        return metadata;
+        return Object.assign(super.documentMetadata, {
+          child: true,
+        });
       }
 
       /**

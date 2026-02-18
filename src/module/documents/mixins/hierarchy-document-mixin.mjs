@@ -18,14 +18,14 @@ export default function HierarchyDocumentMixin(Base) {
     /**
      * @extends TeriockCommon
      * @mixin
-     * @property {HierarchyData} system
+     * @property {HierarchySystem} system
      */
     class HierarchyDocument extends Base {
       /** @inheritDoc */
       static get documentMetadata() {
-        const metadata = super.documentMetadata;
-        metadata.hierarchy = true;
-        return metadata;
+        return Object.assign(super.documentMetadata, {
+          hierarchy: true,
+        });
       }
 
       /**
@@ -145,7 +145,7 @@ export default function HierarchyDocumentMixin(Base) {
       }
 
       /**
-       * Get all findSubs for a given document.
+       * Get all subs for a given document.
        * @param {TeriockCommon|Index<TeriockCommon>} document
        * @param {Collection} [collection]
        * @returns {TypeCollection}
@@ -182,7 +182,7 @@ export default function HierarchyDocumentMixin(Base) {
       }
 
       /**
-       * Get findSubs for a given document.
+       * Get subs for a given document.
        * @param {TeriockCommon|Index<TeriockCommon>} document
        * @param {Collection} [collection]
        * @returns {TypeCollection}
@@ -198,7 +198,7 @@ export default function HierarchyDocumentMixin(Base) {
       }
 
       /**
-       * The findSup for a given document.
+       * The sup for a given document.
        * @param {TeriockCommon|Index<TeriockCommon>} document
        * @param {Collection} collection
        * @returns {TeriockCommon|undefined}
@@ -213,7 +213,7 @@ export default function HierarchyDocumentMixin(Base) {
       }
 
       /**
-       * All the findSubs descendant of this document or their indexes.
+       * All the sub descendant of this document or their indexes.
        * @returns {TypeCollection}
        */
       get allSubs() {
@@ -269,7 +269,7 @@ export default function HierarchyDocumentMixin(Base) {
       }
 
       /**
-       //* The findSubs of this document or their indexes.
+       * The subs of this document or their indexes.
        * @returns {TypeCollection}
        */
       get subs() {
@@ -277,7 +277,7 @@ export default function HierarchyDocumentMixin(Base) {
       }
 
       /**
-       * The findSup of this document or its index.
+       * The sup of this document or its index.
        * @returns {SyncDoc<TeriockCommon>|undefined}
        */
       get sup() {
@@ -369,7 +369,7 @@ export default function HierarchyDocumentMixin(Base) {
       }
 
       /**
-       * Create multiple sub Document instances in a findSup Document's collection using provided input data.
+       * Create multiple sub Document instances in a sup Document's collection using provided input data.
        * @param {object[]} data
        * @param {Partial<DatabaseCreateOperation & Teriock.System._DatabaseCreateOperation>} operation
        * @returns {Promise<TeriockCommon[]>}
@@ -412,7 +412,7 @@ export default function HierarchyDocumentMixin(Base) {
       }
 
       /**
-       * Delete multiple sub Document instances in a findSup Document's collection using provided string ids.
+       * Delete multiple sub Document instances in a sup Document's collection using provided string ids.
        * @param {ID<TeriockCommon>[]} ids
        * @param {DatabaseDeleteOperation} operation
        * @returns {Promise<TeriockCommon[]>}
@@ -436,7 +436,7 @@ export default function HierarchyDocumentMixin(Base) {
       }
 
       /**
-       * All the findSubs descendant of this document.
+       * All the subs descendant of this document.
        * @returns {Promise<TypeCollection>}
        */
       async getAllSubs() {
@@ -477,7 +477,7 @@ export default function HierarchyDocumentMixin(Base) {
       }
 
       /**
-       * The findSubs of this document.
+       * The subs of this document.
        * @returns {Promise<TypeCollection>}
        */
       async getSubs() {
@@ -485,7 +485,7 @@ export default function HierarchyDocumentMixin(Base) {
       }
 
       /**
-       * The findSup of this document.
+       * The sup of this document.
        * @returns {Promise<TeriockCommon|void>}
        */
       async getSup() {
@@ -523,7 +523,7 @@ export default function HierarchyDocumentMixin(Base) {
       }
 
       /**
-       * Update multiple sub Document instances in a findSup Document's collection using provided differential data.
+       * Update multiple sub Document instances in a sup Document's collection using provided differential data.
        * @param {object[]} updates
        * @param {DatabaseUpdateOperation} operation
        * @returns {Promise<TeriockCommon[]>}

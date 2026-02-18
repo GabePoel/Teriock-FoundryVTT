@@ -15,9 +15,9 @@ export default function PanelDocumentMixin(Base) {
     class PanelDocument extends Base {
       /** @inheritDoc */
       static get documentMetadata() {
-        const metadata = super.documentMetadata;
-        metadata.tooltip = true;
-        return metadata;
+        return Object.assign(super.documentMetadata, {
+          tooltip: true,
+        });
       }
 
       /**

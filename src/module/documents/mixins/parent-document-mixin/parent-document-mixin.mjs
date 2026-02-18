@@ -16,9 +16,9 @@ export default function ParentDocumentMixin(Base) {
        * @returns {Teriock.Documents.DocumentMetadata}
        */
       static get documentMetadata() {
-        const metadata = super.documentMetadata;
-        metadata.parent = true;
-        return metadata;
+        return Object.assign(super.documentMetadata, {
+          parent: true,
+        });
       }
 
       /**
