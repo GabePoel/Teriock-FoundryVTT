@@ -68,6 +68,7 @@ export default async function registerTemplates() {
     "systems/teriock/src/templates/document-templates/item-templates/species-template/parts/sp-menu.hbs",
     "systems/teriock/src/templates/document-templates/item-templates/species-template/species-template.hbs",
     "systems/teriock/src/templates/document-templates/item-templates/species-template/tags/sp-traits-tags.hbs",
+    "systems/teriock/src/templates/document-templates/page-templates/harm-template.hbs",
     "systems/teriock/src/templates/document-templates/shared/automations-tab.hbs",
     "systems/teriock/src/templates/document-templates/shared/changes.hbs",
     "systems/teriock/src/templates/document-templates/shared/children.hbs",

@@ -210,6 +210,10 @@ foundry.helpers.Hooks.once("init", function () {
       documentClass: documents.TeriockJournalEntryCategory,
     },
     JournalEntryPage: {
+      dataModels: {
+        damage: data.systems.pages.HarmSystem,
+        drain: data.systems.pages.HarmSystem,
+      },
       documentClass: documents.TeriockJournalEntryPage,
     },
     Macro: {
@@ -371,6 +375,19 @@ foundry.helpers.Hooks.once("init", function () {
       doc: documents.TeriockCard,
       label: "Base",
       types: ["card", "stone"],
+    },
+    // Pages
+    {
+      cls: applications.sheets.page.DamageSheet,
+      doc: documents.TeriockJournalEntryPage,
+      label: "Damage Type",
+      types: ["damage"],
+    },
+    {
+      cls: applications.sheets.page.DrainSheet,
+      doc: documents.TeriockJournalEntryPage,
+      label: "Drain Type",
+      types: ["drain"],
     },
   ];
   sheetMap.forEach(({ cls, label, types, doc, makeDefault = true }) =>

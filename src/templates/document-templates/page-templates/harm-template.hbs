@@ -1,0 +1,27 @@
+<div class="{{cssClass}} tsheet-page">
+  {{#if (eq tab "overview")}}
+    <div class="ab-sheet-everything">
+      <div class="ab-sheet-top">
+        {{> (template "document-templates/shared/header.hbs")}}
+      </div>
+      <div class="ab-main">
+        <div class="ab-tags-all">
+          <div class="ab-tags-container">
+            <div class="ab-tags">
+              <span class="ab-tag tsubtle">{{type}} type</span>
+            </div>
+            {{> (template "document-templates/shared/menu-buttons.hbs")}}
+          </div>
+        </div>
+        {{formGroup
+          textField
+          value=text.content
+          name="text.content"
+        }}
+      </div>
+    </div>
+  {{/if}}
+  {{#if (eq tab "impacts")}}
+    {{> (template "document-templates/shared/automations-tab.hbs")}}
+  {{/if}}
+</div>

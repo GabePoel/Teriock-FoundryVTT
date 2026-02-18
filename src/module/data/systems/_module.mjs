@@ -4,3 +4,4 @@ export * as cards from "./cards/_module.mjs";
 export * as effects from "./effects/_module.mjs";
 export * as items from "./items/_module.mjs";
 export * as messages from "./messages/_module.mjs";
+export * as pages from "./pages/_module.mjs";
