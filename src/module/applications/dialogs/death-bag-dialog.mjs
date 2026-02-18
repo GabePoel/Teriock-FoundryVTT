@@ -133,25 +133,26 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
       };
       /** @type {Teriock.MessageData.MessagePanel} */
       const panelParts = {
-        image: getImage("misc", "Death Bag"),
-        name: "Death Bag",
         bars: [
           {
+            icon: TERIOCK.display.icons.ui.stone,
             label: "Initial Stones in Bag",
-            icon: TERIOCK.display.icons.ui.deathBag,
             wrappers: wrappers,
           },
         ],
         blocks: [
           {
-            title: "Description",
+            italic: true,
             text:
               "<p>You are surrounded by darkness, but aren't alone. Something is reaching out to you. Something?" +
               " Several things? It's not clear. You reach back, grasp something, and start to pull. It pulls you as" +
               " well.</p>",
-            italic: true,
+            title: "Description",
           },
         ],
+        icon: TERIOCK.display.icons.ui.deathBag,
+        image: getImage("misc", "Death Bag"),
+        name: "Death Bag",
       };
       let outcome = "";
       switch (pulledStones.black ?? 0) {
