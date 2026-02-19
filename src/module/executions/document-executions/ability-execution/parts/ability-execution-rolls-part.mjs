@@ -15,12 +15,8 @@ export default function AbilityExecutionRollsPart(Base) {
       get flavor() {
         if (this.source.system.interaction === "attack") {
           let flavor = "Attack Roll";
-          if (this.piercing.ub) {
-            flavor = `UB ${flavor}`;
-          }
-          if (this.warded) {
-            flavor = `Warded ${flavor}`;
-          }
+          if (this.piercing.ub) flavor = `UB ${flavor}`;
+          if (this.warded) flavor = `Warded ${flavor}`;
           return flavor;
         } else if (this.source.system.interaction === "feat") {
           return "Feat Save DC";
