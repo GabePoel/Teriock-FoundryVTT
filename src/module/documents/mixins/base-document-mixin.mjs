@@ -45,7 +45,7 @@ export default function BaseDocumentMixin(Base) {
        * @returns {string}
        */
       get nameString() {
-        return this.system.nameString;
+        return this.system?.nameString || this.name;
       }
 
       /**
