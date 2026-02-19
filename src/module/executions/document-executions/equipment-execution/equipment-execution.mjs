@@ -49,7 +49,7 @@ export default class EquipmentExecution extends ArmamentExecution {
       .filter((a) => a);
     if (onUseAbilities.length > 0) {
       const usedAbilities = await selectDocumentsDialog(onUseAbilities, {
-        hint: `${this.source.name} has abilities that can activate on use. Select which activate`,
+        hint: `${this.source.name} has abilities that can activate on use. Select which to activate.`,
         title: "Activate Abilities",
       });
       for (const ability of usedAbilities) {

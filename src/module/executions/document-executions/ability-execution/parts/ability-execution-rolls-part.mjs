@@ -1,3 +1,4 @@
+import { targetOptions } from "../../../../constants/options/target-options.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 
 /**
@@ -55,9 +56,6 @@ export default function AbilityExecutionRollsPart(Base) {
             rollOptions.targets = [target];
             if (target.actor) {
               rollOptions.threshold = target.actor.system.defense.cc;
-              if (this.vitals) {
-                rollOptions.threshold += 3;
-              }
               rollOptions.comparison = "gte";
               if (
                 this.piercing.ub &&
@@ -66,6 +64,11 @@ export default function AbilityExecutionRollsPart(Base) {
               ) {
                 rollOptions.threshold = target.actor.system.defense.ac;
                 rollOptions.comparison = "gt";
+              }
+              if (this.limb) {
+                rollOptions.threshold += targetOptions.limb;
+              } else if (this.vitals) {
+                rollOptions.threshold += targetOptions.vitals;
               }
             }
             this.rolls.push(

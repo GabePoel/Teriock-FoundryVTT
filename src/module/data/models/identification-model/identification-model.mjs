@@ -173,7 +173,7 @@ export default class IdentificationModel extends EmbeddedDataModel {
           )
           .map((e) => e.uuid);
         const toReveal = await selectDocumentsDialog(revealed, {
-          hint: "Select effects to unreveal.",
+          hint: "Select effects to hide.",
           tooltipAsync: false,
           checked: checked,
         });

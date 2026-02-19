@@ -179,7 +179,7 @@ export async function selectPropertyDialog() {
   return (
     await resolveDocument(
       await selectDocumentDialog(game.teriock.packs.properties.index.contents, {
-        hint: "Please select an property.",
+        hint: "Please select a property.",
         title: "Select Property",
         tooltipAsync: true,
         openable: true,
@@ -260,7 +260,7 @@ export async function selectCompendiumsDialog(selected = true) {
 }
 
 /**
- * Dialog to select a equipment.
+ * Dialog to select equipment.
  * @returns {Promise<TeriockEquipment|void>}
  */
 export async function selectEquipmentTypeDialog() {

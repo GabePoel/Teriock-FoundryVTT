@@ -22,6 +22,7 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
     this.piercing = this.#resolvePiercing(options, sys);
     this.warded = this.#resolveWarded(options, sys);
     this.vitals = this.#resolveVitals(options, sys);
+    this.limb = this.#resolveLimb(options, sys);
     this.attackPenaltyFormula = this.#resolveAttackPenalty(options, sys);
     this.executor = this.actor?.defaultToken ?? null;
     this.attackPenalty = 0;
@@ -108,6 +109,22 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
     return sys.isContact && this.armament
       ? this.armament.system.attackPenalty.formula
       : "-3";
+  }
+
+  /**
+   * Determines if limbs are being targeted.
+   * @param {Teriock.Execution.AbilityExecutionOptions} options
+   * @param {AbilitySystem} sys - The source system data.
+   * @returns {boolean}
+   */
+  #resolveLimb(options, sys) {
+    if (options.limb !== undefined) return options.limb;
+    return (
+      sys.isContact &&
+      (sys.targets.has("arm") ||
+        sys.targets.has("leg") ||
+        sys.targets.has("limb"))
+    );
   }
 
   /**

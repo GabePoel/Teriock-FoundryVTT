@@ -98,7 +98,7 @@ export default class UnitModel extends EvaluationModel {
         required: false,
         initial: this.choiceEntries[0].id,
         choices: this.choices,
-        hint: "The unit of the this value.",
+        hint: "The unit of this value.",
       }),
     });
   }

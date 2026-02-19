@@ -489,7 +489,7 @@ export default class CommonSystem extends mix(
 
   /**
    * Apply transformations of derivations to the values of the source data object. Compute data fields whose values are
-   * not stored in the database. This happens after the actors has completed all operations.
+   * not stored in the database. This happens after the actor has completed all operations.
    */
   prepareSpecialData() {}
 

@@ -1,13 +1,13 @@
 import { systemPath } from "../../../helpers/path.mjs";
 import { qualifiedChangeField } from "../../fields/helpers/builders.mjs";
-import BaseAutomation from "./base-automation.mjs";
+import CritAutomation from "./crit-automation.mjs";
 
 const { fields } = foundry.data;
 
 /**
  * @property {Teriock.Changes.QualifiedChangeData[]} changes
  */
-export default class ChangesAutomation extends BaseAutomation {
+export default class ChangesAutomation extends CritAutomation {
   /** @inheritDoc */
   static get LABEL() {
     return "Changes";

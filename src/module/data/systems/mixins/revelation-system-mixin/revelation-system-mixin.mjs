@@ -25,7 +25,7 @@ export default function RevelationSystemMixin(Base) {
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           revealed: new fields.BooleanField({
-            hint: "Whether this has been revealed from an identify or other.",
+            hint: "Whether this has been revealed from an identify or other source.",
             initial: true,
             label: "Revealed",
             nullable: false,

@@ -8,6 +8,7 @@ declare global {
         armament?: TeriockArmament;
         attackPenalty?: string;
         av0?: boolean;
+        limb?: boolean;
         noGp?: boolean;
         noHeighten?: boolean;
         noHp?: boolean;

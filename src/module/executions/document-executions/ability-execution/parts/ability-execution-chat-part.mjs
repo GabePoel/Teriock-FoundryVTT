@@ -317,7 +317,7 @@ export default function AbilityExecutionChatPart(Base) {
               let chosen;
               if (transformation.multiple) {
                 chosen = await selectDocumentsDialog(choices, {
-                  hint: "Please one or more select species to transform into.",
+                  hint: "Please select one or more species to transform into.",
                   title: "Select Species",
                   tooltipAsync: true,
                   openable: true,

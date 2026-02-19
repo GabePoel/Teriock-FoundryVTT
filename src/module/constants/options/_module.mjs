@@ -17,4 +17,5 @@ export { rankOptions as rank } from "./rank-options.mjs";
 export { resourceOptions as resource } from "./resource-options.mjs";
 export { speciesOptions as species } from "./species-options.mjs";
 export { takeOptions as take } from "./take-options.mjs";
+export { targetOptions as target } from "./target-options.mjs";
 export { tradecraftOptions as tradecraft } from "./tradecraft-options.mjs";
