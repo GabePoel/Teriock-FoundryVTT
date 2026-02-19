@@ -53,6 +53,14 @@ export default class BaseExecution {
   /** @type {object} */
   updates = {};
 
+  /**
+   * A class to use for roll construction.
+   * @returns {typeof BaseRoll}
+   */
+  get _RollClass() {
+    return BaseRoll;
+  }
+
   /** @type {TeriockActor|null} */
   _actor;
 
@@ -152,7 +160,7 @@ export default class BaseExecution {
   async _buildRolls() {
     if (formulaExists(this.formula)) {
       this.rolls.push(
-        new BaseRoll(this.formula, this.rollData, this.rollOptions),
+        new this._RollClass(this.formula, this.rollData, this.rollOptions),
       );
     }
   }

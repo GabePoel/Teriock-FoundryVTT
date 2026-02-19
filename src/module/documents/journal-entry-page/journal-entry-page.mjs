@@ -1,3 +1,4 @@
+import { documentOptions } from "../../constants/options/document-options.mjs";
 import { getImage } from "../../helpers/path.mjs";
 import { mix } from "../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
@@ -29,7 +30,10 @@ export default class TeriockJournalEntryPage extends mix(
         this.system?.img ||
         this.getFlag("teriock", "journalImage") ||
         getImage("powers", "Learned Elder Sorceries"),
-      icon: this.getFlag("teriock", "journalIcon") || "book",
+      icon:
+        documentOptions[this.type]?.icon ||
+        this.getFlag("teriock", "journalIcon") ||
+        "book",
       blocks: [
         {
           title: this.getFlag("teriock", "journalTitle") || "Description",

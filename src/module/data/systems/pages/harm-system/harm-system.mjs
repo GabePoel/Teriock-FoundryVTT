@@ -1,4 +1,5 @@
 import { getImage } from "../../../../helpers/path.mjs";
+import { toTitleCase } from "../../../../helpers/string.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import { BaseSystem } from "../../abstract/_module.mjs";
@@ -50,6 +51,11 @@ export default class HarmSystem extends mix(
 
   get metadata() {
     return this.constructor.metadata;
+  }
+
+  /** @inheritDoc */
+  get nameString() {
+    return `${super.nameString} ${toTitleCase(this.parent.type)}`;
   }
 
   async _preCreate(data, options, user) {

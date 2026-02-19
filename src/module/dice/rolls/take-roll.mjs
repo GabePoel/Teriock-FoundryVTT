@@ -1,3 +1,4 @@
+import { takeOptions } from "../../constants/options/take-options.mjs";
 import BaseRoll from "./base-roll.mjs";
 
 /**
@@ -12,6 +13,8 @@ export default class TakeRoll extends BaseRoll {
   constructor(formula, data, options = {}) {
     super(formula, data, options);
     this.take = options.take;
+    this.options.flavor =
+      this.options.flavor ?? `${takeOptions[this.take].label} Roll`;
   }
 
   /** @inheritDoc */

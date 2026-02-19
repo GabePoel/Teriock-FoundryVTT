@@ -1,5 +1,3 @@
-import { toCamelCase } from "./string.mjs";
-
 /**
  * Get a {@link TeriockItem} from a {@link CompendiumCollection}.
  * @param {string} name - Name of the {@link TeriockItem}.
@@ -88,50 +86,4 @@ export async function getRank(classKey, number, options = {}) {
  */
 export async function copyRank(classKey, number) {
   return await getRank(classKey, number, { clone: true });
-}
-
-/**
- * Get a mapping to all the registered harms of a certain type.
- * @param {string} type
- * @returns {Promise<Record<string, TeriockJournalEntryPage>>}
- */
-export async function getHarmTypes(type) {
-  const damageTypeSourceUuids = game.settings.get(
-    "teriock",
-    `${type}TypeSources`,
-  );
-  const damageTypeSources =
-    /** @type {TeriockJournalEntry[]} */ await Promise.all(
-      Array.from(damageTypeSourceUuids).map((uuid) =>
-        foundry.utils.fromUuid(uuid),
-      ),
-    );
-  const damageTypes = {};
-  damageTypeSources.forEach((source) => {
-    Object.assign(
-      damageTypes,
-      Object.fromEntries(
-        source.pages.contents
-          .filter((p) => p.type === type)
-          .map((d) => [toCamelCase(d.name), d]),
-      ),
-    );
-  });
-  return damageTypes;
-}
-
-/**
- * Get a mapping to all the registered damage types.
- * @returns {Promise<Record<string, TeriockJournalEntryPage>>}
- */
-export async function getDamageTypes() {
-  return getHarmTypes("damage");
-}
-
-/**
- * Get a mapping to all the registered drain types.
- * @returns {Promise<Record<string, TeriockJournalEntryPage>>}
- */
-export async function getDrainTypes() {
-  return getHarmTypes("drain");
 }

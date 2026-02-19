@@ -1,12 +1,7 @@
 import { boostDialog } from "../../../applications/dialogs/_module.mjs";
 import { takeOptions } from "../../../constants/options/take-options.mjs";
-import { BaseRoll } from "../../../dice/rolls/_module.mjs";
+import { BaseRoll, HarmRoll } from "../../../dice/rolls/_module.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
-import {
-  makeDamageDrainTypePanels,
-  makeDamageTypeButtons,
-} from "../../html.mjs";
-import { TakeRollableTakeHandler } from "../button-handlers/rollable-takes-handlers.mjs";
 import { formulaCommand } from "./abstract-command.mjs";
 
 /**
@@ -25,27 +20,19 @@ async function abstractTakeOperation(actor, options) {
     else await take.apply(actor, amount);
     return;
   }
-  const flavor = `Roll ${take.label}`;
   if (options.boost) formula = await boostDialog(formula);
-  const roll = new BaseRoll(formula, actor?.getRollData() || {}, { flavor });
+  const roll = new HarmRoll(formula, actor?.getRollData() || {}, {
+    take: type,
+  });
   if (options.crit) roll.alter(2, 0, { multiplyNumeric: false });
   await roll.evaluate();
-  const buttons = [TakeRollableTakeHandler.buildButton(type, roll.total)];
-  if (type === "damage") buttons.push(...makeDamageTypeButtons(roll));
-  const panels = [];
-  if (["damage", "drain"].includes(type)) {
-    panels.push(...(await makeDamageDrainTypePanels(roll)));
-  }
   const messageData = {
     speaker: TeriockChatMessage.getSpeaker({ actor: actor }),
-    rolls: [roll],
     system: {
       avatar: actor?.img,
-      buttons: buttons,
-      panels: panels,
     },
   };
-  await TeriockChatMessage.create(messageData);
+  await roll.toMessage(messageData);
 }
 
 /**

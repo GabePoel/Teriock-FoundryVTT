@@ -1,10 +1,6 @@
 import { boostDialog } from "../../../applications/dialogs/_module.mjs";
+import { HarmRoll } from "../../../dice/rolls/_module.mjs";
 import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
-import {
-  makeDamageDrainTypePanels,
-  makeDamageTypeButtons,
-} from "../../../helpers/html.mjs";
-import { TakeRollableTakeHandler } from "../../../helpers/interaction/button-handlers/rollable-takes-handlers.mjs";
 import BaseDocumentExecution from "../base-document-execution/base-document-execution.mjs";
 
 /**
@@ -28,6 +24,25 @@ export default class ArmamentExecution extends BaseDocumentExecution {
 
   crit = false;
 
+  /**
+   * A copy of the roll for each thing this deals.
+   * @returns {HarmRoll[]}
+   */
+  get #typedRolls() {
+    if (this.rolls.length === 0) return [];
+    const roll = this.rolls[0];
+    return Array.from(this.deals).map((take) => {
+      const takeRoll = /** @type {HarmRoll} */ roll.clone({ evaluated: true });
+      takeRoll.take = take;
+      return takeRoll;
+    });
+  }
+
+  /** @inheritDoc */
+  get _RollClass() {
+    return HarmRoll;
+  }
+
   /** @inheritDoc */
   get activeAutomations() {
     const automations = super.activeAutomations;
@@ -48,16 +63,8 @@ export default class ArmamentExecution extends BaseDocumentExecution {
 
   /** @inheritDoc */
   async _buildButtons() {
-    if (this.rolls.length > 0) {
-      const roll = this.rolls[0];
-      for (const rollType of this.deals) {
-        this.buttons.push(
-          TakeRollableTakeHandler.buildButton(rollType, roll.total),
-        );
-      }
-      if (this.deals.has("damage")) {
-        this.buttons.push(...makeDamageTypeButtons(roll));
-      }
+    for (const roll of this.#typedRolls) {
+      this.buttons.push(...(await roll.getButtons()));
     }
     await super._buildButtons();
   }
@@ -65,9 +72,8 @@ export default class ArmamentExecution extends BaseDocumentExecution {
   /** @inheritDoc */
   async _buildPanels() {
     await super._buildPanels();
-    if (this.rolls.length > 0) {
-      const roll = this.rolls[0];
-      this.panels.push(...(await makeDamageDrainTypePanels(roll)));
+    for (const roll of this.#typedRolls) {
+      this.panels.push(...(await roll.getPanels()));
     }
   }
 

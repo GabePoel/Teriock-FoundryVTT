@@ -4,7 +4,7 @@ import { makeIcon, makeIconClass } from "../../helpers/utils.mjs";
 
 /**
  * Base mixin.
- * @param {typeof TeriockDocument} Base
+ * @param {typeof ClientDocument} Base
  * @mixin
  */
 export default function BaseDocumentMixin(Base) {
@@ -38,6 +38,14 @@ export default function BaseDocumentMixin(Base) {
        */
       get isViewer() {
         return this.permission >= 2;
+      }
+
+      /**
+       * A modified version of this document's name that displays additional text if needed.
+       * @returns {string}
+       */
+      get nameString() {
+        return this.system.nameString;
       }
 
       /**

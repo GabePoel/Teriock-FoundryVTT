@@ -61,6 +61,14 @@ export const documentOptions = {
     pack: "creatures",
     sorter: docSort,
   },
+  damage: {
+    doc: "JournalEntryPage",
+    icon: icons.effect.damage,
+  },
+  drain: {
+    doc: "JournalEntryPage",
+    icon: icons.effect.drain,
+  },
   effect: {
     doc: "ActiveEffect",
     getter: "effects",
@@ -132,12 +140,12 @@ export const documentOptions = {
     pack: "species",
     sorter: docSort,
   },
-  wrapper: {
-    doc: "Item",
-    icon: icons.document.ability,
-  },
   stone: {
     doc: "Card",
     icon: icons.document.stone,
+  },
+  wrapper: {
+    doc: "Item",
+    icon: icons.document.ability,
   },
 };

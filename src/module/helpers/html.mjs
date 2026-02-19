@@ -1,6 +1,5 @@
 import { TeriockTextEditor } from "../applications/ux/_module.mjs";
 import { documentOptions } from "../constants/options/document-options.mjs";
-import { ApplyStatusHandler } from "./interaction/button-handlers/simple-command-handlers.mjs";
 import { getImage } from "./path.mjs";
 
 /**
@@ -67,121 +66,6 @@ export function createDialogFieldset(legend, description, name, max) {
       <div>${description}</div>
       <input type="number" name="${name}" value="0" min="0" max="${max}" step="1">
     </fieldset>`;
-}
-
-/**
- * Make button-handlers for damage types done by some roll.
- * @param {TeriockRoll} roll
- * @returns {Teriock.UI.HTMLButtonConfig[]}
- */
-export function makeDamageTypeButtons(roll) {
-  const damage = {
-    dirtydark: ["terrored"],
-    financial: ["hollied", "terrored"],
-    fire: ["burned"],
-    holy: ["hollied"],
-    ice: ["frozen"],
-    terror: ["terrored"],
-    vine: ["snared"],
-  };
-  const buttons = [];
-  const statuses = new Set();
-  for (const term of roll.terms) {
-    for (const type of Object.keys(damage)) {
-      if (term.flavor.includes(type)) {
-        for (const status of damage[type]) {
-          statuses.add(status);
-        }
-      }
-    }
-  }
-  for (const status of statuses) {
-    buttons.push(ApplyStatusHandler.buildButton(status));
-  }
-  return buttons;
-}
-
-/**
- * Make a panel for a given damage type.
- * @param damageType
- * @returns {Teriock.MessageData.MessagePanel|null}
- */
-export function makeDamageTypePanel(damageType) {
-  if (Object.keys(TERIOCK.index.damageTypes).includes(damageType)) {
-    return {
-      name: TERIOCK.index.damageTypes[damageType] + " Damage",
-      image: getImage("damage-types", TERIOCK.index.damageTypes[damageType]),
-      icon: TERIOCK.display.icons.effect.damage,
-      blocks: [
-        {
-          title: "Description",
-          text: TERIOCK.content.damageTypes[damageType],
-        },
-      ],
-    };
-  }
-}
-
-/**
- * Make a panel for a given drain type.
- * @param drainType
- * @returns {Teriock.MessageData.MessagePanel|null}
- */
-export function makeDrainTypePanel(drainType) {
-  if (Object.keys(TERIOCK.index.drainTypes).includes(drainType)) {
-    return {
-      name: TERIOCK.index.drainTypes[drainType] + " Drain",
-      image: getImage("drain-types", TERIOCK.index.drainTypes[drainType]),
-      icon: TERIOCK.display.icons.effect.drain,
-      blocks: [
-        {
-          title: "Description",
-          text: TERIOCK.content.drainTypes[drainType],
-        },
-      ],
-    };
-  }
-}
-
-/**
- * Make panels for damage and drain types done by some roll.
- * @param {TeriockRoll} roll
- * @returns {Promise<Teriock.MessageData.MessagePanel[]>}
- */
-export async function makeDamageDrainTypePanels(roll) {
-  const damageTypes = new Set();
-  const drainTypes = new Set();
-  for (const term of roll.terms) {
-    for (const type of Object.keys(TERIOCK.index.damageTypes)) {
-      if (term.flavor.includes(type)) {
-        damageTypes.add(type);
-      }
-    }
-    for (const type of Object.keys(TERIOCK.index.drainTypes)) {
-      if (term.flavor.includes(type)) {
-        drainTypes.add(type);
-      }
-    }
-  }
-  /** @type {Teriock.MessageData.MessagePanel[]} */
-  const panels = [];
-  if (roll.options.flavor?.toLowerCase().includes("damage")) {
-    for (const damageType of damageTypes) {
-      const panel = makeDamageTypePanel(damageType);
-      if (panel) {
-        panels.push(await TeriockTextEditor.enrichPanel(panel));
-      }
-    }
-  }
-  if (roll.options.flavor?.toLowerCase().includes("drain")) {
-    for (const drainType of drainTypes) {
-      const panel = makeDrainTypePanel(drainType);
-      if (panel) {
-        panels.push(await TeriockTextEditor.enrichPanel(panel));
-      }
-    }
-  }
-  return panels;
 }
 
 /**

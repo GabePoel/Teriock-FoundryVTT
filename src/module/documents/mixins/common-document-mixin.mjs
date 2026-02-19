@@ -11,13 +11,13 @@ import {
 
 /**
  * Mixin for common functions used across document classes.
- * @param {typeof ClientDocument} Base
+ * @param {typeof BaseDocument} Base
  */
 export default function CommonDocumentMixin(Base) {
   //noinspection JSUnusedGlobalSymbols
   return (
     /**
-     * @extends ClientDocument
+     * @extends BaseDocument
      * @mixes ChangeableDocument
      * @mixes EmbedCardDocument
      * @mixes HierarchyDocument
@@ -84,10 +84,7 @@ export default function CommonDocumentMixin(Base) {
         return this.system.constructor.metadata;
       }
 
-      /**
-       * A modified version of this document's name that displays additional text if needed.
-       * @returns {string}
-       */
+      /** @inheritDoc */
       get nameString() {
         return this.system.nameString;
       }

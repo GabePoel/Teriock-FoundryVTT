@@ -39,7 +39,7 @@ export default (Base) => {
       /** @inheritDoc */
       async _onRender(context, options) {
         await super._onRender(context, options);
-        const toggleButton = this.window.header.querySelector(
+        const toggleButton = this.window.header?.querySelector(
           "[data-action='toggleLockThis']",
         );
         if (toggleButton) {
@@ -68,7 +68,8 @@ export default (Base) => {
         const frame = await super._renderFrame(options);
         if (
           this.document.documentName === "Item" ||
-          this.document.documentName === "ActiveEffect"
+          this.document.documentName === "ActiveEffect" ||
+          this.document.documentName === "JournalEntryPage"
         ) {
           const toggleButton = document.createElement("button");
           toggleButton.classList.add(
@@ -92,7 +93,7 @@ export default (Base) => {
           ) {
             toggleButton.setAttribute("disabled", "disabled");
           }
-          this.window.controls.before(toggleButton);
+          this.window.controls?.before(toggleButton);
         }
         return frame;
       }
