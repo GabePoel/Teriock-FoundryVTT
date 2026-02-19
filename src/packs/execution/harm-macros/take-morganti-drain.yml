@@ -1,0 +1,21 @@
+_id: FvsCmP4KXDOhXSrb
+_key: '!macros!FvsCmP4KXDOhXSrb'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.10.5
+author: teriockBuilder00
+command: |-
+  const amount = scope.useData.amount;
+  const actors = scope.actors;
+  for (const a of actors) {
+    if (a) {
+      await a.system.takeDrain(amount, { morganti: true });
+    }
+  }
+folder: KDIQAjqFbSAKvi05
+img: icons/svg/dice-target.svg
+name: Take Morganti Drain
+scope: global
+type: script

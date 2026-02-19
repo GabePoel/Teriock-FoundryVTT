@@ -1,0 +1,21 @@
+_id: v61lLuGSD2CrVP7b
+_key: '!macros!v61lLuGSD2CrVP7b'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.10.5
+author: teriockBuilder00
+command: |-
+  const amount = scope.useData.amount;
+  const actors = scope.actors;
+  for (const a of actors) {
+    if (a) {
+      await a.system.takeDamage(amount, { morganti: true });
+    }
+  }
+folder: KDIQAjqFbSAKvi05
+img: icons/svg/dice-target.svg
+name: Take Morganti Damage
+scope: global
+type: script

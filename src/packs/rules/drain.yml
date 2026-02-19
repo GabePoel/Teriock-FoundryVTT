@@ -4,21 +4,63 @@ _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.10.5
 name: Drain
 pages:
+  - _id: wither0000000000
+    _key: '!journal.pages!drain00000000000.wither0000000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.10.5
+    flags:
+      teriock:
+        journalIcon: droplet-slash
+        journalImage: systems/teriock/src/icons/drain-types/wither.webp
+    name: Wither
+    system:
+      automations:
+        Cs9sNmTMgc2642S3:
+          _id: Cs9sNmTMgc2642S3
+          take: wither
+          type: take
+      img: systems/teriock/src/icons/drain-types/wither.webp
+    text:
+      content: >-
+        <p>If a creature takes Wither, then they age a number of years equal to
+        the amount of Wither that they took. This aging is relative to a 100
+        year lifespan, regardless of how long the creature's lifespan would
+        naturally be.</p>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: drain
+    video:
+      controls: true
+      volume: 0.5
   - _id: lethal0000000000
     _key: '!journal.pages!drain00000000000.lethal0000000000'
     _stats:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.10.5
     flags:
       teriock:
         journalIcon: droplet-slash
         journalImage: systems/teriock/src/icons/drain-types/lethal.webp
     name: Lethal
+    system:
+      automations:
+        O8m8y3CvQbCK9YcG:
+          _id: O8m8y3CvQbCK9YcG
+          amount: 999999
+          take: drain
+          title: Remove MP
+          type: take
+      img: systems/teriock/src/icons/drain-types/lethal.webp
     text:
       content: >-
         <p>When a creature is reduced to 0 @L[Core:Hit Points and Mana
@@ -32,31 +74,40 @@ pages:
     title:
       level: 1
       show: true
-    type: text
+    type: drain
     video:
       controls: true
       volume: 0.5
-  - _id: mana000000000000
-    _key: '!journal.pages!drain00000000000.mana000000000000'
+  - _id: morganti00000000
+    _key: '!journal.pages!drain00000000000.morganti00000000'
     _stats:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.10.5
     flags:
       teriock:
         journalIcon: droplet-slash
-        journalImage: systems/teriock/src/icons/drain-types/mana.webp
-    name: Mana
+        journalImage: systems/teriock/src/icons/drain-types/morganti.webp
+    name: Morganti
+    system:
+      automations:
+        QSTLlNA29E9kAP6K:
+          _id: QSTLlNA29E9kAP6K
+          macro: Compendium.teriock.execution.Macro.FvsCmP4KXDOhXSrb
+          type: chatMacro
+      img: systems/teriock/src/icons/drain-types/morganti.webp
     text:
       content: >-
-        <p>Mana drain is similar to @L[Core:Damage]{damage}, but it reduces
-        @L[Core:MP]{MP} instead of @L[Core:HP]{HP}.</p>
+        <p>Morganti drain cannot be @L[Core:Healing]{healed}. This includes 
+        @L[Condition:Dead]{death} and @L[Condition:Unconscious]{unconsciousness}
+        imposed by it. If a creature is @L[Condition:Dead]{killed} with morganti
+        damage then they cannot be @L[Category:Revival effects]{revived}.</p>
       format: 1
     title:
       level: 1
       show: true
-    type: text
+    type: drain
     video:
       controls: true
       volume: 0.5
@@ -66,12 +117,14 @@ pages:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.10.5
     flags:
       teriock:
         journalIcon: droplet-slash
         journalImage: systems/teriock/src/icons/drain-types/memory.webp
     name: Memory
+    system:
+      img: systems/teriock/src/icons/drain-types/memory.webp
     text:
       content: >-
         <p><b>Memory drain</b> is identical to @L[Drain:Mana]{mana drain}, but
@@ -89,59 +142,33 @@ pages:
     title:
       level: 1
       show: true
-    type: text
+    type: drain
     video:
       controls: true
       volume: 0.5
-  - _id: morganti00000000
-    _key: '!journal.pages!drain00000000000.morganti00000000'
+  - _id: mana000000000000
+    _key: '!journal.pages!drain00000000000.mana000000000000'
     _stats:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.10.5
     flags:
       teriock:
         journalIcon: droplet-slash
-        journalImage: systems/teriock/src/icons/drain-types/morganti.webp
-    name: Morganti
+        journalImage: systems/teriock/src/icons/drain-types/mana.webp
+    name: Mana
+    system:
+      img: systems/teriock/src/icons/drain-types/mana.webp
     text:
       content: >-
-        <p>Morganti drain cannot be @L[Core:Healing]{healed}. This includes 
-        @L[Condition:Dead]{death} and @L[Condition:Unconscious]{unconsciousness}
-        imposed by it. If a creature is @L[Condition:Dead]{killed} with morganti
-        damage then they cannot be @L[Category:Revival effects]{revived}.</p>
+        <p>Mana drain is similar to @L[Core:Damage]{damage}, but it reduces
+        @L[Core:MP]{MP} instead of @L[Core:HP]{HP}.</p>
       format: 1
     title:
       level: 1
       show: true
-    type: text
-    video:
-      controls: true
-      volume: 0.5
-  - _id: wither0000000000
-    _key: '!journal.pages!drain00000000000.wither0000000000'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.9.1
-    flags:
-      teriock:
-        journalIcon: droplet-slash
-        journalImage: systems/teriock/src/icons/drain-types/wither.webp
-    name: Wither
-    text:
-      content: >-
-        <p>If a creature takes Wither, then they age a number of years equal to
-        the amount of Wither that they took. This aging is relative to a 100
-        year lifespan, regardless of how long the creature's lifespan would
-        naturally be.</p>
-      format: 1
-    title:
-      level: 1
-      show: true
-    type: text
+    type: drain
     video:
       controls: true
       volume: 0.5
