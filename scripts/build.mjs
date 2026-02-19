@@ -6,7 +6,7 @@ const manifestPath = "./system.json";
 const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf-8"));
 const VERSION = manifest.version;
 
-const file = `teriock-release-${VERSION}.zip`;
+const file = `release-${VERSION}.zip`;
 const downloadUrl = `https://github.com/gabepoel/Teriock-FoundryVTT/releases/download/release-${VERSION}/${file}`;
 manifest.download = downloadUrl;
 
@@ -16,7 +16,7 @@ console.log(`Updated original system.json download URL to version ${VERSION}`);
 const ROOT = ".";
 const DIST_DIR = path.join(ROOT, "dist");
 const SYSTEM_DIR = path.join(DIST_DIR, "teriock");
-const ZIP_PATH = path.join(DIST_DIR, `teriock-release-${VERSION}.zip`);
+const ZIP_PATH = path.join(DIST_DIR, `release-${VERSION}.zip`);
 const ASSETS = ["css", "src", "packs", "lang", "system.json", "README.md"];
 
 console.log(`--- Starting Build v${VERSION} ---`);
