@@ -20,11 +20,11 @@ if (chosenIllusionLevel === "greater") {
   dc = 18;
 }
 const buttons = data.execution.buttons.filter(
-  (b) => b.dataset?.action === "feat-save" && b.dataset?.attribute === "int",
+  (b) => b.dataset?.action === "feat" && b.dataset?.attribute === "int",
 );
 if (typeof dc === "number") {
   for (const b of buttons) {
-    b.dataset.dc = `${dc - 2 * data.execution.heightened}`;
+    b.dataset.threshold = `${dc - 2 * data.execution.heightened}`;
   }
 }
 for (let i = 0; i < data.execution.rolls.length; i++) {

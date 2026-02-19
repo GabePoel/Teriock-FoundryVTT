@@ -23,10 +23,10 @@ if (chosenTransformationLevel === "greater") {
   dc = 18;
 }
 const buttons = data.execution.buttons.filter(
-  (b) => b.dataset?.action === "feat-save" && b.dataset?.attribute === "int",
+  (b) => b.dataset?.action === "feat" && b.dataset?.attribute === "int",
 );
 for (const b of buttons) {
-  b.dataset.dc = dc;
+  b.dataset.threshold = dc;
 }
 for (let i = 0; i < data.execution.rolls.length; i++) {
   const r = data.execution.rolls[i];

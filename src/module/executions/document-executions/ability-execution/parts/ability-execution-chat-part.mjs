@@ -364,10 +364,9 @@ export default function AbilityExecutionChatPart(Base) {
         // Build feat save button
         if (this.source.system.interaction === "feat") {
           this.buttons.push(
-            FeatHandler.buildButton(
-              this.source.system.featSaveAttribute,
-              this.rolls[0].total,
-            ),
+            FeatHandler.buildButton(this.source.system.featSaveAttribute, {
+              threshold: this.rolls[0].total,
+            }),
           );
         }
 
