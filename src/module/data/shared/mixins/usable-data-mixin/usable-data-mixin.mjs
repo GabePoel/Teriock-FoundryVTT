@@ -67,8 +67,8 @@ export default function UsableDataMixin(Base) {
       getLocalRollData() {
         return {
           ...super.getLocalRollData(),
-          flu: Number(this.competence.fluent),
-          pro: Number(this.competence.proficient),
+          flu: Number(this.competence?.fluent),
+          pro: Number(this.competence?.proficient),
         };
       }
 

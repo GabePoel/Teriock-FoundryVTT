@@ -18,7 +18,20 @@ declare global {
   }
 
   export namespace Teriock.System {
-    export type _DatabaseCreateOperation = {
+    export type _CreateOperation = {
+      /**
+       * Allows subs that would be created by other documents to also be created as their own documents in the same
+       * database call. May cause odd results.
+       */
+      allowDuplicateSubs?: boolean;
+      /**
+       * Since {@link HierarchyDocumentMixin._preCreateDocuments} manipulates the default `keepId` value in creation
+       * operations, subsequent operations using the same operation object can get messed up. This allows us to
+       * reset it in {@link HierarchyDocument.createDocuments}.
+       */
+      cachedKeepId?: boolean;
+      /** Tracker to see if the value of `cachedKeepId` should be read. */
+      isKeepIdCached?: boolean;
       /** Force even subs to keep their `_id`. May cause `_id` collisions. */
       keepSubIds?: boolean;
     };

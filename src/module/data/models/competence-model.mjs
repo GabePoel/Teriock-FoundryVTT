@@ -43,7 +43,7 @@ export default class CompetenceModel extends EmbeddedDataModel {
   get fluent() {
     return (
       this.raw >= 2 ||
-      this.parent?.parent?.elder?.system.competence?.fluent ||
+      this.parent?.parent?.elder?.system?.competence?.fluent ||
       false
     );
   }
@@ -74,7 +74,7 @@ export default class CompetenceModel extends EmbeddedDataModel {
   get proficient() {
     return (
       this.raw >= 1 ||
-      this.parent?.parent?.elder?.system.competence?.proficient ||
+      this.parent?.parent?.elder?.system?.competence?.proficient ||
       false
     );
   }

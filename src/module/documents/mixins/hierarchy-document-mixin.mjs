@@ -16,9 +16,13 @@ const { Collection } = foundry.utils;
 export default function HierarchyDocumentMixin(Base) {
   return (
     /**
-     * @extends TeriockCommon
+     * @extends BaseDocument
      * @mixin
      * @property {HierarchySystem} system
+     * @property {(data: Object, context: DocumentConstructionContext & DocumentCloneOptions) =>
+     *  Promise<HierarchyDocument>} clone
+     * @property {Readonly<ID<HierarchyDocument>>} id
+     * @property {Readonly<UUID<HierarchyDocument>>} uuid
      */
     class HierarchyDocument extends Base {
       /** @inheritDoc */
@@ -29,9 +33,25 @@ export default function HierarchyDocumentMixin(Base) {
       }
 
       /**
+       * Ensure all compendiums that document references are in are properly cached during {@link _preCreateOperation}.
+       * @param {HierarchyDocument[]} documents
+       * @returns {Promise<void>}
+       */
+      static async _cacheDocumentReferenceCompendiums(documents) {
+        const docsWithRefs = documents.filter((d) => d.system?._ref);
+        const cachedDocs = /** @type {TeriockDocument[]} */ await Promise.all(
+          docsWithRefs.map((d) => fromUuid(d.system._ref)),
+        );
+        const compendiums = new Set(
+          cachedDocs.filter((d) => d.inCompendium).map((d) => d.compendium),
+        );
+        await Promise.all(Array.from(compendiums).map((c) => c.getIndex()));
+      }
+
+      /**
        * @inheritDoc
        * @param {TeriockCommon[]} documents
-       * @param {DatabaseCreateOperation & Teriock.System._DatabaseCreateOperation} operation
+       * @param {DatabaseCreateOperation & Teriock.System._CreateOperation} operation
        * @param {TeriockUser} user
        * @returns {Promise<boolean|void>}
        */
@@ -42,23 +62,52 @@ export default function HierarchyDocumentMixin(Base) {
         ) {
           return false;
         }
+        operation.cachedKeepId = operation.keepId;
+        operation.isKeepIdCached = true;
+        documents.sort((a, b) => {
+          const aSup = !!a?.system?._sup;
+          const bSup = !!b?.system?._sup;
+          return aSup - bSup;
+        });
+        const filteredDocuments = documents.filter((d) => {
+          const collection = d.siblingCollection;
+          if (d?.system?._sup) {
+            return collection.has(d.system._sup);
+          }
+          return true;
+        });
+        if (!operation.allowDuplicateSubs) {
+          documents.length = 0;
+          documents.push(...filteredDocuments);
+        }
         const keepId = operation.keepId;
         const toCreate = [];
+        const knownRefs = [];
+        await this._cacheDocumentReferenceCompendiums(documents);
         for (const doc of documents) {
-          if (doc.system._ref) {
+          if (doc.system?._ref) {
             const ref = await fromUuid(doc.system._ref);
-            if (ref && ref.subs.size) {
+            let create = true;
+            if (ref) {
+              if (
+                knownRefs.includes(ref.uuid) &&
+                !operation.allowDuplicateSubs
+              ) {
+                create = false;
+              } else knownRefs.push(ref.uuid);
+            }
+            if (ref && ref.subs.size && create) {
               operation.keepId = true;
-              const newDoc = doc.clone({}, { keepId });
-              if (!keepId) {
-                newDoc.updateSource({ _id: foundry.utils.randomID() });
-              }
+              const newId = keepId ? doc._id : foundry.utils.randomID();
+              const newDoc = doc.clone({ _id: newId }, { keepId: true });
               toCreate.push(newDoc);
               /** @type {Record<ID<TeriockCommon>, ID<TeriockCommon>>} */
               const idMap = { [ref.id]: newDoc._id };
+              /** @type {TypeCollection<ID<HierarchyDocument>, HierarchyDocument>} */
               const allRefSubs = await ref.getAllSubs();
               const clones = [];
               for (const sub of allRefSubs.contents) {
+                knownRefs.push(sub.uuid);
                 const subClone = sub.clone(
                   { folder: newDoc.folder },
                   { keepId },
@@ -75,7 +124,7 @@ export default function HierarchyDocumentMixin(Base) {
                 });
               }
               toCreate.push(...clones);
-            } else {
+            } else if (create) {
               toCreate.push(doc);
             }
           } else {
@@ -142,6 +191,19 @@ export default function HierarchyDocumentMixin(Base) {
             }
           }
         }
+      }
+
+      /**
+       * @inheritDoc
+       * @param {object|HierarchyDocument[]} data
+       * @param {Partial<Omit<DatabaseCreateOperation, "data"> & Teriock.System._CreateOperation>} operation
+       * @returns {Promise<void>}
+       */
+      static async createDocuments(data = [], operation = {}) {
+        if (operation.isKeepIdCached) operation.keepId = operation.cachedKeepId;
+        delete operation.isKeepIdCached;
+        delete operation.cachedKeepId;
+        await super.createDocuments(data, operation);
       }
 
       /**
@@ -357,7 +419,7 @@ export default function HierarchyDocumentMixin(Base) {
        * Create multiple child Document instances descendant from a Document using provided input data.
        * @param {TeriockChildName} embeddedName
        * @param {object[]} data
-       * @param {Partial<DatabaseCreateOperation & Teriock.System._DatabaseCreateOperation>} operation
+       * @param {Partial<DatabaseCreateOperation & Teriock.System._CreateOperation>} operation
        * @returns {Promise<TeriockCommon[]>}
        */
       async createChildDocuments(embeddedName, data = [], operation = {}) {
@@ -371,7 +433,7 @@ export default function HierarchyDocumentMixin(Base) {
       /**
        * Create multiple sub Document instances in a sup Document's collection using provided input data.
        * @param {object[]} data
-       * @param {Partial<DatabaseCreateOperation & Teriock.System._DatabaseCreateOperation>} operation
+       * @param {Partial<DatabaseCreateOperation & Teriock.System._CreateOperation>} operation
        * @returns {Promise<TeriockCommon[]>}
        */
       async createSubDocuments(data = [], operation = {}) {
