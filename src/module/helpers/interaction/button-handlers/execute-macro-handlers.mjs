@@ -22,6 +22,7 @@ export class ExecuteMacroHandler extends AbstractButtonHandler {
     return button;
   }
 
+  /** @inheritDoc */
   async primaryAction() {
     const useData = JSON.parse(this.dataset.use);
     const scope = {

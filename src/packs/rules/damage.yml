@@ -4,74 +4,28 @@ _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.10.5
 name: Damage
 pages:
-  - _id: astamori00000000
-    _key: '!journal.pages!damage0000000000.astamori00000000'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.9.1
-    flags:
-      teriock:
-        journalIcon: heart-crack
-        journalImage: systems/teriock/src/icons/damage-types/astamori.webp
-    name: Astamori
-    text:
-      content: >-
-        <p>Astamori damage and the can only be @L[Core:Healing]{healed} with
-        @L[Category:Martially powered abilities]{martially powered abilities}
-        such as @L[Ability:Recover]{Recover} and @L[Ability:First Aid]{First
-        Aid}. This includes  @L[Condition:Dead]{death} and
-        @L[Condition:Unconscious]{unconsciousness} imposed by it.</p>
-      format: 1
-    title:
-      level: 1
-      show: true
-    type: text
-    video:
-      controls: true
-      volume: 0.5
-  - _id: deadly0000000000
-    _key: '!journal.pages!damage0000000000.deadly0000000000'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.9.1
-    flags:
-      teriock:
-        journalIcon: heart-crack
-        journalImage: systems/teriock/src/icons/damage-types/deadly.webp
-    name: Deadly
-    text:
-      content: >-
-        <p>If damage is deadly, it maintains all the same @L[Category:Damage
-        types]{damage types}, but deals exactly 50 damage and is also
-        @L[Damage:Lethal]{lethal}. This counts as a @L[Category:Killing
-        effects]{killing effect}.</p>
-      format: 1
-    title:
-      level: 1
-      show: true
-    type: text
-    video:
-      controls: true
-      volume: 0.5
   - _id: dirtydark0000000
     _key: '!journal.pages!damage0000000000.dirtydark0000000'
     _stats:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.10.5
     flags:
       teriock:
         journalIcon: heart-crack
         journalImage: systems/teriock/src/icons/damage-types/dirtydark.webp
     name: Dirtydark
+    system:
+      automations:
+        sTyzasx5e3TaxLod:
+          _id: sTyzasx5e3TaxLod
+          status: terrored
+          type: chatStatus
+      img: systems/teriock/src/icons/damage-types/dirtydark.webp
     text:
       content: >-
         <p>When a creature is @L[Condition:Down]{dropped} with dirtydark damage
@@ -125,38 +79,70 @@ pages:
     title:
       level: 1
       show: true
-    type: text
+    type: damage
     video:
       controls: true
       volume: 0.5
-  - _id: financial0000000
-    _key: '!journal.pages!damage0000000000.financial0000000'
+  - _id: astamori00000000
+    _key: '!journal.pages!damage0000000000.astamori00000000'
     _stats:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.10.5
     flags:
       teriock:
         journalIcon: heart-crack
-        journalImage: icons/commodities/stone/stone-nugget-gold.webp
-    name: Financial
+        journalImage: systems/teriock/src/icons/damage-types/astamori.webp
+    name: Astamori
+    system:
+      img: systems/teriock/src/icons/damage-types/astamori.webp
     text:
       content: >-
-        <p>Financial damage is damage that occurs via wealth, but still reduces
-        @L[Core:HP]{HP}. Financial damage counts as a @L[Category:Financial
-        effects]{financial effect}. When a creature is
-        @L[Condition:Down]{dropped} with financial damage, they are "indebted"
-        an amount equal to the amount of damage dealt. The indebted creature is
-        @L[Condition:Hollied]{hollied} and @L[Condition:Terrored]{terrored}.
-        Anyone touching the indebted creature may take the @L[Ability:Pay
-        Gold]{Pay Gold} action to pay off a portion of the debt. Once the debt
-        is less than or equal to zero, the conditions are removed.</p>
+        <p>Astamori damage and the can only be @L[Core:Healing]{healed} with
+        @L[Category:Martially powered abilities]{martially powered abilities}
+        such as @L[Ability:Recover]{Recover} and @L[Ability:First Aid]{First
+        Aid}. This includes  @L[Condition:Dead]{death} and
+        @L[Condition:Unconscious]{unconsciousness} imposed by it.</p>
       format: 1
     title:
       level: 1
       show: true
-    type: text
+    type: damage
+    video:
+      controls: true
+      volume: 0.5
+  - _id: ice0000000000000
+    _key: '!journal.pages!damage0000000000.ice0000000000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.10.5
+    flags:
+      teriock:
+        journalIcon: heart-crack
+        journalImage: systems/teriock/src/icons/damage-types/ice.webp
+    name: Ice
+    system:
+      automations:
+        S4aqc96ZPsD0J7cd:
+          _id: S4aqc96ZPsD0J7cd
+          status: frozen
+          type: chatStatus
+      img: systems/teriock/src/icons/damage-types/ice.webp
+    text:
+      content: >-
+        <p>When a creature is @L[Condition:Down]{dropped} with ice damage or
+        dealt it while @L[Condition:Down]{down}, they are
+        @L[Condition:Frozen]{frozen}. At the end of each of your actions, they
+        roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
+        ends.</p>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: damage
     video:
       controls: true
       volume: 0.5
@@ -166,12 +152,19 @@ pages:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.10.5
     flags:
       teriock:
         journalIcon: heart-crack
         journalImage: systems/teriock/src/icons/damage-types/fire.webp
     name: Fire
+    system:
+      automations:
+        uzvoq7JiigjNB3Hv:
+          _id: uzvoq7JiigjNB3Hv
+          status: burned
+          type: chatStatus
+      img: systems/teriock/src/icons/damage-types/fire.webp
     text:
       content: >-
         <p>When a creature is @L[Condition:Down]{dropped} with fire damage or
@@ -182,7 +175,42 @@ pages:
     title:
       level: 1
       show: true
-    type: text
+    type: damage
+    video:
+      controls: true
+      volume: 0.5
+  - _id: deadly0000000000
+    _key: '!journal.pages!damage0000000000.deadly0000000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.10.5
+    flags:
+      teriock:
+        journalIcon: heart-crack
+        journalImage: systems/teriock/src/icons/damage-types/deadly.webp
+    name: Deadly
+    system:
+      automations:
+        8NWrWEoWznTH1RSk:
+          _id: 8NWrWEoWznTH1RSk
+          amount: 50
+          take: damage
+          title: Take 50 Damage
+          type: take
+      img: systems/teriock/src/icons/damage-types/deadly.webp
+    text:
+      content: >-
+        <p>If damage is deadly, it maintains all the same @L[Category:Damage
+        types]{damage types}, but deals exactly 50 damage and is also
+        @L[Damage:Lethal]{lethal}. This counts as a @L[Category:Killing
+        effects]{killing effect}.</p>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: damage
     video:
       controls: true
       volume: 0.5
@@ -192,12 +220,26 @@ pages:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.10.5
     flags:
       teriock:
         journalIcon: heart-crack
         journalImage: systems/teriock/src/icons/damage-types/hack.webp
     name: Hack
+    system:
+      automations:
+        AjZ7GaZtKtlLesRi:
+          _id: AjZ7GaZtKtlLesRi
+          hacks:
+            - arm
+            - leg
+            - body
+            - eye
+            - ear
+            - mouth
+            - nose
+          type: hacks
+      img: systems/teriock/src/icons/damage-types/hack.webp
     text:
       content: >-
         <p>Hack damage does not reduce @L[Core:Hit Points and Mana Points]{HP}.
@@ -249,7 +291,7 @@ pages:
     title:
       level: 1
       show: true
-    type: text
+    type: damage
     video:
       controls: true
       volume: 0.5
@@ -259,12 +301,19 @@ pages:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.10.5
     flags:
       teriock:
         journalIcon: heart-crack
         journalImage: systems/teriock/src/icons/damage-types/holy.webp
     name: Holy
+    system:
+      automations:
+        N2vvNVhSZcF3S2aG:
+          _id: N2vvNVhSZcF3S2aG
+          status: hollied
+          type: chatStatus
+      img: systems/teriock/src/icons/damage-types/holy.webp
     text:
       content: >-
         <p>When a creature is @L[Condition:Down]{dropped} with holy damage or
@@ -275,34 +324,104 @@ pages:
     title:
       level: 1
       show: true
-    type: text
+    type: damage
     video:
       controls: true
       volume: 0.5
-  - _id: ice0000000000000
-    _key: '!journal.pages!damage0000000000.ice0000000000000'
+  - _id: magic00000000000
+    _key: '!journal.pages!damage0000000000.magic00000000000'
     _stats:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.10.5
     flags:
       teriock:
         journalIcon: heart-crack
-        journalImage: systems/teriock/src/icons/damage-types/ice.webp
-    name: Ice
+        journalImage: systems/teriock/src/icons/damage-types/magic.webp
+    name: Magic
+    system:
+      img: systems/teriock/src/icons/damage-types/magic.webp
     text:
       content: >-
-        <p>When a creature is @L[Condition:Down]{dropped} with ice damage or
-        dealt it while @L[Condition:Down]{down}, they are
-        @L[Condition:Frozen]{frozen}. At the end of each of your actions, they
-        roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
-        ends.</p>
+        <p>Magic damage has no innate properties. However, it can affect
+        creatures that only take @L[Ability:Magical Durability]{only take magic
+        damage} such as @L[Category:Greater undead creatures]{greater
+        undead}.</p>
       format: 1
     title:
       level: 1
       show: true
-    type: text
+    type: damage
+    video:
+      controls: true
+      volume: 0.5
+  - _id: morganti00000000
+    _key: '!journal.pages!damage0000000000.morganti00000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.10.5
+    flags:
+      teriock:
+        journalIcon: heart-crack
+        journalImage: systems/teriock/src/icons/damage-types/morganti.webp
+    name: Morganti
+    system:
+      automations:
+        vefIMqH3JA4q9Wse:
+          _id: vefIMqH3JA4q9Wse
+          macro: Compendium.teriock.execution.Macro.v61lLuGSD2CrVP7b
+          type: chatMacro
+      img: systems/teriock/src/icons/damage-types/morganti.webp
+    text:
+      content: >-
+        <p>Morganti damage cannot be @L[Core:Healing]{healed}. This includes
+        @L[Condition:Hacked]{hacks}, @L[Condition:Dead]{death} and
+        @L[Condition:Unconscious]{unconsciousness} imposed by it. If a creature
+        is @L[Condition:Dead]{killed} with morganti damage then they cannot be
+        @L[Category:Revival effects]{revived}.</p>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: damage
+    video:
+      controls: true
+      volume: 0.5
+  - _id: psychic000000000
+    _key: '!journal.pages!damage0000000000.psychic000000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.10.5
+    flags:
+      teriock:
+        journalIcon: heart-crack
+        journalImage: systems/teriock/src/icons/damage-types/psychic.webp
+    name: Psychic
+    system:
+      automations:
+        5JBBsTP0UrZiuFU3:
+          _id: 5JBBsTP0UrZiuFU3
+          formula: 1d10[mana]
+          roll: drain
+          type: roll
+      img: systems/teriock/src/icons/damage-types/psychic.webp
+    text:
+      content: >-
+        <p>Psychic damage is damage that occurs via the mind, but still reduces
+        @L[Core:HP]{HP}. Psychic damage counts as a @L[Category:Mental
+        effects]{mental effect}. When a creature is @L[Condition:Down]{dropped}
+        with psychic damage, they take [[/roll 1d10]] @L[Drain:Mana]{mana drain}
+        as well.</p>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: damage
     video:
       controls: true
       volume: 0.5
@@ -312,12 +431,21 @@ pages:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.10.5
     flags:
       teriock:
         journalIcon: heart-crack
         journalImage: systems/teriock/src/icons/damage-types/lethal.webp
     name: Lethal
+    system:
+      automations:
+        pxZMw4WYPye2WTRL:
+          _id: pxZMw4WYPye2WTRL
+          amount: 999999
+          take: damage
+          title: Remove HP
+          type: take
+      img: systems/teriock/src/icons/damage-types/lethal.webp
     text:
       content: >-
         <p>When a creature is reduced to 0 @L[Core:Hit Points and Mana
@@ -331,60 +459,7 @@ pages:
     title:
       level: 1
       show: true
-    type: text
-    video:
-      controls: true
-      volume: 0.5
-  - _id: magic00000000000
-    _key: '!journal.pages!damage0000000000.magic00000000000'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.9.1
-    flags:
-      teriock:
-        journalIcon: heart-crack
-        journalImage: systems/teriock/src/icons/damage-types/magic.webp
-    name: Magic
-    text:
-      content: >-
-        <p>Magic damage has no innate properties. However, it can affect
-        creatures that only take @L[Ability:Magical Durability]{only take magic
-        damage} such as @L[Category:Greater undead creatures]{greater
-        undead}.</p>
-      format: 1
-    title:
-      level: 1
-      show: true
-    type: text
-    video:
-      controls: true
-      volume: 0.5
-  - _id: morganti00000000
-    _key: '!journal.pages!damage0000000000.morganti00000000'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.9.1
-    flags:
-      teriock:
-        journalIcon: heart-crack
-        journalImage: systems/teriock/src/icons/damage-types/morganti.webp
-    name: Morganti
-    text:
-      content: >-
-        <p>Morganti damage cannot be @L[Core:Healing]{healed}. This includes
-        @L[Condition:Hacked]{hacks}, @L[Condition:Dead]{death} and
-        @L[Condition:Unconscious]{unconsciousness} imposed by it. If a creature
-        is @L[Condition:Dead]{killed} with morganti damage then they cannot be
-        @L[Category:Revival effects]{revived}.</p>
-      format: 1
-    title:
-      level: 1
-      show: true
-    type: text
+    type: damage
     video:
       controls: true
       volume: 0.5
@@ -394,12 +469,14 @@ pages:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.10.5
     flags:
       teriock:
         journalIcon: heart-crack
         journalImage: systems/teriock/src/icons/damage-types/mundane.webp
     name: Mundane
+    system:
+      img: systems/teriock/src/icons/damage-types/mundane.webp
     text:
       content: >-
         <p><b>Mundane</b> @L[Core:Damage]{damage} is @L[Core:Damage]{damage}
@@ -409,34 +486,94 @@ pages:
     title:
       level: 1
       show: true
-    type: text
+    type: damage
     video:
       controls: true
       volume: 0.5
-  - _id: psychic000000000
-    _key: '!journal.pages!damage0000000000.psychic000000000'
+  - _id: silver0000000000
+    _key: '!journal.pages!damage0000000000.silver0000000000'
     _stats:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.10.5
     flags:
       teriock:
         journalIcon: heart-crack
-        journalImage: systems/teriock/src/icons/damage-types/psychic.webp
-    name: Psychic
+        journalImage: systems/teriock/src/icons/damage-types/silver.webp
+    name: Silver
+    system:
+      img: systems/teriock/src/icons/damage-types/silver.webp
     text:
       content: >-
-        <p>Psychic damage is damage that occurs via the mind, but still reduces
-        @L[Core:HP]{HP}. Psychic damage counts as a @L[Category:Mental
-        effects]{mental effect}. When a creature is @L[Condition:Down]{dropped}
-        with psychic damage, they take [[/roll 1d10]] @L[Drain:Mana]{mana drain}
-        as well.</p>
+        <p>Silver damage has no innate properties. However, it can affect
+        creatures with @L[Ability:Impure Durability]{Impure Durability} such as
+        @L[Category:Full undead creatures]{full undead}.</p>
       format: 1
     title:
       level: 1
       show: true
-    type: text
+    type: damage
+    video:
+      controls: true
+      volume: 0.5
+  - _id: terror0000000000
+    _key: '!journal.pages!damage0000000000.terror0000000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.10.5
+    flags:
+      teriock:
+        journalIcon: heart-crack
+        journalImage: systems/teriock/src/icons/damage-types/terror.webp
+    name: Terror
+    system:
+      automations:
+        UJgBBddAGhpUXdRD:
+          _id: UJgBBddAGhpUXdRD
+          status: terrored
+          type: chatStatus
+      img: systems/teriock/src/icons/damage-types/terror.webp
+    text:
+      content: >-
+        <p>When a creature is @L[Condition:Down]{dropped} with terror damage or
+        dealt it while @L[Condition:Down]{down}, they are
+        @L[Condition:Terrored]{terrored}. This condition ends when they are no
+        longer @L[Condition:Down]{down}.</p>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: damage
+    video:
+      controls: true
+      volume: 0.5
+  - _id: toxic00000000000
+    _key: '!journal.pages!damage0000000000.toxic00000000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.10.5
+    flags:
+      teriock:
+        journalIcon: heart-crack
+        journalImage: systems/teriock/src/icons/damage-types/toxic.webp
+    name: Toxic
+    system:
+      img: systems/teriock/src/icons/damage-types/toxic.webp
+    text:
+      content: >-
+        <p>Toxic damage is damage that occurs within a creature's body, but
+        still reduces @L[Core:HP]{HP}. Toxic damage counts as a
+        @L[Category:Poison effects]{poison effect}.</p>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: damage
     video:
       controls: true
       volume: 0.5
@@ -446,12 +583,14 @@ pages:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.10.5
     flags:
       teriock:
         journalIcon: heart-crack
         journalImage: systems/teriock/src/icons/damage-types/silveel.webp
     name: Silveel
+    system:
+      img: systems/teriock/src/icons/damage-types/silveel.webp
     text:
       content: >-
         <p>Silveel damage can @L[Core:Damage]{damage} any creature that could be
@@ -463,32 +602,40 @@ pages:
     title:
       level: 1
       show: true
-    type: text
+    type: damage
     video:
       controls: true
       volume: 0.5
-  - _id: silver0000000000
-    _key: '!journal.pages!damage0000000000.silver0000000000'
+  - _id: financial0000000
+    _key: '!journal.pages!damage0000000000.financial0000000'
     _stats:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.10.5
     flags:
       teriock:
         journalIcon: heart-crack
-        journalImage: systems/teriock/src/icons/damage-types/silver.webp
-    name: Silver
+        journalImage: icons/commodities/stone/stone-nugget-gold.webp
+    name: Financial
+    system:
+      img: icons/commodities/stone/stone-nugget-gold.webp
     text:
       content: >-
-        <p>Silver damage has no innate properties. However, it can affect
-        creatures with @L[Ability:Impure Durability]{Impure Durability} such as
-        @L[Category:Full undead creatures]{full undead}.</p>
+        <p>Financial damage is damage that occurs via wealth, but still reduces
+        @L[Core:HP]{HP}. Financial damage counts as a @L[Category:Financial
+        effects]{financial effect}. When a creature is
+        @L[Condition:Down]{dropped} with financial damage, they are "indebted"
+        an amount equal to the amount of damage dealt. The indebted creature is
+        @L[Condition:Hollied]{hollied} and @L[Condition:Terrored]{terrored}.
+        Anyone touching the indebted creature may take the @L[Ability:Pay
+        Gold]{Pay Gold} action to pay off a portion of the debt. Once the debt
+        is less than or equal to zero, the conditions are removed.</p>
       format: 1
     title:
       level: 1
       show: true
-    type: text
+    type: damage
     video:
       controls: true
       volume: 0.5
@@ -498,12 +645,14 @@ pages:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.10.5
     flags:
       teriock:
         journalIcon: heart-crack
         journalImage: systems/teriock/src/icons/damage-types/spiritual.webp
     name: Spiritual
+    system:
+      img: systems/teriock/src/icons/damage-types/spiritual.webp
     text:
       content: >-
         <p>Spiritual damage is damage that occurs via the spirit, but still
@@ -516,58 +665,7 @@ pages:
     title:
       level: 1
       show: true
-    type: text
-    video:
-      controls: true
-      volume: 0.5
-  - _id: terror0000000000
-    _key: '!journal.pages!damage0000000000.terror0000000000'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.9.1
-    flags:
-      teriock:
-        journalIcon: heart-crack
-        journalImage: systems/teriock/src/icons/damage-types/terror.webp
-    name: Terror
-    text:
-      content: >-
-        <p>When a creature is @L[Condition:Down]{dropped} with terror damage or
-        dealt it while @L[Condition:Down]{down}, they are
-        @L[Condition:Terrored]{terrored}. This condition ends when they are no
-        longer @L[Condition:Down]{down}.</p>
-      format: 1
-    title:
-      level: 1
-      show: true
-    type: text
-    video:
-      controls: true
-      volume: 0.5
-  - _id: toxic00000000000
-    _key: '!journal.pages!damage0000000000.toxic00000000000'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.9.1
-    flags:
-      teriock:
-        journalIcon: heart-crack
-        journalImage: systems/teriock/src/icons/damage-types/toxic.webp
-    name: Toxic
-    text:
-      content: >-
-        <p>Toxic damage is damage that occurs within a creature's body, but
-        still reduces @L[Core:HP]{HP}. Toxic damage counts as a
-        @L[Category:Poison effects]{poison effect}.</p>
-      format: 1
-    title:
-      level: 1
-      show: true
-    type: text
+    type: damage
     video:
       controls: true
       volume: 0.5
@@ -577,12 +675,19 @@ pages:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.10.5
     flags:
       teriock:
         journalIcon: heart-crack
         journalImage: systems/teriock/src/icons/damage-types/vine.webp
     name: Vine
+    system:
+      automations:
+        zJhXlEe2ool2YIqK:
+          _id: zJhXlEe2ool2YIqK
+          status: snared
+          type: chatStatus
+      img: systems/teriock/src/icons/damage-types/vine.webp
     text:
       content: >-
         <p>When a creature is @L[Condition:Down]{dropped} with vine damage or
@@ -593,7 +698,7 @@ pages:
     title:
       level: 1
       show: true
-    type: text
+    type: damage
     video:
       controls: true
       volume: 0.5
@@ -603,12 +708,14 @@ pages:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.0
+      systemVersion: 0.10.5
     flags:
       teriock:
         journalIcon: heart-crack
         journalImage: systems/teriock/src/icons/damage-types/starbright.webp
     name: Starbright
+    system:
+      img: systems/teriock/src/icons/damage-types/starbright.webp
     text:
       content: >-
         <p>Starbright damage is a rare @L[Category:Damage types]{damage type}
@@ -657,7 +764,7 @@ pages:
     title:
       level: 1
       show: true
-    type: text
+    type: damage
     video:
       controls: true
       volume: 0.5
