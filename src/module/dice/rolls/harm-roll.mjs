@@ -32,9 +32,9 @@ export default class HarmRoll extends TakeRoll {
    */
   get harmTypes() {
     const types = new Set();
-    for (const term of this.terms) {
+    for (const term of this._allTerms) {
       const flavor = term.flavor.split(" ");
-      flavor.forEach((type) => types.add(type));
+      flavor.forEach((type) => types.add(type.trim()));
     }
     return Array.from(types);
   }
@@ -55,6 +55,17 @@ export default class HarmRoll extends TakeRoll {
           b.dataset.action === "take-rollable-take" && b.dataset.amount === "0",
       )
       .forEach((b) => (b.dataset.amount = this.total.toString()));
+    buttons
+      .filter((b) => b.dataset.action === "execute-macro")
+      .forEach((b) => {
+        const data = JSON.parse(b.dataset.use);
+        Object.assign(data, {
+          formula: this.formula,
+          amount: this.total,
+          take: this.take,
+        });
+        b.dataset.use = JSON.stringify(data);
+      });
     return buttons;
   }
 

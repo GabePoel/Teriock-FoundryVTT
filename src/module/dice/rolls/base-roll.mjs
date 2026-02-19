@@ -166,6 +166,25 @@ export default class BaseRoll extends Roll {
   }
 
   /**
+   * All terms.
+   * @returns {RollTerm[]}
+   */
+  get _allTerms() {
+    const terms = [...this.terms];
+    for (const t of /** @type {(ParentheticalTerm|Booster)[]} */ this.terms) {
+      if (t.roll && t.roll instanceof Roll) {
+        terms.push(...t.roll.terms);
+      }
+      if (t.rolls) {
+        for (const r of t.rolls) {
+          if (r instanceof Roll) terms.push(...r.terms);
+        }
+      }
+    }
+    return terms;
+  }
+
+  /**
    * Whether this threshold has been met.
    * @returns {null|boolean}
    */

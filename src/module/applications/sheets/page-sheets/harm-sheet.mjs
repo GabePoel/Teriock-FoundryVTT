@@ -2,6 +2,7 @@ import { TextField } from "../../../data/fields/_module.mjs";
 import { systemPath } from "../../../helpers/path.mjs";
 import { mix } from "../../../helpers/utils.mjs";
 import { bindCommonActions } from "../../shared/_module.mjs";
+import { TeriockTextEditor } from "../../ux/_module.mjs";
 import {
   AutomationsCommonSheetPart,
   AutomationsTabsCommonSheetPart,
@@ -69,6 +70,10 @@ export default class HarmSheet extends mix(
       imgPath: "system.img",
       system: this.document.system,
       systemFields: this.document.system.schema.fields,
+      textEnriched: await TeriockTextEditor.enrichHTML(
+        this.document.text.content,
+        { relativeTo: this.document },
+      ),
       textField: new TextField({ label: "Description" }),
       type: this.document.type,
       uuid: this.document.uuid,
