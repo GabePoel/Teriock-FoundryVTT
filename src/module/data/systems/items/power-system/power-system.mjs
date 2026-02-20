@@ -1,6 +1,5 @@
 import { toCamelCase } from "../../../../helpers/string.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
-import { TextField } from "../../../fields/_module.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
@@ -19,6 +18,12 @@ export default class PowerSystem extends mix(
   mixins.CompetenceDisplaySystemMixin,
 ) {
   /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [
+    ...super.LOCALIZATION_PREFIXES,
+    "TERIOCK.SYSTEMS.Power",
+  ];
+
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       type: "power",
@@ -28,14 +33,9 @@ export default class PowerSystem extends mix(
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      flaws: new TextField({
-        initial: "",
-        label: "Flaws",
-      }),
       maxAv: new fields.NumberField({
         initial: 4,
         integer: true,
-        label: "Maximum AV",
         min: 0,
       }),
       competence: new fields.EmbeddedDataField(CompetenceModel, {
@@ -43,7 +43,6 @@ export default class PowerSystem extends mix(
       }),
       type: new fields.StringField({
         initial: "other",
-        label: "Power Type",
       }),
     });
   }

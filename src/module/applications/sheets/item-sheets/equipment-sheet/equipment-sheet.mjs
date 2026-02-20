@@ -115,10 +115,7 @@ export default class EquipmentSheet extends mix(
 
     const staticUpdates = {
       ".ab-damage-button": { "system.damage.base.raw": "1" },
-      ".ab-two-handed-damage-button": {
-        "system.damage.twoHanded.raw":
-          this.item.system.damage.base.formula || "1",
-      },
+      ".ab-two-handed-damage-button": { "system.damage.twoHanded.raw": "1" },
       ".ab-short-range-button": { "system.range.short.raw": "5" },
       ".ab-range-button": { "system.range.long.raw": "5" },
       ".ab-av-button": { "system.av.raw": "1" },

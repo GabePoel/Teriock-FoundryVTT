@@ -20,6 +20,11 @@ export default class CommonSystem extends mix(
   AccessDataMixin,
   AutomatableSystemMixin,
 ) {
+  /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = super.LOCALIZATION_PREFIXES.concat(
+    "TERIOCK.SYSTEMS.Common",
+  );
+
   /**
    * Metadata.
    * @returns {Teriock.Documents.ModelMetadata}
@@ -57,9 +62,10 @@ export default class CommonSystem extends mix(
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       gmNotes: new fields.DocumentUUIDField({
-        required: false,
-        nullable: true,
         initial: null,
+        nullable: true,
+        required: false,
+        type: "JournalEntryPage",
       }),
     });
   }

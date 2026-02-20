@@ -15,6 +15,12 @@ export default function TransformationSystemMixin(Base) {
      */
     class TransformationSystem extends Base {
       /** @inheritDoc */
+      static LOCALIZATION_PREFIXES = [
+        ...super.LOCALIZATION_PREFIXES,
+        "TERIOCK.SCHEMA.Transformation",
+      ];
+
+      /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           transformation: transformationField({

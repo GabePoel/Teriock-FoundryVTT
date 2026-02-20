@@ -2,6 +2,7 @@ import { sortObject } from "../../../helpers/utils.mjs";
 import {
   EnhancedNumberField,
   EnhancedStringField,
+  EvaluationField,
   FormulaField,
   TextField,
 } from "../_module.mjs";
@@ -30,9 +31,9 @@ export function combatExpirationSourceTypeField() {
       executor: "Executor",
       everyone: "Everyone",
     },
-    hint: "Whose turn should this effect attempt to expire on?",
+    hint: "TERIOCK.SCHEMA.CombatExpiration.who.hint",
     initial: "target",
-    label: "Who",
+    label: "TERIOCK.SCHEMA.CombatExpiration.who.label",
   });
 }
 
@@ -48,99 +49,97 @@ export function transformationField(options = {}) {
   const { implementation = false, configuration = false } = options;
   const schema = {
     enabled: new BooleanField({
-      hint:
-        'Whether this ability causes a transformation. Note that this isn\'t just for "transformation effect",' +
-        " but for any case in which another species' stats should be applied (such as animating as an undead).",
+      hint: "TERIOCK.SCHEMA.Transformation.enabled.hint",
       initial: false,
-      label: "Causes Transformation",
+      label: "TERIOCK.SCHEMA.Transformation.enabled.label",
       nullable: false,
       required: false,
     }),
     image: new FilePathField({
       categories: ["IMAGE"],
-      hint: "Optional overriding art to apply to the target.",
+      hint: "TERIOCK.SCHEMA.Transformation.image.hint",
       initial: null,
-      label: "Token Art",
+      label: "TERIOCK.SCHEMA.Transformation.image.label",
       nullable: true,
       required: false,
       trim: true,
     }),
     level: new StringField({
       choices: TERIOCK.options.effect.transformationLevel,
-      hint: "How strong of a transformation this is.",
+      hint: "TERIOCK.SCHEMA.Transformation.level.hint",
       initial: "minor",
-      label: "Transformation Level",
+      label: "TERIOCK.SCHEMA.Transformation.level.label",
       nullable: false,
       required: false,
     }),
+    multiple: new BooleanField({
+      hint: "TERIOCK.SCHEMA.Transformation.multiple.hint",
+      initial: false,
+      label: "TERIOCK.SCHEMA.Transformation.multiple.label",
+      nullable: false,
+      required: false,
+    }),
+    resetHp: new BooleanField({
+      hint: "TERIOCK.SCHEMA.Transformation.resetHp.hint",
+      label: "TERIOCK.SCHEMA.Transformation.resetHp.label",
+      initial: true,
+      required: false,
+      nullable: false,
+    }),
+    resetMp: new BooleanField({
+      hint: "TERIOCK.SCHEMA.Transformation.resetMp.hint",
+      label: "TERIOCK.SCHEMA.Transformation.resetMp.label",
+      initial: false,
+      required: false,
+      nullable: false,
+    }),
     suppression: new SchemaField({
       bodyParts: new BooleanField({
-        hint: "Whether this should suppress body parts not provided by the transformation.",
+        hint: "TERIOCK.SCHEMA.Transformation.suppression.bodyParts.hint",
         initial: true,
-        label: "Suppress Body Parts",
+        label: "TERIOCK.SCHEMA.Transformation.suppression.bodyParts.label",
         nullable: false,
         required: false,
       }),
       equipment: new BooleanField({
-        hint: "Whether this should suppress equipment not provided by the transformation.",
+        hint: "TERIOCK.SCHEMA.Transformation.suppression.equipment.hint",
         initial: true,
-        label: "Suppress Equipment",
+        label: "TERIOCK.SCHEMA.Transformation.suppression.equipment.label",
         nullable: false,
         required: false,
       }),
       fluencies: new BooleanField({
-        hint: "Whether this should suppress fluencies not provided by the transformation.",
+        hint: "TERIOCK.SCHEMA.Transformation.suppression.fluencies.hint",
         initial: true,
-        label: "Suppress Fluencies",
+        label: "TERIOCK.SCHEMA.Transformation.suppression.fluencies.label",
         nullable: false,
         required: false,
       }),
       ranks: new BooleanField({
-        hint: "Whether this should suppress ranks not provided by the transformation.",
+        hint: "TERIOCK.SCHEMA.Transformation.suppression.ranks.hint",
         initial: true,
-        label: "Suppress Ranks",
+        label: "TERIOCK.SCHEMA.Transformation.suppression.ranks.label",
         nullable: false,
         required: false,
       }),
     }),
     uuids: new SetField(
       new DocumentUUIDField({
-        hint: "A specific species this transforms the target into.",
+        hint: "TERIOCK.SCHEMA.Transformation.uuids.itemHint",
         nullable: false,
         type: "Item",
         validate: (uuid) => typeValidator(uuid, ["species"]),
       }),
       {
-        hint: "The species this transforms the target into.",
+        hint: "TERIOCK.SCHEMA.Transformation.uuids.hint",
         initial: [],
-        label: "Species",
+        label: "TERIOCK.SCHEMA.Transformation.uuids.label",
         nullable: false,
         required: false,
         validate: (uuids) => arrayTypeValidator(uuids, ["species"]),
         validationError: "Only species can be transformed into.",
       },
     ),
-    multiple: new BooleanField({
-      hint: "Allow selection of multiple species to transform into at the same time.",
-      initial: false,
-      label: "Multiple Selection",
-      nullable: false,
-      required: false,
-    }),
-    resetHp: new BooleanField({
-      hint: "Reset HP upon transformation.",
-      label: "Reset HP",
-      initial: true,
-      required: false,
-      nullable: false,
-    }),
-    resetMp: new BooleanField({
-      hint: "Reset MP upon transformation.",
-      label: "Reset MP",
-      initial: false,
-      required: false,
-      nullable: false,
-    }),
   };
   if (implementation) {
     schema.species = new ArrayField(new DocumentIdField());
@@ -148,22 +147,22 @@ export function transformationField(options = {}) {
   if (configuration) {
     Object.assign(schema, {
       select: new BooleanField({
-        hint: "Select a subset of the species to turn into instead of all of them.",
-        label: "Select",
+        hint: "TERIOCK.SCHEMA.Transformation.select.hint",
+        label: "TERIOCK.SCHEMA.Transformation.select.label",
         nullable: false,
         required: false,
         initial: false,
       }),
       useFolder: new BooleanField({
-        hint: "Use a folder of species instead of defining each individually.",
-        label: "Use Folder",
+        hint: "TERIOCK.SCHEMA.Transformation.useFolder.hint",
+        label: "TERIOCK.SCHEMA.Transformation.useFolder.label",
         nullable: false,
         required: false,
         initial: false,
       }),
       uuid: new DocumentUUIDField({
-        hint: "The folder of candidate species to transform into.",
-        label: "Folder",
+        hint: "TERIOCK.SCHEMA.Transformation.folder.hint",
+        label: "TERIOCK.SCHEMA.Transformation.folder.label",
         nullable: true,
         required: false,
         type: "Folder",
@@ -181,14 +180,14 @@ export function transformationField(options = {}) {
 export function combatExpirationMethodField() {
   return new SchemaField({
     roll: new StringField({
-      hint: "If this expires on a roll, what is the roll that needs to be made?",
+      hint: "TERIOCK.SCHEMA.CombatExpiration.what.roll.hint",
       initial: "2d4kh1",
-      label: "Roll",
+      label: "TERIOCK.SCHEMA.CombatExpiration.what.roll.label",
     }),
     threshold: new NumberField({
-      hint: "What is the minimum value that needs to be rolled in order for this to expire?",
+      hint: "TERIOCK.SCHEMA.CombatExpiration.what.threshold.hint",
       initial: 4,
-      label: "Threshold",
+      label: "TERIOCK.SCHEMA.CombatExpiration.what.threshold.label",
     }),
     type: new StringField({
       choices: {
@@ -196,9 +195,9 @@ export function combatExpirationMethodField() {
         rolled: "Expires on Roll",
         none: "Does not Expire on Turn",
       },
-      hint: "What is the type of thing that causes this to expire?",
+      hint: "TERIOCK.SCHEMA.CombatExpiration.what.type.hint",
       initial: "none",
-      label: "What",
+      label: "TERIOCK.SCHEMA.CombatExpiration.what.type.label",
     }),
   });
 }
@@ -210,18 +209,18 @@ export function combatExpirationMethodField() {
 export function combatExpirationTimingField() {
   return new SchemaField({
     skip: new NumberField({
-      hint: "A number of instances of the trigger firing to skip before this effect expires.",
+      hint: "TERIOCK.SCHEMA.CombatExpiration.when.skip.hint",
       initial: 0,
-      label: "Skip",
+      label: "TERIOCK.SCHEMA.CombatExpiration.when.skip.label",
     }),
     time: new StringField({
       choices: {
         start: "Start",
         end: "End",
       },
-      hint: "What is the timing for the trigger of this effect expiring?",
+      hint: "TERIOCK.SCHEMA.CombatExpiration.when.time.hint",
       initial: "start",
-      label: "When",
+      label: "TERIOCK.SCHEMA.CombatExpiration.when.time.label",
     }),
     trigger: new StringField({
       choices: {
@@ -229,9 +228,9 @@ export function combatExpirationTimingField() {
         combat: "Combat",
         action: "Action",
       },
-      hint: "What is the trigger for this effect expiring?",
+      hint: "TERIOCK.SCHEMA.CombatExpiration.when.trigger.hint",
       initial: "turn",
-      label: "Trigger",
+      label: "TERIOCK.SCHEMA.CombatExpiration.when.trigger.label",
     }),
   });
 }
@@ -255,33 +254,39 @@ export function qualifiedChangeField() {
   }
   Object.assign(allTypes, sortObject(subTypes));
   return new SchemaField({
-    key: new EnhancedStringField({ initial: "", label: "Key" }),
+    key: new EnhancedStringField({
+      initial: "",
+      label: "TERIOCK.SCHEMA.QualifiedChange.key.label",
+    }),
     mode: new EnhancedNumberField({
       choices: TERIOCK.options.effect.changeMode,
       initial: 4,
-      label: "Mode",
+      label: "TERIOCK.SCHEMA.QualifiedChange.mode.label",
     }),
     priority: new EnhancedNumberField({
       initial: 20,
-      label: "Priority",
+      label: "TERIOCK.SCHEMA.QualifiedChange.priority.label",
     }),
     time: new EnhancedStringField({
       choices: TERIOCK.options.change.timeLabels,
       initial: "normal",
-      label: "Timing",
+      label: "TERIOCK.SCHEMA.QualifiedChange.time.label",
       nullable: false,
     }),
     target: new EnhancedStringField({
       choices: allTypes,
       initial: "Actor",
-      label: "Target Document Type",
+      label: "TERIOCK.SCHEMA.QualifiedChange.target.label",
       nullable: false,
     }),
-    value: new EnhancedStringField({ initial: "", label: "Value" }),
+    value: new EnhancedStringField({
+      initial: "",
+      label: "TERIOCK.SCHEMA.QualifiedChange.value.label",
+    }),
     qualifier: new FormulaField({
       deterministic: true,
       initial: "1",
-      label: "Qualifier",
+      label: "TERIOCK.SCHEMA.QualifiedChange.qualifier.label",
     }),
   });
 }
@@ -463,6 +468,28 @@ export function competenceField() {
     nullable: false,
     required: false,
   });
+}
+
+/**
+ * Damage field.
+ * @param {boolean} [twoHanded]
+ * @returns {SchemaField}
+ */
+export function damageField(twoHanded = false) {
+  const schema = {
+    base: new EvaluationField({
+      deterministic: false,
+      model: teriock.data.models.DamageModel,
+    }),
+    types: new SetField(new StringField()),
+  };
+  if (twoHanded) {
+    schema.twoHanded = new EvaluationField({
+      deterministic: false,
+      model: teriock.data.models.DamageModel,
+    });
+  }
+  return new SchemaField(schema);
 }
 
 /**

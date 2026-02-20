@@ -1,8 +1,6 @@
 import { getRollIcon, makeIcon } from "../../../../../../helpers/utils.mjs";
-import { EvaluationField } from "../../../../../fields/_module.mjs";
-import { DamageModel } from "../../../../../models/_module.mjs";
+import { damageField } from "../../../../../fields/helpers/builders.mjs";
 
-const { fields } = foundry.data;
 const { utils } = foundry;
 
 /**
@@ -22,17 +20,7 @@ export default (Base) => {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          damage: new fields.SchemaField({
-            base: new EvaluationField({
-              deterministic: false,
-              model: DamageModel,
-            }),
-            twoHanded: new EvaluationField({
-              deterministic: false,
-              model: DamageModel,
-            }),
-            types: new fields.SetField(new fields.StringField()),
-          }),
+          damage: damageField(true),
         });
       }
 

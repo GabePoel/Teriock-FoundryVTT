@@ -30,7 +30,7 @@ import * as parts from "./parts/_module.mjs";
  * @mixes AbilityUpgradesPart
  * @mixes ConsumableSystem
  * @mixes HierarchySystem
- * @mixes PiercingSystem
+ * @mixes AttackSystem
  * @mixes CompetenceDisplaySystem
  * @mixes RevelationSystem
  * @mixes ThresholdData

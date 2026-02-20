@@ -30,6 +30,12 @@ export default class RankSystem extends mix(
   mixins.StatGiverSystemMixin,
 ) {
   /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [
+    ...super.LOCALIZATION_PREFIXES,
+    "TERIOCK.SYSTEMS.Rank",
+  ];
+
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       namespace: "Class",
@@ -45,16 +51,13 @@ export default class RankSystem extends mix(
     return Object.assign(super.defineSchema(), {
       archetype: new fields.StringField({
         initial: "everyman",
-        label: "Archetype",
       }),
       className: new fields.StringField({
         initial: "journeyman",
-        label: "Class Name",
       }),
       classRank: new fields.NumberField({
         initial: 0,
         integer: true,
-        label: "Class Rank",
         min: 0,
       }),
       competence: new fields.EmbeddedDataField(CompetenceModel, {
@@ -63,20 +66,11 @@ export default class RankSystem extends mix(
       description: new TextField({
         initial:
           "<p>Every adventurer is a journeyman before they join their first @L[Category:Classes]{class}.</p>",
-        label: "Description",
       }),
-      flaws: new TextField({
-        initial: "",
-        label: "Flaws",
-      }),
-      innate: new fields.BooleanField({
-        initial: false,
-        label: "Innate",
-      }),
+      innate: new fields.BooleanField({ initial: false }),
       maxAv: new fields.NumberField({
         initial: 2,
         integer: true,
-        label: "Maximum AV",
         min: 0,
       }),
     });

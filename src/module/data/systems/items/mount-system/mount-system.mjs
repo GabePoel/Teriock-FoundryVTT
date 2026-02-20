@@ -1,6 +1,5 @@
 import { prefix, toCamelCase } from "../../../../helpers/string.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
-import { TextField } from "../../../fields/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
 
@@ -20,6 +19,12 @@ export default class MountSystem extends mix(
   mixins.StatGiverSystemMixin,
 ) {
   /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [
+    ...super.LOCALIZATION_PREFIXES,
+    "TERIOCK.SYSTEMS.Mount",
+  ];
+
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       type: "mount",
@@ -31,16 +36,12 @@ export default class MountSystem extends mix(
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       mountType: new fields.StringField({
-        initial: "Mount Type",
+        initial: "",
         required: false,
       }),
       mounted: new fields.BooleanField({
         initial: false,
         required: false,
-      }),
-      flaws: new TextField({
-        initial: "",
-        label: "Flaws",
       }),
     });
   }

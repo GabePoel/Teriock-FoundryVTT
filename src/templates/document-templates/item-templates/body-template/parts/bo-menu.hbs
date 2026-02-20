@@ -9,7 +9,7 @@
       <div class="tgrid g1">
         <div class="tgrid-item">
           <div class="ab-multi-select-label">
-            <label class="tsubtle">Fighting Style</label>
+            <label class="tsubtle">{{localize "TERIOCK.SYSTEMS.Armament.FIELDS.fightingStyle.label"}}</label>
             {{formInput
               systemFields.fightingStyle
               value=system.fightingStyle
@@ -32,7 +32,7 @@
               {{/if}}
             >
               {{makeIcon TERIOCK.display.icons.ui.add "button"}}
-              Damage
+              {{localize "TERIOCK.SYSTEMS.Armament.FIELDS.damage.base.raw.label"}}
             </button>
           </div>
         {{/if}}
@@ -44,7 +44,7 @@
               {{/if}}
             >
               {{makeIcon TERIOCK.display.icons.ui.add "button"}}
-              AV
+              {{localize "TERIOCK.SYSTEMS.Armament.FIELDS.av.raw.label"}}
             </button>
           </div>
         {{/if}}
@@ -56,21 +56,23 @@
               {{/if}}
             >
               {{makeIcon TERIOCK.display.icons.ui.add "button"}}
-              BV
+              {{localize "TERIOCK.SYSTEMS.Armament.FIELDS.bv.raw.label"}}
             </button>
           </div>
         {{/if}}
-        {{#if (not (exists system.hit.raw))}}
-          <div class="tgrid-item">
-            <button class="ab-menu-button ab-hit-button"
-              {{#if (not editable)}}
-                    disabled="disabled"
-              {{/if}}
-            >
-              {{makeIcon TERIOCK.display.icons.ui.add "button"}}
-              Hit Bonus
-            </button>
-          </div>
+        {{#if (exists system.damage.base.raw)}}
+          {{#if (not (exists system.hit.raw))}}
+            <div class="tgrid-item">
+              <button class="ab-menu-button ab-hit-button"
+                {{#if (not editable)}}
+                      disabled="disabled"
+                {{/if}}
+              >
+                {{makeIcon TERIOCK.display.icons.ui.add "button"}}
+                {{localize "TERIOCK.SYSTEMS.Armament.FIELDS.hit.raw.label"}}
+              </button>
+            </div>
+          {{/if}}
         {{/if}}
         {{> (template "document-templates/shared/display-field-buttons.hbs")}}
       </div>

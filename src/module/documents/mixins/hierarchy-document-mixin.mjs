@@ -203,7 +203,7 @@ export default function HierarchyDocumentMixin(Base) {
         if (operation.isKeepIdCached) operation.keepId = operation.cachedKeepId;
         delete operation.isKeepIdCached;
         delete operation.cachedKeepId;
-        await super.createDocuments(data, operation);
+        return super.createDocuments(data, operation);
       }
 
       /**

@@ -19,14 +19,8 @@ export default (Base) => {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          dampened: new fields.BooleanField({
-            initial: false,
-            label: "Dampened",
-          }),
-          shattered: new fields.BooleanField({
-            initial: false,
-            label: "Shattered",
-          }),
+          dampened: new fields.BooleanField({ initial: false }),
+          shattered: new fields.BooleanField({ initial: false }),
         });
       }
 

@@ -14,37 +14,35 @@ const { fields } = foundry.data;
  */
 export default class IdentificationModel extends EmbeddedDataModel {
   /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [
+    ...super.LOCALIZATION_PREFIXES,
+    "TERIOCK.MODELS.Identification",
+  ];
+
+  /** @inheritDoc */
   static defineSchema() {
     return {
       flaws: new TextField({
         initial: "",
-        label: "Unidentified Flaws",
         gmOnly: true,
         required: false,
       }),
       identified: new fields.BooleanField({
         initial: true,
-        label: "Identified",
       }),
       name: new fields.StringField({
         initial: "",
-        label: "Unidentified Name",
       }),
       notes: new TextField({
         initial: "",
-        label: "Unidentified Notes",
         gmOnly: true,
         required: false,
       }),
       powerLevel: new fields.StringField({
         choices: TERIOCK.options.equipment.powerLevelShort,
         initial: "mundane",
-        label: "Unidentified Power Level",
       }),
-      read: new fields.BooleanField({
-        initial: true,
-        label: "Read",
-      }),
+      read: new fields.BooleanField({ initial: true }),
     };
   }
 

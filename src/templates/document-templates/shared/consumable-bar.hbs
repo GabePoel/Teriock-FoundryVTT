@@ -2,17 +2,16 @@
   {{formBox
     (formInput
       systemFields.quantity
-      dataset=(object tooltip="Quantity")
       disabled=(not editable)
       value=system.quantity
     )
     icon=TERIOCK.display.icons.ui.quantity
     unselected=(concat system.quantity " Remaining")
+    tooltip=(localize "TERIOCK.SYSTEMS.Consumable.FIELDS.quantity.label")
   }}
   {{formBox
     (formInput
       systemFields.maxQuantity
-      dataset=(object tooltip="Maximum Quantity")
       disabled=(not editable)
       value=system._source.maxQuantity.raw
     )
@@ -20,5 +19,6 @@
     unselected=(concat
       (ifThen system.maxQuantity.raw system.maxQuantity.value "No") " Maximum"
     )
+    tooltip=(localize "TERIOCK.SYSTEMS.Consumable.FIELDS.maxQuantity.raw.label")
   }}
 </div>

@@ -10,12 +10,16 @@ const { fields } = foundry.data;
  */
 export default class StorageModel extends EmbeddedDataModel {
   /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [
+    ...super.LOCALIZATION_PREFIXES,
+    "TERIOCK.MODELS.Storage",
+  ];
+
+  /** @inheritDoc */
   static defineSchema() {
     return {
       enabled: new fields.BooleanField({
-        hint: "If this should be able to store other equipment within it.",
         initial: false,
-        label: "Storage",
         required: false,
       }),
       maxCount: new EvaluationField({

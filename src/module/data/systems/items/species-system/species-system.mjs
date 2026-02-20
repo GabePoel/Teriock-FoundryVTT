@@ -32,6 +32,12 @@ export default class SpeciesSystem extends mix(
   parts.SpeciesPanelPart,
 ) {
   /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [
+    ...super.LOCALIZATION_PREFIXES,
+    "TERIOCK.SYSTEMS.Species",
+  ];
+
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       childItemTypes: ["body", "equipment", "rank"],
@@ -69,23 +75,14 @@ export default class SpeciesSystem extends mix(
       lifespan: new fields.NumberField({ initial: 0, min: 0 }),
       mpIncrease: new TextField({ label: "Mana increase" }),
       size: new fields.SchemaField({
-        enabled: new fields.BooleanField({
-          hint: "Whether or not this species has a size associated with it.",
-          initial: true,
-          label: "Size",
-        }),
+        enabled: new fields.BooleanField({ initial: true }),
         max: new fields.NumberField(),
         min: new fields.NumberField(),
-        value: new fields.NumberField({
-          initial: 3,
-        }),
+        value: new fields.NumberField({ initial: 3 }),
       }),
       traits: new fields.SetField(
         new fields.StringField({ choices: TERIOCK.index.traits }),
-        {
-          initial: ["humanoid"],
-          label: "Traits",
-        },
+        { initial: ["humanoid"] },
       ),
       transformationLevel: new fields.StringField({
         choices: TERIOCK.options.effect.transformationLevel,

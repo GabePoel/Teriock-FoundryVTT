@@ -25,6 +25,7 @@
       systemFields.equipmentType
       value=system.equipmentType
       disabled=(not editable)
+      placeholder="Equipment Type"
     )
     tooltip="Equipment Type"
     icon=TERIOCK.display.icons.equipment.equipmentType
@@ -32,7 +33,7 @@
   {{formBox
     (concat
       "<span style='flex: auto;' data-tooltip='"
-      (ifThen (not (eq system.range.long.unitType "zero")) "Long Range" "Range")
+      (ifThen (not (eq system.range.long.unitType "zero")) "Long Range" "")
       "' data-path='system.range.long' data-action='updateUnit'>"
       (ifThen (eq system.range.long.unitType "finite") system.range.long.formula system.range.long.text)
       "</span>"
@@ -46,5 +47,6 @@
     icon=TERIOCK.display.icons.ability.range
     includeSecondary=(not (eq system.range.long.unitType "zero"))
     label=(ifThen (eq system.range.long.unitType "finite") system.range.long.symbol "")
+    tooltip="Range"
   }}
 </div>

@@ -10,6 +10,12 @@ const { fields } = foundry.data;
  */
 export default class PiercingModel extends EmbeddedDataModel {
   /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [
+    ...super.LOCALIZATION_PREFIXES,
+    "TERIOCK.MODELS.Piercing",
+  ];
+
+  /** @inheritDoc */
   static defineSchema() {
     return {
       raw: new fields.NumberField({
@@ -18,9 +24,7 @@ export default class PiercingModel extends EmbeddedDataModel {
           1: "AV0",
           2: "UB",
         },
-        hint: "How this interacts with armor and blocking.",
         initial: 0,
-        label: "Piercing",
         max: 2,
         min: 0,
         nullable: false,

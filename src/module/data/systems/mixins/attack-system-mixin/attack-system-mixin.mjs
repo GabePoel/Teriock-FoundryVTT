@@ -14,14 +14,19 @@ export default function AttackSystemMixin(Base) {
      * @implements {Teriock.Models.AttackSystemInterface}
      * @mixin
      */
-    class PiercingSystem extends Base {
+    class AttackSystem extends Base {
+      /** @inheritDoc */
+      static LOCALIZATION_PREFIXES = [
+        ...super.LOCALIZATION_PREFIXES,
+        "TERIOCK.SYSTEMS.Attack",
+      ];
+
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           piercing: new fields.EmbeddedDataField(PiercingModel),
           warded: new fields.BooleanField({
             initial: false,
-            label: "Warded",
             nullable: false,
           }),
         });

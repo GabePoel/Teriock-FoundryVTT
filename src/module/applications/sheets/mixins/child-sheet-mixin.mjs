@@ -48,7 +48,7 @@ export default function ChildSheetMixin(Base) {
                 this.document,
                 f.path.replace(".system.", "._schema.system."),
               ),
-              label: f.label || this.document.getSchema(f.path).label,
+              label: f?.label || this.document.getSchema(f.path)?.label,
             },
           };
         });
@@ -78,7 +78,7 @@ export default function ChildSheetMixin(Base) {
           .map((f) => {
             return {
               fieldPath: f.path,
-              name: f.label || f.schema.label,
+              name: f?.label || f.schema?.label,
               editable: f.editable,
             };
           });

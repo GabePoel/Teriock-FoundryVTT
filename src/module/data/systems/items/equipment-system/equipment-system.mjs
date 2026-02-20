@@ -6,7 +6,6 @@ import {
   toCamelCase,
 } from "../../../../helpers/string.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
-import { TextField } from "../../../fields/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
 import * as parts from "./parts/_module.mjs";
@@ -49,6 +48,12 @@ export default class EquipmentSystem extends mix(
   parts.EquipmentWieldingPart,
 ) {
   /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [
+    ...super.LOCALIZATION_PREFIXES,
+    "TERIOCK.SYSTEMS.Equipment",
+  ];
+
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       childItemTypes: ["equipment"],
@@ -80,11 +85,6 @@ export default class EquipmentSystem extends mix(
     return Object.assign(super.defineSchema(), {
       consumable: new fields.BooleanField({
         initial: false,
-        label: "Consumable",
-      }),
-      description: new TextField({
-        initial: "",
-        label: "Description",
       }),
       equipmentClasses: new fields.SetField(
         new fields.StringField({
@@ -92,17 +92,14 @@ export default class EquipmentSystem extends mix(
         }),
       ),
       equipmentType: new fields.StringField({
-        initial: "Equipment Type",
-        label: "Equipment Type",
+        initial: "",
       }),
       powerLevel: new fields.StringField({
         choices: TERIOCK.options.equipment.powerLevelShort,
         initial: "mundane",
-        label: "Power Level",
       }),
       price: new fields.NumberField({
         initial: 0,
-        label: "Price",
       }),
     });
   }

@@ -1,4 +1,5 @@
 import { mix } from "../../../../helpers/utils.mjs";
+import { TextField } from "../../../fields/_module.mjs";
 import { ChildSystem } from "../../abstract/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 
@@ -17,6 +18,12 @@ export default class BaseItemSystem extends mix(
   mixins.HierarchySystemMixin,
 ) {
   /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [
+    ...super.LOCALIZATION_PREFIXES,
+    "TERIOCK.SYSTEMS.BaseItem",
+  ];
+
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       childEffectTypes: ["ability", "fluency", "resource"],
@@ -30,8 +37,8 @@ export default class BaseItemSystem extends mix(
     return foundry.utils.mergeObject(super.defineSchema(), {
       disabled: new fields.BooleanField({
         initial: false,
-        label: "Disabled",
       }),
+      flaws: new TextField({ initial: "" }),
       onUse: new fields.SetField(new fields.DocumentIdField()),
     });
   }

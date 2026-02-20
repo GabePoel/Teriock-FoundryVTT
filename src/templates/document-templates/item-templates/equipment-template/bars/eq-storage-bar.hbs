@@ -3,8 +3,6 @@
     {{formBox
       (formInput
         systemFields.storage.fields.maxCount
-        dataset=(object tooltip=(concat
-          (ifThen system.storage.isOverCountCapacity "Over " "") "Maximum Number of Items Carried"))
         disabled=(not editable)
         value=system._source.storage.maxCount.raw
       )
@@ -16,12 +14,12 @@
         TERIOCK.display.colors.red
         null
       )
+      tooltip=(concat
+        (ifThen system.storage.isOverCountCapacity "Over " "") "Maximum Number of Items Carried")
     }}
     {{formBox
       (formInput
         systemFields.storage.fields.maxWeight
-        dataset=(object tooltip=(concat
-          (ifThen system.storage.isOverWeightCapacity "Over " "") "Maximum Weight Carried"))
         disabled=(not editable)
         value=system._source.storage.maxWeight.raw
       )
@@ -33,16 +31,18 @@
         TERIOCK.display.colors.red
         null
       )
+      tooltip=(concat
+        (ifThen system.storage.isOverWeightCapacity "Over " "") "Maximum Weight Carried")
     }}
     {{formBox
       (formInput
         systemFields.storage.fields.weightMultiplier
-        dataset=(object tooltip="Weight Multiplier")
         disabled=(not editable)
         value=system._source.storage.weightMultiplier
       )
       icon=TERIOCK.display.icons.equipment.weightMultiplier
       unselected=system.storage.weightMultiplier
+      tooltip=(localize "TERIOCK.MODELS.Storage.FIELDS.weightMultiplier.label")
     }}
   </div>
 {{/if}}

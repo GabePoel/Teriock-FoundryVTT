@@ -15,6 +15,12 @@ export default function ConsumableSystemMixin(Base) {
      */
     class ConsumableSystem extends Base {
       /** @inheritDoc */
+      static LOCALIZATION_PREFIXES = [
+        ...super.LOCALIZATION_PREFIXES,
+        "TERIOCK.SYSTEMS.Consumable",
+      ];
+
+      /** @inheritDoc */
       static get metadata() {
         return foundry.utils.mergeObject(super.metadata, {
           consumable: true,
@@ -26,7 +32,6 @@ export default function ConsumableSystemMixin(Base) {
         return Object.assign(super.defineSchema(), {
           consumable: new fields.BooleanField({
             initial: true,
-            label: "Consumable",
           }),
           maxQuantity: new EvaluationField({
             blank: Infinity,

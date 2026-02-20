@@ -11,34 +11,33 @@ const { ImagePopout } = foundry.applications.apps;
 /**
  * Data model shared by items and effects.
  * @extends {CommonSystem}
+ * @extends {BaseSystem}
  * @mixes UsableData
  * @implements {Teriock.Models.ChildSystemInterface}
  */
 export default class ChildSystem extends UsableDataMixin(CommonSystem) {
   /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = super.LOCALIZATION_PREFIXES.concat(
+    "TERIOCK.SYSTEMS.Child",
+  );
+
+  /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       font: new fields.StringField({
         initial: "",
-        label: "Font",
-        hint: "The font to be used for this document's name on its sheet and in chat messages.",
       }),
       description: new TextField({
         initial: "",
-        label: "Description",
       }),
       qualifiers: new fields.SchemaField({
         ephemeral: new EvaluationField({
           deterministic: true,
-          hint: "When this formula is true, the document will be hidden and treated as if it doesn't exist.",
           initial: "0",
-          label: "Ephemeral Formula",
         }),
         suppressed: new EvaluationField({
           deterministic: true,
-          hint: "When this formula is true, the document will be made inactive.",
           initial: "0",
-          label: "Suppressed Formula",
         }),
       }),
     });

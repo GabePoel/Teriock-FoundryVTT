@@ -3,6 +3,9 @@ const { TypeDataModel } = foundry.abstract;
 /** @inheritDoc */
 export default class BaseSystem extends TypeDataModel {
   /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [];
+
+  /** @inheritDoc */
   static defineSchema() {
     return {};
   }

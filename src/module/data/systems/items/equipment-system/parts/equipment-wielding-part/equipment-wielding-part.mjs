@@ -20,14 +20,8 @@ export default (Base) => {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          equipped: new fields.BooleanField({
-            initial: false,
-            label: "Equipped",
-          }),
-          glued: new fields.BooleanField({
-            initial: false,
-            label: "Glued",
-          }),
+          equipped: new fields.BooleanField({ initial: false }),
+          glued: new fields.BooleanField({ initial: false }),
           minStr: new EvaluationField({
             deterministic: true,
             initial: -3,

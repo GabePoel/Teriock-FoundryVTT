@@ -19,6 +19,12 @@ export default function StatGiverSystemMixin(Base) {
      */
     class StatGiverSystem extends Base {
       /** @inheritDoc */
+      static LOCALIZATION_PREFIXES = [
+        ...super.LOCALIZATION_PREFIXES,
+        "TERIOCK.SYSTEMS.StatGiver",
+      ];
+
+      /** @inheritDoc */
       static get metadata() {
         return foundry.utils.mergeObject(super.metadata, {
           stats: true,

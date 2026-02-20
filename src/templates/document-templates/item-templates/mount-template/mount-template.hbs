@@ -3,47 +3,18 @@
     <div class="ab-sheet-top">
       {{> (template "document-templates/shared/header.hbs")}}
       <div class="ab-bars">
-        <div class="ab-bar">
-          {{formBox
-            (concat
-              system.statDice.hp.formula
-              " Hit Di"
-              (ifThen (gt system.statDice.hp.number.value 1) "c" "")
-              "e ("
-              system.statDice.hp.value
-              " HP)"
-            )
-            action="setStatDice"
-            dataset=(object stat="hp")
-            icon=(firstDie system.statDice.hp.formula)
-            tooltip="Hit Dice"
-          }}
-          {{formBox
-            (concat
-              system.statDice.mp.formula
-              " Mana Di"
-              (ifThen (gt system.statDice.mp.number.value 1) "c" "")
-              "e ("
-              system.statDice.mp.value
-              " MP)"
-            )
-            action="setStatDice"
-            dataset=(object stat="mp")
-            icon=(firstDie system.statDice.mp.formula)
-            tooltip="Mana Dice"
-          }}
-        </div>
+        {{> (template "document-templates/item-templates/rank-template/bars/rk-bar-stats.hbs" )}}
         <div class="ab-bar">
           {{formBox
             (formInput
               systemFields.tier
               value=system._source.tier.raw
               disabled=(not editable)
-              dataset=(object tooltip="Presence Tier")
               placeholder="0"
             )
             icon=TERIOCK.display.icons.attunable.tier
             label="TIER"
+            tooltip=(localize "TERIOCK.SYSTEMS.Attunable.FIELDS.tier.raw.label")
             unselected=(ifThen system.tier.raw system.tier.value "")
           }}
           {{formBox
@@ -51,8 +22,9 @@
               systemFields.mountType
               value=system.mountType
               disabled=(not editable)
-              dataset=(object tooltip="Mount Type")
+              placeholder=(localize "TERIOCK.SYSTEMS.Mount.FIELDS.mountType.label")
             )
+            tooltip=(localize "TERIOCK.SYSTEMS.Mount.FIELDS.mountType.label")
             icon=TERIOCK.options.document.species.icon
           }}
         </div>

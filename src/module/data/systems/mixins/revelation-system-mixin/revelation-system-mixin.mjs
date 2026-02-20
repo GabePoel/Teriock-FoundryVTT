@@ -15,6 +15,12 @@ export default function RevelationSystemMixin(Base) {
      */
     class RevelationSystem extends Base {
       /** @inheritDoc */
+      static LOCALIZATION_PREFIXES = [
+        ...super.LOCALIZATION_PREFIXES,
+        "TERIOCK.SYSTEMS.Revelation",
+      ];
+
+      /** @inheritDoc */
       static get metadata() {
         return foundry.utils.mergeObject(super.metadata, {
           revealable: true,
@@ -25,9 +31,7 @@ export default function RevelationSystemMixin(Base) {
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           revealed: new fields.BooleanField({
-            hint: "Whether this has been revealed from an identify or other source.",
             initial: true,
-            label: "Revealed",
             nullable: false,
             required: false,
           }),

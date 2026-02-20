@@ -47,7 +47,11 @@ export default function registerFieldHelpers() {
     if (hasUnselected) {
       content = `<div class="selected">${content}</div>`;
     }
-    let iconStr = `<i class="fa-fw fa-light fa-${icon}"></i>`;
+    const tooltipStr =
+      tooltip && tooltip.toString().length > 0
+        ? `data-tooltip="${tooltip}"`
+        : "";
+    let iconStr = `<i class="fa-fw fa-light fa-${icon}" ${tooltipStr}></i>`;
     let styleStr = "";
     if (iconColor && iconColor.toString().length > 0) {
       styleStr = `style="color: ${iconColor};"`;
@@ -55,10 +59,6 @@ export default function registerFieldHelpers() {
     if (icon.toString().startsWith("<i")) {
       iconStr = icon;
     }
-    const tooltipStr =
-      tooltip && tooltip.toString().length > 0
-        ? `data-tooltip="${tooltip}"`
-        : "";
     const classesStr = classes ? classes : "";
     const actionStr = action ? `data-action="${action}"` : "";
     let datasetStr = "";
@@ -72,7 +72,7 @@ export default function registerFieldHelpers() {
             <div class="ab-box-icon" ${styleStr}>
               ${iconStr}
             </div>
-            <div class="ab-box-content ${hasSecondaryContent ? "ab-split-input" : ""}" ${tooltipStr}>
+            <div class="ab-box-content ${hasSecondaryContent ? "ab-split-input" : ""}">
               ${unselectedContent}${content}
             </div>
             ${hasLabel ? labelText : ""}

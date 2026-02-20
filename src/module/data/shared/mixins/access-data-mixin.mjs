@@ -68,7 +68,7 @@ export default function AccessDataMixin(Base) {
       _makeFormGroups(paths) {
         return paths.map((p) =>
           this.schema.getField(p).toFormGroup(
-            { rootId: foundry.utils.randomID() },
+            { rootId: foundry.utils.randomID(), localize: true },
             {
               name: `${this.localPath}.${p}`,
               value: foundry.utils.getProperty(this, p),

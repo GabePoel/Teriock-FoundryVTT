@@ -4,33 +4,35 @@
       systemFields.tier
       value=system._source.tier.raw
       disabled=(not editable)
-      dataset=(object tooltip="Presence Tier")
       placeholder="0"
     )
     icon=TERIOCK.display.icons.attunable.tier
     label="TIER"
     unselected=(ifThen system.tier.raw system.tier.value "")
+    tooltip=(localize "TERIOCK.SYSTEMS.Attunable.FIELDS.tier.raw.label")
   }}
   {{formBox
     (formInput
       systemFields.weight
       value=system._source.weight.raw
       disabled=(not editable)
-      dataset=(object tooltip="Weight")
+      placeholder="0"
     )
     icon=TERIOCK.display.icons.equipment.weight
     label="lb"
-    unselected=system.weight.value
+    unselected=(ifThen system.weight.raw system.weight.value "")
+    tooltip=(localize "TERIOCK.SYSTEMS.Equipment.FIELDS.weight.raw.label")
   }}
   {{formBox
     (formInput
       systemFields.minStr
       value=system._source.minStr.raw
       disabled=(not editable)
-      dataset=(object tooltip="Minimum STR")
+      placeholder="0"
     )
     icon=TERIOCK.display.icons.equipment.minStr
     label="STR"
-    unselected=system.minStr.value
+    unselected=(ifThen system.minStr.raw system.minStr.value "")
+    tooltip=(localize "TERIOCK.SYSTEMS.Equipment.FIELDS.minStr.raw.label")
   }}
 </div>

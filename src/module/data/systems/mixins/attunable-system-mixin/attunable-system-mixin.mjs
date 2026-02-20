@@ -14,6 +14,12 @@ export default function AttunableSystemMixin(Base) {
      */
     class AttunableSystem extends Base {
       /** @inheritDoc */
+      static LOCALIZATION_PREFIXES = [
+        ...super.LOCALIZATION_PREFIXES,
+        "TERIOCK.SYSTEMS.Attunable",
+      ];
+
+      /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           tier: new EvaluationField({

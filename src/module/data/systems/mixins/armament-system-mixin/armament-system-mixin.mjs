@@ -3,11 +3,8 @@ import { ArmamentExecution } from "../../../../executions/document-executions/_m
 import { toCamelCase } from "../../../../helpers/string.mjs";
 import { getRollIcon } from "../../../../helpers/utils.mjs";
 import { EvaluationField, TextField } from "../../../fields/_module.mjs";
-import {
-  DamageModel,
-  DefenseModel,
-  RangeModel,
-} from "../../../models/_module.mjs";
+import { damageField } from "../../../fields/helpers/builders.mjs";
+import { DefenseModel, RangeModel } from "../../../models/_module.mjs";
 import { AttackSystemMixin } from "../_module.mjs";
 
 const { fields } = foundry.data;
@@ -21,10 +18,16 @@ export default function ArmamentSystemMixin(Base) {
     /**
      * @extends {BaseItemSystem}
      * @implements {Teriock.Models.ArmamentSystemInterface}
-     * @mixes PiercingSystem
+     * @mixes AttackSystem
      * @mixin
      */
     class ArmamentSystem extends AttackSystemMixin(Base) {
+      /** @inheritDoc */
+      static LOCALIZATION_PREFIXES = [
+        ...super.LOCALIZATION_PREFIXES,
+        "TERIOCK.SYSTEMS.Armament",
+      ];
+
       /** @inheritDoc */
       static get metadata() {
         return foundry.utils.mergeObject(super.metadata, {
@@ -54,26 +57,11 @@ export default function ArmamentSystemMixin(Base) {
             min: 0,
             model: DefenseModel,
           }),
-          damage: new fields.SchemaField({
-            base: new EvaluationField({
-              deterministic: false,
-              model: DamageModel,
-            }),
-            types: new fields.SetField(new fields.StringField()),
-          }),
-          description: new TextField({
-            initial: "",
-            label: "Description",
-          }),
+          damage: damageField(false),
           fightingStyle: new fields.StringField({
             initial: null,
-            label: "Style Bonus",
             nullable: true,
             choices: TERIOCK.index.weaponFightingStyles,
-          }),
-          flaws: new TextField({
-            initial: "",
-            label: "Flaws",
           }),
           hit: new EvaluationField({
             floor: true,
@@ -81,35 +69,28 @@ export default function ArmamentSystemMixin(Base) {
           }),
           notes: new TextField({
             initial: "",
-            label: "Notes",
           }),
           range: new fields.SchemaField({
             long: new EvaluationField({ model: RangeModel, label: "Range" }),
             melee: new fields.BooleanField({
               initial: true,
-              label: "Melee",
             }),
             ranged: new fields.BooleanField({
               initial: false,
-              label: "Ranged",
             }),
             short: new EvaluationField({
               model: RangeModel,
-              label: "Short Range",
             }),
           }),
           specialRules: new TextField({
             initial: "",
-            label: "Fighting Style",
           }),
           spellTurning: new fields.BooleanField({
             initial: false,
-            label: "Spell Turning",
             nullable: false,
           }),
           vitals: new fields.BooleanField({
             initial: false,
-            label: "Vitals",
             nullable: false,
           }),
         });
