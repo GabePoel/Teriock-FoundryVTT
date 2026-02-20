@@ -11,8 +11,14 @@ const { fields } = foundry.data;
  */
 export default class HacksAutomation extends BaseAutomation {
   /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [
+    ...super.LOCALIZATION_PREFIXES,
+    "TERIOCK.AUTOMATIONS.HacksAutomation",
+  ];
+
+  /** @inheritDoc */
   static get LABEL() {
-    return "Hacks";
+    return "TERIOCK.AUTOMATIONS.HacksAutomation.LABEL";
   }
 
   /** @inheritDoc */
@@ -33,14 +39,10 @@ export default class HacksAutomation extends BaseAutomation {
           ),
         }),
         {
-          label: "Hacks",
-          hint: "The types of hack damage that this can apply.",
+          label: "TERIOCK.TERMS.Common.hacks",
         },
       ),
-      reverse: new fields.BooleanField({
-        label: "Reverse",
-        hint: "Remove hacks instead of adding them.",
-      }),
+      reverse: new fields.BooleanField(),
     });
   }
 

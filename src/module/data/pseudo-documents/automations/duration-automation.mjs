@@ -10,8 +10,14 @@ const { fields } = foundry.data;
  */
 export default class DurationAutomation extends CritAutomation {
   /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [
+    ...super.LOCALIZATION_PREFIXES,
+    "TERIOCK.AUTOMATIONS.DurationAutomation",
+  ];
+
+  /** @inheritDoc */
   static get LABEL() {
-    return "Duration";
+    return "TERIOCK.AUTOMATIONS.DurationAutomation.LABEL";
   }
 
   /** @inheritDoc */
@@ -22,16 +28,10 @@ export default class DurationAutomation extends CritAutomation {
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      duration: new EvaluationField({
-        model: TimeUnitModel,
-        label: "Formula",
-        hint: "A formula that evaluates to a number of the specified unit.",
-      }),
+      duration: new EvaluationField({ model: TimeUnitModel }),
       mode: new fields.NumberField({
         choices: TERIOCK.options.effect.simpleChangeMode,
-        hint: "The arithmetic operation to apply to this effect's duration.",
         initial: 5,
-        label: "Mode",
       }),
     });
   }

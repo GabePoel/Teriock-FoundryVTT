@@ -21,8 +21,14 @@ export default function MacroAutomationMixin(Base) {
      */
     class MacroAutomation extends LabelAutomationMixin(Base) {
       /** @inheritDoc */
+      static LOCALIZATION_PREFIXES = [
+        ...super.LOCALIZATION_PREFIXES,
+        "TERIOCK.AUTOMATIONS.MacroAutomation",
+      ];
+
+      /** @inheritDoc */
       static get LABEL() {
-        return "Macro";
+        return "TERIOCK.AUTOMATIONS.MacroAutomation.LABEL";
       }
 
       /**
@@ -43,10 +49,7 @@ export default function MacroAutomationMixin(Base) {
       /** @inheritDoc */
       static defineSchema() {
         const schema = Object.assign(super.defineSchema(), {
-          macro: new fields.DocumentUUIDField({
-            type: "Macro",
-            label: "Macro",
-          }),
+          macro: new fields.DocumentUUIDField({ type: "Macro" }),
         });
         if (Object.keys(this._pseudoHookChoices).length > 0) {
           Object.assign(schema, {
@@ -56,13 +59,10 @@ export default function MacroAutomationMixin(Base) {
                 pseudoHook: "Hook",
               },
               initial: "button",
-              label: "Relation",
-              hint: "Whether this macro can be run as a button from the chat message or hooks into other behavior.",
+              label: "TERIOCK.AUTOMATIONS.BaseAutomation.FIELDS.relation.label",
             }),
             pseudoHook: new fields.StringField({
               choices: this._pseudoHookChoices,
-              label: "Hook",
-              hint: "The hook that executes this macro when fired.",
             }),
           });
         }

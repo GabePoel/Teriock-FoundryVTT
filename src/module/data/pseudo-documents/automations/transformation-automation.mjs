@@ -7,7 +7,7 @@ import CritAutomation from "./crit-automation.mjs";
 export default class TransformationAutomation extends CritAutomation {
   /** @inheritDoc */
   static get LABEL() {
-    return "Transformation";
+    return "TERIOCK.AUTOMATIONS.TransformationAutomation.LABEL";
   }
 
   /** @inheritDoc */

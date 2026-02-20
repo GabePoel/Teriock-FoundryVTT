@@ -5,7 +5,9 @@ import { LabelAutomationMixin } from "./mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
+//noinspection JSClosureCompilerSyntax
 /**
+ * @extends {BaseAutomation}
  * @property {Teriock.Parameters.Consequence.RollConsequenceKey} roll
  * @property {string} formula
  * @property {boolean} merge
@@ -14,8 +16,14 @@ export default class RollAutomation extends LabelAutomationMixin(
   BaseAutomation,
 ) {
   /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [
+    ...super.LOCALIZATION_PREFIXES,
+    "TERIOCK.AUTOMATIONS.RollAutomation",
+  ];
+
+  /** @inheritDoc */
   static get LABEL() {
-    return "Roll";
+    return "TERIOCK.ROLLS.Take.label";
   }
 
   /** @inheritDoc */
@@ -27,20 +35,13 @@ export default class RollAutomation extends LabelAutomationMixin(
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       roll: new fields.StringField({
-        label: "Type",
         choices: TERIOCK.options.consequence.rolls,
       }),
       formula: new FormulaField({
         nullable: true,
         deterministic: false,
-        label: "Formula",
-        hint: "The formula to use for the roll.",
       }),
-      merge: new fields.BooleanField({
-        label: "Merge",
-        hint: "Whether to merge this roll with other valid rolls of the same type that have merging enabled.",
-        initial: true,
-      }),
+      merge: new fields.BooleanField({ initial: true }),
     });
   }
 

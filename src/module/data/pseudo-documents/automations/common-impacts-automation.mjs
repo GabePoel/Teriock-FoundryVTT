@@ -14,8 +14,14 @@ const { fields } = foundry.data;
  */
 export default class CommonImpactsAutomation extends BaseAutomation {
   /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [
+    ...super.LOCALIZATION_PREFIXES,
+    "TERIOCK.AUTOMATIONS.CommonImpactsAutomation",
+  ];
+
+  /** @inheritDoc */
   static get LABEL() {
-    return "Common Impacts";
+    return "TERIOCK.AUTOMATIONS.CommonImpactsAutomation.LABEL";
   }
 
   /** @inheritDoc */
@@ -30,10 +36,6 @@ export default class CommonImpactsAutomation extends BaseAutomation {
         new fields.StringField({
           choices: TERIOCK.options.consequence.common,
         }),
-        {
-          label: "Impacts",
-          hint: "Simple one-off effects that don't require customization.",
-        },
       ),
     });
   }

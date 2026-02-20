@@ -1,18 +1,192 @@
 {
+  "EFFECT.FIELDS.statuses.label": "Status Effects",
+  "GAME.Paused": "Hold",
   "TERIOCK": {
-    "SheetLabels": {
-      "Ability": "Teriock Ability Sheet",
-      "Body": "Teriock Body Part Sheet",
-      "Character": "Teriock Character Sheet",
-      "Creature": "Teriock Creature Sheet",
-      "Condition": "Teriock Condition Sheet",
-      "Consequence": "Teriock Consequence Sheet",
-      "Equipment": "Teriock Equipment Sheet",
-      "Fluency": "Teriock Fluency Sheet",
-      "Item": "Teriock Item Sheet",
-      "Rank": "Teriock Rank Sheet",
-      "Resource": "Teriock Resource Sheet",
-      "Mount": "Teriock Mount Sheet"
+    "AUTOMATIONS": {
+      "BaseAutomation": {
+        "FIELDS": {
+          "competencies": {
+            "label": "Competencies"
+          },
+          "heighten": {
+            "label": "Heightening"
+          },
+          "relation": {
+            "label": "Relation"
+          }
+        },
+        "TOOLTIPS": {
+          "crit": {
+            "base": {
+              "off": "Doesn't Apply on Non-Crit",
+              "on": "Applies on Non-Crit"
+            },
+            "critical": {
+              "off": "Doesn't Apply on Crit",
+              "on": "Applies on Crit"
+            }
+          },
+          "competence": {
+            "base": {
+              "off": "Doesn't Always Apply",
+              "on": "Always Applies"
+            },
+            "proficient": {
+              "off": "Doesn't Apply if Proficient",
+              "on": "Applies if Proficient"
+            },
+            "fluent": {
+              "off": "Doesn't Apply if Fluent",
+              "on": "Applies if Fluent"
+            }
+          },
+          "heighten": {
+            "base": {
+              "off": "Doesn't Apply if Unheightened",
+              "on": "Doesn't Apply "
+            },
+            "heightened": {
+              "off": "Doesn't Apply if Heightened",
+              "on": "Applies if Heightened"
+            }
+          }
+        }
+      },
+      "ChangesAutomation": {
+        "LABEL": "Changes"
+      },
+      "ChatStatusAutomation": {
+        "FIELDS": {
+          "executor": {
+            "label": "Associate Executor",
+            "hint": "Whether the creature that executes the ability will be associated with this condition."
+          },
+          "relation": {
+            "hint": "What the relationship between the effect and condition is."
+          },
+          "target": {
+            "hint": "Whether to open a dialog to select tokens that will be associated with this condition.",
+            "label": "Select Associations"
+          }
+        }
+      },
+      "CombatExpirationAutomation": {
+        "LABEL": "Combat Expiration"
+      },
+      "CommonImpactsAutomation": {
+        "FIELDS": {
+          "common": {
+            "label": "Impacts",
+            "hint": "Simple one-off effects that don't require customization."
+          }
+        },
+        "LABEL": "Common Impacts"
+      },
+      "DurationAutomation": {
+        "FIELDS": {
+          "duration": {
+            "hint": "A formula that evaluates to a number of the specified unit.",
+            "label": "Formula"
+          },
+          "mode": {
+            "hint": "The arithmetic operation to apply to this effect's duration.",
+            "label": "Mode"
+          }
+        },
+        "LABEL": "Duration"
+      },
+      "HacksAutomation": {
+        "FIELDS": {
+          "hacks": {
+            "hint": "The types of hack damage that this can apply."
+          },
+          "reverse": {
+            "hint": "Remove hacks instead of adding them.",
+            "label": "Reverse"
+          }
+        },
+        "LABEL": "Hacks"
+      },
+      "MacroAutomation": {
+        "FIELDS": {
+          "macro": {
+            "label": "Macro"
+          },
+          "relation": {
+            "hint": "Whether this macro can be run as a button from the chat message or hooks into other behavior."
+          },
+          "pseudoHook": {
+            "hint": "The hook that executes this macro when fired.",
+            "label": "Hook"
+          }
+        },
+        "LABEL": "Macro"
+      },
+      "ResistAutomation": {
+        "FIELDS": {
+          "hex": {
+            "hint": "Whether this is a hexproof roll."
+          }
+        }
+      },
+      "RollAutomation": {
+        "FIELDS": {
+          "formula": {
+            "hint": "The formula to use for the roll.",
+            "label": "Formula"
+          },
+          "merge": {
+            "hint": "Whether to merge this roll with other valid rolls of the same type that have merging enabled.",
+            "label": "Merge"
+          },
+          "roll": {
+            "label": "Type"
+          }
+        }
+      },
+      "StatusAutomation": {
+        "FIELDS": {
+          "relation": {
+            "hint": "Apply, remove, toggle, or include the condition as part of the ability's effect."
+          }
+        }
+      },
+      "TakeAutomation": {
+        "FIELDS": {
+          "amount": {
+            "hint": "A numerical amount of the effect to take. Leave blank to have it be the result of the roll.",
+            "label": "Amount"
+          },
+          "take": {
+            "label": "Type"
+          }
+        },
+        "LABEL": "Take Effect"
+      },
+      "ThresholdAutomation": {
+        "FIELDS": {
+          "bonus": {
+            "hint": "Formula that defines a bonus that gets added to the roll. Can be negative.",
+            "label": "Bonus"
+          },
+          "threshold": {
+            "hint": "Formula that defines the DC for this roll. Can be left blank.",
+            "label": "Threshold"
+          }
+        }
+      },
+      "TransformationAutomation": {
+        "LABEL": "Transformation"
+      },
+      "UseAbilitiesAutomation": {
+        "FIELDS": {
+          "abilityNames": {
+            "label": "Abilities",
+            "hint": "Abilities that this can directly cause the execution of."
+          }
+        },
+        "LABEL": "Use Abilities"
+      }
     },
     "MODELS": {
       "Identification": {
@@ -53,17 +227,127 @@
           },
           "maxCount": {
             "hint": "The maximum number of other pieces of equipment this can store.",
-            "label": "Maximum Count"
+            "label": "Maximum Count",
+            "over": "Over Maximum Number of Items Carried",
+            "under": "Maximum Number of Items Carried"
           },
           "maxWeight": {
             "hint": "The maximum weight this can store.",
-            "label": "Maximum Weight"
+            "label": "Maximum Weight",
+            "over": "Over Maximum Weight Carried",
+            "under": "Maximum Weight Carried"
           },
           "weightMultiplier": {
             "hint": "An amount to multiply the weight of all things this stores by.",
             "label": "Weight Multiplier"
           }
         }
+      }
+    },
+    "SCHEMA": {
+      "Transformation": {
+        "enabled": {
+          "hint": "Whether this effect causes a transformation. Note that this isn't just for \"transformation effect\"s, but for any case in which another species' stats should be applied (such as animating as an undead).",
+          "label": "Causes Transformation"
+        },
+        "level": {
+          "hint": "How strong of a transformation this is.",
+          "label": "Transformation Level"
+        },
+        "image": {
+          "hint": "Optional overriding art to apply to the target.",
+          "label": "Token Art"
+        },
+        "multiple": {
+          "hint": "Allow selection of multiple species to transform into at the same time.",
+          "label": "Multiple Selection"
+        },
+        "resetHp": {
+          "hint": "Reset HP upon transformation.",
+          "label": "Reset HP"
+        },
+        "resetMp": {
+          "hint": "Reset MP upon transformation.",
+          "label": "Reset MP"
+        },
+        "suppression": {
+          "bodyParts": {
+            "hint": "Whether this should suppress body parts not provided by the transformation.",
+            "label": "Suppress Body Parts"
+          },
+          "equipment": {
+            "hint": "Whether this should suppress equipment not provided by the transformation.",
+            "label": "Suppress Equipment"
+          },
+          "fluencies": {
+            "hint": "Whether this should suppress fluencies not provided by the transformation.",
+            "label": "Suppress Fluencies"
+          },
+          "ranks": {
+            "hint": "Whether this should suppress ranks not provided by the transformation.",
+            "label": "Suppress Ranks"
+          }
+        },
+        "uuids": {
+          "hint": "The species this transforms the target into.",
+          "itemHint": "A specific species this transforms the target into.",
+          "label": "Species"
+        },
+        "select": {
+          "hint": "Select a subset of the species to turn into instead of all of them.",
+          "label": "Select"
+        },
+        "useFolder": {
+          "hint": "Use a folder of species instead of defining each individually.",
+          "label": "Use Folder"
+        },
+        "folder": {
+          "hint": "The folder of candidate species to transform into.",
+          "label": "Folder"
+        }
+      },
+      "CombatExpiration": {
+        "who": {
+          "hint": "Whose turn should this effect attempt to expire on?",
+          "label": "Who"
+        },
+        "what": {
+          "roll": {
+            "hint": "If this expires on a roll, what is the roll that needs to be made?",
+            "label": "Roll"
+          },
+          "threshold": {
+            "hint": "What is the minimum value that needs to be rolled in order for this to expire?",
+            "label": "Threshold"
+          },
+          "type": {
+            "hint": "What is the type of thing that causes this to expire?",
+            "label": "What"
+          }
+        },
+        "when": {
+          "skip": {
+            "hint": "A number of instances of the trigger firing to skip before this effect expires.",
+            "label": "Skip"
+          },
+          "time": {
+            "hint": "What is the timing for the trigger of this effect expiring?",
+            "label": "When"
+          },
+          "trigger": {
+            "hint": "What is the trigger for this effect expiring?",
+            "label": "Trigger"
+          }
+        }
+      },
+      "QualifiedChange": {
+        "key": {"label": "Key"},
+        "mode": {"label": "Mode"},
+        "priority": {"label": "Priority"},
+        "time": {"label": "Timing"},
+        "target": {"label": "Target Document Type"},
+        "value": {"label": "Value"},
+        "qualifier": {"label": "Qualifier"}
       }
     },
     "SYSTEMS": {
@@ -356,111 +640,45 @@
         }
       }
     },
-    "SCHEMA": {
-      "Transformation": {
-        "enabled": {
-          "hint": "Whether this effect causes a transformation. Note that this isn't just for \"transformation effect\"s, but for any case in which another species' stats should be applied (such as animating as an undead).",
-          "label": "Causes Transformation"
-        },
-        "level": {
-          "hint": "How strong of a transformation this is.",
-          "label": "Transformation Level"
-        },
-        "image": {
-          "hint": "Optional overriding art to apply to the target.",
-          "label": "Token Art"
-        },
-        "multiple": {
-          "hint": "Allow selection of multiple species to transform into at the same time.",
-          "label": "Multiple Selection"
-        },
-        "resetHp": {
-          "hint": "Reset HP upon transformation.",
-          "label": "Reset HP"
-        },
-        "resetMp": {
-          "hint": "Reset MP upon transformation.",
-          "label": "Reset MP"
-        },
-        "suppression": {
-          "bodyParts": {
-            "hint": "Whether this should suppress body parts not provided by the transformation.",
-            "label": "Suppress Body Parts"
-          },
-          "equipment": {
-            "hint": "Whether this should suppress equipment not provided by the transformation.",
-            "label": "Suppress Equipment"
-          },
-          "fluencies": {
-            "hint": "Whether this should suppress fluencies not provided by the transformation.",
-            "label": "Suppress Fluencies"
-          },
-          "ranks": {
-            "hint": "Whether this should suppress ranks not provided by the transformation.",
-            "label": "Suppress Ranks"
-          }
-        },
-        "uuids": {
-          "hint": "The species this transforms the target into.",
-          "itemHint": "A specific species this transforms the target into.",
-          "label": "Species"
-        },
-        "select": {
-          "hint": "Select a subset of the species to turn into instead of all of them.",
-          "label": "Select"
-        },
-        "useFolder": {
-          "hint": "Use a folder of species instead of defining each individually.",
-          "label": "Use Folder"
-        },
-        "folder": {
-          "hint": "The folder of candidate species to transform into.",
-          "label": "Folder"
-        }
-      },
-      "CombatExpiration": {
-        "who": {
-          "hint": "Whose turn should this effect attempt to expire on?",
-          "label": "Who"
-        },
-        "what": {
-          "roll": {
-            "hint": "If this expires on a roll, what is the roll that needs to be made?",
-            "label": "Roll"
-          },
-          "threshold": {
-            "hint": "What is the minimum value that needs to be rolled in order for this to expire?",
-            "label": "Threshold"
-          },
-          "type": {
-            "hint": "What is the type of thing that causes this to expire?",
-            "label": "What"
-          }
-        },
-        "when": {
-          "skip": {
-            "hint": "A number of instances of the trigger firing to skip before this effect expires.",
-            "label": "Skip"
-          },
-          "time": {
-            "hint": "What is the timing for the trigger of this effect expiring?",
-            "label": "When"
-          },
-          "trigger": {
-            "hint": "What is the trigger for this effect expiring?",
-            "label": "Trigger"
-          }
-        }
-      },
-      "QualifiedChange": {
-        "key": { "label": "Key" },
-        "mode": { "label": "Mode" },
-        "priority": { "label": "Priority" },
-        "time": { "label": "Timing" },
-        "target": { "label": "Target Document Type" },
-        "value": { "label": "Value" },
-        "qualifier": { "label": "Qualifier" }
+    "TERMS": {
+      "Common": {
+        "attribute": "Attribute",
+        "condition": "Condition",
+        "hacks": "Hacks",
+        "hexproof": "Hexproof",
+        "tradecraft": "Tradecraft"
       }
+    },
+    "ROLLS": {
+      "Take": {
+        "label": "Effect Roll"
+      },
+      "Attack": {
+        "label": "Attack Roll"
+      },
+      "Feat": {
+        "label": "Feat Save"
+      },
+      "Tradecraft": {
+        "label": "Tradecraft Check"
+      },
+      "Resist": {
+        "label": "Resistance Save"
+      }
+    },
+    "SheetLabels": {
+      "Ability": "Teriock Ability Sheet",
+      "Body": "Teriock Body Part Sheet",
+      "Character": "Teriock Character Sheet",
+      "Creature": "Teriock Creature Sheet",
+      "Condition": "Teriock Condition Sheet",
+      "Consequence": "Teriock Consequence Sheet",
+      "Equipment": "Teriock Equipment Sheet",
+      "Fluency": "Teriock Fluency Sheet",
+      "Item": "Teriock Item Sheet",
+      "Rank": "Teriock Rank Sheet",
+      "Resource": "Teriock Resource Sheet",
+      "Mount": "Teriock Mount Sheet"
     }
   },
   "TYPES": {
@@ -496,6 +714,5 @@
       "damage": "Damage Type",
       "drain": "Drain Type"
     }
-  },
-  "GAME.Paused": "Hold"
+  }
 }

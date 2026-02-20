@@ -12,8 +12,14 @@ export default class TakeAutomation extends LabelAutomationMixin(
   BaseAutomation,
 ) {
   /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [
+    ...super.LOCALIZATION_PREFIXES,
+    "TERIOCK.AUTOMATIONS.TakeAutomation",
+  ];
+
+  /** @inheritDoc */
   static get LABEL() {
-    return "Take";
+    return "TERIOCK.AUTOMATIONS.TakeAutomation.LABEL";
   }
 
   /** @inheritDoc */
@@ -25,14 +31,9 @@ export default class TakeAutomation extends LabelAutomationMixin(
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       take: new fields.StringField({
-        label: "Type",
         choices: TERIOCK.options.consequence.rolls,
       }),
-      amount: new fields.NumberField({
-        label: "Amount",
-        hint: "A numerical amount of the effect to take. Leave blank to have it be the result of the roll.",
-        nullable: true,
-      }),
+      amount: new fields.NumberField({ nullable: true }),
     });
   }
 

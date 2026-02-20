@@ -8,6 +8,12 @@ const { fields } = foundry.data;
  * @implements {Teriock.Models.BaseAutomationInterface}
  */
 export default class BaseAutomation extends TypedPseudoDocument {
+  /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [
+    ...super.LOCALIZATION_PREFIXES,
+    "TERIOCK.AUTOMATIONS.BaseAutomation",
+  ];
+
   /**
    * @inheritDoc
    * @returns {{ documentName: "Automation", macro: boolean }}

@@ -152,11 +152,16 @@ export function mix(Base, ...Mixins) {
  * Sort an object by its keys.
  * @template T
  * @param {T} obj
+ * @param {object} [options]
+ * @param {boolean} [options.value]
  * @returns {T}
  */
-export function sortObject(obj) {
+export function sortObject(obj, options = {}) {
+  const sortIndex = options.value ? 1 : 0;
   return Object.fromEntries(
-    Object.entries(obj).sort((a, b) => a[0].localeCompare(b[0])),
+    Object.entries(obj).sort((a, b) => {
+      return a[sortIndex].toString().localeCompare(b[sortIndex].toString());
+    }),
   );
 }
 

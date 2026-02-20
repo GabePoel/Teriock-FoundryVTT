@@ -5,8 +5,14 @@ const { fields } = foundry.data;
 
 export default class ResistAutomation extends ThresholdAutomation {
   /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [
+    ...super.LOCALIZATION_PREFIXES,
+    "TERIOCK.AUTOMATIONS.ResistAutomation",
+  ];
+
+  /** @inheritDoc */
   static get LABEL() {
-    return "Resistance Save";
+    return "TERIOCK.ROLLS.Resist.label";
   }
 
   /** @inheritDoc */
@@ -18,8 +24,7 @@ export default class ResistAutomation extends ThresholdAutomation {
   static defineSchema() {
     const schema = Object.assign(super.defineSchema(), {
       hex: new fields.BooleanField({
-        label: "Hexproof",
-        hint: "Whether this is a hexproof roll.",
+        label: "TERIOCK.TERMS.Common.hexproof",
       }),
     });
     delete schema.threshold;

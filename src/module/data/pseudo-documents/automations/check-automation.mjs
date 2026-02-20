@@ -6,7 +6,7 @@ const { fields } = foundry.data;
 export default class CheckAutomation extends ThresholdAutomation {
   /** @inheritDoc */
   static get LABEL() {
-    return "Tradecraft Check";
+    return "TERIOCK.ROLLS.Tradecraft.label";
   }
 
   /** @inheritDoc */
@@ -19,7 +19,7 @@ export default class CheckAutomation extends ThresholdAutomation {
     return Object.assign(super.defineSchema(), {
       tradecraft: new fields.StringField({
         choices: TERIOCK.index.tradecrafts,
-        label: "Tradecraft",
+        label: "TERIOCK.TERMS.Common.tradecraft",
       }),
     });
   }

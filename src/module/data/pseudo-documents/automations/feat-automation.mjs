@@ -6,7 +6,7 @@ const { fields } = foundry.data;
 export default class FeatAutomation extends ThresholdAutomation {
   /** @inheritDoc */
   static get LABEL() {
-    return "Feat Save";
+    return "TERIOCK.ROLLS.Feat.label";
   }
 
   /** @inheritDoc */
@@ -19,7 +19,7 @@ export default class FeatAutomation extends ThresholdAutomation {
     return Object.assign(super.defineSchema(), {
       attribute: new fields.StringField({
         choices: TERIOCK.index.attributesFull,
-        label: "Attribute",
+        label: "TERIOCK.TERMS.Common.attribute",
       }),
     });
   }

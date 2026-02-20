@@ -8,8 +8,14 @@ const { fields } = foundry.data;
  */
 export default class UseAbilitiesAutomation extends BaseAutomation {
   /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [
+    ...super.LOCALIZATION_PREFIXES,
+    "TERIOCK.AUTOMATIONS.UseAbilitiesAutomation",
+  ];
+
+  /** @inheritDoc */
   static get LABEL() {
-    return "Use Abilities";
+    return "TERIOCK.AUTOMATIONS.UseAbilitiesAutomation.LABEL";
   }
 
   /** @inheritDoc */
@@ -20,10 +26,7 @@ export default class UseAbilitiesAutomation extends BaseAutomation {
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      abilityNames: new fields.SetField(new fields.StringField(), {
-        label: "Abilities",
-        hint: "Abilities that this can directly cause the execution of.",
-      }),
+      abilityNames: new fields.SetField(new fields.StringField()),
     });
   }
 

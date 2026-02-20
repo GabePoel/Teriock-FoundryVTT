@@ -1,4 +1,5 @@
 import { BaseAutomation } from "../../../../../data/pseudo-documents/automations/_module.mjs";
+import { localizeChoices } from "../../../../../helpers/localization.mjs";
 import { objectMap } from "../../../../../helpers/utils.mjs";
 import { selectDialog } from "../../../../dialogs/select-dialog.mjs";
 
@@ -27,9 +28,12 @@ export default (Base) => {
        */
       static async _onCreateAutomation() {
         //noinspection JSUnresolvedReference
-        const choices = objectMap(
-          this.document.system.constructor.automationTypes,
-          (a) => a.LABEL,
+        const choices = localizeChoices(
+          objectMap(
+            this.document.system.constructor.automationTypes,
+            (a) => a.LABEL,
+          ),
+          { sort: true },
         );
         if (Object.keys(choices).length === 0) return;
         let choice;

@@ -14,8 +14,16 @@
         TERIOCK.display.colors.red
         null
       )
-      tooltip=(concat
-        (ifThen system.storage.isOverCountCapacity "Over " "") "Maximum Number of Items Carried")
+      tooltip=(localize
+        (concat
+          "TERIOCK.MODELS.Storage.FIELDS.maxCount."
+          (ifThen
+            system.storage.isOverCountCapacity
+            "over"
+            "under"
+          )
+        )
+      )
     }}
     {{formBox
       (formInput
@@ -31,8 +39,16 @@
         TERIOCK.display.colors.red
         null
       )
-      tooltip=(concat
-        (ifThen system.storage.isOverWeightCapacity "Over " "") "Maximum Weight Carried")
+      tooltip=(localize
+        (concat
+          "TERIOCK.MODELS.Storage.FIELDS.maxWeight."
+          (ifThen
+            system.storage.isOverWeightCapacity
+            "over"
+            "under"
+          )
+        )
+      )
     }}
     {{formBox
       (formInput

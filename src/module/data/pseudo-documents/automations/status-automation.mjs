@@ -9,6 +9,12 @@ const { fields } = foundry.data;
  */
 export default class StatusAutomation extends ChatStatusAutomation {
   /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [
+    ...super.LOCALIZATION_PREFIXES,
+    "TERIOCK.AUTOMATIONS.StatusAutomation",
+  ];
+
+  /** @inheritDoc */
   static get TYPE() {
     return "status";
   }
@@ -20,13 +26,6 @@ export default class StatusAutomation extends ChatStatusAutomation {
     };
   }
 
-  static get _relationHint() {
-    return (
-      super._relationHint +
-      " Apply, remove, toggle, or include the condition as part of the ability's effect."
-    );
-  }
-
   static get _relationInitial() {
     return "include";
   }
@@ -34,14 +33,8 @@ export default class StatusAutomation extends ChatStatusAutomation {
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      target: new fields.BooleanField({
-        label: "Select Associations",
-        hint: "Whether to open a dialog to select tokens that will be associated with this condition.",
-      }),
-      executor: new fields.BooleanField({
-        label: "Associate Executor",
-        hint: "Whether the creature that executes the ability will be associated with this condition.",
-      }),
+      executor: new fields.BooleanField(),
+      target: new fields.BooleanField(),
     });
   }
 

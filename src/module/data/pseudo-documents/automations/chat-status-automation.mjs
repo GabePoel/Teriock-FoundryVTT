@@ -13,8 +13,14 @@ const { fields } = foundry.data;
  */
 export default class ChatStatusAutomation extends CritAutomation {
   /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [
+    ...super.LOCALIZATION_PREFIXES,
+    "TERIOCK.AUTOMATIONS.ChatStatusAutomation",
+  ];
+
+  /** @inheritDoc */
   static get LABEL() {
-    return "Condition";
+    return "TERIOCK.TERMS.Common.condition";
   }
 
   /** @inheritDoc */
@@ -33,10 +39,6 @@ export default class ChatStatusAutomation extends CritAutomation {
     };
   }
 
-  static get _relationHint() {
-    return "What the relationship between the effect and condition is.";
-  }
-
   static get _relationInitial() {
     return "apply";
   }
@@ -46,14 +48,13 @@ export default class ChatStatusAutomation extends CritAutomation {
     return Object.assign(super.defineSchema(), {
       status: new fields.StringField({
         choices: TERIOCK.index.conditions,
-        label: "Condition",
+        label: "TERIOCK.TERMS.Common.condition",
       }),
       relation: new fields.StringField({
         choices: this._relationChoices,
         initial: this._relationInitial,
+        label: "TERIOCK.AUTOMATIONS.BaseAutomation.FIELDS.relation.label",
         nullable: false,
-        label: "Relation",
-        hint: this._relationHint,
       }),
     });
   }

@@ -3,17 +3,21 @@
     class="teriock-automation-header"
     data-action="toggle-collapse"
   >
-    <div class="teriock-automation-header-name">{{{automation.label}}}</div>
+    <div class="teriock-automation-header-name">{{localize automation.label}}</div>
     <div class="teriock-automation-header-buttons">
       {{#if automation.canCrit}}
         <div class="teriock-automation-header-button-group">
           <button
             id="{{automation.uuid}}.noncrit"
-            data-tooltip="Applies on Non-Crit"
             data-action="setToggle"
             data-type="number"
             data-term="0"
-            {{#if (has automation.crit 0)}}data-present="true"{{/if}}
+            {{#if (has automation.crit 0)}}
+            data-present="true"
+            data-tooltip="{{localize "TERIOCK.AUTOMATIONS.BaseAutomation.TOOLTIPS.crit.base.on"}}"
+            {{else}}
+            data-tooltip="{{localize "TERIOCK.AUTOMATIONS.BaseAutomation.TOOLTIPS.crit.base.off"}}"
+            {{/if}}
             data-path="{{automation.fieldPath}}.{{automation.id}}.crit"
             name="_source.{{automation.fieldPath}}.{{automation.id}}.crit"
           >
@@ -25,11 +29,15 @@
           </button>
           <button
             id="{{automation.uuid}}.crit"
-            data-tooltip="Applies on Crit"
             data-action="setToggle"
             data-type="number"
             data-term="1"
-            {{#if (has automation.crit 1)}}data-present="true"{{/if}}
+            {{#if (has automation.crit 1)}}
+            data-present="true"
+            data-tooltip="{{localize "TERIOCK.AUTOMATIONS.BaseAutomation.TOOLTIPS.crit.critical.on"}}"
+            {{else}}
+            data-tooltip="{{localize "TERIOCK.AUTOMATIONS.BaseAutomation.TOOLTIPS.crit.critical.off"}}"
+            {{/if}}
             data-path="{{automation.fieldPath}}.{{automation.id}}.crit"
             name="_source.{{automation.fieldPath}}.{{automation.id}}.crit"
           >
@@ -50,9 +58,9 @@
             data-term="0"
             {{#if (has automation.competencies 0)}}
             data-present="true"
-            data-tooltip="Always Applies"
+            data-tooltip="{{localize "TERIOCK.AUTOMATIONS.BaseAutomation.TOOLTIPS.competence.base.on"}}"
             {{else}}
-            data-tooltip="Doesn't Always Apply"
+            data-tooltip="{{localize "TERIOCK.AUTOMATIONS.BaseAutomation.TOOLTIPS.competence.base.off"}}"
             {{/if}}
             data-path="{{automation.fieldPath}}.{{automation.id}}.competencies"
             name="_source.{{automation.fieldPath}}.{{automation.id}}.competencies"
@@ -70,9 +78,9 @@
             data-term="1"
             {{#if (has automation.competencies 1)}}
             data-present="true"
-            data-tooltip="Applies if Proficient"
+            data-tooltip="{{localize "TERIOCK.AUTOMATIONS.BaseAutomation.TOOLTIPS.competence.proficient.on"}}"
             {{else}}
-            data-tooltip="Doesn't Apply if Proficient"
+            data-tooltip="{{localize "TERIOCK.AUTOMATIONS.BaseAutomation.TOOLTIPS.competence.proficient.off"}}"
             {{/if}}
             data-path="{{automation.fieldPath}}.{{automation.id}}.competencies"
             name="_source.{{automation.fieldPath}}.{{automation.id}}.competencies"
@@ -90,9 +98,9 @@
             data-term="2"
             {{#if (has automation.competencies 2)}}
             data-present="true"
-            data-tooltip="Applies if Fluent"
+            data-tooltip="{{localize "TERIOCK.AUTOMATIONS.BaseAutomation.TOOLTIPS.competence.fluent.on"}}"
             {{else}}
-            data-tooltip="Doesn't Apply if Fluent"
+            data-tooltip="{{localize "TERIOCK.AUTOMATIONS.BaseAutomation.TOOLTIPS.competence.fluent.off"}}"
             {{/if}}
             data-path="{{automation.fieldPath}}.{{automation.id}}.competencies"
             name="_source.{{automation.fieldPath}}.{{automation.id}}.competencies"
@@ -114,9 +122,9 @@
             data-term="0"
             {{#if (has automation.heighten 0)}}
             data-present="true"
-            data-tooltip="Applies if Unheightened"
+            data-tooltip="{{localize "TERIOCK.AUTOMATIONS.BaseAutomation.TOOLTIPS.heighten.base.on"}}"
             {{else}}
-            data-tooltip="Doesn't Apply if Unheightened"
+            data-tooltip="{{localize "TERIOCK.AUTOMATIONS.BaseAutomation.TOOLTIPS.heighten.base.off"}}"
             {{/if}}
             data-path="{{automation.fieldPath}}.{{automation.id}}.heighten"
             name="_source.{{automation.fieldPath}}.{{automation.id}}.heighten"
@@ -134,9 +142,9 @@
             data-term="1"
             {{#if (has automation.heighten 1)}}
             data-present="true"
-            data-tooltip="Applies if Heightened"
+            data-tooltip="{{localize "TERIOCK.AUTOMATIONS.BaseAutomation.TOOLTIPS.heighten.heightened.on"}}"
             {{else}}
-            data-tooltip="Doesn't Apply if Heightened"
+            data-tooltip="{{localize "TERIOCK.AUTOMATIONS.BaseAutomation.TOOLTIPS.heighten.heightened.off"}}"
             {{/if}}
             data-path="{{automation.fieldPath}}.{{automation.id}}.heighten"
             name="_source.{{automation.fieldPath}}.{{automation.id}}.heighten"

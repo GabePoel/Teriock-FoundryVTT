@@ -11,7 +11,7 @@ const { fields } = foundry.data;
 export default class CombatExpirationAutomation extends CritAutomation {
   /** @inheritDoc */
   static get LABEL() {
-    return "Combat Expiration";
+    return "TERIOCK.AUTOMATIONS.CombatExpirationAutomation.LABEL";
   }
 
   /** @inheritDoc */
