@@ -26,45 +26,72 @@ export default async function refreshFromCompendiumDialog(doc) {
       );
     figureElement.style.margin = "0";
   } else {
-    sourceEmbedElement.innerHTML = await TeriockTextEditor.enrichHTML(
-      `<p>@UUID[${doc.uuid}] has no compendium source set.</p>`,
+    const noSourceText = game.i18n.format(
+      "TERIOCK.DIALOGS.RefreshFromCompendium.noSource",
+      { document: `@UUID[${doc.uuid}]` },
     );
+    sourceEmbedElement.innerHTML =
+      await TeriockTextEditor.enrichHTML(noSourceText);
   }
   const sourceLegendElement = document.createElement("legend");
-  sourceLegendElement.innerText = "Source Document";
+  sourceLegendElement.innerText = game.i18n.localize(
+    "TERIOCK.DIALOGS.RefreshFromCompendium.sourceLegend",
+  );
   sourceEmbedElement.insertAdjacentElement("afterbegin", sourceLegendElement);
   const contentElement = document.createElement("div");
   contentElement.append(sourceEmbedElement);
   const optionsElement = document.createElement("fieldset");
   const optionsLegendElement = document.createElement("legend");
-  optionsLegendElement.innerText = "Refresh Options";
+  optionsLegendElement.innerText = game.i18n.localize(
+    "TERIOCK.DIALOGS.RefreshFromCompendium.optionsLegend",
+  );
   optionsElement.append(optionsLegendElement);
   contentElement.append(optionsElement);
   let fields = {
     updateDocument: new BooleanField({
-      label: "Update Document",
+      label: game.i18n.localize(
+        "TERIOCK.DIALOGS.RefreshFromCompendium.FIELDS.updateDocument.label",
+      ),
       initial: true,
-      hint: "If checked, will update local document to match the compendium source.",
+      hint: game.i18n.localize(
+        "TERIOCK.DIALOGS.RefreshFromCompendium.FIELDS.updateDocument.hint",
+      ),
     }),
     deleteChildren: new BooleanField({
-      label: "Delete Children",
+      label: game.i18n.localize(
+        "TERIOCK.DIALOGS.RefreshFromCompendium.FIELDS.deleteChildren.label",
+      ),
       initial: true,
-      hint: "If checked, will delete children that aren't present in the compendium source.",
+      hint: game.i18n.localize(
+        "TERIOCK.DIALOGS.RefreshFromCompendium.FIELDS.deleteChildren.hint",
+      ),
     }),
     createChildren: new BooleanField({
-      label: "Create Children",
+      label: game.i18n.localize(
+        "TERIOCK.DIALOGS.RefreshFromCompendium.FIELDS.createChildren.label",
+      ),
       initial: !(doc.type === "rank" && doc.system.classRank >= 3),
-      hint: "If checked, will create children that aren't present in the local document.",
+      hint: game.i18n.localize(
+        "TERIOCK.DIALOGS.RefreshFromCompendium.FIELDS.createChildren.hint",
+      ),
     }),
     updateChildren: new BooleanField({
-      label: "Update Children",
+      label: game.i18n.localize(
+        "TERIOCK.DIALOGS.RefreshFromCompendium.FIELDS.updateChildren.label",
+      ),
       initial: true,
-      hint: "If checked, will update children to match the compendium source.",
+      hint: game.i18n.localize(
+        "TERIOCK.DIALOGS.RefreshFromCompendium.FIELDS.updateChildren.hint",
+      ),
     }),
     recursive: new BooleanField({
-      label: "Refresh Recursively",
+      label: game.i18n.localize(
+        "TERIOCK.DIALOGS.RefreshFromCompendium.FIELDS.recursive.label",
+      ),
       initial: true,
-      hint: "If checked, refreshes will apply recursively.",
+      hint: game.i18n.localize(
+        "TERIOCK.DIALOGS.RefreshFromCompendium.FIELDS.recursive.hint",
+      ),
     }),
   };
   for (const [key, field] of Object.entries(fields)) {
@@ -84,14 +111,18 @@ export default async function refreshFromCompendiumDialog(doc) {
         await doc.system.refreshFromCompendiumSource(options);
       },
       icon: makeIconClass("check", "button"),
-      label: "Refresh",
+      label: game.i18n.localize(
+        "TERIOCK.DIALOGS.RefreshFromCompendium.BUTTONS.refresh",
+      ),
     },
     position: {
       width: 450,
     },
     window: {
       icon: makeIconClass("book-atlas", "title"),
-      title: `Refresh ${doc.nameString} From Compendium`,
+      title: game.i18n.format("TERIOCK.DIALOGS.RefreshFromCompendium.title", {
+        name: doc.nameString,
+      }),
     },
   });
 }

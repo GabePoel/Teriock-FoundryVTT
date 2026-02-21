@@ -29,11 +29,11 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
 export async function selectDialog(choices, options = {}) {
   const {
     initial = null,
-    label = "Select",
-    hint = "Please select an option above.",
+    label = game.i18n.localize("TERIOCK.DIALOGS.Select.defaults.label"),
+    hint = game.i18n.localize("TERIOCK.DIALOGS.Select.defaults.hint"),
     hintHtml = "",
     hintTitle = "",
-    title = "Select",
+    title = game.i18n.localize("TERIOCK.DIALOGS.Select.defaults.title"),
     other = false,
     genericOther = true,
     icon = "circle-question",
@@ -110,7 +110,7 @@ export async function selectDialog(choices, options = {}) {
     buttons: [
       {
         action: "other",
-        label: "Other",
+        label: game.i18n.localize("TERIOCK.DIALOGS.Select.otherButton"),
         callback: async (_event, _button, dialog) => {
           dialog.classList.add("force-hidden");
           if (genericOther) {
@@ -141,9 +141,9 @@ export async function selectDialog(choices, options = {}) {
  */
 export async function selectEquipmentClassDialog() {
   return await selectDialog(TERIOCK.index.equipmentClasses, {
-    label: "Equipment Class",
-    hint: "Please select an equipment class.",
-    title: "Select Equipment Class",
+    label: game.i18n.localize("TERIOCK.DIALOGS.Select.EquipmentClass.label"),
+    hint: game.i18n.localize("TERIOCK.DIALOGS.Select.EquipmentClass.hint"),
+    title: game.i18n.localize("TERIOCK.DIALOGS.Select.EquipmentClass.title"),
   });
 }
 
@@ -153,9 +153,9 @@ export async function selectEquipmentClassDialog() {
  */
 export async function selectWeaponClassDialog() {
   return await selectDialog(TERIOCK.index.weaponClasses, {
-    label: "Weapon Class",
-    hint: "Please select a weapon class.",
-    title: "Select Weapon Class",
+    label: game.i18n.localize("TERIOCK.DIALOGS.Select.WeaponClass.label"),
+    hint: game.i18n.localize("TERIOCK.DIALOGS.Select.WeaponClass.hint"),
+    title: game.i18n.localize("TERIOCK.DIALOGS.Select.WeaponClass.title"),
   });
 }
 
@@ -165,9 +165,9 @@ export async function selectWeaponClassDialog() {
  */
 export async function selectConditionDialog() {
   return await selectDialog(TERIOCK.index.conditions, {
-    label: "Condition",
-    hint: "Please select a condition.",
-    title: "Select Condition",
+    label: game.i18n.localize("TERIOCK.DIALOGS.Select.Condition.label"),
+    hint: game.i18n.localize("TERIOCK.DIALOGS.Select.Condition.hint"),
+    title: game.i18n.localize("TERIOCK.DIALOGS.Select.Condition.title"),
   });
 }
 
@@ -179,8 +179,8 @@ export async function selectPropertyDialog() {
   return (
     await resolveDocument(
       await selectDocumentDialog(game.teriock.packs.properties.index.contents, {
-        hint: "Please select a property.",
-        title: "Select Property",
+        hint: game.i18n.localize("TERIOCK.DIALOGS.Select.Property.hint"),
+        title: game.i18n.localize("TERIOCK.DIALOGS.Select.Property.title"),
         tooltipAsync: true,
         openable: true,
       }),
@@ -204,8 +204,8 @@ export async function selectTradecraftDialog() {
     }),
   );
   const chosen = await selectDocumentDialog(choices, {
-    hint: "Please select a tradecraft.",
-    title: "Select Tradecraft",
+    hint: game.i18n.localize("TERIOCK.DIALOGS.Select.Tradecraft.hint"),
+    title: game.i18n.localize("TERIOCK.DIALOGS.Select.Tradecraft.title"),
     tooltipKey: "tooltip",
     openable: true,
   });
@@ -224,8 +224,8 @@ export async function selectAbilityDialog() {
   return (
     await resolveDocument(
       await selectDocumentDialog(game.teriock.packs.abilities.index.contents, {
-        hint: "Please select an ability.",
-        title: "Select Ability",
+        hint: game.i18n.localize("TERIOCK.DIALOGS.Select.Ability.hint"),
+        title: game.i18n.localize("TERIOCK.DIALOGS.Select.Ability.title"),
         tooltipAsync: true,
         openable: true,
       }),
@@ -252,8 +252,8 @@ export async function selectCompendiumsDialog(selected = true) {
   const chosen = await tm.dialogs.selectDocumentsDialog(packDocs, {
     tooltip: false,
     tooltipAsync: false,
-    hint: "Please select compendiums.",
-    title: "Select Compendiums",
+    hint: game.i18n.localize("TERIOCK.DIALOGS.Select.Compendiums.hint"),
+    title: game.i18n.localize("TERIOCK.DIALOGS.Select.Compendiums.title"),
     checked: packDocs.map((p) => p.uuid && selected),
   });
   return chosen.map((c) => game.packs.get(c.uuid));
@@ -266,8 +266,8 @@ export async function selectCompendiumsDialog(selected = true) {
 export async function selectEquipmentTypeDialog() {
   return resolveDocument(
     await selectDocumentDialog(game.teriock.packs.equipment.index.contents, {
-      hint: "Please select an equipment type.",
-      title: "Select Equipment Type",
+      hint: game.i18n.localize("TERIOCK.DIALOGS.Select.EquipmentType.hint"),
+      title: game.i18n.localize("TERIOCK.DIALOGS.Select.EquipmentType.title"),
       tooltipAsync: true,
       openable: true,
     }),
@@ -281,8 +281,8 @@ export async function selectEquipmentTypeDialog() {
 export async function selectBodyPartDialog() {
   return resolveDocument(
     await selectDocumentDialog(game.teriock.packs.bodyParts.index.contents, {
-      hint: "Please select a body part.",
-      title: "Select Body Part",
+      hint: game.i18n.localize("TERIOCK.DIALOGS.Select.BodyPart.hint"),
+      title: game.i18n.localize("TERIOCK.DIALOGS.Select.BodyPart.title"),
       tooltipAsync: true,
       openable: true,
     }),
@@ -309,8 +309,8 @@ export async function selectClassDialog() {
     }),
   );
   const chosen = await selectDocumentDialog(choices, {
-    hint: "Please select a class.",
-    title: "Select Class",
+    hint: game.i18n.localize("TERIOCK.DIALOGS.Select.Class.hint"),
+    title: game.i18n.localize("TERIOCK.DIALOGS.Select.Class.title"),
     tooltipKey: "tooltip",
   });
   if (chosen) {

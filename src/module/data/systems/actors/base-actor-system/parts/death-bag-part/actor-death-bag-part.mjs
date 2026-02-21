@@ -24,8 +24,6 @@ export default (Base) => {
               initial: "10",
               nullable: false,
               deterministic: false,
-              label: "Stones to Pull",
-              hint: "Total number of stones to pull from the Death Bag.",
             }),
             stones: new fields.SchemaField({
               black: stoneField("black", 3),
@@ -74,7 +72,6 @@ function stoneField(color, initial) {
     initial: `${initial}`,
     nullable: false,
     deterministic: false,
-    label: `${TERIOCK.options.die.deathBagStoneColor[color]} Stones`,
-    hint: `Number of ${color} stones in the Death Bag.`,
+    label: game.i18n.localize(`TERIOCK.TERMS.Stones.${color}`),
   });
 }

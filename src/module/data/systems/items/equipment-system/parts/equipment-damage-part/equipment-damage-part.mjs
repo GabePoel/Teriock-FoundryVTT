@@ -75,7 +75,9 @@ export default (Base) => {
       getCardContextMenuEntries(doc) {
         const entries = [
           {
-            name: "Use in Two Hands",
+            name: game.i18n.localize(
+              "TERIOCK.SYSTEMS.Equipment.USAGE.twoHanded",
+            ),
             icon: makeIcon(
               getRollIcon(this.damage.twoHanded.formula),
               "contextMenu",

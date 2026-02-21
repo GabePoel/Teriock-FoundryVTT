@@ -62,11 +62,13 @@ export default async function setStatDiceDialog(pool) {
         }
       },
       icon: makeIconClass("check", "button"),
-      label: "Confirm",
+      label: game.i18n.localize("TERIOCK.DIALOGS.SetStatDice.BUTTONS.confirm"),
     },
     window: {
       icon: makeIconClass("dice", "title"),
-      title: `Set ${pool.dieName}`,
+      title: game.i18n.format("TERIOCK.DIALOGS.SetStatDice.title", {
+        dieName: pool.dieName,
+      }),
     },
   });
 }

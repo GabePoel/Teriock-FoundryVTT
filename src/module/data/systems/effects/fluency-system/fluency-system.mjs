@@ -23,7 +23,7 @@ const { fields } = foundry.data;
  * @implements {Teriock.Models.FluencySystemInterface}
  * @mixes CompetenceDisplaySystem
  * @mixes RevelationSystem
- * @mixes ThresholdSystem
+ * @mixes ThresholdData
  * @mixes WikiSystem
  */
 export default class FluencySystem extends mix(
@@ -121,7 +121,9 @@ export default class FluencySystem extends mix(
 
   /** @inheritDoc */
   get nameString() {
-    const nameAddition = this.revealed ? "" : " (Unrevealed)";
+    const nameAddition = this.revealed
+      ? ""
+      : ` (${game.i18n.localize("TERIOCK.SYSTEMS.BaseEffect.NAME.unrevealed")})`;
     return this.parent.name + nameAddition;
   }
 
@@ -134,7 +136,7 @@ export default class FluencySystem extends mix(
           icon: TERIOCK.options.tradecraft[this.field].tradecrafts[
             this.tradecraft
           ].icon,
-          label: "Tradecraft",
+          label: game.i18n.localize("TERIOCK.TERMS.Common.tradecraft"),
           wrappers: [
             TERIOCK.options.tradecraft[this.field].name,
             TERIOCK.options.tradecraft[this.field].tradecrafts[this.tradecraft]

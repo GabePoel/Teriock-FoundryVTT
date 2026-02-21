@@ -64,8 +64,9 @@ export default class RankSystem extends mix(
         initial: { raw: 1 },
       }),
       description: new TextField({
-        initial:
-          "<p>Every adventurer is a journeyman before they join their first @L[Category:Classes]{class}.</p>",
+        initial: game.i18n.localize(
+          "TERIOCK.SYSTEMS.Rank.FIELDS.description.initial",
+        ),
       }),
       innate: new fields.BooleanField({ initial: false }),
       maxAv: new fields.NumberField({
@@ -137,27 +138,28 @@ export default class RankSystem extends mix(
     return [
       {
         icon: TERIOCK.options.rank[this.archetype].classes[this.className].icon,
-        label: "Class",
+        label: game.i18n.localize("TERIOCK.SYSTEMS.Rank.PANELS.class"),
         wrappers: [
           TERIOCK.options.rank[this.archetype].name,
           TERIOCK.options.rank[this.archetype].classes[this.className].name,
-          "Rank " + this.classRank,
+          game.i18n.format("TERIOCK.SYSTEMS.Rank.PANELS.rank", {
+            value: this.classRank,
+          }),
         ],
       },
-      {
-        icon: icons.ui.dice,
-        label: "Stat Dice",
-        wrappers: [
-          this.statDice.hp.formula + " Hit Dice",
-          this.statDice.mp.formula + " Mana Dice",
-        ],
-      },
+      this._statBar,
       {
         icon: icons.armament.av,
-        label: "Details",
+        label: game.i18n.localize("TERIOCK.SYSTEMS.Rank.PANELS.details"),
         wrappers: [
-          this.maxAv === 0 ? "No Armor" : this.maxAv + " Max AV",
-          this.innate ? "Innate" : "Learned",
+          this.maxAv === 0
+            ? game.i18n.localize("TERIOCK.SYSTEMS.Power.PANELS.noArmor")
+            : game.i18n.format("TERIOCK.SYSTEMS.Power.PANELS.maxAv", {
+                value: this.maxAv,
+              }),
+          this.innate
+            ? game.i18n.localize("TERIOCK.SYSTEMS.Rank.PANELS.innate")
+            : game.i18n.localize("TERIOCK.SYSTEMS.Rank.PANELS.learned"),
         ],
       },
     ];
@@ -239,28 +241,28 @@ export default class RankSystem extends mix(
     return [
       ...super.getCardContextMenuEntries(doc),
       {
-        name: "Roll Hit Die",
+        name: game.i18n.localize("TERIOCK.SYSTEMS.Rank.MENU.rollHpDie"),
         icon: makeIcon(getRollIcon(this.hpDie.polyhedral), "contextMenu"),
         callback: async () => await this.hpDie.use(),
         condition: !this.hpDie.spent,
         group: "usage",
       },
       {
-        name: "Recover Hit Die",
+        name: game.i18n.localize("TERIOCK.SYSTEMS.Rank.MENU.recoverHpDie"),
         icon: makeIcon(TERIOCK.display.icons.ui.undo, "contextMenu"),
         callback: async () => await this.hpDie.unuse(),
         condition: this.hpDie.spent,
         group: "usage",
       },
       {
-        name: "Roll Mana Die",
+        name: game.i18n.localize("TERIOCK.SYSTEMS.Rank.MENU.rollMpDie"),
         icon: makeIcon(getRollIcon(this.mpDie.polyhedral), "contextMenu"),
         callback: async () => await this.mpDie.use(),
         condition: !this.mpDie.spent,
         group: "usage",
       },
       {
-        name: "Recover Mana Die",
+        name: game.i18n.localize("TERIOCK.SYSTEMS.Rank.MENU.recoverMpDie"),
         icon: makeIcon(TERIOCK.display.icons.ui.undo, "contextMenu"),
         callback: async () => await this.mpDie.unuse(),
         condition: this.mpDie.spent,

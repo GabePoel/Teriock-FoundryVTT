@@ -121,7 +121,10 @@ export default class AbilitySystem extends mix(
     const fields = [
       {
         path: "system.elderSorceryIncant",
-        label: `With the Elder Sorcery of ${this.elementString}...`,
+        label: game.i18n.format(
+          "TERIOCK.SYSTEMS.Ability.FIELDS.elderSorceryIncant.elements",
+          { elements: this.elementString },
+        ),
         visible: this.elderSorcery,
         classes: "elder-sorcery-display-field",
       },
@@ -190,7 +193,9 @@ export default class AbilitySystem extends mix(
             action: "updatePaths",
             paths:
               "system.upgrades.score.attribute system.upgrades.score.value",
-            title: "Update Attribute Score Upgrade",
+            title: game.i18n.localize(
+              "TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.score.update",
+            ),
             icon: TERIOCK.display.icons.ui.numerical,
           },
         },
@@ -202,7 +207,9 @@ export default class AbilitySystem extends mix(
             action: "updatePaths",
             paths:
               "system.upgrades.competence.attribute system.upgrades.competence.value",
-            title: "Update Attribute Competence Upgrade",
+            title: game.i18n.localize(
+              "TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.competence.update",
+            ),
             icon: TERIOCK.display.icons.competence.fluent,
           },
         },
@@ -242,9 +249,11 @@ export default class AbilitySystem extends mix(
       icons.push({
         icon: TERIOCK.display.icons.ui.locked,
         action: "toggleDisableLocked",
-        tooltip: "Locked",
+        tooltip: game.i18n.localize("TERIOCK.SYSTEMS.Ability.EMBED.locked"),
         callback: () => {
-          ui.notifications.error("Basic abilities cannot be disabled.");
+          ui.notifications.error(
+            game.i18n.localize("TERIOCK.SYSTEMS.Ability.EMBED.basic"),
+          );
         },
         condition: this.basic,
       });
@@ -304,22 +313,38 @@ export default class AbilitySystem extends mix(
       suffix = `: ${this.tag}`;
     }
     if (this.adept.enabled) {
-      additions.push("Adept");
+      additions.push(
+        game.i18n.localize(
+          "TERIOCK.SYSTEMS.Ability.FIELDS.adept.enabled.label",
+        ),
+      );
     }
     if (this.gifted.enabled) {
-      additions.push("Gifted");
+      additions.push(
+        game.i18n.localize(
+          "TERIOCK.SYSTEMS.Ability.FIELDS.gifted.enabled.label",
+        ),
+      );
     }
     if (this.limitation && this.limitation.length > 0) {
-      additions.push("Limited");
+      additions.push(
+        game.i18n.localize("TERIOCK.SYSTEMS.BaseEffect.NAME.limited"),
+      );
     }
     if (this.improvement && this.improvement.length > 0) {
-      additions.push("Improved");
+      additions.push(
+        game.i18n.localize("TERIOCK.SYSTEMS.BaseEffect.NAME.improved"),
+      );
     }
     if (this.grantOnly) {
-      additions.push("Granted");
+      additions.push(
+        game.i18n.localize("TERIOCK.SYSTEMS.Ability.NAME.granted"),
+      );
     }
     if (!this.revealed) {
-      additions.push("Unrevealed");
+      additions.push(
+        game.i18n.localize("TERIOCK.SYSTEMS.BaseEffect.NAME.unrevealed"),
+      );
     }
     let nameAddition = "";
     if (additions.length > 0) {
@@ -400,7 +425,9 @@ export default class AbilitySystem extends mix(
             sustainedUuid: uuid,
           },
           {
-            failPrefix: "Could not expire sustained consequence.",
+            failPrefix: game.i18n.localize(
+              "TERIOCK.SYSTEMS.Ability.QUERY.sustainedExpirationFail",
+            ),
           },
         );
       }

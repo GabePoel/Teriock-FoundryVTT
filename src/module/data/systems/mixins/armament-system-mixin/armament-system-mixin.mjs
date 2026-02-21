@@ -1,5 +1,6 @@
 import { propertyPseudoHooks } from "../../../../constants/system/pseudo-hooks.mjs";
 import { ArmamentExecution } from "../../../../executions/document-executions/_module.mjs";
+import { formulaExists } from "../../../../helpers/formula.mjs";
 import { toCamelCase } from "../../../../helpers/string.mjs";
 import { getRollIcon } from "../../../../helpers/utils.mjs";
 import { EvaluationField, TextField } from "../../../fields/_module.mjs";
@@ -104,6 +105,60 @@ export default function ArmamentSystemMixin(Base) {
         return Object.assign(super.parseEvent(event), {
           crit: event.ctrlKey,
         });
+      }
+
+      /** @returns {Teriock.MessageData.MessageBar} */
+      get _attackBar() {
+        return {
+          icon: TERIOCK.display.icons.interaction.attack,
+          label: game.i18n.localize("TERIOCK.SYSTEMS.Armament.PANELS.attack"),
+          wrappers: [
+            this.piercing.value,
+            ...this._damageWrappers,
+            this.hit.value
+              ? game.i18n.format("TERIOCK.SYSTEMS.Armament.PANELS.hitBonus", {
+                  value: this.hit.value,
+                })
+              : "",
+            this.attackPenalty.nonZero
+              ? game.i18n.format(
+                  "TERIOCK.SYSTEMS.Armament.PANELS.attackPenalty",
+                  { value: this.attackPenalty.formula },
+                )
+              : "",
+            TERIOCK.index.weaponFightingStyles[this.fightingStyle],
+          ],
+        };
+      }
+
+      /** @returns {string[]} */
+      get _damageWrappers() {
+        const damageString = formulaExists(this.damage.base.typed)
+          ? game.i18n.format("TERIOCK.SYSTEMS.Armament.PANELS.damage", {
+              value: this.damage.base.typed,
+            })
+          : "";
+        return [damageString];
+      }
+
+      /** @returns {Teriock.MessageData.MessageBar} */
+      get _defenseBar() {
+        return {
+          icon: TERIOCK.display.icons.interaction.block,
+          label: game.i18n.format("TERIOCK.SYSTEMS.Armament.PANELS.defense"),
+          wrappers: [
+            this.av.value
+              ? game.i18n.format("TERIOCK.SYSTEMS.Armament.PANELS.av", {
+                  value: this.av.value,
+                })
+              : "",
+            this.bv.value
+              ? game.i18n.format("TERIOCK.SYSTEMS.Armament.PANELS.bv", {
+                  value: this.bv.value,
+                })
+              : "",
+          ],
+        };
       }
 
       /** @inheritDoc */

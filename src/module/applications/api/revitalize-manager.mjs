@@ -16,7 +16,7 @@ export default class TeriockRevitalizeManager extends TeriockStatManager {
     },
     window: {
       icon: makeIconClass(takeOptions.revitalizing.icon, "title"),
-      title: "Revitalizing",
+      title: "TERIOCK.DIALOGS.Revitalize.title",
       resizable: false,
     },
   };
@@ -38,13 +38,21 @@ export default class TeriockRevitalizeManager extends TeriockStatManager {
     super(actor, options, ...args);
     this._forHarmField = new fields.BooleanField({
       initial: false,
-      label: "For Drain",
-      hint: "Check this is the revitalizing should be done for drain.",
+      label: game.i18n.localize(
+        "TERIOCK.DIALOGS.Revitalize.FIELDS.forDrain.label",
+      ),
+      hint: game.i18n.localize(
+        "TERIOCK.DIALOGS.Revitalize.FIELDS.forDrain.hint",
+      ),
     });
     this._consumeStatDiceField = new fields.BooleanField({
       initial: true,
-      label: "Consume Mana Dice",
-      hint: "Check this if mana dice should be consumed on use.",
+      label: game.i18n.localize(
+        "TERIOCK.DIALOGS.Revitalize.FIELDS.consumeManaDice.label",
+      ),
+      hint: game.i18n.localize(
+        "TERIOCK.DIALOGS.Revitalize.FIELDS.consumeManaDice.hint",
+      ),
     });
   }
 

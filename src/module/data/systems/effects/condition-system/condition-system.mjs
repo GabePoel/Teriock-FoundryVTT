@@ -73,7 +73,9 @@ export default class ConditionSystem extends mix(
     return [
       {
         icon: "dice-d4",
-        tooltip: "Roll to Remove",
+        tooltip: game.i18n.localize(
+          "TERIOCK.SYSTEMS.Condition.EMBED.rollToRemove",
+        ),
         condition: true,
         callback: async () => this.parent.use(),
         action: "removeConditionDoc",
@@ -88,7 +90,9 @@ export default class ConditionSystem extends mix(
 
   /** @inheritDoc */
   get useText() {
-    return `Roll to Remove ${this.parent.name}`;
+    return game.i18n.format("TERIOCK.SYSTEMS.Condition.USAGE.use", {
+      value: this.parent.name,
+    });
   }
 
   /** @inheritDoc */

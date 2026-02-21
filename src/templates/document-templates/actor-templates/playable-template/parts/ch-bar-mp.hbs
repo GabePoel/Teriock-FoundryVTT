@@ -29,23 +29,24 @@
         max=system.mp.max
         min=system.mp.min
         class="thover-soft character-bar-overlay-left character-bar-overlay-label"
-        dataset=(object tooltip="Current MP")
+        dataset=(object tooltip=(localize "TERIOCK.SHEETS.Actor.SIDEBAR.Bars.mp.current"))
       }}
-      <div class="character-bar-overlay-max character-bar-overlay-label" data-tooltip="Maximum MP">
+      <div class="character-bar-overlay-max character-bar-overlay-label"
+           data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Bars.mp.max"}}">
         <span>/ {{system.mp.max}} +</span>
       </div>
       {{formInput
         systemFields.mp.fields.temp
         value=system.mp.temp
         classes="thover-soft character-bar-overlay-temp character-bar-overlay-label"
-        dataset=(object tooltip="Temporary MP")
+        dataset=(object tooltip=(localize "TERIOCK.SHEETS.Actor.SIDEBAR.Bars.mp.temp"))
       }}
     </div>
     {{#if takeStatButtons}}
       <div
         class="take-harm-button thover take-damage-button"
         data-action="takeRollable"
-        data-tooltip="Take Drain"
+        data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Bars.mp.take"}}"
         data-type="drain"
       >
         <i class="fa-fw fa-light fa-{{TERIOCK.display.icons.effect.drain}}"></i>

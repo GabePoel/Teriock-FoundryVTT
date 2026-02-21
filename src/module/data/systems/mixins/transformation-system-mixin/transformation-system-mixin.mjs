@@ -202,7 +202,9 @@ export default function TransformationSystemMixin(Base) {
         return [
           ...super.getCardContextMenuEntries(doc),
           {
-            name: "Set Primary Transformation",
+            name: game.i18n.localize(
+              "TERIOCK.SYSTEMS.Species.MENU.setPrimaryTransformation",
+            ),
             icon: makeIcon(
               TERIOCK.display.icons.effect.transform,
               "contextMenu",

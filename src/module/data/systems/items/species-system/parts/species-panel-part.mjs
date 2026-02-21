@@ -14,44 +14,77 @@ export default (Base) => {
     class SpeciesPanelPart extends Base {
       /** @inheritDoc */
       get panelParts() {
+        const statBar = this._statBar;
+        statBar.wrappers.push(
+          game.i18n.format("TERIOCK.SYSTEMS.Species.PANELS.br", {
+            value: this.br,
+          }),
+        );
         const bars = [
-          {
-            icon: icons.ui.dice,
-            label: "Stat Dice",
-            wrappers: [
-              this.statDice.hp.formula + " Hit Dice",
-              this.statDice.mp.formula + " Mana Dice",
-              `BR ${this.br}`,
-            ],
-          },
+          statBar,
           {
             icon: icons.species.lifespan,
-            label: "Lifespan",
+            label: game.i18n.localize(
+              "TERIOCK.SYSTEMS.Species.PANELS.lifespan.label",
+            ),
             wrappers: [
-              this.adult ? `Adult at ${this.adult} Years` : "",
+              this.adult
+                ? game.i18n.format(
+                    "TERIOCK.SYSTEMS.Species.PANELS.lifespan.adult",
+                    {
+                      value: this.adult,
+                    },
+                  )
+                : "",
               this.adult
                 ? this.lifespan
-                  ? `Lives to ${this.lifespan} Years`
-                  : "Infinite Lifespan"
+                  ? game.i18n.format(
+                      "TERIOCK.SYSTEMS.Species.PANELS.lifespan.max",
+                      { value: this.lifespan },
+                    )
+                  : game.i18n.localize(
+                      "TERIOCK.SYSTEMS.Species.PANELS.lifespan.infinite",
+                    )
                 : "",
             ],
           },
           {
             icon: icons.species.size,
-            label: "Size",
-            wrappers: [
-              `Size ${this.size.value}`,
-              this.size.min && this.size.max
-                ? `Size ${this.size.min} Minimum`
-                : "",
-              this.size.min && this.size.max
-                ? `Size ${this.size.max} Maximum`
-                : "",
-            ],
+            label: game.i18n.localize(
+              "TERIOCK.SYSTEMS.Species.FIELDS.size.enabled.label",
+            ),
+            wrappers: this.size.enabled
+              ? [
+                  game.i18n.format(
+                    "TERIOCK.SYSTEMS.Species.PANELS.size.value",
+                    {
+                      value: this.size.value,
+                    },
+                  ),
+                  this.size.min && this.size.max
+                    ? game.i18n.format(
+                        "TERIOCK.SYSTEMS.Species.PANELS.size.min",
+                        {
+                          value: this.size.min,
+                        },
+                      )
+                    : "",
+                  this.size.min && this.size.max
+                    ? game.i18n.format(
+                        "TERIOCK.SYSTEMS.Species.PANELS.size.max",
+                        {
+                          value: this.size.max,
+                        },
+                      )
+                    : "",
+                ]
+              : [],
           },
           {
             icon: icons.species.traits,
-            label: "Traits",
+            label: game.i18n.localize(
+              "TERIOCK.SYSTEMS.Species.FIELDS.traits.label",
+            ),
             wrappers: [
               ...this.traits.map((t) => TERIOCK.index.traits[t]),
               this.isTransformation

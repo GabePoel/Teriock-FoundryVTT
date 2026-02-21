@@ -11,7 +11,11 @@
             {{#if (eq avatarImagePath "prototypeToken.texture.src")}}
               <div
                 class="thover"
-                data-tooltip="Ring {{#if document.prototypeToken.ring.enabled}}Enabled{{else}}Disabled{{/if}}"
+                {{#if document.prototypeToken.ring.enabled}}
+                data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Avatar.ringEnabled"}}"
+                {{else}}
+                data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Avatar.ringDisabled"}}"
+                {{/if}}
                 data-action="toggleRing"
               >
                 <i class="fa-fw fa-circle-{{#if document.prototypeToken.ring.enabled}}check{{else}}xmark{{/if}}

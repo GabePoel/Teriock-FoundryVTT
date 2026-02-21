@@ -20,12 +20,18 @@ export default async function inCombatExpirationDialog(
   }
   let expire = false;
   if (effect.system.expirations.combat.what.type === "forced" && !forceDialog) {
+    const name = effect.system.nameString;
     expire = await TeriockDialog.confirm({
       window: {
-        title: `${effect.system.nameString} Expiration`,
+        title: game.i18n.format("TERIOCK.DIALOGS.InCombatExpiration.title", {
+          name,
+        }),
         icon: makeIconClass("circle-question", "title"),
       },
-      content: `Should ${effect.system.nameString} expire?`,
+      content: game.i18n.format(
+        "TERIOCK.DIALOGS.InCombatExpiration.contentConfirm",
+        { name },
+      ),
       modal: true,
       rejectClose: false,
     });
@@ -40,7 +46,9 @@ export default async function inCombatExpirationDialog(
     if (effect.system.expirations.description) {
       const descriptionElement = document.createElement("fieldset");
       const descriptionLegend = document.createElement("legend");
-      descriptionLegend.innerText = "End Condition";
+      descriptionLegend.innerText = game.i18n.localize(
+        "TERIOCK.DIALOGS.InCombatExpiration.endConditionLegend",
+      );
       descriptionElement.append(descriptionLegend);
       const descriptionText = await TextEditor.enrichHTML(
         effect.system.expirations.description,
@@ -71,21 +79,28 @@ export default async function inCombatExpirationDialog(
     try {
       await new TeriockDialog({
         window: {
-          title: `${effect.name} Expiration`,
+          title: game.i18n.format("TERIOCK.DIALOGS.InCombatExpiration.title", {
+            name: effect.name,
+          }),
           icon: makeIconClass("dice-d4", "title"),
         },
         content: contentHtml,
         buttons: [
           {
             action: "roll",
-            label: "Roll",
+            label: game.i18n.localize(
+              "TERIOCK.DIALOGS.InCombatExpiration.BUTTONS.roll",
+            ),
             default: true,
             callback: async (_event, button) => {
               const expirationRoll = new BaseRoll(
                 button.form.elements.namedItem("roll").value,
                 effect.actor.getRollData(),
                 {
-                  flavor: `${effect.name} Ending Roll`,
+                  flavor: game.i18n.format(
+                    "TERIOCK.DIALOGS.InCombatExpiration.rollFlavor",
+                    { name: effect.name },
+                  ),
                   styles: {
                     dice: {
                       classes: "condition",
@@ -116,7 +131,9 @@ export default async function inCombatExpirationDialog(
           },
           {
             action: "remove",
-            label: "Remove",
+            label: game.i18n.localize(
+              "TERIOCK.DIALOGS.InCombatExpiration.BUTTONS.remove",
+            ),
             callback: async () => {
               await effect.system.expire();
             },

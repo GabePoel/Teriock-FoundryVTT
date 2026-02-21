@@ -55,10 +55,18 @@ export default function WikiSystemMixin(Base) {
       wikiOpen() {
         const pageTitle = this.wikiPage;
         if (this.isOnWiki) {
-          ui.notifications.info(`Opening ${pageTitle}.`);
+          ui.notifications.info(
+            game.i18n.format("TERIOCK.SYSTEMS.Wiki.DIALOG.open.opening", {
+              value: pageTitle,
+            }),
+          );
           openWikiPage(pageTitle);
         } else {
-          ui.notifications.error(`${pageTitle} not found on the wiki.`);
+          ui.notifications.error(
+            game.i18n.format("TERIOCK.SYSTEMS.Wiki.DIALOG.open.error", {
+              value: pageTitle,
+            }),
+          );
         }
       }
     }

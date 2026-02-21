@@ -54,7 +54,9 @@ export default class BaseEffectSystem extends ChildSystem {
     return [
       ...super.displayToggles,
       {
-        label: "Disabled",
+        label: game.i18n.localize(
+          "TERIOCK.SYSTEMS.BaseItem.FIELDS.disabled.label",
+        ),
         path: "disabled",
       },
     ];

@@ -72,7 +72,7 @@ export default class PowerSystem extends mix(
   get embedParts() {
     const parts = super.embedParts;
     parts.text = TERIOCK.options.power[this.type].name;
-    parts.subtitle = "Power";
+    parts.subtitle = game.i18n.localize("TYPES.Item.power");
     return parts;
   }
 
@@ -95,10 +95,14 @@ export default class PowerSystem extends mix(
     return [
       {
         icon: TERIOCK.options.power[this.type].icon,
-        label: "Power Type",
+        label: game.i18n.localize("TERIOCK.SYSTEMS.Power.FIELDS.type.label"),
         wrappers: [
           TERIOCK.options.power[this.type].name,
-          this.maxAv === 0 ? "No Armor" : this.maxAv + " Max AV",
+          this.maxAv === 0
+            ? game.i18n.localize("TERIOCK.SYSTEMS.Power.PANELS.noArmor")
+            : game.i18n.format("TERIOCK.SYSTEMS.Power.PANELS.maxAv", {
+                value: this.maxAv,
+              }),
         ],
       },
     ];

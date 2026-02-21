@@ -7,15 +7,15 @@
       {{> (template "document-templates/actor-templates/playable-template/parts/ch-bar-hp.hbs")}}
     </div>
   </div>
-  <p class="hint">Click on the hacks you want to heal{{#if (not noDice)}}
-    and the hit dice you want to spend.{{/if}}</p>
+  <p class="hint">{{#if noDice}}{{localize "TERIOCK.DIALOGS.Heal.hintNoDice"}}{{else}}{{localize
+    "TERIOCK.DIALOGS.Heal.hintWithDice"}}{{/if}}</p>
   <fieldset class="heal-dialog-hacks">
-    <legend>Hacks</legend>
+    <legend>{{localize "TERIOCK.TERMS.Common.hacks"}}</legend>
     {{> (template "document-templates/actor-templates/playable-template/parts/ch-hack-box.hbs") }}
   </fieldset>
   {{#if (not noDice)}}
     <fieldset class="heal-dialog-dice">
-      <legend>Hit Dice</legend>
+      <legend>{{localize "TERIOCK.SYSTEMS.StatGiver.FIELDS.statDice.hp.label"}}</legend>
       <div class="tgrid g7">
         {{{system.sheet.dieBox.hp}}}
       </div>
@@ -37,7 +37,7 @@
   {{/if}}
   <footer class="form-footer" style="margin-top:auto;">
     <button type="submit" data-action="ok" autofocus>
-      {{makeIcon TERIOCK.display.icons.ui.done "button"}}<span>Done</span>
+      {{makeIcon TERIOCK.display.icons.ui.done "button"}}<span>{{localize "TERIOCK.DIALOGS.Heal.done"}}</span>
     </button>
   </footer>
 </form>

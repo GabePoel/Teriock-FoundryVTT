@@ -11,9 +11,11 @@ import { TeriockDialog } from "../api/_module.mjs";
 export default async function updateDialog(
   doc,
   paths,
-  title = "Update Fields",
+  title,
   icon = "file-pen",
 ) {
+  const resolvedTitle =
+    title ?? game.i18n.localize("TERIOCK.DIALOGS.Update.defaults.title");
   const content = document.createElement("div");
   content.classList.add("teriock-form-container");
   for (const path of paths) {
@@ -32,7 +34,7 @@ export default async function updateDialog(
     buttons: [
       {
         action: "update",
-        label: "Update",
+        label: game.i18n.localize("TERIOCK.DIALOGS.Update.BUTTONS.update"),
         default: true,
         icon: makeIconClass("check", "button"),
         callback: async function (_event, button) {
@@ -54,7 +56,7 @@ export default async function updateDialog(
       width: 500,
     },
     window: {
-      title,
+      title: resolvedTitle,
       icon: makeIconClass(icon, "title"),
     },
   });

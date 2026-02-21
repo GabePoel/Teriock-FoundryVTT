@@ -7,24 +7,26 @@ import { TeriockDialog } from "../api/_module.mjs";
  * @returns {Promise<"import" | "create">}
  */
 export default async function newDocumentDialog(type) {
+  const name = TERIOCK.options.document[type].name;
+  const typeName = name.toLowerCase();
   return await TeriockDialog.prompt({
-    content:
-      `Would you like to import an existing ${TERIOCK.options.document[type].name.toLowerCase()} or create one from` +
-      ` scratch?`,
+    content: game.i18n.format("TERIOCK.DIALOGS.NewDocument.content", {
+      typeName,
+    }),
     window: {
-      title: `New ${TERIOCK.options.document[type].name}`,
+      title: game.i18n.format("TERIOCK.DIALOGS.NewDocument.title", { name }),
       icon: makeIconClass(TERIOCK.display.icons.ui.add, "title"),
     },
     modal: true,
     ok: {
-      label: "Import",
+      label: game.i18n.localize("TERIOCK.DIALOGS.NewDocument.BUTTONS.import"),
       default: true,
       callback: () => "import",
       icon: makeIconClass("download", "button"),
     },
     buttons: [
       {
-        label: "Create",
+        label: game.i18n.localize("TERIOCK.DIALOGS.NewDocument.BUTTONS.create"),
         callback: () => "create",
         icon: makeIconClass("hammer-brush", "button"),
       },

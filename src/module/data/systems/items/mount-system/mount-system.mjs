@@ -1,4 +1,4 @@
-import { prefix, toCamelCase } from "../../../../helpers/string.mjs";
+import { toCamelCase } from "../../../../helpers/string.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
@@ -60,7 +60,9 @@ export default class MountSystem extends mix(
       {
         icon: this.mounted ? "circle-check" : "circle",
         action: "toggleMountedDoc",
-        tooltip: this.mounted ? "Mounted" : "Unmounted",
+        tooltip: this.mounted
+          ? game.i18n.localize("TERIOCK.SYSTEMS.Mount.EMBED.mounted")
+          : game.i18n.localize("TERIOCK.SYSTEMS.Mount.EMBED.unmounted"),
         condition: this.parent.isOwner,
         callback: async () => {
           if (this.mounted) {
@@ -77,7 +79,9 @@ export default class MountSystem extends mix(
   get embedParts() {
     const parts = super.embedParts;
     parts.subtitle = this.mountType;
-    parts.text = prefix(this.tier.value, "Tier");
+    parts.text = game.i18n.format("TERIOCK.SYSTEMS.Attunable.PANELS.tier", {
+      value: this.tier.value,
+    });
     return parts;
   }
 
@@ -89,18 +93,16 @@ export default class MountSystem extends mix(
   /** @inheritDoc */
   get messageBars() {
     return [
-      {
-        icon: TERIOCK.display.icons.ui.dice,
-        label: "Stat Dice",
-        wrappers: [
-          this.statDice.hp.formula + " Hit Dice",
-          this.statDice.mp.formula + " Mana Dice",
-        ],
-      },
+      this._statBar,
       {
         icon: TERIOCK.display.icons.armament.load,
-        label: "Load",
-        wrappers: ["Tier " + this.tier.raw || "0", this.mountType],
+        label: game.i18n.localize("TERIOCK.SYSTEMS.Mount.PANELS.load"),
+        wrappers: [
+          game.i18n.format("TERIOCK.SYSTEMS.Attunable.PANELS.tier", {
+            value: this.tier.text,
+          }) || "0",
+          this.mountType,
+        ],
       },
     ];
   }

@@ -12,32 +12,37 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
 export default async function hotbarDropDialog(doc) {
   let choice = "general";
   if (doc.actor) {
+    const label = TERIOCK.options.document[doc.type].name.toLowerCase();
     const context = {
-      label: TERIOCK.options.document[doc.type].name.toLowerCase(),
+      label,
       name: doc.name,
-      child: await TextEditor.enrichHTML(`@UUID[${doc.uuid}]`),
-      actor: await TextEditor.enrichHTML(`@UUID[${doc.actor.uuid}]`),
+      child: `@UUID[${doc.uuid}]`,
+      actor: `@UUID[${doc.actor.uuid}]`,
     };
-    const content = await foundry.applications.handlebars.renderTemplate(
-      systemPath("templates/dialog-templates/hotbar-drop.hbs"),
-      context,
+    const content = await TextEditor.enrichHTML(
+      await foundry.applications.handlebars.renderTemplate(
+        systemPath("templates/dialog-templates/hotbar-drop.hbs"),
+        context,
+      ),
     );
     choice = await TeriockDialog.prompt({
       window: {
         icon: makeIconClass("circle-question", "title"),
-        title: `Macro Type Selection`,
+        title: game.i18n.localize("TERIOCK.DIALOGS.HotbarDrop.title"),
       },
       modal: true,
       content: content,
       ok: {
         default: true,
-        label: "General",
+        label: game.i18n.localize("TERIOCK.DIALOGS.HotbarDrop.BUTTONS.general"),
         callback: () => "general",
       },
       buttons: [
         {
           action: "linked",
-          label: "Linked",
+          label: game.i18n.localize(
+            "TERIOCK.DIALOGS.HotbarDrop.BUTTONS.linked",
+          ),
           callback: () => "linked",
         },
       ],

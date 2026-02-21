@@ -17,7 +17,7 @@ export default class TeriockHealManager extends TeriockStatManager {
     },
     window: {
       icon: makeIconClass(takeOptions.healing.icon, "title"),
-      title: "Healing",
+      title: "TERIOCK.DIALOGS.Heal.title",
       resizable: false,
     },
   };
@@ -41,13 +41,17 @@ export default class TeriockHealManager extends TeriockStatManager {
     this._noDice = noStatDice;
     this._forHarmField = new fields.BooleanField({
       initial: false,
-      label: "For Damage",
-      hint: "Check this is the healing should be done for damage.",
+      label: game.i18n.localize("TERIOCK.DIALOGS.Heal.FIELDS.forDamage.label"),
+      hint: game.i18n.localize("TERIOCK.DIALOGS.Heal.FIELDS.forDamage.hint"),
     });
     this._consumeStatDiceField = new fields.BooleanField({
       initial: true,
-      label: "Consume Hit Dice",
-      hint: "Check this if hit dice should be consumed on use.",
+      label: game.i18n.localize(
+        "TERIOCK.DIALOGS.Heal.FIELDS.consumeHitDice.label",
+      ),
+      hint: game.i18n.localize(
+        "TERIOCK.DIALOGS.Heal.FIELDS.consumeHitDice.hint",
+      ),
     });
   }
 

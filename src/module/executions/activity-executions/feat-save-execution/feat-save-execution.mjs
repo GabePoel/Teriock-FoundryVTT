@@ -27,12 +27,16 @@ export default class FeatSaveExecution extends ThresholdExecutionMixin(
 
   /** @inheritDoc */
   get flavor() {
-    let flavor = "";
     if (this.threshold !== undefined) {
-      flavor += `DC ${this.threshold}`;
+      return game.i18n.format("TERIOCK.ROLLS.Feat.thresholded", {
+        threshold: this.threshold,
+        value: this.attribute.toUpperCase(),
+      });
+    } else {
+      return game.i18n.format("TERIOCK.ROLLS.Feat.unthresholded", {
+        value: this.attribute.toUpperCase(),
+      });
     }
-    flavor += ` ${this.attribute.toUpperCase()} Feat Save`;
-    return flavor;
   }
 
   /** @inheritDoc */
@@ -42,7 +46,9 @@ export default class FeatSaveExecution extends ThresholdExecutionMixin(
 
   /** @inheritDoc */
   get name() {
-    return `${TERIOCK.index.attributesFull[this.attribute]} Feat Save`;
+    return game.i18n.format("TERIOCK.ROLLS.Feat.name", {
+      value: TERIOCK.index.attributesFull[this.attribute],
+    });
   }
 
   /** @inheritDoc */

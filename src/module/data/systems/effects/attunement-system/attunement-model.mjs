@@ -15,6 +15,12 @@ const { fields } = foundry.data;
  */
 export default class AttunementSystem extends BaseEffectSystem {
   /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [
+    ...super.LOCALIZATION_PREFIXES,
+    "TERIOCK.SYSTEMS.Attunement",
+  ];
+
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       type: "attunement",
@@ -26,24 +32,15 @@ export default class AttunementSystem extends BaseEffectSystem {
     return foundry.utils.mergeObject(super.defineSchema(), {
       type: new fields.StringField({
         initial: "equipment",
-        label: "Attunement Type",
-        hint: "What type of entity this attunement corresponds to.",
         choices: attunementOptions.attunementType,
       }),
       target: new fields.DocumentIdField({
-        label: "Attunement Target",
-        hint: "The entity that this attunement corresponds to.",
         nullable: true,
         initial: null,
       }),
-      inheritTier: new fields.BooleanField({
-        label: "Inherit Tier",
-        hint: "Whether this attunement inherits the tier of the target.",
-        initial: true,
-      }),
+      inheritTier: new fields.BooleanField({ initial: true }),
       tier: new fields.NumberField({
-        label: "Tier",
-        hint: "The tier of this attunement.",
+        label: "TERIOCK.SYSTEMS.Attunable.FIELDS.tier.raw.label",
         initial: 0,
       }),
     });
@@ -55,7 +52,7 @@ export default class AttunementSystem extends BaseEffectSystem {
       {
         icon: TERIOCK.display.icons.attunable.deattune,
         action: "deattuneDoc",
-        tooltip: "Deattune",
+        tooltip: game.i18n.localize("TERIOCK.SYSTEMS.Attunable.MENU.deattune"),
         condition: this.parent.isOwner,
         callback: async () => await this.deattune(),
       },
@@ -82,14 +79,20 @@ export default class AttunementSystem extends BaseEffectSystem {
     parts.bars = [
       {
         icon: TERIOCK.display.icons.attunable.tier,
-        label: "Tier",
-        wrappers: [`Tier ${this.tier}`],
+        label: game.i18n.localize(
+          "TERIOCK.SYSTEMS.Attunable.FIELDS.tier.raw.label",
+        ),
+        wrappers: [
+          game.i18n.format("TERIOCK.SYSTEMS.Attunable.PANELS.tier", {
+            value: this.tier,
+          }),
+        ],
       },
     ];
     if (this.targetDocument) {
       parts.associations = [
         {
-          title: "Attunement For",
+          title: game.i18n.format("TERIOCK.SYSTEMS.Attunement.PANELS.for"),
           icon: TERIOCK.options.document.attunement.icon,
           cards: [
             {
@@ -123,21 +126,23 @@ export default class AttunementSystem extends BaseEffectSystem {
     if (this.targetDocument) {
       if (this.targetDocument.type === "equipment") {
         if (this.targetDocument.system.equipped) {
-          return "Equipped";
+          return game.i18n.localize("TERIOCK.SYSTEMS.Equipment.EMBED.equipped");
         } else {
-          return "Unequipped";
+          return game.i18n.localize(
+            "TERIOCK.SYSTEMS.Equipment.EMBED.unequipped",
+          );
         }
       } else if (this.targetDocument.type === "mount") {
         if (this.targetDocument.system.mounted) {
-          return "Mounted";
+          return game.i18n.localize("TERIOCK.SYSTEMS.Mount.EMBED.mounted");
         } else {
-          return "Unmounted";
+          return game.i18n.localize("TERIOCK.SYSTEMS.Mount.EMBED.unmounted");
         }
       } else {
-        return "Attuned";
+        return game.i18n.localize("TERIOCK.SYSTEMS.Attunement.USAGE.attuned");
       }
     } else {
-      return "Not on Character";
+      return game.i18n.localize("TERIOCK.SYSTEMS.Attunement.USAGE.missing");
     }
   }
 
@@ -153,11 +158,17 @@ export default class AttunementSystem extends BaseEffectSystem {
   getCardContextMenuEntries(doc) {
     const entries = super
       .getCardContextMenuEntries(doc)
-      .filter((e) => !["Delete", "Duplicate"].includes(e.name));
+      .filter(
+        (e) =>
+          ![
+            game.i18n.localize("TERIOCK.SYSTEMS.Common.MENU.delete"),
+            game.i18n.localize("TERIOCK.SYSTEMS.Common.MENU.duplicate"),
+          ].includes(e.name),
+      );
     return [
       ...entries,
       {
-        name: "Deattune",
+        name: game.i18n.localize("TERIOCK.SYSTEMS.Attunable.MENU.deattune"),
         icon: makeIcon(TERIOCK.display.icons.attunable.deattune, "contextMenu"),
         callback: async () => await this.deattune(),
         group: "attunement",

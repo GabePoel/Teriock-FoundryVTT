@@ -95,21 +95,21 @@ export default (Base) => {
         return [
           ...super.getCardContextMenuEntries(doc),
           {
-            name: "Shatter",
+            name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.shatter"),
             icon: makeIcon(TERIOCK.display.icons.break.shatter, "contextMenu"),
             callback: this.shatter.bind(this),
             condition: this.parent.isOwner && !this.shattered,
             group: "control",
           },
           {
-            name: "Repair",
+            name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.repair"),
             icon: makeIcon(TERIOCK.display.icons.break.repair, "contextMenu"),
             callback: this.repair.bind(this),
             condition: this.parent.isOwner && this.shattered,
             group: "control",
           },
           {
-            name: "Dampen",
+            name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.dampen"),
             icon: makeIcon(
               TERIOCK.display.icons.equipment.dampen,
               "contextMenu",
@@ -119,7 +119,7 @@ export default (Base) => {
             group: "control",
           },
           {
-            name: "Undampen",
+            name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.undampen"),
             icon: makeIcon(
               TERIOCK.display.icons.equipment.undampen,
               "contextMenu",

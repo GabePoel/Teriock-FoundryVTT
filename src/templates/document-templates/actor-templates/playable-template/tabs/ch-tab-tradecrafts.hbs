@@ -1,5 +1,5 @@
 <div class="character-tab tradecrafts">
-  <h1>Tradecrafts</h1>
+  <h1>{{localize "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.title"}}</h1>
   <div class="character-tab-page teriock-block-results" data-search-key="fluencies">
     <div class="teriock-block-display" data-tooltip-direction="LEFT">
       <div class="tradecraft-panels tgrid g2">
@@ -7,17 +7,21 @@
           {{#if (not (eq field.name "Prestige"))}}
             <div class="field-panel">
               <div class="tradecraft-panel tgrid" data-tooltip-direction="UP">
-                <div class="tradecraft-panel-symbol field-panel-header" data-tooltip="Proficiency/Fluency">
-                  PRO
+                <div class="tradecraft-panel-symbol field-panel-header"
+                     data-tooltip="{{localize "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.competence.tooltip"}}">
+                  {{localize "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.competence.label"}}
                 </div>
-                <div class="tradecraft-panel-symbol field-panel-header" data-tooltip="Talent/Expertise/Mastery">
-                  Tal
+                <div class="tradecraft-panel-symbol field-panel-header"
+                     data-tooltip="{{localize "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.talent.tooltip"}}">
+                  {{localize "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.talent.label"}}
                 </div>
                 <div class="tradecraft-panel-name field-panel-header gi3">
-                  <span data-tooltip="Name">{{field.name}}</span>
+                  <span data-tooltip="{{localize
+                    "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.name.tooltip"}}">{{field.name}}</span>
                 </div>
-                <div class="tradecraft-panel-symbol field-panel-header" data-tooltip="Total Check Modifier">
-                  Mod
+                <div class="tradecraft-panel-symbol field-panel-header"
+                     data-tooltip="{{localize "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.modifier.tooltip"}}">
+                  {{localize "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.modifier.label"}}
                 </div>
                 {{#each field.tradecrafts as |tradecraft name|}}
                   <div
@@ -48,16 +52,20 @@
                       data-action="increment" data-path="system.tradecrafts.{{name}}.score"
                       data-tradecraft="{{name}}" data-tooltip-direction="LEFT" data-tooltip-class="">
                       {{#if (eq (path ../../system.tradecrafts name 'score') 0)}}
-                        <i class="thover fa-fw fa-regular fa-xmark grid-fill" data-tooltip="Normal"></i>
+                        <i class="thover fa-fw fa-regular fa-xmark grid-fill"
+                           data-tooltip="{{localize "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.score.0"}}"></i>
                       {{/if}}
                       {{#if (eq (path ../../system.tradecrafts name 'score') 1)}}
-                        <i class="thover fa-fw fa-regular fa-check grid-fill" data-tooltip="Talented"></i>
+                        <i class="thover fa-fw fa-regular fa-check grid-fill"
+                           data-tooltip="{{localize "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.score.1"}}"></i>
                       {{/if}}
                       {{#if (eq (path ../../system.tradecrafts name 'score') 2)}}
-                        <i class="thover fa-fw fa-regular fa-check-double grid-fill" data-tooltip="Expertise"></i>
+                        <i class="thover fa-fw fa-regular fa-check-double grid-fill"
+                           data-tooltip="{{localize "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.score.2"}}"></i>
                       {{/if}}
                       {{#if (gte (path ../../system.tradecrafts name 'score') 3)}}
-                        <i class="thover fa-fw fa-regular fa-badge-check grid-fill" data-tooltip="Mastery"></i>
+                        <i class="thover fa-fw fa-regular fa-badge-check grid-fill"
+                           data-tooltip="{{localize "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.score.3"}}"></i>
                       {{/if}}
                     </div>
                     <div

@@ -143,7 +143,7 @@ export default class ConsequenceSystem extends mix(
   get nameString() {
     let ns = super.nameString;
     if (this.critical) {
-      ns += " (Critical)";
+      ns += ` (${game.i18n.localize("TERIOCK.SYSTEMS.Consequence.PANELS.critical")})`;
     }
     return ns;
   }
@@ -154,23 +154,34 @@ export default class ConsequenceSystem extends mix(
     parts.bars = [
       {
         icon: TERIOCK.display.icons.ability.duration,
-        label: "Duration",
+        label: game.i18n.localize(
+          "TERIOCK.SYSTEMS.Consequence.PANELS.duration",
+        ),
         wrappers: [this.parent.remainingString],
       },
       {
         icon: TERIOCK.display.icons.document.condition,
-        label: "Conditions",
+        label: game.i18n.localize(
+          "TERIOCK.SYSTEMS.Consequence.PANELS.conditions",
+        ),
         wrappers: [
           ...Array.from(
             this.parent.statuses.map(
               (status) => TERIOCK.index.conditions[status],
             ),
           ),
-          this.critical ? "Critical" : "",
+          this.critical
+            ? game.i18n.localize("TERIOCK.SYSTEMS.Consequence.PANELS.critical")
+            : "",
           this.heightened
-            ? `Heightened ${this.heightened} Time${
-                this.heightened === 1 ? "" : "s"
-              }`
+            ? this.heightened === 1
+              ? game.i18n.localize(
+                  "TERIOCK.SYSTEMS.Consequence.PANELS.heightenedSingle",
+                )
+              : game.i18n.format(
+                  "TERIOCK.SYSTEMS.Consequence.PANELS.heightenedPlural",
+                  { value: this.heightened },
+                )
             : "",
         ],
       },
@@ -194,7 +205,9 @@ export default class ConsequenceSystem extends mix(
 
   /** @inheritDoc */
   get useText() {
-    return `Roll to Remove ${this.parent.name}`;
+    return game.i18n.format("TERIOCK.SYSTEMS.Condition.USAGE.use", {
+      value: this.parent.name,
+    });
   }
 
   /** @inheritDoc */

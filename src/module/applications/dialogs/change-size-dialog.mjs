@@ -22,7 +22,7 @@ export default async function changeSizeDialog(actor, species) {
       modal: true,
       buttons: [
         {
-          action: "yes",
+          action: game.i18n.localize("TERIOCK.DIALOGS.ChangeSize.title"),
           callback: async () => {
             await actor.update({
               "system.size.number.raw": species.system.size.value,
@@ -30,12 +30,12 @@ export default async function changeSizeDialog(actor, species) {
           },
           default: true,
           icon: makeIconClass("check", "button"),
-          label: "Yes",
+          label: game.i18n.localize("TERIOCK.DIALOGS.ChangeSize.BUTTONS.yes"),
         },
         {
           action: "no",
           icon: makeIconClass("xmark", "button"),
-          label: "No",
+          label: game.i18n.localize("TERIOCK.DIALOGS.ChangeSize.BUTTONS.no"),
         },
       ],
       content,

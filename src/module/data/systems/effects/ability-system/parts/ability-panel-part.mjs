@@ -19,34 +19,60 @@ export default (Base) => {
         const ref = TERIOCK.options.ability;
         let mpCost = "";
         if (this.costs.mp.type === "variable") {
-          mpCost = "Variable MP";
+          mpCost = game.i18n.format("TERIOCK.SYSTEMS.Ability.PANELS.variable", {
+            cost: game.i18n.localize("TERIOCK.STATS.mp.abbreviation"),
+          });
         } else if (this.costs.mp.type === "formula") {
-          mpCost = this.costs.mp.value.formula + " MP";
+          mpCost = game.i18n.format("TERIOCK.SYSTEMS.Ability.PANELS.constant", {
+            value: this.costs.mp.value.formula,
+            cost: game.i18n.localize("TERIOCK.STATS.mp.abbreviation"),
+          });
         } else if (this.costs.mp.type === "static") {
-          mpCost = this.costs.mp.value.static + " MP";
+          mpCost = game.i18n.format("TERIOCK.SYSTEMS.Ability.PANELS.constant", {
+            value: this.costs.mp.value.static,
+            cost: game.i18n.localize("TERIOCK.STATS.mp.abbreviation"),
+          });
         }
         let hpCost = "";
         if (this.costs.hp.type === "variable") {
-          hpCost = "Variable HP";
+          hpCost = game.i18n.format("TERIOCK.SYSTEMS.Ability.PANELS.variable", {
+            cost: game.i18n.localize("TERIOCK.STATS.hp.abbreviation"),
+          });
         } else if (this.costs.hp.type === "formula") {
-          hpCost = this.costs.hp.value.formula + " HP";
+          hpCost = game.i18n.format("TERIOCK.SYSTEMS.Ability.PANELS.constant", {
+            value: this.costs.hp.value.formula,
+            cost: game.i18n.localize("TERIOCK.STATS.hp.abbreviation"),
+          });
         } else if (this.costs.hp.type === "static") {
-          hpCost = this.costs.hp.value.static + " HP";
+          hpCost = game.i18n.format("TERIOCK.SYSTEMS.Ability.PANELS.constant", {
+            value: this.costs.hp.value.static,
+            cost: game.i18n.localize("TERIOCK.STATS.hp.abbreviation"),
+          });
         } else if (this.costs.hp.type === "hack") {
-          hpCost = "Hack";
+          hpCost = game.i18n.localize("TERIOCK.TERMS.Common.hack");
         }
         let gpCost = "";
         if (this.costs.gp.type === "variable") {
-          gpCost = "Variable ₲";
+          gpCost = game.i18n.format("TERIOCK.SYSTEMS.Ability.PANELS.variable", {
+            cost: game.i18n.localize("TERIOCK.STATS.gp.abbreviation"),
+          });
         } else if (this.costs.gp.type === "formula") {
-          gpCost = this.costs.gp.value.formula + " ₲";
+          gpCost = game.i18n.format("TERIOCK.SYSTEMS.Ability.PANELS.constant", {
+            value: this.costs.gp.value.formula,
+            cost: game.i18n.localize("TERIOCK.STATS.gp.abbreviation"),
+          });
         } else if (this.costs.gp.type === "static") {
-          gpCost = this.costs.gp.value.static + " ₲";
+          gpCost = game.i18n.format("TERIOCK.SYSTEMS.Ability.PANELS.constant", {
+            value: this.costs.gp.value.static,
+            cost: game.i18n.localize("TERIOCK.STATS.gp.abbreviation"),
+          });
         }
         const bars = [
           {
             icon: icons.ability.execution,
-            label: "Execution",
+            label: game.i18n.localize(
+              "TERIOCK.SYSTEMS.Ability.PANELS.execution",
+            ),
             wrappers: [
               ref.executionTime[this.maneuver][this.executionTime] || "",
               this.piercing.value.toUpperCase(),
@@ -59,7 +85,9 @@ export default (Base) => {
           },
           {
             icon: icons.ability.target,
-            label: "Targeting",
+            label: game.i18n.localize(
+              "TERIOCK.SYSTEMS.Ability.PANELS.targeting",
+            ),
             wrappers: [
               ["missile", "cone", "sight", "aura"].includes(this.delivery.base)
                 ? this.range.abbreviation
@@ -72,7 +100,9 @@ export default (Base) => {
           },
           {
             icon: icons.ability.expansion,
-            label: "Expansion",
+            label: game.i18n.localize(
+              "TERIOCK.SYSTEMS.Ability.FIELDS.expansion.label",
+            ),
             wrappers: this.expansion.type
               ? [
                   ["detonate", "ripple"].includes(this.expansion.type)
@@ -81,48 +111,107 @@ export default (Base) => {
                   ref.expansion[this.expansion.type] || "",
                   this.expansion.range.abbreviation,
                   formulaExists(this.expansion.cap.raw)
-                    ? this.expansion.cap.raw + " extra executions"
+                    ? game.i18n.format(
+                        "TERIOCK.SYSTEMS.Ability.PANELS.expansionCap",
+                        { value: this.expansion.cap.raw },
+                      )
                     : "",
                 ]
               : [],
           },
           {
             icon: icons.ability.cost,
-            label: "Costs",
+            label: game.i18n.localize(
+              "TERIOCK.SYSTEMS.Ability.FIELDS.costs.label",
+            ),
             wrappers: [
               mpCost || "",
               hpCost || "",
               gpCost || "",
               ref.breakCost[this.costs.break] || "",
-              this.costs.verbal ? "Verbal" : "",
-              this.costs.somatic ? "Somatic" : "",
-              this.costs.material ? "Material" : "",
-              this.invoked ? "Invoked" : "",
+              this.costs.verbal
+                ? game.i18n.localize(
+                    "TERIOCK.SYSTEMS.Ability.FIELDS.costs.verbal.label",
+                  )
+                : "",
+              this.costs.somatic
+                ? game.i18n.localize(
+                    "TERIOCK.SYSTEMS.Ability.FIELDS.costs.somatic.label",
+                  )
+                : "",
+              this.costs.material
+                ? game.i18n.localize(
+                    "TERIOCK.SYSTEMS.Ability.FIELDS.costs.material.label",
+                  )
+                : "",
+              this.invoked
+                ? game.i18n.localize(
+                    "TERIOCK.SYSTEMS.Ability.FIELDS.invoked.label",
+                  )
+                : "",
             ],
           },
           {
             icon: icons.ability.effectType,
-            label: "Effects and Power Sources",
+            label: "TERIOCK.SYSTEMS.Ability.PANELS.effectPower",
             wrappers: [
-              this.basic ? "Basic" : "",
-              this.sustained ? "Sustained" : "",
-              this.standard && this.skill ? "Semblant" : "",
-              this.standard && this.spell ? "Conjured" : "",
+              this.basic
+                ? game.i18n.localize(
+                    "TERIOCK.SYSTEMS.Ability.FIELDS.basic.label",
+                  )
+                : "",
+              this.sustained
+                ? game.i18n.localize(
+                    "TERIOCK.SYSTEMS.Ability.FIELDS.sustained.label",
+                  )
+                : "",
+              this.standard && this.skill
+                ? game.i18n.localize("TERIOCK.TERMS.Common.semblant")
+                : "",
+              this.standard && this.spell
+                ? game.i18n.localize("TERIOCK.TERMS.Common.conjured")
+                : "",
               ...this.powerSources.map((power) => ref.powerSources[power]),
               ...this.elements.map((element) => ref.elements[element]),
-              this.ritual ? "Ritual" : "",
-              this.rotator ? "Rotator" : "",
-              this.skill ? "Skill" : "",
-              this.spell ? "Spell" : "",
+              this.ritual
+                ? game.i18n.localize(
+                    "TERIOCK.SYSTEMS.Ability.FIELDS.ritual.label",
+                  )
+                : "",
+              this.rotator
+                ? game.i18n.localize(
+                    "TERIOCK.SYSTEMS.Ability.FIELDS.rotator.label",
+                  )
+                : "",
+              this.skill
+                ? game.i18n.localize(
+                    "TERIOCK.SYSTEMS.Ability.FIELDS.skill.label",
+                  )
+                : "",
+              this.spell
+                ? game.i18n.localize(
+                    "TERIOCK.SYSTEMS.Ability.FIELDS.spell.label",
+                  )
+                : "",
             ],
           },
           {
             icon: ref.form[this.form].icon,
-            label: "Ability Type",
+            label: game.i18n.localize(
+              "TERIOCK.SYSTEMS.Ability.PANELS.abilityType",
+            ),
             wrappers: [
               ref.form[this.form].name || "",
-              this.warded ? "Warded" : "",
-              this.elderSorcery ? "Elder Sorcery" : "",
+              this.warded
+                ? game.i18n.localize(
+                    "TERIOCK.SYSTEMS.Attack.FIELDS.warded.label",
+                  )
+                : "",
+              this.elderSorcery
+                ? game.i18n.localize(
+                    "TERIOCK.SYSTEMS.Ability.FIELDS.elderSorcery.label",
+                  )
+                : "",
               ...this.effectTypes
                 .filter((e) => !this.powerSources.has(e))
                 .map((effect) => ref.effectTypes[effect]),

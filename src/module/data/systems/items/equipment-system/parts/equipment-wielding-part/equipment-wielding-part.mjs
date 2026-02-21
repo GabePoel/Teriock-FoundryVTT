@@ -77,7 +77,11 @@ export default (Base) => {
           {
             icon: this.equipped ? "circle-check" : "circle",
             action: "toggleEquippedDoc",
-            tooltip: this.equipped ? "Equipped" : "Unequipped",
+            tooltip: this.equipped
+              ? game.i18n.localize("TERIOCK.SYSTEMS.Equipment.EMBED.equipped")
+              : game.i18n.localize(
+                  "TERIOCK.SYSTEMS.Equipment.EMBED.unequipped",
+                ),
             condition: this.parent.isOwner,
             callback: async () => {
               if (this.equipped) {

@@ -54,14 +54,7 @@ export default class ResourceSystem extends mix(
   /** @inheritDoc */
   get panelParts() {
     const parts = super.panelParts;
-    parts.bars.push({
-      icon: TERIOCK.display.icons.ui.quantity,
-      label: "Quantity",
-      wrappers: [
-        `${this.quantity} Remaining`,
-        `${this.maxQuantity.value === Infinity ? "No" : this.maxQuantity.value} Maximum`,
-      ],
-    });
+    parts.bars.push(this._consumableBar);
     return parts;
   }
 

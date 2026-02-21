@@ -18,7 +18,9 @@ export async function selectDocumentsDialog(documents, options = {}) {
       nameKey: "name",
       openable: false,
       textKey: null,
-      title: "Select Documents",
+      title: game.i18n.localize(
+        "TERIOCK.DIALOGS.SelectDocument.defaults.title",
+      ),
       tooltip: true,
       tooltipAsync: false,
       tooltipKey: null,
@@ -28,7 +30,9 @@ export async function selectDocumentsDialog(documents, options = {}) {
   );
 
   if (documents.length === 0) {
-    ui.notifications.warn("There are no valid options to select from.");
+    ui.notifications.warn(
+      game.i18n.localize("TERIOCK.DIALOGS.SelectDocument.noOptions"),
+    );
     return [];
   }
 

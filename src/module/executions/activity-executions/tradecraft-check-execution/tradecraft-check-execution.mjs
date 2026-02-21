@@ -29,7 +29,9 @@ export default class TradecraftCheckExecution extends TradecraftExecutionMixin(
 
   /** @inheritDoc */
   get name() {
-    return `${TERIOCK.index.tradecrafts[this.tradecraft]} Check`;
+    return game.i18n.format("TERIOCK.ROLLS.Tradecraft.name", {
+      value: TERIOCK.index.tradecrafts[this.tradecraft],
+    });
   }
 
   /** @inheritDoc */

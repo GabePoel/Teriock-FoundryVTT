@@ -13,29 +13,32 @@ const { fields } = foundry.data;
  * @returns {Promise<string>} The roll formula with boost changes applied.
  */
 export default async function boostDialog(rollFormula, options = {}) {
-  const { crit = false, label = "Make Roll" } = options;
+  const {
+    crit = false,
+    label = game.i18n.localize("TERIOCK.DIALOGS.Boost.BUTTONS.ok"),
+  } = options;
   let formula = rollFormula;
   const formulaField = new fields.StringField({
     initial: rollFormula,
-    label: "Roll Formula",
-    hint: "The original formula. Make changes as needed, but do not directly apply boosts or deboosts.",
+    label: game.i18n.localize("TERIOCK.DIALOGS.Boost.FIELDS.formula.label"),
+    hint: game.i18n.localize("TERIOCK.DIALOGS.Boost.FIELDS.formula.hint"),
   });
   const boostsField = new fields.NumberField({
     min: 0,
     initial: 0,
-    label: "Boosts",
-    hint: "A number of boosts to apply.",
+    label: game.i18n.localize("TERIOCK.DIALOGS.Boost.FIELDS.boosts.label"),
+    hint: game.i18n.localize("TERIOCK.DIALOGS.Boost.FIELDS.boosts.hint"),
   });
   const deboostsField = new fields.NumberField({
     min: 0,
     initial: 0,
-    label: "Deboosts",
-    hint: "A number of deboosts to apply.",
+    label: game.i18n.localize("TERIOCK.DIALOGS.Boost.FIELDS.deboosts.label"),
+    hint: game.i18n.localize("TERIOCK.DIALOGS.Boost.FIELDS.deboosts.hint"),
   });
   const critField = new fields.BooleanField({
-    label: "Go Critical",
+    label: game.i18n.localize("TERIOCK.DIALOGS.Boost.FIELDS.crit.label"),
     initial: crit,
-    hint: "Double the number of dice rolled. This applies after boosts and deboosts.",
+    hint: game.i18n.localize("TERIOCK.DIALOGS.Boost.FIELDS.crit.hint"),
   });
   const contentHtml = document.createElement("div");
   contentHtml.append(
@@ -93,7 +96,7 @@ export default async function boostDialog(rollFormula, options = {}) {
       },
       window: {
         icon: makeIconClass("dice", "title"),
-        title: "Modify Roll Formula",
+        title: game.i18n.localize("TERIOCK.DIALOGS.Boost.title"),
       },
     });
   } catch {

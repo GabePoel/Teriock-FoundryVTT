@@ -43,7 +43,7 @@ export default function RevelationSystemMixin(Base) {
         return [
           ...super.getCardContextMenuEntries(doc),
           {
-            name: "Reveal",
+            name: game.i18n.localize("TERIOCK.SYSTEMS.Revelation.MENU.reveal"),
             icon: makeIcon(TERIOCK.display.icons.ui.show, "contextMenu"),
             callback: async () =>
               this.parent.update({
@@ -54,7 +54,9 @@ export default function RevelationSystemMixin(Base) {
             group: "reveal",
           },
           {
-            name: "Unreveal",
+            name: game.i18n.localize(
+              "TERIOCK.SYSTEMS.Revelation.MENU.unreveal",
+            ),
             icon: makeIcon(TERIOCK.display.icons.ui.hide, "contextMenu"),
             callback: async () =>
               this.parent.update({

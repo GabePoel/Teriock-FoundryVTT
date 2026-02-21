@@ -1,5 +1,5 @@
 <div class="character-tab notes">
-  <h1>Details</h1>
+  <h1>{{localize "TERIOCK.SHEETS.Actor.TABS.Details.title"}}</h1>
   <div class="character-tab-page">
     <div class="tgrid g2" style="gap: 1em;">
       <div class="teriock-block-display">
@@ -10,16 +10,16 @@
           data-tooltip-left="true"
         >
           <div class="tsubtle tcenter">
-            Movement Speed
+            {{localize "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.label"}}
           </div>
           <div class="character-shortbox-value">{{{system.movementSpeed}}}
-            ft / action
+            {{localize "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.rate"}}
           </div>
         </div>
         <div class="teriock-block-display-divider"></div>
         <div class="tgrid g3" style="padding-inline: 0.5em;">
           <div class="gi2">
-            Walk
+            {{localize "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.walk"}}
           </div>
           <div class="tcolored">
             {{{lookup
@@ -28,7 +28,7 @@
             }}}
           </div>
           <div class="gi2">
-            Difficult Terrain
+            {{localize "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.difficultTerrain"}}
           </div>
           <div class="tcolored">
             {{{lookup
@@ -37,7 +37,7 @@
             }}}
           </div>
           <div class="gi2">
-            Crawl
+            {{localize "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.crawl"}}
           </div>
           <div class="tcolored">
             {{{lookup
@@ -46,7 +46,7 @@
             }}}
           </div>
           <div class="gi2">
-            Swim
+            {{localize "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.swim"}}
           </div>
           <div class="tcolored">
             {{{lookup
@@ -55,7 +55,7 @@
             }}}
           </div>
           <div class="gi2">
-            Climb
+            {{localize "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.climb"}}
           </div>
           <div class="tcolored">
             {{{lookup
@@ -64,7 +64,7 @@
             }}}
           </div>
           <div class="gi2">
-            Hidden
+            {{localize "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.hidden"}}
           </div>
           <div class="tcolored">
             {{{lookup
@@ -73,7 +73,7 @@
             }}}
           </div>
           <div class="gi2">
-            Leap (Horizontal)
+            {{localize "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.leapHorizontal"}}
           </div>
           <div class="tcolored">
             {{{lookup
@@ -82,7 +82,7 @@
             }}}
           </div>
           <div class="gi2">
-            Leap (Vertical)
+            {{localize "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.leapVertical"}}
           </div>
           <div class="tcolored">
             {{{lookup
@@ -91,7 +91,7 @@
             }}}
           </div>
           <div class="gi2">
-            Fly
+            {{localize "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.fly"}}
           </div>
           <div class="tcolored">
             {{{lookup
@@ -100,7 +100,7 @@
             }}}
           </div>
           <div class="gi2">
-            Dig
+            {{localize "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.dig"}}
           </div>
           <div class="tcolored">
             {{{lookup
@@ -109,7 +109,7 @@
             }}}
           </div>
           <div class="gi2">
-            Dive
+            {{localize "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.dive"}}
           </div>
           <div class="tcolored">
             {{{lookup
@@ -123,10 +123,10 @@
         <div class="teriock-block-display" style="padding: 1em;">
           <div class="tgrid g3" style="padding-inline: 0.5em;">
             <div class="gi2 tsubtle">
-              Sense
+              {{localize "TERIOCK.SHEETS.Actor.TABS.Details.sense.label"}}
             </div>
             <div class="tcenter tsubtle">
-              Range
+              {{localize "TERIOCK.SHEETS.Actor.TABS.Details.sense.range"}}
             </div>
             {{#each TERIOCK.options.character.senses as |name key|}}
               <div class="gi2">
@@ -157,7 +157,7 @@
               class="character-shortbox character-size-box"
             >
               <div class="tsubtle tcenter">
-                Size
+                {{localize "TERIOCK.SHEETS.Actor.TABS.Details.size.label"}}
               </div>
               <div class="affix">
                 <div class="unselected">
@@ -168,7 +168,7 @@
                   value=system._source.size.number.raw
                   classes="character-size-input character-smallbox-value selected transparent-input"
                   dataset=(object
-                    tooltip=(concat (ucFirst system.size.category) ": " system.size.reach " ft reach")
+                    tooltip=(concat (ucFirst system.size.category) ": " system.size.reach " " (localize "TERIOCK.SHEETS.Actor.TABS.Details.size.reach"))
                     tooltipClass=""
                     tooltipDirection="DOWN")
                 }}
@@ -176,18 +176,20 @@
             </div>
             <div class="character-shortbox character-weight-box">
               <div class="tsubtle tcenter">
-                Weight
+                {{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.label"}}
               </div>
               <div class="affix">
                 <div class="unselected">
-                  <span class="character-weight-input character-smallbox-value">{{{system.weight.self.value}}} lb</span>
+                  <span
+                    class="character-weight-input character-smallbox-value">{{{system.weight.self.value}}} {{localize
+                    "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}</span>
                 </div>
                 {{formInput
                   systemFields.weight.fields.self
                   value=system._source.weight.self.raw
                   classes="character-weight-input character-smallbox-value selected transparent-input"
                   dataset=(object
-                    tooltip=(concat "Including Equipment: " system.weight.value " lb")
+                    tooltip=(localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.includingEquipment" value=system.weight.value)
                     tooltipClass=""
                     tooltipDirection=""
                   )
@@ -196,16 +198,17 @@
             </div>
             <div class="character-shortbox character-carrying-box">
               <div class="tsubtle tcenter">
-                Carrying
+                {{localize "TERIOCK.SHEETS.Actor.TABS.Details.carrying.label"}}
               </div>
               <div
                 class="character-smallbox-value tcenter"
                 data-tooltip-class=""
-                data-tooltip="Including Self: {{{system.weight.value}}} lb"
+                data-tooltip="{{localize "TERIOCK.SHEETS.Actor.TABS.Details.carrying.includingSelf"
+                                         value=system.weight.value}}"
                 data-tooltip-direction="DOWN"
                 style="height: 2rem;"
               >{{{system.weight
-              .carried}}} lb
+              .carried}}} {{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}
               </div>
             </div>
           </div>
@@ -217,37 +220,37 @@
             data-make-tooltip
           >
             <div class="tsubtle tcenter">
-              Light
+              {{localize "TERIOCK.SHEETS.Actor.TABS.Details.carrying.light"}}
             </div>
             <div class="tsubtle tcenter">
-              Heavy
+              {{localize "TERIOCK.SHEETS.Actor.TABS.Details.carrying.heavy"}}
             </div>
             <div class="tsubtle tcenter">
-              Max
+              {{localize "TERIOCK.SHEETS.Actor.TABS.Details.carrying.max"}}
             </div>
             <div
               class="tcenter tround {{#if (gte system.weight.carried system.carryingCapacity.light)}}tred{{/if}}"
-              data-tooltip="Light Carrying Capacity"
+              data-tooltip="{{localize "TERIOCK.SHEETS.Actor.TABS.Details.carrying.lightCapacity"}}"
               data-tooltip-direction="DOWN"
               data-tooltip-class=""
             >
-              {{{system.carryingCapacity.light}}} lb
+              {{{system.carryingCapacity.light}}} {{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}
             </div>
             <div
               class="tcenter tround {{#if (gte system.weight.carried system.carryingCapacity.heavy)}}tred{{/if}}"
-              data-tooltip="Heavy Carrying Capacity"
+              data-tooltip="{{localize "TERIOCK.SHEETS.Actor.TABS.Details.carrying.heavyCapacity"}}"
               data-tooltip-direction="DOWN"
               data-tooltip-class=""
             >
-              {{{system.carryingCapacity.heavy}}} lb
+              {{{system.carryingCapacity.heavy}}} {{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}
             </div>
             <div
               class="tcenter tround {{#if (gte system.weight.carried system.carryingCapacity.max)}}tred{{/if}}"
-              data-tooltip="Maximum Carrying Capacity"
+              data-tooltip="{{localize "TERIOCK.SHEETS.Actor.TABS.Details.carrying.maxCapacity"}}"
               data-tooltip-direction="DOWN"
               data-tooltip-class=""
             >
-              {{{system.carryingCapacity.max}}} lb
+              {{{system.carryingCapacity.max}}} {{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}
             </div>
           </div>
         </div>
@@ -261,15 +264,16 @@
             data-tooltip-left="true"
           >
             <div class="tsubtle tcenter">
-              Curses
+              {{localize "TERIOCK.SHEETS.Actor.TABS.Details.curses.label"}}
             </div>
             <div class="character-smallbox-value tcenter" style="height: 2rem;">
-              {{{system.curses.value}}} / {{{system.curses.max}}}
+              {{localize "TERIOCK.SHEETS.Actor.TABS.Details.curses.capacity" value=system.curses.value
+                         max=system.curses.max}}
             </div>
           </div>
           <div class="character-shortbox">
             <div class="tsubtle tcenter">
-              Max Rotators
+              {{localize "TERIOCK.SHEETS.Actor.TABS.Details.maxRotators.label"}}
             </div>
             <div class="affix">
               <div class="unselected">
@@ -288,7 +292,7 @@
       <div class="teriock-block-display" style="flex-direction: row; padding-bottom: 0.25em; padding-top: 0.75em;">
         <div class="character-shortbox">
           <div class="tsubtle tcenter">
-            Hiding Score
+            {{localize "TERIOCK.SHEETS.Actor.TABS.Details.hiding.label"}}
           </div>
           <div class="affix">
             <div class="unselected">
@@ -305,7 +309,7 @@
         </div>
         <div class="character-shortbox">
           <div class="tsubtle tcenter">
-            Perceiving Score
+            {{localize "TERIOCK.SHEETS.Actor.TABS.Details.perceiving.label"}}
           </div>
           <div class="affix">
             <div class="unselected">
@@ -328,7 +332,8 @@
         value="{{system.notes}}"
         toggled="true"
         editable="editable"
-      >{{#if (exists enrichedNotes)}}{{{enrichedNotes}}}{{else}}Notes can be added here.{{/if}}</prose-mirror>
+      >{{#if (exists enrichedNotes)}}{{{enrichedNotes}}}{{else}}{{localize
+        "TERIOCK.SHEETS.Actor.TABS.Details.notes.placeholder"}}{{/if}}</prose-mirror>
     </div>
   </div>
 </div>

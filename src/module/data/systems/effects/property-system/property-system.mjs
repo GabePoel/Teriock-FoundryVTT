@@ -158,7 +158,9 @@ export default class PropertySystem extends mix(
     return [
       {
         icon: TERIOCK.options.ability.form[this.form].icon,
-        label: "Property Type",
+        label: game.i18n.localize(
+          "TERIOCK.SYSTEMS.BaseEffect.FIELDS.form.label",
+        ),
         wrappers: [TERIOCK.options.ability.form[this.form].name],
       },
     ];
@@ -183,13 +185,19 @@ export default class PropertySystem extends mix(
       suffix = `: ${this.tag}`;
     }
     if (this.limitation && this.limitation.length > 0) {
-      additions.push("Limited");
+      additions.push(
+        game.i18n.localize("TERIOCK.SYSTEMS.BaseEffect.NAME.limited"),
+      );
     }
     if (this.improvement && this.improvement.length > 0) {
-      additions.push("Improved");
+      additions.push(
+        game.i18n.localize("TERIOCK.SYSTEMS.BaseEffect.NAME.improved"),
+      );
     }
     if (!this.revealed) {
-      additions.push("Unrevealed");
+      additions.push(
+        game.i18n.localize("TERIOCK.SYSTEMS.BaseEffect.NAME.unrevealed"),
+      );
     }
     let nameAddition = "";
     if (additions.length > 0) {

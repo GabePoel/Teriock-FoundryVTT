@@ -23,7 +23,9 @@ export default async function deathBagDialog(actor) {
   );
   const stonesHTML = document.createElement("fieldset");
   const stonesLegendHTML = document.createElement("legend");
-  stonesLegendHTML.innerText = "Stones";
+  stonesLegendHTML.innerText = game.i18n.localize(
+    "TERIOCK.DIALOGS.DeathBag.legend",
+  );
   stonesHTML.append(stonesLegendHTML);
   for (const color of ["black", "red", "white"]) {
     stonesHTML.append(
@@ -43,13 +45,15 @@ export default async function deathBagDialog(actor) {
     await new TeriockDialog({
       window: {
         icon: makeIconClass(TERIOCK.display.icons.ui.deathBag, "title"),
-        title: "Death Bag",
+        title: game.i18n.localize("TERIOCK.DIALOGS.DeathBag.title"),
       },
       content: contentHTML,
       buttons: [
         {
           action: "makePull",
-          label: "Make Pull",
+          label: game.i18n.localize(
+            "TERIOCK.DIALOGS.DeathBag.BUTTONS.makePull",
+          ),
           default: true,
           callback: async (_event, button) => {
             const stonesFormulas = {};
@@ -103,7 +107,9 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
   }
   if (totalStonesCount > 99) {
     ui.notifications.error(
-      `Bag has ${totalStonesCount} stones. Maximum of 99 allowed.`,
+      game.i18n.format("TERIOCK.DIALOGS.DeathBag.ERRORS.maxStones", {
+        count: totalStonesCount,
+      }),
     );
   } else {
     for (const color of Object.keys(startingStones)) {
@@ -111,10 +117,17 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
         bag.push(color);
       }
     }
-    wrappers.push(`${bag.length} total`);
+    wrappers.push(
+      game.i18n.format("TERIOCK.DIALOGS.DeathBag.PANEL.total", {
+        count: bag.length,
+      }),
+    );
     if (bag.length < toPullCount) {
       ui.notifications.error(
-        `Bag has ${bag.length} stones. Cannot pull ${toPullCount} stones from it.`,
+        game.i18n.format("TERIOCK.DIALOGS.DeathBag.ERRORS.cannotPull", {
+          bagCount: bag.length,
+          toPullCount,
+        }),
       );
     } else {
       let pulledCount = 0;
@@ -136,40 +149,45 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
         bars: [
           {
             icon: TERIOCK.display.icons.ui.stone,
-            label: "Initial Stones in Bag",
+            label: game.i18n.localize(
+              "TERIOCK.DIALOGS.DeathBag.PANEL.initialStonesInBag",
+            ),
             wrappers: wrappers,
           },
         ],
         blocks: [
           {
             italic: true,
-            text:
-              "<p>You are surrounded by darkness, but aren't alone. Something is reaching out to you. Something?" +
-              " Several things? It's not clear. You reach back, grasp something, and start to pull. It pulls you as" +
-              " well.</p>",
-            title: "Description",
+            text: `<p>${game.i18n.localize("TERIOCK.DIALOGS.DeathBag.PANEL.descriptionText")}</p>`,
+            title: game.i18n.localize(
+              "TERIOCK.DIALOGS.DeathBag.PANEL.description",
+            ),
           },
         ],
         icon: TERIOCK.display.icons.ui.deathBag,
         image: getImage("misc", "Death Bag"),
-        name: "Death Bag",
+        name: game.i18n.localize("TERIOCK.DIALOGS.DeathBag.PANEL.name"),
       };
       let outcome = "";
       switch (pulledStones.black ?? 0) {
         case 1:
-          outcome = "<p>You @L[Core:Death Bag]{forget how you died}.</p>";
+          outcome = game.i18n.localize(
+            "TERIOCK.DIALOGS.DeathBag.PANEL.outcome1",
+          );
           break;
         case 2:
-          outcome = "<p>You gain a @L[Core:Death Scars]{death scar}.</p>";
+          outcome = game.i18n.localize(
+            "TERIOCK.DIALOGS.DeathBag.PANEL.outcome2",
+          );
           break;
         case 3:
-          outcome =
-            "<p>You @L[Core:Permanent Death]{PD} or gain a" +
-            " @UUID[Compendium.teriock.tables.RollTable.b034b3cd8f613d8c]{DI}.";
+          outcome = game.i18n.localize(
+            "TERIOCK.DIALOGS.DeathBag.PANEL.outcome3",
+          );
           break;
       }
       panelParts.blocks.push({
-        title: "Outcome",
+        title: game.i18n.localize("TERIOCK.DIALOGS.DeathBag.PANEL.outcome"),
         text: outcome,
       });
       const pullContent = await foundry.applications.handlebars.renderTemplate(
@@ -182,7 +200,11 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
         content: pullContent,
         system: {
           panels: [panel],
-          tags: [`Pulled ${toPullCount} Stones`],
+          tags: [
+            game.i18n.format("TERIOCK.DIALOGS.DeathBag.PANEL.pulledStonesTag", {
+              count: toPullCount,
+            }),
+          ],
         },
       };
       await TeriockChatMessage.create(chatMessageData);

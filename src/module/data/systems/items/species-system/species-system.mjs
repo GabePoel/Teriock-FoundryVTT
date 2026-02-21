@@ -60,20 +60,17 @@ export default class SpeciesSystem extends mix(
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       adult: new fields.NumberField({ initial: 0, min: 0 }),
-      appearance: new TextField({ label: "Appearance" }),
-      attributeIncrease: new TextField({ label: "Attribute increase" }),
-      br: new fields.NumberField({
-        initial: 1,
-        label: "Battle Rating",
-      }),
+      appearance: new TextField(),
+      attributeIncrease: new TextField(),
+      br: new fields.NumberField({ initial: 1 }),
       competence: new fields.EmbeddedDataField(CompetenceModel, {
         initial: { raw: 1 },
       }),
-      description: new TextField({ label: "Description" }),
-      hpIncrease: new TextField({ label: "Hit increase" }),
-      innateRanks: new TextField({ label: "Innate ranks" }),
+      description: new TextField(),
+      hpIncrease: new TextField(),
+      innateRanks: new TextField(),
       lifespan: new fields.NumberField({ initial: 0, min: 0 }),
-      mpIncrease: new TextField({ label: "Mana increase" }),
+      mpIncrease: new TextField(),
       size: new fields.SchemaField({
         enabled: new fields.BooleanField({ initial: true }),
         max: new fields.NumberField(),
@@ -128,7 +125,11 @@ export default class SpeciesSystem extends mix(
     const parts = super.embedParts;
     parts.text = dotJoin([
       ...Array.from(this.traits),
-      this.size.enabled ? `Size ${this.size.value}` : "",
+      this.size.enabled
+        ? game.i18n.format("TERIOCK.SYSTEMS.Species.PANELS.size.value", {
+            value: this.size.value,
+          })
+        : "",
     ]);
     parts.subtitle = "Species";
     return parts;
@@ -194,11 +195,14 @@ export default class SpeciesSystem extends mix(
     if (this.transformationEffect) {
       const proceed = await TeriockDialog.confirm({
         window: {
-          title: "Delete Effect?",
+          title: game.i18n.localize(
+            "TERIOCK.SYSTEMS.Species.DIALOG.deleteEffect.title",
+          ),
           icon: `fas fa-${TERIOCK.options.document.consequence.icon}`,
         },
-        content:
-          "This species is provided by a transformation effects. Would you like to delete that as well?",
+        content: game.i18n.localize(
+          "TERIOCK.SYSTEMS.Species.DIALOG.deleteEffect.content",
+        ),
         modal: true,
         rejectClose: false,
       });
@@ -217,7 +221,9 @@ export default class SpeciesSystem extends mix(
     return [
       ...super.getCardContextMenuEntries(doc),
       {
-        name: "Set Primary Transformation",
+        name: game.i18n.localize(
+          "TERIOCK.SYSTEMS.Species.MENU.setPrimaryTransformation",
+        ),
         icon: makeIcon(TERIOCK.display.icons.effect.transform, "contextMenu"),
         callback: this.setPrimaryTransformation.bind(this),
         condition:

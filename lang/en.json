@@ -16,6 +16,20 @@
           }
         },
         "TOOLTIPS": {
+          "competence": {
+            "base": {
+              "off": "Doesn't Always Apply",
+              "on": "Always Applies"
+            },
+            "fluent": {
+              "off": "Doesn't Apply if Fluent",
+              "on": "Applies if Fluent"
+            },
+            "proficient": {
+              "off": "Doesn't Apply if Proficient",
+              "on": "Applies if Proficient"
+            }
+          },
           "crit": {
             "base": {
               "off": "Doesn't Apply on Non-Crit",
@@ -24,20 +38,6 @@
             "critical": {
               "off": "Doesn't Apply on Crit",
               "on": "Applies on Crit"
-            }
-          },
-          "competence": {
-            "base": {
-              "off": "Doesn't Always Apply",
-              "on": "Always Applies"
-            },
-            "proficient": {
-              "off": "Doesn't Apply if Proficient",
-              "on": "Applies if Proficient"
-            },
-            "fluent": {
-              "off": "Doesn't Apply if Fluent",
-              "on": "Applies if Fluent"
             }
           },
           "heighten": {
@@ -58,8 +58,8 @@
       "ChatStatusAutomation": {
         "FIELDS": {
           "executor": {
-            "label": "Associate Executor",
-            "hint": "Whether the creature that executes the ability will be associated with this condition."
+            "hint": "Whether the creature that executes the ability will be associated with this condition.",
+            "label": "Associate Executor"
           },
           "relation": {
             "hint": "What the relationship between the effect and condition is."
@@ -76,8 +76,8 @@
       "CommonImpactsAutomation": {
         "FIELDS": {
           "common": {
-            "label": "Impacts",
-            "hint": "Simple one-off effects that don't require customization."
+            "hint": "Simple one-off effects that don't require customization.",
+            "label": "Impacts"
           }
         },
         "LABEL": "Common Impacts"
@@ -112,12 +112,12 @@
           "macro": {
             "label": "Macro"
           },
-          "relation": {
-            "hint": "Whether this macro can be run as a button from the chat message or hooks into other behavior."
-          },
           "pseudoHook": {
             "hint": "The hook that executes this macro when fired.",
             "label": "Hook"
+          },
+          "relation": {
+            "hint": "Whether this macro can be run as a button from the chat message or hooks into other behavior."
           }
         },
         "LABEL": "Macro"
@@ -181,11 +181,242 @@
       "UseAbilitiesAutomation": {
         "FIELDS": {
           "abilityNames": {
-            "label": "Abilities",
-            "hint": "Abilities that this can directly cause the execution of."
+            "hint": "Abilities that this can directly cause the execution of.",
+            "label": "Abilities"
           }
         },
         "LABEL": "Use Abilities"
+      }
+    },
+    "DIALOGS": {
+      "Boost": {
+        "BUTTONS": {
+          "ok": "Make Roll"
+        },
+        "FIELDS": {
+          "boosts": {
+            "hint": "A number of boosts to apply.",
+            "label": "Boosts"
+          },
+          "crit": {
+            "hint": "Double the number of dice rolled. This applies after boosts and deboosts.",
+            "label": "Go Critical"
+          },
+          "deboosts": {
+            "hint": "A number of deboosts to apply",
+            "label": "Deboosts"
+          },
+          "formula": {
+            "hint": "The original formula. Make changes as needed, but do not directly apply boosts or deboosts.",
+            "label": "Roll Formula"
+          }
+        },
+        "title": "Modify Roll Formula"
+      },
+      "ChangeSize": {
+        "BUTTONS": {
+          "no": "No",
+          "yes": "Yes"
+        },
+        "title": "Change Size"
+      },
+      "DeathBag": {
+        "BUTTONS": {
+          "makePull": "Make Pull"
+        },
+        "ERRORS": {
+          "cannotPull": "Bag has {bagCount} stones. Cannot pull {toPullCount} stones from it.",
+          "maxStones": "Bag has {count} stones. Maximum of 99 allowed."
+        },
+        "PANEL": {
+          "description": "Description",
+          "descriptionText": "You are surrounded by darkness, but aren't alone. Something is reaching out to you. Something? Several things? It's not clear. You reach back, grasp something, and start to pull. It pulls you as well.",
+          "initialStonesInBag": "Initial Stones in Bag",
+          "name": "Death Bag",
+          "outcome": "Outcome",
+          "outcome1": "<p>You @L[Core:Death Bag]{forget how you died}.</p>",
+          "outcome2": "<p>You gain a @L[Core:Death Scars]{death scar}.</p>",
+          "outcome3": "<p>You @L[Core:Permanent Death]{PD} or gain a @UUID[Compendium.teriock.tables.RollTable.b034b3cd8f613d8c]{DI}.</p>",
+          "pulledStonesTag": "Pulled {count} Stones",
+          "total": "{count} total"
+        },
+        "legend": "Stones",
+        "title": "Death Bag"
+      },
+      "Heal": {
+        "FIELDS": {
+          "consumeHitDice": {
+            "hint": "Check this if hit dice should be consumed on use.",
+            "label": "Consume Hit Dice"
+          },
+          "forDamage": {
+            "hint": "Check this if the healing should be done for damage.",
+            "label": "For Damage"
+          }
+        },
+        "done": "Done",
+        "hintNoDice": "Click on the hacks you want to heal.",
+        "hintWithDice": "Click on the hacks you want to heal and the hit dice you want to spend.",
+        "title": "Healing"
+      },
+      "HotbarDrop": {
+        "BUTTONS": {
+          "general": "General",
+          "linked": "Linked"
+        },
+        "general": {
+          "hint": "This macro checks whether any actor that's selected has some {label} named {name} and makes them all use it.",
+          "label": "General"
+        },
+        "linked": {
+          "hint": "This macro connects to this specific instance of {child} on {actor}.",
+          "label": "Linked"
+        },
+        "title": "Macro Type Selection"
+      },
+      "InCombatExpiration": {
+        "BUTTONS": {
+          "remove": "Remove",
+          "roll": "Roll"
+        },
+        "contentConfirm": "Should {name} expire?",
+        "endConditionLegend": "End Condition",
+        "rollFlavor": "{name} Ending Roll",
+        "title": "{name} Expiration"
+      },
+      "NewDocument": {
+        "BUTTONS": {
+          "create": "Create",
+          "import": "Import"
+        },
+        "content": "Would you like to import an existing {typeName} or create one from scratch?",
+        "title": "New {name}"
+      },
+      "RefreshFromCompendium": {
+        "BUTTONS": {
+          "refresh": "Refresh"
+        },
+        "FIELDS": {
+          "createChildren": {
+            "hint": "If checked, will create children that aren't present in the local document.",
+            "label": "Create Children"
+          },
+          "deleteChildren": {
+            "hint": "If checked, will delete children that aren't present in the compendium source.",
+            "label": "Delete Children"
+          },
+          "recursive": {
+            "hint": "If checked, refreshes will apply recursively.",
+            "label": "Refresh Recursively"
+          },
+          "updateChildren": {
+            "hint": "If checked, will update children to match the compendium source.",
+            "label": "Update Children"
+          },
+          "updateDocument": {
+            "hint": "If checked, will update local document to match the compendium source.",
+            "label": "Update Document"
+          }
+        },
+        "noSource": "<p>{document} has no compendium source set.</p>",
+        "optionsLegend": "Refresh Options",
+        "sourceLegend": "Source Document",
+        "title": "Refresh {name} From Compendium"
+      },
+      "Revitalize": {
+        "FIELDS": {
+          "consumeManaDice": {
+            "hint": "Check this if mana dice should be consumed on use.",
+            "label": "Consume Mana Dice"
+          },
+          "forDrain": {
+            "hint": "Check this if the revitalizing should be done for drain.",
+            "label": "For Drain"
+          }
+        },
+        "done": "Done",
+        "hint": "Click on the mana dice you want to spend.",
+        "title": "Revitalizing"
+      },
+      "Select": {
+        "Ability": {
+          "hint": "Please select an ability.",
+          "title": "Select Ability"
+        },
+        "BodyPart": {
+          "hint": "Please select a body part.",
+          "title": "Select Body Part"
+        },
+        "Class": {
+          "hint": "Please select a class.",
+          "title": "Select Class"
+        },
+        "Compendiums": {
+          "hint": "Please select compendiums.",
+          "title": "Select Compendiums"
+        },
+        "Condition": {
+          "hint": "Please select a condition.",
+          "label": "Condition",
+          "title": "Select Condition"
+        },
+        "EquipmentClass": {
+          "hint": "Please select an equipment class.",
+          "label": "Equipment Class",
+          "title": "Select Equipment Class"
+        },
+        "EquipmentType": {
+          "hint": "Please select an equipment type.",
+          "title": "Select Equipment Type"
+        },
+        "Property": {
+          "hint": "Please select a property.",
+          "title": "Select Property"
+        },
+        "Tradecraft": {
+          "hint": "Please select a tradecraft.",
+          "title": "Select Tradecraft"
+        },
+        "WeaponClass": {
+          "hint": "Please select a weapon class.",
+          "label": "Weapon Class",
+          "title": "Select Weapon Class"
+        },
+        "defaults": {
+          "hint": "Please select an option above.",
+          "label": "Select",
+          "title": "Select"
+        },
+        "otherButton": "Other"
+      },
+      "SelectDocument": {
+        "defaults": {
+          "title": "Select Documents"
+        },
+        "noOptions": "There are no valid options to select from."
+      },
+      "SelectToken": {
+        "Condition": {
+          "hint": "The targets will be {conditionName} with respect to the selected creatures.",
+          "title": "Select Creatures"
+        },
+        "defaults": {
+          "title": "Select Tokens"
+        }
+      },
+      "SetStatDice": {
+        "BUTTONS": {
+          "confirm": "Confirm"
+        },
+        "title": "Set {dieName}"
+      },
+      "Update": {
+        "BUTTONS": {
+          "update": "Update"
+        },
+        "defaults": {
+          "title": "Update Fields"
+        }
       }
     },
     "MODELS": {
@@ -214,8 +445,8 @@
       "Piercing": {
         "FIELDS": {
           "raw": {
-            "label": "Piercing",
-            "hint": "How this interacts with armor and blocking."
+            "hint": "How this interacts with armor and blocking.",
+            "label": "Piercing"
           }
         }
       },
@@ -242,75 +473,36 @@
             "label": "Weight Multiplier"
           }
         }
+      },
+      "Usable": {
+        "USAGE": {
+          "use": "Use This"
+        }
+      }
+    },
+    "ROLLS": {
+      "Attack": {
+        "label": "Attack Roll"
+      },
+      "Feat": {
+        "label": "Feat Save",
+        "name": "{value} Feat Save",
+        "thresholded": "DC {threshold} {value} Feat Save",
+        "unthresholded": "{value} Feat Save"
+      },
+      "Resist": {
+        "label": "Resistance Save"
+      },
+      "Take": {
+        "label": "Effect Roll"
+      },
+      "Tradecraft": {
+        "label": "Tradecraft Check",
+        "name": "{value} Check"
       }
     },
     "SCHEMA": {
-      "Transformation": {
-        "enabled": {
-          "hint": "Whether this effect causes a transformation. Note that this isn't just for \"transformation effect\"s, but for any case in which another species' stats should be applied (such as animating as an undead).",
-          "label": "Causes Transformation"
-        },
-        "level": {
-          "hint": "How strong of a transformation this is.",
-          "label": "Transformation Level"
-        },
-        "image": {
-          "hint": "Optional overriding art to apply to the target.",
-          "label": "Token Art"
-        },
-        "multiple": {
-          "hint": "Allow selection of multiple species to transform into at the same time.",
-          "label": "Multiple Selection"
-        },
-        "resetHp": {
-          "hint": "Reset HP upon transformation.",
-          "label": "Reset HP"
-        },
-        "resetMp": {
-          "hint": "Reset MP upon transformation.",
-          "label": "Reset MP"
-        },
-        "suppression": {
-          "bodyParts": {
-            "hint": "Whether this should suppress body parts not provided by the transformation.",
-            "label": "Suppress Body Parts"
-          },
-          "equipment": {
-            "hint": "Whether this should suppress equipment not provided by the transformation.",
-            "label": "Suppress Equipment"
-          },
-          "fluencies": {
-            "hint": "Whether this should suppress fluencies not provided by the transformation.",
-            "label": "Suppress Fluencies"
-          },
-          "ranks": {
-            "hint": "Whether this should suppress ranks not provided by the transformation.",
-            "label": "Suppress Ranks"
-          }
-        },
-        "uuids": {
-          "hint": "The species this transforms the target into.",
-          "itemHint": "A specific species this transforms the target into.",
-          "label": "Species"
-        },
-        "select": {
-          "hint": "Select a subset of the species to turn into instead of all of them.",
-          "label": "Select"
-        },
-        "useFolder": {
-          "hint": "Use a folder of species instead of defining each individually.",
-          "label": "Use Folder"
-        },
-        "folder": {
-          "hint": "The folder of candidate species to transform into.",
-          "label": "Folder"
-        }
-      },
       "CombatExpiration": {
-        "who": {
-          "hint": "Whose turn should this effect attempt to expire on?",
-          "label": "Who"
-        },
         "what": {
           "roll": {
             "hint": "If this expires on a roll, what is the roll that needs to be made?",
@@ -338,20 +530,317 @@
             "hint": "What is the trigger for this effect expiring?",
             "label": "Trigger"
           }
+        },
+        "who": {
+          "hint": "Whose turn should this effect attempt to expire on?",
+          "label": "Who"
         }
       },
       "QualifiedChange": {
         "key": {"label": "Key"},
         "mode": {"label": "Mode"},
         "priority": {"label": "Priority"},
-        "time": {"label": "Timing"},
+        "qualifier": {"label": "Qualifier"},
         "target": {"label": "Target Document Type"},
-        "value": {"label": "Value"},
-        "qualifier": {"label": "Qualifier"}
+        "time": {"label": "Timing"},
+        "value": {"label": "Value"}
+      },
+      "Transformation": {
+        "enabled": {
+          "hint": "Whether this effect causes a transformation. Note that this isn't just for \"transformation effect\"s, but for any case in which another species' stats should be applied (such as animating as an undead).",
+          "label": "Causes Transformation"
+        },
+        "folder": {
+          "hint": "The folder of candidate species to transform into.",
+          "label": "Folder"
+        },
+        "image": {
+          "hint": "Optional overriding art to apply to the target.",
+          "label": "Token Art"
+        },
+        "level": {
+          "hint": "How strong of a transformation this is.",
+          "label": "Transformation Level"
+        },
+        "multiple": {
+          "hint": "Allow selection of multiple species to transform into at the same time.",
+          "label": "Multiple Selection"
+        },
+        "resetHp": {
+          "hint": "Reset HP upon transformation.",
+          "label": "Reset HP"
+        },
+        "resetMp": {
+          "hint": "Reset MP upon transformation.",
+          "label": "Reset MP"
+        },
+        "select": {
+          "hint": "Select a subset of the species to turn into instead of all of them.",
+          "label": "Select"
+        },
+        "suppression": {
+          "bodyParts": {
+            "hint": "Whether this should suppress body parts not provided by the transformation.",
+            "label": "Suppress Body Parts"
+          },
+          "equipment": {
+            "hint": "Whether this should suppress equipment not provided by the transformation.",
+            "label": "Suppress Equipment"
+          },
+          "fluencies": {
+            "hint": "Whether this should suppress fluencies not provided by the transformation.",
+            "label": "Suppress Fluencies"
+          },
+          "ranks": {
+            "hint": "Whether this should suppress ranks not provided by the transformation.",
+            "label": "Suppress Ranks"
+          }
+        },
+        "useFolder": {
+          "hint": "Use a folder of species instead of defining each individually.",
+          "label": "Use Folder"
+        },
+        "uuids": {
+          "hint": "The species this transforms the target into.",
+          "itemHint": "A specific species this transforms the target into.",
+          "label": "Species"
+        }
+      }
+    },
+    "SHEETS": {
+      "Actor": {
+        "SIDEBAR": {
+          "AttributeBox": {
+            "competence": {
+              "label": "Pro",
+              "tooltip": "Proficiency/Fluency"
+            },
+            "modifier": {
+              "label": "Mod",
+              "tooltip": "Total Save Modifier"
+            },
+            "name": {
+              "label": "Attribute",
+              "tooltip": "Name"
+            },
+            "score": {
+              "label": "Score",
+              "tooltip": "Attribute Score"
+            }
+          },
+          "Avatar": {
+            "ringDisabled": "Ring Disabled",
+            "ringEnabled": "Ring Enabled"
+          },
+          "Bars": {
+            "hp": {
+              "current": "Current HP",
+              "max": "Maximum HP",
+              "take": "Take Damage",
+              "temp": "Temporary HP"
+            },
+            "mp": {
+              "current": "Current MP",
+              "max": "Maximum MP",
+              "take": "Take Drain",
+              "temp": "Temporary MP"
+            },
+            "wither": {
+              "current": "Current Wither",
+              "max": "Maximum Wither",
+              "take": "Take Wither"
+            }
+          },
+          "BattleBox": {
+            "ac": {
+              "label": "AC",
+              "tooltip": "Armor Class"
+            },
+            "attackingWith": "Attacking With",
+            "av0": {
+              "forced": "AV0*",
+              "normal": "AV0"
+            },
+            "blockingWith": "Blocking With",
+            "bv": {
+              "label": "BV",
+              "tooltip": "Block Value"
+            },
+            "cc": {
+              "label": "AC + BV",
+              "tooltip": "Combined AC and BV"
+            },
+            "fightingStyle": "Fighting Style",
+            "none": "None",
+            "open": "Open",
+            "penalty": {
+              "label": "Penalty",
+              "tooltip": "Change Attack Penalty"
+            },
+            "piercing": {
+              "label": "Piercing",
+              "tooltip": "Override Piercing"
+            },
+            "rollAttack": "Roll Attack",
+            "rollBlock": "Roll Block",
+            "rollDamage": "Roll Damage",
+            "rollResistance": "Roll Resistance Save",
+            "sb": {
+              "label": "SB",
+              "tooltip": "Toggle Style Bonus"
+            },
+            "ub": {
+              "forced": "UB*",
+              "normal": "UB"
+            }
+          },
+          "CoverBox": {
+            "full": "Full Cover",
+            "half": "Half Cover",
+            "label": "Cover",
+            "no": "No Cover",
+            "threeQuarters": "Three-Quarters Cover"
+          },
+          "ReactionBox": {
+            "label": "Has Reaction",
+            "tooltip": "Toggle Reaction"
+          }
+        },
+        "TABS": {
+          "Abilities": {
+            "title": "Abilities"
+          },
+          "Classes": {
+            "title": "Classes"
+          },
+          "Details": {
+            "carrying": {
+              "heavy": "Heavy",
+              "heavyCapacity": "Heavy Carrying Capacity",
+              "includingSelf": "Including Self: {value} lb",
+              "label": "Carrying",
+              "light": "Light",
+              "lightCapacity": "Light Carrying Capacity",
+              "max": "Max",
+              "maxCapacity": "Maximum Carrying Capacity"
+            },
+            "curses": {
+              "capacity": "{value} / {max}",
+              "label": "Curses"
+            },
+            "hiding": {
+              "label": "Hiding Score"
+            },
+            "maxRotators": {
+              "label": "Max Rotators"
+            },
+            "movementSpeed": {
+              "climb": "Climb",
+              "crawl": "Crawl",
+              "difficultTerrain": "Difficult Terrain",
+              "dig": "Dig",
+              "dive": "Dive",
+              "fly": "Fly",
+              "hidden": "Hidden",
+              "label": "Movement Speed",
+              "leapHorizontal": "Leap (Horizontal)",
+              "leapVertical": "Leap (Vertical)",
+              "rate": "ft / action",
+              "swim": "Swim",
+              "walk": "Walk"
+            },
+            "notes": {
+              "label": "Notes",
+              "placeholder": "Notes can be added here."
+            },
+            "perceiving": {
+              "label": "Perceiving Score"
+            },
+            "sense": {
+              "label": "Sense",
+              "range": "Range"
+            },
+            "size": {
+              "label": "Size",
+              "reach": "ft reach"
+            },
+            "title": "Details",
+            "weight": {
+              "includingEquipment": "Including Equipment: {value} lb",
+              "label": "Weight",
+              "unit": "lb"
+            }
+          },
+          "Effects": {
+            "title": "Effects"
+          },
+          "Inventory": {
+            "title": "Inventory"
+          },
+          "Powers": {
+            "title": "Powers"
+          },
+          "Protections": {
+            "title": "Protections"
+          },
+          "Resources": {
+            "title": "Resources"
+          },
+          "Tradecrafts": {
+            "competence": {
+              "label": "Pro",
+              "tooltip": "Proficiency/Fluency"
+            },
+            "modifier": {
+              "label": "Mod",
+              "tooltip": "Total Check Modifier"
+            },
+            "name": {
+              "tooltip": "Name"
+            },
+            "score": {
+              "0": "Normal",
+              "1": "Talented",
+              "2": "Expertise",
+              "3": "Mastery"
+            },
+            "talent": {
+              "label": "Tal",
+              "tooltip": "Talent/Expertise/Mastery"
+            },
+            "title": "Tradecrafts"
+          }
+        }
+      }
+    },
+    "STATS": {
+      "gp": {
+        "abbreviation": "₲",
+        "long": "Gold Pieces",
+        "short": "Gold"
+      },
+      "hp": {
+        "abbreviation": "HP",
+        "long": "Hit Points",
+        "short": "Hits"
+      },
+      "mp": {
+        "abbreviation": "MP",
+        "long": "Mana Points",
+        "short": "Mana"
       }
     },
     "SYSTEMS": {
       "Ability": {
+        "EMBED": {
+          "basic": "Basic abilities cannot be disabled.",
+          "combat": "Combat",
+          "locked": "Locked",
+          "setCombatCategory": "Set Combat Category",
+          "setSupportCategory": "Set Support Category",
+          "support": "Support",
+          "unsetCategory": "Unset Category"
+        },
         "FIELDS": {
           "adept": {
             "enabled": {
@@ -362,19 +851,13 @@
             "label": "Basic"
           },
           "costs": {
-            "material": {
-              "label": "Material"
+            "break": {
+              "label": "Break Cost"
             },
-            "somatic": {
-              "label": "Somatic"
-            },
-            "verbal": {
-              "label": "Verbal"
-            },
-            "mp": {
+            "gp": {
               "value": {
                 "variable": {
-                  "label": "Mana Cost"
+                  "label": "Gold Cost"
                 }
               }
             },
@@ -385,18 +868,25 @@
                 }
               }
             },
-            "gp": {
-              "value": {
-                "variable": {
-                  "label": "Gold Cost"
-                }
-              }
-            },
-            "break": {
-              "label": "Break Cost"
+            "label": "Costs",
+            "material": {
+              "label": "Material"
             },
             "materialCost": {
               "label": "Material Cost"
+            },
+            "mp": {
+              "value": {
+                "variable": {
+                  "label": "Mana Cost"
+                }
+              }
+            },
+            "somatic": {
+              "label": "Somatic"
+            },
+            "verbal": {
+              "label": "Verbal"
             }
           },
           "delivery": {
@@ -412,8 +902,9 @@
             "label": "Elder Sorcery"
           },
           "elderSorceryIncant": {
-            "label": "With Elder Sorcery...",
-            "button": "Elder Sorcery Incant"
+            "button": "Elder Sorcery Incant",
+            "elements": "With the Elder Sorcery of {elements}...",
+            "label": "With Elder Sorcery..."
           },
           "elements": {
             "label": "Elements"
@@ -442,6 +933,7 @@
             "label": "Granter Only"
           },
           "grantOnlyText": {
+            "derived": "This ability can only be used with @UUID[{uuid}].",
             "label": "Granter Only"
           },
           "heightened": {
@@ -532,30 +1024,52 @@
           },
           "upgrades": {
             "competence": {
+              "button": "Attribute Competence",
               "text": {
                 "label": "Attribute Competence Improvement"
               },
-              "button": "Attribute Competence"
+              "update": "Update Attribute Competence Upgrade"
             },
             "score": {
+              "button": "Attribute Score",
               "text": {
                 "label": "Attribute Score Improvement"
               },
+              "update": "Update Attribute Score Upgrade",
               "value": {
                 "hint": "The value of this attribute score.",
                 "label": "Score"
-              },
-              "button": "Attribute Score"
+              }
             }
           }
+        },
+        "NAME": {
+          "granted": "Granted"
+        },
+        "PANELS": {
+          "abilityType": "Ability Type",
+          "constant": "{value} {cost}",
+          "effectPower": "Effect and Power Sources",
+          "execution": "Execution",
+          "expansionCap": "{value} expansion cap",
+          "targeting": "Targeting",
+          "variable": "Variable {cost}"
+        },
+        "QUERY": {
+          "sustainedExpirationFail": "Could not expire sustained consequence."
+        },
+        "USAGE": {
+          "alwaysActive": "Always Active",
+          "cast": "Cast {value}",
+          "onlyOnUse": "Activates Only on Use"
         }
       },
       "Armament": {
         "FIELDS": {
           "attackPenalty": {
             "raw": {
-              "label": "Attack Penalty",
-              "hint": "The attack penalty incurred when attacking with this."
+              "hint": "The attack penalty incurred when attacking with this.",
+              "label": "Attack Penalty"
             }
           },
           "av": {
@@ -578,13 +1092,13 @@
           "fightingStyle": {
             "label": "Fighting Style"
           },
-          "notes": {
-            "label": "Notes"
-          },
           "hit": {
             "raw": {
               "label": "Hit Bonus"
             }
+          },
+          "notes": {
+            "label": "Notes"
           },
           "range": {
             "long": {
@@ -592,16 +1106,16 @@
                 "label": "Range"
               }
             },
-            "short": {
-              "raw": {
-                "label": "Short Range"
-              }
+            "melee": {
+              "label": "Melee"
             },
             "ranged": {
               "label": "Ranged"
             },
-            "melee": {
-              "label": "Melee"
+            "short": {
+              "raw": {
+                "label": "Short Range"
+              }
             }
           },
           "specialRules": {
@@ -613,6 +1127,16 @@
           "vitals": {
             "label": "Vitals"
           }
+        },
+        "PANELS": {
+          "attack": "Attack",
+          "attackPenalty": "{value} AP",
+          "av": "{value} AV",
+          "bv": "{value} BV",
+          "damage": "{value} damage",
+          "defense": "Defense",
+          "hitBonus": "+{value} hit bonus",
+          "load": "Load"
         }
       },
       "Attack": {
@@ -627,6 +1151,78 @@
           "tier": {
             "raw": {
               "label": "Presence Tier"
+            }
+          }
+        },
+        "MENU": {
+          "attune": "Attune",
+          "deattune": "Deattune"
+        },
+        "PANELS": {
+          "tier": "Tier {value}"
+        }
+      },
+      "Attunement": {
+        "FIELDS": {
+          "inheritTier": {
+            "hint": "Whether this attunement inherits the tier of the target.",
+            "label": "Inherit Tier"
+          },
+          "target": {
+            "hint": "The entity that this attunement corresponds to.",
+            "label": "Attunement Target"
+          },
+          "tier": {
+            "hint": "The tier of this attunement."
+          },
+          "type": {
+            "hint": "What type of entity this attunement corresponds to.",
+            "label": "Attunement Type"
+          }
+        },
+        "PANELS": {
+          "for": "Attunement For"
+        },
+        "USAGE": {
+          "attuned": "Attuned",
+          "missing": "Not on Character"
+        }
+      },
+      "BaseActor": {
+        "ENCUMBRANCE": {
+          "0": "Not Encumbered",
+          "1": "Lightly Encumbered",
+          "2": "Heavily Encumbered",
+          "3": "Cannot Carry More"
+        },
+        "FIELDS": {
+          "combat": {
+            "attackPenalty": {
+              "hasReaction": "Has Reaction",
+              "label": "Attack Penalty"
+            }
+          },
+          "deathBag": {
+            "pull": {
+              "hint": "Total number of stones to pull from the Death Bag.",
+              "label": "Stones to Pull"
+            }
+          },
+          "interestRate": {
+            "label": "Interest Rate"
+          },
+          "offense": {
+            "sb": {
+              "label": "Style Bonus"
+            }
+          },
+          "scaling": {
+            "brScale": {
+              "hint": "Scale bonuses off BR instead of LVL.",
+              "label": "Scale off BR"
+            },
+            "lvl": {
+              "label": "Level"
             }
           }
         }
@@ -648,6 +1244,11 @@
           "tag": {
             "label": "Tag"
           }
+        },
+        "NAME": {
+          "improved": "Improved",
+          "limited": "Limited",
+          "unrevealed": "Unrevealed"
         }
       },
       "BaseItem": {
@@ -655,19 +1256,23 @@
           "disabled": {
             "label": "Disabled"
           },
-          "onUse": {
-            "label": "On Use",
-            "hint": "Abilities which activate only when this is used."
-          },
           "flaws": {
             "label": "Flaws"
           },
           "maxAv": {
             "label": "Maximum Worn AV"
+          },
+          "onUse": {
+            "hint": "Abilities which activate only when this is used.",
+            "label": "On Use"
           }
         }
       },
       "Child": {
+        "EMBED": {
+          "disabled": "Disabled",
+          "enabled": "Enabled"
+        },
         "FIELDS": {
           "description": {
             "label": "Description"
@@ -690,6 +1295,17 @@
               }
             }
           }
+        },
+        "MENU": {
+          "disable": "Disable",
+          "enable": "Enable",
+          "openGmNotes": "Open GM Notes",
+          "openImage": "Open Image",
+          "shareImage": "Share Image",
+          "shareWriteup": "Share Writeup"
+        },
+        "USAGE": {
+          "use": "Use {value}"
         }
       },
       "Common": {
@@ -698,37 +1314,23 @@
             "hint": "A journal entry page with notes about this document.",
             "label": "GM Notes"
           }
+        },
+        "MENU": {
+          "delete": "Delete",
+          "duplicate": "Duplicate"
+        }
+      },
+      "Condition": {
+        "EMBED": {
+          "rollToRemove": "Roll to Remove"
+        },
+        "USAGE": {
+          "use": "Roll to Remove {value}"
         }
       },
       "Consequence": {
         "FIELDS": {
           "expirations": {
-            "conditions": {
-              "present": {
-                "hint": "What conditions must be present in order for this ability to be active?",
-                "label": "Present Conditions"
-              },
-              "absent": {
-                "hint": "What conditions must be absent in order for this ability to be active?",
-                "label": "Absent Conditions"
-              }
-            },
-            "movement": {
-              "hint": "If true, effect expires on movement.",
-              "label": "Stationary Expiration"
-            },
-            "dawn": {
-              "hint": "If true, effect expires at dawn.",
-              "label": "Dawn Expiration"
-            },
-            "sustained": {
-              "hint": "If true, effect expires if its source is deleted or disabled.",
-              "label": "Sustained Expiration"
-            },
-            "description": {
-              "hint": "Under what circumstances should this effect expire?",
-              "label": "End Condition"
-            },
             "combat": {
               "who": {
                 "source": {
@@ -736,15 +1338,53 @@
                   "label": "Actor"
                 }
               }
+            },
+            "conditions": {
+              "absent": {
+                "hint": "What conditions must be absent in order for this ability to be active?",
+                "label": "Absent Conditions"
+              },
+              "present": {
+                "hint": "What conditions must be present in order for this ability to be active?",
+                "label": "Present Conditions"
+              }
+            },
+            "dawn": {
+              "hint": "If true, effect expires at dawn.",
+              "label": "Dawn Expiration"
+            },
+            "description": {
+              "hint": "Under what circumstances should this effect expire?",
+              "label": "End Condition"
+            },
+            "movement": {
+              "hint": "If true, effect expires on movement.",
+              "label": "Stationary Expiration"
+            },
+            "sustained": {
+              "hint": "If true, effect expires if its source is deleted or disabled.",
+              "label": "Sustained Expiration"
             }
           }
+        },
+        "PANELS": {
+          "conditions": "Conditions",
+          "critical": "Critical",
+          "duration": "Duration",
+          "heightenedPlural": "Heightened {value} Times",
+          "heightenedSingle": "Heightened 1 Time"
         }
       },
       "Consumable": {
+        "EMBED": {
+          "consumeOne": "Consume One",
+          "remaining": "{value} Remaining",
+          "remainingMax": "{value} / {max} Remaining"
+        },
         "FIELDS": {
           "consumable": {
-            "label": "Consumable",
-            "hint": "Whether or not this is consumable."
+            "hint": "Whether or not this is consumable.",
+            "label": "Consumable"
           },
           "maxQuantity": {
             "raw": {
@@ -754,9 +1394,20 @@
           "quantity": {
             "label": "Quantity"
           }
+        },
+        "PANELS": {
+          "max": "{value} Maximum",
+          "noMax": "No Maximum",
+          "remaining": "{value} Remaining"
         }
       },
       "Equipment": {
+        "EMBED": {
+          "equipped": "Equipped",
+          "glued": "Glued",
+          "unequipped": "Unequipped",
+          "unglued": "Unglued"
+        },
         "FIELDS": {
           "damage": {
             "twoHanded": {
@@ -799,6 +1450,29 @@
               "label": "Weight"
             }
           }
+        },
+        "MENU": {
+          "dampen": "Dampen",
+          "equip": "Equip",
+          "glue": "Glue",
+          "identify": "Identify",
+          "readMagic": "Read Magic",
+          "repair": "Repair",
+          "shatter": "Shatter",
+          "undampen": "Undampen",
+          "unequip": "Unequip",
+          "unglue": "Unglue",
+          "unidentify": "Unidentify"
+        },
+        "PANELS": {
+          "carriedCount": "{value} / {max} Items Carried",
+          "carriedWeight": "{value} / {max} lb Carried",
+          "minStr": "{value} min STR",
+          "weight": "{value} lb",
+          "weightMultiplier": "× {value} Weight Multiplier"
+        },
+        "USAGE": {
+          "twoHanded": "Use in Two Hands"
         }
       },
       "Fluency": {
@@ -809,6 +1483,10 @@
         }
       },
       "Mount": {
+        "EMBED": {
+          "mounted": "Mounted",
+          "unmounted": "Unmounted"
+        },
         "FIELDS": {
           "mountType": {
             "label": "Mount Type"
@@ -816,6 +1494,9 @@
           "mounted": {
             "label": "Mounted"
           }
+        },
+        "PANELS": {
+          "load": "Load"
         }
       },
       "Power": {
@@ -823,6 +1504,10 @@
           "type": {
             "label": "Power Type"
           }
+        },
+        "PANELS": {
+          "maxAv": "{value} Max AV",
+          "noArmor": "No Armor"
         }
       },
       "Property": {
@@ -853,20 +1538,47 @@
           "classRank": {
             "label": "Rank in Class"
           },
+          "description": {
+            "initial": "<p>Every adventurer is a journeyman before they join their first @L[Category:Classes]{class}.</p>",
+            "label": "Description"
+          },
           "innate": {
             "label": "Innate"
           }
+        },
+        "MENU": {
+          "recoverHpDie": "Recover Hit Die",
+          "recoverMpDie": "Recover Mana Die",
+          "rollHpDie": "Roll Hit Die",
+          "rollMpDie": "Roll Mana Die"
+        },
+        "PANELS": {
+          "class": "Class",
+          "details": "Details",
+          "innate": "Innate",
+          "learned": "Learned",
+          "rank": "Rank {value}"
         }
       },
       "Revelation": {
         "FIELDS": {
           "revealed": {
-            "label": "Revealed",
-            "hint": "Whether this has been revealed from an identify or other source."
+            "hint": "Whether this has been revealed from an identify or other source.",
+            "label": "Revealed"
           }
+        },
+        "MENU": {
+          "reveal": "Reveal",
+          "unreveal": "Unreveal"
         }
       },
       "Species": {
+        "DIALOG": {
+          "deleteEffect": {
+            "content": "This species is provided by a transformation effects. Would you like to delete that as well?",
+            "title": "Delete Transformation Effect"
+          }
+        },
         "FIELDS": {
           "adult": {
             "label": "Age of Adulthood"
@@ -907,6 +1619,24 @@
           "transformationLevel": {
             "label": "Transformation Level"
           }
+        },
+        "MENU": {
+          "setPrimaryTransformation": "Set Primary Transformation"
+        },
+        "PANELS": {
+          "adult": "Adult at {value} years",
+          "br": "BR {value}",
+          "lifespan": {
+            "adult": "Adult at {value} years",
+            "infinite": "Infinite lifespan",
+            "label": "Lifespan",
+            "max": "Lives to {value} years"
+          },
+          "size": {
+            "max": "Size {value} maximum",
+            "min": "Size {value} minimum",
+            "value": "Size {value}"
+          }
         }
       },
       "StatGiver": {
@@ -919,49 +1649,55 @@
               "label": "Mana Dice"
             }
           }
+        },
+        "PANELS": {
+          "hp": "{value} Hit Dice",
+          "mp": "{value} Mana Dice",
+          "statDice": "Stat Dice"
         }
-      }
-    },
-    "TERMS": {
-      "Common": {
-        "attribute": "Attribute",
-        "condition": "Condition",
-        "hacks": "Hacks",
-        "hexproof": "Hexproof",
-        "tradecraft": "Tradecraft",
-        "executionTime": "Execution Time"
-      }
-    },
-    "ROLLS": {
-      "Take": {
-        "label": "Effect Roll"
       },
-      "Attack": {
-        "label": "Attack Roll"
-      },
-      "Feat": {
-        "label": "Feat Save"
-      },
-      "Tradecraft": {
-        "label": "Tradecraft Check"
-      },
-      "Resist": {
-        "label": "Resistance Save"
+      "Wiki": {
+        "DIALOG": {
+          "open": {
+            "error": "{value} not found on wiki.",
+            "opening": "Opening {value}."
+          }
+        }
       }
     },
     "SheetLabels": {
       "Ability": "Teriock Ability Sheet",
       "Body": "Teriock Body Part Sheet",
       "Character": "Teriock Character Sheet",
-      "Creature": "Teriock Creature Sheet",
       "Condition": "Teriock Condition Sheet",
       "Consequence": "Teriock Consequence Sheet",
+      "Creature": "Teriock Creature Sheet",
       "Equipment": "Teriock Equipment Sheet",
       "Fluency": "Teriock Fluency Sheet",
       "Item": "Teriock Item Sheet",
+      "Mount": "Teriock Mount Sheet",
       "Rank": "Teriock Rank Sheet",
-      "Resource": "Teriock Resource Sheet",
-      "Mount": "Teriock Mount Sheet"
+      "Resource": "Teriock Resource Sheet"
+    },
+    "TERMS": {
+      "Common": {
+        "attribute": "Attribute",
+        "condition": "Condition",
+        "conjured": "Conjured",
+        "executionTime": "Execution Time",
+        "hack": "Hack",
+        "hacks": "Hacks",
+        "hexproof": "Hexproof",
+        "semblant": "Semblant",
+        "tradecraft": "Tradecraft"
+      },
+      "Stones": {
+        "black": "Black Stones",
+        "blue": "Blue Stones",
+        "green": "Green Stones",
+        "red": "Red Stones",
+        "white": "White Stones"
+      }
     }
   },
   "TYPES": {
@@ -987,11 +1723,11 @@
     "Item": {
       "body": "Body Part",
       "equipment": "Equipment",
+      "mount": "Mount",
       "power": "Power",
       "rank": "Rank",
       "species": "Species",
-      "wrapper": "Wrapper",
-      "mount": "Mount"
+      "wrapper": "Wrapper"
     },
     "JournalEntryPage": {
       "damage": "Damage Type",

@@ -1,3 +1,4 @@
+import { icons } from "../../../../constants/display/icons.mjs";
 import { StatDieModel } from "../../../models/_module.mjs";
 import {
   HpPoolModel,
@@ -36,15 +37,34 @@ export default function StatGiverSystemMixin(Base) {
         return Object.assign(super.defineSchema(), {
           statDice: new fields.SchemaField({
             hp: new fields.EmbeddedDataField(HpPoolModel, {
-              label: "HP Dice",
               nullable: false,
             }),
             mp: new fields.EmbeddedDataField(MpPoolModel, {
-              label: "MP Dice",
               nullable: false,
             }),
           }),
         });
+      }
+
+      /** @returns {Teriock.MessageData.MessageBar} */
+      get _statBar() {
+        return {
+          icon: icons.ui.dice,
+          label: game.i18n.localize(
+            "TERIOCK.SYSTEMS.StatGiver.PANELS.statDice",
+          ),
+          wrappers: [
+            game.i18n.format("TERIOCK.SYSTEMS.StatGiver.PANELS.hp", {
+              value: this.statDice.hp.formula,
+            }),
+            game.i18n.format("TERIOCK.SYSTEMS.StatGiver.PANELS.mp", {
+              value: this.statDice.mp.formula,
+            }),
+            game.i18n.format("TERIOCK.SYSTEMS.Species.PANELS.br", {
+              value: this.br,
+            }),
+          ],
+        };
       }
 
       /** @inheritDoc */

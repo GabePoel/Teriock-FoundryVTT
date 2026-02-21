@@ -33,7 +33,7 @@ export default class ResistanceSaveExecution extends ThresholdExecutionMixin(
 
   /** @inheritDoc */
   get flavor() {
-    return "Resistance Save";
+    return game.i18n.localize("TERIOCK.ROLLS.Resist.label");
   }
 
   /** @inheritDoc */

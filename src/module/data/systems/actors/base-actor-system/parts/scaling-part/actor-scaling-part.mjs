@@ -20,14 +20,9 @@ export default (Base) => {
             lvl: new fields.NumberField({
               initial: 1,
               integer: true,
-              label: "Level",
               min: 1,
             }),
-            brScale: new fields.BooleanField({
-              initial: false,
-              label: "Scale off BR",
-              hint: "Scale bonuses off BR instead of LVL.",
-            }),
+            brScale: new fields.BooleanField({ initial: false }),
           }),
         });
       }

@@ -32,8 +32,8 @@ export default (Base) => {
           icon: this.parent.isOnUse ? "bolt" : "bolt-slash",
           action: "toggleOnUseDoc",
           tooltip: this.parent.isOnUse
-            ? "Activates Only on Use"
-            : "Always Active",
+            ? game.i18n.localize("TERIOCK.SYSTEMS.Ability.USAGE.onlyOnUse")
+            : game.i18n.localize("TERIOCK.SYSTEMS.Ability.USAGE.alwaysActive"),
           condition: this.parent.isOwner,
           callback: async () => {
             const onUseSet = this.parent.parent.system.onUse;
@@ -68,7 +68,12 @@ export default (Base) => {
       prepareDerivedData() {
         super.prepareDerivedData();
         this.grantOnlyText = this.grantOnly
-          ? `This ability can only be used with @UUID[${this.parent.parent.uuid}].`
+          ? game.i18n.format(
+              "TERIOCK.SYSTEMS.Ability.FIELDS.grantOnlyText.derived",
+              {
+                uuid: this.parent.parent?.uuid,
+              },
+            )
           : "";
       }
     }

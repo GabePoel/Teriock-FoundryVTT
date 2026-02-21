@@ -95,7 +95,7 @@ export default class ChildSystem extends UsableDataMixin(CommonSystem) {
       {
         icon: TERIOCK.display.icons.ui.chat,
         action: "chatDoc",
-        tooltip: "Send to Chat",
+        tooltip: game.i18n.localize("TERIOCK.SYSTEMS.Child.MENU.shareWriteup"),
         callback: async () => {
           await this.parent.toMessage();
         },
@@ -107,7 +107,9 @@ export default class ChildSystem extends UsableDataMixin(CommonSystem) {
           : TERIOCK.display.icons.ui.enabled,
         action: "toggleDisabledDoc",
         callback: () => this.parent.toggleDisabled(),
-        tooltip: this.parent.disabled ? "Disabled" : "Enabled",
+        tooltip: this.parent.disabled
+          ? game.i18n.localize("TERIOCK.SYSTEMS.Child.EMBED.disabled")
+          : game.i18n.localize("TERIOCK.SYSTEMS.Child.EMBED.enabled"),
         condition: this.parent.isOwner,
       },
     ];
@@ -191,7 +193,9 @@ export default class ChildSystem extends UsableDataMixin(CommonSystem) {
 
   /** @inheritDoc */
   get useText() {
-    return `Use ${this.parent.name}`;
+    return game.i18n.format("TERIOCK.SYSTEMS.Child.USAGE.use", {
+      value: this.parent.name,
+    });
   }
 
   /** @inheritDoc */
@@ -226,7 +230,7 @@ export default class ChildSystem extends UsableDataMixin(CommonSystem) {
           group: "usage",
         },
         {
-          name: "Enable",
+          name: game.i18n.localize("TERIOCK.SYSTEMS.Child.MENU.enable"),
           icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
           callback: this.parent.enable.bind(this.parent),
           condition:
@@ -236,7 +240,7 @@ export default class ChildSystem extends UsableDataMixin(CommonSystem) {
           group: "control",
         },
         {
-          name: "Disable",
+          name: game.i18n.localize("TERIOCK.SYSTEMS.Child.MENU.disable"),
           icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
           callback: this.parent.disable.bind(this.parent),
           condition:
@@ -248,7 +252,7 @@ export default class ChildSystem extends UsableDataMixin(CommonSystem) {
           group: "control",
         },
         {
-          name: "Open GM Notes",
+          name: game.i18n.localize("TERIOCK.SYSTEMS.Child.MENU.openGmNotes"),
           icon: makeIcon(TERIOCK.display.icons.ui.notes, "contextMenu"),
           callback: async () => {
             await this.gmNotesOpen();
@@ -257,7 +261,7 @@ export default class ChildSystem extends UsableDataMixin(CommonSystem) {
           group: "open",
         },
         {
-          name: "Open Image",
+          name: game.i18n.localize("TERIOCK.SYSTEMS.Child.MENU.openImage"),
           icon: makeIcon(TERIOCK.display.icons.ui.image, "contextMenu"),
           callback: async () => {
             await new ImagePopout({
@@ -269,19 +273,19 @@ export default class ChildSystem extends UsableDataMixin(CommonSystem) {
           group: "open",
         },
         {
-          name: "Share Image",
+          name: game.i18n.localize("TERIOCK.SYSTEMS.Child.MENU.shareImage"),
           icon: makeIcon(TERIOCK.display.icons.ui.shareImage, "contextMenu"),
           callback: this.parent.chatImage.bind(this.parent),
           group: "share",
         },
         {
-          name: "Share Writeup",
+          name: game.i18n.localize("TERIOCK.SYSTEMS.Child.MENU.shareWriteup"),
           icon: makeIcon(TERIOCK.display.icons.ui.shareText, "contextMenu"),
           callback: this.parent.toMessage.bind(this.parent),
           group: "share",
         },
         {
-          name: "Duplicate",
+          name: game.i18n.localize("TERIOCK.SYSTEMS.Common.MENU.delete"),
           icon: makeIcon(TERIOCK.display.icons.ui.duplicate, "contextMenu"),
           callback: async () => {
             await this.parent.duplicate();

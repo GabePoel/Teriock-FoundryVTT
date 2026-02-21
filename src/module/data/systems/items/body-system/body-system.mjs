@@ -1,5 +1,5 @@
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
-import { dotJoin, prefix, suffix } from "../../../../helpers/string.mjs";
+import { dotJoin } from "../../../../helpers/string.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
@@ -38,11 +38,10 @@ export default class BodySystem extends mix(
   /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
-    parts.subtitle = "Body part";
+    parts.subtitle = game.i18n.localize("TYPES.Item.body");
     parts.text = dotJoin([
-      suffix(this.damage.base.formula, "Damage"),
-      suffix(this.bv.value, "BV"),
-      suffix(this.av.value, "AV"),
+      ...this._damageWrappers,
+      ...this._defenseBar.wrappers,
       this.parent.elder ? this.parent.elder?.nameString : "",
     ]);
     return parts;
@@ -67,32 +66,21 @@ export default class BodySystem extends mix(
     return {
       ...super.panelParts,
       bars: [
-        {
-          icon: TERIOCK.display.icons.interaction.attack,
-          label: "Attack",
-          wrappers: [
-            this.piercing.value,
-            suffix(this.damage.base.typed, "damage"),
-            suffix(prefix(this.hit.text, "+", ""), "hit bonus"),
-            suffix(this.attackPenalty.text, "AP"),
-            TERIOCK.index.weaponFightingStyles[this.fightingStyle],
-          ],
-        },
-        {
-          icon: TERIOCK.display.icons.interaction.block,
-          label: "Defense",
-          wrappers: [
-            this.av.value ? `${this.av.value} AV` : "",
-            this.bv.value ? `${this.bv.value} BV` : "",
-          ],
-        },
+        this._attackBar,
+        this._defenseBar,
         {
           icon: TERIOCK.display.icons.equipment.equipmentClasses,
-          label: "Equipment Classes",
+          label: game.i18n.localize(
+            "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentClasses.label",
+          ),
           wrappers: [
             "Body parts",
             this.av.value ? "Armor" : "",
-            this.spellTurning ? "Spell Turning" : "",
+            this.spellTurning
+              ? game.i18n.localize(
+                  "TERIOCK.SYSTEMS.Armament.FIELDS.spellTurning.label",
+                )
+              : "",
           ],
         },
       ],

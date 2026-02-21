@@ -52,6 +52,12 @@ export default class BaseActorSystem extends mix(
   parts.ActorProtectionsPart,
 ) {
   /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [
+    ...super.LOCALIZATION_PREFIXES,
+    "TERIOCK.SYSTEMS.BaseActor",
+  ];
+
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       childEffectTypes: [

@@ -201,18 +201,28 @@ export default (Base) => {
           }
           if (this.encumbranceLevel >= 2) {
             this.parent.statuses.add("slowed");
-            this.conditionInformation.slowed.reasons.add("Heavily Encumbered");
+            this.conditionInformation.slowed.reasons.add(
+              game.i18n.localize("TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.2"),
+            );
           }
-          let encumbranceReason = "Encumbered";
+          let encumbranceReason = game.i18n.localize(
+            "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.0",
+          );
           switch (this.encumbranceLevel) {
             case 1:
-              encumbranceReason = "Lightly Encumbered";
+              encumbranceReason = game.i18n.localize(
+                "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.1",
+              );
               break;
             case 2:
-              encumbranceReason = "Heavily Encumbered";
+              encumbranceReason = game.i18n.localize(
+                "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.2",
+              );
               break;
             case 3:
-              encumbranceReason = "Cannot Carry More";
+              encumbranceReason = game.i18n.localize(
+                "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.3",
+              );
               break;
           }
           this.conditionInformation.encumbered.reasons.add(encumbranceReason);

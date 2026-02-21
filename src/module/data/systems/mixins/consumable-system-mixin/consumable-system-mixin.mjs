@@ -60,6 +60,26 @@ export default function ConsumableSystemMixin(Base) {
         super.migrateData(data);
       }
 
+      /** @returns {Teriock.MessageData.MessageBar} */
+      get _consumableBar() {
+        return {
+          icon: TERIOCK.display.icons.ui.quantity,
+          label: game.i18n.localize(
+            "TERIOCK.SYSTEMS.Consumable.FIELDS.quantity.label",
+          ),
+          wrappers: [
+            game.i18n.format("TERIOCK.SYSTEMS.Consumable.PANELS.remaining", {
+              value: this.quantity,
+            }),
+            this.maxQuantity.value === Infinity
+              ? game.i18n.localize("TERIOCK.SYSTEMS.Consumable.PANELS.noMax")
+              : game.i18n.format("TERIOCK.SYSTEMS.Consumable.PANELS.max", {
+                  value: this.maxQuantity.value,
+                }),
+          ],
+        };
+      }
+
       /** @inheritDoc */
       get embedActions() {
         const embedActions = super.embedActions;
@@ -77,12 +97,19 @@ export default function ConsumableSystemMixin(Base) {
         const parts = super.embedParts;
         if (this.consumable) {
           parts.subtitleAction = "useOneDoc";
-          parts.subtitleTooltip = "Consume One";
-          parts.subtitle = `${this.quantity} ${
-            this.maxQuantity.value && this.maxQuantity.value !== Infinity
-              ? `/ ${this.maxQuantity.value}`
-              : "remaining"
-          }`;
+          parts.subtitleTooltip = game.i18n.localize(
+            "TERIOCK.SYSTEMS.Consumable.EMBED.consumeOne",
+          );
+          parts.subtitle =
+            this.maxQuantity.value === Infinity
+              ? game.i18n.localize("TERIOCK.SYSTEMS.Consumable.EMBED.remaining")
+              : game.i18n.format(
+                  "TERIOCK.SYSTEMS.Consumable.EMBED.remainingMax",
+                  {
+                    value: this.quantity,
+                    max: this.maxQuantity.value,
+                  },
+                );
         }
         return parts;
       }

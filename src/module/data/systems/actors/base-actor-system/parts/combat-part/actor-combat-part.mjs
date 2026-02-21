@@ -27,23 +27,16 @@ export default (Base) => {
             attackPenalty: new fields.NumberField({
               initial: 0,
               integer: true,
-              label: "Attack Penalty",
               max: 0,
             }),
-            hasReaction: new fields.BooleanField({
-              initial: true,
-              label: "Has Reaction",
-            }),
+            hasReaction: new fields.BooleanField({ initial: true }),
           }),
           initiative: new FormulaField({
             initial: characterOptions.initiative,
             deterministic: false,
           }),
           offense: new fields.SchemaField({
-            sb: new fields.BooleanField({
-              initial: false,
-              label: "Style Bonus",
-            }),
+            sb: new fields.BooleanField({ initial: false }),
             piercing: new fields.EmbeddedDataField(PiercingModel),
           }),
           wielding: new fields.SchemaField({

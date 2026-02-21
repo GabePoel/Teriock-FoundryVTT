@@ -1,4 +1,4 @@
-import { prefix, suffix } from "../../../../../helpers/string.mjs";
+import { formulaExists } from "../../../../../helpers/formula.mjs";
 
 /**
  * Equipment panel part.
@@ -12,62 +12,74 @@ export default (Base) => {
      * @mixin
      */
     class EquipmentPanelPart extends Base {
+      /** @inheritdoc */
+      get _damageWrappers() {
+        const wrappers = super._damageWrappers;
+        if (this.hasTwoHandedAttack) {
+          const twoHandedDamageString = formulaExists(
+            this.damage.twoHanded.typed,
+          )
+            ? game.i18n.format("TERIOCK.SYSTEMS.Armament.PANELS.damage", {
+                value: this.damage.twoHanded.typed,
+              })
+            : "";
+          wrappers.push(twoHandedDamageString);
+        }
+        return wrappers;
+      }
+
       /** @inheritDoc */
       get panelParts() {
-        const damageString = suffix(this.damage.base.typed, "damage");
-        const twoHandedDamageString = this.hasTwoHandedAttack
-          ? suffix(this.damage.twoHanded.typed, "damage")
-          : "";
         const bars = [
           {
             icon: TERIOCK.options.equipment.powerLevel[this.powerLevel].icon,
-            label: "Equipment Type",
+            label: game.i18n.localize(
+              "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentType.label",
+            ),
             wrappers: [
               TERIOCK.options.equipment.powerLevel[this.powerLevel].name,
-              this.shattered ? "Shattered" : "",
+              this.shattered
+                ? game.i18n.format(
+                    "TERIOCK.SYSTEMS.Equipment.FIELDS.shattered.label",
+                  )
+                : "",
               this.equipmentType,
               this.range.description,
             ],
           },
-          {
-            icon: TERIOCK.display.icons.interaction.attack,
-            label: "Attack",
-            wrappers: [
-              this.piercing.value,
-              damageString,
-              twoHandedDamageString,
-              this.hit.value ? `+${this.hit.value} Hit Bonus` : "",
-              this.attackPenalty.nonZero
-                ? this.attackPenalty.formula + " AP"
-                : "",
-              TERIOCK.index.weaponFightingStyles[this.fightingStyle],
-            ],
-          },
-          {
-            icon: TERIOCK.display.icons.interaction.block,
-            label: "Defense",
-            wrappers: [
-              this.av.value ? `${this.av.value} AV` : "",
-              this.bv.value ? `${this.bv.value} BV` : "",
-            ],
-          },
+          this._attackBar,
+          this._defenseBar,
           {
             icon: TERIOCK.display.icons.armament.load,
-            label: "Load",
+            label: game.i18n.localize("TERIOCK.SYSTEMS.Armament.PANELS.load"),
             wrappers: [
-              this.weight.value + " lb",
-              this.minStr.value + " min STR",
-              prefix(this.tier.text, "Tier"),
+              game.i18n.format("TERIOCK.SYSTEMS.Equipment.PANELS.weight", {
+                value: this.weight.value,
+              }),
+              game.i18n.format("TERIOCK.SYSTEMS.Equipment.PANELS.minStr", {
+                value: this.minStr.value,
+              }),
+              formulaExists(this.tier.text)
+                ? game.i18n.format("TERIOCK.SYSTEMS.Attunable.PANELS.tier", {
+                    value: this.tier.text,
+                  })
+                : "",
             ],
           },
           {
             icon: TERIOCK.display.icons.equipment.equipmentClasses,
-            label: "Equipment Classes",
+            label: game.i18n.format(
+              "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentClasses.label",
+            ),
             wrappers: [
               ...this.equipmentClasses.map(
                 (ec) => TERIOCK.options.equipment.equipmentClasses[ec],
               ),
-              this.spellTurning ? "Spell Turning" : "",
+              this.spellTurning
+                ? game.i18n.format(
+                    "TERIOCK.SYSTEMS.Armament.FIELDS.spellTurning.label",
+                  )
+                : "",
             ],
           },
           {
@@ -75,9 +87,24 @@ export default (Base) => {
             label: "Storage",
             wrappers: this.storage.enabled
               ? [
-                  `${this.storage.carriedCount} / ${this.storage.maxCount.value} Items Carried`,
-                  `${this.storage.carriedWeight} / ${this.storage.maxWeight.value} lb Carried`,
-                  `× ${this.storage.weightMultiplier} Weight Multiplier`,
+                  game.i18n.format(
+                    "TERIOCK.SYSTEMS.Equipment.PANELS.carriedCount",
+                    {
+                      value: this.storage.carriedCount,
+                      max: this.storage.maxCount.value,
+                    },
+                  ),
+                  game.i18n.format(
+                    "TERIOCK.SYSTEMS.Equipment.PANELS.carriedWeight",
+                    {
+                      value: this.storage.carriedWeight,
+                      max: this.storage.maxWeight.value,
+                    },
+                  ),
+                  game.i18n.format(
+                    "TERIOCK.SYSTEMS.Equipment.PANELS.weightMultiplier",
+                    { value: this.storage.weightMultiplier },
+                  ),
                 ]
               : [],
           },
