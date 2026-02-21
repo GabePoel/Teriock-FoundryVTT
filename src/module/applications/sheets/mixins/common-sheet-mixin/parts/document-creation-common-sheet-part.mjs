@@ -43,10 +43,7 @@ export default (Base) => {
        */
       static async _onCreateAbility() {
         const decision = await newDocumentDialog("ability");
-        let obj = {
-          name: "New Ability",
-          type: "ability",
-        };
+        let obj = newDocumentObj("ability");
         if (decision === "import") {
           const out = await selectAbilityDialog();
           if (!out) return;
@@ -66,10 +63,7 @@ export default (Base) => {
        */
       static async _onCreateBody() {
         const decision = await newDocumentDialog("body");
-        let obj = {
-          name: "New Body Part",
-          type: "body",
-        };
+        let obj = newDocumentObj("body");
         if (decision === "import") {
           obj = game.items.fromCompendium(await selectBodyPartDialog());
         }
@@ -84,10 +78,7 @@ export default (Base) => {
        */
       static async _onCreateConsequence() {
         await this.document.createChildDocuments("ActiveEffect", [
-          {
-            name: "New Consequence",
-            type: "consequence",
-          },
+          newDocumentObj("consequence"),
         ]);
       }
 
@@ -97,10 +88,7 @@ export default (Base) => {
        */
       static async _onCreateEquipment() {
         const decision = await newDocumentDialog("equipment");
-        let obj = {
-          name: "New Equipment",
-          type: "equipment",
-        };
+        let obj = newDocumentObj("equipment");
         if (decision === "import") {
           obj = game.items.fromCompendium(await selectEquipmentTypeDialog());
         }
@@ -121,7 +109,10 @@ export default (Base) => {
           )[0];
           await this.document.createChildDocuments("ActiveEffect", [
             {
-              name: `New ${TERIOCK.index.tradecrafts[tc]} Fluency`,
+              name: game.i18n.format(
+                "TERIOCK.SHEETS.Common.MENU.Create.fluency",
+                { tradecraft: TERIOCK.index.tradecrafts[tc] },
+              ),
               type: "fluency",
               img: getImage("tradecrafts", TERIOCK.index.tradecrafts[tc]),
               system: {
@@ -139,10 +130,7 @@ export default (Base) => {
        */
       static async _onCreatePower() {
         await this.document.createChildDocuments("Item", [
-          {
-            name: "New Power",
-            type: "power",
-          },
+          newDocumentObj("power"),
         ]);
       }
 
@@ -152,10 +140,7 @@ export default (Base) => {
        */
       static async _onCreateProperty() {
         const decision = await newDocumentDialog("property");
-        let obj = {
-          name: "New Property",
-          type: "property",
-        };
+        let obj = newDocumentObj("property");
         if (decision === "import") {
           const out = await selectPropertyDialog();
           if (!out) return;
@@ -188,7 +173,9 @@ export default (Base) => {
         ]);
         const referenceRank =
           /**@type {TeriockRank} */ await selectDocumentDialog(possibleRanks, {
-            title: "Select Rank",
+            title: game.i18n.localize(
+              "TERIOCK.SHEETS.Common.MENU.CreateRank.title",
+            ),
             openable: true,
           });
         const rankNumber = referenceRank.system.classRank;
@@ -236,7 +223,9 @@ export default (Base) => {
           const chosenCombatAbility = await selectDocumentDialog(
             availableCombatAbilities,
             {
-              title: "Select Combat Ability",
+              title: game.i18n.localize(
+                "TERIOCK.SHEETS.Common.MENU.CreateRank.selectCombat",
+              ),
               openable: true,
             },
           );
@@ -252,7 +241,9 @@ export default (Base) => {
           const chosenSupportAbility = await selectDocumentDialog(
             availableSupportAbilities,
             {
-              title: "Select Support Ability",
+              title: game.i18n.localize(
+                "TERIOCK.SHEETS.Common.MENU.CreateRank.selectSupport",
+              ),
               openable: true,
             },
           );
@@ -287,12 +278,20 @@ export default (Base) => {
        */
       static async _onCreateResource() {
         await this.document.createChildDocuments("ActiveEffect", [
-          {
-            name: "New Resource",
-            type: "resource",
-          },
+          newDocumentObj("resource"),
         ]);
       }
     }
   );
 };
+
+function newDocumentObj(type) {
+  return {
+    name: game.i18n.format("TERIOCK.SHEETS.Common.MENU.Create.document", {
+      type: game.i18n.localize(
+        `TYPES.${TERIOCK.options.document[type].doc}.${type}`,
+      ),
+    }),
+    type,
+  };
+}

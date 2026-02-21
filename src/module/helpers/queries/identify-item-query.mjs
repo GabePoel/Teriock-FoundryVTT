@@ -21,7 +21,9 @@ export default async function identifyItemQuery(queryData, { _timeout }) {
     modal: false,
     window: {
       icon: makeIconClass("magnifying-glass", "title"),
-      title: "Identify Item",
+      title: game.i18n.localize(
+        "TERIOCK.MODELS.Identification.QUERY,Identify,title",
+      ),
     },
   });
   if (doIdentify) {
@@ -32,7 +34,9 @@ export default async function identifyItemQuery(queryData, { _timeout }) {
       ...item.fluencies.filter((f) => !f.system.revealed),
     ];
     const toReveal = await selectDocumentsDialog(unrevealed, {
-      hint: "Select effects to reveal.",
+      hint: game.i18n.localize(
+        "TERIOCK.MODELS.Identification.QUERY,Identify,hint",
+      ),
       tooltipAsync: false,
       checked: unrevealed.map((r) => r.uuid),
     });

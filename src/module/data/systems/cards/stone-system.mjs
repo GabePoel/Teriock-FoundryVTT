@@ -7,7 +7,6 @@ export default class StoneSystem extends BaseCardSystem {
     if ((await super._preCreate(data, options, user)) === false) {
       return false;
     }
-    console.log(foundry.utils.deepClone(data));
     if (!foundry.utils.hasProperty(data, "back.img")) {
       this.parent.updateSource({
         "back.img": getImage("death-bag-stones", "Unknown"),
@@ -15,7 +14,7 @@ export default class StoneSystem extends BaseCardSystem {
     }
     if (!foundry.utils.hasProperty(data, "back.name")) {
       this.parent.updateSource({
-        "back.name": "Unknown Stone",
+        "back.name": game.i18n.localize("TERIOCK.SYSTEMS.Stone.DEFAULTS.back"),
       });
     }
     if (
@@ -25,8 +24,8 @@ export default class StoneSystem extends BaseCardSystem {
       this.parent.updateSource({
         faces: [
           {
-            name: "Stone",
             img: getImage("death-bag-stones", "Brown"),
+            name: game.i18n.localize("TERIOCK.SYSTEMS.Stone.DEFAULTS.faces"),
           },
         ],
       });

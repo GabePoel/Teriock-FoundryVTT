@@ -16,13 +16,13 @@ export default async function changeSizeDialog(actor, species) {
     content = await TeriockTextEditor.enrichHTML(content);
     const dialog = new TeriockDialog({
       window: {
-        title: "Change Size",
+        title: game.i18n.localize("TERIOCK.DIALOGS.ChangeSize.title"),
         icon: makeIconClass("circle-question", "title"),
       },
       modal: true,
       buttons: [
         {
-          action: game.i18n.localize("TERIOCK.DIALOGS.ChangeSize.title"),
+          action: "changeSize",
           callback: async () => {
             await actor.update({
               "system.size.number.raw": species.system.size.value,

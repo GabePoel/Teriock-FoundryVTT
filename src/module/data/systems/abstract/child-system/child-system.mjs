@@ -285,7 +285,7 @@ export default class ChildSystem extends UsableDataMixin(CommonSystem) {
           group: "share",
         },
         {
-          name: game.i18n.localize("TERIOCK.SYSTEMS.Common.MENU.delete"),
+          name: game.i18n.localize("TERIOCK.SYSTEMS.Common.MENU.duplicate"),
           icon: makeIcon(TERIOCK.display.icons.ui.duplicate, "contextMenu"),
           callback: async () => {
             await this.parent.duplicate();

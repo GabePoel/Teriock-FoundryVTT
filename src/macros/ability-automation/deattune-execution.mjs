@@ -5,7 +5,7 @@ const equipment = actor.equipment
   .filter((e) => e.system.isAttuned)
   .sort((a, b) => a.name.localeCompare(b.name));
 const selectedEquipment = await tm.dialogs.selectDocumentsDialog(equipment, {
-  title: "Select Equipment",
-  hint: "Select equipment to deattune.",
+  hint: game.i18n.localize("TERIOCK.DIALOGS.Select.Deattunable.hint"),
+  title: game.i18n.localize("TERIOCK.DIALOGS.Select.Deattunable.title"),
 });
 await Promise.all(selectedEquipment.map((e) => e.system.deattune()));

@@ -79,12 +79,14 @@ export async function attributePanel(attribute) {
     name: TERIOCK.index.attributesFull[attribute],
     blocks: [
       {
-        title: "Description",
+        title: game.i18n.localize(
+          "TERIOCK.SYSTEMS.Child.FIELDS.description.label",
+        ),
         text: TERIOCK.data.attributes[attribute],
       },
     ],
     icon: TERIOCK.display.icons.interaction.feat,
-    label: "Attribute",
+    label: game.i18n.localize("TERIOCK.TERMS.Common.attribute"),
   });
 }
 
@@ -106,18 +108,20 @@ export async function tradecraftPanel(tradecraft) {
     bars: [
       {
         icon: TERIOCK.options.tradecraft[field].icon,
-        label: "Field",
+        label: game.i18n.localize("TERIOCK.SYSTEMS.Fluency.FIELDS.field.label"),
         wrappers: [TERIOCK.options.tradecraft[field].name],
       },
     ],
     blocks: [
       {
-        title: "Description",
+        title: game.i18n.localize(
+          "TERIOCK.SYSTEMS.Child.FIELDS.description.label",
+        ),
         text: TERIOCK.content.tradecrafts[tradecraft],
       },
     ],
     icon: documentOptions.fluency.icon,
-    label: "Tradecraft",
+    label: game.i18n.localize("TERIOCK.TERMS.Common.tradecraft"),
   });
 }
 
@@ -139,18 +143,22 @@ export async function classPanel(className) {
     bars: [
       {
         icon: TERIOCK.options.rank[archetype].icon,
-        label: "Archetype",
+        label: game.i18n.localize(
+          "TERIOCK.SYSTEMS.Rank.FIELDS.archetype.label",
+        ),
         wrappers: [TERIOCK.options.rank[archetype].name],
       },
     ],
     blocks: [
       {
-        title: "Description",
+        title: game.i18n.localize(
+          "TERIOCK.SYSTEMS.Child.FIELDS.description.label",
+        ),
         text: TERIOCK.content.classes[className],
       },
     ],
     icon: documentOptions.rank.icon,
-    label: "Class",
+    label: game.i18n.localize("TERIOCK.SYSTEMS.Rank.PANELS.class"),
   });
 }
 

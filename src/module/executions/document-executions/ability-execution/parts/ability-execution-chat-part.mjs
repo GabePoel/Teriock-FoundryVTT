@@ -315,22 +315,20 @@ export default function AbilityExecutionChatPart(Base) {
             );
             if (transformation.select) {
               let chosen;
+              const options = {
+                hint: game.i18n.localize(
+                  "TERIOCK.DIALOGS.Select.Transformation.hint",
+                ),
+                openable: true,
+                title: game.i18n.localize(
+                  "TERIOCK.DIALOGS.Select.Transformation.title",
+                ),
+                tooltipAsync: true,
+              };
               if (transformation.multiple) {
-                chosen = await selectDocumentsDialog(choices, {
-                  hint: "Please select one or more species to transform into.",
-                  title: "Select Species",
-                  tooltipAsync: true,
-                  openable: true,
-                });
+                chosen = await selectDocumentsDialog(choices, options);
               } else {
-                chosen = [
-                  await selectDocumentDialog(choices, {
-                    hint: "Please select a species to transform into.",
-                    title: "Select Species",
-                    tooltipAsync: true,
-                    openable: true,
-                  }),
-                ];
+                chosen = [await selectDocumentDialog(choices, options)];
               }
               if (chosen) {
                 //noinspection JSValidateTypes

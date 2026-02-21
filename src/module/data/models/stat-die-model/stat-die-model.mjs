@@ -155,11 +155,12 @@ export default class StatDieModel extends EmbeddedDataModel {
       } else {
         proceed = await TeriockDialog.confirm({
           window: {
-            title: "Reroll Stat Die?",
+            title: game.i18n.localize(
+              "TERIOCK.MODELS.StatDie.DIALOG.Reroll.title",
+            ),
             icon: makeIconClass(getRollIcon(this.formula), "title"),
           },
-          content:
-            "This stat die is already spent. Would you like to roll it anyways?",
+          content: game.i18n.localize("TERIOCK.MODELS.StatDie.Reroll.content"),
           modal: true,
           rejectClose: false,
         });

@@ -27,11 +27,15 @@ export default class EquipmentExecution extends ArmamentExecution {
     if (this.secret) {
       return {
         icon: TERIOCK.options.document.equipment.icon,
-        name: "Unknown " + this.source.system.equipmentType,
+        name: game.i18n.format("TERIOCK.SYSTEMS.Equipment.PANELS.unknown", {
+          type: this.source.system.equipmentType,
+        }),
         blocks: [
           {
-            title: "Description",
-            text: "Item is used.",
+            title: game.i18n.localize(
+              "TERIOCK.SYSTEMS.Child.FIELDS.description.label",
+            ),
+            text: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.PANELS.used"),
           },
         ],
         image: getImage("equipment", this.source.system.equipmentType),
@@ -49,8 +53,12 @@ export default class EquipmentExecution extends ArmamentExecution {
       .filter((a) => a);
     if (onUseAbilities.length > 0) {
       const usedAbilities = await selectDocumentsDialog(onUseAbilities, {
-        hint: `${this.source.name} has abilities that can activate on use. Select which to activate.`,
-        title: "Activate Abilities",
+        hint: game.i18n.format("TERIOCK.SYSTEMS.Equipment.DIALOG.onUse.hint", {
+          name: this.source.name,
+        }),
+        title: game.i18n.localize(
+          "TERIOCK.SYSTEMS.Equipment.DIALOG.onUse.title",
+        ),
       });
       for (const ability of usedAbilities) {
         if (ability.system.consumable && this.source.system.consumable) {

@@ -17,7 +17,7 @@ export default function UseButtonSheetMixin(Base) {
             {
               action: "rollThis",
               icon: makeIconClass("dice", "contextMenu"),
-              label: "Use This",
+              label: "TERIOCK.MODELS.Usable.USAGE.use",
             },
           ],
         },

@@ -25,7 +25,7 @@ export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(
     },
     window: {
       icon: makeIconClass("circle-check", "title"),
-      title: "Select Document",
+      title: game.i18n.localize("TERIOCK.DIALOGS.Select.Document.title"),
       resizable: true,
     },
     position: {

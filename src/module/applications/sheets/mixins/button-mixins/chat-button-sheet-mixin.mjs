@@ -17,7 +17,7 @@ export default function ChatButtonSheetMixin(Base) {
           {
             action: "chatThis",
             icon: makeIconClass(icons.ui.chat, "contextMenu"),
-            label: "Share in Chat",
+            label: "TERIOCK.SYSTEMS.Child.MENU.shareWriteup",
           },
         ],
       },

@@ -41,9 +41,13 @@ export default (Base) => {
           choice = Object.keys(choices)[0];
         } else {
           choice = await selectDialog(choices, {
-            title: "Add Automation",
-            hint: "Please select an automation type.",
+            hint: game.i18n.localize(
+              "TERIOCK.DIALOGS.Select.AddAutomation.hint",
+            ),
             icon: TERIOCK.display.icons.document.automation,
+            title: game.i18n.localize(
+              "TERIOCK.DIALOGS.Select.AddAutomation.title",
+            ),
           });
         }
         if (!choice) return;

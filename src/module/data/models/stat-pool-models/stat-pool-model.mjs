@@ -13,28 +13,28 @@ const { fields } = foundry.data;
  */
 export default class StatPoolModel extends EmbeddedDataModel {
   /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [
+    ...super.LOCALIZATION_PREFIXES,
+    "TERIOCK.MODELS.StatPool",
+  ];
+
+  /** @inheritDoc */
   static defineSchema() {
     return {
       disabled: new fields.BooleanField({
         initial: false,
         required: false,
-        label: "Disable",
-        hint: "If checked, these dice will not be given to the actor.",
       }),
       faces: new fields.NumberField({
         initial: 10,
         required: false,
-        label: "Faces",
-        hint: "Number of faces on each die.",
         choices: TERIOCK.options.die.faces,
       }),
       number: new EvaluationField({
         blank: 1,
         deterministic: true,
         floor: true,
-        hint: "Number of dice.",
         initial: "1",
-        label: "Number",
         min: 0,
         nullable: false,
         required: false,
@@ -103,12 +103,12 @@ export default class StatPoolModel extends EmbeddedDataModel {
     return [
       {
         image: getImage("equipment", "Die"),
-        name: "Stat Die",
+        name: game.i18n.localize("TERIOCK.MODELS.StatPool.PANELS.name"),
         bars: [],
         blocks: [
           {
-            title: "Description",
-            text: "You have rolled a stat die.",
+            title: game.i18n.localize("TERIOCK.MODELS.StatPool.PANELS.title"),
+            text: game.i18n.localize("TERIOCK.MODELS.StatPool.PANELS.text"),
           },
         ],
         icon: getRollIcon(this.formula),

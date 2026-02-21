@@ -73,7 +73,9 @@ export default function AbilityExecutionGetInputPart(Base) {
           const mpMax = this.actor.system.mp.value - this.actor.system.mp.min;
           dialogs.push(
             createDialogFieldset(
-              "Variable Mana Cost",
+              game.i18n.localize(
+                "TERIOCK.SYSTEMS.Ability.DIALOG.VariableCosts.mp",
+              ),
               mpDescription,
               "mp",
               mpMax,
@@ -89,7 +91,9 @@ export default function AbilityExecutionGetInputPart(Base) {
           const hpMax = this.actor.system.hp.value - this.actor.system.hp.min;
           dialogs.push(
             createDialogFieldset(
-              "Variable Hit Cost",
+              game.i18n.localize(
+                "TERIOCK.SYSTEMS.Ability.DIALOG.VariableCosts.hp",
+              ),
               hpDescription,
               "hp",
               hpMax,
@@ -104,7 +108,9 @@ export default function AbilityExecutionGetInputPart(Base) {
           );
           dialogs.push(
             createDialogFieldset(
-              "Variable Gold Cost",
+              game.i18n.localize(
+                "TERIOCK.SYSTEMS.Ability.DIALOG.VariableCosts.gp",
+              ),
               gpDescription,
               "gp",
               Infinity,
@@ -123,7 +129,9 @@ export default function AbilityExecutionGetInputPart(Base) {
           );
           dialogs.push(
             createDialogFieldset(
-              "Heightened Amount",
+              game.i18n.localize(
+                "TERIOCK.SYSTEMS.Ability.DIALOG.VariableCosts.heightened",
+              ),
               heightenDescription,
               "heightened",
               this.actor?.system.scaling.p || Infinity,
@@ -141,7 +149,9 @@ export default function AbilityExecutionGetInputPart(Base) {
             content: dialogs.join(""),
             modal: true,
             ok: {
-              label: "Confirm",
+              label: game.i18n.localize(
+                "TERIOCK.SYSTEMS.Ability.DIALOG.VariableCosts.ok",
+              ),
               callback: (_event, button) => {
                 for (const [cost, toggle] of Object.entries({
                   hp: promptHp,
@@ -200,11 +210,17 @@ export default function AbilityExecutionGetInputPart(Base) {
           const rangeId = foundry.utils.randomID();
           const tokenId = foundry.utils.randomID();
           placeTemplate = await TeriockDialog.prompt({
-            window: { title: "Template Confirmation" },
+            window: {
+              title: game.i18n.localize(
+                "TERIOCK.SYSTEMS.Ability.DIALOG.PlaceTemplate.title",
+              ),
+            },
             modal: true,
             content: dedent(`
             <div class="standard-form form-group">
-              <label for="${rangeId}">Distance <span class="units">(ft)</span></label>
+              <label for="${rangeId}">
+                ${game.i18n.localize("TERIOCK.SYSTEMS.Ability.DIALOG.PlaceTemplate.range")}
+              </label>
               <input 
                 id="${rangeId}" 
                 name='range' 
@@ -215,12 +231,16 @@ export default function AbilityExecutionGetInputPart(Base) {
               >
             </div>
             <div class="standard-form form-group">
-              <label for="${tokenId}">Add Token Radius</label>
+              <label for="${tokenId}">
+                ${game.i18n.localize("TERIOCK.SYSTEMS.Ability.DIALOG.PlaceTemplate.addTokenRadius")}
+              </label>
               <input id="${tokenId}" name="token" type="checkbox" checked="checked">
             </div>
           `),
             ok: {
-              label: "Place Template",
+              label: game.i18n.localize(
+                "TERIOCK.SYSTEMS.Ability.DIALOG.PlaceTemplate.title",
+              ),
               callback: (_event, button) => {
                 distance =
                   Number(button.form.elements.namedItem("range").value) +

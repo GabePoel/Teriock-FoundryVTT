@@ -76,7 +76,11 @@
       <div
         class="character-presence-bar"
         style="grid-template-columns:{{repeatStr system.presence.max ' 1fr'}};"
-        data-tooltip="{{{system.presence.value}}} out of {{{system.presence.max}}} Presence Used"
+        data-tooltip="{{localize
+          "TERIOCK.SHEETS.Actor.SIDEBAR.Bars.presence.tooltip"
+          value=system.presence.value
+          max=system.presence.max
+        }}"
       >
         {{#if (gte system.presence.value 1)}}
           <div

@@ -26,7 +26,7 @@ export default (Base) => {
             {
               action: "deleteThis",
               icon: makeIconClass(icons.ui.delete, "contextMenu"),
-              label: "Delete Document",
+              label: "TERIOCK.SYSTEMS.Common.MENU.delete",
               ownership: "OWNER",
             },
           ],

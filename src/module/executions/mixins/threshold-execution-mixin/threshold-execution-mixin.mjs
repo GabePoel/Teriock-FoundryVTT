@@ -125,15 +125,23 @@ export default function ThresholdExecutionMixin(Base) {
         const competenceField = new fields.EmbeddedDataField(CompetenceModel);
         const competenceFormGroup = competenceField.fields.raw.toFormGroup(
           {
-            label: "Competence",
-            hint: "Whether this roll has proficiency or fluency.",
+            hint: game.i18n.localize(
+              "TERIOCK.DIALOGS.ThresholdExecutionOptions.FIELDS.competence.hint",
+            ),
+            label: game.i18n.localize(
+              "TERIOCK.DIALOGS.ThresholdExecutionOptions.FIELDS.competence.label",
+            ),
           },
           { name: "competence", value: initialCompetence },
         );
         const bonusField = new FormulaField({
-          label: "Circumstance Bonus",
-          hint: "An additional bonus to apply to this roll.",
+          hint: game.i18n.localize(
+            "TERIOCK.DIALOGS.ThresholdExecutionOptions.FIELDS.bonus.hint",
+          ),
           initial: "",
+          label: game.i18n.localize(
+            "TERIOCK.DIALOGS.ThresholdExecutionOptions.FIELDS.bonus.label",
+          ),
         });
         const content = document.createElement("div");
         content.classList.add("teriock-form-container");
@@ -144,8 +152,12 @@ export default function ThresholdExecutionMixin(Base) {
         content.append(...[competenceFormGroup, bonusFormGroup]);
         await TeriockDialog.wait({
           window: {
-            title: `${this.name} Roll Options`.trim(),
             icon: makeIconClass(this.icon, "title"),
+            title: game.i18n
+              .format("TERIOCK.DIALOGS.ThresholdExecutionOptions.title", {
+                name: this.name,
+              })
+              .trim(),
           },
           modal: true,
           content: content.outerHTML,
@@ -153,7 +165,9 @@ export default function ThresholdExecutionMixin(Base) {
             {
               action: "disadvantage",
               icon: makeIconClass("dice-d20", "button"),
-              label: "Disadvantage",
+              label: game.i18n.localize(
+                "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.disadvantage",
+              ),
               callback: (_event, button) => {
                 this.#updateFromRollDialog(button);
                 this.edge = -1;
@@ -163,7 +177,9 @@ export default function ThresholdExecutionMixin(Base) {
               action: "normal",
               default: true,
               icon: makeIconClass("dice-d20", "button"),
-              label: "Normal",
+              label: game.i18n.localize(
+                "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.normal",
+              ),
               callback: (_event, button) => {
                 this.#updateFromRollDialog(button);
                 this.edge = 0;
@@ -172,7 +188,9 @@ export default function ThresholdExecutionMixin(Base) {
             {
               action: "advantage",
               icon: makeIconClass("dice-d20", "button"),
-              label: "Advantage",
+              label: game.i18n.localize(
+                "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.advantage",
+              ),
               callback: (_event, button) => {
                 this.#updateFromRollDialog(button);
                 this.edge = 1;

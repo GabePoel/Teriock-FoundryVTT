@@ -82,7 +82,9 @@ export default function BaseDocumentMixin(Base) {
         entries.push(
           ...[
             {
-              name: "Open Source",
+              name: game.i18n.localize(
+                "TERIOCK.SYSTEMS.Common.MENU.openSource",
+              ),
               icon: makeIcon(
                 TERIOCK.display.icons.ui.openWindow,
                 "contextMenu",
@@ -93,7 +95,7 @@ export default function BaseDocumentMixin(Base) {
               group: "open",
             },
             {
-              name: "Delete",
+              name: game.i18n.localize("TERIOCK.SYSTEMS.Common.MENU.delete"),
               icon: makeIcon(TERIOCK.display.icons.ui.delete, "contextMenu"),
               callback: async () => await this.safeDelete(),
               condition: () =>
@@ -132,8 +134,7 @@ export default function BaseDocumentMixin(Base) {
             title: `Delete ${this.nameString || this.name}`,
             icon: makeIconClass(icons.ui.delete, "title"),
           },
-          content:
-            "Are you sure you want to delete this? This can't be reversed.",
+          content: game.i18n.localize("TERIOCK.SYSTEMS.Common.DIALOG.delete"),
           modal: true,
           rejectClose: false,
         });

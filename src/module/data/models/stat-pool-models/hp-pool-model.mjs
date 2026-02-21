@@ -29,14 +29,12 @@ export default class HpPoolModel extends StatPoolModel {
     const panels = [
       {
         image: getImage("misc", "Hit Die"),
-        name: "Hit Die",
+        name: game.i18n.localize("TERIOCK.MODELS.HpPool.PANELS.name"),
         bars: [],
         blocks: [
           {
-            title: "Description",
-            text:
-              "You restore the rolled number of @L[Core:Hit Points and Mana Points]{HP} and are" +
-              " @L[Keyword:Awaken]{awakened}.",
+            title: game.i18n.localize("TERIOCK.MODELS.StatPool.PANELS.title"),
+            text: game.i18n.localize("TERIOCK.MODELS.HpPool.PANELS.text"),
           },
         ],
         icon: getRollIcon(this.formula),
@@ -49,7 +47,7 @@ export default class HpPoolModel extends StatPoolModel {
         bars: [],
         blocks: [
           {
-            title: "Description",
+            title: game.i18n.localize("TERIOCK.MODELS.StatPool.PANELS.title"),
             text: TERIOCK.data.conditions.criticallyWounded.description,
           },
         ],
@@ -63,7 +61,7 @@ export default class HpPoolModel extends StatPoolModel {
         bars: [],
         blocks: [
           {
-            title: "Description",
+            title: game.i18n.localize("TERIOCK.MODELS.StatPool.PANELS.title"),
             text: TERIOCK.content.keywords.awaken,
           },
         ],

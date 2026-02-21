@@ -343,6 +343,18 @@
           "hint": "Please select an ability.",
           "title": "Select Ability"
         },
+        "AddAutomation": {
+          "title": "Add Automation",
+          "hint": "Please select an automation type."
+        },
+        "Armament": {
+          "hint": "Please select an armament.",
+          "title": "Select Armament"
+        },
+        "Attunable": {
+          "hint": "Please select an item to attune.",
+          "title": "Select Item"
+        },
         "BodyPart": {
           "hint": "Please select a body part.",
           "title": "Select Body Part"
@@ -360,6 +372,14 @@
           "label": "Condition",
           "title": "Select Condition"
         },
+        "Deattunable": {
+          "hint": "Please select an item to deattune.",
+          "title": "Select Item"
+        },
+        "Document": {
+          "hint": "Please select a document.",
+          "title": "Select Document"
+        },
         "EquipmentClass": {
           "hint": "Please select an equipment class.",
           "label": "Equipment Class",
@@ -369,13 +389,33 @@
           "hint": "Please select an equipment type.",
           "title": "Select Equipment Type"
         },
+        "IllusionLevel": {
+          "hint": "If known, select the level of illusion you are attempting to disbelieve.",
+          "hintTitle": "Illusionary",
+          "title": "Select Illusion Level",
+          "label": "Level"
+        },
         "Property": {
           "hint": "Please select a property.",
           "title": "Select Property"
         },
+        "Spell": {
+          "hint": "Please select a spell.",
+          "title": "Select Spell"
+        },
         "Tradecraft": {
           "hint": "Please select a tradecraft.",
           "title": "Select Tradecraft"
+        },
+        "Transformation": {
+          "hint": "Please select a species to transform into.",
+          "title": "Select Species"
+        },
+        "TransformationLevel": {
+          "hint": "If known, select the level of transformation you are attempting to revert from.",
+          "hintTitle": "Transformed",
+          "title": "Select Transformation Level",
+          "label": "Level"
         },
         "WeaponClass": {
           "hint": "Please select a weapon class.",
@@ -410,6 +450,24 @@
         },
         "title": "Set {dieName}"
       },
+      "ThresholdExecutionOptions": {
+        "BUTTONS": {
+          "advantage": "Advantage",
+          "disadvantage": "Disadvantage",
+          "normal": "Normal"
+        },
+        "FIELDS": {
+          "bonus": {
+            "hint": "An additional bonus to apply to this roll.",
+            "label": "Circumstance Bonus"
+          },
+          "competence": {
+            "hint": "Whether this roll has proficiency or fluency.",
+            "label": "Competence"
+          }
+        },
+        "title": "{name} Roll Options"
+      },
       "Update": {
         "BUTTONS": {
           "update": "Update"
@@ -420,6 +478,47 @@
       }
     },
     "MODELS": {
+      "MpPool": {
+        "PANELS": {
+          "name": "Mana Die",
+          "text": "You restore the rolled number of @L[Core:Hit Points and Mana Points]{MP}."
+        }
+      },
+      "HpPool": {
+        "PANELS": {
+          "name": "Hit Die",
+          "text": "You restore the rolled number of @L[Core:Hit Points and Mana Points]{HP} and are @L[Keyword:Awaken]{awakened}."
+        }
+      },
+      "StatDie": {
+        "DIALOG": {
+          "Reroll": {
+            "title": "Reroll Stat Die?",
+            "content": "This stat die is already spent. Would you like to roll it anyways?"
+          }
+        }
+      },
+      "StatPool": {
+        "FIELDS": {
+          "disabled": {
+            "hint": "If checked, these dice will not be given to the actor.",
+            "label": "Disabled"
+          },
+          "faces": {
+            "hint": "Number of faces on each die.",
+            "label": "Faces"
+          },
+          "number": {
+            "hint": "Number of dice",
+            "label": "Number"
+          }
+        },
+        "PANELS": {
+          "name": "Stat Die",
+          "title": "Description",
+          "text": "You have rolled a stat die."
+        }
+      },
       "Identification": {
         "FIELDS": {
           "flaws": {
@@ -440,6 +539,26 @@
           "read": {
             "label": "Read"
           }
+        },
+        "QUERY": {
+          "Identify": {
+            "ask": "Asking GMs to approve identification of {name}.",
+            "failPrefix": "Could not ask to identify.",
+            "failure": "{name} was not successfully identified.",
+            "hint": "Select effects to reveal.",
+            "success": "{name} was successfully identified.",
+            "title": "Identify Item"
+          },
+          "ReadMagic": {
+            "ask": "Asking GMs to approve reading magic on {name}.",
+            "failPrefix": "Could not ask to read magic.",
+            "failure": "{name} was not successfully read magic on.",
+            "success": "{name} was successfully read magic on.",
+            "title": "Read Magic"
+          },
+          "Unidentify": {
+            "hint": "Select effects to hide"
+          }
         }
       },
       "Piercing": {
@@ -448,6 +567,11 @@
             "hint": "How this interacts with armor and blocking.",
             "label": "Piercing"
           }
+        },
+        "MENU": {
+          "0": "None",
+          "1": "AV0",
+          "2": "UB"
         }
       },
       "Storage": {
@@ -609,6 +733,11 @@
     },
     "SHEETS": {
       "Actor": {
+        "CONDITIONS": {
+          "Associations": {
+            "title": "Associated Creatures"
+          }
+        },
         "SIDEBAR": {
           "AttributeBox": {
             "competence": {
@@ -644,6 +773,9 @@
               "max": "Maximum MP",
               "take": "Take Drain",
               "temp": "Temporary MP"
+            },
+            "presence": {
+              "tooltip": "{value} out of {max} Presence Used"
             },
             "wither": {
               "current": "Current Wither",
@@ -704,6 +836,22 @@
           "ReactionBox": {
             "label": "Has Reaction",
             "tooltip": "Toggle Reaction"
+          },
+          "Scaling": {
+            "labels": {
+              "flu": "FLU",
+              "lvl": "LVL",
+              "pro": "PRO",
+              "rank": "RANK"
+            },
+            "tooltip": {
+              "br": "Scales off BR",
+              "lvl": "Scales off LVL"
+            },
+            "type": {
+              "br": "Scale P and F off BR",
+              "lvl": "Scale P and F off LVL"
+            }
           }
         },
         "TABS": {
@@ -811,6 +959,19 @@
             "title": "Tradecrafts"
           }
         }
+      },
+      "Common": {
+        "MENU": {
+          "Create": {
+            "document": "New {type}",
+            "fluency": "New {tradecraft} Fluency"
+          },
+          "CreateRank": {
+            "selectCombat": "Select Combat Ability",
+            "selectSupport": "Select Support Ability",
+            "title": "Select Rank"
+          }
+        }
       }
     },
     "STATS": {
@@ -832,6 +993,20 @@
     },
     "SYSTEMS": {
       "Ability": {
+        "DIALOG": {
+          "PlaceTemplate": {
+            "addTokenRadius": "Add Token Radius",
+            "range": "Distance <span class='units'>(ft)</span>",
+            "title": "Template Confirmation"
+          },
+          "VariableCosts": {
+            "gp": "Variable Gold Cost",
+            "heightened": "Heightened Amount",
+            "hp": "Variable Hit Cost",
+            "mp": "Variable Mana Cost",
+            "ok": "Confirm"
+          }
+        },
         "EMBED": {
           "basic": "Basic abilities cannot be disabled.",
           "combat": "Combat",
@@ -1299,6 +1474,8 @@
         "MENU": {
           "disable": "Disable",
           "enable": "Enable",
+          "imagePreview": "Image Preview",
+          "openDocument": "Open Document",
           "openGmNotes": "Open GM Notes",
           "openImage": "Open Image",
           "shareImage": "Share Image",
@@ -1309,15 +1486,23 @@
         }
       },
       "Common": {
+        "DIALOG": {
+          "delete": "Are you sure you want to delete this? This can't be reversed."
+        },
         "FIELDS": {
           "gmNotes": {
             "hint": "A journal entry page with notes about this document.",
-            "label": "GM Notes"
+            "label": "GM Notes",
+            "otherCategory": "Other"
           }
         },
         "MENU": {
+          "compendiumRefresh": "Compendium Refresh",
+          "configureDocument": "Configure Document",
           "delete": "Delete",
-          "duplicate": "Duplicate"
+          "duplicate": "Duplicate",
+          "openSource": "Open Source",
+          "viewOnWiki": "View on Wiki"
         }
       },
       "Condition": {
@@ -1401,6 +1586,12 @@
           "remaining": "{value} Remaining"
         }
       },
+      "Stone": {
+        "DEFAULTS": {
+          "back": "Unknown Stone",
+          "faces": "Stone"
+        }
+      },
       "Equipment": {
         "EMBED": {
           "equipped": "Equipped",
@@ -1468,11 +1659,19 @@
           "carriedCount": "{value} / {max} Items Carried",
           "carriedWeight": "{value} / {max} lb Carried",
           "minStr": "{value} min STR",
+          "unknown": "Unknown {type}",
+          "used": "Item is used.",
           "weight": "{value} lb",
           "weightMultiplier": "× {value} Weight Multiplier"
         },
         "USAGE": {
           "twoHanded": "Use in Two Hands"
+        },
+        "DIALOG": {
+          "onUse": {
+            "hint": "{name} has abilities that can activate on use. Select which to activate.",
+            "title": "Activate Abilities"
+          }
         }
       },
       "Fluency": {

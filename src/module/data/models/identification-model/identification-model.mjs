@@ -61,7 +61,9 @@ export default class IdentificationModel extends EmbeddedDataModel {
     if (!data.cancel) {
       if (!this.identified) {
         ui.notifications.info(
-          `Asking GMs to approve identification of ${this.parent.parent.nameString}.`,
+          game.i18n.format("TERIOCK.MODELS.Identification.QUERY.Identify.ask", {
+            name: this.parent.parent.nameString,
+          }),
         );
         const doIdentify = await game.users.queryGM(
           "teriock.identifyItem",
@@ -69,18 +71,30 @@ export default class IdentificationModel extends EmbeddedDataModel {
             uuid: this.parent.parent.uuid,
           },
           {
-            failPrefix: "Could not ask to identify.",
+            failPrefix: game.i18n.localize(
+              "TERIOCK.MODELS.Identification.QUERY.Identify.failPrefix",
+            ),
           },
         );
         if (doIdentify) {
           ui.notifications.success(
-            `${this.parent.parent.nameString} was successfully identified.`,
+            game.i18n.format(
+              "TERIOCK.MODELS.Identification.QUERY.Identify.success",
+              {
+                name: this.parent.parent.nameString,
+              },
+            ),
           );
           return;
         }
       }
       ui.notifications.error(
-        `${this.parent.parent.nameString} was not successfully identified.`,
+        game.i18n.format(
+          "TERIOCK.MODELS.Identification.QUERY.Identify.failure",
+          {
+            name: this.parent.parent.nameString,
+          },
+        ),
       );
     }
   }
@@ -96,7 +110,12 @@ export default class IdentificationModel extends EmbeddedDataModel {
       if (!this.identified && !this.read) {
         const activeGM = game.users.activeGM;
         ui.notifications.info(
-          `Asking GMs to approve reading magic on ${this.parent.parent.nameString}.`,
+          game.i18n.format(
+            "TERIOCK.MODELS.Identification.QUERY.ReadMagic.ask",
+            {
+              name: this.parent.parent.nameString,
+            },
+          ),
         );
         const content = await TeriockTextEditor.enrichHTML(
           `<p>Should @UUID[${game.user.uuid}] read magic on ` +
@@ -107,7 +126,9 @@ export default class IdentificationModel extends EmbeddedDataModel {
           modal: false,
           window: {
             icon: makeIconClass("magnifying-glass", "title"),
-            title: "Read Magic",
+            title: game.i18n.localize(
+              "TERIOCK.MODELS.Identification.QUERY.ReadMagic.title",
+            ),
           },
         });
         if (doReadMagic) {
@@ -121,15 +142,27 @@ export default class IdentificationModel extends EmbeddedDataModel {
               },
             },
             {
-              failPrefix: "Could not ask to read magic.",
+              failPrefix: game.i18n.localize(
+                "TERIOCK.MODELS.Identification.QUERY.ReadMagic.failPrefix",
+              ),
             },
           );
           ui.notifications.success(
-            `${this.parent.parent.nameString} was successfully read.`,
+            game.i18n.format(
+              "TERIOCK.MODELS.Identification.QUERY.ReadMagic.success",
+              {
+                name: this.parent.parent.nameString,
+              },
+            ),
           );
         } else {
           ui.notifications.error(
-            `${this.parent.parent.nameString} was not successfully read.`,
+            game.i18n.format(
+              "TERIOCK.MODELS.Identification.QUERY.ReadMagic.failure",
+              {
+                name: this.parent.parent.nameString,
+              },
+            ),
           );
         }
       }
@@ -171,9 +204,11 @@ export default class IdentificationModel extends EmbeddedDataModel {
           )
           .map((e) => e.uuid);
         const toReveal = await selectDocumentsDialog(revealed, {
-          hint: "Select effects to hide.",
-          tooltipAsync: false,
           checked: checked,
+          hint: game.i18n.localize(
+            "TERIOCK.MODELS.Identification.Query.Unidentify.hint",
+          ),
+          tooltipAsync: false,
         });
         await this.parent.parent.updateEmbeddedDocuments(
           "ActiveEffect",

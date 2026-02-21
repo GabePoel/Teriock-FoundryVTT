@@ -34,7 +34,9 @@ export default class TeriockTableResult extends mix(
     parts.label = "Table Result";
     parts.image = this.icon;
     parts.blocks.push({
-      title: "Description",
+      title: game.i18n.localize(
+        "TERIOCK.SYSTEMS.Child.FIELDS.description.label",
+      ),
       text: this.description,
     });
     parts.bars.push({

@@ -11,7 +11,7 @@ export default class MpPoolModel extends StatPoolModel {
 
   /** @inheritDoc */
   get dieName() {
-    return "Mana Dice";
+    return game.i18n.localize("TERIOCK.MODELS.MpPool.PANELS.name");
   }
 
   /** @inheritDoc */
@@ -24,12 +24,12 @@ export default class MpPoolModel extends StatPoolModel {
     return [
       {
         image: getImage("misc", "Mana Die"),
-        name: "Mana Die",
+        name: game.i18n.localize("TERIOCK.MODELS.MpPool.PANELS.name"),
         bars: [],
         blocks: [
           {
-            title: "Description",
-            text: "You restore the rolled number of @L[Core:Hit Points and Mana Points]{MP}.",
+            title: game.i18n.localize("TERIOCK.MODELS.StatPool.PANELS.title"),
+            text: game.i18n.localize("TERIOCK.MODELS.MpPool.PANELS.text"),
           },
         ],
         icon: getRollIcon(this.formula),

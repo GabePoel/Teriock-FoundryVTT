@@ -20,7 +20,7 @@ export default function ConfigButtonSheetMixin(Base) {
           {
             action: "openDocumentSettings",
             icon: makeIconClass("gear-code", "contextMenu"),
-            label: "Configure Document",
+            label: "TERIOCK.SYSTEMS.Common.MENU.configureDocument",
             ownership: "OWNER",
           },
         ],

@@ -20,7 +20,7 @@ export default function IndexButtonSheetMixin(Base) {
           {
             action: "refreshFromCompendium",
             icon: makeIconClass("book-atlas", "contextMenu"),
-            label: "Compendium Refresh",
+            label: "TERIOCK.SYSTEMS.Common.MENU.compendiumRefresh",
             ownership: "OWNER",
           },
         ],

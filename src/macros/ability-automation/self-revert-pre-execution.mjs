@@ -3,13 +3,19 @@ const transformationLevels = TERIOCK.options.effect.transformationLevel;
 const chosenTransformationLevel = await tm.dialogs.selectDialog(
   transformationLevels,
   {
-    hint: "If known, select the level of transformation you are attempting to revert from.",
+    hint: game.i18n.localize("TERIOCK.DIALOGS.Select.TransformationLevel.hint"),
     hintHtml: TERIOCK.content.conditions.transformed,
-    hintTitle: "Transformed",
+    hintTitle: game.i18n.localize(
+      "TERIOCK.DIALOGS.Select.TransformationLevel.hintTitle",
+    ),
     initial: "minor",
-    label: "Level",
+    label: game.i18n.localize(
+      "TERIOCK.DIALOGS.Select.TransformationLevel.label",
+    ),
     other: true,
-    title: "Select Transformation Level",
+    title: game.i18n.localize(
+      "TERIOCK.DIALOGS.Select.TransformationLevel.title",
+    ),
   },
 );
 let dc = "none";

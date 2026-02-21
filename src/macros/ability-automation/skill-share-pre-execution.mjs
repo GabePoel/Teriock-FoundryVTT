@@ -7,8 +7,8 @@ const validAbilities = actor.abilities
   .filter((a) => !a.isReference && a.system.standard)
   .sort((a, b) => a.name.localeCompare(b.name));
 const ability = await tm.dialogs.selectDocumentDialog(validAbilities, {
-  title: "Select Ability",
-  hint: "Select an ability to share.",
+  hint: game.i18n.localize("TERIOCK.DIALOGS.Select.Ability.hint"),
+  title: game.i18n.localize("TERIOCK.DIALOGS.Select.Ability.title"),
 });
 data.execution.buttons[0].dataset.bonusSubs = JSON.stringify([ability.uuid]);
 data.execution.proficient = false;

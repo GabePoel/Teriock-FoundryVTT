@@ -44,7 +44,9 @@ export default (Base) =>
           blocks: [
             {
               text: TERIOCK.data.conditions[condition].description,
-              title: "Description",
+              title: game.i18n.localize(
+                "TERIOCK.SYSTEMS.Child.FIELDS.description.label",
+              ),
             },
           ],
           image: TERIOCK.data.conditions[condition].img,
@@ -61,7 +63,9 @@ export default (Base) =>
         if (tokenDocs.length > 0) {
           /** @type {Teriock.MessageData.MessageAssociation} */
           const association = {
-            title: "Associated Creatures",
+            title: game.i18n.localize(
+              "TERIOCK.SHEETS.Actor.CONDITIONS.Associations.title",
+            ),
             icon: TERIOCK.options.document.creature.icon,
             cards: [],
           };

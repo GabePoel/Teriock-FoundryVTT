@@ -16,7 +16,7 @@ for (const name of spellNames) {
   spells.push(spell);
 }
 const spell = await tm.dialogs.selectDocumentDialog(spells, {
-  title: "Select Spell",
-  hint: "Select a spell to cast",
+  hint: game.i18n.localize("TERIOCK.DIALOGS.Select.Spell.hint"),
+  title: game.i18n.localize("TERIOCK.DIALOGS.Select.Spell.title"),
 });
 await spell.system.use(options);

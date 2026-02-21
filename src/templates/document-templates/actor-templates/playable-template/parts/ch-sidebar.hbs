@@ -59,36 +59,56 @@
             value=system.scaling.lvl
             classes="character-level-input character-shortbox-value"
           }}
-          <div class="character-level-label character-shortbox-label">LVL</div>
+          <div class="character-level-label character-shortbox-label">
+            {{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.labels.lvl"}}
+          </div>
         </div>
-        <div class="character-shortbox character-rank-box"
-             data-tooltip="Scales off LVL">
+        <div
+          class="character-shortbox character-rank-box"
+          data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.tooltip.lvl"}}"
+        >
           {{numberInput
             system.scaling.rank
             class="character-fluency-input character-shortbox-value"
             disabled=true
           }}
-          <div class="character-class-label character-shortbox-label">RANK</div>
+          <div class="character-class-label character-shortbox-label">
+            {{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.labels.rank"}}
+          </div>
         </div>
-        <div class="character-shortbox character-proficiency-box"
-             data-tooltip="{{#if system.scaling.brScale}}Scales
-             off BR ({{system.scaling.br}}){{else}}Scales off LVL{{/if}}">
+        <div
+          class="character-shortbox character-proficiency-box"
+          {{#if system.scaling.brScale}}
+          data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.tooltip.br"}}"
+          {{else}}
+          data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.tooltip.lvl"}}"
+          {{/if}}
+        >
           {{numberInput
             system.scaling.p
             class="character-fluency-input character-shortbox-value"
             disabled=true
           }}
-          <div class="character-level-label character-shortbox-label">PRO</div>
+          <div class="character-level-label character-shortbox-label">
+            {{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.labels.pro"}}
+          </div>
         </div>
-        <div class="character-shortbox character-fluency-box"
-             data-tooltip="{{#if system.scaling.brScale}}Scales
-             off BR ({{system.scaling.br}}){{else}}Scales off LVL{{/if}}">
+        <div
+          class="character-shortbox character-fluency-box"
+          {{#if system.scaling.brScale}}
+          data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.tooltip.br"}}"
+          {{else}}
+          data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.tooltip.lvl"}}"
+          {{/if}}
+        >
           {{numberInput
             system.scaling.f
             class="character-fluency-input character-shortbox-value"
             disabled=true
           }}
-          <div class="character-fluency-label character-shortbox-label">FLU</div>
+          <div class="character-fluency-label character-shortbox-label">
+            {{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.labels.flu"}}
+          </div>
         </div>
       </div>
     </div>

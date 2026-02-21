@@ -29,9 +29,21 @@ export default (Base) =>
       return TeriockContextMenu.makeUpdateEntries(
         this.actor,
         [
-          { name: "None", icon: TERIOCK.display.icons.piercing.none, value: 0 },
-          { name: "AV0", icon: TERIOCK.display.icons.piercing.av0, value: 1 },
-          { name: "UB", icon: TERIOCK.display.icons.piercing.ub, value: 2 },
+          {
+            name: game.i18n.localize("TERIOCK.MODELS.Piercing.MENU.0"),
+            icon: TERIOCK.display.icons.piercing.none,
+            value: 0,
+          },
+          {
+            name: game.i18n.localize("TERIOCK.MODELS.Piercing.MENU.1"),
+            icon: TERIOCK.display.icons.piercing.av0,
+            value: 1,
+          },
+          {
+            name: game.i18n.localize("TERIOCK.MODELS.Piercing.MENU.2"),
+            icon: TERIOCK.display.icons.piercing.ub,
+            value: 2,
+          },
         ],
         {
           path: "system.offense.piercing.raw",
@@ -48,12 +60,16 @@ export default (Base) =>
         this.actor,
         [
           {
-            name: "Scale P and F off LVL",
+            name: game.i18n.localize(
+              "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.type.lvl",
+            ),
             icon: TERIOCK.display.icons.document.rank,
             value: false,
           },
           {
-            name: "Scale P and F off BR",
+            name: game.i18n.localize(
+              "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.type.br",
+            ),
             icon: TERIOCK.display.icons.species.br,
             value: true,
           },
