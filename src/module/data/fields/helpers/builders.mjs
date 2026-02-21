@@ -398,12 +398,11 @@ export function blockGaplessField(options = {}) {
 
 /**
  * Build a cost adjustment.
- * @param {string} [label]
  * @returns {SchemaField}
  */
-export function costAdjustment(label = "Adjustment") {
+export function costAdjustment() {
   return new SchemaField({
-    enabled: new BooleanField({ label }),
+    enabled: new BooleanField(),
     amount: new NumberField({
       initial: 0,
       min: 0,
@@ -416,10 +415,9 @@ export function costAdjustment(label = "Adjustment") {
  * Build a cost schema.
  * @param {object} [options]
  * @param {Record<string, string>} [options.extraChoices]
- * @param {string} [options.label]
  * @returns {SchemaField}
  */
-export function costField(options = { extraChoices: {}, label: "Cost" }) {
+export function costField(options = { extraChoices: {} }) {
   return new SchemaField({
     type: new StringField({
       initial: "none",
@@ -443,7 +441,6 @@ export function costField(options = { extraChoices: {}, label: "Cost" }) {
       }),
       variable: new TextField({
         initial: "",
-        label: options.label,
       }),
     }),
   });

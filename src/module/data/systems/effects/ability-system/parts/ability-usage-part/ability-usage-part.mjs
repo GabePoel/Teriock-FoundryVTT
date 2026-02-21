@@ -24,30 +24,27 @@ export default (Base) => {
               initial: "weapon",
               choices: TERIOCK.options.ability.delivery,
             }),
-            parent: new fields.StringField({
-              initial: null,
-              nullable: true,
-              choices: TERIOCK.options.ability.deliveryParent,
-            }),
             package: new fields.StringField({
               initial: null,
               nullable: true,
               choices: TERIOCK.options.ability.deliveryPackage,
             }),
+            parent: new fields.StringField({
+              initial: null,
+              nullable: true,
+              choices: TERIOCK.options.ability.deliveryParent,
+            }),
           }),
           executionTime: new fields.StringField({ initial: "a1" }),
           expansion: new fields.SchemaField({
+            cap: new EvaluationField({
+              deterministic: false,
+            }),
+            featSaveAttribute: new fields.StringField({ initial: "mov" }),
+            range: new EvaluationField({ model: RangeModel }),
             type: new fields.StringField({
               initial: null,
               nullable: true,
-            }),
-            range: new EvaluationField({
-              model: RangeModel,
-              label: "Expansion Range",
-            }),
-            featSaveAttribute: new fields.StringField({ initial: "mov" }),
-            cap: new EvaluationField({
-              deterministic: false,
             }),
           }),
           featSaveAttribute: new fields.StringField({
@@ -62,16 +59,12 @@ export default (Base) => {
             initial: "active",
             choices: TERIOCK.options.ability.maneuver,
           }),
-          range: new EvaluationField({ model: RangeModel, label: "Range" }),
+          range: new EvaluationField({ model: RangeModel }),
           targets: new fields.SetField(
             new fields.StringField({
               choices: TERIOCK.options.ability.targets,
             }),
-            {
-              hint: "Valid targets for this ability.",
-              initial: ["creature"],
-              label: "Targets",
-            },
+            { initial: ["creature"] },
           ),
         });
       }

@@ -137,7 +137,7 @@ export default class AbilitySheet extends mix(
         "system.expansion": "detonate",
       },
       ".ab-expansion-cap-button": {
-        "system.expansionCap.raw": "1",
+        "system.expansion.cap.raw": "1",
       },
       ".ab-feat-save-improvement-button": {
         "system.upgrades.competence.attribute": "int",

@@ -18,14 +18,8 @@ export default (Base) => {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          grantOnly: new fields.BooleanField({
-            initial: false,
-            label: "Granter Only",
-          }),
-          grantOnlyText: new TextField({
-            initial: "",
-            label: "Granter Only",
-          }),
+          grantOnly: new fields.BooleanField({ initial: false }),
+          grantOnlyText: new TextField({ initial: "" }),
         });
       }
 

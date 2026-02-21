@@ -23,6 +23,12 @@ export default class ConsequenceSystem extends mix(
   ThresholdDataMixin,
 ) {
   /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [
+    ...super.LOCALIZATION_PREFIXES,
+    "TERIOCK.SYSTEMS.Consequence",
+  ];
+
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       type: "consequence",
@@ -46,51 +52,22 @@ export default class ConsequenceSystem extends mix(
       expirations: new fields.SchemaField({
         conditions: new fields.SchemaField({
           present: new fields.SetField(
-            new fields.StringField({
-              choices: TERIOCK.index.conditions,
-            }),
-            {
-              label: "Present Conditions",
-              hint: "What conditions must be present in order for this ability to be active?",
-            },
+            new fields.StringField({ choices: TERIOCK.index.conditions }),
           ),
           absent: new fields.SetField(
-            new fields.StringField({
-              choices: TERIOCK.index.conditions,
-            }),
-            {
-              label: "Absent Conditions",
-              hint: "What conditions must be absent in order for this ability to be active?",
-            },
+            new fields.StringField({ choices: TERIOCK.index.conditions }),
           ),
         }),
-        movement: new fields.BooleanField({
-          initial: false,
-          label: "Stationary Expiration",
-          hint: "If true, effect expires on movement.",
-        }),
-        dawn: new fields.BooleanField({
-          initial: false,
-          label: "Dawn Expiration",
-          hint: "If true, effect expires at dawn.",
-        }),
-        sustained: new fields.BooleanField({
-          initial: false,
-          label: "Sustained Expiration",
-          hint: "If true, effect expires if its source is deleted or disabled.",
-        }),
-        description: new fields.StringField({
-          label: "End Condition",
-          hint: "Under what circumstances should this effect expire?",
-        }),
+        movement: new fields.BooleanField({ initial: false }),
+        dawn: new fields.BooleanField({ initial: false }),
+        sustained: new fields.BooleanField({ initial: false }),
+        description: new fields.StringField(),
         combat: new fields.SchemaField({
           who: new fields.SchemaField({
             type: builders.combatExpirationSourceTypeField(),
             source: new fields.DocumentUUIDField({
               type: "Actor",
               nullable: true,
-              label: "Actor",
-              hint: "UUID of actor whose turn or other information is used to trigger an expiration?",
             }),
           }),
           what: builders.combatExpirationMethodField(),

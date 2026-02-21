@@ -3,21 +3,24 @@
     (path TERIOCK.options.ability.form system.form "name")
     icon=(path TERIOCK.options.ability.form system.form "icon")
     iconColor=(path TERIOCK.options.ability.form system.form "color")
-    tooltip="Property Form"
+    tooltip=(localize "TERIOCK.SYSTEMS.BaseEffect.FIELDS.form.label")
     classes=(ifThen editable "property-type-box" "")
   }}
   {{formBox
     (formInput
-      systemFields.damageType value=system.damageType disabled=(not editable) placeholder="No Damage Type"
+      systemFields.damageType
+      value=system.damageType
+      disabled=(not editable)
+      placeholder=(localize "TERIOCK.SYSTEMS.Property.FIELDS.damageType.placeholder")
     )
-    tooltip="Damage Type"
+    tooltip=(localize "TERIOCK.SYSTEMS.Property.FIELDS.damageType.label")
     icon=TERIOCK.display.icons.ui.damage
   }}
   {{formBox
     (formInput
       systemFields.tag value=system.tag disabled=(not editable) placeholder="No Tag"
     )
-    tooltip="Tag"
+    tooltip=(localize "TERIOCK.SYSTEMS.BaseEffect.FIELDS.tag.label")
     icon=TERIOCK.display.icons.ui.tag
   }}
 </div>

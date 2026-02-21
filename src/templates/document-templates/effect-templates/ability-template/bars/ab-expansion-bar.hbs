@@ -18,7 +18,7 @@
       classes=(ifThen
         editable (concat "expansion-box expansion-box-" system.expansion) ""
       )
-      tooltip="Expansion Delivery"
+      tooltip=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.expansion.delivery.label")
       icon=TERIOCK.display.icons.ability.expansion
     }}
     {{formBox
@@ -32,7 +32,7 @@
       )
       action="updateUnit"
       icon=TERIOCK.display.icons.ability.expansionRange
-      tooltip="Expansion Range"
+      tooltip=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.expansion.range.label")
       label=(ifThen (eq system.expansion.range.unitType "finite") system.expansion.range.symbol "")
     }}
     {{formBox
@@ -40,11 +40,11 @@
         systemFields.expansion.fields.cap
         value=system._source.expansion.cap.raw
         disabled=(not editable)
-        dataset=(object tooltip="Expansion Cap")
       )
       icon=TERIOCK.display.icons.ability.expansionCap
       unselected=system.expansion.cap.value
       include=(exists system.expansion.cap.raw)
+      tooltip=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.expansion.cap.label")
     }}
   </div>
 {{/if}}

@@ -29,6 +29,12 @@ export default class PropertySystem extends mix(
   mixins.RevelationSystemMixin,
 ) {
   /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [
+    ...super.LOCALIZATION_PREFIXES,
+    "TERIOCK.SYSTEMS.Property",
+  ];
+
+  /** @inheritDoc */
   static get _automationTypes() {
     return [
       automations.ChangesAutomation,
@@ -64,33 +70,15 @@ export default class PropertySystem extends mix(
   /** @inheritDoc */
   static defineSchema() {
     return foundry.utils.mergeObject(super.defineSchema(), {
-      applyIfDampened: new fields.BooleanField({
-        initial: false,
-        label: "Apply if Dampened",
-      }),
-      applyIfShattered: new fields.BooleanField({
-        initial: false,
-        label: "Apply if Shattered",
-      }),
+      applyIfDampened: new fields.BooleanField({ initial: false }),
+      applyIfShattered: new fields.BooleanField({ initial: false }),
       damageType: new fields.StringField({ initial: "" }),
       extraDamage: new FormulaField({ deterministic: false }),
       form: new fields.StringField({ initial: "normal" }),
-      improvement: new TextField({
-        initial: "",
-        label: "Improvement",
-      }),
-      limitation: new TextField({
-        initial: "",
-        label: "Limitation",
-      }),
-      modifiesActor: new fields.BooleanField({
-        initial: false,
-        label: "Modifies Actor",
-      }),
-      tag: new fields.StringField({
-        initial: "",
-        label: "Tag",
-      }),
+      improvement: new TextField({ initial: "" }),
+      limitation: new TextField({ initial: "" }),
+      modifiesActor: new fields.BooleanField({ initial: false }),
+      tag: new fields.StringField({ initial: "" }),
     });
   }
 

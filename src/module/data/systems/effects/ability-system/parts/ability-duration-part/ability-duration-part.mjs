@@ -18,10 +18,7 @@ export default (Base) => {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          duration: new EvaluationField({
-            model: DurationModel,
-            label: "Duration",
-          }),
+          duration: new EvaluationField({ model: DurationModel }),
         });
       }
 

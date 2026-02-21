@@ -13,6 +13,12 @@ const { fields } = foundry.data;
  */
 export default class BaseEffectSystem extends ChildSystem {
   /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [
+    ...super.LOCALIZATION_PREFIXES,
+    "TERIOCK.SYSTEMS.BaseEffect",
+  ];
+
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       modifies: "Actor",
@@ -22,24 +28,7 @@ export default class BaseEffectSystem extends ChildSystem {
   /** @inheritDoc */
   static defineSchema() {
     return foundry.utils.mergeObject(super.defineSchema(), {
-      deleteOnExpire: new fields.BooleanField({
-        initial: false,
-        label: "Delete On Expire",
-      }),
-      suppression: new fields.SchemaField({
-        statuses: new fields.SchemaField({
-          active: new fields.SetField(
-            new fields.StringField({
-              choices: TERIOCK.index.conditions,
-            }),
-          ),
-          inactive: new fields.SetField(
-            new fields.StringField({
-              choices: TERIOCK.index.conditions,
-            }),
-          ),
-        }),
-      }),
+      deleteOnExpire: new fields.BooleanField({ initial: false }),
     });
   }
 

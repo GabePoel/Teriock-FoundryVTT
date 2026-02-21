@@ -32,10 +32,7 @@ export default (Base) => {
               choices: TERIOCK.index.powerSources,
             }),
           ),
-          tag: new fields.StringField({
-            initial: "",
-            label: "Tag",
-          }),
+          tag: new fields.StringField({ initial: "" }),
         });
       }
 

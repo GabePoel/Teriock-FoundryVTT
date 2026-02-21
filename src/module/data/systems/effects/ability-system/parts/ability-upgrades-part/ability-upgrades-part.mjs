@@ -27,7 +27,6 @@ export default (Base) => {
               attribute: attributeField(),
               text: new TextField({
                 initial: "",
-                label: "Attribute Competence Improvement",
                 required: false,
               }),
               value: competenceField(),
@@ -36,13 +35,10 @@ export default (Base) => {
               attribute: attributeField(),
               text: new TextField({
                 initial: "",
-                label: "Attribute Score Improvement",
                 required: false,
               }),
               value: new fields.NumberField({
-                hint: "The value of this attribute score.",
                 initial: 0,
-                label: "Score",
                 max: 5,
                 min: -3,
                 required: false,

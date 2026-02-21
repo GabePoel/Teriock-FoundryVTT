@@ -22,33 +22,20 @@ export default (Base) => {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          adept: costAdjustment("Adept"),
+          adept: costAdjustment(),
           costs: new fields.SchemaField({
-            verbal: new fields.BooleanField({
-              initial: false,
-              label: "Verbal",
-            }),
-            somatic: new fields.BooleanField({
-              initial: false,
-              label: "Somatic",
-            }),
-            material: new fields.BooleanField({
-              initial: false,
-              label: "Material",
-            }),
-            mp: costField({ label: "Mana Cost" }),
+            verbal: new fields.BooleanField({ initial: false }),
+            somatic: new fields.BooleanField({ initial: false }),
+            material: new fields.BooleanField({ initial: false }),
+            mp: costField(),
             hp: costField({
-              label: "Hit Cost",
               extraChoices: { hack: "Hack" },
             }),
-            gp: costField({ label: "Gold Cost" }),
+            gp: costField(),
             break: new fields.StringField({ initial: "" }),
-            materialCost: new TextField({
-              initial: "",
-              label: "Material Cost",
-            }),
+            materialCost: new TextField({ initial: "" }),
           }),
-          gifted: costAdjustment("Gifted"),
+          gifted: costAdjustment(),
         });
       }
 

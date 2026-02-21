@@ -34,6 +34,12 @@ export default class FluencySystem extends mix(
   shared.ThresholdDataMixin,
 ) {
   /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [
+    ...super.LOCALIZATION_PREFIXES,
+    "TERIOCK.SYSTEMS.Fluency",
+  ];
+
+  /** @inheritDoc */
   static get _automationTypes() {
     return [CommonMacroAutomation];
   }
@@ -51,17 +57,14 @@ export default class FluencySystem extends mix(
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      field: new fields.StringField({
-        initial: "artisan",
-        label: "Field",
-      }),
+      field: new fields.StringField({ initial: "artisan" }),
       tradecraft: new fields.StringField({
         initial: "artist",
-        label: "Tradecraft",
+        label: "TERIOCK.TERMS.Common.tradecraft",
       }),
       tradecraftDescription: new TextField({
         initial: "",
-        label: "Tradecraft",
+        label: "TERIOCK.TERMS.Common.tradecraft",
       }),
       competence: new fields.EmbeddedDataField(CompetenceModel, {
         initial: { raw: 2 },

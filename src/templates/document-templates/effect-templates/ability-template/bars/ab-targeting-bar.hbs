@@ -1,7 +1,7 @@
 <div class="ab-bar">
   {{formBox
     (concat
-      "<span style='flex: auto;' data-tooltip='Range' data-path='system.range' data-action='updateUnit'>"
+      "<span style='flex: auto;' data-path='system.range' data-action='updateUnit'>"
       (ifThen (eq system.range.unitType "finite") system.range.formula system.range.text)
       "</span>"
     )
@@ -16,11 +16,12 @@
       (eq system.delivery.base "cone")
       (eq system.delivery.base "sight")
     )
+    tooltip=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.range.label")
   }}
   {{formBox
     system.targetString
     icon=TERIOCK.display.icons.ability.target
-    tooltip="Targets"
+    tooltip=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.targets.label")
     dataset=(object
       action="updatePaths"
       paths="system.targets"
@@ -32,7 +33,7 @@
     system.duration.text
     icon=TERIOCK.display.icons.ability.duration
     action=(ifThen editable "updateUnit" "")
-    tooltip="Duration"
+    tooltip=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.duration.label")
     dataset=(object path="system.duration")
   }}
 </div>

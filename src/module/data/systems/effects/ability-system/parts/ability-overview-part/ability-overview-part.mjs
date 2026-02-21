@@ -18,44 +18,17 @@ export default (Base) => {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          endCondition: new TextField({
-            initial: "",
-            label: "End Condition",
-          }),
-          heightened: new TextField({
-            initial: "",
-            label: "Heightened",
-          }),
-          improvement: new TextField({
-            initial: "",
-            label: "Improvement",
-          }),
-          limitation: new TextField({
-            initial: "",
-            label: "Limitation",
-          }),
+          endCondition: new TextField({ initial: "" }),
+          heightened: new TextField({ initial: "" }),
+          improvement: new TextField({ initial: "" }),
+          limitation: new TextField({ initial: "" }),
           overview: new fields.SchemaField({
-            base: new TextField({
-              initial: "",
-              label: "Description",
-            }),
-            proficient: new TextField({
-              initial: "",
-              label: "If Proficient",
-            }),
-            fluent: new TextField({
-              initial: "",
-              label: "If Fluent",
-            }),
+            base: new TextField({ initial: "" }),
+            proficient: new TextField({ initial: "" }),
+            fluent: new TextField({ initial: "" }),
           }),
-          requirements: new TextField({
-            initial: "",
-            label: "Requirements",
-          }),
-          trigger: new TextField({
-            initial: "",
-            label: "Trigger",
-          }),
+          requirements: new TextField({ initial: "" }),
+          trigger: new TextField({ initial: "" }),
         });
       }
     }

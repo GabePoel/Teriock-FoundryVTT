@@ -60,6 +60,12 @@ export default class AbilitySystem extends mix(
   parts.AbilityTagsPart,
 ) {
   /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [
+    ...super.LOCALIZATION_PREFIXES,
+    "TERIOCK.SYSTEMS.Ability",
+  ];
+
+  /** @inheritDoc */
   static get _automationTypes() {
     return [
       automations.AbilityMacroAutomation,

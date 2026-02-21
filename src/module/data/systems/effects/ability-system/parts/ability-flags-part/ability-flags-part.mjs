@@ -21,50 +21,17 @@ export default (Base) => {
           class: new fields.StringField({
             choices: TERIOCK.options.ability.class,
           }),
-          basic: new fields.BooleanField({
-            initial: false,
-            label: "Basic",
-          }),
-          consumable: new fields.BooleanField({
-            initial: false,
-            label: "Consumable",
-          }),
-          elderSorcery: new fields.BooleanField({
-            initial: false,
-            label: "Elder Sorcery",
-          }),
-          elderSorceryIncant: new TextField({
-            initial: "",
-            label: "With Elder Sorcery...",
-          }),
-          invoked: new fields.BooleanField({
-            initial: false,
-            label: "Invoked",
-          }),
-          ritual: new fields.BooleanField({
-            initial: false,
-            label: "Ritual",
-          }),
-          rotator: new fields.BooleanField({
-            initial: false,
-            label: "Rotator",
-          }),
-          skill: new fields.BooleanField({
-            initial: false,
-            label: "Skill",
-          }),
-          spell: new fields.BooleanField({
-            initial: false,
-            label: "Spell",
-          }),
-          standard: new fields.BooleanField({
-            initial: false,
-            label: "Standard",
-          }),
-          sustained: new fields.BooleanField({
-            initial: false,
-            label: "Sustained",
-          }),
+          basic: new fields.BooleanField({ initial: false }),
+          consumable: new fields.BooleanField({ initial: false }),
+          elderSorcery: new fields.BooleanField({ initial: false }),
+          elderSorceryIncant: new TextField({ initial: "" }),
+          invoked: new fields.BooleanField({ initial: false }),
+          ritual: new fields.BooleanField({ initial: false }),
+          rotator: new fields.BooleanField({ initial: false }),
+          skill: new fields.BooleanField({ initial: false }),
+          spell: new fields.BooleanField({ initial: false }),
+          standard: new fields.BooleanField({ initial: false }),
+          sustained: new fields.BooleanField({ initial: false }),
           sustaining: new fields.SetField(
             new fields.DocumentUUIDField({ type: "ActiveEffect" }),
           ),

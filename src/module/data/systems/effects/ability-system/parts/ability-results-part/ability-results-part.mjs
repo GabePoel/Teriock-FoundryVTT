@@ -19,38 +19,14 @@ export default (Base) => {
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           results: new fields.SchemaField({
-            hit: new TextField({
-              initial: "",
-              label: "On Hit",
-            }),
-            critHit: new TextField({
-              initial: "",
-              label: "On Critical Hit",
-            }),
-            miss: new TextField({
-              initial: "",
-              label: "On Miss",
-            }),
-            critMiss: new TextField({
-              initial: "",
-              label: "On Critical Miss",
-            }),
-            save: new TextField({
-              initial: "",
-              label: "On Success",
-            }),
-            critSave: new TextField({
-              initial: "",
-              label: "On Critical Success",
-            }),
-            fail: new TextField({
-              initial: "",
-              label: "On Fail",
-            }),
-            critFail: new TextField({
-              initial: "",
-              label: "On Critical Fail",
-            }),
+            critFail: new TextField({ initial: "" }),
+            critHit: new TextField({ initial: "" }),
+            critMiss: new TextField({ initial: "" }),
+            critSave: new TextField({ initial: "" }),
+            fail: new TextField({ initial: "" }),
+            hit: new TextField({ initial: "" }),
+            miss: new TextField({ initial: "" }),
+            save: new TextField({ initial: "" }),
           }),
         });
       }
