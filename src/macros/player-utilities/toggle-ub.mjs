@@ -14,5 +14,7 @@ if (actor) {
     ui.notifications.info(`UB piercing disabled for ${actor.name}.`);
   }
 } else {
-  ui.notifications.warn("No actor selected.");
+  ui.notifications.warn("TERIOCK.DIALOGS.Common.ERRORS.noActor", {
+    localize: true,
+  });
 }

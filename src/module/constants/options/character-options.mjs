@@ -1,21 +1,23 @@
+import { preLocalize } from "../../helpers/localization.mjs";
+
 export const characterOptions = {
   initiative: "1d20 + @mov",
   protectionMap: {
     immunities: {
       action: "rollImmunity",
-      text: "Immunity",
+      text: "TERIOCK.TERMS.Protections.immunity.single",
     },
     resistances: {
       action: "rollResistance",
-      text: "Resistance",
+      text: "TERIOCK.TERMS.Protections.resistance.single",
     },
     hexproofs: {
       action: "rollHexproof",
-      text: "Hexproof",
+      text: "TERIOCK.TERMS.Protections.hexproof.single",
     },
     hexseals: {
       action: "rollHexseal",
-      text: "Hexseal",
+      text: "TERIOCK.TERMS.Protections.hexseal.single",
     },
   },
   senseMap: {
@@ -29,19 +31,23 @@ export const characterOptions = {
     truth: "trueSight",
   },
   senses: {
-    hearing: "Advanced Hearing",
-    smell: "Advanced Smell",
-    blind: "Blind Fighting",
-    dark: "Dark Vision",
-    ethereal: "See Ethereal",
-    invisible: "See Invisible",
-    truth: "True Sight",
+    hearing: "TERIOCK.TERMS.Senses.hearing",
+    smell: "TERIOCK.TERMS.Senses.smell",
+    blind: "TERIOCK.TERMS.Senses.blind",
+    dark: "TERIOCK.TERMS.Senses.dark",
+    ethereal: "TERIOCK.TERMS.Senses.ethereal",
+    invisible: "TERIOCK.TERMS.Senses.invisible",
+    truth: "TERIOCK.TERMS.Senses.truth",
   },
   speedAdjustments: {
-    0: "None",
-    1: "Quarter",
-    2: "Half",
-    3: "Normal",
-    4: "Double",
+    0: "TERIOCK.TERMS.SpeedAdjustments.0",
+    1: "TERIOCK.TERMS.SpeedAdjustments.1",
+    2: "TERIOCK.TERMS.SpeedAdjustments.2",
+    3: "TERIOCK.TERMS.SpeedAdjustments.3",
+    4: "TERIOCK.TERMS.SpeedAdjustments.4",
   },
 };
+
+preLocalize("options.character.protectionMap", { keys: ["text"] });
+preLocalize("options.character.senses");
+preLocalize("options.character.speedAdjustments");

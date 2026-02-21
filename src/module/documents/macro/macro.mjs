@@ -129,7 +129,9 @@ export default class TeriockMacro extends mix(
     const command = dedent(`
     await game.teriock.Macro.useDocumentGeneral("${doc.name}", { actor, type: "${doc.type}", event })`);
     const macroData = {
-      name: `Use ${doc.name}`,
+      name: game.i18n.format("TERIOCK.SYSTEMS.Child.USAGE.use", {
+        value: doc.name,
+      }),
       type: "script",
       img: doc.img,
       command: command,
@@ -155,7 +157,9 @@ export default class TeriockMacro extends mix(
     const command = dedent(`
     await game.teriock.Macro.useDocumentLinked("${doc.uuid}", { event: event })`);
     const macroData = {
-      name: `Use ${doc.name}`,
+      name: game.i18n.format("TERIOCK.SYSTEMS.Child.USAGE.use", {
+        value: doc.name,
+      }),
       type: "script",
       img: doc.img,
       command: command,
@@ -188,7 +192,9 @@ export default class TeriockMacro extends mix(
       actors.push(actor);
     }
     if (actors.length === 0) {
-      ui.notifications.warn("No actors selected.");
+      ui.notifications.warn("TERIOCK.DIALOGS.Common.ERRORS.noActor", {
+        localize: true,
+      });
     }
     for (const a of actors) {
       const doc = await this.getDocument(a, name, type);

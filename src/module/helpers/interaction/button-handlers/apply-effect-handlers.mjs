@@ -22,7 +22,7 @@ export class ApplyEffectHandler extends AbstractButtonHandler {
     const { secondaryData, sustainingAbility, bonusSubs = new Set() } = options;
     const button = super.buildButton();
     button.icon = makeIconClass(icons.ui.apply, "button");
-    button.label = "Apply Effect";
+    button.label = game.i18n.localize("TERIOCK.COMMANDS.ApplyEffect.label");
     const primaryJSON = JSON.stringify(primaryData);
     const secondaryJSON = JSON.stringify(secondaryData);
     button.dataset.normal = primaryJSON || secondaryJSON;
@@ -48,8 +48,9 @@ export class ApplyEffectHandler extends AbstractButtonHandler {
           sustainedUuids: createdConsequences.map((c) => c.uuid),
         },
         {
-          failPrefix:
-            "Could not attach effect to the one that's sustaining it.",
+          failPrefix: game.i18n.localize(
+            "TERIOCK.COMMANDS.ApplyEffect.cantSustain",
+          ),
         },
       );
     }
@@ -64,7 +65,9 @@ export class ApplyEffectHandler extends AbstractButtonHandler {
     try {
       return JSON.parse(jsonData);
     } catch {
-      ui.notifications.error("Failed to parse effect data.");
+      ui.notifications.error("TERIOCK.COMMANDS.ApplyEffect.cantParse", {
+        localize: true,
+      });
       return null;
     }
   }
@@ -96,7 +99,11 @@ export class ApplyEffectHandler extends AbstractButtonHandler {
         { keepId: true },
       );
       createdConsequences.push(...newConsequences);
-      ui.notifications.info(`Applied ${effectObj.name}`);
+      ui.notifications.info(
+        game.i18n.format("TERIOCK.COMMANDS.ApplyEffect.applied", {
+          name: effectObj.name,
+        }),
+      );
     }
     await this._addToSustaining(createdConsequences);
   }
@@ -118,9 +125,17 @@ export class ApplyEffectHandler extends AbstractButtonHandler {
       }
       const foundIds = Array.from(foundEffects.map((effect) => effect.id));
       if (foundIds.length > 0) {
-        ui.notifications.info(`Removed ${effectObj.name}`);
+        ui.notifications.info(
+          game.i18n.format("TERIOCK.COMMANDS.ApplyEffect.removed", {
+            name: effectObj.name,
+          }),
+        );
       } else {
-        ui.notifications.warn(`${effectObj.name} not found`);
+        ui.notifications.warn(
+          game.i18n.format("TERIOCK.COMMANDS.ApplyEffect.notFound", {
+            name: effectObj.name,
+          }),
+        );
       }
     }
     await this._addToSustaining(createdConsequences);

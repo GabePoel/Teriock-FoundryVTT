@@ -17,7 +17,7 @@ export default class TeriockDocumentSheet extends HandlebarsApplicationMixin(
       img: this.document.img,
       name: this.document.name,
       system: this.document.system,
-      systemFields: this.document.system.schema.fields,
+      systemFields: this.document.system?.schema.fields,
       uuid: this.document.uuid,
     });
   }

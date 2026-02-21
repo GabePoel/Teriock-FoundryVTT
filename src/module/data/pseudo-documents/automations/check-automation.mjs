@@ -18,7 +18,7 @@ export default class CheckAutomation extends ThresholdAutomation {
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       tradecraft: new fields.StringField({
-        choices: TERIOCK.index.tradecrafts,
+        choices: TERIOCK.reference.tradecrafts,
         label: "TERIOCK.TERMS.Common.tradecraft",
       }),
     });

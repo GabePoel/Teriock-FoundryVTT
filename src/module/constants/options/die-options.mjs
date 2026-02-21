@@ -1,10 +1,12 @@
+import { preLocalize } from "../../helpers/localization.mjs";
+
 export const dieOptions = {
   deathBagStoneColor: {
-    black: "Black",
-    blue: "Blue",
-    green: "Green",
-    red: "Red",
-    white: "White",
+    black: "TERIOCK.TERMS.StoneColor.black",
+    blue: "TERIOCK.TERMS.StoneColor.blue",
+    green: "TERIOCK.TERMS.StoneColor.green",
+    red: "TERIOCK.TERMS.StoneColor.red",
+    white: "TERIOCK.TERMS.StoneColor.white",
   },
   faces: {
     2: "d2",
@@ -90,3 +92,5 @@ export const dieOptions = {
     },
   },
 };
+
+preLocalize("options.die.deathBagStoneColor");

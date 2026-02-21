@@ -1,21 +1,45 @@
-export * as change from "./change-options.mjs";
-export { abilityOptions as ability } from "./ability-options.mjs";
-export { attributeOptions as attribute } from "./attribute-options.mjs";
-export { attunementOptions as attunement } from "./attunement-options.mjs";
-export { characterOptions as character } from "./character-options.mjs";
-export { consequenceOptions as consequence } from "./consequence-options.mjs";
-export { currencyOptions as currency } from "./currency-options.mjs";
-export { deliveryOptions as delivery } from "./delivery-options.mjs";
-export { dieOptions as die } from "./die-options.mjs";
-export { displayOptions as display } from "./display-options.mjs";
-export { documentOptions as document } from "./document-options.mjs";
-export { effectOptions as effect } from "./effect-options.mjs";
-export { equipmentOptions as equipment } from "./equipment-options.mjs";
-export { hackOptions as hack } from "./hack-options.mjs";
-export { powerOptions as power } from "./power-options.mjs";
-export { rankOptions as rank } from "./rank-options.mjs";
-export { resourceOptions as resource } from "./resource-options.mjs";
-export { speciesOptions as species } from "./species-options.mjs";
-export { takeOptions as take } from "./take-options.mjs";
-export { targetOptions as target } from "./target-options.mjs";
-export { tradecraftOptions as tradecraft } from "./tradecraft-options.mjs";
+import { abilityOptions } from "./ability-options.mjs";
+import { attributeOptions } from "./attribute-options.mjs";
+import { attunementOptions } from "./attunement-options.mjs";
+import * as change from "./change-options.mjs";
+import { characterOptions } from "./character-options.mjs";
+import { consequenceOptions } from "./consequence-options.mjs";
+import { currencyOptions } from "./currency-options.mjs";
+import { deliveryOptions } from "./delivery-options.mjs";
+import { dieOptions } from "./die-options.mjs";
+import { displayOptions } from "./display-options.mjs";
+import { documentOptions } from "./document-options.mjs";
+import { effectOptions } from "./effect-options.mjs";
+import { equipmentOptions } from "./equipment-options.mjs";
+import { hackOptions } from "./hack-options.mjs";
+import { powerOptions } from "./power-options.mjs";
+import { rankOptions } from "./rank-options.mjs";
+import { speciesOptions } from "./species-options.mjs";
+import { takeOptions } from "./take-options.mjs";
+import { targetOptions } from "./target-options.mjs";
+import { tradecraftOptions } from "./tradecraft-options.mjs";
+
+const options = {
+  ability: abilityOptions,
+  attribute: attributeOptions,
+  attunement: attunementOptions,
+  change,
+  character: characterOptions,
+  consequence: consequenceOptions,
+  currency: currencyOptions,
+  delivery: deliveryOptions,
+  die: dieOptions,
+  display: displayOptions,
+  document: documentOptions,
+  effect: effectOptions,
+  equipment: equipmentOptions,
+  hack: hackOptions,
+  power: powerOptions,
+  rank: rankOptions,
+  species: speciesOptions,
+  take: takeOptions,
+  target: targetOptions,
+  tradecraft: tradecraftOptions,
+};
+
+export default options;

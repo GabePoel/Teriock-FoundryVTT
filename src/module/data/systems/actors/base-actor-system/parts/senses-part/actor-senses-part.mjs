@@ -103,7 +103,7 @@ function senseField(initial, name) {
   return new fields.NumberField({
     initial: initial,
     integer: true,
-    label: `${name} Range`,
+    label: name,
     min: 0,
   });
 }

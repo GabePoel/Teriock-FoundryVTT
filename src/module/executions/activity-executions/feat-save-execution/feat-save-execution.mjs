@@ -47,7 +47,7 @@ export default class FeatSaveExecution extends ThresholdExecutionMixin(
   /** @inheritDoc */
   get name() {
     return game.i18n.format("TERIOCK.ROLLS.Feat.name", {
-      value: TERIOCK.index.attributesFull[this.attribute],
+      value: TERIOCK.reference.attributesFull[this.attribute],
     });
   }
 

@@ -7,49 +7,81 @@ export default class TokenSettingsModel extends EmbeddedDataModel {
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       autoColoration: new fields.BooleanField({
-        label: "Automatic Coloration",
+        label: game.i18n.localize(
+          "TERIOCK.MODELS.TokenSettings.autoColoration.label",
+        ),
         initial: true,
-        hint: "Automatically change this token's tint color when its actor is wounded.",
+        hint: game.i18n.localize(
+          "TERIOCK.MODELS.TokenSettings.autoColoration.hint",
+        ),
       }),
       autoDetectionModes: new fields.BooleanField({
-        hint: "Automatically change this token's detection mode.",
+        hint: game.i18n.localize(
+          "TERIOCK.MODELS.TokenSettings.autoDetectionModes.hint",
+        ),
         initial: true,
-        label: "Automatic Detection Modes",
+        label: game.i18n.localize(
+          "TERIOCK.MODELS.TokenSettings.autoDetectionModes.label",
+        ),
       }),
       autoLighting: new fields.BooleanField({
-        label: "Automatic Lighting",
+        label: game.i18n.localize(
+          "TERIOCK.MODELS.TokenSettings.autoLighting.label",
+        ),
         initial: true,
-        hint: "Automatically configure light emitted from this token.",
+        hint: game.i18n.localize(
+          "TERIOCK.MODELS.TokenSettings.autoLighting.hint",
+        ),
       }),
       autoMagic: new fields.BooleanField({
-        label: "Automatic Effects",
+        label: game.i18n.localize(
+          "TERIOCK.MODELS.TokenSettings.autoMagic.label",
+        ),
         initial: true,
-        hint: "Automatically apply Token Magic FX to this token for relevant conditions.",
+        hint: game.i18n.localize("TERIOCK.MODELS.TokenSettings.autoMagic.hint"),
       }),
       autoScale: new fields.BooleanField({
-        label: "Automatic Scale",
+        label: game.i18n.localize(
+          "TERIOCK.MODELS.TokenSettings.autoScale.label",
+        ),
         initial: true,
-        hint: "Automatically scale this token to match its actor's size.",
+        hint: game.i18n.localize("TERIOCK.MODELS.TokenSettings.autoScale.hint"),
       }),
       autoTransformation: new fields.BooleanField({
-        label: "Automatic Transformation",
+        label: game.i18n.localize(
+          "TERIOCK.MODELS.TokenSettings.autoTransformation.label",
+        ),
         initial: true,
-        hint: "Automatically change this token when its actor is transformed.",
+        hint: game.i18n.localize(
+          "TERIOCK.MODELS.TokenSettings.autoTransformation.hint",
+        ),
       }),
       autoVisionAngle: new fields.BooleanField({
-        hint: "Automatically change this token's vision angle.",
+        hint: game.i18n.localize(
+          "TERIOCK.MODELS.TokenSettings.autoVisionAngle.hint",
+        ),
         initial: true,
-        label: "Automatic Vision Angle",
+        label: game.i18n.localize(
+          "TERIOCK.MODELS.TokenSettings.autoVisionAngle.label",
+        ),
       }),
       autoVisionModes: new fields.BooleanField({
-        label: "Automatic Vision Modes",
+        label: game.i18n.localize(
+          "TERIOCK.MODELS.TokenSettings.autoVisionModes.label",
+        ),
         initial: true,
-        hint: "Automatically change this token's vision mode.",
+        hint: game.i18n.localize(
+          "TERIOCK.MODELS.TokenSettings.autoVisionModes.hint",
+        ),
       }),
       autoVisionRange: new fields.BooleanField({
-        label: "Automatic Vision Range",
+        label: game.i18n.localize(
+          "TERIOCK.MODELS.TokenSettings.autoVisionRange.label",
+        ),
         initial: true,
-        hint: "Automatically change this token's vision range.",
+        hint: game.i18n.localize(
+          "TERIOCK.MODELS.TokenSettings.autoVisionRange.hint",
+        ),
       }),
     });
   }

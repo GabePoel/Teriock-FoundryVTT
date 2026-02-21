@@ -140,7 +140,7 @@ export async function selectDialog(choices, options = {}) {
  * @returns {Promise<Teriock.Parameters.Equipment.EquipmentClass>}
  */
 export async function selectEquipmentClassDialog() {
-  return await selectDialog(TERIOCK.index.equipmentClasses, {
+  return await selectDialog(TERIOCK.reference.equipmentClasses, {
     label: game.i18n.localize("TERIOCK.DIALOGS.Select.EquipmentClass.label"),
     hint: game.i18n.localize("TERIOCK.DIALOGS.Select.EquipmentClass.hint"),
     title: game.i18n.localize("TERIOCK.DIALOGS.Select.EquipmentClass.title"),
@@ -152,7 +152,7 @@ export async function selectEquipmentClassDialog() {
  * @returns {Promise<Teriock.Parameters.Equipment.WeaponClass>}
  */
 export async function selectWeaponClassDialog() {
-  return await selectDialog(TERIOCK.index.weaponClasses, {
+  return await selectDialog(TERIOCK.reference.weaponClasses, {
     label: game.i18n.localize("TERIOCK.DIALOGS.Select.WeaponClass.label"),
     hint: game.i18n.localize("TERIOCK.DIALOGS.Select.WeaponClass.hint"),
     title: game.i18n.localize("TERIOCK.DIALOGS.Select.WeaponClass.title"),
@@ -164,7 +164,7 @@ export async function selectWeaponClassDialog() {
  * @returns {Promise<Teriock.Parameters.Condition.ConditionKey>}
  */
 export async function selectConditionDialog() {
-  return await selectDialog(TERIOCK.index.conditions, {
+  return await selectDialog(TERIOCK.reference.conditions, {
     label: game.i18n.localize("TERIOCK.DIALOGS.Select.Condition.label"),
     hint: game.i18n.localize("TERIOCK.DIALOGS.Select.Condition.hint"),
     title: game.i18n.localize("TERIOCK.DIALOGS.Select.Condition.title"),
@@ -194,9 +194,9 @@ export async function selectPropertyDialog() {
  */
 export async function selectTradecraftDialog() {
   const choices = await Promise.all(
-    Object.keys(TERIOCK.index.tradecrafts).map(async (tc) => {
+    Object.keys(TERIOCK.reference.tradecrafts).map(async (tc) => {
       return {
-        name: TERIOCK.index.tradecrafts[tc],
+        name: TERIOCK.reference.tradecrafts[tc],
         uuid: tc,
         img: getImage("tradecrafts", TERIOCK.index.tradecrafts[tc]),
         tooltip: await TeriockTextEditor.makeTooltip(await tradecraftPanel(tc)),
@@ -301,7 +301,7 @@ export async function selectClassDialog() {
       ...Object.keys(TERIOCK.options.rank.warrior.classes),
     ].map(async (c) => {
       return {
-        name: TERIOCK.index.classes[c],
+        name: TERIOCK.reference.classes[c],
         uuid: c,
         img: getImage("classes", TERIOCK.index.classes[c]),
         tooltip: await TeriockTextEditor.makeTooltip(await classPanel(c)),

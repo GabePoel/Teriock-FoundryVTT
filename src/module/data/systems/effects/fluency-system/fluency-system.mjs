@@ -79,7 +79,7 @@ export default class FluencySystem extends mix(
       {
         classes: "italic-display-field",
         editable: false,
-        label: TERIOCK.index.tradecrafts[this.tradecraft],
+        label: TERIOCK.reference.tradecrafts[this.tradecraft],
         path: "system.tradecraftDescription",
       },
     ];
@@ -183,7 +183,7 @@ export default class FluencySystem extends mix(
       foundry.utils.setProperty(
         changes,
         "img",
-        getImage("tradecrafts", TERIOCK.index.tradecrafts[tradecraft]),
+        getImage("tradecrafts", TERIOCK.reference.tradecrafts[tradecraft]),
       );
     }
   }

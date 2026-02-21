@@ -111,7 +111,7 @@ export default (Base) => {
             {
               name: game.i18n.format(
                 "TERIOCK.SHEETS.Common.MENU.Create.fluency",
-                { tradecraft: TERIOCK.index.tradecrafts[tc] },
+                { tradecraft: TERIOCK.reference.tradecrafts[tc] },
               ),
               type: "fluency",
               img: getImage("tradecrafts", TERIOCK.index.tradecrafts[tc]),

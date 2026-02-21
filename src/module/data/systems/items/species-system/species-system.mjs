@@ -78,7 +78,7 @@ export default class SpeciesSystem extends mix(
         value: new fields.NumberField({ initial: 3 }),
       }),
       traits: new fields.SetField(
-        new fields.StringField({ choices: TERIOCK.index.traits }),
+        new fields.StringField({ choices: TERIOCK.reference.traits }),
         { initial: ["humanoid"] },
       ),
       transformationLevel: new fields.StringField({

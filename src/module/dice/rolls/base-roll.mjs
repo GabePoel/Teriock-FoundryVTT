@@ -227,11 +227,15 @@ export default class BaseRoll extends Roll {
       context.styles.total.tooltip = "";
       if (this.success) {
         context.styles.total.classes += " success";
-        context.styles.total.tooltip += "Success";
+        context.styles.total.tooltip += game.i18n.localize(
+          "TERIOCK.ROLLS.Base.success",
+        );
         context.styles.total.icon = "check";
       } else {
         context.styles.total.classes += " failure";
-        context.styles.total.tooltip += "Failure";
+        context.styles.total.tooltip += game.i18n.localize(
+          "TERIOCK.ROLLS.Base.failure",
+        );
         context.styles.total.icon = "xmark";
       }
     }

@@ -35,5 +35,7 @@ if (actor) {
   await actor.updateEmbeddedDocuments("Item", toUpdate);
   ui.notifications.success(`Fully healed ${actor.name}.`);
 } else {
-  ui.notifications.warn("No actor selected.");
+  ui.notifications.warn("TERIOCK.DIALOGS.Common.ERRORS.noActor", {
+    localize: true,
+  });
 }

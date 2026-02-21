@@ -13,7 +13,9 @@ async function primary(actor, options = {}) {
   }
   if (!attacker) {
     ui.notifications.error(
-      `${actor.name} doesn't have a default attack weapon.`,
+      game.i18n.format("TERIOCK.COMMANDS.StandardDamage.noDefaultWeapon", {
+        name: actor.name,
+      }),
     );
     return;
   }
@@ -36,7 +38,9 @@ async function secondary(actor, options = {}) {
   }
   if (!attacker) {
     ui.notifications.error(
-      `${actor.name} doesn't have a default attack weapon.`,
+      game.i18n.format("TERIOCK.COMMANDS.StandardDamage.noDefaultWeapon", {
+        name: actor.name,
+      }),
     );
     return;
   }
@@ -57,7 +61,7 @@ const command = {
   ctrl: "twoHanded",
   icon: icons.effect.dealDamage,
   id: "standardDamage",
-  label: "Standard Damage",
+  label: "TERIOCK.EFFECTS.Common.standardDamage",
   primary,
   secondary,
 };

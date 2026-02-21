@@ -463,6 +463,17 @@ foundry.helpers.Hooks.once("setup", function () {
   }
 });
 
+// Perform one-time pre-localization and sorting of some configuration objects
+// ===========================================================================
+
+Hooks.once("i18nInit", () => {
+  helpers.localization.performPreLocalization(TERIOCK);
+  helpers.localization.localizeObject(
+    teriock.applications.shared.imageContextMenuOptions,
+    { keys: ["name"] },
+  );
+});
+
 // Register Hooks
 // ==============
 

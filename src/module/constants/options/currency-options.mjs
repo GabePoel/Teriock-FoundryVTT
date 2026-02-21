@@ -1,57 +1,61 @@
+import { preLocalize } from "../../helpers/localization.mjs";
+
 export const currencyOptions = {
   copper: {
-    name: "Copper",
+    name: "TERIOCK.TERMS.Currency.copper",
     value: 0.01,
     weight: 0.02,
   },
   silver: {
-    name: "Silver",
+    name: "TERIOCK.TERMS.Currency.silver",
     value: 0.1,
     weight: 0.02,
   },
   gold: {
-    name: "Gold",
+    name: "TERIOCK.TERMS.Currency.gold",
     value: 1,
     weight: 0.02,
   },
   entTearAmber: {
-    name: "Ent Tear Amber",
+    name: "TERIOCK.TERMS.Currency.entTearAmber",
     value: 5,
     weight: 0.05,
   },
   fireEyeRuby: {
-    name: "Fire Eye Ruby",
+    name: "TERIOCK.TERMS.Currency.fireEyeRuby",
     value: 10,
     weight: 0.05,
   },
   pixiePlumAmethyst: {
-    name: "Pixie Plum Amethyst",
+    name: "TERIOCK.TERMS.Currency.pixiePlumAmethyst",
     value: 20,
     weight: 0.1,
   },
   snowDiamond: {
-    name: "Snow Diamond",
+    name: "TERIOCK.TERMS.Currency.snowDiamond",
     value: 50,
     weight: 0.2,
   },
   dragonEmerald: {
-    name: "Dragon Emerald",
+    name: "TERIOCK.TERMS.Currency.dragonEmerald",
     value: 100,
     weight: 0.2,
   },
   moonOpal: {
-    name: "Moon Opal",
+    name: "TERIOCK.TERMS.Currency.moonOpal",
     value: 500,
     weight: 0.2,
   },
   magusQuartz: {
-    name: "Magus Quartz",
+    name: "TERIOCK.TERMS.Currency.magusQuartz",
     value: 1000,
     weight: 0.2,
   },
   heartstoneRuby: {
-    name: "Heartstone Ruby",
+    name: "TERIOCK.TERMS.Currency.heartstoneRuby",
     value: 5000,
     weight: 0.2,
   },
 };
+
+preLocalize("options.currency", { key: "name" });

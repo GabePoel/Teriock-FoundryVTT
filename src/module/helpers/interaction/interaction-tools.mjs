@@ -70,7 +70,9 @@ export function CommandButtonHandlerBuilder(command) {
           getInteractionEntryValue(command, "icon", options),
           "button",
         );
-        button.label = getInteractionEntryValue(command, "label", options);
+        button.label = game.i18n.localize(
+          getInteractionEntryValue(command, "label", options),
+        );
         return button;
       }
 

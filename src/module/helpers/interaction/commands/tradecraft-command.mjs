@@ -37,7 +37,11 @@ const command = {
   icon: (options) => `${allOptions[options?.tradecraft || "artist"].icon}`,
   id: "tradecraft",
   label: (options) =>
-    `${allOptions[options?.tradecraft || "artist"].name} Check`,
+    allOptions[options?.tradecraft]?.name
+      ? game.i18n.format("TERIOCK.ROLLS.Tradecraft.name", {
+          value: allOptions[options?.tradecraft].name,
+        })
+      : game.i18n.localize("TERIOCK.ROLLS.Tradecraft.label"),
   primary,
   secondary,
 };

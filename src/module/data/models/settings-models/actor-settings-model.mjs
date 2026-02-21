@@ -12,43 +12,87 @@ export default class ActorSettingsModel extends EmbeddedDataModel {
     return Object.assign(super.defineSchema(), {
       autoWound: new fields.BooleanField({
         initial: true,
-        label: "Auto Wound",
-        hint: "Automatically apply down, critically wounded, and dead statuses?",
+        label: game.i18n.localize(
+          "TERIOCK.MODELS.ActorSettings.autoWound.label",
+        ),
+        hint: game.i18n.localize("TERIOCK.MODELS.ActorSettings.autoWound.hint"),
       }),
       sheetBlockAbilitiesGapless: new blockGaplessField({
         initial: true,
-        label: "Abilities",
+        label: game.i18n.localize(
+          "TERIOCK.MODELS.ActorSettings.sheetBlockAbilitiesGapless.label",
+        ),
       }),
       sheetBlockAbilitiesSize: new blockSizeField({
         initial: "small",
-        label: "Abilities",
+        label: game.i18n.localize(
+          "TERIOCK.MODELS.ActorSettings.sheetBlockAbilitiesSize.label",
+        ),
       }),
-      sheetBlockClassesGapless: new blockGaplessField({ label: "Classes" }),
-      sheetBlockClassesSize: new blockSizeField({ label: "Classes" }),
+      sheetBlockClassesGapless: new blockGaplessField({
+        label: game.i18n.localize(
+          "TERIOCK.MODELS.ActorSettings.sheetBlockClassesGapless.label",
+        ),
+      }),
+      sheetBlockClassesSize: new blockSizeField({
+        label: game.i18n.localize(
+          "TERIOCK.MODELS.ActorSettings.sheetBlockClassesSize.label",
+        ),
+      }),
       sheetBlockEffectsGapless: new blockGaplessField({
         initial: true,
-        label: "Effects",
+        label: game.i18n.localize(
+          "TERIOCK.MODELS.ActorSettings.sheetBlockEffectsGapless.label",
+        ),
       }),
       sheetBlockEffectsSize: new blockSizeField({
         initial: "small",
-        label: "Effects",
+        label: game.i18n.localize(
+          "TERIOCK.MODELS.ActorSettings.sheetBlockEffectsSize.label",
+        ),
       }),
       sheetBlockInventoryGapless: new blockGaplessField({
         initial: true,
-        label: "Inventory",
+        label: game.i18n.localize(
+          "TERIOCK.MODELS.ActorSettings.sheetBlockInventoryGapless.label",
+        ),
       }),
       sheetBlockInventorySize: new blockSizeField({
         initial: "small",
-        label: "Inventory",
+        label: game.i18n.localize(
+          "TERIOCK.MODELS.ActorSettings.sheetBlockInventorySize.label",
+        ),
       }),
-      sheetBlockPowersGapless: new blockGaplessField({ label: "Powers" }),
-      sheetBlockPowersSize: new blockSizeField({ label: "Powers" }),
-      sheetBlockResourcesGapless: new blockGaplessField({ label: "Resources" }),
-      sheetBlockResourcesSize: new blockSizeField({ label: "Resources" }),
+      sheetBlockPowersGapless: new blockGaplessField({
+        label: game.i18n.localize(
+          "TERIOCK.MODELS.ActorSettings.sheetBlockPowersGapless.label",
+        ),
+      }),
+      sheetBlockPowersSize: new blockSizeField({
+        label: game.i18n.localize(
+          "TERIOCK.MODELS.ActorSettings.sheetBlockPowersSize.label",
+        ),
+      }),
+      sheetBlockResourcesGapless: new blockGaplessField({
+        label: game.i18n.localize(
+          "TERIOCK.MODELS.ActorSettings.sheetBlockResourcesGapless.label",
+        ),
+      }),
+      sheetBlockResourcesSize: new blockSizeField({
+        label: game.i18n.localize(
+          "TERIOCK.MODELS.ActorSettings.sheetBlockResourcesSize.label",
+        ),
+      }),
       sheetBlockTradecraftsGapless: new blockGaplessField({
-        label: "Tradecrafts",
+        label: game.i18n.localize(
+          "TERIOCK.MODELS.ActorSettings.sheetBlockTradecraftsGapless.label",
+        ),
       }),
-      sheetBlockTradecraftsSize: new blockSizeField({ label: "Tradecrafts" }),
+      sheetBlockTradecraftsSize: new blockSizeField({
+        label: game.i18n.localize(
+          "TERIOCK.MODELS.ActorSettings.sheetBlockTradecraftsSize.label",
+        ),
+      }),
     });
   }
 }

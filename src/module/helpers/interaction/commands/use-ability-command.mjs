@@ -8,7 +8,9 @@ import { thresholdCommand } from "./abstract-command.mjs";
 async function primary(actor, options = {}) {
   const abilityName = options.ability;
   if (!abilityName) {
-    ui.notifications.warn("No ability name provided.");
+    ui.notifications.warn("TERIOCK.COMMANDS.UseAbility.noName", {
+      localize: true,
+    });
     return;
   }
   await actor.useAbility(
@@ -27,7 +29,9 @@ async function primary(actor, options = {}) {
 async function secondary(actor, options = {}) {
   const abilityName = options.ability;
   if (!abilityName) {
-    ui.notifications.warn("No ability name provided.");
+    ui.notifications.warn("TERIOCK.COMMANDS.UseAbility.noName", {
+      localize: true,
+    });
     return;
   }
   await actor.useAbility(
@@ -49,7 +53,11 @@ const command = {
   icon: () => TERIOCK.options.document.ability.icon,
   id: "useAbility",
   label: (options) =>
-    options?.ability ? `Use ${options.ability}` : "Use Ability",
+    options?.ability
+      ? game.i18n.format("TERIOCK.COMMANDS.UseAbility.useNamed", {
+          name: options.ability,
+        })
+      : game.i18n.localize("TERIOCK.COMMANDS.UseAbility.useUnnamed"),
   primary,
   secondary,
 };

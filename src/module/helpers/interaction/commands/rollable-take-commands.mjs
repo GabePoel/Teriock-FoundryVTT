@@ -63,8 +63,7 @@ const rollableTakeCommands = Object.entries(takeOptions).map(([type, take]) => {
     aliases: take?.aliases || [],
     id: type,
     label: (options) => options.formula,
-    tooltip: (options) =>
-      options.apply ? `${take.prefix} ${take.label}` : `Roll ${take.label}`,
+    tooltip: (options) => (options.apply ? take.take : take.deal),
     icon: take.icon,
     primary: takeOperationFactory(type, "primary"),
     secondary: takeOperationFactory(type, "secondary"),

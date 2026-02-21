@@ -88,7 +88,7 @@ export default class EquipmentSystem extends mix(
       }),
       equipmentClasses: new fields.SetField(
         new fields.StringField({
-          choices: TERIOCK.index.equipmentClasses,
+          choices: TERIOCK.reference.equipmentClasses,
         }),
       ),
       equipmentType: new fields.StringField({

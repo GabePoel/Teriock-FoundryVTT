@@ -15,7 +15,7 @@ async function primary(actor) {
 const command = {
   icon: icons.ui.deathBag,
   id: "bag",
-  label: "Death Bag Pull",
+  label: "TERIOCK.EFFECTS.Common.bag",
   primary,
 };
 

@@ -11,13 +11,13 @@ const { ImagePopout } = foundry.applications.apps;
  */
 const imageContextMenuOptions = [
   {
-    name: game.i18n.localize("TERIOCK.SYSTEMS.Child.MENU.openImage"),
+    name: "TERIOCK.SYSTEMS.Child.MENU.openImage",
     icon: makeIcon(icons.ui.image, "contextMenu"),
     callback: async (target) => {
       await new ImagePopout({
         src: target.getAttribute("src"),
         window: {
-          title: game.i18n.localize("TERIOCK.SYSTEMS.Child.MENU.imagePreview"),
+          title: "TERIOCK.SYSTEMS.Child.MENU.imagePreview",
         },
       }).render(true);
     },
@@ -27,7 +27,7 @@ const imageContextMenuOptions = [
     },
   },
   {
-    name: game.i18n.localize("TERIOCK.SYSTEMS.Child.MENU.shareImage"),
+    name: "TERIOCK.SYSTEMS.Child.MENU.shareImage",
     icon: makeIcon(icons.ui.shareImage, "contextMenu"),
     callback: async (target) => {
       await chatImage(target.getAttribute("src"));
@@ -38,7 +38,7 @@ const imageContextMenuOptions = [
     },
   },
   {
-    name: game.i18n.localize("TERIOCK.SYSTEMS.Child.MENU.openDocument"),
+    name: "TERIOCK.SYSTEMS.Child.MENU.openDocument",
     icon: makeIcon(icons.ui.openWindow, "contextMenu"),
     callback: async (target) => {
       const uuid = target.getAttribute("data-uuid");

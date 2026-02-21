@@ -1,12 +1,16 @@
+import { preLocalize } from "../../helpers/localization.mjs";
+
 export const deliveryOptions = {
   aura: {
-    label: "Aura",
+    label: "TERIOCK.TERMS.Delivery.aura",
     template: "circle",
     sizes: "radius",
   },
   cone: {
-    label: "Cone",
+    label: "TERIOCK.TERMS.Delivery.cone",
     template: "cone",
     sizes: "length",
   },
 };
+
+preLocalize("options.delivery", { keys: ["label"] });

@@ -20,7 +20,7 @@ export default (Base) => {
       /** @inheritDoc */
       static defineSchema() {
         const tradecrafts = {};
-        Object.entries(TERIOCK.index.tradecrafts).forEach(
+        Object.entries(TERIOCK.reference.tradecrafts).forEach(
           ([key, value]) =>
             (tradecrafts[key] = new EvaluationField({
               deterministic: false,

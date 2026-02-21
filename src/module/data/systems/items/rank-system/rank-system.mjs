@@ -242,7 +242,10 @@ export default class RankSystem extends mix(
       ...super.getCardContextMenuEntries(doc),
       {
         name: game.i18n.localize("TERIOCK.SYSTEMS.Rank.MENU.rollHpDie"),
-        icon: makeIcon(getRollIcon(this.hpDie.polyhedral), "contextMenu"),
+        icon: makeIcon(
+          getRollIcon(this.hpDie?.polyhedral || ""),
+          "contextMenu",
+        ),
         callback: async () => await this.hpDie.use(),
         condition: !this.hpDie.spent,
         group: "usage",
@@ -256,7 +259,10 @@ export default class RankSystem extends mix(
       },
       {
         name: game.i18n.localize("TERIOCK.SYSTEMS.Rank.MENU.rollMpDie"),
-        icon: makeIcon(getRollIcon(this.mpDie.polyhedral), "contextMenu"),
+        icon: makeIcon(
+          getRollIcon(this.mpDie?.polyhedral || ""),
+          "contextMenu",
+        ),
         callback: async () => await this.mpDie.use(),
         condition: !this.mpDie.spent,
         group: "usage",

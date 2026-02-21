@@ -14,12 +14,15 @@ export default function TradecraftExecutionMixin(Base) {
     class TradecraftExecution extends ThresholdExecutionMixin(Base) {
       /** @inheritDoc */
       get flavor() {
-        let flavor = "";
         if (this.threshold !== undefined) {
-          flavor += `DC ${this.threshold}`;
+          return game.i18n.format("TERIOCK.ROLLS.Tradecraft.thresholded", {
+            threshold: this.threshold,
+            value: TERIOCK.reference.tradecrafts[this.tradecraft],
+          });
         }
-        flavor += ` ${TERIOCK.index.tradecrafts[this.tradecraft]} Check`;
-        return flavor;
+        return game.i18n.format("TERIOCK.ROLLS.Tradecraft.name", {
+          value: this.tradecraft,
+        });
       }
 
       /**

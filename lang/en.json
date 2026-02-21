@@ -188,6 +188,70 @@
         "LABEL": "Use Abilities"
       }
     },
+    "CHANGES": {
+      "Mode": {
+        "boost": "Boost"
+      },
+      "Targets": {
+        "all": "All Documents",
+        "ancestors": "Ancestor Documents"
+      },
+      "Time": {
+        "base": {
+          "hint": "Base changes are the first ones applied. They take effect right after base data for documents have been set up and before any derived values have been determined.",
+          "label": "Base"
+        },
+        "derivation": {
+          "hint": "Derivation changes apply once derived data has been calculated. This should only be used for effects where the changes themselves rely on data that's been derived.",
+          "label": "Derivation"
+        },
+        "final": {
+          "hint": "These are the last changes that are applied. There is very minimal document data prep that occurs after these changes, so they should only be used for instances where nothing passively relies on them.",
+          "label": "Final"
+        },
+        "fluency": {
+          "hint": "Fluency changes apply immediately after proficiency ones. This should be used exclusively for effects that make other documents fluent.",
+          "label": "Fluency"
+        },
+        "normal": {
+          "hint": "Normal changes are the last ones applied before derived values are determined. This is the default time that changes are applied and should be used unless there is a specific reason to apply at some other time.",
+          "label": "Normal"
+        },
+        "proficiency": {
+          "hint": "Proficiency changes apply immediately after base ones. This should be used exclusively for effects that make other documents proficient.",
+          "label": "Proficiency"
+        }
+      }
+    },
+    "COMMANDS": {
+      "ApplyEffect": {
+        "applied": "Applied {name}",
+        "cantParse": "Failed to parse effect data.",
+        "cantSustain": "Could not attach effect to the one that's sustaining it.",
+        "label": "Apply Effect",
+        "notFound": "{name} not found",
+        "removed": "Removed {name}"
+      },
+      "Attack": {
+        "label": "Attack"
+      },
+      "StandardDamage": {
+        "noDefaultWeapon": "{name} doesn't have a default attack weapon."
+      },
+      "Status": {
+        "applyNamed": "Apply {name}",
+        "applyUnnamed": "Apply Status",
+        "removeNamed": "Remove {name}",
+        "removeUnnamed": "Remove Status",
+        "toggleNamed": "Toggle {name}",
+        "toggleUnnamed": "Toggle Status"
+      },
+      "UseAbility": {
+        "noName": "No ability name provided.",
+        "useNamed": "Use {name}",
+        "useUnnamed": "Use Ability"
+      }
+    },
     "DIALOGS": {
       "Boost": {
         "BUTTONS": {
@@ -219,6 +283,11 @@
           "yes": "Yes"
         },
         "title": "Change Size"
+      },
+      "Common": {
+        "ERRORS": {
+          "noActor": "No actor selected."
+        }
       },
       "DeathBag": {
         "BUTTONS": {
@@ -344,8 +413,8 @@
           "title": "Select Ability"
         },
         "AddAutomation": {
-          "title": "Add Automation",
-          "hint": "Please select an automation type."
+          "hint": "Please select an automation type.",
+          "title": "Add Automation"
         },
         "Armament": {
           "hint": "Please select an armament.",
@@ -392,8 +461,8 @@
         "IllusionLevel": {
           "hint": "If known, select the level of illusion you are attempting to disbelieve.",
           "hintTitle": "Illusionary",
-          "title": "Select Illusion Level",
-          "label": "Level"
+          "label": "Level",
+          "title": "Select Illusion Level"
         },
         "Property": {
           "hint": "Please select a property.",
@@ -414,8 +483,8 @@
         "TransformationLevel": {
           "hint": "If known, select the level of transformation you are attempting to revert from.",
           "hintTitle": "Transformed",
-          "title": "Select Transformation Level",
-          "label": "Level"
+          "label": "Level",
+          "title": "Select Transformation Level"
         },
         "WeaponClass": {
           "hint": "Please select a weapon class.",
@@ -477,46 +546,244 @@
         }
       }
     },
+    "EFFECTS": {
+      "Common": {
+        "awaken": "Awaken",
+        "bag": "Death Bag Pull",
+        "heal": "Heal",
+        "revitalize": "Revitalize",
+        "revive": "Revive",
+        "standardDamage": "Standard Damage"
+      },
+      "Hacks": {
+        "arm": {
+          "apply": "Hack Arm",
+          "label": "Arm Hack",
+          "remove": "Unhack Arm"
+        },
+        "body": {
+          "apply": "Hack Body",
+          "label": "Body Hack",
+          "remove": "Unhack Body"
+        },
+        "ear": {
+          "apply": "Hack Ear",
+          "label": "Ear Hack",
+          "remove": "Unhack Ear"
+        },
+        "eye": {
+          "apply": "Hack Eye",
+          "label": "Eye Hack",
+          "remove": "Unhack Eye"
+        },
+        "leg": {
+          "apply": "Hack Leg",
+          "label": "Leg Hack",
+          "remove": "Unhack Leg"
+        },
+        "mouth": {
+          "apply": "Hack Mouth",
+          "label": "Mouth Hack",
+          "remove": "Unhack Mouth"
+        },
+        "nose": {
+          "apply": "Hack Nose",
+          "label": "Nose Hack",
+          "remove": "Unhack Nose"
+        }
+      },
+      "IllusionLevel": {
+        "full": "Full Illusion",
+        "greater": "Greater Illusion",
+        "minor": "Minor Illusion"
+      },
+      "RollableEffects": {
+        "damage": {
+          "deal": "Deal Damage",
+          "label": "Damage",
+          "take": "Take Damage"
+        },
+        "drain": {
+          "deal": "Deal Drain",
+          "label": "Drain",
+          "take": "Take Drain"
+        },
+        "gainTempHp": {
+          "deal": "Gain Temp HP",
+          "label": "Temp HP",
+          "take": "Gain Temp HP"
+        },
+        "gainTempMp": {
+          "deal": "Gain Temp MP",
+          "label": "Temp MP",
+          "take": "Gain Temp MP"
+        },
+        "heal": {
+          "deal": "Apply Healing",
+          "label": "Healing",
+          "take": "Apply Healing"
+        },
+        "kill": {
+          "deal": "Kill Check",
+          "label": "Kill",
+          "take": "Kill Check"
+        },
+        "other": {
+          "deal": "Other",
+          "label": "Other",
+          "take": "Other"
+        },
+        "pay": {
+          "deal": "Payment",
+          "label": "Payment",
+          "take": "Payment"
+        },
+        "revitalize": {
+          "deal": "Apply Revitalization",
+          "label": "Revitalization",
+          "take": "Apply Revitalization"
+        },
+        "setTempHp": {
+          "deal": "Set Temp HP",
+          "label": "Temp HP",
+          "take": "Set Temp HP"
+        },
+        "setTempMp": {
+          "deal": "Set Temp MP",
+          "label": "Temp MP",
+          "take": "Set Temp MP"
+        },
+        "sleep": {
+          "deal": "Sleep Check",
+          "label": "Sleep",
+          "take": "Sleep Check"
+        },
+        "wither": {
+          "deal": "Deal Wither",
+          "label": "Wither",
+          "take": "Take Wither"
+        }
+      },
+      "TransformationLevel": {
+        "full": "Full Transformation",
+        "greater": "Greater Transformation",
+        "minor": "Minor Transformation"
+      }
+    },
     "MODELS": {
-      "MpPool": {
-        "PANELS": {
-          "name": "Mana Die",
-          "text": "You restore the rolled number of @L[Core:Hit Points and Mana Points]{MP}."
+      "AbilitySettings": {
+        "promptCostGp": {
+          "hint": "Prompt user to spend variable GP upon use.",
+          "label": "Prompt GP"
+        },
+        "promptCostHp": {
+          "hint": "Prompt user to spend variable HP upon use.",
+          "label": "Prompt HP"
+        },
+        "promptCostMp": {
+          "hint": "Prompt user to spend variable MP upon use.",
+          "label": "Prompt MP"
+        },
+        "promptHeighten": {
+          "hint": "Prompt user to heighten upon use.",
+          "label": "Prompt Heighten"
+        },
+        "promptTemplate": {
+          "hint": "Prompt user to place a template upon use.",
+          "label": "Prompt Template"
+        }
+      },
+      "ActorSettings": {
+        "autoWound": {
+          "hint": "Automatically apply down, critically wounded, and dead statuses?",
+          "label": "Auto Wound"
+        },
+        "sheetBlockAbilitiesGapless": {
+          "label": "Abilities"
+        },
+        "sheetBlockAbilitiesSize": {
+          "label": "Abilities"
+        },
+        "sheetBlockClassesGapless": {
+          "label": "Classes"
+        },
+        "sheetBlockClassesSize": {
+          "label": "Classes"
+        },
+        "sheetBlockEffectsGapless": {
+          "label": "Effects"
+        },
+        "sheetBlockEffectsSize": {
+          "label": "Effects"
+        },
+        "sheetBlockInventoryGapless": {
+          "label": "Inventory"
+        },
+        "sheetBlockInventorySize": {
+          "label": "Inventory"
+        },
+        "sheetBlockPowersGapless": {
+          "label": "Powers"
+        },
+        "sheetBlockPowersSize": {
+          "label": "Powers"
+        },
+        "sheetBlockResourcesGapless": {
+          "label": "Resources"
+        },
+        "sheetBlockResourcesSize": {
+          "label": "Resources"
+        },
+        "sheetBlockTradecraftsGapless": {
+          "label": "Tradecrafts"
+        },
+        "sheetBlockTradecraftsSize": {
+          "label": "Tradecrafts"
+        }
+      },
+      "Duration": {
+        "FIELDS": {
+          "conditions": {
+            "absent": {
+              "hint": "What conditions must be absent in order for this ability to be active?",
+              "label": "Absent Conditions"
+            },
+            "present": {
+              "hint": "What conditions must be present in order for this ability to be active?",
+              "label": "Present Conditions"
+            }
+          },
+          "dawn": {
+            "hint": "Does the effect expire at dawn?",
+            "label": "Dawn"
+          },
+          "description": {
+            "hint": "Optional description that overrides the default duration text.",
+            "label": "Description"
+          },
+          "stationary": {
+            "hint": "Do you need to be stationary for this ability to be active?",
+            "label": "Stationary"
+          },
+          "unit": {
+            "hint": "The unit of time for this duration.",
+            "label": "Unit"
+          }
+        },
+        "PREREQUISITES": {
+          "ongoing": "While {partial}",
+          "untilDawn": "Until Dawn {partial}"
+        },
+        "UNITS": {
+          "alwaysActive": "Always Active",
+          "instant": "Instant",
+          "passive": "Passive"
         }
       },
       "HpPool": {
         "PANELS": {
           "name": "Hit Die",
           "text": "You restore the rolled number of @L[Core:Hit Points and Mana Points]{HP} and are @L[Keyword:Awaken]{awakened}."
-        }
-      },
-      "StatDie": {
-        "DIALOG": {
-          "Reroll": {
-            "title": "Reroll Stat Die?",
-            "content": "This stat die is already spent. Would you like to roll it anyways?"
-          }
-        }
-      },
-      "StatPool": {
-        "FIELDS": {
-          "disabled": {
-            "hint": "If checked, these dice will not be given to the actor.",
-            "label": "Disabled"
-          },
-          "faces": {
-            "hint": "Number of faces on each die.",
-            "label": "Faces"
-          },
-          "number": {
-            "hint": "Number of dice",
-            "label": "Number"
-          }
-        },
-        "PANELS": {
-          "name": "Stat Die",
-          "title": "Description",
-          "text": "You have rolled a stat die."
         }
       },
       "Identification": {
@@ -557,8 +824,43 @@
             "title": "Read Magic"
           },
           "Unidentify": {
+            "alreadyUnidentified": "The item is already unidentified.",
             "hint": "Select effects to hide"
           }
+        }
+      },
+      "LengthUnit": {
+        "UNITS": {
+          "cm": {
+            "label": "Centimeter",
+            "plural": "Centimeters"
+          },
+          "ft": {
+            "label": "Foot",
+            "plural": "Feet"
+          },
+          "in": {
+            "label": "Inch",
+            "plural": "Inches"
+          },
+          "km": {
+            "label": "Kilometer",
+            "plural": "Kilometers"
+          },
+          "m": {
+            "label": "Meter",
+            "plural": "Meters"
+          },
+          "mile": {
+            "label": "Mile",
+            "plural": "Miles"
+          }
+        }
+      },
+      "MpPool": {
+        "PANELS": {
+          "name": "Mana Die",
+          "text": "You restore the rolled number of @L[Core:Hit Points and Mana Points]{MP}."
         }
       },
       "Piercing": {
@@ -572,6 +874,35 @@
           "0": "None",
           "1": "AV0",
           "2": "UB"
+        }
+      },
+      "StatDie": {
+        "DIALOG": {
+          "Reroll": {
+            "content": "This stat die is already spent. Would you like to roll it anyways?",
+            "title": "Reroll Stat Die?"
+          }
+        }
+      },
+      "StatPool": {
+        "FIELDS": {
+          "disabled": {
+            "hint": "If checked, these dice will not be given to the actor.",
+            "label": "Disabled"
+          },
+          "faces": {
+            "hint": "Number of faces on each die.",
+            "label": "Faces"
+          },
+          "number": {
+            "hint": "Number of dice",
+            "label": "Number"
+          }
+        },
+        "PANELS": {
+          "name": "Stat Die",
+          "text": "You have rolled a stat die.",
+          "title": "Description"
         }
       },
       "Storage": {
@@ -598,15 +929,119 @@
           }
         }
       },
+      "TimeUnit": {
+        "UNITS": {
+          "day": {
+            "label": "Day",
+            "plural": "Days"
+          },
+          "hour": {
+            "label": "Hour",
+            "plural": "Hours"
+          },
+          "minute": {
+            "label": "Minute",
+            "plural": "Minutes"
+          },
+          "second": {
+            "label": "Second",
+            "plural": "Seconds"
+          },
+          "week": {
+            "label": "Week",
+            "plural": "Weeks"
+          },
+          "year": {
+            "label": "Year",
+            "plural": "Years"
+          }
+        }
+      },
+      "TokenSettings": {
+        "autoColoration": {
+          "hint": "Automatically change this token's tint color when its actor is wounded.",
+          "label": "Automatic Coloration"
+        },
+        "autoDetectionModes": {
+          "hint": "Automatically change this token's detection mode.",
+          "label": "Automatic Detection Modes"
+        },
+        "autoLighting": {
+          "hint": "Automatically configure light emitted from this token.",
+          "label": "Automatic Lighting"
+        },
+        "autoMagic": {
+          "hint": "Automatically apply Token Magic FX to this token for relevant conditions.",
+          "label": "Automatic Effects"
+        },
+        "autoScale": {
+          "hint": "Automatically scale this token to match its actor's size.",
+          "label": "Automatic Scale"
+        },
+        "autoTransformation": {
+          "hint": "Automatically change this token when its actor is transformed.",
+          "label": "Automatic Transformation"
+        },
+        "autoVisionAngle": {
+          "hint": "Automatically change this token's vision angle.",
+          "label": "Automatic Vision Angle"
+        },
+        "autoVisionModes": {
+          "hint": "Automatically change this token's vision mode.",
+          "label": "Automatic Vision Modes"
+        },
+        "autoVisionRange": {
+          "hint": "Automatically change this token's vision range.",
+          "label": "Automatic Vision Range"
+        }
+      },
+      "Unit": {
+        "FIELDS": {
+          "raw": {
+            "hint": "The quantity of the specified unit.",
+            "label": "Quantity"
+          },
+          "unit": {
+            "hint": "The unit of this value.",
+            "label": "Unit"
+          }
+        },
+        "UNITS": {
+          "unlimited": "No Limit"
+        }
+      },
       "Usable": {
         "USAGE": {
           "use": "Use This"
         }
       }
     },
+    "PACKS": {
+      "abilities": "Abilities",
+      "bodyParts": "Body Parts",
+      "classes": "Classes",
+      "creatures": "Creatures",
+      "equipment": "Equipment",
+      "essentials": "Essentials",
+      "execution": "Ability Execution Macros",
+      "magicItems": "Magic Items",
+      "maintenance": "System Maintenance",
+      "maps": "Maps",
+      "player": "Player Utilities",
+      "powers": "Powers",
+      "properties": "Properties",
+      "rules": "Rules",
+      "species": "Species",
+      "stacks": "Stacks",
+      "tables": "Tables"
+    },
     "ROLLS": {
       "Attack": {
         "label": "Attack Roll"
+      },
+      "Base": {
+        "failure": "Failure",
+        "success": "Success"
       },
       "Feat": {
         "label": "Feat Save",
@@ -614,7 +1049,11 @@
         "thresholded": "DC {threshold} {value} Feat Save",
         "unthresholded": "{value} Feat Save"
       },
+      "Hexproof": {
+        "button": "Roll Hexproof"
+      },
       "Resist": {
+        "button": "Roll Resistance",
         "label": "Resistance Save"
       },
       "Take": {
@@ -622,10 +1061,25 @@
       },
       "Tradecraft": {
         "label": "Tradecraft Check",
-        "name": "{value} Check"
+        "name": "{value} Check",
+        "thresholded": "DC {threshold} {value} Check"
       }
     },
     "SCHEMA": {
+      "Attribute": {
+        "hint": "What attribute this applies to.",
+        "label": "Attribute"
+      },
+      "BlackGapless": {
+        "default": "Child",
+        "hint": "Whether there shouldn't be gaps between {name} blocks on this document's sheet.",
+        "label": "{name} Black Gapless"
+      },
+      "BlockSize": {
+        "default": "Child",
+        "hint": "Size that {name} blocks will be displayed at on this document's sheet.",
+        "label": "{name} Block Size"
+      },
       "CombatExpiration": {
         "what": {
           "roll": {
@@ -656,18 +1110,46 @@
           }
         },
         "who": {
+          "choices": {
+            "everyone": "Everyone",
+            "executor": "Executor",
+            "target": "Target"
+          },
           "hint": "Whose turn should this effect attempt to expire on?",
           "label": "Who"
         }
       },
+      "Competence": {
+        "choices": {
+          "0": "None",
+          "1": "Proficient",
+          "2": "Fluent"
+        },
+        "hint": "If this is proficient or fluent.",
+        "label": "Competence"
+      },
       "QualifiedChange": {
-        "key": {"label": "Key"},
-        "mode": {"label": "Mode"},
-        "priority": {"label": "Priority"},
-        "qualifier": {"label": "Qualifier"},
-        "target": {"label": "Target Document Type"},
-        "time": {"label": "Timing"},
-        "value": {"label": "Value"}
+        "key": {
+          "label": "Key"
+        },
+        "mode": {
+          "label": "Mode"
+        },
+        "priority": {
+          "label": "Priority"
+        },
+        "qualifier": {
+          "label": "Qualifier"
+        },
+        "target": {
+          "label": "Target Document Type"
+        },
+        "time": {
+          "label": "Timing"
+        },
+        "value": {
+          "label": "Value"
+        }
       },
       "Transformation": {
         "enabled": {
@@ -727,12 +1209,142 @@
         "uuids": {
           "hint": "The species this transforms the target into.",
           "itemHint": "A specific species this transforms the target into.",
-          "label": "Species"
+          "label": "Species",
+          "validationError": "Only species can be transformed into."
         }
+      }
+    },
+    "SETTINGS": {
+      "armorSuppressesRanks": {
+        "hint": "Alternate rule. If enabled, wearing AV above a rank's maximum suppresses it.",
+        "name": "Armor Suppresses Ranks"
+      },
+      "armorWeakensRanks": {
+        "hint": "Alternate rule. If enabled, wearing AV above a rank's maximum removes proficiency.",
+        "name": "Armor Weakens Ranks"
+      },
+      "automaticPanelCollapseTime": {
+        "hint": "Automatically collapse chat message panels older than this many minutes.",
+        "name": "Automatic Panel Collapse Time"
+      },
+      "automaticTokenMagicConditionEffects": {
+        "hint": "Automatically add visual effects to tokens based on their current conditions. Requires the Token Magic FX module.",
+        "name": "Automatic Token Magic Condition Effects"
+      },
+      "automaticallyChangeVisionModes": {
+        "hint": "If enabled, vision modes will automatically be changed based on abilities and down state.",
+        "name": "Automatically Change Vision Modes"
+      },
+      "automaticallyPayAbilityCosts": {
+        "hint": "If enabled, HP, MP, and GP costs of abilities will be paid automatically upon use.",
+        "name": "Automatically Pay Ability Costs"
+      },
+      "compendiumTooltips": {
+        "hint": "If enabled, tooltips will be displayed for compendium entries.",
+        "name": "Compendium Tooltips"
+      },
+      "confirmStatDiceRerolls": {
+        "hint": "If enabled, spent stat dice will require confirmation before rerolling.",
+        "name": "Confirm Stat Dice Rerolls"
+      },
+      "contentLinkTooltips": {
+        "hint": "If enabled, tooltips will be displayed for content links.",
+        "name": "Content Link Tooltips"
+      },
+      "damageTypeSources": {
+        "hint": "Journals that contain damage types that can be referenced when building damage rolls.",
+        "name": "Damage Type Sources"
+      },
+      "defaultPanelCollapseState": {
+        "choices": {
+          "auto": "Automatic",
+          "closed": "Closed",
+          "open": "Open"
+        },
+        "hint": "Default state for chat message panels.",
+        "name": "Default Panel Collapse State"
+      },
+      "developerMode": {
+        "hint": "Check this if you are a developer of the Teriock system and need additional features. Do not check this otherwise. It is likely to break your game. Even module developers shouldn't check this.",
+        "name": "Developer Mode"
+      },
+      "drainTypeSources": {
+        "hint": "Journals that contain drain types that can be referenced when building drain rolls.",
+        "name": "Drain Type Sources"
+      },
+      "floatingActorTabs": {
+        "hint": "Whether tabs on actor sheets hover outside the window frame.",
+        "name": "Floating Actor Tabs"
+      },
+      "gmDocumentNotesJournalName": {
+        "hint": "Name of the journal entry that linked document notes will automatically be added to.",
+        "name": "GM Document Notes Journal Name"
+      },
+      "hideBasicAbilitiesByDefault": {
+        "hint": "If enabled, basic abilities will be hidden by default on all actor sheets.",
+        "name": "Hide Basic Abilities by Default"
+      },
+      "hideInactiveDocumentsByDefault": {
+        "hint": "If enabled, inactive documents will be hidden by default on all actor sheets.",
+        "name": "Hide Inactive Documents by Default"
+      },
+      "placeTemplateOnAbilityUse": {
+        "hint": "If enabled, using abilities with an area of effect will automatically place a measured template.",
+        "name": "Place Template on Ability Use"
+      },
+      "playerMacrosFolderName": {
+        "hint": "Name of the folder for macros players create with hotbar drops.",
+        "name": "Player Macros Folder Name"
+      },
+      "rollAttackOnArmamentUse": {
+        "hint": "If enabled, using armaments will automatically roll Basic Attack.",
+        "name": "Roll Attack on Armament Use"
+      },
+      "secretEquipment": {
+        "hint": "If enabled, equipment will be secret when used by default.",
+        "name": "Secret Armaments"
+      },
+      "showRollDialogs": {
+        "hint": "If enabled, a dialog will be shown before making most rolls.",
+        "name": "Show Roll Dialogs"
+      },
+      "sidebarTooltips": {
+        "hint": "If enabled, tooltips will be displayed for sidebar entries.",
+        "name": "Sidebar Tooltips"
+      },
+      "sortNewPlayerMacros": {
+        "hint": "New player macros will be created in folders corresponding to the individual players.",
+        "name": "Sort New Player Macros"
+      },
+      "styleDice": {
+        "hint": "Style dice based on damage type, drain type, etc. Requires Dice So Nice! module.",
+        "name": "Style Dice"
+      },
+      "systemLinks": {
+        "hint": "If enabled, links that can be opened within Foundry will do so instead of to the wiki.",
+        "name": "System Links"
+      },
+      "systemTooltips": {
+        "hint": "If enabled, links that can be opened within Foundry will display tooltips.",
+        "name": "System Tooltips"
+      },
+      "twoHandedEquipment": {
+        "hint": "If enabled, equipment will be two-handed when used by default.",
+        "name": "Two-Handed Equipment"
       }
     },
     "SHEETS": {
       "Actor": {
+        "ACTIONS": {
+          "SelectAttacker": {
+            "hint": "Select the default armament you attack with.",
+            "label": "Select Primary Attacker"
+          },
+          "SelectBlocker": {
+            "hint": "Select the default armament you block with.",
+            "label": "Select Primary Blocker"
+          }
+        },
         "CONDITIONS": {
           "Associations": {
             "title": "Associated Creatures"
@@ -961,6 +1573,14 @@
         }
       },
       "Common": {
+        "CARD": {
+          "Sizes": {
+            "large": "Large",
+            "medium": "Medium",
+            "small": "Small",
+            "tiny": "Tiny"
+          }
+        },
         "MENU": {
           "Create": {
             "document": "New {type}",
@@ -971,6 +1591,13 @@
             "selectSupport": "Select Support Ability",
             "title": "Select Rank"
           }
+        },
+        "SORT": {
+          "enabled": "Enabled",
+          "name": "Name",
+          "sourceName": "Source Name",
+          "sourceType": "Source Type",
+          "type": "Type"
         }
       }
     },
@@ -1078,6 +1705,7 @@
           },
           "elderSorceryIncant": {
             "button": "Elder Sorcery Incant",
+            "default": "Incant.",
             "elements": "With the Elder Sorcery of {elements}...",
             "label": "With Elder Sorcery..."
           },
@@ -1167,6 +1795,9 @@
             },
             "save": {
               "label": "On Success"
+            },
+            "use": {
+              "label": "On Use"
             }
           },
           "ritual": {
@@ -1443,6 +2074,12 @@
           }
         }
       },
+      "BaseUser": {
+        "QUERY": {
+          "failPrefix": "Could not complete query.",
+          "failReason": "No GM is currently signed in."
+        }
+      },
       "Child": {
         "EMBED": {
           "disabled": "Disabled",
@@ -1586,13 +2223,13 @@
           "remaining": "{value} Remaining"
         }
       },
-      "Stone": {
-        "DEFAULTS": {
-          "back": "Unknown Stone",
-          "faces": "Stone"
-        }
-      },
       "Equipment": {
+        "DIALOG": {
+          "onUse": {
+            "hint": "{name} has abilities that can activate on use. Select which to activate.",
+            "title": "Activate Abilities"
+          }
+        },
         "EMBED": {
           "equipped": "Equipped",
           "glued": "Glued",
@@ -1666,12 +2303,6 @@
         },
         "USAGE": {
           "twoHanded": "Use in Two Hands"
-        },
-        "DIALOG": {
-          "onUse": {
-            "hint": "{name} has abilities that can activate on use. Select which to activate.",
-            "title": "Activate Abilities"
-          }
         }
       },
       "Fluency": {
@@ -1855,6 +2486,12 @@
           "statDice": "Stat Dice"
         }
       },
+      "Stone": {
+        "DEFAULTS": {
+          "back": "Unknown Stone",
+          "faces": "Stone"
+        }
+      },
       "Wiki": {
         "DIALOG": {
           "open": {
@@ -1864,21 +2501,66 @@
         }
       }
     },
-    "SheetLabels": {
-      "Ability": "Teriock Ability Sheet",
-      "Body": "Teriock Body Part Sheet",
-      "Character": "Teriock Character Sheet",
-      "Condition": "Teriock Condition Sheet",
-      "Consequence": "Teriock Consequence Sheet",
-      "Creature": "Teriock Creature Sheet",
-      "Equipment": "Teriock Equipment Sheet",
-      "Fluency": "Teriock Fluency Sheet",
-      "Item": "Teriock Item Sheet",
-      "Mount": "Teriock Mount Sheet",
-      "Rank": "Teriock Rank Sheet",
-      "Resource": "Teriock Resource Sheet"
-    },
     "TERMS": {
+      "Archetypes": {
+        "everyman": "Everyman",
+        "mage": "Mage",
+        "semi": "Semi",
+        "warrior": "Warrior"
+      },
+      "Attributes": {
+        "int": {
+          "label": "INT",
+          "name": "Intelligence",
+          "page": "Intelligence"
+        },
+        "mov": {
+          "label": "MOV",
+          "name": "Movement",
+          "page": "Movement"
+        },
+        "per": {
+          "label": "PER",
+          "name": "Perception",
+          "page": "Perception"
+        },
+        "snk": {
+          "label": "SNK",
+          "name": "Sneak",
+          "page": "Sneak"
+        },
+        "str": {
+          "label": "STR",
+          "name": "Strength",
+          "page": "Strength"
+        },
+        "unp": {
+          "label": "UNP",
+          "name": "Unused Presence",
+          "page": "Presence"
+        }
+      },
+      "BreakCost": {
+        "destroy": "Destroy",
+        "shatter": "Shatter"
+      },
+      "Classes": {
+        "archer": "Archer",
+        "assassin": "Assassin",
+        "berserker": "Berserker",
+        "corsair": "Corsair",
+        "duelist": "Duelist",
+        "flameMage": "Flame Mage",
+        "knight": "Knight",
+        "lifeMage": "Life Mage",
+        "natureMage": "Nature Mage",
+        "necromancer": "Necromancer",
+        "paladin": "Paladin",
+        "ranger": "Ranger",
+        "stormMage": "Storm Mage",
+        "thief": "Thief",
+        "veteran": "Veteran"
+      },
       "Common": {
         "attribute": "Attribute",
         "condition": "Condition",
@@ -1890,12 +2572,454 @@
         "semblant": "Semblant",
         "tradecraft": "Tradecraft"
       },
+      "Conditions": {
+        "alive": "Alive",
+        "allured": "Allured",
+        "anosmatic": "Anosmatic",
+        "asleep": "Asleep",
+        "blind": "Blind",
+        "bound": "Bound",
+        "burned": "Burned",
+        "charmed": "Charmed",
+        "conscious": "Conscious",
+        "criticallyWounded": "Critically Wounded",
+        "dead": "Dead",
+        "deaf": "Deaf",
+        "defyingDeath": "Defying Death",
+        "disguised": "Disguised",
+        "down": "Down",
+        "dueling": "Dueling",
+        "encumbered": "Encumbered",
+        "ethereal": "Ethereal",
+        "frenzied": "Frenzied",
+        "frightened": "Frightened",
+        "frozen": "Frozen",
+        "goaded": "Goaded",
+        "grounded": "Grounded",
+        "hacked": "Hacked",
+        "hidden": "Hidden",
+        "hollied": "Hollied",
+        "immobilized": "Immobilized",
+        "invisible": "Invisible",
+        "lighted": "Lighted",
+        "meleeDodging": "Melee Dodging",
+        "missileDodging": "Missile Dodging",
+        "mute": "Mute",
+        "odorless": "Odorless",
+        "paralyzed": "Paralyzed",
+        "poisoned": "Poisoned",
+        "prone": "Prone",
+        "ruined": "Ruined",
+        "silenced": "Silenced",
+        "silent": "Silent",
+        "slowed": "Slowed",
+        "snared": "Snared",
+        "suffocating": "Suffocating",
+        "terrored": "Terrored",
+        "transformed": "Transformed",
+        "unconscious": "Unconscious",
+        "up": "Up",
+        "wisping": "Wisping"
+      },
+      "Cost": {
+        "formula": "Formula",
+        "none": "None",
+        "static": "Static",
+        "variable": "Variable"
+      },
+      "Costs": {
+        "invoked": "Invoked",
+        "material": "Material",
+        "somatic": "Somatic",
+        "verbal": "Verbal"
+      },
+      "Currency": {
+        "copper": "Copper",
+        "debt": "Debt",
+        "dragonEmerald": "Dragon Emerald",
+        "entTearAmber": "Ent Tear Amber",
+        "fireEyeRuby": "Fire Eye Ruby",
+        "gold": "Gold",
+        "heartstoneRuby": "Heartstone Ruby",
+        "magusQuartz": "Magus Quartz",
+        "moonOpal": "Moon Opal",
+        "pixiePlumAmethyst": "Pixie Plum Amethyst",
+        "silver": "Silver",
+        "snowDiamond": "Snow Diamond"
+      },
+      "DamageTypes": {
+        "astamori": "Astamori",
+        "deadly": "Deadly",
+        "dirtydark": "Dirtydark",
+        "financial": "Financial",
+        "fire": "Fire",
+        "hack": "Hack",
+        "holy": "Holy",
+        "ice": "Ice",
+        "lethal": "Lethal",
+        "magic": "Magic",
+        "morganti": "Morganti",
+        "mundane": "Mundane",
+        "psychic": "Psychic",
+        "silveel": "Silveel",
+        "silver": "Silver",
+        "spiritual": "Spiritual",
+        "starbright": "Starbright",
+        "terror": "Terror",
+        "toxic": "Toxic",
+        "vine": "Vine"
+      },
+      "Delivery": {
+        "armor": "Armor",
+        "aura": "Aura",
+        "bite": "Bite",
+        "cone": "Cone",
+        "hand": "Hand",
+        "item": "Item",
+        "missile": "Missile",
+        "self": "Self",
+        "shield": "Shield",
+        "sight": "Sight",
+        "weapon": "Weapon"
+      },
+      "DeliveryPackage": {
+        "ball": "Ball",
+        "ray": "Ray",
+        "ritual": "Ritual",
+        "strike": "Strike",
+        "touch": "Touch"
+      },
+      "DeliveryParent": {
+        "item": "Item"
+      },
+      "Duration": {
+        "unit": {
+          "day": "Day",
+          "hour": "Hour",
+          "instant": "Instant",
+          "minute": "Minute",
+          "month": "Month",
+          "noLimit": "No Limit",
+          "second": "Second",
+          "untilDawn": "Until Dawn",
+          "week": "Week",
+          "year": "Year"
+        }
+      },
+      "EffectForm": {
+        "echo": "Echo",
+        "flaw": "Flaw",
+        "gifted": "Gifted",
+        "intrinsic": "Intrinsic",
+        "normal": "Normal",
+        "special": "Special"
+      },
+      "EffectTypes": {
+        "alchemical": "Alchemical",
+        "automatic": "Automatic",
+        "awakening": "Awakening",
+        "contract": "Contract",
+        "control": "Control",
+        "damaging": "Damaging",
+        "destruction": "Destruction",
+        "disease": "Disease",
+        "displacement": "Displacement",
+        "divine": "Divine",
+        "draining": "Draining",
+        "duelModifying": "Duel modifying",
+        "financial": "Financial",
+        "healing": "Healing",
+        "hexproof": "Hexproof",
+        "hexseal": "Hexseal",
+        "immunity": "Immunity",
+        "killing": "Killing",
+        "knockout": "Knockout",
+        "lightning": "Lightning",
+        "longRange": "Long range",
+        "loud": "Loud",
+        "magical": "Magical",
+        "mental": "Mental",
+        "movement": "Movement",
+        "poison": "Poison",
+        "primal": "Primal",
+        "reanimation": "Reanimation",
+        "regeneration": "Regeneration",
+        "resistance": "Resistance",
+        "revitalization": "Revitalization",
+        "revival": "Revival",
+        "sensory": "Sensory",
+        "spiritual": "Spiritual",
+        "stealing": "Stealing",
+        "summoning": "Summoning",
+        "temporal": "Temporal",
+        "transformation": "Transformation",
+        "truthDetecting": "Truth detecting"
+      },
+      "Elements": {
+        "flame": "Flame",
+        "life": "Life",
+        "nature": "Nature",
+        "necromancy": "Necromancy",
+        "storm": "Storm"
+      },
+      "EquipmentClasses": {
+        "ammunition": "Ammunition",
+        "armor": "Armor",
+        "bodyParts": "Body parts",
+        "boulders": "Boulders",
+        "bows": "Bows",
+        "clothing": "Clothing",
+        "containers": "Containers",
+        "daggers": "Daggers",
+        "guns": "Guns",
+        "impactWeapons": "Impact weapons",
+        "instruments": "Instruments",
+        "knickknacks": "Knickknacks",
+        "mageloreEquipment": "Magelore equipment",
+        "objects": "Objects",
+        "organics": "Organics",
+        "poleArms": "Pole-arms",
+        "shields": "Shields",
+        "specialtySwords": "Specialty swords",
+        "specialtyWeapons": "Specialty weapons",
+        "supplies": "Supplies",
+        "swords": "Swords",
+        "tools": "Tools",
+        "weaponClasses": "Weapon classes",
+        "writingImplements": "Writing implements"
+      },
+      "ExecutionTime": {
+        "active": {
+          "0": "Free Actions",
+          "1": "Single Action",
+          "2": "Double Action",
+          "3": "Triple Action"
+        },
+        "reactive": {
+          "0": "Free Reaction",
+          "1": "Reaction"
+        },
+        "slow": {
+          "custom": "Custom",
+          "longRest": "Long Rest",
+          "shortRest": "Short Rest"
+        }
+      },
+      "Expansion": {
+        "cascade": "Cascade",
+        "detonate": "Detonate",
+        "fork": "Fork",
+        "ripple": "Ripple"
+      },
+      "FeatSaveImprovementAmount": {
+        "fluency": "Fluency",
+        "proficiency": "Proficiency"
+      },
+      "Fields": {
+        "artisan": "Artisan",
+        "mediator": "Mediator",
+        "prestige": "Prestige",
+        "scholar": "Scholar",
+        "survivalist": "Survivalist"
+      },
+      "HitCost": {
+        "hack": "Hack",
+        "x": "Variable"
+      },
+      "Interaction": {
+        "attack": "Attack",
+        "block": "Block",
+        "feat": "Feat",
+        "manifest": "Manifest"
+      },
+      "ManaCost": {
+        "x": "Variable"
+      },
+      "Maneuver": {
+        "active": "Active",
+        "passive": "Passive",
+        "reactive": "Reactive",
+        "slow": "Slow"
+      },
+      "PowerLevel": {
+        "enchanted": "Enchanted",
+        "magic": "Magic",
+        "mundane": "Mundane",
+        "unknown": "Unknown"
+      },
+      "PowerSources": {
+        "alchemical": "Alchemical",
+        "divine": "Divine",
+        "financial": "Financial",
+        "magical": "Magical",
+        "martial": "Martial",
+        "primal": "Primal",
+        "spiritual": "Spiritual",
+        "unknown": "Unknown"
+      },
+      "PowerType": {
+        "backstory": "Backstory",
+        "blessing": "Blessing",
+        "curse": "Curse",
+        "deathScar": "Death Scar",
+        "familiar": "Familiar",
+        "holiday": "Holiday",
+        "innate": "Innate",
+        "learned": "Learned",
+        "other": "Other",
+        "pact": "Pact",
+        "traits": "Traits"
+      },
+      "Protections": {
+        "hexproof": {
+          "passive": "Hexproof",
+          "past": "Hexproofed",
+          "plural": "Hexproofs",
+          "single": "Hexproof"
+        },
+        "hexseal": {
+          "passive": "Hexseal",
+          "past": "Hexsealed",
+          "plural": "Hexseals",
+          "single": "Hexseal"
+        },
+        "immunity": {
+          "passive": "Immune",
+          "past": "Immuned",
+          "plural": "Immunities",
+          "single": "Immunity"
+        },
+        "resistance": {
+          "passive": "Resistant",
+          "past": "Resisted",
+          "plural": "Resistances",
+          "single": "Resistance"
+        }
+      },
+      "Senses": {
+        "blind": "Blind Fighting",
+        "dark": "Dark Vision",
+        "ethereal": "Ethereal Vision",
+        "hearing": "Advanced Hearing",
+        "invisible": "See Invisible",
+        "night": "Night Vision",
+        "sight": "Advanced Sight",
+        "smell": "Advanced Smell",
+        "truth": "True Sight"
+      },
+      "SpeedAdjustments": {
+        "0": "None",
+        "1": "Quarter",
+        "2": "Half",
+        "3": "Normal",
+        "4": "Double"
+      },
+      "StoneColor": {
+        "black": "Black",
+        "blue": "Blue",
+        "green": "Green",
+        "red": "Red",
+        "white": "White"
+      },
       "Stones": {
         "black": "Black Stones",
         "blue": "Blue Stones",
         "green": "Green Stones",
         "red": "Red Stones",
         "white": "White Stones"
+      },
+      "TargetParent": {
+        "ability": "Ability",
+        "item": "Item"
+      },
+      "Targets": {
+        "ability": "Ability",
+        "area": "Area",
+        "arm": "Arm",
+        "armor": "Armor",
+        "attack": "Attack",
+        "creature": "Creature",
+        "item": "Item",
+        "leg": "Leg",
+        "other": "Other",
+        "self": "Self",
+        "ship": "Ship",
+        "skill": "Skill",
+        "spell": "Spell",
+        "vitals": "Vitals",
+        "weapon": "Weapon"
+      },
+      "Tradecrafts": {
+        "artist": "Artist",
+        "blacksmith": "Blacksmith",
+        "builder": "Builder",
+        "cartographer": "Cartographer",
+        "chef": "Chef",
+        "courtier": "Courtier",
+        "diplomat": "Diplomat",
+        "enforcer": "Enforcer",
+        "farmer": "Farmer",
+        "gambler": "Gambler",
+        "herbalist": "Herbalist",
+        "historian": "Historian",
+        "hunter": "Hunter",
+        "innkeeper": "Innkeeper",
+        "investigator": "Investigator",
+        "locksmith": "Locksmith",
+        "mariner": "Mariner",
+        "messenger": "Messenger",
+        "metaphysicist": "Metaphysicist",
+        "miner": "Miner",
+        "peacekeeper": "Peacekeeper",
+        "performer": "Performer",
+        "priest": "Priest",
+        "scribe": "Scribe",
+        "tailor": "Tailor",
+        "tamer": "Tamer",
+        "teacher": "Teacher",
+        "tinkerer": "Tinkerer",
+        "tracker": "Tracker",
+        "trader": "Trader"
+      },
+      "Traits": {
+        "animal": "Animal",
+        "aquatic": "Aquatic",
+        "avian": "Avian",
+        "beast": "Beast",
+        "celestial": "Celestial",
+        "construct": "Construct",
+        "draconic": "Draconic",
+        "elemental": "Elemental",
+        "fae": "Fae",
+        "fungus": "Fungus",
+        "humanoid": "Humanoid",
+        "infernal": "Infernal",
+        "monstrous": "Monstrous",
+        "ooze": "Ooze",
+        "outsider": "Outsider",
+        "partialHumanoid": "Partial humanoid",
+        "plant": "Plant",
+        "playerCharacter": "Player character",
+        "undead": "Undead"
+      },
+      "WeaponFightingStyles": {
+        "bluntForce": "Blunt Force",
+        "charging": "Charging",
+        "gladiator": "Gladiator",
+        "greatKenjutsu": "Great Kenjutsu",
+        "greatSwordsman": "Great Swordsman",
+        "javelinier": "Javelinier",
+        "juttejutsu": "Juttejutsu",
+        "kenjutsu": "Kenjutsu",
+        "knife": "Knife",
+        "kunai": "Kunai",
+        "phalanx": "Phalanx",
+        "quickshot": "Quickshot",
+        "savage": "Savage",
+        "sniper": "Sniper",
+        "swordsman": "Swordsman",
+        "trident": "Trident",
+        "wraparound": "Wraparound"
       }
     }
   },

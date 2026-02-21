@@ -31,7 +31,11 @@ const command = {
     TERIOCK.options.attribute[options?.attribute]?.icon || "star",
   id: "feat",
   label: (options) =>
-    `${TERIOCK.options.attribute[options?.attribute]?.label || "Feat"} Save`,
+    TERIOCK.options.attribute[options?.attribute]?.label
+      ? game.i18n.format("TERIOCK.ROLLS.Feat.name", {
+          value: TERIOCK.options.attribute[options?.attribute]?.label,
+        })
+      : game.i18n.localize("TERIOCK.ROLLS.Feat.label"),
   primary,
   secondary,
 };

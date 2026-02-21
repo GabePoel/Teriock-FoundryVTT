@@ -38,7 +38,7 @@ export async function selectTokensDialog(options = {}) {
  * @returns {Promise<UUID<TeriockTokenDocument>[]>}
  */
 export async function conditionDialog(condition) {
-  const conditionName = TERIOCK.index.conditions[condition].toLowerCase();
+  const conditionName = TERIOCK.reference.conditions[condition].toLowerCase();
   return await selectTokensDialog({
     title: game.i18n.localize("TERIOCK.DIALOGS.SelectToken.Condition.title"),
     hint: game.i18n.format("TERIOCK.DIALOGS.SelectToken.Condition.hint", {

@@ -45,6 +45,12 @@ class UnitDialog extends DialogV2 {
  * @implements {Teriock.Models.UnitModelInterface}
  */
 export default class UnitModel extends EvaluationModel {
+  /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [
+    ...super.LOCALIZATION_PREFIXES,
+    "TERIOCK.MODELS.Unit",
+  ];
+
   /** @returns {Teriock.Units.UnitEntry[]} */
   static get choiceEntries() {
     return [
@@ -75,7 +81,7 @@ export default class UnitModel extends EvaluationModel {
     return [
       {
         id: "unlimited",
-        label: "No Limit",
+        label: game.i18n.localize("TERIOCK.MODELS.Unit.UNITS.unlimited"),
       },
     ];
   }
@@ -86,19 +92,12 @@ export default class UnitModel extends EvaluationModel {
   }
 
   /** @inheritDoc */
-  static defineSchema(
-    options = {
-      label: "Quantity",
-      hint: "The quantity of the specified unit.",
-    },
-  ) {
-    return Object.assign(super.defineSchema(options), {
+  static defineSchema() {
+    return Object.assign(super.defineSchema(), {
       unit: new fields.StringField({
-        label: "Unit",
         required: false,
         initial: this.choiceEntries[0].id,
         choices: this.choices,
-        hint: "The unit of this value.",
       }),
     });
   }

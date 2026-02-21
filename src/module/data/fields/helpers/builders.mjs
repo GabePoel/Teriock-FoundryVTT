@@ -1,3 +1,4 @@
+import { abilityOptions } from "../../../constants/options/ability-options.mjs";
 import { sortObject } from "../../../helpers/utils.mjs";
 import {
   EnhancedNumberField,
@@ -27,9 +28,15 @@ const {
 export function combatExpirationSourceTypeField() {
   return new StringField({
     choices: {
-      target: "Target",
-      executor: "Executor",
-      everyone: "Everyone",
+      target: game.i18n.localize(
+        "TERIOCK.SCHEMA.CombatExpiration.who.choices.target",
+      ),
+      executor: game.i18n.localize(
+        "TERIOCK.SCHEMA.CombatExpiration.who.choices.executor",
+      ),
+      everyone: game.i18n.localize(
+        "TERIOCK.SCHEMA.CombatExpiration.who.choices.everyone",
+      ),
     },
     hint: "TERIOCK.SCHEMA.CombatExpiration.who.hint",
     initial: "target",
@@ -137,7 +144,9 @@ export function transformationField(options = {}) {
         nullable: false,
         required: false,
         validate: (uuids) => arrayTypeValidator(uuids, ["species"]),
-        validationError: "Only species can be transformed into.",
+        validationError: game.i18n.localize(
+          "TERIOCK.SCHEMA.Transformation.uuids.validationError",
+        ),
       },
     ),
   };
@@ -371,12 +380,17 @@ export function blocksField() {
  * @returns {StringField}
  */
 export function blockSizeField(options = {}) {
-  const { initial = "medium", label = "Child" } = options;
+  const {
+    initial = "medium",
+    label = game.i18n.localize("TERIOCK.SCHEMA.BlockSize.default"),
+  } = options;
   return new StringField({
     initial,
     choices: TERIOCK.options.display.sizes,
-    label: `${label} Block Size`,
-    hint: `Size that ${label.toLowerCase()} blocks will be displayed at on this document's sheet.`,
+    label: game.i18n.format("TERIOCK.SCHEMA.BlockSize.label", { name: label }),
+    hint: game.i18n.format("TERIOCK.SCHEMA.BlockSize.hint", {
+      name: label.toLocaleLowerCase(),
+    }),
   });
 }
 
@@ -388,11 +402,18 @@ export function blockSizeField(options = {}) {
  * @returns {BooleanField}
  */
 export function blockGaplessField(options = {}) {
-  const { initial = false, label = "Child" } = options;
+  const {
+    initial = false,
+    label = game.i18n.localize("TERIOCK.SCHEMA.BlackGapless.default"),
+  } = options;
   return new BooleanField({
     initial,
-    label: `${label} Block Gapless`,
-    hint: `Whether there shouldn't be gaps between ${label.toLowerCase()} blocks on this document's sheet.`,
+    label: game.i18n.format("TERIOCK.SCHEMA.BlackGapless.label", {
+      name: label,
+    }),
+    hint: game.i18n.format("TERIOCK.SCHEMA.BlackGapless.hint", {
+      name: label.toLocaleLowerCase(),
+    }),
   });
 }
 
@@ -422,10 +443,7 @@ export function costField(options = { extraChoices: {} }) {
     type: new StringField({
       initial: "none",
       choices: {
-        none: "None",
-        static: "Static",
-        formula: "Formula",
-        variable: "Variable",
+        ...abilityOptions.cost,
         ...options.extraChoices,
       },
     }),
@@ -453,13 +471,13 @@ export function costField(options = { extraChoices: {} }) {
 export function competenceField() {
   return new NumberField({
     choices: {
-      0: "None",
-      1: "Proficient",
-      2: "Fluent",
+      0: game.i18n.localize("TERIOCK.SCHEMA.Competence.choices.0"),
+      1: game.i18n.localize("TERIOCK.SCHEMA.Competence.choices.1"),
+      2: game.i18n.localize("TERIOCK.SCHEMA.Competence.choices.2"),
     },
-    hint: "If this is proficient or fluent.",
+    hint: game.i18n.localize("TERIOCK.SCHEMA.Competence.hint"),
     initial: 0,
-    label: "Competence",
+    label: game.i18n.localize("TERIOCK.SCHEMA.Competence.label"),
     max: 2,
     min: 0,
     nullable: false,
@@ -499,11 +517,11 @@ export function damageField(twoHanded = false) {
 export function attributeField(options = { unp: false, nullable: true }) {
   return new StringField({
     choices: options.unp
-      ? TERIOCK.index.statAttributes
-      : TERIOCK.index.attributes,
-    hint: "What attribute this applies to.",
+      ? TERIOCK.reference.statAttributes
+      : TERIOCK.reference.attributes,
+    hint: game.i18n.localize("TERIOCK.SCHEMA.Attribute.hint"),
     initial: options.nullable ? null : "int",
-    label: "Attribute",
+    label: game.i18n.localize("TERIOCK.SCHEMA.Attribute.label"),
     nullable: options.nullable,
     required: false,
   });

@@ -151,10 +151,11 @@ export default function registerUiHelpers() {
       const ascendingValue = foundry.utils.getProperty(context, ascendingPath);
 
       const sizeOptions = TERIOCK.options.display.sizes ?? {};
-      const sortSelectHTML =
+      const sortSelectHTML = foundry.utils.escapeHTML(
         selectOptions(sortOptions, {
           hash: { selected: sortValue },
-        })?.toHTML?.() ?? "";
+        })?.toHTML?.() ?? "",
+      );
 
       const tabDisplay = tab.charAt(0).toUpperCase() + tab.slice(1);
 

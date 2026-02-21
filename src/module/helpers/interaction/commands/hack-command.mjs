@@ -39,11 +39,7 @@ export const unhackCommand = {
   args: ["part"],
   icon: (options) => TERIOCK.options.hack[options?.part || "arm"].icon,
   id: "unhack",
-  label: (options) =>
-    TERIOCK.options.hack[options?.part || "arm"].label.replace(
-      "Hack",
-      "Unhack",
-    ),
+  label: (options) => TERIOCK.options.hack[options?.part || "arm"].remove,
   primary: takeUnhack,
   secondary: takeHack,
 };

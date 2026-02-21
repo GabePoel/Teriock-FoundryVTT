@@ -1,4 +1,6 @@
 //noinspection JSUnusedGlobalSymbols
+// The index is like the reference but with names always in English.
+// We maintain a copy of this to access rules journals and the like.
 
 import { default as allConditions } from "../../../index/names/conditions.json" with { type: "json" };
 import { default as allProperties } from "../../../index/names/properties.json" with { type: "json" };

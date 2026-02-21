@@ -76,7 +76,7 @@ export function createDialogFieldset(legend, description, name, max) {
 export async function attributePanel(attribute) {
   return TeriockTextEditor.enrichPanel({
     image: getImage("attributes", TERIOCK.index.attributesFull[attribute]),
-    name: TERIOCK.index.attributesFull[attribute],
+    name: TERIOCK.reference.attributesFull[attribute],
     blocks: [
       {
         title: game.i18n.localize(
@@ -104,7 +104,7 @@ export async function tradecraftPanel(tradecraft) {
   }
   return TeriockTextEditor.enrichPanel({
     image: getImage("tradecrafts", TERIOCK.index.tradecrafts[tradecraft]),
-    name: TERIOCK.index.tradecrafts[tradecraft],
+    name: TERIOCK.reference.tradecrafts[tradecraft],
     bars: [
       {
         icon: TERIOCK.options.tradecraft[field].icon,
@@ -139,7 +139,7 @@ export async function classPanel(className) {
   }
   return await TeriockTextEditor.enrichPanel({
     image: getImage("classes", TERIOCK.index.classes[className]),
-    name: TERIOCK.index.classes[className],
+    name: TERIOCK.reference.classes[className],
     bars: [
       {
         icon: TERIOCK.options.rank[archetype].icon,

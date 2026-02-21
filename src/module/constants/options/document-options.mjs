@@ -1,3 +1,4 @@
+import { preLocalize } from "../../helpers/localization.mjs";
 import { docSort, effectSort, rankSort } from "../../helpers/sort.mjs";
 import { icons } from "../display/icons.mjs";
 
@@ -11,7 +12,7 @@ export const documentOptions = {
     getter: "abilities",
     icon: icons.document.ability,
     index: "abilities",
-    name: "Ability",
+    name: "TYPES.ActiveEffect.ability",
     pack: "abilities",
     sorter: effectSort,
   },
@@ -19,7 +20,7 @@ export const documentOptions = {
     doc: "ActiveEffect",
     getter: "attunements",
     icon: icons.document.attunement,
-    name: "Attunement",
+    name: "TYPES.ActiveEffect.attunement",
     sorter: docSort,
   },
   body: {
@@ -27,7 +28,7 @@ export const documentOptions = {
     getter: "bodyParts",
     icon: icons.document.body,
     index: "bodyParts",
-    name: "Body Part",
+    name: "TYPES.Item.body",
     pack: "bodyParts",
     sorter: docSort,
   },
@@ -35,7 +36,7 @@ export const documentOptions = {
     doc: "Actor",
     getter: "characters",
     icon: icons.document.character,
-    name: "Character",
+    name: "TYPES.Actor.character",
     sorter: docSort,
   },
   condition: {
@@ -43,21 +44,21 @@ export const documentOptions = {
     getter: "conditions",
     icon: icons.document.condition,
     index: "conditions",
-    name: "Condition",
+    name: "TYPES.ActiveEffect.condition",
     sorter: docSort,
   },
   consequence: {
     doc: "ActiveEffect",
     getter: "consequences",
     icon: icons.document.consequence,
-    name: "Consequence",
+    name: "TYPES.ActiveEffect.consequence",
     sorter: docSort,
   },
   creature: {
     doc: "Actor",
     getter: "creatures",
     icon: icons.document.creature,
-    name: "Creature",
+    name: "TYPES.Actor.creature",
     pack: "creatures",
     sorter: docSort,
   },
@@ -73,7 +74,7 @@ export const documentOptions = {
     doc: "ActiveEffect",
     getter: "effects",
     icon: icons.document.effect,
-    name: "Effect",
+    name: "TYPES.ActiveEffect.effect",
     sorter: docSort,
   },
   equipment: {
@@ -81,7 +82,7 @@ export const documentOptions = {
     getter: "equipment",
     icon: icons.document.equipment,
     index: "equipment",
-    name: "Equipment",
+    name: "TYPES.Item.equipment",
     pack: "equipment",
     sorter: docSort,
   },
@@ -89,21 +90,21 @@ export const documentOptions = {
     doc: "ActiveEffect",
     getter: "fluencies",
     icon: icons.document.fluency,
-    name: "Fluency",
+    name: "TYPES.ActiveEffect.fluency",
     sorter: docSort,
   },
   mount: {
     doc: "Item",
     getter: "mounts",
     icon: icons.document.mount,
-    name: "Mount",
+    name: "TYPES.Item.mount",
     sorter: docSort,
   },
   power: {
     doc: "Item",
     getter: "powers",
     icon: icons.document.power,
-    name: "Power",
+    name: "TYPES.Item.power",
     sorter: docSort,
   },
   property: {
@@ -111,7 +112,7 @@ export const documentOptions = {
     getter: "properties",
     icon: icons.document.property,
     index: "properties",
-    name: "Property",
+    name: "TYPES.ActiveEffect.property",
     pack: "properties",
     sorter: effectSort,
   },
@@ -120,7 +121,7 @@ export const documentOptions = {
     getter: "ranks",
     icon: icons.document.rank,
     index: "classes",
-    name: "Rank",
+    name: "TYPES.Item.rank",
     pack: "classes",
     sorter: rankSort,
   },
@@ -128,7 +129,7 @@ export const documentOptions = {
     doc: "ActiveEffect",
     getter: "resources",
     icon: icons.document.resource,
-    name: "Resource",
+    name: "TYPES.ActiveEffect.resource",
     sorter: docSort,
   },
   species: {
@@ -136,16 +137,20 @@ export const documentOptions = {
     getter: "species",
     icon: icons.document.species,
     index: "creatures",
-    name: "Species",
+    name: "TYPES.Item.species",
     pack: "species",
     sorter: docSort,
   },
   stone: {
     doc: "Card",
     icon: icons.document.stone,
+    name: "TYPES.Card.stone",
   },
   wrapper: {
     doc: "Item",
     icon: icons.document.ability,
+    name: "TYPES.Item.wrapper",
   },
 };
+
+preLocalize("options.document", { keys: ["name"] });

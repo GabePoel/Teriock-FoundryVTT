@@ -1,47 +1,40 @@
+import { preLocalize } from "../../helpers/localization.mjs";
+
 export const targets = {
-  ancestors: "Ancestor Documents",
-  all: "All Documents",
+  ancestors: "TERIOCK.CHANGES.Targets.ancestors",
+  all: "TERIOCK.CHANGES.Targets.all",
 };
+preLocalize("options.change.targets");
 
 export const time = {
   base: {
-    hint:
-      "Base changes are the first ones applied. They take effect right after base data for documents have been" +
-      " set up and before any derived values have been determined.",
-    label: "Base",
+    hint: "TERIOCK.CHANGES.Time.base.hint",
+    label: "TERIOCK.CHANGES.Time.base.label",
   },
   proficiency: {
-    hint:
-      "Proficiency changes apply immediately after base ones. This should be used exclusively for effects that" +
-      " make other documents proficient.",
-    label: "Proficiency",
+    hint: "TERIOCK.CHANGES.Time.proficiency.hint",
+    label: "TERIOCK.CHANGES.Time.proficiency.label",
   },
   fluency: {
-    hint:
-      "Fluency changes apply immediately after proficiency ones. This should be used exclusively for effects" +
-      " that make other documents fluent.",
-    label: "Fluency",
+    hint: "TERIOCK.CHANGES.Time.fluency.hint",
+    label: "TERIOCK.CHANGES.Time.fluency.label",
   },
   normal: {
-    hint:
-      "Normal changes are the last ones applied before derived values are determined. This is the default time" +
-      " that changes are applied and should be used unless there is a specific reason to apply at some other time.",
-    label: "Normal",
+    hint: "TERIOCK.CHANGES.Time.normal.hint",
+    label: "TERIOCK.CHANGES.Time.normal.label",
   },
   derivation: {
-    hint:
-      "Derivation changes apply once derived data has been calculated. This should only be used for effects" +
-      " where the changes themselves rely on data that's been derived.",
-    label: "Derivation",
+    hint: "TERIOCK.CHANGES.Time.derivation.hint",
+    label: "TERIOCK.CHANGES.Time.derivation.label",
   },
   final: {
-    hint:
-      "These are the last changes that are applied. There is very minimal document data prep that occurs after" +
-      " these changes, so they should only be used for instances where nothing passively relies on them.",
-    label: "Final",
+    hint: "TERIOCK.CHANGES.Time.final.hint",
+    label: "TERIOCK.CHANGES.Time.final.label",
   },
 };
+preLocalize("options.change.time", { keys: ["hint", "label"] });
 
 export const timeLabels = Object.fromEntries(
   Object.entries(time).map(([k, v]) => [k, v.label]),
 );
+preLocalize("options.change.timeLabels");

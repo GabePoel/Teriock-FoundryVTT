@@ -206,7 +206,7 @@ export default class IdentificationModel extends EmbeddedDataModel {
         const toReveal = await selectDocumentsDialog(revealed, {
           checked: checked,
           hint: game.i18n.localize(
-            "TERIOCK.MODELS.Identification.Query.Unidentify.hint",
+            "TERIOCK.MODELS.Identification.QUERY.Unidentify.hint",
           ),
           tooltipAsync: false,
         });
@@ -232,7 +232,10 @@ export default class IdentificationModel extends EmbeddedDataModel {
           name: "Unidentified " + this.parent.equipmentType,
         });
       } else {
-        ui.notifications.warn("This item is already unidentified.");
+        ui.notifications.warn(
+          "TERIOCK.MODELS.Identification.QUERY.Unidentify.alreadyUnidentified",
+          { localize: true },
+        );
       }
     }
   }

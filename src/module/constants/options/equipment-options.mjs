@@ -1,37 +1,41 @@
+import { preLocalize } from "../../helpers/localization.mjs";
 import { colors, icons } from "../display/_module.mjs";
 import * as index from "../index/_module.mjs";
 
 export const equipmentOptions = {
   powerLevel: {
     mundane: {
-      name: "Mundane",
+      name: "TERIOCK.TERMS.PowerLevel.mundane",
       icon: icons.powerLevel.mundane,
       color: colors.brown,
     },
     enchanted: {
-      name: "Enchanted",
+      name: "TERIOCK.TERMS.PowerLevel.enchanted",
       icon: icons.powerLevel.enchanted,
       color: colors.blue,
     },
     magic: {
-      name: "Magic",
+      name: "TERIOCK.TERMS.PowerLevel.magic",
       icon: icons.powerLevel.magic,
       color: colors.purple,
     },
     unknown: {
-      name: "Unknown",
+      name: "TERIOCK.TERMS.PowerLevel.unknown",
       icon: icons.powerLevel.unknown,
       color: colors.grey,
     },
   },
   powerLevelShort: {
-    mundane: "Mundane",
-    enchanted: "Enchanted",
-    magic: "Magic",
-    unknown: "Unknown",
+    mundane: "TERIOCK.TERMS.PowerLevel.mundane",
+    enchanted: "TERIOCK.TERMS.PowerLevel.enchanted",
+    magic: "TERIOCK.TERMS.PowerLevel.magic",
+    unknown: "TERIOCK.TERMS.PowerLevel.unknown",
   },
   equipmentClasses: index.equipmentClasses,
   weaponFightingStyles: index.weaponFightingStyles,
   equipmentType: index.equipment,
   unidentifiedProperties: ["Morganti", "Master Crafted"],
 };
+
+preLocalize("options.equipment.powerLevel", { keys: ["name"] });
+preLocalize("options.equipment.powerLevelShort");

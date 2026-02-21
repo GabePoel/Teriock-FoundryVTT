@@ -47,7 +47,7 @@ export default class ChatStatusAutomation extends CritAutomation {
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       status: new fields.StringField({
-        choices: TERIOCK.index.conditions,
+        choices: TERIOCK.reference.conditions,
         label: "TERIOCK.TERMS.Common.condition",
       }),
       relation: new fields.StringField({

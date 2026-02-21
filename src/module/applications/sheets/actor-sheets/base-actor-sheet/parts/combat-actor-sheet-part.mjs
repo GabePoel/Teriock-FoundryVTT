@@ -53,8 +53,12 @@ export default (Base) =>
           ...this.document.bodyParts,
         ],
         {
-          hint: "Select the default equipment you attack with.",
-          label: "Select Primary Attacker",
+          hint: game.i18n.localize(
+            "TERIOCK.SHEETS.Actor.ACTIONS.SelectAttacker.hint",
+          ),
+          label: game.i18n.localize(
+            "TERIOCK.SHEETS.Actor.ACTIONS.SelectAttacker.label",
+          ),
           openable: true,
           textKey: "system.summarizedAttack",
           checked: this.document.system.primaryAttacker?.uuid,
@@ -75,8 +79,12 @@ export default (Base) =>
       const attacker = await selectDocumentDialog(
         this.document.activeArmaments,
         {
-          hint: "Select the default equipment you block with.",
-          label: "Select Primary Blocker",
+          hint: game.i18n.localize(
+            "TERIOCK.SHEETS.Actor.ACTIONS.SelectBlocker.hint",
+          ),
+          label: game.i18n.localize(
+            "TERIOCK.SHEETS.Actor.ACTIONS.SelectBlocker.label",
+          ),
           openable: true,
           textKey: "system.summarizedBlock",
           checked: this.document.system.primaryBlocker?.uuid,

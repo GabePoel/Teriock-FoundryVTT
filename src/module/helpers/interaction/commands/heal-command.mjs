@@ -11,7 +11,7 @@ async function primary(actor) {
 const command = {
   icon: icons.effect.heal,
   id: "heal",
-  label: "Heal",
+  label: "TERIOCK.EFFECTS.Common.heal",
   primary,
 };
 

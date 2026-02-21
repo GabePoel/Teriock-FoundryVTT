@@ -49,7 +49,7 @@ export default (Base) => {
           }),
           featSaveAttribute: new fields.StringField({
             initial: "mov",
-            choices: TERIOCK.index.attributes,
+            choices: TERIOCK.reference.attributes,
           }),
           interaction: new fields.StringField({
             initial: "attack",

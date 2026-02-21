@@ -130,7 +130,9 @@ export default class AbilitySheet extends mix(
         "system.costs.break": "shatter",
       },
       ".ab-es-incant-button": {
-        "system.elderSorceryIncant": "Incant.",
+        "system.elderSorceryIncant": game.i18n.localize(
+          "TERIOCK.SYSTEMS.Ability.FIELDS.elderSorceryIncant.default",
+        ),
         "system.elderSorcery": true,
       },
       ".ab-expansion-button": {

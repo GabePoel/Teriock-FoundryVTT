@@ -19,8 +19,12 @@ export default class TeriockUsers extends BaseWorldCollectionMixin(Users) {
   async queryGM(queryName, queryData, queryOptions) {
     let {
       notifyFailure = true,
-      failPrefix = "Could not complete query.",
-      failReason = "No GM is currently signed in.",
+      failPrefix = game.i18n.localize(
+        "TERIOCK.SYSTEMS.BaseUser.QUERY.failPrefix",
+      ),
+      failReason = game.i18n.localize(
+        "TERIOCK.SYSTEMS.BaseUser.QUERY.failReason",
+      ),
       failMessage = "",
     } = queryOptions;
     if (!failMessage) {

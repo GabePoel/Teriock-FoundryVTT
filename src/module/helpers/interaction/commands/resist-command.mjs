@@ -29,7 +29,10 @@ const command = {
   ...thresholdCommand,
   icon: icons.effect.resist,
   id: "resist",
-  label: (options) => `Roll ${options?.hex ? "Hexproof" : "Resistance"}`,
+  label: (options) =>
+    options?.hex
+      ? game.i18n.localize("TERIOCK.ROLLS.Hexproof.button")
+      : game.i18n.localize("TERIOCK.ROLLS.Resist.button"),
   primary,
   secondary,
 };

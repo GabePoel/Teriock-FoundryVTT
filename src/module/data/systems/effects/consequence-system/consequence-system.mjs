@@ -52,10 +52,10 @@ export default class ConsequenceSystem extends mix(
       expirations: new fields.SchemaField({
         conditions: new fields.SchemaField({
           present: new fields.SetField(
-            new fields.StringField({ choices: TERIOCK.index.conditions }),
+            new fields.StringField({ choices: TERIOCK.reference.conditions }),
           ),
           absent: new fields.SetField(
-            new fields.StringField({ choices: TERIOCK.index.conditions }),
+            new fields.StringField({ choices: TERIOCK.reference.conditions }),
           ),
         }),
         movement: new fields.BooleanField({ initial: false }),
@@ -167,7 +167,7 @@ export default class ConsequenceSystem extends mix(
         wrappers: [
           ...Array.from(
             this.parent.statuses.map(
-              (status) => TERIOCK.index.conditions[status],
+              (status) => TERIOCK.reference.conditions[status],
             ),
           ),
           this.critical

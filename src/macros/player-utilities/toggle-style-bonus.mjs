@@ -8,5 +8,7 @@ if (actor) {
     ui.notifications.info(`Style bonus disabled for ${actor.name}.`);
   }
 } else {
-  ui.notifications.warn("No actor selected.");
+  ui.notifications.warn("TERIOCK.DIALOGS.Common.ERRORS.noActor", {
+    localize: true,
+  });
 }

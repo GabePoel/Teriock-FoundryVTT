@@ -1,6 +1,10 @@
+import { preLocalize } from "../../helpers/localization.mjs";
+
 export const attunementOptions = {
   attunementType: {
-    equipment: "Equipment",
-    mount: "Mount",
+    equipment: "TYPES.equipment",
+    mount: "TYPES.mount",
   },
 };
+
+preLocalize("options.attunement.attunementType");

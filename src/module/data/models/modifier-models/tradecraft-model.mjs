@@ -15,7 +15,7 @@ export default class TradecraftModel extends ModifierModel {
 
   /** @inheritDoc */
   get name() {
-    return TERIOCK.index.tradecrafts[this.key];
+    return TERIOCK.reference.tradecrafts[this.key];
   }
 
   /** @inheritDoc */

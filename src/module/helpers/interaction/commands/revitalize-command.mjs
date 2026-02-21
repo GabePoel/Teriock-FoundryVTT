@@ -11,7 +11,7 @@ async function primary(actor) {
 const command = {
   icon: icons.effect.revitalize,
   id: "revitalize",
-  label: "Revitalize",
+  label: "TERIOCK.EFFECTS.Common.revitalize",
   primary,
 };
 

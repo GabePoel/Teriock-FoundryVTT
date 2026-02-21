@@ -86,7 +86,7 @@ export default (Base) => {
               "TERIOCK.SYSTEMS.Species.FIELDS.traits.label",
             ),
             wrappers: [
-              ...this.traits.map((t) => TERIOCK.index.traits[t]),
+              ...this.traits.map((t) => TERIOCK.reference.traits[t]),
               this.isTransformation
                 ? TERIOCK.options.effect.transformationLevel[
                     this.transformationLevel

@@ -103,7 +103,9 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
     );
     totalStonesCount += startingStones[color];
     pulledStones[color] = 0;
-    wrappers.push(`${startingStones[color]} ${TERIOCK.index.deathBag[color]}`);
+    wrappers.push(
+      `${startingStones[color]} ${TERIOCK.reference.deathBag[color]}`,
+    );
   }
   if (totalStonesCount > 99) {
     ui.notifications.error(

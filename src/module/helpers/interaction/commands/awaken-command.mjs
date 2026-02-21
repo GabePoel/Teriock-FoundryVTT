@@ -15,7 +15,7 @@ async function primary(actor) {
 const command = {
   icon: icons.effect.awaken,
   id: "awaken",
-  label: "Awaken",
+  label: "TERIOCK.EFFECTS.Common.awaken",
   primary,
 };
 

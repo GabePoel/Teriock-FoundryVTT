@@ -18,18 +18,18 @@ export default (Base) => {
         return Object.assign(super.defineSchema(), {
           effectTypes: new fields.SetField(
             new fields.StringField({
-              choices: TERIOCK.index.effectTypes,
+              choices: TERIOCK.reference.effectTypes,
             }),
           ),
           elements: new fields.SetField(
             new fields.StringField({
-              choices: TERIOCK.index.elements,
+              choices: TERIOCK.reference.elements,
             }),
           ),
           form: new fields.StringField({ initial: "normal" }),
           powerSources: new fields.SetField(
             new fields.StringField({
-              choices: TERIOCK.index.powerSources,
+              choices: TERIOCK.reference.powerSources,
             }),
           ),
           tag: new fields.StringField({ initial: "" }),
@@ -120,7 +120,7 @@ export default (Base) => {
         // Enforce power sources
         for (const ps of this.powerSources) {
           if (
-            Object.keys(TERIOCK.index.effectTypes).includes(ps) &&
+            Object.keys(TERIOCK.reference.effectTypes).includes(ps) &&
             !this.effectTypes.has(ps)
           ) {
             this.effectTypes.add(ps);

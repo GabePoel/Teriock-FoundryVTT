@@ -7,29 +7,49 @@ export default class AbilitySettingsModel extends ChildSettingsModel {
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       promptCostGp: new fields.BooleanField({
-        hint: "Prompt user to spend variable GP upon use.",
+        hint: game.i18n.localize(
+          "TERIOCK.MODELS.AbilitySettings.promptCostGp.hint",
+        ),
         initial: true,
-        label: "Prompt GP",
+        label: game.i18n.localize(
+          "TERIOCK.MODELS.AbilitySettings.promptCostGp.label",
+        ),
       }),
       promptCostHp: new fields.BooleanField({
-        hint: "Prompt user to spend variable HP upon use.",
+        hint: game.i18n.localize(
+          "TERIOCK.MODELS.AbilitySettings.promptCostHp.hint",
+        ),
         initial: true,
-        label: "Prompt HP",
+        label: game.i18n.localize(
+          "TERIOCK.MODELS.AbilitySettings.promptCostHp.label",
+        ),
       }),
       promptCostMp: new fields.BooleanField({
-        hint: "Prompt user to spend variable MP upon use.",
+        hint: game.i18n.localize(
+          "TERIOCK.MODELS.AbilitySettings.promptCostMp.hint",
+        ),
         initial: true,
-        label: "Prompt MP",
+        label: game.i18n.localize(
+          "TERIOCK.MODELS.AbilitySettings.promptCostMp.label",
+        ),
       }),
       promptHeighten: new fields.BooleanField({
-        hint: "Prompt user to heighten upon use.",
+        hint: game.i18n.localize(
+          "TERIOCK.MODELS.AbilitySettings.promptHeighten.hint",
+        ),
         initial: true,
-        label: "Prompt Heighten",
+        label: game.i18n.localize(
+          "TERIOCK.MODELS.AbilitySettings.promptHeighten.label",
+        ),
       }),
       promptTemplate: new fields.BooleanField({
-        hint: "Prompt user to place a template upon use.",
+        hint: game.i18n.localize(
+          "TERIOCK.MODELS.AbilitySettings.promptTemplate.hint",
+        ),
         initial: true,
-        label: "Prompt Template",
+        label: game.i18n.localize(
+          "TERIOCK.MODELS.AbilitySettings.promptTemplate.label",
+        ),
       }),
     });
   }

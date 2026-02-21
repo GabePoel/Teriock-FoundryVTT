@@ -276,9 +276,11 @@ function enrichCommand(match, options) {
     ),
   );
   if (!label) {
-    label = getInteractionEntryValue(command, "label", interactionOptions);
+    label = game.i18n.localize(
+      getInteractionEntryValue(command, "label", interactionOptions),
+    );
   }
-  link.appendChild(document.createTextNode(label));
+  link.appendChild(document.createTextNode(game.i18n.localize(label)));
   return link;
 }
 

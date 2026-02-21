@@ -7,6 +7,12 @@ const { fields } = foundry.data;
  * @implements {Teriock.Models.DurationModelInterface}
  */
 export default class DurationModel extends TimeUnitModel {
+  /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [
+    ...super.LOCALIZATION_PREFIXES,
+    "TERIOCK.MODELS.Duration",
+  ];
+
   /**
    * @inheritDoc
    * @returns {Teriock.Units.UnitEntry[]}
@@ -16,7 +22,7 @@ export default class DurationModel extends TimeUnitModel {
       ...super.infiniteChoiceEntries,
       {
         id: "passive",
-        label: "Passive",
+        label: game.i18n.localize("TERIOCK.MODELS.Duration.UNITS.passive"),
       },
     ];
   }
@@ -29,7 +35,7 @@ export default class DurationModel extends TimeUnitModel {
     return [
       {
         id: "instant",
-        label: "Instant",
+        label: game.i18n.localize("TERIOCK.MODELS.Duration.UNITS.instant"),
       },
     ];
   }
@@ -39,32 +45,15 @@ export default class DurationModel extends TimeUnitModel {
     return Object.assign(super.defineSchema(), {
       conditions: new fields.SchemaField({
         present: new fields.SetField(
-          new fields.StringField({ choices: TERIOCK.index.conditions }),
-          {
-            label: "Present Conditions",
-            hint: "What conditions must be present in order for this ability to be active?",
-          },
+          new fields.StringField({ choices: TERIOCK.reference.conditions }),
         ),
         absent: new fields.SetField(
-          new fields.StringField({ choices: TERIOCK.index.conditions }),
-          {
-            label: "Absent Conditions",
-            hint: "What conditions must be absent in order for this ability to be active?",
-          },
+          new fields.StringField({ choices: TERIOCK.reference.conditions }),
         ),
       }),
-      dawn: new fields.BooleanField({
-        label: "Dawn",
-        hint: "Does the effect expire at dawn?",
-      }),
-      stationary: new fields.BooleanField({
-        label: "Stationary",
-        hint: "Do you need to be stationary for this ability to be active?",
-      }),
-      description: new fields.StringField({
-        label: "Description",
-        hint: "Optional description that overrides the default duration text.",
-      }),
+      dawn: new fields.BooleanField(),
+      stationary: new fields.BooleanField(),
+      description: new fields.StringField(),
     });
   }
 
@@ -92,11 +81,11 @@ export default class DurationModel extends TimeUnitModel {
     const parts = [];
     if (this.stationary) parts.push("Stationary");
     parts.push(
-      ...this.conditions.present.map((c) => TERIOCK.index.conditions[c]),
+      ...this.conditions.present.map((c) => TERIOCK.reference.conditions[c]),
     );
     parts.push(
       ...this.conditions.absent.map((c) =>
-        `Not ${TERIOCK.index.conditions[c]}`
+        `Not ${TERIOCK.reference.conditions[c]}`
           .replace("Not Down", "Up")
           .replace("Not Dead", "Alive")
           .replace("Not Unconscious", "Conscious"),
@@ -105,9 +94,15 @@ export default class DurationModel extends TimeUnitModel {
     if (parts.length > 1) parts.push("and " + parts.pop());
     let out = "";
     if (parts.length >= 1) {
-      out = `While ${parts.join(parts.length > 2 ? ", " : " ")}`;
+      out = game.i18n.format("TERIOCK.MODELS.Duration.PREREQUISITES.ongoing", {
+        partial: parts.join(parts.length > 2 ? ", " : " "),
+      });
     }
-    if (this.dawn) out = `Until Dawn ${out}`;
+    if (this.dawn)
+      out = game.i18n.format(
+        "TERIOCK.MODELS.Duration.PREREQUISITES.untilDawn",
+        { partial: out },
+      );
     return out.trim();
   }
 
@@ -120,7 +115,8 @@ export default class DurationModel extends TimeUnitModel {
       if (this.unit === "passive") text = "";
       return `${text} ${s}`;
     }
-    if (this.unit === "passive") text = "Always Active";
+    if (this.unit === "passive")
+      text = game.i18n.localize("TERIOCK.MODELS.Duration.UNITS.alwaysActive");
     return text;
   }
 }

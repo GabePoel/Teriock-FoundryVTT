@@ -1,104 +1,111 @@
+import { preLocalize } from "../../helpers/localization.mjs";
 import { icons } from "../display/icons.mjs";
 
 export const rankOptions = {
   mage: {
     classes: {
       flameMage: {
-        name: "Flame Mage",
+        name: "TERIOCK.TERMS.Classes.flameMage",
         icon: icons.class.flameMage,
       },
       lifeMage: {
-        name: "Life Mage",
+        name: "TERIOCK.TERMS.Classes.lifeMage",
         icon: icons.class.lifeMage,
       },
       natureMage: {
-        name: "Nature Mage",
+        name: "TERIOCK.TERMS.Classes.natureMage",
         icon: icons.class.natureMage,
       },
       necromancer: {
-        name: "Necromancer",
+        name: "TERIOCK.TERMS.Classes.necromancer",
         icon: icons.class.necromancer,
       },
       stormMage: {
-        name: "Storm Mage",
+        name: "TERIOCK.TERMS.Classes.stormMage",
         icon: icons.class.stormMage,
       },
     },
     hp: 8,
     icon: icons.archetype.mage,
     mp: 12,
-    name: "Mage",
+    name: "TERIOCK.TERMS.Archetypes.mage",
   },
   semi: {
     classes: {
       archer: {
-        name: "Archer",
+        name: "TERIOCK.TERMS.Classes.archer",
         icon: icons.class.archer,
       },
       assassin: {
-        name: "Assassin",
+        name: "TERIOCK.TERMS.Classes.assassin",
         icon: icons.class.assassin,
       },
       corsair: {
-        name: "Corsair",
+        name: "TERIOCK.TERMS.Classes.corsair",
         icon: icons.class.corsair,
       },
       ranger: {
-        name: "Ranger",
+        name: "TERIOCK.TERMS.Classes.ranger",
         icon: icons.class.ranger,
       },
       thief: {
-        name: "Thief",
+        name: "TERIOCK.TERMS.Classes.thief",
         icon: icons.class.thief,
       },
     },
     hp: 10,
     icon: icons.archetype.semi,
     mp: 10,
-    name: "Semi",
+    name: "TERIOCK.TERMS.Archetypes.semi",
   },
   warrior: {
     classes: {
       berserker: {
-        name: "Berserker",
+        name: "TERIOCK.TERMS.Classes.berserker",
         icon: icons.class.berserker,
       },
       duelist: {
-        name: "Duelist",
+        name: "TERIOCK.TERMS.Classes.duelist",
         icon: icons.class.duelist,
       },
       knight: {
-        name: "Knight",
+        name: "TERIOCK.TERMS.Classes.knight",
         icon: icons.class.knight,
       },
       paladin: {
-        name: "Paladin",
+        name: "TERIOCK.TERMS.Classes.paladin",
         icon: icons.class.paladin,
       },
       veteran: {
-        name: "Veteran",
+        name: "TERIOCK.TERMS.Classes.veteran",
         icon: icons.class.veteran,
       },
     },
     hp: 12,
     icon: icons.archetype.warrior,
     mp: 8,
-    name: "Warrior",
+    name: "TERIOCK.TERMS.Archetypes.warrior",
   },
   everyman: {
     classes: {
       tradesman: {
-        name: "Tradesman",
+        name: "TERIOCK.TERMS.Classes.tradesman",
         icon: icons.class.tradesman,
       },
       journeyman: {
-        name: "Journeyman",
+        name: "TERIOCK.TERMS.Classes.journeyman",
         icon: icons.class.journeyman,
       },
     },
     hp: 10,
     icon: icons.archetype.everyman,
     mp: 10,
-    name: "Everyman",
+    name: "TERIOCK.TERMS.Archetypes.everyman",
   },
 };
+
+preLocalize("options.rank", { keys: ["name"] });
+preLocalize("options.rank.mage.classes", { keys: ["name"] });
+preLocalize("options.rank.semi.classes", { keys: ["name"] });
+preLocalize("options.rank.warrior.classes", { keys: ["name"] });
+preLocalize("options.rank.everyman.classes", { keys: ["name"] });

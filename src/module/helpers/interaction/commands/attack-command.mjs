@@ -14,7 +14,7 @@ async function primary(actor, options = {}) {
 const command = {
   icon: () => TERIOCK.options.document.ability.icon,
   id: "attack",
-  label: "Attack",
+  label: "TERIOCK.COMMANDS.Attack.label",
   primary,
 };
 
