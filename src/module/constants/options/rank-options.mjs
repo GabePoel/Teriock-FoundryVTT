@@ -89,11 +89,11 @@ export const rankOptions = {
   everyman: {
     classes: {
       tradesman: {
-        name: "TERIOCK.TERMS.Classes.tradesman",
+        name: "TERIOCK.TERMS.Everyman.tradesman",
         icon: icons.class.tradesman,
       },
       journeyman: {
-        name: "TERIOCK.TERMS.Classes.journeyman",
+        name: "TERIOCK.TERMS.Everyman.journeyman",
         icon: icons.class.journeyman,
       },
     },
