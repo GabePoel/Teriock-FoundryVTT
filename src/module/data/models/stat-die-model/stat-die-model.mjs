@@ -160,7 +160,9 @@ export default class StatDieModel extends EmbeddedDataModel {
             ),
             icon: makeIconClass(getRollIcon(this.formula), "title"),
           },
-          content: game.i18n.localize("TERIOCK.MODELS.StatDie.Reroll.content"),
+          content: game.i18n.localize(
+            "TERIOCK.MODELS.StatDie.DIALOG.Reroll.content",
+          ),
           modal: true,
           rejectClose: false,
         });

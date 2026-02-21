@@ -56,7 +56,7 @@ export default class StatPoolModel extends EmbeddedDataModel {
    * @returns {string}
    */
   get dieName() {
-    return "Stat Dice";
+    return game.i18n.localize("TERIOCK.MODELS.StatPool.PANELS.name");
   }
 
   /**
