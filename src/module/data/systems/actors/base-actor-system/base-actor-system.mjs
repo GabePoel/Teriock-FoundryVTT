@@ -1,4 +1,4 @@
-import { dotJoin, prefix } from "../../../../helpers/string.mjs";
+import { dotJoin } from "../../../../helpers/string.mjs";
 import { makeIcon, mix } from "../../../../helpers/utils.mjs";
 import { ActorSettingsModel } from "../../../models/settings-models/_module.mjs";
 import { CommonSystem } from "../../abstract/_module.mjs";
@@ -97,9 +97,15 @@ export default class BaseActorSystem extends mix(
     const parts = super.embedParts;
     parts.subtitle = this.metadata.type;
     parts.text = dotJoin([
-      prefix(this.scaling.lvl, "LVL"),
-      prefix(this.scaling.br, "BR"),
-      prefix(this.size.number.value, "Size"),
+      game.i18n.format("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.lvl", {
+        number: this.scaling.lvl,
+      }),
+      game.i18n.format("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.br", {
+        number: this.scaling.br,
+      }),
+      game.i18n.format("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.size", {
+        number: this.size.number.value,
+      }),
     ]);
     parts.makeTooltip = this.parent.isViewer;
     return parts;
@@ -110,7 +116,7 @@ export default class BaseActorSystem extends mix(
     const parts = super.panelParts;
     parts.blocks = [
       {
-        title: "Notes",
+        title: game.i18n.localize("TERIOCK.SYSTEMS.BaseActor.PANELS.notes"),
         text: this.notes,
       },
     ];
@@ -142,7 +148,7 @@ export default class BaseActorSystem extends mix(
   getCardContextMenuEntries(doc) {
     return [
       {
-        name: "Open Token",
+        name: game.i18n.localize("TERIOCK.SYSTEMS.BaseActor.MENU.openToken"),
         icon: makeIcon(TERIOCK.display.icons.document.token, "contextMenu"),
         condition: () => this.parent.token && this.parent.token.isViewer,
         callback: async () => this.parent.token.sheet.render(true),

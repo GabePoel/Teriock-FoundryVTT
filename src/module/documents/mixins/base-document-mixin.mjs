@@ -131,7 +131,9 @@ export default function BaseDocumentMixin(Base) {
       async safeDelete() {
         const remove = await TeriockDialog.confirm({
           window: {
-            title: `Delete ${this.nameString || this.name}`,
+            title: game.i18n.format("TERIOCK.SYSTEMS.Common.MENU.safeDelete", {
+              name: this.nameString || this.name,
+            }),
             icon: makeIconClass(icons.ui.delete, "title"),
           },
           content: game.i18n.localize("TERIOCK.SYSTEMS.Common.DIALOG.delete"),

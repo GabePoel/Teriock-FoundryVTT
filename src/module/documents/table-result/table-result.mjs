@@ -31,7 +31,9 @@ export default class TeriockTableResult extends mix(
     /** @type {Teriock.MessageData.MessagePanel} */
     const parts = super.panelParts;
     parts.icon = "table-rows";
-    parts.label = "Table Result";
+    parts.label = game.i18n.localize(
+      "TERIOCK.SYSTEMS.TableResult.PANELS.tableResult",
+    );
     parts.image = this.icon;
     parts.blocks.push({
       title: game.i18n.localize(
@@ -40,7 +42,9 @@ export default class TeriockTableResult extends mix(
       text: this.description,
     });
     parts.bars.push({
-      label: "Result Type",
+      label: game.i18n.localize(
+        "TERIOCK.SYSTEMS.TableResult.PANELS.resultType",
+      ),
       icon: TERIOCK.display.icons.ui.info,
       wrappers: [this.type],
     });
@@ -48,7 +52,9 @@ export default class TeriockTableResult extends mix(
       const index = fromUuidSync(this.documentUuid);
       parts.associations = [
         {
-          title: "Documents",
+          title: game.i18n.localize(
+            "TERIOCK.SYSTEMS.TableResult.PANELS.documents",
+          ),
           icon: TERIOCK.display.icons.ui.document,
           cards: [
             {
@@ -71,7 +77,7 @@ export default class TeriockTableResult extends mix(
   getCardContextMenuEntries(doc) {
     return [
       {
-        name: "Open Referenced Document",
+        name: game.i18n.localize("TERIOCK.SYSTEMS.TableResult.MENU.open"),
         icon: makeIcon(TERIOCK.display.icons.ui.document, "contextMenu"),
         condition: () => this.documentUuid,
         callback: async () =>

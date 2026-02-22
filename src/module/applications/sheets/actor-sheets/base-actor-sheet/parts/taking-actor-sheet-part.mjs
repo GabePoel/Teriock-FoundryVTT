@@ -35,16 +35,21 @@ export default (Base) =>
         label: toTitleCase(type),
         min: 0,
         integer: true,
-        hint: `The amount of ${toTitleCase(type).toLowerCase()} to take.`,
+        hint: game.i18n.format(
+          "TERIOCK.SHEETS.Actor.ACTIONS.TakeRollable.hint",
+          { effect: TERIOCK.options.take[type]?.label?.toLowerCase() },
+        ),
       });
       await TeriockDialog.prompt({
         window: {
-          title: `Take ${toTitleCase(type)}`,
+          title: TERIOCK.options.take[type]?.take,
           icon: makeIconClass(TERIOCK.options.take[type].icon, "title"),
         },
         content: field.toFormGroup({}, { name: type }).outerHTML,
         ok: {
-          label: "Confirm",
+          label: game.i18n.localize(
+            "TERIOCK.SHEETS.Actor.ACTIONS.TakeRollable.ok",
+          ),
           callback: (_event, button) => {
             let input = button.form.elements.namedItem(type).value;
             if (input) {
@@ -72,19 +77,30 @@ export default (Base) =>
       if (["damage", "drain"].includes(type)) {
         const field = new fields.NumberField({
           initial: this.document.system[stat].morganti ?? 0,
-          label: `Morganti ${toTitleCase(type)}`,
+          label: game.i18n.format(
+            "TERIOCK.SHEETS.Actor.ACTIONS.ApplyMorganti.label",
+            { effect: TERIOCK.options.take[type]?.label },
+          ),
           min: 0,
           integer: true,
-          hint: `The total amount of morganti ${toTitleCase(type).toLowerCase()} you have ever taken.`,
+          hint: game.i18n.format(
+            "TERIOCK.SHEETS.Actor.ACTIONS.ApplyMorganti.hint",
+            { effect: TERIOCK.options.take[type]?.label?.toLowerCase() },
+          ),
         });
         await TeriockDialog.prompt({
           window: {
-            title: `Set Morganti ${toTitleCase(type)}`,
+            title: game.i18n.format(
+              "TERIOCK.SHEETS.Actor.ACTIONS.ApplyMorganti.title",
+              { effect: TERIOCK.options.take[type]?.label },
+            ),
             icon: makeIconClass(TERIOCK.options.take[type].icon, "title"),
           },
           content: field.toFormGroup({}, { name: type }).outerHTML,
           ok: {
-            label: "Confirm",
+            label: game.i18n.localize(
+              "TERIOCK.SHEETS.Actor.ACTIONS.ApplyMorganti.ok",
+            ),
             callback: async (_event, button) => {
               let input = button.form.elements.namedItem(type).value;
               if (input) {
