@@ -529,6 +529,15 @@ export default class CommonSystem extends mix(
     } = options;
     if (this.parent._stats.compendiumSource) {
       if (updateDocument) {
+        const updateObject = {};
+        const automations =
+          /** @type {BaseAutomation[]} */ this.automations?.contents;
+        if (automations) {
+          for (const automation of automations) {
+            updateObject[`${automation.fieldPath}.-=${automation.id}`] = null;
+          }
+          await this.parent.update(updateObject);
+        }
         const indexObject = await this.getCompendiumSourceRefreshObject();
         delete indexObject.flags;
         delete indexObject.system?._ref;

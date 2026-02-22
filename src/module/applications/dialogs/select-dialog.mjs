@@ -243,7 +243,7 @@ export async function selectCompendiumsDialog(selected = true) {
     .filter((p) => !p.locked)
     .map((p) => {
       return {
-        name: p.title,
+        name: game.i18n.localize(p.title),
         uuid: p.collection,
         img: p.banner || "icons/svg/book.svg",
       };
