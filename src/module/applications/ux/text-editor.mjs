@@ -52,9 +52,22 @@ export default class TeriockTextEditor extends TextEditor {
     if (options.noBlocks) delete parts.blocks;
     if (options.noAssociations) delete parts.associations;
     await this.enrichPanel(parts, options);
-    return await foundry.applications.handlebars.renderTemplate(
+    return await this.renderTemplate(
       systemPath("templates/ui-templates/panel.hbs"),
       parts,
     );
+  }
+
+  /**
+   * A wrapper for rendering templates with handlebars that ensures `TERIOCK` is always available.
+   * @param {string} path
+   * @param {object} data
+   * @returns {Promise<string>}
+   */
+  static async renderTemplate(path, data) {
+    return await foundry.applications.handlebars.renderTemplate(path, {
+      ...data,
+      TERIOCK,
+    });
   }
 }

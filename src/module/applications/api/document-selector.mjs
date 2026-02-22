@@ -1,24 +1,18 @@
 import { makeIconClass } from "../../helpers/utils.mjs";
-import { bindCommonActions } from "../shared/_module.mjs";
+import TeriockBaseApplication from "./base-application.mjs";
 
-const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
 const { SearchFilter } = foundry.applications.ux;
 
-// noinspection JSClosureCompilerSyntax
 /**
- * @extends {ApplicationV2}
- * @mixes HandlebarsApplicationMixin
  * @property {Function} _finish
  */
-export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(
-  ApplicationV2,
-) {
+export default class TeriockDocumentSelector extends TeriockBaseApplication {
   /**
    * @inheritDoc
    * @type {Partial<ApplicationConfiguration>}
    */
   static DEFAULT_OPTIONS = {
-    classes: ["teriock", "dynamic-select", "dialog"],
+    classes: ["dynamic-select", "dialog"],
     actions: {
       ok: this._onGetSelected,
       cancel: this._onCancel,
@@ -162,7 +156,6 @@ export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(
   /** @inheritDoc */
   async _onRender(options = {}) {
     await super._onRender(options);
-    bindCommonActions(this.element);
     this._initSearchFilter();
     this._initClickLoader();
   }
@@ -171,7 +164,6 @@ export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(
   async _prepareContext(options = {}) {
     const context = await super._prepareContext(options);
     Object.assign(context, {
-      TERIOCK,
       documents: this.docs,
       hint: this.hint,
       multi: this.multi,

@@ -29,14 +29,30 @@ export class ReviveHandler extends CommandButtonHandlerBuilder(reviveCommand) {}
 /**
  * Action to trigger healing.
  */
-export class HealHandler extends CommandButtonHandlerBuilder(healCommand) {}
+export class HealHandler extends CommandButtonHandlerBuilder(healCommand) {
+  /**
+   * @inheritDoc
+   * @param {Partial<Teriock.Dialog.HealDialogOptions>} [options]
+   */
+  static buildButton(options = {}) {
+    return super.buildButton(options);
+  }
+}
 
 /**
  * Action to trigger revitalizing.
  */
 export class RevitalizeHandler extends CommandButtonHandlerBuilder(
   revitalizeCommand,
-) {}
+) {
+  /**
+   * @inheritDoc
+   * @param {Partial<Teriock.Dialog.StatDialogOptions>} [options]
+   */
+  static buildButton(options = {}) {
+    return super.buildButton(options);
+  }
+}
 
 /**
  * Action to trigger pulling from the death bag.

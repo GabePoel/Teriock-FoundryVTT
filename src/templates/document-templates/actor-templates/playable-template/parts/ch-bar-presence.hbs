@@ -1,0 +1,28 @@
+<div class="character-presence-container character-bar-container toutline {{#if
+  system.presence.overflow}}overflow{{/if}}">
+  <div
+    class="character-presence-bar"
+    style="grid-template-columns:{{repeatStr system.presence.max ' 1fr'}};"
+    data-tooltip="{{localize
+      "TERIOCK.SHEETS.Actor.SIDEBAR.Bars.presence.tooltip"
+      value=system.presence.value
+      max=system.presence.max
+    }}"
+  >
+    {{#if (gte system.presence.value 1)}}
+      <div
+        class="presence-indicator used"
+        style="grid-column: span {{{system.presence.value}}}; grid-template-columns:{{repeatStr
+          system.presence.value
+          ' 1fr'}}; display: grid;"
+      >
+        {{#repeat system.presence.value}}
+          <div class="presence-indicator empty" style="background: transparent;"></div>
+        {{/repeat}}
+      </div>
+    {{/if}}
+    {{#repeat system.attributes.unp.score}}
+      <div class="presence-indicator unused"></div>
+    {{/repeat}}
+  </div>
+</div>

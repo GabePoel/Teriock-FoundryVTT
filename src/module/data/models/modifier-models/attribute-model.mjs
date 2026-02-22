@@ -12,12 +12,12 @@ export default class AttributeModel extends ModifierModel {
 
   /** @inheritDoc */
   get quickValue() {
-    return 2 * this.score + this.competence.bonus;
+    return 2 * this.score;
   }
 
   /** @inheritDoc */
   get useText() {
-    return `${this.name} Save`;
+    return game.i18n.format("TERIOCK.ROLLS.Feat.name", { value: this.name });
   }
 
   /** @inheritDoc */
@@ -33,12 +33,10 @@ export default class AttributeModel extends ModifierModel {
 
   /** @inheritDoc */
   getLocalRollData() {
-    const localRollData = super.getLocalRollData();
-    Object.assign(localRollData, {
+    return Object.assign(super.getLocalRollData(), {
       passive: this.passive,
       pas: this.passive,
     });
-    return localRollData;
   }
 
   /** @inheritDoc */

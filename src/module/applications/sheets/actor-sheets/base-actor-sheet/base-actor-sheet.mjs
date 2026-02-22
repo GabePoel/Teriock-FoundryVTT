@@ -39,7 +39,7 @@ export default class BaseActorSheet extends mix(
    * @type {Partial<ApplicationConfiguration>}
    */
   static DEFAULT_OPTIONS = {
-    classes: ["teriock", "character"],
+    classes: ["unpadded", "character"],
     position: {
       width: 800,
       height: 600,

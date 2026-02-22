@@ -1,10 +1,10 @@
 import { makeIconClass } from "../../helpers/utils.mjs";
-import { bindCommonActions } from "../shared/_module.mjs";
+import { BaseApplicationMixin } from "../shared/mixins/_module.mjs";
 
 const { DialogV2 } = foundry.applications.api;
 
 /** @inheritDoc */
-export default class TeriockDialog extends DialogV2 {
+export default class TeriockDialog extends BaseApplicationMixin(DialogV2) {
   /**
    * @inheritDoc
    * @type {Partial<ApplicationConfiguration>}
@@ -14,10 +14,4 @@ export default class TeriockDialog extends DialogV2 {
       icon: makeIconClass("pen", "title"),
     },
   };
-
-  /** @inheritDoc */
-  async _onRender(context, options) {
-    await super._onRender(context, options);
-    bindCommonActions(this.element);
-  }
 }

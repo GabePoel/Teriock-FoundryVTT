@@ -26,6 +26,7 @@ export default (Base) => {
               deterministic: false,
               initial: `2 * @att.${key}.score`,
               label: value,
+              min: -Infinity,
               model: AttributeModel,
               score: -3,
             })),
@@ -60,7 +61,7 @@ export default (Base) => {
         super.prepareDerivedData();
         this.#preparePresence();
         for (const att of Object.values(this.attributes)) {
-          att.passive = 10 + 2 * att.value;
+          att.passive = 10 + att.value;
         }
       }
 

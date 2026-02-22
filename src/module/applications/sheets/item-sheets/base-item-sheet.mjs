@@ -25,7 +25,7 @@ export default class BaseItemSheet extends mix(
    * @type {Partial<ApplicationConfiguration>}
    */
   static DEFAULT_OPTIONS = {
-    classes: ["teriock"],
+    classes: ["unpadded"],
     actions: {
       toggleOnUseDoc: this._onToggleOnUseDoc,
     },

@@ -55,4 +55,8 @@ export default function registerLookupHelpers() {
       return getImage("effect-types", "Resistance");
     }
   });
+
+  Handlebars.registerHelper("getImage", (category, key) =>
+    getImage(category, key),
+  );
 }

@@ -25,7 +25,7 @@ export default class BaseEffectSheet extends mix(
    * @type {Partial<ApplicationConfiguration>}
    */
   static DEFAULT_OPTIONS = {
-    classes: ["teriock", "effect"],
+    classes: ["unpadded", "effect"],
     window: {
       icon: makeIconClass(documentOptions.effect.icon, "title"),
     },

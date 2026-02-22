@@ -40,17 +40,21 @@ export default class TeriockHealManager extends TeriockStatManager {
     const { noStatDice = false } = options;
     this._noDice = noStatDice;
     this._forHarmField = new fields.BooleanField({
+      hint: game.i18n.localize(
+        "TERIOCK.AUTOMATIONS.HealAutomation.FIELDS.forHarm.hint",
+      ),
       initial: false,
-      label: game.i18n.localize("TERIOCK.DIALOGS.Heal.FIELDS.forDamage.label"),
-      hint: game.i18n.localize("TERIOCK.DIALOGS.Heal.FIELDS.forDamage.hint"),
+      label: game.i18n.localize(
+        "TERIOCK.AUTOMATIONS.HealAutomation.FIELDS.forHarm.label",
+      ),
     });
     this._consumeStatDiceField = new fields.BooleanField({
+      hint: game.i18n.localize(
+        "TERIOCK.AUTOMATIONS.HealAutomation.FIELDS.consumeStatDice.hint",
+      ),
       initial: true,
       label: game.i18n.localize(
-        "TERIOCK.DIALOGS.Heal.FIELDS.consumeHitDice.label",
-      ),
-      hint: game.i18n.localize(
-        "TERIOCK.DIALOGS.Heal.FIELDS.consumeHitDice.hint",
+        "TERIOCK.AUTOMATIONS.HealAutomation.FIELDS.consumeStatDice.label",
       ),
     });
   }

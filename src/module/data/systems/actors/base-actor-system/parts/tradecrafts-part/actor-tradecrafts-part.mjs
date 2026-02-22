@@ -26,6 +26,7 @@ export default (Base) => {
               deterministic: false,
               initial: `@tc.${key}.score`,
               label: value,
+              min: -Infinity,
               model: TradecraftModel,
             })),
         );

@@ -19,85 +19,11 @@
         </div>
       </div>
     </div>
-    <!-- Wither Bar Start -->
     <div class="character-status-bar-box">
-      <div class="character-wither-bar-container character-bar-container">
-        <div class="character-wither-bar character-bar toutline">
-          <div
-            class="character-bar-left"
-            style="width: {{barLeft system.wither.value system.wither.max 0}}%;"
-          ></div>
-          <div
-            class="character-bar-temp"
-            style="width: {{barTemp
-              system.wither.value
-              system.wither.max
-              0
-            }}%; {{barTempHide
-              system.wither.value
-            }}"
-          ></div>
-          <div
-            class="character-bar-lost"
-            style="width: {{barLost system.wither.value system.wither.max 0}}%;"
-          ></div>
-        </div>
-        <div class="character-bar-overlay">
-          <div
-            class="character-bar-overlay-row character-wither-bar-overlay-row"
-          >
-            {{numberInput
-              system.wither.value
-              name="system.wither.value"
-              max=system.wither.max
-              min=system.wither.min
-              class="thover-soft character-bar-overlay-left character-bar-overlay-label"
-              dataset=(object tooltip=(localize "TERIOCK.SHEETS.Actor.SIDEBAR.Bars.wither.current"))
-            }}
-            <div class="character-bar-overlay-max character-bar-overlay-label"
-                 data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Bars.wither.max"}}">
-              <span>/ {{system.wither.max}}</span>
-            </div>
-          </div>
-          <div
-            class="take-harm-button thover take-wither-button"
-            data-action="takeRollable"
-            data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Bars.wither.take"}}"
-            data-type="wither"
-          >
-            <i class="fa-fw fa-light fa-{{TERIOCK.display.icons.effect.wither}}"></i>
-          </div>
-        </div>
-      </div>
+      {{> (template "document-templates/actor-templates/playable-template/parts/ch-bar-wither.hbs")}}
     </div>
-    <!-- Wither Bar End -->
-    <div class="character-presence-container character-bar-container toutline {{#if
-      system.presence.overflow}}overflow{{/if}}">
-      <div
-        class="character-presence-bar"
-        style="grid-template-columns:{{repeatStr system.presence.max ' 1fr'}};"
-        data-tooltip="{{localize
-          "TERIOCK.SHEETS.Actor.SIDEBAR.Bars.presence.tooltip"
-          value=system.presence.value
-          max=system.presence.max
-        }}"
-      >
-        {{#if (gte system.presence.value 1)}}
-          <div
-            class="presence-indicator used"
-            style="grid-column: span {{{system.presence.value}}}; grid-template-columns:{{repeatStr
-              system.presence.value
-              ' 1fr'}}; display: grid;"
-          >
-            {{#repeat system.presence.value}}
-              <div class="presence-indicator empty" style="background: transparent;"></div>
-            {{/repeat}}
-          </div>
-        {{/if}}
-        {{#repeat system.attributes.unp.score}}
-          <div class="presence-indicator unused"></div>
-        {{/repeat}}
-      </div>
+    <div class="character-status-bar-box">
+      {{> (template "document-templates/actor-templates/playable-template/parts/ch-bar-presence.hbs")}}
     </div>
   </div>
 </div>

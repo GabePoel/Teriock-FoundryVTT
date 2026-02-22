@@ -37,21 +37,21 @@ export default class TeriockRevitalizeManager extends TeriockStatManager {
   constructor(actor, options, ...args) {
     super(actor, options, ...args);
     this._forHarmField = new fields.BooleanField({
+      hint: game.i18n.localize(
+        "TERIOCK.AUTOMATIONS.RevitalizeAutomation.forHarm.hint",
+      ),
       initial: false,
       label: game.i18n.localize(
-        "TERIOCK.DIALOGS.Revitalize.FIELDS.forDrain.label",
-      ),
-      hint: game.i18n.localize(
-        "TERIOCK.DIALOGS.Revitalize.FIELDS.forDrain.hint",
+        "TERIOCK.AUTOMATIONS.RevitalizeAutomation.forHarm.label",
       ),
     });
     this._consumeStatDiceField = new fields.BooleanField({
+      hint: game.i18n.localize(
+        "TERIOCK.AUTOMATIONS.RevitalizeAutomation.forHarm.hint",
+      ),
       initial: true,
       label: game.i18n.localize(
-        "TERIOCK.DIALOGS.Revitalize.FIELDS.consumeManaDice.label",
-      ),
-      hint: game.i18n.localize(
-        "TERIOCK.DIALOGS.Revitalize.FIELDS.consumeManaDice.hint",
+        "TERIOCK.AUTOMATIONS.RevitalizeAutomation.consumeStatDice.label",
       ),
     });
   }

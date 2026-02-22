@@ -142,7 +142,6 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
         pulledStones[pulledColor] = pulledStones[pulledColor] + 1;
       }
       const context = {
-        TERIOCK: TERIOCK,
         pulledCount,
         pulledStones,
       };
@@ -192,7 +191,7 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
         title: game.i18n.localize("TERIOCK.DIALOGS.DeathBag.PANEL.outcome"),
         text: outcome,
       });
-      const pullContent = await foundry.applications.handlebars.renderTemplate(
+      const pullContent = await TeriockTextEditor.renderTemplate(
         systemPath("templates/ui-templates/death-bag.hbs"),
         context,
       );

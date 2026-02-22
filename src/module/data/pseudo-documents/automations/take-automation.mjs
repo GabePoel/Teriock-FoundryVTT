@@ -45,7 +45,7 @@ export default class TakeAutomation extends LabelAutomationMixin(
   /** @inheritDoc */
   get buttons() {
     return [
-      TakeRollableTakeHandler.buildButton(this.take, 0, {
+      TakeRollableTakeHandler.buildButton(this.take, this.amount, {
         label: this.title,
       }),
     ];

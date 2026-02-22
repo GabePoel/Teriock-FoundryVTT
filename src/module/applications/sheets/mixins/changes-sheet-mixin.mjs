@@ -24,7 +24,7 @@ export default function ChangesSheetMixin(Base) {
         let valuePath = target.dataset.valuePath;
         if (!(typeof valuePath === "string")) valuePath = path;
         if (!path) {
-          console.error("No path specified for addChange action");
+          console.error(game.i18n.localize("TERIOCK.CHANGES.Errors.noAddPath"));
           return;
         }
         const changes =
@@ -55,14 +55,20 @@ export default function ChangesSheetMixin(Base) {
         let valuePath = target.dataset.valuePath;
         if (!(typeof valuePath === "string")) valuePath = path;
         if (!path) {
-          console.error("No path specified for deleteChange action");
+          console.error(
+            game.i18n.localize("TERIOCK.CHANGES.Errors.noDeletePath"),
+          );
           return;
         }
         const changes = foundry.utils.deepClone(
           foundry.utils.getProperty(this.document, valuePath),
         );
         if (!changes || !Array.isArray(changes)) {
-          console.error(`No changes array found at path: ${valuePath}`);
+          console.error(
+            game.i18n.format("TERIOCK.CHANGES.Errors.noDeleteArray", {
+              path: valuePath,
+            }),
+          );
           return;
         }
         if (index >= 0 && index < changes.length) {

@@ -1,4 +1,5 @@
-import { fancifyFields } from "../../../helpers/utils.mjs";
+import { icons } from "../../../constants/display/icons.mjs";
+import { fancifyFields, makeIconClass } from "../../../helpers/utils.mjs";
 import { TeriockTextEditor } from "../../ux/_module.mjs";
 
 /**
@@ -18,6 +19,16 @@ export default function ChildSheetMixin(Base) {
       static DEFAULT_OPTIONS = {
         actions: {
           populateField: this._onPopulateField,
+        },
+        window: {
+          controls: [
+            {
+              action: "deleteThis",
+              icon: makeIconClass(icons.ui.delete, "contextMenu"),
+              label: "TERIOCK.SYSTEMS.Common.MENU.delete",
+              ownership: "OWNER",
+            },
+          ],
         },
       };
 

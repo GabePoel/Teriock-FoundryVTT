@@ -1,6 +1,3 @@
-import { icons } from "../../../../../constants/display/icons.mjs";
-import { makeIconClass } from "../../../../../helpers/utils.mjs";
-
 /**
  * @param {typeof TeriockDocumentSheet} Base
  */
@@ -20,16 +17,6 @@ export default (Base) => {
           deleteThis: this._onDeleteThis,
           openDoc: this._onOpenDoc,
           rollThis: this._onRollThis,
-        },
-        window: {
-          controls: [
-            {
-              action: "deleteThis",
-              icon: makeIconClass(icons.ui.delete, "contextMenu"),
-              label: "TERIOCK.SYSTEMS.Common.MENU.delete",
-              ownership: "OWNER",
-            },
-          ],
         },
       };
 

@@ -472,6 +472,10 @@ Hooks.once("i18nInit", () => {
     teriock.applications.shared.imageContextMenuOptions,
     { keys: ["name"] },
   );
+  helpers.localization.localizeObject(
+    teriock.applications.shared.wikiContextMenuOptions,
+    { keys: ["name"] },
+  );
 });
 
 // Register Hooks

@@ -81,7 +81,7 @@ export function CommandButtonHandlerBuilder(command) {
         for (const actor of this.actors) {
           await command.primary(
             actor,
-            Object.assign({ event: this.event }, this.dataset),
+            Object.assign({ event: this.event }, this.options),
           );
         }
       }
@@ -91,7 +91,7 @@ export function CommandButtonHandlerBuilder(command) {
         for (const actor of this.actors) {
           await command.secondary(
             actor,
-            Object.assign({ event: this.event }, this.dataset),
+            Object.assign({ event: this.event }, this.options),
           );
         }
       }

@@ -2,6 +2,7 @@ import { boostDialog } from "../../../applications/dialogs/_module.mjs";
 import { takeOptions } from "../../../constants/options/take-options.mjs";
 import { BaseRoll, HarmRoll } from "../../../dice/rolls/_module.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
+import { cleanDataset } from "../../html.mjs";
 import { formulaCommand } from "./abstract-command.mjs";
 
 /**
@@ -71,22 +72,3 @@ const rollableTakeCommands = Object.entries(takeOptions).map(([type, take]) => {
 });
 
 export default rollableTakeCommands;
-
-/**
- * Clean a dataset of boolean values.
- * @param {DOMStringMap} dataset
- * @returns {object}
- */
-function cleanDataset(dataset) {
-  const options = {};
-  for (const [key, value] of Object.entries(dataset)) {
-    if (value === "true") {
-      options[key] = true;
-    } else if (value === "false") {
-      options[key] = false;
-    } else {
-      options[key] = value;
-    }
-  }
-  return options;
-}

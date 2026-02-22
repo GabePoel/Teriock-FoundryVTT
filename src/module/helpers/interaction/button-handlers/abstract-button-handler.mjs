@@ -1,3 +1,4 @@
+import { cleanDataset } from "../../html.mjs";
 import { makeIconClass } from "../../utils.mjs";
 import InteractionHandler from "../interaction-handler.mjs";
 
@@ -26,6 +27,7 @@ export default class AbstractButtonHandler extends InteractionHandler {
       this.tokens = this.targetedTokens;
       this.actors = this.targetedActors;
     }
+    this.options = cleanDataset(this.dataset);
   }
 
   /**

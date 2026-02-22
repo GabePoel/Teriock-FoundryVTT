@@ -70,7 +70,7 @@ export default class ModifierModel extends mix(
 
   /** @inheritDoc */
   get quickValue() {
-    return this.score + this.competence.bonus;
+    return this.score;
   }
 
   /** @inheritDoc */

@@ -2,10 +2,11 @@ import { icons } from "../../../constants/display/icons.mjs";
 
 /**
  * @param {TeriockActor} actor
+ * @param {Partial<Teriock.Dialog.HealDialogOptions>} [options]
  * @returns {Promise<void>}
  */
-async function primary(actor) {
-  await actor.system.takeHeal();
+async function primary(actor, options = {}) {
+  await actor.system.takeHeal(options);
 }
 
 const command = {

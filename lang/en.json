@@ -107,6 +107,22 @@
         },
         "LABEL": "Hacks"
       },
+      "HealAutomation": {
+        "FIELDS": {
+          "consumeStatDice": {
+            "hint": "Check this if hit dice should be consumed on use.",
+            "label": "Consume Hit Dice"
+          },
+          "forHarm": {
+            "hint": "Check this if the healing should be done for damage.",
+            "label": "For Damage"
+          },
+          "noStatDice": {
+            "hint": "Whether this only displays the option to heal hacks.",
+            "label": "No Stat Dice"
+          }
+        }
+      },
       "MacroAutomation": {
         "FIELDS": {
           "macro": {
@@ -129,6 +145,16 @@
           }
         }
       },
+      "RevitalizeAutomation": {
+        "consumeStatDice": {
+          "hint": "Check this if mana dice should be consumed on use.",
+          "label": "Consume Mana Dice"
+        },
+        "forHarm": {
+          "hint": "Check this if the revitalizing should be done for drain.",
+          "label": "For Drain"
+        }
+      },
       "RollAutomation": {
         "FIELDS": {
           "formula": {
@@ -141,6 +167,18 @@
           },
           "roll": {
             "label": "Type"
+          }
+        }
+      },
+      "StatAutomation": {
+        "FIELDS": {
+          "consumeStatDice": {
+            "hint": "Whether this consumes stat dice by default.",
+            "label": "Consume Stat Dice"
+          },
+          "forHarm": {
+            "hint": "Whether this rolls dice for harm by default.",
+            "label": "For Harm"
           }
         }
       },
@@ -189,6 +227,11 @@
       }
     },
     "CHANGES": {
+      "Errors": {
+        "noAddPath": "No path specified for addChange action",
+        "noDeletePath": "No path specified for deleteChange action",
+        "noDeleteArray": "No changes array found at path: {path}"
+      },
       "Mode": {
         "boost": "Boost"
       },
@@ -244,11 +287,12 @@
         "removeNamed": "Remove {name}",
         "removeUnnamed": "Remove Status",
         "toggleNamed": "Toggle {name}",
-        "toggleUnnamed": "Toggle Status"
+        "toggleUnnamed": "Toggle Condition"
       },
       "UseAbility": {
         "noName": "No ability name provided.",
         "useNamed": "Use {name}",
+        "useResist": "Use Resist",
         "useUnnamed": "Use Ability"
       }
     },
@@ -313,16 +357,6 @@
         "title": "Death Bag"
       },
       "Heal": {
-        "FIELDS": {
-          "consumeHitDice": {
-            "hint": "Check this if hit dice should be consumed on use.",
-            "label": "Consume Hit Dice"
-          },
-          "forDamage": {
-            "hint": "Check this if the healing should be done for damage.",
-            "label": "For Damage"
-          }
-        },
         "done": "Done",
         "hintNoDice": "Click on the hacks you want to heal.",
         "hintWithDice": "Click on the hacks you want to heal and the hit dice you want to spend.",
@@ -393,16 +427,6 @@
         "title": "Refresh {name} From Compendium"
       },
       "Revitalize": {
-        "FIELDS": {
-          "consumeManaDice": {
-            "hint": "Check this if mana dice should be consumed on use.",
-            "label": "Consume Mana Dice"
-          },
-          "forDrain": {
-            "hint": "Check this if the revitalizing should be done for drain.",
-            "label": "For Drain"
-          }
-        },
         "done": "Done",
         "hint": "Click on the mana dice you want to spend.",
         "title": "Revitalizing"
@@ -1052,6 +1076,12 @@
       "Hexproof": {
         "button": "Roll Hexproof"
       },
+      "Hexseal": {
+        "button": "Use Hexseal"
+      },
+      "Immune": {
+        "button": "Use Immunity"
+      },
       "Resist": {
         "button": "Roll Resistance",
         "label": "Resistance Save"
@@ -1337,7 +1367,7 @@
       "Actor": {
         "ACTIONS": {
           "ApplyMorganti": {
-            "hint": "The total amount of morganti {effect} ou have ever taken.",
+            "hint": "The total amount of morganti {effect} you have ever taken.",
             "label": "Morganti {effect}",
             "ok": "Confirm",
             "title": "Set Morganti {effect}"
@@ -2161,6 +2191,7 @@
           "duplicate": "Duplicate",
           "openSource": "Open Source",
           "safeDelete": "Delete {name}",
+          "viewInFoundry": "View in Foundry",
           "viewOnWiki": "View on Wiki"
         }
       },

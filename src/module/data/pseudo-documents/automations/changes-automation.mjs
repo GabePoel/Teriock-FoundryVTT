@@ -1,3 +1,4 @@
+import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { systemPath } from "../../../helpers/path.mjs";
 import { qualifiedChangeField } from "../../fields/helpers/builders.mjs";
 import CritAutomation from "./crit-automation.mjs";
@@ -27,7 +28,7 @@ export default class ChangesAutomation extends CritAutomation {
 
   /** @inheritDoc */
   async getEditor() {
-    const html = await foundry.applications.handlebars.renderTemplate(
+    const html = await TeriockTextEditor.renderTemplate(
       systemPath("templates/document-templates/shared/changes.hbs"),
       {
         changesPath: `${this.fieldPath}.${this.id}.changes`,
@@ -35,7 +36,6 @@ export default class ChangesAutomation extends CritAutomation {
         valuePath: `_source.${this.fieldPath}.${this.id}.changes`,
         fieldDefs: this.schema.fields.changes.element.fields,
         editable: this.document.sheet.isEditable,
-        TERIOCK,
       },
     );
     return /** @type {HTMLDivElement} */ foundry.utils.parseHTML(html);

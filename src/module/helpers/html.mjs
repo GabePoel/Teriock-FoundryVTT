@@ -234,3 +234,22 @@ export function quickAddAssociation(
     associations.push(association);
   }
 }
+
+/**
+ * Clean a dataset of boolean values.
+ * @param {DOMStringMap} dataset
+ * @returns {object}
+ */
+export function cleanDataset(dataset) {
+  const options = {};
+  for (const [key, value] of Object.entries(dataset)) {
+    if (value === "true") {
+      options[key] = true;
+    } else if (value === "false") {
+      options[key] = false;
+    } else {
+      options[key] = value;
+    }
+  }
+  return options;
+}

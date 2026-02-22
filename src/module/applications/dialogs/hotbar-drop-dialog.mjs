@@ -1,8 +1,7 @@
 import { systemPath } from "../../helpers/path.mjs";
 import { makeIconClass } from "../../helpers/utils.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
-
-const TextEditor = foundry.applications.ux.TextEditor.implementation;
+import { TeriockTextEditor } from "../ux/_module.mjs";
 
 /**
  * Dialog to select what type of macro to make.
@@ -19,8 +18,8 @@ export default async function hotbarDropDialog(doc) {
       child: `@UUID[${doc.uuid}]`,
       actor: `@UUID[${doc.actor.uuid}]`,
     };
-    const content = await TextEditor.enrichHTML(
-      await foundry.applications.handlebars.renderTemplate(
+    const content = await TeriockTextEditor.enrichHTML(
+      await TeriockTextEditor.renderTemplate(
         systemPath("templates/dialog-templates/hotbar-drop.hbs"),
         context,
       ),

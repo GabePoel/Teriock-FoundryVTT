@@ -1,7 +1,7 @@
 import { mix } from "../../../../helpers/utils.mjs";
-import { bindCommonActions } from "../../../shared/_module.mjs";
 import { TeriockTextEditor } from "../../../ux/_module.mjs";
 import { ConfigButtonSheetMixin, IndexButtonSheetMixin } from "../_module.mjs";
+import BaseSheetMixin from "../base-sheet-mixin.mjs";
 import * as parts from "./parts/_module.mjs";
 
 /**
@@ -14,6 +14,7 @@ export default function CommonSheetMixin(Base) {
     /**
      * @implements {CommonSheetMixinInterface}
      * @extends {TeriockDocumentSheet}
+     * @mixes BaseSheet
      * @mixes DocumentCreationCommonSheetPart
      * @mixes DragDropCommonSheetPart
      * @mixes FieldsCommonSheetPart
@@ -30,6 +31,7 @@ export default function CommonSheetMixin(Base) {
      */
     class CommonSheet extends mix(
       Base,
+      BaseSheetMixin,
       ConfigButtonSheetMixin,
       parts.ConnectionCommonSheetPart,
       parts.DragDropCommonSheetPart,
@@ -103,7 +105,6 @@ export default function CommonSheetMixin(Base) {
       /** @inheritDoc */
       async _onRender(context, options) {
         await super._onRender(context, options);
-        bindCommonActions(this.element);
         this._connect("[data-debug]", "contextmenu", () => {
           if (game.settings.get("teriock", "developerMode")) {
             console.log("Debug", this.document, this);
@@ -140,28 +141,11 @@ export default function CommonSheetMixin(Base) {
           }
         }
         Object.assign(context, {
-          TERIOCK: TERIOCK,
-          document: this.document,
-          editable: this.isEditable,
           enriched: {},
-          fields: this.document.schema.fields,
-          flags: this.document.flags,
           hasMenu: true,
-          id: this.document.id,
-          img: this.document.img,
           imgPath: "img",
-          isGM: game.user.isGM,
-          limited: this.document.limited,
           metadata: this.document.metadata,
-          name: this.document.name,
-          owner: this.document.isOwner,
           settings: this.settings,
-          sheetId: this.id,
-          source: this.document._source,
-          system: this.document.system,
-          systemFields: this.document.system.schema.fields,
-          systemSource: this.document.system._source,
-          uuid: this.document.uuid,
         });
         return context;
       }

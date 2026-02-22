@@ -10,8 +10,10 @@ export { default as CommonMacroAutomation } from "./common-macro-automation.mjs"
 export { default as DurationAutomation } from "./duration-automation.mjs";
 export { default as FeatAutomation } from "./feat-automation.mjs";
 export { default as HacksAutomation } from "./hacks-automation.mjs";
+export { default as HealAutomation } from "./heal-automation.mjs";
 export { default as PropertyMacroAutomation } from "./property-macro-automation.mjs";
 export { default as ResistAutomation } from "./resist-automation.mjs";
+export { default as RevitalizeAutomation } from "./revitalize-automation.mjs";
 export { default as RollAutomation } from "./roll-automation.mjs";
 export { default as StatusAutomation } from "./status-automation.mjs";
 export { default as TakeAutomaton } from "./take-automation.mjs";

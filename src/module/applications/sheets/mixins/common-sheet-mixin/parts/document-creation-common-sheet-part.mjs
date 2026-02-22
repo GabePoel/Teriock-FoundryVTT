@@ -48,8 +48,8 @@ export default (Base) => {
           const out = await selectAbilityDialog();
           if (!out) return;
           obj = out.toObject();
-          if (out.sup?.type === "wrapper") {
-            obj["_stats.compendiumSource"] = out.sup.uuid;
+          if (out.parent?.type === "wrapper") {
+            obj["_stats.compendiumSource"] = out.parent.uuid;
           }
         }
         if (decision && obj) {
@@ -145,8 +145,8 @@ export default (Base) => {
           const out = await selectPropertyDialog();
           if (!out) return;
           obj = out.toObject();
-          if (out.sup?.type === "wrapper") {
-            obj["_stats.compendiumSource"] = out.sup.uuid;
+          if (out.parent?.type === "wrapper") {
+            obj["_stats.compendiumSource"] = out.parent.uuid;
           }
         }
         if (decision && obj) {

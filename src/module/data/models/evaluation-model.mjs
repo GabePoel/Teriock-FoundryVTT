@@ -113,10 +113,10 @@ export default class EvaluationModel extends EmbeddedDataModel {
 
   /**
    * Derive value of formula internally.
-   * @param {Teriock.Options.EvaluationOptions} [options]
+   * @param {Partial<Teriock.Options.EvaluationOptions>} [options]
    * @returns {number}
    */
-  #evaluate(options = /** @type {Teriock.Options.EvaluationOptions} */ {}) {
+  #evaluate(options = {}) {
     options = {
       ...this._derivationOptions,
       ...options,
@@ -156,7 +156,7 @@ export default class EvaluationModel extends EmbeddedDataModel {
 
   /**
    * Derive value of formula.
-   * @param {Teriock.Options.EvaluationOptions} [options]
+   * @param {Partial<Teriock.Options.EvaluationOptions>} [options]
    */
   evaluate(options = {}) {
     this._value = this.#evaluate(options);

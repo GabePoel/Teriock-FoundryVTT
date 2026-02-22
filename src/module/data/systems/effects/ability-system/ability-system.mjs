@@ -76,9 +76,12 @@ export default class AbilitySystem extends mix(
       automations.DurationAutomation,
       automations.FeatAutomation,
       automations.HacksAutomation,
+      automations.HealAutomation,
       automations.ResistAutomation,
+      automations.RevitalizeAutomation,
       automations.RollAutomation,
       automations.StatusAutomation,
+      automations.TakeAutomaton,
       automations.TransformationAutomation,
       automations.UseAbilitiesAutomation,
     ];

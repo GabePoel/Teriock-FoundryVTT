@@ -1,3 +1,8 @@
+import { icons } from "../../../../../constants/display/icons.mjs";
+
+//noinspection JSClosureCompilerSyntax
+import { makeIconClass } from "../../../../../helpers/utils.mjs";
+
 //noinspection JSClosureCompilerSyntax
 /**
  * @param {typeof BaseActorSheet} Base
@@ -14,6 +19,16 @@ export default (Base) =>
         quickUse: this._onQuickUse,
         toggleCondition: this.#onToggleCondition,
         increaseCover: this.#onIncreaseCover,
+      },
+      window: {
+        controls: [
+          {
+            action: "deathBagPull",
+            icon: makeIconClass(icons.ui.deathBag, "contextMenu"),
+            label: "TERIOCK.EFFECTS.Common.bag",
+            ownership: "OWNER",
+          },
+        ],
       },
     };
 

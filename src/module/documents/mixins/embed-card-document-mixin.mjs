@@ -1,5 +1,8 @@
 import { bindCommonActions } from "../../applications/shared/_module.mjs";
-import { TeriockContextMenu } from "../../applications/ux/_module.mjs";
+import {
+  TeriockContextMenu,
+  TeriockTextEditor,
+} from "../../applications/ux/_module.mjs";
 import { systemPath } from "../../helpers/path.mjs";
 import { toTitleCase } from "../../helpers/string.mjs";
 
@@ -65,7 +68,7 @@ export default function EmbedCardDocumentMixin(Base) {
           if (options.relativeTo) {
             embedContext.relative = options.relativeTo.uuid;
           }
-          const html = await foundry.applications.handlebars.renderTemplate(
+          const html = await TeriockTextEditor.renderTemplate(
             systemPath("templates/ui-templates/block.hbs"),
             embedContext,
           );
