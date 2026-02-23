@@ -5,9 +5,9 @@
       value=system.size.value
       disabled=(not editable)
     )
-    unselected=(concat "Size " system.size.value)
+    unselected=(localize "TERIOCK.SYSTEMS.Species.PANELS.size.value" value=system.size.value)
     icon=TERIOCK.display.icons.species.size
-    tooltip="Default Size"
+    tooltip=(localize "TERIOCK.SYSTEMS.Species.FIELDS.size.value.label")
   }}
   {{#if (and (exists system.size.min) (exists system.size.max))}}
     {{formBox
@@ -16,9 +16,9 @@
         value=system.size.min
         disabled=(not editable)
       )
-      unselected=(concat "Size " system.size.min " Minimum")
+      unselected=(localize "TERIOCK.SYSTEMS.Species.PANELS.size.min" value=system.size.min)
       icon=TERIOCK.display.icons.species.minSize
-      tooltip="Minimum Size"
+      tooltip=(localize "TERIOCK.SYSTEMS.Species.FIELDS.size.min.label")
     }}
     {{formBox
       (formInput
@@ -26,9 +26,9 @@
         value=system.size.max
         disabled=(not editable)
       )
-      unselected=(concat "Size " system.size.max " Maximum")
+      unselected=(localize "TERIOCK.SYSTEMS.Species.PANELS.size.max" value=system.size.max)
       icon=TERIOCK.display.icons.species.maxSize
-      tooltip="Maximum Size"
+      tooltip=(localize "TERIOCK.SYSTEMS.Species.FIELDS.size.max.label")
     }}
   {{/if}}
 </div>

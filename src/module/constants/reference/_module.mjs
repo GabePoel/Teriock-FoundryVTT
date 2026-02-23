@@ -3,6 +3,7 @@
 
 import { preLocalize } from "../../helpers/localization.mjs";
 import {
+  abilities,
   attributes,
   classes,
   conditions,
@@ -10,7 +11,10 @@ import {
   effectTypes,
   elements,
   equipmentClasses,
+  magicalProperties,
+  materialProperties,
   powerSources,
+  properties,
   statAttributes,
   tradecrafts,
   traits,
@@ -19,6 +23,7 @@ import {
 } from "../index/_module.mjs";
 
 const reference = {
+  abilities: foundry.utils.deepClone(abilities),
   attributes: foundry.utils.deepClone(attributes),
   attributesFull: foundry.utils.deepClone(attributes),
   classes: foundry.utils.deepClone(classes),
@@ -28,15 +33,22 @@ const reference = {
   elements: foundry.utils.deepClone(elements),
   equipmentClasses: foundry.utils.deepClone(equipmentClasses),
   powerSources: foundry.utils.deepClone(powerSources),
+  properties: foundry.utils.deepClone(properties),
   statAttributes: foundry.utils.deepClone(statAttributes),
   tradecrafts: foundry.utils.deepClone(tradecrafts),
   traits: foundry.utils.deepClone(traits),
   weaponClasses: foundry.utils.deepClone(weaponClasses),
   weaponFightingStyles: foundry.utils.deepClone(weaponFightingStyles),
+  magicalProperties: foundry.utils.deepClone(magicalProperties),
+  materialProperties: foundry.utils.deepClone(materialProperties),
 };
 
 export default reference;
 
+preLocalize("reference.abilities", {
+  prefix: "TERIOCK.TERMS.Abilities.",
+  transform: "cc",
+});
 preLocalize("reference.attributes", {
   prefix: "TERIOCK.TERMS.Attributes.",
   suffix: ".label",
@@ -75,6 +87,10 @@ preLocalize("reference.powerSources", {
   prefix: "TERIOCK.TERMS.PowerSources.",
   transform: "cc",
 });
+preLocalize("reference.properties", {
+  prefix: "TERIOCK.TERMS.Properties.",
+  transform: "cc",
+});
 preLocalize("reference.statAttributes", {
   prefix: "TERIOCK.TERMS.Attributes.",
   suffix: ".label",
@@ -98,5 +114,13 @@ preLocalize("reference.weaponClasses", {
 });
 preLocalize("reference.weaponFightingStyles", {
   prefix: "TERIOCK.TERMS.WeaponFightingStyles.",
+  transform: "cc",
+});
+preLocalize("reference.magicalProperties", {
+  prefix: "TERIOCK.TERMS.Properties.",
+  transform: "cc",
+});
+preLocalize("reference.materialProperties", {
+  prefix: "TERIOCK.TERMS.Properties.",
   transform: "cc",
 });

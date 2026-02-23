@@ -73,7 +73,7 @@
                 usable=true
                 img=(getIconKey "damage-types" damageType)
                 title=(ucFirst damageType)
-                subtitle="Damage type"
+                subtitle=(localize "TYPES.JournalEntryPage.damage")
                 text=(path @root/TERIOCK.options.character.protectionMap category "text")
                 action=(path @root/TERIOCK.options.character.protectionMap category "action")
               )
@@ -87,7 +87,7 @@
                 usable=true
                 img=(getIconKey "drain-types" drainType)
                 title=(ucFirst drainType)
-                subtitle="Drain type"
+                subtitle=(localize "TYPES.JournalEntryPage.drain")
                 text=(path @root/TERIOCK.options.character.protectionMap category "text")
                 action=(path @root/TERIOCK.options.character.protectionMap category "action")
               )
@@ -101,7 +101,7 @@
                 usable=true
                 img=(getIconKey "conditions" condition)
                 title=(path @root/TERIOCK.reference.conditions condition)
-                subtitle="Condition"
+                subtitle=(localize "TERIOCK.SYSTEMS.Consequence.PANELS.conditions")
                 text=(path @root/TERIOCK.options.character.protectionMap category "text")
                 action=(path @root/TERIOCK.options.character.protectionMap category "action")
               )
@@ -115,7 +115,7 @@
                 usable=true
                 img=(getIconKey "elements" element)
                 title=(path @root/TERIOCK.options.ability.elements element)
-                subtitle="Element"
+                subtitle=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.elements.label")
                 text=(path @root/TERIOCK.options.character.protectionMap category "text")
                 action=(path @root/TERIOCK.options.character.protectionMap category "action")
               )
@@ -129,7 +129,7 @@
                 usable=true
                 img=(getIconKey "effect-types" effect)
                 title=(path @root/TERIOCK.options.ability.effectTypes effect)
-                subtitle="Effect"
+                subtitle=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.effectTypes.label")
                 text=(path @root/TERIOCK.options.character.protectionMap category "text")
                 action=(path @root/TERIOCK.options.character.protectionMap category "action")
               )
@@ -143,7 +143,7 @@
                 usable=true
                 img=(getIconKey "effect-types" powerSource)
                 title=(path @root/TERIOCK.options.ability.powerSources powerSource)
-                subtitle="Power source"
+                subtitle=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.powerSources.label")
                 text=(path @root/TERIOCK.options.character.protectionMap category "text")
                 action=(path @root/TERIOCK.options.character.protectionMap category "action")
               )
@@ -157,7 +157,7 @@
                 usable=true
                 img=(getIconKey "abilities" (toCamelCase ability))
                 title=ability
-                subtitle="Ability"
+                subtitle=(localize "TERIOCK.PACKS.abilities")
                 text=(path @root/TERIOCK.options.character.protectionMap category "text")
                 action=(path @root/TERIOCK.options.character.protectionMap category "action")
               )
@@ -171,7 +171,7 @@
                 usable=true
                 img=(getIconKey "effect-types" (path @root/TERIOCK.options.character.protectionMap category "text"))
                 title=other
-                subtitle="Other"
+                subtitle=(localize "TERIOCK.SYSTEMS.Common.FIELDS.gmNotes.otherCategory")
                 text=(path @root/TERIOCK.options.character.protectionMap category "text")
                 action=(path @root/TERIOCK.options.character.protectionMap category "action")
               )
@@ -179,7 +179,7 @@
           {{/each}}
         {{/each}}
         <div class="no-results medium">
-          <p>No protections found.</p>
+          <p>{{localize "TERIOCK.SHEETS.Common.SEARCH.noProtections"}}</p>
         </div>
       </div>
     </div>

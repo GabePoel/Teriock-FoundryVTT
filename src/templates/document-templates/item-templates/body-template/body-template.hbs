@@ -19,7 +19,7 @@
               )
               icon=(firstDie system.damage.base.formula)
               include=(exists system.damage.base.raw)
-              label="DMG"
+              label=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.damage.base.raw.abbreviation")
               tooltip=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.damage.base.raw.label")
             }}
             {{formBox
@@ -30,7 +30,7 @@
               )
               icon=TERIOCK.display.icons.armament.av
               include=(exists system.av.raw)
-              label="AV"
+              label=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.av.raw.abbreviation")
               unselected=system.av.value
               tooltip=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.av.raw.label")
             }}
@@ -42,7 +42,7 @@
               )
               icon=TERIOCK.display.icons.armament.bv
               include=(exists system.bv.raw)
-              label="BV"
+              label=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.bv.raw.abbreviation")
               unselected=system.bv.value
               tooltip=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.bv.raw.label")
             }}
@@ -54,7 +54,7 @@
               )
               icon=TERIOCK.display.icons.armament.hitBonus
               include=(exists system.hit.raw)
-              label="HIT"
+              label=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.hit.raw.abbreviation")
               unselected=system.hit.raw
               tooltip=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.hit.raw.label")
             }}
@@ -65,7 +65,7 @@
                 value=system._source.attackPenalty.raw
               )
               icon=TERIOCK.display.icons.armament.ap
-              label="AP"
+              label=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.ap.raw.abbreviation")
               unselected=system.attackPenalty.formula
               tooltip=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.attackPenalty.raw.label")
             }}
@@ -78,7 +78,14 @@
       <div class="ab-tags-all">
         <div class="ab-tags-container">
           <div class="ab-tags">
-            <span class="ab-tag tsubtle trait-tag">Body parts</span>
+            <span class="ab-tag tsubtle trait-tag">
+              {{localize "TERIOCK.TERMS.EquipmentClasses.bodyParts"}}
+            </span>
+            {{#if (exists system.av.value)}}
+              <span class="ab-tag tsubtle trait-tag">
+                {{localize "TERIOCK.TERMS.EquipmentClasses.armor"}}
+              </span>
+            {{/if}}
           </div>
           {{> (template "document-templates/shared/menu-buttons.hbs")}}
         </div>

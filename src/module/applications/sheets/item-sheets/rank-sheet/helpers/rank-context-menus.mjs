@@ -71,7 +71,7 @@ export function rankContextMenu(rank) {
   const options = [];
   for (let i = 0; i <= 9; i++) {
     options.push({
-      name: `Rank ${i}`,
+      name: game.i18n.format("TERIOCK.SYSTEMS.Rank.PANELS.rank", { value: i }),
       icon: makeIcon(`${i}`, iconStyle),
       callback: () => rank.update({ "system.classRank": i }),
     });

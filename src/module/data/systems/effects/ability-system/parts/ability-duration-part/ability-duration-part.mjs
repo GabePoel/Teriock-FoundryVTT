@@ -59,7 +59,7 @@ export default (Base) => {
             this.executionTime = "a1";
             this.duration.unit = "minute";
             this.duration.raw = "1";
-            this.duration.description = "1 Minute";
+            delete this.duration.description;
           }
         }
 

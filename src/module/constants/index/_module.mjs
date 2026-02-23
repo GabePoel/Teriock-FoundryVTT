@@ -3,7 +3,6 @@
 // We maintain a copy of this to access rules journals and the like.
 
 import { default as allConditions } from "../../../index/names/conditions.json" with { type: "json" };
-import { default as allProperties } from "../../../index/names/properties.json" with { type: "json" };
 
 delete allConditions.alive;
 delete allConditions.up;
@@ -31,7 +30,7 @@ export { default as keywords } from "../../../index/names/keywords.json" with { 
 export { default as magicalProperties } from "../../../index/names/magical-properties.json" with { type: "json" };
 export { default as materialProperties } from "../../../index/names/material-properties.json" with { type: "json" };
 export { default as powerSources } from "../../../index/names/power-sources.json" with { type: "json" };
-export { allProperties as properties };
+export { default as properties } from "../../../index/names/properties.json" with { type: "json" };
 export { default as statAttributes } from "../../../index/names/stat-attributes.json" with { type: "json" };
 export { default as tradecrafts } from "../../../index/names/tradecrafts.json" with { type: "json" };
 export { default as traits } from "../../../index/names/traits.json" with { type: "json" };

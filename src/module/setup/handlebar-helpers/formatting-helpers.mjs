@@ -11,18 +11,24 @@ export default function registerFormattingHelpers() {
 
   Handlebars.registerHelper("elements", (elements) => {
     elements = Array.from(elements);
-    let out = "Celestial";
+    let out = game.i18n.localize("TERIOCK.TERMS.Common.celestial");
     if (elements && elements.length > 0) {
       out = elements
         .map((e) => e.charAt(0).toUpperCase() + e.slice(1))
         .join(
-          elements.length > 2 ? ", " : elements.length === 2 ? " and " : "",
+          elements.length > 2
+            ? ", "
+            : elements.length === 2
+              ? ` ${game.i18n.localize("TERIOCK.SYSTEMS.Ability.FIELDS.elderSorcery.elementJoin")} `
+              : "",
         );
       if (elements.length > 1) {
         const lastComma = out.lastIndexOf(", ");
         if (lastComma !== -1) {
           out =
-            out.substring(0, lastComma) + " and" + out.substring(lastComma + 1);
+            out.substring(0, lastComma) +
+            ` ${game.i18n.localize("TERIOCK.SYSTEMS.Ability.FIELDS.elderSorcery.elementJoin")}` +
+            out.substring(lastComma + 1);
         }
       }
     }

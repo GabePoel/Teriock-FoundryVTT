@@ -156,31 +156,33 @@ export function parseDurationString(durationString) {
  */
 export function secondsToReadable(totalSeconds) {
   if (totalSeconds < 0) {
-    return "0 seconds";
+    return game.i18n.localize(
+      "TERIOCK.MODELS.TimeUnit.UNITS.zeroSeconds.label",
+    );
   }
   const units = [
     {
-      name: "year",
+      name: game.i18n.localize("TERIOCK.MODELS.TimeUnit.UNITS.year.short"),
       seconds: 365.25 * 24 * 60 * 60,
     },
     {
-      name: "week",
+      name: game.i18n.localize("TERIOCK.MODELS.TimeUnit.UNITS.week.short"),
       seconds: 7 * 24 * 60 * 60,
     },
     {
-      name: "day",
+      name: game.i18n.localize("TERIOCK.MODELS.TimeUnit.UNITS.day.short"),
       seconds: 24 * 60 * 60,
     },
     {
-      name: "hr",
+      name: game.i18n.localize("TERIOCK.MODELS.TimeUnit.UNITS.hour.short"),
       seconds: 60 * 60,
     },
     {
-      name: "min",
+      name: game.i18n.localize("TERIOCK.MODELS.TimeUnit.UNITS.minute.short"),
       seconds: 60,
     },
     {
-      name: "sec",
+      name: game.i18n.localize("TERIOCK.MODELS.TimeUnit.UNITS.second.short"),
       seconds: 1,
     },
   ];
@@ -193,7 +195,9 @@ export function secondsToReadable(totalSeconds) {
       remaining -= count * unit.seconds;
     }
   }
-  return parts.length > 0 ? parts.join(", ") : "0 sec";
+  return parts.length > 0
+    ? parts.join(", ")
+    : game.i18n.localize("TERIOCK.MODELS.TimeUnit.UNITS.zeroSeconds.short");
 }
 /**
  * Round a value to the specified number of decimal places.

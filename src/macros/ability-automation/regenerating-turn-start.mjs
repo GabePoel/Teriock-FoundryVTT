@@ -1,6 +1,6 @@
 if (actor.isDamaged && !actor.statuses.has("burned")) {
   await actor.system.takeHeal({
     consumeStatDice: false,
-    title: "Regenerating",
+    title: game.i18n.localize("TERIOCK.TERMS.Abilities.regenerating"),
   });
 }

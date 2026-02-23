@@ -1,5 +1,6 @@
-import { pseudoHooks } from "../../../../constants/system/pseudo-hooks.mjs";
+import { pseudoHooks } from "../../../../constants/system/_module.mjs";
 import { ExecuteMacroHandler } from "../../../../helpers/interaction/button-handlers/execute-macro-handlers.mjs";
+import { localizeChoices } from "../../../../helpers/localization.mjs";
 import LabelAutomationMixin from "./label-automation-mixin.mjs";
 
 const { fields } = foundry.data;
@@ -36,7 +37,7 @@ export default function MacroAutomationMixin(Base) {
        * @returns {Record<string, string>}
        */
       static get _pseudoHookChoices() {
-        return pseudoHooks;
+        return pseudoHooks.all;
       }
 
       /** @inheritDoc */
@@ -54,10 +55,12 @@ export default function MacroAutomationMixin(Base) {
         if (Object.keys(this._pseudoHookChoices).length > 0) {
           Object.assign(schema, {
             relation: new fields.StringField({
-              choices: {
-                button: "Button",
-                pseudoHook: "Hook",
-              },
+              choices: localizeChoices({
+                button:
+                  "TERIOCK.AUTOMATIONS.MacroAutomation.FIELDS.relation.choices.button",
+                pseudoHook:
+                  "TERIOCK.AUTOMATIONS.MacroAutomation.FIELDS.relation.choices.pseudoHook",
+              }),
               initial: "button",
               label: "TERIOCK.AUTOMATIONS.BaseAutomation.FIELDS.relation.label",
             }),

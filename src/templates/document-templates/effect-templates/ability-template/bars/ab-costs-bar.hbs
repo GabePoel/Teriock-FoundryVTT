@@ -24,20 +24,20 @@
             value=system.costs.mp.value.formula
             disabled=(not editable)
           )
-          "Variable"
+          (localize "TERIOCK.TERMS.Cost.variable")
         )
       )
       tooltip=(ifThen
         (eq system.costs.mp.type "static")
-        "Static Mana Cost"
+        (localize "TERIOCK.TERMS.Cost.static")
         (ifThen
           (eq system.costs.mp.type "formula")
-          "Formula Mana Cost"
-          "Variable Mana Cost"
+          (localize "TERIOCK.TERMS.Cost.formula")
+          (localize "TERIOCK.TERMS.Cost.variable")
         )
       )
       icon=TERIOCK.display.icons.stat.mp
-      label="MP"
+      label=(localize "TERIOCK.STATS.mp.abbreviation")
       include=(not (eq system.costs.mp.type "none"))
       classes=(ifThen editable "mana-cost-box" "")
     }}
@@ -47,8 +47,8 @@
         value=system.adept.amount
         disabled=(not editable)
       )
-      tooltip="Adept Mana Cost"
-      label="MP"
+      tooltip=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.adept.enabled.label")
+      label=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.adept.enabled.label")
       icon=TERIOCK.display.icons.ability.adept
       include=system.adept.enabled
     }}
@@ -58,8 +58,8 @@
         value=system.gifted.amount
         disabled=(not editable)
       )
-      tooltip="Gifted Mana Cost"
-      label="MP"
+      tooltip=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.gifted.enabled.label")
+      label=(localize "TERIOCK.STATS.mp.abbreviation")
       icon=TERIOCK.display.icons.ability.gifted
       include=system.gifted.enabled
     }}
@@ -78,22 +78,27 @@
             value=system.costs.hp.value.formula
             disabled=(not editable)
           )
-          (ifThen (eq system.costs.hp.type "hack") "Hack" "Variable")
+          (ifThen
+            (eq system.costs.hp.type "hack")
+            (localize "TERIOCK.TERMS.Cost.hack")
+            (localize "TERIOCK.TERMS.Cost.variable"))
         )
       )
       tooltip=(ifThen
         (eq system.costs.hp.type "static")
-        "Static Hit Cost"
+        (localize "TERIOCK.TERMS.Cost.static")
         (ifThen
           (eq system.costs.hp.type "formula")
-          "Formula Hit Cost"
+          (localize "TERIOCK.TERMS.Cost.formula")
           (ifThen
-            (eq system.costs.hp.type "hack") "Hack Hit Cost" "Variable Hit Cost"
+            (eq system.costs.hp.type "hack")
+            (localize "TERIOCK.TERMS.Cost.hack")
+            (localize "TERIOCK.TERMS.Cost.variable")
           )
         )
       )
       icon=TERIOCK.display.icons.stat.hp
-      label="HP"
+      label=(localize "TERIOCK.STATS.hp.abbreviation")
       classes=(ifThen editable "hit-cost-box" "")
       include=(not (eq system.costs.hp.type "none"))
     }}
@@ -112,27 +117,27 @@
             value=system.costs.gp.value.formula
             disabled=(not editable)
           )
-          "Variable"
+          (localize "TERIOCK.TERMS.Cost.variable")
         )
       )
       tooltip=(ifThen
         (eq system.costs.gp.type "static")
-        "Static Gold Cost"
+        (localize "TERIOCK.TERMS.Cost.static")
         (ifThen
           (eq system.costs.gp.type "formula")
-          "Formula Gold Cost"
-          "Variable Gold Cost"
+          (localize "TERIOCK.TERMS.Cost.formula")
+          (localize "TERIOCK.TERMS.Cost.variable")
         )
       )
       icon=TERIOCK.display.icons.stat.gp
-      label="₲"
+      label=(localize "TERIOCK.STATS.gp.abbreviation")
       classes=(ifThen editable "gold-cost-box" "")
       include=(not (eq system.costs.gp.type "none"))
     }}
     {{formBox
       (path TERIOCK.options.ability.breakCost system.costs.break)
       icon=TERIOCK.display.icons.ability.break
-      tooltip="Break Cost"
+      tooltip=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.costs.break.label")
       classes=(ifThen editable "break-cost-box" "")
       include=(exists system.costs.break)
     }}

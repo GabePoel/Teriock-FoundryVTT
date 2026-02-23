@@ -1,4 +1,4 @@
-import { abilityPseudoHooks } from "../../../constants/system/pseudo-hooks.mjs";
+import { pseudoHooks } from "../../../constants/system/_module.mjs";
 import CritAutomation from "./crit-automation.mjs";
 import { MacroAutomationMixin } from "./mixins/_module.mjs";
 
@@ -17,7 +17,7 @@ export default class AbilityMacroAutomation extends MacroAutomationMixin(
 
   /** @inheritDoc */
   static get _pseudoHookChoices() {
-    return abilityPseudoHooks;
+    return pseudoHooks.ability;
   }
 
   /** @inheritDoc */

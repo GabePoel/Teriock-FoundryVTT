@@ -1,4 +1,5 @@
 import { abilityOptions } from "../../../constants/options/ability-options.mjs";
+import { localizeChoices } from "../../../helpers/localization.mjs";
 import { sortObject } from "../../../helpers/utils.mjs";
 import {
   EnhancedNumberField,
@@ -27,17 +28,14 @@ const {
  */
 export function combatExpirationSourceTypeField() {
   return new StringField({
-    choices: {
-      target: game.i18n.localize(
-        "TERIOCK.SCHEMA.CombatExpiration.who.choices.target",
-      ),
-      executor: game.i18n.localize(
-        "TERIOCK.SCHEMA.CombatExpiration.who.choices.executor",
-      ),
-      everyone: game.i18n.localize(
-        "TERIOCK.SCHEMA.CombatExpiration.who.choices.everyone",
-      ),
-    },
+    choices: localizeChoices(
+      {
+        target: "TERIOCK.SCHEMA.CombatExpiration.who.choices.target",
+        executor: "TERIOCK.SCHEMA.CombatExpiration.who.choices.executor",
+        everyone: "TERIOCK.SCHEMA.CombatExpiration.who.choices.everyone",
+      },
+      { sort: false },
+    ),
     hint: "TERIOCK.SCHEMA.CombatExpiration.who.hint",
     initial: "target",
     label: "TERIOCK.SCHEMA.CombatExpiration.who.label",
@@ -199,11 +197,11 @@ export function combatExpirationMethodField() {
       label: "TERIOCK.SCHEMA.CombatExpiration.what.threshold.label",
     }),
     type: new StringField({
-      choices: {
-        forced: "Expires Automatically",
-        rolled: "Expires on Roll",
-        none: "Does not Expire on Turn",
-      },
+      choices: localizeChoices({
+        forced: "TERIOCK.SCHEMA.CombatExpiration.what.type.choices.forced",
+        rolled: "TERIOCK.SCHEMA.CombatExpiration.what.type.choices.forced",
+        none: "TERIOCK.SCHEMA.CombatExpiration.what.type.choices.none",
+      }),
       hint: "TERIOCK.SCHEMA.CombatExpiration.what.type.hint",
       initial: "none",
       label: "TERIOCK.SCHEMA.CombatExpiration.what.type.label",
@@ -223,19 +221,19 @@ export function combatExpirationTimingField() {
       label: "TERIOCK.SCHEMA.CombatExpiration.when.skip.label",
     }),
     time: new StringField({
-      choices: {
-        start: "Start",
-        end: "End",
-      },
+      choices: localizeChoices({
+        start: "TERIOCK.SCHEMA.CombatExpiration.when.time.choices.start",
+        end: "TERIOCK.SCHEMA.CombatExpiration.when.time.choices.end",
+      }),
       hint: "TERIOCK.SCHEMA.CombatExpiration.when.time.hint",
       initial: "start",
       label: "TERIOCK.SCHEMA.CombatExpiration.when.time.label",
     }),
     trigger: new StringField({
       choices: {
-        turn: "Turn",
-        combat: "Combat",
-        action: "Action",
+        turn: "TERIOCK.SCHEMA.CombatExpiration.when.trigger.choices.turn",
+        combat: "TERIOCK.SCHEMA.CombatExpiration.when.trigger.choices.combat",
+        action: "TERIOCK.SCHEMA.CombatExpiration.when.trigger.choices.action",
       },
       hint: "TERIOCK.SCHEMA.CombatExpiration.when.trigger.hint",
       initial: "turn",
@@ -250,17 +248,18 @@ export function combatExpirationTimingField() {
  */
 export function qualifiedChangeField() {
   const allTypes = {
-    Actor: "Actors",
-    Item: "Items",
-    ActiveEffect: "Active Effects",
-    parent: "Parent",
+    Actor: "TERIOCK.CHANGES.Targets.Actor",
+    Item: "TERIOCK.CHANGES.Targets.Item",
+    ActiveEffect: "TERIOCK.CHANGES.Targets.ActiveEffect",
+    parent: "TERIOCK.CHANGES.Targets.parent",
   };
   const subTypes = {
-    armament: "Armaments",
+    armament: "TERIOCK.CHANGES.Targets.armament",
   };
-  for (const v of Object.values(TERIOCK.system.documentTypes)) {
-    Object.assign(subTypes, v);
-  }
+  localizeChoices(allTypes);
+  Object.assign(subTypes, TERIOCK.system.documentTypes.actors);
+  Object.assign(subTypes, TERIOCK.system.documentTypes.items);
+  Object.assign(subTypes, TERIOCK.system.documentTypes.effects);
   Object.assign(allTypes, sortObject(subTypes));
   return new SchemaField({
     key: new EnhancedStringField({
@@ -470,11 +469,14 @@ export function costField(options = { extraChoices: {} }) {
  */
 export function competenceField() {
   return new NumberField({
-    choices: {
-      0: game.i18n.localize("TERIOCK.SCHEMA.Competence.choices.0"),
-      1: game.i18n.localize("TERIOCK.SCHEMA.Competence.choices.1"),
-      2: game.i18n.localize("TERIOCK.SCHEMA.Competence.choices.2"),
-    },
+    choices: localizeChoices(
+      {
+        0: "TERIOCK.SCHEMA.Competence.choices.0",
+        1: "TERIOCK.SCHEMA.Competence.choices.1",
+        2: "TERIOCK.SCHEMA.Competence.choices.2",
+      },
+      { sort: false },
+    ),
     hint: game.i18n.localize("TERIOCK.SCHEMA.Competence.hint"),
     initial: 0,
     label: game.i18n.localize("TERIOCK.SCHEMA.Competence.label"),

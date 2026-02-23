@@ -14,7 +14,7 @@ export default function downVisionMode() {
   return new TeriockVisionMode(
     {
       id: "down",
-      label: "Down",
+      label: "TERIOCK.PERCEPTION.VisionModes.down",
       canvas: {
         shader: shaders.ColorAdjustmentsSamplerShader,
         uniforms: {

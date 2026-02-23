@@ -1,4 +1,4 @@
-import { propertyPseudoHooks } from "../../../../constants/system/pseudo-hooks.mjs";
+import { pseudoHooks } from "../../../../constants/system/_module.mjs";
 import { ArmamentExecution } from "../../../../executions/document-executions/_module.mjs";
 import { formulaExists } from "../../../../helpers/formula.mjs";
 import { toCamelCase } from "../../../../helpers/string.mjs";
@@ -62,7 +62,7 @@ export default function ArmamentSystemMixin(Base) {
           fightingStyle: new fields.StringField({
             initial: null,
             nullable: true,
-            choices: TERIOCK.index.weaponFightingStyles,
+            choices: TERIOCK.reference.weaponFightingStyles,
           }),
           hit: new EvaluationField({
             floor: true,
@@ -126,7 +126,7 @@ export default function ArmamentSystemMixin(Base) {
                   { value: this.attackPenalty.formula },
                 )
               : "",
-            TERIOCK.index.weaponFightingStyles[this.fightingStyle],
+            TERIOCK.reference.weaponFightingStyles[this.fightingStyle],
           ],
         };
       }
@@ -170,7 +170,14 @@ export default function ArmamentSystemMixin(Base) {
           {
             classes: "italic-display-field",
             editable: false,
-            label: `${TERIOCK.index.weaponFightingStyles[this.fightingStyle]} Fighting Style`,
+            label: game.i18n.format(
+              "TERIOCK.SYSTEMS.Armament.FIELDS.fightingStyle.named",
+              {
+                name: TERIOCK.reference.weaponFightingStyles[
+                  this.fightingStyle
+                ],
+              },
+            ),
             path: "system.specialRules",
           },
         ];
@@ -289,7 +296,7 @@ export default function ArmamentSystemMixin(Base) {
         // Macros
         this.hookedMacros =
           /** @type {Teriock.Parameters.Equipment.HookedEquipmentMacros} */ {};
-        for (const pseudoHook of Object.keys(propertyPseudoHooks)) {
+        for (const pseudoHook of Object.keys(pseudoHooks.property)) {
           this.hookedMacros[pseudoHook] = [];
         }
       }

@@ -6,15 +6,14 @@
         document.schema.fields._stats.fields.compendiumSource
         value=document._stats.compendiumSource
         rootId=id
-        hint=(concat "An uembedded document in a compendium that this is sourced from. If this is refreshed, it pulls "
-          "from the document specified here.")
-        label="Compendium Source"
+        hint=(localize "TERIOCK.SHEETS.DocumentSettings.FIELDS.compendiumSource.hint")
+        label=(localize "TERIOCK.SHEETS.DocumentSettings.FIELDS.compendiumSource.label")
       }}
     </fieldset>
   {{/if}}
   {{#if hasQualifiers}}
     <fieldset>
-      <legend>Qualifiers</legend>
+      <legend>{{localize "TERIOCK.SHEETS.DocumentSettings.FIELDS.qualifiers.legend"}}</legend>
       {{formGroup
         document.system.schema.fields.qualifiers.fields.ephemeral.fields.raw
         value=document.system.qualifiers.ephemeral.raw
@@ -29,7 +28,7 @@
   {{/if}}
   {{#if hasOtherSettings}}
     <fieldset>
-      <legend>Automated Behavior</legend>
+      <legend>{{localize "TERIOCK.SHEETS.DocumentSettings.FIELDS.automatedBehavior.legend"}}</legend>
       {{#each otherSettings as |value name|}}
         {{formGroup
           (path @root/document.flags.teriockDocumentSettings.schema.fields name)
@@ -42,7 +41,7 @@
   {{/if}}
   {{#if hasSheetSettings}}
     <fieldset>
-      <legend>Sheet Display</legend>
+      <legend>{{localize "TERIOCK.SHEETS.DocumentSettings.FIELDS.sheetDisplay.legend"}}</legend>
       {{#each sheetSettings as |value name|}}
         {{formGroup
           (path @root/document.flags.teriockDocumentSettings.schema.fields name)

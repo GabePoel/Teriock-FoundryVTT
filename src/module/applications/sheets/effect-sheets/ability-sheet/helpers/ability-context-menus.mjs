@@ -74,9 +74,21 @@ export default function abilityContextMenus(ability) {
     piercing: TeriockContextMenu.makeUpdateEntries(
       ability,
       [
-        { name: "None", icon: TERIOCK.display.icons.piercing.none, value: 0 },
-        { name: "AV0", icon: TERIOCK.display.icons.piercing.av0, value: 1 },
-        { name: "UB", icon: TERIOCK.display.icons.piercing.ub, value: 2 },
+        {
+          name: game.i18n.localize("TERIOCK.MODELS.Piercing.MENU.0"),
+          icon: TERIOCK.display.icons.piercing.none,
+          value: 0,
+        },
+        {
+          name: game.i18n.localize("TERIOCK.MODELS.Piercing.MENU.1"),
+          icon: TERIOCK.display.icons.piercing.av0,
+          value: 1,
+        },
+        {
+          name: game.i18n.localize("TERIOCK.MODELS.Piercing.MENU.2"),
+          icon: TERIOCK.display.icons.piercing.ub,
+          value: 2,
+        },
       ],
       {
         path: "system.piercing.raw",
@@ -84,7 +96,7 @@ export default function abilityContextMenus(ability) {
     ),
     maneuver: [
       {
-        name: "Active",
+        name: game.i18n.localize("TERIOCK.TERMS.Maneuver.active"),
         icon: makeIcon(TERIOCK.display.icons.maneuver.active, "contextMenu"),
         callback: async () => {
           await ability.update({
@@ -95,7 +107,7 @@ export default function abilityContextMenus(ability) {
         },
       },
       {
-        name: "Reactive",
+        name: game.i18n.localize("TERIOCK.TERMS.Maneuver.reactive"),
         icon: makeIcon(TERIOCK.display.icons.maneuver.reactive, "contextMenu"),
         callback: async () => {
           await ability.update({
@@ -106,7 +118,7 @@ export default function abilityContextMenus(ability) {
         },
       },
       {
-        name: "Passive",
+        name: game.i18n.localize("TERIOCK.TERMS.Maneuver.passive"),
         icon: makeIcon(TERIOCK.display.icons.maneuver.passive, "contextMenu"),
         callback: async () =>
           await ability.update({
@@ -115,7 +127,7 @@ export default function abilityContextMenus(ability) {
           }),
       },
       {
-        name: "Slow",
+        name: game.i18n.localize("TERIOCK.TERMS.Maneuver.slow"),
         icon: makeIcon(TERIOCK.display.icons.maneuver.slow, "contextMenu"),
         callback: async () => {
           await ability.update({
@@ -135,7 +147,7 @@ export default function abilityContextMenus(ability) {
     ),
     manaCost: [
       {
-        name: "No Mana Cost",
+        name: game.i18n.localize("TERIOCK.TERMS.Cost.none"),
         icon: makeIcon(TERIOCK.display.icons.ui.remove, "contextMenu"),
         callback: () =>
           ability.update({
@@ -143,7 +155,7 @@ export default function abilityContextMenus(ability) {
           }),
       },
       {
-        name: "Static Cost",
+        name: game.i18n.localize("TERIOCK.TERMS.Cost.static"),
         icon: makeIcon(TERIOCK.display.icons.ui.numerical, "contextMenu"),
         callback: () =>
           ability.update({
@@ -154,7 +166,7 @@ export default function abilityContextMenus(ability) {
           }),
       },
       {
-        name: "Formula Cost",
+        name: game.i18n.localize("TERIOCK.TERMS.Cost.formula"),
         icon: makeIcon(TERIOCK.display.icons.ui.formula, "contextMenu"),
         callback: () =>
           ability.update({
@@ -165,7 +177,7 @@ export default function abilityContextMenus(ability) {
           }),
       },
       {
-        name: "Variable Cost",
+        name: game.i18n.localize("TERIOCK.TERMS.Cost.variable"),
         icon: makeIcon(TERIOCK.display.icons.ui.variable, "contextMenu"),
         callback: () =>
           ability.update({
@@ -178,7 +190,7 @@ export default function abilityContextMenus(ability) {
     ],
     hitCost: [
       {
-        name: "No Hit Cost",
+        name: game.i18n.localize("TERIOCK.TERMS.Cost.none"),
         icon: makeIcon(TERIOCK.display.icons.ui.remove, "contextMenu"),
         callback: () =>
           ability.update({
@@ -186,7 +198,7 @@ export default function abilityContextMenus(ability) {
           }),
       },
       {
-        name: "Static Cost",
+        name: game.i18n.localize("TERIOCK.TERMS.Cost.static"),
         icon: makeIcon(TERIOCK.display.icons.ui.numerical, "contextMenu"),
         callback: () =>
           ability.update({
@@ -197,7 +209,7 @@ export default function abilityContextMenus(ability) {
           }),
       },
       {
-        name: "Hack Cost",
+        name: game.i18n.localize("TERIOCK.TERMS.Cost.hack"),
         icon: makeIcon(TERIOCK.display.icons.ui.hack, "contextMenu"),
         callback: () =>
           ability.update({
@@ -205,7 +217,7 @@ export default function abilityContextMenus(ability) {
           }),
       },
       {
-        name: "Formula Cost",
+        name: game.i18n.localize("TERIOCK.TERMS.Cost.formula"),
         icon: makeIcon(TERIOCK.display.icons.ui.formula, "contextMenu"),
         callback: () =>
           ability.update({
@@ -216,20 +228,22 @@ export default function abilityContextMenus(ability) {
           }),
       },
       {
-        name: "Variable Cost",
+        name: game.i18n.localize("TERIOCK.TERMS.Cost.variable"),
         icon: makeIcon(TERIOCK.display.icons.ui.variable, "contextMenu"),
         callback: () =>
           ability.update({
             "system.costs.hp": {
               type: "variable",
-              "value.variable": "<p>Enter cost here.</p>",
+              "value.variable": game.i18n.localize(
+                "TERIOCK.SYSTEMS.Ability.FIELDS.costs.default",
+              ),
             },
           }),
       },
     ],
     goldCost: [
       {
-        name: "No Gold Cost",
+        name: game.i18n.localize("TERIOCK.TERMS.Cost.none"),
         icon: makeIcon(TERIOCK.display.icons.ui.remove, "contextMenu"),
         callback: () =>
           ability.update({
@@ -237,7 +251,7 @@ export default function abilityContextMenus(ability) {
           }),
       },
       {
-        name: "Static Cost",
+        name: game.i18n.localize("TERIOCK.TERMS.Cost.static"),
         icon: makeIcon(TERIOCK.display.icons.ui.numerical, "contextMenu"),
         callback: () =>
           ability.update({
@@ -248,7 +262,7 @@ export default function abilityContextMenus(ability) {
           }),
       },
       {
-        name: "Formula Cost",
+        name: game.i18n.localize("TERIOCK.TERMS.Cost.formula"),
         icon: makeIcon(TERIOCK.display.icons.ui.formula, "contextMenu"),
         callback: () =>
           ability.update({
@@ -259,7 +273,7 @@ export default function abilityContextMenus(ability) {
           }),
       },
       {
-        name: "Variable Cost",
+        name: game.i18n.localize("TERIOCK.TERMS.Cost.variable"),
         icon: makeIcon(TERIOCK.display.icons.ui.variable, "contextMenu"),
         callback: () =>
           ability.update({
@@ -272,7 +286,7 @@ export default function abilityContextMenus(ability) {
     ],
     breakCost: [
       {
-        name: "No Break Cost",
+        name: game.i18n.localize("TERIOCK.TERMS.BreakCost.none"),
         icon: makeIcon(TERIOCK.display.icons.ui.remove, "contextMenu"),
         callback: () =>
           ability.update({
@@ -280,7 +294,7 @@ export default function abilityContextMenus(ability) {
           }),
       },
       {
-        name: "Shatter Cost",
+        name: game.i18n.localize("TERIOCK.TERMS.BreakCost.shatter"),
         icon: makeIcon(TERIOCK.display.icons.break.shatter, "contextMenu"),
         callback: () =>
           ability.update({
@@ -288,7 +302,7 @@ export default function abilityContextMenus(ability) {
           }),
       },
       {
-        name: "Destroy Cost",
+        name: game.i18n.localize("TERIOCK.TERMS.BreakCost.destroy"),
         icon: makeIcon(TERIOCK.display.icons.break.destroy, "contextMenu"),
         callback: () =>
           ability.update({

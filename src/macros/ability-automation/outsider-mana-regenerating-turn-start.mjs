@@ -1,6 +1,8 @@
 if (actor.isDrained) {
   await actor.system.takeRevitalize({
     consumeStatDice: false,
-    title: "Outsider Mana Regenerating",
+    title: game.i18n.localize(
+      "TERIOCK.TERMS.Abilities.outsiderManaRegenerating",
+    ),
   });
 }

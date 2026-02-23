@@ -12,14 +12,14 @@ export const detectionModes = {
   blindFighting: new detection.BlindFightingPerception({
     angle: false,
     id: "blindFighting",
-    label: "Blind Fighting",
+    label: "TERIOCK.PERCEPTION.DetectionModes.blindFighting",
     type: BaseDetectionMode.DETECTION_TYPES.MOVE,
   }),
   /** Dark vision detection mode */
   darkVision: new detection.BasePerception({
     angle: false,
     id: "darkVision",
-    label: "Dark Vision",
+    label: "TERIOCK.PERCEPTION.DetectionModes.darkVision",
     type: BaseDetectionMode.DETECTION_TYPES.SIGHT,
   }),
   /** Ethereal light detection mode */
@@ -27,21 +27,21 @@ export const detectionModes = {
     angle: true,
     ethereal: true,
     id: "etherealLight",
-    label: "Ethereal Light",
+    label: "TERIOCK.PERCEPTION.DetectionModes.etherealLight",
     type: BaseDetectionMode.DETECTION_TYPES.SIGHT,
   }),
   /** Light perception detection mode */
   lightPerception: new detection.LightPerception({
     angle: false,
     id: "lightPerception",
-    label: "Light Perception",
+    label: "TERIOCK.PERCEPTION.DetectionModes.lightPerception",
     type: BaseDetectionMode.DETECTION_TYPES.SIGHT,
   }),
   /** Night vision detection mode */
   nightVision: new detection.BasePerception({
     angle: false,
     id: "nightVision",
-    label: "Night Vision",
+    label: "TERIOCK.PERCEPTION.DetectionModes.nightVision",
     type: BaseDetectionMode.DETECTION_TYPES.SIGHT,
     walls: false,
   }),
@@ -49,7 +49,7 @@ export const detectionModes = {
   scentPerception: new detection.ScentPerception({
     angle: false,
     id: "scentPerception",
-    label: "Scent Perception",
+    label: "TERIOCK.PERCEPTION.DetectionModes.scentPerception",
     material: false,
     type: BaseDetectionMode.DETECTION_TYPES.OTHER,
   }),
@@ -58,21 +58,21 @@ export const detectionModes = {
     angle: false,
     ethereal: true,
     id: "seeEthereal",
-    label: "See Ethereal",
+    label: "TERIOCK.PERCEPTION.DetectionModes.seeEthereal",
     type: BaseDetectionMode.DETECTION_TYPES.SIGHT,
   }),
   /** Invisible perception detection mode */
   seeInvisible: new detection.InvisiblePerception({
     angle: false,
     id: "seeInvisible",
-    label: "See Invisible",
+    label: "TERIOCK.PERCEPTION.DetectionModes.seeInvisible",
     type: BaseDetectionMode.DETECTION_TYPES.SIGHT,
   }),
   /** Sound perception detection mode */
   soundPerception: new detection.SoundPerception({
     angle: false,
     id: "soundPerception",
-    label: "Sound Perception",
+    label: "TERIOCK.PERCEPTION.DetectionModes.soundPerception",
     material: false,
     type: BaseDetectionMode.DETECTION_TYPES.SOUND,
   }),
@@ -81,7 +81,7 @@ export const detectionModes = {
     angle: false,
     ethereal: true,
     id: "trueSight",
-    label: "True Sight",
+    label: "TERIOCK.PERCEPTION.DetectionModes.trueSight",
     type: BaseDetectionMode.DETECTION_TYPES.SIGHT,
   }),
 };

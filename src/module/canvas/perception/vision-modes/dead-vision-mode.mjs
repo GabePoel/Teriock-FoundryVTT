@@ -14,7 +14,7 @@ export default function deadVisionMode() {
   return new TeriockVisionMode(
     {
       id: "dead",
-      label: "Dead",
+      label: "TERIOCK.PERCEPTION.VisionModes.dead",
       canvas: {
         shader: shaders.ColorAdjustmentsSamplerShader,
         uniforms: {

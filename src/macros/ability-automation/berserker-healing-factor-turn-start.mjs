@@ -5,6 +5,6 @@ if (
 ) {
   await actor.system.takeHeal({
     noStatDice: true,
-    title: "Berserker Healing Factor",
+    title: game.i18n.localize("TERIOCK.TERMS.Abilities.berserkerHealingFactor"),
   });
 }

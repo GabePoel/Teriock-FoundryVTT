@@ -17,7 +17,7 @@ export default function etherealVisionMode() {
   return new TeriockVisionMode(
     {
       id: "ethereal",
-      label: "Ethereal",
+      label: "TERIOCK.PERCEPTION.VisionModes.ethereal",
       canvas: {
         shader: shaders.ColorAdjustmentsSamplerShader,
         uniforms: {

@@ -157,7 +157,9 @@ export default function registerUiHelpers() {
         })?.toHTML?.() ?? "",
       );
 
-      const tabDisplay = tab.charAt(0).toUpperCase() + tab.slice(1);
+      const tabDisplay =
+        TERIOCK.options.document[tab]?.name ||
+        tab.charAt(0).toUpperCase() + tab.slice(1);
 
       return new Handlebars.SafeString(`
       <div class="teriock-block-options-header">
@@ -166,7 +168,7 @@ export default function registerUiHelpers() {
           data-bool="${optionsToggle}"
           data-path="${optionsPath}"
           data-action="sheetToggle"
-          data-tooltip="Display Options"
+          data-tooltip="${game.i18n.localize("TERIOCK.SHEETS.Common.SEARCH.displayOptions")}"
         >
           <i class="fa-fw fa-solid fa-sliders"></i>
         </button>
@@ -179,7 +181,7 @@ export default function registerUiHelpers() {
             data-bool="${sortToggle}"
             data-path="${sortPath}"
             data-action="sheetToggle"
-            data-tooltip="Sort Results"
+            data-tooltip="${game.i18n.localize("TERIOCK.SHEETS.Common.SEARCH.sortResults")}"
           >
             <i class="fa-fw fa-solid fa-bars-sort"></i>
           </button>`
@@ -194,7 +196,7 @@ export default function registerUiHelpers() {
             data-bool="${filterToggle}"
             data-path="${filterPath}"
             data-action="sheetToggle"
-            data-tooltip="Filter Results"
+            data-tooltip="${game.i18n.localize("TERIOCK.SHEETS.Common.SEARCH.filterResults")}"
           >
             <i class="fa-fw fa-solid fa-filter"></i>
           </button>`
@@ -204,7 +206,7 @@ export default function registerUiHelpers() {
         <input
           class="${tab}-search teriock-block-search"
           type="text"
-          placeholder="Search"
+          placeholder="${game.i18n.localize("TERIOCK.SHEETS.Common.SEARCH.placeholder")}"
           data-type="${tab}"
           ${searchKey}
         >
@@ -214,7 +216,12 @@ export default function registerUiHelpers() {
             ? `
           <button class="ttoggle-button ${tab}-add-button add-button" data-tab="${tab}"
             data-action="${addAction}"
-            data-tooltip="New ${tabDisplay}"
+            data-tooltip="${game.i18n.format(
+              "TERIOCK.DIALOGS.NewDocument.title",
+              {
+                name: tabDisplay,
+              },
+            )}"
           >
             <i class="fa-fw fa-solid fa-${TERIOCK.display.icons.ui.add}"></i>
           </button>`
@@ -228,7 +235,7 @@ export default function registerUiHelpers() {
         <div class="teriock-block-options-content">
           <div class="tgrid g4">
             <div class="tgrid-item">
-              <label for="${tab}-gapless">Gapless</label>
+              <label for="${tab}-gapless">${game.i18n.localize("TERIOCK.SHEETS.Common.SEARCH.gapless")}</label>
               <input 
                 type="checkbox"
                 name="${gaplessPath}"
@@ -238,7 +245,7 @@ export default function registerUiHelpers() {
             </div>
             <div class="tgrid-item gi3">
               <select name="${sizePath}" id="${tab}-size">
-                <option value="">Card Size</option>
+                <option value="">${game.i18n.localize("TERIOCK.SHEETS.Common.SEARCH.cardSize")}</option>
                 ${selectOptions(sizeOptions, { hash: { selected: sizeValue } })}
               </select>
             </div>

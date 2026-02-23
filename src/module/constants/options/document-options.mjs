@@ -14,6 +14,7 @@ export const documentOptions = {
     index: "abilities",
     name: "TYPES.ActiveEffect.ability",
     pack: "abilities",
+    plural: "TERIOCK.DOCUMENTS.ability.plural",
     sorter: effectSort,
   },
   attunement: {
@@ -21,6 +22,7 @@ export const documentOptions = {
     getter: "attunements",
     icon: icons.document.attunement,
     name: "TYPES.ActiveEffect.attunement",
+    plural: "TERIOCK.DOCUMENTS.attunement.plural",
     sorter: docSort,
   },
   body: {
@@ -30,6 +32,7 @@ export const documentOptions = {
     index: "bodyParts",
     name: "TYPES.Item.body",
     pack: "bodyParts",
+    plural: "TERIOCK.DOCUMENTS.body.plural",
     sorter: docSort,
   },
   character: {
@@ -37,6 +40,7 @@ export const documentOptions = {
     getter: "characters",
     icon: icons.document.character,
     name: "TYPES.Actor.character",
+    plural: "TERIOCK.DOCUMENTS.character.plural",
     sorter: docSort,
   },
   condition: {
@@ -45,6 +49,7 @@ export const documentOptions = {
     icon: icons.document.condition,
     index: "conditions",
     name: "TYPES.ActiveEffect.condition",
+    plural: "TERIOCK.DOCUMENTS.condition.plural",
     sorter: docSort,
   },
   consequence: {
@@ -52,6 +57,7 @@ export const documentOptions = {
     getter: "consequences",
     icon: icons.document.consequence,
     name: "TYPES.ActiveEffect.consequence",
+    plural: "TERIOCK.DOCUMENTS.consequence.plural",
     sorter: docSort,
   },
   creature: {
@@ -60,21 +66,27 @@ export const documentOptions = {
     icon: icons.document.creature,
     name: "TYPES.Actor.creature",
     pack: "creatures",
+    plural: "TERIOCK.DOCUMENTS.creature.plural",
     sorter: docSort,
   },
   damage: {
     doc: "JournalEntryPage",
     icon: icons.effect.damage,
+    name: "TYPES.JournalEntryPage.damage",
+    plural: "TERIOCK.DOCUMENTS.damage.plural",
   },
   drain: {
     doc: "JournalEntryPage",
     icon: icons.effect.drain,
+    name: "TYPES.JournalEntryPage.drain",
+    plural: "TERIOCK.DOCUMENTS.drain.plural",
   },
   effect: {
     doc: "ActiveEffect",
     getter: "effects",
     icon: icons.document.effect,
     name: "TYPES.ActiveEffect.effect",
+    plural: "TERIOCK.DOCUMENTS.effect.plural",
     sorter: docSort,
   },
   equipment: {
@@ -84,6 +96,7 @@ export const documentOptions = {
     index: "equipment",
     name: "TYPES.Item.equipment",
     pack: "equipment",
+    plural: "TERIOCK.DOCUMENTS.equipment.plural",
     sorter: docSort,
   },
   fluency: {
@@ -91,6 +104,7 @@ export const documentOptions = {
     getter: "fluencies",
     icon: icons.document.fluency,
     name: "TYPES.ActiveEffect.fluency",
+    plural: "TERIOCK.DOCUMENTS.fluency.plural",
     sorter: docSort,
   },
   mount: {
@@ -98,6 +112,7 @@ export const documentOptions = {
     getter: "mounts",
     icon: icons.document.mount,
     name: "TYPES.Item.mount",
+    plural: "TERIOCK.DOCUMENTS.mount.plural",
     sorter: docSort,
   },
   power: {
@@ -105,6 +120,7 @@ export const documentOptions = {
     getter: "powers",
     icon: icons.document.power,
     name: "TYPES.Item.power",
+    plural: "TERIOCK.DOCUMENTS.power.plural",
     sorter: docSort,
   },
   property: {
@@ -114,6 +130,7 @@ export const documentOptions = {
     index: "properties",
     name: "TYPES.ActiveEffect.property",
     pack: "properties",
+    plural: "TERIOCK.DOCUMENTS.property.plural",
     sorter: effectSort,
   },
   rank: {
@@ -123,6 +140,7 @@ export const documentOptions = {
     index: "classes",
     name: "TYPES.Item.rank",
     pack: "classes",
+    plural: "TERIOCK.DOCUMENTS.rank.plural",
     sorter: rankSort,
   },
   resource: {
@@ -130,6 +148,7 @@ export const documentOptions = {
     getter: "resources",
     icon: icons.document.resource,
     name: "TYPES.ActiveEffect.resource",
+    plural: "TERIOCK.DOCUMENTS.resource.plural",
     sorter: docSort,
   },
   species: {
@@ -139,18 +158,21 @@ export const documentOptions = {
     index: "creatures",
     name: "TYPES.Item.species",
     pack: "species",
+    plural: "TERIOCK.DOCUMENTS.species.plural",
     sorter: docSort,
   },
   stone: {
     doc: "Card",
     icon: icons.document.stone,
     name: "TYPES.Card.stone",
+    plural: "TERIOCK.DOCUMENTS.stone.plural",
   },
   wrapper: {
     doc: "Item",
     icon: icons.document.ability,
     name: "TYPES.Item.wrapper",
+    plural: "TERIOCK.DOCUMENTS.wrapper.plural",
   },
 };
 
-preLocalize("options.document", { keys: ["name"] });
+preLocalize("options.document", { keys: ["name", "plural"] });

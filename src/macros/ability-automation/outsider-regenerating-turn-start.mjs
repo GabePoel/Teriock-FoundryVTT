@@ -1,6 +1,6 @@
 if (actor.isDamaged) {
   await actor.system.takeHeal({
     consumeStatDice: false,
-    title: "Outsider Regenerating",
+    title: game.i18n.localize("TERIOCK.TERMS.Abilities.outsiderRegenerating"),
   });
 }

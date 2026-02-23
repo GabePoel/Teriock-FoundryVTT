@@ -7,7 +7,7 @@
       iconColor=(path
         TERIOCK.options.equipment.powerLevel system.identification.powerLevel "color"
       )
-      tooltip="Power Level"
+      tooltip=(localize "TERIOCK.SYSTEMS.Equipment.FIELDS.powerLevel.label")
     }}
   {{else}}
     {{formBox
@@ -17,7 +17,7 @@
       iconColor=(path
         TERIOCK.options.equipment.powerLevel system.powerLevel "color"
       )
-      tooltip="Power Level"
+      tooltip=(localize "TERIOCK.SYSTEMS.Equipment.FIELDS.powerLevel.label")
     }}
   {{/if}}
   {{formBox
@@ -25,9 +25,9 @@
       systemFields.equipmentType
       value=system.equipmentType
       disabled=(not editable)
-      placeholder="Equipment Type"
+      placeholder=(localize "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentType.label")
     )
-    tooltip="Equipment Type"
+    tooltip=(localize "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentType.label")
     icon=TERIOCK.display.icons.equipment.equipmentType
   }}
   {{formBox
@@ -47,6 +47,6 @@
     icon=TERIOCK.display.icons.ability.range
     includeSecondary=(not (eq system.range.long.unitType "zero"))
     label=(ifThen (eq system.range.long.unitType "finite") system.range.long.symbol "")
-    tooltip="Range"
+    tooltip=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.range.long.raw.label")
   }}
 </div>

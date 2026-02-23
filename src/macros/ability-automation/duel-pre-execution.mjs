@@ -17,7 +17,10 @@ function modifyData(data) {
     });
     effectObject.system.associations = [
       {
-        title: "Lighted With Respect To",
+        title: game.i18n.format(
+          "TERIOCK.SYSTEMS.Ability.PANELS.statusWithRespectTo",
+          { status: TERIOCK.reference.conditions.lighted },
+        ),
         icon: TERIOCK.options.document.creature.icon,
         cards: [
           {

@@ -16,7 +16,7 @@ export default class HpPoolModel extends StatPoolModel {
 
   /** @inheritDoc */
   get dieName() {
-    return "Hit Dice";
+    return game.i18n.localize("TERIOCK.MODELS.HpPool.PANELS.name");
   }
 
   /** @inheritDoc */
@@ -57,7 +57,7 @@ export default class HpPoolModel extends StatPoolModel {
       panels.push({
         image: getImage("effect-types", "Awakening"),
         icon: TERIOCK.display.icons.effect.awaken,
-        name: "Awaken",
+        name: game.i18n.localize("TERIOCK.EFFECTS.Common.awaken"),
         bars: [],
         blocks: [
           {

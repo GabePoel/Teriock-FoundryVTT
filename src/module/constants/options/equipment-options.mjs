@@ -1,6 +1,7 @@
 import { preLocalize } from "../../helpers/localization.mjs";
 import { colors, icons } from "../display/_module.mjs";
 import * as index from "../index/_module.mjs";
+import reference from "../reference/_module.mjs";
 
 export const equipmentOptions = {
   powerLevel: {
@@ -31,8 +32,8 @@ export const equipmentOptions = {
     magic: "TERIOCK.TERMS.PowerLevel.magic",
     unknown: "TERIOCK.TERMS.PowerLevel.unknown",
   },
-  equipmentClasses: index.equipmentClasses,
-  weaponFightingStyles: index.weaponFightingStyles,
+  equipmentClasses: reference.equipmentClasses,
+  weaponFightingStyles: reference.weaponFightingStyles,
   equipmentType: index.equipment,
   unidentifiedProperties: ["Morganti", "Master Crafted"],
 };

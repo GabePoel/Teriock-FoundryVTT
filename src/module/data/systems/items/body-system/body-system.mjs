@@ -74,8 +74,10 @@ export default class BodySystem extends mix(
             "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentClasses.label",
           ),
           wrappers: [
-            "Body parts",
-            this.av.value ? "Armor" : "",
+            game.i18n.localize("TERIOCK.TERMS.EquipmentClasses.bodyParts"),
+            this.av.value
+              ? game.i18n.localize("TERIOCK.TERMS.EquipmentClasses.armor")
+              : "",
             this.spellTurning
               ? game.i18n.localize(
                   "TERIOCK.SYSTEMS.Armament.FIELDS.spellTurning.label",

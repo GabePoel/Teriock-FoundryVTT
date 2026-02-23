@@ -10,21 +10,27 @@
     {{formBox
       (formInput
         systemFields.damage.fields.base
-        dataset=(object tooltip=(ifThen (exists system._source.damage.twoHanded.raw) "Damage" ""))
+        dataset=(object
+          tooltip=(ifThen
+            (exists system._source.damage.twoHanded.raw)
+            (localize "TERIOCK.SYSTEMS.Armament.FIELDS.damage.base.raw.label")
+            ""
+          )
+        )
         disabled=(not editable)
         value=system._source.damage.base.raw
       )
       secondary=(formInput
         systemFields.damage.fields.twoHanded
-        dataset=(object tooltip="Two-Handed Damage")
+        dataset=(object tooltip=(localize "TERIOCK.SYSTEMS.Equipment.FIELDS.damage.twoHanded.raw.label"))
         disabled=(not editable)
         value=system._source.damage.twoHanded.raw
       )
       icon=(firstDie system.damage.base.formula)
       include=(exists system.damage.base.raw)
       includeSecondary=(exists system._source.damage.twoHanded.raw)
-      label="DMG"
-      tooltip="Damage"
+      label=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.damage.base.raw.abbreviation")
+      tooltip=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.damage.base.raw.label")
     }}
     {{formBox
       (formInput
@@ -34,7 +40,7 @@
       )
       icon=TERIOCK.display.icons.armament.av
       include=(exists system.av.raw)
-      label="AV"
+      label=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.av.raw.abbreviation")
       unselected=system.av.value
       tooltip=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.av.raw.label")
     }}
@@ -46,7 +52,7 @@
       )
       icon=TERIOCK.display.icons.armament.bv
       include=(exists system.bv.raw)
-      label="BV"
+      label=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.bv.raw.abbreviation")
       unselected=system.bv.value
       tooltip=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.bv.raw.label")
     }}
@@ -58,7 +64,7 @@
       )
       icon=TERIOCK.display.icons.armament.hitBonus
       include=(exists system.hit.raw)
-      label="HIT"
+      label=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.hit.raw.abbreviation")
       unselected=system.hit.raw
       tooltip=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.hit.raw.label")
     }}
@@ -69,7 +75,7 @@
         value=system._source.attackPenalty.raw
       )
       icon=TERIOCK.display.icons.armament.ap
-      label="AP"
+      label=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.attackPenalty.raw.abbreviation")
       unselected=system.attackPenalty.formula
       tooltip=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.attackPenalty.raw.label")
     }}

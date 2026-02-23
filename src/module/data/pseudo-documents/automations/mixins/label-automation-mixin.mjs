@@ -12,12 +12,15 @@ export default function LabelAutomationMixin(Base) {
      * @property {string} title
      */
     class LabelAutomation extends Base {
+      /** @inheritDoc */
+      static LOCALIZATION_PREFIXES = [
+        ...super.LOCALIZATION_PREFIXES,
+        "TERIOCK.AUTOMATIONS.LabelAutomation",
+      ];
+
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          title: new fields.StringField({
-            label: "Label",
-            hint: "Text to display on the button. Leave blank for default text.",
-          }),
+          title: new fields.StringField(),
         });
       }
     }

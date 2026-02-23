@@ -1,70 +1,81 @@
-export const commonPseudoHooks = {
-  execution: "Executing This",
-  preExecution: "Before Executing This",
-};
+import { preLocalize } from "../../helpers/localization.mjs";
 
-export const abilityPseudoHooks = {
+const commonPseudoHooks = {
+  execution: "TERIOCK.PSEUDO_HOOKS.execution",
+  preExecution: "TERIOCK.PSEUDO_HOOKS.preExecution",
+};
+preLocalize("system.pseudoHooks.common", { sort: true });
+
+const abilityPseudoHooks = {
   ...commonPseudoHooks,
-  documentChat: "Document Sharing to Chat",
-  documentDuplicate: "Document Duplication",
-  effectApplication: "Effect Application",
-  effectExpiration: "Effect Expiration",
-  movement: "Movement",
-  postUpdate: "Actor Post-updating",
-  deathBagPull: "Pull From Death Bag",
-  rollFeatSave: "Rolling a Feat Save",
-  rollImmunity: "Rolling an Immunity Save",
-  rollResistance: "Rolling a Resistance Save",
-  rollTradecraft: "Rolling a Tradecraft Check",
-  takeAwaken: "Taking Awaken",
-  takeDamage: "Taking Damage",
-  takeDrain: "Taking Drain",
-  takeGainTempHp: "Gaining Temp HP",
-  takeGainTempMp: "Gaining Temp MP",
-  takeHack: "Taking Hack",
-  takeHeal: "Taking Healing",
-  takeKill: "Taking Auto-kill Effect",
-  takeNormalHeal: "Taking Normal Healing",
-  takeNormalRevitalize: "Taking Normal Revitalization",
-  takePay: "Making Payment",
-  takeRevitalize: "Taking Revitalization",
-  takeRevive: "Taking Revival",
-  takeSetTempHp: "Setting Temp HP",
-  takeSetTempMp: "Setting Temp MP",
-  takeSleep: "Taking Auto-sleep Effect",
-  takeUnhack: "Taking Unhack",
-  takeWither: "Taking Wither",
-  turnEnd: "Actor Turn Ending",
-  turnStart: "Actor Turn Starting",
-  useAbility: "Using an Ability",
-  useArmament: "Using an Armament",
+  documentChat: "TERIOCK.PSEUDO_HOOKS.documentChat",
+  documentDuplicate: "TERIOCK.PSEUDO_HOOKS.documentDuplicate",
+  effectApplication: "TERIOCK.PSEUDO_HOOKS.effectApplication",
+  effectExpiration: "TERIOCK.PSEUDO_HOOKS.effectExpiration",
+  movement: "TERIOCK.PSEUDO_HOOKS.movement",
+  postUpdate: "TERIOCK.PSEUDO_HOOKS.postUpdate",
+  deathBagPull: "TERIOCK.PSEUDO_HOOKS.deathBagPull",
+  rollFeatSave: "TERIOCK.PSEUDO_HOOKS.rollFeatSave",
+  rollImmunity: "TERIOCK.PSEUDO_HOOKS.rollImmunity",
+  rollResistance: "TERIOCK.PSEUDO_HOOKS.rollResistance",
+  rollTradecraft: "TERIOCK.PSEUDO_HOOKS.rollTradecraft",
+  takeAwaken: "TERIOCK.PSEUDO_HOOKS.takeAwaken",
+  takeDamage: "TERIOCK.PSEUDO_HOOKS.takeDamage",
+  takeDrain: "TERIOCK.PSEUDO_HOOKS.takeDrain",
+  takeGainTempHp: "TERIOCK.PSEUDO_HOOKS.takeGainTempHp",
+  takeGainTempMp: "TERIOCK.PSEUDO_HOOKS.takeGainTempMp",
+  takeHack: "TERIOCK.PSEUDO_HOOKS.takeHack",
+  takeHeal: "TERIOCK.PSEUDO_HOOKS.takeHeal",
+  takeKill: "TERIOCK.PSEUDO_HOOKS.takeKill",
+  takeNormalHeal: "TERIOCK.PSEUDO_HOOKS.takeNormalHeal",
+  takeNormalRevitalize: "TERIOCK.PSEUDO_HOOKS.takeNormalRevitalize",
+  takePay: "TERIOCK.PSEUDO_HOOKS.takePay",
+  takeRevitalize: "TERIOCK.PSEUDO_HOOKS.takeRevitalize",
+  takeRevive: "TERIOCK.PSEUDO_HOOKS.takeRevive",
+  takeSetTempHp: "TERIOCK.PSEUDO_HOOKS.takeSetTempHp",
+  takeSetTempMp: "TERIOCK.PSEUDO_HOOKS.takeSetTempMp",
+  takeSleep: "TERIOCK.PSEUDO_HOOKS.takeSleep",
+  takeUnhack: "TERIOCK.PSEUDO_HOOKS.takeUnhack",
+  takeWither: "TERIOCK.PSEUDO_HOOKS.takeWither",
+  turnEnd: "TERIOCK.PSEUDO_HOOKS.turnEnd",
+  turnStart: "TERIOCK.PSEUDO_HOOKS.turnStart",
+  useAbility: "TERIOCK.PSEUDO_HOOKS.useAbility",
+  useArmament: "TERIOCK.PSEUDO_HOOKS.useArmament",
 };
+preLocalize("system.pseudoHooks.ability", { sort: true });
 
-export const propertyPseudoHooks = {
-  equipmentAttune: "Equipment Attunement",
-  equipmentDampen: "Equipment Dampening",
-  equipmentDeattune: "Equipment Deattunement",
-  equipmentEquip: "Equipment Equipping",
-  equipmentGlue: "Equipment Gluing",
-  equipmentIdentify: "Equipment Identification",
-  equipmentReadMagic: "Equipment Reading Magic",
-  equipmentRepair: "Equipment Repairing",
-  equipmentShatter: "Equipment Shattering",
-  equipmentUndampen: "Equipment Undampening",
-  equipmentUnequip: "Equipment Unequipping",
-  equipmentUnglue: "Equipment Ungluing",
-  equipmentUnidentify: "Equipment Unidentification",
-  use: "Using Parent",
+const propertyPseudoHooks = {
+  equipmentAttune: "TERIOCK.PSEUDO_HOOKS.equipmentAttune",
+  equipmentDampen: "TERIOCK.PSEUDO_HOOKS.equipmentDampen",
+  equipmentDeattune: "TERIOCK.PSEUDO_HOOKS.equipmentDeattune",
+  equipmentEquip: "TERIOCK.PSEUDO_HOOKS.equipmentEquip",
+  equipmentGlue: "TERIOCK.PSEUDO_HOOKS.equipmentGlue",
+  equipmentIdentify: "TERIOCK.PSEUDO_HOOKS.equipmentIdentify",
+  equipmentReadMagic: "TERIOCK.PSEUDO_HOOKS.equipmentReadMagic",
+  equipmentRepair: "TERIOCK.PSEUDO_HOOKS.equipmentRepair",
+  equipmentShatter: "TERIOCK.PSEUDO_HOOKS.equipmentShatter",
+  equipmentUndampen: "TERIOCK.PSEUDO_HOOKS.equipmentUndampen",
+  equipmentUnequip: "TERIOCK.PSEUDO_HOOKS.equipmentUnequip",
+  equipmentUnglue: "TERIOCK.PSEUDO_HOOKS.equipmentUnglue",
+  equipmentUnidentify: "TERIOCK.PSEUDO_HOOKS.equipmentUnidentify",
+  use: "TERIOCK.PSEUDO_HOOKS.use",
 };
+preLocalize("system.pseudoHooks.property", { sort: true });
 
-export const unsortedPseudoHooks = foundry.utils.mergeObject(
+const unsortedPseudoHooks = foundry.utils.mergeObject(
   abilityPseudoHooks,
   propertyPseudoHooks,
   commonPseudoHooks,
 );
+preLocalize("system.pseudoHooks.all", { sort: true });
 
-export const pseudoHooks = Object.fromEntries(
-  Object.entries(unsortedPseudoHooks).sort(([, a], [, b]) =>
-    a.localeCompare(b),
-  ),
-);
+/**
+ * @type {Record<string, Record<string, string>>}
+ */
+const pseudoHooks = {
+  ability: abilityPseudoHooks,
+  property: propertyPseudoHooks,
+  common: commonPseudoHooks,
+  all: unsortedPseudoHooks,
+};
+export default pseudoHooks;

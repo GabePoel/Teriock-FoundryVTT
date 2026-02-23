@@ -22,7 +22,7 @@ export default class DurationModel extends TimeUnitModel {
       ...super.infiniteChoiceEntries,
       {
         id: "passive",
-        label: game.i18n.localize("TERIOCK.MODELS.Duration.UNITS.passive"),
+        label: "TERIOCK.MODELS.Duration.UNITS.passive",
       },
     ];
   }
@@ -35,7 +35,7 @@ export default class DurationModel extends TimeUnitModel {
     return [
       {
         id: "instant",
-        label: game.i18n.localize("TERIOCK.MODELS.Duration.UNITS.instant"),
+        label: "TERIOCK.MODELS.Duration.UNITS.instant",
       },
     ];
   }
@@ -79,13 +79,19 @@ export default class DurationModel extends TimeUnitModel {
    */
   get prerequisiteString() {
     const parts = [];
-    if (this.stationary) parts.push("Stationary");
+    if (this.stationary)
+      parts.push(
+        game.i18n.localize("TERIOCK.MODELS.Duration.FIELDS.stationary.label"),
+      );
     parts.push(
       ...this.conditions.present.map((c) => TERIOCK.reference.conditions[c]),
     );
     parts.push(
       ...this.conditions.absent.map((c) =>
-        `Not ${TERIOCK.reference.conditions[c]}`
+        game.i18n
+          .format("TERIOCK.MODELS.Duration.PREREQUISITES.notStatus", {
+            status: TERIOCK.reference.conditions[c],
+          })
           .replace("Not Down", "Up")
           .replace("Not Dead", "Alive")
           .replace("Not Unconscious", "Conscious"),

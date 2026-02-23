@@ -16,7 +16,12 @@
         {{#if @root/editable}}
           <button class="create{{ucFirst type}}" data-action="create{{ucFirst type}}">
             {{makeIcon (path @root/TERIOCK.options.document type "icon") "button"}}
-            Add {{path @root/TERIOCK.options.document type "name"}}</button>{{/if}}
+            {{localize
+              "TERIOCK.SHEETS.Common.ACTIONS.addChild"
+              name=(path @root/TERIOCK.options.document type "name")
+            }}
+          </button>
+        {{/if}}
       </div>
     {{/if}}
   {{/each}}

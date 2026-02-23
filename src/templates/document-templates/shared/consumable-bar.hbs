@@ -6,7 +6,7 @@
       value=system.quantity
     )
     icon=TERIOCK.display.icons.ui.quantity
-    unselected=(concat system.quantity " Remaining")
+    unselected=(localize "TERIOCK.SYSTEMS.Consumable.EMBED.remaining" value=system.quantity)
     tooltip=(localize "TERIOCK.SYSTEMS.Consumable.FIELDS.quantity.label")
   }}
   {{formBox
@@ -16,8 +16,13 @@
       value=system._source.maxQuantity.raw
     )
     icon=TERIOCK.display.icons.ui.maximum
-    unselected=(concat
-      (ifThen system.maxQuantity.raw system.maxQuantity.value "No") " Maximum"
+    unselected=(ifThen
+      system.maxQuantity.raw
+      (localize
+        "TERIOCK.SYSTEMS.Consumable.PANELS.max"
+        value=system.maxQuantity.value
+      )
+      (localize "TERIOCK.SYSTEMS.Consumable.PANELS.noMax")
     )
     tooltip=(localize "TERIOCK.SYSTEMS.Consumable.FIELDS.maxQuantity.raw.label")
   }}

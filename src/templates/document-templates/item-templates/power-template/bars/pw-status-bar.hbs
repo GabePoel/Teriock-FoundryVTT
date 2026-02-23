@@ -12,7 +12,11 @@
       disabled=(not editable)
     )
     icon=TERIOCK.display.icons.armament.av
-    unselected=(ifThen (eq system.maxAv 0) "No Armor" (concat system.maxAv " Max Worn AV"))
+    unselected=(ifThen
+      (eq system.maxAv 0)
+      (localize "TERIOCK.SYSTEMS.Power.PANELS.noArmor")
+      (localize "TERIOCK.SYSTEMS.Power.PANELS.maxAv" value=system.maxAv)
+    )
     tooltip=(localize "TERIOCK.SYSTEMS.BaseItem.FIELDS.maxAv.label")
   }}
 </div>

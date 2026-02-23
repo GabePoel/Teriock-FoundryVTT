@@ -2,30 +2,26 @@
   {{formBox
     (concat
       system.statDice.hp.formula
-      " Hit Di"
-      (ifThen (gt system.statDice.hp.number.value 1) "c" "")
-      "e ("
-      system.statDice.hp.value
-      " HP)"
+      (localize "TERIOCK.SYSTEMS.StatGiver.FIELDS.statDice.hp.label")
+      " (" system.statDice.hp.value " "
+      (localize "TERIOCK.STATS.hp.abbreviation") ")"
     )
     action="setStatDice"
     dataset=(object stat="hp")
     icon=(firstDie system.statDice.hp.formula)
-    tooltip="Hit Dice"
+    tooltip=(localize "TERIOCK.SYSTEMS.StatGiver.FIELDS.statDice.hp.label")
   }}
   {{formBox
     (concat
-      system.statDice.mp.formula
-      " Mana Di"
-      (ifThen (gt system.statDice.mp.number.value 1) "c" "")
-      "e ("
-      system.statDice.mp.value
-      " MP)"
+      system.statDice.mp.formula " "
+      (localize "TERIOCK.SYSTEMS.StatGiver.FIELDS.statDice.hp.label")
+      " (" system.statDice.mp.value " "
+      (localize "TERIOCK.STATS.mp.abbreviation") ")"
     )
     action="setStatDice"
     dataset=(object stat="mp")
     icon=(firstDie system.statDice.mp.formula)
-    tooltip="Mana Dice"
+    tooltip=(localize "TERIOCK.SYSTEMS.StatGiver.FIELDS.statDice.mp.label")
   }}
   {{formBox
     (formInput
@@ -34,7 +30,7 @@
       disabled=(not editable)
     )
     icon=TERIOCK.display.icons.species.br
-    tooltip="Battle Rating"
-    label="BR"
+    tooltip=(localize "TERIOCK.SYSTEMS.Species.FIELDS.br.label")
+    label=(localize "TERIOCK.SYSTEMS.BaseActor.FIELDS.scaling.br.abbreviation")
   }}
 </div>

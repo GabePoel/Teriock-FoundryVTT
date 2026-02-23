@@ -5,6 +5,6 @@ if (
 ) {
   await actor.system.takeHeal({
     consumeStatDice: false,
-    title: "Improved Healing Factor",
+    title: game.i18n.localize("TERIOCK.TERMS.Abilities.improvedHealingFactor"),
   });
 }

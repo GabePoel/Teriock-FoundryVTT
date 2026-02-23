@@ -64,7 +64,7 @@ export default (Base) =>
       const context = await super._prepareContext(options);
       const index = game.teriock.packs.player.index;
       context.tradecraftMacros = Object.fromEntries(
-        Object.entries(TERIOCK.reference.tradecrafts).map(([tc, name]) => [
+        Object.entries(TERIOCK.index.tradecrafts).map(([tc, name]) => [
           tc,
           index.getName(`Make ${name} Check`).uuid,
         ]),

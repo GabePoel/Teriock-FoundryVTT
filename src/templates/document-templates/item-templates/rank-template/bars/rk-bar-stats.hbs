@@ -2,11 +2,9 @@
   {{formBox
     (concat
       system.statDice.hp.formula
-      " Hit Di"
-      (ifThen (gt system.statDice.hp.number.value 1) "c" "")
-      "e ("
-      system.statDice.hp.value
-      " HP)"
+      (localize "TERIOCK.SYSTEMS.StatGiver.FIELDS.statDice.hp.label")
+      " (" system.statDice.hp.value " "
+      (localize "TERIOCK.STATS.hp.abbreviation") ")"
     )
     action="setStatDice"
     dataset=(object stat="hp")
@@ -15,12 +13,10 @@
   }}
   {{formBox
     (concat
-      system.statDice.mp.formula
-      " Mana Di"
-      (ifThen (gt system.statDice.mp.number.value 1) "c" "")
-      "e ("
-      system.statDice.mp.value
-      " MP)"
+      system.statDice.mp.formula " "
+      (localize "TERIOCK.SYSTEMS.StatGiver.FIELDS.statDice.hp.label")
+      " (" system.statDice.mp.value " "
+      (localize "TERIOCK.STATS.mp.abbreviation") ")"
     )
     action="setStatDice"
     dataset=(object stat="mp")

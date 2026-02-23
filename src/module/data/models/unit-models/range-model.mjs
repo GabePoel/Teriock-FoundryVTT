@@ -9,11 +9,11 @@ export default class RangeModel extends LengthUnitModel {
     return [
       {
         id: "self",
-        label: "Self",
+        label: "TERIOCK.MODELS.Range.UNITS.self.label",
       },
       {
         id: "melee",
-        label: "Melee",
+        label: "TERIOCK.MODELS.Range.UNITS.melee.label",
       },
     ];
   }

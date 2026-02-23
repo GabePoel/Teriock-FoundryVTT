@@ -4,7 +4,7 @@
     name="settings.abilityFilters.maneuver"
     id="{{concat uuid '.' 'maneuver'}}"
   >
-    <option value="">Maneuver</option>
+    <option value="">{{localize "TERIOCK.SYSTEMS.Ability.FIELDS.maneuver.label"}}</option>
     {{selectOptions
       TERIOCK.options.ability.maneuver
       selected=settings.abilityFilters.maneuver
@@ -16,7 +16,7 @@
     name="settings.abilityFilters.interaction"
     id="{{concat uuid '.' 'interaction'}}"
   >
-    <option value="">Interaction</option>
+    <option value="">{{localize "TERIOCK.SYSTEMS.Ability.FIELDS.interaction.label"}}</option>
     {{selectOptions
       TERIOCK.options.ability.interaction
       selected=settings.abilityFilters.interaction
@@ -28,7 +28,7 @@
     name="settings.abilityFilters.delivery"
     id="{{concat uuid '.' 'delivery'}}"
   >
-    <option value="">Delivery</option>
+    <option value="">{{localize "TERIOCK.SYSTEMS.Ability.FIELDS.delivery.label"}}</option>
     {{selectOptions
       TERIOCK.options.ability.delivery
       selected=settings.abilityFilters.delivery
@@ -40,7 +40,7 @@
     name="settings.abilityFilters.target"
     id="{{concat uuid '.' 'target'}}"
   >
-    <option value="">Target</option>
+    <option value="">{{localize "TERIOCK.SYSTEMS.Ability.FIELDS.targets.label"}}</option>
     {{selectOptions
       TERIOCK.options.ability.targets
       selected=settings.abilityFilters.target
@@ -52,10 +52,18 @@
     name="settings.abilityFilters.piercing"
     id="{{concat uuid '.' 'piercing'}}"
   >
-    <option value="" {{#unless settings.abilityFilters.piercing}}selected{{/unless}}>Piercing</option>
-    <option value="normal" {{#if (eq settings.abilityFilters.piercing "normal")}}selected{{/if}}>Normal</option>
-    <option value="av0" {{#if (eq settings.abilityFilters.piercing "av0")}}selected{{/if}}>AV0</option>
-    <option value="ub" {{#if (eq settings.abilityFilters.piercing "ub")}}selected{{/if}}>UB</option>
+    <option value="" {{#unless settings.abilityFilters.piercing}}selected{{/unless}}>
+      {{localize "TERIOCK.MODELS.Piercing.FIELDS.raw.label"}}
+    </option>
+    <option value="normal" {{#if (eq settings.abilityFilters.piercing "normal")}}selected{{/if}}>
+      {{localize "TERIOCK.MODELS.Piercing.MENU.0"}}
+    </option>
+    <option value="av0" {{#if (eq settings.abilityFilters.piercing "av0")}}selected{{/if}}>
+      {{localize "TERIOCK.MODELS.Piercing.MENU.1"}}
+    </option>
+    <option value="ub" {{#if (eq settings.abilityFilters.piercing "ub")}}selected{{/if}}>
+      {{localize "TERIOCK.MODELS.Piercing.MENU.2"}}
+    </option>
   </select>
   </div>
   <div class="tgrid-item gi2">
@@ -63,7 +71,7 @@
     name="settings.abilityFilters.powerSource"
     id="{{concat uuid '.' 'powerSource'}}"
   >
-    <option value="">Power Source</option>
+    <option value="">{{localize "TERIOCK.SYSTEMS.Ability.FIELDS.powerSources.label"}}</option>
     {{selectOptions
       TERIOCK.options.ability.powerSources
       selected=settings.abilityFilters.powerSource
@@ -75,7 +83,7 @@
     name="settings.abilityFilters.element"
     id="{{concat uuid '.' 'element'}}"
   >
-    <option value="">Element</option>
+    <option value="">{{localize "TERIOCK.SYSTEMS.Ability.FIELDS.elements.label"}}</option>
     {{selectOptions
       TERIOCK.options.ability.elements
       selected=settings.abilityFilters.element
@@ -87,7 +95,7 @@
     name="settings.abilityFilters.effectTypes"
     id="{{concat uuid '.' 'effectTypes'}}"
   >
-    <option value="">Effects</option>
+    <option value="">{{localize "TERIOCK.SYSTEMS.Ability.FIELDS.effectTypes.label"}}</option>
     {{selectOptions
       TERIOCK.options.ability.effectTypes
       selected=settings.abilityFilters.effectTypes
@@ -95,106 +103,110 @@
   </select>
   </div>
   <div class="tgrid-item">
-    <label for="{{concat uuid '.' 'basic'}}">Basic</label>
+    <label for="{{concat uuid '.' 'basic'}}">{{localize "TERIOCK.SYSTEMS.Ability.FIELDS.basic.label"}}</label>
     {{tswitch
       id=(concat uuid "." "basic")
       name="settings.abilityFilters.basic"
     }}
   </div>
   <div class="tgrid-item">
-    <label for="{{concat uuid '.' 'standard'}}">Standard</label>
+    <label for="{{concat uuid '.' 'standard'}}">{{localize "TERIOCK.SYSTEMS.Ability.FIELDS.standard.label"}}</label>
     {{tswitch
       id=(concat uuid "." "standard")
       name="settings.abilityFilters.standard"
     }}
   </div>
   <div class="tgrid-item">
-    <label for="{{concat uuid '.' 'skill'}}">Skill</label>
+    <label for="{{concat uuid '.' 'skill'}}">{{localize "TERIOCK.SYSTEMS.Ability.FIELDS.skill.label"}}</label>
     {{tswitch
       id=(concat uuid "." "skill")
       name="settings.abilityFilters.skill"
     }}
   </div>
   <div class="tgrid-item">
-    <label for="{{concat uuid '.' 'spell'}}">Spell</label>
+    <label for="{{concat uuid '.' 'spell'}}">{{localize "TERIOCK.SYSTEMS.Ability.FIELDS.spell.label"}}</label>
     {{tswitch
       id=(concat uuid "." "spell")
       name="settings.abilityFilters.spell"
     }}
   </div>
   <div class="tgrid-item">
-    <label for="{{concat uuid '.' 'ritual'}}">Ritual</label>
+    <label for="{{concat uuid '.' 'ritual'}}">{{localize "TERIOCK.SYSTEMS.Ability.FIELDS.ritual.label"}}</label>
     {{tswitch
       id=(concat uuid "." "ritual")
       name="settings.abilityFilters.ritual"
     }}
   </div>
   <div class="tgrid-item">
-    <label for="{{concat uuid '.' 'rotator'}}">Rotator</label>
+    <label for="{{concat uuid '.' 'rotator'}}">{{localize "TERIOCK.SYSTEMS.Ability.FIELDS.rotator.label"}}</label>
     {{tswitch
       id=(concat uuid "." "rotator")
       name="settings.abilityFilters.rotator"
     }}
   </div>
   <div class="tgrid-item">
-    <label for="{{concat uuid '.' 'heightened'}}">Heightenable</label>
+    <label for="{{concat uuid '.' 'heightened'}}">{{localize "TERIOCK.SYSTEMS.Ability.FIELDS.heightened.label"}}</label>
     {{tswitch
       id=(concat uuid "." "heightened")
       name="settings.abilityFilters.heightened"
     }}
   </div>
   <div class="tgrid-item">
-    <label for="{{concat uuid '.' 'expansion'}}">Expanding</label>
+    <label for="{{concat uuid '.' 'expansion'}}">{{localize "TERIOCK.SYSTEMS.Ability.FIELDS.expansion.label"}}</label>
     {{tswitch
       id=(concat uuid "." "expansion")
       name="settings.abilityFilters.expansion"
     }}
   </div>
   <div class="tgrid-item">
-    <label for="{{concat uuid '.' 'verbal'}}">Verbal</label>
+    <label for="{{concat uuid '.' 'verbal'}}">{{localize "TERIOCK.TERMS.Costs.verbal"}}</label>
     {{tswitch
       id=(concat uuid "." "verbal")
       name="settings.abilityFilters.verbal"
     }}
   </div>
   <div class="tgrid-item">
-    <label for="{{concat uuid '.' 'somatic'}}">Somatic</label>
+    <label for="{{concat uuid '.' 'somatic'}}">{{localize "TERIOCK.TERMS.Costs.somatic"}}</label>
     {{tswitch
       id=(concat uuid "." "somatic")
       name="settings.abilityFilters.somatic"
     }}
   </div>
   <div class="tgrid-item">
-    <label for="{{concat uuid '.' 'material'}}">Material</label>
+    <label for="{{concat uuid '.' 'material'}}">{{localize "TERIOCK.TERMS.Costs.material"}}</label>
     {{tswitch
       id=(concat uuid "." "material")
       name="settings.abilityFilters.material"
     }}
   </div>
   <div class="tgrid-item">
-    <label for="{{concat uuid '.' 'invoked'}}">Invoked</label>
+    <label for="{{concat uuid '.' 'invoked'}}">{{localize "TERIOCK.TERMS.Costs.invoked"}}</label>
     {{tswitch
       id=(concat uuid "." "invoked")
       name="settings.abilityFilters.invoked"
     }}
   </div>
   <div class="tgrid-item">
-    <label for="{{concat uuid '.' 'hp'}}">Hit Cost</label>
+    <label for="{{concat uuid '.' 'hp'}}">
+      {{localize "TERIOCK.SYSTEMS.Ability.FIELDS.costs.hp.value.variable.label"}}
+    </label>
     {{tswitch id=(concat uuid "." "hp") name="settings.abilityFilters.hp"}}
   </div>
   <div class="tgrid-item">
-    <label for="{{concat uuid '.' 'mp'}}">Mana Cost</label>
+    <label for="{{concat uuid '.' 'mp'}}">
+      {{localize "TERIOCK.SYSTEMS.Ability.FIELDS.costs.mp.value.variable.label"}}
+    </label>
     {{tswitch id=(concat uuid "." "mp") name="settings.abilityFilters.mp"}}
   </div>
   <div class="tgrid-item">
-    <label for="{{concat uuid '.' 'broken'}}">Break Cost</label>
+    <label for="{{concat uuid '.' 'broken'}}">{{localize "TERIOCK.SYSTEMS.Ability.FIELDS.costs.break.label"}}</label>
     {{tswitch
       id=(concat uuid "." "broken")
       name="settings.abilityFilters.broken"
     }}
   </div>
   <div class="tgrid-item">
-    <label for="{{concat uuid '.' 'sustained'}}">Sustained</label>
+    <label for="{{concat uuid '.' 'sustained'}}">{{localize "TERIOCK.SYSTEMS.Ability.FIELDS.sustained.label"}}</label>
     {{tswitch
       id=(concat uuid "." "sustained")
       name="settings.abilityFilters.sustained"

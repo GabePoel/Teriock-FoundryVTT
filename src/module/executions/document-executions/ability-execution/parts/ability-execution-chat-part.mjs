@@ -74,7 +74,10 @@ export default function AbilityExecutionChatPart(Base) {
       #attachTrackedStatusAutomationUuids(automation, uuids) {
         /** @type {Teriock.MessageData.MessageAssociation} */
         const association = {
-          title: `${TERIOCK.index.conditions[automation.status]} With Respect To`,
+          title: game.i18n.format(
+            "TERIOCK.SYSTEMS.Ability.PANELS.statusWithRespectTo",
+            { status: TERIOCK.reference.conditions[automation.status] },
+          ),
           icon: TERIOCK.options.document.creature.icon,
           cards: uuids.map((uuid) => this.#generateAssociationCard(uuid)),
         };
@@ -137,7 +140,10 @@ export default function AbilityExecutionChatPart(Base) {
             seconds: await this.#generateConsequenceDuration(crit),
           },
           img: this.source.img,
-          name: `${this.source.name} Effect`,
+          name: game.i18n.format(
+            "TERIOCK.SYSTEMS.Ability.EXECUTION.effectName",
+            { name: this.source.name },
+          ),
           statuses: this.#generateConsequenceStatuses(crit),
           system: {
             associations: [],
@@ -415,27 +421,54 @@ export default function AbilityExecutionChatPart(Base) {
       /** @inheritDoc */
       async _buildTags() {
         if (this.source.system.interaction === "attack" && this.ub) {
-          this.tags.push("Unblockable");
-        }
-        if (this.warded) {
-          this.tags.push("Warded");
-        }
-        if (this.vitals) {
-          this.tags.push("Vitals");
-        }
-        if (this.heightened > 0) {
           this.tags.push(
-            `Heightened ${this.heightened} Time${this.heightened === 1 ? "" : "s"}`,
+            game.i18n.localize("TERIOCK.TERMS.Properties.unblockable"),
           );
         }
+        if (this.warded) {
+          this.tags.push(
+            game.i18n.localize("TERIOCK.SYSTEMS.Attack.FIELDS.warded.label"),
+          );
+        }
+        if (this.vitals) {
+          this.tags.push(game.i18n.localize("TERIOCK.TERMS.Targets.vitals"));
+        }
+        if (this.heightened > 0) {
+          if (this.heightened === 1) {
+            this.tags.push(
+              game.i18n.localize(
+                "TERIOCK.SYSTEMS.Consequence.PANELS.heightenedSingle",
+              ),
+            );
+          } else {
+            this.tags.push(
+              game.i18n.format(
+                "TERIOCK.SYSTEMS.Consequence.PANELS.heightenedPlural",
+                { value: this.heightened },
+              ),
+            );
+          }
+        }
         if (this.costs.mp > 0) {
-          this.tags.push(`${this.costs.mp} MP Spent`);
+          this.tags.push(
+            game.i18n.format("TERIOCK.SYSTEMS.Consequence.PANELS.spentMp", {
+              amount: this.costs.mp,
+            }),
+          );
         }
         if (this.costs.hp > 0) {
-          this.tags.push(`${this.costs.hp} HP Spent`);
+          this.tags.push(
+            game.i18n.format("TERIOCK.SYSTEMS.Consequence.PANELS.spentHp", {
+              amount: this.costs.hp,
+            }),
+          );
         }
         if (this.costs.gp > 0) {
-          this.tags.push(`${this.costs.gp} ₲ Spent`);
+          this.tags.push(
+            game.i18n.format("TERIOCK.SYSTEMS.Consequence.PANELS.spentGp", {
+              amount: this.costs.gp,
+            }),
+          );
         }
       }
     }

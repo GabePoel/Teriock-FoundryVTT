@@ -65,7 +65,9 @@ export default class UnitModel extends EvaluationModel {
    * @returns {Record<string, string>}
    */
   static get choices() {
-    return Object.fromEntries(this.choiceEntries.map((e) => [e.id, e.label]));
+    return Object.fromEntries(
+      this.choiceEntries.map((e) => [e.id, game.i18n.localize(e.label)]),
+    );
   }
 
   /** @returns {Teriock.Units.UnitEntry[]} */
@@ -176,7 +178,7 @@ export default class UnitModel extends EvaluationModel {
       const entry = this.constructor.finiteChoiceEntries.find(
         (e) => e.id === this.unit,
       );
-      return `${this.raw} ${this.raw === "1" ? entry.label : entry.plural}`;
+      return `${this.raw} ${this.raw === "1" ? game.i18n.localize(entry.label) : game.i18n.localize(entry.plural)}`;
     } else {
       return this.constructor.choices[this.unit];
     }

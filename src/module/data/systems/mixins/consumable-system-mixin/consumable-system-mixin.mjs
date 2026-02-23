@@ -102,7 +102,9 @@ export default function ConsumableSystemMixin(Base) {
           );
           parts.subtitle =
             this.maxQuantity.value === Infinity
-              ? game.i18n.localize("TERIOCK.SYSTEMS.Consumable.EMBED.remaining")
+              ? game.i18n.format("TERIOCK.SYSTEMS.Consumable.EMBED.remaining", {
+                  value: this.quantity,
+                })
               : game.i18n.format(
                   "TERIOCK.SYSTEMS.Consumable.EMBED.remainingMax",
                   {

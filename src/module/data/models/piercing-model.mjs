@@ -20,9 +20,9 @@ export default class PiercingModel extends EmbeddedDataModel {
     return {
       raw: new fields.NumberField({
         choices: {
-          0: "None",
-          1: "AV0",
-          2: "UB",
+          0: game.i18n.localize("TERIOCK.MODELS.Piercing.MENU.0"),
+          1: game.i18n.localize("TERIOCK.MODELS.Piercing.MENU.1"),
+          2: game.i18n.localize("TERIOCK.MODELS.Piercing.MENU.2"),
         },
         initial: 0,
         max: 2,
