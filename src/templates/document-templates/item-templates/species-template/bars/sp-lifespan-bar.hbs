@@ -2,9 +2,9 @@
   <div class="ab-bar">
     {{formBox
       (formInput systemFields.adult value=system.adult disabled=(not editable))
-      unselected=(concat "Adult at " system.adult " Years")
+      unselected=(localize "TERIOCK.SYSTEMS.Species.PANELS.lifespan.adult" value=system.adult)
       icon=TERIOCK.display.icons.species.adult
-      tooltip="Age of Maturity"
+      tooltip=(localize "TERIOCK.SYSTEMS.Species.FIELDS.adult.label")
     }}
     {{formBox
       (formInput
@@ -12,11 +12,11 @@
       )
       unselected=(ifThen
         (exists system.lifespan)
-        (concat "Lives to " system.lifespan " Years")
-        "Infinite Lifespan"
+        (localize "TERIOCK.SYSTEMS.Species.PANELS.lifespan.max" value=system.lifespan)
+        (localize "TERIOCK.SYSTEMS.Species.PANELS.lifespan.infinite")
       )
       icon=TERIOCK.display.icons.species.lifespan
-      tooltip="Maximum Lifespan"
+      tooltip=(localize "TERIOCK.SYSTEMS.Species.FIELDS.lifespan.label")
     }}
   </div>
 {{/if}}

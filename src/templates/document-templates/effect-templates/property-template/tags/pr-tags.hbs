@@ -1,8 +1,12 @@
 <div class="ab-tags-container">
   <div class="ab-tags">
-    <span class="ab-tag tsubtle">{{#if
-      (exists system.damageType)
-    }}Damaging{{else}}Non-damaging{{/if}}</span>
+    <span class="ab-tag tsubtle">
+      {{#if (exists system.damageType)}}
+        {{localize "TERIOCK.SYSTEMS.Property.PANELS.damaging"}}
+      {{else}}
+        {{localize "TERIOCK.SYSTEMS.Property.PANELS.nonDamaging"}}
+      {{/if}}
+    </span>
   </div>
   {{> (template "document-templates/shared/menu-buttons.hbs")}}
 </div>
