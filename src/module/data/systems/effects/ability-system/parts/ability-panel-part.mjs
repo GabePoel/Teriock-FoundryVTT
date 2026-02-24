@@ -93,7 +93,7 @@ export default (Base) => {
                 ? this.range.abbreviation
                 : "",
               ...Array.from(this.targets.map((target) => ref.targets[target])),
-              this.duration.description || "",
+              this.duration.text || "",
             ],
           },
           {
