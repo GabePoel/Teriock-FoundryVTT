@@ -8,9 +8,9 @@ _stats:
 author: teriockBuilder00
 command: |-
   if (actor.isDamaged && !actor.statuses.has("burned")) {
-    await actor.system.takeNormalHeal({
+    await actor.system.takeHeal({
       consumeStatDice: false,
-      title: "Regenerating",
+      title: game.i18n.localize("TERIOCK.TERMS.Abilities.regenerating"),
     });
   }
 img: icons/svg/dice-target.svg

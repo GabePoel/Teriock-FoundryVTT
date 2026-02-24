@@ -6,12 +6,16 @@ _stats:
   systemId: teriock
   systemVersion: 0.9.17
 author: teriockBuilder00
-command: >-
-  if (actor.statuses.has("hacked") && !actor.statuses.has("dead") &&
-  !actor.statuses.has("burned")) {
-    await actor.system.takeNormalHeal({
+command: |-
+  console.log(actor.name)
+  if (
+    actor.statuses.has("hacked") &&
+    !actor.statuses.has("dead") &&
+    !actor.statuses.has("burned")
+  ) {
+    await actor.system.takeHeal({
       noStatDice: true,
-      title: "Berserker Healing Factor",
+      title: game.i18n.localize("TERIOCK.TERMS.Abilities.berserkerHealingFactor"),
     });
   }
 img: icons/svg/dice-target.svg

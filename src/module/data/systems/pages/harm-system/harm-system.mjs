@@ -56,7 +56,7 @@ export default class HarmSystem extends mix(
   get nameString() {
     return game.i18n.format("TERIOCK.SYSTEMS.Harm.EMBED.nameString", {
       name: super.nameString,
-      type: TERIOCK.options.document[this.parent.type]?.name || "",
+      type: TERIOCK.options.take[this.parent.type]?.label || "",
     });
   }
 

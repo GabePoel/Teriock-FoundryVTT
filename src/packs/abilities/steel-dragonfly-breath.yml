@@ -12,7 +12,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.10
+      systemVersion: 0.10.15
     img: systems/teriock/src/icons/abilities/steel-dragonfly-breath.webp
     name: Steel Dragonfly Breath
     system:
@@ -53,7 +53,6 @@ effects:
         base: cone
       duration:
         dawn: false
-        description: Instant
         raw: '0'
         stationary: false
         unit: instant
@@ -79,8 +78,14 @@ effects:
         raw: '15'
         unit: ft
       results:
-        fail: "<p>Target takes [[/damage 4d10[magic]]] @L[Core:Damage]{damage}\_and is moved 30 feet away from you.</p>"
-        save: "<p>Target takes half as much @L[Core:Damage]{damage} from this as they would otherwise\_and has no other non-@L[Core:Damage]{damage} effects applied to them. This is calculated after any @L[Keyword:Boosted]{boosts} or @L[Keyword:Deboosted]{deboosts}.</p>"
+        fail: >-
+          <p>Target takes [[/damage 4d10[magic]]] @L[Core:Damage]{damage} and is
+          moved 30 feet away from you.</p>
+        save: >-
+          <p>Target takes half as much @L[Core:Damage]{damage} from this as they
+          would otherwise and has no other non-@L[Core:Damage]{damage} effects
+          applied to them. This is calculated after any
+          @L[Keyword:Boosted]{boosts} or @L[Keyword:Deboosted]{deboosts}.</p>
       revealed: true
       targets:
         - creature

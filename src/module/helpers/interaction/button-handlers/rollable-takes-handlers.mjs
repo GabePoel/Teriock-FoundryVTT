@@ -65,7 +65,7 @@ export class TakeRollableTakeHandler extends AbstractButtonHandler {
     button.label = options.label || TERIOCK.options.take[rollType].take;
     button.classes = ["teriock-chat-button", `${rollType}-button`];
     button.dataset.type = rollType;
-    button.dataset.amount = amount.toString();
+    button.dataset.amount = amount?.toString();
     return button;
   }
 

@@ -9,8 +9,10 @@ author: teriockBuilder00
 command: |-
   const data = /** @type {Teriock.HookData.UseAbility} */ scope.data;
   const buttons = data.execution.buttons;
-  const applyButton = buttons.find((b) => b.label === "Apply Effect");
-  applyButton.label = "Apply Lighted";
+  const applyButton = buttons.find((b) => b.dataset.action === "apply-effect");
+  applyButton.label = game.i18n.format("TERIOCK.COMMANDS.Status.applyNamed", {
+    name: TERIOCK.reference.conditions.lighted,
+  });
 
   const token = actor?.defaultToken?.document || actor;
 
@@ -26,7 +28,10 @@ command: |-
       });
       effectObject.system.associations = [
         {
-          title: "Lighted With Respect To",
+          title: game.i18n.format(
+            "TERIOCK.SYSTEMS.Ability.PANELS.statusWithRespectTo",
+            { status: TERIOCK.reference.conditions.lighted },
+          ),
           icon: TERIOCK.options.document.creature.icon,
           cards: [
             {

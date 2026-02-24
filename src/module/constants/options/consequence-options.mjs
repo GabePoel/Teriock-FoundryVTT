@@ -4,7 +4,7 @@ export const consequenceOptions = {
   rolls: {
     damage: "TERIOCK.EFFECTS.RollableEffects.damage.deal",
     drain: "TERIOCK.EFFECTS.RollableEffects.drain.deal",
-    wither: "TERIOCK.EFFECTS.RollableEffects.damage.deal",
+    wither: "TERIOCK.EFFECTS.RollableEffects.wither.deal",
     healing: "TERIOCK.EFFECTS.RollableEffects.heal.deal",
     revitalizing: "TERIOCK.EFFECTS.RollableEffects.revitalize.deal",
     setTempHp: "TERIOCK.EFFECTS.RollableEffects.setTempHp.deal",
@@ -19,7 +19,7 @@ export const consequenceOptions = {
   takes: {
     damage: "TERIOCK.EFFECTS.RollableEffects.damage.take",
     drain: "TERIOCK.EFFECTS.RollableEffects.drain.take",
-    wither: "TERIOCK.EFFECTS.RollableEffects.damage.take",
+    wither: "TERIOCK.EFFECTS.RollableEffects.wither.take",
     healing: "TERIOCK.EFFECTS.RollableEffects.heal.take",
     revitalizing: "TERIOCK.EFFECTS.RollableEffects.revitalize.take",
     setTempHp: "TERIOCK.EFFECTS.RollableEffects.setTempHp.take",

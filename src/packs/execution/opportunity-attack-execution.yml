@@ -8,7 +8,7 @@ _stats:
 author: teriockBuilder00
 command: |-
   const data = /** @type {Teriock.HookData.UseAbility} */ scope.data;
-  const options = data.execution.options
+  const options = data.execution.options;
   const actor = data.execution.actor;
   let abilities = await actor.allAbilities();
   abilities = abilities
@@ -21,8 +21,8 @@ command: |-
     )
     .sort((a, b) => a.name.localeCompare(b.name));
   const ability = await tm.dialogs.selectDocumentDialog(abilities, {
-    title: "Select Ability",
-    hint: "Select an ability to use.",
+    hint: game.i18n.localize("TERIOCK.DIALOGS.Select.Ability.hint"),
+    title: game.i18n.localize("TERIOCK.DIALOGS.Select.Ability.title"),
   });
   await ability.system.use(options);
 img: icons/svg/dice-target.svg

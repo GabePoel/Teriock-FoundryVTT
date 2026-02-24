@@ -51,8 +51,7 @@ export default class HarmRoll extends TakeRoll {
     });
     buttons
       .filter(
-        (b) =>
-          b.dataset.action === "take-rollable-take" && b.dataset.amount === "0",
+        (b) => b.dataset.action === "take-rollable-take" && !b.dataset.amount,
       )
       .forEach((b) => (b.dataset.amount = this.total.toString()));
     buttons

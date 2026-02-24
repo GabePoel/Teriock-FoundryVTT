@@ -115,15 +115,20 @@ export default class DurationModel extends TimeUnitModel {
   /** @inheritDoc */
   get text() {
     if (this.description) return this.description;
-    let s = this.prerequisiteString;
-    let text = super.text;
-    if (s.length > 1) {
-      if (text.length > 0 && this.unit === "unlimited") s = "";
-      if (this.unit === "passive") text = "";
-      return `${text} ${s}`;
+    let prerequisite = this.prerequisiteString;
+    let duration = super.text;
+    if (prerequisite.length > 1) {
+      if (prerequisite.length > 0 && this.unit === "unlimited") duration = "";
+      if (this.unit === "passive") duration = "";
+      return game.i18n.format("TERIOCK.MODELS.Duration.PREREQUISITES.text", {
+        duration,
+        prerequisite,
+      });
     }
     if (this.unit === "passive")
-      text = game.i18n.localize("TERIOCK.MODELS.Duration.UNITS.alwaysActive");
-    return text;
+      duration = game.i18n.localize(
+        "TERIOCK.MODELS.Duration.UNITS.alwaysActive",
+      );
+    return duration;
   }
 }

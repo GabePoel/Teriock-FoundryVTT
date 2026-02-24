@@ -8,9 +8,11 @@ _stats:
 author: teriockBuilder00
 command: |-
   if (actor.isDrained) {
-    await actor.system.takeNormalRevitalize({
+    await actor.system.takeRevitalize({
       consumeStatDice: false,
-      title: "Outsider Mana Regenerating",
+      title: game.i18n.localize(
+        "TERIOCK.TERMS.Abilities.outsiderManaRegenerating",
+      ),
     });
   }
 img: icons/svg/dice-target.svg

@@ -6,12 +6,15 @@ _stats:
   systemId: teriock
   systemVersion: 0.9.17
 author: teriockBuilder00
-command: >-
-  if (actor.isDamaged && !actor.statuses.has("down") &&
-  !actor.statuses.has("burned")) {
-    await actor.system.takeNormalHeal({
+command: |-
+  if (
+    actor.isDamaged &&
+    !actor.statuses.has("down") &&
+    !actor.statuses.has("burned")
+  ) {
+    await actor.system.takeHeal({
       consumeStatDice: false,
-      title: "Healing Factor",
+      title: game.i18n.localize("TERIOCK.TERMS.Abilities.healingFactor"),
     });
   }
 img: icons/svg/dice-target.svg

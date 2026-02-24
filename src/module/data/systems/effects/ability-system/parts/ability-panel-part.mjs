@@ -92,9 +92,7 @@ export default (Base) => {
               ["missile", "cone", "sight", "aura"].includes(this.delivery.base)
                 ? this.range.abbreviation
                 : "",
-              Array.from(
-                this.targets.map((target) => ref.targets[target]),
-              ).join(", "),
+              ...Array.from(this.targets.map((target) => ref.targets[target])),
               this.duration.description || "",
             ],
           },
