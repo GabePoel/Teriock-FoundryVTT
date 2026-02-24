@@ -261,6 +261,35 @@ export default class TeriockActor extends mix(
   }
 
   /**
+   * Helper method to add a virtual status.
+   * @param {Teriock.Parameters.Condition.ConditionKey} condition
+   * @param {string} reason
+   * @param {object} [options]
+   * @param {boolean} [options.localize]
+   */
+  _addVirtualStatus(condition, reason, options = {}) {
+    let { localize = true } = options;
+    if (!reason) reason = TERIOCK.reference.conditions[condition];
+    this.system.conditionInformation[condition]?.reasons?.add(
+      localize ? game.i18n.localize(reason) : reason,
+    );
+    this.statuses.add(condition);
+  }
+
+  /**
+   * Helper method to add multiple virtual statuses with the same reason.
+   * @param {Teriock.Parameters.Condition.ConditionKey[]} conditions
+   * @param {string} reason
+   * @param {object} [options]
+   * @param {boolean} [options.localize]
+   */
+  _addVirtualStatuses(conditions, reason, options = {}) {
+    for (const condition of conditions) {
+      this._addVirtualStatus(condition, reason, options);
+    }
+  }
+
+  /**
    * @inheritDoc
    * @param {ActorData} data
    * @param {object} options
@@ -372,11 +401,23 @@ export default class TeriockActor extends mix(
    * Prepare condition information now that all virtual statuses have been applied.
    */
   cleanConditionInformation() {
-    if (this.system.conditionInformation.hacked.reasons.has("2nd Arm Hack")) {
-      this.system.conditionInformation.hacked.reasons.delete("1st Arm Hack");
+    if (
+      this.system.conditionInformation.hacked.reasons.has(
+        game.i18n.localize("TERIOCK.STATUSES.Hacks.armHack2"),
+      )
+    ) {
+      this.system.conditionInformation.hacked.reasons.delete(
+        game.i18n.localize("TERIOCK.STATUSES.Hacks.armHack1"),
+      );
     }
-    if (this.system.conditionInformation.hacked.reasons.has("2nd Leg Hack")) {
-      this.system.conditionInformation.hacked.reasons.delete("1st Leg Hack");
+    if (
+      this.system.conditionInformation.hacked.reasons.has(
+        game.i18n.localize("TERIOCK.STATUSES.Hacks.legHack2"),
+      )
+    ) {
+      this.system.conditionInformation.hacked.reasons.delete(
+        game.i18n.localize("TERIOCK.STATUSES.Hacks.legHack1"),
+      );
     }
     for (const info of Object.values(this.system.conditionInformation)) {
       if (info.reasons.size > 0) {
@@ -512,69 +553,53 @@ export default class TeriockActor extends mix(
 
     // Factoring in protections and overriding states, which states would automatically trigger
     if (hpDead && !protDead && !protDown) {
-      this.system.conditionInformation.dead.reasons.add(
-        "Negative Half Maximum HP",
+      this._addVirtualStatuses(
+        ["dead", "down"],
+        "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.negativeHalfMaxHp",
       );
-      this.system.conditionInformation.down.reasons.add(
-        "Negative Half Maximum HP",
-      );
-      this.statuses.add("dead");
-      this.statuses.add("down");
     }
     if (mpDead && !protDead && !protDown) {
-      this.system.conditionInformation.dead.reasons.add(
-        "Negative Half Maximum MP",
+      this._addVirtualStatuses(
+        ["dead", "down"],
+        "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.negativeHalfMaxMp",
       );
-      this.system.conditionInformation.down.reasons.add(
-        "Negative Half Maximum MP",
-      );
-      this.statuses.add("dead");
-      this.statuses.add("down");
     }
     if (hpCrit && !protCrit && !protDown && !autoDead) {
-      this.system.conditionInformation.criticallyWounded.reasons.add(
-        "Critically Negative HP",
+      this._addVirtualStatuses(
+        ["criticallyWounded", "down"],
+        "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.criticallyNegativeHp",
       );
-      this.system.conditionInformation.down.reasons.add(
-        "Critically Negative HP",
-      );
-      this.statuses.add("criticallyWounded");
-      this.statuses.add("down");
     }
     if (mpCrit && !protCrit && !protDown && !autoDead) {
-      this.system.conditionInformation.criticallyWounded.reasons.add(
-        "Critically Negative MP",
+      this._addVirtualStatuses(
+        ["criticallyWounded", "down"],
+        "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.criticallyNegativeMp",
       );
-      this.system.conditionInformation.down.reasons.add(
-        "Critically Negative MP",
-      );
-      this.statuses.add("criticallyWounded");
-      this.statuses.add("down");
     }
     if (hpUncn && !protUncn && !autoCrit && !autoDead && !protDown) {
       if (this.system.hp.value === 0) {
-        this.system.conditionInformation.unconscious.reasons.add("Zero HP");
-        this.system.conditionInformation.down.reasons.add("Zero HP");
-        this.statuses.add("unconscious");
-        this.statuses.add("down");
+        this._addVirtualStatuses(
+          ["unconscious", "down"],
+          "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.zeroHp",
+        );
       } else {
-        this.system.conditionInformation.unconscious.reasons.add("Negative HP");
-        this.system.conditionInformation.down.reasons.add("Negative HP");
-        this.statuses.add("unconscious");
-        this.statuses.add("down");
+        this._addVirtualStatuses(
+          ["unconscious", "down"],
+          "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.negativeHp",
+        );
       }
     }
     if (mpUncn && !protUncn && !autoCrit && !autoDead && !protDown) {
       if (this.system.mp.value === 0) {
-        this.system.conditionInformation.unconscious.reasons.add("Zero MP");
-        this.system.conditionInformation.down.reasons.add("Zero MP");
-        this.statuses.add("unconscious");
-        this.statuses.add("down");
+        this._addVirtualStatuses(
+          ["unconscious", "down"],
+          "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.zeroMp",
+        );
       } else {
-        this.system.conditionInformation.unconscious.reasons.add("Negative MP");
-        this.system.conditionInformation.down.reasons.add("Negative MP");
-        this.statuses.add("unconscious");
-        this.statuses.add("down");
+        this._addVirtualStatuses(
+          ["unconscious", "down"],
+          "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.negativeMp",
+        );
       }
     }
 
@@ -599,7 +624,14 @@ export default class TeriockActor extends mix(
     if (ability) {
       await ability.use(Object.assign(options, { actor: this }));
     } else {
-      ui.notifications.warn(`${this.name} does not have ${abilityName}.`);
+      ui.notifications.warn("TERIOCK.SYSTEMS.Macro.EXECUTION.noDocument", {
+        format: {
+          actor: this.name,
+          type: TERIOCK.options.document.ability.name.toLowerCase(),
+          name: abilityName,
+        },
+        localize: true,
+      });
     }
   }
 }

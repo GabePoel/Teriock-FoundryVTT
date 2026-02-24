@@ -108,11 +108,12 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
     );
   }
   if (totalStonesCount > 99) {
-    ui.notifications.error(
-      game.i18n.format("TERIOCK.DIALOGS.DeathBag.ERRORS.maxStones", {
+    ui.notifications.error("TERIOCK.DIALOGS.DeathBag.ERRORS.maxStones", {
+      format: {
         count: totalStonesCount,
-      }),
-    );
+      },
+      localize: true,
+    });
   } else {
     for (const color of Object.keys(startingStones)) {
       for (let i = 0; i < startingStones[color]; i++) {
@@ -125,12 +126,13 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
       }),
     );
     if (bag.length < toPullCount) {
-      ui.notifications.error(
-        game.i18n.format("TERIOCK.DIALOGS.DeathBag.ERRORS.cannotPull", {
+      ui.notifications.error("TERIOCK.DIALOGS.DeathBag.ERRORS.cannotPull", {
+        format: {
           bagCount: bag.length,
           toPullCount,
-        }),
-      );
+        },
+        localize: true,
+      });
     } else {
       let pulledCount = 0;
       while (pulledCount < toPullCount) {
@@ -159,7 +161,9 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
         blocks: [
           {
             italic: true,
-            text: `<p>${game.i18n.localize("TERIOCK.DIALOGS.DeathBag.PANEL.descriptionText")}</p>`,
+            text: game.i18n.localize(
+              "TERIOCK.DIALOGS.DeathBag.PANEL.descriptionText",
+            ),
             title: game.i18n.localize(
               "TERIOCK.DIALOGS.DeathBag.PANEL.description",
             ),

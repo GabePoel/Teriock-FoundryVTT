@@ -28,12 +28,38 @@ export default (Base) => {
        */
       static async _onToggleLockThis() {
         this._locked = !this._locked;
-        this.render();
+        await this.render();
+        game.tooltip.reactivate();
       }
 
       /** @inheritDoc */
       get isEditable() {
         return super.isEditable && !this._locked;
+      }
+
+      /**
+       * @param {HTMLButtonElement} toggleButton
+       */
+      #setToggleLockButtonAttributes(toggleButton) {
+        toggleButton.classList.remove(
+          ...[
+            `fa-${TERIOCK.display.icons.ui.unlocked}`,
+            `fa-${TERIOCK.display.icons.ui.locked}`,
+          ],
+        );
+        toggleButton.classList.add(
+          ...[
+            this.isEditable
+              ? `fa-${TERIOCK.display.icons.ui.unlocked}`
+              : `fa-${TERIOCK.display.icons.ui.locked}`,
+          ],
+        );
+        toggleButton.setAttribute(
+          "data-tooltip",
+          this.isEditable
+            ? game.i18n.localize("TERIOCK.SHEETS.Common.ACTIONS.LockSheet.off")
+            : game.i18n.localize("TERIOCK.SHEETS.Common.ACTIONS.LockSheet.on"),
+        );
       }
 
       /** @inheritDoc */
@@ -43,23 +69,7 @@ export default (Base) => {
           "[data-action='toggleLockThis']",
         );
         if (toggleButton) {
-          toggleButton.classList.remove(
-            ...[
-              `fa-${TERIOCK.display.icons.ui.unlocked}`,
-              `fa-${TERIOCK.display.icons.ui.locked}`,
-            ],
-          );
-          toggleButton.classList.add(
-            ...[
-              this.isEditable
-                ? `fa-${TERIOCK.display.icons.ui.unlocked}`
-                : `fa-${TERIOCK.display.icons.ui.locked}`,
-            ],
-          );
-          toggleButton.setAttribute(
-            "data-tooltip",
-            this.isEditable ? "Unlocked" : "Locked",
-          );
+          this.#setToggleLockButtonAttributes(toggleButton);
         }
       }
 
@@ -72,21 +82,9 @@ export default (Base) => {
           this.document.documentName === "JournalEntryPage"
         ) {
           const toggleButton = document.createElement("button");
-          toggleButton.classList.add(
-            ...[
-              "header-control",
-              "icon",
-              "fa-solid",
-              this.isEditable
-                ? `fa-${TERIOCK.display.icons.ui.unlocked}`
-                : `fa-${TERIOCK.display.icons.ui.locked}`,
-            ],
-          );
+          toggleButton.classList.add(...["header-control", "icon", "fa-solid"]);
           toggleButton.setAttribute("data-action", "toggleLockThis");
-          toggleButton.setAttribute(
-            "data-tooltip",
-            this.isEditable ? "Unlocked" : "Locked",
-          );
+          this.#setToggleLockButtonAttributes(toggleButton);
           if (
             !this.document.isOwner ||
             (this.document.inCompendium && this.document.compendium.locked)

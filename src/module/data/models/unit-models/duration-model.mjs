@@ -115,9 +115,10 @@ export default class DurationModel extends TimeUnitModel {
   /** @inheritDoc */
   get text() {
     if (this.description) return this.description;
-    const s = this.prerequisiteString;
+    let s = this.prerequisiteString;
     let text = super.text;
     if (s.length > 1) {
+      if (text.length > 0 && this.unit === "unlimited") s = "";
       if (this.unit === "passive") text = "";
       return `${text} ${s}`;
     }

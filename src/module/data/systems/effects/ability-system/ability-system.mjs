@@ -254,9 +254,9 @@ export default class AbilitySystem extends mix(
         action: "toggleDisableLocked",
         tooltip: game.i18n.localize("TERIOCK.SYSTEMS.Ability.EMBED.locked"),
         callback: () => {
-          ui.notifications.error(
-            game.i18n.localize("TERIOCK.SYSTEMS.Ability.EMBED.basic"),
-          );
+          ui.notifications.error("TERIOCK.SYSTEMS.Ability.EMBED.basic", {
+            localize: true,
+          });
         },
         condition: this.basic,
       });
@@ -428,9 +428,8 @@ export default class AbilitySystem extends mix(
             sustainedUuid: uuid,
           },
           {
-            failPrefix: game.i18n.localize(
-              "TERIOCK.SYSTEMS.Ability.QUERY.sustainedExpirationFail",
-            ),
+            failPrefix: "TERIOCK.SYSTEMS.Ability.QUERY.sustainedExpirationFail",
+            localize: true,
           },
         );
       }

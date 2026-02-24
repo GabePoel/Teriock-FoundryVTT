@@ -4,6 +4,7 @@ import {
 } from "../../../../applications/dialogs/select-document-dialog.mjs";
 import { conditionDialog } from "../../../../applications/dialogs/select-token-dialog.mjs";
 import {
+  AbilityMacroAutomation,
   ChangesAutomation,
   CombatExpirationAutomation,
   DurationAutomation,
@@ -15,8 +16,10 @@ import { TeriockFolder } from "../../../../documents/_module.mjs";
 import { manipulateFormula } from "../../../../helpers/formula.mjs";
 import { ApplyEffectHandler } from "../../../../helpers/interaction/button-handlers/apply-effect-handlers.mjs";
 import { RollRollableTakeHandler } from "../../../../helpers/interaction/button-handlers/rollable-takes-handlers.mjs";
-import { FeatHandler } from "../../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
-import standardDamageCommand from "../../../../helpers/interaction/commands/standard-damage-command.mjs";
+import {
+  FeatHandler,
+  StandardDamageHandler,
+} from "../../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
 import { safeUuid } from "../../../../helpers/resolve.mjs";
 
 /**
@@ -170,7 +173,7 @@ export default function AbilityExecutionChatPart(Base) {
               changes: this.#generateConsequenceChanges(crit),
             },
             source: this.source.uuid,
-            transformation: this.#generateConsequenceTransformation(crit),
+            transformation: await this.#generateConsequenceTransformation(crit),
           },
           type: "consequence",
         };
@@ -218,7 +221,14 @@ export default function AbilityExecutionChatPart(Base) {
         changes.forEach((c) => {
           c.value = this._heightenString(c.value);
         });
-        changes.push(...this.source.system.pseudoHookChanges);
+        const macroAutomations = this.#getCritAutomations(
+          AbilityMacroAutomation,
+          crit,
+        );
+        const pseudoHookChanges = macroAutomations
+          .filter((a) => a.relation === "pseudoHook" && a.hasMacro)
+          .map((a) => a.pseudoHookChange);
+        changes.push(...pseudoHookChanges);
         return changes;
       }
 
@@ -300,11 +310,13 @@ export default function AbilityExecutionChatPart(Base) {
           transformationAutomations.forEach((a) => {
             Object.assign(transformation, a.transformation);
           });
-          const folderUuids = transformation.uuids.filter((uuid) =>
-            uuid.includes("Folder"),
-          );
+          const uuids = [
+            transformation.uuid,
+            ...Array.from(transformation.uuids),
+          ].filter((uuid) => typeof uuid === "string");
+          const folderUuids = uuids.filter((uuid) => uuid.includes("Folder"));
           const nonFolderUuids = Array.from(
-            transformation.uuids.filter((uuid) => !uuid.includes("Folder")),
+            uuids.filter((uuid) => !uuid.includes("Folder")),
           );
           for (const folderUuid of folderUuids) {
             nonFolderUuids.push(
@@ -399,16 +411,16 @@ export default function AbilityExecutionChatPart(Base) {
           );
         }
 
-        // Add armament to the standard damage button
-        const standardDamageButton = this.buttons.find(
-          (b) => b.dataset?.action === standardDamageCommand.id,
-        );
-        if (standardDamageButton && this.armament) {
-          standardDamageButton.dataset.armament = this.armament.uuid;
-        }
-
         // Add all pre-defined buttons
         await super._buildButtons();
+
+        // Add armament to the standard damage button
+        const standardDamageButton = this.buttons.find(
+          (b) => b.dataset?.action === StandardDamageHandler.ACTION,
+        );
+        if (standardDamageButton && this.armament) {
+          standardDamageButton.dataset.attacker = this.armament.uuid;
+        }
 
         // Replace `@h` with heighten amount in all rolls
         this.buttons

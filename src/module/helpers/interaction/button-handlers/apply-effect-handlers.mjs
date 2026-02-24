@@ -48,9 +48,8 @@ export class ApplyEffectHandler extends AbstractButtonHandler {
           sustainedUuids: createdConsequences.map((c) => c.uuid),
         },
         {
-          failPrefix: game.i18n.localize(
-            "TERIOCK.COMMANDS.ApplyEffect.cantSustain",
-          ),
+          failPrefix: "TERIOCK.COMMANDS.ApplyEffect.cantSustain",
+          localize: true,
         },
       );
     }
@@ -96,14 +95,15 @@ export class ApplyEffectHandler extends AbstractButtonHandler {
       const newConsequences = await actor.createEmbeddedDocuments(
         "ActiveEffect",
         toCreate,
-        { keepId: true },
+        { keepId: true, allowDuplicateSubs: true },
       );
       createdConsequences.push(...newConsequences);
-      ui.notifications.info(
-        game.i18n.format("TERIOCK.COMMANDS.ApplyEffect.applied", {
+      ui.notifications.info("TERIOCK.COMMANDS.ApplyEffect.applied", {
+        format: {
           name: effectObj.name,
-        }),
-      );
+        },
+        localize: true,
+      });
     }
     await this._addToSustaining(createdConsequences);
   }
@@ -120,22 +120,25 @@ export class ApplyEffectHandler extends AbstractButtonHandler {
       const foundEffects = actor.effects.filter(
         (effect) => effect.name === effectObj.name,
       );
-      for (const effect of foundEffects) {
-        await effect.delete();
-      }
+      await actor.deleteEmbeddedDocuments(
+        "ActiveEffect",
+        foundEffects.map((e) => e.id),
+      );
       const foundIds = Array.from(foundEffects.map((effect) => effect.id));
       if (foundIds.length > 0) {
-        ui.notifications.info(
-          game.i18n.format("TERIOCK.COMMANDS.ApplyEffect.removed", {
+        ui.notifications.info("TERIOCK.COMMANDS.ApplyEffect.removed", {
+          format: {
             name: effectObj.name,
-          }),
-        );
+          },
+          localize: true,
+        });
       } else {
-        ui.notifications.warn(
-          game.i18n.format("TERIOCK.COMMANDS.ApplyEffect.notFound", {
+        ui.notifications.warn("TERIOCK.COMMANDS.ApplyEffect.notFound", {
+          format: {
             name: effectObj.name,
-          }),
-        );
+          },
+          localize: true,
+        });
       }
     }
     await this._addToSustaining(createdConsequences);

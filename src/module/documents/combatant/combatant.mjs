@@ -20,8 +20,12 @@ export default class TeriockCombatant extends EmbedCardDocumentMixin(
   get embedParts() {
     const parts = super.embedParts;
     parts.text = dotJoin([
-      this.isDefeated ? "Defeated" : "",
-      this.hidden ? "Hidden" : "",
+      this.isDefeated
+        ? game.i18n.localize("TERIOCK.SYSTEMS.Combatant.EMBED.defeated")
+        : "",
+      this.hidden
+        ? game.i18n.localize("TERIOCK.SYSTEMS.Combatant.EMBED.hidden")
+        : "",
       parts.text,
     ]);
     parts.inactive = this.isDefeated;

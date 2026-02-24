@@ -39,9 +39,9 @@ export default class BaseItemSheet extends mix(
    */
   static async _onToggleOnUseDoc(_event, target) {
     if (!this.isEditable) {
-      ui.notifications.warn(
-        `Cannot toggle if ability activates on use. Sheet is not editable.`,
-      );
+      ui.notifications.warn("TERIOCK.SHEETS.Item.ACTIONS.OnUse.notEditable", {
+        localize: true,
+      });
       return;
     }
     const id = target.dataset.id;

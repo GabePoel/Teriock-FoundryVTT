@@ -97,14 +97,16 @@ export function convertUnits(range, fromUnits, toUnits) {
 /**
  * Parses a duration string and returns a duration.
  * @param durationString
- * @returns {object}
+ * @returns {Partial<DurationModelInterface>}
  */
 export function parseDurationString(durationString) {
   let parsingString = durationString.trim().toLowerCase().replace(/\.$/, "");
-  let parsedUnit = "noLimit";
+  let parsedUnit = "unlimited";
+  let parsedDawn = false;
   let parsedQuantity = parseInt(parsingString) || 0;
   let parsedAbsentConditions = new Set();
   let parsedPresentConditions = new Set();
+
   // Handle special cases first
   if (parsingString.includes("while up")) {
     parsedAbsentConditions.add("down");
@@ -116,7 +118,7 @@ export function parseDurationString(durationString) {
     parsedUnit = "instant";
   }
   if (parsingString.includes("until dawn")) {
-    parsedUnit = "untilDawn";
+    parsedDawn = true;
   }
 
   // General condition parsing
@@ -138,14 +140,15 @@ export function parseDurationString(durationString) {
   }
 
   return {
-    unit: parsedUnit,
-    quantity: parsedQuantity,
-    description: durationString,
     conditions: {
       absent: parsedAbsentConditions,
       present: parsedPresentConditions,
     },
+    dawn: parsedDawn,
+    description: "",
+    raw: parsedQuantity,
     stationary: parsedStationary,
+    unit: parsedUnit,
   };
 }
 

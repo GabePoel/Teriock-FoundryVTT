@@ -13,9 +13,10 @@ if (actor) {
     }
   }
   // Remove all conditions.
-  for (const status of actor.statuses) {
-    await actor.toggleStatusEffect(status, false);
-  }
+  await actor.deleteEmbeddedDocuments(
+    "ActiveEffect",
+    actor.conditions.map((c) => c.id),
+  );
   // Restore all hit dice and mana dice
   const toUpdate = [];
   for (const item of [...actor.ranks, ...actor.species, ...actor.mounts]) {
@@ -33,7 +34,10 @@ if (actor) {
     toUpdate.push(itemUpdates);
   }
   await actor.updateEmbeddedDocuments("Item", toUpdate);
-  ui.notifications.success(`Fully healed ${actor.name}.`);
+  ui.notifications.success("TERIOCK.MACROS.FullHeal.success", {
+    localize: true,
+    format: { name: actor.name },
+  });
 } else {
   ui.notifications.warn("TERIOCK.DIALOGS.Common.ERRORS.noActor", {
     localize: true,

@@ -108,6 +108,23 @@ export default function MacroAutomationMixin(Base) {
       get hasMacro() {
         return this.macro && !!fromUuidSync(this.macro);
       }
+
+      /**
+       * A change that hooks this macro into an actor.
+       * @returns {Teriock.Changes.QualifiedChangeData | null}
+       */
+      get pseudoHookChange() {
+        if (this.relation !== "pseudoHook" || !this.hasMacro) return null;
+        return {
+          key: `system.hookedMacros.${this.pseudoHook}`,
+          mode: 2,
+          priority: 5,
+          qualifier: "1",
+          target: "Actor",
+          time: "normal",
+          value: this.macro,
+        };
+      }
     }
   );
 }

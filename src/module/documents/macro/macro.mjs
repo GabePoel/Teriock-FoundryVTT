@@ -46,7 +46,8 @@ export default class TeriockMacro extends mix(
         id: game.user.id,
       },
       {
-        failPrefix: "Could not create a hotbar folder.",
+        failPrefix: "TERIOCK.SYSTEMS.Macro.QUERY.createHotbarFolder.failPrefix",
+        localize: true,
       },
     );
     return this.hotbarFolder;
@@ -205,9 +206,16 @@ export default class TeriockMacro extends mix(
           showDialog: game.settings.get("teriock", "showRollDialogs"),
         });
       else {
-        ui.notifications.warn(
-          `${a.name} has no ${type ? TERIOCK.options.document[type].name.toLowerCase() : "document"} called ${name}.`,
-        );
+        ui.notifications.warn("TERIOCK.SYSTEMS.Macro.EXECUTION.noDocument", {
+          localize: true,
+          format: {
+            actor: a.name,
+            name,
+            type: type
+              ? TERIOCK.options.document[type].name.toLowerCase()
+              : TERIOCK.options.document.document.name.toLowerCase(),
+          },
+        });
       }
     }
   }

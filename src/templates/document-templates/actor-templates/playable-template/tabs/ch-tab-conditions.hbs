@@ -34,11 +34,19 @@
       <div class="tgrid g4 condition-toggle-container">
         {{#each TERIOCK.data.conditions as |condition key|}}
           {{#if (not (eq key "conscious"))}}
-            <div class="condition-toggle {{#if (not (includes ../removableConditions key))}}inactive{{/if}}"
-                 data-action="toggleCondition"
-                 data-condition="{{{key}}}"
-                 data-tooltip="Toggle {{condition.name}} {{#if (includes ../removableConditions key)
-                 }}Off{{else}}On{{/if}}"
+            <div
+              class="condition-toggle {{#if (not (includes ../removableConditions key))}}inactive{{/if}}"
+              data-action="toggleCondition"
+              data-condition="{{{key}}}"
+              data-tooltip="{{localize
+                "TERIOCK.SHEETS.Actor.TABS.Effects.toggle"
+                name=condition.name
+                state=(ifThen
+                  (includes ../removableConditions key)
+                  (localize "TERIOCK.SHEETS.Actor.TABS.Effects.off")
+                  (localize "TERIOCK.SHEETS.Actor.TABS.Effects.on")
+                )
+              }}"
             >
               <div class="condition-image-container">
                 <div class="condition-image">

@@ -28,7 +28,33 @@ export default (Base) =>
      */
     static async _onToggleHideThis() {
       this._hideInactive = !this._hideInactive;
-      this.render();
+      await this.render();
+      game.tooltip.reactivate();
+    }
+
+    /**
+     * @param {HTMLButtonElement} toggleButton
+     */
+    #setToggleHideButtonAttributes(toggleButton) {
+      toggleButton.classList.remove(
+        ...[
+          `fa-${TERIOCK.display.icons.ui.show}`,
+          `fa-${TERIOCK.display.icons.ui.hide}`,
+        ],
+      );
+      toggleButton.classList.add(
+        ...[
+          this._hideInactive
+            ? `fa-${TERIOCK.display.icons.ui.hide}`
+            : `fa-${TERIOCK.display.icons.ui.show}`,
+        ],
+      );
+      toggleButton.setAttribute(
+        "data-tooltip",
+        this._hideInactive
+          ? game.i18n.localize("TERIOCK.SHEETS.Actor.ACTIONS.HideInactive.on")
+          : game.i18n.localize("TERIOCK.SHEETS.Actor.ACTIONS.HideInactive.off"),
+      );
     }
 
     /** @inheritDoc */
@@ -38,23 +64,7 @@ export default (Base) =>
         "[data-action='toggleHideThis']",
       );
       if (toggleButton) {
-        toggleButton.classList.remove(
-          ...[
-            `fa-${TERIOCK.display.icons.ui.show}`,
-            `fa-${TERIOCK.display.icons.ui.hide}`,
-          ],
-        );
-        toggleButton.classList.add(
-          ...[
-            this._hideInactive
-              ? `fa-${TERIOCK.display.icons.ui.hide}`
-              : `fa-${TERIOCK.display.icons.ui.show}`,
-          ],
-        );
-        toggleButton.setAttribute(
-          "data-tooltip",
-          this._hideInactive ? "Inactive Hidden" : "Inactive Visible",
-        );
+        this.#setToggleHideButtonAttributes(toggleButton);
       }
     }
 
@@ -69,21 +79,9 @@ export default (Base) =>
     async _renderFrame(options = {}) {
       const frame = await super._renderFrame(options);
       const toggleButton = document.createElement("button");
-      toggleButton.classList.add(
-        ...[
-          "header-control",
-          "icon",
-          "fa-solid",
-          this._hideInactive
-            ? `fa-${TERIOCK.display.icons.ui.hide}`
-            : `fa-${TERIOCK.display.icons.ui.show}`,
-        ],
-      );
+      toggleButton.classList.add(...["header-control", "icon", "fa-solid"]);
       toggleButton.setAttribute("data-action", "toggleHideThis");
-      toggleButton.setAttribute(
-        "data-tooltip",
-        this._hideInactive ? "Inactive Hidden" : "Inactive Visible",
-      );
+      this.#setToggleHideButtonAttributes(toggleButton);
       this.window.controls.before(toggleButton);
       return frame;
     }

@@ -31,10 +31,14 @@ declare global {
     };
 
     export type DocumentsSelect = Teriock.SelectOptions.BaseDocumentSelect & {
-      /** Whether multiple documents can be selected */
-      multi?: boolean;
       /** Which documents are checked? */
       checked?: string[];
+      /** Whether multiple documents can be selected */
+      multi?: boolean;
+      /** A custom message to show if there's no documents to select from. */
+      noDocumentsMessage?: string;
+      /** Whether to suppress warnings if there's no documents to select from. */
+      silent?: boolean;
     };
 
     export type SelectDocument = {

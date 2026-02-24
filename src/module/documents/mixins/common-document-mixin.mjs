@@ -172,7 +172,8 @@ export default function CommonDocumentMixin(Base) {
                 } catch (e) {
                   if (game.settings.get("teriock", "developerMode")) {
                     ui.notifications.error(
-                      `Macro ${macro.name} experienced an error while executing. See console for more information.`,
+                      "TERIOCK.SYSTEMS.Macro.EXECUTION.cantExecute",
+                      { localize: true, format: { name: macro.name } },
                     );
                   }
                   console.error(e);

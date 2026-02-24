@@ -4,7 +4,7 @@ import { icons } from "../display/icons.mjs";
 
 /**
  * Options that describe documents.
- * @type {Record<string, {doc?: string, name: string, icon: string, doc?: string, sorter?: Function, getter?: string}>}
+ * @type {Record<string, {doc?: string, name: string, icon: string, doc?: string, sorter?: Function, getter?: string, parent?: string}>}
  */
 export const documentOptions = {
   ability: {
@@ -74,6 +74,11 @@ export const documentOptions = {
     icon: icons.effect.damage,
     name: "TYPES.JournalEntryPage.damage",
     plural: "TERIOCK.DOCUMENTS.damage.plural",
+  },
+  document: {
+    icon: icons.ui.document,
+    name: "TYPES.Base.document",
+    plural: "TERIOCK.DOCUMENTS.document.plural",
   },
   drain: {
     doc: "JournalEntryPage",

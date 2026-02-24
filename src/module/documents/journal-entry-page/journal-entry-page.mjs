@@ -36,7 +36,11 @@ export default class TeriockJournalEntryPage extends mix(
         "book",
       blocks: [
         {
-          title: this.getFlag("teriock", "journalTitle") || "Description",
+          title:
+            this.getFlag("teriock", "journalTitle") ||
+            game.i18n.localize(
+              "TERIOCK.SYSTEMS.Child.FIELDS.description.label",
+            ),
           text: html,
         },
       ],

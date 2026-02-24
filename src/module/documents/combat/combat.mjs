@@ -97,7 +97,9 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
           updates: updates,
         },
         {
-          failPrefix: "Could not expire effects.",
+          failPrefix:
+            "TERIOCK.SYSTEMS.Combat.QUERY.tryAllEffectExpirations.failPrefix",
+          localize: true,
         },
       );
     }
@@ -138,14 +140,16 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
       ...game.scenes.active.tokens.contents
         .map((t) => t.actor)
         .filter((a) => a),
-    ];
+    ].filter((a) => a);
     await game.users.queryGM(
       "teriock.resetAttackPenalties",
       {
         actorUuids: Array.from(new Set(actors.map((a) => a.uuid))),
       },
       {
-        failPrefix: "Could not reset attack penalties.",
+        failPrefix:
+          "TERIOCK.SYSTEMS.Combat.QUERY.resetAttackPenalties.failPrefix",
+        localize: true,
       },
     );
     this.updateCombatantActors();

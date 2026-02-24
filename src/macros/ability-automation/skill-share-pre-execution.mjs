@@ -10,6 +10,9 @@ const ability = await tm.dialogs.selectDocumentDialog(validAbilities, {
   hint: game.i18n.localize("TERIOCK.DIALOGS.Select.Ability.hint"),
   title: game.i18n.localize("TERIOCK.DIALOGS.Select.Ability.title"),
 });
-data.execution.buttons[0].dataset.bonusSubs = JSON.stringify([ability.uuid]);
+const button = data.execution.buttons.find(
+  (b) => b.dataset.dataset === "apply-effect",
+);
+button.dataset.bonusSubs = JSON.stringify([ability.uuid]);
 data.execution.proficient = false;
 data.execution.fluent = false;

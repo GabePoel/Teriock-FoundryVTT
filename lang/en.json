@@ -374,7 +374,7 @@
         },
         "PANEL": {
           "description": "Description",
-          "descriptionText": "You are surrounded by darkness, but aren't alone. Something is reaching out to you. Something? Several things? It's not clear. You reach back, grasp something, and start to pull. It pulls you as well.",
+          "descriptionText": "<p>You are surrounded by darkness, but aren't alone. Something is reaching out to you. Something? Several things? It's not clear. You reach back, grasp something, and start to pull. It pulls you as well.</p>",
           "initialStonesInBag": "Initial Stones in Bag",
           "name": "Death Bag",
           "outcome": "Outcome",
@@ -630,6 +630,9 @@
       "damage": {
         "plural": "damage types"
       },
+      "document": {
+        "plural": "documents"
+      },
       "drain": {
         "plural": "drain types"
       },
@@ -679,37 +682,30 @@
       "Hacks": {
         "arm": {
           "apply": "Hack Arm",
-          "label": "Arm Hack",
           "remove": "Unhack Arm"
         },
         "body": {
           "apply": "Hack Body",
-          "label": "Body Hack",
           "remove": "Unhack Body"
         },
         "ear": {
           "apply": "Hack Ear",
-          "label": "Ear Hack",
           "remove": "Unhack Ear"
         },
         "eye": {
           "apply": "Hack Eye",
-          "label": "Eye Hack",
           "remove": "Unhack Eye"
         },
         "leg": {
           "apply": "Hack Leg",
-          "label": "Leg Hack",
           "remove": "Unhack Leg"
         },
         "mouth": {
           "apply": "Hack Mouth",
-          "label": "Mouth Hack",
           "remove": "Unhack Mouth"
         },
         "nose": {
           "apply": "Hack Nose",
-          "label": "Nose Hack",
           "remove": "Unhack Nose"
         }
       },
@@ -795,6 +791,23 @@
       "PseudoCollectionField": {
         "noTypes": "Either the model must define types or they must be explicitly provided",
         "notPseudoDocument": "The model must be a PseudoDocument"
+      }
+    },
+    "MACROS": {
+      "FullHeal": {
+        "success": "Fully healed {name}."
+      },
+      "ToggleAv0": {
+        "disabled": "AV0 piercing disabled for {name}.",
+        "enabled": "AV0 piercing enabled for {name}."
+      },
+      "ToggleSb": {
+        "disabled": "Style bonus disabled for {name}.",
+        "enabled": "Style bonus enabled for {name}."
+      },
+      "ToggleUb": {
+        "disabled": "UB piercing disabled for {name}.",
+        "enabled": "UB piercing enabled for {name}."
       }
     },
     "MODELS": {
@@ -941,6 +954,8 @@
             "failPrefix": "Could not ask to identify.",
             "failure": "{name} was not successfully identified.",
             "hint": "Select effects to reveal.",
+            "noDocumentsMessage": "There are no effects to reveal.",
+            "question": "<p>Should {user} identify {item}?</p>",
             "success": "{name} was successfully identified.",
             "title": "Identify Item"
           },
@@ -948,12 +963,15 @@
             "ask": "Asking GMs to approve reading magic on {name}.",
             "failPrefix": "Could not ask to read magic.",
             "failure": "{name} was not successfully read magic on.",
+            "question": "<p>Should {user} read magic on {item}?</p>",
             "success": "{name} was successfully read magic on.",
             "title": "Read Magic"
           },
           "Unidentify": {
             "alreadyUnidentified": "The item is already unidentified.",
-            "hint": "Select effects to hide"
+            "hint": "Select effects to hide",
+            "name": "Unidentified {type}",
+            "noDocumentsMessage": "There are no effects to hide."
           }
         }
       },
@@ -1581,6 +1599,10 @@
             "ok": "Confirm",
             "title": "Set Morganti {effect}"
           },
+          "HideInactive": {
+            "off": "Inactive Visible",
+            "on": "Inactive Hidden"
+          },
           "SelectAttacker": {
             "hint": "Select the default armament you attack with.",
             "label": "Select Primary Attacker"
@@ -1598,6 +1620,9 @@
           "Associations": {
             "title": "Associated Creatures"
           }
+        },
+        "NOTIFICATIONS": {
+          "noSpecies": "{name} has no species. Add one from the \"{compendium}\" compendium."
         },
         "SIDEBAR": {
           "AttributeBox": {
@@ -1688,11 +1713,7 @@
             }
           },
           "CoverBox": {
-            "full": "Full Cover",
-            "half": "Half Cover",
-            "label": "Cover",
-            "no": "No Cover",
-            "threeQuarters": "Three-Quarters Cover"
+            "label": "Cover"
           },
           "ReactionBox": {
             "label": "Has Reaction",
@@ -1786,7 +1807,10 @@
             }
           },
           "Effects": {
-            "title": "Effects"
+            "off": "Off",
+            "on": "On",
+            "title": "Effects",
+            "toggle": "Toggle {name} {state}"
           },
           "Inventory": {
             "filters": {
@@ -1832,6 +1856,10 @@
       },
       "Common": {
         "ACTIONS": {
+          "LockSheet": {
+            "off": "Unlocked",
+            "on": "Locked"
+          },
           "addChild": "Add {name}"
         },
         "CARD": {
@@ -1903,6 +1931,13 @@
             "legend": "Sheet Display"
           }
         }
+      },
+      "Item": {
+        "ACTIONS": {
+          "OnUse": {
+            "notEditable": "Cannot toggle if ability activates on use. Sheet is not editable."
+          }
+        }
       }
     },
     "STATS": {
@@ -1920,6 +1955,84 @@
         "abbreviation": "MP",
         "long": "Mana Points",
         "short": "Mana"
+      }
+    },
+    "STATUSES": {
+      "Conditions": {
+        "alive": "Alive",
+        "allured": "Allured",
+        "anosmatic": "Anosmatic",
+        "asleep": "Asleep",
+        "blind": "Blind",
+        "bound": "Bound",
+        "burned": "Burned",
+        "charmed": "Charmed",
+        "conscious": "Conscious",
+        "criticallyWounded": "Critically Wounded",
+        "dead": "Dead",
+        "deaf": "Deaf",
+        "defyingDeath": "Defying Death",
+        "disguised": "Disguised",
+        "down": "Down",
+        "dueling": "Dueling",
+        "encumbered": "Encumbered",
+        "ethereal": "Ethereal",
+        "frenzied": "Frenzied",
+        "frightened": "Frightened",
+        "frozen": "Frozen",
+        "goaded": "Goaded",
+        "grounded": "Grounded",
+        "hacked": "Hacked",
+        "hidden": "Hidden",
+        "hollied": "Hollied",
+        "immobilized": "Immobilized",
+        "invisible": "Invisible",
+        "lighted": "Lighted",
+        "meleeDodging": "Melee Dodging",
+        "missileDodging": "Missile Dodging",
+        "mute": "Mute",
+        "odorless": "Odorless",
+        "paralyzed": "Paralyzed",
+        "poisoned": "Poisoned",
+        "prone": "Prone",
+        "ruined": "Ruined",
+        "silenced": "Silenced",
+        "silent": "Silent",
+        "slowed": "Slowed",
+        "snared": "Snared",
+        "suffocating": "Suffocating",
+        "terrored": "Terrored",
+        "transformed": "Transformed",
+        "unconscious": "Unconscious",
+        "up": "Up",
+        "wisping": "Wisping"
+      },
+      "Cover": {
+        "fullCover": "Full Cover",
+        "halfCover": "Half Cover",
+        "noCover": "No Cover",
+        "threeQuartersCover": "Three Quarters Cover"
+      },
+      "Hacks": {
+        "armHack": "Arm Hack",
+        "armHack1": "1st Arm Hack",
+        "armHack2": "2nd Arm Hack",
+        "bodyHack": "Body Hack",
+        "earHack": "Ear Hack",
+        "eyeHack": "Eye Hack",
+        "legHack": "Leg Hack",
+        "legHack1": "1st Leg Hack",
+        "legHack2": "2nd Leg Hack",
+        "mouthHack": "Mouth Hack",
+        "noseHack": "Nose Hack"
+      },
+      "Transformations": {
+        "fullTransformed": "Full Transformed",
+        "greaterTransformed": "Greater Transformed",
+        "illusionTransformed": "Illusion transformed",
+        "minorTransformed": "Minor Transformed",
+        "polymorphed": "Polymorphed",
+        "treeformed": "Treeformed"
       }
     },
     "SYSTEMS": {
@@ -2284,6 +2397,16 @@
         },
         "PANELS": {
           "tier": "Tier {value}"
+        },
+        "USAGE": {
+          "Attune": {
+            "defaultName": "{name} Attunement",
+            "notEnoughPresence": "You do not have enough unused presence to attune {name}.",
+            "success": "{name} was successfully attuned."
+          },
+          "Deattune": {
+            "success": "{name} was successfully deattuned."
+          }
         }
       },
       "Attunement": {
@@ -2309,6 +2432,7 @@
         },
         "USAGE": {
           "attuned": "Attuned",
+          "deattuned": "Deattuned",
           "missing": "Not on Character"
         }
       },
@@ -2359,6 +2483,16 @@
         },
         "PANELS": {
           "notes": "Notes"
+        },
+        "VIRTUAL_EFFECTS": {
+          "criticallyNegativeHp": "Critically Negative HP",
+          "criticallyNegativeMp": "Critically Negative MP",
+          "negativeHalfMaxHp": "Negative Half Maximum HP",
+          "negativeHalfMaxMp": "Negative Half Maximum MP",
+          "negativeHp": "Negative HP",
+          "negativeMp": "Negative MP",
+          "zeroHp": "Zero HP",
+          "zeroMp": "Zero MP"
         }
       },
       "BaseEffect": {
@@ -2407,12 +2541,6 @@
           }
         }
       },
-      "BaseUser": {
-        "QUERY": {
-          "failPrefix": "Could not complete query.",
-          "failReason": "No GM is currently signed in."
-        }
-      },
       "Child": {
         "EMBED": {
           "disabled": "Disabled",
@@ -2453,6 +2581,22 @@
         },
         "USAGE": {
           "use": "Use {value}"
+        }
+      },
+      "Combat": {
+        "QUERY": {
+          "resetAttackPenalties": {
+            "failPrefix": "Could not reset attack penalties."
+          },
+          "tryAllEffectExpirations": {
+            "failPrefix": "Could not expire effects."
+          }
+        }
+      },
+      "Combatant": {
+        "EMBED": {
+          "defeated": "Defeated",
+          "hidden": "Hidden"
         }
       },
       "Common": {
@@ -2647,6 +2791,25 @@
         "FIELDS": {
           "field": {
             "label": "Field"
+          }
+        }
+      },
+      "Harm": {
+        "DATA": {
+          "description": "<p>Enter description here.</p?"
+        },
+        "EMBED": {
+          "nameString": "{name} {type}"
+        }
+      },
+      "Macro": {
+        "EXECUTION": {
+          "cantExecute": "Macro {name} experienced an error while executing. See console for more information.",
+          "noDocument": "{actor} has no {type} called {name}."
+        },
+        "QUERY": {
+          "createHotbarFolder": {
+            "failPrefix": "Could not create a hotbar folder."
           }
         }
       },
@@ -2854,6 +3017,13 @@
           "documents": "Documents",
           "resultType": "Result Type",
           "tableResult": "Table Result"
+        }
+      },
+      "User": {
+        "QUERY": {
+          "failFormat": "{prefix} {reason}",
+          "failPrefix": "Could not complete query.",
+          "failReason": "No GM is currently signed in."
         }
       },
       "Wiki": {
@@ -4137,55 +4307,6 @@
         "semblant": "Semblant",
         "tradecraft": "Tradecraft"
       },
-      "Conditions": {
-        "alive": "Alive",
-        "allured": "Allured",
-        "anosmatic": "Anosmatic",
-        "asleep": "Asleep",
-        "blind": "Blind",
-        "bound": "Bound",
-        "burned": "Burned",
-        "charmed": "Charmed",
-        "conscious": "Conscious",
-        "criticallyWounded": "Critically Wounded",
-        "dead": "Dead",
-        "deaf": "Deaf",
-        "defyingDeath": "Defying Death",
-        "disguised": "Disguised",
-        "down": "Down",
-        "dueling": "Dueling",
-        "encumbered": "Encumbered",
-        "ethereal": "Ethereal",
-        "frenzied": "Frenzied",
-        "frightened": "Frightened",
-        "frozen": "Frozen",
-        "goaded": "Goaded",
-        "grounded": "Grounded",
-        "hacked": "Hacked",
-        "hidden": "Hidden",
-        "hollied": "Hollied",
-        "immobilized": "Immobilized",
-        "invisible": "Invisible",
-        "lighted": "Lighted",
-        "meleeDodging": "Melee Dodging",
-        "missileDodging": "Missile Dodging",
-        "mute": "Mute",
-        "odorless": "Odorless",
-        "paralyzed": "Paralyzed",
-        "poisoned": "Poisoned",
-        "prone": "Prone",
-        "ruined": "Ruined",
-        "silenced": "Silenced",
-        "silent": "Silent",
-        "slowed": "Slowed",
-        "snared": "Snared",
-        "suffocating": "Suffocating",
-        "terrored": "Terrored",
-        "transformed": "Transformed",
-        "unconscious": "Unconscious",
-        "up": "Up",
-        "wisping": "Wisping"
-      },
       "Cost": {
         "formula": "Formula Cost",
         "hack": "Hack Cost",
@@ -4686,6 +4807,9 @@
       "actor": "Actor",
       "character": "Character",
       "creature": "Creature"
+    },
+    "Base": {
+      "document": "Document"
     },
     "Card": {
       "card": "Card",

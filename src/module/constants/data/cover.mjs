@@ -14,7 +14,7 @@ export const coverData = {
     hud: false,
     id: "halfCover",
     img: getImage("cover", "Half Cover"),
-    name: "Half Cover",
+    name: "TERIOCK.STATUSES.Cover.halfCover",
   },
   cover2: {
     _id: "threeQuartersCov",
@@ -29,7 +29,7 @@ export const coverData = {
     hud: false,
     id: "threeQuartersCover",
     img: getImage("cover", "Three-Quarters Cover"),
-    name: "Three-Quarters Cover",
+    name: "TERIOCK.STATUSES.Cover.threeQuartersCover",
   },
   cover3: {
     _id: "fullCover0000000",
@@ -44,6 +44,6 @@ export const coverData = {
     hud: false,
     id: "fullCover",
     img: getImage("cover", "Full Cover"),
-    name: "Full Cover",
+    name: "TERIOCK.STATUSES.Cover.fullCover",
   },
 };

@@ -187,14 +187,22 @@ export function transformationField(options = {}) {
 export function combatExpirationMethodField() {
   return new SchemaField({
     roll: new StringField({
-      hint: "TERIOCK.SCHEMA.CombatExpiration.what.roll.hint",
+      hint: game.i18n.localize(
+        "TERIOCK.SCHEMA.CombatExpiration.what.roll.hint",
+      ),
       initial: "2d4kh1",
-      label: "TERIOCK.SCHEMA.CombatExpiration.what.roll.label",
+      label: game.i18n.localize(
+        "TERIOCK.SCHEMA.CombatExpiration.what.roll.label",
+      ),
     }),
     threshold: new NumberField({
-      hint: "TERIOCK.SCHEMA.CombatExpiration.what.threshold.hint",
+      hint: game.i18n.localize(
+        "TERIOCK.SCHEMA.CombatExpiration.what.threshold.hint",
+      ),
       initial: 4,
-      label: "TERIOCK.SCHEMA.CombatExpiration.what.threshold.label",
+      label: game.i18n.localize(
+        "TERIOCK.SCHEMA.CombatExpiration.what.threshold.label",
+      ),
     }),
     type: new StringField({
       choices: localizeChoices({
@@ -202,9 +210,13 @@ export function combatExpirationMethodField() {
         rolled: "TERIOCK.SCHEMA.CombatExpiration.what.type.choices.forced",
         none: "TERIOCK.SCHEMA.CombatExpiration.what.type.choices.none",
       }),
-      hint: "TERIOCK.SCHEMA.CombatExpiration.what.type.hint",
+      hint: game.i18n.localize(
+        "TERIOCK.SCHEMA.CombatExpiration.what.type.hint",
+      ),
       initial: "none",
-      label: "TERIOCK.SCHEMA.CombatExpiration.what.type.label",
+      label: game.i18n.localize(
+        "TERIOCK.SCHEMA.CombatExpiration.what.type.label",
+      ),
     }),
   });
 }

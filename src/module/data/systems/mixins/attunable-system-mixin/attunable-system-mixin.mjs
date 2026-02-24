@@ -47,10 +47,14 @@ export default function AttunableSystemMixin(Base) {
         return [
           {
             icon: this.isAttuned
-              ? "handshake-simple"
-              : "handshake-simple-slash",
+              ? TERIOCK.display.icons.attunable.attune
+              : TERIOCK.display.icons.attunable.deattune,
             action: "toggleAttunedDoc",
-            tooltip: this.isAttuned ? "Attuned" : "Deattuned",
+            tooltip: this.isAttuned
+              ? game.i18n.localize("TERIOCK.SYSTEMS.Attunement.USAGE.attuned")
+              : game.i18n.localize(
+                  "TERIOCK.SYSTEMS.Attunement.USAGE.deattuned",
+                ),
             condition: this.parent.isOwner,
             callback: async () => {
               if (this.isAttuned) {
@@ -104,7 +108,10 @@ export default function AttunableSystemMixin(Base) {
           }
           const attunementData = {
             type: "attunement",
-            name: `${this.parent.name} Attunement`,
+            name: game.i18n.format(
+              "TERIOCK.SYSTEMS.Attunable.USAGE.Attune.defaultName",
+              { name: this.parent.name },
+            ),
             img: this.parent.img,
             system: {
               type: this.parent.type,
@@ -141,11 +148,13 @@ export default function AttunableSystemMixin(Base) {
               [attunementData],
             );
             ui.notifications.success(
-              `${this.parent.nameString} was successfully attuned.`,
+              "TERIOCK.SYSTEMS.Attunable.USAGE.Attune.success",
+              { format: { name: this.parent.nameString }, localize: true },
             );
           } else {
             ui.notifications.error(
-              `You do not have enough unused presence to attune ${this.parent.nameString}.`,
+              "TERIOCK.SYSTEMS.Attunable.USAGE.Attune.notEnoughPresence",
+              { format: { name: this.parent.nameString }, localize: true },
             );
           }
           return attunement;
@@ -185,7 +194,8 @@ export default function AttunableSystemMixin(Base) {
           if (attunement) {
             await attunement.delete();
             ui.notifications.success(
-              `${this.parent.nameString} was successfully deattuned.`,
+              "TERIOCK.SYSTEMS.Attunable.USAGE.Deattune.success",
+              { format: { name: this.parent.nameString }, localize: true },
             );
           }
         }
@@ -196,7 +206,7 @@ export default function AttunableSystemMixin(Base) {
         return [
           ...super.getCardContextMenuEntries(doc),
           {
-            name: "Attune",
+            name: game.i18n.localize("TERIOCK.SYSTEMS.Attunable.MENU.attune"),
             icon: makeIcon(
               TERIOCK.display.icons.attunable.attune,
               "contextMenu",
@@ -206,7 +216,7 @@ export default function AttunableSystemMixin(Base) {
             group: "control",
           },
           {
-            name: "Deattune",
+            name: game.i18n.localize("TERIOCK.SYSTEMS.Attunable.MENU.deattune"),
             icon: makeIcon(
               TERIOCK.display.icons.attunable.deattune,
               "contextMenu",

@@ -5,7 +5,7 @@ export const hacksData = {
     _id: "armHack100000000",
     id: "armHack1",
     img: getImage("hacks", "1st Arm Hack"),
-    name: "1st Arm Hack",
+    name: "TERIOCK.STATUSES.Hacks.armHack1",
     statuses: ["hacked"],
     hud: false,
     changes: [
@@ -21,7 +21,7 @@ export const hacksData = {
     _id: "armHack200000000",
     id: "armHack2",
     img: getImage("hacks", "2nd Arm Hack"),
-    name: "2nd Arm Hack",
+    name: "TERIOCK.STATUSES.Hacks.armHack2",
     statuses: ["hacked"],
     hud: false,
     changes: [
@@ -37,7 +37,7 @@ export const hacksData = {
     _id: "bodyHack00000000",
     id: "bodyHack",
     img: getImage("hacks", "Body Hack"),
-    name: "Body Hack",
+    name: "TERIOCK.STATUSES.Hacks.bodyHack",
     statuses: ["hacked", "immobilized"],
     hud: false,
     changes: [
@@ -53,7 +53,7 @@ export const hacksData = {
     _id: "earHack000000000",
     id: "earHack",
     img: getImage("hacks", "Ear Hack"),
-    name: "Ear Hack",
+    name: "TERIOCK.STATUSES.Hacks.earHack",
     statuses: ["deaf", "hacked"],
     hud: false,
     changes: [
@@ -69,7 +69,7 @@ export const hacksData = {
     _id: "eyeHack000000000",
     id: "eyeHack",
     img: getImage("hacks", "Eye Hack"),
-    name: "Eye Hack",
+    name: "TERIOCK.STATUSES.Hacks.eyeHack",
     statuses: ["blind", "hacked"],
     hud: false,
     changes: [
@@ -85,7 +85,7 @@ export const hacksData = {
     _id: "legHack100000000",
     id: "legHack1",
     img: getImage("hacks", "1st Leg Hack"),
-    name: "1st Leg Hack",
+    name: "TERIOCK.STATUSES.Hacks.legHack1",
     statuses: ["hacked", "slowed"],
     hud: false,
     changes: [
@@ -101,7 +101,7 @@ export const hacksData = {
     _id: "legHack200000000",
     id: "legHack2",
     img: getImage("hacks", "2nd Leg Hack"),
-    name: "2nd Leg Hack",
+    name: "TERIOCK.STATUSES.Hacks.legHack2",
     statuses: ["hacked", "immobilized"],
     hud: false,
     changes: [
@@ -117,7 +117,7 @@ export const hacksData = {
     _id: "mouthHack0000000",
     id: "mouthHack",
     img: getImage("hacks", "Mouth Hack"),
-    name: "Mouth Hack",
+    name: "TERIOCK.STATUSES.Hacks.mouthHack",
     statuses: ["hacked", "mute"],
     hud: false,
     changes: [
@@ -133,7 +133,7 @@ export const hacksData = {
     _id: "noseHack00000000",
     id: "noseHack",
     img: getImage("hacks", "Nose Hack"),
-    name: "Nose Hack",
+    name: "TERIOCK.STATUSES.Hacks.noseHack",
     statuses: ["hacked", "anosmatic"],
     hud: false,
     changes: [

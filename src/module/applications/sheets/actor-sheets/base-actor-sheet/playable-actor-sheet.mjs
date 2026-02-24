@@ -41,9 +41,15 @@ export default class TeriockPlayableActorSheet extends mix(
   async _onFirstRender(context, options) {
     await super._onFirstRender(context, options);
     if (this.document.species.length === 0) {
-      ui.notifications.warn(
-        `${this.document.name} has no species. Add one from the "Species" compendium.`,
-      );
+      ui.notifications.warn("TERIOCK.SHEETS.Actor.NOTIFICATIONS.noSpecies", {
+        format: {
+          name: this.document.name,
+          compendium: game.i18n.localize(
+            game.packs.get("teriock.species").title,
+          ),
+        },
+        localize: true,
+      });
     }
   }
 }

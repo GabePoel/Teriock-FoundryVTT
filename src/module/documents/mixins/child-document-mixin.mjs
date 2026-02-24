@@ -132,7 +132,10 @@ export default function ChildDocumentMixin(Base) {
        * @returns {Promise<void>}
        */
       async wikiOpen() {
-        ui.notifications.error(`There are no ${this.type} pages on the wiki.`);
+        ui.notifications.error("TERIOCK.SYSTEMS.Wiki.DIALOG.open.error", {
+          format: { value: this.name },
+          localize: true,
+        });
       }
     }
   );

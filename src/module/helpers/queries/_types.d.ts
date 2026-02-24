@@ -12,10 +12,12 @@ declare global {
 
     export type QueryOptions = {
       timeout: number;
-      notifyFailure: boolean;
-      failMessage: string;
-      failPrefix: string;
-      failReason: string;
+      notifyFailure?: boolean;
+      failMessage?: string;
+      failPrefix?: string;
+      failReason?: string;
+      localize?: boolean;
+      format?: Record<string, string>;
     };
 
     export type InCombatExpiration = {

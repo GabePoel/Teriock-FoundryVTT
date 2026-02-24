@@ -16,7 +16,11 @@ export async function selectDocumentsDialog(documents, options = {}) {
       imgKey: "img",
       multi: true,
       nameKey: "name",
+      noDocumentsMessage: game.i18n.localize(
+        "TERIOCK.DIALOGS.SelectDocument.noOptions",
+      ),
       openable: false,
+      silent: false,
       textKey: null,
       title: game.i18n.localize(
         "TERIOCK.DIALOGS.SelectDocument.defaults.title",
@@ -29,10 +33,8 @@ export async function selectDocumentsDialog(documents, options = {}) {
     options,
   );
 
-  if (documents.length === 0) {
-    ui.notifications.warn(
-      game.i18n.localize("TERIOCK.DIALOGS.SelectDocument.noOptions"),
-    );
+  if (documents.length === 0 && !options.silent) {
+    ui.notifications.warn(options.noDocumentsMessage);
     return [];
   }
 

@@ -12,11 +12,12 @@ async function primary(actor, options = {}) {
     attacker = await fromUuid(pureUuid(options.attacker));
   }
   if (!attacker) {
-    ui.notifications.error(
-      game.i18n.format("TERIOCK.COMMANDS.StandardDamage.noDefaultWeapon", {
+    ui.notifications.error("TERIOCK.COMMANDS.StandardDamage.noDefaultWeapon", {
+      format: {
         name: actor.name,
-      }),
-    );
+      },
+      localize: true,
+    });
     return;
   }
   await attacker.use(
@@ -37,11 +38,12 @@ async function secondary(actor, options = {}) {
     attacker = await fromUuid(pureUuid(options.attacker));
   }
   if (!attacker) {
-    ui.notifications.error(
-      game.i18n.format("TERIOCK.COMMANDS.StandardDamage.noDefaultWeapon", {
+    ui.notifications.error("TERIOCK.COMMANDS.StandardDamage.noDefaultWeapon", {
+      format: {
         name: actor.name,
-      }),
-    );
+      },
+      localize: true,
+    });
     return;
   }
   await attacker.use(

@@ -1,5 +1,4 @@
 import { getImage } from "../../../../helpers/path.mjs";
-import { toTitleCase } from "../../../../helpers/string.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import { BaseSystem } from "../../abstract/_module.mjs";
@@ -55,7 +54,10 @@ export default class HarmSystem extends mix(
 
   /** @inheritDoc */
   get nameString() {
-    return `${super.nameString} ${toTitleCase(this.parent.type)}`;
+    return game.i18n.format("TERIOCK.SYSTEMS.Harm.EMBED.nameString", {
+      name: super.nameString,
+      type: TERIOCK.options.document[this.parent.type]?.name || "",
+    });
   }
 
   async _preCreate(data, options, user) {
@@ -63,7 +65,11 @@ export default class HarmSystem extends mix(
       return false;
     }
     if (!data.text?.content) {
-      this.parent.updateSource({ "text.content": "Enter description here." });
+      this.parent.updateSource({
+        "text.content": game.i18n.localize(
+          "TERIOCK.SYSTEMS.Harm.DATA.description",
+        ),
+      });
     }
     if (!data.system?.img) {
       let ref = "";

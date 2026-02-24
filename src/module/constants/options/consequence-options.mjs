@@ -32,13 +32,13 @@ export const consequenceOptions = {
     other: "TERIOCK.EFFECTS.RollableEffects.other.take",
   },
   hacks: {
-    arm: "TERIOCK.EFFECTS.Hacks.arm.label",
-    leg: "TERIOCK.EFFECTS.Hacks.leg.label",
-    body: "TERIOCK.EFFECTS.Hacks.body.label",
-    eye: "TERIOCK.EFFECTS.Hacks.eye.label",
-    ear: "TERIOCK.EFFECTS.Hacks.ear.label",
-    mouth: "TERIOCK.EFFECTS.Hacks.mouth.label",
-    nose: "TERIOCK.EFFECTS.Hacks.nose.label",
+    arm: "TERIOCK.STATUSES.Hacks.armHack",
+    leg: "TERIOCK.STATUSES.Hacks.legHack",
+    body: "TERIOCK.STATUSES.Hacks.bodyHack",
+    eye: "TERIOCK.STATUSES.Hacks.eyeHack",
+    ear: "TERIOCK.STATUSES.Hacks.earHack",
+    mouth: "TERIOCK.STATUSES.Hacks.mouthHack",
+    nose: "TERIOCK.STATUSES.Hacks.noseHack",
   },
   interaction: {
     attack: {

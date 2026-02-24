@@ -1,17 +1,23 @@
 if (actor) {
-  if (actor.system.offense.piercing === "ub") {
+  if (actor.system.offense.piercing.value === "ub") {
     await actor.update({
-      "system.offense.piercing": "none",
+      "system.offense.piercing.raw": 0,
     });
   } else {
     await actor.update({
-      "system.offense.piercing": "ub",
+      "system.offense.piercing.raw": 2,
     });
   }
-  if (actor.system.offense.piercing === "ub") {
-    ui.notifications.success(`UB piercing enabled for ${actor.name}.`);
+  if (actor.system.offense.piercing.value === "ub") {
+    ui.notifications.success("TERIOCK.MACROS.ToggleUb.enabled", {
+      localize: true,
+      format: { name: actor.name },
+    });
   } else {
-    ui.notifications.info(`UB piercing disabled for ${actor.name}.`);
+    ui.notifications.info("TERIOCK.MACROS.ToggleUb.disabled", {
+      localize: true,
+      format: { name: actor.name },
+    });
   }
 } else {
   ui.notifications.warn("TERIOCK.DIALOGS.Common.ERRORS.noActor", {

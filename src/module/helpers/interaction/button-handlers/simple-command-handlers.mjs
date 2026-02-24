@@ -68,6 +68,14 @@ export class StandardDamageHandler extends CommandButtonHandlerBuilder(
     super(...args);
     this.actors = this.selectedActors;
   }
+
+  /**
+   * @param {Teriock.Interaction.StandardDamageOptions} options
+   * @returns {Teriock.UI.HTMLButtonConfig}
+   */
+  static buildButton(options = {}) {
+    return super.buildButton(options);
+  }
 }
 
 /**

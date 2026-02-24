@@ -1,8 +1,7 @@
 import { TeriockDialog } from "../../applications/api/_module.mjs";
 import { selectDocumentsDialog } from "../../applications/dialogs/select-document-dialog.mjs";
+import { TeriockTextEditor } from "../../applications/ux/_module.mjs";
 import { makeIconClass } from "../utils.mjs";
-
-const { ux } = foundry.applications;
 
 /**
  * Query that asks the GM to identify the item.
@@ -13,14 +12,17 @@ const { ux } = foundry.applications;
 export default async function identifyItemQuery(queryData, { _timeout }) {
   const uuid = queryData.uuid;
   const item = await fromUuid(uuid);
-  const content = await ux.TextEditor.implementation.enrichHTML(
-    `<p>Should @UUID[${game.user.uuid}] identify @UUID[${item.uuid}]{${item.system.identification.name}}?</p>`,
+  const content = await TeriockTextEditor.enrichHTML(
+    game.i18n.format("TERIOCK.MODELS.Identification.QUERY.Identify.question", {
+      user: `@UUID[${game.user.uuid}]`,
+      item: `@UUID[${this.parent.parent.uuid}]{${this.name}}`,
+    }),
   );
   const doIdentify = await TeriockDialog.confirm({
     content: content,
     modal: false,
     window: {
-      icon: makeIconClass("magnifying-glass", "title"),
+      icon: makeIconClass(TERIOCK.display.icons.equipment.identify, "title"),
       title: game.i18n.localize(
         "TERIOCK.MODELS.Identification.QUERY.Identify.title",
       ),
@@ -34,11 +36,15 @@ export default async function identifyItemQuery(queryData, { _timeout }) {
       ...item.fluencies.filter((f) => !f.system.revealed),
     ];
     const toReveal = await selectDocumentsDialog(unrevealed, {
+      checked: unrevealed.map((r) => r.uuid),
       hint: game.i18n.localize(
         "TERIOCK.MODELS.Identification.QUERY.Identify.hint",
       ),
+      silent: true,
       tooltipAsync: false,
-      checked: unrevealed.map((r) => r.uuid),
+      noDocumentsMessage: game.i18n.localize(
+        "TERIOCK.MODELS.Identification.QUERY.Identify.noDocumentsMessage",
+      ),
     });
     await item.updateEmbeddedDocuments(
       "ActiveEffect",

@@ -9,4 +9,12 @@ export default class TeriockTooltipManager extends TooltipManager {
     super.activate(element, options);
     bindCommonActions(this.tooltip);
   }
+
+  /**
+   * Reactivate the tooltip.
+   * @param options
+   */
+  reactivate(options = {}) {
+    this.activate(this.element, options);
+  }
 }

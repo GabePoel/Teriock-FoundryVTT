@@ -61,9 +61,13 @@ export default class IdentificationModel extends EmbeddedDataModel {
     if (!data.cancel) {
       if (!this.identified) {
         ui.notifications.info(
-          game.i18n.format("TERIOCK.MODELS.Identification.QUERY.Identify.ask", {
-            name: this.parent.parent.nameString,
-          }),
+          "TERIOCK.MODELS.Identification.QUERY.Identify.ask",
+          {
+            format: {
+              name: this.parent.parent.nameString,
+            },
+            localize: true,
+          },
         );
         const doIdentify = await game.users.queryGM(
           "teriock.identifyItem",
@@ -71,30 +75,32 @@ export default class IdentificationModel extends EmbeddedDataModel {
             uuid: this.parent.parent.uuid,
           },
           {
-            failPrefix: game.i18n.localize(
+            failPrefix:
               "TERIOCK.MODELS.Identification.QUERY.Identify.failPrefix",
-            ),
+            localize: true,
           },
         );
         if (doIdentify) {
           ui.notifications.success(
-            game.i18n.format(
-              "TERIOCK.MODELS.Identification.QUERY.Identify.success",
-              {
+            "TERIOCK.MODELS.Identification.QUERY.Identify.success",
+            {
+              format: {
                 name: this.parent.parent.nameString,
               },
-            ),
+              localize: true,
+            },
           );
           return;
         }
       }
       ui.notifications.error(
-        game.i18n.format(
-          "TERIOCK.MODELS.Identification.QUERY.Identify.failure",
-          {
+        "TERIOCK.MODELS.Identification.QUERY.Identify.failure",
+        {
+          format: {
             name: this.parent.parent.nameString,
           },
-        ),
+          localize: true,
+        },
       );
     }
   }
@@ -110,22 +116,31 @@ export default class IdentificationModel extends EmbeddedDataModel {
       if (!this.identified && !this.read) {
         const activeGM = game.users.activeGM;
         ui.notifications.info(
-          game.i18n.format(
-            "TERIOCK.MODELS.Identification.QUERY.ReadMagic.ask",
-            {
+          "TERIOCK.MODELS.Identification.QUERY.ReadMagic.ask",
+          {
+            format: {
               name: this.parent.parent.nameString,
             },
-          ),
+            localize: true,
+          },
         );
         const content = await TeriockTextEditor.enrichHTML(
-          `<p>Should @UUID[${game.user.uuid}] read magic on ` +
-            `@UUID[${this.parent.parent.uuid}]{${this.name}}?</p>`,
+          game.i18n.format(
+            "TERIOCK.MODELS.Identification.QUERY.ReadMagic.question",
+            {
+              user: `@UUID[${game.user.uuid}]`,
+              item: `@UUID[${this.parent.parent.uuid}]{${this.name}}`,
+            },
+          ),
         );
         const doReadMagic = await TeriockDialog.query(activeGM, "confirm", {
           content: content,
           modal: false,
           window: {
-            icon: makeIconClass("magnifying-glass", "title"),
+            icon: makeIconClass(
+              TERIOCK.display.icons.equipment.readMagic,
+              "title",
+            ),
             title: game.i18n.localize(
               "TERIOCK.MODELS.Identification.QUERY.ReadMagic.title",
             ),
@@ -142,27 +157,29 @@ export default class IdentificationModel extends EmbeddedDataModel {
               },
             },
             {
-              failPrefix: game.i18n.localize(
+              failPrefix:
                 "TERIOCK.MODELS.Identification.QUERY.ReadMagic.failPrefix",
-              ),
+              localize: true,
             },
           );
           ui.notifications.success(
-            game.i18n.format(
-              "TERIOCK.MODELS.Identification.QUERY.ReadMagic.success",
-              {
+            "TERIOCK.MODELS.Identification.QUERY.ReadMagic.success",
+            {
+              format: {
                 name: this.parent.parent.nameString,
               },
-            ),
+              localize: true,
+            },
           );
         } else {
           ui.notifications.error(
-            game.i18n.format(
-              "TERIOCK.MODELS.Identification.QUERY.ReadMagic.failure",
-              {
+            "TERIOCK.MODELS.Identification.QUERY.ReadMagic.failure",
+            {
+              format: {
                 name: this.parent.parent.nameString,
               },
-            ),
+              localize: true,
+            },
           );
         }
       }
@@ -208,7 +225,11 @@ export default class IdentificationModel extends EmbeddedDataModel {
           hint: game.i18n.localize(
             "TERIOCK.MODELS.Identification.QUERY.Unidentify.hint",
           ),
+          silent: true,
           tooltipAsync: false,
+          noDocumentsMessage: game.i18n.localize(
+            "TERIOCK.MODELS.Identification.QUERY.Unidentify.noDocumentsMessage",
+          ),
         });
         await this.parent.parent.updateEmbeddedDocuments(
           "ActiveEffect",
@@ -229,7 +250,10 @@ export default class IdentificationModel extends EmbeddedDataModel {
           "system.identification.read": false,
           "system.notes": "",
           "system.powerLevel": "unknown",
-          name: "Unidentified " + this.parent.equipmentType,
+          name: game.i18n.format(
+            "TERIOCK.MODELS.Identification.QUERY.Unidentify.name",
+            { type: this.parent.equipmentType },
+          ),
         });
       } else {
         ui.notifications.warn(

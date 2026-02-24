@@ -64,7 +64,7 @@ preLocalize("reference.classes", {
   transform: "cc",
 });
 preLocalize("reference.attributes.conditions", {
-  prefix: "TERIOCK.TERMS.Conditions.",
+  prefix: "TERIOCK.STATUSES.Conditions.",
   transform: "cc",
 });
 preLocalize("reference.deathBag", {

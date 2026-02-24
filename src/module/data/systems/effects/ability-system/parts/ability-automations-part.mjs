@@ -28,18 +28,8 @@ export default (Base) => {
             (a) => a.type === AbilityMacroAutomation.TYPE,
           );
         return macroAutomations
-          .filter((a) => a.relation === "pseudoHook")
-          .map((a) => {
-            return {
-              key: `system.hookedMacros.${a.pseudoHook}`,
-              mode: 2,
-              priority: 5,
-              qualifier: "1",
-              target: "Actor",
-              time: "normal",
-              value: a.macro,
-            };
-          });
+          .filter((a) => a.relation === "pseudoHook" && a.hasMacro)
+          .map((a) => a.pseudoHookChange);
       }
     }
   );
