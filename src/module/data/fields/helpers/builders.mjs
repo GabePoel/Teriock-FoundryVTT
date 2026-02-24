@@ -242,11 +242,11 @@ export function combatExpirationTimingField() {
       label: "TERIOCK.SCHEMA.CombatExpiration.when.time.label",
     }),
     trigger: new StringField({
-      choices: {
+      choices: localizeChoices({
         turn: "TERIOCK.SCHEMA.CombatExpiration.when.trigger.choices.turn",
         combat: "TERIOCK.SCHEMA.CombatExpiration.when.trigger.choices.combat",
         action: "TERIOCK.SCHEMA.CombatExpiration.when.trigger.choices.action",
-      },
+      }),
       hint: "TERIOCK.SCHEMA.CombatExpiration.when.trigger.hint",
       initial: "turn",
       label: "TERIOCK.SCHEMA.CombatExpiration.when.trigger.label",
