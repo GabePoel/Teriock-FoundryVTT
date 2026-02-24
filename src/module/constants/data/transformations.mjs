@@ -22,10 +22,10 @@ export const transformationsData = {
   illusionTransformed: {
     _id: "illusionTransfor",
     hud: false,
-    img: getImage("abilities", "Illusionary Arts"),
     id: "illusionTransformed",
-    name: "Illusion Transformed",
-    type: "TERIOCK.STATUSES.Transformations.illusionTransformed",
+    img: getImage("abilities", "Illusionary Arts"),
+    name: "TERIOCK.STATUSES.Transformations.illusionTransformed",
+    type: "base",
   },
   minorTransformed: {
     _id: "minorTransformed",

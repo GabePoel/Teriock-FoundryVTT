@@ -1,6 +1,5 @@
 import { pureUuid } from "../../../../../helpers/resolve.mjs";
 import { conditionSort } from "../../../../../helpers/sort.mjs";
-import { toCamelCase } from "../../../../../helpers/string.mjs";
 import { TeriockTextEditor } from "../../../../ux/_module.mjs";
 
 //noinspection JSClosureCompilerSyntax
@@ -18,20 +17,21 @@ export default (Base) =>
      * @param {object} context
      */
     async _prepareConditionContext(context) {
-      const conditions = conditionSort(
+      const removableConditions = this.actor.conditions.map(
+        (c) => c.system.conditionKey,
+      );
+      const liveConditions = conditionSort(
         Array.from(this.actor.statuses || []).filter((c) =>
           Object.keys(TERIOCK.index.conditions).includes(c),
         ),
       );
       Object.assign(context, {
-        conditions: conditions,
-        removableConditions: conditions.filter((c) =>
-          this.actor.effectKeys.condition.has(c),
-        ),
+        conditions: liveConditions,
+        removableConditions,
       });
       context.conditionsMap = {};
       for (const c of this.actor.conditions) {
-        context.conditionsMap[toCamelCase(c.name)] = c;
+        context.conditionsMap[c.system.conditionKey] = c;
       }
       context.conditionProviders = {};
       context.conditionTooltips = {};

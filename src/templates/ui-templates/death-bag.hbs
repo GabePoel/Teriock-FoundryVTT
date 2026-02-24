@@ -3,13 +3,15 @@
     {{#if (gt number 0)}}
       <div class="death-bag-stones-container">
         <header class="message-header">
-          <span class="flavor-text">{{path @root/TERIOCK.reference.deathBag color}} Stones</span>
+          <span class="flavor-text">
+            {{localize (concat "TERIOCK.TERMS.Stones." color)}}
+          </span>
         </header>
         <div class="death-bag-stones dice-formula">
           {{#repeat number}}
             <div
               class="death-bag-stone"
-              data-tooltip="{{path @root/TERIOCK.reference.deathBag color}} Stone"
+              data-tooltip="{{path @root/TERIOCK.reference.deathBag color}}"
             >
               <img
                 src="systems/teriock/src/icons/death-bag-stones/{{color}}.webp"

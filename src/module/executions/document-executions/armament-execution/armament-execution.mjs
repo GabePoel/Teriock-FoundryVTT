@@ -55,9 +55,11 @@ export default class ArmamentExecution extends BaseDocumentExecution {
   /** @inheritDoc */
   get flavor() {
     if (this.deals.size === 1) {
-      return `${TERIOCK.options.take[Array.from(this.deals)[0]].label} Roll`;
+      return game.i18n.format("TERIOCK.ROLLS.Base.name", {
+        value: TERIOCK.options.take[Array.from(this.deals)[0]].label,
+      });
     } else {
-      return "Multi-Effect Roll";
+      return game.i18n.localize("TERIOCK.ROLLS.Harm.multi");
     }
   }
 

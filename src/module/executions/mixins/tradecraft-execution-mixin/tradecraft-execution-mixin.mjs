@@ -21,7 +21,7 @@ export default function TradecraftExecutionMixin(Base) {
           });
         }
         return game.i18n.format("TERIOCK.ROLLS.Tradecraft.name", {
-          value: this.tradecraft,
+          value: TERIOCK.reference.tradecrafts[this.tradecraft],
         });
       }
 

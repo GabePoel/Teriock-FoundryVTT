@@ -61,13 +61,21 @@ export default function AbilityExecutionGetInputPart(Base) {
           let mpDescription = this.source.system.costs.mp.value.variable;
           if (this.source.system.adept.enabled) {
             mpDescription +=
-              `<div><p>This ability is @L[Keyword:Adept]{adept} and this cost will automatically be ` +
-              `decreaesd by ${this.source.system.adept.amount}.</p>`;
+              "<div><p>" +
+              game.i18n.format(
+                "TERIOCK.SYSTEMS.Ability.EXECUTION.descriptions.adept",
+                { amount: this.source.system.adept.amount },
+              ) +
+              "</p>";
           }
           if (this.source.system.gifted.enabled) {
             mpDescription +=
-              `<div><p>This ability is @L[Keyword:Gifted]{gifted} and this cost will automatically be ` +
-              `increased by ${this.source.system.gifted.amount}.</p>`;
+              "<div><p>" +
+              game.i18n.format(
+                "TERIOCK.SYSTEMS.Ability.EXECUTION.descriptions.gifted",
+                { amount: this.source.system.gifted.amount },
+              ) +
+              "</p>";
           }
           mpDescription = await TeriockTextEditor.enrichHTML(mpDescription);
           const mpMax = this.actor.system.mp.value - this.actor.system.mp.min;
@@ -139,8 +147,13 @@ export default function AbilityExecutionGetInputPart(Base) {
           );
         }
         if (dialogs.length > 0) {
-          const execution = this.source.system.spell ? "Casting" : "Executing";
-          const title = `${execution} ${this.source.name}`;
+          const title = this.source.system.spell
+            ? game.i18n.format("TERIOCK.SYSTEMS.Ability.EXECUTION.casting", {
+                name: this.source.name,
+              })
+            : game.i18n.format("TERIOCK.SYSTEMS.Ability.EXECUTION.execution", {
+                name: this.source.name,
+              });
           await TeriockDialog.prompt({
             window: {
               icon: makeIconClass("burst", "title"),

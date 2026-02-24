@@ -381,7 +381,9 @@ export default class AbilitySystem extends mix(
   /** @inheritDoc */
   get useText() {
     if (this.spell) {
-      return `Cast ${this.parent.name}`;
+      return game.i18n.format("TERIOCK.SYSTEMS.Ability.USAGE.cast", {
+        value: this.parent.name,
+      });
     }
     return super.useText;
   }

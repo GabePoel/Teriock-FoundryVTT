@@ -4,7 +4,7 @@ import { icons } from "../display/icons.mjs";
 
 /**
  * Options that describe documents.
- * @type {Record<string, {doc?: string, name: string, icon: string, doc?: string, sorter?: Function, getter?: string, parent?: string}>}
+ * @type {Record<string, {doc?: string, name: string, icon: string, doc?: string, sorter?: Function, getter?: string, plural?: string}>}
  */
 export const documentOptions = {
   ability: {

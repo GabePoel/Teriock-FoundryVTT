@@ -1,5 +1,4 @@
 import { inCombatExpirationDialog } from "../../../../applications/dialogs/_module.mjs";
-import { toCamelCase } from "../../../../helpers/string.mjs";
 import { makeIcon, mix } from "../../../../helpers/utils.mjs";
 import { combatExpirationMethodField } from "../../../fields/helpers/builders.mjs";
 import { ThresholdDataMixin } from "../../../shared/mixins/_module.mjs";
@@ -50,17 +49,13 @@ export default class ConditionSystem extends mix(
    * @returns {string}
    */
   get conditionKey() {
-    if (
-      Object.values(TERIOCK.data.conditions)
-        .map((c) => c._id)
-        .includes(this.parent.id)
-    ) {
-      return Object.values(TERIOCK.data.conditions).find(
-        (c) => c._id === this.parent.id,
-      ).id;
-    } else {
-      return toCamelCase(this.parent.name);
-    }
+    const idMap = Object.fromEntries(
+      Object.entries(TERIOCK.data.conditions).map(([id, data]) => [
+        data._id,
+        id,
+      ]),
+    );
+    return idMap[this.parent.id];
   }
 
   /** @inheritDoc */
@@ -106,14 +101,10 @@ export default class ConditionSystem extends mix(
 
   /** @inheritDoc */
   async expire() {
-    if (
-      Object.values(TERIOCK.index.conditions).includes(this.conditionKey) &&
-      this.actor
-    ) {
-      await this.actor.system.removeCondition(this.conditionKey);
-    } else {
-      await super.expire();
-    }
+    const actor = this.actor;
+    const key = this.conditionKey;
+    await super.expire();
+    await actor?.toggleStatusEffect(key, { active: false });
   }
 
   /**

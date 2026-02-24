@@ -33,7 +33,13 @@ export default (Base) => {
           {
             icon: this.dampened ? "bell-slash" : "bell",
             action: "toggleDampenedDoc",
-            tooltip: this.dampened ? "Dampened" : "Undampened",
+            tooltip: this.dampened
+              ? game.i18n.localize(
+                  "TERIOCK.SYSTEMS.Equipment.FIELDS.dampened.label",
+                )
+              : game.i18n.localize(
+                  "TERIOCK.SYSTEMS.Equipment.EMBED.undampened",
+                ),
             condition: this.parent.isOwner,
             callback: async () => {
               if (this.dampened) {
@@ -48,7 +54,11 @@ export default (Base) => {
               ? TERIOCK.display.icons.break.shatter
               : TERIOCK.display.icons.break.repair,
             action: "toggleShatteredDoc",
-            tooltip: this.shattered ? "Shattered" : "Shattered",
+            tooltip: this.shattered
+              ? game.i18n.localize("TERIOCK.TERMS.Properties.shattered")
+              : game.i18n.localize(
+                  "TERIOCK.SYSTEMS.Equipment.EMBED.unshatterd",
+                ),
             condition: this.parent.isOwner,
             callback: async () => {
               if (this.shattered) {

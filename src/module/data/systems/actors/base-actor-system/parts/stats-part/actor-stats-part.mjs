@@ -36,11 +36,11 @@ export default (Base) => {
             temp: new fields.NumberField({ initial: 0 }),
             value: new fields.NumberField({ initial: 1 }),
           }),
-          presence: statField("Presence", {
+          presence: statField("", {
             max: 1,
             value: 0,
           }),
-          wither: statField("Wither", {
+          wither: statField("", {
             max: 100,
             value: 20,
           }),
@@ -293,7 +293,7 @@ export default (Base) => {
 
 /**
  * Creates a stat field definition with min, max, and current values, plus optional base and temp fields.
- * @param {string} name - The name of the stat (e.g., "HP", "MP", "Wither")
+ * @param {string} _name - The name of the stat (e.g., "HP", "MP", "Wither")
  * @param {object} [options] - Configuration options for the stat field
  * @param {number} [options.min=0] - Initial minimum value for the stat
  * @param {number} [options.max=1] - Initial maximum value for the stat
@@ -301,36 +301,31 @@ export default (Base) => {
  * @param {boolean} [options.base=false] - Whether to include a base value field
  * @param {boolean} [options.temp=false] - Whether to include a temporary value field
  */
-function statField(name, options = {}) {
+function statField(_name, options = {}) {
   const schema = {
     max: new fields.NumberField({
       initial: options.max ?? 1,
       integer: true,
-      label: `Maximum ${name}`,
     }),
     min: new fields.NumberField({
       initial: options.min ?? 0,
       integer: true,
-      label: `Minimum ${name}`,
     }),
     value: new fields.NumberField({
       initial: options.value ?? 1,
       integer: true,
-      label: `Current ${name}`,
     }),
   };
   if (options.base) {
     schema.base = new fields.NumberField({
       initial: 1,
       integer: true,
-      label: `Base ${name}`,
     });
   }
   if (options.temp) {
     schema.temp = new fields.NumberField({
       initial: 0,
       integer: true,
-      label: `Temporary ${name}`,
       min: 0,
     });
   }

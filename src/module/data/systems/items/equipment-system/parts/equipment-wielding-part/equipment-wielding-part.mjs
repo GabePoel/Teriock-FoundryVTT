@@ -61,7 +61,9 @@ export default (Base) => {
           {
             icon: this.glued ? "link" : "link-slash",
             action: "toggleGluedDoc",
-            tooltip: this.glued ? "Glued" : "Unglued",
+            tooltip: this.glued
+              ? game.i18n.localize("TERIOCK.SYSTEMS.Equipment.EMBED.glued")
+              : game.i18n.localize("TERIOCK.SYSTEMS.Equipment.EMBED.unglued"),
             condition: this.parent.isOwner,
             callback: async () => {
               if (this.glued) {
@@ -127,28 +129,28 @@ export default (Base) => {
         return [
           ...super.getCardContextMenuEntries(doc),
           {
-            name: "Equip",
+            name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.equip"),
             icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
             callback: this.equip.bind(this),
             condition: this.canEquip,
             group: "control",
           },
           {
-            name: "Unequip",
+            name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.unequip"),
             icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
             callback: this.unequip.bind(this),
             condition: this.parent.isOwner && this.canUnequip,
             group: "control",
           },
           {
-            name: "Glue",
+            name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.glue"),
             icon: makeIcon(TERIOCK.display.icons.equipment.glue, "contextMenu"),
             callback: this.glue.bind(this),
             condition: this.parent.isOwner && !this.glued,
             group: "control",
           },
           {
-            name: "Unglue",
+            name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.unglue"),
             icon: makeIcon(
               TERIOCK.display.icons.equipment.unglue,
               "contextMenu",

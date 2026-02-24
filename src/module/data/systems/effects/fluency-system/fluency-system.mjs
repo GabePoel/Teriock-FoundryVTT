@@ -88,9 +88,9 @@ export default class FluencySystem extends mix(
   /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
-    parts.subtitle = `${this.tradecraft}`;
+    parts.subtitle = TERIOCK.reference.tradecrafts[this.tradecraft];
     parts.text = dotJoin([
-      this.field,
+      TERIOCK.options.tradecraft[this.field].name,
       (this.parent.elder?.documentName !== "ActiveEffect"
         ? this.parent.elder?.name
         : "") || "",
@@ -183,7 +183,7 @@ export default class FluencySystem extends mix(
       foundry.utils.setProperty(
         changes,
         "img",
-        getImage("tradecrafts", TERIOCK.reference.tradecrafts[tradecraft]),
+        getImage("tradecrafts", TERIOCK.index.tradecrafts[tradecraft]),
       );
     }
   }

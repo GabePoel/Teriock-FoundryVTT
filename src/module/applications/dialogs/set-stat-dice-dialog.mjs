@@ -6,8 +6,16 @@ import { TeriockDialog } from "../api/_module.mjs";
  * @param {StatPoolModel} pool
  */
 export default async function setStatDiceDialog(pool) {
-  const numberForm = pool.schema.fields.number.toFormGroup(
-    { rootId: foundry.utils.randomID() },
+  const numberForm = pool.schema.fields.number.fields.raw.toFormGroup(
+    {
+      rootId: foundry.utils.randomID(),
+      hint: game.i18n.localize(
+        "TERIOCK.MODELS.StatPool.FIELDS.number.raw.hint",
+      ),
+      label: game.i18n.localize(
+        "TERIOCK.MODELS.StatPool.FIELDS.number.raw.label",
+      ),
+    },
     {
       name: "number",
       value: pool.number._source.raw,

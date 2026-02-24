@@ -42,7 +42,6 @@ const reference = {
   magicalProperties: foundry.utils.deepClone(magicalProperties),
   materialProperties: foundry.utils.deepClone(materialProperties),
 };
-
 export default reference;
 
 preLocalize("reference.abilities", {
@@ -63,7 +62,7 @@ preLocalize("reference.classes", {
   prefix: "TERIOCK.TERMS.Classes.",
   transform: "cc",
 });
-preLocalize("reference.attributes.conditions", {
+preLocalize("reference.conditions", {
   prefix: "TERIOCK.STATUSES.Conditions.",
   transform: "cc",
 });

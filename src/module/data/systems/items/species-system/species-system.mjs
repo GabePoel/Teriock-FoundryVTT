@@ -124,14 +124,14 @@ export default class SpeciesSystem extends mix(
   get embedParts() {
     const parts = super.embedParts;
     parts.text = dotJoin([
-      ...Array.from(this.traits),
+      ...Array.from(this.traits).map((t) => TERIOCK.reference[t]),
       this.size.enabled
         ? game.i18n.format("TERIOCK.SYSTEMS.Species.PANELS.size.value", {
             value: this.size.value,
           })
         : "",
     ]);
-    parts.subtitle = "Species";
+    parts.subtitle = game.i18n.localize("TYPES.Item.species");
     return parts;
   }
 

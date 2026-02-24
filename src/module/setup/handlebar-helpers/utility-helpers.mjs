@@ -260,7 +260,7 @@ export default function registerUiHelpers() {
         <div class="teriock-block-options-content">
           <div class="tgrid g4">
             <div class="tgrid-item">
-              <label for="${tab}-ascending">Ascending</label>
+              <label for="${tab}-ascending">${game.i18n.localize("TERIOCK.SHEETS.Common.SEARCH.ascending")}</label>
               <input
                 type="checkbox" 
                 data-action="sheetToggle" 

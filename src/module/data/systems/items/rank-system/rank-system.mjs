@@ -247,14 +247,16 @@ export default class RankSystem extends mix(
           "contextMenu",
         ),
         callback: async () => await this.hpDie.use(),
-        condition: !!this.hpDie && !this.hpDie?.spent,
+        condition:
+          !!this.hpDie && !this.hpDie?.spent && !this.hpDie?.parent.disabled,
         group: "usage",
       },
       {
         name: game.i18n.localize("TERIOCK.SYSTEMS.Rank.MENU.recoverHpDie"),
         icon: makeIcon(TERIOCK.display.icons.ui.undo, "contextMenu"),
         callback: async () => await this.hpDie.unuse(),
-        condition: !!this.hpDie && this.hpDie?.spent,
+        condition:
+          !!this.hpDie && this.hpDie?.spent && !this.hpDie?.parent.disabled,
         group: "usage",
       },
       {
@@ -264,14 +266,16 @@ export default class RankSystem extends mix(
           "contextMenu",
         ),
         callback: async () => await this.mpDie.use(),
-        condition: !!this.mpDie && !this.mpDie?.spent,
+        condition:
+          !!this.mpDie && !this.mpDie?.spent && !this.hpDie?.parent.disabled,
         group: "usage",
       },
       {
         name: game.i18n.localize("TERIOCK.SYSTEMS.Rank.MENU.recoverMpDie"),
         icon: makeIcon(TERIOCK.display.icons.ui.undo, "contextMenu"),
         callback: async () => await this.mpDie.unuse(),
-        condition: !!this.mpDie && this.mpDie?.spent,
+        condition:
+          !!this.mpDie && this.mpDie?.spent && !this.hpDie?.parent.disabled,
         group: "usage",
       },
     ];

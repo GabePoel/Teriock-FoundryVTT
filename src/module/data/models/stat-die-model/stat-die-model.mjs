@@ -175,7 +175,9 @@ export default class StatDieModel extends EmbeddedDataModel {
         this.formula,
         {},
         {
-          flavor: this.parent.dieName.replace("Dice", "Die") + " Roll",
+          flavor: game.i18n.format("TERIOCK.ROLLS.Base.name", {
+            value: this.parent.dieName,
+          }),
         },
       );
       await roll.evaluate();

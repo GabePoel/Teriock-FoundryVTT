@@ -1,4 +1,6 @@
-let spiritItem = actor.equipment.find((e) => e.name === "Spirit Item");
+let spiritItem = actor.equipment.find(
+  (e) => e.name === game.i18n.localize("TERIOCK.TERMS.Abilities.spiritItem"),
+);
 
 // Create a spirit item if one doesn't already exist
 if (!spiritItem) {
@@ -12,7 +14,7 @@ if (!spiritItem) {
     );
     const spiritItemCopy = spiritItemReference.clone();
     spiritItemCopy.updateSource({
-      name: "Spirit Item",
+      name: game.i18n.localize("TERIOCK.TERMS.Abilities.spiritItem"),
       "system.powerLevel": "magic",
       "system.consumable": false,
     });
@@ -20,7 +22,7 @@ if (!spiritItem) {
   } else {
     spiritItems = await actor.createEmbeddedDocuments("Item", [
       {
-        name: "Spirit Item",
+        name: game.i18n.localize("TERIOCK.TERMS.Abilities.spiritItem"),
         type: "equipment",
         system: {
           powerLevel: "magic",

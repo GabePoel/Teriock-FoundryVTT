@@ -60,9 +60,6 @@ export default function StatGiverSystemMixin(Base) {
             game.i18n.format("TERIOCK.SYSTEMS.StatGiver.PANELS.mp", {
               value: this.statDice.mp.formula,
             }),
-            game.i18n.format("TERIOCK.SYSTEMS.Species.PANELS.br", {
-              value: this.br,
-            }),
           ],
         };
       }

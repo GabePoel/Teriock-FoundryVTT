@@ -1,10 +1,6 @@
 import { EquipmentExecution } from "../../../../executions/document-executions/_module.mjs";
-import {
-  dotJoin,
-  prefix,
-  suffix,
-  toCamelCase,
-} from "../../../../helpers/string.mjs";
+import { formulaExists } from "../../../../helpers/formula.mjs";
+import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
@@ -152,11 +148,16 @@ export default class EquipmentSystem extends mix(
       parts.subtitle = this.equipmentType;
     }
     parts.text = dotJoin([
-      suffix(this.damage.base.text, "damage"),
-      suffix(this.bv.value, "BV"),
-      suffix(this.av.value, "AV"),
-      prefix(this.tier.value, "Tier"),
-      suffix(this.weight.total + this.storage.carriedWeight, "lb"),
+      ...this._damageWrappers,
+      ...this._defenseBar.wrappers,
+      formulaExists(this.tier.text)
+        ? game.i18n.format("TERIOCK.SYSTEMS.Attunable.PANELS.tier", {
+            value: this.tier.text,
+          })
+        : "",
+      game.i18n.format("TERIOCK.SYSTEMS.Equipment.PANELS.weight", {
+        value: this.weight.total + this.storage.carriedWeight,
+      }),
       this.sup?.nameString || "",
     ]);
     return parts;

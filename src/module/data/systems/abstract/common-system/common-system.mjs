@@ -1,6 +1,6 @@
 import { TeriockJournalEntry } from "../../../../documents/_module.mjs";
 import { quickAddAssociation } from "../../../../helpers/html.mjs";
-import { toCamelCase, toTitleCase } from "../../../../helpers/string.mjs";
+import { toCamelCase } from "../../../../helpers/string.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
 import { AccessDataMixin } from "../../../shared/mixins/_module.mjs";
 import { AutomatableSystemMixin } from "../../mixins/_module.mjs";
@@ -193,7 +193,7 @@ export default class CommonSystem extends mix(
         docs = docs.filter((d) => !d.isEphemeral);
         quickAddAssociation(
           docs,
-          toTitleCase(TERIOCK.options.document[type]["getter"]),
+          TERIOCK.options.document[type].plural,
           TERIOCK.options.document[type].icon,
           parts.associations,
         );

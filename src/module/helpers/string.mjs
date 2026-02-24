@@ -149,3 +149,12 @@ export function dedent(str) {
     }, Infinity);
   return lines.map((line) => line.slice(minIndent)).join("\n");
 }
+
+/**
+ * Make the first character of a string upper case.
+ * @param {string} str
+ * @returns {string}
+ */
+export function ucFirst(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
