@@ -57,6 +57,21 @@ export default class ChildSystem extends UsableDataMixin(CommonSystem) {
   }
 
   /**
+   * Localized tags to display in sheets.
+   * @returns {Teriock.Sheet.DisplayTag[]}
+   */
+  get displayTags() {
+    return [
+      {
+        label: this.parent.active
+          ? "TERIOCK.SHEETS.Common.TAGS.active"
+          : "TERIOCK.SHEETS.Common.TAGS.inactive",
+        tooltip: "TERIOCK.SHEETS.Child.DISPLAY.activeStatus",
+      },
+    ];
+  }
+
+  /**
    * Toggles to display in sheets.
    * @returns {Teriock.Sheet.DisplayField[]}
    */

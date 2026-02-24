@@ -116,6 +116,27 @@ export default class SpeciesSystem extends mix(
   }
 
   /** @inheritDoc */
+  get displayTags() {
+    const tags = super.displayTags;
+    tags.push(
+      ...Array.from(this.traits).map((t) => {
+        return {
+          label: TERIOCK.reference.traits[t],
+          tooltip: "TERIOCK.SYSTEMS.Species.FIELDS.traits.label",
+        };
+      }),
+    );
+    if (this.transformationLevel) {
+      tags.push({
+        label:
+          TERIOCK.options.effect.transformationLevel[this.transformationLevel],
+        tooltip: "TERIOCK.SYSTEMS.Species.FIELDS.transformationLevel.label",
+      });
+    }
+    return tags;
+  }
+
+  /** @inheritDoc */
   get displayToggles() {
     return ["system.size.enabled", "system.disabled"];
   }

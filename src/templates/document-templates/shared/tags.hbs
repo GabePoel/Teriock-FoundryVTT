@@ -1,0 +1,14 @@
+<div class="ab-tags-all">
+  <div class="ab-tags-container">
+    <div class="ab-tags">
+      <div class="ab-menu-icons">
+        {{> (template "document-templates/shared/menu-buttons.hbs")}}
+      </div>
+      {{#each displayTags as |tag|}}
+        <span class="ab-tag tsubtle" {{#if (exists tag.tooltip)}}data-tooltip="{{tag.tooltip}}"{{/if}}>
+          {{tag.label}}
+        </span>
+      {{/each}}
+    </div>
+  </div>
+</div>

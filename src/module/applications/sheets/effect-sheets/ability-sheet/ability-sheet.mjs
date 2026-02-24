@@ -1,5 +1,5 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
-import { mix } from "../../../../helpers/utils.mjs";
+import { makeIconClass, mix } from "../../../../helpers/utils.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
 import abilityContextMenus from "./helpers/ability-context-menus.mjs";
@@ -23,7 +23,7 @@ export default class AbilitySheet extends mix(
   static DEFAULT_OPTIONS = {
     classes: ["ability"],
     window: {
-      icon: `fa-solid fa-${documentOptions.ability.icon}`,
+      icon: makeIconClass(documentOptions.ability.icon, "title"),
     },
   };
 
@@ -79,49 +79,6 @@ export default class AbilitySheet extends mix(
   _activateTags() {
     const doc = this.document;
     const root = this.element;
-
-    const tags = {
-      ".flag-tag-basic": "system.basic",
-      ".flag-tag-sustained": "system.sustained",
-      ".flag-tag-standard": "system.standard",
-      ".flag-tag-skill": "system.skill",
-      ".flag-tag-spell": "system.spell",
-      ".flag-tag-ritual": "system.ritual",
-      ".flag-tag-rotator": "system.rotator",
-      ".flag-tag-invoked": "system.costs.invoked",
-      ".flag-tag-verbal": "system.costs.verbal",
-      ".flag-tag-somatic": "system.costs.somatic",
-      ".flag-elder-sorcery": "system.elderSorcery",
-      ".flag-warded": "system.warded",
-    };
-
-    for (const [selector, param] of Object.entries(tags)) {
-      root.querySelectorAll(selector).forEach((el) => {
-        el.addEventListener("click", async () => {
-          await doc.update({ [param]: false });
-        });
-      });
-    }
-
-    const arrayTags = {
-      ".element-tag": "system.elements",
-      ".power-tag": "system.powerSources",
-      ".effect-tag": "system.effectTypes",
-    };
-
-    for (const [selector, param] of Object.entries(arrayTags)) {
-      root.querySelectorAll(selector).forEach(
-        /** @param {HTMLElement} el */ (el) => {
-          el.addEventListener("click", async () => {
-            const value = el.dataset.value;
-            const pathKey = param.split(".")[1];
-            const list = doc.system[pathKey].filter((entry) => entry !== value);
-            await doc.update({ [param]: list });
-          });
-        },
-      );
-    }
-
     const staticUpdates = {
       ".ab-attribute-improvement-button": {
         "system.upgrades.score.attribute": "int",
@@ -190,18 +147,5 @@ export default class AbilitySheet extends mix(
     if (!this.isEditable) return;
     this._activateContextMenus();
     this._activateTags();
-  }
-
-  /** @inheritDoc */
-  async _prepareContext(options = {}) {
-    const context = await super._prepareContext(options);
-    const system = this.document.system;
-    context.tab = this._tab;
-    const effectsSet = new Set(system.effectTypes);
-    //noinspection JSUnresolvedReference
-    context.effectTags = Array.from(
-      effectsSet.difference(new Set(system.powerSources)),
-    );
-    return context;
   }
 }

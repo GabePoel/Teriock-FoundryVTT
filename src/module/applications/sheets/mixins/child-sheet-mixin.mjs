@@ -65,12 +65,42 @@ export default function ChildSheetMixin(Base) {
         });
       }
 
+      /**
+       * Prepare display tags.
+       * @param {Teriock.Sheet.DisplayTag[]} tags
+       * @returns {Teriock.Sheet.FancyDisplayTag[]}
+       */
+      #expandTags(tags) {
+        /** @type {Teriock.Sheet.FancyDisplayTag[]} */
+        let out = [];
+        const defaultTooltip = game.i18n.localize(
+          "TERIOCK.SHEETS.Child.DISPLAY.defaultTagTooltip",
+        );
+        tags.forEach((t) => {
+          if (typeof t === "string") {
+            out.push({
+              label: game.i18n.localize(t),
+              tooltip: defaultTooltip,
+            });
+          } else {
+            out.push({
+              label: game.i18n.localize(t.label),
+              tooltip: game.i18n.localize(t.tooltip),
+            });
+          }
+        });
+        return out;
+      }
+
       /** @inheritDoc */
       async _prepareContext(options = {}) {
         const context = await super._prepareContext(options);
         await this._prepareDisplayFields(context);
         context.displayToggles = this.#expandFields(
           this.document.system.displayToggles,
+        );
+        context.displayTags = this.#expandTags(
+          this.document.system.displayTags,
         );
         return context;
       }

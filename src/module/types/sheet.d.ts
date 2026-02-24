@@ -13,6 +13,13 @@ declare global {
 
     export type DisplayField = Partial<FancyDisplayField> | string;
 
+    export type FancyDisplayTag = {
+      label: string;
+      tooltip?: string;
+    };
+
+    export type DisplayTag = Partial<FancyDisplayTag> | string;
+
     export type EnrichedDisplayField = {
       schema: TextField;
       value: string;

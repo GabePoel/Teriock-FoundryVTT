@@ -13,6 +13,7 @@ import BaseItemSystem from "../base-item-system/base-item-system.mjs";
  *
  * @extends {BaseItemSystem}
  * @implements {Teriock.Models.BodySystemInterface}
+ * @mixes ArmamentSystem
  * @mixes ConsumableSystem
  * @mixes WikiSystem
  */
@@ -33,6 +34,34 @@ export default class BodySystem extends mix(
       usable: true,
       visibleTypes: ["property"],
     });
+  }
+
+  /** @inheritDoc */
+  get displayTags() {
+    const tags = super.displayTags;
+    tags.push({
+      label: "TERIOCK.TERMS.EquipmentClasses.bodyParts",
+      tooltip: "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentClasses.label",
+    });
+    if (this.av.value) {
+      tags.push({
+        label: "TERIOCK.TERMS.EquipmentClasses.armor",
+        tooltip: "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentClasses.label",
+      });
+    }
+    if (this.spellTurning) {
+      tags.push({
+        label: "TERIOCK.TERMS.Properties.spellTurning",
+        tooltip: "TERIOCK.PACKS.properties",
+      });
+    }
+    if (this.warded) {
+      tags.push({
+        label: "TERIOCK.TERMS.Properties.warded",
+        tooltip: "TERIOCK.PACKS.properties",
+      });
+    }
+    return tags;
   }
 
   /** @inheritDoc */

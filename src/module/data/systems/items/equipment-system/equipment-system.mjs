@@ -121,6 +121,85 @@ export default class EquipmentSystem extends mix(
   }
 
   /** @inheritDoc */
+  get displayTags() {
+    const tags = super.displayTags;
+    tags.push(
+      ...Array.from(this.equipmentClasses).map((t) => {
+        return {
+          label: TERIOCK.reference.equipmentClasses[t],
+          tooltip: "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentClasses.label",
+        };
+      }),
+    );
+    if (this.shattered) {
+      tags.push({
+        label: "TERIOCK.TERMS.Properties.shattered",
+        tooltip: "TERIOCK.PACKS.properties",
+      });
+    }
+    if (this.dampened) {
+      tags.push({
+        label: "TERIOCK.TERMS.Properties.dampened",
+        tooltip: "TERIOCK.PACKS.properties",
+      });
+    }
+    if (this.glued) {
+      tags.push({
+        label: "TERIOCK.TERMS.Properties.glued",
+        tooltip: "TERIOCK.PACKS.properties",
+      });
+    }
+    if (this.spellTurning) {
+      tags.push({
+        label: "TERIOCK.TERMS.Properties.spellTurning",
+        tooltip: "TERIOCK.PACKS.properties",
+      });
+    }
+    if (this.warded) {
+      tags.push({
+        label: "TERIOCK.TERMS.Properties.warded",
+        tooltip: "TERIOCK.PACKS.properties",
+      });
+    }
+    if (this.range.melee) {
+      tags.push({
+        label: "TERIOCK.SYSTEMS.Armament.FIELDS.range.melee.label",
+        tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.range.label",
+      });
+    }
+    if (this.range.ranged) {
+      tags.push({
+        label: "TERIOCK.SYSTEMS.Armament.FIELDS.range.ranged.label",
+        tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.range.label",
+      });
+    }
+    if (this.identification.identified) {
+      tags.push({
+        label: "TERIOCK.MODELS.Identification.FIELDS.identified.label",
+        tooltip: "TERIOCK.MODELS.Identification.label",
+      });
+    } else {
+      tags.push({
+        label: "TERIOCK.MODELS.Identification.FIELDS.identified.inverse",
+        tooltip: "TERIOCK.MODELS.Identification.label",
+      });
+      if (this.identification.read) {
+        tags.push({
+          label: "TERIOCK.MODELS.Identification.FIELDS.read.label",
+          tooltip: "TERIOCK.MODELS.Identification.label",
+        });
+      }
+    }
+    if (this.isAttuned) {
+      tags.push({
+        label: "TERIOCK.SYSTEMS.Attunement.USAGE.attuned",
+        tooltip: "TYPES.ActiveEffect.attunement",
+      });
+    }
+    return tags;
+  }
+
+  /** @inheritDoc */
   get displayToggles() {
     return [
       "system.glued",

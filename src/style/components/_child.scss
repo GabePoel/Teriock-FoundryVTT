@@ -343,76 +343,65 @@
     gap: 0.25em;
 
     .ab-tags-container {
-      align-items: flex-start;
-      display: flex;
-      flex-direction: row;
+      width: 100%;
 
       .ab-tags {
-        align-items: center;
-        display: flex;
-        flex: content;
-        flex-direction: row;
-        flex-grow: 1;
-        flex-wrap: wrap;
-        gap: 0.25em;
-        justify-content: start;
-        min-height: 1.5em;
-        width: 100%;
+        display: block;
+
+        .ab-menu-icons {
+          display: flex;
+          flex-direction: row;
+          float: right;
+          margin-bottom: 0;
+          margin-left: 0.25em;
+
+          .ab-menu-toggle {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+
+            .ab-menu-closed-container {
+              display: flex;
+            }
+
+            .ab-menu-open-container {
+              display: none;
+            }
+
+            &.ab-menu-toggle-open {
+              .ab-menu-closed-container {
+                display: none;
+              }
+
+              .ab-menu-open-container {
+                display: flex;
+              }
+            }
+
+            i {
+              opacity: 0.8;
+            }
+
+            &:hover {
+              background-color: color-mix(
+                in srgb,
+                var(--color-text-primary),
+                transparent 90%
+              );
+            }
+          }
+        }
 
         .ab-tag {
           @include mixins.tag-style;
-          cursor: pointer;
+          display: inline-block;
+          margin: 0.125em 0.125em 0.25em;
 
           &:hover {
-            background-color: rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.1);
             color: var(--color-text-subtle);
-            text-decoration: line-through;
           }
-        }
-      }
-
-      .ab-menu-toggle {
-        border: none;
-        cursor: pointer;
-        right: 0;
-        top: 0;
-
-        .ab-menu-closed-container {
-          display: flex;
-        }
-
-        .ab-menu-open-container {
-          display: none;
-        }
-
-        &.ab-menu-toggle-open {
-          .ab-menu-closed-container {
-            display: none;
-          }
-
-          .ab-menu-open-container {
-            display: flex;
-          }
-        }
-
-        &:hover {
-          background-color: color-mix(
-            in srgb,
-            var(--color-text-primary),
-            transparent 90%
-          );
-        }
-
-        &:active {
-          background-color: color-mix(
-            in srgb,
-            var(--color-text-primary),
-            transparent 80%
-          );
-        }
-
-        i {
-          opacity: 0.8;
         }
       }
     }

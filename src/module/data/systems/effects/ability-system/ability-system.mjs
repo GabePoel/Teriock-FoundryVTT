@@ -222,6 +222,85 @@ export default class AbilitySystem extends mix(
   }
 
   /** @inheritDoc */
+  get displayTags() {
+    const tags = super.displayTags;
+    if (this.basic) {
+      tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.basic.label");
+    }
+    if (this.sustained) {
+      tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.sustained.label");
+    }
+    if (this.standard && !this.skill && !this.spell) {
+      tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.standard.label");
+    }
+    if (this.standard && this.skill) {
+      tags.push("TERIOCK.TERMS.Common.semblant");
+    }
+    if (this.skill) {
+      tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.skill.label");
+    }
+    if (this.standard && this.spell) {
+      tags.push("TERIOCK.TERMS.Common.conjured");
+    }
+    if (this.spell) {
+      tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.spell.label");
+    }
+    if (this.invoked) {
+      tags.push({
+        label: "TERIOCK.TERMS.Costs.invoked",
+        tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.costs.label",
+      });
+    }
+    if (this.costs.verbal) {
+      tags.push({
+        label: "TERIOCK.TERMS.Costs.verbal",
+        tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.costs.label",
+      });
+    }
+    if (this.costs.somatic) {
+      tags.push({
+        label: "TERIOCK.TERMS.Costs.somatic",
+        tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.costs.label",
+      });
+    }
+    if (this.ritual) {
+      tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.ritual.label");
+    }
+    if (this.rotator) {
+      tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.rotator.label");
+    }
+    tags.push(
+      ...Array.from(this.powerSources).map((t) => {
+        return {
+          label: TERIOCK.options.ability.powerSources[t],
+          tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.powerSources.label",
+        };
+      }),
+      ...Array.from(this.elements).map((t) => {
+        return {
+          label: TERIOCK.options.ability.elements[t],
+          tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.elements.label",
+        };
+      }),
+      ...Array.from(this.effectTypes)
+        .filter((t) => !this.powerSources.has(t))
+        .map((t) => {
+          return {
+            label: TERIOCK.options.ability.effectTypes[t],
+            tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.effectTypes.label",
+          };
+        }),
+    );
+    if (this.elderSorcery) {
+      tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.elderSorcery.label");
+    }
+    if (this.warded) {
+      tags.push("TERIOCK.SYSTEMS.Attack.FIELDS.warded.label");
+    }
+    return tags;
+  }
+
+  /** @inheritDoc */
   get displayToggles() {
     return [
       "system.basic",

@@ -86,33 +86,6 @@ export default class EquipmentSheet extends mix(
     const doc = this.document;
     const root = this.element;
 
-    const flagTags = {
-      ".flag-tag-glued": "system.glued",
-    };
-
-    for (const [selector, path] of Object.entries(flagTags)) {
-      root.querySelectorAll(selector).forEach((el) => {
-        el.addEventListener("click", async (e) => {
-          e.preventDefault();
-          await doc.update({ [path]: false });
-        });
-      });
-    }
-
-    const arrayTags = {
-      ".equipment-class-tag": "equipmentClasses",
-    };
-
-    for (const [selector, path] of Object.entries(arrayTags)) {
-      root.querySelectorAll(selector).forEach((el) => {
-        el.addEventListener("click", async () => {
-          const val = el.getAttribute("data-value");
-          const current = doc.system[path].filter((v) => v !== val);
-          await doc.update({ [`system.${path}`]: current });
-        });
-      });
-    }
-
     const staticUpdates = {
       ".ab-damage-button": { "system.damage.base.raw": "1" },
       ".ab-two-handed-damage-button": { "system.damage.twoHanded.raw": "1" },

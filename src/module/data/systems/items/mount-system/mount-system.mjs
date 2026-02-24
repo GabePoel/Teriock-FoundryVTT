@@ -52,6 +52,18 @@ export default class MountSystem extends mix(
   }
 
   /** @inheritDoc */
+  get displayTags() {
+    const tags = super.displayTags;
+    if (this.isAttuned) {
+      tags.push({
+        label: "TERIOCK.SYSTEMS.Attunement.USAGE.attuned",
+        tooltip: "TYPES.ActiveEffect.attunement",
+      });
+    }
+    return tags;
+  }
+
+  /** @inheritDoc */
   get embedIcons() {
     return [
       ...super.embedIcons.filter(
