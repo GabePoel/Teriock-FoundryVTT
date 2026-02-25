@@ -14,6 +14,7 @@ export const icons = {
     heightened: "chevrons-up",
     interaction: "swords",
     range: "ruler",
+    scroll: "scroll",
     target: "crosshairs-simple",
     unheightened: "equals",
   },
