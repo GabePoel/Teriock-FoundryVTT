@@ -3,6 +3,7 @@ import {
   RemoveStatusHandler,
   ToggleStatusHandler,
 } from "../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
+import { localizeChoices } from "../../../helpers/localization.mjs";
 import CritAutomation from "./crit-automation.mjs";
 
 const { fields } = foundry.data;
@@ -32,11 +33,14 @@ export default class ChatStatusAutomation extends CritAutomation {
    * @type {Record<string, string>}
    */
   static get _relationChoices() {
-    return {
-      apply: "Apply",
-      remove: "Remove",
-      toggle: "Toggle",
-    };
+    return localizeChoices({
+      apply:
+        "TERIOCK.AUTOMATIONS.ChatStatusAutomation.FIELDS.relation.choices.apply",
+      remove:
+        "TERIOCK.AUTOMATIONS.ChatStatusAutomation.FIELDS.relation.choices.remove",
+      toggle:
+        "TERIOCK.AUTOMATIONS.ChatStatusAutomation.FIELDS.relation.choices.toggle",
+    });
   }
 
   static get _relationInitial() {
@@ -46,15 +50,15 @@ export default class ChatStatusAutomation extends CritAutomation {
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      status: new fields.StringField({
-        choices: TERIOCK.reference.conditions,
-        label: "TERIOCK.TERMS.Common.condition",
-      }),
       relation: new fields.StringField({
         choices: this._relationChoices,
         initial: this._relationInitial,
         label: "TERIOCK.AUTOMATIONS.BaseAutomation.FIELDS.relation.label",
         nullable: false,
+      }),
+      status: new fields.StringField({
+        choices: TERIOCK.reference.conditions,
+        label: "TERIOCK.TERMS.Common.condition",
       }),
     });
   }

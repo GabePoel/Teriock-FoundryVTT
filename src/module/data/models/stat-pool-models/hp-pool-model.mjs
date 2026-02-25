@@ -28,43 +28,43 @@ export default class HpPoolModel extends StatPoolModel {
   get panels() {
     const panels = [
       {
-        image: getImage("misc", "Hit Die"),
-        name: game.i18n.localize("TERIOCK.MODELS.HpPool.PANELS.name"),
         bars: [],
         blocks: [
           {
-            title: game.i18n.localize("TERIOCK.MODELS.StatPool.PANELS.title"),
             text: game.i18n.localize("TERIOCK.MODELS.HpPool.PANELS.text"),
+            title: game.i18n.localize("TERIOCK.MODELS.StatPool.PANELS.title"),
           },
         ],
         icon: getRollIcon(this.formula),
+        image: getImage("misc", "Hit Die"),
+        name: game.i18n.localize("TERIOCK.MODELS.HpPool.PANELS.name"),
       },
     ];
     if (this.parent.actor?.statuses.has("criticallyWounded")) {
       panels.push({
-        image: TERIOCK.data.conditions.criticallyWounded.img,
-        name: TERIOCK.data.conditions.criticallyWounded.name,
         bars: [],
         blocks: [
           {
-            title: game.i18n.localize("TERIOCK.MODELS.StatPool.PANELS.title"),
             text: TERIOCK.data.conditions.criticallyWounded.description,
+            title: game.i18n.localize("TERIOCK.MODELS.StatPool.PANELS.title"),
           },
         ],
         icon: TERIOCK.options.document.condition.icon,
+        image: TERIOCK.data.conditions.criticallyWounded.img,
+        name: TERIOCK.data.conditions.criticallyWounded.name,
       });
     } else if (this.parent.actor?.statuses.has("unconscious")) {
       panels.push({
-        image: getImage("effect-types", "Awakening"),
-        icon: TERIOCK.display.icons.effect.awaken,
-        name: game.i18n.localize("TERIOCK.EFFECTS.Common.awaken"),
         bars: [],
         blocks: [
           {
-            title: game.i18n.localize("TERIOCK.MODELS.StatPool.PANELS.title"),
             text: TERIOCK.content.keywords.awaken,
+            title: game.i18n.localize("TERIOCK.MODELS.StatPool.PANELS.title"),
           },
         ],
+        icon: TERIOCK.display.icons.effect.awaken,
+        image: getImage("effect-types", "Awakening"),
+        name: game.i18n.localize("TERIOCK.EFFECTS.Common.awaken"),
       });
     }
     return panels;

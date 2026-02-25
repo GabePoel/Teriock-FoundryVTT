@@ -254,9 +254,6 @@ export default class UnitModel extends EvaluationModel {
       buttons: [
         {
           action: "update",
-          label: game.i18n.localize("TERIOCK.DIALOGS.Update.BUTTONS.update"),
-          default: true,
-          icon: makeIconClass("check", "button"),
           /**
            * @param {PointerEvent} _event
            * @param {HTMLButtonElement} button
@@ -273,6 +270,9 @@ export default class UnitModel extends EvaluationModel {
             );
             await document.update(updateData);
           },
+          default: true,
+          icon: makeIconClass("check", "button"),
+          label: game.i18n.localize("TERIOCK.DIALOGS.Update.BUTTONS.update"),
         },
       ],
       content: group.outerHTML,

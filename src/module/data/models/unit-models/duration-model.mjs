@@ -44,16 +44,16 @@ export default class DurationModel extends TimeUnitModel {
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       conditions: new fields.SchemaField({
-        present: new fields.SetField(
+        absent: new fields.SetField(
           new fields.StringField({ choices: TERIOCK.reference.conditions }),
         ),
-        absent: new fields.SetField(
+        present: new fields.SetField(
           new fields.StringField({ choices: TERIOCK.reference.conditions }),
         ),
       }),
       dawn: new fields.BooleanField(),
-      stationary: new fields.BooleanField(),
       description: new fields.StringField(),
+      stationary: new fields.BooleanField(),
     });
   }
 

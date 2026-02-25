@@ -31,11 +31,11 @@ export default class ChangesAutomation extends CritAutomation {
     const html = await TeriockTextEditor.renderTemplate(
       systemPath("templates/document-templates/shared/changes.hbs"),
       {
-        changesPath: `${this.fieldPath}.${this.id}.changes`,
         changesData: this.changes,
-        valuePath: `_source.${this.fieldPath}.${this.id}.changes`,
-        fieldDefs: this.schema.fields.changes.element.fields,
+        changesPath: `${this.fieldPath}.${this.id}.changes`,
         editable: this.document.sheet.isEditable,
+        fieldDefs: this.schema.fields.changes.element.fields,
+        valuePath: `_source.${this.fieldPath}.${this.id}.changes`,
       },
     );
     return /** @type {HTMLDivElement} */ foundry.utils.parseHTML(html);

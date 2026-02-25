@@ -23,8 +23,8 @@ export default class AttributeModel extends ModifierModel {
   /** @inheritDoc */
   async _use(options) {
     options = {
-      attribute: this.key,
       actor: this.actor,
+      attribute: this.key,
       ...options,
     };
     const execution = new FeatSaveExecution(options);

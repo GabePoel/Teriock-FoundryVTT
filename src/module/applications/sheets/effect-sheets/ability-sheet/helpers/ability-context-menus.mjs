@@ -32,20 +32,6 @@ export default function abilityContextMenus(ability) {
   }
 
   /**
-   * Fetches configuration values from `TERIOCK.options.ability`.
-   * @param {string} keychain - Dot-separated keychain to traverse.
-   * @returns {*} The configuration value at the specified path.
-   */
-  function fetch(keychain) {
-    let keys = TERIOCK.options.ability;
-    const keysArray = keychain.split(".");
-    for (const key of keysArray) {
-      keys = keys[key];
-    }
-    return keys;
-  }
-
-  /**
    * Creates a quick menu from configuration options.
    * @param {string} keychain - The configuration keychain to use.
    * @param {string} updateKey - The system key to update when an option is selected.
@@ -53,7 +39,7 @@ export default function abilityContextMenus(ability) {
    * @returns {Teriock.Foundry.ContextMenuEntry[]}
    */
   function quickMenu(keychain, updateKey, nullOption = null) {
-    const keys = fetch(keychain);
+    const keys = foundry.utils.getProperty(TERIOCK.options.ability, keychain);
     const out = Object.entries(keys).map(([key, value]) => ({
       name: value,
       icon: makeIcon(findIconByKey(key) ?? key, "contextMenu"),
@@ -61,7 +47,7 @@ export default function abilityContextMenus(ability) {
     }));
     if (nullOption) {
       out.unshift({
-        name: "None",
+        name: game.i18n.localize("TERIOCK.SCHEMA.Competence.choices.0"),
         icon: makeIcon(TERIOCK.display.icons.ui.remove, "contextMenu"),
         callback: () => ability.update({ [updateKey]: null }),
       });
@@ -70,220 +56,7 @@ export default function abilityContextMenus(ability) {
   }
 
   return {
-    delivery: quickMenu("delivery", "system.delivery.base"),
-    piercing: TeriockContextMenu.makeUpdateEntries(
-      ability,
-      [
-        {
-          name: game.i18n.localize("TERIOCK.MODELS.Piercing.MENU.0"),
-          icon: TERIOCK.display.icons.piercing.none,
-          value: 0,
-        },
-        {
-          name: game.i18n.localize("TERIOCK.MODELS.Piercing.MENU.1"),
-          icon: TERIOCK.display.icons.piercing.av0,
-          value: 1,
-        },
-        {
-          name: game.i18n.localize("TERIOCK.MODELS.Piercing.MENU.2"),
-          icon: TERIOCK.display.icons.piercing.ub,
-          value: 2,
-        },
-      ],
-      {
-        path: "system.piercing.raw",
-      },
-    ),
-    maneuver: [
-      {
-        name: game.i18n.localize("TERIOCK.TERMS.Maneuver.active"),
-        icon: makeIcon(TERIOCK.display.icons.maneuver.active, "contextMenu"),
-        callback: async () => {
-          await ability.update({
-            "system.maneuver": "active",
-            "system.executionTime": "a1",
-          });
-          await ability.deleteSubDocuments(ability.subs.map((s) => s._id));
-        },
-      },
-      {
-        name: game.i18n.localize("TERIOCK.TERMS.Maneuver.reactive"),
-        icon: makeIcon(TERIOCK.display.icons.maneuver.reactive, "contextMenu"),
-        callback: async () => {
-          await ability.update({
-            "system.maneuver": "reactive",
-            "system.executionTime": "r1",
-          });
-          await ability.deleteSubDocuments(ability.subs.map((s) => s._id));
-        },
-      },
-      {
-        name: game.i18n.localize("TERIOCK.TERMS.Maneuver.passive"),
-        icon: makeIcon(TERIOCK.display.icons.maneuver.passive, "contextMenu"),
-        callback: async () =>
-          await ability.update({
-            "system.maneuver": "passive",
-            "system.executionTime": "passive",
-          }),
-      },
-      {
-        name: game.i18n.localize("TERIOCK.TERMS.Maneuver.slow"),
-        icon: makeIcon(TERIOCK.display.icons.maneuver.slow, "contextMenu"),
-        callback: async () => {
-          await ability.update({
-            "system.maneuver": "slow",
-            "system.executionTime.slow": "10 Minutes",
-          });
-          await ability.deleteSubDocuments(ability.subs.map((s) => s._id));
-        },
-      },
-    ],
     active: quickMenu("executionTime.active", "system.executionTime"),
-    reactive: quickMenu("executionTime.reactive", "system.executionTime"),
-    interaction: quickMenu("interaction", "system.interaction"),
-    featSaveAttribute: quickMenu(
-      "featSaveAttribute",
-      "system.featSaveAttribute",
-    ),
-    manaCost: [
-      {
-        name: game.i18n.localize("TERIOCK.TERMS.Cost.none"),
-        icon: makeIcon(TERIOCK.display.icons.ui.remove, "contextMenu"),
-        callback: () =>
-          ability.update({
-            "system.costs.mp.type": "none",
-          }),
-      },
-      {
-        name: game.i18n.localize("TERIOCK.TERMS.Cost.static"),
-        icon: makeIcon(TERIOCK.display.icons.ui.numerical, "contextMenu"),
-        callback: () =>
-          ability.update({
-            "system.costs.mp": {
-              type: "static",
-              "value.static": 1,
-            },
-          }),
-      },
-      {
-        name: game.i18n.localize("TERIOCK.TERMS.Cost.formula"),
-        icon: makeIcon(TERIOCK.display.icons.ui.formula, "contextMenu"),
-        callback: () =>
-          ability.update({
-            "system.costs.mp": {
-              type: "formula",
-              "value.formula": "1d4",
-            },
-          }),
-      },
-      {
-        name: game.i18n.localize("TERIOCK.TERMS.Cost.variable"),
-        icon: makeIcon(TERIOCK.display.icons.ui.variable, "contextMenu"),
-        callback: () =>
-          ability.update({
-            "system.costs.mp": {
-              type: "variable",
-              "value.variable": "<p>Enter cost here.</p>",
-            },
-          }),
-      },
-    ],
-    hitCost: [
-      {
-        name: game.i18n.localize("TERIOCK.TERMS.Cost.none"),
-        icon: makeIcon(TERIOCK.display.icons.ui.remove, "contextMenu"),
-        callback: () =>
-          ability.update({
-            "system.costs.hp.type": "none",
-          }),
-      },
-      {
-        name: game.i18n.localize("TERIOCK.TERMS.Cost.static"),
-        icon: makeIcon(TERIOCK.display.icons.ui.numerical, "contextMenu"),
-        callback: () =>
-          ability.update({
-            "system.costs.hp": {
-              type: "static",
-              "value.static": 1,
-            },
-          }),
-      },
-      {
-        name: game.i18n.localize("TERIOCK.TERMS.Cost.hack"),
-        icon: makeIcon(TERIOCK.display.icons.ui.hack, "contextMenu"),
-        callback: () =>
-          ability.update({
-            "system.costs.hp.type": "hack",
-          }),
-      },
-      {
-        name: game.i18n.localize("TERIOCK.TERMS.Cost.formula"),
-        icon: makeIcon(TERIOCK.display.icons.ui.formula, "contextMenu"),
-        callback: () =>
-          ability.update({
-            "system.costs.hp": {
-              type: "formula",
-              "value.formula": "1d4",
-            },
-          }),
-      },
-      {
-        name: game.i18n.localize("TERIOCK.TERMS.Cost.variable"),
-        icon: makeIcon(TERIOCK.display.icons.ui.variable, "contextMenu"),
-        callback: () =>
-          ability.update({
-            "system.costs.hp": {
-              type: "variable",
-              "value.variable": game.i18n.localize(
-                "TERIOCK.SYSTEMS.Ability.FIELDS.costs.default",
-              ),
-            },
-          }),
-      },
-    ],
-    goldCost: [
-      {
-        name: game.i18n.localize("TERIOCK.TERMS.Cost.none"),
-        icon: makeIcon(TERIOCK.display.icons.ui.remove, "contextMenu"),
-        callback: () =>
-          ability.update({
-            "system.costs.gp.type": "none",
-          }),
-      },
-      {
-        name: game.i18n.localize("TERIOCK.TERMS.Cost.static"),
-        icon: makeIcon(TERIOCK.display.icons.ui.numerical, "contextMenu"),
-        callback: () =>
-          ability.update({
-            "system.costs.gp": {
-              type: "static",
-              "value.static": 50,
-            },
-          }),
-      },
-      {
-        name: game.i18n.localize("TERIOCK.TERMS.Cost.formula"),
-        icon: makeIcon(TERIOCK.display.icons.ui.formula, "contextMenu"),
-        callback: () =>
-          ability.update({
-            "system.costs.gp": {
-              type: "formula",
-              "value.formula": "1d100",
-            },
-          }),
-      },
-      {
-        name: game.i18n.localize("TERIOCK.TERMS.Cost.variable"),
-        icon: makeIcon(TERIOCK.display.icons.ui.variable, "contextMenu"),
-        callback: () =>
-          ability.update({
-            "system.costs.gp": {
-              type: "variable",
-              "value.variable": "<p>Enter cost here.</p>",
-            },
-          }),
-      },
-    ],
     breakCost: [
       {
         name: game.i18n.localize("TERIOCK.TERMS.BreakCost.none"),
@@ -310,10 +83,15 @@ export default function abilityContextMenus(ability) {
           }),
       },
     ],
+    delivery: quickMenu("delivery", "system.delivery.base"),
     expansion: quickMenu("expansion", "system.expansion.type", true),
     expansionSaveAttribute: quickMenu(
       "featSaveAttribute",
       "system.expansion.featSaveAttribute",
+    ),
+    featSaveAttribute: quickMenu(
+      "featSaveAttribute",
+      "system.featSaveAttribute",
     ),
     form: Object.entries(TERIOCK.options.ability.form).map(([key, value]) => ({
       name: value.name,
@@ -324,5 +102,214 @@ export default function abilityContextMenus(ability) {
         });
       },
     })),
+    goldCost: [
+      {
+        callback: () =>
+          ability.update({
+            "system.costs.gp.type": "none",
+          }),
+        icon: makeIcon(TERIOCK.display.icons.ui.remove, "contextMenu"),
+        name: game.i18n.localize("TERIOCK.TERMS.Cost.none"),
+      },
+      {
+        callback: () =>
+          ability.update({
+            "system.costs.gp": {
+              type: "static",
+              "value.static": 50,
+            },
+          }),
+        icon: makeIcon(TERIOCK.display.icons.ui.numerical, "contextMenu"),
+        name: game.i18n.localize("TERIOCK.TERMS.Cost.static"),
+      },
+      {
+        callback: () =>
+          ability.update({
+            "system.costs.gp": {
+              type: "formula",
+              "value.formula": "1d100",
+            },
+          }),
+        icon: makeIcon(TERIOCK.display.icons.ui.formula, "contextMenu"),
+        name: game.i18n.localize("TERIOCK.TERMS.Cost.formula"),
+      },
+      {
+        callback: () =>
+          ability.update({
+            "system.costs.gp": {
+              type: "variable",
+              "value.variable": `<p>${game.i18n.localize("TERIOCK.TERMS.Cost.default")}</p>`,
+            },
+          }),
+        icon: makeIcon(TERIOCK.display.icons.ui.variable, "contextMenu"),
+        name: game.i18n.localize("TERIOCK.TERMS.Cost.variable"),
+      },
+    ],
+    hitCost: [
+      {
+        callback: () =>
+          ability.update({
+            "system.costs.hp.type": "none",
+          }),
+        icon: makeIcon(TERIOCK.display.icons.ui.remove, "contextMenu"),
+        name: game.i18n.localize("TERIOCK.TERMS.Cost.none"),
+      },
+      {
+        callback: () =>
+          ability.update({
+            "system.costs.hp": {
+              type: "static",
+              "value.static": 1,
+            },
+          }),
+        icon: makeIcon(TERIOCK.display.icons.ui.numerical, "contextMenu"),
+        name: game.i18n.localize("TERIOCK.TERMS.Cost.static"),
+      },
+      {
+        callback: () =>
+          ability.update({
+            "system.costs.hp.type": "hack",
+          }),
+        icon: makeIcon(TERIOCK.display.icons.ui.hack, "contextMenu"),
+        name: game.i18n.localize("TERIOCK.TERMS.Cost.hack"),
+      },
+      {
+        callback: () =>
+          ability.update({
+            "system.costs.hp": {
+              type: "formula",
+              "value.formula": "1d4",
+            },
+          }),
+        icon: makeIcon(TERIOCK.display.icons.ui.formula, "contextMenu"),
+        name: game.i18n.localize("TERIOCK.TERMS.Cost.formula"),
+      },
+      {
+        callback: () =>
+          ability.update({
+            "system.costs.hp": {
+              type: "variable",
+              "value.variable": game.i18n.localize(
+                "TERIOCK.SYSTEMS.Ability.FIELDS.costs.default",
+              ),
+            },
+          }),
+        icon: makeIcon(TERIOCK.display.icons.ui.variable, "contextMenu"),
+        name: game.i18n.localize("TERIOCK.TERMS.Cost.variable"),
+      },
+    ],
+    interaction: quickMenu("interaction", "system.interaction"),
+    manaCost: [
+      {
+        callback: () =>
+          ability.update({
+            "system.costs.mp.type": "none",
+          }),
+        icon: makeIcon(TERIOCK.display.icons.ui.remove, "contextMenu"),
+        name: game.i18n.localize("TERIOCK.TERMS.Cost.none"),
+      },
+      {
+        callback: () =>
+          ability.update({
+            "system.costs.mp": {
+              type: "static",
+              "value.static": 1,
+            },
+          }),
+        icon: makeIcon(TERIOCK.display.icons.ui.numerical, "contextMenu"),
+        name: game.i18n.localize("TERIOCK.TERMS.Cost.static"),
+      },
+      {
+        callback: () =>
+          ability.update({
+            "system.costs.mp": {
+              type: "formula",
+              "value.formula": "1d4",
+            },
+          }),
+        icon: makeIcon(TERIOCK.display.icons.ui.formula, "contextMenu"),
+        name: game.i18n.localize("TERIOCK.TERMS.Cost.formula"),
+      },
+      {
+        callback: () =>
+          ability.update({
+            "system.costs.mp": {
+              type: "variable",
+              "value.variable": `<p>${game.i18n.localize("TERIOCK.TERMS.Cost.default")}</p>`,
+            },
+          }),
+        icon: makeIcon(TERIOCK.display.icons.ui.variable, "contextMenu"),
+        name: game.i18n.localize("TERIOCK.TERMS.Cost.variable"),
+      },
+    ],
+    maneuver: [
+      {
+        callback: async () => {
+          await ability.update({
+            "system.executionTime.base": "a1",
+            "system.maneuver": "active",
+          });
+          await ability.deleteSubDocuments(ability.subs.map((s) => s._id));
+        },
+        icon: makeIcon(TERIOCK.display.icons.maneuver.active, "contextMenu"),
+        name: game.i18n.localize("TERIOCK.TERMS.Maneuver.active"),
+      },
+      {
+        callback: async () => {
+          await ability.update({
+            "system.executionTime.base": "r1",
+            "system.maneuver": "reactive",
+          });
+          await ability.deleteSubDocuments(ability.subs.map((s) => s._id));
+        },
+        icon: makeIcon(TERIOCK.display.icons.maneuver.reactive, "contextMenu"),
+        name: game.i18n.localize("TERIOCK.TERMS.Maneuver.reactive"),
+      },
+      {
+        callback: async () =>
+          await ability.update({
+            "system.executionTime.base": "passive",
+            "system.maneuver": "passive",
+          }),
+        icon: makeIcon(TERIOCK.display.icons.maneuver.passive, "contextMenu"),
+        name: game.i18n.localize("TERIOCK.TERMS.Maneuver.passive"),
+      },
+      {
+        callback: async () => {
+          await ability.update({
+            "system.executionTime.slow.raw": "10",
+            "system.executionTime.slow.unit": "minute",
+            "system.maneuver": "slow",
+          });
+          await ability.deleteSubDocuments(ability.subs.map((s) => s._id));
+        },
+        icon: makeIcon(TERIOCK.display.icons.maneuver.slow, "contextMenu"),
+        name: game.i18n.localize("TERIOCK.TERMS.Maneuver.slow"),
+      },
+    ],
+    piercing: TeriockContextMenu.makeUpdateEntries(
+      ability,
+      [
+        {
+          icon: TERIOCK.display.icons.piercing.none,
+          name: game.i18n.localize("TERIOCK.MODELS.Piercing.MENU.0"),
+          value: 0,
+        },
+        {
+          icon: TERIOCK.display.icons.piercing.av0,
+          name: game.i18n.localize("TERIOCK.MODELS.Piercing.MENU.1"),
+          value: 1,
+        },
+        {
+          icon: TERIOCK.display.icons.piercing.ub,
+          name: game.i18n.localize("TERIOCK.MODELS.Piercing.MENU.2"),
+          value: 2,
+        },
+      ],
+      {
+        path: "system.piercing.raw",
+      },
+    ),
+    reactive: quickMenu("executionTime.reactive", "system.executionTime"),
   };
 }

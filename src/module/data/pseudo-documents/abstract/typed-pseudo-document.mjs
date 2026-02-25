@@ -26,10 +26,10 @@ export default class TypedPseudoDocument extends PseudoDocument {
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       type: new fields.StringField({
-        required: true,
-        nullable: false,
-        initial: this.TYPE,
         blank: false,
+        initial: this.TYPE,
+        nullable: false,
+        required: true,
       }),
     });
   }

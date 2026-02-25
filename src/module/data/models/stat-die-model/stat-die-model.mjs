@@ -17,16 +17,16 @@ export default class StatDieModel extends EmbeddedDataModel {
   /** @inheritDoc */
   static defineSchema() {
     return {
+      rolled: new fields.BooleanField({
+        initial: false,
+        required: false,
+      }),
       spent: new fields.BooleanField({
         initial: false,
         required: false,
       }),
       value: new fields.NumberField({
         initial: 1,
-        required: false,
-      }),
-      rolled: new fields.BooleanField({
-        initial: false,
         required: false,
       }),
     };
@@ -65,16 +65,18 @@ export default class StatDieModel extends EmbeddedDataModel {
     element.classList.add(
       ...["thover", "die-box", this.spent ? "rolled" : "unrolled"],
     );
-    element.dataset.document = this.parent.parent.parent.id;
-    element.dataset.collection = this.parent.parent.parent.collectionName;
-    element.dataset.stat = this.parent.stat;
-    element.dataset.index = this.index.toString();
-    element.dataset.action = "rollStatDie";
-    element.dataset.tooltipHtml = dedent(`
+    Object.assign(element.dataset, {
+      action: "rollStatDie",
+      collection: this.parent.parent.parent.collectionName,
+      document: this.parent.parent.parent.id,
+      index: this.index.toString(),
+      stat: this.parent.stat,
+      tooltipDirection: "DOWN",
+      tooltipHtml: dedent(`
       <div style='display: flex; flex-direction: column; align-items: center;'>
         <div>d${this.faces} ${this.name}</div><div>(${this.parent.parent.parent.name})</div>
-      </div>`);
-    element.dataset.tooltipDirection = "DOWN";
+      </div>`),
+    });
     const icon = document.createElement("i");
     icon.classList.add(
       ...[
@@ -154,17 +156,17 @@ export default class StatDieModel extends EmbeddedDataModel {
         proceed = true;
       } else {
         proceed = await TeriockDialog.confirm({
-          window: {
-            title: game.i18n.localize(
-              "TERIOCK.MODELS.StatDie.DIALOG.Reroll.title",
-            ),
-            icon: makeIconClass(getRollIcon(this.formula), "title"),
-          },
           content: game.i18n.localize(
             "TERIOCK.MODELS.StatDie.DIALOG.Reroll.content",
           ),
           modal: true,
           rejectClose: false,
+          window: {
+            icon: makeIconClass(getRollIcon(this.formula), "title"),
+            title: game.i18n.localize(
+              "TERIOCK.MODELS.StatDie.DIALOG.Reroll.title",
+            ),
+          },
         });
       }
     }
@@ -184,6 +186,7 @@ export default class StatDieModel extends EmbeddedDataModel {
       const callback = this.parent.callback;
       await callback(roll.total);
       await TeriockChatMessage.create({
+        rolls: [roll],
         speaker: TeriockChatMessage.getSpeaker({
           actor: this.parent.parent.parent.actor,
         }),
@@ -191,7 +194,6 @@ export default class StatDieModel extends EmbeddedDataModel {
           avatar: this.parent.parent.parent.actor.img,
           panels: panels,
         },
-        rolls: [roll],
       });
       if (spend) {
         await this.toggle(true);

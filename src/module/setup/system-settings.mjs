@@ -162,6 +162,26 @@ export function registerSettings() {
       scope: "user",
       type: Boolean,
     },
+    damageTypeSources: {
+      config: true,
+      default: ["Compendium.teriock.rules.JournalEntry.damage0000000000"],
+      hint: "TERIOCK.SETTINGS.damageTypeSources.hint",
+      name: "TERIOCK.SETTINGS.damageTypeSources.name",
+      scope: "world",
+      type: new fields.SetField(
+        new fields.DocumentUUIDField({ type: "JournalEntry" }),
+      ),
+    },
+    drainTypeSources: {
+      config: true,
+      default: ["Compendium.teriock.rules.JournalEntry.drain00000000000"],
+      hint: "TERIOCK.SETTINGS.drainTypeSources.hint",
+      name: "TERIOCK.SETTINGS.drainTypeSources.name",
+      scope: "world",
+      type: new fields.SetField(
+        new fields.DocumentUUIDField({ type: "JournalEntry" }),
+      ),
+    },
     armorSuppressesRanks: {
       config: true,
       default: false,
@@ -217,26 +237,6 @@ export function registerSettings() {
       name: "TERIOCK.SETTINGS.developerMode.name",
       scope: "world",
       type: Boolean,
-    },
-    damageTypeSources: {
-      config: true,
-      default: ["Compendium.teriock.rules.JournalEntry.damage0000000000"],
-      hint: "TERIOCK.SETTINGS.damageTypeSources.hint",
-      name: "TERIOCK.SETTINGS.damageTypeSources.name",
-      scope: "world",
-      type: new fields.SetField(
-        new fields.DocumentUUIDField({ type: "JournalEntry" }),
-      ),
-    },
-    drainTypeSources: {
-      config: true,
-      default: ["Compendium.teriock.rules.JournalEntry.drain00000000000"],
-      hint: "TERIOCK.SETTINGS.drainTypeSources.hint",
-      name: "TERIOCK.SETTINGS.drainTypeSources.name",
-      scope: "world",
-      type: new fields.SetField(
-        new fields.DocumentUUIDField({ type: "JournalEntry" }),
-      ),
     },
   };
   for (const [key, data] of Object.entries(settings)) {

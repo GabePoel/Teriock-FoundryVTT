@@ -28,8 +28,8 @@ export default class TradecraftModel extends ModifierModel {
   /** @inheritDoc */
   async _use(options) {
     options = {
-      tradecraft: this.key,
       actor: this.actor,
+      tradecraft: this.key,
       ...options,
     };
     const execution = new TradecraftExecution(options);
@@ -39,8 +39,8 @@ export default class TradecraftModel extends ModifierModel {
   /** @inheritDoc */
   async use(options) {
     const data = {
-      tradecraft: this.key,
       options,
+      tradecraft: this.key,
     };
     await this.actor.hookCall("rollTradecraft", data);
     if (data.cancel) return;

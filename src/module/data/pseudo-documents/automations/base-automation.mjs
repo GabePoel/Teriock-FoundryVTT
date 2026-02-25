@@ -1,3 +1,4 @@
+import { localizeChoices } from "../../../helpers/localization.mjs";
 import { competenceField } from "../../fields/helpers/builders.mjs";
 import TypedPseudoDocument from "../abstract/typed-pseudo-document.mjs";
 
@@ -33,10 +34,10 @@ export default class BaseAutomation extends TypedPseudoDocument {
       }),
       heighten: new fields.SetField(
         new fields.NumberField({
-          choices: {
-            0: "Non-Heighten",
-            1: "Heighten",
-          },
+          choices: localizeChoices({
+            0: "TERIOCK.AUTOMATIONS.BaseAutomation.FIELDS.heighten.choices.0",
+            1: "TERIOCK.AUTOMATIONS.BaseAutomation.FIELDS.heighten.choices.1",
+          }),
         }),
         {
           initial: [0, 1],

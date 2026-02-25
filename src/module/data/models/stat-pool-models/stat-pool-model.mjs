@@ -21,14 +21,15 @@ export default class StatPoolModel extends EmbeddedDataModel {
   /** @inheritDoc */
   static defineSchema() {
     return {
+      dice: new fields.ArrayField(new fields.EmbeddedDataField(StatDieModel)),
       disabled: new fields.BooleanField({
         initial: false,
         required: false,
       }),
       faces: new fields.NumberField({
+        choices: TERIOCK.options.die.faces,
         initial: 10,
         required: false,
-        choices: TERIOCK.options.die.faces,
       }),
       number: new EvaluationField({
         blank: 1,
@@ -39,7 +40,6 @@ export default class StatPoolModel extends EmbeddedDataModel {
         nullable: false,
         required: false,
       }),
-      dice: new fields.ArrayField(new fields.EmbeddedDataField(StatDieModel)),
     };
   }
 
@@ -102,16 +102,16 @@ export default class StatPoolModel extends EmbeddedDataModel {
   get panels() {
     return [
       {
-        image: getImage("equipment", "Die"),
-        name: game.i18n.localize("TERIOCK.MODELS.StatPool.PANELS.name"),
         bars: [],
         blocks: [
           {
-            title: game.i18n.localize("TERIOCK.MODELS.StatPool.PANELS.title"),
             text: game.i18n.localize("TERIOCK.MODELS.StatPool.PANELS.text"),
+            title: game.i18n.localize("TERIOCK.MODELS.StatPool.PANELS.title"),
           },
         ],
         icon: getRollIcon(this.formula),
+        image: getImage("equipment", "Die"),
+        name: game.i18n.localize("TERIOCK.MODELS.StatPool.PANELS.name"),
       },
     ];
   }

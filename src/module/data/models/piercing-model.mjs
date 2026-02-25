@@ -1,3 +1,4 @@
+import { localizeChoices } from "../../helpers/localization.mjs";
 import EmbeddedDataModel from "./embedded-data-model.mjs";
 
 const { fields } = foundry.data;
@@ -19,11 +20,11 @@ export default class PiercingModel extends EmbeddedDataModel {
   static defineSchema() {
     return {
       raw: new fields.NumberField({
-        choices: {
-          0: game.i18n.localize("TERIOCK.MODELS.Piercing.MENU.0"),
-          1: game.i18n.localize("TERIOCK.MODELS.Piercing.MENU.1"),
-          2: game.i18n.localize("TERIOCK.MODELS.Piercing.MENU.2"),
-        },
+        choices: localizeChoices({
+          0: "TERIOCK.MODELS.Piercing.MENU.0",
+          1: "TERIOCK.MODELS.Piercing.MENU.1",
+          2: "TERIOCK.MODELS.Piercing.MENU.2",
+        }),
         initial: 0,
         max: 2,
         min: 0,

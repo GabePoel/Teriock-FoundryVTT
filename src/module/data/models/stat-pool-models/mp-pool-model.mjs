@@ -23,16 +23,16 @@ export default class MpPoolModel extends StatPoolModel {
   get panels() {
     return [
       {
-        image: getImage("misc", "Mana Die"),
-        name: game.i18n.localize("TERIOCK.MODELS.MpPool.PANELS.name"),
         bars: [],
         blocks: [
           {
-            title: game.i18n.localize("TERIOCK.MODELS.StatPool.PANELS.title"),
             text: game.i18n.localize("TERIOCK.MODELS.MpPool.PANELS.text"),
+            title: game.i18n.localize("TERIOCK.MODELS.StatPool.PANELS.title"),
           },
         ],
         icon: getRollIcon(this.formula),
+        image: getImage("misc", "Mana Die"),
+        name: game.i18n.localize("TERIOCK.MODELS.MpPool.PANELS.name"),
       },
     ];
   }

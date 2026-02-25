@@ -23,8 +23,8 @@ export default class IdentificationModel extends EmbeddedDataModel {
   static defineSchema() {
     return {
       flaws: new TextField({
-        initial: "",
         gmOnly: true,
+        initial: "",
         required: false,
       }),
       identified: new fields.BooleanField({
@@ -34,8 +34,8 @@ export default class IdentificationModel extends EmbeddedDataModel {
         initial: "",
       }),
       notes: new TextField({
-        initial: "",
         gmOnly: true,
+        initial: "",
         required: false,
       }),
       powerLevel: new fields.StringField({
@@ -225,11 +225,11 @@ export default class IdentificationModel extends EmbeddedDataModel {
           hint: game.i18n.localize(
             "TERIOCK.MODELS.Identification.QUERY.Unidentify.hint",
           ),
-          silent: true,
-          tooltipAsync: false,
           noDocumentsMessage: game.i18n.localize(
             "TERIOCK.MODELS.Identification.QUERY.Unidentify.noDocumentsMessage",
           ),
+          silent: true,
+          tooltipAsync: false,
         });
         await this.parent.parent.updateEmbeddedDocuments(
           "ActiveEffect",
@@ -241,6 +241,10 @@ export default class IdentificationModel extends EmbeddedDataModel {
           }),
         );
         await this.parent.parent.update({
+          name: game.i18n.format(
+            "TERIOCK.MODELS.Identification.QUERY.Unidentify.name",
+            { type: this.parent.equipmentType },
+          ),
           "system.flaws": "",
           "system.identification.flaws": this.parent.flaws,
           "system.identification.identified": false,
@@ -250,10 +254,6 @@ export default class IdentificationModel extends EmbeddedDataModel {
           "system.identification.read": false,
           "system.notes": "",
           "system.powerLevel": "unknown",
-          name: game.i18n.format(
-            "TERIOCK.MODELS.Identification.QUERY.Unidentify.name",
-            { type: this.parent.equipmentType },
-          ),
         });
       } else {
         ui.notifications.warn(
