@@ -132,7 +132,7 @@ export default function abilityContextMenus(ability) {
         callback: async () => {
           await ability.update({
             "system.maneuver": "slow",
-            "system.executionTime": "10 Minutes",
+            "system.executionTime.slow": "10 Minutes",
           });
           await ability.deleteSubDocuments(ability.subs.map((s) => s._id));
         },

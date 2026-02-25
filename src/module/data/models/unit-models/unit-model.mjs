@@ -110,6 +110,16 @@ export default class UnitModel extends EvaluationModel {
   }
 
   /**
+   * Title for update window.
+   * @returns {string}
+   */
+  get _updateTitle() {
+    return game.i18n.format("TERIOCK.MODELS.Unit.UPDATE.basic", {
+      label: this.schema.label,
+    });
+  }
+
+  /**
    * A text abbreviation of this.
    * @returns {string}
    */
@@ -244,7 +254,7 @@ export default class UnitModel extends EvaluationModel {
       buttons: [
         {
           action: "update",
-          label: "Update",
+          label: game.i18n.localize("TERIOCK.DIALOGS.Update.BUTTONS.update"),
           default: true,
           icon: makeIconClass("check", "button"),
           /**
@@ -270,7 +280,7 @@ export default class UnitModel extends EvaluationModel {
         width: 500,
       },
       window: {
-        title: `Update ${this.schema.label || "Unit"}`,
+        title: this._updateTitle,
         icon: makeIconClass(this.icon, "title"),
       },
     });

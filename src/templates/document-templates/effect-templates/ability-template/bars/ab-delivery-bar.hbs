@@ -2,27 +2,26 @@
   {{formBox
     (ifThen
       (eq system.maneuver "active")
-      (lookup TERIOCK.options.ability.executionTime.active system.executionTime)
+      (lookup TERIOCK.options.ability.executionTime.active system.executionTime.base)
       (ifThen
         (eq system.maneuver "reactive")
         (lookup
-          TERIOCK.options.ability.executionTime.reactive system.executionTime
+          TERIOCK.options.ability.executionTime.reactive system.executionTime.base
         )
         (ifThen
           (eq system.maneuver "passive")
           (lookup TERIOCK.options.ability.maneuver "passive")
-          (formInput
-            systemFields.executionTime
-            value=system.executionTime
-            disabled=(not editable)
-          )
+          system.executionTime.slow.text
         )
       )
     )
     icon=TERIOCK.display.icons.ability.execution
     tooltip=(localize "TERIOCK.TERMS.Common.executionTime")
+    action=(ifThen (eq system.maneuver "slow") "updateUnit" "")
     dataset=(object
       maneuver=(lookup TERIOCK.options.ability.maneuver system.maneuver)
+      path="system.executionTime.slow"
+      icon=TERIOCK.display.icons.ability.execution
     )
     classes=(ifThen editable "execution-box" "")
   }}

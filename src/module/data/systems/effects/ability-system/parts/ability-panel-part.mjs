@@ -67,6 +67,12 @@ export default (Base) => {
             cost: game.i18n.localize("TERIOCK.STATS.gp.abbreviation"),
           });
         }
+        let time;
+        if (this.maneuver !== "slow") {
+          time = ref.executionTime[this.maneuver][this.executionTime.base];
+        } else {
+          time = this.executionTime.slow.text;
+        }
         const bars = [
           {
             icon: icons.ability.execution,
@@ -74,7 +80,7 @@ export default (Base) => {
               "TERIOCK.SYSTEMS.Ability.PANELS.execution",
             ),
             wrappers: [
-              ref.executionTime[this.maneuver][this.executionTime] || "",
+              time || "",
               this.piercing.value.toUpperCase(),
               ref.delivery[this.delivery.base] || "",
               this.interaction === "feat"

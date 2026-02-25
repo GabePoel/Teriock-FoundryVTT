@@ -1,4 +1,7 @@
-import { RangeModel } from "../../../../../models/unit-models/_module.mjs";
+import {
+  RangeModel,
+  SlowExecutionTimeModel,
+} from "../../../../../models/unit-models/_module.mjs";
 import { EvaluationModel } from "../../../../../models/_module.mjs";
 
 declare global {
@@ -7,7 +10,10 @@ declare global {
       /** <schema> This ability's delivery */
       delivery: DeliveryConfig;
       /** <schema> This ability's execution time */
-      executionTime: Teriock.Parameters.Ability.ExecutionTime;
+      executionTime: {
+        base: Teriock.Parameters.Ability.ExecutionTime;
+        slow: SlowExecutionTimeModel;
+      };
       /** <schema> This ability's expansion */
       expansion: {
         /** <schema> Maximum number of extra executions */

@@ -355,8 +355,8 @@ export default class AbilitySystem extends mix(
     if (!this.consumable) {
       parts.subtitle =
         TERIOCK.options.ability.executionTime[this.maneuver]?.[
-          this.executionTime
-        ] ?? this.executionTime;
+          this.executionTime.base
+        ] ?? this.executionTime.slow?.text;
     }
     return parts;
   }

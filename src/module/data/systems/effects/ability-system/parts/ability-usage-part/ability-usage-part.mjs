@@ -1,5 +1,8 @@
 import { EvaluationField } from "../../../../../fields/_module.mjs";
-import { RangeModel } from "../../../../../models/unit-models/_module.mjs";
+import {
+  RangeModel,
+  SlowExecutionTimeModel,
+} from "../../../../../models/unit-models/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -35,7 +38,12 @@ export default (Base) => {
               choices: TERIOCK.options.ability.deliveryParent,
             }),
           }),
-          executionTime: new fields.StringField({ initial: "a1" }),
+          executionTime: new fields.SchemaField({
+            base: new fields.StringField({ initial: "a1" }),
+            slow: new EvaluationField({
+              model: SlowExecutionTimeModel,
+            }),
+          }),
           expansion: new fields.SchemaField({
             cap: new EvaluationField({
               deterministic: false,
@@ -85,6 +93,29 @@ export default (Base) => {
         }
         if (typeof data.expansionRange === "string") {
           data.expansion.range = { raw: data.expansionRange };
+        }
+
+        // Execution time
+        if (typeof data.executionTime === "string") {
+          data.executionTime = { base: data.executionTime };
+          if (data.maneuver === "slow") {
+            let unit;
+            let raw;
+            const lower = data.executionTime.base.toLowerCase();
+            if (lower.includes("short")) unit = "shortRest";
+            if (lower.includes("long")) unit = "longRest";
+            const units = ["second", "minute", "hour", "day", "week", "year"];
+            for (const u of units) {
+              if (lower.includes(u)) {
+                unit = u;
+                raw = lower.trim().split(" ")[0];
+              }
+            }
+            data.executionTime.slow = {
+              unit,
+              raw,
+            };
+          }
         }
 
         super.migrateData(data);

@@ -70,7 +70,7 @@ export default class DurationModel extends TimeUnitModel {
 
   /** @inheritDoc */
   get icon() {
-    return "hourglass";
+    return TERIOCK.display.icons.ability.duration;
   }
 
   /**
