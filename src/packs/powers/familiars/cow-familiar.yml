@@ -4,7 +4,7 @@ _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.9.17
+  systemVersion: 0.10.23
 effects:
   - _id: cowTamer00000000
     _key: '!items.effects!32b886bd2d5b8303.cowTamer00000000'
@@ -12,7 +12,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.10.23
     disabled: false
     img: icons/environment/settlement/stables-logo.webp
     name: Cow Tamer
@@ -21,72 +21,12 @@ effects:
         raw: 2
       description: <p>You know the way of the @L[Creature:Cow]{cow}.</p>
       field: survivalist
+      identifier: cow-tamer
       revealed: true
       tradecraft: tamer
     tint: '#ffffff'
     transfer: true
     type: fluency
-  - _id: wQ3GBXmuw0Ga5A3U
-    _key: '!items.effects!32b886bd2d5b8303.wQ3GBXmuw0Ga5A3U'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.f970c72f5043d109
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.15
-    img: systems/teriock/src/icons/abilities/instant-awaken.webp
-    name: Instant Awaken
-    system:
-      automations:
-        1728b3a84ea27844:
-          _id: 1728b3a84ea27844
-          common:
-            - awaken
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: common
-      class: veteran
-      competence:
-        raw: 0
-      delivery:
-        base: hand
-      duration:
-        dawn: false
-        raw: '0'
-        stationary: false
-        unit: instant
-      effectTypes:
-        - awakening
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        raw: Your Hand's Range
-        unit: ft
-      results:
-        hit: <p>Target is @L[Keyword:Awaken]{awakened}.</p>
-      revealed: true
-      skill: true
-      standard: true
-      targets:
-        - creature
-    type: ability
   - _id: vxwOxQ8LJEi6bjL7
     _key: '!items.effects!32b886bd2d5b8303.vxwOxQ8LJEi6bjL7'
     _stats:
@@ -94,7 +34,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/skill-share.webp
     name: Skill Share
     system:
@@ -136,6 +76,7 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      identifier: skill-share
       interaction: manifest
       maneuver: active
       overview:
@@ -172,6 +113,194 @@ effects:
       targets:
         - creature
     type: ability
+  - _id: 3ofOuCPQgtEa8GeC
+    _key: '!items.effects!32b886bd2d5b8303.3ofOuCPQgtEa8GeC'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.5451b5caee0b5380
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.10.23
+    img: systems/teriock/src/icons/abilities/partner-awaken.webp
+    name: Partner Awaken
+    system:
+      class: veteran
+      competence:
+        raw: 0
+      delivery:
+        base: sight
+      duration:
+        dawn: false
+        raw: '1'
+        stationary: false
+        unit: hour
+      endCondition: <p>You use [[lookup name]] again.</p>
+      executionTime:
+        base: a1
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      identifier: partner-awaken
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>You and the target gain @L[Keyword:Limited]{Limited}
+          @L[Ability:Instant Awaken]{Instant Awaken} and
+          @L[Keyword:Limited]{Limited} @L[Ability:Reactive Awaken]{Reactive
+          Awaken} (only usable on each other). You may only have this active on
+          one creature at a time.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        raw: '30'
+        unit: ft
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: QM0a8eCGauAoLq1r
+    _key: '!items.effects!32b886bd2d5b8303.QM0a8eCGauAoLq1r'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.f970c72f5043d109
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.10.23
+    img: systems/teriock/src/icons/abilities/instant-awaken.webp
+    name: Instant Awaken
+    system:
+      _sup: 3ofOuCPQgtEa8GeC
+      automations:
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          common:
+            - awaken
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: common
+      competence:
+        raw: 0
+      delivery:
+        base: hand
+      duration:
+        dawn: false
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - awakening
+      executionTime:
+        base: a1
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      identifier: instant-awaken
+      interaction: attack
+      limitation: <p>Only usable on the other participant in the Partner Awaken.</p>
+      maneuver: active
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        raw: Your Hand's Range
+        unit: ft
+      results:
+        hit: <p>Target is @L[Keyword:Awaken]{awakened}.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: PsjcZUrZ963njfBq
+    _key: '!items.effects!32b886bd2d5b8303.PsjcZUrZ963njfBq'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.8d55640ef65f1e81
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.10.23
+    img: systems/teriock/src/icons/abilities/reactive-awaken.webp
+    name: Reactive Awaken
+    system:
+      _sup: 3ofOuCPQgtEa8GeC
+      automations:
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          common:
+            - awaken
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: common
+      competence:
+        raw: 0
+      delivery:
+        base: hand
+      duration:
+        dawn: false
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - awakening
+      executionTime:
+        base: r1
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      identifier: reactive-awaken
+      interaction: attack
+      limitation: <p>Only usable on the other participant in the Partner Awaken.</p>
+      maneuver: reactive
+      overview:
+        base: <p>Target is @L[Keyword:Awaken]{awakened}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        raw: Your Hand's Range
+        unit: ft
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - creature
+    type: ability
 folder: 31fe961f0b485187
 img: systems/teriock/src/icons/abilities/familiar-bond.webp
 name: Cow Familiar
@@ -181,7 +310,8 @@ system:
   description: >-
     <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
     and delete the other
-    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.cow0000000000000]</p>
+    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.0c0e1819aaba7c70]</p>
+  identifier: cow-familiar
   maxAv: 0
   type: familiar
 type: power

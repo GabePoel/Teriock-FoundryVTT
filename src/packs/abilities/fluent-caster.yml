@@ -4,7 +4,7 @@ _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.9.21
+  systemVersion: 0.10.23
 effects:
   - _id: a02135e9b9c774f5
     _key: '!items.effects!a02135e9b9c774f5.a02135e9b9c774f5'
@@ -12,7 +12,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.14
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/fluent-caster.webp
     name: Fluent Caster
     system:
@@ -33,6 +33,7 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      identifier: fluent-caster
       interaction: manifest
       maneuver: passive
       overview:
@@ -61,7 +62,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/fluent-cast-aura.webp
     name: Fluent Cast Aura
     system:
@@ -104,6 +105,7 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      identifier: fluent-cast-aura
       interaction: manifest
       maneuver: active
       overview:
@@ -137,7 +139,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/fluent-cast-ball.webp
     name: Fluent Cast Ball
     system:
@@ -180,6 +182,7 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      identifier: fluent-cast-ball
       interaction: manifest
       maneuver: active
       overview:
@@ -213,7 +216,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/fluent-cast-ray.webp
     name: Fluent Cast Ray
     system:
@@ -256,6 +259,7 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      identifier: fluent-cast-ray
       interaction: manifest
       maneuver: active
       overview:
@@ -289,7 +293,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/fluent-cast-ritual.webp
     name: Fluent Cast Ritual
     system:
@@ -332,6 +336,7 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      identifier: fluent-cast-ritual
       interaction: manifest
       maneuver: active
       overview:
@@ -365,7 +370,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/fluent-cast-touch.webp
     name: Fluent Cast Touch
     system:
@@ -408,6 +413,7 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      identifier: fluent-cast-touch
       interaction: manifest
       maneuver: active
       overview:
@@ -441,11 +447,55 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/innate-elder-sorcery.webp
     name: Innate Elder Sorcery
     system:
       _sup: a02135e9b9c774f5
+      automations:
+        f025905e157ac261:
+          _id: f025905e157ac261
+          changes:
+            - key: system.competence.raw
+              mode: 4
+              priority: 10
+              qualifier: >-
+                or(@identifier.elder-sorcery-creation,
+                @identifier.all-elder-sorcery-words)
+              target: ability
+              time: proficiency
+              value: '1'
+          competencies:
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+        f7da3b5e1992a724:
+          _id: f7da3b5e1992a724
+          changes:
+            - key: system.competence.raw
+              mode: 4
+              priority: 10
+              qualifier: >-
+                or(@identifier.elder-sorcery-creation,
+                @identifier.all-elder-sorcery-words)
+              target: ability
+              time: fluency
+              value: '2'
+          competencies:
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
       competence:
         raw: 0
       delivery:
@@ -463,6 +513,7 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      identifier: innate-elder-sorcery
       interaction: manifest
       maneuver: passive
       overview:
@@ -477,9 +528,9 @@ effects:
           Rest]{short rest}. You can create, cast, and learn spells with any
           "grammar".</p>
         fluent: >-
-          <p>You are @L[Core:Proficiency Bonus]{proficient} at @L[Ability:Elder
-          Sorcery Creation]{Elder Sorcery Creation} and @L[Ability:All Elder
-          Sorcery Words]{All Elder Sorcery Words} and also always gain a +(10 *
+          <p>You are @L[Core:Fluency Bonus]{fluent} at @L[Ability:Elder Sorcery
+          Creation]{Elder Sorcery Creation} and @L[Ability:All Elder Sorcery
+          Words]{All Elder Sorcery Words} and also always gain a +(10 *
           @L[Core:Fluency Bonus]{F}) experience bonus during @L[Core:Elder
           Sorcery]{Elder Sorcery} spell creation.</p>
         proficient: >-
@@ -505,7 +556,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/rotator-fluency.webp
     name: Rotator Fluency
     system:
@@ -517,7 +568,7 @@ effects:
             - key: system.competence.raw
               mode: 4
               priority: 10
-              qualifier: '@key.rotators'
+              qualifier: '@identifier.rotators'
               target: ability
               time: fluency
               value: '2'
@@ -548,6 +599,7 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      identifier: rotator-fluency
       interaction: manifest
       maneuver: passive
       overview:
@@ -579,7 +631,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/rotators.webp
     name: Rotators
     system:
@@ -662,6 +714,7 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      identifier: rotators
       interaction: manifest
       maneuver: passive
       overview:
@@ -704,7 +757,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.14
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/elder-sorcery-creation.webp
     name: Elder Sorcery Creation
     system:
@@ -748,6 +801,7 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      identifier: elder-sorcery-creation
       interaction: manifest
       maneuver: slow
       overview:
@@ -790,7 +844,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.14
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/all-elder-sorcery-words.webp
     name: All Elder Sorcery Words
     system:
@@ -819,6 +873,7 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      identifier: all-elder-sorcery-words
       interaction: manifest
       maneuver: passive
       overview:

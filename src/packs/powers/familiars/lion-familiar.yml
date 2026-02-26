@@ -4,19 +4,341 @@ _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.9.17
+  systemVersion: 0.10.23
 effects:
-  - _id: dCltCIaBNIhlQ4YR
-    _key: '!items.effects!e4781b08f06660b6.dCltCIaBNIhlQ4YR'
+  - _id: lionTamer0000000
+    _key: '!items.effects!e4781b08f06660b6.lionTamer0000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.10.23
+    disabled: false
+    img: icons/environment/settlement/stables-logo.webp
+    name: Lion Tamer
+    system:
+      competence:
+        raw: 2
+      description: <p>You know the way of the @L[Creature:Lion]{lion}.</p>
+      field: survivalist
+      identifier: lion-tamer
+      revealed: true
+      tradecraft: tamer
+    tint: '#ffffff'
+    transfer: true
+    type: fluency
+  - _id: bpx6OlRPssqYhzmq
+    _key: '!items.effects!e4781b08f06660b6.bpx6OlRPssqYhzmq'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.91b30624f59c08d8
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.10.23
+    img: systems/teriock/src/icons/abilities/slay.webp
+    name: Slay
+    system:
+      automations:
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          common:
+            - bag
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: common
+        29b275994cf9f5b1:
+          _id: 29b275994cf9f5b1
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: 5[lethal]
+          heighten:
+            - 1
+            - 0
+          merge: true
+          roll: damage
+          type: roll
+      class: assassin
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      delivery:
+        base: weapon
+      duration:
+        dawn: false
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - killing
+        - damaging
+      executionTime: r0
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      gifted:
+        amount: 1
+        enabled: true
+      grantOnly: false
+      identifier: slay
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>Target takes an additional [[/damage 5[lethal]]]
+          @L[Core:Damage]{damage}. This also has all @L[Category:Damage
+          types]{damage types} of the triggering @L[Category:Attack
+          abilities]{attack}. If the triggering @L[Category:Attack
+          abilities]{attack} was a critical hit, this deals 10
+          @L[Core:Damage]{damage} instead.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        raw: Your Weapon's Range
+        unit: ft
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - creature
+      trigger: >-
+        <p>You have just hit a creature with an @L[Category:Attack
+        abilities]{attack} that dealt them @L[Core:Damage]{damage} from it.</p>
+    type: ability
+  - _id: I7VyUeLfs4ermo1Q
+    _key: '!items.effects!e4781b08f06660b6.I7VyUeLfs4ermo1Q'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.e4f10469b5a423c1
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.10.23
+    img: systems/teriock/src/icons/abilities/martial-arts.webp
+    name: Martial Arts
+    system:
+      class: assassin
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      identifier: martial-arts
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Offensive Martial Arts]{Offensive Martial Arts}
+          and @L[Ability:Defensive Martial Arts]{Defensive Martial Arts}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: x7S7opUTaQVudQv8
+    _key: '!items.effects!e4781b08f06660b6.x7S7opUTaQVudQv8'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.d6d03fa4f167a3ec
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.10.23
+    img: systems/teriock/src/icons/abilities/offensive-martial-arts.webp
+    name: Offensive Martial Arts
+    system:
+      _sup: I7VyUeLfs4ermo1Q
+      automations:
+        29b275994cf9f5b1:
+          _id: 29b275994cf9f5b1
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: 1d4
+          heighten:
+            - 1
+            - 0
+          merge: true
+          roll: damage
+          type: roll
+        3f7fa7707643426f:
+          _id: 3f7fa7707643426f
+          competencies:
+            - 2
+          formula: 1d8
+          heighten:
+            - 1
+            - 0
+          merge: true
+          roll: damage
+          type: roll
+        5e4d195ed81a10cc:
+          _id: 5e4d195ed81a10cc
+          competencies:
+            - 1
+            - 2
+          formula: 1d6
+          heighten:
+            - 1
+            - 0
+          merge: true
+          roll: damage
+          type: roll
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.damage.base.raw
+              mode: 4
+              priority: 10
+              qualifier: '@prop.handy'
+              target: body
+              time: normal
+              value: 1d4
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+        f025905e157ac261:
+          _id: f025905e157ac261
+          changes:
+            - key: system.damage.base.raw
+              mode: 4
+              priority: 10
+              qualifier: '@prop.handy'
+              target: body
+              time: normal
+              value: 1d6
+          competencies:
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+        f7da3b5e1992a724:
+          _id: f7da3b5e1992a724
+          changes:
+            - key: system.damage.base.raw
+              mode: 4
+              priority: 10
+              qualifier: '@prop.handy'
+              target: body
+              time: normal
+              value: 1d8
+          competencies:
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      identifier: offensive-martial-arts
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>Your @L[Body:Hand]{hands} and other @L[Category:Handy
+          equipment]{handy items} count as @L[Category:Weapons]{weapons} for the
+          purposes of @L[Category:Weapon target abilities]{abilities that
+          target} or are @L[Category:Weapon delivery abilities]{delivered by}
+          them (although they cannot be @L[Property:Shattered]{shattered} or
+          @L[Property:Destroyed]{destroyed}). You may @L[Core:Attack
+          Interaction]{attack} with them and their damage die is now [[/damage
+          1d4]].</p>
+        fluent: <p>The damage die is instead [[/damage 1d8]].</p>
+        proficient: <p>The damage die is instead [[/damage 1d6]].</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: 3141pQ3Z2yle3SWz
+    _key: '!items.effects!e4781b08f06660b6.3141pQ3Z2yle3SWz'
     _stats:
       compendiumSource: Compendium.teriock.abilities.Item.9713dc6aaadc794a
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/defensive-martial-arts.webp
     name: Defensive Martial Arts
     system:
+      _sup: I7VyUeLfs4ermo1Q
       automations:
         e789ed5e109ebd1a:
           _id: e789ed5e109ebd1a
@@ -78,7 +400,6 @@ effects:
             - 1
             - 0
           type: changes
-      class: assassin
       competence:
         raw: 0
       delivery:
@@ -88,7 +409,10 @@ effects:
         raw: '0'
         stationary: false
         unit: unlimited
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -96,6 +420,7 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      identifier: defensive-martial-arts
       interaction: manifest
       maneuver: passive
       overview:
@@ -123,118 +448,6 @@ effects:
       targets:
         - self
     type: ability
-  - _id: lionTamer0000000
-    _key: '!items.effects!e4781b08f06660b6.lionTamer0000000'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.9.17
-    disabled: false
-    img: icons/environment/settlement/stables-logo.webp
-    name: Lion Tamer
-    system:
-      competence:
-        raw: 2
-      description: <p>You know the way of the @L[Creature:Lion]{lion}.</p>
-      field: survivalist
-      revealed: true
-      tradecraft: tamer
-    tint: '#ffffff'
-    transfer: true
-    type: fluency
-  - _id: bpx6OlRPssqYhzmq
-    _key: '!items.effects!e4781b08f06660b6.bpx6OlRPssqYhzmq'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.91b30624f59c08d8
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.15
-    img: systems/teriock/src/icons/abilities/slay.webp
-    name: Slay
-    system:
-      automations:
-        1728b3a84ea27844:
-          _id: 1728b3a84ea27844
-          common:
-            - bag
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: common
-        29b275994cf9f5b1:
-          _id: 29b275994cf9f5b1
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: 5[lethal]
-          heighten:
-            - 1
-            - 0
-          merge: true
-          roll: damage
-          type: roll
-      class: assassin
-      competence:
-        raw: 0
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      delivery:
-        base: weapon
-      duration:
-        dawn: false
-        raw: '0'
-        stationary: false
-        unit: instant
-      effectTypes:
-        - killing
-        - damaging
-      executionTime: r0
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      gifted:
-        amount: 1
-        enabled: true
-      grantOnly: false
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>Target takes an additional [[/damage 5[lethal]]]
-          @L[Core:Damage]{damage}. This also has all @L[Category:Damage
-          types]{damage types} of the triggering @L[Category:Attack
-          abilities]{attack}. If the triggering @L[Category:Attack
-          abilities]{attack} was a critical hit, this deals 10
-          @L[Core:Damage]{damage} instead.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        raw: Your Weapon's Range
-        unit: ft
-      revealed: true
-      skill: true
-      standard: true
-      targets:
-        - creature
-      trigger: >-
-        <p>You have just hit a creature with an @L[Category:Attack
-        abilities]{attack} that dealt them @L[Core:Damage]{damage} from it.</p>
-    type: ability
 folder: 31fe961f0b485187
 img: systems/teriock/src/icons/abilities/familiar-bond.webp
 name: Lion Familiar
@@ -244,7 +457,8 @@ system:
   description: >-
     <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
     and delete the other
-    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.lion000000000000]</p>
+    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.3cfb81b47fdfefdf]</p>
+  identifier: lion-familiar
   maxAv: 0
   type: familiar
 type: power

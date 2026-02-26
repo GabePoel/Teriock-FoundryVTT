@@ -4,7 +4,7 @@ _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.10
+  systemVersion: 0.10.23
 effects:
   - _id: EygyxOk5MPaWvB7E
     _key: '!items.effects!4ee4511ef3f5f662.EygyxOk5MPaWvB7E'
@@ -13,7 +13,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/all-elder-sorcery-words.webp
     name: All Elder Sorcery Words
     system:
@@ -42,6 +42,7 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      identifier: all-elder-sorcery-words
       interaction: manifest
       maneuver: passive
       overview:
@@ -262,7 +263,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     flags:
       teriock:
         dontConsume: false
@@ -309,6 +310,7 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      identifier: elder-sorcery-creation
       interaction: manifest
       maneuver: slow
       overview:
@@ -351,7 +353,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/fae-elder-sorcery.webp
     name: Fae Elder Sorcery
     system:
@@ -362,7 +364,7 @@ effects:
             - key: system.competence.raw
               mode: 4
               priority: 10
-              qualifier: '@key.innateElderSorcery'
+              qualifier: '@identifier.innate-elder-sorcery'
               target: ability
               time: fluency
               value: '2'
@@ -394,6 +396,7 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      identifier: fae-elder-sorcery
       interaction: manifest
       maneuver: passive
       overview:
@@ -428,7 +431,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/flying.webp
     name: Flying
     system:
@@ -494,6 +497,7 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      identifier: flying
       interaction: manifest
       maneuver: passive
       overview:
@@ -518,7 +522,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/infinite-lifespan.webp
     name: Infinite Lifespan
     system:
@@ -539,6 +543,7 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      identifier: infinite-lifespan
       interaction: manifest
       maneuver: passive
       overview:
@@ -563,11 +568,55 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/innate-elder-sorcery.webp
     name: Innate Elder Sorcery
     system:
       _sup: m8D3y6pLFSeSPSmM
+      automations:
+        f025905e157ac261:
+          _id: f025905e157ac261
+          changes:
+            - key: system.competence.raw
+              mode: 4
+              priority: 10
+              qualifier: >-
+                or(@identifier.elder-sorcery-creation,
+                @identifier.all-elder-sorcery-words)
+              target: ability
+              time: proficiency
+              value: '1'
+          competencies:
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+        f7da3b5e1992a724:
+          _id: f7da3b5e1992a724
+          changes:
+            - key: system.competence.raw
+              mode: 4
+              priority: 10
+              qualifier: >-
+                or(@identifier.elder-sorcery-creation,
+                @identifier.all-elder-sorcery-words)
+              target: ability
+              time: fluency
+              value: '2'
+          competencies:
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
       competence:
         raw: 0
       delivery:
@@ -585,6 +634,7 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      identifier: innate-elder-sorcery
       interaction: manifest
       maneuver: passive
       overview:
@@ -599,9 +649,9 @@ effects:
           Rest]{short rest}. You can create, cast, and learn spells with any
           "grammar".</p>
         fluent: >-
-          <p>You are @L[Core:Proficiency Bonus]{proficient} at @L[Ability:Elder
-          Sorcery Creation]{Elder Sorcery Creation} and @L[Ability:All Elder
-          Sorcery Words]{All Elder Sorcery Words} and also always gain a +(10 *
+          <p>You are @L[Core:Fluency Bonus]{fluent} at @L[Ability:Elder Sorcery
+          Creation]{Elder Sorcery Creation} and @L[Ability:All Elder Sorcery
+          Words]{All Elder Sorcery Words} and also always gain a +(10 *
           @L[Core:Fluency Bonus]{F}) experience bonus during @L[Core:Elder
           Sorcery]{Elder Sorcery} spell creation.</p>
         proficient: >-
@@ -627,7 +677,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/mana-regenerating.webp
     name: Mana Regenerating
     system:
@@ -682,6 +732,7 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      identifier: mana-regenerating
       interaction: manifest
       maneuver: passive
       overview:
@@ -712,7 +763,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/night-vision.webp
     name: Night Vision
     system:
@@ -757,6 +808,7 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      identifier: night-vision
       interaction: manifest
       maneuver: passive
       overview:
@@ -780,7 +832,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/normal-intelligence.webp
     name: Normal Intelligence
     system:
@@ -801,6 +853,7 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      identifier: normal-intelligence
       interaction: manifest
       maneuver: passive
       piercing:
@@ -824,7 +877,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/normal-movement.webp
     name: Normal Movement
     system:
@@ -845,6 +898,7 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      identifier: normal-movement
       interaction: manifest
       maneuver: passive
       piercing:
@@ -868,7 +922,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/normal-perception.webp
     name: Normal Perception
     system:
@@ -889,6 +943,7 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      identifier: normal-perception
       interaction: manifest
       maneuver: passive
       piercing:
@@ -912,7 +967,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/normal-sneak.webp
     name: Normal Sneak
     system:
@@ -933,6 +988,7 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      identifier: normal-sneak
       interaction: manifest
       maneuver: passive
       piercing:
@@ -956,7 +1012,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/normal-strength.webp
     name: Normal Strength
     system:
@@ -977,6 +1033,7 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      identifier: normal-strength
       interaction: manifest
       maneuver: passive
       piercing:
@@ -1000,7 +1057,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/regenerating.webp
     name: Regenerating
     system:
@@ -1068,6 +1125,7 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      identifier: regenerating
       interaction: manifest
       maneuver: passive
       overview:
@@ -1099,7 +1157,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/thin-soul.webp
     name: Thin Soul
     system:
@@ -1142,6 +1200,7 @@ effects:
       featSaveAttribute: mov
       form: flaw
       grantOnly: false
+      identifier: thin-soul
       interaction: manifest
       maneuver: passive
       overview:
@@ -1173,6 +1232,7 @@ system:
     @L[Category:Abilities]{abilities} listed, [[lookup name style=lc]]s always
     have one @L[Category:Skills]{skill} and one @L[Category:Conjured
     spells]{conjured spell} that they are @L[Core:Fluency Bonus]{fluent} in.</p>
+  identifier: madwing
   size:
     enabled: true
     value: 2

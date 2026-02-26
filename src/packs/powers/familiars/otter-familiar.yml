@@ -4,7 +4,7 @@ _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.9.17
+  systemVersion: 0.10.23
 effects:
   - _id: po7V1oQ5sQU1B8PV
     _key: '!items.effects!f25dd543b60d1b74.po7V1oQ5sQU1B8PV'
@@ -13,7 +13,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/evasive-shimmering.webp
     name: Evasive Shimmering
     system:
@@ -84,6 +84,7 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      identifier: evasive-shimmering
       interaction: manifest
       maneuver: active
       overview:
@@ -104,17 +105,132 @@ effects:
       targets:
         - self
     type: ability
-  - _id: ptNE4vEZKLTJW6u2
-    _key: '!items.effects!f25dd543b60d1b74.ptNE4vEZKLTJW6u2'
+  - _id: otterTamer000000
+    _key: '!items.effects!f25dd543b60d1b74.otterTamer000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.10.23
+    disabled: false
+    img: icons/environment/settlement/stables-logo.webp
+    name: Otter Tamer
+    system:
+      competence:
+        raw: 2
+      description: <p>You know the way of the @L[Creature:Otter]{otter}.</p>
+      field: survivalist
+      identifier: otter-tamer
+      revealed: true
+      tradecraft: tamer
+    tint: '#ffffff'
+    transfer: true
+    type: fluency
+  - _id: YE2hNxOm74Zve2SG
+    _key: '!items.effects!f25dd543b60d1b74.YE2hNxOm74Zve2SG'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.e98ca0f35a33ebe7
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.10.23
+    img: systems/teriock/src/icons/abilities/reflexes.webp
+    name: Reflexes
+    system:
+      automations:
+        8f623097f9f2a087:
+          _id: 8f623097f9f2a087
+          bonus: '0'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          hex: false
+          type: resist
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.protections.resistances.abilities
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: Disarm
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+      class: archer
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      effectTypes:
+        - resistance
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      identifier: reflexes
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You @L[Keyword:Resistance]{resist} @L[Ability:Disarm]{Disarm}, have
+          @L[Core:Advantage]{advantage} on the roll made for @L[Ability:Catch
+          Item]{Catch Item}, and gain @L[Ability:Missile Reflexes]{Missile
+          Reflexes}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        competence:
+          attribute: mov
+          value: 0
+    type: ability
+  - _id: BKmXiVKjorVRlLI1
+    _key: '!items.effects!f25dd543b60d1b74.BKmXiVKjorVRlLI1'
     _stats:
       compendiumSource: Compendium.teriock.abilities.Item.ac8fdcff69199bc3
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/missile-reflexes.webp
     name: Missile Reflexes
     system:
+      _sup: YE2hNxOm74Zve2SG
       automations:
         8f623097f9f2a087:
           _id: 8f623097f9f2a087
@@ -140,7 +256,10 @@ effects:
         unit: instant
       effectTypes:
         - resistance
-      executionTime: r1
+      executionTime:
+        base: r1
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -148,6 +267,7 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      identifier: missile-reflexes
       interaction: block
       maneuver: reactive
       overview:
@@ -171,26 +291,6 @@ effects:
         @L[Category:Missile delivery abilities]{missile delivery} @L[Core:Attack
         Interaction]{attack}.</p>
     type: ability
-  - _id: otterTamer000000
-    _key: '!items.effects!f25dd543b60d1b74.otterTamer000000'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.9.17
-    disabled: false
-    img: icons/environment/settlement/stables-logo.webp
-    name: Otter Tamer
-    system:
-      competence:
-        raw: 2
-      description: <p>You know the way of the @L[Creature:Otter]{otter}.</p>
-      field: survivalist
-      revealed: true
-      tradecraft: tamer
-    tint: '#ffffff'
-    transfer: true
-    type: fluency
 folder: 31fe961f0b485187
 img: systems/teriock/src/icons/abilities/familiar-bond.webp
 name: Otter Familiar
@@ -200,7 +300,8 @@ system:
   description: >-
     <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
     and delete the other
-    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.otter00000000000]</p>
+    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.61d7a0c7f9747369]</p>
+  identifier: otter-familiar
   maxAv: 0
   type: familiar
 type: power

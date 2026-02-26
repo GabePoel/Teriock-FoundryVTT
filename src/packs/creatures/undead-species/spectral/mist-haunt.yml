@@ -4,7 +4,7 @@ _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.9.23
+  systemVersion: 0.10.23
 folder: b8dcf1ebf1b3e669
 img: systems/teriock/src/icons/creatures/mist-haunt.webp
 items:
@@ -15,7 +15,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     effects:
       - _id: DHAjaC2oicxyNJ9Y
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.15
+          systemVersion: 0.10.23
         img: systems/teriock/src/icons/abilities/child-of-mist.webp
         name: Child of Mist
         system:
@@ -38,7 +38,10 @@ items:
             raw: '0'
             stationary: false
             unit: unlimited
-          executionTime: passive
+          executionTime:
+            base: passive
+            slow:
+              unit: second
           expansion:
             featSaveAttribute: mov
             range:
@@ -46,6 +49,7 @@ items:
           featSaveAttribute: mov
           form: special
           grantOnly: false
+          identifier: child-of-mist
           interaction: manifest
           maneuver: passive
           overview:
@@ -72,7 +76,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.15
+          systemVersion: 0.10.23
         img: systems/teriock/src/icons/abilities/partial-undead.webp
         name: Partial Undead
         system:
@@ -87,7 +91,10 @@ items:
             unit: unlimited
           elements:
             - necromancy
-          executionTime: passive
+          executionTime:
+            base: passive
+            slow:
+              unit: second
           expansion:
             featSaveAttribute: mov
             range:
@@ -95,6 +102,7 @@ items:
           featSaveAttribute: mov
           form: normal
           grantOnly: false
+          identifier: partial-undead
           interaction: manifest
           maneuver: passive
           overview:
@@ -121,7 +129,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.15
+          systemVersion: 0.10.23
         img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
         name: Healing Sensitivity
         system:
@@ -137,7 +145,10 @@ items:
             unit: unlimited
           elements:
             - necromancy
-          executionTime: passive
+          executionTime:
+            base: passive
+            slow:
+              unit: second
           expansion:
             featSaveAttribute: mov
             range:
@@ -145,6 +156,7 @@ items:
           featSaveAttribute: mov
           form: flaw
           grantOnly: false
+          identifier: healing-sensitivity
           interaction: manifest
           maneuver: passive
           overview:
@@ -184,6 +196,7 @@ items:
         missing, there’s an audible “pop” sound and the beings more properly
         manifest. Mist haunts are fully capable of fighting and harming the
         people around them if they are in a state where they would do so.</p>
+      identifier: mist-haunt
       size:
         enabled: false
         value: 3
@@ -286,6 +299,7 @@ system:
     morganti: 0
     temp: 0
     value: 1
+  identifier: mist-haunt
   initiative: 1d20 + @mov
   mp:
     max: 1

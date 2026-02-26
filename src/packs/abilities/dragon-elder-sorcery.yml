@@ -4,7 +4,7 @@ _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.9.21
+  systemVersion: 0.10.23
 effects:
   - _id: 0a178e985ba3329b
     _key: '!items.effects!0a178e985ba3329b.0a178e985ba3329b'
@@ -12,7 +12,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.14
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/dragon-elder-sorcery.webp
     name: Dragon Elder Sorcery
     system:
@@ -24,8 +24,8 @@ effects:
               mode: 4
               priority: 10
               qualifier: >-
-                or(@key.innateElderSorcery, @key.elderSorceryAdept,
-                @key.dragonSnapcast)
+                or(@identifier.innate-elder-sorcery,
+                @identifier.elder-sorcery-adept, @identifier.dragon-snapcast)
               target: ability
               time: fluency
               value: '2'
@@ -54,6 +54,7 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      identifier: dragon-elder-sorcery
       interaction: manifest
       maneuver: passive
       overview:
@@ -98,11 +99,55 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/innate-elder-sorcery.webp
     name: Innate Elder Sorcery
     system:
       _sup: 0a178e985ba3329b
+      automations:
+        f025905e157ac261:
+          _id: f025905e157ac261
+          changes:
+            - key: system.competence.raw
+              mode: 4
+              priority: 10
+              qualifier: >-
+                or(@identifier.elder-sorcery-creation,
+                @identifier.all-elder-sorcery-words)
+              target: ability
+              time: proficiency
+              value: '1'
+          competencies:
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+        f7da3b5e1992a724:
+          _id: f7da3b5e1992a724
+          changes:
+            - key: system.competence.raw
+              mode: 4
+              priority: 10
+              qualifier: >-
+                or(@identifier.elder-sorcery-creation,
+                @identifier.all-elder-sorcery-words)
+              target: ability
+              time: fluency
+              value: '2'
+          competencies:
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
       competence:
         raw: 0
       delivery:
@@ -120,6 +165,7 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      identifier: innate-elder-sorcery
       interaction: manifest
       maneuver: passive
       overview:
@@ -134,9 +180,9 @@ effects:
           Rest]{short rest}. You can create, cast, and learn spells with any
           "grammar".</p>
         fluent: >-
-          <p>You are @L[Core:Proficiency Bonus]{proficient} at @L[Ability:Elder
-          Sorcery Creation]{Elder Sorcery Creation} and @L[Ability:All Elder
-          Sorcery Words]{All Elder Sorcery Words} and also always gain a +(10 *
+          <p>You are @L[Core:Fluency Bonus]{fluent} at @L[Ability:Elder Sorcery
+          Creation]{Elder Sorcery Creation} and @L[Ability:All Elder Sorcery
+          Words]{All Elder Sorcery Words} and also always gain a +(10 *
           @L[Core:Fluency Bonus]{F}) experience bonus during @L[Core:Elder
           Sorcery]{Elder Sorcery} spell creation.</p>
         proficient: >-
@@ -162,7 +208,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/elder-sorcery-adept.webp
     name: Elder Sorcery Adept
     system:
@@ -213,6 +259,7 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      identifier: elder-sorcery-adept
       interaction: manifest
       maneuver: passive
       overview:
@@ -236,7 +283,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/elder-sorcery-creation.webp
     name: Elder Sorcery Creation
     system:
@@ -280,6 +327,7 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      identifier: elder-sorcery-creation
       interaction: manifest
       maneuver: slow
       overview:
@@ -322,7 +370,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.14
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/all-elder-sorcery-words.webp
     name: All Elder Sorcery Words
     system:
@@ -351,6 +399,7 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      identifier: all-elder-sorcery-words
       interaction: manifest
       maneuver: passive
       overview:

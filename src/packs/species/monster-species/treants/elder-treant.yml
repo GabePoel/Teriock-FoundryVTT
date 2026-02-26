@@ -4,7 +4,7 @@ _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.10
+  systemVersion: 0.10.23
 effects:
   - _id: u3K02KhCiItZjz2w
     _key: '!items.effects!a5e40f7db5850773.u3K02KhCiItZjz2w'
@@ -13,7 +13,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/all-elder-sorcery-words.webp
     name: All Elder Sorcery Words
     system:
@@ -42,6 +42,7 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      identifier: all-elder-sorcery-words
       interaction: manifest
       maneuver: passive
       overview:
@@ -262,7 +263,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/beastly-strength.webp
     name: Beastly Strength
     system:
@@ -285,6 +286,7 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      identifier: beastly-strength
       interaction: manifest
       maneuver: passive
       overview:
@@ -316,7 +318,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/dark-vision.webp
     name: Dark Vision
     system:
@@ -361,6 +363,7 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      identifier: dark-vision
       interaction: manifest
       maneuver: passive
       overview:
@@ -384,7 +387,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/elder-sorcery-creation.webp
     name: Elder Sorcery Creation
     system:
@@ -428,6 +431,7 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      identifier: elder-sorcery-creation
       interaction: manifest
       maneuver: slow
       overview:
@@ -470,7 +474,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/giant-strength.webp
     name: Giant Strength
     system:
@@ -493,6 +497,7 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      identifier: giant-strength
       interaction: manifest
       maneuver: passive
       overview:
@@ -524,7 +529,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/healing-touch.webp
     name: Healing Touch
     system:
@@ -556,6 +561,7 @@ effects:
         <p>For each additional @L[Core:MP]{MP} spent, target is
         @L[Core:Healing]{healed} again at the start of your next
         @L[Core:Turns]{turn}.</p>
+      identifier: healing-touch
       interaction: attack
       maneuver: active
       piercing:
@@ -583,7 +589,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
     name: Improved Armor Piercing
     system:
@@ -606,6 +612,7 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      identifier: improved-armor-piercing
       interaction: manifest
       maneuver: passive
       overview:
@@ -631,7 +638,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/improved-healing-factor.webp
     name: Improved Healing Factor
     system:
@@ -685,6 +692,7 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      identifier: improved-healing-factor
       interaction: manifest
       maneuver: passive
       overview:
@@ -711,7 +719,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/improved-strength.webp
     name: Improved Strength
     system:
@@ -734,6 +742,7 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      identifier: improved-strength
       interaction: manifest
       maneuver: passive
       overview:
@@ -763,10 +772,54 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/innate-elder-sorcery.webp
     name: Innate Elder Sorcery
     system:
+      automations:
+        f025905e157ac261:
+          _id: f025905e157ac261
+          changes:
+            - key: system.competence.raw
+              mode: 4
+              priority: 10
+              qualifier: >-
+                or(@identifier.elder-sorcery-creation,
+                @identifier.all-elder-sorcery-words)
+              target: ability
+              time: proficiency
+              value: '1'
+          competencies:
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+        f7da3b5e1992a724:
+          _id: f7da3b5e1992a724
+          changes:
+            - key: system.competence.raw
+              mode: 4
+              priority: 10
+              qualifier: >-
+                or(@identifier.elder-sorcery-creation,
+                @identifier.all-elder-sorcery-words)
+              target: ability
+              time: fluency
+              value: '2'
+          competencies:
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
       competence:
         raw: 0
       delivery:
@@ -784,6 +837,7 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      identifier: innate-elder-sorcery
       interaction: manifest
       limitation: <p>Nature only.</p>
       maneuver: passive
@@ -799,9 +853,9 @@ effects:
           Rest]{short rest}. You can create, cast, and learn spells with any
           "grammar".</p>
         fluent: >-
-          <p>You are @L[Core:Proficiency Bonus]{proficient} at @L[Ability:Elder
-          Sorcery Creation]{Elder Sorcery Creation} and @L[Ability:All Elder
-          Sorcery Words]{All Elder Sorcery Words} and also always gain a +(10 *
+          <p>You are @L[Core:Fluency Bonus]{fluent} at @L[Ability:Elder Sorcery
+          Creation]{Elder Sorcery Creation} and @L[Ability:All Elder Sorcery
+          Words]{All Elder Sorcery Words} and also always gain a +(10 *
           @L[Core:Fluency Bonus]{F}) experience bonus during @L[Core:Elder
           Sorcery]{Elder Sorcery} spell creation.</p>
         proficient: >-
@@ -827,7 +881,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
     name: Melee Damage Boost
     system:
@@ -852,6 +906,7 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      identifier: melee-damage-boost
       interaction: manifest
       maneuver: reactive
       overview:
@@ -885,7 +940,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/monstrous-strength.webp
     name: Monstrous Strength
     system:
@@ -935,6 +990,7 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      identifier: monstrous-strength
       interaction: manifest
       maneuver: passive
       overview:
@@ -964,7 +1020,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/normal-intelligence.webp
     name: Normal Intelligence
     system:
@@ -985,6 +1041,7 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      identifier: normal-intelligence
       interaction: manifest
       maneuver: passive
       piercing:
@@ -1008,7 +1065,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/normal-movement.webp
     name: Normal Movement
     system:
@@ -1029,6 +1086,7 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      identifier: normal-movement
       interaction: manifest
       maneuver: passive
       piercing:
@@ -1052,7 +1110,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/normal-perception.webp
     name: Normal Perception
     system:
@@ -1073,6 +1131,7 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      identifier: normal-perception
       interaction: manifest
       maneuver: passive
       piercing:
@@ -1096,7 +1155,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/normal-sneak.webp
     name: Normal Sneak
     system:
@@ -1117,6 +1176,7 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      identifier: normal-sneak
       interaction: manifest
       maneuver: passive
       piercing:
@@ -1140,7 +1200,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/partial-hands.webp
     name: Partial Hands
     system:
@@ -1161,6 +1221,7 @@ effects:
       featSaveAttribute: mov
       form: flaw
       grantOnly: false
+      identifier: partial-hands
       interaction: manifest
       maneuver: passive
       overview:
@@ -1184,7 +1245,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/rebirth.webp
     name: Rebirth
     system:
@@ -1250,6 +1311,7 @@ effects:
         @L[Condition:Dead]{dead} for an additional 10 minutes. If target is
         @L[Category:Undead creatures]{undead}, they are @L[Core:Healing]{healed}
         an additional time.</p>
+      identifier: rebirth
       interaction: attack
       limitation: <p>Only @L[Keyword:Adept]{adept} in home forest.</p>
       maneuver: active
@@ -1298,7 +1360,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/shattering-grip.webp
     name: Shattering Grip
     system:
@@ -1327,6 +1389,7 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      identifier: shattering-grip
       interaction: manifest
       maneuver: active
       overview:
@@ -1349,7 +1412,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/supernatural-strength.webp
     name: Supernatural Strength
     system:
@@ -1371,6 +1434,7 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      identifier: supernatural-strength
       interaction: manifest
       maneuver: passive
       overview:
@@ -1401,7 +1465,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/treeform-ball.webp
     name: Treeform Ball
     system:
@@ -1476,6 +1540,7 @@ effects:
         <p>For each additional @L[Core:MP]{MP} spent, this effect lasts an
         addition turn without the target being able to @L[Ability:Self
         Revert]{Self Revert}.</p>
+      identifier: treeform-ball
       interaction: attack
       maneuver: active
       piercing:
@@ -1511,7 +1576,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/treeform-self.webp
     name: Treeform Self
     system:
@@ -1580,6 +1645,7 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      identifier: treeform-self
       interaction: manifest
       maneuver: active
       overview:
@@ -1605,7 +1671,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/unbreachability.webp
     name: Unbreachability
     system:
@@ -1656,6 +1722,7 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      identifier: unbreachability
       interaction: manifest
       maneuver: passive
       overview:
@@ -1679,7 +1746,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.15
+      systemVersion: 0.10.23
     img: systems/teriock/src/icons/abilities/ward.webp
     name: Ward
     system:
@@ -1706,6 +1773,7 @@ effects:
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      identifier: ward
       interaction: attack
       maneuver: active
       piercing:
@@ -1749,6 +1817,7 @@ system:
     @L[Category:Treants]{Treants} are slow, patient beings, ever on the watch
     for threats to nature and protecting beings who can't protect
     themselves.</p>
+  identifier: elder-treant
   size:
     enabled: true
     value: 8
