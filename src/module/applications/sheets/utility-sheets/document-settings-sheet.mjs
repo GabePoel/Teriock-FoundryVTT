@@ -31,15 +31,17 @@ export default class DocumentSettingsSheet extends TeriockDocumentSheet {
     const context = await super._prepareContext(options);
     const sheetSettings = {};
     const otherSettings = {};
-    Object.entries(this.document.flags.teriockDocumentSettings).forEach(
-      ([key, value]) => {
-        if (key.startsWith("sheet")) {
-          sheetSettings[key] = value;
-        } else {
-          otherSettings[key] = value;
-        }
-      },
-    );
+    if (this.document.flags.teriockDocumentSettings) {
+      Object.entries(this.document.flags.teriockDocumentSettings).forEach(
+        ([key, value]) => {
+          if (key.startsWith("sheet")) {
+            sheetSettings[key] = value;
+          } else {
+            otherSettings[key] = value;
+          }
+        },
+      );
+    }
     Object.assign(context, {
       hasQualifiers: !!this.document.system?.qualifiers,
       hasCompendiumSource:

@@ -1,5 +1,4 @@
 import { getImage } from "../../helpers/path.mjs";
-import { toCamelCase } from "../../helpers/string.mjs";
 
 export default function registerLookupHelpers() {
   Handlebars.registerHelper(
@@ -46,17 +45,10 @@ export default function registerLookupHelpers() {
   });
 
   Handlebars.registerHelper("getIconKey", (category, key) => {
-    if (
-      TERIOCK.index[toCamelCase(category)] &&
-      TERIOCK.index[toCamelCase(category)][key]
-    ) {
-      return getImage(category, TERIOCK.index[toCamelCase(category)][key]);
-    } else {
-      return getImage("effect-types", "Resistance");
-    }
+    return getImage(category, key, getImage("effectTypes", "resistance"));
   });
 
-  Handlebars.registerHelper("getImage", (category, key) =>
-    getImage(category, key),
+  Handlebars.registerHelper("getImage", (category, key, fallback) =>
+    getImage(category, key, fallback),
   );
 }

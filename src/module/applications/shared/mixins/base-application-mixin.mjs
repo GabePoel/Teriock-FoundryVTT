@@ -29,7 +29,7 @@ export default function BaseApplicationMixin(Base) {
       const context = await super._prepareContext(options);
       Object.assign(context, {
         TERIOCK,
-        sheetId: this.id,
+        appId: this.id,
       });
       return context;
     }

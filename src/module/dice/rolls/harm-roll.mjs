@@ -1,4 +1,3 @@
-import { toCamelCase } from "../../helpers/string.mjs";
 import TakeRoll from "./take-roll.mjs";
 
 export default class HarmRoll extends TakeRoll {
@@ -19,7 +18,7 @@ export default class HarmRoll extends TakeRoll {
         Object.fromEntries(
           source.pages.contents
             .filter((p) => p.type === type)
-            .map((d) => [toCamelCase(d.name), d]),
+            .map((d) => [d.system.identifier || d.defaultIdentifier, d]),
         ),
       );
     });

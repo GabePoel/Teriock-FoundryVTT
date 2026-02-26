@@ -268,7 +268,6 @@ export function qualifiedChangeField() {
   const subTypes = {
     armament: "TERIOCK.CHANGES.Targets.armament",
   };
-  localizeChoices(allTypes);
   Object.assign(subTypes, TERIOCK.system.documentTypes.actors);
   Object.assign(subTypes, TERIOCK.system.documentTypes.items);
   Object.assign(subTypes, TERIOCK.system.documentTypes.effects);
@@ -294,7 +293,7 @@ export function qualifiedChangeField() {
       nullable: false,
     }),
     target: new EnhancedStringField({
-      choices: allTypes,
+      choices: localizeChoices(allTypes),
       initial: "Actor",
       label: "TERIOCK.SCHEMA.QualifiedChange.target.label",
       nullable: false,

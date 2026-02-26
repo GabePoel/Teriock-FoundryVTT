@@ -1,7 +1,7 @@
 import { getImage } from "../../../../helpers/path.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
-import { BaseSystem } from "../../abstract/_module.mjs";
+import { RulesSystem } from "../../abstract/_module.mjs";
 import { AutomatableSystemMixin } from "../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
@@ -13,7 +13,7 @@ const { fields } = foundry.data;
  * @mixes AutomatableSystem
  */
 export default class HarmSystem extends mix(
-  BaseSystem,
+  RulesSystem,
   AutomatableSystemMixin,
 ) {
   /** @inheritDoc */

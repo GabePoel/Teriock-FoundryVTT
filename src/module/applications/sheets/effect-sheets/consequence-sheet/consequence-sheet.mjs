@@ -42,7 +42,7 @@ export default class ConsequenceSheet extends mix(
     //noinspection JSUnresolvedReference
     Object.assign(context, {
       TERIOCK,
-      sheetId: this.id,
+      appId: this.id,
       system: this.document.system,
       systemFields: this.document.system.schema.fields,
     });

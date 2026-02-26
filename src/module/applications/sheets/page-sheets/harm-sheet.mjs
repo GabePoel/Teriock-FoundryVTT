@@ -3,6 +3,7 @@ import { systemPath } from "../../../helpers/path.mjs";
 import { mix } from "../../../helpers/utils.mjs";
 import { bindCommonActions } from "../../shared/_module.mjs";
 import { TeriockTextEditor } from "../../ux/_module.mjs";
+import { ConfigButtonSheetMixin } from "../mixins/button-mixins/_module.mjs";
 import {
   AutomationsCommonSheetPart,
   AutomationsTabsCommonSheetPart,
@@ -24,6 +25,7 @@ export default class HarmSheet extends mix(
   AutomationsCommonSheetPart,
   MenuCommonSheetPart,
   LockingCommonSheetPart,
+  ConfigButtonSheetMixin,
 ) {
   static DEFAULT_OPTIONS = {
     classes: ["teriock"],

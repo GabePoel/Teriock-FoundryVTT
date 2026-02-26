@@ -1,5 +1,6 @@
 import { default as iconManifest } from "../../icons/icon-manifest.json" with { type: "json" };
-import { toKebabCase } from "./string.mjs";
+import { indexOptions } from "../constants/options/index-options.mjs";
+import { toCamelCase, toKebabCase } from "./string.mjs";
 
 /**
  * Get a path relative to the Teriock system root.
@@ -14,13 +15,15 @@ export function systemPath(path) {
  * Get the Foundry file path for some icon.
  * @param {Teriock.UI.IconCategory} category
  * @param {string} name
+ * @param {string} [fallback]
  * @returns {string}
  */
-export function getImage(category, name) {
-  return (
-    iconManifest[toKebabCase(category)][name] ||
-    systemPath("icons/documents/uncertainty.svg")
-  );
+export function getImage(category, name, fallback) {
+  const out = fallback || systemPath("icons/documents/uncertainty.svg");
+  let l1 = toCamelCase(category);
+  if (!iconManifest[l1]) l1 = indexOptions[category];
+  if (!iconManifest[l1]) return out;
+  return iconManifest[l1][toCamelCase(name)] || out;
 }
 
 /**

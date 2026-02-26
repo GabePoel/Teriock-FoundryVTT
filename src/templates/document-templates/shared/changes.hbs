@@ -20,7 +20,7 @@
             value=change.key
             disabled=(not @root/editable)
             icon=@root/TERIOCK.display.icons.ui.changeKey
-            id=(concat @root/sheetId ../../changesPath "." i ".key")
+            id=(concat @root/appId ../../changesPath "." i ".key")
             dataset=(object tooltip=change.key)
           }}
           {{formInput
@@ -29,7 +29,7 @@
             value=change.value
             icon=@root/TERIOCK.display.icons.ui.changeValue
             disabled=(not @root/editable)
-            id=(concat @root/sheetId ../../changesPath "." i ".value")
+            id=(concat @root/appId ../../changesPath "." i ".value")
             dataset=(object tooltip=change.value)
           }}
         </div>
@@ -41,7 +41,7 @@
               value=change.qualifier
               disabled=(not @root/editable)
               icon=@root/TERIOCK.display.icons.ui.qualifier
-              id=(concat @root/sheetId ../../changesPath "." i ".qualifier")
+              id=(concat @root/appId ../../changesPath "." i ".qualifier")
               dataset=(object tooltip=change.qualifier)
             }}
             {{formInput
@@ -51,7 +51,7 @@
               icon=@root/TERIOCK.display.icons.ui.priority
               placeholder=(lookup ../../priorities change.mode)
               disabled=(not @root/editable)
-              id=(concat @root/sheetId ../../changesPath "." i ".priority")
+              id=(concat @root/appId ../../changesPath "." i ".priority")
               dataset=(object tooltip=change.priority)
             }}
           </div>
@@ -63,7 +63,7 @@
               icon=@root/TERIOCK.display.icons.ui.changeMode
               choices=@root/TERIOCK.options.effect.changeMode
               disabled=(not @root/editable)
-              id=(concat @root/sheetId ../../changesPath "." i ".mode")
+              id=(concat @root/appId ../../changesPath "." i ".mode")
             }}
             {{formInput
               changeFields.target
@@ -71,7 +71,7 @@
               value=change.target
               icon=@root/TERIOCK.display.icons.ui.changeTarget
               disabled=(not @root/editable)
-              id=(concat @root/sheetId ../../changesPath "." i ".target")
+              id=(concat @root/appId ../../changesPath "." i ".target")
             }}
             {{formInput
               changeFields.time
@@ -79,7 +79,7 @@
               icon=@root/TERIOCK.display.icons.ui.time
               value=change.time
               disabled=(not @root/editable)
-              id=(concat @root/sheetId ../../changesPath "." i ".time")
+              id=(concat @root/appId ../../changesPath "." i ".time")
               dataset=(object tooltip=(path @root/TERIOCK.options.change.time change.time "hint"))
             }}
           </div>

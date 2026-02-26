@@ -1,29 +1,30 @@
 import { TeriockJournalEntry } from "../../../../documents/_module.mjs";
 import { quickAddAssociation } from "../../../../helpers/html.mjs";
-import { toCamelCase } from "../../../../helpers/string.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
 import { AccessDataMixin } from "../../../shared/mixins/_module.mjs";
 import { AutomatableSystemMixin } from "../../mixins/_module.mjs";
-import BaseSystem from "../base-system.mjs";
+import RulesSystem from "../rules-system/rules-system.mjs";
 
 const { fields } = foundry.data;
 
 //noinspection JSClosureCompilerSyntax
 /**
  * @extends {BaseSystem}
+ * @extends {RulesSystem}
  * @mixes AccessData
  * @mixes AutomatableSystem
  * @implements {Teriock.Models.CommonSystemInterface}
  */
 export default class CommonSystem extends mix(
-  BaseSystem,
+  RulesSystem,
   AccessDataMixin,
   AutomatableSystemMixin,
 ) {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = super.LOCALIZATION_PREFIXES.concat(
+  static LOCALIZATION_PREFIXES = [
+    ...super.LOCALIZATION_PREFIXES,
     "TERIOCK.SYSTEMS.Common",
-  );
+  ];
 
   /**
    * Metadata.
@@ -390,8 +391,8 @@ export default class CommonSystem extends mix(
   getLocalRollData() {
     return {
       name: this.parent.name,
-      key: toCamelCase(this.parent.name),
-      [`key.${toCamelCase(this.parent.name)}`]: 1,
+      identifier: this.identifier,
+      [`identifier.${this.identifier}`]: 1,
       type: this.parent.type,
       [`type.${this.parent.type}`]: 1,
     };

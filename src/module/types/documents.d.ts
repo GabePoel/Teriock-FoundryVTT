@@ -250,6 +250,7 @@ declare global {
   export type GenericParent = GenericActor | GenericItem;
   export type GenericCommon = GenericActor | GenericItem | GenericActiveEffect;
   export type GenericChild = GenericItem | GenericActiveEffect;
+  export type GenericRules = GenericCommon | TeriockJournalEntryPage;
   export type TeriockArmament = TeriockBody | TeriockEquipment;
   export type TeriockLingering = TeriockCondition | TeriockConsequence;
 }

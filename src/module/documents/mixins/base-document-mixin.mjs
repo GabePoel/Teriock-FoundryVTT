@@ -27,6 +27,14 @@ export default function BaseDocumentMixin(Base) {
         };
       }
 
+      /**
+       * The default identifier for this document.
+       * @returns {string}
+       */
+      get defaultIdentifier() {
+        return tm.string.toKebabCase(this.name);
+      }
+
       /** @returns {Teriock.Documents.DocumentMetadata} */
       get documentMetadata() {
         return this.constructor.documentMetadata;

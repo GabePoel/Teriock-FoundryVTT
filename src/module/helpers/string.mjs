@@ -1,19 +1,49 @@
 import { formulaExists } from "./formula.mjs";
 
 /**
+ * Checks if a string is in camelCase.
+ * @param {string} str
+ * @returns {boolean}
+ */
+export function isCamelCase(str) {
+  return /^[a-z][a-zA-Z0-9]*$/.test(str);
+}
+
+/**
+ * Checks if a string is in kebab-case.
+ * @param {string} str
+ * @returns {boolean}
+ */
+export function isKebabCase(str) {
+  return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(str);
+}
+
+/**
+ * Checks if a string is in Title Case.
+ * @param {string} str
+ * @returns {boolean}
+ */
+export function isTitleCase(str) {
+  if (!str) return false;
+  return str === toTitleCase(str);
+}
+
+/**
  * Converts a string to camelCase format.
  * @param {string} str - The string to convert.
  * @returns {string} The camelCase version of the string.
  */
 export function toCamelCase(str) {
-  return str
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/'/g, "")
-    .toLowerCase()
-    .replace(/[^a-z0-9]+(.)/gi, (_, c) => c.toUpperCase())
-    .replace(/[^a-z0-9]/gi, "")
-    .replace(/^[A-Z]/, (c) => c.toLowerCase());
+  return isCamelCase(str)
+    ? str
+    : str
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/'/g, "")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+(.)/gi, (_, c) => c.toUpperCase())
+        .replace(/[^a-z0-9]/gi, "")
+        .replace(/^[A-Z]/, (c) => c.toLowerCase());
 }
 
 /**
@@ -33,14 +63,16 @@ export function toTitleCase(str) {
  * @returns {string} The kebab-case version of the string.
  */
 export function toKebabCase(str) {
-  return str
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/'/g, "")
-    .replace(/([a-z])([A-Z])/g, "$1-$2")
-    .replace(/[^a-z0-9]+/gi, "-")
-    .toLowerCase()
-    .replace(/^-+|-+$/g, "");
+  return isKebabCase(str)
+    ? str
+    : str
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/'/g, "")
+        .replace(/([a-z])([A-Z])/g, "$1-$2")
+        .replace(/[^a-z0-9]+/gi, "-")
+        .toLowerCase()
+        .replace(/^-+|-+$/g, "");
 }
 
 /**
@@ -49,11 +81,13 @@ export function toKebabCase(str) {
  * @returns {string} The kebab-case version of the string.
  */
 export function toKebabCaseFull(str) {
-  return str
-    .replace(/[\s_]+/g, "-")
-    .replace(/([a-z\d])([A-Z])/g, "$1-$2")
-    .replace(/([A-Z]+)([A-Z][a-z])/g, "$1-$2")
-    .toLowerCase();
+  return isKebabCase(str)
+    ? str
+    : str
+        .replace(/[\s_]+/g, "-")
+        .replace(/([a-z\d])([A-Z])/g, "$1-$2")
+        .replace(/([A-Z]+)([A-Z][a-z])/g, "$1-$2")
+        .toLowerCase();
 }
 
 /**
