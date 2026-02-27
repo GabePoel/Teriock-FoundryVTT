@@ -8,6 +8,7 @@ import {
   ChangesAutomation,
   CombatExpirationAutomation,
   DurationAutomation,
+  ProtectionAutomation,
   StatusAutomation,
   TransformationAutomation,
 } from "../../../../data/pseudo-documents/automations/_module.mjs";
@@ -229,6 +230,14 @@ export default function AbilityExecutionChatPart(Base) {
           .filter((a) => a.relation === "pseudoHook" && a.hasMacro)
           .map((a) => a.pseudoHookChange);
         changes.push(...pseudoHookChanges);
+        const protectionAutomations = this.#getCritAutomations(
+          ProtectionAutomation,
+          crit,
+        );
+        const protectionChanges = protectionAutomations
+          .filter((a) => a.protectionChange)
+          .map((a) => a.protectionChange);
+        changes.push(...protectionChanges);
         return changes;
       }
 

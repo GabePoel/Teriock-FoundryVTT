@@ -1,0 +1,34 @@
+<div class="teriock-form-container standard-form">
+  {{formGroup
+    fields.relation
+    value=relation
+    name=(concat path ".relation")
+  }}
+  {{formGroup
+    fields.category
+    value=category
+    name=(concat path ".category")
+  }}
+  {{#if (eq category "other")}}
+    {{formGroup
+      fields.value
+      value=value
+      name=(concat path ".value")
+      label=(localize "TERIOCK.SCHEMA.QualifiedChange.value.label")
+    }}
+  {{else}}
+    <div class="form-group">
+      <label for="{{concat uuid "-identifier-entry"}}">
+        {{localize "TERIOCK.SCHEMA.QualifiedChange.value.label"}}
+      </label>
+      <div class="form-fields">
+        <select
+          name="{{concat path ".value"}}"
+          id="{{concat uuid "-identifier-entry"}}"
+        >
+          {{selectOptions choices selected=value}}
+        </select>
+      </div>
+    </div>
+  {{/if}}
+</div>

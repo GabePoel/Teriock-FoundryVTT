@@ -3,180 +3,29 @@
   <div class="character-tab-page">
     <div class="teriock-block-display">
       <div class="tgrid g4 condition-toggle-container">
-        <div
-          class="condition-toggle"
-          data-action="rollResistance"
-          data-tooltip="{{localize "TERIOCK.ROLLS.Resist.button"}}"
-        >
-          <div class="condition-image-container">
-            <div class="condition-image">
-              <img src="{{getImage "effect-types" "Resistance"}}" alt="">
+        {{#each protectionButtons as |b|}}
+          <div
+            class="condition-toggle"
+            data-action="{{b.action}}"
+            data-tooltip="{{b.tooltip}}"
+          >
+            <div class="condition-image-container">
+              <div class="condition-image">
+                <img src="{{b.img}}" alt="">
+              </div>
+            </div>
+            <div class="condition-label tsubtle">
+              {{b.label}}
             </div>
           </div>
-          <div class="condition-label tsubtle">
-            {{localize "TERIOCK.TERMS.Protections.resistance.single"}}
-          </div>
-        </div>
-        <div
-          class="condition-toggle"
-          data-action="rollHexproof"
-          data-tooltip="{{localize "TERIOCK.ROLLS.Hexproof.button"}}"
-        >
-          <div class="condition-image-container">
-            <div class="condition-image">
-              <img src="{{getImage "effect-types" "Hexproof"}}" alt="">
-            </div>
-          </div>
-          <div class="condition-label tsubtle">
-            {{localize "TERIOCK.TERMS.Protections.hexproof.single"}}
-          </div>
-        </div>
-        <div
-          class="condition-toggle"
-          data-action="rollImmunity"
-          data-tooltip="{{localize "TERIOCK.ROLLS.Immune.button"}}"
-        >
-          <div class="condition-image-container">
-            <div class="condition-image">
-              <img src="{{getImage "effect-types" "Immunity"}}" alt="">
-            </div>
-          </div>
-          <div class="condition-label tsubtle">
-            {{localize "TERIOCK.TERMS.Protections.immunity.single"}}
-          </div>
-        </div>
-        <div
-          class="condition-toggle"
-          data-action="rollHexseal"
-          data-tooltip="{{localize "TERIOCK.ROLLS.Hexseal.button"}}"
-        >
-          <div class="condition-image-container">
-            <div class="condition-image">
-              <img src="{{getImage "effect-types" "Hexseal"}}" alt="">
-            </div>
-          </div>
-          <div class="condition-label tsubtle">
-            {{localize "TERIOCK.TERMS.Protections.hexseal.single"}}
-          </div>
-        </div>
+        {{/each}}
       </div>
     </div>
     <div class=" teriock-block-display">
       <div class="teriock-block-container medium">
         <div class="teriock-block-container-start" style="display: none;"></div>
-        {{#each system.protections as |protection category|}}
-          {{#each protection.damageTypes as |damageType|}}
-            {{> (template "ui-templates/block.hbs")
-              (object
-                uuid=(ruleUuid "Keyword" (path @root/TERIOCK.options.character.protectionMap category "text"))
-                makeTooltip=true
-                usable=true
-                img=(getIconKey "damage-types" damageType)
-                title=(ucFirst damageType)
-                subtitle=(localize "TYPES.JournalEntryPage.damage")
-                text=(path @root/TERIOCK.options.character.protectionMap category "text")
-                action=(path @root/TERIOCK.options.character.protectionMap category "action")
-              )
-            }}
-          {{/each}}
-          {{#each protection.drainTypes as |drainType|}}
-            {{> (template "ui-templates/block.hbs")
-              (object
-                uuid=(ruleUuid "Keyword" (path @root/TERIOCK.options.character.protectionMap category "text"))
-                makeTooltip=true
-                usable=true
-                img=(getIconKey "drain-types" drainType)
-                title=(ucFirst drainType)
-                subtitle=(localize "TYPES.JournalEntryPage.drain")
-                text=(path @root/TERIOCK.options.character.protectionMap category "text")
-                action=(path @root/TERIOCK.options.character.protectionMap category "action")
-              )
-            }}
-          {{/each}}
-          {{#each protection.statuses as |condition|}}
-            {{> (template "ui-templates/block.hbs")
-              (object
-                uuid=(ruleUuid "Keyword" (path @root/TERIOCK.options.character.protectionMap category "text"))
-                makeTooltip=true
-                usable=true
-                img=(getIconKey "conditions" condition)
-                title=(path @root/TERIOCK.reference.conditions condition)
-                subtitle=(localize "TERIOCK.SYSTEMS.Consequence.PANELS.conditions")
-                text=(path @root/TERIOCK.options.character.protectionMap category "text")
-                action=(path @root/TERIOCK.options.character.protectionMap category "action")
-              )
-            }}
-          {{/each}}
-          {{#each protection.elements as |element|}}
-            {{> (template "ui-templates/block.hbs")
-              (object
-                uuid=(ruleUuid "Keyword" (path @root/TERIOCK.options.character.protectionMap category "text"))
-                makeTooltip=true
-                usable=true
-                img=(getIconKey "elements" element)
-                title=(path @root/TERIOCK.options.ability.elements element)
-                subtitle=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.elements.label")
-                text=(path @root/TERIOCK.options.character.protectionMap category "text")
-                action=(path @root/TERIOCK.options.character.protectionMap category "action")
-              )
-            }}
-          {{/each}}
-          {{#each protection.effects as |effect|}}
-            {{> (template "ui-templates/block.hbs")
-              (object
-                uuid=(ruleUuid "Keyword" (path @root/TERIOCK.options.character.protectionMap category "text"))
-                makeTooltip=true
-                usable=true
-                img=(getIconKey "effect-types" effect)
-                title=(path @root/TERIOCK.options.ability.effectTypes effect)
-                subtitle=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.effectTypes.label")
-                text=(path @root/TERIOCK.options.character.protectionMap category "text")
-                action=(path @root/TERIOCK.options.character.protectionMap category "action")
-              )
-            }}
-          {{/each}}
-          {{#each protection.powerSources as |powerSource|}}
-            {{> (template "ui-templates/block.hbs")
-              (object
-                uuid=(ruleUuid "Keyword" (path @root/TERIOCK.options.character.protectionMap category "text"))
-                makeTooltip=true
-                usable=true
-                img=(getIconKey "effect-types" powerSource)
-                title=(path @root/TERIOCK.options.ability.powerSources powerSource)
-                subtitle=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.powerSources.label")
-                text=(path @root/TERIOCK.options.character.protectionMap category "text")
-                action=(path @root/TERIOCK.options.character.protectionMap category "action")
-              )
-            }}
-          {{/each}}
-          {{#each protection.abilities as |ability|}}
-            {{> (template "ui-templates/block.hbs")
-              (object
-                uuid=(ruleUuid "Keyword" (path @root/TERIOCK.options.character.protectionMap category "text"))
-                makeTooltip=true
-                usable=true
-                img=(getIconKey "abilities" (toCamelCase ability))
-                title=ability
-                subtitle=(localize "TERIOCK.PACKS.abilities")
-                text=(path @root/TERIOCK.options.character.protectionMap category "text")
-                action=(path @root/TERIOCK.options.character.protectionMap category "action")
-              )
-            }}
-          {{/each}}
-          {{#each protection.other as |other|}}
-            {{> (template "ui-templates/block.hbs")
-              (object
-                uuid=(ruleUuid "Keyword" (path @root/TERIOCK.options.character.protectionMap category "text"))
-                makeTooltip=true
-                usable=true
-                img=(getIconKey "effect-types" (path @root/TERIOCK.options.character.protectionMap category "text"))
-                title=other
-                subtitle=(localize "TERIOCK.SYSTEMS.Common.FIELDS.gmNotes.otherCategory")
-                text=(path @root/TERIOCK.options.character.protectionMap category "text")
-                action=(path @root/TERIOCK.options.character.protectionMap category "action")
-              )
-            }}
-          {{/each}}
+        {{#each protectionEntries as |p|}}
+          {{> (template "ui-templates/block.hbs") p}}
         {{/each}}
         <div class="no-results medium">
           <p>{{localize "TERIOCK.SHEETS.Common.SEARCH.noProtections"}}</p>

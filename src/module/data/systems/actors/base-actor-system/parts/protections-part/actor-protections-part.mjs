@@ -1,8 +1,10 @@
+import { protectionOptions } from "../../../../../../constants/options/protection-options.mjs";
 import { ThresholdRoll } from "../../../../../../dice/rolls/_module.mjs";
 import {
   ImmunityExecution,
   ResistanceExecution,
 } from "../../../../../../executions/activity-executions/_module.mjs";
+import { objectMap } from "../../../../../../helpers/utils.mjs";
 
 const { fields } = foundry.data;
 
@@ -22,12 +24,22 @@ export default (Base) => {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          protections: new fields.SchemaField({
-            resistances: protectionField("are resistant to"),
-            immunities: protectionField("are immune to"),
-            hexproofs: protectionField("are hexproof against"),
-            hexseals: protectionField("are hexseal against"),
-          }),
+          protections: new fields.SchemaField(
+            objectMap(
+              protectionOptions.types,
+              (type) =>
+                new fields.SchemaField(
+                  objectMap(
+                    protectionOptions.categories,
+                    (category) =>
+                      new fields.SetField(new fields.StringField(), {
+                        label: category.label,
+                      }),
+                  ),
+                  { label: type.label },
+                ),
+            ),
+          ),
         });
       }
 
@@ -37,14 +49,14 @@ export default (Base) => {
        * Relevant wiki pages:
        * - [Protection keywords](https://wiki.teriock.com/index.php/Category:Protection_keywords)
        *
-       * @param {ProtectionDataKey} key - Category of protection
-       * @param {ProtectionDataValue} value - Specific protection
+       * @param {ProtectionCategoryKey} category - Category of protection
+       * @param {string} value - Specific protection
        * @returns {boolean} Whether or not there's some protection against the specified key and value
        */
-      isProtected(key, value) {
+      isProtected(category, value) {
         let hasProtection = false;
         for (const protectionData of Object.values(this.protections)) {
-          if ((protectionData[key] || new Set()).has(value)) {
+          if ((protectionData[category] || new Set()).has(value)) {
             hasProtection = true;
           }
         }
@@ -96,70 +108,3 @@ export default (Base) => {
     }
   );
 };
-
-/**
- * Creates a schema field definition for protection types.
- *
- * Relevant wiki pages:
- * - [Damage types](https://wiki.teriock.com/index.php/Category:Damage_types)
- * - [Drain types](https://wiki.teriock.com/index.php/Category:Drain_types)
- * - [Conditions](https://wiki.teriock.com/index.php/Category:Conditions)
- * - [Elemental abilities](https://wiki.teriock.com/index.php/Category:Elemental_abilities)
- * - [Effects](https://wiki.teriock.com/index.php/Category:Effects)
- * - [Powered abilities](https://wiki.teriock.com/index.php/Category:Powered_abilities)
- *
- * @param {string} tagline - The tagline of the protection type (e.g., "resist", "are immune to")
- */
-function protectionField(tagline) {
-  return new fields.SchemaField({
-    damageTypes: protectionSetField("Damage Type", "Damage Types", tagline),
-    drainTypes: protectionSetField("Drain Type", "Drain Types", tagline),
-    statuses: protectionSetField(
-      "Condition",
-      "Conditions",
-      tagline,
-      TERIOCK.reference.conditions,
-    ),
-    elements: protectionSetField(
-      "Element",
-      "Elements",
-      tagline,
-      TERIOCK.reference.elements,
-    ),
-    effects: protectionSetField(
-      "Effect Type",
-      "Effect Types",
-      tagline,
-      TERIOCK.reference.effectTypes,
-    ),
-    powerSources: protectionSetField(
-      "Power Source",
-      "Power Sources",
-      tagline,
-      TERIOCK.reference.powerSources,
-    ),
-    abilities: protectionSetField("Ability", "Abilities", tagline),
-    other: protectionSetField("Other", "Other Effects", tagline),
-  });
-}
-
-/**
- * An individual entry for the protections fields.
- * @param {string} label
- * @param {string} tagline
- * @param {string} plural
- * @param {object} [choices]
- */
-function protectionSetField(label, plural, tagline, choices) {
-  return new fields.SetField(
-    new fields.StringField({
-      initial: "",
-      label,
-      choices,
-    }),
-    {
-      label: `${label}s`,
-      hint: `A list of ${plural.toLowerCase()} you ${tagline}.`,
-    },
-  );
-}

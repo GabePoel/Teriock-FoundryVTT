@@ -1,5 +1,6 @@
 import {
   ChangesAutomation,
+  ProtectionAutomation,
   StatusAutomation,
 } from "../../../pseudo-documents/automations/_module.mjs";
 import { ChildSystem } from "../../abstract/_module.mjs";
@@ -46,6 +47,13 @@ export default class BaseEffectSystem extends ChildSystem {
       changes.push(...a.changes);
     });
     changes.push(...this.pseudoHookChanges);
+    const protectionAutomations =
+      /** @type {ProtectionAutomation[]} */ this.activeAutomations.filter(
+        (a) => a.type === ProtectionAutomation.TYPE,
+      );
+    protectionAutomations.forEach((a) => {
+      if (a.protectionChange) changes.push(a.protectionChange);
+    });
     return changes;
   }
 

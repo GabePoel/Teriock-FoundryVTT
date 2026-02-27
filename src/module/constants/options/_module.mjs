@@ -14,6 +14,7 @@ import { equipmentOptions } from "./equipment-options.mjs";
 import { hackOptions } from "./hack-options.mjs";
 import { indexOptions } from "./index-options.mjs";
 import { powerOptions } from "./power-options.mjs";
+import { protectionOptions } from "./protection-options.mjs";
 import { rankOptions } from "./rank-options.mjs";
 import { speciesOptions } from "./species-options.mjs";
 import { takeOptions } from "./take-options.mjs";
@@ -37,6 +38,7 @@ const options = {
   hack: hackOptions,
   index: indexOptions,
   power: powerOptions,
+  protection: protectionOptions,
   rank: rankOptions,
   species: speciesOptions,
   take: takeOptions,

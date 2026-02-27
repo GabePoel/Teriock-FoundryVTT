@@ -76,6 +76,7 @@ export default async function registerTemplates() {
     "systems/teriock/src/templates/document-templates/shared/header.hbs",
     "systems/teriock/src/templates/document-templates/shared/image.hbs",
     "systems/teriock/src/templates/document-templates/shared/menu-buttons.hbs",
+    "systems/teriock/src/templates/document-templates/shared/protection-config.hbs",
     "systems/teriock/src/templates/document-templates/shared/simple-menu.hbs",
     "systems/teriock/src/templates/document-templates/shared/tags.hbs",
     "systems/teriock/src/templates/document-templates/utility-templates/document-settings-template.hbs",

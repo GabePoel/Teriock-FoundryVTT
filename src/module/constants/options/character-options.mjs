@@ -2,24 +2,6 @@ import { preLocalize } from "../../helpers/localization.mjs";
 
 export const characterOptions = {
   initiative: "1d20 + @mov",
-  protectionMap: {
-    immunities: {
-      action: "rollImmunity",
-      text: "TERIOCK.TERMS.Protections.immunity.single",
-    },
-    resistances: {
-      action: "rollResistance",
-      text: "TERIOCK.TERMS.Protections.resistance.single",
-    },
-    hexproofs: {
-      action: "rollHexproof",
-      text: "TERIOCK.TERMS.Protections.hexproof.single",
-    },
-    hexseals: {
-      action: "rollHexseal",
-      text: "TERIOCK.TERMS.Protections.hexseal.single",
-    },
-  },
   senseMap: {
     blind: "blindFighting",
     dark: "darkVision",
@@ -48,6 +30,5 @@ export const characterOptions = {
   },
 };
 
-preLocalize("options.character.protectionMap", { keys: ["text"] });
 preLocalize("options.character.senses");
 preLocalize("options.character.speedAdjustments");

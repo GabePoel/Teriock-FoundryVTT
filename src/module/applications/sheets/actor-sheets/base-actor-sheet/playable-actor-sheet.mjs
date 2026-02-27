@@ -22,6 +22,7 @@ export default class TeriockPlayableActorSheet extends mix(
   parts.CombatActorSheetPart,
   parts.ConditionsActorSheetPart,
   parts.MechanicalActorSheetPart,
+  parts.ProtectionsActorSheetPart,
   parts.RollingActorSheetPart,
   parts.SidebarActorSheetPart,
   parts.TabsActorSheetPart,
