@@ -1,6 +1,6 @@
 export * as collections from "./collections/_module.mjs";
 export * as mixins from "./mixins/_module.mjs";
-export { default as TeriockActiveEffect } from "./active-effect/effect.mjs";
+export { default as TeriockActiveEffect } from "./active-effect/active-effect.mjs";
 export { default as TeriockActor } from "./actor/actor.mjs";
 export { default as TeriockCard } from "./card/card.mjs";
 export { default as TeriockChatMessage } from "./chat-message/chat-message.mjs";

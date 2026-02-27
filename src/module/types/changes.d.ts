@@ -1,9 +1,9 @@
 import { TeriockActiveEffect } from "../documents/_module.mjs";
-import { change } from "../constants/options/_module.mjs";
+import { time } from "../constants/options/change-options.mjs";
 
 declare global {
   namespace Teriock.Changes {
-    export type ChangeTime = keyof typeof change.time;
+    export type ChangeTime = keyof typeof time;
 
     export type ChangeTarget =
       | Teriock.Documents.CommonType

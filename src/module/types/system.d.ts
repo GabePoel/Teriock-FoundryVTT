@@ -1,15 +1,12 @@
-import {
-  abilityPseudoHooks,
-  propertyPseudoHooks,
-} from "../constants/system/pseudo-hooks.mjs";
 import { TeriockMacro } from "../documents/_module.mjs";
 import { displayOptions } from "../constants/options/display-options.mjs";
+import { pseudoHooks } from "../constants/system/_module.mjs";
 
 declare global {
   export namespace Teriock.Parameters.Shared {
-    export type AbilityPseudoHook = keyof typeof abilityPseudoHooks;
-    export type PropertyPseudoHook = keyof typeof propertyPseudoHooks;
-    export type PseudoHook = AbilityPseudoHook | PropertyPseudoHook;
+    export type AbilityPseudoHook = keyof typeof pseudoHooks.ability;
+    export type PropertyPseudoHook = keyof typeof pseudoHooks.property;
+    export type PseudoHook = keyof typeof pseudoHooks.all;
     export type MacroHookRecord = Record<
       SafeUUID<TeriockMacro>,
       Teriock.Parameters.Shared.PropertyPseudoHook
@@ -25,7 +22,7 @@ declare global {
        */
       allowDuplicateSubs?: boolean;
       /**
-       * Since {@link HierarchyDocumentMixin._preCreateDocuments} manipulates the default `keepId` value in creation
+       * Since {@link HierarchyDocument._preCreateOperation} manipulates the default `keepId` value in creation
        * operations, subsequent operations using the same operation object can get messed up. This allows us to
        * reset it in {@link HierarchyDocument.createDocuments}.
        */

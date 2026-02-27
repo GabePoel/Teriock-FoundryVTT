@@ -1,3 +1,4 @@
+import { coverData } from "../../../../../../constants/data/cover.mjs";
 import { addFormula } from "../../../../../../helpers/formula.mjs";
 
 /**
@@ -15,34 +16,32 @@ export default (Base) => {
     class ActorCoverPart extends Base {
       /**
        * Decrease cover by one step.
+       * @param {number} [amount]
        * @returns {Promise<void>}
        */
-      async decreaseCover() {
-        if (this.parent.statuses.has("fullCover")) {
-          await this.parent.toggleStatusEffect("fullCover", { active: false });
-        } else if (this.parent.statuses.has("threeQuartersCover")) {
-          await this.parent.toggleStatusEffect("threeQuartersCover", {
-            active: false,
-          });
-        } else if (this.parent.statuses.has("halfCover")) {
-          await this.parent.toggleStatusEffect("halfCover", { active: false });
+      async decreaseCover(amount = 1) {
+        const value = this.parent.system.cover;
+        const min = Math.max(0, value - amount);
+        const ids = [];
+        for (let i = value; i > min; i--) {
+          ids.push(coverData["cover" + i.toString()].id);
         }
+        await this.parent.removeStatusEffects(ids);
       }
 
       /**
        * Increase cover by one step.
+       * @param {number} [amount]
        * @returns {Promise<void>}
        */
-      async increaseCover() {
-        if (!this.parent.statuses.has("halfCover")) {
-          await this.parent.toggleStatusEffect("halfCover", { active: true });
-        } else if (!this.parent.statuses.has("threeQuartersCover")) {
-          await this.parent.toggleStatusEffect("threeQuartersCover", {
-            active: true,
-          });
-        } else if (!this.parent.statuses.has("fullCover")) {
-          await this.parent.toggleStatusEffect("fullCover", { active: true });
+      async increaseCover(amount = 1) {
+        const value = this.parent.system.cover;
+        const max = Math.min(3, value + amount);
+        const ids = [];
+        for (let i = value; i < max; i++) {
+          ids.push(coverData["cover" + (i + 1).toString()].id);
         }
+        await this.parent.applyStatusEffects(ids);
       }
 
       /** @inheritDoc */

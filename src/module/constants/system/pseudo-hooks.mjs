@@ -69,9 +69,6 @@ const unsortedPseudoHooks = foundry.utils.mergeObject(
 );
 preLocalize("system.pseudoHooks.all", { sort: true });
 
-/**
- * @type {Record<string, Record<string, string>>}
- */
 const pseudoHooks = {
   ability: abilityPseudoHooks,
   property: propertyPseudoHooks,

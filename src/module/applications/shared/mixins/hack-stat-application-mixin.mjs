@@ -1,3 +1,5 @@
+import { hackOptions } from "../../../constants/options/hack-options.mjs";
+
 /**
  * Mixin allowing hacks and spending dice stats.
  * @param {typeof TeriockDocumentSheet} Base
@@ -35,8 +37,7 @@ export default function HackStatApplicationMixin(Base) {
        * @this {HackStatApplication}
        */
       static async _onTakeHack(event, target) {
-        event.stopPropagation();
-        await this.document.system.takeHack(target.dataset.part);
+        await onTakeHack(this.document, event, target);
       }
 
       /**
@@ -47,8 +48,15 @@ export default function HackStatApplicationMixin(Base) {
        * @this {HackStatApplication}
        */
       static async _onTakeUnhack(event, target) {
-        event.stopPropagation();
-        await this.document.system.takeUnhack(target.dataset.part);
+        await onTakeUnhack(this.document, event, target);
+      }
+
+      /**
+       * Whether this hacks in the forward or reverse direction.
+       * @returns {boolean}
+       */
+      get _hackForward() {
+        return true;
       }
 
       /**
@@ -73,11 +81,19 @@ export default function HackStatApplicationMixin(Base) {
         this.element
           .querySelectorAll("[data-action=rollStatDie]")
           .forEach((el) => {
-            el.addEventListener("contextmenu", async (e) => {
-              e.preventDefault();
-              const target = e.currentTarget;
-              await this._unrollStatDie(e, target);
-              e.stopPropagation();
+            el.addEventListener("contextmenu", async (ev) => {
+              ev.preventDefault();
+              await this._unrollStatDie(ev, el);
+              ev.stopPropagation();
+            });
+          });
+        this.element
+          .querySelectorAll("[data-action=takeHack]")
+          .forEach((el) => {
+            el.addEventListener("contextmenu", async (ev) => {
+              ev.preventDefault();
+              if (this._hackForward) await onTakeUnhack(this.document, ev, el);
+              else await onTakeHack(this.document, ev, el);
             });
           });
       }
@@ -134,4 +150,38 @@ export default function HackStatApplicationMixin(Base) {
       }
     }
   );
+}
+
+/**
+ * Hack a specific body part.
+ * @param {GenericActor} actor
+ * @param {PointerEvent} event
+ * @param {HTMLElement} target
+ * @returns {Promise<void>}
+ */
+async function onTakeHack(actor, event, target) {
+  event.stopPropagation();
+  const part = target.dataset.part;
+  if (actor.system.hacks[part].value < hackOptions[part].max) {
+    await actor.system.takeHack(part);
+  } else {
+    await actor.system.takeUnhack(part, hackOptions[part].max);
+  }
+}
+
+/**
+ * Unhack a specific body part.
+ * @param {GenericActor} actor
+ * @param {PointerEvent} event
+ * @param {HTMLElement} target
+ * @returns {Promise<void>}
+ */
+async function onTakeUnhack(actor, event, target) {
+  event.stopPropagation();
+  const part = target.dataset.part;
+  if (actor.system.hacks[part].value > 0) {
+    await actor.system.takeUnhack(part);
+  } else {
+    await actor.system.takeHack(part, hackOptions[part].max);
+  }
 }

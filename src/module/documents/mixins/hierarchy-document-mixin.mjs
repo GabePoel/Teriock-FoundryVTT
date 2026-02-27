@@ -565,7 +565,9 @@ export default function HierarchyDocumentMixin(Base) {
       /** @inheritDoc */
       toObject(source = true) {
         const out = super.toObject(source);
-        foundry.utils.setProperty(out, "system._ref", this.uuid);
+        if (this.collection) {
+          foundry.utils.setProperty(out, "system._ref", this.uuid);
+        }
         return out;
       }
 

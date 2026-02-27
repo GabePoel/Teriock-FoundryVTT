@@ -81,22 +81,8 @@ export default class TeriockHealManager extends TeriockStatManager {
   }
 
   /** @inheritDoc */
-  async _onRender(context, options) {
-    await super._onRender(context, options);
-    // Hacks work the opposite way they do on character sheets.
-    this.element.querySelectorAll(".hack-marker-box").forEach((el) => {
-      el.addEventListener("contextmenu", async (e) => {
-        e.preventDefault();
-        if (!(el instanceof HTMLElement)) {
-          return;
-        }
-        const part =
-          /** @type {Teriock.Parameters.Actor.HackableBodyPart} */
-          el.dataset.part;
-        await this.document.system.takeHack(part);
-        e.stopPropagation();
-      });
-    });
+  get _hackForward() {
+    return false;
   }
 
   /** @inheritDoc */

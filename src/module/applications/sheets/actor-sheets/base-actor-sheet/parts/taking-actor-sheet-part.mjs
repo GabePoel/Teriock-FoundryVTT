@@ -1,7 +1,6 @@
 import { toCamelCase, toTitleCase } from "../../../../../helpers/string.mjs";
 import { makeIconClass } from "../../../../../helpers/utils.mjs";
 import { TeriockDialog } from "../../../../api/_module.mjs";
-import { HackStatMixin } from "../../../../shared/mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -14,7 +13,7 @@ export default (Base) =>
    * @extends {BaseActorSheet}
    * @mixin
    */
-  class TakingActorSheetPart extends HackStatMixin(Base) {
+  class TakingActorSheetPart extends Base {
     static DEFAULT_OPTIONS = {
       actions: {
         takeHack: this._onTakeHack,

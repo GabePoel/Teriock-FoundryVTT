@@ -398,6 +398,20 @@ export default class TeriockActor extends mix(
   }
 
   /**
+   * Add multiple status effects to the actor.
+   * @param {string[]} statusIds
+   * @returns {Promise<void>}
+   */
+  async applyStatusEffects(statusIds) {
+    const effects = await Promise.all(
+      statusIds.map(async (id) => ActiveEffect.fromStatusEffect(id)),
+    );
+    await this.createEmbeddedDocuments("ActiveEffect", effects, {
+      keepId: true,
+    });
+  }
+
+  /**
    * Prepare condition information now that all virtual statuses have been applied.
    */
   cleanConditionInformation() {
@@ -610,6 +624,21 @@ export default class TeriockActor extends mix(
     if (this.statuses.has("criticallyWounded")) {
       this.statuses.delete("unconscious");
     }
+  }
+
+  /**
+   * Remove multiple status effects from the actor.
+   * @param statusIds
+   * @returns {Promise<void>}
+   */
+  async removeStatusEffects(statusIds) {
+    const candidates = CONFIG.statusEffects.filter((e) =>
+      statusIds.includes(e.id),
+    );
+    const toRemove = candidates
+      .filter((e) => this.effects.get(e?._id))
+      .map((e) => e?._id);
+    await this.deleteEmbeddedDocuments("ActiveEffect", toRemove);
   }
 
   /**

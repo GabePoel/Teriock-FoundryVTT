@@ -1,3 +1,7 @@
+import { hacksData } from "../../../../../../constants/data/hacks.mjs";
+import { hackOptions } from "../../../../../../constants/options/hack-options.mjs";
+import { objectMap } from "../../../../../../helpers/utils.mjs";
+
 /**
  * Actor data model mixin that handles hacks.
  * @param {typeof BaseActorSystem} Base
@@ -11,6 +15,19 @@ export default (Base) => {
      * @mixin
      */
     class ActorHacksPart extends Base {
+      /**
+       * Clear all hacks of a given part.
+       * @param {Teriock.Parameters.Actor.HackableBodyPart} part
+       * @returns {Promise<void>}
+       */
+      async clearHacks(part) {
+        const ids = [];
+        for (let i = 0; i < hackOptions[part].max; i++) {
+          ids.push(hacksData[part + (i + 1).toString()]._id);
+        }
+        await this.parent.deleteEmbeddedDocuments("ActiveEffect", ids);
+      }
+
       /** @inheritDoc */
       getRollData() {
         const rollData = super.getRollData();
@@ -23,15 +40,13 @@ export default (Base) => {
       /** @inheritDoc */
       prepareBaseData() {
         super.prepareBaseData();
-        this.hacks = {
-          arm: hackField(2),
-          body: hackField(1),
-          ear: hackField(1),
-          eye: hackField(1),
-          leg: hackField(2),
-          mouth: hackField(1),
-          nose: hackField(1),
-        };
+        this.hacks = objectMap(hackOptions, (conf) => {
+          return {
+            min: 0,
+            max: conf.max,
+            value: 0,
+          };
+        });
       }
 
       /**
@@ -41,27 +56,21 @@ export default (Base) => {
        * - [Hack](https://wiki.teriock.com/index.php/Damage:Hack)
        *
        * @param {Teriock.Parameters.Actor.HackableBodyPart} part - The part to hack.
+       * @param {number} [amount]
        * @returns {Promise<void>}
        */
-      async takeHack(part) {
+      async takeHack(part, amount = 1) {
         const data = { part };
         await this.parent.hookCall("takeHack", data);
-        if (data.cancel) {
-          return;
-        }
+        if (data.cancel) return;
         part = data.part;
-        let statusName = part + "Hack";
-        if (["arm", "leg"].includes(part)) {
-          statusName += "1";
+        const value = this.parent.system.hacks[part].value;
+        const max = Math.min(value + amount, hackOptions[part].max);
+        const ids = [];
+        for (let i = value; i < max; i++) {
+          ids.push(hacksData[part + (i + 1).toString()].id);
         }
-        if (!this.parent.statuses.has(statusName)) {
-          await this.parent.toggleStatusEffect(statusName, { active: true });
-        } else if (["arm", "leg"].includes(part)) {
-          statusName = part + "Hack2";
-          if (!this.parent.statuses.has(statusName)) {
-            await this.parent.toggleStatusEffect(statusName, { active: true });
-          }
-        }
+        await this.parent.applyStatusEffects(ids);
       }
 
       /**
@@ -71,41 +80,22 @@ export default (Base) => {
        * - [Hack](https://wiki.teriock.com/index.php/Damage:Hack)
        *
        * @param {Teriock.Parameters.Actor.HackableBodyPart} part - The part to unhack.
+       * @param {number} [amount]
        * @returns {Promise<void>}
        */
-      async takeUnhack(part) {
+      async takeUnhack(part, amount = 1) {
         const data = { part };
         await this.parent.hookCall("takeUnhack", data);
-        if (data.cancel) {
-          return;
-        }
+        if (data.cancel) return;
         part = data.part;
-        let statusName = part + "Hack";
-        if (this.parent.statuses.has(statusName + "2")) {
-          await this.parent.toggleStatusEffect(statusName + "2", {
-            active: false,
-          });
-        } else if (this.parent.statuses.has(statusName + "1")) {
-          await this.parent.toggleStatusEffect(statusName + "1", {
-            active: false,
-          });
-        } else if (this.parent.statuses.has(statusName)) {
-          await this.parent.toggleStatusEffect(statusName, { active: false });
+        const value = this.parent.system.hacks[part].value;
+        const min = Math.max(value - amount, 0);
+        const ids = [];
+        for (let i = value; i > min; i--) {
+          ids.push(hacksData[part + i.toString()].id);
         }
+        await this.parent.removeStatusEffects(ids);
       }
     }
   );
 };
-
-/**
- * Define a hack.
- * @param {number} max
- * @returns {{max, min: 0, value: 0}}
- */
-function hackField(max) {
-  return {
-    max: max,
-    min: 0,
-    value: 0,
-  };
-}

@@ -109,9 +109,10 @@ export default function ChangeableDocumentMixin(Base) {
        */
       get _canChange() {
         return (
-          !this.parent ||
-          !["Actor", "Item"].includes(this.parent.documentName) ||
-          this.parent._embeddedPreparation
+          !!this.collection &&
+          (!this.parent ||
+            !["Actor", "Item"].includes(this.parent.documentName) ||
+            this.parent._embeddedPreparation)
         );
       }
 

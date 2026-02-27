@@ -6,11 +6,11 @@ export default interface ActorHacksPartInterface {
 /** Hack data */
 export interface ActorHackData {
   /** Maximum */
-  max: 1 | 2;
+  max: number;
   /** Minimum */
-  min: 0;
+  min: number;
   /** Value */
-  value: 0 | 1 | 2;
+  value: number;
 }
 
 /** The types of hacks that could be applied. */

@@ -6,7 +6,7 @@ import {
   EmbedCardDocumentMixin,
   HierarchyDocumentMixin,
   PanelDocumentMixin,
-  SettingsDocumentMixin,
+  SettingsDocumentMixin
 } from "./_module.mjs";
 
 /**
@@ -35,12 +35,10 @@ export default function CommonDocumentMixin(Base) {
     ) {
       /** @inheritDoc */
       static get documentMetadata() {
-        const metadata = super.documentMetadata;
-        Object.assign(metadata, {
+        return Object.assign(super.documentMetadata, {
           common: true,
           typed: true,
         });
-        return metadata;
       }
 
       /** @inheritDoc */
@@ -135,7 +133,7 @@ export default function CommonDocumentMixin(Base) {
        * Executes all macros for a given pseudo-hook and calls a regular hook with the same name.
        * @param {Teriock.Parameters.Shared.PseudoHook} pseudoHook - What pseudo-hook to call.
        * @param {Partial<Teriock.HookData.BaseHookData>} [data] - Data to call in each connected {@link TeriockMacro}.
-       * @param {TeriockActiveEffect} [effect] - Only call {@link TeriockMacro}s provided by this {@link TeriockActiveEffect}.
+       * @param {TeriockActiveEffect} [effect] - Only call {@link TeriockMacro}s from this {@link TeriockActiveEffect}.
        * @param {boolean} [skipCall] - Whether to skip calling normal hooks.
        * @returns {Promise<Teriock.HookData.BaseHookData>} The mutated data.
        */
@@ -200,8 +198,8 @@ export default function CommonDocumentMixin(Base) {
 
       /**
        * Add statuses and explanations for "virtual effects". These are things that would otherwise be represented with
-       * {@link TeriockActiveEffect}s, but that we want to be able to add synchronously during the update cycle. Any of these
-       * effects that should be shown on the token need to be manually added to {@link TeriockToken._drawEffects}.
+       * {@link TeriockActiveEffect}s, but that we want to be able to add synchronously during the update cycle. Any of
+       * these effects that should be shown on the token need to be manually added to {@link TeriockToken._drawEffects}.
        */
       prepareVirtualEffects() {
         this.system.prepareVirtualEffects();

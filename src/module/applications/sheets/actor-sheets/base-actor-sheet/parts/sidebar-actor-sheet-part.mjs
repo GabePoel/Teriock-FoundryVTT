@@ -137,19 +137,6 @@ export default (Base) =>
           e.stopPropagation();
         });
 
-      this.element.querySelectorAll(".hack-marker-box").forEach((el) => {
-        el.addEventListener("contextmenu", async (e) => {
-          e.preventDefault();
-          if (!(el instanceof HTMLElement)) {
-            return;
-          }
-          const part =
-            /** @type {Teriock.Parameters.Actor.HackableBodyPart} */ el.dataset
-              .part;
-          await this.actor.system.takeUnhack(part);
-          e.stopPropagation();
-        });
-      });
       this._connectContextMenu(
         ".character-piercing-box",
         this.#piercingContextMenu(),

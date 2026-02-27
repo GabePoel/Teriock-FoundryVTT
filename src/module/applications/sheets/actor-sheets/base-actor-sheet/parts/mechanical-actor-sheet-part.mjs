@@ -45,7 +45,11 @@ export default (Base) =>
      * @returns {Promise<void>}
      */
     static async #onIncreaseCover() {
-      await this.document.system.increaseCover();
+      if (this.document.system.cover < 3) {
+        await this.document.system.increaseCover();
+      } else {
+        await this.document.system.decreaseCover(3);
+      }
     }
 
     /**
@@ -95,10 +99,13 @@ export default (Base) =>
       this.element
         .querySelectorAll("[data-action='increaseCover']")
         .forEach((el) => {
-          el.addEventListener(
-            "contextmenu",
-            async () => await this.document.system.decreaseCover(),
-          );
+          el.addEventListener("contextmenu", async () => {
+            if (this.document.system.cover > 0) {
+              await this.document.system.decreaseCover();
+            } else {
+              await this.document.system.increaseCover(3);
+            }
+          });
         });
       this.element.querySelectorAll("[data-action=quickUse]").forEach((el) => {
         el.addEventListener("contextmenu", async (ev) => {
