@@ -4,7 +4,7 @@ import { selectWeightedMaxFaceDie } from "./helpers.mjs";
 const { FunctionTerm } = foundry.dice.terms;
 
 /**
- * Subclassed to allow for boosting and deboosting. Foundry relies on the original  class. So, the overwritten
+ * Subclassed to allow for boosting and deboosting. Foundry relies on the original class. So, the overwritten
  * methods on this subclass need to be transplanted into the original class in order to work.
  *
  * Relevant wiki pages:
