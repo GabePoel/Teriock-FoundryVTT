@@ -27,9 +27,11 @@
           tabDisplay=TERIOCK.options.document.equipment.name
         }}
         {{#if settings.menus.equipmentFilters}}
-          <div class="teriock-block-options-content">
-            {{> (template "document-templates/actor-templates/playable-template/filters/ch-equipment-filter.hbs")}}
-          </div>
+          {{> (template "ui-templates/filters.hbs")
+            appId=appId
+            filterSelects=equipmentFilterSelects
+            filterToggles=equipmentFilterToggles
+          }}
         {{/if}}
       </div>
       {{> (template "document-templates/actor-templates/playable-template/results/search-results.hbs")
