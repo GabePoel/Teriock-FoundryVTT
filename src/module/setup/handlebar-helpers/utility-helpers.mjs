@@ -205,7 +205,7 @@ export default function registerUiHelpers() {
         
         <input
           class="${tab}-search teriock-block-search"
-          type="text"
+          type="search"
           placeholder="${game.i18n.localize("TERIOCK.SHEETS.Common.SEARCH.placeholder")}"
           data-type="${tab}"
           ${searchKey}

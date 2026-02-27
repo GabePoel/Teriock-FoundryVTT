@@ -5,11 +5,16 @@ import { preLocalize } from "../../helpers/localization.mjs";
 import {
   abilities,
   attributes,
+  bodyParts,
   classes,
   conditions,
+  creatures,
+  damageTypes,
   deathBag,
+  drainTypes,
   effectTypes,
   elements,
+  equipment,
   equipmentClasses,
   magicalProperties,
   materialProperties,
@@ -26,12 +31,19 @@ const reference = {
   abilities: foundry.utils.deepClone(abilities),
   attributes: foundry.utils.deepClone(attributes),
   attributesFull: foundry.utils.deepClone(attributes),
+  bodyParts: foundry.utils.deepClone(bodyParts),
   classes: foundry.utils.deepClone(classes),
   conditions: foundry.utils.deepClone(conditions),
+  creatures: foundry.utils.deepClone(creatures),
+  damageTypes: foundry.utils.deepClone(damageTypes),
   deathBag: foundry.utils.deepClone(deathBag),
+  drainTypes: foundry.utils.deepClone(drainTypes),
   effectTypes: foundry.utils.deepClone(effectTypes),
   elements: foundry.utils.deepClone(elements),
+  equipment: foundry.utils.deepClone(equipment),
   equipmentClasses: foundry.utils.deepClone(equipmentClasses),
+  magicalProperties: foundry.utils.deepClone(magicalProperties),
+  materialProperties: foundry.utils.deepClone(materialProperties),
   powerSources: foundry.utils.deepClone(powerSources),
   properties: foundry.utils.deepClone(properties),
   statAttributes: foundry.utils.deepClone(statAttributes),
@@ -39,8 +51,6 @@ const reference = {
   traits: foundry.utils.deepClone(traits),
   weaponClasses: foundry.utils.deepClone(weaponClasses),
   weaponFightingStyles: foundry.utils.deepClone(weaponFightingStyles),
-  magicalProperties: foundry.utils.deepClone(magicalProperties),
-  materialProperties: foundry.utils.deepClone(materialProperties),
 };
 export default reference;
 
@@ -58,6 +68,10 @@ preLocalize("reference.attributesFull", {
   suffix: ".name",
   transform: "lc",
 });
+preLocalize("reference.bodyParts", {
+  prefix: "TERIOCK.TERMS.BodyParts.",
+  transform: "cc",
+});
 preLocalize("reference.classes", {
   prefix: "TERIOCK.TERMS.Classes.",
   transform: "cc",
@@ -66,8 +80,20 @@ preLocalize("reference.conditions", {
   prefix: "TERIOCK.STATUSES.Conditions.",
   transform: "cc",
 });
+preLocalize("reference.creatures", {
+  prefix: "TERIOCK.TERMS.Creatures.",
+  transform: "cc",
+});
+preLocalize("reference.damageTypes", {
+  prefix: "TERIOCK.TERMS.DamageTypes.",
+  transform: "cc",
+});
 preLocalize("reference.deathBag", {
   prefix: "TERIOCK.TERMS.StoneColor.",
+  transform: "cc",
+});
+preLocalize("reference.drainTypes", {
+  prefix: "TERIOCK.TERMS.DrainTypes.",
   transform: "cc",
 });
 preLocalize("reference.effectTypes", {
@@ -76,6 +102,10 @@ preLocalize("reference.effectTypes", {
 });
 preLocalize("reference.elements", {
   prefix: "TERIOCK.TERMS.Elements.",
+  transform: "cc",
+});
+preLocalize("reference.equipment", {
+  prefix: "TERIOCK.TERMS.Equipment.",
   transform: "cc",
 });
 preLocalize("reference.equipmentClasses", {
