@@ -4,17 +4,27 @@
     {{> (template "document-templates/actor-templates/playable-template/parts/ch-money-display.hbs")}}
     <div class="teriock-block-display">
       <div class="teriock-block-options">
-        {{blockOptions
-          settings.menus.equipmentOptions
-          settings.menus.equipmentFilters
-          settings.menus.equipmentSort
-          settings.equipmentFilters.search
-          "equipment"
+        {{> (template "ui-templates/block-options.hbs")
+          tab="equipment"
+          optionsToggle=settings.menus.equipmentOptions
+          optionsPath="settings.menus.equipmentOptions"
+          filterToggle=settings.menus.equipmentFilters
+          filterPath="settings.menus.equipmentFilters"
+          sortToggle=settings.menus.equipmentSort
+          sortPath="settings.menus.equipmentSort"
+          searchValue=settings.equipmentFilters.search
+          searchKey="equipment"
+          addAction="createEquipment"
           sortOptions=TERIOCK.options.display.equipmentSortOrders
           sortValue=settings.equipmentSortOption
-          addAction="createEquipment" key="equipment"
+          sortOptionPath="settings.equipmentSortOption"
           gaplessPath="flags.teriockDocumentSettings.sheetBlockInventoryGapless"
+          gaplessValue=flags.teriockDocumentSettings.sheetBlockInventoryGapless
           sizePath="flags.teriockDocumentSettings.sheetBlockInventorySize"
+          sizeValue=flags.teriockDocumentSettings.sheetBlockInventorySize
+          ascendingPath="settings.equipmentSortAscending"
+          ascendingValue=settings.equipmentSortAscending
+          tabDisplay=TERIOCK.options.document.equipment.name
         }}
         {{#if settings.menus.equipmentFilters}}
           <div class="teriock-block-options-content">

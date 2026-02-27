@@ -3,11 +3,18 @@
   <div class="character-tab-page teriock-block-results" data-search-key="powers">
     <div class="teriock-block-display">
       <div class="teriock-block-options">
-        {{blockOptions
-          settings.menus.powerOptions null null settings.powerFilters.search "power" key="powers"
+        {{> (template "ui-templates/block-options.hbs")
+          tab="power"
+          optionsToggle=settings.menus.powerOptions
+          optionsPath="settings.menus.powerOptions"
+          searchValue=settings.powerFilters.search
+          searchKey="powers"
           addAction="createPower"
           gaplessPath="flags.teriockDocumentSettings.sheetBlockPowersGapless"
+          gaplessValue=flags.teriockDocumentSettings.sheetBlockPowersGapless
           sizePath="flags.teriockDocumentSettings.sheetBlockPowersSize"
+          sizeValue=flags.teriockDocumentSettings.sheetBlockPowersSize
+          tabDisplay=TERIOCK.options.document.power.name
         }}
       </div>
       {{> (template "document-templates/actor-templates/playable-template/results/search-results.hbs")

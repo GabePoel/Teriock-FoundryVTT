@@ -88,11 +88,18 @@
     </div>
     <div class="teriock-block-display">
       <div class="teriock-block-options">
-        {{blockOptions
-          settings.menus.fluencyOptions null null settings.fluencyFilters.search "fluency"
-          key="fluencies" addAction="createFluency"
+        {{> (template "ui-templates/block-options.hbs")
+          tab="fluency"
+          optionsToggle=settings.menus.fluencyOptions
+          optionsPath="settings.menus.fluencyOptions"
+          searchValue=settings.fluencyFilters.search
+          searchKey="fluencies"
+          addAction="createFluency"
           gaplessPath="flags.teriockDocumentSettings.sheetBlockTradecraftsGapless"
+          gaplessValue=flags.teriockDocumentSettings.sheetBlockTradecraftsGapless
           sizePath="flags.teriockDocumentSettings.sheetBlockTradecraftsSize"
+          sizeValue=flags.teriockDocumentSettings.sheetBlockTradecraftsSize
+          tabDisplay=TERIOCK.options.document.fluency.name
         }}
       </div>
       {{> (template "document-templates/actor-templates/playable-template/results/search-results.hbs")

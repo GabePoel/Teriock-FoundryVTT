@@ -3,12 +3,18 @@
   <div class="character-tab-page teriock-block-results" data-search-key="ranks">
     <div class="teriock-block-display">
       <div class="teriock-block-options">
-        {{blockOptions
-          settings.menus.rankOptions null null settings.rankFilters.search "rank"
+        {{> (template "ui-templates/block-options.hbs")
+          tab="rank"
+          optionsToggle=settings.menus.rankOptions
+          optionsPath="settings.menus.rankOptions"
+          searchValue=settings.rankFilters.search
+          searchKey="ranks"
           addAction="createRank"
-          key="ranks"
           gaplessPath="flags.teriockDocumentSettings.sheetBlockClassesGapless"
+          gaplessValue=flags.teriockDocumentSettings.sheetBlockClassesGapless
           sizePath="flags.teriockDocumentSettings.sheetBlockClassesSize"
+          sizeValue=flags.teriockDocumentSettings.sheetBlockClassesSize
+          tabDisplay=TERIOCK.options.document.rank.name
         }}
       </div>
       {{> (template "document-templates/actor-templates/playable-template/results/search-results.hbs")

@@ -1,0 +1,28 @@
+<div class="tgrid g4" style="margin-bottom: 0.5em;">
+  {{#each filterSelects as |field|}}
+    <div class="tgrid-item gi2">
+      <label for="{{concat ../appId '.' field.key}}"></label>
+      <select
+        name="{{field.name}}"
+        id="{{concat ../appId '.' field.key}}"
+        data-never-disable="true"
+      >
+        <option value="">{{localize field.label}}</option>
+        {{selectOptions field.choices selected=field.selected}}
+      </select>
+    </div>
+  {{/each}}
+</div>
+<div class="tgrid g4" style="column-gap: 0.75em; padding-inline: 0.25em;">
+  {{#each filterToggles as |toggle|}}
+    <div class="tgrid-item">
+      <label for="{{concat ../appId '.' toggle.key}}">
+        {{localize toggle.label}}
+      </label>
+      {{threeToggle
+        id=(concat ../appId "." toggle.key)
+        name=toggle.name
+      }}
+    </div>
+  {{/each}}
+</div>

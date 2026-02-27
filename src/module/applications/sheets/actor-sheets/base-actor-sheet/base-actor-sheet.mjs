@@ -110,6 +110,17 @@ export default class BaseActorSheet extends mix(
         this.#cycleToggleSwitch(el, false);
         await this.render();
       });
+
+      // Support right-click on associated labels
+      const id = el.id;
+      if (!id) return;
+      const label = this.element.querySelector(`label[for="${id}"]`);
+      if (!label) return;
+      label.addEventListener("contextmenu", async (event) => {
+        event.preventDefault();
+        this.#cycleToggleSwitch(el, false);
+        await this.render();
+      });
     });
   }
 

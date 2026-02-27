@@ -55,7 +55,7 @@ export default (Base) =>
             label: "TERIOCK.SHEETS.Actor.TABS.Resources.title",
           },
           {
-            id: "conditions",
+            id: "effects",
             icon: makeIconClass(documentOptions.condition.icon, "solid"),
             label: "TERIOCK.SHEETS.Actor.TABS.Effects.title",
           },
@@ -65,7 +65,7 @@ export default (Base) =>
             label: "TERIOCK.SHEETS.Actor.TABS.Protections.title",
           },
           {
-            id: "notes",
+            id: "details",
             icon: makeIconClass("list-ul", "solid"),
             label: "TERIOCK.SHEETS.Actor.TABS.Details.title",
           },
@@ -104,7 +104,7 @@ export default (Base) =>
             dropData.systemType,
           )
         ) {
-          await this.setActiveTab("conditions");
+          await this.setActiveTab("effects");
         }
       }
     }

@@ -3,11 +3,18 @@
   <div class="character-tab-page teriock-block-results" data-search-key="resources">
     <div class="teriock-block-display">
       <div class="teriock-block-options">
-        {{blockOptions
-          settings.menus.resourceOptions null null settings.resourceFilters.search "resource"
-          key="resources" addAction="createResource"
-          gapless="sheetBlockResourcesGapless"
-          size="sheetBlockResourcesSize"
+        {{> (template "ui-templates/block-options.hbs")
+          tab="resource"
+          optionsToggle=settings.menus.resourceOptions
+          optionsPath="settings.menus.resourceOptions"
+          searchValue=settings.resourceFilters.search
+          searchKey="resources"
+          addAction="createResource"
+          gaplessPath="flags.teriockDocumentSettings.sheetBlockResourcesGapless"
+          gaplessValue=flags.teriockDocumentSettings.sheetBlockResourcesGapless
+          sizePath="flags.teriockDocumentSettings.sheetBlockResourcesSize"
+          sizeValue=flags.teriockDocumentSettings.sheetBlockResourcesSize
+          tabDisplay=TERIOCK.options.document.resource.name
         }}
       </div>
       {{> (template "document-templates/actor-templates/playable-template/results/search-results.hbs")

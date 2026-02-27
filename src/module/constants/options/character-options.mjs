@@ -28,7 +28,24 @@ export const characterOptions = {
     3: "TERIOCK.TERMS.SpeedAdjustments.3",
     4: "TERIOCK.TERMS.SpeedAdjustments.4",
   },
+  movementTypes: {
+    walk: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.walk",
+    difficultTerrain:
+      "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.difficultTerrain",
+    crawl: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.crawl",
+    swim: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.swim",
+    climb: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.climb",
+    hidden: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.hidden",
+    leapHorizontal:
+      "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.leapHorizontal",
+    leapVertical:
+      "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.leapVertical",
+    fly: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.fly",
+    dig: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.dig",
+    dive: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.dive",
+  },
 };
 
 preLocalize("options.character.senses");
 preLocalize("options.character.speedAdjustments");
+preLocalize("options.character.movementTypes");

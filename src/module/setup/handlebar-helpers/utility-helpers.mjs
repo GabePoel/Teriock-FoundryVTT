@@ -18,8 +18,8 @@ export default function registerUiHelpers() {
     makeIconClass(icon, ...styles),
   );
 
-  Handlebars.registerHelper("tswitch", (options) => {
-    const { name, disabled } = options.hash;
+  Handlebars.registerHelper("threeToggle", (options) => {
+    const { name, disabled, id } = options.hash;
     let value;
     if (name && typeof name === "string") {
       const keys = name.split(".");
@@ -34,23 +34,24 @@ export default function registerUiHelpers() {
       }
     }
     const attrs = [
+      id ? `id="${id}"` : "",
       name ? `data-name="${name}"` : "",
       name ? `data-value="${value}"` : "",
       disabled ? "" : name ? 'data-action="toggleSwitch"' : "",
       disabled ? "disabled" : "",
     ];
     return new Handlebars.SafeString(`
-      <div class="tswitch">
-        <button class="tswitch-bg" ${attrs.join(" ")} data-never-disable="true">
-          <div class="tcircle"></div>
+      <div class="three-toggle">
+        <button class="three-toggle-bg" ${attrs.join(" ")} data-never-disable="true">
+          <div class="three-toggle-circle"></div>
         </button>
       </div>
     `);
   });
 
   Handlebars.registerHelper(
-    "ttoggle",
-    (bool) => `ttoggle-button${bool ? " toggled" : ""}`,
+    "toggleButton",
+    (bool) => `toggle-button${bool ? " toggled" : ""}`,
   );
 
   Handlebars.registerHelper("ticon", (icon, options) => {
@@ -110,180 +111,6 @@ export default function registerUiHelpers() {
         ${parentId ? `data-parent-id="${parentId}"` : ""} 
         ${actionAttr}
         ${tooltipAttr}></i>
-    `);
-    },
-  );
-
-  Handlebars.registerHelper(
-    "blockOptions",
-    function (
-      optionsToggle,
-      filterToggle,
-      sortToggle,
-      _searchValue,
-      tab,
-      options,
-    ) {
-      let {
-        showAddButton = true,
-        sortOptions = {},
-        sortValue = "",
-        addAction = "",
-        key = null,
-        gaplessPath = undefined,
-        sizePath = undefined,
-      } = options.hash;
-      const context = options.data.root;
-      const ttoggle = Handlebars.helpers.ttoggle;
-      const checked = Handlebars.helpers.checked;
-      const selectOptions = Handlebars.helpers.selectOptions;
-      const optionsPath = `settings.menus.${tab}Options`;
-      const filterPath = `settings.menus.${tab}Filters`;
-      const sortPath = `settings.menus.${tab}Sort`;
-      const searchKey = key ? `data-search-key=${key}` : "";
-
-      gaplessPath = gaplessPath || `system.sheet.display.${tab}.gapless`;
-      sizePath = sizePath || `system.sheet.display.${tab}.size`;
-      const ascendingPath = `settings.${tab}SortAscending`;
-
-      const gaplessValue = foundry.utils.getProperty(context, gaplessPath);
-      const sizeValue = foundry.utils.getProperty(context, sizePath);
-      const ascendingValue = foundry.utils.getProperty(context, ascendingPath);
-      const sizeOptions = TERIOCK.options.display.sizes ?? {};
-
-      const tabDisplay =
-        TERIOCK.options.document[tab]?.name ||
-        tab.charAt(0).toUpperCase() + tab.slice(1);
-
-      return new Handlebars.SafeString(`
-      <div class="teriock-block-options-header">
-        <button
-          class="${tab}-options-menu-toggle options-menu-toggle ${ttoggle(optionsToggle)}" 
-          data-bool="${optionsToggle}"
-          data-path="${optionsPath}"
-          data-action="sheetToggle"
-          data-tooltip="${game.i18n.localize("TERIOCK.SHEETS.Common.SEARCH.displayOptions")}"
-        >
-          <i class="fa-fw fa-solid fa-sliders"></i>
-        </button>
-        
-        ${
-          sortToggle !== null && sortToggle !== undefined
-            ? `
-          <button
-            class="${tab}-sort-menu-toggle sort-menu-toggle ${ttoggle(sortToggle)}"
-            data-bool="${sortToggle}"
-            data-path="${sortPath}"
-            data-action="sheetToggle"
-            data-tooltip="${game.i18n.localize("TERIOCK.SHEETS.Common.SEARCH.sortResults")}"
-            data-never-disable="true"
-          >
-            <i class="fa-fw fa-solid fa-bars-sort"></i>
-          </button>`
-            : ""
-        }
-  
-        ${
-          filterToggle !== null && filterToggle !== undefined
-            ? `
-          <button
-            class="${tab}-filter-menu-toggle filter-menu-toggle ${ttoggle(filterToggle)}"
-            data-bool="${filterToggle}"
-            data-path="${filterPath}"
-            data-action="sheetToggle"
-            data-tooltip="${game.i18n.localize("TERIOCK.SHEETS.Common.SEARCH.filterResults")}"
-            data-never-disable="true"
-          >
-            <i class="fa-fw fa-solid fa-filter"></i>
-          </button>`
-            : ""
-        }
-        
-        <input
-          class="${tab}-search teriock-block-search"
-          type="search"
-          placeholder="${game.i18n.localize("TERIOCK.SHEETS.Common.SEARCH.placeholder")}"
-          data-type="${tab}"
-          data-never-disable="true"
-          ${searchKey}
-        >
-
-        ${
-          showAddButton
-            ? `
-          <button class="ttoggle-button ${tab}-add-button add-button" data-tab="${tab}"
-            data-action="${addAction}"
-            data-tooltip="${game.i18n.format(
-              "TERIOCK.DIALOGS.NewDocument.title",
-              {
-                name: tabDisplay,
-              },
-            )}"
-          >
-            <i class="fa-fw fa-solid fa-${TERIOCK.display.icons.ui.add}"></i>
-          </button>`
-            : ""
-        }
-      </div>
-
-      ${
-        optionsToggle
-          ? `
-        <div class="teriock-block-options-content">
-          <div class="tgrid g4">
-            <div class="tgrid-item">
-              <label for="${tab}-gapless">${game.i18n.localize("TERIOCK.SHEETS.Common.SEARCH.gapless")}</label>
-              <input 
-                id="${tab}-gapless"
-                type="checkbox"
-                name="${gaplessPath}"
-                ${checked(gaplessValue)}
-              >
-            </div>
-            <div class="tgrid-item gi3">
-              <select name="${sizePath}" id="${tab}-size">
-                <option value="">${game.i18n.localize("TERIOCK.SHEETS.Common.SEARCH.cardSize")}</option>
-                ${selectOptions(sizeOptions, { hash: { selected: sizeValue } })}
-              </select>
-            </div>
-          </div>
-        </div>`
-          : ""
-      }
-
-      ${
-        sortToggle
-          ? `
-        <div class="teriock-block-options-content">
-          <div class="tgrid g4">
-            <div class="tgrid-item">
-              <label for="${tab}-ascending">${game.i18n.localize("TERIOCK.SHEETS.Common.SEARCH.ascending")}</label>
-              <input
-                id="${tab}-ascending" ${checked(ascendingValue)}
-                type="checkbox" 
-                data-action="sheetToggle" 
-                data-bool="${ascendingValue}" 
-                data-path="${ascendingPath}" 
-                data-never-disable="true"
-              >
-            </div>
-            <div class="tgrid-item gi3">
-              <select
-                data-action="sheetSelect"
-                data-path="settings.${tab}SortOption"
-                data-never-disable="true"
-                id="${tab}-sort"
-              >
-                ${Object.entries(sortOptions).map(
-                  ([k, v]) =>
-                    `<option value='${k}' ${k === sortValue ? "selected" : ""}>${v}</option>`,
-                )}
-              </select>
-            </div>
-          </div>
-        </div>`
-          : ""
-      }
     `);
     },
   );

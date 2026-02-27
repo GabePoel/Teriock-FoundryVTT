@@ -3,6 +3,7 @@ import { attributeOptions } from "./attribute-options.mjs";
 import { attunementOptions } from "./attunement-options.mjs";
 import * as change from "./change-options.mjs";
 import { characterOptions } from "./character-options.mjs";
+import { competenceOptions } from "./competence-options.mjs";
 import { consequenceOptions } from "./consequence-options.mjs";
 import { currencyOptions } from "./currency-options.mjs";
 import { deliveryOptions } from "./delivery-options.mjs";
@@ -13,6 +14,7 @@ import { effectOptions } from "./effect-options.mjs";
 import { equipmentOptions } from "./equipment-options.mjs";
 import { hackOptions } from "./hack-options.mjs";
 import { indexOptions } from "./index-options.mjs";
+import { piercingOptions } from "./piercing-options.mjs";
 import { powerOptions } from "./power-options.mjs";
 import { protectionOptions } from "./protection-options.mjs";
 import { rankOptions } from "./rank-options.mjs";
@@ -29,6 +31,7 @@ const options = {
   character: characterOptions,
   consequence: consequenceOptions,
   currency: currencyOptions,
+  competence: competenceOptions,
   delivery: deliveryOptions,
   die: dieOptions,
   display: displayOptions,
@@ -38,6 +41,7 @@ const options = {
   hack: hackOptions,
   index: indexOptions,
   power: powerOptions,
+  piercing: piercingOptions,
   protection: protectionOptions,
   rank: rankOptions,
   species: speciesOptions,

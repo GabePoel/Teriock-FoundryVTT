@@ -80,7 +80,7 @@ export type AbilityFilters = {
   /** Show, hide, or don't filter based on if MP cost */
   mp: Teriock.UI.ThreeToggle;
   /** If the filter is applied, which piercing type is displayed */
-  piercing: string | null;
+  piercing: Teriock.System.PiercingLevel | null;
   /** If the filter is applied, which power source type is displayed */
   powerSource: Teriock.Parameters.Ability.PowerSource | null;
   /** Show, hide, or don't filter based on if a ritual */

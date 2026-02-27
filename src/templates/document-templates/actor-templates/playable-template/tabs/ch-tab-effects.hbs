@@ -3,11 +3,18 @@
   <div class="character-tab-page teriock-block-results" data-search-key="effects">
     <div class="teriock-block-display">
       <div class="teriock-block-options">
-        {{blockOptions
-          settings.menus.consequenceOptions null null settings.consequenceFilters.search
-          "consequence" key="effects" addAction="createConsequence"
+        {{> (template "ui-templates/block-options.hbs")
+          tab="consequence"
+          optionsToggle=settings.menus.consequenceOptions
+          optionsPath="settings.menus.consequenceOptions"
+          searchValue=settings.consequenceFilters.search
+          searchKey="effects"
+          addAction="createConsequence"
           gaplessPath="flags.teriockDocumentSettings.sheetBlockEffectsGapless"
+          gaplessValue=flags.teriockDocumentSettings.sheetBlockEffectsGapless
           sizePath="flags.teriockDocumentSettings.sheetBlockEffectsSize"
+          sizeValue=flags.teriockDocumentSettings.sheetBlockEffectsSize
+          tabDisplay=TERIOCK.options.document.consequence.name
         }}
       </div>
       {{> (template "document-templates/actor-templates/playable-template/results/search-results.hbs")
@@ -63,3 +70,4 @@
     </div>
   </div>
 </div>
+

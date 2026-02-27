@@ -39,6 +39,216 @@ export default (Base) =>
         equipment: this._sortEquipment(
           this._getFilteredEquipment(context.equipment),
         ),
+        abilityFilterSelects: [
+          {
+            key: "maneuver",
+            name: "settings.abilityFilters.maneuver",
+            label: "TERIOCK.SYSTEMS.Ability.FIELDS.maneuver.label",
+            choices: TERIOCK.options.ability.maneuver,
+            selected: this.settings.abilityFilters.maneuver,
+          },
+          {
+            key: "interaction",
+            name: "settings.abilityFilters.interaction",
+            label: "TERIOCK.SYSTEMS.Ability.FIELDS.interaction.label",
+            choices: TERIOCK.options.ability.interaction,
+            selected: this.settings.abilityFilters.interaction,
+          },
+          {
+            key: "delivery",
+            name: "settings.abilityFilters.delivery",
+            label: "TERIOCK.SYSTEMS.Ability.FIELDS.delivery.label",
+            choices: TERIOCK.options.ability.delivery,
+            selected: this.settings.abilityFilters.delivery,
+          },
+          {
+            key: "target",
+            name: "settings.abilityFilters.target",
+            label: "TERIOCK.SYSTEMS.Ability.FIELDS.targets.label",
+            choices: TERIOCK.options.ability.targets,
+            selected: this.settings.abilityFilters.target,
+          },
+          {
+            key: "powerSource",
+            name: "settings.abilityFilters.powerSource",
+            label: "TERIOCK.SYSTEMS.Ability.FIELDS.powerSources.label",
+            choices: TERIOCK.options.ability.powerSources,
+            selected: this.settings.abilityFilters.powerSource,
+          },
+          {
+            key: "element",
+            name: "settings.abilityFilters.element",
+            label: "TERIOCK.SYSTEMS.Ability.FIELDS.elements.label",
+            choices: TERIOCK.options.ability.elements,
+            selected: this.settings.abilityFilters.element,
+          },
+          {
+            key: "effectTypes",
+            name: "settings.abilityFilters.effectTypes",
+            label: "TERIOCK.SYSTEMS.Ability.FIELDS.effectTypes.label",
+            choices: TERIOCK.options.ability.effectTypes,
+            selected: this.settings.abilityFilters.effectTypes,
+          },
+          {
+            key: "piercing",
+            name: "settings.abilityFilters.piercing",
+            label: "TERIOCK.MODELS.Piercing.FIELDS.raw.label",
+            choices: TERIOCK.options.piercing.levels,
+            selected: this.settings.abilityFilters.piercing,
+          },
+        ],
+        abilityFilterToggles: [
+          {
+            key: "basic",
+            name: "settings.abilityFilters.basic",
+            label: "TERIOCK.SYSTEMS.Ability.FIELDS.basic.label",
+          },
+          {
+            key: "standard",
+            name: "settings.abilityFilters.standard",
+            label: "TERIOCK.SYSTEMS.Ability.FIELDS.standard.label",
+          },
+          {
+            key: "skill",
+            name: "settings.abilityFilters.skill",
+            label: "TERIOCK.SYSTEMS.Ability.FIELDS.skill.label",
+          },
+          {
+            key: "spell",
+            name: "settings.abilityFilters.spell",
+            label: "TERIOCK.SYSTEMS.Ability.FIELDS.spell.label",
+          },
+          {
+            key: "ritual",
+            name: "settings.abilityFilters.ritual",
+            label: "TERIOCK.SYSTEMS.Ability.FIELDS.ritual.label",
+          },
+          {
+            key: "rotator",
+            name: "settings.abilityFilters.rotator",
+            label: "TERIOCK.SYSTEMS.Ability.FIELDS.rotator.label",
+          },
+          {
+            key: "heightened",
+            name: "settings.abilityFilters.heightened",
+            label: "TERIOCK.SYSTEMS.Ability.FIELDS.heightened.label",
+          },
+          {
+            key: "expansion",
+            name: "settings.abilityFilters.expansion",
+            label: "TERIOCK.SYSTEMS.Ability.FIELDS.expansion.label",
+          },
+          {
+            key: "verbal",
+            name: "settings.abilityFilters.verbal",
+            label: "TERIOCK.TERMS.Costs.verbal",
+          },
+          {
+            key: "somatic",
+            name: "settings.abilityFilters.somatic",
+            label: "TERIOCK.TERMS.Costs.somatic",
+          },
+          {
+            key: "material",
+            name: "settings.abilityFilters.material",
+            label: "TERIOCK.TERMS.Costs.material",
+          },
+          {
+            key: "invoked",
+            name: "settings.abilityFilters.invoked",
+            label: "TERIOCK.TERMS.Costs.invoked",
+          },
+          {
+            key: "hp",
+            name: "settings.abilityFilters.hp",
+            label:
+              "TERIOCK.SYSTEMS.Ability.FIELDS.costs.hp.value.variable.label",
+          },
+          {
+            key: "mp",
+            name: "settings.abilityFilters.mp",
+            label:
+              "TERIOCK.SYSTEMS.Ability.FIELDS.costs.mp.value.variable.label",
+          },
+          {
+            key: "broken",
+            name: "settings.abilityFilters.broken",
+            label: "TERIOCK.SYSTEMS.Ability.FIELDS.costs.break.label",
+          },
+          {
+            key: "sustained",
+            name: "settings.abilityFilters.sustained",
+            label: "TERIOCK.SYSTEMS.Ability.FIELDS.sustained.label",
+          },
+        ],
+        equipmentFilterSelects: [
+          {
+            key: "equipmentClasses",
+            name: "settings.equipmentFilters.equipmentClasses",
+            label: "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentClasses.label",
+            choices: TERIOCK.options.equipment.equipmentClasses,
+            selected: this.settings.equipmentFilters.equipmentClasses,
+          },
+          {
+            key: "properties",
+            name: "settings.equipmentFilters.properties",
+            label: "TERIOCK.PACKS.properties",
+            choices: TERIOCK.reference.properties,
+            selected: this.settings.equipmentFilters.properties,
+          },
+          {
+            key: "materialProperties",
+            name: "settings.equipmentFilters.materialProperties",
+            label:
+              "TERIOCK.SHEETS.Actor.TABS.Inventory.filters.materialProperties",
+            choices: TERIOCK.reference.materialProperties,
+            selected: this.settings.equipmentFilters.materialProperties,
+          },
+          {
+            key: "magicalProperties",
+            name: "settings.equipmentFilters.magicalProperties",
+            label:
+              "TERIOCK.SHEETS.Actor.TABS.Inventory.filters.magicalProperties",
+            choices: TERIOCK.reference.magicalProperties,
+            selected: this.settings.equipmentFilters.magicalProperties,
+          },
+          {
+            key: "weaponFightingStyles",
+            name: "settings.equipmentFilters.weaponFightingStyles",
+            label: "TERIOCK.SYSTEMS.Armament.FIELDS.fightingStyle.label",
+            choices: TERIOCK.options.equipment.weaponFightingStyles,
+            selected: this.settings.equipmentFilters.weaponFightingStyles,
+          },
+          {
+            key: "powerLevel",
+            name: "settings.equipmentFilters.powerLevel",
+            label: "TERIOCK.SYSTEMS.Equipment.FIELDS.powerLevel.label",
+            choices: TERIOCK.options.equipment.powerLevelShort,
+            selected: this.settings.equipmentFilters.powerLevel,
+          },
+        ],
+        equipmentFilterToggles: [
+          {
+            key: "equipped",
+            name: "settings.equipmentFilters.equipped",
+            label: "TERIOCK.SYSTEMS.Equipment.FIELDS.equipped.label",
+          },
+          {
+            key: "shattered",
+            name: "settings.equipmentFilters.shattered",
+            label: "TERIOCK.SYSTEMS.Equipment.FIELDS.shattered.label",
+          },
+          {
+            key: "identified",
+            name: "settings.equipmentFilters.identified",
+            label: "TERIOCK.MODELS.Identification.FIELDS.identified.label",
+          },
+          {
+            key: "consumable",
+            name: "settings.equipmentFilters.consumable",
+            label: "TERIOCK.SYSTEMS.Consumable.FIELDS.consumable.label",
+          },
+        ],
       });
       return context;
     }

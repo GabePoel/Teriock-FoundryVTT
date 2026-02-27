@@ -1,4 +1,5 @@
 import { abilityOptions } from "../../../constants/options/ability-options.mjs";
+import { competenceOptions } from "../../../constants/options/competence-options.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
 import { sortObject } from "../../../helpers/utils.mjs";
 import {
@@ -480,14 +481,7 @@ export function costField(options = { extraChoices: {} }) {
  */
 export function competenceField() {
   return new NumberField({
-    choices: localizeChoices(
-      {
-        0: "TERIOCK.SCHEMA.Competence.choices.0",
-        1: "TERIOCK.SCHEMA.Competence.choices.1",
-        2: "TERIOCK.SCHEMA.Competence.choices.2",
-      },
-      { sort: false },
-    ),
+    choices: localizeChoices(competenceOptions.levels, { sort: false }),
     hint: game.i18n.localize("TERIOCK.SCHEMA.Competence.hint"),
     initial: 0,
     label: game.i18n.localize("TERIOCK.SCHEMA.Competence.label"),

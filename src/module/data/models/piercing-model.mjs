@@ -1,3 +1,4 @@
+import { piercingOptions } from "../../constants/options/piercing-options.mjs";
 import { localizeChoices } from "../../helpers/localization.mjs";
 import EmbeddedDataModel from "./embedded-data-model.mjs";
 
@@ -20,11 +21,7 @@ export default class PiercingModel extends EmbeddedDataModel {
   static defineSchema() {
     return {
       raw: new fields.NumberField({
-        choices: localizeChoices({
-          0: "TERIOCK.MODELS.Piercing.MENU.0",
-          1: "TERIOCK.MODELS.Piercing.MENU.1",
-          2: "TERIOCK.MODELS.Piercing.MENU.2",
-        }),
+        choices: localizeChoices(piercingOptions.levels),
         initial: 0,
         max: 2,
         min: 0,

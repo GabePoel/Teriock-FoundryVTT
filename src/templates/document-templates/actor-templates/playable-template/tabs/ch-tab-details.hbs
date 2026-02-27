@@ -18,105 +18,18 @@
         </div>
         <div class="teriock-block-display-divider"></div>
         <div class="tgrid g3" style="padding-inline: 0.5em;">
-          <div class="gi2">
-            {{localize "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.walk"}}
-          </div>
-          <div class="tcolored">
-            {{{lookup
-              TERIOCK.options.character.speedAdjustments
-              system.speedAdjustments.walk
-            }}}
-          </div>
-          <div class="gi2">
-            {{localize "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.difficultTerrain"}}
-          </div>
-          <div class="tcolored">
-            {{{lookup
-              TERIOCK.options.character.speedAdjustments
-              system.speedAdjustments.difficultTerrain
-            }}}
-          </div>
-          <div class="gi2">
-            {{localize "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.crawl"}}
-          </div>
-          <div class="tcolored">
-            {{{lookup
-              TERIOCK.options.character.speedAdjustments
-              system.speedAdjustments.crawl
-            }}}
-          </div>
-          <div class="gi2">
-            {{localize "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.swim"}}
-          </div>
-          <div class="tcolored">
-            {{{lookup
-              TERIOCK.options.character.speedAdjustments
-              system.speedAdjustments.swim
-            }}}
-          </div>
-          <div class="gi2">
-            {{localize "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.climb"}}
-          </div>
-          <div class="tcolored">
-            {{{lookup
-              TERIOCK.options.character.speedAdjustments
-              system.speedAdjustments.climb
-            }}}
-          </div>
-          <div class="gi2">
-            {{localize "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.hidden"}}
-          </div>
-          <div class="tcolored">
-            {{{lookup
-              TERIOCK.options.character.speedAdjustments
-              system.speedAdjustments.hidden
-            }}}
-          </div>
-          <div class="gi2">
-            {{localize "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.leapHorizontal"}}
-          </div>
-          <div class="tcolored">
-            {{{lookup
-              TERIOCK.options.character.speedAdjustments
-              system.speedAdjustments.leapHorizontal
-            }}}
-          </div>
-          <div class="gi2">
-            {{localize "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.leapVertical"}}
-          </div>
-          <div class="tcolored">
-            {{{lookup
-              TERIOCK.options.character.speedAdjustments
-              system.speedAdjustments.leapVertical
-            }}}
-          </div>
-          <div class="gi2">
-            {{localize "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.fly"}}
-          </div>
-          <div class="tcolored">
-            {{{lookup
-              TERIOCK.options.character.speedAdjustments
-              system.speedAdjustments.fly
-            }}}
-          </div>
-          <div class="gi2">
-            {{localize "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.dig"}}
-          </div>
-          <div class="tcolored">
-            {{{lookup
-              TERIOCK.options.character.speedAdjustments
-              system.speedAdjustments.dig
-            }}}
-          </div>
-          <div class="gi2">
-            {{localize "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.dive"}}
-          </div>
-          <div class="tcolored">
-            {{{lookup
-              TERIOCK.options.character.speedAdjustments
-              system.speedAdjustments.dive
-            }}}
-          </div>
+          {{#each TERIOCK.options.character.movementTypes as |name key|}}
+            <div class="gi2">
+              {{{name}}}
+            </div>
+            <div class="tcolored">
+              {{lookup
+                @root/TERIOCK.options.character.speedAdjustments
+                (lookup @root/system.speedAdjustments key)
+              }}
+              {{{lookup system.speedAdjustments key}}}
+            </div>
+          {{/each}}
         </div>
       </div>
       <div class="tgrid-item" style="display: flex; flex-direction: column; gap: 1em;">
@@ -168,7 +81,13 @@
                   value=system._source.size.number.raw
                   classes="character-size-input character-smallbox-value selected transparent-input"
                   dataset=(object
-                    tooltip=(concat (ucFirst system.size.category) ": " system.size.reach " " (localize "TERIOCK.SHEETS.Actor.TABS.Details.size.reach"))
+                    tooltip=(concat
+                      (ucFirst system.size.category)
+                      ": "
+                      system.size.reach
+                      " "
+                      (localize "TERIOCK.SHEETS.Actor.TABS.Details.size.reach")
+                    )
                     tooltipClass=""
                     tooltipDirection="DOWN")
                 }}
@@ -180,16 +99,19 @@
               </div>
               <div class="affix">
                 <div class="unselected">
-                  <span
-                    class="character-weight-input character-smallbox-value">{{{system.weight.self.value}}} {{localize
-                    "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}</span>
+                  <span class="character-weight-input character-smallbox-value">
+                    {{{system.weight.self.value}}} {{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}
+                  </span>
                 </div>
                 {{formInput
                   systemFields.weight.fields.self
                   value=system._source.weight.self.raw
                   classes="character-weight-input character-smallbox-value selected transparent-input"
                   dataset=(object
-                    tooltip=(localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.includingEquipment" value=system.weight.value)
+                    tooltip=(localize
+                      "TERIOCK.SHEETS.Actor.TABS.Details.weight.includingEquipment"
+                      value=system.weight.value
+                    )
                     tooltipClass=""
                     tooltipDirection=""
                   )
@@ -337,3 +259,4 @@
     </div>
   </div>
 </div>
+

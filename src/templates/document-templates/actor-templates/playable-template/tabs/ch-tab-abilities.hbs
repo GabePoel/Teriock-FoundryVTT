@@ -3,17 +3,34 @@
   <div class="character-tab-page teriock-block-results" data-search-key="abilities">
     <div class="teriock-block-display">
       <div class="teriock-block-options">
-        {{blockOptions
-          settings.menus.abilityOptions settings.menus.abilityFilters settings.menus.abilitySort
-          settings.abilityFilters.search "ability"
+        {{> (template "ui-templates/block-options.hbs")
+          tab="ability"
+          optionsToggle=settings.menus.abilityOptions
+          optionsPath="settings.menus.abilityOptions"
+          filterToggle=settings.menus.abilityFilters
+          filterPath="settings.menus.abilityFilters"
+          sortToggle=settings.menus.abilitySort
+          sortPath="settings.menus.abilitySort"
+          searchValue=settings.abilityFilters.search
+          searchKey="abilities"
           sortOptions=TERIOCK.options.display.abilitySortOrders
-          sortValue=settings.abilitySortOption showAddButton=false key="abilities"
+          sortValue=settings.abilitySortOption
+          sortOptionPath="settings.abilitySortOption"
           gaplessPath="flags.teriockDocumentSettings.sheetBlockAbilitiesGapless"
+          gaplessValue=flags.teriockDocumentSettings.sheetBlockAbilitiesGapless
           sizePath="flags.teriockDocumentSettings.sheetBlockAbilitiesSize"
+          sizeValue=flags.teriockDocumentSettings.sheetBlockAbilitiesSize
+          ascendingPath="settings.abilitySortAscending"
+          ascendingValue=settings.abilitySortAscending
+          tabDisplay=TERIOCK.options.document.ability.name
         }}
         {{#if settings.menus.abilityFilters}}
           <div class="teriock-block-options-content">
-            {{> (template "document-templates/actor-templates/playable-template/filters/ch-ability-filter.hbs")}}
+            {{> (template "ui-templates/filters.hbs")
+              appId=appId
+              filterSelects=abilityFilterSelects
+              filterToggles=abilityFilterToggles
+            }}
           </div>
         {{/if}}
       </div>

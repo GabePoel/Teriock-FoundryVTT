@@ -42,7 +42,8 @@ export default (Base) =>
           (!filters.interaction ||
             a.system.interaction === filters.interaction) &&
           (!filters.delivery || a.system.delivery.base === filters.delivery) &&
-          (!filters.piercing || a.system.piercing === filters.piercing) &&
+          (!filters.piercing ||
+            a.system.piercing.raw === Number(filters.piercing)) &&
           (!filters.target ||
             (a.system.targets || new Set()).has(filters.target)) &&
           (!filters.powerSource ||
@@ -77,7 +78,10 @@ export default (Base) =>
             e.effectKeys.property.has(filters.magicalProperties)) &&
           binaryFilter(filters.equipped, e.system.equipped) &&
           binaryFilter(filters.shattered, e.system.shattered) &&
-          binaryFilter(filters.identified, e.system.identified) &&
+          binaryFilter(
+            filters.identified,
+            e.system.identification.identified,
+          ) &&
           binaryFilter(filters.consumable, e.system.consumable) &&
           (!filters.powerLevel || e.system.powerLevel === filters.powerLevel) &&
           (!filters.equipmentClasses ||
