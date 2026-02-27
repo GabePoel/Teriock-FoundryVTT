@@ -22,6 +22,10 @@ export default function BaseApplicationMixin(Base) {
     async _onRender(options = {}) {
       await super._onRender(options);
       bindCommonActions(this.element);
+      this.element.querySelectorAll("[data-never-disable]").forEach(
+        /** @param {HTMLButtonElement|HTMLInputElement} e */
+        (e) => (e.disabled = false),
+      );
     }
 
     /** @inheritDoc */

@@ -41,7 +41,7 @@ export default function registerUiHelpers() {
     ];
     return new Handlebars.SafeString(`
       <div class="tswitch">
-        <button class="tswitch-bg" ${attrs.join(" ")}>
+        <button class="tswitch-bg" ${attrs.join(" ")} data-never-disable="true">
           <div class="tcircle"></div>
         </button>
       </div>
@@ -149,13 +149,7 @@ export default function registerUiHelpers() {
       const gaplessValue = foundry.utils.getProperty(context, gaplessPath);
       const sizeValue = foundry.utils.getProperty(context, sizePath);
       const ascendingValue = foundry.utils.getProperty(context, ascendingPath);
-
       const sizeOptions = TERIOCK.options.display.sizes ?? {};
-      const sortSelectHTML = foundry.utils.escapeHTML(
-        selectOptions(sortOptions, {
-          hash: { selected: sortValue },
-        })?.toHTML?.() ?? "",
-      );
 
       const tabDisplay =
         TERIOCK.options.document[tab]?.name ||
@@ -182,6 +176,7 @@ export default function registerUiHelpers() {
             data-path="${sortPath}"
             data-action="sheetToggle"
             data-tooltip="${game.i18n.localize("TERIOCK.SHEETS.Common.SEARCH.sortResults")}"
+            data-never-disable="true"
           >
             <i class="fa-fw fa-solid fa-bars-sort"></i>
           </button>`
@@ -197,6 +192,7 @@ export default function registerUiHelpers() {
             data-path="${filterPath}"
             data-action="sheetToggle"
             data-tooltip="${game.i18n.localize("TERIOCK.SHEETS.Common.SEARCH.filterResults")}"
+            data-never-disable="true"
           >
             <i class="fa-fw fa-solid fa-filter"></i>
           </button>`
@@ -208,6 +204,7 @@ export default function registerUiHelpers() {
           type="search"
           placeholder="${game.i18n.localize("TERIOCK.SHEETS.Common.SEARCH.placeholder")}"
           data-type="${tab}"
+          data-never-disable="true"
           ${searchKey}
         >
 
@@ -237,9 +234,9 @@ export default function registerUiHelpers() {
             <div class="tgrid-item">
               <label for="${tab}-gapless">${game.i18n.localize("TERIOCK.SHEETS.Common.SEARCH.gapless")}</label>
               <input 
+                id="${tab}-gapless"
                 type="checkbox"
                 name="${gaplessPath}"
-                id="${tab}-gapless"
                 ${checked(gaplessValue)}
               >
             </div>
@@ -262,21 +259,25 @@ export default function registerUiHelpers() {
             <div class="tgrid-item">
               <label for="${tab}-ascending">${game.i18n.localize("TERIOCK.SHEETS.Common.SEARCH.ascending")}</label>
               <input
+                id="${tab}-ascending" ${checked(ascendingValue)}
                 type="checkbox" 
                 data-action="sheetToggle" 
                 data-bool="${ascendingValue}" 
                 data-path="${ascendingPath}" 
-                id="${tab}-ascending" ${checked(ascendingValue)}
+                data-never-disable="true"
               >
             </div>
             <div class="tgrid-item gi3">
-              <select 
-                data-action="sheetSelect" 
-                data-path="settings.${tab}SortOption" 
+              <select
+                data-action="sheetSelect"
+                data-path="settings.${tab}SortOption"
+                data-never-disable="true"
                 id="${tab}-sort"
-                ${selectOptions(sortOptions, { hash: { selected: sortValue } })}
               >
-                ${sortSelectHTML}
+                ${Object.entries(sortOptions).map(
+                  ([k, v]) =>
+                    `<option value='${k}' ${k === sortValue ? "selected" : ""}>${v}</option>`,
+                )}
               </select>
             </div>
           </div>

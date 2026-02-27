@@ -30,7 +30,7 @@ export default (Base) =>
           binaryFilter(filters.rotator, a.system.rotator) &&
           binaryFilter(filters.sustained, a.system.sustained) &&
           binaryFilter(filters.heightened, a.system.heightened) &&
-          binaryFilter(filters.expansion, a.system.expansion) &&
+          binaryFilter(filters.expansion, a.system.expansion.type) &&
           binaryFilter(filters.verbal, a.system.costs.verbal) &&
           binaryFilter(filters.somatic, a.system.costs.somatic) &&
           binaryFilter(filters.material, a.system.costs.material) &&
