@@ -1,28 +1,5 @@
 <div class="ab-bar">
-  {{formBox
-    (concat
-      system.statDice.hp.formula
-      (localize "TERIOCK.SYSTEMS.StatGiver.FIELDS.statDice.hp.label")
-      " (" system.statDice.hp.value " "
-      (localize "TERIOCK.STATS.hp.abbreviation") ")"
-    )
-    action="setStatDice"
-    dataset=(object stat="hp")
-    icon=(firstDie system.statDice.hp.formula)
-    tooltip=(localize "TERIOCK.SYSTEMS.StatGiver.FIELDS.statDice.hp.label")
-  }}
-  {{formBox
-    (concat
-      system.statDice.mp.formula " "
-      (localize "TERIOCK.SYSTEMS.StatGiver.FIELDS.statDice.hp.label")
-      " (" system.statDice.mp.value " "
-      (localize "TERIOCK.STATS.mp.abbreviation") ")"
-    )
-    action="setStatDice"
-    dataset=(object stat="mp")
-    icon=(firstDie system.statDice.mp.formula)
-    tooltip=(localize "TERIOCK.SYSTEMS.StatGiver.FIELDS.statDice.mp.label")
-  }}
+  {{> (template "document-templates/forms/stat-forms.hbs")}}
   {{formBox
     (formInput
       systemFields.br

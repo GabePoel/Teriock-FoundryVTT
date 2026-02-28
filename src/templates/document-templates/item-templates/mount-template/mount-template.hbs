@@ -3,20 +3,9 @@
     <div class="ab-sheet-top">
       {{> (template "document-templates/shared/header.hbs")}}
       <div class="ab-bars">
-        {{> (template "document-templates/item-templates/rank-template/bars/rk-bar-stats.hbs" )}}
+        <div class="ab-bar">{{> (template "document-templates/forms/stat-forms.hbs")}}</div>
         <div class="ab-bar">
-          {{formBox
-            (formInput
-              systemFields.tier
-              value=system._source.tier.raw
-              disabled=(not editable)
-              placeholder="0"
-            )
-            icon=TERIOCK.display.icons.attunable.tier
-            label=(localize "TERIOCK.SYSTEMS.Attunable.FIELDS.tier.raw.abbreviation")
-            tooltip=(localize "TERIOCK.SYSTEMS.Attunable.FIELDS.tier.raw.label")
-            unselected=(ifThen system.tier.raw system.tier.value "")
-          }}
+          {{> (template "document-templates/forms/tier-form.hbs")}}
           {{formBox
             (formInput
               systemFields.mountType

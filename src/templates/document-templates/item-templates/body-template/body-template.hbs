@@ -3,76 +3,9 @@
     <div class="ab-sheet-top">
       {{> (template "document-templates/shared/header.hbs")}}
       <div class="ab-bars">
-        {{#if
-          (or
-            (exists system.av.raw)
-            (exists system.bv.raw)
-            (exists system.damage.base.raw)
-          )
-        }}
-          <div class="ab-bar">
-            {{formBox
-              (formInput
-                systemFields.damage.fields.base
-                disabled=(not editable)
-                value=system._source.damage.base.raw
-              )
-              icon=(firstDie system.damage.base.formula)
-              include=(exists system.damage.base.raw)
-              label=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.damage.base.raw.abbreviation")
-              tooltip=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.damage.base.raw.label")
-            }}
-            {{formBox
-              (formInput
-                systemFields.av
-                disabled=(not editable)
-                value=system._source.av.raw
-              )
-              icon=TERIOCK.display.icons.armament.av
-              include=(exists system.av.raw)
-              label=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.av.raw.abbreviation")
-              unselected=system.av.value
-              tooltip=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.av.raw.label")
-            }}
-            {{formBox
-              (formInput
-                systemFields.bv
-                disabled=(not editable)
-                value=system._source.bv.raw
-              )
-              icon=TERIOCK.display.icons.armament.bv
-              include=(exists system.bv.raw)
-              label=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.bv.raw.abbreviation")
-              unselected=system.bv.value
-              tooltip=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.bv.raw.label")
-            }}
-            {{formBox
-              (formInput
-                systemFields.hit
-                disabled=(not editable)
-                value=system._source.hit.raw
-              )
-              icon=TERIOCK.display.icons.armament.hitBonus
-              include=(exists system.hit.raw)
-              label=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.hit.raw.abbreviation")
-              unselected=system.hit.raw
-              tooltip=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.hit.raw.label")
-            }}
-            {{formBox
-              (formInput
-                systemFields.attackPenalty
-                disabled=(not editable)
-                value=system._source.attackPenalty.raw
-              )
-              icon=TERIOCK.display.icons.armament.ap
-              label=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.attackPenalty.raw.abbreviation")
-              unselected=system.attackPenalty.formula
-              tooltip=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.attackPenalty.raw.label")
-            }}
-          </div>
-        {{/if}}
+        {{> (template "document-templates/forms/armament-bars.hbs")}}
       </div>
-      {{> (template "document-templates/item-templates/body-template/parts/bo-menu.hbs")}}
+      {{> (template "document-templates/item-templates/body-template/body-menu.hbs")}}
     </div>
     <div class="ab-main">
       {{> (template "document-templates/shared/tags.hbs")}}

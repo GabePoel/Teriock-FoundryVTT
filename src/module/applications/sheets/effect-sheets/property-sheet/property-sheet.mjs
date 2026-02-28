@@ -43,7 +43,7 @@ export default class PropertySheet extends mix(
       return;
     }
     this._connectBuildContextMenu(
-      ".property-type-box",
+      ".form-type-box",
       TERIOCK.options.ability.form,
       "system.form",
       "click",

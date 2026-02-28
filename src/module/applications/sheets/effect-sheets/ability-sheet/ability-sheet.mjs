@@ -64,7 +64,7 @@ export default class AbilitySheet extends mix(
       [".expansion-box", cm.expansion, "click"],
       [".expansion-box-detonate", cm.expansionSaveAttribute, "contextmenu"],
       [".expansion-box-ripple", cm.expansionSaveAttribute, "contextmenu"],
-      [".ability-type-box", cm.form, "click"],
+      [".form-type-box", cm.form, "click"],
     ];
 
     for (const [selector, opts, evt] of contextMap) {

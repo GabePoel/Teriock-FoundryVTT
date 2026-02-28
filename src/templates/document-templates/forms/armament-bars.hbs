@@ -1,9 +1,8 @@
 {{#if
   (or
-    (exists system.av.raw)
-    (exists system.bv.raw)
     (exists system.damage.base.raw)
-    (exists system.range.long.raw)
+    (exists system.attackPenalty.raw)
+    (exists system.hit.raw)
   )
 }}
   <div class="ab-bar">
@@ -34,6 +33,38 @@
     }}
     {{formBox
       (formInput
+        systemFields.hit
+        disabled=(not editable)
+        value=system._source.hit.raw
+      )
+      icon=TERIOCK.display.icons.armament.hitBonus
+      include=(exists system.hit.raw)
+      label=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.hit.raw.abbreviation")
+      unselected=system.hit.raw
+      tooltip=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.hit.raw.label")
+    }}
+    {{formBox
+      (formInput
+        systemFields.attackPenalty
+        disabled=(not editable)
+        value=system._source.attackPenalty.raw
+      )
+      icon=TERIOCK.display.icons.armament.ap
+      label=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.attackPenalty.raw.abbreviation")
+      unselected=system.attackPenalty.formula
+      tooltip=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.attackPenalty.raw.label")
+    }}
+  </div>
+{{/if}}
+{{#if
+  (or
+    (exists system.av.raw)
+    (exists system.bv.raw)
+  )
+}}
+  <div class="ab-bar">
+    {{formBox
+      (formInput
         systemFields.av
         disabled=(not editable)
         value=system._source.av.raw
@@ -55,29 +86,6 @@
       label=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.bv.raw.abbreviation")
       unselected=system.bv.value
       tooltip=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.bv.raw.label")
-    }}
-    {{formBox
-      (formInput
-        systemFields.hit
-        disabled=(not editable)
-        value=system._source.hit.raw
-      )
-      icon=TERIOCK.display.icons.armament.hitBonus
-      include=(exists system.hit.raw)
-      label=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.hit.raw.abbreviation")
-      unselected=system.hit.raw
-      tooltip=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.hit.raw.label")
-    }}
-    {{formBox
-      (formInput
-        systemFields.attackPenalty
-        disabled=(not editable)
-        value=system._source.attackPenalty.raw
-      )
-      icon=TERIOCK.display.icons.armament.ap
-      label=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.attackPenalty.raw.abbreviation")
-      unselected=system.attackPenalty.formula
-      tooltip=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.attackPenalty.raw.label")
     }}
   </div>
 {{/if}}

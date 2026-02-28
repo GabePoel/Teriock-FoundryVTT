@@ -33,13 +33,19 @@
   {{formBox
     (concat
       "<span style='flex: auto;' data-tooltip='"
-      (ifThen (not (eq system.range.long.unitType "zero")) "Long Range" "")
+      (ifThen
+        (not (eq system.range.long.unitType "zero"))
+        (localize "TERIOCK.SYSTEMS.Armament.FIELDS.range.long.raw.alt")
+        ""
+      )
       "' data-path='system.range.long' data-action='updateUnit'>"
       (ifThen (eq system.range.long.unitType "finite") system.range.long.formula system.range.long.text)
       "</span>"
     )
     secondary=(concat
-      "<span style='flex: auto;' data-tooltip='Short Range' data-path='system.range.short' data-action='updateUnit'>"
+      "<span style='flex: auto;' data-tooltip='"
+      (localize "TERIOCK.SYSTEMS.Armament.FIELDS.range.short.raw.label")
+      "' data-path='system.range.short' data-action='updateUnit'>"
       (ifThen (eq system.range.short.unitType "finite") system.range.short.formula system.range.short.text)
       "</span>"
     )

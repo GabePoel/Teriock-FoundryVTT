@@ -1,0 +1,31 @@
+{{#if system.consumable}}
+  <div class="ab-bar">
+    {{formBox
+      (formInput
+        systemFields.quantity
+        disabled=(not editable)
+        value=system.quantity
+      )
+      icon=TERIOCK.display.icons.ui.quantity
+      unselected=(localize "TERIOCK.SYSTEMS.Consumable.EMBED.remaining" value=system.quantity)
+      tooltip=(localize "TERIOCK.SYSTEMS.Consumable.FIELDS.quantity.label")
+    }}
+    {{formBox
+      (formInput
+        systemFields.maxQuantity
+        disabled=(not editable)
+        value=system._source.maxQuantity.raw
+      )
+      icon=TERIOCK.display.icons.ui.maximum
+      unselected=(ifThen
+        system.maxQuantity.raw
+        (localize
+          "TERIOCK.SYSTEMS.Consumable.PANELS.max"
+          value=system.maxQuantity.value
+        )
+        (localize "TERIOCK.SYSTEMS.Consumable.PANELS.noMax")
+      )
+      tooltip=(localize "TERIOCK.SYSTEMS.Consumable.FIELDS.maxQuantity.raw.label")
+    }}
+  </div>
+{{/if}}

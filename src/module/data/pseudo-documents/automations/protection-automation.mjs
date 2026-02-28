@@ -83,7 +83,9 @@ export default class ProtectionAutomation extends CritAutomation {
   /** @inheritDoc */
   async getEditor() {
     const html = await TeriockTextEditor.renderTemplate(
-      systemPath("templates/document-templates/shared/protection-config.hbs"),
+      systemPath(
+        "templates/document-templates/automations/protection-config.hbs",
+      ),
       {
         category: this.category,
         choices: this._choices,

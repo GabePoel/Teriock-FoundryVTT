@@ -1,11 +1,5 @@
 <div class="ab-bar">
-  {{formBox
-    (path TERIOCK.options.ability.form system.form "name")
-    icon=(path TERIOCK.options.ability.form system.form "icon")
-    iconColor=(path TERIOCK.options.ability.form system.form "color")
-    tooltip=(localize "TERIOCK.SYSTEMS.BaseEffect.FIELDS.form.label")
-    classes=(ifThen editable "property-type-box" "")
-  }}
+  {{> (template "document-templates/forms/form-form.hbs")}}
   {{formBox
     (formInput
       systemFields.damageType
@@ -16,14 +10,5 @@
     tooltip=(localize "TERIOCK.SYSTEMS.Property.FIELDS.damageType.label")
     icon=TERIOCK.display.icons.ui.damage
   }}
-  {{formBox
-    (formInput
-      systemFields.tag
-      value=system.tag
-      disabled=(not editable)
-      placeholder=(localize "TERIOCK.SYSTEMS.BaseEffect.FIELDS.tag.placeholder")
-    )
-    tooltip=(localize "TERIOCK.SYSTEMS.BaseEffect.FIELDS.tag.label")
-    icon=TERIOCK.display.icons.ui.tag
-  }}
+  {{> (template "document-templates/forms/tag-form.hbs")}}
 </div>
