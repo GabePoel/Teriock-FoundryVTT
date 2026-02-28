@@ -20,9 +20,7 @@ export default class InventorySheet extends BaseActorSheet {
 
   static PARTS = {
     all: {
-      template: systemPath(
-        "templates/sheets/actors/inventory/inventory.hbs",
-      ),
+      template: systemPath("templates/sheets/actors/inventory/inventory.hbs"),
       scrollable: [""],
     },
   };
