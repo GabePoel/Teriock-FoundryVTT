@@ -1,4 +1,9 @@
-import { toCamelCase, toId, toKebabCase } from "../../helpers/string.mjs";
+import {
+  toCamelCase,
+  toId,
+  toKebabCase,
+  ucFirst,
+} from "../../helpers/string.mjs";
 import { roundTo } from "../../helpers/unit.mjs";
 
 export default function registerStringHelpers() {
@@ -10,12 +15,7 @@ export default function registerStringHelpers() {
     typeof str === "string" ? str.toUpperCase() : "",
   );
 
-  Handlebars.registerHelper("ucFirst", (str) => {
-    if (typeof str !== "string") {
-      return "";
-    }
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  });
+  Handlebars.registerHelper("ucFirst", ucFirst);
 
   Handlebars.registerHelper("length", (str) =>
     typeof str === "string" ? str.length : 0,
@@ -97,7 +97,7 @@ export default function registerStringHelpers() {
     );
   });
 
-  Handlebars.registerHelper("toCamelCase", (str) => toCamelCase(str));
+  Handlebars.registerHelper("toCamelCase", toCamelCase);
 
-  Handlebars.registerHelper("toKebabCase", (str) => toKebabCase(str));
+  Handlebars.registerHelper("toKebabCase", toKebabCase);
 }

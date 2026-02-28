@@ -1,3 +1,4 @@
+import { ucFirst } from "../../helpers/string.mjs";
 import { makeIconClass } from "../../helpers/utils.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
 
@@ -28,11 +29,21 @@ export default async function setStatDiceDialog(pool) {
       value: pool.faces,
     },
   );
+  const canToggle = pool.parent[`_canToggle${ucFirst(pool.stat)}Dice`];
+  const tooltip = !canToggle
+    ? game.i18n.localize("TERIOCK.SYSTEMS.StatGiver.DIALOG.cantToggle")
+    : "";
+  const dataset = {};
+  if (tooltip.length > 0) {
+    dataset.tooltip = tooltip;
+  }
   const disabledForm = pool.schema.fields.disabled.toFormGroup(
     { rootId: foundry.utils.randomID() },
     {
       name: "disabled",
       value: pool.disabled,
+      disabled: !canToggle,
+      dataset,
     },
   );
   const contentElement = document.createElement("div");

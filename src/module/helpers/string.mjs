@@ -186,8 +186,8 @@ export function dedent(str) {
 
 /**
  * Make the first character of a string upper case.
- * @param {string} str
- * @returns {string}
+ * @param {string} str - The string to convert.
+ * @returns {string} - The modified string.
  */
 export function ucFirst(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);

@@ -91,23 +91,13 @@ export default class SpeciesSystem extends mix(
   }
 
   /** @inheritDoc */
-  get _canDisableHpDice() {
-    return super._canDisableHpDice && !this._isInactiveTransformation;
+  get _canToggleHpDice() {
+    return super._canToggleHpDice && !this._isInactiveTransformation;
   }
 
   /** @inheritDoc */
-  get _canDisableMpDice() {
-    return super._canDisableMpDice && !this._isInactiveTransformation;
-  }
-
-  /** @inheritDoc */
-  get _canEnableHpDice() {
-    return super._canEnableHpDice && !this._isInactiveTransformation;
-  }
-
-  /** @inheritDoc */
-  get _canEnableMpDice() {
-    return super._canEnableMpDice && !this._isInactiveTransformation;
+  get _canToggleMpDice() {
+    return super._canToggleMpDice && !this._isInactiveTransformation;
   }
 
   /**

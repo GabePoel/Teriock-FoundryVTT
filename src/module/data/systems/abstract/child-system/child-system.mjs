@@ -1,3 +1,4 @@
+import { ucFirst } from "../../../../helpers/string.mjs";
 import { fancifyFields, makeIcon } from "../../../../helpers/utils.mjs";
 import { EvaluationField, TextField } from "../../../fields/_module.mjs";
 import { ChildSettingsModel } from "../../../models/settings-models/_module.mjs";
@@ -339,9 +340,7 @@ export default class ChildSystem extends UsableDataMixin(CommonSystem) {
     await this.parent.hookCall("use", data);
     if (data.cancel) return;
     Hooks.callAll(
-      "teriock.use" +
-        this.parent.type.charAt(0).toUpperCase() +
-        this.parent.type.slice(1),
+      "teriock.use" + ucFirst(this.parent.type) + this.parent.type.slice(1),
       [this.parent],
     );
     await super.use(options);

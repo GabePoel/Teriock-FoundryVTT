@@ -11,6 +11,7 @@ import {
   toCamelCase,
   toKebabCase,
   toTitleCase,
+  ucFirst,
 } from "../../helpers/string.mjs";
 import { makeIconElement } from "../../helpers/utils.mjs";
 
@@ -165,7 +166,7 @@ const lookupEnricher = {
         text = toKebabCase(text);
         break;
       case "ucf":
-        text = text.charAt(0).toUpperCase() + text.slice(1);
+        text = ucFirst(text);
         break;
     }
 

@@ -79,6 +79,22 @@ export default function StatGiverSystemMixin(Base) {
         return this.statDice.mp.disabled;
       }
 
+      /**
+       * Whether the HP dice can be toggled disabled/enabled.
+       * @returns {boolean}
+       */
+      get _canToggleHpDice() {
+        return true;
+      }
+
+      /**
+       * Whether the MP dice can be toggled disabled/enabled.
+       * @returns {boolean}
+       */
+      get _canToggleMpDice() {
+        return true;
+      }
+
       /** @returns {Teriock.MessageData.MessageBar} */
       get _statBar() {
         return {
@@ -116,7 +132,7 @@ export default function StatGiverSystemMixin(Base) {
                 "system.statDice.hp.disabled": false,
               });
             },
-            condition: this._canEnableHpDice,
+            condition: this.statDice.hp.disabled && this._canToggleHpDice,
             group: "control",
           },
           {
@@ -127,7 +143,7 @@ export default function StatGiverSystemMixin(Base) {
             callback: async () => {
               await this.parent.update({ "system.statDice.hp.disabled": true });
             },
-            condition: this._canDisableHpDice,
+            condition: !this.statDice.hp.disabled && this._canToggleHpDice,
             group: "control",
           },
           {
@@ -140,7 +156,7 @@ export default function StatGiverSystemMixin(Base) {
                 "system.statDice.mp.disabled": false,
               });
             },
-            condition: this._canEnableMpDice,
+            condition: this.statDice.mp.disabled && this._canToggleMpDice,
             group: "control",
           },
           {
@@ -151,7 +167,7 @@ export default function StatGiverSystemMixin(Base) {
             callback: async () => {
               await this.parent.update({ "system.statDice.mp.disabled": true });
             },
-            condition: this._canDisableMpDice,
+            condition: !this.statDice.mp.disabled && this._canToggleMpDice,
             group: "control",
           },
         );

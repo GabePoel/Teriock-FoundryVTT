@@ -78,23 +78,13 @@ export default class RankSystem extends mix(
   }
 
   /** @inheritDoc */
-  get _canDisableHpDice() {
-    return super._canDisableHpDice && !this.innate;
+  get _canToggleHpDice() {
+    return super._canToggleHpDice && !this.innate;
   }
 
   /** @inheritDoc */
-  get _canDisableMpDice() {
-    return super._canDisableMpDice && !this.innate;
-  }
-
-  /** @inheritDoc */
-  get _canEnableHpDice() {
-    return super._canEnableHpDice && !this.innate;
-  }
-
-  /** @inheritDoc */
-  get _canEnableMpDice() {
-    return super._canEnableMpDice && !this.innate;
+  get _canToggleMpDice() {
+    return super._canToggleMpDice && !this.innate;
   }
 
   /** @inheritDoc */
@@ -116,14 +106,6 @@ export default class RankSystem extends mix(
     const parts = super.embedParts;
     parts.subtitle = TERIOCK.options.rank[this.archetype].name;
     return parts;
-  }
-
-  /**
-   * The singular hit die.
-   * @returns {StatDieModel}
-   */
-  get hpDie() {
-    return this.statDice.hp.dice[0];
   }
 
   /** @inheritDoc */
@@ -175,14 +157,6 @@ export default class RankSystem extends mix(
         ],
       },
     ];
-  }
-
-  /**
-   * The singular mana die.
-   * @returns {StatDieModel}
-   */
-  get mpDie() {
-    return this.statDice.mp.dice[0];
   }
 
   /** @inheritDoc */
