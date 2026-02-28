@@ -393,8 +393,8 @@ export default function HierarchyDocumentMixin(Base) {
       }
 
       /** @inheritDoc */
-      _onDelete(data, options, userId) {
-        super._onDelete(data, options, userId);
+      _onDelete(options, userId) {
+        super._onDelete(options, userId);
         this.#renderSupSheets();
       }
 

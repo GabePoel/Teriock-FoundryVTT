@@ -174,7 +174,11 @@ export default function BaseDocumentMixin(Base) {
           rejectClose: false,
         });
         if (remove) {
-          await this.delete();
+          if (typeof this.system?.deleteThis === "function") {
+            await this.system.deleteThis();
+          } else {
+            await this.delete();
+          }
         }
       }
     }

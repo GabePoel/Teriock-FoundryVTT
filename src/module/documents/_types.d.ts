@@ -96,6 +96,7 @@ declare global {
       preservedProperties: string[];
       pseudos: Record<string, string>;
       revealable: boolean;
+      stats: boolean;
       tooltip: boolean;
       type: Teriock.Documents.CommonType;
       usable: boolean;

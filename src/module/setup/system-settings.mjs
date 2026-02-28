@@ -182,6 +182,14 @@ export function registerSettings() {
         new fields.DocumentUUIDField({ type: "JournalEntry" }),
       ),
     },
+    automaticallyExpireSustainedConsequences: {
+      config: true,
+      default: true,
+      hint: "TERIOCK.SETTINGS.automaticallyExpireSustainedConsequences.hint",
+      name: "TERIOCK.SETTINGS.automaticallyExpireSustainedConsequences.name",
+      scope: "world",
+      type: Boolean,
+    },
     armorSuppressesRanks: {
       config: true,
       default: false,

@@ -77,20 +77,6 @@ export default class BodySystem extends mix(
   }
 
   /** @inheritDoc */
-  get makeSuppressed() {
-    let suppressed = super.makeSuppressed;
-    if (this.actor && this.actor.system.isTransformed) {
-      if (
-        this.parent.elder?.documentName === "Actor" &&
-        this.actor.system.transformation.suppression.bodyParts
-      ) {
-        suppressed = true;
-      }
-    }
-    return suppressed;
-  }
-
-  /** @inheritDoc */
   get panelParts() {
     return {
       ...super.panelParts,

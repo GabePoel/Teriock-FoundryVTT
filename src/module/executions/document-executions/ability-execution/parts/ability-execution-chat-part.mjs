@@ -170,6 +170,9 @@ export default function AbilityExecutionChatPart(Base) {
               description: this.source.system.endCondition,
             },
             heightened: this.heightened,
+            identifier:
+              (this.source.system.identifier || this.source.defaultIdentifier) +
+              "-effect",
             impacts: {
               changes: this.#generateConsequenceChanges(crit),
             },

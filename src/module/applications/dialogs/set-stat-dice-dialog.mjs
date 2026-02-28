@@ -60,7 +60,7 @@ export default async function setStatDiceDialog(pool) {
         if (
           number !== pool.number._source.raw ||
           faces !== pool.faces ||
-          disabled === pool.disabled
+          disabled !== pool.disabled
         ) {
           await pool.update({
             "number.raw": number,

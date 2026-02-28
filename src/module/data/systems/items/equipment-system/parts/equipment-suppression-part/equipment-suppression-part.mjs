@@ -32,7 +32,9 @@ export default (Base) => {
             i.action?.toLowerCase().includes("attuned"),
           ),
           {
-            icon: this.dampened ? "bell-slash" : "bell",
+            icon: this.dampened
+              ? TERIOCK.display.icons.equipment.dampen
+              : TERIOCK.display.icons.equipment.undampen,
             action: "toggleDampenedDoc",
             tooltip: this.dampened
               ? game.i18n.localize(
@@ -77,16 +79,7 @@ export default (Base) => {
 
       /** @inheritDoc */
       get makeSuppressed() {
-        let suppressed = super.makeSuppressed || !this.equipped;
-        if (this.actor && this.actor.system.isTransformed) {
-          if (
-            this.parent.elder?.documentName === "Actor" &&
-            this.actor.system.transformation.suppression.equipment
-          ) {
-            suppressed = true;
-          }
-        }
-        return suppressed;
+        return super.makeSuppressed || !this.equipped || this.stashed;
       }
 
       /**

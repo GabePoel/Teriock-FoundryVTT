@@ -45,7 +45,7 @@ export default function TransformationSystemMixin(Base) {
       }
 
       /**
-       * Whether this consequence is a transformation.
+       * Whether this effect is a transformation.
        * @returns {boolean}
        */
       get isTransformation() {
@@ -78,20 +78,159 @@ export default function TransformationSystemMixin(Base) {
        * @returns {TeriockSpecies[]}
        */
       get species() {
+        if (!this.actor || !this.isTransformation) return [];
         return /** @type {TeriockSpecies[]} */ this.transformation.species
           .map((id) => this.actor.items.get(id))
           .filter((s) => s);
       }
 
+      /**
+       * Apply transformation suppression and stat-dice updates using flags built by {@link _buildTransformationFlags}.
+       * @returns {Promise<void>}
+       */
+      async _applyTransformationUpdates() {
+        if (!this.actor) return;
+        const hasItem = (id) => this.actor.items.has(id);
+        const hasEffect = (id) => this.actor.effects.has(id);
+        const stashedEquipment = (
+          this.parent.getFlag("teriock", "stashedEquipment") ?? []
+        ).filter(hasItem);
+        const disabledEffects = (
+          this.parent.getFlag("teriock", "disabledEffects") ?? []
+        ).filter(hasEffect);
+        const disabledItems = (
+          this.parent.getFlag("teriock", "disabledItems") ?? []
+        ).filter(hasItem);
+        const disabledHpDiceItems = (
+          this.parent.getFlag("teriock", "disabledHpDiceItems") ?? []
+        ).filter(hasItem);
+        const disabledMpDiceItems = (
+          this.parent.getFlag("teriock", "disabledMpDiceItems") ?? []
+        ).filter(hasItem);
+
+        /** @type {Record<string, object>} */
+        const itemUpdatesById = {};
+        for (const id of stashedEquipment) {
+          if (!itemUpdatesById[id]) itemUpdatesById[id] = { _id: id };
+          itemUpdatesById[id]["system.stashed"] = true;
+        }
+        for (const id of disabledItems) {
+          if (!itemUpdatesById[id]) itemUpdatesById[id] = { _id: id };
+          itemUpdatesById[id]["system.disabled"] = true;
+        }
+        for (const id of disabledHpDiceItems) {
+          if (!itemUpdatesById[id]) itemUpdatesById[id] = { _id: id };
+          itemUpdatesById[id]["system.statDice.hp.disabled"] = true;
+        }
+        for (const id of disabledMpDiceItems) {
+          if (!itemUpdatesById[id]) itemUpdatesById[id] = { _id: id };
+          itemUpdatesById[id]["system.statDice.mp.disabled"] = true;
+        }
+        const itemUpdates = Object.values(itemUpdatesById);
+
+        const effectUpdates = disabledEffects.map((id) => ({
+          _id: id,
+          disabled: true,
+        }));
+
+        if (itemUpdates.length) {
+          await this.actor.updateEmbeddedDocuments("Item", itemUpdates);
+        }
+        if (effectUpdates.length) {
+          await this.actor.updateEmbeddedDocuments(
+            "ActiveEffect",
+            effectUpdates,
+          );
+        }
+      }
+
+      _buildTransformationFlags() {
+        const stashedEquipment = [];
+        const disabledEffects = [];
+        const disabledItems = [];
+        const disabledHpDiceItems = [];
+        const disabledMpDiceItems = [];
+
+        const typeMap = this.actor.children.typeMap;
+        if (this.transformation.suppression.equipment) {
+          stashedEquipment.push(
+            ...(typeMap.equipment?.filter((e) => !e.system.stashed) || []).map(
+              (e) => e.id,
+            ),
+          );
+        }
+        if (this.transformation.suppression.fluencies) {
+          disabledEffects.push(
+            ...(typeMap.fluency?.filter((f) => !f.disabled) || []).map(
+              (f) => f.id,
+            ),
+          );
+        }
+        if (this.transformation.suppression.bodyParts) {
+          disabledItems.push(
+            ...(typeMap.body?.filter((b) => !b.system.disabled) || []).map(
+              (b) => b.id,
+            ),
+          );
+        }
+        if (this.transformation.suppression.ranks) {
+          disabledItems.push(
+            ...(typeMap.rank?.filter((r) => !r.system.disabled) || []).map(
+              (r) => r.id,
+            ),
+          );
+        }
+        disabledItems.push(
+          ...(
+            typeMap.species?.filter(
+              (s) =>
+                !s.system.disabled &&
+                !this.transformation.species.includes(s.id),
+            ) || []
+          ).map((s) => s.id),
+        );
+        const statItems = this.actor.items.contents.filter(
+          (i) => i.system.metadata.stats,
+        );
+        if (this.transformation.resetHp) {
+          disabledHpDiceItems.push(
+            ...statItems
+              .filter((i) => !i.system.statDice.hp.disabled)
+              .map((i) => i.id),
+          );
+        }
+        if (this.transformation.resetMp) {
+          disabledMpDiceItems.push(
+            ...statItems
+              .filter((i) => !i.system.statDice.mp.disabled)
+              .map((i) => i.id),
+          );
+        }
+
+        return {
+          teriock: {
+            disabledEffects,
+            disabledHpDiceItems,
+            disabledItems,
+            disabledMpDiceItems,
+            stashedEquipment,
+            preTransformHp: this.actor.system.hp.value,
+            preTransformMp: this.actor.system.mp.value,
+          },
+        };
+      }
+
       /** @inheritDoc */
       _onCreate(data, options, userId) {
         super._onCreate(data, options, userId);
-        if (game.user.id !== userId) {
+        if (
+          !this.parent.checkEditor(userId) ||
+          !this.isTransformation ||
+          !this.actor
+        ) {
           return;
         }
-        if (!this.isTransformation || !this.parent.actor) {
-          return;
-        }
+        this._applyTransformationUpdates().then();
         const actor = this.parent.actor;
         const updateData = {
           "system.transformation.primary": this.parent.id,
@@ -109,21 +248,64 @@ export default function TransformationSystemMixin(Base) {
       }
 
       /** @inheritDoc */
+      _onDelete(options, userId) {
+        super._onDelete(options, userId);
+        if (
+          !this.parent.checkEditor(userId) ||
+          !this.isTransformation ||
+          !this.actor
+        ) {
+          return;
+        }
+        this._removeTransformationUpdates().then();
+      }
+
+      /** @inheritDoc */
+      _onUpdate(changed, options, userId) {
+        super._onUpdate(changed, options, userId);
+        if (
+          !this.parent.checkEditor(userId) ||
+          !this.isTransformation ||
+          !this.actor
+        ) {
+          return;
+        }
+        if (foundry.utils.hasProperty(changed, "disabled")) {
+          if (this.parent.disabled) {
+            this._removeTransformationUpdates().then();
+          } else {
+            this._applyTransformationUpdates().then(() => {
+              if (this.transformation.resetHp || this.transformation.resetMp) {
+                const updateData = {};
+                if (this.transformation.resetHp) {
+                  updateData["system.hp.value"] = this.parent.getFlag(
+                    "teriock",
+                    "transformationHp",
+                  );
+                }
+                if (this.transformation.resetMp) {
+                  updateData["system.mp.value"] = this.parent.getFlag(
+                    "teriock",
+                    "transformationMp",
+                  );
+                }
+                if (Object.keys(updateData).length && this.actor) {
+                  return this.actor.update(updateData);
+                }
+              }
+            });
+          }
+        }
+      }
+
+      /** @inheritDoc */
       async _preCreate(data, options, user) {
         if ((await super._preCreate(data, options, user)) === false) {
           return false;
         }
         if (this.isTransformation && this.parent.actor) {
-          this.parent.updateSource({
-            flags: {
-              teriock: {
-                wasTransformed: this.parent.actor.system.isTransformed,
-                preTransformHp: this.parent.actor.system.hp.value,
-                preTransformMp: this.parent.actor.system.mp.value,
-                priorTransform: this.parent.actor.system.transformation.primary,
-              },
-            },
-          });
+          const flags = this._buildTransformationFlags();
+          this.parent.updateSource({ flags });
           const uuids = this.transformation.uuids;
           let species = /** @type {TeriockSpecies[]} */ await Promise.all(
             uuids.map((uuid) => fromUuid(uuid)),
@@ -166,34 +348,120 @@ export default function TransformationSystemMixin(Base) {
         if ((await super._preDelete(options, user)) === false) {
           return false;
         }
-        if (this.parent.actor) {
-          const speciesIds = this.transformation.species.filter((id) =>
-            this.parent.actor.species.map((s) => s.id).includes(id),
+        if (!this.isTransformation || !this.parent.actor) return;
+        const speciesIds = (this.transformation.species ?? []).filter((id) =>
+          this.parent.actor.species.map((s) => s.id).includes(id),
+        );
+        if (speciesIds.length > 0) {
+          await this.parent.actor.deleteEmbeddedDocuments("Item", speciesIds);
+        }
+      }
+
+      /** @inheritDoc */
+      async _preUpdate(changed, options, user) {
+        if ((await super._preUpdate(changed, options, user)) === false) {
+          return false;
+        }
+        if (!this.actor || !this.isTransformation) return;
+        if (foundry.utils.hasProperty(changed, "disabled")) {
+          const wasDisabled = changed.disabled === false;
+          if (wasDisabled) {
+            const flags = foundry.utils.mergeObject(
+              this.parent.flags,
+              this._buildTransformationFlags(),
+            );
+            foundry.utils.setProperty(changed, "flags", flags);
+          } else {
+            foundry.utils.setProperty(
+              changed,
+              "flags.teriock.transformationHp",
+              this.actor.system.hp.value,
+            );
+            foundry.utils.setProperty(
+              changed,
+              "flags.teriock.transformationMp",
+              this.actor.system.mp.value,
+            );
+          }
+        }
+      }
+
+      /**
+       * Revert transformation suppression and stat-dice updates using flags from
+       * _buildTransformationFlags. Unstashes equipment, re-enables effects/items,
+       * and re-enables hp/mp stat dice.
+       * @returns {Promise<void>}
+       */
+      async _removeTransformationUpdates() {
+        if (!this.actor) return;
+        const hasItem = (id) => this.actor.items.has(id);
+        const hasEffect = (id) => this.actor.effects.has(id);
+        const stashedEquipment = (
+          this.parent.getFlag("teriock", "stashedEquipment") ?? []
+        ).filter(hasItem);
+        const disabledEffects = (
+          this.parent.getFlag("teriock", "disabledEffects") ?? []
+        ).filter(hasEffect);
+        const disabledItems = (
+          this.parent.getFlag("teriock", "disabledItems") ?? []
+        ).filter(hasItem);
+        const disabledHpDiceItems = (
+          this.parent.getFlag("teriock", "disabledHpDiceItems") ?? []
+        ).filter(hasItem);
+        const disabledMpDiceItems = (
+          this.parent.getFlag("teriock", "disabledMpDiceItems") ?? []
+        ).filter(hasItem);
+
+        /** @type {Record<string, object>} */
+        const itemUpdatesById = {};
+        for (const id of stashedEquipment) {
+          if (!itemUpdatesById[id]) itemUpdatesById[id] = { _id: id };
+          itemUpdatesById[id]["system.stashed"] = false;
+        }
+        for (const id of disabledItems) {
+          if (!itemUpdatesById[id]) itemUpdatesById[id] = { _id: id };
+          itemUpdatesById[id]["system.disabled"] = false;
+        }
+        for (const id of disabledHpDiceItems) {
+          if (!itemUpdatesById[id]) itemUpdatesById[id] = { _id: id };
+          itemUpdatesById[id]["system.statDice.hp.disabled"] = false;
+        }
+        for (const id of disabledMpDiceItems) {
+          if (!itemUpdatesById[id]) itemUpdatesById[id] = { _id: id };
+          itemUpdatesById[id]["system.statDice.mp.disabled"] = false;
+        }
+        const itemUpdates = Object.values(itemUpdatesById);
+
+        const effectUpdates = disabledEffects.map((id) => ({
+          _id: id,
+          disabled: false,
+        }));
+
+        if (itemUpdates.length) {
+          await this.actor.updateEmbeddedDocuments("Item", itemUpdates);
+        }
+        if (effectUpdates.length) {
+          await this.actor.updateEmbeddedDocuments(
+            "ActiveEffect",
+            effectUpdates,
           );
-          if (speciesIds.length > 0) {
-            await this.parent.actor.deleteEmbeddedDocuments("Item", speciesIds);
+        }
+
+        if (this.transformation.resetHp || this.transformation.resetMp) {
+          const updateData = {};
+          if (this.transformation.resetHp) {
+            updateData["system.hp.value"] = this.parent.getFlag(
+              "teriock",
+              "preTransformHp",
+            );
           }
-          if (this.isTransformation) {
-            const updateData = {
-              "system.transformation.primary": this.parent.getFlag(
-                "teriock",
-                "priorTransform",
-              ),
-            };
-            if (this.transformation.resetHp) {
-              updateData["system.hp.value"] = this.parent.getFlag(
-                "teriock",
-                "preTransformHp",
-              );
-            }
-            if (this.transformation.resetMp) {
-              updateData["system.mp.value"] = this.parent.getFlag(
-                "teriock",
-                "preTransformMp",
-              );
-            }
-            await this.parent.actor.update(updateData);
+          if (this.transformation.resetMp) {
+            updateData["system.mp.value"] = this.parent.getFlag(
+              "teriock",
+              "preTransformMp",
+            );
           }
+          await this.actor.update(updateData);
         }
       }
 

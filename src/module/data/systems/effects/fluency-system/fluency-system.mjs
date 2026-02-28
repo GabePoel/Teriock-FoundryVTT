@@ -108,14 +108,6 @@ export default class FluencySystem extends mix(
     ) {
       suppressed = !this.parent.parent.system.isAttuned;
     }
-    if (this.actor && this.actor.system.isTransformed) {
-      if (
-        this.parent.elder?.documentName === "Actor" &&
-        this.actor.system.transformation.suppression.ranks
-      ) {
-        suppressed = true;
-      }
-    }
     return suppressed;
   }
 

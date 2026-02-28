@@ -10,7 +10,7 @@ const { Collection } = foundry.utils;
 export default class TypeCollection extends Collection {
   /**
    * An object with the children sorted by their type.
-   * @returns {Record<Teriock.Documents.CommonType, TeriockCommon[]>}
+   * @returns {Record<Teriock.Documents.CommonType, GenericCommon[]>}
    */
   get typeMap() {
     const documentTypeMap = {};
@@ -26,5 +26,5 @@ export default class TypeCollection extends Collection {
 
 /**
  * @template T
- * @typedef {TypeCollection<TeriockCommon, TeriockCommon | Index<TeriockCommon>>} IndexCollection
+ * @typedef {TypeCollection<TeriockCommon, GenericCommon | Index<GenericCommon>>} IndexCollection
  */

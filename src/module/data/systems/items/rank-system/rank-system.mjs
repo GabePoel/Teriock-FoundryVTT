@@ -1,7 +1,7 @@
 import { icons } from "../../../../constants/display/icons.mjs";
 import { resolveDocument } from "../../../../helpers/resolve.mjs";
 import { toCamelCase } from "../../../../helpers/string.mjs";
-import { getRollIcon, makeIcon, mix } from "../../../../helpers/utils.mjs";
+import { mix } from "../../../../helpers/utils.mjs";
 import { TextField } from "../../../fields/_module.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
@@ -78,6 +78,26 @@ export default class RankSystem extends mix(
   }
 
   /** @inheritDoc */
+  get _canDisableHpDice() {
+    return super._canDisableHpDice && !this.innate;
+  }
+
+  /** @inheritDoc */
+  get _canDisableMpDice() {
+    return super._canDisableMpDice && !this.innate;
+  }
+
+  /** @inheritDoc */
+  get _canEnableHpDice() {
+    return super._canEnableHpDice && !this.innate;
+  }
+
+  /** @inheritDoc */
+  get _canEnableMpDice() {
+    return super._canEnableMpDice && !this.innate;
+  }
+
+  /** @inheritDoc */
   get color() {
     if (this.innate) {
       return TERIOCK.display.colors.purple;
@@ -114,14 +134,6 @@ export default class RankSystem extends mix(
   /** @inheritDoc */
   get makeSuppressed() {
     let suppressed = super.makeSuppressed;
-    if (this.actor && this.actor.system.isTransformed) {
-      if (
-        this.parent.elder?.documentName === "Actor" &&
-        this.actor.system.transformation.suppression.ranks
-      ) {
-        suppressed = true;
-      }
-    }
     if (
       game.settings.get("teriock", "armorSuppressesRanks") &&
       this.actor &&
@@ -237,51 +249,6 @@ export default class RankSystem extends mix(
   }
 
   /** @inheritDoc */
-  getCardContextMenuEntries(doc) {
-    return [
-      ...super.getCardContextMenuEntries(doc),
-      {
-        name: game.i18n.localize("TERIOCK.SYSTEMS.Rank.MENU.rollHpDie"),
-        icon: makeIcon(
-          getRollIcon(this.hpDie?.polyhedral || ""),
-          "contextMenu",
-        ),
-        callback: async () => await this.hpDie.use(),
-        condition:
-          !!this.hpDie && !this.hpDie?.spent && !this.hpDie?.parent.disabled,
-        group: "usage",
-      },
-      {
-        name: game.i18n.localize("TERIOCK.SYSTEMS.Rank.MENU.recoverHpDie"),
-        icon: makeIcon(TERIOCK.display.icons.ui.undo, "contextMenu"),
-        callback: async () => await this.hpDie.unuse(),
-        condition:
-          !!this.hpDie && this.hpDie?.spent && !this.hpDie?.parent.disabled,
-        group: "usage",
-      },
-      {
-        name: game.i18n.localize("TERIOCK.SYSTEMS.Rank.MENU.rollMpDie"),
-        icon: makeIcon(
-          getRollIcon(this.mpDie?.polyhedral || ""),
-          "contextMenu",
-        ),
-        callback: async () => await this.mpDie.use(),
-        condition:
-          !!this.mpDie && !this.mpDie?.spent && !this.hpDie?.parent.disabled,
-        group: "usage",
-      },
-      {
-        name: game.i18n.localize("TERIOCK.SYSTEMS.Rank.MENU.recoverMpDie"),
-        icon: makeIcon(TERIOCK.display.icons.ui.undo, "contextMenu"),
-        callback: async () => await this.mpDie.unuse(),
-        condition:
-          !!this.mpDie && this.mpDie?.spent && !this.hpDie?.parent.disabled,
-        group: "usage",
-      },
-    ];
-  }
-
-  /** @inheritDoc */
   getLocalRollData() {
     return {
       ...super.getLocalRollData(),
@@ -319,18 +286,5 @@ export default class RankSystem extends mix(
         pool.disabled = true;
       }
     }
-  }
-
-  /** @inheritDoc */
-  prepareSpecialData() {
-    if (this.parent.actor && this.parent.actor.system.isTransformed) {
-      if (this.parent.actor.system.transformation.suppression.ranks) {
-        this.statDice.hp.disabled = true;
-        if (this.parent.actor.system.transformation.level === "greater") {
-          this.statDice.mp.disabled = true;
-        }
-      }
-    }
-    super.prepareSpecialData();
   }
 }

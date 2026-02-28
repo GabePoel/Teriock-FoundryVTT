@@ -480,7 +480,11 @@ export default class AbilitySystem extends mix(
   _onUpdate(changed, options, userId) {
     super._onUpdate(changed, options, userId);
     if (this.parent.checkEditor(userId)) {
-      this.expireSustainedConsequences().then();
+      if (
+        game.settings.get("teriock", "automaticallyExpireSustainedConsequences")
+      ) {
+        this.expireSustainedConsequences().then();
+      }
     }
   }
 

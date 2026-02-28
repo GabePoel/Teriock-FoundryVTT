@@ -1,4 +1,5 @@
 import { icons } from "../../../../constants/display/icons.mjs";
+import { makeIcon } from "../../../../helpers/utils.mjs";
 import { StatDieModel } from "../../../models/_module.mjs";
 import {
   HpPoolModel,
@@ -46,6 +47,38 @@ export default function StatGiverSystemMixin(Base) {
         });
       }
 
+      /**
+       * Whether the HP dice can be disabled.
+       * @returns {boolean}
+       */
+      get _canDisableHpDice() {
+        return !this.statDice.hp.disabled;
+      }
+
+      /**
+       * Whether the MP dice can be disabled.
+       * @returns {boolean}
+       */
+      get _canDisableMpDice() {
+        return !this.statDice.mp.disabled;
+      }
+
+      /**
+       * Whether the HP dice can be enabled.
+       * @returns {boolean}
+       */
+      get _canEnableHpDice() {
+        return this.statDice.hp.disabled;
+      }
+
+      /**
+       * Whether the MP dice can be enabled.
+       * @returns {boolean}
+       */
+      get _canEnableMpDice() {
+        return this.statDice.mp.disabled;
+      }
+
       /** @returns {Teriock.MessageData.MessageBar} */
       get _statBar() {
         return {
@@ -62,6 +95,67 @@ export default function StatGiverSystemMixin(Base) {
             }),
           ],
         };
+      }
+
+      /**
+       * Context menu entries to enable/disable HP and mana dice.
+       * @param {TeriockDocument} doc
+       * @returns {Teriock.Foundry.ContextMenuEntry[]}
+       */
+      getCardContextMenuEntries(doc) {
+        const entries = super.getCardContextMenuEntries(doc);
+        if (!doc?.isOwner) return entries;
+        entries.push(
+          {
+            name: game.i18n.localize(
+              "TERIOCK.SYSTEMS.StatGiver.MENU.enableHpDice",
+            ),
+            icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
+            callback: async () => {
+              await this.parent.update({
+                "system.statDice.hp.disabled": false,
+              });
+            },
+            condition: this._canEnableHpDice,
+            group: "control",
+          },
+          {
+            name: game.i18n.localize(
+              "TERIOCK.SYSTEMS.StatGiver.MENU.disableHpDice",
+            ),
+            icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
+            callback: async () => {
+              await this.parent.update({ "system.statDice.hp.disabled": true });
+            },
+            condition: this._canDisableHpDice,
+            group: "control",
+          },
+          {
+            name: game.i18n.localize(
+              "TERIOCK.SYSTEMS.StatGiver.MENU.enableMpDice",
+            ),
+            icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
+            callback: async () => {
+              await this.parent.update({
+                "system.statDice.mp.disabled": false,
+              });
+            },
+            condition: this._canEnableMpDice,
+            group: "control",
+          },
+          {
+            name: game.i18n.localize(
+              "TERIOCK.SYSTEMS.StatGiver.MENU.disableMpDice",
+            ),
+            icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
+            callback: async () => {
+              await this.parent.update({ "system.statDice.mp.disabled": true });
+            },
+            condition: this._canDisableMpDice,
+            group: "control",
+          },
+        );
+        return entries;
       }
 
       /** @inheritDoc */

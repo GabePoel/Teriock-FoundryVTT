@@ -53,6 +53,7 @@ export default class CommonSystem extends mix(
         Automation: "system.automations",
       },
       revealable: false,
+      stats: false,
       tooltip: true,
       type: "base",
       usable: false,

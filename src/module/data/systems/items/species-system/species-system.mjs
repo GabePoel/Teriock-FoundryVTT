@@ -1,7 +1,7 @@
 import { TeriockDialog } from "../../../../applications/api/_module.mjs";
 import { TeriockActor } from "../../../../documents/_module.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
-import { makeIcon, mix } from "../../../../helpers/utils.mjs";
+import { makeIcon, makeIconClass, mix } from "../../../../helpers/utils.mjs";
 import { TextField } from "../../../fields/_module.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
@@ -91,6 +91,38 @@ export default class SpeciesSystem extends mix(
   }
 
   /** @inheritDoc */
+  get _canDisableHpDice() {
+    return super._canDisableHpDice && !this._isInactiveTransformation;
+  }
+
+  /** @inheritDoc */
+  get _canDisableMpDice() {
+    return super._canDisableMpDice && !this._isInactiveTransformation;
+  }
+
+  /** @inheritDoc */
+  get _canEnableHpDice() {
+    return super._canEnableHpDice && !this._isInactiveTransformation;
+  }
+
+  /** @inheritDoc */
+  get _canEnableMpDice() {
+    return super._canEnableMpDice && !this._isInactiveTransformation;
+  }
+
+  /**
+   * Whether this is part of an inactive transformation.
+   * @returns {boolean}
+   */
+  get _isInactiveTransformation() {
+    return (
+      this.isTransformation &&
+      this.transformationEffect &&
+      !this.transformationEffect.active
+    );
+  }
+
+  /** @inheritDoc */
   get color() {
     if (this.transformationLevel === "minor") {
       return TERIOCK.display.colors.blue;
@@ -161,11 +193,16 @@ export default class SpeciesSystem extends mix(
    * @returns {boolean}
    */
   get isPrimaryTransformation() {
-    if (this.isTransformation && this.transformationEffect) {
-      return this.transformationEffect.system.isPrimaryTransformation;
-    } else {
-      return false;
+    if (this.isTransformation) {
+      const transformationEffect = this.transformationEffect;
+      if (
+        transformationEffect &&
+        transformationEffect.system.isPrimaryTransformation
+      ) {
+        return true;
+      }
     }
+    return false;
   }
 
   /**
@@ -180,17 +217,11 @@ export default class SpeciesSystem extends mix(
   get makeSuppressed() {
     let suppressed = super.makeSuppressed;
     if (this.isTransformation && this.parent.actor) {
+      const transformationEffect = this.transformationEffect;
       suppressed =
         suppressed ||
-        !this.isPrimaryTransformation ||
-        (this.transformationEffect && !this.transformationEffect.active);
-    }
-    if (
-      this.parent.actor &&
-      this.parent.actor.system.isTransformed &&
-      !this.isTransformation
-    ) {
-      return true;
+        (transformationEffect && !transformationEffect.active) ||
+        !this.isPrimaryTransformation;
     }
     return suppressed;
   }
@@ -219,7 +250,7 @@ export default class SpeciesSystem extends mix(
           title: game.i18n.localize(
             "TERIOCK.SYSTEMS.Species.DIALOG.deleteEffect.title",
           ),
-          icon: `fas fa-${TERIOCK.options.document.consequence.icon}`,
+          icon: makeIconClass(TERIOCK.display.icons.effect.transform, "title"),
         },
         content: game.i18n.localize(
           "TERIOCK.SYSTEMS.Species.DIALOG.deleteEffect.content",
@@ -286,26 +317,12 @@ export default class SpeciesSystem extends mix(
   }
 
   /** @inheritDoc */
-  prepareSpecialData() {
-    if (this.actor) {
-      if (this.actor.system.isTransformed) {
-        if (!this.isTransformation) {
-          this.statDice.hp.disabled = true;
-          if (this.actor.system.transformation.level === "greater") {
-            this.statDice.mp.disabled = true;
-          }
-        } else {
-          if (!this.isPrimaryTransformation) {
-            this.statDice.hp.disabled = true;
-            this.statDice.mp.disabled = true;
-          }
-        }
-      } else if (this.isTransformation) {
-        this.statDice.hp.disabled = true;
-        this.statDice.mp.disabled = true;
-      }
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    if (this._isInactiveTransformation) {
+      this.statDice.hp.disabled = true;
+      this.statDice.mp.disabled = true;
     }
-    super.prepareSpecialData();
   }
 
   /**
