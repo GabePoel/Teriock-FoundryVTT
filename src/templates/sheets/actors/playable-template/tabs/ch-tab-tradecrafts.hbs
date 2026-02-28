@@ -1,0 +1,115 @@
+<div class="character-tab tradecrafts">
+  <h1>{{localize "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.title"}}</h1>
+  <div class="character-tab-page teriock-block-results" data-search-key="fluencies">
+    <div class="teriock-block-display" data-tooltip-direction="LEFT">
+      <div class="tradecraft-panels tgrid g2">
+        {{#each TERIOCK.options.tradecraft as |field|}}
+          {{#if (not (eq field.name @root/TERIOCK.options.tradecraft.prestige.name))}}
+            <div class="field-panel">
+              <div class="tradecraft-panel tgrid" data-tooltip-direction="UP">
+                <div class="tradecraft-panel-symbol field-panel-header"
+                     data-tooltip="{{localize "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.competence.tooltip"}}">
+                  {{localize "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.competence.label"}}
+                </div>
+                <div class="tradecraft-panel-symbol field-panel-header"
+                     data-tooltip="{{localize "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.talent.tooltip"}}">
+                  {{localize "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.talent.label"}}
+                </div>
+                <div class="tradecraft-panel-name field-panel-header gi3">
+                  <span data-tooltip="{{localize
+                    "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.name.tooltip"}}">{{field.name}}</span>
+                </div>
+                <div class="tradecraft-panel-symbol field-panel-header"
+                     data-tooltip="{{localize "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.modifier.tooltip"}}">
+                  {{localize "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.modifier.label"}}
+                </div>
+                {{#each field.tradecrafts as |tradecraft name|}}
+                  <div
+                    class="tradecraft-container tgrid gi6"
+                    {{#if (and (not (eq ../name "Artisan")) (not (eq ../name "Scholar")))}}
+                    data-tooltip-direction="RIGHT"
+                    {{else}}
+                    data-tooltip-direction="LEFT"
+                    data-tooltip-left="true"
+                    {{/if}}
+                    data-make-tooltip="true"
+                    data-uuid="{{ruleUuid "Tradecraft" name}}"
+                  >
+                    <div
+                      class="tradecraft-panel-symbol ch-tradecraft-pro-box grid-fill"
+                      data-action="increment"
+                      data-path="system.tradecrafts.{{name}}.competence.raw"
+                      data-tooltip-direction="LEFT"
+                      data-tooltip-class=""
+                    >
+                      <i
+                        class="thover {{path ../../system.tradecrafts name "iconClass"}} grid-fill"
+                        data-tooltip="{{path ../../system.tradecrafts name "competence.description"}}"
+                      ></i>
+                    </div>
+                    <div
+                      class="tradecraft-panel-symbol thover grid-fill"
+                      data-action="increment" data-path="system.tradecrafts.{{name}}.score"
+                      data-tradecraft="{{name}}" data-tooltip-direction="LEFT" data-tooltip-class="">
+                      {{#if (eq (path ../../system.tradecrafts name 'score') 0)}}
+                        <i class="thover fa-fw fa-regular fa-xmark grid-fill"
+                           data-tooltip="{{localize "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.score.0"}}"></i>
+                      {{/if}}
+                      {{#if (eq (path ../../system.tradecrafts name 'score') 1)}}
+                        <i class="thover fa-fw fa-regular fa-check grid-fill"
+                           data-tooltip="{{localize "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.score.1"}}"></i>
+                      {{/if}}
+                      {{#if (eq (path ../../system.tradecrafts name 'score') 2)}}
+                        <i class="thover fa-fw fa-regular fa-check-double grid-fill"
+                           data-tooltip="{{localize "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.score.2"}}"></i>
+                      {{/if}}
+                      {{#if (gte (path ../../system.tradecrafts name 'score') 3)}}
+                        <i class="thover fa-fw fa-regular fa-badge-check grid-fill"
+                           data-tooltip="{{localize "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.score.3"}}"></i>
+                      {{/if}}
+                    </div>
+                    <div
+                      class="tradecraft-panel-name thover gi3 draggable" data-action="rollTradecraft"
+                      data-tradecraft="{{name}}"
+                      data-uuid="{{lookup @root/tradecraftMacros name}}"
+                    >
+                      {{tradecraft.name}}
+                    </div>
+                    <div class="tradecraft-panel-symbol">
+                      {{path ../../system.tradecrafts name 'value'}}
+                    </div>
+                  </div>
+                {{/each}}
+              </div>
+            </div>
+          {{/if}}
+        {{/each}}
+      </div>
+    </div>
+    <div class="teriock-block-display">
+      <div class="teriock-block-options">
+        {{> (template "ui/block-options.hbs")
+          tab="fluency"
+          optionsToggle=settings.menus.fluencyOptions
+          optionsPath="settings.menus.fluencyOptions"
+          searchValue=settings.fluencyFilters.search
+          searchKey="fluencies"
+          addAction="createFluency"
+          gaplessPath="flags.teriockDocumentSettings.sheetBlockTradecraftsGapless"
+          gaplessValue=flags.teriockDocumentSettings.sheetBlockTradecraftsGapless
+          sizePath="flags.teriockDocumentSettings.sheetBlockTradecraftsSize"
+          sizeValue=flags.teriockDocumentSettings.sheetBlockTradecraftsSize
+          tabDisplay=TERIOCK.options.document.fluency.name
+        }}
+      </div>
+      {{> (template "sheets/actors/playable-template/results/search-results.hbs")
+        docs=fluencies
+        searchKey="fluencies"
+        displayKey="fluency"
+        empty=TERIOCK.options.document.fluency.plural
+        gapless="sheetBlockTradecraftsGapless"
+        size="sheetBlockTradecraftsSize"
+      }}
+    </div>
+  </div>
+</div>

@@ -2,6 +2,8 @@ import { systemPath } from "../../helpers/path.mjs";
 import { makeIcon, makeIconClass } from "../../helpers/utils.mjs";
 
 export default function registerUiHelpers() {
+  Handlebars.registerHelper("systemPath", systemPath);
+
   Handlebars.registerHelper("template", (str) => {
     return systemPath("templates/" + str);
   });

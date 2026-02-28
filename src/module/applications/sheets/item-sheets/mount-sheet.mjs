@@ -1,0 +1,40 @@
+import { documentOptions } from "../../../constants/options/document-options.mjs";
+import { systemPath } from "../../../helpers/path.mjs";
+import { makeIconClass } from "../../../helpers/utils.mjs";
+import BaseItemSheet from "./base-item-sheet.mjs";
+
+/**
+ * Sheet for a {@link TeriockMount}.
+ * @property {TeriockMount} document
+ * @property {TeriockMount} item
+ */
+export default class MountSheet extends BaseItemSheet {
+  /** @inheritDoc */
+  static BARS = [
+    systemPath("templates/sheets/shared/bars/stat-bar.hbs"),
+    systemPath("templates/sheets/items/mount/status-bar.hbs"),
+  ];
+
+  /** @inheritDoc */
+  static DEFAULT_OPTIONS = {
+    classes: ["mount"],
+    actions: {
+      toggleMounted: this.#onToggleMounted,
+    },
+    window: {
+      icon: makeIconClass(documentOptions.mount.icon, "title"),
+    },
+  };
+
+  /**
+   * Toggles the mounted state of the mount.
+   * @returns {Promise<void>}
+   */
+  static async #onToggleMounted() {
+    if (this.document.system.mounted) {
+      await this.document.system.unmount();
+    } else {
+      await this.document.system.mount();
+    }
+  }
+}

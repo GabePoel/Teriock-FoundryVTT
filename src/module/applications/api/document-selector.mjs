@@ -29,7 +29,7 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
 
   static PARTS = {
     all: {
-      template: "systems/teriock/src/templates/dialog-templates/select.hbs",
+      template: "systems/teriock/src/templates/dialogs/select.hbs",
       scrollable: [".doc-list-container"],
     },
   };

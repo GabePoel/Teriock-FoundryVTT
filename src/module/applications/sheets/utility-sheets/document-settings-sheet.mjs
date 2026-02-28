@@ -21,7 +21,7 @@ export default class DocumentSettingsSheet extends TeriockDocumentSheet {
   static PARTS = {
     all: {
       template:
-        "systems/teriock/src/templates/document-templates/utility-templates/document-settings-template.hbs",
+        "systems/teriock/src/templates/sheets/utility/document-settings-template.hbs",
       scrollable: [""],
     },
   };

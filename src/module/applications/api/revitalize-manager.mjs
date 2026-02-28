@@ -23,7 +23,7 @@ export default class TeriockRevitalizeManager extends TeriockStatManager {
 
   static PARTS = {
     all: {
-      template: "systems/teriock/src/templates/dialog-templates/revitalize.hbs",
+      template: "systems/teriock/src/templates/dialogs/revitalize.hbs",
       scrollable: [""],
     },
   };

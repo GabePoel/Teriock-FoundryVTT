@@ -6,7 +6,7 @@ export default class TeriockTokenHUD extends TokenHUD {
   static PARTS = {
     hud: {
       root: true,
-      template: systemPath("templates/hud-templates/token-hud.hbs"),
+      template: systemPath("templates/hud/token-hud.hbs"),
     },
   };
 }

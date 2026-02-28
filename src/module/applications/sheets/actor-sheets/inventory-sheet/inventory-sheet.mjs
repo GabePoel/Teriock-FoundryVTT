@@ -1,5 +1,6 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
 import { systemPath } from "../../../../helpers/path.mjs";
+import { makeIconClass } from "../../../../helpers/utils.mjs";
 import BaseActorSheet from "../base-actor-sheet/base-actor-sheet.mjs";
 
 export default class InventorySheet extends BaseActorSheet {
@@ -13,14 +14,14 @@ export default class InventorySheet extends BaseActorSheet {
       height: 600,
     },
     window: {
-      icon: `fa-solid fa-${documentOptions.equipment.icon}`,
+      icon: makeIconClass(documentOptions.equipment.icon, "title"),
     },
   };
 
   static PARTS = {
     all: {
       template: systemPath(
-        "templates/document-templates/actor-templates/inventory-template/inventory-template.hbs",
+        "templates/sheets/actors/inventory-template/inventory-template.hbs",
       ),
       scrollable: [""],
     },

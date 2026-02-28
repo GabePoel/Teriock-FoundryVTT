@@ -1,4 +1,5 @@
 import { icons } from "../../../constants/display/icons.mjs";
+import { systemPath } from "../../../helpers/path.mjs";
 import { fancifyFields, makeIconClass } from "../../../helpers/utils.mjs";
 import { TeriockTextEditor } from "../../ux/_module.mjs";
 
@@ -15,6 +16,16 @@ export default function ChildSheetMixin(Base) {
      * @property {TeriockChild} document
      */
     class ChildSheet extends Base {
+      /** @type {string[]} */
+      static BARS = [];
+
+      /** @type {Record<string, HandlebarsTemplatePart>} */
+      static CONTENT_PARTS = {
+        content: {
+          template: systemPath("templates/sheets/shared/content.hbs"),
+        },
+      };
+
       /** @type {Partial<ApplicationConfiguration>} */
       static DEFAULT_OPTIONS = {
         actions: {
@@ -32,6 +43,27 @@ export default function ChildSheetMixin(Base) {
         },
       };
 
+      /** @type {Record<string, HandlebarsTemplatePart>} */
+      static HEADER_PARTS = {
+        header: {
+          template: systemPath("templates/sheets/shared/top.hbs"),
+        },
+      };
+
+      /** @type {Record<string, HandlebarsTemplatePart>} */
+      static MENU_PARTS = {
+        menu: {
+          template: systemPath("templates/sheets/shared/simple-menu.hbs"),
+        },
+      };
+
+      /** @type {Record<string, HandlebarsTemplatePart>} */
+      static PARTS = {
+        ...this.HEADER_PARTS,
+        ...this.MENU_PARTS,
+        ...this.CONTENT_PARTS,
+      };
+
       /**
        * Populate a display field.
        * @param {PointerEvent} _event
@@ -40,8 +72,14 @@ export default function ChildSheetMixin(Base) {
        */
       static async _onPopulateField(_event, target) {
         await this.document.update({
-          [target.dataset.path]: "<p>Add text here.</p>",
+          [target.dataset.path]:
+            `<p>${game.i18n.localize("TERIOCK.SHEETS.Child.DEFAULTS.populateField")}</p>`,
         });
+      }
+
+      /** @type {Record<string, object>} */
+      get _buttonUpdates() {
+        return {};
       }
 
       /**
@@ -60,6 +98,7 @@ export default function ChildSheetMixin(Base) {
                 f.path.replace(".system.", "._schema.system."),
               ),
               label: f?.label || this.document.getSchema(f.path)?.label,
+              button: f?.button,
             },
           };
         });
@@ -92,6 +131,28 @@ export default function ChildSheetMixin(Base) {
         return out;
       }
 
+      /**
+       * @inheritDoc
+       * @param {ApplicationRenderOptions} options
+       */
+      _configureRenderOptions(options) {
+        super._configureRenderOptions(options);
+        if (this._tab !== "overview") {
+          this._removeFromArray(options.parts, "menu");
+        }
+      }
+
+      /** @inheritDoc */
+      async _onRender(context, options) {
+        await super._onRender(context, options);
+        if (!this.isEditable) return;
+        for (const [selector, update] of Object.entries(this._buttonUpdates)) {
+          this.element.querySelectorAll(selector).forEach((el) => {
+            el.addEventListener("click", () => this.document.update(update));
+          });
+        }
+      }
+
       /** @inheritDoc */
       async _prepareContext(options = {}) {
         const context = await super._prepareContext(options);
@@ -119,7 +180,7 @@ export default function ChildSheetMixin(Base) {
           .map((f) => {
             return {
               fieldPath: f.path,
-              name: f?.label || f.schema?.label,
+              name: f?.button || f?.label || f.schema?.label,
               editable: f.editable,
             };
           });
@@ -137,6 +198,19 @@ export default function ChildSheetMixin(Base) {
               }),
           );
         context.displayFieldButtons = displayFieldButtons;
+        context.bars = this._tab === "overview" ? this.constructor.BARS : [];
+      }
+
+      /**
+       * Remove an element from an array.
+       * @param {string[]} arr
+       * @param {*} el
+       */
+      _removeFromArray(arr, el) {
+        const s = new Set(arr);
+        s.delete(el);
+        arr.length = 0;
+        arr.push(...Array.from(s));
       }
     }
   );

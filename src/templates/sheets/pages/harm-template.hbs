@@ -1,0 +1,30 @@
+<div class="{{cssClass}} tsheet-page">
+  {{#if (eq tab "overview")}}
+    <div class="ab-sheet-everything">
+      <div class="ab-sheet-top">
+        {{> (template "sheets/shared/header.hbs")}}
+      </div>
+      <div class="ab-main">
+        <div class="ab-tags-all">
+          <div class="ab-tags-container">
+            <div class="ab-tags">
+              <div class="ab-menu-icons">
+                {{> (template "sheets/shared/menu-buttons.hbs")}}
+              </div>
+              <span class="ab-tag tsubtle">{{localize (concat "TYPES.JournalEntryPage." document.type)}}</span>
+            </div>
+          </div>
+        </div>
+        {{formGroup
+          textField
+          value=text.content
+          name="text.content"
+          enriched=textEnriched
+        }}
+      </div>
+    </div>
+  {{/if}}
+  {{#if (eq tab "automations")}}
+    {{> (template "sheets/shared/automations.hbs")}}
+  {{/if}}
+</div>

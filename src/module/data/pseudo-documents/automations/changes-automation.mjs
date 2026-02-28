@@ -29,7 +29,7 @@ export default class ChangesAutomation extends CritAutomation {
   /** @inheritDoc */
   async getEditor() {
     const html = await TeriockTextEditor.renderTemplate(
-      systemPath("templates/document-templates/shared/changes.hbs"),
+      systemPath("templates/sheets/shared/changes.hbs"),
       {
         changesData: this.changes,
         changesPath: `${this.fieldPath}.${this.id}.changes`,

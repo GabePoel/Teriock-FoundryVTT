@@ -196,7 +196,7 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
         text: outcome,
       });
       const pullContent = await TeriockTextEditor.renderTemplate(
-        systemPath("templates/ui-templates/death-bag.hbs"),
+        systemPath("templates/ui/death-bag.hbs"),
         context,
       );
       const panel = await TeriockTextEditor.enrichPanel(panelParts);

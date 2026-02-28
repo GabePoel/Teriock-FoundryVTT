@@ -1,4 +1,3 @@
-import { elementClass } from "../../helpers/html.mjs";
 import { getRollIcon } from "../../helpers/utils.mjs";
 
 export default function registerFormattingHelpers() {
@@ -33,10 +32,6 @@ export default function registerFormattingHelpers() {
       }
     }
     return out;
-  });
-
-  Handlebars.registerHelper("elementClass", (elements) => {
-    return elementClass(elements);
   });
 
   Handlebars.registerHelper("hackFill", (part) => {

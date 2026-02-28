@@ -33,7 +33,7 @@ export default class TeriockPlayableActorSheet extends mix(
   static PARTS = {
     all: {
       template:
-        "systems/teriock/src/templates/document-templates/actor-templates/playable-template/playable-template.hbs",
+        "systems/teriock/src/templates/sheets/actors/playable-template/playable-template.hbs",
       scrollable: [".character-sidebar-container", ".character-tab-content"],
     },
   };

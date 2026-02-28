@@ -1,0 +1,14 @@
+<div class="ab-bar">
+  {{> (template "sheets/shared/forms/form-form.hbs")}}
+  {{formBox
+    (formInput
+      systemFields.damageType
+      value=system.damageType
+      disabled=(not editable)
+      placeholder=(localize "TERIOCK.SYSTEMS.Property.FIELDS.damageType.placeholder")
+    )
+    tooltip=(localize "TERIOCK.SYSTEMS.Property.FIELDS.damageType.label")
+    icon=TERIOCK.display.icons.ui.damage
+  }}
+  {{> (template "sheets/shared/forms/tag-form.hbs")}}
+</div>

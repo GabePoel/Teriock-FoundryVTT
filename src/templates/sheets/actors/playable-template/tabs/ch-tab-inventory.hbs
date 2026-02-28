@@ -1,0 +1,62 @@
+<div class="character-tab inventory">
+  <h1>{{localize "TERIOCK.SHEETS.Actor.TABS.Inventory.title"}}</h1>
+  <div class="character-tab-page teriock-block-results" data-search-key="equipment">
+    {{> (template "sheets/actors/playable-template/parts/ch-money-display.hbs")}}
+    <div class="teriock-block-display">
+      <div class="teriock-block-options">
+        {{> (template "ui/block-options.hbs")
+          tab="equipment"
+          optionsToggle=settings.menus.equipmentOptions
+          optionsPath="settings.menus.equipmentOptions"
+          filterToggle=settings.menus.equipmentFilters
+          filterPath="settings.menus.equipmentFilters"
+          sortToggle=settings.menus.equipmentSort
+          sortPath="settings.menus.equipmentSort"
+          searchValue=settings.equipmentFilters.search
+          searchKey="equipment"
+          addAction="createEquipment"
+          sortOptions=TERIOCK.options.display.equipmentSortOrders
+          sortValue=settings.equipmentSortOption
+          sortOptionPath="settings.equipmentSortOption"
+          gaplessPath="flags.teriockDocumentSettings.sheetBlockInventoryGapless"
+          gaplessValue=flags.teriockDocumentSettings.sheetBlockInventoryGapless
+          sizePath="flags.teriockDocumentSettings.sheetBlockInventorySize"
+          sizeValue=flags.teriockDocumentSettings.sheetBlockInventorySize
+          ascendingPath="settings.equipmentSortAscending"
+          ascendingValue=settings.equipmentSortAscending
+          tabDisplay=TERIOCK.options.document.equipment.name
+        }}
+        {{#if settings.menus.equipmentFilters}}
+          {{> (template "ui/filters.hbs")
+            appId=appId
+            filterSelects=equipmentFilterSelects
+            filterToggles=equipmentFilterToggles
+          }}
+        {{/if}}
+      </div>
+      {{> (template "sheets/actors/playable-template/results/search-results.hbs")
+        docs=equipment
+        searchKey="equipment"
+        empty=TERIOCK.options.document.equipment.plural
+        gapless="sheetBlockInventoryGapless"
+        size="sheetBlockInventorySize"
+      }}
+      <div class="teriock-block-display-divider"></div>
+      {{> (template "sheets/actors/playable-template/results/search-results.hbs")
+        docs=bodyParts
+        searchKey="equipment"
+        empty=TERIOCK.options.document.body.plural
+        gapless="sheetBlockInventoryGapless"
+        size="sheetBlockInventorySize"
+      }}
+      <div class="teriock-block-display-divider"></div>
+      {{> (template "sheets/actors/playable-template/results/search-results.hbs")
+        docs=mounts
+        searchKey="equipment"
+        empty=TERIOCK.options.document.mount.plural
+        gapless="sheetBlockInventoryGapless"
+        size="sheetBlockInventorySize"
+      }}
+    </div>
+  </div>
+</div>

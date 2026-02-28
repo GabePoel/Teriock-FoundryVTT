@@ -85,6 +85,7 @@ export function fancifyFields(displayFields) {
         label = "",
         path = fancy.path,
         visible = true,
+        button,
       } = fancy;
       return {
         classes,
@@ -93,6 +94,7 @@ export function fancifyFields(displayFields) {
         label,
         path,
         visible,
+        button,
       };
     })
     .filter((f) => f.visible);

@@ -170,9 +170,7 @@ foundry.helpers.Hooks.once("init", function () {
         base: data.systems.messages.BaseMessageSystem,
       },
       documentClass: documents.TeriockChatMessage,
-      template: helpers.path.systemPath(
-        "templates/ui-templates/chat-message.hbs",
-      ),
+      template: helpers.path.systemPath("templates/ui/chat-message.hbs"),
     },
     Combat: {
       initiative: {
@@ -361,6 +359,18 @@ foundry.helpers.Hooks.once("init", function () {
       doc: documents.TeriockActiveEffect,
       label: "TYPES.ActiveEffect.consequence",
       types: ["consequence"],
+    },
+    {
+      cls: applications.sheets.effect.ConditionSheet,
+      doc: documents.TeriockActiveEffect,
+      label: "TYPES.ActiveEffect.condition",
+      types: ["condition"],
+    },
+    {
+      cls: applications.sheets.effect.AttunementSheet,
+      doc: documents.TeriockActiveEffect,
+      label: "TYPES.ActiveEffect.attunement",
+      types: ["attunement"],
     },
     // Tokens
     {

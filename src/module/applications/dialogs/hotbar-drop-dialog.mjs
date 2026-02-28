@@ -20,7 +20,7 @@ export default async function hotbarDropDialog(doc) {
     };
     const content = await TeriockTextEditor.enrichHTML(
       await TeriockTextEditor.renderTemplate(
-        systemPath("templates/dialog-templates/hotbar-drop.hbs"),
+        systemPath("templates/dialogs/hotbar-drop.hbs"),
         context,
       ),
     );

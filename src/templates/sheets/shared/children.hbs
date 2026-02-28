@@ -1,0 +1,28 @@
+<div class="children-container">
+  {{#each document.visibleTypes as |type|}}
+    {{#if (or @root/editable (exists (lookup @root (path @root/TERIOCK.options.document type "getter"))))}}
+      <div class="ab-main">
+        {{#if (exists (lookup @root (path @root/TERIOCK.options.document type "getter")))}}
+          <div
+            class="teriock-block-container {{@root.document.flags.teriockDocumentSettings.sheetBlockChildSize}} {{#if
+              @root.document.flags.teriockDocumentSettings.sheetBlockChildGapless}}gapless{{/if}}"
+          >
+            {{#each (lookup @root (path @root/TERIOCK.options.document type "getter")) as |doc|}}
+              {{> (template "ui/block.hbs") (merge doc.embedParts (object
+                relative=@root/document.uuid))}}
+            {{/each}}
+          </div>
+        {{/if}}
+        {{#if @root/editable}}
+          <button class="create{{ucFirst type}}" data-action="create{{ucFirst type}}">
+            {{makeIcon (path @root/TERIOCK.options.document type "icon") "button"}}
+            {{localize
+              "TERIOCK.SHEETS.Common.ACTIONS.addChild"
+              name=(path @root/TERIOCK.options.document type "name")
+            }}
+          </button>
+        {{/if}}
+      </div>
+    {{/if}}
+  {{/each}}
+</div>

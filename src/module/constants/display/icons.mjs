@@ -286,6 +286,7 @@ export const icons = {
   ui: {
     add: "plus",
     apply: "share-all",
+    automations: "flask-gear",
     back: "chevron-left",
     changeKey: "search",
     changeMacro: "gear-code",

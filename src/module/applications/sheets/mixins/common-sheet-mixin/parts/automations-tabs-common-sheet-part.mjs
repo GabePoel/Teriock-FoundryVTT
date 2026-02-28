@@ -12,14 +12,14 @@ export default (Base) => {
       /** @type {Partial<ApplicationConfiguration>} */
       static DEFAULT_OPTIONS = {
         actions: {
-          changeImpactTab: this._onChangeImpactTab,
-          toggleImpacts: this._onToggleImpacts,
+          changeAutomationTab: this._onChangeAutomationTab,
+          toggleAutomations: this._onToggleAutomations,
         },
       };
 
       constructor(...args) {
         super(...args);
-        this._impactTab = "base";
+        this._automationTab = "base";
         this._tab = "overview";
       }
 
@@ -29,7 +29,7 @@ export default (Base) => {
        * @param {HTMLElement} target - The target element.
        * @returns {Promise<void>}
        */
-      static async _onChangeImpactTab(_event, target) {
+      static async _onChangeAutomationTab(_event, target) {
         this._impactTab = target.dataset.tab;
         await this.render();
       }
@@ -38,25 +38,27 @@ export default (Base) => {
        * Toggles between overview and impacts tabs.
        * @returns {Promise<void>}
        */
-      static async _onToggleImpacts() {
-        this._tab = this._tab === "impacts" ? "overview" : "impacts";
+      static async _onToggleAutomations() {
+        this._tab = this._tab === "automations" ? "overview" : "automations";
         await this.render();
       }
 
       /** @inheritDoc */
       async _onRender(context, options) {
         await super._onRender(context, options);
-        this.element.querySelectorAll("[data-action='toggleImpacts']").forEach(
-          /** @param {HTMLButtonElement} el */ (el) => {
-            el.disabled = false;
-          },
-        );
+        this.element
+          .querySelectorAll("[data-action='toggleAutomations']")
+          .forEach(
+            /** @param {HTMLButtonElement} el */ (el) => {
+              el.disabled = false;
+            },
+          );
       }
 
       /** @inheritDoc */
       async _prepareContext(options = {}) {
         const context = await super._prepareContext(options);
-        context.impactTab = this._impactTab;
+        context.automationTab = this._automationTab;
         context.tab = this._tab;
         return context;
       }

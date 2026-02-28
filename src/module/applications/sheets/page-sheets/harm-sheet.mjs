@@ -44,9 +44,7 @@ export default class HarmSheet extends mix(
 
   static EDIT_PARTS = {
     all: {
-      template: systemPath(
-        "templates/document-templates/page-templates/harm-template.hbs",
-      ),
+      template: systemPath("templates/sheets/pages/harm-template.hbs"),
       scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
     },
   };

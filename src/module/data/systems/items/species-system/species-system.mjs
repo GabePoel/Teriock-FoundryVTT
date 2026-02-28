@@ -221,7 +221,8 @@ export default class SpeciesSystem extends mix(
    * @returns {TeriockLingering|null}
    */
   get transformationEffect() {
-    const transformations = this.parent.actor.transformations;
+    if (!this.actor) return null;
+    const transformations = this.actor.transformations;
     for (const transformation of transformations) {
       if (
         transformation.system.transformation.species.includes(this.parent.id)

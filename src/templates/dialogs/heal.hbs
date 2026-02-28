@@ -1,0 +1,43 @@
+<form class="dialog-form standard-form heal-dialog">
+  <div class="stat-header">
+    <div class="ab-profile-img timage" data-tooltip="{{name}}">
+      <img src="{{img}}" alt="">
+    </div>
+    <div class="stat-bar">
+      {{> (template "sheets/actors/playable-template/parts/ch-bar-hp.hbs")}}
+    </div>
+  </div>
+  <p class="hint">{{#if noDice}}{{localize "TERIOCK.DIALOGS.Heal.hintNoDice"}}{{else}}{{localize
+    "TERIOCK.DIALOGS.Heal.hintWithDice"}}{{/if}}</p>
+  <fieldset class="heal-dialog-hacks">
+    <legend>{{localize "TERIOCK.TERMS.Common.hacks"}}</legend>
+    {{> (template "sheets/actors/playable-template/parts/ch-hack-box.hbs") }}
+  </fieldset>
+  {{#if (not noDice)}}
+    <fieldset class="heal-dialog-dice">
+      <legend>{{localize "TERIOCK.SYSTEMS.StatGiver.FIELDS.statDice.hp.label"}}</legend>
+      <div class="tgrid g7">
+        {{{system.sheet.dieBox.hp}}}
+      </div>
+    </fieldset>
+  {{/if}}
+  {{#if (not noDice)}}
+    {{formGroup
+      forHarmField
+      value=forHarm
+      rootId=uuid
+      name="for-harm"
+    }}
+    {{formGroup
+      consumeStatDiceField
+      value=consumeStatDice
+      rootId=uuid
+      name="consume-dice"
+    }}
+  {{/if}}
+  <footer class="form-footer" style="margin-top:auto;">
+    <button type="submit" data-action="ok" autofocus>
+      {{makeIcon TERIOCK.display.icons.ui.done "button"}}<span>{{localize "TERIOCK.DIALOGS.Heal.done"}}</span>
+    </button>
+  </footer>
+</form>

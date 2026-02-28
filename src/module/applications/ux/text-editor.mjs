@@ -53,7 +53,7 @@ export default class TeriockTextEditor extends TextEditor {
     if (options.noAssociations) delete parts.associations;
     await this.enrichPanel(parts, options);
     return await this.renderTemplate(
-      systemPath("templates/ui-templates/panel.hbs"),
+      systemPath("templates/ui/panel.hbs"),
       parts,
     );
   }

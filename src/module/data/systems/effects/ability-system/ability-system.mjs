@@ -131,6 +131,9 @@ export default class AbilitySystem extends mix(
         ),
         visible: this.elderSorcery,
         classes: "elder-sorcery-display-field",
+        button: game.i18n.localize(
+          "TERIOCK.SYSTEMS.Ability.FIELDS.elderSorcery.label",
+        ),
       },
       {
         path: "system.costs.mp.value.variable",

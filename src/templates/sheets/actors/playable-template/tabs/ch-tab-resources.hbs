@@ -1,0 +1,30 @@
+<div class="character-tab resources">
+  <h1>{{localize "TERIOCK.SHEETS.Actor.TABS.Resources.title"}}</h1>
+  <div class="character-tab-page teriock-block-results" data-search-key="resources">
+    <div class="teriock-block-display">
+      <div class="teriock-block-options">
+        {{> (template "ui/block-options.hbs")
+          tab="resource"
+          optionsToggle=settings.menus.resourceOptions
+          optionsPath="settings.menus.resourceOptions"
+          searchValue=settings.resourceFilters.search
+          searchKey="resources"
+          addAction="createResource"
+          gaplessPath="flags.teriockDocumentSettings.sheetBlockResourcesGapless"
+          gaplessValue=flags.teriockDocumentSettings.sheetBlockResourcesGapless
+          sizePath="flags.teriockDocumentSettings.sheetBlockResourcesSize"
+          sizeValue=flags.teriockDocumentSettings.sheetBlockResourcesSize
+          tabDisplay=TERIOCK.options.document.resource.name
+        }}
+      </div>
+      {{> (template "sheets/actors/playable-template/results/search-results.hbs")
+        docs=resources
+        searchKey="resources"
+        displayKey="resource"
+        empty=TERIOCK.options.document.resource.plural
+        gapless="sheetBlockResourcesGapless"
+        size="sheetBlockResourcesSize"
+      }}
+    </div>
+  </div>
+</div>

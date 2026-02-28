@@ -1,4 +1,5 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
+import { systemPath } from "../../../../helpers/path.mjs";
 import { makeIconClass, mix } from "../../../../helpers/utils.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseItemSheet from "../base-item-sheet.mjs";
@@ -19,6 +20,13 @@ export default class RankSheet extends mix(
   BaseItemSheet,
   mixins.WikiButtonSheetMixin,
 ) {
+  /** @inheritDoc */
+  static BARS = [
+    systemPath("templates/sheets/items/rank/class-bar.hbs"),
+    systemPath("templates/sheets/shared/bars/stat-bar.hbs"),
+    systemPath("templates/sheets/items/rank/restrictions-bar.hbs"),
+  ];
+
   /**
    * @inheritDoc
    * @type {Partial<ApplicationConfiguration>}
@@ -30,15 +38,6 @@ export default class RankSheet extends mix(
     },
     actions: {
       toggleInnate: this.#onToggleInnate,
-    },
-  };
-
-  /** @inheritDoc */
-  static PARTS = {
-    all: {
-      template:
-        "systems/teriock/src/templates/document-templates/item-templates/rank-template/rank-template.hbs",
-      scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
     },
   };
 

@@ -9,6 +9,7 @@ declare global {
       label: string;
       path: string;
       visible: boolean;
+      button?: string;
     };
 
     export type DisplayField = Partial<FancyDisplayField> | string;

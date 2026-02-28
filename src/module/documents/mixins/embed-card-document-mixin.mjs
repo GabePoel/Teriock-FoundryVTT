@@ -69,7 +69,7 @@ export default function EmbedCardDocumentMixin(Base) {
             embedContext.relative = options.relativeTo.uuid;
           }
           const html = await TeriockTextEditor.renderTemplate(
-            systemPath("templates/ui-templates/block.hbs"),
+            systemPath("templates/ui/block.hbs"),
             embedContext,
           );
           config.caption = false;
