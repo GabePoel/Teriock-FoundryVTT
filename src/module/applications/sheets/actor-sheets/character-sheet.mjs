@@ -29,7 +29,7 @@ export default class CharacterSheet extends TeriockPlayableActorSheet {
   static PARTS = {
     all: {
       template:
-        "systems/teriock/src/templates/sheets/actors/playable-template/playable-template.hbs",
+        "systems/teriock/src/templates/sheets/actors/playable/playable.hbs",
       scrollable: [".character-sidebar", ".character-tab-content"],
     },
   };

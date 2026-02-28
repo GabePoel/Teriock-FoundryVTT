@@ -1,7 +1,7 @@
 <div class="{{cssClass}} {{#if hideInactive}}hide-inactive{{/if}} character-window {{#if
   windowNavigation}}window-navigation{{/if}}">
   <div class="character-page">
-    {{> (template "sheets/actors/playable-template/parts/ch-sidebar.hbs")}}
+    {{> (template "sheets/actors/playable/parts/sidebar.hbs")}}
     <div class="character-sidebar-tabber-container">
       <div class="character-tabber character-sidebar-tabber ui-controls" data-tab="sidebar"
            data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Toggle.label"}}" data-tooltip-direction="RIGHT">
@@ -10,10 +10,10 @@
       </div>
     </div>
     <div class="character-tab-content">
-      {{> (template (concat "sheets/actors/playable-template/tabs/ch-tab-" activeTab ".hbs"))}}
+      {{> (template (concat "sheets/actors/playable/tabs/" activeTab "-tab.hbs"))}}
     </div>
     <div class="character-tabber-background">
-      {{> (template "sheets/actors/playable-template/parts/ch-tabs.hbs")}}
+      {{> (template "sheets/actors/playable/parts/tabs.hbs")}}
     </div>
   </div>
 </div>
