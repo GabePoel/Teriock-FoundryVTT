@@ -4,7 +4,7 @@ _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.23
+  systemVersion: 0.10.25
 effects:
   - _id: gZ5RdDd75Ey7z5eo
     _key: '!items.effects!1bbd1a82d7a436b7.gZ5RdDd75Ey7z5eo'
@@ -64,7 +64,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.23
+      systemVersion: 0.10.25
     img: systems/teriock/src/icons/abilities/adrenaline.webp
     name: Adrenaline
     system:
@@ -156,7 +156,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.23
+      systemVersion: 0.10.25
     img: systems/teriock/src/icons/abilities/improved-strength.webp
     name: Improved Strength
     system:
@@ -191,7 +191,7 @@ effects:
         - martial
       qualifiers:
         ephemeral:
-          raw: or(lt(@size, 0), gte(@size, 7))
+          raw: or(lt(@species.size, 0), gte(@species.size, 7))
       range:
         unit: self
       revealed: true
@@ -360,7 +360,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.23
+      systemVersion: 0.10.25
     img: systems/teriock/src/icons/abilities/mana-drain-recovery.webp
     name: Mana Drain Recovery
     system:
@@ -525,7 +525,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.23
+      systemVersion: 0.10.25
     img: systems/teriock/src/icons/abilities/poison-strike.webp
     name: Poison Strike
     system:
@@ -684,7 +684,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.23
+      systemVersion: 0.10.25
     img: systems/teriock/src/icons/abilities/spell-immunity.webp
     name: Spell Immunity
     system:
@@ -806,7 +806,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.23
+      systemVersion: 0.10.25
     img: systems/teriock/src/icons/abilities/triumphant-healing-surge.webp
     name: Triumphant Healing Surge
     system:
@@ -1617,7 +1617,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.23
+      systemVersion: 0.10.25
     img: systems/teriock/src/icons/abilities/monstrous-strength.webp
     name: Monstrous Strength
     system:
@@ -1632,13 +1632,13 @@ effects:
               target: armament
               time: normal
               value: '1'
-            - key: system.piercing.av0
-              mode: 4
+            - key: system.piercing.raw
+              mode: 2
               priority: 10
               qualifier: '@range.melee'
               target: armament
               time: normal
-              value: 'true'
+              value: '1'
           competencies:
             - 0
             - 1
@@ -2102,7 +2102,7 @@ system:
       disabled: false
       faces: 6
       number:
-        raw: '@size - 2'
+        raw: '@species.size - 2'
     mp:
       disabled: false
       faces: 2
