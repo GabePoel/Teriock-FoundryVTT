@@ -107,6 +107,12 @@ export default function ChangeableDocumentMixin(Base) {
         return changeTree;
       }
 
+      /**
+       * Cached result of {@link candidateChanges()} for the current data prep cycle.
+       * @type {TeriockActiveEffect[]|undefined}
+       */
+      _cachedCandidateEffects;
+
       //noinspection ES6ClassMemberInitializationOrder,JSUnusedGlobalSymbols
       /**
        * An object that tracks which tracks the changes to the data model which were applied by active effects
@@ -212,9 +218,30 @@ export default function ChangeableDocumentMixin(Base) {
       _buildChangeTree() {
         if (!this.parent?.changeTree) {
           this._changeTree = this.constructor.buildChangeTree(
-            this.allApplicableEffects(),
+            this._getCandidateEffects(),
             { allChanges: this._allChanges },
           );
+        }
+      }
+
+      /**
+       * Effects that may have changes, cached for the current prepare cycle.
+       * @returns {TeriockActiveEffect[]}
+       */
+      _getCandidateEffects() {
+        if (this._cachedCandidateEffects === undefined) {
+          this._cachedCandidateEffects = [...this.candidateChanges()];
+        }
+        return this._cachedCandidateEffects;
+      }
+
+      /**
+       * Get all ActiveEffects that may have changes.
+       * @returns {Generator<GenericActiveEffect, void, void>}
+       */
+      *candidateChanges() {
+        for (const effect of this.allApplicableEffects()) {
+          if (effect.system.canChange) yield effect;
         }
       }
 
@@ -222,6 +249,7 @@ export default function ChangeableDocumentMixin(Base) {
       prepareBaseData() {
         this.overrides = {};
         this._changeTree = undefined;
+        this._cachedCandidateEffects = undefined;
         super.prepareBaseData();
         if (this._allChanges) {
           this._applyChangesByTime("base");

@@ -69,7 +69,7 @@ export default class TeriockItem extends mix(
    * @returns {boolean} True if the item is suppressed, false otherwise.
    */
   get isSuppressed() {
-    return this.system.makeSuppressed;
+    return this.system.isSuppressed;
   }
 
   /**
@@ -104,7 +104,7 @@ export default class TeriockItem extends mix(
   /**
    * @inheritDoc
    * @yields {TeriockActiveEffect}
-   * @returns {Generator<TeriockActiveEffect, void, void>}
+   * @returns {Generator<GenericActiveEffect, void, void>}
    */
   *allApplicableEffects() {
     for (const effect of this.effects) {

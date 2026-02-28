@@ -21,6 +21,7 @@ export default (Base) => {
         return Object.assign(super.defineSchema(), {
           dampened: new fields.BooleanField({ initial: false }),
           shattered: new fields.BooleanField({ initial: false }),
+          stashed: new fields.BooleanField({ initial: false }),
         });
       }
 
@@ -137,6 +138,26 @@ export default (Base) => {
             condition: this.parent.isOwner && this.dampened,
             group: "control",
           },
+          {
+            name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.stash"),
+            icon: makeIcon(
+              TERIOCK.display.icons.equipment.stash,
+              "contextMenu",
+            ),
+            callback: this.stash.bind(this),
+            condition: this.parent.isOwner && !this.stashed,
+            group: "control",
+          },
+          {
+            name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.unstash"),
+            icon: makeIcon(
+              TERIOCK.display.icons.equipment.unstash,
+              "contextMenu",
+            ),
+            callback: this.unstash.bind(this),
+            condition: this.parent.isOwner && this.stashed,
+            group: "control",
+          },
         ];
       }
 
@@ -191,6 +212,14 @@ export default (Base) => {
       }
 
       /**
+       * Stash this equipment.
+       * @returns {Promise<void>}
+       */
+      async stash() {
+        await this.parent.update({ "system.stashed": true });
+      }
+
+      /**
        * Undampen this equipment.
        * @returns {Promise<void>}
        */
@@ -199,6 +228,14 @@ export default (Base) => {
         await this.parent.hookCall("equipmentUndampen", data);
         if (data.cancel) return;
         await this.parent.update({ "system.dampened": false });
+      }
+
+      /**
+       * Unstash this equipment.
+       * @returns {Promise<void>}
+       */
+      async unstash() {
+        await this.parent.update({ "system.stashed": false });
       }
     }
   );

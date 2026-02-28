@@ -86,6 +86,11 @@ export default class ConsequenceSystem extends mix(
   }
 
   /** @inheritDoc */
+  get canChange() {
+    return !!this.impacts.changes.length;
+  }
+
+  /** @inheritDoc */
   get changes() {
     return this.impacts.changes;
   }

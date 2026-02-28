@@ -145,12 +145,14 @@ export default function ConsumableSystemMixin(Base) {
       /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
-        this.maxQuantity.evaluate();
         if (this.consumable) {
+          this.maxQuantity.evaluate();
           this.quantity = Math.max(
             Math.min(this.maxQuantity.value, this.quantity),
             0,
           );
+        } else {
+          this.maxQuantity._value = Infinity;
         }
       }
 

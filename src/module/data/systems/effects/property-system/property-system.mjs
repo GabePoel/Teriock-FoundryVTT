@@ -120,17 +120,20 @@ export default class PropertySystem extends mix(
         this.parent.elder?.documentName === "Item" && !this.parent.elder?.active
       );
     }
-    if (!suppressed && this.parent.parent.type === "equipment") {
+    if (!suppressed && this.parent.parent?.type === "equipment") {
+      if (this.parent.parent?.system.stashed) {
+        suppressed = true;
+      }
       if (
         !suppressed &&
-        !this.parent.parent.system.equipped &&
+        !this.parent.parent?.system.equipped &&
         this.modifies === "Actor"
       ) {
         suppressed = true;
       }
       if (
         !suppressed &&
-        this.parent.parent.system.dampened &&
+        this.parent.parent?.system.dampened &&
         this.form !== "intrinsic" &&
         !this.applyIfDampened
       ) {
@@ -139,7 +142,7 @@ export default class PropertySystem extends mix(
     }
     if (
       !suppressed &&
-      this.parent.parent.system.shattered &&
+      this.parent.parent?.system.shattered &&
       !this.applyIfShattered
     ) {
       suppressed = true;

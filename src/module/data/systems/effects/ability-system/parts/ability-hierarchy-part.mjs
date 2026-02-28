@@ -24,7 +24,7 @@ export default (Base) => {
         if (!suppressed && this.parent.isReference) {
           suppressed = true;
         }
-        if (!suppressed && this.parent.parent.type === "equipment") {
+        if (!suppressed && this.parent.parent?.type === "equipment") {
           if (!this.parent.parent.system.equipped) suppressed = true;
           if (
             this.form !== "intrinsic" &&

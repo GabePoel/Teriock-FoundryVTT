@@ -1,5 +1,7 @@
 import {
+  AbilityMacroAutomation,
   ChangesAutomation,
+  PropertyMacroAutomation,
   ProtectionAutomation,
   StatusAutomation,
 } from "../../../pseudo-documents/automations/_module.mjs";
@@ -31,6 +33,20 @@ export default class BaseEffectSystem extends ChildSystem {
     return foundry.utils.mergeObject(super.defineSchema(), {
       deleteOnExpire: new fields.BooleanField({ initial: false }),
     });
+  }
+
+  /**
+   * Whether this can change.
+   * @returns {boolean}
+   */
+  get canChange() {
+    const validTypes = [
+      ChangesAutomation.TYPE,
+      ProtectionAutomation.TYPE,
+      AbilityMacroAutomation.TYPE,
+      PropertyMacroAutomation.TYPE,
+    ];
+    return !!this.automations.contents.find((a) => validTypes.includes(a.type));
   }
 
   /**

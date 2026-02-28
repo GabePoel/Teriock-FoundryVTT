@@ -218,11 +218,10 @@ export default function TransformationSystemMixin(Base) {
 
       /** @inheritDoc */
       getLocalRollData() {
-        return {
-          ...super.getLocalRollData(),
+        return Object.assign(super.getLocalRollData(), {
           transformation: Number(this.isTransformation),
           "transformation.primary": Number(this.isPrimaryTransformation),
-        };
+        });
       }
 
       /** @inheritDoc */

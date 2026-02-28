@@ -248,7 +248,7 @@ export default class EquipmentSystem extends mix(
       return false;
     }
     if (this.parent.isEmbedded) {
-      this.updateSource({ equipped: false });
+      this.updateSource({ equipped: true });
     }
   }
 

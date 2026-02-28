@@ -248,6 +248,7 @@ export default class TeriockActor extends mix(
    * @returns {GenericActiveEffect[]}
    */
   get validEffects() {
+    //noinspection JSValidateTypes
     return Array.from(this.allApplicableEffects());
   }
 
@@ -387,17 +388,6 @@ export default class TeriockActor extends mix(
   }
 
   /**
-   * @inheritDoc
-   * @yields {GenericActiveEffect}
-   * @returns {Generator<GenericActiveEffect, void, void>}
-   */
-  *allApplicableEffects() {
-    for (const effect of super.allApplicableEffects()) {
-      yield effect;
-    }
-  }
-
-  /**
    * Add multiple status effects to the actor.
    * @param {string[]} statusIds
    * @returns {Promise<void>}
@@ -528,7 +518,7 @@ export default class TeriockActor extends mix(
    * Add statuses and explanations for being wounded.
    */
   prepareVirtualWounds() {
-    if (!this.getSetting("autoWound")) return;
+    if (!this.getSetting("automaticallyWound")) return;
     // Check what states are triggered in normal circumstances
     const hpUncn = this.system.hp.value < 1;
     const hpCrit =

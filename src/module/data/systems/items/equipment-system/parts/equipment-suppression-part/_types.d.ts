@@ -3,4 +3,6 @@ export default interface EquipmentSuppressionPartInterface {
   dampened: boolean;
   /** <schema> Is the equipment shattered? */
   shattered: boolean;
+  /** <schema> Is the equipment stashed? If it is, it has no weight. */
+  stashed: boolean;
 }

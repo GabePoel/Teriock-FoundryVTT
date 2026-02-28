@@ -64,6 +64,7 @@ export default function AbilityExecutionActorUpdatePart(Base) {
       async _updateActor() {
         if (
           this.actor &&
+          this.actor.getSetting("automaticallyPayAbilityCosts") &&
           game.settings.get("teriock", "automaticallyPayAbilityCosts")
         ) {
           if (this.costs.gp > 0 && !this.options.noGp) {

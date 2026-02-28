@@ -88,10 +88,18 @@ export default (Base) => {
       }
 
       /** @inheritDoc */
+      prepareDerivedData() {
+        super.prepareDerivedData();
+        if (this.stashed) this.storage.weightMultiplier = "0";
+      }
+
+      /** @inheritDoc */
       prepareSpecialData() {
         super.prepareSpecialData();
-        this.storage.maxCount.evaluate();
-        this.storage.maxWeight.evaluate();
+        if (this.storage.enabled) {
+          this.storage.maxCount.evaluate();
+          this.storage.maxWeight.evaluate();
+        }
         if (this.parent.elder?.type === "equipment") {
           if (this.parent.elder?.system?.storage?.enabled) {
             this.weight.raw = multiplyFormula(
@@ -100,7 +108,11 @@ export default (Base) => {
             );
           }
         }
-        this.weight.evaluate();
+        if (this.stashed) {
+          this.weight._value = 0;
+        } else {
+          this.weight.evaluate();
+        }
         this.weight.total = this.weight.value;
         if (this.consumable) {
           this.weight.total = roundTo(this.weight.value * this.quantity, 2);
