@@ -490,15 +490,13 @@ export default class TeriockActor extends mix(
   /**
    * Performs post-update operations for the actor.
    * @param {Teriock.Parameters.Actor.SkipFunctions} skipFunctions - Functions that should be skipped.
-   * @returns {Promise<void>} Resolves when all post-update operations are complete
    * @returns {Promise<void>}
    */
   async postUpdate(skipFunctions = {}) {
     const data = { skipFunctions };
     await this.hookCall("postUpdate", data);
-    if (!data.cancel) {
-      await this.system.postUpdate(data.skipFunctions);
-    }
+    if (data.cancel) return;
+    await this.system.postUpdate(data.skipFunctions);
   }
 
   /** @inheritDoc */
@@ -513,14 +511,6 @@ export default class TeriockActor extends mix(
   }
 
   /** @inheritDoc */
-  prepareSpecialData() {
-    this.items.forEach((i) => {
-      i.prepareSpecialData();
-    });
-    super.prepareSpecialData();
-  }
-
-  /** @inheritDoc */
   prepareVirtualEffects() {
     for (const e of this.validEffects) {
       for (const s of e.statuses) {
@@ -529,7 +519,7 @@ export default class TeriockActor extends mix(
         }
       }
     }
-    super.prepareVirtualEffects();
+    this.system.prepareVirtualEffects();
     this.prepareVirtualWounds();
     this.cleanConditionInformation();
   }

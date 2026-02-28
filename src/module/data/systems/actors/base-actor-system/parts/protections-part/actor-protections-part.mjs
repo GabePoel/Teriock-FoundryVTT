@@ -76,9 +76,7 @@ export default (Base) => {
       async rollImmunity(options = {}) {
         const data = { options };
         await this.parent.hookCall("rollImmunity", data);
-        if (data.cancel) {
-          return;
-        }
+        if (data.cancel) return;
         options.actor = this.parent;
         const execution = new ImmunityExecution(options);
         await execution.execute();

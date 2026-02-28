@@ -13,9 +13,7 @@ export default function registerTokenManagementHooks() {
     async (document, _movement, _operation, user) => {
       if (document.checkEditor(user) && document.actor) {
         const data = await document.actor.hookCall("movement");
-        if (data.cancel) {
-          return false;
-        }
+        if (data.cancel) return false;
         for (const e of document.actor.movementExpirationEffects) {
           await e.system.expire();
         }

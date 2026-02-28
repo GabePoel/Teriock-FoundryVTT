@@ -11,11 +11,20 @@ export default class ActorSettingsModel extends EmbeddedDataModel {
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       autoWound: new fields.BooleanField({
+        hint: game.i18n.localize("TERIOCK.MODELS.ActorSettings.autoWound.hint"),
         initial: true,
         label: game.i18n.localize(
           "TERIOCK.MODELS.ActorSettings.autoWound.label",
         ),
-        hint: game.i18n.localize("TERIOCK.MODELS.ActorSettings.autoWound.hint"),
+      }),
+      nonHierarchicalChanges: new fields.BooleanField({
+        hint: game.i18n.localize(
+          "TERIOCK.SETTINGS.nonHierarchicalChanges.hint",
+        ),
+        initial: true,
+        label: game.i18n.localize(
+          "TERIOCK.SETTINGS.nonHierarchicalChanges.name",
+        ),
       }),
       sheetBlockAbilitiesGapless: new blockGaplessField({
         initial: true,

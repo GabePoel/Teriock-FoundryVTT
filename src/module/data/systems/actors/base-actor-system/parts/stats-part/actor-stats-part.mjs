@@ -209,9 +209,7 @@ export default (Base) => {
        */
       async takeAwaken() {
         const data = await this.parent.hookCall("takeAwaken");
-        if (data.cancel) {
-          return;
-        }
+        if (data.cancel) return;
         if (
           this.parent.statuses.has("unconscious") &&
           !this.parent.statuses.has("dead")
@@ -240,9 +238,7 @@ export default (Base) => {
       async takeHeal(options = {}) {
         const data = { options };
         await this.parent.hookCall("takeHeal", data);
-        if (data.cancel) {
-          return;
-        }
+        if (data.cancel) return;
         await healDialog(this.actor, data.options);
       }
 
@@ -254,9 +250,7 @@ export default (Base) => {
       async takeRevitalize(options = {}) {
         const data = { options };
         await this.parent.hookCall("takeRevitalize", data);
-        if (data.cancel) {
-          return;
-        }
+        if (data.cancel) return;
         await revitalizeDialog(this.parent, data.options);
       }
 
@@ -270,9 +264,7 @@ export default (Base) => {
        */
       async takeRevive() {
         const data = await this.parent.hookCall("takeRevive");
-        if (data.cancel) {
-          return;
-        }
+        if (data.cancel) return;
         if (this.parent.statuses.has("dead")) {
           if (this.hp.value <= 0) {
             await this.takeHealing(1 - this.hp.value);

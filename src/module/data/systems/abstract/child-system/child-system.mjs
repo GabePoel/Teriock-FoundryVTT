@@ -337,14 +337,13 @@ export default class ChildSystem extends UsableDataMixin(CommonSystem) {
   async use(options = {}) {
     const data = { doc: this.parent };
     await this.parent.hookCall("use", data);
-    if (!data.cancel) {
-      Hooks.callAll(
-        "teriock.use" +
-          this.parent.type.charAt(0).toUpperCase() +
-          this.parent.type.slice(1),
-        [this.parent],
-      );
-      await super.use(options);
-    }
+    if (data.cancel) return;
+    Hooks.callAll(
+      "teriock.use" +
+        this.parent.type.charAt(0).toUpperCase() +
+        this.parent.type.slice(1),
+      [this.parent],
+    );
+    await super.use(options);
   }
 }

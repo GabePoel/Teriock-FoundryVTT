@@ -279,7 +279,7 @@ export default class SpeciesSystem extends mix(
   /** @inheritDoc */
   getRollData() {
     const rollData = super.getRollData();
-    if (!this.parent.actor) {
+    if (!this.actor) {
       rollData.size = this.size.enabled ? this.size.value : 0;
     }
     return rollData;
@@ -287,11 +287,11 @@ export default class SpeciesSystem extends mix(
 
   /** @inheritDoc */
   prepareSpecialData() {
-    if (this.parent.actor) {
-      if (this.parent.actor.system.isTransformed) {
+    if (this.actor) {
+      if (this.actor.system.isTransformed) {
         if (!this.isTransformation) {
           this.statDice.hp.disabled = true;
-          if (this.parent.actor.system.transformation.level === "greater") {
+          if (this.actor.system.transformation.level === "greater") {
             this.statDice.mp.disabled = true;
           }
         } else {

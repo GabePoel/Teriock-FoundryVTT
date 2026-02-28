@@ -1,7 +1,10 @@
 import { TeriockJournalEntry } from "../../../../documents/_module.mjs";
 import { quickAddAssociation } from "../../../../helpers/html.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
-import { AccessDataMixin } from "../../../shared/mixins/_module.mjs";
+import {
+  AccessDataMixin,
+  PropagationDataMixin,
+} from "../../../shared/mixins/_module.mjs";
 import { AutomatableSystemMixin } from "../../mixins/_module.mjs";
 import RulesSystem from "../rules-system/rules-system.mjs";
 
@@ -11,12 +14,14 @@ const { fields } = foundry.data;
 /**
  * @extends {BaseSystem}
  * @extends {RulesSystem}
+ * @mixes PropagationData
  * @mixes AccessData
  * @mixes AutomatableSystem
  * @implements {Teriock.Models.CommonSystemInterface}
  */
 export default class CommonSystem extends mix(
   RulesSystem,
+  PropagationDataMixin,
   AccessDataMixin,
   AutomatableSystemMixin,
 ) {
@@ -426,9 +431,7 @@ export default class CommonSystem extends mix(
    */
   async gmNotesOpen() {
     let notesPage;
-    if (this.gmNotes) {
-      notesPage = await fromUuid(this.gmNotes);
-    }
+    if (this.gmNotes) notesPage = await fromUuid(this.gmNotes);
     if (notesPage) {
       const notesJournal = notesPage.parent;
       await notesJournal?.sheet.render(true);
@@ -461,11 +464,7 @@ export default class CommonSystem extends mix(
           if (!notesCategory) {
             const categories = await notesJournal.createEmbeddedDocuments(
               "JournalEntryCategory",
-              [
-                {
-                  name: notesCategoryName,
-                },
-              ],
+              [{ name: notesCategoryName }],
             );
             notesCategory = categories[0];
           }
@@ -476,9 +475,7 @@ export default class CommonSystem extends mix(
                 name: this.parent.name,
                 type: "text",
                 category: notesCategory.id,
-                text: {
-                  content: `<p>@Embed[${this.parent.uuid}]</p>`,
-                },
+                text: { content: `<p>@Embed[${this.parent.uuid}]</p>` },
               },
             ],
           );
@@ -488,27 +485,12 @@ export default class CommonSystem extends mix(
           await notesJournal?.sheet.render(true);
           notesJournal?.sheet.goToPage(notesPage.id);
           if (!this.parent.inCompendium) {
-            await this.parent.update({
-              "system.gmNotes": notesPage.uuid,
-            });
+            await this.parent.update({ "system.gmNotes": notesPage.uuid });
           }
         }
       }
     }
   }
-
-  /**
-   * Apply transformations of derivations to the values of the source data object. Compute data fields whose values are
-   * not stored in the database. This happens after the actor has completed all operations.
-   */
-  prepareSpecialData() {}
-
-  /**
-   * Add statuses and explanations for "virtual effects". These are things that would otherwise be represented with
-   * {@link TeriockActiveEffect}s, but that should be able to add synchronously during the update cycle. Any of these
-   * effects that should be shown on the token need to be manually added to {@link TeriockToken._drawEffects} as well.
-   */
-  prepareVirtualEffects() {}
 
   /**
    * Refresh this document from the index.

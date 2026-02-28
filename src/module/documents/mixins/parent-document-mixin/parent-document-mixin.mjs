@@ -60,14 +60,6 @@ export default function ParentDocumentMixin(Base) {
       get validEffects() {
         return [];
       }
-
-      /** @inheritDoc */
-      prepareSpecialData() {
-        this.effects.forEach((e) => {
-          e.prepareSpecialData();
-        });
-        super.prepareSpecialData();
-      }
     }
   );
 }

@@ -1,3 +1,4 @@
+import { icons } from "../../../../../../constants/display/icons.mjs";
 import { getProperty } from "../../../../../../helpers/fetch.mjs";
 import { makeIcon } from "../../../../../../helpers/utils.mjs";
 import { EvaluationField } from "../../../../../fields/_module.mjs";
@@ -59,7 +60,7 @@ export default (Base) => {
       get embedIcons() {
         return [
           {
-            icon: this.glued ? "link" : "link-slash",
+            icon: this.glued ? icons.equipment.glue : icons.equipment.unglue,
             action: "toggleGluedDoc",
             tooltip: this.glued
               ? game.i18n.localize("TERIOCK.SYSTEMS.Equipment.EMBED.glued")
@@ -77,7 +78,7 @@ export default (Base) => {
             (i) => !i.action?.toLowerCase().includes("disabled"),
           ),
           {
-            icon: this.equipped ? "circle-check" : "circle",
+            icon: this.equipped ? icons.ui.enabled : icons.ui.disabled,
             action: "toggleEquippedDoc",
             tooltip: this.equipped
               ? game.i18n.localize("TERIOCK.SYSTEMS.Equipment.EMBED.equipped")
@@ -98,12 +99,10 @@ export default (Base) => {
 
       /** @inheritDoc */
       get embedParts() {
-        const parts = super.embedParts;
-        Object.assign(parts, {
+        return Object.assign(super.embedParts, {
           struck: !this.equipped,
           shattered: this.shattered,
         });
-        return parts;
       }
 
       /** @inheritDoc */
@@ -119,9 +118,8 @@ export default (Base) => {
       async equip() {
         const data = { doc: this.parent };
         await this.parent.hookCall("equipmentEquip", data);
-        if (!data.cancel) {
-          await this.parent.update({ "system.equipped": true });
-        }
+        if (data.cancel) return;
+        await this.parent.update({ "system.equipped": true });
       }
 
       /** @inheritdoc */
@@ -181,13 +179,12 @@ export default (Base) => {
       async glue() {
         const data = { doc: this.parent };
         await this.parent.hookCall("equipmentGlue", data);
-        if (!data.cancel) {
-          const glueProperty = await getProperty("Glued");
-          if (!this.glued) {
-            await this.parent.createEmbeddedDocuments("ActiveEffect", [
-              glueProperty,
-            ]);
-          }
+        if (data.cancel) return;
+        const glueProperty = await getProperty("Glued");
+        if (!this.glued) {
+          await this.parent.createEmbeddedDocuments("ActiveEffect", [
+            glueProperty,
+          ]);
         }
       }
 
@@ -212,9 +209,8 @@ export default (Base) => {
       async unequip() {
         const data = { doc: this.parent };
         await this.parent.hookCall("equipmentUnequip", data);
-        if (!data.cancel) {
-          await this.parent.update({ "system.equipped": false });
-        }
+        if (data.cancel) return;
+        await this.parent.update({ "system.equipped": false });
       }
 
       /**
@@ -224,20 +220,19 @@ export default (Base) => {
       async unglue() {
         const data = { doc: this.parent };
         await this.parent.hookCall("equipmentUnglue", data);
-        if (!data.cancel) {
-          if (this.glued) {
-            const glueProperties = this.parent.properties.filter(
-              (p) => p.name === "Glued",
+        if (data.cancel) return;
+        if (this.glued) {
+          const glueProperties = this.parent.properties.filter(
+            (p) => p.name === "Glued",
+          );
+          if (glueProperties.length > 0) {
+            await this.parent.deleteEmbeddedDocuments(
+              "ActiveEffect",
+              glueProperties.map((p) => p.id),
             );
-            if (glueProperties.length > 0) {
-              await this.parent.deleteEmbeddedDocuments(
-                "ActiveEffect",
-                glueProperties.map((p) => p.id),
-              );
-            }
-            if (this.glued) {
-              await this.parent.update({ "system.glued": false });
-            }
+          }
+          if (this.glued) {
+            await this.parent.update({ "system.glued": false });
           }
         }
       }

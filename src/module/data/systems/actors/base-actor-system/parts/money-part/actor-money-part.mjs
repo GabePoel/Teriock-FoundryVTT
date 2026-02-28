@@ -59,14 +59,9 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       async takePay(amount, mode) {
-        const data = {
-          amount,
-          mode,
-        };
+        const data = { amount, mode };
         await this.parent.hookCall("takePay", data);
-        if (data.cancel) {
-          return;
-        }
+        if (data.cancel) return;
         amount = data.amount;
         mode = data.mode;
         // Get current money state

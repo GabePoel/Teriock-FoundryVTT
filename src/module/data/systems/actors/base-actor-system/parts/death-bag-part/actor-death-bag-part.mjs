@@ -40,9 +40,7 @@ export default (Base) => {
        */
       async deathBagPull() {
         const data = await this.parent.hookCall("deathBagPull");
-        if (data.cancel) {
-          return;
-        }
+        if (data.cancel) return;
         await deathBagDialog(this.actor);
       }
 

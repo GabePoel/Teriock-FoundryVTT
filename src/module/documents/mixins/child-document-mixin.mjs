@@ -67,14 +67,9 @@ export default function ChildDocumentMixin(Base) {
       async duplicate() {
         const copy = foundry.utils.duplicate(this.toObject());
         copy._stats.duplicateSource = this.uuid;
-        const data = {
-          doc: this.parent,
-          copy: copy,
-        };
+        const data = { doc: this.parent, copy: copy };
         await this.hookCall("documentDuplicate", data);
-        if (data.cancel) {
-          return data.copy;
-        }
+        if (data.cancel) return data.copy;
         let copyDocument;
         if (this.isEmbedded) {
           copyDocument = await this.parent.createEmbeddedDocuments(
@@ -112,9 +107,7 @@ export default function ChildDocumentMixin(Base) {
       async toMessage(options = {}) {
         const data = { doc: this.parent };
         await this.hookCall("documentChat", data);
-        if (data.cancel) {
-          return;
-        }
+        if (data.cancel) return;
         return await super.toMessage(options);
       }
 

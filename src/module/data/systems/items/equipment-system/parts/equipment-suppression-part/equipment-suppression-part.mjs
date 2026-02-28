@@ -95,9 +95,8 @@ export default (Base) => {
       async dampen() {
         const data = { doc: this.parent };
         await this.parent.hookCall("equipmentDampen", data);
-        if (!data.cancel) {
-          await this.parent.update({ "system.dampened": true });
-        }
+        if (data.cancel) return;
+        await this.parent.update({ "system.dampened": true });
       }
 
       /** @inheritdoc */
@@ -158,21 +157,20 @@ export default (Base) => {
       async repair() {
         const data = { doc: this.parent };
         await this.parent.hookCall("equipmentRepair", data);
-        if (!data.cancel) {
-          if (this.shattered) {
-            const shatterProperties = this.parent.properties.filter(
-              (p) => p.name === "Shattered",
+        if (data.cancel) return;
+        if (this.shattered) {
+          const shatterProperties = this.parent.properties.filter(
+            (p) => p.name === "Shattered",
+          );
+          if (shatterProperties.length > 0) {
+            await this.parent.deleteEmbeddedDocuments(
+              "ActiveEffect",
+              shatterProperties.map((p) => p.id),
             );
-            if (shatterProperties.length > 0) {
-              await this.parent.deleteEmbeddedDocuments(
-                "ActiveEffect",
-                shatterProperties.map((p) => p.id),
-              );
-            }
           }
-          if (this.shattered) {
-            await this.parent.update({ "system.shattered": false });
-          }
+        }
+        if (this.shattered) {
+          await this.parent.update({ "system.shattered": false });
         }
       }
 
@@ -183,13 +181,12 @@ export default (Base) => {
       async shatter() {
         const data = { doc: this.parent };
         await this.parent.hookCall("equipmentShatter", data);
-        if (!data.cancel) {
-          const shatterProperty = await getProperty("Shattered");
-          if (!this.shattered) {
-            await this.parent.createEmbeddedDocuments("ActiveEffect", [
-              shatterProperty,
-            ]);
-          }
+        if (data.cancel) return;
+        const shatterProperty = await getProperty("Shattered");
+        if (!this.shattered) {
+          await this.parent.createEmbeddedDocuments("ActiveEffect", [
+            shatterProperty,
+          ]);
         }
       }
 
@@ -200,9 +197,8 @@ export default (Base) => {
       async undampen() {
         const data = { doc: this.parent };
         await this.parent.hookCall("equipmentUndampen", data);
-        if (!data.cancel) {
-          await this.parent.update({ "system.dampened": false });
-        }
+        if (data.cancel) return;
+        await this.parent.update({ "system.dampened": false });
       }
     }
   );

@@ -15,25 +15,30 @@ export default function ChangeableDocumentMixin(Base) {
       /**
        * Build a change tree from an array of expanded changes.
        * @param {TeriockActiveEffect[]} effects
+       * @param {object} [options]
+       * @param {boolean} [options.allChanges]
        * @returns {Teriock.Changes.ChangeTree}
        */
-      static buildChangeTree(effects) {
+      static buildChangeTree(effects, options = {}) {
         const changeTree =
           /** @type {Teriock.Changes.ChangeTree} */ Object.fromEntries(
             Object.keys(TERIOCK.options.change.time).map((time) => [
               time,
               Object.fromEntries(
                 ["Actor", "Item", "ActiveEffect"].map((documentName) => {
+                  const typed = options.allChanges
+                    ? Object.fromEntries(
+                        Object.keys(CONFIG[documentName].dataModels).map(
+                          (k) => [k, []],
+                        ),
+                      )
+                    : {};
                   return [
                     documentName,
                     {
                       untyped: [],
                       uuids: {},
-                      typed: Object.fromEntries(
-                        Object.keys(CONFIG[documentName].dataModels).map(
-                          (k) => [k, []],
-                        ),
-                      ),
+                      typed,
                     },
                   ];
                 }),
@@ -70,6 +75,12 @@ export default function ChangeableDocumentMixin(Base) {
             };
             const time = change.time || "normal";
             const target = change.target || "Actor";
+            if (
+              !options.allChanges &&
+              (time !== "normal" || !["Actor", "parent"].includes(target))
+            ) {
+              continue;
+            }
             if (target === "parent" && effect.parent) {
               const uuids = changeTree[time][effect.parent.documentName].uuids;
               if (!uuids[effect.parent.uuid]) uuids[effect.parent.uuid] = [];
@@ -102,6 +113,17 @@ export default function ChangeableDocumentMixin(Base) {
        * @type {object}
        */
       overrides = this.overrides ?? {};
+
+      /**
+       * Whether to apply all changes instead of just the hierarchical ones.
+       * @returns {boolean}
+       */
+      get _allChanges() {
+        return (
+          game.settings.get("teriock", "nonHierarchicalChanges") &&
+          this.actor?.getSetting("nonHierarchicalChanges")
+        );
+      }
 
       /**
        * Whether this can be changed.
@@ -140,14 +162,17 @@ export default function ChangeableDocumentMixin(Base) {
        */
       _applyChanges(changes) {
         changes.sort((a, b) => a.priority - b.priority);
+        let rollData = {};
+        let rollDataComputed = false;
         for (const change of changes) {
           if (!change.key || !change.qualifier) continue;
           let shouldApply = change.qualifier === "1";
           if (!shouldApply) {
-            shouldApply = !!BaseRoll.minValue(
-              change.qualifier,
-              this.system.getLocalRollData(),
-            );
+            if (!rollDataComputed) {
+              rollData = this.system.getLocalRollData();
+              rollDataComputed = true;
+            }
+            shouldApply = !!BaseRoll.minValue(change.qualifier, rollData);
           }
           if (shouldApply) {
             const changeOverrides = change.effect.apply(this, change);
@@ -162,12 +187,23 @@ export default function ChangeableDocumentMixin(Base) {
        */
       _applyChangesByTime(time) {
         if (!this._canChange) return;
+        if (
+          (time !== "normal" || this.documentName === "ActiveEffect") &&
+          !this._allChanges
+        ) {
+          return;
+        }
         const partialTree = this.changeTree[time][this.documentName];
-        this._applyChanges([
-          ...partialTree.untyped,
-          ...partialTree.typed[this.type],
-          ...(partialTree.uuids[this.uuid] || []),
-        ]);
+        const changesToApply = partialTree.uuids[this.uuid] || [];
+        if (!this._allChanges) {
+          if (this.documentName === "Actor") {
+            changesToApply.push(...partialTree.untyped);
+          }
+        } else {
+          changesToApply.push(...partialTree.untyped);
+          changesToApply.push(...partialTree.typed[this.type]);
+        }
+        this._applyChanges(changesToApply);
       }
 
       /**
@@ -177,6 +213,7 @@ export default function ChangeableDocumentMixin(Base) {
         if (!this.parent?.changeTree) {
           this._changeTree = this.constructor.buildChangeTree(
             this.allApplicableEffects(),
+            { allChanges: this._allChanges },
           );
         }
       }
@@ -186,10 +223,12 @@ export default function ChangeableDocumentMixin(Base) {
         this.overrides = {};
         this._changeTree = undefined;
         super.prepareBaseData();
-        this._applyChangesByTime("base");
-        this._applyChangesByTime("proficiency");
-        this._buildChangeTree();
-        this._applyChangesByTime("fluency");
+        if (this._allChanges) {
+          this._applyChangesByTime("base");
+          this._applyChangesByTime("proficiency");
+          this._buildChangeTree();
+          this._applyChangesByTime("fluency");
+        }
         this._buildChangeTree();
       }
 

@@ -98,9 +98,7 @@ export default class BaseEffectSystem extends ChildSystem {
   async _preDelete(options, user) {
     const data = { doc: this.parent };
     await this.parent.hookCall("effectExpiration", data, this.parent);
-    if (data.cancel) {
-      return false;
-    }
+    if (data.cancel) return;
     await super._preDelete(options, user);
   }
 
@@ -122,9 +120,7 @@ export default class BaseEffectSystem extends ChildSystem {
     if (!this.deleteOnExpire) {
       const data = { doc: this.parent };
       await this.parent.hookCall("effectExpiration", data, this.parent);
-      if (data.cancel) {
-        return;
-      }
+      if (data.cancel) return;
     }
     if (this.deleteOnExpire) {
       await this.parent.delete();

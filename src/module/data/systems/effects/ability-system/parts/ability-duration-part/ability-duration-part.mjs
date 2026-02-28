@@ -62,22 +62,6 @@ export default (Base) => {
             delete this.duration.description;
           }
         }
-
-        // Compute changes
-        let applyChanges = this.maneuver === "passive";
-        for (const status of this.duration.conditions.present) {
-          if (!this.actor?.statuses.has(status)) {
-            applyChanges = false;
-          }
-        }
-        for (const status of this.duration.conditions.absent) {
-          if (this.actor?.statuses.has(status)) {
-            applyChanges = false;
-          }
-        }
-        if (applyChanges) {
-          this.parent.changes = this.changes;
-        }
       }
     }
   );

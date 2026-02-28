@@ -58,8 +58,10 @@ export default (Base) => {
           Object.assign(this.transformation, {
             image: effect.system.transformation.image,
             level: effect.system.transformation.level,
-            species: this.parent.species.filter((s) =>
-              effect.system.transformation.species.includes(s.id),
+            species: this.parent.items.contents.filter(
+              (i) =>
+                i.type === "species" &&
+                effect.system.transformation.species.includes(i.id),
             ),
             suppression: foundry.utils.deepClone(
               effect.system.transformation.suppression,

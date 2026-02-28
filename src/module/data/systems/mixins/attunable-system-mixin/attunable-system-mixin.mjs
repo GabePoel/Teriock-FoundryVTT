@@ -22,10 +22,7 @@ export default function AttunableSystemMixin(Base) {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          tier: new EvaluationField({
-            deterministic: true,
-            min: 0,
-          }),
+          tier: new EvaluationField({ deterministic: true, min: 0 }),
         });
       }
 
@@ -57,11 +54,8 @@ export default function AttunableSystemMixin(Base) {
                 ),
             condition: this.parent.isOwner,
             callback: async () => {
-              if (this.isAttuned) {
-                await this.deattune();
-              } else {
-                await this.attune();
-              }
+              if (this.isAttuned) await this.deattune();
+              else await this.attune();
             },
           },
           ...super.embedIcons,
@@ -101,64 +95,61 @@ export default function AttunableSystemMixin(Base) {
         const data = { doc: this.parent };
         await this.parent.hookCall("attune", data);
         await this.parent.hookCall(`${this.parent.type}Attune`, data);
-        if (!data.cancel) {
-          let attunement = this.attunement;
-          if (attunement) {
-            return attunement;
-          }
-          const attunementData = {
-            type: "attunement",
-            name: game.i18n.format(
-              "TERIOCK.SYSTEMS.Attunable.USAGE.Attune.defaultName",
-              { name: this.parent.name },
-            ),
-            img: this.parent.img,
-            system: {
-              type: this.parent.type,
-              target: this.parent._id,
-              inheritTier: true,
-              tier: this.tier.value,
+        if (data.cancel) return null;
+        let attunement = this.attunement;
+        if (attunement) return attunement;
+        const attunementData = {
+          type: "attunement",
+          name: game.i18n.format(
+            "TERIOCK.SYSTEMS.Attunable.USAGE.Attune.defaultName",
+            { name: this.parent.name },
+          ),
+          img: this.parent.img,
+          system: {
+            type: this.parent.type,
+            target: this.parent._id,
+            inheritTier: true,
+            tier: this.tier.value,
+          },
+          changes: [
+            {
+              key: "system.attunements",
+              mode: 2,
+              value: this.parent._id,
+              priority: 10,
             },
-            changes: [
-              {
-                key: "system.attunements",
-                mode: 2,
-                value: this.parent._id,
-                priority: 10,
-              },
-              {
-                key: "system.presence.value",
-                mode: 2,
-                value: this.tier.value,
-                priority: 10,
-              },
-            ],
-          };
-          if (this.parent.actor && (await this.canAttune())) {
-            if (this.reference && !this.identified) {
-              const ref = await fromUuid(this.reference);
-              if (ref) {
-                await this.parent.update({
-                  "system.tier.saved": ref.system.tier.raw,
-                });
-              }
+            {
+              key: "system.presence.value",
+              mode: 2,
+              value: this.tier.value,
+              priority: 10,
+            },
+          ],
+        };
+        if (this.parent.actor && (await this.canAttune())) {
+          if (this.reference && !this.identified) {
+            const ref = await fromUuid(this.reference);
+            if (ref) {
+              await this.parent.update({
+                "system.tier.saved": ref.system.tier.raw,
+              });
             }
-            attunement = await this.parent.actor.createEmbeddedDocuments(
-              "ActiveEffect",
-              [attunementData],
-            );
-            ui.notifications.success(
-              "TERIOCK.SYSTEMS.Attunable.USAGE.Attune.success",
-              { format: { name: this.parent.nameString }, localize: true },
-            );
-          } else {
-            ui.notifications.error(
-              "TERIOCK.SYSTEMS.Attunable.USAGE.Attune.notEnoughPresence",
-              { format: { name: this.parent.nameString }, localize: true },
-            );
           }
-          return attunement;
+          attunement = await this.parent.actor.createEmbeddedDocuments(
+            "ActiveEffect",
+            [attunementData],
+          );
+          ui.notifications.success(
+            "TERIOCK.SYSTEMS.Attunable.USAGE.Attune.success",
+            { format: { name: this.parent.nameString }, localize: true },
+          );
+        } else {
+          ui.notifications.error(
+            "TERIOCK.SYSTEMS.Attunable.USAGE.Attune.notEnoughPresence",
+            { format: { name: this.parent.nameString }, localize: true },
+          );
         }
+        return attunement;
       }
 
       /**
@@ -189,15 +180,14 @@ export default function AttunableSystemMixin(Base) {
         const data = { doc: this.parent };
         await this.parent.hookCall(`deattune`, data);
         await this.parent.hookCall(`${this.parent.type}Deattune`, data);
-        if (!data.cancel) {
-          const attunement = this.attunement;
-          if (attunement) {
-            await attunement.delete();
-            ui.notifications.success(
-              "TERIOCK.SYSTEMS.Attunable.USAGE.Deattune.success",
-              { format: { name: this.parent.nameString }, localize: true },
-            );
-          }
+        if (data.cancel) return;
+        const attunement = this.attunement;
+        if (attunement) {
+          await attunement.delete();
+          ui.notifications.success(
+            "TERIOCK.SYSTEMS.Attunable.USAGE.Deattune.success",
+            { format: { name: this.parent.nameString }, localize: true },
+          );
         }
       }
 

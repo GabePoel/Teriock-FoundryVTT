@@ -1,3 +1,4 @@
+import PropagationDataMixin from "../../data/shared/mixins/propagation-data-mixin.mjs";
 import { systemPath } from "../../helpers/path.mjs";
 import { mix } from "../../helpers/utils.mjs";
 import { TeriockActor } from "../_module.mjs";
@@ -6,7 +7,7 @@ import {
   EmbedCardDocumentMixin,
   HierarchyDocumentMixin,
   PanelDocumentMixin,
-  SettingsDocumentMixin
+  SettingsDocumentMixin,
 } from "./_module.mjs";
 
 /**
@@ -18,6 +19,7 @@ export default function CommonDocumentMixin(Base) {
   return (
     /**
      * @extends BaseDocument
+     * @mixes PropagationData
      * @mixes ChangeableDocument
      * @mixes EmbedCardDocument
      * @mixes HierarchyDocument
@@ -27,6 +29,7 @@ export default function CommonDocumentMixin(Base) {
      */
     class CommonDocument extends mix(
       Base,
+      PropagationDataMixin,
       ChangeableDocumentMixin,
       EmbedCardDocumentMixin,
       HierarchyDocumentMixin,
@@ -140,9 +143,7 @@ export default function CommonDocumentMixin(Base) {
       async hookCall(pseudoHook, data = {}, effect = null, skipCall = false) {
         data.cancel = false;
         if (this.system.hookedMacros) {
-          if (!data) {
-            data = {};
-          }
+          if (!data) data = {};
           data.cancel = false;
           if (!skipCall) {
             Hooks.callAll(`teriock.${pseudoHook}`, this, data);
@@ -163,10 +164,7 @@ export default function CommonDocumentMixin(Base) {
               const macro = await fromUuid(macroUuid);
               if (macro) {
                 try {
-                  await macro.execute({
-                    actor: this,
-                    data: data,
-                  });
+                  await macro.execute({ actor: this, data: data });
                 } catch (e) {
                   if (game.settings.get("teriock", "developerMode")) {
                     ui.notifications.error(
@@ -184,25 +182,6 @@ export default function CommonDocumentMixin(Base) {
           await this.actor.hookCall(pseudoHook, data, effect, skipCall);
         }
         return /** @type {Teriock.HookData.BaseHookData} */ data;
-      }
-
-      /**
-       * Data preparation that happens after `prepareDerivedData()`. This allows {@link TeriockChild} documents to apply
-       * changes from the parent {@link TeriockActor} and should be primarily used for that purpose.
-       * {@link TeriockActor}s are the only documents that call this directly. In all other cases, it is only called
-       * if the parent document calls it.
-       */
-      prepareSpecialData() {
-        this.system.prepareSpecialData();
-      }
-
-      /**
-       * Add statuses and explanations for "virtual effects". These are things that would otherwise be represented with
-       * {@link TeriockActiveEffect}s, but that we want to be able to add synchronously during the update cycle. Any of
-       * these effects that should be shown on the token need to be manually added to {@link TeriockToken._drawEffects}.
-       */
-      prepareVirtualEffects() {
-        this.system.prepareVirtualEffects();
       }
 
       /** @inheritDoc */

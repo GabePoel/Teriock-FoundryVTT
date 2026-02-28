@@ -1,3 +1,4 @@
+import { icons } from "../../../../constants/display/icons.mjs";
 import { toCamelCase } from "../../../../helpers/string.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
 import * as mixins from "../../mixins/_module.mjs";
@@ -35,14 +36,8 @@ export default class MountSystem extends mix(
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      mountType: new fields.StringField({
-        initial: "",
-        required: false,
-      }),
-      mounted: new fields.BooleanField({
-        initial: false,
-        required: false,
-      }),
+      mountType: new fields.StringField({ initial: "", required: false }),
+      mounted: new fields.BooleanField({ initial: false, required: false }),
     });
   }
 
@@ -70,18 +65,15 @@ export default class MountSystem extends mix(
         (i) => !i.action.toLowerCase().includes("disabled"),
       ),
       {
-        icon: this.mounted ? "circle-check" : "circle",
+        icon: this.mounted ? icons.ui.enabled : icons.ui.disabled,
         action: "toggleMountedDoc",
         tooltip: this.mounted
           ? game.i18n.localize("TERIOCK.SYSTEMS.Mount.EMBED.mounted")
           : game.i18n.localize("TERIOCK.SYSTEMS.Mount.EMBED.unmounted"),
         condition: this.parent.isOwner,
         callback: async () => {
-          if (this.mounted) {
-            await this.unmount();
-          } else {
-            await this.mount();
-          }
+          if (this.mounted) await this.unmount();
+          else await this.mount();
         },
       },
     ];
@@ -89,12 +81,12 @@ export default class MountSystem extends mix(
 
   /** @inheritDoc */
   get embedParts() {
-    const parts = super.embedParts;
-    parts.subtitle = this.mountType;
-    parts.text = game.i18n.format("TERIOCK.SYSTEMS.Attunable.PANELS.tier", {
-      value: this.tier.value,
+    return Object.assign(super.embedParts, {
+      subtitle: this.mountType,
+      text: game.i18n.format("TERIOCK.SYSTEMS.Attunable.PANELS.tier", {
+        value: this.tier.value,
+      }),
     });
-    return parts;
   }
 
   /** @inheritDoc */
@@ -135,9 +127,8 @@ export default class MountSystem extends mix(
   async mount() {
     const data = { doc: this.parent };
     await this.parent.hookCall("mountMount", data);
-    if (!data.cancel) {
-      await this.parent.update({ "system.mounted": true });
-    }
+    if (data.cancel) return;
+    await this.parent.update({ "system.mounted": true });
   }
 
   /**
@@ -147,8 +138,7 @@ export default class MountSystem extends mix(
   async unmount() {
     const data = { doc: this.parent };
     await this.parent.hookCall("mountUnmount", data);
-    if (!data.cancel) {
-      await this.parent.update({ "system.mounted": false });
-    }
+    if (data.cancel) return;
+    await this.parent.update({ "system.mounted": false });
   }
 }

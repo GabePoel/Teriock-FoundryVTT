@@ -1,5 +1,6 @@
 import { TeriockDialog } from "../../applications/api/_module.mjs";
 import { icons } from "../../constants/display/icons.mjs";
+import { toId } from "../../helpers/string.mjs";
 import { makeIcon, makeIconClass } from "../../helpers/utils.mjs";
 
 /**
@@ -25,6 +26,14 @@ export default function BaseDocumentMixin(Base) {
           typed: false,
           types: /** @type {Teriock.Documents.CommonType[]} */ [],
         };
+      }
+
+      /**
+       * Prefix to use in {@link _benchmarkStart} and {@link _benchmarkEnd}.
+       * @returns {string}
+       */
+      get _benchmarkString() {
+        return `${this.name}.${this.type}.${toId(this.collection ? this.uuid : this.name, { hash: true })}`;
       }
 
       /**
@@ -54,6 +63,22 @@ export default function BaseDocumentMixin(Base) {
        */
       get nameString() {
         return this.system?.nameString || this.name;
+      }
+
+      /**
+       * Helper to start a benchmark.
+       * @param {string} key
+       */
+      _benchmarkEnd(key) {
+        console.timeEnd(`${key} - ${this._benchmarkString}`);
+      }
+
+      /**
+       * Helper to end a benchmark.
+       * @param {string} key
+       */
+      _benchmarkStart(key) {
+        console.time(`${key} - ${this._benchmarkString}`);
       }
 
       /**

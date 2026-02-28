@@ -198,6 +198,15 @@ export function registerSettings() {
       name: "TERIOCK.SETTINGS.armorWeakensRanks.name",
       type: Boolean,
     },
+    nonHierarchicalChanges: {
+      config: true,
+      default: true,
+      hint: "TERIOCK.SETTINGS.nonHierarchicalChanges.hint",
+      name: "TERIOCK.SETTINGS.nonHierarchicalChanges.name",
+      requiresReload: true,
+      scope: "world",
+      type: Boolean,
+    },
     automaticTokenMagicConditionEffects: {
       config: true,
       default: true,

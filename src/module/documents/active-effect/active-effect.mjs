@@ -43,6 +43,11 @@ export default class TeriockActiveEffect extends mix(
     return super.migrateData(data);
   }
 
+  /** @inheritDoc */
+  get _canChange() {
+    return this.active && super._canChange;
+  }
+
   /**
    * Alternative to {@link TeriockActiveEffect.isTemporary} that only references duration.
    * @returns {boolean}
