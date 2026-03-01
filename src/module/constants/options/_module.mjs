@@ -21,6 +21,7 @@ import { rankOptions } from "./rank-options.mjs";
 import { speciesOptions } from "./species-options.mjs";
 import { takeOptions } from "./take-options.mjs";
 import { targetOptions } from "./target-options.mjs";
+import { timeOptions } from "./time-options.mjs";
 import { tradecraftOptions } from "./tradecraft-options.mjs";
 
 const options = {
@@ -29,9 +30,9 @@ const options = {
   attunement: attunementOptions,
   change,
   character: characterOptions,
+  competence: competenceOptions,
   consequence: consequenceOptions,
   currency: currencyOptions,
-  competence: competenceOptions,
   delivery: deliveryOptions,
   die: dieOptions,
   display: displayOptions,
@@ -40,13 +41,14 @@ const options = {
   equipment: equipmentOptions,
   hack: hackOptions,
   index: indexOptions,
-  power: powerOptions,
   piercing: piercingOptions,
+  power: powerOptions,
   protection: protectionOptions,
   rank: rankOptions,
   species: speciesOptions,
   take: takeOptions,
   target: targetOptions,
+  time: timeOptions,
   tradecraft: tradecraftOptions,
 };
 

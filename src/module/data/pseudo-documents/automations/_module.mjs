@@ -13,6 +13,7 @@ export { default as HacksAutomation } from "./hacks-automation.mjs";
 export { default as HealAutomation } from "./heal-automation.mjs";
 export { default as PropertyMacroAutomation } from "./property-macro-automation.mjs";
 export { default as ProtectionAutomation } from "./protection-automation.mjs";
+export { default as RegainUsesAutomation } from "./regain-uses-automation.mjs";
 export { default as ResistAutomation } from "./resist-automation.mjs";
 export { default as RevitalizeAutomation } from "./revitalize-automation.mjs";
 export { default as RollAutomation } from "./roll-automation.mjs";

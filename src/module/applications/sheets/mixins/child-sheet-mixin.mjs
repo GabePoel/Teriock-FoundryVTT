@@ -1,6 +1,9 @@
 import { icons } from "../../../constants/display/icons.mjs";
 import { systemPath } from "../../../helpers/path.mjs";
-import { fancifyFields, makeIconClass } from "../../../helpers/utils.mjs";
+import {
+  fancifyFields,
+  makeIconClass
+} from "../../../helpers/utils.mjs";
 import { TeriockTextEditor } from "../../ux/_module.mjs";
 
 /**
@@ -30,6 +33,7 @@ export default function ChildSheetMixin(Base) {
       static DEFAULT_OPTIONS = {
         actions: {
           populateField: this._onPopulateField,
+          openSource: this.#onOpenSource,
         },
         window: {
           controls: [
@@ -38,6 +42,11 @@ export default function ChildSheetMixin(Base) {
               icon: makeIconClass(icons.ui.delete, "contextMenu"),
               label: "TERIOCK.SYSTEMS.Common.MENU.delete",
               ownership: "OWNER",
+            },
+            {
+              action: "openSource",
+              icon: makeIconClass(icons.ui.openWindow, "contextMenu"),
+              label: "TERIOCK.SYSTEMS.Common.MENU.openSource",
             },
           ],
         },
@@ -63,6 +72,14 @@ export default function ChildSheetMixin(Base) {
         ...this.MENU_PARTS,
         ...this.CONTENT_PARTS,
       };
+
+      /**
+       * Open this document's elder if it exists.
+       * @returns {Promise<void>}
+       */
+      static async #onOpenSource() {
+        await this.document.elder?.sheet.render(true);
+      }
 
       /**
        * Populate a display field.

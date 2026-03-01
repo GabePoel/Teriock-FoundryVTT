@@ -19,6 +19,7 @@
             "label": "Relation"
           }
         },
+        "LABEL": "Automation",
         "TOOLTIPS": {
           "competence": {
             "base": {
@@ -181,6 +182,26 @@
           }
         },
         "LABEL": "Protection"
+      },
+      "RegainUsesAutomation": {
+        "DIALOG": {
+          "text": "Would you like {name} to regain uses?"
+        },
+        "FIELDS": {
+          "formula": {
+            "hint": "An amount of consumable uses to regain. Can be negative.",
+            "label": "Formula"
+          },
+          "trigger": {
+            "hint": "The event that causes this to regain consumable uses.",
+            "label": "Trigger"
+          }
+        },
+        "LABEL": "Regain Uses",
+        "USAGE": {
+          "description": "Regain uses of {name}.",
+          "roll": "Regain Uses Roll"
+        }
       },
       "ResistAutomation": {
         "FIELDS": {
@@ -1757,6 +1778,10 @@
         "hint": "If enabled, equipment will be secret when used by default.",
         "name": "Secret Armaments"
       },
+      "showLongRestDialog": {
+        "hint": "If enabled, a dialog to heal, revitalize, and restore lost hit dice and mana dice will appear for each of your actors on a long rest.",
+        "name": "Show Long Rest Dialog"
+      },
       "showRollDialogs": {
         "hint": "If enabled, a dialog will be shown before making most rolls.",
         "name": "Show Roll Dialogs"
@@ -1807,9 +1832,17 @@
             "hint": "Select the default armament you block with.",
             "label": "Select Primary Blocker"
           },
+          "TakeLongRest": {
+            "healText": "Would you like to restore all lost HP and MP regain all spent hit dice and mana dice?",
+            "healTitle": "Long Rest Healing",
+            "label": "Take Long Rest"
+          },
           "TakeRollable": {
             "hint": "The amount of {effect} to take.",
             "ok": "Confirm"
+          },
+          "TakeShortRest": {
+            "label": "Take Short Rest"
           }
         },
         "CONDITIONS": {
@@ -2561,8 +2594,8 @@
           "range": {
             "long": {
               "raw": {
-                "label": "Range",
-                "alt": "Long Range"
+                "alt": "Long Range",
+                "label": "Range"
               }
             },
             "melee": {
@@ -3227,6 +3260,9 @@
         }
       },
       "StatGiver": {
+        "DIALOG": {
+          "cantToggle": "The disabled state of this stat die cannot be changed due to some other property of its parent document."
+        },
         "FIELDS": {
           "statDice": {
             "hp": {
@@ -3247,9 +3283,6 @@
           "hp": "{value} Hit Dice",
           "mp": "{value} Mana Dice",
           "statDice": "Stat Dice"
-        },
-        "DIALOG": {
-          "cantToggle": "The disabled state of this stat die cannot be changed due to some other property of its parent document."
         }
       },
       "Stone": {
@@ -5782,6 +5815,12 @@
         "plant": "Plant",
         "playerCharacter": "Player character",
         "undead": "Undead"
+      },
+      "Triggers": {
+        "dawn": "Dawn",
+        "dusk": "Dusk",
+        "longRest": "Long Rest",
+        "shortRest": "Short Rest"
       },
       "WeaponFightingStyles": {
         "bluntForce": "Blunt Force",

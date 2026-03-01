@@ -16,9 +16,11 @@ export default (Base) =>
     static DEFAULT_OPTIONS = {
       actions: {
         deathBagPull: this.#onDeathBagPull,
-        quickUse: this._onQuickUse,
-        toggleCondition: this.#onToggleCondition,
         increaseCover: this.#onIncreaseCover,
+        quickUse: this._onQuickUse,
+        takeLongRest: this.#onTakeLongRest,
+        takeShortRest: this.#onTakeShortRest,
+        toggleCondition: this.#onToggleCondition,
       },
       window: {
         controls: [
@@ -26,6 +28,18 @@ export default (Base) =>
             action: "deathBagPull",
             icon: makeIconClass(icons.ui.deathBag, "contextMenu"),
             label: "TERIOCK.EFFECTS.Common.bag",
+            ownership: "OWNER",
+          },
+          {
+            action: "takeLongRest",
+            icon: makeIconClass(icons.ui.longRest, "contextMenu"),
+            label: "TERIOCK.SHEETS.Actor.ACTIONS.TakeLongRest.label",
+            ownership: "OWNER",
+          },
+          {
+            action: "takeShortRest",
+            icon: makeIconClass(icons.ui.shortRest, "contextMenu"),
+            label: "TERIOCK.SHEETS.Actor.ACTIONS.TakeShortRest.label",
             ownership: "OWNER",
           },
         ],
@@ -50,6 +64,22 @@ export default (Base) =>
       } else {
         await this.document.system.decreaseCover(3);
       }
+    }
+
+    /**
+     * Take a long rest.
+     * @returns {Promise<void>}
+     */
+    static async #onTakeLongRest() {
+      await this.actor.fireTrigger("longRest");
+    }
+
+    /**
+     * Take a short rest.
+     * @returns {Promise<void>}
+     */
+    static async #onTakeShortRest() {
+      await this.actor.fireTrigger("shortRest");
     }
 
     /**

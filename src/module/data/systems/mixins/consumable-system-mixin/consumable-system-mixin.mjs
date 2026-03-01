@@ -1,4 +1,10 @@
+import { TeriockDialog } from "../../../../applications/api/_module.mjs";
+import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
+import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
+import { TeriockChatMessage } from "../../../../documents/_module.mjs";
+import { makeIconClass } from "../../../../helpers/utils.mjs";
 import { EvaluationField } from "../../../fields/_module.mjs";
+import { RegainUsesAutomation } from "../../../pseudo-documents/automations/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -11,6 +17,7 @@ export default function ConsumableSystemMixin(Base) {
     /**
      * @extends {ChildSystem}
      * @implements {Teriock.Models.ConsumableSystemInterface}
+     * @mixes OperationTriggerData
      * @mixin
      */
     class ConsumableSystem extends Base {
@@ -19,6 +26,11 @@ export default function ConsumableSystemMixin(Base) {
         ...super.LOCALIZATION_PREFIXES,
         "TERIOCK.SYSTEMS.Consumable",
       ];
+
+      /** @inheritDoc */
+      static get _automationTypes() {
+        return [...super._automationTypes, RegainUsesAutomation];
+      }
 
       /** @inheritDoc */
       static get metadata() {
@@ -116,6 +128,127 @@ export default function ConsumableSystemMixin(Base) {
         return parts;
       }
 
+      /** @inheritDoc */
+      _onDawn() {
+        super._onDawn();
+        this._regainUsesFromTrigger("dawn").then();
+      }
+
+      /** @inheritDoc */
+      _onDusk() {
+        super._onDusk();
+        this._regainUsesFromTrigger("dusk").then();
+      }
+
+      /** @inheritDoc */
+      _onLongRest() {
+        super._onLongRest();
+        this._regainUsesFromTrigger("longRest").then();
+      }
+
+      /** @inheritDoc */
+      _onShortRest() {
+        super._onShortRest();
+        this._regainUsesFromTrigger("shortRest").then();
+      }
+
+      /**
+       * Regain uses that match a specific trigger defined in automations.
+       * @param {Teriock.System.TimeTrigger} trigger
+       */
+      async _regainUsesFromTrigger(trigger) {
+        const candidateAutomations =
+          /** @type {RegainUsesAutomation[]} */ this.activeAutomations.filter(
+            (a) => a.type === RegainUsesAutomation.TYPE,
+          );
+        const triggeredAutomations = candidateAutomations.filter(
+          (a) => a.trigger === trigger,
+        );
+        let change = 0;
+        for (const a of triggeredAutomations) {
+          if (!this.consumable) continue;
+          const regain = await TeriockDialog.confirm({
+            window: {
+              title: game.i18n.localize(
+                "TERIOCK.AUTOMATIONS.RegainUsesAutomation.LABEL",
+              ),
+              icon: makeIconClass(
+                TERIOCK.options.document[this.parent.type].icon,
+                "title",
+              ),
+            },
+            content: await TeriockTextEditor.enrichHTML(
+              "<p>" +
+                game.i18n.format(
+                  "TERIOCK.AUTOMATIONS.RegainUsesAutomation.DIALOG.text",
+                  { name: `@UUID[${this.parent.uuid}]` },
+                ) +
+                "</p>",
+            ),
+          });
+          if (!regain) continue;
+          const roll = new BaseRoll(a.formula, this.getRollData(), {
+            flavor: game.i18n.localize(
+              "TERIOCK.AUTOMATIONS.RegainUsesAutomation.USAGE.roll",
+            ),
+          });
+          await roll.evaluate();
+          /** @type {Teriock.MessageData.MessagePanel} */
+          const panelData = {
+            image: this.parent.img,
+            name: game.i18n.localize(
+              "TERIOCK.AUTOMATIONS.RegainUsesAutomation.LABEL",
+            ),
+            label: game.i18n.localize(
+              "TERIOCK.AUTOMATIONS.RegainUsesAutomation.LABEL",
+            ),
+            bars: [
+              {
+                label: game.i18n.localize(
+                  "TERIOCK.SHEETS.Common.NAVIGATION.enterAutomationsTab",
+                ),
+                icon: TERIOCK.display.icons.ui.automations,
+                wrappers: [
+                  game.i18n.localize(
+                    "TERIOCK.AUTOMATIONS.BaseAutomation.LABEL",
+                  ),
+                  TERIOCK.options.time.triggers[trigger],
+                ],
+              },
+            ],
+            blocks: [
+              {
+                title: game.i18n.localize(
+                  "TERIOCK.SYSTEMS.Child.FIELDS.description.label",
+                ),
+                text: game.i18n.format(
+                  "TERIOCK.AUTOMATIONS.RegainUsesAutomation.USAGE.description",
+                  { name: this.parent.nameString },
+                ),
+              },
+            ],
+          };
+          const panel = await TeriockTextEditor.enrichPanel(panelData);
+          const messageData = {
+            speaker: TeriockChatMessage.getSpeaker({ actor: this.actor }),
+            rolls: [roll],
+            system: {
+              panels: [panel],
+            },
+          };
+          await TeriockChatMessage.create(messageData);
+          change += roll.total;
+        }
+        if (change !== 0) {
+          await this.parent.update({
+            "system.quantity": Math.max(
+              Math.min(this.maxQuantity.value, this.quantity + change),
+              0,
+            ),
+          });
+        }
+      }
+
       /**
        * Adds one unit to the consumable item.
        * Increments the quantity by 1, respecting maximum quantity limits.
@@ -137,6 +270,7 @@ export default function ConsumableSystemMixin(Base) {
         return {
           ...super.getLocalRollData(),
           consumable: Number(this.consumable),
+          max: this.consumable ? this.maxQuantity.value : 1,
           quantity: this.consumable ? this.quantity : 1,
           "quantity.max": this.consumable ? this.maxQuantity.value : 1,
         };

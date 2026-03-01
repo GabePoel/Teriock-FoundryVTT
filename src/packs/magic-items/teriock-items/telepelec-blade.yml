@@ -29,7 +29,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.23
+      systemVersion: 0.10.28
     img: systems/teriock/src/icons/abilities/flame-ray.webp
     name: Flame Ray
     system:
@@ -115,7 +115,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.23
+      systemVersion: 0.10.28
     img: systems/teriock/src/icons/abilities/lightning-ray.webp
     name: Lightning Ray
     system:
@@ -221,7 +221,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.2
+      systemVersion: 0.10.28
     img: systems/teriock/src/icons/properties/mana-storing.webp
     name: Mana Storing
     system:
@@ -234,7 +234,7 @@ effects:
         number N associated with them (1, by default, if no number is listed).
         This number refers to a "mana die" analogous to those that creatures
         have. It is always [[/roll 1d4]] (3 MP), which means the item stores a
-        maximum of N × 3 @L[Core:MP]{MP}. At dawn, if
+        maximum of N × 4 @L[Core:MP]{MP}. At dawn, if
         @L[Ability:Attune]{attuned} to the [[lookup name style=lc]] item, roll
         [[/roll d4]]. The item regains up to this much spent @L[Core:MP]{MP}. If
         dawn comes and nobody is @L[Ability:Attune]{attuned} to a [[lookup
@@ -250,7 +250,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.23
+      systemVersion: 0.10.28
     img: systems/teriock/src/icons/properties/ranged.webp
     name: Ranged
     system:
@@ -312,40 +312,6 @@ effects:
       form: intrinsic
       revealed: true
     type: property
-  - _id: 7BchbaFnAQu4kqcr
-    _key: '!items.effects!dc32b921d467d5bc.7BchbaFnAQu4kqcr'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.9.17
-    disabled: false
-    img: systems/teriock/src/icons/general/celestial-mana-storing.webp
-    name: Stored Mana
-    system:
-      competence:
-        raw: 0
-      consumable: true
-      description: >-
-        A <b>mana storing</b> item has some latent energy held within it that
-        creatures can use to power their own @L[Category:Abilities]{abilities}.
-        Mana storing items will always have a number N associated with them (1,
-        by default, if no number is listed). This number refers to a "mana die"
-        analogous to those that creatures have. It is always [[/roll 1d4]] (3
-        MP), which means the item stores a maximum of N × 3 @L[Core:MP]{MP}. At
-        dawn, if @L[Ability:Attune]{attuned} to the mana storing item, roll
-        [[/roll d4]]. The item regains up to this much spent @L[Core:MP]{MP}. If
-        dawn comes and nobody is @L[Ability:Attune]{attuned} to a Mana Storing
-        item, it releases all @L[Core:MP]{MP} it had stored.
-      macros:
-        - Compendium.teriock.player.Macro.20AgUNM6tioUSxHq
-      maxQuantity:
-        raw: '6'
-      quantity: 0
-      revealed: true
-    tint: '#ffffff'
-    transfer: true
-    type: resource
   - _id: gWYrox9o6GFVxS0W
     _key: '!items.effects!dc32b921d467d5bc.gWYrox9o6GFVxS0W'
     _stats:
@@ -385,6 +351,53 @@ effects:
       form: intrinsic
       revealed: true
     type: property
+  - _id: SxbVTMEujFq96Ssk
+    _key: '!items.effects!dc32b921d467d5bc.SxbVTMEujFq96Ssk'
+    _stats:
+      compendiumSource: Compendium.teriock.essentials.Item.e7cc58f0e03ffb75
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.10.28
+    disabled: false
+    img: systems/teriock/src/icons/general/celestial-mana-storing.webp
+    name: Stored Mana
+    system:
+      automations:
+        GgWN3WmfMLRcQ8yI:
+          _id: GgWN3WmfMLRcQ8yI
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: (@resource.max / 4)d4
+          heighten:
+            - 0
+            - 1
+          trigger: dawn
+          type: regain
+      competence:
+        raw: 0
+      consumable: true
+      description: >-
+        <p>A <strong>mana storing</strong> item has some latent energy held
+        within it that creatures can use to power their own
+        @L[Category:Abilities]{abilities}. Mana storing items will always have a
+        number N associated with them (1, by default, if no number is listed).
+        This number refers to a "mana die" analogous to those that creatures
+        have. It is always [[/roll 1d4]] (3 MP), which means the item stores a
+        maximum of N × 4 @L[Core:MP]{MP}. At dawn, if
+        @L[Ability:Attune]{attuned} to the mana storing item, roll [[/roll d4]].
+        The item regains up to this much spent @L[Core:MP]{MP}. If dawn comes
+        and nobody is @L[Ability:Attune]{attuned} to a Mana Storing item, it
+        releases all @L[Core:MP]{MP} it had stored.</p>
+      maxQuantity:
+        raw: '4'
+      quantity: 0
+      revealed: true
+    tint: '#ffffff'
+    transfer: true
+    type: resource
 folder: 9e47cf966e0cd702
 img: systems/teriock/src/assets/items/telepelec-blade.webp
 name: Telepelec Blade

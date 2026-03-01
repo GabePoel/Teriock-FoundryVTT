@@ -68,6 +68,7 @@ export default class AbilitySystem extends mix(
   /** @inheritDoc */
   static get _automationTypes() {
     return [
+      ...super._automationTypes,
       automations.AbilityMacroAutomation,
       automations.ChangesAutomation,
       automations.CheckAutomation,

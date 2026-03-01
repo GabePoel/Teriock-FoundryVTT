@@ -52,6 +52,14 @@ export function registerSettings() {
       scope: "user",
       type: Boolean,
     },
+    showLongRestDialog: {
+      config: true,
+      default: true,
+      hint: "TERIOCK.SETTINGS.showRollDialogs.hint",
+      name: "TERIOCK.SETTINGS.showLongRestDialog.name",
+      scope: "user",
+      type: Boolean,
+    },
     defaultPanelCollapseState: {
       config: true,
       default: "auto",

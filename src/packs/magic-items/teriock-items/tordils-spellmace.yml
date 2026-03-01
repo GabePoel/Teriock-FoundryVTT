@@ -4,7 +4,7 @@ _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.23
+  systemVersion: 0.10.28
 effects:
   - _id: QfYIvnVdhSo69Db6
     _key: '!items.effects!21b38d71792642dd.QfYIvnVdhSo69Db6'
@@ -25,6 +25,265 @@ effects:
       form: intrinsic
       revealed: true
     type: property
+  - _id: YO5TamPRhJOmWbtw
+    _key: '!items.effects!21b38d71792642dd.YO5TamPRhJOmWbtw'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.9d87c75655012284
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.10.28
+    img: icons/magic/symbols/runes-star-pentagon-orange-purple.webp
+    name: Spell Store
+    system:
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      delivery:
+        base: sight
+        package: ritual
+      duration:
+        dawn: false
+        raw: '1'
+        stationary: false
+        unit: hour
+      executionTime:
+        base: 10 Minutes
+        slow:
+          raw: '10'
+          unit: minute
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: true
+      identifier: spell-store
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>You "store" a @L[Category:Missile delivery spells]{missile attack
+          spell} that you can cast and are @L[Core:Proficiency
+          Bonus]{proficient} in in the target @L[Category:Weapons]{weapon}. For
+          the duration of [[lookup name]], you gain @L[Keyword:Limited]{Limited}
+          @L[Keyword:Improved]{Improved} @L[Ability:Spell Strike]{Spell Strike}.
+          Only one @L[Category:Missile delivery spells]{spell} can be stored in
+          the target @L[Category:Weapons]{weapon} at a time.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        raw: '5'
+        unit: ft
+      revealed: true
+      ritual: true
+      targets:
+        - weapon
+    type: ability
+  - _id: 0U6JLkgiwD6swAVF
+    _key: '!items.effects!21b38d71792642dd.0U6JLkgiwD6swAVF'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.ea1ecd00bc4430e1
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.10.28
+    img: systems/teriock/src/icons/abilities/spell-strike.webp
+    name: Spell Strike
+    system:
+      _sup: YO5TamPRhJOmWbtw
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      delivery:
+        base: weapon
+      duration:
+        dawn: false
+        raw: '0'
+        stationary: false
+        unit: instant
+      executionTime:
+        base: r0
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      identifier: spell-strike
+      improvement: >-
+        <p>You are considered to have and be @L[Core:Proficiency
+        Bonus]{proficient} in the stored spell for this purpose.</p>
+      interaction: manifest
+      limitation: >-
+        <p>Can only be used with the stored spell and the item it is stored
+        in.</p>
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>Target takes the "on hit" effect of a @L[Category:Missile delivery
+          spells]{missile spell} that you are @L[Core:Proficiency
+          Bonus]{proficient} in. If the triggering hit was a critical hit, then
+          the target takes the "on critical hit" effect instead.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: melee
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - creature
+      trigger: >-
+        <p>You have just landed a hit with a @L[Category:Weapon delivery
+        abilities]{weapon} or @L[Category:Bite delivery abilities]{bite}
+        @L[Category:Attack abilities]{attack} on another creature and the effect
+        has successfully applied.</p>
+    type: ability
+  - _id: tFJU61ATYk8dIyh4
+    _key: '!items.effects!21b38d71792642dd.tFJU61ATYk8dIyh4'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.25a219e3670cd776
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.10.28
+    img: icons/magic/defensive/shield-barrier-flaming-pentagon-purple-orange.webp
+    name: Spell Catch
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: weapon
+      duration:
+        dawn: false
+        raw: '1'
+        stationary: false
+        unit: hour
+      effectTypes:
+        - magical
+      executionTime:
+        base: r1
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: true
+      identifier: spell-catch
+      interaction: block
+      maneuver: reactive
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: melee
+      requirements: >-
+        <p>Target is a @L[Category:Missile delivery spells]{missile attack
+        spell} being cast by an opponent.</p>
+      results:
+        save: >-
+          <p>The target @L[Core:Interactions]{attack} @L[Category:Missile
+          delivery spells]{spell} @L[Core:Fizzles]{fizzles} and gets "stored" in
+          the @L[Category:Weapons]{weapon} used to deliver [[lookup name]]. For
+          the duration of [[lookup name]], you gain @L[Keyword:Adept]{Adept}
+          @L[Keyword:Limited]{Limited} @L[Keyword:Improved]{Improved}
+          @L[Ability:Spell Strike]{Spell Strike}. Only one @L[Category:Missile
+          delivery spells]{spell} can be stored in the
+          @L[Category:Weapons]{weapon} at a time.</p>
+      revealed: true
+      targets:
+        - spell
+    type: ability
+  - _id: dzBSdtII82tEEhhC
+    _key: '!items.effects!21b38d71792642dd.dzBSdtII82tEEhhC'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.ea1ecd00bc4430e1
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.10.28
+    img: systems/teriock/src/icons/abilities/spell-strike.webp
+    name: Spell Strike
+    system:
+      _sup: tFJU61ATYk8dIyh4
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      delivery:
+        base: weapon
+      duration:
+        dawn: false
+        raw: '0'
+        stationary: false
+        unit: instant
+      executionTime:
+        base: r0
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      identifier: spell-strike
+      improvement: >-
+        <p>You are considered to have and be @L[Core:Proficiency
+        Bonus]{proficient} in the stored spell for this purpose.</p>
+      interaction: manifest
+      limitation: >-
+        <p>Can only be used with the stored spell and the item it is stored
+        in.</p>
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>Target takes the "on hit" effect of a @L[Category:Missile delivery
+          spells]{missile spell} that you are @L[Core:Proficiency
+          Bonus]{proficient} in. If the triggering hit was a critical hit, then
+          the target takes the "on critical hit" effect instead.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: melee
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - creature
+      trigger: >-
+        <p>You have just landed a hit with a @L[Category:Weapon delivery
+        abilities]{weapon} or @L[Category:Bite delivery abilities]{bite}
+        @L[Category:Attack abilities]{attack} on another creature and the effect
+        has successfully applied.</p>
+    type: ability
 folder: 9e47cf966e0cd702
 img: systems/teriock/src/assets/items/tordils-spellmace.webp
 name: Tordil's Spellmace
@@ -59,6 +318,8 @@ system:
     ranged: false
     short:
       unit: melee
+  tier:
+    raw: '3'
   vitals: false
   weight:
     raw: '1'

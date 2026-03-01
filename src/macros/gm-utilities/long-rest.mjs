@@ -1,0 +1,1 @@
+Hooks.callAll("teriock.longRest");

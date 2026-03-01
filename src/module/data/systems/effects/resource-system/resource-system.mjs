@@ -20,6 +20,7 @@ export default class ResourceSystem extends mix(
   /** @inheritDoc */
   static get _automationTypes() {
     return [
+      ...super._automationTypes,
       automations.CheckAutomation,
       automations.CommonImpactsAutomation,
       automations.CommonMacroAutomation,

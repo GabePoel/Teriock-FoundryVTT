@@ -44,7 +44,7 @@ export default (Base) => {
             hint: game.i18n.localize(
               "TERIOCK.DIALOGS.Select.AddAutomation.hint",
             ),
-            icon: TERIOCK.display.icons.document.automation,
+            icon: TERIOCK.display.icons.ui.automations,
             title: game.i18n.localize(
               "TERIOCK.DIALOGS.Select.AddAutomation.title",
             ),

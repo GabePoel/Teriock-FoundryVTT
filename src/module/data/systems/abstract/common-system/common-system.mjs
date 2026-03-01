@@ -3,6 +3,7 @@ import { quickAddAssociation } from "../../../../helpers/html.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
 import {
   AccessDataMixin,
+  OperationTriggerDataMixin,
   PropagationDataMixin,
 } from "../../../shared/mixins/_module.mjs";
 import { AutomatableSystemMixin } from "../../mixins/_module.mjs";
@@ -22,6 +23,7 @@ const { fields } = foundry.data;
 export default class CommonSystem extends mix(
   RulesSystem,
   PropagationDataMixin,
+  OperationTriggerDataMixin,
   AccessDataMixin,
   AutomatableSystemMixin,
 ) {

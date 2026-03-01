@@ -1,6 +1,7 @@
 import { TeriockMacro } from "../documents/_module.mjs";
 import { displayOptions } from "../constants/options/display-options.mjs";
 import { pseudoHooks } from "../constants/system/_module.mjs";
+import type { timeOptions } from "../constants/options/time-options.mjs";
 
 declare global {
   export namespace Teriock.Parameters.Shared {
@@ -32,6 +33,11 @@ declare global {
       /** Force even subs to keep their `_id`. May cause `_id` collisions. */
       keepSubIds?: boolean;
     };
+
+    /**
+     * A defined trigger time that can be invoked.
+     */
+    export type TimeTrigger = keyof typeof timeOptions.triggers;
 
     /**
      * Something's competency level specifies if it's proficient or fluent.

@@ -1,3 +1,4 @@
+import OperationTriggerDataMixin from "../../data/shared/mixins/operation-trigger-data-mixin.mjs";
 import PropagationDataMixin from "../../data/shared/mixins/propagation-data-mixin.mjs";
 import { systemPath } from "../../helpers/path.mjs";
 import { mix } from "../../helpers/utils.mjs";
@@ -7,7 +8,7 @@ import {
   EmbedCardDocumentMixin,
   HierarchyDocumentMixin,
   PanelDocumentMixin,
-  SettingsDocumentMixin,
+  SettingsDocumentMixin
 } from "./_module.mjs";
 
 /**
@@ -20,6 +21,7 @@ export default function CommonDocumentMixin(Base) {
     /**
      * @extends BaseDocument
      * @mixes PropagationData
+     * @mixes OperationTriggerData
      * @mixes ChangeableDocument
      * @mixes EmbedCardDocument
      * @mixes HierarchyDocument
@@ -30,6 +32,7 @@ export default function CommonDocumentMixin(Base) {
     class CommonDocument extends mix(
       Base,
       PropagationDataMixin,
+      OperationTriggerDataMixin,
       ChangeableDocumentMixin,
       EmbedCardDocumentMixin,
       HierarchyDocumentMixin,

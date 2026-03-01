@@ -1,3 +1,5 @@
+import { timeOptions } from "../../constants/options/time-options.mjs";
+
 /**
  * Get each {@link TeriockActor} in the current scene.
  * @returns {TeriockActor[]}
@@ -41,13 +43,13 @@ export default function registerTimeManagementHooks() {
     },
   );
 
-  foundry.helpers.Hooks.on("teriock.dawn", async () => {
-    if (game.user.isActiveGM) {
+  for (const trigger of Object.keys(timeOptions.triggers)) {
+    foundry.helpers.Hooks.on(`teriock.${trigger}`, async () => {
       for (const actor of getActors()) {
-        for (const effect of actor.dawnExpirationEffects) {
-          await effect.system.expire();
+        if (game.user.id === actor.defaultUser.id) {
+          actor?.fireTrigger(trigger).then();
         }
       }
-    }
-  });
+    });
+  }
 }

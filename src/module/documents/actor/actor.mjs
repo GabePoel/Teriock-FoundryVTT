@@ -1,8 +1,9 @@
+import { TeriockDialog } from "../../applications/api/_module.mjs";
 import { documentTypes } from "../../constants/system/_module.mjs";
 import { systemPath } from "../../helpers/path.mjs";
 import { pureUuid, resolveDocument } from "../../helpers/resolve.mjs";
 import { toCamelCase } from "../../helpers/string.mjs";
-import { mix } from "../../helpers/utils.mjs";
+import { makeIconClass, mix } from "../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
 import TeriockTokenDocument from "../token-document/token-document.mjs";
 
@@ -16,6 +17,7 @@ const { Actor } = foundry.documents;
  * @mixes CommonDocument
  * @mixes ParentDocument
  * @mixes RetrievalDocument
+ * @mixes OperationTriggerData
  * @property {TypeCollection<GenericActiveEffect, GenericActiveEffect>} effects
  * @property {TypeCollection<GenericItem, GenericItem>} items
  * @property {Teriock.Documents.ActorModel} system
@@ -290,6 +292,14 @@ export default class TeriockActor extends mix(
     }
   }
 
+  /** @inheritDoc */
+  _onDawn() {
+    super._onDawn();
+    for (const effect of this.dawnExpirationEffects) {
+      effect.system.expire().then();
+    }
+  }
+
   /**
    * @inheritDoc
    * @param {ActorData} data
@@ -320,6 +330,49 @@ export default class TeriockActor extends mix(
       prototypeToken.height = size;
     }
     this.updateSource({ prototypeToken: prototypeToken });
+  }
+
+  /** @inheritDoc */
+  async _preLongRest() {
+    await super._preLongRest();
+    if (this.statuses.has("dead")) return;
+    const heal =
+      game.settings.get("teriock", "showLongRestDialog") &&
+      (await TeriockDialog.confirm({
+        window: {
+          title: game.i18n.localize(
+            "TERIOCK.SHEETS.Actor.ACTIONS.TakeLongRest.label",
+          ),
+          icon: makeIconClass(TERIOCK.display.icons.ui.longRest, "title"),
+        },
+        content: game.i18n.localize(
+          "TERIOCK.SHEETS.Actor.ACTIONS.TakeLongRest.healText",
+        ),
+        modal: true,
+        rejectClose: false,
+      }));
+    if (heal) {
+      const toUpdate = [];
+      for (const item of [...this.ranks, ...this.species, ...this.mounts]) {
+        const itemUpdates = { _id: item.id };
+        const hpDice = item.system.statDice.hp.dice.map((d) => d.toObject());
+        for (const d of hpDice) {
+          d.spent = false;
+        }
+        const mpDice = item.system.statDice.mp.dice.map((d) => d.toObject());
+        for (const d of mpDice) {
+          d.spent = false;
+        }
+        itemUpdates["system.statDice.hp.dice"] = hpDice;
+        itemUpdates["system.statDice.mp.dice"] = mpDice;
+        toUpdate.push(itemUpdates);
+      }
+      await this.updateChildDocuments("Item", toUpdate);
+      await this.update({
+        "system.hp.value": this.system.hp.max,
+        "system.mp.value": this.system.mp.max,
+      });
+    }
   }
 
   /**
