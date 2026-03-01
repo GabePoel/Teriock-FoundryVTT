@@ -62,6 +62,16 @@ export default (Base) =>
     /** @inheritDoc */
     async _prepareContext(options = {}) {
       const context = await super._prepareContext(options);
+      const tcFields = foundry.utils.deepClone(TERIOCK.options.tradecraft);
+      delete tcFields.prestige;
+      context.tradecraftFields = tcFields;
+
+      const p1 = foundry.utils.deepClone(TERIOCK.options.tradecraft.prestige);
+      const p2 = foundry.utils.deepClone(TERIOCK.options.tradecraft.prestige);
+      delete p1.tradecrafts.tinkerer;
+      delete p2.tradecrafts.metaphysicist;
+      context.prestigeFields = { p1, p2 };
+
       const index = game.teriock.packs.player.index;
       context.tradecraftMacros = Object.fromEntries(
         Object.entries(TERIOCK.index.tradecrafts).map(([tc, name]) => [

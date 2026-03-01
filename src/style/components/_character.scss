@@ -392,10 +392,6 @@ body > form:only-child section .character-page,
       &.collapsed {
         left: 0;
 
-        //.character-sidebar-tabber {
-        //  border-left: none !important;
-        //}
-
         .expanded-icon {
           display: none;
         }
@@ -570,18 +566,15 @@ body > form:only-child section .character-page,
     margin: 0;
     padding: 0.5em;
 
-    &:nth-child(1),
-    &:nth-child(3) {
+    &:nth-child(odd) {
       border-right: 1px dashed var(--color-form-hint);
     }
 
-    &:nth-child(2),
-    &:nth-child(4) {
+    &:nth-child(even) {
       padding-left: 12px;
     }
 
-    &:nth-child(1),
-    &:nth-child(2) {
+    &:not(:nth-last-child(-n + 2)) {
       border-bottom: 1px dashed var(--color-form-hint);
     }
   }
@@ -878,15 +871,3 @@ body > form:only-child section .character-page,
   padding: 0;
   width: 100%;
 }
-
-//$modifier-panel-gap: 3px;
-//
-//.tradecraft-panel {
-//  row-gap: calc(0.5rem - 2 * $modifier-panel-gap);
-//}
-//
-//.tradecraft-container {
-//  @include mixins.box-hover;
-//  border-radius: 4px;
-//  padding-block: $modifier-panel-gap;
-//}
