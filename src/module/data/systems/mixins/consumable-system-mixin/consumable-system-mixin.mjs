@@ -168,15 +168,6 @@ export default function ConsumableSystemMixin(Base) {
         for (const a of triggeredAutomations) {
           if (!this.consumable) continue;
           const regain = await TeriockDialog.confirm({
-            window: {
-              title: game.i18n.localize(
-                "TERIOCK.AUTOMATIONS.RegainUsesAutomation.LABEL",
-              ),
-              icon: makeIconClass(
-                TERIOCK.options.document[this.parent.type].icon,
-                "title",
-              ),
-            },
             content: await TeriockTextEditor.enrichHTML(
               "<p>" +
                 game.i18n.format(
@@ -185,6 +176,15 @@ export default function ConsumableSystemMixin(Base) {
                 ) +
                 "</p>",
             ),
+            window: {
+              icon: makeIconClass(
+                TERIOCK.options.document[this.parent.type].icon,
+                "title",
+              ),
+              title: game.i18n.localize(
+                "TERIOCK.AUTOMATIONS.RegainUsesAutomation.LABEL",
+              ),
+            },
           });
           if (!regain) continue;
           const roll = new BaseRoll(a.formula, this.getRollData(), {
@@ -195,13 +195,6 @@ export default function ConsumableSystemMixin(Base) {
           await roll.evaluate();
           /** @type {Teriock.MessageData.MessagePanel} */
           const panelData = {
-            image: this.parent.img,
-            name: game.i18n.localize(
-              "TERIOCK.AUTOMATIONS.RegainUsesAutomation.LABEL",
-            ),
-            label: game.i18n.localize(
-              "TERIOCK.AUTOMATIONS.RegainUsesAutomation.LABEL",
-            ),
             bars: [
               {
                 label: game.i18n.localize(
@@ -218,20 +211,28 @@ export default function ConsumableSystemMixin(Base) {
             ],
             blocks: [
               {
-                title: game.i18n.localize(
-                  "TERIOCK.SYSTEMS.Child.FIELDS.description.label",
-                ),
                 text: game.i18n.format(
                   "TERIOCK.AUTOMATIONS.RegainUsesAutomation.USAGE.description",
                   { name: this.parent.nameString },
                 ),
+                title: game.i18n.localize(
+                  "TERIOCK.SYSTEMS.Child.FIELDS.description.label",
+                ),
               },
             ],
+            icon: TERIOCK.display.icons.ui.automations,
+            image: this.parent.img,
+            label: game.i18n.localize(
+              "TERIOCK.AUTOMATIONS.RegainUsesAutomation.LABEL",
+            ),
+            name: game.i18n.localize(
+              "TERIOCK.AUTOMATIONS.RegainUsesAutomation.LABEL",
+            ),
           };
           const panel = await TeriockTextEditor.enrichPanel(panelData);
           const messageData = {
-            speaker: TeriockChatMessage.getSpeaker({ actor: this.actor }),
             rolls: [roll],
+            speaker: TeriockChatMessage.getSpeaker({ actor: this.actor }),
             system: {
               panels: [panel],
             },
