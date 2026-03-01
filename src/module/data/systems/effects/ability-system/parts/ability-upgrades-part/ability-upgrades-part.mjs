@@ -80,6 +80,15 @@ export default (Base) => {
       }
 
       /** @inheritDoc */
+      get canChange() {
+        return (
+          super.canChange ||
+          !!this.upgrades.score.attribute ||
+          !!this.upgrades.competence.attribute
+        );
+      }
+
+      /** @inheritDoc */
       get changes() {
         const changes = super.changes;
         if (this.upgrades.score.attribute) {
