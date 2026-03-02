@@ -8,6 +8,7 @@ import PixiJS from "pixi.js";
 import * as placeables from "./canvas/placeables/_module.mjs";
 
 declare global {
+  // @ts-expect-error Double global.
   export import PIXI = PixiJS;
 
   const TERIOCK: typeof import("./constants/_module.mjs");
@@ -51,8 +52,4 @@ declare global {
    * A safe version of a document that can be called within compendiums.
    */
   export type SyncDoc<Doc> = Index<Doc> | Doc;
-
-  type ArrayToSetFor<T, K extends keyof T> = Omit<T, K> & {
-    [P in K]: T[P] extends (infer U)[] ? Set<U> : T[P];
-  };
 }

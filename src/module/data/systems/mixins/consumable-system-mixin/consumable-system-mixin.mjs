@@ -1,8 +1,3 @@
-import { TeriockDialog } from "../../../../applications/api/_module.mjs";
-import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
-import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
-import { TeriockChatMessage } from "../../../../documents/_module.mjs";
-import { makeIconClass } from "../../../../helpers/utils.mjs";
 import { EvaluationField } from "../../../fields/_module.mjs";
 import { RegainUsesAutomation } from "../../../pseudo-documents/automations/_module.mjs";
 
@@ -17,7 +12,6 @@ export default function ConsumableSystemMixin(Base) {
     /**
      * @extends {ChildSystem}
      * @implements {Teriock.Models.ConsumableSystemInterface}
-     * @mixes OperationTriggerData
      * @mixin
      */
     class ConsumableSystem extends Base {
@@ -94,14 +88,12 @@ export default function ConsumableSystemMixin(Base) {
 
       /** @inheritDoc */
       get embedActions() {
-        const embedActions = super.embedActions;
-        Object.assign(embedActions, {
+        return Object.assign(super.embedActions, {
           useOneDoc: {
             primary: async () => await this.useOne(),
             secondary: async () => await this.gainOne(),
           },
         });
-        return embedActions;
       }
 
       /** @inheritDoc */
@@ -126,128 +118,6 @@ export default function ConsumableSystemMixin(Base) {
                 );
         }
         return parts;
-      }
-
-      /** @inheritDoc */
-      _onDawn() {
-        super._onDawn();
-        this._regainUsesFromTrigger("dawn").then();
-      }
-
-      /** @inheritDoc */
-      _onDusk() {
-        super._onDusk();
-        this._regainUsesFromTrigger("dusk").then();
-      }
-
-      /** @inheritDoc */
-      _onLongRest() {
-        super._onLongRest();
-        this._regainUsesFromTrigger("longRest").then();
-      }
-
-      /** @inheritDoc */
-      _onShortRest() {
-        super._onShortRest();
-        this._regainUsesFromTrigger("shortRest").then();
-      }
-
-      /**
-       * Regain uses that match a specific trigger defined in automations.
-       * @param {Teriock.System.TimeTrigger} trigger
-       */
-      async _regainUsesFromTrigger(trigger) {
-        const candidateAutomations =
-          /** @type {RegainUsesAutomation[]} */ this.activeAutomations.filter(
-            (a) => a.type === RegainUsesAutomation.TYPE,
-          );
-        const triggeredAutomations = candidateAutomations.filter(
-          (a) => a.trigger === trigger,
-        );
-        let change = 0;
-        for (const a of triggeredAutomations) {
-          if (!this.consumable) continue;
-          const regain = await TeriockDialog.confirm({
-            content: await TeriockTextEditor.enrichHTML(
-              "<p>" +
-                game.i18n.format(
-                  "TERIOCK.AUTOMATIONS.RegainUsesAutomation.DIALOG.text",
-                  { name: `@UUID[${this.parent.uuid}]` },
-                ) +
-                "</p>",
-            ),
-            window: {
-              icon: makeIconClass(
-                TERIOCK.options.document[this.parent.type].icon,
-                "title",
-              ),
-              title: game.i18n.localize(
-                "TERIOCK.AUTOMATIONS.RegainUsesAutomation.LABEL",
-              ),
-            },
-          });
-          if (!regain) continue;
-          const roll = new BaseRoll(a.formula, this.getRollData(), {
-            flavor: game.i18n.localize(
-              "TERIOCK.AUTOMATIONS.RegainUsesAutomation.USAGE.roll",
-            ),
-          });
-          await roll.evaluate();
-          /** @type {Teriock.MessageData.MessagePanel} */
-          const panelData = {
-            bars: [
-              {
-                label: game.i18n.localize(
-                  "TERIOCK.SHEETS.Common.NAVIGATION.enterAutomationsTab",
-                ),
-                icon: TERIOCK.display.icons.ui.automations,
-                wrappers: [
-                  game.i18n.localize(
-                    "TERIOCK.AUTOMATIONS.BaseAutomation.LABEL",
-                  ),
-                  TERIOCK.options.time.triggers[trigger],
-                ],
-              },
-            ],
-            blocks: [
-              {
-                text: game.i18n.format(
-                  "TERIOCK.AUTOMATIONS.RegainUsesAutomation.USAGE.description",
-                  { name: this.parent.nameString },
-                ),
-                title: game.i18n.localize(
-                  "TERIOCK.SYSTEMS.Child.FIELDS.description.label",
-                ),
-              },
-            ],
-            icon: TERIOCK.display.icons.ui.automations,
-            image: this.parent.img,
-            label: game.i18n.localize(
-              "TERIOCK.AUTOMATIONS.RegainUsesAutomation.LABEL",
-            ),
-            name: game.i18n.localize(
-              "TERIOCK.AUTOMATIONS.RegainUsesAutomation.LABEL",
-            ),
-          };
-          const panel = await TeriockTextEditor.enrichPanel(panelData);
-          const messageData = {
-            rolls: [roll],
-            speaker: TeriockChatMessage.getSpeaker({ actor: this.actor }),
-            system: {
-              panels: [panel],
-            },
-          };
-          await TeriockChatMessage.create(messageData);
-          change += roll.total;
-        }
-        if (change !== 0) {
-          await this.parent.update({
-            "system.quantity": Math.max(
-              Math.min(this.maxQuantity.value, this.quantity + change),
-              0,
-            ),
-          });
-        }
       }
 
       /**

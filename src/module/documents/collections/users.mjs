@@ -4,8 +4,8 @@ const { Users } = foundry.documents.collections;
 
 //noinspection JSClosureCompilerSyntax,JSValidateJSDoc
 /**
- * @implements {TypeCollection<TeriockUser, TeriockUser>}
- * @implements {DocumentCollection<TeriockUser>}
+ * @extends {WorldCollection<TeriockUser>}
+ * @extends {Users}
  * @property {TeriockUser|null} activeGM
  */
 export default class TeriockUsers extends BaseWorldCollectionMixin(Users) {

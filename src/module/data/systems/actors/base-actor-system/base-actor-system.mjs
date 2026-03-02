@@ -22,6 +22,7 @@ import * as parts from "./parts/_module.mjs";
  * @mixes ActorMoneyPart
  * @mixes ActorMovementPart
  * @mixes ActorProtectionsPart
+ * @mixes ActorRestingPart
  * @mixes ActorRollableTakesPart
  * @mixes ActorScalingPart
  * @mixes ActorSensesPart
@@ -50,6 +51,7 @@ export default class BaseActorSystem extends mix(
   parts.ActorMovementPart,
   parts.ActorSensesPart,
   parts.ActorProtectionsPart,
+  parts.ActorRestingPart,
 ) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
@@ -170,10 +172,20 @@ export default class BaseActorSystem extends mix(
    * @returns {Promise<void>}
    */
   async postUpdate() {
+    const conditionExpirationEffects = this.parent.consequences.filter(
+      (c) =>
+        c.system.expirations.conditions.present.size +
+          c.system.expirations.conditions.absent.size >
+        0,
+    );
+    const shouldExpire = conditionExpirationEffects.filter((c) =>
+      c.system.shouldExpireFromConditions(),
+    );
+    await this.parent.deleteEmbeddedDocuments(
+      "ActiveEffect",
+      shouldExpire.map((c) => c.id),
+    );
     await Promise.all([
-      ...this.parent.conditionExpirationEffects.map((e) =>
-        e.system.checkExpiration(),
-      ),
       ...this.parent.getDependentTokens().map((t) => t.postActorUpdate()),
     ]);
   }

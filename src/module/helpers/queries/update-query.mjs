@@ -6,7 +6,5 @@
  */
 export default async function updateQuery(queryData, { _timeout }) {
   const doc = await fromUuid(queryData.uuid);
-  if (doc) {
-    await doc.update(queryData.data);
-  }
+  await doc?.update(queryData.data);
 }

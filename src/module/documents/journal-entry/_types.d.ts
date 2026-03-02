@@ -1,20 +1,23 @@
 import {
+  TeriockJournalEntry,
   TeriockJournalEntryCategory,
   TeriockJournalEntryPage,
 } from "../_module.mjs";
+import { DocumentCollection } from "../../../../foundry/client/documents/abstract/_module.mjs";
 
-declare module "./journal-entry.mjs" {
-  export default interface TeriockJournalEntry
-    extends Teriock.Documents.Interface<
-      TeriockJournalEntryCategory | TeriockJournalEntryPage
-    > {
-    _id: ID<TeriockJournalEntry>;
+declare global {
+  namespace Teriock.Documents {
+    export interface JournalEntryInterface {
+      _id: ID<TeriockJournalEntry>;
+      categories: DocumentCollection<TeriockJournalEntryCategory>;
+      pages: DocumentCollection<TeriockJournalEntryPage>;
 
-    get documentName(): "JournalEntry";
+      get documentName(): "JournalEntry";
 
-    get id(): ID<TeriockJournalEntry>;
+      get id(): ID<TeriockJournalEntry>;
 
-    get uuid(): UUID<TeriockJournalEntry>;
+      get uuid(): UUID<TeriockJournalEntry>;
+    }
   }
 }
 

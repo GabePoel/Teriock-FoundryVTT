@@ -1,7 +1,9 @@
+import { icons } from "../../../constants/display/icons.mjs";
 import { documentOptions } from "../../../constants/options/document-options.mjs";
 import { systemPath } from "../../../helpers/path.mjs";
 import { makeIconClass, mix } from "../../../helpers/utils.mjs";
-import * as mixins from "../mixins/_module.mjs";
+import { ChangesSheetMixin } from "../mixins/_module.mjs";
+import { AutomationsCommonSheetPart } from "../mixins/common-sheet-mixin/parts/_module.mjs";
 
 const { ActiveEffectConfig } = foundry.applications.sheets;
 
@@ -12,7 +14,8 @@ const { ActiveEffectConfig } = foundry.applications.sheets;
  */
 export default class ConsequenceSheet extends mix(
   ActiveEffectConfig,
-  mixins.ChangesSheetMixin,
+  ChangesSheetMixin,
+  AutomationsCommonSheetPart,
 ) {
   static DEFAULT_OPTIONS = {
     form: {
@@ -26,11 +29,25 @@ export default class ConsequenceSheet extends mix(
 
   static PARTS = {
     ...super.PARTS,
-    changes: {
+    automations: {
       template: systemPath(
-        "templates/sheets/effects/consequence/changes-tab.hbs",
+        "templates/sheets/effects/consequence/automations-tab.hbs",
       ),
-      scrollable: [".change-config-container"],
+      scrollable: [""],
+    },
+  };
+
+  static TABS = {
+    sheet: {
+      tabs: [
+        ...super.TABS.sheet.tabs,
+        {
+          id: "automations",
+          icon: makeIconClass(icons.ui.automations, "solid"),
+        },
+      ],
+      initial: super.TABS.sheet.initial,
+      labelPrefix: super.TABS.sheet.labelPrefix,
     },
   };
 

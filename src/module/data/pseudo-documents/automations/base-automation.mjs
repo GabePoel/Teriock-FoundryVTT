@@ -1,5 +1,6 @@
 import { localizeChoices } from "../../../helpers/localization.mjs";
 import { competenceField } from "../../fields/helpers/builders.mjs";
+import { PropagationDataMixin } from "../../shared/mixins/_module.mjs";
 import TypedPseudoDocument from "../abstract/typed-pseudo-document.mjs";
 
 const { fields } = foundry.data;
@@ -7,8 +8,12 @@ const { fields } = foundry.data;
 //noinspection JSClosureCompilerSyntax
 /**
  * @implements {Teriock.Models.BaseAutomationInterface}
+ * @extends {TypedPseudoDocument}
+ * @mixes PropagationData
  */
-export default class BaseAutomation extends TypedPseudoDocument {
+export default class BaseAutomation extends PropagationDataMixin(
+  TypedPseudoDocument,
+) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
     ...super.LOCALIZATION_PREFIXES,
@@ -68,14 +73,6 @@ export default class BaseAutomation extends TypedPseudoDocument {
    */
   get canCrit() {
     return false;
-  }
-
-  /**
-   * Whether this can heighten.
-   * @returns {boolean}
-   */
-  get canHeighten() {
-    return this.document.type === "ability";
   }
 
   /**

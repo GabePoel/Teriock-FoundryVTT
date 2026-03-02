@@ -7,7 +7,8 @@ const { JournalEntryPage } = foundry.documents;
 
 // noinspection JSClosureCompilerSyntax
 /**
- * The Teriock {@link JournalEntry} implementation.
+ * The Teriock JournalEntryPage implementation.
+ * @implements {Teriock.Documents.JournalEntryPageInterface}
  * @extends {ClientDocument}
  * @extends {JournalEntryPage}
  * @mixes BaseDocument

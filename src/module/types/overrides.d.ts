@@ -5,6 +5,7 @@ import {
   TeriockChatMessage,
   TeriockUser,
 } from "../documents/_module.mjs";
+import TeriockCanvas from "../_canvas.mjs";
 import {
   TeriockActors,
   TeriockChatMessages,
@@ -16,17 +17,7 @@ import {
   TeriockScenes,
   TeriockUsers,
 } from "../documents/collections/_module.mjs";
-import TeriockGame from "../_game.mjs";
 import { TeriockTooltipManager } from "../helpers/interaction/_module.mjs";
-import TeriockCanvas from "../_canvas.mjs";
-import { TeriockNotifications } from "../applications/ui/_module.mjs";
-import type { TeriockCompendiumCollection } from "../documents/collections/packs";
-import { TeriockDocumentSheet } from "../applications/sheets/utility-sheets/_module.mjs";
-import {
-  TeriockActorDirectory,
-  TeriockItemDirectory,
-} from "../applications/sidebar/_module.mjs";
-import type TeriockHotbar from "../applications/ui/hotbar.mjs";
 
 declare global {
   // Definition for writing macros.

@@ -6,8 +6,10 @@ import {
 
 const { Combatant } = foundry.documents;
 
+//noinspection JSClosureCompilerSyntax
 /**
- * The Teriock {@link Combatant} implementation.
+ * The Teriock Combatant implementation.
+ * @implements {Teriock.Documents.CombatantInterface}
  * @extends {ClientDocument}
  * @extends {Combatant}
  * @mixes BaseDocument
@@ -41,8 +43,8 @@ export default class TeriockCombatant extends EmbedCardDocumentMixin(
    * @returns {string}
    */
   _getInitiativeFormula() {
-    let formula =
-      this.actor?.system.initiative || super._getInitiativeFormula();
+    let formula = super._getInitiativeFormula();
+    if (this.actor) formula = this.actor.system.initiative || formula;
     if (this._advantage) {
       formula = formula.replace("1d20", "2d20kh1");
     } else if (this._disadvantage) {

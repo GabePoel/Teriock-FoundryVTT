@@ -9,10 +9,5 @@ export default async function updateEmbeddedDocumentsQuery(
   { _timeout },
 ) {
   const doc = await fromUuid(queryData.uuid);
-  if (doc) {
-    await doc.updateEmbeddedDocuments(
-      queryData.embeddedName,
-      queryData.updates,
-    );
-  }
+  await doc?.updateEmbeddedDocuments(queryData.embeddedName, queryData.updates);
 }

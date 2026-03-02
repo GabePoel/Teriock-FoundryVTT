@@ -1,19 +1,21 @@
+import { TeriockUser } from "../_module.mjs";
 import { TeriockToken } from "../../canvas/placeables/_module.mjs";
-import { TeriockActor, TeriockTokenDocument } from "../_module.mjs";
 
-declare module "./user.mjs" {
-  export default interface TeriockUser
-    extends Teriock.Documents.Interface<TeriockTokenDocument> {
-    _id: ID<TeriockUser>;
-    readonly character: TeriockActor | null;
+declare global {
+  namespace Teriock.Documents {
+    export interface UserInterface {
+      _id: ID<TeriockUser>;
 
-    get documentName(): "User";
+      get character(): GenericActor | null;
 
-    get id(): ID<TeriockUser>;
+      get documentName(): "User";
 
-    get targets(): Set<TeriockToken>;
+      get id(): ID<TeriockUser>;
 
-    get uuid(): UUID<TeriockUser>;
+      get targets(): Set<TeriockToken>;
+
+      get uuid(): UUID<TeriockUser>;
+    }
   }
 }
 

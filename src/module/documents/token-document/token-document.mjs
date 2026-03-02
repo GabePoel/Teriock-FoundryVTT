@@ -10,13 +10,13 @@ const { TokenDocument } = foundry.documents;
 
 // noinspection JSClosureCompilerSyntax
 /**
- * The Teriock {@link TokenDocument} implementation.
+ * The Teriock TokenDocument implementation.
+ * @implements {Teriock.Documents.TokenDocumentInterface}
  * @extends {TokenDocument}
  * @extends {ClientDocument}
  * @mixes EmbedCardDocument
  * @mixes BaseDocument
  * @mixes SettingsDocument
- * @property {TeriockDocumentSheet} sheet
  */
 export default class TeriockTokenDocument extends mix(
   TokenDocument,
@@ -95,7 +95,8 @@ export default class TeriockTokenDocument extends mix(
    * @returns {string}
    */
   get imageTransformed() {
-    let path = this.actor?.system.transformation.image || this.texture.src;
+    if (!this.actor) return this.texture.src;
+    let path = this.actor.system.transformation.image || this.texture.src;
     if (this.ring.enabled) {
       return TeriockTokenDocument.ringImage(path);
     }

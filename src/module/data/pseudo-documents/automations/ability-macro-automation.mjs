@@ -16,12 +16,12 @@ export default class AbilityMacroAutomation extends MacroAutomationMixin(
   }
 
   /** @inheritDoc */
-  static get _pseudoHookChoices() {
+  static get _triggerChoices() {
     return pseudoHooks.ability;
   }
 
   /** @inheritDoc */
   get canCrit() {
-    return this.relation === "pseudoHook" && super.canCrit;
+    return this.relation === "trigger" && super.canCrit;
   }
 }

@@ -9,7 +9,5 @@ export default async function sustainedExpirationQuery(
   { _timeout },
 ) {
   const sustainedConsequence = await fromUuid(queryData.sustainedUuid);
-  if (sustainedConsequence) {
-    await sustainedConsequence.system.expire();
-  }
+  await sustainedConsequence?.system.expire();
 }

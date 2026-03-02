@@ -61,8 +61,8 @@ export default class TeriockPacks {
   }
 
   /**
-   * Official powers common many things.
-   * @returns {TeriockCompendiumCollection<TeriockPower>}
+   * Official common essential items.
+   * @returns {TeriockCompendiumCollection<GenericItem>}
    */
   get essentials() {
     return game.packs.get("teriock.essentials");

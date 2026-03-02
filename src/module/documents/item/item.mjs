@@ -4,9 +4,10 @@ import * as mixins from "../mixins/_module.mjs";
 
 const { Item } = foundry.documents;
 
-//noinspection JSUnresolvedReference
+//noinspection JSUnresolvedReference,JSClosureCompilerSyntax,JSValidateJSDoc
 /**
- * The Teriock {@link Item} implementation.
+ * The Teriock Item implementation.
+ * @implements {Teriock.Documents.ItemInterface}
  * @extends {ClientDocument}
  * @extends {Item}
  * @mixes BaseDocument
@@ -14,13 +15,6 @@ const { Item } = foundry.documents;
  * @mixes CommonDocument
  * @mixes ParentDocument
  * @mixes RetrievalDocument
- * @property {TypeCollection<ID<GenericActiveEffect>, GenericActiveEffect>} effects
- * @property {Teriock.Documents.ItemModel | WrapperSystem} system
- * @property {Teriock.Documents.ItemType} type
- * @property {ID<TeriockItem>} _id
- * @property {ID<TeriockItem>} id
- * @property {UUID<TeriockItem>} uuid
- * @property {BaseItemSheet} sheet
  */
 export default class TeriockItem extends mix(
   Item,

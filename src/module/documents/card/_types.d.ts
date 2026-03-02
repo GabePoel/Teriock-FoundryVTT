@@ -1,13 +1,21 @@
-import type TeriockCards from "../cards/cards.mjs";
+import { TeriockCard, TeriockCards } from "../_module.mjs";
+import { BaseCardSystem } from "../../data/systems/cards/_module.mjs";
 
-declare module "./card.mjs" {
-  export default interface TeriockCard
-    extends Teriock.Documents.Interface<Teriock.Documents.NullDocument> {
-    _id: ID<TeriockCard>;
+declare global {
+  namespace Teriock.Documents {
+    export interface CardInterface {
+      _id: ID<TeriockCard>;
+      parent: TeriockCards;
+      system: BaseCardSystem;
+      type: Teriock.Documents.CardType;
 
-    get documentName(): "Card";
-    get id(): ID<TeriockCard>;
-    get parent(): TeriockCards;
-    get uuid(): UUID<TeriockCard>;
+      get documentName(): "Card";
+
+      get id(): ID<TeriockCard>;
+
+      get uuid(): UUID<TeriockCard>;
+    }
   }
 }
+
+export {};

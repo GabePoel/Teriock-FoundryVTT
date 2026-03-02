@@ -1,4 +1,3 @@
-import { pseudoHooks } from "../../../../constants/system/_module.mjs";
 import { ArmamentExecution } from "../../../../executions/document-executions/_module.mjs";
 import { formulaExists } from "../../../../helpers/formula.mjs";
 import { toCamelCase } from "../../../../helpers/string.mjs";
@@ -292,13 +291,6 @@ export default function ArmamentSystemMixin(Base) {
         this.range.melee =
           this.range.long.unit === "melee" || this.range.short.unit === "melee";
         this.range.ranged = this.range.long.unitType !== "zero";
-
-        // Macros
-        this.hookedMacros =
-          /** @type {Teriock.Parameters.Equipment.HookedEquipmentMacros} */ {};
-        for (const pseudoHook of Object.keys(pseudoHooks.property)) {
-          this.hookedMacros[pseudoHook] = [];
-        }
       }
 
       /** @inheritDoc */

@@ -40,7 +40,7 @@ export default async function registerTemplates() {
     "systems/teriock/src/templates/sheets/effects/ability/menu.hbs",
     "systems/teriock/src/templates/sheets/effects/ability/status-bar.hbs",
     "systems/teriock/src/templates/sheets/effects/ability/targeting-bar.hbs",
-    "systems/teriock/src/templates/sheets/effects/consequence/changes-tab.hbs",
+    "systems/teriock/src/templates/sheets/effects/consequence/automations-tab.hbs",
     "systems/teriock/src/templates/sheets/effects/fluency/tradecraft-bar.hbs",
     "systems/teriock/src/templates/sheets/effects/property/menu.hbs",
     "systems/teriock/src/templates/sheets/effects/property/status-bar.hbs",

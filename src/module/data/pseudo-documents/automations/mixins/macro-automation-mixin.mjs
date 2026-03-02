@@ -1,6 +1,6 @@
-import { pseudoHooks } from "../../../../constants/system/_module.mjs";
 import { ExecuteMacroHandler } from "../../../../helpers/interaction/button-handlers/execute-macro-handlers.mjs";
 import { localizeChoices } from "../../../../helpers/localization.mjs";
+import { TriggerAutomationMixin } from "./_module.mjs";
 import LabelAutomationMixin from "./label-automation-mixin.mjs";
 
 const { fields } = foundry.data;
@@ -15,12 +15,14 @@ export default function MacroAutomationMixin(Base) {
     /**
      * @extends {BaseAutomation}
      * @mixin
-     * @property {"button"|"pseudoHook"} relation
+     * @property {"button"|"trigger"} relation
      * @property {Teriock.Parameters.Shared.AbilityPseudoHook} pseudoHook
      * @property {UUID<TeriockMacro>} macro
      * @property {string} title
      */
-    class MacroAutomation extends LabelAutomationMixin(Base) {
+    class MacroAutomation extends TriggerAutomationMixin(
+      LabelAutomationMixin(Base),
+    ) {
       /** @inheritDoc */
       static LOCALIZATION_PREFIXES = [
         ...super.LOCALIZATION_PREFIXES,
@@ -30,14 +32,6 @@ export default function MacroAutomationMixin(Base) {
       /** @inheritDoc */
       static get LABEL() {
         return "TERIOCK.AUTOMATIONS.MacroAutomation.LABEL";
-      }
-
-      /**
-       * Viable pseudo-hook choices.
-       * @returns {Record<string, string>}
-       */
-      static get _pseudoHookChoices() {
-        return pseudoHooks.all;
       }
 
       /** @inheritDoc */
@@ -52,20 +46,16 @@ export default function MacroAutomationMixin(Base) {
         const schema = Object.assign(super.defineSchema(), {
           macro: new fields.DocumentUUIDField({ type: "Macro" }),
         });
-        if (Object.keys(this._pseudoHookChoices).length > 0) {
+        if (Object.keys(this._triggerChoices).length > 0) {
           Object.assign(schema, {
             relation: new fields.StringField({
               choices: localizeChoices({
                 button:
                   "TERIOCK.AUTOMATIONS.MacroAutomation.FIELDS.relation.choices.button",
-                pseudoHook:
-                  "TERIOCK.AUTOMATIONS.MacroAutomation.FIELDS.relation.choices.pseudoHook",
+                trigger: "TERIOCK.SYSTEMS.Ability.FIELDS.trigger.label",
               }),
               initial: "button",
               label: "TERIOCK.AUTOMATIONS.BaseAutomation.FIELDS.relation.label",
-            }),
-            pseudoHook: new fields.StringField({
-              choices: this._pseudoHookChoices,
             }),
           });
         }
@@ -73,10 +63,22 @@ export default function MacroAutomationMixin(Base) {
       }
 
       /** @inheritDoc */
+      static migrateData(data) {
+        if (data.pseudoHook) {
+          data.trigger = data.pseudoHook;
+        }
+        if (data.relation === "pseudoHook") {
+          data.relation = "trigger";
+        }
+        delete data.pseudoHook;
+        return data;
+      }
+
+      /** @inheritDoc */
       get _formPaths() {
         const paths = ["macro", "relation"];
-        if (this.relation === "pseudoHook") {
-          paths.push("pseudoHook");
+        if (this.relation === "trigger") {
+          paths.push("trigger");
         } else {
           paths.push("title");
         }
@@ -85,7 +87,7 @@ export default function MacroAutomationMixin(Base) {
 
       /** @inheritDoc */
       get buttons() {
-        if (this.relation !== "pseudoHook" && this.hasMacro) {
+        if (this.relation !== "trigger" && this.hasMacro) {
           return [
             ExecuteMacroHandler.buildButton(
               this.macro,
@@ -101,6 +103,11 @@ export default function MacroAutomationMixin(Base) {
         }
       }
 
+      /** @inheritDoc */
+      get canFire() {
+        return super.canFire && this.hasMacro;
+      }
+
       /**
        * Convenience helper to check if this has a macro.
        * @returns {boolean}
@@ -109,21 +116,22 @@ export default function MacroAutomationMixin(Base) {
         return this.macro && !!fromUuidSync(this.macro);
       }
 
-      /**
-       * A change that hooks this macro into an actor.
-       * @returns {Teriock.Changes.QualifiedChangeData | null}
-       */
-      get pseudoHookChange() {
-        if (this.relation !== "pseudoHook" || !this.hasMacro) return null;
-        return {
-          key: `system.hookedMacros.${this.pseudoHook}`,
-          mode: 2,
-          priority: 5,
-          qualifier: "1",
-          target: "Actor",
-          time: "normal",
-          value: this.macro,
-        };
+      /** @inheritDoc */
+      _preFire() {
+        const scope = { trigger: this.trigger };
+        if (this.document.actor) {
+          scope.actor = this.document.actor;
+        }
+        if (this.document.documentName === "ActiveEffect") {
+          scope.effect = this.document;
+          if (this.document.parent?.documentName === "Item") {
+            scope.item = this.document.parent;
+          }
+        } else if (this.document.documentName === "Item") {
+          scope.item = this.document;
+        }
+        scope[this.document.type] = this.document;
+        fromUuid(this.macro).then((macro) => macro.execute(scope));
       }
     }
   );

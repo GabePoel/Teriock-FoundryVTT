@@ -21,7 +21,7 @@ declare global {
     };
 
     export type InCombatExpiration = {
-      effectUuid: UUID<TeriockConsequence>;
+      uuid: UUID<TeriockConsequence>;
     };
 
     export type AddToSustaining = {

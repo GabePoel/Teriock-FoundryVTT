@@ -54,7 +54,7 @@ export const takeOptions = {
   },
   setTempMp: {
     aliases: ["stm", "stmp"],
-    apply: async (actor, amt) => await actor?.system.takeGainTempHp(amt),
+    apply: async (actor, amt) => await actor?.system.takeSetTempMp(amt),
     icon: icons.stat.mp,
     label: "TERIOCK.EFFECTS.RollableEffects.setTempMp.label",
     deal: "TERIOCK.EFFECTS.RollableEffects.setTempMp.deal",
@@ -63,7 +63,7 @@ export const takeOptions = {
   },
   gainTempHp: {
     aliases: ["gth", "gthp"],
-    apply: async (actor, amt) => await actor?.system.takeSetTempMp(amt),
+    apply: async (actor, amt) => await actor?.system.takeGainTempHp(amt),
     icon: icons.stat.hp,
     label: "TERIOCK.EFFECTS.RollableEffects.gainTempHp.label",
     deal: "TERIOCK.EFFECTS.RollableEffects.gainTempHp.deal",

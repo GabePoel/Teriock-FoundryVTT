@@ -5,7 +5,8 @@ const { ChatMessage } = foundry.documents;
 
 // noinspection JSClosureCompilerSyntax
 /**
- * The Teriock {@link ChatMessage} implementation.
+ * The Teriock ChatMessage implementation.
+ * @implements {Teriock.Documents.ChatMessageInterface}
  * @extends {ChatMessage}
  * @extends {ClientDocument}
  * @mixes BaseDocument

@@ -1,1 +1,1 @@
-Hooks.callAll("teriock.shortRest");
+Hooks.callAll("teriock.forceShortRest");

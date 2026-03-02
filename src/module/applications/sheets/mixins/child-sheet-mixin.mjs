@@ -1,9 +1,6 @@
 import { icons } from "../../../constants/display/icons.mjs";
 import { systemPath } from "../../../helpers/path.mjs";
-import {
-  fancifyFields,
-  makeIconClass
-} from "../../../helpers/utils.mjs";
+import { fancifyFields, makeIconClass } from "../../../helpers/utils.mjs";
 import { TeriockTextEditor } from "../../ux/_module.mjs";
 
 /**

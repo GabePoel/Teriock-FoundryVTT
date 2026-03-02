@@ -4,7 +4,8 @@ const { Card } = foundry.documents;
 
 //noinspection JSClosureCompilerSyntax
 /**
- * The Teriock {@link Card} implementation.
+ * The Teriock Card implementation.
+ * @implements {Teriock.Documents.CardInterface}
  * @extends {ClientDocument}
  * @extends {Card}
  * @mixes BaseDocument

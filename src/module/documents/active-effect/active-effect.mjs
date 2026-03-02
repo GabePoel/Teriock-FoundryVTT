@@ -6,20 +6,16 @@ import * as mixins from "../mixins/_module.mjs";
 
 const { ActiveEffect } = foundry.documents;
 
+//noinspection JSClosureCompilerSyntax
 /**
- * The Teriock {@link ActiveEffect} implementation.
+ * The Teriock ActiveEffect implementation.
+ * @implements {Teriock.Documents.ActiveEffectInterface}
  * @extends {ActiveEffect}
  * @extends {ClientDocument}
  * @mixes BaseDocument
  * @mixes ChildDocument
  * @mixes CommonDocument
  * @mixes RetrievalDocument
- * @property {Teriock.Documents.EffectModel} system
- * @property {Teriock.Documents.EffectType} type
- * @property {ID<TeriockActiveEffect>} _id
- * @property {ID<TeriockActiveEffect>} id
- * @property {UUID<TeriockActiveEffect>} uuid
- * @property {BaseEffectSheet} sheet
  */
 export default class TeriockActiveEffect extends mix(
   ActiveEffect,

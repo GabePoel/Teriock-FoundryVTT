@@ -51,7 +51,10 @@ for (let i = 0; i < data.execution.rolls.length; i++) {
               icon: TERIOCK.display.icons.interaction.feat,
             },
           },
-          flavor: transformationLevels[chosenTransformationLevel] + " DC",
+          flavor: game.i18n.format(
+            "TERIOCK.DIALOGS.Select.TransformationLevel.flavor",
+            { level: transformationLevels[chosenTransformationLevel] },
+          ),
         },
       );
       await newRoll.evaluate();

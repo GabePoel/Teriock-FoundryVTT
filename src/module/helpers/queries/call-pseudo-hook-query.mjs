@@ -6,7 +6,5 @@
  */
 export default async function callPseudoHookQuery(queryData, { _timeout }) {
   const doc = await fromUuid(queryData.uuid);
-  if (doc) {
-    await doc.hookCall(queryData.pseudoHook, queryData.data);
-  }
+  await doc?.hookCall(queryData.pseudoHook, queryData.data);
 }

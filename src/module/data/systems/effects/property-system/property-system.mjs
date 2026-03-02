@@ -1,7 +1,6 @@
 import { mix } from "../../../../helpers/utils.mjs";
 import { FormulaField, TextField } from "../../../fields/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
-import { PropertyMacroAutomation } from "../../../pseudo-documents/automations/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
 
@@ -207,25 +206,6 @@ export default class PropertySystem extends mix(
       nameAddition = ` (${additions.join(", ")})`;
     }
     return this.parent.name.trim() + suffix + nameAddition;
-  }
-
-  /** @inheritDoc */
-  get pseudoHookChanges() {
-    const macroAutomations =
-      /** @type {PropertyMacroAutomation[]} */ this.activeAutomations.filter(
-        (a) => a.type === PropertyMacroAutomation.TYPE,
-      );
-    return macroAutomations.map((a) => {
-      return {
-        key: `system.hookedMacros.${a.pseudoHook}`,
-        mode: 2,
-        priority: 5,
-        qualifier: "1",
-        target: "parent",
-        time: "normal",
-        value: a.macro,
-      };
-    });
   }
 
   /** @inheritDoc */

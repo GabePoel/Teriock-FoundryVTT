@@ -230,7 +230,7 @@ async function executeCommandFromElement(target, operation, event) {
     const doc = await fromUuid(target.dataset.relativeTo);
     actor = doc?.actor;
   }
-  if (!actor) actor = game.actors.defaultActor;
+  if (!actor) actor = game.actors.default;
   await command[operation](actor, options);
 }
 

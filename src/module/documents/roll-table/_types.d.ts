@@ -1,13 +1,18 @@
-import TeriockTableResult from "../table-result/table-result.mjs";
+import { TeriockRollTable, TeriockTableResult } from "../_module.mjs";
+import { DocumentCollection } from "../../../../foundry/client/documents/abstract/_module.mjs";
 
-declare module "./roll-table.mjs" {
-  export default interface TeriockRollTable
-    extends Teriock.Documents.Interface<TeriockTableResult> {
-    _id: ID<TeriockRollTable>;
+declare global {
+  namespace Teriock.Documents {
+    export interface RollTableInterface {
+      _id: ID<TeriockRollTable>;
+      results: DocumentCollection<TeriockTableResult>;
 
-    get documentName(): "RollTable";
-    get id(): ID<TeriockRollTable>;
-    get uuid(): UUID<TeriockRollTable>;
+      get documentName(): "RollTable";
+
+      get id(): ID<TeriockRollTable>;
+
+      get uuid(): UUID<TeriockRollTable>;
+    }
   }
 }
 

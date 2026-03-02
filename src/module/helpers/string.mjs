@@ -114,6 +114,28 @@ export function dotJoin(strings) {
 }
 
 /**
+ * Join strings with nice formatting.
+ * @param {string[]} strings
+ * @param {boolean} or
+ * @returns {string}
+ */
+export function formatJoin(strings, or = false) {
+  if (strings.length === 0) return "";
+  if (strings.length === 1) return strings[0];
+  if (strings.length === 2)
+    return game.i18n.format(`TERIOCK.FORMAT.${or ? "or" : "and"}.two`, {
+      start: strings[0],
+      end: strings[1],
+    });
+  const end = strings.pop();
+  const separator = game.i18n.localize("TERIOCK.FORMAT.separator");
+  return game.i18n.format(`TERIOCK.FORMAT.${or ? "or" : "and"}.many`, {
+    start: strings.join(separator),
+    end: end,
+  });
+}
+
+/**
  * Converts a string to an ID.
  * @param {string} str
  * @param {object} [options]

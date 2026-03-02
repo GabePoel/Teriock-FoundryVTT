@@ -30,6 +30,22 @@ export default function ChildDocumentMixin(Base) {
         return this.system.makeEphemeral;
       }
 
+      /** @inheritDoc */
+      _onCreate(data, options, userId) {
+        super._onCreate(data, options, userId);
+        if (this.checkEditor(userId) && this.actor) {
+          this.actor.system.postUpdate();
+        }
+      }
+
+      /** @inheritDoc */
+      _onDelete(options, userId) {
+        super._onDelete(options, userId);
+        if (this.checkEditor(userId) && this.actor) {
+          this.actor.system.postUpdate();
+        }
+      }
+
       /**
        * Get all ActiveEffects that may apply to this document.
        * @yields {TeriockActiveEffect}

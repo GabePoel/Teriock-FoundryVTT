@@ -77,7 +77,7 @@ export default (Base) =>
      */
     static async #onSelectBlocker() {
       const attacker = await selectDocumentDialog(
-        this.document.activeArmaments,
+        this.document.armaments.filter((a) => a.active),
         {
           hint: game.i18n.localize(
             "TERIOCK.SHEETS.Actor.ACTIONS.SelectBlocker.hint",

@@ -10,11 +10,6 @@ export default class ChatMacroAutomation extends MacroAutomationMixin(
   }
 
   /** @inheritDoc */
-  static get _pseudoHookChoices() {
-    return {};
-  }
-
-  /** @inheritDoc */
   get _formPaths() {
     return ["macro", "title"];
   }

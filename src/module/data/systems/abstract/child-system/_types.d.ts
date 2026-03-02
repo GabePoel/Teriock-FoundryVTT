@@ -13,7 +13,7 @@ declare global {
         suppressed: EvaluationModel;
       };
 
-      get parent(): TeriockChild;
+      get parent(): GenericChild;
     }
   }
 }

@@ -1,5 +1,3 @@
-import { AbilityMacroAutomation } from "../../../../pseudo-documents/automations/_module.mjs";
-
 /**
  * Ability automations part.
  * @param {typeof AbilitySystem} Base
@@ -19,17 +17,6 @@ export default (Base) => {
       get activeAutomations() {
         if (this.maneuver !== "passive") return [];
         return super.activeAutomations;
-      }
-
-      /** @inheritDoc */
-      get pseudoHookChanges() {
-        const macroAutomations =
-          /** @type {AbilityMacroAutomation[]} */ this.activeAutomations.filter(
-            (a) => a.type === AbilityMacroAutomation.TYPE,
-          );
-        return macroAutomations
-          .filter((a) => a.relation === "pseudoHook" && a.hasMacro)
-          .map((a) => a.pseudoHookChange);
       }
     }
   );

@@ -18,12 +18,24 @@ export default class RevitalizeAutomation extends StatAutomation {
     return "revitalize";
   }
   /** @inheritDoc */
-  get buttons() {
+  get _buttons() {
     return [
       RevitalizeHandler.buildButton({
         consumeStatDice: this.consumeStatDice,
         forHarm: this.forHarm,
       }),
     ];
+  }
+
+  /** @inheritDoc */
+  async _preFire() {
+    if (!this.actor.isDrained || this.forHarm) return;
+    this.document.actor.system
+      .takeRevitalize({
+        consumeStatDice: this.consumeStatDice,
+        forHarm: this.forHarm,
+        title: this.document.nameString,
+      })
+      .then();
   }
 }

@@ -28,6 +28,10 @@ export const documentTypes = {
     chat: "TYPES.Macro.chat",
     script: "TYPES.Macro.script",
   },
+  card: {
+    stone: "TYPES.Card.stone",
+    card: "TYPES.Card.card",
+  },
 };
 
 preLocalize("TERIOCK.system.documentTypes.items");

@@ -6,7 +6,7 @@ export default class InteractionHandler {
     //noinspection JSUnresolvedReference,JSValidateJSDoc
     const tokenLayer = /** @type {TokenLayer} */ game.canvas.tokens;
     const user = game.user;
-    const defaultActor = game.actors.defaultActor;
+    const defaultActor = game.actors.default;
     this.selectedTokens =
       /** @type {TeriockTokenDocument[]} */
       tokenLayer.controlled.filter((t) => t);

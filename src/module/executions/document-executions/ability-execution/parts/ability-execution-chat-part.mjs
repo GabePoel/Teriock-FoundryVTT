@@ -4,11 +4,9 @@ import {
 } from "../../../../applications/dialogs/select-document-dialog.mjs";
 import { conditionDialog } from "../../../../applications/dialogs/select-token-dialog.mjs";
 import {
-  AbilityMacroAutomation,
   ChangesAutomation,
   CombatExpirationAutomation,
   DurationAutomation,
-  ProtectionAutomation,
   StatusAutomation,
   TransformationAutomation,
 } from "../../../../data/pseudo-documents/automations/_module.mjs";
@@ -127,8 +125,6 @@ export default function AbilityExecutionChatPart(Base) {
           value: safeUuid(uuid),
           mode: 2,
           priority: 10,
-          target: "Actor",
-          qualifier: "1",
         };
       }
 
@@ -151,6 +147,7 @@ export default function AbilityExecutionChatPart(Base) {
           statuses: this.#generateConsequenceStatuses(crit),
           system: {
             associations: [],
+            automations: this.#generateConsequenceAutomations(crit),
             blocks: this.source.system.panelParts.blocks,
             critical: crit,
             deleteOnExpire: true,
@@ -164,18 +161,14 @@ export default function AbilityExecutionChatPart(Base) {
                   this.source.system.duration.conditions.present,
                 ),
               },
-              movement: this.source.system.duration.stationary,
-              dawn: this.source.system.duration.dawn,
-              sustained: this.source.system.sustained,
               description: this.source.system.endCondition,
+              sustained: this.source.system.sustained,
+              triggers: Array.from(this.source.system.duration.triggers),
             },
             heightened: this.heightened,
             identifier:
               (this.source.system.identifier || this.source.defaultIdentifier) +
               "-effect",
-            impacts: {
-              changes: this.#generateConsequenceChanges(crit),
-            },
             source: this.source.uuid,
             transformation: await this.#generateConsequenceTransformation(crit),
           },
@@ -211,37 +204,26 @@ export default function AbilityExecutionChatPart(Base) {
 
       /**
        * @param {boolean} crit
-       * @returns {object[]}
+       * @returns {Record<string, object>}
        */
-      #generateConsequenceChanges(crit = false) {
-        const changesAutomations = this.#getCritAutomations(
-          ChangesAutomation,
-          crit,
-        );
-        const changes = [];
-        changesAutomations.forEach((a) => {
-          changes.push(...foundry.utils.deepClone(a.changes));
-        });
-        changes.forEach((c) => {
-          c.value = this._heightenString(c.value);
-        });
-        const macroAutomations = this.#getCritAutomations(
-          AbilityMacroAutomation,
-          crit,
-        );
-        const pseudoHookChanges = macroAutomations
-          .filter((a) => a.relation === "pseudoHook" && a.hasMacro)
-          .map((a) => a.pseudoHookChange);
-        changes.push(...pseudoHookChanges);
-        const protectionAutomations = this.#getCritAutomations(
-          ProtectionAutomation,
-          crit,
-        );
-        const protectionChanges = protectionAutomations
-          .filter((a) => a.protectionChange)
-          .map((a) => a.protectionChange);
-        changes.push(...protectionChanges);
-        return changes;
+      #generateConsequenceAutomations(crit = false) {
+        const types =
+          CONFIG.ActiveEffect.dataModels.consequence._automationTypes;
+        const out = {};
+        for (const Cls of types) {
+          const automations = this.#getCritAutomations(Cls, crit);
+          for (const a of automations) {
+            const data = a.toObject();
+            data._id = foundry.utils.randomID();
+            if (data?.type === ChangesAutomation.TYPE) {
+              data?.changes.forEach((c) => {
+                c.value = this._heightenString(c.value);
+              });
+            }
+            out[data._id] = data;
+          }
+        }
+        return out;
       }
 
       /**
@@ -407,13 +389,9 @@ export default function AbilityExecutionChatPart(Base) {
           const critEffectData = await this.#generateConsequence(true);
           await this.#generateConsequenceAssociations();
           normalEffectData.system.associations = this.#associationMap["normal"];
-          normalEffectData.system.impacts.changes.push(
-            ...this.#trackerMap["normal"],
-          );
+          normalEffectData.changes.push(...this.#trackerMap["normal"]);
           critEffectData.system.associations = this.#associationMap["crit"];
-          critEffectData.system.impacts.changes.push(
-            ...this.#trackerMap["crit"],
-          );
+          critEffectData.changes.push(...this.#trackerMap["crit"]);
           this.buttons.push(
             ApplyEffectHandler.buildButton(normalEffectData, {
               secondaryData: critEffectData,

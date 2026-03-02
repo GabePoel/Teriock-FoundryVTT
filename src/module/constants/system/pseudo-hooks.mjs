@@ -1,20 +1,16 @@
 import { preLocalize } from "../../helpers/localization.mjs";
+import { timeOptions } from "../options/time-options.mjs";
 
-const commonPseudoHooks = {
+const childPseudoHooks = {
   execution: "TERIOCK.PSEUDO_HOOKS.execution",
   preExecution: "TERIOCK.PSEUDO_HOOKS.preExecution",
 };
-preLocalize("system.pseudoHooks.common", { sort: true });
+preLocalize("system.pseudoHooks.child", { sort: true });
 
-const abilityPseudoHooks = {
-  ...commonPseudoHooks,
-  documentChat: "TERIOCK.PSEUDO_HOOKS.documentChat",
-  documentDuplicate: "TERIOCK.PSEUDO_HOOKS.documentDuplicate",
-  effectApplication: "TERIOCK.PSEUDO_HOOKS.effectApplication",
-  effectExpiration: "TERIOCK.PSEUDO_HOOKS.effectExpiration",
-  movement: "TERIOCK.PSEUDO_HOOKS.movement",
-  postUpdate: "TERIOCK.PSEUDO_HOOKS.postUpdate",
+const actorPseudoHooks = {
+  ...timeOptions.triggers,
   deathBagPull: "TERIOCK.PSEUDO_HOOKS.deathBagPull",
+  movement: "TERIOCK.PSEUDO_HOOKS.movement",
   rollFeatSave: "TERIOCK.PSEUDO_HOOKS.rollFeatSave",
   rollImmunity: "TERIOCK.PSEUDO_HOOKS.rollImmunity",
   rollResistance: "TERIOCK.PSEUDO_HOOKS.rollResistance",
@@ -37,10 +33,23 @@ const abilityPseudoHooks = {
   takeSleep: "TERIOCK.PSEUDO_HOOKS.takeSleep",
   takeUnhack: "TERIOCK.PSEUDO_HOOKS.takeUnhack",
   takeWither: "TERIOCK.PSEUDO_HOOKS.takeWither",
-  turnEnd: "TERIOCK.PSEUDO_HOOKS.turnEnd",
-  turnStart: "TERIOCK.PSEUDO_HOOKS.turnStart",
-  useAbility: "TERIOCK.PSEUDO_HOOKS.useAbility",
-  useArmament: "TERIOCK.PSEUDO_HOOKS.useArmament",
+  turnStart: "TERIOCK.TERMS.Triggers.turnStart",
+  turnEnd: "TERIOCK.TERMS.Triggers.turnEnd",
+  combatStart: "TERIOCK.TERMS.Triggers.combatStart",
+  combatEnd: "TERIOCK.TERMS.Triggers.combatEnd",
+};
+preLocalize("system.pseudoHooks.actor", { sort: true });
+
+const abilityPseudoHooks = {
+  ...actorPseudoHooks,
+  ...childPseudoHooks,
+  //documentChat: "TERIOCK.PSEUDO_HOOKS.documentChat",
+  //documentDuplicate: "TERIOCK.PSEUDO_HOOKS.documentDuplicate",
+  effectApplication: "TERIOCK.PSEUDO_HOOKS.effectApplication",
+  effectExpiration: "TERIOCK.PSEUDO_HOOKS.effectExpiration",
+  postUpdate: "TERIOCK.PSEUDO_HOOKS.postUpdate",
+  //useAbility: "TERIOCK.PSEUDO_HOOKS.useAbility",
+  //useArmament: "TERIOCK.PSEUDO_HOOKS.useArmament",
 };
 preLocalize("system.pseudoHooks.ability", { sort: true });
 
@@ -57,7 +66,7 @@ const propertyPseudoHooks = {
   equipmentUndampen: "TERIOCK.PSEUDO_HOOKS.equipmentUndampen",
   equipmentUnequip: "TERIOCK.PSEUDO_HOOKS.equipmentUnequip",
   equipmentUnglue: "TERIOCK.PSEUDO_HOOKS.equipmentUnglue",
-  equipmentUnidentify: "TERIOCK.PSEUDO_HOOKS.equipmentUnidentify",
+  //equipmentUnidentify: "TERIOCK.PSEUDO_HOOKS.equipmentUnidentify",
   use: "TERIOCK.PSEUDO_HOOKS.use",
 };
 preLocalize("system.pseudoHooks.property", { sort: true });
@@ -65,14 +74,15 @@ preLocalize("system.pseudoHooks.property", { sort: true });
 const unsortedPseudoHooks = foundry.utils.mergeObject(
   abilityPseudoHooks,
   propertyPseudoHooks,
-  commonPseudoHooks,
+  childPseudoHooks,
 );
 preLocalize("system.pseudoHooks.all", { sort: true });
 
 const pseudoHooks = {
+  actor: actorPseudoHooks,
   ability: abilityPseudoHooks,
   property: propertyPseudoHooks,
-  common: commonPseudoHooks,
+  child: childPseudoHooks,
   all: unsortedPseudoHooks,
 };
 export default pseudoHooks;

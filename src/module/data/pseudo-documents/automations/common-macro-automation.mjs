@@ -16,7 +16,7 @@ export default class CommonMacroAutomation extends MacroAutomationMixin(
   }
 
   /** @inheritDoc */
-  static get _pseudoHookChoices() {
-    return pseudoHooks.common;
+  static get _triggerChoices() {
+    return pseudoHooks.child;
   }
 }

@@ -1,23 +1,12 @@
 import { timeOptions } from "../../constants/options/time-options.mjs";
-
-/**
- * Get each {@link TeriockActor} in the current scene.
- * @returns {TeriockActor[]}
- */
-function getActors() {
-  return Array.from(
-    game.scenes.viewed.tokens
-      .filter((token) => token.actor)
-      .map((token) => token.actor),
-  );
-}
+import { ucFirst } from "../../helpers/string.mjs";
 
 export default function registerTimeManagementHooks() {
   foundry.helpers.Hooks.on(
     "updateWorldTime",
     async (_worldTime, dt, _options, userId) => {
       if (game.user.id === userId && game.user.isActiveGM) {
-        for (const actor of getActors()) {
+        for (const actor of visibleActors()) {
           for (const effect of actor.durationExpirationEffects) {
             await effect.system.checkExpiration();
           }
@@ -35,7 +24,7 @@ export default function registerTimeManagementHooks() {
         }
       }
 
-      for (const actor of getActors()) {
+      for (const actor of visibleActors()) {
         if (actor.isViewer && actor.sheet.rendered) {
           actor.sheet.render(true).then();
         }
@@ -44,12 +33,24 @@ export default function registerTimeManagementHooks() {
   );
 
   for (const trigger of Object.keys(timeOptions.triggers)) {
-    foundry.helpers.Hooks.on(`teriock.${trigger}`, async () => {
-      for (const actor of getActors()) {
+    foundry.helpers.Hooks.on(`teriock.force${ucFirst(trigger)}`, async () => {
+      for (const actor of visibleActors()) {
         if (game.user.id === actor.defaultUser.id) {
-          actor?.fireTrigger(trigger).then();
+          actor?.system[`take${ucFirst(trigger)}`]();
         }
       }
     });
   }
+}
+
+/**
+ * Currently visible actors.
+ * @returns {GenericActor[]}
+ */
+function visibleActors() {
+  return Array.from(
+    game.scenes.viewed.tokens
+      .filter((token) => token.actor)
+      .map((token) => token.actor),
+  );
 }

@@ -5,13 +5,12 @@ const { JournalEntry } = foundry.documents;
 
 // noinspection JSClosureCompilerSyntax
 /**
- * The Teriock {@link JournalEntry} implementation.
+ * The Teriock JournalEntry implementation.
+ * @implements {Teriock.Documents.JournalEntryInterface}
  * @extends {JournalEntry}
  * @extends {ClientDocument}
  * @mixes BaseDocument
  * @mixes EmbedCardDocument
- * @property {TypeCollection<TeriockJournalEntryCategory, TeriockJournalEntryCategory>} categories
- * @property {TypeCollection<TeriockJournalEntryPage, TeriockJournalEntryPage>} pages
  */
 export default class TeriockJournalEntry extends mix(
   JournalEntry,

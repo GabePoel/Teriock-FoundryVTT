@@ -71,7 +71,7 @@ export default (Base) =>
      * @returns {Promise<void>}
      */
     static async #onTakeLongRest() {
-      await this.actor.fireTrigger("longRest");
+      await this.actor.system.takeLongRest();
     }
 
     /**
@@ -79,7 +79,7 @@ export default (Base) =>
      * @returns {Promise<void>}
      */
     static async #onTakeShortRest() {
-      await this.actor.fireTrigger("shortRest");
+      await this.actor.system.takeShortRest();
     }
 
     /**

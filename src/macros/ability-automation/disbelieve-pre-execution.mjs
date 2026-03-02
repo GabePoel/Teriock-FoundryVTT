@@ -37,7 +37,10 @@ for (let i = 0; i < data.execution.rolls.length; i++) {
         `${dc} - 2 * @h`,
         data.execution.rollData,
         {
-          flavor: illusionLevels[chosenIllusionLevel] + " DC",
+          flavor: game.i18n.format(
+            "TERIOCK.DIALOGS.Select.IllusionLevel.flavor",
+            { level: illusionLevels[chosenIllusionLevel] },
+          ),
           styles: {
             dice: {
               classes: "feat",

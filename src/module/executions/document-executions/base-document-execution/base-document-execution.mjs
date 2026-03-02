@@ -36,7 +36,6 @@ export default class BaseDocumentExecution extends BaseExecution {
       }),
       args: [this],
       execution: this,
-      useData: this,
       source: this.source,
       system: this.source.system,
       chatData: this.chatData,
@@ -178,7 +177,7 @@ export default class BaseDocumentExecution extends BaseExecution {
         (a) => a.constructor.metadata.macro,
       );
     const correctMacroAutomations = macroAutomations.filter(
-      (a) => a.pseudoHook === pseudoHook && a.hasMacro,
+      (a) => a.trigger === pseudoHook && a.hasMacro,
     );
     await Promise.all(
       correctMacroAutomations.map(async (a) => {

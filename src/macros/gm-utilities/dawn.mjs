@@ -1,1 +1,1 @@
-Hooks.callAll("teriock.dawn");
+Hooks.callAll("teriock.forceDawn");

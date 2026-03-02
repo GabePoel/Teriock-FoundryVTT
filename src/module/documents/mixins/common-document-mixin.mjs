@@ -1,4 +1,3 @@
-import OperationTriggerDataMixin from "../../data/shared/mixins/operation-trigger-data-mixin.mjs";
 import PropagationDataMixin from "../../data/shared/mixins/propagation-data-mixin.mjs";
 import { systemPath } from "../../helpers/path.mjs";
 import { mix } from "../../helpers/utils.mjs";
@@ -8,7 +7,7 @@ import {
   EmbedCardDocumentMixin,
   HierarchyDocumentMixin,
   PanelDocumentMixin,
-  SettingsDocumentMixin
+  SettingsDocumentMixin,
 } from "./_module.mjs";
 
 /**
@@ -21,7 +20,6 @@ export default function CommonDocumentMixin(Base) {
     /**
      * @extends BaseDocument
      * @mixes PropagationData
-     * @mixes OperationTriggerData
      * @mixes ChangeableDocument
      * @mixes EmbedCardDocument
      * @mixes HierarchyDocument
@@ -32,7 +30,6 @@ export default function CommonDocumentMixin(Base) {
     class CommonDocument extends mix(
       Base,
       PropagationDataMixin,
-      OperationTriggerDataMixin,
       ChangeableDocumentMixin,
       EmbedCardDocumentMixin,
       HierarchyDocumentMixin,
@@ -107,6 +104,14 @@ export default function CommonDocumentMixin(Base) {
       }
 
       /** @inheritDoc */
+      _onUpdate(changed, options, userId) {
+        super._onUpdate(changed, options, userId);
+        if (this.checkEditor(userId) && this.actor) {
+          this.actor.system.postUpdate();
+        }
+      }
+
+      /** @inheritDoc */
       async _preCreate(data, options, user) {
         if ((await super._preCreate(data, options, user)) === false) {
           return false;
@@ -139,50 +144,30 @@ export default function CommonDocumentMixin(Base) {
        * Executes all macros for a given pseudo-hook and calls a regular hook with the same name.
        * @param {Teriock.Parameters.Shared.PseudoHook} pseudoHook - What pseudo-hook to call.
        * @param {Partial<Teriock.HookData.BaseHookData>} [data] - Data to call in each connected {@link TeriockMacro}.
-       * @param {TeriockActiveEffect} [effect] - Only call {@link TeriockMacro}s from this {@link TeriockActiveEffect}.
-       * @param {boolean} [skipCall] - Whether to skip calling normal hooks.
+       * @param {object} [options]
+       * @param {boolean} [options.skipCall] - Whether to skip calling normal hooks.
+       * @param {boolean} [options.skipPropagation] - Whether to skip propagation.
        * @returns {Promise<Teriock.HookData.BaseHookData>} The mutated data.
        */
-      async hookCall(pseudoHook, data = {}, effect = null, skipCall = false) {
-        data.cancel = false;
-        if (this.system.hookedMacros) {
-          if (!data) data = {};
-          data.cancel = false;
-          if (!skipCall) {
-            Hooks.callAll(`teriock.${pseudoHook}`, this, data);
-            skipCall = true;
-          }
-          let macroUuids = this.system.hookedMacros[pseudoHook];
-          if (macroUuids) {
-            if (effect) {
-              macroUuids = macroUuids.filter((uuid) =>
-                effect.changes
-                  .filter((c) => c.key === `system.hookedMacros.${pseudoHook}`)
-                  .map((c) => c.value)
-                  .includes(uuid),
-              );
-            }
-            for (const macroUuid of macroUuids) {
-              /** @type {TeriockMacro} */
-              const macro = await fromUuid(macroUuid);
-              if (macro) {
-                try {
-                  await macro.execute({ actor: this, data: data });
-                } catch (e) {
-                  if (game.settings.get("teriock", "developerMode")) {
-                    ui.notifications.error(
-                      "TERIOCK.SYSTEMS.Macro.EXECUTION.cantExecute",
-                      { localize: true, format: { name: macro.name } },
-                    );
-                  }
-                  console.error(e);
-                }
-              }
-            }
-          }
+      async hookCall(pseudoHook, data = {}, options = {}) {
+        let { skipCall = false, skipPropagation = false } = options;
+        data[this.type] = this;
+        if (this.actor) {
+          data.actor = this.actor;
         }
-        if (this.documentName !== "Actor" && this.actor) {
-          await this.actor.hookCall(pseudoHook, data, effect, skipCall);
+        if (this.documentName === "ActiveEffect") {
+          data.effect = this;
+          if (this.parent?.documentName === "Item") {
+            data.item = this.parent;
+          }
+        } else if (this.documentName === "Item") {
+          data.item = this;
+        }
+        if (!skipPropagation) {
+          await this.actor?.fireTrigger(pseudoHook);
+        }
+        if (!skipCall) {
+          Hooks.callAll(`teriock.${pseudoHook}`, this, data);
         }
         return /** @type {Teriock.HookData.BaseHookData} */ data;
       }

@@ -1,12 +1,17 @@
-import { TeriockCard } from "../_module.mjs";
+import { TeriockCards } from "../_module.mjs";
 
-declare module "./cards.mjs" {
-  export default interface TeriockCards
-    extends Teriock.Documents.Interface<TeriockCard> {
-    _id: ID<TeriockCards>;
+declare global {
+  namespace Teriock.Documents {
+    export interface CardsInterface {
+      _id: ID<TeriockCards>;
 
-    get documentName(): "Cards";
-    get id(): ID<TeriockCards>;
-    get uuid(): UUID<TeriockCards>;
+      get documentName(): "Cards";
+
+      get id(): ID<TeriockCards>;
+
+      get uuid(): UUID<TeriockCards>;
+    }
   }
 }
+
+export {};

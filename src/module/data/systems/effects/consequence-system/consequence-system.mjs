@@ -1,6 +1,8 @@
 import { inCombatExpirationDialog } from "../../../../applications/dialogs/_module.mjs";
 import { getRollIcon, mix } from "../../../../helpers/utils.mjs";
 import { builders } from "../../../fields/helpers/_module.mjs";
+import { conditionRequirementsField } from "../../../fields/helpers/builders.mjs";
+import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import { migrateHierarchy } from "../../../shared/migrations/migrate-hierarchy.mjs";
 import { ThresholdDataMixin } from "../../../shared/mixins/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
@@ -28,6 +30,17 @@ export default class ConsequenceSystem extends mix(
     "TERIOCK.SYSTEMS.Consequence",
   ];
 
+  static get _automationTypes() {
+    return [
+      ...super._automationTypes,
+      automations.AbilityMacroAutomation,
+      automations.ChangesAutomation,
+      automations.HealAutomation,
+      automations.ProtectionAutomation,
+      automations.RevitalizeAutomation,
+    ];
+  }
+
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
@@ -50,18 +63,6 @@ export default class ConsequenceSystem extends mix(
         changes: new fields.ArrayField(builders.qualifiedChangeField()),
       }),
       expirations: new fields.SchemaField({
-        conditions: new fields.SchemaField({
-          present: new fields.SetField(
-            new fields.StringField({ choices: TERIOCK.reference.conditions }),
-          ),
-          absent: new fields.SetField(
-            new fields.StringField({ choices: TERIOCK.reference.conditions }),
-          ),
-        }),
-        movement: new fields.BooleanField({ initial: false }),
-        dawn: new fields.BooleanField({ initial: false }),
-        sustained: new fields.BooleanField({ initial: false }),
-        description: new fields.StringField(),
         combat: new fields.SchemaField({
           who: new fields.SchemaField({
             type: builders.combatExpirationSourceTypeField(),
@@ -73,6 +74,12 @@ export default class ConsequenceSystem extends mix(
           what: builders.combatExpirationMethodField(),
           when: builders.combatExpirationTimingField(),
         }),
+        conditions: conditionRequirementsField(),
+        description: new fields.StringField(),
+        sustained: new fields.BooleanField({ initial: false }),
+        triggers: new fields.SetField(
+          new fields.StringField({ choices: TERIOCK.system.pseudoHooks.all }),
+        ),
       }),
       sourceDescription: new fields.HTMLField(),
       heightened: new fields.NumberField(),
@@ -83,36 +90,6 @@ export default class ConsequenceSystem extends mix(
   static migrateData(data) {
     data = migrateHierarchy(data);
     return super.migrateData(data);
-  }
-
-  /** @inheritDoc */
-  get canChange() {
-    return !!this.impacts.changes.length;
-  }
-
-  /** @inheritDoc */
-  get changes() {
-    return this.impacts.changes;
-  }
-
-  /**
-   * Checks if the effect has condition-based expiration.
-   * @returns {boolean} True if the effect expires based on a condition, false otherwise.
-   */
-  get conditionExpiration() {
-    return (
-      this.expirations.conditions.present.size +
-        this.expirations.conditions.absent.size >
-      0
-    );
-  }
-
-  /**
-   * Checks if the effect expires at dawn.
-   * @returns {boolean} True if the effect expires at dawn, false otherwise.
-   */
-  get dawnExpiration() {
-    return this.expirations.dawn;
   }
 
   /** @inheritDoc */
@@ -134,14 +111,6 @@ export default class ConsequenceSystem extends mix(
   /** @inheritDoc */
   get messageBlocks() {
     return this.blocks;
-  }
-
-  /**
-   * Checks if the effect expires on movement.
-   * @returns {boolean} True if the effect expires on movement, false otherwise.
-   */
-  get movementExpiration() {
-    return this.expirations.movement;
   }
 
   /** @inheritDoc */
@@ -195,14 +164,6 @@ export default class ConsequenceSystem extends mix(
     return parts;
   }
 
-  /**
-   * Checks if the effect expires when its source is deleted or disabled.
-   * @returns {boolean} True if the effect expires when sustained, false otherwise.
-   */
-  get sustainedExpiration() {
-    return this.expirations.sustained;
-  }
-
   /** @inheritDoc */
   get useIcon() {
     return getRollIcon(this.expirations.combat.what.roll);
@@ -213,6 +174,30 @@ export default class ConsequenceSystem extends mix(
     return game.i18n.format("TERIOCK.SYSTEMS.Condition.USAGE.use", {
       value: this.parent.name,
     });
+  }
+
+  /** @inheritDoc */
+  _onCreate(data, options, userId) {
+    super._onCreate(data, options, userId);
+    if (this.parent.checkEditor(userId) && this.actor) {
+      this.parent.hookCall("effectApplication").then();
+    }
+  }
+
+  /** @inheritDoc */
+  _onFireTrigger(trigger) {
+    super._onFireTrigger(trigger);
+    if (this.expirations.triggers.has(trigger)) {
+      this.expire().then();
+    }
+  }
+
+  /** @inheritDoc */
+  async _preDelete(options, user) {
+    if ((await super._preDelete(options, user)) === false) {
+      return false;
+    }
+    await this.parent.hookCall("effectExpiration");
   }
 
   /** @inheritDoc */
@@ -231,20 +216,38 @@ export default class ConsequenceSystem extends mix(
 
   /** @inheritDoc */
   async shouldExpire() {
-    let should = await super.shouldExpire();
-    if (this.conditionExpiration && this.actor) {
-      const conditions = this.actor.statuses;
-      for (const condition of this.expirations.conditions.present) {
-        should = should || !conditions.has(condition);
-      }
-      for (const condition of this.expirations.conditions.absent) {
-        should = should || conditions.has(condition);
-      }
+    if (this.shouldExpireFromConditions()) return true;
+    if (await this.shouldExpireFromBeingUnsustained()) return true;
+    return super.shouldExpire();
+  }
+
+  /**
+   * Checks if this should expire due to being unsustained.
+   * @returns {Promise<boolean>}
+   */
+  async shouldExpireFromBeingUnsustained() {
+    if (!this.expirations.sustained) return false;
+    if (
+      !game.settings.get("teriock", "automaticallyExpireSustainedConsequences")
+    ) {
+      return false;
     }
-    if (this.sustainedExpiration) {
-      const source = await fromUuid(this.source);
-      should = should || !source || !source.active;
+    const source = await fromUuid(this.source);
+    return source && !source.active;
+  }
+
+  /**
+   * Checks if this should expire due to its actor's conditions.
+   * @returns {boolean}
+   */
+  shouldExpireFromConditions() {
+    if (!this.actor) return false;
+    for (const c of this.expirations.conditions.present) {
+      if (!this.actor.statuses.has(c)) return true;
     }
-    return should;
+    for (const c of this.expirations.conditions.absent) {
+      if (this.actor.statuses.has(c)) return true;
+    }
+    return false;
   }
 }

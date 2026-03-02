@@ -71,7 +71,7 @@ export default class BaseExecution {
     if (this._actor) {
       return this._actor;
     } else {
-      return game.actors.defaultActor;
+      return game.actors.default;
     }
   }
 

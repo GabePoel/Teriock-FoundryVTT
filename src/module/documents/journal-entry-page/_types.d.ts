@@ -1,17 +1,17 @@
-import { TeriockJournalEntry } from "../_module.mjs";
+import { TeriockJournalEntry, TeriockJournalEntryPage } from "../_module.mjs";
 
-declare module "./journal-entry-page.mjs" {
-  export default interface TeriockJournalEntryPage
-    extends Teriock.Documents.Interface<Teriock.Documents.NullDocument> {
-    _id: ID<TeriockJournalEntryPage>;
+declare global {
+  namespace Teriock.Documents {
+    export interface JournalEntryPageInterface {
+      _id: ID<TeriockJournalEntryPage>;
+      parent: TeriockJournalEntry;
 
-    get documentName(): "JournalEntryPage";
+      get documentName(): "JournalEntryPage";
 
-    get id(): ID<TeriockJournalEntryPage>;
+      get id(): ID<TeriockJournalEntryPage>;
 
-    get parent(): TeriockJournalEntry;
-
-    get uuid(): UUID<TeriockJournalEntryPage>;
+      get uuid(): UUID<TeriockJournalEntryPage>;
+    }
   }
 }
 

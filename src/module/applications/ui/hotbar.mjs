@@ -51,7 +51,7 @@ export default class TeriockHotbar extends Hotbar {
       callback: async (li) => {
         const macro = this.#getMacroForSlot(li);
         if (macro.getFlag("teriock", "macroType") === "useGeneral") {
-          const actor = game.actors.defaultActor;
+          const actor = game.actors.default;
           const doc = await TeriockMacro.getDocument(
             actor,
             macro.getFlag("teriock", "macroDocumentName"),

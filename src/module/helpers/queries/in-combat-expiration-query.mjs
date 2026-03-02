@@ -5,7 +5,6 @@
  * @returns {Promise<void>}
  */
 export default async function inCombatExpirationQuery(queryData, { _timeout }) {
-  const effectUuid = queryData.effectUuid;
-  const effect = await fromUuid(effectUuid);
-  await effect.system.inCombatExpiration();
+  const effect = await fromUuid(queryData.uuid);
+  await effect?.system.inCombatExpiration();
 }

@@ -3,13 +3,15 @@ import * as mixins from "../mixins/_module.mjs";
 
 const { TableResult } = foundry.documents;
 
+//noinspection JSClosureCompilerSyntax
 /**
- * The Teriock {@link TableResult} implementation.
+ * The Teriock TableResult implementation.
  * @extends {TableResult}
  * @extends {ClientDocument}
  * @mixes EmbedCardDocument
  * @mixes BaseDocument
  * @mixes PanelDocument
+ * @implements {Teriock.Documents.TableResultInterface}
  */
 export default class TeriockTableResult extends mix(
   TableResult,

@@ -4,10 +4,11 @@ const { Card } = foundry.documents;
 
 //noinspection JSClosureCompilerSyntax
 /**
- * The Teriock {@link Cards} implementation.
+ * The Teriock Cards implementation.
+ * @implements {Teriock.Documents.CardsInterface}
  * @extends {ClientDocument}
  * @extends {Cards}
  * @mixes BaseDocument
- * @property {TypeCollection<ID<TeriockCard>, TeriockCard>} cards
+ * @property {DocumentCollection<TeriockCard>} cards
  */
 export default class TeriockCards extends BaseDocumentMixin(Card) {}

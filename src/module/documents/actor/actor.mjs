@@ -1,31 +1,24 @@
-import { TeriockDialog } from "../../applications/api/_module.mjs";
 import { documentTypes } from "../../constants/system/_module.mjs";
 import { systemPath } from "../../helpers/path.mjs";
-import { pureUuid, resolveDocument } from "../../helpers/resolve.mjs";
+import { resolveDocument } from "../../helpers/resolve.mjs";
 import { toCamelCase } from "../../helpers/string.mjs";
-import { makeIconClass, mix } from "../../helpers/utils.mjs";
+import { mix } from "../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
 import TeriockTokenDocument from "../token-document/token-document.mjs";
 
 const { Actor } = foundry.documents;
 
+//noinspection JSClosureCompilerSyntax
 /**
- * The Teriock {@link Actor} implementation.
+ * The Teriock Actor implementation.
+ * @implements {Teriock.Documents.ActorInterface}
  * @extends {Actor}
  * @extends {ClientDocument}
  * @mixes BaseDocument
  * @mixes CommonDocument
  * @mixes ParentDocument
  * @mixes RetrievalDocument
- * @mixes OperationTriggerData
- * @property {TypeCollection<GenericActiveEffect, GenericActiveEffect>} effects
- * @property {TypeCollection<GenericItem, GenericItem>} items
- * @property {Teriock.Documents.ActorModel} system
- * @property {Teriock.Documents.ActorType} type
- * @property {ID<TeriockActor>} _id
- * @property {ID<TeriockActor>} id
- * @property {UUID<TeriockActor>} uuid
- * @property {BaseActorSheet} sheet
+ * @mixes PropagationData
  */
 export default class TeriockActor extends mix(
   Actor,
@@ -89,18 +82,6 @@ export default class TeriockActor extends mix(
   }
 
   /**
-   * Enabled body parts and equipped equipment.
-   * @returns {TeriockArmament[]}
-   */
-  get activeArmaments() {
-    return [
-      ...this.equipment.filter((e) => e.system.equipped),
-      ...this.bodyParts.filter((b) => !b.disabled),
-    ];
-  }
-
-  //noinspection JSUnusedGlobalSymbols
-  /**
    * Body parts and equipment.
    * @returns {TeriockArmament[]}
    */
@@ -114,18 +95,9 @@ export default class TeriockActor extends mix(
    */
   get conditionExpirationEffects() {
     return (
-      this.consequences.filter((effect) => effect.system.conditionExpiration) ||
-      []
-    );
-  }
-
-  /**
-   * Gets effects that expire at dawn.
-   * @returns {TeriockConsequence[]} Array of dawn expiration effects.
-   */
-  get dawnExpirationEffects() {
-    return (
-      this.consequences.filter((effect) => effect.system.dawnExpiration) || []
+      this.consequences.filter(
+        (effect) => effect.system.shouldExpireFromConditions,
+      ) || []
     );
   }
 
@@ -292,14 +264,6 @@ export default class TeriockActor extends mix(
     }
   }
 
-  /** @inheritDoc */
-  _onDawn() {
-    super._onDawn();
-    for (const effect of this.dawnExpirationEffects) {
-      effect.system.expire().then();
-    }
-  }
-
   /**
    * @inheritDoc
    * @param {ActorData} data
@@ -330,49 +294,6 @@ export default class TeriockActor extends mix(
       prototypeToken.height = size;
     }
     this.updateSource({ prototypeToken: prototypeToken });
-  }
-
-  /** @inheritDoc */
-  async _preLongRest() {
-    await super._preLongRest();
-    if (this.statuses.has("dead")) return;
-    const heal =
-      game.settings.get("teriock", "showLongRestDialog") &&
-      (await TeriockDialog.confirm({
-        window: {
-          title: game.i18n.localize(
-            "TERIOCK.SHEETS.Actor.ACTIONS.TakeLongRest.label",
-          ),
-          icon: makeIconClass(TERIOCK.display.icons.ui.longRest, "title"),
-        },
-        content: game.i18n.localize(
-          "TERIOCK.SHEETS.Actor.ACTIONS.TakeLongRest.healText",
-        ),
-        modal: true,
-        rejectClose: false,
-      }));
-    if (heal) {
-      const toUpdate = [];
-      for (const item of [...this.ranks, ...this.species, ...this.mounts]) {
-        const itemUpdates = { _id: item.id };
-        const hpDice = item.system.statDice.hp.dice.map((d) => d.toObject());
-        for (const d of hpDice) {
-          d.spent = false;
-        }
-        const mpDice = item.system.statDice.mp.dice.map((d) => d.toObject());
-        for (const d of mpDice) {
-          d.spent = false;
-        }
-        itemUpdates["system.statDice.hp.dice"] = hpDice;
-        itemUpdates["system.statDice.mp.dice"] = mpDice;
-        toUpdate.push(itemUpdates);
-      }
-      await this.updateChildDocuments("Item", toUpdate);
-      await this.update({
-        "system.hp.value": this.system.hp.max,
-        "system.mp.value": this.system.mp.max,
-      });
-    }
   }
 
   /**
@@ -485,45 +406,6 @@ export default class TeriockActor extends mix(
 
   /**
    * @inheritDoc
-   * @param {TeriockChildName} embeddedName
-   * @param {object[]} data
-   * @param {DatabaseCreateOperation} [operation={}]
-   * @returns {Promise<TeriockChild[]>}
-   */
-  async createEmbeddedDocuments(embeddedName, data = [], operation = {}) {
-    if (
-      embeddedName === "ActiveEffect" &&
-      data.find((d) => d.type === "consequence")
-    ) {
-      for (const consequenceData of data.filter(
-        (d) => d.type === "consequence",
-      )) {
-        const changes = consequenceData?.system?.impacts?.changes;
-        if (changes && changes.length > 0) {
-          for (const change of changes) {
-            if (change.key === "system.hookedMacros.effectApplication") {
-              const uuid = pureUuid(change.value);
-              /** @type {TeriockMacro|null} */
-              const macro = await fromUuid(uuid);
-              if (macro) {
-                await macro.execute({
-                  actor: this,
-                  data: {
-                    cancel: false,
-                    docData: consequenceData,
-                  },
-                });
-              }
-            }
-          }
-        }
-      }
-    }
-    return super.createEmbeddedDocuments(embeddedName, data, operation);
-  }
-
-  /**
-   * @inheritDoc
    * @returns {object}
    */
   getRollData() {
@@ -547,10 +429,6 @@ export default class TeriockActor extends mix(
     super.prepareData();
     this.prepareSpecialData();
     this.prepareVirtualEffects();
-    const user = this.defaultUser;
-    if (user?.id) {
-      foundry.helpers.Hooks.callAll(`teriock.actorPostUpdate`, this, user.id);
-    }
   }
 
   /** @inheritDoc */

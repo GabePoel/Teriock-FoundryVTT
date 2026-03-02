@@ -62,7 +62,6 @@ export default class BaseEffectSystem extends ChildSystem {
     changesAutomations.forEach((a) => {
       changes.push(...a.changes);
     });
-    changes.push(...this.pseudoHookChanges);
     const protectionAutomations =
       /** @type {ProtectionAutomation[]} */ this.activeAutomations.filter(
         (a) => a.type === ProtectionAutomation.TYPE,
@@ -102,14 +101,6 @@ export default class BaseEffectSystem extends ChildSystem {
     return this.metadata.modifies;
   }
 
-  /**
-   * Changes corresponding to pseudo-hooks.
-   * @returns {Teriock.Changes.QualifiedChangeData[]}
-   */
-  get pseudoHookChanges() {
-    return [];
-  }
-
   /** @inheritDoc */
   async _preDelete(options, user) {
     const data = { doc: this.parent };
@@ -134,9 +125,7 @@ export default class BaseEffectSystem extends ChildSystem {
    */
   async expire() {
     if (!this.deleteOnExpire) {
-      const data = { doc: this.parent };
-      await this.parent.hookCall("effectExpiration", data, this.parent);
-      if (data.cancel) return;
+      await this.hookCall("effectExpiration");
     }
     if (this.deleteOnExpire) {
       await this.parent.delete();

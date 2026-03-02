@@ -31,13 +31,7 @@ export default class HealAutomation extends StatAutomation {
   }
 
   /** @inheritDoc */
-  get _formPaths() {
-    const paths = this.noStatDice ? [] : super._formPaths;
-    return [...paths, "noStatDice"];
-  }
-
-  /** @inheritDoc */
-  get buttons() {
+  get _buttons() {
     return [
       HealHandler.buildButton({
         consumeStatDice: this.consumeStatDice,
@@ -45,5 +39,24 @@ export default class HealAutomation extends StatAutomation {
         noStatDice: this.noStatDice,
       }),
     ];
+  }
+
+  /** @inheritDoc */
+  get _formPaths() {
+    const paths = this.noStatDice ? this._triggerPaths : super._formPaths;
+    return ["noStatDice", ...paths];
+  }
+
+  /** @inheritDoc */
+  async _preFire() {
+    if (!this.actor.isDamaged || this.forHarm) return;
+    this.document.actor.system
+      .takeHeal({
+        consumeStatDice: this.consumeStatDice,
+        forHarm: this.forHarm,
+        noStatDice: this.noStatDice,
+        title: this.document.nameString,
+      })
+      .then();
   }
 }

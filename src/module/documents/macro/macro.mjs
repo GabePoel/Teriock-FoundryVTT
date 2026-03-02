@@ -5,8 +5,10 @@ import * as mixins from "../mixins/_module.mjs";
 
 const { Macro } = foundry.documents;
 
+//noinspection JSClosureCompilerSyntax
 /**
- * The Teriock {@link Macro} implementation.
+ * The Teriock Macro implementation.
+ * @implements {Teriock.Documents.MacroInterface}
  * @extends {ClientDocument}
  * @extends {Macro}
  * @mixes BaseDocument
@@ -275,7 +277,7 @@ export default class TeriockMacro extends mix(
    * @returns {Promise<void>}
    */
   async scopedExecute(event) {
-    const actor = game.actors.defaultActor;
+    const actor = game.actors.default;
     await this.execute({
       actor,
       token: actor?.defaultToken,

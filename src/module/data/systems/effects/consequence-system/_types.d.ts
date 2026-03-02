@@ -28,6 +28,8 @@ declare global {
           /** <schema> Conditions that must be absent in order for this effect to be active */
           absent: Set<Teriock.Parameters.Condition.ConditionKey>;
         };
+        /** <schema> Triggers that will make this consequence expire */
+        triggers: Set<string>;
         /** <schema> Expirations based on combat timing */
         combat: {
           /** <schema> Who triggers effect expiration? */
@@ -42,10 +44,6 @@ declare global {
           /** <schema> When in the combat does this effect expire? */
           when: CombatExpirationTiming;
         };
-        /** <schema> If this effect expires when the {@link TeriockToken} representing its {@link TeriockActor} moves */
-        movement: boolean;
-        /** <schema> If this effect expires at dawn */
-        dawn: boolean;
         /** <schema> If this effect expires when its source is inactive */
         sustained: boolean;
         /** <schema> Description of the circumstances under which this effect expires */
@@ -63,8 +61,6 @@ declare global {
       source: UUID<TeriockActiveEffect>;
       /** <schema> Source description */
       sourceDescription: string;
-      /** <schema> If this expires when its source is inactive */
-      sustainedExpiration: boolean;
 
       get parent(): TeriockConsequence;
     }

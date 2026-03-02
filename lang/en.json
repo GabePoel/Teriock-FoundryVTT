@@ -1,5 +1,6 @@
 {
   "EFFECT.FIELDS.statuses.label": "Status Effects",
+  "EFFECT.TABS.automations": "Automations",
   "GAME.Paused": "Hold",
   "TERIOCK": {
     "AUTOMATIONS": {
@@ -283,6 +284,27 @@
       },
       "TransformationAutomation": {
         "LABEL": "Transformation"
+      },
+      "TriggerAutomation": {
+        "FIELDS": {
+          "trigger": {
+            "choices": {
+              "none": "None"
+            },
+            "hint": "An optional trigger that makes this happen automatically.",
+            "label": "Trigger"
+          },
+          "conditions": {
+            "absent": {
+              "hint": "What conditions must be absent in order for this trigger to be able to activate?",
+              "label": "Absent Conditions"
+            },
+            "present": {
+              "hint": "What conditions must be present in order for this trigger to be able to activate?",
+              "label": "Present Conditions"
+            }
+          }
+        }
       },
       "UseAbilitiesAutomation": {
         "FIELDS": {
@@ -714,6 +736,7 @@
           "title": "Select Equipment Type"
         },
         "IllusionLevel": {
+          "flavor": "{level} DC",
           "hint": "If known, select the level of illusion you are attempting to disbelieve.",
           "hintTitle": "Illusionary",
           "label": "Level",
@@ -736,6 +759,7 @@
           "title": "Select Species"
         },
         "TransformationLevel": {
+          "flavor": "{level} DC",
           "hint": "If known, select the level of transformation you are attempting to revert from.",
           "hintTitle": "Transformed",
           "label": "Level",
@@ -989,6 +1013,17 @@
         "notPseudoDocument": "The model must be a PseudoDocument"
       }
     },
+    "FORMAT": {
+      "and": {
+        "many": "{start}, and {end}",
+        "two": "{start} and {end}"
+      },
+      "or": {
+        "many": "{start}, or {end}",
+        "two": "{start} or {end}"
+      },
+      "separator": ", "
+    },
     "MACROS": {
       "FullHeal": {
         "success": "Fully healed {name}."
@@ -1101,6 +1136,10 @@
             "hint": "Do you need to be stationary for this ability to be active?",
             "label": "Stationary"
           },
+          "triggers": {
+            "hint": "Things that will cause this ability's effect to expire.",
+            "label": "Triggers"
+          },
           "unit": {
             "hint": "The unit of time for this duration.",
             "label": "Unit"
@@ -1109,8 +1148,8 @@
         "PREREQUISITES": {
           "notStatus": "Not {status}",
           "ongoing": "While {partial}",
-          "text": "{duration} {prerequisite}",
-          "untilDawn": "Until Dawn {partial}"
+          "text": "{start} {end}",
+          "untilTriggers": "Until {partial}"
         },
         "UNITS": {
           "alwaysActive": "Always Active",
@@ -5817,10 +5856,14 @@
         "undead": "Undead"
       },
       "Triggers": {
+        "combatEnd": "Combat End",
+        "combatStart": "Combat Start",
         "dawn": "Dawn",
         "dusk": "Dusk",
         "longRest": "Long Rest",
-        "shortRest": "Short Rest"
+        "shortRest": "Short Rest",
+        "turnEnd": "Turn End",
+        "turnStart": "Turn Start"
       },
       "WeaponFightingStyles": {
         "bluntForce": "Blunt Force",

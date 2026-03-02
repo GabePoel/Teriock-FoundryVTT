@@ -41,85 +41,83 @@ const wikiContextMenuOptions = [
       const condition = toCamelCase(
         target.dataset.tooltip.split("Condition: ")[1],
       );
-      await game.actors.defaultActor.toggleStatusEffect(condition);
+      await game.actors.default.toggleStatusEffect(condition);
     },
     condition: (target) =>
       target.dataset.tooltip?.startsWith("Condition: ") &&
       Object.keys(TERIOCK.data.conditions).includes(
         toCamelCase(target.dataset.tooltip.split("Condition: ")[1]),
       ) &&
-      game.actors.defaultActor,
+      game.actors.default,
   },
   {
     name: "TERIOCK.EFFECTS.Common.bag",
     icon: makeIcon(icons.ui.deathBag, "contextMenu"),
     callback: async () => {
-      await game.actors.defaultActor.system.deathBagPull();
+      await game.actors.default.system.deathBagPull();
     },
     condition: (target) =>
       ["Condition: Dead", "Core: Death Bag"].includes(target.dataset.tooltip) &&
-      game.actors.defaultActor,
+      game.actors.default,
   },
   {
     name: "TERIOCK.EFFECTS.Common.heal",
     icon: makeIcon(icons.effect.heal, "contextMenu"),
     callback: async () => {
-      await game.actors.defaultActor.system.takeHeal();
+      await game.actors.default.system.takeHeal();
     },
     condition: (target) =>
-      target.dataset.tooltip === "Core: Healing" && game.actors.defaultActor,
+      target.dataset.tooltip === "Core: Healing" && game.actors.default,
   },
   {
     name: "TERIOCK.EFFECTS.Common.revitalize",
     icon: makeIcon(icons.effect.heal, "contextMenu"),
     callback: async () => {
-      await game.actors.defaultActor.system.takeRevitalize();
+      await game.actors.default.system.takeRevitalize();
     },
     condition: (target) =>
-      target.dataset.tooltip === "Core: Revitalizing" &&
-      game.actors.defaultActor,
+      target.dataset.tooltip === "Core: Revitalizing" && game.actors.default,
   },
   {
     name: "TERIOCK.EFFECTS.Common.awaken",
     icon: makeIcon(icons.effect.awaken, "contextMenu"),
     callback: async () => {
-      await game.actors.defaultActor.system.takeAwaken();
+      await game.actors.default.system.takeAwaken();
     },
     condition: (target) =>
-      target.dataset.tooltip === "Keyword: Awaken" && game.actors.defaultActor,
+      target.dataset.tooltip === "Keyword: Awaken" && game.actors.default,
   },
   {
     name: "TERIOCK.ROLLS.Resist.button",
     icon: makeIcon(icons.effect.resist, "contextMenu"),
     callback: async () => {
-      await game.actors.defaultActor.system.rollResistance();
+      await game.actors.default.system.rollResistance();
     },
     condition: (target) =>
       ["Keyword: Resistance", "Keyword: Hexproof"].includes(
         target.dataset.tooltip,
-      ) && game.actors.defaultActor,
+      ) && game.actors.default,
   },
   {
     name: "TERIOCK.COMMANDS.UseAbility.useResist",
     icon: makeIcon(icons.document.ability, "contextMenu"),
     callback: async () => {
-      await game.actors.defaultActor.useAbility("Resist");
+      await game.actors.default.useAbility("Resist");
     },
     condition: (target) =>
       ["Keyword: Resistance", "Keyword: Hexproof"].includes(
         target.dataset.tooltip,
-      ) && game.actors.defaultActor,
+      ) && game.actors.default,
   },
   {
     name: "TERIOCK.COMMANDS.UseAbility.useUnnamed",
     icon: makeIcon(icons.document.ability, "contextMenu"),
     callback: async (target) => {
       const abilityName = target.dataset.tooltip.split("Ability: ")[1];
-      await game.actors.defaultActor.useAbility(abilityName);
+      await game.actors.default.useAbility(abilityName);
     },
     condition: (target) =>
-      target.dataset.tooltip?.startsWith("Ability: ") &&
-      game.actors.defaultActor,
+      target.dataset.tooltip?.startsWith("Ability: ") && game.actors.default,
   },
 ];
 

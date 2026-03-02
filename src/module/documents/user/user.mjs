@@ -5,10 +5,11 @@ const { User } = foundry.documents;
 
 // noinspection JSClosureCompilerSyntax
 /**
- * The Teriock {@link User} implementation.
+ * The Teriock User implementation.
  * @extends {User}
  * @extends {ClientDocument}
  * @mixes BaseDocument
+ * @implements {Teriock.Documents.UserInterface}
  */
 export default class TeriockUser extends mix(
   User,

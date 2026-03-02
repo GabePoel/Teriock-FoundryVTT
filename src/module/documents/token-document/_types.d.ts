@@ -1,21 +1,25 @@
-import { TeriockActor, TeriockCombat } from "../_module.mjs";
+import { TeriockCombat, TeriockTokenDocument } from "../_module.mjs";
 import { TeriockToken } from "../../canvas/placeables/_module.mjs";
 import { BaseTokenSheet } from "../../applications/sheets/token-sheets/_module.mjs";
 
-declare module "./token-document.mjs" {
-  export default interface TeriockTokenDocument
-    extends Teriock.Documents.Interface<TeriockTokenDocument> {
-    _id: ID<TeriockTokenDocument>;
-    readonly actor: TeriockActor | null;
-    readonly combat: TeriockCombat | null;
-    readonly object: TeriockToken;
-    sheet: BaseTokenSheet;
+declare global {
+  namespace Teriock.Documents {
+    export interface TokenDocumentInterface {
+      _id: ID<TeriockTokenDocument>;
+      sheet: BaseTokenSheet;
 
-    get documentName(): "TokenDocument";
+      get actor(): GenericActor | null;
 
-    get id(): ID<TeriockTokenDocument>;
+      get combat(): TeriockCombat | null;
 
-    get uuid(): UUID<TeriockTokenDocument>;
+      get documentName(): "TokenDocument";
+
+      get id(): ID<TeriockTokenDocument>;
+
+      get object(): TeriockToken;
+
+      get uuid(): UUID<TeriockTokenDocument>;
+    }
   }
 }
 

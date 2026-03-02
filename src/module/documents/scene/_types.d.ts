@@ -1,15 +1,18 @@
-import { TeriockTokenDocument } from "../_module.mjs";
+import { TeriockScene, TeriockTokenDocument } from "../_module.mjs";
+import { DocumentCollection } from "../../../../foundry/client/documents/abstract/_module.mjs";
 
-declare module "./scene.mjs" {
-  export default interface TeriockScene
-    extends Teriock.Documents.Interface<TeriockTokenDocument> {
-    _id: ID<TeriockScene>;
+declare global {
+  namespace Teriock.Documents {
+    export interface SceneInterface {
+      _id: ID<TeriockScene>;
+      tokens: DocumentCollection<TeriockTokenDocument>;
 
-    get documentName(): "Scene";
+      get documentName(): "Scene";
 
-    get id(): ID<TeriockScene>;
+      get id(): ID<TeriockScene>;
 
-    get uuid(): UUID<TeriockScene>;
+      get uuid(): UUID<TeriockScene>;
+    }
   }
 }
 

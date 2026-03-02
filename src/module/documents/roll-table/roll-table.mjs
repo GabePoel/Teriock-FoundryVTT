@@ -5,12 +5,13 @@ import * as mixins from "../mixins/_module.mjs";
 
 const { RollTable } = foundry.documents;
 
+//noinspection JSClosureCompilerSyntax
 /**
- * The Teriock {@link RollTable} implementation.
+ * The Teriock RollTable implementation.
  * @extends {RollTable}
  * @extends {ClientDocument}
  * @mixes BaseDocument
- * @property {TypeCollection<TeriockTableResult, TeriockTableResult>} results
+ * @implements {Teriock.Documents.RollTableInterface}
  */
 export default class TeriockRollTable extends mix(
   RollTable,
@@ -20,7 +21,7 @@ export default class TeriockRollTable extends mix(
    * @inheritDoc
    * @param {TeriockTableResult[]} results
    * @param {object} [options]
-   * @param {TeriockRoll} [options.roll]
+   * @param {BaseRoll} [options.roll]
    * @param {Partial<Teriock.Data.ChatMessageData>} [options.messageData]
    * @param {object} messageOptions
    */

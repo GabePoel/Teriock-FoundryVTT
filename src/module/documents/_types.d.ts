@@ -17,44 +17,9 @@ import "./table-result/_types";
 import "./token-document/_types";
 import "./user/_types";
 import { documentTypes } from "../constants/system/document-types.mjs";
-import * as systems from "../data/systems/_module.mjs";
 
 declare global {
   namespace Teriock.Documents {
-    type NullDocument = {
-      readonly documentName: "";
-    };
-
-    interface Interface<
-      Embed extends {
-        documentName?: string;
-      },
-    > {
-      isOwner: boolean;
-      limited: boolean;
-      name: string;
-
-      createEmbeddedDocuments(
-        embeddedName: Embed["documentName"],
-        data: object[],
-        operation: object,
-      ): Promise<Embed[]>;
-
-      deleteEmbeddedDocuments(
-        embeddedName: Embed["documentName"],
-        ids: ID<Embed>[],
-        operation: object,
-      ): Promise<Embed[]>;
-
-      prepareEmbeddedDocuments(): void;
-
-      updateEmbeddedDocuments(
-        embeddedName: Embed["documentName"],
-        updates: object[],
-        operation: object,
-      ): Promise<Embed[]>;
-    }
-
     export type IndexCategoryKey = keyof typeof TERIOCK.index;
 
     export type IndexCompendiumKey =
@@ -78,6 +43,7 @@ declare global {
     export type CommonType =
       | Teriock.Documents.ChildType
       | Teriock.Documents.ActorType;
+    export type CardType = keyof typeof documentTypes.card;
 
     export type ModelMetadata = {
       armament: boolean;
@@ -114,18 +80,5 @@ declare global {
       typed: boolean;
       types: Teriock.Documents.CommonType[];
     };
-
-    export type ActorModel = systems.actors.BaseActorSystem &
-      InstanceType<(typeof systems.actors)[keyof typeof systems.actors]>;
-    export type ItemModel = systems.items.BaseItemSystem &
-      InstanceType<(typeof systems.items)[keyof typeof systems.items]>;
-    export type EffectModel = systems.effects.BaseEffectSystem &
-      InstanceType<(typeof systems.effects)[keyof typeof systems.effects]>;
-  }
-}
-
-declare module "./chat-message/chat-message.mjs" {
-  export default interface TeriockChatMessage {
-    get implementation(): typeof TeriockChatMessage;
   }
 }

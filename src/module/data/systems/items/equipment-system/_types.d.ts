@@ -14,8 +14,6 @@ declare global {
       equipmentClasses: Set<Teriock.Parameters.Equipment.EquipmentClass>;
       /** <schema> Canonical Equipment Type */
       equipmentType: string;
-      /** <base> Registered pseudo-hook macros to fire */
-      hookedMacros: Teriock.Parameters.Equipment.HookedEquipmentMacros;
       /** <schema> Power Level */
       powerLevel: Teriock.Parameters.Equipment.EquipmentPowerLevel;
       /** <schema> Price */

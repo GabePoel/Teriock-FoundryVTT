@@ -3,7 +3,6 @@ import { quickAddAssociation } from "../../../../helpers/html.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
 import {
   AccessDataMixin,
-  OperationTriggerDataMixin,
   PropagationDataMixin,
 } from "../../../shared/mixins/_module.mjs";
 import { AutomatableSystemMixin } from "../../mixins/_module.mjs";
@@ -23,7 +22,6 @@ const { fields } = foundry.data;
 export default class CommonSystem extends mix(
   RulesSystem,
   PropagationDataMixin,
-  OperationTriggerDataMixin,
   AccessDataMixin,
   AutomatableSystemMixin,
 ) {
@@ -303,6 +301,17 @@ export default class CommonSystem extends mix(
         children.dst.map((d) => d.id),
       );
     }
+  }
+
+  /** @inheritDoc */
+  async _propagateOperation(methodName, isAsync = false, args = []) {
+    for (const automation of this.automations.contents) {
+      if (typeof automation[methodName] === "function") {
+        if (isAsync) await automation[methodName](...args);
+        else automation[methodName](...args);
+      }
+    }
+    await super._propagateOperation(methodName, isAsync, args);
   }
 
   /**

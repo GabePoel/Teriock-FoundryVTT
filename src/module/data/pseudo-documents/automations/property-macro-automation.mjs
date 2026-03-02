@@ -16,7 +16,7 @@ export default class PropertyMacroAutomation extends MacroAutomationMixin(
   }
 
   /** @inheritDoc */
-  static get _pseudoHookChoices() {
+  static get _triggerChoices() {
     return pseudoHooks.property;
   }
 }

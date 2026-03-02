@@ -1,1 +1,1 @@
-Hooks.callAll("teriock.dusk");
+Hooks.callAll("teriock.forceDusk");

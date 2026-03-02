@@ -21,9 +21,8 @@ declare global {
         absent: Set<Teriock.Parameters.Condition.ConditionKey>;
         present: Set<Teriock.Parameters.Condition.ConditionKey>;
       };
-      dawn: boolean;
       description: string;
-      stationary: boolean;
+      triggers: Set<string>;
     }
   }
 }
