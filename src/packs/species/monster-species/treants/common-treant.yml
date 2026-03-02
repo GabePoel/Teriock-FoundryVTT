@@ -232,37 +232,29 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.28
+      systemVersion: 0.10.29
     img: systems/teriock/src/icons/abilities/improved-healing-factor.webp
     name: Improved Healing Factor
     system:
       automations:
-        1728b3a84ea27844:
-          _id: 1728b3a84ea27844
+        Suc9ayhHqRkmjAwZ:
+          _id: Suc9ayhHqRkmjAwZ
           competencies:
             - 0
             - 1
             - 2
+          conditions:
+            absent:
+              - burned
+              - dead
+          consumeStatDice: false
+          forHarm: false
           heighten:
-            - 1
-            - 0
-          type: common
-        b13e025d8fcf09cc:
-          _id: b13e025d8fcf09cc
-          competencies:
             - 0
             - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          macro: Compendium.teriock.execution.Macro.ba4c50b6d32fe62c
-          pseudoHook: turnStart
-          relation: pseudoHook
-          type: abilityMacro
+          noStatDice: false
+          trigger: turnStart
+          type: heal
       competence:
         raw: 0
       delivery:
@@ -425,7 +417,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.28
+      systemVersion: 0.10.29
     img: systems/teriock/src/icons/abilities/monstrous-strength.webp
     name: Monstrous Strength
     system:
@@ -730,7 +722,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.28
+      systemVersion: 0.10.29
     img: systems/teriock/src/icons/abilities/rebirth.webp
     name: Rebirth
     system:
@@ -950,7 +942,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.28
+      systemVersion: 0.10.29
     img: systems/teriock/src/icons/abilities/treeform-ball.webp
     name: Treeform Ball
     system:
@@ -968,8 +960,8 @@ effects:
             - 1
             - 0
           macro: Compendium.teriock.execution.Macro.ce7e68b1e3f9dd74
-          pseudoHook: takeDamage
-          relation: pseudoHook
+          relation: trigger
+          trigger: takeDamage
           type: abilityMacro
         iB9yugE9ZXYHDeCK:
           _id: iB9yugE9ZXYHDeCK
@@ -1061,7 +1053,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.28
+      systemVersion: 0.10.29
     img: systems/teriock/src/icons/abilities/treeform-self.webp
     name: Treeform Self
     system:
@@ -1079,8 +1071,8 @@ effects:
             - 1
             - 0
           macro: Compendium.teriock.execution.Macro.ce7e68b1e3f9dd74
-          pseudoHook: takeDamage
-          relation: pseudoHook
+          relation: trigger
+          trigger: takeDamage
           type: abilityMacro
         AjiJDtn4fs82jWgF:
           _id: AjiJDtn4fs82jWgF

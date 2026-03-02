@@ -7,11 +7,10 @@ _stats:
   systemVersion: 0.9.17
 author: teriockBuilder00
 command: |-
-  const data = /** @type {Teriock.HookData.UseAbility} */ scope.data;
-  const options = data.execution.options;
-  const actor = data.execution.actor;
-  const armaments = actor.activeArmaments.filter(
-    (e) => actor.system.primaryAttacker !== e.id,
+  const options = scope.execution.options;
+  const actor = scope.execution.actor;
+  const armaments = actor.armaments.filter(
+    (a) => a.active && actor.system.primaryAttacker?.id !== a.id,
   );
   if (armaments.length > 0) {
     const selectedArmament = await tm.dialogs.selectDocumentDialog(armaments, {
@@ -24,7 +23,7 @@ command: |-
         (a) =>
           a.system.interaction === "attack" &&
           a.system.maneuver === "active" &&
-          a.system.executionTime === "a1" &&
+          a.system.executionTime.base === "a1" &&
           ["weapon", "hand"].includes(a.system.delivery.base),
       )
       .sort((a, b) => a.name.localeCompare(b.name));

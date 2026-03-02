@@ -7,11 +7,8 @@ _stats:
   systemVersion: 0.9.17
 author: teriockBuilder00
 command: |-
-  const data = /** @type {Teriock.HookData.RollFeatSave} */ scope.data;
-  if (["mov", "str"].includes(data.attribute)) {
-    data.options.edge = 1;
-    const effect = actor.effects.getName("Bodyguard Backup Effect");
-    await effect.delete();
+  if (["mov", "str"].includes(scope.attribute)) {
+    await scope.effect?.delete();
   }
 img: icons/svg/dice-target.svg
 name: Bodyguard Backup - Roll Feat Save
