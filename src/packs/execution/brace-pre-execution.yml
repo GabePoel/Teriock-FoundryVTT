@@ -1,0 +1,29 @@
+_id: IMwKoWnnUmVFpAcA
+_key: '!macros!IMwKoWnnUmVFpAcA'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.10.29
+author: teriockBuilder00
+command: |-
+  const execution = /** @type {AbilityExecution} */ scope.execution;
+  const dieSize = actor?.flags?.teriockEffect?.braceDieSize || 6;
+  let formula = `1d${dieSize}`;
+  if (execution.proficient) {
+    formula = `(1 + @p)d${dieSize}`;
+  }
+  if (execution.fluent) {
+    formula = `(1 + @f)d${dieSize}`;
+  }
+  const button = execution.buttons.find(
+    (b) => b.dataset.action === "apply-effect",
+  );
+  const consequenceData = JSON.parse(button.dataset.normal);
+  consequenceData.flags = { teriockEffect: { formula } };
+  button.dataset.normal = JSON.stringify(consequenceData);
+  button.dataset.crit = JSON.stringify(consequenceData);
+img: icons/svg/dice-target.svg
+name: Brace - Pre-execution
+scope: global
+type: script

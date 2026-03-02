@@ -12,29 +12,23 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.23
+      systemVersion: 0.10.29
     img: systems/teriock/src/icons/abilities/berserker-healing-factor.webp
     name: Berserker Healing Factor
     system:
       automations:
         8QOdQYnnSxyi3PA8:
           _id: 8QOdQYnnSxyi3PA8
+          conditions:
+            absent:
+              - burned
+              - dead
+            present:
+              - hacked
           consumeStatDice: true
           noStatDice: true
+          trigger: turnStart
           type: heal
-        c2791a4513cf7ba7:
-          _id: c2791a4513cf7ba7
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          macro: Compendium.teriock.execution.Macro.04b61e9803bc33a7
-          pseudoHook: turnStart
-          relation: pseudoHook
-          type: abilityMacro
       class: berserker
       competence:
         raw: 0
