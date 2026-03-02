@@ -2,6 +2,7 @@ import { inCombatExpirationDialog } from "../../../../applications/dialogs/_modu
 import { getRollIcon, mix } from "../../../../helpers/utils.mjs";
 import { builders } from "../../../fields/helpers/_module.mjs";
 import { conditionRequirementsField } from "../../../fields/helpers/builders.mjs";
+import DurationModel from "../../../models/unit-models/duration-model.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import { migrateHierarchy } from "../../../shared/migrations/migrate-hierarchy.mjs";
 import { ThresholdDataMixin } from "../../../shared/mixins/_module.mjs";
@@ -46,6 +47,8 @@ export default class ConsequenceSystem extends mix(
     return foundry.utils.mergeObject(super.metadata, {
       type: "consequence",
       usable: true,
+      childEffectTypes: ["ability"],
+      visibleTypes: ["ability"],
     });
   }
 
@@ -58,9 +61,6 @@ export default class ConsequenceSystem extends mix(
       source: new fields.StringField({
         initial: "",
         nullable: true,
-      }),
-      impacts: new fields.SchemaField({
-        changes: new fields.ArrayField(builders.qualifiedChangeField()),
       }),
       expirations: new fields.SchemaField({
         combat: new fields.SchemaField({
@@ -78,7 +78,7 @@ export default class ConsequenceSystem extends mix(
         description: new fields.StringField(),
         sustained: new fields.BooleanField({ initial: false }),
         triggers: new fields.SetField(
-          new fields.StringField({ choices: TERIOCK.system.pseudoHooks.all }),
+          new fields.StringField({ choices: DurationModel._triggerChoices }),
         ),
       }),
       sourceDescription: new fields.HTMLField(),

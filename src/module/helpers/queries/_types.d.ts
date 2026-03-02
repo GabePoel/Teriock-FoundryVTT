@@ -29,10 +29,10 @@ declare global {
       sustainedUuids: UUID<TeriockConsequence>[];
     };
 
-    export type CallPseudoHook = {
+    export type FireTrigger = {
       uuid: UUID<GenericCommon>;
-      pseudoHook: Teriock.Parameters.Shared.PseudoHook;
-      data: object;
+      trigger: Teriock.System.Trigger;
+      options: object;
     };
 
     export type IdentifyItem = {

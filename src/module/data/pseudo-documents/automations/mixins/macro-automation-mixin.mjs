@@ -1,5 +1,6 @@
 import { ExecuteMacroHandler } from "../../../../helpers/interaction/button-handlers/execute-macro-handlers.mjs";
 import { localizeChoices } from "../../../../helpers/localization.mjs";
+import { lcFirst } from "../../../../helpers/string.mjs";
 import { TriggerAutomationMixin } from "./_module.mjs";
 import LabelAutomationMixin from "./label-automation-mixin.mjs";
 
@@ -16,7 +17,6 @@ export default function MacroAutomationMixin(Base) {
      * @extends {BaseAutomation}
      * @mixin
      * @property {"button"|"trigger"} relation
-     * @property {Teriock.Parameters.Shared.AbilityPseudoHook} pseudoHook
      * @property {UUID<TeriockMacro>} macro
      * @property {string} title
      */
@@ -71,7 +71,13 @@ export default function MacroAutomationMixin(Base) {
           data.relation = "trigger";
         }
         delete data.pseudoHook;
-        return data;
+        if (data.trigger?.includes("equipment")) {
+          data.trigger = data.trigger.replace("equipment", "");
+          data.trigger = lcFirst(data.trigger);
+        }
+        if (data.trigger === "effectApplication") data.trigger = "applyEffect";
+        if (data.trigger === "effectExpiration") data.trigger = "expireEffect";
+        return super.migrateData(data);
       }
 
       /** @inheritDoc */
@@ -117,21 +123,10 @@ export default function MacroAutomationMixin(Base) {
       }
 
       /** @inheritDoc */
-      _preFire() {
-        const scope = { trigger: this.trigger };
-        if (this.document.actor) {
-          scope.actor = this.document.actor;
-        }
-        if (this.document.documentName === "ActiveEffect") {
-          scope.effect = this.document;
-          if (this.document.parent?.documentName === "Item") {
-            scope.item = this.document.parent;
-          }
-        } else if (this.document.documentName === "Item") {
-          scope.item = this.document;
-        }
-        scope[this.document.type] = this.document;
-        fromUuid(this.macro).then((macro) => macro.execute(scope));
+      async _preFire(scope) {
+        fromUuid(this.macro).then((macro) =>
+          macro.execute(this.getScope(scope)),
+        );
       }
     }
   );

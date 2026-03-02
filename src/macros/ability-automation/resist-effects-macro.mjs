@@ -1,29 +1,28 @@
-const data = /** @type {Teriock.HookData.UseAbility} */ scope.data;
-const buttons = data.execution.buttons;
+const buttons = scope.execution.buttons;
 const applyButton = buttons.find((b) => b.label === "Apply Effect");
 
-const choices = {
-  awakening: "Awakening",
-  control: "Control",
-  displacement: "Displacement",
-  duelModifying: "Duel modifying",
-  financial: "Financial",
-  healing: "Healing",
-  killing: "Killing",
-  knockout: "Knockout",
-  loud: "Loud",
-  mental: "Mental",
-  poison: "Poison",
-  reanimation: "Reanimation",
-  regeneration: "Regeneration",
-  revitalization: "Revitalization",
-  revival: "Revival",
-  stealing: "Stealing",
-  summoning: "Summoning",
-  temporal: "Temporal",
-  transformation: "Transformation",
-  truthDetecting: "Truth detecting",
-};
+const choices = teriock.helpers.localization.localizeChoices({
+  awakening: "TERIOCK.TERMS.EffectTypes.awakening",
+  control: "TERIOCK.TERMS.EffectTypes.control",
+  displacement: "TERIOCK.TERMS.EffectTypes.displacement",
+  duelModifying: "TERIOCK.TERMS.EffectTypes.duelModifying",
+  financial: "TERIOCK.TERMS.EffectTypes.financial",
+  healing: "TERIOCK.TERMS.EffectTypes.healing",
+  killing: "TERIOCK.TERMS.EffectTypes.killing",
+  knockout: "TERIOCK.TERMS.EffectTypes.knockout",
+  loud: "TERIOCK.TERMS.EffectTypes.loud",
+  mental: "TERIOCK.TERMS.EffectTypes.mental",
+  poison: "TERIOCK.TERMS.EffectTypes.poison",
+  reanimation: "TERIOCK.TERMS.EffectTypes.reanimation",
+  regeneration: "TERIOCK.TERMS.EffectTypes.regeneration",
+  revitalization: "TERIOCK.TERMS.EffectTypes.revitalization",
+  revival: "TERIOCK.TERMS.EffectTypes.revival",
+  stealing: "TERIOCK.TERMS.EffectTypes.stealing",
+  summoning: "TERIOCK.TERMS.EffectTypes.summoning",
+  temporal: "TERIOCK.TERMS.EffectTypes.temporal",
+  transformation: "TERIOCK.TERMS.EffectTypes.transformation",
+  truthDetecting: "TERIOCK.TERMS.EffectTypes.truthDetecting",
+});
 
 const documents = Object.entries(choices).map(([uuid, name]) => {
   const img = tm.path.getImage("effect-types", name);
@@ -37,7 +36,7 @@ const choice = await tm.dialogs.selectDocumentDialog(documents, {
 function modifyData(data) {
   const effectObject = JSON.parse(data);
   effectObject.changes.push({
-    key: "system.protections.resistances.effects",
+    key: "system.protections.resistances.effectTypes",
     value: choice.uuid,
     mode: 2,
     priority: 10,

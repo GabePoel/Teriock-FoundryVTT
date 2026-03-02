@@ -1,4 +1,4 @@
-const formula = scope.effect.flags.teriockEffect.formula;
+const formula = scope.effect?.flags.teriockEffect.formula;
 const roll = new game.teriock.Roll(formula, actor.getRollData());
 await roll.evaluate();
 await roll.toMessage(

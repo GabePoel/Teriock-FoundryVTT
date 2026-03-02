@@ -1,4 +1,4 @@
-const execution = /** @type {AbilityExecution} */ scope.execution;
+const execution = scope.execution;
 const dieSize = actor?.flags?.teriockEffect?.braceDieSize || 6;
 let formula = `1d${dieSize}`;
 if (execution.proficient) {

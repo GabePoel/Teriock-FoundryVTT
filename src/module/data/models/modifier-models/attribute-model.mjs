@@ -41,12 +41,9 @@ export default class AttributeModel extends ModifierModel {
 
   /** @inheritDoc */
   async use(options) {
-    const data = {
-      attribute: this.key,
-      options,
-    };
-    await this.actor.hookCall("rollFeatSave", data);
-    if (data.cancel) return;
-    await super.use(Object.assign(options, { attribute: data.attribute }));
+    await this.actor.hookCall("rollFeatSave", {
+      scope: { attribute: this.key },
+    });
+    await super.use(Object.assign(options, { attribute: this.key }));
   }
 }

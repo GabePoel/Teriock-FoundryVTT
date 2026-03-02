@@ -56,9 +56,11 @@ export default class IdentificationModel extends EmbeddedDataModel {
    * @returns {Promise<void>}
    */
   async identify() {
-    const data = { doc: this.parent.parent };
-    await this.parent.parent.hookCall("equipmentIdentify", data);
-    if (data.cancel) return;
+    await this.parent.parent.hookCall("identify", {
+      scope: {
+        equipment: this.parent.parent,
+      },
+    });
     if (!this.identified) {
       ui.notifications.info(
         "TERIOCK.MODELS.Identification.QUERY.Identify.ask",
@@ -91,9 +93,9 @@ export default class IdentificationModel extends EmbeddedDataModel {
    * @returns {Promise<void>}
    */
   async readMagic() {
-    const data = { doc: this.parent.parent };
-    await this.parent.parent.hookCall("equipmentReadMagic", data);
-    if (data.cancel) return;
+    await this.parent.parent.hookCall("readMagic", {
+      scope: { equipment: this.parent.parent },
+    });
     if (!this.identified && !this.read) {
       const activeGM = game.users.activeGM;
       ui.notifications.info(
@@ -161,9 +163,6 @@ export default class IdentificationModel extends EmbeddedDataModel {
    * @returns {Promise<void>}
    */
   async unidentify() {
-    const data = { doc: this.parent.parent };
-    await this.parent.parent.hookCall("equipmentUnidentify", data);
-    if (data.cancel) return;
     if (this.identified && game.user.isGM) {
       const uncheckedPropertyNames =
         TERIOCK.options.equipment.unidentifiedProperties;

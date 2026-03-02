@@ -22,7 +22,7 @@ import { TeriockTooltipManager } from "../helpers/interaction/_module.mjs";
 declare global {
   // Definition for writing macros.
   let actor: TeriockActor;
-  let scope: Teriock.Rolls.MacroScope;
+  let scope: Teriock.System.TriggerScope;
 
   const game: TeriockGame & {
     actors: TeriockActors;

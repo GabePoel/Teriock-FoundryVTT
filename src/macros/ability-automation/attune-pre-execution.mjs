@@ -1,6 +1,5 @@
-const data = /** @type {Teriock.HookData.UseAbility} */ scope.data;
-data.execution.buttons = [];
-const actor = data.execution.actor;
+scope.execution.buttons = [];
+const actor = scope.execution.actor;
 const equipment = actor.equipment
   .filter((e) => !e.system.isAttuned)
   .sort((a, b) => a.name.localeCompare(b.name));

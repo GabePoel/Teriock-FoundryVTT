@@ -70,7 +70,10 @@ export default class AbilityExecution extends AbilityExecutionChatPart(
   /** @inheritDoc */
   async _postExecute() {
     await super._postExecute();
-    await this.actor?.hookCall("useAbility", { execution: this });
+    await this.actor?.hookCall("useAbility", { scope: this.getScope() });
+    if (this.source?.system.spell) {
+      await this.actor?.hookCall("castSpell", { scope: this.getScope() });
+    }
   }
 
   /** @inheritDoc */
@@ -83,5 +86,10 @@ export default class AbilityExecution extends AbilityExecutionChatPart(
     } else if (this.source.system.interaction === "block") {
       this.formula = "10 + @av + @bv";
     }
+  }
+
+  /** @inheritDoc */
+  getScope(scope = {}) {
+    return Object.assign(super.getScope(scope), { ability: this.source });
   }
 }

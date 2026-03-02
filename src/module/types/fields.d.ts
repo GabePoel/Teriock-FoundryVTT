@@ -28,6 +28,22 @@ declare global {
      * Valid comparison operations.
      */
     export type ComparisonCheck = keyof typeof comparisons;
+
+    /**
+     * A single group that will be given the corresponding label in a generated `<select>` element.
+     * @see {DynamicChoices}
+     */
+    export type DynamicChoiceGroup = {
+      label: string;
+      choices: Record<string, string>;
+    };
+
+    /**
+     * Select options will be built from dynamic choices. The key for each choice group will be used as that group's
+     * value in the generated `<select>` element. Every choice within that {@link DynamicChoiceGroup} will be part of
+     * the group designated by its key.
+     */
+    export type DynamicChoices = Record<string, DynamicChoiceGroup>;
   }
 }
 

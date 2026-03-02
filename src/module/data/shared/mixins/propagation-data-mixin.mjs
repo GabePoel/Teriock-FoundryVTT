@@ -12,18 +12,23 @@ export default function PropagationDataMixin(Base) {
       /**
        * Stuff that happens when a trigger is fired.
        * @param {string} trigger
+       * @param {Teriock.System.TriggerScope} [scope]
        */
-      _onFireTrigger(trigger) {
-        this._propagateOperation("_onFireTrigger", false, [trigger]);
+      _onFireTrigger(trigger, scope = {}) {
+        this._propagateOperation("_onFireTrigger", false, [trigger, scope]);
       }
 
       /**
        * Stuff that happens before a trigger is fired.
        * @param {string} trigger
+       * @param {Teriock.System.TriggerScope} [scope]
        * @returns {Promise<void>}
        */
-      async _preFireTrigger(trigger) {
-        await this._propagateOperation("_preFireTrigger", true, [trigger]);
+      async _preFireTrigger(trigger, scope = {}) {
+        await this._propagateOperation("_preFireTrigger", true, [
+          trigger,
+          scope,
+        ]);
       }
 
       /**
@@ -59,11 +64,39 @@ export default function PropagationDataMixin(Base) {
       /**
        * Fire a designated trigger.
        * @param {string} trigger
+       * @param {Teriock.System.TriggerScope} [scope]
        * @returns {Promise<void>}
        */
-      async fireTrigger(trigger) {
-        await this._preFireTrigger(trigger);
-        this._onFireTrigger(trigger);
+      async fireTrigger(trigger, scope = {}) {
+        await this._preFireTrigger(trigger, scope);
+        this._onFireTrigger(trigger, scope);
+      }
+
+      /**
+       * A scope that can be used when executing macros from a fired trigger.
+       * @param {Teriock.System.TriggerScope} [scope]
+       * @returns {Teriock.System.TriggerScope}
+       */
+      getScope(scope = {}) {
+        scope = { ...scope };
+        switch (this.documentName) {
+          case "Actor":
+            scope.actor = /** @type {GenericActor} */ this;
+            break;
+          case "Automation":
+            scope.automation = /** @type {BaseAutomation} */ this;
+            break;
+          case "ActiveEffect":
+            scope.effect = /** @type {GenericActiveEffect} */ this;
+            break;
+          case "Item":
+            scope.item = /** @type {GenericItem} */ this;
+            break;
+        }
+        if (this.parent && typeof this.parent.getScope === "function") {
+          Object.assign(scope, this.parent.getScope());
+        }
+        return scope;
       }
 
       /**

@@ -1,7 +1,6 @@
-const data = /** @type {Teriock.HookData.UseAbility} */ scope.data;
 const options = {
-  edge: data.execution.edge,
-  actor: data.execution.actor,
+  edge: scope.execution.edge,
+  actor: scope.execution.actor,
   noHeighten: true,
 };
 const spellNames = [

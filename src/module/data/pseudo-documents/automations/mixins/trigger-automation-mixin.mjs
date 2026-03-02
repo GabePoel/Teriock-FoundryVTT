@@ -1,5 +1,5 @@
-import { pseudoHooks } from "../../../../constants/system/_module.mjs";
-import { localizeChoices } from "../../../../helpers/localization.mjs";
+import { triggers } from "../../../../constants/system/_module.mjs";
+import { formatDynamicSelectOptions } from "../../../../helpers/utils.mjs";
 import { conditionRequirementsField } from "../../../fields/helpers/builders.mjs";
 
 const { fields } = foundry.data;
@@ -24,27 +24,47 @@ export default function TriggerAutomationMixin(Base) {
       ];
 
       /**
+       * An intermediate getter to ensure that the allowed triggers are localized and formatted.
+       * @returns {Record<string, FormSelectOption>}
+       */
+      static get _processedTriggerChoices() {
+        return formatDynamicSelectOptions(this._triggerChoices, {
+          localize: true,
+        });
+      }
+
+      /**
        * Allowed triggers.
-       * @returns {Record<string, string>}
+       * @returns {Teriock.Fields.DynamicChoices}
        */
       static get _triggerChoices() {
-        return pseudoHooks.ability;
+        return {
+          activity: triggers.activity,
+          combat: triggers.combat,
+          consequence: triggers.consequence,
+          execution: triggers.execution,
+          impact: triggers.impact,
+          protection: triggers.protection,
+          time: triggers.time,
+        };
       }
 
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           trigger: new fields.StringField({
-            choices: {
-              none: game.i18n.localize(
-                "TERIOCK.AUTOMATIONS.TriggerAutomation.FIELDS.trigger.choices.none",
-              ),
-              ...localizeChoices(this._triggerChoices),
-            },
-            initial: "none",
+            choices: this._processedTriggerChoices,
+            nullable: true,
+            initial: null,
           }),
           conditions: conditionRequirementsField(),
         });
+      }
+
+      /** @inheritDoc */
+      static migrateData(data) {
+        if (data.trigger === "none") data.trigger = null;
+        return super.migrateData(data);
       }
 
       /**
@@ -129,28 +149,30 @@ export default function TriggerAutomationMixin(Base) {
 
       /**
        * What happens when this automation is triggered.
+       * @param {Teriock.System.TriggerScope} _scope
        */
-      _onFire() {}
+      _onFire(_scope) {}
 
       /** @inheritDoc */
-      _onFireTrigger(trigger) {
-        super._onFireTrigger(trigger);
+      _onFireTrigger(trigger, scope) {
+        super._onFireTrigger(trigger, scope);
         if (trigger === this.trigger && this.canFire) {
-          this._onFire();
+          this._onFire(scope);
         }
       }
 
       /**
        * What happens before this automation is triggered.
+       * @param {Teriock.System.TriggerScope} _scope
        * @returns {Promise<void>}
        */
-      async _preFire() {}
+      async _preFire(_scope) {}
 
       /** @inheritDoc */
-      async _preFireTrigger(trigger) {
-        await super._preFireTrigger(trigger);
+      async _preFireTrigger(trigger, scope) {
+        await super._preFireTrigger(trigger, scope);
         if (trigger === this.trigger && this.canFire) {
-          await this._preFire();
+          await this._preFire(scope);
         }
       }
     }

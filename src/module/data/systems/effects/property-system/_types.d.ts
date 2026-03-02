@@ -12,16 +12,6 @@ declare global {
       extraDamage: string;
       /** <schema> Property form */
       form: Teriock.Parameters.Shared.Form;
-      /** <schema> Impacts */
-      impacts: {
-        /** <schema> Changes made to the parent {@link TeriockEquipment} and {@link TeriockActor}). */
-        changes: Teriock.Changes.QualifiedChangeData[];
-        /**
-         * <schema> {@link TeriockMacro}s hooked to the parent {@link TeriockEquipment} or {@link TeriockActor} if
-         * {@link modifiesActor} is set to `true`.
-         */
-        macros: Teriock.Parameters.Shared.MacroHookRecord;
-      };
       /** <schema> Improvement description */
       improvement: string;
       /** <schema> Limitation description */

@@ -141,35 +141,24 @@ export default function CommonDocumentMixin(Base) {
       }
 
       /**
-       * Executes all macros for a given pseudo-hook and calls a regular hook with the same name.
-       * @param {Teriock.Parameters.Shared.PseudoHook} pseudoHook - What pseudo-hook to call.
-       * @param {Partial<Teriock.HookData.BaseHookData>} [data] - Data to call in each connected {@link TeriockMacro}.
+       * Executes all macros for a given trigger and calls a regular hook with the same name.
+       * @param {Teriock.System.Trigger} trigger - What trigger to call.
        * @param {object} [options]
+       * @param {Teriock.System.TriggerScope} [options.scope] - Optional scope to merge into the generated one.
        * @param {boolean} [options.skipCall] - Whether to skip calling normal hooks.
        * @param {boolean} [options.skipPropagation] - Whether to skip propagation.
        * @returns {Promise<Teriock.HookData.BaseHookData>} The mutated data.
        */
-      async hookCall(pseudoHook, data = {}, options = {}) {
-        let { skipCall = false, skipPropagation = false } = options;
-        data[this.type] = this;
-        if (this.actor) {
-          data.actor = this.actor;
-        }
-        if (this.documentName === "ActiveEffect") {
-          data.effect = this;
-          if (this.parent?.documentName === "Item") {
-            data.item = this.parent;
-          }
-        } else if (this.documentName === "Item") {
-          data.item = this;
-        }
+      async hookCall(trigger, options = {}) {
+        let { skipCall = false, skipPropagation = false, scope = {} } = options;
+        scope.trigger = trigger;
         if (!skipPropagation) {
-          await this.actor?.fireTrigger(pseudoHook);
+          await this.actor?.fireTrigger(trigger, scope);
         }
         if (!skipCall) {
-          Hooks.callAll(`teriock.${pseudoHook}`, this, data);
+          Hooks.callAll(`teriock.${trigger}`, this, this.getScope(scope));
         }
-        return /** @type {Teriock.HookData.BaseHookData} */ data;
+        return /** @type {Teriock.HookData.BaseHookData} */ scope;
       }
 
       /** @inheritDoc */

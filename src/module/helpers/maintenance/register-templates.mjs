@@ -49,7 +49,6 @@ export default async function registerTemplates() {
     "systems/teriock/src/templates/sheets/items/equipment/menu.hbs",
     "systems/teriock/src/templates/sheets/items/equipment/status-bar.hbs",
     "systems/teriock/src/templates/sheets/items/equipment/storage-bar.hbs",
-    "systems/teriock/src/templates/sheets/items/mount/mount-template.hbs",
     "systems/teriock/src/templates/sheets/items/mount/status-bar.hbs",
     "systems/teriock/src/templates/sheets/items/power/status-bar.hbs",
     "systems/teriock/src/templates/sheets/items/rank/class-bar.hbs",

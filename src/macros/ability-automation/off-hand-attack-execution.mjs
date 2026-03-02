@@ -1,8 +1,7 @@
-const data = /** @type {Teriock.HookData.UseAbility} */ scope.data;
-const options = data.execution.options;
-const actor = data.execution.actor;
+const options = scope.execution.options;
+const actor = scope.execution.actor;
 const armaments = actor.armaments.filter(
-  (a) => a.active && actor.system.primaryAttacker !== a.id,
+  (a) => a.active && actor.system.primaryAttacker?.id !== a.id,
 );
 if (armaments.length > 0) {
   const selectedArmament = await tm.dialogs.selectDocumentDialog(armaments, {
@@ -15,7 +14,7 @@ if (armaments.length > 0) {
       (a) =>
         a.system.interaction === "attack" &&
         a.system.maneuver === "active" &&
-        a.system.executionTime === "a1" &&
+        a.system.executionTime.base === "a1" &&
         ["weapon", "hand"].includes(a.system.delivery.base),
     )
     .sort((a, b) => a.name.localeCompare(b.name));

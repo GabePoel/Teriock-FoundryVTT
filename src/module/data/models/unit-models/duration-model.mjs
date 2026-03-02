@@ -1,5 +1,6 @@
-import { pseudoHooks } from "../../../constants/system/_module.mjs";
+import { triggers } from "../../../constants/system/_module.mjs";
 import { formatJoin } from "../../../helpers/string.mjs";
+import { formatDynamicSelectOptions } from "../../../helpers/utils.mjs";
 import { conditionRequirementsField } from "../../fields/helpers/builders.mjs";
 import TimeUnitModel from "./time-unit-model.mjs";
 
@@ -15,6 +16,24 @@ export default class DurationModel extends TimeUnitModel {
     ...super.LOCALIZATION_PREFIXES,
     "TERIOCK.MODELS.Duration",
   ];
+
+  /**
+   * Trigger choices.
+   * @returns {Record<string, FormSelectOption>}
+   */
+  static get _triggerChoices() {
+    return formatDynamicSelectOptions(
+      {
+        activity: triggers.activity,
+        combat: triggers.combat,
+        consequence: triggers.consequence,
+        execution: triggers.execution,
+        impact: triggers.impact,
+        time: triggers.time,
+      },
+      { localize: true },
+    );
+  }
 
   /**
    * @inheritDoc
@@ -49,7 +68,9 @@ export default class DurationModel extends TimeUnitModel {
       conditions: conditionRequirementsField(),
       description: new fields.StringField(),
       triggers: new fields.SetField(
-        new fields.StringField({ choices: pseudoHooks.actor }),
+        new fields.StringField({
+          choices: this._triggerChoices,
+        }),
       ),
     });
   }
@@ -88,7 +109,9 @@ export default class DurationModel extends TimeUnitModel {
    * @returns {string}
    */
   get prerequisiteString() {
-    const triggers = [...this.triggers.map((t) => pseudoHooks.all[t])];
+    const triggers = [
+      ...this.triggers.map((t) => DurationModel._triggerChoices[t].label),
+    ];
     const conditions = [
       ...this.conditions.present.map((c) => TERIOCK.reference.conditions[c]),
       ...this.conditions.absent.map((c) =>

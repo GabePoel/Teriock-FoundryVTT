@@ -61,11 +61,11 @@ export default class BaseExecution {
     return BaseRoll;
   }
 
-  /** @type {TeriockActor|null} */
+  /** @type {GenericActor|null} */
   _actor;
 
   /**
-   * @returns {TeriockActor|null}
+   * @returns {GenericActor|null}
    */
   get actor() {
     if (this._actor) {
@@ -76,7 +76,7 @@ export default class BaseExecution {
   }
 
   /**
-   * @param {TeriockActor|null} actor
+   * @param {GenericActor|null} actor
    */
   set actor(actor) {
     this._actor = actor;
@@ -273,5 +273,19 @@ export default class BaseExecution {
     await this._prepareUpdates();
     await this._updateActor();
     await this._postExecute();
+  }
+
+  /**
+   * A scope that can be used when executing macros from a fired trigger.
+   * @returns {Teriock.System.TriggerScope}
+   */
+  getScope(scope = {}) {
+    return Object.assign(
+      {
+        execution: this,
+        actor: this.actor || undefined,
+      },
+      scope,
+    );
   }
 }

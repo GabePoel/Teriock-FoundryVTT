@@ -1,5 +1,4 @@
-const data = /** @type {Teriock.HookData.UseAbility} */ scope.data;
-const buttons = data.execution.buttons;
+const buttons = scope.execution.buttons;
 const applyButton = buttons.find((b) => b.dataset.action === "apply-effect");
 applyButton.label = game.i18n.format("TERIOCK.COMMANDS.Status.applyNamed", {
   name: TERIOCK.reference.conditions.lighted,

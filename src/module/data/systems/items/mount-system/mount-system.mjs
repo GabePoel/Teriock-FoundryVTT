@@ -1,6 +1,6 @@
 import { icons } from "../../../../constants/display/icons.mjs";
 import { toCamelCase } from "../../../../helpers/string.mjs";
-import { mix } from "../../../../helpers/utils.mjs";
+import { makeIcon, mix } from "../../../../helpers/utils.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
 
@@ -112,6 +112,27 @@ export default class MountSystem extends mix(
   }
 
   /** @inheritDoc */
+  getCardContextMenuEntries(doc) {
+    return [
+      ...super.getCardContextMenuEntries(doc),
+      {
+        name: game.i18n.localize("TERIOCK.SYSTEMS.Mount.MENU.mount"),
+        icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
+        callback: this.mount.bind(this),
+        condition: this.parent.isOwner && !this.mounted,
+        group: "control",
+      },
+      {
+        name: game.i18n.localize("TERIOCK.SYSTEMS.Mount.MENU.unmount"),
+        icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
+        callback: this.unmount.bind(this),
+        condition: this.parent.isOwner && this.mounted,
+        group: "control",
+      },
+    ];
+  }
+
+  /** @inheritDoc */
   getLocalRollData() {
     return {
       ...super.getLocalRollData(),
@@ -125,9 +146,7 @@ export default class MountSystem extends mix(
    * @returns {Promise<void>}
    */
   async mount() {
-    const data = { doc: this.parent };
-    await this.parent.hookCall("mountMount", data);
-    if (data.cancel) return;
+    await this.parent.hookCall("mount", { scope: { mount: this.parent } });
     await this.parent.update({ "system.mounted": true });
   }
 
@@ -136,9 +155,7 @@ export default class MountSystem extends mix(
    * @returns {Promise<void>}
    */
   async unmount() {
-    const data = { doc: this.parent };
-    await this.parent.hookCall("mountUnmount", data);
-    if (data.cancel) return;
+    await this.parent.hookCall("unmount", { scope: { mount: this.parent } });
     await this.parent.update({ "system.mounted": false });
   }
 }

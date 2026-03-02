@@ -214,3 +214,12 @@ export function dedent(str) {
 export function ucFirst(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
+
+/**
+ * Make the first character of a string lower case.
+ * @param {string} str - The string to convert.
+ * @returns {string} - The modified string.
+ */
+export function lcFirst(str) {
+  return str.charAt(0).toLowerCase() + str.slice(1);
+}

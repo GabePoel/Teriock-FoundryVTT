@@ -29,14 +29,6 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
     this.targets = new Set();
   }
 
-  /** @inheritDoc */
-  get _macroExecutionScope() {
-    return {
-      ...super._macroExecutionScope,
-      ability: this.source,
-    };
-  }
-
   /**
    * @inheritDoc
    * @returns {BaseAutomation[]}

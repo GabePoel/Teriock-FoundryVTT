@@ -59,11 +59,8 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       async takePay(amount, mode) {
-        const data = { amount, mode };
-        await this.parent.hookCall("takePay", data);
-        if (data.cancel) return;
-        amount = data.amount;
-        mode = data.mode;
+        await this.parent.hookCall("takePay", { scope: { amount, mode } });
+
         // Get current money state
         const currentMoney = { ...this.money };
 

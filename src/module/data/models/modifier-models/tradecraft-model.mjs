@@ -38,12 +38,9 @@ export default class TradecraftModel extends ModifierModel {
 
   /** @inheritDoc */
   async use(options) {
-    const data = {
-      options,
-      tradecraft: this.key,
-    };
-    await this.actor.hookCall("rollTradecraft", data);
-    if (data.cancel) return;
-    await super.use(Object.assign(options, { tradecraft: data.tradecraft }));
+    await this.actor.hookCall("rollTradecraft", {
+      scope: { tradecraft: this.key },
+    });
+    await super.use(Object.assign(options, { tradecraft: this.key }));
   }
 }

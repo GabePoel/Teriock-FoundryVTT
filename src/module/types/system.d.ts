@@ -1,17 +1,14 @@
-import { TeriockMacro } from "../documents/_module.mjs";
 import { displayOptions } from "../constants/options/display-options.mjs";
-import { pseudoHooks } from "../constants/system/_module.mjs";
-import type { timeOptions } from "../constants/options/time-options.mjs";
+import { triggers } from "../constants/system/_module.mjs";
+import { BaseAutomation } from "../data/pseudo-documents/automations/_module.mjs";
+import type BaseExecution from "../executions/base-execution/base-execution.mjs";
+import {
+  AbilityExecution,
+  ArmamentExecution,
+} from "../executions/document-executions/_module.mjs";
 
 declare global {
   export namespace Teriock.Parameters.Shared {
-    export type AbilityPseudoHook = keyof typeof pseudoHooks.ability;
-    export type PropertyPseudoHook = keyof typeof pseudoHooks.property;
-    export type PseudoHook = keyof typeof pseudoHooks.all;
-    export type MacroHookRecord = Record<
-      SafeUUID<TeriockMacro>,
-      Teriock.Parameters.Shared.PropertyPseudoHook
-    >;
     export type CardDisplaySize = keyof typeof displayOptions.sizes;
   }
 
@@ -34,10 +31,42 @@ declare global {
       keepSubIds?: boolean;
     };
 
-    /**
-     * A defined trigger time that can be invoked.
-     */
-    export type TimeTrigger = keyof typeof timeOptions.triggers;
+    export type ActivityTrigger = keyof typeof triggers.activity.choices;
+    export type AttunableTrigger = keyof typeof triggers.attunable.choices;
+    export type CombatTrigger = keyof typeof triggers.combat.choices;
+    export type ConsequenceTrigger = keyof typeof triggers.consequence.choices;
+    export type EquipmentTrigger = keyof typeof triggers.equipment.choices;
+    export type ExecutionTrigger = keyof typeof triggers.execution.choices;
+    export type ImpactTrigger = keyof typeof triggers.impact.choices;
+    export type MountTrigger = keyof typeof triggers.mount.choices;
+    export type ProtectionTrigger = keyof typeof triggers.protection.choices;
+    export type TimeTrigger = keyof typeof triggers.time.choices;
+    export type Trigger =
+      | ActivityTrigger
+      | AttunableTrigger
+      | CombatTrigger
+      | ConsequenceTrigger
+      | EquipmentTrigger
+      | ExecutionTrigger
+      | ImpactTrigger
+      | MountTrigger
+      | ProtectionTrigger
+      | TimeTrigger;
+
+    export type TriggerScope = {
+      ability?: TeriockAbility;
+      actor?: GenericActor;
+      amount?: number;
+      armament?: TeriockArmament;
+      attribute?: Teriock.Parameters.Actor.Attribute;
+      automation?: BaseAutomation;
+      effect?: GenericActiveEffect;
+      equipment?: TeriockEquipment;
+      execution?: BaseExecution | AbilityExecution | ArmamentExecution;
+      item?: GenericItem;
+      tradecraft?: Teriock.Parameters.Fluency.Tradecraft;
+      trigger?: string;
+    };
 
     /**
      * Something's competency level specifies if it's proficient or fluent.

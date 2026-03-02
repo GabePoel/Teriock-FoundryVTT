@@ -1,4 +1,3 @@
-import { TeriockMacro } from "../../../../documents/_module.mjs";
 import { abilityOptions } from "../../../../constants/options/ability-options.mjs";
 import { dieOptions } from "../../../../constants/options/die-options.mjs";
 
@@ -60,11 +59,6 @@ declare global {
       | "rainbowswirl"
       | "flame"
       | "vortex";
-
-    export type HookedActorMacros = Record<
-      Teriock.Parameters.Shared.PseudoHook,
-      UUID<TeriockMacro>[]
-    >;
 
     export type PayMode = "exact" | "greedy";
 

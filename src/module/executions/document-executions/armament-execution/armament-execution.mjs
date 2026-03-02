@@ -101,7 +101,7 @@ export default class ArmamentExecution extends BaseDocumentExecution {
   /** @inheritDoc */
   async _postExecute() {
     await super._postExecute();
-    await this.actor?.hookCall("useArmament", { execution: this });
+    await this.actor?.hookCall("useArmament", { scope: this.getScope() });
   }
 
   /** @inheritDoc */
@@ -109,5 +109,10 @@ export default class ArmamentExecution extends BaseDocumentExecution {
     if (formulaExists(this.bonusDamage)) {
       this.formula = addFormula(this.formula, this.bonusDamage);
     }
+  }
+
+  /** @inheritDoc */
+  getScope(scope = {}) {
+    return Object.assign(super.getScope(scope), { armament: this.source });
   }
 }

@@ -151,7 +151,7 @@ export default function AbilityExecutionGetInputPart(Base) {
             ? game.i18n.format("TERIOCK.SYSTEMS.Ability.EXECUTION.casting", {
                 name: this.source.name,
               })
-            : game.i18n.format("TERIOCK.SYSTEMS.Ability.EXECUTION.execution", {
+            : game.i18n.format("TERIOCK.SYSTEMS.Ability.EXECUTION.executing", {
                 name: this.source.name,
               });
           await TeriockDialog.prompt({

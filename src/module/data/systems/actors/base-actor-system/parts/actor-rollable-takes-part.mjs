@@ -51,10 +51,8 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       async takeDamage(amount, options = {}) {
-        const data = { amount };
-        await this.parent.hookCall("takeDamage", data);
-        if (data.cancel) return;
-        await this.#takeHarm(data.amount, "hp", options);
+        await this.parent.hookCall("takeDamage", { scope: { amount } });
+        await this.#takeHarm(amount, "hp", options);
       }
 
       /**
@@ -70,10 +68,8 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       async takeDrain(amount, options = {}) {
-        const data = { amount };
-        await this.parent.hookCall("takeDrain", { data });
-        if (data.cancel) return;
-        await this.#takeHarm(data.amount, "mp", options);
+        await this.parent.hookCall("takeDrain", { scope: { amount } });
+        await this.#takeHarm(amount, "mp", options);
       }
 
       /**
@@ -86,11 +82,9 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       async takeGainTempHp(amount) {
-        const data = { amount };
-        await this.parent.hookCall("takeGainTempHp", data);
-        if (data.cancel) return;
+        await this.parent.hookCall("takeGainTempHp", { scope: { amount } });
         await this.parent.update({
-          "system.hp.temp": Math.max(this.hp.temp + data.amount, 0),
+          "system.hp.temp": Math.max(this.hp.temp + amount, 0),
         });
       }
 
@@ -104,11 +98,9 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       async takeGainTempMp(amount) {
-        const data = { amount };
-        await this.parent.hookCall("takeGainTempMp", data);
-        if (data.cancel) return;
+        await this.parent.hookCall("takeGainTempMp", { scope: { amount } });
         await this.parent.update({
-          "system.mp.temp": Math.max(this.mp.temp + data.amount, 0),
+          "system.mp.temp": Math.max(this.mp.temp + amount, 0),
         });
       }
 
@@ -122,10 +114,8 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       async takeHealing(amount) {
-        const data = { amount };
-        await this.parent.hookCall("takeHealing", data);
-        if (data.cancel) return;
-        const value = Math.min(this.hp.max, this.hp.value + data.amount);
+        await this.parent.hookCall("takeHealing", { scope: { amount } });
+        const value = Math.min(this.hp.max, this.hp.value + amount);
         await this.parent.update({ "system.hp.value": value });
       }
 
@@ -139,10 +129,8 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       async takeKill(amount) {
-        const data = { amount };
-        await this.parent.hookCall("takeKill", data);
-        if (data.cancel) return;
-        if (this.hp.value <= data.amount) {
+        await this.parent.hookCall("takeKill", { scope: { amount } });
+        if (this.hp.value <= amount) {
           await this.parent.toggleStatusEffect("dead", {
             active: true,
             overlay: true,
@@ -160,10 +148,8 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       async takeRevitalizing(amount) {
-        const data = { amount };
-        await this.parent.hookCall("takeRevitalizing", data);
-        if (data.cancel) return;
-        const value = Math.min(this.mp.max, this.mp.value + data.amount);
+        await this.parent.hookCall("takeRevitalizing", { scope: { amount } });
+        const value = Math.min(this.mp.max, this.mp.value + amount);
         await this.parent.update({ "system.mp.value": value });
       }
 
@@ -177,10 +163,8 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       async takeSetTempHp(amount) {
-        const data = { amount };
-        await this.parent.hookCall("takeSetTempHp", data);
-        if (data.cancel) return;
-        await this.parent.update({ "system.hp.temp": data.amount });
+        await this.parent.hookCall("takeSetTempHp", { scope: { amount } });
+        await this.parent.update({ "system.hp.temp": amount });
       }
 
       /**
@@ -193,10 +177,8 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       async takeSetTempMp(amount) {
-        const data = { amount };
-        await this.parent.hookCall("takeSetTempMp", data);
-        if (data.cancel) return;
-        await this.parent.update({ "system.mp.temp": data.amount });
+        await this.parent.hookCall("takeSetTempMp", { scope: { amount } });
+        await this.parent.update({ "system.mp.temp": amount });
       }
 
       /**
@@ -209,10 +191,8 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       async takeSleep(amount) {
-        const data = { amount };
-        await this.parent.hookCall("takeSleep", data);
-        if (data.cancel) return;
-        if (this.hp.value <= data.amount) {
+        await this.parent.hookCall("takeSleep", { scope: { amount } });
+        if (this.hp.value <= amount) {
           await this.parent.toggleStatusEffect("asleep", {
             active: true,
             overlay: true,
@@ -230,12 +210,10 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       async takeWither(amount) {
-        const data = { amount };
-        await this.parent.hookCall("takeWither", data);
-        if (data.cancel) return;
+        await this.parent.hookCall("takeWither", { scope: { amount } });
         const value = Math.min(
           this.wither.max,
-          this.wither.value + Number(data.amount),
+          this.wither.value + Number(amount),
         );
         await this.parent.update({ "system.wither.value": value });
       }

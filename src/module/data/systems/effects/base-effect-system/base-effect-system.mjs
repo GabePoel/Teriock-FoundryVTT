@@ -101,14 +101,6 @@ export default class BaseEffectSystem extends ChildSystem {
     return this.metadata.modifies;
   }
 
-  /** @inheritDoc */
-  async _preDelete(options, user) {
-    const data = { doc: this.parent };
-    await this.parent.hookCall("effectExpiration", data, this.parent);
-    if (data.cancel) return;
-    await super._preDelete(options, user);
-  }
-
   /**
    * Checks if the effect should expire and expires it if necessary.
    * @returns {Promise<void>}

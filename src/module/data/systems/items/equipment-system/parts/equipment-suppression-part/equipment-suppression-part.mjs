@@ -87,9 +87,9 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       async dampen() {
-        const data = { doc: this.parent };
-        await this.parent.hookCall("equipmentDampen", data);
-        if (data.cancel) return;
+        await this.parent.hookCall("dampen", {
+          scope: { equipment: this.parent },
+        });
         await this.parent.update({ "system.dampened": true });
       }
 
@@ -169,9 +169,9 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       async repair() {
-        const data = { doc: this.parent };
-        await this.parent.hookCall("equipmentRepair", data);
-        if (data.cancel) return;
+        await this.parent.hookCall("repair", {
+          scope: { equipment: this.parent },
+        });
         if (this.shattered) {
           const shatterProperties = this.parent.properties.filter(
             (p) => p.name === "Shattered",
@@ -193,9 +193,9 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       async shatter() {
-        const data = { doc: this.parent };
-        await this.parent.hookCall("equipmentShatter", data);
-        if (data.cancel) return;
+        await this.parent.hookCall("shatter", {
+          scope: { equipment: this.parent },
+        });
         const shatterProperty = await getProperty("Shattered");
         if (!this.shattered) {
           await this.parent.createEmbeddedDocuments("ActiveEffect", [
@@ -217,9 +217,9 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       async undampen() {
-        const data = { doc: this.parent };
-        await this.parent.hookCall("equipmentUndampen", data);
-        if (data.cancel) return;
+        await this.parent.hookCall("undampen", {
+          scope: { equipment: this.parent },
+        });
         await this.parent.update({ "system.dampened": false });
       }
 

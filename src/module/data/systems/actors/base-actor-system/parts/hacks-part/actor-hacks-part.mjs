@@ -60,10 +60,7 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       async takeHack(part, amount = 1) {
-        const data = { part };
-        await this.parent.hookCall("takeHack", data);
-        if (data.cancel) return;
-        part = data.part;
+        await this.parent.hookCall("takeHack", { scope: { part, amount } });
         const value = this.parent.system.hacks[part].value;
         const max = Math.min(value + amount, hackOptions[part].max);
         const ids = [];
@@ -84,10 +81,7 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       async takeUnhack(part, amount = 1) {
-        const data = { part };
-        await this.parent.hookCall("takeUnhack", data);
-        if (data.cancel) return;
-        part = data.part;
+        await this.parent.hookCall("takeUnhack", { scope: { part, amount } });
         const value = this.parent.system.hacks[part].value;
         const min = Math.max(value - amount, 0);
         const ids = [];

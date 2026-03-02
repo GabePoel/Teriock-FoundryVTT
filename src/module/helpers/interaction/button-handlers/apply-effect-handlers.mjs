@@ -82,29 +82,37 @@ export class ApplyEffectHandler extends AbstractButtonHandler {
     const bonusSubs = /** @type {TeriockChild[]} */ await Promise.all(
       bonusSubUuids.map((uuid) => fromUuid(uuid)),
     );
-    const bonusSubData = bonusSubs.map((s) => {
-      const obj = s.toObject();
-      delete obj._id;
-      obj.system._sup = effectObj._id;
-      return obj;
-    });
-    const toCreate = [effectObj, ...bonusSubData];
+
     /** @type {TeriockConsequence[]} */
     const createdConsequences = [];
     for (const actor of this.actors) {
       const newConsequences = await actor.createEmbeddedDocuments(
         "ActiveEffect",
-        toCreate,
+        [effectObj],
         { keepId: true, allowDuplicateSubs: true },
       );
       createdConsequences.push(...newConsequences);
-      ui.notifications.info("TERIOCK.COMMANDS.ApplyEffect.applied", {
-        format: {
-          name: effectObj.name,
-        },
-        localize: true,
-      });
     }
+    await Promise.all(
+      createdConsequences.map((c) => {
+        console.log(
+          c,
+          bonusSubs,
+          bonusSubs.map((s) => s.toObject()),
+        );
+        return c.createChildDocuments(
+          "ActiveEffect",
+          bonusSubs.map((s) => s.toObject()),
+        );
+      }),
+    );
+
+    ui.notifications.info("TERIOCK.COMMANDS.ApplyEffect.applied", {
+      format: {
+        name: effectObj.name,
+      },
+      localize: true,
+    });
     await this._addToSustaining(createdConsequences);
   }
 

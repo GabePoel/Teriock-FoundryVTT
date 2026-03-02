@@ -57,7 +57,7 @@ export default function UsableDataMixin(Base) {
       }
 
       /**
-       * Use this without any hook or pseudo-hook calls.
+       * Use this without any hook or trigger calls.
        * @param {object} _options
        * @returns {Promise<void>}
        */
@@ -84,7 +84,7 @@ export default function UsableDataMixin(Base) {
       }
 
       /**
-       * Uses this, including all hook and pseudo-hook calls.
+       * Uses this, including all hook and trigger calls.
        * @param {Teriock.Interaction.UseOptions} options
        * @returns {Promise<void>}
        */

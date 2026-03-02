@@ -1,5 +1,4 @@
 import * as index from "../../../../constants/index/_module.mjs";
-import { TeriockMacro } from "../../../../documents/_module.mjs";
 import { equipmentOptions } from "../../../../constants/options/equipment-options.mjs";
 
 declare global {
@@ -23,11 +22,5 @@ declare global {
 
     /** Property keys */
     export type PropertyKey = keyof typeof index.properties;
-
-    /** Hooked equipment macros */
-    export type HookedEquipmentMacros = Record<
-      Teriock.Parameters.Shared.PropertyPseudoHook,
-      UUID<TeriockMacro>[]
-    >;
   }
 }

@@ -92,10 +92,9 @@ export default function AttunableSystemMixin(Base) {
        * @returns {Promise<TeriockAttunement | null>} Promise that resolves to the attunement effect or null.
        */
       async attune() {
-        const data = { doc: this.parent };
-        await this.parent.hookCall("attune", data);
-        await this.parent.hookCall(`${this.parent.type}Attune`, data);
-        if (data.cancel) return null;
+        await this.parent.hookCall("attune", {
+          scope: { attunable: this.parent },
+        });
         let attunement = this.attunement;
         if (attunement) return attunement;
         const attunementData = {
@@ -177,10 +176,9 @@ export default function AttunableSystemMixin(Base) {
        * @returns {Promise<void>}
        */
       async deattune() {
-        const data = { doc: this.parent };
-        await this.parent.hookCall(`deattune`, data);
-        await this.parent.hookCall(`${this.parent.type}Deattune`, data);
-        if (data.cancel) return;
+        await this.parent.hookCall(`deattune`, {
+          scope: { attunable: this.parent },
+        });
         const attunement = this.attunement;
         if (attunement) {
           await attunement.delete();

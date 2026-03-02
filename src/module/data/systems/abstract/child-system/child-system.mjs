@@ -336,9 +336,7 @@ export default class ChildSystem extends UsableDataMixin(CommonSystem) {
 
   /** @inheritDoc */
   async use(options = {}) {
-    const data = { doc: this.parent };
-    await this.parent.hookCall("use", data);
-    if (data.cancel) return;
+    await this.parent.hookCall("use");
     Hooks.callAll(
       "teriock.use" + ucFirst(this.parent.type) + this.parent.type.slice(1),
       [this.parent],

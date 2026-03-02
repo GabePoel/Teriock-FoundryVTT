@@ -157,16 +157,12 @@
           "macro": {
             "label": "Macro"
           },
-          "pseudoHook": {
-            "hint": "The hook that executes this macro when fired.",
-            "label": "Hook"
-          },
           "relation": {
             "choices": {
               "button": "Button",
-              "pseudoHook": "Hook"
+              "trigger": "Trigger"
             },
-            "hint": "Whether this macro can be run as a button from the chat message or hooks into other behavior."
+            "hint": "Whether this macro can be run as a button from the chat message or triggers off of other behavior."
           }
         },
         "LABEL": "Macro"
@@ -287,13 +283,6 @@
       },
       "TriggerAutomation": {
         "FIELDS": {
-          "trigger": {
-            "choices": {
-              "none": "None"
-            },
-            "hint": "An optional trigger that makes this happen automatically.",
-            "label": "Trigger"
-          },
           "conditions": {
             "absent": {
               "hint": "What conditions must be absent in order for this trigger to be able to activate?",
@@ -303,6 +292,13 @@
               "hint": "What conditions must be present in order for this trigger to be able to activate?",
               "label": "Present Conditions"
             }
+          },
+          "trigger": {
+            "choices": {
+              "none": "None"
+            },
+            "hint": "An optional trigger that makes this happen automatically.",
+            "label": "Trigger"
           }
         }
       },
@@ -1464,57 +1460,6 @@
         "ethereal": "Ethereal",
         "invisibleEthereal": "Invisible Ethereal"
       }
-    },
-    "PSEUDO_HOOKS": {
-      "deathBagPull": "Pull From Death Bag",
-      "documentChat": "Document Sharing to Chat",
-      "documentDuplicate": "Document Duplication",
-      "effectApplication": "Effect Application",
-      "effectExpiration": "Effect Expiration",
-      "equipmentAttune": "Equipment Attunement",
-      "equipmentDampen": "Equipment Dampening",
-      "equipmentDeattune": "Equipment Deattunement",
-      "equipmentEquip": "Equipment Equipping",
-      "equipmentGlue": "Equipment Gluing",
-      "equipmentIdentify": "Equipment Identification",
-      "equipmentReadMagic": "Equipment Reading Magic",
-      "equipmentRepair": "Equipment Repairing",
-      "equipmentShatter": "Equipment Shattering",
-      "equipmentUndampen": "Equipment Undampening",
-      "equipmentUnequip": "Equipment Unequipping",
-      "equipmentUnglue": "Equipment Ungluing",
-      "equipmentUnidentify": "Equipment Unidentification",
-      "execution": "Executing This",
-      "movement": "Movement",
-      "postUpdate": "Actor Post-updating",
-      "preExecution": "Before Executing This",
-      "rollFeatSave": "Rolling a Feat Save",
-      "rollImmunity": "Rolling an Immunity Save",
-      "rollResistance": "Rolling a Resistance Save",
-      "rollTradecraft": "Rolling a Tradecraft Check",
-      "takeAwaken": "Taking Awaken",
-      "takeDamage": "Taking Damage",
-      "takeDrain": "Taking Drain",
-      "takeGainTempHp": "Gaining Temp HP",
-      "takeGainTempMp": "Gaining Temp MP",
-      "takeHack": "Taking Hack",
-      "takeHeal": "Taking Healing",
-      "takeKill": "Taking Auto-kill Effect",
-      "takeNormalHeal": "Taking Normal Healing",
-      "takeNormalRevitalize": "Taking Normal Revitalization",
-      "takePay": "Making Payment",
-      "takeRevitalize": "Taking Revitalization",
-      "takeRevive": "Taking Revival",
-      "takeSetTempHp": "Setting Temp HP",
-      "takeSetTempMp": "Setting Temp MP",
-      "takeSleep": "Taking Auto-sleep Effect",
-      "takeUnhack": "Taking Unhack",
-      "takeWither": "Taking Wither",
-      "turnEnd": "Actor Turn Ending",
-      "turnStart": "Actor Turn Starting",
-      "use": "Using Parent",
-      "useAbility": "Using an Ability",
-      "useArmament": "Using an Armament"
     },
     "ROLLS": {
       "Attack": {
@@ -3129,6 +3074,10 @@
             "label": "Mounted"
           }
         },
+        "MENU": {
+          "mount": "Mount",
+          "unmount": "Unmount"
+        },
         "PANELS": {
           "load": "Load"
         }
@@ -3335,7 +3284,7 @@
           "open": "Open Referenced Document"
         },
         "PANELS": {
-          "documents": "Documents",
+          "formatDynamicSelectOptions(this._triggerChoices),documents": "Documents",
           "resultType": "Result Type",
           "tableResult": "Table Result"
         }
@@ -5855,16 +5804,6 @@
         "playerCharacter": "Player character",
         "undead": "Undead"
       },
-      "Triggers": {
-        "combatEnd": "Combat End",
-        "combatStart": "Combat Start",
-        "dawn": "Dawn",
-        "dusk": "Dusk",
-        "longRest": "Long Rest",
-        "shortRest": "Short Rest",
-        "turnEnd": "Turn End",
-        "turnStart": "Turn Start"
-      },
       "WeaponFightingStyles": {
         "bluntForce": "Blunt Force",
         "charging": "Charging",
@@ -5883,6 +5822,103 @@
         "swordsman": "Swordsman",
         "trident": "Trident",
         "wraparound": "Wraparound"
+      }
+    },
+    "TRIGGERS": {
+      "Activity": {
+        "choices": {
+          "castSpell": "Casting a Spell",
+          "deathBagPull": "Pulling From Death Bag",
+          "movement": "Movement",
+          "rollFeatSave": "Rolling a Feat Save",
+          "rollTradecraft": "Rolling a Tradecraft Check",
+          "useAbility": "Using an Ability",
+          "useArmament": "Using an Armament"
+        },
+        "label": "Activity"
+      },
+      "Attunable": {
+        "choices": {
+          "attune": "Attuning",
+          "deattune": "Deattuning"
+        },
+        "label": "Attunable"
+      },
+      "Combat": {
+        "choices": {
+          "combatEnd": "Combat End",
+          "combatStart": "Combat Start",
+          "turnEnd": "Turn End",
+          "turnStart": "Turn Start"
+        },
+        "label": "Combat"
+      },
+      "Consequence": {
+        "choices": {
+          "applyEffect": "Effect Application",
+          "expireEffect": "Effect Expiration"
+        },
+        "label": "Consequence"
+      },
+      "Equipment": {
+        "choices": {
+          "dampen": "Dampening",
+          "equip": "Equipping",
+          "glue": "Gluing",
+          "identify": "Identifying",
+          "readMagic": "Reading Magic",
+          "repair": "Repairing",
+          "shatter": "Shattering",
+          "undampen": "Undampening",
+          "unequip": "Unequipping",
+          "unglue": "Ungluing"
+        },
+        "label": "Equipment"
+      },
+      "Execution": {
+        "choices": {
+          "execution": "Upon Executing This",
+          "preExecution": "Before Executing This"
+        },
+        "label": "Execution"
+      },
+      "Impact": {
+        "choices": {
+          "takeAwaken": "Taking Awaken",
+          "takeDamage": "Taking Damage",
+          "takeDrain": "Taking Drain",
+          "takeGainTempHp": "Taking Gain Temp HP",
+          "takeGainTempMp": "Taking Gain Temp MP",
+          "takeHack": "Taking Hack",
+          "takeHeal": "Taking Exact Healing",
+          "takeKill": "Taking Threshold Kill",
+          "takeNormalHeal": "Taking Normal Heal",
+          "takeNormalRevitalize": "Taking Normal Revitalize",
+          "takePay": "Taking Payment",
+          "takeRevitalize": "Taking Exact Revitalize",
+          "takeRevive": "Taking Revive",
+          "takeSetTempHp": "Taking Set Temp HP",
+          "takeSetTempMp": "Taking Set Temp MP",
+          "takeSleep": "Taking Threshold Sleep",
+          "takeUnhack": "Taking Hack Removal",
+          "takeWither": "Taking Wither"
+        },
+        "label": "Impact"
+      },
+      "None": {
+        "label": "None"
+      },
+      "Protection": {
+        "label": "Protection"
+      },
+      "Time": {
+        "choices": {
+          "dawn": "Dawn",
+          "dusk": "Dusk",
+          "longRest": "Long Rest",
+          "shortRest": "Short Rest"
+        },
+        "label": "Time"
       }
     }
   },

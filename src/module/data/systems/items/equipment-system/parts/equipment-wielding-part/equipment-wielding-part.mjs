@@ -116,9 +116,9 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       async equip() {
-        const data = { doc: this.parent };
-        await this.parent.hookCall("equipmentEquip", data);
-        if (data.cancel) return;
+        await this.parent.hookCall("equip", {
+          scope: { equipment: this.parent },
+        });
         await this.parent.update({ "system.equipped": true });
       }
 
@@ -130,7 +130,7 @@ export default (Base) => {
             name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.equip"),
             icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
             callback: this.equip.bind(this),
-            condition: this.canEquip,
+            condition: this.parent.isOwner && this.canEquip,
             group: "control",
           },
           {
@@ -177,9 +177,9 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       async glue() {
-        const data = { doc: this.parent };
-        await this.parent.hookCall("equipmentGlue", data);
-        if (data.cancel) return;
+        await this.parent.hookCall("glue", {
+          scope: { equipment: this.parent },
+        });
         const glueProperty = await getProperty("Glued");
         if (!this.glued) {
           await this.parent.createEmbeddedDocuments("ActiveEffect", [
@@ -207,9 +207,9 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       async unequip() {
-        const data = { doc: this.parent };
-        await this.parent.hookCall("equipmentUnequip", data);
-        if (data.cancel) return;
+        await this.parent.hookCall("unequip", {
+          scope: { equipment: this.parent },
+        });
         await this.parent.update({ "system.equipped": false });
       }
 
@@ -218,9 +218,9 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       async unglue() {
-        const data = { doc: this.parent };
-        await this.parent.hookCall("equipmentUnglue", data);
-        if (data.cancel) return;
+        await this.parent.hookCall("unglue", {
+          scope: { equipment: this.parent },
+        });
         if (this.glued) {
           const glueProperties = this.parent.properties.filter(
             (p) => p.name === "Glued",

@@ -1,4 +1,4 @@
-import { pseudoHooks } from "../../../constants/system/_module.mjs";
+import { triggers } from "../../../constants/system/_module.mjs";
 import BaseAutomation from "./base-automation.mjs";
 import { MacroAutomationMixin } from "./mixins/_module.mjs";
 
@@ -17,6 +17,8 @@ export default class CommonMacroAutomation extends MacroAutomationMixin(
 
   /** @inheritDoc */
   static get _triggerChoices() {
-    return pseudoHooks.child;
+    return {
+      execution: triggers.execution,
+    };
   }
 }

@@ -1,4 +1,3 @@
-import TeriockChatMessage from "../../../documents/chat-message/chat-message.mjs";
 import {
   addFormula,
   boostFormula,
@@ -23,25 +22,6 @@ export default class BaseDocumentExecution extends BaseExecution {
 
   /** @type {BaseAutomation[]} */
   automations;
-
-  /**
-   * Data to include in macro execution scopes.
-   * @returns {object}
-   */
-  get _macroExecutionScope() {
-    return {
-      actor: this.actor,
-      speaker: TeriockChatMessage.getSpeaker({
-        actor: this.actor,
-      }),
-      args: [this],
-      execution: this,
-      source: this.source,
-      system: this.source.system,
-      chatData: this.chatData,
-      data: { execution: this },
-    };
-  }
 
   /** @type {GenericChild} */
   _source;
@@ -149,7 +129,7 @@ export default class BaseDocumentExecution extends BaseExecution {
 
   /** @inheritDoc */
   async _createChatMessage() {
-    await this._executePseudoHookMacros("preExecution");
+    await this._fireTriggerMacros("preExecution");
     await super._createChatMessage();
   }
 
@@ -167,29 +147,36 @@ export default class BaseDocumentExecution extends BaseExecution {
   }
 
   /**
-   * Execute all connected macros that match a given pseudo-hook.
-   * @param {string} pseudoHook
+   * Execute all connected macros that match a given trigger.
+   * @param {Teriock.System.Trigger} trigger
    * @returns {Promise<void>}
    */
-  async _executePseudoHookMacros(pseudoHook) {
+  async _fireTriggerMacros(trigger) {
     const macroAutomations =
-      /** @type {MacroAutomation[]} */ this.activeAutomations.filter(
-        (a) => a.constructor.metadata.macro,
-      );
+      /** @type {MacroAutomation[]} */
+      this.activeAutomations.filter((a) => a.constructor.metadata.macro);
     const correctMacroAutomations = macroAutomations.filter(
-      (a) => a.trigger === pseudoHook && a.hasMacro,
+      (a) => a.trigger === trigger && a.hasMacro,
     );
     await Promise.all(
       correctMacroAutomations.map(async (a) => {
         const macro = await fromUuid(a.macro);
-        await macro.execute(this._macroExecutionScope);
+        await macro.execute(this.getScope({ trigger }));
       }),
     );
   }
 
   /** @inheritDoc */
   async _postExecute() {
-    await this._executePseudoHookMacros("execution");
+    await this._fireTriggerMacros("execution");
     await super._postExecute();
+  }
+
+  /** @inheritDoc*/
+  getScope(scope = {}) {
+    return Object.assign(
+      this.source?.getScope(scope) || {},
+      super.getScope(scope),
+    );
   }
 }

@@ -208,8 +208,7 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       async takeAwaken() {
-        const data = await this.parent.hookCall("takeAwaken");
-        if (data.cancel) return;
+        await this.parent.hookCall("takeAwaken");
         if (
           this.parent.statuses.has("unconscious") &&
           !this.parent.statuses.has("dead")
@@ -236,10 +235,8 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       async takeHeal(options = {}) {
-        const data = { options };
-        await this.parent.hookCall("takeHeal", data);
-        if (data.cancel) return;
-        await healDialog(this.actor, data.options);
+        await this.parent.hookCall("takeHeal");
+        await healDialog(this.actor, options);
       }
 
       /**
@@ -248,10 +245,8 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       async takeRevitalize(options = {}) {
-        const data = { options };
-        await this.parent.hookCall("takeRevitalize", data);
-        if (data.cancel) return;
-        await revitalizeDialog(this.parent, data.options);
+        await this.parent.hookCall("takeRevitalize");
+        await revitalizeDialog(this.parent, options);
       }
 
       /**
@@ -263,8 +258,7 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       async takeRevive() {
-        const data = await this.parent.hookCall("takeRevive");
-        if (data.cancel) return;
+        await this.parent.hookCall("takeRevive");
         if (this.parent.statuses.has("dead")) {
           if (this.hp.value <= 0) {
             await this.takeHealing(1 - this.hp.value);

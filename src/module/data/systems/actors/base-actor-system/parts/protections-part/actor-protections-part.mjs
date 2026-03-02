@@ -74,9 +74,7 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       async rollImmunity(options = {}) {
-        const data = { options };
-        await this.parent.hookCall("rollImmunity", data);
-        if (data.cancel) return;
+        await this.parent.hookCall("rollImmunity");
         options.actor = this.parent;
         const execution = new ImmunityExecution(options);
         await execution.execute();
@@ -96,9 +94,7 @@ export default (Base) => {
         if (options.event) {
           Object.assign(options, ThresholdRoll.parseEvent(options.event));
         }
-        const data = { options };
-        await this.parent.hookCall("rollResistance", data);
-        if (data.cancel) return;
+        await this.parent.hookCall("rollResistance");
         options.actor = this.parent;
         const execution = new ResistanceExecution(options);
         await execution.execute();

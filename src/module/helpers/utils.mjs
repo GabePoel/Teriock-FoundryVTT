@@ -178,3 +178,38 @@ export function sortObject(obj, options = {}) {
 export function objectMap(obj, fn) {
   return Object.fromEntries(Object.entries(obj).map(([k, v]) => [k, fn(v)]));
 }
+
+/**
+ * Pre-process grouped choices into something that {@link SelectInputConfig} can read.
+ * @param {Teriock.Fields.DynamicChoices|Teriock.Fields.DynamicChoices[]} choices
+ * @param {object} [options]
+ * @param {boolean} [options.localize]
+ * @returns {Record<string, FormSelectOption>}
+ */
+export function formatDynamicSelectOptions(choices = {}, options = {}) {
+  const out = {};
+  const choiceArray = [];
+  if (Array.isArray(choices)) {
+    choiceArray.push(...choices);
+  } else {
+    for (const group of Object.values(choices)) {
+      const groupLabel = options.localize
+        ? game.i18n.localize(group.label)
+        : group.label;
+      for (const [choiceValue, choiceLabel] of Object.entries(group.choices)) {
+        choiceArray.push({
+          label: options.localize
+            ? game.i18n.localize(choiceLabel)
+            : choiceLabel,
+          value: choiceValue,
+          group: groupLabel,
+        });
+      }
+    }
+  }
+  for (const choice of choiceArray) {
+    out[choice.value] = choice;
+    delete out[choice.value].value;
+  }
+  return out;
+}

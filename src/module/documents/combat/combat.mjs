@@ -32,18 +32,6 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
   }
 
   /**
-   * Call a pseudo-hook on the provided actor.
-   * @param {TeriockActor} actor
-   * @param {string} pseudoHook
-   */
-  #callPseudoHook(actor, pseudoHook) {
-    actor?.defaultUser?.query("teriock.callPseudoHook", {
-      uuid: actor.uuid,
-      pseudoHook,
-    });
-  }
-
-  /**
    * Check if the effect might expire and send a dialog to some {@link TeriockUser}.
    * @param {TeriockConsequence} effect - Effect to check expiration for.
    * @param {"turn"|"combat"|"action"} trigger - What might trigger this effect to expire.
@@ -73,6 +61,18 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
         });
       }
     }
+  }
+
+  /**
+   * Call a trigger on the provided actor.
+   * @param {TeriockActor} actor
+   * @param {Teriock.System.Trigger} trigger
+   */
+  #fireTrigger(actor, trigger) {
+    actor?.defaultUser?.query("teriock.fireTrigger", {
+      uuid: actor.uuid,
+      trigger,
+    });
   }
 
   /**
@@ -141,7 +141,7 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
     this.#resetAttackPenalties();
     for (const actor of this.actors) {
       this.#tryExpirations(actor, actor, "combat", "end");
-      this.#callPseudoHook(actor, "combatEnd");
+      this.#fireTrigger(actor, "combatEnd");
       this.#regainReaction(actor);
     }
     return out;
@@ -158,7 +158,7 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
     }
     this.#resetAttackPenalties();
     this.updateCombatantActors();
-    this.#callPseudoHook(previousActor, "turnEnd");
+    this.#fireTrigger(previousActor, "turnEnd");
     const newActor = this.actor;
     if (newActor) {
       this.#regainReaction(newActor);
@@ -166,7 +166,7 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
         this.#tryExpirations(actor, newActor, "action", "start");
         this.#tryExpirations(actor, newActor, "turn", "start");
       }
-      this.#callPseudoHook(newActor, "turnStart");
+      this.#fireTrigger(newActor, "turnStart");
     }
     return out;
   }
@@ -177,7 +177,7 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
     this.#resetAttackPenalties();
     for (const actor of this.actors) {
       this.#tryExpirations(actor, actor, "combat", "start");
-      this.#callPseudoHook(actor, "combatStart");
+      this.#fireTrigger(actor, "combatStart");
     }
     return out;
   }

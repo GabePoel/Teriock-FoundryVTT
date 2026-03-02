@@ -418,10 +418,7 @@ export default class TeriockActor extends mix(
    * @returns {Promise<void>}
    */
   async postUpdate(skipFunctions = {}) {
-    const data = { skipFunctions };
-    await this.hookCall("postUpdate", data);
-    if (data.cancel) return;
-    await this.system.postUpdate(data.skipFunctions);
+    await this.system.postUpdate(skipFunctions);
   }
 
   /** @inheritDoc */

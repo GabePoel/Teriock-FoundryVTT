@@ -1,7 +1,6 @@
-const data = /** @type {Teriock.HookData.UseAbility} */ scope.data;
-const options = data.execution.options;
-options.proficient = data.execution.proficient;
-options.fluent = data.execution.fluent;
+const options = scope.execution.options;
+options.proficient = scope.execution.proficient;
+options.fluent = scope.execution.fluent;
 const spellNames = [
   "Crown of Flame",
   "Crown of Light",

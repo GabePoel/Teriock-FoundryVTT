@@ -83,21 +83,18 @@ export default function ChildDocumentMixin(Base) {
       async duplicate() {
         const copy = foundry.utils.duplicate(this.toObject());
         copy._stats.duplicateSource = this.uuid;
-        const data = { doc: this.parent, copy: copy };
-        await this.hookCall("documentDuplicate", data);
-        if (data.cancel) return data.copy;
         let copyDocument;
         if (this.isEmbedded) {
           copyDocument = await this.parent.createEmbeddedDocuments(
             this.documentName,
-            [data.copy],
+            [copy],
           );
         } else if (this.inCompendium) {
-          copyDocument = await this.constructor.create(data.copy, {
+          copyDocument = await this.constructor.create(copy, {
             pack: this.compendium.collection,
           });
         } else {
-          copyDocument = await this.constructor.create(data.copy);
+          copyDocument = await this.constructor.create(copy);
         }
         return copyDocument[0];
       }
@@ -117,14 +114,6 @@ export default function ChildDocumentMixin(Base) {
           this.prepareSpecialData();
           this.prepareVirtualEffects();
         }
-      }
-
-      /** @inheritDoc */
-      async toMessage(options = {}) {
-        const data = { doc: this.parent };
-        await this.hookCall("documentChat", data);
-        if (data.cancel) return;
-        return await super.toMessage(options);
       }
 
       /**
