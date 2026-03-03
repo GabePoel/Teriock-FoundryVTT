@@ -1,4 +1,3 @@
-import { systemPath } from "../../helpers/path.mjs";
 import { bindCommonActions } from "../shared/_module.mjs";
 
 /**
@@ -11,9 +10,7 @@ export default function SidebarMixin(Base) {
      * @mixin
      */
     class Sidebar extends Base {
-      static _entryPartial = systemPath(
-        "templates/sidebar/document-partial.hbs",
-      );
+      static _entryPartial = "teriock/sidebar/document-partial";
 
       /** @inheritDoc */
       async _onRender(context, options) {

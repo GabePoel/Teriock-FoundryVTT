@@ -1,6 +1,5 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
 import { elementClass } from "../../../../helpers/html.mjs";
-import { systemPath } from "../../../../helpers/path.mjs";
 import { makeIconClass, mix } from "../../../../helpers/utils.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseEffectSheet from "../base-effect-sheet.mjs";
@@ -20,12 +19,12 @@ export default class AbilitySheet extends mix(
 ) {
   /** @inheritDoc */
   static BARS = [
-    systemPath("templates/sheets/effects/ability/status-bar.hbs"),
-    systemPath("templates/sheets/effects/ability/delivery-bar.hbs"),
-    systemPath("templates/sheets/effects/ability/targeting-bar.hbs"),
-    systemPath("templates/sheets/effects/ability/expansion-bar.hbs"),
-    systemPath("templates/sheets/effects/ability/costs-bar.hbs"),
-    systemPath("templates/sheets/shared/bars/consumable-bar.hbs"),
+    "teriock/sheets/effects/ability/status-bar",
+    "teriock/sheets/effects/ability/delivery-bar",
+    "teriock/sheets/effects/ability/targeting-bar",
+    "teriock/sheets/effects/ability/expansion-bar",
+    "teriock/sheets/effects/ability/costs-bar",
+    "teriock/sheets/shared/bars/consumable-bar",
   ];
 
   /**
@@ -42,13 +41,11 @@ export default class AbilitySheet extends mix(
   /** @inheritDoc */
   static PARTS = {
     mask: {
-      template: systemPath(
-        "templates/sheets/effects/ability/elder-sorcery-mask.hbs",
-      ),
+      template: "teriock/sheets/effects/ability/elder-sorcery-mask",
     },
     ...this.HEADER_PARTS,
     menu: {
-      template: systemPath("templates/sheets/effects/ability/menu.hbs"),
+      template: "teriock/sheets/effects/ability/menu",
     },
     ...this.CONTENT_PARTS,
   };

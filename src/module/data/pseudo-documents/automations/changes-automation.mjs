@@ -1,5 +1,4 @@
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
-import { systemPath } from "../../../helpers/path.mjs";
 import { qualifiedChangeField } from "../../fields/helpers/builders.mjs";
 import CritAutomation from "./crit-automation.mjs";
 
@@ -29,7 +28,7 @@ export default class ChangesAutomation extends CritAutomation {
   /** @inheritDoc */
   async getEditor() {
     const html = await TeriockTextEditor.renderTemplate(
-      systemPath("templates/sheets/shared/changes.hbs"),
+      "teriock/sheets/shared/changes",
       {
         changesData: this.changes,
         changesPath: `${this.fieldPath}.${this.id}.changes`,

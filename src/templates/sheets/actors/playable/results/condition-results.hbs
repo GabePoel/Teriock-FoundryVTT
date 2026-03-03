@@ -3,7 +3,7 @@
     document.flags.teriockDocumentSettings.sheetBlockEffectsGapless}}gapless{{/if}}">
     {{#each conditions as |condition|}}
       {{#if (not (path ../system.conditionInformation condition "locked"))}}
-        {{> (template "ui/block.hbs")
+        {{> "teriock/ui/block"
           (merge
             (path ../conditionsMap condition "system.embedParts")
             (object
@@ -13,7 +13,7 @@
           )
         }}
       {{else}}
-        {{> (template "ui/block.hbs")
+        {{> "teriock/ui/block"
           (object
             img=(path ../TERIOCK.data.conditions condition "img")
             title=(path ../TERIOCK.data.conditions condition "name")

@@ -1,3 +1,4 @@
+import { default as templates } from "../index/templates.json" with { type: "json" };
 import * as applications from "./applications/_module.mjs";
 import * as canvas from "./canvas/_module.mjs";
 import * as constants from "./constants/_module.mjs";
@@ -170,7 +171,7 @@ foundry.helpers.Hooks.once("init", function () {
         base: data.systems.messages.BaseMessageSystem,
       },
       documentClass: documents.TeriockChatMessage,
-      template: helpers.path.systemPath("templates/ui/chat-message.hbs"),
+      template: "teriock/ui/chat-message",
     },
     Combat: {
       initiative: {
@@ -461,7 +462,7 @@ foundry.helpers.Hooks.once("init", function () {
   // Register Handlebars Templates
   // =============================
 
-  helpers.maintenance.registerTemplates();
+  foundry.applications.handlebars.loadTemplates(templates);
 });
 
 // Override Compendium Applications

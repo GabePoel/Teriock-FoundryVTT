@@ -1,5 +1,4 @@
 import { documentOptions } from "../../../constants/options/document-options.mjs";
-import { systemPath } from "../../../helpers/path.mjs";
 import { makeIconClass } from "../../../helpers/utils.mjs";
 import BaseItemSheet from "./base-item-sheet.mjs";
 
@@ -11,8 +10,8 @@ import BaseItemSheet from "./base-item-sheet.mjs";
 export default class MountSheet extends BaseItemSheet {
   /** @inheritDoc */
   static BARS = [
-    systemPath("templates/sheets/shared/bars/stat-bar.hbs"),
-    systemPath("templates/sheets/items/mount/status-bar.hbs"),
+    "teriock/sheets/shared/bars/stat-bar",
+    "teriock/sheets/items/mount/status-bar",
   ];
 
   /** @inheritDoc */

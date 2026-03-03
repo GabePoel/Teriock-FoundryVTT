@@ -1,6 +1,5 @@
 import { icons } from "../../../constants/display/icons.mjs";
 import { documentOptions } from "../../../constants/options/document-options.mjs";
-import { systemPath } from "../../../helpers/path.mjs";
 import { makeIconClass, mix } from "../../../helpers/utils.mjs";
 import { ChangesSheetMixin } from "../mixins/_module.mjs";
 import { AutomationsCommonSheetPart } from "../mixins/common-sheet-mixin/parts/_module.mjs";
@@ -30,9 +29,7 @@ export default class ConsequenceSheet extends mix(
   static PARTS = {
     ...super.PARTS,
     automations: {
-      template: systemPath(
-        "templates/sheets/effects/consequence/automations-tab.hbs",
-      ),
+      template: "teriock/sheets/effects/consequence/automations-tab",
       scrollable: [""],
     },
   };

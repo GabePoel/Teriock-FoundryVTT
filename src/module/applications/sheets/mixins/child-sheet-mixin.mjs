@@ -1,5 +1,4 @@
 import { icons } from "../../../constants/display/icons.mjs";
-import { systemPath } from "../../../helpers/path.mjs";
 import { fancifyFields, makeIconClass } from "../../../helpers/utils.mjs";
 import { TeriockTextEditor } from "../../ux/_module.mjs";
 
@@ -21,9 +20,7 @@ export default function ChildSheetMixin(Base) {
 
       /** @type {Record<string, HandlebarsTemplatePart>} */
       static CONTENT_PARTS = {
-        content: {
-          template: systemPath("templates/sheets/shared/content.hbs"),
-        },
+        content: { template: "teriock/sheets/shared/content" },
       };
 
       /** @type {Partial<ApplicationConfiguration>} */
@@ -51,16 +48,12 @@ export default function ChildSheetMixin(Base) {
 
       /** @type {Record<string, HandlebarsTemplatePart>} */
       static HEADER_PARTS = {
-        header: {
-          template: systemPath("templates/sheets/shared/top.hbs"),
-        },
+        header: { template: "teriock/sheets/shared/top" },
       };
 
       /** @type {Record<string, HandlebarsTemplatePart>} */
       static MENU_PARTS = {
-        menu: {
-          template: systemPath("templates/sheets/shared/simple-menu.hbs"),
-        },
+        menu: { template: "teriock/sheets/shared/simple-menu" },
       };
 
       /** @type {Record<string, HandlebarsTemplatePart>} */

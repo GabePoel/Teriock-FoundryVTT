@@ -1,5 +1,4 @@
 import { documentOptions } from "../../../constants/options/document-options.mjs";
-import { systemPath } from "../../../helpers/path.mjs";
 import { makeIconClass, mix } from "../../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
 import ArmamentSheet from "./armament-sheet.mjs";
@@ -17,11 +16,11 @@ export default class EquipmentSheet extends mix(
 ) {
   /** @inheritDoc */
   static BARS = [
-    systemPath("templates/sheets/items/equipment/status-bar.hbs"),
+    "teriock/sheets/items/equipment/status-bar",
     ...super.BARS,
-    systemPath("templates/sheets/items/equipment/load-bar.hbs"),
-    systemPath("templates/sheets/shared/bars/consumable-bar.hbs"),
-    systemPath("templates/sheets/items/equipment/storage-bar.hbs"),
+    "teriock/sheets/items/equipment/load-bar",
+    "teriock/sheets/shared/bars/consumable-bar",
+    "teriock/sheets/items/equipment/storage-bar",
   ];
 
   /**
@@ -43,9 +42,7 @@ export default class EquipmentSheet extends mix(
   /** @inheritDoc */
   static PARTS = {
     ...this.HEADER_PARTS,
-    menu: {
-      template: systemPath("templates/sheets/items/equipment/menu.hbs"),
-    },
+    menu: { template: "teriock/sheets/items/equipment/menu" },
     ...this.CONTENT_PARTS,
   };
 

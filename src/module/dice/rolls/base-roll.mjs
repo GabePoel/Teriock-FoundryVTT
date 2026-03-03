@@ -7,7 +7,7 @@ const { Roll } = foundry.dice;
 /** @inheritDoc */
 export default class BaseRoll extends Roll {
   /** @inheritDoc */
-  static CHAT_TEMPLATE = systemPath("templates/ui/roll.hbs");
+  static CHAT_TEMPLATE = "teriock/ui/roll";
 
   /**
    * @param {Teriock.System.FormulaString} formula

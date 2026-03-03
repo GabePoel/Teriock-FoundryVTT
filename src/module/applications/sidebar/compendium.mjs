@@ -1,10 +1,9 @@
-import { systemPath } from "../../helpers/path.mjs";
 import { bindCommonActions } from "../shared/_module.mjs";
 
 const { Compendium } = foundry.applications.sidebar.apps;
 
 export default class TeriockCompendium extends Compendium {
-  static _entryPartial = systemPath("templates/sidebar/index-partial.hbs");
+  static _entryPartial = "teriock/sidebar/index-partial";
 
   /** @inheritDoc */
   async _onRender(context, options) {

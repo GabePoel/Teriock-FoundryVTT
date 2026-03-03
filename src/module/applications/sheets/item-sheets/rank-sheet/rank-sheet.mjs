@@ -1,5 +1,4 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
-import { systemPath } from "../../../../helpers/path.mjs";
 import { makeIconClass, mix } from "../../../../helpers/utils.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseItemSheet from "../base-item-sheet.mjs";
@@ -22,9 +21,9 @@ export default class RankSheet extends mix(
 ) {
   /** @inheritDoc */
   static BARS = [
-    systemPath("templates/sheets/items/rank/class-bar.hbs"),
-    systemPath("templates/sheets/shared/bars/stat-bar.hbs"),
-    systemPath("templates/sheets/items/rank/restrictions-bar.hbs"),
+    "teriock/sheets/items/rank/class-bar",
+    "teriock/sheets/shared/bars/stat-bar",
+    "teriock/sheets/items/rank/restrictions-bar",
   ];
 
   /**

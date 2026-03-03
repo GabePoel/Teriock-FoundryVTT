@@ -1,4 +1,3 @@
-import { systemPath } from "../../helpers/path.mjs";
 import { makeIconClass } from "../../helpers/utils.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
 import { TeriockTextEditor } from "../ux/_module.mjs";
@@ -20,7 +19,7 @@ export default async function hotbarDropDialog(doc) {
     };
     const content = await TeriockTextEditor.enrichHTML(
       await TeriockTextEditor.renderTemplate(
-        systemPath("templates/dialogs/hotbar-drop.hbs"),
+        "teriock/dialogs/hotbar-drop",
         context,
       ),
     );

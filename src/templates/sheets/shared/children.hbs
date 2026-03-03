@@ -8,7 +8,7 @@
               @root.document.flags.teriockDocumentSettings.sheetBlockChildGapless}}gapless{{/if}}"
           >
             {{#each (lookup @root (path @root/TERIOCK.options.document type "getter")) as |doc|}}
-              {{> (template "ui/block.hbs") (merge doc.embedParts (object
+              {{> "teriock/ui/block" (merge doc.embedParts (object
                 relative=@root/document.uuid))}}
             {{/each}}
           </div>

@@ -4,16 +4,16 @@
     <div class="teriock-block-display" data-tooltip-direction="LEFT">
       <div class="tradecraft-panels tgrid g2">
         {{#each tradecraftFields as |field|}}
-          {{> (template "sheets/actors/playable/parts/tradecrafts-field.hbs") field=field}}
+          {{> "teriock/sheets/actors/playable/parts/tradecrafts-field" field=field}}
         {{/each}}
         {{#each prestigeFields as |field|}}
-          {{> (template "sheets/actors/playable/parts/tradecrafts-field.hbs") field=field}}
+          {{> "teriock/sheets/actors/playable/parts/tradecrafts-field" field=field}}
         {{/each}}
       </div>
     </div>
     <div class="teriock-block-display">
       <div class="teriock-block-options">
-        {{> (template "ui/block-options.hbs")
+        {{> "teriock/ui/block-options"
           tab="fluency"
           optionsToggle=settings.menus.fluencyOptions
           optionsPath="settings.menus.fluencyOptions"
@@ -27,7 +27,7 @@
           tabDisplay=TERIOCK.options.document.fluency.name
         }}
       </div>
-      {{> (template "sheets/actors/playable/results/search-results.hbs")
+      {{> "teriock/sheets/actors/playable/results/search-results"
         docs=fluencies
         searchKey="fluencies"
         displayKey="fluency"

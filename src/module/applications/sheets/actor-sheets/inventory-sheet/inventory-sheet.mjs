@@ -1,5 +1,4 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
-import { systemPath } from "../../../../helpers/path.mjs";
 import { makeIconClass } from "../../../../helpers/utils.mjs";
 import BaseActorSheet from "../base-actor-sheet/base-actor-sheet.mjs";
 
@@ -20,7 +19,7 @@ export default class InventorySheet extends BaseActorSheet {
 
   static PARTS = {
     all: {
-      template: systemPath("templates/sheets/actors/inventory/inventory.hbs"),
+      template: "teriock/sheets/actors/inventory/inventory",
       scrollable: [""],
     },
   };

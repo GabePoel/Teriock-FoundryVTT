@@ -1,6 +1,6 @@
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
 import { TeriockChatMessage } from "../../documents/_module.mjs";
-import { getImage, systemPath } from "../../helpers/path.mjs";
+import { getImage } from "../../helpers/path.mjs";
 import { makeIconClass } from "../../helpers/utils.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
 import { TeriockTextEditor } from "../ux/_module.mjs";
@@ -196,7 +196,7 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
         text: outcome,
       });
       const pullContent = await TeriockTextEditor.renderTemplate(
-        systemPath("templates/ui/death-bag.hbs"),
+        "teriock/ui/death-bag",
         context,
       );
       const panel = await TeriockTextEditor.enrichPanel(panelParts);

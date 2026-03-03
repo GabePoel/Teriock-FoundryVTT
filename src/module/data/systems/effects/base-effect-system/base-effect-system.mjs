@@ -117,7 +117,7 @@ export default class BaseEffectSystem extends ChildSystem {
    */
   async expire() {
     if (!this.deleteOnExpire) {
-      await this.hookCall("effectExpiration");
+      await this.parent.hookCall("effectExpiration");
     }
     if (this.deleteOnExpire) {
       await this.parent.delete();

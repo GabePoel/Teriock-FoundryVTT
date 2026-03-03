@@ -1,4 +1,3 @@
-import { systemPath } from "../../../helpers/path.mjs";
 import { mix } from "../../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
 import BaseItemSheet from "./base-item-sheet.mjs";
@@ -16,7 +15,7 @@ export default class ArmamentSheet extends mix(
   mixins.WikiButtonSheetMixin,
 ) {
   /** @inheritDoc */
-  static BARS = [systemPath("templates/sheets/shared/bars/armament-bars.hbs")];
+  static BARS = ["teriock/sheets/shared/bars/armament-bars"];
 
   /** @inheritDoc */
   get _buttonUpdates() {

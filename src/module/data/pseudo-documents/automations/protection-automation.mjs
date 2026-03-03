@@ -1,7 +1,6 @@
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { protectionOptions } from "../../../constants/options/protection-options.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
-import { systemPath } from "../../../helpers/path.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
 import CritAutomation from "./crit-automation.mjs";
 
@@ -83,7 +82,7 @@ export default class ProtectionAutomation extends CritAutomation {
   /** @inheritDoc */
   async getEditor() {
     const html = await TeriockTextEditor.renderTemplate(
-      systemPath("templates/sheets/automations/protection-config.hbs"),
+      "teriock/sheets/automations/protection-config",
       {
         category: this.category,
         choices: this._choices,

@@ -1,5 +1,4 @@
 import { documentOptions } from "../../../constants/options/document-options.mjs";
-import { systemPath } from "../../../helpers/path.mjs";
 import { makeIconClass } from "../../../helpers/utils.mjs";
 import ArmamentSheet from "./armament-sheet.mjs";
 
@@ -24,7 +23,7 @@ export default class BodySheet extends ArmamentSheet {
   static PARTS = {
     ...this.HEADER_PARTS,
     menu: {
-      template: systemPath("templates/sheets/items/body/menu.hbs"),
+      template: "teriock/sheets/items/body/menu",
     },
     ...this.CONTENT_PARTS,
   };

@@ -1,5 +1,4 @@
 import { documentOptions } from "../../../constants/options/document-options.mjs";
-import { systemPath } from "../../../helpers/path.mjs";
 import { makeIcon, makeIconClass, mix } from "../../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
 import BaseEffectSheet from "./base-effect-sheet.mjs";
@@ -15,9 +14,7 @@ export default class FluencySheet extends mix(
   mixins.UseButtonSheetMixin,
 ) {
   /** @inheritDoc */
-  static BARS = [
-    systemPath("templates/sheets/effects/fluency/tradecraft-bar.hbs"),
-  ];
+  static BARS = ["teriock/sheets/effects/fluency/tradecraft-bar"];
 
   /**
    * @inheritDoc

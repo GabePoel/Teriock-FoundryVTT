@@ -4,10 +4,6 @@ import { makeIcon, makeIconClass } from "../../helpers/utils.mjs";
 export default function registerUiHelpers() {
   Handlebars.registerHelper("systemPath", systemPath);
 
-  Handlebars.registerHelper("template", (str) => {
-    return systemPath("templates/" + str);
-  });
-
   Handlebars.registerHelper("tabActive", (active, tab) =>
     active === tab ? "active" : "inactive",
   );

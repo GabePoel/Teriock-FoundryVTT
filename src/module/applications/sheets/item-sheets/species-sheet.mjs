@@ -1,5 +1,4 @@
 import { documentOptions } from "../../../constants/options/document-options.mjs";
-import { systemPath } from "../../../helpers/path.mjs";
 import { makeIconClass, mix } from "../../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
 import BaseItemSheet from "./base-item-sheet.mjs";
@@ -17,9 +16,9 @@ export default class SpeciesSheet extends mix(
 ) {
   /** @inheritDoc */
   static BARS = [
-    systemPath("templates/sheets/items/species/stats-bar.hbs"),
-    systemPath("templates/sheets/items/species/lifespan-bar.hbs"),
-    systemPath("templates/sheets/items/species/size-bar.hbs"),
+    "teriock/sheets/items/species/stats-bar",
+    "teriock/sheets/items/species/lifespan-bar",
+    "teriock/sheets/items/species/size-bar",
   ];
 
   /**
@@ -36,9 +35,7 @@ export default class SpeciesSheet extends mix(
   /** @inheritDoc */
   static PARTS = {
     ...this.HEADER_PARTS,
-    menu: {
-      template: systemPath("templates/sheets/items/species/menu.hbs"),
-    },
+    menu: { template: "teriock/sheets/items/species/menu" },
     ...this.CONTENT_PARTS,
   };
 

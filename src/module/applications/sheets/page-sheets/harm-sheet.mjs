@@ -1,5 +1,4 @@
 import { TextField } from "../../../data/fields/_module.mjs";
-import { systemPath } from "../../../helpers/path.mjs";
 import { mix } from "../../../helpers/utils.mjs";
 import { bindCommonActions } from "../../shared/_module.mjs";
 import { TeriockTextEditor } from "../../ux/_module.mjs";
@@ -44,7 +43,7 @@ export default class HarmSheet extends mix(
 
   static EDIT_PARTS = {
     all: {
-      template: systemPath("templates/sheets/pages/harm-template.hbs"),
+      template: "teriock/sheets/pages/harm-config",
       scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
     },
   };

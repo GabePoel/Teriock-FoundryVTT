@@ -1,5 +1,3 @@
-import { systemPath } from "../../helpers/path.mjs";
-
 const { TextEditor } = foundry.applications.ux;
 
 export default class TeriockTextEditor extends TextEditor {
@@ -52,10 +50,7 @@ export default class TeriockTextEditor extends TextEditor {
     if (options.noBlocks) delete parts.blocks;
     if (options.noAssociations) delete parts.associations;
     await this.enrichPanel(parts, options);
-    return await this.renderTemplate(
-      systemPath("templates/ui/panel.hbs"),
-      parts,
-    );
+    return await this.renderTemplate("teriock/ui/panel", parts);
   }
 
   /**

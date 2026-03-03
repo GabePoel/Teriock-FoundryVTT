@@ -3,7 +3,6 @@ export * as formula from "./formula.mjs";
 export * as html from "./html.mjs";
 export * as interaction from "./interaction/_module.mjs";
 export * as localization from "./localization.mjs";
-export * as maintenance from "./maintenance/_module.mjs";
 export * as path from "./path.mjs";
 export * as resolve from "./resolve.mjs";
 export * as sort from "./sort.mjs";

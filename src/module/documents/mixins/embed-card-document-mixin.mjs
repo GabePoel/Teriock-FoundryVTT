@@ -3,7 +3,6 @@ import {
   TeriockContextMenu,
   TeriockTextEditor,
 } from "../../applications/ux/_module.mjs";
-import { systemPath } from "../../helpers/path.mjs";
 import { toTitleCase } from "../../helpers/string.mjs";
 
 /**
@@ -69,7 +68,7 @@ export default function EmbedCardDocumentMixin(Base) {
             embedContext.relative = options.relativeTo.uuid;
           }
           const html = await TeriockTextEditor.renderTemplate(
-            systemPath("templates/ui/block.hbs"),
+            "teriock/ui/block",
             embedContext,
           );
           config.caption = false;

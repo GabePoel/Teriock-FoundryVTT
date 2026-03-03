@@ -1,5 +1,4 @@
 import { documentOptions } from "../../../constants/options/document-options.mjs";
-import { systemPath } from "../../../helpers/path.mjs";
 import { makeIconClass, mix } from "../../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
 import BaseEffectSheet from "./base-effect-sheet.mjs";
@@ -15,9 +14,7 @@ export default class PropertySheet extends mix(
   mixins.WikiButtonSheetMixin,
 ) {
   /** @inheritDoc */
-  static BARS = [
-    systemPath("templates/sheets/effects/property/status-bar.hbs"),
-  ];
+  static BARS = ["teriock/sheets/effects/property/status-bar"];
 
   /**
    * @inheritDoc
@@ -33,9 +30,7 @@ export default class PropertySheet extends mix(
   /** @inheritDoc */
   static PARTS = {
     ...this.HEADER_PARTS,
-    menu: {
-      template: systemPath("templates/sheets/effects/property/menu.hbs"),
-    },
+    menu: { template: "teriock/sheets/effects/property/menu" },
     ...this.CONTENT_PARTS,
   };
 
