@@ -26,6 +26,7 @@ export default class ResourceSystem extends mix(
       automations.CommonMacroAutomation,
       automations.HacksAutomation,
       automations.RollAutomation,
+      automations.UseExternalDocumentsAutomation,
     ];
   }
 

@@ -1,4 +1,5 @@
 import { TeriockChatMessage } from "../_module.mjs";
+import UsableDocumentMixin from "./usable-document-mixin.mjs";
 
 /**
  * Mixin for common functions used across document classes embedded in actorsUuids.
@@ -14,7 +15,7 @@ export default function ChildDocumentMixin(Base) {
      * @mixes PanelDocument
      * @mixin
      */
-    class ChildDocument extends Base {
+    class ChildDocument extends UsableDocumentMixin(Base) {
       /** @inheritDoc */
       static get documentMetadata() {
         return Object.assign(super.documentMetadata, {
@@ -116,11 +117,7 @@ export default function ChildDocumentMixin(Base) {
         }
       }
 
-      /**
-       * Does whatever the default roll/execution for this document is.
-       * @param {Teriock.Interaction.UseOptions} options
-       * @returns {Promise<void>}
-       */
+      /** @inheritDoc */
       async use(options = {}) {
         await this.system.use(options);
       }

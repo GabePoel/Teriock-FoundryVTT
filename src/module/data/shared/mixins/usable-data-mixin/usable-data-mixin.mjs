@@ -91,7 +91,6 @@ export default function UsableDataMixin(Base) {
       async use(options = {}) {
         if (options.event) {
           Object.assign(options, this.parseEvent(options.event));
-          delete options.event;
         }
         await this._use(options);
       }

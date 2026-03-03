@@ -8,3 +8,4 @@ export { default as PanelDocumentMixin } from "./panel-document-mixin.mjs";
 export { default as ParentDocumentMixin } from "./parent-document-mixin/parent-document-mixin.mjs";
 export { default as RetrievalDocumentMixin } from "./retrieval-document-mixin.mjs";
 export { default as SettingsDocumentMixin } from "./settings-document-mixin.mjs";
+export { default as UsableDocumentMixin } from "./usable-document-mixin.mjs";

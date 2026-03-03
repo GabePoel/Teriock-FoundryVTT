@@ -16,6 +16,7 @@ const { RollTable } = foundry.documents;
 export default class TeriockRollTable extends mix(
   RollTable,
   mixins.BaseDocumentMixin,
+  mixins.UsableDocumentMixin,
 ) {
   /**
    * @inheritDoc
@@ -62,5 +63,10 @@ export default class TeriockRollTable extends mix(
       messageData.system.panels,
     );
     return TeriockChatMessage.create(messageData, messageOptions);
+  }
+
+  /** @inheritDoc */
+  async use(options = {}) {
+    await this.draw(options);
   }
 }

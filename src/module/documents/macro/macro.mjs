@@ -18,6 +18,7 @@ export default class TeriockMacro extends mix(
   Macro,
   mixins.BaseDocumentMixin,
   mixins.EmbedCardDocumentMixin,
+  mixins.UsableDocumentMixin,
 ) {
   /**
    * Hotbar folder for the current user.
@@ -283,5 +284,10 @@ export default class TeriockMacro extends mix(
       token: actor?.defaultToken,
       event,
     });
+  }
+
+  /** @inheritDoc */
+  async use(options = {}) {
+    await this.execute(options);
   }
 }

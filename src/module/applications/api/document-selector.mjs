@@ -55,6 +55,13 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
     this.tooltip = tooltip;
     this.tooltipAsync = tooltipAsync;
     this.openable = openable;
+    if (options.title) {
+      this.options = foundry.utils.mergeObject(this.options || {}, {
+        window: {
+          title: options.title,
+        },
+      });
+    }
     this._resolve = null;
     this._result = new Promise((resolve) => (this._resolve = resolve));
   }
@@ -91,6 +98,9 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
     await this.close();
   }
 
+  /**
+   * Finish the document selection.
+   */
   _finish(value) {
     if (this._resolve) {
       const r = this._resolve;

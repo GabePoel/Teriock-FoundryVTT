@@ -166,9 +166,30 @@ export default class BaseDocumentExecution extends BaseExecution {
     );
   }
 
+  /**
+   * Fire all external document use automations.
+   * @returns {Promise<void>}
+   */
+  async _fireUseAutomations() {
+    const useAutomations =
+      /** @type {UseExternalDocumentsAutomation[]} */ this.activeAutomations.filter(
+        (a) => a.type === "useExternal",
+      );
+    await Promise.all(
+      useAutomations.map(async (a) =>
+        a.use({
+          actor: this.actor,
+          edge: this.edge,
+          event: this.options.event,
+        }),
+      ),
+    );
+  }
+
   /** @inheritDoc */
   async _postExecute() {
     await this._fireTriggerMacros("execution");
+    await this._fireUseAutomations();
     await super._postExecute();
   }
 

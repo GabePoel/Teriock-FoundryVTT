@@ -26,4 +26,9 @@ export default class WrapperSystem extends BaseItemSystem {
   get panelParts() {
     return this.effect?.system.panelParts;
   }
+
+  /** @inheritDoc */
+  async use(options = {}) {
+    return this.effect.use(options);
+  }
 }
