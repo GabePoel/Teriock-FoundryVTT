@@ -90,9 +90,10 @@ export default function PanelDocumentMixin(Base) {
           if (!config.label) config.caption = false;
           return foundry.utils.parseHTML(
             await TeriockTextEditor.makeTooltip(this.panelParts, {
-              noBlocks: config.values.includes("noBlocks"),
-              noBars: config.values.includes("noBars"),
               noAssociations: config.values.includes("noAssociations"),
+              noBars: config.values.includes("noBars"),
+              noBlocks: config.values.includes("noBlocks"),
+              relativeTo: this,
             }),
           );
         }

@@ -5,7 +5,6 @@ await roll.toMessage(
   {
     speaker: ChatMessage.getSpeaker({ actor: actor }),
     flavor: "Braced Temp HP",
-    rollMode: game.settings.get("core", "rollMode"),
     create: true,
   },
   {

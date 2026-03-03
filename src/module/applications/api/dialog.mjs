@@ -3,7 +3,10 @@ import { BaseApplicationMixin } from "../shared/mixins/_module.mjs";
 
 const { DialogV2 } = foundry.applications.api;
 
-/** @inheritDoc */
+/**
+ * @extends {DialogV2}
+ * @mixes BaseApplication
+ */
 export default class TeriockDialog extends BaseApplicationMixin(DialogV2) {
   /**
    * @inheritDoc
