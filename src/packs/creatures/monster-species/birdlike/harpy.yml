@@ -15,7 +15,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.28
+      systemVersion: 0.10.30
     effects:
       - _id: N9khq4nBfAyTdB51
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.28
+          systemVersion: 0.10.30
         img: systems/teriock/src/icons/abilities/fast.webp
         name: Fast
         system:
@@ -34,9 +34,7 @@ items:
           delivery:
             base: self
           duration:
-            dawn: false
             raw: '0'
-            stationary: false
             unit: unlimited
           executionTime:
             base: passive
@@ -74,7 +72,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.28
+          systemVersion: 0.10.30
         img: systems/teriock/src/icons/abilities/flying.webp
         name: Flying
         system:
@@ -126,9 +124,7 @@ items:
           delivery:
             base: self
           duration:
-            dawn: false
             raw: '0'
-            stationary: false
             unit: unlimited
           effectTypes:
             - movement
@@ -169,37 +165,29 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.28
+          systemVersion: 0.10.30
         img: systems/teriock/src/icons/abilities/improved-healing-factor.webp
         name: Improved Healing Factor
         system:
           automations:
-            1728b3a84ea27844:
-              _id: 1728b3a84ea27844
+            Suc9ayhHqRkmjAwZ:
+              _id: Suc9ayhHqRkmjAwZ
               competencies:
                 - 0
                 - 1
                 - 2
+              conditions:
+                absent:
+                  - burned
+                  - dead
+              consumeStatDice: false
+              forHarm: false
               heighten:
-                - 1
-                - 0
-              type: common
-            b13e025d8fcf09cc:
-              _id: b13e025d8fcf09cc
-              competencies:
                 - 0
                 - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
-              macro: Compendium.teriock.execution.Macro.ba4c50b6d32fe62c
-              pseudoHook: turnStart
-              relation: pseudoHook
-              type: abilityMacro
+              noStatDice: false
+              trigger: turnStart
+              type: heal
           competence:
             raw: 0
           delivery:
@@ -208,9 +196,7 @@ items:
             conditions:
               absent:
                 - dead
-            dawn: false
             raw: '0'
-            stationary: false
             unit: unlimited
           effectTypes:
             - healing
@@ -254,7 +240,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.28
+          systemVersion: 0.10.30
         img: systems/teriock/src/icons/abilities/low-intelligence.webp
         name: Low Intelligence
         system:
@@ -263,9 +249,7 @@ items:
           delivery:
             base: self
           duration:
-            dawn: false
             raw: '0'
-            stationary: false
             unit: unlimited
           executionTime:
             base: passive
@@ -303,7 +287,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.28
+          systemVersion: 0.10.30
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
@@ -312,9 +296,7 @@ items:
           delivery:
             base: self
           duration:
-            dawn: false
             raw: '0'
-            stationary: false
             unit: unlimited
           executionTime:
             base: passive
@@ -352,7 +334,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.28
+          systemVersion: 0.10.30
         img: systems/teriock/src/icons/abilities/normal-sneak.webp
         name: Normal Sneak
         system:
@@ -361,9 +343,7 @@ items:
           delivery:
             base: self
           duration:
-            dawn: false
             raw: '0'
-            stationary: false
             unit: unlimited
           executionTime:
             base: passive
@@ -401,7 +381,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.28
+          systemVersion: 0.10.30
         img: systems/teriock/src/icons/abilities/normal-strength.webp
         name: Normal Strength
         system:
@@ -410,9 +390,7 @@ items:
           delivery:
             base: self
           duration:
-            dawn: false
             raw: '0'
-            stationary: false
             unit: unlimited
           executionTime:
             base: passive
@@ -450,7 +428,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.28
+          systemVersion: 0.10.30
         img: systems/teriock/src/icons/abilities/partial-hands.webp
         name: Partial Hands
         system:
@@ -459,9 +437,7 @@ items:
           delivery:
             base: self
           duration:
-            dawn: false
             raw: '0'
-            stationary: false
             unit: unlimited
           executionTime:
             base: passive
@@ -499,7 +475,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.28
+          systemVersion: 0.10.30
         img: systems/teriock/src/icons/abilities/swimming.webp
         name: Swimming
         system:
@@ -531,9 +507,7 @@ items:
           delivery:
             base: self
           duration:
-            dawn: false
             raw: '0'
-            stationary: false
             unit: unlimited
           executionTime:
             base: passive
@@ -567,6 +541,7 @@ items:
     img: systems/teriock/src/icons/creatures/harpy.webp
     name: Harpy
     system:
+      adult: 0
       appearance: <p>Bird-like, but with @L[Creature:Human]{human} features.</p>
       br: 9
       competence:
@@ -575,6 +550,7 @@ items:
         <p>Harpies are generally cruel and prefer to attack in bands from the
         air. They usually live near the coast.</p>
       identifier: harpy
+      lifespan: 0
       size:
         enabled: true
         value: 2
@@ -600,7 +576,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.28
+      systemVersion: 0.10.30
     effects:
       - _id: FAUPXdLk1A1fD0k8
         _key: >-
@@ -610,7 +586,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.28
+          systemVersion: 0.10.30
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -631,7 +607,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.28
+          systemVersion: 0.10.30
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -651,7 +627,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.28
+          systemVersion: 0.10.30
         img: systems/teriock/src/icons/properties/prehensile.webp
         name: Prehensile
         system:
@@ -671,7 +647,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.28
+          systemVersion: 0.10.30
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -712,7 +688,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.28
+      systemVersion: 0.10.30
     effects:
       - _id: 2BzyrinG9hOCt6Hg
         _key: >-
@@ -722,7 +698,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.28
+          systemVersion: 0.10.30
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -742,7 +718,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.28
+          systemVersion: 0.10.30
         img: systems/teriock/src/icons/properties/prehensile.webp
         name: Prehensile
         system:
@@ -762,7 +738,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.28
+          systemVersion: 0.10.30
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -804,7 +780,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.28
+      systemVersion: 0.10.30
     effects:
       - _id: LwntE76DWV8LsMYk
         _key: >-
@@ -814,7 +790,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.28
+          systemVersion: 0.10.30
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -835,7 +811,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.28
+          systemVersion: 0.10.30
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:

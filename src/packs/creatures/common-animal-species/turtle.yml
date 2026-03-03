@@ -15,7 +15,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.28
+      systemVersion: 0.10.30
     effects:
       - _id: s9MuwMiB4R4hmIiw
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.28
+          systemVersion: 0.10.30
         img: systems/teriock/src/icons/abilities/brace.webp
         name: Brace
         system:
@@ -43,8 +43,8 @@ items:
                 - 1
                 - 0
               macro: Compendium.teriock.execution.Macro.0ea7be85a8217ccd
-              pseudoHook: effectApplication
-              relation: pseudoHook
+              relation: trigger
+              trigger: applyEffect
               type: abilityMacro
             e97f2827a0c6277f:
               _id: e97f2827a0c6277f
@@ -59,8 +59,8 @@ items:
                 - 1
                 - 0
               macro: Compendium.teriock.execution.Macro.6e203038c142a0a0
-              pseudoHook: movement
-              relation: pseudoHook
+              relation: trigger
+              trigger: movement
               type: abilityMacro
           class: veteran
           competence:
@@ -68,9 +68,9 @@ items:
           delivery:
             base: self
           duration:
-            dawn: false
             raw: '0'
-            stationary: true
+            triggers:
+              - movement
             unit: unlimited
           executionTime:
             base: a1
@@ -118,7 +118,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.28
+          systemVersion: 0.10.30
         img: systems/teriock/src/icons/abilities/dense-intelligence.webp
         name: Dense Intelligence
         system:
@@ -127,9 +127,7 @@ items:
           delivery:
             base: self
           duration:
-            dawn: false
             raw: '0'
-            stationary: false
             unit: unlimited
           executionTime:
             base: passive
@@ -167,7 +165,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.28
+          systemVersion: 0.10.30
         img: systems/teriock/src/icons/abilities/diving.webp
         name: Diving
         system:
@@ -177,9 +175,7 @@ items:
           delivery:
             base: self
           duration:
-            dawn: false
             raw: '0'
-            stationary: false
             unit: unlimited
           executionTime:
             base: passive
@@ -219,7 +215,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.28
+          systemVersion: 0.10.30
         img: systems/teriock/src/icons/abilities/low-strength.webp
         name: Low Strength
         system:
@@ -228,9 +224,7 @@ items:
           delivery:
             base: self
           duration:
-            dawn: false
             raw: '0'
-            stationary: false
             unit: unlimited
           executionTime:
             base: passive
@@ -268,7 +262,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.28
+          systemVersion: 0.10.30
         img: systems/teriock/src/icons/abilities/low-strength.webp
         name: Low Strength
         system:
@@ -277,9 +271,7 @@ items:
           delivery:
             base: self
           duration:
-            dawn: false
             raw: '0'
-            stationary: false
             unit: unlimited
           executionTime:
             base: passive
@@ -317,7 +309,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.28
+          systemVersion: 0.10.30
         img: systems/teriock/src/icons/abilities/no-hands.webp
         name: No Hands
         system:
@@ -326,9 +318,7 @@ items:
           delivery:
             base: self
           duration:
-            dawn: false
             raw: '0'
-            stationary: false
             unit: unlimited
           executionTime:
             base: passive
@@ -364,7 +354,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.28
+          systemVersion: 0.10.30
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
@@ -373,9 +363,7 @@ items:
           delivery:
             base: self
           duration:
-            dawn: false
             raw: '0'
-            stationary: false
             unit: unlimited
           executionTime:
             base: passive
@@ -413,7 +401,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.28
+          systemVersion: 0.10.30
         img: systems/teriock/src/icons/abilities/normal-sneak.webp
         name: Normal Sneak
         system:
@@ -422,9 +410,7 @@ items:
           delivery:
             base: self
           duration:
-            dawn: false
             raw: '0'
-            stationary: false
             unit: unlimited
           executionTime:
             base: passive
@@ -462,7 +448,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.28
+          systemVersion: 0.10.30
         img: systems/teriock/src/icons/abilities/swimming.webp
         name: Swimming
         system:
@@ -494,9 +480,7 @@ items:
           delivery:
             base: self
           duration:
-            dawn: false
             raw: '0'
-            stationary: false
             unit: unlimited
           executionTime:
             base: passive
@@ -534,7 +518,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.28
+          systemVersion: 0.10.30
         img: systems/teriock/src/icons/abilities/unbreachability.webp
         name: Unbreachability
         system:
@@ -573,9 +557,7 @@ items:
           delivery:
             base: self
           duration:
-            dawn: false
             raw: '0'
-            stationary: false
             unit: unlimited
           executionTime:
             base: passive
@@ -609,10 +591,12 @@ items:
     img: systems/teriock/src/icons/creatures/turtle.webp
     name: Turtle
     system:
+      adult: 0
       br: 1
       competence:
         raw: 1
       identifier: turtle
+      lifespan: 0
       size:
         enabled: true
         value: 1
@@ -637,7 +621,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.28
+      systemVersion: 0.10.30
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/icons/body-parts/reinforced-shell.webp
     name: Reinforced Shell
@@ -669,7 +653,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.28
+      systemVersion: 0.10.30
     effects:
       - _id: G0tdQXSp86EwqkNT
         _key: >-
@@ -679,7 +663,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.28
+          systemVersion: 0.10.30
         img: icons/creatures/abilities/mouth-teeth-long-red.webp
         name: Biting
         system:
@@ -699,7 +683,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.28
+          systemVersion: 0.10.30
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
