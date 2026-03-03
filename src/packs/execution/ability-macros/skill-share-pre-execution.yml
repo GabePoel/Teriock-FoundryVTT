@@ -1,0 +1,31 @@
+_id: b20a3ed766f6438c
+_key: '!macros!b20a3ed766f6438c'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.17
+author: teriockBuilder00
+command: |-
+  const validAbilities = actor.abilities
+    .filter((a) => !a.isReference && a.system.standard)
+    .sort((a, b) => a.name.localeCompare(b.name));
+  const ability = await tm.dialogs.selectDocumentDialog(validAbilities, {
+    hint: game.i18n.localize("TERIOCK.DIALOGS.Select.Ability.hint"),
+    title: game.i18n.localize("TERIOCK.DIALOGS.Select.Ability.title"),
+  });
+  const buttons = scope.execution.buttons.filter(
+    (button) => button.dataset.action === "apply-effect",
+  );
+  const button = buttons.find((b) => b.dataset.action === "apply-effect");
+  if (button) {
+    button.dataset.bonusSubs = JSON.stringify([ability.uuid]);
+  }
+  scope.execution.buttons = buttons;
+  scope.execution.proficient = false;
+  scope.execution.fluent = false;
+folder: SsB1D27Gn6q9lTTV
+img: icons/svg/dice-target.svg
+name: Skill Share - Pre-execution
+scope: global
+type: script

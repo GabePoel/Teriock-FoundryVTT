@@ -1,0 +1,30 @@
+_id: 0ea7be85a8217ccd
+_key: '!macros!0ea7be85a8217ccd'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.17
+author: teriockBuilder00
+command: |-
+  const formula = scope.effect?.flags.teriockEffect.formula;
+  const roll = new game.teriock.Roll(formula, actor.getRollData());
+  await roll.evaluate();
+  await roll.toMessage(
+    {
+      speaker: ChatMessage.getSpeaker({ actor: actor }),
+      flavor: "Braced Temp HP",
+      rollMode: game.settings.get("core", "rollMode"),
+      create: true,
+    },
+    {
+      rollMode: game.settings.get("core", "rollMode"),
+    },
+  );
+
+  await actor?.system.takeSetTempHp(roll.total);
+folder: SsB1D27Gn6q9lTTV
+img: icons/svg/dice-target.svg
+name: Brace - Application
+scope: global
+type: script

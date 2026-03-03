@@ -1,0 +1,25 @@
+_id: 3dd06b9d23279885
+_key: '!macros!3dd06b9d23279885'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.17
+author: teriockBuilder00
+command: |-
+  const spiritItem = actor.equipment.find((e) => e.name === "Spirit Item");
+  if (spiritItem) {
+    await spiritItem.setFlag("teriock", "weight", spiritItem.system.weight);
+    await spiritItem.update({
+      "system.disabled": true,
+      "system.weight": 0,
+    });
+    await spiritItem.system.repair();
+    await spiritItem.system.unequip();
+    await spiritItem.system.deattune();
+  }
+folder: SsB1D27Gn6q9lTTV
+img: icons/svg/dice-target.svg
+name: Spirit Item - Expiration
+scope: global
+type: script

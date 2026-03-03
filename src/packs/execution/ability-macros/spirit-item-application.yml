@@ -1,0 +1,27 @@
+_id: 544fb066dc0fd656
+_key: '!macros!544fb066dc0fd656'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.17
+author: teriockBuilder00
+command: |-
+  const spiritItem = actor.equipment.find((e) => e.name === "Spirit Item");
+  if (spiritItem) {
+    const updateData = { "system.disabled": false };
+    if (spiritItem.system.weight > 0) {
+      await spiritItem.setFlag("teriock", "weight", spiritItem.system.weight);
+    } else if (spiritItem.getFlag("teriock", "weight")) {
+      updateData["system.weight"] = spiritItem.getFlag("teriock", "weight");
+    }
+    await spiritItem.update(updateData);
+    await spiritItem.system.repair();
+    await spiritItem.system.equip();
+    await spiritItem.system.attune();
+  }
+folder: SsB1D27Gn6q9lTTV
+img: icons/svg/dice-target.svg
+name: Spirit Item - Application
+scope: global
+type: script

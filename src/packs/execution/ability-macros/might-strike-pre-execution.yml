@@ -1,0 +1,39 @@
+_id: e805e3fad6cedde3
+_key: '!macros!e805e3fad6cedde3'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.17
+author: teriockBuilder00
+command: |-
+  const buttons = scope.execution.buttons;
+  scope.execution.buttons = buttons.filter(
+    (button) => button.dataset.action === "apply-effect",
+  );
+  const button = scope.execution.buttons[0];
+  const effectObject = JSON.parse(button.dataset.normal);
+  const equipmentClass = await tm.dialogs.selectWeaponClassDialog();
+  const changesId = foundry.utils.randomID();
+  effectObject.system.automations[changesId] = {
+    type: "changes",
+    _id: changesId,
+    changes: [
+      {
+        key: "system.damage.all.raw",
+        qualifier: `@class.${equipmentClass}`,
+        target: "armament",
+        value: "1d4[holy]",
+        mode: 2,
+        priority: 10,
+      },
+    ],
+  };
+  const effectString = JSON.stringify(effectObject);
+  scope.execution.buttons[0].dataset.normal = effectString;
+  scope.execution.buttons[0].dataset.crit = effectString;
+folder: SsB1D27Gn6q9lTTV
+img: icons/svg/dice-target.svg
+name: Might Strike - Pre-execution
+scope: global
+type: script

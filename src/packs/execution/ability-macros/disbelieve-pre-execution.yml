@@ -1,0 +1,74 @@
+_id: d91c0c5ced0c6a58
+_key: '!macros!d91c0c5ced0c6a58'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.17
+author: teriockBuilder00
+command: |-
+  const illusionLevels = TERIOCK.options.effect.illusionLevel;
+  const chosenIllusionLevel = await tm.dialogs.selectDialog(illusionLevels, {
+    hint: game.i18n.localize("TERIOCK.DIALOGS.Select.IllusionLevel.hint"),
+    hintHtml: TERIOCK.content.keywords.illusionary,
+    hintTitle: game.i18n.localize(
+      "TERIOCK.DIALOGS.Select.IllusionLevel.hintTitle",
+    ),
+    initial: "minor",
+    label: game.i18n.localize("TERIOCK.DIALOGS.Select.IllusionLevel.label"),
+    other: true,
+    title: game.i18n.localize("TERIOCK.DIALOGS.Select.IllusionLevel.title"),
+  });
+  let dc = "none";
+  if (chosenIllusionLevel === "minor") {
+    dc = 6;
+  }
+  if (chosenIllusionLevel === "full") {
+    dc = 12;
+  }
+  if (chosenIllusionLevel === "greater") {
+    dc = 18;
+  }
+  const buttons = scope.execution.buttons.filter(
+    (b) => b.dataset?.action === "feat" && b.dataset?.attribute === "int",
+  );
+  if (typeof dc === "number") {
+    for (const b of buttons) {
+      b.dataset.threshold = `${dc - 2 * scope.execution.heightened}`;
+    }
+  }
+  for (let i = 0; i < scope.execution.rolls.length; i++) {
+    const r = scope.execution.rolls[i];
+    if (r.styles.dice.classes === "feat") {
+      if (typeof dc === "number") {
+        const newRoll = new game.teriock.Roll(
+          `${dc} - 2 * @h`,
+          scope.execution.rollData,
+          {
+            flavor: game.i18n.format(
+              "TERIOCK.DIALOGS.Select.IllusionLevel.flavor",
+              { level: illusionLevels[chosenIllusionLevel] },
+            ),
+            styles: {
+              dice: {
+                classes: "feat",
+              },
+              total: {
+                classes: "feat",
+                icon: TERIOCK.display.icons.interaction.feat,
+              },
+            },
+          },
+        );
+        await newRoll.evaluate();
+        scope.execution.rolls[i] = newRoll;
+      } else {
+        scope.execution.rolls.pop();
+      }
+    }
+  }
+folder: SsB1D27Gn6q9lTTV
+img: icons/svg/dice-target.svg
+name: Disbelieve - Pre-execution
+scope: global
+type: script
