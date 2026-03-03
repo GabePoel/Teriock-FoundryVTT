@@ -1,18 +1,21 @@
+import TeriockDialog from "../../../applications/api/dialog.mjs";
 import {
-  AwakenHandler,
-  DeathBagHandler,
-  HealHandler,
-  ReviveHandler,
-  StandardDamageHandler,
-} from "../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
+  buttonHandlers,
+  commands,
+} from "../../../helpers/interaction/_module.mjs";
+import { formatJoin } from "../../../helpers/string.mjs";
+import { makeIconClass } from "../../../helpers/utils.mjs";
 import BaseAutomation from "./base-automation.mjs";
+import { TriggerAutomationMixin } from "./mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
  * @property {Set<Teriock.Parameters.Consequence.CommonImpactKey>} common
  */
-export default class CommonImpactsAutomation extends BaseAutomation {
+export default class CommonImpactsAutomation extends TriggerAutomationMixin(
+  BaseAutomation,
+) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
     ...super.LOCALIZATION_PREFIXES,
@@ -41,31 +44,38 @@ export default class CommonImpactsAutomation extends BaseAutomation {
   }
 
   /** @inheritDoc */
-  get _formPaths() {
-    return ["common"];
+  get _buttons() {
+    return Array.from(this.common).map((c) => buttonHandlers[c].buildButton());
   }
 
   /** @inheritDoc */
-  get buttons() {
-    const buttons = [];
-    if (this.common.has("standardDamage")) {
-      buttons.push(StandardDamageHandler.buildButton());
+  get _formPaths() {
+    return ["common", ...super._formPaths];
+  }
+
+  /** @inheritDoc */
+  async _preFire() {
+    if (!this.document.actor) return;
+    const proceed = await TeriockDialog.confirm({
+      window: {
+        title: this.document.name,
+        icon: makeIconClass(TERIOCK.display.icons.ui.automations, "title"),
+      },
+      content: game.i18n.format(
+        "TERIOCK.AUTOMATIONS.CommonImpactsAutomation.DIALOG.content",
+        {
+          impacts: formatJoin(
+            Array.from(this.common).map(
+              (c) => TERIOCK.options.consequence.common[c],
+            ),
+          ),
+        },
+      ),
+    });
+    if (proceed) {
+      for (const c of this.common) {
+        commands[c].primary(this.document.actor).then();
+      }
     }
-    if (this.common.has("awaken")) {
-      buttons.push(AwakenHandler.buildButton());
-    }
-    if (this.common.has("revive")) {
-      buttons.push(ReviveHandler.buildButton());
-    }
-    if (this.common.has("bag")) {
-      buttons.push(DeathBagHandler.buildButton());
-    }
-    if (this.common.has("heal")) {
-      buttons.push(HealHandler.buildButton());
-    }
-    if (this.common.has("revitalize")) {
-      buttons.push(ReviveHandler.buildButton());
-    }
-    return buttons;
   }
 }

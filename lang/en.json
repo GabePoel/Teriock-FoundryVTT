@@ -4,34 +4,6 @@
   "GAME.Paused": "Hold",
   "TERIOCK": {
     "AUTOMATIONS": {
-      "UseExternalDocumentsAutomation": {
-        "FIELDS": {
-          "automatic": {
-            "label": "Automatic",
-            "hint": "If checked and this has only one document, it will be used automatically without additional prompting."
-          },
-          "competence": {
-            "label": "Competence",
-            "hint": "Whether to use documents with proficiency or fluency."
-          },
-          "documents": {
-            "label": "Documents"
-          },
-          "multi": {
-            "label": "Multiple Selection",
-            "hint": "If checked, multiple documents can be selected to be used at once."
-          },
-          "noHeighten": {
-            "label": "No Heightening",
-            "hint": "If checked, abilities this executes cannot be heightened."
-          },
-          "overrideCompetence": {
-            "label": "Override Competence",
-            "hint": "If checked, the documents used will have a different competence then the parent of this automation."
-          }
-        },
-        "LABEL": "Use External Documents"
-      },
       "BaseAutomation": {
         "FIELDS": {
           "competencies": {
@@ -113,6 +85,9 @@
         "LABEL": "Combat Expiration"
       },
       "CommonImpactsAutomation": {
+        "DIALOG": {
+          "content": "Would you like to take the following common impacts? {impacts}"
+        },
         "FIELDS": {
           "common": {
             "hint": "Simple one-off effects that don't require customization.",
@@ -292,7 +267,7 @@
             "label": "Type"
           }
         },
-        "LABEL": "Take Effect"
+        "LABEL": "Take Numerical Impact"
       },
       "ThresholdAutomation": {
         "FIELDS": {
@@ -338,6 +313,34 @@
           }
         },
         "LABEL": "Use Named Abilities"
+      },
+      "UseExternalDocumentsAutomation": {
+        "FIELDS": {
+          "automatic": {
+            "hint": "If checked and this has only one document, it will be used automatically without additional prompting.",
+            "label": "Automatic"
+          },
+          "competence": {
+            "hint": "Whether to use documents with proficiency or fluency.",
+            "label": "Competence"
+          },
+          "documents": {
+            "label": "Documents"
+          },
+          "multi": {
+            "hint": "If checked, multiple documents can be selected to be used at once.",
+            "label": "Multiple Selection"
+          },
+          "noHeighten": {
+            "hint": "If checked, abilities this executes cannot be heightened.",
+            "label": "No Heightening"
+          },
+          "overrideCompetence": {
+            "hint": "If checked, the documents used will have a different competence then the parent of this automation.",
+            "label": "Override Competence"
+          }
+        },
+        "LABEL": "Use External Documents"
       }
     },
     "CHANGES": {
@@ -401,8 +404,44 @@
       "Attack": {
         "label": "Attack"
       },
+      "Attune": {
+        "hint": "Select item to attune."
+      },
+      "Dampen": {
+        "hint": "Select equipment to dampen."
+      },
+      "Deattune": {
+        "hint": "Select item to deattune."
+      },
+      "Destroy": {
+        "hint": "Select equipment to destroy."
+      },
+      "Glue": {
+        "hint": "Select equipment to glue."
+      },
+      "Identify": {
+        "hint": "Select equipment to identify."
+      },
+      "Mount": {
+        "hint": "Select mount to mount."
+      },
+      "ReadMagic": {
+        "hint": "Select equipment to read magic."
+      },
+      "Reforge": {
+        "hint": "Select equipment to reforge."
+      },
+      "Repair": {
+        "hint": "Select equipment to repair."
+      },
+      "Shatter": {
+        "hint": "Select equipment to shatter."
+      },
       "StandardDamage": {
         "noDefaultWeapon": "{name} doesn't have a default attack weapon."
+      },
+      "Stash": {
+        "hint": "Select equipment to stash."
       },
       "Status": {
         "applyNamed": "Apply {name}",
@@ -411,6 +450,18 @@
         "removeUnnamed": "Remove Status",
         "toggleNamed": "Toggle {name}",
         "toggleUnnamed": "Toggle Condition"
+      },
+      "Undampen": {
+        "hint": "Select equipment to undampen."
+      },
+      "Unglue": {
+        "hint": "Select equipment to unglue."
+      },
+      "Unmount": {
+        "hint": "Select mount to unmount."
+      },
+      "Unstash": {
+        "hint": "Select equipment to unstash."
       },
       "UseAbility": {
         "noName": "No ability name provided.",
@@ -592,7 +643,8 @@
             "label": "Roll Formula"
           }
         },
-        "title": "Modify Roll Formula"
+        "title": "Modify Roll Formula",
+        "typeTitle": "Modify {type} Roll Formula"
       },
       "ChangeSize": {
         "BUTTONS": {
@@ -1521,7 +1573,7 @@
         "label": "Resistance Save"
       },
       "Take": {
-        "label": "Effect Roll"
+        "label": "Roll Numerical Impact"
       },
       "Tradecraft": {
         "label": "Tradecraft Check",
@@ -3037,10 +3089,12 @@
         },
         "MENU": {
           "dampen": "Dampen",
+          "destroy": "Destroy",
           "equip": "Equip",
           "glue": "Glue",
           "identify": "Identify",
           "readMagic": "Read Magic",
+          "reforge": "Reforge",
           "repair": "Repair",
           "shatter": "Shatter",
           "stash": "Stash",

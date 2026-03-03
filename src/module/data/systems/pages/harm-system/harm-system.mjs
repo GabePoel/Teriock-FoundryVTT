@@ -21,6 +21,7 @@ export default class HarmSystem extends mix(
     return [
       automations.ChatMacroAutomation,
       automations.ChatStatusAutomation,
+      automations.CommonImpactsAutomation,
       automations.HacksAutomation,
       automations.RollAutomation,
       automations.TakeAutomaton,

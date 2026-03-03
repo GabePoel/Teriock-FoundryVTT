@@ -29,9 +29,16 @@ export async function selectDocumentsDialog(documents, options = {}) {
       tooltipAsync: false,
       tooltipKey: null,
       tooltipUUID: "uuid",
+      localize: false,
     },
     options,
   );
+
+  if (options.localize) {
+    options.noDocumentsMessage = game.i18n.localize(options.noDocumentsMessage);
+    options.title = game.i18n.localize(options.title);
+    options.hint = game.i18n.localize(options.hint);
+  }
 
   if (documents.length === 0 && !options.silent) {
     ui.notifications.warn(options.noDocumentsMessage);

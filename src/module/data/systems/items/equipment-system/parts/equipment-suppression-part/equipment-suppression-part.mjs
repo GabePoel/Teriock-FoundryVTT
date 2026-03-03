@@ -1,4 +1,7 @@
-import { getProperty } from "../../../../../../helpers/fetch.mjs";
+import {
+  ensureChildren,
+  ensureNoChildren,
+} from "../../../../../../helpers/resolve.mjs";
 import { makeIcon } from "../../../../../../helpers/utils.mjs";
 
 const { fields } = foundry.data;
@@ -22,6 +25,7 @@ export default (Base) => {
           dampened: new fields.BooleanField({ initial: false }),
           shattered: new fields.BooleanField({ initial: false }),
           stashed: new fields.BooleanField({ initial: false }),
+          destroyed: new fields.BooleanField({ initial: false }),
         });
       }
 
@@ -79,7 +83,12 @@ export default (Base) => {
 
       /** @inheritDoc */
       get makeSuppressed() {
-        return super.makeSuppressed || !this.equipped || this.stashed;
+        return (
+          super.makeSuppressed ||
+          !this.equipped ||
+          this.stashed ||
+          this.destroyed
+        );
       }
 
       /**
@@ -90,7 +99,18 @@ export default (Base) => {
         await this.parent.hookCall("dampen", {
           scope: { equipment: this.parent },
         });
-        await this.parent.update({ "system.dampened": true });
+        await ensureChildren(this.parent, "property", ["Dampened"]);
+      }
+
+      /**
+       * Destroy this equipment.
+       * @returns {Promise<void>}
+       */
+      async destroy() {
+        await this.parent.hookCall("destroy", {
+          scope: { equipment: this.parent },
+        });
+        await ensureChildren(this.parent, "property", ["Destroyed"]);
       }
 
       /** @inheritdoc */
@@ -109,6 +129,20 @@ export default (Base) => {
             icon: makeIcon(TERIOCK.display.icons.break.repair, "contextMenu"),
             callback: this.repair.bind(this),
             condition: this.parent.isOwner && this.shattered,
+            group: "control",
+          },
+          {
+            name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.destroy"),
+            icon: makeIcon(TERIOCK.display.icons.break.destroy, "contextMenu"),
+            callback: this.destroy.bind(this),
+            condition: this.parent.isOwner && !this.destroyed,
+            group: "control",
+          },
+          {
+            name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.reforge"),
+            icon: makeIcon(TERIOCK.display.icons.break.reforge, "contextMenu"),
+            callback: this.reforge.bind(this),
+            condition: this.parent.isOwner && this.destroyed,
             group: "control",
           },
           {
@@ -165,6 +199,17 @@ export default (Base) => {
       }
 
       /**
+       * Reforge this equipment.
+       * @returns {Promise<void>}
+       */
+      async reforge() {
+        await this.parent.hookCall("reforge", {
+          scope: { equipment: this.parent },
+        });
+        await ensureNoChildren(this.parent, "property", ["Destroyed"]);
+      }
+
+      /**
        * Repair this equipment.
        * @returns {Promise<void>}
        */
@@ -172,17 +217,7 @@ export default (Base) => {
         await this.parent.hookCall("repair", {
           scope: { equipment: this.parent },
         });
-        if (this.shattered) {
-          const shatterProperties = this.parent.properties.filter(
-            (p) => p.name === "Shattered",
-          );
-          if (shatterProperties.length > 0) {
-            await this.parent.deleteEmbeddedDocuments(
-              "ActiveEffect",
-              shatterProperties.map((p) => p.id),
-            );
-          }
-        }
+        await ensureNoChildren(this.parent, "property", ["Shattered"]);
         if (this.shattered) {
           await this.parent.update({ "system.shattered": false });
         }
@@ -196,12 +231,7 @@ export default (Base) => {
         await this.parent.hookCall("shatter", {
           scope: { equipment: this.parent },
         });
-        const shatterProperty = await getProperty("Shattered");
-        if (!this.shattered) {
-          await this.parent.createEmbeddedDocuments("ActiveEffect", [
-            shatterProperty,
-          ]);
-        }
+        await ensureChildren(this.parent, "property", ["Shattered"]);
       }
 
       /**
@@ -220,7 +250,7 @@ export default (Base) => {
         await this.parent.hookCall("undampen", {
           scope: { equipment: this.parent },
         });
-        await this.parent.update({ "system.dampened": false });
+        await ensureNoChildren(this.parent, "property", ["Dampened"]);
       }
 
       /**

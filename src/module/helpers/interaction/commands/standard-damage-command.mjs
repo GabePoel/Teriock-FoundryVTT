@@ -7,7 +7,7 @@ import { pureUuid } from "../../resolve.mjs";
  * @returns {Promise<void>}
  */
 async function primary(actor, options = {}) {
-  let attacker = actor.system.primaryAttacker;
+  let attacker = actor?.system?.primaryAttacker;
   if (options.attacker) {
     attacker = await fromUuid(pureUuid(options.attacker));
   }

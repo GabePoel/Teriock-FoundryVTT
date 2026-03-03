@@ -7,6 +7,8 @@ declare global {
       idKey?: string;
       /** Path to an image to display for each document */
       imgKey?: string;
+      /** Whether to localize title, hint, and warning strings */
+      localize?: boolean;
       /** Path to a name to display for each document */
       nameKey?: string;
       /** Whether document sheets can be opened on double click */

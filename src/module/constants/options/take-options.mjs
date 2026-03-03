@@ -105,6 +105,14 @@ export const takeOptions = {
     take: "TERIOCK.EFFECTS.RollableEffects.pay.take",
     reverse: async (actor, amt) => await actor?.system.takePay(-amt),
   },
+  other: {
+    apply: () => null,
+    icon: icons.ui.dice,
+    label: "TERIOCK.EFFECTS.RollableEffects.other.label",
+    deal: "TERIOCK.EFFECTS.RollableEffects.other.label",
+    take: "TERIOCK.EFFECTS.RollableEffects.other.label",
+    reverse: () => null,
+  },
 };
 
 preLocalize("options.take", { keys: ["label", "deal", "take"] });

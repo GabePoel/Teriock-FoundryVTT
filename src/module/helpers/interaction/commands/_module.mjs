@@ -1,6 +1,19 @@
 import attackCommand from "./attack-command.mjs";
+import { attuneCommand, deattuneCommand } from "./attunable-commands.mjs";
 import awakenCommand from "./awaken-command.mjs";
 import bagCommand from "./bag-command.mjs";
+import {
+  dampenCommand,
+  destroyCommand,
+  glueCommand,
+  identifyCommand,
+  readMagicCommand,
+  reforgeCommand,
+  repairCommand,
+  shatterCommand,
+  undampenCommand,
+  unglueCommand,
+} from "./equipment-commands.mjs";
 import featCommand from "./feat-command.mjs";
 import { hackCommand, unhackCommand } from "./hack-command.mjs";
 import healCommand from "./heal-command.mjs";
@@ -21,18 +34,30 @@ const commandArray = [
   ...rollableTakeCommands,
   applyStatusCommand,
   attackCommand,
+  attuneCommand,
   awakenCommand,
   bagCommand,
+  dampenCommand,
+  deattuneCommand,
+  destroyCommand,
   featCommand,
+  glueCommand,
   hackCommand,
   healCommand,
+  identifyCommand,
+  readMagicCommand,
+  reforgeCommand,
   removeStatusCommand,
+  repairCommand,
   resistCommand,
   revitalizeCommand,
   reviveCommand,
+  shatterCommand,
   standardDamageCommand,
   toggleStatusCommand,
   tradecraftCommand,
+  undampenCommand,
+  unglueCommand,
   unhackCommand,
   useAbilityCommand,
 ];

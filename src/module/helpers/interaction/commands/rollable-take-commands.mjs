@@ -21,7 +21,12 @@ async function abstractTakeOperation(actor, options) {
     else await take.apply(actor, amount);
     return;
   }
-  if (options.boost) formula = await boostDialog(formula);
+  if (options.boost) {
+    formula = await boostDialog(formula, {
+      type: TERIOCK.options.take[type].label,
+    });
+  }
+  if (!formula) return;
   const roll = new HarmRoll(formula, actor?.getRollData() || {}, {
     take: type,
   });

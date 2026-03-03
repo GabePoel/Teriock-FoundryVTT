@@ -10,12 +10,14 @@ const { fields } = foundry.data;
  * @param {object} [options]
  * @param {boolean} [options.crit] - Go critical?
  * @param {string} [options.label] - Custom button label
+ * @param {string} [options.type] - The title of the type of roll being made
  * @returns {Promise<string>} The roll formula with boost changes applied.
  */
 export default async function boostDialog(rollFormula, options = {}) {
   const {
     crit = false,
     label = game.i18n.localize("TERIOCK.DIALOGS.Boost.BUTTONS.ok"),
+    type,
   } = options;
   let formula = rollFormula;
   const formulaField = new fields.StringField({
@@ -65,42 +67,40 @@ export default async function boostDialog(rollFormula, options = {}) {
       { name: "crit" },
     ),
   );
-  try {
-    await TeriockDialog.prompt({
-      content: contentHtml,
-      modal: true,
-      ok: {
-        callback: (_event, button) => {
-          let updatedFormula = button.form.elements.namedItem("formula").value;
-          const boosts = Number(button.form.elements.namedItem("boosts").value);
-          const deboosts = Number(
-            button.form.elements.namedItem("deboosts").value,
+  return await TeriockDialog.prompt({
+    content: contentHtml,
+    modal: true,
+    ok: {
+      callback: (_event, button) => {
+        let updatedFormula = button.form.elements.namedItem("formula").value;
+        const boosts = Number(button.form.elements.namedItem("boosts").value);
+        const deboosts = Number(
+          button.form.elements.namedItem("deboosts").value,
+        );
+        const critButton =
+          /** @type {HTMLInputElement} */ button.form.elements.namedItem(
+            "crit",
           );
-          const critButton =
-            /** @type {HTMLInputElement} */ button.form.elements.namedItem(
-              "crit",
-            );
-          const crit = critButton.checked;
-          const roll = new BaseRoll(updatedFormula, {});
-          if (crit) {
-            roll.alter(2, 0, { multiplyNumeric: false });
-          }
-          formula = roll.formula;
-          const setboostNumber = (boosts - deboosts) * (crit ? 2 : 1);
-          if (setboostNumber !== 0) {
-            formula = `sb(${formula}, ${setboostNumber})`;
-          }
-        },
-        icon: makeIconClass("dice", "title"),
-        label: label,
+        const crit = critButton.checked;
+        const roll = new BaseRoll(updatedFormula, {});
+        if (crit) {
+          roll.alter(2, 0, { multiplyNumeric: false });
+        }
+        formula = roll.formula;
+        const setboostNumber = (boosts - deboosts) * (crit ? 2 : 1);
+        if (setboostNumber !== 0) {
+          formula = `sb(${formula}, ${setboostNumber})`;
+        }
+        return formula;
       },
-      window: {
-        icon: makeIconClass("dice", "title"),
-        title: game.i18n.localize("TERIOCK.DIALOGS.Boost.title"),
-      },
-    });
-  } catch {
-    return rollFormula;
-  }
-  return formula;
+      icon: makeIconClass("dice", "title"),
+      label: label,
+    },
+    window: {
+      icon: makeIconClass("dice", "title"),
+      title: type
+        ? game.i18n.format("TERIOCK.DIALOGS.Boost.typeTitle", { type })
+        : game.i18n.localize("TERIOCK.DIALOGS.Boost.title"),
+    },
+  });
 }

@@ -139,9 +139,9 @@ export default function TriggerAutomationMixin(Base) {
        */
       get canFire() {
         return (
+          this.trigger &&
           this.active &&
           this._canRunPassively &&
-          this.trigger !== "none" &&
           this._conditionsActive &&
           this._documentActive
         );

@@ -18,6 +18,7 @@ import { RollRollableTakeHandler } from "../../../../helpers/interaction/button-
 import {
   FeatHandler,
   StandardDamageHandler,
+  UseAbilityHandler,
 } from "../../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
 import { safeUuid } from "../../../../helpers/resolve.mjs";
 
@@ -380,11 +381,16 @@ export default function AbilityExecutionChatPart(Base) {
           );
         }
 
-        // Build apply effects button
+        // Add block cone button
+        if (this.source.system.delivery.base === "cone") {
+          this.buttons.push(UseAbilityHandler.buildButton("Block Cone"));
+        }
+
         if (
           this.source.system.duration.unit !== "instant" &&
           this.source.system.maneuver !== "passive"
         ) {
+          // Build apply effects button
           const normalEffectData = await this.#generateConsequence(false);
           const critEffectData = await this.#generateConsequence(true);
           await this.#generateConsequenceAssociations();

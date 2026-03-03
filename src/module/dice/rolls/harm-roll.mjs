@@ -41,7 +41,14 @@ export default class HarmRoll extends TakeRoll {
   /** @inheritDoc */
   async getButtons() {
     const harmArray = await this.getHarmArray();
-    const buttons = await super.getButtons();
+    let buttons = await super.getButtons();
+    buttons = buttons.filter(
+      (b) =>
+        !(
+          b.dataset.action === "take-rollable-take" &&
+          b.dataset.type === "other"
+        ),
+    );
     harmArray.forEach((h) => {
       const automations = h.system.automations.contents;
       automations.forEach((a) => {

@@ -77,6 +77,7 @@ export const icons = {
     destroy: "burst",
     repair: "wine-glass",
     shatter: "wine-glass-crack",
+    reforge: "hammer",
   },
   competence: {
     fluent: "award",

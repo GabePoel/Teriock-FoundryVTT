@@ -463,7 +463,7 @@ export default function HierarchyDocumentMixin(Base) {
        * @param {TeriockChildName} embeddedName
        * @param {ID<TeriockCommon>[]} ids
        * @param {DatabaseDeleteOperation} operation
-       * @returns {Promise<TeriockCommon>}
+       * @returns {Promise<TeriockCommon[]>}
        */
       async deleteChildDocuments(embeddedName, ids = [], operation = {}) {
         if (embeddedName === this.documentName) {

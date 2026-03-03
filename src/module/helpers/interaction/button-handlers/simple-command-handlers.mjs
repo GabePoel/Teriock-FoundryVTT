@@ -1,5 +1,21 @@
+import {
+  attuneCommand,
+  deattuneCommand,
+} from "../commands/attunable-commands.mjs";
 import awakenCommand from "../commands/awaken-command.mjs";
 import bagCommand from "../commands/bag-command.mjs";
+import {
+  dampenCommand,
+  destroyCommand,
+  glueCommand,
+  identifyCommand,
+  readMagicCommand,
+  reforgeCommand,
+  repairCommand,
+  shatterCommand,
+  undampenCommand,
+  unglueCommand,
+} from "../commands/equipment-commands.mjs";
 import featCommand from "../commands/feat-command.mjs";
 import { hackCommand, unhackCommand } from "../commands/hack-command.mjs";
 import healCommand from "../commands/heal-command.mjs";
@@ -25,6 +41,80 @@ export class AwakenHandler extends CommandButtonHandlerBuilder(awakenCommand) {}
  * Action to trigger revival.
  */
 export class ReviveHandler extends CommandButtonHandlerBuilder(reviveCommand) {}
+
+/**
+ * Action to trigger shatter.
+ */
+export class ShatterHandler extends CommandButtonHandlerBuilder(
+  shatterCommand,
+) {}
+
+/**
+ * Action to trigger repair.
+ */
+export class RepairHandler extends CommandButtonHandlerBuilder(repairCommand) {}
+
+/**
+ * Action to trigger destroy.
+ */
+export class DestroyHandler extends CommandButtonHandlerBuilder(
+  destroyCommand,
+) {}
+
+/**
+ * Action to trigger reforge.
+ */
+export class ReforgeHandler extends CommandButtonHandlerBuilder(
+  reforgeCommand,
+) {}
+
+/**
+ * Action to trigger glue.
+ */
+export class GlueHandler extends CommandButtonHandlerBuilder(glueCommand) {}
+
+/**
+ * Action to trigger unglue.
+ */
+export class UnglueHandler extends CommandButtonHandlerBuilder(unglueCommand) {}
+
+/**
+ * Action to trigger dampen.
+ */
+export class DampenHandler extends CommandButtonHandlerBuilder(dampenCommand) {}
+
+/**
+ * Action to trigger undampen.
+ */
+export class UndampenHandler extends CommandButtonHandlerBuilder(
+  undampenCommand,
+) {}
+
+/**
+ * Action to trigger identify.
+ */
+export class IdentifyHandler extends CommandButtonHandlerBuilder(
+  identifyCommand,
+) {}
+
+/**
+ * Action to trigger read magic.
+ */
+export class ReadMagicHandler extends CommandButtonHandlerBuilder(
+  readMagicCommand,
+) {}
+
+/**
+ * Action to trigger attune.
+ */
+export class AttuneHandler extends CommandButtonHandlerBuilder(attuneCommand) {}
+
+/**
+ * Action to trigger deattune.
+ */
+export class DeattuneHandler extends CommandButtonHandlerBuilder(
+  deattuneCommand,
+) {}
 
 /**
  * Action to trigger healing.

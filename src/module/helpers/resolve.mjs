@@ -86,6 +86,24 @@ export async function ensureChildren(document, type, names) {
 }
 
 /**
+ * Ensure a document has none of the predefined documents named.
+ * @param {TeriockCommon} document
+ * @param {Teriock.Documents.CommonType} type
+ * @param {string[]} names
+ * @returns {Promise<TeriockCommon[]>}
+ */
+export async function ensureNoChildren(document, type, names) {
+  const existing = document.children.typeMap[type] || [];
+  const toDelete = existing.filter((c) => names.includes(c.name));
+  if (toDelete.length === 0) return [];
+  const documentName = toDelete[0]?.documentName;
+  return document.deleteChildDocuments(
+    documentName,
+    toDelete.map((c) => c.id),
+  );
+}
+
+/**
  * Attempt to add a compendium source for some document.
  * @param {TeriockCommon} document
  * @returns {Promise<void>}

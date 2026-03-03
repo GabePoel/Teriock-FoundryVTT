@@ -29,7 +29,6 @@ export const consequenceOptions = {
     sleep: "TERIOCK.EFFECTS.RollableEffects.sleep.take",
     kill: "TERIOCK.EFFECTS.RollableEffects.kill.take",
     pay: "TERIOCK.EFFECTS.RollableEffects.pay.take",
-    other: "TERIOCK.EFFECTS.RollableEffects.other.take",
   },
   hacks: {
     arm: "TERIOCK.STATUSES.Hacks.armHack",
@@ -58,10 +57,22 @@ export const consequenceOptions = {
     },
   },
   common: {
-    standardDamage: "TERIOCK.EFFECTS.Common.standardDamage",
-    bag: "TERIOCK.EFFECTS.Common.bag",
-    revive: "TERIOCK.EFFECTS.Common.revive",
+    attune: "TERIOCK.SYSTEMS.Attunable.MENU.attune",
     awaken: "TERIOCK.EFFECTS.Common.awaken",
+    bag: "TERIOCK.EFFECTS.Common.bag",
+    dampen: "TERIOCK.SYSTEMS.Equipment.MENU.dampen",
+    deattune: "TERIOCK.SYSTEMS.Attunable.MENU.deattune",
+    destroy: "TERIOCK.SYSTEMS.Equipment.MENU.destroy",
+    glue: "TERIOCK.SYSTEMS.Equipment.MENU.glue",
+    identify: "TERIOCK.SYSTEMS.Equipment.MENU.identify",
+    readMagic: "TERIOCK.SYSTEMS.Equipment.MENU.readMagic",
+    reforge: "TERIOCK.SYSTEMS.Equipment.MENU.reforge",
+    repair: "TERIOCK.SYSTEMS.Equipment.MENU.repair",
+    revive: "TERIOCK.EFFECTS.Common.revive",
+    shatter: "TERIOCK.SYSTEMS.Equipment.MENU.shatter",
+    standardDamage: "TERIOCK.EFFECTS.Common.standardDamage",
+    undampen: "TERIOCK.SYSTEMS.Equipment.MENU.undampen",
+    unglue: "TERIOCK.SYSTEMS.Equipment.MENU.unglue",
   },
 };
 

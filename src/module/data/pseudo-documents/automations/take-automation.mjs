@@ -31,7 +31,7 @@ export default class TakeAutomation extends LabelAutomationMixin(
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       take: new fields.StringField({
-        choices: TERIOCK.options.consequence.rolls,
+        choices: TERIOCK.options.consequence.takes,
       }),
       amount: new fields.NumberField({ nullable: true }),
     });
