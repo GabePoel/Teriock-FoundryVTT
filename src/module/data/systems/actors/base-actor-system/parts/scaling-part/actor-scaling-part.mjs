@@ -44,26 +44,17 @@ export default (Base) => {
        * @returns {object}
        */
       #getRankRollData() {
-        const data = {
-          "rank.mag": 0,
-          "rank.sem": 0,
-          "rank.war": 0,
-        };
-        for (const k of Object.keys(TERIOCK.index.classes)) {
-          data[`rank.${k}`] = 0;
+        const data = {};
+        const ranks = this.parent.itemTypes.rank;
+        for (const c of Object.keys(TERIOCK.index.classes)) {
+          const count = ranks.filter((r) => r.system.className === c).length;
+          data[`rank.${c}`] = count;
+          data[`rank.${c.slice(0, 3).toLowerCase()}`] = count;
         }
-        const keys = Object.keys(data);
-        for (const rank of this.parent.itemTypes.rank || []) {
-          const classKey =
-            "rank." + rank.system.className.slice(0, 3).toLowerCase();
-          const archetypeKey =
-            "rank." + rank.system.archetype.slice(0, 3).toLowerCase();
-          if (classKey && keys.includes(classKey)) {
-            data[classKey]++;
-          }
-          if (archetypeKey && keys.includes(archetypeKey)) {
-            data[archetypeKey]++;
-          }
+        for (const a of Object.keys(TERIOCK.options.rank)) {
+          const count = ranks.filter((r) => r.system.archetype === a).length;
+          data[`rank.${a}`] = count;
+          data[`rank.${a.slice(0, 3).toLowerCase()}`] = count;
         }
         return data;
       }
