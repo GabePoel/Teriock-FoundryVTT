@@ -27,8 +27,7 @@ export default class AttributeModel extends ModifierModel {
       attribute: this.key,
       ...options,
     };
-    const execution = new FeatSaveExecution(options);
-    await execution.execute();
+    await new FeatSaveExecution(options).execute();
   }
 
   /** @inheritDoc */

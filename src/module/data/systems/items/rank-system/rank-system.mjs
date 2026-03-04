@@ -1,6 +1,5 @@
 import { icons } from "../../../../constants/display/icons.mjs";
 import { resolveDocument } from "../../../../helpers/resolve.mjs";
-import { toCamelCase } from "../../../../helpers/string.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
 import { TextField } from "../../../fields/_module.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
@@ -206,7 +205,7 @@ export default class RankSystem extends mix(
     super._onDelete(options, userId);
     if (this.parent.checkEditor(userId) && this.actor) {
       const archetypePowers = this.actor.powers.filter(
-        (p) => toCamelCase(p.name) === this.archetype,
+        (p) => p.system.identifier === this.archetype,
       );
       const needsArchetype =
         this.actor.ranks.filter((r) => r.system.archetype === this.archetype)

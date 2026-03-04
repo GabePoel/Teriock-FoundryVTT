@@ -76,70 +76,68 @@ export default async function inCombatExpirationDialog(
         },
       ),
     );
-    try {
-      await new TeriockDialog({
-        window: {
-          title: game.i18n.format("TERIOCK.DIALOGS.InCombatExpiration.title", {
-            name: effect.name,
-          }),
-          icon: makeIconClass("dice-d4", "title"),
-        },
-        content: contentHtml,
-        buttons: [
-          {
-            action: "roll",
-            label: game.i18n.localize(
-              "TERIOCK.DIALOGS.InCombatExpiration.BUTTONS.roll",
-            ),
-            default: true,
-            callback: async (_event, button) => {
-              const expirationRoll = new BaseRoll(
-                button.form.elements.namedItem("roll").value,
-                effect.actor.getRollData(),
-                {
-                  flavor: game.i18n.format(
-                    "TERIOCK.DIALOGS.InCombatExpiration.rollFlavor",
-                    { name: effect.name },
-                  ),
-                  styles: {
-                    dice: {
-                      classes: "condition",
-                    },
+    await new TeriockDialog({
+      window: {
+        title: game.i18n.format("TERIOCK.DIALOGS.InCombatExpiration.title", {
+          name: effect.name,
+        }),
+        icon: makeIconClass("dice-d4", "title"),
+      },
+      content: contentHtml,
+      buttons: [
+        {
+          action: "roll",
+          label: game.i18n.localize(
+            "TERIOCK.DIALOGS.InCombatExpiration.BUTTONS.roll",
+          ),
+          default: true,
+          callback: async (_event, button) => {
+            const expirationRoll = new BaseRoll(
+              button.form.elements.namedItem("roll").value,
+              effect.actor.getRollData(),
+              {
+                flavor: game.i18n.format(
+                  "TERIOCK.DIALOGS.InCombatExpiration.rollFlavor",
+                  { name: effect.name },
+                ),
+                styles: {
+                  dice: {
+                    classes: "condition",
                   },
-                  threshold: Number(
-                    button.form.elements.namedItem("threshold").value,
-                  ),
                 },
-              );
-              await expirationRoll.toMessage(
-                {
-                  speaker: TeriockChatMessage.getSpeaker({
-                    actor: effect.actor,
-                  }),
-                },
-                {
-                  rollMode: game.settings.get("core", "rollMode"),
-                },
-              );
-              if (
-                expirationRoll.total >=
-                Number(button.form.elements.namedItem("threshold").value)
-              ) {
-                await effect.system.expire();
-              }
-            },
-          },
-          {
-            action: "remove",
-            label: game.i18n.localize(
-              "TERIOCK.DIALOGS.InCombatExpiration.BUTTONS.remove",
-            ),
-            callback: async () => {
+                threshold: Number(
+                  button.form.elements.namedItem("threshold").value,
+                ),
+              },
+            );
+            await expirationRoll.toMessage(
+              {
+                speaker: TeriockChatMessage.getSpeaker({
+                  actor: effect.actor,
+                }),
+              },
+              {
+                rollMode: game.settings.get("core", "rollMode"),
+              },
+            );
+            if (
+              expirationRoll.total >=
+              Number(button.form.elements.namedItem("threshold").value)
+            ) {
               await effect.system.expire();
-            },
+            }
           },
-        ],
-      }).render(true);
-    } catch {}
+        },
+        {
+          action: "remove",
+          label: game.i18n.localize(
+            "TERIOCK.DIALOGS.InCombatExpiration.BUTTONS.remove",
+          ),
+          callback: async () => {
+            await effect.system.expire();
+          },
+        },
+      ],
+    }).render(true);
   }
 }

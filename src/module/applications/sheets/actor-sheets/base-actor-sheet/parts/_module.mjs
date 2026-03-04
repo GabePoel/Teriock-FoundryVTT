@@ -1,6 +1,7 @@
 export { default as AvatarImageActorSheetPart } from "./avatar-image-actor-sheet-part.mjs";
 export { default as CombatActorSheetPart } from "./combat-actor-sheet-part.mjs";
 export { default as ConditionsActorSheetPart } from "./conditions-actor-sheet-part.mjs";
+export { default as DocumentCreationActorSheetPart } from "./document-creation-actor-sheet-part.mjs";
 export { default as FiltersActorSheetPart } from "./filters-actor-sheet-part.mjs";
 export { default as HidingActorSheetPart } from "./hiding-actor-sheet-part.mjs";
 export { default as MechanicalActorSheetPart } from "./mechanical-actor-sheet-part.mjs";

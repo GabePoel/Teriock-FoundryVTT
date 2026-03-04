@@ -20,7 +20,7 @@ declare global {
     export type ContextMenuCondition = (html: HTMLElement) => boolean;
 
     export type ContextMenuEntry = {
-      callback: ContextMenuCallback;
+      callback?: ContextMenuCallback;
       classes?: string;
       condition?: boolean | ContextMenuCondition;
       group?: string;

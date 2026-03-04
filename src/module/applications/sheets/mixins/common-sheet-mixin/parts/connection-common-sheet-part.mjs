@@ -54,12 +54,19 @@ export default (Base) => {
       /**
        * Creates a context menu for elements.
        * @param {string} cssClass - The CSS class for elements to attach the menu to.
-       * @param {object[]} menuItems - The context menu items.
+       * @param {Teriock.Foundry.ContextMenuEntry[]} menuItems - The context menu items.
        * @param {string} eventName - The event name to trigger the menu.
        * @param {"up"|"down"} [direction] - Direction for the context menu to expand.
+       * @param {boolean} [fixed]
        * @returns {ContextMenu} The created context menu.
        */
-      _connectContextMenu(cssClass, menuItems, eventName, direction) {
+      _connectContextMenu(
+        cssClass,
+        menuItems,
+        eventName,
+        direction,
+        fixed = false,
+      ) {
         return /** @type {ContextMenu} */ new TeriockContextMenu(
           this.element,
           cssClass,
@@ -67,7 +74,7 @@ export default (Base) => {
           {
             eventName,
             jQuery: false,
-            fixed: false,
+            fixed,
             forceDirection: direction,
           },
         );

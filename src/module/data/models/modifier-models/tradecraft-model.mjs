@@ -32,8 +32,7 @@ export default class TradecraftModel extends ModifierModel {
       tradecraft: this.key,
       ...options,
     };
-    const execution = new TradecraftExecution(options);
-    await execution.execute();
+    await new TradecraftExecution(options).execute();
   }
 
   /** @inheritDoc */

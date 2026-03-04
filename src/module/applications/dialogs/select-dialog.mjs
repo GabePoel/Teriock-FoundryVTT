@@ -223,7 +223,7 @@ export async function selectTradecraftDialog() {
 export async function selectAbilityDialog() {
   return (
     await resolveDocument(
-      await selectDocumentDialog(game.teriock.packs.abilities.index.contents, {
+      await selectDocumentDialog(await noSup(game.teriock.packs.abilities), {
         hint: game.i18n.localize("TERIOCK.DIALOGS.Select.Ability.hint"),
         title: game.i18n.localize("TERIOCK.DIALOGS.Select.Ability.title"),
         tooltipAsync: true,
@@ -265,9 +265,24 @@ export async function selectCompendiumsDialog(selected = true) {
  */
 export async function selectEquipmentTypeDialog() {
   return resolveDocument(
-    await selectDocumentDialog(game.teriock.packs.equipment.index.contents, {
+    await selectDocumentDialog(await noSup(game.teriock.packs.equipment), {
       hint: game.i18n.localize("TERIOCK.DIALOGS.Select.EquipmentType.hint"),
       title: game.i18n.localize("TERIOCK.DIALOGS.Select.EquipmentType.title"),
+      tooltipAsync: true,
+      openable: true,
+    }),
+  );
+}
+
+/**
+ * Dialog to select a species.
+ * @returns {Promise<TeriockSpecies|void>}
+ */
+export async function selectSpeciesDialog() {
+  return resolveDocument(
+    await selectDocumentDialog(await noSup(game.teriock.packs.species), {
+      hint: game.i18n.localize("TERIOCK.DIALOGS.Select.Species.hint"),
+      title: game.i18n.localize("TERIOCK.DIALOGS.Select.Species.title"),
       tooltipAsync: true,
       openable: true,
     }),
@@ -280,7 +295,7 @@ export async function selectEquipmentTypeDialog() {
  */
 export async function selectBodyPartDialog() {
   return resolveDocument(
-    await selectDocumentDialog(game.teriock.packs.bodyParts.index.contents, {
+    await selectDocumentDialog(await noSup(game.teriock.packs.bodyParts), {
       hint: game.i18n.localize("TERIOCK.DIALOGS.Select.BodyPart.hint"),
       title: game.i18n.localize("TERIOCK.DIALOGS.Select.BodyPart.title"),
       tooltipAsync: true,
@@ -318,4 +333,18 @@ export async function selectClassDialog() {
   } else {
     return null;
   }
+}
+
+/**
+ * @param {TeriockCompendiumCollection<GenericItem>} pack
+ */
+async function noSup(pack) {
+  if (!pack.indexed) {
+    ui.notifications.info("TERIOCK.DIALOGS.NewDocument.loading", {
+      localize: true,
+      format: { name: game.i18n.localize(pack.title) },
+    });
+  }
+  const index = await pack.getIndex({ fields: "system._sup" });
+  return index.contents.filter((i) => !i.system._sup);
 }

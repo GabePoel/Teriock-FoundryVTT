@@ -63,8 +63,7 @@ export default class ResourceSystem extends mix(
   /** @inheritDoc */
   async _use(options = {}) {
     options.source = this.parent;
-    const execution = new BaseDocumentExecution(options);
-    await execution.execute();
+    await new BaseDocumentExecution(options).execute();
   }
 
   /** @inheritDoc */

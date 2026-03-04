@@ -261,8 +261,7 @@ export default class EquipmentSystem extends mix(
       await this.actor?.useAbility("Basic Attack");
     }
     options.source = this.parent;
-    const execution = new EquipmentExecution(options);
-    await execution.execute();
+    await new EquipmentExecution(options).execute();
   }
 
   /** @inheritDoc */

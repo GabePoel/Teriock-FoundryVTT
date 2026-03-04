@@ -197,7 +197,7 @@ export const icons = {
     attack: "sword",
     block: "shield",
     feat: "star",
-    manifest: "magic",
+    manifest: "sparkle",
   },
   maneuver: {
     active: "arrow-right",

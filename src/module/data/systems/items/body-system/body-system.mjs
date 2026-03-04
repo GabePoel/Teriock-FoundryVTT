@@ -71,7 +71,11 @@ export default class BodySystem extends mix(
     parts.text = dotJoin([
       ...this._damageWrappers,
       ...this._defenseBar.wrappers,
-      this.parent.elder ? this.parent.elder?.nameString : "",
+      this.parent.elder
+        ? this.parent.elder?.documentName !== "Actor"
+          ? this.parent.elder?.nameString
+          : ""
+        : "",
     ]);
     return parts;
   }

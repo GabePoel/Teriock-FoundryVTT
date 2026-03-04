@@ -76,8 +76,7 @@ export default (Base) => {
       async rollImmunity(options = {}) {
         await this.parent.hookCall("rollImmunity");
         options.actor = this.parent;
-        const execution = new ImmunityExecution(options);
-        await execution.execute();
+        await new ImmunityExecution(options).execute();
       }
 
       /**
@@ -96,8 +95,7 @@ export default (Base) => {
         }
         await this.parent.hookCall("rollResistance");
         options.actor = this.parent;
-        const execution = new ResistanceExecution(options);
-        await execution.execute();
+        await new ResistanceExecution(options).execute();
       }
     }
   );

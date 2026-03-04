@@ -186,8 +186,7 @@ export default class FluencySystem extends mix(
    */
   async _use(options = {}) {
     options.source = this.parent;
-    const execution = new FluencyExecution(options);
-    await execution.execute();
+    await new FluencyExecution(options).execute();
   }
 
   /** @inheritDoc */

@@ -7,6 +7,7 @@ import {
   selectClassDialog,
   selectEquipmentTypeDialog,
   selectPropertyDialog,
+  selectSpeciesDialog,
   selectTradecraftDialog,
 } from "../../../../dialogs/select-dialog.mjs";
 import { selectDocumentDialog } from "../../../../dialogs/select-document-dialog.mjs";
@@ -27,13 +28,15 @@ export default (Base) => {
         actions: {
           createAbility: this._onCreateAbility,
           createBody: this._onCreateBody,
+          createConsequence: this._onCreateConsequence,
           createEquipment: this._onCreateEquipment,
           createFluency: this._onCreateFluency,
+          createMount: this._onCreateMount,
+          createPower: this._onCreatePower,
           createProperty: this._onCreateProperty,
           createRank: this._onCreateRank,
           createResource: this._onCreateResource,
-          createPower: this._onCreatePower,
-          createConsequence: this._onCreateConsequence,
+          createSpecies: this._onCreateSpecies,
         },
       };
 
@@ -122,6 +125,16 @@ export default (Base) => {
             },
           ]);
         }
+      }
+
+      /**
+       * Adds a new {@link TeriockMount} to the current document.
+       * @returns {Promise<void>}
+       */
+      static async _onCreateMount() {
+        await this.document.createChildDocuments("Item", [
+          newDocumentObj("mount"),
+        ]);
       }
 
       /**
@@ -280,6 +293,21 @@ export default (Base) => {
         await this.document.createChildDocuments("ActiveEffect", [
           newDocumentObj("resource"),
         ]);
+      }
+
+      /**
+       * Adds a new {@link TeriockSpecies} to the current document.
+       * @returns {Promise<void>}
+       */
+      static async _onCreateSpecies() {
+        const decision = await newDocumentDialog("species");
+        let obj = newDocumentObj("species");
+        if (decision === "import") {
+          obj = game.items.fromCompendium(await selectSpeciesDialog());
+        }
+        if (decision && obj) {
+          await this.document.createChildDocuments("Item", [obj]);
+        }
       }
     }
   );

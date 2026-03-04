@@ -15,12 +15,14 @@ import * as parts from "./parts/_module.mjs";
  * @mixes TabsActorSheetPart
  * @mixes TakingActorSheetPart
  * @mixes TradecraftsActorSheetPart
+ * @mixes DocumentCreationActorSheetPart
  */
 export default class TeriockPlayableActorSheet extends mix(
   BaseActorSheet,
   parts.AvatarImageActorSheetPart,
   parts.CombatActorSheetPart,
   parts.ConditionsActorSheetPart,
+  parts.DocumentCreationActorSheetPart,
   parts.MechanicalActorSheetPart,
   parts.ProtectionsActorSheetPart,
   parts.RollingActorSheetPart,

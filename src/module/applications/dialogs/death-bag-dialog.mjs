@@ -41,36 +41,31 @@ export default async function deathBagDialog(actor) {
     );
   }
   contentHTML.append(stonesHTML);
-  try {
-    await new TeriockDialog({
-      window: {
-        icon: makeIconClass(TERIOCK.display.icons.ui.deathBag, "title"),
-        title: game.i18n.localize("TERIOCK.DIALOGS.DeathBag.title"),
-      },
-      content: contentHTML,
-      buttons: [
-        {
-          action: "makePull",
-          label: game.i18n.localize(
-            "TERIOCK.DIALOGS.DeathBag.BUTTONS.makePull",
-          ),
-          default: true,
-          callback: async (_event, button) => {
-            const stonesFormulas = {};
-            for (const color of ["black", "red", "white"]) {
-              stonesFormulas[color] =
-                button.form.elements.namedItem(color).value;
-            }
-            await deathBagPull(
-              button.form.elements.namedItem("pull").value,
-              stonesFormulas,
-              actor,
-            );
-          },
+  await new TeriockDialog({
+    window: {
+      icon: makeIconClass(TERIOCK.display.icons.ui.deathBag, "title"),
+      title: game.i18n.localize("TERIOCK.DIALOGS.DeathBag.title"),
+    },
+    content: contentHTML,
+    buttons: [
+      {
+        action: "makePull",
+        label: game.i18n.localize("TERIOCK.DIALOGS.DeathBag.BUTTONS.makePull"),
+        default: true,
+        callback: async (_event, button) => {
+          const stonesFormulas = {};
+          for (const color of ["black", "red", "white"]) {
+            stonesFormulas[color] = button.form.elements.namedItem(color).value;
+          }
+          await deathBagPull(
+            button.form.elements.namedItem("pull").value,
+            stonesFormulas,
+            actor,
+          );
         },
-      ],
-    }).render(true);
-  } catch {}
+      },
+    ],
+  }).render(true);
 }
 
 /**

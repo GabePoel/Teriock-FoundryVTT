@@ -214,8 +214,7 @@ export default function ArmamentSystemMixin(Base) {
           await this.actor?.useAbility("Basic Attack");
         }
         options.source = /** @type {TeriockArmament} */ this.parent;
-        const execution = new ArmamentExecution(options);
-        await execution.execute();
+        await new ArmamentExecution(options).execute();
       }
 
       /** @inheritDoc */

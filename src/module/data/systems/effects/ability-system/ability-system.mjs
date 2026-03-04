@@ -230,33 +230,22 @@ export default class AbilitySystem extends mix(
   /** @inheritDoc */
   get displayTags() {
     const tags = super.displayTags;
-    if (this.basic) {
-      tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.basic.label");
-    }
+    if (this.basic) tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.basic.label");
     if (this.sustained) {
       tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.sustained.label");
     }
     if (this.standard && !this.skill && !this.spell) {
       tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.standard.label");
     }
-    if (this.standard && this.skill) {
-      tags.push("TERIOCK.TERMS.Common.semblant");
-    }
-    if (this.skill) {
-      tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.skill.label");
-    }
-    if (this.standard && this.spell) {
-      tags.push("TERIOCK.TERMS.Common.conjured");
-    }
-    if (this.spell) {
-      tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.spell.label");
-    }
-    if (this.invoked) {
+    if (this.standard && this.skill) tags.push("TERIOCK.TERMS.Common.semblant");
+    if (this.skill) tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.skill.label");
+    if (this.standard && this.spell) tags.push("TERIOCK.TERMS.Common.conjured");
+    if (this.spell) tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.spell.label");
+    if (this.invoked)
       tags.push({
         label: "TERIOCK.TERMS.Costs.invoked",
         tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.costs.label",
       });
-    }
     if (this.costs.verbal) {
       tags.push({
         label: "TERIOCK.TERMS.Costs.verbal",
@@ -269,12 +258,8 @@ export default class AbilitySystem extends mix(
         tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.costs.label",
       });
     }
-    if (this.ritual) {
-      tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.ritual.label");
-    }
-    if (this.rotator) {
-      tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.rotator.label");
-    }
+    if (this.ritual) tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.ritual.label");
+    if (this.rotator) tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.rotator.label");
     tags.push(
       ...Array.from(this.powerSources).map((t) => {
         return {
@@ -300,9 +285,7 @@ export default class AbilitySystem extends mix(
     if (this.elderSorcery) {
       tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.elderSorcery.label");
     }
-    if (this.warded) {
-      tags.push("TERIOCK.SYSTEMS.Attack.FIELDS.warded.label");
-    }
+    if (this.warded) tags.push("TERIOCK.SYSTEMS.Attack.FIELDS.warded.label");
     return tags;
   }
 
@@ -371,9 +354,7 @@ export default class AbilitySystem extends mix(
   get isReference() {
     const sups = /** @type {TeriockAbility[]} */ this.parent.allSups.contents;
     for (const sup of sups) {
-      if (sup.system?.maneuver !== "passive") {
-        return true;
-      }
+      if (sup.system?.maneuver !== "passive") return true;
     }
     return super.isReference;
   }
@@ -389,7 +370,8 @@ export default class AbilitySystem extends mix(
    */
   get isVirtual() {
     return (
-      this.parent.inCompendium && this.parent.parent.name === "Basic Abilities"
+      this.parent.inCompendium &&
+      this.parent.parent.system.identifier === "basic-abilities"
     );
   }
 
@@ -454,13 +436,7 @@ export default class AbilitySystem extends mix(
 
   /** @inheritDoc */
   get useIcon() {
-    if (this.interaction === "attack") {
-      return "dice-d20";
-    }
-    if (this.interaction === "block") {
-      return "shield";
-    }
-    return TERIOCK.options.document.ability.icon;
+    return TERIOCK.display.icons.interaction[this.interaction];
   }
 
   /** @inheritDoc */
@@ -502,8 +478,7 @@ export default class AbilitySystem extends mix(
     if (this.grantOnly && this.parent.parent.metadata.armament) {
       options.armament = /** @type {TeriockArmament} */ this.parent.parent;
     }
-    const execution = new AbilityExecution(options);
-    await execution.execute();
+    await new AbilityExecution(options).execute();
   }
 
   /**
@@ -524,9 +499,7 @@ export default class AbilitySystem extends mix(
           },
         );
       }
-      try {
-        await this.parent.update({ "system.sustaining": [] });
-      } catch {}
+      await this.parent.update({ "system.sustaining": [] });
     }
   }
 
