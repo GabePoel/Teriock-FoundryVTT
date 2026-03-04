@@ -70,7 +70,7 @@ export default function HackStatApplicationMixin(Base) {
         const stat = target.dataset.stat;
         const index = target.dataset.index;
         const item =
-          /** @type {TeriockChild & {system: Teriock.Models.StatGiverSystemInterface}} */
+          /** @type {ChildDocument & {system: Teriock.Models.StatGiverSystemInterface}} */
           this.document[collection].get(id);
         return item.system.statDice[stat].dice[Number(index)];
       }
@@ -140,7 +140,7 @@ export default function HackStatApplicationMixin(Base) {
         const stat = target.dataset.stat;
         const index = target.dataset.index;
         const item =
-          /** @type {TeriockChild & {system: Teriock.Models.StatGiverSystemInterface}} */
+          /** @type {ChildDocument & {system: Teriock.Models.StatGiverSystemInterface}} */
           this.document[collection].get(id);
         const statDie =
           /** @type {StatDieModel} */ item.system.statDice[stat].dice[
@@ -154,7 +154,7 @@ export default function HackStatApplicationMixin(Base) {
 
 /**
  * Hack a specific body part.
- * @param {GenericActor} actor
+ * @param {AnyActor} actor
  * @param {PointerEvent} event
  * @param {HTMLElement} target
  * @returns {Promise<void>}
@@ -171,7 +171,7 @@ async function onTakeHack(actor, event, target) {
 
 /**
  * Unhack a specific body part.
- * @param {GenericActor} actor
+ * @param {AnyActor} actor
  * @param {PointerEvent} event
  * @param {HTMLElement} target
  * @returns {Promise<void>}

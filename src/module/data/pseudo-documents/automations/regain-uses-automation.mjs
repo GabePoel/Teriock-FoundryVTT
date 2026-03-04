@@ -135,6 +135,6 @@ export default class RegainUsesAutomation extends TriggerAutomationMixin(
 
   /** @inheritDoc */
   _onFire() {
-    this.#regainUses().then();
+    this.#regainUses();
   }
 }

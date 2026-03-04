@@ -52,12 +52,12 @@ declare global {
     };
 
     export type DocActivity = Teriock.HookData.BaseHookData & {
-      doc: TeriockChild;
+      doc: ChildDocument;
     };
 
     export type DocDuplicate = Teriock.HookData.BaseHookData & {
-      copy: TeriockChild;
-      doc: TeriockChild;
+      copy: ChildDocument;
+      doc: ChildDocument;
     };
 
     export type EffectActivity = Teriock.HookData.BaseHookData & {

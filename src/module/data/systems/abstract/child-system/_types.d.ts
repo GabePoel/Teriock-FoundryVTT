@@ -13,7 +13,7 @@ declare global {
         suppressed: EvaluationModel;
       };
 
-      get parent(): GenericChild;
+      get parent(): AnyChildDocument;
     }
   }
 }

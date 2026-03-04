@@ -30,7 +30,7 @@ declare global {
     };
 
     export type FireTrigger = {
-      uuid: UUID<GenericCommon>;
+      uuid: UUID<AnyCommonDocument>;
       trigger: Teriock.System.Trigger;
       options: object;
     };

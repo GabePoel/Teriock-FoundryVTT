@@ -16,7 +16,7 @@ export class ApplyEffectHandler extends AbstractButtonHandler {
    * @param {object} [options]
    * @param {object} [options.secondaryData]
    * @param {TeriockAbility} [options.sustainingAbility]
-   * @param {Set<UUID<TeriockChild>>} [options.bonusSubs]
+   * @param {Set<UUID<ChildDocument>>} [options.bonusSubs]
    */
   static buildButton(primaryData, options = {}) {
     const { secondaryData, sustainingAbility, bonusSubs = new Set() } = options;
@@ -79,7 +79,7 @@ export class ApplyEffectHandler extends AbstractButtonHandler {
     }
     effectObj._id = foundry.utils.randomID();
     const bonusSubUuids = this._toObj(this.dataset.bonusSubs);
-    const bonusSubs = /** @type {TeriockChild[]} */ await Promise.all(
+    const bonusSubs = /** @type {ChildDocument[]} */ await Promise.all(
       bonusSubUuids.map((uuid) => fromUuid(uuid)),
     );
 

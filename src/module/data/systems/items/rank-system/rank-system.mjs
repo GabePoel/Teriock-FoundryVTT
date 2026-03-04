@@ -1,5 +1,4 @@
 import { icons } from "../../../../constants/display/icons.mjs";
-import { resolveDocument } from "../../../../helpers/resolve.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
 import { TextField } from "../../../fields/_module.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
@@ -182,19 +181,15 @@ export default class RankSystem extends mix(
   _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
     if (this.parent.checkEditor(userId) && this.actor && this.classRank === 1) {
-      const needsArchetype =
-        !this.actor.itemKeys.power.has(this.archetype) &&
-        this.archetype !== "everyman";
-      if (needsArchetype) {
+      if (
+        this.archetype !== "everyman" &&
+        !this.actor.powers
+          .map((p) => p.system.identifier)
+          .includes(this.archetype)
+      ) {
         const archetypeName = TERIOCK.options.rank[this.archetype].name;
-        resolveDocument(
-          game.teriock.packs.classes.index.getName(archetypeName),
-        ).then((p) =>
-          this.actor.createChildDocuments(
-            "Item",
-            [game.items.fromCompendium(p, { clearSort: true, keepId: true })],
-            { keepId: true },
-          ),
+        this.actor._stagedItemCreations.add(
+          game.teriock.packs.classes.index.getName(archetypeName).uuid,
         );
       }
     }
@@ -211,12 +206,9 @@ export default class RankSystem extends mix(
         this.actor.ranks.filter((r) => r.system.archetype === this.archetype)
           .length > 0;
       if (!needsArchetype && archetypePowers.length > 0) {
-        this.actor
-          .deleteChildDocuments(
-            "Item",
-            archetypePowers.map((p) => p.id),
-          )
-          .then();
+        for (const p of archetypePowers) {
+          this.actor._stagedItemDeletions.add(p.id);
+        }
       }
     }
   }

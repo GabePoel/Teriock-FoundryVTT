@@ -230,7 +230,7 @@ export default function TransformationSystemMixin(Base) {
         ) {
           return;
         }
-        this._applyTransformationUpdates().then();
+        this._applyTransformationUpdates();
         const actor = this.parent.actor;
         const updateData = {
           "system.transformation.primary": this.parent.id,
@@ -244,7 +244,7 @@ export default function TransformationSystemMixin(Base) {
         if (this.transformation.resetMp) {
           updateData["system.mp.value"] = 99999999;
         }
-        actor.update(updateData).then();
+        actor.update(updateData);
       }
 
       /** @inheritDoc */
@@ -257,7 +257,7 @@ export default function TransformationSystemMixin(Base) {
         ) {
           return;
         }
-        this._removeTransformationUpdates().then();
+        this._removeTransformationUpdates();
       }
 
       /** @inheritDoc */
@@ -272,7 +272,7 @@ export default function TransformationSystemMixin(Base) {
         }
         if (foundry.utils.hasProperty(changed, "disabled")) {
           if (this.parent.disabled) {
-            this._removeTransformationUpdates().then();
+            this._removeTransformationUpdates();
           } else {
             this._applyTransformationUpdates().then(() => {
               if (this.transformation.resetHp || this.transformation.resetMp) {

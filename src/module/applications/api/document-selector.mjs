@@ -119,7 +119,7 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
           el.addEventListener("dblclick", async (ev) => {
             const target = /** @type {HTMLElement} */ ev.currentTarget;
             const uuid = target.dataset.uuid;
-            const doc = /** @type {TeriockChild} */ await fromUuid(uuid);
+            const doc = /** @type {ChildDocument} */ await fromUuid(uuid);
             await doc.sheet.render(true);
           });
         }

@@ -57,20 +57,14 @@ export default (Base) => {
             options.teriock.mpChange < 999999
           ) {
             const color = options.teriock.mpChange > 0 ? "#99C1F1" : "#1A5FB4";
-            this.animateStatChangeEffect(
-              options.teriock.mpChange,
-              color,
-            ).then();
+            this.animateStatChangeEffect(options.teriock.mpChange, color);
           }
           if (
             options.teriock.hpChange !== 0 &&
             options.teriock.hpChange < 999999
           ) {
             const color = options.teriock.hpChange > 0 ? "#F66151" : "#A51D2D";
-            this.animateStatChangeEffect(
-              options.teriock.hpChange,
-              color,
-            ).then();
+            this.animateStatChangeEffect(options.teriock.hpChange, color);
           }
           if (
             options.teriock.witherChange !== 0 &&
@@ -78,10 +72,7 @@ export default (Base) => {
           ) {
             const color =
               options.teriock.witherChange > 0 ? "#241F31" : "#5E5C64";
-            this.animateStatChangeEffect(
-              options.teriock.witherChange,
-              color,
-            ).then();
+            this.animateStatChangeEffect(options.teriock.witherChange, color);
           }
         }
       }

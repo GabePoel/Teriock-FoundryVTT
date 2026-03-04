@@ -1,25 +1,17 @@
 /**
  * Preview a document's sheet even if you aren't the owner of it.
- * @param {GenericChild} doc
+ * @param {AnyChildDocument} doc
  */
 export default async function previewSheet(doc) {
   if (doc.isOwner) {
     await doc.sheet.render(true);
   } else {
     let root = doc;
-    if (doc.documentName === "ActiveEffect") {
-      root = doc.parent;
-    }
+    if (doc.documentName === "ActiveEffect") root = doc.parent;
     const rootData = root.toObject();
-    rootData.ownership = {
-      [game.user.id]: 1,
-    };
+    rootData.ownership = { [game.user.id]: 1 };
     assignRealUuid(rootData, root);
-    const RootClass =
-      /** @type {typeof TeriockParent} */ foundry.utils.getDocumentClass(
-        root.documentName,
-      );
-    //noinspection JSValidateTypes
+    const RootClass = foundry.utils.getDocumentClass(root.documentName);
     const rootDoc = new RootClass.implementation(rootData);
     if (doc.documentName === "ActiveEffect") {
       await rootDoc.effects.get(doc.id).sheet.render(true);
@@ -32,15 +24,11 @@ export default async function previewSheet(doc) {
 /**
  * Assign UUID flags to document and embeds.
  * @param {object} docData
- * @param {TeriockChild} doc
+ * @param {ChildDocument} doc
  */
 function assignRealUuid(docData, doc) {
-  if (!docData.flags) {
-    docData.flags = {};
-  }
-  if (!docData.flags.teriock) {
-    docData.flags.teriock = {};
-  }
+  if (!docData.flags) docData.flags = {};
+  if (!docData.flags.teriock) docData.flags.teriock = {};
   docData.flags.teriock["previewUuid"] = doc.uuid;
   if (docData.effects) {
     for (const effect of docData.effects) {

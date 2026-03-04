@@ -21,7 +21,7 @@ export default class TeriockHotbar extends Hotbar {
 
   /**
    * @inheritDoc
-   * @param {TeriockChild} doc
+   * @param {ChildDocument} doc
    */
   async _createDocumentSheetToggle(doc) {
     if (doc.documentMetadata.child) {

@@ -58,10 +58,10 @@ export async function resolveCollection(typeCollection) {
 
 /**
  * Ensure a document has all the predefined documents named.
- * @param {TeriockCommon} document
+ * @param {CommonDocument} document
  * @param {Teriock.Documents.CommonType} type
  * @param {string[]} names
- * @returns {Promise<TeriockChild[]>}
+ * @returns {Promise<ChildDocument[]>}
  */
 export async function ensureChildren(document, type, names) {
   if (names.length === 0) return [];
@@ -87,10 +87,10 @@ export async function ensureChildren(document, type, names) {
 
 /**
  * Ensure a document has none of the predefined documents named.
- * @param {TeriockCommon} document
+ * @param {CommonDocument} document
  * @param {Teriock.Documents.CommonType} type
  * @param {string[]} names
- * @returns {Promise<TeriockCommon[]>}
+ * @returns {Promise<CommonDocument[]>}
  */
 export async function ensureNoChildren(document, type, names) {
   const existing = document.children.typeMap[type] || [];
@@ -105,7 +105,7 @@ export async function ensureNoChildren(document, type, names) {
 
 /**
  * Attempt to add a compendium source for some document.
- * @param {TeriockCommon} document
+ * @param {CommonDocument} document
  * @returns {Promise<void>}
  */
 export async function inferCompendiumSource(document) {
@@ -126,7 +126,7 @@ export async function inferCompendiumSource(document) {
 
 /**
  * Attempt to add a compendium source for some document's children.
- * @param {TeriockCommon} document
+ * @param {CommonDocument} document
  * @returns {Promise<void>}
  */
 export async function inferChildCompendiumSources(document) {

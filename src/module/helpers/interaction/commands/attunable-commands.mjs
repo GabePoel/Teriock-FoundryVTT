@@ -2,6 +2,7 @@ import { selectDocumentsDialog } from "../../../applications/dialogs/select-docu
 import { icons } from "../../../constants/display/icons.mjs";
 
 /**
+ * @see {AttunableSystem.attune}
  * @param {TeriockActor} actor
  * @returns {Promise<void>}
  */
@@ -18,6 +19,7 @@ async function takeAttune(actor) {
 }
 
 /**
+ * @see {AttunableSystem.deattune}
  * @param {TeriockActor} actor
  * @returns {Promise<void>}
  */

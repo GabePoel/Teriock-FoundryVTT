@@ -10,8 +10,8 @@ const { HandlebarsApplicationMixin } = foundry.applications.api;
  * @mixes ChatButtonSheet
  * @mixes CommonSheet
  * @mixes ChildSheet
- * @property {GenericItem} document
- * @property {GenericItem} item
+ * @property {AnyItem} document
+ * @property {AnyItem} item
  */
 export default class BaseItemSheet extends mix(
   ItemSheetV2,

@@ -54,7 +54,7 @@ export default (Base) => {
                 "system._sup": null,
               };
             });
-            this.parent.updateChildDocuments("Item", updateData).then();
+            this.parent.updateChildDocuments("Item", updateData);
           }
         }
       }

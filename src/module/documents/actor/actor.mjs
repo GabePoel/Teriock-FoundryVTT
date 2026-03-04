@@ -73,6 +73,12 @@ export default class TeriockActor extends mix(
     );
   }
 
+  /** @type Set<UUID<TeriockItem>> */
+  _stagedItemCreations;
+
+  /** @type Set<ID<TeriockItem>> */
+  _stagedItemDeletions;
+
   /**
    * Is this actor active?
    * @returns {boolean}
@@ -87,18 +93,6 @@ export default class TeriockActor extends mix(
    */
   get armaments() {
     return [...this.bodyParts, ...this.equipment];
-  }
-
-  /**
-   * Gets effects that expire based on conditions.
-   * @returns {TeriockConsequence[]} Array of condition expiration effects.
-   */
-  get conditionExpirationEffects() {
-    return (
-      this.consequences.filter(
-        (effect) => effect.system.shouldExpireFromConditions,
-      ) || []
-    );
   }
 
   /**
@@ -219,7 +213,7 @@ export default class TeriockActor extends mix(
 
   /**
    * @inheritDoc
-   * @returns {GenericActiveEffect[]}
+   * @returns {AnyActiveEffect[]}
    */
   get validEffects() {
     //noinspection JSValidateTypes
@@ -348,6 +342,34 @@ export default class TeriockActor extends mix(
         }
       }
     }
+  }
+
+  /**
+   * Create all the staged items.
+   * @returns {Promise<AnyItem[]>}
+   */
+  async _processStagedItemCreations() {
+    console.log(this._stagedItemCreations);
+    if (!this._stagedItemCreations) return [];
+    const items = await Promise.all(
+      this._stagedItemCreations.map((uuid) => fromUuid(uuid)),
+    );
+    const data = items.map((i) =>
+      game.items.fromCompendium(i, { keepId: true, clearSort: true }),
+    );
+    return this.createChildDocuments("Item", Array.from(data));
+  }
+
+  /**
+   * Delete all staged items.
+   * @returns {Promise<CommonDocument[]>}
+   */
+  async _processStagedItemDeletions() {
+    if (!this._stagedItemDeletions) return [];
+    return this.deleteChildDocuments(
+      "Item",
+      Array.from(this._stagedItemDeletions),
+    );
   }
 
   /**

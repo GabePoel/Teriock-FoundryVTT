@@ -78,17 +78,17 @@ export default function AttunableSystemMixin(Base) {
         super._onUpdate(changed, options, userId);
         if (this.parent.checkEditor(userId)) {
           if (this.attunement) {
-            this.attunement
-              .update({
-                "system.tier": this.tier.value,
-              })
-              .then();
+            this.attunement.update({ "system.tier": this.tier.value });
           }
         }
       }
 
       /**
        * Attunes the item to the current character.
+       *
+       * Relevant wiki pages:
+       * - [Attune](https://wiki.teriock.com/index.php/Ability:Attune)
+       *
        * @returns {Promise<TeriockAttunement | null>} Promise that resolves to the attunement effect or null.
        */
       async attune() {
@@ -173,6 +173,10 @@ export default function AttunableSystemMixin(Base) {
 
       /**
        * Removes attunement from the item.
+       *
+       * Relevant wiki pages:
+       * - [Deattune](https://wiki.teriock.com/index.php/Ability:Deattune)
+       *
        * @returns {Promise<void>}
        */
       async deattune() {

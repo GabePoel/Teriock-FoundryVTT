@@ -6,7 +6,7 @@ export default (Base) => {
     /**
      * @extends {TeriockDocumentSheet}
      * @mixin
-     * @property {GenericCommon} document
+     * @property {AnyCommonDocument} document
      */
     class MenuCommonSheetPart extends Base {
       constructor(...args) {

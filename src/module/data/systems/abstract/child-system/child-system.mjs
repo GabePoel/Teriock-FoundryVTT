@@ -201,10 +201,10 @@ export default class ChildSystem extends UsableDataMixin(CommonSystem) {
 
   /**
    * @inheritDoc
-   * @returns {TeriockChild}
+   * @returns {ChildDocument}
    */
   get parent() {
-    return /** @type {TeriockChild} */ super.parent;
+    return /** @type {ChildDocument} */ super.parent;
   }
 
   /** @inheritDoc */

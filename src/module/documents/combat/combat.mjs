@@ -14,7 +14,7 @@ const { Combat } = foundry.documents;
 export default class TeriockCombat extends BaseDocumentMixin(Combat) {
   /**
    * The currently acting actor.
-   * @returns {GenericActor|null}
+   * @returns {AnyActor|null}
    */
   get actor() {
     if (this.combatant) return this.combatant.actor || null;
@@ -23,7 +23,7 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
 
   /**
    * The actors in this combat.
-   * @returns {GenericActor[]}
+   * @returns {AnyActor[]}
    */
   get actors() {
     return Array.from(
@@ -90,19 +90,17 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
    * Reset every actor's attack penalty.
    */
   #resetAttackPenalties() {
-    game.users
-      .queryGM(
-        "teriock.resetAttackPenalties",
-        {
-          actorUuids: this.actors.map((a) => a.uuid),
-        },
-        {
-          failPrefix:
-            "TERIOCK.SYSTEMS.Combat.QUERY.resetAttackPenalties.failPrefix",
-          localize: true,
-        },
-      )
-      .then();
+    game.users.queryGM(
+      "teriock.resetAttackPenalties",
+      {
+        actorUuids: this.actors.map((a) => a.uuid),
+      },
+      {
+        failPrefix:
+          "TERIOCK.SYSTEMS.Combat.QUERY.resetAttackPenalties.failPrefix",
+        localize: true,
+      },
+    );
   }
 
   /**
@@ -117,21 +115,19 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
       this.#checkExpiration(effect, trigger, time, timeActor?.uuid, updates);
     }
     if (updates.length > 0) {
-      game.users
-        .queryGM(
-          "teriock.updateEmbeddedDocuments",
-          {
-            uuid: effectActor.uuid,
-            embeddedName: "ActiveEffect",
-            updates: updates,
-          },
-          {
-            failPrefix:
-              "TERIOCK.SYSTEMS.Combat.QUERY.tryAllEffectExpirations.failPrefix",
-            localize: true,
-          },
-        )
-        .then();
+      game.users.queryGM(
+        "teriock.updateEmbeddedDocuments",
+        {
+          uuid: effectActor.uuid,
+          embeddedName: "ActiveEffect",
+          updates: updates,
+        },
+        {
+          failPrefix:
+            "TERIOCK.SYSTEMS.Combat.QUERY.tryAllEffectExpirations.failPrefix",
+          localize: true,
+        },
+      );
     }
   }
 

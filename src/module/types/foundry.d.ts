@@ -38,7 +38,7 @@ declare global {
     };
 
     export type EffectChangeData = {
-      /** <schema> The attribute path in the {@link TeriockParent} data which the change modifies */
+      /** <schema> The attribute path in the {@link ParentDocument} data which the change modifies */
       key: string;
       /** <schema> The value of the change effect */
       value: string;

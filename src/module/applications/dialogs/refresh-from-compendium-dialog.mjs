@@ -6,7 +6,7 @@ const { BooleanField } = foundry.data.fields;
 
 /**
  * Dialog that refreshes from compendium.
- * @param {TeriockCommon} doc
+ * @param {CommonDocument} doc
  * @returns {Promise<void>}
  */
 export default async function refreshFromCompendiumDialog(doc) {

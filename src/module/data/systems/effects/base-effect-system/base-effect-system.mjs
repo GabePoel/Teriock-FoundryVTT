@@ -95,7 +95,7 @@ export default class BaseEffectSystem extends ChildSystem {
 
   /**
    * What this modifies.
-   * @returns {TeriockParentName}
+   * @returns {ParentDocumentName}
    */
   get modifies() {
     return this.metadata.modifies;

@@ -1,6 +1,7 @@
 /**
  * Mixin to ensure data models have access to the data they need.
  * @param {typeof DataModel | typeof TypeDataModel} Base
+ * @property {AccessData} parent
  */
 export default function AccessDataMixin(Base) {
   return (
@@ -19,7 +20,7 @@ export default function AccessDataMixin(Base) {
 
       /**
        * This data model's actor.
-       * @returns {GenericActor}
+       * @returns {AnyActor}
        */
       get actor() {
         return this.parent.actor;
@@ -27,7 +28,7 @@ export default function AccessDataMixin(Base) {
 
       /**
        * This data model's document.
-       * @returns {GenericCommon}
+       * @returns {AnyCommonDocument}
        */
       get document() {
         return this.parent.document;

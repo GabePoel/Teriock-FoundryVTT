@@ -336,7 +336,7 @@ export async function selectClassDialog() {
 }
 
 /**
- * @param {TeriockCompendiumCollection<GenericItem>} pack
+ * @param {TeriockCompendiumCollection<AnyItem>} pack
  */
 async function noSup(pack) {
   if (!pack.indexed) {

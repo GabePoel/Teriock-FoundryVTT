@@ -6,7 +6,7 @@ export default (Base) => {
     /**
      * @extends {TeriockDocumentSheet}
      * @mixin
-     * @property {TeriockCommon} document
+     * @property {CommonDocument} document
      */
     class StatDiceCommonSheetPart extends Base {
       /** @type {Partial<ApplicationConfiguration>} */

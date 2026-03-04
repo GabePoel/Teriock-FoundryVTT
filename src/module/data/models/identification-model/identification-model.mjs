@@ -52,7 +52,11 @@ export default class IdentificationModel extends EmbeddedDataModel {
   }
 
   /**
-   * Identifies the equipment, revealing all its properties.
+   * Identifies the equipment.
+   *
+   * Relevant wiki pages:
+   * - [Identify](https://wiki.teriock.com/index.php/Ability:Identify)
+   *
    * @returns {Promise<void>}
    */
   async identify() {
@@ -89,7 +93,12 @@ export default class IdentificationModel extends EmbeddedDataModel {
   }
 
   /**
-   * Reads magic on the equipment to reveal its properties.
+   * Reads magic on the equipment.
+   *
+   * Relevant wiki pages:
+   * - [Read Magic](https://wiki.teriock.com/index.php/Ability:Read_Magic)
+   * - [Magic](https://wiki.teriock.com/index.php/Property:Magic)
+   *
    * @returns {Promise<void>}
    */
   async readMagic() {
@@ -160,6 +169,10 @@ export default class IdentificationModel extends EmbeddedDataModel {
 
   /**
    * Removes identification from the equipment.
+   *
+   * Relevant wiki pages:
+   * - [Identify](https://wiki.teriock.com/index.php/Ability:Identify)
+   *
    * @returns {Promise<void>}
    */
   async unidentify() {

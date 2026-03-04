@@ -55,7 +55,7 @@ declare global {
       hierarchy: boolean;
       indexCategoryKey?: IndexCategoryKey;
       indexCompendiumKey?: IndexCompendiumKey;
-      modifies: TeriockParentName;
+      modifies: ParentDocumentName;
       namespace?: string;
       pageNameKey: string;
       passive: boolean;

@@ -6,22 +6,22 @@ import { DocumentCollection } from "../../../../foundry/client/documents/abstrac
 declare global {
   namespace Teriock.Documents {
     export interface ActorInterface {
-      _id: ID<GenericActor>;
-      effects: DocumentCollection<GenericActiveEffect>;
-      items: DocumentCollection<GenericItem>;
+      _id: ID<AnyActor>;
+      effects: DocumentCollection<AnyActiveEffect>;
+      items: DocumentCollection<AnyItem>;
       sheet: BaseActorSheet;
       statuses: Set<Teriock.Parameters.Condition.ConditionKey>;
       system: BaseActorSystem;
 
-      get actor(): GenericActor;
+      get actor(): AnyActor;
 
-      get appliedEffects(): GenericActiveEffect[];
+      get appliedEffects(): AnyActiveEffect[];
 
       get documentName(): "Actor";
 
       getDependentTokens(): TeriockTokenDocument[];
 
-      get id(): ID<GenericActor>;
+      get id(): ID<AnyActor>;
 
       get itemTypes(): Teriock.Parent.ParentItemTypes;
 
@@ -29,7 +29,7 @@ declare global {
 
       get token(): TeriockTokenDocument | null;
 
-      get uuid(): UUID<GenericActor>;
+      get uuid(): UUID<AnyActor>;
     }
   }
 }

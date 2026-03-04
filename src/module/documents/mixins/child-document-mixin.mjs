@@ -79,7 +79,7 @@ export default function ChildDocumentMixin(Base) {
 
       /**
        * Duplicates the document within its parent.
-       * @returns {Promise<TeriockChild>}
+       * @returns {Promise<ChildDocument>}
        */
       async duplicate() {
         const copy = foundry.utils.duplicate(this.toObject());

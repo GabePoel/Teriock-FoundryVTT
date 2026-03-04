@@ -55,15 +55,15 @@ declare global {
 
     export type TriggerScope = {
       ability?: TeriockAbility;
-      actor?: GenericActor;
+      actor?: AnyActor;
       amount?: number;
       armament?: TeriockArmament;
       attribute?: Teriock.Parameters.Actor.Attribute;
       automation?: BaseAutomation;
-      effect?: GenericActiveEffect;
+      effect?: AnyActiveEffect;
       equipment?: TeriockEquipment;
       execution?: BaseExecution | AbilityExecution | ArmamentExecution;
-      item?: GenericItem;
+      item?: AnyItem;
       tradecraft?: Teriock.Parameters.Fluency.Tradecraft;
       trigger?: string;
     };

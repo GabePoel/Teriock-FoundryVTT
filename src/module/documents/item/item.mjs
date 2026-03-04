@@ -32,6 +32,58 @@ export default class TeriockItem extends mix(
   }
 
   /**
+   * @inheritDoc
+   * @param {TeriockItem[]} documents
+   * @param {DatabaseCreateOperation & Teriock.System._CreateOperation} operation
+   * @param {TeriockUser} user
+   * @returns {Promise<boolean|void>}
+   */
+  static async _onCreateOperation(documents, operation, user) {
+    const actors = new Set();
+    for (const d of documents) if (d.actor) actors.add(d.actor);
+    await Promise.all(actors.map((a) => a._processStagedItemCreations()));
+    return super._onCreateOperation(documents, operation, user);
+  }
+
+  /**
+   * @inheritDoc
+   * @param {TeriockItem[]} documents
+   * @param {DatabaseDeleteOperation} operation
+   * @param {TeriockUser} user
+   * @returns {Promise<void>}
+   */
+  static async _onDeleteOperation(documents, operation, user) {
+    const actors = new Set();
+    for (const d of documents) if (d.actor) actors.add(d.actor);
+    await Promise.all(actors.map((a) => a._processStagedItemDeletions()));
+    return super._onDeleteOperation(documents, operation, user);
+  }
+
+  /**
+   * @inheritDoc
+   * @param {TeriockItem[]} documents
+   * @param {DatabaseCreateOperation & Teriock.System._CreateOperation} operation
+   * @param {TeriockUser} user
+   * @returns {Promise<boolean|void>}
+   */
+  static async _preCreateOperation(documents, operation, user) {
+    for (const d of documents) d.actor._stagedItemCreations = new Set();
+    return super._preCreateOperation(documents, operation, user);
+  }
+
+  /**
+   * @inheritDoc
+   * @param {TeriockItem[]} documents
+   * @param {DatabaseDeleteOperation} operation
+   * @param {TeriockUser} user
+   * @returns {Promise<boolean|void>}
+   */
+  static async _preDeleteOperation(documents, operation, user) {
+    for (const d of documents) d.actor._stagedItemDeletions = new Set();
+    return super._preDeleteOperation(documents, operation, user);
+  }
+
+  /**
    * Checks if the item is active.
    * @returns {boolean}
    */
@@ -68,7 +120,7 @@ export default class TeriockItem extends mix(
 
   /**
    * @inheritDoc
-   * @returns {GenericActiveEffect[]}
+   * @returns {AnyActiveEffect[]}
    */
   get validEffects() {
     return this.effects.contents;
@@ -79,7 +131,7 @@ export default class TeriockItem extends mix(
     super._onUpdate(changed, options, userId);
     if (this.checkEditor(userId)) {
       for (const a of this.abilities) {
-        a.system?.expireSustainedConsequences().then();
+        a.system?.expireSustainedConsequences();
       }
     }
   }
@@ -98,7 +150,7 @@ export default class TeriockItem extends mix(
   /**
    * @inheritDoc
    * @yields {TeriockActiveEffect}
-   * @returns {Generator<GenericActiveEffect, void, void>}
+   * @returns {Generator<AnyActiveEffect, void, void>}
    */
   *allApplicableEffects() {
     for (const effect of this.effects) {

@@ -23,12 +23,12 @@ export default class BaseDocumentExecution extends BaseExecution {
   /** @type {BaseAutomation[]} */
   automations;
 
-  /** @type {GenericChild} */
+  /** @type {AnyChildDocument} */
   _source;
 
   /**
    * Source document.
-   * @returns {GenericChild}
+   * @returns {AnyChildDocument}
    */
   get source() {
     return this._source;

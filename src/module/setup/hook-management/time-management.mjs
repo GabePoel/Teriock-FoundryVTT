@@ -26,7 +26,7 @@ export default function registerTimeManagementHooks() {
 
       for (const actor of visibleActors()) {
         if (actor.isViewer && actor.sheet.rendered) {
-          actor.sheet.render(true).then();
+          actor.sheet.render(true);
         }
       }
     },
@@ -45,7 +45,7 @@ export default function registerTimeManagementHooks() {
 
 /**
  * Currently visible actors.
- * @returns {GenericActor[]}
+ * @returns {AnyActor[]}
  */
 function visibleActors() {
   return Array.from(

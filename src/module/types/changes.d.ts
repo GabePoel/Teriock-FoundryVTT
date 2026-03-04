@@ -24,7 +24,7 @@ declare global {
     };
 
     export type PartialChangeTypeTree<keys extends string> = {
-      uuids: Record<UUID<TeriockParent>, PreparedChangeData[]>;
+      uuids: Record<UUID<ParentDocument>, PreparedChangeData[]>;
       typed: Record<keys, PreparedChangeData[]>;
       untyped: PreparedChangeData[];
     };

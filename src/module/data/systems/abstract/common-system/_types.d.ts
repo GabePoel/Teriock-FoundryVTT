@@ -3,10 +3,10 @@ import { TypeCollection } from "../../../../documents/collections/_module.mjs";
 import { BaseAutomation } from "../../../pseudo-documents/automations/_module.mjs";
 
 export type ChildDeltaMap = Record<
-  TeriockCommonName,
+  CommonDocumentName,
   {
-    src: TeriockCommon[];
-    dst: TeriockCommon[];
+    src: CommonDocument[];
+    dst: CommonDocument[];
   }
 >;
 
@@ -20,7 +20,7 @@ declare global {
       /** <schema> Journal entry page only accessible to GM */
       gmNotes: UUID<TeriockJournalEntryPage>;
 
-      get parent(): GenericCommon;
+      get parent(): AnyCommonDocument;
     }
   }
 }

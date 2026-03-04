@@ -230,7 +230,7 @@ declare global {
 // ===============
 
 declare global {
-  export type GenericActiveEffect =
+  export type AnyActiveEffect =
     | TeriockAbility
     | TeriockAttunement
     | TeriockCondition
@@ -238,7 +238,7 @@ declare global {
     | TeriockFluency
     | TeriockProperty
     | TeriockResource;
-  export type GenericItem =
+  export type AnyItem =
     | TeriockBody
     | TeriockEquipment
     | TeriockPower
@@ -246,11 +246,11 @@ declare global {
     | TeriockSpecies
     | TeriockMount
     | TeriockWrapper;
-  export type GenericActor = TeriockCharacter | TeriockCreature;
-  export type GenericParent = GenericActor | GenericItem;
-  export type GenericCommon = GenericActor | GenericItem | GenericActiveEffect;
-  export type GenericChild = GenericItem | GenericActiveEffect;
-  export type GenericRules = GenericCommon | TeriockJournalEntryPage;
+  export type AnyActor = TeriockCharacter | TeriockCreature;
+  export type AnyParent = AnyActor | AnyItem;
+  export type AnyCommonDocument = AnyActor | AnyItem | AnyActiveEffect;
+  export type AnyChildDocument = AnyItem | AnyActiveEffect;
+  export type AnyRules = AnyCommonDocument | TeriockJournalEntryPage;
   export type TeriockArmament = TeriockBody | TeriockEquipment;
   export type TeriockLingering = TeriockCondition | TeriockConsequence;
 }
@@ -259,12 +259,12 @@ declare global {
 // ==============
 
 declare global {
-  export type TeriockParent = TeriockActor | TeriockItem;
-  export type TeriockParentName = "Actor" | "Item";
-  export type TeriockChild = TeriockItem | TeriockActiveEffect;
-  export type TeriockChildName = "Item" | "ActiveEffect";
-  export type TeriockCommon = TeriockActor | TeriockItem | TeriockActiveEffect;
-  export type TeriockCommonName = "Actor" | "Item" | "ActiveEffect";
+  export type ParentDocument = TeriockActor | TeriockItem;
+  export type ParentDocumentName = "Actor" | "Item";
+  export type ChildDocument = TeriockItem | TeriockActiveEffect;
+  export type ChildDocumentName = "Item" | "ActiveEffect";
+  export type CommonDocument = TeriockActor | TeriockItem | TeriockActiveEffect;
+  export type CommonDocumentName = "Actor" | "Item" | "ActiveEffect";
   export type TeriockDocument =
     | TeriockActor
     | TeriockChatMessage

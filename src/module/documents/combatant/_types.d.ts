@@ -6,7 +6,7 @@ declare global {
       _id: ID<TeriockCombatant>;
       parent: TeriockCombat;
 
-      get actor(): GenericActor | null;
+      get actor(): AnyActor | null;
 
       get documentName(): "Combatant";
 

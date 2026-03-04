@@ -50,13 +50,11 @@ export default class HealAutomation extends StatAutomation {
   /** @inheritDoc */
   async _preFire() {
     if (!this.actor.isDamaged || this.forHarm) return;
-    this.document.actor.system
-      .takeHeal({
-        consumeStatDice: this.consumeStatDice,
-        forHarm: this.forHarm,
-        noStatDice: this.noStatDice,
-        title: this.document.nameString,
-      })
-      .then();
+    this.document.actor.system.takeHeal({
+      consumeStatDice: this.consumeStatDice,
+      forHarm: this.forHarm,
+      noStatDice: this.noStatDice,
+      title: this.document.nameString,
+    });
   }
 }

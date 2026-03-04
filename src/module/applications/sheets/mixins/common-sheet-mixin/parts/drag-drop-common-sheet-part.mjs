@@ -7,7 +7,7 @@ export default (Base) => {
   return (
     /**
      * @extends {TeriockDocumentSheet}
-     * @property {GenericCommon} document
+     * @property {AnyCommonDocument} document
      * @mixin
      */
     class DragDropCommonSheetPart extends Base {
@@ -29,7 +29,7 @@ export default (Base) => {
 
       /**
        * Checks if some other document can be dropped on this document.
-       * @param {TeriockCommon} doc
+       * @param {CommonDocument} doc
        * @returns {boolean}
        */
       _canDropChild(doc) {
@@ -103,13 +103,14 @@ export default (Base) => {
       /**
        * Handles dropping of potential children.
        * @param {Teriock.Sheet.EmbedDragEvent} _event - The drop event.
-       * @param {Teriock.Sheet.DropData<TeriockCommon>} dropData - The document drop data.
-       * @returns {Promise<TeriockCommon|void>} Promise that resolves to the created document if successful.
+       * @param {Teriock.Sheet.DropData<CommonDocument>} dropData - The document drop data.
+       * @returns {Promise<CommonDocument|void>} Promise that resolves to the created document if successful.
        */
       async _onDropChild(_event, dropData) {
         /** @type {typeof ClientDocument} */
         const Cls = foundry.utils.getDocumentClass(dropData.type);
-        let doc = /** @type {GenericChild} */ await Cls.fromDropData(dropData);
+        let doc =
+          /** @type {AnyChildDocument} */ await Cls.fromDropData(dropData);
         if (doc.type === "wrapper") {
           doc = doc.system.effect;
         }

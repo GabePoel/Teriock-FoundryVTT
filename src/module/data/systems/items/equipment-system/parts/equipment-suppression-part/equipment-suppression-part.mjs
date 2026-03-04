@@ -93,6 +93,10 @@ export default (Base) => {
 
       /**
        * Dampen this equipment.
+       *
+       * Relevant wiki pages:
+       * - [Dampened](https://wiki.teriock.com/index.php/Property:Dampened)
+       *
        * @returns {Promise<void>}
        */
       async dampen() {
@@ -104,6 +108,10 @@ export default (Base) => {
 
       /**
        * Destroy this equipment.
+       *
+       * Relevant wiki pages:
+       * - [Destroyed](https://wiki.teriock.com/index.php/Property:Destroyed)
+       *
        * @returns {Promise<void>}
        */
       async destroy() {
@@ -200,6 +208,10 @@ export default (Base) => {
 
       /**
        * Reforge this equipment.
+       *
+       * Relevant wiki pages:
+       * - [Destroyed](https://wiki.teriock.com/index.php/Property:Destroyed)
+       *
        * @returns {Promise<void>}
        */
       async reforge() {
@@ -211,6 +223,10 @@ export default (Base) => {
 
       /**
        * Repair this equipment.
+       *
+       * Relevant wiki pages:
+       * - [Shattered](https://wiki.teriock.com/index.php/Property:Shattered)
+       *
        * @returns {Promise<void>}
        */
       async repair() {
@@ -225,6 +241,10 @@ export default (Base) => {
 
       /**
        * Shatter this equipment.
+       *
+       * Relevant wiki pages:
+       * - [Shattered](https://wiki.teriock.com/index.php/Property:Shattered)
+       *
        * @returns {Promise<void>}
        */
       async shatter() {
@@ -244,6 +264,10 @@ export default (Base) => {
 
       /**
        * Undampen this equipment.
+       *
+       * Relevant wiki pages:
+       * - [Dampened](https://wiki.teriock.com/index.php/Property:Dampened)
+       *
        * @returns {Promise<void>}
        */
       async undampen() {

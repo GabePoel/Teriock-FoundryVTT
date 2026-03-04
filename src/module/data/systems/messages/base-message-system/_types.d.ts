@@ -9,14 +9,14 @@ declare global {
       buttons: Teriock.UI.HTMLButtonConfig[];
       /** <schema> Custom number of columns */
       columns: number;
-      /** <schema> Content to be displayed in addition to {@link TeriockRoll} results */
+      /** <schema> Content to be displayed in addition to {@link BaseRoll} results */
       extraContent: string;
       /** <schema> Elder Sorcery spell circle overlay */
       overlay: string;
       /** <schema> Panels to render */
       panels: Teriock.MessageData.MessagePanel[];
       /** <schema> Document that the message is sourced from */
-      source: UUID<TeriockCommon>;
+      source: UUID<CommonDocument>;
       /** <schema> Strings to be wrapped as tags at the bottom of the message */
       tags: string[];
     }

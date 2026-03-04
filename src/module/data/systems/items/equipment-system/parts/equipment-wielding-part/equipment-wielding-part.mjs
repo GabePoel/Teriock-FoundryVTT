@@ -108,7 +108,7 @@ export default (Base) => {
       /** @inheritDoc */
       _onCreate(data, options, userId) {
         super._onCreate(data, options, userId);
-        this.unglue().then();
+        this.unglue();
       }
 
       /**

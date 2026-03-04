@@ -11,7 +11,7 @@ export default (Base) => {
     /**
      * @extends {TeriockDocumentSheet}
      * @mixin
-     * @property {GenericCommon} document
+     * @property {AnyCommonDocument} document
      */
     class AutomationsCommonSheetPart extends Base {
       static DEFAULT_OPTIONS = {

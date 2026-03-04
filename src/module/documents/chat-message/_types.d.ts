@@ -22,7 +22,7 @@ declare global {
 
       get id(): ID<TeriockChatMessage>;
 
-      get speakerActor(): GenericActor | null;
+      get speakerActor(): AnyActor | null;
 
       get uuid(): UUID<TeriockChatMessage>;
     }

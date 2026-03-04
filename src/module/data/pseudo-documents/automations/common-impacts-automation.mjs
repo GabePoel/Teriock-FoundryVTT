@@ -54,9 +54,9 @@ export default class CommonImpactsAutomation extends TriggerAutomationMixin(
   }
 
   /** @inheritDoc */
-  async _preFire() {
+  _onFire() {
     if (!this.document.actor) return;
-    const proceed = await TeriockDialog.confirm({
+    TeriockDialog.confirm({
       window: {
         title: this.document.name,
         icon: makeIconClass(TERIOCK.display.icons.ui.automations, "title"),
@@ -71,11 +71,11 @@ export default class CommonImpactsAutomation extends TriggerAutomationMixin(
           ),
         },
       ),
-    });
-    if (proceed) {
+    }).then((proceed) => {
+      if (!proceed) return;
       for (const c of this.common) {
-        commands[c].primary(this.document.actor).then();
+        commands[c].primary(this.document.actor);
       }
-    }
+    });
   }
 }

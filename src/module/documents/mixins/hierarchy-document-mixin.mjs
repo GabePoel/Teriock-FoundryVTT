@@ -50,7 +50,7 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * @inheritDoc
-       * @param {GenericCommon[]} documents
+       * @param {AnyCommonDocument[]} documents
        * @param {DatabaseCreateOperation & Teriock.System._CreateOperation} operation
        * @param {TeriockUser} user
        * @returns {Promise<boolean|void>}
@@ -101,7 +101,7 @@ export default function HierarchyDocumentMixin(Base) {
               const newId = keepId ? doc._id : foundry.utils.randomID();
               const newDoc = doc.clone({ _id: newId }, { keepId: true });
               toCreate.push(newDoc);
-              /** @type {Record<ID<GenericCommon>, ID<GenericCommon>>} */
+              /** @type {Record<ID<AnyCommonDocument>, ID<AnyCommonDocument>>} */
               const idMap = { [ref.id]: newDoc._id };
               /** @type {TypeCollection<ID<HierarchyDocument>, HierarchyDocument>} */
               const allRefSubs = await ref.getAllSubs();
@@ -137,7 +137,7 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * @inheritDoc
-       * @param {TeriockCommon[]} documents
+       * @param {CommonDocument[]} documents
        * @param {DatabaseDeleteOperation} operation
        * @param {TeriockUser} user
        * @returns {Promise<boolean|void>}
@@ -156,7 +156,7 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * @inheritDoc
-       * @param {TeriockCommon[]} documents
+       * @param {CommonDocument[]} documents
        * @param {DatabaseUpdateOperation} operation
        * @param {TeriockUser} user
        * @returns {Promise<boolean|void>}
@@ -208,7 +208,7 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * Get all subs for a given document.
-       * @param {TeriockCommon|Index<TeriockCommon>} document
+       * @param {CommonDocument|Index<CommonDocument>} document
        * @param {Collection} [collection]
        * @returns {TypeCollection}
        */
@@ -225,7 +225,7 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * Get all sups for a given document.
-       * @param {TeriockCommon|Index<TeriockCommon>} document
+       * @param {CommonDocument|Index<CommonDocument>} document
        * @param {Collection} [collection]
        * @returns {TypeCollection}
        */
@@ -245,7 +245,7 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * Get subs for a given document.
-       * @param {TeriockCommon|Index<TeriockCommon>} document
+       * @param {CommonDocument|Index<CommonDocument>} document
        * @param {Collection} [collection]
        * @returns {TypeCollection}
        */
@@ -261,9 +261,9 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * The sup for a given document.
-       * @param {TeriockCommon|Index<TeriockCommon>} document
+       * @param {CommonDocument|Index<CommonDocument>} document
        * @param {Collection} collection
-       * @returns {TeriockCommon|undefined}
+       * @returns {CommonDocument|undefined}
        */
       static findSup(document, collection) {
         if (!collection) {
@@ -292,7 +292,7 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * Array containing all children or their indexes.
-       * @returns {TeriockChild[]}
+       * @returns {ChildDocument[]}
        */
       get childArray() {
         return [
@@ -312,7 +312,7 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * The document that most directly provides this one.
-       * @returns {SyncDoc<TeriockCommon>}
+       * @returns {SyncDoc<CommonDocument>}
        */
       get elder() {
         return this.sup || this.parent;
@@ -340,7 +340,7 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * The sup of this document or its index.
-       * @returns {SyncDoc<TeriockCommon>|undefined}
+       * @returns {SyncDoc<CommonDocument>|undefined}
        */
       get sup() {
         return HierarchyDocument.findSup(this, this.siblingCollection);
@@ -353,7 +353,7 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * Array containing all visible children.
-       * @returns {TeriockChild[]}
+       * @returns {ChildDocument[]}
        */
       get visibleChildren() {
         return this.childArray
@@ -373,14 +373,14 @@ export default function HierarchyDocumentMixin(Base) {
         this.getAllSups().then((result) => {
           result.forEach((doc) => {
             if (doc.isViewer) {
-              doc.sheet.render({ force: false }).then();
+              doc.sheet.render({ force: false });
             }
           });
         });
         if (this.collection.name === "CompendiumCollection") {
           this.collection.apps.forEach((app) => {
             if (app.rendered) {
-              app.render().then();
+              app.render();
             }
           });
         }
@@ -417,10 +417,10 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * Create multiple child Document instances descendant from a Document using provided input data.
-       * @param {TeriockChildName} embeddedName
+       * @param {ChildDocumentName} embeddedName
        * @param {object[]} data
        * @param {Partial<DatabaseCreateOperation & Teriock.System._CreateOperation>} operation
-       * @returns {Promise<TeriockCommon[]>}
+       * @returns {Promise<CommonDocument[]>}
        */
       async createChildDocuments(embeddedName, data = [], operation = {}) {
         if (embeddedName === this.documentName) {
@@ -434,7 +434,7 @@ export default function HierarchyDocumentMixin(Base) {
        * Create multiple sub Document instances in a sup Document's collection using provided input data.
        * @param {object[]} data
        * @param {Partial<DatabaseCreateOperation & Teriock.System._CreateOperation>} operation
-       * @returns {Promise<TeriockCommon[]>}
+       * @returns {Promise<CommonDocument[]>}
        */
       async createSubDocuments(data = [], operation = {}) {
         data = foundry.utils.deepClone(data);
@@ -460,10 +460,10 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * Delete multiple child Document instances descendant from a Document using provided string ids.
-       * @param {TeriockChildName} embeddedName
-       * @param {ID<TeriockCommon>[]} ids
+       * @param {ChildDocumentName} embeddedName
+       * @param {ID<CommonDocument>[]} ids
        * @param {DatabaseDeleteOperation} operation
-       * @returns {Promise<TeriockCommon[]>}
+       * @returns {Promise<CommonDocument[]>}
        */
       async deleteChildDocuments(embeddedName, ids = [], operation = {}) {
         if (embeddedName === this.documentName) {
@@ -475,9 +475,9 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * Delete multiple sub Document instances in a sup Document's collection using provided string ids.
-       * @param {ID<TeriockCommon>[]} ids
+       * @param {ID<CommonDocument>[]} ids
        * @param {DatabaseDeleteOperation} operation
-       * @returns {Promise<TeriockCommon[]>}
+       * @returns {Promise<CommonDocument[]>}
        */
       async deleteSubDocuments(ids = [], operation = {}) {
         ids = ids.filter((id) => this.subs.map((s) => s.id).includes(id));
@@ -515,7 +515,7 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * Resolved array containing all children.
-       * @returns {Promise<TeriockCommon[]>}
+       * @returns {Promise<CommonDocument[]>}
        */
       async getChildArray() {
         return resolveDocuments(this.childArray);
@@ -532,7 +532,7 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * The document that provides this document.
-       * @returns {Promise<GenericCommon|void>}
+       * @returns {Promise<AnyCommonDocument|void>}
        */
       async getElder() {
         return await resolveDocument(this.elder);
@@ -548,7 +548,7 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * The sup of this document.
-       * @returns {Promise<GenericCommon|void>}
+       * @returns {Promise<AnyCommonDocument|void>}
        */
       async getSup() {
         return await resolveDocument(this.sup);
@@ -556,7 +556,7 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * Resolved visible children.
-       * @returns {Promise<GenericCommon[]>}
+       * @returns {Promise<AnyCommonDocument[]>}
        */
       async getVisibleChildren() {
         return resolveDocuments(this.visibleChildren);
@@ -573,10 +573,10 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * Update multiple child Document instances descendant from a Document using provided differential data.
-       * @param {TeriockChildName} embeddedName
+       * @param {ChildDocumentName} embeddedName
        * @param {object[]} updates
        * @param {DatabaseUpdateOperation} operation
-       * @returns {Promise<GenericCommon[]>}
+       * @returns {Promise<AnyCommonDocument[]>}
        */
       async updateChildDocuments(embeddedName, updates = [], operation = {}) {
         if (embeddedName === this.documentName) {
@@ -590,7 +590,7 @@ export default function HierarchyDocumentMixin(Base) {
        * Update multiple sub Document instances in a sup Document's collection using provided differential data.
        * @param {object[]} updates
        * @param {DatabaseUpdateOperation} operation
-       * @returns {Promise<GenericCommon[]>}
+       * @returns {Promise<AnyCommonDocument[]>}
        */
       async updateSubDocuments(updates = [], operation = {}) {
         updates = updates.filter((update) =>

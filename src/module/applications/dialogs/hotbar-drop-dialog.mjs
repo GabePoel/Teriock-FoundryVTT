@@ -4,7 +4,7 @@ import { TeriockTextEditor } from "../ux/_module.mjs";
 
 /**
  * Dialog to select what type of macro to make.
- * @param {TeriockChild} doc
+ * @param {ChildDocument} doc
  * @returns {Promise<"linked"|"general">} Type of macro to be made.
  */
 export default async function hotbarDropDialog(doc) {

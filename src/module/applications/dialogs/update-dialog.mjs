@@ -3,7 +3,7 @@ import { TeriockDialog } from "../api/_module.mjs";
 
 /**
  * Create a dialog to update the specified paths.
- * @param {GenericCommon} doc
+ * @param {AnyCommonDocument} doc
  * @param {string[]} paths
  * @param {string} [title]
  * @param {string} [icon]

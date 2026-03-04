@@ -1,12 +1,12 @@
 /**
  * A mixin that can be used by both documents and data models to propagate shared operations.
- * @param {typeof TeriockCommon|typeof CommonSystem} Base
+ * @param {typeof CommonDocument|typeof CommonSystem} Base
  */
 export default function PropagationDataMixin(Base) {
   return (
     /**
      * @mixin
-     * @param {TeriockCommon|CommonSystem} Base
+     * @param {CommonDocument|CommonSystem} Base
      */
     class PropagationData extends Base {
       /**
@@ -81,16 +81,16 @@ export default function PropagationDataMixin(Base) {
         scope = { ...scope };
         switch (this.documentName) {
           case "Actor":
-            scope.actor = /** @type {GenericActor} */ this;
+            scope.actor = /** @type {AnyActor} */ this;
             break;
           case "Automation":
             scope.automation = /** @type {BaseAutomation} */ this;
             break;
           case "ActiveEffect":
-            scope.effect = /** @type {GenericActiveEffect} */ this;
+            scope.effect = /** @type {AnyActiveEffect} */ this;
             break;
           case "Item":
-            scope.item = /** @type {GenericItem} */ this;
+            scope.item = /** @type {AnyItem} */ this;
             break;
         }
         if (this.parent && typeof this.parent.getScope === "function") {
@@ -100,8 +100,8 @@ export default function PropagationDataMixin(Base) {
       }
 
       /**
-       * Data preparation that happens after `prepareDerivedData()`. This allows {@link TeriockChild} documents to apply
-       * changes from the parent {@link TeriockActor} and should be primarily used for that purpose.
+       * Data preparation that happens after `prepareDerivedData()`. This allows {@link ChildDocument} documents to
+       * apply changes from the parent {@link TeriockActor} and should be primarily used for that purpose.
        * {@link TeriockActor}s are the only documents that call this directly. In all other cases, it is only called
        * if the parent document calls it.
        */

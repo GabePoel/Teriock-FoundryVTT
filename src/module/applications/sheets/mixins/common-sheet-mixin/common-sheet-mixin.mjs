@@ -5,7 +5,7 @@ import BaseSheetMixin from "../base-sheet-mixin.mjs";
 import * as parts from "./parts/_module.mjs";
 
 /**
- * {@link TeriockCommon} sheet mixin.
+ * {@link CommonDocument} sheet mixin.
  * @param {typeof TeriockDocumentSheet} Base - The base application class to mix in with.
  */
 export default function CommonSheetMixin(Base) {
@@ -27,7 +27,7 @@ export default function CommonSheetMixin(Base) {
      * @mixes StatDiceCommonSheetPart
      * @mixes ToggleCommonSheetPart
      * @mixin
-     * @property {GenericCommon} document
+     * @property {AnyCommonDocument} document
      */
     class CommonSheet extends mix(
       Base,

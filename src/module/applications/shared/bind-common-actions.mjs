@@ -107,7 +107,7 @@ export default function bindCommonActions(rootElement) {
       // Add tooltip listener
       el.addEventListener("pointerenter", async (ev) => {
         const target = /** @type {HTMLElement} */ ev.currentTarget;
-        const uuid = /** @type {UUID<TeriockChild>} */ target.dataset.uuid;
+        const uuid = /** @type {UUID<ChildDocument>} */ target.dataset.uuid;
         const fetched = target.dataset.tooltipFetched;
         if (!fetched) {
           target.setAttribute("data-tooltip-fetched", "true");
@@ -128,7 +128,7 @@ export default function bindCommonActions(rootElement) {
         // Add preview listener
         el.addEventListener("click", async (event) => {
           event.stopPropagation();
-          const uuid = /** @type {UUID<TeriockChild>} */ el.dataset.uuid;
+          const uuid = /** @type {UUID<ChildDocument>} */ el.dataset.uuid;
           if (!uuid) return;
           const doc = await fromUuid(uuid);
           if (!doc) return;

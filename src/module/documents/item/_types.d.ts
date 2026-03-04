@@ -5,22 +5,22 @@ import { DocumentCollection } from "../../../../foundry/client/documents/abstrac
 declare global {
   namespace Teriock.Documents {
     export interface ItemInterface {
-      _id: ID<GenericItem>;
-      effects: DocumentCollection<GenericActiveEffect>;
-      parent?: GenericActor;
+      _id: ID<AnyItem>;
+      effects: DocumentCollection<AnyActiveEffect>;
+      parent?: AnyActor;
       sheet: BaseItemSheet;
       system: BaseItemSystem;
       type: Teriock.Documents.ItemType;
 
-      get actor(): GenericActor;
+      get actor(): AnyActor;
 
       get documentName(): "Item";
 
-      get id(): ID<GenericItem>;
+      get id(): ID<AnyItem>;
 
-      get transferredEffects(): GenericActiveEffect[];
+      get transferredEffects(): AnyActiveEffect[];
 
-      get uuid(): UUID<GenericItem>;
+      get uuid(): UUID<AnyItem>;
     }
   }
 }

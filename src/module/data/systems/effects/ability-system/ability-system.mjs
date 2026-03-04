@@ -453,7 +453,7 @@ export default class AbilitySystem extends mix(
   _onDelete(options, userId) {
     super._onDelete(options, userId);
     if (this.parent.checkEditor(userId)) {
-      this.expireSustainedConsequences(true).then();
+      this.expireSustainedConsequences(true);
     }
   }
 
@@ -464,7 +464,7 @@ export default class AbilitySystem extends mix(
       if (
         game.settings.get("teriock", "automaticallyExpireSustainedConsequences")
       ) {
-        this.expireSustainedConsequences().then();
+        this.expireSustainedConsequences();
       }
     }
   }

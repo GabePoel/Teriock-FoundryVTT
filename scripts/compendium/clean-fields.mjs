@@ -2,7 +2,7 @@
 
 /**
  * Clean excess terms from a document.
- * @param {GenericCommon} doc
+ * @param {AnyCommonDocument} doc
  */
 export function cleanDocument(doc) {
   delete doc.sort;
@@ -28,7 +28,7 @@ export function cleanDocument(doc) {
 }
 
 /**
- * @param {GenericCommon} doc
+ * @param {AnyCommonDocument} doc
  */
 function cleanCommon(doc) {
   delete doc.system._ref;

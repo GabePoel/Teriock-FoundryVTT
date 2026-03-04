@@ -61,11 +61,11 @@ export default class BaseExecution {
     return BaseRoll;
   }
 
-  /** @type {GenericActor|null} */
+  /** @type {AnyActor|null} */
   _actor;
 
   /**
-   * @returns {GenericActor|null}
+   * @returns {AnyActor|null}
    */
   get actor() {
     if (this._actor) {
@@ -76,7 +76,7 @@ export default class BaseExecution {
   }
 
   /**
-   * @param {GenericActor|null} actor
+   * @param {AnyActor|null} actor
    */
   set actor(actor) {
     this._actor = actor;

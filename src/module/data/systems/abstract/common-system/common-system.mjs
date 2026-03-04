@@ -103,7 +103,7 @@ export default class CommonSystem extends mix(
   }
 
   /**
-   * @returns {TeriockCommon}
+   * @returns {CommonDocument}
    */
   get document() {
     return this.parent;
@@ -227,8 +227,8 @@ export default class CommonSystem extends mix(
 
   /**
    * Make a map of documents by `documentName` based on some operation between two maps of documents by their `type`.
-   * @param {Record<Teriock.Documents.CommonType, TeriockCommon[]>} srcTypeMap
-   * @param {Record<Teriock.Documents.CommonType, TeriockCommon[]>} dstTypeMap
+   * @param {Record<Teriock.Documents.CommonType, CommonDocument[]>} srcTypeMap
+   * @param {Record<Teriock.Documents.CommonType, CommonDocument[]>} dstTypeMap
    * @param {"diff" | "union" | "intersect" | "diffSrc" | "diffDst"} mapType
    * @returns {ChildDeltaMap}
    */
@@ -351,7 +351,7 @@ export default class CommonSystem extends mix(
 
   /**
    * Get a copy of the index reference that this document is based off of if it exists.
-   * @returns {Promise<TeriockCommon|void>}
+   * @returns {Promise<CommonDocument|void>}
    */
   async getCompendiumSource() {
     const reference = await fromUuid(this.parent._stats.compendiumSource);

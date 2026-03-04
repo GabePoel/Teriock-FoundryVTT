@@ -30,12 +30,10 @@ export default class RevitalizeAutomation extends StatAutomation {
   /** @inheritDoc */
   async _preFire() {
     if (!this.actor.isDrained || this.forHarm) return;
-    this.document.actor.system
-      .takeRevitalize({
-        consumeStatDice: this.consumeStatDice,
-        forHarm: this.forHarm,
-        title: this.document.nameString,
-      })
-      .then();
+    this.document.actor.system.takeRevitalize({
+      consumeStatDice: this.consumeStatDice,
+      forHarm: this.forHarm,
+      title: this.document.nameString,
+    });
   }
 }

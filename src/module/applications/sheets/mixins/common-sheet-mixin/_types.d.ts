@@ -1,3 +1,3 @@
 export interface CommonSheetMixinInterface {
-  get document(): TeriockCommon;
+  get document(): CommonDocument;
 }

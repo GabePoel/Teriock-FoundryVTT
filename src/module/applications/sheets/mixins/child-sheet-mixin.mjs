@@ -3,7 +3,7 @@ import { fancifyFields, makeIconClass } from "../../../helpers/utils.mjs";
 import { TeriockTextEditor } from "../../ux/_module.mjs";
 
 /**
- * {@link TeriockChild} sheet mixin.
+ * {@link ChildDocument} sheet mixin.
  * @param {typeof CommonSheet} Base
  */
 export default function ChildSheetMixin(Base) {
@@ -12,7 +12,7 @@ export default function ChildSheetMixin(Base) {
      * @extends {CommonSheet}
      * @mixes ConfigButtonSheet
      * @mixin
-     * @property {TeriockChild} document
+     * @property {ChildDocument} document
      */
     class ChildSheet extends Base {
       /** @type {string[]} */

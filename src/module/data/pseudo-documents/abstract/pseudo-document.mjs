@@ -2,6 +2,9 @@ import { EmbeddedDataModel } from "../../models/_module.mjs";
 
 const { fields } = foundry.data;
 
+/**
+ * @property {AccessData} parent
+ */
 export default class PseudoDocument extends EmbeddedDataModel {
   /**
    * Label for this pseudo-document class.
@@ -22,7 +25,7 @@ export default class PseudoDocument extends EmbeddedDataModel {
   /**
    * Create a pseudo-document within some parent document.
    * @param {object} data
-   * @param {GenericCommon | CommonSystem} parent
+   * @param {CommonSystem | HarmSystem} parent
    * @param {DatabaseCreateOperation} operation
    * @returns {Promise<PseudoDocument>}
    */

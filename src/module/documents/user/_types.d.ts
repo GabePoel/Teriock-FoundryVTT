@@ -6,7 +6,7 @@ declare global {
     export interface UserInterface {
       _id: ID<TeriockUser>;
 
-      get character(): GenericActor | null;
+      get character(): AnyActor | null;
 
       get documentName(): "User";
 

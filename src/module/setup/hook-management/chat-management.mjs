@@ -31,7 +31,7 @@ export default function registerChatManagementHooks() {
           if (actors.length > 0) {
             actors.map((actor) => command.primary(actor, argumentObject));
           } else {
-            command.primary(undefined, argumentObject).then();
+            command.primary(undefined, argumentObject);
           }
         }
       }

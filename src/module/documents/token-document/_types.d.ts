@@ -8,7 +8,7 @@ declare global {
       _id: ID<TeriockTokenDocument>;
       sheet: BaseTokenSheet;
 
-      get actor(): GenericActor | null;
+      get actor(): AnyActor | null;
 
       get combat(): TeriockCombat | null;
 

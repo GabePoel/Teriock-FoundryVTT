@@ -62,7 +62,7 @@ export default class TeriockPacks {
 
   /**
    * Official common essential items.
-   * @returns {TeriockCompendiumCollection<GenericItem>}
+   * @returns {TeriockCompendiumCollection<AnyItem>}
    */
   get essentials() {
     return game.packs.get("teriock.essentials");

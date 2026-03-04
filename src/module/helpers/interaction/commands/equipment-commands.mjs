@@ -2,6 +2,7 @@ import { selectDocumentsDialog } from "../../../applications/dialogs/select-docu
 import { icons } from "../../../constants/display/icons.mjs";
 
 /**
+ * @see {EquipmentSuppressionPart.shatter}
  * @param {TeriockActor} actor
  * @returns {Promise<void>}
  */
@@ -16,6 +17,7 @@ async function takeShatter(actor) {
 }
 
 /**
+ * @see {EquipmentSuppressionPart.repair}
  * @param {TeriockActor} actor
  * @returns {Promise<void>}
  */
@@ -30,6 +32,7 @@ async function takeRepair(actor) {
 }
 
 /**
+ * @see {EquipmentSuppressionPart.destroy}
  * @param {TeriockActor} actor
  * @returns {Promise<void>}
  */
@@ -44,6 +47,7 @@ async function takeDestroy(actor) {
 }
 
 /**
+ * @see {EquipmentSuppressionPart.reforge}
  * @param {TeriockActor} actor
  * @returns {Promise<void>}
  */
@@ -58,6 +62,7 @@ async function takeReforge(actor) {
 }
 
 /**
+ * @see {EquipmentWieldingPart.glue}
  * @param {TeriockActor} actor
  * @returns {Promise<void>}
  */
@@ -72,6 +77,7 @@ async function takeGlue(actor) {
 }
 
 /**
+ * @see {EquipmentWieldingPart.unglue}
  * @param {TeriockActor} actor
  * @returns {Promise<void>}
  */
@@ -86,6 +92,7 @@ async function takeUnglue(actor) {
 }
 
 /**
+ * @see {EquipmentSuppressionPart.dampen}
  * @param {TeriockActor} actor
  * @returns {Promise<void>}
  */
@@ -100,6 +107,7 @@ async function takeDampen(actor) {
 }
 
 /**
+ * @see {EquipmentSuppressionPart.undampen}
  * @param {TeriockActor} actor
  * @returns {Promise<void>}
  */
@@ -114,6 +122,7 @@ async function takeUndampen(actor) {
 }
 
 /**
+ * @see {IdentificationModel.identify}
  * @param {TeriockActor} actor
  * @returns {Promise<void>}
  */
@@ -130,6 +139,7 @@ async function takeIdentify(actor) {
 }
 
 /**
+ * @see {IdentificationModel.readMagic}
  * @param {TeriockActor} actor
  * @returns {Promise<void>}
  */

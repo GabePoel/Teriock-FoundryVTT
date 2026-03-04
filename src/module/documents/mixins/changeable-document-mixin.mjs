@@ -237,7 +237,7 @@ export default function ChangeableDocumentMixin(Base) {
 
       /**
        * Get all ActiveEffects that may have changes.
-       * @returns {Generator<GenericActiveEffect, void, void>}
+       * @returns {Generator<AnyActiveEffect, void, void>}
        */
       *candidateChanges() {
         for (const effect of this.allApplicableEffects()) {

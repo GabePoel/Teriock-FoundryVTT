@@ -4,6 +4,7 @@ const { DataModel } = foundry.abstract;
 
 /**
  * Model for data that gets embedded within some parent document.
+ * @mixes AccessData
  * @extends {DataModel}
  */
 export default class EmbeddedDataModel extends AccessDataMixin(DataModel) {

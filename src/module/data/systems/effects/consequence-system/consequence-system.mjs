@@ -180,7 +180,7 @@ export default class ConsequenceSystem extends mix(
   _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
     if (this.parent.checkEditor(userId) && this.actor) {
-      this.parent.hookCall("effectApplication").then();
+      this.parent.hookCall("effectApplication");
     }
   }
 
@@ -188,7 +188,7 @@ export default class ConsequenceSystem extends mix(
   _onFireTrigger(trigger) {
     super._onFireTrigger(trigger);
     if (this.expirations.triggers.has(trigger)) {
-      this.expire().then();
+      this.expire();
     }
   }
 

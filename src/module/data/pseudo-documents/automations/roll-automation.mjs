@@ -74,8 +74,9 @@ export default class RollAutomation extends TriggerAutomationMixin(
   _onFire() {
     if (!this.document.actor) return;
     const command = commands[this.roll];
-    command
-      .primary(this.document.actor, { formula: this.formula, boost: true })
-      .then();
+    command.primary(this.document.actor, {
+      formula: this.formula,
+      boost: true,
+    });
   }
 }
