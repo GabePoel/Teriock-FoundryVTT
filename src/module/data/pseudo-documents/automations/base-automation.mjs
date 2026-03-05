@@ -7,7 +7,7 @@ const { fields } = foundry.data;
 
 //noinspection JSClosureCompilerSyntax
 /**
- * @implements {Teriock.Models.BaseAutomationInterface}
+ * @implements {Teriock.Automations.BaseAutomationInterface}
  * @extends {TypedPseudoDocument}
  * @mixes PropagationData
  */

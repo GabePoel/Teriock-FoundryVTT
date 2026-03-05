@@ -1,9 +1,10 @@
 import { TeriockDialog } from "../../../../applications/api/_module.mjs";
+import { placeTemplateDialog } from "../../../../applications/dialogs/_module.mjs";
 import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
 import { AbilityTemplate } from "../../../../canvas/placeables/_module.mjs";
+import { TemplateAutomation } from "../../../../data/pseudo-documents/automations/_module.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { createDialogFieldset } from "../../../../helpers/html.mjs";
-import { dedent } from "../../../../helpers/string.mjs";
 import { makeIconClass } from "../../../../helpers/utils.mjs";
 
 /**
@@ -196,10 +197,6 @@ export default function AbilityExecutionGetInputPart(Base) {
         await this._getTargetInput();
       }
 
-      /**
-       * Get user input on targets.
-       * @returns {Promise<void>}
-       */
       async _getTargetInput() {
         if (
           this.source.system.targets.size === 1 &&
@@ -212,63 +209,68 @@ export default function AbilityExecutionGetInputPart(Base) {
             this.targets.add(target);
           }
         }
-        if (
-          this.source.system.isAoe &&
-          !this.flags.noTemplate &&
-          game.settings.get("teriock", "placeTemplateOnAbilityUse") &&
-          this.actor
-        ) {
-          let placeTemplate;
-          let distance = Number(this.source.system.range);
-          const rangeId = foundry.utils.randomID();
-          const tokenId = foundry.utils.randomID();
-          placeTemplate = await TeriockDialog.prompt({
-            window: {
-              title: game.i18n.localize(
-                "TERIOCK.SYSTEMS.Ability.DIALOG.PlaceTemplate.title",
-              ),
+        const templateAutomation =
+          /** @type {TemplateAutomation} */
+          this.activeAutomations.find(
+            (a) => a.type === TemplateAutomation.TYPE,
+          );
+        const noTemplate =
+          this.flags.noTemplate ||
+          !game.settings.get("teriock", "placeTemplateOnAbilityUse") ||
+          templateAutomation?.t === "none";
+        const canTemplate = this.source.system.isAoe || !!templateAutomation;
+        if (canTemplate && !noTemplate) {
+          let t = "circle";
+          if (this.source.system.expansion.type === "detonate") t = "circle";
+          if (this.source.system.delivery.base === "cone") t = "cone";
+          if (this.source.system.delivery.base === "aura") t = "circle";
+          let templateData = foundry.utils.mergeObject(
+            {
+              t,
+              distance: this.source.system.range.currentValue.toString(),
+              width: this.source.system.range.currentValue.toString(),
+              angle: CONFIG.MeasuredTemplate.defaults.angle.toString(),
+              movable: this.source.system.expansion.type === "detonate",
             },
-            modal: true,
-            content: dedent(`
-            <div class="standard-form form-group">
-              <label for="${rangeId}">
-                ${game.i18n.localize("TERIOCK.SYSTEMS.Ability.DIALOG.PlaceTemplate.range")}
-              </label>
-              <input 
-                id="${rangeId}" 
-                name='range' 
-                type='number'
-                min='0' 
-                step='1' 
-                value='${this.source.system.range.currentValue}'
-              >
-            </div>
-            <div class="standard-form form-group">
-              <label for="${tokenId}">
-                ${game.i18n.localize("TERIOCK.SYSTEMS.Ability.DIALOG.PlaceTemplate.addTokenRadius")}
-              </label>
-              <input id="${tokenId}" name="token" type="checkbox" checked="checked">
-            </div>
-          `),
-            ok: {
-              label: game.i18n.localize(
-                "TERIOCK.SYSTEMS.Ability.DIALOG.PlaceTemplate.title",
-              ),
-              callback: (_event, button) => {
-                distance =
-                  Number(button.form.elements.namedItem("range").value) +
-                  (button.form.elements["token"].checked
-                    ? ((this.actor.system.size.length ?? 0) / 2) * 5
-                    : 0);
-              },
-            },
-          });
-          if (placeTemplate) {
-            const abilityTemplate = AbilityTemplate.fromExecution(this, {
-              distance: distance,
-            });
-            await abilityTemplate?.drawPreview();
+            templateAutomation?.templateOptions ?? {},
+          );
+          templateData = await placeTemplateDialog(templateData);
+          if (!templateData) return;
+          const token = this.actor?.defaultToken;
+          let distance = BaseRoll.minValue(
+            templateData.distance,
+            this.rollData,
+          );
+          if (token && !templateData.movable) distance += token.document.radius;
+          const resolvedTemplateData = {
+            angle: BaseRoll.minValue(templateData.angle, this.rollData),
+            distance,
+            fillColor: game.user.color,
+            flags: { teriock: { deleteOnTurnChange: true } },
+            t: templateData.t,
+            width: BaseRoll.minValue(templateData.width, this.rollData),
+            x: token?.center.x || 0,
+            y: token?.center.y || 0,
+          };
+          const templateDocument = new CONFIG.MeasuredTemplate.documentClass(
+            resolvedTemplateData,
+            { parent: canvas.scene },
+          );
+          const template = new AbilityTemplate(templateDocument);
+          template.actorSheet = this.actor?.sheet;
+          template.movable = templateData.movable;
+          foundry.helpers.Hooks.callAll(
+            "teriock.createAbilityTemplate",
+            this,
+            template,
+          );
+          if (templateData.movable || templateData.t !== "circle") {
+            ui.notifications.info(
+              "TERIOCK.SYSTEMS.Ability.DIALOG.PlaceTemplate.notification",
+              { localize: true },
+            );
           }
+          await template?.drawPreview();
         }
       }
 

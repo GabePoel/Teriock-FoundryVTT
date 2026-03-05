@@ -1,83 +1,9 @@
-import { BaseRoll } from "../../dice/rolls/_module.mjs";
-
 const { MeasuredTemplate } = foundry.canvas.placeables;
 
 /**
  * @property {MeasuredTemplateDocument} document
  */
 export default class AbilityTemplate extends MeasuredTemplate {
-  /**
-   * A factory method to create an AbilityTemplate instance using provided data from an Activity instance.
-   * @param {AbilityExecution} execution - The roll config to construct the template from.
-   * @param {object} [options={}] - Options to modify the created template.
-   * @returns {AbilityTemplate|null} The template objects, or null if the item does not produce a template.
-   */
-  static fromExecution(execution, options = {}) {
-    const templateShape =
-      TERIOCK.options.delivery[execution.source.system.delivery.base]?.template;
-    if (!templateShape) {
-      return null;
-    }
-    const source = execution.executor || execution.actor?.defaultToken;
-    if (!source) {
-      return null;
-    }
-    let distance = BaseRoll.meanValue(
-      execution.source.system.range.formula,
-      execution.rollData,
-    );
-    if (source && execution.source.system.isAoe) {
-      distance += source.document.radius;
-    }
-    const templateData = foundry.utils.mergeObject(
-      {
-        t: templateShape,
-        user: game.user.id,
-        distance: distance,
-        direction: 0,
-        x: source?.center.x || 0,
-        y: source?.center.y || 0,
-        fillColor: game.user.color,
-        flags: {
-          teriock: {
-            deleteOnTurnChange: true,
-          },
-        },
-      },
-      options,
-    );
-    switch (templateShape) {
-      case "cone":
-        templateData.angle = CONFIG.MeasuredTemplate.defaults.angle;
-        break;
-      default:
-        break;
-    }
-    if (
-      foundry.helpers.Hooks.call(
-        "teriock.preCreateAbilityTemplate",
-        execution,
-        templateData,
-      ) === false
-    ) {
-      return null;
-    }
-    const cls = CONFIG.MeasuredTemplate.documentClass;
-    const template = new cls(foundry.utils.deepClone(templateData), {
-      parent: canvas.scene,
-    });
-    const object = new this(template);
-    object.execution = execution;
-    object.ability = execution.source;
-    object.actorSheet = execution.actor?.sheet || null;
-    foundry.helpers.Hooks.callAll(
-      "teriock.createAbilityTemplate",
-      execution,
-      object,
-    );
-    return object;
-  }
-
   /**
    * Track the bound event handlers so they can be properly canceled later.
    * @type {object}
@@ -95,6 +21,12 @@ export default class AbilityTemplate extends MeasuredTemplate {
    * @type {number}
    */
   #moveTime = 0;
+
+  /**
+   * Whether this can be moved.
+   * @type {boolean}
+   */
+  movable;
 
   /**
    * Shared code for when template placement ends by being confirmed or canceled.
@@ -148,9 +80,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
 
     // Apply a 20ms throttle
     const now = Date.now();
-    if (now - this.#moveTime <= 20) {
-      return;
-    }
+    if (now - this.#moveTime <= 20) return;
 
     const center = event.data.getLocalPosition(this.layer);
     const updates = this.getSnappedPosition(center);
@@ -164,9 +94,8 @@ export default class AbilityTemplate extends MeasuredTemplate {
    * @param {WheelEvent} event - Triggering mouse event.
    */
   _onRotatePlacement(event) {
-    if (event.ctrlKey) {
-      event.preventDefault();
-    }
+    if (event.ctrlKey) event.preventDefault();
+
     // Avoid zooming the browser window
     event.stopPropagation();
     const delta = canvas.grid.type > CONST.GRID_TYPES.SQUARE ? 30 : 15;
@@ -193,7 +122,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
         reject,
         rotate: this._onRotatePlacement.bind(this),
       };
-      if (this.execution.source.system.expansion.type === "detonate") {
+      if (this.movable) {
         this.#events.move = this._onMovePlacement.bind(this);
         canvas.stage.on("mousemove", this.#events.move);
       }
@@ -211,7 +140,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
    */
   async drawPreview() {
     const initialLayer = canvas.activeLayer;
-    if (this.execution.source.system.delivery.base === "cone") {
+    if (this.movable || this.document.t !== "circle") {
       // Draw the template and switch to the template layer
       await this.draw();
       this.layer.activate();
