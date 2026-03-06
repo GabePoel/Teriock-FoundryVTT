@@ -229,7 +229,9 @@ export default function AbilityExecutionGetInputPart(Base) {
               t,
               distance: this.source.system.range.currentValue.toString(),
               width: this.source.system.range.currentValue.toString(),
-              angle: CONFIG.MeasuredTemplate.defaults.angle.toString(),
+              angle: game.settings
+                .get("teriock", "defaultConeAngle")
+                .toString(),
               movable: this.source.system.expansion.type === "detonate",
             },
             templateAutomation?.templateOptions ?? {},
@@ -257,8 +259,15 @@ export default function AbilityExecutionGetInputPart(Base) {
             { parent: canvas.scene },
           );
           const template = new AbilityTemplate(templateDocument);
-          template.actorSheet = this.actor?.sheet;
-          template.movable = templateData.movable;
+          template.sheets = [
+            this.actor?.sheet,
+            this.source?.sheet,
+            this.source?.elder?.sheet,
+            ...this.source.allSups.contents.map((s) => s.sheet),
+          ];
+          template.sheets = Array.from(
+            new Set(template.sheets.filter((s) => s)),
+          );
           foundry.helpers.Hooks.callAll(
             "teriock.createAbilityTemplate",
             this,

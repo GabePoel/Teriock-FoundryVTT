@@ -29,6 +29,12 @@ export default class AbilityTemplate extends MeasuredTemplate {
   movable;
 
   /**
+   * Sheets to get minimized and maximized.
+   * @type {TeriockDocumentSheet[]}
+   */
+  sheets;
+
+  /**
    * Shared code for when template placement ends by being confirmed or canceled.
    * @param {Event} event  Triggering event that ended the placement.
    */
@@ -41,7 +47,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
     canvas.app.view.oncontextmenu = null;
     canvas.app.view.onwheel = null;
     this.#initialLayer.activate();
-    await this.actorSheet?.maximize();
+    await Promise.all((this.sheets || []).map((s) => s?.maximize()));
   }
 
   /**
@@ -146,8 +152,8 @@ export default class AbilityTemplate extends MeasuredTemplate {
       this.layer.activate();
       this.layer.preview.addChild(this);
 
-      // Hide the sheet that originated the preview
-      await this.actorSheet?.minimize();
+      // Hide the sheets that originated the preview
+      await Promise.all((this.sheets || []).map((s) => s?.minimize()));
 
       // Activate interactivity
       return this.activatePreviewListeners(initialLayer);

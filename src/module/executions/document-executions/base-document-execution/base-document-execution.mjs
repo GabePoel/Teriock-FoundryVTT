@@ -59,9 +59,10 @@ export default class BaseDocumentExecution extends BaseExecution {
    * @returns {object}
    */
   get rollData() {
-    const rollData = this.source.system.getSystemRollData();
-    Object.assign(rollData, super.rollData);
-    return rollData;
+    return Object.assign(
+      this.source.system.getSystemRollData() || {},
+      super.rollData,
+    );
   }
 
   /** @inheritDoc */

@@ -170,6 +170,28 @@ export function registerSettings() {
       scope: "user",
       type: Boolean,
     },
+    defaultConeAngle: {
+      config: true,
+      default: CONFIG.MeasuredTemplate.defaults.angle,
+      hint: "TERIOCK.SETTINGS.defaultConeAngle.hint",
+      name: "TERIOCK.SETTINGS.defaultConeAngle.name",
+      scope: "world",
+      type: new fields.NumberField({
+        min: 0,
+        max: 360,
+      }),
+    },
+    defaultDragonBreathAngle: {
+      config: true,
+      default: CONFIG.MeasuredTemplate.defaults.angle,
+      hint: "TERIOCK.SETTINGS.defaultDragonBreathAngle.hint",
+      name: "TERIOCK.SETTINGS.defaultDragonBreathAngle.name",
+      scope: "world",
+      type: new fields.NumberField({
+        min: 0,
+        max: 360,
+      }),
+    },
     damageTypeSources: {
       config: true,
       default: ["Compendium.teriock.rules.JournalEntry.damage0000000000"],
