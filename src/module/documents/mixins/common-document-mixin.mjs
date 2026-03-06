@@ -86,11 +86,6 @@ export default function CommonDocumentMixin(Base) {
       }
 
       /** @inheritDoc */
-      get nameString() {
-        return this.system.nameString;
-      }
-
-      /** @inheritDoc */
       get panelParts() {
         return this.system.panelParts;
       }

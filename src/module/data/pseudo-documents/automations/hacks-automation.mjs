@@ -2,7 +2,7 @@ import {
   TakeHackHandler,
   TakeUnhackHandler,
 } from "../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
-import BaseAutomation from "./base-automation.mjs";
+import { BaseAutomation } from "./abstract/_module.mjs";
 
 const { fields } = foundry.data;
 

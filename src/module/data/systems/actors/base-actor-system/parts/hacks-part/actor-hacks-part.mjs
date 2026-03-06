@@ -7,11 +7,10 @@ import { objectMap } from "../../../../../../helpers/utils.mjs";
  * @param {typeof BaseActorSystem} Base
  */
 export default (Base) => {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @extends {BaseActorSystem}
-     * @implements {ActorHacksPartInterface}
+     * @extends {CommonSystem}
+     * @extends {ActorHacksPartInterface}
      * @mixin
      */
     class ActorHacksPart extends Base {

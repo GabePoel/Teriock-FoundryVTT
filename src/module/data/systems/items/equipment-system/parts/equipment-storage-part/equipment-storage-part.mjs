@@ -9,11 +9,10 @@ const { EmbeddedDataField } = foundry.data.fields;
  * @param {typeof EquipmentSystem} Base
  */
 export default (Base) => {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @extends {EquipmentSystem}
-     * @implements {EquipmentStoragePartInterface}
+     * @extends {ConsumableSystem}
+     * @extends {EquipmentStoragePartInterface}
      * @mixin
      */
     class EquipmentStoragePart extends Base {

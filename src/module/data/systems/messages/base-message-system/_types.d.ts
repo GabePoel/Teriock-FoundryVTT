@@ -2,7 +2,7 @@ import { TeriockChatMessage } from "../../../../documents/_module.mjs";
 
 declare global {
   namespace Teriock.Data {
-    export interface BaseMessageData {
+    export type BaseMessageData = {
       /** <schema> Fallback avatar image to use. */
       avatar: string;
       /** <schema> Buttons to display below the content of the message */
@@ -19,13 +19,12 @@ declare global {
       source: UUID<CommonDocument>;
       /** <schema> Strings to be wrapped as tags at the bottom of the message */
       tags: string[];
-    }
+    };
   }
 
   namespace Teriock.Models {
-    export interface BaseMessageSystemInterface
-      extends Teriock.Data.BaseMessageData {
+    export type BaseMessageSystemInterface = Teriock.Data.BaseMessageData & {
       get parent(): TeriockChatMessage;
-    }
+    };
   }
 }

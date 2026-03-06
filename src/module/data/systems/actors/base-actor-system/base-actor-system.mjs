@@ -7,7 +7,7 @@ import * as parts from "./parts/_module.mjs";
 //noinspection JSClosureCompilerSyntax
 /**
  * Base {@link TeriockActor} data model.
- * @implements {Teriock.Models.BaseActorSystemInterface}
+ * @extends {Teriock.Models.BaseActorSystemInterface}
  * @mixes CommonSystem
  * @mixes ActorAttributesPart
  * @mixes ActorAutomationPart
@@ -57,6 +57,13 @@ export default class BaseActorSystem extends mix(
   static LOCALIZATION_PREFIXES = [
     ...super.LOCALIZATION_PREFIXES,
     "TERIOCK.SYSTEMS.BaseActor",
+  ];
+
+  /** @inheritDoc */
+  static PRESERVED_PROPERTIES = [
+    "effects",
+    "items",
+    ...super.PRESERVED_PROPERTIES,
   ];
 
   /** @inheritDoc */

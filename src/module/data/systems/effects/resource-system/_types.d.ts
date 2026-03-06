@@ -1,9 +1,8 @@
 declare global {
   namespace Teriock.Models {
-    export interface ResourceSystemInterface
-      extends Teriock.Models.BaseEffectSystemInterface {
+    export type ResourceSystemInterface = {
       get parent(): TeriockResource;
-    }
+    };
   }
 }
 

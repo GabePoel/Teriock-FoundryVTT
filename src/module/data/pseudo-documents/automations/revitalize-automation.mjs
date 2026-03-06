@@ -1,5 +1,5 @@
 import { RevitalizeHandler } from "../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
-import StatAutomation from "./stat-automation.mjs";
+import { StatAutomation } from "./abstract/_module.mjs";
 
 export default class RevitalizeAutomation extends StatAutomation {
   /** @inheritDoc */

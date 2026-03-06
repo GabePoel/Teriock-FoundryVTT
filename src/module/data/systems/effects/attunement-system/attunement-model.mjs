@@ -5,13 +5,13 @@ import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
 
 const { fields } = foundry.data;
 
-//noinspection JSClosureCompilerSyntax
 /**
  * Attunement-specific effect data model.
  *
  * Relevant wiki pages:
  * - [Presence](https://wiki.teriock.com/index.php/Core:Presence)
- * @implements {Teriock.Models.AttunementSystemInterface}
+ *
+ * @extends {Teriock.Models.AttunementSystemInterface}
  */
 export default class AttunementSystem extends BaseEffectSystem {
   /** @inheritDoc */

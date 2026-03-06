@@ -1,4 +1,4 @@
-import { FormulaField } from "../../fields/_module.mjs";
+import { FormulaField } from "../../../fields/_module.mjs";
 import BaseAutomation from "./base-automation.mjs";
 
 export default class ThresholdAutomation extends BaseAutomation {

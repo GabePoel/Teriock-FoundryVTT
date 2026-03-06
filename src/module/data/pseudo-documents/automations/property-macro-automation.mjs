@@ -1,5 +1,5 @@
 import { triggers } from "../../../constants/system/_module.mjs";
-import BaseAutomation from "./base-automation.mjs";
+import { BaseAutomation } from "./abstract/_module.mjs";
 import { MacroAutomationMixin } from "./mixins/_module.mjs";
 
 //noinspection JSClosureCompilerSyntax

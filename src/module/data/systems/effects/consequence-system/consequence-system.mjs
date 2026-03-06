@@ -11,11 +11,10 @@ import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
 
 const { fields } = foundry.data;
 
-//noinspection JSClosureCompilerSyntax
 /**
  * Effect-specific effect data model.
  * @extends {BaseEffectSystem}
- * @implements {Teriock.Models.ConsequenceSystemInterface}
+ * @extends {Teriock.Models.ConsequenceSystemInterface}
  * @mixes HierarchySystem
  * @mixes TransformationSystem
  */
@@ -93,6 +92,17 @@ export default class ConsequenceSystem extends mix(
   }
 
   /** @inheritDoc */
+  get _nameTags() {
+    const tags = super._nameTags;
+    if (this.critical) {
+      tags.unshift(
+        game.i18n.localize("TERIOCK.SYSTEMS.Consequence.PANELS.critical"),
+      );
+    }
+    return tags;
+  }
+
+  /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
     parts.subtitle = this.parent.remainingString;
@@ -111,15 +121,6 @@ export default class ConsequenceSystem extends mix(
   /** @inheritDoc */
   get messageBlocks() {
     return this.blocks;
-  }
-
-  /** @inheritDoc */
-  get nameString() {
-    let ns = super.nameString;
-    if (this.critical) {
-      ns += ` (${game.i18n.localize("TERIOCK.SYSTEMS.Consequence.PANELS.critical")})`;
-    }
-    return ns;
   }
 
   /** @inheritDoc */

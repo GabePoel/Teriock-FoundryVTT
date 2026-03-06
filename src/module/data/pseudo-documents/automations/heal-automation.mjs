@@ -1,5 +1,5 @@
 import { HealHandler } from "../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
-import StatAutomation from "./stat-automation.mjs";
+import { StatAutomation } from "./abstract/_module.mjs";
 
 const { fields } = foundry.data;
 

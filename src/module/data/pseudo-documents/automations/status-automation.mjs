@@ -3,9 +3,9 @@ import ChatStatusAutomation from "./chat-status-automation.mjs";
 const { fields } = foundry.data;
 
 /**
- * @param {"apply"|"remove"|"toggle"|"include"} relation
- * @param {boolean} target
- * @param {boolean} executor
+ * @property {"apply"|"remove"|"toggle"|"include"} relation
+ * @property {boolean} target
+ * @property {boolean} executor
  */
 export default class StatusAutomation extends ChatStatusAutomation {
   /** @inheritDoc */

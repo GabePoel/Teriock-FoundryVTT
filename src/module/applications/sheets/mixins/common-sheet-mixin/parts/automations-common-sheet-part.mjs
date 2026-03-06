@@ -1,4 +1,4 @@
-import { BaseAutomation } from "../../../../../data/pseudo-documents/automations/_module.mjs";
+import { BaseAutomation } from "../../../../../data/pseudo-documents/automations/abstract/_module.mjs";
 import { localizeChoices } from "../../../../../helpers/localization.mjs";
 import { objectMap } from "../../../../../helpers/utils.mjs";
 import { selectDialog } from "../../../../dialogs/select-dialog.mjs";

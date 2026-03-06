@@ -1,6 +1,6 @@
 import { TeriockJournalEntryPage } from "../../../../documents/_module.mjs";
 import { TypeCollection } from "../../../../documents/collections/_module.mjs";
-import { BaseAutomation } from "../../../pseudo-documents/automations/_module.mjs";
+import { BaseAutomation } from "../../../pseudo-documents/automations/abstract/_module.mjs";
 
 export type ChildDeltaMap = Record<
   CommonDocumentName,
@@ -12,7 +12,7 @@ export type ChildDeltaMap = Record<
 
 declare global {
   namespace Teriock.Models {
-    export interface CommonSystemInterface {
+    export type CommonSystemInterface = {
       /** <schema> Automations */
       automations: TypeCollection<ID<BaseAutomation>, BaseAutomation>;
       /** <base> Boosts formulas by roll type */
@@ -21,6 +21,6 @@ declare global {
       gmNotes: UUID<TeriockJournalEntryPage>;
 
       get parent(): AnyCommonDocument;
-    }
+    };
   }
 }

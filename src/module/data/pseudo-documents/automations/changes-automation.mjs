@@ -1,6 +1,6 @@
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { qualifiedChangeField } from "../../fields/helpers/builders.mjs";
-import CritAutomation from "./crit-automation.mjs";
+import { CritAutomation } from "./abstract/_module.mjs";
 
 const { fields } = foundry.data;
 

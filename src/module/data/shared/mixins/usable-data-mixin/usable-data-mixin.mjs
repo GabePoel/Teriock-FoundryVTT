@@ -7,11 +7,10 @@ const { fields } = foundry.data;
  * @param {typeof EmbeddedDataModel | typeof CommonSystem} Base
  */
 export default function UsableDataMixin(Base) {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
      * @extends {EmbeddedDataModel|CommonSystem}
-     * @implements {Teriock.Models.UsableDataInterface}
+     * @extends {Teriock.Models.UsableDataInterface}
      * @mixin
      */
     class UsableData extends Base {

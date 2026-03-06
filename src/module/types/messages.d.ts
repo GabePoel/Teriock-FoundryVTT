@@ -56,23 +56,23 @@ declare global {
 
     /** Represents the individual rules-parts that make up a message. */
     export type MessagePanel = {
-      /** The URL or path to the image associated with the message. */
-      image?: string;
-      /** The name or title to display in the message. */
-      name?: string;
+      associations?: Teriock.MessageData.MessageAssociation[];
       bars?: Teriock.MessageData.MessageBar[];
       blocks?: Teriock.MessageData.MessageBlock[];
-      /** Font used for a message. Message uses font if nothing is specified. */
-      font?: Teriock.Parameters.Shared.Font;
-      associations?: Teriock.MessageData.MessageAssociation[];
-      /** Font Awesome icons */
-      icon?: string;
-      /** Label that gets displayed upon hovering over icon. */
-      label?: string;
-      /** Color to assign to the image border. */
-      color?: string;
       /** Additional CSS classes to add */
       classes?: string;
+      /** Color to assign to the image border. */
+      color?: string;
+      /** Font used for a message. Message uses font if nothing is specified. */
+      font?: Teriock.Parameters.Shared.Font;
+      /** Font Awesome icons */
+      icon?: string;
+      /** The URL or path to the image associated with the message. */
+      image?: string;
+      /** Label that gets displayed upon hovering over icon. */
+      label?: string;
+      /** The name or title to display in the message. */
+      name?: string;
       /** UUID of a document that can be opened */
       uuid?: UUID<ChildDocument>;
     };

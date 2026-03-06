@@ -5,11 +5,10 @@ const { fields } = foundry.data;
  * @param {typeof AbilitySystem} Base
  */
 export default (Base) => {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @extends {AbilitySystem}
-     * @implements {Teriock.Models.AbilityTagsPartInterface}
+     * @extends {BaseEffectSystem}
+     * @extends {Teriock.Models.AbilityTagsPartInterface}
      * @mixin
      */
     class AbilityTagsPart extends Base {
@@ -32,7 +31,6 @@ export default (Base) => {
               choices: TERIOCK.reference.powerSources,
             }),
           ),
-          tag: new fields.StringField({ initial: "" }),
         });
       }
 

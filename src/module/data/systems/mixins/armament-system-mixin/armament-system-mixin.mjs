@@ -13,11 +13,10 @@ const { fields } = foundry.data;
  * @param {typeof BaseItemSystem} Base
  */
 export default function ArmamentSystemMixin(Base) {
-  //noinspection JSClosureCompilerSyntax,JSUnusedGlobalSymbols
   return (
     /**
      * @extends {BaseItemSystem}
-     * @implements {Teriock.Models.ArmamentSystemInterface}
+     * @extends {Teriock.Models.ArmamentSystemInterface}
      * @mixes AttackSystem
      * @mixin
      */
@@ -259,7 +258,7 @@ export default function ArmamentSystemMixin(Base) {
         super.prepareBaseData();
 
         // What this deals
-        /** @type {Set<Record<Teriock.Parameters.Consequence.RollConsequenceKey>} */
+        /** @type {Set<Record<Teriock.Parameters.Consequence.RollConsequenceKey>>} */
         this.deals = new Set(["damage"]);
 
         // Properties

@@ -1,13 +1,12 @@
-import { localizeChoices } from "../../../helpers/localization.mjs";
-import { competenceField } from "../../fields/helpers/builders.mjs";
-import { PropagationDataMixin } from "../../shared/mixins/_module.mjs";
-import TypedPseudoDocument from "../abstract/typed-pseudo-document.mjs";
+import { localizeChoices } from "../../../../helpers/localization.mjs";
+import { competenceField } from "../../../fields/helpers/builders.mjs";
+import { PropagationDataMixin } from "../../../shared/mixins/_module.mjs";
+import TypedPseudoDocument from "../../abstract/typed-pseudo-document.mjs";
 
 const { fields } = foundry.data;
 
-//noinspection JSClosureCompilerSyntax
 /**
- * @implements {Teriock.Automations.BaseAutomationInterface}
+ * @extends {Teriock.Automations.BaseAutomationInterface}
  * @extends {TypedPseudoDocument}
  * @mixes PropagationData
  */

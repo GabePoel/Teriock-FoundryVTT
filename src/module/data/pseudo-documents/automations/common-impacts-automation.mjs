@@ -5,7 +5,7 @@ import {
 } from "../../../helpers/interaction/_module.mjs";
 import { formatJoin } from "../../../helpers/string.mjs";
 import { makeIconClass } from "../../../helpers/utils.mjs";
-import BaseAutomation from "./base-automation.mjs";
+import BaseAutomation from "./abstract/base-automation.mjs";
 import { TriggerAutomationMixin } from "./mixins/_module.mjs";
 
 const { fields } = foundry.data;

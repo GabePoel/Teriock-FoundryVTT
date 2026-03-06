@@ -1,3 +1,6 @@
+import { currencyOptions } from "../../../../../../constants/options/currency-options.mjs";
+import { objectMap } from "../../../../../../helpers/utils.mjs";
+
 const { fields } = foundry.data;
 
 /**
@@ -5,11 +8,10 @@ const { fields } = foundry.data;
  * @param {typeof BaseActorSystem} Base
  */
 export default (Base) => {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @extends {BaseActorSystem}
-     * @implements {ActorMoneyPartInterface}
+     * @extends {CommonSystem}
+     * @extends {ActorMoneyPartInterface}
      * @mixin
      */
     class ActorMoneyPart extends Base {
@@ -22,19 +24,9 @@ export default (Base) => {
             label: "Interest Rate",
           }),
           money: new fields.SchemaField({
-            copper: currencyField("Copper Coins"),
-            dragonEmerald: currencyField("Dragon Emeralds"),
-            entTearAmber: currencyField("Ent Tear Amber"),
-            fireEyeRuby: currencyField("Fire Eye Rubies"),
-            gold: currencyField("Gold Coins"),
-            heartstoneRuby: currencyField("Heartstone Rubies"),
-            magusQuartz: currencyField("Magus Quartz"),
-            moonOpal: currencyField("Moon Opals"),
-            pixiePlumAmethyst: currencyField("Pixie Plum Amethysts"),
-            silver: currencyField("Silver Coins"),
-            snowDiamond: currencyField("Snow Diamonds"),
-            debt: currencyField("Debt", false),
+            ...objectMap(currencyOptions, (o) => currencyField(o.name)),
             total: currencyField("Total Money", false),
+            debt: currencyField("Debt", false),
           }),
         });
       }
@@ -42,13 +34,16 @@ export default (Base) => {
       /** @inheritDoc */
       getRollData() {
         const rollData = super.getRollData();
-        for (const [k, v] of Object.entries(MONEY_MAP)) {
+        for (const v of Object.keys(currencyOptions)) {
+          const k = v.slice(0, 3);
           rollData[`money.${k}.num`] = this.money[v];
           rollData[`money.${k}.val`] =
             TERIOCK.options.currency[v].value * this.money[v];
-          rollData[`money.${k}.total`] =
+          rollData[`money.${k}.weight`] =
             TERIOCK.options.currency[v].weight * this.money[v];
         }
+        rollData[`money.debt`] = this.money.debt;
+        rollData[`money.total`] = this.money.total;
         return rollData;
       }
 
@@ -187,17 +182,3 @@ function currencyField(label, integer = true) {
     min: 0,
   });
 }
-
-const MONEY_MAP = {
-  cop: "copper",
-  sil: "silver",
-  gol: "gold",
-  ent: "entTearAmber",
-  fir: "fireEyeRuby",
-  pix: "pixiePlumAmethyst",
-  sno: "snowDiamond",
-  dra: "dragonEmerald",
-  moo: "moonOpal",
-  mag: "magusQuartz",
-  hea: "heartstoneRuby",
-};

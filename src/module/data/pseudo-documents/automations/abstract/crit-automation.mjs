@@ -1,4 +1,4 @@
-import { localizeChoices } from "../../../helpers/localization.mjs";
+import { localizeChoices } from "../../../../helpers/localization.mjs";
 import BaseAutomation from "./base-automation.mjs";
 
 const { fields } = foundry.data;

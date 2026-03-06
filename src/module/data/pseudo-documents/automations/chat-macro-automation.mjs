@@ -1,4 +1,4 @@
-import { BaseAutomation } from "./_module.mjs";
+import { BaseAutomation } from "./abstract/_module.mjs";
 import { MacroAutomationMixin } from "./mixins/_module.mjs";
 
 export default class ChatMacroAutomation extends MacroAutomationMixin(

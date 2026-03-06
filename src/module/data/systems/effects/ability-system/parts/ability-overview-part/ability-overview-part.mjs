@@ -7,11 +7,10 @@ const { fields } = foundry.data;
  * @param {typeof AbilitySystem} Base
  */
 export default (Base) => {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @extends {AbilitySystem}
-     * @implements {Teriock.Models.AbilityOverviewPartInterface}
+     * @extends {BaseEffectSystem}
+     * @extends {Teriock.Models.AbilityOverviewPartInterface}
      * @mixin
      */
     class AbilityOverviewPart extends Base {

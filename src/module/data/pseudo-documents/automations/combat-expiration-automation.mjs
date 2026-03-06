@@ -1,5 +1,5 @@
 import { builders } from "../../fields/helpers/_module.mjs";
-import CritAutomation from "./crit-automation.mjs";
+import { CritAutomation } from "./abstract/_module.mjs";
 
 const { fields } = foundry.data;
 

@@ -282,12 +282,12 @@ export default class TeriockTokenDocument extends mix(
       if (this.actor?.system.senses.dark > 0) {
         visionMode = "darkvision";
       }
-      if (
-        this.actor?.system.senses.night > 0 &&
-        this.actor?.system.senses.night >= this.actor?.system.senses.dark
-      ) {
-        visionMode = "lightAmplification";
-      }
+      //if (
+      //  this.actor?.system.senses.night > 0 &&
+      //  this.actor?.system.senses.night >= this.actor?.system.senses.dark
+      //) {
+      //  visionMode = "lightAmplification";
+      //}
       if (this.hasStatusEffect("ethereal")) {
         visionMode = "ethereal";
         angle = this.actor?.system.light.angle || angle;
@@ -306,7 +306,7 @@ export default class TeriockTokenDocument extends mix(
       }
       range = Math.max(
         this.actor?.system.senses.dark,
-        this.actor?.system.senses.night,
+        //this.actor?.system.senses.night,
         this.actor?.system.senses.blind,
         this.actor?.system.senses.hearing,
         this.actor?.system.senses.etherealLight,

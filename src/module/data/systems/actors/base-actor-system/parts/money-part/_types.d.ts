@@ -1,4 +1,4 @@
-export default interface ActorMoneyPartInterface {
+export type ActorMoneyPartInterface = {
   /** <schema> Interest rate */
   interestRate: number;
   /** <schema> Money */
@@ -30,4 +30,4 @@ export default interface ActorMoneyPartInterface {
     /** <schema> Total money in gold */
     total: number;
   };
-}
+};

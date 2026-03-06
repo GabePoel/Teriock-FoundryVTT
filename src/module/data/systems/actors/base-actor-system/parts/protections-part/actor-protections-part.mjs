@@ -13,11 +13,10 @@ const { fields } = foundry.data;
  * @param {typeof BaseActorSystem} Base
  */
 export default (Base) => {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @extends {BaseActorSystem}
-     * @implements {ActorProtectionsPartInterface}
+     * @extends {CommonSystem}
+     * @extends {ActorProtectionsPartInterface}
      * @mixin
      */
     class ActorProtectionsPart extends Base {

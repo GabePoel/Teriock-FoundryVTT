@@ -6,9 +6,9 @@ import { EvaluationModel } from "../../../../../models/_module.mjs";
 
 declare global {
   namespace Teriock.Models {
-    export interface AbilityUsagePartInterface {
+    export type AbilityUsagePartInterface = {
       /** <schema> This ability's delivery */
-      delivery: DeliveryConfig;
+      delivery: Teriock.Parameters.Ability.Delivery;
       /** <schema> This ability's execution time */
       executionTime: {
         base: Teriock.Parameters.Ability.ExecutionTime;
@@ -35,33 +35,8 @@ declare global {
       range: RangeModel;
       /** <schema> Appropriate targets */
       targets: Set<Teriock.Parameters.Ability.Target>;
-    }
+    };
   }
-}
-
-/**
- * Valid delivery packages
- */
-export type DeliveryPackage =
-  | "ball"
-  | "ray"
-  | "ritual"
-  | "strike"
-  | "touch"
-  | null;
-
-/**
- * Valid delivery parents
- */
-export type DeliveryParent = "item" | null;
-
-/**
- * Delivery configuration
- */
-export interface DeliveryConfig {
-  base: Teriock.Parameters.Ability.Delivery;
-  package: DeliveryPackage;
-  parent: DeliveryParent;
 }
 
 export {};

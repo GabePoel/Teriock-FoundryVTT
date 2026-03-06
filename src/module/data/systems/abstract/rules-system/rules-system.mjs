@@ -3,9 +3,8 @@ import BaseSystem from "../base-system.mjs";
 
 const { fields } = foundry.data;
 
-//noinspection JSClosureCompilerSyntax
 /**
- * @implements {Teriock.Models.RulesSystemInterface}
+ * @extends {Teriock.Models.RulesSystemInterface}
  */
 export default class RulesSystem extends BaseSystem {
   /** @inheritDoc */

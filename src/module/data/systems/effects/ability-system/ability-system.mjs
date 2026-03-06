@@ -28,6 +28,7 @@ import * as parts from "./parts/_module.mjs";
  * @mixes AbilityResultsPart
  * @mixes AbilityTagsPart
  * @mixes AbilityUpgradesPart
+ * @mixes AdjustableSystem
  * @mixes ConsumableSystem
  * @mixes HierarchySystem
  * @mixes AttackSystem
@@ -45,6 +46,7 @@ export default class AbilitySystem extends mix(
   mixins.CompetenceDisplaySystemMixin,
   mixins.RevelationSystemMixin,
   mixins.WikiSystemMixin,
+  mixins.AdjustableSystemMixin,
   parts.AbilityAutomationsPart,
   parts.AbilityCostsPart,
   parts.AbilityDurationPart,
@@ -63,6 +65,14 @@ export default class AbilitySystem extends mix(
   static LOCALIZATION_PREFIXES = [
     ...super.LOCALIZATION_PREFIXES,
     "TERIOCK.SYSTEMS.Ability",
+  ];
+
+  /** @inheritDoc */
+  static PRESERVED_PROPERTIES = [
+    "system.adept",
+    "system.gifted",
+    "system.grantOnly",
+    ...super.PRESERVED_PROPERTIES,
   ];
 
   /** @inheritDoc */
@@ -100,22 +110,32 @@ export default class AbilitySystem extends mix(
       indexCompendiumKey: "abilities",
       namespace: "Ability",
       passive: true,
-      preservedProperties: [
-        "system.adept",
-        "system.competence",
-        "system.consumable",
-        "system.gifted",
-        "system.grantOnly",
-        "system.improvement",
-        "system.limitation",
-        "system.maxQuantity",
-        "system.quantity",
-        "system.tag",
-      ],
       type: "ability",
       usable: true,
       visibleTypes: ["ability"],
     });
+  }
+
+  get _nameTags() {
+    const tags = [];
+    if (this.adept.enabled) {
+      tags.push(
+        game.i18n.localize(
+          "TERIOCK.SYSTEMS.Ability.FIELDS.adept.enabled.label",
+        ),
+      );
+    }
+    if (this.gifted.enabled) {
+      tags.push(
+        game.i18n.localize(
+          "TERIOCK.SYSTEMS.Ability.FIELDS.gifted.enabled.label",
+        ),
+      );
+    }
+    if (this.grantOnly) {
+      tags.push(game.i18n.localize("TERIOCK.SYSTEMS.Ability.NAME.granted"));
+    }
+    return [...tags, ...super._nameTags];
   }
 
   /** @inheritDoc */
@@ -153,8 +173,7 @@ export default class AbilitySystem extends mix(
       "system.costs.materialCost",
       "system.trigger",
       "system.requirements",
-      "system.limitation",
-      "system.improvement",
+      ...this.constructor._adjustableTextFields,
       "system.overview.base",
       {
         path: "system.overview.proficient",
@@ -374,54 +393,6 @@ export default class AbilitySystem extends mix(
       this.parent.inCompendium &&
       this.parent.parent.system.identifier === "basic-abilities"
     );
-  }
-
-  /** @inheritDoc */
-  get nameString() {
-    const additions = [];
-    let suffix = "";
-    if (this.tag && this.tag.length > 0) {
-      suffix = `: ${this.tag}`;
-    }
-    if (this.adept.enabled) {
-      additions.push(
-        game.i18n.localize(
-          "TERIOCK.SYSTEMS.Ability.FIELDS.adept.enabled.label",
-        ),
-      );
-    }
-    if (this.gifted.enabled) {
-      additions.push(
-        game.i18n.localize(
-          "TERIOCK.SYSTEMS.Ability.FIELDS.gifted.enabled.label",
-        ),
-      );
-    }
-    if (this.limitation && this.limitation.length > 0) {
-      additions.push(
-        game.i18n.localize("TERIOCK.SYSTEMS.BaseEffect.NAME.limited"),
-      );
-    }
-    if (this.improvement && this.improvement.length > 0) {
-      additions.push(
-        game.i18n.localize("TERIOCK.SYSTEMS.BaseEffect.NAME.improved"),
-      );
-    }
-    if (this.grantOnly) {
-      additions.push(
-        game.i18n.localize("TERIOCK.SYSTEMS.Ability.NAME.granted"),
-      );
-    }
-    if (!this.revealed) {
-      additions.push(
-        game.i18n.localize("TERIOCK.SYSTEMS.BaseEffect.NAME.unrevealed"),
-      );
-    }
-    let nameAddition = "";
-    if (additions.length > 0) {
-      nameAddition = ` (${additions.join(", ")})`;
-    }
-    return this.parent.name.trim() + suffix + nameAddition;
   }
 
   /**

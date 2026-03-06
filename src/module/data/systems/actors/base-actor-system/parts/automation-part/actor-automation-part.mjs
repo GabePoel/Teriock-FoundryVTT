@@ -3,11 +3,10 @@
  * @param {typeof BaseActorSystem} Base
  */
 export default (Base) => {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @extends {BaseActorSystem}
-     * @implements {ActorAutomationPartInterface}
+     * @extends {CommonSystem}
+     * @extends {ActorAutomationPartInterface}
      * @mixin
      */
     class ActorAutomationPart extends Base {

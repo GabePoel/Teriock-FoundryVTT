@@ -12,11 +12,10 @@ const { fields } = foundry.data;
  * @param {typeof BaseItemSystem} Base
  */
 export default function StatGiverSystemMixin(Base) {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
      * @extends {BaseItemSystem}
-     * @implements {Teriock.Models.StatGiverSystemInterface}
+     * @extends {Teriock.Models.StatGiverSystemInterface}
      * @mixin
      */
     class StatGiverSystem extends Base {
@@ -45,38 +44,6 @@ export default function StatGiverSystemMixin(Base) {
             }),
           }),
         });
-      }
-
-      /**
-       * Whether the HP dice can be disabled.
-       * @returns {boolean}
-       */
-      get _canDisableHpDice() {
-        return !this.statDice.hp.disabled;
-      }
-
-      /**
-       * Whether the MP dice can be disabled.
-       * @returns {boolean}
-       */
-      get _canDisableMpDice() {
-        return !this.statDice.mp.disabled;
-      }
-
-      /**
-       * Whether the HP dice can be enabled.
-       * @returns {boolean}
-       */
-      get _canEnableHpDice() {
-        return this.statDice.hp.disabled;
-      }
-
-      /**
-       * Whether the MP dice can be enabled.
-       * @returns {boolean}
-       */
-      get _canEnableMpDice() {
-        return this.statDice.mp.disabled;
       }
 
       /**

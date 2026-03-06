@@ -11,39 +11,20 @@ const { fields } = foundry.data;
  * @param {typeof BaseActorSystem} Base
  */
 export default (Base) => {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @extends {BaseActorSystem}
-     * @implements {ActorStatsPartInterface}
+     * @extends {CommonSystem}
+     * @extends {ActorStatsPartInterface}
      * @mixin
      */
     class ActorStatsPart extends Base {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          hp: new fields.SchemaField({
-            max: new fields.NumberField({ initial: 1 }),
-            min: new fields.NumberField({ initial: 0 }),
-            morganti: new fields.NumberField({ initial: 0 }),
-            temp: new fields.NumberField({ initial: 0 }),
-            value: new fields.NumberField({ initial: 1 }),
-          }),
-          mp: new fields.SchemaField({
-            max: new fields.NumberField({ initial: 1 }),
-            min: new fields.NumberField({ initial: 0 }),
-            morganti: new fields.NumberField({ initial: 0 }),
-            temp: new fields.NumberField({ initial: 0 }),
-            value: new fields.NumberField({ initial: 1 }),
-          }),
-          presence: statField("", {
-            max: 1,
-            value: 0,
-          }),
-          wither: statField("", {
-            max: 100,
-            value: 20,
-          }),
+          hp: statField({ temp: true, morganti: true }),
+          mp: statField({ temp: true, morganti: true }),
+          presence: statField({ max: 1, value: 0 }),
+          wither: statField({ max: 100, value: 20 }),
         });
       }
 
@@ -270,15 +251,15 @@ export default (Base) => {
 
 /**
  * Creates a stat field definition with min, max, and current values, plus optional base and temp fields.
- * @param {string} _name - The name of the stat (e.g., "HP", "MP", "Wither")
  * @param {object} [options] - Configuration options for the stat field
  * @param {number} [options.min=0] - Initial minimum value for the stat
  * @param {number} [options.max=1] - Initial maximum value for the stat
  * @param {number} [options.value=1] - Initial current value for the stat
- * @param {boolean} [options.base=false] - Whether to include a base value field
- * @param {boolean} [options.temp=false] - Whether to include a temporary value field
+ * @param {boolean} [options.base=false] - Whether to include a base value
+ * @param {boolean} [options.temp=false] - Whether to include a temporary value
+ * @param {boolean} [options.morganti=false] - Whether to include a morganti value
  */
-function statField(_name, options = {}) {
+function statField(options = {}) {
   const schema = {
     max: new fields.NumberField({
       initial: options.max ?? 1,
@@ -293,14 +274,15 @@ function statField(_name, options = {}) {
       integer: true,
     }),
   };
-  if (options.base) {
-    schema.base = new fields.NumberField({
-      initial: 1,
-      integer: true,
-    });
-  }
   if (options.temp) {
     schema.temp = new fields.NumberField({
+      initial: 0,
+      integer: true,
+      min: 0,
+    });
+  }
+  if (options.morganti) {
+    schema.morganti = new fields.NumberField({
       initial: 0,
       integer: true,
       min: 0,

@@ -4,13 +4,13 @@ import {
   ToggleStatusHandler,
 } from "../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
-import CritAutomation from "./crit-automation.mjs";
+import { CritAutomation } from "./abstract/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
- * @param {Teriock.Parameters.Condition.ConditionKey} status
- * @param {"apply"|"remove"|"toggle"} relation
+ * @property {Teriock.Parameters.Condition.ConditionKey} status
+ * @property {"apply"|"remove"|"toggle"} relation
  */
 export default class ChatStatusAutomation extends CritAutomation {
   /** @inheritDoc */

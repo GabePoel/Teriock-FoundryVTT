@@ -5,10 +5,9 @@ import { makeIcon } from "../../../../../helpers/utils.mjs";
  * @param {typeof AbilitySystem} Base
  */
 export default (Base) => {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @extends {AbilitySystem}
+     * @extends {BaseEffectSystem}
      * @mixin
      */
     class AbilityRankPart extends Base {

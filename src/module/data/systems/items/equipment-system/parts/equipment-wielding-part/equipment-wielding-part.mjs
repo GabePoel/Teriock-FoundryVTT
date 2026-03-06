@@ -10,11 +10,11 @@ const { fields } = foundry.data;
  * @param {typeof EquipmentSystem} Base
  */
 export default (Base) => {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @extends {EquipmentSystem}
-     * @implements {EquipmentWieldingPartInterface}
+     * @extends {BaseItemSystem}
+     * @extends {EquipmentWieldingPartInterface}
+     * @property {ClientDocument} parent
      * @mixin
      */
     class EquipmentWieldingPart extends Base {

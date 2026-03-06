@@ -4,11 +4,10 @@ import * as automations from "../../../pseudo-documents/automations/_module.mjs"
 import * as mixins from "../../mixins/_module.mjs";
 import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
 
-//noinspection JSClosureCompilerSyntax
 /**
  * Resource-specific effect data model.
  * @extends {BaseEffectSystem}
- * @implements {Teriock.Models.ResourceSystemInterface}
+ * @extends {Teriock.Models.ResourceSystemInterface}
  * @mixes ConsumableSystem
  * @mixes RevelationSystem
  */
@@ -45,12 +44,6 @@ export default class ResourceSystem extends mix(
       suppressed = !this.parent.parent.system.isAttuned;
     }
     return suppressed;
-  }
-
-  /** @inheritDoc */
-  get nameString() {
-    const nameAddition = this.revealed ? "" : " (Unrevealed)";
-    return this.parent.name + nameAddition;
   }
 
   /** @inheritDoc */

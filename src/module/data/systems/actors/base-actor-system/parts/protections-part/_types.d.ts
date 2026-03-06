@@ -4,10 +4,10 @@ export type ProtectionTypeKey = keyof typeof protectionOptions.types;
 
 export type ProtectionCategoryKey = keyof typeof protectionOptions.categories;
 
-export default interface ActorProtectionsPartInterface {
+export type ActorProtectionsPartInterface = {
   /** <base> Protections */
   protections: Record<
     ProtectionTypeKey,
     Record<ProtectionCategoryKey, Set<string>>
   >;
-}
+};

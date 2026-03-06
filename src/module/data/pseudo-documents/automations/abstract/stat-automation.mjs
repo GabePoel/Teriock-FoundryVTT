@@ -1,5 +1,5 @@
+import { TriggerAutomationMixin } from "../mixins/_module.mjs";
 import BaseAutomation from "./base-automation.mjs";
-import { TriggerAutomationMixin } from "./mixins/_module.mjs";
 
 const { fields } = foundry.data;
 

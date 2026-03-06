@@ -10,7 +10,6 @@ import * as parts from "./parts/_module.mjs";
 
 const { fields } = foundry.data;
 
-//noinspection JSClosureCompilerSyntax
 /**
  * Species-specific item data model.
  *
@@ -18,7 +17,7 @@ const { fields } = foundry.data;
  * - [Creatures](https://wiki.teriock.com/index.php/Category:Creatures)
  *
  * @extends {BaseItemSystem}
- * @implements {Teriock.Models.SpeciesSystemInterface}
+ * @extends {Teriock.Models.SpeciesSystemInterface}
  * @mixes CompetenceDisplaySystem
  * @mixes SpeciesPanelPart
  * @mixes StatGiverSystem
@@ -278,6 +277,7 @@ export default class SpeciesSystem extends mix(
     ];
   }
 
+  /** @inheritDoc */
   getLocalRollData() {
     const data = super.getLocalRollData();
     Object.assign(data, {
@@ -345,28 +345,16 @@ export default class SpeciesSystem extends mix(
         img: this.parent.img,
         prototypeToken: {
           name: this.parent.name,
-          ring: {
-            enabled: hasTokenImg,
-          },
-          texture: {
-            src: tokenImg,
-          },
+          ring: { enabled: hasTokenImg },
+          texture: { src: tokenImg },
           width: TeriockActor.sizeDefinition(this.size.value).length / 5,
           height: TeriockActor.sizeDefinition(this.size.value).length / 5,
         },
         items: [game.items.fromCompendium(this.parent)],
         system: {
-          hp: {
-            value: 999999,
-          },
-          mp: {
-            value: 999999,
-          },
-          size: {
-            number: {
-              saved: this.size.value,
-            },
-          },
+          hp: { value: 999999 },
+          mp: { value: 999999 },
+          size: { number: { saved: this.size.value } },
         },
       },
       data,

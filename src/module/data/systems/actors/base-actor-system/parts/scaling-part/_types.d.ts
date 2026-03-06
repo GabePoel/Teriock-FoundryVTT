@@ -1,12 +1,6 @@
-export default interface ActorScalingPartInterface {
+export type ActorScalingPartInterface = {
   /** <base> Presence */
-  presence: {
-    /** <base> Maximum presence tier */
-    max: number;
-    /** <base> Minimum presence tier */
-    min: number;
-    /** <derived> Currently used presence tier */
-    value: number;
+  presence: Teriock.Foundry.BarField & {
     /** <derived> Too much presence being used */
     overflow: boolean;
   };
@@ -27,4 +21,4 @@ export default interface ActorScalingPartInterface {
     /** <base> Scaling term, either LVL or BR */
     scale: number;
   };
-}
+};

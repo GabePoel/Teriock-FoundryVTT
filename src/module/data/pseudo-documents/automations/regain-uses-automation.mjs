@@ -4,7 +4,7 @@ import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
 import { makeIconClass } from "../../../helpers/utils.mjs";
 import { FormulaField } from "../../fields/_module.mjs";
-import BaseAutomation from "./base-automation.mjs";
+import { BaseAutomation } from "./abstract/_module.mjs";
 import { TriggerAutomationMixin } from "./mixins/_module.mjs";
 
 /**

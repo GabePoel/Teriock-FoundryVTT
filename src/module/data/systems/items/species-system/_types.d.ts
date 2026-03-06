@@ -7,8 +7,7 @@ export type SizeAbilityStep = {
 
 declare global {
   namespace Teriock.Models {
-    export interface SpeciesSystemInterface
-      extends Teriock.Models.BaseItemSystemInterface {
+    export type SpeciesSystemInterface = {
       /** <schema> Age of maturity */
       adult: number;
       /** <schema> Appearance */
@@ -24,15 +23,9 @@ declare global {
       /** <schema> Maximum lifespan */
       lifespan: number | null;
       /** <schema> Size constraints */
-      size: {
+      size: Teriock.Foundry.BarField & {
         /** <schema> Enabled */
         enabled: boolean;
-        /** <schema> Maximum size */
-        max: number;
-        /** <schema> Minimum size */
-        min: number;
-        /** <schema> Size */
-        value: number;
       };
       /** <schema> Size adjustments */
       sizeStepAbilities: Record<number, SizeAbilityStep>;
@@ -46,6 +39,6 @@ declare global {
       transformationLevel: Teriock.Parameters.Shared.TransformationLevel | null;
 
       get parent(): TeriockSpecies;
-    }
+    };
   }
 }

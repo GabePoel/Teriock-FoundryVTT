@@ -15,142 +15,140 @@ import { BaseSystem } from "../../abstract/_module.mjs";
 
 const { fields } = foundry.data;
 
-//noinspection JSClosureCompilerSyntax
 /**
- * @implements {Teriock.Models.BaseMessageSystemInterface}
- * @implements {Teriock.Data.BaseMessageData}
+ * @extends {Teriock.Models.BaseMessageSystemInterface}
+ * @extends {Teriock.Data.BaseMessageData}
  */
 export default class BaseMessageSystem extends BaseSystem {
-  //noinspection JSValidateJSDoc
   /**
    * @inheritDoc
    * @returns {Record<string, DataField>}
    */
   static defineSchema() {
-    const schema = {};
-    schema.avatar = new fields.StringField({
-      initial: null,
-      nullable: true,
-      required: false,
-    });
-    schema.columns = new fields.NumberField({ initial: 2 });
-    schema.overlay = new fields.HTMLField({
-      initial: null,
-      nullable: true,
-      required: false,
-    });
-    schema.panels = new fields.ArrayField(
-      new fields.SchemaField({
-        associations: associationsField(),
-        bars: new fields.ArrayField(
-          new fields.SchemaField({
-            icon: new fields.StringField({
+    return {
+      avatar: new fields.StringField({
+        initial: null,
+        nullable: true,
+        required: false,
+      }),
+      columns: new fields.NumberField({ initial: 2 }),
+      overlay: new fields.HTMLField({
+        initial: null,
+        nullable: true,
+        required: false,
+      }),
+      panels: new fields.ArrayField(
+        new fields.SchemaField({
+          associations: associationsField(),
+          bars: new fields.ArrayField(
+            new fields.SchemaField({
+              icon: new fields.StringField({
+                initial: "",
+                required: false,
+              }),
+              label: new fields.StringField({
+                nullable: true,
+                required: false,
+              }),
+              wrappers: new fields.ArrayField(new fields.StringField(), {
+                initial: [],
+                required: false,
+              }),
+            }),
+            {
+              initial: [],
+              required: false,
+            },
+          ),
+          blocks: blocksField(),
+          classes: new fields.StringField({
+            nullable: true,
+            initial: null,
+            required: false,
+          }),
+          color: new fields.StringField({
+            initial: null,
+            nullable: true,
+            required: false,
+          }),
+          font: new fields.StringField({
+            nullable: true,
+            initial: null,
+            required: false,
+          }),
+          icon: new fields.StringField({
+            nullable: true,
+            initial: null,
+            required: false,
+          }),
+          image: new fields.StringField({
+            initial: null,
+            nullable: true,
+            required: false,
+          }),
+          label: new fields.StringField({
+            nullable: true,
+            initial: null,
+            required: false,
+          }),
+          name: new fields.StringField({
+            initial: null,
+            nullable: true,
+            required: false,
+          }),
+          uuid: new fields.DocumentUUIDField({
+            initial: null,
+            nullable: true,
+            required: false,
+          }),
+        }),
+        {
+          initial: [],
+          required: false,
+        },
+      ),
+      buttons: new fields.ArrayField(
+        new fields.SchemaField({
+          label: new fields.StringField(),
+          dataset: new fields.TypedObjectField(
+            new fields.StringField({
               initial: "",
               required: false,
             }),
-            label: new fields.StringField({
-              nullable: true,
-              required: false,
-            }),
-            wrappers: new fields.ArrayField(new fields.StringField(), {
-              initial: [],
-              required: false,
-            }),
-          }),
-          {
-            initial: [],
+          ),
+          classes: new fields.SetField(new fields.StringField(), {
+            initial: ["teriock-chat-button"],
             required: false,
-          },
-        ),
-        blocks: blocksField(),
-        classes: new fields.StringField({
-          nullable: true,
-          initial: null,
-          required: false,
-        }),
-        color: new fields.StringField({
-          initial: null,
-          nullable: true,
-          required: false,
-        }),
-        font: new fields.StringField({
-          nullable: true,
-          initial: null,
-          required: false,
-        }),
-        icon: new fields.StringField({
-          nullable: true,
-          initial: null,
-          required: false,
-        }),
-        image: new fields.StringField({
-          initial: null,
-          nullable: true,
-          required: false,
-        }),
-        label: new fields.StringField({
-          nullable: true,
-          initial: null,
-          required: false,
-        }),
-        name: new fields.StringField({
-          initial: null,
-          nullable: true,
-          required: false,
-        }),
-        uuid: new fields.DocumentUUIDField({
-          initial: null,
-          nullable: true,
-          required: false,
-        }),
-      }),
-      {
-        initial: [],
-        required: false,
-      },
-    );
-    schema.buttons = new fields.ArrayField(
-      new fields.SchemaField({
-        label: new fields.StringField(),
-        dataset: new fields.TypedObjectField(
-          new fields.StringField({
+          }),
+          icon: new fields.StringField({
             initial: "",
             required: false,
           }),
-        ),
-        classes: new fields.SetField(new fields.StringField(), {
-          initial: ["teriock-chat-button"],
-          required: false,
+          type: new fields.StringField({
+            initial: "",
+            required: false,
+          }),
+          disabled: new fields.BooleanField({ required: false }),
         }),
-        icon: new fields.StringField({
-          initial: "",
+        {
+          initial: [],
           required: false,
-        }),
-        type: new fields.StringField({
-          initial: "",
-          required: false,
-        }),
-        disabled: new fields.BooleanField({ required: false }),
-      }),
-      {
+        },
+      ),
+      tags: new fields.ArrayField(new fields.StringField(), {
         initial: [],
         required: false,
-      },
-    );
-    schema.tags = new fields.ArrayField(new fields.StringField(), {
-      initial: [],
-      required: false,
-    });
-    schema.extraContent = new fields.HTMLField({
-      initial: "",
-      required: false,
-    });
-    schema.source = new fields.DocumentUUIDField({
-      nullable: true,
-      initial: null,
-      required: false,
-    });
-    return schema;
+      }),
+      extraContent: new fields.HTMLField({
+        initial: "",
+        required: false,
+      }),
+      source: new fields.DocumentUUIDField({
+        nullable: true,
+        initial: null,
+        required: false,
+      }),
+    };
   }
 
   /** @returns {TeriockChatMessage} */
@@ -325,7 +323,7 @@ export default class BaseMessageSystem extends BaseSystem {
           const tokenDocument = /** @type {TeriockDocument} */ await fromUuid(
             container.dataset.tokenUuid,
           );
-          tokenDocument?.object.release();
+          if (tokenDocument) tokenDocument.object.release();
         });
 
         container.addEventListener("click", async (event) => {

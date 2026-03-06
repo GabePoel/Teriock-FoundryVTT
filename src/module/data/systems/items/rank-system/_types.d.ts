@@ -2,8 +2,7 @@ import "./_parameters";
 
 declare global {
   namespace Teriock.Models {
-    export interface RankSystemInterface
-      extends Teriock.Models.BaseItemSystemInterface {
+    export type RankSystemInterface = {
       /** <schema> Rank Class Archetype */
       archetype: Teriock.Parameters.Rank.RankArchetype;
       /** <schema> Rank Class Name */
@@ -18,6 +17,6 @@ declare global {
       maxAv: 0 | 1 | 2 | 3 | 4;
 
       get parent(): TeriockRank;
-    }
+    };
   }
 }

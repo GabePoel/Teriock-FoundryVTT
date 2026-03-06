@@ -12,11 +12,10 @@ const { utils } = foundry;
  * @param {typeof BaseActorSystem} Base
  */
 export default (Base) => {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @extends {BaseActorSystem}
-     * @implements {ActorCombatPartInterface}
+     * @extends {CommonSystem}
+     * @extends {ActorCombatPartInterface}
      * @mixin
      */
     class ActorCombatPart extends Base {

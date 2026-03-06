@@ -1,4 +1,4 @@
-export default interface ActorMovementPartInterface {
+export type ActorMovementPartInterface = {
   movementSpeed: number;
   /** <base> Speed adjustments */
   speedAdjustments: {
@@ -25,4 +25,4 @@ export default interface ActorMovementPartInterface {
     /** <base> Walk speed */
     walk: number;
   };
-}
+};

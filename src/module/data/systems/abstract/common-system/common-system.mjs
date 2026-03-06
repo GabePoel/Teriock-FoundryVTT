@@ -1,6 +1,6 @@
 import { TeriockJournalEntry } from "../../../../documents/_module.mjs";
 import { quickAddAssociation } from "../../../../helpers/html.mjs";
-import { mix } from "../../../../helpers/utils.mjs";
+import { fancifyFields, mix } from "../../../../helpers/utils.mjs";
 import {
   AccessDataMixin,
   PropagationDataMixin,
@@ -10,14 +10,13 @@ import RulesSystem from "../rules-system/rules-system.mjs";
 
 const { fields } = foundry.data;
 
-//noinspection JSClosureCompilerSyntax
 /**
  * @extends {BaseSystem}
  * @extends {RulesSystem}
+ * @extends {Teriock.Models.CommonSystemInterface}
  * @mixes PropagationData
  * @mixes AccessData
  * @mixes AutomatableSystem
- * @implements {Teriock.Models.CommonSystemInterface}
  */
 export default class CommonSystem extends mix(
   RulesSystem,
@@ -29,6 +28,21 @@ export default class CommonSystem extends mix(
   static LOCALIZATION_PREFIXES = [
     ...super.LOCALIZATION_PREFIXES,
     "TERIOCK.SYSTEMS.Common",
+  ];
+
+  /**
+   * Properties that will be left unchanged when refreshing from compendium.
+   * @type {string[]}
+   */
+  static PRESERVED_PROPERTIES = [
+    "_id",
+    "_stats",
+    "flags",
+    "folder",
+    "origin",
+    "ownership",
+    "sort",
+    "type",
   ];
 
   /**
@@ -48,7 +62,7 @@ export default class CommonSystem extends mix(
       namespace: "",
       pageNameKey: "name",
       passive: false,
-      preservedProperties: [],
+      preservedProperties: this.PRESERVED_PROPERTIES,
       pseudos: {
         Automation: "system.automations",
       },
@@ -103,7 +117,7 @@ export default class CommonSystem extends mix(
   }
 
   /**
-   * @returns {CommonDocument}
+   * @returns {AnyCommonDocument}
    */
   get document() {
     return this.parent;
@@ -156,6 +170,34 @@ export default class CommonSystem extends mix(
   }
 
   /**
+   * Message panel bars.
+   * @returns {Teriock.MessageData.MessageBar[]}
+   */
+  get messageBars() {
+    return [];
+  }
+
+  /**
+   * Message panel blocks.
+   * @returns {Teriock.MessageData.MessageBlock[]}
+   */
+  get messageBlocks() {
+    return fancifyFields(this.displayFields)
+      .map((f) => {
+        const schema = this.parent.getSchema(f.path);
+        const value = foundry.utils.getProperty(this.parent, f.path);
+        if (value && !schema.gmOnly) {
+          return {
+            title: f.label || schema.label,
+            text: value,
+            classes: f.classes,
+          };
+        }
+      })
+      .filter((f) => f);
+  }
+
+  /**
    * Metadata.
    * @returns {Teriock.Documents.ModelMetadata}
    */
@@ -164,24 +206,17 @@ export default class CommonSystem extends mix(
   }
 
   /**
-   * Type-specific changes to the name string.
-   * @returns {string}
-   */
-  get nameString() {
-    return this.parent.name;
-  }
-
-  /**
    * Gets the message rules-parts for displaying the child document in chat.
    * Includes image, name, and font information from the parent document.
-   * @returns {Teriock.MessageData.MessagePanel} Object containing message display components.
+   * @returns {Partial<Teriock.MessageData.MessagePanel>} Object containing message display components.
    */
   get panelParts() {
+    /** @type {Partial<Teriock.MessageData.MessagePanel>} */
     const parts = {
-      associations: [],
+      associations: /** @type {Teriock.MessageData.MessageAssociation[]} */ [],
       bars: this.messageBars,
       blocks: this.messageBlocks,
-      color: this.color,
+      color: this.color || undefined,
       font: this.font,
       image: this.parent.img,
       name: this.parent.nameString,
@@ -372,30 +407,7 @@ export default class CommonSystem extends mix(
   async getCompendiumSourceRefreshObject() {
     const reference = await this.getCompendiumSource();
     if (reference) {
-      const preservedProperties = [
-        "_id",
-        "_stats",
-        "changes",
-        "disabled",
-        "duration",
-        "effects",
-        "flags",
-        "folder",
-        "items",
-        "origin",
-        "ownership",
-        "sort",
-        "system._ref",
-        "system._sup",
-        "system.qualifiers",
-        "tint",
-        "transfer",
-        "type",
-      ];
       const object = reference.toObject();
-      for (const property of preservedProperties) {
-        foundry.utils.deleteProperty(object, property);
-      }
       for (const property of this.metadata.preservedProperties || []) {
         foundry.utils.deleteProperty(object, property);
       }

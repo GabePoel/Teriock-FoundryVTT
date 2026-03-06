@@ -1,9 +1,9 @@
 import { TeriockTokenDocument } from "../../../../../../documents/_module.mjs";
 
-export default interface ActorAutomationPartInterface {
+export type ActorAutomationPartInterface = {
   /** <base> Information explaining conditions in place. */
   conditionInformation: ConditionInformation;
-}
+};
 
 export type ConditionInformation = Record<
   Teriock.Parameters.Condition.ConditionKey,

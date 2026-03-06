@@ -7,11 +7,10 @@ const { fields } = foundry.data;
  * @param {typeof ChildSystem} Base
  */
 export default function AttackSystemMixin(Base) {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
      * @extends {ChildSystem}
-     * @implements {Teriock.Models.AttackSystemInterface}
+     * @extends {Teriock.Models.AttackSystemInterface}
      * @mixin
      */
     class AttackSystem extends Base {

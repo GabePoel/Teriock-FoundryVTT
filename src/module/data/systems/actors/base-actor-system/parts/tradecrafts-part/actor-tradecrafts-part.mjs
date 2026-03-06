@@ -9,11 +9,10 @@ const { SchemaField } = foundry.data.fields;
  * @param {typeof BaseActorSystem} Base
  */
 export default (Base) => {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @extends {BaseActorSystem}
-     * @implements {ActorTradecraftsPartInterface}
+     * @extends {CommonSystem}
+     * @extends {ActorTradecraftsPartInterface}
      * @mixin
      */
     class ActorTradecraftsPart extends Base {

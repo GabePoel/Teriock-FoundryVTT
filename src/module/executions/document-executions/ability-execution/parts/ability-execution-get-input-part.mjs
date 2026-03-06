@@ -222,8 +222,8 @@ export default function AbilityExecutionGetInputPart(Base) {
         if (canTemplate && !noTemplate) {
           let t = "circle";
           if (this.source.system.expansion.type === "detonate") t = "circle";
-          if (this.source.system.delivery.base === "cone") t = "cone";
-          if (this.source.system.delivery.base === "aura") t = "circle";
+          if (this.source.system.delivery === "cone") t = "cone";
+          if (this.source.system.delivery === "aura") t = "circle";
           let templateData = foundry.utils.mergeObject(
             {
               t,

@@ -1,5 +1,5 @@
 import { TakeRollableTakeHandler } from "../../../helpers/interaction/button-handlers/rollable-takes-handlers.mjs";
-import BaseAutomation from "./base-automation.mjs";
+import { BaseAutomation } from "./abstract/_module.mjs";
 import { LabelAutomationMixin } from "./mixins/_module.mjs";
 
 const { fields } = foundry.data;

@@ -1,4 +1,4 @@
-import CritAutomation from "./crit-automation.mjs";
+import { CritAutomation } from "./abstract/_module.mjs";
 import { MacroAutomationMixin } from "./mixins/_module.mjs";
 
 //noinspection JSClosureCompilerSyntax

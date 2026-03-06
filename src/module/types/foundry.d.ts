@@ -15,6 +15,12 @@ declare global {
       token?: string;
     };
 
+    export type BarField = {
+      max: number;
+      min: number;
+      value: number;
+    };
+
     export type ContextMenuCallback = (target: HTMLElement) => unknown;
 
     export type ContextMenuCondition = (html: HTMLElement) => boolean;

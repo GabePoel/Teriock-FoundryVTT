@@ -1,5 +1,5 @@
 import { ResistHandler } from "../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
-import ThresholdAutomation from "./threshold-automation.mjs";
+import { ThresholdAutomation } from "./abstract/_module.mjs";
 
 const { fields } = foundry.data;
 

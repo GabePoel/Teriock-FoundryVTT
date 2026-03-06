@@ -5,12 +5,11 @@ import * as mixins from "../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
-//noinspection JSClosureCompilerSyntax
 /**
  * Base item data model for all Teriock items.
  * Provides common functionality for disabled state and update tracking.
  * @extends {ChildSystem}
- * @implements {Teriock.Models.BaseItemSystemInterface}
+ * @extends {Teriock.Models.BaseItemSystemInterface}
  * @mixes HierarchySystem
  */
 export default class BaseItemSystem extends mix(
@@ -21,6 +20,13 @@ export default class BaseItemSystem extends mix(
   static LOCALIZATION_PREFIXES = [
     ...super.LOCALIZATION_PREFIXES,
     "TERIOCK.SYSTEMS.BaseItem",
+  ];
+
+  /** @inheritDoc */
+  static PRESERVED_PROPERTIES = [
+    "effects",
+    "system.disabled",
+    ...super.PRESERVED_PROPERTIES,
   ];
 
   /** @inheritDoc */

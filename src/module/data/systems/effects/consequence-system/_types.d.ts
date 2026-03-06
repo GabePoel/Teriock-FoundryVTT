@@ -11,8 +11,7 @@ import {
 
 declare global {
   namespace Teriock.Models {
-    export interface ConsequenceSystemInterface
-      extends Teriock.Models.BaseEffectSystemInterface {
+    export type ConsequenceSystemInterface = {
       /** <schema> Associations */
       associations: Teriock.MessageData.MessageAssociation[];
       /** <schema> Blocks representing the source */
@@ -63,6 +62,6 @@ declare global {
       sourceDescription: string;
 
       get parent(): TeriockConsequence;
-    }
+    };
   }
 }

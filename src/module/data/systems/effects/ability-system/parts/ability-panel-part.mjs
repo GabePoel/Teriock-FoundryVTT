@@ -7,10 +7,18 @@ import { elementClass } from "../../../../../helpers/html.mjs";
  * @param {typeof AbilitySystem} Base
  */
 export default (Base) => {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @extends {AbilitySystem}
+     * @extends {BaseEffectSystem}
+     * @extends {AbilityCostsPart}
+     * @extends {AbilityDurationPart}
+     * @extends {AbilityEquipmentPart}
+     * @extends {AbilityFlagsPart}
+     * @extends {AbilityOverviewPart}
+     * @extends {AbilityResultsPart}
+     * @extends {AbilityTagsPart}
+     * @extends {AbilityUpgradesPart}
+     * @extends {AbilityUsagePart}
      * @mixin
      */
     class AbilityPanelPart extends Base {
@@ -82,7 +90,7 @@ export default (Base) => {
             wrappers: [
               time || "",
               this.piercing.value.toUpperCase(),
-              ref.delivery[this.delivery.base] || "",
+              ref.delivery[this.delivery] || "",
               this.interaction === "feat"
                 ? ref.featSaveAttribute[this.featSaveAttribute]
                 : "",
@@ -95,9 +103,7 @@ export default (Base) => {
               "TERIOCK.SYSTEMS.Ability.PANELS.targeting",
             ),
             wrappers: [
-              ["missile", "cone", "sight", "aura"].includes(this.delivery.base)
-                ? this.range.abbreviation
-                : "",
+              this.isRanged ? this.range.abbreviation : "",
               ...Array.from(this.targets.map((target) => ref.targets[target])),
               this.duration.text || "",
             ],

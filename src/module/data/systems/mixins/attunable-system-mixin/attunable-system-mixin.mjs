@@ -5,11 +5,10 @@ import { EvaluationField } from "../../../fields/_module.mjs";
  * @param {typeof BaseItemSystem} Base
  */
 export default function AttunableSystemMixin(Base) {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
      * @extends {BaseItemSystem}
-     * @implements {Teriock.Models.AttunableSystemInterface}
+     * @extends {Teriock.Models.AttunableSystemInterface}
      * @mixin
      */
     class AttunableSystem extends Base {

@@ -382,10 +382,7 @@ export default function AbilityExecutionChatPart(Base) {
         }
 
         // Add block cone button
-        if (
-          this.source.system.delivery.base === "cone" &&
-          !this.flags.noTemplate
-        ) {
+        if (this.source.system.delivery === "cone" && !this.flags.noTemplate) {
           this.buttons.push(UseAbilityHandler.buildButton("Block Cone"));
         }
 

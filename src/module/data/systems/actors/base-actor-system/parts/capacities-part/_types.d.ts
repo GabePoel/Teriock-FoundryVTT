@@ -1,6 +1,6 @@
 import { EvaluationModel } from "../../../../../models/_module.mjs";
 
-export default interface ActorCapacitiesPartInterface {
+export type ActorCapacitiesPartInterface = {
   /** <base> Attunements - IDs of attuned equipment */
   attunements: Set<ID<TeriockEquipment>>;
   carryingCapacity: {
@@ -35,4 +35,4 @@ export default interface ActorCapacitiesPartInterface {
     /** <derived> Total weight of the actor and everything they carry (self + carried) */
     value: number;
   };
-}
+};

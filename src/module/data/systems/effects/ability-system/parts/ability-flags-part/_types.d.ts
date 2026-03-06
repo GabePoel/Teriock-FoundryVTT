@@ -1,6 +1,6 @@
 declare global {
   namespace Teriock.Models {
-    export interface AbilityFlagsPartInterface {
+    export type AbilityFlagsPartInterface = {
       /** <schema> If this is a basic ability */
       basic: boolean;
       /** <schema> What class this ability is associated with */
@@ -29,7 +29,7 @@ declare global {
       sustaining: Set<UUID<TeriockConsequence>>;
       /** <schema> If this ability is automatically warded */
       warded: boolean;
-    }
+    };
   }
 }
 

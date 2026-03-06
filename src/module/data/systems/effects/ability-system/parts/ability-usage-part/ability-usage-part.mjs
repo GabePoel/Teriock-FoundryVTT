@@ -11,32 +11,20 @@ const { fields } = foundry.data;
  * @param {typeof AbilitySystem} Base
  */
 export default (Base) => {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @extends {AbilitySystem}
-     * @implements {Teriock.Models.AbilityUsagePartInterface}
+     * @extends {AttackSystem}
+     * @extends {BaseEffectSystem}
+     * @extends {Teriock.Models.AbilityUsagePartInterface}
      * @mixin
      */
     class AbilityUsagePart extends Base {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          delivery: new fields.SchemaField({
-            base: new fields.StringField({
-              initial: "weapon",
-              choices: TERIOCK.options.ability.delivery,
-            }),
-            package: new fields.StringField({
-              initial: null,
-              nullable: true,
-              choices: TERIOCK.options.ability.deliveryPackage,
-            }),
-            parent: new fields.StringField({
-              initial: null,
-              nullable: true,
-              choices: TERIOCK.options.ability.deliveryParent,
-            }),
+          delivery: new fields.StringField({
+            initial: "weapon",
+            choices: TERIOCK.options.ability.delivery,
           }),
           executionTime: new fields.SchemaField({
             base: new fields.StringField({ initial: "a1" }),
@@ -118,6 +106,10 @@ export default (Base) => {
           }
         }
 
+        if (data.delivery?.base) {
+          data.delivery = data.delivery.base;
+        }
+
         super.migrateData(data);
       }
 
@@ -127,10 +119,14 @@ export default (Base) => {
        */
       get isAoe() {
         return (
-          this.delivery.base === "aura" ||
-          this.delivery.base === "cone" ||
+          this.delivery === "aura" ||
+          this.delivery === "cone" ||
           this.expansion.type === "detonate"
         );
+      }
+
+      get isBall() {
+        return this.delivery === "missile" && this.piercing.raw === 2;
       }
 
       /**
@@ -139,8 +135,50 @@ export default (Base) => {
        */
       get isContact() {
         return ["armor", "bite", "hand", "item", "shield", "weapon"].includes(
-          this.delivery.base,
+          this.delivery,
         );
+      }
+
+      /**
+       * If this ability is ranged.
+       * @returns {boolean}
+       */
+      get isRanged() {
+        return ["missile", "aura", "cone", "sight", "area"].includes(
+          this.delivery,
+        );
+      }
+
+      /**
+       * If this ability is a ray.
+       * @returns {boolean}
+       */
+      get isRay() {
+        return this.delivery === "missile" && this.piercing.raw === 1;
+      }
+
+      /**
+       * If this ability is a strike.
+       * @returns {boolean}
+       */
+      get isStrike() {
+        return this.delivery === "weapon" && this.interaction === "attack";
+      }
+
+      /**
+       * If this ability is a touch.
+       * @returns {boolean}
+       */
+      get isTouch() {
+        return this.delivery === "hand" && this.piercing.raw === 2;
+      }
+
+      /**
+       * If this ability needs an item.
+       * @returns {boolean}
+       */
+      get needsItem() {
+        return ["armor", "item", "shield", "weapon"].includes(this.delivery);
       }
 
       /** @inheritDoc */
@@ -156,15 +194,12 @@ export default (Base) => {
           range: this.range.value,
         });
         // Add deliveries
-        if (this.delivery.base) {
-          data[`delivery.${this.delivery.base}`] = 1;
-        }
-        if (this.delivery.parent) {
-          data[`delivery.${this.delivery.parent}`] = 1;
-        }
-        if (this.delivery.package) {
-          data[`delivery.${this.delivery.package}`] = 1;
-        }
+        if (this.delivery) data[`delivery.${this.delivery}`] = 1;
+        data["delivery.ball"] = Number(this.isBall);
+        data["delivery.ray"] = Number(this.isRay);
+        data["delivery.touch"] = Number(this.isTouch);
+        data["delivery.strike"] = Number(this.isStrike);
+        data["delivery.item"] = Number(this.needsItem);
         if (this.interaction === "feat") {
           data[`attr.${this.featSaveAttribute}`] = 1;
         }

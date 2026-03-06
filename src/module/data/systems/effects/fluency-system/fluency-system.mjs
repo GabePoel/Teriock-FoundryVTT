@@ -12,7 +12,6 @@ import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
 
 const { fields } = foundry.data;
 
-//noinspection JSClosureCompilerSyntax
 /**
  * Fluency-specific effect data model.
  *
@@ -20,7 +19,7 @@ const { fields } = foundry.data;
  * - [Tradecraft Fluencies](https://wiki.teriock.com/index.php/Core:Tradecraft_Fluencies)
  *
  * @extends {BaseEffectSystem}
- * @implements {Teriock.Models.FluencySystemInterface}
+ * @extends {Teriock.Models.FluencySystemInterface}
  * @mixes CompetenceDisplaySystem
  * @mixes RevelationSystem
  * @mixes ThresholdData
@@ -109,14 +108,6 @@ export default class FluencySystem extends mix(
       suppressed = !this.parent.parent.system.isAttuned;
     }
     return suppressed;
-  }
-
-  /** @inheritDoc */
-  get nameString() {
-    const nameAddition = this.revealed
-      ? ""
-      : ` (${game.i18n.localize("TERIOCK.SYSTEMS.BaseEffect.NAME.unrevealed")})`;
-    return this.parent.name + nameAddition;
   }
 
   /** @inheritDoc */

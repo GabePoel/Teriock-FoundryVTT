@@ -1,6 +1,6 @@
 import { PiercingModel } from "../../../../../models/_module.mjs";
 
-export default interface ActorCombatPartInterface {
+export type ActorCombatPartInterface = {
   /** <schema> Stuff that changes during combat */
   combat: {
     /** <schema> Attack penalty */
@@ -44,4 +44,4 @@ export default interface ActorCombatPartInterface {
     /** <schema> Primary blocker ID */
     blocker: ID<TeriockEquipment> | null;
   };
-}
+};

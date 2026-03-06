@@ -5,10 +5,12 @@ import { formulaExists } from "../../../../../helpers/formula.mjs";
  * @param {typeof EquipmentSystem} Base
  */
 export default (Base) => {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @extends {EquipmentSystem}
+     * @extends {EquipmentDamagePart}
+     * @extends {EquipmentIdentificationPart}
+     * @extends {EquipmentStoragePart}
+     * @extends {EquipmentWieldingPart}
      * @mixin
      */
     class EquipmentPanelPart extends Base {

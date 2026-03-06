@@ -5,10 +5,8 @@ import { icons } from "../../../../../constants/display/icons.mjs";
  * @param {typeof SpeciesSystem} Base
  */
 export default (Base) => {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @extends {SpeciesSystem}
      * @mixin
      */
     class SpeciesPanelPart extends Base {

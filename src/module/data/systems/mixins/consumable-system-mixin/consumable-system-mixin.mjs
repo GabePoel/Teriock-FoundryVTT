@@ -7,11 +7,10 @@ const { fields } = foundry.data;
  * @param {typeof ChildSystem} Base
  */
 export default function ConsumableSystemMixin(Base) {
-  // noinspection JSClosureCompilerSyntax
   return (
     /**
      * @extends {ChildSystem}
-     * @implements {Teriock.Models.ConsumableSystemInterface}
+     * @extends {Teriock.Models.ConsumableSystemInterface}
      * @mixin
      */
     class ConsumableSystem extends Base {
@@ -19,6 +18,14 @@ export default function ConsumableSystemMixin(Base) {
       static LOCALIZATION_PREFIXES = [
         ...super.LOCALIZATION_PREFIXES,
         "TERIOCK.SYSTEMS.Consumable",
+      ];
+
+      /** @inheritDoc */
+      static PRESERVED_PROPERTIES = [
+        "system.consumable",
+        "system.maxQuantity",
+        "system.quantity",
+        ...super.PRESERVED_PROPERTIES,
       ];
 
       /** @inheritDoc */

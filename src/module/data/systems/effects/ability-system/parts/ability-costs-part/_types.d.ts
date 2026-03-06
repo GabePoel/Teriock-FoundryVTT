@@ -1,23 +1,23 @@
 declare global {
   namespace Teriock.Models {
-    export interface AbilityCostsPartInterface {
+    export type AbilityCostsPartInterface = {
       /** <schema> If this ability is adept and how much it costs if so */
       adept: CostAdjustment;
       /** <schema> Costs that must be spent for this ability to be used */
-      costs: CostsConfig;
+      costs: {
+        break: BreakCost;
+        gp: NumberCost;
+        hp: NumberCost;
+        material: boolean;
+        materialCost: string;
+        mp: NumberCost;
+        somatic: boolean;
+        verbal: boolean;
+      };
       /** <schema> If this ability is gifted and how much it costs if so */
       gifted: CostAdjustment;
-    }
+    };
   }
-}
-
-export default interface AbilityCostsPartInterface {
-  /** <schema> If this ability is adept and how much it costs if so */
-  adept: CostAdjustment;
-  /** <schema> Costs that must be spent for this ability to be used */
-  costs: CostsConfig;
-  /** <schema> If this ability is gifted and how much it costs if so */
-  gifted: CostAdjustment;
 }
 
 /**
@@ -28,32 +28,18 @@ export type BreakCost = "shatter" | "destroy";
 /**
  * Valid cost types
  */
-export type CostType = "none" | "static" | "formula" | "variable" | "hack";
+export type ValueCost = "none" | "static" | "formula" | "variable" | "hack";
 
 /**
  * Numerical cost configuration.
  */
 export interface NumberCost {
-  type: CostType;
+  type: ValueCost;
   value: {
     static: number;
     formula: Teriock.System.FormulaString;
     variable: string;
   };
-}
-
-/**
- * Complete costs configuration.
- */
-export interface CostsConfig {
-  break: BreakCost;
-  gp: NumberCost;
-  hp: NumberCost;
-  material: boolean;
-  materialCost: string;
-  mp: NumberCost;
-  somatic: boolean;
-  verbal: boolean;
 }
 
 /**
@@ -65,5 +51,3 @@ export type CostAdjustment = {
   /** <schema> Mow much the MP cost is changed */
   amount: number;
 };
-
-export {};

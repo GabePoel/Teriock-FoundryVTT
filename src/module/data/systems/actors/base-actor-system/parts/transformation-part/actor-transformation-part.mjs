@@ -5,11 +5,10 @@ const { fields } = foundry.data;
  * @param {typeof BaseActorSystem} Base
  */
 export default (Base) => {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @extends {BaseActorSystem}
-     * @implements {ActorTransformationPartInterface}
+     * @extends {CommonSystem}
+     * @extends {ActorTransformationPartInterface}
      * @mixin
      */
     class ActorAutomationPart extends Base {
@@ -47,12 +46,6 @@ export default (Base) => {
           image: null,
           species: [],
           level: "minor",
-          suppression: {
-            bodyParts: false,
-            equipment: false,
-            fluencies: false,
-            ranks: false,
-          },
         });
         if (effect) {
           Object.assign(this.transformation, {
@@ -62,9 +55,6 @@ export default (Base) => {
               (i) =>
                 i.type === "species" &&
                 effect.system.transformation.species.includes(i.id),
-            ),
-            suppression: foundry.utils.deepClone(
-              effect.system.transformation.suppression,
             ),
           });
         }

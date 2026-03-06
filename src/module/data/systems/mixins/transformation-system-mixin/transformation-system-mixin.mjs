@@ -6,11 +6,10 @@ import { transformationField } from "../../../fields/helpers/builders.mjs";
  * @param {typeof ChildSystem} Base
  */
 export default function TransformationSystemMixin(Base) {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
      * @extends {ChildSystem}
-     * @implements {Teriock.Models.TransformationSystemInterface}
+     * @extends {Teriock.Models.TransformationSystemInterface}
      * @mixin
      */
     class TransformationSystem extends Base {
@@ -27,6 +26,37 @@ export default function TransformationSystemMixin(Base) {
             implementation: true,
           }),
         });
+      }
+
+      /**
+       * @returns {{
+       *  stashedEquipment: TeriockEquipment[],
+       *  disabledEffects: AnyActiveEffect[],
+       *  disabledItems: AnyItem[],
+       *  disabledHpDiceItems: AnyItem[],
+       *  disabledMpDiceItems: AnyItem[]
+       * }}
+       */
+      get #flagMap() {
+        const hasItem = (id) => this.actor.items.has(id);
+        const hasEffect = (id) => this.actor.effects.has(id);
+        return {
+          stashedEquipment: (
+            this.parent.getFlag("teriock", "stashedEquipment") ?? []
+          ).filter(hasItem),
+          disabledEffects: (
+            this.parent.getFlag("teriock", "disabledEffects") ?? []
+          ).filter(hasEffect),
+          disabledItems: (
+            this.parent.getFlag("teriock", "disabledItems") ?? []
+          ).filter(hasItem),
+          disabledHpDiceItems: (
+            this.parent.getFlag("teriock", "disabledHpDiceItems") ?? []
+          ).filter(hasItem),
+          disabledMpDiceItems: (
+            this.parent.getFlag("teriock", "disabledMpDiceItems") ?? []
+          ).filter(hasItem),
+        };
       }
 
       /**
@@ -90,45 +120,29 @@ export default function TransformationSystemMixin(Base) {
        */
       async _applyTransformationUpdates() {
         if (!this.actor) return;
-        const hasItem = (id) => this.actor.items.has(id);
-        const hasEffect = (id) => this.actor.effects.has(id);
-        const stashedEquipment = (
-          this.parent.getFlag("teriock", "stashedEquipment") ?? []
-        ).filter(hasItem);
-        const disabledEffects = (
-          this.parent.getFlag("teriock", "disabledEffects") ?? []
-        ).filter(hasEffect);
-        const disabledItems = (
-          this.parent.getFlag("teriock", "disabledItems") ?? []
-        ).filter(hasItem);
-        const disabledHpDiceItems = (
-          this.parent.getFlag("teriock", "disabledHpDiceItems") ?? []
-        ).filter(hasItem);
-        const disabledMpDiceItems = (
-          this.parent.getFlag("teriock", "disabledMpDiceItems") ?? []
-        ).filter(hasItem);
+        const fm = this.#flagMap;
 
         /** @type {Record<string, object>} */
         const itemUpdatesById = {};
-        for (const id of stashedEquipment) {
+        for (const id of fm.stashedEquipment) {
           if (!itemUpdatesById[id]) itemUpdatesById[id] = { _id: id };
           itemUpdatesById[id]["system.stashed"] = true;
         }
-        for (const id of disabledItems) {
+        for (const id of fm.disabledItems) {
           if (!itemUpdatesById[id]) itemUpdatesById[id] = { _id: id };
           itemUpdatesById[id]["system.disabled"] = true;
         }
-        for (const id of disabledHpDiceItems) {
+        for (const id of fm.disabledHpDiceItems) {
           if (!itemUpdatesById[id]) itemUpdatesById[id] = { _id: id };
           itemUpdatesById[id]["system.statDice.hp.disabled"] = true;
         }
-        for (const id of disabledMpDiceItems) {
+        for (const id of fm.disabledMpDiceItems) {
           if (!itemUpdatesById[id]) itemUpdatesById[id] = { _id: id };
           itemUpdatesById[id]["system.statDice.mp.disabled"] = true;
         }
         const itemUpdates = Object.values(itemUpdatesById);
 
-        const effectUpdates = disabledEffects.map((id) => ({
+        const effectUpdates = fm.disabledEffects.map((id) => ({
           _id: id,
           disabled: true,
         }));
@@ -394,45 +408,29 @@ export default function TransformationSystemMixin(Base) {
        */
       async _removeTransformationUpdates() {
         if (!this.actor) return;
-        const hasItem = (id) => this.actor.items.has(id);
-        const hasEffect = (id) => this.actor.effects.has(id);
-        const stashedEquipment = (
-          this.parent.getFlag("teriock", "stashedEquipment") ?? []
-        ).filter(hasItem);
-        const disabledEffects = (
-          this.parent.getFlag("teriock", "disabledEffects") ?? []
-        ).filter(hasEffect);
-        const disabledItems = (
-          this.parent.getFlag("teriock", "disabledItems") ?? []
-        ).filter(hasItem);
-        const disabledHpDiceItems = (
-          this.parent.getFlag("teriock", "disabledHpDiceItems") ?? []
-        ).filter(hasItem);
-        const disabledMpDiceItems = (
-          this.parent.getFlag("teriock", "disabledMpDiceItems") ?? []
-        ).filter(hasItem);
+        const fm = this.#flagMap;
 
         /** @type {Record<string, object>} */
         const itemUpdatesById = {};
-        for (const id of stashedEquipment) {
+        for (const id of fm.stashedEquipment) {
           if (!itemUpdatesById[id]) itemUpdatesById[id] = { _id: id };
           itemUpdatesById[id]["system.stashed"] = false;
         }
-        for (const id of disabledItems) {
+        for (const id of fm.disabledItems) {
           if (!itemUpdatesById[id]) itemUpdatesById[id] = { _id: id };
           itemUpdatesById[id]["system.disabled"] = false;
         }
-        for (const id of disabledHpDiceItems) {
+        for (const id of fm.disabledHpDiceItems) {
           if (!itemUpdatesById[id]) itemUpdatesById[id] = { _id: id };
           itemUpdatesById[id]["system.statDice.hp.disabled"] = false;
         }
-        for (const id of disabledMpDiceItems) {
+        for (const id of fm.disabledMpDiceItems) {
           if (!itemUpdatesById[id]) itemUpdatesById[id] = { _id: id };
           itemUpdatesById[id]["system.statDice.mp.disabled"] = false;
         }
         const itemUpdates = Object.values(itemUpdatesById);
 
-        const effectUpdates = disabledEffects.map((id) => ({
+        const effectUpdates = fm.disabledEffects.map((id) => ({
           _id: id,
           disabled: false,
         }));

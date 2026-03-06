@@ -2,7 +2,7 @@ import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { protectionOptions } from "../../../constants/options/protection-options.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
-import CritAutomation from "./crit-automation.mjs";
+import { CritAutomation } from "./abstract/_module.mjs";
 
 const { fields } = foundry.data;
 

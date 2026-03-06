@@ -1,4 +1,4 @@
-export default interface ActorDeathBagPartInterface {
+export type ActorDeathBagPartInterface = {
   /** <schema> Death Bag */
   deathBag: {
     /** <schema> How many stones to pull from the Death Bag */
@@ -13,4 +13,4 @@ export default interface ActorDeathBagPartInterface {
       white: Teriock.System.FormulaString;
     };
   };
-}
+};

@@ -1,4 +1,4 @@
-export default interface ActorCoverPartInterface {
+export type ActorCoverPartInterface = {
   /** <base> Cover */
   cover: number;
-}
+};

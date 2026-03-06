@@ -11,11 +11,10 @@ const { fields } = foundry.data;
  * @param {typeof AbilitySystem} Base
  */
 export default (Base) => {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @extends {AbilitySystem}
-     * @implements {AbilityCostsPartInterface}
+     * @extends {BaseEffectSystem}
+     * @extends {AbilityCostsPartInterface}
      * @mixin
      */
     class AbilityCostsPart extends Base {

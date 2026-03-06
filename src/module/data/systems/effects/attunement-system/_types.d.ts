@@ -2,8 +2,7 @@ import "./_parameters";
 
 declare global {
   namespace Teriock.Models {
-    export interface AttunementSystemInterface
-      extends Teriock.Models.BaseEffectSystemInterface {
+    export type AttunementSystemInterface = {
       /** <schema> Should this inherit the tier of the target entity? */
       inheritTier: boolean;
       /** <schema> The entity that this attunement corresponds to */
@@ -14,6 +13,6 @@ declare global {
       type: Teriock.Parameters.Attunement.AttunementType;
 
       get parent(): TeriockAttunement;
-    }
+    };
   }
 }

@@ -9,16 +9,26 @@ import { ChildSystem } from "../../abstract/_module.mjs";
 
 const { fields } = foundry.data;
 
-//noinspection JSClosureCompilerSyntax
 /**
  * Base effect data model.
- * @implements {Teriock.Models.BaseEffectSystemInterface}
+ * @extends {Teriock.Models.BaseEffectSystemInterface}
+ * @extends {ChildSystem}
  */
 export default class BaseEffectSystem extends ChildSystem {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
     ...super.LOCALIZATION_PREFIXES,
     "TERIOCK.SYSTEMS.BaseEffect",
+  ];
+
+  /** @inheritDoc */
+  static PRESERVED_PROPERTIES = [
+    "changes",
+    "disabled",
+    "duration",
+    "tint",
+    "transfer",
+    ...super.PRESERVED_PROPERTIES,
   ];
 
   /** @inheritDoc */

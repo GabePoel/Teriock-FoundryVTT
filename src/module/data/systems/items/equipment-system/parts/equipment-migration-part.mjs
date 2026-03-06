@@ -3,10 +3,9 @@
  * @param {typeof EquipmentSystem} Base
  */
 export default (Base) => {
-  //noinspection JSClosureCompilerSyntax,JSUnresolvedReference
   return (
     /**
-     * @extends {EquipmentSystem}
+     * @extends {BaseItemSystem}
      * @mixin
      */
     class EquipmentMigrationPart extends Base {

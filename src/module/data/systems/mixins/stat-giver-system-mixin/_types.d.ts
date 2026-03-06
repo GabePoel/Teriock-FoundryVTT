@@ -5,11 +5,11 @@ import {
 
 declare global {
   namespace Teriock.Models {
-    export interface StatGiverSystemInterface {
+    export type StatGiverSystemInterface = {
       statDice: {
         hp: HpPoolModel;
         mp: MpPoolModel;
       };
-    }
+    };
   }
 }

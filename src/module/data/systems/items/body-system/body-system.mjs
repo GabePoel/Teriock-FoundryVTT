@@ -4,7 +4,6 @@ import { mix } from "../../../../helpers/utils.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
 
-//noinspection JSClosureCompilerSyntax
 /**
  * Body part-specific item data model.
  *
@@ -12,7 +11,7 @@ import BaseItemSystem from "../base-item-system/base-item-system.mjs";
  * - [Body Parts](https://wiki.teriock.com/index.php/Category:Body_parts)
  *
  * @extends {BaseItemSystem}
- * @implements {Teriock.Models.BodySystemInterface}
+ * @extends {Teriock.Models.BodySystemInterface}
  * @mixes ArmamentSystem
  * @mixes ConsumableSystem
  * @mixes WikiSystem

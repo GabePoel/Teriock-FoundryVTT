@@ -18,6 +18,8 @@ export default (Base) =>
         deathBagPull: this.#onDeathBagPull,
         increaseCover: this.#onIncreaseCover,
         quickUse: this._onQuickUse,
+        takeDawn: this.#onTakeDawn,
+        takeDusk: this.#onTakeDusk,
         takeLongRest: this.#onTakeLongRest,
         takeShortRest: this.#onTakeShortRest,
         toggleCondition: this.#onToggleCondition,
@@ -64,6 +66,22 @@ export default (Base) =>
       } else {
         await this.document.system.decreaseCover(3);
       }
+    }
+
+    /**
+     * Take a dawn.
+     * @returns {Promise<void>}
+     */
+    static async #onTakeDawn() {
+      await this.actor.system.takeDawn();
+    }
+
+    /**
+     * Take a dusk.
+     * @returns {Promise<void>}
+     */
+    static async #onTakeDusk() {
+      await this.actor.system.takeDusk();
     }
 
     /**

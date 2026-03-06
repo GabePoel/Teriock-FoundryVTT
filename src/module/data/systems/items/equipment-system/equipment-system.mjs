@@ -8,7 +8,6 @@ import * as parts from "./parts/_module.mjs";
 
 const { fields } = foundry.data;
 
-//noinspection JSClosureCompilerSyntax
 /**
  * Equipment-specific item data model.
  *
@@ -16,7 +15,7 @@ const { fields } = foundry.data;
  * - [Equipment](https://wiki.teriock.com/index.php/Category:Equipment)
  *
  * @extends {BaseItemSystem}
- * @implements {Teriock.Models.EquipmentSystemInterface}
+ * @extends {Teriock.Models.EquipmentSystemInterface}
  * @mixes ArmamentSystem
  * @mixes AttunableSystem
  * @mixes ConsumableSystem
@@ -50,6 +49,17 @@ export default class EquipmentSystem extends mix(
   ];
 
   /** @inheritDoc */
+  static PRESERVED_PROPERTIES = [
+    "name",
+    "img",
+    "system.description",
+    "system.flaws",
+    "system.notes",
+    "system.powerLevel",
+    ...super.PRESERVED_PROPERTIES,
+  ];
+
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       childItemTypes: ["equipment"],
@@ -57,19 +67,6 @@ export default class EquipmentSystem extends mix(
       indexCompendiumKey: "equipment",
       namespace: "Equipment",
       pageNameKey: "system.equipmentType",
-      preservedProperties: [
-        "name",
-        "img",
-        "system.consumable",
-        "system.description",
-        "system.flaws",
-        "system.fluent",
-        "system.maxQuantity",
-        "system.notes",
-        "system.powerLevel",
-        "system.competence",
-        "system.quantity",
-      ],
       type: "equipment",
       usable: true,
       visibleTypes: ["ability", "equipment", "fluency", "property", "resource"],

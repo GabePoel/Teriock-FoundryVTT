@@ -7,7 +7,6 @@ import BaseItemSystem from "../base-item-system/base-item-system.mjs";
 
 const { fields } = foundry.data;
 
-//noinspection JSClosureCompilerSyntax
 /**
  * Rank-specific item data model.
  *
@@ -16,7 +15,7 @@ const { fields } = foundry.data;
  *
  * @extends {BaseItemSystem}
  * @extends {CommonSystem}
- * @implements {Teriock.Models.RankSystemInterface}
+ * @extends {Teriock.Models.RankSystemInterface}
  * @mixes CompetenceDisplaySystem
  * @mixes StatGiverSystem
  * @mixes WikiSystem

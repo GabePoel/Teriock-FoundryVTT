@@ -6,11 +6,10 @@ import BaseItemSystem from "../base-item-system/base-item-system.mjs";
 
 const { fields } = foundry.data;
 
-//noinspection JSClosureCompilerSyntax
 /**
  * Power-specific item data model.
  * @extends {BaseItemSystem}
- * @implements {Teriock.Models.PowerSystemInterface}
+ * @extends {Teriock.Models.PowerSystemInterface}
  * @mixes CompetenceDisplaySystem
  */
 export default class PowerSystem extends mix(

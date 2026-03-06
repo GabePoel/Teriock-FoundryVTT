@@ -13,12 +13,13 @@ export const characterOptions = {
     truth: "trueSight",
   },
   senses: {
-    hearing: "TERIOCK.TERMS.Senses.hearing",
-    smell: "TERIOCK.TERMS.Senses.smell",
     blind: "TERIOCK.TERMS.Senses.blind",
     dark: "TERIOCK.TERMS.Senses.dark",
     ethereal: "TERIOCK.TERMS.Senses.ethereal",
+    hearing: "TERIOCK.TERMS.Senses.hearing",
     invisible: "TERIOCK.TERMS.Senses.invisible",
+    sight: "TERIOCK.TERMS.Senses.sight",
+    smell: "TERIOCK.TERMS.Senses.smell",
     truth: "TERIOCK.TERMS.Senses.truth",
   },
   speedAdjustments: {
@@ -43,6 +44,31 @@ export const characterOptions = {
     fly: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.fly",
     dig: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.dig",
     dive: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.dive",
+  },
+  defaultLight: {
+    negative: false,
+    priority: 0,
+    alpha: 0.5,
+    angle: 360,
+    bright: 0,
+    color: "#000000",
+    coloration: 1,
+    dim: 0,
+    attenuation: 0.5,
+    luminosity: 0.5,
+    saturation: 0,
+    contrast: 0,
+    shadows: 0,
+    animation: {
+      type: null,
+      speed: 5,
+      intensity: 5,
+      reverse: false,
+    },
+    darkness: {
+      min: 0,
+      max: 1,
+    },
   },
 };
 

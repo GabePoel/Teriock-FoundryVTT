@@ -1,5 +1,5 @@
 import { transformationField } from "../../fields/helpers/builders.mjs";
-import CritAutomation from "./crit-automation.mjs";
+import { CritAutomation } from "./abstract/_module.mjs";
 
 /**
  * @property {TransformationConfigurationField} transformation

@@ -6,11 +6,10 @@ const { fields } = foundry.data;
  * @param {typeof BaseEffectSystem} Base
  */
 export default function RevelationSystemMixin(Base) {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
      * @extends {BaseEffectSystem}
-     * @implements {Teriock.Models.RevelationSystemInterface}
+     * @extends {Teriock.Models.RevelationSystemInterface}
      * @mixin
      */
     class RevelationSystem extends Base {
@@ -36,6 +35,17 @@ export default function RevelationSystemMixin(Base) {
             required: false,
           }),
         });
+      }
+
+      /** @inheritDoc */
+      get _nameTags() {
+        const tags = super._nameTags;
+        if (!this.revealed) {
+          tags.unshift(
+            game.i18n.localize("TERIOCK.SYSTEMS.Revelation.NAME.unrevealed"),
+          );
+        }
+        return tags;
       }
 
       /** @inheritDoc */

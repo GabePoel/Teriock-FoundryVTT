@@ -1,5 +1,5 @@
 import { ucFirst } from "../../../../helpers/string.mjs";
-import { fancifyFields, makeIcon } from "../../../../helpers/utils.mjs";
+import { makeIcon } from "../../../../helpers/utils.mjs";
 import { EvaluationField, TextField } from "../../../fields/_module.mjs";
 import { ChildSettingsModel } from "../../../models/settings-models/_module.mjs";
 import { UsableDataMixin } from "../../../shared/mixins/_module.mjs";
@@ -8,19 +8,25 @@ import CommonSystem from "../common-system/common-system.mjs";
 const { fields } = foundry.data;
 const { ImagePopout } = foundry.applications.apps;
 
-//noinspection JSClosureCompilerSyntax
 /**
  * Data model shared by items and effects.
  * @extends {CommonSystem}
  * @extends {BaseSystem}
+ * @extends {Teriock.Models.ChildSystemInterface}
  * @mixes UsableData
- * @implements {Teriock.Models.ChildSystemInterface}
  */
 export default class ChildSystem extends UsableDataMixin(CommonSystem) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = super.LOCALIZATION_PREFIXES.concat(
     "TERIOCK.SYSTEMS.Child",
   );
+
+  /** @inheritDoc */
+  static PRESERVED_PROPERTIES = [
+    "system.competence",
+    "system.qualifiers",
+    ...super.PRESERVED_PROPERTIES,
+  ];
 
   /** @inheritDoc */
   static defineSchema() {
@@ -169,34 +175,6 @@ export default class ChildSystem extends UsableDataMixin(CommonSystem) {
       !!this.qualifiers.suppressed.value ||
       !!this.parent.isEphemeral
     );
-  }
-
-  /**
-   * Message panel bars.
-   * @returns {Teriock.MessageData.MessageBar[]}
-   */
-  get messageBars() {
-    return [];
-  }
-
-  /**
-   * Message panel blocks.
-   * @returns {Teriock.MessageData.MessageBlock[]}
-   */
-  get messageBlocks() {
-    return fancifyFields(this.displayFields)
-      .map((f) => {
-        const schema = this.parent.getSchema(f.path);
-        const value = foundry.utils.getProperty(this.parent, f.path);
-        if (value && !schema.gmOnly) {
-          return {
-            title: f.label || schema.label,
-            text: value,
-            classes: f.classes,
-          };
-        }
-      })
-      .filter((f) => f);
   }
 
   /**

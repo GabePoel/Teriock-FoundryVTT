@@ -3,7 +3,7 @@ import type {
   StorageModel,
 } from "../../../../../models/_module.mjs";
 
-export default interface EquipmentStoragePartInterface {
+export type EquipmentStoragePartInterface = {
   /** <schema> Storage */
   storage: StorageModel;
   /** <schema> Weight (lb) */
@@ -11,4 +11,4 @@ export default interface EquipmentStoragePartInterface {
     /** <special> Weight times quantity */
     total: number;
   };
-}
+};

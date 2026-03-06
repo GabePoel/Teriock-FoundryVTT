@@ -1,5 +1,5 @@
 import { TradecraftModel } from "../../../../../models/_module.mjs";
 
-export default interface ActorTradecraftsPartInterface {
+export type ActorTradecraftsPartInterface = {
   tradecrafts: Record<Teriock.Parameters.Fluency.Tradecraft, TradecraftModel>;
-}
+};

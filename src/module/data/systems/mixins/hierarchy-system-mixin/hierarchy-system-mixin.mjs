@@ -5,14 +5,20 @@ const { fields } = foundry.data;
  * @param {typeof ChildSystem} Base
  */
 export default function HierarchySystemMixin(Base) {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
      * @extends {ChildSystem}
-     * @implements {Teriock.Models.HierarchySystemInterface}
+     * @extends {Teriock.Models.HierarchySystemInterface}
      * @mixin
      */
     class HierarchySystem extends Base {
+      /** @inheritDoc */
+      static PRESERVED_PROPERTIES = [
+        "system._ref",
+        "system._sup",
+        ...super.PRESERVED_PROPERTIES,
+      ];
+
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {

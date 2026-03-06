@@ -1,6 +1,6 @@
 import { selectDocumentsDialog } from "../../../applications/dialogs/select-document-dialog.mjs";
 import { CompetenceModel } from "../../models/_module.mjs";
-import { BaseAutomation } from "./_module.mjs";
+import { BaseAutomation } from "./abstract/_module.mjs";
 
 const { fields } = foundry.data;
 

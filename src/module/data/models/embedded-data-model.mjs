@@ -10,6 +10,7 @@ const { DataModel } = foundry.abstract;
 export default class EmbeddedDataModel extends AccessDataMixin(DataModel) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [];
+
   /**
    * @inheritDoc
    * @returns {Record<string, DataField>}

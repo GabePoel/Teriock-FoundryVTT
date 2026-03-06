@@ -83,7 +83,7 @@ export default function abilityContextMenus(ability) {
           }),
       },
     ],
-    delivery: quickMenu("delivery", "system.delivery.base"),
+    delivery: quickMenu("delivery", "system.delivery"),
     expansion: quickMenu("expansion", "system.expansion.type", true),
     expansionSaveAttribute: quickMenu(
       "featSaveAttribute",

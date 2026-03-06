@@ -1,6 +1,6 @@
 declare global {
   namespace Teriock.Models {
-    export interface AbilityOverviewPartInterface {
+    export type AbilityOverviewPartInterface = {
       /** <schema> Circumstances in which this ability's effect ends */
       endCondition: string;
       /** <schema> Description of how this ability changes if heightened */
@@ -13,22 +13,17 @@ declare global {
       /** <schema> Description of any limitation that makes this ability worse than it would otherwise be */
       limitation: string;
       /** <schema> Description of what this ability does */
-      overview: OverviewText;
+      overview: {
+        base: string;
+        fluent: string;
+        proficient: string;
+      };
       /** <schema> Requirements that must be met for this ability to be used */
       requirements: string;
       /** <schema> Description of this ability's trigger */
       trigger: string;
-    }
+    };
   }
-}
-
-/**
- * Overview text for different proficiency levels
- */
-export interface OverviewText {
-  base: string;
-  fluent: string;
-  proficient: string;
 }
 
 export {};

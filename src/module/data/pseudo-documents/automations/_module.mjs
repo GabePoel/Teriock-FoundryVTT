@@ -1,5 +1,6 @@
+export * as abstract from "./abstract/_module.mjs";
+export * as mixins from "./mixins/_module.mjs";
 export { default as AbilityMacroAutomation } from "./ability-macro-automation.mjs";
-export { default as BaseAutomation } from "./base-automation.mjs";
 export { default as ChangesAutomation } from "./changes-automation.mjs";
 export { default as ChatMacroAutomation } from "./chat-macro-automation.mjs";
 export { default as ChatStatusAutomation } from "./chat-status-automation.mjs";

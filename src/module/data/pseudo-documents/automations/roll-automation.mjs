@@ -1,11 +1,9 @@
 import { commands } from "../../../helpers/interaction/_module.mjs";
 import { RollRollableTakeHandler } from "../../../helpers/interaction/button-handlers/rollable-takes-handlers.mjs";
+import { mix } from "../../../helpers/utils.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
-import BaseAutomation from "./base-automation.mjs";
-import {
-  LabelAutomationMixin,
-  TriggerAutomationMixin,
-} from "./mixins/_module.mjs";
+import { BaseAutomation } from "./abstract/_module.mjs";
+import * as mixins from "./mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -18,8 +16,10 @@ const { fields } = foundry.data;
  * @mixes TriggerAutomation
  * @mixes LabelAutomation
  */
-export default class RollAutomation extends TriggerAutomationMixin(
-  LabelAutomationMixin(BaseAutomation),
+export default class RollAutomation extends mix(
+  BaseAutomation,
+  mixins.LabelAutomationMixin,
+  mixins.TriggerAutomationMixin,
 ) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [

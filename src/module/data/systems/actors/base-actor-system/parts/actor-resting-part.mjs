@@ -2,10 +2,9 @@ import { TeriockDialog } from "../../../../../applications/api/_module.mjs";
 import { makeIconClass } from "../../../../../helpers/utils.mjs";
 
 export default (Base) => {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @extends {BaseActorSystem}
+     * @extends {CommonSystem}
      */
     class ActorRestingPart extends Base {
       /**

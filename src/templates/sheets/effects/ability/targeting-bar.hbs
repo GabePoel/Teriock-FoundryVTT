@@ -9,13 +9,7 @@
     dataset=(object path="system.range")
     icon=TERIOCK.display.icons.ability.range
     label=(ifThen (eq system.range.unitType "finite") system.range.symbol "")
-    include=(or
-      (eq system.delivery.base "area")
-      (eq system.delivery.base "missile")
-      (eq system.delivery.base "aura")
-      (eq system.delivery.base "cone")
-      (eq system.delivery.base "sight")
-    )
+    include=system.isRanged
     tooltip=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.range.label")
   }}
   {{formBox

@@ -1,6 +1,7 @@
 import { EvaluationModel } from "../../../../../models/_module.mjs";
+import type { characterOptions } from "../../../../../../constants/options/character-options.mjs";
 
-export default interface ActorSensesPartInterface {
+export type ActorSensesPartInterface = {
   /** <schema> Detection parameters */
   detection: {
     /** <schema> Hiding based on sneak */
@@ -9,7 +10,7 @@ export default interface ActorSensesPartInterface {
     perceiving: EvaluationModel;
   };
   /** <base> */
-  light: object;
+  light: typeof characterOptions.defaultLight;
   /** <schema> Senses */
   senses: {
     /** <schema> Blind fighting */
@@ -33,4 +34,4 @@ export default interface ActorSensesPartInterface {
     /** <schema> Ethereal light */
     etherealLight: number;
   };
-}
+};

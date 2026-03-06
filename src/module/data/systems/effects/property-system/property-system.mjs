@@ -1,12 +1,11 @@
 import { mix } from "../../../../helpers/utils.mjs";
-import { FormulaField, TextField } from "../../../fields/_module.mjs";
+import { FormulaField } from "../../../fields/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
 
 const { fields } = foundry.data;
 
-//noinspection JSClosureCompilerSyntax
 /**
  * Property-specific effect data model.
  *
@@ -14,15 +13,15 @@ const { fields } = foundry.data;
  * - [Properties](https://wiki.teriock.com/index.php/Category:Properties)
  *
  * @extends {BaseEffectSystem}
- * @extends {ChildSystem}
- * @extends {CommonSystem}
- * @implements {Teriock.Models.PropertySystemInterface}
+ * @extends {Teriock.Models.PropertySystemInterface}
+ * @mixes AdjustableSystem
  * @mixes HierarchySystem
  * @mixes RevelationSystem
  * @mixes WikiSystem
  */
 export default class PropertySystem extends mix(
   BaseEffectSystem,
+  mixins.AdjustableSystemMixin,
   mixins.WikiSystemMixin,
   mixins.HierarchySystemMixin,
   mixins.RevelationSystemMixin,
@@ -55,13 +54,6 @@ export default class PropertySystem extends mix(
       modifies: "Item",
       namespace: "Property",
       passive: true,
-      preservedProperties: [
-        "system.competence",
-        "system.hierarchy",
-        "system.improvement",
-        "system.limitation",
-        "system.tag",
-      ],
       type: "property",
       visibleTypes: ["property"],
     });
@@ -75,10 +67,7 @@ export default class PropertySystem extends mix(
       damageType: new fields.StringField({ initial: "" }),
       extraDamage: new FormulaField({ deterministic: false }),
       form: new fields.StringField({ initial: "normal" }),
-      improvement: new TextField({ initial: "" }),
-      limitation: new TextField({ initial: "" }),
       modifiesActor: new fields.BooleanField({ initial: false }),
-      tag: new fields.StringField({ initial: "" }),
     });
   }
 
@@ -102,7 +91,7 @@ export default class PropertySystem extends mix(
 
   /** @inheritDoc */
   get displayFields() {
-    return ["system.description", "system.improvement", "system.limitation"];
+    return ["system.description", ...this.constructor._adjustableTextFields];
   }
 
   /** @inheritDoc */
@@ -121,19 +110,19 @@ export default class PropertySystem extends mix(
       );
     }
     if (!suppressed && this.parent.parent?.type === "equipment") {
-      if (this.parent.parent?.system.stashed) {
+      if (this.parent.parent.system.stashed) {
         suppressed = true;
       }
       if (
         !suppressed &&
-        !this.parent.parent?.system.equipped &&
+        !this.parent.parent.system.equipped &&
         this.modifies === "Actor"
       ) {
         suppressed = true;
       }
       if (
         !suppressed &&
-        this.parent.parent?.system.dampened &&
+        this.parent.parent.system.dampened &&
         this.form !== "intrinsic" &&
         !this.applyIfDampened
       ) {
@@ -142,7 +131,7 @@ export default class PropertySystem extends mix(
     }
     if (
       !suppressed &&
-      this.parent.parent?.system.shattered &&
+      this.parent.parent.system.shattered &&
       !this.applyIfShattered
     ) {
       suppressed = true;
@@ -178,35 +167,6 @@ export default class PropertySystem extends mix(
       return "Actor";
     }
     return super.modifies;
-  }
-
-  /** @inheritDoc */
-  get nameString() {
-    const additions = [];
-    let suffix = "";
-    if (this.tag && this.tag.length > 0) {
-      suffix = `: ${this.tag}`;
-    }
-    if (this.limitation && this.limitation.length > 0) {
-      additions.push(
-        game.i18n.localize("TERIOCK.SYSTEMS.BaseEffect.NAME.limited"),
-      );
-    }
-    if (this.improvement && this.improvement.length > 0) {
-      additions.push(
-        game.i18n.localize("TERIOCK.SYSTEMS.BaseEffect.NAME.improved"),
-      );
-    }
-    if (!this.revealed) {
-      additions.push(
-        game.i18n.localize("TERIOCK.SYSTEMS.BaseEffect.NAME.unrevealed"),
-      );
-    }
-    let nameAddition = "";
-    if (additions.length > 0) {
-      nameAddition = ` (${additions.join(", ")})`;
-    }
-    return this.parent.name.trim() + suffix + nameAddition;
   }
 
   /** @inheritDoc */

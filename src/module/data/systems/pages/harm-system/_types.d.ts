@@ -1,8 +1,8 @@
 declare global {
   namespace Teriock.Models {
-    export interface HarmSystemInterface {
+    export type HarmSystemInterface = {
       img: Teriock.System.ImageString;
-    }
+    };
   }
 }
 

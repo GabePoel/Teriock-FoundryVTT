@@ -15,7 +15,7 @@ if (armaments.length > 0) {
         a.system.interaction === "attack" &&
         a.system.maneuver === "active" &&
         a.system.executionTime.base === "a1" &&
-        ["weapon", "hand"].includes(a.system.delivery.base),
+        ["weapon", "hand"].includes(a.system.delivery),
     )
     .sort((a, b) => a.name.localeCompare(b.name));
   const ability = await tm.dialogs.selectDocumentDialog(abilities, {

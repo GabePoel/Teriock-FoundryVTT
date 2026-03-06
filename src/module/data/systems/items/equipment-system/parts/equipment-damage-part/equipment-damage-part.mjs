@@ -9,11 +9,10 @@ const { utils } = foundry;
  * @param {typeof EquipmentSystem} Base
  */
 export default (Base) => {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @extends {EquipmentSystem}
-     * @implements {EquipmentDamagePartInterface}
+     * @extends {ArmamentSystem}
+     * @extends {EquipmentDamagePartInterface}
      * @mixin
      */
     class EquipmentDamagePart extends Base {

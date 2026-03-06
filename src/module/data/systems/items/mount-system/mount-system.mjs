@@ -6,11 +6,10 @@ import BaseItemSystem from "../base-item-system/base-item-system.mjs";
 
 const { fields } = foundry.data;
 
-//noinspection JSClosureCompilerSyntax
 /**
  * Mount-specific item data model.
  * @extends {BaseItemSystem}
- * @implements {Teriock.Models.MountSystemInterface}
+ * @extends {Teriock.Models.MountSystemInterface}
  * @mixes AttunableSystem
  * @mixes StatGiverSystem
  */

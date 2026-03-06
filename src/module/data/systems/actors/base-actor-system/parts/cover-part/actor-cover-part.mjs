@@ -6,11 +6,10 @@ import { addFormula } from "../../../../../../helpers/formula.mjs";
  * @param {typeof BaseActorSystem} Base
  */
 export default (Base) => {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @extends {BaseActorSystem}
-     * @implements {ActorCoverPartInterface}
+     * @extends {CommonSystem}
+     * @extends {ActorCoverPartInterface}
      * @mixin
      */
     class ActorCoverPart extends Base {

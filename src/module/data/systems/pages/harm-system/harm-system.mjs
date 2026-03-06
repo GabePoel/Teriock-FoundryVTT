@@ -6,10 +6,9 @@ import { AutomatableSystemMixin } from "../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
-//noinspection JSClosureCompilerSyntax
 /**
- * @extends {BaseSystem}
- * @implements {Teriock.Models.HarmSystemInterface}
+ * @extends {RulesSystem}
+ * @extends {Teriock.Models.HarmSystemInterface}
  * @mixes AutomatableSystem
  */
 export default class HarmSystem extends mix(

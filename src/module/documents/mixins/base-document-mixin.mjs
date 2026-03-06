@@ -12,6 +12,7 @@ export default function BaseDocumentMixin(Base) {
   return (
     /**
      * @extends {ClientDocument}
+     * @property {Readonly<boolean>} isOwner
      * @mixin
      */
     class BaseDocument extends Base {

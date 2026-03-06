@@ -41,7 +41,7 @@ export default (Base) =>
           (!filters.maneuver || a.system.maneuver === filters.maneuver) &&
           (!filters.interaction ||
             a.system.interaction === filters.interaction) &&
-          (!filters.delivery || a.system.delivery.base === filters.delivery) &&
+          (!filters.delivery || a.system.delivery === filters.delivery) &&
           (!filters.piercing ||
             a.system.piercing.raw === Number(filters.piercing)) &&
           (!filters.target ||

@@ -74,7 +74,7 @@ export default function PropagationDataMixin(Base) {
 
       /**
        * A scope that can be used when executing macros from a fired trigger.
-       * @param {Teriock.System.TriggerScope} [scope]
+       * @param {Partial<Teriock.System.TriggerScope>} [scope]
        * @returns {Teriock.System.TriggerScope}
        */
       getScope(scope = {}) {

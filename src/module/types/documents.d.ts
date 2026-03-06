@@ -214,7 +214,7 @@ declare global {
     _id: ID<TeriockProperty>;
     get id(): ID<TeriockProperty>;
     get uuid(): UUID<TeriockProperty>;
-    parent: TeriockEquipment;
+    get parent(): TeriockEquipment;
   };
   export type TeriockResource = TeriockActiveEffect & {
     sheet: ResourceSheet;
@@ -280,3 +280,10 @@ declare global {
     | TeriockTokenDocument
     | TeriockUser;
 }
+
+// Automation Unions
+// =================
+
+// declare global {
+//   export type AnyAutomation =
+// }

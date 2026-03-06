@@ -1,15 +1,14 @@
 import { PseudoCollectionField } from "../../../fields/_module.mjs";
-import { BaseAutomation } from "../../../pseudo-documents/automations/_module.mjs";
+import { BaseAutomation } from "../../../pseudo-documents/automations/abstract/_module.mjs";
 
 /**
  * @param {typeof BaseSystem} Base
  */
 export default function AutomatableSystemMixin(Base) {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
      * @extends {BaseSystem}
-     * @implements {Teriock.Models.AutomatableSystemInterface}
+     * @extends {Teriock.Models.AutomatableSystemInterface}
      * @mixin
      */
     class AutomatableSystem extends Base {

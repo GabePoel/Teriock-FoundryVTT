@@ -2,8 +2,7 @@ import "./_parameters";
 
 declare global {
   namespace Teriock.Models {
-    export interface PowerSystemInterface
-      extends Teriock.Models.BaseItemSystemInterface {
+    export type PowerSystemInterface = {
       /** <schema> Flaws */
       flaws: string;
       /** <schema> Max Armor Value */
@@ -12,6 +11,6 @@ declare global {
       type: Teriock.Parameters.Power.PowerType;
 
       get parent(): TeriockPower;
-    }
+    };
   }
 }
