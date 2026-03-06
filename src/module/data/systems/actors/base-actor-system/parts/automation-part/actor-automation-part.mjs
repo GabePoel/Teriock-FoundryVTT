@@ -6,14 +6,15 @@ export default (Base) => {
   return (
     /**
      * @extends {CommonSystem}
-     * @extends {ActorAutomationPartInterface}
+     * @extends {Teriock.Models.ActorAutomationPartInterface}
      * @mixin
      */
     class ActorAutomationPart extends Base {
       /** @inheritDoc */
       prepareBaseData() {
         super.prepareBaseData();
-        this.conditionInformation = /** @type {ConditionInformation} */ {};
+        this.conditionInformation =
+          /** @type {Teriock.Parameters.Actor.ConditionInformation} */ {};
         for (const key of Object.keys(TERIOCK.index.conditions)) {
           this.conditionInformation[key] = {
             locked: false,

@@ -13,7 +13,7 @@ export default (Base) => {
   return (
     /**
      * @extends {BaseItemSystem}
-     * @extends {EquipmentWieldingPartInterface}
+     * @extends {Teriock.Models.EquipmentWieldingPartInterface}
      * @property {ClientDocument} parent
      * @mixin
      */

@@ -1,6 +1,12 @@
 import type { IdentificationModel } from "../../../../../models/_module.mjs";
 
-export type EquipmentIdentificationPartInterface = {
-  /** <schema.> Identification info */
-  identification: IdentificationModel;
-};
+declare global {
+  namespace Teriock.Models {
+    export type EquipmentIdentificationPartInterface = {
+      /** <schema.> Identification info */
+      identification: IdentificationModel;
+    };
+  }
+}
+
+export {};

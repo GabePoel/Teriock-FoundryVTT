@@ -11,7 +11,7 @@ export default (Base) => {
   return (
     /**
      * @extends {CommonSystem}
-     * @extends {ActorDeathBagPartInterface}
+     * @extends {Teriock.Models.ActorDeathBagPartInterface}
      * @mixin
      */
     class ActorDeathBagPart extends Base {

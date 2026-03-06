@@ -16,7 +16,7 @@ export default (Base) => {
   return (
     /**
      * @extends {CommonSystem}
-     * @extends {ActorProtectionsPartInterface}
+     * @extends {Teriock.Models.ActorProtectionsPartInterface}
      * @mixin
      */
     class ActorProtectionsPart extends Base {
@@ -48,7 +48,7 @@ export default (Base) => {
        * Relevant wiki pages:
        * - [Protection keywords](https://wiki.teriock.com/index.php/Category:Protection_keywords)
        *
-       * @param {ProtectionCategoryKey} category - Category of protection
+       * @param {Teriock.Parameters.Actor.ProtectionCategoryKey} category - Category of protection
        * @param {string} value - Specific protection
        * @returns {boolean} Whether or not there's some protection against the specified key and value
        */

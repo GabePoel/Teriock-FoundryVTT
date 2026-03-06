@@ -12,7 +12,7 @@ export default (Base) => {
   return (
     /**
      * @extends {CommonSystem}
-     * @extends {ActorSensesPartInterface}
+     * @extends {Teriock.Models.ActorSensesPartInterface}
      * @mixin
      */
     class ActorSensesPart extends Base {

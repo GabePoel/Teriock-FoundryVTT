@@ -1,13 +1,22 @@
 import type { protectionOptions } from "../../../../../../constants/options/protection-options.mjs";
 
-export type ProtectionTypeKey = keyof typeof protectionOptions.types;
+declare global {
+  namespace Teriock.Parameters.Actor {
+    export type ProtectionTypeKey = keyof typeof protectionOptions.types;
 
-export type ProtectionCategoryKey = keyof typeof protectionOptions.categories;
+    export type ProtectionCategoryKey =
+      keyof typeof protectionOptions.categories;
+  }
 
-export type ActorProtectionsPartInterface = {
-  /** <base> Protections */
-  protections: Record<
-    ProtectionTypeKey,
-    Record<ProtectionCategoryKey, Set<string>>
-  >;
-};
+  namespace Teriock.Models {
+    export type ActorProtectionsPartInterface = {
+      /** <base> Protections */
+      protections: Record<
+        Teriock.Parameters.Actor.ProtectionTypeKey,
+        Record<Teriock.Parameters.Actor.ProtectionCategoryKey, Set<string>>
+      >;
+    };
+  }
+}
+
+export {};

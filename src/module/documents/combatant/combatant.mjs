@@ -38,7 +38,7 @@ export default class TeriockCombatant extends EmbedCardDocumentMixin(
   /**
    * Modified to allow for custom initiative and advantage/disadvantage on alt and shift clicks.
    * @see {TeriockCombatTracker._onCombatantControl}
-   * @see {ActorCombatPartInterface.initiative}
+   * @see {Teriock.Models.ActorCombatPartInterface.initiative}
    * @inheritDoc
    * @returns {string}
    */

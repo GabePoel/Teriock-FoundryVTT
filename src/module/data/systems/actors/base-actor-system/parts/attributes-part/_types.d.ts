@@ -1,5 +1,11 @@
 import { AttributeModel } from "../../../../../models/modifier-models/_module.mjs";
 
-export type ActorAttributesPartInterface = {
-  attributes: Record<Teriock.Parameters.Actor.Attribute, AttributeModel>;
-};
+declare global {
+  namespace Teriock.Models {
+    export type ActorAttributesPartInterface = {
+      attributes: Record<Teriock.Parameters.Actor.Attribute, AttributeModel>;
+    };
+  }
+}
+
+export {};
