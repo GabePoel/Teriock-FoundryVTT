@@ -30,9 +30,10 @@ export default class EquipmentSheet extends mix(
   static DEFAULT_OPTIONS = {
     classes: ["equipment"],
     actions: {
-      toggleEquipped: this.#onToggleEquipped,
-      toggleShattered: this.#onToggleShattered,
       toggleDampened: this.#onToggleDampened,
+      toggleEquipped: this.#onToggleEquipped,
+      toggleGlued: this.#onToggleGlued,
+      toggleShattered: this.#onToggleShattered,
     },
     window: {
       icon: makeIconClass(documentOptions.equipment.icon, "title"),
@@ -67,6 +68,18 @@ export default class EquipmentSheet extends mix(
       await this.document.system.unequip();
     } else {
       await this.document.system.equip();
+    }
+  }
+
+  /**
+   * Toggles the glued state of the equipment.
+   * @returns {Promise<void>}
+   */
+  static async #onToggleGlued() {
+    if (this.document.system.glued) {
+      await this.document.system.unglue();
+    } else {
+      await this.document.system.glue();
     }
   }
 

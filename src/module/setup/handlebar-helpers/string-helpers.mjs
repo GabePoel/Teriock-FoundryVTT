@@ -1,9 +1,5 @@
-import {
-  toCamelCase,
-  toId,
-  toKebabCase,
-  ucFirst,
-} from "../../helpers/string.mjs";
+import { ruleUuid } from "../../helpers/fetch.mjs";
+import { toCamelCase, toKebabCase, ucFirst } from "../../helpers/string.mjs";
 import { roundTo } from "../../helpers/unit.mjs";
 
 export default function registerStringHelpers() {
@@ -79,11 +75,7 @@ export default function registerStringHelpers() {
     return out;
   });
 
-  Handlebars.registerHelper("ruleUuid", (namespace, pageName) => {
-    const nsId = toId(namespace, { hash: false });
-    const pnId = toId(pageName, { hash: false });
-    return `Compendium.teriock.rules.JournalEntry.${nsId}.JournalEntryPage.${pnId}`;
-  });
+  Handlebars.registerHelper("ruleUuid", ruleUuid);
 
   Handlebars.registerHelper("escapeAttr", function (html) {
     if (html == null) {

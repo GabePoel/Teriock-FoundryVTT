@@ -1,3 +1,4 @@
+import { icons } from "../../../../constants/display/icons.mjs";
 import { makeIconClass } from "../../../../helpers/utils.mjs";
 
 /**
@@ -16,7 +17,7 @@ export default function UseButtonSheetMixin(Base) {
           controls: [
             {
               action: "rollThis",
-              icon: makeIconClass("dice", "contextMenu"),
+              icon: makeIconClass(icons.ui.dice, "contextMenu"),
               label: "TERIOCK.MODELS.Usable.USAGE.use",
             },
           ],

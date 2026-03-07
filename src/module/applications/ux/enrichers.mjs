@@ -13,7 +13,7 @@ import {
   toTitleCase,
   ucFirst,
 } from "../../helpers/string.mjs";
-import { makeIconElement } from "../../helpers/utils.mjs";
+import { makeIconClass, makeIconElement } from "../../helpers/utils.mjs";
 
 const enricherIcons = {
   Class: icons.document.rank,
@@ -100,7 +100,8 @@ const wikiLinkEnricher = {
     let linkText = displayText || pageName;
     if (icon && uuid) {
       const iconEl = document.createElement("i");
-      iconEl.className = `fas fa-fw fa-${icon}`;
+      iconEl.className = makeIconClass(icon, "solid");
+      iconEl.classList.remove("fa-fw");
       link.prepend(iconEl);
     } else {
       link.className = "teriock-not-content-link";

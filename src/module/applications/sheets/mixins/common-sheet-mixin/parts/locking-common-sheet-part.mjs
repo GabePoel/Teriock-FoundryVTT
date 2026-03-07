@@ -41,18 +41,9 @@ export default (Base) => {
        * @param {HTMLButtonElement} toggleButton
        */
       #setToggleLockButtonAttributes(toggleButton) {
-        toggleButton.classList.remove(
-          ...[
-            `fa-${TERIOCK.display.icons.ui.unlocked}`,
-            `fa-${TERIOCK.display.icons.ui.locked}`,
-          ],
-        );
+        toggleButton.classList.remove(...["fa-lock-open", "fa-lock"]);
         toggleButton.classList.add(
-          ...[
-            this.isEditable
-              ? `fa-${TERIOCK.display.icons.ui.unlocked}`
-              : `fa-${TERIOCK.display.icons.ui.locked}`,
-          ],
+          ...[this.isEditable ? "fa-lock-open" : "fa-lock"],
         );
         toggleButton.setAttribute(
           "data-tooltip",

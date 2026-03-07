@@ -117,6 +117,14 @@ export default class CommonSystem extends mix(
   }
 
   /**
+   * Fields to display in panels and sheets.
+   * @returns {Teriock.Sheet.DisplayField[]}
+   */
+  get displayFields() {
+    return ["system.description"];
+  }
+
+  /**
    * @returns {AnyCommonDocument}
    */
   get document() {

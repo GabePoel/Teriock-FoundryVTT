@@ -1,6 +1,5 @@
 import { icons } from "../../../../../constants/display/icons.mjs";
 import { documentOptions } from "../../../../../constants/options/document-options.mjs";
-import { makeIconClass } from "../../../../../helpers/utils.mjs";
 import TeriockTextEditor from "../../../../ux/text-editor.mjs";
 
 //noinspection JSClosureCompilerSyntax,JSUnresolvedReference,JSUnusedGlobalSymbols
@@ -26,47 +25,47 @@ export default (Base) =>
         tabs: [
           {
             id: "tradecrafts",
-            icon: makeIconClass(documentOptions.fluency.icon, "solid"),
+            icon: documentOptions.fluency.icon,
             label: "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.title",
           },
           {
             id: "abilities",
-            icon: makeIconClass(documentOptions.ability.icon, "solid"),
+            icon: documentOptions.ability.icon,
             label: "TERIOCK.SHEETS.Actor.TABS.Abilities.title",
           },
           {
             id: "inventory",
-            icon: makeIconClass(documentOptions.equipment.icon, "solid"),
+            icon: documentOptions.equipment.icon,
             label: "TERIOCK.SHEETS.Actor.TABS.Inventory.title",
           },
           {
             id: "classes",
-            icon: makeIconClass(documentOptions.rank.icon, "solid"),
+            icon: documentOptions.rank.icon,
             label: "TERIOCK.SHEETS.Actor.TABS.Classes.title",
           },
           {
             id: "powers",
-            icon: makeIconClass(documentOptions.power.icon, "solid"),
+            icon: documentOptions.power.icon,
             label: "TERIOCK.SHEETS.Actor.TABS.Powers.title",
           },
           {
             id: "resources",
-            icon: makeIconClass(documentOptions.resource.icon, "solid"),
+            icon: documentOptions.resource.icon,
             label: "TERIOCK.SHEETS.Actor.TABS.Resources.title",
           },
           {
             id: "effects",
-            icon: makeIconClass(documentOptions.condition.icon, "solid"),
+            icon: documentOptions.condition.icon,
             label: "TERIOCK.SHEETS.Actor.TABS.Effects.title",
           },
           {
             id: "protections",
-            icon: makeIconClass(icons.effect.protection, "solid"),
+            icon: icons.effect.protection,
             label: "TERIOCK.SHEETS.Actor.TABS.Protections.title",
           },
           {
             id: "details",
-            icon: makeIconClass("list-ul", "solid"),
+            icon: icons.ui.details,
             label: "TERIOCK.SHEETS.Actor.TABS.Details.title",
           },
         ],

@@ -32,14 +32,14 @@ export function makeIconElement(icon, ...styles) {
  */
 export function makeIconClass(icon, ...styles) {
   if (!icon) return "";
+  let prefix = "fa-";
+  let start = "fa-fw";
   const styleClasses = styles
     .map((s) => iconStyles[s] || s)
     .filter((s) => typeof s === "string");
-  const classString = styleClasses.map((s) => `fa-${s}`).join(" ");
-  if (!icon.startsWith("fa-")) {
-    icon = `fa-${icon}`;
-  }
-  return `fa-fw ${classString} ${icon}`;
+  if (icon.startsWith("ms-")) start += " mic";
+  const classString = styleClasses.map((s) => `${prefix}${s}`).join(" ");
+  return `${start} ${classString} ${icon}`;
 }
 
 /**
@@ -54,14 +54,14 @@ export function getRollIcon(rollFormula) {
   dice.sort((a, b) => b.faces - a.faces);
   for (const die of dice) {
     if (polyhedralDice.includes(die.faces)) {
-      return `dice-d${die.faces}`;
+      return `fa-dice-d${die.faces}`;
     } else if (die.faces === 2) {
-      return "coin";
+      return "fa-coins";
     } else if (die.faces === 100) {
-      return "hundred-points";
+      return "fa-percent";
     }
   }
-  return "dice";
+  return "fa-dice";
 }
 
 /**

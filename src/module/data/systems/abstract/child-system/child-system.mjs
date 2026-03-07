@@ -56,14 +56,6 @@ export default class ChildSystem extends UsableDataMixin(CommonSystem) {
   }
 
   /**
-   * Fields to display in panels and sheets.
-   * @returns {Teriock.Sheet.DisplayField[]}
-   */
-  get displayFields() {
-    return ["system.description"];
-  }
-
-  /**
    * Localized tags to display in sheets.
    * @returns {Teriock.Sheet.DisplayTag[]}
    */

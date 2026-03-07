@@ -59,22 +59,3 @@ export function classContextMenu(rank) {
   }
   return options;
 }
-
-/**
- * Creates context menu entries for selecting a rank's number.
- * Generates options for ranks 0 through 9.
- * @param {TeriockRank} rank - The rank item to create the context menu for.
- * @returns {Teriock.Foundry.ContextMenuEntry[]}
- */
-export function rankContextMenu(rank) {
-  const iconStyle = TERIOCK.display.iconStyles.contextMenu;
-  const options = [];
-  for (let i = 0; i <= 9; i++) {
-    options.push({
-      name: game.i18n.format("TERIOCK.SYSTEMS.Rank.PANELS.rank", { value: i }),
-      icon: makeIcon(`${i}`, iconStyle),
-      callback: () => rank.update({ "system.classRank": i }),
-    });
-  }
-  return options;
-}

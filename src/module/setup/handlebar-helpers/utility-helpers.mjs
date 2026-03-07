@@ -58,7 +58,7 @@ export default function registerUiHelpers() {
       id,
       parentId,
       action,
-      style = "light",
+      style = "solid",
       tooltip = "",
     } = options.hash;
     const attrs = [
@@ -104,7 +104,7 @@ export default function registerUiHelpers() {
           : "";
 
       return new Handlebars.SafeString(`
-        <i class="ticon teriock-block-clickable ${cssClass} fa-fw fa-light fa-${icon}" 
+        <i class="ticon teriock-block-clickable ${cssClass} fa-fw fa-solid fa-${icon}" 
         ${id ? `data-id="${id}"` : ""} 
         ${parentId ? `data-parent-id="${parentId}"` : ""} 
         ${actionAttr}

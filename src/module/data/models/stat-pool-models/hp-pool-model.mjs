@@ -1,5 +1,4 @@
 import { getImage } from "../../../helpers/path.mjs";
-import { getRollIcon } from "../../../helpers/utils.mjs";
 import StatPoolModel from "./stat-pool-model.mjs";
 
 export default class HpPoolModel extends StatPoolModel {
@@ -35,7 +34,7 @@ export default class HpPoolModel extends StatPoolModel {
             title: game.i18n.localize("TERIOCK.MODELS.StatPool.PANELS.title"),
           },
         ],
-        icon: getRollIcon(this.formula),
+        icon: TERIOCK.display.icons.stat.hp,
         image: getImage("misc", "Hit Die"),
         name: game.i18n.localize("TERIOCK.MODELS.HpPool.PANELS.name"),
       },

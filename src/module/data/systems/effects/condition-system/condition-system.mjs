@@ -78,11 +78,6 @@ export default class ConditionSystem extends mix(
   }
 
   /** @inheritDoc */
-  get useIcon() {
-    return "dice-d4";
-  }
-
-  /** @inheritDoc */
   get useText() {
     return game.i18n.format("TERIOCK.SYSTEMS.Condition.USAGE.use", {
       value: this.parent.name,

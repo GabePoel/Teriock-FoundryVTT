@@ -97,7 +97,7 @@ export async function selectDialog(choices, options = {}) {
 
   return await TeriockDialog.prompt({
     window: {
-      icon: makeIconClass("circle-question", "title"),
+      icon: makeIconClass(TERIOCK.display.icons.ui.select, "title"),
       title,
     },
     modal: true,
@@ -119,7 +119,7 @@ export async function selectDialog(choices, options = {}) {
 
           return await TeriockDialog.prompt({
             window: {
-              icon: makeIconClass("circle-question", "title"),
+              icon: makeIconClass(TERIOCK.display.icons.ui.custom, "title"),
               title,
             },
             modal: true,

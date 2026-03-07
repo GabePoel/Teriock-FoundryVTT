@@ -16,8 +16,13 @@
     classes=(ifThen editable "class-box" "")
   }}
   {{formBox
-    (localize "TERIOCK.SYSTEMS.Rank.PANELS.rank" value=system.classRank)
-    icon=system.classRank
+    (formInput
+      systemFields.classRank
+      value=system.classRank
+      disabled=(not editable)
+    )
+    unselected=(localize "TERIOCK.SYSTEMS.Rank.PANELS.rank" value=system.classRank)
+    icon=TERIOCK.options.document.rank.icon
     classes=(ifThen editable "rank-box" "")
     tooltip=(localize "TERIOCK.SYSTEMS.Rank.FIELDS.classRank.label")
   }}

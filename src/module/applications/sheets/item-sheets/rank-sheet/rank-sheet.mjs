@@ -5,7 +5,6 @@ import BaseItemSheet from "../base-item-sheet.mjs";
 import {
   archetypeContextMenu,
   classContextMenu,
-  rankContextMenu,
 } from "./helpers/rank-context-menus.mjs";
 
 /**
@@ -57,10 +56,6 @@ export default class RankSheet extends mix(
       return;
     }
     [
-      {
-        selector: ".rank-box",
-        menu: rankContextMenu,
-      },
       {
         selector: ".class-box",
         menu: classContextMenu,

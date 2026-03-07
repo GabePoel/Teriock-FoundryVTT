@@ -1,3 +1,4 @@
+import { icons } from "../../constants/display/icons.mjs";
 import { makeIconClass } from "../../helpers/utils.mjs";
 import { BaseApplicationMixin } from "../shared/mixins/_module.mjs";
 
@@ -14,7 +15,7 @@ export default class TeriockDialog extends BaseApplicationMixin(DialogV2) {
    */
   static DEFAULT_OPTIONS = {
     window: {
-      icon: makeIconClass("pen", "title"),
+      icon: makeIconClass(icons.ui.edit, "title"),
     },
   };
 }

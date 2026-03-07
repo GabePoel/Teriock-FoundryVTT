@@ -1,3 +1,4 @@
+import { icons } from "../../constants/display/icons.mjs";
 import { makeIconClass } from "../../helpers/utils.mjs";
 import TeriockBaseApplication from "./base-application.mjs";
 
@@ -18,7 +19,7 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
       cancel: this._onCancel,
     },
     window: {
-      icon: makeIconClass("circle-check", "title"),
+      icon: makeIconClass(icons.ui.select, "title"),
       title: "TERIOCK.DIALOGS.Select.Document.title",
       resizable: true,
     },

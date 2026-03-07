@@ -230,13 +230,13 @@ export default class BaseRoll extends Roll {
         context.styles.total.tooltip += game.i18n.localize(
           "TERIOCK.ROLLS.Base.success",
         );
-        context.styles.total.icon = "check";
+        context.styles.total.icon = TERIOCK.display.icons.ui.enable;
       } else {
         context.styles.total.classes += " failure";
         context.styles.total.tooltip += game.i18n.localize(
           "TERIOCK.ROLLS.Base.failure",
         );
-        context.styles.total.icon = "xmark";
+        context.styles.total.icon = TERIOCK.display.icons.ui.disable;
       }
     }
     return context;

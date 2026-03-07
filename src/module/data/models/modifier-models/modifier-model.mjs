@@ -46,10 +46,10 @@ export default class ModifierModel extends mix(
    * @returns {string}
    */
   get iconClass() {
-    if (this.competence.fluent) return makeIconClass("circle-dot", "solid");
+    if (this.competence.fluent) return makeIconClass("fa-circle-dot", "solid");
     if (this.competence.proficient)
-      return makeIconClass("circle-dot", "regular");
-    return makeIconClass("circle", "regular");
+      return makeIconClass("fa-circle-dot", "regular");
+    return makeIconClass("fa-circle", "regular");
   }
 
   /**

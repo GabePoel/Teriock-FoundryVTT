@@ -51,7 +51,7 @@ export default function registerFieldHelpers() {
       tooltip && tooltip.toString().length > 0
         ? `data-tooltip="${tooltip}"`
         : "";
-    let iconStr = `<i class="fa-fw fa-light fa-${icon}" ${tooltipStr}></i>`;
+    let iconStr = `<i class="fa-fw fa-light mic ${icon}" ${tooltipStr}></i>`;
     let styleStr = "";
     if (iconColor && iconColor.toString().length > 0) {
       styleStr = `style="color: ${iconColor};"`;

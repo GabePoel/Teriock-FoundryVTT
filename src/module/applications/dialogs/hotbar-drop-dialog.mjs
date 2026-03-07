@@ -25,7 +25,7 @@ export default async function hotbarDropDialog(doc) {
     );
     choice = await TeriockDialog.prompt({
       window: {
-        icon: makeIconClass("circle-question", "title"),
+        icon: makeIconClass(TERIOCK.display.icons.ui.confirm, "title"),
         title: game.i18n.localize("TERIOCK.DIALOGS.HotbarDrop.title"),
       },
       modal: true,

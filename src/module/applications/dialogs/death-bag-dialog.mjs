@@ -146,7 +146,7 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
       const panelParts = {
         bars: [
           {
-            icon: TERIOCK.display.icons.ui.stone,
+            icon: TERIOCK.options.document.stone.icon,
             label: game.i18n.localize(
               "TERIOCK.DIALOGS.DeathBag.PANEL.initialStonesInBag",
             ),

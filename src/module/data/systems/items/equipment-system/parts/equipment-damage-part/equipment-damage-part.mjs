@@ -1,4 +1,4 @@
-import { getRollIcon, makeIcon } from "../../../../../../helpers/utils.mjs";
+import { makeIcon } from "../../../../../../helpers/utils.mjs";
 import { damageField } from "../../../../../fields/helpers/builders.mjs";
 
 const { utils } = foundry;
@@ -78,7 +78,7 @@ export default (Base) => {
               "TERIOCK.SYSTEMS.Equipment.USAGE.twoHanded",
             ),
             icon: makeIcon(
-              getRollIcon(this.damage.twoHanded.formula),
+              TERIOCK.display.icons.equipment.twoHanded,
               "contextMenu",
             ),
             callback: this.use.bind(this, { twoHanded: true }),

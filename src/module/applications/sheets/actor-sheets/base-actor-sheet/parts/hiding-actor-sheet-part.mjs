@@ -36,18 +36,9 @@ export default (Base) =>
      * @param {HTMLButtonElement} toggleButton
      */
     #setToggleHideButtonAttributes(toggleButton) {
-      toggleButton.classList.remove(
-        ...[
-          `fa-${TERIOCK.display.icons.ui.show}`,
-          `fa-${TERIOCK.display.icons.ui.hide}`,
-        ],
-      );
+      toggleButton.classList.remove(...["fa-eye", "fa-eye-slash"]);
       toggleButton.classList.add(
-        ...[
-          this._hideInactive
-            ? `fa-${TERIOCK.display.icons.ui.hide}`
-            : `fa-${TERIOCK.display.icons.ui.show}`,
-        ],
+        ...[this._hideInactive ? "fa-eye-slash" : "fa-eye"],
       );
       toggleButton.setAttribute(
         "data-tooltip",

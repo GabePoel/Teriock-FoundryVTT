@@ -199,7 +199,12 @@ export default class EquipmentSystem extends mix(
   /** @inheritDoc */
   get displayToggles() {
     return [
-      "system.glued",
+      {
+        path: "system.glued",
+        dataset: {
+          action: "toggleGlued",
+        },
+      },
       {
         path: "system.shattered",
         dataset: {

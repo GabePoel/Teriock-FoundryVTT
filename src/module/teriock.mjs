@@ -465,13 +465,44 @@ foundry.helpers.Hooks.once("init", function () {
   foundry.applications.handlebars.loadTemplates(templates);
 });
 
-// Override Compendium Applications
-// ================================
-
 foundry.helpers.Hooks.once("setup", function () {
+  // Override Compendium Applications
+  // ================================
+
   for (const pack of game.packs) {
     pack.applicationClass = applications.sidebar.TeriockCompendium;
   }
+  const link = document.createElement("link");
+
+  // Enable Material Symbols
+  // =======================
+
+  link.href =
+    "https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200";
+  link.rel = "stylesheet";
+  document.head.appendChild(link);
+
+  // Mutate material symbols to work like font awesome icons
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      mutation.addedNodes.forEach((node) => {
+        if (node.nodeType === 1) {
+          const icons = node?.querySelectorAll('i[class*="ms-"]');
+          icons.forEach((icon) => {
+            const iconName = Array.from(icon.classList)
+              .find((c) => c.startsWith("ms-"))
+              ?.replace("ms-", "");
+            if (icon.innerText !== iconName) {
+              icon.innerText = iconName;
+              icon.classList.add("mic");
+            }
+          });
+        }
+      });
+    });
+  });
+
+  observer.observe(document.body, { childList: true, subtree: true });
 });
 
 // Perform one-time pre-localization and sorting of some configuration objects

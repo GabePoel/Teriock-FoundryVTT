@@ -1,6 +1,9 @@
 import { TeriockDialog } from "../../../applications/api/_module.mjs";
 import { FormulaField } from "../../../data/fields/_module.mjs";
-import { CompetenceModel } from "../../../data/models/_module.mjs";
+import {
+  CompetenceModel,
+  PiercingModel,
+} from "../../../data/models/_module.mjs";
 import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
 import { makeIconClass } from "../../../helpers/utils.mjs";
 
@@ -47,6 +50,14 @@ export default function ThresholdExecutionMixin(Base) {
       }
 
       /**
+       * If this is an attack.
+       * @returns {boolean}
+       */
+      get isAttack() {
+        return false;
+      }
+
+      /**
        * A name for this execution to show in dialogs.
        * @returns {string}
        */
@@ -81,6 +92,10 @@ export default function ThresholdExecutionMixin(Base) {
         }
         const bonus = button.form.elements.namedItem("bonus").value;
         if (bonus) this.bonus = addFormula(this.bonus, bonus);
+        if (this.piercing) {
+          const piercing = button.form.elements.namedItem("piercing").value;
+          if (piercing) this.piercing.raw = piercing;
+        }
       }
 
       /** @inheritDoc */
@@ -119,6 +134,8 @@ export default function ThresholdExecutionMixin(Base) {
        * @private
        */
       async _showRollDialog() {
+        const content = document.createElement("div");
+        content.classList.add("teriock-form-container");
         let initialCompetence = 0;
         if (this.proficient) initialCompetence = 1;
         if (this.fluent) initialCompetence = 2;
@@ -134,6 +151,25 @@ export default function ThresholdExecutionMixin(Base) {
           },
           { name: "competence", value: initialCompetence },
         );
+        content.append(competenceFormGroup);
+        if (this.isAttack) {
+          const piercingField = new fields.EmbeddedDataField(PiercingModel);
+          const piercingFormGroup = piercingField.fields.raw.toFormGroup(
+            {
+              hint: game.i18n.localize(
+                "TERIOCK.MODELS.Piercing.FIELDS.raw.hint",
+              ),
+              label: game.i18n.localize(
+                "TERIOCK.MODELS.Piercing.FIELDS.raw.label",
+              ),
+            },
+            {
+              name: "piercing",
+              value: this.piercing.raw,
+            },
+          );
+          content.append(piercingFormGroup);
+        }
         const bonusField = new FormulaField({
           hint: game.i18n.localize(
             "TERIOCK.DIALOGS.ThresholdExecutionOptions.FIELDS.bonus.hint",
@@ -143,13 +179,11 @@ export default function ThresholdExecutionMixin(Base) {
             "TERIOCK.DIALOGS.ThresholdExecutionOptions.FIELDS.bonus.label",
           ),
         });
-        const content = document.createElement("div");
-        content.classList.add("teriock-form-container");
         const bonusFormGroup = bonusField.toFormGroup(
           {},
           { name: "bonus", placeholder: "0" },
         );
-        content.append(...[competenceFormGroup, bonusFormGroup]);
+        content.append(bonusFormGroup);
         await TeriockDialog.wait({
           window: {
             icon: makeIconClass(this.icon, "title"),
@@ -164,7 +198,7 @@ export default function ThresholdExecutionMixin(Base) {
           buttons: [
             {
               action: "disadvantage",
-              icon: makeIconClass("dice-d20", "button"),
+              icon: makeIconClass("fa-dice-d20", "button"),
               label: game.i18n.localize(
                 "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.disadvantage",
               ),
@@ -176,7 +210,7 @@ export default function ThresholdExecutionMixin(Base) {
             {
               action: "normal",
               default: true,
-              icon: makeIconClass("dice-d20", "button"),
+              icon: makeIconClass("fa-dice-d20", "button"),
               label: game.i18n.localize(
                 "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.normal",
               ),
@@ -187,7 +221,7 @@ export default function ThresholdExecutionMixin(Base) {
             },
             {
               action: "advantage",
-              icon: makeIconClass("dice-d20", "button"),
+              icon: makeIconClass("fa-dice-d20", "button"),
               label: game.i18n.localize(
                 "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.advantage",
               ),

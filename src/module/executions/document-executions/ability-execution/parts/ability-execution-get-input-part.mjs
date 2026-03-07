@@ -157,7 +157,7 @@ export default function AbilityExecutionGetInputPart(Base) {
               });
           await TeriockDialog.prompt({
             window: {
-              icon: makeIconClass("burst", "title"),
+              icon: makeIconClass("fa-burst", "title"),
               title: title,
             },
             content: dialogs.join(""),

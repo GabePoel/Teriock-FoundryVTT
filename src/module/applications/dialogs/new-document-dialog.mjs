@@ -22,13 +22,13 @@ export default async function newDocumentDialog(type) {
       label: game.i18n.localize("TERIOCK.DIALOGS.NewDocument.BUTTONS.import"),
       default: true,
       callback: () => "import",
-      icon: makeIconClass("download", "button"),
+      icon: makeIconClass(TERIOCK.display.icons.ui.import, "button"),
     },
     buttons: [
       {
         label: game.i18n.localize("TERIOCK.DIALOGS.NewDocument.BUTTONS.create"),
         callback: () => "create",
-        icon: makeIconClass("hammer-brush", "button"),
+        icon: makeIconClass(TERIOCK.display.icons.ui.custom, "button"),
       },
     ],
   });

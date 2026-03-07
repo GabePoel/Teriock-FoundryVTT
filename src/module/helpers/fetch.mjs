@@ -1,3 +1,5 @@
+import { toId } from "./string.mjs";
+
 /**
  * Get a {@link TeriockItem} from a {@link CompendiumCollection}.
  * @param {string} name - Name of the {@link TeriockItem}.
@@ -86,4 +88,16 @@ export async function getRank(classKey, number, options = {}) {
  */
 export async function copyRank(classKey, number) {
   return await getRank(classKey, number, { clone: true });
+}
+
+/**
+ * Get the UUID for a rules journal entry page.
+ * @param {string} namespace
+ * @param {string} pageName
+ * @returns {string}
+ */
+export function ruleUuid(namespace, pageName) {
+  const nsId = toId(namespace, { hash: false });
+  const pnId = toId(pageName, { hash: false });
+  return `Compendium.teriock.rules.JournalEntry.${nsId}.JournalEntryPage.${pnId}`;
 }

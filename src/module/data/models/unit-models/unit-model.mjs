@@ -271,7 +271,7 @@ export default class UnitModel extends EvaluationModel {
             await document.update(updateData);
           },
           default: true,
-          icon: makeIconClass("check", "button"),
+          icon: makeIconClass(TERIOCK.display.icons.ui.enable, "button"),
           label: game.i18n.localize("TERIOCK.DIALOGS.Update.BUTTONS.update"),
         },
       ],

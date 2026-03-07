@@ -1,5 +1,5 @@
 import { inCombatExpirationDialog } from "../../../../applications/dialogs/_module.mjs";
-import { getRollIcon, mix } from "../../../../helpers/utils.mjs";
+import { mix } from "../../../../helpers/utils.mjs";
 import { builders } from "../../../fields/helpers/_module.mjs";
 import { conditionRequirementsField } from "../../../fields/helpers/builders.mjs";
 import DurationModel from "../../../models/unit-models/duration-model.mjs";
@@ -163,11 +163,6 @@ export default class ConsequenceSystem extends mix(
     ];
     parts.associations.push(...this.associations);
     return parts;
-  }
-
-  /** @inheritDoc */
-  get useIcon() {
-    return getRollIcon(this.expirations.combat.what.roll);
   }
 
   /** @inheritDoc */

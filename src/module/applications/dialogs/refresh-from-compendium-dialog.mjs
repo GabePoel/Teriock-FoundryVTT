@@ -110,7 +110,7 @@ export default async function refreshFromCompendiumDialog(doc) {
         }
         await doc.system.refreshFromCompendiumSource(options);
       },
-      icon: makeIconClass("check", "button"),
+      icon: makeIconClass(TERIOCK.display.icons.ui.select, "button"),
       label: game.i18n.localize(
         "TERIOCK.DIALOGS.RefreshFromCompendium.BUTTONS.refresh",
       ),
@@ -119,7 +119,7 @@ export default async function refreshFromCompendiumDialog(doc) {
       width: 450,
     },
     window: {
-      icon: makeIconClass("book-atlas", "title"),
+      icon: makeIconClass("fa-book-atlas", "title"),
       title: game.i18n.format("TERIOCK.DIALOGS.RefreshFromCompendium.title", {
         name: doc.nameString,
       }),

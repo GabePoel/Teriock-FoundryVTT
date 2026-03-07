@@ -44,7 +44,7 @@ export default function UsableDataMixin(Base) {
        * @returns {string}
        */
       get useIcon() {
-        return "dice-d20";
+        return TERIOCK.display.icons.ui.dice;
       }
 
       /**

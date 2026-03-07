@@ -39,11 +39,11 @@ export default function registerFormattingHelpers() {
     const max = part?.max || 0;
     const value = part?.value || 0;
     if (value === min) {
-      return "solid";
+      return "mic fa-solid";
     } else if (value === max) {
-      return "regular";
+      return "mic fa-faint";
     } else {
-      return "duotone fa-regular";
+      return "mic fa-intermediate";
     }
   });
 

@@ -45,10 +45,10 @@ export default (Base) =>
       context.avatarImagePath = this.settings.avatarImagePath;
       if (context.avatarImagePath === "img") {
         context.avatarTooltip = "Actor Image";
-        context.avatarIcon = `fa-${TERIOCK.display.icons.document.character}`;
+        context.avatarIcon = TERIOCK.display.icons.document.character;
       } else {
         context.avatarTooltip = "Token Image";
-        context.avatarIcon = `fa-${TERIOCK.display.icons.document.token}`;
+        context.avatarIcon = TERIOCK.display.icons.document.token;
       }
       return context;
     }

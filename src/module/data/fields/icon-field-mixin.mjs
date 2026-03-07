@@ -21,7 +21,7 @@ export default function iconFieldMixin(Base, optionsIndex = 0) {
       /** @inheritDoc */
       _toInput(config) {
         const icon = config.icon || this.icon;
-        const style = config.style || "regular";
+        const style = config.style || "light";
         const inputElement = super._toInput(config);
         if (icon) {
           const element = document.createElement("div");

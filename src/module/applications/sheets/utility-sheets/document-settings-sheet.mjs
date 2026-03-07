@@ -1,3 +1,4 @@
+import { icons } from "../../../constants/display/icons.mjs";
 import { makeIconClass } from "../../../helpers/utils.mjs";
 import TeriockDocumentSheet from "./document-sheet.mjs";
 
@@ -14,7 +15,7 @@ export default class DocumentSettingsSheet extends TeriockDocumentSheet {
     },
     window: {
       resizable: true,
-      icon: makeIconClass("gear-code", "title"),
+      icon: makeIconClass(icons.ui.configure, "title"),
     },
   };
   /** @inheritDoc */

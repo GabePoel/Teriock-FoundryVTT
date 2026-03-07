@@ -1,5 +1,4 @@
 import { getImage } from "../../../helpers/path.mjs";
-import { getRollIcon } from "../../../helpers/utils.mjs";
 import StatPoolModel from "./stat-pool-model.mjs";
 
 export default class MpPoolModel extends StatPoolModel {
@@ -30,7 +29,7 @@ export default class MpPoolModel extends StatPoolModel {
             title: game.i18n.localize("TERIOCK.MODELS.StatPool.PANELS.title"),
           },
         ],
-        icon: getRollIcon(this.formula),
+        icon: TERIOCK.display.icons.stat.mp,
         image: getImage("misc", "Mana Die"),
         name: game.i18n.localize("TERIOCK.MODELS.MpPool.PANELS.name"),
       },

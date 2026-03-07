@@ -36,7 +36,7 @@ export default class AbstractButtonHandler extends InteractionHandler {
    */
   static buildButton() {
     return {
-      icon: makeIconClass("check", "button"),
+      icon: makeIconClass(TERIOCK.display.icons.ui.enable, "button"),
       dataset: {
         action: this.ACTION,
       },

@@ -36,7 +36,7 @@ export default async function updateDialog(
         action: "update",
         label: game.i18n.localize("TERIOCK.DIALOGS.Update.BUTTONS.update"),
         default: true,
-        icon: makeIconClass("check", "button"),
+        icon: makeIconClass(TERIOCK.display.icons.ui.enable, "button"),
         callback: async function (_event, button) {
           const namedElements = /** @type {HTMLInputElement[]} */ Array.from(
             button.form.elements,

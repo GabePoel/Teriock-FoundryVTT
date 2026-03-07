@@ -43,6 +43,11 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
   }
 
   /** @inheritDoc */
+  get isAttack() {
+    return this.source?.system.interaction === "attack";
+  }
+
+  /** @inheritDoc */
   get rollData() {
     return Object.assign(super.rollData, {
       "angle.normal": game.settings.get("teriock", "defaultConeAngle"),

@@ -26,7 +26,10 @@ export default async function inCombatExpirationDialog(
         title: game.i18n.format("TERIOCK.DIALOGS.InCombatExpiration.title", {
           name,
         }),
-        icon: makeIconClass("circle-question", "title"),
+        icon: makeIconClass(
+          TERIOCK.options.document[effect.type].icon,
+          "title",
+        ),
       },
       content: game.i18n.format(
         "TERIOCK.DIALOGS.InCombatExpiration.contentConfirm",
@@ -81,7 +84,10 @@ export default async function inCombatExpirationDialog(
         title: game.i18n.format("TERIOCK.DIALOGS.InCombatExpiration.title", {
           name: effect.name,
         }),
-        icon: makeIconClass("dice-d4", "title"),
+        icon: makeIconClass(
+          TERIOCK.options.document[effect.type].icon,
+          "title",
+        ),
       },
       content: contentHtml,
       buttons: [
@@ -91,6 +97,7 @@ export default async function inCombatExpirationDialog(
             "TERIOCK.DIALOGS.InCombatExpiration.BUTTONS.roll",
           ),
           default: true,
+          icon: makeIconClass(TERIOCK.display.icons.ui.dice, "button"),
           callback: async (_event, button) => {
             const expirationRoll = new BaseRoll(
               button.form.elements.namedItem("roll").value,
@@ -130,6 +137,7 @@ export default async function inCombatExpirationDialog(
         },
         {
           action: "remove",
+          icon: makeIconClass(TERIOCK.display.icons.ui.remove, "button"),
           label: game.i18n.localize(
             "TERIOCK.DIALOGS.InCombatExpiration.BUTTONS.remove",
           ),

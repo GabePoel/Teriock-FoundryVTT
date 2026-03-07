@@ -93,11 +93,11 @@ export default async function boostDialog(rollFormula, options = {}) {
         }
         return formula;
       },
-      icon: makeIconClass("dice", "title"),
+      icon: makeIconClass(TERIOCK.display.icons.ui.dice, "title"),
       label: label,
     },
     window: {
-      icon: makeIconClass("dice", "title"),
+      icon: makeIconClass(TERIOCK.display.icons.ui.dice, "title"),
       title: type
         ? game.i18n.format("TERIOCK.DIALOGS.Boost.typeTitle", { type })
         : game.i18n.localize("TERIOCK.DIALOGS.Boost.title"),

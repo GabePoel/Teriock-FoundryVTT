@@ -1,7 +1,6 @@
 import { ArmamentExecution } from "../../../../executions/document-executions/_module.mjs";
 import { formulaExists } from "../../../../helpers/formula.mjs";
 import { toCamelCase } from "../../../../helpers/string.mjs";
-import { getRollIcon } from "../../../../helpers/utils.mjs";
 import { EvaluationField, TextField } from "../../../fields/_module.mjs";
 import { damageField } from "../../../fields/helpers/builders.mjs";
 import { DefenseModel, RangeModel } from "../../../models/_module.mjs";
@@ -199,7 +198,9 @@ export default function ArmamentSystemMixin(Base) {
 
       /** @inheritDoc */
       get useIcon() {
-        return getRollIcon(this.damage.base.formula);
+        return this.damage.base.nonZero
+          ? TERIOCK.display.icons.ui.damage
+          : super.useIcon;
       }
 
       /**
