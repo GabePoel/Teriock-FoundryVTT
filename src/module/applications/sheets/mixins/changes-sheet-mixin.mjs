@@ -8,8 +8,8 @@ export default function ChangesSheetMixin(Base) {
     class ChangesSheet extends Base {
       static DEFAULT_OPTIONS = {
         actions: {
-          addChange: this._onAddChange,
-          deleteChange: this._onDeleteChange,
+          addQualifiedChange: this._onAddChange,
+          deleteQualifiedChange: this._onDeleteChange,
         },
       };
 
