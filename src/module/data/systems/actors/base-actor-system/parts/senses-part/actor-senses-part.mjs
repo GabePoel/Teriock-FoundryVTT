@@ -43,6 +43,12 @@ export default (Base) => {
       prepareBaseData() {
         super.prepareBaseData();
         this.light = foundry.utils.deepClone(characterOptions.defaultLight);
+        if (!this.detection.hiding.raw) {
+          this.detection.hiding.raw = "@snk.pas";
+        }
+        if (!this.detection.perceiving.raw) {
+          this.detection.perceiving.raw = "@per.pas";
+        }
       }
 
       /** @inheritDoc */

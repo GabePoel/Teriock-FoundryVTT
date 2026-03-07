@@ -158,6 +158,7 @@ export default (Base) => {
       /** @inheritDoc */
       prepareBaseData() {
         super.prepareBaseData();
+        if (!this.weight.self.raw) this.weight.self.raw = "pow(3 + @size, 3)";
         this.encumbranceLevel = 0;
         this.attunements = new Set(
           this.parent.attunements.map((a) => a.system.target),

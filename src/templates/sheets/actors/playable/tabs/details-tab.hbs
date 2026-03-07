@@ -16,8 +16,8 @@
             {{localize "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.rate"}}
           </div>
         </div>
-        <div class="teriock-block-display-divider"></div>
-        <div class="tgrid g3" style="padding-inline: 0.5em;">
+        <div class="teriock-block-display-divider" style="margin-bottom: 1rem"></div>
+        <div class="tgrid g3" style="padding-inline: 0.5em; row-gap: 0.55rem;">
           {{#each TERIOCK.options.character.movementTypes as |name key|}}
             <div class="gi2">
               {{{name}}}
@@ -107,6 +107,7 @@
                   systemFields.weight.fields.self
                   value=system._source.weight.self.raw
                   classes="character-weight-input character-smallbox-value selected transparent-input"
+                  placeholder="pow(3 + @size, 3)"
                   dataset=(object
                     tooltip=(localize
                       "TERIOCK.SHEETS.Actor.TABS.Details.weight.includingEquipment"
@@ -226,6 +227,7 @@
               value=system._source.detection.hiding.raw
               classes="character-detection-input character-smallbox-value selected transparent-input"
               dataset=(object tooltip=system.detection.hiding.formula)
+              placeholder="@snk.pas"
             }}
           </div>
         </div>
@@ -243,6 +245,7 @@
               value=system._source.detection.perceiving.raw
               classes="character-detection-input character-smallbox-value selected transparent-input"
               dataset=(object tooltip=system.detection.perceiving.formula)
+              placeholder="@per.pas"
             }}
           </div>
         </div>
