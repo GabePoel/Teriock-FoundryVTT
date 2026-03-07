@@ -67,7 +67,9 @@ export default class TeriockItem extends mix(
    * @returns {Promise<boolean|void>}
    */
   static async _preCreateOperation(documents, operation, user) {
-    for (const d of documents) d.actor._stagedItemCreations = new Set();
+    for (const d of documents.filter((d) => d.actor)) {
+      d.actor._stagedItemCreations = new Set();
+    }
     return super._preCreateOperation(documents, operation, user);
   }
 
@@ -79,7 +81,9 @@ export default class TeriockItem extends mix(
    * @returns {Promise<boolean|void>}
    */
   static async _preDeleteOperation(documents, operation, user) {
-    for (const d of documents) d.actor._stagedItemDeletions = new Set();
+    for (const d of documents.filter((d) => d.actor)) {
+      d.actor._stagedItemDeletions = new Set();
+    }
     return super._preDeleteOperation(documents, operation, user);
   }
 
