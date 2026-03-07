@@ -1,67 +1,75 @@
-@use "../mixins";
+@use "../mixins" as mixins;
 
 // Compendium background/icon/header map
 $compendiums: (
   abilities: (
-    icon: "\e05d",
+    icon: "waving_hand",
     name: "Abilities",
   ),
   bodyParts: (
-    icon: "\f782",
+    icon: "pet_supplies",
     name: "Body Parts",
   ),
   classes: (
-    icon: "\e5d2",
+    icon: "military_tech",
     name: "Classes",
   ),
   creatures: (
-    icon: "\e688",
+    icon: "owl",
     name: "Creatures",
   ),
   equipment: (
-    icon: "\f723",
+    icon: "box",
     name: "Equipment",
   ),
   magicItems: (
-    icon: "\f6e1",
+    icon: "experiment",
     name: "Magic Items",
   ),
   powers: (
-    icon: "\e54d",
+    icon: "person_celebrate",
     name: "Powers",
   ),
   properties: (
-    icon: "\f5d3",
+    icon: "orbit",
     name: "Properties",
   ),
   species: (
-    icon: "\f8de",
+    icon: "sound_detection_dog_barking",
     name: "Species",
   ),
   tables: (
-    icon: "\f0ce",
+    icon: "table",
     name: "Tables",
   ),
   maintenance: (
-    icon: "\f085",
+    icon: "construction",
     name: "System Maintenance",
   ),
   execution: (
-    icon: "\f6e5",
+    icon: "code_xml",
     name: "Ability Execution Macros",
   ),
   essentials: (
-    icon: "\f61f",
+    icon: "support",
     name: "Essentials",
   ),
+  maps: (
+    icon: "map",
+    name: "Maps",
+  ),
   player: (
-    icon: "\f4fe",
+    icon: "service_toolbox",
     name: "Player Utilities",
   ),
   rules: (
-    icon: "\f05a",
+    icon: "book_2",
     name: "Rules",
   ),
+  stacks: (
+    icon: "playing_cards",
+    name: "Stacks"
+  )
 );
 
 // Compendium header banners
@@ -72,6 +80,7 @@ $compendiums: (
 
     img[alt="#{$name}"] {
       + .compendium-name i::before {
+        @include mixins.material-symbol();
         content: $icon;
       }
     }
@@ -96,6 +105,7 @@ $compendiums: (
     $icon: map-get($data, icon);
     &[data-pack="teriock.#{$key}"] {
       .entry-name i::before {
+        @include mixins.material-symbol();
         content: $icon;
       }
     }
