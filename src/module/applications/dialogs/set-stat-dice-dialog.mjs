@@ -4,17 +4,17 @@ import { TeriockDialog } from "../api/_module.mjs";
 
 /**
  * Dialog that sets {@link StatDieModel} values.
- * @param {StatPoolModel} pool
+ * @param {BaseStatPoolModel} pool
  */
 export default async function setStatDiceDialog(pool) {
   const numberForm = pool.schema.fields.number.fields.raw.toFormGroup(
     {
       rootId: foundry.utils.randomID(),
       hint: game.i18n.localize(
-        "TERIOCK.MODELS.StatPool.FIELDS.number.raw.hint",
+        "TERIOCK.MODELS.BaseStatPool.FIELDS.number.raw.hint",
       ),
       label: game.i18n.localize(
-        "TERIOCK.MODELS.StatPool.FIELDS.number.raw.label",
+        "TERIOCK.MODELS.BaseStatPool.FIELDS.number.raw.label",
       ),
     },
     {

@@ -1,11 +1,11 @@
 import { displayOptions } from "../constants/options/display-options.mjs";
 import { triggers } from "../constants/system/_module.mjs";
-import { BaseAutomation } from "../data/pseudo-documents/automations/_module.mjs";
 import type BaseExecution from "../executions/base-execution/base-execution.mjs";
 import {
   AbilityExecution,
   ArmamentExecution,
 } from "../executions/document-executions/_module.mjs";
+import { BaseAutomation } from "../data/pseudo-documents/automations/abstract/_module.mjs";
 
 declare global {
   export namespace Teriock.Parameters.Shared {

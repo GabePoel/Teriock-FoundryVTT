@@ -81,12 +81,10 @@
                   value=system._source.size.number.raw
                   classes="character-size-input character-smallbox-value selected transparent-input"
                   dataset=(object
-                    tooltip=(concat
-                      (ucFirst system.size.category)
-                      ": "
-                      system.size.reach
-                      " "
-                      (localize "TERIOCK.SHEETS.Actor.TABS.Details.size.reach")
+                    tooltip=(localize
+                      "TERIOCK.SHEETS.Actor.TABS.Details.size.description"
+                      category=system.size.category
+                      reach=system.size.reach
                     )
                     tooltipClass=""
                     tooltipDirection="DOWN")
@@ -130,13 +128,12 @@
                                          value=system.weight.value}}"
                 data-tooltip-direction="DOWN"
                 style="height: 2rem;"
-              >{{{system.weight
-              .carried}}} {{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}
+              >
+                {{{system.weight.carried}}} {{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}
               </div>
             </div>
           </div>
-          <div class="teriock-block-display-divider"
-               style="margin-top: 0.125em; margin-bottom: 0.625em;"></div>
+          <div class="teriock-block-display-divider" style="margin-top: 0.125em; margin-bottom: 0.625em;"></div>
           <div
             class="tgrid g3"
             data-uuid="{{ruleUuid "Core" "Carrying Capacity"}}"
@@ -190,8 +187,11 @@
               {{localize "TERIOCK.SHEETS.Actor.TABS.Details.curses.label"}}
             </div>
             <div class="character-smallbox-value tcenter" style="height: 2rem;">
-              {{localize "TERIOCK.SHEETS.Actor.TABS.Details.curses.capacity" value=system.curses.value
-                         max=system.curses.max}}
+              {{localize
+                "TERIOCK.SHEETS.Actor.TABS.Details.curses.capacity"
+                value=system.curses.value
+                max=system.curses.max
+              }}
             </div>
           </div>
           <div class="character-shortbox">
@@ -219,15 +219,16 @@
           </div>
           <div class="affix">
             <div class="unselected">
-                <span
-                  class="character-detection-input character-smallbox-value">{{{system.detection.hiding.value}}}</span>
+                <span class="character-detection-input character-smallbox-value">
+                  {{{system.detection.hiding.value}}}
+                </span>
             </div>
             {{formInput
               systemFields.detection.fields.hiding
               value=system._source.detection.hiding.raw
               classes="character-detection-input character-smallbox-value selected transparent-input"
               dataset=(object tooltip=system.detection.hiding.formula)
-              placeholder="@snk.pas"
+              placeholder=TERIOCK.options.character.defaults.hiding
             }}
           </div>
         </div>
@@ -237,15 +238,16 @@
           </div>
           <div class="affix">
             <div class="unselected">
-          <span class="character-detection-input character-smallbox-value">{{{system.detection.perceiving
-          .value}}}</span>
+          <span class="character-detection-input character-smallbox-value">
+            {{{system.detection.perceiving.value}}}
+          </span>
             </div>
             {{formInput
               systemFields.detection.fields.perceiving
               value=system._source.detection.perceiving.raw
               classes="character-detection-input character-smallbox-value selected transparent-input"
               dataset=(object tooltip=system.detection.perceiving.formula)
-              placeholder="@per.pas"
+              placeholder=TERIOCK.options.character.defaults.perceiving
             }}
           </div>
         </div>
@@ -257,8 +259,13 @@
         value="{{system.notes}}"
         toggled="true"
         editable="editable"
-      >{{#if (exists enrichedNotes)}}{{{enrichedNotes}}}{{else}}{{localize
-        "TERIOCK.SHEETS.Actor.TABS.Details.notes.placeholder"}}{{/if}}</prose-mirror>
+      >
+        {{#if (exists enrichedNotes)}}
+          {{{enrichedNotes}}}
+        {{else}}
+          {{localize "TERIOCK.SHEETS.Actor.TABS.Details.notes.placeholder"}}
+        {{/if}}
+      </prose-mirror>
     </div>
   </div>
 </div>

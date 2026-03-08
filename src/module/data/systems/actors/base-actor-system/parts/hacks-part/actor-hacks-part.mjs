@@ -14,19 +14,6 @@ export default (Base) => {
      * @mixin
      */
     class ActorHacksPart extends Base {
-      /**
-       * Clear all hacks of a given part.
-       * @param {Teriock.Parameters.Actor.HackableBodyPart} part
-       * @returns {Promise<void>}
-       */
-      async clearHacks(part) {
-        const ids = [];
-        for (let i = 0; i < hackOptions[part].max; i++) {
-          ids.push(hacksData[part + (i + 1).toString()]._id);
-        }
-        await this.parent.deleteEmbeddedDocuments("ActiveEffect", ids);
-      }
-
       /** @inheritDoc */
       getRollData() {
         const rollData = super.getRollData();

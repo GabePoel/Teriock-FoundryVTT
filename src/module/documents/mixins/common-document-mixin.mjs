@@ -108,9 +108,9 @@ export default function CommonDocumentMixin(Base) {
 
       /** @inheritDoc */
       async _preCreate(data, options, user) {
-        if ((await super._preCreate(data, options, user)) === false) {
-          return false;
-        }
+        const no = await super._preCreate(data, options, user);
+        if (no === false) return false;
+
         if (!data.img) {
           this.updateSource({
             img: systemPath(`icons/documents/${data.type}.svg`),

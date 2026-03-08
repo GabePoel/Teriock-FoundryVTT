@@ -24,6 +24,7 @@ export default (Base) => {
             (attributes[key] = new EvaluationField({
               deterministic: false,
               initial: `2 * @att.${key}.score`,
+              interval: 1,
               label: value,
               min: -Infinity,
               model: AttributeModel,

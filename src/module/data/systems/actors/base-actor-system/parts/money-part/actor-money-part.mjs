@@ -47,6 +47,27 @@ export default (Base) => {
         return rollData;
       }
 
+      /** @inheritDoc */
+      prepareDerivedData() {
+        super.prepareDerivedData();
+        const totalValue =
+          Object.keys(TERIOCK.options.currency).reduce((sum, key) => {
+            this.money[key] = Math.max(0, this.money[key] || 0);
+            const value = this.money[key] * TERIOCK.options.currency[key].value;
+            return sum + value;
+          }, 0) - this.money.debt;
+        const totalWeight = Object.keys(TERIOCK.options.currency).reduce(
+          (sum, key) => {
+            const weight =
+              (this.money[key] || 0) * TERIOCK.options.currency[key].weight;
+            return sum + weight;
+          },
+          0,
+        );
+        this.money.total = totalValue.toNearest(0.01);
+        this.weight.money = totalWeight.toNearest(0.01);
+      }
+
       /**
        * Actor pays money.
        * @param {number} amount - The amount of gold-equivalent money to pay.

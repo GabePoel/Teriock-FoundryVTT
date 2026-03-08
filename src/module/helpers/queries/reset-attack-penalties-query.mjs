@@ -1,4 +1,4 @@
-const { Actor } = foundry.documents;
+import { massUpdate } from "../utils.mjs";
 
 /**
  * Query that gets the {@link TeriockUser} to reset attack penalties and templates.
@@ -12,32 +12,12 @@ export default async function resetAttackPenaltiesQuery(
 ) {
   await canvas.scene.deleteEmbeddedDocuments(
     "MeasuredTemplate",
-    canvas.scene.templates.contents
-      .filter(
-        /** @param {MeasuredTemplateDocument} t */ (t) =>
-          t.getFlag("teriock", "deleteOnTurnChange"),
-      )
-      .map(/** @param {MeasuredTemplateDocument} t */ (t) => t.id),
+    canvas.scene.templates
+      .filter((t) => t.getFlag("teriock", "deleteOnTurnChange"))
+      .map((t) => t.id),
   );
-  const actorIds = queryData.actorUuids.filter((uuid) =>
-    uuid.startsWith("Actor"),
-  );
-  const idActors = actorIds.map((id) => fromUuidSync(id));
-  await Actor.implementation.updateDocuments(
-    idActors.map((a) => {
-      return {
-        _id: a.id,
-        "system.combat.attackPenalty": 0,
-      };
-    }),
-  );
-  const actorUuids = queryData.actorUuids.filter(
-    (uuid) => !uuid.startsWith("Actor"),
-  );
-  const actors = actorUuids.map((uuid) => fromUuidSync(uuid));
-  await Promise.all(
-    actors.map(
-      async (a) => await a.update({ "system.combat.attackPenalty": 0 }),
-    ),
-  );
+  const attackPenaltyUpdates = queryData.actorUuids.map((uuid) => {
+    return { uuid, "system.combat.attackPenalty": 0 };
+  });
+  await massUpdate("Actor", attackPenaltyUpdates);
 }

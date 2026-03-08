@@ -1,5 +1,6 @@
+import { characterOptions } from "../../../../../../constants/options/character-options.mjs";
+import { equipmentOptions } from "../../../../../../constants/options/equipment-options.mjs";
 import { TeriockActor } from "../../../../../../documents/_module.mjs";
-import { roundTo } from "../../../../../../helpers/unit.mjs";
 import { EvaluationField } from "../../../../../fields/_module.mjs";
 
 const { fields } = foundry.data;
@@ -34,9 +35,10 @@ export default (Base) => {
           }),
           weight: new fields.SchemaField({
             self: new EvaluationField({
-              blank: "pow(3 + @size, 3)",
+              blank: characterOptions.defaults.weight,
               deterministic: true,
-              initial: "pow(3 + @size, 3)",
+              initial: characterOptions.defaults.weight,
+              interval: equipmentOptions.weight.interval,
               min: 0,
             }),
           }),
@@ -94,30 +96,6 @@ export default (Base) => {
       }
 
       /**
-       * Prepare total currency value and weight.
-       */
-      #prepareMoney() {
-        const totalValue = Object.keys(TERIOCK.options.currency).reduce(
-          (sum, key) => {
-            this.money[key] = Math.max(0, this.money[key] || 0);
-            const value = this.money[key] * TERIOCK.options.currency[key].value;
-            return sum + value;
-          },
-          0,
-        );
-        const totalWeight = Object.keys(TERIOCK.options.currency).reduce(
-          (sum, key) => {
-            const weight =
-              (this.money[key] || 0) * TERIOCK.options.currency[key].weight;
-            return sum + weight;
-          },
-          0,
-        );
-        this.money.total = totalValue;
-        this.weight.money = roundTo(totalWeight, 2);
-      }
-
-      /**
        * Prepare the amount of weight being carried.
        */
       #prepareWeightCarried() {
@@ -126,11 +104,13 @@ export default (Base) => {
           equipmentWeight += e.system.weight.total;
         }
         this.weight.equipment = equipmentWeight;
-        this.weight.carried = Math.ceil(
-          this.weight.equipment + this.weight.money,
+        const carried = this.weight.equipment + this.weight.money;
+        this.weight.carried = carried.toNearest(
+          equipmentOptions.weight.interval,
         );
-        this.weight.value =
+        const value =
           this.weight.equipment + this.weight.money + this.weight.self.value;
+        this.weight.value = value.toNearest(equipmentOptions.weight.interval);
       }
 
       /** @inheritDoc */
@@ -158,7 +138,6 @@ export default (Base) => {
       /** @inheritDoc */
       prepareBaseData() {
         super.prepareBaseData();
-        if (!this.weight.self.raw) this.weight.self.raw = "pow(3 + @size, 3)";
         this.encumbranceLevel = 0;
         this.attunements = new Set(
           this.parent.attunements.map((a) => a.system.target),
@@ -171,13 +150,10 @@ export default (Base) => {
         super.prepareDerivedData();
         this.size.number.evaluate();
         this.weight.self.evaluate();
-        const sizeDefinition = TeriockActor.sizeDefinition(
-          this.size.number.value,
-        );
+        const sizeDefinition = TeriockActor.sizeConfig(this.size.number.value);
         this.size.category = sizeDefinition.category;
-        this.size.length = sizeDefinition.length / 5;
+        this.size.length = sizeDefinition.length;
         this.size.reach = sizeDefinition.reach;
-        this.#prepareMoney();
       }
 
       /** @inheritDoc */

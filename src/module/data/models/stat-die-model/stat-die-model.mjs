@@ -8,10 +8,9 @@ import EmbeddedDataModel from "../embedded-data-model.mjs";
 
 const { fields } = foundry.data;
 
-//noinspection JSClosureCompilerSyntax
 /**
- * @implements {Teriock.Models.StatDieModelInterface}
- * @implements {StatDieData}
+ * @extends {Teriock.Models.StatDieModelInterface}
+ * @extends {Teriock.Data.StatDieData}
  */
 export default class StatDieModel extends EmbeddedDataModel {
   /** @inheritDoc */
@@ -70,7 +69,7 @@ export default class StatDieModel extends EmbeddedDataModel {
       collection: this.parent.parent.parent.collectionName,
       document: this.parent.parent.parent.id,
       index: this.index.toString(),
-      stat: this.parent.stat,
+      stat: this.stat,
       tooltipDirection: "DOWN",
       tooltipHtml: dedent(`
       <div style='display: flex; flex-direction: column; align-items: center;'>
@@ -92,12 +91,6 @@ export default class StatDieModel extends EmbeddedDataModel {
    */
   get name() {
     return this.parent.dieName;
-  }
-
-  /** @returns {StatPoolModel} */
-  get parent() {
-    //noinspection JSValidateTypes
-    return super.parent;
   }
 
   /**
@@ -131,14 +124,6 @@ export default class StatDieModel extends EmbeddedDataModel {
     await this.parent.parent.parent.update({
       [updatePath]: dice,
     });
-  }
-
-  /**
-   * Unuse this die.
-   * @returns {Promise<void>}
-   */
-  async unuse() {
-    await this.toggle(false);
   }
 
   /**

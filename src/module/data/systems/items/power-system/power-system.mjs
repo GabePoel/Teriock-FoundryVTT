@@ -109,9 +109,9 @@ export default class PowerSystem extends mix(
 
   /** @inheritDoc */
   async _preCreate(data, options, user) {
-    if ((await super._preCreate(data, options, user)) === false) {
-      return false;
-    }
+    const no = await super._preCreate(data, options, user);
+    if (no === false) return false;
+
     if (
       this.actor?.powers.map((p) => p.name).includes(this.parent.name) &&
       ["Warrior", "Semi", "Mage"].includes(this.parent.name)

@@ -31,7 +31,7 @@ export default (Base) => {
             hasReaction: new fields.BooleanField({ initial: true }),
           }),
           initiative: new FormulaField({
-            initial: characterOptions.initiative,
+            initial: characterOptions.defaults.initiative,
             deterministic: false,
           }),
           offense: new fields.SchemaField({

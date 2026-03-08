@@ -1,7 +1,7 @@
 import { getImage } from "../../../helpers/path.mjs";
-import StatPoolModel from "./stat-pool-model.mjs";
+import BaseStatPoolModel from "./base-stat-pool-model.mjs";
 
-export default class MpPoolModel extends StatPoolModel {
+export default class MpPoolModel extends BaseStatPoolModel {
   get callback() {
     return /** @param {number} amount */ async (amount) => {
       await this.parent.actor?.system.takeRevitalizing(amount);
@@ -26,7 +26,9 @@ export default class MpPoolModel extends StatPoolModel {
         blocks: [
           {
             text: game.i18n.localize("TERIOCK.MODELS.MpPool.PANELS.text"),
-            title: game.i18n.localize("TERIOCK.MODELS.StatPool.PANELS.title"),
+            title: game.i18n.localize(
+              "TERIOCK.MODELS.BaseStatPool.PANELS.title",
+            ),
           },
         ],
         icon: TERIOCK.display.icons.stat.mp,

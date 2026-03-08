@@ -1,7 +1,7 @@
-import InteractionHandler from "../interaction-handler.mjs";
+import AbstractInteractionHandler from "../abstract-interaction-handler.mjs";
 
-declare module "./abstract-button-handler.mjs" {
-  export default interface ActionHandler extends InteractionHandler {
+declare module "./base-button-handler.mjs" {
+  export default interface ActionHandler extends AbstractInteractionHandler {
     /** Dataset */
     dataset: DOMStringMap;
     /** HTML Element */

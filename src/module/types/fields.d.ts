@@ -9,13 +9,13 @@ declare global {
     };
 
     export type FormulaDerivationOptions = {
-      floor?: boolean;
-      ceil?: boolean;
-      max?: number;
-      min?: number;
+      interval?: number;
       blank?: number | string;
       bool?: boolean;
-      decimals?: number;
+      ceil?: boolean;
+      floor?: boolean;
+      max?: number;
+      min?: number;
       skipRollData?: boolean;
     };
 

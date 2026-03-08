@@ -1,12 +1,12 @@
 import { cleanDataset } from "../../html.mjs";
 import { makeIconClass } from "../../utils.mjs";
-import InteractionHandler from "../interaction-handler.mjs";
+import AbstractInteractionHandler from "../abstract-interaction-handler.mjs";
 
 /**
  * Handler for calling actions when clicking on buttons in chat messages.
  * @template {DOMStringMap} [TDataset=DOMStringMap]
  */
-export default class AbstractButtonHandler extends InteractionHandler {
+export default class BaseButtonHandler extends AbstractInteractionHandler {
   /**
    * Name of action to connect to listeners.
    * @type {string}

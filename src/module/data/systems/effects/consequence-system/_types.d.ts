@@ -55,7 +55,6 @@ declare global {
         /** <schema> Changes */
         changes: Teriock.Changes.QualifiedChangeData[];
       };
-      movementExpiration: boolean;
       /** <schema> {@link TeriockActiveEffect} that's the source of this consequence */
       source: UUID<TeriockActiveEffect>;
       /** <schema> Source description */

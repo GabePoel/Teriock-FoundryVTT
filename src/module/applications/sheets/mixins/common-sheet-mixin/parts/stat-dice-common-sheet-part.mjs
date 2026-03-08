@@ -28,7 +28,7 @@ export default (Base) => {
         }
         const stat = target.dataset.stat;
         const pool =
-          /** @type {StatPoolModel} */ this.document.system.statDice[stat];
+          /** @type {BaseStatPoolModel} */ this.document.system.statDice[stat];
         await pool.setStatDice();
       }
     }

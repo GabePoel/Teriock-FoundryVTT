@@ -258,9 +258,9 @@ export default class TeriockMacro extends mix(
 
   /** @inheritDoc */
   async _preCreate(data, options, user) {
-    if ((await super._preCreate(data, options, user)) === false) {
-      return false;
-    }
+    const no = await super._preCreate(data, options, user);
+    if (no === false) return false;
+
     if (game.settings.get("teriock", "sortNewPlayerMacros") && !this.folder) {
       if (
         (!game.user.isGM && this.constructor.hotbarFolder) ||

@@ -1,7 +1,7 @@
 /**
  * Class that provides common fields to be referenced.
  */
-export default class InteractionHandler {
+export default class AbstractInteractionHandler {
   constructor() {
     //noinspection JSUnresolvedReference,JSValidateJSDoc
     const tokenLayer = /** @type {TokenLayer} */ game.canvas.tokens;

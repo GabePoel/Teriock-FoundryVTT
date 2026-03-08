@@ -1,6 +1,11 @@
 import { makeIconClass } from "../utils.mjs";
-import AbstractButtonHandler from "./button-handlers/abstract-button-handler.mjs";
+import BaseButtonHandler from "./button-handlers/base-button-handler.mjs";
 
+/**
+ * Parse arguments from a string for an interaction.
+ * @param {string} input
+ * @returns {(string|number|boolean)[]}
+ */
 export function parseArguments(input) {
   const regex = /([^\s"']+)|"([^"]*)"|'([^']*)'/g;
   const args = [];
@@ -19,6 +24,12 @@ export function parseArguments(input) {
   }, []);
 }
 
+/**
+ * Reformat arguments from interaction entries into an object.
+ * @param {[string, any][]} argArr
+ * @param {Teriock.Interaction.CommandEntry} command
+ * @returns {Record<string, any>}
+ */
 export function interpretArguments(argArr, command) {
   const argObj = {};
   let num = 0;
@@ -52,14 +63,14 @@ export function getInteractionEntryValue(interaction, property, options) {
 /**
  * Build a button handler from a command entry.
  * @param {Teriock.Interaction.CommandEntry} command
- * @returns {typeof AbstractButtonHandler}
+ * @returns {typeof BaseButtonHandler}
  */
 export function CommandButtonHandlerBuilder(command) {
   return (
     /**
      * @mixin
      */
-    class CommandButtonHandler extends AbstractButtonHandler {
+    class CommandButtonHandler extends BaseButtonHandler {
       static ACTION = command.id;
 
       /** @inheritDoc */

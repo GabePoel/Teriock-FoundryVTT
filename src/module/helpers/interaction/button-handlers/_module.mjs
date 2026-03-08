@@ -34,7 +34,7 @@ import {
   UseAbilityHandler,
 } from "./simple-command-handlers.mjs";
 
-/** @type {typeof AbstractButtonHandler[]} */
+/** @type {typeof BaseButtonHandler[]} */
 const handlerArray = [
   ApplyEffectHandler,
   ApplyStatusHandler,
@@ -69,7 +69,7 @@ const handlerArray = [
   UseAbilityHandler,
 ];
 
-/** @type {Record<string, typeof AbstractButtonHandler>} */
+/** @type {Record<string, typeof BaseButtonHandler>} */
 const handlers = {};
 for (const handler of handlerArray) {
   handlers[handler.ACTION] = handler;

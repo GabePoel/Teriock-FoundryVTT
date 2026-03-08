@@ -1,8 +1,8 @@
 import { icons } from "../../../constants/display/icons.mjs";
 import { makeIconClass } from "../../utils.mjs";
-import AbstractButtonHandler from "./abstract-button-handler.mjs";
+import BaseButtonHandler from "./base-button-handler.mjs";
 
-export class ExecuteMacroHandler extends AbstractButtonHandler {
+export class ExecuteMacroHandler extends BaseButtonHandler {
   static ACTION = "execute-macro";
 
   /**

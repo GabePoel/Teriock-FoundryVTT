@@ -6,7 +6,7 @@ const { fields } = foundry.data;
 const { DialogV2 } = foundry.applications.api;
 
 class UnitDialog extends DialogV2 {
-  /** @type {UnitModel} */
+  /** @type {BaseUnitModel} */
   unitModel;
 
   /**
@@ -40,15 +40,14 @@ class UnitDialog extends DialogV2 {
   }
 }
 
-//noinspection JSClosureCompilerSyntax,JSUnusedGlobalSymbols
 /**
- * @implements {Teriock.Models.UnitModelInterface}
+ * @extends {Teriock.Models.BaseUnitModelInterface}
  */
-export default class UnitModel extends EvaluationModel {
+export default class BaseUnitModel extends EvaluationModel {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
     ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.MODELS.Unit",
+    "TERIOCK.MODELS.BaseUnit",
   ];
 
   /** @returns {Teriock.Units.UnitEntry[]} */
@@ -83,7 +82,7 @@ export default class UnitModel extends EvaluationModel {
     return [
       {
         id: "unlimited",
-        label: game.i18n.localize("TERIOCK.MODELS.Unit.UNITS.unlimited"),
+        label: game.i18n.localize("TERIOCK.MODELS.BaseUnit.UNITS.unlimited"),
       },
     ];
   }
@@ -114,7 +113,7 @@ export default class UnitModel extends EvaluationModel {
    * @returns {string}
    */
   get _updateTitle() {
-    return game.i18n.format("TERIOCK.MODELS.Unit.UPDATE.basic", {
+    return game.i18n.format("TERIOCK.MODELS.BaseUnit.UPDATE.basic", {
       label: this.schema.label,
     });
   }

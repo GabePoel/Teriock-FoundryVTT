@@ -1,6 +1,5 @@
 import "./data/_types";
 import "./dice/_types";
-import "./applications/_types";
 import "./documents/_types";
 import "./helpers/_types";
 import { TeriockFolder } from "./documents/_module.mjs";

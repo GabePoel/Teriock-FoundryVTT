@@ -1,7 +1,7 @@
 import { FeatSaveExecution } from "../../../executions/activity-executions/_module.mjs";
-import ModifierModel from "./modifier-model.mjs";
+import BaseModifierModel from "./base-modifier-model.mjs";
 
-export default class AttributeModel extends ModifierModel {
+export default class AttributeModel extends BaseModifierModel {
   /** @type {number} */
   passive;
 

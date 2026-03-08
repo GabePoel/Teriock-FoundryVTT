@@ -164,9 +164,7 @@ export default class BaseEffectSystem extends ChildSystem {
    * @returns {Promise<boolean>} True if the effect should expire, false otherwise.
    */
   async shouldExpire() {
-    if (!this.parent.isTemporary) {
-      return false;
-    }
+    if (!this.parent.isTemporary) return false;
     return this.parent.duration.remaining < 0;
   }
 }

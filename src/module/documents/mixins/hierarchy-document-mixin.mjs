@@ -56,12 +56,9 @@ export default function HierarchyDocumentMixin(Base) {
        * @returns {Promise<boolean|void>}
        */
       static async _preCreateOperation(documents, operation, user) {
-        if (
-          (await super._preCreateOperation(documents, operation, user)) ===
-          false
-        ) {
-          return false;
-        }
+        const no = await super._preCreateOperation(documents, operation, user);
+        if (no === false) return false;
+
         operation.cachedKeepId = operation.keepId;
         operation.isKeepIdCached = true;
         documents.sort((a, b) => {

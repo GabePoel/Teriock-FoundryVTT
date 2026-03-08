@@ -9,10 +9,8 @@ import * as parts from "./parts/_module.mjs";
  * @param {typeof TeriockDocumentSheet} Base - The base application class to mix in with.
  */
 export default function CommonSheetMixin(Base) {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @implements {CommonSheetMixinInterface}
      * @extends {TeriockDocumentSheet}
      * @mixes BaseSheet
      * @mixes DocumentCreationCommonSheetPart

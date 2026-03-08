@@ -1,12 +1,12 @@
 import { icons } from "../../../constants/display/icons.mjs";
 import { pureUuid, safeUuid } from "../../resolve.mjs";
 import { makeIconClass } from "../../utils.mjs";
-import AbstractButtonHandler from "./abstract-button-handler.mjs";
+import BaseButtonHandler from "./base-button-handler.mjs";
 
 /**
  * Action to apply an effect.
  */
-export class ApplyEffectHandler extends AbstractButtonHandler {
+export class ApplyEffectHandler extends BaseButtonHandler {
   /** @inheritDoc */
   static ACTION = "apply-effect";
 

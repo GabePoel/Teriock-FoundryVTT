@@ -135,9 +135,10 @@ export default function ConsumableSystemMixin(Base) {
       async gainOne() {
         if (this.consumable) {
           await this.parent.update({
-            "system.quantity": Math.max(
-              Math.min(this.maxQuantity.value, this.quantity + 1),
+            "system.quantity": Math.clamp(
+              this.quantity + 1,
               0,
+              this.maxQuantity.value,
             ),
           });
         }
@@ -159,10 +160,7 @@ export default function ConsumableSystemMixin(Base) {
         super.prepareDerivedData();
         if (this.consumable) {
           this.maxQuantity.evaluate();
-          this.quantity = Math.max(
-            Math.min(this.maxQuantity.value, this.quantity),
-            0,
-          );
+          this.quantity = Math.clamp(this.quantity, 0, this.maxQuantity.value);
         } else {
           this.maxQuantity._value = Infinity;
         }

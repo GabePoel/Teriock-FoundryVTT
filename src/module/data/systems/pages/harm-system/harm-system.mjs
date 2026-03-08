@@ -61,9 +61,9 @@ export default class HarmSystem extends mix(
   }
 
   async _preCreate(data, options, user) {
-    if ((await super._preCreate(data, options, user)) === false) {
-      return false;
-    }
+    const no = await super._preCreate(data, options, user);
+    if (no === false) return false;
+
     if (!data.text?.content) {
       this.parent.updateSource({
         "text.content": game.i18n.localize(

@@ -1,3 +1,5 @@
+import { barClamp } from "../../../../../helpers/utils.mjs";
+
 /**
  * Actor data model mixin that handles rollable takes.
  * @param {typeof BaseActorSystem} Base
@@ -10,7 +12,7 @@ export default (Base) => {
      */
     class ActorRollableTakesPart extends Base {
       /**
-       * Applies harm to a stat.
+       * Applies harm to a stat that can have a temporary and morganti value.
        *
        * Relevant wiki pages:
        * - [Morganti](https://wiki.teriock.com/index.php/Property:Morganti)
@@ -25,14 +27,12 @@ export default (Base) => {
         const sp = this[stat];
         const temp = Math.max(0, sp.temp - amount);
         amount = Math.max(0, amount - sp.temp);
-        const updateData = { [`system.${stat}.temp`]: temp };
+        const updateData = {
+          [`system.${stat}.temp`]: temp,
+          [`system.${stat}.value`]: barClamp(sp, -amount),
+        };
         if (options.morganti) {
           updateData[`system.${stat}.morganti`] = sp.morganti + amount;
-        } else {
-          updateData[`system.${stat}.value`] = Math.max(
-            sp.min,
-            sp.value - amount,
-          );
         }
         await this.parent.update(updateData);
       }
@@ -114,8 +114,9 @@ export default (Base) => {
        */
       async takeHealing(amount) {
         await this.parent.hookCall("takeHealing", { scope: { amount } });
-        const value = Math.min(this.hp.max, this.hp.value + amount);
-        await this.parent.update({ "system.hp.value": value });
+        await this.parent.update({
+          "system.hp.value": barClamp(this.hp, amount),
+        });
       }
 
       /**
@@ -148,8 +149,9 @@ export default (Base) => {
        */
       async takeRevitalizing(amount) {
         await this.parent.hookCall("takeRevitalizing", { scope: { amount } });
-        const value = Math.min(this.mp.max, this.mp.value + amount);
-        await this.parent.update({ "system.mp.value": value });
+        await this.parent.update({
+          "system.mp.value": barClamp(this.mp, amount),
+        });
       }
 
       /**
@@ -210,11 +212,9 @@ export default (Base) => {
        */
       async takeWither(amount) {
         await this.parent.hookCall("takeWither", { scope: { amount } });
-        const value = Math.min(
-          this.wither.max,
-          this.wither.value + Number(amount),
-        );
-        await this.parent.update({ "system.wither.value": value });
+        await this.parent.update({
+          "system.wither.value": barClamp(this.wither, amount),
+        });
       }
     }
   );

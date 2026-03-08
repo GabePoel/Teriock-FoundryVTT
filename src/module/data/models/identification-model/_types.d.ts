@@ -1,6 +1,8 @@
+import { EquipmentSystem } from "../../systems/items/_module.mjs";
+
 declare global {
   namespace Teriock.Models {
-    export interface IdentificationModelInterface {
+    export type IdentificationModelInterface = {
       /** <schema> Secret flaws for when this is identified */
       flaws: string;
       /** <schema> Is the equipment identified? */
@@ -13,7 +15,9 @@ declare global {
       powerLevel: Teriock.Parameters.Equipment.EquipmentPowerLevel;
       /** <schema> Whether magic has been read on this */
       read: boolean;
-    }
+
+      get parent(): EquipmentSystem;
+    };
   }
 }
 

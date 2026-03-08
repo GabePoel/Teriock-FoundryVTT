@@ -142,9 +142,9 @@ export default class TeriockItem extends mix(
 
   /** @inheritDoc */
   async _preCreate(data, options, user) {
-    if ((await super._preCreate(data, options, user)) === false) {
-      return false;
-    }
+    const no = await super._preCreate(data, options, user);
+    if (no === false) return false;
+
     const elder = await this.getElder();
     if (elder && !elder.metadata.childItemTypes.includes(this.type)) {
       return false;

@@ -24,6 +24,7 @@ export default (Base) => {
             (tradecrafts[key] = new EvaluationField({
               deterministic: false,
               initial: `@tc.${key}.score`,
+              interval: 1,
               label: value,
               min: -Infinity,
               model: TradecraftModel,

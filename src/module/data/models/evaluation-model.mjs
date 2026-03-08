@@ -1,5 +1,4 @@
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
-import { roundTo } from "../../helpers/unit.mjs";
 import { FormulaField } from "../fields/_module.mjs";
 import EmbeddedDataModel from "./embedded-data-model.mjs";
 
@@ -16,12 +15,12 @@ export default class EvaluationModel extends EmbeddedDataModel {
       min = 0,
       max = Infinity,
       blank = 0,
-      decimals = undefined,
+      interval = undefined,
       ...options
     } = {},
   ) {
     super(data, { ...options });
-    this._derivationOptions = { floor, ceil, min, max, blank, decimals };
+    this._derivationOptions = { floor, ceil, min, max, blank, interval };
   }
 
   /**
@@ -142,8 +141,8 @@ export default class EvaluationModel extends EmbeddedDataModel {
     if (typeof options.min === "number") {
       value = Math.max(value, options.min);
     }
-    if (typeof options.decimals === "number") {
-      value = roundTo(value, options.decimals);
+    if (typeof options.interval === "number") {
+      value = value.toNearest(options.interval);
     }
     if (options.floor) {
       value = Math.floor(value);

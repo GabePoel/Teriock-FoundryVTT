@@ -1,12 +1,12 @@
 declare global {
   namespace Teriock.Models {
-    export interface ActorHacksPartInterface {
+    export type ActorHacksPartInterface = {
       /** <base> Hacks */
       hacks: Record<
         Teriock.Parameters.Actor.HackableBodyPart,
         Teriock.Foundry.BarField
       >;
-    }
+    };
   }
 }
 

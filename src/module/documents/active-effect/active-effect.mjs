@@ -9,7 +9,7 @@ const { ActiveEffect } = foundry.documents;
 //noinspection JSClosureCompilerSyntax
 /**
  * The Teriock ActiveEffect implementation.
- * @implements {Teriock.Documents.ActiveEffectInterface}
+ * @extends {Teriock.Documents.ActiveEffectInterface}
  * @extends {ActiveEffect}
  * @extends {ClientDocument}
  * @mixes BaseDocument
@@ -124,9 +124,9 @@ export default class TeriockActiveEffect extends mix(
 
   /** @inheritDoc */
   async _preCreate(data, options, user) {
-    if ((await super._preCreate(data, options, user)) === false) {
-      return false;
-    }
+    const no = await super._preCreate(data, options, user);
+    if (no === false) return false;
+
     const elder = await this.getElder();
     if (elder && !elder.metadata.childEffectTypes.includes(this.type)) {
       return false;
@@ -146,10 +146,10 @@ export default class TeriockActiveEffect extends mix(
   }
 
   /** @inheritDoc */
-  async _preUpdate(changed, options, user) {
-    if ((await super._preUpdate(changed, options, user)) === false) {
-      return false;
-    }
+  async _preUpdate(changes, options, user) {
+    const no = await super._preUpdate(changes, options, user);
+    if (no === false) return false;
+
     if (
       this.elder?.type === "wrapper" &&
       foundry.utils.getProperty(this.elder, "system.effect.id") === this.id
@@ -158,11 +158,11 @@ export default class TeriockActiveEffect extends mix(
       const wrapperUpdates = {};
       for (const key of wrapperKeys) {
         if (
-          foundry.utils.hasProperty(changed, key) &&
-          foundry.utils.getProperty(changed, key) !==
+          foundry.utils.hasProperty(changes, key) &&
+          foundry.utils.getProperty(changes, key) !==
             foundry.utils.getProperty(this.elder, key)
         ) {
-          wrapperUpdates[key] = foundry.utils.getProperty(changed, key);
+          wrapperUpdates[key] = foundry.utils.getProperty(changes, key);
         }
       }
       if (Object.keys(wrapperUpdates).length > 0) {

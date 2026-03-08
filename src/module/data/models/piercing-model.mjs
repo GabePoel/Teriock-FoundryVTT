@@ -4,10 +4,9 @@ import EmbeddedDataModel from "./embedded-data-model.mjs";
 
 const { fields } = foundry.data;
 
-//noinspection JSClosureCompilerSyntax
 /**
  * Model for common implementation of piercing settings.
- * @implements {Teriock.Models.ScaleModelInterface}
+ * @extends {Teriock.Models.ScaleModelInterface}
  * @property {Teriock.System.PiercingLevel} raw
  */
 export default class PiercingModel extends EmbeddedDataModel {

@@ -489,13 +489,7 @@ foundry.helpers.Hooks.once("setup", function () {
         if (node.nodeType === 1) {
           const icons = node?.querySelectorAll('i[class*="ms-"]');
           icons.forEach((icon) => {
-            const iconName = Array.from(icon.classList)
-              .find((c) => c.startsWith("ms-"))
-              ?.replace("ms-", "");
-            if (icon.innerText !== iconName) {
-              icon.innerText = iconName;
-              icon.classList.add("mic");
-            }
+            setup.iconMutation.mutateIcon(icon);
           });
         }
       });

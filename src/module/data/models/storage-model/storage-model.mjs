@@ -1,12 +1,12 @@
+import { equipmentOptions } from "../../../constants/options/equipment-options.mjs";
 import { EvaluationField, FormulaField } from "../../fields/_module.mjs";
 import EmbeddedDataModel from "../embedded-data-model.mjs";
 
 const { fields } = foundry.data;
 
-//noinspection JSClosureCompilerSyntax
 /**
  * Model that provides useful getters for equipment that stores other equipment.
- * @implements {Teriock.Models.StorageModelInterface}
+ * @extends {Teriock.Models.StorageModelInterface}
  */
 export default class StorageModel extends EmbeddedDataModel {
   /** @inheritDoc */
@@ -25,10 +25,11 @@ export default class StorageModel extends EmbeddedDataModel {
       maxCount: new EvaluationField({
         blank: Infinity,
         deterministic: true,
+        interval: 1,
       }),
       maxWeight: new EvaluationField({
         blank: Infinity,
-        decimals: 2,
+        interval: equipmentOptions.weight.interval,
         deterministic: true,
       }),
       weightMultiplier: new FormulaField({
@@ -54,8 +55,9 @@ export default class StorageModel extends EmbeddedDataModel {
    */
   get carriedWeight() {
     return this.parent.parent.equipment
-      .map((e) => e.system?.weight?.total || 0)
-      .reduce((a, b) => a + b, 0);
+      .map((e) => Number(e.system?.weight?.total))
+      .reduce((a, b) => a + b, 0)
+      .toNearest(equipmentOptions.weight.interval);
   }
 
   /**

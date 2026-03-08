@@ -214,7 +214,7 @@ declare global {
     _id: ID<TeriockProperty>;
     get id(): ID<TeriockProperty>;
     get uuid(): UUID<TeriockProperty>;
-    get parent(): TeriockEquipment;
+    get parent(): TeriockEquipment | null;
   };
   export type TeriockResource = TeriockActiveEffect & {
     sheet: ResourceSheet;

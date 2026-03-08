@@ -19,21 +19,22 @@ export default (Base) => {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
+          // TODO: Consider moving all senses to token in v14.
           senses: new fields.SchemaField({
             ...objectMap(characterOptions.senses, (o) => senseField(0, o)),
           }),
           detection: new fields.SchemaField({
             hiding: new EvaluationField({
-              blank: "@snk.pas",
+              blank: characterOptions.defaults.hiding,
               deterministic: true,
               floor: true,
-              initial: "@snk.pas",
+              initial: characterOptions.defaults.hiding,
             }),
             perceiving: new EvaluationField({
-              blank: "@per.pas",
+              blank: characterOptions.defaults.perceiving,
               deterministic: true,
               floor: true,
-              initial: "@per.pas",
+              initial: characterOptions.defaults.perceiving,
             }),
           }),
         });
@@ -42,13 +43,8 @@ export default (Base) => {
       /** @inheritDoc */
       prepareBaseData() {
         super.prepareBaseData();
+        // TODO: Move light controls to token overrides in v14.
         this.light = foundry.utils.deepClone(characterOptions.defaultLight);
-        if (!this.detection.hiding.raw) {
-          this.detection.hiding.raw = "@snk.pas";
-        }
-        if (!this.detection.perceiving.raw) {
-          this.detection.perceiving.raw = "@per.pas";
-        }
       }
 
       /** @inheritDoc */
@@ -56,6 +52,7 @@ export default (Base) => {
         super.prepareDerivedData();
         this.detection.hiding.evaluate();
         this.detection.perceiving.evaluate();
+        // TODO: Move light controls to token overrides in v14.
         if (this.parent.statuses.has("ethereal")) {
           this.senses.etherealLight = Math.max(
             this.light.dim || 0,

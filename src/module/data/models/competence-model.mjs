@@ -1,12 +1,11 @@
-import { makeIconClass } from "../../helpers/utils.mjs";
 import { competenceField } from "../fields/helpers/builders.mjs";
 import EmbeddedDataModel from "./embedded-data-model.mjs";
 
-//noinspection JSClosureCompilerSyntax,JSUnusedGlobalSymbols
 /**
  * Model for common implementation of piercing settings.
- * @implements {Teriock.Models.ScaleModelInterface}
+ * @extends {Teriock.Models.ScaleModelInterface}
  * @property {Teriock.System.CompetenceLevel} raw
+ * @property {CommonSystem|null} parent
  */
 export default class CompetenceModel extends EmbeddedDataModel {
   /** @inheritDoc */
@@ -57,15 +56,6 @@ export default class CompetenceModel extends EmbeddedDataModel {
     if (this.fluent) return TERIOCK.display.icons.competence.fluent;
     if (this.proficient) return TERIOCK.display.icons.competence.proficient;
     return TERIOCK.display.icons.competence.none;
-  }
-
-  /**
-   * Icon class that represents this.
-   * @returns {string}
-   */
-  get iconClass() {
-    let style = this.fluent ? "solid" : "regular";
-    return makeIconClass(this.icon, style);
   }
 
   /**

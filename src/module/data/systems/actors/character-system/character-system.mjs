@@ -22,9 +22,8 @@ export default class CharacterSystem extends BaseActorSystem {
 
   /** @inheritDoc */
   async _preCreate(data, options, user) {
-    if ((await super._preCreate(data, options, user)) === false) {
-      return false;
-    }
+    const no = await super._preCreate(data, options, user);
+    if (no === false) return false;
 
     // Ensure default items
     const defaultItems = [

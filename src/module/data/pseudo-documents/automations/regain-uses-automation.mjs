@@ -120,15 +120,14 @@ export default class RegainUsesAutomation extends TriggerAutomationMixin(
     const messageData = {
       rolls: [roll],
       speaker: TeriockChatMessage.getSpeaker({ actor: this.actor }),
-      system: {
-        panels: [panel],
-      },
+      system: { panels: [panel] },
     };
     await TeriockChatMessage.create(messageData);
     await this.document.update({
-      "system.quantity": Math.max(
-        Math.min(this.parent.maxQuantity.value, this.parent.quantity + 1),
+      "system.quantity": Math.clamp(
+        this.parent.quantity + roll.total,
         0,
+        this.parent.maxQuantity.value,
       ),
     });
   }

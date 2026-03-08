@@ -1,3 +1,4 @@
+import { characterOptions } from "../../constants/options/character-options.mjs";
 import { documentTypes } from "../../constants/system/_module.mjs";
 import { systemPath } from "../../helpers/path.mjs";
 import { resolveDocument } from "../../helpers/resolve.mjs";
@@ -45,12 +46,8 @@ export default class TeriockActor extends mix(
    * @returns {number}
    */
   static defaultWeight(size, amount = "typical") {
-    if (amount === "min") {
-      size -= 0.5;
-    }
-    if (amount === "max") {
-      size += 0.5;
-    }
+    if (amount === "min") size -= 0.5;
+    if (amount === "max") size += 0.5;
     return Math.max(0.001, Math.pow(3 + size, 3));
   }
 
@@ -61,15 +58,14 @@ export default class TeriockActor extends mix(
    * - [Size](https://wiki.teriock.com/index.php/Core:Size)
    *
    * @param {number} value
-   * @returns {{ max: number, length: number, category: string, reach: number }}
+   * @returns {Teriock.Config.SizeConfig}
    */
-  static sizeDefinition(value) {
-    const greaterThanEqualSizes = SIZE_DEFINITIONS.map((d) => d.max).filter(
-      (m) => m >= value,
+  static sizeConfig(value) {
+    const minCategoryMaxSize = Math.min(
+      ...characterOptions.sizes.map((d) => d.max).filter((m) => m >= value),
     );
-    const sizeDefinitionMax = Math.min(...greaterThanEqualSizes);
     return foundry.utils.deepClone(
-      SIZE_DEFINITIONS.find((d) => d.max === sizeDefinitionMax),
+      characterOptions.sizes.find((d) => d.max === minCategoryMaxSize),
     );
   }
 
@@ -105,41 +101,27 @@ export default class TeriockActor extends mix(
   }
 
   /**
-   * Get the best user for this actor.
+   * Get the default user to perform updates on this actor. This is most important for updates that involve dialogs
+   * or other approval. The idea is to be as specific as possible and avoid selecting the active GM wherever possible.
    * @returns {TeriockUser|null}
    */
   get defaultUser() {
-    let selectedUser = null;
+    let selected;
+
     // See if any user has the actor as a character
-    game.users.forEach((user) => {
-      if (user.character?.uuid === this.uuid && user.active) {
-        selectedUser = user;
-      }
-    });
+    selected = game.users.active.find(
+      (u) => u.character === this && this.canUserModify(u, "update"),
+    );
+
     // See if any players have control over the actor
-    if (!selectedUser) {
-      game.users.forEach((user) => {
-        if (
-          !user.isActiveGM &&
-          this.canUserModify(user, "update") &&
-          user.active
-        ) {
-          selectedUser = user;
-        }
-      });
-    }
-    // See if anyone has control over the actor
-    if (!selectedUser) {
-      game.users.forEach((user) => {
-        if (this.canUserModify(user, "update") && user.active) {
-          selectedUser = user;
-        }
-      });
-    }
-    if (!selectedUser) {
-      selectedUser = game.users.activeGM;
-    }
-    return selectedUser;
+    selected ??= game.users.active.find(
+      (u) => !u.isActiveGM && this.canUserModify(u, "update"),
+    );
+
+    // If all else fails, fall back to the active GM
+    selected ??= game.users.activeGM;
+
+    return selected;
   }
 
   /**
@@ -148,14 +130,6 @@ export default class TeriockActor extends mix(
    */
   get disabled() {
     return this.statuses.has("dead");
-  }
-
-  /**
-   * Get effects that expire with some duration.
-   * @returns {TeriockConsequence[]}
-   */
-  get durationExpirationEffects() {
-    return this.consequences.filter((effect) => effect.hasDuration);
   }
 
   /**
@@ -189,17 +163,6 @@ export default class TeriockActor extends mix(
       );
     }
     return out;
-  }
-
-  /**
-   * Gets effects that expire based on movement.
-   * @returns {TeriockConsequence[]} Array of movement expiration effects.
-   */
-  get movementExpirationEffects() {
-    return (
-      this.consequences.filter((effect) => effect.system.movementExpiration) ||
-      []
-    );
   }
 
   /**
@@ -266,9 +229,9 @@ export default class TeriockActor extends mix(
    * @returns {Promise<boolean|void>}
    */
   async _preCreate(data, options, user) {
-    if ((await super._preCreate(data, options, user)) === false) {
-      return false;
-    }
+    const no = await super._preCreate(data, options, user);
+    if (no === false) return false;
+
     const elder = await this.getElder();
     if (elder && !elder.metadata.childActorTypes.includes(this.type)) {
       return false;
@@ -292,37 +255,35 @@ export default class TeriockActor extends mix(
 
   /**
    * @inheritDoc
-   * @param {object} changed
+   * @param {object} changes
    * @param {object} options
    * @param {TeriockUser} user
    * @returns {Promise<boolean|void>}
    */
-  async _preUpdate(changed, options, user) {
-    if ((await super._preUpdate(changed, options, user)) === false) {
-      return false;
-    }
+  async _preUpdate(changes, options, user) {
+    const no = await super._preUpdate(changes, options, user);
+    if (no === false) return false;
+
     if (
-      foundry.utils.hasProperty(changed, "img") &&
-      !foundry.utils.hasProperty(changed, "prototypeToken.texture.src") &&
+      foundry.utils.hasProperty(changes, "img") &&
+      !foundry.utils.hasProperty(changes, "prototypeToken.texture.src") &&
       foundry.utils
-        .getProperty(changed, "img")
+        .getProperty(changes, "img")
         .startsWith(systemPath("icons/creatures"))
     ) {
       foundry.utils.setProperty(
-        changed,
+        changes,
         "prototypeToken.texture.src",
         TeriockTokenDocument.ringImage(
-          foundry.utils.getProperty(changed, "img"),
+          foundry.utils.getProperty(changes, "img"),
         ),
       );
     }
     const tokenUpdates =
-      foundry.utils.getProperty(changed, "prototypeToken") || {};
-    if (foundry.utils.hasProperty(changed, "system.size.raw")) {
-      const tokenSize = this.constructor.sizeDefinition(
-        changed.size.raw,
-      ).length;
-      if (!foundry.utils.hasProperty(changed, "prototypeToken.width")) {
+      foundry.utils.getProperty(changes, "prototypeToken") || {};
+    if (foundry.utils.hasProperty(changes, "system.size.raw")) {
+      const tokenSize = this.constructor.sizeConfig(changes.size.raw).length;
+      if (!foundry.utils.hasProperty(changes, "prototypeToken.width")) {
         tokenUpdates["prototypeToken.width"] = tokenSize;
         tokenUpdates["prototypeToken.height"] = tokenSize;
       }
@@ -349,7 +310,6 @@ export default class TeriockActor extends mix(
    * @returns {Promise<AnyItem[]>}
    */
   async _processStagedItemCreations() {
-    console.log(this._stagedItemCreations);
     if (!this._stagedItemCreations) return [];
     const items = await Promise.all(
       this._stagedItemCreations.map((uuid) => fromUuid(uuid)),
@@ -594,48 +554,3 @@ export default class TeriockActor extends mix(
     }
   }
 }
-
-const SIZE_DEFINITIONS = [
-  {
-    max: 0.5,
-    length: 2.5,
-    category: "tiny",
-    reach: 5,
-  },
-  {
-    max: 2,
-    length: 5,
-    category: "small",
-    reach: 5,
-  },
-  {
-    max: 4,
-    length: 5,
-    category: "medium",
-    reach: 5,
-  },
-  {
-    max: 9,
-    length: 10,
-    category: "large",
-    reach: 10,
-  },
-  {
-    max: 14,
-    length: 15,
-    category: "huge",
-    reach: 15,
-  },
-  {
-    max: 20,
-    length: 20,
-    category: "gargantuan",
-    reach: 20,
-  },
-  {
-    max: Infinity,
-    length: 30,
-    category: "colossal",
-    reach: 30,
-  },
-];

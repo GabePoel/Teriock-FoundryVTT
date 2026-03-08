@@ -1,11 +1,11 @@
 import { getRollIcon, makeIconClass } from "../../utils.mjs";
 import commands from "../commands/_module.mjs";
-import AbstractButtonHandler from "./abstract-button-handler.mjs";
+import BaseButtonHandler from "./base-button-handler.mjs";
 
 /**
  * Action to roll a rollable take.
  */
-export class RollRollableTakeHandler extends AbstractButtonHandler {
+export class RollRollableTakeHandler extends BaseButtonHandler {
   /** @inheritDoc */
   static ACTION = "roll-rollable-take";
 
@@ -48,7 +48,7 @@ export class RollRollableTakeHandler extends AbstractButtonHandler {
 /**
  * Action to take a rollable take.
  */
-export class TakeRollableTakeHandler extends AbstractButtonHandler {
+export class TakeRollableTakeHandler extends BaseButtonHandler {
   /** @inheritDoc */
   static ACTION = "take-rollable-take";
 

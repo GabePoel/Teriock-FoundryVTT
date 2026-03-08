@@ -5,7 +5,7 @@ import {
   TeriockTokenDocument,
 } from "../../documents/_module.mjs";
 
-declare module "./interaction-handler.mjs" {
+declare module "./abstract-interaction-handler.mjs" {
   export default interface InteractionHandler {
     /** Default Actors */
     actors: TeriockActor[];

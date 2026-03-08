@@ -157,9 +157,9 @@ export default class TeriockTokenDocument extends mix(
 
   /** @inheritDoc */
   async _preCreate(data, options, user) {
-    if ((await super._preCreate(data, options, user)) === false) {
-      return false;
-    }
+    const no = await super._preCreate(data, options, user);
+    if (no === false) return false;
+
     if (foundry.utils.hasProperty(data, "texture.src")) {
       this.updateSource({
         flags: {
@@ -173,9 +173,9 @@ export default class TeriockTokenDocument extends mix(
 
   /** @inheritDoc */
   async _preUpdate(changes, options, user) {
-    if ((await super._preUpdate(changes, options, user)) === false) {
-      return false;
-    }
+    const no = await super._preUpdate(changes, options, user);
+    if (no === false) return false;
+
     if (foundry.utils.hasProperty(changes, "texture.src")) {
       if (!options.transformationUpdate) {
         foundry.utils.setProperty(

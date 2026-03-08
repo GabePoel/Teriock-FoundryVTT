@@ -7,15 +7,15 @@ import StatDieModel from "../stat-die-model/stat-die-model.mjs";
 
 const { fields } = foundry.data;
 
-//noinspection JSClosureCompilerSyntax
 /**
- * @implements {Teriock.Models.StatPoolModelInterface}
+ * @extends {Teriock.Models.BaseStatPoolModelInterface}
+ * @property {StatGiverSystem} parent
  */
-export default class StatPoolModel extends EmbeddedDataModel {
+export default class BaseStatPoolModel extends EmbeddedDataModel {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
     ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.MODELS.StatPool",
+    "TERIOCK.MODELS.BaseStatPool",
   ];
 
   /** @inheritDoc */
@@ -56,7 +56,7 @@ export default class StatPoolModel extends EmbeddedDataModel {
    * @returns {string}
    */
   get dieName() {
-    return game.i18n.localize("TERIOCK.MODELS.StatPool.PANELS.name");
+    return game.i18n.localize("TERIOCK.MODELS.BaseStatPool.PANELS.name");
   }
 
   /**
@@ -105,13 +105,15 @@ export default class StatPoolModel extends EmbeddedDataModel {
         bars: [],
         blocks: [
           {
-            text: game.i18n.localize("TERIOCK.MODELS.StatPool.PANELS.text"),
-            title: game.i18n.localize("TERIOCK.MODELS.StatPool.PANELS.title"),
+            text: game.i18n.localize("TERIOCK.MODELS.BaseStatPool.PANELS.text"),
+            title: game.i18n.localize(
+              "TERIOCK.MODELS.BaseStatPool.PANELS.title",
+            ),
           },
         ],
         icon: getRollIcon(this.formula),
         image: getImage("equipment", "Die"),
-        name: game.i18n.localize("TERIOCK.MODELS.StatPool.PANELS.name"),
+        name: game.i18n.localize("TERIOCK.MODELS.BaseStatPool.PANELS.name"),
       },
     ];
   }

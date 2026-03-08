@@ -4,6 +4,8 @@ import * as index from "../index/_module.mjs";
 import reference from "../reference/_module.mjs";
 
 export const equipmentOptions = {
+  equipmentClasses: reference.equipmentClasses,
+  equipmentType: index.equipment,
   powerLevel: {
     mundane: {
       name: "TERIOCK.TERMS.PowerLevel.mundane",
@@ -32,10 +34,9 @@ export const equipmentOptions = {
     magic: "TERIOCK.TERMS.PowerLevel.magic",
     unknown: "TERIOCK.TERMS.PowerLevel.unknown",
   },
-  equipmentClasses: reference.equipmentClasses,
+  unidentifiedProperties: ["morganti", "master-crafted", "small", "cumbersome"],
   weaponFightingStyles: reference.weaponFightingStyles,
-  equipmentType: index.equipment,
-  unidentifiedProperties: ["Morganti", "Master Crafted"],
+  weight: { interval: 0.01 },
 };
 
 preLocalize("options.equipment.powerLevel", { keys: ["name"] });

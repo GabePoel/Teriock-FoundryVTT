@@ -1,6 +1,6 @@
-import UnitModel from "./unit-model.mjs";
+import BaseUnitModel from "./base-unit-model.mjs";
 
-export default class TimeUnitModel extends UnitModel {
+export default class TimeUnitModel extends BaseUnitModel {
   /**
    * @inheritDoc
    * @returns {Teriock.Units.UnitEntry[]}

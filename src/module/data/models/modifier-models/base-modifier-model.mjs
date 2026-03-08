@@ -1,5 +1,5 @@
-import { toCamelCase, toTitleCase } from "../../../helpers/string.mjs";
-import { makeIconClass, mix } from "../../../helpers/utils.mjs";
+import { toCamelCase } from "../../../helpers/string.mjs";
+import { mix } from "../../../helpers/utils.mjs";
 import {
   ThresholdDataMixin,
   UsableDataMixin,
@@ -8,13 +8,12 @@ import EvaluationModel from "../evaluation-model.mjs";
 
 const { fields } = foundry.data;
 
-//noinspection JSClosureCompilerSyntax,JSUnusedGlobalSymbols
 /**
  * @mixes UsableData
- * @extends EvaluationModel
- * @implements {Teriock.Models.ModifierModelInterface}
+ * @extends {EvaluationModel}
+ * @extends {Teriock.Models.BaseModifierModelInterface}
  */
-export default class ModifierModel extends mix(
+export default class BaseModifierModel extends mix(
   EvaluationModel,
   UsableDataMixin,
   ThresholdDataMixin,
@@ -42,18 +41,6 @@ export default class ModifierModel extends mix(
   }
 
   /**
-   * Class to use in icons for this modifier's competence.
-   * @returns {string}
-   */
-  get iconClass() {
-    if (this.competence.fluent) {
-      return makeIconClass("ms-circle_circle", "solid");
-    }
-    if (this.competence.proficient) return makeIconClass("ms-adjust", "light");
-    return makeIconClass("ms-circle", "light");
-  }
-
-  /**
    * A key identifying this executable.
    * @returns {string}
    */
@@ -66,7 +53,7 @@ export default class ModifierModel extends mix(
    * @returns {string}
    */
   get name() {
-    return toTitleCase(this.schema.fields.raw.label);
+    return this.schema.fields.raw.label;
   }
 
   /** @inheritDoc */

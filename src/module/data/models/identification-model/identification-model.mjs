@@ -8,9 +8,8 @@ import EmbeddedDataModel from "../embedded-data-model.mjs";
 
 const { fields } = foundry.data;
 
-//noinspection JSClosureCompilerSyntax
 /**
- * @implements {Teriock.Models.IdentificationModelInterface}
+ * @extends {Teriock.Models.IdentificationModelInterface}
  */
 export default class IdentificationModel extends EmbeddedDataModel {
   /** @inheritDoc */
@@ -44,11 +43,6 @@ export default class IdentificationModel extends EmbeddedDataModel {
       }),
       read: new fields.BooleanField({ initial: true }),
     };
-  }
-
-  /** @returns {EquipmentSystem} */
-  get parent() {
-    return /** @type {EquipmentSystem} */ super.parent;
   }
 
   /**
@@ -177,17 +171,18 @@ export default class IdentificationModel extends EmbeddedDataModel {
    */
   async unidentify() {
     if (this.identified && game.user.isGM) {
-      const uncheckedPropertyNames =
-        TERIOCK.options.equipment.unidentifiedProperties;
+      const uncheckedPropertyIdentifiers = [
+        ...TERIOCK.options.equipment.unidentifiedProperties,
+      ];
       if (
         Object.values(TERIOCK.index.equipment).includes(
           this.parent.equipmentType,
         )
       ) {
-        uncheckedPropertyNames.push(
+        uncheckedPropertyIdentifiers.push(
           ...(
             await getDocument(this.parent.equipmentType, "equipment")
-          ).properties.map((p) => p.name),
+          ).properties.map((p) => p.system.identifier),
         );
       }
       const revealed = [
@@ -196,10 +191,12 @@ export default class IdentificationModel extends EmbeddedDataModel {
         ...this.parent.parent.resources.filter((r) => r.system.revealed),
         ...this.parent.parent.fluencies.filter((f) => f.system.revealed),
       ];
+      console.log(uncheckedPropertyIdentifiers);
       const checked = revealed
         .filter(
           (e) =>
-            e.type !== "property" || !uncheckedPropertyNames.includes(e.name),
+            e.type !== "property" ||
+            !uncheckedPropertyIdentifiers.includes(e.system.identifier),
         )
         .map((e) => e.uuid);
       const toReveal = await selectDocumentsDialog(revealed, {

@@ -14,9 +14,12 @@ await tm.utils.progressBar(
         }),
         async (i) => {
           const doc = await tm.resolve.resolveDocument(i);
-          await doc.update({
-            "system.identifier": doc.defaultIdentifier,
-          });
+          const identifier = doc.defaultIdentifier;
+          await doc.update({ "system.identifier": identifier });
+          if (doc.type === "wrapper") {
+            await doc.system.effect.update({ "system.identifier": identifier });
+          }
+          console.log(doc.defaultIdentifier, doc.system.identifier);
           if (typeof doc?.system?.refreshFromCompendiumSource === "function") {
             const options = {};
             if (p.collection === "teriock.magicItems") {

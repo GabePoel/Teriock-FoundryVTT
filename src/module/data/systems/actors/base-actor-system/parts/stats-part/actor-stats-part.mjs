@@ -60,9 +60,9 @@ export default (Base) => {
 
       /** @inheritDoc */
       async _preUpdate(changes, options, user) {
-        if ((await super._preUpdate(changes, options, user)) === false) {
-          return false;
-        }
+        const no = await super._preUpdate(changes, options, user);
+        if (no === false) return false;
+
         options.teriock ??= {};
         const newHp = foundry.utils.mergeObject(
           foundry.utils.deepClone(this.hp),
@@ -163,8 +163,9 @@ export default (Base) => {
           this[stat].max = Math.max(1, this[stat].base);
           this[stat].min = -Math.floor(this[stat].max / 2);
           this[stat].max -= this[stat].morganti;
-          this[stat].value = Math.min(
-            Math.max(this[stat].value, this[stat].min),
+          this[stat].value = Math.clamp(
+            this[stat].value,
+            this[stat].min,
             this[stat].max,
           );
           this[stat].temp = Math.max(0, this[stat].temp);

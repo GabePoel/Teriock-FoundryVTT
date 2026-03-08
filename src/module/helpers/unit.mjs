@@ -202,13 +202,3 @@ export function secondsToReadable(totalSeconds) {
     ? parts.join(", ")
     : game.i18n.localize("TERIOCK.MODELS.TimeUnit.UNITS.zeroSeconds.short");
 }
-/**
- * Round a value to the specified number of decimal places.
- * @param {number} value
- * @param {number} decimals
- * @returns {number}
- */
-export function roundTo(value, decimals) {
-  const factor = Math.pow(10, decimals);
-  return Math.round(value * factor) / factor;
-}

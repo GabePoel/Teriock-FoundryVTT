@@ -213,3 +213,65 @@ export function formatDynamicSelectOptions(choices = {}, options = {}) {
   }
   return out;
 }
+
+/**
+ * Helper function to ensure a value with a min and max is allowed.
+ * @param {Teriock.Foundry.BarField} bar
+ * @param {number} change
+ * @returns {number}
+ */
+export function barClamp(bar, change) {
+  return Math.clamp(bar.value + change, bar.min, bar.max);
+}
+
+/**
+ * Update many documents with a few database calls as possible.
+ * @param {string} documentName
+ * @param {(object & { uuid: UUID<TeriockDocument>})[]} updateData
+ * @param {DatabaseUpdateOperation} [operation={}]
+ * @returns {Promise<TeriockDocument[]>}
+ */
+export async function massUpdate(documentName, updateData, operation = {}) {
+  updateData = updateData.filter((d) => d.uuid);
+  const worldUpdates = [];
+  const parentUpdates = {};
+  for (const ud of updateData) {
+    if (ud.uuid.startsWith(documentName)) {
+      const update = {
+        ...ud,
+        _id: foundry.utils.parseUuid(ud.uuid).id,
+      };
+      delete update.uuid;
+      worldUpdates.push(update);
+    } else {
+      const uuidParts = ud.uuid.split(".");
+      uuidParts.pop();
+      uuidParts.pop();
+      const parentUuid = uuidParts.join(".");
+      if (!parentUpdates[parentUuid]) parentUpdates[parentUuid] = [];
+      const update = {
+        ...ud,
+        _id: foundry.utils.parseUuid(ud.uuid).id,
+      };
+      delete update.uuid;
+      parentUpdates[parentUuid].push(update);
+    }
+  }
+  const Cls = foundry.utils.getDocumentClass(documentName);
+  const resolvedUpdates = await Promise.all([
+    Cls.updateDocuments(worldUpdates, foundry.utils.deepClone(operation)),
+    ...Object.entries(parentUpdates).map(async ([parentUuid, updates]) => {
+      const parent = await fromUuid(parentUuid);
+      return parent.updateEmbeddedDocuments(
+        documentName,
+        updates,
+        foundry.utils.deepClone(operation),
+      );
+    }),
+  ]);
+  const documents = [];
+  for (const ud of resolvedUpdates) {
+    documents.push(...ud);
+  }
+  return documents;
+}

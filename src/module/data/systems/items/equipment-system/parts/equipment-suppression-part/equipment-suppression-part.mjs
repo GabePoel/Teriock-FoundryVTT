@@ -29,6 +29,19 @@ export default (Base) => {
       }
 
       /** @inheritDoc */
+      get _nameTags() {
+        const tags = super._nameTags;
+        if (this.stashed) {
+          tags.push(
+            game.i18n.localize(
+              "TERIOCK.SYSTEMS.Equipment.FIELDS.stashed.label",
+            ),
+          );
+        }
+        return tags;
+      }
+
+      /** @inheritDoc */
       get embedIcons() {
         return [
           super.embedIcons.find((i) =>

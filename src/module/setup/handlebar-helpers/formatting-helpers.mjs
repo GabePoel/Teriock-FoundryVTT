@@ -1,4 +1,4 @@
-import { getRollIcon } from "../../helpers/utils.mjs";
+import { getRollIcon, makeIconClass } from "../../helpers/utils.mjs";
 
 export default function registerFormattingHelpers() {
   Handlebars.registerHelper("firstDie", (str) => {
@@ -6,6 +6,16 @@ export default function registerFormattingHelpers() {
       str = "";
     }
     return getRollIcon(str);
+  });
+
+  Handlebars.registerHelper("modifierIconClass", (modifier) => {
+    if (modifier.competence.fluent) {
+      return makeIconClass("ms-circle_circle", "solid");
+    }
+    if (modifier.competence.proficient) {
+      return makeIconClass("ms-adjust", "light");
+    }
+    return makeIconClass("ms-circle", "light");
   });
 
   Handlebars.registerHelper("elements", (elements) => {
@@ -47,14 +57,6 @@ export default function registerFormattingHelpers() {
     }
   });
 
-  function normalizeBarInputs(value, max, temp = 0) {
-    return {
-      value: Math.max(0, value ?? 0),
-      max: Math.max(0, max ?? 0),
-      temp: Math.max(0, temp ?? 0),
-    };
-  }
-
   Handlebars.registerHelper("frac", (value, max) => (value / max) * 100);
 
   Handlebars.registerHelper("barLeft", (value, max, temp = 0) => {
@@ -83,4 +85,12 @@ export default function registerFormattingHelpers() {
     }
     return "";
   });
+}
+
+function normalizeBarInputs(value, max, temp = 0) {
+  return {
+    value: Math.max(0, value ?? 0),
+    max: Math.max(0, max ?? 0),
+    temp: Math.max(0, temp ?? 0),
+  };
 }

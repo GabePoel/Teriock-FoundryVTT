@@ -17,6 +17,17 @@ declare global {
       plural: string;
       sorter: (doc: AnyCommonDocument[]) => AnyCommonDocument[];
     };
+
+    export type SizeConfig = {
+      /** Maximum size corresponding to this category */
+      max: number;
+      /** Number of tiles wide this size category is on the battlefield */
+      length: number;
+      /** ID for this size category */
+      category: string;
+      /** Number of feet this size category can reach for melee attacks */
+      reach: number;
+    };
   }
 }
 

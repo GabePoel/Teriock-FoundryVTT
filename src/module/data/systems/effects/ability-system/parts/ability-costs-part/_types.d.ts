@@ -33,14 +33,14 @@ export type ValueCost = "none" | "static" | "formula" | "variable" | "hack";
 /**
  * Numerical cost configuration.
  */
-export interface NumberCost {
+export type NumberCost = {
   type: ValueCost;
   value: {
     static: number;
     formula: Teriock.System.FormulaString;
     variable: string;
   };
-}
+};
 
 /**
  * Const adjustment.

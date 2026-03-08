@@ -10,6 +10,14 @@ const { Users } = foundry.documents.collections;
  */
 export default class TeriockUsers extends BaseWorldCollectionMixin(Users) {
   /**
+   * The currently active users.
+   * @returns {TeriockUser[]}
+   */
+  get active() {
+    return this.filter((u) => u.active);
+  }
+
+  /**
    * Helper function to send a query to the active GM if there is one.
    * @param {Teriock.QueryData.QueryName} queryName
    * @param {object} queryData

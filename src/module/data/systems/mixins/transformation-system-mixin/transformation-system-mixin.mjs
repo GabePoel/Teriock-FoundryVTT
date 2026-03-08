@@ -314,9 +314,9 @@ export default function TransformationSystemMixin(Base) {
 
       /** @inheritDoc */
       async _preCreate(data, options, user) {
-        if ((await super._preCreate(data, options, user)) === false) {
-          return false;
-        }
+        const no = await super._preCreate(data, options, user);
+        if (no === false) return false;
+
         if (this.isTransformation && this.parent.actor) {
           const flags = this._buildTransformationFlags();
           this.parent.updateSource({ flags });
@@ -336,12 +336,10 @@ export default function TransformationSystemMixin(Base) {
                 s.system.proficient = false;
               }
               if (s.system.size.min && s.system.size.max) {
-                s.system.size.value = Math.min(
+                s.system.size.value = Math.clamp(
+                  this.parent.actor.system.size.number.value,
+                  s.system.size.min,
                   s.system.size.max,
-                  Math.max(
-                    s.system.size.min,
-                    this.parent.actor.system.size.number.value,
-                  ),
                 );
               }
             });
@@ -372,27 +370,27 @@ export default function TransformationSystemMixin(Base) {
       }
 
       /** @inheritDoc */
-      async _preUpdate(changed, options, user) {
-        if ((await super._preUpdate(changed, options, user)) === false) {
-          return false;
-        }
+      async _preUpdate(changes, options, user) {
+        const no = await super._preUpdate(changes, options, user);
+        if (no === false) return false;
+
         if (!this.actor || !this.isTransformation) return;
-        if (foundry.utils.hasProperty(changed, "disabled")) {
-          const wasDisabled = changed.disabled === false;
+        if (foundry.utils.hasProperty(changes, "disabled")) {
+          const wasDisabled = changes.disabled === false;
           if (wasDisabled) {
             const flags = foundry.utils.mergeObject(
               this.parent.flags,
               this._buildTransformationFlags(),
             );
-            foundry.utils.setProperty(changed, "flags", flags);
+            foundry.utils.setProperty(changes, "flags", flags);
           } else {
             foundry.utils.setProperty(
-              changed,
+              changes,
               "flags.teriock.transformationHp",
               this.actor.system.hp.value,
             );
             foundry.utils.setProperty(
-              changed,
+              changes,
               "flags.teriock.transformationMp",
               this.actor.system.mp.value,
             );

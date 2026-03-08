@@ -93,7 +93,9 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
     game.users.queryGM(
       "teriock.resetAttackPenalties",
       {
-        actorUuids: this.actors.map((a) => a.uuid),
+        actorUuids: this.actors
+          .filter((a) => a.system.combat.attackPenalty !== 0)
+          .map((a) => a.uuid),
       },
       {
         failPrefix:

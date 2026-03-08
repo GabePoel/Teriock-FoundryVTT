@@ -1,7 +1,7 @@
 import { getImage } from "../../../helpers/path.mjs";
-import StatPoolModel from "./stat-pool-model.mjs";
+import BaseStatPoolModel from "./base-stat-pool-model.mjs";
 
-export default class HpPoolModel extends StatPoolModel {
+export default class HpPoolModel extends BaseStatPoolModel {
   get callback() {
     return /** @param {number} amount */ async (amount) => {
       const criticallyWounded =
@@ -31,7 +31,9 @@ export default class HpPoolModel extends StatPoolModel {
         blocks: [
           {
             text: game.i18n.localize("TERIOCK.MODELS.HpPool.PANELS.text"),
-            title: game.i18n.localize("TERIOCK.MODELS.StatPool.PANELS.title"),
+            title: game.i18n.localize(
+              "TERIOCK.MODELS.BaseStatPool.PANELS.title",
+            ),
           },
         ],
         icon: TERIOCK.display.icons.stat.hp,
@@ -45,7 +47,9 @@ export default class HpPoolModel extends StatPoolModel {
         blocks: [
           {
             text: TERIOCK.data.conditions.criticallyWounded.description,
-            title: game.i18n.localize("TERIOCK.MODELS.StatPool.PANELS.title"),
+            title: game.i18n.localize(
+              "TERIOCK.MODELS.BaseStatPool.PANELS.title",
+            ),
           },
         ],
         icon: TERIOCK.options.document.condition.icon,
@@ -58,7 +62,9 @@ export default class HpPoolModel extends StatPoolModel {
         blocks: [
           {
             text: TERIOCK.content.keywords.awaken,
-            title: game.i18n.localize("TERIOCK.MODELS.StatPool.PANELS.title"),
+            title: game.i18n.localize(
+              "TERIOCK.MODELS.BaseStatPool.PANELS.title",
+            ),
           },
         ],
         icon: TERIOCK.display.icons.effect.awaken,

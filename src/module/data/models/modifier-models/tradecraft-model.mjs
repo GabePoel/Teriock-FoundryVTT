@@ -1,9 +1,9 @@
 import { TradecraftExecution } from "../../../executions/activity-executions/_module.mjs";
-import ModifierModel from "./modifier-model.mjs";
+import BaseModifierModel from "./base-modifier-model.mjs";
 
 const { fields } = foundry.data;
 
-export default class TradecraftModel extends ModifierModel {
+export default class TradecraftModel extends BaseModifierModel {
   /** @inheritDoc */
   static defineSchema(options = {}) {
     const { score = 0 } = options;

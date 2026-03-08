@@ -347,8 +347,8 @@ export default class SpeciesSystem extends mix(
           name: this.parent.name,
           ring: { enabled: hasTokenImg },
           texture: { src: tokenImg },
-          width: TeriockActor.sizeDefinition(this.size.value).length / 5,
-          height: TeriockActor.sizeDefinition(this.size.value).length / 5,
+          width: TeriockActor.sizeConfig(this.size.value).length,
+          height: TeriockActor.sizeConfig(this.size.value).length,
         },
         items: [game.items.fromCompendium(this.parent)],
         system: {

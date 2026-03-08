@@ -6,9 +6,8 @@ import TimeUnitModel from "./time-unit-model.mjs";
 
 const { fields } = foundry.data;
 
-//noinspection JSClosureCompilerSyntax
 /**
- * @implements {Teriock.Models.DurationModelInterface}
+ * @extends {Teriock.Models.DurationModelInterface}
  */
 export default class DurationModel extends TimeUnitModel {
   /** @inheritDoc */
