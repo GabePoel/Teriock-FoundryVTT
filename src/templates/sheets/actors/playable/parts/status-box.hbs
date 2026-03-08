@@ -1,11 +1,11 @@
 <div class="character-status-box">
   <div class="character-status-bars">
     <div class="character-status-bar-box">
-      <div class="die-drawer top-drawer hack-drawer ch-hack-box hp-drawer">
+      <div class="die-drawer top-drawer hack-drawer hp-drawer">
         {{> "teriock/sheets/actors/playable/parts/hack-box"}}
       </div>
       {{> "teriock/sheets/actors/playable/parts/bar-hp"}}
-      <div class="die-drawer hp-die-drawer hp-drawer">
+      <div class="die-drawer hp-die-drawer hp-drawer {{#if hpDrawerCollapsed}}collapsed{{/if}}">
         <div class="tgrid g7">
           {{{system.sheet.dieBox.hp}}}
         </div>
@@ -13,7 +13,7 @@
     </div>
     <div class="character-status-bar-box">
       {{> "teriock/sheets/actors/playable/parts/bar-mp"}}
-      <div class="die-drawer mp-die-drawer mp-drawer">
+      <div class="die-drawer mp-die-drawer mp-drawer {{#if mpDrawerCollapsed}}collapsed{{/if}}">
         <div class="tgrid g7">
           {{{system.sheet.dieBox.mp}}}
         </div>

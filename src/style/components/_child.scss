@@ -218,70 +218,37 @@
 
 .ab-menu {
   @include mixins.collapsible;
-  @include mixins.collapsible-closed;
+  @include mixins.collapsible-open;
   background-color: color-mix(
-    in srgb,
-    var(--color-sheet-header-background),
-    transparent 30%
+      in srgb,
+      var(--color-sheet-header-background),
+      transparent 30%
   );
   border-bottom: 0 solid var(--color-bar-border);
+  border-bottom-width: 1px;
   box-shadow: inset 0 0 5px var(--color-sheet-header-shadow);
-  display: grid;
-  left: 0;
-  min-height: fit-content;
-  overflow: hidden;
-  top: 0;
+  padding-block: 0.5rem;
+  padding-inline: 0.5rem;
   width: 100%;
+
+  &.collapsed {
+    @include mixins.collapsible-closed;
+    padding-block: 0;
+  }
 
   &.no-transition {
     transition: none;
   }
 
-  &.ab-menu-open {
-    @include mixins.collapsible-open;
-    border-bottom-width: 1px;
-
-    .ab-menu-content {
-      margin-bottom: 0.5em;
-      padding-top: 0.5em;
-    }
-  }
-
-  .ab-menu-header {
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    margin-bottom: 0.5em;
-    padding: 0.5em;
-    width: 100%;
-
-    .ab-menu-title {
-      flex: 1;
-      font-size: larger;
-      font-weight: bold;
-      text-align: center;
-    }
-  }
 
   .ab-menu-content {
     align-items: center;
     display: flex;
     flex-direction: column;
     gap: 0.5em;
-    justify-content: center;
-    overflow: hidden;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
     width: 100%;
 
     .ab-menu-bar {
-      align-items: center;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      gap: 0.5em;
-      justify-content: start;
       width: 100%;
 
       .tgrid-item:has(select) {
@@ -290,12 +257,6 @@
 
       select {
         width: 100%;
-      }
-
-      .ab-menu-inline {
-        //.tags {
-        //  display: none;
-        //}
       }
 
       .ab-menu-item {
@@ -307,15 +268,6 @@
         input {
           margin-bottom: 0;
           margin-top: 0;
-        }
-
-        .ab-menu-button {
-          align-content: center;
-          font-size: unset;
-          height: 2em;
-          line-height: unset;
-          margin: 0;
-          text-align: center;
         }
       }
 
@@ -387,24 +339,21 @@
               opacity: 0.8;
             }
 
-            .mic,
-            .mdi {
-              font-size: medium;
-            }
+            @include mixins.icon-format;
 
             &:active {
               background-color: color-mix(
-                in srgb,
-                var(--color-text-primary),
-                transparent 85%
+                  in srgb,
+                  var(--color-text-primary),
+                  transparent 85%
               );
             }
 
             &:hover:not(:active) {
               background-color: color-mix(
-                in srgb,
-                var(--color-text-primary),
-                transparent 90%
+                  in srgb,
+                  var(--color-text-primary),
+                  transparent 90%
               );
             }
           }
@@ -509,9 +458,9 @@
 
   &:hover {
     background-color: color-mix(
-      in srgb,
-      var(--color-text-primary),
-      transparent 90%
+        in srgb,
+        var(--color-text-primary),
+        transparent 90%
     );
 
     i {
@@ -521,9 +470,9 @@
 
   &:active {
     background-color: color-mix(
-      in srgb,
-      var(--color-text-primary),
-      transparent 80%
+        in srgb,
+        var(--color-text-primary),
+        transparent 80%
     );
 
     i {
@@ -595,22 +544,12 @@
     }
   }
 
-  .ab-check-grid {
-    grid-template-columns: 1fr 1fr;
+  .ab-check-grid, .menu-small-grid {
+    grid-template-columns: 1fr 1fr !important;
   }
 
-  .ab-select-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .ab-button-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .ab-menu {
-    .tab {
-      display: none;
-    }
+  .ab-select-grid, .ab-button-grid, .menu-large-grid {
+    grid-template-columns: 1fr !important;
   }
 }
 

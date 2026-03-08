@@ -62,6 +62,6 @@ export default class LengthUnitModel extends BaseUnitModel {
 
   /** @inheritDoc */
   get icon() {
-    return "ruler-combined";
+    return TERIOCK.display.icons.ability.range;
   }
 }

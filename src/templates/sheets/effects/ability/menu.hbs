@@ -1,4 +1,4 @@
-<div class="ab-menu">
+<div class="ab-menu {{#if menuCollapsed}}collapsed{{/if}}">
   <div class="ab-menu-content">
     <div class="ab-menu-bar">
       <div class="tgrid ab-check-grid">
@@ -6,7 +6,7 @@
       </div>
     </div>
     <div class="ab-menu-bar">
-      <div class="tgrid ab-select-grid g3">
+      <div class="tgrid ab-select-grid g3 menu-large-grid">
         <div class="tgrid-item">
           <div class="ab-multi-select-label">
             <label class="tsubtle">{{localize "TERIOCK.SYSTEMS.Ability.FIELDS.powerSources.label"}}</label>
@@ -53,7 +53,7 @@
             </button>
           </div>
         {{/if}}
-        {{#if (and (exists system.expansion.type) (not (exists system.expansionCap.raw)))}}
+        {{#if (and (exists system.expansion.type) (not (exists system.expansion.cap.raw)))}}
           <div class="tgrid-item">
             <button class="ab-menu-button ab-expansion-cap-button"
               {{#if (not editable)}}

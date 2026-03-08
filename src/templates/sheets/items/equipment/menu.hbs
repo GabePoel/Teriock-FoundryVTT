@@ -1,12 +1,12 @@
-<div class="ab-menu">
+<div class="ab-menu {{#if menuCollapsed}}collapsed{{/if}}">
   <div class="ab-menu-content">
     <div class="ab-menu-bar">
-      <div class="tgrid ab-check-grid g3">
+      <div class="tgrid ab-check-grid g3 menu-small-grid">
         {{> "teriock/sheets/shared/display-toggles"}}
       </div>
     </div>
     <div class="ab-menu-bar">
-      <div class="tgrid g2">
+      <div class="tgrid g2 menu-large-grid">
         <div class="tgrid-item">
           <div class="ab-multi-select-label">
             <label class="tsubtle">{{localize "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentClasses.label"}}</label>
@@ -34,7 +34,7 @@
       </div>
     </div>
     <div class="ab-menu-bar">
-      <div class="tgrid g3">
+      <div class="tgrid g3 menu-large-grid">
         {{#if (not (exists system.damage.base.raw))}}
           <div class="tgrid-item">
             <button

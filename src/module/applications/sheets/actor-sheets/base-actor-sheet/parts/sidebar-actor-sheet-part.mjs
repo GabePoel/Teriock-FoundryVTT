@@ -93,13 +93,6 @@ export default (Base) =>
         hpDrawer: this.element.querySelector(".hp-die-drawer"),
         mpDrawer: this.element.querySelector(".mp-die-drawer"),
       };
-      for (const [key, el] of Object.entries(interactiveElements)) {
-        el?.classList.add("no-transition");
-        el?.classList.toggle("collapsed", !this[`_${key}Open`]);
-        //eslint-disable-next-line @typescript-eslint/no-unused-expressions
-        el?.offsetHeight;
-        el?.classList.remove("no-transition");
-      }
 
       this.element
         .querySelectorAll(".character-tabber[data-tab='sidebar']")
@@ -153,6 +146,9 @@ export default (Base) =>
     /** @inheritDoc */
     async _prepareContext(options = {}) {
       const context = await super._prepareContext(options);
+      for (const stat of Object.keys(TERIOCK.options.die.stats)) {
+        context[`${stat}DrawerCollapsed`] = !this[`_${stat}DrawerOpen`];
+      }
       return Object.assign(context, {
         sidebarOpen: this._sidebarOpen,
         takeStatButtons: true,

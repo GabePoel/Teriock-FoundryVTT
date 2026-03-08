@@ -1,6 +1,5 @@
 @use "colors" as colors;
 @use "../mixins" as mixins;
-@use "../actor/sidebar/hack-box";
 @use "../actor/sidebar/intro-box";
 @use "../actor/sidebar/status-box";
 
@@ -32,9 +31,9 @@
   // Add gradient layer
   &::before {
     background: linear-gradient(
-      to right,
-      var(--color-cool-5),
-      var(--color-cool-4)
+        to right,
+        var(--color-cool-5),
+        var(--color-cool-4)
     );
     content: "";
     inset: 0;
@@ -222,9 +221,8 @@ body > form:only-child section .character-page,
       --input-text-color: var(--color-light-3);
       --color-text-primary: var(--color-light-3);
       --color-text-subtle: var(--color-light-5);
-      transition:
-        max-width 250ms,
-        box-shadow 250ms;
+      transition: max-width 250ms,
+      box-shadow 250ms;
       width: 500px;
       z-index: 1;
 
@@ -539,12 +537,11 @@ body > form:only-child section .character-page,
 
       &.used {
         background-image: repeating-linear-gradient(
-          135deg,
-          var(--color-presence-bar) 0px,
-          var(--color-presence-bar) 2px,
-          var(--color-presence-bar-dark) 2px,
-          var(--color-presence-bar-dark) 8px
-            /* gap between lines: 2px line + 6px gap */
+            135deg,
+            var(--color-presence-bar) 0px,
+            var(--color-presence-bar) 2px,
+            var(--color-presence-bar-dark) 2px,
+            var(--color-presence-bar-dark) 8px /* gap between lines: 2px line + 6px gap */
         );
       }
 
@@ -721,18 +718,17 @@ body > form:only-child section .character-page,
 }
 
 .die-drawer {
+  @include mixins.collapsible;
+  @include mixins.collapsible-open;
   border: 1px solid var(--color-text-subtle);
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
   border-top: none;
-  flex-direction: row;
-  flex-wrap: wrap;
-  margin-inline: 1em;
-  max-height: 100px;
-  min-height: 2.25em;
+  margin-block: 1px;
+  margin-inline: 0.5em;
+  min-height: 2.5em;
   overflow: hidden;
   padding: 0.5em;
-  transition: all 0.2s ease-in-out;
 
   &.hp-drawer {
     background-color: #{colors.$hp-red-drawer};
@@ -749,7 +745,7 @@ body > form:only-child section .character-page,
   }
 
   &.collapsed {
-    max-height: 0;
+    @include mixins.collapsible-closed;
     min-height: 0;
     padding-bottom: 0;
     padding-top: 0;
@@ -783,8 +779,7 @@ body > form:only-child section .character-page,
       transition: all 0.2s ease-in-out;
 
       &.locked {
-        filter: brightness(0) saturate(100%) invert(24%) sepia(30%)
-          saturate(3723%) hue-rotate(326deg) brightness(89%) contrast(109%);
+        filter: brightness(0) saturate(100%) invert(24%) sepia(30%) saturate(3723%) hue-rotate(326deg) brightness(89%) contrast(109%);
       }
 
       &.removable {

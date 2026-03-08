@@ -126,7 +126,7 @@ export const icons = {
     kill: "ms-skull",
     protection: "mdi-shield-half-full",
     resist: "ms-shield",
-    revitalize: "ms-water-drops",
+    revitalize: "ms-water_drops",
     revive: "ms-cardiology",
     sleep: "ms-hotel",
     transform: "ms-nature",

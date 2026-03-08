@@ -34,8 +34,9 @@ export default class TeriockPlayableActorSheet extends mix(
   /** @inheritDoc */
   static PARTS = {
     all: {
-      template: "teriock/sheets/actors/playable/playable",
-      scrollable: [".character-sidebar-container", ".character-tab-content"],
+      template:
+        "systems/teriock/src/templates/sheets/actors/playable/playable.hbs",
+      scrollable: [".character-sidebar", ".character-tab-content"],
     },
   };
 

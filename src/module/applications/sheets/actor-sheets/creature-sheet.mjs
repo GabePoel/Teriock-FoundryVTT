@@ -24,13 +24,4 @@ export default class CreatureSheet extends TeriockPlayableActorSheet {
       icon: makeIconClass(documentOptions.creature.icon, "title"),
     },
   };
-
-  /** @inheritDoc */
-  static PARTS = {
-    all: {
-      template:
-        "systems/teriock/src/templates/sheets/actors/playable/playable.hbs",
-      scrollable: [".character-sidebar", ".character-tab-content"],
-    },
-  };
 }
