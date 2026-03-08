@@ -1,113 +1,119 @@
+@use "sass:map";
 @use "../mixins" as mixins;
 
 // Compendium background/icon/header map
 $compendiums: (
   abilities: (
-    icon: "waving_hand",
+    icon: "\F0674",
+    type: mdi,
     name: "Abilities",
   ),
   bodyParts: (
-    icon: "pet_supplies",
+    icon: "rib_cage",
+    type: symbol,
     name: "Body Parts",
   ),
   classes: (
     icon: "military_tech",
+    type: symbol,
     name: "Classes",
   ),
   creatures: (
     icon: "owl",
+    type: symbol,
     name: "Creatures",
   ),
   equipment: (
-    icon: "box",
+    icon: "package_2",
+    type: symbol,
     name: "Equipment",
   ),
   magicItems: (
     icon: "experiment",
+    type: symbol,
     name: "Magic Items",
   ),
   powers: (
     icon: "person_celebrate",
+    type: symbol,
     name: "Powers",
   ),
   properties: (
     icon: "orbit",
+    type: symbol,
     name: "Properties",
   ),
   species: (
-    icon: "sound_detection_dog_barking",
+    icon: "genetics",
+    type: symbol,
     name: "Species",
   ),
   tables: (
     icon: "table",
+    type: symbol,
     name: "Tables",
   ),
   maintenance: (
     icon: "construction",
+    type: symbol,
     name: "System Maintenance",
   ),
   execution: (
     icon: "code_xml",
+    type: symbol,
     name: "Ability Execution Macros",
   ),
   essentials: (
-    icon: "support",
+    icon: "\F0833",
+    type: mdi,
     name: "Essentials",
   ),
   maps: (
     icon: "map",
+    type: symbol,
     name: "Maps",
   ),
   player: (
     icon: "service_toolbox",
+    type: symbol,
     name: "Player Utilities",
   ),
   rules: (
     icon: "book_2",
+    type: symbol,
     name: "Rules",
   ),
   stacks: (
     icon: "playing_cards",
+    type: symbol,
     name: "Stacks",
   ),
 );
 
-// Compendium header banners
-.header-banner {
-  @each $key, $data in $compendiums {
-    $icon: map-get($data, icon);
-    $name: map-get($data, name);
+// Compendium headers and sidebar entries
+@each $key, $data in $compendiums {
+  $icon: map.get($data, icon);
+  $type: map.get($data, type);
+  $name: map.get($data, name);
 
-    img[alt="#{$name}"] {
-      + .compendium-name i::before {
+  .header-banner img[alt="#{$name}"] + .compendium-name,
+  .directory-item.entry.compendium[data-pack="teriock.#{$key}"] .entry-name {
+    i::before {
+      @if $type == mdi {
+        @include mixins.material-design-icon();
+      } @else {
         @include mixins.material-symbol();
-        content: $icon;
       }
+      @include mixins.icon-sizing;
+      content: $icon;
     }
   }
 }
 
-.slot.full {
-  img {
-    @include mixins.warm-image-background;
-  }
-}
-
+// Backgrounds of images within compendiums
+.slot-full,
 .directory-item.entry {
   img {
     @include mixins.warm-image-background;
-  }
-}
-
-// Compendium sidebar entries
-.directory-item.entry.compendium {
-  @each $key, $data in $compendiums {
-    $icon: map-get($data, icon);
-    &[data-pack="teriock.#{$key}"] {
-      .entry-name i::before {
-        @include mixins.material-symbol();
-        content: $icon;
-      }
-    }
   }
 }

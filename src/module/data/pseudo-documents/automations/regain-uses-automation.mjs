@@ -89,7 +89,7 @@ export default class RegainUsesAutomation extends TriggerAutomationMixin(
           label: game.i18n.localize(
             "TERIOCK.SHEETS.Common.NAVIGATION.enterAutomationsTab",
           ),
-          icon: TERIOCK.display.icons.ui.automations,
+          icon: TERIOCK.display.icons.pseudoDocument.automation,
           wrappers: [
             game.i18n.localize("TERIOCK.AUTOMATIONS.BaseAutomation.LABEL"),
             TERIOCK.options.time.triggers[this.trigger],
@@ -107,7 +107,7 @@ export default class RegainUsesAutomation extends TriggerAutomationMixin(
           ),
         },
       ],
-      icon: TERIOCK.display.icons.ui.automations,
+      icon: TERIOCK.display.icons.pseudoDocument.automation,
       image: this.document.img,
       label: game.i18n.localize(
         "TERIOCK.AUTOMATIONS.RegainUsesAutomation.LABEL",

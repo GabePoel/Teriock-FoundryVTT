@@ -1,5 +1,6 @@
 //noinspection JSUnusedGlobalSymbols
 
+import { icons } from "../../constants/display/icons.mjs";
 import { classPanel, tradecraftPanel } from "../../helpers/html.mjs";
 import { getImage } from "../../helpers/path.mjs";
 import { resolveDocument } from "../../helpers/resolve.mjs";
@@ -23,7 +24,7 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
  * @param {string} [options.title="Select"] - Dialog title.
  * @param {boolean} [options.other=false] - Whether to include an "Other" button.
  * @param {boolean} [options.genericOther=true] - If true, "Other" returns `null` instead of prompting again.
- * @param {string} [options.icon="circle-question"] - Icon to use for the select window.
+ * @param {string} [options.icon] - Icon to use for the select window.
  * @returns {Promise<string|null>} The chosen value, or `null` if canceled or genericOther.
  */
 export async function selectDialog(choices, options = {}) {
@@ -36,7 +37,7 @@ export async function selectDialog(choices, options = {}) {
     title = game.i18n.localize("TERIOCK.DIALOGS.Select.defaults.title"),
     other = false,
     genericOther = true,
-    icon = "circle-question",
+    icon = makeIconClass(icons.ui.select, "title"),
   } = options;
 
   const selectContentHtml = document.createElement("div");

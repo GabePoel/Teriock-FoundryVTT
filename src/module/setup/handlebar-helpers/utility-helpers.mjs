@@ -1,9 +1,6 @@
-import { systemPath } from "../../helpers/path.mjs";
 import { makeIcon, makeIconClass } from "../../helpers/utils.mjs";
 
 export default function registerUiHelpers() {
-  Handlebars.registerHelper("systemPath", systemPath);
-
   Handlebars.registerHelper("tabActive", (active, tab) =>
     active === tab ? "active" : "inactive",
   );
@@ -50,66 +47,5 @@ export default function registerUiHelpers() {
   Handlebars.registerHelper(
     "toggleButton",
     (bool) => `toggle-button${bool ? " toggled" : ""}`,
-  );
-
-  Handlebars.registerHelper("ticon", (icon, options) => {
-    const {
-      cssClass = "",
-      id,
-      parentId,
-      action,
-      style = "solid",
-      tooltip = "",
-    } = options.hash;
-    const attrs = [
-      id ? `data-id="${id}"` : "",
-      parentId ? `data-parent-id="${parentId}"` : "",
-      action ? `data-action="${action}"` : "",
-      tooltip ? `data-tooltip="${tooltip}"` : "",
-    ].join(" ");
-    return new Handlebars.SafeString(
-      `<i class="ticon teriock-block-clickable ${cssClass} fa-fw fa-${style} fa-${icon}" ${attrs}></i>`,
-    );
-  });
-
-  Handlebars.registerHelper(
-    "ticonToggle",
-    (iconTrue, iconFalse, bool, options) => {
-      const {
-        cssClass = "",
-        id,
-        parentId,
-        action,
-        falseAction = true,
-        tooltipTrue = "",
-        tooltipFalse = "",
-      } = options.hash;
-
-      const icon = bool ? iconTrue : iconFalse;
-
-      // Determine action to use
-      const resolvedAction = bool
-        ? action
-        : typeof falseAction === "string"
-          ? falseAction
-          : falseAction && action;
-
-      const actionAttr = resolvedAction
-        ? `data-action="${resolvedAction}"`
-        : "";
-
-      const tooltipAttr =
-        (bool || falseAction) && action
-          ? `data-tooltip="${bool ? tooltipTrue : tooltipFalse}"`
-          : "";
-
-      return new Handlebars.SafeString(`
-        <i class="ticon teriock-block-clickable ${cssClass} fa-fw fa-solid fa-${icon}" 
-        ${id ? `data-id="${id}"` : ""} 
-        ${parentId ? `data-parent-id="${parentId}"` : ""} 
-        ${actionAttr}
-        ${tooltipAttr}></i>
-    `);
-    },
   );
 }

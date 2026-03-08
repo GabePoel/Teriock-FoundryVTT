@@ -472,11 +472,11 @@ foundry.helpers.Hooks.once("setup", function () {
   for (const pack of game.packs) {
     pack.applicationClass = applications.sidebar.TeriockCompendium;
   }
-  const link = document.createElement("link");
 
   // Enable Material Symbols
   // =======================
 
+  const link = document.createElement("link");
   link.href =
     "https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200";
   link.rel = "stylesheet";

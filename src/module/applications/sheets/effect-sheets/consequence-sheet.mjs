@@ -40,7 +40,7 @@ export default class ConsequenceSheet extends mix(
         ...super.TABS.sheet.tabs,
         {
           id: "automations",
-          icon: makeIconClass(icons.ui.automations, "solid"),
+          icon: makeIconClass(icons.pseudoDocument.automation, "solid"),
         },
       ],
       initial: super.TABS.sheet.initial,

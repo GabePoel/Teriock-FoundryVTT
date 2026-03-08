@@ -59,7 +59,10 @@ export default class CommonImpactsAutomation extends TriggerAutomationMixin(
     TeriockDialog.confirm({
       window: {
         title: this.document.name,
-        icon: makeIconClass(TERIOCK.display.icons.ui.automations, "title"),
+        icon: makeIconClass(
+          TERIOCK.display.icons.pseudoDocument.automation,
+          "title",
+        ),
       },
       content: game.i18n.format(
         "TERIOCK.AUTOMATIONS.CommonImpactsAutomation.DIALOG.content",

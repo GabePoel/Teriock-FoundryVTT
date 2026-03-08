@@ -77,10 +77,10 @@ export default class StatDieModel extends EmbeddedDataModel {
       </div>`),
     });
     const icon = document.createElement("i");
-    icon.classList.add(...["fa-fw", "fa-solid", getRollIcon(this.polyhedral)]);
-    if (this.spent) {
-      icon.classList.add("fa-faint");
-    }
+    icon.classList.add(
+      ...makeIconClass(getRollIcon(this.polyhedral), "solid").split(" "),
+    );
+    if (this.spent) icon.classList.add("fa-faint");
     element.append(icon);
     return element.outerHTML;
   }

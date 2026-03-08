@@ -1,8 +1,5 @@
 import { icons } from "../../../constants/display/icons.mjs";
-import {
-  pureUuid,
-  safeUuid
-} from "../../resolve.mjs";
+import { pureUuid, safeUuid } from "../../resolve.mjs";
 import { makeIconClass } from "../../utils.mjs";
 import BaseButtonHandler from "./base-button-handler.mjs";
 

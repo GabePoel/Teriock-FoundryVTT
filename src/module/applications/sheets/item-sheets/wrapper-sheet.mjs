@@ -17,8 +17,8 @@ export default class WrapperSheet extends BaseItemSheet {
         typeChoices[type] = toTitleCase(type);
       }
       const type = await selectDialog(typeChoices, {
-        label: "Select Effect Type",
-        hint: "What type of effect is this a wrapper for?",
+        label: game.i18n.localize("TERIOCK.SHEETS.Wrapper.DIALOG.label"),
+        hint: game.i18n.localize("TERIOCK.SHEETS.Wrapper.DIALOG.hint"),
       });
       await this.document.createEmbeddedDocuments("ActiveEffect", [
         {

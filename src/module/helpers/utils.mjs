@@ -38,6 +38,12 @@ export function makeIconClass(icon, ...styles) {
     .map((s) => iconStyles[s] || s)
     .filter((s) => typeof s === "string");
   if (icon.startsWith("ms-")) start += " mic";
+  if (icon.startsWith("mdi-")) {
+    start += " mdi";
+    if (styleClasses.includes("light") || styleClasses.includes("regular")) {
+      icon = `${icon} ${icon}-outline`;
+    }
+  }
   const classString = styleClasses.map((s) => `${prefix}${s}`).join(" ");
   return `${start} ${classString} ${icon}`;
 }
