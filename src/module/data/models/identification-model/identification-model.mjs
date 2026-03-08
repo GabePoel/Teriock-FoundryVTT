@@ -191,7 +191,6 @@ export default class IdentificationModel extends EmbeddedDataModel {
         ...this.parent.parent.resources.filter((r) => r.system.revealed),
         ...this.parent.parent.fluencies.filter((f) => f.system.revealed),
       ];
-      console.log(uncheckedPropertyIdentifiers);
       const checked = revealed
         .filter(
           (e) =>
