@@ -18,6 +18,7 @@ export function cleanDocument(doc) {
   if (doc.system) {
     cleanCommon(doc);
     cleanItem(doc);
+    cleanActiveEffect(doc);
     if (doc.type === "ability") cleanAbility(doc);
     if (doc.type === "body") cleanBody(doc);
     if (doc.type === "creature") cleanCreature(doc);
@@ -70,6 +71,7 @@ function cleanActiveEffect(doc) {
   delete doc.duration;
   if (!doc.disabled) delete doc.disabled;
   if (doc.transfer) delete doc.transfer;
+  if (doc.showIcon) delete doc.showIcon;
 }
 
 /**
@@ -160,7 +162,6 @@ function cleanEquipment(doc) {
  * @param {TeriockProperty} doc
  */
 function cleanProperty(doc) {
-  cleanActiveEffect(doc);
   delete doc.system.impacts;
   if (!doc.system.applyIfDampened) delete doc.system.applyIfDampened;
   if (!doc.system.applyIfShattered) delete doc.system.applyIfShattered;
@@ -171,8 +172,6 @@ function cleanProperty(doc) {
  * @param {TeriockAbility} doc
  */
 function cleanAbility(doc) {
-  cleanActiveEffect(doc);
-
   // Clean Impacts
   if (doc.system.impacts) {
     delete doc.system.impacts;

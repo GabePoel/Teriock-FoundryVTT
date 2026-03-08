@@ -151,15 +151,6 @@ function sortKeys(obj) {
 }
 
 /**
- * Sort an embedded collection.
- * @param {object[] || undefined} collection
- */
-function sortEmbedded(collection) {
-  if (!collection) return;
-  collection.sort((a, b) => a.name.localeCompare(b.name));
-}
-
-/**
  *
  * @param {object} obj
  * @returns {object}
