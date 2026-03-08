@@ -32,7 +32,9 @@ export default (Base) => {
        */
       get onUseIcon() {
         return {
-          icon: this.parent.isOnUse ? "bolt" : "bolt-slash",
+          icon: this.parent.isOnUse
+            ? TERIOCK.display.icons.ability.onUse
+            : TERIOCK.display.icons.ability.notOnUse,
           action: "toggleOnUseDoc",
           tooltip: this.parent.isOnUse
             ? game.i18n.localize("TERIOCK.SYSTEMS.Ability.USAGE.onlyOnUse")
@@ -109,7 +111,7 @@ export default (Base) => {
        * Data that represents this ability as a scroll.
        * @param {object} [data] - Optional data to mutate the created scroll.
        * @param {string} [equipmentType="scroll"] - A chosen equipment type to make.
-       * @returns {Promise<Object>}
+       * @returns {Promise<object>}
        */
       async toScroll(data = {}, equipmentType = "scroll") {
         const reference = await copyItem(

@@ -119,7 +119,7 @@ export async function inferCompendiumSource(document) {
       if (document.uuid.includes(uuid)) uuid = null;
       await document.update({ "_stats.compendiumSource": uuid });
     } else {
-      console.log(document.name);
+      console.warn(`Could not find a compendium source for ${document.name}`);
     }
   }
 }

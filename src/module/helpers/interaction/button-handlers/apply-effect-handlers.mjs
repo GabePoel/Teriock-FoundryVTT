@@ -1,5 +1,8 @@
 import { icons } from "../../../constants/display/icons.mjs";
-import { pureUuid, safeUuid } from "../../resolve.mjs";
+import {
+  pureUuid,
+  safeUuid
+} from "../../resolve.mjs";
 import { makeIconClass } from "../../utils.mjs";
 import BaseButtonHandler from "./base-button-handler.mjs";
 
@@ -95,11 +98,6 @@ export class ApplyEffectHandler extends BaseButtonHandler {
     }
     await Promise.all(
       createdConsequences.map((c) => {
-        console.log(
-          c,
-          bonusSubs,
-          bonusSubs.map((s) => s.toObject()),
-        );
         return c.createChildDocuments(
           "ActiveEffect",
           bonusSubs.map((s) => s.toObject()),
