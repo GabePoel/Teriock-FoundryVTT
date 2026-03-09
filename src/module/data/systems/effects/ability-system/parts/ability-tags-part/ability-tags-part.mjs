@@ -63,7 +63,7 @@ export default (Base) => {
           delete data.effects;
         }
 
-        super.migrateData(data);
+        return super.migrateData(data);
       }
 
       /** @inheritDoc */

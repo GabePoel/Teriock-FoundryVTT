@@ -110,7 +110,7 @@ export default (Base) => {
           data.delivery = data.delivery.base;
         }
 
-        super.migrateData(data);
+        return super.migrateData(data);
       }
 
       /**

@@ -217,7 +217,7 @@ export default function AbilityExecutionChatPart(Base) {
             const data = a.toObject();
             data._id = foundry.utils.randomID();
             if (data?.type === ChangesAutomation.TYPE) {
-              data?.changes.forEach((c) => {
+              data?.qualifiedChanges.forEach((c) => {
                 c.value = this._heightenString(c.value);
               });
             }
@@ -395,9 +395,9 @@ export default function AbilityExecutionChatPart(Base) {
           const critEffectData = await this.#generateConsequence(true);
           await this.#generateConsequenceAssociations();
           normalEffectData.system.associations = this.#associationMap["normal"];
-          normalEffectData.changes.push(...this.#trackerMap["normal"]);
+          normalEffectData.qualifiedChanges.push(...this.#trackerMap["normal"]);
           critEffectData.system.associations = this.#associationMap["crit"];
-          critEffectData.changes.push(...this.#trackerMap["crit"]);
+          critEffectData.qualifiedChanges.push(...this.#trackerMap["crit"]);
           this.buttons.push(
             ApplyEffectHandler.buildButton(normalEffectData, {
               secondaryData: critEffectData,

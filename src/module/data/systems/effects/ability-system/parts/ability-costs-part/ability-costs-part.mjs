@@ -99,7 +99,7 @@ export default (Base) => {
           }
         }
 
-        super.migrateData(data);
+        return super.migrateData(data);
       }
 
       /** @inheritDoc */

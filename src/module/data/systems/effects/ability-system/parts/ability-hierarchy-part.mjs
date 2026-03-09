@@ -15,7 +15,7 @@ export default (Base) => {
       /** @inheritDoc */
       static migrateData(data) {
         migrateHierarchy(data);
-        super.migrateData(data);
+        return super.migrateData(data);
       }
 
       /** @inheritDoc */

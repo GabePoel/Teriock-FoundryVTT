@@ -78,6 +78,12 @@ const globalTeriock = {
   tm: "readonly",
 };
 
+const globalOperators = {
+  _del: "readonly",
+  _loc: "readonly",
+  _replace: "readonly",
+};
+
 export default defineConfig([
   {
     extends: ["js/recommended"],
@@ -89,6 +95,7 @@ export default defineConfig([
         ...globalHelpers,
         ...globalClient,
         ...globalTeriock,
+        ...globalOperators,
       },
     },
     plugins: { js },

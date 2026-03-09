@@ -191,7 +191,7 @@ export default class AttunementSystem extends BaseEffectSystem {
     if (this.inheritTier && this.targetDocument) {
       this.tier = this.targetDocument.system.tier.currentValue;
     }
-    this.parent.changes = [
+    this.parent.qualifiedChanges = [
       {
         key: "system.presence.value",
         mode: 2,

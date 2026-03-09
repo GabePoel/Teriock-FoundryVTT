@@ -5,6 +5,18 @@ import { CritAutomation } from "./abstract/_module.mjs";
 const { fields } = foundry.data;
 
 /**
+ * Hacky array field that makes sure data conforms to an array before being saved to source.
+ * This is used to avoid making substantive changes to input handling in {@link ChangesSheetMixin}.
+ * @todo Find a better way to handle this.
+ */
+class ChangesArrayField extends fields.ArrayField {
+  _updateCommit(source, key, value, _diff, _options) {
+    value = this._cast(value);
+    return super._updateCommit(source, key, value, _diff, _options);
+  }
+}
+
+/**
  * @property {Teriock.Changes.QualifiedChangeData[]} changes
  */
 export default class ChangesAutomation extends CritAutomation {
@@ -21,7 +33,7 @@ export default class ChangesAutomation extends CritAutomation {
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      changes: new fields.ArrayField(qualifiedChangeField()),
+      changes: new ChangesArrayField(qualifiedChangeField()),
     });
   }
 

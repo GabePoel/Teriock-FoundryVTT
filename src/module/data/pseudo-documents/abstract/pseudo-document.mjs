@@ -45,7 +45,9 @@ export default class PseudoDocument extends EmbeddedDataModel {
     const fieldPath =
       directParent.metadata?.pseudos?.[this.metadata.documentName];
     if (!fieldPath) throw new Error("Invalid pseudo-document parent");
-    const updateData = { [`${fieldPath}.${id}`]: { ...data, _id: id } };
+    const updateData = {
+      [`${fieldPath}.${id}`]: _replace({ ...data, _id: id }),
+    };
     await directParent.document.update(updateData, operation);
     return foundry.utils.getProperty(directParent.parent, fieldPath).get(id);
   }
@@ -113,7 +115,7 @@ export default class PseudoDocument extends EmbeddedDataModel {
    * @returns {Promise<Document|undefined>}
    */
   async delete(operation = {}) {
-    const updateData = { [`${this.fieldPath}.-=${this.id}`]: null };
+    const updateData = { [`${this.fieldPath}.${this.id}`]: _del };
     return this.document.update(updateData, operation);
   }
 }

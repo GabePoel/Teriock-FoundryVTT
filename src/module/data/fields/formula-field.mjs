@@ -27,7 +27,7 @@ export default class FormulaField extends EnhancedStringField {
   static get _defaults() {
     return foundry.utils.mergeObject(super._defaults, {
       deterministic: false,
-      required: true,
+      required: false,
     });
   }
 

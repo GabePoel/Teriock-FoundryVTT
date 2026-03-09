@@ -47,8 +47,9 @@ export default function ChangeableDocumentMixin(Base) {
           );
         for (const effect of effects) {
           if (!effect.active) continue;
-          let changes = [...effect.system.changes];
+          let changes = [...effect.system.qualifiedChanges];
           for (const change of changes) {
+            if (!change.key) continue;
             if (change.key.startsWith("system.damage.all")) {
               changes.push(
                 ...[

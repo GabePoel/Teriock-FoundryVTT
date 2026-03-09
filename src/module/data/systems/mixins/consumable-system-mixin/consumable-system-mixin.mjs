@@ -70,7 +70,7 @@ export default function ConsumableSystemMixin(Base) {
             derived: derivedMaxQuantity,
           };
         }
-        super.migrateData(data);
+        return super.migrateData(data);
       }
 
       /** @returns {Teriock.MessageData.MessageBar} */

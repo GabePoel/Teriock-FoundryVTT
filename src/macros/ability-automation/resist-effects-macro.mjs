@@ -35,7 +35,7 @@ const choice = await tm.dialogs.selectDocumentDialog(documents, {
 
 function modifyData(data) {
   const effectObject = JSON.parse(data);
-  effectObject.changes.push({
+  effectObject.qualifiedChanges.push({
     key: "system.protections.resistances.effectTypes",
     value: choice.uuid,
     mode: 2,

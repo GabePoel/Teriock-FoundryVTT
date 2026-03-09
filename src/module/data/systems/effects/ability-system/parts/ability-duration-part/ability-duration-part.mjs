@@ -49,7 +49,7 @@ export default (Base) => {
         if (getProperty(data, "duration.unit") === "noLimit") {
           setProperty(data, "duration.unit", "unlimited");
         }
-        super.migrateData(data);
+        return super.migrateData(data);
       }
 
       /** @inheritDoc */

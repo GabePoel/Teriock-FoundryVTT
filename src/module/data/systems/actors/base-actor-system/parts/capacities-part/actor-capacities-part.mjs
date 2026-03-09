@@ -68,7 +68,7 @@ export default (Base) => {
             data.size.number.saved.toString(),
           );
         }
-        super.migrateData(data);
+        return super.migrateData(data);
       }
 
       /**

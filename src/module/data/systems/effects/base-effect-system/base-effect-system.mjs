@@ -7,7 +7,7 @@ import {
 } from "../../../pseudo-documents/automations/_module.mjs";
 import { ChildSystem } from "../../abstract/_module.mjs";
 
-const { fields } = foundry.data;
+const { fields, ActiveEffectTypeDataModel } = foundry.data;
 
 /**
  * Base effect data model.
@@ -38,10 +38,14 @@ export default class BaseEffectSystem extends ChildSystem {
     });
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @todo Make `BaseEffectSystem` extend `ActiveEffectTypeDataModel` by turning `ChildSystem` into a mixin.
+   */
   static defineSchema() {
     return foundry.utils.mergeObject(super.defineSchema(), {
       deleteOnExpire: new fields.BooleanField({ initial: false }),
+      ...ActiveEffectTypeDataModel.defineSchema(),
     });
   }
 
@@ -57,29 +61,6 @@ export default class BaseEffectSystem extends ChildSystem {
       PropertyMacroAutomation.TYPE,
     ];
     return !!this.automations.contents.find((a) => validTypes.includes(a.type));
-  }
-
-  /**
-   * Gets the changes this ability would provide.
-   * @returns {Teriock.Changes.QualifiedChangeData[]}
-   */
-  get changes() {
-    const changes = [];
-    const changesAutomations =
-      /** @type {ChangesAutomation[]} */ this.activeAutomations.filter(
-        (a) => a.type === ChangesAutomation.TYPE,
-      );
-    changesAutomations.forEach((a) => {
-      changes.push(...a.changes);
-    });
-    const protectionAutomations =
-      /** @type {ProtectionAutomation[]} */ this.activeAutomations.filter(
-        (a) => a.type === ProtectionAutomation.TYPE,
-      );
-    protectionAutomations.forEach((a) => {
-      if (a.protectionChange) changes.push(a.protectionChange);
-    });
-    return changes;
   }
 
   /** @inheritDoc */
@@ -109,6 +90,29 @@ export default class BaseEffectSystem extends ChildSystem {
    */
   get modifies() {
     return this.metadata.modifies;
+  }
+
+  /**
+   * Gets the changes this ability would provide.
+   * @returns {Teriock.Changes.QualifiedChangeData[]}
+   */
+  get qualifiedChanges() {
+    const changes = [];
+    const changesAutomations =
+      /** @type {ChangesAutomation[]} */ this.activeAutomations.filter(
+        (a) => a.type === ChangesAutomation.TYPE,
+      );
+    changesAutomations.forEach((a) => {
+      changes.push(...a.changes);
+    });
+    const protectionAutomations =
+      /** @type {ProtectionAutomation[]} */ this.activeAutomations.filter(
+        (a) => a.type === ProtectionAutomation.TYPE,
+      );
+    protectionAutomations.forEach((a) => {
+      if (a.protectionChange) changes.push(a.protectionChange);
+    });
+    return changes;
   }
 
   /**

@@ -10,7 +10,7 @@ function modifyData(data) {
   const uuid = token.uuid || actor.uuid;
   const effectObject = JSON.parse(data);
   if (uuid) {
-    effectObject.changes.push({
+    effectObject.qualifiedChanges.push({
       key: "system.conditionInformation.lighted.trackers",
       value: tm.resolve.safeUuid(uuid),
       mode: 2,

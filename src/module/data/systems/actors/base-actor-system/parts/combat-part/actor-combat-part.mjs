@@ -81,7 +81,7 @@ export default (Base) => {
           utils.setProperty(data, "wielding.blocker", null);
         }
         data.offense = migratePiercing(data.offense);
-        super.migrateData(data);
+        return super.migrateData(data);
       }
 
       /**
