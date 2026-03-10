@@ -159,11 +159,10 @@
         }
 
         .ab-box-label {
-          color: var(--color-text-subtle);
+          @include mixins.text-subtle;
           height: 1em;
           position: absolute;
           right: 0.25em;
-          text-transform: uppercase;
           top: calc(50% - 0.625em);
         }
 
@@ -230,10 +229,6 @@
   &.collapsed {
     @include mixins.collapsible-closed;
     padding-block: 0;
-  }
-
-  &.no-transition {
-    transition: none;
   }
 
   .ab-menu-content {
@@ -401,12 +396,11 @@
     }
 
     .ab-section-title {
-      color: var(--color-text-subtle);
+      @include mixins.text-subtle;
       font-size: smaller;
       margin-inline: 0.25em;
       padding-inline: 0.25em;
       text-align: left;
-      text-transform: uppercase;
     }
 
     > :first-child {

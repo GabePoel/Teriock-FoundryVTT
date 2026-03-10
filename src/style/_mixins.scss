@@ -93,19 +93,17 @@
 }
 
 @mixin tag-style() {
+  @include text-subtle;
   background-color: rgba(255, 255, 255, 0.05);
   border: 1px solid
     color-mix(in srgb, var(--color-text-subtle), transparent 75%);
   white-space: normal;
   border-radius: 3px;
-  //height: 1.5em;
   margin: 0;
   padding-inline: 0.3em;
   text-align: start;
   align-content: center;
   break-inside: avoid;
-
-  @include text-subtle;
 }
 
 @mixin roll-style() {
@@ -196,6 +194,45 @@
     .ab-box-icon {
       opacity: 1;
     }
+  }
+}
+
+@mixin frosted-block-hover(
+  $bg-alpha: 0.15,
+  $inactive-alpha: 0.075,
+  $shadow-color: var(--color-block-hover-inset)
+) {
+  background-color: rgba(255, 255, 255, $bg-alpha);
+
+  &.inactive {
+    background-color: rgba(255, 255, 255, $inactive-alpha);
+  }
+
+  &::after {
+    bottom: 0;
+    box-shadow: inset 0 0 8px $shadow-color;
+    content: "";
+    left: 0;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}
+
+@mixin frosted-block-active(
+  $bg-alpha: 0.1,
+  $inactive-alpha: 0.05,
+  $shadow-color: var(--color-block-active-inset)
+) {
+  background-color: rgba(255, 255, 255, $bg-alpha);
+
+  &.inactive {
+    background-color: rgba(255, 255, 255, $inactive-alpha);
+  }
+
+  &::after {
+    box-shadow: inset 0 0 8px $shadow-color;
   }
 }
 

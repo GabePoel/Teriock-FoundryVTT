@@ -190,12 +190,11 @@ body > form:only-child section .character-page,
       }
 
       .character-shortbox-label {
+        @include mixins.text-subtle;
         background-color: transparent;
         border: none;
-        color: var(--color-text-subtle);
         font-size: 1em;
         text-align: center;
-        text-transform: uppercase;
       }
     }
 
@@ -230,10 +229,6 @@ body > form:only-child section .character-page,
         padding: 15px;
         transition: 250ms;
         width: 250px;
-      }
-
-      &.no-transition {
-        transition: none;
       }
 
       input {
@@ -358,10 +353,6 @@ body > form:only-child section .character-page,
 
       .character-sidebar-tabber {
         border-left: none !important;
-      }
-
-      &.no-transition {
-        transition: none;
       }
 
       .expanded-icon {
@@ -554,9 +545,7 @@ body > form:only-child section .character-page,
   }
 
   .field-panel-header {
-    color: var(--color-text-subtle);
-    font-size: 0.8em;
-    text-transform: uppercase;
+    @include mixins.text-subtle;
     width: 100%;
   }
 
@@ -718,98 +707,6 @@ body > form:only-child section .character-page,
     min-height: 0;
     padding-bottom: 0;
     padding-top: 0;
-  }
-
-  &.no-transition {
-    transition: none;
-  }
-}
-
-.condition-display {
-  align-items: flex-start;
-
-  display: flex;
-  flex-direction: column;
-
-  .condition-header {
-    position: relative;
-    width: 100%;
-
-    img {
-      background-color: rgba(0, 0, 0, 0.3);
-      border: 1px solid color-mix(in srgb, var(--color-border), transparent 50%);
-      border-radius: 4px;
-      box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
-      max-height: var(--font-h4-size);
-      max-width: var(--font-h4-size);
-      position: absolute;
-      right: 0;
-      top: 0;
-      transition: all 0.2s ease-in-out;
-
-      &.locked {
-        filter: brightness(0) saturate(100%) invert(24%) sepia(30%)
-          saturate(3723%) hue-rotate(326deg) brightness(89%) contrast(109%);
-      }
-
-      &.removable {
-        &:hover {
-          background-color: rgba(0, 0, 0, 0.5);
-          border-color: var(--color-cool-3);
-        }
-
-        &:active {
-          background-color: rgba(0, 0, 0, 0.7);
-          border-color: var(--color-warm-2);
-        }
-      }
-    }
-  }
-
-  .mw-editsection {
-    display: none;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    margin: unset;
-  }
-
-  ul {
-    margin-top: 0.5em;
-  }
-
-  :last-child {
-    margin-bottom: 0;
-  }
-
-  h2 {
-    font-family: var(--font-h4), serif;
-    font-size: var(--font-h4-size);
-  }
-}
-
-.condition-body {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.2s ease-in-out;
-
-  &.expanded {
-    max-height: 1000px;
-  }
-}
-
-.condition-header {
-  h4 {
-    transition: all 0.2s ease-in-out;
-
-    &:hover {
-      filter: drop-shadow(0 0 2px rgba(125, 0, 0, 0.4));
-    }
   }
 }
 
