@@ -1,24 +1,11 @@
 @use "../mixins";
 
 .heal-dialog {
-  .heal-dialog-hacks {
-    .hack-marker-box {
-      align-items: center;
-      display: flex;
-      flex-direction: column;
-      height: 28px;
-      justify-content: center;
-    }
-  }
-
-  .heal-dialog-dice {
-    .die-box {
-      align-items: center;
-      display: flex;
-      flex-direction: column;
-      height: 28px;
-      justify-content: center;
-    }
+  .heal-dialog-hacks .hack-marker-box,
+  .heal-dialog-dice .die-box {
+    @include mixins.centralize;
+    flex-direction: column;
+    height: 28px;
   }
 }
 

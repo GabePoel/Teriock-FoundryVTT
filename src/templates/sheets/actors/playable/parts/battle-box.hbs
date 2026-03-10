@@ -35,19 +35,19 @@
         <div class="title-left">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.blockingWith"}}</div>
         <div class="title-right">
           <i
-            class="fa-light mic ms-token thover"
+            class="{{makeIconClass TERIOCK.display.icons.ui.d20 "light"}} thover"
             data-action="rollResistance"
             data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.rollResistance"}}"
           ></i>
           {{#if (exists system.primaryBlocker)}}
             <i
-              class="fa-light mic {{TERIOCK.display.icons.interaction.block}} thover"
+              class="{{makeIconClass TERIOCK.display.icons.interaction.block "light"}} thover"
               data-action="useAbility"
               data-ability="Basic Block"
               data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.rollBlock"}}"
             ></i>
             <i
-              class="fa-light mic {{TERIOCK.display.icons.ui.openWindow}} thover"
+              class="{{makeIconClass TERIOCK.display.icons.ui.openWindow "light"}} thover"
               data-action="openPrimaryBlocker"
               data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.open"}}"
             ></i>
@@ -90,22 +90,24 @@
         data-tooltip-class=""
         data-tooltip-direction="DOWN"
       >
-        {{#if (eq system.cover 0)}}<i
-          class="fa-fw mic fa-solid {{TERIOCK.display.icons.ui.off}} thover"
+        <i
+          {{#if (eq system.cover 0)}}
+          class="thover {{makeIconClass TERIOCK.display.icons.ui.off "solid"}}"
           data-tooltip="{{localize "TERIOCK.STATUSES.Cover.noCover"}}"
-        ></i>{{/if}}
-        {{#if (eq system.cover 1)}}<i
-          class="fa-fw mic fa-solid {{TERIOCK.display.icons.cover.half}} thover"
+          {{/if}}
+          {{#if (eq system.cover 1)}}
+          class="thover {{makeIconClass TERIOCK.display.icons.cover.half "solid"}}"
           data-tooltip="{{localize "TERIOCK.STATUSES.Cover.halfCover"}}"
-        ></i>{{/if}}
-        {{#if (eq system.cover 2)}}<i
-          class="fa-fw mic fa-solid {{TERIOCK.display.icons.cover.partial}} thover"
+          {{/if}}
+          {{#if (eq system.cover 2)}}
+          class="thover {{makeIconClass TERIOCK.display.icons.cover.partial "solid"}}"
           data-tooltip="{{localize "TERIOCK.STATUSES.Cover.threeQuartersCover"}}"
-        ></i>{{/if}}
-        {{#if (eq system.cover 3)}}<i
-          class="fa-fw mic fa-solid {{TERIOCK.display.icons.cover.full}} thover"
+          {{/if}}
+          {{#if (eq system.cover 3)}}
+          class="thover {{makeIconClass TERIOCK.display.icons.cover.full "solid"}}"
           data-tooltip="{{localize "TERIOCK.STATUSES.Cover.fullCover"}}"
-        ></i>{{/if}}
+          {{/if}}
+        ></i>
       </div>
     </div>
     <div
@@ -122,11 +124,8 @@
           class="character-smallbox-value"
           data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.ReactionBox.tooltip"}}"
         >
-          {{#if system.combat.hasReaction}}
-            <i class="fa-light mic {{TERIOCK.display.icons.ui.on}} thover"></i>
-          {{else}}
-            <i class="fa-light mic {{TERIOCK.display.icons.ui.off}} thover"></i>
-          {{/if}}
+          <i class="thover {{makeIconClass
+            (lookup TERIOCK.display.icons.ui (ifThen system.combat.hasReaction "on" "off")) "light"}}"></i>
         </div>
       </div>
     </div>
@@ -165,7 +164,7 @@
                 {{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.av0.normal"}}
               {{/if}}
             {{else}}
-              <i class="fa-light mic {{TERIOCK.display.icons.ui.off}} thover"></i>
+              <i class="{{makeIconClass TERIOCK.display.icons.ui.off "light"}} thover"></i>
             {{/if}}
           {{/if}}
         </div>
@@ -175,11 +174,8 @@
         <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.sb.label"}}</div>
         <div class="character-smallbox-value"
              data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.sb.tooltip"}}">
-          {{#if system.offense.sb}}
-            <i class="fa-light mic {{TERIOCK.display.icons.ui.on}} thover"></i>
-          {{else}}
-            <i class="fa-light mic {{TERIOCK.display.icons.ui.off}} thover"></i>
-          {{/if}}
+          <i class="thover {{makeIconClass
+            (path TERIOCK.display.icons.ui (ifThen system.offense.sb "on" "off")) "light"}}"></i>
         </div>
       </div>
 
@@ -188,7 +184,7 @@
         {{formInput
           systemFields.combat.fields.attackPenalty
           value=system.combat.attackPenalty
-          classes="character-penalty-input character-smallbox-value"
+          classes="character-penalty-input character-smallbox-value thover-soft"
           dataset=(object tooltip=(localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.penalty.tooltip"))
         }}
       </div>
@@ -203,20 +199,20 @@
         <div class="title-left">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.attackingWith"}}</div>
         <div class="title-right">
           <i
-            class="fa-fw fa-light mic {{TERIOCK.display.icons.interaction.attack}} thover"
+            class="{{makeIconClass TERIOCK.display.icons.interaction.attack "light"}} thover"
             data-action="useAbility"
             data-ability="Basic Attack"
             data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.rollAttack"}}"
           ></i>
           {{#if (exists system.primaryAttacker)}}
             <i
-              class="fa-fw fa-regular mic {{TERIOCK.display.icons.effect.dealDamage}} thover"
+              class="{{makeIconClass TERIOCK.display.icons.effect.dealDamage "light"}} thover"
               data-action="quickUse"
               data-id="{{system.primaryAttacker._id}}"
               data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.rollDamage"}}"
             ></i>
             <i
-              class="fa-fw fa-regular mic {{TERIOCK.display.icons.ui.openWindow}} thover"
+              class="{{makeIconClass TERIOCK.display.icons.ui.openWindow "light"}} thover"
               data-action="openPrimaryAttacker"
               data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.open"}}"
             ></i>

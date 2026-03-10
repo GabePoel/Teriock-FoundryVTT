@@ -1,10 +1,9 @@
 @use "../../components/colors" as colors;
+@use "../../mixins" as mixins;
 
 .character-status-box {
-  align-items: center;
-  display: flex;
+  @include mixins.centralize;
   flex-direction: column;
-  justify-content: center;
 
   .character-status-bars {
     display: flex;
@@ -69,7 +68,7 @@
           colors.$mp-blue 0px,
           colors.$mp-blue 2px,
           colors.$mp-blue-dark 2px,
-          colors.$mp-blue-dark 8px /* gap between lines: 2px line + 6px gap */
+          colors.$mp-blue-dark 8px
         );
         border-right: 2px solid colors.$mp-blue;
       }
@@ -114,16 +113,8 @@
       }
     }
 
-    .character-bar-left {
-      flex: none;
-      height: 3em;
-    }
-
-    .character-bar-temp {
-      flex: none;
-      height: 3em;
-    }
-
+    .character-bar-left,
+    .character-bar-temp,
     .character-bar-lost {
       flex: none;
       height: 3em;

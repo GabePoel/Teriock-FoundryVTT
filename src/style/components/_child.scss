@@ -90,10 +90,8 @@
   }
 
   .ab-competence {
-    align-items: center;
-    display: flex;
+    @include mixins.centralize;
     height: 1em;
-    justify-content: center;
     position: absolute;
     right: 1rem;
     top: 1rem;
@@ -177,11 +175,9 @@
         }
 
         .ab-box-content {
-          align-items: center;
+          @include mixins.centralize;
           cursor: pointer;
-          display: flex;
           flex-direction: row;
-          justify-content: center;
           padding-inline: 1.5em;
           text-align: center;
           text-wrap: nowrap;
@@ -259,10 +255,8 @@
       }
 
       .ab-menu-item {
-        align-items: center;
-        display: flex;
+        @include mixins.centralize;
         flex-direction: row;
-        justify-content: center;
 
         input {
           margin-bottom: 0;
@@ -442,11 +436,9 @@
   width: 1.5em;
 
   div {
-    align-items: center;
-    display: flex;
+    @include mixins.centralize;
     font-size: smaller;
     height: 100%;
-    justify-content: center;
     width: 100%;
   }
 
@@ -563,103 +555,6 @@
       }
     }
   }
-}
-
-// OLD STUFF
-// ---------
-
-.ability-bar {
-  display: flex;
-  flex-direction: row;
-  padding: 3px;
-  position: relative;
-
-  .ability-bar-label {
-    flex: 0 0 auto;
-    font-weight: bold;
-    margin-right: 0.5em;
-
-    .ability-bar-label-text {
-      display: flex;
-      flex-direction: row;
-      width: max-content;
-    }
-  }
-
-  .ability-bar-content {
-    display: flex;
-    flex-direction: row;
-    gap: 0.25rem;
-
-    .ability-bar-select-container {
-      align-items: center;
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-    }
-
-    .ability-bar-input,
-    .ability-bar-select,
-    .ability-bar-multi-select {
-      height: unset;
-      width: unset;
-    }
-
-    .ability-bar-select {
-      height: 18px;
-      margin: 0;
-      padding: 0;
-      width: 18px;
-    }
-
-    .ability-bar-select-measure {
-      border: 1px solid var(--color-border);
-      border-radius: 4px;
-      font-size: var(--font-size-12);
-      padding: 1px 0.25rem;
-      // display: flex;
-    }
-
-    .ability-bar-multi-select {
-      flex-direction: row;
-
-      select {
-        height: 18px;
-        width: 18px;
-      }
-
-      .tags {
-        justify-content: flex-start;
-      }
-    }
-
-    .ability-bar-editable {
-      min-height: 1em;
-
-      .editor {
-        margin: 0;
-        min-height: 1em;
-        padding: 0;
-
-        .editor-content {
-          margin: 0;
-          max-width: max-content;
-          min-width: 16px;
-          padding: 0;
-        }
-      }
-    }
-  }
-
-  p,
-  a {
-    margin: 0;
-    padding: 0;
-  }
-}
-
-.ability-bar:nth-child(odd) {
-  background-color: rgba(0, 0, 0, 0.05);
 }
 
 .prosemirror,

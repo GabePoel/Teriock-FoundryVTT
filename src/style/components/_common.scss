@@ -1,3 +1,4 @@
+@use "../mixins" as mixins;
 @import "../ui/block";
 @import "../ui/grid";
 @import "../ui/switch";
@@ -20,16 +21,7 @@ table {
   font-size: small;
 }
 
-.thover {
-  &:hover {
-    color: var(--color-warm-2) !important;
-  }
-
-  &:active {
-    color: var(--color-text-subtle) !important;
-  }
-}
-
+.thover,
 .thover-soft {
   &:hover {
     color: var(--color-warm-2) !important;
@@ -72,7 +64,7 @@ table {
 
 .tround {
   border: 1px solid transparent;
-  border-radius: 3px;
+  border-radius: 4px;
 }
 
 .ttransparent {
@@ -92,21 +84,16 @@ table {
 }
 
 .tcenter {
-  align-items: center;
-  display: flex;
+  @include mixins.centralize;
   flex-direction: column;
-  justify-content: center;
-  text-align: center;
 }
 
 .tbox {
-  align-items: center;
+  @include mixins.centralize;
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 6px;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
-  display: flex;
   flex-direction: column;
-  justify-content: center;
   padding: 0.5em;
 }
 
@@ -121,16 +108,18 @@ table {
   justify-content: space-between;
   width: 100%;
 
-  .title-left {
+  .title-left,
+  .title-right {
     display: flex;
     flex: 1 1 0;
+  }
+
+  .title-left {
     justify-content: flex-start;
     text-align: left;
   }
 
   .title-right {
-    display: flex;
-    flex: 1 1 0;
     gap: 0.5em;
     justify-content: flex-end;
     text-align: right;

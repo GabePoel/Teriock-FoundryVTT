@@ -9,7 +9,7 @@
 
 .character-tabber {
   @include mixins.typed-icon-sizing;
-  align-items: center;
+  @include mixins.centralize;
   background: var(--color-cool-5);
   border: 1px solid var(--color-cool-4);
   border-bottom-right-radius: 6px;
@@ -18,9 +18,7 @@
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
   color: var(--color-text-selection);
   cursor: default;
-  display: flex;
   height: 2.75em;
-  justify-content: center;
   margin-block: 0.25em;
   overflow: hidden;
   position: relative;
@@ -166,19 +164,15 @@ body > form:only-child section .character-page,
     position: relative;
 
     .character-smallbox-value {
+      @include mixins.centralize;
       background-color: transparent;
       border: none;
       color: var(--color-text);
-      display: flex;
-      justify-content: center;
-      text-align: center;
     }
 
     .character-shortbox {
-      align-items: center;
-      display: flex;
+      @include mixins.centralize;
       flex-direction: column;
-      justify-content: center;
       width: 100%;
 
       .character-shortbox-value {
@@ -190,10 +184,8 @@ body > form:only-child section .character-page,
       }
 
       .character-smallbox-value {
-        align-items: center;
-        display: flex;
+        @include mixins.centralize;
         font-size: 1.25em;
-        justify-content: center;
         min-height: 22px;
       }
 
@@ -280,10 +272,8 @@ body > form:only-child section .character-page,
       }
 
       .detection-box-main {
-        align-items: center;
-        display: flex;
+        @include mixins.centralize;
         flex-direction: row;
-        justify-content: center;
         margin-bottom: 0;
         padding-bottom: 0;
         width: 100%;
@@ -295,11 +285,9 @@ body > form:only-child section .character-page,
       }
 
       .cover-box {
-        align-items: center;
+        @include mixins.centralize;
         border-right: 1px solid var(--color-border);
-        display: flex;
         flex: 1;
-        justify-content: center;
         padding-bottom: 0.5em;
         padding-right: 0.5em;
         padding-top: 0.5em;
@@ -308,11 +296,9 @@ body > form:only-child section .character-page,
       .defense-box-main,
       .attack-box-main,
       .carrying-box-main {
-        align-items: center;
+        @include mixins.centralize;
         border-bottom: 1px dotted var(--color-text-subtle);
-        display: flex;
         flex-direction: row;
-        justify-content: center;
         margin-bottom: 0.5em;
         padding-bottom: 0.25em;
         width: 100%;
@@ -329,10 +315,8 @@ body > form:only-child section .character-page,
       }
 
       .ch-battle-box {
-        align-items: center;
-        display: flex;
+        @include mixins.centralize;
         flex-direction: column;
-        justify-content: center;
         padding: 0;
         width: 100%;
 
@@ -434,15 +418,13 @@ body > form:only-child section .character-page,
 }
 
 .teriock-block-display {
-  align-items: center;
+  @include mixins.centralize;
   background-color: var(--color-block-display-background);
   border: 1px solid var(--color-block-display-border);
   border-radius: 9px;
   box-shadow: 0 0 6px var(--color-block-shadow);
-  display: flex;
   flex-direction: column;
   height: 100%;
-  justify-content: center;
   padding: 0.5em;
   width: 100%;
 
@@ -487,24 +469,18 @@ body > form:only-child section .character-page,
 }
 
 .character-tab-page {
-  align-items: center;
-  display: flex;
+  @include mixins.centralize;
   flex-direction: column;
   gap: 1em;
-  justify-content: center;
   width: 100%;
 }
 
 .character-presence-container {
-  align-items: center;
+  @include mixins.centralize;
   border: 2px solid var(--color-presence-bar);
   border-radius: 6px;
-
-  display: flex;
-
   flex-direction: column;
   height: 3em;
-  justify-content: center;
   overflow: hidden;
   --color-presence-bar: #{colors.$pp-yellow};
   --color-presence-bar-dark: #{colors.$pp-yellow-dark};
@@ -525,7 +501,6 @@ body > form:only-child section .character-page,
     .presence-indicator {
       background-color: black;
       height: 100%;
-
       width: 100%;
 
       &:not(:first-child) {
@@ -589,11 +564,9 @@ body > form:only-child section .character-page,
     width: 100%;
 
     .tradecraft-panel-symbol {
-      align-items: center;
+      @include mixins.centralize;
       color: var(--color-text-subtle);
-      display: flex;
       flex-direction: column;
-      justify-content: center;
     }
   }
 }
@@ -628,11 +601,9 @@ body > form:only-child section .character-page,
   }
 
   .money-icon {
-    align-items: center;
-    display: flex;
+    @include mixins.centralize;
     flex-direction: column;
     height: 100%;
-    justify-content: center;
 
     img {
       @include mixins.image-border(0, 0, 2px);
@@ -682,22 +653,18 @@ body > form:only-child section .character-page,
 }
 
 .money-total {
-  align-items: center;
+  @include mixins.centralize;
   border-radius: 3px;
-  display: flex;
   flex-direction: column;
   height: 2em;
-  justify-content: center;
   width: 100%;
 }
 
 .tgrid {
   .die-box {
-    align-items: center;
-    display: flex;
+    @include mixins.centralize;
     flex-direction: column;
     height: 18px;
-    justify-content: center;
 
     &.unrolled {
       color: var(--color-text-primary);
@@ -847,10 +814,8 @@ body > form:only-child section .character-page,
 }
 
 .currency-image {
-  align-items: center;
-  display: flex;
+  @include mixins.centralize;
   height: 100%;
-  justify-content: center;
   width: 100%;
 
   img {
@@ -861,10 +826,8 @@ body > form:only-child section .character-page,
 }
 
 .grid-fill {
-  align-items: center;
-  display: flex;
+  @include mixins.centralize;
   height: 100%;
-  justify-content: center;
   margin: 0;
   padding: 0;
   width: 100%;
