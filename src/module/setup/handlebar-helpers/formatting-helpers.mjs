@@ -10,12 +10,12 @@ export default function registerFormattingHelpers() {
 
   Handlebars.registerHelper("modifierIconClass", (modifier) => {
     if (modifier.competence.fluent) {
-      return makeIconClass("ms-circle_circle", "solid");
+      return makeIconClass(TERIOCK.display.icons.ui.filled2, "solid");
     }
     if (modifier.competence.proficient) {
-      return makeIconClass("ms-adjust", "light");
+      return makeIconClass(TERIOCK.display.icons.ui.filled1, "light");
     }
-    return makeIconClass("ms-circle", "light");
+    return makeIconClass(TERIOCK.display.icons.ui.filled0, "light");
   });
 
   Handlebars.registerHelper("elements", (elements) => {
