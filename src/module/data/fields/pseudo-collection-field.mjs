@@ -55,7 +55,7 @@ export default class PseudoCollectionField extends TypedObjectField {
    * @returns {string}
    */
   get documentName() {
-    return this.documentClass.metadata.documentName;
+    return this.documentClass.metadata.name;
   }
 
   /** @inheritDoc */

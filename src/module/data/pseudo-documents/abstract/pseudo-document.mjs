@@ -16,7 +16,7 @@ export default class PseudoDocument extends EmbeddedDataModel {
 
   static get metadata() {
     return {
-      documentName: "",
+      name: "",
       icon: "",
       sheetClass: null,
     };
@@ -42,8 +42,7 @@ export default class PseudoDocument extends EmbeddedDataModel {
     )
       ? parent
       : parent.system;
-    const fieldPath =
-      directParent.metadata?.pseudos?.[this.metadata.documentName];
+    const fieldPath = directParent.metadata?.pseudos?.[this.metadata.name];
     if (!fieldPath) throw new Error("Invalid pseudo-document parent");
     const updateData = { [`${fieldPath}.${id}`]: { ...data, _id: id } };
     await directParent.document.update(updateData, operation);
@@ -64,7 +63,7 @@ export default class PseudoDocument extends EmbeddedDataModel {
    * @returns {null}
    */
   get documentName() {
-    return this.constructor.metadata.documentName;
+    return this.constructor.metadata.name;
   }
 
   /**

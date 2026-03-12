@@ -21,11 +21,11 @@ export default class BaseAutomation extends PropagationDataMixin(
 
   /**
    * @inheritDoc
-   * @returns {{ documentName: "Automation", macro: boolean }}
+   * @returns {{ name: "Automation", macro: boolean }}
    */
   static get metadata() {
     return Object.assign(super.metadata, {
-      documentName: "Automation",
+      name: "Automation",
       macro: false,
     });
   }
