@@ -192,7 +192,7 @@ export default class TeriockTokenDocument extends mix(
   _prepareDetectionModes() {
     super._prepareDetectionModes();
     if (!this.getSetting("autoDetectionModes")) return;
-    const basicMode = this.detectionModes.find((m) => m.id === "basicSight");
+    const basicMode = this.detectionModes.basicSight;
     if (basicMode) {
       basicMode.enabled = false;
     }
@@ -208,28 +208,20 @@ export default class TeriockTokenDocument extends mix(
       "soundPerception",
       "trueSight",
     ];
-    this.detectionModes.push(
-      ...enabledIds
-        .filter((id) => !this.detectionModes.find((mode) => mode.id === id))
-        .map((id) => {
-          return {
-            id: id,
-            enabled: true,
-            range: Infinity,
-          };
-        }),
-    );
-    this.detectionModes.push(
-      ...disabledIds
-        .filter((id) => !this.detectionModes.find((mode) => mode.id === id))
-        .map((id) => {
-          return {
-            id: id,
-            enabled: false,
-            range: 0,
-          };
-        }),
-    );
+    for (const id of enabledIds) {
+      this.detectionModes[id] = {
+        enabled: true,
+        id,
+        range: Infinity,
+      };
+    }
+    for (const id of disabledIds) {
+      this.detectionModes[id] = {
+        enabled: false,
+        id,
+        range: 0,
+      };
+    }
   }
 
   /**
@@ -240,14 +232,13 @@ export default class TeriockTokenDocument extends mix(
       for (const [sense, id] of Object.entries(
         TERIOCK.options.character.senseMap,
       )) {
-        const mode = this.detectionModes.find((m) => m.id === id);
-        if (mode) {
-          mode.range = convertUnits(
+        if (this.detectionModes[id]) {
+          this.detectionModes[id].range = convertUnits(
             this.actor.system.senses[sense],
             "ft",
             this.parent?.grid.units || "",
           );
-          mode.enabled = this.actor.system.senses[sense] > 0;
+          this.detectionModes[id].enabled = this.actor.system.senses[sense] > 0;
         }
       }
     }

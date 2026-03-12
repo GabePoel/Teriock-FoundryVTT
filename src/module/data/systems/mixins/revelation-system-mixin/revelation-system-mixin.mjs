@@ -90,7 +90,7 @@ export default function RevelationSystemMixin(Base) {
       /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
-        if (this.parent.elder && this.parent.elder?.metadata.revealable) {
+        if (this.parent.elder && this.parent.elder?.metadata?.revealable) {
           this.revealed = this.revealed && this.parent.elder?.system.revealed;
         }
       }
