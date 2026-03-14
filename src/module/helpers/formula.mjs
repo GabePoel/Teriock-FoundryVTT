@@ -1,8 +1,8 @@
 /**
  * Add something to a formula.
- * @param {string} value - Original formula.
- * @param {string} delta - Modification to formula.
- * @returns {string}
+ * @param {Teriock.System.FormulaString} value - Original formula.
+ * @param {Teriock.System.FormulaString} delta - Modification to formula.
+ * @returns {Teriock.System.FormulaString}
  */
 export function addFormula(value, delta) {
   const operator = delta.startsWith("-") ? "-" : "+";
@@ -13,9 +13,9 @@ export function addFormula(value, delta) {
 
 /**
  * Boost a formula.
- * @param {string} value - Original formula.
- * @param {string} delta - Modification to formula.
- * @returns {string}
+ * @param {Teriock.System.FormulaString} value - Original formula.
+ * @param {Teriock.System.FormulaString} delta - Modification to formula.
+ * @returns {Teriock.System.FormulaString}
  */
 export function boostFormula(value, delta) {
   if (formulaExists(value)) return `sb(${value}, ${delta})`;
@@ -24,9 +24,9 @@ export function boostFormula(value, delta) {
 
 /**
  * Downgrade a formula deterministically.
- * @param {string} value - Original formula.
- * @param {string} delta - Modification to formula.
- * @returns {string}
+ * @param {Teriock.System.FormulaString} value - Original formula.
+ * @param {Teriock.System.FormulaString} delta - Modification to formula.
+ * @returns {Teriock.System.FormulaString}
  */
 export function downgradeDeterministicFormula(value, delta) {
   const terms = new game.teriock.Roll(value, {}).terms;
@@ -38,9 +38,9 @@ export function downgradeDeterministicFormula(value, delta) {
 
 /**
  * Downgrade a formula indeterministically.
- * @param {string} value - Original formula.
- * @param {string} delta - Modification to formula.
- * @returns {string}
+ * @param {Teriock.System.FormulaString} value - Original formula.
+ * @param {Teriock.System.FormulaString} delta - Modification to formula.
+ * @returns {Teriock.System.FormulaString}
  */
 export function downgradeIndeterministicFormula(value, delta) {
   const valueTotal = game.teriock.Roll.meanValue(value);
@@ -54,9 +54,9 @@ export function downgradeIndeterministicFormula(value, delta) {
 
 /**
  * Multiply a formula with something.
- * @param {string} value - Original formula.
- * @param {string} delta - Modification to formula.
- * @returns {string}
+ * @param {Teriock.System.FormulaString} value - Original formula.
+ * @param {Teriock.System.FormulaString} delta - Modification to formula.
+ * @returns {Teriock.System.FormulaString}
  */
 export function multiplyFormula(value, delta) {
   if (Number(delta) === 1) {
@@ -71,9 +71,9 @@ export function multiplyFormula(value, delta) {
 
 /**
  * Upgrade a formula deterministically.
- * @param {string} value - Original formula.
- * @param {string} delta - Modification to formula.
- * @returns {string}
+ * @param {Teriock.System.FormulaString} value - Original formula.
+ * @param {Teriock.System.FormulaString} delta - Modification to formula.
+ * @returns {Teriock.System.FormulaString}
  */
 export function upgradeDeterministicFormula(value, delta) {
   const terms = new game.teriock.Roll(value, {}).terms;
@@ -85,9 +85,9 @@ export function upgradeDeterministicFormula(value, delta) {
 
 /**
  * Upgrade a formula indeterministically.
- * @param {string} value - Original formula.
- * @param {string} delta - Modification to formula.
- * @returns {string}
+ * @param {Teriock.System.FormulaString} value - Original formula.
+ * @param {Teriock.System.FormulaString} delta - Modification to formula.
+ * @returns {Teriock.System.FormulaString}
  */
 export function upgradeIndeterministicFormula(value, delta) {
   const valueTotal = game.teriock.Roll.meanValue(value);
@@ -101,10 +101,10 @@ export function upgradeIndeterministicFormula(value, delta) {
 
 /**
  * Transform a formula indeterministically.
- * @param {string} value
- * @param {string} delta
+ * @param {Teriock.System.FormulaString} value
+ * @param {Teriock.System.FormulaString} delta
  * @param {number} mode
- * @returns {string}
+ * @returns {Teriock.System.FormulaString}
  */
 export function manipulateFormula(value, delta, mode) {
   switch (mode) {
@@ -138,5 +138,26 @@ export function formulaExists(formula) {
     return Boolean(formula.length > 0 && formula !== "0");
   } else {
     return Boolean(formula);
+  }
+}
+
+/**
+ * Apply boosts to fields in active effect changes.
+ * @type {ActiveEffectChangeHandler}
+ * @param {AnyActor | AnyItem | TeriockTokenDocument} targetDoc
+ * @param {ActiveEffectChangeData} change
+ * @param {{field: DataField; replacementData: Record<string, unknown>; modifyTarget: boolean;}} [options]
+ * @returns {Record<string, unknown> | void}
+ */
+export function boostHandler(targetDoc, change, options = {}) {
+  const field = options.field || targetDoc.getFieldForProperty(change.key);
+  if (typeof field._applyChangeBoost === "function") {
+    const value = foundry.utils.getProperty(targetDoc, change.key);
+    const delta = change.value;
+    const update = field._applyChangeBoost(value, delta, targetDoc, change);
+    if (update !== undefined) {
+      foundry.utils.setProperty(targetDoc, change.key, update);
+      return { [change.key]: update };
+    }
   }
 }

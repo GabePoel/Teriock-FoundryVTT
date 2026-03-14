@@ -37,6 +37,19 @@ export default class FormulaField extends EnhancedStringField {
     return addFormula(value, delta);
   }
 
+  /**
+   * Apply a boost change to this field.
+   * @param {Teriock.System.FormulaField} value
+   * @param {Teriock.System.FormulaString} delta
+   * @param {DataModel} _model
+   * @param {EffectChangeData} _change
+   * @returns {Teriock.System.FormulaString}
+   */
+  _applyChangeBoost(value, delta, _model, _change) {
+    if (!delta || this.deterministic) return value;
+    return boostFormula(value, delta);
+  }
+
   /** @inheritDoc */
   _applyChangeCustom(value, delta, _model, _change) {
     if (!delta || this.deterministic) return value;

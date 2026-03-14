@@ -242,6 +242,15 @@ foundry.helpers.Hooks.once("init", function () {
     },
   });
 
+  // Configure Active Effect Changes
+  // -------------------------------
+
+  CONFIG.ActiveEffect.changeTypes.boost = {
+    defaultPriority: 45,
+    handler: helpers.formula.boostHandler,
+    label: "TERIOCK.CHANGES.Mode.boost",
+  };
+
   // Configure Type Icons
   // --------------------
 
