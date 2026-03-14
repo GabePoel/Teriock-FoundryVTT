@@ -182,7 +182,10 @@ export default function ChangeableDocumentMixin(Base) {
             shouldApply = !!BaseRoll.minValue(change.qualifier, rollData);
           }
           if (shouldApply) {
-            const changeOverrides = change.effect.apply(this, change);
+            const changeOverrides = change.effect.constructor.applyChange(
+              this,
+              change,
+            );
             Object.assign(this.overrides, changeOverrides);
           }
         }

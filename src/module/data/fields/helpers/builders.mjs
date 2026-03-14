@@ -1,7 +1,7 @@
 import { abilityOptions } from "../../../constants/options/ability-options.mjs";
 import { competenceOptions } from "../../../constants/options/competence-options.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
-import { sortObject } from "../../../helpers/utils.mjs";
+import { objectMap, sortObject } from "../../../helpers/utils.mjs";
 import {
   EnhancedNumberField,
   EnhancedStringField,
@@ -256,6 +256,20 @@ export function combatExpirationTimingField() {
 }
 
 /**
+ * Field that gives valid change modes.
+ * @return {StringField}
+ */
+export function changeModeField() {
+  return new EnhancedStringField({
+    choices: localizeChoices(
+      objectMap(ActiveEffect.CHANGE_TYPES, (c) => c.label),
+    ),
+    initial: "add",
+    label: "TERIOCK.SCHEMA.QualifiedChange.mode.label",
+  });
+}
+
+/**
  * Field that represents an expanded change.
  * @returns {SchemaField}
  */
@@ -278,11 +292,7 @@ export function qualifiedChangeField() {
       initial: "",
       label: "TERIOCK.SCHEMA.QualifiedChange.key.label",
     }),
-    mode: new EnhancedNumberField({
-      choices: TERIOCK.options.effect.changeMode,
-      initial: 4,
-      label: "TERIOCK.SCHEMA.QualifiedChange.mode.label",
-    }),
+    mode: changeModeField(),
     priority: new EnhancedNumberField({
       initial: 20,
       label: "TERIOCK.SCHEMA.QualifiedChange.priority.label",

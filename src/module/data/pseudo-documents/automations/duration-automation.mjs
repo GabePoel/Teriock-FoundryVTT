@@ -1,8 +1,8 @@
 import { EvaluationField } from "../../fields/_module.mjs";
+import { changeModeField } from "../../fields/helpers/builders.mjs";
 import { TimeUnitModel } from "../../models/unit-models/_module.mjs";
+import { v14MigrateChangeMode } from "../../shared/migrations/migrate-changes.mjs";
 import { CritAutomation } from "./abstract/_module.mjs";
-
-const { fields } = foundry.data;
 
 /**
  * @property {TimeUnitModel} duration
@@ -29,11 +29,14 @@ export default class DurationAutomation extends CritAutomation {
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       duration: new EvaluationField({ model: TimeUnitModel }),
-      mode: new fields.NumberField({
-        choices: TERIOCK.options.effect.simpleChangeMode,
-        initial: 5,
-      }),
+      mode: changeModeField(),
     });
+  }
+
+  /** @inheritDoc */
+  static migrateData(data) {
+    if (data.mode) data.mode = v14MigrateChangeMode(data.mode);
+    return super.migrateData(data);
   }
 
   /** @inheritDoc */

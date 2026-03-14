@@ -33,7 +33,7 @@ export default function ChangesSheetMixin(Base) {
           ) || [];
         const newChange = {
           key: "",
-          mode: 0,
+          mode: "add",
           value: "",
           priority: 0,
         };
