@@ -1,6 +1,9 @@
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { qualifiedChangeField } from "../../fields/helpers/builders.mjs";
-import { v14MigrateChangeMode } from "../../shared/migrations/migrate-changes.mjs";
+import {
+  v14MigrateChangeKey,
+  v14MigrateChangeMode,
+} from "../../shared/migrations/migrate-changes.mjs";
 import { CritAutomation } from "./abstract/_module.mjs";
 
 const { fields } = foundry.data;
@@ -40,7 +43,10 @@ export default class ChangesAutomation extends CritAutomation {
 
   /** @inheritDoc */
   static migrateData(data) {
-    for (const c of data.changes || []) c.mode = v14MigrateChangeMode(c.mode);
+    for (const c of data.changes || []) {
+      c.mode = v14MigrateChangeMode(c.mode);
+      c.key = v14MigrateChangeKey(c.key);
+    }
     return super.migrateData(data);
   }
 
