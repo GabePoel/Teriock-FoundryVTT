@@ -549,7 +549,7 @@ export default class CommonSystem extends mix(
           /** @type {BaseAutomation[]} */ this.automations?.contents;
         if (automations) {
           for (const automation of automations) {
-            updateObject[`${automation.fieldPath}.-=${automation.id}`] = null;
+            updateObject[`${automation.fieldPath}.${automation.id}`] = _del;
           }
           await this.parent.update(updateObject);
         }
@@ -557,6 +557,12 @@ export default class CommonSystem extends mix(
         delete indexObject.flags;
         delete indexObject.system?._ref;
         delete indexObject.system?._sup;
+        if (foundry.utils.hasProperty(indexObject, "system.automations")) {
+          for (const a of Object.values(indexObject.system.automations)) {
+            indexObject[`system.automations.${a._id}`] = _replace(a);
+          }
+          foundry.utils.deleteProperty(indexObject, "system.automations");
+        }
         await this.parent.update(indexObject);
       }
       const reference = await this.getCompendiumSource();

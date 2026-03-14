@@ -1,3 +1,4 @@
+import { constants } from "../../constants/system/constants.mjs";
 import { systemPath } from "../../helpers/path.mjs";
 import Booster from "../booster.mjs";
 import { selectWeightedMaxFaceDie } from "../helpers.mjs";
@@ -14,23 +15,16 @@ export default class BaseRoll extends Roll {
    * @param {object} data
    * @param {Teriock.Dice.RollOptions} options
    */
-  constructor(formula, data, options = {}) {
+  constructor(formula, data = {}, options = {}) {
     super(formula, data, options);
+    Object.assign(data, constants);
     /** @type {Teriock.Dice.RollOptions} */
     const userOptions = foundry.utils.mergeObject(
       {
         hideRoll: false,
         styles: {
-          dice: {
-            classes: "",
-            tooltip: "",
-            icon: "",
-          },
-          total: {
-            classes: "",
-            tooltip: "",
-            icon: "",
-          },
+          dice: { classes: "", tooltip: "", icon: "" },
+          total: { classes: "", tooltip: "", icon: "" },
         },
         targets: [],
         threshold: null,
@@ -146,20 +140,20 @@ export default class BaseRoll extends Roll {
     return {};
   }
 
+  /** @inheritDoc */
+  static replaceFormulaData(formula, data, options = {}, _r = 0) {
+    Object.assign(data, constants);
+    return super.replaceFormulaData(formula, data, options);
+  }
+
   /**
    * Reset all rolls recursively.
    * @param {BaseRoll} roll
    */
   static resetFormulas(roll) {
     for (const term of roll.terms) {
-      if (term?.rolls) {
-        term.rolls.forEach((r) => {
-          this.resetFormulas(r);
-        });
-      }
-      if (term?.isBooster) {
-        term.result = term.rolls[0].total;
-      }
+      if (term?.rolls) term.rolls.forEach((r) => this.resetFormulas(r));
+      if (term?.isBooster) term.result = term.rolls[0].total;
     }
     roll.resetFormula();
     roll._total = roll._evaluateTotal();
@@ -172,9 +166,7 @@ export default class BaseRoll extends Roll {
   get _allTerms() {
     const terms = [...this.terms];
     for (const t of /** @type {(ParentheticalTerm|Booster)[]} */ this.terms) {
-      if (t.roll && t.roll instanceof Roll) {
-        terms.push(...t.roll.terms);
-      }
+      if (t.roll && t.roll instanceof Roll) terms.push(...t.roll.terms);
       if (t.rolls) {
         for (const r of t.rolls) {
           if (r instanceof Roll) terms.push(...r.terms);
@@ -196,6 +188,13 @@ export default class BaseRoll extends Roll {
       return Boolean(comparisonRoll.total);
     }
     return null;
+  }
+
+  /** @inheritDoc */
+  get total() {
+    const total = super.total;
+    if (this.options.infnity && total >= constants.inf) return Infinity;
+    return total;
   }
 
   /**

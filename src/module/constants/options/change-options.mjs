@@ -6,7 +6,7 @@ export const targets = {
 };
 preLocalize("options.change.targets");
 
-export const time = {
+export const phase = {
   base: {
     hint: "TERIOCK.CHANGES.Time.base.hint",
     label: "TERIOCK.CHANGES.Time.base.label",
@@ -34,7 +34,7 @@ export const time = {
 };
 preLocalize("options.change.time", { keys: ["hint", "label"] });
 
-export const timeLabels = Object.fromEntries(
-  Object.entries(time).map(([k, v]) => [k, v.label]),
+export const phaseLabels = Object.fromEntries(
+  Object.entries(phase).map(([k, v]) => [k, v.label]),
 );
-preLocalize("options.change.timeLabels");
+preLocalize("options.change.phaseLabels");

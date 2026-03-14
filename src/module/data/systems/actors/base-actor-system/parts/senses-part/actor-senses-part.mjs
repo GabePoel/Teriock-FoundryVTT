@@ -1,6 +1,9 @@
 import { characterOptions } from "../../../../../../constants/options/character-options.mjs";
 import { objectMap } from "../../../../../../helpers/utils.mjs";
-import { EvaluationField } from "../../../../../fields/_module.mjs";
+import {
+  EnhancedNumberField,
+  EvaluationField,
+} from "../../../../../fields/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -72,7 +75,7 @@ export default (Base) => {
  * @param {string} name
  */
 function senseField(initial, name) {
-  return new fields.NumberField({
+  return new EnhancedNumberField({
     initial: initial,
     integer: true,
     label: name,

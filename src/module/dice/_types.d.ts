@@ -16,7 +16,9 @@ declare global {
       tokenUuid?: UUID<TeriockTokenDocument>;
     };
     export type RollOptions = {
+      comparison?: Teriock.Fields.ComparisonCheck;
       hideRoll?: boolean;
+      infinity?: boolean;
       styles?: {
         dice?: {
           classes?: string;
@@ -31,7 +33,6 @@ declare global {
       };
       targets?: Teriock.Dice.RollTargetOption[];
       threshold?: number | null;
-      comparison?: Teriock.Fields.ComparisonCheck;
     };
     export type TakeRollOptions = Teriock.Dice.RollOptions & {
       take?: Teriock.Parameters.Consequence.RollConsequenceKey;

@@ -128,9 +128,9 @@ export default function PanelDocumentMixin(Base) {
             tags: [],
           },
         };
-        TeriockChatMessage.applyRollMode(
+        TeriockChatMessage.applyMode(
           messageData,
-          game.settings.get("core", "rollMode"),
+          game.settings.get("core", "messageMode"),
         );
         return TeriockChatMessage.create(messageData);
       }

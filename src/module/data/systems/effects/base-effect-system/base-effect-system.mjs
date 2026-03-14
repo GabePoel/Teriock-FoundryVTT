@@ -23,7 +23,6 @@ export default class BaseEffectSystem extends ChildSystem {
 
   /** @inheritDoc */
   static PRESERVED_PROPERTIES = [
-    "changes",
     "disabled",
     "duration",
     "tint",

@@ -99,7 +99,7 @@ export default class EtherealFilter extends AbstractBaseFilter {
   /** @inheritDoc */
   apply(filterManager, input, output, clear) {
     if (this.animated && !game.canvas.photosensitiveMode) {
-      this.uniforms.time = game.canvas.app.ticker.lastTime;
+      this.uniforms.phase = game.canvas.app.ticker.lastTime;
     }
     filterManager.applyFilter(this, input, output, clear);
   }

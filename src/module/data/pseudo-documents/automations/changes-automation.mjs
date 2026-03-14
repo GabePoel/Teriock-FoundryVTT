@@ -1,9 +1,6 @@
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { qualifiedChangeField } from "../../fields/helpers/builders.mjs";
-import {
-  v14MigrateChangeKey,
-  v14MigrateChangeMode,
-} from "../../shared/migrations/migrate-changes.mjs";
+import { v14MigrateChange } from "../../shared/migrations/migrate-changes.mjs";
 import { CritAutomation } from "./abstract/_module.mjs";
 
 const { fields } = foundry.data;
@@ -14,10 +11,10 @@ const { fields } = foundry.data;
  * @todo Find a better way to handle this.
  */
 class ChangesArrayField extends fields.ArrayField {
-  _updateCommit(source, key, value, _diff, _options) {
-    value = this._cast(value);
-    return super._updateCommit(source, key, value, _diff, _options);
-  }
+  //_updateCommit(source, key, value, _diff, _options) {
+  //  value = this._cast(value);
+  //  return super._updateCommit(source, key, value, _diff, _options);
+  //}
 }
 
 /**
@@ -43,10 +40,7 @@ export default class ChangesAutomation extends CritAutomation {
 
   /** @inheritDoc */
   static migrateData(data) {
-    for (const c of data.changes || []) {
-      c.mode = v14MigrateChangeMode(c.mode);
-      c.key = v14MigrateChangeKey(c.key);
-    }
+    for (const c of data.changes || []) v14MigrateChange(c);
     return super.migrateData(data);
   }
 

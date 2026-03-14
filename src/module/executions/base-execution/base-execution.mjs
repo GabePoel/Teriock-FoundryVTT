@@ -174,13 +174,13 @@ export default class BaseExecution {
   /**
    * Create a chat message from this execution.
    * @param {object} [options]
-   * @param {Teriock.Rolls.RollMode} [options.rollMode]
+   * @param {string} [options.messageMode]
    * @returns {Promise<void>}
    */
   async _createChatMessage(options = {}) {
-    const { rollMode = game.settings.get("core", "rollMode") } = options;
+    const { messageMode = game.settings.get("core", "messageMode") } = options;
     const chatData = this.chatData;
-    TeriockChatMessage.applyRollMode(chatData, rollMode);
+    TeriockChatMessage.applyMode(chatData, messageMode);
     this.message = await TeriockChatMessage.create(chatData);
   }
 

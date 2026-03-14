@@ -292,16 +292,20 @@ export function qualifiedChangeField() {
       initial: "",
       label: "TERIOCK.SCHEMA.QualifiedChange.key.label",
     }),
-    mode: changeModeField(),
+    phase: new EnhancedStringField({
+      choices: TERIOCK.options.change.phaseLabels,
+      initial: "normal",
+      label: "TERIOCK.SCHEMA.QualifiedChange.time.label",
+      nullable: false,
+    }),
     priority: new EnhancedNumberField({
       initial: 20,
       label: "TERIOCK.SCHEMA.QualifiedChange.priority.label",
     }),
-    time: new EnhancedStringField({
-      choices: TERIOCK.options.change.timeLabels,
-      initial: "normal",
-      label: "TERIOCK.SCHEMA.QualifiedChange.time.label",
-      nullable: false,
+    qualifier: new FormulaField({
+      deterministic: true,
+      initial: "1",
+      label: "TERIOCK.SCHEMA.QualifiedChange.qualifier.label",
     }),
     target: new EnhancedStringField({
       choices: localizeChoices(allTypes),
@@ -309,14 +313,10 @@ export function qualifiedChangeField() {
       label: "TERIOCK.SCHEMA.QualifiedChange.target.label",
       nullable: false,
     }),
+    type: changeModeField(),
     value: new EnhancedStringField({
       initial: "",
       label: "TERIOCK.SCHEMA.QualifiedChange.value.label",
-    }),
-    qualifier: new FormulaField({
-      deterministic: true,
-      initial: "1",
-      label: "TERIOCK.SCHEMA.QualifiedChange.qualifier.label",
     }),
   });
 }

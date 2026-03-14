@@ -22,7 +22,7 @@ export default function ChangeableDocumentMixin(Base) {
       static buildChangeTree(effects, options = {}) {
         const changeTree =
           /** @type {Teriock.Changes.ChangeTree} */ Object.fromEntries(
-            Object.keys(TERIOCK.options.change.time).map((time) => [
+            Object.keys(TERIOCK.options.change.phase).map((time) => [
               time,
               Object.fromEntries(
                 ["Actor", "Item", "ActiveEffect"].map((documentName) => {
@@ -33,14 +33,7 @@ export default function ChangeableDocumentMixin(Base) {
                         ),
                       )
                     : {};
-                  return [
-                    documentName,
-                    {
-                      untyped: [],
-                      uuids: {},
-                      typed,
-                    },
-                  ];
+                  return [documentName, { untyped: [], uuids: {}, typed }];
                 }),
               ),
             ]),
@@ -53,14 +46,8 @@ export default function ChangeableDocumentMixin(Base) {
             if (change.key.startsWith("system.damage.all")) {
               changes.push(
                 ...[
-                  {
-                    ...change,
-                    key: change.key.replace("all", "base"),
-                  },
-                  {
-                    ...change,
-                    key: change.key.replace("all", "twoHanded"),
-                  },
+                  { ...change, key: change.key.replace("all", "base") },
+                  { ...change, key: change.key.replace("all", "twoHanded") },
                 ],
               );
             }
@@ -68,37 +55,37 @@ export default function ChangeableDocumentMixin(Base) {
           for (const change of changes) {
             const conditionalChange = {
               key: change.key,
-              mode: change.mode,
+              type: change.type,
               priority: change.priority,
               value: change.value,
               qualifier: change.qualifier || "1",
               effect: effect,
             };
-            const time = change.time || "normal";
+            const phase = change.phase || "normal";
             const target = change.target || "Actor";
             if (
               !options.allChanges &&
-              (time !== "normal" || !["Actor", "parent"].includes(target))
+              (phase !== "normal" || !["Actor", "parent"].includes(target))
             ) {
               continue;
             }
             if (target === "parent" && effect.parent) {
-              const uuids = changeTree[time][effect.parent.documentName].uuids;
+              const uuids = changeTree[phase][effect.parent.documentName].uuids;
               if (!uuids[effect.parent.uuid]) uuids[effect.parent.uuid] = [];
               uuids[effect.parent.uuid].push(conditionalChange);
             } else if (["Actor", "Item", "ActiveEffect"].includes(target)) {
-              changeTree[time][target].untyped.push(conditionalChange);
+              changeTree[phase][target].untyped.push(conditionalChange);
             } else if (target === "armament") {
-              changeTree[time].Item.typed.equipment.push(conditionalChange);
+              changeTree[phase].Item.typed.equipment.push(conditionalChange);
               if (
                 !conditionalChange.key.startsWith("system.damage.twoHanded")
               ) {
-                changeTree[time].Item.typed.body.push(conditionalChange);
+                changeTree[phase].Item.typed.body.push(conditionalChange);
               }
             } else {
               const documentName = TERIOCK.options.document[target]?.doc;
               if (documentName) {
-                changeTree[time][documentName].typed[target].push(
+                changeTree[phase][documentName].typed[target].push(
                   conditionalChange,
                 );
               }
@@ -185,6 +172,7 @@ export default function ChangeableDocumentMixin(Base) {
             const changeOverrides = change.effect.constructor.applyChange(
               this,
               change,
+              { replacementData: rollData },
             );
             Object.assign(this.overrides, changeOverrides);
           }

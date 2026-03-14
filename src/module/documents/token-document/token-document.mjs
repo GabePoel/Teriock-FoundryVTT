@@ -209,18 +209,10 @@ export default class TeriockTokenDocument extends mix(
       "trueSight",
     ];
     for (const id of enabledIds) {
-      this.detectionModes[id] = {
-        enabled: true,
-        id,
-        range: Infinity,
-      };
+      this.detectionModes[id] = { enabled: true, id, range: Infinity };
     }
     for (const id of disabledIds) {
-      this.detectionModes[id] = {
-        enabled: false,
-        id,
-        range: 0,
-      };
+      this.detectionModes[id] = { enabled: false, id, range: 0 };
     }
   }
 

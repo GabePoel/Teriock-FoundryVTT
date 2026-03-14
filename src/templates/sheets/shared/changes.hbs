@@ -49,7 +49,7 @@
               name=(concat ../../changesPath "." i ".priority")
               value=change.priority
               icon=@root/TERIOCK.display.icons.ui.priority
-              placeholder=(lookup ../../priorities change.mode)
+              placeholder=(lookup ../../priorities change.type)
               disabled=(not @root/editable)
               id=(concat @root/appId ../../changesPath "." i ".priority")
               dataset=(object tooltip=change.priority)
@@ -57,12 +57,12 @@
           </div>
           <div class="change-assignment">
             {{formInput
-              changeFields.mode
-              name=(concat ../../changesPath "." i ".mode")
-              value=change.mode
+              changeFields.type
+              name=(concat ../../changesPath "." i ".type")
+              value=change.type
               icon=@root/TERIOCK.display.icons.ui.changeMode
               disabled=(not @root/editable)
-              id=(concat @root/appId ../../changesPath "." i ".mode")
+              id=(concat @root/appId ../../changesPath "." i ".type")
             }}
             {{formInput
               changeFields.target
@@ -73,13 +73,13 @@
               id=(concat @root/appId ../../changesPath "." i ".target")
             }}
             {{formInput
-              changeFields.time
-              name=(concat ../../changesPath "." i ".time")
+              changeFields.phase
+              name=(concat ../../changesPath "." i ".phase")
               icon=@root/TERIOCK.display.icons.ui.time
-              value=change.time
+              value=change.phase
               disabled=(not @root/editable)
-              id=(concat @root/appId ../../changesPath "." i ".time")
-              dataset=(object tooltip=(path @root/TERIOCK.options.change.time change.time "hint"))
+              id=(concat @root/appId ../../changesPath "." i ".phase")
+              dataset=(object tooltip=(path @root/TERIOCK.options.change.time change.phase "hint"))
             }}
           </div>
         </div>

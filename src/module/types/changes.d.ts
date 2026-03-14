@@ -1,9 +1,9 @@
 import { TeriockActiveEffect } from "../documents/_module.mjs";
-import { time } from "../constants/options/change-options.mjs";
+import { phase } from "../constants/options/change-options.mjs";
 
 declare global {
   namespace Teriock.Changes {
-    export type ChangeTime = keyof typeof time;
+    export type ChangeTime = keyof typeof phase;
 
     export type ChangeTarget =
       | Teriock.Documents.CommonType
@@ -20,7 +20,7 @@ declare global {
     export type QualifiedChangeData = Teriock.Foundry.EffectChangeData & {
       qualifier: string;
       target: ChangeTarget;
-      time: ChangeTime;
+      phase: ChangeTime;
     };
 
     export type PartialChangeTypeTree<keys extends string> = {

@@ -1,11 +1,12 @@
+import { TeriockDocument } from "./documents.js";
+
 declare global {
   namespace Teriock.Foundry {
     /**
      * Describes the origin of a {@link TeriockChatMessage}.
      */
     export type ChatSpeakerData = {
-      /** The `_id` of the {@link TeriockActor
-       * } who generated this message */
+      /** The `_id` of the {@link TeriockActor} who generated this message */
       actor?: string;
       /** An overridden alias name used instead of the {@link TeriockActor} or {@link TeriockTokenDocument} name */
       alias?: string;
@@ -46,12 +47,12 @@ declare global {
     export type EffectChangeData = {
       /** <schema> The attribute path in the {@link ParentDocument} data which the change modifies */
       key: string;
-      /** <schema> The value of the change effect */
-      value: string;
-      /** <schema> The modification mode with which the change is applied */
-      mode: number;
       /** <schema> The priority level with which this change is applied */
       priority: number;
+      /** <schema> The modification mode with which the change is applied */
+      type: number;
+      /** <schema> The value of the change effect */
+      value: string;
     };
 
     export type EnrichmentOptions = {
