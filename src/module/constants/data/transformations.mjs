@@ -1,65 +1,57 @@
 import { getImage } from "../../helpers/path.mjs";
+import { completeUtilityStatuses } from "../../helpers/utils.mjs";
 
-export const transformationsData = {
+const transformationsData = {
   fullTransformed: {
-    _id: "fullTransformed0",
-    hud: false,
     id: "fullTransformed",
     img: getImage("conditions", "Transformed"),
     name: "TERIOCK.STATUSES.Transformations.fullTransformed",
     statuses: ["transformed"],
-    type: "base",
   },
   greaterTransformed: {
-    _id: "greaterTransform",
-    hud: false,
     id: "greaterTransformed",
     img: getImage("conditions", "Transformed"),
     name: "TERIOCK.STATUSES.Transformations.greaterTransformed",
     statuses: ["transformed"],
-    type: "base",
   },
   illusionTransformed: {
-    _id: "illusionTransfor",
-    hud: false,
     id: "illusionTransformed",
     img: getImage("abilities", "Illusionary Arts"),
     name: "TERIOCK.STATUSES.Transformations.illusionTransformed",
-    type: "base",
   },
   minorTransformed: {
-    _id: "minorTransformed",
-    hud: false,
     id: "minorTransformed",
     img: getImage("conditions", "Transformed"),
     name: "TERIOCK.STATUSES.Transformations.minorTransformed",
     statuses: ["transformed"],
-    type: "base",
   },
   polymorphed: {
-    _id: "polymorphed00000",
-    hud: false,
     id: "polymorphed",
     img: getImage("abilities", "Polymorph"),
     name: "TERIOCK.STATUSES.Transformations.polymorphed",
     statuses: ["fullTransformed", "transformed"],
-    type: "base",
   },
   treeformed: {
-    _id: "treeformed000000",
     changes: [
       {
-        key: "system.transformation.image",
-        value: "icons/environment/wilderness/tree-ash.webp",
-        mode: 5,
+        key: "tokenOverrides.ring.enabled",
         priority: 20,
+        type: "override",
+        value: "true",
+      },
+      {
+        key: "tokenOverrides.ring.subject.texture",
+        priority: 20,
+        type: "override",
+        value: "icons/environment/wilderness/tree-ash.webp",
       },
     ],
-    hud: false,
     id: "treeformed",
     img: getImage("abilities", "Treeform Ball"),
     name: "TERIOCK.STATUSES.Transformations.treeformed",
     statuses: ["minorTransformed", "transformed"],
-    type: "base",
   },
 };
+
+completeUtilityStatuses(transformationsData);
+export default transformationsData;

@@ -1,4 +1,3 @@
-import { coverData } from "../../../../../../constants/data/cover.mjs";
 import { addFormula } from "../../../../../../helpers/formula.mjs";
 
 /**
@@ -23,7 +22,7 @@ export default (Base) => {
         const min = Math.max(0, value - amount);
         const ids = [];
         for (let i = value; i > min; i--) {
-          ids.push(coverData["cover" + i.toString()].id);
+          ids.push(TERIOCK.data.cover["cover" + i.toString()].id);
         }
         await this.parent.removeStatusEffects(ids);
       }
@@ -38,7 +37,7 @@ export default (Base) => {
         const max = Math.min(3, value + amount);
         const ids = [];
         for (let i = value; i < max; i++) {
-          ids.push(coverData["cover" + (i + 1).toString()].id);
+          ids.push(TERIOCK.data.cover["cover" + (i + 1).toString()].id);
         }
         await this.parent.applyStatusEffects(ids);
       }

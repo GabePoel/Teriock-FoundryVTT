@@ -1,5 +1,3 @@
-import { hacksData } from "../../../../../../constants/data/hacks.mjs";
-import { hackOptions } from "../../../../../../constants/options/hack-options.mjs";
 import { objectMap } from "../../../../../../helpers/utils.mjs";
 
 /**
@@ -26,7 +24,7 @@ export default (Base) => {
       /** @inheritDoc */
       prepareBaseData() {
         super.prepareBaseData();
-        this.hacks = objectMap(hackOptions, (conf) => {
+        this.hacks = objectMap(TERIOCK.options.hack, (conf) => {
           return {
             min: 0,
             max: conf.max,
@@ -48,10 +46,10 @@ export default (Base) => {
       async takeHack(part, amount = 1) {
         await this.parent.hookCall("takeHack", { scope: { part, amount } });
         const value = this.parent.system.hacks[part].value;
-        const max = Math.min(value + amount, hackOptions[part].max);
+        const max = Math.min(value + amount, TERIOCK.options.hack[part].max);
         const ids = [];
         for (let i = value; i < max; i++) {
-          ids.push(hacksData[part + (i + 1).toString()].id);
+          ids.push(TERIOCK.data.hacks[part + (i + 1).toString()].id);
         }
         await this.parent.applyStatusEffects(ids);
       }
@@ -72,7 +70,7 @@ export default (Base) => {
         const min = Math.max(value - amount, 0);
         const ids = [];
         for (let i = value; i > min; i--) {
-          ids.push(hacksData[part + i.toString()].id);
+          ids.push(TERIOCK.data.hacks[part + i.toString()].id);
         }
         await this.parent.removeStatusEffects(ids);
       }

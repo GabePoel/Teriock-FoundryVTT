@@ -1,5 +1,6 @@
 import { iconStyles } from "../constants/display/_module.mjs";
 import { BaseRoll } from "../dice/rolls/_module.mjs";
+import { toId } from "./string.mjs";
 
 /**
  * Creates an HTML icon using Font Awesome classes.
@@ -280,4 +281,19 @@ export async function massUpdate(documentName, updateData, operation = {}) {
     documents.push(...ud);
   }
   return documents;
+}
+
+/**
+ * Fill in the remaining data needed for statuses that aren't conditions.
+ * @param {Record<string, object>} statuses
+ * @param {object} [data]
+ */
+export function completeUtilityStatuses(
+  statuses,
+  data = { hud: false, type: "base" },
+) {
+  Object.values(statuses).forEach((s) => {
+    s._id = toId(s.id, { hash: false });
+    Object.assign(s, data);
+  });
 }

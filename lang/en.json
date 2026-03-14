@@ -1204,6 +1204,48 @@
           "label": "Tradecrafts"
         }
       },
+      "BaseStatPool": {
+        "FIELDS": {
+          "disabled": {
+            "hint": "If checked, these dice will not be given to the actor.",
+            "label": "Disabled"
+          },
+          "faces": {
+            "hint": "Number of faces on each die.",
+            "label": "Faces"
+          },
+          "number": {
+            "raw": {
+              "hint": "Number of dice",
+              "label": "Number"
+            }
+          }
+        },
+        "PANELS": {
+          "name": "Stat Die",
+          "text": "You have rolled a stat die.",
+          "title": "Description"
+        }
+      },
+      "BaseUnit": {
+        "FIELDS": {
+          "raw": {
+            "hint": "The quantity of the specified unit.",
+            "label": "Quantity"
+          },
+          "unit": {
+            "hint": "The unit of this value.",
+            "label": "Unit"
+          }
+        },
+        "UNITS": {
+          "unlimited": "No Limit"
+        },
+        "UPDATE": {
+          "basic": "Update {label}",
+          "slowExecutionTime": "Update Slow Execution Time"
+        }
+      },
       "Duration": {
         "FIELDS": {
           "conditions": {
@@ -1370,29 +1412,6 @@
           }
         }
       },
-      "BaseStatPool": {
-        "FIELDS": {
-          "disabled": {
-            "hint": "If checked, these dice will not be given to the actor.",
-            "label": "Disabled"
-          },
-          "faces": {
-            "hint": "Number of faces on each die.",
-            "label": "Faces"
-          },
-          "number": {
-            "raw": {
-              "hint": "Number of dice",
-              "label": "Number"
-            }
-          }
-        },
-        "PANELS": {
-          "name": "Stat Die",
-          "text": "You have rolled a stat die.",
-          "title": "Description"
-        }
-      },
       "Storage": {
         "FIELDS": {
           "enabled": {
@@ -1491,25 +1510,6 @@
         "autoVisionRange": {
           "hint": "Automatically change this token's vision range.",
           "label": "Automatic Vision Range"
-        }
-      },
-      "BaseUnit": {
-        "FIELDS": {
-          "raw": {
-            "hint": "The quantity of the specified unit.",
-            "label": "Quantity"
-          },
-          "unit": {
-            "hint": "The unit of this value.",
-            "label": "Unit"
-          }
-        },
-        "UNITS": {
-          "unlimited": "No Limit"
-        },
-        "UPDATE": {
-          "basic": "Update {label}",
-          "slowExecutionTime": "Update Slow Execution Time"
         }
       },
       "Usable": {
@@ -1900,12 +1900,6 @@
       }
     },
     "SHEETS": {
-      "Wrapper": {
-        "DIALOG": {
-          "label": "Select Effect Type",
-          "hint": "What type of effect is this a wrapper for?"
-        }
-      },
       "Actor": {
         "ACTIONS": {
           "ApplyMorganti": {
@@ -2277,6 +2271,12 @@
             "notEditable": "Cannot toggle if ability activates on use. Sheet is not editable."
           }
         }
+      },
+      "Wrapper": {
+        "DIALOG": {
+          "hint": "What type of effect is this a wrapper for?",
+          "label": "Select Effect Type"
+        }
       }
     },
     "STATS": {
@@ -2354,14 +2354,14 @@
       },
       "Hacks": {
         "armHack": "Arm Hack",
-        "armHack1": "1st Arm Hack",
-        "armHack2": "2nd Arm Hack",
+        "armHack1": "Arm Hack 1",
+        "armHack2": "Arm Hack 2",
         "bodyHack": "Body Hack",
         "earHack": "Ear Hack",
         "eyeHack": "Eye Hack",
         "legHack": "Leg Hack",
-        "legHack1": "1st Leg Hack",
-        "legHack2": "2nd Leg Hack",
+        "legHack1": "Leg Hack 1",
+        "legHack2": "Leg Hack 2",
         "mouthHack": "Mouth Hack",
         "noseHack": "Nose Hack"
       },
@@ -2375,13 +2375,6 @@
       }
     },
     "SYSTEMS": {
-      "Base": {
-        "EMBED": {
-          "taggedNameString": "{name} ({tags})",
-          "valueNameString": "{name}: {value}",
-          "valueSeparator": ", "
-        }
-      },
       "Ability": {
         "DIALOG": {
           "MakeScroll": {
@@ -2651,6 +2644,20 @@
           "onlyOnUse": "Activates Only on Use"
         }
       },
+      "Adjustable": {
+        "FIELDS": {
+          "improvement": {
+            "label": "Improvement"
+          },
+          "limitation": {
+            "label": "Limitation"
+          }
+        },
+        "NAME": {
+          "improved": "Improved",
+          "limited": "Limited"
+        }
+      },
       "Armament": {
         "FIELDS": {
           "attackPenalty": {
@@ -2794,6 +2801,13 @@
           "missing": "Not on Character"
         }
       },
+      "Base": {
+        "EMBED": {
+          "taggedNameString": "{name} ({tags})",
+          "valueNameString": "{name}: {value}",
+          "valueSeparator": ", "
+        }
+      },
       "BaseActor": {
         "ENCUMBRANCE": {
           "0": "Not Encumbered",
@@ -2852,20 +2866,6 @@
           "negativeMp": "Negative MP",
           "zeroHp": "Zero HP",
           "zeroMp": "Zero MP"
-        }
-      },
-      "Adjustable": {
-        "FIELDS": {
-          "improvement": {
-            "label": "Improvement"
-          },
-          "limitation": {
-            "label": "Limitation"
-          }
-        },
-        "NAME": {
-          "improved": "Improved",
-          "limited": "Limited"
         }
       },
       "BaseEffect": {
@@ -3278,12 +3278,12 @@
             "label": "Revealed"
           }
         },
-        "NAME": {
-          "unrevealed": "Unrevealed"
-        },
         "MENU": {
           "reveal": "Reveal",
           "unreveal": "Unreveal"
+        },
+        "NAME": {
+          "unrevealed": "Unrevealed"
         }
       },
       "Rules": {

@@ -145,11 +145,7 @@ export function formatJoin(strings, or = false) {
  * @returns {string}
  */
 export function toId(str, options = {}) {
-  const {
-    background = "0000000000000000",
-    length = 16,
-    hash = false,
-  } = options;
+  const { background = "0", length = 16, hash = false } = options;
   if (hash) {
     const FNV_OFFSET_64 = 0xcbf29ce484222325n;
     const FNV_PRIME_64 = 0x100000001b3n;
@@ -159,10 +155,9 @@ export function toId(str, options = {}) {
       val ^= BigInt(str.charCodeAt(i));
       val = (val * FNV_PRIME_64) & MASK_64;
     }
-    return val.toString(16).padStart(16, "0");
+    return val.toString(16).padStart(length, background).slice(0, length);
   }
-  const camel = toCamelCase(str);
-  return camel.slice(0, length) + background.slice(camel.length);
+  return toCamelCase(str).padEnd(length, background).slice(0, length);
 }
 
 /**

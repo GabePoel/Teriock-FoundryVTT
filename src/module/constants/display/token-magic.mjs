@@ -1,4 +1,4 @@
-import { hacksData } from "../data/hacks.mjs";
+import { hacks } from "../data/_module.mjs";
 
 const tokenMagic = {
   burned: {
@@ -275,7 +275,7 @@ const tokenMagic = {
   },
 };
 
-for (const hack of Object.values(hacksData)) {
+for (const hack of Object.values(hacks)) {
   tokenMagic[hack.id] = {
     filterType: "splash",
     filterId:

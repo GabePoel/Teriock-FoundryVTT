@@ -1,49 +1,47 @@
 import { getImage } from "../../helpers/path.mjs";
+import { completeUtilityStatuses } from "../../helpers/utils.mjs";
 
-export const coverData = {
+const coverData = {
   cover1: {
-    _id: "halfCover0000000",
     changes: [
       {
         key: "system.cover",
-        value: "1",
-        mode: 4,
         priority: 5,
+        type: "upgrade",
+        value: "1",
       },
     ],
-    hud: false,
     id: "halfCover",
     img: getImage("cover", "Half Cover"),
     name: "TERIOCK.STATUSES.Cover.halfCover",
   },
   cover2: {
-    _id: "threeQuartersCov",
     changes: [
       {
         key: "system.cover",
-        value: "2",
-        mode: 4,
         priority: 5,
+        type: "upgrade",
+        value: "2",
       },
     ],
-    hud: false,
     id: "threeQuartersCover",
     img: getImage("cover", "Three-Quarters Cover"),
     name: "TERIOCK.STATUSES.Cover.threeQuartersCover",
   },
   cover3: {
-    _id: "fullCover0000000",
     changes: [
       {
         key: "system.cover",
-        value: "3",
-        mode: 4,
         priority: 5,
+        type: "upgrade",
+        value: "3",
       },
     ],
-    hud: false,
     id: "fullCover",
     img: getImage("cover", "Full Cover"),
     name: "TERIOCK.STATUSES.Cover.fullCover",
   },
 };
+
+completeUtilityStatuses(coverData);
+export default coverData;
