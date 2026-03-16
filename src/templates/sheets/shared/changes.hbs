@@ -12,75 +12,103 @@
 <ol class="change-config-container" data-changes>
   {{#each changesData as |change i|}}
     {{#with ../fieldDefs as |changeFields|}}
-      <li class="change-container" data-index="{{i}}">
+      <li class="change-container" data-index="{{i}}" data-path="{{../../changesPath}}">
         <div class="change-entry">
           {{formInput
             changeFields.key
-            name=(concat ../../changesPath "." i ".key")
+            name=""
             value=change.key
             disabled=(not @root/editable)
             icon=@root/TERIOCK.display.icons.ui.changeKey
             id=(concat @root/appId ../../changesPath "." i ".key")
-            dataset=(object tooltip=change.key)
+            classes="teriock-change-input"
+            dataset=(object
+              tooltip=change.key
+              property="key"
+            )
           }}
           {{formInput
             changeFields.value
-            name=(concat ../../changesPath "." i ".value")
+            name=""
             value=change.value
             icon=@root/TERIOCK.display.icons.ui.changeValue
             disabled=(not @root/editable)
             id=(concat @root/appId ../../changesPath "." i ".value")
-            dataset=(object tooltip=change.value)
+            classes="teriock-change-input"
+            dataset=(object
+              tooltip=change.value
+              property="value"
+            )
           }}
         </div>
         <div class="change-config">
           <div class="change-activation">
             {{formInput
               changeFields.qualifier
-              name=(concat ../../changesPath "." i ".qualifier")
+              name=""
               value=change.qualifier
               disabled=(not @root/editable)
               icon=@root/TERIOCK.display.icons.ui.qualifier
               id=(concat @root/appId ../../changesPath "." i ".qualifier")
-              dataset=(object tooltip=change.qualifier)
+              classes="teriock-change-input"
+              dataset=(object
+                tooltip=change.qualifier
+                property="qualifier"
+              )
             }}
             {{formInput
               changeFields.priority
-              name=(concat ../../changesPath "." i ".priority")
+              name=""
               value=change.priority
               icon=@root/TERIOCK.display.icons.ui.priority
               placeholder=(lookup ../../priorities change.mode)
               disabled=(not @root/editable)
               id=(concat @root/appId ../../changesPath "." i ".priority")
-              dataset=(object tooltip=change.priority)
+              classes="teriock-change-input"
+              dataset=(object
+                tooltip=change.priority
+                property="priority"
+              )
             }}
           </div>
           <div class="change-assignment">
             {{formInput
               changeFields.mode
-              name=(concat ../../changesPath "." i ".mode")
+              name=""
               value=change.mode
               icon=@root/TERIOCK.display.icons.ui.changeMode
               choices=@root/TERIOCK.options.effect.changeMode
               disabled=(not @root/editable)
               id=(concat @root/appId ../../changesPath "." i ".mode")
+              classes="teriock-change-input"
+              dataset=(object
+                property="mode"
+              )
             }}
             {{formInput
               changeFields.target
-              name=(concat ../../changesPath "." i ".target")
+              name=""
               value=change.target
               icon=@root/TERIOCK.display.icons.ui.changeTarget
               disabled=(not @root/editable)
               id=(concat @root/appId ../../changesPath "." i ".target")
+              classes="teriock-change-input"
+              dataset=(object
+                property="target"
+              )
             }}
             {{formInput
               changeFields.time
-              name=(concat ../../changesPath "." i ".time")
+              name=""
               icon=@root/TERIOCK.display.icons.ui.time
               value=change.time
               disabled=(not @root/editable)
               id=(concat @root/appId ../../changesPath "." i ".time")
-              dataset=(object tooltip=(path @root/TERIOCK.options.change.time change.time "hint"))
+              classes="teriock-change-input"
+              dataset=(object
+                tooltip=(path @root/TERIOCK.options.change.time change.time "hint")
+                property="time"
+              )
             }}
           </div>
         </div>

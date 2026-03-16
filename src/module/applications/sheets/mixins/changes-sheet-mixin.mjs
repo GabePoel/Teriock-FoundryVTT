@@ -76,6 +76,28 @@ export default function ChangesSheetMixin(Base) {
           await this.document.update({ [path]: changes });
         }
       }
+
+      /** @inheritDoc */
+      async _onRender(context, options) {
+        await super._onRender(context, options);
+        if (!this.isEditable) return;
+        this.element.querySelectorAll(".teriock-change-input").forEach(
+          /** @param {HTMLInputElement} el */ (el) => {
+            el.addEventListener("change", () => {
+              const container =
+                /** @type {HTMLLIElement} */ el.closest(".change-container");
+              const path = container.dataset.path;
+              const index = container.dataset.index;
+              const property = el.dataset.property;
+              const changes = foundry.utils.deepClone(
+                foundry.utils.getProperty(this.document._source, path),
+              );
+              changes[Number(index)][property] = el.value;
+              this.document.update({ [path]: changes });
+            });
+          },
+        );
+      }
     }
   );
 }
