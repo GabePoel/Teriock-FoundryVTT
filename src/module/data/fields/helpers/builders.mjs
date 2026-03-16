@@ -208,7 +208,7 @@ export function combatExpirationMethodField() {
     type: new StringField({
       choices: localizeChoices({
         forced: "TERIOCK.SCHEMA.CombatExpiration.what.type.choices.forced",
-        rolled: "TERIOCK.SCHEMA.CombatExpiration.what.type.choices.forced",
+        rolled: "TERIOCK.SCHEMA.CombatExpiration.what.type.choices.rolled",
         none: "TERIOCK.SCHEMA.CombatExpiration.what.type.choices.none",
       }),
       hint: game.i18n.localize(
