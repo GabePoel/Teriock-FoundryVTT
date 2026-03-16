@@ -136,6 +136,7 @@ export default class ChildSystem extends UsableDataMixin(CommonSystem) {
     parts.action = "useDoc";
     parts.struck = this.parent.disabled;
     parts.usable = true;
+    parts.text = this.parent.elder?.documentName === "Actor" ? "" : parts.text;
     return parts;
   }
 

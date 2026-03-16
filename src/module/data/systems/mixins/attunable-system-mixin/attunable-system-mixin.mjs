@@ -237,8 +237,6 @@ export default function AttunableSystemMixin(Base) {
       prepareSpecialData() {
         super.prepareSpecialData();
         this.tier.evaluate();
-        this.range.long.evaluate();
-        this.range.short.evaluate();
       }
     }
   );

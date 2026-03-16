@@ -1,15 +1,20 @@
 import { setStatDiceDialog } from "../../../applications/dialogs/_module.mjs";
+import { BaseRoll } from "../../../dice/rolls/_module.mjs";
+import { formulaExists } from "../../../helpers/formula.mjs";
 import { getImage } from "../../../helpers/path.mjs";
 import { getRollIcon } from "../../../helpers/utils.mjs";
-import { EvaluationField } from "../../fields/_module.mjs";
+import { FormulaField } from "../../fields/_module.mjs";
 import EmbeddedDataModel from "../embedded-data-model.mjs";
 import StatDieModel from "../stat-die-model/stat-die-model.mjs";
 
 const { fields } = foundry.data;
+const { Collection } = foundry.utils;
 
 /**
  * @extends {Teriock.Models.BaseStatPoolModelInterface}
  * @property {StatGiverSystem} parent
+ * @property {Set<number>} spent
+ * @implements {Teriock.Functionality.StatProvider}
  */
 export default class BaseStatPoolModel extends EmbeddedDataModel {
   /** @inheritDoc */
@@ -18,30 +23,59 @@ export default class BaseStatPoolModel extends EmbeddedDataModel {
     "TERIOCK.MODELS.BaseStatPool",
   ];
 
+  /**
+   * The model for the stat dice in this pool.
+   * @type {typeof StatDieModel}
+   */
+  static _statDieModel = StatDieModel;
+
   /** @inheritDoc */
   static defineSchema() {
     return {
-      dice: new fields.ArrayField(new fields.EmbeddedDataField(StatDieModel)),
-      disabled: new fields.BooleanField({
-        initial: false,
-        required: false,
-      }),
-      faces: new fields.NumberField({
-        choices: TERIOCK.options.die.faces,
-        initial: 10,
-        required: false,
-      }),
-      number: new EvaluationField({
-        blank: 1,
-        deterministic: true,
-        floor: true,
-        initial: "1",
-        min: 0,
-        nullable: false,
-        required: false,
-      }),
+      disabled: new fields.BooleanField({ initial: false }),
+      formula: new FormulaField({ deterministic: false }),
+      spent: new fields.SetField(new fields.NumberField()),
     };
   }
+
+  /** @inheritDoc */
+  static migrateData(data) {
+    if (
+      foundry.utils.hasProperty(data, "faces") &&
+      !foundry.utils.hasProperty(data, "formula")
+    ) {
+      let number = data.number.raw || "1";
+      if (!Number.isNumeric(Number(number))) number = `(${number})`;
+      data.formula = `${number}d${data.faces}`;
+      delete data.faces;
+      delete data.number;
+    }
+    return super.migrateData(data);
+  }
+
+  /**
+   * The stat dice within this pool.
+   * @type {StatDieModel[]}
+   */
+  _dice = [];
+
+  /**
+   * The terms that define the stat dice within this pool.
+   * @type {DiceTerm[]}
+   */
+  _terms = [];
+
+  /**
+   * @inheritDoc
+   * @type {Collection<ID<StatDieModel>, StatDieModel>}
+   */
+  dice;
+
+  /**
+   * Total stat value of all the dice in this pool.
+   * @type {number}
+   */
+  value = 0;
 
   /**
    * @returns {(_number: number) => Promise<void>}
@@ -60,40 +94,11 @@ export default class BaseStatPoolModel extends EmbeddedDataModel {
   }
 
   /**
-   * The dice that are not disabled.
-   * @returns {StatDieModel[]}
-   */
-  get enabledDice() {
-    return this.dice.filter((d) => !d.disabled);
-  }
-
-  /**
    * Flavor to apply to stat dice.
    * @returns {string}
    */
   get flavor() {
     return "";
-  }
-
-  /**
-   * Formula that describes the dice in this pool.
-   * @returns {string}
-   */
-  get formula() {
-    return `${this.number.value || 0}d${this.faces}`;
-  }
-
-  /**
-   * Render a die box HTML element. Creates a clickable pool of dic icon that shows whether each die has been used or
-   * not.
-   * @returns {string}
-   */
-  get html() {
-    let html = "";
-    for (const die of this.enabledDice) {
-      html += die.html;
-    }
-    return html;
   }
 
   /**
@@ -134,18 +139,29 @@ export default class BaseStatPoolModel extends EmbeddedDataModel {
     return "";
   }
 
-  /**
-   * Total value of all stat dice in this pool.
-   * @returns {number}
-   */
-  get value() {
-    let value = 0;
-    for (const die of this.dice) {
-      if (!die.disabled) {
-        value += die.value;
+  /** @inheritDoc */
+  prepareStatDice() {
+    this._dice = [];
+    this._terms = [];
+    if (!this.disabled && formulaExists(this.formula)) {
+      const roll = new BaseRoll(this.formula, this.getRollData());
+      roll.evaluateSync({ minimize: true });
+      this._terms = roll.dice;
+      for (const term of this._terms) {
+        for (let i = 0; i < term.number; i++) {
+          const statDie = new this.constructor._statDieModel(
+            { _id: foundry.utils.randomID(), faces: term.faces, index: i },
+            { parent: this },
+          );
+          this._dice.push(statDie);
+        }
       }
     }
-    return value;
+    this.dice = new Collection(this._dice.map((d) => [d.id, d]));
+    this.value = this._dice.reduce(
+      (total, die) => ((die.faces + 1) / 2).toNearest(1, "round") + total,
+      0,
+    );
   }
 
   /**
@@ -162,8 +178,6 @@ export default class BaseStatPoolModel extends EmbeddedDataModel {
    * @returns {Promise<void>}
    */
   async update(data = {}) {
-    await this.parent.parent.update({
-      [this.path]: data,
-    });
+    await this.document.update({ [this.path]: data });
   }
 }

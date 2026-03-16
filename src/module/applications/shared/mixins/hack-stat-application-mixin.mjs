@@ -65,14 +65,9 @@ export default function HackStatApplicationMixin(Base) {
        * @returns {StatDieModel}
        */
       _getStatDie(target) {
-        const id = target.dataset.document;
-        const collection = target.dataset.collection;
+        const id = target.dataset.id;
         const stat = target.dataset.stat;
-        const index = target.dataset.index;
-        const item =
-          /** @type {ChildDocument & {system: Teriock.Models.StatGiverSystemInterface}} */
-          this.document[collection].get(id);
-        return item.system.statDice[stat].dice[Number(index)];
+        return this.document.system[stat].dice.get(id);
       }
 
       /** @inheritDoc */
@@ -135,17 +130,7 @@ export default function HackStatApplicationMixin(Base) {
        * @returns {Promise<void>}
        */
       async _unrollStatDie(_event, target) {
-        const id = target.dataset.document;
-        const collection = target.dataset.collection;
-        const stat = target.dataset.stat;
-        const index = target.dataset.index;
-        const item =
-          /** @type {ChildDocument & {system: Teriock.Models.StatGiverSystemInterface}} */
-          this.document[collection].get(id);
-        const statDie =
-          /** @type {StatDieModel} */ item.system.statDice[stat].dice[
-            Number(index)
-          ];
+        const statDie = this._getStatDie(target);
         await statDie.toggle(false);
       }
     }

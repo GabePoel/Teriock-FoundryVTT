@@ -1,6 +1,5 @@
 import { icons } from "../../../../constants/display/icons.mjs";
 import { makeIcon } from "../../../../helpers/utils.mjs";
-import { StatDieModel } from "../../../models/_module.mjs";
 import {
   HpPoolModel,
   MpPoolModel,
@@ -16,6 +15,7 @@ export default function StatGiverSystemMixin(Base) {
     /**
      * @extends {BaseItemSystem}
      * @extends {Teriock.Models.StatGiverSystemInterface}
+     * @implements {Teriock.Functionality.StatProvider}
      * @mixin
      */
     class StatGiverSystem extends Base {
@@ -145,44 +145,25 @@ export default function StatGiverSystemMixin(Base) {
       getLocalRollData() {
         return {
           ...super.getLocalRollData(),
-          "hp.faces": this.statDice.hp.faces,
-          "mp.faces": this.statDice.mp.faces,
-          "hp.number": this.statDice.hp.number.value,
-          "mp.number": this.statDice.mp.number.value,
-          "hp.disabled": Number(this.statDice.hp.disabled),
-          "mp.disabled": Number(this.statDice.mp.disabled),
           hp: this.statDice.hp.formula,
+          "hp.disabled": Number(this.statDice.hp.disabled),
+          "hp.value": Number(this.statDice.hp.value),
           mp: this.statDice.mp.formula,
+          "mp.disabled": Number(this.statDice.mp.disabled),
+          "mp.value": Number(this.statDice.mp.value),
         };
       }
 
       /** @inheritDoc */
-      prepareBaseData() {
-        super.prepareBaseData();
-        for (const pool of Object.values(this.statDice)) {
-          pool.number.evaluate();
-        }
+      prepareSpecialData() {
+        super.prepareSpecialData();
+        if (!this.actor) this.prepareStatDice();
       }
 
       /** @inheritDoc */
-      prepareSpecialData() {
-        for (const pool of Object.values(this.statDice)) {
-          pool.number.evaluate();
-          if (pool.dice.length < pool.number.value || 0) {
-            for (let i = pool.dice.length; i < pool.number.value; i++) {
-              pool.dice.push(new StatDieModel({}, { parent: pool }));
-            }
-          }
-          for (const [i, die] of Object.entries(pool.dice)) {
-            die.index = Number(i);
-            if (!die.rolled || die.value > die.faces) {
-              die.value = Math.ceil(die.faces / 2) + 1;
-            }
-            if (die.index >= (pool.number?.value || 0) || pool.disabled) {
-              die.disabled = true;
-            }
-          }
-        }
+      prepareStatDice() {
+        this.statDice.hp.prepareStatDice();
+        this.statDice.mp.prepareStatDice();
       }
     }
   );

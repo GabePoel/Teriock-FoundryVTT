@@ -83,7 +83,6 @@ export default (Base) => {
 
       /** @inheritDoc */
       prepareBaseData() {
-        super.prepareBaseData();
         this.presence = {
           max: Math.max(1, Math.floor(1 + (this.scaling.lvl + 1) / 5)),
           min: 0,
@@ -102,6 +101,7 @@ export default (Base) => {
           Math.floor(1 + (this.scaling.scale - 7) / 10),
         );
         this.scaling.f = Math.max(0, Math.floor((this.scaling.scale - 2) / 5));
+        super.prepareBaseData();
       }
     }
   );

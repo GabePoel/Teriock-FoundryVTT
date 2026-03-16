@@ -2,7 +2,6 @@ import { TeriockDialog } from "../../../applications/api/_module.mjs";
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
-import { dedent } from "../../../helpers/string.mjs";
 import { getRollIcon, makeIconClass } from "../../../helpers/utils.mjs";
 import EmbeddedDataModel from "../embedded-data-model.mjs";
 
@@ -10,33 +9,21 @@ const { fields } = foundry.data;
 
 /**
  * @extends {Teriock.Models.StatDieModelInterface}
- * @extends {Teriock.Data.StatDieData}
  */
 export default class StatDieModel extends EmbeddedDataModel {
   /** @inheritDoc */
   static defineSchema() {
     return {
-      rolled: new fields.BooleanField({
-        initial: false,
-        required: false,
+      _id: new fields.DocumentIdField({ required: true }),
+      faces: new fields.NumberField({
+        integer: true,
+        required: true,
       }),
-      spent: new fields.BooleanField({
-        initial: false,
-        required: false,
-      }),
-      value: new fields.NumberField({
-        initial: 1,
-        required: false,
+      index: new fields.NumberField({
+        integer: true,
+        required: true,
       }),
     };
-  }
-
-  /**
-   * Number of faces this die has.
-   * @returns {number}
-   */
-  get faces() {
-    return this.parent.faces || 10;
   }
 
   /**
@@ -56,33 +43,19 @@ export default class StatDieModel extends EmbeddedDataModel {
   }
 
   /**
-   * Render a die box HTML element. Creates a clickable die icon that shows whether the die has been used or not.
-   * @returns {string}
+   * An icon that represents this.
+   * @return {string}
    */
-  get html() {
-    const element = document.createElement("div");
-    element.classList.add(
-      ...["thover", "die-box", this.spent ? "rolled" : "unrolled"],
-    );
-    Object.assign(element.dataset, {
-      action: "rollStatDie",
-      collection: this.parent.parent.parent.collectionName,
-      document: this.parent.parent.parent.id,
-      index: this.index.toString(),
-      stat: this.stat,
-      tooltipDirection: "DOWN",
-      tooltipHtml: dedent(`
-      <div style='display: flex; flex-direction: column; align-items: center;'>
-        <div>d${this.faces} ${this.name}</div><div>(${this.parent.parent.parent.name})</div>
-      </div>`),
-    });
-    const icon = document.createElement("i");
-    icon.classList.add(
-      ...makeIconClass(getRollIcon(this.polyhedral), "solid").split(" "),
-    );
-    if (this.spent) icon.classList.add("fa-faint");
-    element.append(icon);
-    return element.outerHTML;
+  get icon() {
+    return getRollIcon(this.formula);
+  }
+
+  /**
+   * The ID for this stat die.
+   * @return {ID<StatDieModel>}
+   */
+  get id() {
+    return this._id;
   }
 
   /**
@@ -102,6 +75,14 @@ export default class StatDieModel extends EmbeddedDataModel {
   }
 
   /**
+   * Whether this stat die is spent.
+   * @return {boolean}
+   */
+  get spent() {
+    return this.parent.spent.has(this.index);
+  }
+
+  /**
    * The stat this modifies.
    * @returns {string}
    */
@@ -115,14 +96,13 @@ export default class StatDieModel extends EmbeddedDataModel {
    * @returns {Promise<void>}
    */
   async toggle(spent) {
-    if (typeof spent === "undefined") {
-      spent = !this.spent;
-    }
-    const dice = this.parent.dice.map((d) => d.toObject());
-    dice[this.index].spent = spent;
-    const updatePath = `system.statDice.${this.parent.stat}.dice`;
+    if (typeof spent === "undefined") spent = !this.spent;
+    const spentCopy = new Set(Array.from(this.parent.spent));
+    if (spent) spentCopy.add(this.index);
+    else spentCopy.delete(this.index);
+    const updatePath = `system.statDice.${this.parent.stat}.spent`;
     await this.parent.parent.parent.update({
-      [updatePath]: dice,
+      [updatePath]: Array.from(spentCopy),
     });
   }
 

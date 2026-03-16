@@ -16,8 +16,8 @@ import * as parts from "./parts/_module.mjs";
  * @mixes ActorConditionTogglingPart
  * @mixes ActorCoverPart
  * @mixes ActorDeathBagPart
- * @mixes ActorDisplayPart
  * @mixes ActorHacksPart
+ * @mixes ActorInformationPart
  * @mixes ActorLimitsPart
  * @mixes ActorMoneyPart
  * @mixes ActorMovementPart
@@ -45,7 +45,7 @@ export default class BaseActorSystem extends mix(
   parts.ActorCapacitiesPart,
   parts.ActorTransformationPart,
   parts.ActorDeathBagPart,
-  parts.ActorDisplayPart,
+  parts.ActorInformationPart,
   parts.ActorLimitsPart,
   parts.ActorMoneyPart,
   parts.ActorMovementPart,

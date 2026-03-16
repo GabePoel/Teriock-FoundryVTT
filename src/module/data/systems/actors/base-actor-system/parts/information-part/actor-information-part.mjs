@@ -8,21 +8,15 @@ export default (Base) => {
   return (
     /**
      * @extends {CommonSystem}
-     * @extends {Teriock.Models.ActorDisplayPartInterface}
+     * @extends {Teriock.Models.ActorInformationPartInterface}
      * @mixin
      */
-    class ActorDisplayPart extends Base {
+    class ActorInformationPart extends Base {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           notes: new fields.HTMLField({ initial: "" }),
         });
-      }
-
-      /** @inheritDoc */
-      prepareBaseData() {
-        super.prepareBaseData();
-        this.sheet = {};
       }
     }
   );

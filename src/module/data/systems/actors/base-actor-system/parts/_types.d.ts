@@ -3,7 +3,7 @@ import "./automation-part/_types";
 import "./capacities-part/_types";
 import "./combat-part/_types";
 import "./death-bag-part/_types";
-import "./display-part/_types";
+import "./information-part/_types";
 import "./hacks-part/_types";
 import "./limits-part/_types";
 import "./money-part/_types";

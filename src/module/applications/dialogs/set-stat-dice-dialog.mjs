@@ -7,26 +7,19 @@ import { TeriockDialog } from "../api/_module.mjs";
  * @param {BaseStatPoolModel} pool
  */
 export default async function setStatDiceDialog(pool) {
-  const numberForm = pool.schema.fields.number.fields.raw.toFormGroup(
+  const formulaForm = pool.schema.fields.formula.toFormGroup(
     {
       rootId: foundry.utils.randomID(),
       hint: game.i18n.localize(
-        "TERIOCK.MODELS.BaseStatPool.FIELDS.number.raw.hint",
+        "TERIOCK.MODELS.BaseStatPool.FIELDS.formula.hint",
       ),
       label: game.i18n.localize(
-        "TERIOCK.MODELS.BaseStatPool.FIELDS.number.raw.label",
+        "TERIOCK.MODELS.BaseStatPool.FIELDS.formula.label",
       ),
     },
     {
-      name: "number",
-      value: pool.number._source.raw,
-    },
-  );
-  const facesForm = pool.schema.fields.faces.toFormGroup(
-    { rootId: foundry.utils.randomID() },
-    {
-      name: "faces",
-      value: pool.faces,
+      name: "formula",
+      value: pool._source.formula,
     },
   );
   const canToggle = pool.parent[`_canToggle${ucFirst(pool.stat)}Dice`];
@@ -47,37 +40,24 @@ export default async function setStatDiceDialog(pool) {
     },
   );
   const contentElement = document.createElement("div");
-  contentElement.append(...[numberForm, facesForm, disabledForm]);
+  contentElement.append(...[formulaForm, disabledForm]);
   await TeriockDialog.prompt({
     content: contentElement,
     modal: true,
     ok: {
       callback: async (_event, button) => {
-        const numberInput =
+        const formulaInput =
           /** @type {HTMLInputElement} */ button.form.elements.namedItem(
-            "number",
-          );
-        const facesInput =
-          /** @type {HTMLInputElement} */ button.form.elements.namedItem(
-            "faces",
+            "formula",
           );
         const disabledInput =
           /** @type {HTMLInputElement} */ button.form.elements.namedItem(
             "disabled",
           );
-        const number = numberInput.value;
-        const faces = Number(facesInput.value);
+        const formula = formulaInput.value;
         const disabled = disabledInput.checked;
-        if (
-          number !== pool.number._source.raw ||
-          faces !== pool.faces ||
-          disabled !== pool.disabled
-        ) {
-          await pool.update({
-            "number.raw": number,
-            faces: faces,
-            disabled: disabled,
-          });
+        if (formula !== pool.formula || disabled !== pool.disabled) {
+          await pool.update({ formula, disabled });
         }
       },
       icon: makeIconClass(TERIOCK.display.icons.ui.enable, "button"),

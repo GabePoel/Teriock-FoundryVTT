@@ -2,7 +2,7 @@ import {
   healDialog,
   revitalizeDialog,
 } from "../../../../../../applications/dialogs/_module.mjs";
-import { docSort } from "../../../../../../helpers/sort.mjs";
+import { docSort, rankSort } from "../../../../../../helpers/sort.mjs";
 
 const { fields } = foundry.data;
 
@@ -15,6 +15,7 @@ export default (Base) => {
     /**
      * @extends {CommonSystem}
      * @extends {Teriock.Models.ActorStatsPartInterface}
+     * @implements {Teriock.Functionality.StatProvider}
      * @mixin
      */
     class ActorStatsPart extends Base {
@@ -88,15 +89,44 @@ export default (Base) => {
       }
 
       /**
+       * Prepare a specific stat.
+       * @param {Teriock.Parameters.Shared.DieStat} stat
+       * @param {AnyItem[]} items
+       */
+      _prepareStat(stat, items) {
+        const statData = this[stat];
+        statData._dice = [];
+        statData.base = 0;
+        let numRanks = 0;
+        for (const item of items) {
+          if (
+            (item.type === "rank" &&
+              !item.system.innate &&
+              numRanks >= statData.poolLimit) ||
+            item.system.statDice[stat].disabled
+          ) {
+            continue;
+          }
+          if (item.type === "rank" && !item.system.innate) numRanks += 1;
+          statData._dice.push(...item.system.statDice[stat]._dice);
+          statData.base += item.system.statDice[stat].value;
+        }
+        statData.dice = new Collection(statData._dice.map((d) => [d.id, d]));
+        statData.max = Math.max(1, statData.base);
+        statData.min = -Math.floor(statData.max / 2);
+        statData.max -= statData.morganti;
+        statData.value = Math.clamp(statData.value, statData.min, statData.max);
+        statData.temp = Math.max(0, statData.temp);
+      }
+
+      /**
        * Display an animated state change on active tokens.
        * @param {number} diff
        * @param {string} color
        * @returns {Promise<void>}
        */
       async animateStatChangeEffect(diff, color = "white") {
-        if (!diff || !canvas.scene) {
-          return;
-        }
+        if (!diff || !canvas.scene) return;
         const tokens =
           /** @type {TeriockToken[]} */ this.parent.getActiveTokens();
         const displayedDiff = diff.signedString();
@@ -108,9 +138,7 @@ export default (Base) => {
           direction: diff > 0 ? 2 : 1,
         };
         tokens.forEach((token) => {
-          if (!token.visible || token.document.isSecret) {
-            return;
-          }
+          if (!token.visible || token.document.isSecret) return;
           const scrollingTextArgs = [token.center, displayedDiff, displayArgs];
           canvas.interface.createScrollingText(...scrollingTextArgs);
         });
@@ -135,41 +163,31 @@ export default (Base) => {
       }
 
       /** @inheritDoc */
+      prepareBaseData() {
+        super.prepareBaseData();
+        const poolLimit = Math.floor(this.scaling.lvl / 5);
+        this.hp.poolLimit = poolLimit;
+        this.mp.poolLimit = poolLimit;
+      }
+
+      /** @inheritDoc */
       prepareSpecialData() {
         super.prepareSpecialData();
-        const diceLimit = Math.floor(this.scaling.lvl / 5);
-        const diceStats = ["hp", "mp"];
-        this.sheet.dieBox = {};
-        const statItems = [
+        this.prepareStatDice();
+      }
+
+      /** @inheritDoc */
+      prepareStatDice() {
+        const items = [
           ...docSort(this.parent.species),
-          ...docSort(this.parent.ranks),
+          ...rankSort(this.parent.ranks),
           ...docSort(this.parent.mounts),
         ];
-        for (const stat of diceStats) {
-          let numRanks = 0;
-          this[stat].base = 0;
-          this.sheet.dieBox[stat] = "";
-          for (const item of statItems) {
-            if (item.type !== "rank" || numRanks < diceLimit) {
-              if (!item.system.statDice[stat].disabled) {
-                this[stat].base += item.system.statDice[stat].value;
-                this.sheet.dieBox[stat] += item.system.statDice[stat].html;
-              }
-            }
-            if (item.type === "rank" && !item.system.innate) {
-              numRanks += 1;
-            }
-          }
-          this[stat].max = Math.max(1, this[stat].base);
-          this[stat].min = -Math.floor(this[stat].max / 2);
-          this[stat].max -= this[stat].morganti;
-          this[stat].value = Math.clamp(
-            this[stat].value,
-            this[stat].min,
-            this[stat].max,
-          );
-          this[stat].temp = Math.max(0, this[stat].temp);
+        for (const item of items) {
+          item.system.prepareStatDice();
         }
+        this._prepareStat("hp", items);
+        this._prepareStat("mp", items);
       }
 
       /**

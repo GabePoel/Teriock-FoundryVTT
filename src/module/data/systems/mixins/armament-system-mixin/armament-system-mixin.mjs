@@ -330,6 +330,8 @@ export default function ArmamentSystemMixin(Base) {
         if (!this.damage.base.nonZero) {
           this.range.melee = false;
         }
+        //this.range.long.evaluate();
+        //this.range.short.evaluate();
       }
     }
   );

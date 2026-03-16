@@ -7,8 +7,7 @@ import PixiJS from "pixi.js";
 import * as placeables from "./canvas/placeables/_module.mjs";
 
 declare global {
-  // @ts-expect-error Double global.
-  export import PIXI = PixiJS;
+  const PIXI: typeof PixiJS;
 
   const TERIOCK: typeof import("./constants/_module.mjs");
 
@@ -17,23 +16,23 @@ declare global {
   const __brand: unique symbol;
 
   /** FoundryVTT UUID */
-  export type UUID<T = unknown> = string & {
+  type UUID<T = unknown> = string & {
     [__brand]: T;
   };
 
   /** FoundryVTT ID */
-  export type ID<T = unknown> = string & {
+  type ID<T = unknown> = string & {
     [__brand]: T;
   };
   /** Safe Teriock UUID */
-  export type SafeUUID<T = unknown> = string & {
+  type SafeUUID<T = unknown> = string & {
     [__brand]: T;
   };
 
   /**
    * Index representing a subset of document data.
    */
-  export type Index<Doc> = {
+  type Index<Doc> = {
     _id: ID<Doc>;
     folder: ID<TeriockFolder>;
     img: string;
@@ -50,5 +49,5 @@ declare global {
   /**
    * A safe version of a document that can be called within compendiums.
    */
-  export type SyncDoc<Doc> = Index<Doc> | Doc;
+  type SyncDoc<Doc> = Index<Doc> | Doc;
 }

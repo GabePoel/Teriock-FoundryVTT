@@ -10,15 +10,13 @@
   <p class="hint">{{#if noDice}}{{localize "TERIOCK.DIALOGS.Heal.hintNoDice"}}{{else}}{{localize
     "TERIOCK.DIALOGS.Heal.hintWithDice"}}{{/if}}</p>
   <fieldset class="heal-dialog-hacks">
-  <legend>{{localize "TERIOCK.TERMS.Common.hacks"}}</legend>
+    <legend>{{localize "TERIOCK.TERMS.Common.hacks"}}</legend>
     {{> "teriock/sheets/actors/playable/parts/hack-box"}}
   </fieldset>
   {{#if (not noDice)}}
     <fieldset class="heal-dialog-dice">
       <legend>{{localize "TERIOCK.SYSTEMS.StatGiver.FIELDS.statDice.hp.label"}}</legend>
-      <div class="tgrid g7">
-        {{{system.sheet.dieBox.hp}}}
-      </div>
+      {{> "teriock/ui/stat-dice" dice=system.hp.dice}}
     </fieldset>
   {{/if}}
   {{#if (not noDice)}}

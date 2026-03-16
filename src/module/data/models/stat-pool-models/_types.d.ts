@@ -1,13 +1,17 @@
-import { EvaluationModel, StatDieModel } from "../_module.mjs";
-
 declare global {
   namespace Teriock.Models {
     export type BaseStatPoolModelInterface = {
-      dice: StatDieModel[];
       disabled: boolean;
-      faces: number;
-      number: EvaluationModel;
+      formula: Teriock.System.FormulaString;
+      spent: Set<number>;
     };
+  }
+
+  namespace Teriock.Functionality {
+    export interface StatProvider {
+      /** Prepare all the stat dice this has access to. */
+      prepareStatDice(): void;
+    }
   }
 }
 

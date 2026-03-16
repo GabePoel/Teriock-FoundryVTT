@@ -8,6 +8,55 @@ export default (Base) => {
      */
     class ActorRestingPart extends Base {
       /**
+       * @param {object} [options]
+       * @param {boolean} [options.hp]
+       * @param {boolean} [options.hpDice]
+       * @param {boolean} [options.mp]
+       * @param {boolean} [options.mpDice]
+       * @param {boolean} [options.conditions]
+       * @param {boolean} [options.hacks]
+       * @param {boolean} [options.cover]
+       * @param {boolean} [options.combat]
+       */
+      async partialReset(options = {}) {
+        const actorUpdate = {};
+        const itemUpdates = [];
+        const statuses = [];
+        if (options.hp) actorUpdate["system.hp.value"] = this.hp.max;
+        if (options.mp) actorUpdate["system.mp.value"] = this.mp.max;
+        if (options.hpDice || options.mpDice) {
+          for (const item of this.parent.items.filter(
+            (i) => i.metadata.stats,
+          )) {
+            const itemUpdate = { _id: item.id };
+            if (options.hpDice) itemUpdate["system.statDice.hp.spent"] = [];
+            if (options.mpDice) itemUpdate["system.statDice.mp.spent"] = [];
+            itemUpdates.push(itemUpdate);
+          }
+        }
+        if (options.conditions) {
+          statuses.push(
+            ...Object.values(TERIOCK.data.conditions).map((s) => s.id),
+          );
+        }
+        if (options.hacks) {
+          statuses.push(...Object.values(TERIOCK.data.hacks).map((s) => s.id));
+        }
+        if (options.cover) {
+          statuses.push(...Object.values(TERIOCK.data.cover).map((s) => s.id));
+        }
+        if (options.combat) {
+          actorUpdate["system.combat.attackPenalty"] = 0;
+          actorUpdate["system.combat.hasReaction"] = true;
+        }
+        await this.parent.updateEmbeddedDocuments("Item", itemUpdates);
+        await this.parent.update(actorUpdate);
+        await this.parent.removeStatusEffects(
+          statuses.filter((s) => this.parent.statuses.has(s)),
+        );
+      }
+
+      /**
        * Actor experiences dawn.
        * @returns {Promise<void>}
        */
@@ -45,29 +94,11 @@ export default (Base) => {
           rejectClose: false,
         });
         if (!heal) return;
-        const toUpdate = [];
-        for (const item of [
-          ...this.parent.ranks,
-          ...this.parent.species,
-          ...this.parent.mounts,
-        ]) {
-          const itemUpdates = { _id: item.id };
-          const hpDice = item.system.statDice.hp.dice.map((d) => d.toObject());
-          for (const d of hpDice) {
-            d.spent = false;
-          }
-          const mpDice = item.system.statDice.mp.dice.map((d) => d.toObject());
-          for (const d of mpDice) {
-            d.spent = false;
-          }
-          itemUpdates["system.statDice.hp.dice"] = hpDice;
-          itemUpdates["system.statDice.mp.dice"] = mpDice;
-          toUpdate.push(itemUpdates);
-        }
-        await this.parent.updateChildDocuments("Item", toUpdate);
-        await this.parent.update({
-          "system.hp.value": this.system.hp.max,
-          "system.mp.value": this.system.mp.max,
+        await this.partialReset({
+          hp: true,
+          hpDice: true,
+          mp: true,
+          mpDice: true,
         });
       }
 

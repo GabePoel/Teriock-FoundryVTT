@@ -518,7 +518,7 @@ export default class TeriockActor extends mix(
 
   /**
    * Remove multiple status effects from the actor.
-   * @param statusIds
+   * @param {string[]} statusIds
    * @returns {Promise<void>}
    */
   async removeStatusEffects(statusIds) {

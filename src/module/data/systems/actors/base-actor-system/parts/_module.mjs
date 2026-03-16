@@ -5,8 +5,8 @@ export { default as ActorCombatPart } from "./combat-part/actor-combat-part.mjs"
 export { default as ActorConditionTogglingPart } from "./actor-condition-toggling-part.mjs";
 export { default as ActorCoverPart } from "./cover-part/actor-cover-part.mjs";
 export { default as ActorDeathBagPart } from "./death-bag-part/actor-death-bag-part.mjs";
-export { default as ActorDisplayPart } from "./display-part/actor-display-part.mjs";
 export { default as ActorHacksPart } from "./hacks-part/actor-hacks-part.mjs";
+export { default as ActorInformationPart } from "./information-part/actor-information-part.mjs";
 export { default as ActorLimitsPart } from "./limits-part/actor-limits-part.mjs";
 export { default as ActorMoneyPart } from "./money-part/actor-money-part.mjs";
 export { default as ActorMovementPart } from "./movement-part/actor-movement-part.mjs";
