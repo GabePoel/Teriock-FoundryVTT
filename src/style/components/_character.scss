@@ -654,6 +654,7 @@ body > form:only-child section .character-page,
     @include mixins.centralize;
     flex-direction: column;
     height: 18px;
+    line-height: normal;
 
     &:not(.spent) {
       color: var(--color-text-primary);
@@ -683,15 +684,21 @@ body > form:only-child section .character-page,
 .die-drawer {
   @include mixins.collapsible;
   @include mixins.collapsible-open;
+  align-items: center;
   border: 1px solid var(--color-text-subtle);
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
   border-top: none;
+  line-height: 3;
   margin-block: 1px;
   margin-inline: 0.5em;
   min-height: 2.5em;
   overflow: hidden;
   padding: 0.5em;
+
+  i {
+    line-height: 1.25;
+  }
 
   &.hp-drawer {
     background-color: #{colors.$hp-red-drawer};

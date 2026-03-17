@@ -147,13 +147,15 @@ export default class BaseStatPoolModel extends EmbeddedDataModel {
       const roll = new BaseRoll(this.formula, this.getRollData());
       roll.evaluateSync({ minimize: true });
       this._terms = roll.dice;
+      let index = 0;
       for (const term of this._terms) {
         for (let i = 0; i < term.number; i++) {
           const statDie = new this.constructor._statDieModel(
-            { _id: foundry.utils.randomID(), faces: term.faces, index: i },
+            { _id: foundry.utils.randomID(), faces: term.faces, index },
             { parent: this },
           );
           this._dice.push(statDie);
+          index++;
         }
       }
     }
