@@ -91,6 +91,11 @@ export default class RankSystem extends mix(
   get embedParts() {
     const parts = super.embedParts;
     parts.subtitle = TERIOCK.options.rank[this.archetype].name;
+    parts.text =
+      parts.text ||
+      (this.innate
+        ? game.i18n.localize("TERIOCK.TERMS.PowerType.innate")
+        : game.i18n.localize("TERIOCK.TERMS.PowerType.learned"));
     return parts;
   }
 
