@@ -33,7 +33,7 @@ export default class BaseStatPoolModel extends EmbeddedDataModel {
   static defineSchema() {
     return {
       disabled: new fields.BooleanField({ initial: false }),
-      formula: new FormulaField({ deterministic: false }),
+      formula: new FormulaField({ deterministic: false, initial: "1d10" }),
       spent: new fields.SetField(new fields.NumberField()),
     };
   }

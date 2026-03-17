@@ -46,12 +46,8 @@ export default class RankSystem extends mix(
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      archetype: new fields.StringField({
-        initial: "everyman",
-      }),
-      className: new fields.StringField({
-        initial: "journeyman",
-      }),
+      archetype: new fields.StringField({ initial: "everyman" }),
+      className: new fields.StringField({ initial: "journeyman" }),
       classRank: new fields.NumberField({
         initial: 0,
         integer: true,
@@ -66,11 +62,7 @@ export default class RankSystem extends mix(
         ),
       }),
       innate: new fields.BooleanField({ initial: false }),
-      maxAv: new fields.NumberField({
-        initial: 2,
-        integer: true,
-        min: 0,
-      }),
+      maxAv: new fields.NumberField({ initial: 2, integer: true, min: 0 }),
     });
   }
 
@@ -86,11 +78,8 @@ export default class RankSystem extends mix(
 
   /** @inheritDoc */
   get color() {
-    if (this.innate) {
-      return TERIOCK.display.colors.purple;
-    } else {
-      return TERIOCK.display.colors.grey;
-    }
+    if (this.innate) return TERIOCK.display.colors.purple;
+    else return TERIOCK.display.colors.grey;
   }
 
   /** @inheritDoc */
@@ -230,9 +219,7 @@ export default class RankSystem extends mix(
   /** @inheritDoc */
   prepareBaseData() {
     super.prepareBaseData();
-    if (this.parent.sup?.type === "species") {
-      this.innate = true;
-    }
+    if (this.parent.sup?.type === "species") this.innate = true;
     if (
       game.settings.get("teriock", "armorWeakensRanks") &&
       this.actor &&
@@ -246,9 +233,7 @@ export default class RankSystem extends mix(
   prepareDerivedData() {
     super.prepareDerivedData();
     for (const pool of Object.values(this.statDice)) {
-      if (this.innate) {
-        pool.disabled = true;
-      }
+      if (this.innate) pool.disabled = true;
     }
   }
 }

@@ -36,12 +36,8 @@ export default function StatGiverSystemMixin(Base) {
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           statDice: new fields.SchemaField({
-            hp: new fields.EmbeddedDataField(HpPoolModel, {
-              nullable: false,
-            }),
-            mp: new fields.EmbeddedDataField(MpPoolModel, {
-              nullable: false,
-            }),
+            hp: new fields.EmbeddedDataField(HpPoolModel),
+            mp: new fields.EmbeddedDataField(MpPoolModel),
           }),
         });
       }
