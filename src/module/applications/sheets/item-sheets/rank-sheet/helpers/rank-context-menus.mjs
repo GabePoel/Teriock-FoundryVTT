@@ -18,8 +18,8 @@ export function archetypeContextMenu(rank) {
           system: {
             archetype: aKey,
             className: firstClass,
-            "statDice.hp.faces": aData.hp,
-            "statDice.mp.faces": aData.mp,
+            "statDice.hp.formula": `1d${aData.hp}`,
+            "statDice.mp.formula": `1d${aData.mp}`,
           },
         });
       },
