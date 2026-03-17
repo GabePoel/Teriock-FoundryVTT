@@ -188,6 +188,12 @@ export default function AbilityExecutionGetInputPart(Base) {
             },
           });
         }
+        if (this.costs.mp !== undefined && this.source.system.adept.enabled) {
+          this.costs.mp -= this.source.system.adept.amount;
+        }
+        if (this.costs.mp !== undefined && this.source.system.gifted.enabled) {
+          this.costs.mp += this.source.system.gifted.amount;
+        }
       }
 
       /** @inheritDoc */
