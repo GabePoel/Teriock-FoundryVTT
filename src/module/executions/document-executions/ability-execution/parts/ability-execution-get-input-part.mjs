@@ -47,6 +47,46 @@ export default function AbilityExecutionGetInputPart(Base) {
       }
 
       /**
+       * Apply constant adept/inept/gifted modifications to default costs.
+       */
+      #modifyCosts() {
+        if (this.source.system.adept.enabled) {
+          this.costs.mp -= this.source.system.adept.amount;
+        }
+        if (this.source.system.gifted.enabled) {
+          this.costs.mp += this.source.system.gifted.amount;
+        }
+      }
+
+      /**
+       * Text to add to adept casting costs.
+       * @return {Promise<string>}
+       */
+      async #textAdept() {
+        return TeriockTextEditor.enrichHTML(
+          game.i18n.format(
+            "TERIOCK.SYSTEMS.Ability.EXECUTION.descriptions.adept",
+            { amount: this.source.system.adept.amount },
+          ),
+          { relativeTo: this.source },
+        );
+      }
+
+      /**
+       * Text to add to gifted casting costs.
+       * @return {Promise<string>}
+       */
+      async #textGifted() {
+        return TeriockTextEditor.enrichHTML(
+          game.i18n.format(
+            "TERIOCK.SYSTEMS.Ability.EXECUTION.descriptions.gifted",
+            { amount: this.source.system.gifted.amount },
+          ),
+          { relativeTo: this.source },
+        );
+      }
+
+      /**
        * Get user input on costs.
        * @returns {Promise<void>}
        */
@@ -59,26 +99,19 @@ export default function AbilityExecutionGetInputPart(Base) {
           this.source.system.costs.mp.type === "variable" && !this.options.noMp;
         const dialogs = [];
         if (promptMp) {
-          let mpDescription = this.source.system.costs.mp.value.variable;
+          let mpDescription = await TeriockTextEditor.enrichHTML(
+            this.source.system.costs.mp.value.variable,
+            { relativeTo: this.source },
+          );
           if (this.source.system.adept.enabled) {
-            mpDescription +=
-              "<div><p>" +
-              game.i18n.format(
-                "TERIOCK.SYSTEMS.Ability.EXECUTION.descriptions.adept",
-                { amount: this.source.system.adept.amount },
-              ) +
-              "</p>";
+            mpDescription += `<p>${await this.#textAdept()}</p>`;
           }
           if (this.source.system.gifted.enabled) {
-            mpDescription +=
-              "<div><p>" +
-              game.i18n.format(
-                "TERIOCK.SYSTEMS.Ability.EXECUTION.descriptions.gifted",
-                { amount: this.source.system.gifted.amount },
-              ) +
-              "</p>";
+            mpDescription += `<p>${await this.#textGifted()}</p>`;
           }
-          mpDescription = await TeriockTextEditor.enrichHTML(mpDescription);
+          mpDescription = await TeriockTextEditor.enrichHTML(mpDescription, {
+            relativeTo: this.source,
+          });
           const mpMax = this.actor.system.mp.value - this.actor.system.mp.min;
           dialogs.push(
             createDialogFieldset(
@@ -96,6 +129,7 @@ export default function AbilityExecutionGetInputPart(Base) {
         if (promptHp) {
           const hpDescription = await TeriockTextEditor.enrichHTML(
             this.source.system.costs.hp.value.variable,
+            { relativeTo: this.source },
           );
           const hpMax = this.actor.system.hp.value - this.actor.system.hp.min;
           dialogs.push(
@@ -114,6 +148,7 @@ export default function AbilityExecutionGetInputPart(Base) {
         if (promptGp) {
           const gpDescription = await TeriockTextEditor.enrichHTML(
             this.source.system.costs.gp.value.variable,
+            { relativeTo: this.source },
           );
           dialogs.push(
             createDialogFieldset(
@@ -135,6 +170,7 @@ export default function AbilityExecutionGetInputPart(Base) {
         ) {
           const heightenDescription = await TeriockTextEditor.enrichHTML(
             this.source.system.heightened,
+            { relativeTo: this.source },
           );
           dialogs.push(
             createDialogFieldset(
@@ -157,7 +193,10 @@ export default function AbilityExecutionGetInputPart(Base) {
               });
           await TeriockDialog.prompt({
             window: {
-              icon: makeIconClass("fa-burst", "title"),
+              icon: makeIconClass(
+                TERIOCK.display.icons.document.ability,
+                "title",
+              ),
               title: title,
             },
             content: dialogs.join(""),
@@ -188,12 +227,7 @@ export default function AbilityExecutionGetInputPart(Base) {
             },
           });
         }
-        if (this.costs.mp !== undefined && this.source.system.adept.enabled) {
-          this.costs.mp -= this.source.system.adept.amount;
-        }
-        if (this.costs.mp !== undefined && this.source.system.gifted.enabled) {
-          this.costs.mp += this.source.system.gifted.amount;
-        }
+        this.#modifyCosts();
       }
 
       /** @inheritDoc */
@@ -203,6 +237,10 @@ export default function AbilityExecutionGetInputPart(Base) {
         await this._getTargetInput();
       }
 
+      /**
+       * Determine targets and place templates.
+       * @return {Promise<void>}
+       */
       async _getTargetInput() {
         if (
           this.source.system.targets.size === 1 &&
@@ -279,6 +317,7 @@ export default function AbilityExecutionGetInputPart(Base) {
             this,
             template,
           );
+          template.movable = !!templateData.movable;
           if (templateData.movable || templateData.t !== "circle") {
             ui.notifications.info(
               "TERIOCK.SYSTEMS.Ability.DIALOG.PlaceTemplate.notification",
