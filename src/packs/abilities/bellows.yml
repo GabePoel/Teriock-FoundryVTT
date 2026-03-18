@@ -4,7 +4,7 @@ _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.35
+  systemVersion: 0.10.50
 effects:
   - _id: 4e33d0516a15a1af
     _key: '!items.effects!4e33d0516a15a1af.4e33d0516a15a1af'
@@ -12,7 +12,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/bellows.webp
     name: Bellows
     system:
@@ -69,12 +69,15 @@ effects:
       competence:
         raw: 0
       costs:
-        mp:
-          type: static
-          value:
-            static: 1
-        somatic: true
-        verbal: true
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+        primary:
+          mp:
+            formula: '1'
+            type: formula
       delivery:
         base: self
       duration:
@@ -91,7 +94,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, the next
         @L[Category:Spells]{spell} you cast is @L[Keyword:Boosted]{boosted}
@@ -109,7 +111,7 @@ effects:
       powerSources:
         - magical
       range:
-        unit: self
+        unit: melee
       revealed: true
       rotator: true
       spell: true

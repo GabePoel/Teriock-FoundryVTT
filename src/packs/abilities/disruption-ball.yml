@@ -4,7 +4,7 @@ _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.35
+  systemVersion: 0.10.50
 effects:
   - _id: f01fd6d1dab77571
     _key: '!items.effects!f01fd6d1dab77571.f01fd6d1dab77571'
@@ -12,7 +12,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/disruption-ball.webp
     name: Disruption Ball
     system:
@@ -44,16 +44,15 @@ effects:
       competence:
         raw: 0
       costs:
-        mp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
+        primary:
+          mp:
+            description: >-
               <p>This costs 0 @L[Core:Hit Points and Mana Points]{MP} if the
               triggering @L[Category:Active abilities]{ability} was used on you
               or some @L[Category:Equipment]{equipment} you
               @L[Keyword:Bearing]{bear}. It costs 1 @L[Core:Hit Points and Mana
               Points]{MP} otherwise.</p>
+            type: description
       delivery:
         base: missile
         package: ball
@@ -72,7 +71,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: disruption-ball
       interaction: attack
       maneuver: reactive

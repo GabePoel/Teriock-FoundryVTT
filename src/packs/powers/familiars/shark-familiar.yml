@@ -13,7 +13,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/resurrect.webp
     name: Resurrect
     system:
@@ -67,7 +67,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, target can have been
         @L[Condition:Dead]{dead} for an additional 24 hours. If target is
@@ -134,7 +133,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/summon-the-dead.webp
     name: Summon the Dead
     system:
@@ -142,24 +141,21 @@ effects:
       competence:
         raw: 0
       costs:
-        hp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
+        primary:
+          hp:
+            description: >-
               <p>[[lookup name]] costs 0 @L[Core:Hit Points and Mana Points]{HP}
               if the body is in your possession. Otherwise, it costs 3
               @L[Core:Hit Points and Mana Points]{HP} per @L[Core:Size]{size} of
               the body.</p>
-        mp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
+            type: description
+          mp:
+            description: >-
               <p>[[lookup name]] costs 0 @L[Core:Hit Points and Mana Points]{MP}
               if the body is in your possession. Otherwise, it costs 2
               @L[Core:Hit Points and Mana Points]{MP} per @L[Core:Size]{size} of
               the body.</p>
+            type: description
       delivery:
         base: sight
         package: ritual
@@ -179,7 +175,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: summon-the-dead
       interaction: manifest
       maneuver: slow

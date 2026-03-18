@@ -4,7 +4,7 @@ _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.35
+  systemVersion: 0.10.50
 effects:
   - _id: a0e331dd4f67e25b
     _key: '!items.effects!a0e331dd4f67e25b.a0e331dd4f67e25b'
@@ -12,32 +12,34 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/elder-sorcery-creation.webp
     name: Elder Sorcery Creation
     system:
       competence:
         raw: 0
       costs:
-        hp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
-              <p>Creation cost is at least 3 × @L[Core:HP]{HP} of the spell
-              itself.</p>
-        material: true
+        components:
+          material:
+            description: >-
+              <p>Creation cost is at least 3 × the material components of the
+              spell itself.</p>
+            type: description
         materialCost: >-
           <p>Creation cost is at least 3 × the material components of the spell
           itself.</p>
-        mp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
+        primary:
+          hp:
+            description: >-
+              <p>Creation cost is at least 3 × @L[Core:HP]{HP} of the spell
+              itself.</p>
+            type: description
+          mp:
+            description: >-
               <p>Creation cost is at least 1 @L[Core:MP]{MP} per @L[Core:Elder
               Sorcery]{OP} of <i>each</i> word in the spell plus 3 ×
               @L[Core:MP]{MP} of the spell itself.</p>
+            type: description
       delivery:
         base: sight
         package: ritual
@@ -54,7 +56,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       identifier: elder-sorcery-creation
       interaction: manifest
       maneuver: slow

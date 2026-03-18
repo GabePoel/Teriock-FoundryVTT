@@ -31,7 +31,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/disable-ray.webp
     name: Disable Ray
     system:
@@ -63,15 +63,14 @@ effects:
       competence:
         raw: 0
       costs:
-        mp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
+        primary:
+          mp:
+            description: >-
               <p>This costs 0 @L[Core:Hit Points and Mana Points]{MP} if the
               triggering @L[Category:Abilities]{ability} was used on you or some
               @L[Category:Equipment]{equipment} you @L[Keyword:Bearing]{bear}.
               It costs 1 @L[Core:Hit Points and Mana Points]{MP} otherwise.</p>
+            type: description
       delivery:
         base: missile
         package: ray
@@ -90,7 +89,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: disable-ray
       interaction: attack
       maneuver: reactive
@@ -129,7 +127,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/endure.webp
     name: Endure
     system:
@@ -152,10 +150,9 @@ effects:
       competence:
         raw: 0
       costs:
-        hp:
-          type: hack
-          value:
-            static: 0
+        components:
+          hack:
+            type: tag
       delivery:
         base: self
       duration:
@@ -172,7 +169,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: endure
       interaction: manifest
       maneuver: reactive
@@ -195,7 +191,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       skill: true
       standard: true

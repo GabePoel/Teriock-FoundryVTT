@@ -4,7 +4,7 @@ _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.35
+  systemVersion: 0.10.50
 effects:
   - _id: 2f6d6a0509902573
     _key: '!items.effects!2f6d6a0509902573.2f6d6a0509902573'
@@ -12,7 +12,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/polymorph.webp
     name: Polymorph
     system:
@@ -41,8 +41,11 @@ effects:
       competence:
         raw: 0
       costs:
-        somatic: true
-        verbal: true
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
       delivery:
         base: sight
         package: ritual
@@ -62,7 +65,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, the maximum @L[Core:Battle
         Rating]{BR} available to you increases by 3.</p>

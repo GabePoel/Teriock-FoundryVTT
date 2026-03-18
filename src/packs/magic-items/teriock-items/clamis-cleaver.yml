@@ -13,7 +13,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/burning-touch.webp
     name: Burning Touch
     system:
@@ -47,8 +47,11 @@ effects:
       competence:
         raw: 0
       costs:
-        somatic: true
-        verbal: true
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
       delivery:
         base: hand
         package: touch
@@ -68,10 +71,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      gifted:
-        amount: 1
-        enabled: true
-      grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage}.</p>
@@ -122,7 +121,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/properties/runic.webp
     name: Runic
     system:
@@ -162,7 +161,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/slay.webp
     name: Slay
     system:
@@ -196,10 +195,10 @@ effects:
       competence:
         raw: 0
       costs:
-        mp:
-          type: static
-          value:
-            static: 1
+        primary:
+          mp:
+            formula: '1'
+            type: formula
       delivery:
         base: weapon
       duration:
@@ -217,10 +216,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      gifted:
-        amount: 1
-        enabled: true
-      grantOnly: false
       identifier: slay
       interaction: manifest
       limitation: <p>Trolls only.</p>
@@ -276,7 +271,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/weapons-mastery.webp
     name: Weapons Mastery
     system:
@@ -317,7 +312,6 @@ effects:
       gifted:
         amount: 1
         enabled: true
-      grantOnly: false
       identifier: weapons-mastery
       interaction: manifest
       limitation: <p>@L[Equipment:Longsword]{Longswords} only.</p>
@@ -344,7 +338,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       skill: true
       standard: true

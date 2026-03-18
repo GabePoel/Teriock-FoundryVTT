@@ -14,7 +14,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     flags:
       teriock:
         category: support
@@ -39,7 +39,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: armor-master
       interaction: manifest
       maneuver: passive
@@ -52,7 +51,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       skill: true
       standard: true
@@ -66,7 +65,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     flags:
       teriock:
         category: combat
@@ -92,6 +91,12 @@ effects:
         raw: 0
       costs:
         break: shatter
+        components:
+          break:
+            description: >-
+              <p>When [[lookup name]] is used, the item that delivers it becomes
+              @L[Property:Shattered]{shattered}.</p>
+            type: description
       delivery:
         base: armor
       duration:
@@ -106,7 +111,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: armor-wound
       interaction: manifest
       maneuver: reactive
@@ -136,7 +140,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/master-armor-smith.webp
     name: Master Armor Smith
     system:
@@ -180,7 +184,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: master-armor-smith
       interaction: manifest
       maneuver: passive
@@ -195,7 +198,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       skill: true
       standard: true
@@ -209,7 +212,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/runic-armor.webp
     name: Runic Armor
     system:
@@ -218,13 +221,12 @@ effects:
       competence:
         raw: 0
       costs:
-        mp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
+        primary:
+          mp:
+            description: >-
               <p>[[lookup name]] costs an amount of @L[Core:MP]{MP} equal to the
               armor's @L[Core:AV]{AV}.</p>
+            type: description
       delivery:
         base: sight
         package: ritual
@@ -240,7 +242,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: runic-armor
       interaction: manifest
       maneuver: slow

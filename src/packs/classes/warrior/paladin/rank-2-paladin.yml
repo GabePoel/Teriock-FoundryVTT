@@ -13,7 +13,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/disenchant.webp
     name: Disenchant
     system:
@@ -46,20 +46,17 @@ effects:
       competence:
         raw: 0
       costs:
-        hp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
+        primary:
+          hp:
+            description: >-
               <p>An amount of @L[Core:Hit Points and Mana Points]{HP} equal to
               the [[/tc priest]]{priest check's} DC. Paid only on failure.</p>
-        mp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
+            type: description
+          mp:
+            description: >-
               <p>An amount of @L[Core:Hit Points and Mana Points]{MP} equal to
               the [[/tc priest]]{priest check's} DC. Paid only on failure.</p>
+            type: description
       delivery:
         base: sight
         package: ritual
@@ -77,7 +74,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: disenchant
       interaction: manifest
       maneuver: slow
@@ -134,7 +130,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/exorcism.webp
     name: Exorcism
     system:
@@ -142,20 +138,17 @@ effects:
       competence:
         raw: 0
       costs:
-        hp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
+        primary:
+          hp:
+            description: >-
               <p>An amount of @L[Core:HP]{HP} equal to the [[/tc priest]]{priest
               check's} DC. Paid only on failure.</p>
-        mp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
+            type: description
+          mp:
+            description: >-
               <p>An amount of @L[Core:MP]{MP} equal to the [[/tc priest]]{priest
               check's} DC. Paid only on failure.</p>
+            type: description
       delivery:
         base: sight
         package: ritual
@@ -171,7 +164,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: exorcism
       interaction: manifest
       maneuver: slow
@@ -244,7 +236,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/remove-charm.webp
     name: Remove Charm
     system:
@@ -265,11 +257,13 @@ effects:
       competence:
         raw: 0
       costs:
-        mp:
-          type: static
-          value:
-            static: 1
-        verbal: true
+        components:
+          verbal:
+            type: tag
+        primary:
+          mp:
+            formula: '1'
+            type: formula
       delivery:
         base: hand
       duration:
@@ -284,7 +278,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: remove-charm
       interaction: attack
       maneuver: active
@@ -313,7 +306,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/spell-turning-shields.webp
     name: Spell Turning Shields
     system:
@@ -377,7 +370,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: spell-turning-shields
       interaction: manifest
       maneuver: passive
@@ -390,7 +382,7 @@ effects:
       powerSources:
         - divine
       range:
-        unit: self
+        unit: melee
       revealed: true
       skill: true
       standard: true
@@ -404,7 +396,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/zone-of-divinity.webp
     name: Zone of Divinity
     system:
@@ -425,7 +417,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: zone-of-divinity
       interaction: manifest
       maneuver: passive
@@ -468,7 +459,7 @@ effects:
       powerSources:
         - divine
       range:
-        unit: self
+        unit: melee
       revealed: true
       skill: true
       standard: true

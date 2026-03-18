@@ -26,36 +26,6 @@ export default class ChangesAutomation extends CritAutomation {
   }
 
   /** @inheritDoc */
-  static migrateData(data) {
-    if (data.changes) {
-      const keep = [];
-      for (const c of data.changes) {
-        if (!c.key) {
-          keep.push(c);
-          continue;
-        }
-        if (c.key.startsWith("system.adept.enabled")) continue;
-        if (c.key.startsWith("system.gifted.enabled")) continue;
-        if (c.key.startsWith("system.adept.amount")) {
-          c.key = c.key.replace(
-            "system.adept.amount",
-            "system.costs.tweaks.adept",
-          );
-        }
-        if (c.key.startsWith("system.gifted.amount")) {
-          c.key = c.key.replace(
-            "system.gifted.amount",
-            "system.costs.tweaks.gifted",
-          );
-        }
-        keep.push(c);
-      }
-      data.changes = keep;
-    }
-    return super.migrateData(data);
-  }
-
-  /** @inheritDoc */
   async getEditor() {
     const html = await TeriockTextEditor.renderTemplate(
       "teriock/sheets/shared/changes",

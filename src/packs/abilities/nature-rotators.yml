@@ -4,7 +4,7 @@ _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.35
+  systemVersion: 0.10.50
 effects:
   - _id: 063b0cceb9b65c6c
     _key: '!items.effects!063b0cceb9b65c6c.063b0cceb9b65c6c'
@@ -12,7 +12,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/nature-rotators.webp
     name: Nature Rotators
     system:
@@ -85,7 +85,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: nature-rotators
       interaction: manifest
       maneuver: passive
@@ -121,7 +120,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       skill: true
       targets:
@@ -134,7 +133,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/crown-of-vines.webp
     name: Crown of Vines
     system:
@@ -179,10 +178,10 @@ effects:
       competence:
         raw: 0
       costs:
-        mp:
-          type: static
-          value:
-            static: 1
+        primary:
+          mp:
+            formula: '1'
+            type: formula
       delivery:
         base: self
       duration:
@@ -199,7 +198,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       identifier: crown-of-vines
       interaction: manifest
       maneuver: active
@@ -213,7 +211,7 @@ effects:
       powerSources:
         - magical
       range:
-        unit: self
+        unit: melee
       revealed: true
       rotator: true
       spell: true
@@ -229,7 +227,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/earthbind-aura.webp
     name: Earthbind Aura
     system:
@@ -308,10 +306,10 @@ effects:
       competence:
         raw: 0
       costs:
-        mp:
-          type: static
-          value:
-            static: 1
+        primary:
+          mp:
+            formula: '1'
+            type: formula
       delivery:
         base: aura
       duration:
@@ -331,7 +329,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/damage 1d4[magic vine]]] @L[Core:Damage]{damage}  as well.</p>
@@ -362,7 +359,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/earthbind-touch.webp
     name: Earthbind Touch
     system:
@@ -460,7 +457,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/damage 1d4[magic vine]]] @L[Core:Damage]{damage}  as well.</p>
@@ -492,7 +488,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/polymorph.webp
     name: Polymorph
     system:
@@ -545,8 +541,11 @@ effects:
       competence:
         raw: 0
       costs:
-        somatic: true
-        verbal: true
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
       delivery:
         base: sight
         package: ritual
@@ -566,7 +565,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, the maximum @L[Core:Battle
         Rating]{BR} available to you increases by 3.</p>
@@ -608,7 +606,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/regeneration-touch.webp
     name: Regeneration Touch
     system:
@@ -641,8 +639,11 @@ effects:
       competence:
         raw: 0
       costs:
-        somatic: true
-        verbal: true
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
       delivery:
         base: hand
         package: touch
@@ -665,7 +666,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       identifier: regeneration-touch
       interaction: attack
       invoked: true
@@ -695,7 +695,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/unforge.webp
     name: Unforge
     system:
@@ -717,12 +717,15 @@ effects:
       competence:
         raw: 0
       costs:
-        mp:
-          type: static
-          value:
-            static: 1
-        somatic: true
-        verbal: true
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+        primary:
+          mp:
+            formula: '1'
+            type: formula
       delivery:
         base: hand
       duration:
@@ -741,7 +744,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       identifier: unforge
       interaction: attack
       invoked: true
@@ -768,7 +770,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/wildborn.webp
     name: Wildborn
     system:
@@ -777,12 +779,15 @@ effects:
       competence:
         raw: 0
       costs:
-        mp:
-          type: static
-          value:
-            static: 1
-        somatic: true
-        verbal: true
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+        primary:
+          mp:
+            formula: '1'
+            type: formula
       delivery:
         base: self
       duration:
@@ -801,7 +806,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       identifier: wildborn
       interaction: manifest
       invoked: true
@@ -818,7 +822,7 @@ effects:
         - magical
         - primal
       range:
-        unit: self
+        unit: melee
       revealed: true
       rotator: true
       spell: true
@@ -834,7 +838,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/regenerating.webp
     name: Regenerating
     system:
@@ -890,7 +894,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       identifier: regenerating
       interaction: manifest
       limitation: >-
@@ -917,7 +920,7 @@ effects:
       powerSources:
         - primal
       range:
-        unit: self
+        unit: melee
       revealed: true
       targets:
         - self

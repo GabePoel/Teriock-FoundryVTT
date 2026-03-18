@@ -13,7 +13,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.37
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -24,8 +24,11 @@ effects:
       competence:
         raw: 0
       costs:
-        somatic: true
-        verbal: true
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
       delivery:
         base: item
       duration:
@@ -33,21 +36,18 @@ effects:
         raw: '0'
         stationary: false
         unit: instant
-      effectTypes:
-        - magical
       executionTime:
-        base: a3
+        base: r0
       expansion:
         featSaveAttribute: mov
         range:
           unit: self
       featSaveAttribute: mov
       form: intrinsic
-      grantOnly: false
       identifier: access-stored-mana
       interaction: manifest
       invoked: true
-      maneuver: active
+      maneuver: reactive
       overview:
         base: >-
           <p>You use the @L[Core:MP]{MP} in a @L[Property:Mana Storing]{mana
@@ -76,7 +76,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -100,7 +100,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: intrinsic
-      grantOnly: false
       identifier: aid
       interaction: manifest
       maneuver: reactive
@@ -136,7 +135,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.36
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -177,7 +176,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: intrinsic
-      grantOnly: false
       identifier: attempt-check
       interaction: manifest
       maneuver: active
@@ -195,7 +193,7 @@ effects:
         - martial
       range:
         raw: Varies
-        unit: self
+        unit: ft
       results:
         fail: <p>Results are determined by the @L[Core:Game Master]{GM}.</p>
         save: <p>Results are determined by the @L[Core:Game Master]{GM}.</p>
@@ -210,7 +208,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.36
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -252,7 +250,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: intrinsic
-      grantOnly: false
       identifier: attempt-hide
       interaction: manifest
       maneuver: active
@@ -275,7 +272,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       requirements: >-
         <p>You are in a location with shadows, dim light,
         @L[Core:Cover]{three-quarters cover}, or some other feature which the
@@ -293,7 +290,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.36
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -333,7 +330,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: intrinsic
-      grantOnly: false
       identifier: attune
       interaction: manifest
       maneuver: active
@@ -346,7 +342,7 @@ effects:
       powerSources:
         - spiritual
       range:
-        unit: self
+        unit: melee
       requirements: <p>You are using target item or mounted on target creature.</p>
       revealed: true
       sustained: true
@@ -361,7 +357,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.36
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -401,7 +397,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: intrinsic
-      grantOnly: false
       identifier: basic-attack
       interaction: attack
       maneuver: active
@@ -433,7 +428,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -457,7 +452,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: intrinsic
-      grantOnly: false
       identifier: basic-block
       interaction: block
       maneuver: reactive
@@ -484,7 +478,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -508,7 +502,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: intrinsic
-      grantOnly: false
       identifier: basic-command
       interaction: manifest
       maneuver: active
@@ -539,7 +532,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -563,7 +556,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: intrinsic
-      grantOnly: false
       identifier: block-ally
       interaction: block
       maneuver: reactive
@@ -596,7 +588,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.36
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -621,6 +613,12 @@ effects:
         raw: 0
       costs:
         break: shatter
+        components:
+          break:
+            description: >-
+              <p>When [[lookup name]] is used, the item that delivers it becomes
+              @L[Property:Shattered]{shattered}.</p>
+            type: description
       delivery:
         base: shield
       duration:
@@ -635,7 +633,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: intrinsic
-      grantOnly: false
       identifier: block-cone
       interaction: manifest
       maneuver: reactive
@@ -669,7 +666,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.36
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -713,7 +710,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: intrinsic
-      grantOnly: false
       identifier: burn
       interaction: attack
       maneuver: active
@@ -738,7 +734,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -762,7 +758,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: intrinsic
-      grantOnly: false
       identifier: catch-item
       interaction: manifest
       maneuver: reactive
@@ -792,7 +787,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -818,7 +813,6 @@ effects:
           unit: self
       featSaveAttribute: snk
       form: intrinsic
-      grantOnly: false
       identifier: check-disguise
       interaction: feat
       maneuver: active
@@ -851,7 +845,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.36
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -888,7 +882,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: intrinsic
-      grantOnly: false
       identifier: deattune
       interaction: manifest
       maneuver: slow
@@ -903,7 +896,7 @@ effects:
       powerSources:
         - spiritual
       range:
-        unit: self
+        unit: melee
       revealed: true
       targets:
         - self
@@ -915,7 +908,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -939,7 +932,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: intrinsic
-      grantOnly: false
       identifier: delay
       interaction: manifest
       maneuver: active
@@ -969,7 +961,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       targets:
         - self
@@ -981,7 +973,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.36
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -1024,7 +1016,6 @@ effects:
           unit: self
       featSaveAttribute: int
       form: intrinsic
-      grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, the DC of the [[lookup
         name]] decreases by 2.</p>
@@ -1060,7 +1051,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -1084,7 +1075,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: intrinsic
-      grantOnly: false
       identifier: disengage
       interaction: manifest
       maneuver: active
@@ -1097,7 +1087,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       targets:
         - self
@@ -1109,7 +1099,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.36
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -1153,7 +1143,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: intrinsic
-      grantOnly: false
       identifier: drop-prone
       interaction: manifest
       maneuver: active
@@ -1164,7 +1153,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       requirements: <p>You are not @L[Condition:Prone]{prone}.</p>
       revealed: true
       targets:
@@ -1177,7 +1166,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.36
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -1228,7 +1217,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: intrinsic
-      grantOnly: false
       identifier: first-aid
       interaction: manifest
       maneuver: active
@@ -1255,7 +1243,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.36
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -1279,10 +1267,10 @@ effects:
       competence:
         raw: 0
       costs:
-        mp:
-          type: static
-          value:
-            static: 1
+        primary:
+          mp:
+            formula: '1'
+            type: formula
       delivery:
         base: hand
       duration:
@@ -1297,7 +1285,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: intrinsic
-      grantOnly: false
       identifier: force-revert
       interaction: attack
       maneuver: active
@@ -1324,7 +1311,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -1348,7 +1335,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: intrinsic
-      grantOnly: false
       identifier: interact
       interaction: manifest
       maneuver: active
@@ -1376,7 +1362,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.36
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -1417,7 +1403,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: intrinsic
-      grantOnly: false
       identifier: knockout-attack
       interaction: attack
       maneuver: active
@@ -1450,7 +1435,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.36
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -1518,7 +1503,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: intrinsic
-      grantOnly: false
       identifier: melee-dodge
       interaction: manifest
       maneuver: active
@@ -1531,7 +1515,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       requirements: >-
         <p>You are not @L[Condition:Prone]{prone}, @L[Condition:Snared]{snared},
         or @L[Condition:Immobile]{immobile}.</p>
@@ -1547,7 +1531,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.36
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -1615,7 +1599,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: intrinsic
-      grantOnly: false
       identifier: missile-dodge
       interaction: manifest
       maneuver: active
@@ -1628,7 +1611,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       requirements: >-
         <p>You are not @L[Condition:Prone]{prone}, @L[Condition:Snared]{snared},
         or @L[Condition:Immobile]{immobile}.</p>
@@ -1644,7 +1627,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -1670,7 +1653,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: intrinsic
-      grantOnly: false
       identifier: move
       interaction: manifest
       maneuver: active
@@ -1687,7 +1669,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       targets:
         - self
@@ -1699,7 +1681,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.36
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -1740,7 +1722,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: intrinsic
-      grantOnly: false
       identifier: off-hand-attack
       interaction: manifest
       maneuver: reactive
@@ -1757,7 +1738,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       requirements: >-
         <p>You have a second @L[Category:Weapons]{weapon} or hand that is
         capable of making an @L[Category:Attack abilities]{attack} and that did
@@ -1776,7 +1757,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.36
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -1817,7 +1798,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: intrinsic
-      grantOnly: false
       identifier: opportunity-attack
       interaction: manifest
       maneuver: reactive
@@ -1832,7 +1812,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       targets:
         - self
@@ -1849,7 +1829,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.36
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -1885,12 +1865,13 @@ effects:
       competence:
         raw: 0
       costs:
-        gp:
-          type: variable
-          value:
-            static: 0
-            variable: <p>An amount of @L[Equipment:Coin]{gold} of your choosing.</p>
-        material: true
+        components:
+          material:
+            type: tag
+        primary:
+          gp:
+            description: <p>An amount of @L[Equipment:Coin]{gold} of your choosing.</p>
+            type: description
       delivery:
         base: self
       duration:
@@ -1905,7 +1886,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: intrinsic
-      grantOnly: false
       identifier: pay-gold
       interaction: manifest
       maneuver: active
@@ -1920,7 +1900,7 @@ effects:
         - divine
         - financial
       range:
-        unit: self
+        unit: melee
       revealed: true
       targets:
         - creature
@@ -1932,7 +1912,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -1943,11 +1923,10 @@ effects:
       competence:
         raw: 0
       costs:
-        mp:
-          type: variable
-          value:
-            static: 0
-            variable: <p>An amount of @L[Core:MP]{MP} of your choosing.</p>
+        primary:
+          mp:
+            description: <p>An amount of @L[Core:MP]{MP} of your choosing.</p>
+            type: description
       delivery:
         base: hand
       duration:
@@ -1962,7 +1941,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: intrinsic
-      grantOnly: false
       identifier: pay-mana
       interaction: manifest
       maneuver: active
@@ -1989,7 +1967,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -2015,7 +1993,6 @@ effects:
           unit: self
       featSaveAttribute: per
       form: intrinsic
-      grantOnly: false
       identifier: perceive
       interaction: feat
       maneuver: active
@@ -2024,7 +2001,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       results:
         fail: >-
           <p>You do not see any @L[Condition:Hidden]{hidden} creatures with a
@@ -2043,7 +2020,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.36
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -2078,10 +2055,10 @@ effects:
       competence:
         raw: 0
       costs:
-        hp:
-          type: static
-          value:
-            static: 5
+        primary:
+          hp:
+            formula: '5'
+            type: formula
       delivery:
         base: weapon
       duration:
@@ -2097,7 +2074,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: intrinsic
-      grantOnly: false
       identifier: power-through
       interaction: manifest
       maneuver: active
@@ -2122,7 +2098,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -2146,7 +2122,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: intrinsic
-      grantOnly: false
       identifier: prepare-aid
       interaction: manifest
       maneuver: active
@@ -2176,7 +2151,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.36
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -2215,7 +2190,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: intrinsic
-      grantOnly: false
       identifier: read-magic
       interaction: attack
       maneuver: active
@@ -2246,7 +2220,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -2270,7 +2244,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: intrinsic
-      grantOnly: false
       identifier: ready
       interaction: manifest
       maneuver: active
@@ -2297,7 +2270,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       sustained: true
       targets:
@@ -2310,7 +2283,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.36
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -2348,7 +2321,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: intrinsic
-      grantOnly: false
       identifier: recover
       interaction: manifest
       maneuver: slow
@@ -2368,7 +2340,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       targets:
         - self
@@ -2380,7 +2352,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -2404,7 +2376,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: intrinsic
-      grantOnly: false
       identifier: reload
       interaction: manifest
       maneuver: active
@@ -2415,7 +2386,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       requirements: <p>Target has the @L[Property:Loading]{loading property}.</p>
       revealed: true
       targets:
@@ -2428,7 +2399,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -2439,10 +2410,10 @@ effects:
       competence:
         raw: 0
       costs:
-        mp:
-          type: static
-          value:
-            static: 1
+        primary:
+          mp:
+            formula: '1'
+            type: formula
       delivery:
         base: self
       duration:
@@ -2457,7 +2428,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: intrinsic
-      grantOnly: false
       identifier: resist
       interaction: manifest
       maneuver: reactive
@@ -2470,7 +2440,7 @@ effects:
       powerSources:
         - spiritual
       range:
-        unit: self
+        unit: melee
       revealed: true
       targets:
         - self
@@ -2483,7 +2453,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -2509,7 +2479,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: intrinsic
-      grantOnly: false
       identifier: search
       interaction: manifest
       maneuver: active
@@ -2536,7 +2505,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.36
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -2589,7 +2558,6 @@ effects:
           unit: self
       featSaveAttribute: int
       form: intrinsic
-      grantOnly: false
       identifier: self-revert
       interaction: feat
       maneuver: active
@@ -2603,7 +2571,7 @@ effects:
       powerSources:
         - primal
       range:
-        unit: self
+        unit: melee
       requirements: <p>You are @L[Condition:Transformed]{transformed}.</p>
       results:
         save: <p>You cease being @L[Condition:Transformed]{transformed}.</p>
@@ -2618,7 +2586,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.36
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -2657,7 +2625,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: intrinsic
-      grantOnly: false
       identifier: stand-up
       interaction: manifest
       maneuver: active
@@ -2668,7 +2635,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       requirements: <p>You are @L[Condition:Prone]{prone}.</p>
       revealed: true
       targets:
@@ -2681,7 +2648,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.36
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/start-wisping.webp
     name: Start Wisping
     system:
@@ -2720,7 +2687,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: intrinsic
-      grantOnly: false
       identifier: start-wisping
       interaction: manifest
       maneuver: active
@@ -2733,7 +2699,7 @@ effects:
       powerSources:
         - spiritual
       range:
-        unit: self
+        unit: melee
       requirements: <p>You are @L[Condition:Dead]{dead}.</p>
       revealed: true
       targets:
@@ -2746,7 +2712,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -2770,7 +2736,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: intrinsic
-      grantOnly: false
       identifier: sustain
       interaction: manifest
       maneuver: active
@@ -2788,7 +2753,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       targets:
         - self

@@ -13,7 +13,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     flags:
       teriock:
         category: combat
@@ -37,7 +37,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: battle-charge
       interaction: attack
       maneuver: reactive
@@ -76,7 +75,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/master-weapon-smith.webp
     name: Master Weapon Smith
     system:
@@ -120,7 +119,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: master-weapon-smith
       interaction: manifest
       maneuver: passive
@@ -135,7 +133,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       skill: true
       standard: true
@@ -149,7 +147,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     flags:
       teriock:
         category: support
@@ -174,11 +172,13 @@ effects:
       competence:
         raw: 0
       costs:
-        mp:
-          type: static
-          value:
-            static: 1
-        somatic: true
+        components:
+          somatic:
+            type: tag
+        primary:
+          mp:
+            formula: '1'
+            type: formula
       delivery:
         base: sight
         package: ritual
@@ -194,7 +194,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: mystic-weapon-repair
       interaction: manifest
       maneuver: slow
@@ -226,7 +225,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     flags:
       teriock:
         category: combat
@@ -268,12 +267,15 @@ effects:
       competence:
         raw: 0
       costs:
-        mp:
-          type: static
-          value:
-            static: 1
-        somatic: true
-        verbal: true
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+        primary:
+          mp:
+            formula: '1'
+            type: formula
       delivery:
         base: aura
       duration:
@@ -295,7 +297,6 @@ effects:
           unit: self
       featSaveAttribute: int
       form: normal
-      grantOnly: false
       identifier: rallying-cry
       interaction: feat
       maneuver: active
@@ -333,7 +334,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/runic-weapons.webp
     name: Runic Weapons
     system:
@@ -342,10 +343,10 @@ effects:
       competence:
         raw: 0
       costs:
-        mp:
-          type: static
-          value:
-            static: 1
+        primary:
+          mp:
+            formula: '1'
+            type: formula
       delivery:
         base: sight
         package: ritual
@@ -361,7 +362,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: runic-weapons
       interaction: manifest
       maneuver: slow
@@ -390,7 +390,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     flags:
       teriock:
         category: combat
@@ -442,7 +442,6 @@ effects:
           unit: self
       featSaveAttribute: int
       form: normal
-      grantOnly: false
       identifier: taunt
       interaction: feat
       maneuver: active
@@ -470,7 +469,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/triumphant-healing-surge.webp
     name: Triumphant Healing Surge
     system:
@@ -508,7 +507,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: triumphant-healing-surge
       interaction: manifest
       maneuver: reactive
@@ -519,7 +517,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       skill: true
       standard: true
@@ -534,7 +532,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     flags:
       teriock:
         category: support
@@ -558,7 +556,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: warrior-stance
       interaction: manifest
       maneuver: passive
@@ -571,7 +568,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       skill: true
       standard: true
@@ -589,7 +586,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     flags:
       teriock:
         category: support
@@ -614,7 +611,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: weapon-master
       interaction: manifest
       maneuver: passive
@@ -627,7 +623,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       skill: true
       standard: true
@@ -641,7 +637,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/withstand.webp
     name: Withstand
     system:
@@ -664,10 +660,9 @@ effects:
       competence:
         raw: 0
       costs:
-        hp:
-          type: hack
-          value:
-            static: 0
+        components:
+          hack:
+            type: tag
       delivery:
         base: self
       duration:
@@ -684,7 +679,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: withstand
       interaction: manifest
       maneuver: reactive
@@ -698,7 +692,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       requirements: <p>You are not @L[Damage:Hack]{body hacked}.</p>
       revealed: true
       skill: true

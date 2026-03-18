@@ -13,7 +13,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/blizzard-aura.webp
     name: Blizzard Aura
     system:
@@ -75,12 +75,15 @@ effects:
       competence:
         raw: 0
       costs:
-        mp:
-          type: static
-          value:
-            static: 1
-        somatic: true
-        verbal: true
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+        primary:
+          mp:
+            formula: '1'
+            type: formula
       delivery:
         base: aura
       duration:
@@ -102,7 +105,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/damage 1d4[magic ice]]] @L[Core:Damage]{damage}  as well.</p>
@@ -132,7 +134,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -157,7 +159,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       identifier: celestial-elder-sorcery-words
       interaction: manifest
       maneuver: passive
@@ -252,7 +253,7 @@ effects:
       powerSources:
         - magical
       range:
-        unit: self
+        unit: melee
       revealed: true
       skill: true
       targets:
@@ -265,7 +266,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/crown-of-ice.webp
     name: Crown of Ice
     system:
@@ -310,12 +311,15 @@ effects:
       competence:
         raw: 0
       costs:
-        mp:
-          type: static
-          value:
-            static: 1
-        somatic: true
-        verbal: true
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+        primary:
+          mp:
+            formula: '1'
+            type: formula
       delivery:
         base: self
       duration:
@@ -332,7 +336,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       identifier: crown-of-ice
       interaction: manifest
       invoked: true
@@ -347,7 +350,7 @@ effects:
       powerSources:
         - magical
       range:
-        unit: self
+        unit: melee
       revealed: true
       rotator: true
       spell: true
@@ -363,7 +366,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/dispel-magic.webp
     name: Dispel Magic
     system:
@@ -386,8 +389,11 @@ effects:
       competence:
         raw: 0
       costs:
-        somatic: true
-        verbal: true
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
       delivery:
         base: aura
       duration:
@@ -405,7 +411,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, the range of [[lookup
         name]] increases by 10 feet.</p>
@@ -452,7 +457,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/displace.webp
     name: Displace
     system:
@@ -478,7 +483,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, the range increases by 10
         feet.</p>
@@ -515,7 +519,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -526,25 +530,27 @@ effects:
       competence:
         raw: 0
       costs:
-        hp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
-              <p>Creation cost is at least 3 × @L[Core:HP]{HP} of the spell
-              itself.</p>
-        material: true
+        components:
+          material:
+            description: >-
+              <p>Creation cost is at least 3 × the material components of the
+              spell itself.</p>
+            type: description
         materialCost: >-
           <p>Creation cost is at least 3 × the material components of the spell
           itself.</p>
-        mp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
+        primary:
+          hp:
+            description: >-
+              <p>Creation cost is at least 3 × @L[Core:HP]{HP} of the spell
+              itself.</p>
+            type: description
+          mp:
+            description: >-
               <p>Creation cost is at least 1 @L[Core:MP]{MP} per @L[Core:Elder
               Sorcery]{OP} of <i>each</i> word in the spell plus 3 ×
               @L[Core:MP]{MP} of the spell itself.</p>
+            type: description
       delivery:
         base: sight
         package: ritual
@@ -561,7 +567,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       identifier: elder-sorcery-creation
       interaction: manifest
       maneuver: slow
@@ -605,7 +610,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/resist-effects.webp
     name: Resist Effects
     system:
@@ -643,10 +648,10 @@ effects:
       competence:
         raw: 0
       costs:
-        mp:
-          type: static
-          value:
-            static: 1
+        primary:
+          mp:
+            formula: '1'
+            type: formula
       delivery:
         base: self
       duration:
@@ -665,7 +670,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       identifier: resist-effects
       interaction: manifest
       maneuver: active
@@ -699,7 +703,7 @@ effects:
       powerSources:
         - magical
       range:
-        unit: self
+        unit: melee
       revealed: true
       rotator: true
       spell: true
@@ -715,7 +719,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/shock-touch.webp
     name: Shock Touch
     system:
@@ -798,8 +802,11 @@ effects:
       competence:
         raw: 0
       costs:
-        somatic: true
-        verbal: true
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
       delivery:
         base: hand
         package: touch
@@ -822,7 +829,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/damage 1d4[magic ice]]] @L[Core:Damage]{damage}  as well.</p>
@@ -853,7 +859,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/spell-trigger.webp
     name: Spell Trigger
     system:
@@ -862,8 +868,11 @@ effects:
       competence:
         raw: 0
       costs:
-        somatic: true
-        verbal: true
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
       delivery:
         base: self
       duration:
@@ -880,7 +889,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       identifier: spell-trigger
       interaction: manifest
       invoked: true
@@ -895,7 +903,7 @@ effects:
       powerSources:
         - magical
       range:
-        unit: self
+        unit: melee
       revealed: true
       rotator: true
       spell: true
@@ -911,7 +919,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/storm-elder-sorcery.webp
     name: Storm Elder Sorcery
     system:
@@ -932,7 +940,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: storm-elder-sorcery
       interaction: manifest
       maneuver: passive
@@ -947,7 +954,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       skill: true
       targets:
@@ -960,7 +967,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/storm-elder-sorcery-words.webp
     name: Storm Elder Sorcery Words
     system:
@@ -985,7 +992,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       identifier: storm-elder-sorcery-words
       interaction: manifest
       maneuver: passive
@@ -1029,7 +1035,7 @@ effects:
       powerSources:
         - magical
       range:
-        unit: self
+        unit: melee
       revealed: true
       skill: true
       targets:
@@ -1042,7 +1048,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/storm-rotators.webp
     name: Storm Rotators
     system:
@@ -1124,7 +1130,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: storm-rotators
       interaction: manifest
       maneuver: passive
@@ -1160,7 +1165,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       skill: true
       targets:

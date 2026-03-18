@@ -4,7 +4,7 @@ _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.35
+  systemVersion: 0.10.50
 effects:
   - _id: b0bcfcca93a41eab
     _key: '!items.effects!b0bcfcca93a41eab.b0bcfcca93a41eab'
@@ -12,7 +12,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/disable-ray.webp
     name: Disable Ray
     system:
@@ -44,15 +44,14 @@ effects:
       competence:
         raw: 0
       costs:
-        mp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
+        primary:
+          mp:
+            description: >-
               <p>This costs 0 @L[Core:Hit Points and Mana Points]{MP} if the
               triggering @L[Category:Abilities]{ability} was used on you or some
               @L[Category:Equipment]{equipment} you @L[Keyword:Bearing]{bear}.
               It costs 1 @L[Core:Hit Points and Mana Points]{MP} otherwise.</p>
+            type: description
       delivery:
         base: missile
         package: ray
@@ -71,7 +70,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: disable-ray
       interaction: attack
       maneuver: reactive

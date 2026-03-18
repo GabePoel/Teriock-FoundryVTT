@@ -15,7 +15,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     effects:
       - _id: s8YD16Kef53pRjfV
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/animate-dead.webp
         name: Animate Dead
         system:
@@ -33,12 +33,15 @@ items:
           competence:
             raw: 0
           costs:
-            mp:
-              type: static
-              value:
-                static: 1
-            somatic: true
-            verbal: true
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
+            primary:
+              mp:
+                formula: '1'
+                type: formula
           delivery: hand
           duration:
             raw: '0'
@@ -57,7 +60,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: animate-dead
           interaction: attack
           invoked: true
@@ -100,7 +102,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/constructed-body.webp
         name: Constructed Body
         system:
@@ -134,7 +136,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: constructed-body
           interaction: manifest
           maneuver: passive
@@ -173,7 +174,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -186,7 +187,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/death-rattle.webp
         name: Death Rattle
         system:
@@ -194,8 +195,11 @@ items:
           competence:
             raw: 0
           costs:
-            somatic: true
-            verbal: true
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
           delivery: self
           duration:
             raw: '0'
@@ -212,7 +216,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: death-rattle
           interaction: manifest
           invoked: true
@@ -227,7 +230,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           rotator: true
           spell: true
@@ -244,7 +247,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/ethereal-senses.webp
         name: Ethereal Senses
         system:
@@ -291,7 +294,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: ethereal-senses
           interaction: manifest
           maneuver: passive
@@ -306,7 +308,7 @@ items:
             - spiritual
             - primal
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -319,7 +321,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/greater-undead.webp
         name: Greater Undead
         system:
@@ -341,7 +343,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: greater-undead
           interaction: manifest
           maneuver: passive
@@ -361,7 +362,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -374,7 +375,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
         name: Healing Sensitivity
         system:
@@ -397,7 +398,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: flaw
-          grantOnly: false
           identifier: healing-sensitivity
           interaction: manifest
           maneuver: passive
@@ -415,7 +415,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -428,7 +428,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/magical-durability.webp
         name: Magical Durability
         system:
@@ -473,7 +473,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: magical-durability
           interaction: manifest
           maneuver: passive
@@ -486,7 +485,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -499,7 +498,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/mana-drain-touch.webp
         name: Mana Drain Touch
         system:
@@ -549,7 +548,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: mana-drain-touch
           interaction: attack
           maneuver: active
@@ -587,7 +585,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/normal-intelligence.webp
         name: Normal Intelligence
         system:
@@ -607,7 +605,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: normal-intelligence
           interaction: manifest
           maneuver: passive
@@ -616,7 +613,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -633,7 +630,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
@@ -653,7 +650,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: normal-movement
           interaction: manifest
           maneuver: passive
@@ -662,7 +658,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -679,7 +675,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
@@ -699,7 +695,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: normal-perception
           interaction: manifest
           maneuver: passive
@@ -708,7 +703,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -725,7 +720,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/normal-sneak.webp
         name: Normal Sneak
         system:
@@ -745,7 +740,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: normal-sneak
           interaction: manifest
           maneuver: passive
@@ -754,7 +748,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -771,7 +765,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/normal-strength.webp
         name: Normal Strength
         system:
@@ -791,7 +785,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: normal-strength
           interaction: manifest
           maneuver: passive
@@ -800,7 +793,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -817,7 +810,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/undead-mind.webp
         name: Undead Mind
         system:
@@ -871,7 +864,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: undead-mind
           interaction: manifest
           maneuver: passive
@@ -886,7 +878,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -899,7 +891,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/undying-durability.webp
         name: Undying Durability
         system:
@@ -960,7 +952,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: undying-durability
           interaction: manifest
           maneuver: passive
@@ -980,7 +971,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -989,7 +980,6 @@ items:
     img: systems/teriock/src/icons/creatures/superior-cemerai.webp
     name: Superior Cemerai
     system:
-      adult: 0
       appearance: >-
         <p>Complete suits of armor with full helm, walking around, with empty
         black voids where a face should be.</p>
@@ -1003,21 +993,16 @@ items:
         way.</p>
       identifier: superior-cemerai
       innateRanks: <p>Innately @L[Category:Classes]{rank} 4 @L[Class:Duelist]{Duelist}.</p>
-      lifespan: 0
       size:
         enabled: true
         value: 3
       statDice:
         hp:
           disabled: false
-          faces: 10
-          number:
-            raw: '4'
+          formula: 4d10
         mp:
           disabled: false
-          faces: 10
-          number:
-            raw: '1'
+          formula: 1d10
       traits:
         - undead
         - construct
@@ -1029,7 +1014,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     effects:
       - _id: FAUPXdLk1A1fD0k8
         _key: >-
@@ -1039,7 +1024,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -1061,7 +1046,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -1082,7 +1067,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/properties/prehensile.webp
         name: Prehensile
         system:
@@ -1103,7 +1088,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -1145,7 +1130,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     effects:
       - _id: azq2YepcyMcJsrp2
         _key: >-
@@ -1155,7 +1140,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/active-bow-out.webp
         name: Active Bow Out
         system:
@@ -1192,7 +1177,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: active-bow-out
           interaction: manifest
           maneuver: active
@@ -1210,7 +1194,7 @@ items:
           powerSources:
             - spiritual
           range:
-            unit: self
+            unit: melee
           revealed: true
           skill: true
           standard: true
@@ -1225,7 +1209,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/bow-out.webp
         name: Bow Out
         system:
@@ -1246,7 +1230,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: bow-out
           interaction: manifest
           maneuver: passive
@@ -1259,7 +1242,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           skill: true
           standard: true
@@ -1274,7 +1257,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/chi-strike.webp
         name: Chi Strike
         system:
@@ -1296,10 +1279,10 @@ items:
           competence:
             raw: 0
           costs:
-            mp:
-              type: static
-              value:
-                static: 1
+            primary:
+              mp:
+                formula: '1'
+                type: formula
           delivery: weapon
           duration:
             raw: '0'
@@ -1316,7 +1299,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: chi-strike
           interaction: attack
           limitation: >-
@@ -1364,7 +1346,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/dueling-techniques.webp
         name: Dueling Techniques
         system:
@@ -1372,7 +1354,9 @@ items:
           competence:
             raw: 0
           costs:
-            somatic: true
+            components:
+              somatic:
+                type: tag
           delivery: self
           duration:
             conditions:
@@ -1391,7 +1375,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: dueling-techniques
           interaction: manifest
           maneuver: active
@@ -1407,7 +1390,7 @@ items:
           powerSources:
             - spiritual
           range:
-            unit: self
+            unit: melee
           requirements: >-
             <p>You must be @L[Condition:Dueling]{dueling} and wielding the
             targeted weapon.</p>
@@ -1425,7 +1408,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/reactive-bow-out.webp
         name: Reactive Bow Out
         system:
@@ -1447,7 +1430,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: reactive-bow-out
           interaction: manifest
           maneuver: reactive
@@ -1463,7 +1445,7 @@ items:
           powerSources:
             - spiritual
           range:
-            unit: self
+            unit: melee
           revealed: true
           skill: true
           standard: true
@@ -1482,7 +1464,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/tea-ceremony.webp
         name: Tea Ceremony
         system:
@@ -1490,14 +1472,13 @@ items:
           competence:
             raw: 0
           costs:
-            mp:
-              type: variable
-              value:
-                static: 0
-                variable: >-
+            primary:
+              mp:
+                description: >-
                   <p>2 MP per participant. Each participant must pay at least 1
                   MP. After that, the remaining cost of may be paid in any
                   combination by any of the participants.</p>
+                type: description
           delivery: sight
           duration:
             raw: '24'
@@ -1515,7 +1496,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: tea-ceremony
           interaction: manifest
           maneuver: slow
@@ -1591,14 +1571,10 @@ items:
       statDice:
         hp:
           disabled: false
-          faces: 12
-          number:
-            raw: '1'
+          formula: 1d12
         mp:
           disabled: false
-          faces: 8
-          number:
-            raw: '1'
+          formula: 1d8
     type: rank
   - _id: 2wc7vk29VUbTTFZG
     _key: '!actors.items!d3672cafa9fd70c4.2wc7vk29VUbTTFZG'
@@ -1607,7 +1583,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     effects:
       - _id: ygSqYQJfPOv9a0Fr
         _key: >-
@@ -1617,7 +1593,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         flags:
           teriock:
             category: combat
@@ -1663,7 +1639,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: final-fury
           interaction: manifest
           maneuver: passive
@@ -1680,7 +1655,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           skill: true
           standard: true
@@ -1695,7 +1670,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         flags:
           teriock:
             category: support
@@ -1721,7 +1696,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: hara-kiri
           interaction: manifest
           maneuver: slow
@@ -1784,14 +1758,10 @@ items:
       statDice:
         hp:
           disabled: false
-          faces: 12
-          number:
-            raw: '1'
+          formula: 1d12
         mp:
           disabled: false
-          faces: 8
-          number:
-            raw: '1'
+          formula: 1d8
     type: rank
   - _id: TeAxF9wGVKkm8DYS
     _key: '!actors.items!d3672cafa9fd70c4.TeAxF9wGVKkm8DYS'
@@ -1800,7 +1770,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     effects:
       - _id: QxDyN7VLtCaq1ppD
         _key: >-
@@ -1810,7 +1780,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         flags:
           teriock:
             category: support
@@ -1835,7 +1805,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: clan-fealty
           interaction: manifest
           maneuver: passive
@@ -1856,7 +1825,7 @@ items:
               Ceremony} is @L[Keyword:Warded]{warded} on those you have declared
               fealty to and costs one less @L[Core:Hit Points and Mana
               Points]{MP} per participant you've declared fealty
-              to.</li></ul><div style="padding:0em"></div>
+              to.</li></ul><div style="padding: 0em;"></div>
             fluent: >-
               <p>You may declare "fealty" to up to @L[Core:Fluency Bonus]{F}
               groups or individuals.</p>
@@ -1868,7 +1837,7 @@ items:
           powerSources:
             - spiritual
           range:
-            unit: self
+            unit: melee
           revealed: true
           skill: true
           standard: true
@@ -1883,7 +1852,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         flags:
           teriock:
             category: combat
@@ -1925,10 +1894,10 @@ items:
           competence:
             raw: 0
           costs:
-            mp:
-              type: static
-              value:
-                static: 1
+            primary:
+              mp:
+                formula: '1'
+                type: formula
           delivery: sight
           duration:
             raw: '0'
@@ -1943,7 +1912,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: duel-swap
           interaction: manifest
           maneuver: active
@@ -1998,14 +1966,10 @@ items:
       statDice:
         hp:
           disabled: false
-          faces: 12
-          number:
-            raw: '1'
+          formula: 1d12
         mp:
           disabled: false
-          faces: 8
-          number:
-            raw: '1'
+          formula: 1d8
     type: rank
   - _id: VM1M7GMDShdOHq2U
     _key: '!actors.items!d3672cafa9fd70c4.VM1M7GMDShdOHq2U'
@@ -2014,7 +1978,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     folder: 0b00935e53673daa
     img: systems/teriock/src/icons/equipment/full-plate.webp
     name: Full Plate
@@ -2058,7 +2022,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     effects:
       - _id: LwntE76DWV8LsMYk
         _key: >-
@@ -2068,7 +2032,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -2090,7 +2054,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -2132,7 +2096,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     effects:
       - _id: Uz1hvRPju7UkGtEK
         _key: >-
@@ -2142,7 +2106,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/defy-death.webp
         name: Defy Death
         system:
@@ -2193,7 +2157,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: defy-death
           interaction: manifest
           maneuver: reactive
@@ -2204,7 +2167,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           skill: true
           standard: true
@@ -2221,7 +2184,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/detect-lie.webp
         name: Detect Lie
         system:
@@ -2230,10 +2193,10 @@ items:
           competence:
             raw: 0
           costs:
-            mp:
-              type: static
-              value:
-                static: 1
+            primary:
+              mp:
+                formula: '1'
+                type: formula
           delivery: sight
           duration:
             raw: '0'
@@ -2250,7 +2213,6 @@ items:
               unit: self
           featSaveAttribute: snk
           form: normal
-          grantOnly: false
           identifier: detect-lie
           interaction: feat
           maneuver: reactive
@@ -2287,7 +2249,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/duel.webp
         name: Duel
         system:
@@ -2326,13 +2288,6 @@ items:
               target: false
               type: status
             6f7374b1f63be8d9:
-              _id: 6f7374b1f63be8d9
-              competencies:
-                - 1
-                - 2
-              heighten:
-                - 1
-                - 0
               type: useAbilities
             747b3e9c9b617af6:
               _id: 747b3e9c9b617af6
@@ -2391,7 +2346,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: duel
           interaction: manifest
           maneuver: active
@@ -2435,7 +2389,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/resolve-conflict.webp
         name: Resolve Conflict
         system:
@@ -2478,7 +2432,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: resolve-conflict
           interaction: manifest
           maneuver: passive
@@ -2492,7 +2445,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           skill: true
           standard: true
@@ -2524,33 +2477,29 @@ items:
       statDice:
         hp:
           disabled: false
-          faces: 12
-          number:
-            raw: '1'
+          formula: 1d12
         mp:
           disabled: false
-          faces: 8
-          number:
-            raw: '1'
+          formula: 1d8
     type: rank
-  - _id: CmF7H8gPFdxVajGw
-    _key: '!actors.items!d3672cafa9fd70c4.CmF7H8gPFdxVajGw'
+  - _id: BRLl4Nij5xSq1vtp
+    _key: '!actors.items!d3672cafa9fd70c4.BRLl4Nij5xSq1vtp'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.380dac2710b593e9
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     effects:
       - _id: 4tKZWhHPGEJoR7dR
         _key: >-
-          !actors.items.effects!d3672cafa9fd70c4.CmF7H8gPFdxVajGw.4tKZWhHPGEJoR7dR
+          !actors.items.effects!d3672cafa9fd70c4.BRLl4Nij5xSq1vtp.4tKZWhHPGEJoR7dR
         _stats:
           compendiumSource: Compendium.teriock.abilities.Item.9713dc6aaadc794a
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/defensive-martial-arts.webp
         name: Defensive Martial Arts
         system:
@@ -2632,7 +2581,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: defensive-martial-arts
           interaction: manifest
           limitation: <p>While wearing @L[Category:Armor]{armor} only.</p>
@@ -2655,7 +2603,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           skill: true
           standard: true
@@ -2664,13 +2612,13 @@ items:
         type: ability
       - _id: 8e9roKoeCSmTjbbo
         _key: >-
-          !actors.items.effects!d3672cafa9fd70c4.CmF7H8gPFdxVajGw.8e9roKoeCSmTjbbo
+          !actors.items.effects!d3672cafa9fd70c4.BRLl4Nij5xSq1vtp.8e9roKoeCSmTjbbo
         _stats:
           compendiumSource: Compendium.teriock.abilities.Item.d97a0e2c8e3d8730
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/warrior-techniques.webp
         name: Warrior Techniques
         system:
@@ -2690,7 +2638,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: warrior-techniques
           interaction: manifest
           maneuver: passive
@@ -2706,7 +2653,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           skill: true
           standard: true

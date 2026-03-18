@@ -4,7 +4,7 @@ _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.35
+  systemVersion: 0.10.50
 effects:
   - _id: fce794f1196ae28c
     _key: '!items.effects!fce794f1196ae28c.fce794f1196ae28c'
@@ -12,7 +12,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/disenchant.webp
     name: Disenchant
     system:
@@ -37,20 +37,17 @@ effects:
       competence:
         raw: 0
       costs:
-        hp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
+        primary:
+          hp:
+            description: >-
               <p>An amount of @L[Core:Hit Points and Mana Points]{HP} equal to
               the [[/tc priest]]{priest check's} DC. Paid only on failure.</p>
-        mp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
+            type: description
+          mp:
+            description: >-
               <p>An amount of @L[Core:Hit Points and Mana Points]{MP} equal to
               the [[/tc priest]]{priest check's} DC. Paid only on failure.</p>
+            type: description
       delivery:
         base: sight
         package: ritual
@@ -68,7 +65,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: disenchant
       interaction: manifest
       maneuver: slow

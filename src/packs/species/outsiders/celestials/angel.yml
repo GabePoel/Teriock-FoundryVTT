@@ -4,7 +4,7 @@ _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.23
+  systemVersion: 0.10.50
 effects:
   - _id: lw1Mqe1tNXW7aJft
     _key: '!items.effects!5b9492d85a54e38a.lw1Mqe1tNXW7aJft'
@@ -13,7 +13,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/beastly-strength.webp
     name: Beastly Strength
     system:
@@ -35,7 +35,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: beastly-strength
       interaction: manifest
       maneuver: passive
@@ -50,7 +49,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       skill: true
       standard: true
@@ -68,7 +67,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/bless.webp
     name: Bless
     system:
@@ -76,26 +75,30 @@ effects:
       competence:
         raw: 0
       costs:
-        hp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
-              <p>You may sacrifice any amount of health as a part of this
-              ritual.</p>
-        material: true
+        components:
+          material:
+            description: >-
+              <p>You may sacrifice any material components as a part of this
+              ritual, but you must have a symbol of your deity present.</p>
+            type: description
+          somatic:
+            type: tag
+          verbal:
+            type: tag
         materialCost: >-
           <p>You may sacrifice any material components as a part of this ritual,
           but you must have a symbol of your deity present.</p>
-        mp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
+        primary:
+          hp:
+            description: >-
+              <p>You may sacrifice any amount of health as a part of this
+              ritual.</p>
+            type: description
+          mp:
+            description: >-
               <p>You may sacrifice any amount of mana as a part of this
               ritual.</p>
-        somatic: true
-        verbal: true
+            type: description
       delivery:
         base: sight
         package: ritual
@@ -113,7 +116,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: bless
       interaction: manifest
       maneuver: slow
@@ -157,7 +159,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/divine-gift.webp
     name: Divine Gift
     system:
@@ -165,26 +167,30 @@ effects:
       competence:
         raw: 0
       costs:
-        hp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
-              <p>You may sacrifice any amount of health as a part of this
-              ritual.</p>
-        material: true
+        components:
+          material:
+            description: >-
+              <p>You may sacrifice any material components as a part of this
+              ritual, but you must have a symbol of your deity present.</p>
+            type: description
+          somatic:
+            type: tag
+          verbal:
+            type: tag
         materialCost: >-
           <p>You may sacrifice any material components as a part of this ritual,
           but you must have a symbol of your deity present.</p>
-        mp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
+        primary:
+          hp:
+            description: >-
+              <p>You may sacrifice any amount of health as a part of this
+              ritual.</p>
+            type: description
+          mp:
+            description: >-
               <p>You may sacrifice any amount of mana as a part of this
               ritual.</p>
-        somatic: true
-        verbal: true
+            type: description
       delivery:
         base: sight
         package: ritual
@@ -202,7 +208,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: divine-gift
       interaction: manifest
       maneuver: slow
@@ -255,7 +260,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/extreme-intelligence.webp
     name: Extreme Intelligence
     system:
@@ -275,7 +280,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       identifier: extreme-intelligence
       interaction: manifest
       maneuver: passive
@@ -284,7 +288,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       targets:
         - self
@@ -300,7 +304,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/flying.webp
     name: Flying
     system:
@@ -365,7 +369,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: flying
       interaction: manifest
       maneuver: passive
@@ -377,7 +380,7 @@ effects:
       powerSources:
         - magical
       range:
-        unit: self
+        unit: melee
       revealed: true
       skill: true
       standard: true
@@ -391,7 +394,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/giant-strength.webp
     name: Giant Strength
     system:
@@ -412,7 +415,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: giant-strength
       interaction: manifest
       maneuver: passive
@@ -427,7 +429,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       skill: true
       standard: true
@@ -445,7 +447,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
     name: Improved Armor Piercing
     system:
@@ -467,7 +469,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: improved-armor-piercing
       interaction: manifest
       maneuver: passive
@@ -480,7 +481,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       skill: true
       standard: true
@@ -494,7 +495,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/improved-strength.webp
     name: Improved Strength
     system:
@@ -516,7 +517,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: improved-strength
       interaction: manifest
       maneuver: passive
@@ -529,7 +529,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       skill: true
       standard: true
@@ -547,7 +547,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/instant-ethereal.webp
     name: Instant Ethereal
     system:
@@ -587,7 +587,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       identifier: instant-ethereal
       interaction: manifest
       maneuver: active
@@ -600,7 +599,7 @@ effects:
       powerSources:
         - magical
       range:
-        unit: self
+        unit: melee
       revealed: true
       targets:
         - self
@@ -612,7 +611,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/jumpstart-heal.webp
     name: Jumpstart Heal
     system:
@@ -646,7 +645,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: jumpstart-heal
       interaction: attack
       maneuver: active
@@ -671,7 +669,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/magical-durability.webp
     name: Magical Durability
     system:
@@ -715,7 +713,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       identifier: magical-durability
       interaction: manifest
       maneuver: passive
@@ -728,7 +725,7 @@ effects:
       powerSources:
         - magical
       range:
-        unit: self
+        unit: melee
       revealed: true
       targets:
         - self
@@ -740,7 +737,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
     name: Melee Damage Boost
     system:
@@ -764,7 +761,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: melee-damage-boost
       interaction: manifest
       maneuver: reactive
@@ -799,7 +795,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/normal-movement.webp
     name: Normal Movement
     system:
@@ -819,7 +815,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: normal-movement
       interaction: manifest
       maneuver: passive
@@ -828,7 +823,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       targets:
         - self
@@ -844,7 +839,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/normal-perception.webp
     name: Normal Perception
     system:
@@ -864,7 +859,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: normal-perception
       interaction: manifest
       maneuver: passive
@@ -873,7 +867,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       targets:
         - self
@@ -889,7 +883,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/normal-sneak.webp
     name: Normal Sneak
     system:
@@ -909,7 +903,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: normal-sneak
       interaction: manifest
       maneuver: passive
@@ -918,7 +911,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       targets:
         - self
@@ -934,7 +927,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/outsider-mana-regenerating.webp
     name: Outsider Mana Regenerating
     system:
@@ -985,7 +978,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       identifier: outsider-mana-regenerating
       interaction: manifest
       limitation: >-
@@ -1009,7 +1001,7 @@ effects:
       powerSources:
         - magical
       range:
-        unit: self
+        unit: melee
       revealed: true
       targets:
         - self
@@ -1021,7 +1013,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/outsider-regenerating.webp
     name: Outsider Regenerating
     system:
@@ -1073,7 +1065,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       identifier: outsider-regenerating
       interaction: manifest
       maneuver: passive
@@ -1094,7 +1085,7 @@ effects:
       powerSources:
         - magical
       range:
-        unit: self
+        unit: melee
       revealed: true
       targets:
         - self
@@ -1106,7 +1097,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/rebirth.webp
     name: Rebirth
     system:
@@ -1141,12 +1132,15 @@ effects:
       competence:
         raw: 0
       costs:
-        mp:
-          type: static
-          value:
-            static: 1
-        somatic: true
-        verbal: true
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+        primary:
+          mp:
+            formula: '1'
+            type: formula
       delivery:
         base: hand
       duration:
@@ -1166,7 +1160,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, target can have been
         @L[Condition:Dead]{dead} for an additional 10 minutes. If target is
@@ -1221,7 +1214,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/shattering-armor.webp
     name: Shattering Armor
     system:
@@ -1256,7 +1249,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: shattering-armor
       interaction: block
       maneuver: reactive
@@ -1289,7 +1281,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/spell-turning-shields.webp
     name: Spell Turning Shields
     system:
@@ -1353,7 +1345,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: spell-turning-shields
       interaction: manifest
       maneuver: passive
@@ -1366,7 +1357,7 @@ effects:
       powerSources:
         - divine
       range:
-        unit: self
+        unit: melee
       revealed: true
       skill: true
       standard: true

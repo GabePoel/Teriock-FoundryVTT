@@ -4,7 +4,7 @@ _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.35
+  systemVersion: 0.10.50
 effects:
   - _id: 6d19482b52be9671
     _key: '!items.effects!6d19482b52be9671.6d19482b52be9671'
@@ -12,7 +12,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/debtor-hunter.webp
     name: Debtor Hunter
     system:
@@ -20,14 +20,19 @@ effects:
       competence:
         raw: 0
       costs:
-        material: true
+        components:
+          material:
+            description: >-
+              <p>Something symbolic of your deity. A contract of a debt of the
+              same type as the one violated by the creature being summoned.</p>
+            type: description
         materialCost: >-
           <p>Something symbolic of your deity. A contract of a debt of the same
           type as the one violated by the creature being summoned.</p>
-        mp:
-          type: static
-          value:
-            static: 1
+        primary:
+          mp:
+            formula: '1'
+            type: formula
       delivery:
         base: self
         package: ritual
@@ -47,7 +52,6 @@ effects:
           unit: self
       featSaveAttribute: unp
       form: normal
-      grantOnly: false
       identifier: debtor-hunter
       interaction: feat
       maneuver: slow
@@ -81,7 +85,7 @@ effects:
         - financial
       range:
         raw: 10 Miles
-        unit: self
+        unit: ft
       requirements: >-
         <p>Target must be behind on paying a debt to you or an entity you
         represent.</p>

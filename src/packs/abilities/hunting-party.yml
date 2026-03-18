@@ -4,7 +4,7 @@ _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.35
+  systemVersion: 0.10.50
 effects:
   - _id: 4a062a304b141fc0
     _key: '!items.effects!4a062a304b141fc0.4a062a304b141fc0'
@@ -12,10 +12,24 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/hunting-party.webp
     name: Hunting Party
     system:
+      automations:
+        4f1206090ee146b3:
+          _id: 4f1206090ee146b3
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          macro: Compendium.teriock.execution.Macro.UqkWyQDB563ezNf8
+          relation: trigger
+          trigger: preExecution
+          type: abilityMacro
       class: ranger
       competence:
         raw: 0
@@ -33,7 +47,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: hunting-party
       interaction: manifest
       maneuver: slow
@@ -54,7 +67,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       requirements: <p>You are not @L[Core:Sustained]{sustaining} [[lookup name]].</p>
       revealed: true
       skill: true
@@ -70,7 +83,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/flanking.webp
     name: Flanking
     system:
@@ -91,12 +104,11 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: flanking
       interaction: manifest
       limitation: >-
         <p>You only get the benefits of [[lookup name]] against creatures of the
-        species you chose.</p>
+        chosen species.</p>
       maneuver: passive
       overview:
         base: >-
@@ -108,10 +120,127 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       targets:
         - self
+    type: ability
+  - _id: NovXBW2RZRbE4oPg
+    _key: '!items.effects!4a062a304b141fc0.NovXBW2RZRbE4oPg'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.6f1e35c05a5589d6
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.10.50
+    img: systems/teriock/src/icons/abilities/snare.webp
+    name: Snare
+    system:
+      _sup: 4a062a304b141fc0
+      automations:
+        5d57231066693cee:
+          _id: 5d57231066693cee
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          executor: false
+          heighten:
+            - 1
+            - 0
+          relation: include
+          status: snared
+          target: false
+          type: status
+        d5717000e99ee582:
+          _id: d5717000e99ee582
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: combatExpiration
+          what:
+            roll: 2d4kh1
+            threshold: 4
+            type: rolled
+          when:
+            skip: 1
+            time: end
+            trigger: turn
+          who:
+            type: target
+        d635eb44dba086dd:
+          _id: d635eb44dba086dd
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+          heighten:
+            - 1
+            - 0
+          type: combatExpiration
+          what:
+            roll: 2d4kh1
+            threshold: 4
+            type: rolled
+          when:
+            skip: 0
+            time: end
+            trigger: turn
+          who:
+            type: target
+      class: ranger
+      competence:
+        raw: 0
+      costs:
+        tweaks:
+          gifted: 1
+      delivery: weapon
+      duration:
+        raw: '0'
+        unit: unlimited
+      endCondition: >-
+        <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
+        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+      executionTime:
+        base: a1
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: snare
+      interaction: attack
+      limitation: <p>You can only use [[lookup name]] against the chosen species.</p>
+      maneuver: active
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        raw: Your Weapon's Range
+        unit: ft
+      results:
+        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
+        hit: <p>Target is @L[Condition:Snared]{snared}.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - leg
     type: ability
 img: systems/teriock/src/icons/abilities/hunting-party.webp
 name: Hunting Party

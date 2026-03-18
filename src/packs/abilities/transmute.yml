@@ -4,7 +4,7 @@ _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.35
+  systemVersion: 0.10.50
 effects:
   - _id: 11a9a31c8fe1cb60
     _key: '!items.effects!11a9a31c8fe1cb60.11a9a31c8fe1cb60'
@@ -12,7 +12,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/transmute.webp
     name: Transmute
     system:
@@ -39,14 +39,13 @@ effects:
       competence:
         raw: 0
       costs:
-        hp:
-          type: hack
-          value:
-            static: 0
-        mp:
-          type: static
-          value:
-            static: 1
+        components:
+          hack:
+            type: tag
+        primary:
+          mp:
+            formula: '1'
+            type: formula
       delivery:
         base: self
       duration:
@@ -65,7 +64,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       identifier: transmute
       interaction: manifest
       maneuver: reactive
@@ -95,7 +93,7 @@ effects:
         - magical
         - primal
       range:
-        unit: self
+        unit: melee
       revealed: true
       rotator: true
       spell: true

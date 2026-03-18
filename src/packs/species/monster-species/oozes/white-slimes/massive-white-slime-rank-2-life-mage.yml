@@ -14,7 +14,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/blessing.webp
     name: Blessing
     system:
@@ -23,12 +23,15 @@ effects:
       competence:
         raw: 0
       costs:
-        mp:
-          type: static
-          value:
-            static: 1
-        somatic: true
-        verbal: true
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+        primary:
+          mp:
+            formula: '1'
+            type: formula
       delivery:
         base: sight
         package: ritual
@@ -48,7 +51,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, you may target 1
         additional creature.</p>
@@ -96,7 +98,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -121,7 +123,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       identifier: celestial-elder-sorcery-words
       interaction: manifest
       maneuver: passive
@@ -216,7 +217,7 @@ effects:
       powerSources:
         - magical
       range:
-        unit: self
+        unit: melee
       revealed: true
       skill: true
       targets:
@@ -229,7 +230,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/crown-of-light.webp
     name: Crown of Light
     system:
@@ -274,10 +275,10 @@ effects:
       competence:
         raw: 0
       costs:
-        mp:
-          type: static
-          value:
-            static: 1
+        primary:
+          mp:
+            formula: '1'
+            type: formula
       delivery:
         base: self
       duration:
@@ -294,7 +295,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       identifier: crown-of-light
       interaction: manifest
       maneuver: active
@@ -308,7 +308,7 @@ effects:
       powerSources:
         - magical
       range:
-        unit: self
+        unit: melee
       revealed: true
       rotator: true
       spell: true
@@ -324,7 +324,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/cure-illness.webp
     name: Cure Illness
     system:
@@ -333,12 +333,15 @@ effects:
       competence:
         raw: 0
       costs:
-        mp:
-          type: static
-          value:
-            static: 1
-        somatic: true
-        verbal: true
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+        primary:
+          mp:
+            formula: '1'
+            type: formula
       delivery:
         base: sight
         package: ritual
@@ -358,7 +361,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, The DC of the check is
         reduced by 1.</p>
@@ -410,7 +412,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -421,25 +423,27 @@ effects:
       competence:
         raw: 0
       costs:
-        hp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
-              <p>Creation cost is at least 3 × @L[Core:HP]{HP} of the spell
-              itself.</p>
-        material: true
+        components:
+          material:
+            description: >-
+              <p>Creation cost is at least 3 × the material components of the
+              spell itself.</p>
+            type: description
         materialCost: >-
           <p>Creation cost is at least 3 × the material components of the spell
           itself.</p>
-        mp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
+        primary:
+          hp:
+            description: >-
+              <p>Creation cost is at least 3 × @L[Core:HP]{HP} of the spell
+              itself.</p>
+            type: description
+          mp:
+            description: >-
               <p>Creation cost is at least 1 @L[Core:MP]{MP} per @L[Core:Elder
               Sorcery]{OP} of <i>each</i> word in the spell plus 3 ×
               @L[Core:MP]{MP} of the spell itself.</p>
+            type: description
       delivery:
         base: sight
         package: ritual
@@ -456,7 +460,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       identifier: elder-sorcery-creation
       interaction: manifest
       maneuver: slow
@@ -500,7 +503,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/glow-of-healing.webp
     name: Glow of Healing
     system:
@@ -509,12 +512,15 @@ effects:
       competence:
         raw: 0
       costs:
-        mp:
-          type: static
-          value:
-            static: 1
-        somatic: true
-        verbal: true
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+        primary:
+          mp:
+            formula: '1'
+            type: formula
       delivery:
         base: sight
         package: ritual
@@ -532,7 +538,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       identifier: glow-of-healing
       interaction: manifest
       invoked: true
@@ -562,7 +567,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/healing-touch.webp
     name: Healing Touch
     system:
@@ -571,8 +576,11 @@ effects:
       competence:
         raw: 0
       costs:
-        somatic: true
-        verbal: true
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
       delivery:
         base: hand
         package: touch
@@ -590,7 +598,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, target is
         @L[Core:Healing]{healed} again at the start of your next
@@ -624,7 +631,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/life-elder-sorcery.webp
     name: Life Elder Sorcery
     system:
@@ -645,7 +652,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: life-elder-sorcery
       interaction: manifest
       maneuver: passive
@@ -660,7 +666,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       skill: true
       targets:
@@ -673,7 +679,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/life-elder-sorcery-words.webp
     name: Life Elder Sorcery Words
     system:
@@ -698,7 +704,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       identifier: life-elder-sorcery-words
       interaction: manifest
       maneuver: passive
@@ -742,7 +747,7 @@ effects:
       powerSources:
         - magical
       range:
-        unit: self
+        unit: melee
       revealed: true
       skill: true
       targets:
@@ -755,7 +760,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/life-rotators.webp
     name: Life Rotators
     system:
@@ -837,7 +842,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: life-rotators
       interaction: manifest
       maneuver: passive
@@ -872,7 +876,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       skill: true
       targets:
@@ -885,7 +889,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/light-aura.webp
     name: Light Aura
     system:
@@ -947,10 +951,10 @@ effects:
       competence:
         raw: 0
       costs:
-        mp:
-          type: static
-          value:
-            static: 1
+        primary:
+          mp:
+            formula: '1'
+            type: formula
       delivery:
         base: aura
       duration:
@@ -970,7 +974,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/damage 1d4[magic holy]]] @L[Core:Damage]{damage}  as well.</p>
@@ -1001,7 +1004,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/light-touch.webp
     name: Light Touch
     system:
@@ -1103,7 +1106,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/damage 1d4[magic holy]]] @L[Core:Damage]{damage}  as well.</p>
@@ -1135,7 +1137,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/rebirth.webp
     name: Rebirth
     system:
@@ -1171,12 +1173,15 @@ effects:
       competence:
         raw: 0
       costs:
-        mp:
-          type: static
-          value:
-            static: 1
-        somatic: true
-        verbal: true
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+        primary:
+          mp:
+            formula: '1'
+            type: formula
       delivery:
         base: hand
       duration:
@@ -1196,7 +1201,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, target can have been
         @L[Condition:Dead]{dead} for an additional 10 minutes. If target is
@@ -1251,7 +1255,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/ward.webp
     name: Ward
     system:
@@ -1260,8 +1264,11 @@ effects:
       competence:
         raw: 0
       costs:
-        somatic: true
-        verbal: true
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
       delivery:
         base: hand
       duration:
@@ -1278,7 +1285,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       identifier: ward
       interaction: attack
       invoked: true

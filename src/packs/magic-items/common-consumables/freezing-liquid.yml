@@ -4,7 +4,7 @@ _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.23
+  systemVersion: 0.10.50
 effects:
   - _id: iYl1sblFlotOhUBe
     _key: '!items.effects!2d956f82dca6786f.iYl1sblFlotOhUBe'
@@ -13,7 +13,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/drink-freezing-liquid.webp
     name: Drink Freezing Liquid
     system:
@@ -33,7 +33,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: drink-freezing-liquid
       interaction: manifest
       maneuver: active
@@ -46,7 +45,7 @@ effects:
       powerSources:
         - alchemical
       range:
-        unit: self
+        unit: melee
       revealed: true
       targets:
         - self
@@ -83,7 +82,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/pour-freezing-liquid.webp
     name: Pour Freezing Liquid
     system:
@@ -130,8 +129,8 @@ effects:
             type: target
       competence:
         raw: 0
+      consumeSource: true
       costs:
-        material: true
         materialCost: >-
           <p>Using this ability consumes the @L[Category:Equipment]{equipment}
           that provides it.</p>
@@ -152,7 +151,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: pour-freezing-liquid
       interaction: attack
       maneuver: active
@@ -163,7 +161,7 @@ effects:
       range:
         unit: melee
       requirements: >-
-        <p>Use this ability by interacting with the
+        <p>Use [[lookup name]] by interacting with the
         @L[Category:Equipment]{equipment} that provides it. That counts as the
         @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
         the ability. Target must be @L[Condition:Down]{down}.</p>
@@ -201,7 +199,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/shock-touch.webp
     name: Shock Touch
     system:
@@ -284,8 +282,11 @@ effects:
       competence:
         raw: 0
       costs:
-        somatic: true
-        verbal: true
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
       delivery:
         base: hand
         package: touch
@@ -308,10 +309,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      gifted:
-        amount: 1
-        enabled: true
-      grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/damage 1d4[magic ice]]] @L[Core:Damage]{damage}  as well.</p>

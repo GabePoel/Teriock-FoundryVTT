@@ -4,7 +4,7 @@ _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.25
+  systemVersion: 0.10.50
 effects:
   - _id: Sp7Dmm386RPsyOSb
     _key: '!items.effects!637b93dd540194ba.Sp7Dmm386RPsyOSb'
@@ -13,7 +13,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/all-elder-sorcery-words.webp
     name: All Elder Sorcery Words
     system:
@@ -41,7 +41,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       identifier: all-elder-sorcery-words
       interaction: manifest
       maneuver: passive
@@ -251,7 +250,7 @@ effects:
       powerSources:
         - magical
       range:
-        unit: self
+        unit: melee
       revealed: true
       targets:
         - self
@@ -263,7 +262,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/battle-cry.webp
     name: Battle Cry
     system:
@@ -285,7 +284,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: battle-cry
       improvement: >-
         <p>You are @L[Keyword:Adept]{adept} at @L[Ability:Battle Cry
@@ -301,7 +299,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       skill: true
       standard: true
@@ -315,7 +313,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
     name: Battle Cry Aura
     system:
@@ -365,7 +363,9 @@ effects:
       competence:
         raw: 0
       costs:
-        verbal: true
+        components:
+          verbal:
+            type: tag
       delivery:
         base: aura
       duration:
@@ -385,7 +385,6 @@ effects:
           unit: self
       featSaveAttribute: int
       form: normal
-      grantOnly: false
       identifier: battle-cry-aura
       interaction: feat
       maneuver: active
@@ -413,7 +412,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
     name: Battle Cry Resistance
     system:
@@ -472,7 +471,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: battle-cry-resistance
       interaction: manifest
       maneuver: active
@@ -485,7 +483,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       skill: true
       standard: true
@@ -499,7 +497,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/battle-roar.webp
     name: Battle Roar
     system:
@@ -519,7 +517,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: battle-roar
       interaction: manifest
       maneuver: passive
@@ -532,7 +529,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       targets:
         - self
@@ -544,7 +541,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/battle-roar-aura.webp
     name: Battle Roar Aura
     system:
@@ -593,7 +590,9 @@ effects:
       competence:
         raw: 0
       costs:
-        verbal: true
+        components:
+          verbal:
+            type: tag
       delivery:
         base: aura
       duration:
@@ -613,7 +612,6 @@ effects:
           unit: self
       featSaveAttribute: int
       form: normal
-      grantOnly: false
       identifier: battle-roar-aura
       interaction: feat
       maneuver: active
@@ -639,7 +637,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/beastly-strength.webp
     name: Beastly Strength
     system:
@@ -661,7 +659,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: beastly-strength
       interaction: manifest
       maneuver: passive
@@ -676,7 +673,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       skill: true
       standard: true
@@ -694,7 +691,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/berserker-adept.webp
     name: Berserker Adept
     system:
@@ -702,14 +699,7 @@ effects:
         e789ed5e109ebd1a:
           _id: e789ed5e109ebd1a
           changes:
-            - key: system.adept.enabled
-              mode: 5
-              priority: 10
-              qualifier: '@class.berserker'
-              target: ability
-              time: normal
-              value: 'true'
-            - key: system.adept.amount
+            - key: system.costs.tweaks.adept
               mode: 4
               priority: 10
               qualifier: '@class.berserker'
@@ -743,7 +733,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       identifier: berserker-adept
       interaction: manifest
       maneuver: passive
@@ -757,7 +746,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       targets:
         - self
@@ -769,7 +758,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/dragon-elder-sorcery.webp
     name: Dragon Elder Sorcery
     system:
@@ -813,7 +802,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       identifier: dragon-elder-sorcery
       interaction: manifest
       maneuver: passive
@@ -847,7 +835,7 @@ effects:
       powerSources:
         - magical
       range:
-        unit: self
+        unit: melee
       revealed: true
       targets:
         - self
@@ -859,7 +847,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/dragon-sight.webp
     name: Dragon Sight
     system:
@@ -903,7 +891,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       identifier: dragon-sight
       interaction: manifest
       maneuver: passive
@@ -916,7 +903,7 @@ effects:
       powerSources:
         - magical
       range:
-        unit: self
+        unit: melee
       revealed: true
       targets:
         - self
@@ -932,7 +919,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/elder-sorcery-adept.webp
     name: Elder Sorcery Adept
     system:
@@ -941,14 +928,7 @@ effects:
         e789ed5e109ebd1a:
           _id: e789ed5e109ebd1a
           changes:
-            - key: system.adept.enabled
-              mode: 4
-              priority: 10
-              qualifier: '@es'
-              target: ability
-              time: normal
-              value: 'true'
-            - key: system.adept.amount
+            - key: system.costs.tweaks.adept
               mode: 4
               priority: 10
               qualifier: '@es'
@@ -982,7 +962,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       identifier: elder-sorcery-adept
       interaction: manifest
       maneuver: passive
@@ -995,7 +974,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       targets:
         - self
@@ -1007,7 +986,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     flags:
       teriock:
         dontConsume: false
@@ -1018,25 +997,27 @@ effects:
       competence:
         raw: 0
       costs:
-        hp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
-              <p>Creation cost is at least 3 × @L[Core:HP]{HP} of the spell
-              itself.</p>
-        material: true
+        components:
+          material:
+            description: >-
+              <p>Creation cost is at least 3 × the material components of the
+              spell itself.</p>
+            type: description
         materialCost: >-
           <p>Creation cost is at least 3 × the material components of the spell
           itself.</p>
-        mp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
+        primary:
+          hp:
+            description: >-
+              <p>Creation cost is at least 3 × @L[Core:HP]{HP} of the spell
+              itself.</p>
+            type: description
+          mp:
+            description: >-
               <p>Creation cost is at least 1 @L[Core:MP]{MP} per @L[Core:Elder
               Sorcery]{OP} of <i>each</i> word in the spell plus 3 ×
               @L[Core:MP]{MP} of the spell itself.</p>
+            type: description
       delivery:
         base: sight
         package: ritual
@@ -1053,7 +1034,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       identifier: elder-sorcery-creation
       interaction: manifest
       maneuver: slow
@@ -1097,7 +1077,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/ethereal-senses.webp
     name: Ethereal Senses
     system:
@@ -1144,7 +1124,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: ethereal-senses
       interaction: manifest
       maneuver: passive
@@ -1159,7 +1138,7 @@ effects:
         - spiritual
         - primal
       range:
-        unit: self
+        unit: melee
       revealed: true
       targets:
         - self
@@ -1171,7 +1150,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/extreme-intelligence.webp
     name: Extreme Intelligence
     system:
@@ -1191,7 +1170,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       identifier: extreme-intelligence
       interaction: manifest
       maneuver: passive
@@ -1200,7 +1178,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       targets:
         - self
@@ -1216,7 +1194,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/flying.webp
     name: Flying
     system:
@@ -1281,7 +1259,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: flying
       interaction: manifest
       maneuver: passive
@@ -1293,7 +1270,7 @@ effects:
       powerSources:
         - magical
       range:
-        unit: self
+        unit: melee
       revealed: true
       skill: true
       standard: true
@@ -1307,7 +1284,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/giant-strength.webp
     name: Giant Strength
     system:
@@ -1329,7 +1306,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: giant-strength
       interaction: manifest
       maneuver: passive
@@ -1344,7 +1320,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       skill: true
       standard: true
@@ -1362,7 +1338,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
     name: Improved Armor Piercing
     system:
@@ -1384,7 +1360,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: improved-armor-piercing
       interaction: manifest
       maneuver: passive
@@ -1397,7 +1372,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       skill: true
       standard: true
@@ -1411,7 +1386,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/improved-healing-factor.webp
     name: Improved Healing Factor
     system:
@@ -1456,7 +1431,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       identifier: improved-healing-factor
       interaction: manifest
       limitation: <p>Only in vicinity of lair.</p>
@@ -1473,7 +1447,7 @@ effects:
       powerSources:
         - primal
       range:
-        unit: self
+        unit: melee
       revealed: true
       targets:
         - self
@@ -1485,7 +1459,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/improved-revitalizing-factor.webp
     name: Improved Revitalizing Factor
     system:
@@ -1528,7 +1502,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       identifier: improved-revitalizing-factor
       interaction: manifest
       limitation: <p>Only in vicinity of lair.</p>
@@ -1544,7 +1517,7 @@ effects:
       powerSources:
         - primal
       range:
-        unit: self
+        unit: melee
       revealed: true
       targets:
         - self
@@ -1556,7 +1529,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/improved-strength.webp
     name: Improved Strength
     system:
@@ -1578,7 +1551,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: improved-strength
       interaction: manifest
       maneuver: passive
@@ -1591,7 +1563,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       skill: true
       standard: true
@@ -1609,7 +1581,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/innate-elder-sorcery.webp
     name: Innate Elder Sorcery
     system:
@@ -1674,7 +1646,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       identifier: innate-elder-sorcery
       interaction: manifest
       maneuver: passive
@@ -1706,7 +1677,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       targets:
         - self
@@ -1718,7 +1689,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/instant-identify-sight.webp
     name: Instant Identify Sight
     system:
@@ -1757,7 +1728,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       identifier: instant-identify-sight
       interaction: manifest
       maneuver: active
@@ -1790,7 +1760,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/iron-dragon-breath.webp
     name: Iron Dragon Breath
     system:
@@ -1838,10 +1808,10 @@ effects:
       competence:
         raw: 0
       costs:
-        mp:
-          type: static
-          value:
-            static: 1
+        primary:
+          mp:
+            formula: '1'
+            type: formula
       delivery:
         base: cone
       duration:
@@ -1858,7 +1828,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/damage 2d10[magic]]] @L[Core:Damage]{damage}. Additionally, the
@@ -1893,7 +1862,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/lumbering.webp
     name: Lumbering
     system:
@@ -1913,7 +1882,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: flaw
-      grantOnly: false
       identifier: lumbering
       interaction: manifest
       maneuver: passive
@@ -1922,7 +1890,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       targets:
         - self
@@ -1938,7 +1906,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
     name: Melee Damage Boost
     system:
@@ -1962,7 +1930,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: melee-damage-boost
       interaction: manifest
       maneuver: reactive
@@ -1997,7 +1964,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/monstrous-strength.webp
     name: Monstrous Strength
     system:
@@ -2046,7 +2013,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       identifier: monstrous-strength
       interaction: manifest
       maneuver: passive
@@ -2061,7 +2027,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       targets:
         - self
@@ -2077,7 +2043,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/night-vision.webp
     name: Night Vision
     system:
@@ -2121,7 +2087,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: night-vision
       interaction: manifest
       maneuver: passive
@@ -2134,7 +2099,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       targets:
         - self
@@ -2146,7 +2111,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/scouting.webp
     name: Scouting
     system:
@@ -2170,7 +2135,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: scouting
       interaction: manifest
       maneuver: passive
@@ -2183,7 +2147,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       skill: true
       standard: true
@@ -2204,7 +2168,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/shattering-armor.webp
     name: Shattering Armor
     system:
@@ -2239,7 +2203,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: shattering-armor
       interaction: block
       maneuver: reactive
@@ -2272,7 +2235,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/shattering-grip.webp
     name: Shattering Grip
     system:
@@ -2293,10 +2256,10 @@ effects:
       competence:
         raw: 0
       costs:
-        mp:
-          type: static
-          value:
-            static: 1
+        primary:
+          mp:
+            formula: '1'
+            type: formula
       delivery:
         base: hand
       duration:
@@ -2313,7 +2276,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: shattering-grip
       interaction: manifest
       maneuver: active
@@ -2337,7 +2299,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/speed.webp
     name: Speed
     system:
@@ -2357,7 +2319,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: speed
       interaction: manifest
       maneuver: passive
@@ -2366,7 +2327,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       targets:
         - self
@@ -2382,7 +2343,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/supernatural-strength.webp
     name: Supernatural Strength
     system:
@@ -2403,7 +2364,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       identifier: supernatural-strength
       interaction: manifest
       maneuver: passive
@@ -2419,7 +2379,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       targets:
         - self
@@ -2435,7 +2395,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/true-sight.webp
     name: True Sight
     system:
@@ -2480,7 +2440,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       identifier: true-sight
       interaction: manifest
       maneuver: passive
@@ -2497,7 +2456,7 @@ effects:
       powerSources:
         - magical
       range:
-        unit: self
+        unit: melee
       revealed: true
       targets:
         - self

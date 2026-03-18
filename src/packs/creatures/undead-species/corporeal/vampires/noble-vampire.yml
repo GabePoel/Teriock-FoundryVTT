@@ -15,7 +15,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     effects:
       - _id: IpFRK1r3qVFnFk7J
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/animate-dead.webp
         name: Animate Dead
         system:
@@ -33,12 +33,15 @@ items:
           competence:
             raw: 0
           costs:
-            mp:
-              type: static
-              value:
-                static: 1
-            somatic: true
-            verbal: true
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
+            primary:
+              mp:
+                formula: '1'
+                type: formula
           delivery: hand
           duration:
             raw: '0'
@@ -57,7 +60,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: animate-dead
           interaction: attack
           invoked: true
@@ -99,7 +101,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/bestial-transformation.webp
         name: Bestial Transformation
         system:
@@ -167,7 +169,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           heightened: >-
             <p>For each additional @L[Core:MP]{MP} spent, the maximum
             @L[Core:BR]{BR} available to you increases by 1.</p>
@@ -192,7 +193,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           rotator: true
           spell: true
@@ -208,7 +209,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/charm.webp
         name: Charm
         system:
@@ -233,10 +234,10 @@ items:
           competence:
             raw: 0
           costs:
-            mp:
-              type: static
-              value:
-                static: 1
+            primary:
+              mp:
+                formula: '1'
+                type: formula
           delivery: hand
           duration:
             raw: '1'
@@ -254,7 +255,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: charm
           improvement: >-
             <p>May have up to 2 × @L[Core:Presence]{PRES} creatures
@@ -285,7 +285,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/duel.webp
         name: Duel
         system:
@@ -389,7 +389,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: duel
           interaction: manifest
           maneuver: active
@@ -433,7 +432,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/ethereal-senses.webp
         name: Ethereal Senses
         system:
@@ -480,7 +479,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: ethereal-senses
           interaction: manifest
           maneuver: passive
@@ -495,7 +493,7 @@ items:
             - spiritual
             - primal
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -508,7 +506,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: icons/skills/social/diplomacy-handshake-blue.webp
         name: Expert Courtier
         system:
@@ -550,7 +548,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: expert-courtier
           interaction: manifest
           maneuver: passive
@@ -563,7 +560,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -576,7 +573,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/flying.webp
         name: Flying
         system:
@@ -641,7 +638,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: flying
           interaction: manifest
           maneuver: passive
@@ -653,7 +649,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           skill: true
           standard: true
@@ -668,7 +664,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/greater-undead.webp
         name: Greater Undead
         system:
@@ -690,7 +686,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: greater-undead
           interaction: manifest
           maneuver: passive
@@ -710,7 +705,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -723,7 +718,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
         name: Healing Sensitivity
         system:
@@ -746,7 +741,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: flaw
-          grantOnly: false
           identifier: healing-sensitivity
           interaction: manifest
           maneuver: passive
@@ -764,7 +758,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -777,7 +771,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: >-
           systems/teriock/src/icons/abilities/increased-running-water-sensitivity.webp
         name: Increased Running Water Sensitivity
@@ -800,7 +794,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: flaw
-          grantOnly: false
           identifier: increased-running-water-sensitivity
           interaction: manifest
           maneuver: passive
@@ -817,7 +810,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -831,7 +824,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: >-
           systems/teriock/src/icons/abilities/increased-sunlight-sensitivity.webp
         name: Increased Sunlight Sensitivity
@@ -854,7 +847,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: flaw
-          grantOnly: false
           identifier: increased-sunlight-sensitivity
           interaction: manifest
           maneuver: passive
@@ -871,7 +863,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -885,7 +877,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/instant-ethereal.webp
         name: Instant Ethereal
         system:
@@ -925,7 +917,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: instant-ethereal
           interaction: manifest
           maneuver: active
@@ -938,7 +929,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -951,7 +942,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/magical-durability.webp
         name: Magical Durability
         system:
@@ -996,7 +987,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: magical-durability
           interaction: manifest
           maneuver: passive
@@ -1009,7 +999,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -1022,7 +1012,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/mana-drain-touch.webp
         name: Mana Drain Touch
         system:
@@ -1072,7 +1062,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: mana-drain-touch
           interaction: attack
           maneuver: active
@@ -1110,7 +1099,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/sentient-feeding.webp
         name: Sentient Feeding
         system:
@@ -1132,7 +1121,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: flaw
-          grantOnly: false
           identifier: sentient-feeding
           interaction: manifest
           maneuver: passive
@@ -1156,7 +1144,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -1169,7 +1157,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/spirit-bury.webp
         name: Spirit Bury
         system:
@@ -1210,8 +1198,11 @@ items:
           competence:
             raw: 0
           costs:
-            somatic: true
-            verbal: true
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
           delivery: hand
           duration:
             raw: '1'
@@ -1228,7 +1219,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           heightened: >-
             <p>For each additional @L[Core:MP]{MP} spent, the duration of this
             effect increases by 1 hour.</p>
@@ -1262,7 +1252,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/undead-mind.webp
         name: Undead Mind
         system:
@@ -1316,7 +1306,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: undead-mind
           interaction: manifest
           maneuver: passive
@@ -1331,7 +1320,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -1344,7 +1333,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/undying-durability.webp
         name: Undying Durability
         system:
@@ -1405,7 +1394,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: undying-durability
           interaction: manifest
           maneuver: passive
@@ -1425,7 +1413,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -1438,17 +1426,17 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/vampiric-infect.webp
         name: Vampiric Infect
         system:
           competence:
             raw: 0
           costs:
-            mp:
-              type: static
-              value:
-                static: 1
+            primary:
+              mp:
+                formula: '1'
+                type: formula
           delivery: bite
           duration:
             raw: '0'
@@ -1466,7 +1454,6 @@ items:
               unit: self
           featSaveAttribute: unp
           form: special
-          grantOnly: false
           identifier: vampiric-infect
           interaction: feat
           maneuver: slow
@@ -1504,7 +1491,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/very-high-intelligence.webp
         name: Very High Intelligence
         system:
@@ -1524,7 +1511,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: very-high-intelligence
           interaction: manifest
           maneuver: passive
@@ -1533,7 +1519,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -1546,7 +1532,6 @@ items:
     img: systems/teriock/src/icons/creatures/noble-vampire.webp
     name: Noble Vampire
     system:
-      adult: 0
       appearance: >-
         <p>Look exactly like their original species and may not even seem
         @L[Category:Undead creatures]{undead}! Usually have pale skin and
@@ -1555,21 +1540,16 @@ items:
       competence:
         raw: 1
       identifier: noble-vampire
-      lifespan: 0
       size:
         enabled: false
         value: 3
       statDice:
         hp:
           disabled: false
-          faces: 10
-          number:
-            raw: '2'
+          formula: 2d10
         mp:
           disabled: false
-          faces: 8
-          number:
-            raw: '2'
+          formula: 2d8
       traits:
         - undead
     type: species
@@ -1580,7 +1560,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     effects:
       - _id: ozGDVg02SHRX2hCr
         _key: >-
@@ -1590,7 +1570,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: icons/creatures/abilities/mouth-teeth-long-red.webp
         name: Biting
         system:
@@ -1611,7 +1591,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:

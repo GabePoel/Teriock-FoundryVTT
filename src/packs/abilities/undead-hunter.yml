@@ -4,7 +4,7 @@ _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.35
+  systemVersion: 0.10.50
 effects:
   - _id: 2a2a9478e75f018e
     _key: '!items.effects!2a2a9478e75f018e.2a2a9478e75f018e'
@@ -12,7 +12,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/undead-hunter.webp
     name: Undead Hunter
     system:
@@ -20,14 +20,19 @@ effects:
       competence:
         raw: 0
       costs:
-        material: true
+        components:
+          material:
+            description: >-
+              <p>Something symbolic of your deity. A piece of the type of undead
+              being summoned.</p>
+            type: description
         materialCost: >-
           <p>Something symbolic of your deity. A piece of the type of undead
           being summoned.</p>
-        mp:
-          type: static
-          value:
-            static: 1
+        primary:
+          mp:
+            formula: '1'
+            type: formula
       delivery:
         base: self
         package: ritual
@@ -47,7 +52,6 @@ effects:
           unit: self
       featSaveAttribute: unp
       form: normal
-      grantOnly: false
       identifier: undead-hunter
       interaction: feat
       maneuver: slow
@@ -80,7 +84,7 @@ effects:
         - divine
       range:
         raw: 10 Miles
-        unit: self
+        unit: ft
       requirements: <p>Target must be @L[Category:Undead creatures]{undead}.</p>
       results:
         fail: >-

@@ -15,7 +15,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     effects:
       - _id: fUBvCxsNgsnH0KL4
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/adrenaline.webp
         name: Adrenaline
         system:
@@ -88,7 +88,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: adrenaline
           interaction: manifest
           maneuver: passive
@@ -105,7 +104,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -118,7 +117,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/beastly-strength.webp
         name: Beastly Strength
         system:
@@ -140,7 +139,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: beastly-strength
           interaction: manifest
           maneuver: passive
@@ -155,7 +153,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           skill: true
           standard: true
@@ -174,7 +172,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/beastly-strength.webp
         name: Beastly Strength
         system:
@@ -196,7 +194,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: beastly-strength
           interaction: manifest
           maneuver: passive
@@ -211,7 +208,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           skill: true
           standard: true
@@ -230,7 +227,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/dense-intelligence.webp
         name: Dense Intelligence
         system:
@@ -250,7 +247,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: flaw
-          grantOnly: false
           identifier: dense-intelligence
           interaction: manifest
           maneuver: passive
@@ -259,7 +255,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -276,7 +272,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/devour.webp
         name: Devour
         system:
@@ -296,7 +292,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: devour
           interaction: attack
           maneuver: active
@@ -326,7 +321,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/endure.webp
         name: Endure
         system:
@@ -349,10 +344,9 @@ items:
           competence:
             raw: 0
           costs:
-            hp:
-              type: hack
-              value:
-                static: 0
+            components:
+              hack:
+                type: tag
           delivery: self
           duration:
             raw: '0'
@@ -369,7 +363,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: endure
           interaction: manifest
           maneuver: reactive
@@ -393,7 +386,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           skill: true
           standard: true
@@ -411,7 +404,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/fire-damage-immunity.webp
         name: Fire Damage Immunity
         system:
@@ -455,7 +448,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: fire-damage-immunity
           interaction: manifest
           maneuver: passive
@@ -468,7 +460,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -481,7 +473,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/flame-magic-adept.webp
         name: Flame Magic Adept
         system:
@@ -489,14 +481,7 @@ items:
             e789ed5e109ebd1a:
               _id: e789ed5e109ebd1a
               changes:
-                - key: system.system.adept.enabled
-                  mode: 4
-                  priority: 10
-                  qualifier: '@element.flame'
-                  target: ability
-                  time: normal
-                  value: 'true'
-                - key: system.system.adept.amount
+                - key: system.costs.tweaks.adept
                   mode: 4
                   priority: 10
                   qualifier: '@element.flame'
@@ -532,7 +517,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: flame-magic-adept
           interaction: manifest
           maneuver: passive
@@ -546,7 +530,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -559,7 +543,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/flying.webp
         name: Flying
         system:
@@ -608,6 +592,9 @@ items:
           class: corsair
           competence:
             raw: 0
+          costs:
+            tweaks:
+              gifted: 1
           delivery: self
           duration:
             raw: '0'
@@ -624,10 +611,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          gifted:
-            amount: 1
-            enabled: true
-          grantOnly: false
           identifier: flying
           interaction: manifest
           maneuver: passive
@@ -639,7 +622,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           skill: true
           standard: true
@@ -654,13 +637,16 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/giant-strength.webp
         name: Giant Strength
         system:
           class: knight
           competence:
             raw: 0
+          costs:
+            tweaks:
+              gifted: 1
           delivery: self
           duration:
             raw: '0'
@@ -675,10 +661,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          gifted:
-            amount: 1
-            enabled: true
-          grantOnly: false
           identifier: giant-strength
           interaction: manifest
           maneuver: passive
@@ -693,7 +675,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           skill: true
           standard: true
@@ -712,7 +694,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/gliding.webp
         name: Gliding
         system:
@@ -756,7 +738,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: gliding
           interaction: manifest
           maneuver: passive
@@ -772,7 +753,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -785,7 +766,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
         name: Improved Armor Piercing
         system:
@@ -807,7 +788,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: improved-armor-piercing
           interaction: manifest
           maneuver: passive
@@ -820,7 +800,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           skill: true
           standard: true
@@ -835,7 +815,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
         name: Improved Armor Piercing
         system:
@@ -857,7 +837,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: improved-armor-piercing
           interaction: manifest
           maneuver: passive
@@ -870,7 +849,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           skill: true
           standard: true
@@ -885,7 +864,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/improved-strength.webp
         name: Improved Strength
         system:
@@ -907,7 +886,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: improved-strength
           interaction: manifest
           maneuver: passive
@@ -920,7 +898,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           skill: true
           standard: true
@@ -939,7 +917,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/improved-strength.webp
         name: Improved Strength
         system:
@@ -960,7 +938,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: improved-strength
           interaction: manifest
           maneuver: passive
@@ -973,7 +950,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           skill: true
           standard: true
@@ -992,13 +969,10 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/inferno-aura.webp
         name: Inferno Aura
         system:
-          adept:
-            amount: 1
-            enabled: true
           automations:
             29b275994cf9f5b1:
               _id: 29b275994cf9f5b1
@@ -1029,12 +1003,17 @@ items:
           competence:
             raw: 0
           costs:
-            mp:
-              type: static
-              value:
-                static: 1
-            somatic: true
-            verbal: true
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
+            primary:
+              mp:
+                formula: '1'
+                type: formula
+            tweaks:
+              adept: 1
           delivery: aura
           duration:
             raw: '0'
@@ -1053,7 +1032,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           heightened: >-
             <p>For each additional @L[Core:MP]{MP} spent, deal an additional
             [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage}.</p>
@@ -1086,7 +1064,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/lumbering.webp
         name: Lumbering
         system:
@@ -1106,7 +1084,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: flaw
-          grantOnly: false
           identifier: lumbering
           interaction: manifest
           maneuver: passive
@@ -1115,7 +1092,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -1132,7 +1109,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
         name: Melee Damage Boost
         system:
@@ -1156,7 +1133,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: melee-damage-boost
           interaction: manifest
           maneuver: reactive
@@ -1193,7 +1169,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/nature-magic-inept.webp
         name: Nature Magic Inept
         system:
@@ -1201,14 +1177,7 @@ items:
             e789ed5e109ebd1a:
               _id: e789ed5e109ebd1a
               changes:
-                - key: system.system.gifted.enabled
-                  mode: 4
-                  priority: 10
-                  qualifier: '@element.nature'
-                  target: ability
-                  time: normal
-                  value: 'true'
-                - key: system.system.gifted.amount
+                - key: system.costs.tweaks.inept
                   mode: 2
                   priority: 10
                   qualifier: '@element.nature'
@@ -1242,7 +1211,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: flaw
-          grantOnly: false
           identifier: nature-magic-inept
           interaction: manifest
           maneuver: passive
@@ -1256,7 +1224,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -1269,7 +1237,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
@@ -1289,7 +1257,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: normal-movement
           interaction: manifest
           maneuver: passive
@@ -1298,7 +1265,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -1315,7 +1282,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
@@ -1335,7 +1302,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: normal-perception
           interaction: manifest
           maneuver: passive
@@ -1344,7 +1310,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -1361,7 +1327,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/regenerating.webp
         name: Regenerating
         system:
@@ -1416,7 +1382,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: regenerating
           interaction: manifest
           maneuver: passive
@@ -1438,7 +1403,7 @@ items:
           powerSources:
             - primal
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -1451,7 +1416,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/withstand.webp
         name: Withstand
         system:
@@ -1473,10 +1438,9 @@ items:
           competence:
             raw: 0
           costs:
-            hp:
-              type: hack
-              value:
-                static: 0
+            components:
+              hack:
+                type: tag
           delivery: self
           duration:
             raw: '0'
@@ -1493,7 +1457,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: withstand
           interaction: manifest
           maneuver: reactive
@@ -1507,7 +1470,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           requirements: <p>You are not @L[Damage:Hack]{body hacked}.</p>
           revealed: true
           skill: true
@@ -1520,7 +1483,6 @@ items:
     img: systems/teriock/src/icons/creatures/mozomatli.webp
     name: Mozomatli
     system:
-      adult: 0
       appearance: >-
         <p>Enormous @L[Creature:Ape]{gorillas} with crusty stone backs and
         volcanic jets bursting from their skin.</p>
@@ -1532,7 +1494,6 @@ items:
         <p>Innately @L[Category:Classes]{rank} 2 @L[Class:Flame Mage]{Flame
         Mage}. Innately @L[Category:Classes]{rank} 2 @L[Class:Nature
         Mage]{Nature Mage}.</p>
-      lifespan: 0
       size:
         enabled: true
         max: 20
@@ -1541,14 +1502,10 @@ items:
       statDice:
         hp:
           disabled: false
-          faces: 10
-          number:
-            raw: '8'
+          formula: 8d10
         mp:
           disabled: false
-          faces: 10
-          number:
-            raw: '2'
+          formula: 2d10
       traits:
         - elemental
         - partialHumanoid
@@ -1562,7 +1519,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     effects:
       - _id: oy1A5zdakXd9Rhxu
         _key: >-
@@ -1572,7 +1529,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/empathic-ray.webp
         name: Empathic Ray
         system:
@@ -1616,11 +1573,10 @@ items:
           competence:
             raw: 0
           costs:
-            hp:
-              type: formula
-              value:
+            primary:
+              hp:
                 formula: 1d4
-                static: 0
+                type: formula
           delivery: missile
           duration:
             raw: '0'
@@ -1641,7 +1597,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           heightened: >-
             <p>For each additional @L[Core:MP]{MP} spent, deal an additional
             [[/damage 1d6[magic]]] or @L[Core:Healing]{heal} the target again
@@ -1656,7 +1611,7 @@ items:
               [[lookup name]] only counts as a @L[Category:Damaging
               effects]{damaging effect} if you choose "damage" and only as a
               @L[Category:Healing effects]{healing effect} if you choose
-              "healing". <br />If you do not take any damage before the start of
+              "healing". <br>If you do not take any damage before the start of
               your next @L[Core:Turns]{turn}, you regain the @L[Core:Hit Points
               and Mana Points]{HP} you spent on [[lookup name]]. This counts as
               a @L[Category:Regeneration effects]{regeneration effect} and a
@@ -1693,7 +1648,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/familiar-bond.webp
         name: Familiar Bond
         system:
@@ -1701,14 +1656,16 @@ items:
           competence:
             raw: 0
           costs:
-            material: true
-            materialCost: >-
-              <p>Something symbolic of the animal you wish to bond with and the
-              relationship you wish to have with it.</p>
-            mp:
-              type: static
-              value:
-                static: 3
+            components:
+              material:
+                description: >-
+                  <p>Something symbolic of the animal you wish to bond with and
+                  the relationship you wish to have with it.</p>
+                type: description
+            primary:
+              mp:
+                formula: '3'
+                type: formula
           delivery: sight
           duration:
             raw: '0'
@@ -1728,7 +1685,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: familiar-bond
           interaction: manifest
           maneuver: slow
@@ -1779,7 +1735,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/oracle.webp
         name: Oracle
         system:
@@ -1787,10 +1743,10 @@ items:
           competence:
             raw: 0
           costs:
-            mp:
-              type: static
-              value:
-                static: 1
+            primary:
+              mp:
+                formula: '1'
+                type: formula
           delivery: self
           duration:
             raw: '0'
@@ -1808,7 +1764,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: oracle
           interaction: manifest
           maneuver: slow
@@ -1843,7 +1798,7 @@ items:
             - divine
           range:
             raw: '5'
-            unit: self
+            unit: ft
           revealed: true
           ritual: true
           spell: true
@@ -1859,7 +1814,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/treeform-ball.webp
         name: Treeform Ball
         system:
@@ -1930,7 +1885,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           heightened: >-
             <p>For each additional @L[Core:MP]{MP} spent, this effect lasts an
             addition turn without the target being able to @L[Ability:Self
@@ -1989,14 +1943,10 @@ items:
       statDice:
         hp:
           disabled: false
-          faces: 8
-          number:
-            raw: '1'
+          formula: 1d8
         mp:
           disabled: false
-          faces: 12
-          number:
-            raw: '1'
+          formula: 1d12
     type: rank
   - _id: JCwSYDOdMTRPNmmB
     _key: '!actors.items!b178f6794385765b.JCwSYDOdMTRPNmmB'
@@ -2005,7 +1955,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     folder: 69c46aee850a3137
     img: systems/teriock/src/icons/body-parts/hardened-hide.webp
     name: Hardened Hide
@@ -2037,7 +1987,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     effects:
       - _id: 1keJAxX1vkfTL8Wl
         _key: >-
@@ -2047,7 +1997,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -2069,7 +2019,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: icons/creatures/abilities/mouth-teeth-long-red.webp
         name: Biting
         system:
@@ -2090,7 +2040,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -2133,7 +2083,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     effects:
       - _id: l0uzxUxLi5NfMRNz
         _key: >-
@@ -2143,7 +2093,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/bellows.webp
         name: Bellows
         system:
@@ -2210,12 +2160,15 @@ items:
           competence:
             raw: 0
           costs:
-            mp:
-              type: static
-              value:
-                static: 1
-            somatic: true
-            verbal: true
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
+            primary:
+              mp:
+                formula: '1'
+                type: formula
           delivery: self
           duration:
             raw: '1'
@@ -2232,7 +2185,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           heightened: >-
             <p>For each additional @L[Core:MP]{MP} spent, the next
             @L[Category:Spells]{spell} you cast is @L[Keyword:Boosted]{boosted}
@@ -2250,7 +2202,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           rotator: true
           spell: true
@@ -2267,7 +2219,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/burning-touch.webp
         name: Burning Touch
         system:
@@ -2302,8 +2254,11 @@ items:
           competence:
             raw: 0
           costs:
-            somatic: true
-            verbal: true
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
           delivery: hand
           duration:
             raw: '0'
@@ -2322,7 +2277,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           heightened: >-
             <p>For each additional @L[Core:MP]{MP} spent, deal an additional
             [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage}.</p>
@@ -2358,7 +2312,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         flags:
           teriock:
             dontConsume: false
@@ -2383,100 +2337,99 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: celestial-elder-sorcery-words
           interaction: manifest
           maneuver: passive
           overview:
             base: >-
               <p>You know @L[Core:Elder Sorcery]{OP} 1 @L[Core:Celestial Elder
-              Sorcery Words]{Celestial Elder Sorcery words}.</p><table
+              Sorcery Words]{Celestial Elder Sorcery words}.<table
               class="wikitable sortable"><caption style="white-space:nowrap">OP
               1 Celestial @L[Core:Elder Sorcery Words]{Elder Sorcery
-              Words}</caption><tbody><tr><th
-              style="background-color:#e5a50a1A">OP</th><th
-              style="background-color:#6135831A">Celestial Adjectives</th><th
-              style="background-color:#6135831A">Celestial Adverbs</th><th
-              style="background-color:#6135831A">Celestial Articles</th><th
-              style="background-color:#6135831A">Celestial Conjunctions</th><th
-              style="background-color:#6135831A">Celestial Nouns</th><th
-              style="background-color:#6135831A">Celestial Prepositions</th><th
-              style="background-color:#6135831A">Celestial Pronouns</th><th
-              style="background-color:#6135831A">Celestial
-              Verbs</th></tr><tr><td rowspan="9"
-              style="background-color:#f9f06b1A">1</td><td
-              style="background-color:#dc8add1A">bad</td><td
-              style="background-color:#dc8add1A">as</td><td
-              style="background-color:#dc8add1A">an</td><td
-              style="background-color:#dc8add1A">as</td><td
-              style="background-color:#dc8add1A">color</td><td
-              style="background-color:#dc8add1A">by</td><td
-              style="background-color:#dc8add1A">me</td><td
-              style="background-color:#dc8add1A">are</td></tr> <tr><td
-              style="background-color:#6135831A">big</td><td
-              style="background-color:#6135831A">carefully</td><td
-              style="background-color:#6135831A">one</td><td
-              style="background-color:#6135831A">but</td><td
-              style="background-color:#6135831A">cup</td><td
-              style="background-color:#6135831A">for</td><td
-              style="background-color:#6135831A">my</td><td
-              style="background-color:#6135831A">be</td></tr> <tr><td
-              style="background-color:#dc8add1A">bright</td><td
-              style="background-color:#dc8add1A">here</td><td
-              style="background-color:#dc8add1A">the</td><td
-              style="background-color:#dc8add1A">or</td><td
-              style="background-color:#dc8add1A">dagger</td><td
-              style="background-color:#dc8add1A">in</td><td
-              style="background-color:#dc8add1A">that</td><td
-              style="background-color:#dc8add1A">begin</td></tr> <tr><td
-              style="background-color:#6135831A">clean</td><td
-              style="background-color:#6135831A">pretty</td><td
-              style="background-color:#6135831A"></td><td
-              style="background-color:#6135831A">so</td><td
-              style="background-color:#6135831A">foot</td><td
-              style="background-color:#6135831A">of</td><td
-              style="background-color:#6135831A">this</td><td
-              style="background-color:#6135831A">did</td></tr> <tr><td
-              style="background-color:#dc8add1A">little</td><td
-              style="background-color:#dc8add1A">then</td><td
-              style="background-color:#dc8add1A"></td><td
-              style="background-color:#dc8add1A"></td><td
-              style="background-color:#dc8add1A">hand</td><td
-              style="background-color:#dc8add1A">off</td><td
-              style="background-color:#dc8add1A">you</td><td
-              style="background-color:#dc8add1A">may</td></tr> <tr><td
-              style="background-color:#6135831A">long</td><td
-              style="background-color:#6135831A">there</td><td
-              style="background-color:#6135831A"></td><td
-              style="background-color:#6135831A"></td><td
-              style="background-color:#6135831A">hat</td><td
-              style="background-color:#6135831A">on</td><td
-              style="background-color:#6135831A">your</td><td
-              style="background-color:#6135831A">might</td></tr> <tr><td
-              style="background-color:#dc8add1A">short</td><td
-              style="background-color:#dc8add1A">today</td><td
-              style="background-color:#dc8add1A"></td><td
-              style="background-color:#dc8add1A"></td><td
-              style="background-color:#dc8add1A">skin</td><td
-              style="background-color:#dc8add1A">to</td><td
-              style="background-color:#dc8add1A"></td><td
-              style="background-color:#dc8add1A">stand</td></tr> <tr><td
-              style="background-color:#6135831A">small</td><td
-              style="background-color:#6135831A"></td><td
-              style="background-color:#6135831A"></td><td
-              style="background-color:#6135831A"></td><td
-              style="background-color:#6135831A">torch</td><td
-              style="background-color:#6135831A"></td><td
-              style="background-color:#6135831A"></td><td
-              style="background-color:#6135831A">tend</td></tr> <tr><td
-              style="background-color:#dc8add1A">this</td><td
-              style="background-color:#dc8add1A"></td><td
-              style="background-color:#dc8add1A"></td><td
-              style="background-color:#dc8add1A"></td><td
-              style="background-color:#dc8add1A">wand</td><td
-              style="background-color:#dc8add1A"></td><td
-              style="background-color:#dc8add1A"></td><td
-              style="background-color:#dc8add1A">use</td></tr></tbody></table><p></p>
+              Words}</caption><tbody><tr><th style="background-color:
+              #e5a50a1A">OP</th><th style="background-color:
+              #6135831A">Celestial Adjectives</th><th style="background-color:
+              #6135831A">Celestial Adverbs</th><th style="background-color:
+              #6135831A">Celestial Articles</th><th style="background-color:
+              #6135831A">Celestial Conjunctions</th><th style="background-color:
+              #6135831A">Celestial Nouns</th><th style="background-color:
+              #6135831A">Celestial Prepositions</th><th style="background-color:
+              #6135831A">Celestial Pronouns</th><th style="background-color:
+              #6135831A">Celestial Verbs</th></tr><tr><td rowspan="9"
+              style="background-color: #f9f06b1A">1</td><td
+              style="background-color: #dc8add1A">bad</td><td
+              style="background-color: #dc8add1A">as</td><td
+              style="background-color: #dc8add1A">an</td><td
+              style="background-color: #dc8add1A">as</td><td
+              style="background-color: #dc8add1A">color</td><td
+              style="background-color: #dc8add1A">by</td><td
+              style="background-color: #dc8add1A">me</td><td
+              style="background-color: #dc8add1A">are</td></tr> <tr><td
+              style="background-color: #6135831A">big</td><td
+              style="background-color: #6135831A">carefully</td><td
+              style="background-color: #6135831A">one</td><td
+              style="background-color: #6135831A">but</td><td
+              style="background-color: #6135831A">cup</td><td
+              style="background-color: #6135831A">for</td><td
+              style="background-color: #6135831A">my</td><td
+              style="background-color: #6135831A">be</td></tr> <tr><td
+              style="background-color: #dc8add1A">bright</td><td
+              style="background-color: #dc8add1A">here</td><td
+              style="background-color: #dc8add1A">the</td><td
+              style="background-color: #dc8add1A">or</td><td
+              style="background-color: #dc8add1A">dagger</td><td
+              style="background-color: #dc8add1A">in</td><td
+              style="background-color: #dc8add1A">that</td><td
+              style="background-color: #dc8add1A">begin</td></tr> <tr><td
+              style="background-color: #6135831A">clean</td><td
+              style="background-color: #6135831A">pretty</td><td
+              style="background-color: #6135831A"></td><td
+              style="background-color: #6135831A">so</td><td
+              style="background-color: #6135831A">foot</td><td
+              style="background-color: #6135831A">of</td><td
+              style="background-color: #6135831A">this</td><td
+              style="background-color: #6135831A">did</td></tr> <tr><td
+              style="background-color: #dc8add1A">little</td><td
+              style="background-color: #dc8add1A">then</td><td
+              style="background-color: #dc8add1A"></td><td
+              style="background-color: #dc8add1A"></td><td
+              style="background-color: #dc8add1A">hand</td><td
+              style="background-color: #dc8add1A">off</td><td
+              style="background-color: #dc8add1A">you</td><td
+              style="background-color: #dc8add1A">may</td></tr> <tr><td
+              style="background-color: #6135831A">long</td><td
+              style="background-color: #6135831A">there</td><td
+              style="background-color: #6135831A"></td><td
+              style="background-color: #6135831A"></td><td
+              style="background-color: #6135831A">hat</td><td
+              style="background-color: #6135831A">on</td><td
+              style="background-color: #6135831A">your</td><td
+              style="background-color: #6135831A">might</td></tr> <tr><td
+              style="background-color: #dc8add1A">short</td><td
+              style="background-color: #dc8add1A">today</td><td
+              style="background-color: #dc8add1A"></td><td
+              style="background-color: #dc8add1A"></td><td
+              style="background-color: #dc8add1A">skin</td><td
+              style="background-color: #dc8add1A">to</td><td
+              style="background-color: #dc8add1A"></td><td
+              style="background-color: #dc8add1A">stand</td></tr> <tr><td
+              style="background-color: #6135831A">small</td><td
+              style="background-color: #6135831A"></td><td
+              style="background-color: #6135831A"></td><td
+              style="background-color: #6135831A"></td><td
+              style="background-color: #6135831A">torch</td><td
+              style="background-color: #6135831A"></td><td
+              style="background-color: #6135831A"></td><td
+              style="background-color: #6135831A">tend</td></tr> <tr><td
+              style="background-color: #dc8add1A">this</td><td
+              style="background-color: #dc8add1A"></td><td
+              style="background-color: #dc8add1A"></td><td
+              style="background-color: #dc8add1A"></td><td
+              style="background-color: #dc8add1A">wand</td><td
+              style="background-color: #dc8add1A"></td><td
+              style="background-color: #dc8add1A"></td><td
+              style="background-color:
+              #dc8add1A">use</td></tr></tbody></table></p>
             fluent: >-
               <p>The @L[Core:Elder Sorcery]{OP} of words you know is 1 + (3 ×
               @L[Core:Fluency Bonus]{F}).</p>
@@ -2488,7 +2441,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           skill: true
           targets:
@@ -2502,7 +2455,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/control-and-resist-fire.webp
         name: Control and Resist Fire
         system:
@@ -2565,12 +2518,15 @@ items:
           competence:
             raw: 0
           costs:
-            mp:
-              type: static
-              value:
-                static: 1
-            somatic: true
-            verbal: true
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
+            primary:
+              mp:
+                formula: '1'
+                type: formula
           delivery: self
           duration:
             raw: '1'
@@ -2589,7 +2545,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: control-and-resist-fire
           interaction: manifest
           invoked: true
@@ -2605,7 +2560,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           rotator: true
           spell: true
@@ -2622,7 +2577,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/crown-of-flame.webp
         name: Crown of Flame
         system:
@@ -2667,12 +2622,15 @@ items:
           competence:
             raw: 0
           costs:
-            mp:
-              type: static
-              value:
-                static: 1
-            somatic: true
-            verbal: true
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
+            primary:
+              mp:
+                formula: '1'
+                type: formula
           delivery: self
           duration:
             raw: '8'
@@ -2689,7 +2647,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: crown-of-flame
           interaction: manifest
           invoked: true
@@ -2704,7 +2661,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           rotator: true
           spell: true
@@ -2721,7 +2678,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         flags:
           teriock:
             dontConsume: false
@@ -2732,25 +2689,24 @@ items:
           competence:
             raw: 0
           costs:
-            hp:
-              type: variable
-              value:
-                static: 0
-                variable: >-
+            components:
+              material:
+                description: >-
+                  <p>Creation cost is at least 3 × the material components of
+                  the spell itself.</p>
+                type: description
+            primary:
+              hp:
+                description: >-
                   <p>Creation cost is at least 3 × @L[Core:HP]{HP} of the spell
                   itself.</p>
-            material: true
-            materialCost: >-
-              <p>Creation cost is at least 3 × the material components of the
-              spell itself.</p>
-            mp:
-              type: variable
-              value:
-                static: 0
-                variable: >-
+                type: description
+              mp:
+                description: >-
                   <p>Creation cost is at least 1 @L[Core:MP]{MP} per
                   @L[Core:Elder Sorcery]{OP} of <i>each</i> word in the spell
                   plus 3 × @L[Core:MP]{MP} of the spell itself.</p>
+                type: description
           delivery: sight
           duration:
             raw: '0'
@@ -2766,7 +2722,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: elder-sorcery-creation
           interaction: manifest
           maneuver: slow
@@ -2813,7 +2768,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/flame-elder-sorcery.webp
         name: Flame Elder Sorcery
         system:
@@ -2834,7 +2789,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: flame-elder-sorcery
           interaction: manifest
           maneuver: passive
@@ -2849,7 +2803,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           skill: true
           targets:
@@ -2863,7 +2817,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/flame-elder-sorcery-words.webp
         name: Flame Elder Sorcery Words
         system:
@@ -2888,40 +2842,39 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: flame-elder-sorcery-words
           interaction: manifest
           maneuver: passive
           overview:
             base: >-
               <p>You know @L[Core:Elder Sorcery]{OP} 1 @L[Core:Flame Elder
-              Sorcery Words]{Flame Elder Sorcery words}.</p><table
-              class="wikitable sortable"><caption style="white-space:nowrap">OP
-              1 Flame @L[Core:Elder Sorcery Words]{Elder Sorcery
-              Words}</caption><tbody><tr><th
-              style="background-color:#e5a50a1A">OP</th><th
-              style="background-color:#a51d2d1A">@L[Class:Flame Mage]{Flame
-              Nouns}</th><th style="background-color:#a51d2d1A">@L[Class:Flame
-              Mage]{Flame Verbs}</th></tr><tr><td rowspan="9"
-              style="background-color:#f9f06b1A">1</td><td
-              style="background-color:#f661511A">ash</td><td
-              style="background-color:#f661511A">crack</td></tr> <tr><td
-              style="background-color:#a51d2d1A">cinder</td><td
-              style="background-color:#a51d2d1A">damage</td></tr> <tr><td
-              style="background-color:#f661511A">ember</td><td
-              style="background-color:#f661511A">dry</td></tr> <tr><td
-              style="background-color:#a51d2d1A">flame</td><td
-              style="background-color:#a51d2d1A">glow</td></tr> <tr><td
-              style="background-color:#f661511A">howl</td><td
-              style="background-color:#f661511A">illuminate</td></tr> <tr><td
-              style="background-color:#a51d2d1A">light</td><td
-              style="background-color:#a51d2d1A">kindle</td></tr> <tr><td
-              style="background-color:#f661511A">spark</td><td
-              style="background-color:#f661511A">rush</td></tr> <tr><td
-              style="background-color:#a51d2d1A">tinder</td><td
-              style="background-color:#a51d2d1A">temper</td></tr> <tr><td
-              style="background-color:#f661511A">warmth</td><td
-              style="background-color:#f661511A">warm</td></tr></tbody></table><p></p>
+              Sorcery Words]{Flame Elder Sorcery words}.<table class="wikitable
+              sortable"><caption style="white-space:nowrap">OP 1 Flame
+              @L[Core:Elder Sorcery Words]{Elder Sorcery
+              Words}</caption><tbody><tr><th style="background-color:
+              #e5a50a1A">OP</th><th style="background-color:
+              #a51d2d1A">@L[Class:Flame Mage]{Flame Nouns}</th><th
+              style="background-color: #a51d2d1A">@L[Class:Flame Mage]{Flame
+              Verbs}</th></tr><tr><td rowspan="9" style="background-color:
+              #f9f06b1A">1</td><td style="background-color:
+              #f661511A">ash</td><td style="background-color:
+              #f661511A">crack</td></tr> <tr><td style="background-color:
+              #a51d2d1A">cinder</td><td style="background-color:
+              #a51d2d1A">damage</td></tr> <tr><td style="background-color:
+              #f661511A">ember</td><td style="background-color:
+              #f661511A">dry</td></tr> <tr><td style="background-color:
+              #a51d2d1A">flame</td><td style="background-color:
+              #a51d2d1A">glow</td></tr> <tr><td style="background-color:
+              #f661511A">howl</td><td style="background-color:
+              #f661511A">illuminate</td></tr> <tr><td style="background-color:
+              #a51d2d1A">light</td><td style="background-color:
+              #a51d2d1A">kindle</td></tr> <tr><td style="background-color:
+              #f661511A">spark</td><td style="background-color:
+              #f661511A">rush</td></tr> <tr><td style="background-color:
+              #a51d2d1A">tinder</td><td style="background-color:
+              #a51d2d1A">temper</td></tr> <tr><td style="background-color:
+              #f661511A">warmth</td><td style="background-color:
+              #f661511A">warm</td></tr></tbody></table></p>
             fluent: >-
               <p>The @L[Core:Elder Sorcery]{OP} of words you know is 1 + (3 ×
               @L[Core:Fluency Bonus]{F}).</p>
@@ -2933,7 +2886,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           skill: true
           targets:
@@ -2947,7 +2900,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/flame-rotators.webp
         name: Flame Rotators
         system:
@@ -3029,7 +2982,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: flame-rotators
           interaction: manifest
           maneuver: passive
@@ -3067,7 +3019,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           skill: true
           targets:
@@ -3081,7 +3033,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/inferno-aura.webp
         name: Inferno Aura
         system:
@@ -3116,12 +3068,15 @@ items:
           competence:
             raw: 0
           costs:
-            mp:
-              type: static
-              value:
-                static: 1
-            somatic: true
-            verbal: true
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
+            primary:
+              mp:
+                formula: '1'
+                type: formula
           delivery: aura
           duration:
             raw: '0'
@@ -3140,7 +3095,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           heightened: >-
             <p>For each additional @L[Core:MP]{MP} spent, deal an additional
             [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage}.</p>
@@ -3173,7 +3127,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/melting-grasp.webp
         name: Melting Grasp
         system:
@@ -3182,12 +3136,15 @@ items:
           competence:
             raw: 0
           costs:
-            mp:
-              type: static
-              value:
-                static: 1
-            somatic: true
-            verbal: true
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
+            primary:
+              mp:
+                formula: '1'
+                type: formula
           delivery: hand
           duration:
             raw: '0'
@@ -3204,7 +3161,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: melting-grasp
           interaction: attack
           invoked: true
@@ -3233,7 +3189,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/rupture-mark.webp
         name: Rupture Mark
         system:
@@ -3242,12 +3198,15 @@ items:
           competence:
             raw: 0
           costs:
-            mp:
-              type: static
-              value:
-                static: 1
-            somatic: true
-            verbal: true
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
+            primary:
+              mp:
+                formula: '1'
+                type: formula
           delivery: hand
           duration:
             raw: '1'
@@ -3264,7 +3223,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: rupture-mark
           interaction: attack
           invoked: true
@@ -3309,14 +3267,10 @@ items:
       statDice:
         hp:
           disabled: false
-          faces: 8
-          number:
-            raw: '1'
+          formula: 1d8
         mp:
           disabled: false
-          faces: 12
-          number:
-            raw: '1'
+          formula: 1d12
     type: rank
   - _id: ecDjIJ1VVjR1FnB5
     _key: '!actors.items!b178f6794385765b.ecDjIJ1VVjR1FnB5'
@@ -3325,7 +3279,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     effects:
       - _id: cFvorDqPhvSdcZYX
         _key: >-
@@ -3335,7 +3289,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         flags:
           teriock:
             dontConsume: false
@@ -3360,100 +3314,99 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: celestial-elder-sorcery-words
           interaction: manifest
           maneuver: passive
           overview:
             base: >-
               <p>You know @L[Core:Elder Sorcery]{OP} 1 @L[Core:Celestial Elder
-              Sorcery Words]{Celestial Elder Sorcery words}.</p><table
+              Sorcery Words]{Celestial Elder Sorcery words}.<table
               class="wikitable sortable"><caption style="white-space:nowrap">OP
               1 Celestial @L[Core:Elder Sorcery Words]{Elder Sorcery
-              Words}</caption><tbody><tr><th
-              style="background-color:#e5a50a1A">OP</th><th
-              style="background-color:#6135831A">Celestial Adjectives</th><th
-              style="background-color:#6135831A">Celestial Adverbs</th><th
-              style="background-color:#6135831A">Celestial Articles</th><th
-              style="background-color:#6135831A">Celestial Conjunctions</th><th
-              style="background-color:#6135831A">Celestial Nouns</th><th
-              style="background-color:#6135831A">Celestial Prepositions</th><th
-              style="background-color:#6135831A">Celestial Pronouns</th><th
-              style="background-color:#6135831A">Celestial
-              Verbs</th></tr><tr><td rowspan="9"
-              style="background-color:#f9f06b1A">1</td><td
-              style="background-color:#dc8add1A">bad</td><td
-              style="background-color:#dc8add1A">as</td><td
-              style="background-color:#dc8add1A">an</td><td
-              style="background-color:#dc8add1A">as</td><td
-              style="background-color:#dc8add1A">color</td><td
-              style="background-color:#dc8add1A">by</td><td
-              style="background-color:#dc8add1A">me</td><td
-              style="background-color:#dc8add1A">are</td></tr> <tr><td
-              style="background-color:#6135831A">big</td><td
-              style="background-color:#6135831A">carefully</td><td
-              style="background-color:#6135831A">one</td><td
-              style="background-color:#6135831A">but</td><td
-              style="background-color:#6135831A">cup</td><td
-              style="background-color:#6135831A">for</td><td
-              style="background-color:#6135831A">my</td><td
-              style="background-color:#6135831A">be</td></tr> <tr><td
-              style="background-color:#dc8add1A">bright</td><td
-              style="background-color:#dc8add1A">here</td><td
-              style="background-color:#dc8add1A">the</td><td
-              style="background-color:#dc8add1A">or</td><td
-              style="background-color:#dc8add1A">dagger</td><td
-              style="background-color:#dc8add1A">in</td><td
-              style="background-color:#dc8add1A">that</td><td
-              style="background-color:#dc8add1A">begin</td></tr> <tr><td
-              style="background-color:#6135831A">clean</td><td
-              style="background-color:#6135831A">pretty</td><td
-              style="background-color:#6135831A"></td><td
-              style="background-color:#6135831A">so</td><td
-              style="background-color:#6135831A">foot</td><td
-              style="background-color:#6135831A">of</td><td
-              style="background-color:#6135831A">this</td><td
-              style="background-color:#6135831A">did</td></tr> <tr><td
-              style="background-color:#dc8add1A">little</td><td
-              style="background-color:#dc8add1A">then</td><td
-              style="background-color:#dc8add1A"></td><td
-              style="background-color:#dc8add1A"></td><td
-              style="background-color:#dc8add1A">hand</td><td
-              style="background-color:#dc8add1A">off</td><td
-              style="background-color:#dc8add1A">you</td><td
-              style="background-color:#dc8add1A">may</td></tr> <tr><td
-              style="background-color:#6135831A">long</td><td
-              style="background-color:#6135831A">there</td><td
-              style="background-color:#6135831A"></td><td
-              style="background-color:#6135831A"></td><td
-              style="background-color:#6135831A">hat</td><td
-              style="background-color:#6135831A">on</td><td
-              style="background-color:#6135831A">your</td><td
-              style="background-color:#6135831A">might</td></tr> <tr><td
-              style="background-color:#dc8add1A">short</td><td
-              style="background-color:#dc8add1A">today</td><td
-              style="background-color:#dc8add1A"></td><td
-              style="background-color:#dc8add1A"></td><td
-              style="background-color:#dc8add1A">skin</td><td
-              style="background-color:#dc8add1A">to</td><td
-              style="background-color:#dc8add1A"></td><td
-              style="background-color:#dc8add1A">stand</td></tr> <tr><td
-              style="background-color:#6135831A">small</td><td
-              style="background-color:#6135831A"></td><td
-              style="background-color:#6135831A"></td><td
-              style="background-color:#6135831A"></td><td
-              style="background-color:#6135831A">torch</td><td
-              style="background-color:#6135831A"></td><td
-              style="background-color:#6135831A"></td><td
-              style="background-color:#6135831A">tend</td></tr> <tr><td
-              style="background-color:#dc8add1A">this</td><td
-              style="background-color:#dc8add1A"></td><td
-              style="background-color:#dc8add1A"></td><td
-              style="background-color:#dc8add1A"></td><td
-              style="background-color:#dc8add1A">wand</td><td
-              style="background-color:#dc8add1A"></td><td
-              style="background-color:#dc8add1A"></td><td
-              style="background-color:#dc8add1A">use</td></tr></tbody></table><p></p>
+              Words}</caption><tbody><tr><th style="background-color:
+              #e5a50a1A">OP</th><th style="background-color:
+              #6135831A">Celestial Adjectives</th><th style="background-color:
+              #6135831A">Celestial Adverbs</th><th style="background-color:
+              #6135831A">Celestial Articles</th><th style="background-color:
+              #6135831A">Celestial Conjunctions</th><th style="background-color:
+              #6135831A">Celestial Nouns</th><th style="background-color:
+              #6135831A">Celestial Prepositions</th><th style="background-color:
+              #6135831A">Celestial Pronouns</th><th style="background-color:
+              #6135831A">Celestial Verbs</th></tr><tr><td rowspan="9"
+              style="background-color: #f9f06b1A">1</td><td
+              style="background-color: #dc8add1A">bad</td><td
+              style="background-color: #dc8add1A">as</td><td
+              style="background-color: #dc8add1A">an</td><td
+              style="background-color: #dc8add1A">as</td><td
+              style="background-color: #dc8add1A">color</td><td
+              style="background-color: #dc8add1A">by</td><td
+              style="background-color: #dc8add1A">me</td><td
+              style="background-color: #dc8add1A">are</td></tr> <tr><td
+              style="background-color: #6135831A">big</td><td
+              style="background-color: #6135831A">carefully</td><td
+              style="background-color: #6135831A">one</td><td
+              style="background-color: #6135831A">but</td><td
+              style="background-color: #6135831A">cup</td><td
+              style="background-color: #6135831A">for</td><td
+              style="background-color: #6135831A">my</td><td
+              style="background-color: #6135831A">be</td></tr> <tr><td
+              style="background-color: #dc8add1A">bright</td><td
+              style="background-color: #dc8add1A">here</td><td
+              style="background-color: #dc8add1A">the</td><td
+              style="background-color: #dc8add1A">or</td><td
+              style="background-color: #dc8add1A">dagger</td><td
+              style="background-color: #dc8add1A">in</td><td
+              style="background-color: #dc8add1A">that</td><td
+              style="background-color: #dc8add1A">begin</td></tr> <tr><td
+              style="background-color: #6135831A">clean</td><td
+              style="background-color: #6135831A">pretty</td><td
+              style="background-color: #6135831A"></td><td
+              style="background-color: #6135831A">so</td><td
+              style="background-color: #6135831A">foot</td><td
+              style="background-color: #6135831A">of</td><td
+              style="background-color: #6135831A">this</td><td
+              style="background-color: #6135831A">did</td></tr> <tr><td
+              style="background-color: #dc8add1A">little</td><td
+              style="background-color: #dc8add1A">then</td><td
+              style="background-color: #dc8add1A"></td><td
+              style="background-color: #dc8add1A"></td><td
+              style="background-color: #dc8add1A">hand</td><td
+              style="background-color: #dc8add1A">off</td><td
+              style="background-color: #dc8add1A">you</td><td
+              style="background-color: #dc8add1A">may</td></tr> <tr><td
+              style="background-color: #6135831A">long</td><td
+              style="background-color: #6135831A">there</td><td
+              style="background-color: #6135831A"></td><td
+              style="background-color: #6135831A"></td><td
+              style="background-color: #6135831A">hat</td><td
+              style="background-color: #6135831A">on</td><td
+              style="background-color: #6135831A">your</td><td
+              style="background-color: #6135831A">might</td></tr> <tr><td
+              style="background-color: #dc8add1A">short</td><td
+              style="background-color: #dc8add1A">today</td><td
+              style="background-color: #dc8add1A"></td><td
+              style="background-color: #dc8add1A"></td><td
+              style="background-color: #dc8add1A">skin</td><td
+              style="background-color: #dc8add1A">to</td><td
+              style="background-color: #dc8add1A"></td><td
+              style="background-color: #dc8add1A">stand</td></tr> <tr><td
+              style="background-color: #6135831A">small</td><td
+              style="background-color: #6135831A"></td><td
+              style="background-color: #6135831A"></td><td
+              style="background-color: #6135831A"></td><td
+              style="background-color: #6135831A">torch</td><td
+              style="background-color: #6135831A"></td><td
+              style="background-color: #6135831A"></td><td
+              style="background-color: #6135831A">tend</td></tr> <tr><td
+              style="background-color: #dc8add1A">this</td><td
+              style="background-color: #dc8add1A"></td><td
+              style="background-color: #dc8add1A"></td><td
+              style="background-color: #dc8add1A"></td><td
+              style="background-color: #dc8add1A">wand</td><td
+              style="background-color: #dc8add1A"></td><td
+              style="background-color: #dc8add1A"></td><td
+              style="background-color:
+              #dc8add1A">use</td></tr></tbody></table></p>
             fluent: >-
               <p>The @L[Core:Elder Sorcery]{OP} of words you know is 1 + (3 ×
               @L[Core:Fluency Bonus]{F}).</p>
@@ -3465,7 +3418,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           skill: true
           targets:
@@ -3479,7 +3432,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/crown-of-vines.webp
         name: Crown of Vines
         system:
@@ -3524,10 +3477,10 @@ items:
           competence:
             raw: 0
           costs:
-            mp:
-              type: static
-              value:
-                static: 1
+            primary:
+              mp:
+                formula: '1'
+                type: formula
           delivery: self
           duration:
             raw: '8'
@@ -3544,7 +3497,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: crown-of-vines
           interaction: manifest
           maneuver: active
@@ -3558,7 +3510,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           rotator: true
           spell: true
@@ -3575,7 +3527,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/earthbind-aura.webp
         name: Earthbind Aura
         system:
@@ -3654,10 +3606,10 @@ items:
           competence:
             raw: 0
           costs:
-            mp:
-              type: static
-              value:
-                static: 1
+            primary:
+              mp:
+                formula: '1'
+                type: formula
           delivery: aura
           duration:
             raw: '1'
@@ -3678,7 +3630,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           heightened: >-
             <p>For each additional @L[Core:MP]{MP} spent, deal an additional
             [[/damage 1d4[magic vine]]] @L[Core:Damage]{damage}  as well.</p>
@@ -3710,7 +3661,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/earthbind-touch.webp
         name: Earthbind Touch
         system:
@@ -3808,7 +3759,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           heightened: >-
             <p>For each additional @L[Core:MP]{MP} spent, deal an additional
             [[/damage 1d4[magic vine]]] @L[Core:Damage]{damage}  as well.</p>
@@ -3843,7 +3793,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         flags:
           teriock:
             dontConsume: false
@@ -3854,25 +3804,24 @@ items:
           competence:
             raw: 0
           costs:
-            hp:
-              type: variable
-              value:
-                static: 0
-                variable: >-
+            components:
+              material:
+                description: >-
+                  <p>Creation cost is at least 3 × the material components of
+                  the spell itself.</p>
+                type: description
+            primary:
+              hp:
+                description: >-
                   <p>Creation cost is at least 3 × @L[Core:HP]{HP} of the spell
                   itself.</p>
-            material: true
-            materialCost: >-
-              <p>Creation cost is at least 3 × the material components of the
-              spell itself.</p>
-            mp:
-              type: variable
-              value:
-                static: 0
-                variable: >-
+                type: description
+              mp:
+                description: >-
                   <p>Creation cost is at least 1 @L[Core:MP]{MP} per
                   @L[Core:Elder Sorcery]{OP} of <i>each</i> word in the spell
                   plus 3 × @L[Core:MP]{MP} of the spell itself.</p>
+                type: description
           delivery: sight
           duration:
             raw: '0'
@@ -3888,7 +3837,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: elder-sorcery-creation
           interaction: manifest
           maneuver: slow
@@ -3935,7 +3883,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/nature-elder-sorcery.webp
         name: Nature Elder Sorcery
         system:
@@ -3956,7 +3904,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: nature-elder-sorcery
           interaction: manifest
           maneuver: passive
@@ -3971,7 +3918,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           skill: true
           targets:
@@ -3985,7 +3932,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/nature-elder-sorcery-words.webp
         name: Nature Elder Sorcery Words
         system:
@@ -4010,42 +3957,41 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: nature-elder-sorcery-words
           interaction: manifest
           maneuver: passive
           overview:
             base: >-
               <p>You know @L[Core:Elder Sorcery]{OP} 1 @L[Core:Nature Elder
-              Sorcery Words]{Nature Elder Sorcery words}.</p><table
-              class="wikitable sortable"><caption style="white-space:nowrap">OP
-              1 Nature @L[Core:Elder Sorcery Words]{Elder Sorcery
-              Words}</caption><tbody><tr><th
-              style="background-color:#e5a50a1A">OP</th><th
-              style="background-color:#26a2691A">@L[Class:Nature Mage]{Nature
-              Nouns}</th><th style="background-color:#26a2691A">@L[Class:Nature
-              Mage]{Nature Verbs}</th></tr><tr><td rowspan="10"
-              style="background-color:#f9f06b1A">1</td><td
-              style="background-color:#8ff0a41A">dirt</td><td
-              style="background-color:#8ff0a41A">augment</td></tr> <tr><td
-              style="background-color:#26a2691A">fruit</td><td
-              style="background-color:#26a2691A">bloom</td></tr> <tr><td
-              style="background-color:#8ff0a41A">grass</td><td
-              style="background-color:#8ff0a41A">grow</td></tr> <tr><td
-              style="background-color:#26a2691A">leaf</td><td
-              style="background-color:#26a2691A">lull</td></tr> <tr><td
-              style="background-color:#8ff0a41A">path</td><td
-              style="background-color:#8ff0a41A">lure</td></tr> <tr><td
-              style="background-color:#26a2691A">reach</td><td
-              style="background-color:#26a2691A">nourish</td></tr> <tr><td
-              style="background-color:#8ff0a41A">size</td><td
-              style="background-color:#8ff0a41A">ripen</td></tr> <tr><td
-              style="background-color:#26a2691A">twig</td><td
-              style="background-color:#26a2691A">shrink</td></tr> <tr><td
-              style="background-color:#8ff0a41A">vine</td><td
-              style="background-color:#8ff0a41A">touch</td></tr> <tr><td
-              style="background-color:#26a2691A"><i>watermelon</i></td><td
-              style="background-color:#26a2691A"></td></tr></tbody></table><p></p>
+              Sorcery Words]{Nature Elder Sorcery words}.<table class="wikitable
+              sortable"><caption style="white-space:nowrap">OP 1 Nature
+              @L[Core:Elder Sorcery Words]{Elder Sorcery
+              Words}</caption><tbody><tr><th style="background-color:
+              #e5a50a1A">OP</th><th style="background-color:
+              #26a2691A">@L[Class:Nature Mage]{Nature Nouns}</th><th
+              style="background-color: #26a2691A">@L[Class:Nature Mage]{Nature
+              Verbs}</th></tr><tr><td rowspan="10" style="background-color:
+              #f9f06b1A">1</td><td style="background-color:
+              #8ff0a41A">dirt</td><td style="background-color:
+              #8ff0a41A">augment</td></tr> <tr><td style="background-color:
+              #26a2691A">fruit</td><td style="background-color:
+              #26a2691A">bloom</td></tr> <tr><td style="background-color:
+              #8ff0a41A">grass</td><td style="background-color:
+              #8ff0a41A">grow</td></tr> <tr><td style="background-color:
+              #26a2691A">leaf</td><td style="background-color:
+              #26a2691A">lull</td></tr> <tr><td style="background-color:
+              #8ff0a41A">path</td><td style="background-color:
+              #8ff0a41A">lure</td></tr> <tr><td style="background-color:
+              #26a2691A">reach</td><td style="background-color:
+              #26a2691A">nourish</td></tr> <tr><td style="background-color:
+              #8ff0a41A">size</td><td style="background-color:
+              #8ff0a41A">ripen</td></tr> <tr><td style="background-color:
+              #26a2691A">twig</td><td style="background-color:
+              #26a2691A">shrink</td></tr> <tr><td style="background-color:
+              #8ff0a41A">vine</td><td style="background-color:
+              #8ff0a41A">touch</td></tr> <tr><td style="background-color:
+              #26a2691A"><i>watermelon</i></td><td style="background-color:
+              #26a2691A"></td></tr></tbody></table></p>
             fluent: >-
               <p>The @L[Core:Elder Sorcery]{OP} of words you know is 1 + (3 ×
               @L[Core:Fluency Bonus]{F}).</p>
@@ -4057,7 +4003,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           skill: true
           targets:
@@ -4071,7 +4017,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/nature-rotators.webp
         name: Nature Rotators
         system:
@@ -4153,7 +4099,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: nature-rotators
           interaction: manifest
           maneuver: passive
@@ -4190,7 +4135,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           skill: true
           targets:
@@ -4204,7 +4149,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/polymorph.webp
         name: Polymorph
         system:
@@ -4257,8 +4202,11 @@ items:
           competence:
             raw: 0
           costs:
-            somatic: true
-            verbal: true
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
           delivery: sight
           duration:
             raw: '1'
@@ -4278,7 +4226,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           heightened: >-
             <p>For each additional @L[Core:MP]{MP} spent, the maximum
             @L[Core:Battle Rating]{BR} available to you increases by 3.</p>
@@ -4321,7 +4268,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/regenerating.webp
         name: Regenerating
         system:
@@ -4377,7 +4324,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: regenerating
           interaction: manifest
           limitation: >-
@@ -4403,7 +4349,7 @@ items:
           powerSources:
             - primal
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -4416,7 +4362,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/regeneration-touch.webp
         name: Regeneration Touch
         system:
@@ -4449,8 +4395,11 @@ items:
           competence:
             raw: 0
           costs:
-            somatic: true
-            verbal: true
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
           delivery: hand
           duration:
             raw: '1'
@@ -4473,7 +4422,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: regeneration-touch
           interaction: attack
           invoked: true
@@ -4504,7 +4452,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/unforge.webp
         name: Unforge
         system:
@@ -4526,12 +4474,15 @@ items:
           competence:
             raw: 0
           costs:
-            mp:
-              type: static
-              value:
-                static: 1
-            somatic: true
-            verbal: true
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
+            primary:
+              mp:
+                formula: '1'
+                type: formula
           delivery: hand
           duration:
             raw: '0'
@@ -4550,7 +4501,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: unforge
           interaction: attack
           invoked: true
@@ -4578,7 +4528,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/wildborn.webp
         name: Wildborn
         system:
@@ -4587,12 +4537,15 @@ items:
           competence:
             raw: 0
           costs:
-            mp:
-              type: static
-              value:
-                static: 1
-            somatic: true
-            verbal: true
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
+            primary:
+              mp:
+                formula: '1'
+                type: formula
           delivery: self
           duration:
             raw: '8'
@@ -4611,7 +4564,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: wildborn
           interaction: manifest
           invoked: true
@@ -4628,7 +4580,7 @@ items:
             - magical
             - primal
           range:
-            unit: self
+            unit: melee
           revealed: true
           rotator: true
           spell: true
@@ -4661,14 +4613,10 @@ items:
       statDice:
         hp:
           disabled: false
-          faces: 8
-          number:
-            raw: '1'
+          formula: 1d8
         mp:
           disabled: false
-          faces: 12
-          number:
-            raw: '1'
+          formula: 1d12
     type: rank
   - _id: jKVuI5PARs0aJITw
     _key: '!actors.items!b178f6794385765b.jKVuI5PARs0aJITw'
@@ -4677,7 +4625,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     effects:
       - _id: LwntE76DWV8LsMYk
         _key: >-
@@ -4687,7 +4635,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -4709,7 +4657,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -4751,7 +4699,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     effects:
       - _id: wKxfL6pzdYHJceL0
         _key: >-
@@ -4761,7 +4709,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/fire-ball.webp
         name: Fire Ball
         system:
@@ -4812,7 +4760,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           heightened: >-
             <p>For each additional @L[Core:MP]{MP} spent, deal an additional
             [[/damage 1d4[magic fire]]] @L[Core:Damage]{damage}.</p>
@@ -4847,7 +4794,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/flame-ray.webp
         name: Flame Ray
         system:
@@ -4898,7 +4845,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           heightened: >-
             <p>For each additional @L[Core:MP]{MP} spent, deal an additional
             [[/damage 1d8[fire magic]]] @L[Core:Damage]{damage}.</p>
@@ -4933,7 +4879,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/ignite.webp
         name: Ignite
         system:
@@ -5009,7 +4955,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           heightened: >-
             <p>For each additional @L[Core:MP]{MP} spent, the duration of this
             effect increases by 1 hour.</p>
@@ -5045,7 +4990,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/light.webp
         name: Light
         system:
@@ -5131,7 +5076,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: light
           interaction: manifest
           maneuver: active
@@ -5162,7 +5106,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/mage-light.webp
         name: Mage Light
         system:
@@ -5183,7 +5127,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: mage-light
           interaction: manifest
           maneuver: passive
@@ -5196,7 +5139,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           skill: true
           standard: true
@@ -5211,7 +5154,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/self-detonate.webp
         name: Self Detonate
         system:
@@ -5219,12 +5162,15 @@ items:
           competence:
             raw: 0
           costs:
-            mp:
-              type: static
-              value:
-                static: 1
-            somatic: true
-            verbal: true
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
+            primary:
+              mp:
+                formula: '1'
+                type: formula
           delivery: sight
           duration:
             raw: '8'
@@ -5242,7 +5188,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           heightened: >-
             <p>For each additional @L[Core:MP]{MP} spent, you may target an
             additional person.</p>
@@ -5306,14 +5251,10 @@ items:
       statDice:
         hp:
           disabled: false
-          faces: 8
-          number:
-            raw: '1'
+          formula: 1d8
         mp:
           disabled: false
-          faces: 12
-          number:
-            raw: '1'
+          formula: 1d12
     type: rank
   - _id: wzNAyu16fySkqpaz
     _key: '!actors.items!b178f6794385765b.wzNAyu16fySkqpaz'
@@ -5322,7 +5263,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     effects:
       - _id: LwQ7bQ0NWiZc8z7r
         _key: >-
@@ -5332,7 +5273,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -5353,7 +5294,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/properties/prehensile.webp
         name: Prehensile
         system:
@@ -5374,7 +5315,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -5412,24 +5353,24 @@ items:
           unit: self
       vitals: false
     type: body
-  - _id: 2cTcvx9k2CrZXQer
-    _key: '!actors.items!b178f6794385765b.2cTcvx9k2CrZXQer'
+  - _id: KVgcFyoNmdOMJPPj
+    _key: '!actors.items!b178f6794385765b.KVgcFyoNmdOMJPPj'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.4a095aaed0254ec3
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     effects:
       - _id: NGCuRUaVtXnxAbRe
         _key: >-
-          !actors.items.effects!b178f6794385765b.2cTcvx9k2CrZXQer.NGCuRUaVtXnxAbRe
+          !actors.items.effects!b178f6794385765b.KVgcFyoNmdOMJPPj.NGCuRUaVtXnxAbRe
         _stats:
           compendiumSource: Compendium.teriock.abilities.Item.ac35fb736d8bd407
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/arcane-ray.webp
         name: Arcane Ray
         system:
@@ -5477,7 +5418,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           heightened: >-
             <p>For each additional @L[Core:MP]{MP} spent, deal an additional
             [[/damage 1d4[magic]]] @L[Core:Damage]{damage}.</p>
@@ -5506,13 +5446,13 @@ items:
         type: ability
       - _id: aCWLNsvSFjEuLTyl
         _key: >-
-          !actors.items.effects!b178f6794385765b.2cTcvx9k2CrZXQer.aCWLNsvSFjEuLTyl
+          !actors.items.effects!b178f6794385765b.KVgcFyoNmdOMJPPj.aCWLNsvSFjEuLTyl
         _stats:
           compendiumSource: Compendium.teriock.abilities.Item.30358f2e8d9b3a0a
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/staff-touch.webp
         name: Staff Touch
         system:
@@ -5532,7 +5472,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: staff-touch
           interaction: manifest
           maneuver: passive
@@ -5562,7 +5501,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           skill: true
           standard: true

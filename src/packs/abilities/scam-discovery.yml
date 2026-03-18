@@ -4,7 +4,7 @@ _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.35
+  systemVersion: 0.10.50
 effects:
   - _id: 083f029e9264a39b
     _key: '!items.effects!083f029e9264a39b.083f029e9264a39b'
@@ -12,7 +12,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/scam-discovery.webp
     name: Scam Discovery
     system:
@@ -33,7 +33,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: scam-discovery
       interaction: manifest
       maneuver: passive
@@ -47,7 +46,7 @@ effects:
         - divine
         - financial
       range:
-        unit: self
+        unit: melee
       revealed: true
       skill: true
       standard: true
@@ -61,7 +60,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/sense-scam.webp
     name: Sense Scam
     system:
@@ -85,7 +84,6 @@ effects:
           unit: self
       featSaveAttribute: unp
       form: normal
-      grantOnly: false
       identifier: sense-scam
       interaction: feat
       maneuver: active
@@ -117,7 +115,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/audit.webp
     name: Audit
     system:
@@ -126,14 +124,19 @@ effects:
       competence:
         raw: 0
       costs:
-        material: true
+        components:
+          material:
+            description: <p>Something symbolic of your deity.</p>
+            type: description
+          somatic:
+            type: tag
+          verbal:
+            type: tag
         materialCost: <p>Something symbolic of your deity.</p>
-        mp:
-          type: static
-          value:
-            static: 1
-        somatic: true
-        verbal: true
+        primary:
+          mp:
+            formula: '1'
+            type: formula
       delivery:
         base: sight
         package: ritual
@@ -151,7 +154,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: audit
       interaction: manifest
       maneuver: slow

@@ -179,13 +179,37 @@ function cleanAbility(doc) {
 
   // Clean Costs
   if (doc.system.costs) {
-    if (!doc.system.costs.verbal) delete doc.system.costs.verbal;
-    if (!doc.system.costs.somatic) delete doc.system.costs.somatic;
-    if (!doc.system.costs.material) delete doc.system.costs.material;
-    if (doc.system.costs.mp?.type === "none") delete doc.system.costs.mp;
-    if (doc.system.costs.hp?.type === "none") delete doc.system.costs.hp;
-    if (doc.system.costs.gp?.type === "none") delete doc.system.costs.gp;
+    delete doc.system.costs.verbal;
+    delete doc.system.costs.somatic;
+    delete doc.system.costs.material;
+    delete doc.system.costs.mp;
+    delete doc.system.costs.hp;
+    delete doc.system.costs.gp;
+    delete doc.system.adept;
+    delete doc.system.gifted;
+    if (doc.system.costs.tweaks) {
+      if (!doc.system.costs.tweaks.adept) {
+        delete doc.system.costs.tweaks.adept;
+      }
+      if (!doc.system.costs.tweaks.gifted) {
+        delete doc.system.costs.tweaks.gifted;
+      }
+      if (!doc.system.costs.tweaks.inept) {
+        delete doc.system.costs.tweaks.inept;
+      }
+      if (
+        !doc.system.costs.tweaks.adept &&
+        !doc.system.costs.tweaks.gifted &&
+        !doc.system.costs.tweaks.inept
+      ) {
+        delete doc.system.costs.tweaks;
+      }
+    }
   }
+
+  // Clean Equipment Connections
+  if (!doc.system.consumeSource) delete doc.system.consumeSource;
+  if (!doc.system.grantOnly) delete doc.system.grantOnly;
 
   // Clean Upgrades
   if (doc.system.upgrades) {
@@ -202,18 +226,20 @@ function cleanAbility(doc) {
   if (!doc.system.gifted?.enabled) delete doc.system.gifted;
 
   // Clean Tags
+  if (!doc.system.basic) delete doc.system.basic;
+  if (!doc.system.class) delete doc.system.class;
+  if (!doc.system.consumable) delete doc.system.consumable;
   if (!doc.system.elderSorcery) delete doc.system.elderSorcery;
-  if (!doc.system.sustained) delete doc.system.sustained;
+  if (!doc.system.guildmaster) delete doc.system.guildmaster;
+  if (!doc.system.invoked) delete doc.system.invoked;
+  if (!doc.system.lore) delete doc.system.lore;
+  if (!doc.system.ritual) delete doc.system.ritual;
+  if (!doc.system.rotator) delete doc.system.rotator;
   if (!doc.system.skill) delete doc.system.skill;
   if (!doc.system.spell) delete doc.system.spell;
   if (!doc.system.standard) delete doc.system.standard;
-  if (!doc.system.ritual) delete doc.system.ritual;
-  if (!doc.system.class) delete doc.system.class;
-  if (!doc.system.rotator) delete doc.system.rotator;
-  if (!doc.system.invoked) delete doc.system.invoked;
-  if (!doc.system.basic) delete doc.system.basic;
+  if (!doc.system.sustained) delete doc.system.sustained;
   if (!doc.system.warded) delete doc.system.warded;
-  if (!doc.system.consumable) delete doc.system.consumable;
 
   // Clean Retired Tags
   delete doc.system.secret;

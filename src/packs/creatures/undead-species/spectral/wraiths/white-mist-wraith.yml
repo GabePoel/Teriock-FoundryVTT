@@ -15,7 +15,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     effects:
       - _id: yQpBFkfZJCRbp5hU
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/animate-dead.webp
         name: Animate Dead
         system:
@@ -33,12 +33,15 @@ items:
           competence:
             raw: 0
           costs:
-            mp:
-              type: static
-              value:
-                static: 1
-            somatic: true
-            verbal: true
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
+            primary:
+              mp:
+                formula: '1'
+                type: formula
           delivery: hand
           duration:
             raw: '0'
@@ -57,7 +60,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: animate-dead
           interaction: attack
           invoked: true
@@ -99,7 +101,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/charm.webp
         name: Charm
         system:
@@ -124,10 +126,10 @@ items:
           competence:
             raw: 0
           costs:
-            mp:
-              type: static
-              value:
-                static: 1
+            primary:
+              mp:
+                formula: '1'
+                type: formula
           delivery: hand
           duration:
             raw: '1'
@@ -145,7 +147,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: charm
           interaction: attack
           maneuver: active
@@ -173,7 +174,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/child-of-mist.webp
         name: Child of Mist
         system:
@@ -193,7 +194,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: child-of-mist
           interaction: manifest
           maneuver: passive
@@ -208,7 +208,7 @@ items:
           powerSources:
             - unknown
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -221,7 +221,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/completely-silent.webp
         name: Completely Silent
         system:
@@ -259,7 +259,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: completely-silent
           interaction: manifest
           maneuver: passive
@@ -275,7 +274,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -288,7 +287,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/cannot-speak.webp
         name: Cannot Speak
         system:
@@ -327,7 +326,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: flaw
-          grantOnly: false
           identifier: cannot-speak
           interaction: manifest
           maneuver: passive
@@ -338,7 +336,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -351,7 +349,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/ethereal-silence.webp
         name: Ethereal Silence
         system:
@@ -372,7 +370,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: ethereal-silence
           interaction: manifest
           maneuver: passive
@@ -385,7 +382,7 @@ items:
           powerSources:
             - unknown
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -398,7 +395,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/ethereal-full-plate.webp
         name: Ethereal Full Plate
         system:
@@ -443,7 +440,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: ethereal-full-plate
           interaction: manifest
           maneuver: passive
@@ -458,7 +454,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -471,7 +467,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/flying.webp
         name: Flying
         system:
@@ -536,7 +532,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: flying
           interaction: manifest
           maneuver: passive
@@ -548,7 +543,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           skill: true
           standard: true
@@ -563,7 +558,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/ghostlike.webp
         name: Ghostlike
         system:
@@ -583,7 +578,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: ghostlike
           interaction: manifest
           maneuver: passive
@@ -592,7 +586,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -609,7 +603,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/greater-undead.webp
         name: Greater Undead
         system:
@@ -631,7 +625,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: greater-undead
           interaction: manifest
           maneuver: passive
@@ -651,7 +644,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -664,7 +657,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/ethereal-senses.webp
         name: Ethereal Senses
         system:
@@ -711,7 +704,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: ethereal-senses
           interaction: manifest
           maneuver: passive
@@ -726,7 +718,7 @@ items:
             - spiritual
             - primal
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -739,7 +731,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
         name: Healing Sensitivity
         system:
@@ -762,7 +754,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: flaw
-          grantOnly: false
           identifier: healing-sensitivity
           interaction: manifest
           maneuver: passive
@@ -780,7 +771,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -793,7 +784,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/magical-durability.webp
         name: Magical Durability
         system:
@@ -838,7 +829,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: magical-durability
           interaction: manifest
           maneuver: passive
@@ -851,7 +841,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -864,7 +854,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/mana-drain-touch.webp
         name: Mana Drain Touch
         system:
@@ -914,7 +904,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: mana-drain-touch
           interaction: attack
           maneuver: active
@@ -952,7 +941,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/undead-mind.webp
         name: Undead Mind
         system:
@@ -1006,7 +995,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: undead-mind
           interaction: manifest
           maneuver: passive
@@ -1021,7 +1009,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -1034,7 +1022,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/undying-durability.webp
         name: Undying Durability
         system:
@@ -1095,7 +1083,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: undying-durability
           interaction: manifest
           maneuver: passive
@@ -1115,7 +1102,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -1128,7 +1115,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/high-intelligence.webp
         name: High Intelligence
         system:
@@ -1148,7 +1135,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: high-intelligence
           interaction: manifest
           maneuver: passive
@@ -1157,7 +1143,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -1174,7 +1160,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/incorporeal.webp
         name: Incorporeal
         system:
@@ -1218,7 +1204,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: incorporeal
           interaction: manifest
           maneuver: passive
@@ -1234,7 +1219,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -1247,7 +1232,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/instant-ethereal.webp
         name: Instant Ethereal
         system:
@@ -1287,7 +1272,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: instant-ethereal
           interaction: manifest
           maneuver: active
@@ -1300,7 +1284,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -1313,7 +1297,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/memory-drain-touch.webp
         name: Memory Drain Touch
         system:
@@ -1351,7 +1335,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: memory-drain-touch
           interaction: attack
           maneuver: active
@@ -1381,7 +1364,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
@@ -1401,7 +1384,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: normal-movement
           interaction: manifest
           maneuver: passive
@@ -1410,7 +1392,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -1427,7 +1409,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
@@ -1447,7 +1429,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: normal-perception
           interaction: manifest
           maneuver: passive
@@ -1456,7 +1437,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -1473,7 +1454,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/normal-strength.webp
         name: Normal Strength
         system:
@@ -1493,7 +1474,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: normal-strength
           interaction: manifest
           maneuver: passive
@@ -1502,7 +1482,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           targets:
             - self
@@ -1519,7 +1499,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/slay.webp
         name: Slay
         system:
@@ -1553,10 +1533,10 @@ items:
           competence:
             raw: 0
           costs:
-            mp:
-              type: static
-              value:
-                static: 1
+            primary:
+              mp:
+                formula: '1'
+                type: formula
           delivery: weapon
           duration:
             raw: '0'
@@ -1574,7 +1554,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: slay
           interaction: manifest
           maneuver: reactive
@@ -1607,7 +1586,6 @@ items:
     img: systems/teriock/src/icons/creatures/white-mist-wraith.webp
     name: White Mist Wraith
     system:
-      adult: 0
       appearance: >-
         <p>Transparent glassy @L[Category:Humanoid creatures]{humanoids} with
         cracks in space instead of eyes. They have long claws and strands of
@@ -1628,21 +1606,16 @@ items:
         @L[Class:Necromancer]{Necromancer}. Innately @L[Category:Classes]{rank}
         1 @L[Class:Storm Mage]{Storm Mage}, @L[Class:Corsair]{Corsair}, or
         @L[Class:Thief]{Thief}.</p>
-      lifespan: 0
       size:
         enabled: true
         value: 3
       statDice:
         hp:
           disabled: false
-          faces: 10
-          number:
-            raw: '4'
+          formula: 4d10
         mp:
           disabled: false
-          faces: 10
-          number:
-            raw: '1'
+          formula: 1d10
       traits:
         - undead
     type: species
@@ -1653,7 +1626,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     effects:
       - _id: 4ivp79u1LGhVpN5A
         _key: >-
@@ -1663,7 +1636,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/properties/av0.webp
         name: AV0
         system:
@@ -1704,7 +1677,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -1725,7 +1698,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/properties/prehensile.webp
         name: Prehensile
         system:
@@ -1746,7 +1719,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -1791,7 +1764,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     effects:
       - _id: Q3bElOKJWjw3DI9t
         _key: >-
@@ -1801,7 +1774,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/death-ray.webp
         name: Death Ray
         system:
@@ -1864,7 +1837,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           heightened: >-
             <p>For each additional @L[Core:MP]{MP} spent, roll an additional
             [[/kill 1d6]].</p>
@@ -1902,7 +1874,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/spirit-guide.webp
         name: Spirit Guide
         system:
@@ -1932,8 +1904,11 @@ items:
           competence:
             raw: 0
           costs:
-            somatic: true
-            verbal: true
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
           delivery: sight
           duration:
             raw: '24'
@@ -1953,7 +1928,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           heightened: >-
             <p>For each additional @L[Core:MP]{MP} spent, you may target an
             additional creature.</p>
@@ -2000,7 +1974,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/summon-the-dead.webp
         name: Summon the Dead
         system:
@@ -2008,24 +1982,21 @@ items:
           competence:
             raw: 0
           costs:
-            hp:
-              type: variable
-              value:
-                static: 0
-                variable: >-
+            primary:
+              hp:
+                description: >-
                   <p>[[lookup name]] costs 0 @L[Core:Hit Points and Mana
                   Points]{HP} if the body is in your possession. Otherwise, it
                   costs 3 @L[Core:Hit Points and Mana Points]{HP} per
                   @L[Core:Size]{size} of the body.</p>
-            mp:
-              type: variable
-              value:
-                static: 0
-                variable: >-
+                type: description
+              mp:
+                description: >-
                   <p>[[lookup name]] costs 0 @L[Core:Hit Points and Mana
                   Points]{MP} if the body is in your possession. Otherwise, it
                   costs 2 @L[Core:Hit Points and Mana Points]{MP} per
                   @L[Core:Size]{size} of the body.</p>
+                type: description
           delivery: sight
           duration:
             raw: '0'
@@ -2045,7 +2016,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: summon-the-dead
           interaction: manifest
           maneuver: slow
@@ -2087,7 +2057,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/terror-ball.webp
         name: Terror Ball
         system:
@@ -2138,7 +2108,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           heightened: >-
             <p>For each additional @L[Core:MP]{MP} spent, deal an additional
             [[/damage 1d4[magic terror]]] @L[Core:Damage]{damage}.</p>
@@ -2189,14 +2158,10 @@ items:
       statDice:
         hp:
           disabled: false
-          faces: 8
-          number:
-            raw: '1'
+          formula: 1d8
         mp:
           disabled: false
-          faces: 12
-          number:
-            raw: '1'
+          formula: 1d12
     type: rank
   - _id: LJdo01EMdfmDuy7w
     _key: '!actors.items!073355c8b877b782.LJdo01EMdfmDuy7w'
@@ -2205,7 +2170,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     effects:
       - _id: fsBv5b4tQSp6BeUJ
         _key: >-
@@ -2215,7 +2180,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/animate-dead.webp
         name: Animate Dead
         system:
@@ -2224,12 +2189,15 @@ items:
           competence:
             raw: 0
           costs:
-            mp:
-              type: static
-              value:
-                static: 1
-            somatic: true
-            verbal: true
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
+            primary:
+              mp:
+                formula: '1'
+                type: formula
           delivery: hand
           duration:
             raw: '0'
@@ -2248,7 +2216,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: animate-dead
           interaction: attack
           invoked: true
@@ -2290,7 +2257,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         flags:
           teriock:
             dontConsume: false
@@ -2315,100 +2282,99 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: celestial-elder-sorcery-words
           interaction: manifest
           maneuver: passive
           overview:
             base: >-
               <p>You know @L[Core:Elder Sorcery]{OP} 1 @L[Core:Celestial Elder
-              Sorcery Words]{Celestial Elder Sorcery words}.</p><table
+              Sorcery Words]{Celestial Elder Sorcery words}.<table
               class="wikitable sortable"><caption style="white-space:nowrap">OP
               1 Celestial @L[Core:Elder Sorcery Words]{Elder Sorcery
-              Words}</caption><tbody><tr><th
-              style="background-color:#e5a50a1A">OP</th><th
-              style="background-color:#6135831A">Celestial Adjectives</th><th
-              style="background-color:#6135831A">Celestial Adverbs</th><th
-              style="background-color:#6135831A">Celestial Articles</th><th
-              style="background-color:#6135831A">Celestial Conjunctions</th><th
-              style="background-color:#6135831A">Celestial Nouns</th><th
-              style="background-color:#6135831A">Celestial Prepositions</th><th
-              style="background-color:#6135831A">Celestial Pronouns</th><th
-              style="background-color:#6135831A">Celestial
-              Verbs</th></tr><tr><td rowspan="9"
-              style="background-color:#f9f06b1A">1</td><td
-              style="background-color:#dc8add1A">bad</td><td
-              style="background-color:#dc8add1A">as</td><td
-              style="background-color:#dc8add1A">an</td><td
-              style="background-color:#dc8add1A">as</td><td
-              style="background-color:#dc8add1A">color</td><td
-              style="background-color:#dc8add1A">by</td><td
-              style="background-color:#dc8add1A">me</td><td
-              style="background-color:#dc8add1A">are</td></tr> <tr><td
-              style="background-color:#6135831A">big</td><td
-              style="background-color:#6135831A">carefully</td><td
-              style="background-color:#6135831A">one</td><td
-              style="background-color:#6135831A">but</td><td
-              style="background-color:#6135831A">cup</td><td
-              style="background-color:#6135831A">for</td><td
-              style="background-color:#6135831A">my</td><td
-              style="background-color:#6135831A">be</td></tr> <tr><td
-              style="background-color:#dc8add1A">bright</td><td
-              style="background-color:#dc8add1A">here</td><td
-              style="background-color:#dc8add1A">the</td><td
-              style="background-color:#dc8add1A">or</td><td
-              style="background-color:#dc8add1A">dagger</td><td
-              style="background-color:#dc8add1A">in</td><td
-              style="background-color:#dc8add1A">that</td><td
-              style="background-color:#dc8add1A">begin</td></tr> <tr><td
-              style="background-color:#6135831A">clean</td><td
-              style="background-color:#6135831A">pretty</td><td
-              style="background-color:#6135831A"></td><td
-              style="background-color:#6135831A">so</td><td
-              style="background-color:#6135831A">foot</td><td
-              style="background-color:#6135831A">of</td><td
-              style="background-color:#6135831A">this</td><td
-              style="background-color:#6135831A">did</td></tr> <tr><td
-              style="background-color:#dc8add1A">little</td><td
-              style="background-color:#dc8add1A">then</td><td
-              style="background-color:#dc8add1A"></td><td
-              style="background-color:#dc8add1A"></td><td
-              style="background-color:#dc8add1A">hand</td><td
-              style="background-color:#dc8add1A">off</td><td
-              style="background-color:#dc8add1A">you</td><td
-              style="background-color:#dc8add1A">may</td></tr> <tr><td
-              style="background-color:#6135831A">long</td><td
-              style="background-color:#6135831A">there</td><td
-              style="background-color:#6135831A"></td><td
-              style="background-color:#6135831A"></td><td
-              style="background-color:#6135831A">hat</td><td
-              style="background-color:#6135831A">on</td><td
-              style="background-color:#6135831A">your</td><td
-              style="background-color:#6135831A">might</td></tr> <tr><td
-              style="background-color:#dc8add1A">short</td><td
-              style="background-color:#dc8add1A">today</td><td
-              style="background-color:#dc8add1A"></td><td
-              style="background-color:#dc8add1A"></td><td
-              style="background-color:#dc8add1A">skin</td><td
-              style="background-color:#dc8add1A">to</td><td
-              style="background-color:#dc8add1A"></td><td
-              style="background-color:#dc8add1A">stand</td></tr> <tr><td
-              style="background-color:#6135831A">small</td><td
-              style="background-color:#6135831A"></td><td
-              style="background-color:#6135831A"></td><td
-              style="background-color:#6135831A"></td><td
-              style="background-color:#6135831A">torch</td><td
-              style="background-color:#6135831A"></td><td
-              style="background-color:#6135831A"></td><td
-              style="background-color:#6135831A">tend</td></tr> <tr><td
-              style="background-color:#dc8add1A">this</td><td
-              style="background-color:#dc8add1A"></td><td
-              style="background-color:#dc8add1A"></td><td
-              style="background-color:#dc8add1A"></td><td
-              style="background-color:#dc8add1A">wand</td><td
-              style="background-color:#dc8add1A"></td><td
-              style="background-color:#dc8add1A"></td><td
-              style="background-color:#dc8add1A">use</td></tr></tbody></table><p></p>
+              Words}</caption><tbody><tr><th style="background-color:
+              #e5a50a1A">OP</th><th style="background-color:
+              #6135831A">Celestial Adjectives</th><th style="background-color:
+              #6135831A">Celestial Adverbs</th><th style="background-color:
+              #6135831A">Celestial Articles</th><th style="background-color:
+              #6135831A">Celestial Conjunctions</th><th style="background-color:
+              #6135831A">Celestial Nouns</th><th style="background-color:
+              #6135831A">Celestial Prepositions</th><th style="background-color:
+              #6135831A">Celestial Pronouns</th><th style="background-color:
+              #6135831A">Celestial Verbs</th></tr><tr><td rowspan="9"
+              style="background-color: #f9f06b1A">1</td><td
+              style="background-color: #dc8add1A">bad</td><td
+              style="background-color: #dc8add1A">as</td><td
+              style="background-color: #dc8add1A">an</td><td
+              style="background-color: #dc8add1A">as</td><td
+              style="background-color: #dc8add1A">color</td><td
+              style="background-color: #dc8add1A">by</td><td
+              style="background-color: #dc8add1A">me</td><td
+              style="background-color: #dc8add1A">are</td></tr> <tr><td
+              style="background-color: #6135831A">big</td><td
+              style="background-color: #6135831A">carefully</td><td
+              style="background-color: #6135831A">one</td><td
+              style="background-color: #6135831A">but</td><td
+              style="background-color: #6135831A">cup</td><td
+              style="background-color: #6135831A">for</td><td
+              style="background-color: #6135831A">my</td><td
+              style="background-color: #6135831A">be</td></tr> <tr><td
+              style="background-color: #dc8add1A">bright</td><td
+              style="background-color: #dc8add1A">here</td><td
+              style="background-color: #dc8add1A">the</td><td
+              style="background-color: #dc8add1A">or</td><td
+              style="background-color: #dc8add1A">dagger</td><td
+              style="background-color: #dc8add1A">in</td><td
+              style="background-color: #dc8add1A">that</td><td
+              style="background-color: #dc8add1A">begin</td></tr> <tr><td
+              style="background-color: #6135831A">clean</td><td
+              style="background-color: #6135831A">pretty</td><td
+              style="background-color: #6135831A"></td><td
+              style="background-color: #6135831A">so</td><td
+              style="background-color: #6135831A">foot</td><td
+              style="background-color: #6135831A">of</td><td
+              style="background-color: #6135831A">this</td><td
+              style="background-color: #6135831A">did</td></tr> <tr><td
+              style="background-color: #dc8add1A">little</td><td
+              style="background-color: #dc8add1A">then</td><td
+              style="background-color: #dc8add1A"></td><td
+              style="background-color: #dc8add1A"></td><td
+              style="background-color: #dc8add1A">hand</td><td
+              style="background-color: #dc8add1A">off</td><td
+              style="background-color: #dc8add1A">you</td><td
+              style="background-color: #dc8add1A">may</td></tr> <tr><td
+              style="background-color: #6135831A">long</td><td
+              style="background-color: #6135831A">there</td><td
+              style="background-color: #6135831A"></td><td
+              style="background-color: #6135831A"></td><td
+              style="background-color: #6135831A">hat</td><td
+              style="background-color: #6135831A">on</td><td
+              style="background-color: #6135831A">your</td><td
+              style="background-color: #6135831A">might</td></tr> <tr><td
+              style="background-color: #dc8add1A">short</td><td
+              style="background-color: #dc8add1A">today</td><td
+              style="background-color: #dc8add1A"></td><td
+              style="background-color: #dc8add1A"></td><td
+              style="background-color: #dc8add1A">skin</td><td
+              style="background-color: #dc8add1A">to</td><td
+              style="background-color: #dc8add1A"></td><td
+              style="background-color: #dc8add1A">stand</td></tr> <tr><td
+              style="background-color: #6135831A">small</td><td
+              style="background-color: #6135831A"></td><td
+              style="background-color: #6135831A"></td><td
+              style="background-color: #6135831A"></td><td
+              style="background-color: #6135831A">torch</td><td
+              style="background-color: #6135831A"></td><td
+              style="background-color: #6135831A"></td><td
+              style="background-color: #6135831A">tend</td></tr> <tr><td
+              style="background-color: #dc8add1A">this</td><td
+              style="background-color: #dc8add1A"></td><td
+              style="background-color: #dc8add1A"></td><td
+              style="background-color: #dc8add1A"></td><td
+              style="background-color: #dc8add1A">wand</td><td
+              style="background-color: #dc8add1A"></td><td
+              style="background-color: #dc8add1A"></td><td
+              style="background-color:
+              #dc8add1A">use</td></tr></tbody></table></p>
             fluent: >-
               <p>The @L[Core:Elder Sorcery]{OP} of words you know is 1 + (3 ×
               @L[Core:Fluency Bonus]{F}).</p>
@@ -2420,7 +2386,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           skill: true
           targets:
@@ -2434,7 +2400,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/crown-of-fear.webp
         name: Crown of Fear
         system:
@@ -2479,10 +2445,10 @@ items:
           competence:
             raw: 0
           costs:
-            mp:
-              type: static
-              value:
-                static: 1
+            primary:
+              mp:
+                formula: '1'
+                type: formula
           delivery: self
           duration:
             raw: '8'
@@ -2499,7 +2465,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: crown-of-fear
           interaction: manifest
           maneuver: active
@@ -2513,7 +2478,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           rotator: true
           spell: true
@@ -2530,7 +2495,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/death-rattle.webp
         name: Death Rattle
         system:
@@ -2539,8 +2504,11 @@ items:
           competence:
             raw: 0
           costs:
-            somatic: true
-            verbal: true
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
           delivery: self
           duration:
             raw: '0'
@@ -2557,7 +2525,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: death-rattle
           interaction: manifest
           invoked: true
@@ -2571,7 +2538,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           rotator: true
           spell: true
@@ -2588,7 +2555,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         flags:
           teriock:
             dontConsume: false
@@ -2599,25 +2566,24 @@ items:
           competence:
             raw: 0
           costs:
-            hp:
-              type: variable
-              value:
-                static: 0
-                variable: >-
+            components:
+              material:
+                description: >-
+                  <p>Creation cost is at least 3 × the material components of
+                  the spell itself.</p>
+                type: description
+            primary:
+              hp:
+                description: >-
                   <p>Creation cost is at least 3 × @L[Core:HP]{HP} of the spell
                   itself.</p>
-            material: true
-            materialCost: >-
-              <p>Creation cost is at least 3 × the material components of the
-              spell itself.</p>
-            mp:
-              type: variable
-              value:
-                static: 0
-                variable: >-
+                type: description
+              mp:
+                description: >-
                   <p>Creation cost is at least 1 @L[Core:MP]{MP} per
                   @L[Core:Elder Sorcery]{OP} of <i>each</i> word in the spell
                   plus 3 × @L[Core:MP]{MP} of the spell itself.</p>
+                type: description
           delivery: sight
           duration:
             raw: '0'
@@ -2633,7 +2599,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: elder-sorcery-creation
           interaction: manifest
           maneuver: slow
@@ -2680,7 +2645,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/ethereal-shift.webp
         name: Ethereal Shift
         system:
@@ -2707,10 +2672,10 @@ items:
           competence:
             raw: 0
           costs:
-            mp:
-              type: static
-              value:
-                static: 1
+            primary:
+              mp:
+                formula: '1'
+                type: formula
           delivery: self
           duration:
             raw: '1'
@@ -2727,7 +2692,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: ethereal-shift
           interaction: manifest
           maneuver: active
@@ -2740,7 +2704,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           rotator: true
           spell: true
@@ -2756,7 +2720,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/fear-aura.webp
         name: Fear Aura
         system:
@@ -2818,10 +2782,10 @@ items:
           competence:
             raw: 0
           costs:
-            mp:
-              type: static
-              value:
-                static: 1
+            primary:
+              mp:
+                formula: '1'
+                type: formula
           delivery: aura
           duration:
             raw: '1'
@@ -2844,7 +2808,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           heightened: >-
             <p>For each additional @L[Core:MP]{MP} spent, deal an additional
             [[/damage 1d4[magic terror]]] @L[Core:Damage]{damage}  as well.</p>
@@ -2874,7 +2837,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/fear-touch.webp
         name: Fear Touch
         system:
@@ -2978,7 +2941,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           heightened: >-
             <p>For each additional @L[Core:MP]{MP} spent, deal an additional
             [[/damage 1d4[magic terror]]] @L[Core:Damage]{damage}  as well.</p>
@@ -3011,7 +2973,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/necromancy-elder-sorcery.webp
         name: Necromancy Elder Sorcery
         system:
@@ -3032,7 +2994,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: necromancy-elder-sorcery
           interaction: manifest
           maneuver: passive
@@ -3047,7 +3008,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           skill: true
           targets:
@@ -3061,7 +3022,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: >-
           systems/teriock/src/icons/abilities/necromancy-elder-sorcery-words.webp
         name: Necromancy Elder Sorcery Words
@@ -3087,41 +3048,40 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: necromancy-elder-sorcery-words
           interaction: manifest
           maneuver: passive
           overview:
             base: >-
               <p>You know @L[Core:Elder Sorcery]{OP} 1 @L[Core:Necromancy Elder
-              Sorcery Words]{Necromancy Elder Sorcery words}.</p><table
+              Sorcery Words]{Necromancy Elder Sorcery words}.<table
               class="wikitable sortable"><caption style="white-space:nowrap">OP
               1 Necromancy @L[Core:Elder Sorcery Words]{Elder Sorcery
-              Words}</caption><tbody><tr><th
-              style="background-color:#e5a50a1A">OP</th><th
-              style="background-color:#0000001A">@L[Class:Necromancer]{Necromancy
-              Nouns}</th><th
-              style="background-color:#0000001A">@L[Class:Necromancer]{Necromancy
-              Verbs}</th></tr><tr><td rowspan="9"
-              style="background-color:#f9f06b1A">1</td><td
-              style="background-color:#77767b1A">blemish</td><td
-              style="background-color:#77767b1A">force</td></tr> <tr><td
-              style="background-color:#0000001A">darkness</td><td
-              style="background-color:#0000001A">intimidate</td></tr> <tr><td
-              style="background-color:#77767b1A">filth</td><td
-              style="background-color:#77767b1A">shame</td></tr> <tr><td
-              style="background-color:#0000001A">grave</td><td
-              style="background-color:#0000001A">sicken</td></tr> <tr><td
-              style="background-color:#77767b1A">pain</td><td
-              style="background-color:#77767b1A">spoil</td></tr> <tr><td
-              style="background-color:#0000001A">seizure</td><td
-              style="background-color:#0000001A">summon</td></tr> <tr><td
-              style="background-color:#77767b1A">stench</td><td
-              style="background-color:#77767b1A">taint</td></tr> <tr><td
-              style="background-color:#0000001A">tears</td><td
-              style="background-color:#0000001A">twist</td></tr> <tr><td
-              style="background-color:#77767b1A">woe</td><td
-              style="background-color:#77767b1A">wrench</td></tr></tbody></table><p></p>
+              Words}</caption><tbody><tr><th style="background-color:
+              #e5a50a1A">OP</th><th style="background-color:
+              #0000001A">@L[Class:Necromancer]{Necromancy Nouns}</th><th
+              style="background-color:
+              #0000001A">@L[Class:Necromancer]{Necromancy
+              Verbs}</th></tr><tr><td rowspan="9" style="background-color:
+              #f9f06b1A">1</td><td style="background-color:
+              #77767b1A">blemish</td><td style="background-color:
+              #77767b1A">force</td></tr> <tr><td style="background-color:
+              #0000001A">darkness</td><td style="background-color:
+              #0000001A">intimidate</td></tr> <tr><td style="background-color:
+              #77767b1A">filth</td><td style="background-color:
+              #77767b1A">shame</td></tr> <tr><td style="background-color:
+              #0000001A">grave</td><td style="background-color:
+              #0000001A">sicken</td></tr> <tr><td style="background-color:
+              #77767b1A">pain</td><td style="background-color:
+              #77767b1A">spoil</td></tr> <tr><td style="background-color:
+              #0000001A">seizure</td><td style="background-color:
+              #0000001A">summon</td></tr> <tr><td style="background-color:
+              #77767b1A">stench</td><td style="background-color:
+              #77767b1A">taint</td></tr> <tr><td style="background-color:
+              #0000001A">tears</td><td style="background-color:
+              #0000001A">twist</td></tr> <tr><td style="background-color:
+              #77767b1A">woe</td><td style="background-color:
+              #77767b1A">wrench</td></tr></tbody></table></p>
             fluent: >-
               <p>The @L[Core:Elder Sorcery]{OP} of words you know is 1 + (3 ×
               @L[Core:Fluency Bonus]{F}).</p>
@@ -3133,7 +3093,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           skill: true
           targets:
@@ -3147,7 +3107,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/necromancy-rotators.webp
         name: Necromancy Rotators
         system:
@@ -3229,7 +3189,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: necromancy-rotators
           interaction: manifest
           maneuver: passive
@@ -3266,7 +3225,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           skill: true
           targets:
@@ -3280,7 +3239,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/spirit-bury.webp
         name: Spirit Bury
         system:
@@ -3322,8 +3281,11 @@ items:
           competence:
             raw: 0
           costs:
-            somatic: true
-            verbal: true
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
           delivery: hand
           duration:
             raw: '1'
@@ -3340,7 +3302,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           heightened: >-
             <p>For each additional @L[Core:MP]{MP} spent, the duration of this
             effect increases by 1 hour.</p>
@@ -3374,7 +3335,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/undead-reanimation.webp
         name: Undead Reanimation
         system:
@@ -3383,8 +3344,11 @@ items:
           competence:
             raw: 0
           costs:
-            somatic: true
-            verbal: true
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
           delivery: self
           duration:
             raw: '8'
@@ -3401,7 +3365,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantOnly: false
           identifier: undead-reanimation
           interaction: manifest
           invoked: true
@@ -3415,7 +3378,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           rotator: true
           spell: true
@@ -3431,7 +3394,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/zombify.webp
         name: Zombify
         system:
@@ -3499,8 +3462,11 @@ items:
           competence:
             raw: 0
           costs:
-            somatic: true
-            verbal: true
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
           delivery: hand
           duration:
             raw: '1'
@@ -3520,7 +3486,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           heightened: >-
             <p>For each additional @L[Core:MP]{MP} spent, the duration of this
             effect increases by 1 hour.</p>
@@ -3581,14 +3546,10 @@ items:
       statDice:
         hp:
           disabled: false
-          faces: 8
-          number:
-            raw: '1'
+          formula: 1d8
         mp:
           disabled: false
-          faces: 12
-          number:
-            raw: '1'
+          formula: 1d12
     type: rank
   - _id: j73acoDkx1HEdFpo
     _key: '!actors.items!073355c8b877b782.j73acoDkx1HEdFpo'
@@ -3597,7 +3558,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     effects:
       - _id: 4ItidnDymWbci8lr
         _key: >-
@@ -3607,7 +3568,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/beastly-strength.webp
         name: Beastly Strength
         system:
@@ -3629,7 +3590,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: beastly-strength
           interaction: manifest
           maneuver: passive
@@ -3644,7 +3604,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           skill: true
           standard: true
@@ -3663,7 +3623,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
         name: Improved Armor Piercing
         system:
@@ -3685,7 +3645,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: improved-armor-piercing
           interaction: manifest
           maneuver: passive
@@ -3698,7 +3657,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           skill: true
           standard: true
@@ -3713,7 +3672,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/improved-strength.webp
         name: Improved Strength
         system:
@@ -3734,7 +3693,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: improved-strength
           interaction: manifest
           maneuver: passive
@@ -3747,7 +3705,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           skill: true
           standard: true
@@ -3766,7 +3724,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/improvised-weapons.webp
         name: Improvised Weapons
         system:
@@ -3787,7 +3745,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: improvised-weapons
           interaction: manifest
           maneuver: slow
@@ -3810,7 +3767,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           skill: true
           standard: true
@@ -3825,7 +3782,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/knockback.webp
         name: Knockback
         system:
@@ -3846,7 +3803,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: knockback
           interaction: attack
           maneuver: active
@@ -3896,33 +3852,29 @@ items:
       statDice:
         hp:
           disabled: false
-          faces: 12
-          number:
-            raw: '1'
+          formula: 1d12
         mp:
           disabled: false
-          faces: 8
-          number:
-            raw: '1'
+          formula: 1d8
     type: rank
-  - _id: BqNZ4UnNqfC7qNKC
-    _key: '!actors.items!073355c8b877b782.BqNZ4UnNqfC7qNKC'
+  - _id: yH5hgpqin2iHBPpT
+    _key: '!actors.items!073355c8b877b782.yH5hgpqin2iHBPpT'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.4a095aaed0254ec3
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     effects:
       - _id: NGCuRUaVtXnxAbRe
         _key: >-
-          !actors.items.effects!073355c8b877b782.BqNZ4UnNqfC7qNKC.NGCuRUaVtXnxAbRe
+          !actors.items.effects!073355c8b877b782.yH5hgpqin2iHBPpT.NGCuRUaVtXnxAbRe
         _stats:
           compendiumSource: Compendium.teriock.abilities.Item.ac35fb736d8bd407
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/arcane-ray.webp
         name: Arcane Ray
         system:
@@ -3970,7 +3922,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           heightened: >-
             <p>For each additional @L[Core:MP]{MP} spent, deal an additional
             [[/damage 1d4[magic]]] @L[Core:Damage]{damage}.</p>
@@ -3999,13 +3950,13 @@ items:
         type: ability
       - _id: aCWLNsvSFjEuLTyl
         _key: >-
-          !actors.items.effects!073355c8b877b782.BqNZ4UnNqfC7qNKC.aCWLNsvSFjEuLTyl
+          !actors.items.effects!073355c8b877b782.yH5hgpqin2iHBPpT.aCWLNsvSFjEuLTyl
         _stats:
           compendiumSource: Compendium.teriock.abilities.Item.30358f2e8d9b3a0a
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/staff-touch.webp
         name: Staff Touch
         system:
@@ -4025,7 +3976,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: staff-touch
           interaction: manifest
           maneuver: passive
@@ -4055,7 +4005,7 @@ items:
           powerSources:
             - magical
           range:
-            unit: self
+            unit: melee
           revealed: true
           skill: true
           standard: true
@@ -4082,24 +4032,24 @@ items:
       maxAv: 0
       type: learned
     type: power
-  - _id: USQCRTGrKKca11bt
-    _key: '!actors.items!073355c8b877b782.USQCRTGrKKca11bt'
+  - _id: ebPv3en8OyyytFed
+    _key: '!actors.items!073355c8b877b782.ebPv3en8OyyytFed'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.380dac2710b593e9
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     effects:
       - _id: 4tKZWhHPGEJoR7dR
         _key: >-
-          !actors.items.effects!073355c8b877b782.USQCRTGrKKca11bt.4tKZWhHPGEJoR7dR
+          !actors.items.effects!073355c8b877b782.ebPv3en8OyyytFed.4tKZWhHPGEJoR7dR
         _stats:
           compendiumSource: Compendium.teriock.abilities.Item.9713dc6aaadc794a
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/defensive-martial-arts.webp
         name: Defensive Martial Arts
         system:
@@ -4181,7 +4131,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: defensive-martial-arts
           interaction: manifest
           limitation: <p>While wearing @L[Category:Armor]{armor} only.</p>
@@ -4204,7 +4153,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           skill: true
           standard: true
@@ -4213,13 +4162,13 @@ items:
         type: ability
       - _id: 8e9roKoeCSmTjbbo
         _key: >-
-          !actors.items.effects!073355c8b877b782.USQCRTGrKKca11bt.8e9roKoeCSmTjbbo
+          !actors.items.effects!073355c8b877b782.ebPv3en8OyyytFed.8e9roKoeCSmTjbbo
         _stats:
           compendiumSource: Compendium.teriock.abilities.Item.d97a0e2c8e3d8730
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.10.42
+          systemVersion: 0.10.50
         img: systems/teriock/src/icons/abilities/warrior-techniques.webp
         name: Warrior Techniques
         system:
@@ -4239,7 +4188,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantOnly: false
           identifier: warrior-techniques
           interaction: manifest
           maneuver: passive
@@ -4255,7 +4203,7 @@ items:
           powerSources:
             - martial
           range:
-            unit: self
+            unit: melee
           revealed: true
           skill: true
           standard: true

@@ -14,7 +14,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/empathic-ray.webp
     name: Empathic Ray
     system:
@@ -58,11 +58,10 @@ effects:
       competence:
         raw: 0
       costs:
-        hp:
-          type: formula
-          value:
+        primary:
+          hp:
             formula: 1d4
-            static: 0
+            type: formula
       delivery:
         base: missile
         package: ray
@@ -84,7 +83,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/damage 1d6[magic]]] or @L[Core:Healing]{heal} the target again
@@ -133,7 +131,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/familiar-bond.webp
     name: Familiar Bond
     system:
@@ -141,14 +139,19 @@ effects:
       competence:
         raw: 0
       costs:
-        material: true
+        components:
+          material:
+            description: >-
+              <p>Something symbolic of the animal you wish to bond with and the
+              relationship you wish to have with it.</p>
+            type: description
         materialCost: >-
           <p>Something symbolic of the animal you wish to bond with and the
           relationship you wish to have with it.</p>
-        mp:
-          type: static
-          value:
-            static: 3
+        primary:
+          mp:
+            formula: '3'
+            type: formula
       delivery:
         base: sight
         package: ritual
@@ -169,7 +172,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: familiar-bond
       interaction: manifest
       maneuver: slow
@@ -218,7 +220,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/oracle.webp
     name: Oracle
     system:
@@ -226,10 +228,10 @@ effects:
       competence:
         raw: 0
       costs:
-        mp:
-          type: static
-          value:
-            static: 1
+        primary:
+          mp:
+            formula: '1'
+            type: formula
       delivery:
         base: self
         package: ritual
@@ -247,7 +249,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: oracle
       interaction: manifest
       maneuver: slow
@@ -281,7 +282,7 @@ effects:
         - divine
       range:
         raw: '5'
-        unit: self
+        unit: ft
       revealed: true
       ritual: true
       spell: true
@@ -296,7 +297,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/treeform-ball.webp
     name: Treeform Ball
     system:
@@ -366,7 +367,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, this effect lasts an
         addition turn without the target being able to @L[Ability:Self

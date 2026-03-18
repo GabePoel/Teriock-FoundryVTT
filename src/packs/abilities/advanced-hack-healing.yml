@@ -4,7 +4,7 @@ _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.35
+  systemVersion: 0.10.50
 effects:
   - _id: 3ddde616d16291fa
     _key: '!items.effects!3ddde616d16291fa.3ddde616d16291fa'
@@ -12,7 +12,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/advanced-hack-healing.webp
     name: Advanced Hack Healing
     system:
@@ -25,12 +25,15 @@ effects:
       competence:
         raw: 0
       costs:
-        mp:
-          type: static
-          value:
-            static: 1
-        somatic: true
-        verbal: true
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+        primary:
+          mp:
+            formula: '1'
+            type: formula
       delivery:
         base: self
       duration:
@@ -50,7 +53,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       identifier: advanced-hack-healing
       interaction: manifest
       invoked: true
@@ -65,7 +67,7 @@ effects:
         - magical
         - primal
       range:
-        unit: self
+        unit: melee
       revealed: true
       rotator: true
       spell: true

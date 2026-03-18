@@ -4,7 +4,7 @@ _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.35
+  systemVersion: 0.10.50
 effects:
   - _id: 895e9d07d1ee287c
     _key: '!items.effects!895e9d07d1ee287c.895e9d07d1ee287c'
@@ -12,7 +12,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/mind-control.webp
     name: Mind Control
     system:
@@ -55,11 +55,13 @@ effects:
       competence:
         raw: 0
       costs:
-        mp:
-          type: static
-          value:
-            static: 1
-        verbal: true
+        components:
+          verbal:
+            type: tag
+        primary:
+          mp:
+            formula: '1'
+            type: formula
       delivery:
         base: sight
       duration:
@@ -82,7 +84,6 @@ effects:
           unit: self
       featSaveAttribute: int
       form: special
-      grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, the maximum length of the
         command can be increased by 1 word.</p>

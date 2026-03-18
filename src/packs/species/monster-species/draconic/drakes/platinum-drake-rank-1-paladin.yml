@@ -14,7 +14,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/divine-gift.webp
     name: Divine Gift
     system:
@@ -22,26 +22,30 @@ effects:
       competence:
         raw: 0
       costs:
-        hp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
-              <p>You may sacrifice any amount of health as a part of this
-              ritual.</p>
-        material: true
+        components:
+          material:
+            description: >-
+              <p>You may sacrifice any material components as a part of this
+              ritual, but you must have a symbol of your deity present.</p>
+            type: description
+          somatic:
+            type: tag
+          verbal:
+            type: tag
         materialCost: >-
           <p>You may sacrifice any material components as a part of this ritual,
           but you must have a symbol of your deity present.</p>
-        mp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
+        primary:
+          hp:
+            description: >-
+              <p>You may sacrifice any amount of health as a part of this
+              ritual.</p>
+            type: description
+          mp:
+            description: >-
               <p>You may sacrifice any amount of mana as a part of this
               ritual.</p>
-        somatic: true
-        verbal: true
+            type: description
       delivery:
         base: sight
         package: ritual
@@ -59,7 +63,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: divine-gift
       interaction: manifest
       maneuver: slow
@@ -112,7 +115,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/jumpstart-heal.webp
     name: Jumpstart Heal
     system:
@@ -146,7 +149,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: jumpstart-heal
       interaction: attack
       maneuver: active
@@ -171,7 +173,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/might-strike.webp
     name: Might Strike
     system:
@@ -209,14 +211,19 @@ effects:
       competence:
         raw: 0
       costs:
-        material: true
+        components:
+          material:
+            description: <p>Something symbolic of your deity.</p>
+            type: description
+          somatic:
+            type: tag
+          verbal:
+            type: tag
         materialCost: <p>Something symbolic of your deity.</p>
-        mp:
-          type: static
-          value:
-            static: 1
-        somatic: true
-        verbal: true
+        primary:
+          mp:
+            formula: '1'
+            type: formula
       delivery:
         base: self
         package: ritual
@@ -232,7 +239,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: might-strike
       interaction: manifest
       maneuver: slow
@@ -258,7 +264,7 @@ effects:
       powerSources:
         - divine
       range:
-        unit: self
+        unit: melee
       requirements: >-
         <p>You not already @L[Category:Sustained abilities]{sustaining} [[lookup
         name]].</p>
@@ -277,7 +283,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/resist-mental-effects.webp
     name: Resist Mental Effects
     system:
@@ -334,7 +340,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: resist-mental-effects
       interaction: manifest
       maneuver: passive
@@ -347,7 +352,7 @@ effects:
       powerSources:
         - divine
       range:
-        unit: self
+        unit: melee
       revealed: true
       skill: true
       standard: true

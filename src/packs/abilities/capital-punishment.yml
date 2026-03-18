@@ -4,7 +4,7 @@ _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.35
+  systemVersion: 0.10.50
 effects:
   - _id: d5eadb23f5aed300
     _key: '!items.effects!d5eadb23f5aed300.d5eadb23f5aed300'
@@ -12,7 +12,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/capital-punishment.webp
     name: Capital Punishment
     system:
@@ -20,14 +20,19 @@ effects:
       competence:
         raw: 0
       costs:
-        material: true
+        components:
+          material:
+            description: <p>Something symbolic of your deity.</p>
+            type: description
+          somatic:
+            type: tag
+          verbal:
+            type: tag
         materialCost: <p>Something symbolic of your deity.</p>
-        mp:
-          type: static
-          value:
-            static: 1
-        somatic: true
-        verbal: true
+        primary:
+          mp:
+            formula: '1'
+            type: formula
       delivery:
         base: self
         package: ritual
@@ -43,7 +48,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: capital-punishment
       interaction: manifest
       maneuver: slow
@@ -62,7 +66,7 @@ effects:
         - divine
         - financial
       range:
-        unit: self
+        unit: melee
       requirements: >-
         <p>You are not already @L[Category:Sustained abilities]{sustaining}
         Might Strike.</p>
@@ -81,7 +85,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/slay.webp
     name: Slay
     system:
@@ -116,10 +120,10 @@ effects:
       competence:
         raw: 0
       costs:
-        mp:
-          type: static
-          value:
-            static: 1
+        primary:
+          mp:
+            formula: '1'
+            type: formula
       delivery:
         base: weapon
       duration:
@@ -137,7 +141,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: slay
       interaction: manifest
       limitation: >-

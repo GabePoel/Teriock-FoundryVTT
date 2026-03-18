@@ -13,7 +13,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/active-bow-out.webp
     name: Active Bow Out
     system:
@@ -50,7 +50,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: active-bow-out
       interaction: manifest
       maneuver: active
@@ -68,7 +67,7 @@ effects:
       powerSources:
         - spiritual
       range:
-        unit: self
+        unit: melee
       revealed: true
       skill: true
       standard: true
@@ -82,7 +81,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/bow-out.webp
     name: Bow Out
     system:
@@ -103,7 +102,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: bow-out
       interaction: manifest
       maneuver: passive
@@ -116,7 +114,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       skill: true
       standard: true
@@ -130,7 +128,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/chi-strike.webp
     name: Chi Strike
     system:
@@ -152,10 +150,10 @@ effects:
       competence:
         raw: 0
       costs:
-        mp:
-          type: static
-          value:
-            static: 1
+        primary:
+          mp:
+            formula: '1'
+            type: formula
       delivery:
         base: weapon
         package: strike
@@ -173,7 +171,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: chi-strike
       interaction: attack
       limitation: >-
@@ -219,7 +216,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/dueling-techniques.webp
     name: Dueling Techniques
     system:
@@ -227,7 +224,9 @@ effects:
       competence:
         raw: 0
       costs:
-        somatic: true
+        components:
+          somatic:
+            type: tag
       delivery:
         base: self
       duration:
@@ -246,7 +245,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: dueling-techniques
       interaction: manifest
       maneuver: active
@@ -261,7 +259,7 @@ effects:
       powerSources:
         - spiritual
       range:
-        unit: self
+        unit: melee
       requirements: >-
         <p>You must be @L[Condition:Dueling]{dueling} and wielding the targeted
         weapon.</p>
@@ -278,7 +276,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/reactive-bow-out.webp
     name: Reactive Bow Out
     system:
@@ -300,7 +298,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: reactive-bow-out
       interaction: manifest
       maneuver: reactive
@@ -316,7 +313,7 @@ effects:
       powerSources:
         - spiritual
       range:
-        unit: self
+        unit: melee
       revealed: true
       skill: true
       standard: true
@@ -334,7 +331,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/tea-ceremony.webp
     name: Tea Ceremony
     system:
@@ -342,14 +339,13 @@ effects:
       competence:
         raw: 0
       costs:
-        mp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
+        primary:
+          mp:
+            description: >-
               <p>2 MP per participant. Each participant must pay at least 1 MP.
               After that, the remaining cost of may be paid in any combination
               by any of the participants.</p>
+            type: description
       delivery:
         base: sight
         package: ritual
@@ -367,7 +363,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: tea-ceremony
       interaction: manifest
       maneuver: slow

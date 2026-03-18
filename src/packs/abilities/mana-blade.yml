@@ -4,7 +4,7 @@ _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.35
+  systemVersion: 0.10.50
 effects:
   - _id: 83e0dc090e915968
     _key: '!items.effects!83e0dc090e915968.83e0dc090e915968'
@@ -12,7 +12,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/mana-blade.webp
     name: Mana Blade
     system:
@@ -81,15 +81,14 @@ effects:
       competence:
         raw: 0
       costs:
-        mp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
+        primary:
+          mp:
+            description: >-
               <p>This costs 1 @L[Core:Hit Points and Mana Points]{MP} to cast,
               plus an additional @L[Core:Hit Points and Mana Points]{MP} if you
               choose to use the @L[Core:Proficiency Bonus]{proficiency}
               upgrade.</p>
+            type: description
       delivery:
         base: self
       duration:
@@ -108,7 +107,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, the duration of this
         effect increases by 1 hour.</p>
@@ -143,7 +141,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       requirements: <p>You have at least one hand free.</p>
       revealed: true
       rotator: true

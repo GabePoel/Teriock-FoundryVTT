@@ -13,7 +13,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.31
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/battle-cry.webp
     name: Battle Cry
     system:
@@ -34,7 +34,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: battle-cry
       interaction: manifest
       maneuver: passive
@@ -47,7 +46,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       skill: true
       standard: true
@@ -61,7 +60,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
     name: Battle Cry Aura
     system:
@@ -111,7 +110,9 @@ effects:
       competence:
         raw: 0
       costs:
-        verbal: true
+        components:
+          verbal:
+            type: tag
       delivery:
         base: aura
       duration:
@@ -131,7 +132,6 @@ effects:
           unit: self
       featSaveAttribute: int
       form: normal
-      grantOnly: false
       identifier: battle-cry-aura
       interaction: feat
       maneuver: active
@@ -159,7 +159,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
     name: Battle Cry Resistance
     system:
@@ -218,7 +218,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: battle-cry-resistance
       interaction: manifest
       maneuver: active
@@ -231,7 +230,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       skill: true
       standard: true
@@ -263,7 +262,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/endure.webp
     name: Endure
     system:
@@ -286,10 +285,9 @@ effects:
       competence:
         raw: 0
       costs:
-        hp:
-          type: hack
-          value:
-            static: 0
+        components:
+          hack:
+            type: tag
       delivery:
         base: self
       duration:
@@ -306,7 +304,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      grantOnly: false
       identifier: endure
       interaction: manifest
       maneuver: reactive
@@ -329,7 +326,7 @@ effects:
       powerSources:
         - martial
       range:
-        unit: self
+        unit: melee
       revealed: true
       skill: true
       standard: true

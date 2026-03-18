@@ -13,7 +13,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/circle-of-protection.webp
     name: Circle of Protection
     system:
@@ -38,10 +38,10 @@ effects:
       competence:
         raw: 0
       costs:
-        mp:
-          type: static
-          value:
-            static: 1
+        primary:
+          mp:
+            formula: '1'
+            type: formula
       delivery:
         base: hand
         package: ritual
@@ -59,7 +59,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, the duration of this
         effect increases by 24 hours.</p>
@@ -134,11 +133,6 @@ effects:
     system:
       competence:
         raw: 0
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
       delivery:
         base: self
       duration:
@@ -158,7 +152,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       interaction: manifest
       maneuver: active
       piercing:
@@ -178,10 +171,11 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/properties/mana-storing.webp
     name: Mana Storing
     system:
+      badge: '1'
       competence:
         raw: 0
       description: >-
@@ -212,19 +206,9 @@ effects:
     name: Rebirth
     system:
       _sup: 823nqH198nACfJpj
-      adept:
-        amount: 1
-        enabled: true
       class: lifeMage
       competence:
         raw: 0
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-        somatic: true
-        verbal: true
       delivery:
         base: hand
       duration:
@@ -245,7 +229,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       heightened: >-
         For each additional @L[Core:MP]{MP} spent, target can have been
         @L[Condition:Dead]{dead} for an additional 10 minutes. If target is
@@ -336,7 +319,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/abilities/spirit-bury.webp
     name: Spirit Bury
     system:
@@ -377,8 +360,11 @@ effects:
       competence:
         raw: 0
       costs:
-        somatic: true
-        verbal: true
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
       delivery:
         base: hand
       duration:
@@ -395,7 +381,6 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: special
-      grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, the duration of this
         effect increases by 1 hour.</p>
@@ -428,7 +413,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.10.50
     img: systems/teriock/src/icons/general/celestial-mana-storing.webp
     name: Stored Mana
     system:
@@ -460,6 +445,7 @@ effects:
         The item regains up to this much spent @L[Core:MP]{MP}. If dawn comes
         and nobody is @L[Ability:Attune]{attuned} to a Mana Storing item, it
         releases all @L[Core:MP]{MP} it had stored.</p>
+      identifier: stored-mana
       maxQuantity:
         raw: '4'
       quantity: 0
