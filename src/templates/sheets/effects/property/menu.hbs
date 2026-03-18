@@ -1,31 +1,15 @@
 <div class="ab-menu {{#if menuCollapsed}}collapsed{{/if}}">
   <div class="ab-menu-content">
     <div class="ab-menu-bar">
-      <div class="tgrid ap-check-grid g3">
-        {{formGroup
-          systemFields.applyIfShattered
-          value=system.applyIfShattered
-          disabled=(not editable)
-          classes="tgrid-item"
-          rootId=uuid
-        }}
-        {{formGroup
-          systemFields.applyIfDampened
-          value=system.applyIfDampened
-          disabled=(not editable)
-          classes="tgrid-item"
-          rootId=uuid
-        }}
-        {{formGroup
-          systemFields.modifiesActor
-          value=system.modifiesActor
-          disabled=(not editable)
-          classes="tgrid-item"
-          rootId=uuid
-        }}
+      <div class="ab-menu-bar">
+        <div class="tgrid ab-check-grid g2">
+          {{> "teriock/sheets/shared/display-toggles"}}
+        </div>
       </div>
-      <div class="tgrid ap-check-grid g2">
-        {{> "teriock/sheets/shared/display-field-buttons"}}
+      <div class="ab-menu-bar">
+        <div class="tgrid ab-button-grid menu-large-grid">
+          {{> "teriock/sheets/shared/display-field-buttons"}}
+        </div>
       </div>
     </div>
   </div>

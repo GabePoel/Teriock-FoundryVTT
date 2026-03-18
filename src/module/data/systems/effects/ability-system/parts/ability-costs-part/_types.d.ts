@@ -1,53 +1,33 @@
+import type { costOptions } from "../../../../../../constants/options/cost-options.mjs";
+
 declare global {
   namespace Teriock.Models {
     export type AbilityCostsPartInterface = {
-      /** <schema> If this ability is adept and how much it costs if so */
-      adept: CostAdjustment;
-      /** <schema> Costs that must be spent for this ability to be used */
       costs: {
-        break: BreakCost;
-        gp: NumberCost;
-        hp: NumberCost;
-        material: boolean;
-        materialCost: string;
-        mp: NumberCost;
-        somatic: boolean;
-        verbal: boolean;
+        /** <schema> Component costs */
+        components: Record<CostComponentKey, CostComponentValue>;
+        /** <schema> Primary costs */
+        primary: Record<CostPrimaryKey, CostPrimaryValue>;
+        /** <schema> Cost tweaks */
+        tweaks: Record<CostTweakKey, number>;
       };
-      /** <schema> If this ability is gifted and how much it costs if so */
-      gifted: CostAdjustment;
     };
   }
 }
 
-/**
- * Valid break costs
- */
-export type BreakCost = "shatter" | "destroy";
+export type CostComponentKey = keyof typeof costOptions.components.keys;
 
-/**
- * Valid cost types
- */
-export type ValueCost = "none" | "static" | "formula" | "variable" | "hack";
-
-/**
- * Numerical cost configuration.
- */
-export type NumberCost = {
-  type: ValueCost;
-  value: {
-    static: number;
-    formula: Teriock.System.FormulaString;
-    variable: string;
-  };
+export type CostComponentValue = {
+  type: keyof typeof costOptions.components.types | null;
+  description: string;
 };
 
-/**
- * Const adjustment.
- */
-export type CostAdjustment = {
-  /** <schema> If the MP cost is changed */
-  enabled: boolean;
-  /** <schema> Mow much the MP cost is changed */
-  amount: number;
+export type CostPrimaryKey = keyof typeof costOptions.primary.keys;
+
+export type CostPrimaryValue = {
+  type: keyof typeof costOptions.primary.types | null;
+  formula: Teriock.System.FormulaString;
+  description: string;
 };
+
+export type CostTweakKey = keyof typeof costOptions.tweaks;

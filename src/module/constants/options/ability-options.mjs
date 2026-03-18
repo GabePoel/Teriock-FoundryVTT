@@ -91,26 +91,9 @@ export const abilityOptions = {
     fork: "TERIOCK.TERMS.Expansion.fork",
     ripple: "TERIOCK.TERMS.Expansion.ripple",
   },
-  manaCost: {
-    x: "TERIOCK.TERMS.ManaCost.x",
-  },
-  hitCost: {
-    x: "TERIOCK.TERMS.HitCost.x",
-    hack: "TERIOCK.TERMS.HitCost.hack",
-  },
-  breakCost: {
-    shatter: "TERIOCK.TERMS.BreakCost.shatter",
-    destroy: "TERIOCK.TERMS.BreakCost.destroy",
-  },
   featSaveImprovementAmount: {
     proficiency: "TERIOCK.TERMS.FeatSaveImprovementAmount.proficiency",
     fluency: "TERIOCK.TERMS.FeatSaveImprovementAmount.fluency",
-  },
-  costs: {
-    verbal: "TERIOCK.TERMS.Costs.verbal",
-    somatic: "TERIOCK.TERMS.Costs.somatic",
-    material: "TERIOCK.TERMS.Costs.material",
-    invoked: "TERIOCK.TERMS.Costs.invoked",
   },
   duration: {
     unit: {
@@ -125,12 +108,6 @@ export const abilityOptions = {
       noLimit: "TERIOCK.TERMS.Duration.unit.noLimit",
       untilDawn: "TERIOCK.TERMS.Duration.unit.untilDawn",
     },
-  },
-  cost: {
-    none: "TERIOCK.TERMS.Cost.none",
-    static: "TERIOCK.TERMS.Cost.static",
-    formula: "TERIOCK.TERMS.Cost.formula",
-    variable: "TERIOCK.TERMS.Cost.variable",
   },
   form: {
     special: {
@@ -166,7 +143,6 @@ export const abilityOptions = {
   },
 };
 
-preLocalize("options.ability.cost");
 preLocalize("options.ability.maneuver");
 preLocalize("options.ability.interaction");
 preLocalize("options.ability.executionTime.active");
@@ -179,10 +155,6 @@ preLocalize("options.ability.delivery");
 preLocalize("options.ability.deliveryPackage");
 preLocalize("options.ability.deliveryParent");
 preLocalize("options.ability.expansion");
-preLocalize("options.ability.manaCost");
-preLocalize("options.ability.hitCost");
-preLocalize("options.ability.breakCost");
 preLocalize("options.ability.featSaveImprovementAmount");
-preLocalize("options.ability.costs");
 preLocalize("options.ability.duration.unit");
 preLocalize("options.ability.form", { key: "name" });

@@ -95,6 +95,16 @@ export default class PropertySystem extends mix(
   }
 
   /** @inheritDoc */
+  get displayToggles() {
+    return [
+      "system.applyIfShattered",
+      "system.applyIfDampened",
+      "system.modifiesActor",
+      ...super.displayToggles,
+    ];
+  }
+
+  /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
     parts.subtitle = TERIOCK.options.ability.form[this.form].name;

@@ -25,56 +25,6 @@ export default (Base) => {
       /** @inheritDoc */
       get panelParts() {
         const ref = TERIOCK.options.ability;
-        let mpCost = "";
-        if (this.costs.mp.type === "variable") {
-          mpCost = game.i18n.format("TERIOCK.SYSTEMS.Ability.PANELS.variable", {
-            cost: game.i18n.localize("TERIOCK.STATS.mp.abbreviation"),
-          });
-        } else if (this.costs.mp.type === "formula") {
-          mpCost = game.i18n.format("TERIOCK.SYSTEMS.Ability.PANELS.constant", {
-            value: this.costs.mp.value.formula,
-            cost: game.i18n.localize("TERIOCK.STATS.mp.abbreviation"),
-          });
-        } else if (this.costs.mp.type === "static") {
-          mpCost = game.i18n.format("TERIOCK.SYSTEMS.Ability.PANELS.constant", {
-            value: this.costs.mp.value.static,
-            cost: game.i18n.localize("TERIOCK.STATS.mp.abbreviation"),
-          });
-        }
-        let hpCost = "";
-        if (this.costs.hp.type === "variable") {
-          hpCost = game.i18n.format("TERIOCK.SYSTEMS.Ability.PANELS.variable", {
-            cost: game.i18n.localize("TERIOCK.STATS.hp.abbreviation"),
-          });
-        } else if (this.costs.hp.type === "formula") {
-          hpCost = game.i18n.format("TERIOCK.SYSTEMS.Ability.PANELS.constant", {
-            value: this.costs.hp.value.formula,
-            cost: game.i18n.localize("TERIOCK.STATS.hp.abbreviation"),
-          });
-        } else if (this.costs.hp.type === "static") {
-          hpCost = game.i18n.format("TERIOCK.SYSTEMS.Ability.PANELS.constant", {
-            value: this.costs.hp.value.static,
-            cost: game.i18n.localize("TERIOCK.STATS.hp.abbreviation"),
-          });
-        } else if (this.costs.hp.type === "hack") {
-          hpCost = game.i18n.localize("TERIOCK.TERMS.Common.hack");
-        }
-        let gpCost = "";
-        if (this.costs.gp.type === "variable") {
-          gpCost = game.i18n.format("TERIOCK.SYSTEMS.Ability.PANELS.variable", {
-            cost: game.i18n.localize("TERIOCK.STATS.gp.abbreviation"),
-          });
-        } else if (this.costs.gp.type === "formula") {
-          gpCost = game.i18n.format("TERIOCK.SYSTEMS.Ability.PANELS.constant", {
-            value: this.costs.gp.value.formula,
-            cost: game.i18n.localize("TERIOCK.STATS.gp.abbreviation"),
-          });
-        } else if (this.costs.gp.type === "static") {
-          gpCost = game.i18n.format("TERIOCK.SYSTEMS.Ability.PANELS.constant", {
-            value: this.costs.gp.value.static,
-            cost: game.i18n.localize("TERIOCK.STATS.gp.abbreviation"),
-          });
-        }
         let time;
         if (this.maneuver !== "slow") {
           time = ref.executionTime[this.maneuver][this.executionTime.base];
@@ -135,30 +85,28 @@ export default (Base) => {
               "TERIOCK.SYSTEMS.Ability.FIELDS.costs.label",
             ),
             wrappers: [
-              mpCost || "",
-              hpCost || "",
-              gpCost || "",
-              ref.breakCost[this.costs.break] || "",
-              this.costs.verbal
-                ? game.i18n.localize(
-                    "TERIOCK.SYSTEMS.Ability.FIELDS.costs.verbal.label",
-                  )
-                : "",
-              this.costs.somatic
-                ? game.i18n.localize(
-                    "TERIOCK.SYSTEMS.Ability.FIELDS.costs.somatic.label",
-                  )
-                : "",
-              this.costs.material
-                ? game.i18n.localize(
-                    "TERIOCK.SYSTEMS.Ability.FIELDS.costs.material.label",
-                  )
-                : "",
-              this.invoked
-                ? game.i18n.localize(
-                    "TERIOCK.SYSTEMS.Ability.FIELDS.invoked.label",
-                  )
-                : "",
+              ...Object.entries(TERIOCK.options.cost.primary.keys).map(
+                ([k, v]) =>
+                  this.costs.primary[k].type === "formula"
+                    ? game.i18n.format(
+                        "TERIOCK.SYSTEMS.Ability.PANELS.constant",
+                        {
+                          value: this.costs.primary[k].formula,
+                          cost: v.abbreviation,
+                        },
+                      )
+                    : this.costs.primary[k].type === "description"
+                      ? game.i18n.format(
+                          "TERIOCK.SYSTEMS.Ability.PANELS.variable",
+                          {
+                            cost: v.abbreviation,
+                          },
+                        )
+                      : "",
+              ),
+              ...Object.entries(TERIOCK.options.cost.components.keys).map(
+                ([k, v]) => (this.costs.components[k].type ? v : ""),
+              ),
             ],
           },
           {

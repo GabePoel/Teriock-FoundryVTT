@@ -55,8 +55,6 @@ export type BaseActorSheetSettings = {
 export type AbilityFilters = {
   /** Show, hide, or don't filter based on if basic */
   basic: Teriock.UI.ThreeToggle;
-  /** Show, hide, or don't filter based on if break cost */
-  broken: Teriock.UI.ThreeToggle;
   /** If the filter is applied, which delivery is displayed */
   delivery: Teriock.Parameters.Ability.Delivery | null;
   /** If the filter is applied, which effect type is displayed */
@@ -65,6 +63,8 @@ export type AbilityFilters = {
   element: Teriock.Parameters.Ability.Element | null;
   /** Show, hide, or don't filter based on if expansion */
   expansion: Teriock.UI.ThreeToggle;
+  /** Show, hide, or don't filter based on if GP cost */
+  gp: Teriock.UI.ThreeToggle;
   /** Show, hide, or don't filter based on if heightenable */
   heightened: Teriock.UI.ThreeToggle;
   /** Show, hide, or don't filter based on if HP cost */

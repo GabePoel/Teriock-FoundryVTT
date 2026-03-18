@@ -19,6 +19,12 @@ export default (Base) => {
      */
     class AbilityEquipmentPart extends Base {
       /** @inheritDoc */
+      static PRESERVED_PROPERTIES = [
+        "system.grantOnly",
+        ...super.PRESERVED_PROPERTIES,
+      ];
+
+      /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           grantOnly: new fields.BooleanField({ initial: false }),

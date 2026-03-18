@@ -1,13 +1,17 @@
-import { TextField } from "../../../../../fields/_module.mjs";
-import {
-  costAdjustment,
-  costField,
-} from "../../../../../fields/helpers/builders.mjs";
+import { costOptions } from "../../../../../../constants/options/cost-options.mjs";
+import { localizeChoices } from "../../../../../../helpers/localization.mjs";
+import { objectMap } from "../../../../../../helpers/utils.mjs";
+import { FormulaField, TextField } from "../../../../../fields/_module.mjs";
 
+const { hasProperty, getProperty, setProperty, deleteProperty } = foundry.utils;
 const { fields } = foundry.data;
 
 /**
  * Ability costs part.
+ *
+ * Relevant wiki pages:
+ * - [Costs](https://wiki.teriock.com/index.php/Core:Costs)
+ *
  * @param {typeof AbilitySystem} Base
  */
 export default (Base) => {
@@ -19,28 +23,73 @@ export default (Base) => {
      */
     class AbilityCostsPart extends Base {
       /** @inheritDoc */
+      static PRESERVED_PROPERTIES = [
+        "system.costs.tweaks",
+        ...super.PRESERVED_PROPERTIES,
+      ];
+
+      /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          adept: costAdjustment(),
           costs: new fields.SchemaField({
-            verbal: new fields.BooleanField({ initial: false }),
-            somatic: new fields.BooleanField({ initial: false }),
-            material: new fields.BooleanField({ initial: false }),
-            mp: costField(),
-            hp: costField({
-              extraChoices: { hack: "Hack" },
-            }),
-            gp: costField(),
-            break: new fields.StringField({ initial: "" }),
-            materialCost: new TextField({ initial: "" }),
+            primary: new fields.SchemaField(
+              objectMap(costOptions.primary.keys, (v) => {
+                const label = game.i18n.format("TERIOCK.COSTS.Long.primary", {
+                  key: game.i18n.localize(v.label),
+                });
+                return new fields.SchemaField(
+                  {
+                    description: new TextField({ label }),
+                    formula: new FormulaField({ label, deterministic: false }),
+                    type: new fields.StringField({
+                      choices: localizeChoices(costOptions.primary.types),
+                      initial: null,
+                      label,
+                      nullable: true,
+                    }),
+                  },
+                  { label },
+                );
+              }),
+            ),
+            components: new fields.SchemaField(
+              objectMap(costOptions.components.keys, (v) => {
+                const label = game.i18n.format("TERIOCK.COSTS.Long.component", {
+                  key: game.i18n.localize(v),
+                });
+                return new fields.SchemaField(
+                  {
+                    description: new TextField({ label }),
+                    type: new fields.StringField({
+                      choices: localizeChoices(costOptions.components.types),
+                      initial: null,
+                      label,
+                      nullable: true,
+                    }),
+                  },
+                  { label },
+                );
+              }),
+            ),
+            tweaks: new fields.SchemaField(
+              objectMap(
+                costOptions.tweaks,
+                (v) =>
+                  new fields.NumberField({
+                    label: v.label,
+                    initial: 0,
+                    integer: true,
+                    min: 0,
+                  }),
+              ),
+            ),
           }),
-          gifted: costAdjustment(),
         });
       }
 
       /** @inheritDoc */
       static migrateData(data) {
-        // HP and MP cost migration
+        // 2025-12-18 HP and MP point cost migration
         for (const pointCost of ["mp", "hp"]) {
           if (data.costs) {
             if (data.costs[pointCost] === null) {
@@ -99,51 +148,125 @@ export default (Base) => {
           }
         }
 
+        // 2026-03-17 Unified cost migration
+        if (getProperty(data, "costs.hp.type") === "hack") {
+          setProperty(data, "costs.components.hack.type", "tag");
+        }
+        for (const stat of ["hp", "mp", "gp"]) {
+          if (hasProperty(data, `costs.${stat}`)) {
+            if (getProperty(data, `costs.${stat}.type`) === "variable") {
+              setProperty(data, `costs.primary.${stat}.type`, "description");
+              setProperty(
+                data,
+                `costs.primary.${stat}.description`,
+                getProperty(data, `costs.${stat}.value.variable`),
+              );
+            } else if (getProperty(data, `costs.${stat}.type`) === "static") {
+              setProperty(data, `costs.primary.${stat}.type`, "formula");
+              setProperty(
+                data,
+                `costs.primary.${stat}.formula`,
+                getProperty(data, `costs.${stat}.value.static`).toString(),
+              );
+            } else if (getProperty(data, `costs.${stat}.type`) === "formula") {
+              setProperty(data, `costs.primary.${stat}.type`, "formula");
+              setProperty(
+                data,
+                `costs.primary.${stat}.formula`,
+                getProperty(data, `costs.${stat}.value.formula`),
+              );
+            } else {
+              setProperty(data, `costs.${stat}.type`, null);
+            }
+            deleteProperty(`costs.${stat}`);
+          }
+        }
+        for (const component of ["material", "somatic", "verbal"]) {
+          if (getProperty(data, `costs.${component}`)) {
+            setProperty(data, `costs.components.${component}.type`, "tag");
+          }
+          deleteProperty(`costs.${component}`);
+        }
+        if (getProperty(data, "costs.materialCost")) {
+          setProperty(data, "costs.components.material.type", "description");
+          setProperty(
+            data,
+            "costs.components.material.description",
+            getProperty(data, "costs.materialCost"),
+          );
+        }
+        deleteProperty(data, "costs.materialCost");
+        if (getProperty(data, "costs.break") === "shatter") {
+          setProperty(data, "costs.components.break.type", "description");
+          setProperty(
+            data,
+            "costs.components.break.description",
+            "When [[lookup name]] is used, the item that delivers it becomes @L[Property:Shattered]{shattered}.",
+          );
+        } else if (getProperty(data, "costs.break") === "destroy") {
+          setProperty(data, "costs.components.break.type", "description");
+          setProperty(
+            data,
+            "costs.components.break.description",
+            "When [[lookup name]] is used, the item that delivers it becomes @L[Property:Destroyed]{destroyed}.",
+          );
+        }
+        for (const tweak of ["adept", "gifted"]) {
+          if (
+            getProperty(data, `${tweak}.enabled`) &&
+            getProperty(data, `${tweak}.amount`)
+          ) {
+            setProperty(
+              data,
+              `costs.tweaks.${tweak}`,
+              getProperty(data, `${tweak}.amount`),
+            );
+            deleteProperty(data, tweak);
+          }
+        }
         super.migrateData(data);
       }
 
       /** @inheritDoc */
       getLocalRollData() {
-        const data = super.getLocalRollData();
-        Object.assign(data, {
-          adept: Number(this.adept.enabled),
-          "adept.amount": this.adept.enabled ? this.adept.amount : 0,
-          gifted: Number(this.gifted.enabled),
-          "gifted.amount": this.gifted.enabled ? this.gifted.amount : 0,
-          "costs.ver": Number(this.costs.verbal),
-          "costs.som": Number(this.costs.somatic),
-          "costs.mat": Number(this.costs.material),
+        return Object.assign(super.getLocalRollData(), {
+          ...Object.fromEntries(
+            Object.entries(this.costs.tweaks).map(([k, v]) => [
+              `tweaks.${k}`,
+              v,
+            ]),
+          ),
+          ...Object.fromEntries(
+            Object.entries(this.costs.components).map(([k, v]) => [
+              `components.${k}`,
+              Number(v.type),
+            ]),
+          ),
+          ...Object.fromEntries(
+            Object.entries(this.costs.primary).map(([k, v]) => [
+              `costs.${k}`,
+              v.type === "formula"
+                ? v.formula
+                : v.type === "description"
+                  ? "x"
+                  : 0,
+            ]),
+          ),
         });
-        // Add cost values
-        for (const c of ["gp", "hp", "mp"]) {
-          const cost = this.costs[c];
-          if (["static", "formula"].includes(cost.type)) {
-            data[`costs.${c}`] = cost.value[cost.type];
-          }
-        }
-        return data;
       }
 
       /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
 
-        // Enforce cost values
-        for (const c of ["gp", "hp", "mp"]) {
-          const cost = this.costs[c];
-          const defaultValue = {
-            formula: "",
-            static: 0,
-            variable: "",
-          };
-          delete defaultValue[cost.type];
-          Object.assign(cost.value, defaultValue);
-        }
-
         // Enforce invoked costs
         if (this.invoked) {
-          this.costs.somatic = true;
-          this.costs.verbal = true;
+          if (!this.costs.components.somatic.type) {
+            this.costs.components.somatic.type = "tag";
+          }
+          if (!this.costs.components.verbal.type) {
+            this.costs.components.verbal.type = "tag";
+          }
         }
       }
     }

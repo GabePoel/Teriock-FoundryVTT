@@ -10,11 +10,11 @@ export default function defaultSheetSettings() {
       basic: game.settings.get("teriock", "hideBasicAbilitiesByDefault")
         ? -1
         : 0,
-      broken: threeToggleInitial,
       delivery: null,
       effects: null,
       element: null,
       expansion: threeToggleInitial,
+      gp: threeToggleInitial,
       heightened: threeToggleInitial,
       hp: threeToggleInitial,
       interaction: null,

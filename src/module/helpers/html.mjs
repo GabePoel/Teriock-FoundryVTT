@@ -38,17 +38,10 @@ export function buildHTMLButton(config) {
  * @returns {string}
  */
 export function elementClass(elements) {
-  const colorMap = {
-    life: "es-life",
-    storm: "es-storm",
-    necro: "es-necro",
-    flame: "es-flame",
-    nature: "es-nature",
-  };
   if (elements.size !== 1) {
     return "es-multi";
   } else {
-    return colorMap[Array.from(elements)[0]];
+    return `es-${Array.from(elements)[0]}`;
   }
 }
 
@@ -57,10 +50,15 @@ export function elementClass(elements) {
  * @param {string} legend - The legend text for the fieldset.
  * @param {string} description - The description text for the field.
  * @param {string} name - The name attribute for the input field.
- * @param {number} max - The maximum value for the number input.
+ * @param {number} [max] - The maximum value for the number input.
  * @returns {string} HTML string for the dialog fieldset.
  */
-export function createDialogFieldset(legend, description, name, max) {
+export function createDialogFieldset(
+  legend,
+  description,
+  name,
+  max = Infinity,
+) {
   return `
     <fieldset><legend>${legend}</legend>
       <div>${description}</div>

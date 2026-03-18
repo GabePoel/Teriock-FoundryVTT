@@ -1,145 +1,28 @@
 {{#if
   (or
-    (not (eq system.costs.mp.type "none"))
-    (not (eq system.costs.hp.type "none"))
-    (not (eq system.costs.gp.type "none"))
-    (exists system.costs.break)
-    system.gifted.enabled
-    system.adept.enabled
+    (not (eq system.costs.primary.gp.type "formula"))
+    (not (eq system.costs.primary.hp.type "formula"))
+    (not (eq system.costs.primary.mp.type "formula"))
   )
 }}
   <div class="ab-bar">
-    {{formBox
-      (ifThen
-        (eq system.costs.mp.type "static")
-        (formInput
-          systemFields.costs.fields.mp.fields.value.fields.static
-          value=system.costs.mp.value.static
-          disabled=(not editable)
-        )
-        (ifThen
-          (eq system.costs.mp.type "formula")
-          (formInput
-            systemFields.costs.fields.mp.fields.value.fields.formula
-            value=system.costs.mp.value.formula
-            disabled=(not editable)
-          )
-          (localize "TERIOCK.TERMS.Cost.variable")
-        )
-      )
-      tooltip=(ifThen
-        (eq system.costs.mp.type "static")
-        (localize "TERIOCK.TERMS.Cost.static")
-        (ifThen
-          (eq system.costs.mp.type "formula")
-          (localize "TERIOCK.TERMS.Cost.formula")
-          (localize "TERIOCK.TERMS.Cost.variable")
-        )
-      )
-      icon=TERIOCK.display.icons.stat.mp
-      label=(localize "TERIOCK.STATS.mp.abbreviation")
-      include=(not (eq system.costs.mp.type "none"))
-      classes=(ifThen editable "mana-cost-box" "")
-    }}
-    {{formBox
-      (formInput
-        systemFields.adept.fields.amount
-        value=system.adept.amount
-        disabled=(not editable)
-      )
-      tooltip=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.adept.enabled.label")
-      label=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.adept.enabled.label")
-      icon=TERIOCK.display.icons.ability.adept
-      include=system.adept.enabled
-    }}
-    {{formBox
-      (formInput
-        systemFields.gifted.fields.amount
-        value=system.gifted.amount
-        disabled=(not editable)
-      )
-      tooltip=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.gifted.enabled.label")
-      label=(localize "TERIOCK.STATS.mp.abbreviation")
-      icon=TERIOCK.display.icons.ability.gifted
-      include=system.gifted.enabled
-    }}
-    {{formBox
-      (ifThen
-        (eq system.costs.hp.type "static")
-        (formInput
-          systemFields.costs.fields.hp.fields.value.fields.static
-          value=system.costs.hp.value.static
-          disabled=(not editable)
-        )
-        (ifThen
-          (eq system.costs.hp.type "formula")
-          (formInput
-            systemFields.costs.fields.hp.fields.value.fields.formula
-            value=system.costs.hp.value.formula
-            disabled=(not editable)
-          )
+    {{#each TERIOCK.options.cost.primary.keys as |value key|}}
+      {{#if (path @root/system.costs.primary key "type")}}
+        {{formBox
           (ifThen
-            (eq system.costs.hp.type "hack")
-            (localize "TERIOCK.TERMS.Cost.hack")
-            (localize "TERIOCK.TERMS.Cost.variable"))
-        )
-      )
-      tooltip=(ifThen
-        (eq system.costs.hp.type "static")
-        (localize "TERIOCK.TERMS.Cost.static")
-        (ifThen
-          (eq system.costs.hp.type "formula")
-          (localize "TERIOCK.TERMS.Cost.formula")
-          (ifThen
-            (eq system.costs.hp.type "hack")
-            (localize "TERIOCK.TERMS.Cost.hack")
-            (localize "TERIOCK.TERMS.Cost.variable")
+            (eq (path @root/system.costs.primary key "type") "formula")
+            (formInput
+              (path @root/systemFields.costs.fields.primary.fields key "fields.formula")
+              value=(path @root/system.costs.primary key "formula")
+              disabled=(not @root/editable)
+            )
+            @root/TERIOCK.options.cost.primary.types.description
           )
-        )
-      )
-      icon=TERIOCK.display.icons.stat.hp
-      label=(localize "TERIOCK.STATS.hp.abbreviation")
-      classes=(ifThen editable "hit-cost-box" "")
-      include=(not (eq system.costs.hp.type "none"))
-    }}
-    {{formBox
-      (ifThen
-        (eq system.costs.gp.type "static")
-        (formInput
-          systemFields.costs.fields.gp.fields.value.fields.static
-          value=system.costs.gp.value.static
-          disabled=(not editable)
-        )
-        (ifThen
-          (eq system.costs.gp.type "formula")
-          (formInput
-            systemFields.costs.fields.gp.fields.value.fields.formula
-            value=system.costs.gp.value.formula
-            disabled=(not editable)
-          )
-          (localize "TERIOCK.TERMS.Cost.variable")
-        )
-      )
-      tooltip=(ifThen
-        (eq system.costs.gp.type "static")
-        (localize "TERIOCK.TERMS.Cost.static")
-        (ifThen
-          (eq system.costs.gp.type "formula")
-          (localize "TERIOCK.TERMS.Cost.formula")
-          (localize "TERIOCK.TERMS.Cost.variable")
-        )
-      )
-      icon=TERIOCK.display.icons.stat.gp
-      label=(localize "TERIOCK.STATS.gp.abbreviation")
-      classes=(ifThen editable "gold-cost-box" "")
-      include=(not (eq system.costs.gp.type "none"))
-    }}
-    {{formBox
-      (path TERIOCK.options.ability.breakCost system.costs.break)
-      icon=TERIOCK.display.icons.ability.break
-      tooltip=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.costs.break.label")
-      classes=(ifThen editable "break-cost-box" "")
-      include=(exists system.costs.break)
-    }}
+          icon=value.icon
+          tooltip=(localize "TERIOCK.COSTS.Long.primary" key=value.label)
+          label=value.abbreviation
+        }}
+      {{/if}}
+    {{/each}}
   </div>
 {{/if}}

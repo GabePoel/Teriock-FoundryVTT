@@ -7,30 +7,8 @@
     </div>
     <div class="ab-menu-bar">
       <div class="tgrid ab-select-grid g2 menu-large-grid">
-        <div class="tgrid-item gi1">
-          <div class="ab-multi-select-label">
-            <label class="tsubtle">{{localize "TERIOCK.SYSTEMS.Species.FIELDS.traits.label"}}</label>
-            {{formInput
-              systemFields.traits
-              value=system.traits
-              disabled=(not editable)
-              classes="teriock-full-width ab-menu-inline"
-              rootId=uuid
-            }}
-          </div>
-        </div>
-        <div class="tgrid-item gi1">
-          <div class="ab-multi-select-label">
-            <label class="tsubtle">{{localize "TERIOCK.SYSTEMS.Species.FIELDS.transformationLevel.label"}}</label>
-            {{formInput
-              systemFields.transformationLevel
-              value=system.transformationLevel
-              disabled=(not editable)
-              classes="teriock-full-width ab-menu-inline"
-              rootId=uuid
-            }}
-          </div>
-        </div>
+        {{> "teriock/sheets/shared/menu-input" field=systemFields.traits value=system.traits}}
+        {{> "teriock/sheets/shared/menu-input" field=systemFields.transformationLevel value=system.transformationLevel}}
       </div>
     </div>
     <div class="ab-menu-bar">

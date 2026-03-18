@@ -7,30 +7,8 @@
     </div>
     <div class="ab-menu-bar">
       <div class="tgrid g2 menu-large-grid">
-        <div class="tgrid-item">
-          <div class="ab-multi-select-label">
-            <label class="tsubtle">{{localize "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentClasses.label"}}</label>
-            {{formInput
-              systemFields.equipmentClasses
-              value=system.equipmentClasses
-              disabled=(not editable)
-              classes="teriock-full-width ab-menu-inline"
-              rootId=uuid
-            }}
-          </div>
-        </div>
-        <div class="tgrid-item">
-          <div class="ab-multi-select-label">
-            <label class="tsubtle">{{localize "TERIOCK.SYSTEMS.Armament.FIELDS.fightingStyle.label"}}</label>
-            {{formInput
-              systemFields.fightingStyle
-              value=system.fightingStyle
-              disabled=(not editable)
-              classes="teriock-full-width"
-              rootId=uuid
-            }}
-          </div>
-        </div>
+        {{> "teriock/sheets/shared/menu-input" field=systemFields.equipmentClasses value=system.equipmentClasses}}
+        {{> "teriock/sheets/shared/menu-input" field=systemFields.fightingStyle value=system.fightingStyle}}
       </div>
     </div>
     <div class="ab-menu-bar">

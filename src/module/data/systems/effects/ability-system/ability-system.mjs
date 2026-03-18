@@ -1,3 +1,4 @@
+import { costOptions } from "../../../../constants/options/cost-options.mjs";
 import { AbilityExecution } from "../../../../executions/document-executions/_module.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
 import { AbilitySettingsModel } from "../../../models/settings-models/_module.mjs";
@@ -68,14 +69,6 @@ export default class AbilitySystem extends mix(
   ];
 
   /** @inheritDoc */
-  static PRESERVED_PROPERTIES = [
-    "system.adept",
-    "system.gifted",
-    "system.grantOnly",
-    ...super.PRESERVED_PROPERTIES,
-  ];
-
-  /** @inheritDoc */
   static get _automationTypes() {
     return [
       ...super._automationTypes,
@@ -118,19 +111,10 @@ export default class AbilitySystem extends mix(
 
   get _nameTags() {
     const tags = [];
-    if (this.adept.enabled) {
-      tags.push(
-        game.i18n.localize(
-          "TERIOCK.SYSTEMS.Ability.FIELDS.adept.enabled.label",
-        ),
-      );
-    }
-    if (this.gifted.enabled) {
-      tags.push(
-        game.i18n.localize(
-          "TERIOCK.SYSTEMS.Ability.FIELDS.gifted.enabled.label",
-        ),
-      );
+    for (const [k, v] of Object.entries(TERIOCK.options.cost.tweaks)) {
+      if (this.costs.tweaks[k]) {
+        tags.push(v.label);
+      }
     }
     if (this.grantOnly) {
       tags.push(game.i18n.localize("TERIOCK.SYSTEMS.Ability.NAME.granted"));
@@ -158,19 +142,18 @@ export default class AbilitySystem extends mix(
           "TERIOCK.SYSTEMS.Ability.FIELDS.elderSorcery.label",
         ),
       },
-      {
-        path: "system.costs.mp.value.variable",
-        visible: this.costs.mp.type === "variable",
-      },
-      {
-        path: "system.costs.hp.value.variable",
-        visible: this.costs.hp.type === "variable",
-      },
-      {
-        path: "system.costs.gp.value.variable",
-        visible: this.costs.gp.type === "variable",
-      },
-      "system.costs.materialCost",
+      ...Object.keys(costOptions.primary.keys).map((k) => {
+        return {
+          path: `system.costs.primary.${k}.description`,
+          visible: this.costs.primary[k].type === "description",
+        };
+      }),
+      ...Object.keys(costOptions.components.keys).map((k) => {
+        return {
+          path: `system.costs.components.${k}.description`,
+          visible: this.costs.components[k].type === "description",
+        };
+      }),
       "system.trigger",
       "system.requirements",
       ...this.constructor._adjustableTextFields,
@@ -261,23 +244,20 @@ export default class AbilitySystem extends mix(
     if (this.skill) tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.skill.label");
     if (this.standard && this.spell) tags.push("TERIOCK.TERMS.Common.conjured");
     if (this.spell) tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.spell.label");
-    if (this.invoked)
+    if (this.invoked) {
       tags.push({
         label: "TERIOCK.TERMS.Costs.invoked",
         tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.costs.label",
       });
-    if (this.costs.verbal) {
-      tags.push({
-        label: "TERIOCK.TERMS.Costs.verbal",
-        tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.costs.label",
-      });
     }
-    if (this.costs.somatic) {
-      tags.push({
-        label: "TERIOCK.TERMS.Costs.somatic",
-        tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.costs.label",
-      });
-    }
+    Object.keys(costOptions.components.keys).forEach((k) => {
+      if (this.costs.components[k].type) {
+        tags.push({
+          label: costOptions.components.keys[k],
+          tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.costs.components.label",
+        });
+      }
+    });
     if (this.ritual) tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.ritual.label");
     if (this.rotator) tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.rotator.label");
     tags.push(
@@ -320,11 +300,7 @@ export default class AbilitySystem extends mix(
       "system.rotator",
       "system.sustained",
       "system.invoked",
-      "system.costs.verbal",
-      "system.costs.somatic",
       "system.elderSorcery",
-      "system.adept.enabled",
-      "system.gifted.enabled",
       "system.consumable",
       "system.grantOnly",
       "system.warded",

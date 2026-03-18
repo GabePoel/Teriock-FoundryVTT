@@ -171,9 +171,10 @@ export default (Base) =>
               "TERIOCK.SYSTEMS.Ability.FIELDS.costs.mp.value.variable.label",
           },
           {
-            key: "broken",
-            name: "settings.abilityFilters.broken",
-            label: "TERIOCK.SYSTEMS.Ability.FIELDS.costs.break.label",
+            key: "gp",
+            name: "settings.abilityFilters.gp",
+            label:
+              "TERIOCK.SYSTEMS.Ability.FIELDS.costs.gp.value.variable.label",
           },
           {
             key: "sustained",

@@ -31,13 +31,13 @@ export default (Base) =>
           binaryFilter(filters.sustained, a.system.sustained) &&
           binaryFilter(filters.heightened, a.system.heightened) &&
           binaryFilter(filters.expansion, a.system.expansion.type) &&
-          binaryFilter(filters.verbal, a.system.costs.verbal) &&
-          binaryFilter(filters.somatic, a.system.costs.somatic) &&
-          binaryFilter(filters.material, a.system.costs.material) &&
+          binaryFilter(filters.verbal, a.system.costs.components.verbal) &&
+          binaryFilter(filters.somatic, a.system.costs.components.somatic) &&
+          binaryFilter(filters.material, a.system.costs.components.material) &&
           binaryFilter(filters.invoked, a.system.invoked) &&
-          binaryFilter(filters.hp, a.system.costs.hp.type !== "none") &&
-          binaryFilter(filters.mp, a.system.costs.mp.type !== "none") &&
-          binaryFilter(filters.broken, a.system.costs.break) &&
+          binaryFilter(filters.hp, a.system.costs.primary.hp.type) &&
+          binaryFilter(filters.mp, a.system.costs.primary.mp.type) &&
+          binaryFilter(filters.gp, a.system.costs.primary.gp.type) &&
           (!filters.maneuver || a.system.maneuver === filters.maneuver) &&
           (!filters.interaction ||
             a.system.interaction === filters.interaction) &&

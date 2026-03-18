@@ -6,6 +6,10 @@ const { getProperty, setProperty, deleteProperty } = foundry.utils;
 
 /**
  * Ability duration part.
+ *
+ * Relevant wiki pages:
+ * - [Duration](https://wiki.teriock.com/index.php/Core:Duration)
+ *
  * @param {typeof AbilitySystem} Base
  */
 export default (Base) => {
@@ -62,7 +66,7 @@ export default (Base) => {
         }
 
         // Gifted modifications
-        if (this.gifted.enabled) {
+        if (this.costs.tweaks.gifted) {
           this.form = "gifted";
           if (this.maneuver === "passive") {
             this.maneuver = "active";

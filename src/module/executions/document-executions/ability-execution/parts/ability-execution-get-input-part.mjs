@@ -5,6 +5,7 @@ import { AbilityTemplate } from "../../../../canvas/placeables/_module.mjs";
 import { TemplateAutomation } from "../../../../data/pseudo-documents/automations/_module.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { createDialogFieldset } from "../../../../helpers/html.mjs";
+import { ucFirst } from "../../../../helpers/string.mjs";
 import { makeIconClass } from "../../../../helpers/utils.mjs";
 
 /**
@@ -32,11 +33,9 @@ export default function AbilityExecutionGetInputPart(Base) {
        * @returns {Promise<number>}
        */
       async #determineCost(stat) {
-        if (this.source.system.costs[stat].type === "static") {
-          return this.source.system.costs[stat].value.static;
-        } else if (this.source.system.costs[stat].type === "formula") {
+        if (this.source.system.costs.primary[stat].type === "formula") {
           const roll = new BaseRoll(
-            this.source.system.costs[stat].value.formula,
+            this.source.system.costs.primary[stat].formula,
             this.rollData,
           );
           await roll.evaluate();
@@ -50,39 +49,21 @@ export default function AbilityExecutionGetInputPart(Base) {
        * Apply constant adept/inept/gifted modifications to default costs.
        */
       #modifyCosts() {
-        if (this.source.system.adept.enabled) {
-          this.costs.mp -= this.source.system.adept.amount;
-        }
-        if (this.source.system.gifted.enabled) {
-          this.costs.mp += this.source.system.gifted.amount;
+        for (const [k, v] of Object.entries(TERIOCK.options.cost.tweaks)) {
+          this.costs[v.primary] +=
+            v.amount * this.source.system.costs.tweaks[k];
         }
       }
 
       /**
-       * Text to add to adept casting costs.
-       * @return {Promise<string>}
+       * Whether the prompt for a given cost should be shown.
+       * @param {string} stat
+       * @returns {boolean}
        */
-      async #textAdept() {
-        return TeriockTextEditor.enrichHTML(
-          game.i18n.format(
-            "TERIOCK.SYSTEMS.Ability.EXECUTION.descriptions.adept",
-            { amount: this.source.system.adept.amount },
-          ),
-          { relativeTo: this.source },
-        );
-      }
-
-      /**
-       * Text to add to gifted casting costs.
-       * @return {Promise<string>}
-       */
-      async #textGifted() {
-        return TeriockTextEditor.enrichHTML(
-          game.i18n.format(
-            "TERIOCK.SYSTEMS.Ability.EXECUTION.descriptions.gifted",
-            { amount: this.source.system.gifted.amount },
-          ),
-          { relativeTo: this.source },
+      #shouldShowCostPrompt(stat) {
+        return (
+          this.source.system.costs.primary[stat].type === "description" &&
+          !this.options[`no${ucFirst(stat)}`]
         );
       }
 
@@ -91,77 +72,25 @@ export default function AbilityExecutionGetInputPart(Base) {
        * @returns {Promise<void>}
        */
       async _getCostInput() {
-        const promptGp =
-          this.source.system.costs.gp.type === "variable" && !this.options.noGp;
-        const promptHp =
-          this.source.system.costs.hp.type === "variable" && !this.options.noHp;
-        const promptMp =
-          this.source.system.costs.mp.type === "variable" && !this.options.noMp;
         const dialogs = [];
-        if (promptMp) {
-          let mpDescription = await TeriockTextEditor.enrichHTML(
-            this.source.system.costs.mp.value.variable,
-            { relativeTo: this.source },
-          );
-          if (this.source.system.adept.enabled) {
-            mpDescription += `<p>${await this.#textAdept()}</p>`;
+        for (const [k, v] of Object.entries(
+          TERIOCK.options.cost.primary.keys,
+        )) {
+          if (this.#shouldShowCostPrompt(k)) {
+            dialogs.push(
+              createDialogFieldset(
+                game.i18n.format("TERIOCK.COSTS.Long.primary", {
+                  key: v.label,
+                }),
+                await TeriockTextEditor.enrichHTML(
+                  this.source.system.costs.primary[k].description,
+                ),
+                k,
+              ),
+            );
+          } else {
+            this.costs[k] = await this.#determineCost(k);
           }
-          if (this.source.system.gifted.enabled) {
-            mpDescription += `<p>${await this.#textGifted()}</p>`;
-          }
-          mpDescription = await TeriockTextEditor.enrichHTML(mpDescription, {
-            relativeTo: this.source,
-          });
-          const mpMax = this.actor.system.mp.value - this.actor.system.mp.min;
-          dialogs.push(
-            createDialogFieldset(
-              game.i18n.localize(
-                "TERIOCK.SYSTEMS.Ability.DIALOG.VariableCosts.mp",
-              ),
-              mpDescription,
-              "mp",
-              mpMax,
-            ),
-          );
-        } else {
-          this.costs.mp = await this.#determineCost("mp");
-        }
-        if (promptHp) {
-          const hpDescription = await TeriockTextEditor.enrichHTML(
-            this.source.system.costs.hp.value.variable,
-            { relativeTo: this.source },
-          );
-          const hpMax = this.actor.system.hp.value - this.actor.system.hp.min;
-          dialogs.push(
-            createDialogFieldset(
-              game.i18n.localize(
-                "TERIOCK.SYSTEMS.Ability.DIALOG.VariableCosts.hp",
-              ),
-              hpDescription,
-              "hp",
-              hpMax,
-            ),
-          );
-        } else {
-          this.costs.hp = await this.#determineCost("hp");
-        }
-        if (promptGp) {
-          const gpDescription = await TeriockTextEditor.enrichHTML(
-            this.source.system.costs.gp.value.variable,
-            { relativeTo: this.source },
-          );
-          dialogs.push(
-            createDialogFieldset(
-              game.i18n.localize(
-                "TERIOCK.SYSTEMS.Ability.DIALOG.VariableCosts.gp",
-              ),
-              gpDescription,
-              "gp",
-              Infinity,
-            ),
-          );
-        } else {
-          this.costs.gp = await this.#determineCost("gp");
         }
         if (
           this.proficient &&
@@ -206,14 +135,12 @@ export default function AbilityExecutionGetInputPart(Base) {
                 "TERIOCK.SYSTEMS.Ability.DIALOG.VariableCosts.ok",
               ),
               callback: (_event, button) => {
-                for (const [cost, toggle] of Object.entries({
-                  hp: promptHp,
-                  mp: promptMp,
-                  gp: promptGp,
-                })) {
-                  if (toggle) {
-                    this.costs[cost] = Number(
-                      button.form.elements.namedItem(cost).value,
+                for (const k of Object.keys(
+                  TERIOCK.options.cost.primary.keys,
+                )) {
+                  if (this.#shouldShowCostPrompt(k)) {
+                    this.costs[k] = Number(
+                      button.form.elements.namedItem(k).value,
                     );
                   }
                 }

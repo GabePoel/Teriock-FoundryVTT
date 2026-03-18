@@ -5,6 +5,7 @@ import * as change from "./change-options.mjs";
 import { characterOptions } from "./character-options.mjs";
 import { competenceOptions } from "./competence-options.mjs";
 import { consequenceOptions } from "./consequence-options.mjs";
+import { costOptions } from "./cost-options.mjs";
 import { currencyOptions } from "./currency-options.mjs";
 import { deliveryOptions } from "./delivery-options.mjs";
 import { dieOptions } from "./die-options.mjs";
@@ -32,6 +33,7 @@ const options = {
   character: characterOptions,
   competence: competenceOptions,
   consequence: consequenceOptions,
+  cost: costOptions,
   currency: currencyOptions,
   delivery: deliveryOptions,
   die: dieOptions,

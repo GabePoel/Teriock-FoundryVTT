@@ -12,6 +12,7 @@ export const icons = {
     expansionRange: "ms-straighten",
     gifted: "ms-remove",
     heightened: "ms-stat-3",
+    inept: "ms-remove",
     interaction: "ms-swords",
     notOnUse: "ms-sync",
     onUse: "ms-sync-disabled",

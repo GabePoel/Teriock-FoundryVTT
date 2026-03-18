@@ -24,6 +24,7 @@ export default class AbilitySheet extends mix(
     "teriock/sheets/effects/ability/targeting-bar",
     "teriock/sheets/effects/ability/expansion-bar",
     "teriock/sheets/effects/ability/costs-bar",
+    "teriock/sheets/effects/ability/tweaks-bar",
     "teriock/sheets/shared/bars/consumable-bar",
   ];
 
@@ -57,31 +58,18 @@ export default class AbilitySheet extends mix(
       ".ab-attribute-improvement-button": {
         "system.upgrades.score.attribute": "int",
       },
-      ".ab-break-cost-button": { "system.costs.break": "shatter" },
       ".ab-expansion-button": { "system.expansion": "detonate" },
       ".ab-expansion-cap-button": { "system.expansion.cap.raw": "1" },
       ".ab-feat-save-improvement-button": {
         "system.upgrades.competence.attribute": "int",
         "system.upgrades.competence.value": 1,
       },
-      ".ab-gold-cost-button": {
-        "system.costs.gp": {
-          type: "formula",
-          value: { static: 0, formula: "1d100", variable: "" },
-        },
-      },
-      ".ab-hit-cost-button": {
-        "system.costs.hp": {
-          type: "static",
-          value: { static: 1, formula: "", variable: "" },
-        },
-      },
-      ".ab-mana-cost-button": {
-        "system.costs.mp": {
-          type: "static",
-          value: { static: 1, formula: "", variable: "" },
-        },
-      },
+      ...Object.fromEntries(
+        Object.keys(TERIOCK.options.cost.tweaks).map((k) => [
+          `.ab-tweak-${k}-button`,
+          { [`system.costs.tweaks.${k}`]: 1 },
+        ]),
+      ),
     };
   }
 
@@ -90,11 +78,7 @@ export default class AbilitySheet extends mix(
    */
   #resetElderSorceryElements() {
     this.window.content.classList.remove(
-      "es-life",
-      "es-storm",
-      "es-necro",
-      "es-flame",
-      "es-nature",
+      ...Object.keys(TERIOCK.reference.elements).map((e) => `es-${e}`),
       "es-multi",
     );
     if (this.document.system.elderSorcery) {
@@ -118,10 +102,6 @@ export default class AbilitySheet extends mix(
       ['.execution-box[data-maneuver="Reactive"]', cm.reactive, "click"],
       [".interaction-box", cm.interaction, "click"],
       [".interaction-box-feat", cm.featSaveAttribute, "contextmenu"],
-      [".mana-cost-box", cm.manaCost, "contextmenu"],
-      [".hit-cost-box", cm.hitCost, "contextmenu"],
-      [".gold-cost-box", cm.goldCost, "contextmenu"],
-      [".break-cost-box", cm.breakCost, "contextmenu"],
       [".expansion-box", cm.expansion, "click"],
       [".expansion-box-detonate", cm.expansionSaveAttribute, "contextmenu"],
       [".expansion-box-ripple", cm.expansionSaveAttribute, "contextmenu"],
