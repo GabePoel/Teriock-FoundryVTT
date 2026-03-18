@@ -20,7 +20,6 @@ export default (Base) => {
     class AbilityEquipmentPart extends Base {
       /** @inheritDoc */
       static PRESERVED_PROPERTIES = [
-        "system.consumeSource",
         "system.grantOnly",
         ...super.PRESERVED_PROPERTIES,
       ];
@@ -50,7 +49,7 @@ export default (Base) => {
             : game.i18n.localize("TERIOCK.SYSTEMS.Ability.USAGE.alwaysActive"),
           condition: this.parent.isOwner,
           callback: async () => {
-            const onUseSet = this.parent.parent.system.onUse;
+            const onUseSet = this.parent.parent?.system.onUse;
             if (onUseSet.has(this.parent.id)) {
               onUseSet.delete(this.parent.id);
             } else {
@@ -106,20 +105,22 @@ export default (Base) => {
       /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
-        this.consumeSourceText = this.consumeSource
-          ? game.i18n.format(
-              "TERIOCK.SYSTEMS.Ability.FIELDS.consumeSourceText.derived",
-              { uuid: this.parent.parent?.uuid },
-            )
-          : "";
-        this.grantOnlyText = this.grantOnly
-          ? game.i18n.format(
-              "TERIOCK.SYSTEMS.Ability.FIELDS.grantOnlyText.derived",
-              {
-                uuid: this.parent.parent?.uuid,
-              },
-            )
-          : "";
+        this.consumeSourceText =
+          this.consumeSource && this.parent.parent?.type !== "wrapper"
+            ? game.i18n.format(
+                "TERIOCK.SYSTEMS.Ability.FIELDS.consumeSourceText.derived",
+                { uuid: this.parent.parent?.uuid },
+              )
+            : "";
+        this.grantOnlyText =
+          this.grantOnly && this.parent.parent?.type !== "wrapper"
+            ? game.i18n.format(
+                "TERIOCK.SYSTEMS.Ability.FIELDS.grantOnlyText.derived",
+                {
+                  uuid: this.parent.parent?.uuid,
+                },
+              )
+            : "";
       }
 
       /**

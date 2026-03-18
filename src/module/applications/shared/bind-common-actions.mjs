@@ -71,12 +71,12 @@ export default function bindCommonActions(rootElement) {
           resolvedUuid?.type,
         ).implementation;
         if (documentClass?.documentMetadata?.tooltip) {
+          el.dataset.tooltipClass = "teriock-rich-tooltip";
           el.dataset.tooltipHtml = TERIOCK.display.panel.loading;
         }
       }
       // Determine tooltip direction and style
       el.addEventListener("pointerenter", (ev) => {
-        el.dataset.tooltipClass = "teriock-rich-tooltip";
         const rect = el.getBoundingClientRect();
         const leftSpace = rect.left;
         const rightSpace = window.innerWidth - rect.right;
@@ -96,6 +96,9 @@ export default function bindCommonActions(rootElement) {
           }
         }
         const target = /** @type {HTMLElement} */ ev.currentTarget;
+        if (target.dataset.tooltipHtml) {
+          el.dataset.tooltipClass = "teriock-rich-tooltip";
+        }
         if (target.dataset.tooltip || target.dataset.tooltipHtml) {
           game.tooltip.activate(target);
         }
@@ -115,6 +118,7 @@ export default function bindCommonActions(rootElement) {
           if (doc && typeof doc.toTooltip === "function") {
             const tooltip = await doc.toTooltip();
             target.setAttribute("data-tooltip-html", tooltip);
+            target.setAttribute("data-tooltip-class", "teriock-rich-tooltip");
             if (target === game.tooltip.element) game.tooltip.activate(target);
           }
         }

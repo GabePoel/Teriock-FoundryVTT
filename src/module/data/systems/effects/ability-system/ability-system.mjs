@@ -380,7 +380,7 @@ export default class AbilitySystem extends mix(
   get isVirtual() {
     return (
       this.parent.inCompendium &&
-      this.parent.parent.system.identifier === "basic-abilities"
+      this.parent.parent?.system.identifier === "basic-abilities"
     );
   }
 

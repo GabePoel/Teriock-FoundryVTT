@@ -105,7 +105,7 @@ export default class FluencySystem extends mix(
       this.parent.parent &&
       this.parent.parent.type === "equipment"
     ) {
-      suppressed = !this.parent.parent.system.isAttuned;
+      suppressed = !this.parent.parent?.system.isAttuned;
     }
     return suppressed;
   }

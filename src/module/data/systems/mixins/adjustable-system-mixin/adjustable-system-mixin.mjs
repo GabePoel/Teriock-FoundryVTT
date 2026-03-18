@@ -21,7 +21,7 @@ export default function AdjustableSystemMixin(Base) {
 
       /** @inheritDoc */
       static PRESERVED_PROPERTIES = [
-        "system.tag",
+        "system.badge",
         ...this._adjustableTextFields,
         ...super.PRESERVED_PROPERTIES,
       ];
@@ -36,10 +36,15 @@ export default function AdjustableSystemMixin(Base) {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
+          badge: new fields.StringField({ initial: "" }),
           improvement: new TextField({ initial: "" }),
           limitation: new TextField({ initial: "" }),
-          tag: new fields.StringField({ initial: "" }),
         });
+      }
+
+      /** @inheritDoc */
+      get _nameBadge() {
+        return this.badge || "";
       }
 
       /** @inheritDoc */
@@ -56,11 +61,6 @@ export default function AdjustableSystemMixin(Base) {
           );
         }
         return [...tags, ...super._nameTags];
-      }
-
-      /** @inheritDoc */
-      get _nameValue() {
-        return this.tag || "";
       }
     }
   );

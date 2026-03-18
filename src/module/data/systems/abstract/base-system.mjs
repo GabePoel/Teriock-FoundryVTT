@@ -11,6 +11,14 @@ export default class BaseSystem extends TypeDataModel {
   }
 
   /**
+   * A value to append to a name.
+   * @returns {string}
+   */
+  get _nameBadge() {
+    return "";
+  }
+
+  /**
    * Strings to add to the name.
    * @returns {string[]}
    */
@@ -19,23 +27,15 @@ export default class BaseSystem extends TypeDataModel {
   }
 
   /**
-   * A value to append to a name.
-   * @returns {string}
-   */
-  get _nameValue() {
-    return "";
-  }
-
-  /**
    * A string to show instead of the name.
    * @returns {string}
    */
   get nameString() {
     let name = this.parent?.name ?? "";
-    if (this._nameValue) {
+    if (this._nameBadge) {
       name = game.i18n.format("TERIOCK.SYSTEMS.Base.EMBED.valueNameString", {
         name,
-        value: this._nameValue.trim(),
+        value: this._nameBadge.trim(),
       });
     }
     if (this._nameTags.length > 0) {

@@ -41,7 +41,7 @@ export default class ResourceSystem extends mix(
   get makeSuppressed() {
     let suppressed = super.makeSuppressed;
     if (!suppressed && this.parent.parent.type === "equipment") {
-      suppressed = !this.parent.parent.system.isAttuned;
+      suppressed = !this.parent.parent?.system.isAttuned;
     }
     return suppressed;
   }
