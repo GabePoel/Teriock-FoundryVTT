@@ -35,8 +35,9 @@ export default (Base) => {
             deterministic: false,
           }),
           offense: new fields.SchemaField({
-            sb: new fields.BooleanField({ initial: false }),
             piercing: new fields.EmbeddedDataField(PiercingModel),
+            sb: new fields.BooleanField({ initial: false }),
+            warded: new fields.BooleanField({ initial: false }),
           }),
           wielding: new fields.SchemaField({
             attacker: new fields.DocumentIdField({ nullable: true }),

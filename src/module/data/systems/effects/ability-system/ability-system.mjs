@@ -198,6 +198,11 @@ export default class AbilitySystem extends mix(
           editable: false,
         },
         {
+          path: "system.consumeSourceText",
+          classes: "italic-display-field ab-improvement-attribute",
+          editable: false,
+        },
+        {
           path: "system.upgrades.score.text",
           classes: "italic-display-field editable-display-field",
           editable: false,
@@ -260,6 +265,10 @@ export default class AbilitySystem extends mix(
     });
     if (this.ritual) tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.ritual.label");
     if (this.rotator) tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.rotator.label");
+    if (this.guildmaster) {
+      tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.guildmaster.label");
+    }
+    if (this.lore) tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.lore.label");
     tags.push(
       ...Array.from(this.powerSources).map((t) => {
         return {
@@ -298,12 +307,16 @@ export default class AbilitySystem extends mix(
       "system.spell",
       "system.ritual",
       "system.rotator",
+      "system.guildmaster",
+      "system.lore",
       "system.sustained",
       "system.invoked",
       "system.elderSorcery",
       "system.consumable",
+      "system.consumeSource",
       "system.grantOnly",
       "system.warded",
+      ...super.displayToggles,
     ];
   }
 
@@ -398,14 +411,6 @@ export default class AbilitySystem extends mix(
   }
 
   /** @inheritDoc */
-  _onDelete(options, userId) {
-    super._onDelete(options, userId);
-    if (this.parent.checkEditor(userId)) {
-      this.expireSustainedConsequences(true);
-    }
-  }
-
-  /** @inheritDoc */
   _onUpdate(changed, options, userId) {
     super._onUpdate(changed, options, userId);
     if (this.parent.checkEditor(userId)) {
@@ -415,6 +420,14 @@ export default class AbilitySystem extends mix(
         this.expireSustainedConsequences();
       }
     }
+  }
+
+  /** @inheritDoc */
+  async _preDelete(options, user) {
+    const yes = await super._preDelete(options, user);
+    if (yes === false) return false;
+
+    await this.expireSustainedConsequences(true);
   }
 
   /**
@@ -434,7 +447,7 @@ export default class AbilitySystem extends mix(
    * @param {boolean} force - Force consequences to expire even if this isn't suppressed.
    */
   async expireSustainedConsequences(force = false) {
-    if (!this.parent.active || force) {
+    if (force || !this.parent.active) {
       for (const uuid of this.sustaining) {
         await game.users.queryGM(
           "teriock.sustainedExpiration",

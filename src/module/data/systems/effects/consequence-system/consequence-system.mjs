@@ -190,9 +190,9 @@ export default class ConsequenceSystem extends mix(
 
   /** @inheritDoc */
   async _preDelete(options, user) {
-    if ((await super._preDelete(options, user)) === false) {
-      return false;
-    }
+    const yes = await super._preDelete(options, user);
+    if (yes === false) return false;
+
     await this.parent.hookCall("effectExpiration");
   }
 

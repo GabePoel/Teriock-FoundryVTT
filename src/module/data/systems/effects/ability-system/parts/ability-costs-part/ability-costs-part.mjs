@@ -3,7 +3,6 @@ import { localizeChoices } from "../../../../../../helpers/localization.mjs";
 import { objectMap } from "../../../../../../helpers/utils.mjs";
 import { FormulaField, TextField } from "../../../../../fields/_module.mjs";
 
-const { hasProperty, getProperty, setProperty, deleteProperty } = foundry.utils;
 const { fields } = foundry.data;
 
 /**
@@ -145,83 +144,6 @@ export default (Base) => {
                 },
               };
             }
-          }
-        }
-
-        // 2026-03-17 Unified cost migration
-        if (getProperty(data, "costs.hp.type") === "hack") {
-          setProperty(data, "costs.components.hack.type", "tag");
-        }
-        for (const stat of ["hp", "mp", "gp"]) {
-          if (hasProperty(data, `costs.${stat}`)) {
-            if (getProperty(data, `costs.${stat}.type`) === "variable") {
-              setProperty(data, `costs.primary.${stat}.type`, "description");
-              setProperty(
-                data,
-                `costs.primary.${stat}.description`,
-                getProperty(data, `costs.${stat}.value.variable`),
-              );
-            } else if (getProperty(data, `costs.${stat}.type`) === "static") {
-              setProperty(data, `costs.primary.${stat}.type`, "formula");
-              setProperty(
-                data,
-                `costs.primary.${stat}.formula`,
-                getProperty(data, `costs.${stat}.value.static`).toString(),
-              );
-            } else if (getProperty(data, `costs.${stat}.type`) === "formula") {
-              setProperty(data, `costs.primary.${stat}.type`, "formula");
-              setProperty(
-                data,
-                `costs.primary.${stat}.formula`,
-                getProperty(data, `costs.${stat}.value.formula`),
-              );
-            } else {
-              setProperty(data, `costs.${stat}.type`, null);
-            }
-            deleteProperty(`costs.${stat}`);
-          }
-        }
-        for (const component of ["material", "somatic", "verbal"]) {
-          if (getProperty(data, `costs.${component}`)) {
-            setProperty(data, `costs.components.${component}.type`, "tag");
-          }
-          deleteProperty(`costs.${component}`);
-        }
-        if (getProperty(data, "costs.materialCost")) {
-          setProperty(data, "costs.components.material.type", "description");
-          setProperty(
-            data,
-            "costs.components.material.description",
-            getProperty(data, "costs.materialCost"),
-          );
-        }
-        deleteProperty(data, "costs.materialCost");
-        if (getProperty(data, "costs.break") === "shatter") {
-          setProperty(data, "costs.components.break.type", "description");
-          setProperty(
-            data,
-            "costs.components.break.description",
-            "When [[lookup name]] is used, the item that delivers it becomes @L[Property:Shattered]{shattered}.",
-          );
-        } else if (getProperty(data, "costs.break") === "destroy") {
-          setProperty(data, "costs.components.break.type", "description");
-          setProperty(
-            data,
-            "costs.components.break.description",
-            "When [[lookup name]] is used, the item that delivers it becomes @L[Property:Destroyed]{destroyed}.",
-          );
-        }
-        for (const tweak of ["adept", "gifted"]) {
-          if (
-            getProperty(data, `${tweak}.enabled`) &&
-            getProperty(data, `${tweak}.amount`)
-          ) {
-            setProperty(
-              data,
-              `costs.tweaks.${tweak}`,
-              getProperty(data, `${tweak}.amount`),
-            );
-            deleteProperty(data, tweak);
           }
         }
         super.migrateData(data);

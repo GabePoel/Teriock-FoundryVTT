@@ -229,8 +229,8 @@ export default class TeriockActor extends mix(
    * @returns {Promise<boolean|void>}
    */
   async _preCreate(data, options, user) {
-    const no = await super._preCreate(data, options, user);
-    if (no === false) return false;
+    const yes = await super._preCreate(data, options, user);
+    if (yes === false) return false;
 
     const elder = await this.getElder();
     if (elder && !elder.metadata.childActorTypes.includes(this.type)) {
@@ -261,8 +261,8 @@ export default class TeriockActor extends mix(
    * @returns {Promise<boolean|void>}
    */
   async _preUpdate(changes, options, user) {
-    const no = await super._preUpdate(changes, options, user);
-    if (no === false) return false;
+    const yes = await super._preUpdate(changes, options, user);
+    if (yes === false) return false;
 
     if (
       foundry.utils.hasProperty(changes, "img") &&

@@ -314,8 +314,8 @@ export default function TransformationSystemMixin(Base) {
 
       /** @inheritDoc */
       async _preCreate(data, options, user) {
-        const no = await super._preCreate(data, options, user);
-        if (no === false) return false;
+        const yes = await super._preCreate(data, options, user);
+        if (yes === false) return false;
 
         if (this.isTransformation && this.parent.actor) {
           const flags = this._buildTransformationFlags();
@@ -357,9 +357,9 @@ export default function TransformationSystemMixin(Base) {
 
       /** @inheritDoc */
       async _preDelete(options, user) {
-        if ((await super._preDelete(options, user)) === false) {
-          return false;
-        }
+        const yes = await super._preDelete(options, user);
+        if (yes === false) return false;
+
         if (!this.isTransformation || !this.parent.actor) return;
         const speciesIds = (this.transformation.species ?? []).filter((id) =>
           this.parent.actor.species.map((s) => s.id).includes(id),
@@ -371,8 +371,8 @@ export default function TransformationSystemMixin(Base) {
 
       /** @inheritDoc */
       async _preUpdate(changes, options, user) {
-        const no = await super._preUpdate(changes, options, user);
-        if (no === false) return false;
+        const yes = await super._preUpdate(changes, options, user);
+        if (yes === false) return false;
 
         if (!this.actor || !this.isTransformation) return;
         if (foundry.utils.hasProperty(changes, "disabled")) {

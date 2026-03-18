@@ -31,8 +31,8 @@ export default class CreatureSystem extends BaseActorSystem {
 
   /** @inheritDoc */
   async _preCreate(data, options, user) {
-    const no = await super._preCreate(data, options, user);
-    if (no === false) return false;
+    const yes = await super._preCreate(data, options, user);
+    if (yes === false) return false;
 
     const updateData = {
       "system.scaling.brScale": true,

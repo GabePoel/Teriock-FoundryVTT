@@ -124,8 +124,8 @@ export default class TeriockActiveEffect extends mix(
 
   /** @inheritDoc */
   async _preCreate(data, options, user) {
-    const no = await super._preCreate(data, options, user);
-    if (no === false) return false;
+    const yes = await super._preCreate(data, options, user);
+    if (yes === false) return false;
 
     const elder = await this.getElder();
     if (elder && !elder.metadata.childEffectTypes.includes(this.type)) {
@@ -135,9 +135,9 @@ export default class TeriockActiveEffect extends mix(
 
   /** @inheritDoc */
   async _preDelete(options, user) {
-    if ((await super._preDelete(options, user)) === false) {
-      return false;
-    }
+    const yes = await super._preDelete(options, user);
+    if (yes === false) return false;
+
     if (this.elder?.type === "wrapper") {
       const elder = await this.getElder();
       await elder.delete();
@@ -147,8 +147,8 @@ export default class TeriockActiveEffect extends mix(
 
   /** @inheritDoc */
   async _preUpdate(changes, options, user) {
-    const no = await super._preUpdate(changes, options, user);
-    if (no === false) return false;
+    const yes = await super._preUpdate(changes, options, user);
+    if (yes === false) return false;
 
     if (
       this.elder?.type === "wrapper" &&

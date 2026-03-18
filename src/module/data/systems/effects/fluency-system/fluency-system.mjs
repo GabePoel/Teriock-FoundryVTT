@@ -140,8 +140,8 @@ export default class FluencySystem extends mix(
 
   /** @inheritDoc */
   async _preCreate(data, options, user) {
-    const no = await super._preCreate(data, options, user);
-    if (no === false) return false;
+    const yes = await super._preCreate(data, options, user);
+    if (yes === false) return false;
 
     if (!foundry.utils.hasProperty(data, "img")) {
       this.parent.updateSource({
@@ -152,8 +152,8 @@ export default class FluencySystem extends mix(
 
   /** @inheritDoc */
   async _preUpdate(changes, options, user) {
-    const no = await super._preUpdate(changes, options, user);
-    if (no === false) return false;
+    const yes = await super._preUpdate(changes, options, user);
+    if (yes === false) return false;
 
     if (
       Object.values(iconManifest.tradecrafts).includes(this.parent.img) &&

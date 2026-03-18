@@ -134,8 +134,8 @@ export default class BaseActorSystem extends mix(
 
   /** @inheritDoc */
   async _preCreate(data, options, user) {
-    const no = await super._preCreate(data, options, user);
-    if (no === false) return false;
+    const yes = await super._preCreate(data, options, user);
+    if (yes === false) return false;
 
     this.parent.updateSource({
       prototypeToken: {

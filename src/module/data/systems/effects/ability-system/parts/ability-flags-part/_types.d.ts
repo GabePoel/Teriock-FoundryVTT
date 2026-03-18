@@ -11,8 +11,12 @@ declare global {
       elderSorcery: boolean;
       /** <schema> Wording of this ability's Elder Sorcery incant */
       elderSorceryIncant: string;
+      /** <schema> If this ability is a guildmaster ability */
+      guildmaster: boolean;
       /** <schema> If this ability is invoked */
       invoked: boolean;
+      /** <schema> If this ability is a lore ability */
+      lore: boolean;
       /** <schema> If this ability is a ritual */
       ritual: boolean;
       /** <schema> If this ability is a rotator */

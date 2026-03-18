@@ -56,8 +56,8 @@ export default function HierarchyDocumentMixin(Base) {
        * @returns {Promise<boolean|void>}
        */
       static async _preCreateOperation(documents, operation, user) {
-        const no = await super._preCreateOperation(documents, operation, user);
-        if (no === false) return false;
+        const yes = await super._preCreateOperation(documents, operation, user);
+        if (yes === false) return false;
 
         operation.cachedKeepId = operation.keepId;
         operation.isKeepIdCached = true;
@@ -140,12 +140,9 @@ export default function HierarchyDocumentMixin(Base) {
        * @returns {Promise<boolean|void>}
        */
       static async _preDeleteOperation(documents, operation, user) {
-        if (
-          (await super._preDeleteOperation(documents, operation, user)) ===
-          false
-        ) {
-          return false;
-        }
+        const yes = await super._preDeleteOperation(documents, operation, user);
+        if (yes === false) return false;
+
         for (const doc of documents) {
           operation.ids.push(...doc.allSubs.contents.map((s) => s._id));
         }
@@ -159,12 +156,9 @@ export default function HierarchyDocumentMixin(Base) {
        * @returns {Promise<boolean|void>}
        */
       static async _preUpdateOperation(documents, operation, user) {
-        if (
-          (await super._preUpdateOperation(documents, operation, user)) ===
-          false
-        ) {
-          return false;
-        }
+        const yes = await super._preUpdateOperation(documents, operation, user);
+        if (yes === false) return false;
+
         for (const doc of documents) {
           const folderUpdate = operation.updates.find(
             (update) =>

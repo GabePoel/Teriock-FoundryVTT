@@ -20,6 +20,7 @@ export default (Base) => {
     class AbilityEquipmentPart extends Base {
       /** @inheritDoc */
       static PRESERVED_PROPERTIES = [
+        "system.consumeSource",
         "system.grantOnly",
         ...super.PRESERVED_PROPERTIES,
       ];
@@ -27,6 +28,8 @@ export default (Base) => {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
+          consumeSource: new fields.BooleanField({ initial: false }),
+          consumeSourceText: new TextField({ initial: "" }),
           grantOnly: new fields.BooleanField({ initial: false }),
           grantOnlyText: new TextField({ initial: "" }),
         });
@@ -103,6 +106,12 @@ export default (Base) => {
       /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
+        this.consumeSourceText = this.consumeSource
+          ? game.i18n.format(
+              "TERIOCK.SYSTEMS.Ability.FIELDS.consumeSourceText.derived",
+              { uuid: this.parent.parent?.uuid },
+            )
+          : "";
         this.grantOnlyText = this.grantOnly
           ? game.i18n.format(
               "TERIOCK.SYSTEMS.Ability.FIELDS.grantOnlyText.derived",

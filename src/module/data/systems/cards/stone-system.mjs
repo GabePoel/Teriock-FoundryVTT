@@ -4,8 +4,8 @@ import BaseCardSystem from "./base-card-system.mjs";
 export default class StoneSystem extends BaseCardSystem {
   /** @inheritDoc */
   async _preCreate(data, options, user) {
-    const no = await super._preCreate(data, options, user);
-    if (no === false) return false;
+    const yes = await super._preCreate(data, options, user);
+    if (yes === false) return false;
 
     if (!foundry.utils.hasProperty(data, "back.img")) {
       this.parent.updateSource({

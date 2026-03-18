@@ -96,6 +96,9 @@ export default function ThresholdExecutionMixin(Base) {
           const piercing = button.form.elements.namedItem("piercing").value;
           if (piercing) this.piercing.raw = piercing;
         }
+        if (this.isAttack) {
+          this.warded = !!button.form.elements.namedItem("warded").checked;
+        }
       }
 
       /** @inheritDoc */
@@ -134,6 +137,7 @@ export default function ThresholdExecutionMixin(Base) {
        * @private
        */
       async _showRollDialog() {
+        const rootId = foundry.utils.randomID();
         const content = document.createElement("div");
         content.classList.add("teriock-form-container");
         let initialCompetence = 0;
@@ -148,8 +152,14 @@ export default function ThresholdExecutionMixin(Base) {
             label: game.i18n.localize(
               "TERIOCK.DIALOGS.ThresholdExecutionOptions.FIELDS.competence.label",
             ),
+            rootId,
           },
-          { name: "competence", value: initialCompetence },
+          {
+            id: `${rootId}-competence`,
+            name: "competence",
+            rootId,
+            value: initialCompetence,
+          },
         );
         content.append(competenceFormGroup);
         if (this.isAttack) {
@@ -162,9 +172,12 @@ export default function ThresholdExecutionMixin(Base) {
               label: game.i18n.localize(
                 "TERIOCK.MODELS.Piercing.FIELDS.raw.label",
               ),
+              rootId,
             },
             {
+              id: `${rootId}-piercing`,
               name: "piercing",
+              rootId,
               value: this.piercing.raw,
             },
           );
@@ -180,10 +193,26 @@ export default function ThresholdExecutionMixin(Base) {
           ),
         });
         const bonusFormGroup = bonusField.toFormGroup(
-          {},
-          { name: "bonus", placeholder: "0" },
+          { rootId },
+          { id: `${rootId}-bonus`, name: "bonus", placeholder: "0", rootId },
         );
         content.append(bonusFormGroup);
+        if (this.isAttack) {
+          const wardedField = new fields.BooleanField();
+          const wardedFormGroup = wardedField.toFormGroup(
+            {
+              label: game.i18n.localize("TERIOCK.TERMS.Properties.warded"),
+              rootId,
+            },
+            {
+              id: `${rootId}-warded`,
+              name: "warded",
+              rootId,
+              value: !!this.warded,
+            },
+          );
+          content.append(wardedFormGroup);
+        }
         await TeriockDialog.wait({
           window: {
             icon: makeIconClass(this.icon, "title"),

@@ -61,8 +61,8 @@ export default (Base) => {
 
       /** @inheritDoc */
       async _preUpdate(changes, options, user) {
-        const no = await super._preUpdate(changes, options, user);
-        if (no === false) return false;
+        const yes = await super._preUpdate(changes, options, user);
+        if (yes === false) return false;
 
         options.teriock ??= {};
         const newHp = foundry.utils.mergeObject(

@@ -172,8 +172,9 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
   #resolveWarded(options, sys) {
     if (options.warded !== undefined) return options.warded;
     const armamentWarded =
-      this.armament?.system.warded &&
-      ["attack", "block"].includes(sys.interaction);
+      (this.armament?.system.warded &&
+        ["attack", "block"].includes(sys.interaction)) ||
+      this.actor?.system?.combat?.offense?.warded;
     return sys.isContact && armamentWarded ? true : !!sys.warded;
   }
 

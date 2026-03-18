@@ -17,14 +17,16 @@ export default (Base) => {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
+          basic: new fields.BooleanField({ initial: false }),
           class: new fields.StringField({
             choices: TERIOCK.options.ability.class,
           }),
-          basic: new fields.BooleanField({ initial: false }),
           consumable: new fields.BooleanField({ initial: false }),
           elderSorcery: new fields.BooleanField({ initial: false }),
           elderSorceryIncant: new TextField({ initial: "" }),
+          guildmaster: new fields.BooleanField({ initial: false }),
           invoked: new fields.BooleanField({ initial: false }),
+          lore: new fields.BooleanField({ initial: false }),
           ritual: new fields.BooleanField({ initial: false }),
           rotator: new fields.BooleanField({ initial: false }),
           skill: new fields.BooleanField({ initial: false }),
@@ -53,17 +55,19 @@ export default (Base) => {
       getLocalRollData() {
         const data = super.getLocalRollData();
         Object.assign(data, {
-          warded: Number(this.warded),
           basic: Number(this.basic),
-          standard: Number(this.standard),
-          skill: Number(this.skill),
-          spell: Number(this.spell),
-          ritual: Number(this.ritual),
-          rotator: Number(this.rotator),
-          sustained: Number(this.sustained),
-          invoked: Number(this.invoked),
           elderSorcery: Number(this.elderSorcery),
           es: Number(this.elderSorcery),
+          guildmaster: Number(this.guildmaster),
+          invoked: Number(this.invoked),
+          lore: Number(this.lore),
+          ritual: Number(this.ritual),
+          rotator: Number(this.rotator),
+          skill: Number(this.skill),
+          spell: Number(this.spell),
+          standard: Number(this.standard),
+          sustained: Number(this.sustained),
+          warded: Number(this.warded),
         });
         if (this.parent.parent?.type === "rank") {
           const rank = /** @type {TeriockRank} */ this.parent.parent;
