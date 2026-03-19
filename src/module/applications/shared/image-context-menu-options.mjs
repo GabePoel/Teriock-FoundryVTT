@@ -24,11 +24,10 @@ const imageContextMenuOptions = [
     condition: (target) => {
       const src = target.getAttribute("src");
       return (
-        (src &&
-          src.length > 0 &&
-          target.getAttribute("data-openable") &&
-          game.user.isGM) ||
-        game.settings.get("teriock", "openChatImages")
+        src &&
+        src.length > 0 &&
+        target.getAttribute("data-openable") &&
+        (game.user.isGM || game.settings.get("teriock", "openChatImages"))
       );
     },
   },
@@ -56,10 +55,9 @@ const imageContextMenuOptions = [
       }
     },
     condition: (target) =>
-      (target.getAttribute("data-openable-document") &&
-        target.getAttribute("data-uuid") &&
-        game.user.isGM) ||
-      game.settings.get("teriock", "openChatDocuments"),
+      target.getAttribute("data-openable-document") &&
+      target.getAttribute("data-uuid") &&
+      (game.user.isGM || game.settings.get("teriock", "openChatDocuments")),
   },
 ];
 export default imageContextMenuOptions;
