@@ -17,7 +17,6 @@ export function cleanDocument(doc) {
   }
   if (doc.system) {
     cleanCommon(doc);
-    cleanItem(doc);
     cleanActiveEffect(doc);
     if (doc.type === "ability") cleanAbility(doc);
     if (doc.type === "body") cleanBody(doc);
@@ -106,13 +105,6 @@ function cleanPiercing(piercing) {
 }
 
 /**
- * @param {TeriockItem} doc
- */
-function cleanItem(doc) {
-  delete doc.system.onUse;
-}
-
-/**
  * @param {TeriockPower} doc
  */
 function cleanPower(doc) {
@@ -179,13 +171,15 @@ function cleanAbility(doc) {
 
   // Clean Costs
   if (doc.system.costs) {
-    delete doc.system.costs.verbal;
-    delete doc.system.costs.somatic;
-    delete doc.system.costs.material;
-    delete doc.system.costs.mp;
-    delete doc.system.costs.hp;
-    delete doc.system.costs.gp;
     delete doc.system.adept;
+    delete doc.system.costs.break;
+    delete doc.system.costs.gp;
+    delete doc.system.costs.hp;
+    delete doc.system.costs.material;
+    delete doc.system.costs.materialCost;
+    delete doc.system.costs.mp;
+    delete doc.system.costs.somatic;
+    delete doc.system.costs.verbal;
     delete doc.system.gifted;
     if (doc.system.costs.tweaks) {
       if (!doc.system.costs.tweaks.adept) {
