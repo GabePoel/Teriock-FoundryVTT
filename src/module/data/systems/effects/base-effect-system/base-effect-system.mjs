@@ -11,7 +11,7 @@ const { fields } = foundry.data;
 
 /**
  * Base effect data model.
- * @extends {Teriock.Models.BaseEffectSystemInterface}
+ * @extends {Teriock.Models.BaseEffectSystemData}
  * @extends {ChildSystem}
  */
 export default class BaseEffectSystem extends ChildSystem {

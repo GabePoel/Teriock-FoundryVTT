@@ -5,7 +5,7 @@ import type {
 
 declare global {
   namespace Teriock.Models {
-    export type EquipmentStoragePartInterface = {
+    export type EquipmentStoragePartData = {
       /** <schema> Storage */
       storage: StorageModel;
       /** <schema> Weight (lb) */

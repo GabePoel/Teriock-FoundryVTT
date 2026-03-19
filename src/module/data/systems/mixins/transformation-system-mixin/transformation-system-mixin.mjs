@@ -9,7 +9,7 @@ export default function TransformationSystemMixin(Base) {
   return (
     /**
      * @extends {ChildSystem}
-     * @extends {Teriock.Models.TransformationSystemInterface}
+     * @extends {Teriock.Models.TransformationSystemData}
      * @mixin
      */
     class TransformationSystem extends Base {

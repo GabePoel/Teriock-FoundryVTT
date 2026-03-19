@@ -8,7 +8,7 @@ import EmbeddedDataModel from "../embedded-data-model.mjs";
 const { fields } = foundry.data;
 
 /**
- * @extends {Teriock.Models.StatDieModelInterface}
+ * @extends {Teriock.Models.StatDieModelData}
  */
 export default class StatDieModel extends EmbeddedDataModel {
   /** @inheritDoc */

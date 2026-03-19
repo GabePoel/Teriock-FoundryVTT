@@ -1,6 +1,6 @@
 declare global {
   namespace Teriock.Models {
-    export type ActorMovementPartInterface = {
+    export type ActorMovementPartData = {
       movementSpeed: number;
       /** <base> Speed adjustments */
       speedAdjustments: {

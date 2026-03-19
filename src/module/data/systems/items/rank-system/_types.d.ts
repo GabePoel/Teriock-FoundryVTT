@@ -2,7 +2,7 @@ import "./_parameters";
 
 declare global {
   namespace Teriock.Models {
-    export type RankSystemInterface = {
+    export type RankSystemData = {
       /** <schema> Rank Class Archetype */
       archetype: Teriock.Parameters.Rank.RankArchetype;
       /** <schema> Rank Class Name */

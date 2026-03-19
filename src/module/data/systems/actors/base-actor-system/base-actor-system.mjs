@@ -7,7 +7,7 @@ import * as parts from "./parts/_module.mjs";
 //noinspection JSClosureCompilerSyntax
 /**
  * Base {@link TeriockActor} data model.
- * @extends {Teriock.Models.BaseActorSystemInterface}
+ * @extends {Teriock.Models.BaseActorSystemData}
  * @mixes CommonSystem
  * @mixes ActorAttributesPart
  * @mixes ActorAutomationPart

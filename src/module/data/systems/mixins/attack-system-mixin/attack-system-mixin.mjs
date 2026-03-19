@@ -10,7 +10,7 @@ export default function AttackSystemMixin(Base) {
   return (
     /**
      * @extends {ChildSystem}
-     * @extends {Teriock.Models.AttackSystemInterface}
+     * @extends {Teriock.Models.AttackSystemData}
      * @mixin
      */
     class AttackSystem extends Base {

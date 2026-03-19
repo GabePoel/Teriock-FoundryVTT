@@ -9,7 +9,7 @@ const { fields } = foundry.data;
 /**
  * Power-specific item data model.
  * @extends {BaseItemSystem}
- * @extends {Teriock.Models.PowerSystemInterface}
+ * @extends {Teriock.Models.PowerSystemData}
  * @mixes CompetenceDisplaySystem
  */
 export default class PowerSystem extends mix(

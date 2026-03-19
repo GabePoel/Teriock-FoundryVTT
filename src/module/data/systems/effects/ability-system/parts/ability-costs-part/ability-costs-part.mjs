@@ -17,7 +17,7 @@ export default (Base) => {
   return (
     /**
      * @extends {BaseEffectSystem}
-     * @extends {Teriock.Models.AbilityCostsPartInterface}
+     * @extends {Teriock.Models.AbilityCostsPartData}
      * @mixin
      */
     class AbilityCostsPart extends Base {

@@ -2,7 +2,7 @@ import { PiercingModel } from "../../../models/_module.mjs";
 
 declare global {
   namespace Teriock.Models {
-    export type AttackSystemInterface = {
+    export type AttackSystemData = {
       /** <schema> Piercing */
       piercing: PiercingModel;
       /** <base> Warded */

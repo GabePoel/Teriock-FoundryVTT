@@ -17,7 +17,7 @@ const { fields } = foundry.data;
  * - [Creatures](https://wiki.teriock.com/index.php/Category:Creatures)
  *
  * @extends {BaseItemSystem}
- * @extends {Teriock.Models.SpeciesSystemInterface}
+ * @extends {Teriock.Models.SpeciesSystemData}
  * @mixes CompetenceDisplaySystem
  * @mixes SpeciesPanelPart
  * @mixes StatGiverSystem

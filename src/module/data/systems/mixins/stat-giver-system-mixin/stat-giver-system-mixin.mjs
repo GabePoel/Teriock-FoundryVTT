@@ -14,7 +14,7 @@ export default function StatGiverSystemMixin(Base) {
   return (
     /**
      * @extends {BaseItemSystem}
-     * @extends {Teriock.Models.StatGiverSystemInterface}
+     * @extends {Teriock.Models.StatGiverSystemData}
      * @implements {Teriock.Functionality.StatProvider}
      * @mixin
      */

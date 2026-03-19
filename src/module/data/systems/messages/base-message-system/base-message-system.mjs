@@ -16,7 +16,7 @@ import { BaseSystem } from "../../abstract/_module.mjs";
 const { fields } = foundry.data;
 
 /**
- * @extends {Teriock.Models.BaseMessageSystemInterface}
+ * @extends {Teriock.Models.BaseMessageSystemData}
  * @extends {Teriock.Data.BaseMessageData}
  */
 export default class BaseMessageSystem extends BaseSystem {

@@ -10,7 +10,7 @@ export default function ConsumableSystemMixin(Base) {
   return (
     /**
      * @extends {ChildSystem}
-     * @extends {Teriock.Models.ConsumableSystemInterface}
+     * @extends {Teriock.Models.ConsumableSystemData}
      * @mixin
      */
     class ConsumableSystem extends Base {

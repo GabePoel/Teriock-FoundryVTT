@@ -11,7 +11,7 @@ import {
 
 declare global {
   namespace Teriock.Models {
-    export type ConsequenceSystemInterface = {
+    export type ConsequenceSystemData = {
       /** <schema> Associations */
       associations: Teriock.MessageData.MessageAssociation[];
       /** <schema> Blocks representing the source */

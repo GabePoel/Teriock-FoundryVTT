@@ -1,6 +1,6 @@
 declare global {
   namespace Teriock.Models {
-    export type ActorTransformationPartInterface = {
+    export type ActorTransformationPartData = {
       /** <base> Transformation */
       transformation: {
         /** <base> Transformed token art */

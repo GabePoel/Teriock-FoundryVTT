@@ -1,6 +1,6 @@
 declare global {
   namespace Teriock.Models {
-    export type AbilityResultsPartInterface = {
+    export type AbilityResultsPartData = {
       /** <schema> What this ability does to a target */
       results: {
         critFail: string;

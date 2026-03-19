@@ -15,7 +15,7 @@ const { fields } = foundry.data;
  *
  * @extends {BaseItemSystem}
  * @extends {CommonSystem}
- * @extends {Teriock.Models.RankSystemInterface}
+ * @extends {Teriock.Models.RankSystemData}
  * @mixes CompetenceDisplaySystem
  * @mixes StatGiverSystem
  * @mixes WikiSystem

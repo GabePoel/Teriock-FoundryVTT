@@ -15,7 +15,7 @@ export default (Base) => {
     /**
      * @extends {AttackSystem}
      * @extends {BaseEffectSystem}
-     * @extends {Teriock.Models.AbilityUsagePartInterface}
+     * @extends {Teriock.Models.AbilityUsagePartData}
      * @mixin
      */
     class AbilityUsagePart extends Base {

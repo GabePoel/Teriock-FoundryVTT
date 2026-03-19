@@ -12,7 +12,7 @@ export default (Base) => {
   return (
     /**
      * @extends {ConsumableSystem}
-     * @extends {Teriock.Models.EquipmentStoragePartInterface}
+     * @extends {Teriock.Models.EquipmentStoragePartData}
      * @mixin
      */
     class EquipmentStoragePart extends Base {

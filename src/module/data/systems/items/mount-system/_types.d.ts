@@ -1,6 +1,6 @@
 declare global {
   namespace Teriock.Models {
-    export type MountSystemInterface = {
+    export type MountSystemData = {
       /** <schema> Mount species or type */
       mountType: string;
       /** <schema> If mount is mounted */

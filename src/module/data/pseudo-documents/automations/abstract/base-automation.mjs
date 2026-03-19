@@ -6,7 +6,7 @@ import TypedPseudoDocument from "../../abstract/typed-pseudo-document.mjs";
 const { fields } = foundry.data;
 
 /**
- * @extends {Teriock.Automations.BaseAutomationInterface}
+ * @extends {Teriock.Automations.BaseAutomationData}
  * @extends {TypedPseudoDocument}
  * @mixes PropagationData
  */

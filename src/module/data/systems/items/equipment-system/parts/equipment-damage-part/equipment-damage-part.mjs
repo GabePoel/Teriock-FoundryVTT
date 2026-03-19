@@ -12,7 +12,7 @@ export default (Base) => {
   return (
     /**
      * @extends {ArmamentSystem}
-     * @extends {Teriock.Models.EquipmentDamagePartInterface}
+     * @extends {Teriock.Models.EquipmentDamagePartData}
      * @mixin
      */
     class EquipmentDamagePart extends Base {

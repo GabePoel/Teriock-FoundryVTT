@@ -9,7 +9,7 @@ declare global {
   }
 
   namespace Teriock.Models {
-    export type ActorProtectionsPartInterface = {
+    export type ActorProtectionsPartData = {
       /** <base> Protections */
       protections: Record<
         Teriock.Parameters.Actor.ProtectionTypeKey,

@@ -6,7 +6,7 @@ import { EvaluationModel } from "../../../../../models/_module.mjs";
 
 declare global {
   namespace Teriock.Models {
-    export type AbilityUsagePartInterface = {
+    export type AbilityUsagePartData = {
       /** <schema> This ability's delivery */
       delivery: Teriock.Parameters.Ability.Delivery;
       /** <schema> This ability's execution time */

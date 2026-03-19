@@ -9,7 +9,7 @@ export default function AdjustableSystemMixin(Base) {
   return (
     /**
      * @extends {ChildSystem}
-     * @extends {Teriock.Models.AdjustableSystemInterface}
+     * @extends {Teriock.Models.AdjustableSystemData}
      * @mixin
      */
     class AdjustableSystem extends Base {

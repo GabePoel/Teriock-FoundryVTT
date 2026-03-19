@@ -2,7 +2,7 @@ import BaseItemSystem from "../base-item-system/base-item-system.mjs";
 
 /**
  * Wrapper-specific item data model.
- * @extends {Teriock.Models.WrapperSystemInterface}
+ * @extends {Teriock.Models.WrapperSystemData}
  */
 export default class WrapperSystem extends BaseItemSystem {
   /** @inheritDoc */

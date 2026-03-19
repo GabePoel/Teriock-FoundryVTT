@@ -2,7 +2,7 @@ import { PiercingModel } from "../../../../../models/_module.mjs";
 
 declare global {
   namespace Teriock.Models {
-    export type ActorCombatPartInterface = {
+    export type ActorCombatPartData = {
       /** <schema> Stuff that changes during combat */
       combat: {
         /** <schema> Attack penalty */

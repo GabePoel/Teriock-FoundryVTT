@@ -6,7 +6,7 @@ export default (Base) => {
   return (
     /**
      * @extends {CommonSystem}
-     * @extends {Teriock.Models.ActorAutomationPartInterface}
+     * @extends {Teriock.Models.ActorAutomationPartData}
      * @mixin
      */
     class ActorAutomationPart extends Base {

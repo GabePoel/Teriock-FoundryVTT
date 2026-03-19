@@ -7,7 +7,7 @@ export type SizeAbilityStep = {
 
 declare global {
   namespace Teriock.Models {
-    export type SpeciesSystemInterface = {
+    export type SpeciesSystemData = {
       /** <schema> Age of maturity */
       adult: number;
       /** <schema> Appearance */

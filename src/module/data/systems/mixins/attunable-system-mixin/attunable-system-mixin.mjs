@@ -8,7 +8,7 @@ export default function AttunableSystemMixin(Base) {
   return (
     /**
      * @extends {BaseItemSystem}
-     * @extends {Teriock.Models.AttunableSystemInterface}
+     * @extends {Teriock.Models.AttunableSystemData}
      * @mixin
      */
     class AttunableSystem extends Base {

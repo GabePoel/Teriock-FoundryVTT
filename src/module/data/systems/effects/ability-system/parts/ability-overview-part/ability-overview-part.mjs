@@ -10,7 +10,7 @@ export default (Base) => {
   return (
     /**
      * @extends {BaseEffectSystem}
-     * @extends {Teriock.Models.AbilityOverviewPartInterface}
+     * @extends {Teriock.Models.AbilityOverviewPartData}
      * @mixin
      */
     class AbilityOverviewPart extends Base {

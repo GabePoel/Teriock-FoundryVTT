@@ -1,6 +1,6 @@
 declare global {
   namespace Teriock.Models {
-    export type PropertySystemInterface = {
+    export type PropertySystemData = {
       /** <schema> Applies even if the parent {@link TeriockEquipment} is dampened */
       applyIfDampened: boolean;
       /** <schema> Applies even if the parent {@link TeriockEquipment} is shattered */

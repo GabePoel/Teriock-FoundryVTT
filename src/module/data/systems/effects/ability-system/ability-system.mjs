@@ -16,7 +16,7 @@ import * as parts from "./parts/_module.mjs";
  * - [Ability Rules](https://wiki.teriock.com/index.php/Category:Ability_rules)
  *
  * @extends {BaseEffectSystem}
- * @implements {Teriock.Models.AbilitySystemInterface}
+ * @implements {Teriock.Models.AbilitySystemData}
  * @mixes AbilityAutomationsPart
  * @mixes AbilityCostsPart
  * @mixes AbilityDurationPart

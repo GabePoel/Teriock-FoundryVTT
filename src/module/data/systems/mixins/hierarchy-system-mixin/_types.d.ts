@@ -1,6 +1,6 @@
 declare global {
   namespace Teriock.Models {
-    export type HierarchySystemInterface = {
+    export type HierarchySystemData = {
       _ref: UUID<CommonDocument>;
       _sup: UUID<CommonDocument>;
     };

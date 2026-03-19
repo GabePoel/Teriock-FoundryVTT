@@ -8,7 +8,7 @@ export default function HierarchySystemMixin(Base) {
   return (
     /**
      * @extends {ChildSystem}
-     * @extends {Teriock.Models.HierarchySystemInterface}
+     * @extends {Teriock.Models.HierarchySystemData}
      * @mixin
      */
     class HierarchySystem extends Base {

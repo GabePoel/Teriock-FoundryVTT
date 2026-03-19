@@ -1,6 +1,6 @@
 declare global {
   namespace Teriock.Models {
-    export type WrapperSystemInterface = {
+    export type WrapperSystemData = {
       get parent(): TeriockWrapper;
     };
   }

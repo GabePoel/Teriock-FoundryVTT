@@ -13,7 +13,7 @@ declare global {
       types: Set<string>;
     };
 
-    export type ArmamentSystemInterface = {
+    export type ArmamentSystemData = {
       /** <schema> How much this increases an actor's attack penalty by per use */
       attackPenalty: EvaluationModel;
       /** <schema> Armor Value */

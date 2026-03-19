@@ -41,7 +41,7 @@ class UnitDialog extends DialogV2 {
 }
 
 /**
- * @extends {Teriock.Models.BaseUnitModelInterface}
+ * @extends {Teriock.Models.BaseUnitModelData}
  */
 export default class BaseUnitModel extends EvaluationModel {
   /** @inheritDoc */

@@ -13,7 +13,7 @@ const { fields } = foundry.data;
  * - [Properties](https://wiki.teriock.com/index.php/Category:Properties)
  *
  * @extends {BaseEffectSystem}
- * @extends {Teriock.Models.PropertySystemInterface}
+ * @extends {Teriock.Models.PropertySystemData}
  * @mixes AdjustableSystem
  * @mixes HierarchySystem
  * @mixes RevelationSystem

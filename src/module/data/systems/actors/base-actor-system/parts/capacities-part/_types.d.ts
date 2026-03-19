@@ -2,7 +2,7 @@ import { EvaluationModel } from "../../../../../models/_module.mjs";
 
 declare global {
   namespace Teriock.Models {
-    export type ActorCapacitiesPartInterface = {
+    export type ActorCapacitiesPartData = {
       /** <base> Attunements - IDs of attuned equipment */
       attunements: Set<ID<TeriockEquipment>>;
       carryingCapacity: {

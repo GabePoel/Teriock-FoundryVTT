@@ -9,7 +9,7 @@ const { fields } = foundry.data;
 /**
  * Mount-specific item data model.
  * @extends {BaseItemSystem}
- * @extends {Teriock.Models.MountSystemInterface}
+ * @extends {Teriock.Models.MountSystemData}
  * @mixes AttunableSystem
  * @mixes StatGiverSystem
  */

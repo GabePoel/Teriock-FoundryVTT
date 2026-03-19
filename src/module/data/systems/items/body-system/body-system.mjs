@@ -11,7 +11,7 @@ import BaseItemSystem from "../base-item-system/base-item-system.mjs";
  * - [Body Parts](https://wiki.teriock.com/index.php/Category:Body_parts)
  *
  * @extends {BaseItemSystem}
- * @extends {Teriock.Models.BodySystemInterface}
+ * @extends {Teriock.Models.BodySystemData}
  * @mixes ArmamentSystem
  * @mixes ConsumableSystem
  * @mixes WikiSystem

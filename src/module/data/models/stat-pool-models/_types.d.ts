@@ -1,6 +1,6 @@
 declare global {
   namespace Teriock.Models {
-    export type BaseStatPoolModelInterface = {
+    export type BaseStatPoolModelData = {
       disabled: boolean;
       formula: Teriock.System.FormulaString;
       spent: Set<number>;

@@ -3,8 +3,8 @@ import "./_parameters";
 
 declare global {
   namespace Teriock.Models {
-    export interface AbilitySystemInterface
-      extends Teriock.Models.BaseEffectSystemInterface {
+    export interface AbilitySystemData
+      extends Teriock.Models.BaseEffectSystemData {
       get parent(): TeriockAbility;
     }
   }

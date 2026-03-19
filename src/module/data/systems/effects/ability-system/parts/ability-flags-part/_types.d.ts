@@ -1,6 +1,6 @@
 declare global {
   namespace Teriock.Models {
-    export type AbilityFlagsPartInterface = {
+    export type AbilityFlagsPartData = {
       /** <schema> If this is a basic ability */
       basic: boolean;
       /** <schema> What class this ability is associated with */

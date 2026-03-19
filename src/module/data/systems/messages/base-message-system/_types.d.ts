@@ -23,7 +23,7 @@ declare global {
   }
 
   namespace Teriock.Models {
-    export type BaseMessageSystemInterface = Teriock.Data.BaseMessageData & {
+    export type BaseMessageSystemData = Teriock.Data.BaseMessageData & {
       get parent(): TeriockChatMessage;
     };
   }

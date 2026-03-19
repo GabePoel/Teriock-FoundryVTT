@@ -12,11 +12,11 @@ declare global {
   }
 
   namespace Teriock.Models {
-    export type BaseUnitModelInterface = {
+    export type BaseUnitModelData = {
       unit: string;
     };
 
-    export type DurationModelInterface = {
+    export type DurationModelData = {
       conditions: {
         absent: Set<Teriock.Parameters.Condition.ConditionKey>;
         present: Set<Teriock.Parameters.Condition.ConditionKey>;

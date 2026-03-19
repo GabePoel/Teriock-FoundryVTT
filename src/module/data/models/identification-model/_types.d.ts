@@ -2,7 +2,7 @@ import { EquipmentSystem } from "../../systems/items/_module.mjs";
 
 declare global {
   namespace Teriock.Models {
-    export type IdentificationModelInterface = {
+    export type IdentificationModelData = {
       /** <schema> Secret flaws for when this is identified */
       flaws: string;
       /** <schema> Is the equipment identified? */

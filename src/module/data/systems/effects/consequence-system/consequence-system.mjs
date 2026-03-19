@@ -14,7 +14,7 @@ const { fields } = foundry.data;
 /**
  * Effect-specific effect data model.
  * @extends {BaseEffectSystem}
- * @extends {Teriock.Models.ConsequenceSystemInterface}
+ * @extends {Teriock.Models.ConsequenceSystemData}
  * @mixes HierarchySystem
  * @mixes TransformationSystem
  */

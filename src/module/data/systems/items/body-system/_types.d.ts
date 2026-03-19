@@ -1,6 +1,6 @@
 declare global {
   namespace Teriock.Models {
-    export type BodySystemInterface = {
+    export type BodySystemData = {
       get parent(): TeriockBody;
     };
   }

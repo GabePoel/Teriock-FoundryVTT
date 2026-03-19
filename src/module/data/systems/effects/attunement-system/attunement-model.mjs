@@ -11,7 +11,7 @@ const { fields } = foundry.data;
  * Relevant wiki pages:
  * - [Presence](https://wiki.teriock.com/index.php/Core:Presence)
  *
- * @extends {Teriock.Models.AttunementSystemInterface}
+ * @extends {Teriock.Models.AttunementSystemData}
  */
 export default class AttunementSystem extends BaseEffectSystem {
   /** @inheritDoc */

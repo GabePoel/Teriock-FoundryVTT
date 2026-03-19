@@ -2,7 +2,7 @@ import "./_parameters";
 
 declare global {
   namespace Teriock.Models {
-    export type PowerSystemInterface = {
+    export type PowerSystemData = {
       /** <schema> Flaws */
       flaws: string;
       /** <schema> Max Armor Value */

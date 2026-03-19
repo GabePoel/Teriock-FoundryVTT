@@ -5,7 +5,7 @@ import {
 
 declare global {
   namespace Teriock.Models {
-    export type StatGiverSystemInterface = {
+    export type StatGiverSystemData = {
       statDice: {
         hp: HpPoolModel;
         mp: MpPoolModel;

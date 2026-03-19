@@ -1,6 +1,6 @@
 declare global {
   namespace Teriock.Models {
-    export type AbilityEquipmentPartInterface = {
+    export type AbilityEquipmentPartData = {
       /** <schema> Consumes the item that grants it. */
       consumeSource: boolean;
       /** <derived> Text describing this consuming its source. */

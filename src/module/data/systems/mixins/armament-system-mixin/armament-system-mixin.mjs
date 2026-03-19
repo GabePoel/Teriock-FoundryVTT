@@ -15,7 +15,7 @@ export default function ArmamentSystemMixin(Base) {
   return (
     /**
      * @extends {BaseItemSystem}
-     * @extends {Teriock.Models.ArmamentSystemInterface}
+     * @extends {Teriock.Models.ArmamentSystemData}
      * @mixes AttackSystem
      * @mixin
      */

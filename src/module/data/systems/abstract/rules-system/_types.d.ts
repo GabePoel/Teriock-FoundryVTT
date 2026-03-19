@@ -1,6 +1,6 @@
 declare global {
   namespace Teriock.Models {
-    export type RulesSystemInterface = {
+    export type RulesSystemData = {
       /** A kebab-case string that uniquely identifies this rules element amongst its type. */
       identifier: string;
 

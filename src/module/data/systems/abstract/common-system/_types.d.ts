@@ -12,7 +12,7 @@ export type ChildDeltaMap = Record<
 
 declare global {
   namespace Teriock.Models {
-    export type CommonSystemInterface = {
+    export type CommonSystemData = {
       /** <schema> Automations */
       automations: TypeCollection<ID<BaseAutomation>, BaseAutomation>;
       /** <base> Boosts formulas by roll type */

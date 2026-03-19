@@ -1,6 +1,6 @@
 declare global {
   namespace Teriock.Models {
-    export type ActorDeathBagPartInterface = {
+    export type ActorDeathBagPartData = {
       /** <schema> Death Bag */
       deathBag: {
         /** <schema> How many stones to pull from the Death Bag */

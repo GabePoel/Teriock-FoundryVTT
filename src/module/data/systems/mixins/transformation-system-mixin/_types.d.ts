@@ -2,7 +2,7 @@ import { TransformationImplementationField } from "../../../fields/helpers/_type
 
 declare global {
   namespace Teriock.Models {
-    export type TransformationSystemInterface = {
+    export type TransformationSystemData = {
       /** <schema> Transformation configuration */
       transformation: TransformationImplementationField;
     };

@@ -2,7 +2,7 @@ import type { costOptions } from "../../../../../../constants/options/cost-optio
 
 declare global {
   namespace Teriock.Models {
-    export type AbilityCostsPartInterface = {
+    export type AbilityCostsPartData = {
       costs: {
         /** <schema> Component costs */
         components: Record<CostComponentKey, CostComponentValue>;

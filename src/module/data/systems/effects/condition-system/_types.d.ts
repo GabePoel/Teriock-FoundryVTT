@@ -3,7 +3,7 @@ import { CombatExpirationMethod } from "../../../fields/helpers/_types";
 
 declare global {
   namespace Teriock.Models {
-    export type ConditionSystemInterface = {
+    export type ConditionSystemData = {
       /** <schema> Expirations */
       expirations: {
         /** <schema> Combat expirations */

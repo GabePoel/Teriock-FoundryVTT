@@ -11,7 +11,7 @@ export default (Base) => {
   return (
     /**
      * @extends {BaseItemSystem}
-     * @extends {Teriock.Models.EquipmentIdentificationPartInterface}
+     * @extends {Teriock.Models.EquipmentIdentificationPartData}
      * @mixin
      */
     class EquipmentIdentificationPart extends Base {

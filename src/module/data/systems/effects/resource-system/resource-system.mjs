@@ -7,7 +7,7 @@ import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
 /**
  * Resource-specific effect data model.
  * @extends {BaseEffectSystem}
- * @extends {Teriock.Models.ResourceSystemInterface}
+ * @extends {Teriock.Models.ResourceSystemData}
  * @mixes ConsumableSystem
  * @mixes RevelationSystem
  */

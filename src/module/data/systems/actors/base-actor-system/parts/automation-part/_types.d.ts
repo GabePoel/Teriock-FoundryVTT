@@ -2,7 +2,7 @@ import { TeriockTokenDocument } from "../../../../../../documents/_module.mjs";
 
 declare global {
   namespace Teriock.Models {
-    export type ActorAutomationPartInterface = {
+    export type ActorAutomationPartData = {
       /** <base> Information explaining conditions in place. */
       conditionInformation: Teriock.Parameters.Actor.ConditionInformation;
     };

@@ -3,7 +3,7 @@ import { characterOptions } from "../../../../../../constants/options/character-
 
 declare global {
   namespace Teriock.Models {
-    export type ActorSensesPartInterface = {
+    export type ActorSensesPartData = {
       /** <schema> Detection parameters */
       detection: {
         /** <schema> Hiding based on sneak */

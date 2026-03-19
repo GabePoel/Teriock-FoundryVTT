@@ -3,7 +3,7 @@ import { BaseAutomation } from "../../../pseudo-documents/automations/abstract/_
 
 declare global {
   namespace Teriock.Models {
-    export type AutomatableSystemInterface = {
+    export type AutomatableSystemData = {
       /** <schema> Automations */
       automations: TypeCollection<ID<BaseAutomation>, BaseAutomation>;
     };

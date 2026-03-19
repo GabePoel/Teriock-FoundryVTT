@@ -3,7 +3,7 @@ import "./_parameters";
 
 declare global {
   namespace Teriock.Models {
-    export type EquipmentSystemInterface = {
+    export type EquipmentSystemData = {
       /** <schema> Equipment Classes */
       equipmentClasses: Set<Teriock.Parameters.Equipment.EquipmentClass>;
       /** <schema> Canonical Equipment Type */

@@ -9,7 +9,7 @@ export default function RevelationSystemMixin(Base) {
   return (
     /**
      * @extends {BaseEffectSystem}
-     * @extends {Teriock.Models.RevelationSystemInterface}
+     * @extends {Teriock.Models.RevelationSystemData}
      * @mixin
      */
     class RevelationSystem extends Base {

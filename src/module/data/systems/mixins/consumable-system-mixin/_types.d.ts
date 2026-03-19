@@ -2,7 +2,7 @@ import { EvaluationModel } from "../../../models/_module.mjs";
 
 declare global {
   namespace Teriock.Models {
-    export type ConsumableSystemInterface = {
+    export type ConsumableSystemData = {
       /** <schema> Whether this item is consumable */
       consumable: boolean;
       /** <schema> Maximum quantity configuration */

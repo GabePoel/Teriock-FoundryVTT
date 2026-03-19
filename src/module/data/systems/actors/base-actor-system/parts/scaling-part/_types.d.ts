@@ -1,6 +1,6 @@
 declare global {
   namespace Teriock.Models {
-    export type ActorScalingPartInterface = {
+    export type ActorScalingPartData = {
       /** <base> Presence */
       presence: Teriock.Foundry.BarField & {
         /** <derived> Too much presence being used */

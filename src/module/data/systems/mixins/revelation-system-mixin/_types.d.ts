@@ -1,6 +1,6 @@
 declare global {
   namespace Teriock.Models {
-    export type RevelationSystemInterface = {
+    export type RevelationSystemData = {
       /** <schema> Whether this has been revealed */
       revealed: boolean;
     };

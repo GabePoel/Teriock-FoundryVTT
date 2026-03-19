@@ -17,7 +17,7 @@ export default (Base) => {
   return (
     /**
      * @extends {BaseEffectSystem}
-     * @extends {Teriock.Models.AbilityDurationPartInterface}
+     * @extends {Teriock.Models.AbilityDurationPartData}
      * @mixin
      */
     class AbilityDurationPart extends Base {

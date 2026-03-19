@@ -3,7 +3,7 @@ import { Collection } from "@common/utils/_module.mjs";
 
 declare global {
   namespace Teriock.Models {
-    export type ActorStatsPartInterface = {
+    export type ActorStatsPartData = {
       /** <schema> Hit points */
       hp: CoreStat;
       /** <schema> Mana points */

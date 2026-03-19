@@ -2,7 +2,7 @@ import "./_parameters";
 
 declare global {
   namespace Teriock.Models {
-    export type AttunementSystemInterface = {
+    export type AttunementSystemData = {
       /** <schema> Should this inherit the tier of the target entity? */
       inheritTier: boolean;
       /** <schema> The entity that this attunement corresponds to */

@@ -1,6 +1,6 @@
 declare global {
   namespace Teriock.Models {
-    export type ActorHacksPartInterface = {
+    export type ActorHacksPartData = {
       /** <base> Hacks */
       hacks: Record<
         Teriock.Parameters.Actor.HackableBodyPart,

@@ -11,7 +11,7 @@ const { fields } = foundry.data;
 /**
  * @mixes UsableData
  * @extends {EvaluationModel}
- * @extends {Teriock.Models.BaseModifierModelInterface}
+ * @extends {Teriock.Models.BaseModifierModelData}
  */
 export default class BaseModifierModel extends mix(
   EvaluationModel,

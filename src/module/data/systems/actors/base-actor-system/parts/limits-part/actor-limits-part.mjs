@@ -10,7 +10,7 @@ export default (Base) => {
   return (
     /**
      * @extends {CommonSystem}
-     * @extends {Teriock.Models.ActorLimitsPartInterface}
+     * @extends {Teriock.Models.ActorLimitsPartData}
      * @mixin
      */
     class ActorLimitsPart extends Base {

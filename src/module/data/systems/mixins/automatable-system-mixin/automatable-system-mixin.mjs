@@ -8,7 +8,7 @@ export default function AutomatableSystemMixin(Base) {
   return (
     /**
      * @extends {BaseSystem}
-     * @extends {Teriock.Models.AutomatableSystemInterface}
+     * @extends {Teriock.Models.AutomatableSystemData}
      * @mixin
      */
     class AutomatableSystem extends Base {

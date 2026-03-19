@@ -1,7 +1,7 @@
 declare global {
   namespace Teriock.Models {
-    export interface CharacterSystemInterface
-      extends Teriock.Models.BaseActorSystemInterface {
+    export interface CharacterSystemData
+      extends Teriock.Models.BaseActorSystemData {
       get parent(): TeriockCharacter;
     }
   }

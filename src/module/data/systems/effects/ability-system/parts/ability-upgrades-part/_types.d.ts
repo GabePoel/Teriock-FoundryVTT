@@ -1,6 +1,6 @@
 declare global {
   namespace Teriock.Models {
-    export type AbilityUpgradesPartInterface = {
+    export type AbilityUpgradesPartData = {
       /** <schema> Attributes that this ability upgrades */
       upgrades: {
         competence: {

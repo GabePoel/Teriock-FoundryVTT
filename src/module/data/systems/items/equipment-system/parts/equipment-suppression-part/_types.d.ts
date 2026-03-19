@@ -1,6 +1,6 @@
 declare global {
   namespace Teriock.Models {
-    export type EquipmentSuppressionPartInterface = {
+    export type EquipmentSuppressionPartData = {
       /** <schema> Is the equipment dampened? */
       dampened: boolean;
       /** <schema> Is the equipment destroyed? */

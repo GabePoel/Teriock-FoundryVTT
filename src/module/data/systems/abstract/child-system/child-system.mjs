@@ -12,7 +12,7 @@ const { ImagePopout } = foundry.applications.apps;
  * Data model shared by items and effects.
  * @extends {CommonSystem}
  * @extends {BaseSystem}
- * @extends {Teriock.Models.ChildSystemInterface}
+ * @extends {Teriock.Models.ChildSystemData}
  * @mixes UsableData
  */
 export default class ChildSystem extends UsableDataMixin(CommonSystem) {

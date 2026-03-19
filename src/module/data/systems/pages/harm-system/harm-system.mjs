@@ -8,7 +8,7 @@ const { fields } = foundry.data;
 
 /**
  * @extends {RulesSystem}
- * @extends {Teriock.Models.HarmSystemInterface}
+ * @extends {Teriock.Models.HarmSystemData}
  * @mixes AutomatableSystem
  */
 export default class HarmSystem extends mix(

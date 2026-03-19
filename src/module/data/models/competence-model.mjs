@@ -3,7 +3,7 @@ import EmbeddedDataModel from "./embedded-data-model.mjs";
 
 /**
  * Model for common implementation of piercing settings.
- * @extends {Teriock.Models.ScaleModelInterface}
+ * @extends {Teriock.Models.ScaleModelData}
  * @property {Teriock.System.CompetenceLevel} raw
  * @property {CommonSystem|null} parent
  */

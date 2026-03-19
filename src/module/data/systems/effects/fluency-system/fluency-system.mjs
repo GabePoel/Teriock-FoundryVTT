@@ -19,7 +19,7 @@ const { fields } = foundry.data;
  * - [Tradecraft Fluencies](https://wiki.teriock.com/index.php/Core:Tradecraft_Fluencies)
  *
  * @extends {BaseEffectSystem}
- * @extends {Teriock.Models.FluencySystemInterface}
+ * @extends {Teriock.Models.FluencySystemData}
  * @mixes CompetenceDisplaySystem
  * @mixes RevelationSystem
  * @mixes ThresholdData

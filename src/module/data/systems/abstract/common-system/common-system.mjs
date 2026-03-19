@@ -13,7 +13,7 @@ const { fields } = foundry.data;
 /**
  * @extends {BaseSystem}
  * @extends {RulesSystem}
- * @extends {Teriock.Models.CommonSystemInterface}
+ * @extends {Teriock.Models.CommonSystemData}
  * @mixes PropagationData
  * @mixes AccessData
  * @mixes AutomatableSystem

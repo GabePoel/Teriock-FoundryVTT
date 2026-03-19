@@ -2,7 +2,7 @@ import { EvaluationModel } from "../../../models/_module.mjs";
 
 declare global {
   namespace Teriock.Models {
-    export type ChildSystemInterface = {
+    export type ChildSystemData = {
       /** <schema> Description */
       description: string;
       /** <schema> Font */

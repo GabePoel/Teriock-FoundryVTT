@@ -3,7 +3,7 @@ import { EquipmentSystem } from "../../systems/items/_module.mjs";
 
 declare global {
   namespace Teriock.Models {
-    export type StorageModelInterface = {
+    export type StorageModelData = {
       /** <schema> Container enabled */
       enabled: boolean;
       /** <schema> Maximum number of items that can go in container */

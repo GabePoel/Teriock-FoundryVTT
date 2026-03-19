@@ -1,6 +1,6 @@
 declare global {
   namespace Teriock.Models {
-    export type AbilityOverviewPartInterface = {
+    export type AbilityOverviewPartData = {
       /** <schema> Circumstances in which this ability's effect ends */
       endCondition: string;
       /** <schema> Description of how this ability changes if heightened */

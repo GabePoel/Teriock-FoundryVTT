@@ -6,7 +6,7 @@ import "./storage-model/_types";
 
 declare global {
   namespace Teriock.Models {
-    export type ScaleModelInterface = {
+    export type ScaleModelData = {
       raw: number;
     };
   }

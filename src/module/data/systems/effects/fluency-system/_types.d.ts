@@ -2,7 +2,7 @@ import "./_parameters";
 
 declare global {
   namespace Teriock.Models {
-    export type FluencySystemInterface = {
+    export type FluencySystemData = {
       /** <schema> Tradecraft field */
       field: Teriock.Parameters.Fluency.Field;
       /** <schema> Tradecraft */

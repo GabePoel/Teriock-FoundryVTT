@@ -2,7 +2,7 @@ import { AttributeModel } from "../../../../../models/modifier-models/_module.mj
 
 declare global {
   namespace Teriock.Models {
-    export type ActorAttributesPartInterface = {
+    export type ActorAttributesPartData = {
       attributes: Record<Teriock.Parameters.Actor.Attribute, AttributeModel>;
     };
   }

@@ -3,7 +3,7 @@ import { StatDieModel } from "../_module.mjs";
 
 declare global {
   namespace Teriock.Models {
-    export type StatDieModelInterface = {
+    export type StatDieModelData = {
       _id: ID<StatDieModel>;
       faces: number;
       index: number;

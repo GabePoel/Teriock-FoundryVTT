@@ -9,7 +9,7 @@ const { fields } = foundry.data;
  * Base item data model for all Teriock items.
  * Provides common functionality for disabled state and update tracking.
  * @extends {ChildSystem}
- * @extends {Teriock.Models.BaseItemSystemInterface}
+ * @extends {Teriock.Models.BaseItemSystemData}
  * @mixes HierarchySystem
  */
 export default class BaseItemSystem extends mix(
