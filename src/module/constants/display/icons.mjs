@@ -227,6 +227,9 @@ export const icons = {
     mundane: "ms-candle",
     unknown: "ms-question-mark",
   },
+  pseudoDocument: {
+    automation: "ms-settings-b-roll",
+  },
   rank: {
     combatAbility: "ms-swords",
     supportAbility: "ms-shield-with-heart",
@@ -234,6 +237,14 @@ export const icons = {
   roll: {
     boost: "ms-arrow-warm-up",
     deboost: "ms-arrow-cool-down",
+  },
+  settings: {
+    alternateRules: "mdi-dice-multiple",
+    automatedBehavior: "mdi-auto-fix",
+    dialog: "mdi-script",
+    display: "ms-display-settings",
+    gameContent: "mdi-flask",
+    gameMasterControls: "mdi-crown",
   },
   species: {
     adult: "ms-accessibility-new",
@@ -287,9 +298,6 @@ export const icons = {
     tracker: "ms-footprint",
     metaphysicist: "ms-cognition",
     tinkerer: "ms-build",
-  },
-  pseudoDocument: {
-    automation: "ms-settings-b-roll",
   },
   ui: {
     add: "ms-add",
@@ -346,6 +354,7 @@ export const icons = {
     qualifier: "ms-mystery",
     quantity: "mdi-abacus",
     remove: "ms-close",
+    save: "ms-save",
     select: "ms-task-alt",
     shareImage: "ms-mms",
     shareText: "ms-chat",

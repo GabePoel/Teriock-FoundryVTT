@@ -1,7 +1,13 @@
 import { data, display, index, options } from "../constants/_module.mjs";
+import { settings } from "../setup/system-settings.mjs";
 
 declare global {
   namespace Teriock.Keys {
+    // System Keys
+    export type Setting = {
+      [Category in keyof typeof settings]: keyof (typeof settings)[Category];
+    }[keyof typeof settings];
+
     // Tradecraft Keys
     export type Field = keyof typeof options.tradecraft;
     export type ArtisanTradecraft =

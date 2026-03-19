@@ -13,6 +13,18 @@ const { ChatMessage } = foundry.documents;
  */
 export default class TeriockChatMessage extends BaseDocumentMixin(ChatMessage) {
   /**
+   * @inheritDoc
+   * @param {object} data
+   * @param {Partial<DatabaseCreateOperation & { defaultMode: boolean} >} [operation]
+   */
+  static async create(data = {}, operation = {}) {
+    if (operation.defaultMode) {
+      this.applyRollMode(data, game.settings.get("core", "rollMode"));
+    }
+    return super.create(data, operation);
+  }
+
+  /**
    * Whether the avatar image should be rescaled.
    * @returns {boolean}
    */

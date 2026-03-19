@@ -1,4 +1,5 @@
 import { bindCommonActions } from "../../applications/shared/_module.mjs";
+import { chatImage } from "../../applications/shared/image-context-menu-options.mjs";
 import { makeIconClass } from "../../helpers/utils.mjs";
 
 /**
@@ -34,6 +35,22 @@ function addGmNotesToHeader(_application, controls) {
   }
 }
 
+/**
+ * Add share image in chat button to image popout header.
+ * @param {ImagePopout} application
+ * @param {ApplicationHeaderControlsEntry[]} controls
+ */
+function addShareImageToHeader(application, controls) {
+  controls.push({
+    action: "shareImageInChat",
+    icon: makeIconClass(TERIOCK.display.icons.ui.shareImage, "contextMenu"),
+    label: game.i18n.localize("TERIOCK.SYSTEMS.Child.MENU.shareInChat"),
+    onClick: () => {
+      chatImage(application.options.src);
+    },
+  });
+}
+
 export default function registerSheetManagementHooks() {
   foundry.helpers.Hooks.on(
     "renderJournalEntrySheet",
@@ -65,6 +82,11 @@ export default function registerSheetManagementHooks() {
   foundry.helpers.Hooks.on(
     "getHeaderControlsGmNotesCommonSheetPart",
     addGmNotesToHeader,
+  );
+
+  foundry.helpers.Hooks.on(
+    "getHeaderControlsImagePopout",
+    addShareImageToHeader,
   );
 
   foundry.helpers.Hooks.on(

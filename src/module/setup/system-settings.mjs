@@ -1,27 +1,18 @@
+import * as configs from "../applications/settings/_module.mjs";
+
 const { fields } = foundry.data;
 
-export function registerSettings() {
-  //noinspection JSValidateJSDoc
-  /** @type {Record<string, Partial<SettingConfig>>} */
-  const settings = /** @type {Record<string, Partial<SettingConfig>>} */ {
-    showRollDialogs: {
-      config: true,
-      default: true,
-      hint: "TERIOCK.SETTINGS.showRollDialogs.hint",
-      name: "TERIOCK.SETTINGS.showRollDialogs.name",
-      scope: "client",
-      type: Boolean,
-    },
-    confirmStatDiceRerolls: {
-      config: true,
-      default: true,
-      hint: "TERIOCK.SETTINGS.confirmStatDiceRerolls.hint",
-      name: "TERIOCK.SETTINGS.confirmStatDiceRerolls.name",
-      scope: "user",
-      type: Boolean,
-    },
+export const settings = {
+  actorSheet: {
+    //floatingActorTabs: {
+    //  default: true,
+    //  hint: "TERIOCK.SETTINGS.floatingActorTabs.hint",
+    //  name: "TERIOCK.SETTINGS.floatingActorTabs.name",
+    //  requiresReload: true,
+    //  scope: "client",
+    //  type: Boolean,
+    //},
     hideBasicAbilitiesByDefault: {
-      config: true,
       default: false,
       hint: "TERIOCK.SETTINGS.hideBasicAbilitiesByDefault.hint",
       name: "TERIOCK.SETTINGS.hideBasicAbilitiesByDefault.name",
@@ -29,39 +20,231 @@ export function registerSettings() {
       type: Boolean,
     },
     hideInactiveDocumentsByDefault: {
-      config: true,
       default: false,
       hint: "TERIOCK.SETTINGS.hideInactiveDocumentsByDefault.hint",
       name: "TERIOCK.SETTINGS.hideInactiveDocumentsByDefault.name",
       scope: "user",
       type: Boolean,
     },
-    automaticallyPayAbilityCosts: {
-      config: true,
-      default: true,
-      hint: "TERIOCK.SETTINGS.automaticallyPayAbilityCosts.hint",
-      name: "TERIOCK.SETTINGS.automaticallyPayAbilityCosts.name",
+  },
+  armament: {
+    rollAttackOnArmamentUse: {
+      default: false,
+      hint: "TERIOCK.SETTINGS.rollAttackOnArmamentUse.hint",
+      name: "TERIOCK.SETTINGS.rollAttackOnArmamentUse.name",
       scope: "user",
       type: Boolean,
     },
+    secretEquipment: {
+      default: false,
+      hint: "TERIOCK.SETTINGS.secretEquipment.hint",
+      name: "TERIOCK.SETTINGS.secretEquipment.name",
+      scope: "user",
+      type: Boolean,
+    },
+    twoHandedEquipment: {
+      default: false,
+      hint: "TERIOCK.SETTINGS.twoHandedEquipment.hint",
+      name: "TERIOCK.SETTINGS.twoHandedEquipment.name",
+      scope: "user",
+      type: Boolean,
+    },
+  },
+  armor: {
+    armorSuppressesRanks: {
+      default: false,
+      hint: "TERIOCK.SETTINGS.armorSuppressesRanks.hint",
+      scope: "world",
+      name: "TERIOCK.SETTINGS.armorSuppressesRanks.name",
+      type: Boolean,
+    },
+    armorWeakensRanks: {
+      default: false,
+      hint: "TERIOCK.SETTINGS.armorWeakensRanks.hint",
+      scope: "world",
+      name: "TERIOCK.SETTINGS.armorWeakensRanks.name",
+      type: Boolean,
+    },
+  },
+  automatedBehavior: {
     automaticallyChangeVisionModes: {
-      config: true,
       default: true,
       hint: "TERIOCK.SETTINGS.automaticallyChangeVisionModes.hint",
       name: "TERIOCK.SETTINGS.automaticallyChangeVisionModes.name",
       scope: "user",
       type: Boolean,
     },
+    automaticallyExpireSustainedConsequences: {
+      default: true,
+      hint: "TERIOCK.SETTINGS.automaticallyExpireSustainedConsequences.hint",
+      name: "TERIOCK.SETTINGS.automaticallyExpireSustainedConsequences.name",
+      scope: "world",
+      type: Boolean,
+    },
+    automaticallyPayAbilityCosts: {
+      default: true,
+      hint: "TERIOCK.SETTINGS.automaticallyPayAbilityCosts.hint",
+      name: "TERIOCK.SETTINGS.automaticallyPayAbilityCosts.name",
+      scope: "user",
+      type: Boolean,
+    },
+    nonHierarchicalChanges: {
+      default: true,
+      hint: "TERIOCK.SETTINGS.nonHierarchicalChanges.hint",
+      name: "TERIOCK.SETTINGS.nonHierarchicalChanges.name",
+      requiresReload: true,
+      scope: "world",
+      type: Boolean,
+    },
+  },
+  cone: {
+    defaultConeAngle: {
+      default: CONFIG.MeasuredTemplate.defaults.angle,
+      hint: "TERIOCK.SETTINGS.defaultConeAngle.hint",
+      name: "TERIOCK.SETTINGS.defaultConeAngle.name",
+      scope: "world",
+      type: new fields.NumberField({
+        min: 0,
+        max: 360,
+      }),
+    },
+    defaultDragonBreathAngle: {
+      default: CONFIG.MeasuredTemplate.defaults.angle,
+      hint: "TERIOCK.SETTINGS.defaultDragonBreathAngle.hint",
+      name: "TERIOCK.SETTINGS.defaultDragonBreathAngle.name",
+      scope: "world",
+      type: new fields.NumberField({
+        min: 0,
+        max: 360,
+      }),
+    },
+  },
+  dialog: {
+    confirmStatDiceRerolls: {
+      default: true,
+      hint: "TERIOCK.SETTINGS.confirmStatDiceRerolls.hint",
+      name: "TERIOCK.SETTINGS.confirmStatDiceRerolls.name",
+      scope: "user",
+      type: Boolean,
+    },
+    placeTemplateOnAbilityUse: {
+      default: true,
+      hint: "TERIOCK.SETTINGS.placeTemplateOnAbilityUse.hint",
+      name: "TERIOCK.SETTINGS.placeTemplateOnAbilityUse.name",
+      scope: "user",
+      type: Boolean,
+    },
     showLongRestDialog: {
-      config: true,
       default: true,
       hint: "TERIOCK.SETTINGS.showRollDialogs.hint",
       name: "TERIOCK.SETTINGS.showLongRestDialog.name",
       scope: "user",
       type: Boolean,
     },
+    showRollDialogs: {
+      default: true,
+      hint: "TERIOCK.SETTINGS.showRollDialogs.hint",
+      name: "TERIOCK.SETTINGS.showRollDialogs.name",
+      scope: "client",
+      type: Boolean,
+    },
+  },
+  gameContent: {
+    damageTypeSources: {
+      default: ["Compendium.teriock.rules.JournalEntry.damage0000000000"],
+      hint: "TERIOCK.SETTINGS.damageTypeSources.hint",
+      name: "TERIOCK.SETTINGS.damageTypeSources.name",
+      scope: "world",
+      type: new fields.SetField(
+        new fields.DocumentUUIDField({ type: "JournalEntry" }),
+      ),
+    },
+    drainTypeSources: {
+      default: ["Compendium.teriock.rules.JournalEntry.drain00000000000"],
+      hint: "TERIOCK.SETTINGS.drainTypeSources.hint",
+      name: "TERIOCK.SETTINGS.drainTypeSources.name",
+      scope: "world",
+      type: new fields.SetField(
+        new fields.DocumentUUIDField({ type: "JournalEntry" }),
+      ),
+    },
+  },
+  gameMasterControls: {
+    gmDocumentNotesJournalName: {
+      default: "GM Document Notes",
+      hint: "TERIOCK.SETTINGS.gmDocumentNotesJournalName.hint",
+      name: "TERIOCK.SETTINGS.gmDocumentNotesJournalName.name",
+      scope: "world",
+      type: String,
+    },
+    openChatDocuments: {
+      default: true,
+      hint: "TERIOCK.SETTINGS.openChatDocuments.hint",
+      name: "TERIOCK.SETTINGS.openChatDocuments.name",
+      scope: "world",
+      type: Boolean,
+    },
+    openChatImages: {
+      default: true,
+      hint: "TERIOCK.SETTINGS.openChatImages.hint",
+      name: "TERIOCK.SETTINGS.openChatImages.name",
+      scope: "world",
+      type: Boolean,
+    },
+    playerMacrosFolderName: {
+      default: "Player Macros",
+      hint: "TERIOCK.SETTINGS.playerMacrosFolderName.hint",
+      name: "TERIOCK.SETTINGS.playerMacrosFolderName.name",
+      scope: "world",
+      type: String,
+    },
+    sortNewPlayerMacros: {
+      default: true,
+      hint: "TERIOCK.SETTINGS.sortNewPlayerMacros.hint",
+      name: "TERIOCK.SETTINGS.sortNewPlayerMacros.name",
+      scope: "world",
+      type: Boolean,
+    },
+    developerMode: {
+      default: false,
+      hint: "TERIOCK.SETTINGS.developerMode.hint",
+      name: "TERIOCK.SETTINGS.developerMode.name",
+      scope: "world",
+      type: Boolean,
+    },
+  },
+  generalDisplay: {
+    automaticTokenMagicConditionEffects: {
+      default: true,
+      hint: "TERIOCK.SETTINGS.automaticTokenMagicConditionEffects.hint",
+      name: "TERIOCK.SETTINGS.automaticTokenMagicConditionEffects.name",
+      scope: "world",
+      type: Boolean,
+    },
+    styleDice: {
+      default: true,
+      hint: "TERIOCK.SETTINGS.styleDice.hint",
+      name: "TERIOCK.SETTINGS.styleDice.name",
+      scope: "user",
+      type: Boolean,
+    },
+    systemLinks: {
+      default: false,
+      hint: "TERIOCK.SETTINGS.systemLinks.hint",
+      name: "TERIOCK.SETTINGS.systemLinks.name",
+      scope: "user",
+      type: Boolean,
+    },
+  },
+  panel: {
+    automaticPanelCollapseTime: {
+      default: 5,
+      hint: "TERIOCK.SETTINGS.automaticPanelCollapseTime.hint",
+      name: "TERIOCK.SETTINGS.automaticPanelCollapseTime.name",
+      scope: "user",
+      type: Number,
+    },
     defaultPanelCollapseState: {
-      config: true,
       default: "auto",
       hint: "TERIOCK.SETTINGS.defaultPanelCollapseState.hint",
       name: "TERIOCK.SETTINGS.defaultPanelCollapseState.name",
@@ -73,33 +256,9 @@ export function registerSettings() {
         open: "TERIOCK.SETTINGS.defaultPanelCollapseState.choices.open",
       },
     },
-    automaticPanelCollapseTime: {
-      config: true,
-      default: 5,
-      hint: "TERIOCK.SETTINGS.automaticPanelCollapseTime.hint",
-      name: "TERIOCK.SETTINGS.automaticPanelCollapseTime.name",
-      scope: "user",
-      type: Number,
-    },
-    floatingActorTabs: {
-      config: true,
-      default: true,
-      hint: "TERIOCK.SETTINGS.floatingActorTabs.hint",
-      name: "TERIOCK.SETTINGS.floatingActorTabs.name",
-      requiresReload: true,
-      scope: "client",
-      type: Boolean,
-    },
-    systemLinks: {
-      config: true,
-      default: false,
-      hint: "TERIOCK.SETTINGS.systemLinks.hint",
-      name: "TERIOCK.SETTINGS.systemLinks.name",
-      scope: "user",
-      type: Boolean,
-    },
+  },
+  tooltip: {
     systemTooltips: {
-      config: true,
       default: false,
       hint: "TERIOCK.SETTINGS.systemTooltips.hint",
       name: "TERIOCK.SETTINGS.systemTooltips.name",
@@ -107,7 +266,6 @@ export function registerSettings() {
       type: Boolean,
     },
     compendiumTooltips: {
-      config: true,
       default: true,
       hint: "TERIOCK.SETTINGS.compendiumTooltips.hint",
       name: "TERIOCK.SETTINGS.compendiumTooltips.name",
@@ -115,7 +273,6 @@ export function registerSettings() {
       type: Boolean,
     },
     sidebarTooltips: {
-      config: true,
       default: true,
       hint: "TERIOCK.SETTINGS.sidebarTooltips.hint",
       name: "TERIOCK.SETTINGS.sidebarTooltips.name",
@@ -123,186 +280,28 @@ export function registerSettings() {
       type: Boolean,
     },
     contentLinkTooltips: {
-      config: true,
       default: true,
       hint: "TERIOCK.SETTINGS.contentLinkTooltips.hint",
       name: "TERIOCK.SETTINGS.contentLinkTooltips.name",
       scope: "user",
       type: Boolean,
     },
-    placeTemplateOnAbilityUse: {
-      config: true,
-      default: true,
-      hint: "TERIOCK.SETTINGS.placeTemplateOnAbilityUse.hint",
-      name: "TERIOCK.SETTINGS.placeTemplateOnAbilityUse.name",
-      scope: "user",
-      type: Boolean,
-    },
-    rollAttackOnArmamentUse: {
-      config: true,
-      default: false,
-      hint: "TERIOCK.SETTINGS.rollAttackOnArmamentUse.hint",
-      name: "TERIOCK.SETTINGS.rollAttackOnArmamentUse.name",
-      scope: "user",
-      type: Boolean,
-    },
-    secretEquipment: {
-      config: true,
-      default: false,
-      hint: "TERIOCK.SETTINGS.secretEquipment.hint",
-      name: "TERIOCK.SETTINGS.secretEquipment.name",
-      scope: "user",
-      type: Boolean,
-    },
-    twoHandedEquipment: {
-      config: true,
-      default: false,
-      hint: "TERIOCK.SETTINGS.twoHandedEquipment.hint",
-      name: "TERIOCK.SETTINGS.twoHandedEquipment.name",
-      scope: "user",
-      type: Boolean,
-    },
-    styleDice: {
-      config: true,
-      default: true,
-      hint: "TERIOCK.SETTINGS.styleDice.hint",
-      name: "TERIOCK.SETTINGS.styleDice.name",
-      scope: "user",
-      type: Boolean,
-    },
-    openChatDocuments: {
-      config: true,
-      default: true,
-      hint: "TERIOCK.SETTINGS.openChatDocuments.hint",
-      name: "TERIOCK.SETTINGS.openChatDocuments.name",
-      scope: "world",
-      type: Boolean,
-    },
-    openChatImages: {
-      config: true,
-      default: true,
-      hint: "TERIOCK.SETTINGS.openChatImages.hint",
-      name: "TERIOCK.SETTINGS.openChatImages.name",
-      scope: "world",
-      type: Boolean,
-    },
-    defaultConeAngle: {
-      config: true,
-      default: CONFIG.MeasuredTemplate.defaults.angle,
-      hint: "TERIOCK.SETTINGS.defaultConeAngle.hint",
-      name: "TERIOCK.SETTINGS.defaultConeAngle.name",
-      scope: "world",
-      type: new fields.NumberField({
-        min: 0,
-        max: 360,
-      }),
-    },
-    defaultDragonBreathAngle: {
-      config: true,
-      default: CONFIG.MeasuredTemplate.defaults.angle,
-      hint: "TERIOCK.SETTINGS.defaultDragonBreathAngle.hint",
-      name: "TERIOCK.SETTINGS.defaultDragonBreathAngle.name",
-      scope: "world",
-      type: new fields.NumberField({
-        min: 0,
-        max: 360,
-      }),
-    },
-    damageTypeSources: {
-      config: true,
-      default: ["Compendium.teriock.rules.JournalEntry.damage0000000000"],
-      hint: "TERIOCK.SETTINGS.damageTypeSources.hint",
-      name: "TERIOCK.SETTINGS.damageTypeSources.name",
-      scope: "world",
-      type: new fields.SetField(
-        new fields.DocumentUUIDField({ type: "JournalEntry" }),
-      ),
-    },
-    drainTypeSources: {
-      config: true,
-      default: ["Compendium.teriock.rules.JournalEntry.drain00000000000"],
-      hint: "TERIOCK.SETTINGS.drainTypeSources.hint",
-      name: "TERIOCK.SETTINGS.drainTypeSources.name",
-      scope: "world",
-      type: new fields.SetField(
-        new fields.DocumentUUIDField({ type: "JournalEntry" }),
-      ),
-    },
-    automaticallyExpireSustainedConsequences: {
-      config: true,
-      default: true,
-      hint: "TERIOCK.SETTINGS.automaticallyExpireSustainedConsequences.hint",
-      name: "TERIOCK.SETTINGS.automaticallyExpireSustainedConsequences.name",
-      scope: "world",
-      type: Boolean,
-    },
-    armorSuppressesRanks: {
-      config: true,
-      default: false,
-      hint: "TERIOCK.SETTINGS.armorSuppressesRanks.hint",
-      scope: "world",
-      name: "TERIOCK.SETTINGS.armorSuppressesRanks.name",
-      type: Boolean,
-    },
-    armorWeakensRanks: {
-      config: true,
-      default: false,
-      hint: "TERIOCK.SETTINGS.armorWeakensRanks.hint",
-      scope: "world",
-      name: "TERIOCK.SETTINGS.armorWeakensRanks.name",
-      type: Boolean,
-    },
-    nonHierarchicalChanges: {
-      config: true,
-      default: true,
-      hint: "TERIOCK.SETTINGS.nonHierarchicalChanges.hint",
-      name: "TERIOCK.SETTINGS.nonHierarchicalChanges.name",
-      requiresReload: true,
-      scope: "world",
-      type: Boolean,
-    },
-    automaticTokenMagicConditionEffects: {
-      config: true,
-      default: true,
-      hint: "TERIOCK.SETTINGS.automaticTokenMagicConditionEffects.hint",
-      name: "TERIOCK.SETTINGS.automaticTokenMagicConditionEffects.name",
-      scope: "world",
-      type: Boolean,
-    },
-    sortNewPlayerMacros: {
-      config: true,
-      default: true,
-      hint: "TERIOCK.SETTINGS.sortNewPlayerMacros.hint",
-      name: "TERIOCK.SETTINGS.sortNewPlayerMacros.name",
-      scope: "world",
-      type: Boolean,
-    },
-    playerMacrosFolderName: {
-      config: true,
-      default: "Player Macros",
-      hint: "TERIOCK.SETTINGS.playerMacrosFolderName.hint",
-      name: "TERIOCK.SETTINGS.playerMacrosFolderName.name",
-      scope: "world",
-      type: String,
-    },
-    gmDocumentNotesJournalName: {
-      config: true,
-      default: "GM Document Notes",
-      hint: "TERIOCK.SETTINGS.gmDocumentNotesJournalName.hint",
-      name: "TERIOCK.SETTINGS.gmDocumentNotesJournalName.name",
-      scope: "world",
-      type: String,
-    },
-    developerMode: {
-      config: true,
-      default: false,
-      hint: "TERIOCK.SETTINGS.developerMode.hint",
-      name: "TERIOCK.SETTINGS.developerMode.name",
-      scope: "world",
-      type: Boolean,
-    },
-  };
-  for (const [key, data] of Object.entries(settings)) {
-    game.settings.register("teriock", key, data);
+  },
+};
+
+/**
+ * Register all settings and setting menus.
+ */
+export function registerSettings() {
+  configs.AutomatedBehaviorConfig.registerMenu();
+  configs.AlternateRulesConfig.registerMenu();
+  configs.DialogConfig.registerMenu();
+  configs.DisplayConfig.registerMenu();
+  configs.GameContentConfig.registerMenu();
+  configs.GameMasterControlsConfig.registerMenu();
+  for (const s of Object.values(settings)) {
+    for (const [k, d] of Object.entries(s)) {
+      game.settings.register("teriock", k, d);
+    }
   }
 }

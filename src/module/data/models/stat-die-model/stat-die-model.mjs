@@ -147,7 +147,7 @@ export default class StatDieModel extends EmbeddedDataModel {
       await roll.evaluate();
       const callback = this.parent.callback;
       await callback(roll.total);
-      await TeriockChatMessage.create({
+      const messageData = {
         rolls: [roll],
         speaker: TeriockChatMessage.getSpeaker({
           actor: this.parent.parent.parent.actor,
@@ -156,7 +156,8 @@ export default class StatDieModel extends EmbeddedDataModel {
           avatar: this.parent.parent.parent.actor.img,
           panels: panels,
         },
-      });
+      };
+      await TeriockChatMessage.create(messageData, { defaultMode: true });
       if (spend) {
         await this.toggle(true);
       }

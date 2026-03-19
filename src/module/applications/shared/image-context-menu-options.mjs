@@ -1,8 +1,10 @@
 import { icons } from "../../constants/display/icons.mjs";
 import { TeriockChatMessage } from "../../documents/_module.mjs";
+import { dedent } from "../../helpers/string.mjs";
 import { makeIcon } from "../../helpers/utils.mjs";
-import { TeriockImagePopout } from "../apps/_module.mjs";
 import { previewSheet } from "./_module.mjs";
+
+const { ImagePopout } = foundry.applications.apps;
 
 /**
  * Context menu options for image elements.
@@ -14,7 +16,7 @@ const imageContextMenuOptions = [
     name: "TERIOCK.SYSTEMS.Child.MENU.openImage",
     icon: makeIcon(icons.ui.image, "contextMenu"),
     callback: async (target) => {
-      await new TeriockImagePopout({
+      await new ImagePopout({
         src: target.getAttribute("src"),
         window: {
           title: "TERIOCK.SYSTEMS.Child.MENU.imagePreview",
@@ -70,19 +72,15 @@ export default imageContextMenuOptions;
 export async function chatImage(img) {
   if (img) {
     const messageData = {
-      content: `
+      content: dedent(`
         <div
           class="timage"
           data-src="${img}"
           style="display: flex; justify-content: center;"
         >
-          <img src="${img}" class="teriock-image" alt="Image">
-        </div>`,
+          <img src="${img}" class="teriock-image" alt="Image" data-openable="true">
+        </div>`),
     };
-    TeriockChatMessage.applyRollMode(
-      messageData,
-      game.settings.get("core", "rollMode"),
-    );
-    await foundry.documents.ChatMessage.create(messageData);
+    await TeriockChatMessage.create(messageData, { defaultMode: true });
   }
 }

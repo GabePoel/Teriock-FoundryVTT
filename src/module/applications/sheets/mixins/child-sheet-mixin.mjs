@@ -1,7 +1,8 @@
 import { icons } from "../../../constants/display/icons.mjs";
 import { fancifyFields, makeIconClass } from "../../../helpers/utils.mjs";
-import { TeriockImagePopout } from "../../apps/_module.mjs";
 import { TeriockTextEditor } from "../../ux/_module.mjs";
+
+const { ImagePopout } = foundry.applications.apps;
 
 /**
  * {@link ChildDocument} sheet mixin.
@@ -75,7 +76,7 @@ export default function ChildSheetMixin(Base) {
        * @return {Promise<void>}
        */
       static async #onOpenImage() {
-        await new TeriockImagePopout({
+        await new ImagePopout({
           src: this.document.img,
           window: {
             title: "TERIOCK.SYSTEMS.Child.MENU.imagePreview",

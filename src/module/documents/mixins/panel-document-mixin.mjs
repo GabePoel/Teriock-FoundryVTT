@@ -128,11 +128,7 @@ export default function PanelDocumentMixin(Base) {
             tags: [],
           },
         };
-        TeriockChatMessage.applyRollMode(
-          messageData,
-          game.settings.get("core", "rollMode"),
-        );
-        return TeriockChatMessage.create(messageData);
+        return TeriockChatMessage.create(messageData, { defaultMode: true });
       }
 
       /** @returns {Promise<Teriock.MessageData.MessagePanel>} */
