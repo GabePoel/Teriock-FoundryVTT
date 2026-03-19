@@ -1,5 +1,6 @@
 import { icons } from "../../../constants/display/icons.mjs";
 import { fancifyFields, makeIconClass } from "../../../helpers/utils.mjs";
+import { TeriockImagePopout } from "../../apps/_module.mjs";
 import { TeriockTextEditor } from "../../ux/_module.mjs";
 
 /**
@@ -26,8 +27,9 @@ export default function ChildSheetMixin(Base) {
       /** @type {Partial<ApplicationConfiguration>} */
       static DEFAULT_OPTIONS = {
         actions: {
-          populateField: this._onPopulateField,
+          openImage: this.#onOpenImage,
           openSource: this.#onOpenSource,
+          populateField: this._onPopulateField,
         },
         window: {
           controls: [
@@ -41,6 +43,11 @@ export default function ChildSheetMixin(Base) {
               action: "openSource",
               icon: makeIconClass(icons.ui.openWindow, "contextMenu"),
               label: "TERIOCK.SYSTEMS.Common.MENU.openSource",
+            },
+            {
+              action: "openImage",
+              icon: makeIconClass(icons.ui.image),
+              label: "TERIOCK.SYSTEMS.Child.MENU.openImage",
             },
           ],
         },
@@ -62,6 +69,19 @@ export default function ChildSheetMixin(Base) {
         ...this.MENU_PARTS,
         ...this.CONTENT_PARTS,
       };
+
+      /**
+       * Open the image for this document.
+       * @return {Promise<void>}
+       */
+      static async #onOpenImage() {
+        await new TeriockImagePopout({
+          src: this.document.img,
+          window: {
+            title: "TERIOCK.SYSTEMS.Child.MENU.imagePreview",
+          },
+        }).render(true);
+      }
 
       /**
        * Open this document's elder if it exists.

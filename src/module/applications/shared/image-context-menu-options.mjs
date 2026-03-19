@@ -1,8 +1,8 @@
 import { icons } from "../../constants/display/icons.mjs";
+import { TeriockChatMessage } from "../../documents/_module.mjs";
 import { makeIcon } from "../../helpers/utils.mjs";
+import { TeriockImagePopout } from "../apps/_module.mjs";
 import { previewSheet } from "./_module.mjs";
-
-const { ImagePopout } = foundry.applications.apps;
 
 /**
  * Context menu options for image elements.
@@ -14,7 +14,7 @@ const imageContextMenuOptions = [
     name: "TERIOCK.SYSTEMS.Child.MENU.openImage",
     icon: makeIcon(icons.ui.image, "contextMenu"),
     callback: async (target) => {
-      await new ImagePopout({
+      await new TeriockImagePopout({
         src: target.getAttribute("src"),
         window: {
           title: "TERIOCK.SYSTEMS.Child.MENU.imagePreview",
@@ -23,7 +23,13 @@ const imageContextMenuOptions = [
     },
     condition: (target) => {
       const src = target.getAttribute("src");
-      return src && src.length > 0 && target.getAttribute("data-openable");
+      return (
+        (src &&
+          src.length > 0 &&
+          target.getAttribute("data-openable") &&
+          game.user.isGM) ||
+        game.settings.get("teriock", "openChatImages")
+      );
     },
   },
   {
@@ -50,8 +56,10 @@ const imageContextMenuOptions = [
       }
     },
     condition: (target) =>
-      target.getAttribute("data-openable-document") &&
-      target.getAttribute("data-uuid"),
+      (target.getAttribute("data-openable-document") &&
+        target.getAttribute("data-uuid") &&
+        game.user.isGM) ||
+      game.settings.get("teriock", "openChatDocuments"),
   },
 ];
 export default imageContextMenuOptions;
@@ -63,7 +71,7 @@ export default imageContextMenuOptions;
  */
 export async function chatImage(img) {
   if (img) {
-    await foundry.documents.ChatMessage.create({
+    const messageData = {
       content: `
         <div
           class="timage"
@@ -72,6 +80,11 @@ export async function chatImage(img) {
         >
           <img src="${img}" class="teriock-image" alt="Image">
         </div>`,
-    });
+    };
+    TeriockChatMessage.applyRollMode(
+      messageData,
+      game.settings.get("core", "rollMode"),
+    );
+    await foundry.documents.ChatMessage.create(messageData);
   }
 }

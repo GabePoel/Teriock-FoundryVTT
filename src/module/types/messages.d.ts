@@ -28,20 +28,21 @@ declare global {
 
     /** Definition for an association card. */
     export type MessageAssociationCard = {
-      rescale?: boolean;
-      name: string;
-      uuid?: UUID<CommonDocument>;
-      makeTooltip?: boolean;
-      tooltip?: string;
-      img: string;
       color?: string;
+      draggable?: boolean;
       icon?: string;
       id?: ID<CommonDocument>;
+      img: string;
+      makeTooltip?: boolean;
+      name: string;
+      pack?: string;
+      rescale?: boolean;
+      tooltip?: string;
       type:
         | Teriock.Documents.ActorType
         | Teriock.Documents.ItemType
         | Teriock.Documents.EffectType;
-      draggable?: boolean;
+      uuid?: UUID<CommonDocument>;
     };
 
     /** Pieces of a group of associations within a chat message. */

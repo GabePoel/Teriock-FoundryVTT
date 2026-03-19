@@ -223,6 +223,7 @@ export function quickAddAssociation(
           img: d.img,
           makeTooltip: options.makeTooltip,
           name: d.system.nameString || d.name,
+          pack: d.pack,
           rescale: false,
           type: d.documentName,
           uuid: d.uuid,

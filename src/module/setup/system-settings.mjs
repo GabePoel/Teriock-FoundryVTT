@@ -170,6 +170,22 @@ export function registerSettings() {
       scope: "user",
       type: Boolean,
     },
+    openChatDocuments: {
+      config: true,
+      default: true,
+      hint: "TERIOCK.SETTINGS.openChatDocuments.hint",
+      name: "TERIOCK.SETTINGS.openChatDocuments.name",
+      scope: "world",
+      type: Boolean,
+    },
+    openChatImages: {
+      config: true,
+      default: true,
+      hint: "TERIOCK.SETTINGS.openChatImages.hint",
+      name: "TERIOCK.SETTINGS.openChatImages.name",
+      scope: "world",
+      type: Boolean,
+    },
     defaultConeAngle: {
       config: true,
       default: CONFIG.MeasuredTemplate.defaults.angle,

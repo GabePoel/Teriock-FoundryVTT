@@ -1,3 +1,4 @@
+import { TeriockImagePopout } from "../../../../applications/apps/_module.mjs";
 import { ucFirst } from "../../../../helpers/string.mjs";
 import { makeIcon } from "../../../../helpers/utils.mjs";
 import { EvaluationField, TextField } from "../../../fields/_module.mjs";
@@ -6,7 +7,6 @@ import { UsableDataMixin } from "../../../shared/mixins/_module.mjs";
 import CommonSystem from "../common-system/common-system.mjs";
 
 const { fields } = foundry.data;
-const { ImagePopout } = foundry.applications.apps;
 
 /**
  * Data model shared by items and effects.
@@ -251,7 +251,7 @@ export default class ChildSystem extends UsableDataMixin(CommonSystem) {
           name: game.i18n.localize("TERIOCK.SYSTEMS.Child.MENU.openImage"),
           icon: makeIcon(TERIOCK.display.icons.ui.image, "contextMenu"),
           callback: async () => {
-            await new ImagePopout({
+            await new TeriockImagePopout({
               src: this.parent.img,
               uuid: this.parent.uuid,
               window: { title: this.parent.nameString },
