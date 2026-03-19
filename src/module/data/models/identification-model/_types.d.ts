@@ -12,7 +12,7 @@ declare global {
       /** <schema> Secret notes for when this is identified */
       notes: string;
       /** <schema> Secret power level */
-      powerLevel: Teriock.Parameters.Equipment.EquipmentPowerLevel;
+      powerLevel: Teriock.Keys.PowerLevel;
       /** <schema> Whether magic has been read on this */
       read: boolean;
 

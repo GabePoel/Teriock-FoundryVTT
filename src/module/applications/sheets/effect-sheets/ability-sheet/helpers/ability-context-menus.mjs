@@ -33,14 +33,13 @@ export default function abilityContextMenus(ability) {
 
   /**
    * Creates a quick menu from configuration options.
-   * @param {string} keychain - The configuration keychain to use.
+   * @param {Record<string, string>} config - The configuration to use.
    * @param {string} updateKey - The system key to update when an option is selected.
    * @param {boolean|null} nullOption - Whether to include a "None" option.
    * @returns {Teriock.Foundry.ContextMenuEntry[]}
    */
-  function quickMenu(keychain, updateKey, nullOption = null) {
-    const keys = foundry.utils.getProperty(TERIOCK.options.ability, keychain);
-    const out = Object.entries(keys).map(([key, value]) => ({
+  function quickMenu(config, updateKey, nullOption = null) {
+    const out = Object.entries(config).map(([key, value]) => ({
       name: value,
       icon: makeIcon(findIconByKey(key) ?? key, "contextMenu"),
       callback: () => ability.update({ [updateKey]: key }),
@@ -56,18 +55,25 @@ export default function abilityContextMenus(ability) {
   }
 
   return {
-    active: quickMenu("executionTime.active", "system.executionTime"),
-    delivery: quickMenu("delivery", "system.delivery"),
-    expansion: quickMenu("expansion", "system.expansion.type", true),
+    active: quickMenu(
+      TERIOCK.options.ability.executionTime.active,
+      "system.executionTime",
+    ),
+    delivery: quickMenu(TERIOCK.options.ability.delivery, "system.delivery"),
+    expansion: quickMenu(
+      TERIOCK.options.ability.expansion,
+      "system.expansion.type",
+      true,
+    ),
     expansionSaveAttribute: quickMenu(
-      "featSaveAttribute",
+      TERIOCK.reference.attributes,
       "system.expansion.featSaveAttribute",
     ),
     featSaveAttribute: quickMenu(
-      "featSaveAttribute",
+      TERIOCK.reference.attributes,
       "system.featSaveAttribute",
     ),
-    form: Object.entries(TERIOCK.options.ability.form).map(([key, value]) => ({
+    form: Object.entries(TERIOCK.options.effect.form).map(([key, value]) => ({
       name: value.name,
       icon: makeIcon(value.icon, TERIOCK.display.iconStyles.contextMenu),
       callback: async () => {
@@ -76,7 +82,10 @@ export default function abilityContextMenus(ability) {
         });
       },
     })),
-    interaction: quickMenu("interaction", "system.interaction"),
+    interaction: quickMenu(
+      TERIOCK.options.ability.interaction,
+      "system.interaction",
+    ),
     maneuver: [
       {
         callback: async () => {
@@ -145,6 +154,9 @@ export default function abilityContextMenus(ability) {
         path: "system.piercing.raw",
       },
     ),
-    reactive: quickMenu("executionTime.reactive", "system.executionTime"),
+    reactive: quickMenu(
+      TERIOCK.options.ability.executionTime.reactive,
+      "system.executionTime",
+    ),
   };
 }

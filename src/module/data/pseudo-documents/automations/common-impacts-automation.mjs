@@ -11,7 +11,7 @@ import { TriggerAutomationMixin } from "./mixins/_module.mjs";
 const { fields } = foundry.data;
 
 /**
- * @property {Set<Teriock.Parameters.Consequence.CommonImpactKey>} common
+ * @property {Set<Teriock.Keys.CommonImpact>} common
  */
 export default class CommonImpactsAutomation extends TriggerAutomationMixin(
   BaseAutomation,

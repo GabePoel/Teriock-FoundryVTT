@@ -39,7 +39,7 @@ export default function defaultSheetSettings() {
     abilitySortOption: "name",
     avatarImagePath: "img",
     conditionExpansions:
-      /** @type {Record<Teriock.Parameters.Condition.ConditionKey, boolean>} */ {},
+      /** @type {Record<Teriock.Keys.Condition, boolean>} */ {},
     equipmentFilters: {
       consumable: threeToggleInitial,
       equipmentClasses: null,

@@ -71,7 +71,7 @@ export default (Base) => {
       /**
        * Actor pays money.
        * @param {number} amount - The amount of gold-equivalent money to pay.
-       * @param {Teriock.Parameters.Actor.PayMode} mode - Exact change or the closest denomination, rounded up.
+       * @param {Teriock.Keys.PayMode} mode - Exact change or the closest denomination, rounded up.
        * @returns {Promise<void>}
        */
       async takePay(amount, mode) {

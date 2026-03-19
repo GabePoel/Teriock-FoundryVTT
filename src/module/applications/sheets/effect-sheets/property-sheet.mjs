@@ -37,12 +37,10 @@ export default class PropertySheet extends mix(
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
-    if (!this.isEditable) {
-      return;
-    }
+    if (!this.isEditable) return;
     this._connectBuildContextMenu(
       ".form-type-box",
-      TERIOCK.options.ability.form,
+      TERIOCK.options.effect.form,
       "system.form",
       "click",
     );

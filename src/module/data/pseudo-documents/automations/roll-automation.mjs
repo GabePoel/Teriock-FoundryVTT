@@ -10,7 +10,7 @@ const { fields } = foundry.data;
 //noinspection JSClosureCompilerSyntax
 /**
  * @extends {BaseAutomation}
- * @property {Teriock.Parameters.Consequence.RollConsequenceKey} roll
+ * @property {Teriock.Keys.RollImpact} roll
  * @property {string} formula
  * @property {boolean} merge
  * @mixes TriggerAutomation

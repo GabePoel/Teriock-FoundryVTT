@@ -1,3 +1,4 @@
+import { effectOptions } from "../../../../constants/options/effect-options.mjs";
 import { TextField } from "../../../fields/_module.mjs";
 
 const { fields } = foundry.data;
@@ -37,6 +38,10 @@ export default function AdjustableSystemMixin(Base) {
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           badge: new fields.StringField({ initial: "" }),
+          form: new fields.StringField({
+            choices: effectOptions.form,
+            initial: "normal",
+          }),
           improvement: new TextField({ initial: "" }),
           limitation: new TextField({ initial: "" }),
         });

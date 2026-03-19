@@ -34,7 +34,7 @@ declare global {
       comparison?: Teriock.Fields.ComparisonCheck;
     };
     export type TakeRollOptions = Teriock.Dice.RollOptions & {
-      take?: Teriock.Parameters.Consequence.RollConsequenceKey;
+      take?: Teriock.Keys.RollImpact;
     };
   }
 }

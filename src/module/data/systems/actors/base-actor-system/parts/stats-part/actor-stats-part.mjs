@@ -90,7 +90,7 @@ export default (Base) => {
 
       /**
        * Prepare a specific stat.
-       * @param {Teriock.Parameters.Shared.DieStat} stat
+       * @param {Teriock.Keys.DieStat} stat
        * @param {AnyItem[]} items
        */
       _prepareStat(stat, items) {

@@ -33,91 +33,91 @@ import useAbilityCommand from "../commands/use-ability-command.mjs";
 import { CommandButtonHandlerBuilder } from "../interaction-tools.mjs";
 
 /**
- * Action to trigger awaken.
+ * Handler to trigger awaken.
  */
 export class AwakenHandler extends CommandButtonHandlerBuilder(awakenCommand) {}
 
 /**
- * Action to trigger revival.
+ * Handler to trigger revival.
  */
 export class ReviveHandler extends CommandButtonHandlerBuilder(reviveCommand) {}
 
 /**
- * Action to trigger shatter.
+ * Handler to trigger shatter.
  */
 export class ShatterHandler extends CommandButtonHandlerBuilder(
   shatterCommand,
 ) {}
 
 /**
- * Action to trigger repair.
+ * Handler to trigger repair.
  */
 export class RepairHandler extends CommandButtonHandlerBuilder(repairCommand) {}
 
 /**
- * Action to trigger destroy.
+ * Handler to trigger destroy.
  */
 export class DestroyHandler extends CommandButtonHandlerBuilder(
   destroyCommand,
 ) {}
 
 /**
- * Action to trigger reforge.
+ * Handler to trigger reforge.
  */
 export class ReforgeHandler extends CommandButtonHandlerBuilder(
   reforgeCommand,
 ) {}
 
 /**
- * Action to trigger glue.
+ * Handler to trigger glue.
  */
 export class GlueHandler extends CommandButtonHandlerBuilder(glueCommand) {}
 
 /**
- * Action to trigger unglue.
+ * Handler to trigger unglue.
  */
 export class UnglueHandler extends CommandButtonHandlerBuilder(unglueCommand) {}
 
 /**
- * Action to trigger dampen.
+ * Handler to trigger dampen.
  */
 export class DampenHandler extends CommandButtonHandlerBuilder(dampenCommand) {}
 
 /**
- * Action to trigger undampen.
+ * Handler to trigger undampen.
  */
 export class UndampenHandler extends CommandButtonHandlerBuilder(
   undampenCommand,
 ) {}
 
 /**
- * Action to trigger identify.
+ * Handler to trigger identify.
  */
 export class IdentifyHandler extends CommandButtonHandlerBuilder(
   identifyCommand,
 ) {}
 
 /**
- * Action to trigger read magic.
+ * Handler to trigger read magic.
  */
 export class ReadMagicHandler extends CommandButtonHandlerBuilder(
   readMagicCommand,
 ) {}
 
 /**
- * Action to trigger attune.
+ * Handler to trigger attune.
  */
 export class AttuneHandler extends CommandButtonHandlerBuilder(attuneCommand) {}
 
 /**
- * Action to trigger deattune.
+ * Handler to trigger deattune.
  */
 export class DeattuneHandler extends CommandButtonHandlerBuilder(
   deattuneCommand,
 ) {}
 
 /**
- * Action to trigger healing.
+ * Handler to trigger healing.
  */
 export class HealHandler extends CommandButtonHandlerBuilder(healCommand) {
   /**
@@ -130,7 +130,7 @@ export class HealHandler extends CommandButtonHandlerBuilder(healCommand) {
 }
 
 /**
- * Action to trigger revitalizing.
+ * Handler to trigger revitalizing.
  */
 export class RevitalizeHandler extends CommandButtonHandlerBuilder(
   revitalizeCommand,
@@ -145,11 +145,11 @@ export class RevitalizeHandler extends CommandButtonHandlerBuilder(
 }
 
 /**
- * Action to trigger pulling from the death bag.
+ * Handler to trigger pulling from the death bag.
  */
 export class DeathBagHandler extends CommandButtonHandlerBuilder(bagCommand) {}
 /**
- * Action to use an ability.
+ * Handler to use an ability.
  */
 export class StandardDamageHandler extends CommandButtonHandlerBuilder(
   standardDamageCommand,
@@ -169,12 +169,12 @@ export class StandardDamageHandler extends CommandButtonHandlerBuilder(
 }
 
 /**
- * Action to take a hack.
+ * Handler to take a hack.
  */
 export class TakeHackHandler extends CommandButtonHandlerBuilder(hackCommand) {
   /**
    * @inheritDoc
-   * @param {Teriock.Parameters.Actor.HackableBodyPart} part
+   * @param {Teriock.Keys.HackableBodyPart} part
    */
   static buildButton(part) {
     return super.buildButton({ part });
@@ -182,21 +182,21 @@ export class TakeHackHandler extends CommandButtonHandlerBuilder(hackCommand) {
 }
 
 /**
- * Action to heal a hack.
+ * Handler to heal a hack.
  */
 export class TakeUnhackHandler extends CommandButtonHandlerBuilder(
   unhackCommand,
 ) {
   /**
    * @inheritDoc
-   * @param {Teriock.Parameters.Actor.HackableBodyPart} part
+   * @param {Teriock.Keys.HackableBodyPart} part
    */
   static buildButton(part) {
     return super.buildButton({ part });
   }
 }
 /**
- * Action to use an ability.
+ * Handler to use an ability.
  */
 export class UseAbilityHandler extends CommandButtonHandlerBuilder(
   useAbilityCommand,
@@ -210,14 +210,14 @@ export class UseAbilityHandler extends CommandButtonHandlerBuilder(
   }
 }
 /**
- * Action to trigger a tradecraft check roll.
+ * Handler to trigger a tradecraft check roll.
  */
 export class TradecraftCheckHandler extends CommandButtonHandlerBuilder(
   tradecraftCommand,
 ) {
   /**
    * @inheritDoc
-   * @param {Teriock.Parameters.Fluency.Tradecraft} tradecraft
+   * @param {Teriock.Keys.Tradecraft} tradecraft
    * @param {object} [options]
    * @param {number} [options.threshold]
    * @param {number|string} [options.bonus]
@@ -230,14 +230,14 @@ export class TradecraftCheckHandler extends CommandButtonHandlerBuilder(
 }
 
 /**
- * Action to apply a condition.
+ * Handler to apply a condition or other status.
  */
 export class ApplyStatusHandler extends CommandButtonHandlerBuilder(
   applyStatusCommand,
 ) {
   /**
    * @inheritDoc
-   * @param {Teriock.Parameters.Condition.ConditionKey} status
+   * @param {Teriock.Keys.Status} status
    */
   static buildButton(status) {
     return super.buildButton({ status });
@@ -245,14 +245,14 @@ export class ApplyStatusHandler extends CommandButtonHandlerBuilder(
 }
 
 /**
- * Action to remove a condition.
+ * Handler to remove a condition or other status.
  */
 export class RemoveStatusHandler extends CommandButtonHandlerBuilder(
   removeStatusCommand,
 ) {
   /**
    * @inheritDoc
-   * @param {Teriock.Parameters.Condition.ConditionKey} status
+   * @param {Teriock.Keys.Status} status
    */
   static buildButton(status) {
     return super.buildButton({ status });
@@ -260,14 +260,14 @@ export class RemoveStatusHandler extends CommandButtonHandlerBuilder(
 }
 
 /**
- * Action to toggle a condition.
+ * Handler to toggle a condition or other status.
  */
 export class ToggleStatusHandler extends CommandButtonHandlerBuilder(
   toggleStatusCommand,
 ) {
   /**
    * @inheritDoc
-   * @param {Teriock.Parameters.Condition.ConditionKey} status
+   * @param {Teriock.Keys.Status} status
    */
   static buildButton(status) {
     return super.buildButton({ status });
@@ -275,7 +275,7 @@ export class ToggleStatusHandler extends CommandButtonHandlerBuilder(
 }
 
 /**
- * Action to trigger a resistance roll.
+ * Handler to trigger a resistance roll.
  */
 export class ResistHandler extends CommandButtonHandlerBuilder(resistCommand) {
   /**
@@ -290,12 +290,12 @@ export class ResistHandler extends CommandButtonHandlerBuilder(resistCommand) {
 }
 
 /**
- * Action to trigger a feat save roll.
+ * Handler to trigger a feat save roll.
  */
 export class FeatHandler extends CommandButtonHandlerBuilder(featCommand) {
   /**
    * @inheritDoc
-   * @param {Teriock.Parameters.Actor.Attribute} attribute
+   * @param {Teriock.Keys.Attribute} attribute
    * @param {object} [options]
    * @param {number|string} [options.bonus]
    * @param {number} [options.threshold]

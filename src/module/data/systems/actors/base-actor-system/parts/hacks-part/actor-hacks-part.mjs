@@ -41,7 +41,7 @@ export default (Base) => {
        * Relevant wiki pages:
        * - [Hack](https://wiki.teriock.com/index.php/Damage:Hack)
        *
-       * @param {Teriock.Parameters.Actor.HackableBodyPart} part - The part to hack.
+       * @param {Teriock.Keys.HackableBodyPart} part - The part to hack.
        * @param {number} [amount]
        * @returns {Promise<void>}
        */
@@ -62,7 +62,7 @@ export default (Base) => {
        * Relevant wiki pages:
        * - [Hack](https://wiki.teriock.com/index.php/Damage:Hack)
        *
-       * @param {Teriock.Parameters.Actor.HackableBodyPart} part - The part to unhack.
+       * @param {Teriock.Keys.HackableBodyPart} part - The part to unhack.
        * @param {number} [amount]
        * @returns {Promise<void>}
        */

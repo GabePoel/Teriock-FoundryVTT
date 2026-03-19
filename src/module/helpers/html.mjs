@@ -34,7 +34,7 @@ export function buildHTMLButton(config) {
 
 /**
  * Make a CSS class for a given array of elements.
- * @param {Set<Teriock.Parameters.Ability.Element>} elements
+ * @param {Set<Teriock.Keys.Element>} elements
  * @returns {string}
  */
 export function elementClass(elements) {
@@ -68,7 +68,7 @@ export function createDialogFieldset(
 
 /**
  * Get the panel for an attribute.
- * @param {Teriock.Parameters.Actor.Attribute} attribute
+ * @param {Teriock.Keys.Attribute} attribute
  * @returns {Promise<Teriock.MessageData.MessagePanel>}
  */
 export async function attributePanel(attribute) {
@@ -90,7 +90,7 @@ export async function attributePanel(attribute) {
 
 /**
  * Get the panel for a tradecraft.
- * @param {Teriock.Parameters.Fluency.Tradecraft} tradecraft
+ * @param {Teriock.Keys.Tradecraft} tradecraft
  * @returns {Promise<Teriock.MessageData.MessagePanel>}
  */
 export async function tradecraftPanel(tradecraft) {
@@ -125,7 +125,7 @@ export async function tradecraftPanel(tradecraft) {
 
 /**
  * Get the panel for a class.
- * @param {Teriock.Parameters.Rank.RankClass} className
+ * @param {Teriock.Keys.Class} className
  * @returns {Promise<Teriock.MessageData.MessagePanel>}
  */
 export async function classPanel(className) {

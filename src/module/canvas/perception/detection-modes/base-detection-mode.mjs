@@ -10,8 +10,8 @@ const { fields } = foundry.data;
 export default class BaseDetectionMode extends DetectionMode {
   /**
    * What statuses block what detection types.
-   * @type {Record<string, {src: Teriock.Parameters.Condition.ConditionKey[], tgt:
-   *   Teriock.Parameters.Condition.ConditionKey}>}
+   * @type {Record<string, {src: Teriock.Keys.Condition[], tgt:
+   *   Teriock.Keys.Condition}>}
    */
   static BLOCKING_STATUSES = {
     move: {

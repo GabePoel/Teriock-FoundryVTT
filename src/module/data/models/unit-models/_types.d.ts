@@ -18,8 +18,8 @@ declare global {
 
     export type DurationModelData = {
       conditions: {
-        absent: Set<Teriock.Parameters.Condition.ConditionKey>;
-        present: Set<Teriock.Parameters.Condition.ConditionKey>;
+        absent: Set<Teriock.Keys.Condition>;
+        present: Set<Teriock.Keys.Condition>;
       };
       description: string;
       triggers: Set<string>;

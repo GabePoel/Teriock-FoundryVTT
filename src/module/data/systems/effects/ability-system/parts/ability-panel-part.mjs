@@ -42,7 +42,7 @@ export default (Base) => {
               this.piercing.value.toUpperCase(),
               ref.delivery[this.delivery] || "",
               this.interaction === "feat"
-                ? ref.featSaveAttribute[this.featSaveAttribute]
+                ? TERIOCK.reference.attributes[this.featSaveAttribute]
                 : "",
               ref.interaction[this.interaction] || "",
             ],
@@ -66,7 +66,9 @@ export default (Base) => {
             wrappers: this.expansion.type
               ? [
                   ["detonate", "ripple"].includes(this.expansion.type)
-                    ? ref.attribute[this.expansion.featSaveAttribute]
+                    ? TERIOCK.reference.attributes[
+                        this.expansion.featSaveAttribute
+                      ]
                     : "",
                   ref.expansion[this.expansion.type] || "",
                   this.expansion.range.abbreviation,
@@ -129,8 +131,10 @@ export default (Base) => {
               this.standard && this.spell
                 ? game.i18n.localize("TERIOCK.TERMS.Common.conjured")
                 : "",
-              ...this.powerSources.map((power) => ref.powerSources[power]),
-              ...this.elements.map((element) => ref.elements[element]),
+              ...this.powerSources.map(
+                (p) => TERIOCK.reference.powerSources[p],
+              ),
+              ...this.elements.map((e) => TERIOCK.reference.elements[e]),
               this.ritual
                 ? game.i18n.localize(
                     "TERIOCK.SYSTEMS.Ability.FIELDS.ritual.label",
@@ -154,12 +158,12 @@ export default (Base) => {
             ],
           },
           {
-            icon: ref.form[this.form].icon,
+            icon: TERIOCK.options.effect.form[this.form].icon,
             label: game.i18n.localize(
               "TERIOCK.SYSTEMS.Ability.PANELS.abilityType",
             ),
             wrappers: [
-              ref.form[this.form].name || "",
+              TERIOCK.options.effect.form[this.form].name || "",
               this.warded
                 ? game.i18n.localize(
                     "TERIOCK.SYSTEMS.Attack.FIELDS.warded.label",
@@ -172,7 +176,7 @@ export default (Base) => {
                 : "",
               ...this.effectTypes
                 .filter((e) => !this.powerSources.has(e))
-                .map((effect) => ref.effectTypes[effect]),
+                .map((e) => TERIOCK.reference.effectTypes[e]),
             ],
           },
         ];

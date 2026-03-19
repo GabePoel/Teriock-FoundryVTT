@@ -28,7 +28,7 @@ export function getImage(category, name, fallback) {
 
 /**
  * Get the icon for a given rank.
- * @param {Teriock.Parameters.Rank.RankClass} className
+ * @param {Teriock.Keys.Class} className
  * @param {number} rankNumber
  * @returns {string}
  */

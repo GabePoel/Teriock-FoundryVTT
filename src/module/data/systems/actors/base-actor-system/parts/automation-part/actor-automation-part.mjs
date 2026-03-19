@@ -1,3 +1,5 @@
+import { objectMap } from "../../../../../../helpers/utils.mjs";
+
 /**
  * Actor data model that handles automation.
  * @param {typeof BaseActorSystem} Base
@@ -13,15 +15,13 @@ export default (Base) => {
       /** @inheritDoc */
       prepareBaseData() {
         super.prepareBaseData();
-        this.conditionInformation =
-          /** @type {Teriock.Parameters.Actor.ConditionInformation} */ {};
-        for (const key of Object.keys(TERIOCK.index.conditions)) {
-          this.conditionInformation[key] = {
+        this.conditionInformation = objectMap(TERIOCK.index.conditions, () => {
+          return {
             locked: false,
             reasons: new Set(),
             trackers: new Set(),
           };
-        }
+        });
       }
 
       /** @inheritDoc */

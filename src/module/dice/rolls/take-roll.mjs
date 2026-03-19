@@ -2,7 +2,7 @@ import { takeOptions } from "../../constants/options/take-options.mjs";
 import BaseRoll from "./base-roll.mjs";
 
 /**
- * @property {Teriock.Parameters.Consequence.RollConsequenceKey} take
+ * @property {Teriock.Keys.RollImpact} take
  */
 export default class TakeRoll extends BaseRoll {
   /**

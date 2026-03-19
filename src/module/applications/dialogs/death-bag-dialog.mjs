@@ -71,7 +71,7 @@ export default async function deathBagDialog(actor) {
 /**
  * Pull from the Death Bag.
  * @param {string} pullFormula
- * @param {Record<Teriock.Parameters.Actor.DeathBagStoneColor, string>} stonesFormulas
+ * @param {Record<Teriock.Keys.DeathBagStoneColor, string>} stonesFormulas
  * @param {TeriockActor} [actor]
  */
 async function deathBagPull(pullFormula, stonesFormulas, actor) {
@@ -83,12 +83,12 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
     Math.max(await BaseRoll.getValue(pullFormula, rollData), 0),
   );
   const startingStones =
-    /** @type {Record<Teriock.Parameters.Actor.DeathBagStoneColor, number>} */
+    /** @type {Record<Teriock.Keys.DeathBagStoneColor, number>} */
     {};
   const pulledStones =
-    /** @type {Record<Teriock.Parameters.Actor.DeathBagStoneColor, number>} */
+    /** @type {Record<Teriock.Keys.DeathBagStoneColor, number>} */
     {};
-  /** @type {Teriock.Parameters.Actor.DeathBagStoneColor[]} */
+  /** @type {Teriock.Keys.DeathBagStoneColor[]} */
   const bag = [];
   let totalStonesCount = 0;
   const wrappers = [];

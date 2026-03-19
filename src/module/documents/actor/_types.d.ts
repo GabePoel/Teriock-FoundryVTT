@@ -7,10 +7,12 @@ declare global {
   namespace Teriock.Documents {
     export interface ActorInterface {
       _id: ID<AnyActor>;
+      // @ts-expect-error Document construction.
       effects: DocumentCollection<AnyActiveEffect>;
+      // @ts-expect-error Document construction.
       items: DocumentCollection<AnyItem>;
       sheet: BaseActorSheet;
-      statuses: Set<Teriock.Parameters.Condition.ConditionKey>;
+      statuses: Set<Teriock.Keys.Condition>;
       system: BaseActorSystem;
 
       get actor(): AnyActor;

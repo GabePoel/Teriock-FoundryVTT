@@ -8,13 +8,11 @@ declare global {
       /** <schema> Damage type */
       damageType: string;
       /** <schema> Extra damage dealt by the parent {@link TeriockEquipment} */
-      extraDamage: string;
-      /** <schema> Property form */
-      form: Teriock.Parameters.Shared.Form;
+      extraDamage: Teriock.System.FormulaString;
       /** <schema> Modifies the {@link TeriockActor} instead of the {@link TeriockEquipment} */
       modifiesActor: boolean;
       /** <schema> Power sources */
-      powerSources: Teriock.Parameters.Ability.PowerSource[];
+      powerSources: Teriock.Keys.PowerSource[];
 
       get parent(): TeriockProperty;
     };

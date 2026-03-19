@@ -83,7 +83,7 @@ export default class BaseDocumentExecution extends BaseExecution {
 
     // Create aggregate formulas from the merged buttons
     const buttonsByRollType =
-      /** @type {Record<Teriock.Parameters.Consequence.RollConsequenceKey, Teriock.UI.HTMLButtonConfig[]>} */ {};
+      /** @type {Record<Teriock.Keys.RollImpact, Teriock.UI.HTMLButtonConfig[]>} */ {};
     for (const button of buttonsToMerge) {
       const rollType = button.dataset.type;
       if (!Object.keys(buttonsByRollType).includes(rollType)) {

@@ -272,13 +272,13 @@ export default class AbilitySystem extends mix(
     tags.push(
       ...Array.from(this.powerSources).map((t) => {
         return {
-          label: TERIOCK.options.ability.powerSources[t],
+          label: TERIOCK.reference.powerSources[t],
           tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.powerSources.label",
         };
       }),
       ...Array.from(this.elements).map((t) => {
         return {
-          label: TERIOCK.options.ability.elements[t],
+          label: TERIOCK.reference.elements[t],
           tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.elements.label",
         };
       }),
@@ -286,7 +286,7 @@ export default class AbilitySystem extends mix(
         .filter((t) => !this.powerSources.has(t))
         .map((t) => {
           return {
-            label: TERIOCK.options.ability.effectTypes[t],
+            label: TERIOCK.reference.effectTypes[t],
             tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.effectTypes.label",
           };
         }),

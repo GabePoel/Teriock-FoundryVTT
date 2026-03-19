@@ -4,20 +4,17 @@ declare global {
   namespace Teriock.Models {
     export type ActorAutomationPartData = {
       /** <base> Information explaining conditions in place. */
-      conditionInformation: Teriock.Parameters.Actor.ConditionInformation;
+      conditionInformation: Record<
+        Teriock.Keys.Condition,
+        ConditionInformation
+      >;
     };
   }
-
-  namespace Teriock.Parameters.Actor {
-    export type ConditionInformation = Record<
-      Teriock.Parameters.Condition.ConditionKey,
-      {
-        locked: boolean;
-        reasons: Set<string>;
-        trackers: Set<SafeUUID<TeriockTokenDocument>>;
-      }
-    >;
-  }
 }
+export type ConditionInformation = {
+  locked: boolean;
+  reasons: Set<string>;
+  trackers: Set<SafeUUID<TeriockTokenDocument>>;
+};
 
 export {};

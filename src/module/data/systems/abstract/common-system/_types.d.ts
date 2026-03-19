@@ -16,7 +16,7 @@ declare global {
       /** <schema> Automations */
       automations: TypeCollection<ID<BaseAutomation>, BaseAutomation>;
       /** <base> Boosts formulas by roll type */
-      boosts: Record<Teriock.Parameters.Consequence.RollConsequenceKey, string>;
+      boosts: Record<Teriock.Keys.RollImpact, Teriock.System.FormulaString>;
       /** <schema> Journal entry page only accessible to GM */
       gmNotes: UUID<TeriockJournalEntryPage>;
 

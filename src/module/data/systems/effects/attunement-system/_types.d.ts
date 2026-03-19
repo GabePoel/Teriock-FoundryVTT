@@ -1,5 +1,3 @@
-import "./_parameters";
-
 declare global {
   namespace Teriock.Models {
     export type AttunementSystemData = {
@@ -10,9 +8,11 @@ declare global {
       /** <schema> Presence tier of the target entity */
       tier: number;
       /** <schema> What type of entity this attunement corresponds to */
-      type: Teriock.Parameters.Attunement.AttunementType;
+      type: Teriock.Keys.AttunementType;
 
       get parent(): TeriockAttunement;
     };
   }
 }
+
+export {};

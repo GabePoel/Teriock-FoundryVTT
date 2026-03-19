@@ -7,7 +7,7 @@ export type TransformationField = {
   /** <schema> Overriding image to apply */
   image: string;
   /** <schema> Level of transformation */
-  level: Teriock.Parameters.Shared.TransformationLevel;
+  level: Teriock.Keys.TransformationLevel;
   /** <schema> Reset HP upon applying transformation */
   resetHp: boolean;
   /** <schema> Reset MP upon applying transformation */

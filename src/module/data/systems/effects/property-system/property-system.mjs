@@ -66,7 +66,6 @@ export default class PropertySystem extends mix(
       applyIfShattered: new fields.BooleanField({ initial: false }),
       damageType: new fields.StringField({ initial: "" }),
       extraDamage: new FormulaField({ deterministic: false }),
-      form: new fields.StringField({ initial: "normal" }),
       modifiesActor: new fields.BooleanField({ initial: false }),
     });
   }
@@ -86,7 +85,7 @@ export default class PropertySystem extends mix(
 
   /** @inheritDoc */
   get color() {
-    return TERIOCK.options.ability.form[this.form].color;
+    return TERIOCK.options.effect.form[this.form].color;
   }
 
   /** @inheritDoc */
@@ -107,7 +106,7 @@ export default class PropertySystem extends mix(
   /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
-    parts.subtitle = TERIOCK.options.ability.form[this.form].name;
+    parts.subtitle = TERIOCK.options.effect.form[this.form].name;
     return parts;
   }
 
@@ -159,11 +158,11 @@ export default class PropertySystem extends mix(
   get messageBars() {
     return [
       {
-        icon: TERIOCK.options.ability.form[this.form].icon,
+        icon: TERIOCK.options.effect.form[this.form].icon,
         label: game.i18n.localize(
           "TERIOCK.SYSTEMS.BaseEffect.FIELDS.form.label",
         ),
-        wrappers: [TERIOCK.options.ability.form[this.form].name],
+        wrappers: [TERIOCK.options.effect.form[this.form].name],
       },
     ];
   }

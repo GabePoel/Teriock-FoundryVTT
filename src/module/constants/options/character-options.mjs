@@ -34,20 +34,61 @@ export const characterOptions = {
   },
   initiative: "1d20 + @mov",
   movementTypes: {
-    walk: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.walk",
-    climb: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.climb",
-    crawl: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.crawl",
-    difficultTerrain:
-      "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.difficultTerrain",
-    dig: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.dig",
-    dive: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.dive",
-    fly: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.fly",
-    hidden: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.hidden",
-    leapHorizontal:
-      "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.leapHorizontal",
-    leapVertical:
-      "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.leapVertical",
-    swim: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.swim",
+    walk: {
+      abbreviation: "wal",
+      initial: 3,
+      label: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.walk",
+    },
+    climb: {
+      abbreviation: "cli",
+      initial: 1,
+      label: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.climb",
+    },
+    crawl: {
+      abbreviation: "cra",
+      initial: 1,
+      label: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.crawl",
+    },
+    difficultTerrain: {
+      abbreviation: "dif",
+      initial: 2,
+      label: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.difficultTerrain",
+    },
+    dig: {
+      abbreviation: "dig",
+      initial: 0,
+      label: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.dig",
+    },
+    dive: {
+      abbreviation: "div",
+      initial: 0,
+      label: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.dive",
+    },
+    fly: {
+      abbreviation: "fly",
+      initial: 0,
+      label: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.fly",
+    },
+    hidden: {
+      abbreviation: "hid",
+      initial: 1,
+      label: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.hidden",
+    },
+    leapHorizontal: {
+      abbreviation: "leh",
+      initial: 1,
+      label: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.leapHorizontal",
+    },
+    leapVertical: {
+      abbreviation: "lev",
+      initial: 0,
+      label: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.leapVertical",
+    },
+    swim: {
+      abbreviation: "swi",
+      initial: 1,
+      label: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.swim",
+    },
   },
   senseMap: {
     blind: "blindFighting",
@@ -120,15 +161,15 @@ export const characterOptions = {
     },
   ],
   speedAdjustments: {
-    0: "TERIOCK.TERMS.SpeedAdjustments.0",
-    1: "TERIOCK.TERMS.SpeedAdjustments.1",
-    2: "TERIOCK.TERMS.SpeedAdjustments.2",
-    3: "TERIOCK.TERMS.SpeedAdjustments.3",
-    4: "TERIOCK.TERMS.SpeedAdjustments.4",
+    0: { label: "TERIOCK.TERMS.SpeedAdjustments.0", multiplier: 0 },
+    1: { label: "TERIOCK.TERMS.SpeedAdjustments.1", multiplier: 0.25 },
+    2: { label: "TERIOCK.TERMS.SpeedAdjustments.2", multiplier: 0.5 },
+    3: { label: "TERIOCK.TERMS.SpeedAdjustments.3", multiplier: 1 },
+    4: { label: "TERIOCK.TERMS.SpeedAdjustments.4", multiplier: 2 },
   },
 };
 
 preLocalize("options.character.senses");
-preLocalize("options.character.speedAdjustments");
-preLocalize("options.character.movementTypes");
+preLocalize("options.character.speedAdjustments", { keys: ["label"] });
+preLocalize("options.character.movementTypes", { keys: ["label"] });
 preLocalize("options.character.sizes", { keys: ["category"] });

@@ -46,15 +46,15 @@ declare global {
     };
 
     export type TradecraftOptions = ThresholdOptions & {
-      tradecraft?: Teriock.Parameters.Fluency.Tradecraft;
+      tradecraft?: Teriock.Keys.Tradecraft;
     };
 
     export type FeatOptions = ThresholdOptions & {
-      attribute?: Teriock.Parameters.Actor.Attribute;
+      attribute?: Teriock.Keys.Attribute;
     };
 
     export type HackOptions = {
-      part?: Teriock.Parameters.Actor.HackableBodyPart;
+      part?: Teriock.Keys.HackableBodyPart;
     };
 
     export type FormulaOptions = {
@@ -70,7 +70,7 @@ declare global {
     };
 
     export type StatusOptions = {
-      status?: Teriock.Parameters.Condition.ConditionKey;
+      status?: Teriock.Keys.Condition;
     };
 
     export type StandardDamageOptions = {

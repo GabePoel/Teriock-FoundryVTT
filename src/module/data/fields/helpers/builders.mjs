@@ -386,7 +386,7 @@ export function blocksField() {
 /**
  * Field that sets block sizes.
  * @param {object} [options]
- * @param {Teriock.Parameters.Shared.CardDisplaySize} [options.initial]
+ * @param {Teriock.Keys.CardDisplaySize} [options.initial]
  * @param {string} [options.label]
  * @returns {StringField}
  */

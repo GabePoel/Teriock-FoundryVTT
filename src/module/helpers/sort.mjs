@@ -1,6 +1,6 @@
 /**
  * Sort conditions.
- * @param {Teriock.Parameters.Condition.ConditionKey[]} conditions
+ * @param {Teriock.Keys.Condition[]} conditions
  */
 export function conditionSort(conditions) {
   conditions.sort((a, b) => {
@@ -81,15 +81,15 @@ export function rankSort(ranks) {
  * @returns {TeriockAbility[]}
  */
 export function effectSort(abilities) {
-  const abilityFormOrder = Object.keys(TERIOCK.options.ability.form || {});
+  const effectFormOrder = Object.keys(TERIOCK.options.effect.form || {});
   return abilities.sort((a, b) => {
     if (!a.system?.form || !b.system?.form) {
       return a.name.localeCompare(b.name);
     }
     const typeA = a.system?.form || "";
     const typeB = b.system?.form || "";
-    const indexA = abilityFormOrder.indexOf(typeA);
-    const indexB = abilityFormOrder.indexOf(typeB);
+    const indexA = effectFormOrder.indexOf(typeA);
+    const indexB = effectFormOrder.indexOf(typeB);
     if (indexA !== indexB) {
       return indexA - indexB;
     }

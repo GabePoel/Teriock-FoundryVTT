@@ -18,7 +18,7 @@ export default (Base) => {
        * - [Morganti](https://wiki.teriock.com/index.php/Property:Morganti)
        *
        * @param {number} amount
-       * @param {Teriock.Parameters.Shared.DieStat} stat - The stat to apply the harm to.
+       * @param {Teriock.Keys.DieStat} stat - The stat to apply the harm to.
        * @param {object} [options]
        * @param {boolean} [options.morganti] - Make the non-temporary harm morganti.
        * @returns {Promise<void>}

@@ -34,7 +34,7 @@ export async function selectTokensDialog(options = {}) {
 
 /**
  * Select some number of visible tokens for a target to have a condition associated with.
- * @param {Teriock.Parameters.Condition.ConditionKey} condition
+ * @param {Teriock.Keys.Condition} condition
  * @returns {Promise<UUID<TeriockTokenDocument>[]>}
  */
 export async function conditionDialog(condition) {

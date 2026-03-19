@@ -1,3 +1,6 @@
+import { characterOptions } from "../../../../../../constants/options/character-options.mjs";
+import { objectMap } from "../../../../../../helpers/utils.mjs";
+
 const { fields } = foundry.data;
 
 /**
@@ -15,19 +18,11 @@ export default (Base) => {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          speedAdjustments: new fields.SchemaField({
-            climb: speedField(1, "Climb"),
-            crawl: speedField(1, "Crawl"),
-            difficultTerrain: speedField(2, "Difficult Terrain"),
-            dig: speedField(0, "Dig"),
-            dive: speedField(0, "Dive"),
-            fly: speedField(0, "Fly"),
-            hidden: speedField(1, "Hidden"),
-            leapHorizontal: speedField(1, "Horizontal Leap"),
-            leapVertical: speedField(0, "Vertical Leap"),
-            swim: speedField(1, "Swim"),
-            walk: speedField(3, "Walk"),
-          }),
+          speedAdjustments: new fields.SchemaField(
+            objectMap(characterOptions.movementTypes, (t) =>
+              speedField(t.initial, t.label),
+            ),
+          ),
         });
       }
 
@@ -35,28 +30,13 @@ export default (Base) => {
       getRollData() {
         const rollData = super.getRollData();
         rollData["speed"] = this.movementSpeed;
-        for (const [k, v] of Object.entries(SPEED_MAP)) {
-          const adjustment = this.speedAdjustments[v] || 0;
-          rollData[`speed.${k}`] = adjustment;
-          let feetPerMove = 0;
-          switch (adjustment) {
-            case 0:
-              feetPerMove = 0;
-              break;
-            case 1:
-              feetPerMove = this.movementSpeed / 4;
-              break;
-            case 2:
-              feetPerMove = this.movementSpeed / 2;
-              break;
-            case 3:
-              feetPerMove = this.movementSpeed;
-              break;
-            case 4:
-              feetPerMove = this.movementSpeed * 2;
-              break;
-          }
-          rollData[`speed.${k}.feet`] = feetPerMove;
+        for (const [k, v] of Object.entries(characterOptions.movementTypes)) {
+          const adjustment = this.speedAdjustments[k] || 0;
+          rollData[`speed.${v.abbreviation}`] = adjustment;
+          rollData[`speed.${v.abbreviation}.feet`] = (
+            this.movementSpeed *
+            characterOptions.speedAdjustments[adjustment].multiplier
+          ).toNearest(1, "floor");
         }
         return rollData;
       }
@@ -109,17 +89,3 @@ function speedField(initial, name) {
     step: 1,
   });
 }
-
-const SPEED_MAP = {
-  cli: "climb",
-  cra: "crawl",
-  dif: "difficultTerrain",
-  dig: "dig",
-  div: "dive",
-  fly: "fly",
-  hid: "hidden",
-  leh: "leapHorizontal",
-  lev: "leapVertical",
-  swi: "swim",
-  wal: "walk",
-};

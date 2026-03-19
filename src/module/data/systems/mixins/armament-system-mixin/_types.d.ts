@@ -23,7 +23,7 @@ declare global {
       /** <schema> Damage Dice */
       damage: Teriock.Models.ArmamentDamage;
       /** <schema> Style Bonus (Weapon Fighting Style) */
-      fightingStyle: Teriock.Parameters.Equipment.WeaponFightingStyle;
+      fightingStyle: Teriock.Keys.WeaponFightingStyle;
       /** <schema> Flaws */
       flaws: string;
       /** <schema> Additional Hit Bonus */

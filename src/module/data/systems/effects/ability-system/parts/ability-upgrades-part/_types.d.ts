@@ -4,11 +4,11 @@ declare global {
       /** <schema> Attributes that this ability upgrades */
       upgrades: {
         competence: {
-          attribute: Teriock.Parameters.Actor.Attribute | null;
+          attribute: Teriock.Keys.Attribute | null;
           value: number;
         };
         score: {
-          attribute: Teriock.Parameters.Actor.StatAttribute | null;
+          attribute: Teriock.Keys.StatAttribute | null;
           value: number;
         };
       };

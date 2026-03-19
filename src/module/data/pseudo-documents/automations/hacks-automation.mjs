@@ -7,7 +7,7 @@ import { BaseAutomation } from "./abstract/_module.mjs";
 const { fields } = foundry.data;
 
 /**
- * @property {Set<Teriock.Parameters.Actor.HackableBodyPart>} hacks
+ * @property {Set<Teriock.Keys.HackableBodyPart>} hacks
  */
 export default class HacksAutomation extends BaseAutomation {
   /** @inheritDoc */

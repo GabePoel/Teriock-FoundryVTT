@@ -1,15 +1,14 @@
 import "./parts/_types";
-import "./_parameters";
 
 declare global {
   namespace Teriock.Models {
     export type EquipmentSystemData = {
       /** <schema> Equipment Classes */
-      equipmentClasses: Set<Teriock.Parameters.Equipment.EquipmentClass>;
+      equipmentClasses: Set<Teriock.Keys.EquipmentClass>;
       /** <schema> Canonical Equipment Type */
       equipmentType: string;
       /** <schema> Power Level */
-      powerLevel: Teriock.Parameters.Equipment.EquipmentPowerLevel;
+      powerLevel: Teriock.Keys.PowerLevel;
       /** <schema> Price */
       price: number;
 

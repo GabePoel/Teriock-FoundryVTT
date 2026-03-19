@@ -18,14 +18,15 @@
         </div>
         <div class="teriock-block-display-divider" style="margin-bottom: 1rem"></div>
         <div class="tgrid g3" style="padding-inline: 0.5em; row-gap: 0.55rem;">
-          {{#each TERIOCK.options.character.movementTypes as |name key|}}
+          {{#each TERIOCK.options.character.movementTypes as |config key|}}
             <div class="gi2">
-              {{{name}}}
+              {{{config.label}}}
             </div>
             <div class="tcolored">
-              {{lookup
+              {{path
                 @root/TERIOCK.options.character.speedAdjustments
                 (lookup @root/system.speedAdjustments key)
+                "label"
               }}
               {{{lookup system.speedAdjustments key}}}
             </div>

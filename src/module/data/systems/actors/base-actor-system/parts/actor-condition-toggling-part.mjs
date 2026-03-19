@@ -9,8 +9,9 @@ export default (Base) => {
      */
     class ActorConditionTogglingPart extends Base {
       /**
-       * Remove the condition and all consequences that provide it.
-       * @param {Teriock.Parameters.Condition.ConditionKey} status
+       * Remove the status and all consequences that provide it. Intended to be used with conditions, but all
+       * statuses work.
+       * @param {Teriock.Keys.Status} status
        * @returns {Promise<void>}
        */
       async removeCondition(status) {

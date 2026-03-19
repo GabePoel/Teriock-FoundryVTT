@@ -8,10 +8,10 @@ declare global {
   namespace Teriock.Models {
     export type AbilityUsagePartData = {
       /** <schema> This ability's delivery */
-      delivery: Teriock.Parameters.Ability.Delivery;
+      delivery: Teriock.Keys.Delivery;
       /** <schema> This ability's execution time */
       executionTime: {
-        base: Teriock.Parameters.Ability.ExecutionTime;
+        base: Teriock.Keys.ExecutionTime;
         slow: SlowExecutionTimeModel;
       };
       /** <schema> This ability's expansion */
@@ -19,22 +19,22 @@ declare global {
         /** <schema> Maximum number of extra executions */
         cap: EvaluationModel;
         /** <schema> Type of ability's expansion */
-        type: Teriock.Parameters.Ability.Expansion | null;
+        type: Teriock.Keys.Expansion | null;
         /** <schema> Range of expansion */
         range: RangeModel;
         /** <schema> What attribute is used for feat saves against this ability's expansion */
-        featSaveAttribute: Teriock.Parameters.Actor.Attribute;
+        featSaveAttribute: Teriock.Keys.Attribute;
       };
       /** <schema> What attribute is used for feat saves against this ability */
-      featSaveAttribute: Teriock.Parameters.Actor.Attribute;
+      featSaveAttribute: Teriock.Keys.Attribute;
       /** <schema> This ability's interaction */
-      interaction: Teriock.Parameters.Ability.Interaction;
+      interaction: Teriock.Keys.Interaction;
       /** <schema> This ability's maneuver */
-      maneuver: Teriock.Parameters.Ability.Maneuver;
+      maneuver: Teriock.Keys.Maneuver;
       /** <schema> The maximum range at which this ability can be used */
       range: RangeModel;
       /** <schema> Appropriate targets */
-      targets: Set<Teriock.Parameters.Ability.Target>;
+      targets: Set<Teriock.Keys.Target>;
     };
   }
 }

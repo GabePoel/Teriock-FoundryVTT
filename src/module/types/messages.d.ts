@@ -62,9 +62,7 @@ declare global {
       /** Additional CSS classes to add */
       classes?: string;
       /** Color to assign to the image border. */
-      color?: string;
-      /** Font used for a message. Message uses font if nothing is specified. */
-      font?: Teriock.Parameters.Shared.Font;
+      color?: Teriock.Keys.Color;
       /** Font Awesome icons */
       icon?: string;
       /** The URL or path to the image associated with the message. */

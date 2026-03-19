@@ -259,7 +259,7 @@ export default function ArmamentSystemMixin(Base) {
         super.prepareBaseData();
 
         // What this deals
-        /** @type {Set<Record<Teriock.Parameters.Consequence.RollConsequenceKey>>} */
+        /** @type {Set<Record<Teriock.Keys.RollImpact>>} */
         this.deals = new Set(["damage"]);
 
         // Properties

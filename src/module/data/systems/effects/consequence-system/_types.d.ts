@@ -1,4 +1,3 @@
-import "./_parameters";
 import {
   CombatExpirationMethod,
   CombatExpirationSourceType,
@@ -23,9 +22,9 @@ declare global {
         /** <schema> Conditions that affect if this effect is active or expired */
         conditions: {
           /** <schema> Conditions that must be present in order for this effect to be active */
-          present: Set<Teriock.Parameters.Condition.ConditionKey>;
+          present: Set<Teriock.Keys.Condition>;
           /** <schema> Conditions that must be absent in order for this effect to be active */
-          absent: Set<Teriock.Parameters.Condition.ConditionKey>;
+          absent: Set<Teriock.Keys.Condition>;
         };
         /** <schema> Triggers that will make this consequence expire */
         triggers: Set<string>;

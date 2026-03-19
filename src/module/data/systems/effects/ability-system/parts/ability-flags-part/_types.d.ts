@@ -4,7 +4,7 @@ declare global {
       /** <schema> If this is a basic ability */
       basic: boolean;
       /** <schema> What class this ability is associated with */
-      class: Teriock.Parameters.Rank.RankClass;
+      class: Teriock.Keys.Class;
       /** <schema> If this ability is consumable */
       consumable: boolean;
       /** <schema> If this ability is considered to be Elder Sorcery */

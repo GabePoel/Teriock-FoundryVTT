@@ -1,4 +1,3 @@
-import { displayOptions } from "../constants/options/display-options.mjs";
 import { triggers } from "../constants/system/_module.mjs";
 import type BaseExecution from "../executions/base-execution/base-execution.mjs";
 import {
@@ -8,10 +7,6 @@ import {
 import { BaseAutomation } from "../data/pseudo-documents/automations/abstract/_module.mjs";
 
 declare global {
-  export namespace Teriock.Parameters.Shared {
-    export type CardDisplaySize = keyof typeof displayOptions.sizes;
-  }
-
   export namespace Teriock.System {
     export type _CreateOperation = {
       /**
@@ -58,13 +53,13 @@ declare global {
       actor?: AnyActor;
       amount?: number;
       armament?: TeriockArmament;
-      attribute?: Teriock.Parameters.Actor.Attribute;
+      attribute?: Teriock.Keys.Attribute;
       automation?: BaseAutomation;
       effect?: AnyActiveEffect;
       equipment?: TeriockEquipment;
       execution?: BaseExecution | AbilityExecution | ArmamentExecution;
       item?: AnyItem;
-      tradecraft?: Teriock.Parameters.Fluency.Tradecraft;
+      tradecraft?: Teriock.Keys.Tradecraft;
       trigger?: string;
     };
 

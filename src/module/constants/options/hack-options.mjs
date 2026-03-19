@@ -3,7 +3,6 @@ import { icons } from "../display/icons.mjs";
 
 /**
  * Hack button definitions.
- * @type {Record<Teriock.Parameters.Actor.HackableBodyPart, Teriock.Config.HackConfig>}
  */
 export const hackOptions = {
   arm: {

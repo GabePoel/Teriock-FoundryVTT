@@ -25,7 +25,6 @@ export default (Base) => {
               choices: TERIOCK.reference.elements,
             }),
           ),
-          form: new fields.StringField({ initial: "normal" }),
           powerSources: new fields.SetField(
             new fields.StringField({
               choices: TERIOCK.reference.powerSources,
@@ -68,7 +67,7 @@ export default (Base) => {
 
       /** @inheritDoc */
       get color() {
-        return TERIOCK.options.ability.form[this.form].color;
+        return TERIOCK.options.effect.form[this.form].color;
       }
 
       /**

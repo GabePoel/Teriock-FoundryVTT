@@ -116,7 +116,7 @@ export default function AbilityExecutionChatPart(Base) {
 
       /**
        * Generate a condition tracker.
-       * @param {Teriock.Parameters.Condition.ConditionKey} status
+       * @param {Teriock.Keys.Condition} status
        * @param {UUID<TeriockTokenDocument|TeriockActor>} uuid
        * @returns {Teriock.Changes.QualifiedChangeData}
        */
@@ -278,7 +278,7 @@ export default function AbilityExecutionChatPart(Base) {
 
       /**
        * @param {boolean} crit
-       * @returns {Teriock.Parameters.Consequence.RollConsequenceKey[]}
+       * @returns {Teriock.Keys.RollImpact[]}
        */
       #generateConsequenceStatuses(crit = false) {
         const statusAutomations = this.#getCritAutomations(

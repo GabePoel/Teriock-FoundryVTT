@@ -59,7 +59,7 @@ export default (Base) => {
 
 /**
  * Make the field for a color of stone in the Death Bag.
- * @param {Teriock.Parameters.Actor.DeathBagStoneColor} color
+ * @param {Teriock.Keys.DeathBagStoneColor} color
  * @param {number} initial
  * @returns {FormulaField}
  */

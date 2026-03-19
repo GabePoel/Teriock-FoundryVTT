@@ -1,5 +1,4 @@
 import "./parts/_types";
-import "./_parameters";
 
 declare global {
   namespace Teriock.Models {

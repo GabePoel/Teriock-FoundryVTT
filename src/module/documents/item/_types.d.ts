@@ -1,11 +1,12 @@
 import { BaseItemSystem } from "../../data/systems/items/_module.mjs";
 import { BaseItemSheet } from "../../applications/sheets/item-sheets/_module.mjs";
-import { DocumentCollection } from "../../../../foundry/client/documents/abstract/_module.mjs";
+import { DocumentCollection } from "@client/documents/abstract/_module.mjs";
 
 declare global {
   namespace Teriock.Documents {
     export interface ItemInterface {
       _id: ID<AnyItem>;
+      // @ts-expect-error Document construction.
       effects: DocumentCollection<AnyActiveEffect>;
       parent?: AnyActor;
       sheet: BaseItemSheet;

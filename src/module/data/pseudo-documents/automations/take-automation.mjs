@@ -5,7 +5,7 @@ import { LabelAutomationMixin } from "./mixins/_module.mjs";
 const { fields } = foundry.data;
 
 /**
- * @property {Teriock.Parameters.Consequence.RollConsequenceKey} take
+ * @property {Teriock.Keys.RollImpact} take
  * @property {number | null} amount
  */
 export default class TakeAutomation extends LabelAutomationMixin(

@@ -138,7 +138,7 @@ export async function selectDialog(choices, options = {}) {
 
 /**
  * Dialog to select an equipment class.
- * @returns {Promise<Teriock.Parameters.Equipment.EquipmentClass>}
+ * @returns {Promise<Teriock.Keys.EquipmentClass>}
  */
 export async function selectEquipmentClassDialog() {
   return await selectDialog(TERIOCK.reference.equipmentClasses, {
@@ -150,7 +150,7 @@ export async function selectEquipmentClassDialog() {
 
 /**
  * Dialog to select a weapon class.
- * @returns {Promise<Teriock.Parameters.Equipment.WeaponClass>}
+ * @returns {Promise<Teriock.Keys.WeaponClass>}
  */
 export async function selectWeaponClassDialog() {
   return await selectDialog(TERIOCK.reference.weaponClasses, {
@@ -162,7 +162,7 @@ export async function selectWeaponClassDialog() {
 
 /**
  * Dialog to select a condition.
- * @returns {Promise<Teriock.Parameters.Condition.ConditionKey>}
+ * @returns {Promise<Teriock.Keys.Condition>}
  */
 export async function selectConditionDialog() {
   return await selectDialog(TERIOCK.reference.conditions, {
@@ -191,7 +191,7 @@ export async function selectPropertyDialog() {
 
 /**
  * Dialog to select a tradecraft.
- * @returns {Promise<Teriock.Parameters.Fluency.Tradecraft|null>}
+ * @returns {Promise<Teriock.Keys.Tradecraft|null>}
  */
 export async function selectTradecraftDialog() {
   const choices = await Promise.all(

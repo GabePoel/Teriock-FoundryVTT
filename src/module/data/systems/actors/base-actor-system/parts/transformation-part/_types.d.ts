@@ -12,7 +12,7 @@ declare global {
         /** <base> */
         species: TeriockSpecies[];
         /** <base> */
-        level: Teriock.Parameters.Shared.TransformationLevel;
+        level: Teriock.Keys.TransformationLevel;
       };
     };
   }

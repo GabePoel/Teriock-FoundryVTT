@@ -1,12 +1,10 @@
-import "./_parameters";
-
 declare global {
   namespace Teriock.Models {
     export type RankSystemData = {
       /** <schema> Rank Class Archetype */
-      archetype: Teriock.Parameters.Rank.RankArchetype;
+      archetype: Teriock.Keys.Archetype;
       /** <schema> Rank Class Name */
-      className: Teriock.Parameters.Rank.RankClass;
+      className: Teriock.Keys.Class;
       /** <schema> What number rank this is, with respect to its class */
       classRank: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
       /** <schema> Flaws */
@@ -20,3 +18,5 @@ declare global {
     };
   }
 }
+
+export {};

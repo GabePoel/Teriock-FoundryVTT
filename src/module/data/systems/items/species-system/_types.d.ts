@@ -1,5 +1,3 @@
-import "./_parameters";
-
 export type SizeAbilityStep = {
   gain: Set<string>;
   lose: Set<string>;
@@ -34,9 +32,9 @@ declare global {
       /** <schema> Size interval to add another MP die at */
       sizeStepMp: number | null;
       /** <schema> Traits */
-      traits: Set<Teriock.Parameters.Species.Trait>;
+      traits: Set<Teriock.Keys.Trait>;
       /** <schema> Level of transformation this species is */
-      transformationLevel: Teriock.Parameters.Shared.TransformationLevel | null;
+      transformationLevel: Teriock.Keys.TransformationLevel | null;
 
       get parent(): TeriockSpecies;
     };

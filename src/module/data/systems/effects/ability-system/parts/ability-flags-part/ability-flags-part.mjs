@@ -18,9 +18,7 @@ export default (Base) => {
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           basic: new fields.BooleanField({ initial: false }),
-          class: new fields.StringField({
-            choices: TERIOCK.options.ability.class,
-          }),
+          class: new fields.StringField({ choices: TERIOCK.reference.classes }),
           consumable: new fields.BooleanField({ initial: false }),
           elderSorcery: new fields.BooleanField({ initial: false }),
           elderSorceryIncant: new TextField({ initial: "" }),

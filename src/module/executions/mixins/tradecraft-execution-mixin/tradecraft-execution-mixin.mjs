@@ -27,7 +27,7 @@ export default function TradecraftExecutionMixin(Base) {
 
       /**
        * Tradecraft this execution corresponds to.
-       * @returns {Teriock.Parameters.Fluency.Tradecraft}
+       * @returns {Teriock.Keys.Tradecraft}
        * @abstract
        */
       get tradecraft() {

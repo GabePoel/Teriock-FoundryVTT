@@ -22,7 +22,7 @@ export default class FeatSaveExecution extends ThresholdExecutionMixin(
     }
   }
 
-  /** @type {Teriock.Parameters.Actor.Attribute} */
+  /** @type {Teriock.Keys.Attribute} */
   attribute;
 
   /** @inheritDoc */

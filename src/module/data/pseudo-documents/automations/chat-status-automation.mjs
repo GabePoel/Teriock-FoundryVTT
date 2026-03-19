@@ -9,7 +9,7 @@ import { CritAutomation } from "./abstract/_module.mjs";
 const { fields } = foundry.data;
 
 /**
- * @property {Teriock.Parameters.Condition.ConditionKey} status
+ * @property {Teriock.Keys.Condition} status
  * @property {"apply"|"remove"|"toggle"} relation
  */
 export default class ChatStatusAutomation extends CritAutomation {

@@ -194,7 +194,7 @@ export default class TeriockActor extends mix(
 
   /**
    * Helper method to add a virtual status.
-   * @param {Teriock.Parameters.Condition.ConditionKey} condition
+   * @param {Teriock.Keys.Condition} condition
    * @param {string} reason
    * @param {object} [options]
    * @param {boolean} [options.localize]
@@ -210,7 +210,7 @@ export default class TeriockActor extends mix(
 
   /**
    * Helper method to add multiple virtual statuses with the same reason.
-   * @param {Teriock.Parameters.Condition.ConditionKey[]} conditions
+   * @param {Teriock.Keys.Condition[]} conditions
    * @param {string} reason
    * @param {object} [options]
    * @param {boolean} [options.localize]
@@ -396,11 +396,10 @@ export default class TeriockActor extends mix(
 
   /**
    * Performs post-update operations for the actor.
-   * @param {Teriock.Parameters.Actor.SkipFunctions} skipFunctions - Functions that should be skipped.
    * @returns {Promise<void>}
    */
-  async postUpdate(skipFunctions = {}) {
-    await this.system.postUpdate(skipFunctions);
+  async postUpdate() {
+    await this.system.postUpdate();
   }
 
   /** @inheritDoc */
