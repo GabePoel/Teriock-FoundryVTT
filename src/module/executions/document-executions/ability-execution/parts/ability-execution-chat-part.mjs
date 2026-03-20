@@ -5,7 +5,7 @@ import {
   CombatExpirationAutomation,
   DurationAutomation,
   StatusAutomation,
-  TransformationAutomation
+  TransformationAutomation,
 } from "../../../../data/pseudo-documents/automations/_module.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { manipulateFormula } from "../../../../helpers/formula.mjs";
@@ -14,7 +14,7 @@ import { RollRollableTakeHandler } from "../../../../helpers/interaction/button-
 import {
   FeatHandler,
   StandardDamageHandler,
-  UseAbilityHandler
+  UseAbilityHandler,
 } from "../../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
 import { safeUuid } from "../../../../helpers/resolve.mjs";
 

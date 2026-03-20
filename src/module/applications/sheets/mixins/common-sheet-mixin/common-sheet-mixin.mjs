@@ -49,9 +49,6 @@ export default function CommonSheetMixin(Base) {
       /** @type {Partial<ApplicationConfiguration>} */
       static DEFAULT_OPTIONS =
         /** @type {Partial<ApplicationConfiguration>} */ {
-          actions: {
-            openDoc: this._onOpenDoc,
-          },
           form: {
             closeOnSubmit: false,
             submitOnChange: true,
@@ -73,18 +70,6 @@ export default function CommonSheetMixin(Base) {
       constructor(...args) {
         super(...args);
         this.settings = {};
-      }
-
-      /**
-       * Open a linked document.
-       * @param {PointerEvent} _event
-       * @param {HTMLEmbedElement} target
-       * @returns {Promise<void>}
-       */
-      static async _onOpenDoc(_event, target) {
-        const uuid = target.dataset.uuid;
-        const doc = await fromUuid(uuid);
-        await doc.sheet.render(true);
       }
 
       /**

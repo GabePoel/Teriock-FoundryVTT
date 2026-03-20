@@ -39,6 +39,18 @@ export default (Base) => {
       }
 
       /**
+       * Open a linked document.
+       * @param {PointerEvent} _event
+       * @param {HTMLEmbedElement} target
+       * @returns {Promise<void>}
+       */
+      static async _onOpenDoc(_event, target) {
+        const uuid = target.dataset.uuid;
+        const doc = await fromUuid(uuid);
+        await doc.sheet.render(true);
+      }
+
+      /**
        * Rolls the current document with optional advantage/disadvantage.
        * @param {PointerEvent} event - The event object.
        * @returns {Promise<void>}
