@@ -1,12 +1,9 @@
 import {
   boostDialog,
-  selectDocumentsDialog
+  selectDocumentsDialog,
 } from "../../../applications/dialogs/_module.mjs";
 import { HarmRoll } from "../../../dice/rolls/_module.mjs";
-import {
-  addFormula,
-  formulaExists
-} from "../../../helpers/formula.mjs";
+import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
 import BaseDocumentExecution from "../base-document-execution/base-document-execution.mjs";
 
 /**
