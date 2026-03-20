@@ -1,3 +1,4 @@
+import { resolveDocuments } from "../../helpers/resolve.mjs";
 import { BaseDocumentMixin } from "../mixins/_module.mjs";
 
 const { Folder } = foundry.documents;
@@ -55,7 +56,7 @@ export default class TeriockFolder extends BaseDocumentMixin(Folder) {
 
   /**
    * All contents of this folder and its descendants.
-   * @returns {ClientDocument[]}
+   * @returns {TeriockDocument[]}
    */
   get allContents() {
     const contents = [...this.contents];
@@ -68,5 +69,21 @@ export default class TeriockFolder extends BaseDocumentMixin(Folder) {
   /** @inheritDoc */
   get contents() {
     return super.contents.filter((d) => !d.system?._sup);
+  }
+
+  /**
+   * The contents of this folder and its descendants.
+   * @return {Promise<TeriockDocument[]>}
+   */
+  async getAllContents() {
+    return resolveDocuments(this.allContents);
+  }
+
+  /**
+   * The contents of this folder.
+   * @return {Promise<TeriockDocument[]>}
+   */
+  async getContents() {
+    return resolveDocuments(this.contents);
   }
 }

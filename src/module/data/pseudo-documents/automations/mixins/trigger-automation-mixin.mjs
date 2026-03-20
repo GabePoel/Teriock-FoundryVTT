@@ -9,7 +9,6 @@ const { fields } = foundry.data;
  * @param {typeof BaseAutomation} Base
  */
 export default function TriggerAutomationMixin(Base) {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
      * @extends {BaseAutomation}

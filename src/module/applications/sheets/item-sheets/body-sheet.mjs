@@ -22,9 +22,7 @@ export default class BodySheet extends ArmamentSheet {
   /** @inheritDoc */
   static PARTS = {
     ...this.HEADER_PARTS,
-    menu: {
-      template: "teriock/sheets/items/body/menu",
-    },
+    menu: { template: "teriock/sheets/items/body/menu" },
     ...this.CONTENT_PARTS,
   };
 }

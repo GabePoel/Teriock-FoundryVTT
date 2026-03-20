@@ -1,10 +1,13 @@
 import { transformationField } from "../../fields/helpers/builders.mjs";
 import { CritAutomation } from "./abstract/_module.mjs";
+import { ExternalDocumentsAutomationMixin } from "./mixins/_module.mjs";
 
 /**
- * @property {TransformationConfigurationField} transformation
+ * @property {TransformationData} transformation
  */
-export default class TransformationAutomation extends CritAutomation {
+export default class TransformationAutomation extends ExternalDocumentsAutomationMixin(
+  CritAutomation,
+) {
   /** @inheritDoc */
   static get LABEL() {
     return "TERIOCK.AUTOMATIONS.TransformationAutomation.LABEL";
@@ -27,22 +30,27 @@ export default class TransformationAutomation extends CritAutomation {
 
   /** @inheritDoc */
   get _formPaths() {
-    const paths = ["transformation.level", "transformation.useFolder"];
-    if (this.transformation.useFolder) paths.push("transformation.uuid");
-    else paths.push("transformation.uuids");
-    paths.push("transformation.select");
-    if (this.transformation.select) paths.push("transformation.multiple");
-    paths.push(
-      ...[
-        "transformation.image",
-        "transformation.resetHp",
-        "transformation.resetMp",
-        "transformation.suppression.bodyParts",
-        "transformation.suppression.equipment",
-        "transformation.suppression.fluencies",
-        "transformation.suppression.ranks",
-      ],
-    );
-    return paths;
+    return [
+      ...super._formPaths,
+      "transformation.level",
+      "transformation.image",
+      "transformation.resetHp",
+      "transformation.resetMp",
+      "transformation.suppression.bodyParts",
+      "transformation.suppression.equipment",
+      "transformation.suppression.fluencies",
+      "transformation.suppression.ranks",
+    ];
+  }
+
+  /** @inheritDoc */
+  async getDocuments(options = {}) {
+    let out = await super.getDocuments(options);
+    const actors = out.filter((d) => d.documentName === "Actor");
+    out = out.filter((d) => d.type === "species");
+    for (const a of actors) {
+      out.push(...a.species);
+    }
+    return out;
   }
 }

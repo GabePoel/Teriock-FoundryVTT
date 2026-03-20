@@ -1,18 +1,18 @@
-import { selectDocumentsDialog } from "../../../applications/dialogs/select-document-dialog.mjs";
 import { CompetenceModel } from "../../models/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
+import { ExternalDocumentsAutomationMixin } from "./mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
- * @property {boolean} automatic
  * @property {CompetenceModel} competence
- * @property {UUID<UsableDocument>[]} documents
- * @property {boolean} multi
  * @property {boolean} noHeighten
  * @property {boolean} overrideCompetence
+ * @property {boolean} expandTables
  */
-export default class UseExternalDocumentsAutomation extends BaseAutomation {
+export default class UseExternalDocumentsAutomation extends ExternalDocumentsAutomationMixin(
+  BaseAutomation,
+) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
     ...super.LOCALIZATION_PREFIXES,
@@ -32,10 +32,8 @@ export default class UseExternalDocumentsAutomation extends BaseAutomation {
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      automatic: new fields.BooleanField(),
       competence: new fields.EmbeddedDataField(CompetenceModel),
-      documents: new fields.SetField(new fields.DocumentUUIDField()),
-      multi: new fields.BooleanField(),
+      expandTables: new fields.BooleanField(),
       noHeighten: new fields.BooleanField(),
       overrideCompetence: new fields.BooleanField(),
     });
@@ -44,14 +42,19 @@ export default class UseExternalDocumentsAutomation extends BaseAutomation {
   /** @inheritDoc */
   get _formPaths() {
     const paths = [
-      "documents",
-      "multi",
-      "automatic",
+      ...super._formPaths,
+      "expandTables",
       "noHeighten",
       "overrideCompetence",
     ];
     if (this.overrideCompetence) paths.push("competence.raw");
     return paths;
+  }
+
+  /** @inheritDoc */
+  async getDocuments(options = {}) {
+    const out = await super.getDocuments(options);
+    return out.filter((d) => d && typeof d.use === "function");
   }
 
   /**
@@ -72,22 +75,18 @@ export default class UseExternalDocumentsAutomation extends BaseAutomation {
         fluent,
         noHeighten: this.noHeighten,
         proficient,
-        showDialog: game.settings.get("teriock", "showRollDialogs"),
+        showDialog: game.teriock.getSetting("showRollDialogs"),
       },
       options,
     );
-    const validDocuments = (
-      await Promise.all(this.documents.map((uuid) => fromUuid(uuid)))
-    ).filter((d) => d && typeof d.use === "function");
-    if (validDocuments.length === 0) return;
-    if (this.automatic && validDocuments.length === 1) {
-      await validDocuments[0].use(options);
-      return;
-    }
-    const chosen = await selectDocumentsDialog(validDocuments, {
-      multi: this.multi,
-      title: this.document.nameString || this.document.name,
+    const chosen = await this._choose({
+      expandFolders: true,
+      expandTables: this.expandTables,
     });
-    await Promise.all(chosen.map((c) => c.use(options)));
+    if (this.automatic && chosen.length === 1) {
+      await chosen[0].use(options);
+    } else {
+      await Promise.all(chosen.map((c) => c.use(options)));
+    }
   }
 }

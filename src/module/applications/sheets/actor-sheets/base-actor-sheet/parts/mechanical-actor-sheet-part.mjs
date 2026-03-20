@@ -123,7 +123,7 @@ export default (Base) =>
       await this.#onQuickUse(
         event,
         target,
-        game.settings.get("teriock", "showRollDialogs"),
+        game.teriock.getSetting("showRollDialogs"),
       );
     }
 
@@ -160,7 +160,7 @@ export default (Base) =>
           await this.#onQuickUse(
             ev,
             el,
-            !game.settings.get("teriock", "showRollDialogs"),
+            !game.teriock.getSetting("showRollDialogs"),
           );
         });
       });

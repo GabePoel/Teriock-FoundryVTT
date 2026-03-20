@@ -15,7 +15,6 @@ const { fields } = foundry.data;
  * @extends {BaseEffectSystem}
  * @extends {Teriock.Models.PropertySystemData}
  * @mixes AdjustableSystem
- * @mixes HierarchySystem
  * @mixes RevelationSystem
  * @mixes WikiSystem
  */
@@ -23,7 +22,6 @@ export default class PropertySystem extends mix(
   BaseEffectSystem,
   mixins.AdjustableSystemMixin,
   mixins.WikiSystemMixin,
-  mixins.HierarchySystemMixin,
   mixins.RevelationSystemMixin,
 ) {
   /** @inheritDoc */

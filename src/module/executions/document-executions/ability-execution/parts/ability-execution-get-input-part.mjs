@@ -187,7 +187,7 @@ export default function AbilityExecutionGetInputPart(Base) {
           );
         const noTemplate =
           this.flags.noTemplate ||
-          !game.settings.get("teriock", "placeTemplateOnAbilityUse") ||
+          !game.teriock.getSetting("placeTemplateOnAbilityUse") ||
           templateAutomation?.t === "none";
         const canTemplate = this.source.system.isAoe || !!templateAutomation;
         if (canTemplate && !noTemplate) {

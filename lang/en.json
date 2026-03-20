@@ -1,9 +1,13 @@
 {
   "EFFECT.FIELDS.statuses.label": "Status Effects",
   "EFFECT.TABS.automations": "Automations",
+  "EFFECT.TABS.children": "Children",
   "GAME.Paused": "Hold",
   "TERIOCK": {
     "AUTOMATIONS": {
+      "AddExternalDocumentsAutomation": {
+        "LABEL": "Add External Documents"
+      },
       "BaseAutomation": {
         "FIELDS": {
           "competencies": {
@@ -118,6 +122,21 @@
           }
         },
         "LABEL": "Duration"
+      },
+      "ExternalDocumentsAutomation": {
+        "FIELDS": {
+          "automatic": {
+            "hint": "If checked and this has only one document, it will be selected automatically without additional prompting.",
+            "label": "Automatic"
+          },
+          "documents": {
+            "label": "Documents"
+          },
+          "multi": {
+            "hint": "If checked, multiple documents can be selected to be used at once.",
+            "label": "Multiple Selection"
+          }
+        }
       },
       "HacksAutomation": {
         "FIELDS": {
@@ -326,20 +345,13 @@
       },
       "UseExternalDocumentsAutomation": {
         "FIELDS": {
-          "automatic": {
-            "hint": "If checked and this has only one document, it will be used automatically without additional prompting.",
-            "label": "Automatic"
-          },
           "competence": {
             "hint": "Whether to use documents with proficiency or fluency.",
             "label": "Competence"
           },
-          "documents": {
-            "label": "Documents"
-          },
-          "multi": {
-            "hint": "If checked, multiple documents can be selected to be used at once.",
-            "label": "Multiple Selection"
+          "expandTables": {
+            "hint": "If checked, select from the documents within tables instead of rolling the table itself.",
+            "label": "Expand Tables"
           },
           "noHeighten": {
             "hint": "If checked, abilities this executes cannot be heightened.",
@@ -1848,10 +1860,6 @@
         "hint": "If enabled, vision modes will automatically be changed based on abilities and down state.",
         "name": "Automatically Change Vision Modes"
       },
-      "automaticallyExpireSustainedConsequences": {
-        "hint": "If enabled, sustained consequences will automatically expire if the effect sustaining them is inactive. This may cause unintuitive behavior. For instance, consequences created by inactive abilities may delete themselves as soon as they're created.",
-        "name": "Automatically Expire Sustained Consequences"
-      },
       "automaticallyPayAbilityCosts": {
         "hint": "If enabled, HP, MP, and GP costs of abilities will be paid automatically upon use.",
         "name": "Automatically Pay Ability Costs"
@@ -1871,14 +1879,6 @@
       "damageTypeSources": {
         "hint": "Journals that contain damage types that can be referenced when building damage rolls.",
         "name": "Damage Type Sources"
-      },
-      "openChatDocuments": {
-        "hint": "If enabled, players can open documents that have been shared in chat even without ownership.",
-        "name": "Open Chat Documents"
-      },
-      "openChatImages": {
-        "hint": "If enabled, players can open the images of panels in chat.",
-        "name": "Open Chat Images"
       },
       "defaultConeAngle": {
         "hint": "The default angle in degrees for cones.",
@@ -1925,6 +1925,14 @@
         "hint": "If enabled, effects can apply changes to other items or effects that they are not descended from. For actors with lots of items and effects, this can cause performance issues. Disable to improve performance.",
         "name": "Non-Hierarchical Changes"
       },
+      "openChatDocuments": {
+        "hint": "If enabled, players can open documents that have been shared in chat even without ownership.",
+        "name": "Open Chat Documents"
+      },
+      "openChatImages": {
+        "hint": "If enabled, players can open the images of panels in chat.",
+        "name": "Open Chat Images"
+      },
       "placeTemplateOnAbilityUse": {
         "hint": "If enabled, using abilities with an area of effect will automatically place a measured template.",
         "name": "Place Template on Ability Use"
@@ -1968,6 +1976,10 @@
       "systemTooltips": {
         "hint": "If enabled, links that can be opened within Foundry will display tooltips.",
         "name": "System Tooltips"
+      },
+      "trackSustainedConsequences": {
+        "hint": "If enabled, sustained consequences will be tracked and turned inactive or deleted based on the ability sustaining them.",
+        "name": "Track sustained consequences."
       },
       "twoHandedEquipment": {
         "hint": "If enabled, equipment will be two-handed when used by default.",
@@ -3505,7 +3517,7 @@
           "open": "Open Referenced Document"
         },
         "PANELS": {
-          "formatDynamicSelectOptions(this._triggerChoices),documents": "Documents",
+          "documents": "Documents",
           "resultType": "Result Type",
           "tableResult": "Table Result"
         }

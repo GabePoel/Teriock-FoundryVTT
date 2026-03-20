@@ -1,4 +1,3 @@
-import { quickAddAssociation } from "../../../../helpers/html.mjs";
 import { makeIcon } from "../../../../helpers/utils.mjs";
 import { transformationField } from "../../../fields/helpers/builders.mjs";
 
@@ -91,27 +90,30 @@ export default function TransformationSystemMixin(Base) {
         return suppressed;
       }
 
-      /** @inheritDoc */
-      get panelParts() {
-        const parts = super.panelParts;
-        quickAddAssociation(
-          this.species,
-          "Species",
-          TERIOCK.options.document.species.icon,
-          parts.associations,
-        );
-        return parts;
+      /**
+       * The primary species this transforms the actor into.
+       * @return {TeriockSpecies | null}
+       */
+      get primarySpecies() {
+        return this.isTransformation ? this.parent.species[0] : null;
       }
 
       /**
-       * This species this is transforming an actor into.
-       * @returns {TeriockSpecies[]}
+       * Filter an array of documents to include only the ones that aren't disabled.
+       * @param {AnyChildDocument[]} docs
+       * @return {AnyChildDocument[]}
        */
-      get species() {
-        if (!this.actor || !this.isTransformation) return [];
-        return /** @type {TeriockSpecies[]} */ this.transformation.species
-          .map((id) => this.actor.items.get(id))
-          .filter((s) => s);
+      #enabledFilter(docs) {
+        return docs.filter((d) => !d.disabled);
+      }
+
+      /**
+       * Map an array of documents to their ids.
+       * @param {AnyChildDocument[]} docs
+       * @return {ID<AnyChildDocument>[]}
+       */
+      #toIds(docs) {
+        return docs.map((d) => d.id);
       }
 
       /**
@@ -158,76 +160,60 @@ export default function TransformationSystemMixin(Base) {
         }
       }
 
+      /**
+       * Build the flags relevant for applying and undoing this transformation.
+       * @returns {object}
+       */
       _buildTransformationFlags() {
         const stashedEquipment = [];
-        const disabledEffects = [];
-        const disabledItems = [];
+        let disabledEffects = [];
+        let disabledItems = [];
         const disabledHpDiceItems = [];
         const disabledMpDiceItems = [];
 
         const typeMap = this.actor.children.typeMap;
         if (this.transformation.suppression.equipment) {
           stashedEquipment.push(
-            ...(typeMap.equipment?.filter((e) => !e.system.stashed) || []).map(
-              (e) => e.id,
-            ),
+            ...(typeMap.equipment?.filter((e) => !e.system.stashed) || []),
           );
         }
         if (this.transformation.suppression.fluencies) {
-          disabledEffects.push(
-            ...(typeMap.fluency?.filter((f) => !f.disabled) || []).map(
-              (f) => f.id,
-            ),
-          );
+          disabledEffects.push(...this.#enabledFilter(typeMap.fluency || []));
         }
+        disabledEffects = disabledEffects.filter(
+          (e) => e.dependee !== this.parent,
+        );
+
         if (this.transformation.suppression.bodyParts) {
-          disabledItems.push(
-            ...(typeMap.body?.filter((b) => !b.system.disabled) || []).map(
-              (b) => b.id,
-            ),
-          );
+          disabledItems.push(...this.#enabledFilter(typeMap.body || []));
         }
         if (this.transformation.suppression.ranks) {
-          disabledItems.push(
-            ...(typeMap.rank?.filter((r) => !r.system.disabled) || []).map(
-              (r) => r.id,
-            ),
-          );
+          disabledItems.push(...this.#enabledFilter(typeMap.rank || []));
         }
-        disabledItems.push(
-          ...(
-            typeMap.species?.filter(
-              (s) =>
-                !s.system.disabled &&
-                !this.transformation.species.includes(s.id),
-            ) || []
-          ).map((s) => s.id),
-        );
+        disabledItems.push(...this.#enabledFilter(typeMap.species || []));
+        disabledItems = disabledItems.filter((i) => i.dependee !== this.parent);
+
         const statItems = this.actor.items.contents.filter(
           (i) => i.system.metadata.stats,
         );
         if (this.transformation.resetHp) {
           disabledHpDiceItems.push(
-            ...statItems
-              .filter((i) => !i.system.statDice.hp.disabled)
-              .map((i) => i.id),
+            ...statItems.filter((i) => !i.system.statDice.hp.disabled),
           );
         }
         if (this.transformation.resetMp) {
           disabledMpDiceItems.push(
-            ...statItems
-              .filter((i) => !i.system.statDice.mp.disabled)
-              .map((i) => i.id),
+            ...statItems.filter((i) => !i.system.statDice.mp.disabled),
           );
         }
 
         return {
           teriock: {
-            disabledEffects,
-            disabledHpDiceItems,
-            disabledItems,
-            disabledMpDiceItems,
-            stashedEquipment,
+            disabledEffects: this.#toIds(disabledEffects),
+            disabledHpDiceItems: this.#toIds(disabledHpDiceItems),
+            disabledItems: this.#toIds(disabledItems),
+            disabledMpDiceItems: this.#toIds(disabledMpDiceItems),
+            stashedEquipment: this.#toIds(stashedEquipment),
             preTransformHp: this.actor.system.hp.value,
             preTransformMp: this.actor.system.mp.value,
           },
@@ -265,13 +251,12 @@ export default function TransformationSystemMixin(Base) {
       _onDelete(options, userId) {
         super._onDelete(options, userId);
         if (
-          !this.parent.checkEditor(userId) ||
-          !this.isTransformation ||
-          !this.actor
+          this.parent.checkEditor(userId) &&
+          this.isTransformation &&
+          this.actor
         ) {
-          return;
+          this._removeTransformationUpdates();
         }
-        this._removeTransformationUpdates();
       }
 
       /** @inheritDoc */
@@ -317,19 +302,20 @@ export default function TransformationSystemMixin(Base) {
         const yes = await super._preCreate(data, options, user);
         if (yes === false) return false;
 
-        if (this.isTransformation && this.parent.actor) {
+        if (this.isTransformation && this.actor) {
+          const uuids = this.transformation.uuids;
           const flags = this._buildTransformationFlags();
           this.parent.updateSource({ flags });
-          const uuids = this.transformation.uuids;
           let species = /** @type {TeriockSpecies[]} */ await Promise.all(
             uuids.map((uuid) => fromUuid(uuid)),
           );
           species = species.filter((s) => s);
           if (species) {
-            const speciesData = /** @type {TeriockSpecies[]} */ species.map(
-              (s) => s.toObject(),
+            const itemData = /** @type {TeriockSpecies[]} */ species.map((s) =>
+              s.toObject(),
             );
-            speciesData.forEach((s) => {
+            itemData.forEach((s) => {
+              s.system._dep = this.parent.id;
               s.system.transformationLevel = this.transformation.level;
               if (this.transformation.level !== "greater") {
                 s.system.statDice.mp.disabled = true;
@@ -343,29 +329,8 @@ export default function TransformationSystemMixin(Base) {
                 );
               }
             });
-            const created =
-              /** @type {TeriockSpecies[]} */ await this.parent.actor.createEmbeddedDocuments(
-                "Item",
-                speciesData,
-              );
-            this.parent.updateSource({
-              "system.transformation.species": created.map((s) => s.id),
-            });
+            await this.actor.createEmbeddedDocuments("Item", itemData);
           }
-        }
-      }
-
-      /** @inheritDoc */
-      async _preDelete(options, user) {
-        const yes = await super._preDelete(options, user);
-        if (yes === false) return false;
-
-        if (!this.isTransformation || !this.parent.actor) return;
-        const speciesIds = (this.transformation.species ?? []).filter((id) =>
-          this.parent.actor.species.map((s) => s.id).includes(id),
-        );
-        if (speciesIds.length > 0) {
-          await this.parent.actor.deleteEmbeddedDocuments("Item", speciesIds);
         }
       }
 
@@ -492,17 +457,8 @@ export default function TransformationSystemMixin(Base) {
       prepareBaseData() {
         super.prepareBaseData();
         if (this.isTransformation) {
-          if (
-            !this.transformation.image &&
-            this.parent.actor &&
-            this.transformation.species.length > 0
-          ) {
-            const firstSpecies = this.parent.actor.items.get(
-              this.transformation.species[0],
-            );
-            if (firstSpecies) {
-              this.transformation.image = firstSpecies.img;
-            }
+          if (!this.transformation.image && this.actor && this.primarySpecies) {
+            this.transformation.image = this.primarySpecies.img;
           }
         }
       }

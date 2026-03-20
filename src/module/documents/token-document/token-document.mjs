@@ -277,7 +277,7 @@ export default class TeriockTokenDocument extends mix(
     let angle = 360;
     if (
       this.sight?.enabled &&
-      game.settings.get("teriock", "automaticallyChangeVisionModes")
+      game.teriock.getSetting("automaticallyChangeVisionModes")
     ) {
       if (this.actor?.system.senses.dark > 0) {
         visionMode = "darkvision";
@@ -385,7 +385,7 @@ export default class TeriockTokenDocument extends mix(
     }
     if (
       visionMode !== this.sight.visionMode &&
-      game.settings.get("teriock", "automaticallyChangeVisionModes") &&
+      game.teriock.getSetting("automaticallyChangeVisionModes") &&
       this.id &&
       this.getSetting("autoVisionModes")
     ) {

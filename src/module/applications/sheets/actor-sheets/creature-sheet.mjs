@@ -13,15 +13,8 @@ export default class CreatureSheet extends TeriockPlayableActorSheet {
    */
   static DEFAULT_OPTIONS = {
     classes: ["character"],
-    form: {
-      submitOnChange: true,
-    },
-    position: {
-      width: 800,
-      height: 600,
-    },
-    window: {
-      icon: makeIconClass(documentOptions.creature.icon, "title"),
-    },
+    form: { submitOnChange: true },
+    position: { width: 800, height: 600 },
+    window: { icon: makeIconClass(documentOptions.creature.icon, "title") },
   };
 }

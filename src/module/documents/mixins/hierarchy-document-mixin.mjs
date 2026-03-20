@@ -1,22 +1,19 @@
 //noinspection JSUnusedGlobalSymbols
 
-import {
-  resolveCollection,
-  resolveDocument,
-  resolveDocuments,
-} from "../../helpers/resolve.mjs";
+import { DependentsRegistry } from "../../helpers/_module.mjs";
+import { resolveCollection, resolveDocument } from "../../helpers/resolve.mjs";
 import { TypeCollection } from "../collections/_module.mjs";
 
 const { Collection } = foundry.utils;
 
 /**
  * Document mixin to support hierarchies of the same document type.
- * @param {typeof BaseDocument} Base
+ * @param {typeof CommonDocument} Base
  */
 export default function HierarchyDocumentMixin(Base) {
   return (
     /**
-     * @extends BaseDocument
+     * @extends CommonDocument
      * @mixin
      * @property {HierarchySystem} system
      * @property {(data: Object, context: DocumentConstructionContext & DocumentCloneOptions) =>
@@ -287,18 +284,33 @@ export default function HierarchyDocumentMixin(Base) {
        */
       get childArray() {
         return [
-          ...(this.effects?.contents || []).filter((e) => !e.sup),
-          ...(this.items?.contents || []).filter((i) => !i.sup),
+          ...super.childArray,
           ...(this.subs.contents || []),
+          ...this.dependents,
         ];
       }
 
       /**
-       * Collection containing all children or their indexes.
-       * @returns {TypeCollection}
+       * A document that this depends on.
+       * @return {AnyChildDocument|null}
        */
-      get children() {
-        return new TypeCollection(this.childArray.map((c) => [c._id, c]));
+      get dependee() {
+        if (this.system._dep) {
+          const uuid = DependentsRegistry.resolveDependentID(
+            this.system._dep,
+            this,
+          );
+          if (uuid) return DependentsRegistry.fetchFromUuid(this, uuid);
+        }
+        return null;
+      }
+
+      /**
+       * Array of dependent documents.
+       * @return {AnyChildDocument[]}
+       */
+      get dependents() {
+        return game.teriock.dependentsRegistry.get(this);
       }
 
       /**
@@ -307,6 +319,11 @@ export default function HierarchyDocumentMixin(Base) {
        */
       get elder() {
         return this.sup || this.parent;
+      }
+
+      /** @inheritDoc */
+      get master() {
+        return this.sup || this.dependee || this.parent;
       }
 
       /**
@@ -343,18 +360,20 @@ export default function HierarchyDocumentMixin(Base) {
       }
 
       /**
-       * Array containing all visible children.
-       * @returns {ChildDocument[]}
+       * Render the sheet of the dependee.
        */
-      get visibleChildren() {
-        return this.childArray
-          .filter((c) => !c.isEphemeral)
-          .filter(
-            (c) =>
-              c.documentName !== "ActiveEffect" ||
-              c.system.revealed ||
-              game.user.isGM,
-          );
+      #renderDependeeSheet() {
+        if (this.dependee?.isViewer) {
+          this.dependee?.sheet.render({ force: false });
+        }
+      }
+
+      /**
+       * Render sheets of documents which have control over this.
+       */
+      #renderSheets() {
+        this.#renderSupSheets();
+        this.#renderDependeeSheet();
       }
 
       /**
@@ -380,19 +399,25 @@ export default function HierarchyDocumentMixin(Base) {
       /** @inheritDoc */
       _onCreate(data, options, userId) {
         super._onCreate(data, options, userId);
-        this.#renderSupSheets();
+        this.#renderSheets();
       }
 
       /** @inheritDoc */
       _onDelete(options, userId) {
         super._onDelete(options, userId);
-        this.#renderSupSheets();
+        if (game.user.isActiveGM) {
+          this.dependents.forEach((d) => d.delete());
+        }
+        if (this.system._dep && this.uuid) {
+          game.teriock.dependentsRegistry.untrack(this.system._dep, this);
+        }
+        this.#renderSheets();
       }
 
       /** @inheritDoc */
       _onUpdate(data, options, userId) {
         super._onUpdate(data, options, userId);
-        this.#renderSupSheets();
+        this.#renderSheets();
       }
 
       /** @inheritDoc */
@@ -406,26 +431,41 @@ export default function HierarchyDocumentMixin(Base) {
         }
       }
 
-      /**
-       * Create multiple child Document instances descendant from a Document using provided input data.
-       * @param {ChildDocumentName} embeddedName
-       * @param {object[]} data
-       * @param {Partial<DatabaseCreateOperation & Teriock.System._CreateOperation>} operation
-       * @returns {Promise<CommonDocument[]>}
-       */
+      /** @inheritDoc */
       async createChildDocuments(embeddedName, data = [], operation = {}) {
         if (embeddedName === this.documentName) {
           return await this.createSubDocuments(data, operation);
         } else {
-          return this.createEmbeddedDocuments(embeddedName, data, operation);
+          return super.createChildDocuments(embeddedName, data, operation);
         }
+      }
+
+      /**
+       * Create multiple dependent Document instances in this document's actor using provided input data. All
+       * created documents will be dependent on this one. The operation fails silently if this does not have an actor.
+       * @param {ChildDocumentName} embeddedName
+       * @param {object[]} data
+       * @param {Partial<DatabaseCreateOperation>} operation
+       * @return {Promise<AnyChildDocument[]>}
+       */
+      async createDependentDocuments(embeddedName, data = [], operation = {}) {
+        if (!this.actor) return [];
+        data = foundry.utils.deepClone(data);
+        for (const doc of data) {
+          foundry.utils.setProperty(doc, "system._dep", this.id);
+        }
+        return this.actor.createEmbeddedDocuments(
+          embeddedName,
+          data,
+          operation,
+        );
       }
 
       /**
        * Create multiple sub Document instances in a sup Document's collection using provided input data.
        * @param {object[]} data
        * @param {Partial<DatabaseCreateOperation & Teriock.System._CreateOperation>} operation
-       * @returns {Promise<CommonDocument[]>}
+       * @returns {Promise<AnyChildDocument[]>}
        */
       async createSubDocuments(data = [], operation = {}) {
         data = foundry.utils.deepClone(data);
@@ -449,26 +489,20 @@ export default function HierarchyDocumentMixin(Base) {
         }
       }
 
-      /**
-       * Delete multiple child Document instances descendant from a Document using provided string ids.
-       * @param {ChildDocumentName} embeddedName
-       * @param {ID<CommonDocument>[]} ids
-       * @param {DatabaseDeleteOperation} operation
-       * @returns {Promise<CommonDocument[]>}
-       */
+      /** @inheritDoc */
       async deleteChildDocuments(embeddedName, ids = [], operation = {}) {
         if (embeddedName === this.documentName) {
           return await this.deleteSubDocuments(ids, operation);
         } else {
-          return this.deleteEmbeddedDocuments(embeddedName, ids, operation);
+          return super.deleteChildDocuments(embeddedName, ids, operation);
         }
       }
 
       /**
        * Delete multiple sub Document instances in a sup Document's collection using provided string ids.
-       * @param {ID<CommonDocument>[]} ids
+       * @param {ID<AnyCommonDocument>[]} ids
        * @param {DatabaseDeleteOperation} operation
-       * @returns {Promise<CommonDocument[]>}
+       * @returns {Promise<AnyCommonDocument[]>}
        */
       async deleteSubDocuments(ids = [], operation = {}) {
         ids = ids.filter((id) => this.subs.map((s) => s.id).includes(id));
@@ -505,23 +539,6 @@ export default function HierarchyDocumentMixin(Base) {
       }
 
       /**
-       * Resolved array containing all children.
-       * @returns {Promise<CommonDocument[]>}
-       */
-      async getChildArray() {
-        return resolveDocuments(this.childArray);
-      }
-
-      /**
-       * Resolved collection containing all children.
-       * @returns {Promise<TypeCollection>}
-       */
-      async getChildren() {
-        const children = await resolveDocuments(this.childArray);
-        return new TypeCollection(children.map((c) => [c._id, c]));
-      }
-
-      /**
        * The document that provides this document.
        * @returns {Promise<AnyCommonDocument|void>}
        */
@@ -545,12 +562,12 @@ export default function HierarchyDocumentMixin(Base) {
         return await resolveDocument(this.sup);
       }
 
-      /**
-       * Resolved visible children.
-       * @returns {Promise<AnyCommonDocument[]>}
-       */
-      async getVisibleChildren() {
-        return resolveDocuments(this.visibleChildren);
+      /** @inheritDoc */
+      prepareData() {
+        super.prepareData();
+        if (this.system._dep && this.uuid) {
+          game.teriock.dependentsRegistry.track(this.system._dep, this);
+        }
       }
 
       /** @inheritDoc */
@@ -573,7 +590,7 @@ export default function HierarchyDocumentMixin(Base) {
         if (embeddedName === this.documentName) {
           return await this.updateSubDocuments(updates, operation);
         } else {
-          return this.updateEmbeddedDocuments(embeddedName, updates, operation);
+          return super.updateChildDocuments(embeddedName, updates, operation);
         }
       }
 

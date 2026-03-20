@@ -31,7 +31,6 @@ import * as parts from "./parts/_module.mjs";
  * @mixes AbilityUpgradesPart
  * @mixes AdjustableSystem
  * @mixes ConsumableSystem
- * @mixes HierarchySystem
  * @mixes AttackSystem
  * @mixes CompetenceDisplaySystem
  * @mixes RevelationSystem
@@ -43,7 +42,6 @@ export default class AbilitySystem extends mix(
   shared.ThresholdDataMixin,
   mixins.AttackSystemMixin,
   mixins.ConsumableSystemMixin,
-  mixins.HierarchySystemMixin,
   mixins.CompetenceDisplaySystemMixin,
   mixins.RevelationSystemMixin,
   mixins.WikiSystemMixin,
@@ -73,6 +71,7 @@ export default class AbilitySystem extends mix(
     return [
       ...super._automationTypes,
       automations.AbilityMacroAutomation,
+      automations.AddExternalDocumentsAutomation,
       automations.ChangesAutomation,
       automations.CheckAutomation,
       automations.CombatExpirationAutomation,
@@ -410,26 +409,6 @@ export default class AbilitySystem extends mix(
     return super.useText;
   }
 
-  /** @inheritDoc */
-  _onUpdate(changed, options, userId) {
-    super._onUpdate(changed, options, userId);
-    if (this.parent.checkEditor(userId)) {
-      if (
-        game.settings.get("teriock", "automaticallyExpireSustainedConsequences")
-      ) {
-        this.expireSustainedConsequences();
-      }
-    }
-  }
-
-  /** @inheritDoc */
-  async _preDelete(options, user) {
-    const yes = await super._preDelete(options, user);
-    if (yes === false) return false;
-
-    await this.expireSustainedConsequences(true);
-  }
-
   /**
    * @inheritDoc
    * @param {Teriock.Execution.AbilityExecutionOptions} options
@@ -440,28 +419,6 @@ export default class AbilitySystem extends mix(
       options.armament = /** @type {TeriockArmament} */ this.parent.parent;
     }
     await new AbilityExecution(options).execute();
-  }
-
-  /**
-   * Cause all consequences this is sustaining to expire.
-   * @param {boolean} force - Force consequences to expire even if this isn't suppressed.
-   */
-  async expireSustainedConsequences(force = false) {
-    if (force || !this.parent.active) {
-      for (const uuid of this.sustaining) {
-        await game.users.queryGM(
-          "teriock.sustainedExpiration",
-          {
-            sustainedUuid: uuid,
-          },
-          {
-            failPrefix: "TERIOCK.SYSTEMS.Ability.QUERY.sustainedExpirationFail",
-            localize: true,
-          },
-        );
-      }
-      await this.parent.update({ "system.sustaining": [] });
-    }
   }
 
   /** @inheritDoc */

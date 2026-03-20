@@ -1,3 +1,4 @@
+import { TeriockItem } from "../../../../../../documents/_module.mjs";
 import { copyItem } from "../../../../../../helpers/fetch.mjs";
 import { getImage } from "../../../../../../helpers/path.mjs";
 import { toTitleCase } from "../../../../../../helpers/string.mjs";
@@ -84,7 +85,7 @@ export default (Base) => {
                 keepEmbeddedIds: true,
               });
             } else {
-              game.teriock.Item.create(data, { keepEmbeddedIds: true });
+              TeriockItem.create(data, { keepEmbeddedIds: true });
             }
           },
           condition: this.parent.parent?.isOwner && this.spell,

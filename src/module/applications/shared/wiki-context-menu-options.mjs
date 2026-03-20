@@ -12,7 +12,7 @@ const wikiContextMenuOptions = [
         window.open(address, "_blank", "noopener,noreferrer");
       }
     },
-    condition: () => game.settings.get("teriock", "systemLinks"),
+    condition: () => game.teriock.getSetting("systemLinks"),
   },
   {
     name: "TERIOCK.SYSTEMS.Common.MENU.viewInFoundry",
@@ -32,7 +32,7 @@ const wikiContextMenuOptions = [
         }
       }
     },
-    condition: () => !game.settings.get("teriock", "systemLinks"),
+    condition: () => !game.teriock.getSetting("systemLinks"),
   },
   {
     name: "TERIOCK.COMMANDS.Status.toggleUnnamed",

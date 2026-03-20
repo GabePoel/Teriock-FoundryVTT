@@ -1,10 +1,11 @@
+import { mix } from "../../helpers/utils.mjs";
 import { TeriockChatMessage } from "../_module.mjs";
+import { HierarchyDocumentMixin } from "./_module.mjs";
 import UsableDocumentMixin from "./usable-document-mixin.mjs";
 
 /**
  * Mixin for common functions used across document classes embedded in actorsUuids.
  * @param {typeof CommonDocument} Base
- * @mixin
  */
 export default function ChildDocumentMixin(Base) {
   //noinspection JSClosureCompilerSyntax
@@ -12,10 +13,16 @@ export default function ChildDocumentMixin(Base) {
     /**
      * @extends {ClientDocument}
      * @mixes CommonDocument
+     * @mixes HierarchyDocument
      * @mixes PanelDocument
+     * @mixes UsableDocument
      * @mixin
      */
-    class ChildDocument extends UsableDocumentMixin(Base) {
+    class ChildDocument extends mix(
+      Base,
+      UsableDocumentMixin,
+      HierarchyDocumentMixin,
+    ) {
       /** @inheritDoc */
       static get documentMetadata() {
         return Object.assign(super.documentMetadata, {
@@ -29,6 +36,18 @@ export default function ChildDocumentMixin(Base) {
        */
       get isEphemeral() {
         return this.system.makeEphemeral;
+      }
+
+      /**
+       * Checks if the document is suppressed.
+       * @returns {boolean}
+       */
+      get isSuppressed() {
+        return (
+          super.isSuppressed ||
+          this.system.makeSuppressed ||
+          this.dependee?.active === false
+        );
       }
 
       /** @inheritDoc */

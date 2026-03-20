@@ -2,12 +2,11 @@ const { fields } = foundry.data;
 
 /**
  * Data mixin to support hierarchies of the same document type.
- * @param {typeof ChildSystem} Base
+ * @param {typeof CommonSystem} Base
  */
 export default function HierarchySystemMixin(Base) {
   return (
     /**
-     * @extends {ChildSystem}
      * @extends {Teriock.Models.HierarchySystemData}
      * @mixin
      */
@@ -22,11 +21,15 @@ export default function HierarchySystemMixin(Base) {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          _sup: new fields.DocumentIdField({
+          _dep: new fields.StringField({
             nullable: true,
             required: false,
           }),
           _ref: new fields.DocumentUUIDField({
+            nullable: true,
+            required: false,
+          }),
+          _sup: new fields.DocumentIdField({
             nullable: true,
             required: false,
           }),

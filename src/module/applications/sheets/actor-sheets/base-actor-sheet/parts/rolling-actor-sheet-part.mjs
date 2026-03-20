@@ -32,7 +32,7 @@ export default (Base) =>
       await this.#onRollFeatSave(
         event,
         target,
-        game.settings.get("teriock", "showRollDialogs"),
+        game.teriock.getSetting("showRollDialogs"),
       );
     }
 
@@ -47,7 +47,7 @@ export default (Base) =>
       await this.#onRollHexproof(
         event,
         target,
-        game.settings.get("teriock", "showRollDialogs"),
+        game.teriock.getSetting("showRollDialogs"),
       );
     }
 
@@ -84,7 +84,7 @@ export default (Base) =>
       await this.#onRollResistance(
         event,
         target,
-        game.settings.get("teriock", "showRollDialogs"),
+        game.teriock.getSetting("showRollDialogs"),
       );
     }
 
@@ -143,7 +143,7 @@ export default (Base) =>
             await this.#onRollFeatSave(
               ev,
               el,
-              !game.settings.get("teriock", "showRollDialogs"),
+              !game.teriock.getSetting("showRollDialogs"),
             );
           });
         });
@@ -154,7 +154,7 @@ export default (Base) =>
             await this.#onRollResistance(
               ev,
               el,
-              !game.settings.get("teriock", "showRollDialogs"),
+              !game.teriock.getSetting("showRollDialogs"),
             );
           });
         });
@@ -165,7 +165,7 @@ export default (Base) =>
             await this.#onRollHexproof(
               ev,
               el,
-              !game.settings.get("teriock", "showRollDialogs"),
+              !game.teriock.getSetting("showRollDialogs"),
             );
           });
         });

@@ -7,7 +7,7 @@ import { thresholdCommand } from "./abstract-command.mjs";
  * @returns {Promise<void>}
  */
 async function primary(actor, options = {}) {
-  options.showDialog = game.settings.get("teriock", "showRollDialogs");
+  options.showDialog = game.teriock.getSetting("showRollDialogs");
   await actor.system.rollResistance(options);
 }
 
@@ -17,7 +17,7 @@ async function primary(actor, options = {}) {
  * @returns {Promise<void>}
  */
 async function secondary(actor, options = {}) {
-  options.showDialog = !game.settings.get("teriock", "showRollDialogs");
+  options.showDialog = !game.teriock.getSetting("showRollDialogs");
   await actor.system.rollResistance(options);
 }
 

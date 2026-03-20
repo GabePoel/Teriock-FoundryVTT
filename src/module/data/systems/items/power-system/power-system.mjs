@@ -1,4 +1,4 @@
-import { toCamelCase } from "../../../../helpers/string.mjs";
+import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
@@ -70,7 +70,7 @@ export default class PowerSystem extends mix(
   /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
-    parts.text = TERIOCK.options.power[this.type].name;
+    parts.text = dotJoin([TERIOCK.options.power[this.type].name, parts.text]);
     parts.subtitle = game.i18n.localize("TYPES.Item.power");
     return parts;
   }
@@ -79,7 +79,7 @@ export default class PowerSystem extends mix(
   get makeSuppressed() {
     let suppressed = super.makeSuppressed;
     if (
-      game.settings.get("teriock", "armorSuppressesRanks") &&
+      game.teriock.getSetting("armorSuppressesRanks") &&
       this.actor &&
       !this.innate &&
       this.actor.system.defense.av.base > this.maxAv
@@ -134,7 +134,7 @@ export default class PowerSystem extends mix(
   prepareBaseData() {
     super.prepareBaseData();
     if (
-      game.settings.get("teriock", "armorWeakensRanks") &&
+      game.teriock.getSetting("armorWeakensRanks") &&
       this.actor &&
       this.actor.system.defense.av.base > this.maxAv
     ) {

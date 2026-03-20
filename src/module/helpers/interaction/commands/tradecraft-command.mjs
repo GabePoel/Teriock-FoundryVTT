@@ -11,7 +11,7 @@ Object.values(tradecraftOptions).forEach((fieldOption) => {
  * @param {Teriock.Interaction.TradecraftOptions} options
  */
 async function primary(actor, options = {}) {
-  options.showDialog = game.settings.get("teriock", "showRollDialogs");
+  options.showDialog = game.teriock.getSetting("showRollDialogs");
   const tradecraft = options.tradecraft || "artist";
   await actor.system.rollTradecraft(tradecraft, options);
 }
@@ -21,7 +21,7 @@ async function primary(actor, options = {}) {
  * @param {Teriock.Interaction.TradecraftOptions} options
  */
 async function secondary(actor, options = {}) {
-  options.showDialog = !game.settings.get("teriock", "showRollDialogs");
+  options.showDialog = !game.teriock.getSetting("showRollDialogs");
   const tradecraft = options.tradecraft || "artist";
   await actor.system.rollTradecraft(tradecraft, options);
 }

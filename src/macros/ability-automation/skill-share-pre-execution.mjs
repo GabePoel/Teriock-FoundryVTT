@@ -10,7 +10,7 @@ const buttons = scope.execution.buttons.filter(
 );
 const button = buttons.find((b) => b.dataset.action === "apply-effect");
 if (button) {
-  button.dataset.bonusSubs = JSON.stringify([ability.uuid]);
+  button.dataset.children = JSON.stringify([ability.uuid]);
 }
 scope.execution.buttons = buttons;
 scope.execution.proficient = false;

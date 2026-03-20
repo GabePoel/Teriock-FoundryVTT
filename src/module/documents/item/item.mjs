@@ -115,29 +115,11 @@ export default class TeriockItem extends mix(
   }
 
   /**
-   * Checks if the item is suppressed.
-   * @returns {boolean} True if the item is suppressed, false otherwise.
-   */
-  get isSuppressed() {
-    return this.system.makeSuppressed;
-  }
-
-  /**
    * @inheritDoc
    * @returns {AnyActiveEffect[]}
    */
   get validEffects() {
     return this.effects.contents;
-  }
-
-  /** @inheritDoc */
-  _onUpdate(changed, options, userId) {
-    super._onUpdate(changed, options, userId);
-    if (this.checkEditor(userId)) {
-      for (const a of this.abilities) {
-        a.system?.expireSustainedConsequences();
-      }
-    }
   }
 
   /** @inheritDoc */

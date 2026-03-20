@@ -172,6 +172,7 @@ export default class SpeciesSystem extends mix(
             value: this.size.value,
           })
         : "",
+      parts.text,
     ]);
     parts.subtitle = game.i18n.localize("TYPES.Item.species");
     return parts;
@@ -221,15 +222,7 @@ export default class SpeciesSystem extends mix(
    */
   get transformationEffect() {
     if (!this.actor) return null;
-    const transformations = this.actor.transformations;
-    for (const transformation of transformations) {
-      if (
-        transformation.system.transformation.species.includes(this.parent.id)
-      ) {
-        return transformation;
-      }
-    }
-    return null;
+    return this.parent.dependee ?? null;
   }
 
   /** @inheritDoc */
@@ -301,9 +294,7 @@ export default class SpeciesSystem extends mix(
   /** @inheritDoc */
   getRollData() {
     const rollData = super.getRollData();
-    if (!this.actor) {
-      rollData.size = this.size.enabled ? this.size.value : 0;
-    }
+    if (!this.actor) rollData.size = this.size.enabled ? this.size.value : 0;
     return rollData;
   }
 
@@ -321,10 +312,7 @@ export default class SpeciesSystem extends mix(
    * @returns {Promise<void>}
    */
   async setPrimaryTransformation() {
-    const transformationEffect = this.transformationEffect;
-    if (transformationEffect) {
-      await transformationEffect.system.setPrimaryTransformation();
-    }
+    await this.transformationEffect?.system.setPrimaryTransformation();
   }
 
   /**

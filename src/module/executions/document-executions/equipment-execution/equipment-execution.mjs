@@ -12,8 +12,8 @@ export default class EquipmentExecution extends ArmamentExecution {
   constructor(options = {}) {
     super(options);
     const {
-      secret = game.settings.get("teriock", "secretEquipment"),
-      twoHanded = game.settings.get("teriock", "twoHandedEquipment"),
+      secret = game.teriock.getSetting("secretEquipment"),
+      twoHanded = game.teriock.getSetting("twoHandedEquipment"),
     } = options;
     if (options.formula === undefined && options.twoHanded) {
       this.formula = this.source.system.damage.twoHanded.formula;

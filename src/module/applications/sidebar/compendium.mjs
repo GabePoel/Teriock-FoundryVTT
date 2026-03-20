@@ -23,7 +23,7 @@ export default class TeriockCompendium extends Compendium {
         }
       }
     }
-    if (game.settings.get("teriock", "compendiumTooltips")) {
+    if (game.teriock.getSetting("compendiumTooltips")) {
       bindCommonActions(this.element);
     }
   }

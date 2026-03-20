@@ -210,7 +210,7 @@ export default function ArmamentSystemMixin(Base) {
       async _use(
         options = /** @type {Teriock.Execution.ArmamentExecutionOptions} */ {},
       ) {
-        if (game.settings.get("teriock", "rollAttackOnArmamentUse")) {
+        if (game.teriock.getSetting("rollAttackOnArmamentUse")) {
           await this.actor?.useAbility("Basic Attack");
         }
         options.source = /** @type {TeriockArmament} */ this.parent;

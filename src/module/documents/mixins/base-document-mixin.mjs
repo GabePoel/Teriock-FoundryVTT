@@ -1,5 +1,6 @@
 import { TeriockDialog } from "../../applications/api/_module.mjs";
 import { icons } from "../../constants/display/icons.mjs";
+import { resolveDocument } from "../../helpers/resolve.mjs";
 import { toId } from "../../helpers/string.mjs";
 import { makeIcon, makeIconClass } from "../../helpers/utils.mjs";
 
@@ -56,6 +57,14 @@ export default function BaseDocumentMixin(Base) {
        */
       get isViewer() {
         return this.permission >= 2;
+      }
+
+      /**
+       * That document that has the most control over this one.
+       * @return {SyncDoc<CommonDocument>}
+       */
+      get master() {
+        return this.parent;
       }
 
       /**
@@ -123,9 +132,12 @@ export default function BaseDocumentMixin(Base) {
                 TERIOCK.display.icons.ui.openWindow,
                 "contextMenu",
               ),
-              callback: async () => await this.elder.sheet.render(true),
+              callback: async () => {
+                const resolved = await resolveDocument(this.master);
+                await resolved?.sheet?.render(true);
+              },
               condition: () =>
-                this.elder?.isViewer && doc?.uuid !== this.elder?.uuid,
+                this.master?.isViewer && doc?.uuid !== this.master?.uuid,
               group: "open",
             },
             {
@@ -134,7 +146,7 @@ export default function BaseDocumentMixin(Base) {
               callback: async () => await this.safeDelete(),
               condition: () =>
                 this.isOwner &&
-                this.checkAncestor(doc) &&
+                (this.checkAncestor(doc) || this.master === doc) &&
                 doc?.sheet.isEditable,
               group: "document",
             },

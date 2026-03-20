@@ -29,8 +29,6 @@ declare global {
       standard: boolean;
       /** <schema> If this ability is sustained */
       sustained: boolean;
-      /** <schema> What consequences this ability is currently sustaining */
-      sustaining: Set<UUID<TeriockConsequence>>;
       /** <schema> If this ability is automatically warded */
       warded: boolean;
     };

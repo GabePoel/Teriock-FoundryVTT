@@ -50,8 +50,8 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
   /** @inheritDoc */
   get rollData() {
     return Object.assign(super.rollData, {
-      "angle.normal": game.settings.get("teriock", "defaultConeAngle"),
-      "angle.dragon": game.settings.get("teriock", "defaultDragonBreathAngle"),
+      "angle.normal": game.teriock.getSetting("defaultConeAngle"),
+      "angle.dragon": game.teriock.getSetting("defaultDragonBreathAngle"),
     });
   }
 

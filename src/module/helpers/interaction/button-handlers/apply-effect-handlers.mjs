@@ -1,5 +1,5 @@
 import { icons } from "../../../constants/display/icons.mjs";
-import { pureUuid, safeUuid } from "../../resolve.mjs";
+import { resolveDocuments } from "../../resolve.mjs";
 import { makeIconClass } from "../../utils.mjs";
 import BaseButtonHandler from "./base-button-handler.mjs";
 
@@ -12,47 +12,28 @@ export class ApplyEffectHandler extends BaseButtonHandler {
 
   /**
    * @inheritDoc
-   * @param {object} primaryData
+   * @param {object} normalData
    * @param {object} [options]
-   * @param {object} [options.secondaryData]
-   * @param {TeriockAbility} [options.sustainingAbility]
-   * @param {Set<UUID<ChildDocument>>} [options.bonusSubs]
+   * @param {object} [options.critData]
+   * @param {UUID<ChildDocument>[]} [options.normalChildren]
+   * @param {UUID<ChildDocument>[]} [options.critChildren]
    */
-  static buildButton(primaryData, options = {}) {
-    const { secondaryData, sustainingAbility, bonusSubs = new Set() } = options;
+  static buildButton(normalData, options = {}) {
+    const { critData, normalChildren = [], critChildren = [] } = options;
     const button = super.buildButton();
     button.icon = makeIconClass(icons.ui.apply, "button");
     button.label = game.i18n.localize("TERIOCK.COMMANDS.ApplyEffect.label");
-    const primaryJSON = JSON.stringify(primaryData);
-    const secondaryJSON = JSON.stringify(secondaryData);
+    const primaryJSON = JSON.stringify(normalData);
+    const secondaryJSON = JSON.stringify(critData);
     button.dataset.normal = primaryJSON || secondaryJSON;
     button.dataset.crit = secondaryJSON || primaryJSON;
-    button.dataset.sustaining = sustainingAbility?.system?.sustained
-      ? safeUuid(sustainingAbility.uuid)
-      : "null";
-    button.dataset.bonusSubs = JSON.stringify([...bonusSubs]);
+    button.dataset.normalChildren = JSON.stringify(
+      Array.from(new Set(normalChildren)),
+    );
+    button.dataset.critChildren = JSON.stringify(
+      Array.from(new Set(critChildren)),
+    );
     return button;
-  }
-
-  /**
-   * Add each {@link TeriockConsequence} to the sustaining {@link TeriockAbility}.
-   * @param {TeriockConsequence[]} createdConsequences
-   * @returns {Promise<void>}
-   */
-  async _addToSustaining(createdConsequences) {
-    if (this.dataset.sustaining !== "null") {
-      await game.users.queryGM(
-        "teriock.addToSustaining",
-        {
-          sustainingUuid: pureUuid(this.dataset.sustaining),
-          sustainedUuids: createdConsequences.map((c) => c.uuid),
-        },
-        {
-          failPrefix: "TERIOCK.COMMANDS.ApplyEffect.cantSustain",
-          localize: true,
-        },
-      );
-    }
   }
 
   /**
@@ -74,16 +55,12 @@ export class ApplyEffectHandler extends BaseButtonHandler {
   /** @inheritDoc */
   async primaryAction() {
     let effectObj = this._toObj(this.dataset.normal);
+    let childrenUuids = this._toObj(this.dataset.normalChildren);
     if (this.event.altKey) {
       effectObj = this._toObj(this.dataset.crit);
+      childrenUuids = this._toObj(this.dataset.critChildren);
     }
     effectObj._id = foundry.utils.randomID();
-    const bonusSubUuids = this._toObj(this.dataset.bonusSubs);
-    const bonusSubs = /** @type {ChildDocument[]} */ await Promise.all(
-      bonusSubUuids.map((uuid) => fromUuid(uuid)),
-    );
-
-    /** @type {TeriockConsequence[]} */
     const createdConsequences = [];
     for (const actor of this.actors) {
       const newConsequences = await actor.createEmbeddedDocuments(
@@ -93,22 +70,38 @@ export class ApplyEffectHandler extends BaseButtonHandler {
       );
       createdConsequences.push(...newConsequences);
     }
-    await Promise.all(
-      createdConsequences.map((c) => {
-        return c.createChildDocuments(
-          "ActiveEffect",
-          bonusSubs.map((s) => s.toObject()),
-        );
-      }),
-    );
-
+    if (childrenUuids && childrenUuids.length > 0) {
+      const children = await resolveDocuments(childrenUuids);
+      /** @type {TeriockConsequence[]} */
+      const items = children.filter((s) => s.documentName === "Item");
+      const effects = children.filter((s) => s.documentName === "ActiveEffect");
+      const creationPromises = [];
+      for (const c of createdConsequences) {
+        if (items.length > 0) {
+          creationPromises.push(
+            c.createChildDocuments(
+              "Item",
+              items.map((i) => i.toObject()),
+            ),
+          );
+        }
+        if (effects.length > 0) {
+          creationPromises.push(
+            c.createChildDocuments(
+              "ActiveEffect",
+              effects.map((e) => e.toObject()),
+            ),
+          );
+        }
+      }
+      await Promise.all(creationPromises);
+    }
     ui.notifications.info("TERIOCK.COMMANDS.ApplyEffect.applied", {
       format: {
         name: effectObj.name,
       },
       localize: true,
     });
-    await this._addToSustaining(createdConsequences);
   }
 
   /** @inheritDoc */
@@ -117,8 +110,6 @@ export class ApplyEffectHandler extends BaseButtonHandler {
     if (this.event.altKey) {
       effectObj = this._toObj(this.dataset.crit);
     }
-    /** @type {TeriockConsequence[]} */
-    const createdConsequences = [];
     for (const actor of this.actors) {
       const foundEffects = actor.effects.filter(
         (effect) => effect.name === effectObj.name,
@@ -144,6 +135,5 @@ export class ApplyEffectHandler extends BaseButtonHandler {
         });
       }
     }
-    await this._addToSustaining(createdConsequences);
   }
 }

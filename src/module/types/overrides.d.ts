@@ -18,6 +18,7 @@ import {
   TeriockUsers,
 } from "../documents/collections/_module.mjs";
 import { TeriockTooltipManager } from "../helpers/interaction/_module.mjs";
+import { TeriockManager } from "../helpers/_module.mjs";
 
 declare global {
   // Definition for writing macros.
@@ -38,6 +39,7 @@ declare global {
     tooltip: TeriockTooltipManager;
     user: TeriockUser;
     users: TeriockUsers;
+    teriock: TeriockManager;
   };
   const ui: {
     activeWindow: TeriockDocumentSheet;

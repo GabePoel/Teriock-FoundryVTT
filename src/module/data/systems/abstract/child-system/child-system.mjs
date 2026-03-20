@@ -1,8 +1,9 @@
 import { ucFirst } from "../../../../helpers/string.mjs";
-import { makeIcon } from "../../../../helpers/utils.mjs";
+import { makeIcon, mix } from "../../../../helpers/utils.mjs";
 import { EvaluationField, TextField } from "../../../fields/_module.mjs";
 import { ChildSettingsModel } from "../../../models/settings-models/_module.mjs";
 import { UsableDataMixin } from "../../../shared/mixins/_module.mjs";
+import { HierarchySystemMixin } from "../../mixins/_module.mjs";
 import CommonSystem from "../common-system/common-system.mjs";
 
 const { fields } = foundry.data;
@@ -14,8 +15,13 @@ const { ImagePopout } = foundry.applications.apps;
  * @extends {BaseSystem}
  * @extends {Teriock.Models.ChildSystemData}
  * @mixes UsableData
+ * @mixes HierarchySystem
  */
-export default class ChildSystem extends UsableDataMixin(CommonSystem) {
+export default class ChildSystem extends mix(
+  CommonSystem,
+  UsableDataMixin,
+  HierarchySystemMixin,
+) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = super.LOCALIZATION_PREFIXES.concat(
     "TERIOCK.SYSTEMS.Child",
@@ -87,14 +93,14 @@ export default class ChildSystem extends UsableDataMixin(CommonSystem) {
           await this.use({
             event,
             actor: relative?.actor,
-            showDialog: game.settings.get("teriock", "showRollDialogs"),
+            showDialog: game.teriock.getSetting("showRollDialogs"),
           });
         },
         secondary: async (event, relative) => {
           await this.use({
             event,
             actor: relative?.actor,
-            showDialog: !game.settings.get("teriock", "showRollDialogs"),
+            showDialog: !game.teriock.getSetting("showRollDialogs"),
           });
         },
       },
@@ -136,7 +142,7 @@ export default class ChildSystem extends UsableDataMixin(CommonSystem) {
     parts.action = "useDoc";
     parts.struck = this.parent.disabled;
     parts.usable = true;
-    parts.text = this.parent.elder?.documentName === "Actor" ? "" : parts.text;
+    parts.text = this.parent.master?.documentName === "Actor" ? "" : parts.text;
     return parts;
   }
 

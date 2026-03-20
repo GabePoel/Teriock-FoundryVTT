@@ -17,7 +17,7 @@ export default class DetectionModeEthereal extends DetectionModeLightPerception 
     //noinspection JSUnresolvedReference
     if (
       !game.modules.get("tokenmagic")?.active ||
-      !game.settings.get("teriock", "automaticTokenMagicConditionEffects")
+      !game.teriock.getSetting("automaticTokenMagicConditionEffects")
     ) {
       //noinspection JSValidateTypes
       return (this._detectionFilter ??= EtherealFilter.create({

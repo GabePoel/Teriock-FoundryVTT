@@ -104,40 +104,15 @@ export default function CommonSheetMixin(Base) {
       async _onRender(context, options) {
         await super._onRender(context, options);
         this._connect("[data-debug]", "contextmenu", () => {
-          if (game.settings.get("teriock", "developerMode")) {
+          if (game.teriock.getSetting("developerMode")) {
             console.log("Debug", this.document, this);
           }
         });
-        this.element.querySelectorAll(".teriock-block[data-uuid]").forEach(
-          /** @param {HTMLElement} el */ (el) => {
-            const uuid = el.dataset.uuid;
-            fromUuid(uuid).then((doc) => doc?.onEmbed(el));
-          },
-        );
       }
 
       /** @inheritDoc */
       async _prepareContext(options = {}) {
         const context = await super._prepareContext(options);
-        let children = await this.document.getVisibleChildren();
-        children = children.filter((c) => {
-          if (foundry.utils.hasProperty(c, "system.revealed")) {
-            return (
-              foundry.utils.getProperty(c, "system.revealed") || game.user.isGM
-            );
-          } else {
-            return true;
-          }
-        });
-        for (const [type, options] of Object.entries(
-          TERIOCK.options.document,
-        )) {
-          if (options.getter) {
-            context[options["getter"]] = TERIOCK.options.document[type].sorter(
-              children.filter((c) => c.type === type),
-            );
-          }
-        }
         Object.assign(context, {
           enriched: {},
           hasMenu: true,

@@ -9,7 +9,6 @@ import {
   FormulaField,
   TextField,
 } from "../_module.mjs";
-import { arrayTypeValidator, typeValidator } from "./validators.mjs";
 
 const {
   ArrayField,
@@ -47,20 +46,12 @@ export function combatExpirationSourceTypeField() {
  * Field for a transformation.
  * @param {object} [options]
  * @param {boolean} [options.implementation] - Make this into an implementation.
- * @param {boolean} [options.configuration] - Make this into a configuration.
  * @param {boolean} [options.alwaysEnabled] - Do not include an enabled key.
  * @returns {SchemaField}
  */
 export function transformationField(options = {}) {
-  const { implementation = false, configuration = false } = options;
+  const { implementation = false } = options;
   const schema = {
-    enabled: new BooleanField({
-      hint: "TERIOCK.SCHEMA.Transformation.enabled.hint",
-      initial: false,
-      label: "TERIOCK.SCHEMA.Transformation.enabled.label",
-      nullable: false,
-      required: false,
-    }),
     image: new FilePathField({
       categories: ["IMAGE"],
       hint: "TERIOCK.SCHEMA.Transformation.image.hint",
@@ -75,13 +66,6 @@ export function transformationField(options = {}) {
       hint: "TERIOCK.SCHEMA.Transformation.level.hint",
       initial: "minor",
       label: "TERIOCK.SCHEMA.Transformation.level.label",
-      nullable: false,
-      required: false,
-    }),
-    multiple: new BooleanField({
-      hint: "TERIOCK.SCHEMA.Transformation.multiple.hint",
-      initial: false,
-      label: "TERIOCK.SCHEMA.Transformation.multiple.label",
       nullable: false,
       required: false,
     }),
@@ -129,12 +113,13 @@ export function transformationField(options = {}) {
         required: false,
       }),
     }),
-    uuids: new SetField(
+  };
+  if (implementation) {
+    schema.uuids = new SetField(
       new DocumentUUIDField({
         hint: "TERIOCK.SCHEMA.Transformation.uuids.itemHint",
         nullable: false,
         type: "Item",
-        validate: (uuid) => typeValidator(uuid, ["species"]),
       }),
       {
         hint: "TERIOCK.SCHEMA.Transformation.uuids.hint",
@@ -142,39 +127,14 @@ export function transformationField(options = {}) {
         label: "TERIOCK.SCHEMA.Transformation.uuids.label",
         nullable: false,
         required: false,
-        validate: (uuids) => arrayTypeValidator(uuids, ["species"]),
-        validationError: game.i18n.localize(
-          "TERIOCK.SCHEMA.Transformation.uuids.validationError",
-        ),
       },
-    ),
-  };
-  if (implementation) {
-    schema.species = new ArrayField(new DocumentIdField());
-  }
-  if (configuration) {
-    Object.assign(schema, {
-      select: new BooleanField({
-        hint: "TERIOCK.SCHEMA.Transformation.select.hint",
-        label: "TERIOCK.SCHEMA.Transformation.select.label",
-        nullable: false,
-        required: false,
-        initial: false,
-      }),
-      useFolder: new BooleanField({
-        hint: "TERIOCK.SCHEMA.Transformation.useFolder.hint",
-        label: "TERIOCK.SCHEMA.Transformation.useFolder.label",
-        nullable: false,
-        required: false,
-        initial: false,
-      }),
-      uuid: new DocumentUUIDField({
-        hint: "TERIOCK.SCHEMA.Transformation.folder.hint",
-        label: "TERIOCK.SCHEMA.Transformation.folder.label",
-        nullable: true,
-        required: false,
-        type: "Folder",
-      }),
+    );
+    schema.enabled = new BooleanField({
+      hint: "TERIOCK.SCHEMA.Transformation.enabled.hint",
+      initial: false,
+      label: "TERIOCK.SCHEMA.Transformation.enabled.label",
+      nullable: false,
+      required: false,
     });
   }
   if (options.alwaysEnabled) delete schema.enabled;

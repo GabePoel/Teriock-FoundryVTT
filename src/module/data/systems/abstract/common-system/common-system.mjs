@@ -52,7 +52,6 @@ export default class CommonSystem extends mix(
   static get metadata() {
     return {
       armament: false,
-      childActorTypes: [],
       childEffectTypes: [],
       childItemTypes: [],
       childMacroTypes: [],
@@ -163,7 +162,7 @@ export default class CommonSystem extends mix(
     return {
       title: this.parent.nameString,
       img: this.parent.img,
-      text: this.parent.elder?.nameString,
+      text: this.parent.master?.nameString,
       color: this.color,
       openable: true,
       draggable: true,

@@ -1,11 +1,12 @@
 import PropagationDataMixin from "../../data/shared/mixins/propagation-data-mixin.mjs";
 import { systemPath } from "../../helpers/path.mjs";
+import { resolveDocuments } from "../../helpers/resolve.mjs";
 import { mix } from "../../helpers/utils.mjs";
 import { TeriockActor } from "../_module.mjs";
+import { TypeCollection } from "../collections/_module.mjs";
 import {
   ChangeableDocumentMixin,
   EmbedCardDocumentMixin,
-  HierarchyDocumentMixin,
   PanelDocumentMixin,
   SettingsDocumentMixin,
 } from "./_module.mjs";
@@ -22,7 +23,6 @@ export default function CommonDocumentMixin(Base) {
      * @mixes PropagationData
      * @mixes ChangeableDocument
      * @mixes EmbedCardDocument
-     * @mixes HierarchyDocument
      * @mixes PanelDocument
      * @mixes SettingsDocument
      * @mixin
@@ -32,7 +32,6 @@ export default function CommonDocumentMixin(Base) {
       PropagationDataMixin,
       ChangeableDocumentMixin,
       EmbedCardDocumentMixin,
-      HierarchyDocumentMixin,
       PanelDocumentMixin,
       SettingsDocumentMixin,
     ) {
@@ -62,6 +61,25 @@ export default function CommonDocumentMixin(Base) {
         }
       }
 
+      /**
+       * Array containing all children or their indexes.
+       * @returns {ChildDocument[]}
+       */
+      get childArray() {
+        return [
+          ...(this.effects?.contents || []).filter((e) => !e.sup),
+          ...(this.items?.contents || []).filter((i) => !i.sup),
+        ];
+      }
+
+      /**
+       * Collection containing all children or their indexes.
+       * @returns {TypeCollection}
+       */
+      get children() {
+        return new TypeCollection(this.childArray.map((c) => [c._id, c]));
+      }
+
       /** @inheritDoc */
       get embedActions() {
         return { ...super.embedActions, ...this.system.embedActions };
@@ -88,6 +106,21 @@ export default function CommonDocumentMixin(Base) {
       /** @inheritDoc */
       get panelParts() {
         return this.system.panelParts;
+      }
+
+      /**
+       * Array containing all visible children.
+       * @returns {ChildDocument[]}
+       */
+      get visibleChildren() {
+        return this.childArray
+          .filter((c) => !c.isEphemeral)
+          .filter(
+            (c) =>
+              c.documentName !== "ActiveEffect" ||
+              c.system.revealed ||
+              game.user.isGM,
+          );
       }
 
       /**
@@ -120,6 +153,28 @@ export default function CommonDocumentMixin(Base) {
       }
 
       /**
+       * Create multiple child Document instances descendant from a Document using provided input data.
+       * @param {ChildDocumentName} embeddedName
+       * @param {object[]} data
+       * @param {Partial<DatabaseCreateOperation & Teriock.System._CreateOperation>} operation
+       * @returns {Promise<AnyCommonDocument[]>}
+       */
+      async createChildDocuments(embeddedName, data = [], operation = {}) {
+        return this.createEmbeddedDocuments(embeddedName, data, operation);
+      }
+
+      /**
+       * Delete multiple child Document instances descendant from a Document using provided string ids.
+       * @param {ChildDocumentName} embeddedName
+       * @param {ID<AnyCommonDocument>[]} ids
+       * @param {DatabaseDeleteOperation} operation
+       * @returns {Promise<AnyCommonDocument[]>}
+       */
+      async deleteChildDocuments(embeddedName, ids = [], operation = {}) {
+        return this.deleteEmbeddedDocuments(embeddedName, ids, operation);
+      }
+
+      /**
        * Disables the document.
        * @returns {Promise<void>}
        */
@@ -133,6 +188,31 @@ export default function CommonDocumentMixin(Base) {
        */
       async enable() {
         await this.update({ "system.disabled": false });
+      }
+
+      /**
+       * Resolved array containing all children.
+       * @returns {Promise<CommonDocument[]>}
+       */
+      async getChildArray() {
+        return resolveDocuments(this.childArray);
+      }
+
+      /**
+       * Resolved collection containing all children.
+       * @returns {Promise<TypeCollection>}
+       */
+      async getChildren() {
+        const children = await resolveDocuments(this.childArray);
+        return new TypeCollection(children.map((c) => [c._id, c]));
+      }
+
+      /**
+       * Resolved visible children.
+       * @returns {Promise<AnyCommonDocument[]>}
+       */
+      async getVisibleChildren() {
+        return resolveDocuments(this.visibleChildren);
       }
 
       /**
@@ -169,6 +249,17 @@ export default function CommonDocumentMixin(Base) {
        */
       async toggleDisabled() {
         await this.update({ "system.disabled": !this.system.disabled });
+      }
+
+      /**
+       * Update multiple child Document instances descendant from a Document using provided differential data.
+       * @param {ChildDocumentName} embeddedName
+       * @param {object[]} updates
+       * @param {DatabaseUpdateOperation} operation
+       * @returns {Promise<AnyCommonDocument[]>}
+       */
+      async updateChildDocuments(embeddedName, updates = [], operation = {}) {
+        return this.updateEmbeddedDocuments(embeddedName, updates, operation);
       }
     }
   );

@@ -26,7 +26,7 @@ export default function bindCommonActions(rootElement) {
     },
   );
   queryAll(rootElement, ".content-link[data-uuid]").forEach((el) => {
-    if (game.settings.get("teriock", "contentLinkTooltips")) {
+    if (game.teriock.getSetting("contentLinkTooltips")) {
       const cls = /** @type {TeriockDocument} */ foundry.utils.getDocumentClass(
         el.dataset.type,
       );
@@ -35,7 +35,7 @@ export default function bindCommonActions(rootElement) {
   });
   queryAll(rootElement, "[data-teriock-content-link]").forEach(
     /** @param {HTMLLinkElement} el */ (el) => {
-      if (game.settings.get("teriock", "systemLinks")) {
+      if (game.teriock.getSetting("systemLinks")) {
         el.dataset.makeTooltip = "true";
         el.classList.add("teriock-content-link");
         el.classList.remove("teriock-not-content-link");
@@ -57,7 +57,7 @@ export default function bindCommonActions(rootElement) {
         el.classList.add("teriock-not-content-link");
         el.href = el.dataset.wikiAddress;
       }
-      if (!game.settings.get("teriock", "systemTooltips")) {
+      if (!game.teriock.getSetting("systemTooltips")) {
         el.removeAttribute("data-make-tooltip");
         el.removeAttribute("data-tooltip-html");
       }

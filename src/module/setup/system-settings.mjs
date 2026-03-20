@@ -4,6 +4,7 @@ const { fields } = foundry.data;
 
 export const settings = {
   actorSheet: {
+    // TODO: Implement as part of V14.
     //floatingActorTabs: {
     //  default: true,
     //  hint: "TERIOCK.SETTINGS.floatingActorTabs.hint",
@@ -74,13 +75,6 @@ export const settings = {
       scope: "user",
       type: Boolean,
     },
-    automaticallyExpireSustainedConsequences: {
-      default: true,
-      hint: "TERIOCK.SETTINGS.automaticallyExpireSustainedConsequences.hint",
-      name: "TERIOCK.SETTINGS.automaticallyExpireSustainedConsequences.name",
-      scope: "world",
-      type: Boolean,
-    },
     automaticallyPayAbilityCosts: {
       default: true,
       hint: "TERIOCK.SETTINGS.automaticallyPayAbilityCosts.hint",
@@ -93,6 +87,13 @@ export const settings = {
       hint: "TERIOCK.SETTINGS.nonHierarchicalChanges.hint",
       name: "TERIOCK.SETTINGS.nonHierarchicalChanges.name",
       requiresReload: true,
+      scope: "world",
+      type: Boolean,
+    },
+    trackSustainedConsequences: {
+      default: true,
+      hint: "TERIOCK.SETTINGS.trackSustainedConsequences.hint",
+      name: "TERIOCK.SETTINGS.trackSustainedConsequences.name",
       scope: "world",
       type: Boolean,
     },

@@ -52,11 +52,11 @@ function takeOperationFactory(type, operation) {
     options.type = type;
     delete options.boost;
     if (operation === "primary") {
-      options.boost = game.settings.get("teriock", "showRollDialogs");
+      options.boost = game.teriock.getSetting("showRollDialogs");
       delete options.reverse;
     }
     if (operation === "secondary") {
-      options.boost = !game.settings.get("teriock", "showRollDialogs");
+      options.boost = !game.teriock.getSetting("showRollDialogs");
       options.reverse = true;
     }
     return abstractTakeOperation(actor, options);

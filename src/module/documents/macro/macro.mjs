@@ -25,7 +25,7 @@ export default class TeriockMacro extends mix(
    * @returns {TeriockFolder|null}
    */
   static get hotbarFolder() {
-    if (!game.settings.get("teriock", "sortNewPlayerMacros")) return null;
+    if (!game.teriock.getSetting("sortNewPlayerMacros")) return null;
     return game.folders.find(
       (f) =>
         f.getFlag("teriock", "user") === game.user.id &&
@@ -39,7 +39,7 @@ export default class TeriockMacro extends mix(
    * @returns {Promise<TeriockFolder>|null}
    */
   static async ensureHotbarFolder() {
-    if (!game.settings.get("teriock", "sortNewPlayerMacros")) return null;
+    if (!game.teriock.getSetting("sortNewPlayerMacros")) return null;
     let hotbarFolder = this.hotbarFolder;
     if (hotbarFolder) return hotbarFolder;
     await game.users.queryGM(
@@ -206,7 +206,7 @@ export default class TeriockMacro extends mix(
         await doc.system.use({
           actor: a,
           event,
-          showDialog: game.settings.get("teriock", "showRollDialogs"),
+          showDialog: game.teriock.getSetting("showRollDialogs"),
         });
       else {
         ui.notifications.warn("TERIOCK.SYSTEMS.Macro.EXECUTION.noDocument", {
@@ -235,7 +235,7 @@ export default class TeriockMacro extends mix(
       await doc.system.use(
         Object.assign(options, {
           actor: doc.actor,
-          showDialog: game.settings.get("teriock", "showRollDialogs"),
+          showDialog: game.teriock.getSetting("showRollDialogs"),
         }),
       );
   }
@@ -261,7 +261,7 @@ export default class TeriockMacro extends mix(
     const yes = await super._preCreate(data, options, user);
     if (yes === false) return false;
 
-    if (game.settings.get("teriock", "sortNewPlayerMacros") && !this.folder) {
+    if (game.teriock.getSetting("sortNewPlayerMacros") && !this.folder) {
       if (
         (!game.user.isGM && this.constructor.hotbarFolder) ||
         game.users.activeGM

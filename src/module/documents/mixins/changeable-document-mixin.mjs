@@ -126,7 +126,7 @@ export default function ChangeableDocumentMixin(Base) {
        */
       get _allChanges() {
         return (
-          game.settings.get("teriock", "nonHierarchicalChanges") &&
+          game.teriock.getSetting("nonHierarchicalChanges") &&
           this.actor?.getSetting("nonHierarchicalChanges")
         );
       }

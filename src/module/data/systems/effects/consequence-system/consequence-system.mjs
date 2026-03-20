@@ -15,12 +15,10 @@ const { fields } = foundry.data;
  * Effect-specific effect data model.
  * @extends {BaseEffectSystem}
  * @extends {Teriock.Models.ConsequenceSystemData}
- * @mixes HierarchySystem
  * @mixes TransformationSystem
  */
 export default class ConsequenceSystem extends mix(
   BaseEffectSystem,
-  mixins.HierarchySystemMixin,
   mixins.TransformationSystemMixin,
   ThresholdDataMixin,
 ) {
@@ -46,8 +44,17 @@ export default class ConsequenceSystem extends mix(
     return foundry.utils.mergeObject(super.metadata, {
       type: "consequence",
       usable: true,
-      childEffectTypes: ["ability"],
-      visibleTypes: ["ability"],
+      childEffectTypes: ["ability", "resource"],
+      childItemTypes: ["body", "equipment", "power", "rank", "species"],
+      visibleTypes: [
+        "ability",
+        "body",
+        "equipment",
+        "power",
+        "rank",
+        "resource",
+        "species",
+      ],
     });
   }
 
@@ -213,23 +220,7 @@ export default class ConsequenceSystem extends mix(
   /** @inheritDoc */
   async shouldExpire() {
     if (this.shouldExpireFromConditions()) return true;
-    if (await this.shouldExpireFromBeingUnsustained()) return true;
     return super.shouldExpire();
-  }
-
-  /**
-   * Checks if this should expire due to being unsustained.
-   * @returns {Promise<boolean>}
-   */
-  async shouldExpireFromBeingUnsustained() {
-    if (!this.expirations.sustained) return false;
-    if (
-      !game.settings.get("teriock", "automaticallyExpireSustainedConsequences")
-    ) {
-      return false;
-    }
-    const source = await fromUuid(this.source);
-    return source && !source.active;
   }
 
   /**

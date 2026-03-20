@@ -44,23 +44,20 @@ export default (Base) => {
         Object.assign(this.transformation, {
           effect,
           image: null,
-          species: [],
           level: "minor",
         });
         if (effect) {
           Object.assign(this.transformation, {
             image: effect.system.transformation.image,
             level: effect.system.transformation.level,
-            species: this.parent.items.contents.filter(
-              (i) =>
-                i.type === "species" &&
-                effect.system.transformation.species.includes(i.id),
-            ),
           });
         }
-        if (this.isTransformed && this.transformation.species.length > 0) {
+        if (
+          this.isTransformed &&
+          this.transformation?.effect?.system.primarySpecies?.system.size.value
+        ) {
           this.size.number.raw =
-            this.transformation.species[0].system.size.value?.toString() ||
+            this.transformation.effect.system.primarySpecies.system.size.value.toString() ||
             this.size.number.raw;
         }
       }

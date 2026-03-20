@@ -436,23 +436,7 @@ foundry.helpers.Hooks.once("init", function () {
   // Register Game Shortcuts
   // =======================
 
-  game.teriock = {
-    Actor: documents.TeriockActor,
-    Combat: documents.TeriockCombat,
-    Effect: documents.TeriockActiveEffect,
-    Item: documents.TeriockItem,
-    Macro: documents.TeriockMacro,
-    ChatMessage: documents.TeriockChatMessage,
-    Scene: documents.TeriockScene,
-    Token: documents.TeriockTokenDocument,
-    User: documents.TeriockUser,
-    JournalEntry: documents.TeriockJournalEntry,
-    JournalEntryPage: documents.TeriockJournalEntryPage,
-    JournalEntryCategory: documents.TeriockJournalEntryCategory,
-    Roll: dice.rolls.BaseRoll,
-    data: data,
-    packs: new documents.collections.TeriockPacks(),
-  };
+  game.teriock = new helpers.TeriockManager();
 
   // Register Settings
   // =================

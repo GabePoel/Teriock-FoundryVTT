@@ -232,10 +232,6 @@ export default class TeriockActor extends mix(
     const yes = await super._preCreate(data, options, user);
     if (yes === false) return false;
 
-    const elder = await this.getElder();
-    if (elder && !elder.metadata.childActorTypes.includes(this.type)) {
-      return false;
-    }
     const prototypeToken = {};
     const size = this.system.size.length;
     if (!foundry.utils.hasProperty(data, "prototypeToken.sight.enabled")) {

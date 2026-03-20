@@ -100,7 +100,7 @@ export default class EquipmentSystem extends mix(
   /** @inheritDoc */
   static parseEvent(event) {
     return Object.assign(super.parseEvent(event), {
-      secret: game.settings.get("teriock", "secretEquipment")
+      secret: game.teriock.getSetting("secretEquipment")
         ? !event.shiftKey
         : event.shiftKey,
     });
@@ -240,6 +240,7 @@ export default class EquipmentSystem extends mix(
         value: this.weight.total + this.storage.carriedWeight,
       }),
       this.sup?.nameString || "",
+      parts.text,
     ]);
     return parts;
   }
@@ -259,7 +260,7 @@ export default class EquipmentSystem extends mix(
    * @param {Teriock.Execution.EquipmentExecutionOptions} options
    */
   async _use(options = {}) {
-    if (game.settings.get("teriock", "rollAttackOnArmamentUse")) {
+    if (game.teriock.getSetting("rollAttackOnArmamentUse")) {
       await this.actor?.useAbility("Basic Attack");
     }
     options.source = this.parent;

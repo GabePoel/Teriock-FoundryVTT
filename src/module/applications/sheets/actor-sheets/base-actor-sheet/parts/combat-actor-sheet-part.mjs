@@ -128,7 +128,7 @@ export default (Base) =>
       await this.#onUseAbility(
         event,
         target,
-        game.settings.get("teriock", "showRollDialogs"),
+        game.teriock.getSetting("showRollDialogs"),
       );
     }
 
@@ -156,7 +156,7 @@ export default (Base) =>
             await this.#onUseAbility(
               ev,
               el,
-              !game.settings.get("teriock", "showRollDialogs"),
+              !game.teriock.getSetting("showRollDialogs"),
             );
           });
         });

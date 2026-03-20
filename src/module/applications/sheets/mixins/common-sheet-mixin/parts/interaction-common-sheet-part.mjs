@@ -46,7 +46,7 @@ export default (Base) => {
       static async _onRollThis(event) {
         await this.document.use({
           event,
-          showDialog: game.settings.get("teriock", "showRollDialogs"),
+          showDialog: game.teriock.getSetting("showRollDialogs"),
         });
       }
     }

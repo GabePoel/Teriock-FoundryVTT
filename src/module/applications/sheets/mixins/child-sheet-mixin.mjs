@@ -89,7 +89,7 @@ export default function ChildSheetMixin(Base) {
        * @returns {Promise<void>}
        */
       static async #onOpenSource() {
-        await this.document.elder?.sheet.render(true);
+        await this.document.master?.sheet.render(true);
       }
 
       /**

@@ -108,7 +108,7 @@ export default class RankSystem extends mix(
   get makeSuppressed() {
     let suppressed = super.makeSuppressed;
     if (
-      game.settings.get("teriock", "armorSuppressesRanks") &&
+      game.teriock.getSetting("armorSuppressesRanks") &&
       this.actor &&
       !this.innate &&
       this.actor.system.defense.av.base > this.maxAv
@@ -226,7 +226,7 @@ export default class RankSystem extends mix(
     super.prepareBaseData();
     if (this.parent.sup?.type === "species") this.innate = true;
     if (
-      game.settings.get("teriock", "armorWeakensRanks") &&
+      game.teriock.getSetting("armorWeakensRanks") &&
       this.actor &&
       this.actor.system.defense.av.base > this.maxAv
     ) {

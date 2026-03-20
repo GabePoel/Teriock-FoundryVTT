@@ -79,7 +79,7 @@ export default (Base) => {
       async takeLongRest() {
         await this.parent.hookCall("longRest");
         if (this.parent.statuses.has("dead")) return;
-        if (!game.settings.get("teriock", "showLongRestDialog")) return;
+        if (!game.teriock.getSetting("showLongRestDialog")) return;
         const heal = await TeriockDialog.confirm({
           window: {
             title: game.i18n.localize(

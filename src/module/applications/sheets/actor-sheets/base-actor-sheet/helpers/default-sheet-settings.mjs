@@ -7,9 +7,7 @@ const threeToggleInitial = 0;
 export default function defaultSheetSettings() {
   return {
     abilityFilters: {
-      basic: game.settings.get("teriock", "hideBasicAbilitiesByDefault")
-        ? -1
-        : 0,
+      basic: game.teriock.getSetting("hideBasicAbilitiesByDefault") ? -1 : 0,
       delivery: null,
       effects: null,
       element: null,

@@ -41,13 +41,9 @@ export default class AbilitySheet extends mix(
 
   /** @inheritDoc */
   static PARTS = {
-    mask: {
-      template: "teriock/sheets/effects/ability/elder-sorcery-mask",
-    },
+    mask: { template: "teriock/sheets/effects/ability/elder-sorcery-mask" },
     ...this.HEADER_PARTS,
-    menu: {
-      template: "teriock/sheets/effects/ability/menu",
-    },
+    menu: { template: "teriock/sheets/effects/ability/menu" },
     ...this.CONTENT_PARTS,
   };
 

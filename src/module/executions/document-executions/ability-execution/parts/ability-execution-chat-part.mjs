@@ -1,24 +1,20 @@
-import {
-  selectDocumentDialog,
-  selectDocumentsDialog,
-} from "../../../../applications/dialogs/select-document-dialog.mjs";
 import { conditionDialog } from "../../../../applications/dialogs/select-token-dialog.mjs";
 import {
+  AddExternalDocumentsAutomation,
   ChangesAutomation,
   CombatExpirationAutomation,
   DurationAutomation,
   StatusAutomation,
-  TransformationAutomation,
+  TransformationAutomation
 } from "../../../../data/pseudo-documents/automations/_module.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
-import { TeriockFolder } from "../../../../documents/_module.mjs";
 import { manipulateFormula } from "../../../../helpers/formula.mjs";
 import { ApplyEffectHandler } from "../../../../helpers/interaction/button-handlers/apply-effect-handlers.mjs";
 import { RollRollableTakeHandler } from "../../../../helpers/interaction/button-handlers/rollable-takes-handlers.mjs";
 import {
   FeatHandler,
   StandardDamageHandler,
-  UseAbilityHandler,
+  UseAbilityHandler
 } from "../../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
 import { safeUuid } from "../../../../helpers/resolve.mjs";
 
@@ -147,6 +143,11 @@ export default function AbilityExecutionChatPart(Base) {
           ),
           statuses: this.#generateConsequenceStatuses(crit),
           system: {
+            _dep:
+              this.source.system.sustained &&
+              game.teriock.getSetting("trackSustainedConsequences")
+                ? this.source.uuid
+                : undefined,
             associations: [],
             automations: this.#generateConsequenceAutomations(crit),
             blocks: this.source.system.panelParts.blocks,
@@ -292,63 +293,22 @@ export default function AbilityExecutionChatPart(Base) {
 
       /**
        * @param {boolean} crit
-       * @returns {Promise<Partial<TransformationConfigurationField>>}
+       * @returns {Promise<Partial<TransformationField>>}
        */
       async #generateConsequenceTransformation(crit = false) {
         const transformationAutomations = this.#getCritAutomations(
           TransformationAutomation,
           crit,
         );
-        /** @type {Partial<TransformationConfigurationField>} */
-        const transformation = { enabled: !!transformationAutomations.length };
+        /** @type {Partial<TransformationData>} */
+        const transformation = {
+          enabled: !!transformationAutomations.length,
+          uuids: [],
+        };
         if (transformation.enabled) {
-          transformationAutomations.forEach((a) => {
-            Object.assign(transformation, a.transformation);
-          });
-          const uuids = [
-            transformation.uuid,
-            ...Array.from(transformation.uuids),
-          ].filter((uuid) => typeof uuid === "string");
-          const folderUuids = uuids.filter((uuid) => uuid.includes("Folder"));
-          const nonFolderUuids = Array.from(
-            uuids.filter((uuid) => !uuid.includes("Folder")),
-          );
-          for (const folderUuid of folderUuids) {
-            nonFolderUuids.push(
-              ...(await TeriockFolder.getContents(folderUuid, {
-                types: ["species"],
-              })),
-            );
-          }
-          //noinspection JSValidateTypes
-          transformation.uuids = nonFolderUuids;
-          if (!crit) {
-            const choices = transformation.uuids.map((uuid) =>
-              fromUuidSync(uuid),
-            );
-            if (transformation.select) {
-              let chosen;
-              const options = {
-                hint: game.i18n.localize(
-                  "TERIOCK.DIALOGS.Select.Transformation.hint",
-                ),
-                openable: true,
-                title: game.i18n.localize(
-                  "TERIOCK.DIALOGS.Select.Transformation.title",
-                ),
-                tooltipAsync: true,
-              };
-              if (transformation.multiple) {
-                chosen = await selectDocumentsDialog(choices, options);
-              } else {
-                chosen = [await selectDocumentDialog(choices, options)];
-              }
-              if (chosen) {
-                //noinspection JSValidateTypes
-                transformation.uuids = chosen.map((s) => s.uuid);
-              }
-            }
-          }
+          const a =
+            /** @type {TransformationAutomation} */ transformationAutomations[0];
+          Object.assign(transformation, a.transformation);
         }
         return transformation;
       }
@@ -391,18 +351,42 @@ export default function AbilityExecutionChatPart(Base) {
           this.source.system.maneuver !== "passive"
         ) {
           // Build apply effects button
-          const normalEffectData = await this.#generateConsequence(false);
-          const critEffectData = await this.#generateConsequence(true);
+          const normalData = await this.#generateConsequence(false);
+          const critData = await this.#generateConsequence(true);
           await this.#generateConsequenceAssociations();
-          normalEffectData.system.associations = this.#associationMap["normal"];
-          normalEffectData.changes.push(...this.#trackerMap["normal"]);
-          critEffectData.system.associations = this.#associationMap["crit"];
-          critEffectData.changes.push(...this.#trackerMap["crit"]);
+          normalData.system.associations = this.#associationMap["normal"];
+          normalData.changes.push(...this.#trackerMap["normal"]);
+          critData.system.associations = this.#associationMap["crit"];
+          critData.changes.push(...this.#trackerMap["crit"]);
+          const normalChildren = this.source.subs.map((s) => s.uuid);
+          const critChildren = [...normalChildren];
+          const childAutomations =
+            /** @type {AddExternalDocumentsAutomation[]} */ this.activeAutomations.filter(
+              (a) => [AddExternalDocumentsAutomation.TYPE].includes(a.type),
+            );
+          for (const a of childAutomations) {
+            const toAdd = await a.choose();
+            if (a.crit.has(0)) normalChildren.push(...toAdd);
+            if (a.crit.has(1)) critChildren.push(...toAdd);
+          }
+          const transformationAutomations =
+            /** @type {TransformationAutomation[]} */ this.activeAutomations.filter(
+              (a) => [TransformationAutomation.TYPE].includes(a.type),
+            );
+          for (const a of transformationAutomations) {
+            const toAdd = await a.choose();
+            if (a.crit.has(0)) {
+              normalData.system.transformation.uuids.push(...toAdd);
+            }
+            if (a.crit.has(1)) {
+              critData.system.transformation.uuids.push(...toAdd);
+            }
+          }
           this.buttons.push(
-            ApplyEffectHandler.buildButton(normalEffectData, {
-              secondaryData: critEffectData,
-              sustainingAbility: this.source,
-              bonusSubs: new Set(this.source.subs.map((s) => s.uuid)),
+            ApplyEffectHandler.buildButton(normalData, {
+              critData,
+              normalChildren,
+              critChildren,
             }),
           );
         }

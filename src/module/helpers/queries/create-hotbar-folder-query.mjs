@@ -12,12 +12,12 @@ export default async function createHotbarFolderQuery(queryData, { _timeout }) {
   const id = queryData.id;
   let macroFolder = game.folders.find(
     (f) =>
-      f.name === game.settings.get("teriock", "playerMacrosFolderName") &&
+      f.name === game.teriock.getSetting("playerMacrosFolderName") &&
       f.type === "Macro",
   );
   if (!macroFolder) {
     macroFolder = await TeriockFolder.create({
-      name: game.settings.get("teriock", "playerMacrosFolderName"),
+      name: game.teriock.getSetting("playerMacrosFolderName"),
       type: "Macro",
     });
   }

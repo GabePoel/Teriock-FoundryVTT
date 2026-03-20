@@ -10,4 +10,6 @@ export * as string from "./string.mjs";
 export * as unit from "./unit.mjs";
 export * as utils from "./utils.mjs";
 export * as wiki from "./wiki.mjs";
+export { default as DependentsRegistry } from "./dependents-registry.mjs";
+export { default as TeriockManager } from "./manager.mjs";
 export { default as queries } from "./queries/_module.mjs";

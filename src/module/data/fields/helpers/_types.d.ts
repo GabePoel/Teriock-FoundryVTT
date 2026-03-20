@@ -1,7 +1,7 @@
-import { TeriockActor, TeriockFolder } from "../../../documents/_module.mjs";
+import { TeriockActor } from "../../../documents/_module.mjs";
 
 /** <schema> Transformation configuration */
-export type TransformationField = {
+export type TransformationData = {
   /** <schema> Whether transformation is enabled */
   enabled: boolean;
   /** <schema> Overriding image to apply */
@@ -24,22 +24,11 @@ export type TransformationField = {
     ranks: boolean;
   };
   /** <schema> UUID of specific species to transform into */
-  uuids: Set<UUID<TeriockSpecies>>;
+  uuids: UUID<TeriockSpecies>[];
 };
 
-export type TransformationConfigurationField = TransformationField & {
-  select: boolean;
-  /** <schema> Use a folder instead of a set of species UUIDS. */
-  useFolder: boolean /** <schema> Documents to suppress */;
-  /** <schema> UUID of folder to use. */
-  uuid: UUID<TeriockFolder>;
-  /** <schema> Allow selection of multiple species. */
-  multiple: boolean;
-};
-
-export type TransformationImplementationField = TransformationField & {
-  /** <schema> The actual species items this is associated with on the actor */
-  species: ID<TeriockSpecies>[];
+export type TransformationField = TransformationData & {
+  uuids: Set<UUID<TeriockSpecies>>[];
 };
 
 /** <schema> What is the relationship of the {@link TeriockActor} that triggers expirations? */

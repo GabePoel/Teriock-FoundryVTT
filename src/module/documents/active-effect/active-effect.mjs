@@ -75,14 +75,6 @@ export default class TeriockActiveEffect extends mix(
   }
 
   /**
-   * @inheritDoc
-   * @returns {boolean}
-   */
-  get isSuppressed() {
-    return this.system.makeSuppressed || super.isSuppressed;
-  }
-
-  /**
    * The number of seconds remaining before this effect expires.
    * @returns {number|null}
    */
@@ -168,6 +160,15 @@ export default class TeriockActiveEffect extends mix(
       if (Object.keys(wrapperUpdates).length > 0) {
         await this.elder?.update(wrapperUpdates);
       }
+    }
+  }
+
+  /** @inheritDoc */
+  async createChildDocuments(embeddedName, data = [], operation = {}) {
+    if (embeddedName === "Item") {
+      return this.createDependentDocuments(embeddedName, data, operation);
+    } else {
+      return super.createChildDocuments(embeddedName, data, operation);
     }
   }
 

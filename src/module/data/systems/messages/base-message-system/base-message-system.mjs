@@ -457,9 +457,7 @@ export default class BaseMessageSystem extends BaseSystem {
       autoCollapse =
         this.parent.timestamp <
         Date.now() -
-          game.settings.get("teriock", "automaticPanelCollapseTime") *
-            60 *
-            1000;
+          game.teriock.getSetting("automaticPanelCollapseTime") * 60 * 1000;
     }
     TeriockItem.toggleCollapse(htmlElement, {
       autoCollapse: true,

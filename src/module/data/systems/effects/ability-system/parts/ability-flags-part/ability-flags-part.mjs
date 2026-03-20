@@ -31,9 +31,6 @@ export default (Base) => {
           spell: new fields.BooleanField({ initial: false }),
           standard: new fields.BooleanField({ initial: false }),
           sustained: new fields.BooleanField({ initial: false }),
-          sustaining: new fields.SetField(
-            new fields.DocumentUUIDField({ type: "ActiveEffect" }),
-          ),
         });
       }
 

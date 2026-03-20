@@ -22,7 +22,7 @@ async function primary(actor, options = {}) {
   }
   await attacker.use(
     Object.assign(options, {
-      showDialog: game.settings.get("teriock", "showRollDialogs"),
+      showDialog: game.teriock.getSetting("showRollDialogs"),
     }),
   );
 }
@@ -48,7 +48,7 @@ async function secondary(actor, options = {}) {
   }
   await attacker.use(
     Object.assign(options, {
-      showDialog: !game.settings.get("teriock", "showRollDialogs"),
+      showDialog: !game.teriock.getSetting("showRollDialogs"),
     }),
   );
 }

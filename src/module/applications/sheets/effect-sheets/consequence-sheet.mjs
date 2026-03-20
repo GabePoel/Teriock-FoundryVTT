@@ -2,7 +2,11 @@ import { icons } from "../../../constants/display/icons.mjs";
 import { documentOptions } from "../../../constants/options/document-options.mjs";
 import { makeIconClass, mix } from "../../../helpers/utils.mjs";
 import { ChangesSheetMixin } from "../mixins/_module.mjs";
-import { AutomationsCommonSheetPart } from "../mixins/common-sheet-mixin/parts/_module.mjs";
+import {
+  AutomationsCommonSheetPart,
+  DocumentCreationCommonSheetPart,
+  DragDropCommonSheetPart,
+} from "../mixins/common-sheet-mixin/parts/_module.mjs";
 
 const { ActiveEffectConfig } = foundry.applications.sheets;
 
@@ -15,12 +19,11 @@ export default class ConsequenceSheet extends mix(
   ActiveEffectConfig,
   ChangesSheetMixin,
   AutomationsCommonSheetPart,
+  DocumentCreationCommonSheetPart,
+  DragDropCommonSheetPart,
 ) {
   static DEFAULT_OPTIONS = {
-    form: {
-      closeOnSubmit: false,
-      submitOnChange: true,
-    },
+    form: { closeOnSubmit: false, submitOnChange: true },
     window: {
       icon: makeIconClass(documentOptions.consequence.icon, "title"),
     },
@@ -32,6 +35,10 @@ export default class ConsequenceSheet extends mix(
       template: "teriock/sheets/effects/consequence/automations-tab",
       scrollable: [""],
     },
+    children: {
+      template: "teriock/sheets/effects/consequence/children-tab",
+      scrollable: [""],
+    },
   };
 
   static TABS = {
@@ -41,6 +48,10 @@ export default class ConsequenceSheet extends mix(
         {
           id: "automations",
           icon: makeIconClass(icons.pseudoDocument.automation, "solid"),
+        },
+        {
+          id: "children",
+          icon: makeIconClass(icons.ui.document, "solid"),
         },
       ],
       initial: super.TABS.sheet.initial,

@@ -19,6 +19,19 @@ export default class TeriockRollTable extends mix(
   mixins.UsableDocumentMixin,
 ) {
   /**
+   * All the documents in this table's results.
+   * @return {Promise<TeriockDocument[]>}
+   */
+  async getContents() {
+    const out = await Promise.all(
+      this.results
+        .filter((r) => r.type === "document")
+        .map((r) => foundry.utils.fromUuid(r.documentUuid)),
+    );
+    return out.filter((_) => _);
+  }
+
+  /**
    * @inheritDoc
    * @param {TeriockTableResult[]} results
    * @param {object} [options]

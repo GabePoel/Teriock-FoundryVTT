@@ -24,11 +24,13 @@ export function pureUuid(safeUuid) {
 
 /**
  * Ensure a document is not an index.
- * @param {Index<TeriockDocument>} syncDoc
- * @returns {Promise<TeriockDocument|void>}
+ * @template T
+ * @param {Index<T> | UUID<T>} syncDoc
+ * @returns {Promise<T|void>}
  */
 export async function resolveDocument(syncDoc) {
   if (!syncDoc) return;
+  if (typeof syncDoc === "string") return fromUuid(syncDoc);
   if (syncDoc instanceof Document) {
     return syncDoc;
   } else {
@@ -39,7 +41,7 @@ export async function resolveDocument(syncDoc) {
 /**
  * Ensure all documents in an array are not indexes.
  * @template T
- * @param {Index<T>[]} syncDocs
+ * @param {Index<T>[] | UUID<T>} syncDocs
  * @returns {Promise<T[]>}
  */
 export async function resolveDocuments(syncDocs) {

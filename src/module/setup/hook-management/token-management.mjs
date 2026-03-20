@@ -44,7 +44,7 @@ export default function registerTokenManagementHooks() {
       if (
         token.document.getSetting("autoMagic") &&
         game.modules.get("tokenmagic")?.active &&
-        game.settings.get("teriock", "automaticTokenMagicConditionEffects") &&
+        game.teriock.getSetting("automaticTokenMagicConditionEffects") &&
         tokenEditor
       ) {
         if (Object.keys(TERIOCK.display.tokenMagic).includes(statusId)) {

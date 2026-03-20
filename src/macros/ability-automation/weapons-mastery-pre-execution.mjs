@@ -8,6 +8,9 @@ const consequenceData = {
     .trim(),
   img: scope.effect?.img,
   system: {
+    _dep: game.teriock.getSetting("trackSustainedConsequences")
+      ? scope.effect.uuid
+      : undefined,
     automations: {
       [changesId]: {
         type: "changes",
