@@ -22,6 +22,24 @@ export default class TeriockRollTable extends mix(
    * All the documents in this table's results.
    * @return {Promise<TeriockDocument[]>}
    */
+  async getAllContents() {
+    const out = await this.getContents();
+    const allDocs = [
+      ...out.filter((d) => !["RollTable", "Folder"].includes(d.documentName)),
+    ];
+    for (const d of out) {
+      if (["RollTable", "Folder"].includes(d.documentName)) {
+        const toAdd = await d.getAllContents();
+        allDocs.push(...toAdd);
+      }
+    }
+    return allDocs;
+  }
+
+  /**
+   * The documents in this table's results.
+   * @return {Promise<TeriockDocument[]>}
+   */
   async getContents() {
     const out = await Promise.all(
       this.results

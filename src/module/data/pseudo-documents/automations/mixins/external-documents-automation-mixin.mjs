@@ -89,7 +89,9 @@ export default function ExternalDocumentsAutomationMixin(Base) {
         );
         out = out.filter((d) => d.documentName !== "RollTable");
         if (options.expandTables) {
-          const toAdd = await Promise.all(tables.map((d) => d.getContents()));
+          const toAdd = await Promise.all(
+            tables.map((d) => d.getAllContents()),
+          );
           for (const arr of toAdd) out.push(...arr);
         } else {
           out.push(...tables);

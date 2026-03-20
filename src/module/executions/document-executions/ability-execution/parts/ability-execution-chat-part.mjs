@@ -360,14 +360,22 @@ export default function AbilityExecutionChatPart(Base) {
           critData.changes.push(...this.#trackerMap["crit"]);
           const normalChildren = this.source.subs.map((s) => s.uuid);
           const critChildren = [...normalChildren];
+          const normalDocuments = [];
+          const critDocuments = [];
           const childAutomations =
             /** @type {AddExternalDocumentsAutomation[]} */ this.activeAutomations.filter(
               (a) => [AddExternalDocumentsAutomation.TYPE].includes(a.type),
             );
           for (const a of childAutomations) {
             const toAdd = await a.choose();
-            if (a.crit.has(0)) normalChildren.push(...toAdd);
-            if (a.crit.has(1)) critChildren.push(...toAdd);
+            if (a.crit.has(0)) {
+              if (a.attachDocuments) normalChildren.push(...toAdd);
+              else normalDocuments.push(...toAdd);
+            }
+            if (a.crit.has(1)) {
+              if (a.attachDocuments) critChildren.push(...toAdd);
+              else critDocuments.push(...toAdd);
+            }
           }
           const transformationAutomations =
             /** @type {TransformationAutomation[]} */ this.activeAutomations.filter(
@@ -387,6 +395,8 @@ export default function AbilityExecutionChatPart(Base) {
               critData,
               normalChildren,
               critChildren,
+              normalDocuments,
+              critDocuments,
             }),
           );
         }
