@@ -30,7 +30,7 @@ export default class CheckAutomation extends ThresholdAutomation {
   }
 
   /** @inheritDoc */
-  get buttons() {
+  async getButtons() {
     return [
       TradecraftCheckHandler.buildButton(this.tradecraft, {
         bonus: this.bonus,

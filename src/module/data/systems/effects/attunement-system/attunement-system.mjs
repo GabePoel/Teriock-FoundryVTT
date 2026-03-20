@@ -1,6 +1,7 @@
 import { attunementOptions } from "../../../../constants/options/attunement-options.mjs";
+import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
-import { makeIcon } from "../../../../helpers/utils.mjs";
+import { makeIcon, objectMap } from "../../../../helpers/utils.mjs";
 import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
 
 const { fields } = foundry.data;
@@ -31,8 +32,10 @@ export default class AttunementSystem extends BaseEffectSystem {
   static defineSchema() {
     return foundry.utils.mergeObject(super.defineSchema(), {
       type: new fields.StringField({
-        initial: "equipment",
-        choices: attunementOptions.attunementType,
+        initial: "effect",
+        choices: localizeChoices(
+          objectMap(attunementOptions.type, (v) => v.name),
+        ),
       }),
       target: new fields.DocumentIdField({
         nullable: true,
@@ -63,8 +66,11 @@ export default class AttunementSystem extends BaseEffectSystem {
   /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
-    parts.subtitle = `Tier ${this.tier || 0}`;
-    parts.text = dotJoin([this.type, this.usage]);
+    parts.subtitle = game.i18n.format(
+      "TERIOCK.SYSTEMS.Attunement.PANELS.subtitle",
+      { tier: this.tier || 0 },
+    );
+    parts.text = dotJoin([attunementOptions.type[this.type].name, this.usage]);
     return parts;
   }
 
@@ -83,8 +89,9 @@ export default class AttunementSystem extends BaseEffectSystem {
           "TERIOCK.SYSTEMS.Attunable.FIELDS.tier.raw.label",
         ),
         wrappers: [
+          attunementOptions.type[this.type].name,
           game.i18n.format("TERIOCK.SYSTEMS.Attunable.PANELS.tier", {
-            value: this.tier,
+            value: this.tier || 0,
           }),
         ],
       },
@@ -141,8 +148,10 @@ export default class AttunementSystem extends BaseEffectSystem {
       } else {
         return game.i18n.localize("TERIOCK.SYSTEMS.Attunement.USAGE.attuned");
       }
-    } else {
+    } else if (this.target) {
       return game.i18n.localize("TERIOCK.SYSTEMS.Attunement.USAGE.missing");
+    } else {
+      return "";
     }
   }
 

@@ -22,6 +22,7 @@ export class ApplyEffectHandler extends BaseButtonHandler {
    * @inheritDoc
    * @param {object} normalData
    * @param {object} [options]
+   * @param {string} [options.label]
    * @param {object} [options.critData]
    * @param {Teriock.System.Attachment<ChildDocument>[]} [options.normalChildren]
    * @param {Teriock.System.Attachment<ChildDocument>[]} [options.critChildren]
@@ -32,7 +33,8 @@ export class ApplyEffectHandler extends BaseButtonHandler {
     const { critData } = options;
     const button = super.buildButton();
     button.icon = makeIconClass(icons.ui.apply, "button");
-    button.label = game.i18n.localize("TERIOCK.COMMANDS.ApplyEffect.label");
+    button.label =
+      options.label || game.i18n.localize("TERIOCK.COMMANDS.ApplyEffect.label");
     const normalJSON = JSON.stringify(normalData);
     const critJSON = JSON.stringify(critData) || normalJSON;
     Object.assign(button.dataset, {
@@ -156,7 +158,7 @@ export class ApplyEffectHandler extends BaseButtonHandler {
     }
     for (const actor of this.actors) {
       const foundEffects = actor.effects.filter(
-        (effect) => effect.name === effectObj.name,
+        (effect) => effect.name === effectObj?.name,
       );
       await actor.deleteEmbeddedDocuments(
         "ActiveEffect",
@@ -166,14 +168,14 @@ export class ApplyEffectHandler extends BaseButtonHandler {
       if (foundIds.length > 0) {
         ui.notifications.info("TERIOCK.COMMANDS.ApplyEffect.removed", {
           format: {
-            name: effectObj.name,
+            name: effectObj?.name,
           },
           localize: true,
         });
       } else {
         ui.notifications.warn("TERIOCK.COMMANDS.ApplyEffect.notFound", {
           format: {
-            name: effectObj.name,
+            name: effectObj?.name,
           },
           localize: true,
         });

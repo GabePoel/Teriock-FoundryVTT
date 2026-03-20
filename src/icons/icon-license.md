@@ -6,6 +6,7 @@ The icons in [`./documents`]() are from [game-icons.net]() ([License](https://cr
 Links to the original pages with the authors can be found below.
 
 - [`./documents/ability.svg`](https://game-icons.net/1x1/delapouite/sparkles.html)
+- [`./documents/attunement.svg`](https://game-icons.net/1x1/lorc/high-five.html)
 - [`./documents/body.svg`](https://game-icons.net/1x1/lorc/ribcage.html)
 - [`./documents/chest.svg`](https://game-icons.net/1x1/delapouite/chest.html)
 - [`./documents/condition.svg`](https://game-icons.net/1x1/lorc/fleshy-mass.html)

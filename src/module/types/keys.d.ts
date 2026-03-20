@@ -79,7 +79,7 @@ declare global {
     export type Trait = keyof typeof index.traits;
 
     // Power Keys
-    export type PowerType = keyof typeof options.power;
+    export type PowerType = keyof typeof options.power.type;
 
     // Effect Keys
     export type Form = keyof typeof options.effect.form;
@@ -101,7 +101,7 @@ declare global {
     export type Status = Condition | Cover | Hack | Transformation;
 
     // Attunement Keys
-    export type AttunementType = keyof typeof options.attunement.attunementType;
+    export type AttunementType = keyof typeof options.attunement.type;
 
     // Rank Keys
     export type Archetype = keyof typeof options.rank;

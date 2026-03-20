@@ -67,7 +67,14 @@ export default class BaseDocumentExecution extends BaseExecution {
 
   /** @inheritDoc */
   async _buildButtons() {
-    this.activeAutomations.forEach((a) => this.buttons.push(...a.buttons));
+    const buttonLists = await Promise.all(
+      this.activeAutomations.map((a) =>
+        a.getButtons({ rollData: this.rollData }),
+      ),
+    );
+    for (const buttons of buttonLists) {
+      this.buttons.push(...buttons);
+    }
 
     // Get all buttons that need to be merged
     const buttonsToMerge = this.buttons.filter(

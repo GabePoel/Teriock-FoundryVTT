@@ -36,7 +36,7 @@ export default class UseAbilitiesAutomation extends BaseAutomation {
   }
 
   /** @inheritDoc */
-  get buttons() {
+  async getButtons() {
     return Array.from(this.abilityNames).map((an) =>
       UseAbilityHandler.buildButton(an),
     );

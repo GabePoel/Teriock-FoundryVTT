@@ -11,10 +11,7 @@ export default class PowerSheet extends BaseItemSheet {
   /** @inheritDoc */
   static BARS = ["teriock/sheets/items/power/status-bar"];
 
-  /**
-   * @inheritDoc
-   * @type {Partial<ApplicationConfiguration>}
-   */
+  /** @inheritDoc */
   static DEFAULT_OPTIONS = {
     classes: ["power"],
     window: {
@@ -32,12 +29,10 @@ export default class PowerSheet extends BaseItemSheet {
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
-    if (!this.isEditable) {
-      return;
-    }
+    if (!this.isEditable) return;
     this._connectBuildContextMenu(
       ".power-box",
-      TERIOCK.options.power,
+      TERIOCK.options.power.type,
       "system.type",
       "click",
     );

@@ -30,7 +30,7 @@ export default class FeatAutomation extends ThresholdAutomation {
   }
 
   /** @inheritDoc */
-  get buttons() {
+  async getButtons() {
     return [
       FeatHandler.buildButton(this.attribute, {
         bonus: this.bonus,

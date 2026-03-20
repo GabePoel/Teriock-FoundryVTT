@@ -19,6 +19,18 @@ export default class TeriockJournalEntryPage extends mix(
   mixins.BaseDocumentMixin,
   mixins.PanelDocumentMixin,
 ) {
+  /**
+   * An image that represents this.
+   * @return {string}
+   */
+  get img() {
+    return (
+      this.system?.img ||
+      this.getFlag("teriock", "journalImage") ||
+      getImage("powers", "Learned Elder Sorceries")
+    );
+  }
+
   /** @inheritDoc */
   get panelParts() {
     const div = document.createElement("div");
@@ -27,10 +39,7 @@ export default class TeriockJournalEntryPage extends mix(
     const html = div.innerHTML;
     return {
       ...super.panelParts,
-      image:
-        this.system?.img ||
-        this.getFlag("teriock", "journalImage") ||
-        getImage("powers", "Learned Elder Sorceries"),
+      image: this.img,
       icon:
         documentOptions[this.type]?.icon ||
         this.getFlag("teriock", "journalIcon") ||

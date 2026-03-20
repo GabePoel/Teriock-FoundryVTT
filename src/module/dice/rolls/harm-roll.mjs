@@ -49,12 +49,15 @@ export default class HarmRoll extends TakeRoll {
           b.dataset.type === "other"
         ),
     );
-    harmArray.forEach((h) => {
+    for (const h of harmArray) {
       const automations = h.system.automations.contents;
-      automations.forEach((a) => {
-        buttons.push(...a.buttons);
+      const buttonLists = await Promise.all(
+        automations.map((a) => a.getButtons()),
+      );
+      buttonLists.forEach((b) => {
+        buttons.push(...b);
       });
-    });
+    }
     buttons
       .filter(
         (b) => b.dataset.action === "take-rollable-take" && !b.dataset.amount,

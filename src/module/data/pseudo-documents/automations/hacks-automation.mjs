@@ -52,7 +52,7 @@ export default class HacksAutomation extends BaseAutomation {
   }
 
   /** @inheritDoc */
-  get buttons() {
+  async getButtons() {
     if (this.reverse) {
       return Array.from(this.hacks).map((hack) =>
         TakeUnhackHandler.buildButton(hack),

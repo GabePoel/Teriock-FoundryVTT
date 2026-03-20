@@ -126,12 +126,6 @@ export default function TriggerAutomationMixin(Base) {
         return paths;
       }
 
-      /** @inheritDoc */
-      get buttons() {
-        if (this.trigger && this.trigger !== "none") return [];
-        return this._buttons;
-      }
-
       /**
        * Whether this can fire.
        * @returns {boolean}
@@ -173,6 +167,12 @@ export default function TriggerAutomationMixin(Base) {
         if (trigger === this.trigger && this.canFire) {
           await this._preFire(scope);
         }
+      }
+
+      /** @inheritDoc */
+      async getButtons() {
+        if (this.trigger && this.trigger !== "none") return [];
+        return this._buttons;
       }
     }
   );

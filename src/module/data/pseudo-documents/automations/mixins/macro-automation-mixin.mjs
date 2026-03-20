@@ -92,24 +92,6 @@ export default function MacroAutomationMixin(Base) {
       }
 
       /** @inheritDoc */
-      get buttons() {
-        if (this.relation !== "trigger" && this.hasMacro) {
-          return [
-            ExecuteMacroHandler.buildButton(
-              this.macro,
-              {
-                proficient: this.document?.system.competence?.proficient,
-                fluent: this.document?.system.competence?.fluent,
-              },
-              { label: this.title },
-            ),
-          ];
-        } else {
-          return [];
-        }
-      }
-
-      /** @inheritDoc */
       get canFire() {
         return super.canFire && this.hasMacro;
       }
@@ -127,6 +109,24 @@ export default function MacroAutomationMixin(Base) {
         fromUuid(this.macro).then((macro) =>
           macro.execute(this.getScope(scope)),
         );
+      }
+
+      /** @inheritDoc */
+      async getButtons() {
+        if (this.relation !== "trigger" && this.hasMacro) {
+          return [
+            ExecuteMacroHandler.buildButton(
+              this.macro,
+              {
+                proficient: this.document?.system.competence?.proficient,
+                fluent: this.document?.system.competence?.fluent,
+              },
+              { label: this.title },
+            ),
+          ];
+        } else {
+          return [];
+        }
       }
     }
   );

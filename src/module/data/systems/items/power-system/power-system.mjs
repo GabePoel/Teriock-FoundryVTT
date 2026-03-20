@@ -1,5 +1,7 @@
+import { powerOptions } from "../../../../constants/options/power-options.mjs";
+import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
-import { mix } from "../../../../helpers/utils.mjs";
+import { mix, objectMap } from "../../../../helpers/utils.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
@@ -42,6 +44,7 @@ export default class PowerSystem extends mix(
       }),
       type: new fields.StringField({
         initial: "other",
+        choices: localizeChoices(objectMap(powerOptions.type, (v) => v.name)),
       }),
     });
   }
@@ -59,7 +62,7 @@ export default class PowerSystem extends mix(
 
   /** @inheritDoc */
   get color() {
-    return TERIOCK.options.power[this.type].color;
+    return powerOptions.type[this.type].color;
   }
 
   /** @inheritDoc */
@@ -70,7 +73,7 @@ export default class PowerSystem extends mix(
   /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
-    parts.text = dotJoin([TERIOCK.options.power[this.type].name, parts.text]);
+    parts.text = dotJoin([powerOptions.type[this.type].name, parts.text]);
     parts.subtitle = game.i18n.localize("TYPES.Item.power");
     return parts;
   }
@@ -93,10 +96,10 @@ export default class PowerSystem extends mix(
   get messageBars() {
     return [
       {
-        icon: TERIOCK.options.power[this.type].icon,
+        icon: powerOptions.type[this.type].icon,
         label: game.i18n.localize("TERIOCK.SYSTEMS.Power.FIELDS.type.label"),
         wrappers: [
-          TERIOCK.options.power[this.type].name,
+          powerOptions.type[this.type].name,
           this.maxAv === 0
             ? game.i18n.localize("TERIOCK.SYSTEMS.Power.PANELS.noArmor")
             : game.i18n.format("TERIOCK.SYSTEMS.Power.PANELS.maxAv", {

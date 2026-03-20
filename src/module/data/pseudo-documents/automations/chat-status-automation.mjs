@@ -69,7 +69,7 @@ export default class ChatStatusAutomation extends CritAutomation {
   }
 
   /** @inheritDoc */
-  get buttons() {
+  async getButtons() {
     if (this.relation === "apply") {
       return [ApplyStatusHandler.buildButton(this.status)];
     } else if (this.relation === "remove") {

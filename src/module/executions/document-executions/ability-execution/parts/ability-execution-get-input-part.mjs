@@ -15,6 +15,7 @@ export default function AbilityExecutionGetInputPart(Base) {
   return (
     /**
      * @extends {AbilityExecutionConstructor}
+     * @extends {BaseDocumentExecution}
      * @mixin
      */
     class AbilityExecutionGetInput extends Base {

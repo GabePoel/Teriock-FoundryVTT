@@ -37,7 +37,7 @@ export default class ResistAutomation extends ThresholdAutomation {
   }
 
   /** @inheritDoc */
-  get buttons() {
+  async getButtons() {
     return [
       ResistHandler.buildButton({
         bonus: this.bonus,

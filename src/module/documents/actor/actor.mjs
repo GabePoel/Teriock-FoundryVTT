@@ -383,14 +383,6 @@ export default class TeriockActor extends mix(
   }
 
   /**
-   * @inheritDoc
-   * @returns {object}
-   */
-  getRollData() {
-    return this.system.getRollData();
-  }
-
-  /**
    * Performs post-update operations for the actor.
    * @returns {Promise<void>}
    */

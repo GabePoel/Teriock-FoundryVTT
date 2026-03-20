@@ -8,7 +8,7 @@ import {
   ChangeableDocumentMixin,
   EmbedCardDocumentMixin,
   PanelDocumentMixin,
-  SettingsDocumentMixin,
+  SettingsDocumentMixin
 } from "./_module.mjs";
 
 /**
@@ -205,6 +205,14 @@ export default function CommonDocumentMixin(Base) {
       async getChildren() {
         const children = await resolveDocuments(this.childArray);
         return new TypeCollection(children.map((c) => [c._id, c]));
+      }
+
+      /**
+       * Roll data.
+       * @returns {object}
+       */
+      getRollData() {
+        return this.system.getRollData();
       }
 
       /**

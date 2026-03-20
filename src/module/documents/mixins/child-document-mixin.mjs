@@ -119,14 +119,6 @@ export default function ChildDocumentMixin(Base) {
         return copyDocument[0];
       }
 
-      /**
-       * Roll data.
-       * @returns {object}
-       */
-      getRollData() {
-        return this.system.getRollData();
-      }
-
       /** @inheritDoc */
       prepareData() {
         super.prepareData();

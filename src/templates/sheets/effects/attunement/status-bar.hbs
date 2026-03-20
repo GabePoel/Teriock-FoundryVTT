@@ -1,0 +1,20 @@
+<div class="ab-bar">
+  {{formBox
+    (path TERIOCK.options.attunement.type system.type "name")
+    icon=(path TERIOCK.options.attunement.type system.type "icon")
+    classes="attunement-box"
+    tooltip=(localize "TERIOCK.SYSTEMS.Attunement.FIELDS.type.label")
+  }}
+  {{formBox
+    (formInput
+      systemFields.tier
+      value=system._source.tier
+      disabled=(or (not editable) system.targetDocument)
+      placeholder="0"
+    )
+    icon=TERIOCK.display.icons.attunable.tier
+    label=(localize "TERIOCK.SYSTEMS.Attunable.FIELDS.tier.raw.abbreviation")
+    tooltip=(localize "TERIOCK.SYSTEMS.Attunement.FIELDS.tier.label")
+    unselected=(ifThen system.tier system.tier "")
+  }}
+</div>

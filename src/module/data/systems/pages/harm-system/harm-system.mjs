@@ -1,6 +1,7 @@
 import { getImage } from "../../../../helpers/path.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
+import { AccessDataMixin } from "../../../shared/mixins/_module.mjs";
 import { RulesSystem } from "../../abstract/_module.mjs";
 import { AutomatableSystemMixin } from "../../mixins/_module.mjs";
 
@@ -9,15 +10,18 @@ const { fields } = foundry.data;
 /**
  * @extends {RulesSystem}
  * @extends {Teriock.Models.HarmSystemData}
+ * @mixes AccessData
  * @mixes AutomatableSystem
  */
 export default class HarmSystem extends mix(
   RulesSystem,
+  AccessDataMixin,
   AutomatableSystemMixin,
 ) {
   /** @inheritDoc */
   static get _automationTypes() {
     return [
+      automations.AttunementAutomation,
       automations.ChatMacroAutomation,
       automations.ChatStatusAutomation,
       automations.CommonImpactsAutomation,
@@ -78,5 +82,10 @@ export default class HarmSystem extends mix(
       if (this.parent.type === "drain") ref = "Draining";
       this.parent.updateSource({ "system.img": getImage("effect-types", ref) });
     }
+  }
+
+  /** @inheritDoc */
+  getRollData() {
+    return {};
   }
 }

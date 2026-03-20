@@ -8,6 +8,21 @@ export default (Base) =>
    */
   class DocumentCreationActorSheetPart extends Base {
     /**
+     * Create and connect a context menu to create the provided document types.
+     * @param {string} cssClass
+     * @param {Teriock.Documents.ChildType[]} types
+     */
+    #createContextMenu(cssClass, types) {
+      this._connectContextMenu(
+        cssClass,
+        types.map((t) => this.#createContextMenuEntry(t)),
+        "contextmenu",
+        undefined,
+        true,
+      );
+    }
+
+    /**
      * Context menu entry to create a given document type.
      * @param {Teriock.Documents.ChildType} type
      * @returns {Teriock.Foundry.ContextMenuEntry}
@@ -26,26 +41,15 @@ export default (Base) =>
     async _onRender(context, options) {
       await super._onRender(context, options);
       if (!this.isEditable) return;
-      this._connectContextMenu(
-        ".equipment-add-button",
-        [
-          this.#createContextMenuEntry("equipment"),
-          this.#createContextMenuEntry("body"),
-          this.#createContextMenuEntry("mount"),
-        ],
-        "contextmenu",
-        undefined,
-        true,
-      );
-      this._connectContextMenu(
-        ".power-add-button",
-        [
-          this.#createContextMenuEntry("power"),
-          this.#createContextMenuEntry("species"),
-        ],
-        "contextmenu",
-        undefined,
-        true,
-      );
+      this.#createContextMenu(".equipment-add-button", [
+        "equipment",
+        "body",
+        "mount",
+      ]);
+      this.#createContextMenu(".consequence-add-button", [
+        "consequence",
+        "attunement",
+      ]);
+      this.#createContextMenu(".power-add-button", ["species", "power"]);
     }
   };

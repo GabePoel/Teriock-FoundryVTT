@@ -1,4 +1,7 @@
-import { copyRank, getRank } from "../../../../../helpers/fetch.mjs";
+import {
+  copyRank,
+  getRank
+} from "../../../../../helpers/fetch.mjs";
 import { getImage } from "../../../../../helpers/path.mjs";
 import { newDocumentDialog } from "../../../../dialogs/_module.mjs";
 import {
@@ -8,7 +11,7 @@ import {
   selectEquipmentTypeDialog,
   selectPropertyDialog,
   selectSpeciesDialog,
-  selectTradecraftDialog,
+  selectTradecraftDialog
 } from "../../../../dialogs/select-dialog.mjs";
 import { selectDocumentDialog } from "../../../../dialogs/select-document-dialog.mjs";
 
@@ -27,6 +30,7 @@ export default (Base) => {
       static DEFAULT_OPTIONS = {
         actions: {
           createAbility: this._onCreateAbility,
+          createAttunement: this._onCreateAttunement,
           createBody: this._onCreateBody,
           createConsequence: this._onCreateConsequence,
           createEquipment: this._onCreateEquipment,
@@ -58,6 +62,16 @@ export default (Base) => {
         if (decision && obj) {
           await this.document.createChildDocuments("ActiveEffect", [obj]);
         }
+      }
+
+      /**
+       * Adds a new {@link TeriockAttunement} to the current document.
+       * @returns {Promise<void>}
+       */
+      static async _onCreateAttunement() {
+        await this.document.createChildDocuments("ActiveEffect", [
+          newDocumentObj("attunement"),
+        ]);
       }
 
       /**
@@ -118,10 +132,7 @@ export default (Base) => {
               ),
               type: "fluency",
               img: getImage("tradecrafts", TERIOCK.index.tradecrafts[tc]),
-              system: {
-                tradecraft: tc,
-                field: f,
-              },
+              system: { tradecraft: tc, field: f },
             },
           ]);
         }
