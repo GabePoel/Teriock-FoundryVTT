@@ -44,12 +44,13 @@ export default class ConsequenceSystem extends mix(
     return foundry.utils.mergeObject(super.metadata, {
       type: "consequence",
       usable: true,
-      childEffectTypes: ["ability", "resource"],
+      childEffectTypes: ["ability", "fluency", "resource"],
       childItemTypes: ["body", "equipment", "power", "rank", "species"],
       visibleTypes: [
         "ability",
         "body",
         "equipment",
+        "fluency",
         "power",
         "rank",
         "resource",

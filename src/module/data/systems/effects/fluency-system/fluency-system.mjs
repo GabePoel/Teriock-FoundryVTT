@@ -90,9 +90,7 @@ export default class FluencySystem extends mix(
     parts.subtitle = TERIOCK.reference.tradecrafts[this.tradecraft];
     parts.text = dotJoin([
       TERIOCK.options.tradecraft[this.field].name,
-      (this.parent.elder?.documentName !== "ActiveEffect"
-        ? this.parent.elder?.name
-        : "") || "",
+      parts.text,
     ]);
     return parts;
   }
