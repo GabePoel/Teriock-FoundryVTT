@@ -1,4 +1,3 @@
-import { selectDocumentsDialog } from "../../../applications/dialogs/select-document-dialog.mjs";
 import { getImage } from "../../../helpers/path.mjs";
 import ArmamentExecution from "../armament-execution/armament-execution.mjs";
 
@@ -43,36 +42,5 @@ export default class EquipmentExecution extends ArmamentExecution {
     } else {
       return super._buildSourcePanel();
     }
-  }
-
-  /** @inheritDoc */
-  async _postExecute() {
-    const onUseIds = Array.from(this.source.system.onUse);
-    const onUseAbilities = /** @type {TeriockAbility[]} */ onUseIds
-      .map((id) => this.source.effects.get(id))
-      .filter((a) => a);
-    if (onUseAbilities.length > 0) {
-      const usedAbilities = await selectDocumentsDialog(onUseAbilities, {
-        hint: game.i18n.format("TERIOCK.SYSTEMS.Equipment.DIALOG.onUse.hint", {
-          name: this.source.name,
-        }),
-        title: game.i18n.localize(
-          "TERIOCK.SYSTEMS.Equipment.DIALOG.onUse.title",
-        ),
-      });
-      for (const ability of usedAbilities) {
-        if (ability.system.consumable && this.source.system.consumable) {
-          if (
-            ability.system.quantity !== 1 &&
-            this.source.isOwner &&
-            !this.source.inCompendium
-          ) {
-            await this.source.setFlag("teriock", "dontConsume", true);
-          }
-        }
-        await ability.use();
-      }
-    }
-    await super._postExecute();
   }
 }

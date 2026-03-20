@@ -1,6 +1,12 @@
-import { boostDialog } from "../../../applications/dialogs/_module.mjs";
+import {
+  boostDialog,
+  selectDocumentsDialog
+} from "../../../applications/dialogs/_module.mjs";
 import { HarmRoll } from "../../../dice/rolls/_module.mjs";
-import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
+import {
+  addFormula,
+  formulaExists
+} from "../../../helpers/formula.mjs";
 import BaseDocumentExecution from "../base-document-execution/base-document-execution.mjs";
 
 /**
@@ -100,6 +106,32 @@ export default class ArmamentExecution extends BaseDocumentExecution {
 
   /** @inheritDoc */
   async _postExecute() {
+    const onUseIds = Array.from(this.source.system.onUse);
+    const onUseAbilities = /** @type {TeriockAbility[]} */ onUseIds
+      .map((id) => this.source.effects.get(id))
+      .filter((a) => a);
+    if (onUseAbilities.length > 0) {
+      const usedAbilities = await selectDocumentsDialog(onUseAbilities, {
+        hint: game.i18n.format("TERIOCK.SYSTEMS.Equipment.DIALOG.onUse.hint", {
+          name: this.source.name,
+        }),
+        title: game.i18n.localize(
+          "TERIOCK.SYSTEMS.Equipment.DIALOG.onUse.title",
+        ),
+      });
+      for (const ability of usedAbilities) {
+        if (ability.system.consumable && this.source.system.consumable) {
+          if (
+            ability.system.quantity !== 1 &&
+            this.source.isOwner &&
+            !this.source.inCompendium
+          ) {
+            await this.source.setFlag("teriock", "dontConsume", true);
+          }
+        }
+        await ability.use();
+      }
+    }
     await super._postExecute();
     await this.actor?.hookCall("useArmament", { scope: this.getScope() });
   }

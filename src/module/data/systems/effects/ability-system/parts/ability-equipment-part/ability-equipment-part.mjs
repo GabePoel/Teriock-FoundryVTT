@@ -65,7 +65,10 @@ export default (Base) => {
 
       /** @inheritDoc */
       get tagIcon() {
-        if (this.parent.elder?.type === "equipment" && this.parent.isOnUse) {
+        if (
+          ["body", "equipment"].includes(this.parent.elder?.type) &&
+          this.parent.isOnUse
+        ) {
           return this.onUseIcon;
         }
         return super.tagIcon;

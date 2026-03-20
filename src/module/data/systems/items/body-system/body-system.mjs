@@ -24,14 +24,14 @@ export default class BodySystem extends mix(
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
-      childEffectTypes: ["property"],
+      childEffectTypes: ["ability", "property"],
       indexCategoryKey: "bodyParts",
       indexCompendiumKey: "bodyParts",
       namespace: "Body",
       pageNameKey: "name",
       type: "body",
       usable: true,
-      visibleTypes: ["property"],
+      visibleTypes: ["ability", "property"],
     });
   }
 

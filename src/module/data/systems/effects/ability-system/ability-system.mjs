@@ -337,7 +337,10 @@ export default class AbilitySystem extends mix(
         condition: this.basic,
       });
     }
-    if (this.parent.elder?.type === "equipment" && !this.parent.isOnUse) {
+    if (
+      ["body", "equipment"].includes(this.parent.elder?.type) &&
+      !this.parent.isOnUse
+    ) {
       icons.unshift(this.onUseIcon);
     }
     if (this.tagIcon) {
