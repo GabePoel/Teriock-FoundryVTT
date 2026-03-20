@@ -106,6 +106,18 @@
         },
         "LABEL": "Common Impacts"
       },
+      "CompetenceAutomation": {
+        "FIELDS": {
+          "competence": {
+            "hint": "Whether to use documents with proficiency or fluency.",
+            "label": "Competence"
+          },
+          "overrideCompetence": {
+            "hint": "If checked, the external documents will have a different competence then the parent of this automation.",
+            "label": "Override Competence"
+          }
+        }
+      },
       "CritAutomation": {
         "FIELDS": {
           "crit": {
@@ -351,10 +363,6 @@
       },
       "UseExternalDocumentsAutomation": {
         "FIELDS": {
-          "competence": {
-            "hint": "Whether to use documents with proficiency or fluency.",
-            "label": "Competence"
-          },
           "expandTables": {
             "hint": "If checked, select from the documents within tables instead of rolling the table itself.",
             "label": "Expand Tables"
@@ -362,10 +370,6 @@
           "noHeighten": {
             "hint": "If checked, abilities this executes cannot be heightened.",
             "label": "No Heightening"
-          },
-          "overrideCompetence": {
-            "hint": "If checked, the documents used will have a different competence then the parent of this automation.",
-            "label": "Override Competence"
           }
         },
         "LABEL": "Use External Documents"
@@ -497,6 +501,50 @@
         "useNamed": "Use {name}",
         "useResist": "Use Resist",
         "useUnnamed": "Use Ability"
+      }
+    },
+    "CONFIGS": {
+      "AlternateRules": {
+        "hint": "Other rules options that change the way the game plays.",
+        "label": "Configure Alternate Rules",
+        "name": "Alternate Rules Configuration",
+        "parts": {
+          "armor": "Armor",
+          "cones": "Cones"
+        }
+      },
+      "AutomatedBehavior": {
+        "hint": "Configure what parts of the game should be automated or handled manually.",
+        "label": "Configure Automated Behavior",
+        "name": "Automated Behavior Configuration",
+        "parts": {
+          "armaments": "Armaments"
+        }
+      },
+      "Dialog": {
+        "hint": "Configure what dialogs automatically appear.",
+        "label": "Configure Dialogs",
+        "name": "Dialog Configuration"
+      },
+      "Display": {
+        "hint": "Configure the default behavior of panels, sheets, tooltips, and other user interface components.",
+        "label": "Configure Display",
+        "name": "Display Configuration",
+        "parts": {
+          "actorSheets": "Actor Sheets",
+          "panels": "Panels",
+          "tooltips": "Tooltips"
+        }
+      },
+      "GameContent": {
+        "hint": "Configure what content is available within the game.",
+        "label": "Configure Game Content",
+        "name": "Game Content Configuration"
+      },
+      "GameMasterControls": {
+        "hint": "Settings for the game master to adjust based on how they want their game to operate and what they want their players to have access to.",
+        "label": "Configure Game Master Controls",
+        "name": "Game Master Controls Configuration"
       }
     },
     "CONTENT": {
@@ -1801,50 +1849,6 @@
         }
       }
     },
-    "CONFIGS": {
-      "AlternateRules": {
-        "hint": "Other rules options that change the way the game plays.",
-        "label": "Configure Alternate Rules",
-        "name": "Alternate Rules Configuration",
-        "parts": {
-          "armor": "Armor",
-          "cones": "Cones"
-        }
-      },
-      "AutomatedBehavior": {
-        "hint": "Configure what parts of the game should be automated or handled manually.",
-        "label": "Configure Automated Behavior",
-        "name": "Automated Behavior Configuration",
-        "parts": {
-          "armaments": "Armaments"
-        }
-      },
-      "Dialog": {
-        "hint": "Configure what dialogs automatically appear.",
-        "label": "Configure Dialogs",
-        "name": "Dialog Configuration"
-      },
-      "Display": {
-        "hint": "Configure the default behavior of panels, sheets, tooltips, and other user interface components.",
-        "label": "Configure Display",
-        "name": "Display Configuration",
-        "parts": {
-          "actorSheets": "Actor Sheets",
-          "panels": "Panels",
-          "tooltips": "Tooltips"
-        }
-      },
-      "GameContent": {
-        "hint": "Configure what content is available within the game.",
-        "label": "Configure Game Content",
-        "name": "Game Content Configuration"
-      },
-      "GameMasterControls": {
-        "hint": "Settings for the game master to adjust based on how they want their game to operate and what they want their players to have access to.",
-        "label": "Configure Game Master Controls",
-        "name": "Game Master Controls Configuration"
-      }
-    },
     "SETTINGS": {
       "armorSuppressesRanks": {
         "hint": "Alternate rule. If enabled, wearing AV above a rank's maximum suppresses it.",
@@ -2982,15 +2986,15 @@
       },
       "BaseEffect": {
         "FIELDS": {
+          "badge": {
+            "label": "Badge",
+            "placeholder": "No Badge"
+          },
           "deleteOnExpire": {
             "label": "Delete On Expire"
           },
           "form": {
             "label": "Form"
-          },
-          "badge": {
-            "label": "Badge",
-            "placeholder": "No Badge"
           }
         },
         "PANELS": {

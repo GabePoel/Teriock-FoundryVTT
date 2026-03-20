@@ -63,6 +63,13 @@ declare global {
       trigger?: string;
     };
 
+    export type AttachmentData<T> = {
+      uuid?: UUID<T>;
+      data?: Partial<T>;
+    };
+
+    export type Attachment<T> = AttachmentData<T> | UUID<T>;
+
     /**
      * Something's competency level specifies if it's proficient or fluent.
      * - `0`: Neither proficient nor fluent

@@ -6,11 +6,7 @@ import TeriockPlayableActorSheet from "./base-actor-sheet/playable-actor-sheet.m
  * Sheet for a {@link TeriockCharacter}.
  */
 export default class CharacterSheet extends TeriockPlayableActorSheet {
-  //noinspection JSValidateTypes
-  /**
-   * @inheritDoc
-   * @type {Partial<ApplicationConfiguration>}
-   */
+  /** @inheritDoc */
   static DEFAULT_OPTIONS = {
     classes: ["character"],
     form: { submitOnChange: true },

@@ -72,11 +72,11 @@ export default class CompetenceModel extends EmbeddedDataModel {
 
   /**
    * A competence value.
-   * @returns {"proficient"|"fluent"|""}
+   * @returns {Teriock.System.CompetenceLevel}
    */
   get value() {
-    if (this.proficient) return "proficient";
-    if (this.fluent) return "fluent";
-    else return "";
+    if (this.fluent) return 2;
+    if (this.proficient) return 1;
+    else return 0;
   }
 }

@@ -8,6 +8,7 @@ const { ActiveEffectConfig } = foundry.applications.sheets;
  * @property {TeriockAttunement} document
  */
 export default class AttunementSheet extends ActiveEffectConfig {
+  /** @inheritDoc */
   static DEFAULT_OPTIONS = {
     classes: ["attunement"],
     window: {

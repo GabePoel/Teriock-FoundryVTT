@@ -1,17 +1,23 @@
-import { CompetenceModel } from "../../models/_module.mjs";
+import { mix } from "../../../helpers/utils.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
-import { ExternalDocumentsAutomationMixin } from "./mixins/_module.mjs";
+import {
+  CompetenceAutomationMixin,
+  ExternalDocumentsAutomationMixin,
+} from "./mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
- * @property {CompetenceModel} competence
  * @property {boolean} noHeighten
- * @property {boolean} overrideCompetence
  * @property {boolean} expandTables
+ * @extends {BaseAutomation}
+ * @mixes ExternalDocumentsAutomation
+ * @mixes CompetenceAutomation
  */
-export default class UseExternalDocumentsAutomation extends ExternalDocumentsAutomationMixin(
+export default class UseExternalDocumentsAutomation extends mix(
   BaseAutomation,
+  ExternalDocumentsAutomationMixin,
+  CompetenceAutomationMixin,
 ) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
@@ -32,23 +38,14 @@ export default class UseExternalDocumentsAutomation extends ExternalDocumentsAut
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      competence: new fields.EmbeddedDataField(CompetenceModel),
       expandTables: new fields.BooleanField(),
       noHeighten: new fields.BooleanField(),
-      overrideCompetence: new fields.BooleanField(),
     });
   }
 
   /** @inheritDoc */
   get _formPaths() {
-    const paths = [
-      ...super._formPaths,
-      "expandTables",
-      "noHeighten",
-      "overrideCompetence",
-    ];
-    if (this.overrideCompetence) paths.push("competence.raw");
-    return paths;
+    return [...super._formPaths, "noHeighten", "expandTables"];
   }
 
   /** @inheritDoc */

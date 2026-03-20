@@ -1,5 +1,4 @@
 import { icons } from "../../../constants/display/icons.mjs";
-import { resolveDocuments } from "../../resolve.mjs";
 import { makeIconClass } from "../../utils.mjs";
 import BaseButtonHandler from "./base-button-handler.mjs";
 
@@ -24,10 +23,10 @@ export class ApplyEffectHandler extends BaseButtonHandler {
    * @param {object} normalData
    * @param {object} [options]
    * @param {object} [options.critData]
-   * @param {UUID<ChildDocument>[]} [options.normalChildren]
-   * @param {UUID<ChildDocument>[]} [options.critChildren]
-   * @param {UUID<ChildDocument>[]} [options.normalDocuments]
-   * @param {UUID<ChildDocument>[]} [options.critDocuments]
+   * @param {Teriock.System.Attachment<ChildDocument>[]} [options.normalChildren]
+   * @param {Teriock.System.Attachment<ChildDocument>[]} [options.critChildren]
+   * @param {Teriock.System.Attachment<ChildDocument>[]} [options.normalDocuments]
+   * @param {Teriock.System.Attachment<ChildDocument>[]} [options.critDocuments]
    */
   static buildButton(normalData, options = {}) {
     const { critData } = options;
@@ -48,27 +47,55 @@ export class ApplyEffectHandler extends BaseButtonHandler {
   }
 
   /**
-   * Create child documents within some parent.
-   * @param {AnyCommonDocument} parent
-   * @param {ChildDocumentName} documentName
-   * @param {object[]} objs
-   * @return {Promise<AnyCommonDocument[]>}
+   * Get data from an attachment.
+   * @param {Teriock.System.Attachment<AnyChildDocument>} attachment
    */
-  #safeCreate(parent, documentName, objs) {
-    if (objs.length > 0) return parent.createChildDocuments(documentName, objs);
-    return [];
+  async #fromAttachment(attachment) {
+    if (typeof attachment === "string") {
+      attachment = { uuid: attachment, data: {} };
+    }
+    const data = {};
+    if (attachment.uuid) {
+      const fetched = await foundry.utils.fromUuid(attachment.uuid);
+      const fetchedData = fetched.toObject();
+      if (fetchedData) {
+        foundry.utils.mergeObject(data, fetchedData, { inplace: true });
+      }
+      data.documentName = fetched.documentName;
+    }
+    if (attachment.data) {
+      foundry.utils.mergeObject(data, attachment.data, { inplace: true });
+    }
+    return data;
   }
 
   /**
-   * Convert documents into pure filtered objects.
-   * @param {ChildDocumentName} documentName
-   * @param {AnyChildDocument[]} docs
-   * @return {object[]}
+   * Get data from many attachments.
+   * @param {Teriock.System.Attachment<AnyChildDocument>[]}attachments
+   * @return {Promise<object[]>}
    */
-  #toObjs(documentName, docs) {
-    return docs
-      .filter((d) => d.documentName === documentName)
-      .map((d) => d.toObject());
+  async #fromAttachments(attachments) {
+    const resolved = await Promise.all(
+      attachments.map((a) => this.#fromAttachment(a)),
+    );
+    return resolved.filter((r) => Object.keys(r).length > 0);
+  }
+
+  /**
+   * Create child documents within some parent.
+   * @param {AnyChildDocument} parent
+   * @param {ChildDocumentName} documentName
+   * @param {object[]} objs
+   * @return {Promise<AnyChildDocument[]>}
+   */
+  #safeCreate(parent, documentName, objs) {
+    if (objs.length > 0) {
+      return parent.createChildDocuments(
+        documentName,
+        objs.filter((e) => e.documentName === documentName),
+      );
+    }
+    return [];
   }
 
   /**
@@ -84,12 +111,12 @@ export class ApplyEffectHandler extends BaseButtonHandler {
   /** @inheritDoc */
   async primaryAction() {
     let effectObj = this._toObj(this.dataset.normal) || {};
-    let childrenUuids = this._toObj(this.dataset.normalChildren) || [];
-    let documentUuids = this._toObj(this.dataset.normalDocuments) || [];
+    let ca = this._toObj(this.dataset.normalChildren) || [];
+    let da = this._toObj(this.dataset.normalDocuments) || [];
     if (this.event.altKey) {
       effectObj = this._toObj(this.dataset.crit) || {};
-      childrenUuids = this._toObj(this.dataset.critChildren) || [];
-      documentUuids = this._toObj(this.dataset.critDocuments) || [];
+      ca = this._toObj(this.dataset.critChildren) || [];
+      da = this._toObj(this.dataset.critDocuments) || [];
     }
     effectObj._id = foundry.utils.randomID();
     const createdConsequences = [];
@@ -101,20 +128,16 @@ export class ApplyEffectHandler extends BaseButtonHandler {
       );
       createdConsequences.push(...newConsequences);
     }
-    const children = await resolveDocuments(childrenUuids);
-    const documents = await resolveDocuments(documentUuids);
-    const ci = this.#toObjs("Item", children);
-    const ce = this.#toObjs("ActiveEffect", children);
-    const di = this.#toObjs("Item", documents);
-    const de = this.#toObjs("ActiveEffect", documents);
+    const cd = await this.#fromAttachments(ca);
+    const dd = await this.#fromAttachments(da);
     const creationPromises = [];
     for (const c of createdConsequences) {
-      creationPromises.push(this.#safeCreate(c, "Item", ci));
-      creationPromises.push(this.#safeCreate(c, "ActiveEffect", ce));
+      creationPromises.push(this.#safeCreate(c, "Item", cd));
+      creationPromises.push(this.#safeCreate(c, "ActiveEffect", cd));
     }
     for (const a of this.actors) {
-      creationPromises.push(this.#safeCreate(a, "Item", di));
-      creationPromises.push(this.#safeCreate(a, "ActiveEffect", de));
+      creationPromises.push(this.#safeCreate(a, "Item", dd));
+      creationPromises.push(this.#safeCreate(a, "ActiveEffect", dd));
     }
     await Promise.all(creationPromises);
     ui.notifications.info("TERIOCK.COMMANDS.ApplyEffect.applied", {
