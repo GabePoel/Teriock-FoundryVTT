@@ -1,4 +1,5 @@
 import { ApplyEffectHandler } from "./apply-effect-handlers.mjs";
+import { ChangeMovementButtonHandler } from "./change-movement-button-handler.mjs";
 import { ExecuteMacroHandler } from "./execute-macro-handlers.mjs";
 import {
   RollRollableTakeHandler,
@@ -40,6 +41,7 @@ const handlerArray = [
   ApplyStatusHandler,
   AttuneHandler,
   AwakenHandler,
+  ChangeMovementButtonHandler,
   DampenHandler,
   DeathBagHandler,
   DeattuneHandler,

@@ -3,6 +3,7 @@ import { makeIconClass } from "../../utils.mjs";
 import BaseButtonHandler from "./base-button-handler.mjs";
 
 export class ExecuteMacroHandler extends BaseButtonHandler {
+  /** @inheritDoc */
   static ACTION = "execute-macro";
 
   /**
@@ -10,7 +11,7 @@ export class ExecuteMacroHandler extends BaseButtonHandler {
    * @param {UUID<TeriockMacro>} uuid
    * @param {object} data
    * @param {object} [options]
-   * @param {object} [options.label]
+   * @param {string} [options.label]
    */
   static buildButton(uuid, data = {}, options = {}) {
     const button = super.buildButton();

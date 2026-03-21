@@ -73,6 +73,7 @@ export default class AbilitySystem extends mix(
       automations.AbilityMacroAutomation,
       automations.AddExternalDocumentsAutomation,
       automations.AttunementAutomation,
+      automations.ChangeMovementAutomation,
       automations.ChangesAutomation,
       automations.CheckAutomation,
       automations.CombatExpirationAutomation,
@@ -109,6 +110,7 @@ export default class AbilitySystem extends mix(
     });
   }
 
+  /** @inheritDoc */
   get _nameTags() {
     const tags = [];
     for (const [k, v] of Object.entries(TERIOCK.options.cost.tweaks)) {

@@ -142,12 +142,15 @@ export class ApplyEffectHandler extends BaseButtonHandler {
       creationPromises.push(this.#safeCreate(a, "ActiveEffect", dd));
     }
     await Promise.all(creationPromises);
-    ui.notifications.info("TERIOCK.COMMANDS.ApplyEffect.applied", {
-      format: {
-        name: effectObj.name,
-      },
-      localize: true,
-    });
+    for (const actor of this.actors) {
+      ui.notifications.success("TERIOCK.COMMANDS.ApplyEffect.applied", {
+        format: {
+          actor: actor.name,
+          effect: effectObj.name,
+        },
+        localize: true,
+      });
+    }
   }
 
   /** @inheritDoc */
@@ -166,16 +169,18 @@ export class ApplyEffectHandler extends BaseButtonHandler {
       );
       const foundIds = Array.from(foundEffects.map((effect) => effect.id));
       if (foundIds.length > 0) {
-        ui.notifications.info("TERIOCK.COMMANDS.ApplyEffect.removed", {
+        ui.notifications.success("TERIOCK.COMMANDS.ApplyEffect.removed", {
           format: {
-            name: effectObj?.name,
+            actor: actor.name,
+            effect: effectObj?.name,
           },
           localize: true,
         });
       } else {
         ui.notifications.warn("TERIOCK.COMMANDS.ApplyEffect.notFound", {
           format: {
-            name: effectObj?.name,
+            actor: actor.name,
+            effect: effectObj?.name,
           },
           localize: true,
         });

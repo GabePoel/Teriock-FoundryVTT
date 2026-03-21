@@ -148,9 +148,9 @@ export default class TeriockTokenDocument extends mix(
    * @inheritDoc
    */
   _onRelatedUpdate(update = {}, operation = {}) {
-    this.deriveVision();
-    this.deriveLighting();
-    this.deriveDetectionModes();
+    if (this.getSetting("autoVisionModes")) this.deriveVision();
+    if (this.getSetting("autoLighting")) this.deriveLighting();
+    if (this.getSetting("autoDetectionModes")) this.deriveDetectionModes();
     super._onRelatedUpdate(update, operation);
     this.object?.initializeSources();
   }

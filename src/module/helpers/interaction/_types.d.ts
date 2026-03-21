@@ -1,9 +1,7 @@
 import "./button-handlers/_types";
 import "./command-handler/_types";
-import {
-  TeriockActor,
-  TeriockTokenDocument,
-} from "../../documents/_module.mjs";
+import { TeriockActor } from "../../documents/_module.mjs";
+import { TeriockToken } from "../../canvas/placeables/_module.mjs";
 
 declare module "./abstract-interaction-handler.mjs" {
   export default interface InteractionHandler {
@@ -12,14 +10,12 @@ declare module "./abstract-interaction-handler.mjs" {
     /** Selected Actors */
     selectedActors: TeriockActor[];
     /** Selected Tokens */
-    selectedTokens: TeriockTokenDocument[];
+    selectedTokens: TeriockToken[];
     /** Targeted Actors */
     targetedActors: TeriockActor[];
     /** Targeted Tokens */
-    targetedTokens: TeriockTokenDocument[];
+    targetedTokens: TeriockToken[];
     /** Default Tokens */
-    tokens: TeriockTokenDocument[];
+    tokens: TeriockToken[];
   }
 }
-
-export {};

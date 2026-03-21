@@ -3,12 +3,11 @@
  */
 export default class AbstractInteractionHandler {
   constructor() {
-    //noinspection JSUnresolvedReference,JSValidateJSDoc
     const tokenLayer = /** @type {TokenLayer} */ game.canvas.tokens;
     const user = game.user;
     const defaultActor = game.actors.default;
     this.selectedTokens =
-      /** @type {TeriockTokenDocument[]} */
+      /** @type {TeriockToken[]} */
       tokenLayer.controlled.filter((t) => t);
     this.selectedActors =
       this.selectedTokens.map((t) => t.actor).filter((a) => a) || defaultActor
@@ -20,5 +19,13 @@ export default class AbstractInteractionHandler {
       .filter((a) => a);
     this.tokens = this.selectedTokens;
     this.actors = this.selectedActors;
+  }
+
+  /**
+   * Token documents.
+   * @return {TeriockTokenDocument[]}
+   */
+  get tokenDocuments() {
+    return this.tokens.map((t) => t.document);
   }
 }

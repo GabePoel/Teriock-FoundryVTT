@@ -156,6 +156,15 @@
           }
         }
       },
+      "ChangeMovementAutomation": {
+        "FIELDS": {
+          "movementAction": {
+            "label": "Movement Action",
+            "hint": "A movement action this switches the token to."
+          }
+        },
+        "LABEL": "Change Movement"
+      },
       "HacksAutomation": {
         "FIELDS": {
           "hacks": {
@@ -425,13 +434,19 @@
       }
     },
     "COMMANDS": {
+      "ChangeMovement": {
+        "already": "Movement of {token} is already {movement}",
+        "changed": "Changed movement of {token} from {old} to {new}",
+        "reverted": "Reverted movement of {token} from {old} to {new}",
+        "notFount": "{token} cannot have movement reverted from {movement}"
+      },
       "ApplyEffect": {
-        "applied": "Applied {name}",
+        "applied": "Applied {effect} to {actor}",
         "cantParse": "Failed to parse effect data.",
         "cantSustain": "Could not attach effect to the one that's sustaining it.",
         "label": "Apply Effect",
-        "notFound": "{name} not found",
-        "removed": "Removed {name}"
+        "notFound": "{effect} not found on {actor}",
+        "removed": "Removed {effect} from {actor}"
       },
       "Attack": {
         "label": "Attack"

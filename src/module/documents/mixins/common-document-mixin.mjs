@@ -8,7 +8,7 @@ import {
   ChangeableDocumentMixin,
   EmbedCardDocumentMixin,
   PanelDocumentMixin,
-  SettingsDocumentMixin
+  SettingsDocumentMixin,
 } from "./_module.mjs";
 
 /**
