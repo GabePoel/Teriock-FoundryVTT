@@ -1,4 +1,5 @@
 import { icons } from "../../../constants/display/icons.mjs";
+import { resolveDocument } from "../../resolve.mjs";
 import { makeIconClass } from "../../utils.mjs";
 import BaseButtonHandler from "./base-button-handler.mjs";
 
@@ -59,7 +60,7 @@ export class ApplyEffectHandler extends BaseButtonHandler {
     }
     const data = {};
     if (attachment.uuid) {
-      const fetched = await foundry.utils.fromUuid(attachment.uuid);
+      const fetched = await resolveDocument(attachment.uuid);
       const fetchedData = fetched.toObject();
       if (fetchedData) {
         foundry.utils.mergeObject(data, fetchedData, { inplace: true });

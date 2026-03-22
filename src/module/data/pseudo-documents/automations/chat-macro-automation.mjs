@@ -10,7 +10,23 @@ export default class ChatMacroAutomation extends MacroAutomationMixin(
   }
 
   /** @inheritDoc */
+  static defineSchema() {
+    const schema = super.defineSchema();
+    delete schema.relation;
+    delete schema.trigger;
+    return schema;
+  }
+
+  /** @inheritDoc */
   get _formPaths() {
     return ["macro", "title"];
+  }
+
+  /**
+   * Getter that replaces the optional relation data.
+   * @return {string}
+   */
+  get relation() {
+    return "button";
   }
 }

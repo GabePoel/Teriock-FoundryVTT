@@ -184,7 +184,7 @@ export default class ConsequenceSystem extends mix(
   _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
     if (this.parent.checkEditor(userId) && this.actor) {
-      this.parent.hookCall("effectApplication");
+      this.parent.fireTrigger("applyEffect", this.parent.getScope());
     }
   }
 
@@ -201,7 +201,7 @@ export default class ConsequenceSystem extends mix(
     const yes = await super._preDelete(options, user);
     if (yes === false) return false;
 
-    await this.parent.hookCall("effectExpiration");
+    this.parent.fireTrigger("expireEffect", this.parent.getScope());
   }
 
   /** @inheritDoc */

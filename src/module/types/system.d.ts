@@ -55,6 +55,7 @@ declare global {
       armament?: TeriockArmament;
       attribute?: Teriock.Keys.Attribute;
       automation?: BaseAutomation;
+      awaitFire?: boolean;
       effect?: AnyActiveEffect;
       equipment?: TeriockEquipment;
       execution?: BaseExecution | AbilityExecution | ArmamentExecution;
@@ -103,5 +104,23 @@ declare global {
      * A string that represents an image's file path.
      */
     export type ImageString = string;
+
+    /**
+     * Options that control how a single document is resolved.
+     */
+    export type ResolveDocumentOptions = {
+      /** Whether to preserve wrappers instead of resolving to their effects. */
+      preserveWrappers?: boolean;
+    };
+
+    /**
+     * Options that control how multiple documents are resolved.
+     */
+    export type ResolveDocumentsOptions = ResolveDocumentOptions & {
+      /** Whether to expand folders while resolving. */
+      expandFolders?: boolean;
+      /** Whether to expand tables while resolving. */
+      expandTables?: boolean;
+    };
   }
 }

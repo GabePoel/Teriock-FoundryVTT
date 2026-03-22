@@ -23,6 +23,24 @@ export default function TriggerAutomationMixin(Base) {
       ];
 
       /**
+       * Whether to include condition restrictions on this triggering.
+       * @return {boolean}
+       */
+      static get _conditions() {
+        return true;
+      }
+
+      /** @return {string|null} */
+      static get _initialTrigger() {
+        return null;
+      }
+
+      /** @return {boolean} */
+      static get _nullableTrigger() {
+        return true;
+      }
+
+      /**
        * An intermediate getter to ensure that the allowed triggers are localized and formatted.
        * @returns {Record<string, FormSelectOption>}
        */
@@ -50,28 +68,21 @@ export default function TriggerAutomationMixin(Base) {
 
       /** @inheritDoc */
       static defineSchema() {
-        return Object.assign(super.defineSchema(), {
+        const schema = Object.assign(super.defineSchema(), {
           trigger: new fields.StringField({
             choices: this._processedTriggerChoices,
-            nullable: true,
-            initial: null,
+            nullable: this._nullableTrigger,
+            initial: this._initialTrigger,
           }),
-          conditions: conditionRequirementsField(),
         });
+        if (this._conditions) schema.conditions = conditionRequirementsField();
+        return schema;
       }
 
       /** @inheritDoc */
       static migrateData(data) {
         if (data.trigger === "none") data.trigger = null;
         return super.migrateData(data);
-      }
-
-      /**
-       * The buttons this generates when this is used.
-       * @returns {Teriock.UI.HTMLButtonConfig[]}
-       */
-      get _buttons() {
-        return [];
       }
 
       /**
@@ -90,7 +101,7 @@ export default function TriggerAutomationMixin(Base) {
        * @returns {boolean}
        */
       get _conditionsActive() {
-        if (this.document.actor) {
+        if (this.document.actor && this.constructor._conditions) {
           for (const c of this.conditions.present) {
             if (!this.document.actor.statuses.has(c)) return false;
           }
@@ -115,29 +126,41 @@ export default function TriggerAutomationMixin(Base) {
       }
 
       /**
+       * Whether this has buttons to display.
+       * @return {boolean}
+       */
+      get _hasButtons() {
+        return !this.trigger;
+      }
+
+      /**
        * Paths associated with this trigger.
        * @returns {string[]}
        */
       get _triggerPaths() {
         const paths = ["trigger"];
         if (this.trigger && this.trigger !== "none") {
-          paths.push(...["conditions.present", "conditions.absent"]);
+          if (this.conditions._conditions) {
+            paths.push(...["conditions.present", "conditions.absent"]);
+          }
         }
         return paths;
       }
 
       /**
-       * Whether this can fire.
-       * @returns {boolean}
+       * The buttons this generates when this is used.
+       * @returns {Teriock.UI.HTMLButtonConfig[]}
        */
-      get canFire() {
-        return (
-          this.trigger &&
-          this.active &&
-          this._canRunPassively &&
-          this._conditionsActive &&
-          this._documentActive
-        );
+      async _getButtons() {
+        return [];
+      }
+
+      /**
+       * @param {string} trigger
+       * @return {boolean}
+       */
+      _isActiveTrigger(trigger) {
+        return Object.keys(triggers.execution.choices).includes(trigger);
       }
 
       /**
@@ -149,7 +172,7 @@ export default function TriggerAutomationMixin(Base) {
       /** @inheritDoc */
       _onFireTrigger(trigger, scope) {
         super._onFireTrigger(trigger, scope);
-        if (trigger === this.trigger && this.canFire) {
+        if (this.canFire(trigger)) {
           this._onFire(scope);
         }
       }
@@ -164,15 +187,29 @@ export default function TriggerAutomationMixin(Base) {
       /** @inheritDoc */
       async _preFireTrigger(trigger, scope) {
         await super._preFireTrigger(trigger, scope);
-        if (trigger === this.trigger && this.canFire) {
+        if (this.canFire(trigger)) {
           await this._preFire(scope);
         }
       }
 
+      /**
+       * Whether this can fire.
+       * @param {string} trigger
+       * @returns {boolean}
+       */
+      canFire(trigger) {
+        return (
+          trigger === this.trigger &&
+          this._conditionsActive &&
+          (this._isActiveTrigger(trigger) ||
+            (this.active && this._canRunPassively && this._documentActive))
+        );
+      }
+
       /** @inheritDoc */
       async getButtons() {
-        if (this.trigger && this.trigger !== "none") return [];
-        return this._buttons;
+        if (this._hasButtons) return this._getButtons();
+        else return [];
       }
     }
   );

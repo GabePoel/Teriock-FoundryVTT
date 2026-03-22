@@ -52,22 +52,22 @@ export default class RollAutomation extends mix(
   }
 
   /** @inheritDoc */
-  get _buttons() {
-    return [
-      RollRollableTakeHandler.buildButton(this.roll, this.formula, {
-        label: this.title,
-        merge: this.merge,
-      }),
-    ];
-  }
-
-  /** @inheritDoc */
   get _formPaths() {
     const paths = ["roll", "formula"];
     if (!this.merge) paths.push("title");
     if (!this.trigger) paths.push("merge");
     paths.push(...super._formPaths);
     return paths;
+  }
+
+  /** @inheritDoc */
+  async _getButtons() {
+    return [
+      RollRollableTakeHandler.buildButton(this.roll, this.formula, {
+        label: this.title,
+        merge: this.merge,
+      }),
+    ];
   }
 
   /** @inheritDoc */

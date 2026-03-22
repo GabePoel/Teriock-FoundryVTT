@@ -177,16 +177,14 @@ export async function selectConditionDialog() {
  * @returns {Promise<TeriockProperty|void>}
  */
 export async function selectPropertyDialog() {
-  return (
-    await resolveDocument(
-      await selectDocumentDialog(game.teriock.packs.properties.index.contents, {
-        hint: game.i18n.localize("TERIOCK.DIALOGS.Select.Property.hint"),
-        title: game.i18n.localize("TERIOCK.DIALOGS.Select.Property.title"),
-        tooltipAsync: true,
-        openable: true,
-      }),
-    )
-  )?.system.effect;
+  return await resolveDocument(
+    await selectDocumentDialog(game.teriock.packs.properties.index.contents, {
+      hint: game.i18n.localize("TERIOCK.DIALOGS.Select.Property.hint"),
+      title: game.i18n.localize("TERIOCK.DIALOGS.Select.Property.title"),
+      tooltipAsync: true,
+      openable: true,
+    }),
+  );
 }
 
 /**
@@ -222,16 +220,14 @@ export async function selectTradecraftDialog() {
  * @returns {Promise<TeriockAbility|void>}
  */
 export async function selectAbilityDialog() {
-  return (
-    await resolveDocument(
-      await selectDocumentDialog(await noSup(game.teriock.packs.abilities), {
-        hint: game.i18n.localize("TERIOCK.DIALOGS.Select.Ability.hint"),
-        title: game.i18n.localize("TERIOCK.DIALOGS.Select.Ability.title"),
-        tooltipAsync: true,
-        openable: true,
-      }),
-    )
-  )?.system.effect;
+  return await resolveDocument(
+    await selectDocumentDialog(await noSup(game.teriock.packs.abilities), {
+      hint: game.i18n.localize("TERIOCK.DIALOGS.Select.Ability.hint"),
+      title: game.i18n.localize("TERIOCK.DIALOGS.Select.Ability.title"),
+      tooltipAsync: true,
+      openable: true,
+    }),
+  );
 }
 
 /**

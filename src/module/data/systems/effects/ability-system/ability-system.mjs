@@ -162,11 +162,15 @@ export default class AbilitySystem extends mix(
       "system.overview.base",
       {
         path: "system.overview.proficient",
-        classes: this.competence.proficient ? "" : "faded-display-field",
+        classes: this.competence.proficient
+          ? ""
+          : TERIOCK.display.panel.classes.faded,
       },
       {
         path: "system.overview.fluent",
-        classes: this.competence.fluent ? "" : "faded-display-field",
+        classes: this.competence.fluent
+          ? ""
+          : TERIOCK.display.panel.classes.faded,
       },
     ];
     if (this.interaction === "attack") {

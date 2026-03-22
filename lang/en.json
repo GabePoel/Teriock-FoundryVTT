@@ -68,6 +68,15 @@
           }
         }
       },
+      "ChangeMovementAutomation": {
+        "FIELDS": {
+          "movementAction": {
+            "hint": "A movement action this switches the token to.",
+            "label": "Movement Action"
+          }
+        },
+        "LABEL": "Change Movement"
+      },
       "ChangesAutomation": {
         "LABEL": "Changes"
       },
@@ -128,6 +137,18 @@
           }
         }
       },
+      "DocumentsAutomation": {
+        "FIELDS": {
+          "automatic": {
+            "hint": "If checked and this has only one document, it will be selected automatically without additional prompting.",
+            "label": "Automatic"
+          },
+          "multi": {
+            "hint": "If checked, multiple documents can be selected to be used at once.",
+            "label": "Multiple Selection"
+          }
+        }
+      },
       "DurationAutomation": {
         "FIELDS": {
           "duration": {
@@ -143,27 +164,10 @@
       },
       "ExternalDocumentsAutomation": {
         "FIELDS": {
-          "automatic": {
-            "hint": "If checked and this has only one document, it will be selected automatically without additional prompting.",
-            "label": "Automatic"
-          },
           "documents": {
             "label": "Documents"
-          },
-          "multi": {
-            "hint": "If checked, multiple documents can be selected to be used at once.",
-            "label": "Multiple Selection"
           }
         }
-      },
-      "ChangeMovementAutomation": {
-        "FIELDS": {
-          "movementAction": {
-            "label": "Movement Action",
-            "hint": "A movement action this switches the token to."
-          }
-        },
-        "LABEL": "Change Movement"
       },
       "HacksAutomation": {
         "FIELDS": {
@@ -205,16 +209,20 @@
         "FIELDS": {
           "macro": {
             "label": "Macro"
-          },
+          }
+        },
+        "LABEL": "Macro"
+      },
+      "OptionalAutomation": {
+        "FIELDS": {
           "relation": {
             "choices": {
               "button": "Button",
               "trigger": "Trigger"
             },
-            "hint": "Whether this macro can be run as a button from the chat message or triggers off of other behavior."
+            "hint": "Whether this can be used as a button from the chat message or triggers off of other behavior."
           }
-        },
-        "LABEL": "Macro"
+        }
       },
       "ProtectionAutomation": {
         "FIELDS": {
@@ -356,7 +364,7 @@
             "choices": {
               "none": "None"
             },
-            "hint": "An optional trigger that makes this happen automatically.",
+            "hint": "An optional trigger that makes this happen automatically. Buttons will appear in chat messages if this is left blank.",
             "label": "Trigger"
           }
         }
@@ -443,12 +451,6 @@
       }
     },
     "COMMANDS": {
-      "ChangeMovement": {
-        "already": "Movement of {token} is already {movement}",
-        "changed": "Changed movement of {token} from {old} to {new}",
-        "reverted": "Reverted movement of {token} from {old} to {new}",
-        "notFount": "{token} cannot have movement reverted from {movement}"
-      },
       "ApplyEffect": {
         "applied": "Applied {effect} to {actor}",
         "cantParse": "Failed to parse effect data.",
@@ -462,6 +464,12 @@
       },
       "Attune": {
         "hint": "Select item to attune."
+      },
+      "ChangeMovement": {
+        "already": "Movement of {token} is already {movement}",
+        "changed": "Changed movement of {token} from {old} to {new}",
+        "notFount": "{token} cannot have movement reverted from {movement}",
+        "reverted": "Reverted movement of {token} from {old} to {new}"
       },
       "Dampen": {
         "hint": "Select equipment to dampen."
@@ -520,14 +528,20 @@
       "Unstash": {
         "hint": "Select equipment to unstash."
       },
-      "UseLocal": {
-        "noLookup": "No identifier or name provided."
-      },
       "UseAbility": {
         "noName": "No ability name provided.",
-        "useNamed": "Use {name}",
         "useResist": "Use Resist",
         "useUnnamed": "Use Ability"
+      },
+      "UseDocument": {
+        "useNamed": "Use {name}",
+        "useUnnamed": "Use Document"
+      },
+      "UseExternal": {
+        "noUuid": "No UUID provided."
+      },
+      "UseLocal": {
+        "noLookup": "No identifier or name provided."
       }
     },
     "CONFIGS": {
@@ -1024,7 +1038,7 @@
             "label": "Circumstance Bonus"
           },
           "competence": {
-            "hint": "Whether this roll has proficiency or fluency.",
+            "hint": "Whether this has proficiency or fluency.",
             "label": "Competence"
           }
         },

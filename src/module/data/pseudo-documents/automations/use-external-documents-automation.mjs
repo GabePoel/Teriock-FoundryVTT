@@ -1,8 +1,10 @@
+import { UseExternalHandler } from "../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
+import { resolveDocument } from "../../../helpers/resolve.mjs";
 import { mix } from "../../../helpers/utils.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 import {
-  CompetenceAutomationMixin,
   ExternalDocumentsAutomationMixin,
+  UseDocumentsAutomationMixin,
 } from "./mixins/_module.mjs";
 
 const { fields } = foundry.data;
@@ -13,11 +15,12 @@ const { fields } = foundry.data;
  * @extends {BaseAutomation}
  * @mixes ExternalDocumentsAutomation
  * @mixes CompetenceAutomation
+ * @mixes UseDocumentsAutomation
  */
 export default class UseExternalDocumentsAutomation extends mix(
   BaseAutomation,
   ExternalDocumentsAutomationMixin,
-  CompetenceAutomationMixin,
+  UseDocumentsAutomationMixin,
 ) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
@@ -48,42 +51,36 @@ export default class UseExternalDocumentsAutomation extends mix(
     return [...super._formPaths, "noHeighten", "expandTables"];
   }
 
+  /**
+   * Make a button for a given document.
+   * @param {UUID<AnyChildDocument>} uuid
+   * @return {Promise<Teriock.UI.HTMLButtonConfig>}
+   */
+  async #makeButton(uuid) {
+    const doc = await resolveDocument(uuid);
+    const label = doc.name;
+    const icon = TERIOCK.options.document[doc.type]?.icon;
+    return UseExternalHandler.buildButton(uuid, {
+      competence: this.overrideCompetence
+        ? this.competence.raw
+        : this.document.system.competence.raw,
+      expandTables: this.expandTables,
+      icon,
+      label,
+      noHeighten: this.noHeighten,
+    });
+  }
+
+  /** @inheritDoc */
+  async _getButtons() {
+    return Promise.all(
+      Array.from(this.documents).map((d) => this.#makeButton(d)),
+    );
+  }
+
   /** @inheritDoc */
   async getDocuments(options = {}) {
     const out = await super.getDocuments(options);
     return out.filter((d) => d && typeof d.use === "function");
-  }
-
-  /**
-   * Use specified documents with the provided options.
-   * @param {object} options
-   * @returns {Promise<void>}
-   */
-  async use(options = {}) {
-    const proficient = this.overrideCompetence
-      ? this.competence.proficient
-      : this.document.system.competence.proficient;
-    const fluent = this.overrideCompetence
-      ? this.competence.fluent
-      : this.document.system.competence.fluent;
-    options = Object.assign(
-      {
-        actor: this.document.actor,
-        fluent,
-        noHeighten: this.noHeighten,
-        proficient,
-        showDialog: game.teriock.getSetting("showRollDialogs"),
-      },
-      options,
-    );
-    const chosen = await this._choose({
-      expandFolders: true,
-      expandTables: this.expandTables,
-    });
-    if (this.automatic && chosen.length === 1) {
-      await chosen[0].use(options);
-    } else {
-      await Promise.all(chosen.map((c) => c.use(options)));
-    }
   }
 }

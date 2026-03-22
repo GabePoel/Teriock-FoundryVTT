@@ -26,26 +26,58 @@ export function pureUuid(safeUuid) {
  * Ensure a document is not an index.
  * @template T
  * @param {Index<T> | UUID<T>} syncDoc
- * @returns {Promise<T|void>}
+ * @param {Teriock.System.ResolveDocumentOptions} [options]
+ * @returns {Promise<T|null>}
  */
-export async function resolveDocument(syncDoc) {
-  if (!syncDoc) return;
-  if (typeof syncDoc === "string") return fromUuid(syncDoc);
-  if (syncDoc instanceof Document) {
-    return syncDoc;
+export async function resolveDocument(syncDoc, options = {}) {
+  let out = null;
+  if (!syncDoc) return out;
+  if (typeof syncDoc === "string") {
+    out = await fromUuid(syncDoc);
+  } else if (syncDoc instanceof Document) {
+    out = syncDoc;
   } else {
-    return fromUuid(syncDoc.uuid);
+    out = await foundry.utils.fromUuid(syncDoc.uuid);
   }
+  if (out?.type === "wrapper" && !options.preserveWrappers) {
+    out = out.system?.effect || out;
+  }
+  return out;
 }
 
 /**
  * Ensure all documents in an array are not indexes.
  * @template T
  * @param {Index<T>[] | UUID<T>} syncDocs
+ * @param {Teriock.System.ResolveDocumentsOptions} [options]
  * @returns {Promise<T[]>}
  */
-export async function resolveDocuments(syncDocs) {
-  return Promise.all(syncDocs.map(async (syncDoc) => resolveDocument(syncDoc)));
+export async function resolveDocuments(syncDocs, options = {}) {
+  const fetched = await Promise.all(
+    syncDocs.map(async (syncDoc) => resolveDocument(syncDoc, options)),
+  );
+  let out = [...fetched.filter((d) => d?.documentName !== "Folder")];
+  const folders = /** @type {TeriockFolder[]} */ fetched.filter(
+    (d) => d?.documentName === "Folder",
+  );
+  if (options.expandFolders) {
+    const toAdd = await Promise.all(folders.map((d) => d.getAllContents()));
+    for (const arr of toAdd) out.push(...arr);
+  } else {
+    out.push(...folders);
+  }
+  // Add rollable tables. This includes the tables that were in folders.
+  const tables = /** @type {TeriockRollTable[]} */ out.filter(
+    (d) => d?.documentName === "RollTable",
+  );
+  out = out.filter((d) => d?.documentName !== "RollTable");
+  if (options.expandTables) {
+    const toAdd = await Promise.all(tables.map((d) => d.getAllContents()));
+    for (const arr of toAdd) out.push(...arr);
+  } else {
+    out.push(...tables);
+  }
+  return out.filter((_) => _);
 }
 
 /**

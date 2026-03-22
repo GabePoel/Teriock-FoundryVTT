@@ -28,6 +28,7 @@ import {
   toggleStatusCommand,
 } from "./status-commands.mjs";
 import tradecraftCommand from "./tradecraft-command.mjs";
+import useExternalCommand from "./use-external-command.mjs";
 import useLocalCommand from "./use-local-command.mjs";
 
 const commandArray = [
@@ -59,6 +60,7 @@ const commandArray = [
   undampenCommand,
   unglueCommand,
   unhackCommand,
+  useExternalCommand,
   useLocalCommand,
 ];
 

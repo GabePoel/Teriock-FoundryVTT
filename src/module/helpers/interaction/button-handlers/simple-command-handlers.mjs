@@ -29,6 +29,7 @@ import {
   toggleStatusCommand,
 } from "../commands/status-commands.mjs";
 import tradecraftCommand from "../commands/tradecraft-command.mjs";
+import UseExternalCommand from "../commands/use-external-command.mjs";
 import UseLocalCommand from "../commands/use-local-command.mjs";
 import { CommandButtonHandlerBuilder } from "../interaction-tools.mjs";
 
@@ -196,16 +197,35 @@ export class TakeUnhackHandler extends CommandButtonHandlerBuilder(
   }
 }
 
+/**
+ * Handler to use a local document.
+ */
 export class UseLocalHandler extends CommandButtonHandlerBuilder(
   UseLocalCommand,
 ) {
   /**
    * @inheritDoc
    * @param {string} lookup
-   * @param {Teriock.Documents.ChildType} [type]
+   * @param {Partial<Teriock.Interaction.UseLocalOptions>} [options]
    */
-  static buildButton(lookup, type) {
-    return super.buildButton({ lookup, type });
+  static buildButton(lookup, options = {}) {
+    return super.buildButton({ ...options, lookup });
+  }
+}
+
+/**
+ * Handler to use an external document.
+ */
+export class UseExternalHandler extends CommandButtonHandlerBuilder(
+  UseExternalCommand,
+) {
+  /**
+   * @inheritDoc
+   * @param {UUID<ChildDocument>} uuid
+   * @param {Partial<Teriock.Interaction.UseExternalOptions & Teriock.Interaction.ButtonCustomization>} [options]
+   */
+  static buildButton(uuid, options = {}) {
+    return super.buildButton({ ...options, uuid });
   }
 }
 

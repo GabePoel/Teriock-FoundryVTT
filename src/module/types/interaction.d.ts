@@ -14,11 +14,13 @@ declare global {
     };
 
     export type CommandEntry = InteractionEntry & {
-      id: string;
       aliases?: string[];
+      alt?: string;
       args?: string[];
       flags?: Record<string, string>;
       formula?: boolean;
+      id: string;
+      shift?: string;
     };
 
     export type UseOptions = {
@@ -83,13 +85,24 @@ declare global {
       hex?: boolean;
     };
 
-    export type UseAbilityOptions = ThresholdOptions & {
-      ability?: string;
+    export type DocumentUseOptions = ThresholdOptions &
+      Teriock.Execution.DocumentExecutionOptions & {
+        competence?: number;
+        noHeighten?: boolean;
+      };
+
+    export type UseLocalOptions = DocumentUseOptions & {
+      lookup?: string;
     };
 
-    export type UseLocalOptions = ThresholdOptions & {
-      lookup?: string;
-      type?: Teriock.Documents.ChildType;
+    export type UseExternalOptions = DocumentUseOptions &
+      Teriock.System.ResolveDocumentsOptions & {
+        uuid?: UUID<ChildDocument>;
+      };
+
+    export type ButtonCustomization = {
+      icon?: string;
+      label?: string;
     };
   }
 }

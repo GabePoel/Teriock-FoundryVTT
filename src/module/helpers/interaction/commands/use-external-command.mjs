@@ -1,10 +1,12 @@
-import { inferNameFromIdentifier } from "../../utils.mjs";
+import { selectDocumentsDialog } from "../../../applications/dialogs/select-document-dialog.mjs";
+import { icons } from "../../../constants/display/icons.mjs";
+import { resolveDocuments } from "../../resolve.mjs";
 import { thresholdCommand } from "./abstract-command.mjs";
 
 /**
  * @param {TeriockActor} actor
  * @param {boolean} showDialog
- * @param {Teriock.Interaction.UseLocalOptions} options
+ * @param {Teriock.Interaction.UseExternalOptions} options
  * @returns {Promise<void>}
  */
 async function use(actor, showDialog, options = {}) {
@@ -13,22 +15,29 @@ async function use(actor, showDialog, options = {}) {
       localize: true,
     });
   }
-  if (!options.lookup) {
-    ui.notifications.error("TERIOCK.COMMANDS.UseLocal.noLookup", {
+  if (!options.uuid) {
+    ui.notifications.error("TERIOCK.COMMANDS.UseExternal.noUuid", {
       localize: true,
     });
-    return;
   }
   if (["number", "string"].includes(typeof options.competence)) {
     options.proficient = Number(options.competence) >= 1;
     options.fluent = Number(options.competence) >= 2;
   }
-  await actor.useDocument(options.lookup, { ...options, showDialog });
+  const documents = await resolveDocuments([options.uuid], {
+    ...options,
+    expandFolders: true,
+  });
+  const chosen =
+    documents.length > 1 ? await selectDocumentsDialog(documents) : documents;
+  await Promise.all(
+    chosen.map((c) => c.use({ ...options, actor, showDialog })),
+  );
 }
 
 /**
  * @param {TeriockActor} actor
- * @param {Teriock.Interaction.UseLocalOptions} options
+ * @param {Teriock.Interaction.UseExternalOptions} options
  * @returns {Promise<void>}
  */
 async function primary(actor, options = {}) {
@@ -37,7 +46,7 @@ async function primary(actor, options = {}) {
 
 /**
  * @param {TeriockActor} actor
- * @param {Teriock.Interaction.UseLocalOptions} options
+ * @param {Teriock.Interaction.UseExternalOptions} options
  * @returns {Promise<void>}
  */
 async function secondary(actor, options = {}) {
@@ -45,19 +54,17 @@ async function secondary(actor, options = {}) {
 }
 
 /**
- * Use local document command
+ * Use external document command
  * @type {Teriock.Interaction.CommandEntry}
  */
 const command = {
   ...thresholdCommand,
-  aliases: ["use"],
-  args: ["lookup"],
-  icon: (options) => TERIOCK.options.document[options?.type || "document"].icon,
-  id: "use-local",
+  args: ["uuid"],
+  icon: (options) => options?.icon || icons.ui.document,
+  id: "use-external",
   label: (options) =>
-    game.i18n.format("TERIOCK.COMMANDS.UseDocument.useNamed", {
-      name: inferNameFromIdentifier(options?.lookup, options?.type) || "",
-    }),
+    options?.label ||
+    game.i18n.localize("TERIOCK.COMMANDS.UseDocument.useUnnamed"),
   primary,
   secondary,
 };

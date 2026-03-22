@@ -43,7 +43,7 @@ export default class AddExternalDocumentsAutomation extends mix(
 
   /** @inheritDoc */
   get _formPaths() {
-    return [...super._formPaths, "attachDocuments"];
+    return [...super._formPaths, ...super._selectionPaths, "attachDocuments"];
   }
 
   /**

@@ -25,6 +25,11 @@ export default function AbilityExecutionGetInputPart(Base) {
       }
 
       /** @inheritDoc */
+      get isRoll() {
+        return ["attack", "feat"].includes(this.source.system.interaction);
+      }
+
+      /** @inheritDoc */
       get name() {
         return this.source.system.fullName;
       }
@@ -189,7 +194,8 @@ export default function AbilityExecutionGetInputPart(Base) {
         const noTemplate =
           this.flags.noTemplate ||
           !game.teriock.getSetting("placeTemplateOnAbilityUse") ||
-          templateAutomation?.t === "none";
+          templateAutomation?.t === "none" ||
+          !this.actor;
         const canTemplate = this.source.system.isAoe || !!templateAutomation;
         if (canTemplate && !noTemplate) {
           let t = "circle";
@@ -258,7 +264,15 @@ export default function AbilityExecutionGetInputPart(Base) {
 
       /** @inheritDoc */
       async _showRollDialog() {
-        if (this.source.system.interaction !== "attack") return;
+        if (
+          this.automations.filter((a) => a.wantsDialog).length === 0 &&
+          !this.isRoll &&
+          !this.source.system.overview.proficient &&
+          !this.source.system.overview.fluent &&
+          (!this.source.system.heightened || this.flags.noHeighten)
+        ) {
+          return;
+        }
         await super._showRollDialog();
       }
     }

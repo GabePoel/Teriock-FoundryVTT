@@ -14,4 +14,7 @@ export const displayPanel = {
         </div>
       </header>
     </div>`),
+  classes: {
+    faded: "faded-display-field",
+  },
 };

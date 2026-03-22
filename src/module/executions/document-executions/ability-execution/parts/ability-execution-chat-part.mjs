@@ -423,6 +423,54 @@ export default function AbilityExecutionChatPart(Base) {
       }
 
       /** @inheritDoc */
+      async _buildSourcePanel() {
+        const panel = await super._buildSourcePanel();
+        const proficientBlock = panel.blocks.find(
+          (b) =>
+            b.title ===
+            game.i18n.localize(
+              "TERIOCK.SYSTEMS.Ability.FIELDS.overview.proficient.label",
+            ),
+        );
+        if (proficientBlock) {
+          if (this.proficient) {
+            delete proficientBlock.classes;
+          } else {
+            proficientBlock.classes = [TERIOCK.display.panel.classes.faded];
+          }
+        }
+        const fluentBlock = panel.blocks.find(
+          (b) =>
+            b.title ===
+            game.i18n.localize(
+              "TERIOCK.SYSTEMS.Ability.FIELDS.overview.fluent.label",
+            ),
+        );
+        if (fluentBlock) {
+          if (this.fluent) {
+            delete fluentBlock.classes;
+          } else {
+            fluentBlock.classes = [TERIOCK.display.panel.classes.faded];
+          }
+        }
+        const heightenedBlock = panel.blocks.find(
+          (b) =>
+            b.title ===
+            game.i18n.localize(
+              "TERIOCK.SYSTEMS.Ability.FIELDS.heightened.label",
+            ),
+        );
+        if (heightenedBlock) {
+          if (this.heightened) {
+            delete heightenedBlock.classes;
+          } else {
+            heightenedBlock.classes = [TERIOCK.display.panel.classes.faded];
+          }
+        }
+        return panel;
+      }
+
+      /** @inheritDoc */
       async _buildTags() {
         if (this.source.system.interaction === "attack" && this.ub) {
           this.tags.push(

@@ -39,12 +39,10 @@ export default class BaseDocumentExecution extends BaseExecution {
    * @returns {BaseAutomation[]}
    */
   get activeAutomations() {
-    return this.automations.filter(
-      (a) =>
-        a.competencies.has(0) ||
-        (a.competencies.has(1) && this.proficient) ||
-        (a.competencies.has(2) && this.fluent),
-    );
+    let competence = 0;
+    if (this.proficient) competence = 1;
+    if (this.fluent) competence = 2;
+    return this.automations.filter((a) => a.competencies.has(competence));
   }
 
   /** @inheritDoc */
@@ -137,7 +135,7 @@ export default class BaseDocumentExecution extends BaseExecution {
 
   /** @inheritDoc */
   async _createChatMessage() {
-    await this._fireTriggerMacros("preExecution");
+    await this._fireTriggerMacros("preExecution", { awaitFire: true });
     await super._createChatMessage();
   }
 
@@ -157,39 +155,14 @@ export default class BaseDocumentExecution extends BaseExecution {
   /**
    * Execute all connected macros that match a given trigger.
    * @param {Teriock.System.Trigger} trigger
+   * @param {Partial<Teriock.System.TriggerScope>} [scope]
    * @returns {Promise<void>}
    */
-  async _fireTriggerMacros(trigger) {
-    const macroAutomations =
-      /** @type {MacroAutomation[]} */
-      this.activeAutomations.filter((a) => a.constructor.metadata.macro);
-    const correctMacroAutomations = macroAutomations.filter(
-      (a) => a.trigger === trigger && a.hasMacro,
-    );
+  async _fireTriggerMacros(trigger, scope = {}) {
+    const automations = this.activeAutomations;
     await Promise.all(
-      correctMacroAutomations.map(async (a) => {
-        const macro = await fromUuid(a.macro);
-        await macro.execute(this.getScope({ trigger }));
-      }),
-    );
-  }
-
-  /**
-   * Fire all external document use automations.
-   * @returns {Promise<void>}
-   */
-  async _fireUseAutomations() {
-    const useAutomations =
-      /** @type {UseExternalDocumentsAutomation[]} */ this.activeAutomations.filter(
-        (a) => a.type === "useExternal",
-      );
-    await Promise.all(
-      useAutomations.map(async (a) =>
-        a.use({
-          actor: this.actor,
-          edge: this.edge,
-          event: this.options.event,
-        }),
+      automations.map((a) =>
+        a.fireTrigger(trigger, this.getScope({ ...scope, trigger })),
       ),
     );
   }
@@ -197,7 +170,6 @@ export default class BaseDocumentExecution extends BaseExecution {
   /** @inheritDoc */
   async _postExecute() {
     await this._fireTriggerMacros("execution");
-    await this._fireUseAutomations();
     await super._postExecute();
   }
 

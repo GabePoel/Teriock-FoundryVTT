@@ -1,8 +1,8 @@
 import { ExecuteMacroHandler } from "../../../../helpers/interaction/button-handlers/execute-macro-handlers.mjs";
-import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { lcFirst } from "../../../../helpers/string.mjs";
-import { TriggerAutomationMixin } from "./_module.mjs";
+import { mix } from "../../../../helpers/utils.mjs";
 import LabelAutomationMixin from "./label-automation-mixin.mjs";
+import TriggerAutomationMixin from "./trigger-automation-mixin.mjs";
 
 const { fields } = foundry.data;
 
@@ -11,17 +11,19 @@ const { fields } = foundry.data;
  * @constructor
  */
 export default function MacroAutomationMixin(Base) {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
      * @extends {BaseAutomation}
+     * @mixes TriggerAutomation
+     * @mixes LabelAutomation
      * @mixin
-     * @property {"button"|"trigger"} relation
      * @property {UUID<TeriockMacro>} macro
      * @property {string} title
      */
-    class MacroAutomation extends TriggerAutomationMixin(
-      LabelAutomationMixin(Base),
+    class MacroAutomation extends mix(
+      Base,
+      TriggerAutomationMixin,
+      LabelAutomationMixin,
     ) {
       /** @inheritDoc */
       static LOCALIZATION_PREFIXES = [
@@ -43,23 +45,9 @@ export default function MacroAutomationMixin(Base) {
 
       /** @inheritDoc */
       static defineSchema() {
-        const schema = Object.assign(super.defineSchema(), {
+        return Object.assign(super.defineSchema(), {
           macro: new fields.DocumentUUIDField({ type: "Macro" }),
         });
-        if (Object.keys(this._triggerChoices).length > 0) {
-          Object.assign(schema, {
-            relation: new fields.StringField({
-              choices: localizeChoices({
-                button:
-                  "TERIOCK.AUTOMATIONS.MacroAutomation.FIELDS.relation.choices.button",
-                trigger: "TERIOCK.SYSTEMS.Ability.FIELDS.trigger.label",
-              }),
-              initial: "button",
-              label: "TERIOCK.AUTOMATIONS.BaseAutomation.FIELDS.relation.label",
-            }),
-          });
-        }
-        return schema;
       }
 
       /** @inheritDoc */
@@ -82,18 +70,14 @@ export default function MacroAutomationMixin(Base) {
 
       /** @inheritDoc */
       get _formPaths() {
-        const paths = ["macro", "relation"];
-        if (this.relation === "trigger") {
-          paths.push("trigger");
-        } else {
-          paths.push("title");
-        }
+        let paths = ["macro", ...super._formPaths];
+        if (this.trigger) paths = paths.filter((p) => p !== "title");
         return paths;
       }
 
       /** @inheritDoc */
-      get canFire() {
-        return super.canFire && this.hasMacro;
+      get _hasButtons() {
+        return super._hasButtons && this.hasMacro;
       }
 
       /**
@@ -105,28 +89,39 @@ export default function MacroAutomationMixin(Base) {
       }
 
       /** @inheritDoc */
-      async _preFire(scope) {
-        fromUuid(this.macro).then((macro) =>
-          macro.execute(this.getScope(scope)),
-        );
+      async _getButtons() {
+        return [
+          ExecuteMacroHandler.buildButton(
+            this.macro,
+            {
+              proficient: this.document?.system.competence?.proficient,
+              fluent: this.document?.system.competence?.fluent,
+            },
+            { label: this.title },
+          ),
+        ];
       }
 
       /** @inheritDoc */
-      async getButtons() {
-        if (this.relation !== "trigger" && this.hasMacro) {
-          return [
-            ExecuteMacroHandler.buildButton(
-              this.macro,
-              {
-                proficient: this.document?.system.competence?.proficient,
-                fluent: this.document?.system.competence?.fluent,
-              },
-              { label: this.title },
-            ),
-          ];
-        } else {
-          return [];
-        }
+      async _preFire(scope) {
+        if (scope.awaitFire) await this.executeMacro(scope);
+        else this.executeMacro(scope);
+      }
+
+      /** @inheritDoc */
+      canFire(trigger) {
+        return super.canFire(trigger) && this.hasMacro;
+      }
+
+      /**
+       * Execute the macro.
+       * @param {Teriock.System.TriggerScope} scope
+       * @return {Promise<void>}
+       */
+      async executeMacro(scope = {}) {
+        if (!this.hasMacro) return;
+        const macro = await fromUuid(this.macro);
+        await macro.execute(this.getScope(scope));
       }
     }
   );

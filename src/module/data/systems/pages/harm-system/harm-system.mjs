@@ -31,6 +31,10 @@ export default class HarmSystem extends mix(
     ];
   }
 
+  /**
+   * Metadata.
+   * @return {{pseudos: {Automation: string}}}
+   */
   static get metadata() {
     return {
       pseudos: {

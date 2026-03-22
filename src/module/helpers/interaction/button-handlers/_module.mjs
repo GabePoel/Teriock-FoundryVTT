@@ -32,6 +32,7 @@ import {
   TradecraftCheckHandler,
   UndampenHandler,
   UnglueHandler,
+  UseExternalHandler,
   UseLocalHandler,
 } from "./simple-command-handlers.mjs";
 
@@ -68,6 +69,7 @@ const handlerArray = [
   TradecraftCheckHandler,
   UndampenHandler,
   UnglueHandler,
+  UseExternalHandler,
   UseLocalHandler,
 ];
 

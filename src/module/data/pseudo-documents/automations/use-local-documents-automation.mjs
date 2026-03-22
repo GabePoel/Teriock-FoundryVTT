@@ -1,10 +1,24 @@
 import { UseLocalHandler } from "../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
+import { mix } from "../../../helpers/utils.mjs";
 import { IdentifierField } from "../../fields/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
+import {
+  DocumentsAutomationMixin,
+  UseDocumentsAutomationMixin,
+} from "./mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
-export default class UseLocalDocumentsAutomation extends BaseAutomation {
+/**
+ * @extends {BaseAutomation}
+ * @mixes UseDocumentsAutomation
+ */
+export default class UseLocalDocumentsAutomation extends mix(
+  BaseAutomation,
+  DocumentsAutomationMixin,
+  UseDocumentsAutomationMixin,
+) {
+  /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
     ...super.LOCALIZATION_PREFIXES,
     "TERIOCK.AUTOMATIONS.UseLocalDocumentsAutomation",
@@ -31,20 +45,49 @@ export default class UseLocalDocumentsAutomation extends BaseAutomation {
 
   /** @inheritDoc */
   get _formPaths() {
-    return ["identifiers"];
+    return ["identifiers", ...super._formPaths];
   }
 
-  /** @inheritDoc */
-  async getButtons() {
+  /**
+   * Parse this automation's identifiers.
+   * @return {{type: string|null, identifier: string}[]}
+   */
+  #parseIdentifiers() {
     return Array.from(this.identifiers).map((i) => {
-      let type;
+      let type = null;
       let identifier = i;
       if (i.includes(":")) {
         const parts = i.split(":");
         type = parts[0];
         identifier = parts[1];
       }
-      return UseLocalHandler.buildButton(identifier, type);
+      return {
+        type,
+        identifier,
+      };
     });
+  }
+
+  /** @inheritDoc */
+  async _getButtons() {
+    return this.#parseIdentifiers().map((p) =>
+      UseLocalHandler.buildButton(p.identifier, {
+        type: p.type,
+        noHeighten: this.noHeighten,
+        competence: this.overrideCompetence
+          ? this.competence.raw
+          : this.document.system.competence.raw,
+      }),
+    );
+  }
+
+  /** @inheritDoc */
+  async getDocuments(options = {}) {
+    const out = await Promise.all(
+      this.#parseIdentifiers().map((p) =>
+        (options.actor || this.actor)?.getDocument(p.identifier, p.type),
+      ),
+    );
+    return out.filter((d) => d && typeof d.use === "function");
   }
 }

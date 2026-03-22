@@ -4,7 +4,6 @@ const { fields } = foundry.data;
  * @param {typeof BaseAutomation} Base
  */
 export default function LabelAutomationMixin(Base) {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
      * @extends {BaseAutomation}
@@ -18,6 +17,7 @@ export default function LabelAutomationMixin(Base) {
         "TERIOCK.AUTOMATIONS.LabelAutomation",
       ];
 
+      /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           title: new fields.StringField(),
