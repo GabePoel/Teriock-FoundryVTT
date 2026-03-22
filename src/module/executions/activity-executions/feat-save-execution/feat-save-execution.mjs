@@ -1,3 +1,4 @@
+import { addFormula } from "../../../helpers/formula.mjs";
 import { attributePanel } from "../../../helpers/html.mjs";
 import BaseExecution from "../../base-execution/base-execution.mjs";
 import { ThresholdExecutionMixin } from "../../mixins/_module.mjs";
@@ -17,8 +18,11 @@ export default class FeatSaveExecution extends ThresholdExecutionMixin(
   ) {
     super(options);
     this.attribute = options.attribute;
-    if (this.actor && options.bonus === undefined) {
-      this.bonus = this.actor.system.attributes[options.attribute].formula;
+    if (this.actor) {
+      this.bonus = addFormula(
+        this.actor.system.attributes[options.attribute].formula,
+        this.bonus,
+      );
     }
   }
 

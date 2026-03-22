@@ -85,10 +85,10 @@ export default class BaseAutomation extends PropagationDataMixin(
   }
 
   /**
-   * Whether this wants a dialog to be displayed upon execution.
+   * Whether this wants a competence dialog to be displayed upon execution.
    * @return {boolean}
    */
-  get wantsDialog() {
+  get requiresCompetence() {
     return this.competencies.size !== 3;
   }
 

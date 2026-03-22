@@ -13,17 +13,39 @@ export default function AbilityExecutionRollsPart(Base) {
     class AbilityExecutionRolls extends Base {
       /** @inheritDoc */
       get flavor() {
-        if (this.source.system.interaction === "attack") {
-          let flavor = "Attack Roll";
-          if (this.piercing.ub) flavor = `UB ${flavor}`;
-          if (this.warded) flavor = `Warded ${flavor}`;
+        if (this.isAttack) {
+          let flavor = game.i18n.localize(
+            "TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.attack",
+          );
+          if (this.piercing.ub) {
+            flavor = game.i18n.format(
+              "TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.ub",
+              {
+                flavor,
+              },
+            );
+          }
+          if (this.warded) {
+            flavor = game.i18n.format(
+              "TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.warded",
+              {
+                flavor,
+              },
+            );
+          }
           return flavor;
-        } else if (this.source.system.interaction === "feat") {
-          return "Feat Save DC";
-        } else if (this.source.system.interaction === "block") {
-          return "Block and Armor Value";
+        } else if (this.isFeat) {
+          return game.i18n.localize(
+            "TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.feat",
+          );
+        } else if (this.isBlock) {
+          return game.i18n.localize(
+            "TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.block",
+          );
         } else {
-          return "Manifest";
+          return game.i18n.localize(
+            "TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.manifest",
+          );
         }
       }
 
@@ -45,7 +67,9 @@ export default function AbilityExecutionRollsPart(Base) {
           };
           if (this.piercing.ub) {
             generalRollOptions.styles.dice.classes += " ub";
-            generalRollOptions.styles.dice.tooltip = "Unblockable";
+            generalRollOptions.styles.dice.tooltip = game.i18n.localize(
+              "TERIOCK.TERMS.Properties.unblockable",
+            );
           }
           for (const target of this.targets) {
             const rollOptions = foundry.utils.deepClone(generalRollOptions);
@@ -76,7 +100,7 @@ export default function AbilityExecutionRollsPart(Base) {
               new BaseRoll(this.formula, this.rollData, generalRollOptions),
             );
           }
-        } else if (this.source.system.interaction === "feat") {
+        } else if (this.isFeat) {
           styles.total.icon = "star";
           this.rolls.push(
             new BaseRoll(this.formula, this.rollData, {
@@ -85,7 +109,7 @@ export default function AbilityExecutionRollsPart(Base) {
               styles: styles,
             }),
           );
-        } else if (this.source.system.interaction === "block") {
+        } else if (this.isBlock) {
           this.rolls.push(
             new BaseRoll(this.formula, this.rollData, {
               flavor: this.flavor,
@@ -93,7 +117,7 @@ export default function AbilityExecutionRollsPart(Base) {
               targets: Array.from(this.targets),
             }),
           );
-        } else if (this.source.system.interaction === "manifest") {
+        } else if (this.isManifest) {
           if (this.targets.size > 0) {
             this.rolls.push(
               new BaseRoll("0", this.rollData, {

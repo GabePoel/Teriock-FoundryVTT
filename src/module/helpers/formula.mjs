@@ -8,6 +8,7 @@ export function addFormula(value, delta) {
   const operator = delta.startsWith("-") ? "-" : "+";
   delta = delta.replace(/^[+-]/, "").trim();
   if (!formulaExists(value)) return delta;
+  if (!formulaExists(delta)) return value;
   return `${value} ${operator} ${delta}`;
 }
 
@@ -18,7 +19,9 @@ export function addFormula(value, delta) {
  * @returns {string}
  */
 export function boostFormula(value, delta) {
-  if (formulaExists(value)) return `sb(${value}, ${delta})`;
+  if (formulaExists(value) && formulaExists(delta)) {
+    return `sb(${value}, ${delta})`;
+  }
   return value;
 }
 

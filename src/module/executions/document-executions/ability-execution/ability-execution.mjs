@@ -25,6 +25,16 @@ export default class AbilityExecution extends AbilityExecutionChatPart(
   ),
 ) {
   /** @inheritDoc */
+  get competenceImprovesFormula() {
+    return this.isAttack || this.isFeat;
+  }
+
+  /** @inheritDoc */
+  get hasBonus() {
+    return this.isAttack || this.isBlock || this.isFeat;
+  }
+
+  /** @inheritDoc */
   get rollData() {
     const rollData = super.rollData;
     const rollAdditions = {
@@ -48,23 +58,14 @@ export default class AbilityExecution extends AbilityExecutionChatPart(
 
   /** @inheritDoc */
   async _improveFormula() {
-    if (["attack", "feat"].includes(this.source.system.interaction)) {
-      await super._improveFormula();
-      if (this.heightened > 0) {
-        this.formula = addFormula(this.formula, "@h");
-      }
-      if (this.source.system.interaction === "attack") {
-        if (this.piercing.av0) {
-          this.formula = addFormula(this.formula, "@av0");
-        }
-        if (this.piercing.sb) {
-          this.formula = addFormula(this.formula, "@sb");
-        }
-        if (this.armament?.system.hit.nonZero) {
-          this.formula = addFormula(this.formula, "@hit");
-        }
-      }
+    if (this.isAttack) {
+      if (this.piercing.av0) this.formula = addFormula(this.formula, "@av0");
+      if (this.sb) this.formula = addFormula(this.formula, "@sb");
     }
+    if (this.competenceImprovesFormula) {
+      if (this.heightened > 0) this.formula = addFormula(this.formula, "@h");
+    }
+    await super._improveFormula();
   }
 
   /** @inheritDoc */
@@ -78,12 +79,12 @@ export default class AbilityExecution extends AbilityExecutionChatPart(
 
   /** @inheritDoc */
   async _prepareBaseFormula() {
-    if (this.source.system.interaction === "attack") {
+    if (this.isAttack) {
       await super._prepareBaseFormula();
       this.formula = addFormula(this.formula, "@ap");
-    } else if (this.source.system.interaction === "feat") {
+    } else if (this.isFeat) {
       this.formula = "10";
-    } else if (this.source.system.interaction === "block") {
+    } else if (this.isBlock) {
       this.formula = "10 + @av + @bv";
     }
   }

@@ -1,10 +1,7 @@
 import { TeriockDialog } from "../../../applications/api/_module.mjs";
 import { icons } from "../../../constants/display/icons.mjs";
 import { FormulaField } from "../../../data/fields/_module.mjs";
-import {
-  CompetenceModel,
-  PiercingModel,
-} from "../../../data/models/_module.mjs";
+import { CompetenceModel } from "../../../data/models/_module.mjs";
 import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
 import { makeIconClass } from "../../../helpers/utils.mjs";
 
@@ -43,19 +40,99 @@ export default function ThresholdExecutionMixin(Base) {
       }
 
       /**
+       * @returns {Teriock.Execution.ExecutionDialogButton[]}
+       */
+      get _dialogButtons() {
+        return this.isRoll
+          ? [
+              {
+                action: "disadvantage",
+                callback: () => (this.edge = -1),
+                icon: "fa-dice-d20",
+                label:
+                  "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.disadvantage",
+              },
+              {
+                action: "normal",
+                callback: () => (this.edge = 0),
+                default: true,
+                icon: "fa-dice-d20",
+                label:
+                  "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.normal",
+              },
+              {
+                action: "advantage",
+                callback: () => (this.edge = 1),
+                icon: "fa-dice-d20",
+                label:
+                  "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.advantage",
+              },
+            ]
+          : [
+              {
+                action: "ok",
+                default: true,
+                icon: icons.ui.enable,
+                label: "TERIOCK.DIALOGS.SetStatDice.BUTTONS.confirm",
+              },
+            ];
+      }
+
+      /**
+       * @returns {Teriock.Execution.ExecutionDialogEntry[]}
+       */
+      get _dialogFields() {
+        return [
+          {
+            condition: this.requiresCompetence,
+            field: new fields.EmbeddedDataField(CompetenceModel).fields.raw,
+            hint: "TERIOCK.DIALOGS.ThresholdExecutionOptions.FIELDS.competence.hint",
+            value: this.fluent ? 2 : this.proficient ? 1 : 0,
+            label:
+              "TERIOCK.DIALOGS.ThresholdExecutionOptions.FIELDS.competence.label",
+            name: "competence",
+            update: (v) => {
+              const c = Number(v);
+              if (c === 2) {
+                this.fluent = true;
+                this.proficient = true;
+              } else if (c === 1) {
+                this.fluent = false;
+                this.proficient = true;
+              } else {
+                this.fluent = false;
+                this.proficient = false;
+              }
+            },
+          },
+          {
+            condition: this.hasBonus,
+            field: new FormulaField({ deterministic: false }),
+            hint: "TERIOCK.DIALOGS.ThresholdExecutionOptions.FIELDS.bonus.hint",
+            value: this.bonus,
+            label:
+              "TERIOCK.DIALOGS.ThresholdExecutionOptions.FIELDS.bonus.label",
+            name: "bonus",
+            placeholder: "0",
+            update: (v) => (this.bonus = v),
+          },
+        ];
+      }
+
+      /**
+       * Whether this can have a bonus applied.
+       * @return {boolean}
+       */
+      get hasBonus() {
+        return this.isRoll;
+      }
+
+      /**
        * An icon for this execution to show in dialogs.
        * @returns {string}
        */
       get icon() {
         return "dice-d20";
-      }
-
-      /**
-       * If this is an attack.
-       * @returns {boolean}
-       */
-      get isAttack() {
-        return false;
       }
 
       /**
@@ -74,6 +151,14 @@ export default function ThresholdExecutionMixin(Base) {
         return "";
       }
 
+      /**
+       * Whether this execution requires competence.
+       * @return {boolean}
+       */
+      get requiresCompetence() {
+        return this.isRoll;
+      }
+
       /** @inheritDoc */
       get rollOptions() {
         return {
@@ -88,27 +173,21 @@ export default function ThresholdExecutionMixin(Base) {
        * @param {HTMLButtonElement} button
        */
       #updateFromRollDialog(button) {
-        const competence = button.form.elements.namedItem("competence").value;
-        if (Number(competence) === 2) {
-          this.fluent = true;
-          this.proficient = true;
-        } else if (Number(competence) === 1) {
-          this.fluent = false;
-          this.proficient = true;
-        } else {
-          this.fluent = false;
-          this.proficient = false;
-        }
-        if (this.isRoll) {
-          const bonus = button.form.elements.namedItem("bonus").value;
-          if (bonus) this.bonus = addFormula(this.bonus, bonus);
-        }
-        if (this.isAttack) {
-          if (this.piercing) {
-            const piercing = button.form.elements.namedItem("piercing").value;
-            if (piercing) this.piercing.raw = piercing;
+        for (const f of this._dialogFields) {
+          if (typeof f.condition === "boolean" && !f.condition) continue;
+          if (typeof f.condition === "function" && !f.condition()) continue;
+          let value;
+          const element =
+            /** @type {HTMLInputElement} */
+            button.form.elements.namedItem(f.name);
+          if (f.field instanceof fields.BooleanField) {
+            value = element.checked;
+          } else if (f.field instanceof fields.NumberField) {
+            value = Number(element.value);
+          } else {
+            value = element.value;
           }
-          this.warded = !!button.form.elements.namedItem("warded").checked;
+          f.update(value);
         }
       }
 
@@ -118,6 +197,14 @@ export default function ThresholdExecutionMixin(Base) {
           await this._showRollDialog();
         }
         await super._getInput();
+      }
+
+      /** @inheritDoc */
+      async _improveFormula() {
+        await super._improveFormula();
+        if (formulaExists(this.bonus)) {
+          this.formula = addFormula(this.formula, this.bonus);
+        }
       }
 
       /**
@@ -137,9 +224,6 @@ export default function ThresholdExecutionMixin(Base) {
       async _prepareFormula() {
         await this._prepareBaseFormula();
         await super._prepareFormula();
-        if (formulaExists(this.bonus)) {
-          this.formula = addFormula(this.formula, this.bonus);
-        }
       }
 
       /**
@@ -150,82 +234,27 @@ export default function ThresholdExecutionMixin(Base) {
       async _showRollDialog() {
         const rootId = foundry.utils.randomID();
         const content = document.createElement("div");
+        let hasFields = false;
         content.classList.add("teriock-form-container");
-        let initialCompetence = 0;
-        if (this.proficient) initialCompetence = 1;
-        if (this.fluent) initialCompetence = 2;
-        const competenceField = new fields.EmbeddedDataField(CompetenceModel);
-        const competenceFormGroup = competenceField.fields.raw.toFormGroup(
-          {
-            hint: game.i18n.localize(
-              "TERIOCK.DIALOGS.ThresholdExecutionOptions.FIELDS.competence.hint",
-            ),
-            label: game.i18n.localize(
-              "TERIOCK.DIALOGS.ThresholdExecutionOptions.FIELDS.competence.label",
-            ),
+        for (const f of this._dialogFields) {
+          if (typeof f.condition === "boolean" && !f.condition) continue;
+          if (typeof f.condition == "function" && !f.condition()) continue;
+          const groupConfig = { label: game.i18n.localize(f.label), rootId };
+          if (f.hint) groupConfig.hint = game.i18n.localize(f.hint);
+          const inputConfig = {
+            id: `${rootId}-${f.name}`,
+            integer: f.integer,
+            max: f.max,
+            min: f.min,
+            name: f.name,
+            placeholder: f.placeholder,
             rootId,
-          },
-          {
-            id: `${rootId}-competence`,
-            name: "competence",
-            rootId,
-            value: initialCompetence,
-          },
-        );
-        content.append(competenceFormGroup);
-        if (this.isAttack) {
-          const piercingField = new fields.EmbeddedDataField(PiercingModel);
-          const piercingFormGroup = piercingField.fields.raw.toFormGroup(
-            {
-              hint: game.i18n.localize(
-                "TERIOCK.MODELS.Piercing.FIELDS.raw.hint",
-              ),
-              label: game.i18n.localize(
-                "TERIOCK.MODELS.Piercing.FIELDS.raw.label",
-              ),
-              rootId,
-            },
-            {
-              id: `${rootId}-piercing`,
-              name: "piercing",
-              rootId,
-              value: this.piercing.raw,
-            },
-          );
-          content.append(piercingFormGroup);
+            value: f.value,
+          };
+          content.append(f.field.toFormGroup(groupConfig, inputConfig));
+          hasFields = true;
         }
-        if (this.isRoll) {
-          const bonusField = new FormulaField({
-            hint: game.i18n.localize(
-              "TERIOCK.DIALOGS.ThresholdExecutionOptions.FIELDS.bonus.hint",
-            ),
-            initial: "",
-            label: game.i18n.localize(
-              "TERIOCK.DIALOGS.ThresholdExecutionOptions.FIELDS.bonus.label",
-            ),
-          });
-          const bonusFormGroup = bonusField.toFormGroup(
-            { rootId },
-            { id: `${rootId}-bonus`, name: "bonus", placeholder: "0", rootId },
-          );
-          content.append(bonusFormGroup);
-        }
-        if (this.isAttack) {
-          const wardedField = new fields.BooleanField();
-          const wardedFormGroup = wardedField.toFormGroup(
-            {
-              label: game.i18n.localize("TERIOCK.TERMS.Properties.warded"),
-              rootId,
-            },
-            {
-              id: `${rootId}-warded`,
-              name: "warded",
-              rootId,
-              value: !!this.warded,
-            },
-          );
-          content.append(wardedFormGroup);
-        }
+        if (!hasFields) return;
         await TeriockDialog.wait({
           window: {
             icon: makeIconClass(this.icon, "title"),
@@ -235,56 +264,21 @@ export default function ThresholdExecutionMixin(Base) {
               })
               .trim(),
           },
+          position: { width: 550 },
           modal: true,
           content: content.outerHTML,
-          buttons: this.isRoll
-            ? [
-                {
-                  action: "disadvantage",
-                  icon: makeIconClass("fa-dice-d20", "button"),
-                  label: game.i18n.localize(
-                    "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.disadvantage",
-                  ),
-                  callback: (_event, button) => {
-                    this.#updateFromRollDialog(button);
-                    this.edge = -1;
-                  },
-                },
-                {
-                  action: "normal",
-                  default: true,
-                  icon: makeIconClass("fa-dice-d20", "button"),
-                  label: game.i18n.localize(
-                    "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.normal",
-                  ),
-                  callback: (_event, button) => {
-                    this.#updateFromRollDialog(button);
-                    this.edge = 0;
-                  },
-                },
-                {
-                  action: "advantage",
-                  icon: makeIconClass("fa-dice-d20", "button"),
-                  label: game.i18n.localize(
-                    "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.advantage",
-                  ),
-                  callback: (_event, button) => {
-                    this.#updateFromRollDialog(button);
-                    this.edge = 1;
-                  },
-                },
-              ]
-            : [
-                {
-                  action: "ok",
-                  icon: makeIconClass(icons.ui.enable, "button"),
-                  label: game.i18n.localize(
-                    "TERIOCK.DIALOGS.SetStatDice.BUTTONS.confirm",
-                  ),
-                  callback: (_event, button) =>
-                    this.#updateFromRollDialog(button),
-                },
-              ],
+          buttons: this._dialogButtons.map((b) => {
+            return {
+              action: b.action,
+              icon: makeIconClass(b.icon || this.icon, "button"),
+              label: game.i18n.localize(b.label),
+              default: b.default,
+              callback: (_event, button) => {
+                this.#updateFromRollDialog(button);
+                if (typeof b.callback === "function") b.callback();
+              },
+            };
+          }),
         });
       }
     }

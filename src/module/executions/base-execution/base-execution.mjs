@@ -134,6 +134,14 @@ export default class BaseExecution {
   }
 
   /**
+   * Whether competence improves the formula.
+   * @return {boolean}
+   */
+  get competenceImprovesFormula() {
+    return true;
+  }
+
+  /**
    * Flavor text to display on each die roll.
    * @returns {string}
    */
@@ -213,10 +221,12 @@ export default class BaseExecution {
    * @returns {Promise<void>}
    */
   async _improveFormula() {
-    if (this.fluent) {
-      this.formula = addFormula(this.formula, "@f");
-    } else if (this.proficient) {
-      this.formula = addFormula(this.formula, "@p");
+    if (this.competenceImprovesFormula) {
+      if (this.fluent) {
+        this.formula = addFormula(this.formula, "@f");
+      } else if (this.proficient) {
+        this.formula = addFormula(this.formula, "@p");
+      }
     }
   }
 

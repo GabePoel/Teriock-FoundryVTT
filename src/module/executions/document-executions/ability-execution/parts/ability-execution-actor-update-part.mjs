@@ -17,16 +17,11 @@ export default function AbilityExecutionActorUpdatePart(Base) {
        * @returns {Promise<void>}
        */
       async _prepareAttackPenalty() {
-        if (
-          this.source.system.interaction === "attack" &&
-          formulaExists(this.attackPenaltyFormula)
-        ) {
-          const attackPenaltyRoll = new BaseRoll(
-            this.attackPenaltyFormula,
+        if (this.isAttack && formulaExists(this.incurredAttackPenalty)) {
+          this.attackPenalty = await BaseRoll.getValue(
+            this.incurredAttackPenalty,
             this.rollData,
           );
-          await attackPenaltyRoll.evaluate();
-          this.attackPenalty = attackPenaltyRoll.total;
         } else {
           this.attackPenalty = 0;
         }
@@ -36,14 +31,11 @@ export default function AbilityExecutionActorUpdatePart(Base) {
       async _prepareUpdates() {
         await this._prepareAttackPenalty();
         if (this.actor) {
-          if (this.source.system.interaction === "attack") {
+          if (this.isAttack) {
             this.updates["system.combat.attackPenalty"] =
               this.actor.system.combat.attackPenalty + this.attackPenalty;
           }
-          if (
-            this.source.system.maneuver === "reactive" &&
-            this.source.system.executionTime === "r1"
-          ) {
+          if (this.usesReaction) {
             this.updates["system.combat.hasReaction"] = false;
           }
           for (const stat of ["hp", "mp"]) {

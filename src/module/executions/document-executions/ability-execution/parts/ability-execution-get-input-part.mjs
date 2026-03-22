@@ -2,11 +2,15 @@ import { TeriockDialog } from "../../../../applications/api/_module.mjs";
 import { placeTemplateDialog } from "../../../../applications/dialogs/_module.mjs";
 import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
 import { AbilityTemplate } from "../../../../canvas/placeables/_module.mjs";
+import { FormulaField } from "../../../../data/fields/_module.mjs";
+import { PiercingModel } from "../../../../data/models/_module.mjs";
 import { TemplateAutomation } from "../../../../data/pseudo-documents/automations/_module.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { createDialogFieldset } from "../../../../helpers/html.mjs";
 import { ucFirst } from "../../../../helpers/string.mjs";
 import { makeIconClass } from "../../../../helpers/utils.mjs";
+
+const { fields } = foundry.data;
 
 /**
  * @param {typeof AbilityExecutionConstructor} Base
@@ -19,19 +23,82 @@ export default function AbilityExecutionGetInputPart(Base) {
      * @mixin
      */
     class AbilityExecutionGetInput extends Base {
-      /** @inheritDoc */
-      get icon() {
-        return TERIOCK.display.icons.document.ability;
+      get _dialogFields() {
+        const oldFields = super._dialogFields;
+        const newFields = oldFields.filter((f) => f.name === "competence");
+        const endFields = oldFields.filter((f) => f.name !== "competence");
+        return [
+          ...newFields,
+          {
+            condition: this.isAttack,
+            field: new fields.EmbeddedDataField(PiercingModel).fields.raw,
+            hint: "TERIOCK.MODELS.Piercing.FIELDS.raw.hint",
+            value: this.piercing.raw,
+            label: "TERIOCK.MODELS.Piercing.FIELDS.raw.label",
+            name: "piercing",
+            update: (v) => (this.piercing.raw = v),
+          },
+          {
+            condition: this.isAttack,
+            field: new fields.NumberField({ deterministic: false }),
+            hint: "TERIOCK.SYSTEMS.Ability.EXECUTION.attackPenalty.existing.hint",
+            integer: true,
+            label:
+              "TERIOCK.SYSTEMS.Ability.EXECUTION.attackPenalty.existing.label",
+            max: 0,
+            name: "existing-attack-penalty",
+            placeholder: 0,
+            update: (v) => (this.existingAttackPenalty = v),
+            value: this.existingAttackPenalty,
+          },
+          {
+            condition: this.isAttack && this.actor,
+            field: new FormulaField({ deterministic: false }),
+            hint: "TERIOCK.SYSTEMS.Ability.EXECUTION.attackPenalty.incurred.hint",
+            label:
+              "TERIOCK.SYSTEMS.Ability.EXECUTION.attackPenalty.incurred.label",
+            name: "incurred-attack-penalty",
+            placeholder: "0",
+            update: (v) => (this.incurredAttackPenalty = v),
+            value: this.incurredAttackPenalty,
+          },
+          ...endFields,
+          {
+            condition: this.isAttack,
+            field: new fields.BooleanField(),
+            value: !!this.sb,
+            label: "TERIOCK.SYSTEMS.BaseActor.FIELDS.offense.sb.label",
+            name: "sb",
+            update: (v) => (this.sb = v),
+          },
+          {
+            condition: true,
+            field: new fields.BooleanField(),
+            value: !!this.warded,
+            label: "TERIOCK.SYSTEMS.Attack.FIELDS.warded.label",
+            name: "warded",
+            update: (v) => (this.warded = v),
+          },
+          {
+            condition: this.source.system.maneuver === "reactive",
+            field: new fields.BooleanField(),
+            label: "TERIOCK.SYSTEMS.Ability.EXECUTION.usesReaction.label",
+            name: "uses-reaction",
+            update: (v) => (this.usesReaction = v),
+            value: !!this.usesReaction,
+          },
+        ];
       }
 
       /** @inheritDoc */
-      get isRoll() {
-        return ["attack", "feat"].includes(this.source.system.interaction);
-      }
-
-      /** @inheritDoc */
-      get name() {
-        return this.source.system.fullName;
+      get requiresCompetence() {
+        return (
+          super.requiresCompetence ||
+          this.automations.filter((a) => a.requiresCompetence).length !== 0 ||
+          !!this.source.system.overview.proficient ||
+          !!this.source.system.overview.fluent ||
+          (this.source.system.heightened && !this.flags.noHeighten)
+        );
       }
 
       /**
@@ -260,20 +327,6 @@ export default function AbilityExecutionGetInputPart(Base) {
           }
           await template?.drawPreview();
         }
-      }
-
-      /** @inheritDoc */
-      async _showRollDialog() {
-        if (
-          this.automations.filter((a) => a.wantsDialog).length === 0 &&
-          !this.isRoll &&
-          !this.source.system.overview.proficient &&
-          !this.source.system.overview.fluent &&
-          (!this.source.system.heightened || this.flags.noHeighten)
-        ) {
-          return;
-        }
-        await super._showRollDialog();
       }
     }
   );

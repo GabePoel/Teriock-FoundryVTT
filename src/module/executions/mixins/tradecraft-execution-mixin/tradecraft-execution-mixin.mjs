@@ -12,6 +12,21 @@ export default function TradecraftExecutionMixin(Base) {
      * @mixin
      */
     class TradecraftExecution extends ThresholdExecutionMixin(Base) {
+      /**
+       * @param {Teriock.Execution.TradecraftExecutionOptions} options
+       */
+      constructor(
+        options = /** @type {Teriock.Execution.TradecraftExecutionOptions} */ {},
+      ) {
+        super(options);
+        if (this.actor) {
+          this.bonus = addFormula(
+            this.actor.system.tradecrafts[this.tradecraft].formula,
+            this.bonus,
+          );
+        }
+      }
+
       /** @inheritDoc */
       get flavor() {
         if (this.threshold !== undefined) {
@@ -32,21 +47,6 @@ export default function TradecraftExecutionMixin(Base) {
        */
       get tradecraft() {
         return "artist";
-      }
-
-      /** @inheritDoc */
-      async _prepareFormula() {
-        await super._prepareFormula();
-        if (this.actor) {
-          const { extra } =
-            this.actor.system.tradecrafts[this.tradecraft] || {};
-          if (extra) {
-            this.formula = addFormula(
-              this.formula,
-              `@tc.${this.tradecraft.slice(0, 3)}.kno`,
-            );
-          }
-        }
       }
     }
   );

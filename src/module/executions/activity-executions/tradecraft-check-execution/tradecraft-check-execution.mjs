@@ -17,9 +17,6 @@ export default class TradecraftCheckExecution extends TradecraftExecutionMixin(
   ) {
     super(options);
     this._tradecraft = options.tradecraft;
-    if (this.actor && options.bonus === undefined) {
-      this.bonus = this.actor.system.tradecrafts[options.tradecraft].formula;
-    }
   }
 
   /** @inheritDoc */
@@ -43,7 +40,7 @@ export default class TradecraftCheckExecution extends TradecraftExecutionMixin(
 
   /** @inheritDoc */
   get tradecraft() {
-    return this._tradecraft;
+    return this._tradecraft ?? this.options.tradecraft;
   }
 
   /** @inheritDoc */

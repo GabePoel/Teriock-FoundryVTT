@@ -1,3 +1,4 @@
+import { addFormula, formulaExists } from "../../../../helpers/formula.mjs";
 import { ThresholdExecutionMixin } from "../../../mixins/_module.mjs";
 import BaseDocumentExecution from "../../base-document-execution/base-document-execution.mjs";
 
@@ -18,15 +19,30 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
       options.armament ?? this.#determineDefaultArmament(sys.interaction);
     this.#initializeFlags(options);
     this.#initializeCosts(options);
-    this.sb = options.sb ?? this.actor?.system.offense.sb ?? 0;
+    this.sb =
+      options.sb ??
+      !!(this.armament && this.source.system.isContact) *
+        (this.actor?.system.offense.sb ?? 0);
     this.piercing = this.#resolvePiercing(options, sys);
     this.warded = this.#resolveWarded(options, sys);
     this.vitals = this.#resolveVitals(options, sys);
     this.limb = this.#resolveLimb(options, sys);
-    this.attackPenaltyFormula = this.#resolveAttackPenalty(options, sys);
+    this.incurredAttackPenalty = this.#resolveAttackPenalty(options);
     this.executor = this.actor?.defaultToken ?? null;
-    this.attackPenalty = 0;
+    this.existingAttackPenalty = Number(
+      this.actor?.system.combat.attackPenalty,
+    );
+    this.usesReaction =
+      this.source.system.maneuver === "reactive" &&
+      this.source.system.executionTime.base === "r1";
     this.targets = new Set();
+    if (
+      this.isAttack &&
+      formulaExists(this.armament?.system.hit.formula) &&
+      this.source.system.isContact
+    ) {
+      this.bonus = addFormula(this.bonus, this.armament.system.hit.formula);
+    }
   }
 
   /**
@@ -43,13 +59,69 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
   }
 
   /** @inheritDoc */
+  get hasBonus() {
+    return this.isAttack || this.isFeat;
+  }
+
+  /** @inheritDoc */
+  get icon() {
+    return TERIOCK.display.icons.document.ability;
+  }
+
+  /**
+   * If this is an attack interaction.
+   * @returns {boolean}
+   */
   get isAttack() {
     return this.source?.system.interaction === "attack";
+  }
+
+  /**
+   * If this is a block interaction.
+   * @return {boolean}
+   */
+  get isBlock() {
+    return this.source?.system.interaction === "block";
+  }
+
+  /**
+   * Does this require physical contact with the target?
+   * @return {boolean}
+   */
+  get isContact() {
+    return this.source.system.isContact;
+  }
+
+  /**
+   * If this is a feat interaction.
+   * @return {boolean}
+   */
+  get isFeat() {
+    return this.source?.system.interaction === "feat";
+  }
+
+  /**
+   * If this is a manifest interaction.
+   * @return {boolean}
+   */
+  get isManifest() {
+    return this.source?.system.interaction === "manifest";
+  }
+
+  /** @inheritDoc */
+  get isRoll() {
+    return this.isAttack;
+  }
+
+  /** @inheritDoc */
+  get name() {
+    return this.source.system.fullName;
   }
 
   /** @inheritDoc */
   get rollData() {
     return Object.assign(super.rollData, {
+      ap: this.existingAttackPenalty,
       "angle.normal": game.teriock.getSetting("defaultConeAngle"),
       "angle.dragon": game.teriock.getSetting("defaultDragonBreathAngle"),
     });
@@ -104,14 +176,12 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
   /**
    * Determines the formula for attack penalties.
    * @param {Teriock.Execution.AbilityExecutionOptions} options
-   * @param {AbilitySystem} sys - The source system data.
    * @returns {string}
    */
-  #resolveAttackPenalty(options, sys) {
+  #resolveAttackPenalty(options) {
     if (options.attackPenalty !== undefined) return options.attackPenalty;
-    if (sys.interaction !== "attack") return "0";
-
-    return sys.isContact && this.armament
+    if (!this.isAttack) return "0";
+    return this.isContact && this.armament
       ? this.armament.system.attackPenalty.formula
       : "-3";
   }
