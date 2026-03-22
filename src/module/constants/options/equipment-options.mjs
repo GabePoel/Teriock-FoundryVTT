@@ -34,7 +34,15 @@ export const equipmentOptions = {
     magic: "TERIOCK.TERMS.PowerLevel.magic",
     unknown: "TERIOCK.TERMS.PowerLevel.unknown",
   },
-  unidentifiedProperties: ["morganti", "master-crafted", "small", "cumbersome"],
+  unidentifiedProperties: [
+    "cumbersome",
+    "destroyed",
+    "glowing",
+    "master-crafted",
+    "morganti",
+    "shattered",
+    "small",
+  ],
   weaponFightingStyles: reference.weaponFightingStyles,
   weight: { interval: 0.01 },
 };
