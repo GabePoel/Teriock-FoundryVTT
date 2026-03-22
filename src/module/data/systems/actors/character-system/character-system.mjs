@@ -52,9 +52,7 @@ export default class CharacterSystem extends BaseActorSystem {
       prototypeToken: {
         actorLink: true,
         disposition: 0,
-        sight: {
-          enabled: true,
-        },
+        sight: { enabled: true },
       },
       items: items,
     });

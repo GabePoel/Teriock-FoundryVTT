@@ -139,16 +139,9 @@ export default class BaseActorSystem extends mix(
 
     this.parent.updateSource({
       prototypeToken: {
-        bar1: {
-          attribute: "hp",
-        },
-        bar2: {
-          attribute: "mp",
-        },
+        bar1: { attribute: "hp" },
+        bar2: { attribute: "mp" },
         displayBars: 20,
-        ring: {
-          enabled: true,
-        },
       },
     });
   }

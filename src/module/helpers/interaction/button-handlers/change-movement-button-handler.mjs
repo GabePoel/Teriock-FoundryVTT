@@ -1,3 +1,4 @@
+import { makeIconClass } from "../../utils.mjs";
 import BaseButtonHandler from "./base-button-handler.mjs";
 
 export class ChangeMovementButtonHandler extends BaseButtonHandler {
@@ -12,12 +13,22 @@ export class ChangeMovementButtonHandler extends BaseButtonHandler {
    */
   static buildButton(movementAction, options = {}) {
     const button = super.buildButton();
-    button.icon = CONFIG.Token.movement.actions[movementAction].icon;
-    button.label =
-      options.label ||
-      game.i18n.localize(CONFIG.Token.movement.actions[movementAction].label);
+    button.icon =
+      CONFIG.Token.movement.actions[movementAction]?.icon ||
+      makeIconClass("ms-sprint");
+    button.label = options.label || this.getLabel(movementAction);
     button.dataset.movementAction = movementAction;
     return button;
+  }
+
+  /**
+   * @param {string} movementAction
+   * @return {string}
+   */
+  static getLabel(movementAction) {
+    return game.i18n.localize(
+      CONFIG.Token.movement.actions[movementAction].label,
+    );
   }
 
   /**
@@ -25,16 +36,6 @@ export class ChangeMovementButtonHandler extends BaseButtonHandler {
    */
   get movementAction() {
     return this.dataset.movementAction || "walk";
-  }
-
-  /**
-   * @param {string} movementAction
-   * @return {string}
-   */
-  #getLabel(movementAction) {
-    return game.i18n.localize(
-      CONFIG.Token.movement.actions[movementAction].label,
-    );
   }
 
   /** @inheritDoc */
@@ -48,8 +49,8 @@ export class ChangeMovementButtonHandler extends BaseButtonHandler {
         });
         ui.notifications.success("TERIOCK.COMMANDS.ChangeMovement.changed", {
           format: {
-            new: this.#getLabel(this.movementAction),
-            old: this.#getLabel(old),
+            new: ChangeMovementButtonHandler.getLabel(this.movementAction),
+            old: ChangeMovementButtonHandler.getLabel(old),
             token: t.name,
           },
           localize: true,
@@ -57,7 +58,7 @@ export class ChangeMovementButtonHandler extends BaseButtonHandler {
       } else {
         ui.notifications.warn("TERIOCK.COMMANDS.ChangeMovement.already", {
           format: {
-            movement: this.#getLabel(this.movementAction),
+            movement: ChangeMovementButtonHandler.getLabel(this.movementAction),
             token: t.name,
           },
           localize: true,
@@ -80,8 +81,8 @@ export class ChangeMovementButtonHandler extends BaseButtonHandler {
         });
         ui.notifications.success("TERIOCK.COMMANDS.ChangeMovement.reverted", {
           format: {
-            new: this.#getLabel(t.movementAction),
-            old: this.#getLabel(this.movementAction),
+            new: ChangeMovementButtonHandler.getLabel(t.movementAction),
+            old: ChangeMovementButtonHandler.getLabel(this.movementAction),
             token: t.name,
           },
           localize: true,
@@ -89,7 +90,7 @@ export class ChangeMovementButtonHandler extends BaseButtonHandler {
       } else {
         ui.notifications.warn("TERIOCK.COMMANDS.ChangeMovement.notFount", {
           format: {
-            movement: this.#getLabel(this.movementAction),
+            movement: ChangeMovementButtonHandler.getLabel(this.movementAction),
             token: t.name,
           },
           localize: true,

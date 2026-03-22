@@ -336,7 +336,7 @@ export default class TeriockActor extends mix(
     const basicAbilitiesItem = await resolveDocument(
       game.teriock.packs.essentials.index.getName("Basic Abilities"),
     );
-    return [...basicAbilitiesItem.abilities, ...this.abilities];
+    return [...this.abilities, ...basicAbilitiesItem.abilities];
   }
 
   /**
