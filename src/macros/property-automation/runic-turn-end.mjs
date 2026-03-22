@@ -12,8 +12,8 @@ if (
   const proceed = await teriock.applications.api.TeriockDialog.confirm({
     window: {
       title: game.i18n.format("TERIOCK.MODELS.Duration.PREREQUISITES.text", {
-        start: scope.effect.nameString,
-        end: scope.item.nameString,
+        start: scope.effect.fullName,
+        end: scope.item.fullName,
       }),
       icon: teriock.helpers.utils.makeIconClass(
         TERIOCK.display.icons.break.repair,

@@ -48,20 +48,25 @@ export default class HarmSystem extends mix(
     });
   }
 
+  /** @inheritDoc */
   get document() {
     return this.parent;
   }
 
-  get metadata() {
-    return this.constructor.metadata;
-  }
-
   /** @inheritDoc */
-  get nameString() {
-    return game.i18n.format("TERIOCK.SYSTEMS.Harm.EMBED.nameString", {
-      name: super.nameString,
+  get fullName() {
+    return game.i18n.format("TERIOCK.SYSTEMS.Harm.EMBED.fullName", {
+      name: super.fullName,
       type: TERIOCK.options.take[this.parent.type]?.label || "",
     });
+  }
+
+  /**
+   * Metadata.
+   * @return {{pseudos: {Automation: string}}}
+   */
+  get metadata() {
+    return this.constructor.metadata;
   }
 
   /** @inheritDoc */

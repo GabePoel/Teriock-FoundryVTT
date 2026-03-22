@@ -46,7 +46,7 @@ export default function ExternalDocumentsAutomationMixin(Base) {
         }
         return await selectDocumentsDialog(choices, {
           multi: this.multi,
-          title: this.document.nameString || this.document.name,
+          title: this.document.fullName || this.document.name,
         });
       }
 

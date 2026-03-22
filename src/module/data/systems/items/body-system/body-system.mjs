@@ -72,7 +72,7 @@ export default class BodySystem extends mix(
       ...this._defenseBar.wrappers,
       this.parent.elder
         ? this.parent.elder?.documentName !== "Actor"
-          ? this.parent.elder?.nameString
+          ? this.parent.elder?.fullName
           : ""
         : "",
     ]);

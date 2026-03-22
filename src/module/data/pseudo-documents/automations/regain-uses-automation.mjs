@@ -100,7 +100,7 @@ export default class RegainUsesAutomation extends TriggerAutomationMixin(
         {
           text: game.i18n.format(
             "TERIOCK.AUTOMATIONS.RegainUsesAutomation.USAGE.description",
-            { name: this.document.nameString },
+            { name: this.document.fullName },
           ),
           title: game.i18n.localize(
             "TERIOCK.SYSTEMS.Child.FIELDS.description.label",

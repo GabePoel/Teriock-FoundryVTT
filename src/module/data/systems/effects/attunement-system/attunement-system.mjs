@@ -103,7 +103,7 @@ export default class AttunementSystem extends BaseEffectSystem {
           icon: TERIOCK.options.document.attunement.icon,
           cards: [
             {
-              name: this.targetDocument.nameString,
+              name: this.targetDocument.fullName,
               uuid: this.targetDocument.uuid,
               makeTooltip: true,
               img: this.targetDocument.img,

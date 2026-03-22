@@ -21,7 +21,7 @@ export default class TeriockUser extends mix(
     const parts = super.embedParts;
     parts.img = this.avatar;
     if (this.character) {
-      parts.subtitle = this.character.nameString;
+      parts.subtitle = this.character.fullName;
     }
     return parts;
   }

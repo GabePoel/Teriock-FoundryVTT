@@ -260,7 +260,7 @@ export default class ChildSystem extends mix(
             await new ImagePopout({
               src: this.parent.img,
               uuid: this.parent.uuid,
-              window: { title: this.parent.nameString },
+              window: { title: this.parent.fullName },
             }).render(true);
           },
           group: "open",

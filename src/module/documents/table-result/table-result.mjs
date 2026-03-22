@@ -64,7 +64,7 @@ export default class TeriockTableResult extends mix(
               img: index.img,
               id: index._id,
               makeTooltip: true,
-              name: index.nameString || index.name,
+              name: index.fullName || index.name,
               type: index.type || "base",
               uuid: index.uuid,
             },

@@ -152,7 +152,7 @@ export default (Base) => {
         let out = foundry.utils.mergeObject(reference.toObject(true), {
           name: game.i18n.format(
             "TERIOCK.SYSTEMS.Ability.DIALOG.MakeScroll.scrollName",
-            { name: this.parent.nameString },
+            { name: this.parent.fullName },
           ),
           system: {
             consumable: true,

@@ -26,7 +26,7 @@ export default function AbilityExecutionGetInputPart(Base) {
 
       /** @inheritDoc */
       get name() {
-        return this.source.system.nameString;
+        return this.source.system.fullName;
       }
 
       /**

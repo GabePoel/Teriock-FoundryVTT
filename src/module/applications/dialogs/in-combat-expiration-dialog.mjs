@@ -20,7 +20,7 @@ export default async function inCombatExpirationDialog(
   }
   let expire = false;
   if (effect.system.expirations.combat.what.type === "forced" && !forceDialog) {
-    const name = effect.system.nameString;
+    const name = effect.system.fullName;
     expire = await TeriockDialog.confirm({
       window: {
         title: game.i18n.format("TERIOCK.DIALOGS.InCombatExpiration.title", {

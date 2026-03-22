@@ -62,7 +62,7 @@ export default class IdentificationModel extends EmbeddedDataModel {
     if (!this.identified) {
       ui.notifications.info(
         "TERIOCK.MODELS.Identification.QUERY.Identify.ask",
-        { format: { name: this.parent.parent.nameString }, localize: true },
+        { format: { name: this.parent.parent.fullName }, localize: true },
       );
       const doIdentify = await game.users.queryGM(
         "teriock.identifyItem",
@@ -75,14 +75,14 @@ export default class IdentificationModel extends EmbeddedDataModel {
       if (doIdentify) {
         ui.notifications.success(
           "TERIOCK.MODELS.Identification.QUERY.Identify.success",
-          { format: { name: this.parent.parent.nameString }, localize: true },
+          { format: { name: this.parent.parent.fullName }, localize: true },
         );
         return;
       }
     }
     ui.notifications.error(
       "TERIOCK.MODELS.Identification.QUERY.Identify.failure",
-      { format: { name: this.parent.parent.nameString }, localize: true },
+      { format: { name: this.parent.parent.fullName }, localize: true },
     );
   }
 
@@ -103,7 +103,7 @@ export default class IdentificationModel extends EmbeddedDataModel {
       const activeGM = game.users.activeGM;
       ui.notifications.info(
         "TERIOCK.MODELS.Identification.QUERY.ReadMagic.ask",
-        { format: { name: this.parent.parent.nameString }, localize: true },
+        { format: { name: this.parent.parent.fullName }, localize: true },
       );
       const content = await TeriockTextEditor.enrichHTML(
         game.i18n.format(
@@ -145,14 +145,14 @@ export default class IdentificationModel extends EmbeddedDataModel {
         );
         ui.notifications.success(
           "TERIOCK.MODELS.Identification.QUERY.ReadMagic.success",
-          { format: { name: this.parent.parent.nameString }, localize: true },
+          { format: { name: this.parent.parent.fullName }, localize: true },
         );
       } else {
         ui.notifications.error(
           "TERIOCK.MODELS.Identification.QUERY.ReadMagic.failure",
           {
             format: {
-              name: this.parent.parent.nameString,
+              name: this.parent.parent.fullName,
             },
             localize: true,
           },

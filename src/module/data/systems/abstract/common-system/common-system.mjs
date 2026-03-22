@@ -160,9 +160,9 @@ export default class CommonSystem extends mix(
    */
   get embedParts() {
     return {
-      title: this.parent.nameString,
+      title: this.parent.fullName,
       img: this.parent.img,
-      text: this.parent.master?.nameString,
+      text: this.parent.master?.fullName,
       color: this.color,
       openable: true,
       draggable: true,
@@ -226,7 +226,7 @@ export default class CommonSystem extends mix(
       color: this.color || undefined,
       font: this.font,
       image: this.parent.img,
-      name: this.parent.nameString,
+      name: this.parent.fullName,
       uuid: this.parent.uuid,
       icon: TERIOCK.options.document[this.metadata.type].icon,
       label: TERIOCK.options.document[this.metadata.type].name,

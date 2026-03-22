@@ -54,7 +54,7 @@ export default class HealAutomation extends StatAutomation {
       consumeStatDice: this.consumeStatDice,
       forHarm: this.forHarm,
       noStatDice: this.noStatDice,
-      title: this.document.nameString,
+      title: this.document.fullName,
     });
   }
 }

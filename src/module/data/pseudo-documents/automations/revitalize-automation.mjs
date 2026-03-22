@@ -33,7 +33,7 @@ export default class RevitalizeAutomation extends StatAutomation {
     this.document.actor.system.takeRevitalize({
       consumeStatDice: this.consumeStatDice,
       forHarm: this.forHarm,
-      title: this.document.nameString,
+      title: this.document.fullName,
     });
   }
 }

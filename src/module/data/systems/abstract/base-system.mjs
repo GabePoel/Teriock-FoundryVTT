@@ -30,7 +30,7 @@ export default class BaseSystem extends TypeDataModel {
    * A string to show instead of the name.
    * @returns {string}
    */
-  get nameString() {
+  get fullName() {
     let name = this.parent?.name ?? "";
     if (this._nameBadge) {
       name = game.i18n.format("TERIOCK.SYSTEMS.Base.EMBED.valueNameString", {

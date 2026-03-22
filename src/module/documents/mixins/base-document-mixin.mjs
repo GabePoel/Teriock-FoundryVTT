@@ -52,6 +52,14 @@ export default function BaseDocumentMixin(Base) {
       }
 
       /**
+       * A modified version of this document's name that displays additional text if needed.
+       * @returns {string}
+       */
+      get fullName() {
+        return this.system?.fullName || this.name;
+      }
+
+      /**
        * Can this be viewed?
        * @returns {boolean}
        */
@@ -65,14 +73,6 @@ export default function BaseDocumentMixin(Base) {
        */
       get master() {
         return this.parent;
-      }
-
-      /**
-       * A modified version of this document's name that displays additional text if needed.
-       * @returns {string}
-       */
-      get nameString() {
-        return this.system?.nameString || this.name;
       }
 
       /**
@@ -178,7 +178,7 @@ export default function BaseDocumentMixin(Base) {
         const remove = await TeriockDialog.confirm({
           window: {
             title: game.i18n.format("TERIOCK.SYSTEMS.Common.MENU.safeDelete", {
-              name: this.nameString || this.name,
+              name: this.fullName || this.name,
             }),
             icon: makeIconClass(icons.ui.delete, "title"),
           },

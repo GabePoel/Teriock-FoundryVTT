@@ -139,12 +139,12 @@ export default function AttunableSystemMixin(Base) {
           );
           ui.notifications.success(
             "TERIOCK.SYSTEMS.Attunable.USAGE.Attune.success",
-            { format: { name: this.parent.nameString }, localize: true },
+            { format: { name: this.parent.fullName }, localize: true },
           );
         } else {
           ui.notifications.error(
             "TERIOCK.SYSTEMS.Attunable.USAGE.Attune.notEnoughPresence",
-            { format: { name: this.parent.nameString }, localize: true },
+            { format: { name: this.parent.fullName }, localize: true },
           );
         }
         return attunement;
@@ -187,7 +187,7 @@ export default function AttunableSystemMixin(Base) {
           await attunement.delete();
           ui.notifications.success(
             "TERIOCK.SYSTEMS.Attunable.USAGE.Deattune.success",
-            { format: { name: this.parent.nameString }, localize: true },
+            { format: { name: this.parent.fullName }, localize: true },
           );
         }
       }

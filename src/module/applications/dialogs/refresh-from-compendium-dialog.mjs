@@ -121,7 +121,7 @@ export default async function refreshFromCompendiumDialog(doc) {
     window: {
       icon: makeIconClass("fa-book-atlas", "title"),
       title: game.i18n.format("TERIOCK.DIALOGS.RefreshFromCompendium.title", {
-        name: doc.nameString,
+        name: doc.fullName,
       }),
     },
   });

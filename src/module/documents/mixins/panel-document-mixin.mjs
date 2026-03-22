@@ -76,7 +76,7 @@ export default function PanelDocumentMixin(Base) {
       /** @returns {Teriock.MessageData.MessagePanel} */
       get panelParts() {
         return {
-          name: this.nameString || this.name,
+          name: this.fullName || this.name,
           image: systemPath("icons/documents/uncertainty.svg"),
           icon: TERIOCK.display.icons.ui.document,
           blocks: [],

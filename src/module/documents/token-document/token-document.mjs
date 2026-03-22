@@ -63,8 +63,8 @@ export default class TeriockTokenDocument extends mix(
       ? this.imageLive
       : this.texture.src;
     if (this.actor) {
-      if (this.actor.nameString !== parts.title) {
-        parts.text = this.actor.nameString;
+      if (this.actor.fullName !== parts.title) {
+        parts.text = this.actor.fullName;
       }
     }
     return parts;

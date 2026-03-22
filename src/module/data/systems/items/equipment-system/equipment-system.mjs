@@ -239,7 +239,7 @@ export default class EquipmentSystem extends mix(
       game.i18n.format("TERIOCK.SYSTEMS.Equipment.PANELS.weight", {
         value: this.weight.total + this.storage.carriedWeight,
       }),
-      this.sup?.nameString || "",
+      this.sup?.fullName || "",
       parts.text,
     ]);
     return parts;
