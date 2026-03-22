@@ -3,7 +3,7 @@ import { documentTypes } from "../../constants/system/_module.mjs";
 import { systemPath } from "../../helpers/path.mjs";
 import { resolveDocument } from "../../helpers/resolve.mjs";
 import { toCamelCase } from "../../helpers/string.mjs";
-import { mix } from "../../helpers/utils.mjs";
+import { lookupDocument, mix } from "../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
 import TeriockTokenDocument from "../token-document/token-document.mjs";
 
@@ -383,6 +383,20 @@ export default class TeriockActor extends mix(
   }
 
   /**
+   * Get a document if this actor has it.
+   * @param {string} lookup - An identifier or name. Identifiers are preferred.
+   * @param {Teriock.Documents.ChildType} [type] - The type of document.
+   * @return {Promise<AnyChildDocument|null>}
+   */
+  async getDocument(lookup, type) {
+    let candidates = this.visibleChildren.filter((c) => c.type !== "ability");
+    const abilities = await this.allAbilities();
+    candidates.push(...abilities);
+    if (type) candidates = candidates.filter((c) => c.type === type);
+    return lookupDocument(candidates, lookup) || null;
+  }
+
+  /**
    * Performs post-update operations for the actor.
    * @returns {Promise<void>}
    */
@@ -519,22 +533,23 @@ export default class TeriockActor extends mix(
   }
 
   /**
-   * Uses an ability by name.
-   * @param {string} abilityName - The name of the ability to use.
-   * @param {Teriock.Execution.AbilityExecutionOptions} [options] - Options for using the ability.
-   * @returns {Promise<void>}
+   * Use a specified document.
+   * @param {string} lookup - The identifier or ame of the document to use. Identifiers are preferred.
+   * @param {Teriock.Execution.DocumentExecutionOptions & { type?: Teriock.Documents.ChildType }} [options] - Options
+   * for finding and using the document.
+   * @return {Promise<void>}
    */
-  async useAbility(abilityName, options = {}) {
-    const abilities = await this.allAbilities();
-    const ability = abilities.find((i) => i.name === abilityName);
-    if (ability) {
-      await ability.use(Object.assign(options, { actor: this }));
-    } else {
+  async useDocument(lookup, options = {}) {
+    const doc = await this.getDocument(lookup, options.type);
+    if (doc) await doc.use(Object.assign(options, { actor: this }));
+    else {
       ui.notifications.warn("TERIOCK.SYSTEMS.Macro.EXECUTION.noDocument", {
         format: {
           actor: this.name,
-          type: TERIOCK.options.document.ability.name.toLowerCase(),
-          name: abilityName,
+          type: TERIOCK.options.document[
+            options.type || "document"
+          ].name.toLowerCase(),
+          name: lookup,
         },
         localize: true,
       });

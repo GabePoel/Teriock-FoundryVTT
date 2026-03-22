@@ -86,6 +86,11 @@ declare global {
     export type UseAbilityOptions = ThresholdOptions & {
       ability?: string;
     };
+
+    export type UseLocalOptions = ThresholdOptions & {
+      lookup?: string;
+      type?: Teriock.Documents.ChildType;
+    };
   }
 }
 

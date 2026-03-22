@@ -1,4 +1,4 @@
-import { UseAbilityHandler } from "../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
+import { UseLocalHandler } from "../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
 import { getImage } from "../../../helpers/path.mjs";
 import { ThresholdExecutionMixin } from "../../mixins/_module.mjs";
 import ImmunityExecution from "../immunity-execution/immunity-execution.mjs";
@@ -50,6 +50,6 @@ export default class ResistanceSaveExecution extends ThresholdExecutionMixin(
 
   /** @inheritDoc */
   async _buildButtons() {
-    this.buttons.push(UseAbilityHandler.buildButton("Resist"));
+    this.buttons.push(UseLocalHandler.buildButton("resist", "ability"));
   }
 }

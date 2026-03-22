@@ -261,7 +261,7 @@ export default class EquipmentSystem extends mix(
    */
   async _use(options = {}) {
     if (game.teriock.getSetting("rollAttackOnArmamentUse")) {
-      await this.actor?.useAbility("Basic Attack");
+      await this.actor?.useDocument("basic-attack", { type: "ability" });
     }
     options.source = this.parent;
     await new EquipmentExecution(options).execute();

@@ -1,7 +1,5 @@
-import { isKebabCase } from "../../../../helpers/string.mjs";
+import { IdentifierField } from "../../../fields/_module.mjs";
 import BaseSystem from "../base-system.mjs";
-
-const { fields } = foundry.data;
 
 /**
  * @extends {Teriock.Models.RulesSystemData}
@@ -16,12 +14,7 @@ export default class RulesSystem extends BaseSystem {
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      identifier: new fields.StringField({
-        validate: (identifier) => isKebabCase(identifier),
-        validationError: game.i18n.localize(
-          "TERIOCK.SYSTEMS.Rules.FIELDS.identifier.validationError",
-        ),
-      }),
+      identifier: new IdentifierField(),
     });
   }
 }

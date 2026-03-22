@@ -140,9 +140,10 @@ export default (Base) =>
      * @returns {Promise<void>}
      */
     async #onUseAbility(event, target, showDialog) {
-      await this.document.useAbility(target.dataset.ability, {
+      await this.document.useDocument(target.dataset.ability, {
         event,
         showDialog,
+        type: "ability",
       });
     }
 

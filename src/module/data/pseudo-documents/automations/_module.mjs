@@ -25,5 +25,5 @@ export { default as StatusAutomation } from "./status-automation.mjs";
 export { default as TakeAutomaton } from "./take-automation.mjs";
 export { default as TemplateAutomation } from "./template-automation.mjs";
 export { default as TransformationAutomation } from "./transformation-automation.mjs";
-export { default as UseAbilitiesAutomation } from "./use-abilities-automation.mjs";
 export { default as UseExternalDocumentsAutomation } from "./use-external-documents-automation.mjs";
+export { default as UseLocalDocumentsAutomation } from "./use-local-documents-automation.mjs";

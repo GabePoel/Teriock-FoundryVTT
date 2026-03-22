@@ -32,7 +32,7 @@ import {
   TradecraftCheckHandler,
   UndampenHandler,
   UnglueHandler,
-  UseAbilityHandler,
+  UseLocalHandler,
 } from "./simple-command-handlers.mjs";
 
 /** @type {typeof BaseButtonHandler[]} */
@@ -68,7 +68,7 @@ const handlerArray = [
   TradecraftCheckHandler,
   UndampenHandler,
   UnglueHandler,
-  UseAbilityHandler,
+  UseLocalHandler,
 ];
 
 /** @type {Record<string, typeof BaseButtonHandler>} */

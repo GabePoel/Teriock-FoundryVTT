@@ -1,4 +1,3 @@
-import { getDocument } from "../../helpers/fetch.mjs";
 import { dedent } from "../../helpers/string.mjs";
 import { mix } from "../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
@@ -35,6 +34,15 @@ export default class TeriockMacro extends mix(
   }
 
   /**
+   * Determined the lookup key for some document.
+   * @param {TeriockDocument} doc
+   * @return {string}
+   */
+  static documentLookupKey(doc) {
+    return foundry.utils.getProperty(doc, "system.identifier") || doc.name;
+  }
+
+  /**
    * Get the hotbar folder for the current user.
    * @returns {Promise<TeriockFolder>|null}
    */
@@ -57,38 +65,6 @@ export default class TeriockMacro extends mix(
   }
 
   /**
-   * Get a document from an actor.
-   * @param {TeriockActor} actor - The actor to get the document from.
-   * @param {string} name - The name of the document. This is case-sensitive.
-   * @param {Teriock.Documents.ChildType} [type] - The type of the document.
-   * @returns {Promise<ChildDocument|null>}
-   */
-  static async getDocument(actor, name, type) {
-    let doc = null;
-    if (!type) {
-      doc = actor.items.find((i) => i.name === name);
-      if (!doc) {
-        doc = actor.validEffects.find((e) => e.name === name);
-      }
-      return doc;
-    } else if (
-      Object.keys(TERIOCK.system.documentTypes.effects).includes(type)
-    ) {
-      doc = actor.validEffects.find((e) => e.name === name && e.type === type);
-    } else if (Object.keys(TERIOCK.system.documentTypes.items).includes(type)) {
-      doc = actor.items.find((i) => i.name === name && i.type === type);
-    }
-    if (!doc && type === "ability") {
-      const basicAbilitiesItem = await getDocument(
-        "Basic Abilities",
-        "essentials",
-      );
-      doc = basicAbilitiesItem?.abilities.find((a) => a.name === name);
-    }
-    return doc;
-  }
-
-  /**
    * Create a general use macro from the given document.
    * @param {ChildDocument} doc
    * @returns {Promise<TeriockMacro>}
@@ -99,11 +75,10 @@ export default class TeriockMacro extends mix(
         m.getFlag("teriock", "user") === game.user.id &&
         m.getFlag("teriock", "macroType") === "useGeneral" &&
         m.getFlag("teriock", "macroDocumentType") === doc.type &&
-        m.getFlag("teriock", "macroDocumentName") === doc.name,
+        m.getFlag("teriock", "macroDocumentName") ===
+          this.documentLookupKey(doc),
     );
-    if (macro) {
-      return macro;
-    }
+    if (macro) return macro;
     return this.makeGeneralUseMacro(doc);
   }
 
@@ -130,8 +105,9 @@ export default class TeriockMacro extends mix(
    * @returns {Promise<TeriockMacro>}
    */
   static async makeGeneralUseMacro(doc) {
+    const lookup = this.documentLookupKey(doc);
     const command = dedent(`
-    await game.teriock.Macro.useDocumentGeneral("${doc.name}", { actor, type: "${doc.type}", event })`);
+    await game.teriock.Macro.useDocumentGeneral("${lookup}", { actor, type: "${doc.type}", event })`);
     const macroData = {
       name: game.i18n.format("TERIOCK.SYSTEMS.Child.USAGE.use", {
         value: doc.name,
@@ -145,7 +121,7 @@ export default class TeriockMacro extends mix(
           user: game.user.id,
           macroType: "useGeneral",
           macroDocumentType: doc.type,
-          macroDocumentName: doc.name,
+          macroDocumentName: this.documentLookupKey(doc),
         },
       },
     };
@@ -181,17 +157,17 @@ export default class TeriockMacro extends mix(
 
   /**
    * Get a document on an actor and use it.
-   * @param {string} name
+   * @param {string} lookup
    * @param {object} [options]
    * @param {TeriockActor} [options.actor]
    * @param {Teriock.Documents.ChildType} [options.type]
    * @param {PointerEvent} [options.event]
    * @returns {Promise<void>}
    */
-  static async useDocumentGeneral(name, options) {
+  static async useDocumentGeneral(lookup, options) {
     const { actor, type, event } = options;
     const tokens = /** @type {TeriockToken[]} */ game.canvas.tokens.controlled;
-    const actors = tokens.map((t) => t.actor);
+    const actors = tokens.map((t) => t.actor).filter((_) => _);
     if (actors.length === 0 && options.actor) {
       actors.push(actor);
     }
@@ -201,7 +177,7 @@ export default class TeriockMacro extends mix(
       });
     }
     for (const a of actors) {
-      const doc = await this.getDocument(a, name, type);
+      const doc = await a.getDocument(lookup, type);
       if (doc)
         await doc.system.use({
           actor: a,
@@ -213,7 +189,7 @@ export default class TeriockMacro extends mix(
           localize: true,
           format: {
             actor: a.name,
-            name,
+            name: lookup,
             type: type
               ? TERIOCK.options.document[type].name.toLowerCase()
               : TERIOCK.options.document.document.name.toLowerCase(),

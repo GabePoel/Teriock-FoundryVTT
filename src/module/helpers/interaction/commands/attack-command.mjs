@@ -4,7 +4,7 @@
  * @returns {Promise<void>}
  */
 async function primary(actor, options = {}) {
-  await actor.useAbility("Basic Attack", options);
+  await actor.useDocument("basic-attack", { ...options, type: "ability" });
 }
 
 /**

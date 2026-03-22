@@ -19,6 +19,7 @@ import { piercingOptions } from "./piercing-options.mjs";
 import { powerOptions } from "./power-options.mjs";
 import { protectionOptions } from "./protection-options.mjs";
 import { rankOptions } from "./rank-options.mjs";
+import { scalingOptions } from "./scaling-options.mjs";
 import { speciesOptions } from "./species-options.mjs";
 import { takeOptions } from "./take-options.mjs";
 import { targetOptions } from "./target-options.mjs";
@@ -47,6 +48,7 @@ const options = {
   power: powerOptions,
   protection: protectionOptions,
   rank: rankOptions,
+  scaling: scalingOptions,
   species: speciesOptions,
   take: takeOptions,
   target: targetOptions,

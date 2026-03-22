@@ -21,15 +21,15 @@ async function abstractTakeOperation(actor, options) {
     else await take.apply(actor, amount);
     return;
   }
+  const rollData = actor?.getRollData() || {};
   if (options.boost) {
     formula = await boostDialog(formula, {
       type: TERIOCK.options.take[type].label,
+      rollData,
     });
   }
   if (!formula) return;
-  const roll = new HarmRoll(formula, actor?.getRollData() || {}, {
-    take: type,
-  });
+  const roll = new HarmRoll(formula, rollData, { take: type });
   if (options.crit) roll.alter(2, 0, { multiplyNumeric: false });
   await roll.evaluate();
   const messageData = {

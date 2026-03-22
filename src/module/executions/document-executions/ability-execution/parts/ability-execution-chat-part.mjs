@@ -14,7 +14,7 @@ import { RollRollableTakeHandler } from "../../../../helpers/interaction/button-
 import {
   FeatHandler,
   StandardDamageHandler,
-  UseAbilityHandler,
+  UseLocalHandler,
 } from "../../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
 import { safeUuid } from "../../../../helpers/resolve.mjs";
 
@@ -343,7 +343,9 @@ export default function AbilityExecutionChatPart(Base) {
 
         // Add block cone button
         if (this.source.system.delivery === "cone" && !this.flags.noTemplate) {
-          this.buttons.push(UseAbilityHandler.buildButton("Block Cone"));
+          this.buttons.push(
+            UseLocalHandler.buildButton("block-cone", "ability"),
+          );
         }
 
         if (

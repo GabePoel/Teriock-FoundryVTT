@@ -102,7 +102,7 @@ const wikiContextMenuOptions = [
     name: "TERIOCK.COMMANDS.UseAbility.useResist",
     icon: makeIcon(icons.document.ability, "contextMenu"),
     callback: async () => {
-      await game.actors.default.useAbility("Resist");
+      await game.actors.default.useDocument("resist", { type: "ability" });
     },
     condition: (target) =>
       ["Keyword: Resistance", "Keyword: Hexproof"].includes(
@@ -114,7 +114,7 @@ const wikiContextMenuOptions = [
     icon: makeIcon(icons.document.ability, "contextMenu"),
     callback: async (target) => {
       const abilityName = target.dataset.tooltip.split("Ability: ")[1];
-      await game.actors.default.useAbility(abilityName);
+      await game.actors.default.useDocument(abilityName, { type: "ability" });
     },
     condition: (target) =>
       target.dataset.tooltip?.startsWith("Ability: ") && game.actors.default,

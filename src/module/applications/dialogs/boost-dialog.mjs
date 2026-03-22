@@ -11,6 +11,7 @@ const { fields } = foundry.data;
  * @param {boolean} [options.crit] - Go critical?
  * @param {string} [options.label] - Custom button label
  * @param {string} [options.type] - The title of the type of roll being made
+ * @param {object} [options.rollData] - Roll data to use when updating the formula.
  * @returns {Promise<string>} The roll formula with boost changes applied.
  */
 export default async function boostDialog(rollFormula, options = {}) {
@@ -82,7 +83,7 @@ export default async function boostDialog(rollFormula, options = {}) {
             "crit",
           );
         const crit = critButton.checked;
-        const roll = new BaseRoll(updatedFormula, {});
+        const roll = new BaseRoll(updatedFormula, options.rollData || {});
         if (crit) {
           roll.alter(2, 0, { multiplyNumeric: false });
         }

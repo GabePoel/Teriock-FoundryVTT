@@ -97,10 +97,17 @@ export default (Base) => {
           : this.scaling.lvl;
         this.scaling.rank = Math.max(0, Math.floor((this.scaling.lvl - 1) / 5));
         this.scaling.p = Math.max(
-          0,
-          Math.floor(1 + (this.scaling.scale - 7) / 10),
+          TERIOCK.options.scaling.minP,
+          Math.floor(
+            TERIOCK.options.scaling.minP + 1 + (this.scaling.scale - 7) / 10,
+          ),
         );
-        this.scaling.f = Math.max(0, Math.floor((this.scaling.scale - 2) / 5));
+        this.scaling.f = Math.max(
+          TERIOCK.options.scaling.minF,
+          Math.floor(
+            TERIOCK.options.scaling.minF + (this.scaling.scale - 2) / 5,
+          ),
+        );
         super.prepareBaseData();
       }
     }

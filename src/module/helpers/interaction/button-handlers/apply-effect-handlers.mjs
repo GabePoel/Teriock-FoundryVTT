@@ -23,6 +23,7 @@ export class ApplyEffectHandler extends BaseButtonHandler {
    * @param {object} normalData
    * @param {object} [options]
    * @param {string} [options.label]
+   * @param {string} [options.icon]
    * @param {object} [options.critData]
    * @param {Teriock.System.Attachment<ChildDocument>[]} [options.normalChildren]
    * @param {Teriock.System.Attachment<ChildDocument>[]} [options.critChildren]
@@ -32,7 +33,7 @@ export class ApplyEffectHandler extends BaseButtonHandler {
   static buildButton(normalData, options = {}) {
     const { critData } = options;
     const button = super.buildButton();
-    button.icon = makeIconClass(icons.ui.apply, "button");
+    button.icon = makeIconClass(options.icon || icons.ui.apply, "button");
     button.label =
       options.label || game.i18n.localize("TERIOCK.COMMANDS.ApplyEffect.label");
     const normalJSON = JSON.stringify(normalData);

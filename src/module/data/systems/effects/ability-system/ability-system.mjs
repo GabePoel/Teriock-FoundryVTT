@@ -90,8 +90,8 @@ export default class AbilitySystem extends mix(
       automations.TakeAutomaton,
       automations.TemplateAutomation,
       automations.TransformationAutomation,
-      automations.UseAbilitiesAutomation,
       automations.UseExternalDocumentsAutomation,
+      automations.UseLocalDocumentsAutomation,
     ];
   }
 

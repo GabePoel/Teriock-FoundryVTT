@@ -1,3 +1,4 @@
+import { icons } from "../../../constants/display/icons.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { ApplyEffectHandler } from "../../../helpers/interaction/button-handlers/apply-effect-handlers.mjs";
 import { FormulaField } from "../../fields/_module.mjs";
@@ -50,6 +51,7 @@ export default class AttunementAutomation extends BaseAutomation {
     };
     return [
       ApplyEffectHandler.buildButton(attunementData, {
+        icon: icons.attunable.attune,
         label: game.i18n.format("TERIOCK.COMMANDS.Status.applyNamed", {
           name: game.i18n.localize("TYPES.ActiveEffect.attunement"),
         }),

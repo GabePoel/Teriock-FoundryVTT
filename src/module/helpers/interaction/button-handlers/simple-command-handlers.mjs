@@ -29,7 +29,7 @@ import {
   toggleStatusCommand,
 } from "../commands/status-commands.mjs";
 import tradecraftCommand from "../commands/tradecraft-command.mjs";
-import useAbilityCommand from "../commands/use-ability-command.mjs";
+import UseLocalCommand from "../commands/use-local-command.mjs";
 import { CommandButtonHandlerBuilder } from "../interaction-tools.mjs";
 
 /**
@@ -195,20 +195,20 @@ export class TakeUnhackHandler extends CommandButtonHandlerBuilder(
     return super.buildButton({ part });
   }
 }
-/**
- * Handler to use an ability.
- */
-export class UseAbilityHandler extends CommandButtonHandlerBuilder(
-  useAbilityCommand,
+
+export class UseLocalHandler extends CommandButtonHandlerBuilder(
+  UseLocalCommand,
 ) {
   /**
    * @inheritDoc
-   * @param {string} ability
+   * @param {string} lookup
+   * @param {Teriock.Documents.ChildType} [type]
    */
-  static buildButton(ability) {
-    return super.buildButton({ ability });
+  static buildButton(lookup, type) {
+    return super.buildButton({ lookup, type });
   }
 }
+
 /**
  * Handler to trigger a tradecraft check roll.
  */

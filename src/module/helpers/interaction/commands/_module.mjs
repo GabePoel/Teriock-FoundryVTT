@@ -28,7 +28,7 @@ import {
   toggleStatusCommand,
 } from "./status-commands.mjs";
 import tradecraftCommand from "./tradecraft-command.mjs";
-import useAbilityCommand from "./use-ability-command.mjs";
+import useLocalCommand from "./use-local-command.mjs";
 
 const commandArray = [
   ...rollableTakeCommands,
@@ -59,7 +59,7 @@ const commandArray = [
   undampenCommand,
   unglueCommand,
   unhackCommand,
-  useAbilityCommand,
+  useLocalCommand,
 ];
 
 /** @type {Record<string, Teriock.Interaction.CommandEntry>} */

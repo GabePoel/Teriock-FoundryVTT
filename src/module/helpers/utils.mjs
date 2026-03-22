@@ -1,5 +1,6 @@
 import { iconStyles } from "../constants/display/_module.mjs";
 import { BaseRoll } from "../dice/rolls/_module.mjs";
+import { toCamelCase, toTitleCase } from "./string.mjs";
 
 /**
  * Creates an HTML icon using Font Awesome classes.
@@ -280,4 +281,38 @@ export async function massUpdate(documentName, updateData, operation = {}) {
     documents.push(...ud);
   }
   return documents;
+}
+
+/**
+ * Try and find a document from an array of candidates.
+ * @param {TeriockDocument[]} candidates
+ * @param {string} lookup - A term to search for. Either an identifier or a name. Identifiers are preferred.
+ * @returns {TeriockDocument | null}
+ */
+export function lookupDocument(candidates, lookup) {
+  return (
+    candidates.find(
+      (c) => foundry.utils.getProperty(c, "system.identifier") === lookup,
+    ) ||
+    candidates.find((c) => c.name === lookup) ||
+    null
+  );
+}
+
+/**
+ * See if the document has a specified name.
+ * @param {string} identifier
+ * @param {Teriock.Documents.ChildType} [type]
+ * @return {string}
+ */
+export function inferNameFromIdentifier(identifier, type) {
+  if (identifier.includes(":") && !type) {
+    const parts = identifier.split(":");
+    type = parts[0];
+    identifier = parts[1];
+  }
+  let out = toTitleCase(identifier.replaceAll("-", " "));
+  const reference = TERIOCK.reference[TERIOCK.options.document[type]?.index];
+  if (reference) out = reference[toCamelCase(identifier)] || out;
+  return out;
 }
