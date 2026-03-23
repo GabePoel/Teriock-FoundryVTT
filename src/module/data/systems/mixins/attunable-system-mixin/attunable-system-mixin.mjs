@@ -26,6 +26,21 @@ export default function AttunableSystemMixin(Base) {
       }
 
       /**
+       * Attunable tags.
+       * @returns {Teriock.Sheet.DisplayTag[]}
+       */
+      get _attunableTags() {
+        if (this.isAttuned)
+          return [
+            {
+              label: "TERIOCK.SYSTEMS.Attunement.USAGE.attuned",
+              tooltip: "TYPES.ActiveEffect.attunement",
+            },
+          ];
+        return [];
+      }
+
+      /**
        * Gets the current attunement data for this item.
        * @returns {TeriockAttunement|null} The attunement data or null if not attuned.
        */

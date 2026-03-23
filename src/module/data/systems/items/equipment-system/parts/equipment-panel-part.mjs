@@ -1,4 +1,5 @@
 import { formulaExists } from "../../../../../helpers/formula.mjs";
+import { simplifyTags } from "../../../../../helpers/panel.mjs";
 
 /**
  * Equipment panel part.
@@ -40,17 +41,20 @@ export default (Base) => {
             ),
             wrappers: [
               TERIOCK.options.equipment.powerLevel[this.powerLevel].name,
-              this.shattered
-                ? game.i18n.format(
-                    "TERIOCK.SYSTEMS.Equipment.FIELDS.shattered.label",
-                  )
-                : "",
               this.equipmentType,
               this.range.description,
+              ...simplifyTags(this._armamentTags),
             ],
           },
           this._attackBar,
           this._defenseBar,
+          {
+            icon: TERIOCK.display.icons.equipment.equipmentClasses,
+            label: game.i18n.format(
+              "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentClasses.label",
+            ),
+            wrappers: [...simplifyTags(this._equipmentClassesTags)],
+          },
           {
             icon: TERIOCK.display.icons.armament.load,
             label: game.i18n.localize("TERIOCK.SYSTEMS.Armament.PANELS.load"),
@@ -66,27 +70,14 @@ export default (Base) => {
                     value: this.tier.text,
                   })
                 : "",
-            ],
-          },
-          {
-            icon: TERIOCK.display.icons.equipment.equipmentClasses,
-            label: game.i18n.format(
-              "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentClasses.label",
-            ),
-            wrappers: [
-              ...this.equipmentClasses.map(
-                (ec) => TERIOCK.options.equipment.equipmentClasses[ec],
-              ),
-              this.spellTurning
-                ? game.i18n.format(
-                    "TERIOCK.SYSTEMS.Armament.FIELDS.spellTurning.label",
-                  )
-                : "",
+              ...simplifyTags(this._identificationTags),
             ],
           },
           {
             icon: TERIOCK.display.icons.equipment.storage,
-            label: "Storage",
+            label: game.i18n.localize(
+              "TERIOCK.MODELS.Storage.FIELDS.enabled.label",
+            ),
             wrappers: this.storage.enabled
               ? [
                   game.i18n.format(

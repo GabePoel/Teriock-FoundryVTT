@@ -56,6 +56,11 @@ export default function ArmamentSystemMixin(Base) {
             model: DefenseModel,
           }),
           damage: damageField(false),
+          equipmentClasses: new fields.SetField(
+            new fields.StringField({
+              choices: TERIOCK.reference.equipmentClasses,
+            }),
+          ),
           fightingStyle: new fields.StringField({
             initial: null,
             nullable: true,
@@ -104,6 +109,14 @@ export default function ArmamentSystemMixin(Base) {
         });
       }
 
+      /**
+       * Armament tags.
+       * @returns {Teriock.Sheet.DisplayTag[]}
+       */
+      get _armamentTags() {
+        return [...this._propertyTags, ...this._rangeTags];
+      }
+
       /** @returns {Teriock.MessageData.MessageBar} */
       get _attackBar() {
         return {
@@ -123,7 +136,6 @@ export default function ArmamentSystemMixin(Base) {
                   { value: this.attackPenalty.formula },
                 )
               : "",
-            TERIOCK.reference.weaponFightingStyles[this.fightingStyle],
           ],
         };
       }
@@ -158,6 +170,61 @@ export default function ArmamentSystemMixin(Base) {
         };
       }
 
+      /**
+       * Equipment classes tags.
+       * @returns {Teriock.Sheet.DisplayTag[]}
+       */
+      get _equipmentClassesTags() {
+        return Array.from(this.equipmentClasses).map((t) => {
+          return {
+            label: TERIOCK.reference.equipmentClasses[t],
+            tooltip: "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentClasses.label",
+          };
+        });
+      }
+
+      /**
+       * Property tags.
+       * @returns {Teriock.Sheet.DisplayTag[]}
+       */
+      get _propertyTags() {
+        const tags = [];
+        if (this.spellTurning) {
+          tags.push({
+            label: "TERIOCK.TERMS.Properties.spellTurning",
+            tooltip: "TERIOCK.PACKS.properties",
+          });
+        }
+        if (this.warded) {
+          tags.push({
+            label: "TERIOCK.TERMS.Properties.warded",
+            tooltip: "TERIOCK.PACKS.properties",
+          });
+        }
+        return tags;
+      }
+
+      /**
+       * Range tags.
+       * @returns {Teriock.Sheet.DisplayTag[]}
+       */
+      get _rangeTags() {
+        const tags = [];
+        if (this.range.melee) {
+          tags.push({
+            label: "TERIOCK.SYSTEMS.Armament.FIELDS.range.melee.label",
+            tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.range.label",
+          });
+        }
+        if (this.range.ranged) {
+          tags.push({
+            label: "TERIOCK.SYSTEMS.Armament.FIELDS.range.ranged.label",
+            tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.range.label",
+          });
+        }
+        return tags;
+      }
+
       /** @inheritDoc */
       get displayFields() {
         return [
@@ -180,12 +247,23 @@ export default function ArmamentSystemMixin(Base) {
         ];
       }
 
+      /** @inheritDoc */
+      get displayTags() {
+        return [
+          ...super.displayTags,
+          ...this._equipmentClassesTags,
+          ...this._armamentTags,
+        ];
+      }
+
       /**
        * Summary of attack stats.
        * @returns {string}
        */
       get summarizedAttack() {
-        return `${this.damage.base.formula} damage`;
+        return game.i18n.format("TERIOCK.SYSTEMS.Armament.PANELS.damage", {
+          value: this.damage.base.formula,
+        });
       }
 
       /**
@@ -193,7 +271,9 @@ export default function ArmamentSystemMixin(Base) {
        * @returns {string}
        */
       get summarizedBlock() {
-        return `${this.bv.value} BV`;
+        return game.i18n.format("TERIOCK.SYSTEMS.Armament.PANELS.bv", {
+          format: this.bv.formula,
+        });
       }
 
       /** @inheritDoc */
@@ -240,6 +320,9 @@ export default function ArmamentSystemMixin(Base) {
         }
         for (const p of this.props || new Set()) {
           data[`prop.${p}`] = 1;
+        }
+        for (const equipmentClass of this.equipmentClasses) {
+          data[`class.${equipmentClass}`] = 1;
         }
         return data;
       }

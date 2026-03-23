@@ -2,7 +2,10 @@ import { TeriockDialog } from "../../applications/api/_module.mjs";
 import { icons } from "../../constants/display/icons.mjs";
 import { resolveDocument } from "../../helpers/resolve.mjs";
 import { toId } from "../../helpers/string.mjs";
-import { makeIcon, makeIconClass } from "../../helpers/utils.mjs";
+import {
+  makeIcon,
+  makeIconClass
+} from "../../helpers/utils.mjs";
 
 /**
  * Base mixin.
@@ -126,11 +129,8 @@ export default function BaseDocumentMixin(Base) {
        * @param {TeriockDocument|Index<TeriockDocument>} doc
        */
       checkAncestor(doc) {
-        if (doc?.uuid === this.uuid) {
-          return true;
-        } else {
-          return this.parent?.checkAncestor(doc) || false;
-        }
+        if (doc?.uuid === this.uuid) return true;
+        return this.parent?.checkAncestor(doc) || false;
       }
 
       /**

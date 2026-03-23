@@ -149,6 +149,30 @@ export default (Base) => {
         super.migrateData(data);
       }
 
+      /**
+       * Cost wrappers.
+       * @returns {string[]}
+       */
+      get _costWrappers() {
+        return [
+          ...Object.entries(TERIOCK.options.cost.primary.keys).map(([k, v]) =>
+            this.costs.primary[k].type === "formula"
+              ? game.i18n.format("TERIOCK.SYSTEMS.Ability.PANELS.constant", {
+                  value: this.costs.primary[k].formula,
+                  cost: v.abbreviation,
+                })
+              : this.costs.primary[k].type === "description"
+                ? game.i18n.format("TERIOCK.SYSTEMS.Ability.PANELS.variable", {
+                    cost: v.abbreviation,
+                  })
+                : "",
+          ),
+          ...Object.entries(TERIOCK.options.cost.components.keys).map(
+            ([k, v]) => (this.costs.components[k].type ? v : ""),
+          ),
+        ];
+      }
+
       /** @inheritDoc */
       getLocalRollData() {
         return Object.assign(super.getLocalRollData(), {

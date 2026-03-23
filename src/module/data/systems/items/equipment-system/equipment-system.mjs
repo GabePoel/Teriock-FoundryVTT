@@ -79,11 +79,6 @@ export default class EquipmentSystem extends mix(
       consumable: new fields.BooleanField({
         initial: false,
       }),
-      equipmentClasses: new fields.SetField(
-        new fields.StringField({
-          choices: TERIOCK.reference.equipmentClasses,
-        }),
-      ),
       equipmentType: new fields.StringField({
         initial: "",
       }),
@@ -119,101 +114,16 @@ export default class EquipmentSystem extends mix(
 
   /** @inheritDoc */
   get displayTags() {
-    const tags = super.displayTags;
-    tags.push(
-      ...Array.from(this.equipmentClasses).map((t) => {
-        return {
-          label: TERIOCK.reference.equipmentClasses[t],
-          tooltip: "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentClasses.label",
-        };
-      }),
-    );
-    if (this.shattered) {
-      tags.push({
-        label: "TERIOCK.TERMS.Properties.shattered",
-        tooltip: "TERIOCK.PACKS.properties",
-      });
-    }
-    if (this.dampened) {
-      tags.push({
-        label: "TERIOCK.TERMS.Properties.dampened",
-        tooltip: "TERIOCK.PACKS.properties",
-      });
-    }
-    if (this.glued) {
-      tags.push({
-        label: "TERIOCK.TERMS.Properties.glued",
-        tooltip: "TERIOCK.PACKS.properties",
-      });
-    }
-    if (this.spellTurning) {
-      tags.push({
-        label: "TERIOCK.TERMS.Properties.spellTurning",
-        tooltip: "TERIOCK.PACKS.properties",
-      });
-    }
-    if (this.warded) {
-      tags.push({
-        label: "TERIOCK.TERMS.Properties.warded",
-        tooltip: "TERIOCK.PACKS.properties",
-      });
-    }
-    if (this.range.melee) {
-      tags.push({
-        label: "TERIOCK.SYSTEMS.Armament.FIELDS.range.melee.label",
-        tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.range.label",
-      });
-    }
-    if (this.range.ranged) {
-      tags.push({
-        label: "TERIOCK.SYSTEMS.Armament.FIELDS.range.ranged.label",
-        tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.range.label",
-      });
-    }
-    if (this.identification.identified) {
-      tags.push({
-        label: "TERIOCK.MODELS.Identification.FIELDS.identified.label",
-        tooltip: "TERIOCK.MODELS.Identification.label",
-      });
-    } else {
-      tags.push({
-        label: "TERIOCK.MODELS.Identification.FIELDS.identified.inverse",
-        tooltip: "TERIOCK.MODELS.Identification.label",
-      });
-      if (this.identification.read) {
-        tags.push({
-          label: "TERIOCK.MODELS.Identification.FIELDS.read.label",
-          tooltip: "TERIOCK.MODELS.Identification.label",
-        });
-      }
-    }
-    if (this.isAttuned) {
-      tags.push({
-        label: "TERIOCK.SYSTEMS.Attunement.USAGE.attuned",
-        tooltip: "TYPES.ActiveEffect.attunement",
-      });
-    }
-    return tags;
+    return [
+      ...super.displayTags,
+      ...this._identificationTags,
+      ...this._attunableTags,
+    ];
   }
 
   /** @inheritDoc */
   get displayToggles() {
-    return [
-      {
-        path: "system.glued",
-        dataset: { action: "toggleGlued" },
-      },
-      {
-        path: "system.shattered",
-        dataset: { action: "toggleShattered" },
-      },
-      {
-        path: "system.dampened",
-        dataset: { action: "toggleDampened" },
-      },
-      "system.consumable",
-      ...super.displayToggles,
-    ];
+    return ["system.consumable", ...super.displayToggles];
   }
 
   /** @inheritDoc */
@@ -263,16 +173,11 @@ export default class EquipmentSystem extends mix(
 
   /** @inheritDoc */
   getLocalRollData() {
-    const data = super.getLocalRollData();
-    Object.assign(data, {
+    return Object.assign(super.getLocalRollData(), {
       price: this.price,
       [`type.${toCamelCase(this.equipmentType)}`]: 1,
       [`power.${toCamelCase(this.powerLevel)}`]: 1,
     });
-    for (const equipmentClass of this.equipmentClasses) {
-      data[`class.${equipmentClass}`] = 1;
-    }
-    return data;
   }
 
   /** @inheritDoc */

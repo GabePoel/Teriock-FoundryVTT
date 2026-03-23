@@ -7,10 +7,6 @@ declare global {
       class: Teriock.Keys.Class;
       /** <schema> If this ability is consumable */
       consumable: boolean;
-      /** <schema> If this ability is considered to be Elder Sorcery */
-      elderSorcery: boolean;
-      /** <schema> Wording of this ability's Elder Sorcery incant */
-      elderSorceryIncant: string;
       /** <schema> If this ability is a guildmaster ability */
       guildmaster: boolean;
       /** <schema> If this ability is invoked */

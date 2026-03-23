@@ -1,4 +1,5 @@
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
+import { simplifyTags } from "../../../../helpers/panel.mjs";
 import { dotJoin } from "../../../../helpers/string.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
 import * as mixins from "../../mixins/_module.mjs";
@@ -36,34 +37,6 @@ export default class BodySystem extends mix(
   }
 
   /** @inheritDoc */
-  get displayTags() {
-    const tags = super.displayTags;
-    tags.push({
-      label: "TERIOCK.TERMS.EquipmentClasses.bodyParts",
-      tooltip: "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentClasses.label",
-    });
-    if (this.av.value) {
-      tags.push({
-        label: "TERIOCK.TERMS.EquipmentClasses.armor",
-        tooltip: "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentClasses.label",
-      });
-    }
-    if (this.spellTurning) {
-      tags.push({
-        label: "TERIOCK.TERMS.Properties.spellTurning",
-        tooltip: "TERIOCK.PACKS.properties",
-      });
-    }
-    if (this.warded) {
-      tags.push({
-        label: "TERIOCK.TERMS.Properties.warded",
-        tooltip: "TERIOCK.PACKS.properties",
-      });
-    }
-    return tags;
-  }
-
-  /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
     parts.subtitle = game.i18n.localize("TYPES.Item.body");
@@ -92,26 +65,12 @@ export default class BodySystem extends mix(
             "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentClasses.label",
           ),
           wrappers: [
-            game.i18n.localize("TERIOCK.TERMS.EquipmentClasses.bodyParts"),
-            this.av.value
-              ? game.i18n.localize("TERIOCK.TERMS.EquipmentClasses.armor")
-              : "",
-            this.spellTurning
-              ? game.i18n.localize(
-                  "TERIOCK.SYSTEMS.Armament.FIELDS.spellTurning.label",
-                )
-              : "",
+            this.range.description,
+            ...simplifyTags(this._equipmentClassesTags),
+            ...simplifyTags(this._armamentTags),
           ],
         },
       ],
-    };
-  }
-
-  /** @inheritDoc */
-  getLocalRollData() {
-    return {
-      ...super.getLocalRollData(),
-      "class.bodyParts": 1,
     };
   }
 
@@ -137,6 +96,8 @@ export default class BodySystem extends mix(
       });
       foundry.utils.setProperty(this, key, damageRoll.formula);
     }
+    this.equipmentClasses.add("bodyParts");
+    if (this.av.value) this.equipmentClasses.add("armor");
     super.prepareSpecialData();
   }
 }

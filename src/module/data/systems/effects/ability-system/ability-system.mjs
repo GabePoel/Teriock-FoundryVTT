@@ -21,14 +21,14 @@ import * as parts from "./parts/_module.mjs";
  * @mixes AbilityCostsPart
  * @mixes AbilityDurationPart
  * @mixes AbilityEquipmentPart
- * @mixes AbilityFlagsPart
- * @mixes AbilityUsagePart
  * @mixes AbilityHierarchyPart
+ * @mixes AbilityInfoPart
+ * @mixes AbilityMetaphysicsPart
  * @mixes AbilityOverviewPart
  * @mixes AbilityPanelPart
  * @mixes AbilityResultsPart
- * @mixes AbilityTagsPart
  * @mixes AbilityUpgradesPart
+ * @mixes AbilityUsagePart
  * @mixes AdjustableSystem
  * @mixes ConsumableSystem
  * @mixes AttackSystem
@@ -50,7 +50,7 @@ export default class AbilitySystem extends mix(
   parts.AbilityCostsPart,
   parts.AbilityDurationPart,
   parts.AbilityEquipmentPart,
-  parts.AbilityFlagsPart,
+  parts.AbilityInfoPart,
   parts.AbilityUsagePart,
   parts.AbilityHierarchyPart,
   parts.AbilityImprovementsPart,
@@ -58,7 +58,7 @@ export default class AbilitySystem extends mix(
   parts.AbilityPanelPart,
   parts.AbilityRankPart,
   parts.AbilityResultsPart,
-  parts.AbilityTagsPart,
+  parts.AbilityMetaphysicsPart,
 ) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
@@ -243,68 +243,7 @@ export default class AbilitySystem extends mix(
 
   /** @inheritDoc */
   get displayTags() {
-    const tags = super.displayTags;
-    if (this.basic) tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.basic.label");
-    if (this.sustained) {
-      tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.sustained.label");
-    }
-    if (this.standard && !this.skill && !this.spell) {
-      tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.standard.label");
-    }
-    if (this.standard && this.skill) tags.push("TERIOCK.TERMS.Common.semblant");
-    if (this.skill) tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.skill.label");
-    if (this.standard && this.spell) tags.push("TERIOCK.TERMS.Common.conjured");
-    if (this.spell) tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.spell.label");
-    if (this.invoked) {
-      tags.push({
-        label: "TERIOCK.TERMS.Costs.invoked",
-        tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.costs.label",
-      });
-    }
-    Object.keys(costOptions.components.keys).forEach((k) => {
-      if (this.costs.components[k].type) {
-        tags.push({
-          label: costOptions.components.keys[k],
-          tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.costs.components.label",
-        });
-      }
-    });
-    if (this.ritual) tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.ritual.label");
-    if (this.rotator) tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.rotator.label");
-    if (this.guildmaster) {
-      tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.guildmaster.label");
-    }
-    //if (this.lore) tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.lore.label");
-    tags.push(
-      ...Array.from(this.powerSources).map((t) => {
-        return {
-          label: TERIOCK.reference.powerSources[t],
-          tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.powerSources.label",
-        };
-      }),
-      ...Array.from(this.elements).map((t) => {
-        return {
-          label: TERIOCK.reference.elements[t],
-          tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.elements.label",
-        };
-      }),
-      ...Array.from(this.effectTypes)
-        .filter((t) => !this.powerSources.has(t))
-        .map((t) => {
-          return {
-            label: TERIOCK.reference.effectTypes[t],
-            tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.effectTypes.label",
-          };
-        }),
-    );
-    if (this.elderSorcery) {
-      tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.elderSorcery.label");
-    }
-    if (this.warded) tags.push("TERIOCK.SYSTEMS.Attack.FIELDS.warded.label");
-    if (this.mundane) {
-      tags.push("TERIOCK.SYSTEMS.Adjustable.FIELDS.mundane.label");
-    }
-    return tags;
+    return [...super.displayTags, ...this._infoTags, ...this._metaphysicsTags];
   }
 
   /** @inheritDoc */

@@ -1,4 +1,4 @@
-import { tradecraftPanel } from "../../../helpers/html.mjs";
+import { tradecraftPanel } from "../../../helpers/panel.mjs";
 import BaseExecution from "../../base-execution/base-execution.mjs";
 import { TradecraftExecutionMixin } from "../../mixins/_module.mjs";
 

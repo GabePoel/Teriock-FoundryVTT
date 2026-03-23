@@ -21,21 +21,6 @@ function addWikiOpenToHeader(application, controls) {
 }
 
 /**
- * Add GM notes button to sheet header.
- * @param {BaseItemSheet|BaseEffectSheet} _application
- * @param {ApplicationHeaderControlsEntry[]} controls
- */
-function addGmNotesToHeader(_application, controls) {
-  if (game.user.isGM) {
-    controls.push({
-      action: "gmNotesOpen",
-      icon: makeIconClass(TERIOCK.display.icons.ui.notes, "contextMenu"),
-      label: game.i18n.localize("TERIOCK.SYSTEMS.Child.MENU.openGmNotes"),
-    });
-  }
-}
-
-/**
  * Add share image in chat button to image popout header.
  * @param {ImagePopout} application
  * @param {ApplicationHeaderControlsEntry[]} controls
@@ -112,11 +97,6 @@ export default function registerSheetManagementHooks() {
   foundry.helpers.Hooks.on(
     "getHeaderControlsWikiButtonSheet",
     addWikiOpenToHeader,
-  );
-
-  foundry.helpers.Hooks.on(
-    "getHeaderControlsGmNotesCommonSheetPart",
-    addGmNotesToHeader,
   );
 
   foundry.helpers.Hooks.on(

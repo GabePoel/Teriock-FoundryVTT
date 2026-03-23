@@ -23,6 +23,32 @@ export default (Base) => {
         };
       }
 
+      /**
+       * Identification tags.
+       * @returns {Teriock.Sheet.DisplayTag[]}
+       */
+      get _identificationTags() {
+        const tags = [];
+        if (this.identification.identified) {
+          tags.push({
+            label: "TERIOCK.MODELS.Identification.FIELDS.identified.label",
+            tooltip: "TERIOCK.MODELS.Identification.label",
+          });
+        } else {
+          tags.push({
+            label: "TERIOCK.MODELS.Identification.FIELDS.identified.inverse",
+            tooltip: "TERIOCK.MODELS.Identification.label",
+          });
+          if (this.identification.read) {
+            tags.push({
+              label: "TERIOCK.MODELS.Identification.FIELDS.read.label",
+              tooltip: "TERIOCK.MODELS.Identification.label",
+            });
+          }
+        }
+        return tags;
+      }
+
       /** @inheritDoc */
       get displayFields() {
         return [

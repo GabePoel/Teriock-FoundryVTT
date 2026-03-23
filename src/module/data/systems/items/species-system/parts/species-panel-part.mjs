@@ -1,4 +1,5 @@
 import { icons } from "../../../../../constants/display/icons.mjs";
+import { simplifyTags } from "../../../../../helpers/panel.mjs";
 
 /**
  * Species panel part.
@@ -83,14 +84,7 @@ export default (Base) => {
             label: game.i18n.localize(
               "TERIOCK.SYSTEMS.Species.FIELDS.traits.label",
             ),
-            wrappers: [
-              ...this.traits.map((t) => TERIOCK.reference.traits[t]),
-              this.isTransformation
-                ? TERIOCK.options.effect.transformationLevel[
-                    this.transformationLevel
-                  ]
-                : "",
-            ],
+            wrappers: simplifyTags(this._traitTags),
           },
         ];
         return {

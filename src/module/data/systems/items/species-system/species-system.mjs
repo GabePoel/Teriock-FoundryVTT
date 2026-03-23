@@ -1,5 +1,6 @@
 import { TeriockDialog } from "../../../../applications/api/_module.mjs";
 import { TeriockActor } from "../../../../documents/_module.mjs";
+import { simplifyTags } from "../../../../helpers/panel.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
 import { makeIcon, makeIconClass, mix } from "../../../../helpers/utils.mjs";
 import { TextField } from "../../../fields/_module.mjs";
@@ -111,6 +112,27 @@ export default class SpeciesSystem extends mix(
     );
   }
 
+  /**
+   * Trait tags.
+   * @returns {Teriock.Sheet.DisplayTag[]}
+   */
+  get _traitTags() {
+    const tags = Array.from(this.traits).map((t) => {
+      return {
+        label: TERIOCK.reference.traits[t],
+        tooltip: "TERIOCK.SYSTEMS.Species.FIELDS.traits.label",
+      };
+    });
+    if (this.transformationLevel) {
+      tags.push({
+        label:
+          TERIOCK.options.effect.transformationLevel[this.transformationLevel],
+        tooltip: "TERIOCK.SYSTEMS.Species.FIELDS.transformationLevel.label",
+      });
+    }
+    return tags;
+  }
+
   /** @inheritDoc */
   get color() {
     if (this.transformationLevel === "minor") {
@@ -138,23 +160,7 @@ export default class SpeciesSystem extends mix(
 
   /** @inheritDoc */
   get displayTags() {
-    const tags = super.displayTags;
-    tags.push(
-      ...Array.from(this.traits).map((t) => {
-        return {
-          label: TERIOCK.reference.traits[t],
-          tooltip: "TERIOCK.SYSTEMS.Species.FIELDS.traits.label",
-        };
-      }),
-    );
-    if (this.transformationLevel) {
-      tags.push({
-        label:
-          TERIOCK.options.effect.transformationLevel[this.transformationLevel],
-        tooltip: "TERIOCK.SYSTEMS.Species.FIELDS.transformationLevel.label",
-      });
-    }
-    return tags;
+    return [...super.displayTags, ...this._traitTags];
   }
 
   /** @inheritDoc */
@@ -165,15 +171,7 @@ export default class SpeciesSystem extends mix(
   /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
-    parts.text = dotJoin([
-      ...Array.from(this.traits).map((t) => TERIOCK.reference[t]),
-      this.size.enabled
-        ? game.i18n.format("TERIOCK.SYSTEMS.Species.PANELS.size.value", {
-            value: this.size.value,
-          })
-        : "",
-      parts.text,
-    ]);
+    parts.text = dotJoin([...simplifyTags(this._traitTags), parts.text]);
     parts.subtitle = game.i18n.localize("TYPES.Item.species");
     return parts;
   }

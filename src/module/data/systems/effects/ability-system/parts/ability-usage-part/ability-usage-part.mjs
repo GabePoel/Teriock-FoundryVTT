@@ -1,3 +1,4 @@
+import { formulaExists } from "../../../../../../helpers/formula.mjs";
 import { EvaluationField } from "../../../../../fields/_module.mjs";
 import {
   RangeModel,
@@ -114,6 +115,69 @@ export default (Base) => {
       }
 
       /**
+       * Execution wrappers.
+       * @returns {string[]}
+       */
+      get _executionWrappers() {
+        let time;
+        if (this.maneuver !== "slow") {
+          time =
+            TERIOCK.options.ability.executionTime[this.maneuver][
+              this.executionTime.base
+            ];
+        } else {
+          time = this.executionTime.slow.text;
+        }
+        return [
+          time || "",
+          this.piercing.value.toUpperCase(),
+          TERIOCK.options.ability.delivery[this.delivery] || "",
+          this.interaction === "feat"
+            ? TERIOCK.reference.attributes[this.featSaveAttribute]
+            : "",
+          TERIOCK.options.ability.interaction[this.interaction] || "",
+        ];
+      }
+
+      /**
+       * Expansion wrappers.
+       * @returns {string[]}
+       */
+      get _expansionWrappers() {
+        return this.expansion.type
+          ? [
+              ["detonate", "ripple"].includes(this.expansion.type)
+                ? TERIOCK.reference.attributes[this.expansion.featSaveAttribute]
+                : "",
+              TERIOCK.options.ability.expansion[this.expansion.type] || "",
+              this.expansion.range.abbreviation,
+              formulaExists(this.expansion.cap.raw)
+                ? game.i18n.format(
+                    "TERIOCK.SYSTEMS.Ability.PANELS.expansionCap",
+                    { value: this.expansion.cap.raw },
+                  )
+                : "",
+            ]
+          : [];
+      }
+
+      /**
+       * Targeting wrappers.
+       * @returns {string[]}
+       */
+      get _targetingWrappers() {
+        return [
+          this.isRanged ? this.range.abbreviation : "",
+          ...Array.from(
+            this.targets.map(
+              (target) => TERIOCK.options.ability.targets[target],
+            ),
+          ),
+          this.duration.text || "",
+        ];
+      }
+
+      /**
        * Whether this has an area of effect.
        * @returns {boolean}
        */
@@ -125,6 +189,10 @@ export default (Base) => {
         );
       }
 
+      /**
+       * If this ability is a ball.
+       * @returns {boolean}
+       */
       get isBall() {
         return this.delivery === "missile" && this.piercing.raw === 2;
       }

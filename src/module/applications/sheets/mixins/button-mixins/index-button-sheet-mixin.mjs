@@ -1,5 +1,5 @@
 import { makeIconClass } from "../../../../helpers/utils.mjs";
-import { refreshFromCompendiumDialog } from "../../../dialogs/_module.mjs"; //noinspection JSValidateJSDoc
+import { refreshFromCompendiumDialog } from "../../../dialogs/_module.mjs";
 
 /**
  * @param {typeof TeriockDocumentSheet} Base

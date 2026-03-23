@@ -1,5 +1,5 @@
 import { addFormula } from "../../../helpers/formula.mjs";
-import { attributePanel } from "../../../helpers/html.mjs";
+import { attributePanel } from "../../../helpers/panel.mjs";
 import BaseExecution from "../../base-execution/base-execution.mjs";
 import { ThresholdExecutionMixin } from "../../mixins/_module.mjs";
 

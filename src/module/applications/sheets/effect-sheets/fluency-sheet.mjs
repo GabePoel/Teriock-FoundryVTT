@@ -1,8 +1,5 @@
 import { documentOptions } from "../../../constants/options/document-options.mjs";
-import {
-  makeIcon,
-  makeIconClass
-} from "../../../helpers/utils.mjs";
+import { makeIcon, makeIconClass } from "../../../helpers/utils.mjs";
 import BaseEffectSheet from "./base-effect-sheet.mjs";
 
 /**

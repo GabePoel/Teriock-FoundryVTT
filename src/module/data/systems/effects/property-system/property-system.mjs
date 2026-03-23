@@ -1,3 +1,4 @@
+import { simplifyTags } from "../../../../helpers/panel.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
 import { FormulaField } from "../../../fields/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
@@ -83,6 +84,21 @@ export default class PropertySystem extends mix(
     return super.migrateData(data);
   }
 
+  /**
+   * Metaphysics tags.
+   * @returns {Teriock.Sheet.DisplayTag[]}
+   */
+  get _metaphysicsTags() {
+    const tags = [];
+    if (this.material) {
+      tags.push("TERIOCK.SYSTEMS.Property.FIELDS.material.label");
+    }
+    if (this.mundane) {
+      tags.push("TERIOCK.SYSTEMS.Adjustable.FIELDS.mundane.label");
+    }
+    return tags;
+  }
+
   /** @inheritDoc */
   get color() {
     return TERIOCK.options.effect.form[this.form].color;
@@ -95,14 +111,7 @@ export default class PropertySystem extends mix(
 
   /** @inheritDoc */
   get displayTags() {
-    const tags = super.displayTags;
-    if (this.material) {
-      tags.push("TERIOCK.SYSTEMS.Property.FIELDS.material.label");
-    }
-    if (this.mundane) {
-      tags.push("TERIOCK.SYSTEMS.Adjustable.FIELDS.mundane.label");
-    }
-    return tags;
+    return [...super.displayTags, ...this._metaphysicsTags];
   }
 
   /** @inheritDoc */
@@ -133,32 +142,32 @@ export default class PropertySystem extends mix(
       );
     }
     if (!suppressed && this.parent.parent?.type === "equipment") {
-      if (this.parent.parent?.system.stashed) {
+      if (this.parent.parent.system.stashed) {
         suppressed = true;
       }
       if (
         !suppressed &&
-        !this.parent.parent?.system.equipped &&
+        !this.parent.parent.system.equipped &&
         this.modifies === "Actor"
       ) {
         suppressed = true;
       }
       if (
         !suppressed &&
-        this.parent.parent?.system.dampened &&
+        this.parent.parent.system.dampened &&
         this.form !== "intrinsic" &&
         !this.mundane &&
         !this.applyIfDampened
       ) {
         suppressed = true;
       }
-    }
-    if (
-      !suppressed &&
-      this.parent.parent?.system.shattered &&
-      !this.applyIfShattered
-    ) {
-      suppressed = true;
+      if (
+        !suppressed &&
+        this.parent.parent.system.shattered &&
+        !this.applyIfShattered
+      ) {
+        suppressed = true;
+      }
     }
     if (!suppressed && this.actor && this.parent.sup) {
       const sups = this.parent.allSups;
@@ -179,16 +188,7 @@ export default class PropertySystem extends mix(
         ),
         wrappers: [
           TERIOCK.options.effect.form[this.form].name,
-          this.material
-            ? game.i18n.localize(
-                "TERIOCK.SYSTEMS.Property.FIELDS.material.label",
-              )
-            : "",
-          this.mundane
-            ? game.i18n.localize(
-                "TERIOCK.SYSTEMS.Adjustable.FIELDS.mundane.label",
-              )
-            : "",
+          ...simplifyTags(this._metaphysicsTags),
         ],
       },
     ];

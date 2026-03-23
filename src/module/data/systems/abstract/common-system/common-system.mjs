@@ -1,5 +1,5 @@
 import { TeriockJournalEntry } from "../../../../documents/_module.mjs";
-import { quickAddAssociation } from "../../../../helpers/html.mjs";
+import { quickAddAssociation } from "../../../../helpers/panel.mjs";
 import { fancifyFields, mix } from "../../../../helpers/utils.mjs";
 import {
   AccessDataMixin,

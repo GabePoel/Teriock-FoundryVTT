@@ -22,6 +22,8 @@ declare global {
       bv: EvaluationModel;
       /** <schema> Damage Dice */
       damage: Teriock.Models.ArmamentDamage;
+      /** <schema> Equipment Classes */
+      equipmentClasses: Set<Teriock.Keys.EquipmentClass>;
       /** <schema> Style Bonus (Weapon Fighting Style) */
       fightingStyle: Teriock.Keys.WeaponFightingStyle;
       /** <schema> Flaws */
@@ -36,9 +38,9 @@ declare global {
       range: {
         /** <schema> Long range (this is the default range) */
         long: RangeModel;
-        /** <schema> Is the equipment melee? */
+        /** <schema> Is the armament melee? */
         melee: boolean;
-        /** <schema> Is the equipment ranged? */
+        /** <schema> Is the armament ranged? */
         ranged: boolean;
         /** <schema> Short range */
         short: RangeModel;

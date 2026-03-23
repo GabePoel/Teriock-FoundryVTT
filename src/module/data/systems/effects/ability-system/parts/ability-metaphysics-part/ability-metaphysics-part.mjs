@@ -1,3 +1,5 @@
+import { TextField } from "../../../../../fields/_module.mjs";
+
 const { fields } = foundry.data;
 
 /**
@@ -11,7 +13,7 @@ export default (Base) => {
      * @extends {Teriock.Models.AbilityTagsPartData}
      * @mixin
      */
-    class AbilityTagsPart extends Base {
+    class AbilityMetaphysicsPart extends Base {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
@@ -20,6 +22,8 @@ export default (Base) => {
               choices: TERIOCK.reference.effectTypes,
             }),
           ),
+          elderSorcery: new fields.BooleanField({ initial: false }),
+          elderSorceryIncant: new TextField({ initial: "" }),
           elements: new fields.SetField(
             new fields.StringField({
               choices: TERIOCK.reference.elements,
@@ -63,6 +67,45 @@ export default (Base) => {
         }
 
         super.migrateData(data);
+      }
+
+      /**
+       * Metaphysics tags.
+       * @returns {Teriock.Sheet.DisplayTag[]}
+       */
+      get _metaphysicsTags() {
+        const tags = [];
+        tags.push(
+          ...Array.from(this.powerSources).map((t) => {
+            return {
+              label: TERIOCK.reference.powerSources[t],
+              tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.powerSources.label",
+            };
+          }),
+          ...Array.from(this.elements).map((t) => {
+            return {
+              label: TERIOCK.reference.elements[t],
+              tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.elements.label",
+            };
+          }),
+          ...Array.from(this.effectTypes)
+            .filter((t) => !this.powerSources.has(t))
+            .map((t) => {
+              return {
+                label: TERIOCK.reference.effectTypes[t],
+                tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.effectTypes.label",
+              };
+            }),
+        );
+        if (this.warded)
+          tags.push("TERIOCK.SYSTEMS.Attack.FIELDS.warded.label");
+        if (this.elderSorcery) {
+          tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.elderSorcery.label");
+        }
+        if (this.mundane) {
+          tags.push("TERIOCK.SYSTEMS.Adjustable.FIELDS.mundane.label");
+        }
+        return tags;
       }
 
       /** @inheritDoc */

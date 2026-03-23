@@ -1,7 +1,7 @@
 //noinspection JSUnusedGlobalSymbols
 
 import { icons } from "../../constants/display/icons.mjs";
-import { classPanel, tradecraftPanel } from "../../helpers/html.mjs";
+import { classPanel, tradecraftPanel } from "../../helpers/panel.mjs";
 import { getImage } from "../../helpers/path.mjs";
 import { resolveDocument } from "../../helpers/resolve.mjs";
 import { makeIconClass } from "../../helpers/utils.mjs";
