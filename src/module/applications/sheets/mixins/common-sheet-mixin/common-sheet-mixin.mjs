@@ -16,7 +16,6 @@ export default function CommonSheetMixin(Base) {
      * @mixes DocumentCreationCommonSheetPart
      * @mixes DragDropCommonSheetPart
      * @mixes FieldsCommonSheetPart
-     * @mixes GmNotesCommonSheetPart
      * @mixes ImageEditingCommonSheetPart
      * @mixes AutomationsTabsCommonSheetPart
      * @mixes InteractionCommonSheetPart
@@ -35,7 +34,6 @@ export default function CommonSheetMixin(Base) {
       parts.DragDropCommonSheetPart,
       parts.DocumentCreationCommonSheetPart,
       parts.FieldsCommonSheetPart,
-      parts.GmNotesCommonSheetPart,
       parts.ImageEditingCommonSheetPart,
       parts.AutomationsTabsCommonSheetPart,
       parts.InteractionCommonSheetPart,

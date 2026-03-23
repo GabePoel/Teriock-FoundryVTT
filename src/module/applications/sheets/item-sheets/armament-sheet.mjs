@@ -6,12 +6,10 @@ import BaseItemSheet from "./base-item-sheet.mjs";
  * Sheet for a {@link TeriockArmament}
  * @property {TeriockArmament} document
  * @property {TeriockArmament} item
- * @mixes UseButtonSheet
  * @mixes WikiButtonSheet
  */
 export default class ArmamentSheet extends mix(
   BaseItemSheet,
-  mixins.UseButtonSheetMixin,
   mixins.WikiButtonSheetMixin,
 ) {
   /** @inheritDoc */

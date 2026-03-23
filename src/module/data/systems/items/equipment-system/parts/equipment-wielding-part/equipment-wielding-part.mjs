@@ -39,8 +39,7 @@ export default (Base) => {
         return (
           ((this.consumable && this.quantity >= 1) || !this.consumable) &&
           this.actor &&
-          !this.equipped &&
-          this.actor.system.attributes.str.score >= this.minStr.currentValue
+          !this.equipped
         );
       }
 
@@ -130,21 +129,28 @@ export default (Base) => {
             name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.equip"),
             icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
             callback: this.equip.bind(this),
-            condition: this.parent.isOwner && this.canEquip,
+            condition:
+              this.canEquip &&
+              this.parent._checkValidEditorDocument(doc, { self: false }),
             group: "control",
           },
           {
             name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.unequip"),
             icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
             callback: this.unequip.bind(this),
-            condition: this.parent.isOwner && this.canUnequip,
+            condition:
+              this.canUnequip &&
+              this.parent._checkValidEditorDocument(doc, { self: false }),
             group: "control",
           },
           {
             name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.glue"),
             icon: makeIcon(TERIOCK.display.icons.equipment.glue, "contextMenu"),
             callback: this.glue.bind(this),
-            condition: this.parent.isOwner && !this.glued,
+            condition:
+              !this.glued &&
+              this.actor &&
+              this.parent._checkValidEditorDocument(doc, { self: false }),
             group: "control",
           },
           {
@@ -154,7 +160,10 @@ export default (Base) => {
               "contextMenu",
             ),
             callback: this.unglue.bind(this),
-            condition: this.parent.isOwner && this.glued,
+            condition:
+              this.glued &&
+              this.actor &&
+              this.parent._checkValidEditorDocument(doc, { self: false }),
             group: "control",
           },
         ];

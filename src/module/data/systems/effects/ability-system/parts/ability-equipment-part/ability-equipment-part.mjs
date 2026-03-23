@@ -91,7 +91,11 @@ export default (Base) => {
               TeriockItem.create(data, { keepEmbeddedIds: true });
             }
           },
-          condition: this.parent.parent?.isOwner && this.spell,
+          condition:
+            this.parent.parent?.isOwner &&
+            this.spell &&
+            doc !== this.parent &&
+            doc.sheet.isEditable,
           group: "control",
           icon: makeIcon(TERIOCK.display.icons.ability.scroll, "contextMenu"),
           name: game.i18n.localize("TERIOCK.SYSTEMS.Ability.EMBED.makeScroll"),

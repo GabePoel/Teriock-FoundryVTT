@@ -48,4 +48,12 @@ export default class BaseSystem extends TypeDataModel {
     }
     return name.trim();
   }
+
+  /**
+   * Whether this document shouldn't have its basic information like compendium source and identifier visible.
+   * @return {boolean}
+   */
+  get isSecret() {
+    return false;
+  }
 }

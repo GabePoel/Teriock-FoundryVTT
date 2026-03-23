@@ -7,6 +7,7 @@ const { DocumentSheetV2, HandlebarsApplicationMixin } =
 /**
  * @extends {DocumentSheetV2}
  * @mixes HandlebarsApplication
+ * @property {TeriockDocument} document
  */
 export default class TeriockDocumentSheet extends BaseSheetMixin(
   HandlebarsApplicationMixin(DocumentSheetV2),

@@ -8,7 +8,6 @@ const { ActiveEffectConfig } = foundry.applications.sheets;
  * Base {@link TeriockActiveEffect} sheet.
  * @extends {ActiveEffectConfig}
  * @mixes ChangesSheet
- * @mixes ChatButtonSheet
  * @mixes ChildSheet
  * @mixes CommonSheet
  * @property {AnyActiveEffect} document
@@ -17,7 +16,6 @@ export default class BaseEffectSheet extends mix(
   ActiveEffectConfig,
   mixins.CommonSheetMixin,
   mixins.ChildSheetMixin,
-  mixins.ChatButtonSheetMixin,
   mixins.ChangesSheetMixin,
 ) {
   /**

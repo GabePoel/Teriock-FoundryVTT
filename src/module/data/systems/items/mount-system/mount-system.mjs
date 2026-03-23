@@ -118,14 +118,20 @@ export default class MountSystem extends mix(
         name: game.i18n.localize("TERIOCK.SYSTEMS.Mount.MENU.mount"),
         icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
         callback: this.mount.bind(this),
-        condition: this.parent.isOwner && !this.mounted,
+        condition:
+          !this.mounted &&
+          this.actor &&
+          this.parent._checkValidEditorDocument(doc, { self: false }),
         group: "control",
       },
       {
         name: game.i18n.localize("TERIOCK.SYSTEMS.Mount.MENU.unmount"),
         icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
         callback: this.unmount.bind(this),
-        condition: this.parent.isOwner && this.mounted,
+        condition:
+          this.mounted &&
+          this.actor &&
+          this.parent._checkValidEditorDocument(doc, { self: false }),
         group: "control",
       },
     ];

@@ -60,6 +60,15 @@ export default function BaseDocumentMixin(Base) {
       }
 
       /**
+       * Whether this document shouldn't have its basic information like compendium source and identifier visible.
+       * @return {boolean}
+       */
+      get isSecret() {
+        if (this.system) return this.system.isSecret;
+        return false;
+      }
+
+      /**
        * Can this be viewed?
        * @returns {boolean}
        */
@@ -89,6 +98,27 @@ export default function BaseDocumentMixin(Base) {
        */
       _benchmarkStart(key) {
         console.time(`${key} - ${this._benchmarkString}`);
+      }
+
+      /**
+       * Check whether it's valid for this document to be edited from another one. This is mainly intended for use
+       * in {@link getCardContextMenuEntries}. If this document appears as an embedded card (via `@EMBED`) or
+       * otherwise has its context menu entries shown in a sheet for some document, only some of them should be visible.
+       * @param {TeriockDocument} doc
+       * @param {object} [options]
+       * @param {boolean} [options.editable] - Require the document's sheet to be editable.
+       * @param {boolean} [options.self] - Whether the document must or must not be this one.
+       * @returns {boolean}
+       */
+      _checkValidEditorDocument(doc, options = {}) {
+        const { editable = true, self = undefined } = options;
+        if (self === false && doc === this) return false;
+        if (self === true && doc !== this) return false;
+        return (
+          this.isOwner &&
+          (this.checkAncestor(doc) || this.master === doc || this === doc) &&
+          (doc?.sheet.isEditable || !editable)
+        );
       }
 
       /**
@@ -145,9 +175,7 @@ export default function BaseDocumentMixin(Base) {
               icon: makeIcon(TERIOCK.display.icons.ui.delete, "contextMenu"),
               callback: async () => await this.safeDelete(),
               condition: () =>
-                this.isOwner &&
-                (this.checkAncestor(doc) || this.master === doc) &&
-                doc?.sheet.isEditable,
+                this._checkValidEditorDocument(doc, { self: false }),
               group: "document",
             },
           ],

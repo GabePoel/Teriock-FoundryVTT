@@ -40,6 +40,13 @@ export default (Base) => {
         ];
       }
 
+      /** @inheritDoc */
+      get isSecret() {
+        return (
+          (!this.identification.identified && !game.user.isGM) || super.isSecret
+        );
+      }
+
       /** @inheritdoc */
       getCardContextMenuEntries(doc) {
         return [
@@ -51,7 +58,7 @@ export default (Base) => {
               "contextMenu",
             ),
             callback: this.identification.identify.bind(this.identification),
-            condition: !this.identification.identified,
+            condition: this.parent.isOwner && !this.identification.identified,
             group: "usage",
           },
           {

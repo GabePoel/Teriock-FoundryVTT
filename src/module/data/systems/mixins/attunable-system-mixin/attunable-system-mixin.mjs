@@ -203,7 +203,10 @@ export default function AttunableSystemMixin(Base) {
               "contextMenu",
             ),
             callback: this.attune.bind(this),
-            condition: this.parent.isOwner && !this.isAttuned,
+            condition:
+              !this.isAttuned &&
+              this.actor &&
+              this.parent._checkValidEditorDocument({ self: false }),
             group: "control",
           },
           {
@@ -213,7 +216,10 @@ export default function AttunableSystemMixin(Base) {
               "contextMenu",
             ),
             callback: this.deattune.bind(this),
-            condition: this.parent.isOwner && this.isAttuned,
+            condition:
+              this.isAttuned &&
+              this.actor &&
+              this.parent._checkValidEditorDocument({ self: false }),
             group: "control",
           },
         ];

@@ -86,8 +86,7 @@ export default class ChildSystem extends mix(
 
   /** @inheritDoc */
   get embedActions() {
-    const embedActions = super.embedActions;
-    Object.assign(embedActions, {
+    return Object.assign(super.embedActions, {
       useDoc: {
         primary: async (event, relative) => {
           await this.use({
@@ -105,7 +104,6 @@ export default class ChildSystem extends mix(
         },
       },
     });
-    return embedActions;
   }
 
   /** @inheritDoc */
@@ -229,7 +227,9 @@ export default class ChildSystem extends mix(
           condition:
             this.parent.parent?.isOwner &&
             this.parent.disabled &&
-            this.parent.type !== "equipment",
+            this.parent.type !== "equipment" &&
+            this.parent.type !== "mount" &&
+            doc !== this.parent,
           group: "control",
         },
         {
@@ -241,7 +241,8 @@ export default class ChildSystem extends mix(
             !this.parent.disabled &&
             this.parent.type !== "equipment" &&
             this.parent.type !== "mount" &&
-            !(this.parent.type === "ability" && this.isVirtual),
+            !(this.parent.type === "ability" && this.isVirtual) &&
+            doc !== this.parent,
           group: "control",
         },
         {
@@ -284,7 +285,7 @@ export default class ChildSystem extends mix(
             await this.parent.duplicate();
           },
           condition: () =>
-            this.parent?.elder?.sheet?.isEditable && this.parent.isOwner,
+            this.parent._checkValidEditorDocument(doc, { self: false }),
           group: "document",
         },
       ],

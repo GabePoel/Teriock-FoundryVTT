@@ -1,5 +1,5 @@
 <div class="{{cssClass}} standard-form scrollable">
-  {{#if hasCompendiumSource}}
+  {{#if (and hasCompendiumSource (not document.isSecret))}}
     <fieldset>
       <legend>{{localize "TERIOCK.SHEETS.DocumentSettings.FIELDS.sources.legend"}}</legend>
       {{formGroup

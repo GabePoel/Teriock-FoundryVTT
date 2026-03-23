@@ -141,28 +141,36 @@ export default (Base) => {
             name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.shatter"),
             icon: makeIcon(TERIOCK.display.icons.break.shatter, "contextMenu"),
             callback: this.shatter.bind(this),
-            condition: this.parent.isOwner && !this.shattered,
+            condition:
+              !this.shattered &&
+              this.parent._checkValidEditorDocument({ self: false }),
             group: "control",
           },
           {
             name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.repair"),
             icon: makeIcon(TERIOCK.display.icons.break.repair, "contextMenu"),
             callback: this.repair.bind(this),
-            condition: this.parent.isOwner && this.shattered,
+            condition:
+              this.shattered &&
+              this.parent._checkValidEditorDocument({ self: false }),
             group: "control",
           },
           {
             name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.destroy"),
             icon: makeIcon(TERIOCK.display.icons.break.destroy, "contextMenu"),
             callback: this.destroy.bind(this),
-            condition: this.parent.isOwner && !this.destroyed,
+            condition:
+              !this.destroyed &&
+              this.parent._checkValidEditorDocument({ self: false }),
             group: "control",
           },
           {
             name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.reforge"),
             icon: makeIcon(TERIOCK.display.icons.break.reforge, "contextMenu"),
             callback: this.reforge.bind(this),
-            condition: this.parent.isOwner && this.destroyed,
+            condition:
+              this.destroyed &&
+              this.parent._checkValidEditorDocument({ self: false }),
             group: "control",
           },
           {
@@ -172,7 +180,9 @@ export default (Base) => {
               "contextMenu",
             ),
             callback: this.dampen.bind(this),
-            condition: this.parent.isOwner && !this.dampened,
+            condition:
+              !this.dampened &&
+              this.parent._checkValidEditorDocument({ self: false }),
             group: "control",
           },
           {
@@ -182,7 +192,9 @@ export default (Base) => {
               "contextMenu",
             ),
             callback: this.undampen.bind(this),
-            condition: this.parent.isOwner && this.dampened,
+            condition:
+              this.dampened &&
+              this.parent._checkValidEditorDocument({ self: false }),
             group: "control",
           },
           {
@@ -192,7 +204,10 @@ export default (Base) => {
               "contextMenu",
             ),
             callback: this.stash.bind(this),
-            condition: this.parent.isOwner && !this.stashed,
+            condition:
+              !this.stashed &&
+              this.actor &&
+              this.parent._checkValidEditorDocument({ self: false }),
             group: "control",
           },
           {
@@ -202,7 +217,10 @@ export default (Base) => {
               "contextMenu",
             ),
             callback: this.unstash.bind(this),
-            condition: this.parent.isOwner && this.stashed,
+            condition:
+              this.stashed &&
+              this.actor &&
+              this.parent._checkValidEditorDocument({ self: false }),
             group: "control",
           },
         ];

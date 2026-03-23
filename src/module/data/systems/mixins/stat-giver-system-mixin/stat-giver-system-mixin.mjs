@@ -95,7 +95,10 @@ export default function StatGiverSystemMixin(Base) {
                 "system.statDice.hp.disabled": false,
               });
             },
-            condition: this.statDice.hp.disabled && this._canToggleHpDice,
+            condition:
+              this.statDice.hp.disabled &&
+              this._canToggleHpDice &&
+              doc !== this.parent,
             group: "control",
           },
           {
@@ -106,7 +109,10 @@ export default function StatGiverSystemMixin(Base) {
             callback: async () => {
               await this.parent.update({ "system.statDice.hp.disabled": true });
             },
-            condition: !this.statDice.hp.disabled && this._canToggleHpDice,
+            condition:
+              !this.statDice.hp.disabled &&
+              this._canToggleHpDice &&
+              doc !== this.parent,
             group: "control",
           },
           {
@@ -119,7 +125,10 @@ export default function StatGiverSystemMixin(Base) {
                 "system.statDice.mp.disabled": false,
               });
             },
-            condition: this.statDice.mp.disabled && this._canToggleMpDice,
+            condition:
+              this.statDice.mp.disabled &&
+              this._canToggleMpDice &&
+              this.parent._checkValidEditorDocument(doc, { self: false }),
             group: "control",
           },
           {
@@ -130,7 +139,10 @@ export default function StatGiverSystemMixin(Base) {
             callback: async () => {
               await this.parent.update({ "system.statDice.mp.disabled": true });
             },
-            condition: !this.statDice.mp.disabled && this._canToggleMpDice,
+            condition:
+              !this.statDice.mp.disabled &&
+              this._canToggleMpDice &&
+              this.parent._checkValidEditorDocument(doc, { self: false }),
             group: "control",
           },
         );

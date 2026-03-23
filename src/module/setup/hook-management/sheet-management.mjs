@@ -51,6 +51,41 @@ function addShareImageToHeader(application, controls) {
   });
 }
 
+/**
+ * Add the entries from {@link BaseDocument.getCardContextMenuEntries} to sheet header.
+ * @param {TeriockDocumentSheet} application
+ * @param {ApplicationHeaderControlsEntry[]} controls
+ */
+function addCardContextMenuEntriesToHeader(application, controls) {
+  if (typeof application.document?.getCardContextMenuEntries !== "function") {
+    return;
+  }
+  const entries = application.document.getCardContextMenuEntries(
+    application.document,
+  );
+  const groups = {};
+  const ungrouped = [];
+  const sorted = [];
+  entries.forEach((entry) => {
+    if (entry.group && !groups[entry.group]) groups[entry.group] = [];
+    if (entry.group) groups[entry.group].push(entry);
+    else ungrouped.push(entry);
+  });
+  Object.values(groups).forEach((g) => sorted.push(...g));
+  sorted.push(...ungrouped);
+  controls.push(
+    ...sorted.map((e) => {
+      return {
+        group: e.group,
+        icon: e.icon.split('class="')[1].split('">')[0],
+        label: e.name,
+        onClick: e.callback,
+        visible: e.condition,
+      };
+    }),
+  );
+}
+
 export default function registerSheetManagementHooks() {
   foundry.helpers.Hooks.on(
     "renderJournalEntrySheet",
@@ -90,7 +125,7 @@ export default function registerSheetManagementHooks() {
   );
 
   foundry.helpers.Hooks.on(
-    "getHeaderControlsDocumentSheetV2",
+    "getHeaderControlsActorSheetV2",
     /**
      * @param {DocumentSheetV2} _application
      * @param {ApplicationHeaderControlsEntry[]} controls
@@ -100,5 +135,10 @@ export default function registerSheetManagementHooks() {
         game.i18n.format(a.label).localeCompare(game.i18n.format(b.label)),
       );
     },
+  );
+
+  foundry.helpers.Hooks.on(
+    "getHeaderControlsDocumentSheetV2",
+    addCardContextMenuEntriesToHeader,
   );
 }

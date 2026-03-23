@@ -1,18 +1,13 @@
 import { documentOptions } from "../../../constants/options/document-options.mjs";
-import { makeIconClass, mix } from "../../../helpers/utils.mjs";
-import * as mixins from "../mixins/_module.mjs";
+import { makeIconClass } from "../../../helpers/utils.mjs";
 import BaseEffectSheet from "./base-effect-sheet.mjs";
 
 /**
  * {@link TeriockResource} sheet.
  * @extends {BaseEffectSheet}
- * @mixes UseButtonSheet
  * @property {TeriockResource} document
  */
-export default class ResourceSheet extends mix(
-  BaseEffectSheet,
-  mixins.UseButtonSheetMixin,
-) {
+export default class ResourceSheet extends BaseEffectSheet {
   /** @inheritDoc */
   static BARS = ["teriock/sheets/shared/bars/consumable-bar"];
 

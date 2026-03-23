@@ -7,7 +7,6 @@ const { HandlebarsApplicationMixin } = foundry.applications.api;
 /**
  * Base {@link TeriockItem} sheet.
  * @extends {ItemSheetV2}
- * @mixes ChatButtonSheet
  * @mixes CommonSheet
  * @mixes ChildSheet
  * @property {AnyItem} document
@@ -18,7 +17,6 @@ export default class BaseItemSheet extends mix(
   HandlebarsApplicationMixin,
   mixins.CommonSheetMixin,
   mixins.ChildSheetMixin,
-  mixins.ChatButtonSheetMixin,
 ) {
   /**
    * @inheritDoc

@@ -1,5 +1,4 @@
-import { icons } from "../../../constants/display/icons.mjs";
-import { fancifyFields, makeIconClass } from "../../../helpers/utils.mjs";
+import { fancifyFields } from "../../../helpers/utils.mjs";
 import { TeriockTextEditor } from "../../ux/_module.mjs";
 
 const { ImagePopout } = foundry.applications.apps;
@@ -31,26 +30,6 @@ export default function ChildSheetMixin(Base) {
           openImage: this.#onOpenImage,
           openSource: this.#onOpenSource,
           populateField: this._onPopulateField,
-        },
-        window: {
-          controls: [
-            {
-              action: "deleteThis",
-              icon: makeIconClass(icons.ui.delete, "contextMenu"),
-              label: "TERIOCK.SYSTEMS.Common.MENU.delete",
-              ownership: "OWNER",
-            },
-            {
-              action: "openSource",
-              icon: makeIconClass(icons.ui.openWindow, "contextMenu"),
-              label: "TERIOCK.SYSTEMS.Common.MENU.openSource",
-            },
-            {
-              action: "openImage",
-              icon: makeIconClass(icons.ui.image),
-              label: "TERIOCK.SYSTEMS.Child.MENU.openImage",
-            },
-          ],
         },
       };
 
