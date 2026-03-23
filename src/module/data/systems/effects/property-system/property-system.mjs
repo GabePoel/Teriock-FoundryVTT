@@ -65,6 +65,7 @@ export default class PropertySystem extends mix(
       applyIfShattered: new fields.BooleanField({ initial: false }),
       damageType: new fields.StringField({ initial: "" }),
       extraDamage: new FormulaField({ deterministic: false }),
+      material: new fields.BooleanField({ initial: false }),
       modifiesActor: new fields.BooleanField({ initial: false }),
     });
   }
@@ -93,11 +94,25 @@ export default class PropertySystem extends mix(
   }
 
   /** @inheritDoc */
+  get displayTags() {
+    const tags = super.displayTags;
+    if (this.material) {
+      tags.push("TERIOCK.SYSTEMS.Property.FIELDS.material.label");
+    }
+    if (this.mundane) {
+      tags.push("TERIOCK.SYSTEMS.Adjustable.FIELDS.mundane.label");
+    }
+    return tags;
+  }
+
+  /** @inheritDoc */
   get displayToggles() {
     return [
       "system.applyIfShattered",
       "system.applyIfDampened",
       "system.modifiesActor",
+      "system.mundane",
+      "system.material",
       ...super.displayToggles,
     ];
   }
@@ -132,6 +147,7 @@ export default class PropertySystem extends mix(
         !suppressed &&
         this.parent.parent?.system.dampened &&
         this.form !== "intrinsic" &&
+        !this.mundane &&
         !this.applyIfDampened
       ) {
         suppressed = true;
@@ -161,7 +177,19 @@ export default class PropertySystem extends mix(
         label: game.i18n.localize(
           "TERIOCK.SYSTEMS.BaseEffect.FIELDS.form.label",
         ),
-        wrappers: [TERIOCK.options.effect.form[this.form].name],
+        wrappers: [
+          TERIOCK.options.effect.form[this.form].name,
+          this.material
+            ? game.i18n.localize(
+                "TERIOCK.SYSTEMS.Property.FIELDS.material.label",
+              )
+            : "",
+          this.mundane
+            ? game.i18n.localize(
+                "TERIOCK.SYSTEMS.Adjustable.FIELDS.mundane.label",
+              )
+            : "",
+        ],
       },
     ];
   }

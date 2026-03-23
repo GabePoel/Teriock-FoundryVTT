@@ -17,8 +17,9 @@ export default class RevitalizeAutomation extends StatAutomation {
   static get TYPE() {
     return "revitalize";
   }
+
   /** @inheritDoc */
-  get _buttons() {
+  async _getButtons() {
     return [
       RevitalizeHandler.buildButton({
         consumeStatDice: this.consumeStatDice,

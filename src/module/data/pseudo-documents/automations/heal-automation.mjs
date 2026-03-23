@@ -31,7 +31,13 @@ export default class HealAutomation extends StatAutomation {
   }
 
   /** @inheritDoc */
-  get _buttons() {
+  get _formPaths() {
+    const paths = this.noStatDice ? this._triggerPaths : super._formPaths;
+    return ["noStatDice", ...paths];
+  }
+
+  /** @inheritDoc */
+  async _getButtons() {
     return [
       HealHandler.buildButton({
         consumeStatDice: this.consumeStatDice,
@@ -39,12 +45,6 @@ export default class HealAutomation extends StatAutomation {
         noStatDice: this.noStatDice,
       }),
     ];
-  }
-
-  /** @inheritDoc */
-  get _formPaths() {
-    const paths = this.noStatDice ? this._triggerPaths : super._formPaths;
-    return ["noStatDice", ...paths];
   }
 
   /** @inheritDoc */

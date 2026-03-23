@@ -22,9 +22,9 @@ export default (Base) => {
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           dampened: new fields.BooleanField({ initial: false }),
+          destroyed: new fields.BooleanField({ initial: false }),
           shattered: new fields.BooleanField({ initial: false }),
           stashed: new fields.BooleanField({ initial: false }),
-          destroyed: new fields.BooleanField({ initial: false }),
         });
       }
 

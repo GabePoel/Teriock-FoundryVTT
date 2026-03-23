@@ -201,21 +201,15 @@ export default class EquipmentSystem extends mix(
     return [
       {
         path: "system.glued",
-        dataset: {
-          action: "toggleGlued",
-        },
+        dataset: { action: "toggleGlued" },
       },
       {
         path: "system.shattered",
-        dataset: {
-          action: "toggleShattered",
-        },
+        dataset: { action: "toggleShattered" },
       },
       {
         path: "system.dampened",
-        dataset: {
-          action: "toggleDampened",
-        },
+        dataset: { action: "toggleDampened" },
       },
       "system.consumable",
       ...super.displayToggles,

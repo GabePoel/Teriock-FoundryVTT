@@ -44,13 +44,13 @@ export default class CommonImpactsAutomation extends TriggerAutomationMixin(
   }
 
   /** @inheritDoc */
-  get _buttons() {
-    return Array.from(this.common).map((c) => buttonHandlers[c].buildButton());
+  get _formPaths() {
+    return ["common", ...super._formPaths];
   }
 
   /** @inheritDoc */
-  get _formPaths() {
-    return ["common", ...super._formPaths];
+  async _getButtons() {
+    return Array.from(this.common).map((c) => buttonHandlers[c].buildButton());
   }
 
   /** @inheritDoc */

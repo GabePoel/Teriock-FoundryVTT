@@ -28,6 +28,7 @@ export default (Base) => {
           if (!this.parent.parent?.system.equipped) suppressed = true;
           if (
             this.form !== "intrinsic" &&
+            !this.mundane &&
             (this.parent.parent?.system.dampened ||
               !this.parent.parent?.system.isAttuned)
           ) {

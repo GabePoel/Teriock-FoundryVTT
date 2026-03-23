@@ -155,6 +155,11 @@ export default (Base) => {
                     "TERIOCK.SYSTEMS.Ability.FIELDS.spell.label",
                   )
                 : "",
+              this.mundane
+                ? game.i18n.localize(
+                    "TERIOCK.SYSTEMS.Adjustable.FIELDS.mundane.label",
+                  )
+                : "",
             ],
           },
           {

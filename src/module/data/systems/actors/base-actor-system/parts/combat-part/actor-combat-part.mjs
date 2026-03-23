@@ -223,22 +223,16 @@ export default (Base) => {
       /** @inheritDoc */
       prepareSpecialData() {
         super.prepareSpecialData();
-        const armor = this.parent.equipment.filter(
-          (e) => e.system.equipped && e.system.equipmentClasses.has("armor"),
+        this.defense.av.worn = Math.max(
+          ...this.parent.equipment
+            .filter((e) => e.active)
+            .map((e) => e.system.av.value),
         );
-        const naturalArmor = this.parent.bodyParts.filter(
-          (a) => !a.disabled && a.system.av.value > 0,
+        this.defense.av.natural = Math.max(
+          ...this.parent.bodyParts
+            .filter((b) => b.active)
+            .map((b) => b.system.av.value),
         );
-        if (armor.length > 0) {
-          this.defense.av.worn = Math.max(
-            ...armor.map((a) => a.system.av.value),
-          );
-        }
-        if (naturalArmor.length > 0) {
-          this.defense.av.natural = Math.max(
-            ...naturalArmor.map((a) => a.system.av.value),
-          );
-        }
         this.defense.av.value = Math.max(
           this.defense.av.natural,
           this.defense.av.worn,

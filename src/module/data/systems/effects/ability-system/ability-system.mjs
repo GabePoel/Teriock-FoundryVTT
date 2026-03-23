@@ -274,7 +274,7 @@ export default class AbilitySystem extends mix(
     if (this.guildmaster) {
       tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.guildmaster.label");
     }
-    if (this.lore) tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.lore.label");
+    //if (this.lore) tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.lore.label");
     tags.push(
       ...Array.from(this.powerSources).map((t) => {
         return {
@@ -301,6 +301,9 @@ export default class AbilitySystem extends mix(
       tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.elderSorcery.label");
     }
     if (this.warded) tags.push("TERIOCK.SYSTEMS.Attack.FIELDS.warded.label");
+    if (this.mundane) {
+      tags.push("TERIOCK.SYSTEMS.Adjustable.FIELDS.mundane.label");
+    }
     return tags;
   }
 
@@ -314,7 +317,6 @@ export default class AbilitySystem extends mix(
       "system.ritual",
       "system.rotator",
       "system.guildmaster",
-      "system.lore",
       "system.sustained",
       "system.invoked",
       "system.elderSorcery",
@@ -322,6 +324,7 @@ export default class AbilitySystem extends mix(
       "system.consumeSource",
       "system.grantOnly",
       "system.warded",
+      "system.mundane",
       ...super.displayToggles,
     ];
   }

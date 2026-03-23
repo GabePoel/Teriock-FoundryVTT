@@ -117,16 +117,19 @@ export default function ChildSheetMixin(Base) {
        */
       #expandFields(fields) {
         return fancifyFields(fields).map((f) => {
+          const sourceValue = foundry.utils.getProperty(
+            this.document,
+            f.path.replace("system.", "_source.system."),
+          );
+          const value = foundry.utils.getProperty(this.document, f.path);
           return {
             ...f,
             ...{
               schema: this.document.getSchema(f.path),
-              value: foundry.utils.getProperty(
-                this.document,
-                f.path.replace(".system.", "._schema.system."),
-              ),
+              value,
               label: f?.label || this.document.getSchema(f.path)?.label,
               button: f?.button,
+              editable: value === sourceValue,
             },
           };
         });
