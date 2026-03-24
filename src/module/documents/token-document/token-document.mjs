@@ -160,15 +160,18 @@ export default class TeriockTokenDocument extends mix(
     const yes = await super._preCreate(data, options, user);
     if (yes === false) return false;
 
-    if (foundry.utils.hasProperty(data, "texture.src")) {
-      this.updateSource({
-        flags: {
-          teriock: {
-            imageRaw: foundry.utils.getProperty(data, "texture.src"),
+    this.updateSource(
+      foundry.utils.mergeObject(
+        {
+          flags: {
+            teriock: {
+              imageRaw: foundry.utils.getProperty(data, "texture.src"),
+            },
           },
         },
-      });
-    }
+        data,
+      ),
+    );
   }
 
   /** @inheritDoc */

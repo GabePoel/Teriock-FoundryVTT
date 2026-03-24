@@ -48,13 +48,18 @@ export default class CharacterSystem extends BaseActorSystem {
     }
 
     // Add Essential Items
-    this.parent.updateSource({
-      prototypeToken: {
-        actorLink: true,
-        disposition: 0,
-        sight: { enabled: true },
-      },
-      items: items,
-    });
+    this.parent.updateSource(
+      foundry.utils.mergeObject(
+        {
+          prototypeToken: {
+            actorLink: true,
+            disposition: 0,
+            sight: { enabled: true },
+          },
+          items: items,
+        },
+        data,
+      ),
+    );
   }
 }

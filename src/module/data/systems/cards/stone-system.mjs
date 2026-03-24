@@ -1,25 +1,27 @@
 import { getImage } from "../../../helpers/path.mjs";
-import BaseCardSystem from "./base-card-system.mjs";
+import { BaseSystem } from "../abstract/_module.mjs";
 
-export default class StoneSystem extends BaseCardSystem {
+export default class StoneSystem extends BaseSystem {
   /** @inheritDoc */
   async _preCreate(data, options, user) {
     const yes = await super._preCreate(data, options, user);
     if (yes === false) return false;
 
-    if (!foundry.utils.hasProperty(data, "back.img")) {
-      this.parent.updateSource({
-        "back.img": getImage("death-bag-stones", "Unknown"),
-      });
-    }
-    if (!foundry.utils.hasProperty(data, "back.name")) {
-      this.parent.updateSource({
-        "back.name": game.i18n.localize("TERIOCK.SYSTEMS.Stone.DEFAULTS.back"),
-      });
-    }
+    const copy = foundry.utils.deepClone(data);
+    this.parent.updateSource(
+      foundry.utils.mergeObject(
+        {
+          back: {
+            img: getImage("death-bag-stones", "Unknown"),
+            name: game.i18n.localize("TERIOCK.SYSTEMS.Stone.DEFAULTS.back"),
+          },
+        },
+        data,
+      ),
+    );
     if (
-      !foundry.utils.hasProperty(data, "faces") ||
-      Object.keys(foundry.utils.getProperty(data, "faces")[0]).length === 0
+      !foundry.utils.hasProperty(copy, "faces") ||
+      Object.keys(copy.faces[0]).length === 0
     ) {
       this.parent.updateSource({
         faces: [
@@ -37,7 +39,7 @@ export default class StoneSystem extends BaseCardSystem {
     super.prepareDerivedData();
     if (this.parent.parent) {
       let count = 1;
-      const cards = this.parent.parent.cards.contents.filter(
+      const cards = this.parent.parent?.cards.contents.filter(
         (c) => c.type === this.parent.type && c.suit === this.parent.suit,
       );
       cards.sort((a, b) => a.sort - b.sort);

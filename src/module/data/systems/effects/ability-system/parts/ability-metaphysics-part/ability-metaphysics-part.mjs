@@ -1,3 +1,4 @@
+import { formatJoin } from "../../../../../../helpers/string.mjs";
 import { TextField } from "../../../../../fields/_module.mjs";
 
 const { fields } = foundry.data;
@@ -119,15 +120,12 @@ export default (Base) => {
        */
       get elementString() {
         if (this.elements.size === 0) {
-          return "Celestial";
-        } else if (this.elements.size === 1) {
-          return Array.from(this.elements)[0];
-        } else {
-          const elements = Array.from(this.elements).sort((a, b) =>
-            a.localeCompare(b),
-          );
-          return `${elements.slice(0, -1).join(", ")}${this.elements.size > 2 ? "," : ""} and ${elements.at(-1)}`;
+          return game.i18n.localize("TERIOCK.TERMS.Common.celestial");
         }
+        const elements = Array.from(
+          this.elements.map((e) => TERIOCK.reference.elements[e]),
+        ).sort((a, b) => a.localeCompare(b));
+        return formatJoin(elements);
       }
 
       /** @inheritDoc */

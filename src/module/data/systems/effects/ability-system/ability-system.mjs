@@ -343,7 +343,7 @@ export default class AbilitySystem extends mix(
     return Array.from(this.targets)
       .map((t) => TERIOCK.options.ability.targets[t])
       .sort((a, b) => a.localeCompare(b))
-      .join(", ");
+      .join(game.i18n.localize("TERIOCK.SYSTEMS.Base.EMBED.valueSeparator"));
   }
 
   /** @inheritDoc */

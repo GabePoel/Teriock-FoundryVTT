@@ -90,6 +90,7 @@ export default (Base) => {
           value: 0,
         };
         this.scaling.br = Math.max(
+          0,
           ...this.parent.species.map((s) => s.system.br),
         );
         this.scaling.scale = this.scaling.brScale

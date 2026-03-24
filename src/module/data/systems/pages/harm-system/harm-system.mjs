@@ -78,19 +78,22 @@ export default class HarmSystem extends mix(
     const yes = await super._preCreate(data, options, user);
     if (yes === false) return false;
 
-    if (!data.text?.content) {
-      this.parent.updateSource({
-        "text.content": game.i18n.localize(
-          "TERIOCK.SYSTEMS.Harm.DATA.description",
-        ),
-      });
-    }
-    if (!data.system?.img) {
-      let ref = "";
-      if (this.parent.type === "damage") ref = "Damaging";
-      if (this.parent.type === "drain") ref = "Draining";
-      this.parent.updateSource({ "system.img": getImage("effect-types", ref) });
-    }
+    let ref = "";
+    if (this.parent.type === "damage") ref = "Damaging";
+    if (this.parent.type === "drain") ref = "Draining";
+    this.parent.updateSource(
+      foundry.utils.mergeObject(
+        {
+          text: {
+            content: game.i18n.localize(
+              "TERIOCK.SYSTEMS.Harm.DATA.description",
+            ),
+          },
+          system: { img: getImage("effect-types", ref) },
+        },
+        data,
+      ),
+    );
   }
 
   /** @inheritDoc */

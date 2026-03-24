@@ -1,12 +1,12 @@
 import { TeriockCard, TeriockCards } from "../_module.mjs";
-import { BaseCardSystem } from "../../data/systems/cards/_module.mjs";
+import { BaseSystem } from "../../data/systems/abstract/_module.mjs";
 
 declare global {
   namespace Teriock.Documents {
     export interface CardInterface {
       _id: ID<TeriockCard>;
       parent: TeriockCards;
-      system: BaseCardSystem;
+      system: BaseSystem;
       type: Teriock.Documents.CardType;
 
       get documentName(): "Card";

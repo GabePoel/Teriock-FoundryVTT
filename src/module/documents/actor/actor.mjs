@@ -232,21 +232,16 @@ export default class TeriockActor extends mix(
     const yes = await super._preCreate(data, options, user);
     if (yes === false) return false;
 
-    const prototypeToken = {};
-    const size = this.system.size.length;
-    if (!foundry.utils.hasProperty(data, "prototypeToken.sight.enabled")) {
-      prototypeToken.sight = {
-        enabled: true,
-        range: 0,
-      };
-    }
-    if (!foundry.utils.hasProperty(data, "prototypeToken.width")) {
-      prototypeToken.width = size;
-    }
-    if (!foundry.utils.hasProperty(data, "prototypeToken.height")) {
-      prototypeToken.height = size;
-    }
-    this.updateSource({ prototypeToken: prototypeToken });
+    this.updateSource(
+      foundry.utils.mergeObject({
+        prototypeToken: {
+          height: this.system.size.length,
+          sight: { enabled: true, range: 0 },
+          width: this.system.size.length,
+        },
+      }),
+      data,
+    );
   }
 
   /**
@@ -260,6 +255,7 @@ export default class TeriockActor extends mix(
     const yes = await super._preUpdate(changes, options, user);
     if (yes === false) return false;
 
+    // TODO: Refine token update process in V14
     if (
       foundry.utils.hasProperty(changes, "img") &&
       !foundry.utils.hasProperty(changes, "prototypeToken.texture.src") &&

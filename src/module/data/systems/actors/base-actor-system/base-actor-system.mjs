@@ -123,6 +123,23 @@ export default class BaseActorSystem extends mix(
   /** @inheritDoc */
   get panelParts() {
     const parts = super.panelParts;
+    parts.bars = [
+      {
+        icon: TERIOCK.display.icons.ui.info,
+        label: game.i18n.localize("TERIOCK.SYSTEMS.Ability.PANELS.info"),
+        wrappers: [
+          game.i18n.format("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.lvl", {
+            number: this.scaling.lvl,
+          }),
+          game.i18n.format("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.br", {
+            number: this.scaling.br,
+          }),
+          game.i18n.format("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.size", {
+            number: this.size.number.value,
+          }),
+        ],
+      },
+    ];
     parts.blocks = [
       {
         title: game.i18n.localize("TERIOCK.SYSTEMS.BaseActor.PANELS.notes"),
@@ -137,13 +154,18 @@ export default class BaseActorSystem extends mix(
     const yes = await super._preCreate(data, options, user);
     if (yes === false) return false;
 
-    this.parent.updateSource({
-      prototypeToken: {
-        bar1: { attribute: "hp" },
-        bar2: { attribute: "mp" },
-        displayBars: 20,
-      },
-    });
+    this.parent.updateSource(
+      foundry.utils.mergeObject(
+        {
+          prototypeToken: {
+            bar1: { attribute: "hp" },
+            bar2: { attribute: "mp" },
+            displayBars: 20,
+          },
+        },
+        data,
+      ),
+    );
   }
 
   /** @inheritDoc */

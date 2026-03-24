@@ -116,8 +116,10 @@ export default class PowerSystem extends mix(
     if (yes === false) return false;
 
     if (
-      this.actor?.powers.map((p) => p.name).includes(this.parent.name) &&
-      ["Warrior", "Semi", "Mage"].includes(this.parent.name)
+      this.actor?.powers
+        .map((p) => p.system.identifier)
+        .includes(this.identifier) &&
+      ["warrior", "semi", "mage"].includes(this.identifier)
     ) {
       return false;
     }

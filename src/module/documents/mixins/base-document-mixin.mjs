@@ -2,10 +2,7 @@ import { TeriockDialog } from "../../applications/api/_module.mjs";
 import { icons } from "../../constants/display/icons.mjs";
 import { resolveDocument } from "../../helpers/resolve.mjs";
 import { toId } from "../../helpers/string.mjs";
-import {
-  makeIcon,
-  makeIconClass
-} from "../../helpers/utils.mjs";
+import { makeIcon, makeIconClass } from "../../helpers/utils.mjs";
 
 /**
  * Base mixin.
