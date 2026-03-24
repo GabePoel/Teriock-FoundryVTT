@@ -210,7 +210,7 @@ export default function ArmamentSystemMixin(Base) {
        */
       get _rangeTags() {
         const tags = [];
-        if (this.range.melee) {
+        if (this.range.melee && this.range.long.unitType !== "zero") {
           tags.push({
             label: "TERIOCK.SYSTEMS.Armament.FIELDS.range.melee.label",
             tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.range.label",
@@ -360,9 +360,7 @@ export default function ArmamentSystemMixin(Base) {
             this.damage.types.add(p.system.damageType.toLowerCase());
           }
         }
-        if (this.powerLevel === "magic") {
-          this.damage.types.add("magic");
-        }
+        if (this.powerLevel === "magic") this.damage.types.add("magic");
         this.damage.base.addTypes(this.damage.types);
 
         // Tags
@@ -370,8 +368,7 @@ export default function ArmamentSystemMixin(Base) {
 
         // Range
         this.range.description = "";
-        this.range.melee =
-          this.range.long.unit === "melee" || this.range.short.unit === "melee";
+        if (this.range.long.unitType === "zero") this.range.melee = true;
         this.range.ranged = this.range.long.unitType !== "zero";
       }
 

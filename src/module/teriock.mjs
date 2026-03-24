@@ -449,22 +449,13 @@ foundry.helpers.Hooks.once("init", function () {
   foundry.applications.handlebars.loadTemplates(templates);
 });
 
-foundry.helpers.Hooks.once("setup", function () {
-  // Override Compendium Applications
-  // ================================
+// Override Compendium Applications
+// ================================
 
+foundry.helpers.Hooks.once("setup", function () {
   for (const pack of game.packs) {
     pack.applicationClass = applications.sidebar.TeriockCompendium;
   }
-
-  // Enable Material Symbols
-  // =======================
-
-  const link = document.createElement("link");
-  link.href =
-    "https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200";
-  link.rel = "stylesheet";
-  document.head.appendChild(link);
 });
 
 // Perform one-time pre-localization and sorting of some configuration objects
