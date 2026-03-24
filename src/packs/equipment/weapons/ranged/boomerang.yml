@@ -4,7 +4,7 @@ _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.50
+  systemVersion: 0.10.64
 effects:
   - _id: missile000000000
     _key: '!items.effects!c63b325c4f93fdab.missile000000000'
@@ -13,10 +13,32 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.63
+      systemVersion: 0.10.64
     img: systems/teriock/src/icons/properties/missile.webp
     name: Missile
     system:
+      automations:
+        parameterChanges:
+          _id: parameterChanges
+          changes:
+            - key: system.range.melee
+              mode: 5
+              priority: 10
+              qualifier: '1'
+              target: parent
+              time: normal
+              value: 'false'
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 0
+            - 1
+          type: changes
       competence:
         raw: 0
       description: >-
@@ -34,7 +56,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.63
+      systemVersion: 0.10.64
     img: systems/teriock/src/icons/properties/ranged.webp
     name: Ranged
     system:
@@ -128,7 +150,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.63
+      systemVersion: 0.10.64
     img: systems/teriock/src/icons/properties/thrown.webp
     name: Thrown
     system:
@@ -136,8 +158,7 @@ effects:
         raw: 0
       description: >-
         <p>A weapon with this property can be tossed to make a
-        @L[Property:Ranged]{ranged} attack. Unless noted otherwise, it can still
-        be used to make melee attacks.</p>
+        @L[Property:Ranged]{ranged} attack.</p>
       form: intrinsic
       identifier: thrown
       mundane: true
