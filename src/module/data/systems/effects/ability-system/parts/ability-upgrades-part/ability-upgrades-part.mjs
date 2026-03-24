@@ -40,7 +40,7 @@ export default (Base) => {
                 initial: 0,
                 max: 5,
                 min: -3,
-                required: false,
+                nullable: false,
               }),
             }),
           }),

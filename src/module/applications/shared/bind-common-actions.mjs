@@ -1,4 +1,4 @@
-import { TeriockContextMenu } from "../ux/_module.mjs";
+import { TeriockContextMenu, TeriockTextEditor } from "../ux/_module.mjs";
 import {
   imageContextMenuOptions,
   previewSheet,
@@ -72,7 +72,7 @@ export default function bindCommonActions(rootElement) {
         ).implementation;
         if (documentClass?.documentMetadata?.tooltip) {
           el.dataset.tooltipClass = "teriock-rich-tooltip";
-          el.dataset.tooltipHtml = TERIOCK.display.panel.loading;
+          el.dataset.tooltipHtml = TeriockTextEditor.loadingPanelHTML;
         }
       }
       // Determine tooltip direction and style

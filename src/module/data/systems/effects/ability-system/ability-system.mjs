@@ -133,16 +133,16 @@ export default class AbilitySystem extends mix(
   get displayFields() {
     const fields = [
       {
-        path: "system.elderSorceryIncant",
+        button: game.i18n.localize(
+          "TERIOCK.SYSTEMS.Ability.FIELDS.elderSorceryIncant.button",
+        ),
+        classes: TERIOCK.display.panel.classes.elderSorcery,
         label: game.i18n.format(
           "TERIOCK.SYSTEMS.Ability.FIELDS.elderSorceryIncant.elements",
           { elements: this.elementString },
         ),
+        path: "system.elderSorceryIncant",
         visible: this.elderSorcery,
-        classes: "elder-sorcery-display-field",
-        button: game.i18n.localize(
-          "TERIOCK.SYSTEMS.Ability.FIELDS.elderSorcery.label",
-        ),
       },
       ...Object.keys(costOptions.primary.keys).map((k) => {
         return {
@@ -161,16 +161,16 @@ export default class AbilitySystem extends mix(
       ...this.constructor._adjustableTextFields,
       "system.overview.base",
       {
-        path: "system.overview.proficient",
         classes: this.competence.proficient
           ? ""
           : TERIOCK.display.panel.classes.faded,
+        path: "system.overview.proficient",
       },
       {
-        path: "system.overview.fluent",
         classes: this.competence.fluent
           ? ""
           : TERIOCK.display.panel.classes.faded,
+        path: "system.overview.fluent",
       },
     ];
     if (this.interaction === "attack") {
@@ -199,19 +199,20 @@ export default class AbilitySystem extends mix(
         "system.heightened",
         "system.endCondition",
         {
+          classes: TERIOCK.display.panel.classes.derived,
+          editable: false,
           path: "system.grantOnlyText",
-          classes: "italic-display-field ab-improvement-attribute",
-          editable: false,
         },
         {
+          classes: TERIOCK.display.panel.classes.derived,
+          editable: false,
           path: "system.consumeSourceText",
-          classes: "italic-display-field ab-improvement-attribute",
-          editable: false,
         },
         {
-          path: "system.upgrades.score.text",
-          classes: "italic-display-field editable-display-field",
-          editable: false,
+          classes: [
+            TERIOCK.display.panel.classes.derived,
+            TERIOCK.display.panel.classes.editable,
+          ].join(" "),
           dataset: {
             action: "updatePaths",
             paths:
@@ -221,11 +222,14 @@ export default class AbilitySystem extends mix(
             ),
             icon: TERIOCK.display.icons.ui.numerical,
           },
+          editable: false,
+          path: "system.upgrades.score.text",
         },
         {
-          path: "system.upgrades.competence.text",
-          classes: "italic-display-field editable-display-field",
-          editable: false,
+          classes: [
+            TERIOCK.display.panel.classes.derived,
+            TERIOCK.display.panel.classes.editable,
+          ].join(" "),
           dataset: {
             action: "updatePaths",
             paths:
@@ -235,6 +239,8 @@ export default class AbilitySystem extends mix(
             ),
             icon: TERIOCK.display.icons.competence.fluent,
           },
+          editable: false,
+          path: "system.upgrades.competence.text",
         },
       ],
     );

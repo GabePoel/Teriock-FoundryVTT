@@ -87,7 +87,7 @@ export default class TeriockRollTable extends mix(
       panel.blocks.push({
         title: this.name,
         text: this.description,
-        classes: "italic-display-field",
+        classes: TERIOCK.display.panel.classes.derived,
       });
     });
     messageData.system.panels = await TeriockTextEditor.enrichPanels(

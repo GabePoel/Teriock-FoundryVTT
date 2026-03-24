@@ -15,34 +15,24 @@
   "documentTypes": {
     "ActiveEffect": {
       "ability": {
+        "filePathFields": {
+          "automations.*.transformation.image": ["IMAGE"]
+        },
         "htmlFields": [
-          "costs.components.break.description",
-          "costs.components.hack.description",
-          "costs.components.material.description",
-          "costs.components.other.description",
-          "costs.components.somatic.description",
-          "costs.components.verbal.description",
-          "costs.primary.gp.description",
-          "costs.primary.hp.description",
-          "costs.primary.mp.description",
+          "consumeSourceText",
+          "costs.components.*.description",
+          "costs.primary.*.description",
           "elderSorceryIncant",
           "endCondition",
+          "grantOnlyText",
           "heightened",
           "improvement",
           "limitation",
-          "overview.base",
-          "overview.fluent",
-          "overview.proficient",
+          "overview.*",
           "requirements",
-          "results.critFail",
-          "results.critHit",
-          "results.critMiss",
-          "results.critSave",
-          "results.fail",
-          "results.hit",
-          "results.miss",
-          "results.save",
-          "trigger"
+          "results.*",
+          "trigger",
+          "upgrades.*.text"
         ]
       },
       "attunement": {
@@ -55,7 +45,7 @@
         "htmlFields": ["description"]
       },
       "fluency": {
-        "htmlFields": ["description"]
+        "htmlFields": ["description", "tradecraftDescription"]
       },
       "property": {
         "htmlFields": ["description", "limitation", "improvement"]
@@ -78,10 +68,10 @@
     },
     "Item": {
       "body": {
-        "htmlFields": ["description", "flaws", "notes"]
+        "htmlFields": ["description", "flaws", "notes", "specialRules"]
       },
       "equipment": {
-        "htmlFields": ["description", "flaws", "notes"]
+        "htmlFields": ["description", "flaws", "notes", "specialRules"]
       },
       "mount": {
         "htmlFields": ["description", "flaws"]
@@ -98,7 +88,8 @@
           "attributeIncrease",
           "description",
           "hpIncrease",
-          "innateRanks"
+          "innateRanks",
+          "mpIncrease"
         ]
       },
       "wrapper": {
@@ -108,17 +99,17 @@
     "JournalEntryPage": {
       "damage": {
         "filePathFields": {
-          "img": "IMAGE"
+          "img": ["IMAGE"]
         }
       },
       "drain": {
         "filePathFields": {
-          "img": "IMAGE"
+          "img": ["IMAGE"]
         }
       }
     }
   },
-  "download": "https://github.com/gabepoel/Teriock-FoundryVTT/releases/download/release-0.10.66/release-0.10.66.zip",
+  "download": "https://github.com/gabepoel/Teriock-FoundryVTT/releases/download/release-0.10.67/release-0.10.67.zip",
   "esmodules": ["src/module/teriock.mjs"],
   "flags": {
     "hotReload": {
@@ -380,5 +371,5 @@
   ],
   "title": "Teriock",
   "url": "https://github.com/gabepoel/Teriock-FoundryVTT",
-  "version": "0.10.66"
+  "version": "0.10.67"
 }

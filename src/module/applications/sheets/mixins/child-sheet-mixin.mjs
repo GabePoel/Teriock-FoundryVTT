@@ -108,7 +108,7 @@ export default function ChildSheetMixin(Base) {
               value,
               label: f?.label || this.document.getSchema(f.path)?.label,
               button: f?.button,
-              editable: value === sourceValue,
+              editable: f.editable === false ? false : value === sourceValue,
             },
           };
         });
@@ -185,7 +185,7 @@ export default function ChildSheetMixin(Base) {
         const expandedDisplayFields = this.#expandFields(
           this.document.system.displayFields,
         );
-        const displayFieldButtons = expandedDisplayFields
+        context.displayFieldButtons = expandedDisplayFields
           .filter((f) => !f.value)
           .map((f) => {
             return {
@@ -193,7 +193,8 @@ export default function ChildSheetMixin(Base) {
               name: f?.button || f?.label || f.schema?.label,
               editable: f.editable,
             };
-          });
+          })
+          .filter((b) => b.editable !== false);
         context.displayFields =
           /** @type {Teriock.Sheet.EnrichedDisplayField[]} */ await Promise.all(
             expandedDisplayFields
@@ -207,7 +208,7 @@ export default function ChildSheetMixin(Base) {
                 };
               }),
           );
-        context.displayFieldButtons = displayFieldButtons;
+        console.log(context.displayFieldButtons);
         context.bars = this._tab === "overview" ? this.constructor.BARS : [];
       }
 

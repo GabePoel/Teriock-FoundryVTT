@@ -2,6 +2,17 @@ const { TextEditor } = foundry.applications.ux;
 
 export default class TeriockTextEditor extends TextEditor {
   /**
+   * Localized HTML string to represent a loading panel.
+   * @returns {string}
+   */
+  static get loadingPanelHTML() {
+    return TERIOCK.display.panel.loading.replace(
+      "TERIOCK.LOADING",
+      game.i18n.localize("TERIOCK.TERMS.Common.loading"),
+    );
+  }
+
+  /**
    * Enrich all the blocks within a panel.
    * @param {Teriock.MessageData.MessagePanel} panel
    * @param {object} [options]
@@ -14,9 +25,7 @@ export default class TeriockTextEditor extends TextEditor {
     for (const association of panel.associations || []) {
       for (const card of association.cards || []) {
         if (card.uuid && card.makeTooltip) {
-          card.tooltip = foundry.utils.escapeHTML(
-            TERIOCK.display.panel.loading,
-          );
+          card.tooltip = foundry.utils.escapeHTML(this.loadingPanelHTML);
         }
       }
     }

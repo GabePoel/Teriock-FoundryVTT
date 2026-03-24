@@ -76,7 +76,7 @@ export default class FluencySystem extends mix(
     return [
       "system.description",
       {
-        classes: "italic-display-field",
+        classes: TERIOCK.display.panel.classes.derived,
         editable: false,
         label: TERIOCK.reference.tradecrafts[this.tradecraft],
         path: "system.tradecraftDescription",

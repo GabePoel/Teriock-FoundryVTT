@@ -232,7 +232,7 @@ export default function ArmamentSystemMixin(Base) {
           "system.notes",
           "system.flaws",
           {
-            classes: "italic-display-field",
+            classes: TERIOCK.display.panel.classes.derived,
             editable: false,
             label: game.i18n.format(
               "TERIOCK.SYSTEMS.Armament.FIELDS.fightingStyle.named",

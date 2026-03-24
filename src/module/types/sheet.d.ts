@@ -3,13 +3,13 @@ import { TextField } from "../data/fields/_module.mjs";
 declare global {
   namespace Teriock.Sheet {
     export type FancyDisplayField = {
+      button?: string;
       classes: string;
       dataset: Record<string, string>;
       editable: boolean;
       label: string;
       path: string;
       visible: boolean;
-      button?: string;
     };
 
     export type DisplayField = Partial<FancyDisplayField> | string;
@@ -22,12 +22,12 @@ declare global {
     export type DisplayTag = Partial<FancyDisplayTag> | string;
 
     export type EnrichedDisplayField = {
-      schema: TextField;
-      value: string;
-      enriched: string;
       classes: string;
       editable: boolean;
+      enriched: string;
       label: string;
+      schema: TextField;
+      value: string;
     };
 
     export type DragDropSelector = {
@@ -41,9 +41,9 @@ declare global {
 
     export type DropData<T> = {
       data?: T;
-      uuid: UUID<T>;
-      type: "ActiveEffect" | "Item" | "Macro" | "Actor" | "JournalEntryPage";
       systemType?: Teriock.Documents.CommonType;
+      type: "ActiveEffect" | "Item" | "Macro" | "Actor" | "JournalEntryPage";
+      uuid: UUID<T>;
     };
 
     export interface EmbedDragEvent extends DragEvent {
