@@ -457,8 +457,8 @@ export default function TransformationSystemMixin(Base) {
       prepareBaseData() {
         super.prepareBaseData();
         if (this.isTransformation) {
-          if (!this.transformation.image && this.actor && this.primarySpecies) {
-            this.transformation.image = this.primarySpecies.img;
+          if (!this.transformation.img && this.actor && this.primarySpecies) {
+            this.transformation.img = this.primarySpecies.img;
           }
         }
       }

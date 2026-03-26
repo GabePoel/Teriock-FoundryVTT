@@ -33,7 +33,7 @@ export default class TransformationAutomation extends ExternalDocumentsAutomatio
     return [
       ...super._formPaths,
       "transformation.level",
-      "transformation.image",
+      "transformation.img",
       "transformation.resetHp",
       "transformation.resetMp",
       "transformation.suppression.bodyParts",

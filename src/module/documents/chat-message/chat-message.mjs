@@ -66,6 +66,8 @@ export default class TeriockChatMessage extends BaseDocumentMixin(ChatMessage) {
 
   /** @inheritDoc */
   async renderHTML(options = {}) {
+    // Rolls being hidden when content is not otherwise visible reveals more information than it hides
+    if (!this.isContentVisible) for (const r of this.rolls) r.hideRoll = false;
     const html = await super.renderHTML(options);
     await this.system.alterMessageHTML(html);
     return html;

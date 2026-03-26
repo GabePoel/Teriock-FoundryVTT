@@ -4,7 +4,7 @@ declare global {
       /** <base> Transformation */
       transformation: {
         /** <base> Transformed token art */
-        image: string | null;
+        img: string | null;
         /** <schema> */
         primary: ID<TeriockConsequence> | null;
         /** <base> */

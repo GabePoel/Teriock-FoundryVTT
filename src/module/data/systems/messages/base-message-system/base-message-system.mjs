@@ -167,16 +167,9 @@ export default class BaseMessageSystem extends BaseSystem {
 
     // Create and add a tag container
     const tagContainer = this._createTagContainer();
-    if (tagContainer) {
-      footer.appendChild(tagContainer);
-    }
-
-    // Create and add a button container
+    if (tagContainer) footer.appendChild(tagContainer);
     const buttonContainer = this._createButtonContainer();
-    if (buttonContainer) {
-      footer.appendChild(buttonContainer);
-    }
-
+    if (buttonContainer) footer.appendChild(buttonContainer);
     return footer;
   }
 
@@ -299,9 +292,32 @@ export default class BaseMessageSystem extends BaseSystem {
 
     const hasContent =
       (this.tags && this.tags.length > 0) || this.buttons.length > 0;
-    if (hasContent) {
+    if (hasContent && this.parent.isContentVisible) {
       const footer = this._constructFooter();
       htmlElement.insertAdjacentElement("beforeend", footer);
+    }
+
+    // Remove custom content if it shouldn't be visible
+    if (!this.parent.isContentVisible) {
+      htmlElement
+        .querySelectorAll(".teriock-target-container, .teriock-dice-total-icon")
+        .forEach((el) => el.remove());
+      htmlElement
+        .querySelectorAll(".dice-total.teriock-dice-total")
+        .forEach((el) => {
+          el.className = "dice-total teriock-dice-total";
+        });
+      htmlElement
+        .querySelectorAll(".dice-formula.teriock-dice-formula")
+        .forEach((el) => {
+          el.className = "dice-formula teriock-dice-formula";
+        });
+      htmlElement.querySelectorAll(".dice-total, .dice-formula").forEach(
+        /** @param {HTMLElement} el */ (el) => {
+          delete el.dataset.tooltip;
+          delete el.dataset.tooltipHtml;
+        },
+      );
     }
 
     if (this.overlay) {

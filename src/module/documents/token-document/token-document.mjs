@@ -96,7 +96,7 @@ export default class TeriockTokenDocument extends mix(
    */
   get imageTransformed() {
     if (!this.actor) return this.texture.src;
-    let path = this.actor.system.transformation.image || this.texture.src;
+    let path = this.actor.system.transformation.img || this.texture.src;
     if (this.ring.enabled) {
       return TeriockTokenDocument.ringImage(path);
     }

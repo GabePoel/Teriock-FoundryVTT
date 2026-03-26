@@ -48,7 +48,7 @@ export default (Base) => {
         });
         if (effect) {
           Object.assign(this.transformation, {
-            image: effect.system.transformation.image,
+            image: effect.system.transformation.img,
             level: effect.system.transformation.level,
           });
         }
@@ -66,8 +66,8 @@ export default (Base) => {
       prepareDerivedData() {
         super.prepareDerivedData();
         if (this.transformation.effect) {
-          this.transformation.image =
-            this.transformation.effect.system.transformation.image;
+          this.transformation.img =
+            this.transformation.effect.system.transformation.img;
         }
       }
     }

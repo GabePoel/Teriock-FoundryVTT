@@ -5,7 +5,7 @@ export type TransformationData = {
   /** <schema> Whether transformation is enabled */
   enabled: boolean;
   /** <schema> Overriding image to apply */
-  image: string;
+  img: string;
   /** <schema> Level of transformation */
   level: Teriock.Keys.TransformationLevel;
   /** <schema> Reset HP upon applying transformation */
