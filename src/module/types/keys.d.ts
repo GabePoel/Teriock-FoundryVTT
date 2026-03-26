@@ -83,7 +83,7 @@ declare global {
 
     // Effect Keys
     export type Form = keyof typeof options.effect.form;
-    export type IllusionLevel = keyof typeof options.effect.illusionLevel;
+    export type IllusionLevel = keyof typeof options.illusion.level;
     export type TransformationLevel = keyof typeof options.transformation.level;
 
     // Display Keys

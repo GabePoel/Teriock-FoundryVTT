@@ -14,6 +14,7 @@ import { documentOptions } from "./document-options.mjs";
 import { effectOptions } from "./effect-options.mjs";
 import { equipmentOptions } from "./equipment-options.mjs";
 import { hackOptions } from "./hack-options.mjs";
+import { illusionOptions } from "./illusion-options.mjs";
 import { indexOptions } from "./index-options.mjs";
 import { piercingOptions } from "./piercing-options.mjs";
 import { powerOptions } from "./power-options.mjs";
@@ -44,6 +45,7 @@ const options = {
   effect: effectOptions,
   equipment: equipmentOptions,
   hack: hackOptions,
+  illusion: illusionOptions,
   index: indexOptions,
   piercing: piercingOptions,
   power: powerOptions,
