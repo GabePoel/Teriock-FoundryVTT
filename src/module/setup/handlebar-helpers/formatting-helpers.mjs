@@ -1,4 +1,8 @@
-import { getRollIcon, makeIconClass } from "../../helpers/utils.mjs";
+import {
+  getRollIcon,
+  inferNameFromIdentifier,
+  makeIconClass,
+} from "../../helpers/utils.mjs";
 
 export default function registerFormattingHelpers() {
   Handlebars.registerHelper("firstDie", (str) => {
@@ -85,6 +89,8 @@ export default function registerFormattingHelpers() {
     }
     return "";
   });
+
+  Handlebars.registerHelper("inferName", inferNameFromIdentifier);
 }
 
 function normalizeBarInputs(value, max, temp = 0) {

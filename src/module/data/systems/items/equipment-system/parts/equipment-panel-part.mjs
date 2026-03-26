@@ -1,5 +1,6 @@
 import { formulaExists } from "../../../../../helpers/formula.mjs";
 import { simplifyTags } from "../../../../../helpers/panel.mjs";
+import { inferNameFromIdentifier } from "../../../../../helpers/utils.mjs";
 
 /**
  * Equipment panel part.
@@ -41,7 +42,7 @@ export default (Base) => {
             ),
             wrappers: [
               TERIOCK.options.equipment.powerLevel[this.powerLevel].name,
-              this.equipmentType,
+              inferNameFromIdentifier(this.equipmentType, "equipment"),
               this.range.description,
               ...simplifyTags(this._armamentTags),
             ],

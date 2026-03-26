@@ -1,6 +1,7 @@
 import { simplifyTags } from "../../../../helpers/panel.mjs";
+import { toKebabCase } from "../../../../helpers/string.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
-import { FormulaField } from "../../../fields/_module.mjs";
+import { FormulaField, IdentifierField } from "../../../fields/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
@@ -64,7 +65,7 @@ export default class PropertySystem extends mix(
     return foundry.utils.mergeObject(super.defineSchema(), {
       applyIfDampened: new fields.BooleanField({ initial: false }),
       applyIfShattered: new fields.BooleanField({ initial: false }),
-      damageType: new fields.StringField({ initial: "" }),
+      damageType: new IdentifierField({ initial: "" }),
       extraDamage: new FormulaField({ deterministic: false }),
       material: new fields.BooleanField({ initial: false }),
       modifiesActor: new fields.BooleanField({ initial: false }),
@@ -74,13 +75,11 @@ export default class PropertySystem extends mix(
   /** @inheritDoc */
   static migrateData(data) {
     // Form migration
-    if (foundry.utils.getProperty(data, "propertyType")) {
-      foundry.utils.setProperty(
-        data,
-        "form",
-        foundry.utils.getProperty(data, "propertyType"),
-      );
+    if (data.propertyType) {
+      data.form = data.propertyType;
+      delete data.propertyType;
     }
+    if (data.damageType) data.damageType = toKebabCase(data.damageType);
     return super.migrateData(data);
   }
 
@@ -199,9 +198,7 @@ export default class PropertySystem extends mix(
    * @returns {"Actor"|"Item"}
    */
   get modifies() {
-    if (this.modifiesActor) {
-      return "Actor";
-    }
+    if (this.modifiesActor) return "Actor";
     return super.modifies;
   }
 
@@ -211,8 +208,8 @@ export default class PropertySystem extends mix(
       ...super.getLocalRollData(),
       form: this.form,
       [`form.${this.form}`]: 1,
-      "damage.type": this.damageType.toLowerCase(),
-      [`damage.type.${this.damageType.toLowerCase()}`]: 1,
+      "damage.type": this.damageType,
+      [`damage.type.${this.damageType}`]: 1,
       "damage.extra": this.extraDamage,
     };
   }

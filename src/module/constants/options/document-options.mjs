@@ -1,5 +1,9 @@
 import { preLocalize } from "../../helpers/localization.mjs";
-import { docSort, effectSort, rankSort } from "../../helpers/sort.mjs";
+import {
+  docSort,
+  effectSort,
+  rankSort
+} from "../../helpers/sort.mjs";
 import { icons } from "../display/icons.mjs";
 
 /**
@@ -72,6 +76,7 @@ export const documentOptions = {
   damage: {
     doc: "JournalEntryPage",
     icon: icons.effect.damage,
+    index: "damageTypes",
     name: "TYPES.JournalEntryPage.damage",
     plural: "TERIOCK.DOCUMENTS.damage.plural",
   },
@@ -83,6 +88,7 @@ export const documentOptions = {
   drain: {
     doc: "JournalEntryPage",
     icon: icons.effect.drain,
+    index: "drainTypes",
     name: "TYPES.JournalEntryPage.drain",
     plural: "TERIOCK.DOCUMENTS.drain.plural",
   },

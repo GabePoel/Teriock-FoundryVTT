@@ -2,6 +2,7 @@ import { TeriockDialog } from "../../../applications/api/_module.mjs";
 import { selectDocumentsDialog } from "../../../applications/dialogs/select-document-dialog.mjs";
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { getDocument } from "../../../helpers/fetch.mjs";
+import { toCamelCase } from "../../../helpers/string.mjs";
 import { makeIconClass } from "../../../helpers/utils.mjs";
 import { TextField } from "../../fields/_module.mjs";
 import EmbeddedDataModel from "../embedded-data-model.mjs";
@@ -175,8 +176,8 @@ export default class IdentificationModel extends EmbeddedDataModel {
         ...TERIOCK.options.equipment.unidentifiedProperties,
       ];
       if (
-        Object.values(TERIOCK.index.equipment).includes(
-          this.parent.equipmentType,
+        Object.keys(TERIOCK.index.equipment).includes(
+          toCamelCase(this.parent.equipmentType),
         )
       ) {
         uncheckedPropertyIdentifiers.push(

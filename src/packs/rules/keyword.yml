@@ -45,32 +45,6 @@ pages:
     video:
       controls: true
       volume: 0.5
-  - _id: av00000000000000
-    _key: '!journal.pages!keyword000000000.av00000000000000'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.46
-    flags:
-      teriock:
-        journalIcon: ms-info
-    name: AV0
-    system:
-      identifier: av0
-    text:
-      content: >-
-        <p>If an @L[Core:Attack Interaction]{attack} is AV0, it has a +2 to hit.
-        This doesn't stack. If an @L[Core:Attack Interaction]{attack} would be
-        AV0 for multiple reasons, it still only has a +2 to hit.</p>
-      format: 1
-    title:
-      level: 1
-      show: true
-    type: text
-    video:
-      controls: true
-      volume: 0.5
   - _id: awaken0000000000
     _key: '!journal.pages!keyword000000000.awaken0000000000'
     _stats:
@@ -186,11 +160,12 @@ pages:
         round-box">            <div class="expandable-content-container
         round-box">                <div class="expandable-sub-box
         expandable-sub-main"><p>If an @L[Category:Attack abilities]{attack} that
-        normally deals [[/roll 2d4+1d8]] damage gets boosted, it deals [[/roll
-        2d4+2d8]] damage instead.</p></div>            </div>        </div>   
-        </div></div><div class="subber expandable-container round-box
-        bounded-container" data-namespace data-name="Example">    <div
-        class="toccolours mw-collapsible mw-collapsed" style="overflow:auto"
+        normally deals [[/damage 2d4 + 1d8]] @L[Core:Damage]{damage} gets
+        boosted, it deals [[/damage 2d4 + 2d8]] @L[Core:Damage]{damage}
+        instead.</p></div>            </div>        </div>    </div></div><div
+        class="subber expandable-container round-box bounded-container"
+        data-namespace data-name="Example">    <div class="toccolours
+        mw-collapsible mw-collapsed" style="overflow:auto"
         data-expandtext="Example" data-collapsetext="Example">        <div
         class="mw-collapsible-content round-box">            <div
         class="expandable-content-container round-box">                <div
@@ -198,10 +173,9 @@ pages:
         @L[Ability:Might Strike]{Might Strike} and @L[Ability:Control and Resist
         Fire]{Control and Resist Fire} while making a @L[Ability:Basic
         Attack]{Basic Attack} with a @L[Category:Equipment]{dagger}. This deals
-        [[/roll 1d4]] @L[Damage:Mundane]{mundane damage} + [[/roll 1d4]]
-        @L[Damage:Fire]{fire damage} + [[/roll 1d4]] @L[Damage:Holy]{holy
-        damage} + [[/roll 1d4]] @L[Damage:Fire]{fire} @L[Damage:Holy]{holy
-        damage}.</p></div>            </div>        </div>    </div></div>
+        [[/damage 1d4[mundane] + 1d4[fire] + 1d4[holy] + 1d4[fire holy]]]
+        @L[Core:Damage]{damage}.</p></div>            </div>        </div>   
+        </div></div>
       format: 1
     title:
       level: 1
@@ -264,9 +238,9 @@ pages:
         round-box">            <div class="expandable-content-container
         round-box">                <div class="expandable-sub-box
         expandable-sub-main"><p>If an @L[Category:Attack abilities]{Attack} that
-        normally deals [[/roll 2d4+1d8]] damage gets deboosted, it deals [[/roll
-        2d4]] damage instead.</p></div>            </div>        </div>   
-        </div></div>
+        normally deals [[/damage 2d4 + 1d8]] @L[Core:Damage]{damage} gets
+        deboosted, it deals [[/damage 2d4]] @L[Core:Damage]{damage}
+        instead.</p></div>            </div>        </div>    </div></div>
       format: 1
     title:
       level: 1
@@ -650,12 +624,12 @@ pages:
       identifier: invoke
     text:
       content: >-
-        <p>If an @L[Category:Invoked component abilities]{ability} is invoked
-        then it requires that the creature executing it be wielding a
+        <p>If an @L[Category:Invoked abilities]{ability is invoked} then it
+        requires that the creature executing it be wielding a
         @L[Category:Magelore equipment]{magelore item} and that the
-        @L[Category:Invoked component abilities]{ability} has @L[Category:Verbal
-        component abilities]{verbal} and @L[Category:Somatic component
-        abilities]{somatic} components.</p>
+        @L[Category:Invoked abilities]{ability} has @L[Category:Verbal component
+        abilities]{verbal} and @L[Category:Somatic component abilities]{somatic}
+        components.</p>
       format: 1
     title:
       level: 1
@@ -776,12 +750,12 @@ pages:
         them. On a fail, they are. Resistance saves cannot be failed
         automatically. Only one resistance save can be attempted per
         @L[Core:Interactions]{interaction}. A resistance cannot stop a
-        @L[Keyword:Warded]{warded} @L[Core:Abilities]{ability}.</p><p>If an item
-        is resistant to something (such as if it is
-        @L[Property:Durable]{durable}) and it is being @L[Keyword:Using]{used},
-        then the save is made with its @L[Keyword:Using]{user's}
-        @L[Core:Proficiency Bonus]{proficiency bonus}. Otherwise, it is made
-        without a @L[Core:Proficiency Bonus]{proficiency bonus}.</p>
+        @L[Keyword:Warded]{warded} @L[Core:Abilities]{ability}.If an item is
+        resistant to something (such as if it is @L[Property:Durable]{durable})
+        and it is being @L[Keyword:Using]{used}, then the save is made with its
+        @L[Keyword:Using]{user's} @L[Core:Proficiency Bonus]{proficiency bonus}.
+        Otherwise, it is made without a @L[Core:Proficiency Bonus]{proficiency
+        bonus}.</p>
       format: 1
     title:
       level: 1
@@ -835,8 +809,8 @@ pages:
       identifier: unblockable
     text:
       content: >-
-        <p>If an attack is <b>unblockable</b> ("UB"), it is @L[Keyword:AV0]{AV0}
-        and cannot be @L[Core:Block Interaction]{blocked}.</p>
+        <p>If an attack is <b>unblockable</b> ("UB"), it is @L[Keyword:Armor
+        Voiding]{AV0} and cannot be @L[Core:Block Interaction]{blocked}.</p>
       format: 1
     title:
       level: 1
@@ -890,7 +864,7 @@ pages:
         would be intended (wearing a ring on their finger, wielding a sword in
         their hand, and so on) or in some way that would be just as effective
         (using a sword in a prehensile tail instead of their hand), then they
-        are considered to be "using" the item.</p>
+        are considered to be "<b>using</b>" the item.</p>
       format: 1
     title:
       level: 1
@@ -994,6 +968,33 @@ pages:
         @L[Keyword:Resistance]{resisted}. This applies to all
         @L[Keyword:Resistance]{resistances} in an
         @L[Core:Interactions]{interaction chain}.</p>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+  - _id: armorVoiding0000
+    _key: '!journal.pages!keyword000000000.armorVoiding0000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.10.67
+    flags:
+      teriock:
+        journalIcon: ms-info
+    name: Armor Voiding
+    system:
+      identifier: armor-voiding
+    text:
+      content: >-
+        <p>If an @L[Core:Attack Interaction]{attack} is <b>armor voiding</b>
+        ("AV0"), it has a +2 to hit. This doesn't stack. If an @L[Core:Attack
+        Interaction]{attack} would be AV0 for multiple reasons, it still only
+        has a +2 to hit.</p>
       format: 1
     title:
       level: 1

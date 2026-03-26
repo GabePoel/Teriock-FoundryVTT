@@ -4,7 +4,7 @@ declare global {
       /** <base> Transformation */
       transformation: {
         /** <base> Transformed token art */
-        img: string | null;
+        img: Teriock.System.ImageString | null;
         /** <schema> */
         primary: ID<TeriockConsequence> | null;
         /** <base> */

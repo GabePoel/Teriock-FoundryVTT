@@ -32,9 +32,10 @@ pages:
         Penalty]{AP}</td><td>@L[Core:Attack Penalty]{Attack
         Penalty}</td><td>Yes</td></tr><tr><td>@L[Core:Armor
         Class]{AV}</td><td>@L[Core:Armor Class]{Armor
-        value}</td><td>Yes</td></tr><tr><td>@L[Keyword:AV0]{AV0}</td><td>This
-        once meant "armor value equals zero", but now it just means
-        "@L[Keyword:AV0]{AV0}".</td><td>No</td></tr><tr><td>@L[Core:Death
+        value}</td><td>Yes</td></tr><tr><td>@L[Keyword:Armor
+        Voiding]{AV0}</td><td>This once meant "armor value equals zero", but now
+        it stands for "@L[Keyword:Armor Voiding]{armor
+        voiding}".</td><td>No</td></tr><tr><td>@L[Core:Death
         Bag]{DI}</td><td>@L[Core:Death Bag]{Divine
         Intervention}</td><td>No</td></tr><tr><td>@L[Core:Block
         Interaction]{BV}</td><td>@L[Core:Block Interaction]{Block
@@ -106,7 +107,7 @@ pages:
         Online, everything a creature can do is determined by its
         @L[Category:Abilities]{abilities}. These may be granted by the
         creature's species type, their @L[Category:Classes]{classes}, magic
-        items they use, or other @L[Category:Traits]{traits} of theirs. By
+        items they use, or other @L[Category:Stats]{stats} of theirs. By
         default, every creature is able to use any @L[Category:Basic
         abilities]{basic abilities} so long as they meet whatever conditions are
         specified for the given @L[Category:Basic abilities]{basic
@@ -665,7 +666,10 @@ pages:
         with a -3 penalty to hit. If they make a third attack with the
         @L[Equipment:Longsword]{longsword} or the @L[Equipment:Dagger]{dagger}
         in the same turn, that attack has a -4 penalty to
-        hit.</p></div>            </div>        </div>    </div></div>
+        hit.</p></div>            </div>        </div>    </div></div><img
+        class="interaction-routine"
+        src="systems/teriock/src/assets/interaction-routines/complete-attack-block-interaction.svg"
+        />
       format: 1
     title:
       level: 1
@@ -1149,7 +1153,10 @@ pages:
         successful or unsuccessful block are described in the "On success" and
         "On fail" section of the @L[Category:Block abilities]{ability} that's
         used. For a @L[Ability:Basic Block]{Basic Block}, a successful block
-        causes the attacking effect to @L[Core:Fizzles]{fizzle}.</p>
+        causes the attacking effect to @L[Core:Fizzles]{fizzle}.</p><img
+        class="interaction-routine"
+        src="systems/teriock/src/assets/interaction-routines/complete-attack-block-interaction.svg"
+        />
       format: 1
     title:
       level: 1
@@ -2560,7 +2567,9 @@ pages:
         DC depends on the creature using the @L[Core:Abilities]{ability}. If
         they're @L[Core:Proficiency Bonus]{proficient} in the ability, then the
         save DC is 10 + @L[Core:Proficiency Bonus]{P}. If not, then it's just
-        10.</p>
+        10.</p><img class="interaction-routine"
+        src="systems/teriock/src/assets/interaction-routines/complete-feat-interaction.svg"
+        />
       format: 1
     title:
       level: 1
@@ -3062,7 +3071,7 @@ pages:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.58
+      systemVersion: 0.10.67
     flags:
       teriock:
         journalIcon: ms-neurology
@@ -3273,57 +3282,36 @@ pages:
         described in the "On success" and "On fail" section of the
         @L[Category:Block abilities]{ability} that's used. For a
         @L[Ability:Basic Block]{Basic Block}, a successful block causes the
-        attacking effect to @L[Core:Fizzles]{fizzle}.</p><div
-        class="ext-mermaid" data-mermaid="{&quot;content&quot;:&quot;flowchart
-        TD\nbs[[&amp;quot;Block Interaction
-        Begins&amp;quot;]]\nbm{{&amp;quot;Block
-        Check&amp;quot;}}\nor((Other\\nResponses))\nf([Effect
-        Fizzles])\na([Effect Applies])\n\nbs --&amp;gt; bm\nbm --
-        &amp;quot;Block Succeeds&amp;quot; --&amp;gt; f\nbm -- &amp;quot;Block
-        Fails&amp;quot; --&amp;gt; or\nor -- &amp;quot;Other Responses
-        Succeed&amp;quot; --&amp;gt; f\nor -- &amp;quot;Other Responses
-        Fail&amp;quot; --&amp;gt;
-        a&quot;,&quot;config&quot;:{&quot;theme&quot;:&quot;forest&quot;}}"><div
-        class="mermaid-dots"></div></div><h3>Feat Interaction</h3><p>The feat
-        interaction (or "feat save interaction") is used whenever a target would
-        have the chance to respond to an @L[Core:Abilities]{ability} that
-        doesn't hit them physically (such as area of effect abilities like
-        @L[Category:Aura delivery abilities]{auras}). Any
-        @L[Core:Abilities]{ability} using the feat interaction has a "Saving
-        feature" section which describes which @L[Core:Attributes]{attribute}
-        the target must use to make the save. They then add two times that
-        @L[Core:Attributes]{attribute}. For instance, if an ability requires a
-        "feat of strength" to make the save, then the target will roll [[/roll
-        1d20]] + (2 × @L[Core:STR]{STR}). If they are @L[Core:Proficiency
-        Bonus]{proficient} in the attribute they are saving with, they will add
-        their @L[Core:Proficiency Bonus]{proficiency bonus} to the roll as well.
-        If the roll is equal to or greater than the save DC then the save
-        succeeds. If the roll is less than the save DC then the save fails. The
-        consequence of a successful or unsuccessful save are described in the
-        "On success" and "On fail" section of the @L[Core:Abilities]{ability}
-        that's used. Some feats may also be able to "go critical" if the save is
-        a natural 1.</p><p>The save DC depends on the creature using the
-        @L[Core:Abilities]{ability}. If they're @L[Core:Proficiency
-        Bonus]{proficient} in the ability, then the save DC is 10 +
-        @L[Core:Proficiency Bonus]{P}. If not, then it's just 10.</p><div
-        class="ext-mermaid" data-mermaid="{&quot;content&quot;:&quot;flowchart
-        TD\nsi[&amp;quot;Feat Interaction Begins&amp;quot;]\nst{{&amp;quot;Feat
-        Save&amp;quot;}}\nsc(&amp;quot;Critical
-        Fail?&amp;quot;)\nsf[\/&amp;quot;Effect Goes
-        Critical&amp;quot;\/]\niq((&amp;quot;Responses&amp;quot;))\nf([&amp;quot;Effect
-        Fizzles&amp;quot;])\na([&amp;quot;Effect Applies&amp;quot;])\n\nsi
-        --&amp;gt; st\nst -- &amp;quot;Feat Succeeds&amp;quot; --&amp;gt; f\nst
-        -- &amp;quot;Feat Fails&amp;quot; --&amp;gt; sc\nsc --
-        &amp;quot;Yes&amp;quot; --&amp;gt; sf\nsc -- &amp;quot;No&amp;quot;
-        --&amp;gt; iq\nsf --&amp;gt; iq\niq -- &amp;quot;Responses
-        Succeed&amp;quot; --&amp;gt; f\niq -- &amp;quot;Responses Fail&amp;quot;
-        --&amp;gt;
-        a&quot;,&quot;config&quot;:{&quot;theme&quot;:&quot;forest&quot;}}"><div
-        class="mermaid-dots"></div></div><h3>Manifest Interaction</h3><p>The
-        final interaction is the manifest Interaction. It's by far the simplest
-        and is used whenever an effect "just happens". There's no built in way
-        to deal with a manifest, only responses like
-        @L[Keyword:Resistance]{resistances} and
+        attacking effect to @L[Core:Fizzles]{fizzle}.</p><img
+        class="interaction-routine"
+        src="systems/teriock/src/assets/interaction-routines/block-interaction.svg"
+        /><h3>Feat Interaction</h3><p>The feat interaction (or "feat save
+        interaction") is used whenever a target would have the chance to respond
+        to an @L[Core:Abilities]{ability} that doesn't hit them physically (such
+        as area of effect abilities like @L[Category:Aura delivery
+        abilities]{auras}). Any @L[Core:Abilities]{ability} using the feat
+        interaction has a "Saving feature" section which describes which
+        @L[Core:Attributes]{attribute} the target must use to make the save.
+        They then add two times that @L[Core:Attributes]{attribute}. For
+        instance, if an ability requires a "feat of strength" to make the save,
+        then the target will roll [[/roll 1d20]] + (2 × @L[Core:STR]{STR}). If
+        they are @L[Core:Proficiency Bonus]{proficient} in the attribute they
+        are saving with, they will add their @L[Core:Proficiency
+        Bonus]{proficiency bonus} to the roll as well. If the roll is equal to
+        or greater than the save DC then the save succeeds. If the roll is less
+        than the save DC then the save fails. The consequence of a successful or
+        unsuccessful save are described in the "On success" and "On fail"
+        section of the @L[Core:Abilities]{ability} that's used. Some feats may
+        also be able to "go critical" if the save is a natural 1.</p><p>The save
+        DC depends on the creature using the @L[Core:Abilities]{ability}. If
+        they're @L[Core:Proficiency Bonus]{proficient} in the ability, then the
+        save DC is 10 + @L[Core:Proficiency Bonus]{P}. If not, then it's just
+        10.</p><img class="interaction-routine"
+        src="systems/teriock/src/assets/interaction-routines/feat-interaction.svg"
+        /><h3>Manifest Interaction</h3><p>The final interaction is the manifest
+        Interaction. It's by far the simplest and is used whenever an effect
+        "just happens". There's no built in way to deal with a manifest, only
+        responses like @L[Keyword:Resistance]{resistances} and
         @L[Keyword:Immunity]{immunities}.</p><div class="ext-mermaid"
         data-mermaid="{&quot;content&quot;:&quot;flowchart
         TD\nmi[&amp;quot;Manifest Interaction
@@ -3355,7 +3343,14 @@ pages:
         through immunities.</p><h2>Order of Operations</h2><p>As a rule of
         thumb, the basic rules of Interactions happen first, followed by
         Immunities, then Resistances. In case it's needed, the complete
-        interaction routines are provided below.</p>
+        interaction routines are provided below.</p><img
+        class="interaction-routine"
+        src="systems/teriock/src/assets/interaction-routines/complete-attack-block-interaction.svg"
+        /><img class="interaction-routine"
+        src="systems/teriock/src/assets/interaction-routines/complete-feat-interaction.svg"
+        /><img class="interaction-routine"
+        src="systems/teriock/src/assets/interaction-routines/complete-manifest-interaction.svg"
+        />
       format: 1
     title:
       level: 1
@@ -3877,7 +3872,9 @@ pages:
         simplest and is used whenever an effect "just happens". There's no built
         in way to deal with a manifest, only responses like
         @L[Keyword:Resistance]{resistances} and
-        @L[Keyword:Immunity]{immunities}.</p>
+        @L[Keyword:Immunity]{immunities}.</p><img class="interaction-routine"
+        src="systems/teriock/src/assets/interaction-routines/complete-manifest-interaction.svg"
+        />
       format: 1
     title:
       level: 1
@@ -3987,7 +3984,7 @@ pages:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.58
+      systemVersion: 0.10.67
     flags:
       teriock:
         journalIcon: ms-directions-run
@@ -4297,7 +4294,7 @@ pages:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.58
+      systemVersion: 0.10.67
     flags:
       teriock:
         journalIcon: ms-visibility
@@ -4427,7 +4424,7 @@ pages:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.58
+      systemVersion: 0.10.67
     flags:
       teriock:
         journalIcon: ms-self-improvement
@@ -5194,7 +5191,7 @@ pages:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.58
+      systemVersion: 0.10.67
     flags:
       teriock:
         journalIcon: ms-domino-mask
@@ -5328,7 +5325,7 @@ pages:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.58
+      systemVersion: 0.10.67
     flags:
       teriock:
         journalIcon: ms-exercise
@@ -5531,7 +5528,7 @@ pages:
     system:
       identifier: style-bonus
     text:
-      content: "<p>A <b>style bonus</b> (SB) is a +1 bonus to hit that @L[Core:Attack Interaction]{attacks} can gain when done in a certain way. Many @L[Category:Weapons]{weapons} have criteria in which they get SB. If an @L[Core:Attack Interaction]{attack} would have SB from multiple sources, it still only gets a +1 bonus to hit. However, SB stacks with other bonuses, such as those granted by @L[Core:Proficiency Bonus]{proficiency} or @L[Keyword:AV0]{AV0}.</p><table class=\"wikitable sortable\"><tbody><tr><th>Style</th><th>When it grants SB</th><th>What gets it</th></tr><tr><td>@L[Property:Blunt Force Fighting Style]{Blunt Force Fighting Style}</td><td>@L[Category:Attack abilities]{Attacking} with a @L[Category:Knockout effects]{knockout effect}.</td><td><div>@L[Equipment:Battle Staff]{Battle Staff},\_@L[Equipment:Rod]{Rod},\_@L[Equipment:Short Staff]{Short Staff}</div></td></tr><tr><td>@L[Property:Charging Fighting Style]{Charging Fighting Style}</td><td>@L[Category:Attack abilities]{Attacking} a creature you moved at least 5 feet towards this @L[Core:Turns]{turn}.</td><td><div>@L[Body:Bump]{Bump},\_@L[Body:Colossal Horn]{Colossal Horn},\_@L[Body:Goring Horn]{Goring Horn},\_@L[Body:Horn]{Horn},\_@L[Body:Piercing Horn]{Piercing Horn},\_@L[Body:Stabbing Horn]{Stabbing Horn}</div></td></tr><tr><td>@L[Property:Gladiator Fighting Style]{Gladiator Fighting Style}</td><td>@L[Category:Attack abilities]{Attacking} a @L[Condition:Prone]{prone}, @L[Condition:Snared]{snared}, @L[Condition:Frightened]{frightened}, @L[Condition:Hacked]{hacked}, or @L[Condition:Goaded]{goaded} creature.</td><td><div>@L[Equipment:Boulder]{Boulder},\_@L[Equipment:Halberd Axe]{Halberd Axe},\_@L[Equipment:Pickaxe]{Pickaxe},\_@L[Equipment:Tall Axe]{Tall Axe},\_@L[Equipment:Throwing Axe]{Throwing Axe},\_@L[Equipment:War Hammer]{War Hammer}</div></td></tr><tr><td>@L[Property:Great Kenjutsu Fighting Style]{Great Kenjutsu Fighting Style}</td><td>@L[Category:Attack abilities]{Attacking} a creature smaller than you on another creature's @L[Core:Turns]{turn}.</td><td><div>@L[Equipment:Ōdachi]{Ōdachi}</div></td></tr><tr><td>@L[Property:Great Swordsman Fighting Style]{Great Swordsman Fighting Style}</td><td>@L[Category:Attack abilities]{Attacking} a creature smaller than you for the first time on your @L[Core:Turns]{turn}.</td><td><div>@L[Equipment:Claymore]{Claymore}</div></td></tr><tr><td>@L[Property:Javelinier Fighting Style]{Javelinier Fighting Style}</td><td>@L[Category:Attack abilities]{Attacking} with a @L[Property:Thrown]{thrown} @L[Core:Attack Interaction]{attack}.</td><td><div>@L[Equipment:Javelin]{Javelin}</div></td></tr><tr><td>@L[Property:Juttejutsu Fighting Style]{Juttejutsu Fighting Style}</td><td>@L[Category:Attack abilities]{Attacking} a creature you've @L[Category:Block abilities]{blocked} since the end of your last @L[Core:Turns]{turn}.</td><td><div>@L[Equipment:Jitte]{Jitte}</div></td></tr><tr><td>@L[Property:Kenjutsu Fighting Style]{Kenjutsu Fighting Style}</td><td>@L[Category:Attack abilities]{Attacking} on another creature's @L[Core:Turns]{turn}.</td><td><div>@L[Equipment:Katana]{Katana},\_@L[Equipment:Ninjatu]{Ninjatu},\_@L[Equipment:Wakizashi]{Wakizashi}</div></td></tr><tr><td>@L[Property:Knife Fighting Style]{Knife Fighting Style}</td><td>@L[Category:Attack abilities]{Attacking} on your @L[Core:Turns]{turn} while @L[Condition:Hidden]{hidden}.</td><td><div>@L[Equipment:Dagger]{Dagger},\_@L[Equipment:Knife]{Knife}</div></td></tr><tr><td>@L[Property:Kunai Fighting Style]{Kunai Fighting Style}</td><td>@L[Category:Attack abilities]{Attacking} if this was sheathed at the start of your @L[Core:Turns]{turn}.</td><td><div>@L[Equipment:Kunai]{Kunai}</div></td></tr><tr><td>@L[Property:Phalanx Fighting Style]{Phalanx Fighting Style}</td><td>@L[Category:Attack abilities]{Attacking} a creature if you have an ally using a @L[Category:Shields]{shield} directly between you and your target.</td><td><div>@L[Equipment:Spear]{Spear}</div></td></tr><tr><td>@L[Property:Quickshot Fighting Style]{Quickshot Fighting Style}</td><td>@L[Category:Attack abilities]{Attacking} on your @L[Core:Turns]{turn} if you had three actions remaining prior to making this @L[Category:Attack abilities]{attack}.</td><td><div>@L[Equipment:Blowgun]{Blowgun},\_@L[Equipment:Pistol]{Pistol},\_@L[Equipment:Shortbow]{Shortbow}</div></td></tr><tr><td>@L[Property:Savage Fighting Style]{Savage Fighting Style}</td><td>@L[Category:Attack abilities]{Attacking} a @L[Condition:Prone]{prone}, @L[Condition:Snared]{snared}, @L[Condition:Frightened]{frightened}, @L[Condition:Suffocating]{suffocating}, or @L[Condition:Immobilized]{immobilized} creature.</td><td><div>@L[Body:Air Tendril]{Air Tendril},\_@L[Body:Beak]{Beak},\_@L[Equipment:Boomerang]{Boomerang},\_@L[Equipment:Brass Knuckles]{Brass Knuckles},\_@L[Equipment:Chain]{Chain},\_@L[Body:Claw]{Claw},\_@L[Equipment:Crowbar]{Crowbar},\_@L[Body:Crushing Beak]{Crushing Beak},\_@L[Body:Crushing Jaw]{Crushing Jaw},\_@L[Body:Devouring Beak]{Devouring Beak},\_@L[Body:Devouring Maw]{Devouring Maw},\_@L[Body:Earth Tendril]{Earth Tendril},\_@L[Body:Fanged Jaw]{Fanged Jaw},\_@L[Body:Ferocious Beak]{Ferocious Beak},\_@L[Body:Ferocious Jaw]{Ferocious Jaw},\_@L[Body:Fire Tendril]{Fire Tendril},\_@L[Equipment:Glove Claw]{Glove Claw},\_@L[Equipment:Hammer]{Hammer},\_@L[Equipment:Hook Hand]{Hook Hand},\_@L[Body:Jaw]{Jaw},\_@L[Body:Mouth]{Mouth},\_@L[Body:Nipper]{Nipper},\_@L[Equipment:Nunchucks]{Nunchucks},\_@L[Body:Paw]{Paw},\_@L[Body:Pecker]{Pecker},\_@L[Body:Pincer]{Pincer},\_@L[Equipment:Pipe]{Pipe},\_@L[Body:Prehensile Claw]{Prehensile Claw},\_@L[Body:Prehensile Rending Claw]{Prehensile Rending Claw},\_@L[Body:Prehensile Ripping Claw]{Prehensile Ripping Claw},\_@L[Body:Prehensile Savage Claw]{Prehensile Savage Claw},\_@L[Body:Prehensile Sharp Claw]{Prehensile Sharp Claw},\_@L[Body:Rending Claw]{Rending Claw},\_@L[Body:Rending Pincer]{Rending Pincer},\_@L[Body:Ripping Claw]{Ripping Claw},\_@L[Body:Ripping Pincer]{Ripping Pincer},\_@L[Body:Savage Claw]{Savage Claw},\_@L[Body:Savage Pincer]{Savage Pincer},\_@L[Equipment:Saw]{Saw},\_@L[Equipment:Scythe]{Scythe},\_@L[Body:Shadow Tendril]{Shadow Tendril},\_@L[Body:Sharp Beak]{Sharp Beak},\_@L[Body:Sharp Claw]{Sharp Claw},\_@L[Body:Sharp Pincer]{Sharp Pincer},\_@L[Equipment:Sickle]{Sickle},\_@L[Body:Water Tendril]{Water Tendril}</div></td></tr><tr><td>@L[Property:Sniper Fighting Style]{Sniper Fighting Style}</td><td>@L[Category:Attack abilities]{Attacking} on your @L[Core:Turns]{turn} if you have not @L[Ability:Move]{moved} since the end of your last @L[Core:Turns]{turn} and will have no actions remaining after this @L[Category:Attack abilities]{attack}.</td><td><div>@L[Equipment:Crossbow]{Crossbow},\_@L[Equipment:Longbow]{Longbow}</div></td></tr><tr><td>@L[Property:Swordsman Fighting Style]{Swordsman Fighting Style}</td><td>@L[Category:Attack abilities]{Attacking} for the first time on your @L[Core:Turns]{turn}.</td><td><div>@L[Equipment:Broadsword]{Broadsword},\_@L[Equipment:Cutlass]{Cutlass},\_@L[Equipment:Longsword]{Longsword},\_@L[Equipment:Saber]{Saber},\_@L[Equipment:Scimitar]{Scimitar},\_@L[Equipment:Shortsword]{Shortsword}</div></td></tr><tr><td>@L[Property:Trident Fighting Style]{Trident Fighting Style}</td><td>@L[Category:Attack abilities]{Attacking} from or into the water.</td><td><div>@L[Equipment:Trident]{Trident}</div></td></tr><tr><td>@L[Property:Wraparound Fighting Style]{Wraparound Fighting Style}</td><td>@L[Category:Attack abilities]{Attacking} a creature with a @L[Category:Shields]{shield}.</td><td><div>@L[Body:Colossal Stinger]{Colossal Stinger},\_@L[Body:Colossal Tail]{Colossal Tail},\_@L[Body:Crushing Stinger]{Crushing Stinger},\_@L[Body:Crushing Tail]{Crushing Tail},\_@L[Body:Crushing Tentacle]{Crushing Tentacle},\_@L[Body:Crushing Vine]{Crushing Vine},\_@L[Body:Enormous Vine]{Enormous Vine},\_@L[Body:Ferocious Tail]{Ferocious Tail},\_@L[Body:Grasping Tentacle]{Grasping Tentacle},\_@L[Body:Grasping Vine]{Grasping Vine},\_@L[Equipment:Long Flail]{Long Flail},\_@L[Body:Mighty Tail]{Mighty Tail},\_@L[Equipment:Net]{Net},\_@L[Body:Piercing Stinger]{Piercing Stinger},\_@L[Body:Prehensile Colossal Tail]{Prehensile Colossal Tail},\_@L[Body:Prehensile Crushing Tail]{Prehensile Crushing Tail},\_@L[Body:Prehensile Ferocious Tail]{Prehensile Ferocious Tail},\_@L[Body:Prehensile Mighty Tail]{Prehensile Mighty Tail},\_@L[Body:Prehensile Swinging Tail]{Prehensile Swinging Tail},\_@L[Body:Prehensile Tail]{Prehensile Tail},\_@L[Body:Protruding Stinger]{Protruding Stinger},\_@L[Equipment:Rope]{Rope},\_@L[Equipment:Sail]{Sail},\_@L[Equipment:Short Flail]{Short Flail},\_@L[Body:Stinger]{Stinger},\_@L[Body:Swinging Tail]{Swinging Tail},\_@L[Body:Swinging Trunk]{Swinging Trunk},\_@L[Body:Tail]{Tail},\_@L[Body:Tentacle]{Tentacle},\_@L[Body:Thorny Vine]{Thorny Vine},\_@L[Body:Thrashing Vine]{Thrashing Vine},\_@L[Body:Titanic Tentacle]{Titanic Tentacle},\_@L[Body:Trunk]{Trunk},\_@L[Body:Vine]{Vine},\_@L[Body:Wriggling Tentacle]{Wriggling Tentacle},\_@L[Body:Writhing Tentacle]{Writhing Tentacle}</div></td></tr></tbody></table>"
+      content: "<p>A <b>style bonus</b> (SB) is a +1 bonus to hit that @L[Core:Attack Interaction]{attacks} can gain when done in a certain way. Many @L[Category:Weapons]{weapons} have criteria in which they get SB. If an @L[Core:Attack Interaction]{attack} would have SB from multiple sources, it still only gets a +1 bonus to hit. However, SB stacks with other bonuses, such as those granted by @L[Core:Proficiency Bonus]{proficiency} or @L[Keyword:Armor Voiding]{AV0}.</p><table class=\"wikitable sortable\"><tbody><tr><th>Style</th><th>When it grants SB</th><th>What gets it</th></tr><tr><td>@L[Property:Blunt Force Fighting Style]{Blunt Force Fighting Style}</td><td>@L[Category:Attack abilities]{Attacking} with a @L[Category:Knockout effects]{knockout effect}.</td><td><div>@L[Equipment:Battle Staff]{Battle Staff},\_@L[Equipment:Rod]{Rod},\_@L[Equipment:Short Staff]{Short Staff}</div></td></tr><tr><td>@L[Property:Charging Fighting Style]{Charging Fighting Style}</td><td>@L[Category:Attack abilities]{Attacking} a creature you moved at least 5 feet towards this @L[Core:Turns]{turn}.</td><td><div>@L[Body:Bump]{Bump},\_@L[Body:Colossal Horn]{Colossal Horn},\_@L[Body:Goring Horn]{Goring Horn},\_@L[Body:Horn]{Horn},\_@L[Body:Piercing Horn]{Piercing Horn},\_@L[Body:Stabbing Horn]{Stabbing Horn}</div></td></tr><tr><td>@L[Property:Gladiator Fighting Style]{Gladiator Fighting Style}</td><td>@L[Category:Attack abilities]{Attacking} a @L[Condition:Prone]{prone}, @L[Condition:Snared]{snared}, @L[Condition:Frightened]{frightened}, @L[Condition:Hacked]{hacked}, or @L[Condition:Goaded]{goaded} creature.</td><td><div>@L[Equipment:Boulder]{Boulder},\_@L[Equipment:Halberd Axe]{Halberd Axe},\_@L[Equipment:Pickaxe]{Pickaxe},\_@L[Equipment:Tall Axe]{Tall Axe},\_@L[Equipment:Throwing Axe]{Throwing Axe},\_@L[Equipment:War Hammer]{War Hammer}</div></td></tr><tr><td>@L[Property:Great Kenjutsu Fighting Style]{Great Kenjutsu Fighting Style}</td><td>@L[Category:Attack abilities]{Attacking} a creature smaller than you on another creature's @L[Core:Turns]{turn}.</td><td><div>@L[Equipment:Ōdachi]{Ōdachi}</div></td></tr><tr><td>@L[Property:Great Swordsman Fighting Style]{Great Swordsman Fighting Style}</td><td>@L[Category:Attack abilities]{Attacking} a creature smaller than you for the first time on your @L[Core:Turns]{turn}.</td><td><div>@L[Equipment:Claymore]{Claymore}</div></td></tr><tr><td>@L[Property:Javelinier Fighting Style]{Javelinier Fighting Style}</td><td>@L[Category:Attack abilities]{Attacking} with a @L[Property:Thrown]{thrown} @L[Core:Attack Interaction]{attack}.</td><td><div>@L[Equipment:Javelin]{Javelin}</div></td></tr><tr><td>@L[Property:Juttejutsu Fighting Style]{Juttejutsu Fighting Style}</td><td>@L[Category:Attack abilities]{Attacking} a creature you've @L[Category:Block abilities]{blocked} since the end of your last @L[Core:Turns]{turn}.</td><td><div>@L[Equipment:Jitte]{Jitte}</div></td></tr><tr><td>@L[Property:Kenjutsu Fighting Style]{Kenjutsu Fighting Style}</td><td>@L[Category:Attack abilities]{Attacking} on another creature's @L[Core:Turns]{turn}.</td><td><div>@L[Equipment:Katana]{Katana},\_@L[Equipment:Ninjatu]{Ninjatu},\_@L[Equipment:Wakizashi]{Wakizashi}</div></td></tr><tr><td>@L[Property:Knife Fighting Style]{Knife Fighting Style}</td><td>@L[Category:Attack abilities]{Attacking} on your @L[Core:Turns]{turn} while @L[Condition:Hidden]{hidden}.</td><td><div>@L[Equipment:Dagger]{Dagger},\_@L[Equipment:Knife]{Knife}</div></td></tr><tr><td>@L[Property:Kunai Fighting Style]{Kunai Fighting Style}</td><td>@L[Category:Attack abilities]{Attacking} if this was sheathed at the start of your @L[Core:Turns]{turn}.</td><td><div>@L[Equipment:Kunai]{Kunai}</div></td></tr><tr><td>@L[Property:Phalanx Fighting Style]{Phalanx Fighting Style}</td><td>@L[Category:Attack abilities]{Attacking} a creature if you have an ally using a @L[Category:Shields]{shield} directly between you and your target.</td><td><div>@L[Equipment:Spear]{Spear}</div></td></tr><tr><td>@L[Property:Quickshot Fighting Style]{Quickshot Fighting Style}</td><td>@L[Category:Attack abilities]{Attacking} on your @L[Core:Turns]{turn} if you had three actions remaining prior to making this @L[Category:Attack abilities]{attack}.</td><td><div>@L[Equipment:Blowgun]{Blowgun},\_@L[Equipment:Pistol]{Pistol},\_@L[Equipment:Shortbow]{Shortbow}</div></td></tr><tr><td>@L[Property:Savage Fighting Style]{Savage Fighting Style}</td><td>@L[Category:Attack abilities]{Attacking} a @L[Condition:Prone]{prone}, @L[Condition:Snared]{snared}, @L[Condition:Frightened]{frightened}, @L[Condition:Suffocating]{suffocating}, or @L[Condition:Immobilized]{immobilized} creature.</td><td><div>@L[Body:Air Tendril]{Air Tendril},\_@L[Body:Beak]{Beak},\_@L[Equipment:Boomerang]{Boomerang},\_@L[Equipment:Brass Knuckles]{Brass Knuckles},\_@L[Equipment:Chain]{Chain},\_@L[Body:Claw]{Claw},\_@L[Equipment:Crowbar]{Crowbar},\_@L[Body:Crushing Beak]{Crushing Beak},\_@L[Body:Crushing Jaw]{Crushing Jaw},\_@L[Body:Devouring Beak]{Devouring Beak},\_@L[Body:Devouring Maw]{Devouring Maw},\_@L[Body:Earth Tendril]{Earth Tendril},\_@L[Body:Fanged Jaw]{Fanged Jaw},\_@L[Body:Ferocious Beak]{Ferocious Beak},\_@L[Body:Ferocious Jaw]{Ferocious Jaw},\_@L[Body:Fire Tendril]{Fire Tendril},\_@L[Equipment:Glove Claw]{Glove Claw},\_@L[Equipment:Hammer]{Hammer},\_@L[Equipment:Hook Hand]{Hook Hand},\_@L[Body:Jaw]{Jaw},\_@L[Body:Mouth]{Mouth},\_@L[Body:Nipper]{Nipper},\_@L[Equipment:Nunchucks]{Nunchucks},\_@L[Body:Paw]{Paw},\_@L[Body:Pecker]{Pecker},\_@L[Body:Pincer]{Pincer},\_@L[Equipment:Pipe]{Pipe},\_@L[Body:Prehensile Claw]{Prehensile Claw},\_@L[Body:Prehensile Rending Claw]{Prehensile Rending Claw},\_@L[Body:Prehensile Ripping Claw]{Prehensile Ripping Claw},\_@L[Body:Prehensile Savage Claw]{Prehensile Savage Claw},\_@L[Body:Prehensile Sharp Claw]{Prehensile Sharp Claw},\_@L[Body:Rending Claw]{Rending Claw},\_@L[Body:Rending Pincer]{Rending Pincer},\_@L[Body:Ripping Claw]{Ripping Claw},\_@L[Body:Ripping Pincer]{Ripping Pincer},\_@L[Body:Savage Claw]{Savage Claw},\_@L[Body:Savage Pincer]{Savage Pincer},\_@L[Equipment:Saw]{Saw},\_@L[Equipment:Scythe]{Scythe},\_@L[Body:Shadow Tendril]{Shadow Tendril},\_@L[Body:Sharp Beak]{Sharp Beak},\_@L[Body:Sharp Claw]{Sharp Claw},\_@L[Body:Sharp Pincer]{Sharp Pincer},\_@L[Equipment:Sickle]{Sickle},\_@L[Body:Water Tendril]{Water Tendril}</div></td></tr><tr><td>@L[Property:Sniper Fighting Style]{Sniper Fighting Style}</td><td>@L[Category:Attack abilities]{Attacking} on your @L[Core:Turns]{turn} if you have not @L[Ability:Move]{moved} since the end of your last @L[Core:Turns]{turn} and will have no actions remaining after this @L[Category:Attack abilities]{attack}.</td><td><div>@L[Equipment:Crossbow]{Crossbow},\_@L[Equipment:Longbow]{Longbow}</div></td></tr><tr><td>@L[Property:Swordsman Fighting Style]{Swordsman Fighting Style}</td><td>@L[Category:Attack abilities]{Attacking} for the first time on your @L[Core:Turns]{turn}.</td><td><div>@L[Equipment:Broadsword]{Broadsword},\_@L[Equipment:Cutlass]{Cutlass},\_@L[Equipment:Longsword]{Longsword},\_@L[Equipment:Saber]{Saber},\_@L[Equipment:Scimitar]{Scimitar},\_@L[Equipment:Shortsword]{Shortsword}</div></td></tr><tr><td>@L[Property:Trident Fighting Style]{Trident Fighting Style}</td><td>@L[Category:Attack abilities]{Attacking} from or into the water.</td><td><div>@L[Equipment:Trident]{Trident}</div></td></tr><tr><td>@L[Property:Wraparound Fighting Style]{Wraparound Fighting Style}</td><td>@L[Category:Attack abilities]{Attacking} a creature with a @L[Category:Shields]{shield}.</td><td><div>@L[Body:Colossal Stinger]{Colossal Stinger},\_@L[Body:Colossal Tail]{Colossal Tail},\_@L[Body:Crushing Stinger]{Crushing Stinger},\_@L[Body:Crushing Tail]{Crushing Tail},\_@L[Body:Crushing Tentacle]{Crushing Tentacle},\_@L[Body:Crushing Vine]{Crushing Vine},\_@L[Body:Enormous Vine]{Enormous Vine},\_@L[Body:Ferocious Tail]{Ferocious Tail},\_@L[Body:Grasping Tentacle]{Grasping Tentacle},\_@L[Body:Grasping Vine]{Grasping Vine},\_@L[Equipment:Long Flail]{Long Flail},\_@L[Body:Mighty Tail]{Mighty Tail},\_@L[Equipment:Net]{Net},\_@L[Body:Piercing Stinger]{Piercing Stinger},\_@L[Body:Prehensile Colossal Tail]{Prehensile Colossal Tail},\_@L[Body:Prehensile Crushing Tail]{Prehensile Crushing Tail},\_@L[Body:Prehensile Ferocious Tail]{Prehensile Ferocious Tail},\_@L[Body:Prehensile Mighty Tail]{Prehensile Mighty Tail},\_@L[Body:Prehensile Swinging Tail]{Prehensile Swinging Tail},\_@L[Body:Prehensile Tail]{Prehensile Tail},\_@L[Body:Protruding Stinger]{Protruding Stinger},\_@L[Equipment:Rope]{Rope},\_@L[Equipment:Sail]{Sail},\_@L[Equipment:Short Flail]{Short Flail},\_@L[Body:Stinger]{Stinger},\_@L[Body:Swinging Tail]{Swinging Tail},\_@L[Body:Swinging Trunk]{Swinging Trunk},\_@L[Body:Tail]{Tail},\_@L[Body:Tentacle]{Tentacle},\_@L[Body:Thorny Vine]{Thorny Vine},\_@L[Body:Thrashing Vine]{Thrashing Vine},\_@L[Body:Titanic Tentacle]{Titanic Tentacle},\_@L[Body:Trunk]{Trunk},\_@L[Body:Vine]{Vine},\_@L[Body:Wriggling Tentacle]{Wriggling Tentacle},\_@L[Body:Writhing Tentacle]{Writhing Tentacle}</div></td></tr></tbody></table>"
       format: 1
     title:
       level: 1
@@ -6313,6 +6310,34 @@ pages:
         lb.</td><td>32768 lb.</td><td>34328
         lb.</td></tr><tr><td>30</td><td>34328 lb.</td><td>35937
         lb.</td><td>37595 lb.</td></tr></tbody></table>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+  - _id: competence000000
+    _key: '!journal.pages!core000000000000.competence000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.10.67
+    flags:
+      teriock:
+        journalIcon: ms-info
+    name: Competence
+    system:
+      identifier: competence
+    text:
+      content: >-
+        <p>A creature's competence in something is a shorthand for whether they
+        have @L[Core:Proficiency Bonus]{proficiency} or @L[Core:Fluency
+        Bonus]{fluency} in that thing. For instance, their competence in some
+        @L[Category:Abilities]{ability} could be "fluent", "proficient", or
+        "none".</p>
       format: 1
     title:
       level: 1

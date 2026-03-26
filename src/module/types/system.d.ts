@@ -106,6 +106,11 @@ declare global {
     export type ImageString = string;
 
     /**
+     * A string that represents a document's identifier.
+     */
+    export type IdentifierString = string;
+
+    /**
      * Options that control how a single document is resolved.
      */
     export type ResolveDocumentOptions = {

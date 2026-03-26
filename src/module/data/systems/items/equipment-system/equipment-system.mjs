@@ -1,7 +1,12 @@
 import { EquipmentExecution } from "../../../../executions/document-executions/_module.mjs";
 import { formulaExists } from "../../../../helpers/formula.mjs";
-import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
-import { mix } from "../../../../helpers/utils.mjs";
+import {
+  dotJoin,
+  toCamelCase,
+  toKebabCase,
+} from "../../../../helpers/string.mjs";
+import { inferNameFromIdentifier, mix } from "../../../../helpers/utils.mjs";
+import { IdentifierField } from "../../../fields/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
 import * as parts from "./parts/_module.mjs";
@@ -76,20 +81,22 @@ export default class EquipmentSystem extends mix(
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      consumable: new fields.BooleanField({
-        initial: false,
-      }),
-      equipmentType: new fields.StringField({
-        initial: "",
-      }),
+      consumable: new fields.BooleanField({ initial: false }),
+      equipmentType: new IdentifierField({ initial: "" }),
       powerLevel: new fields.StringField({
         choices: TERIOCK.options.equipment.powerLevelShort,
         initial: "mundane",
       }),
-      price: new fields.NumberField({
-        initial: 0,
-      }),
+      price: new fields.NumberField({ initial: 0 }),
     });
+  }
+
+  /** @inheritDoc */
+  static migrateData(data) {
+    if (data.equipmentType) {
+      data.equipmentType = toKebabCase(data.equipmentType);
+    }
+    return super.migrateData(data);
   }
 
   /** @inheritDoc */
@@ -147,6 +154,11 @@ export default class EquipmentSystem extends mix(
       parts.text,
     ]);
     return parts;
+  }
+
+  /** @inheritDoc */
+  get wikiPage() {
+    return `Equipment:${inferNameFromIdentifier(this.equipmentType)}`;
   }
 
   /** @inheritDoc */
