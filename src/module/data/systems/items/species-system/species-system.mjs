@@ -82,7 +82,7 @@ export default class SpeciesSystem extends mix(
         { initial: ["humanoid"] },
       ),
       transformationLevel: new fields.StringField({
-        choices: TERIOCK.options.effect.transformationLevel,
+        choices: TERIOCK.options.transformation.level,
         initial: null,
         nullable: true,
         required: false,
@@ -125,8 +125,7 @@ export default class SpeciesSystem extends mix(
     });
     if (this.transformationLevel) {
       tags.push({
-        label:
-          TERIOCK.options.effect.transformationLevel[this.transformationLevel],
+        label: TERIOCK.options.transformation.level[this.transformationLevel],
         tooltip: "TERIOCK.SYSTEMS.Species.FIELDS.transformationLevel.label",
       });
     }

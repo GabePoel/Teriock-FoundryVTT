@@ -308,7 +308,7 @@ export default function AbilityExecutionChatPart(Base) {
         if (transformation.enabled) {
           const a =
             /** @type {TransformationAutomation} */ transformationAutomations[0];
-          Object.assign(transformation, a.transformation);
+          Object.assign(transformation, a.toObject().transformation);
         }
         return transformation;
       }

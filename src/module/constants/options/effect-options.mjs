@@ -21,11 +21,6 @@ export const effectOptions = {
     0: "TERIOCK.CHANGES.Mode.boost",
     ...foundryChangeMode,
   },
-  transformationLevel: {
-    minor: "TERIOCK.EFFECTS.TransformationLevel.minor",
-    full: "TERIOCK.EFFECTS.TransformationLevel.full",
-    greater: "TERIOCK.EFFECTS.TransformationLevel.greater",
-  },
   illusionLevel: {
     minor: "TERIOCK.EFFECTS.IllusionLevel.minor",
     full: "TERIOCK.EFFECTS.IllusionLevel.full",
@@ -68,6 +63,5 @@ export const effectOptions = {
 preLocalize("options.effect.simpleChangeMode");
 preLocalize("options.effect.foundryChangeMode");
 preLocalize("options.effect.changeMode");
-preLocalize("options.effect.transformationLevel");
 preLocalize("options.effect.illusionLevel");
 preLocalize("options.effect.form", { key: "name" });

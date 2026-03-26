@@ -29,20 +29,16 @@ export default function TransformationSystemMixin(Base) {
 
       /**
        * @returns {{
-       *  stashedEquipment: TeriockEquipment[],
-       *  disabledEffects: AnyActiveEffect[],
-       *  disabledItems: AnyItem[],
-       *  disabledHpDiceItems: AnyItem[],
-       *  disabledMpDiceItems: AnyItem[]
+       *  disabledEffects: ID<AnyActiveEffect>[],
+       *  disabledItems: ID<AnyItem>[],
+       *  disabledHpDiceItems: ID<AnyItem>[],
+       *  disabledMpDiceItems: ID<AnyItem>[]
        * }}
        */
       get #flagMap() {
         const hasItem = (id) => this.actor.items.has(id);
         const hasEffect = (id) => this.actor.effects.has(id);
         return {
-          stashedEquipment: (
-            this.parent.getFlag("teriock", "stashedEquipment") ?? []
-          ).filter(hasItem),
           disabledEffects: (
             this.parent.getFlag("teriock", "disabledEffects") ?? []
           ).filter(hasEffect),
@@ -99,12 +95,35 @@ export default function TransformationSystemMixin(Base) {
       }
 
       /**
+       * Add a document toggle to the update data array.
+       * @param {Record<ID<AnyChildDocument>, object>} updatesById
+       * @param {DocumentCollection} collection
+       * @param {ID<AnyChildDocument>} id
+       * @param {boolean} value
+       */
+      #applyToggle(updatesById, collection, id, value) {
+        const toggle =
+          TERIOCK.options.transformation.suppress[collection.get(id)?.type]
+            ?.path;
+        if (toggle) {
+          if (!updatesById[id]) updatesById[id] = { _id: id };
+          updatesById[id][toggle] = value;
+        }
+      }
+
+      /**
        * Filter an array of documents to include only the ones that aren't disabled.
        * @param {AnyChildDocument[]} docs
        * @return {AnyChildDocument[]}
        */
       #enabledFilter(docs) {
-        return docs.filter((d) => !d.disabled);
+        return docs.filter(
+          (d) =>
+            !foundry.utils.getProperty(
+              d,
+              TERIOCK.options.transformation.suppress[d.type]?.path,
+            ) && d.dependee !== this.parent,
+        );
       }
 
       /**
@@ -117,38 +136,38 @@ export default function TransformationSystemMixin(Base) {
       }
 
       /**
-       * Apply transformation suppression and stat-dice updates using flags built by {@link _buildTransformationFlags}.
+       * Toggle all documents that this would force on/off to some state.
+       * @param {boolean} value
        * @returns {Promise<void>}
        */
-      async _applyTransformationUpdates() {
+      async #toggleDocuments(value) {
         if (!this.actor) return;
         const fm = this.#flagMap;
 
-        /** @type {Record<string, object>} */
+        /** @type {Record<ID<AnyItem>, object>} */
         const itemUpdatesById = {};
-        for (const id of fm.stashedEquipment) {
-          if (!itemUpdatesById[id]) itemUpdatesById[id] = { _id: id };
-          itemUpdatesById[id]["system.stashed"] = true;
-        }
+        /** @type {Record<ID<AnyActiveEffect>, object>} */
+        const effectUpdatesById = {};
         for (const id of fm.disabledItems) {
-          if (!itemUpdatesById[id]) itemUpdatesById[id] = { _id: id };
-          itemUpdatesById[id]["system.disabled"] = true;
+          this.#applyToggle(itemUpdatesById, this.actor.items, id, value);
+        }
+        for (const id of fm.disabledEffects) {
+          this.#applyToggle(effectUpdatesById, this.actor.effects, id, value);
         }
         for (const id of fm.disabledHpDiceItems) {
           if (!itemUpdatesById[id]) itemUpdatesById[id] = { _id: id };
-          itemUpdatesById[id]["system.statDice.hp.disabled"] = true;
+          itemUpdatesById[id]["system.statDice.hp.disabled"] = value;
         }
         for (const id of fm.disabledMpDiceItems) {
           if (!itemUpdatesById[id]) itemUpdatesById[id] = { _id: id };
-          itemUpdatesById[id]["system.statDice.mp.disabled"] = true;
+          itemUpdatesById[id]["system.statDice.mp.disabled"] = value;
         }
-        const itemUpdates = Object.values(itemUpdatesById);
-
-        const effectUpdates = fm.disabledEffects.map((id) => ({
-          _id: id,
-          disabled: true,
-        }));
-
+        const itemUpdates = Object.values(itemUpdatesById).filter((u) =>
+          this.actor.items.get(u._id),
+        );
+        const effectUpdates = Object.values(effectUpdatesById).filter((u) =>
+          this.actor.effects.get(u._id),
+        );
         if (itemUpdates.length) {
           await this.actor.updateEmbeddedDocuments("Item", itemUpdates);
         }
@@ -161,59 +180,51 @@ export default function TransformationSystemMixin(Base) {
       }
 
       /**
+       * Apply transformation suppression and stat-dice updates using flags built by {@link _buildTransformationFlags}.
+       * @returns {Promise<void>}
+       */
+      async _applyTransformationUpdates() {
+        if (!this.actor) return;
+        await this.#toggleDocuments(true);
+      }
+
+      /**
        * Build the flags relevant for applying and undoing this transformation.
        * @returns {object}
        */
       _buildTransformationFlags() {
-        const stashedEquipment = [];
         let disabledEffects = [];
         let disabledItems = [];
         const disabledHpDiceItems = [];
         const disabledMpDiceItems = [];
-
         const typeMap = this.actor.children.typeMap;
-        if (this.transformation.suppression.equipment) {
-          stashedEquipment.push(
-            ...(typeMap.equipment?.filter((e) => !e.system.stashed) || []),
-          );
+        for (const t of this.transformation.suppress) {
+          if (TERIOCK.options.document[t].doc === "ActiveEffect") {
+            disabledEffects.push(...this.#enabledFilter(typeMap[t] || []));
+          }
+          if (TERIOCK.options.document[t].doc === "Item") {
+            disabledItems.push(...this.#enabledFilter(typeMap[t] || []));
+          }
         }
-        if (this.transformation.suppression.fluencies) {
-          disabledEffects.push(...this.#enabledFilter(typeMap.fluency || []));
-        }
-        disabledEffects = disabledEffects.filter(
-          (e) => e.dependee !== this.parent,
-        );
-
-        if (this.transformation.suppression.bodyParts) {
-          disabledItems.push(...this.#enabledFilter(typeMap.body || []));
-        }
-        if (this.transformation.suppression.ranks) {
-          disabledItems.push(...this.#enabledFilter(typeMap.rank || []));
-        }
-        disabledItems.push(...this.#enabledFilter(typeMap.species || []));
-        disabledItems = disabledItems.filter((i) => i.dependee !== this.parent);
-
         const statItems = this.actor.items.contents.filter(
           (i) => i.system.metadata.stats,
         );
-        if (this.transformation.resetHp) {
+        if (this.transformation.reset.has("mp")) {
           disabledHpDiceItems.push(
             ...statItems.filter((i) => !i.system.statDice.hp.disabled),
           );
         }
-        if (this.transformation.resetMp) {
+        if (this.transformation.reset.has("hp")) {
           disabledMpDiceItems.push(
             ...statItems.filter((i) => !i.system.statDice.mp.disabled),
           );
         }
-
         return {
           teriock: {
             disabledEffects: this.#toIds(disabledEffects),
             disabledHpDiceItems: this.#toIds(disabledHpDiceItems),
             disabledItems: this.#toIds(disabledItems),
             disabledMpDiceItems: this.#toIds(disabledMpDiceItems),
-            stashedEquipment: this.#toIds(stashedEquipment),
             preTransformHp: this.actor.system.hp.value,
             preTransformMp: this.actor.system.mp.value,
           },
@@ -238,10 +249,10 @@ export default function TransformationSystemMixin(Base) {
         };
         // This high number is included because just setting to `system.hp.max` or `system.mp.max` uses the former
         // values. This requires explicit filtering when rendering numbers on the actor's tokens.
-        if (this.transformation.resetHp) {
+        if (this.transformation.reset.has("hp")) {
           updateData["system.hp.value"] = 99999999;
         }
-        if (this.transformation.resetMp) {
+        if (this.transformation.reset.has("mp")) {
           updateData["system.mp.value"] = 99999999;
         }
         actor.update(updateData);
@@ -274,15 +285,15 @@ export default function TransformationSystemMixin(Base) {
             this._removeTransformationUpdates();
           } else {
             this._applyTransformationUpdates().then(() => {
-              if (this.transformation.resetHp || this.transformation.resetMp) {
+              if (this.transformation.reset.size) {
                 const updateData = {};
-                if (this.transformation.resetHp) {
+                if (this.transformation.reset.has("hp")) {
                   updateData["system.hp.value"] = this.parent.getFlag(
                     "teriock",
                     "transformationHp",
                   );
                 }
-                if (this.transformation.resetMp) {
+                if (this.transformation.reset.has("mp")) {
                   updateData["system.mp.value"] = this.parent.getFlag(
                     "teriock",
                     "transformationMp",
@@ -364,59 +375,22 @@ export default function TransformationSystemMixin(Base) {
       }
 
       /**
-       * Revert transformation suppression and stat-dice updates using flags from
-       * _buildTransformationFlags. Unstashes equipment, re-enables effects/items,
-       * and re-enables hp/mp stat dice.
+       * Remove transformation suppression and stat-dice updates using flags built by {@link _buildTransformationFlags}.
        * @returns {Promise<void>}
        */
       async _removeTransformationUpdates() {
         if (!this.actor) return;
-        const fm = this.#flagMap;
+        await this.#toggleDocuments(false);
 
-        /** @type {Record<string, object>} */
-        const itemUpdatesById = {};
-        for (const id of fm.stashedEquipment) {
-          if (!itemUpdatesById[id]) itemUpdatesById[id] = { _id: id };
-          itemUpdatesById[id]["system.stashed"] = false;
-        }
-        for (const id of fm.disabledItems) {
-          if (!itemUpdatesById[id]) itemUpdatesById[id] = { _id: id };
-          itemUpdatesById[id]["system.disabled"] = false;
-        }
-        for (const id of fm.disabledHpDiceItems) {
-          if (!itemUpdatesById[id]) itemUpdatesById[id] = { _id: id };
-          itemUpdatesById[id]["system.statDice.hp.disabled"] = false;
-        }
-        for (const id of fm.disabledMpDiceItems) {
-          if (!itemUpdatesById[id]) itemUpdatesById[id] = { _id: id };
-          itemUpdatesById[id]["system.statDice.mp.disabled"] = false;
-        }
-        const itemUpdates = Object.values(itemUpdatesById);
-
-        const effectUpdates = fm.disabledEffects.map((id) => ({
-          _id: id,
-          disabled: false,
-        }));
-
-        if (itemUpdates.length) {
-          await this.actor.updateEmbeddedDocuments("Item", itemUpdates);
-        }
-        if (effectUpdates.length) {
-          await this.actor.updateEmbeddedDocuments(
-            "ActiveEffect",
-            effectUpdates,
-          );
-        }
-
-        if (this.transformation.resetHp || this.transformation.resetMp) {
+        if (this.transformation.reset.size) {
           const updateData = {};
-          if (this.transformation.resetHp) {
+          if (this.transformation.reset.has("hp")) {
             updateData["system.hp.value"] = this.parent.getFlag(
               "teriock",
               "preTransformHp",
             );
           }
-          if (this.transformation.resetMp) {
+          if (this.transformation.reset.has("mp")) {
             updateData["system.mp.value"] = this.parent.getFlag(
               "teriock",
               "preTransformMp",

@@ -1,9 +1,5 @@
 import { preLocalize } from "../../helpers/localization.mjs";
-import {
-  docSort,
-  effectSort,
-  rankSort
-} from "../../helpers/sort.mjs";
+import { docSort, effectSort, rankSort } from "../../helpers/sort.mjs";
 import { icons } from "../display/icons.mjs";
 
 /**

@@ -25,6 +25,7 @@ import { takeOptions } from "./take-options.mjs";
 import { targetOptions } from "./target-options.mjs";
 import { timeOptions } from "./time-options.mjs";
 import { tradecraftOptions } from "./tradecraft-options.mjs";
+import { transformationOptions } from "./transformation-options.mjs";
 
 const options = {
   ability: abilityOptions,
@@ -54,6 +55,7 @@ const options = {
   target: targetOptions,
   time: timeOptions,
   tradecraft: tradecraftOptions,
+  transformation: transformationOptions,
 };
 
 export default options;

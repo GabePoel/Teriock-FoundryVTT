@@ -34,12 +34,8 @@ export default class TransformationAutomation extends ExternalDocumentsAutomatio
       ...super._formPaths,
       "transformation.level",
       "transformation.img",
-      "transformation.resetHp",
-      "transformation.resetMp",
-      "transformation.suppression.bodyParts",
-      "transformation.suppression.equipment",
-      "transformation.suppression.fluencies",
-      "transformation.suppression.ranks",
+      "transformation.reset",
+      "transformation.suppress",
     ];
   }
 

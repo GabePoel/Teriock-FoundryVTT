@@ -1,7 +1,9 @@
 import { abilityOptions } from "../../../constants/options/ability-options.mjs";
 import { competenceOptions } from "../../../constants/options/competence-options.mjs";
+import { documentOptions } from "../../../constants/options/document-options.mjs";
+import { transformationOptions } from "../../../constants/options/transformation-options.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
-import { sortObject } from "../../../helpers/utils.mjs";
+import { choiceMap, sortObject } from "../../../helpers/utils.mjs";
 import {
   EnhancedNumberField,
   EnhancedStringField,
@@ -52,67 +54,53 @@ export function combatExpirationSourceTypeField() {
 export function transformationField(options = {}) {
   const { implementation = false } = options;
   const schema = {
-    image: new FilePathField({
+    img: new FilePathField({
       categories: ["IMAGE"],
-      hint: "TERIOCK.SCHEMA.Transformation.image.hint",
+      hint: "TERIOCK.SCHEMA.Transformation.img.hint",
       initial: null,
-      label: "TERIOCK.SCHEMA.Transformation.image.label",
+      label: "TERIOCK.SCHEMA.Transformation.img.label",
       nullable: true,
       required: false,
       trim: true,
     }),
     level: new StringField({
-      choices: TERIOCK.options.effect.transformationLevel,
+      choices: TERIOCK.options.transformation.level,
       hint: "TERIOCK.SCHEMA.Transformation.level.hint",
       initial: "minor",
       label: "TERIOCK.SCHEMA.Transformation.level.label",
       nullable: false,
       required: false,
     }),
-    resetHp: new BooleanField({
-      hint: "TERIOCK.SCHEMA.Transformation.resetHp.hint",
-      label: "TERIOCK.SCHEMA.Transformation.resetHp.label",
-      initial: true,
-      required: false,
-      nullable: false,
-    }),
-    resetMp: new BooleanField({
-      hint: "TERIOCK.SCHEMA.Transformation.resetMp.hint",
-      label: "TERIOCK.SCHEMA.Transformation.resetMp.label",
-      initial: false,
-      required: false,
-      nullable: false,
-    }),
-    suppression: new SchemaField({
-      bodyParts: new BooleanField({
-        hint: "TERIOCK.SCHEMA.Transformation.suppression.bodyParts.hint",
-        initial: true,
-        label: "TERIOCK.SCHEMA.Transformation.suppression.bodyParts.label",
-        nullable: false,
-        required: false,
+    reset: new SetField(
+      new StringField({
+        choices: choiceMap(
+          transformationOptions.reset,
+          (k) => TERIOCK.options.cost.primary.keys[k].abbreviation,
+        ),
       }),
-      equipment: new BooleanField({
-        hint: "TERIOCK.SCHEMA.Transformation.suppression.equipment.hint",
-        initial: true,
-        label: "TERIOCK.SCHEMA.Transformation.suppression.equipment.label",
-        nullable: false,
-        required: false,
+      {
+        hint: "TERIOCK.SCHEMA.Transformation.reset.hint",
+        label: "TERIOCK.SCHEMA.Transformation.reset.label",
+        initial: Object.keys(transformationOptions.reset).filter(
+          (k) => transformationOptions.reset[k].initial,
+        ),
+      },
+    ),
+    suppress: new SetField(
+      new StringField({
+        choices: choiceMap(
+          transformationOptions.suppress,
+          (k) => documentOptions[k].name,
+        ),
       }),
-      fluencies: new BooleanField({
-        hint: "TERIOCK.SCHEMA.Transformation.suppression.fluencies.hint",
-        initial: true,
-        label: "TERIOCK.SCHEMA.Transformation.suppression.fluencies.label",
-        nullable: false,
-        required: false,
-      }),
-      ranks: new BooleanField({
-        hint: "TERIOCK.SCHEMA.Transformation.suppression.ranks.hint",
-        initial: true,
-        label: "TERIOCK.SCHEMA.Transformation.suppression.ranks.label",
-        nullable: false,
-        required: false,
-      }),
-    }),
+      {
+        hint: "TERIOCK.SCHEMA.Transformation.suppress.hint",
+        initial: Object.keys(transformationOptions.suppress).filter(
+          (k) => transformationOptions.suppress[k].initial,
+        ),
+        label: "TERIOCK.SCHEMA.Transformation.suppress.label",
+      },
+    ),
   };
   if (implementation) {
     schema.uuids = new SetField(

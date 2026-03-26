@@ -3042,13 +3042,14 @@ effects:
           multi: false
           transformation:
             level: full
-            resetHp: true
-            resetMp: false
-            suppression:
-              bodyParts: true
-              equipment: true
-              fluencies: true
-              ranks: true
+            reset:
+              - hp
+            suppress:
+              - body
+              - equipment
+              - fluency
+              - rank
+              - species
           type: transformation
       class: natureMage
       competence:
@@ -4043,13 +4044,14 @@ effects:
           multi: false
           transformation:
             level: greater
-            resetHp: true
-            resetMp: false
-            suppression:
-              bodyParts: false
-              equipment: false
-              fluencies: true
-              ranks: true
+            reset:
+              - hp
+              - mp
+            suppress:
+              - body
+              - fluency
+              - rank
+              - species
           type: transformation
       class: necromancer
       competence:

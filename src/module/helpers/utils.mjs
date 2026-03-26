@@ -1,5 +1,6 @@
 import { iconStyles } from "../constants/display/_module.mjs";
 import { BaseRoll } from "../dice/rolls/_module.mjs";
+import { localizeChoices } from "./localization.mjs";
 import { toCamelCase, toTitleCase } from "./string.mjs";
 
 /**
@@ -184,6 +185,20 @@ export function sortObject(obj, options = {}) {
  */
 export function objectMap(obj, fn) {
   return Object.fromEntries(Object.entries(obj).map(([k, v]) => [k, fn(v)]));
+}
+
+/**
+ * Map the keys of an object to strings.
+ * @param {Record<string, *>} obj
+ * @param {(string) => string} fn
+ * @param {object} [options]
+ * @param {boolean} [options.localize] - Whether to localize the values of the returned object.
+ * @returns {Record<string, string>}
+ */
+export function choiceMap(obj, fn, options = { localize: true }) {
+  const out = Object.fromEntries(Object.keys(obj).map((k) => [k, fn(k)]));
+  if (options.localize) return localizeChoices(out);
+  return out;
 }
 
 /**

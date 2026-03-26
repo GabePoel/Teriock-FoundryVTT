@@ -1,28 +1,18 @@
 import { TeriockActor } from "../../../documents/_module.mjs";
+import type { transformationOptions } from "../../../constants/options/transformation-options.mjs";
 
 /** <schema> Transformation configuration */
 export type TransformationData = {
   /** <schema> Whether transformation is enabled */
   enabled: boolean;
   /** <schema> Overriding image to apply */
-  img: string;
+  img: Teriock.System.ImageString;
   /** <schema> Level of transformation */
   level: Teriock.Keys.TransformationLevel;
-  /** <schema> Reset HP upon applying transformation */
-  resetHp: boolean;
-  /** <schema> Reset MP upon applying transformation */
-  resetMp: boolean;
-  /** <schema> Select a species to transform into instead of getting all options. */
-  suppression: {
-    /** <schema> Whether to suppress body parts */
-    bodyParts: boolean;
-    /** <schema> Whether to suppress equipment */
-    equipment: boolean;
-    /** <schema> Whether to suppress fluencies */
-    fluencies: boolean;
-    /** <schema> Whether to suppress ranks */
-    ranks: boolean;
-  };
+  /** <schema> Stats this transformation should reset */
+  reset: Set<keyof typeof transformationOptions.reset>;
+  /** <schema> Types of documents this transformation should turn off */
+  suppress: Set<keyof typeof transformationOptions.suppress>;
   /** <schema> UUID of specific species to transform into */
   uuids: UUID<TeriockSpecies>[];
 };
