@@ -137,11 +137,9 @@ export default (Base) => {
        */
       async _onDropJournalEntryPage(_event, dropData) {
         if (game.user.isGM) {
-          const updateData = {
-            "system.gmNotes": dropData.uuid,
-          };
+          const updateData = { "system.gmNotes": dropData.uuid };
           await this.document.update(updateData);
-          return fromUuidSync(dropData.uuid);
+          return fromUuid(dropData.uuid);
         }
       }
 

@@ -1,6 +1,7 @@
 //noinspection RegExpRedundantEscape
 
 import { icons } from "../../constants/display/icons.mjs";
+import { wikiOptions } from "../../constants/options/wiki-options.mjs";
 import {
   commands,
   getInteractionEntryValue,
@@ -14,16 +15,7 @@ import {
   ucFirst,
 } from "../../helpers/string.mjs";
 import { makeIconClass, makeIconElement } from "../../helpers/utils.mjs";
-
-const enricherIcons = {
-  Class: icons.document.rank,
-  Condition: icons.document.condition,
-  Core: icons.document.core,
-  Damage: icons.effect.damage,
-  Drain: icons.effect.drain,
-  Keyword: icons.document.keyword,
-  Tradecraft: icons.document.fluency,
-};
+import { wikiToUuid } from "../../helpers/wiki.mjs";
 
 /**
  * Wiki link enricher. Designed to mimic the `@EMBED` and `@UUID` enrichers as well as the `{{L}}` wiki syntax.
@@ -35,62 +27,33 @@ const wikiLinkEnricher = {
     const pageName = match[1];
     let displayText = match[2];
     const namespace = pageName.split(":")[0];
-    let target = pageName.split(":")[1];
-    if (!displayText) {
-      displayText = target;
-    }
+    let name = pageName.split(":")[1];
+    if (!displayText) displayText = name;
     if (
-      Object.keys(TERIOCK.aliases[namespace.toLowerCase()] || {}).includes(
-        target,
-      )
+      Object.keys(TERIOCK.aliases[namespace.toLowerCase()] || {}).includes(name)
     ) {
-      target = TERIOCK.aliases[namespace.toLowerCase()][target];
+      name = TERIOCK.aliases[namespace.toLowerCase()][name];
     }
     const urlPageName = pageName.replace(/ /g, "_");
     const link = document.createElement("a");
     const address = `https://wiki.teriock.com/index.php/${urlPageName}`;
-    let uuid;
-    let icon = "globe";
-    if (namespace === "Equipment") {
-      uuid = game.teriock.packs.equipment.index.getName(target)?.uuid;
-      icon = uuid ? TERIOCK.options.document.equipment.icon : icon;
-    } else if (namespace === "Creature") {
-      uuid = game.teriock.packs.creatures.index.getName(target)?.uuid;
-      icon = uuid ? TERIOCK.options.document.creature.icon : icon;
-    } else if (namespace === "Ability") {
-      uuid = game.teriock.packs.abilities.index.getName(target)?.uuid;
-      icon = uuid ? TERIOCK.options.document.ability.icon : icon;
-    } else if (namespace === "Property") {
-      uuid = game.teriock.packs.properties.index.getName(target)?.uuid;
-      icon = uuid ? TERIOCK.options.document.property.icon : icon;
-    } else if (namespace === "Body") {
-      uuid = game.teriock.packs.bodyParts.index.getName(target)?.uuid;
-      icon = uuid ? TERIOCK.options.document.body.icon : icon;
-    } else if (
-      [
-        "Keyword",
-        "Core",
-        "Condition",
-        "Damage",
-        "Drain",
-        "Tradecraft",
-        "Class",
-      ].includes(namespace)
-    ) {
-      const compendiumIndex = game.teriock.packs.rules.index.getName(namespace);
-      const compendium = await fromUuid(compendiumIndex.uuid);
-      uuid = compendium.pages.getName(target)?.uuid;
-      icon = uuid ? enricherIcons[namespace] : icon;
-    }
+    const uuid = await wikiToUuid(namespace, name);
+    const icon = wikiOptions.namespaces[namespace]?.icon || icons.ui.wiki;
     if (uuid) {
       const parsed = foundry.utils.parseUuid(uuid);
-      link.dataset.uuid = uuid;
-      link.dataset.id = parsed.id;
-      link.dataset.makeTooltip = "true";
-      link.dataset.wikiAddress = address;
-      link.dataset.wikiContext = "true";
-      link.dataset.teriockContentLink = "true";
+      Object.assign(link.dataset, {
+        id: parsed.id,
+        link: "",
+        makeTooltip: "true",
+        pack: parsed.collection?.collection,
+        teriockContentLink: "true",
+        type: parsed.type,
+        uuid,
+        wikiAddress: address,
+        wikiContext: "true",
+      });
       link.className = "teriock-content-link";
+      link.draggable = true;
     } else {
       link.href = address;
     }

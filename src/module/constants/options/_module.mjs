@@ -27,6 +27,7 @@ import { targetOptions } from "./target-options.mjs";
 import { timeOptions } from "./time-options.mjs";
 import { tradecraftOptions } from "./tradecraft-options.mjs";
 import { transformationOptions } from "./transformation-options.mjs";
+import { wikiOptions } from "./wiki-options.mjs";
 
 const options = {
   ability: abilityOptions,
@@ -58,6 +59,7 @@ const options = {
   time: timeOptions,
   tradecraft: tradecraftOptions,
   transformation: transformationOptions,
+  wiki: wikiOptions,
 };
 
 export default options;

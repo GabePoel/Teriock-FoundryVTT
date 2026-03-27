@@ -230,7 +230,7 @@ export const settings = {
       type: Boolean,
     },
     systemLinks: {
-      default: false,
+      default: true,
       hint: "TERIOCK.SETTINGS.systemLinks.hint",
       name: "TERIOCK.SETTINGS.systemLinks.name",
       scope: "user",
@@ -260,7 +260,7 @@ export const settings = {
   },
   tooltip: {
     systemTooltips: {
-      default: false,
+      default: true,
       hint: "TERIOCK.SETTINGS.systemTooltips.hint",
       name: "TERIOCK.SETTINGS.systemTooltips.name",
       scope: "user",

@@ -208,7 +208,6 @@ export default function ChildSheetMixin(Base) {
                 };
               }),
           );
-        console.log(context.displayFieldButtons);
         context.bars = this._tab === "overview" ? this.constructor.BARS : [];
       }
 
