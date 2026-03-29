@@ -28,6 +28,11 @@ export default function TradecraftExecutionMixin(Base) {
       }
 
       /** @inheritDoc */
+      get executionNames() {
+        return [...super.executionNames, "Tradecraft"];
+      }
+
+      /** @inheritDoc */
       get flavor() {
         if (this.threshold !== undefined) {
           return game.i18n.format("TERIOCK.ROLLS.Tradecraft.thresholded", {

@@ -9,14 +9,6 @@ import BaseDocumentExecution from "../base-document-execution/base-document-exec
 export default class FluencyExecution extends TradecraftExecutionMixin(
   BaseDocumentExecution,
 ) {
-  /** @param {Teriock.Execution.DocumentExecutionOptions} options */
-  constructor(options = {}) {
-    super(options);
-    if (options.fluent === undefined) {
-      this.fluent = true;
-    }
-  }
-
   /** @inheritDoc */
   get tradecraft() {
     return this.source.system.tradecraft;

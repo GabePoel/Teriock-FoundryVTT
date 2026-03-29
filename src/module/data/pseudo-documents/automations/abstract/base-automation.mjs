@@ -9,6 +9,7 @@ const { fields } = foundry.data;
  * @extends {Teriock.Automations.BaseAutomationData}
  * @extends {TypedPseudoDocument}
  * @mixes PropagationData
+ * @property {ID<BaseAutomation>} _id
  */
 export default class BaseAutomation extends PropagationDataMixin(
   TypedPseudoDocument,

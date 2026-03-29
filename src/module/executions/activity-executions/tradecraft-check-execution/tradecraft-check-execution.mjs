@@ -5,6 +5,7 @@ import { TradecraftExecutionMixin } from "../../mixins/_module.mjs";
 /**
  * @extends {BaseExecution}
  * @mixes TradecraftExecution
+ * @property {Teriock.Execution.TradecraftExecutionOptions} options
  */
 export default class TradecraftCheckExecution extends TradecraftExecutionMixin(
   BaseExecution,
@@ -53,14 +54,10 @@ export default class TradecraftCheckExecution extends TradecraftExecutionMixin(
    * @param {Teriock.Execution.TradecraftExecutionOptions} options
    */
   _determineCompetence(options) {
-    if (!this.actor) return;
-    if (options.proficient === undefined) {
-      this.proficient =
-        this.actor.system.tradecrafts[options.tradecraft].competence.proficient;
+    if (this.actor) {
+      this.competence.raw =
+        this.actor.system.tradecrafts[options.tradecraft].competence.value;
     }
-    if (options.fluent === undefined) {
-      this.fluent =
-        this.actor.system.tradecrafts[options.tradecraft].competence.fluent;
-    }
+    super._determineCompetence(options);
   }
 }

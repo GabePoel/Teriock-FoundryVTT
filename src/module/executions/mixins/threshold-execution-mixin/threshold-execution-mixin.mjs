@@ -87,23 +87,11 @@ export default function ThresholdExecutionMixin(Base) {
             condition: this.requiresCompetence,
             field: new fields.EmbeddedDataField(CompetenceModel).fields.raw,
             hint: "TERIOCK.DIALOGS.ThresholdExecutionOptions.FIELDS.competence.hint",
-            value: this.fluent ? 2 : this.proficient ? 1 : 0,
+            value: this.competence.raw,
             label:
               "TERIOCK.DIALOGS.ThresholdExecutionOptions.FIELDS.competence.label",
             name: "competence",
-            update: (v) => {
-              const c = Number(v);
-              if (c === 2) {
-                this.fluent = true;
-                this.proficient = true;
-              } else if (c === 1) {
-                this.fluent = false;
-                this.proficient = true;
-              } else {
-                this.fluent = false;
-                this.proficient = false;
-              }
-            },
+            update: (v) => (this.competence.raw = Number(v)),
           },
           {
             condition: this.hasBonus,

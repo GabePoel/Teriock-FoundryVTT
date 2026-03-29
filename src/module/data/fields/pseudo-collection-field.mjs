@@ -7,7 +7,7 @@ const { TypedObjectField } = foundry.data.fields;
 export default class PseudoCollectionField extends TypedObjectField {
   /**
    * @param {typeof TypedPseudoDocument} model
-   * @param {DataFieldOptions} [options]
+   * @param {DataFieldOptions & Partial<{ collection: typeof TypeCollection}>} [options]
    * @param {Record<string, typeof TypedPseudoDocument>} [options.types]
    * @param {DataFieldContext} [context]
    */
@@ -27,6 +27,7 @@ export default class PseudoCollectionField extends TypedObjectField {
     }
     super(new PseudoTypedSchemaField(types), options, context);
     this.#documentClass = model;
+    this.#collectionClass = options.collection ?? TypeCollection;
   }
 
   /** @inheritDoc */
@@ -35,6 +36,12 @@ export default class PseudoCollectionField extends TypedObjectField {
       validateKey: foundry.data.validators.isValidId,
     });
   }
+
+  /**
+   * The collection class.
+   * @type {typeof TypeCollection}
+   */
+  #collectionClass;
 
   /**
    * The pseudo-document class.
@@ -61,9 +68,9 @@ export default class PseudoCollectionField extends TypedObjectField {
   /** @inheritDoc */
   initialize(value, model, options = {}) {
     const obj = super.initialize(value, model, options);
-    return new TypeCollection(
+    return new this.#collectionClass(
       Object.entries(obj).filter(
-        ([_k, Cls]) => Cls instanceof TypedPseudoDocument,
+        ([_k, inst]) => inst instanceof TypedPseudoDocument,
       ),
     );
   }

@@ -4,6 +4,7 @@ const { fields } = foundry.data;
 
 /**
  * @property {AccessData} parent
+ * @property {ID<PseudoDocument>} _id
  */
 export default class PseudoDocument extends EmbeddedDataModel {
   /**
@@ -80,7 +81,7 @@ export default class PseudoDocument extends EmbeddedDataModel {
 
   /**
    * The ID of this pseudo-document.
-   * @returns {string}
+   * @returns {ID<PseudoDocument>}
    */
   get id() {
     return this._id;

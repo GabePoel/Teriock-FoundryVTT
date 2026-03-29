@@ -86,13 +86,16 @@ export default function ChildDocumentMixin(Base) {
       async chatImage() {
         const img = this.img;
         if (img) {
-          await TeriockChatMessage.create({
-            content: `
+          await TeriockChatMessage.create(
+            {
+              content: `
             <div class="timage" data-src="${img}" style="display: flex; justify-content: center;">
               <img src="${img}" alt="${this.name}" class="teriock-image">
             </div>`,
-            speaker: TeriockChatMessage.getSpeaker({ actor: this.actor }),
-          });
+              speaker: TeriockChatMessage.getSpeaker({ actor: this.actor }),
+            },
+            { defaultMode: true },
+          );
         }
       }
 

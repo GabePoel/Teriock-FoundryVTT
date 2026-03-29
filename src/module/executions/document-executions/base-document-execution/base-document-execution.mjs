@@ -14,14 +14,9 @@ export default class BaseDocumentExecution extends BaseExecution {
   constructor(options = {}) {
     super(options);
     this._source = options.source;
-    if (options.actor === undefined) {
-      this._actor = options.source.actor || null;
-    }
-    this.automations = this.source.system.automations.contents;
+    this._actor = options.actor ?? this.source.actor ?? game.actors.default;
+    this._automations = this.source.system.automations.contents || [];
   }
-
-  /** @type {BaseAutomation[]} */
-  automations;
 
   /** @type {AnyChildDocument} */
   _source;
@@ -32,17 +27,6 @@ export default class BaseDocumentExecution extends BaseExecution {
    */
   get source() {
     return this._source;
-  }
-
-  /**
-   * The automations that are active.
-   * @returns {BaseAutomation[]}
-   */
-  get activeAutomations() {
-    let competence = 0;
-    if (this.proficient) competence = 1;
-    if (this.fluent) competence = 2;
-    return this.automations.filter((a) => a.competencies.has(competence));
   }
 
   /** @inheritDoc */
@@ -133,44 +117,22 @@ export default class BaseDocumentExecution extends BaseExecution {
     return this.source.toPanel();
   }
 
-  /** @inheritDoc */
-  async _createChatMessage() {
-    await this._fireTriggerMacros("preExecution", { awaitFire: true });
-    await super._createChatMessage();
-  }
-
   /**
    * @inheritDoc
    * @param {Teriock.Execution.DocumentExecutionOptions} options
    */
   _determineCompetence(options) {
-    if (options.proficient === undefined) {
-      this.proficient = options.source.system.competence.proficient;
-    }
-    if (options.fluent === undefined) {
-      this.fluent = options.source.system.competence.fluent;
-    }
-  }
-
-  /**
-   * Execute all connected macros that match a given trigger.
-   * @param {Teriock.System.Trigger} trigger
-   * @param {Partial<Teriock.System.TriggerScope>} [scope]
-   * @returns {Promise<void>}
-   */
-  async _fireTriggerMacros(trigger, scope = {}) {
-    const automations = this.activeAutomations;
-    await Promise.all(
-      automations.map((a) =>
-        a.fireTrigger(trigger, this.getScope({ ...scope, trigger })),
-      ),
-    );
+    this.competence.raw = options.source?.system.competence.value || 0;
+    super._determineCompetence(options);
   }
 
   /** @inheritDoc */
-  async _postExecute() {
-    await this._fireTriggerMacros("execution");
-    await super._postExecute();
+  async execute() {
+    if (!this.source) {
+      console.error("Document executions must have a source document.");
+      return;
+    }
+    await super.execute();
   }
 
   /** @inheritDoc*/

@@ -22,6 +22,11 @@ export default class EquipmentExecution extends ArmamentExecution {
   }
 
   /** @inheritDoc */
+  get executionNames() {
+    return [...super.executionNames, "Equipment"];
+  }
+
+  /** @inheritDoc */
   async _buildSourcePanel() {
     if (this.secret) {
       return {

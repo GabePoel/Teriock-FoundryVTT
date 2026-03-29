@@ -1,9 +1,13 @@
 import {
   boostDialog,
-  selectDocumentsDialog,
+  selectDocumentsDialog
 } from "../../../applications/dialogs/_module.mjs";
 import { HarmRoll } from "../../../dice/rolls/_module.mjs";
-import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
+import { AutomationCollection } from "../../../documents/collections/_module.mjs";
+import {
+  addFormula,
+  formulaExists
+} from "../../../helpers/formula.mjs";
 import BaseDocumentExecution from "../base-document-execution/base-document-execution.mjs";
 
 /**
@@ -47,12 +51,17 @@ export default class ArmamentExecution extends BaseDocumentExecution {
   }
 
   /** @inheritDoc */
-  get activeAutomations() {
-    const automations = super.activeAutomations;
-    for (const property of this.source.properties) {
-      automations.push(...property.system.activeAutomations);
+  get automations() {
+    const automations = [...this._automations];
+    for (const p of this.source.properties) {
+      automations.push(...p.system.automations.contents);
     }
-    return automations;
+    return new AutomationCollection(automations.map((a) => [a.id, a]));
+  }
+
+  /** @inheritDoc */
+  get executionNames() {
+    return [...super.executionNames, "Armament"];
   }
 
   /** @inheritDoc */
@@ -130,7 +139,6 @@ export default class ArmamentExecution extends BaseDocumentExecution {
       }
     }
     await super._postExecute();
-    await this.actor?.hookCall("useArmament", { scope: this.getScope() });
   }
 
   /** @inheritDoc */

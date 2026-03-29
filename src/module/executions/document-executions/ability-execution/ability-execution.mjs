@@ -69,15 +69,6 @@ export default class AbilityExecution extends AbilityExecutionChatPart(
   }
 
   /** @inheritDoc */
-  async _postExecute() {
-    await super._postExecute();
-    await this.actor?.hookCall("useAbility", { scope: this.getScope() });
-    if (this.source?.system.spell) {
-      await this.actor?.hookCall("castSpell", { scope: this.getScope() });
-    }
-  }
-
-  /** @inheritDoc */
   async _prepareBaseFormula() {
     if (this.isAttack) {
       await super._prepareBaseFormula();

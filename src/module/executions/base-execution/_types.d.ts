@@ -4,10 +4,9 @@ declare global {
   namespace Teriock.Execution {
     export type BaseExecutionOptions = {
       actor?: TeriockActor;
+      competence?: Teriock.System.CompetenceLevel;
       event?: PointerEvent;
-      fluent?: boolean;
       formula?: string;
-      proficient?: boolean;
       rollData?: object;
       rollOptions?: object;
     };

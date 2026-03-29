@@ -1,3 +1,4 @@
+import { PiercingModel } from "../../../../data/models/_module.mjs";
 import { addFormula, formulaExists } from "../../../../helpers/formula.mjs";
 import { ThresholdExecutionMixin } from "../../../mixins/_module.mjs";
 import BaseDocumentExecution from "../../base-document-execution/base-document-execution.mjs";
@@ -23,7 +24,7 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
       options.sb ??
       !!(this.armament && this.source.system.isContact) *
         (this.actor?.system.offense.sb ?? 0);
-    this.piercing = this.#resolvePiercing(options, sys);
+    this.#determinePiercing(options);
     this.warded = this.#resolveWarded(options, sys);
     this.vitals = this.#resolveVitals(options, sys);
     this.limb = this.#resolveLimb(options, sys);
@@ -45,17 +46,32 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
     }
   }
 
-  /**
-   * @inheritDoc
-   * @returns {BaseAutomation[]}
-   */
+  /** @type {PiercingModel} */
+  piercing = new PiercingModel();
+
+  /** @inheritDoc */
   get activeAutomations() {
-    const automations = /** @type {BaseAutomation[]} */ super.activeAutomations;
-    return automations.filter(
+    return super.activeAutomations.filter(
       (a) =>
         (a.heighten.has(0) && !this.heightened) ||
         (a.heighten.has(1) && this.heightened),
     );
+  }
+
+  /** @returns {boolean} */
+  get canHeighten() {
+    return (
+      this.competence.proficient &&
+      !!this.source.system.heightened &&
+      !this.flags.noHeighten
+    );
+  }
+
+  /** @inheritDoc */
+  get executionNames() {
+    const names = [...super.executionNames, "Ability"];
+    if (this.source.system.spell) names.push("Spell");
+    return names;
   }
 
   /** @inheritDoc */
@@ -148,6 +164,23 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
   }
 
   /**
+   * Resolves piercing by comparing source, armament, and actor offense.
+   * @param {Teriock.Execution.AbilityExecutionOptions} options
+   * @returns {PiercingModel}
+   */
+  #determinePiercing(options) {
+    this.piercing.raw = this.source.system.piercing.raw;
+    if (this.armament && this.source.system.isContact) {
+      this.piercing.raw = Math.max(
+        this.piercing.raw,
+        this.armament.system.piercing.raw,
+        this.actor?.system.offense.piercing.raw || 0,
+      );
+    }
+    if (options.piercing !== undefined) this.piercing.raw = options.piercing;
+  }
+
+  /**
    * Syncs cost options and initializes cost tracking.
    * @param {Teriock.Execution.AbilityExecutionOptions} options
    */
@@ -200,24 +233,6 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
         sys.targets.has("leg") ||
         sys.targets.has("limb"))
     );
-  }
-
-  /**
-   * Resolves piercing by comparing source, armament, and actor offense.
-   * @param {Teriock.Execution.AbilityExecutionOptions} options
-   * @param {AbilitySystem} sys - The source system data.
-   * @returns {PiercingModel}
-   */
-  #resolvePiercing(options, sys) {
-    const piercing = options.piercing?.clone() ?? sys.piercing.clone();
-    if (this.armament && sys.isContact) {
-      piercing.raw = Math.max(
-        piercing.raw,
-        this.armament.system.piercing.raw,
-        this.actor?.system.offense.piercing.raw || 0,
-      );
-    }
-    return piercing;
   }
 
   /**

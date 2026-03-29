@@ -122,7 +122,7 @@ export default class RegainUsesAutomation extends TriggerAutomationMixin(
       speaker: TeriockChatMessage.getSpeaker({ actor: this.actor }),
       system: { panels: [panel] },
     };
-    await TeriockChatMessage.create(messageData);
+    await TeriockChatMessage.create(messageData, { defaultMode: true });
     await this.document.update({
       "system.quantity": Math.clamp(
         this.parent.quantity + roll.total,

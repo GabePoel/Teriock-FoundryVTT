@@ -3,6 +3,8 @@ import { CritAutomation } from "./abstract/_module.mjs";
 import { ExternalDocumentsAutomationMixin } from "./mixins/_module.mjs";
 
 /**
+ * @extends {CritAutomation}
+ * @mixes ExternalDocumentsAutomation
  * @property {TransformationData} transformation
  */
 export default class TransformationAutomation extends ExternalDocumentsAutomationMixin(

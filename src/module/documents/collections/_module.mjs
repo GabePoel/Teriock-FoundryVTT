@@ -9,3 +9,4 @@ export { default as TeriockRollTables } from "./roll-tables.mjs";
 export { default as TeriockScenes } from "./scenes.mjs";
 export { default as TeriockUsers } from "./users.mjs";
 export { default as TypeCollection } from "./type-collection.mjs";
+export { default as AutomationCollection } from "./automation-collection.mjs";

@@ -4,13 +4,13 @@ const triggers = {
   activity: {
     label: "TERIOCK.TRIGGERS.Activity.label",
     choices: {
-      castSpell: "TERIOCK.TRIGGERS.Activity.choices.castSpell",
-      deathBagPull: "TERIOCK.TRIGGERS.Activity.choices.deathBagPull",
+      executeDeathBag: "TERIOCK.TRIGGERS.Activity.choices.deathBagPull",
+      executeAbility: "TERIOCK.TRIGGERS.Activity.choices.useAbility",
+      executeArmament: "TERIOCK.TRIGGERS.Activity.choices.useArmament",
+      executeFeat: "TERIOCK.TRIGGERS.Activity.choices.rollFeatSave",
+      executeSpell: "TERIOCK.TRIGGERS.Activity.choices.castSpell",
+      executeTradecraft: "TERIOCK.TRIGGERS.Activity.choices.rollTradecraft",
       movement: "TERIOCK.TRIGGERS.Activity.choices.movement",
-      rollFeatSave: "TERIOCK.TRIGGERS.Activity.choices.rollFeatSave",
-      rollTradecraft: "TERIOCK.TRIGGERS.Activity.choices.rollTradecraft",
-      useAbility: "TERIOCK.TRIGGERS.Activity.choices.useAbility",
-      useArmament: "TERIOCK.TRIGGERS.Activity.choices.useArmament",
     },
   },
   attunable: {
@@ -54,8 +54,8 @@ const triggers = {
   execution: {
     label: "TERIOCK.TRIGGERS.Execution.label",
     choices: {
-      execution: "TERIOCK.TRIGGERS.Execution.choices.execution",
-      preExecution: "TERIOCK.TRIGGERS.Execution.choices.preExecution",
+      execute: "TERIOCK.TRIGGERS.Execution.choices.execution",
+      preExecute: "TERIOCK.TRIGGERS.Execution.choices.preExecution",
     },
   },
   impact: {

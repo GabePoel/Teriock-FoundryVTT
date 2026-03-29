@@ -207,7 +207,7 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
           ],
         },
       };
-      await TeriockChatMessage.create(chatMessageData);
+      await TeriockChatMessage.create(chatMessageData, { defaultMode: true });
     }
   }
 }

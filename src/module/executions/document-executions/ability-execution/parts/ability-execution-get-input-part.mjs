@@ -165,11 +165,7 @@ export default function AbilityExecutionGetInputPart(Base) {
             this.costs[k] = await this.#determineCost(k);
           }
         }
-        if (
-          this.proficient &&
-          this.source.system.heightened &&
-          !this.flags.noHeighten
-        ) {
+        if (this.canHeighten) {
           const heightenDescription = await TeriockTextEditor.enrichHTML(
             this.source.system.heightened,
             { relativeTo: this.source },
@@ -217,7 +213,7 @@ export default function AbilityExecutionGetInputPart(Base) {
                     );
                   }
                 }
-                if (this.proficient && this.source.system.heightened) {
+                if (this.canHeighten) {
                   this.heightened = Number(
                     button.form.elements.namedItem("heightened").value,
                   );

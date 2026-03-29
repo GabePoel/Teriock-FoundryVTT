@@ -14,6 +14,7 @@ declare global {
         noHp?: boolean;
         noMp?: boolean;
         noTemplate?: boolean;
+        piercing?: Teriock.System.PiercingLevel;
         sb?: boolean;
         source?: TeriockAbility;
         ub?: boolean;
@@ -40,11 +41,6 @@ declare module "./ability-execution-constructor.mjs" {
       noHeighten: boolean;
     };
     heightened: number;
-    piercing: {
-      av0: boolean;
-      ub: boolean;
-      sb: boolean;
-    };
     targets: Set<TeriockToken>;
     vitals: boolean;
     warded: boolean;

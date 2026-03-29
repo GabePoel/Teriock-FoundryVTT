@@ -10,14 +10,18 @@ if (flankingButton) {
     (s) => s.system?.identifier === "snare",
   );
   if (flankingSub) {
-    flankingButton.dataset.bonusSubs = JSON.stringify([flankingSub.uuid]);
+    const children = JSON.stringify([flankingSub.uuid]);
+    flankingButton.dataset.normalChildren = children;
+    flankingButton.dataset.critChildren = children;
     flankingButton.label = game.i18n.format(
       "TERIOCK.COMMANDS.Status.applyNamed",
       { name: flankingSub.name },
     );
   }
   if (snareSub) {
-    snareButton.dataset.bonusSubs = JSON.stringify([snareSub.uuid]);
+    const children = JSON.stringify([snareSub.uuid]);
+    snareButton.dataset.normalChildren = children;
+    snareButton.dataset.critChildren = children;
     snareButton.label = game.i18n.format("TERIOCK.COMMANDS.Status.applyNamed", {
       name: snareSub.name,
     });

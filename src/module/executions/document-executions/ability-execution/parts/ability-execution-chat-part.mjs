@@ -279,7 +279,7 @@ export default function AbilityExecutionChatPart(Base) {
 
       /**
        * @param {boolean} crit
-       * @returns {Teriock.Keys.RollImpact[]}
+       * @returns {Teriock.Keys.Status[]}
        */
       #generateConsequenceStatuses(crit = false) {
         const statusAutomations = this.#getCritAutomations(
@@ -300,14 +300,12 @@ export default function AbilityExecutionChatPart(Base) {
           TransformationAutomation,
           crit,
         );
-        /** @type {Partial<TransformationData>} */
         const transformation = {
           enabled: !!transformationAutomations.length,
           uuids: [],
         };
         if (transformation.enabled) {
-          const a =
-            /** @type {TransformationAutomation} */ transformationAutomations[0];
+          const a = transformationAutomations[0];
           Object.assign(transformation, a.toObject().transformation);
         }
         return transformation;
@@ -316,16 +314,14 @@ export default function AbilityExecutionChatPart(Base) {
       /**
        * Get all active automations of a given type.
        * @template T
-       * @param {T} automation
+       * @param {typeof T} Cls
        * @param {boolean} crit
        * @returns {T[]}
        */
-      #getCritAutomations(automation, crit) {
-        const automations =
-          /** @type {CritAutomation[]} */ this.activeAutomations;
-        return automations.filter(
+      #getCritAutomations(Cls, crit) {
+        return this.activeAutomations.filter(
           (a) =>
-            a.type === automation.TYPE &&
+            a.type === Cls.TYPE &&
             ((crit && a.crit?.has(1)) || (!crit && a.crit?.has(0))),
         );
       }
@@ -433,7 +429,7 @@ export default function AbilityExecutionChatPart(Base) {
             ),
         );
         if (proficientBlock) {
-          if (this.proficient) {
+          if (this.competence.proficient) {
             delete proficientBlock.classes;
           } else {
             proficientBlock.classes = [TERIOCK.display.panel.classes.faded];
@@ -447,7 +443,7 @@ export default function AbilityExecutionChatPart(Base) {
             ),
         );
         if (fluentBlock) {
-          if (this.fluent) {
+          if (this.competence.fluent) {
             delete fluentBlock.classes;
           } else {
             fluentBlock.classes = [TERIOCK.display.panel.classes.faded];

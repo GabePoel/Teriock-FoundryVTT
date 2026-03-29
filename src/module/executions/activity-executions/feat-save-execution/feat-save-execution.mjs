@@ -30,6 +30,11 @@ export default class FeatSaveExecution extends ThresholdExecutionMixin(
   attribute;
 
   /** @inheritDoc */
+  get executionNames() {
+    return [...super.executionNames, "Feat"];
+  }
+
+  /** @inheritDoc */
   get flavor() {
     if (this.threshold !== undefined) {
       return game.i18n.format("TERIOCK.ROLLS.Feat.thresholded", {
@@ -65,14 +70,10 @@ export default class FeatSaveExecution extends ThresholdExecutionMixin(
    * @param {Teriock.Execution.FeatSaveExecutionOptions} options
    */
   _determineCompetence(options) {
-    if (!this.actor) return;
-    if (options.proficient === undefined) {
-      this.proficient =
-        this.actor.system.attributes[options.attribute].competence.proficient;
+    if (this.actor) {
+      this.competence.raw =
+        this.actor.system.attributes[options.attribute].competence.value;
     }
-    if (options.fluent === undefined) {
-      this.fluent =
-        this.actor.system.attributes[options.attribute].competence.fluent;
-    }
+    super._determineCompetence(options);
   }
 }

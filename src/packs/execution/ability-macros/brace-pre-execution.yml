@@ -10,10 +10,10 @@ command: |-
   const execution = scope.execution;
   const dieSize = actor?.flags?.teriockEffect?.braceDieSize || 6;
   let formula = `1d${dieSize}`;
-  if (execution.proficient) {
+  if (execution.competence.proficient) {
     formula = `(1 + @p)d${dieSize}`;
   }
-  if (execution.fluent) {
+  if (execution.competence.fluent) {
     formula = `(1 + @f)d${dieSize}`;
   }
   const button = execution.buttons.find(

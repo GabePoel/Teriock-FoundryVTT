@@ -1,5 +1,7 @@
+import { CompetenceModel } from "../../data/models/_module.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
 import { TeriockChatMessage } from "../../documents/_module.mjs";
+import { AutomationCollection } from "../../documents/collections/_module.mjs";
 import { addFormula, formulaExists } from "../../helpers/formula.mjs";
 
 export default class BaseExecution {
@@ -8,41 +10,26 @@ export default class BaseExecution {
    * @param {Teriock.Execution.BaseExecutionOptions} options
    */
   constructor(options = {}) {
-    const {
-      actor = null,
-      proficient = false,
-      fluent = false,
-      formula = "",
-      rollData = {},
-      rollOptions = {},
-    } = options;
     this.options = options;
-    this._actor = actor;
-    this.formula = formula;
-    this.proficient = proficient;
-    this.fluent = fluent;
-    this._rollData = rollData;
-    this._rollOptions = rollOptions;
+    this._actor = options.actor ?? game.actors.default;
+    this._formula = options.formula ?? "";
+    this._rollData = options.rollData ?? {};
+    this._rollOptions = options.rollOptions ?? {};
     this._determineCompetence(options);
+    options.competence = this.competence.raw;
   }
 
   /** @type {Teriock.UI.HTMLButtonConfig[]} */
   buttons = [];
 
-  /** @type {boolean} */
-  fluent = false;
-
-  /** @type {string} */
-  formula;
+  /** @type {CompetenceModel} */
+  competence = new CompetenceModel();
 
   /** @type {TeriockChatMessage|undefined} */
   message;
 
   /** @type {Teriock.MessageData.MessagePanel[]} */
   panels = [];
-
-  /** @type {boolean} */
-  proficient = false;
 
   /** @type {BaseRoll[]} */
   rolls = [];
@@ -64,22 +51,44 @@ export default class BaseExecution {
   /** @type {AnyActor|null} */
   _actor;
 
-  /**
-   * @returns {AnyActor|null}
-   */
+  /** @returns {AnyActor|null} */
   get actor() {
-    if (this._actor) {
-      return this._actor;
-    } else {
-      return game.actors.default;
+    if (this._actor) return this._actor;
+    return game.actors.default;
+  }
+
+  /** @param {AnyActor|null} actor */
+  set actor(actor) {
+    this._actor = actor;
+  }
+
+  /** @type {BaseAutomation[]} */
+  _automations = [];
+
+  /** @returns {AutomationCollection} */
+  get automations() {
+    return new AutomationCollection(this._automations.map((a) => [a.id, a]));
+  }
+
+  /** @param {AutomationCollection | BaseAutomation[]} automations */
+  set automations(automations) {
+    if (Array.isArray(automations)) this._automations = automations;
+    if (automations instanceof AutomationCollection) {
+      this._automations = automations.contents;
     }
   }
 
-  /**
-   * @param {AnyActor|null} actor
-   */
-  set actor(actor) {
-    this._actor = actor;
+  /** @type {Teriock.System.FormulaString} */
+  _formula;
+
+  /** @returns {Teriock.System.FormulaString} */
+  get formula() {
+    return this._formula;
+  }
+
+  /** @param {Teriock.System.FormulaString} formula */
+  set formula(formula) {
+    this._formula = formula;
   }
 
   /** @type {object} */
@@ -112,6 +121,16 @@ export default class BaseExecution {
   }
 
   /**
+   * The automations that are active.
+   * @returns {BaseAutomation[]}
+   */
+  get activeAutomations() {
+    return this.automations.contents.filter((a) =>
+      a.competencies.has(this.competence.raw),
+    );
+  }
+
+  /**
    * Data for the chat message this execution creates.
    * @returns {Partial<Teriock.Data.ChatMessageData>}
    */
@@ -139,6 +158,11 @@ export default class BaseExecution {
    */
   get competenceImprovesFormula() {
     return true;
+  }
+
+  /** @returns {string[]} */
+  get executionNames() {
+    return [];
   }
 
   /**
@@ -194,9 +218,13 @@ export default class BaseExecution {
 
   /**
    * Determine this execution's competence.
-   * @param {Teriock.Execution.BaseExecutionOptions} _options
+   * @param {Teriock.Execution.BaseExecutionOptions} options
    */
-  _determineCompetence(_options) {}
+  _determineCompetence(options) {
+    if (options.competence !== undefined) {
+      this.competence.raw = options.competence;
+    }
+  }
 
   /**
    * Evaluate all rolls.
@@ -204,10 +232,37 @@ export default class BaseExecution {
    */
   async _evaluateRolls() {
     const rollPromises = [];
-    for (const roll of this.rolls) {
-      rollPromises.push(roll.evaluate());
-    }
+    for (const roll of this.rolls) rollPromises.push(roll.evaluate());
     await Promise.all(rollPromises);
+  }
+
+  /**
+   * Propagate a trigger through the connected actor.
+   * @param {Teriock.System.Trigger} trigger
+   * @param {Partial<Teriock.System.TriggerScope>} [scope]
+   * @returns {Promise<void|false>}
+   */
+  async _fireActorTrigger(trigger, scope = {}) {
+    return await this.actor?.hookCall(trigger, {
+      scope: this.getScope({ ...scope, trigger }),
+    });
+  }
+
+  /**
+   * Propagate a trigger through all connected automations.
+   * @param {Teriock.System.Trigger} trigger
+   * @param {Partial<Teriock.System.TriggerScope>} [scope]
+   * @param {object} [options]
+   * @param {BaseAutomation[]} [options.automations]
+   * @returns {Promise<void>}
+   */
+  async _fireAutomationsTrigger(trigger, scope = {}, options = {}) {
+    const automations = options.automations ?? this.activeAutomations;
+    await Promise.all(
+      automations.map((a) =>
+        a.fireTrigger(trigger, this.getScope({ ...scope, trigger })),
+      ),
+    );
   }
 
   /**
@@ -222,9 +277,9 @@ export default class BaseExecution {
    */
   async _improveFormula() {
     if (this.competenceImprovesFormula) {
-      if (this.fluent) {
+      if (this.competence.fluent) {
         this.formula = addFormula(this.formula, "@f");
-      } else if (this.proficient) {
+      } else if (this.competence.proficient) {
         this.formula = addFormula(this.formula, "@p");
       }
     }
@@ -234,13 +289,26 @@ export default class BaseExecution {
    * The end of the execution.
    * @returns {Promise<void>}
    */
-  async _postExecute() {}
+  async _postExecute() {
+    await this._fireAutomationsTrigger("execute");
+    await Promise.all(
+      this.executionNames.map((n) => this.fireTrigger(`execute${n}`)),
+    );
+  }
 
   /**
    * The start of the execution.
-   * @returns {Promise<void>}
+   * @returns {Promise<void|false>}
    */
-  async _preExecute() {}
+  async _preExecute() {
+    await this._fireAutomationsTrigger("preExecute", { awaitFire: true });
+    const results = await Promise.all(
+      this.executionNames.map((n) =>
+        this.fireTrigger(`preExecute${n}`, { awaitFire: true }),
+      ),
+    );
+    if (results.includes(false)) return false;
+  }
 
   /**
    * Prepare the primary formula used in this execution.
@@ -271,7 +339,6 @@ export default class BaseExecution {
    * @returns {Promise<void>}
    */
   async execute() {
-    await this._preExecute();
     await this._getInput();
     await this._prepareFormula();
     await this._buildRolls();
@@ -279,10 +346,26 @@ export default class BaseExecution {
     await this._buildPanels();
     await this._buildButtons();
     await this._buildTags();
+    const yes = await this._preExecute();
+    if (yes === false) return;
     await this._createChatMessage();
     await this._prepareUpdates();
     await this._updateActor();
     await this._postExecute();
+  }
+
+  /**
+   * Propagate trigger.
+   * @param {Teriock.System.Trigger} trigger
+   * @param {Partial<Teriock.System.TriggerScope>} [scope]
+   * @returns {Promise<void|false>}
+   */
+  async fireTrigger(trigger, scope) {
+    const automations = this.activeAutomations.filter(
+      (a) => a.actor !== this.actor,
+    );
+    await this._fireAutomationsTrigger(trigger, scope, { automations });
+    return await this._fireActorTrigger(trigger, scope);
   }
 
   /**

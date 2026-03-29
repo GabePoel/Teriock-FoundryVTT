@@ -15,9 +15,6 @@ export default class ResistanceSaveExecution extends ThresholdExecutionMixin(
    */
   constructor(options = {}) {
     super(options);
-    if (options.proficient === undefined) {
-      this.proficient = true;
-    }
     if (options.threshold === undefined) {
       this.threshold = 10;
     }
@@ -51,5 +48,11 @@ export default class ResistanceSaveExecution extends ThresholdExecutionMixin(
   /** @inheritDoc */
   async _buildButtons() {
     this.buttons.push(UseLocalHandler.buildButton("resist", "ability"));
+  }
+
+  /** @inheritDoc */
+  _determineCompetence(options) {
+    this.competence.raw = 1;
+    super._determineCompetence(options);
   }
 }

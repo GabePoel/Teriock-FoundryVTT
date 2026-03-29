@@ -230,16 +230,15 @@ export default function CommonDocumentMixin(Base) {
        * @param {Teriock.System.TriggerScope} [options.scope] - Optional scope to merge into the generated one.
        * @param {boolean} [options.skipCall] - Whether to skip calling normal hooks.
        * @param {boolean} [options.skipPropagation] - Whether to skip propagation.
-       * @returns {Promise<Teriock.System.TriggerScope>} The mutated data.
+       * @returns {Promise<void|false>} The mutated data.
        */
       async hookCall(trigger, options = {}) {
         let { skipCall = false, skipPropagation = false, scope = {} } = options;
         scope.trigger = trigger;
         if (!skipPropagation) await this.actor?.fireTrigger(trigger, scope);
         if (!skipCall) {
-          Hooks.callAll(`teriock.${trigger}`, this, this.getScope(scope));
+          return Hooks.call(`teriock.${trigger}`, this, this.getScope(scope));
         }
-        return /** @type {Teriock.System.TriggerScope} */ scope;
       }
 
       /** @inheritDoc */
