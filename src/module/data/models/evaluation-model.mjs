@@ -71,7 +71,7 @@ export default class EvaluationModel extends EmbeddedDataModel {
 
   /**
    * The formula that gets evaluated.
-   * @returns {string}
+   * @returns {Teriock.System.FormulaString}
    */
   get formula() {
     if (this.raw) {

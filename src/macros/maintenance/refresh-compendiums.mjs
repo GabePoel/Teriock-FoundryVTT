@@ -1,7 +1,7 @@
 await tm.utils.progressBar(
   await tm.dialogs.selectCompendiumsDialog(),
   game.i18n.localize("TERIOCK.DIALOGS.RefreshCompendium.messageUnnamed"),
-  /** @param {TeriockCompendiumCollection<TeriockDocument>} p */ async (p) => {
+  /** @param {CompendiumCollection<TeriockDocument>} p */ async (p) => {
     if (!p.locked) {
       await p.getIndex();
       const indexes = tm.sort.docSort(
@@ -14,7 +14,7 @@ await tm.utils.progressBar(
         }),
         async (i) => {
           const doc = await tm.resolve.resolveDocument(i);
-          if (doc.defaultIdentifier) {
+          if (doc?.defaultIdentifier) {
             const identifier = doc.defaultIdentifier;
             await doc.update({ "system.identifier": identifier });
             if (doc.type === "wrapper") {
@@ -29,9 +29,9 @@ await tm.utils.progressBar(
               options.deleteChildren = false;
               options.recursive = false;
             }
-            await doc.system.refreshFromCompendiumSource(options);
+            await doc?.system.refreshFromCompendiumSource(options);
             if (p.collection === "teriock.magicItems") {
-              for (const child of await doc.getChildArray()) {
+              for (const child of (await doc?.getChildArray()) || []) {
                 await child.system.refreshFromCompendiumSource();
               }
             }

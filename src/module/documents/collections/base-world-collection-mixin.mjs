@@ -5,7 +5,7 @@ const { WorldCollection } = foundry.abstract;
  * @param {typeof WorldCollection} Base
  */
 export default function BaseWorldCollectionMixin(Base) {
-  //noinspection JSClosureCompilerSyntax,JSUnusedGlobalSymbols
+  //noinspection JSClosureCompilerSyntax
   return (
     /**
      * @template TeriockDocument

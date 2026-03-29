@@ -233,7 +233,7 @@ export async function selectAbilityDialog() {
 /**
  * Dialog to select compendiums.
  * @property {boolean} selected
- * @returns {Promise<TeriockCompendiumCollection<TeriockDocument>[]>}
+ * @returns {Promise<CompendiumCollection<TeriockDocument>[]>}
  */
 export async function selectCompendiumsDialog(selected = true) {
   const packDocs = game.packs.contents
@@ -333,7 +333,7 @@ export async function selectClassDialog() {
 }
 
 /**
- * @param {TeriockCompendiumCollection<AnyItem>} pack
+ * @param {CompendiumCollection<AnyItem>} pack
  */
 async function noSup(pack) {
   if (!pack.indexed) {

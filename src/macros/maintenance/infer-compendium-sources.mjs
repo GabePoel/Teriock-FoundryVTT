@@ -1,7 +1,7 @@
 await tm.utils.progressBar(
   await tm.dialogs.selectCompendiumsDialog(),
   "Refreshing Compendium Sources",
-  /** @param {TeriockCompendiumCollection<TeriockDocument>} p */ async (p) => {
+  /** @param {CompendiumCollection<TeriockDocument>} p */ async (p) => {
     if (!p.locked) {
       await p.getIndex();
       const indexes = tm.sort.docSort(
@@ -12,7 +12,7 @@ await tm.utils.progressBar(
         `Refreshing ${p.title} Sources`,
         async (i) => {
           const doc = await tm.resolve.resolveDocument(i);
-          if (doc.documentMetadata.common) {
+          if (doc?.documentMetadata.common) {
             await tm.resolve.inferChildCompendiumSources(doc);
           }
         },

@@ -19,6 +19,7 @@ import {
 } from "../documents/collections/_module.mjs";
 import { TeriockTooltipManager } from "../helpers/interaction/_module.mjs";
 import { TeriockManager } from "../helpers/_module.mjs";
+import { CompendiumCollection } from "@client/documents/collections/_module.mjs";
 
 declare global {
   // Definition for writing macros.
@@ -33,7 +34,7 @@ declare global {
     items: TeriockItems;
     journal: TeriockJournal;
     macros: TeriockMacros;
-    packs: Collection<string, TeriockCompendiumCollection<TeriockDocument>>;
+    packs: Collection<string, CompendiumCollection<TeriockDocument>>;
     rollTables: TeriockRollTables;
     scenes: TeriockScenes;
     tooltip: TeriockTooltipManager;
