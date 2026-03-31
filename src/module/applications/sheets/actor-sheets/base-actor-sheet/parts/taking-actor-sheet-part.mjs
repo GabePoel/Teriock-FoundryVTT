@@ -1,4 +1,4 @@
-import { toCamelCase, toTitleCase } from "../../../../../helpers/string.mjs";
+import { toTitleCase } from "../../../../../helpers/string.mjs";
 import { makeIconClass } from "../../../../../helpers/utils.mjs";
 import { TeriockDialog } from "../../../../api/_module.mjs";
 
@@ -17,65 +17,23 @@ export default (Base) =>
     static DEFAULT_OPTIONS = {
       actions: {
         takeHack: this._onTakeHack,
-        takeRollable: this._onTakeRollable,
+        takeRollable: { buttons: [0, 2], handler: this._onTakeRollable },
       },
     };
 
     /**
-     * Prompt for taking some amount of something and applying it to the actor.
-     * @param {PointerEvent} _event
-     * @param {HTMLElement} target
-     * @returns {Promise<void>}
-     */
-    static async _onTakeRollable(_event, target) {
-      const type = target.dataset.type;
-      const field = new fields.NumberField({
-        initial: 0,
-        label: toTitleCase(type),
-        min: 0,
-        integer: true,
-        hint: game.i18n.format(
-          "TERIOCK.SHEETS.Actor.ACTIONS.TakeRollable.hint",
-          { effect: TERIOCK.options.take[type]?.label?.toLowerCase() },
-        ),
-      });
-      await TeriockDialog.prompt({
-        window: {
-          title: TERIOCK.options.take[type]?.take,
-          icon: makeIconClass(TERIOCK.options.take[type].icon, "title"),
-        },
-        content: field.toFormGroup({}, { name: type }).outerHTML,
-        ok: {
-          label: game.i18n.localize(
-            "TERIOCK.SHEETS.Actor.ACTIONS.TakeRollable.ok",
-          ),
-          callback: (_event, button) => {
-            let input = button.form.elements.namedItem(type).value;
-            if (input) {
-              this.document.system[toCamelCase(`Take ${toTitleCase(type)}`)](
-                Number(input),
-              );
-            }
-          },
-        },
-      });
-    }
-
-    /**
      * Prompt for applying some amount of morganti damage or drain.
-     * @param {PointerEvent} _event
-     * @param {HTMLElement} target
+     * @param {string} type
+     * @param {TeriockActor} actor
      * @returns {Promise<void>}
-     * @private
      */
-    async _applyMorganti(_event, target) {
-      const type = target.dataset.type;
+    static async _applyMorganti(type, actor) {
       let stat;
       if (type === "damage") stat = "hp";
       if (type === "drain") stat = "mp";
       if (["damage", "drain"].includes(type)) {
         const field = new fields.NumberField({
-          initial: this.document.system[stat].morganti ?? 0,
+          initial: actor.system[stat].morganti ?? 0,
           label: game.i18n.format(
             "TERIOCK.SHEETS.Actor.ACTIONS.ApplyMorganti.label",
             { effect: TERIOCK.options.take[type]?.label },
@@ -103,7 +61,7 @@ export default (Base) =>
             callback: async (_event, button) => {
               let input = button.form.elements.namedItem(type).value;
               if (input) {
-                await this.document.update({
+                await actor.update({
                   [`system.${stat}.morganti`]: input,
                 });
               }
@@ -113,15 +71,43 @@ export default (Base) =>
       }
     }
 
-    /** @inheritDoc */
-    async _onRender(context, options) {
-      await super._onRender(context, options);
-      this.element.querySelectorAll("[data-action='takeRollable']").forEach(
-        /** @param {HTMLElement} el */ (el) => {
-          el.addEventListener("contextmenu", async (ev) => {
-            await this._applyMorganti(ev, el);
-          });
+    /**
+     * Prompt for taking some amount of something and applying it to the actor.
+     * @param {PointerEvent} event
+     * @param {HTMLElement} target
+     * @returns {Promise<void>}
+     */
+    static async _onTakeRollable(event, target) {
+      const type = target.dataset.type;
+      if (event.button === 2) {
+        await TakingActorSheetPart._applyMorganti(type, this.document);
+        return;
+      }
+      const field = new fields.NumberField({
+        initial: 0,
+        label: toTitleCase(type),
+        min: 0,
+        integer: true,
+        hint: game.i18n.format(
+          "TERIOCK.SHEETS.Actor.ACTIONS.TakeRollable.hint",
+          { effect: TERIOCK.options.take[type]?.label?.toLowerCase() },
+        ),
+      });
+      await TeriockDialog.prompt({
+        window: {
+          title: TERIOCK.options.take[type]?.take,
+          icon: makeIconClass(TERIOCK.options.take[type].icon, "title"),
         },
-      );
+        content: field.toFormGroup({}, { name: type }).outerHTML,
+        ok: {
+          label: game.i18n.localize(
+            "TERIOCK.SHEETS.Actor.ACTIONS.TakeRollable.ok",
+          ),
+          callback: (_event, button) => {
+            let input = button.form.elements.namedItem(type).value;
+            this.document.system[`take${toTitleCase(type)}`](Number(input));
+          },
+        },
+      });
     }
   };

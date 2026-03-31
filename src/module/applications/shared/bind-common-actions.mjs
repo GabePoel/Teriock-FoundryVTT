@@ -1,3 +1,4 @@
+import { queryAll } from "../../helpers/html.mjs";
 import { TeriockContextMenu, TeriockTextEditor } from "../ux/_module.mjs";
 import {
   imageContextMenuOptions,
@@ -140,19 +141,4 @@ export default function bindCommonActions(rootElement) {
         });
       },
     );
-}
-
-/**
- * Like querySelectorAll, but includes the root element if it matches.
- * @param {HTMLElement} root
- * @param {string} selector
- * @returns {HTMLElement[]} An array of matching elements (root and descendants).
- */
-export function queryAll(root, selector) {
-  const result = [];
-  if (root.matches(selector)) {
-    result.push(root);
-  }
-  result.push(...root.querySelectorAll(selector));
-  return result;
 }

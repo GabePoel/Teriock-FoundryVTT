@@ -12,7 +12,7 @@ export default (Base) =>
   class CombatActorSheetPart extends Base {
     static DEFAULT_OPTIONS = {
       actions: {
-        useAbility: this._onUseAbility,
+        useAbility: { buttons: [0, 2], handler: this.#onUseAbility },
         openPrimaryAttacker: this.#onOpenPrimaryAttacker,
         openPrimaryBlocker: this.#onOpenPrimaryBlocker,
         selectAttacker: this.#onSelectAttacker,
@@ -122,44 +122,11 @@ export default (Base) =>
      * @param {PointerEvent} event
      * @param {HTMLElement} target
      * @returns {Promise<void>}
-     * @this CombatActorSheetPart
      */
-    static async _onUseAbility(event, target) {
-      await this.#onUseAbility(
-        event,
-        target,
-        game.teriock.getSetting("showRollDialogs"),
-      );
-    }
-
-    /**
-     * Use the specified ability.
-     * @param {PointerEvent} event
-     * @param {HTMLElement} target
-     * @param {boolean} showDialog - Whether to show a dialog.
-     * @returns {Promise<void>}
-     */
-    async #onUseAbility(event, target, showDialog) {
+    static async #onUseAbility(event, target) {
       await this.document.useDocument(target.dataset.ability, {
         event,
-        showDialog,
         type: "ability",
       });
-    }
-
-    /** @inheritDoc */
-    async _onRender(context, options) {
-      await super._onRender(context, options);
-      this.element
-        .querySelectorAll("[data-action=useAbility]")
-        .forEach((el) => {
-          el.addEventListener("contextmenu", async (ev) => {
-            await this.#onUseAbility(
-              ev,
-              el,
-              !game.teriock.getSetting("showRollDialogs"),
-            );
-          });
-        });
     }
   };

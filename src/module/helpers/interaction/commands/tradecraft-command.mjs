@@ -10,18 +10,7 @@ Object.values(tradecraftOptions).forEach((fieldOption) => {
  * @param {TeriockActor} actor
  * @param {Teriock.Interaction.TradecraftOptions} options
  */
-async function primary(actor, options = {}) {
-  options.showDialog = game.teriock.getSetting("showRollDialogs");
-  const tradecraft = options.tradecraft || "artist";
-  await actor.system.rollTradecraft(tradecraft, options);
-}
-
-/**
- * @param {TeriockActor} actor
- * @param {Teriock.Interaction.TradecraftOptions} options
- */
-async function secondary(actor, options = {}) {
-  options.showDialog = !game.teriock.getSetting("showRollDialogs");
+async function use(actor, options = {}) {
   const tradecraft = options.tradecraft || "artist";
   await actor.system.rollTradecraft(tradecraft, options);
 }
@@ -42,8 +31,8 @@ const command = {
           value: allOptions[options?.tradecraft].name,
         })
       : game.i18n.localize("TERIOCK.ROLLS.Tradecraft.label"),
-  primary,
-  secondary,
+  primary: use,
+  secondary: use,
 };
 
 export default command;

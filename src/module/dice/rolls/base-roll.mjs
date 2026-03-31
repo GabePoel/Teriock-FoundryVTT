@@ -139,11 +139,15 @@ export default class BaseRoll extends Roll {
 
   /**
    * Parse an event into usable roll or execution options.
-   * @param {PointerEvent} _event
+   * @param {PointerEvent} event
    * @returns {object}
    */
-  static parseEvent(_event) {
-    return {};
+  static parseEvent(event) {
+    return {
+      showDialog: game.teriock.getSetting("showRollDialogs")
+        ? event.button !== 2
+        : event.button === 2,
+    };
   }
 
   /**

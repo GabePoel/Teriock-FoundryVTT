@@ -76,7 +76,6 @@ export default function UseDocumentsAutomationMixin(Base) {
           {
             actor: options.actor || this.document.actor,
             noHeighten: this.noHeighten,
-            showDialog: game.teriock.getSetting("showRollDialogs"),
           },
           options,
         );

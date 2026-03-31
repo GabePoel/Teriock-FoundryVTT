@@ -93,6 +93,7 @@ declare global {
 
     export type UseLocalOptions = DocumentUseOptions & {
       lookup?: string;
+      type?: Teriock.Documents.ChildType;
     };
 
     export type UseExternalOptions = DocumentUseOptions &

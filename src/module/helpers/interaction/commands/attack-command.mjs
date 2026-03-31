@@ -1,9 +1,9 @@
 /**
  * @param {TeriockActor} actor
- * @param {Teriock.Interaction.UseAbilityOptions} options
+ * @param {Teriock.Interaction.UseLocalOptions} options
  * @returns {Promise<void>}
  */
-async function primary(actor, options = {}) {
+async function use(actor, options = {}) {
   await actor.useDocument("basic-attack", { ...options, type: "ability" });
 }
 
@@ -15,7 +15,8 @@ const command = {
   icon: () => TERIOCK.options.document.ability.icon,
   id: "attack",
   label: "TERIOCK.COMMANDS.Attack.label",
-  primary,
+  primary: use,
+  secondary: use,
 };
 
 export default command;

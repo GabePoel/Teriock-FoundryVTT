@@ -3,6 +3,7 @@ import {
   TeriockContextMenu,
   TeriockTextEditor,
 } from "../../applications/ux/_module.mjs";
+import { queryAll } from "../../helpers/html.mjs";
 import { toTitleCase } from "../../helpers/string.mjs";
 
 /**
@@ -80,7 +81,7 @@ export default function EmbedCardDocumentMixin(Base) {
       /** @inheritDoc */
       onEmbed(element) {
         bindCommonActions(element);
-        element.querySelectorAll("[data-action]").forEach((el) => {
+        queryAll(element, "[data-action]").forEach((el) => {
           const action = el.dataset.action;
           if (this.embedActions[action]) {
             for (const [type, callback] of Object.entries({

@@ -178,12 +178,7 @@ export default class TeriockMacro extends mix(
     }
     for (const a of actors) {
       const doc = await a.getDocument(lookup, type);
-      if (doc)
-        await doc.system.use({
-          actor: a,
-          event,
-          showDialog: game.teriock.getSetting("showRollDialogs"),
-        });
+      if (doc) await doc.system.use({ actor: a, event });
       else {
         ui.notifications.warn("TERIOCK.SYSTEMS.Macro.EXECUTION.noDocument", {
           localize: true,
@@ -207,13 +202,7 @@ export default class TeriockMacro extends mix(
    */
   static async useDocumentLinked(uuid, options = {}) {
     const doc = await fromUuid(uuid);
-    if (doc)
-      await doc.system.use(
-        Object.assign(options, {
-          actor: doc.actor,
-          showDialog: game.teriock.getSetting("showRollDialogs"),
-        }),
-      );
+    if (doc) await doc.system.use(Object.assign(options, { actor: doc.actor }));
   }
 
   /** @inheritDoc */

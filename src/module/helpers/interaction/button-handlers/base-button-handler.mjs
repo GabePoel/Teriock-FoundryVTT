@@ -28,6 +28,7 @@ export default class BaseButtonHandler extends AbstractInteractionHandler {
       this.actors = this.targetedActors;
     }
     this.options = cleanDataset(this.dataset);
+    this.options.event = event;
   }
 
   /**

@@ -12,12 +12,12 @@ export default (Base) =>
   class RollingActorSheetPart extends Base {
     static DEFAULT_OPTIONS = {
       actions: {
-        rollFeatSave: this._onRollFeatSave,
-        rollHexproof: this._onRollHexproof,
-        rollHexseal: this._onRollHexseal,
-        rollImmunity: this._onRollImmunity,
-        rollResistance: this._onRollResistance,
-        rollStatDie: this._onRollStatDie,
+        rollFeatSave: { buttons: [0, 2], handler: this.#onRollFeatSave },
+        rollHexproof: { buttons: [0, 2], handler: this.#onRollHexproof },
+        rollHexseal: { buttons: [0, 2], handler: this.#onRollHexseal },
+        rollImmunity: { buttons: [0, 2], handler: this.#onRollImmunity },
+        rollResistance: { buttons: [0, 2], handler: this.#onRollResistance },
+        rollStatDie: { buttons: [0], handler: this._onRollStatDie },
       },
     };
 
@@ -26,14 +26,11 @@ export default (Base) =>
      * @param {PointerEvent} event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>}
-     * @this RollingActorSheetPart
      */
-    static async _onRollFeatSave(event, target) {
-      await this.#onRollFeatSave(
+    static async #onRollFeatSave(event, target) {
+      await this.actor.system.rollFeatSave(target.dataset.attribute, {
         event,
-        target,
-        game.teriock.getSetting("showRollDialogs"),
-      );
+      });
     }
 
     /**
@@ -41,13 +38,10 @@ export default (Base) =>
      * @param {PointerEvent} event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>}
-     * @this RollingActorSheetPart
      */
-    static async _onRollHexproof(event, target) {
-      await this.#onRollHexproof(
-        event,
-        target,
-        game.teriock.getSetting("showRollDialogs"),
+    static async #onRollHexproof(event, target) {
+      await this.actor.system.rollResistance(
+        Object.assign(protectionOptions(event, target), { hex: true }),
       );
     }
 
@@ -57,7 +51,7 @@ export default (Base) =>
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>}
      */
-    static async _onRollHexseal(event, target) {
+    static async #onRollHexseal(event, target) {
       await this.actor.system.rollImmunity(
         Object.assign(protectionOptions(event, target), { hex: true }),
       );
@@ -69,7 +63,7 @@ export default (Base) =>
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>}
      */
-    static async _onRollImmunity(event, target) {
+    static async #onRollImmunity(event, target) {
       await this.actor.system.rollImmunity(protectionOptions(event, target));
     }
 
@@ -78,97 +72,9 @@ export default (Base) =>
      * @param {PointerEvent} event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>}
-     * @this RollingActorSheetPart
      */
-    static async _onRollResistance(event, target) {
-      await this.#onRollResistance(
-        event,
-        target,
-        game.teriock.getSetting("showRollDialogs"),
-      );
-    }
-
-    /**
-     * Rolls a feat save with optional advantage/disadvantage.
-     * @param {PointerEvent} event - The event object.
-     * @param {HTMLElement} target - The target element.
-     * @param {boolean} showDialog - Whether to show a dialog.
-     * @returns {Promise<void>}
-     */
-    async #onRollFeatSave(event, target, showDialog) {
-      await this.actor.system.rollFeatSave(target.dataset.attribute, {
-        event,
-        showDialog,
-      });
-    }
-
-    /**
-     * Rolls hexproof resistance with optional advantage/disadvantage.
-     * @param {PointerEvent} event - The event object.
-     * @param {HTMLElement} target - The target element.
-     * @param {boolean} showDialog - Whether to show a dialog.
-     * @returns {Promise<void>}
-     */
-    async #onRollHexproof(event, target, showDialog) {
-      await this.actor.system.rollResistance(
-        Object.assign(protectionOptions(event, target), {
-          hex: true,
-          showDialog,
-        }),
-      );
-    }
-
-    /**
-     * Rolls resistance with optional advantage/disadvantage.
-     * @param {PointerEvent} event - The event object.
-     * @param {HTMLElement} target - The target element.
-     * @param {boolean} showDialog - Whether to show a dialog.
-     * @returns {Promise<void>}
-     */
-    async #onRollResistance(event, target, showDialog) {
-      await this.actor.system.rollResistance(
-        Object.assign(protectionOptions(event, target), {
-          showDialog,
-        }),
-      );
-    }
-
-    /** @inheritDoc */
-    async _onRender(context, options) {
-      await super._onRender(context, options);
-      this.element
-        .querySelectorAll("[data-action=rollFeatSave]")
-        .forEach((el) => {
-          el.addEventListener("contextmenu", async (ev) => {
-            await this.#onRollFeatSave(
-              ev,
-              el,
-              !game.teriock.getSetting("showRollDialogs"),
-            );
-          });
-        });
-      this.element
-        .querySelectorAll("[data-action=rollResistance]")
-        .forEach((el) => {
-          el.addEventListener("contextmenu", async (ev) => {
-            await this.#onRollResistance(
-              ev,
-              el,
-              !game.teriock.getSetting("showRollDialogs"),
-            );
-          });
-        });
-      this.element
-        .querySelectorAll("[data-action=rollHexproof]")
-        .forEach((el) => {
-          el.addEventListener("contextmenu", async (ev) => {
-            await this.#onRollHexproof(
-              ev,
-              el,
-              !game.teriock.getSetting("showRollDialogs"),
-            );
-          });
-        });
+    static async #onRollResistance(event, target) {
+      await this.actor.system.rollResistance(protectionOptions(event, target));
     }
 
     /** @inheritDoc */

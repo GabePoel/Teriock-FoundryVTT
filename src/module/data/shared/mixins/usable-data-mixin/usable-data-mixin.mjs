@@ -1,3 +1,4 @@
+import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
 
 const { fields } = foundry.data;
@@ -32,11 +33,11 @@ export default function UsableDataMixin(Base) {
 
       /**
        * Parse an event into usable roll or execution options for this type.
-       * @param {PointerEvent} _event
+       * @param {PointerEvent} event
        * @returns {Teriock.Execution.DocumentExecutionOptions}
        */
-      static parseEvent(_event) {
-        return {};
+      static parseEvent(event) {
+        return BaseRoll.parseEvent(event);
       }
 
       /**
@@ -72,24 +73,14 @@ export default function UsableDataMixin(Base) {
       }
 
       /**
-       * Parse an event into usable roll or execution options for this instance.
-       * @param {PointerEvent} event
-       * @returns {Teriock.Execution.DocumentExecutionOptions}
-       */
-      parseEvent(event) {
-        return Object.assign(this.constructor.parseEvent(event), {
-          source: this.parent,
-        });
-      }
-
-      /**
        * Uses this, including all hook and trigger calls.
        * @param {Teriock.Interaction.UseOptions} options
        * @returns {Promise<void>}
        */
       async use(options = {}) {
+        options.source ??= this.parent;
         if (options.event) {
-          Object.assign(options, this.parseEvent(options.event));
+          Object.assign(options, this.constructor.parseEvent(options.event));
         }
         await this._use(options);
       }

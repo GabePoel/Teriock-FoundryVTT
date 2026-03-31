@@ -16,8 +16,8 @@ export default (Base) =>
     static DEFAULT_OPTIONS = {
       actions: {
         deathBagPull: this.#onDeathBagPull,
-        increaseCover: this.#onIncreaseCover,
-        quickUse: this._onQuickUse,
+        increaseCover: { buttons: [0, 2], handler: this.#onIncreaseCover },
+        quickUse: { buttons: [0, 2], handler: this.#onQuickUse },
         takeDawn: this.#onTakeDawn,
         takeDusk: this.#onTakeDusk,
         takeLongRest: this.#onTakeLongRest,
@@ -58,14 +58,35 @@ export default (Base) =>
 
     /**
      * Increases cover by a step.
+     * @param {PointerEvent} event
      * @returns {Promise<void>}
      */
-    static async #onIncreaseCover() {
-      if (this.document.system.cover < 3) {
-        await this.document.system.increaseCover();
-      } else {
-        await this.document.system.decreaseCover(3);
+    static async #onIncreaseCover(event) {
+      if (event.button === 0) {
+        if (this.document.system.cover < 3) {
+          await this.document.system.increaseCover();
+        } else {
+          await this.document.system.decreaseCover(3);
+        }
+      } else if (event.button === 2) {
+        if (this.document.system.cover > 0) {
+          await this.document.system.decreaseCover();
+        } else {
+          await this.document.system.increaseCover(3);
+        }
       }
+    }
+
+    /**
+     * Quickly uses an item with optional modifiers.
+     * @param {PointerEvent} event - The event object.
+     * @param {HTMLElement} target - The target element.
+     * @returns {Promise<void>}
+     */
+    static async #onQuickUse(event, target) {
+      const id = target.dataset.id;
+      const item = this.document.items.get(id);
+      if (item) await item.use({ event });
     }
 
     /**
@@ -107,62 +128,7 @@ export default (Base) =>
      * @returns {Promise<void>}
      */
     static async #onToggleCondition(event, target) {
-      event.stopPropagation();
       const conditionKey = target.dataset.condition;
       await this.document.toggleStatusEffect(conditionKey);
-    }
-
-    /**
-     * Quickly uses an item with optional modifiers.
-     * @param {PointerEvent} event - The event object.
-     * @param {HTMLElement} target - The target element.
-     * @returns {Promise<void>}
-     * @this MechanicalActorSheetPart
-     */
-    static async _onQuickUse(event, target) {
-      await this.#onQuickUse(
-        event,
-        target,
-        game.teriock.getSetting("showRollDialogs"),
-      );
-    }
-
-    /**
-     * Quickly uses an item with optional modifiers.
-     * @param {PointerEvent} event - The event object.
-     * @param {HTMLElement} target - The target element.
-     * @param {boolean} showDialog - Whether to show a dialog.
-     * @returns {Promise<void>}
-     */
-    async #onQuickUse(event, target, showDialog) {
-      event.stopPropagation();
-      const id = target.dataset.id;
-      const item = this.document.items.get(id);
-      if (item) await item.use({ event, showDialog });
-    }
-
-    /** @inheritDoc */
-    async _onRender(context, options) {
-      await super._onRender(context, options);
-      this.element
-        .querySelectorAll("[data-action='increaseCover']")
-        .forEach((el) => {
-          el.addEventListener("contextmenu", async () => {
-            if (this.document.system.cover > 0) {
-              await this.document.system.decreaseCover();
-            } else {
-              await this.document.system.increaseCover(3);
-            }
-          });
-        });
-      this.element.querySelectorAll("[data-action=quickUse]").forEach((el) => {
-        el.addEventListener("contextmenu", async (ev) => {
-          await this.#onQuickUse(
-            ev,
-            el,
-            !game.teriock.getSetting("showRollDialogs"),
-          );
-        });
-      });
     }
   };

@@ -15,7 +15,7 @@ export default (Base) => {
       /** @type {Partial<ApplicationConfiguration>} */
       static DEFAULT_OPTIONS = {
         actions: {
-          increment: this.#onIncrement,
+          increment: { buttons: [0, 2], handler: this.#onIncrement },
           updatePaths: this.#onUpdatePaths,
           updateUnit: this.#onUpdateUnit,
         },
@@ -23,12 +23,21 @@ export default (Base) => {
 
       /**
        * Increment forwards.
-       * @param {PointerEvent} _event
+       * @param {PointerEvent} event
        * @param {HTMLElement} target
+       * @param {number} change
        * @returns {Promise<void>}
        */
-      static async #onIncrement(_event, target) {
-        await this._onIncrement(_event, target);
+      static async #onIncrement(event, target, change = 1) {
+        if (event.button === 2) change = change * -1;
+        const { path } = target.dataset;
+        const value = foundry.utils.getProperty(this.document, path);
+        const schema = this.document.getSchema(path);
+        const min = schema.min ?? 0;
+        const max = schema.max ?? Infinity;
+        const delta = max - min + 1;
+        const adjusted = ((value + min + change + delta) % delta) - min;
+        await this.document.update({ [path]: adjusted });
       }
 
       /**
@@ -60,30 +69,11 @@ export default (Base) => {
           .updateDialog();
       }
 
-      /**
-       * Increment forwards.
-       * @param {PointerEvent} _event
-       * @param {HTMLElement} target
-       * @param {number} change
-       * @returns {Promise<void>}
-       */
-      async _onIncrement(_event, target, change = 1) {
-        const { path } = target.dataset;
-        const value = foundry.utils.getProperty(this.document, path);
-        const schema = this.document.getSchema(path);
-        const min = schema.min ?? 0;
-        const max = schema.max ?? Infinity;
-        const delta = max - min + 1;
-        const adjusted = ((value + min + change + delta) % delta) - min;
-        await this.document.update({ [path]: adjusted });
-      }
-
       /** @inheritDoc */
       async _onRender(context, options) {
         await super._onRender(context, options);
         this._setupUpdateHandlers();
         this._setupChangeHandlers();
-        this._setupIncrementHandlers();
       }
 
       /**
@@ -120,19 +110,6 @@ export default (Base) => {
               const copy = foundry.utils.deepClone(existing) || [];
               copy.splice(button.dataset.index, 1);
               await this.document.update({ [name.value]: copy });
-            });
-          },
-        );
-      }
-
-      /**
-       * Sets up handlers for reversing increment directions.
-       */
-      _setupIncrementHandlers() {
-        this.element.querySelectorAll("[data-action='increment']").forEach(
-          /** @param {HTMLElement} el */ (el) => {
-            el.addEventListener("contextmenu", async (ev) => {
-              await this._onIncrement(ev, el, -1);
             });
           },
         );

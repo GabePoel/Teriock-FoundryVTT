@@ -18,7 +18,6 @@ export default function CommonSheetMixin(Base) {
      * @mixes FieldsCommonSheetPart
      * @mixes ImageEditingCommonSheetPart
      * @mixes AutomationsTabsCommonSheetPart
-     * @mixes InteractionCommonSheetPart
      * @mixes LockingCommonSheetPart
      * @mixes MenuCommonSheetPart
      * @mixes StatDiceCommonSheetPart
@@ -36,7 +35,6 @@ export default function CommonSheetMixin(Base) {
       parts.FieldsCommonSheetPart,
       parts.ImageEditingCommonSheetPart,
       parts.AutomationsTabsCommonSheetPart,
-      parts.InteractionCommonSheetPart,
       parts.LockingCommonSheetPart,
       parts.MenuCommonSheetPart,
       parts.StatDiceCommonSheetPart,

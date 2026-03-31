@@ -6,51 +6,19 @@ import { pureUuid } from "../../resolve.mjs";
  * @param {Teriock.Interaction.StandardDamageOptions} options
  * @returns {Promise<void>}
  */
-async function primary(actor, options = {}) {
+async function use(actor, options = {}) {
   let attacker = actor?.system?.primaryAttacker;
   if (options.attacker) {
     attacker = await fromUuid(pureUuid(options.attacker));
   }
   if (!attacker) {
     ui.notifications.error("TERIOCK.COMMANDS.StandardDamage.noDefaultWeapon", {
-      format: {
-        name: actor.name,
-      },
+      format: { name: actor.name },
       localize: true,
     });
     return;
   }
-  await attacker.use(
-    Object.assign(options, {
-      showDialog: game.teriock.getSetting("showRollDialogs"),
-    }),
-  );
-}
-
-/**
- * @param {TeriockActor} actor
- * @param {Teriock.Interaction.StandardDamageOptions} options
- * @returns {Promise<void>}
- */
-async function secondary(actor, options = {}) {
-  let attacker = actor.system.primaryAttacker;
-  if (options.attacker) {
-    attacker = await fromUuid(pureUuid(options.attacker));
-  }
-  if (!attacker) {
-    ui.notifications.error("TERIOCK.COMMANDS.StandardDamage.noDefaultWeapon", {
-      format: {
-        name: actor.name,
-      },
-      localize: true,
-    });
-    return;
-  }
-  await attacker.use(
-    Object.assign(options, {
-      showDialog: !game.teriock.getSetting("showRollDialogs"),
-    }),
-  );
+  await attacker.use(options);
 }
 
 /**
@@ -64,8 +32,8 @@ const command = {
   icon: icons.effect.dealDamage,
   id: "standardDamage",
   label: "TERIOCK.EFFECTS.Common.standardDamage",
-  primary,
-  secondary,
+  primary: use,
+  secondary: use,
 };
 
 export default command;

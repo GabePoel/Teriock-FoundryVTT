@@ -1,4 +1,3 @@
-import { abilityOptions } from "../../../constants/options/ability-options.mjs";
 import { competenceOptions } from "../../../constants/options/competence-options.mjs";
 import { documentOptions } from "../../../constants/options/document-options.mjs";
 import { transformationOptions } from "../../../constants/options/transformation-options.mjs";
@@ -9,7 +8,6 @@ import {
   EnhancedStringField,
   EvaluationField,
   FormulaField,
-  TextField,
 } from "../_module.mjs";
 
 const {
@@ -372,53 +370,6 @@ export function blockGaplessField(options = {}) {
     }),
     hint: game.i18n.format("TERIOCK.SCHEMA.BlackGapless.hint", {
       name: label.toLocaleLowerCase(),
-    }),
-  });
-}
-
-/**
- * Build a cost adjustment.
- * @returns {SchemaField}
- */
-export function costAdjustment() {
-  return new SchemaField({
-    enabled: new BooleanField(),
-    amount: new NumberField({
-      initial: 0,
-      min: 0,
-      integer: true,
-    }),
-  });
-}
-
-/**
- * Build a cost schema.
- * @param {object} [options]
- * @param {Record<string, string>} [options.extraChoices]
- * @returns {SchemaField}
- */
-export function costField(options = { extraChoices: {} }) {
-  return new SchemaField({
-    type: new StringField({
-      initial: "none",
-      choices: {
-        ...abilityOptions.cost,
-        ...options.extraChoices,
-      },
-    }),
-    value: new SchemaField({
-      static: new NumberField({
-        initial: 0,
-        integer: true,
-        min: 0,
-      }),
-      formula: new FormulaField({
-        initial: "",
-        deterministic: false,
-      }),
-      variable: new TextField({
-        initial: "",
-      }),
     }),
   });
 }

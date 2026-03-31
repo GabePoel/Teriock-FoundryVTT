@@ -10,7 +10,7 @@ export default (Base) =>
   class TradecraftsActorSheetPart extends Base {
     static DEFAULT_OPTIONS = {
       actions: {
-        rollTradecraft: this._onRollTradecraft,
+        rollTradecraft: { buttons: [0, 2], handler: this.#onRollTradecraft },
       },
     };
 
@@ -19,44 +19,11 @@ export default (Base) =>
      * @param {PointerEvent} event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>}
-     * @this TradecraftsActorSheetPart
      */
-    static async _onRollTradecraft(event, target) {
-      await this.#onRollTradecraft(
-        event,
-        target,
-        game.teriock.getSetting("showRollDialogs"),
-      );
-    }
-
-    /**
-     * Rolls a tradecraft check with optional advantage/disadvantage.
-     * @param {PointerEvent} event - The event object.
-     * @param {HTMLElement} target - The target element.
-     * @param {boolean} showDialog - Whether to show a dialog.
-     * @returns {Promise<void>}
-     */
-    async #onRollTradecraft(event, target, showDialog) {
+    static async #onRollTradecraft(event, target) {
       await this.actor.system.rollTradecraft(target.dataset.tradecraft, {
         event,
-        showDialog,
       });
-    }
-
-    /** @inheritDoc */
-    async _onRender(context, options) {
-      await super._onRender(context, options);
-      this.element
-        .querySelectorAll("[data-action=rollTradecraft]")
-        .forEach((el) => {
-          el.addEventListener("contextmenu", async (ev) => {
-            await this.#onRollTradecraft(
-              ev,
-              el,
-              !game.teriock.getSetting("showRollDialogs"),
-            );
-          });
-        });
     }
 
     /** @inheritDoc */

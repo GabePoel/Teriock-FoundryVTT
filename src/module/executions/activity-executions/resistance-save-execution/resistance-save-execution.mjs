@@ -47,7 +47,9 @@ export default class ResistanceSaveExecution extends ThresholdExecutionMixin(
 
   /** @inheritDoc */
   async _buildButtons() {
-    this.buttons.push(UseLocalHandler.buildButton("resist", "ability"));
+    this.buttons.push(
+      UseLocalHandler.buildButton("resist", { type: "ability" }),
+    );
   }
 
   /** @inheritDoc */

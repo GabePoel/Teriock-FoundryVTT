@@ -135,15 +135,7 @@ export default class CommonSystem extends mix(
    * @returns {Record<string, Teriock.EmbedData.EmbedAction>}
    */
   get embedActions() {
-    const actions = {
-      openDoc: { primary: async () => this.parent.sheet.render(true) },
-    };
-    for (const embedIcon of this.embedIcons) {
-      if (embedIcon.action && embedIcon.callback) {
-        actions[embedIcon.action] = { primary: embedIcon.callback };
-      }
-    }
-    return actions;
+    return {};
   }
 
   /**

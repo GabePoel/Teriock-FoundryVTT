@@ -9,6 +9,7 @@ declare global {
       formula?: string;
       rollData?: object;
       rollOptions?: object;
+      showDialog?: boolean;
     };
   }
 }

@@ -9,7 +9,6 @@ import {
   AutomationsCommonSheetPart,
   DocumentCreationCommonSheetPart,
   DragDropCommonSheetPart,
-  InteractionCommonSheetPart,
 } from "../mixins/common-sheet-mixin/parts/_module.mjs";
 
 const { ActiveEffectConfig } = foundry.applications.sheets;
@@ -26,7 +25,6 @@ export default class ConsequenceSheet extends mix(
   AutomationsCommonSheetPart,
   DocumentCreationCommonSheetPart,
   DragDropCommonSheetPart,
-  InteractionCommonSheetPart,
 ) {
   static DEFAULT_OPTIONS = {
     form: { closeOnSubmit: false, submitOnChange: true },

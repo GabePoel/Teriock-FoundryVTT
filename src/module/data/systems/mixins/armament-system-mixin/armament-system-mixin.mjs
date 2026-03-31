@@ -287,13 +287,11 @@ export default function ArmamentSystemMixin(Base) {
        * @inheritDoc
        * @param {Teriock.Execution.ArmamentExecutionOptions} options
        */
-      async _use(
-        options = /** @type {Teriock.Execution.ArmamentExecutionOptions} */ {},
-      ) {
+      async _use(options = {}) {
         if (game.teriock.getSetting("rollAttackOnArmamentUse")) {
           await this.actor?.useDocument("basic-attack", { type: "ability" });
         }
-        options.source = /** @type {TeriockArmament} */ this.parent;
+        options.deals ??= this.deals;
         await new ArmamentExecution(options).execute();
       }
 
@@ -342,7 +340,7 @@ export default function ArmamentSystemMixin(Base) {
         super.prepareBaseData();
 
         // What this deals
-        /** @type {Set<Record<Teriock.Keys.RollImpact>>} */
+        /** @type {Set<Teriock.Keys.RollImpact>} */
         this.deals = new Set(["damage"]);
 
         // Properties

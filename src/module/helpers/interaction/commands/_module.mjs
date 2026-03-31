@@ -28,8 +28,7 @@ import {
   toggleStatusCommand,
 } from "./status-commands.mjs";
 import tradecraftCommand from "./tradecraft-command.mjs";
-import useExternalCommand from "./use-external-command.mjs";
-import useLocalCommand from "./use-local-command.mjs";
+import { useExternalCommand, useLocalCommand } from "./use-commands.mjs";
 
 const commandArray = [
   ...rollableTakeCommands,

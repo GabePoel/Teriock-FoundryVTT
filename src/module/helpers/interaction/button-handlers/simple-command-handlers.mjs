@@ -29,8 +29,10 @@ import {
   toggleStatusCommand,
 } from "../commands/status-commands.mjs";
 import tradecraftCommand from "../commands/tradecraft-command.mjs";
-import UseExternalCommand from "../commands/use-external-command.mjs";
-import UseLocalCommand from "../commands/use-local-command.mjs";
+import {
+  useExternalCommand,
+  useLocalCommand,
+} from "../commands/use-commands.mjs";
 import { CommandButtonHandlerBuilder } from "../interaction-tools.mjs";
 
 /**
@@ -201,7 +203,7 @@ export class TakeUnhackHandler extends CommandButtonHandlerBuilder(
  * Handler to use a local document.
  */
 export class UseLocalHandler extends CommandButtonHandlerBuilder(
-  UseLocalCommand,
+  useLocalCommand,
 ) {
   /**
    * @inheritDoc
@@ -217,7 +219,7 @@ export class UseLocalHandler extends CommandButtonHandlerBuilder(
  * Handler to use an external document.
  */
 export class UseExternalHandler extends CommandButtonHandlerBuilder(
-  UseExternalCommand,
+  useExternalCommand,
 ) {
   /**
    * @inheritDoc

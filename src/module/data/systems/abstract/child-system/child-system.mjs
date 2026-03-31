@@ -89,18 +89,10 @@ export default class ChildSystem extends mix(
     return Object.assign(super.embedActions, {
       useDoc: {
         primary: async (event, relative) => {
-          await this.use({
-            event,
-            actor: relative?.actor,
-            showDialog: game.teriock.getSetting("showRollDialogs"),
-          });
+          await this.use({ event, actor: relative?.actor });
         },
         secondary: async (event, relative) => {
-          await this.use({
-            event,
-            actor: relative?.actor,
-            showDialog: !game.teriock.getSetting("showRollDialogs"),
-          });
+          await this.use({ event, actor: relative?.actor });
         },
       },
     });

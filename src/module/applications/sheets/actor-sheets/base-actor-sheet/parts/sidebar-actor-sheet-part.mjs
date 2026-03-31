@@ -10,14 +10,61 @@ export default (Base) =>
    * @mixin
    */
   class SidebarActorSheetPart extends Base {
+    static DEFAULT_OPTIONS = {
+      actions: {
+        resetAttackPenalty: {
+          buttons: [2],
+          handler: this.#onResetAttackPenalty,
+        },
+        toggleSidebar: this.#onToggleSidebar,
+        toggleStatDrawer: {
+          buttons: [2],
+          handler: this.#onToggleStatDrawer,
+        },
+      },
+    };
+
     /** @inheritDoc */
     constructor(...args) {
       super(...args);
       this._sidebarOpen = true;
-      this._tabberOpen = true;
       for (const stat of Object.keys(TERIOCK.options.die.stats)) {
         this[`_${stat}DrawerOpen`] = true;
       }
+    }
+
+    /**
+     * Reset attack penalty to zero.
+     * @returns {Promise<void>}
+     */
+    static async #onResetAttackPenalty() {
+      await this.document.update({ "system.combat.attackPenalty": 0 });
+    }
+
+    /**
+     * Toggle the sidebar's collapsed state.
+     * @returns {Promise<void>}
+     */
+    static async #onToggleSidebar() {
+      this.element
+        .querySelectorAll(".sidebar-collapser")
+        .forEach((el) => el.classList.toggle("collapsed"));
+      this._sidebarOpen = !this._sidebarOpen;
+    }
+
+    /**
+     * Toggle a stat drawer's collapsed state.
+     * @param {PointerEvent} _event - The event object.
+     * @param {HTMLElement} target - The target element.
+     * @returns {Promise<void>}
+     */
+    static async #onToggleStatDrawer(_event, target) {
+      target
+        .closest(".character-status-bar-box")
+        ?.querySelector(".die-drawer:not(.top-drawer)")
+        ?.classList.toggle("collapsed");
+      const stat = target.dataset.stat;
+      this[`_${stat}DrawerOpen`] = !this[`_${stat}DrawerOpen`];
     }
 
     /**
@@ -74,61 +121,13 @@ export default (Base) =>
             value: true,
           },
         ],
-        {
-          path: "system.scaling.brScale",
-        },
+        { path: "system.scaling.brScale" },
       );
     }
 
     /** @inheritDoc */
     async _onRender(context, options) {
       await super._onRender(context, options);
-
-      /** @type {Record<string, HTMLElement>} */
-      const interactiveElements = {
-        sidebar: this.element.querySelector(".character-sidebar"),
-        tabber: this.element.querySelector(
-          ".character-sidebar-tabber-container",
-        ),
-        hpDrawer: this.element.querySelector(".hp-die-drawer"),
-        mpDrawer: this.element.querySelector(".mp-die-drawer"),
-      };
-
-      this.element
-        .querySelectorAll(".character-tabber[data-tab='sidebar']")
-        .forEach((el) => {
-          el.addEventListener("click", async (e) => {
-            e.preventDefault();
-            interactiveElements.sidebar.classList.toggle("collapsed");
-            interactiveElements.tabber.classList.toggle("collapsed");
-            this._sidebarOpen = !this._sidebarOpen;
-            this._tabberOpen = !this._tabberOpen;
-            e.stopPropagation();
-          });
-        });
-
-      for (const [stat, name] of Object.entries(TERIOCK.options.die.stats)) {
-        this.element
-          .querySelectorAll(`.character-${name}-bar-overlay-row`)
-          .forEach((el) => {
-            el.addEventListener("contextmenu", (e) => {
-              e.preventDefault();
-              interactiveElements[`${stat}Drawer`].classList.toggle(
-                "collapsed",
-              );
-              this[`_${stat}DrawerOpen`] = !this[`_${stat}DrawerOpen`];
-              e.stopPropagation();
-            });
-          });
-      }
-
-      this.element
-        .querySelector(".character-penalty-box")
-        ?.addEventListener("contextmenu", async (e) => {
-          e.preventDefault();
-          await this.document.update({ "system.combat.attackPenalty": 0 });
-          e.stopPropagation();
-        });
 
       this._connectContextMenu(
         ".character-piercing-box",

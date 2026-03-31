@@ -4,6 +4,7 @@ import { simplifyTags } from "../../../../helpers/panel.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
 import { makeIcon, makeIconClass, mix } from "../../../../helpers/utils.mjs";
 import { TextField } from "../../../fields/_module.mjs";
+import { speciesTransformationFields } from "../../../fields/helpers/transformation-fields.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
@@ -81,6 +82,7 @@ export default class SpeciesSystem extends mix(
         new fields.StringField({ choices: TERIOCK.reference.traits }),
         { initial: ["humanoid"] },
       ),
+      transformation: new fields.SchemaField(speciesTransformationFields()),
       transformationLevel: new fields.StringField({
         choices: TERIOCK.options.transformation.level,
         initial: null,
