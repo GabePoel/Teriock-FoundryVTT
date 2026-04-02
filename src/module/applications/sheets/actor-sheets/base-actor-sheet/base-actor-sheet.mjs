@@ -130,7 +130,7 @@ export default class BaseActorSheet extends mix(
     this._prepareDisplayContext(context);
     context.enrichedNotes = await this._enrich(this.document.system.notes);
     context.enrichedSpecialRules = await this._enrich(
-      this.document.system.primaryAttacker?.system?.specialRules,
+      this.document.system.wielding.attacker?.system?.specialRules,
     );
     return context;
   }

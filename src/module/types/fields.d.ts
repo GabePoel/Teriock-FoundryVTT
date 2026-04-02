@@ -13,6 +13,15 @@ declare global {
       propagationPaths?: string[];
     };
 
+    export type _LocalDocumentFieldOptions = {
+      /** Display string ID if no matching document is found */
+      fallback?: boolean;
+      /** Only display the ID and not the full document */
+      idOnly?: boolean;
+      /** Force to null if the specified condition is met */
+      nullify?: (doc: TeriockDocument) => boolean;
+    };
+
     export type FormulaDerivationOptions = {
       interval?: number;
       blank?: number | string;

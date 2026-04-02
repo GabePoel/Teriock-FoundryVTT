@@ -87,7 +87,7 @@ export default function CommonDocumentMixin(Base) {
 
       /** @inheritDoc */
       get embedIcons() {
-        return [...super.embedIcons, this.system.embedIcons];
+        return [...super.embedIcons, ...this.system.embedIcons];
       }
 
       /** @inheritDoc */

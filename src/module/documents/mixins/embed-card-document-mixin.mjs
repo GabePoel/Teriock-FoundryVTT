@@ -3,7 +3,6 @@ import {
   TeriockContextMenu,
   TeriockTextEditor,
 } from "../../applications/ux/_module.mjs";
-import { queryAll } from "../../helpers/html.mjs";
 import { toTitleCase } from "../../helpers/string.mjs";
 
 /**
@@ -81,40 +80,31 @@ export default function EmbedCardDocumentMixin(Base) {
       /** @inheritDoc */
       onEmbed(element) {
         bindCommonActions(element);
-        queryAll(element, "[data-action]").forEach((el) => {
-          const action = el.dataset.action;
-          if (this.embedActions[action]) {
-            for (const [type, callback] of Object.entries({
-              click: "primary",
-              contextmenu: "secondary",
-            })) {
-              if (this.embedActions[action][callback]) {
-                el.addEventListener(type, async (event) => {
-                  event.stopPropagation();
-                  event.preventDefault();
-                  const target = /** @type {HTMLElement} */ event.target;
-                  const card =
-                    /** @type {HTMLElement} */ target.closest(
-                      "[data-relative]",
-                    );
-                  const relativeUuid = card?.dataset.relative;
-                  let relative;
-                  if (relativeUuid) {
-                    relative = await fromUuid(relativeUuid);
-                  }
-                  await this.embedActions[action][callback](event, relative);
-                  if (relative && relative.sheet?.isVisible) {
-                    await relative.sheet.render();
-                  }
-                  if (relative?.parent && relative.parent.sheet?.isVisible) {
-                    await relative.parent.sheet.render();
-                  }
-                });
+        const relativeUuid = element.dataset.relative;
+        for (const [type, callback] of Object.entries({
+          click: "primary",
+          contextmenu: "secondary",
+        })) {
+          element.addEventListener(type, async (ev) => {
+            const target = /** @type {HTMLElement} */ ev.target;
+            const el =
+              /** @type {HTMLElement} */ target.closest("[data-action]");
+            if (el) {
+              const action = el.dataset.action;
+              let relative;
+              if (relativeUuid) relative = await fromUuid(relativeUuid);
+              const fn = this.embedActions[action][callback];
+              if (!fn) return;
+              await fn(ev, relative);
+              if (relative && relative.sheet?.isVisible) {
+                await relative.sheet.render();
+              }
+              if (relative?.parent && relative.parent.sheet?.isVisible) {
+                await relative.parent.sheet.render();
               }
             }
-          }
-        });
-        const relativeUuid = element.dataset.relative;
+          });
+        }
         if (relativeUuid) {
           fromUuid(relativeUuid).then((relative) => {
             const menuEntries = this.getCardContextMenuEntries(relative);

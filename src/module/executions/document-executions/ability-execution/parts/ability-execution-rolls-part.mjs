@@ -80,7 +80,7 @@ export default function AbilityExecutionRollsPart(Base) {
               if (
                 this.piercing.ub &&
                 (this.warded ||
-                  !target.actor.system.primaryBlocker.system.spellTurning)
+                  !target.actor.system.wielding.blocker?.system.spellTurning)
               ) {
                 rollOptions.threshold = target.actor.system.defense.ac;
                 rollOptions.comparison = "gt";

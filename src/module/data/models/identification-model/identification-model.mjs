@@ -3,7 +3,10 @@ import { selectDocumentsDialog } from "../../../applications/dialogs/select-docu
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { getDocument } from "../../../helpers/fetch.mjs";
 import { toCamelCase } from "../../../helpers/string.mjs";
-import { makeIconClass } from "../../../helpers/utils.mjs";
+import {
+  inferNameFromIdentifier,
+  makeIconClass,
+} from "../../../helpers/utils.mjs";
 import { TextField } from "../../fields/_module.mjs";
 import EmbeddedDataModel from "../embedded-data-model.mjs";
 
@@ -180,11 +183,15 @@ export default class IdentificationModel extends EmbeddedDataModel {
           toCamelCase(this.parent.equipmentType),
         )
       ) {
-        uncheckedPropertyIdentifiers.push(
-          ...(
-            await getDocument(this.parent.equipmentType, "equipment")
-          ).properties.map((p) => p.system.identifier),
+        const reference = await getDocument(
+          inferNameFromIdentifier(this.parent.equipmentType, "equipment"),
+          "equipment",
         );
+        if (reference) {
+          uncheckedPropertyIdentifiers.push(
+            ...reference.properties.map((p) => p.system.identifier),
+          );
+        }
       }
       const revealed = [
         ...this.parent.parent.properties.filter((p) => p.system.revealed),

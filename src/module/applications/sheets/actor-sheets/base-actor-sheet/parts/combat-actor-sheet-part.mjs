@@ -24,22 +24,18 @@ export default (Base) =>
 
     /**
      * Opens the primary attacker's sheet.
-     * @param {PointerEvent} event - The event object.
      * @returns {Promise<void>}
      */
-    static async #onOpenPrimaryAttacker(event) {
-      event.stopPropagation();
-      await this.document.system.primaryAttacker?.sheet.render(true);
+    static async #onOpenPrimaryAttacker() {
+      await this.document.system.wielding.attacker?.sheet.render(true);
     }
 
     /**
      * Opens the primary blocker's sheet.
-     * @param {PointerEvent} event - The event object.
      * @returns {Promise<void>}
      */
-    static async #onOpenPrimaryBlocker(event) {
-      event.stopPropagation();
-      await this.document.system.primaryBlocker?.sheet.render(true);
+    static async #onOpenPrimaryBlocker() {
+      await this.document.system.wielding.blocker?.sheet.render(true);
     }
 
     /**
@@ -51,7 +47,7 @@ export default (Base) =>
         [
           ...this.document.equipment.filter((e) => e.system.equipped),
           ...this.document.bodyParts,
-        ],
+        ].filter((a) => a.active),
         {
           hint: game.i18n.localize(
             "TERIOCK.SHEETS.Actor.ACTIONS.SelectAttacker.hint",
@@ -61,7 +57,7 @@ export default (Base) =>
           ),
           openable: true,
           textKey: "system.summarizedAttack",
-          checked: this.document.system.primaryAttacker?.uuid,
+          checked: this.document.system.wielding.attacker?.uuid,
         },
       );
       if (attacker) {
@@ -77,7 +73,10 @@ export default (Base) =>
      */
     static async #onSelectBlocker() {
       const attacker = await selectDocumentDialog(
-        this.document.armaments.filter((a) => a.active),
+        [
+          ...this.document.equipment.filter((e) => e.system.equipped),
+          ...this.document.bodyParts,
+        ].filter((a) => a.active),
         {
           hint: game.i18n.localize(
             "TERIOCK.SHEETS.Actor.ACTIONS.SelectBlocker.hint",
@@ -87,7 +86,7 @@ export default (Base) =>
           ),
           openable: true,
           textKey: "system.summarizedBlock",
-          checked: this.document.system.primaryBlocker?.uuid,
+          checked: this.document.system.wielding.blocker?.uuid,
         },
       );
       if (attacker) {

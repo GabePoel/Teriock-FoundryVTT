@@ -1,11 +1,21 @@
 import { characterOptions } from "../../../../../../constants/options/character-options.mjs";
 import { prefixObject } from "../../../../../../helpers/utils.mjs";
-import { FormulaField } from "../../../../../fields/_module.mjs";
+import {
+  FormulaField,
+  LocalDocumentField,
+} from "../../../../../fields/_module.mjs";
 import { PiercingModel } from "../../../../../models/_module.mjs";
-import { migratePiercing } from "../../../../../shared/migrations/migrate-piercing.mjs";
 
 const { fields } = foundry.data;
-const { utils } = foundry;
+
+/**
+ * Determine if a wielded document should be null.
+ * @param {TeriockArmament} doc
+ */
+function nullifyWielded(doc) {
+  if (!["body", "equipment"].includes(doc.type) || !doc.active) return true;
+  return doc.type === "equipment" && !doc.system.equipped;
+}
 
 /**
  * Actor data model that handles combat.
@@ -40,81 +50,14 @@ export default (Base) => {
             warded: new fields.BooleanField({ initial: false }),
           }),
           wielding: new fields.SchemaField({
-            attacker: new fields.DocumentIdField({ nullable: true }),
-            blocker: new fields.DocumentIdField({ nullable: true }),
+            attacker: new LocalDocumentField(foundry.documents.BaseItem, {
+              nullify: nullifyWielded,
+            }),
+            blocker: new LocalDocumentField(foundry.documents.BaseItem, {
+              nullify: nullifyWielded,
+            }),
           }),
         });
-      }
-
-      /**
-       * @inheritDoc
-       * @param {object} data
-       */
-      static migrateData(data) {
-        if (
-          utils.getType(utils.getProperty(data, "wielding.attacker.raw")) ===
-          "string"
-        ) {
-          utils.setProperty(
-            data,
-            "wielding.attacker",
-            utils.getProperty(data, "wielding.attacker.raw"),
-          );
-        } else if (
-          utils.getType(utils.getProperty(data, "wielding.attacker")) ===
-          "Object"
-        ) {
-          utils.setProperty(data, "wielding.attacker", null);
-        }
-        if (
-          utils.getType(utils.getProperty(data, "wielding.blocker.raw")) ===
-          "string"
-        ) {
-          utils.setProperty(
-            data,
-            "wielding.blocker",
-            utils.getProperty(data, "wielding.blocker.raw"),
-          );
-        } else if (
-          utils.getType(utils.getProperty(data, "wielding.blocker")) ===
-          "Object"
-        ) {
-          utils.setProperty(data, "wielding.blocker", null);
-        }
-        data.offense = migratePiercing(data.offense);
-        super.migrateData(data);
-      }
-
-      /**
-       * Primary attacking item.
-       * @returns {TeriockArmament|null}
-       */
-      get primaryAttacker() {
-        if (this.wielding.attacker) {
-          const item = /** @type {TeriockArmament} */ this.parent.items.get(
-            this.wielding.attacker,
-          );
-          if (item?.type === "body" || item?.system.equipped) {
-            return item;
-          }
-        }
-        return null;
-      }
-
-      /**
-       * Primary blocking item.
-       * @returns {TeriockArmament|null}
-       */
-      get primaryBlocker() {
-        if (this.wielding.blocker) {
-          const item = /** @type {TeriockArmament} */ this.parent.items.get(
-            this.wielding.blocker,
-          );
-          if (item?.type === "body" || item?.system.equipped) {
-            return item;
-          }
-        }
-        return null;
       }
 
       /**
@@ -138,16 +81,17 @@ export default (Base) => {
        */
       #getEquipmentRollData() {
         const data = {};
-        if (this.primaryAttacker) {
+        const { attacker, blocker } = this.wielding;
+        if (attacker) {
           Object.assign(
             data,
-            prefixObject(this.primaryAttacker.system.getLocalRollData(), "atk"),
+            prefixObject(attacker.system.getLocalRollData(), "atk"),
           );
         }
-        if (this.primaryBlocker) {
+        if (blocker) {
           Object.assign(
             data,
-            prefixObject(this.primaryBlocker.system.getLocalRollData(), "blk"),
+            prefixObject(blocker.system.getLocalRollData(), "blk"),
           );
         }
         return data;
@@ -158,20 +102,13 @@ export default (Base) => {
        * @returns {object}
        */
       #getOffenseRollData() {
-        const weaponAv0 = this.primaryAttacker
-          ? this.primaryAttacker.system.piercing.av0
-          : false;
-        const naturalAv0 =
-          this.offense.piercing === "av0" || this.offense.piercing === "ub";
+        const weaponAv0 = !!this.wielding.attacker?.system.piercing.av0;
+        const naturalAv0 = this.offense.piercing.av0;
         const hasAv0 = weaponAv0 || naturalAv0;
-        const weaponUb = this.primaryAttacker
-          ? this.primaryAttacker.system.piercing.ub
-          : false;
-        const naturalUb = this.offense.piercing === "ub";
+        const weaponUb = !!this.wielding.attacker?.system.piercing.ub;
+        const naturalUb = this.offense.piercing.ub;
         const hasUb = weaponUb || naturalUb;
-        const weaponWarded = this.primaryAttacker
-          ? this.primaryAttacker.system.warded
-          : false;
+        const weaponWarded = !!this.wielding.attacker?.system.warded;
         return {
           sb: Number(this.offense.sb),
           av0: Number(hasAv0) * 2,
@@ -241,7 +178,7 @@ export default (Base) => {
           this.defense.av.worn,
         );
         this.defense.ac += this.defense.av.value;
-        this.defense.bv = this.primaryBlocker?.system.bv.value || 0;
+        this.defense.bv = this.wielding.blocker?.system.bv.value || 0;
         this.defense.cc = this.defense.ac + this.defense.bv;
       }
     }

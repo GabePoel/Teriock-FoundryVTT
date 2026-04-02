@@ -158,8 +158,8 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
    */
   #determineDefaultArmament(interaction) {
     if (!this.actor) return null;
-    if (interaction === "attack") return this.actor.system.primaryAttacker;
-    if (interaction === "block") return this.actor.system.primaryBlocker;
+    if (interaction === "attack") return this.actor.system.wielding.attacker;
+    if (interaction === "block") return this.actor.system.wielding.blocker;
     return null;
   }
 

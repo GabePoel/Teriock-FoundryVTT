@@ -42,9 +42,9 @@ declare global {
       /** <schema> Wielding */
       wielding: {
         /** <schema> Primary attacker ID */
-        attacker: ID<TeriockEquipment> | null;
+        attacker: TeriockArmament | null;
         /** <schema> Primary blocker ID */
-        blocker: ID<TeriockEquipment> | null;
+        blocker: TeriockArmament | null;
       };
     };
   }
