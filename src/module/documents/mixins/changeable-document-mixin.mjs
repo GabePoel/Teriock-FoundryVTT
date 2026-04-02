@@ -49,22 +49,6 @@ export default function ChangeableDocumentMixin(Base) {
           if (!effect.active) continue;
           let changes = [...effect.system.changes];
           for (const change of changes) {
-            if (change.key.startsWith("system.damage.all")) {
-              changes.push(
-                ...[
-                  {
-                    ...change,
-                    key: change.key.replace("all", "base"),
-                  },
-                  {
-                    ...change,
-                    key: change.key.replace("all", "twoHanded"),
-                  },
-                ],
-              );
-            }
-          }
-          for (const change of changes) {
             const conditionalChange = {
               key: change.key,
               mode: change.mode,

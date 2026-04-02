@@ -11,7 +11,7 @@ effectObject.system.automations[changesId] = {
   _id: changesId,
   changes: [
     {
-      key: "system.damage.all.raw",
+      key: "system.damage",
       qualifier: `@class.${equipmentClass}`,
       target: "armament",
       value: "1d4[holy]",
