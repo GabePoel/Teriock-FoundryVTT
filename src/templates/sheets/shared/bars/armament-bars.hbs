@@ -1,8 +1,9 @@
 {{#if
   (or
-    (exists system.damage.base.raw)
-    (exists system.attackPenalty.raw)
-    (exists system.hit.raw)
+    (exists system.attackPenalty)
+    (exists system.damage.base)
+    (exists system.damage.twoHanded)
+    (exists system.hitBonus)
   )
 }}
   <div class="ab-bar">
@@ -11,52 +12,52 @@
         systemFields.damage.fields.base
         dataset=(object
           tooltip=(ifThen
-            (exists system._source.damage.twoHanded.raw)
-            (localize "TERIOCK.SYSTEMS.Armament.FIELDS.damage.base.raw.label")
+            (exists system._source.damage.twoHanded)
+            (localize "TERIOCK.SYSTEMS.Armament.FIELDS.damage.base.label")
             ""
           )
         )
         disabled=(not editable)
-        value=system._source.damage.base.raw
+        value=system._source.damage.base
       )
       secondary=(formInput
         (ifThen
-          (exists system._source.damage.twoHanded.raw)
+          (exists system._source.damage.twoHanded)
           systemFields.damage.fields.twoHanded
           systemFields.damage.fields.base
         )
-        dataset=(object tooltip=(localize "TERIOCK.SYSTEMS.Equipment.FIELDS.damage.twoHanded.raw.label"))
+        dataset=(object tooltip=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.damage.twoHanded.label"))
         disabled=(not editable)
-        value=system._source.damage.twoHanded.raw
+        value=system._source.damage.twoHanded
       )
       icon=TERIOCK.display.icons.ui.damage
-      include=(exists system.damage.base.raw)
-      includeSecondary=(exists system._source.damage.twoHanded.raw)
-      label=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.damage.base.raw.abbreviation")
-      tooltip=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.damage.base.raw.label")
+      include=(exists system.damage.base)
+      includeSecondary=(exists system._source.damage.twoHanded)
+      label=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.damage.abbreviation")
+      tooltip=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.damage.base.label")
     }}
     {{formBox
       (formInput
-        systemFields.hit
+        systemFields.hitBonus
         disabled=(not editable)
-        value=system._source.hit.raw
+        value=system._source.hitBonus
       )
       icon=TERIOCK.display.icons.armament.hitBonus
-      include=(exists system.hit.raw)
-      label=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.hit.raw.abbreviation")
-      unselected=system.hit.raw
-      tooltip=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.hit.raw.label")
+      include=(exists system.hitBonus)
+      label=(localize "TERIOCK.SYSTEMS.Attack.FIELDS.hitBonus.abbreviation")
+      unselected=system.hitBonus
+      tooltip=(localize "TERIOCK.SYSTEMS.Attack.FIELDS.hitBonus.label")
     }}
     {{formBox
       (formInput
         systemFields.attackPenalty
         disabled=(not editable)
-        value=system._source.attackPenalty.raw
+        value=system._source.attackPenalty
       )
       icon=TERIOCK.display.icons.armament.ap
-      label=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.attackPenalty.raw.abbreviation")
-      unselected=system.attackPenalty.formula
-      tooltip=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.attackPenalty.raw.label")
+      label=(localize "TERIOCK.SYSTEMS.Attack.FIELDS.attackPenalty.abbreviation")
+      unselected=system.attackPenalty
+      tooltip=(localize "TERIOCK.SYSTEMS.Attack.FIELDS.attackPenalty.label")
     }}
   </div>
 {{/if}}
@@ -75,7 +76,7 @@
       )
       icon=TERIOCK.display.icons.armament.av
       include=(exists system.av.raw)
-      label=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.av.raw.abbreviation")
+      label=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.av.abbreviation")
       unselected=system.av.value
       tooltip=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.av.raw.label")
     }}
@@ -87,7 +88,7 @@
       )
       icon=TERIOCK.display.icons.armament.bv
       include=(exists system.bv.raw)
-      label=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.bv.raw.abbreviation")
+      label=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.bv.abbreviation")
       unselected=system.bv.value
       tooltip=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.bv.raw.label")
     }}

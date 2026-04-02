@@ -49,8 +49,8 @@ export default class AbilityExecution extends AbilityExecutionChatPart(
     };
     if (this.armament) {
       rollAdditions.bv = this.armament.system.bv.value;
-      rollAdditions.hit = this.armament.system.hit.formula;
-      rollAdditions["hit.web"] = this.armament.system.hit.formula;
+      rollAdditions.hit = this.armament.system.hitBonus;
+      rollAdditions["hit.wep"] = this.armament.system.hitBonus;
     }
     Object.assign(rollData, rollAdditions);
     return rollData;

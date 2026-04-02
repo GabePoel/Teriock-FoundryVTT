@@ -1,5 +1,4 @@
 import { EquipmentExecution } from "../../../../executions/document-executions/_module.mjs";
-import { formulaExists } from "../../../../helpers/formula.mjs";
 import {
   dotJoin,
   toCamelCase,
@@ -24,7 +23,6 @@ const { fields } = foundry.data;
  * @mixes ArmamentSystem
  * @mixes AttunableSystem
  * @mixes ConsumableSystem
- * @mixes EquipmentDamagePart
  * @mixes EquipmentIdentificationPart
  * @mixes EquipmentMigrationPart
  * @mixes EquipmentPanelPart
@@ -39,7 +37,6 @@ export default class EquipmentSystem extends mix(
   mixins.AttunableSystemMixin,
   mixins.ConsumableSystemMixin,
   mixins.WikiSystemMixin,
-  parts.EquipmentDamagePart,
   parts.EquipmentIdentificationPart,
   parts.EquipmentMigrationPart,
   parts.EquipmentPanelPart,
@@ -136,29 +133,23 @@ export default class EquipmentSystem extends mix(
   /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
-    if (!this.consumable) {
-      parts.subtitle = this.equipmentType;
-    }
-    parts.text = dotJoin([
-      ...this._damageWrappers,
-      ...this._defenseBar.wrappers,
-      formulaExists(this.tier.text)
-        ? game.i18n.format("TERIOCK.SYSTEMS.Attunable.PANELS.tier", {
-            value: this.tier.text,
-          })
-        : "",
-      game.i18n.format("TERIOCK.SYSTEMS.Equipment.PANELS.weight", {
-        value: this.weight.total + this.storage.carriedWeight,
-      }),
-      this.sup?.fullName || "",
-      parts.text,
-    ]);
-    return parts;
+    return Object.assign(parts, {
+      subtitle: !this.consumable
+        ? inferNameFromIdentifier(this.equipmentType, "equipment")
+        : parts.subtitle,
+      text: dotJoin([
+        ...this._attunableWrappers,
+        game.i18n.format("TERIOCK.SYSTEMS.Equipment.PANELS.weight", {
+          value: this.weight.total + this.storage.carriedWeight,
+        }),
+        parts.text,
+      ]),
+    });
   }
 
   /** @inheritDoc */
   get wikiPage() {
-    return `Equipment:${inferNameFromIdentifier(this.equipmentType)}`;
+    return `Equipment:${inferNameFromIdentifier(this.equipmentType, "equipment")}`;
   }
 
   /** @inheritDoc */

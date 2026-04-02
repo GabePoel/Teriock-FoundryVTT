@@ -9,29 +9,12 @@ import { inferNameFromIdentifier } from "../../../../../helpers/utils.mjs";
 export default (Base) => {
   return (
     /**
-     * @extends {EquipmentDamagePart}
      * @extends {EquipmentIdentificationPart}
      * @extends {EquipmentStoragePart}
      * @extends {EquipmentWieldingPart}
      * @mixin
      */
     class EquipmentPanelPart extends Base {
-      /** @inheritdoc */
-      get _damageWrappers() {
-        const wrappers = super._damageWrappers;
-        if (this.hasTwoHandedAttack) {
-          const twoHandedDamageString = formulaExists(
-            this.damage.twoHanded.typed,
-          )
-            ? game.i18n.format("TERIOCK.SYSTEMS.Armament.PANELS.damage", {
-                value: this.damage.twoHanded.typed,
-              })
-            : "";
-          wrappers.push(twoHandedDamageString);
-        }
-        return wrappers;
-      }
-
       /** @inheritDoc */
       get panelParts() {
         const bars = [

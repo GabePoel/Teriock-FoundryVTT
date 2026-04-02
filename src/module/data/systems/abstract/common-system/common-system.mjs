@@ -91,6 +91,14 @@ export default class CommonSystem extends mix(
   }
 
   /**
+   * Text describing whatever is the master of this document.
+   * @returns {string}
+   */
+  get _masterText() {
+    return this.parent.master?.fullName || "";
+  }
+
+  /**
    * @returns {typeof EmbeddedDataModel|null}
    */
   get _settingsFlagsDataModel() {
@@ -154,7 +162,7 @@ export default class CommonSystem extends mix(
     return {
       title: this.parent.fullName,
       img: this.parent.img,
-      text: this.parent.master?.fullName,
+      text: this._masterText,
       color: this.color,
       openable: true,
       draggable: true,

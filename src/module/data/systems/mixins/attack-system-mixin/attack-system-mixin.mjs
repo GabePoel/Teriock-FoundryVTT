@@ -1,3 +1,4 @@
+import { FormulaField } from "../../../fields/_module.mjs";
 import { PiercingModel } from "../../../models/_module.mjs";
 import { migratePiercing } from "../../../shared/migrations/migrate-piercing.mjs";
 
@@ -23,6 +24,11 @@ export default function AttackSystemMixin(Base) {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
+          attackPenalty: new FormulaField({
+            deterministic: false,
+            initial: "-3",
+          }),
+          hitBonus: new FormulaField({ deterministic: false }),
           piercing: new fields.EmbeddedDataField(PiercingModel),
           warded: new fields.BooleanField({
             initial: false,
@@ -40,6 +46,8 @@ export default function AttackSystemMixin(Base) {
       /** @inheritDoc */
       getLocalRollData() {
         return Object.assign(super.getLocalRollData(), {
+          ap: this.attackPenalty,
+          hit: this.hitBonus,
           av0: Number(this.piercing.av0),
           ub: Number(this.piercing.ub),
           warded: Number(this.warded),

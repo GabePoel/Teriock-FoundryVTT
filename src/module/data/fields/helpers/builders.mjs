@@ -6,7 +6,6 @@ import { choiceMap, sortObject } from "../../../helpers/utils.mjs";
 import {
   EnhancedNumberField,
   EnhancedStringField,
-  EvaluationField,
   FormulaField,
 } from "../_module.mjs";
 
@@ -389,28 +388,6 @@ export function competenceField() {
     nullable: false,
     required: false,
   });
-}
-
-/**
- * Damage field.
- * @param {boolean} [twoHanded]
- * @returns {SchemaField}
- */
-export function damageField(twoHanded = false) {
-  const schema = {
-    base: new EvaluationField({
-      deterministic: false,
-      model: teriock.data.models.DamageModel,
-    }),
-    types: new SetField(new StringField()),
-  };
-  if (twoHanded) {
-    schema.twoHanded = new EvaluationField({
-      deterministic: false,
-      model: teriock.data.models.DamageModel,
-    });
-  }
-  return new SchemaField(schema);
 }
 
 /**

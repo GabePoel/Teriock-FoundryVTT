@@ -6,13 +6,13 @@ const { fields } = foundry.data;
 
 /**
  * Dialog that allows for modifying a roll with boosts/deboosts.
- * @param {string} rollFormula
+ * @param {Teriock.System.FormulaString} rollFormula
  * @param {object} [options]
  * @param {boolean} [options.crit] - Go critical?
  * @param {string} [options.label] - Custom button label
  * @param {string} [options.type] - The title of the type of roll being made
  * @param {object} [options.rollData] - Roll data to use when updating the formula.
- * @returns {Promise<string>} The roll formula with boost changes applied.
+ * @returns {Promise<Teriock.System.FormulaString>} The roll formula with boost changes applied.
  */
 export default async function boostDialog(rollFormula, options = {}) {
   const {

@@ -16,14 +16,18 @@ export default class ArmamentExecution extends BaseDocumentExecution {
    */
   constructor(options = {}) {
     super(options);
-    const { crit = false, deals = ["damage"], bonusDamage = "" } = options;
-    this.crit = crit;
-    this.deals = new Set(deals);
-    this.bonusDamage = bonusDamage;
+    this.crit = options.crit ?? false;
+    this.deals = new Set(
+      options.deals ?? Array.from(this.source.system.deals) ?? ["damage"],
+    );
+    this.bonusDamage = options.bonusDamage ?? "";
     this.showDialog = options.showDialog;
-    if (options.formula === undefined) {
-      this.formula = this.source.system.damage.base.formula;
-    }
+    this.twoHanded = options.twoHanded && this.source.system.hasTwoHandedAttack;
+    this.formula =
+      options.formula ??
+      (this.twoHanded
+        ? this.source.system.damage.twoHanded
+        : this.source.system.damage.base);
   }
 
   crit = false;

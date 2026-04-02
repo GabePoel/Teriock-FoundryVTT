@@ -19,7 +19,7 @@ export const displayOptions = {
     av: "TERIOCK.SYSTEMS.Armament.FIELDS.av.raw.label",
     bv: "TERIOCK.SYSTEMS.Armament.FIELDS.bv.raw.label",
     consumable: "TERIOCK.SYSTEMS.Consumable.FIELDS.consumable.label",
-    damage: "TERIOCK.SYSTEMS.Armament.FIELDS.damage.base.raw.label",
+    damage: "TERIOCK.SYSTEMS.Armament.FIELDS.damage.base.label",
     dampened: "TERIOCK.SYSTEMS.Equipment.FIELDS.dampened.label",
     equipmentType: "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentType.label",
     equipped: "TERIOCK.SYSTEMS.Equipment.FIELDS.equipped.label",

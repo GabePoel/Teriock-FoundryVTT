@@ -3,7 +3,6 @@ export * from "./settings-models/_module.mjs";
 export * from "./stat-pool-models/_module.mjs";
 export * from "./unit-models/_module.mjs";
 export { default as CompetenceModel } from "./competence-model.mjs";
-export { default as DamageModel } from "./damage-model.mjs";
 export { default as DefenseModel } from "./defense-model.mjs";
 export { default as EmbeddedDataModel } from "./embedded-data-model.mjs";
 export { default as EvaluationModel } from "./evaluation-model.mjs";

@@ -12,7 +12,7 @@
     </div>
     <div class="ab-menu-bar">
       <div class="tgrid g3">
-        {{#if (not (exists system.damage.base.raw))}}
+        {{#if (not (exists system.damage.base))}}
           <div class="tgrid-item">
             <button
               class="ab-menu-button ab-damage-button"
@@ -21,7 +21,7 @@
               {{/if}}
             >
               {{makeIcon TERIOCK.display.icons.ui.add "button"}}
-              {{localize "TERIOCK.SYSTEMS.Armament.FIELDS.damage.base.raw.label"}}
+              {{localize "TERIOCK.SYSTEMS.Armament.FIELDS.damage.label"}}
             </button>
           </div>
         {{/if}}
@@ -49,8 +49,8 @@
             </button>
           </div>
         {{/if}}
-        {{#if (exists system.damage.base.raw)}}
-          {{#if (not (exists system.hit.raw))}}
+        {{#if (exists system.damage.base)}}
+          {{#if (not (exists system.hitBonus))}}
             <div class="tgrid-item">
               <button class="ab-menu-button ab-hit-button"
                 {{#if (not editable)}}
@@ -58,7 +58,7 @@
                 {{/if}}
               >
                 {{makeIcon TERIOCK.display.icons.ui.add "button"}}
-                {{localize "TERIOCK.SYSTEMS.Armament.FIELDS.hit.raw.label"}}
+                {{localize "TERIOCK.SYSTEMS.Attack.FIELDS.hitBonus.label"}}
               </button>
             </div>
           {{/if}}

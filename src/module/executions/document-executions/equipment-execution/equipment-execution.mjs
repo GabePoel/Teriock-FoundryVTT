@@ -1,4 +1,5 @@
 import { getImage } from "../../../helpers/path.mjs";
+import { inferNameFromIdentifier } from "../../../helpers/utils.mjs";
 import ArmamentExecution from "../armament-execution/armament-execution.mjs";
 
 /**
@@ -10,15 +11,7 @@ export default class EquipmentExecution extends ArmamentExecution {
    */
   constructor(options = {}) {
     super(options);
-    const {
-      secret = game.teriock.getSetting("secretEquipment"),
-      twoHanded = game.teriock.getSetting("twoHandedEquipment"),
-    } = options;
-    if (options.formula === undefined && options.twoHanded) {
-      this.formula = this.source.system.damage.twoHanded.formula;
-    }
-    this.secret = secret;
-    this.twoHanded = twoHanded;
+    this.secret = options.secret ?? game.teriock.getSetting("secretEquipment");
   }
 
   /** @inheritDoc */
@@ -32,7 +25,10 @@ export default class EquipmentExecution extends ArmamentExecution {
       return {
         icon: TERIOCK.options.document.equipment.icon,
         name: game.i18n.format("TERIOCK.SYSTEMS.Equipment.PANELS.unknown", {
-          type: this.source.system.equipmentType,
+          type: inferNameFromIdentifier(
+            this.source.system.equipmentType,
+            "equipment",
+          ),
         }),
         blocks: [
           {

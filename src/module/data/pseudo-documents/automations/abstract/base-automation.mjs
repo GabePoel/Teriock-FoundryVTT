@@ -72,7 +72,7 @@ export default class BaseAutomation extends PropagationDataMixin(
    * @returns {boolean}
    */
   get competent() {
-    return this.competencies.has(this.parent.competence.raw);
+    return this.competencies.has(this.parent.competence.value);
   }
 
   /**

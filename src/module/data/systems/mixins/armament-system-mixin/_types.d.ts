@@ -1,35 +1,27 @@
-import {
-  DamageModel,
-  EvaluationModel,
-  RangeModel,
-} from "../../../models/_module.mjs";
+import { EvaluationModel, RangeModel } from "../../../models/_module.mjs";
 
 declare global {
   namespace Teriock.Models {
-    export type ArmamentDamage = {
-      /** <schema> Damage this always deals */
-      base: DamageModel;
-      /** <schema> Additional damage types to be added to all the base damage */
-      types: Set<string>;
-    };
-
     export type ArmamentSystemData = {
-      /** <schema> How much this increases an actor's attack penalty by per use */
-      attackPenalty: EvaluationModel;
       /** <schema> Armor Value */
       av: EvaluationModel;
       /** <schema> Block Value */
       bv: EvaluationModel;
       /** <schema> Damage Dice */
-      damage: Teriock.Models.ArmamentDamage;
+      damage: {
+        /** <schema> The amount of damage this typically deals */
+        base: Teriock.System.FormulaString;
+        /** <schema> The amount of damage this deals in two hands */
+        twoHanded: Teriock.System.FormulaString;
+        /** <base> Additional damage types that will be added to damage this deals */
+        types: Set<Teriock.System.IdentifierString>;
+      };
       /** <schema> Equipment Classes */
       equipmentClasses: Set<Teriock.Keys.EquipmentClass>;
       /** <schema> Style Bonus (Weapon Fighting Style) */
       fightingStyle: Teriock.Keys.WeaponFightingStyle;
       /** <schema> Flaws */
       flaws: string;
-      /** <schema> Additional Hit Bonus */
-      hit: EvaluationModel;
       /** <schema> Notes */
       notes: string;
       /** <base> Local property keys that can be modified by changes */

@@ -52,11 +52,8 @@ export default class EquipmentSheet extends mix(
    * @returns {Promise<void>}
    */
   static async #onToggleDampened() {
-    if (this.document.system.dampened) {
-      await this.document.system.undampen();
-    } else {
-      await this.document.system.dampen();
-    }
+    if (this.document.system.dampened) await this.document.system.undampen();
+    else await this.document.system.dampen();
   }
 
   /**
@@ -64,11 +61,8 @@ export default class EquipmentSheet extends mix(
    * @returns {Promise<void>}
    */
   static async #onToggleEquipped() {
-    if (this.document.system.equipped) {
-      await this.document.system.unequip();
-    } else {
-      await this.document.system.equip();
-    }
+    if (this.document.system.equipped) await this.document.system.unequip();
+    else await this.document.system.equip();
   }
 
   /**
@@ -76,11 +70,8 @@ export default class EquipmentSheet extends mix(
    * @returns {Promise<void>}
    */
   static async #onToggleGlued() {
-    if (this.document.system.glued) {
-      await this.document.system.unglue();
-    } else {
-      await this.document.system.glue();
-    }
+    if (this.document.system.glued) await this.document.system.unglue();
+    else await this.document.system.glue();
   }
 
   /**
@@ -88,20 +79,14 @@ export default class EquipmentSheet extends mix(
    * @returns {Promise<void>}
    */
   static async #onToggleShattered() {
-    if (this.document.system.shattered) {
-      await this.document.system.repair();
-    } else {
-      await this.document.system.shatter();
-    }
+    if (this.document.system.shattered) await this.document.system.repair();
+    else await this.document.system.shatter();
   }
 
   /** @inheritDoc */
   get _buttonUpdates() {
     return {
       ...super._buttonUpdates,
-      ".ab-two-handed-damage-button": { "system.damage.twoHanded.raw": "1" },
-      ".ab-short-range-button": { "system.range.short.raw": "5" },
-      ".ab-range-button": { "system.range.long.raw": "5" },
       ".ab-weight-button": { "system.weight.raw": "1" },
       ".ab-tier-button": { "system.tier.raw": "1" },
     };

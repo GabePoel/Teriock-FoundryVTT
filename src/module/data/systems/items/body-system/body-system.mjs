@@ -1,6 +1,4 @@
-import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { simplifyTags } from "../../../../helpers/panel.mjs";
-import { dotJoin } from "../../../../helpers/string.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
@@ -38,18 +36,9 @@ export default class BodySystem extends mix(
 
   /** @inheritDoc */
   get embedParts() {
-    const parts = super.embedParts;
-    parts.subtitle = game.i18n.localize("TYPES.Item.body");
-    parts.text = dotJoin([
-      ...this._damageWrappers,
-      ...this._defenseBar.wrappers,
-      this.parent.elder
-        ? this.parent.elder?.documentName !== "Actor"
-          ? this.parent.elder?.fullName
-          : ""
-        : "",
-    ]);
-    return parts;
+    return Object.assign(super.embedParts, {
+      subtitle: game.i18n.localize("TYPES.Item.body"),
+    });
   }
 
   /** @inheritDoc */
@@ -76,26 +65,6 @@ export default class BodySystem extends mix(
 
   /** @inheritDoc */
   prepareSpecialData() {
-    for (const damageOption of ["base"]) {
-      const key = `damage.${damageOption}.raw`;
-      const damageRoll = new BaseRoll(foundry.utils.getProperty(this, key));
-      damageRoll.terms.forEach((term) => {
-        const flavorParts = new Set([
-          ...term.flavor
-            .toLowerCase()
-            .split(" ")
-            .map((p) => p.trim()),
-          ...Array.from(this.damage.types).map((t) => t.toLowerCase().trim()),
-        ]);
-        flavorParts.delete("");
-        const flavorArray = Array.from(flavorParts);
-        flavorArray.sort((a, b) => a.localeCompare(b));
-        if (!term.isDeterministic || !isNaN(Number(term.expression))) {
-          term.options.flavor = flavorArray.join(" ");
-        }
-      });
-      foundry.utils.setProperty(this, key, damageRoll.formula);
-    }
     this.equipmentClasses.add("bodyParts");
     if (this.av.value) this.equipmentClasses.add("armor");
     super.prepareSpecialData();

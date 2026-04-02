@@ -19,10 +19,13 @@ export default class ArmamentSheet extends mix(
   get _buttonUpdates() {
     return {
       ...super._buttonUpdates,
-      ".ab-damage-button": { "system.damage.base.raw": "1" },
       ".ab-av-button": { "system.av.raw": "1" },
       ".ab-bv-button": { "system.bv.raw": "1" },
-      ".ab-hit-button": { "system.hit.raw": "1" },
+      ".ab-damage-button": { "system.damage.base": "1" },
+      ".ab-hit-button": { "system.hitBonus": "1" },
+      ".ab-range-button": { "system.range.long.raw": "5" },
+      ".ab-short-range-button": { "system.range.short.raw": "5" },
+      ".ab-two-handed-damage-button": { "system.damage.twoHanded": "1" },
     };
   }
 }

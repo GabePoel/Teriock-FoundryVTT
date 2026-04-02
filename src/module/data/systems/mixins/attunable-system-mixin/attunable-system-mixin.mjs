@@ -1,3 +1,4 @@
+import { formulaExists } from "../../../../helpers/formula.mjs";
 import { makeIcon } from "../../../../helpers/utils.mjs";
 import { EvaluationField } from "../../../fields/_module.mjs";
 
@@ -38,6 +39,20 @@ export default function AttunableSystemMixin(Base) {
             },
           ];
         return [];
+      }
+
+      /**
+       * Attunable wrappers.
+       * @returns {string[]}
+       */
+      get _attunableWrappers() {
+        return formulaExists(this.tier.text)
+          ? [
+              game.i18n.format("TERIOCK.SYSTEMS.Attunable.PANELS.tier", {
+                value: this.tier.text,
+              }),
+            ]
+          : [];
       }
 
       /**

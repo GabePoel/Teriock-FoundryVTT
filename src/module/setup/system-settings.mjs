@@ -43,10 +43,10 @@ export const settings = {
       scope: "user",
       type: Boolean,
     },
-    twoHandedEquipment: {
+    twoHandedArmaments: {
       default: false,
-      hint: "TERIOCK.SETTINGS.twoHandedEquipment.hint",
-      name: "TERIOCK.SETTINGS.twoHandedEquipment.name",
+      hint: "TERIOCK.SETTINGS.twoHandedArmaments.hint",
+      name: "TERIOCK.SETTINGS.twoHandedArmaments.name",
       scope: "user",
       type: Boolean,
     },

@@ -8,6 +8,11 @@ declare global {
       deterministic?: boolean;
     };
 
+    export type _PropagationFieldOptions = {
+      /** Specific paths this should propagate to instead of all direct subfields */
+      propagationPaths?: string[];
+    };
+
     export type FormulaDerivationOptions = {
       interval?: number;
       blank?: number | string;

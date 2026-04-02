@@ -1838,8 +1838,8 @@
           "label": "Causes Transformation"
         },
         "img": {
-          "hint": "Optional overriding art to apply to the target.",
-          "label": "Token Art"
+          "hint": "An image for transformed token art. Consequence transformation images are prioritized over species. This only applies if token art is overridden.",
+          "label": "Token Image"
         },
         "level": {
           "hint": "How strong of a transformation this is.",
@@ -1849,9 +1849,13 @@
           "hint": "Stats that should be reset by this transformation.",
           "label": "Reset"
         },
+        "ring": {
+          "hint": "Whether this transformation has a token ring or not. Consequence transformation rings are prioritized over species. This only applies if token art is overridden.",
+          "label": "Token Ring"
+        },
         "suppress": {
-          "label": "Suppress",
-          "hint": "Types of documents this should turn off if they're not provided by the transformation."
+          "hint": "Types of documents this should turn off if they're not provided by the transformation.",
+          "label": "Suppress"
         },
         "uuids": {
           "hint": "The species this transforms the target into.",
@@ -2003,9 +2007,9 @@
         "hint": "If enabled, sustained consequences will be tracked and turned inactive or deleted based on the ability sustaining them.",
         "name": "Track sustained consequences."
       },
-      "twoHandedEquipment": {
-        "hint": "If enabled, equipment will be two-handed when used by default.",
-        "name": "Two-Handed Equipment"
+      "twoHandedArmaments": {
+        "hint": "If enabled, armaments will be two-handed when used by default.",
+        "name": "Two-Handed Armaments"
       }
     },
     "SHEETS": {
@@ -2812,42 +2816,30 @@
       },
       "Armament": {
         "FIELDS": {
-          "attackPenalty": {
-            "raw": {
-              "abbreviation": "AP",
-              "hint": "The attack penalty incurred when attacking with this.",
-              "label": "Attack Penalty"
-            }
-          },
           "av": {
+            "abbreviation": "AV",
             "raw": {
-              "abbreviation": "AV",
               "label": "Armor Value"
             }
           },
           "bv": {
+            "abbreviation": "BV",
             "raw": {
-              "abbreviation": "BV",
               "label": "Block Value"
             }
           },
           "damage": {
+            "abbreviation": "DMG",
             "base": {
-              "raw": {
-                "abbreviation": "DMG",
-                "label": "Damage"
-              }
+              "label": "Damage"
+            },
+            "twoHanded": {
+              "label": "Two-Handed Damage"
             }
           },
           "fightingStyle": {
             "label": "Fighting Style",
             "named": "{name} Fighting Style"
-          },
-          "hit": {
-            "raw": {
-              "abbreviation": "HIT",
-              "label": "Hit Bonus"
-            }
           },
           "notes": {
             "label": "Notes"
@@ -2886,7 +2878,7 @@
           "attackPenalty": "{value} AP",
           "av": "{value} AV",
           "bv": "{value} BV",
-          "damage": "{value} damage",
+          "damage": "{value} DMG",
           "defense": "Defense",
           "hitBonus": "+{value} hit bonus",
           "load": "Load"
@@ -2894,6 +2886,15 @@
       },
       "Attack": {
         "FIELDS": {
+          "attackPenalty": {
+            "abbreviation": "AP",
+            "hint": "The attack penalty incurred when attacking with this.",
+            "label": "Attack Penalty"
+          },
+          "hitBonus": {
+            "abbreviation": "HIT",
+            "label": "Hit Bonus"
+          },
           "warded": {
             "label": "Warded"
           }
@@ -2902,8 +2903,8 @@
       "Attunable": {
         "FIELDS": {
           "tier": {
+            "abbreviation": "TIER",
             "raw": {
-              "abbreviation": "TIER",
               "label": "Presence Tier"
             }
           }
@@ -3238,13 +3239,6 @@
           "unshatterd": "Unshattered"
         },
         "FIELDS": {
-          "damage": {
-            "twoHanded": {
-              "raw": {
-                "label": "Two Handed Damage"
-              }
-            }
-          },
           "dampened": {
             "label": "Dampened"
           },

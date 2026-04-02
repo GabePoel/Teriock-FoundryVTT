@@ -5,6 +5,7 @@ declare global {
       crit?: boolean;
       deals?: Iterable<Teriock.Keys.RollImpact>;
       source?: TeriockArmament;
+      twoHanded?: boolean;
     };
 
     export interface ArmamentExecutionInterface {

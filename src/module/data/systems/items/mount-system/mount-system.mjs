@@ -1,6 +1,11 @@
 import { icons } from "../../../../constants/display/icons.mjs";
-import { toCamelCase } from "../../../../helpers/string.mjs";
-import { makeIcon, mix } from "../../../../helpers/utils.mjs";
+import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
+import {
+  inferNameFromIdentifier,
+  makeIcon,
+  mix,
+} from "../../../../helpers/utils.mjs";
+import { IdentifierField } from "../../../fields/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
 
@@ -35,7 +40,7 @@ export default class MountSystem extends mix(
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      mountType: new fields.StringField({ initial: "", required: false }),
+      mountType: new IdentifierField({ initial: "" }),
       mounted: new fields.BooleanField({ initial: false, required: false }),
     });
   }
@@ -73,11 +78,10 @@ export default class MountSystem extends mix(
 
   /** @inheritDoc */
   get embedParts() {
-    return Object.assign(super.embedParts, {
-      subtitle: this.mountType,
-      text: game.i18n.format("TERIOCK.SYSTEMS.Attunable.PANELS.tier", {
-        value: this.tier.value,
-      }),
+    const parts = super.embedParts;
+    return Object.assign(parts, {
+      subtitle: inferNameFromIdentifier(this.mountType, "mount"),
+      text: dotJoin([...this._attunableWrappers, parts.text]),
     });
   }
 

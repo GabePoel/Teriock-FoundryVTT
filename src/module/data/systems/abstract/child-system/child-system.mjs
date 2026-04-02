@@ -57,6 +57,13 @@ export default class ChildSystem extends mix(
   }
 
   /** @inheritDoc */
+  get _masterText() {
+    return this.parent.master?.documentName === "Actor"
+      ? ""
+      : super._masterText;
+  }
+
+  /** @inheritDoc */
   get _settingsFlagsDataModel() {
     return ChildSettingsModel;
   }
@@ -127,13 +134,12 @@ export default class ChildSystem extends mix(
 
   /** @inheritDoc */
   get embedParts() {
-    const parts = super.embedParts;
-    parts.makeTooltip = true;
-    parts.action = "useDoc";
-    parts.struck = this.parent.disabled;
-    parts.usable = true;
-    parts.text = this.parent.master?.documentName === "Actor" ? "" : parts.text;
-    return parts;
+    return Object.assign(super.embedParts, {
+      action: "useDoc",
+      makeTooltip: true,
+      struck: this.parent.disabled,
+      usable: true,
+    });
   }
 
   /**

@@ -39,10 +39,10 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
     this.targets = new Set();
     if (
       this.isAttack &&
-      formulaExists(this.armament?.system.hit.formula) &&
+      formulaExists(this.armament?.system.hitBonus) &&
       this.source.system.isContact
     ) {
-      this.bonus = addFormula(this.bonus, this.armament.system.hit.formula);
+      this.bonus = addFormula(this.bonus, this.armament.system.hitBonus);
     }
   }
 
@@ -215,8 +215,8 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
     if (options.attackPenalty !== undefined) return options.attackPenalty;
     if (!this.isAttack) return "0";
     return this.isContact && this.armament
-      ? this.armament.system.attackPenalty.formula
-      : "-3";
+      ? this.armament.system.attackPenalty
+      : this.source.system.attackPenalty;
   }
 
   /**
