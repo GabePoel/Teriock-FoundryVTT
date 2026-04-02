@@ -171,13 +171,40 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.50
+      systemVersion: 0.10.68
     img: systems/teriock/src/icons/properties/mana-storing.webp
     name: Mana Storing
     system:
+      automations:
+        q7NnSZ2OIzRup4jF:
+          _id: q7NnSZ2OIzRup4jF
+          amount: 1
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 0
+            - 1
+          take: revitalizing
+          title: Restore 1 MP
+          type: take
+        zX38VgUzQi4kOQ5N:
+          _id: zX38VgUzQi4kOQ5N
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: (@property.max / 4)d4
+          heighten:
+            - 0
+            - 1
+          trigger: dawn
+          type: regain
       badge: '1'
       competence:
         raw: 0
+      consumable: true
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> item has some latent energy held
         within it that creatures can use to power their own
@@ -192,6 +219,9 @@ effects:
         name]] item, it releases all @L[Core:MP]{MP} it had stored.</p>
       form: normal
       identifier: mana-storing
+      maxQuantity:
+        raw: '4'
+      quantity: 0
       revealed: true
       tag: '1'
     type: property
@@ -407,51 +437,6 @@ effects:
       targets:
         - creature
     type: ability
-  - _id: kgsyNSA1gOXnrQqB
-    _key: '!items.effects!2aec4f7a72d3cff1.kgsyNSA1gOXnrQqB'
-    _stats:
-      compendiumSource: Compendium.teriock.essentials.Item.e7cc58f0e03ffb75
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.68
-    img: systems/teriock/src/icons/general/celestial-mana-storing.webp
-    name: Stored Mana
-    system:
-      automations:
-        GgWN3WmfMLRcQ8yI:
-          _id: GgWN3WmfMLRcQ8yI
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: (@resource.max / 4)d4
-          heighten:
-            - 0
-            - 1
-          trigger: dawn
-          type: regain
-      competence:
-        raw: 0
-      consumable: true
-      description: >-
-        <p>A <strong>mana storing</strong> item has some latent energy held
-        within it that creatures can use to power their own
-        @L[Category:Abilities]{abilities}. Mana storing items will always have a
-        number N associated with them (1, by default, if no number is listed).
-        This number refers to a "mana die" analogous to those that creatures
-        have. It is always [[/roll 1d4]] (3 MP), which means the item stores a
-        maximum of N × 4 @L[Core:MP]{MP}. At dawn, if
-        @L[Ability:Attune]{attuned} to the mana storing item, roll [[/roll d4]].
-        The item regains up to this much spent @L[Core:MP]{MP}. If dawn comes
-        and nobody is @L[Ability:Attune]{attuned} to a Mana Storing item, it
-        releases all @L[Core:MP]{MP} it had stored.</p>
-      identifier: stored-mana
-      maxQuantity:
-        raw: '4'
-      quantity: 0
-      revealed: true
-    type: resource
 flags:
   teriockDocumentSettings:
     sheetBlockChildGapless: false

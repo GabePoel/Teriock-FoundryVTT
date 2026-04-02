@@ -12,13 +12,26 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.67
+      systemVersion: 0.10.68
     img: systems/teriock/src/icons/properties/mana-storing.webp
     name: Mana Storing
     system:
+      automations:
+        q7NnSZ2OIzRup4jF:
+          _id: q7NnSZ2OIzRup4jF
+          amount: 1
+          take: revitalizing
+          title: Restore 1 MP
+          type: take
+        zX38VgUzQi4kOQ5N:
+          _id: zX38VgUzQi4kOQ5N
+          formula: (@property.max / 4)d4
+          trigger: dawn
+          type: regain
       badge: x
       competence:
         raw: 0
+      consumable: true
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> item has some latent energy held
         within it that creatures can use to power their own
@@ -33,6 +46,7 @@ effects:
         name]] item, it releases all @L[Core:MP]{MP} it had stored.</p>
       form: normal
       identifier: mana-storing
+      quantity: 0
       revealed: true
       tag: x
     type: property

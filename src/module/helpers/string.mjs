@@ -1,5 +1,3 @@
-import { formulaExists } from "./formula.mjs";
-
 /**
  * Checks if a string is in camelCase.
  * @param {string} str
@@ -172,7 +170,7 @@ export function toId(str, options = {}) {
  * @param {string} space
  */
 export function suffix(base, suffix, space = " ") {
-  if (formulaExists(base)) {
+  if (teriock.helpers.formula.formulaExists(base)) {
     return `${base}${space}${suffix}`;
   }
   return "";
@@ -185,7 +183,7 @@ export function suffix(base, suffix, space = " ") {
  * @param {string} space
  */
 export function prefix(base, prefix, space = " ") {
-  if (formulaExists(base)) {
+  if (teriock.helpers.formula.formulaExists(base)) {
     return `${prefix}${space}${base}`;
   }
   return "";
