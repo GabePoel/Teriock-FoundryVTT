@@ -1,3 +1,4 @@
+import { BaseDocumentExecution } from "../../../../executions/document-executions/_module.mjs";
 import { simplifyTags } from "../../../../helpers/panel.mjs";
 import { toKebabCase } from "../../../../helpers/string.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
@@ -17,12 +18,14 @@ const { fields } = foundry.data;
  * @extends {BaseEffectSystem}
  * @extends {Teriock.Models.PropertySystemData}
  * @mixes AdjustableSystem
+ * @mixes ConsumableSystem
  * @mixes RevelationSystem
  * @mixes WikiSystem
  */
 export default class PropertySystem extends mix(
   BaseEffectSystem,
   mixins.AdjustableSystemMixin,
+  mixins.ConsumableSystemMixin,
   mixins.WikiSystemMixin,
   mixins.RevelationSystemMixin,
 ) {
@@ -35,14 +38,16 @@ export default class PropertySystem extends mix(
   /** @inheritDoc */
   static get _automationTypes() {
     return [
+      ...super._automationTypes,
       automations.ChangesAutomation,
       automations.CheckAutomation,
       automations.CommonImpactsAutomation,
       automations.HacksAutomation,
       automations.PropertyMacroAutomation,
       automations.RollAutomation,
-      automations.UseLocalDocumentsAutomation,
+      automations.TakeAutomaton,
       automations.UseExternalDocumentsAutomation,
+      automations.UseLocalDocumentsAutomation,
     ];
   }
 
@@ -56,6 +61,7 @@ export default class PropertySystem extends mix(
       namespace: "Property",
       passive: true,
       type: "property",
+      usable: true,
       visibleTypes: ["property"],
     });
   }
@@ -65,10 +71,10 @@ export default class PropertySystem extends mix(
     return foundry.utils.mergeObject(super.defineSchema(), {
       applyIfDampened: new fields.BooleanField({ initial: false }),
       applyIfShattered: new fields.BooleanField({ initial: false }),
+      applyIfUnequipped: new fields.BooleanField({ initial: true }),
+      consumable: new fields.BooleanField({ initial: false }),
       damageType: new IdentifierField({ initial: "" }),
       extraDamage: new FormulaField({ deterministic: false }),
-      material: new fields.BooleanField({ initial: false }),
-      modifiesActor: new fields.BooleanField({ initial: false }),
     });
   }
 
@@ -89,9 +95,6 @@ export default class PropertySystem extends mix(
    */
   get _metaphysicsTags() {
     const tags = [];
-    if (this.material) {
-      tags.push("TERIOCK.SYSTEMS.Property.FIELDS.material.label");
-    }
     if (this.mundane) {
       tags.push("TERIOCK.SYSTEMS.Adjustable.FIELDS.mundane.label");
     }
@@ -118,9 +121,9 @@ export default class PropertySystem extends mix(
     return [
       "system.applyIfShattered",
       "system.applyIfDampened",
-      "system.modifiesActor",
+      "system.applyIfUnequipped",
       "system.mundane",
-      "system.material",
+      "system.consumable",
       ...super.displayToggles,
     ];
   }
@@ -128,13 +131,15 @@ export default class PropertySystem extends mix(
   /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
-    parts.subtitle = TERIOCK.options.effect.form[this.form].name;
+    if (!this.consumable) {
+      parts.subtitle = TERIOCK.options.effect.form[this.form].name;
+    }
     return parts;
   }
 
   /** @inheritDoc */
   get makeSuppressed() {
-    let suppressed = false;
+    let suppressed = this.consumable && this.quantity === 0;
     if (this.parent.elder?.type !== "equipment") {
       suppressed = !!(
         this.parent.elder?.documentName === "Item" && !this.parent.elder?.active
@@ -147,7 +152,7 @@ export default class PropertySystem extends mix(
       if (
         !suppressed &&
         !this.parent.parent.system.equipped &&
-        this.modifies === "Actor"
+        !this.applyIfUnequipped
       ) {
         suppressed = true;
       }
@@ -200,6 +205,11 @@ export default class PropertySystem extends mix(
   get modifies() {
     if (this.modifiesActor) return "Actor";
     return super.modifies;
+  }
+
+  /** @inheritDoc */
+  async _use(options = {}) {
+    await new BaseDocumentExecution(options).execute();
   }
 
   /** @inheritDoc */

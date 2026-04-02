@@ -1,5 +1,35 @@
 import { TeriockActor } from "../../../documents/_module.mjs";
-import type { transformationOptions } from "../../../constants/options/transformation-options.mjs";
+import { transformationOptions } from "../../../constants/options/transformation-options.mjs";
+
+export type SpeciesTransformationConfig = {
+  /** <schema> Overriding image to apply */
+  img: Teriock.System.ImageString;
+  /** <schema> Override whether the token has a ring */
+  ring: boolean;
+};
+
+export type ActorTransformationConfig = SpeciesTransformationConfig & {
+  /** <schema> ID of a transformation effect */
+  primary: TeriockLingering | null;
+};
+
+export type AutomationTransformationConfig = SpeciesTransformationConfig & {
+  /** <schema> Level of transformation */
+  level: Teriock.Keys.TransformationLevel;
+  /** <schema> Additional parameters this transformation should override */
+  override: Set<keyof typeof transformationOptions.override>;
+  /** <schema> Stats this transformation should reset */
+  reset: Set<keyof typeof transformationOptions.reset>;
+  /** <schema> Types of documents this transformation should turn off */
+  suppress: Set<keyof typeof transformationOptions.suppress>;
+};
+
+export type EffectTransformationConfig = AutomationTransformationConfig & {
+  /** <schema> Whether transformation is enabled */
+  enabled: boolean;
+  /** <schema> UUID of specific species to transform into */
+  uuids: UUID<TeriockSpecies>[];
+};
 
 /** <schema> Transformation configuration */
 export type TransformationData = {
@@ -9,6 +39,8 @@ export type TransformationData = {
   img: Teriock.System.ImageString;
   /** <schema> Level of transformation */
   level: Teriock.Keys.TransformationLevel;
+  /** <schema> Additional parameters this transformation should override */
+  override: Set<keyof typeof transformationOptions.override>;
   /** <schema> Stats this transformation should reset */
   reset: Set<keyof typeof transformationOptions.reset>;
   /** <schema> Types of documents this transformation should turn off */

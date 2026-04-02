@@ -14,7 +14,10 @@ export default class PropertySheet extends mix(
   mixins.WikiButtonSheetMixin,
 ) {
   /** @inheritDoc */
-  static BARS = ["teriock/sheets/effects/property/status-bar"];
+  static BARS = [
+    "teriock/sheets/effects/property/status-bar",
+    "teriock/sheets/shared/bars/consumable-bar",
+  ];
 
   /**
    * @inheritDoc

@@ -81,32 +81,32 @@ export default function EmbedCardDocumentMixin(Base) {
       onEmbed(element) {
         bindCommonActions(element);
         const relativeUuid = element.dataset.relative;
-        for (const [type, callback] of Object.entries({
-          click: "primary",
-          contextmenu: "secondary",
-        })) {
-          element.addEventListener(type, async (ev) => {
-            const target = /** @type {HTMLElement} */ ev.target;
-            const el =
-              /** @type {HTMLElement} */ target.closest("[data-action]");
-            if (el) {
-              const action = el.dataset.action;
-              let relative;
-              if (relativeUuid) relative = await fromUuid(relativeUuid);
-              const fn = this.embedActions[action][callback];
-              if (!fn) return;
-              await fn(ev, relative);
-              if (relative && relative.sheet?.isVisible) {
-                await relative.sheet.render();
-              }
-              if (relative?.parent && relative.parent.sheet?.isVisible) {
-                await relative.parent.sheet.render();
-              }
-            }
-          });
-        }
         if (relativeUuid) {
           fromUuid(relativeUuid).then((relative) => {
+            for (const [type, callback] of Object.entries({
+              click: "primary",
+              contextmenu: "secondary",
+            })) {
+              element.addEventListener(type, async (ev) => {
+                const target = /** @type {HTMLElement} */ ev.target;
+                const el =
+                  /** @type {HTMLElement} */ target.closest("[data-action]");
+                if (el) {
+                  const action = el.dataset.action;
+                  const fn = this.embedActions[action][callback];
+                  if (!fn) return;
+                  ev.stopImmediatePropagation();
+                  ev.preventDefault();
+                  await fn(ev, relative);
+                  if (relative && relative.sheet?.isVisible) {
+                    await relative.sheet.render();
+                  }
+                  if (relative?.parent && relative.parent.sheet?.isVisible) {
+                    await relative.parent.sheet.render();
+                  }
+                }
+              });
+            }
             const menuEntries = this.getCardContextMenuEntries(relative);
             if (menuEntries) {
               new TeriockContextMenu(element, ".teriock-block", menuEntries, {

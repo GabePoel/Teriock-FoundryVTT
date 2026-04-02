@@ -1,4 +1,3 @@
-import { timeOptions } from "../../constants/options/time-options.mjs";
 import { ucFirst } from "../../helpers/string.mjs";
 import { massUpdate } from "../../helpers/utils.mjs";
 
@@ -31,7 +30,7 @@ export default function registerTimeManagementHooks() {
     },
   );
 
-  for (const trigger of Object.keys(timeOptions.triggers)) {
+  for (const trigger of Object.keys(TERIOCK.system.triggers.time.choices)) {
     foundry.helpers.Hooks.on(`teriock.force${ucFirst(trigger)}`, async () => {
       for (const actor of game.actors.visible) {
         if (game.user.id === actor.defaultUser.id) {

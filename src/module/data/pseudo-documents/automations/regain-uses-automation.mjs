@@ -92,7 +92,7 @@ export default class RegainUsesAutomation extends TriggerAutomationMixin(
           icon: TERIOCK.display.icons.pseudoDocument.automation,
           wrappers: [
             game.i18n.localize("TERIOCK.AUTOMATIONS.BaseAutomation.LABEL"),
-            TERIOCK.options.time.triggers[this.trigger],
+            this.constructor._processedTriggerChoices[this.trigger].label,
           ],
         },
       ],

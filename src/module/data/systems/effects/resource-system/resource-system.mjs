@@ -25,7 +25,9 @@ export default class ResourceSystem extends mix(
       automations.CommonMacroAutomation,
       automations.HacksAutomation,
       automations.RollAutomation,
+      automations.TakeAutomaton,
       automations.UseExternalDocumentsAutomation,
+      automations.UseLocalDocumentsAutomation,
     ];
   }
 
@@ -55,22 +57,6 @@ export default class ResourceSystem extends mix(
 
   /** @inheritDoc */
   async _use(options = {}) {
-    options.source = this.parent;
     await new BaseDocumentExecution(options).execute();
-  }
-
-  /** @inheritDoc */
-  async gainOne() {
-    await super.gainOne();
-    await this.parent.enable();
-  }
-
-  /** @inheritDoc */
-  async useOne() {
-    const toDisable = this.quantity <= 1;
-    await super.useOne();
-    if (toDisable) {
-      await this.parent.disable();
-    }
   }
 }

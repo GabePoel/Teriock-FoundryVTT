@@ -24,7 +24,6 @@ import { scalingOptions } from "./scaling-options.mjs";
 import { speciesOptions } from "./species-options.mjs";
 import { takeOptions } from "./take-options.mjs";
 import { targetOptions } from "./target-options.mjs";
-import { timeOptions } from "./time-options.mjs";
 import { tradecraftOptions } from "./tradecraft-options.mjs";
 import { transformationOptions } from "./transformation-options.mjs";
 import { wikiOptions } from "./wiki-options.mjs";
@@ -56,7 +55,6 @@ const options = {
   species: speciesOptions,
   take: takeOptions,
   target: targetOptions,
-  time: timeOptions,
   tradecraft: tradecraftOptions,
   transformation: transformationOptions,
   wiki: wikiOptions,

@@ -132,6 +132,12 @@ export default class BaseActorSheet extends mix(
     context.enrichedSpecialRules = await this._enrich(
       this.document.system.wielding.attacker?.system?.specialRules,
     );
+    context.consumableAbilities = this.document.abilities.filter(
+      (a) => a.system.consumable,
+    );
+    context.consumableProperties = this.document.properties.filter(
+      (a) => a.system.consumable,
+    );
     return context;
   }
 

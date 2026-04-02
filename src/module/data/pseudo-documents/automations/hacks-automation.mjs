@@ -2,6 +2,8 @@ import {
   TakeHackHandler,
   TakeUnhackHandler,
 } from "../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
+import { localizeChoices } from "../../../helpers/localization.mjs";
+import { objectMap } from "../../../helpers/utils.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 
 const { fields } = foundry.data;
@@ -31,11 +33,8 @@ export default class HacksAutomation extends BaseAutomation {
     return Object.assign(super.defineSchema(), {
       hacks: new fields.SetField(
         new fields.StringField({
-          choices: Object.fromEntries(
-            Object.entries(TERIOCK.options.hack).map(([k, v]) => [
-              k,
-              v.label.replace("Hack", "").trim(),
-            ]),
+          choices: localizeChoices(
+            objectMap(TERIOCK.options.hack, (h) => h.part),
           ),
         }),
         {

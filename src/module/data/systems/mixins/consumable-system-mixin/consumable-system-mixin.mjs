@@ -127,6 +127,11 @@ export default function ConsumableSystemMixin(Base) {
         return parts;
       }
 
+      /** @inheritDoc */
+      get makeSuppressed() {
+        return (this.consumable && this.quantity === 0) || super.makeSuppressed;
+      }
+
       /**
        * Adds one unit to the consumable item.
        * Increments the quantity by 1, respecting maximum quantity limits.
