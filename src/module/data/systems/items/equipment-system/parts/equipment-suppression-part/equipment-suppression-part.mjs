@@ -61,11 +61,8 @@ export default (Base) => {
                 ),
             condition: this.parent.isOwner,
             callback: async () => {
-              if (this.dampened) {
-                await this.undampen();
-              } else {
-                await this.dampen();
-              }
+              if (this.dampened) await this.undampen();
+              else await this.dampen();
             },
           },
           {
@@ -80,11 +77,8 @@ export default (Base) => {
                 ),
             condition: this.parent.isOwner,
             callback: async () => {
-              if (this.shattered) {
-                await this.repair();
-              } else {
-                await this.shatter();
-              }
+              if (this.shattered) await this.repair();
+              else await this.shatter();
             },
           },
           ...super.embedIcons.filter(
@@ -143,7 +137,7 @@ export default (Base) => {
             callback: this.shatter.bind(this),
             condition:
               !this.shattered &&
-              this.parent._checkValidEditorDocument({ self: false }),
+              this.parent._checkValidEditorDocument(doc, { self: false }),
             group: "control",
           },
           {
@@ -152,7 +146,7 @@ export default (Base) => {
             callback: this.repair.bind(this),
             condition:
               this.shattered &&
-              this.parent._checkValidEditorDocument({ self: false }),
+              this.parent._checkValidEditorDocument(doc, { self: false }),
             group: "control",
           },
           {
@@ -161,7 +155,7 @@ export default (Base) => {
             callback: this.destroy.bind(this),
             condition:
               !this.destroyed &&
-              this.parent._checkValidEditorDocument({ self: false }),
+              this.parent._checkValidEditorDocument(doc, { self: false }),
             group: "control",
           },
           {
@@ -170,7 +164,7 @@ export default (Base) => {
             callback: this.reforge.bind(this),
             condition:
               this.destroyed &&
-              this.parent._checkValidEditorDocument({ self: false }),
+              this.parent._checkValidEditorDocument(doc, { self: false }),
             group: "control",
           },
           {
@@ -182,7 +176,7 @@ export default (Base) => {
             callback: this.dampen.bind(this),
             condition:
               !this.dampened &&
-              this.parent._checkValidEditorDocument({ self: false }),
+              this.parent._checkValidEditorDocument(doc, { self: false }),
             group: "control",
           },
           {
@@ -194,7 +188,7 @@ export default (Base) => {
             callback: this.undampen.bind(this),
             condition:
               this.dampened &&
-              this.parent._checkValidEditorDocument({ self: false }),
+              this.parent._checkValidEditorDocument(doc, { self: false }),
             group: "control",
           },
           {
@@ -207,7 +201,7 @@ export default (Base) => {
             condition:
               !this.stashed &&
               this.actor &&
-              this.parent._checkValidEditorDocument({ self: false }),
+              this.parent._checkValidEditorDocument(doc, { self: false }),
             group: "control",
           },
           {
@@ -220,7 +214,7 @@ export default (Base) => {
             condition:
               this.stashed &&
               this.actor &&
-              this.parent._checkValidEditorDocument({ self: false }),
+              this.parent._checkValidEditorDocument(doc, { self: false }),
             group: "control",
           },
         ];

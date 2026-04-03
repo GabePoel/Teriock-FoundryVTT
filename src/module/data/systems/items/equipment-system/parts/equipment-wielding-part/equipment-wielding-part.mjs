@@ -69,11 +69,8 @@ export default (Base) => {
               : game.i18n.localize("TERIOCK.SYSTEMS.Equipment.EMBED.unglued"),
             condition: this.parent.isOwner,
             callback: async () => {
-              if (this.glued) {
-                await this.unglue();
-              } else {
-                await this.glue();
-              }
+              if (this.glued) await this.unglue();
+              else await this.glue();
             },
           },
           ...super.embedIcons.filter(
@@ -89,11 +86,8 @@ export default (Base) => {
                 ),
             condition: this.parent.isOwner,
             callback: async () => {
-              if (this.equipped) {
-                await this.unequip();
-              } else {
-                await this.equip();
-              }
+              if (this.equipped) await this.unequip();
+              await this.equip();
             },
           },
         ];
@@ -196,9 +190,7 @@ export default (Base) => {
       /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
-        if (this.consumable && this.quantity === 0) {
-          this.equipped = false;
-        }
+        if (this.consumable && this.quantity === 0) this.equipped = false;
       }
 
       /** @inheritDoc */
