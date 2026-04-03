@@ -36,6 +36,9 @@ function cleanCommon(doc) {
   delete doc.system.deleteOnExpire;
   delete doc.system.disabled;
   delete doc.system.gmNotes;
+  if (typeof doc.system.attackPenalty === "object") {
+    doc.system.attackPenalty = doc.system.attackPenalty.raw;
+  }
   if (doc.system.qualifiers) {
     if (doc.system.qualifiers.ephemeral?.saved) {
       doc.system.qualifiers.ephemeral.raw =
@@ -118,6 +121,12 @@ function cleanPower(doc) {
  */
 function cleanArmament(doc) {
   if (doc.system.piercing) cleanPiercing(doc.system.piercing);
+  if (typeof doc.system.damage?.base === "object") {
+    doc.system.damage.base = doc.system.damage.base.raw;
+  }
+  if (typeof doc.system.damage?.twoHanded === "object") {
+    doc.system.damage.twoHanded = doc.system.damage.twoHanded.raw;
+  }
   if (isZero(doc.system.av?.raw)) {
     delete doc.system.av;
   }
