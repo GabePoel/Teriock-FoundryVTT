@@ -28,9 +28,7 @@ effects:
         conditions:
           present:
             - down
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       executionTime: passive
       expansion:
@@ -50,7 +48,6 @@ effects:
         - primal
       range:
         unit: melee
-      revealed: true
       skill: true
       standard: true
       targets:
@@ -63,7 +60,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.63
+      systemVersion: 0.10.68
     img: systems/teriock/src/icons/abilities/hibernation-shield.webp
     name: Hibernation Shield
     system:
@@ -76,9 +73,9 @@ effects:
         conditions:
           present:
             - down
-        dawn: true
         raw: '0'
-        stationary: false
+        triggers:
+          - dawn
         unit: unlimited
       elements:
         - life
@@ -107,7 +104,6 @@ effects:
         raw: '10'
         unit: ft
       requirements: <p>Target must be @L[Condition:Down]{down}.</p>
-      revealed: true
       spell: true
       standard: true
       targets:
@@ -209,9 +205,7 @@ effects:
         base: missile
         package: ray
       duration:
-        dawn: false
         raw: '1'
-        stationary: false
         unit: minute
       elements:
         - life
@@ -242,7 +236,6 @@ effects:
         hit: >-
           <p>Target is @L[Condition:Lighted]{lighted} to a creature of your
           choice until the end of their next @L[Core:Turns]{turn}.</p>
-      revealed: true
       spell: true
       standard: true
       targets:
@@ -291,9 +284,7 @@ effects:
         base: missile
         package: ball
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: instant
       effectTypes:
         - healing
@@ -324,7 +315,6 @@ effects:
       results:
         critHit: <p>Double the amount of times target @L[Core:Healing]{heals}.</p>
         hit: <p>Target @L[Core:Healing]{heals}.</p>
-      revealed: true
       spell: true
       standard: true
       targets:
@@ -375,9 +365,7 @@ effects:
         base: sight
         package: ritual
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: instant
       effectTypes:
         - revival
@@ -425,7 +413,6 @@ effects:
       requirements: >-
         <p>Target is @L[Category:Undead creatures]{undead} or has
         @L[Condition:Dead]{died} within the last 24 hours.</p>
-      revealed: true
       ritual: true
       spell: true
       standard: true

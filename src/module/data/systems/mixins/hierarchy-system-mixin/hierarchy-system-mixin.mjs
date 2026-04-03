@@ -37,18 +37,6 @@ export default function HierarchySystemMixin(Base) {
       }
 
       /** @inheritDoc */
-      static migrateData(data) {
-        if (
-          typeof data?.hierarchy?.supId === "string" &&
-          typeof data._sup !== "string"
-        ) {
-          data._sup = data.hierarchy.supId;
-          delete data.hierarchy;
-        }
-        return super.migrateData(data);
-      }
-
-      /** @inheritDoc */
       toObject(source = true) {
         const out = super.toObject(source);
         out._ref = this.parent.uuid;

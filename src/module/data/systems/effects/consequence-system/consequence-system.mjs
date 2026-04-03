@@ -4,7 +4,6 @@ import { builders } from "../../../fields/helpers/_module.mjs";
 import { conditionRequirementsField } from "../../../fields/helpers/builders.mjs";
 import DurationModel from "../../../models/unit-models/duration-model.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
-import { migrateHierarchy } from "../../../shared/migrations/migrate-hierarchy.mjs";
 import { ThresholdDataMixin } from "../../../shared/mixins/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
@@ -91,12 +90,6 @@ export default class ConsequenceSystem extends mix(
       sourceDescription: new fields.HTMLField(),
       heightened: new fields.NumberField(),
     });
-  }
-
-  /** @inheritDoc */
-  static migrateData(data) {
-    data = migrateHierarchy(data);
-    return super.migrateData(data);
   }
 
   /** @inheritDoc */

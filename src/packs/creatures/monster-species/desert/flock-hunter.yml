@@ -4,7 +4,7 @@ _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.63
+  systemVersion: 0.10.68
 folder: 8185a98b7551093c
 img: systems/teriock/src/icons/creatures/flock-hunter.webp
 items:
@@ -50,6 +50,8 @@ items:
             mix9AG1C4iNRI3x5:
               _id: mix9AG1C4iNRI3x5
               automatic: true
+              competence:
+                raw: 0
               competencies:
                 - 0
                 - 1
@@ -62,17 +64,22 @@ items:
               heighten:
                 - 0
                 - 1
+              level: full
               multi: false
-              transformation:
-                level: full
-                reset:
-                  - hp
-                suppress:
-                  - body
-                  - equipment
-                  - fluency
-                  - rank
-                  - species
+              override:
+                - size
+                - art
+              overrideCompetence: true
+              reset:
+                - gp
+                - hp
+              ring: false
+              suppress:
+                - body
+                - equipment
+                - fluency
+                - rank
+                - species
               type: transformation
           competence:
             raw: 0
@@ -123,7 +130,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           rotator: true
           spell: true
           standard: true
@@ -168,7 +174,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -273,7 +278,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           skill: true
           standard: true
           targets:
@@ -349,7 +353,6 @@ items:
             - primal
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -391,7 +394,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -437,7 +439,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -483,7 +484,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -529,7 +529,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -579,7 +578,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -657,7 +655,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           skill: true
           standard: true
           targets:
@@ -692,6 +689,9 @@ items:
       traits:
         - partialHumanoid
         - monstrous
+      transformation:
+        img: systems/teriock/src/icons/tokens/flock-hunter.webp
+        ring: true
     type: species
   - _id: Yamh7YbjeQHPELPc
     _key: '!actors.items!00d59d7b13bee958.Yamh7YbjeQHPELPc'
@@ -722,9 +722,7 @@ items:
             Attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-          material: false
           mundane: true
-          revealed: true
         type: property
       - _id: 70oASdJA4Iza7rlK
         _key: >-
@@ -745,22 +743,18 @@ items:
             used in the same hand as a @L[Category:Shields]{shield}.</p>
           form: intrinsic
           identifier: small
-          material: false
           mundane: true
-          revealed: true
         type: property
     folder: 8185a98b7551093c
     img: systems/teriock/src/icons/body-parts/foot.webp
     name: Foot
     system:
       _sup: 00d59d7b13bee958
-      attackPenalty:
-        raw: '-3'
+      attackPenalty: '-3'
       competence:
         raw: 0
       damage:
-        base:
-          raw: '1'
+        base: '1'
       identifier: foot
       range:
         long:
@@ -799,9 +793,7 @@ items:
             @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
           form: intrinsic
           identifier: handy
-          material: false
           mundane: true
-          revealed: true
         type: property
       - _id: kHofNmEDiCNuRYru
         _key: >-
@@ -822,9 +814,7 @@ items:
             as while using @L[Ability:Interact]{Interact}.</p>
           form: intrinsic
           identifier: prehensile
-          material: false
           mundane: true
-          revealed: true
         type: property
       - _id: iXU2dd2zsJUYCqh2
         _key: >-
@@ -845,22 +835,18 @@ items:
             @L[Category:Attack abilities]{attack}.</p>
           form: intrinsic
           identifier: weapon
-          material: false
           mundane: true
-          revealed: true
         type: property
     folder: 8185a98b7551093c
     img: systems/teriock/src/icons/body-parts/prehensile-claw.webp
     name: Prehensile Claw
     system:
       _sup: 00d59d7b13bee958
-      attackPenalty:
-        raw: '-3'
+      attackPenalty: '-3'
       competence:
         raw: 0
       damage:
-        base:
-          raw: 1d4
+        base: 1d4
       fightingStyle: savage
       identifier: prehensile-claw
       range:
@@ -901,9 +887,7 @@ items:
             Attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-          material: false
           mundane: true
-          revealed: true
         type: property
       - _id: wGdRsURrcXoNZsur
         _key: >-
@@ -924,9 +908,7 @@ items:
             @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
           form: intrinsic
           identifier: handy
-          material: false
           mundane: true
-          revealed: true
         type: property
       - _id: 1eIcI58ulvhlFYKA
         _key: >-
@@ -947,9 +929,7 @@ items:
             as while using @L[Ability:Interact]{Interact}.</p>
           form: intrinsic
           identifier: prehensile
-          material: false
           mundane: true
-          revealed: true
         type: property
       - _id: r6jJPWhMBH4YpEKr
         _key: >-
@@ -970,22 +950,18 @@ items:
             used in the same hand as a @L[Category:Shields]{shield}.</p>
           form: intrinsic
           identifier: small
-          material: false
           mundane: true
-          revealed: true
         type: property
     folder: 8185a98b7551093c
     img: systems/teriock/src/icons/body-parts/hand.webp
     name: Hand
     system:
       _sup: 00d59d7b13bee958
-      attackPenalty:
-        raw: '-3'
+      attackPenalty: '-3'
       competence:
         raw: 0
       damage:
-        base:
-          raw: '1'
+        base: '1'
       identifier: hand
       range:
         long:
@@ -1103,6 +1079,6 @@ system:
     self:
       raw: pow(3 + @size, 3)
   wielding:
-    attacker: uyn0jqaz2O7RATq0
+    attacker: whVjQVwRES1OGJO6
     blocker: whVjQVwRES1OGJO6
 type: creature

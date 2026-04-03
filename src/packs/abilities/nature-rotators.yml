@@ -12,7 +12,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.63
+      systemVersion: 0.10.68
     img: systems/teriock/src/icons/abilities/nature-rotators.webp
     name: Nature Rotators
     system:
@@ -74,9 +74,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       executionTime: passive
       expansion:
@@ -121,7 +119,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       skill: true
       targets:
         - self
@@ -185,9 +182,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '8'
-        stationary: false
         unit: hour
       elements:
         - nature
@@ -212,7 +207,6 @@ effects:
         - magical
       range:
         unit: melee
-      revealed: true
       rotator: true
       spell: true
       standard: true
@@ -313,9 +307,7 @@ effects:
       delivery:
         base: aura
       duration:
-        dawn: false
         raw: '1'
-        stationary: false
         unit: minute
       elements:
         - nature
@@ -346,7 +338,6 @@ effects:
         fail: >-
           <p>Target is @L[Condition:Grounded]{grounded} and
           @L[Condition:Immobile]{immobilized}.</p>
-      revealed: true
       spell: true
       standard: true
       targets:
@@ -441,9 +432,7 @@ effects:
         base: hand
         package: touch
       duration:
-        dawn: false
         raw: '1'
-        stationary: false
         unit: minute
       elements:
         - nature
@@ -475,7 +464,6 @@ effects:
         hit: >-
           <p>Target is @L[Condition:Grounded]{grounded} and
           @L[Condition:Immobile]{immobilized}.</p>
-      revealed: true
       spell: true
       standard: true
       targets:
@@ -514,6 +502,8 @@ effects:
         D55WBiqM2QcyO7Vv:
           _id: D55WBiqM2QcyO7Vv
           automatic: true
+          competence:
+            raw: 0
           competencies:
             - 0
             - 1
@@ -526,17 +516,22 @@ effects:
           heighten:
             - 0
             - 1
+          level: full
           multi: false
-          transformation:
-            level: full
-            reset:
-              - hp
-            suppress:
-              - body
-              - equipment
-              - fluency
-              - rank
-              - species
+          override:
+            - size
+            - art
+          overrideCompetence: true
+          reset:
+            - gp
+            - hp
+          ring: false
+          suppress:
+            - body
+            - equipment
+            - fluency
+            - rank
+            - species
           type: transformation
       class: natureMage
       competence:
@@ -551,9 +546,7 @@ effects:
         base: sight
         package: ritual
       duration:
-        dawn: false
         raw: '1'
-        stationary: false
         unit: hour
       effectTypes:
         - transformation
@@ -592,7 +585,6 @@ effects:
       range:
         raw: '5'
         unit: ft
-      revealed: true
       ritual: true
       rotator: true
       spell: true
@@ -649,9 +641,7 @@ effects:
         base: hand
         package: touch
       duration:
-        dawn: false
         raw: '1'
-        stationary: false
         unit: minute
       effectTypes:
         - regeneration
@@ -682,7 +672,6 @@ effects:
         hit: >-
           <p>Target gains @L[Keyword:Limited]{Limited}
           @L[Ability:Regenerating]{Regenerating}.</p>
-      revealed: true
       rotator: true
       spell: true
       standard: true
@@ -730,9 +719,7 @@ effects:
       delivery:
         base: hand
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: instant
       effectTypes:
         - destruction
@@ -757,7 +744,6 @@ effects:
         unit: melee
       results:
         hit: <p>Target is @L[Property:Destroyed]{destroyed}.</p>
-      revealed: true
       rotator: true
       spell: true
       standard: true
@@ -814,9 +800,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '8'
-        stationary: false
         unit: hour
       effectTypes:
         - transformation
@@ -846,7 +830,6 @@ effects:
         - primal
       range:
         unit: melee
-      revealed: true
       rotator: true
       spell: true
       standard: true
@@ -902,9 +885,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       effectTypes:
         - revival
@@ -944,7 +925,6 @@ effects:
         - primal
       range:
         unit: melee
-      revealed: true
       targets:
         - self
     type: ability

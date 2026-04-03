@@ -38,38 +38,6 @@ export default (Base) => {
         });
       }
 
-      /** @inheritDoc */
-      static migrateData(data) {
-        // Effect key migration
-        if (data.effects?.includes("truth")) {
-          data.effects = data.effects.map((effect) =>
-            effect === "truth" ? "truthDetecting" : effect,
-          );
-        }
-        if (data.effects?.includes("duelMod")) {
-          data.effects = data.effects.map((effect) =>
-            effect === "duelMod" ? "duelModifying" : effect,
-          );
-        }
-
-        // Form migration
-        if (foundry.utils.getProperty(data, "abilityType")) {
-          foundry.utils.setProperty(
-            data,
-            "form",
-            foundry.utils.getProperty(data, "abilityType"),
-          );
-        }
-
-        // Effect types migration
-        if (data.effects) {
-          data.effectTypes = data.effects;
-          delete data.effects;
-        }
-
-        super.migrateData(data);
-      }
-
       /**
        * Metaphysics tags.
        * @returns {Teriock.Sheet.DisplayTag[]}

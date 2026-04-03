@@ -32,14 +32,6 @@ export default class TeriockActiveEffect extends mix(
   }
 
   /** @inheritDoc */
-  static migrateData(data) {
-    if (typeof data?.type === "string" && data.type === "effect") {
-      data.type = "consequence";
-    }
-    return super.migrateData(data);
-  }
-
-  /** @inheritDoc */
   get _canChange() {
     return this.active && super._canChange;
   }

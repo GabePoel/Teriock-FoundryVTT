@@ -50,17 +50,6 @@ export default class PowerSystem extends mix(
   }
 
   /** @inheritDoc */
-  static migrateData(data) {
-    if (
-      foundry.utils.hasProperty(data, "type") &&
-      foundry.utils.getProperty(data, "type") === "species"
-    ) {
-      foundry.utils.setProperty(data, "type", "other");
-    }
-    return super.migrateData(data);
-  }
-
-  /** @inheritDoc */
   get color() {
     return powerOptions.type[this.type].color;
   }

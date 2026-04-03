@@ -12,7 +12,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.63
+      systemVersion: 0.10.68
     img: systems/teriock/src/icons/abilities/capital-punishment.webp
     name: Capital Punishment
     system:
@@ -36,9 +36,9 @@ effects:
         base: self
         package: ritual
       duration:
-        dawn: true
         raw: '0'
-        stationary: false
+        triggers:
+          - dawn
         unit: unlimited
       executionTime: 10 Minutes
       expansion:
@@ -67,7 +67,6 @@ effects:
       range:
         unit: melee
       requirements: <p>You are not @L[Core:Sustained]{sustaining} [[lookup name]].</p>
-      revealed: true
       ritual: true
       skill: true
       standard: true
@@ -124,9 +123,7 @@ effects:
       delivery:
         base: weapon
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: instant
       effectTypes:
         - killing
@@ -163,7 +160,6 @@ effects:
       range:
         raw: Your Weapon's Range
         unit: ft
-      revealed: true
       skill: true
       standard: true
       targets:

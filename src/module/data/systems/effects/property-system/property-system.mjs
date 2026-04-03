@@ -80,11 +80,6 @@ export default class PropertySystem extends mix(
 
   /** @inheritDoc */
   static migrateData(data) {
-    // Form migration
-    if (data.propertyType) {
-      data.form = data.propertyType;
-      delete data.propertyType;
-    }
     if (data.damageType) data.damageType = toKebabCase(data.damageType);
     return super.migrateData(data);
   }

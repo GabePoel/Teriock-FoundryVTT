@@ -66,9 +66,7 @@ effects:
         base: missile
         package: ray
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: instant
       effectTypes:
         - healing
@@ -118,7 +116,6 @@ effects:
         hit: >-
           <p>Deal [[/damage 1d6[magic]]] @L[Core:Damage]{damage} to target or
           @L[Core:Healing]{heal} them (depending on what you chose).</p>
-      revealed: true
       spell: true
       standard: true
       targets:
@@ -175,9 +172,7 @@ effects:
         base: sight
         package: ritual
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       effectTypes:
         - longRange
@@ -224,7 +219,6 @@ effects:
         raw: '5'
         unit: ft
       requirements: <p>This ritual can typically be used only once.</p>
-      revealed: true
       ritual: true
       spell: true
       standard: true
@@ -255,9 +249,7 @@ effects:
         base: self
         package: ritual
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: instant
       elements:
         - nature
@@ -302,7 +294,6 @@ effects:
       range:
         raw: '5'
         unit: ft
-      revealed: true
       ritual: true
       spell: true
       standard: true
@@ -341,6 +332,8 @@ effects:
         iB9yugE9ZXYHDeCK:
           _id: iB9yugE9ZXYHDeCK
           automatic: true
+          competence:
+            raw: 0
           competencies:
             - 0
             - 1
@@ -353,17 +346,21 @@ effects:
           heighten:
             - 0
             - 1
+          level: minor
           multi: false
-          transformation:
-            level: minor
-            reset:
-              - hp
-            suppress:
-              - body
-              - equipment
-              - fluency
-              - rank
-              - species
+          override:
+            - art
+          overrideCompetence: true
+          reset:
+            - gp
+            - hp
+          ring: false
+          suppress:
+            - body
+            - equipment
+            - fluency
+            - rank
+            - species
           type: transformation
       class: natureMage
       competence:
@@ -372,11 +369,12 @@ effects:
         base: missile
         package: ball
       duration:
-        dawn: true
         raw: '0'
-        stationary: false
+        triggers:
+          - dawn
         unit: unlimited
       effectTypes:
+        - magical
         - transformation
       elements:
         - nature
@@ -414,7 +412,6 @@ effects:
           reduced to 0 @L[Core:Hit Points and Mana Points]{HP}, then they revert
           and any remaining @L[Core:Damage]{damage} carries over to their
           reverted state. </p>
-      revealed: true
       spell: true
       standard: true
       targets:

@@ -4,7 +4,7 @@ _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.50
+  systemVersion: 0.10.68
 effects:
   - _id: 6HL9SHO1o6YpMb1m
     _key: '!items.effects!5284d973f4af48c2.6HL9SHO1o6YpMb1m'
@@ -22,9 +22,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       executionTime: passive
       expansion:
@@ -42,7 +40,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       targets:
         - self
       upgrades:
@@ -89,9 +86,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       effectTypes:
         - sensory
@@ -119,7 +114,6 @@ effects:
         - primal
       range:
         unit: melee
-      revealed: true
       targets:
         - self
     type: ability
@@ -140,9 +134,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       elements:
         - necromancy
@@ -171,7 +163,6 @@ effects:
         - magical
       range:
         unit: melee
-      revealed: true
       targets:
         - self
     type: ability
@@ -191,9 +182,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       executionTime: passive
       expansion:
@@ -211,7 +200,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       targets:
         - self
       upgrades:
@@ -235,9 +223,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       elements:
         - necromancy
@@ -266,7 +252,6 @@ effects:
         - magical
       range:
         unit: melee
-      revealed: true
       targets:
         - self
     type: ability
@@ -286,9 +271,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       executionTime: passive
       expansion:
@@ -306,7 +289,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       targets:
         - self
       upgrades:
@@ -330,9 +312,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       executionTime: passive
       expansion:
@@ -350,7 +330,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       targets:
         - self
       upgrades:
@@ -374,9 +353,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       executionTime: passive
       expansion:
@@ -394,7 +371,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       targets:
         - self
       upgrades:
@@ -432,9 +408,7 @@ effects:
       delivery:
         base: hand
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: instant
       effectTypes:
         - revitalization
@@ -461,7 +435,6 @@ effects:
       range:
         raw: Your Hand's Range
         unit: ft
-      revealed: true
       targets:
         - creature
     type: ability
@@ -511,9 +484,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       effectTypes:
         - immunity
@@ -541,7 +512,6 @@ effects:
         - magical
       range:
         unit: melee
-      revealed: true
       targets:
         - self
     type: ability
@@ -598,9 +568,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       effectTypes:
         - immunity
@@ -632,7 +600,6 @@ effects:
         - magical
       range:
         unit: melee
-      revealed: true
       targets:
         - self
     type: ability
@@ -655,9 +622,7 @@ effects:
         conditions:
           absent:
             - down
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       elements:
         - necromancy
@@ -681,7 +646,6 @@ effects:
         raw: '60'
         unit: ft
       requirements: <p>Only targets @L[Category:Zombies]{zombies}.</p>
-      revealed: true
       targets:
         - creature
     type: ability
@@ -732,6 +696,8 @@ effects:
         ngQVntiCQ8Ruot8n:
           _id: ngQVntiCQ8Ruot8n
           automatic: true
+          competence:
+            raw: 0
           competencies:
             - 0
             - 1
@@ -745,16 +711,18 @@ effects:
             - 0
             - 1
           multi: false
-          transformation:
-            level: greater
-            reset:
-              - hp
-              - mp
-            suppress:
-              - body
-              - fluency
-              - rank
-              - species
+          override:
+            - art
+          overrideCompetence: true
+          reset:
+            - hp
+            - mp
+          ring: false
+          suppress:
+            - body
+            - fluency
+            - rank
+            - species
           type: transformation
       class: necromancer
       competence:
@@ -769,9 +737,7 @@ effects:
         base: hand
         package: touch
       duration:
-        dawn: false
         raw: '1'
-        stationary: false
         unit: minute
       effectTypes:
         - control
@@ -815,7 +781,6 @@ effects:
           before, but loses all other traits and abilities. If the target was
           already @L[Category:Zombies]{some kind of zombie}, then it is
           reanimated as that type.</p>
-      revealed: true
       spell: true
       standard: true
       targets:
@@ -849,4 +814,7 @@ system:
         raw: '1'
   traits:
     - undead
+  transformation:
+    img: systems/teriock/src/icons/tokens/zombie-lord.webp
+    ring: true
 type: species

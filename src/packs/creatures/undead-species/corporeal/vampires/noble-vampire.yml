@@ -88,7 +88,6 @@ items:
           requirements: >-
             <p>Target is @L[Condition:Dead]{dead} and @L[Category:Undead
             creatures]{undead}.</p>
-          revealed: true
           spell: true
           standard: true
           targets:
@@ -127,6 +126,8 @@ items:
             mix9AG1C4iNRI3x5:
               _id: mix9AG1C4iNRI3x5
               automatic: true
+              competence:
+                raw: 0
               competencies:
                 - 0
                 - 1
@@ -139,17 +140,22 @@ items:
               heighten:
                 - 0
                 - 1
+              level: full
               multi: false
-              transformation:
-                level: full
-                reset:
-                  - hp
-                suppress:
-                  - body
-                  - equipment
-                  - fluency
-                  - rank
-                  - species
+              override:
+                - size
+                - art
+              overrideCompetence: true
+              reset:
+                - gp
+                - hp
+              ring: false
+              suppress:
+                - body
+                - equipment
+                - fluency
+                - rank
+                - species
               type: transformation
           competence:
             raw: 0
@@ -197,7 +203,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           rotator: true
           spell: true
           standard: true
@@ -277,7 +282,6 @@ items:
             @L[Condition:Charmed]{charmed} at a time.</p>
           results:
             hit: <p>Target is @L[Condition:Charmed]{charmed}.</p>
-          revealed: true
           targets:
             - creature
         type: ability
@@ -294,8 +298,8 @@ items:
         name: Duel
         system:
           automations:
-            4229c8d4dbb8e1e7:
-              _id: 4229c8d4dbb8e1e7
+            17ccb3b36c88eac6:
+              _id: 17ccb3b36c88eac6
               competencies:
                 - 0
                 - 1
@@ -422,7 +426,6 @@ items:
           requirements: >-
             <p>You are not @L[Condition:Dueling]{dueling} and can only use this
             on an opponent.</p>
-          revealed: true
           skill: true
           standard: true
           targets:
@@ -499,7 +502,6 @@ items:
             - primal
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -567,7 +569,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -668,7 +669,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           skill: true
           standard: true
           targets:
@@ -725,7 +725,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -779,7 +778,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -832,7 +830,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           warded: true
@@ -886,7 +883,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           warded: true
@@ -953,7 +949,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -1024,7 +1019,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -1112,7 +1106,6 @@ items:
               @L[Core:Revitalizing]{revitalization} is the only part of this
               that is a @L[Category:Revitalization effects]{revitalization
               effect}.</p>
-          revealed: true
           targets:
             - creature
         type: ability
@@ -1171,7 +1164,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -1264,7 +1256,6 @@ items:
           requirements: <p>Target is @L[Condition:Dead]{dead}.</p>
           results:
             hit: <p>Target cannot become @L[Condition:Wisping]{wisping}.</p>
-          revealed: true
           rotator: true
           spell: true
           standard: true
@@ -1349,7 +1340,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -1443,7 +1433,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -1509,7 +1498,6 @@ items:
               what type of @L[Category:Vampires]{vampire} they
               become.</p><p>@Embed[Compendium.teriock.tables.RollTable.9dadf089bd2103c8
               rollable]</p>
-          revealed: true
           targets:
             - creature
         type: ability
@@ -1551,7 +1539,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -1585,6 +1572,9 @@ items:
           formula: 2d8
       traits:
         - undead
+      transformation:
+        img: systems/teriock/src/icons/tokens/noble-vampire.webp
+        ring: true
     type: species
   - _id: bqqTaALi3qWE5oEu
     _key: '!actors.items!10b9dfc1051735f9.bqqTaALi3qWE5oEu'
@@ -1614,9 +1604,7 @@ items:
             @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
           form: intrinsic
           identifier: biting
-          material: false
           mundane: true
-          revealed: true
         type: property
       - _id: u9pZ8QANF4C7gKB9
         _key: >-
@@ -1637,24 +1625,20 @@ items:
             @L[Category:Attack abilities]{attack}.</p>
           form: intrinsic
           identifier: weapon
-          material: false
           mundane: true
-          revealed: true
         type: property
     folder: 65fbed36e42b583a
     img: systems/teriock/src/icons/body-parts/fanged-jaw.webp
     name: Fanged Jaw
     system:
       _sup: 10b9dfc1051735f9
-      attackPenalty:
-        raw: '-3'
+      attackPenalty: '-3'
       bv:
         raw: '1'
       competence:
         raw: 0
       damage:
-        base:
-          raw: 1d6
+        base: 1d6
       fightingStyle: savage
       identifier: fanged-jaw
       range:

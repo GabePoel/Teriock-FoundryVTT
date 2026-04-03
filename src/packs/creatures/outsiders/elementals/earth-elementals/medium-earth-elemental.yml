@@ -62,7 +62,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           skill: true
           standard: true
           targets:
@@ -138,7 +137,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -208,7 +206,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -297,7 +294,6 @@ items:
             - primal
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -371,7 +367,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -413,7 +408,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -459,7 +453,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -505,7 +498,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -551,7 +543,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -613,7 +604,6 @@ items:
           requirements: >-
             <p>You are in a @L[Ability:Take Humanoid Elemental Form]{humanoid
             elemental form}.</p>
-          revealed: true
           targets:
             - self
         type: ability
@@ -668,7 +658,6 @@ items:
           requirements: >-
             <p>You are in an @L[Ability:Take Amorphous Elemental Form]{amorphous
             elemental form}.</p>
-          revealed: true
           targets:
             - self
         type: ability
@@ -738,7 +727,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -775,6 +763,9 @@ items:
       traits:
         - outsider
         - elemental
+      transformation:
+        img: systems/teriock/src/icons/tokens/medium-earth-elemental.webp
+        ring: true
     type: species
   - _id: DBjvRjGKNNSCpuBI
     _key: '!actors.items!fba711c61db94387.DBjvRjGKNNSCpuBI'
@@ -924,7 +915,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           skill: true
           targets:
             - self
@@ -1017,7 +1007,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           rotator: true
           spell: true
           standard: true
@@ -1154,7 +1143,6 @@ items:
             fail: >-
               <p>Target is @L[Condition:Grounded]{grounded} and
               @L[Condition:Immobile]{immobilized}.</p>
-          revealed: true
           spell: true
           standard: true
           targets:
@@ -1287,7 +1275,6 @@ items:
             hit: >-
               <p>Target is @L[Condition:Grounded]{grounded} and
               @L[Condition:Immobile]{immobilized}.</p>
-          revealed: true
           spell: true
           standard: true
           targets:
@@ -1378,7 +1365,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           ritual: true
           skill: true
           targets:
@@ -1429,7 +1415,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           skill: true
           targets:
             - self
@@ -1515,7 +1500,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           skill: true
           targets:
             - self
@@ -1648,7 +1632,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           skill: true
           targets:
             - self
@@ -1687,6 +1670,8 @@ items:
             D55WBiqM2QcyO7Vv:
               _id: D55WBiqM2QcyO7Vv
               automatic: true
+              competence:
+                raw: 0
               competencies:
                 - 0
                 - 1
@@ -1699,17 +1684,22 @@ items:
               heighten:
                 - 0
                 - 1
+              level: full
               multi: false
-              transformation:
-                level: full
-                reset:
-                  - hp
-                suppress:
-                  - body
-                  - equipment
-                  - fluency
-                  - rank
-                  - species
+              override:
+                - size
+                - art
+              overrideCompetence: true
+              reset:
+                - gp
+                - hp
+              ring: false
+              suppress:
+                - body
+                - equipment
+                - fluency
+                - rank
+                - species
               type: transformation
           class: natureMage
           competence:
@@ -1766,7 +1756,6 @@ items:
           range:
             raw: '5'
             unit: ft
-          revealed: true
           ritual: true
           rotator: true
           spell: true
@@ -1865,7 +1854,6 @@ items:
             - primal
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -1953,7 +1941,6 @@ items:
             hit: >-
               <p>Target gains @L[Keyword:Limited]{Limited}
               @L[Ability:Regenerating]{Regenerating}.</p>
-          revealed: true
           rotator: true
           spell: true
           standard: true
@@ -2030,7 +2017,6 @@ items:
             unit: melee
           results:
             hit: <p>Target is @L[Property:Destroyed]{destroyed}.</p>
-          revealed: true
           rotator: true
           spell: true
           standard: true
@@ -2121,7 +2107,6 @@ items:
             - primal
           range:
             unit: melee
-          revealed: true
           rotator: true
           spell: true
           standard: true
@@ -2281,7 +2266,6 @@ items:
             hit: >-
               <p>Deal [[/damage 1d6[magic]]] @L[Core:Damage]{damage} to target
               or @L[Core:Healing]{heal} them (depending on what you chose).</p>
-          revealed: true
           spell: true
           standard: true
           targets:
@@ -2389,7 +2373,6 @@ items:
             raw: '5'
             unit: ft
           requirements: <p>This ritual can typically be used only once.</p>
-          revealed: true
           ritual: true
           spell: true
           standard: true
@@ -2470,7 +2453,6 @@ items:
           range:
             raw: '5'
             unit: ft
-          revealed: true
           ritual: true
           spell: true
           standard: true
@@ -2510,6 +2492,8 @@ items:
             iB9yugE9ZXYHDeCK:
               _id: iB9yugE9ZXYHDeCK
               automatic: true
+              competence:
+                raw: 0
               competencies:
                 - 0
                 - 1
@@ -2522,17 +2506,21 @@ items:
               heighten:
                 - 0
                 - 1
+              level: minor
               multi: false
-              transformation:
-                level: minor
-                reset:
-                  - hp
-                suppress:
-                  - body
-                  - equipment
-                  - fluency
-                  - rank
-                  - species
+              override:
+                - art
+              overrideCompetence: true
+              reset:
+                - gp
+                - hp
+              ring: false
+              suppress:
+                - body
+                - equipment
+                - fluency
+                - rank
+                - species
               type: transformation
           class: natureMage
           competence:
@@ -2544,6 +2532,7 @@ items:
               - dawn
             unit: unlimited
           effectTypes:
+            - magical
             - transformation
           elements:
             - nature
@@ -2586,7 +2575,6 @@ items:
               is reduced to 0 @L[Core:Hit Points and Mana Points]{HP}, then they
               revert and any remaining @L[Core:Damage]{damage} carries over to
               their reverted state. </p>
-          revealed: true
           spell: true
           standard: true
           targets:
@@ -2650,9 +2638,7 @@ items:
             @L[Damage:Vine]{vine damage}.</p>
           form: intrinsic
           identifier: entangling
-          material: false
           mundane: false
-          revealed: true
         type: property
       - _id: pdWMQJUX7JfuY6K5
         _key: >-
@@ -2673,9 +2659,7 @@ items:
             @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
           form: intrinsic
           identifier: handy
-          material: false
           mundane: true
-          revealed: true
         type: property
       - _id: jXnGwUFYVmEtDopZ
         _key: >-
@@ -2696,24 +2680,20 @@ items:
             @L[Category:Attack abilities]{attack}.</p>
           form: intrinsic
           identifier: weapon
-          material: false
           mundane: true
-          revealed: true
         type: property
     folder: 26a3b429ac70d5ab
     img: systems/teriock/src/icons/body-parts/earth-tendril.webp
     name: Earth Tendril
     system:
       _sup: fba711c61db94387
-      attackPenalty:
-        raw: '-3'
+      attackPenalty: '-3'
       bv:
         raw: '1'
       competence:
         raw: 0
       damage:
-        base:
-          raw: 1d6
+        base: 1d6
       fightingStyle: savage
       identifier: earth-tendril
       range:
@@ -2725,8 +2705,8 @@ items:
           unit: self
       vitals: false
     type: body
-  - _id: hQ2ryZM4USaqZx51
-    _key: '!actors.items!fba711c61db94387.hQ2ryZM4USaqZx51'
+  - _id: tWnbgg5DJHoXbKtX
+    _key: '!actors.items!fba711c61db94387.tWnbgg5DJHoXbKtX'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.4a095aaed0254ec3
       coreVersion: '13'
@@ -2736,7 +2716,7 @@ items:
     effects:
       - _id: NGCuRUaVtXnxAbRe
         _key: >-
-          !actors.items.effects!fba711c61db94387.hQ2ryZM4USaqZx51.NGCuRUaVtXnxAbRe
+          !actors.items.effects!fba711c61db94387.tWnbgg5DJHoXbKtX.NGCuRUaVtXnxAbRe
         _stats:
           compendiumSource: Compendium.teriock.abilities.Item.ac35fb736d8bd407
           coreVersion: '13'
@@ -2811,7 +2791,6 @@ items:
             hit: >-
               <p>Deal [[/damage 1d4[magic]]] @L[Core:Damage]{damage} to
               target.</p>
-          revealed: true
           spell: true
           standard: true
           targets:
@@ -2819,7 +2798,7 @@ items:
         type: ability
       - _id: aCWLNsvSFjEuLTyl
         _key: >-
-          !actors.items.effects!fba711c61db94387.hQ2ryZM4USaqZx51.aCWLNsvSFjEuLTyl
+          !actors.items.effects!fba711c61db94387.tWnbgg5DJHoXbKtX.aCWLNsvSFjEuLTyl
         _stats:
           compendiumSource: Compendium.teriock.abilities.Item.30358f2e8d9b3a0a
           coreVersion: '13'
@@ -2876,7 +2855,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           skill: true
           standard: true
           targets:

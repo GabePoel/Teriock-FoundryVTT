@@ -4,7 +4,7 @@ _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.23
+  systemVersion: 0.10.68
 folder: ff7afe06984df507
 img: systems/teriock/src/icons/creatures/green-dragonfly.webp
 items:
@@ -88,7 +88,6 @@ items:
             @L[Condition:Charmed]{charmed} at a time.</p>
           results:
             hit: <p>Target is @L[Condition:Charmed]{charmed}.</p>
-          revealed: true
           targets:
             - creature
         type: ability
@@ -205,7 +204,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           skill: true
           standard: true
           targets:
@@ -249,7 +247,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -354,7 +351,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           skill: true
           standard: true
           targets:
@@ -450,7 +446,6 @@ items:
               they would otherwise. This is calculated after any
               @L[Keyword:Boosted]{boosts} or
               @L[Keyword:Deboosted]{deboosts}.</p>
-          revealed: true
           targets:
             - creature
             - item
@@ -568,7 +563,6 @@ items:
             the @L[Core:Game Master]{GM} determines is appropriate for being
             @L[Condition:Hidden]{hidden}. You must remain in areas that maintain
             these conditions to stay @L[Condition:Hidden]{hidden}.</p>
-          revealed: true
           skill: true
           standard: true
           targets:
@@ -619,7 +613,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -665,7 +658,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -717,7 +709,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           skill: true
           standard: true
           targets:
@@ -761,7 +752,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -807,7 +797,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -964,7 +953,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           skill: true
           standard: true
           targets:
@@ -1003,6 +991,8 @@ items:
             D55WBiqM2QcyO7Vv:
               _id: D55WBiqM2QcyO7Vv
               automatic: true
+              competence:
+                raw: 0
               competencies:
                 - 0
                 - 1
@@ -1015,17 +1005,22 @@ items:
               heighten:
                 - 0
                 - 1
+              level: full
               multi: false
-              transformation:
-                level: full
-                reset:
-                  - hp
-                suppress:
-                  - body
-                  - equipment
-                  - fluency
-                  - rank
-                  - species
+              override:
+                - size
+                - art
+              overrideCompetence: true
+              reset:
+                - gp
+                - hp
+              ring: false
+              suppress:
+                - body
+                - equipment
+                - fluency
+                - rank
+                - species
               type: transformation
           class: natureMage
           competence:
@@ -1083,7 +1078,6 @@ items:
           range:
             raw: '5'
             unit: ft
-          revealed: true
           ritual: true
           rotator: true
           spell: true
@@ -1178,7 +1172,6 @@ items:
             - primal
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -1220,7 +1213,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -1261,6 +1253,9 @@ items:
       traits:
         - animal
         - draconic
+      transformation:
+        img: systems/teriock/src/icons/tokens/green-dragonfly.webp
+        ring: true
     type: species
   - _id: 3Z2EoyIp2yqlv3Ss
     _key: '!actors.items!9a8e3f22d106ab84.3Z2EoyIp2yqlv3Ss'
@@ -1290,9 +1285,7 @@ items:
             @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
           form: intrinsic
           identifier: handy
-          material: false
           mundane: true
-          revealed: true
         type: property
       - _id: vCHGHoD0tGaZII3J
         _key: >-
@@ -1313,9 +1306,7 @@ items:
             @L[Category:Attack abilities]{attack}.</p>
           form: intrinsic
           identifier: weapon
-          material: false
           mundane: true
-          revealed: true
         type: property
       - _id: jgOr3b4jZHNXKepO
         _key: >-
@@ -1358,24 +1349,20 @@ items:
             Voiding]{AV0}.</p>
           form: intrinsic
           identifier: armor-voiding
-          material: false
           mundane: true
-          revealed: true
         type: property
     folder: ff7afe06984df507
     img: systems/teriock/src/icons/body-parts/rending-claw.webp
     name: Rending Claw
     system:
       _sup: 9a8e3f22d106ab84
-      attackPenalty:
-        raw: '-3'
+      attackPenalty: '-3'
       bv:
         raw: '1'
       competence:
         raw: 0
       damage:
-        base:
-          raw: 1d8
+        base: 1d8
       fightingStyle: savage
       identifier: rending-claw
       range:
@@ -1400,15 +1387,13 @@ items:
     name: Reinforced Carapace
     system:
       _sup: 9a8e3f22d106ab84
-      attackPenalty:
-        raw: '-3'
+      attackPenalty: '-3'
       av:
         raw: '4'
       competence:
         raw: 0
       damage:
-        base:
-          raw: '0'
+        base: '0'
       identifier: reinforced-carapace
       range:
         long:
@@ -1526,6 +1511,6 @@ system:
     self:
       raw: pow(3 + @size, 3)
   wielding:
-    attacker: 3Z2EoyIp2yqlv3Ss
+    attacker: CyxqJpzibg0HtfZz
     blocker: 3Z2EoyIp2yqlv3Ss
 type: creature

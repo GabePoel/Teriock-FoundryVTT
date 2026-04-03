@@ -33,6 +33,21 @@ effects:
           macro: Compendium.teriock.execution.Macro.0ea7be85a8217ccd
           trigger: applyEffect
           type: abilityMacro
+        acf2fffd5ffd2598:
+          _id: acf2fffd5ffd2598
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          macro: Compendium.teriock.execution.Macro.IMwKoWnnUmVFpAcA
+          trigger: preExecute
+          type: abilityMacro
         e97f2827a0c6277f:
           _id: e97f2827a0c6277f
           competencies:
@@ -48,30 +63,15 @@ effects:
           macro: Compendium.teriock.execution.Macro.6e203038c142a0a0
           trigger: movement
           type: abilityMacro
-        fcdf17e0657fc4d5:
-          _id: fcdf17e0657fc4d5
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          macro: Compendium.teriock.execution.Macro.IMwKoWnnUmVFpAcA
-          trigger: preExecute
-          type: abilityMacro
       class: veteran
       competence:
         raw: 0
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: true
+        triggers:
+          - movement
         unit: unlimited
       executionTime: a1
       expansion:
@@ -100,7 +100,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       skill: true
       standard: true
       sustained: true
@@ -195,9 +194,7 @@ effects:
         base: hand
         package: touch
       duration:
-        dawn: false
         raw: '1'
-        stationary: false
         unit: minute
       elements:
         - nature
@@ -229,7 +226,6 @@ effects:
         hit: >-
           <p>Target is @L[Condition:Grounded]{grounded} and
           @L[Condition:Immobile]{immobilized}.</p>
-      revealed: true
       spell: true
       standard: true
       targets:
@@ -250,7 +246,6 @@ effects:
       description: <p>You know the way of the @L[Creature:Toad]{toad}.</p>
       field: survivalist
       identifier: toad-tamer
-      revealed: true
       tradecraft: tamer
     type: fluency
 folder: 31fe961f0b485187

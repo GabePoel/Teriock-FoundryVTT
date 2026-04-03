@@ -1,5 +1,3 @@
-import { migrateHierarchy } from "../../../../shared/migrations/migrate-hierarchy.mjs";
-
 /**
  * Ability hierarchy part.
  * @param {typeof AbilitySystem} Base
@@ -12,12 +10,6 @@ export default (Base) => {
      * @mixin
      */
     class AbilityHierarchyPart extends Base {
-      /** @inheritDoc */
-      static migrateData(data) {
-        migrateHierarchy(data);
-        super.migrateData(data);
-      }
-
       /** @inheritDoc */
       get makeSuppressed() {
         let suppressed = super.makeSuppressed;

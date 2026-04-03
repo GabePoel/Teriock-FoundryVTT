@@ -88,7 +88,6 @@ items:
           requirements: >-
             <p>Target is @L[Condition:Dead]{dead} and @L[Category:Undead
             creatures]{undead}.</p>
-          revealed: true
           spell: true
           standard: true
           targets:
@@ -172,7 +171,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -247,7 +245,6 @@ items:
             - primal
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -319,7 +316,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           rotator: true
           spell: true
           standard: true
@@ -376,7 +372,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -418,7 +413,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -476,7 +470,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -548,7 +541,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -621,7 +613,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -709,7 +700,6 @@ items:
               @L[Core:Revitalizing]{revitalization} is the only part of this
               that is a @L[Category:Revitalization effects]{revitalization
               effect}.</p>
-          revealed: true
           targets:
             - creature
         type: ability
@@ -751,7 +741,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -797,7 +786,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -843,7 +831,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -889,7 +876,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -975,7 +961,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -1069,7 +1054,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -1120,6 +1104,8 @@ items:
             ngQVntiCQ8Ruot8n:
               _id: ngQVntiCQ8Ruot8n
               automatic: true
+              competence:
+                raw: 0
               competencies:
                 - 0
                 - 1
@@ -1133,16 +1119,18 @@ items:
                 - 0
                 - 1
               multi: false
-              transformation:
-                level: greater
-                reset:
-                  - hp
-                  - mp
-                suppress:
-                  - body
-                  - fluency
-                  - rank
-                  - species
+              override:
+                - art
+              overrideCompetence: true
+              reset:
+                - hp
+                - mp
+              ring: false
+              suppress:
+                - body
+                - fluency
+                - rank
+                - species
               type: transformation
           class: necromancer
           competence:
@@ -1203,7 +1191,6 @@ items:
               before, but loses all other traits and abilities. If the target
               was already @L[Category:Zombies]{some kind of zombie}, then it is
               reanimated as that type.</p>
-          revealed: true
           spell: true
           standard: true
           targets:
@@ -1239,6 +1226,9 @@ items:
           formula: 1d10
       traits:
         - undead
+      transformation:
+        img: systems/teriock/src/icons/tokens/blue-wisp-guard.webp
+        ring: true
     type: species
   - _id: H457Y0zURCZLtdTu
     _key: '!actors.items!24e9b2c5646602ad.H457Y0zURCZLtdTu'
@@ -1304,7 +1294,6 @@ items:
             hit: >-
               <p>You know if the target is
               @L[Keyword:Illusionary]{illusionary}.</p>
-          revealed: true
           spell: true
           standard: true
           targets:
@@ -1441,7 +1430,6 @@ items:
               <p>The target automatically fails the first [[/roll 2d4]]
               roll.</p>
             hit: <p>Target is @L[Condition:Frozen]{frozen}.</p>
-          revealed: true
           spell: true
           standard: true
           targets:
@@ -1518,7 +1506,6 @@ items:
           range:
             raw: '5'
             unit: ft
-          revealed: true
           ritual: true
           spell: true
           standard: true
@@ -1569,7 +1556,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           skill: true
           standard: true
           targets:
@@ -1656,7 +1642,6 @@ items:
             hit: >-
               <p>Deal [[/damage 1d6[magic]]] @L[Core:Damage]{damage} to
               target.</p>
-          revealed: true
           spell: true
           standard: true
           targets:
@@ -1731,7 +1716,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           spell: true
           standard: true
           targets:
@@ -1766,8 +1750,8 @@ items:
           disabled: false
           formula: 1d12
     type: rank
-  - _id: VQPflKeHd5u8vxkm
-    _key: '!actors.items!24e9b2c5646602ad.VQPflKeHd5u8vxkm'
+  - _id: obsEhJ44XRcjCOt8
+    _key: '!actors.items!24e9b2c5646602ad.obsEhJ44XRcjCOt8'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.4a095aaed0254ec3
       coreVersion: '13'
@@ -1777,7 +1761,7 @@ items:
     effects:
       - _id: NGCuRUaVtXnxAbRe
         _key: >-
-          !actors.items.effects!24e9b2c5646602ad.VQPflKeHd5u8vxkm.NGCuRUaVtXnxAbRe
+          !actors.items.effects!24e9b2c5646602ad.obsEhJ44XRcjCOt8.NGCuRUaVtXnxAbRe
         _stats:
           compendiumSource: Compendium.teriock.abilities.Item.ac35fb736d8bd407
           coreVersion: '13'
@@ -1852,7 +1836,6 @@ items:
             hit: >-
               <p>Deal [[/damage 1d4[magic]]] @L[Core:Damage]{damage} to
               target.</p>
-          revealed: true
           spell: true
           standard: true
           targets:
@@ -1860,7 +1843,7 @@ items:
         type: ability
       - _id: aCWLNsvSFjEuLTyl
         _key: >-
-          !actors.items.effects!24e9b2c5646602ad.VQPflKeHd5u8vxkm.aCWLNsvSFjEuLTyl
+          !actors.items.effects!24e9b2c5646602ad.obsEhJ44XRcjCOt8.aCWLNsvSFjEuLTyl
         _stats:
           compendiumSource: Compendium.teriock.abilities.Item.30358f2e8d9b3a0a
           coreVersion: '13'
@@ -1917,7 +1900,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           skill: true
           standard: true
           targets:

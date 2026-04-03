@@ -18,21 +18,6 @@ effects:
     name: Might Strike
     system:
       automations:
-        2244835e3195cc9f:
-          _id: 2244835e3195cc9f
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          macro: Compendium.teriock.execution.Macro.e805e3fad6cedde3
-          trigger: preExecute
-          type: abilityMacro
         29b275994cf9f5b1:
           _id: 29b275994cf9f5b1
           competencies:
@@ -46,6 +31,21 @@ effects:
           merge: true
           roll: damage
           type: roll
+        9ad6dfd8be12f59a:
+          _id: 9ad6dfd8be12f59a
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          macro: Compendium.teriock.execution.Macro.e805e3fad6cedde3
+          trigger: preExecute
+          type: abilityMacro
       class: paladin
       competence:
         raw: 0
@@ -66,9 +66,9 @@ effects:
         base: self
         package: ritual
       duration:
-        dawn: true
         raw: '0'
-        stationary: false
+        triggers:
+          - dawn
         unit: unlimited
       executionTime: 10 Minutes
       expansion:
@@ -104,7 +104,6 @@ effects:
       range:
         unit: melee
       requirements: <p>You are not @L[Core:Sustained]{sustaining} [[lookup name]].</p>
-      revealed: true
       ritual: true
       skill: true
       standard: true
@@ -127,7 +126,6 @@ effects:
       description: <p>You know the way of the @L[Creature:Rhinoceros]{rhinoceros}.</p>
       field: survivalist
       identifier: rhinoceros-tamer
-      revealed: true
       tradecraft: tamer
     type: fluency
   - _id: LJTFYxAqMchkbwFR
@@ -188,9 +186,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       effectTypes:
         - resistance
@@ -214,7 +210,6 @@ effects:
         - divine
       range:
         unit: melee
-      revealed: true
       skill: true
       standard: true
       targets:

@@ -55,7 +55,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -134,7 +133,6 @@ items:
             - primal
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -188,7 +186,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -230,7 +227,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -288,7 +284,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -330,7 +325,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -376,7 +370,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -422,7 +415,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -493,7 +485,6 @@ items:
           range:
             raw: Your Hand's Range
             unit: ft
-          revealed: true
           targets:
             - creature
         type: ability
@@ -575,7 +566,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -669,7 +659,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -720,7 +709,6 @@ items:
             raw: '60'
             unit: ft
           requirements: <p>Only targets @L[Category:Zombies]{zombies}.</p>
-          revealed: true
           targets:
             - creature
         type: ability
@@ -772,6 +760,8 @@ items:
             ngQVntiCQ8Ruot8n:
               _id: ngQVntiCQ8Ruot8n
               automatic: true
+              competence:
+                raw: 0
               competencies:
                 - 0
                 - 1
@@ -785,16 +775,18 @@ items:
                 - 0
                 - 1
               multi: false
-              transformation:
-                level: greater
-                reset:
-                  - hp
-                  - mp
-                suppress:
-                  - body
-                  - fluency
-                  - rank
-                  - species
+              override:
+                - art
+              overrideCompetence: true
+              reset:
+                - hp
+                - mp
+              ring: false
+              suppress:
+                - body
+                - fluency
+                - rank
+                - species
               type: transformation
           class: necromancer
           competence:
@@ -855,7 +847,6 @@ items:
               before, but loses all other traits and abilities. If the target
               was already @L[Category:Zombies]{some kind of zombie}, then it is
               reanimated as that type.</p>
-          revealed: true
           spell: true
           standard: true
           targets:
@@ -887,6 +878,9 @@ items:
           formula: 1d8
       traits:
         - undead
+      transformation:
+        img: systems/teriock/src/icons/tokens/zombie-lord.webp
+        ring: true
     type: species
   - _id: 1M8bKeQ8xD5kDW9u
     _key: '!actors.items!5284d973f4af48c2.1M8bKeQ8xD5kDW9u'
@@ -917,9 +911,7 @@ items:
             Attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-          material: false
           mundane: true
-          revealed: true
         type: property
       - _id: wGdRsURrcXoNZsur
         _key: >-
@@ -940,9 +932,7 @@ items:
             @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
           form: intrinsic
           identifier: handy
-          material: false
           mundane: true
-          revealed: true
         type: property
       - _id: 1eIcI58ulvhlFYKA
         _key: >-
@@ -963,9 +953,7 @@ items:
             as while using @L[Ability:Interact]{Interact}.</p>
           form: intrinsic
           identifier: prehensile
-          material: false
           mundane: true
-          revealed: true
         type: property
       - _id: r6jJPWhMBH4YpEKr
         _key: >-
@@ -986,22 +974,18 @@ items:
             used in the same hand as a @L[Category:Shields]{shield}.</p>
           form: intrinsic
           identifier: small
-          material: false
           mundane: true
-          revealed: true
         type: property
     folder: 249fb1db4a91e504
     img: systems/teriock/src/icons/body-parts/hand.webp
     name: Hand
     system:
       _sup: 5284d973f4af48c2
-      attackPenalty:
-        raw: '-3'
+      attackPenalty: '-3'
       competence:
         raw: 0
       damage:
-        base:
-          raw: '1'
+        base: '1'
       identifier: hand
       range:
         long:
@@ -1041,9 +1025,7 @@ items:
             Attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-          material: false
           mundane: true
-          revealed: true
         type: property
       - _id: 70oASdJA4Iza7rlK
         _key: >-
@@ -1064,22 +1046,18 @@ items:
             used in the same hand as a @L[Category:Shields]{shield}.</p>
           form: intrinsic
           identifier: small
-          material: false
           mundane: true
-          revealed: true
         type: property
     folder: 249fb1db4a91e504
     img: systems/teriock/src/icons/body-parts/foot.webp
     name: Foot
     system:
       _sup: 5284d973f4af48c2
-      attackPenalty:
-        raw: '-3'
+      attackPenalty: '-3'
       competence:
         raw: 0
       damage:
-        base:
-          raw: '1'
+        base: '1'
       identifier: foot
       range:
         long:
@@ -1119,9 +1097,7 @@ items:
             Attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-          material: false
           mundane: true
-          revealed: true
         type: property
       - _id: cj70nNvBKfT3EQ8P
         _key: >-
@@ -1142,9 +1118,7 @@ items:
             @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
           form: intrinsic
           identifier: biting
-          material: false
           mundane: true
-          revealed: true
         type: property
       - _id: 43UnM2Fnf4EpPLFE
         _key: >-
@@ -1165,22 +1139,18 @@ items:
             used in the same hand as a @L[Category:Shields]{shield}.</p>
           form: intrinsic
           identifier: small
-          material: false
           mundane: true
-          revealed: true
         type: property
     folder: 249fb1db4a91e504
     img: icons/creatures/abilities/mouth-teeth-human.webp
     name: Mouth
     system:
       _sup: 5284d973f4af48c2
-      attackPenalty:
-        raw: '-3'
+      attackPenalty: '-3'
       competence:
         raw: 0
       damage:
-        base:
-          raw: '1'
+        base: '1'
       fightingStyle: savage
       identifier: mouth
       range:

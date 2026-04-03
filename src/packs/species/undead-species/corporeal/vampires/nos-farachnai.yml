@@ -4,7 +4,7 @@ _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.50
+  systemVersion: 0.10.68
 effects:
   - _id: 8XNMdEQNn4oCzx3d
     _key: '!items.effects!c489adeae1c683aa.8XNMdEQNn4oCzx3d'
@@ -22,9 +22,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       effectTypes:
         - automatic
@@ -49,7 +47,6 @@ effects:
         - alchemical
       range:
         unit: melee
-      revealed: true
       targets:
         - self
       trigger: >-
@@ -73,9 +70,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       effectTypes:
         - movement
@@ -99,7 +94,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       skill: true
       standard: true
       targets:
@@ -126,9 +120,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       elderSorcery: true
       elements:
@@ -354,7 +346,6 @@ effects:
         - magical
       range:
         unit: melee
-      revealed: true
       targets:
         - self
     type: ability
@@ -386,9 +377,7 @@ effects:
         base: hand
         package: touch
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: instant
       effectTypes:
         - reanimation
@@ -428,7 +417,6 @@ effects:
       requirements: >-
         <p>Target is @L[Condition:Dead]{dead} and @L[Category:Undead
         creatures]{undead}.</p>
-      revealed: true
       spell: true
       standard: true
       targets:
@@ -452,9 +440,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       executionTime: passive
       expansion:
@@ -478,7 +464,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       skill: true
       standard: true
       targets:
@@ -520,6 +505,8 @@ effects:
         mix9AG1C4iNRI3x5:
           _id: mix9AG1C4iNRI3x5
           automatic: true
+          competence:
+            raw: 0
           competencies:
             - 0
             - 1
@@ -532,26 +519,29 @@ effects:
           heighten:
             - 0
             - 1
+          level: full
           multi: false
-          transformation:
-            level: full
-            reset:
-              - hp
-            suppress:
-              - body
-              - equipment
-              - fluency
-              - rank
-              - species
+          override:
+            - size
+            - art
+          overrideCompetence: true
+          reset:
+            - gp
+            - hp
+          ring: false
+          suppress:
+            - body
+            - equipment
+            - fluency
+            - rank
+            - species
           type: transformation
       competence:
         raw: 0
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '1'
-        stationary: false
         unit: minute
       effectTypes:
         - transformation
@@ -589,7 +579,6 @@ effects:
         - magical
       range:
         unit: melee
-      revealed: true
       rotator: true
       spell: true
       standard: true
@@ -636,9 +625,7 @@ effects:
         base: hand
         package: touch
       duration:
-        dawn: false
         raw: '1'
-        stationary: false
         unit: hour
       effectTypes:
         - mental
@@ -668,7 +655,6 @@ effects:
         @L[Condition:Charmed]{charmed} at a time.</p>
       results:
         hit: <p>Target is @L[Condition:Charmed]{charmed}.</p>
-      revealed: true
       targets:
         - creature
     type: ability
@@ -742,9 +728,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       effectTypes:
         - movement
@@ -767,7 +751,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       targets:
         - self
     type: ability
@@ -809,9 +792,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       effectTypes:
         - sensory
@@ -835,7 +816,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       targets:
         - self
     type: ability
@@ -855,9 +835,7 @@ effects:
       delivery:
         base: bite
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: instant
       executionTime: a2
       expansion:
@@ -882,7 +860,6 @@ effects:
           <p>Target is @L[Condition:Dead]{dead}, @L[Condition:Ruined]{ruined},
           and their @L[Core:Size]{SIZE} is reduced by 1. If their
           @L[Core:Size]{SIZE} was already less than 1, it is reduced to 0.</p>
-      revealed: true
       targets:
         - creature
     type: ability
@@ -924,9 +901,7 @@ effects:
       delivery:
         base: aura
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: instant
       elements:
         - storm
@@ -967,7 +942,6 @@ effects:
         raw: '30'
         unit: ft
       requirements: <p>Target is a @L[Category:Conjured spells]{conjured spell}.</p>
-      revealed: true
       rotator: true
       spell: true
       standard: true
@@ -989,8 +963,8 @@ effects:
     name: Duel
     system:
       automations:
-        4229c8d4dbb8e1e7:
-          _id: 4229c8d4dbb8e1e7
+        17ccb3b36c88eac6:
+          _id: 17ccb3b36c88eac6
           competencies:
             - 0
             - 1
@@ -1076,9 +1050,7 @@ effects:
       delivery:
         base: sight
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       executionTime: a1
       expansion:
@@ -1115,7 +1087,6 @@ effects:
       requirements: >-
         <p>You are not @L[Condition:Dueling]{dueling} and can only use this on
         an opponent.</p>
-      revealed: true
       skill: true
       standard: true
       targets:
@@ -1161,9 +1132,7 @@ effects:
         base: sight
         package: ritual
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: instant
       elderSorcery: true
       executionTime: Long Rest
@@ -1203,7 +1172,6 @@ effects:
         - magical
       range:
         unit: melee
-      revealed: true
       ritual: true
       skill: true
       targets:
@@ -1248,9 +1216,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       effectTypes:
         - sensory
@@ -1278,7 +1244,6 @@ effects:
         - primal
       range:
         unit: melee
-      revealed: true
       targets:
         - self
     type: ability
@@ -1298,9 +1263,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       executionTime: passive
       expansion:
@@ -1318,7 +1281,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       targets:
         - self
       upgrades:
@@ -1370,9 +1332,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: instant
       elderSorcery: true
       executionTime: a0
@@ -1405,7 +1365,6 @@ effects:
         - magical
       range:
         unit: melee
-      revealed: true
       spell: true
       targets:
         - self
@@ -1454,9 +1413,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: instant
       elderSorcery: true
       executionTime: a0
@@ -1489,7 +1446,6 @@ effects:
         - magical
       range:
         unit: melee
-      revealed: true
       spell: true
       targets:
         - self
@@ -1538,9 +1494,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: instant
       elderSorcery: true
       executionTime: a0
@@ -1573,7 +1527,6 @@ effects:
         - magical
       range:
         unit: melee
-      revealed: true
       spell: true
       targets:
         - self
@@ -1622,9 +1575,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: instant
       elderSorcery: true
       executionTime: a0
@@ -1657,7 +1608,6 @@ effects:
         - magical
       range:
         unit: melee
-      revealed: true
       spell: true
       targets:
         - self
@@ -1706,9 +1656,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: instant
       elderSorcery: true
       executionTime: a0
@@ -1741,7 +1689,6 @@ effects:
         - magical
       range:
         unit: melee
-      revealed: true
       spell: true
       targets:
         - self
@@ -1762,9 +1709,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       executionTime: passive
       expansion:
@@ -1791,7 +1736,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       targets:
         - self
     type: ability
@@ -1812,9 +1756,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       executionTime: passive
       expansion:
@@ -1838,7 +1780,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       skill: true
       standard: true
       targets:
@@ -1864,9 +1805,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       elements:
         - necromancy
@@ -1896,7 +1835,6 @@ effects:
         - magical
       range:
         unit: melee
-      revealed: true
       targets:
         - self
     type: ability
@@ -1917,9 +1855,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       elements:
         - necromancy
@@ -1948,7 +1884,6 @@ effects:
         - magical
       range:
         unit: melee
-      revealed: true
       targets:
         - self
     type: ability
@@ -1970,9 +1905,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       executionTime: passive
       expansion:
@@ -1994,7 +1927,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       skill: true
       standard: true
       targets:
@@ -2018,9 +1950,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       executionTime: passive
       expansion:
@@ -2042,7 +1972,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       skill: true
       standard: true
       targets:
@@ -2069,9 +1998,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       elements:
         - necromancy
@@ -2099,7 +2026,6 @@ effects:
         - magical
       range:
         unit: melee
-      revealed: true
       targets:
         - self
       warded: true
@@ -2120,9 +2046,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       elements:
         - necromancy
@@ -2150,7 +2074,6 @@ effects:
         - magical
       range:
         unit: melee
-      revealed: true
       targets:
         - self
       warded: true
@@ -2216,9 +2139,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       executionTime: passive
       expansion:
@@ -2259,7 +2180,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       targets:
         - self
     type: ability
@@ -2297,9 +2217,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '1'
-        stationary: false
         unit: hour
       elements:
         - necromancy
@@ -2323,7 +2241,6 @@ effects:
         - magical
       range:
         unit: melee
-      revealed: true
       targets:
         - self
     type: ability
@@ -2373,9 +2290,7 @@ effects:
       delivery:
         base: aura
       duration:
-        dawn: false
         raw: '1'
-        stationary: false
         unit: minute
       endCondition: >-
         <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
@@ -2404,7 +2319,6 @@ effects:
           abilities]{magical abilities.}  Any @L[Category:Magically powered
           abilities]{magical} @L[Category:Sustained abilities]{sustained
           abilities} on them @L[Core:Fizzles]{fizzle}.</p>
-      revealed: true
       rotator: true
       targets:
         - creature
@@ -2494,9 +2408,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       effectTypes:
         - movement
@@ -2523,7 +2435,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       skill: true
       standard: true
       targets:
@@ -2568,9 +2479,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       effectTypes:
         - immunity
@@ -2594,7 +2503,6 @@ effects:
         - magical
       range:
         unit: melee
-      revealed: true
       targets:
         - self
     type: ability
@@ -2614,9 +2522,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       executionTime: passive
       expansion:
@@ -2639,7 +2545,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       targets:
         - self
     type: ability
@@ -2687,9 +2592,7 @@ effects:
         base: hand
         package: touch
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: instant
       effectTypes:
         - revitalization
@@ -2724,7 +2627,6 @@ effects:
           @L[Core:Revitalizing]{revitalize}.  This
           @L[Core:Revitalizing]{revitalization} is the only part of this that is
           a @L[Category:Revitalization effects]{revitalization effect}.</p>
-      revealed: true
       targets:
         - creature
     type: ability
@@ -2746,9 +2648,7 @@ effects:
       delivery:
         base: weapon
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: instant
       effectTypes:
         - damaging
@@ -2776,7 +2676,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       skill: true
       standard: true
       targets:
@@ -2808,9 +2707,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: instant
       executionTime: r1
       expansion:
@@ -2835,7 +2732,6 @@ effects:
         - magical
       range:
         unit: melee
-      revealed: true
       rotator: true
       spell: true
       standard: true
@@ -2892,9 +2788,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       executionTime: passive
       expansion:
@@ -2916,7 +2810,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       skill: true
       standard: true
       targets:
@@ -2938,9 +2831,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       executionTime: passive
       expansion:
@@ -2958,7 +2849,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       targets:
         - self
       upgrades:
@@ -2982,9 +2872,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       executionTime: passive
       expansion:
@@ -3002,7 +2890,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       targets:
         - self
       upgrades:
@@ -3026,9 +2913,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       executionTime: passive
       expansion:
@@ -3046,7 +2931,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       targets:
         - self
       upgrades:
@@ -3071,9 +2955,7 @@ effects:
         base: sight
         package: ritual
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: instant
       effectTypes:
         - transformation
@@ -3104,7 +2986,6 @@ effects:
       range:
         raw: '5'
         unit: ft
-      revealed: true
       ritual: true
       targets:
         - creature
@@ -3181,9 +3062,7 @@ effects:
         base: weapon
         package: strike
       duration:
-        dawn: false
         raw: '24'
-        stationary: false
         unit: hour
       effectTypes:
         - poison
@@ -3217,7 +3096,6 @@ effects:
           <p>Target is @L[Condition:Poisoned]{poisoned}. The
           @L[Condition:Poisoned]{poison} deals [[/damage 1d6[toxic]]]
           @L[Core:Damage]{damage}.</p>
-      revealed: true
       skill: true
       targets:
         - creature
@@ -3260,9 +3138,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       executionTime: passive
       expansion:
@@ -3290,7 +3166,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       skill: true
       standard: true
       targets:
@@ -3374,9 +3249,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       executionTime: passive
       expansion:
@@ -3416,7 +3289,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       skill: true
       targets:
         - self
@@ -3437,9 +3309,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       elements:
         - necromancy
@@ -3474,7 +3344,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       targets:
         - self
     type: ability
@@ -3514,9 +3383,7 @@ effects:
         base: weapon
         package: strike
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       endCondition: >-
         <p>The @L[Condition:Snared]{snare} caused by this ability does not end
@@ -3545,7 +3412,6 @@ effects:
         unit: ft
       results:
         hit: <p>Target is @L[Condition:Snared]{snared}.</p>
-      revealed: true
       targets:
         - creature
     type: ability
@@ -3585,9 +3451,7 @@ effects:
         base: missile
         package: ball
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       endCondition: >-
         <p>The @L[Condition:Snared]{snare} caused by this ability does not end
@@ -3616,7 +3480,6 @@ effects:
         unit: ft
       results:
         hit: <p>Target is @L[Condition:Snared]{snared}.</p>
-      revealed: true
       targets:
         - creature
     type: ability
@@ -3656,9 +3519,7 @@ effects:
         base: missile
         package: ray
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       endCondition: >-
         <p>The @L[Condition:Snared]{snare} caused by this ability does not end
@@ -3687,7 +3548,6 @@ effects:
         unit: ft
       results:
         hit: <p>Target is @L[Condition:Snared]{snared}.</p>
-      revealed: true
       targets:
         - creature
     type: ability
@@ -3707,9 +3567,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       executionTime: passive
       expansion:
@@ -3732,7 +3590,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       targets:
         - self
     type: ability
@@ -3782,9 +3639,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       effectTypes:
         - immunity
@@ -3812,7 +3667,6 @@ effects:
         - magical
       range:
         unit: melee
-      revealed: true
       targets:
         - self
     type: ability
@@ -3869,9 +3723,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       effectTypes:
         - immunity
@@ -3903,7 +3755,6 @@ effects:
         - magical
       range:
         unit: melee
-      revealed: true
       targets:
         - self
     type: ability
@@ -3928,9 +3779,7 @@ effects:
       delivery:
         base: bite
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       effectTypes:
         - disease
@@ -3965,7 +3814,6 @@ effects:
           type of @L[Category:Vampires]{vampire} they
           become.</p><p>@Embed[Compendium.teriock.tables.RollTable.9dadf089bd2103c8
           rollable]</p>
-      revealed: true
       targets:
         - creature
     type: ability
@@ -4002,4 +3850,7 @@ system:
   traits:
     - undead
     - outsider
+  transformation:
+    img: systems/teriock/src/icons/tokens/nos-farachnai.webp
+    ring: true
 type: species

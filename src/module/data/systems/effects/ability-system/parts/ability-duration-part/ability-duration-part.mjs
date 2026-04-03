@@ -1,8 +1,5 @@
-import { parseDurationString } from "../../../../../../helpers/unit.mjs";
 import { EvaluationField } from "../../../../../fields/_module.mjs";
 import { DurationModel } from "../../../../../models/unit-models/_module.mjs";
-
-const { getProperty, setProperty, deleteProperty } = foundry.utils;
 
 /**
  * Ability duration part.
@@ -26,34 +23,6 @@ export default (Base) => {
         return Object.assign(super.defineSchema(), {
           duration: new EvaluationField({ model: DurationModel }),
         });
-      }
-
-      /** @inheritDoc */
-      static migrateData(data) {
-        // Duration migration
-        if (typeof data.duration == "string") {
-          data.duration = parseDurationString(data.duration);
-        }
-        if (
-          ["number", "string"].includes(
-            typeof getProperty(data, "duration.quantity"),
-          )
-        ) {
-          setProperty(
-            data,
-            "duration.raw",
-            getProperty(data, "duration.quantity").toString(),
-          );
-          deleteProperty(data, "duration.quantity");
-        }
-        if (getProperty(data, "duration.unit") === "untilDawn") {
-          deleteProperty(data, "duration.unit");
-          setProperty(data, "duration.dawn", true);
-        }
-        if (getProperty(data, "duration.unit") === "noLimit") {
-          setProperty(data, "duration.unit", "unlimited");
-        }
-        super.migrateData(data);
       }
 
       /** @inheritDoc */

@@ -76,7 +76,6 @@ items:
               language with the target or their spirit. This is more akin to a
               "hive mind", where they implicitly understand you needs and
               directives.</p>
-          revealed: true
           targets:
             - creature
         type: ability
@@ -126,7 +125,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           skill: true
           standard: true
           targets:
@@ -174,7 +172,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -253,7 +250,6 @@ items:
             - primal
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -358,7 +354,6 @@ items:
             - primal
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -408,7 +403,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           skill: true
           standard: true
           targets:
@@ -469,7 +463,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -540,7 +533,6 @@ items:
             hit: >-
               <p>The target takes 1 @L[Damage:Hack]{hack damage} on either an
               arm or leg, depending on what you chose.</p>
-          revealed: true
           skill: true
           standard: true
           targets:
@@ -597,7 +589,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -639,7 +630,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -691,7 +681,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           skill: true
           standard: true
           targets:
@@ -741,7 +730,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           skill: true
           standard: true
           targets:
@@ -798,6 +786,8 @@ items:
             NPWpKFGYaHcADPNW:
               _id: NPWpKFGYaHcADPNW
               automatic: true
+              competence:
+                raw: 0
               competencies:
                 - 0
                 - 1
@@ -811,16 +801,18 @@ items:
                 - 0
                 - 1
               multi: false
-              transformation:
-                level: greater
-                reset:
-                  - hp
-                  - mp
-                suppress:
-                  - body
-                  - fluency
-                  - rank
-                  - species
+              override:
+                - art
+              overrideCompetence: true
+              reset:
+                - hp
+                - mp
+              ring: false
+              suppress:
+                - body
+                - fluency
+                - rank
+                - species
               type: transformation
           competence:
             raw: 0
@@ -877,7 +869,6 @@ items:
               traits and abilities. If the target was already
               @L[Category:Zombies]{some kind of zombie}, then it is reanimated
               as that type.</p>
-          revealed: true
           targets:
             - creature
         type: ability
@@ -948,7 +939,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -1036,7 +1026,6 @@ items:
               @L[Core:Revitalizing]{revitalization} is the only part of this
               that is a @L[Category:Revitalization effects]{revitalization
               effect}.</p>
-          revealed: true
           targets:
             - creature
         type: ability
@@ -1091,7 +1080,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           skill: true
           standard: true
           targets:
@@ -1174,7 +1162,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -1220,7 +1207,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -1266,7 +1252,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -1360,7 +1345,6 @@ items:
             - primal
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -1429,7 +1413,6 @@ items:
               <p>@L[Category:Equipment]{Equipment} that delivers
               @L[Category:Attack abilities]{attack} you @L[Core:Block
               Interaction]{block} becomes @L[Property:Shattered]{shattered}.</p>
-          revealed: true
           targets:
             - item
         type: ability
@@ -1495,7 +1478,6 @@ items:
           range:
             unit: melee
           requirements: <p>You are holding the target.</p>
-          revealed: true
           targets:
             - item
         type: ability
@@ -1581,7 +1563,6 @@ items:
           range:
             raw: Your Weapon's Range
             unit: ft
-          revealed: true
           skill: true
           standard: true
           targets:
@@ -1680,7 +1661,6 @@ items:
           requirements: <p>Target is @L[Condition:Dead]{dead}.</p>
           results:
             hit: <p>Target cannot become @L[Condition:Wisping]{wisping}.</p>
-          revealed: true
           rotator: true
           spell: true
           standard: true
@@ -1733,7 +1713,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -1819,7 +1798,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -1913,7 +1891,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -1956,6 +1933,9 @@ items:
         - undead
         - animal
         - monstrous
+      transformation:
+        img: systems/teriock/src/icons/tokens/ayla-beast.webp
+        ring: true
     type: species
   - _id: vXTrpb4CxJfKoh1K
     _key: '!actors.items!3cb6131a0fbfc2b7.vXTrpb4CxJfKoh1K'
@@ -1970,15 +1950,13 @@ items:
     name: Reinforced Hide
     system:
       _sup: 3cb6131a0fbfc2b7
-      attackPenalty:
-        raw: '-3'
+      attackPenalty: '-3'
       av:
         raw: '4'
       competence:
         raw: 0
       damage:
-        base:
-          raw: '0'
+        base: '0'
       identifier: reinforced-hide
       range:
         long:

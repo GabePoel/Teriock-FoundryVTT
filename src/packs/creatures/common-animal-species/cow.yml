@@ -4,7 +4,7 @@ _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.63
+  systemVersion: 0.10.68
 folder: 30f4d11e5e53d332
 img: systems/teriock/src/icons/creatures/cow.webp
 items:
@@ -70,7 +70,6 @@ items:
           results:
             critHit: <p>Target moves 20 feet away from you.</p>
             hit: <p>Target moves 10 feet away from you.</p>
-          revealed: true
           skill: true
           standard: true
           targets:
@@ -125,7 +124,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           skill: true
           standard: true
           targets:
@@ -173,7 +171,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -225,7 +222,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           skill: true
           standard: true
           targets:
@@ -274,7 +270,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           skill: true
           standard: true
           targets:
@@ -332,7 +327,6 @@ items:
           results:
             critHit: <p>Target moves 20 feet away from you.</p>
             hit: <p>Target moves 10 feet away from you.</p>
-          revealed: true
           skill: true
           standard: true
           targets:
@@ -378,7 +372,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -420,7 +413,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -466,7 +458,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -512,7 +503,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -594,7 +584,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           skill: true
           standard: true
           targets:
@@ -679,7 +668,6 @@ items:
             hit: >-
               <p>Deal @L[Core:Standard and Critical Damage]{standard
               damage}.</p>
-          revealed: true
           targets:
             - creature
           trigger: >-
@@ -708,6 +696,9 @@ items:
           formula: 1d6
       traits:
         - animal
+      transformation:
+        img: systems/teriock/src/icons/tokens/cow.webp
+        ring: true
     type: species
   - _id: 1rxikPEP6naQpWNd
     _key: '!actors.items!0c0e1819aaba7c70.1rxikPEP6naQpWNd'
@@ -722,15 +713,13 @@ items:
     name: Hide
     system:
       _sup: 0c0e1819aaba7c70
-      attackPenalty:
-        raw: '-3'
+      attackPenalty: '-3'
       av:
         raw: '1'
       competence:
         raw: 0
       damage:
-        base:
-          raw: '0'
+        base: '0'
       identifier: hide
       range:
         long:
@@ -769,24 +758,20 @@ items:
             @L[Category:Attack abilities]{attack}.</p>
           form: intrinsic
           identifier: weapon
-          material: false
           mundane: true
-          revealed: true
         type: property
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/icons/body-parts/stabbing-horn.webp
     name: Stabbing Horn
     system:
       _sup: 0c0e1819aaba7c70
-      attackPenalty:
-        raw: '-3'
+      attackPenalty: '-3'
       bv:
         raw: '1'
       competence:
         raw: 0
       damage:
-        base:
-          raw: 1d6
+        base: 1d6
       fightingStyle: charging
       identifier: stabbing-horn
       range:
@@ -827,9 +812,7 @@ items:
             Attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-          material: false
           mundane: true
-          revealed: true
         type: property
       - _id: sstVVZlXOTxriXsr
         _key: >-
@@ -850,22 +833,18 @@ items:
             used in the same hand as a @L[Category:Shields]{shield}.</p>
           form: intrinsic
           identifier: small
-          material: false
           mundane: true
-          revealed: true
         type: property
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/icons/body-parts/hoof.webp
     name: Hoof
     system:
       _sup: 0c0e1819aaba7c70
-      attackPenalty:
-        raw: '-3'
+      attackPenalty: '-3'
       competence:
         raw: 0
       damage:
-        base:
-          raw: '1'
+        base: '1'
       fightingStyle: savage
       identifier: hoof
       range:
@@ -906,9 +885,7 @@ items:
             Attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-          material: false
           mundane: true
-          revealed: true
         type: property
       - _id: cj70nNvBKfT3EQ8P
         _key: >-
@@ -929,9 +906,7 @@ items:
             @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
           form: intrinsic
           identifier: biting
-          material: false
           mundane: true
-          revealed: true
         type: property
       - _id: 43UnM2Fnf4EpPLFE
         _key: >-
@@ -952,22 +927,18 @@ items:
             used in the same hand as a @L[Category:Shields]{shield}.</p>
           form: intrinsic
           identifier: small
-          material: false
           mundane: true
-          revealed: true
         type: property
     folder: 30f4d11e5e53d332
     img: icons/creatures/abilities/mouth-teeth-human.webp
     name: Mouth
     system:
       _sup: 0c0e1819aaba7c70
-      attackPenalty:
-        raw: '-3'
+      attackPenalty: '-3'
       competence:
         raw: 0
       damage:
-        base:
-          raw: '1'
+        base: '1'
       fightingStyle: savage
       identifier: mouth
       range:
@@ -1086,6 +1057,6 @@ system:
     self:
       raw: pow(3 + @size, 3)
   wielding:
-    attacker: 3fx4bVho6HR5bQcN
+    attacker: ZSRfNAnYryZ2YozV
     blocker: 3fx4bVho6HR5bQcN
 type: creature

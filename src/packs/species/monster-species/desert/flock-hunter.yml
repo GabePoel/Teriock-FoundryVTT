@@ -4,7 +4,7 @@ _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.50
+  systemVersion: 0.10.68
 effects:
   - _id: tDg2UiQTtX5CwAuS
     _key: '!items.effects!00d59d7b13bee958.tDg2UiQTtX5CwAuS'
@@ -38,6 +38,8 @@ effects:
         mix9AG1C4iNRI3x5:
           _id: mix9AG1C4iNRI3x5
           automatic: true
+          competence:
+            raw: 0
           competencies:
             - 0
             - 1
@@ -50,26 +52,29 @@ effects:
           heighten:
             - 0
             - 1
+          level: full
           multi: false
-          transformation:
-            level: full
-            reset:
-              - hp
-            suppress:
-              - body
-              - equipment
-              - fluency
-              - rank
-              - species
+          override:
+            - size
+            - art
+          overrideCompetence: true
+          reset:
+            - gp
+            - hp
+          ring: false
+          suppress:
+            - body
+            - equipment
+            - fluency
+            - rank
+            - species
           type: transformation
       competence:
         raw: 0
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '1'
-        stationary: false
         unit: minute
       effectTypes:
         - transformation
@@ -109,7 +114,6 @@ effects:
         - magical
       range:
         unit: melee
-      revealed: true
       rotator: true
       spell: true
       standard: true
@@ -132,9 +136,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       executionTime: passive
       expansion:
@@ -152,7 +154,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       targets:
         - self
       upgrades:
@@ -230,9 +231,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       effectTypes:
         - movement
@@ -255,7 +254,6 @@ effects:
         - magical
       range:
         unit: melee
-      revealed: true
       skill: true
       standard: true
       targets:
@@ -299,9 +297,7 @@ effects:
         conditions:
           absent:
             - dead
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       effectTypes:
         - healing
@@ -329,7 +325,6 @@ effects:
         - primal
       range:
         unit: melee
-      revealed: true
       targets:
         - self
     type: ability
@@ -349,9 +344,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       executionTime: passive
       expansion:
@@ -369,7 +362,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       targets:
         - self
       upgrades:
@@ -393,9 +385,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       executionTime: passive
       expansion:
@@ -413,7 +403,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       targets:
         - self
       upgrades:
@@ -437,9 +426,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       executionTime: passive
       expansion:
@@ -457,7 +444,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       targets:
         - self
       upgrades:
@@ -481,9 +467,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       executionTime: passive
       expansion:
@@ -501,7 +485,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       targets:
         - self
       upgrades:
@@ -525,9 +508,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       executionTime: passive
       expansion:
@@ -549,7 +530,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       targets:
         - self
     type: ability
@@ -603,9 +583,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       executionTime: passive
       expansion:
@@ -625,7 +603,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       skill: true
       standard: true
       targets:
@@ -662,4 +639,7 @@ system:
   traits:
     - partialHumanoid
     - monstrous
+  transformation:
+    img: systems/teriock/src/icons/tokens/flock-hunter.webp
+    ring: true
 type: species

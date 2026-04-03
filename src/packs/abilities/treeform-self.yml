@@ -12,7 +12,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.63
+      systemVersion: 0.10.68
     img: systems/teriock/src/icons/abilities/treeform-self.webp
     name: Treeform Self
     system:
@@ -33,18 +33,22 @@ effects:
           _id: AjiJDtn4fs82jWgF
           documents:
             - Compendium.teriock.species.Item.85b3b9fb528f2775
-          transformation:
-            uuids:
-              - Compendium.teriock.species.Item.85b3b9fb528f2775
+          level: minor
+          override:
+            - art
+          overrideCompetence: true
+          reset:
+            - gp
+            - hp
           type: transformation
       competence:
         raw: 0
       delivery:
         base: self
       duration:
-        dawn: true
         raw: '0'
-        stationary: false
+        triggers:
+          - dawn
         unit: unlimited
       effectTypes:
         - transformation
@@ -72,7 +76,6 @@ effects:
         - magical
       range:
         unit: melee
-      revealed: true
       targets:
         - self
     type: ability

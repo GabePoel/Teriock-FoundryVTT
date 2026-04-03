@@ -75,19 +75,6 @@ export default class DurationModel extends TimeUnitModel {
   }
 
   /** @inheritDoc */
-  static migrateData(data) {
-    if (data.dawn) {
-      if (!data.triggers) data.triggers = [];
-      data.triggers.push("dawn");
-    }
-    if (data.stationary) {
-      if (!data.triggers) data.triggers = [];
-      data.triggers.push("movement");
-    }
-    return super.migrateData(data);
-  }
-
-  /** @inheritDoc */
   get _formPaths() {
     return [
       ...super._formPaths,

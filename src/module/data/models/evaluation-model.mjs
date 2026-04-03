@@ -34,15 +34,6 @@ export default class EvaluationModel extends EmbeddedDataModel {
     };
   }
 
-  /** @inheritDoc */
-  static migrateData(data) {
-    if (typeof data.saved === "string") {
-      data.raw = data.saved;
-      delete data.saved;
-    }
-    return super.migrateData(data);
-  }
-
   /** @type {Teriock.Fields.FormulaDerivationOptions} */
   _derivationOptions;
 

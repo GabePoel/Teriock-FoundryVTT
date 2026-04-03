@@ -28,14 +28,6 @@ export default class BaseModifierModel extends mix(
   }
 
   /** @inheritDoc */
-  static migrateData(data) {
-    if (typeof data.score === "object") {
-      data.score = Number(data.score?.saved) || 0;
-    }
-    return super.migrateData(data);
-  }
-
-  /** @inheritDoc */
   get currentValue() {
     return this.#modify(super.currentValue);
   }

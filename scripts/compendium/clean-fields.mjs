@@ -18,6 +18,7 @@ export function cleanDocument(doc) {
   if (doc.system) {
     cleanCommon(doc);
     cleanActiveEffect(doc);
+    if (doc.system.automations) cleanAutomations(doc.system.automations);
     if (doc.type === "ability") cleanAbility(doc);
     if (doc.type === "body") cleanBody(doc);
     if (doc.type === "creature") cleanCreature(doc);
@@ -71,6 +72,7 @@ function cleanActiveEffect(doc) {
   if (!doc.disabled) delete doc.disabled;
   if (doc.transfer) delete doc.transfer;
   if (doc.showIcon) delete doc.showIcon;
+  if (doc.system.revealed) delete doc.system.revealed;
 }
 
 /**
@@ -155,9 +157,10 @@ function cleanEquipment(doc) {
  */
 function cleanProperty(doc) {
   delete doc.system.impacts;
+  if (!doc.system.consumable) delete doc.system.consumable;
   if (!doc.system.applyIfDampened) delete doc.system.applyIfDampened;
   if (!doc.system.applyIfShattered) delete doc.system.applyIfShattered;
-  if (!doc.system.modifiesActor) delete doc.system.modifiesActor;
+  if (doc.system.applyIfUnequipped) delete doc.system.applyIfUnequipped;
 }
 
 /**
@@ -235,10 +238,31 @@ function cleanAbility(doc) {
   if (!doc.system.sustained) delete doc.system.sustained;
   if (!doc.system.warded) delete doc.system.warded;
 
+  // Clean Common Defaults
+  if (doc.system.attackPenalty === "-3") delete doc.system.attackPenalty;
+
   // Clean Retired Tags
   delete doc.system.secret;
   delete doc.system.prepared;
+  delete doc.system.duration.dawn;
+  delete doc.system.duration.stationary;
   if (doc.system.effectTypes) delete doc.system.effects;
+}
+
+/**
+ * @param {Record<string, BaseAutomation>} automations
+ */
+function cleanAutomations(automations) {
+  for (const a of Object.values(automations)) {
+    cleanAutomation(a);
+  }
+}
+
+/**
+ * @param {BaseAutomation} automation
+ */
+function cleanAutomation(automation) {
+  delete automation.transformation;
 }
 
 /**

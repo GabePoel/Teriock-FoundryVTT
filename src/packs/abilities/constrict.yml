@@ -12,7 +12,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.63
+      systemVersion: 0.10.68
     img: systems/teriock/src/icons/abilities/constrict.webp
     name: Constrict
     system:
@@ -45,9 +45,9 @@ effects:
       delivery:
         base: hand
       duration:
-        dawn: false
         raw: '0'
-        stationary: true
+        triggers:
+          - movement
         unit: unlimited
       endCondition: <p>The start of your next @L[Core:Turn]{turn}.</p>
       executionTime: a1
@@ -72,7 +72,6 @@ effects:
         fail: >-
           <p>Target is @L[Condition:Suffocating]{suffocating} and
           @L[Condition:Snared]{snared}.</p>
-      revealed: true
       sustained: true
       targets:
         - creature

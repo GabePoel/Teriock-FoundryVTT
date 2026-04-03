@@ -95,64 +95,6 @@ export function convertUnits(range, fromUnits, toUnits) {
 }
 
 /**
- * Parses a duration string and returns a duration.
- * @param durationString
- * @returns {Partial<DurationModelInterface>}
- */
-export function parseDurationString(durationString) {
-  let parsingString = durationString.trim().toLowerCase().replace(/\.$/, "");
-  let parsedUnit = "unlimited";
-  let parsedDawn = false;
-  let parsedQuantity = parseInt(parsingString) || 0;
-  let parsedAbsentConditions = new Set();
-  let parsedPresentConditions = new Set();
-
-  // Handle special cases first
-  if (parsingString.includes("while up")) {
-    parsedAbsentConditions.add("down");
-  }
-  if (parsingString.includes("while alive")) {
-    parsedAbsentConditions.add("dead");
-  }
-  if (parsingString.includes("instant")) {
-    parsedUnit = "instant";
-  }
-  if (parsingString.includes("until dawn")) {
-    parsedDawn = true;
-  }
-
-  // General condition parsing
-  for (const condition of Object.keys(TERIOCK.index.conditions)) {
-    if (parsingString.includes("not " + condition)) {
-      parsedAbsentConditions.add(condition);
-    } else if (parsingString.includes(condition)) {
-      parsedPresentConditions.add(condition);
-    }
-  }
-  const parsedStationary = parsingString.includes("stationary");
-  // Use word boundaries for unit matching to avoid partial matches
-  for (const unit of Object.keys(TERIOCK.options.ability.duration.unit)) {
-    const regex = new RegExp(`\\b${unit}s?\\b`);
-    if (regex.test(parsingString)) {
-      parsedUnit = unit;
-      break;
-    }
-  }
-
-  return {
-    conditions: {
-      absent: parsedAbsentConditions,
-      present: parsedPresentConditions,
-    },
-    dawn: parsedDawn,
-    description: "",
-    raw: parsedQuantity,
-    stationary: parsedStationary,
-    unit: parsedUnit,
-  };
-}
-
-/**
  * Converts a number of seconds to a human-readable time string.
  * @param {number} totalSeconds - The total number of seconds to convert.
  * @returns {string} A human-readable time string.

@@ -42,18 +42,17 @@ effects:
           _id: NPWpKFGYaHcADPNW
           documents:
             - Compendium.teriock.species.Item.b3708edf8c3c5c9f
-          transformation:
-            level: greater
-            reset:
-              - hp
-              - mp
-            suppress:
-              - body
-              - fluency
-              - rank
-              - species
-            uuids:
-              - Compendium.teriock.species.Item.b3708edf8c3c5c9f
+          override:
+            - art
+          overrideCompetence: true
+          reset:
+            - hp
+            - mp
+          suppress:
+            - body
+            - fluency
+            - rank
+            - species
           type: transformation
       competence:
         raw: 0
@@ -67,9 +66,7 @@ effects:
         base: hand
         package: touch
       duration:
-        dawn: false
         raw: '1'
-        stationary: false
         unit: minute
       effectTypes:
         - control
@@ -109,7 +106,6 @@ effects:
           @L[Core:Size]{SIZE} it had before, but loses all other traits and
           abilities. If the target was already @L[Category:Zombies]{some kind of
           zombie}, then it is reanimated as that type.</p>
-      revealed: true
       targets:
         - creature
     type: ability

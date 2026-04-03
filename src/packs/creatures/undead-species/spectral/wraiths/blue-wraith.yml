@@ -33,6 +33,8 @@ items:
             iShmKJVk38YllA02:
               _id: iShmKJVk38YllA02
               automatic: true
+              competence:
+                raw: 1
               competencies:
                 - 0
                 - 1
@@ -46,16 +48,18 @@ items:
                 - 0
                 - 1
               multi: false
-              transformation:
-                level: greater
-                reset:
-                  - hp
-                  - mp
-                suppress:
-                  - body
-                  - fluency
-                  - rank
-                  - species
+              override:
+                - art
+              overrideCompetence: true
+              reset:
+                - hp
+                - mp
+              ring: false
+              suppress:
+                - body
+                - fluency
+                - rank
+                - species
               type: transformation
           competence:
             raw: 0
@@ -96,7 +100,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           targets:
             - creature
           trigger: >-
@@ -175,7 +178,6 @@ items:
             - primal
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -276,7 +278,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           skill: true
           standard: true
           targets:
@@ -320,7 +321,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -379,7 +379,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -433,7 +432,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -475,7 +473,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -552,7 +549,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -618,7 +614,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -689,7 +684,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -777,7 +771,6 @@ items:
               @L[Core:Revitalizing]{revitalization} is the only part of this
               that is a @L[Category:Revitalization effects]{revitalization
               effect}.</p>
-          revealed: true
           targets:
             - creature
         type: ability
@@ -819,7 +812,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -865,7 +857,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -911,7 +902,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -997,7 +987,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -1091,7 +1080,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -1121,6 +1109,9 @@ items:
           formula: 2d10
       traits:
         - undead
+      transformation:
+        img: systems/teriock/src/icons/tokens/blue-wraith.webp
+        ring: true
     type: species
   - _id: h1dxE2UId3EaUc3s
     _key: '!actors.items!b53b0b4c488fa6f8.h1dxE2UId3EaUc3s'
@@ -1150,9 +1141,7 @@ items:
             @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
           form: intrinsic
           identifier: handy
-          material: false
           mundane: true
-          revealed: true
         type: property
       - _id: WvMAuLt3N8RlGo44
         _key: >-
@@ -1173,9 +1162,7 @@ items:
             as while using @L[Ability:Interact]{Interact}.</p>
           form: intrinsic
           identifier: prehensile
-          material: false
           mundane: true
-          revealed: true
         type: property
       - _id: DBAMgCzXFj7nPQiB
         _key: >-
@@ -1196,9 +1183,7 @@ items:
             @L[Category:Attack abilities]{attack}.</p>
           form: intrinsic
           identifier: weapon
-          material: false
           mundane: true
-          revealed: true
         type: property
       - _id: vymceUCeThwDmqS8
         _key: >-
@@ -1241,24 +1226,20 @@ items:
             Voiding]{AV0}.</p>
           form: intrinsic
           identifier: armor-voiding
-          material: false
           mundane: true
-          revealed: true
         type: property
     folder: bd7120d756dc6f4f
     img: systems/teriock/src/icons/body-parts/prehensile-rending-claw.webp
     name: Prehensile Rending Claw
     system:
       _sup: b53b0b4c488fa6f8
-      attackPenalty:
-        raw: '-3'
+      attackPenalty: '-3'
       bv:
         raw: '1'
       competence:
         raw: 0
       damage:
-        base:
-          raw: 1d8
+        base: 1d8
       fightingStyle: savage
       identifier: prehensile-rending-claw
       range:

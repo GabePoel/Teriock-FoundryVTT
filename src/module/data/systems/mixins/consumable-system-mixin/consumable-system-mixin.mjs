@@ -60,19 +60,6 @@ export default function ConsumableSystemMixin(Base) {
         });
       }
 
-      /** @inheritDoc */
-      static migrateData(data) {
-        if (data.maxQuantity && typeof data.maxQuantity === "number") {
-          const rawMaxQuantity = String(data.maxQuantity) || "";
-          const derivedMaxQuantity = Number(data.maxQuantity) || 0;
-          data.maxQuantity = {
-            raw: rawMaxQuantity,
-            derived: derivedMaxQuantity,
-          };
-        }
-        super.migrateData(data);
-      }
-
       /** @returns {Teriock.MessageData.MessageBar} */
       get _consumableBar() {
         return {

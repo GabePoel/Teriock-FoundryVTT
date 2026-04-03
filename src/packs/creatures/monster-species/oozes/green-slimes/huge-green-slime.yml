@@ -63,7 +63,6 @@ items:
             - alchemical
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           trigger: >-
@@ -123,7 +122,6 @@ items:
           range:
             unit: melee
           requirements: <p>You are not @L[Condition:Anosmatic]{anosmatic}.</p>
-          revealed: true
           skill: true
           standard: true
           targets:
@@ -179,7 +177,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           skill: true
           standard: true
           targets:
@@ -260,7 +257,6 @@ items:
             - primal
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -306,7 +302,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -380,7 +375,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -430,7 +424,6 @@ items:
               @L[Condition:Ruined]{ruined}, and their @L[Core:Size]{SIZE} is
               reduced by 1. If their @L[Core:Size]{SIZE} was already less than
               1, it is reduced to 0.</p>
-          revealed: true
           targets:
             - creature
         type: ability
@@ -479,7 +472,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           skill: true
           standard: true
           targets:
@@ -531,7 +523,6 @@ items:
             - alchemical
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -579,7 +570,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           skill: true
           standard: true
           targets:
@@ -629,7 +619,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           skill: true
           standard: true
           targets:
@@ -690,7 +679,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           skill: true
           standard: true
           targets:
@@ -767,7 +755,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -860,7 +847,6 @@ items:
             - alchemical
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -877,8 +863,8 @@ items:
         name: Resist Effects
         system:
           automations:
-            45d6b3b37a696b5e:
-              _id: 45d6b3b37a696b5e
+            63c7106d02025d43:
+              _id: 63c7106d02025d43
               competencies:
                 - 0
                 - 1
@@ -965,7 +951,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           rotator: true
           spell: true
           standard: true
@@ -1050,7 +1035,6 @@ items:
           requirements: >-
             <p>You are not @L[Condition:Anosmatic]{anosmatic} and the target is
             not @L[Condition:Odorless]{odorless}.</p>
-          revealed: true
           skill: true
           standard: true
           targets:
@@ -1094,7 +1078,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
           upgrades:
@@ -1168,7 +1151,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -1246,7 +1228,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -1281,6 +1262,9 @@ items:
           formula: (@species.size)d6
       traits:
         - ooze
+      transformation:
+        img: systems/teriock/src/icons/tokens/huge-green-slime.webp
+        ring: true
     type: species
   - _id: AQzCBm5py7lxMsgU
     _key: '!actors.items!1e1d512c131e91e1.AQzCBm5py7lxMsgU'
@@ -1405,7 +1389,6 @@ items:
             hit: >-
               <p>Deal [[/damage 1d6[magic]]] @L[Core:Damage]{damage} to target
               or @L[Core:Healing]{heal} them (depending on what you chose).</p>
-          revealed: true
           spell: true
           standard: true
           targets:
@@ -1513,7 +1496,6 @@ items:
             raw: '5'
             unit: ft
           requirements: <p>This ritual can typically be used only once.</p>
-          revealed: true
           ritual: true
           spell: true
           standard: true
@@ -1594,7 +1576,6 @@ items:
           range:
             raw: '5'
             unit: ft
-          revealed: true
           ritual: true
           spell: true
           standard: true
@@ -1634,6 +1615,8 @@ items:
             iB9yugE9ZXYHDeCK:
               _id: iB9yugE9ZXYHDeCK
               automatic: true
+              competence:
+                raw: 0
               competencies:
                 - 0
                 - 1
@@ -1646,17 +1629,21 @@ items:
               heighten:
                 - 0
                 - 1
+              level: minor
               multi: false
-              transformation:
-                level: minor
-                reset:
-                  - hp
-                suppress:
-                  - body
-                  - equipment
-                  - fluency
-                  - rank
-                  - species
+              override:
+                - art
+              overrideCompetence: true
+              reset:
+                - gp
+                - hp
+              ring: false
+              suppress:
+                - body
+                - equipment
+                - fluency
+                - rank
+                - species
               type: transformation
           class: natureMage
           competence:
@@ -1668,6 +1655,7 @@ items:
               - dawn
             unit: unlimited
           effectTypes:
+            - magical
             - transformation
           elements:
             - nature
@@ -1710,7 +1698,6 @@ items:
               is reduced to 0 @L[Core:Hit Points and Mana Points]{HP}, then they
               revert and any remaining @L[Core:Damage]{damage} carries over to
               their reverted state. </p>
-          revealed: true
           spell: true
           standard: true
           targets:
@@ -1774,9 +1761,7 @@ items:
             Attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-          material: false
           mundane: true
-          revealed: true
         type: property
       - _id: m1dnpbfEEctxiIi7
         _key: >-
@@ -1797,9 +1782,7 @@ items:
             @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
           form: intrinsic
           identifier: handy
-          material: false
           mundane: true
-          revealed: true
         type: property
       - _id: 6kXcYLaqKdbDi8Gz
         _key: >-
@@ -1820,22 +1803,18 @@ items:
             used in the same hand as a @L[Category:Shields]{shield}.</p>
           form: intrinsic
           identifier: small
-          material: false
           mundane: true
-          revealed: true
         type: property
     folder: 1c2657666be68efd
     img: icons/creatures/slimes/slime-movement-pseudopods-blue.webp
     name: Pseudopod
     system:
       _sup: 1e1d512c131e91e1
-      attackPenalty:
-        raw: '-3'
+      attackPenalty: '-3'
       competence:
         raw: 0
       damage:
-        base:
-          raw: '1'
+        base: '1'
       identifier: pseudopod
       range:
         long:
@@ -1903,7 +1882,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           skill: true
           targets:
             - self
@@ -1983,7 +1961,6 @@ items:
             - primal
           range:
             unit: melee
-          revealed: true
           rotator: true
           spell: true
           standard: true
@@ -2102,7 +2079,6 @@ items:
               <p>You are @L[Keyword:Incapable]{incapable} of attempting to learn
               that spell or word again.</p>
             save: <p>You learn the spell or word.</p>
-          revealed: true
           skill: true
           standard: true
           targets:
@@ -2201,7 +2177,6 @@ items:
             - primal
           range:
             unit: melee
-          revealed: true
           rotator: true
           spell: true
           standard: true
@@ -2304,7 +2279,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           skill: true
           standard: true
           targets:
@@ -2363,7 +2337,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           skill: true
           standard: true
           targets:
@@ -2433,7 +2406,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           skill: true
           standard: true
           targets:
@@ -2492,7 +2464,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           skill: true
           standard: true
           targets:
@@ -2612,7 +2583,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           skill: true
           standard: true
           targets:
@@ -2665,7 +2635,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           skill: true
           standard: true
           targets:
@@ -2724,7 +2693,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           skill: true
           standard: true
           targets:
@@ -2912,7 +2880,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           skill: true
           targets:
             - self
@@ -3005,7 +2972,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           rotator: true
           spell: true
           standard: true
@@ -3142,7 +3108,6 @@ items:
             fail: >-
               <p>Target is @L[Condition:Grounded]{grounded} and
               @L[Condition:Immobile]{immobilized}.</p>
-          revealed: true
           spell: true
           standard: true
           targets:
@@ -3275,7 +3240,6 @@ items:
             hit: >-
               <p>Target is @L[Condition:Grounded]{grounded} and
               @L[Condition:Immobile]{immobilized}.</p>
-          revealed: true
           spell: true
           standard: true
           targets:
@@ -3366,7 +3330,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           ritual: true
           skill: true
           targets:
@@ -3417,7 +3380,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           skill: true
           targets:
             - self
@@ -3503,7 +3465,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           skill: true
           targets:
             - self
@@ -3636,7 +3597,6 @@ items:
             - martial
           range:
             unit: melee
-          revealed: true
           skill: true
           targets:
             - self
@@ -3675,6 +3635,8 @@ items:
             D55WBiqM2QcyO7Vv:
               _id: D55WBiqM2QcyO7Vv
               automatic: true
+              competence:
+                raw: 0
               competencies:
                 - 0
                 - 1
@@ -3687,17 +3649,22 @@ items:
               heighten:
                 - 0
                 - 1
+              level: full
               multi: false
-              transformation:
-                level: full
-                reset:
-                  - hp
-                suppress:
-                  - body
-                  - equipment
-                  - fluency
-                  - rank
-                  - species
+              override:
+                - size
+                - art
+              overrideCompetence: true
+              reset:
+                - gp
+                - hp
+              ring: false
+              suppress:
+                - body
+                - equipment
+                - fluency
+                - rank
+                - species
               type: transformation
           class: natureMage
           competence:
@@ -3754,7 +3721,6 @@ items:
           range:
             raw: '5'
             unit: ft
-          revealed: true
           ritual: true
           rotator: true
           spell: true
@@ -3853,7 +3819,6 @@ items:
             - primal
           range:
             unit: melee
-          revealed: true
           targets:
             - self
         type: ability
@@ -3941,7 +3906,6 @@ items:
             hit: >-
               <p>Target gains @L[Keyword:Limited]{Limited}
               @L[Ability:Regenerating]{Regenerating}.</p>
-          revealed: true
           rotator: true
           spell: true
           standard: true
@@ -4018,7 +3982,6 @@ items:
             unit: melee
           results:
             hit: <p>Target is @L[Property:Destroyed]{destroyed}.</p>
-          revealed: true
           rotator: true
           spell: true
           standard: true
@@ -4109,7 +4072,6 @@ items:
             - primal
           range:
             unit: melee
-          revealed: true
           rotator: true
           spell: true
           standard: true
@@ -4146,8 +4108,8 @@ items:
           disabled: false
           formula: 1d12
     type: rank
-  - _id: ZuqCJFLzizh2iWnx
-    _key: '!actors.items!1e1d512c131e91e1.ZuqCJFLzizh2iWnx'
+  - _id: TP0yBNRbmdKjRjZf
+    _key: '!actors.items!1e1d512c131e91e1.TP0yBNRbmdKjRjZf'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.4a095aaed0254ec3
       coreVersion: '13'
@@ -4157,7 +4119,7 @@ items:
     effects:
       - _id: NGCuRUaVtXnxAbRe
         _key: >-
-          !actors.items.effects!1e1d512c131e91e1.ZuqCJFLzizh2iWnx.NGCuRUaVtXnxAbRe
+          !actors.items.effects!1e1d512c131e91e1.TP0yBNRbmdKjRjZf.NGCuRUaVtXnxAbRe
         _stats:
           compendiumSource: Compendium.teriock.abilities.Item.ac35fb736d8bd407
           coreVersion: '13'
@@ -4232,7 +4194,6 @@ items:
             hit: >-
               <p>Deal [[/damage 1d4[magic]]] @L[Core:Damage]{damage} to
               target.</p>
-          revealed: true
           spell: true
           standard: true
           targets:
@@ -4240,7 +4201,7 @@ items:
         type: ability
       - _id: aCWLNsvSFjEuLTyl
         _key: >-
-          !actors.items.effects!1e1d512c131e91e1.ZuqCJFLzizh2iWnx.aCWLNsvSFjEuLTyl
+          !actors.items.effects!1e1d512c131e91e1.TP0yBNRbmdKjRjZf.aCWLNsvSFjEuLTyl
         _stats:
           compendiumSource: Compendium.teriock.abilities.Item.30358f2e8d9b3a0a
           coreVersion: '13'
@@ -4297,7 +4258,6 @@ items:
             - magical
           range:
             unit: melee
-          revealed: true
           skill: true
           standard: true
           targets:

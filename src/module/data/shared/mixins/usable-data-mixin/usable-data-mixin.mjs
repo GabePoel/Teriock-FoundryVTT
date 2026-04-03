@@ -22,15 +22,6 @@ export default function UsableDataMixin(Base) {
         });
       }
 
-      /** @inheritDoc */
-      static migrateData(data) {
-        if (data.proficient) data.competence = { raw: 1 };
-        if (data.fluent) data.competence = { raw: 2 };
-        delete data.proficient;
-        delete data.fluent;
-        return super.migrateData(data);
-      }
-
       /**
        * Parse an event into usable roll or execution options for this type.
        * @param {PointerEvent} event

@@ -4,7 +4,7 @@ _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.50
+  systemVersion: 0.10.68
 effects:
   - _id: hisU2T6ljz7dtCeH
     _key: '!items.effects!8f0a2557617120b8.hisU2T6ljz7dtCeH'
@@ -24,9 +24,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       executionTime: passive
       expansion:
@@ -50,7 +48,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       skill: true
       standard: true
       targets:
@@ -76,9 +73,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       executionTime: passive
       expansion:
@@ -96,7 +91,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       targets:
         - self
       upgrades:
@@ -120,9 +114,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       executionTime: passive
       expansion:
@@ -140,7 +132,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       targets:
         - self
       upgrades:
@@ -164,9 +155,7 @@ effects:
       delivery:
         base: bite
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: instant
       executionTime: a2
       expansion:
@@ -191,7 +180,6 @@ effects:
           <p>Target is @L[Condition:Dead]{dead}, @L[Condition:Ruined]{ruined},
           and their @L[Core:Size]{SIZE} is reduced by 1. If their
           @L[Core:Size]{SIZE} was already less than 1, it is reduced to 0.</p>
-      revealed: true
       targets:
         - creature
     type: ability
@@ -213,9 +201,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       executionTime: passive
       expansion:
@@ -237,7 +223,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       skill: true
       standard: true
       targets:
@@ -259,9 +244,7 @@ effects:
       delivery:
         base: bite
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: instant
       executionTime: a1
       expansion:
@@ -288,7 +271,6 @@ effects:
           and their @L[Core:Size]{SIZE} is reduced by 2. If their
           @L[Core:Size]{SIZE} was already 2 or less, their body is completely
           consumed.</p>
-      revealed: true
       targets:
         - creature
     type: ability
@@ -309,9 +291,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       executionTime: passive
       expansion:
@@ -333,7 +313,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       skill: true
       standard: true
       targets:
@@ -359,9 +338,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       executionTime: passive
       expansion:
@@ -383,7 +360,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       targets:
         - self
     type: ability
@@ -403,9 +379,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       executionTime: passive
       expansion:
@@ -423,7 +397,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       targets:
         - self
       upgrades:
@@ -447,9 +420,7 @@ effects:
       delivery:
         base: self
       duration:
-        dawn: false
         raw: '0'
-        stationary: false
         unit: unlimited
       executionTime: passive
       expansion:
@@ -467,7 +438,6 @@ effects:
         - martial
       range:
         unit: melee
-      revealed: true
       targets:
         - self
       upgrades:
@@ -507,6 +477,8 @@ effects:
         iB9yugE9ZXYHDeCK:
           _id: iB9yugE9ZXYHDeCK
           automatic: true
+          competence:
+            raw: 0
           competencies:
             - 0
             - 1
@@ -519,17 +491,21 @@ effects:
           heighten:
             - 0
             - 1
+          level: minor
           multi: false
-          transformation:
-            level: minor
-            reset:
-              - hp
-            suppress:
-              - body
-              - equipment
-              - fluency
-              - rank
-              - species
+          override:
+            - art
+          overrideCompetence: true
+          reset:
+            - gp
+            - hp
+          ring: false
+          suppress:
+            - body
+            - equipment
+            - fluency
+            - rank
+            - species
           type: transformation
       class: natureMage
       competence:
@@ -538,11 +514,12 @@ effects:
         base: missile
         package: ball
       duration:
-        dawn: true
         raw: '0'
-        stationary: false
+        triggers:
+          - dawn
         unit: unlimited
       effectTypes:
+        - magical
         - transformation
       elements:
         - nature
@@ -580,7 +557,6 @@ effects:
           reduced to 0 @L[Core:Hit Points and Mana Points]{HP}, then they revert
           and any remaining @L[Core:Damage]{damage} carries over to their
           reverted state. </p>
-      revealed: true
       spell: true
       standard: true
       targets:
@@ -614,4 +590,7 @@ system:
   traits:
     - animal
     - monstrous
+  transformation:
+    img: systems/teriock/src/icons/tokens/weevil-beast.webp
+    ring: true
 type: species
