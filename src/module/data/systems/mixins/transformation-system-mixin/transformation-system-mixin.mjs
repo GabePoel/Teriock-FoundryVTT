@@ -1,5 +1,7 @@
 import { makeIcon } from "../../../../helpers/utils.mjs";
-import { transformationField } from "../../../fields/helpers/builders.mjs";
+import { effectTransformationFields } from "../../../fields/helpers/transformation-fields.mjs";
+
+const { fields } = foundry.data;
 
 /**
  * @param {typeof ChildSystem} Base
@@ -21,9 +23,7 @@ export default function TransformationSystemMixin(Base) {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          transformation: transformationField({
-            implementation: true,
-          }),
+          transformation: new fields.SchemaField(effectTransformationFields()),
         });
       }
 
@@ -55,6 +55,21 @@ export default function TransformationSystemMixin(Base) {
       }
 
       /**
+       * Reset update data.
+       * @returns {object}
+       */
+      get #resetUpdateData() {
+        const updateData = {};
+        for (const r of this.transformation.reset) {
+          Object.assign(
+            updateData,
+            TERIOCK.options.transformation.reset[r].update,
+          );
+        }
+        return updateData;
+      }
+
+      /**
        * Whether this is the primary transformation.
        * @returns {boolean}
        */
@@ -62,7 +77,7 @@ export default function TransformationSystemMixin(Base) {
         if (this.actor) {
           return (
             this.isTransformation &&
-            this.actor.system.transformation.primary === this.parent.id
+            this.actor.system.transformation.primary === this.parent
           );
         } else {
           return this.isTransformation;
@@ -209,15 +224,22 @@ export default function TransformationSystemMixin(Base) {
         const statItems = this.actor.items.contents.filter(
           (i) => i.system.metadata.stats,
         );
-        if (this.transformation.reset.has("mp")) {
+        if (this.transformation.reset.has("hp")) {
           disabledHpDiceItems.push(
             ...statItems.filter((i) => !i.system.statDice.hp.disabled),
           );
         }
-        if (this.transformation.reset.has("hp")) {
+        if (this.transformation.reset.has("mp")) {
           disabledMpDiceItems.push(
             ...statItems.filter((i) => !i.system.statDice.mp.disabled),
           );
+        }
+        const preTransform = {};
+        for (const r of this.transformation.reset) {
+          const update = TERIOCK.options.transformation.reset[r].update;
+          for (const k of Object.keys(update)) {
+            preTransform[k] = foundry.utils.getProperty(this.actor, k);
+          }
         }
         return {
           teriock: {
@@ -225,8 +247,7 @@ export default function TransformationSystemMixin(Base) {
             disabledHpDiceItems: this.#toIds(disabledHpDiceItems),
             disabledItems: this.#toIds(disabledItems),
             disabledMpDiceItems: this.#toIds(disabledMpDiceItems),
-            preTransformHp: this.actor.system.hp.value,
-            preTransformMp: this.actor.system.mp.value,
+            preTransform: foundry.utils.expandObject(preTransform),
           },
         };
       }
@@ -246,15 +267,8 @@ export default function TransformationSystemMixin(Base) {
         const updateData = {
           "system.transformation.primary": this.parent.id,
           "flags.teriock.lastTransformation": this.parent.id,
+          ...this.#resetUpdateData,
         };
-        // This high number is included because just setting to `system.hp.max` or `system.mp.max` uses the former
-        // values. This requires explicit filtering when rendering numbers on the actor's tokens.
-        if (this.transformation.reset.has("hp")) {
-          updateData["system.hp.value"] = 99999999;
-        }
-        if (this.transformation.reset.has("mp")) {
-          updateData["system.mp.value"] = 99999999;
-        }
         actor.update(updateData);
       }
 
@@ -286,22 +300,7 @@ export default function TransformationSystemMixin(Base) {
           } else {
             this._applyTransformationUpdates().then(() => {
               if (this.transformation.reset.size) {
-                const updateData = {};
-                if (this.transformation.reset.has("hp")) {
-                  updateData["system.hp.value"] = this.parent.getFlag(
-                    "teriock",
-                    "transformationHp",
-                  );
-                }
-                if (this.transformation.reset.has("mp")) {
-                  updateData["system.mp.value"] = this.parent.getFlag(
-                    "teriock",
-                    "transformationMp",
-                  );
-                }
-                if (Object.keys(updateData).length && this.actor) {
-                  return this.actor.update(updateData);
-                }
+                this.actor.update(this.#resetUpdateData);
               }
             });
           }
@@ -328,10 +327,11 @@ export default function TransformationSystemMixin(Base) {
             itemData.forEach((s) => {
               s.system._dep = this.parent.id;
               s.system.transformationLevel = this.transformation.level;
-              if (this.transformation.level !== "greater") {
-                s.system.statDice.mp.disabled = true;
-                s.system.proficient = false;
-              }
+              s.system.statDice.hp.disabled =
+                !this.transformation.reset.has("hp");
+              s.system.statDice.mp.disabled =
+                !this.transformation.reset.has("mp");
+              s.system.competence.raw = this.transformation.competence.value;
               if (s.system.size.min && s.system.size.max) {
                 s.system.size.value = Math.clamp(
                   this.parent.actor.system.size.number.value,
@@ -381,22 +381,10 @@ export default function TransformationSystemMixin(Base) {
       async _removeTransformationUpdates() {
         if (!this.actor) return;
         await this.#toggleDocuments(false);
-
         if (this.transformation.reset.size) {
-          const updateData = {};
-          if (this.transformation.reset.has("hp")) {
-            updateData["system.hp.value"] = this.parent.getFlag(
-              "teriock",
-              "preTransformHp",
-            );
-          }
-          if (this.transformation.reset.has("mp")) {
-            updateData["system.mp.value"] = this.parent.getFlag(
-              "teriock",
-              "preTransformMp",
-            );
-          }
-          await this.actor.update(updateData);
+          await this.actor.update(
+            this.parent.getFlag("teriock", "preTransform") ?? {},
+          );
         }
       }
 
@@ -422,7 +410,7 @@ export default function TransformationSystemMixin(Base) {
       /** @inheritDoc */
       getLocalRollData() {
         return Object.assign(super.getLocalRollData(), {
-          transformation: Number(this.isTransformation),
+          transformation: Number(this.transformation.enabled),
           "transformation.primary": Number(this.isPrimaryTransformation),
         });
       }
@@ -431,8 +419,13 @@ export default function TransformationSystemMixin(Base) {
       prepareBaseData() {
         super.prepareBaseData();
         if (this.isTransformation) {
-          if (!this.transformation.img && this.actor && this.primarySpecies) {
-            this.transformation.img = this.primarySpecies.img;
+          if (this.actor && !this.transformation.img) {
+            for (const s of this.parent.species) {
+              if (s.system.transformation.img && !this.transformation.img) {
+                this.transformation.img = s.system.transformation.img;
+                this.transformation.ring = s.system.transformation.ring;
+              }
+            }
           }
         }
       }

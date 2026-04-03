@@ -1,8 +1,6 @@
 import { competenceOptions } from "../../../constants/options/competence-options.mjs";
-import { documentOptions } from "../../../constants/options/document-options.mjs";
-import { transformationOptions } from "../../../constants/options/transformation-options.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
-import { choiceMap, sortObject } from "../../../helpers/utils.mjs";
+import { sortObject } from "../../../helpers/utils.mjs";
 import {
   EnhancedNumberField,
   EnhancedStringField,
@@ -14,7 +12,6 @@ const {
   BooleanField,
   DocumentIdField,
   DocumentUUIDField,
-  FilePathField,
   NumberField,
   SchemaField,
   SetField,
@@ -39,91 +36,6 @@ export function combatExpirationSourceTypeField() {
     initial: "target",
     label: "TERIOCK.SCHEMA.CombatExpiration.who.label",
   });
-}
-
-/**
- * Field for a transformation.
- * @param {object} [options]
- * @param {boolean} [options.implementation] - Make this into an implementation.
- * @param {boolean} [options.alwaysEnabled] - Do not include an enabled key.
- * @returns {SchemaField}
- */
-export function transformationField(options = {}) {
-  const { implementation = false } = options;
-  const schema = {
-    img: new FilePathField({
-      categories: ["IMAGE"],
-      hint: "TERIOCK.SCHEMA.Transformation.img.hint",
-      initial: null,
-      label: "TERIOCK.SCHEMA.Transformation.img.label",
-      nullable: true,
-      required: false,
-      trim: true,
-    }),
-    level: new StringField({
-      choices: TERIOCK.options.transformation.level,
-      hint: "TERIOCK.SCHEMA.Transformation.level.hint",
-      initial: "minor",
-      label: "TERIOCK.SCHEMA.Transformation.level.label",
-      nullable: false,
-      required: false,
-    }),
-    reset: new SetField(
-      new StringField({
-        choices: choiceMap(
-          transformationOptions.reset,
-          (k) => TERIOCK.options.cost.primary.keys[k].abbreviation,
-        ),
-      }),
-      {
-        hint: "TERIOCK.SCHEMA.Transformation.reset.hint",
-        label: "TERIOCK.SCHEMA.Transformation.reset.label",
-        initial: Object.keys(transformationOptions.reset).filter(
-          (k) => transformationOptions.reset[k].initial,
-        ),
-      },
-    ),
-    suppress: new SetField(
-      new StringField({
-        choices: choiceMap(
-          transformationOptions.suppress,
-          (k) => documentOptions[k].name,
-        ),
-      }),
-      {
-        hint: "TERIOCK.SCHEMA.Transformation.suppress.hint",
-        initial: Object.keys(transformationOptions.suppress).filter(
-          (k) => transformationOptions.suppress[k].initial,
-        ),
-        label: "TERIOCK.SCHEMA.Transformation.suppress.label",
-      },
-    ),
-  };
-  if (implementation) {
-    schema.uuids = new SetField(
-      new DocumentUUIDField({
-        hint: "TERIOCK.SCHEMA.Transformation.uuids.itemHint",
-        nullable: false,
-        type: "Item",
-      }),
-      {
-        hint: "TERIOCK.SCHEMA.Transformation.uuids.hint",
-        initial: [],
-        label: "TERIOCK.SCHEMA.Transformation.uuids.label",
-        nullable: false,
-        required: false,
-      },
-    );
-    schema.enabled = new BooleanField({
-      hint: "TERIOCK.SCHEMA.Transformation.enabled.hint",
-      initial: false,
-      label: "TERIOCK.SCHEMA.Transformation.enabled.label",
-      nullable: false,
-      required: false,
-    });
-  }
-  if (options.alwaysEnabled) delete schema.enabled;
-  return new SchemaField(schema);
 }
 
 /**
@@ -317,10 +229,7 @@ export function blocksField() {
     new SchemaField({
       elements: new StringField({ nullable: true }),
       classes: new StringField({ initial: "" }),
-      italic: new BooleanField({
-        initial: false,
-        required: false,
-      }),
+      italic: new BooleanField({ initial: false, required: false }),
       special: new StringField({ nullable: true }),
       text: new StringField({ nullable: true }),
       title: new StringField(),

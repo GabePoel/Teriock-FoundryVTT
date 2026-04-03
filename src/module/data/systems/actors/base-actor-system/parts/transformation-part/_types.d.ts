@@ -1,19 +1,10 @@
+import { ActorTransformationConfig } from "../../../../../fields/helpers/_types.js";
+
 declare global {
   namespace Teriock.Models {
     export type ActorTransformationPartData = {
       /** <base> Transformation */
-      transformation: {
-        /** <base> Transformed token art */
-        img: Teriock.System.ImageString | null;
-        /** <schema> */
-        primary: ID<TeriockConsequence> | null;
-        /** <base> */
-        effect: TeriockConsequence | null;
-        /** <base> */
-        species: TeriockSpecies[];
-        /** <base> */
-        level: Teriock.Keys.TransformationLevel;
-      };
+      transformation: ActorTransformationConfig;
     };
   }
 }

@@ -1,14 +1,21 @@
-import { transformationField } from "../../fields/helpers/builders.mjs";
+import { mix } from "../../../helpers/utils.mjs";
+import { automationTransformationFields } from "../../fields/helpers/transformation-fields.mjs";
 import { CritAutomation } from "./abstract/_module.mjs";
-import { ExternalDocumentsAutomationMixin } from "./mixins/_module.mjs";
+import {
+  CompetenceAutomationMixin,
+  ExternalDocumentsAutomationMixin,
+} from "./mixins/_module.mjs";
 
 /**
  * @extends {CritAutomation}
+ * @extends {AutomationTransformationConfig}
  * @mixes ExternalDocumentsAutomation
- * @property {TransformationData} transformation
+ * @mixes CompetenceAutomation
  */
-export default class TransformationAutomation extends ExternalDocumentsAutomationMixin(
+export default class TransformationAutomation extends mix(
   CritAutomation,
+  ExternalDocumentsAutomationMixin,
+  CompetenceAutomationMixin,
 ) {
   /** @inheritDoc */
   static get LABEL() {
@@ -22,22 +29,22 @@ export default class TransformationAutomation extends ExternalDocumentsAutomatio
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(super.defineSchema(), {
-      transformation: transformationField({
-        alwaysEnabled: true,
-        configuration: true,
-      }),
-    });
+    return Object.assign(
+      super.defineSchema(),
+      automationTransformationFields(),
+    );
   }
 
   /** @inheritDoc */
   get _formPaths() {
     return [
       ...super._formPaths,
-      "transformation.level",
-      "transformation.img",
-      "transformation.reset",
-      "transformation.suppress",
+      "level",
+      "img",
+      "ring",
+      "override",
+      "reset",
+      "suppress",
     ];
   }
 

@@ -1,5 +1,6 @@
 import { TeriockActor } from "../../../documents/_module.mjs";
 import { transformationOptions } from "../../../constants/options/transformation-options.mjs";
+import { CompetenceModel } from "../../models/_module.mjs";
 
 export type SpeciesTransformationConfig = {
   /** <schema> Overriding image to apply */
@@ -15,7 +16,7 @@ export type ActorTransformationConfig = SpeciesTransformationConfig & {
 
 export type AutomationTransformationConfig = SpeciesTransformationConfig & {
   /** <schema> Level of transformation */
-  level: Teriock.Keys.TransformationLevel;
+  level: Teriock.Keys.TransformationLevel | null;
   /** <schema> Additional parameters this transformation should override */
   override: Set<keyof typeof transformationOptions.override>;
   /** <schema> Stats this transformation should reset */
@@ -29,28 +30,8 @@ export type EffectTransformationConfig = AutomationTransformationConfig & {
   enabled: boolean;
   /** <schema> UUID of specific species to transform into */
   uuids: UUID<TeriockSpecies>[];
-};
-
-/** <schema> Transformation configuration */
-export type TransformationData = {
-  /** <schema> Whether transformation is enabled */
-  enabled: boolean;
-  /** <schema> Overriding image to apply */
-  img: Teriock.System.ImageString;
-  /** <schema> Level of transformation */
-  level: Teriock.Keys.TransformationLevel;
-  /** <schema> Additional parameters this transformation should override */
-  override: Set<keyof typeof transformationOptions.override>;
-  /** <schema> Stats this transformation should reset */
-  reset: Set<keyof typeof transformationOptions.reset>;
-  /** <schema> Types of documents this transformation should turn off */
-  suppress: Set<keyof typeof transformationOptions.suppress>;
-  /** <schema> UUID of specific species to transform into */
-  uuids: UUID<TeriockSpecies>[];
-};
-
-export type TransformationField = TransformationData & {
-  uuids: Set<UUID<TeriockSpecies>>[];
+  /** <schema> Competence to override with */
+  competence: CompetenceModel;
 };
 
 /** <schema> What is the relationship of the {@link TeriockActor} that triggers expirations? */

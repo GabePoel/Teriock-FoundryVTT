@@ -1,11 +1,9 @@
 import { characterOptions } from "../../constants/options/character-options.mjs";
 import { documentTypes } from "../../constants/system/_module.mjs";
-import { systemPath } from "../../helpers/path.mjs";
 import { resolveDocument } from "../../helpers/resolve.mjs";
 import { toCamelCase } from "../../helpers/string.mjs";
 import { lookupDocument, mix } from "../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
-import TeriockTokenDocument from "../token-document/token-document.mjs";
 
 const { Actor } = foundry.documents;
 
@@ -256,21 +254,6 @@ export default class TeriockActor extends mix(
     if (yes === false) return false;
 
     // TODO: Refine token update process in V14
-    if (
-      foundry.utils.hasProperty(changes, "img") &&
-      !foundry.utils.hasProperty(changes, "prototypeToken.texture.src") &&
-      foundry.utils
-        .getProperty(changes, "img")
-        .startsWith(systemPath("icons/creatures"))
-    ) {
-      foundry.utils.setProperty(
-        changes,
-        "prototypeToken.texture.src",
-        TeriockTokenDocument.ringImage(
-          foundry.utils.getProperty(changes, "img"),
-        ),
-      );
-    }
     const tokenUpdates =
       foundry.utils.getProperty(changes, "prototypeToken") || {};
     if (foundry.utils.hasProperty(changes, "system.size.raw")) {

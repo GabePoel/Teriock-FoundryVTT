@@ -1,3 +1,5 @@
+import { actorTransformationConfig } from "../../../../../fields/helpers/transformation-fields.mjs";
+
 const { fields } = foundry.data;
 
 /**
@@ -15,12 +17,7 @@ export default (Base) => {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          transformation: new fields.SchemaField({
-            primary: new fields.DocumentIdField({
-              nullable: true,
-              initial: null,
-            }),
-          }),
+          transformation: new fields.SchemaField(actorTransformationConfig()),
         });
       }
 
@@ -29,35 +26,21 @@ export default (Base) => {
        * @returns {boolean}
        */
       get isTransformed() {
-        return Boolean(
-          this.transformation.effect && this.transformation.effect.active,
-        );
+        return !!this.transformation.primary?.active;
       }
 
       /** @inheritDoc */
       prepareBaseData() {
         super.prepareBaseData();
-        const effect =
-          /** @type {TeriockConsequence} */ this.parent.effects.get(
-            this.transformation.primary,
-          ) || null;
-        Object.assign(this.transformation, {
-          effect,
-          image: null,
-          level: "minor",
-        });
-        if (effect) {
-          Object.assign(this.transformation, {
-            image: effect.system.transformation.img,
-            level: effect.system.transformation.level,
-          });
-        }
         if (
           this.isTransformed &&
-          this.transformation?.effect?.system.primarySpecies?.system.size.value
+          this.transformation.primary?.system.transformation.override.has(
+            "size",
+          ) &&
+          this.transformation.primary?.system.primarySpecies?.system.size.value
         ) {
           this.size.number.raw =
-            this.transformation.effect.system.primarySpecies.system.size.value.toString() ||
+            this.transformation.primary?.system.primarySpecies.system.size.value.toString() ||
             this.size.number.raw;
         }
       }
@@ -65,9 +48,14 @@ export default (Base) => {
       /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
-        if (this.transformation.effect) {
+        if (
+          this.isTransformed &&
+          this.transformation.primary?.system.transformation.override.has("art")
+        ) {
           this.transformation.img =
-            this.transformation.effect.system.transformation.img;
+            this.transformation.primary?.system.transformation.img;
+          this.transformation.ring =
+            this.transformation.primary?.system.transformation.ring;
         }
       }
     }

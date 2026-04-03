@@ -43,6 +43,10 @@ export default class ConsequenceSheet extends mix(
       template: "teriock/sheets/effects/consequence/children-tab",
       scrollable: [""],
     },
+    transformation: {
+      template: "teriock/sheets/effects/consequence/transformation-tab",
+      scrollable: [""],
+    },
   };
 
   static TABS = {
@@ -56,6 +60,10 @@ export default class ConsequenceSheet extends mix(
         {
           id: "children",
           icon: makeIconClass(icons.ui.document, "solid"),
+        },
+        {
+          id: "transformation",
+          icon: makeIconClass(icons.effect.transform, "solid"),
         },
       ],
       initial: super.TABS.sheet.initial,
@@ -72,12 +80,18 @@ export default class ConsequenceSheet extends mix(
   /** @inheritDoc */
   async _prepareContext(options = {}) {
     const context = await super._prepareContext(options);
-    //noinspection JSUnresolvedReference
     Object.assign(context, {
       TERIOCK,
       appId: this.id,
       system: this.document.system,
       systemFields: this.document.system.schema.fields,
+      transformation: ["enabled", "level", "img", "ring"].map((p) => {
+        return {
+          field: this.document.system.schema.getField(`transformation.${p}`),
+          value: this.document.system.transformation[p],
+          localize: true,
+        };
+      }),
     });
     return context;
   }

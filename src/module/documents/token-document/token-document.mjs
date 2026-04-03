@@ -1,7 +1,6 @@
 //noinspection JSValidateJSDoc
 
 import { TokenSettingsModel } from "../../data/models/settings-models/_module.mjs";
-import { systemPath } from "../../helpers/path.mjs";
 import { convertUnits } from "../../helpers/unit.mjs";
 import { makeIcon, mix } from "../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
@@ -24,27 +23,11 @@ export default class TeriockTokenDocument extends mix(
   mixins.EmbedCardDocumentMixin,
   mixins.SettingsDocumentMixin,
 ) {
-  /**
-   * Convert the image path to one intended for token rings if possible.
-   * @param {string} path
-   * @returns {string}
-   */
-  static ringImage(path) {
-    if (path.startsWith(systemPath("icons/creatures"))) {
-      return path.replace(
-        systemPath("icons/creatures"),
-        systemPath("icons/tokens"),
-      );
-    }
-    return path;
-  }
-
   /** @inheritDoc */
   get _settingsFlagsDataModel() {
     return TokenSettingsModel;
   }
 
-  //noinspection JSUnusedGlobalSymbols
   /**
    * Center of this token.
    * @returns {Point}
@@ -75,11 +58,8 @@ export default class TeriockTokenDocument extends mix(
    * @returns {string}
    */
   get imageLive() {
-    if (this.isTransformed) {
-      return this.imageTransformed;
-    } else {
-      return this.imageRaw;
-    }
+    if (this.isTransformed) return this.imageTransformed;
+    return this.imageRaw;
   }
 
   /**
@@ -96,11 +76,7 @@ export default class TeriockTokenDocument extends mix(
    */
   get imageTransformed() {
     if (!this.actor) return this.texture.src;
-    let path = this.actor.system.transformation.img || this.texture.src;
-    if (this.ring.enabled) {
-      return TeriockTokenDocument.ringImage(path);
-    }
-    return path;
+    return this.actor.system.transformation.img || this.texture.src;
   }
 
   /**
@@ -108,11 +84,8 @@ export default class TeriockTokenDocument extends mix(
    * @returns {boolean}
    */
   get isTransformed() {
-    if (this.actor) {
-      return this.actor.system.isTransformed;
-    } else {
-      return false;
-    }
+    if (this.actor) return this.actor.system.isTransformed;
+    return false;
   }
 
   /**
@@ -135,6 +108,34 @@ export default class TeriockTokenDocument extends mix(
     return !!this.ring.enabled;
   }
 
+  /**
+   * Whether this should have a ring.
+   * @returns {boolean}
+   */
+  get ringLive() {
+    if (this.isTransformed) return this.ringTransformed;
+    return this.ringRaw;
+  }
+
+  /**
+   * Whether this should have a ring if not transformed.
+   * @returns {boolean}
+   */
+  get ringRaw() {
+    return !!(this.getFlag("teriock", "ringRaw") ?? this.ring.enabled);
+  }
+
+  /**
+   * Whether this should have a ring if transformed.
+   * @returns {boolean}
+   */
+  get ringTransformed() {
+    if (this.actor && this.actor.system.transformation.img) {
+      return this.actor.system.transformation.ring;
+    }
+    return this.ringRaw;
+  }
+
   /** @inheritDoc */
   _inferRingSubjectTexture() {
     let out = super._inferRingSubjectTexture();
@@ -152,7 +153,7 @@ export default class TeriockTokenDocument extends mix(
     if (this.getSetting("autoLighting")) this.deriveLighting();
     if (this.getSetting("autoDetectionModes")) this.deriveDetectionModes();
     super._onRelatedUpdate(update, operation);
-    this.object?.initializeSources();
+    if (this.object) this.object.initializeSources();
   }
 
   /** @inheritDoc */
@@ -166,6 +167,7 @@ export default class TeriockTokenDocument extends mix(
           flags: {
             teriock: {
               imageRaw: foundry.utils.getProperty(data, "texture.src"),
+              ringRaw: foundry.utils.getProperty(data, "ring.enabled"),
             },
           },
         },
@@ -185,6 +187,11 @@ export default class TeriockTokenDocument extends mix(
           changes,
           "flags.teriock.imageRaw",
           foundry.utils.getProperty(changes, "texture.src"),
+        );
+        foundry.utils.setProperty(
+          changes,
+          "flags.teriock.ringRaw",
+          foundry.utils.getProperty(changes, "ring.enabled"),
         );
       }
     }
@@ -280,9 +287,10 @@ export default class TeriockTokenDocument extends mix(
     let angle = 360;
     if (
       this.sight?.enabled &&
-      game.teriock.getSetting("automaticallyChangeVisionModes")
+      game.teriock.getSetting("automaticallyChangeVisionModes") &&
+      this.actor
     ) {
-      if (this.actor?.system.senses.dark > 0) {
+      if (this.actor.system.senses.dark > 0) {
         visionMode = "darkvision";
       }
       //if (
@@ -293,7 +301,7 @@ export default class TeriockTokenDocument extends mix(
       //}
       if (this.hasStatusEffect("ethereal")) {
         visionMode = "ethereal";
-        angle = this.actor?.system.light.angle || angle;
+        angle = this.actor.system.light.angle || angle;
       }
       if (
         this.hasStatusEffect("ethereal") &&
@@ -308,11 +316,11 @@ export default class TeriockTokenDocument extends mix(
         visionMode = "dead";
       }
       range = Math.max(
-        this.actor?.system.senses.dark,
-        //this.actor?.system.senses.night,
-        this.actor?.system.senses.blind,
-        this.actor?.system.senses.hearing,
-        this.actor?.system.senses.etherealLight,
+        this.actor.system.senses.dark,
+        //this.actor.system.senses.night,
+        this.actor.system.senses.blind,
+        this.actor.system.senses.hearing,
+        this.actor.system.senses.etherealLight,
       );
       if (
         this.getSetting("autoVisionModes") &&
@@ -332,7 +340,7 @@ export default class TeriockTokenDocument extends mix(
   getCardContextMenuEntries(doc) {
     return [
       {
-        name: "Open Actor",
+        name: game.i18n.localize("TERIOCK.SYSTEMS.Common.MENU.openSource"),
         icon: makeIcon(TERIOCK.options.document.character.icon, "contextMenu"),
         condition: () => this.actor && this.actor.isViewer,
         callback: async () => this.actor.sheet.render(true),
@@ -380,6 +388,9 @@ export default class TeriockTokenDocument extends mix(
         }
         if (this.imageLive !== this.texture.src) {
           updateData["texture.src"] = this.imageLive;
+        }
+        if (this.ringLive !== this.ring.enabled) {
+          updateData["ring.enabled"] = this.ringLive;
         }
       }
     }

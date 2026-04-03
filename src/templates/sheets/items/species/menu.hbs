@@ -1,14 +1,17 @@
 <div class="ab-menu {{#if menuCollapsed}}collapsed{{/if}}">
   <div class="ab-menu-content">
     <div class="ab-menu-bar">
-      <div class="tgrid ab-check-grid g2">
+      <div class="tgrid ab-check-grid g3">
         {{> "teriock/sheets/shared/display-toggles"}}
       </div>
     </div>
     <div class="ab-menu-bar">
       <div class="tgrid ab-select-grid g2 menu-large-grid">
         {{> "teriock/sheets/shared/menu-input" field=systemFields.traits value=system.traits}}
-        {{> "teriock/sheets/shared/menu-input" field=systemFields.transformationLevel value=system.transformationLevel}}
+        {{> "teriock/sheets/shared/menu-input"
+          field=systemFields.transformation.fields.img
+          value=system.transformation.img
+        }}
       </div>
     </div>
     <div class="ab-menu-bar">

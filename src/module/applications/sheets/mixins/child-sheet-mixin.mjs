@@ -106,7 +106,9 @@ export default function ChildSheetMixin(Base) {
             ...{
               schema: this.document.getSchema(f.path),
               value,
-              label: f?.label || this.document.getSchema(f.path)?.label,
+              label:
+                f?.label ||
+                game.i18n.localize(this.document.getSchema(f.path)?.label),
               button: f?.button,
               editable: f.editable === false ? false : value === sourceValue,
             },

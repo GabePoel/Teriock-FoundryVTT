@@ -2,7 +2,8 @@ import { documentOptions } from "../../../constants/options/document-options.mjs
 import { transformationOptions } from "../../../constants/options/transformation-options.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
 import { choiceMap, objectMap } from "../../../helpers/utils.mjs";
-import LocalDocumentField from "../local-document-field.mjs";
+import { CompetenceModel } from "../../models/_module.mjs";
+import { LocalDocumentField } from "../_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -27,7 +28,11 @@ export function speciesTransformationFields() {
 
 export function actorTransformationConfig() {
   return Object.assign(speciesTransformationFields(), {
-    primary: new LocalDocumentField(),
+    primary: new LocalDocumentField(foundry.documents.BaseActiveEffect, {
+      nullify: (d) =>
+        !["condition", "consequence"].includes(d.type) ||
+        !d.system.transformation.enabled,
+    }),
   });
 }
 
@@ -36,9 +41,9 @@ export function automationTransformationFields() {
     level: new fields.StringField({
       choices: TERIOCK.options.transformation.level,
       hint: "TERIOCK.SCHEMA.Transformation.level.hint",
-      initial: "minor",
+      initial: null,
       label: "TERIOCK.SCHEMA.Transformation.level.label",
-      nullable: false,
+      nullable: true,
       required: false,
     }),
     override: new fields.SetField(
@@ -46,10 +51,14 @@ export function automationTransformationFields() {
         choices: localizeChoices(
           objectMap(transformationOptions.override, (k) => k.label),
         ),
+      }),
+      {
+        hint: "TERIOCK.SCHEMA.Transformation.override.hint",
         initial: Object.keys(transformationOptions.override).filter(
           (k) => transformationOptions.override[k].initial,
         ),
-      }),
+        label: "TERIOCK.SCHEMA.Transformation.override.label",
+      },
     ),
     reset: new fields.SetField(
       new fields.StringField({
@@ -60,10 +69,10 @@ export function automationTransformationFields() {
       }),
       {
         hint: "TERIOCK.SCHEMA.Transformation.reset.hint",
-        label: "TERIOCK.SCHEMA.Transformation.reset.label",
         initial: Object.keys(transformationOptions.reset).filter(
           (k) => transformationOptions.reset[k].initial,
         ),
+        label: "TERIOCK.SCHEMA.Transformation.reset.label",
       },
     ),
     suppress: new fields.SetField(
@@ -86,6 +95,7 @@ export function automationTransformationFields() {
 
 export function effectTransformationFields() {
   return Object.assign(automationTransformationFields(), {
+    competence: new fields.EmbeddedDataField(CompetenceModel),
     enabled: new fields.BooleanField({
       hint: "TERIOCK.SCHEMA.Transformation.enabled.hint",
       initial: false,

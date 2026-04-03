@@ -1,4 +1,5 @@
 import { preLocalize } from "../../helpers/localization.mjs";
+import { currencyOptions } from "./currency-options.mjs";
 
 export const transformationOptions = {
   level: {
@@ -6,14 +7,30 @@ export const transformationOptions = {
     full: "TERIOCK.EFFECTS.TransformationLevel.full",
     greater: "TERIOCK.EFFECTS.TransformationLevel.greater",
   },
+  override: {
+    art: {
+      initial: true,
+      label: "TERIOCK.SCHEMA.Transformation.override.choices.art",
+    },
+    size: {
+      initial: true,
+      label: "TERIOCK.SCHEMA.Transformation.override.choices.size",
+    },
+  },
   reset: {
     hp: {
       initial: true,
-      path: "system.hp.value",
+      update: { "system.hp.value": 99999999 },
     },
     mp: {
       initial: false,
-      path: "system.mp.value",
+      update: { "system.mp.value": 99999999 },
+    },
+    gp: {
+      initial: true,
+      update: Object.fromEntries(
+        Object.keys(currencyOptions).map((k) => [`system.money.${k}`, 0]),
+      ),
     },
   },
   suppress: {
@@ -57,3 +74,4 @@ export const transformationOptions = {
 };
 
 preLocalize("options.transformation.level");
+preLocalize("options.transformation.override", { key: "label" });

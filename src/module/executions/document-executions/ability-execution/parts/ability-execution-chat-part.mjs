@@ -293,7 +293,7 @@ export default function AbilityExecutionChatPart(Base) {
 
       /**
        * @param {boolean} crit
-       * @returns {Promise<Partial<TransformationField>>}
+       * @returns {Promise<Partial<EffectTransformationConfig>>}
        */
       async #generateConsequenceTransformation(crit = false) {
         const transformationAutomations = this.#getCritAutomations(
@@ -306,7 +306,17 @@ export default function AbilityExecutionChatPart(Base) {
         };
         if (transformation.enabled) {
           const a = transformationAutomations[0];
-          Object.assign(transformation, a.toObject().transformation);
+          const competence = a.competence.toObject();
+          if (!a.overrideCompetence) competence.raw = this.competence.value;
+          Object.assign(transformation, {
+            competence,
+            img: a.img,
+            level: a.level,
+            override: Array.from(a.override),
+            reset: Array.from(a.reset),
+            ring: a.ring,
+            suppress: Array.from(a.suppress),
+          });
         }
         return transformation;
       }

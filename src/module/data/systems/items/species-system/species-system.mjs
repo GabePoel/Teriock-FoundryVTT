@@ -83,12 +83,6 @@ export default class SpeciesSystem extends mix(
         { initial: ["humanoid"] },
       ),
       transformation: new fields.SchemaField(speciesTransformationFields()),
-      transformationLevel: new fields.StringField({
-        choices: TERIOCK.options.transformation.level,
-        initial: null,
-        nullable: true,
-        required: false,
-      }),
     });
   }
 
@@ -125,9 +119,12 @@ export default class SpeciesSystem extends mix(
         tooltip: "TERIOCK.SYSTEMS.Species.FIELDS.traits.label",
       };
     });
-    if (this.transformationLevel) {
+    if (this.transformationEffect?.system.transformation.level) {
       tags.push({
-        label: TERIOCK.options.transformation.level[this.transformationLevel],
+        label:
+          TERIOCK.options.transformation.level[
+            this.transformationEffect.system.transformation.level
+          ],
         tooltip: "TERIOCK.SYSTEMS.Species.FIELDS.transformationLevel.label",
       });
     }
@@ -136,15 +133,18 @@ export default class SpeciesSystem extends mix(
 
   /** @inheritDoc */
   get color() {
-    if (this.transformationLevel === "minor") {
-      return TERIOCK.display.colors.blue;
-    } else if (this.transformationLevel === "full") {
-      return TERIOCK.display.colors.green;
-    } else if (this.transformationLevel === "greater") {
-      return TERIOCK.display.colors.purple;
-    } else {
-      return super.color;
+    if (this.isTransformation) {
+      if (this.transformationEffect.system.transformation.level === "minor") {
+        return TERIOCK.display.colors.blue;
+      }
+      if (this.transformationEffect.system.transformation.level === "full") {
+        return TERIOCK.display.colors.green;
+      }
+      if (this.transformationEffect.system.transformation.level === "greater") {
+        return TERIOCK.display.colors.purple;
+      }
     }
+    return super.color;
   }
 
   /** @inheritDoc */
@@ -166,7 +166,11 @@ export default class SpeciesSystem extends mix(
 
   /** @inheritDoc */
   get displayToggles() {
-    return ["system.size.enabled", "system.disabled"];
+    return [
+      "system.size.enabled",
+      "system.transformation.ring",
+      ...super.displayToggles,
+    ];
   }
 
   /** @inheritDoc */
@@ -199,7 +203,10 @@ export default class SpeciesSystem extends mix(
    * @returns {boolean}
    */
   get isTransformation() {
-    return Boolean(this.transformationLevel);
+    return (
+      !!this.transformationEffect &&
+      this.transformationEffect.system.isTransformation
+    );
   }
 
   /** @inheritDoc */
@@ -260,10 +267,7 @@ export default class SpeciesSystem extends mix(
         ),
         icon: makeIcon(TERIOCK.display.icons.effect.transform, "contextMenu"),
         callback: this.setPrimaryTransformation.bind(this),
-        condition:
-          this.isTransformation &&
-          !this.isPrimaryTransformation &&
-          Boolean(this.transformationEffect),
+        condition: this.isTransformation && !this.isPrimaryTransformation,
         group: "control",
       },
     ];
@@ -273,7 +277,8 @@ export default class SpeciesSystem extends mix(
   getLocalRollData() {
     const data = super.getLocalRollData();
     Object.assign(data, {
-      [`transformation.level`]: this.transformationLevel,
+      [`transformation.level`]:
+        this.transformationEffect?.system.transformation.level || 0,
       transformation: Number(this.isTransformation),
       "transformation.primary": Number(this.isPrimaryTransformation),
       size: this.size.enabled ? this.size.value : 0,

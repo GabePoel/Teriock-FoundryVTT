@@ -1,7 +1,4 @@
-export type SizeAbilityStep = {
-  gain: Set<string>;
-  lose: Set<string>;
-};
+import { SpeciesTransformationConfig } from "../../../fields/helpers/_types.js";
 
 declare global {
   namespace Teriock.Models {
@@ -20,21 +17,17 @@ declare global {
       innateRanks: string;
       /** <schema> Maximum lifespan */
       lifespan: number | null;
+      /** <schema> MP increase */
+      mpIncrease: string;
       /** <schema> Size constraints */
       size: Teriock.Foundry.BarField & {
         /** <schema> Enabled */
         enabled: boolean;
       };
-      /** <schema> Size adjustments */
-      sizeStepAbilities: Record<number, SizeAbilityStep>;
-      /** <schema> Size interval to add another HP die at */
-      sizeStepHp: number | null;
-      /** <schema> Size interval to add another MP die at */
-      sizeStepMp: number | null;
       /** <schema> Traits */
       traits: Set<Teriock.Keys.Trait>;
-      /** <schema> Level of transformation this species is */
-      transformationLevel: Teriock.Keys.TransformationLevel | null;
+      /** <schema> Transformation config */
+      transformation: SpeciesTransformationConfig;
 
       get parent(): TeriockSpecies;
     };
