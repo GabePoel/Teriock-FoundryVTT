@@ -279,10 +279,3 @@ declare global {
     | TeriockTokenDocument
     | TeriockUser;
 }
-
-// Automation Unions
-// =================
-
-// declare global {
-//   export type AnyAutomation =
-// }

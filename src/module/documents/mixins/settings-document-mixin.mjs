@@ -19,9 +19,8 @@ export default function SettingsDocumentMixin(Base) {
       getFlag(scope, key) {
         if (scope === "teriockDocumentSettings") {
           return foundry.utils.getProperty(this.flags, `${scope}.${key}`);
-        } else {
-          return super.getFlag(scope, key);
         }
+        return super.getFlag(scope, key);
       }
 
       /**

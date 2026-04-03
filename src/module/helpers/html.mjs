@@ -18,12 +18,8 @@ export function buildHTMLButton(config) {
     button.dataset[key] = value;
   }
   button.classList.add(...classes);
-  if (icon) {
-    icon = `<i class="${icon}"></i> `;
-  }
-  if (disabled) {
-    button.disabled = true;
-  }
+  if (icon) icon = `<i class="${icon}"></i> `;
+  if (disabled) button.disabled = true;
   button.innerHTML = `${icon}${label}`;
   return button;
 }
@@ -34,11 +30,8 @@ export function buildHTMLButton(config) {
  * @returns {string}
  */
 export function elementClass(elements) {
-  if (elements.size !== 1) {
-    return "es-multi";
-  } else {
-    return `es-${Array.from(elements)[0]}`;
-  }
+  if (elements.size !== 1) return "es-multi";
+  return `es-${Array.from(elements)[0]}`;
 }
 
 /**
@@ -73,9 +66,7 @@ export function createDialogFieldset(
 export function unpackEffectButton(execution, options = {}) {
   const { useType = "normal" } = options;
   const button = execution.chatData.system.buttons.find((b) => b.dataset);
-  if (button) {
-    return JSON.parse(button.dataset[useType]);
-  }
+  if (button) return JSON.parse(button.dataset[useType]);
   return null;
 }
 
@@ -124,9 +115,7 @@ export function cleanDataset(dataset) {
  */
 export function queryAll(root, selector) {
   const result = [];
-  if (root.matches(selector)) {
-    result.push(root);
-  }
+  if (root.matches(selector)) result.push(root);
   result.push(...root.querySelectorAll(selector));
   return result;
 }

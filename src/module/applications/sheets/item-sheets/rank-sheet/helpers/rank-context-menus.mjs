@@ -4,7 +4,7 @@ import { makeIcon } from "../../../../../helpers/utils.mjs";
  * Creates context menu entries for selecting a rank's archetype.
  * Generates options for all available archetypes with appropriate hit and mana dice.
  * @param {TeriockRank} rank - The rank item to create the context menu for.
- * @returns {Teriock.Foundry.ContextMenuEntry[]}
+ * @returns {ContextMenuEntry[]}
  */
 export function archetypeContextMenu(rank) {
   const options = [];
@@ -33,7 +33,7 @@ export function archetypeContextMenu(rank) {
  * Creates context menu entries for selecting a rank's class.
  * Generates options for all classes within the current archetype.
  * @param {TeriockRank} rank - The rank item to create the context menu for.
- * @returns {Teriock.Foundry.ContextMenuEntry[]}
+ * @returns {ContextMenuEntry[]}
  */
 export function classContextMenu(rank) {
   const options = [];

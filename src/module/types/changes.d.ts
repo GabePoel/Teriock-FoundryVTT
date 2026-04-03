@@ -1,5 +1,6 @@
 import { TeriockActiveEffect } from "../documents/_module.mjs";
 import { time } from "../constants/options/change-options.mjs";
+import { EffectChangeData } from "@common/documents/_types.mjs";
 
 declare global {
   namespace Teriock.Changes {
@@ -12,12 +13,12 @@ declare global {
       | "ActiveEffect"
       | "parent";
 
-    export type PreparedChangeData = Teriock.Foundry.EffectChangeData & {
+    export type PreparedChangeData = EffectChangeData & {
       qualifier: string;
       effect: TeriockActiveEffect;
     };
 
-    export type QualifiedChangeData = Teriock.Foundry.EffectChangeData & {
+    export type QualifiedChangeData = EffectChangeData & {
       qualifier: string;
       target: ChangeTarget;
       time: ChangeTime;

@@ -1,6 +1,6 @@
 declare global {
   namespace Teriock.Execution {
-    export type FeatSaveExecutionOptions = ThresholdExecutionOptions & {
+    export type FeatExecutionOptions = ThresholdExecutionOptions & {
       attribute: Teriock.Keys.Attribute;
     };
   }

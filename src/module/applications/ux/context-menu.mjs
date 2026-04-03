@@ -10,7 +10,7 @@ export default class TeriockContextMenu extends ContextMenu {
    * @inheritDoc
    * @param {HTMLElement} container
    * @param {string} selector
-   * @param {Teriock.Foundry.ContextMenuEntry[]} menuItems
+   * @param {ContextMenuEntry[]} menuItems
    * @param {Teriock.Foundry.ContextMenuOptions} [options]
    */
   constructor(container, selector, menuItems, options = {}) {
@@ -30,7 +30,7 @@ export default class TeriockContextMenu extends ContextMenu {
    * @param {{name: string; icon: string; value: any; path?: string;}[]} choices - Map to build entries from.
    * @param {object} [options] - Options.
    * @param {string} [options.path] - Default path to use for updates.
-   * @return {Teriock.Foundry.ContextMenuEntry[]}
+   * @return {ContextMenuEntry[]}
    */
   static makeUpdateEntries(document, choices, options) {
     return choices.map((c) => {

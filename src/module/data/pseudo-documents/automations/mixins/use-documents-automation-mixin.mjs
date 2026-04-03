@@ -50,19 +50,13 @@ export default function UseDocumentsAutomationMixin(Base) {
        * @return {Promise<void>}
        */
       async executeDocuments(scope = {}) {
-        const proficient = this.overrideCompetence
-          ? this.competence.proficient
-          : (scope.execution?.proficient ??
-            this.document.system.competence.proficient);
-        const fluent = this.overrideCompetence
-          ? this.competence.fluent
-          : (scope.execution?.fluent ?? this.document.system.competence.fluent);
         await this.use({
           actor: scope.execution?.actor || this.actor,
           edge: scope.execution?.edge,
           event: scope.execution?.options?.event,
-          proficient,
-          fluent,
+          competence: this.overrideCompetence
+            ? this.competence.raw
+            : this.document.system.competence.raw,
         });
       }
 

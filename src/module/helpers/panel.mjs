@@ -67,9 +67,7 @@ export async function tradecraftPanel(tradecraft) {
 export async function classPanel(className) {
   let archetype;
   for (const [key, value] of Object.entries(TERIOCK.options.rank)) {
-    if (Object.keys(value.classes).includes(className)) {
-      archetype = key;
-    }
+    if (Object.keys(value.classes).includes(className)) archetype = key;
   }
   return await TeriockTextEditor.enrichPanel({
     image: getImage("classes", TERIOCK.index.classes[className]),

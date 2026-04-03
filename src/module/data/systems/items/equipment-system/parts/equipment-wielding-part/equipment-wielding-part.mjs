@@ -1,5 +1,8 @@
 import { icons } from "../../../../../../constants/display/icons.mjs";
-import { getProperty } from "../../../../../../helpers/fetch.mjs";
+import {
+  ensureChildren,
+  ensureNoChildren,
+} from "../../../../../../helpers/resolve.mjs";
 import { makeIcon } from "../../../../../../helpers/utils.mjs";
 import { EvaluationField } from "../../../../../fields/_module.mjs";
 
@@ -171,14 +174,12 @@ export default (Base) => {
 
       /** @inheritDoc */
       getLocalRollData() {
-        const data = super.getLocalRollData();
-        Object.assign(data, {
+        return Object.assign(super.getLocalRollData(), {
           equipped: Number(this.equipped),
           glued: Number(this.glued),
           minStr: this.minStr.value,
           str: this.minStr.value,
         });
-        return data;
       }
 
       /**
@@ -189,12 +190,7 @@ export default (Base) => {
         await this.parent.hookCall("glue", {
           scope: { equipment: this.parent },
         });
-        const glueProperty = await getProperty("Glued");
-        if (!this.glued) {
-          await this.parent.createEmbeddedDocuments("ActiveEffect", [
-            glueProperty,
-          ]);
-        }
+        await ensureChildren(this.parent, "property", ["Glued"]);
       }
 
       /** @inheritDoc */
@@ -230,19 +226,9 @@ export default (Base) => {
         await this.parent.hookCall("unglue", {
           scope: { equipment: this.parent },
         });
+        await ensureNoChildren(this.parent, "property", ["Glued"]);
         if (this.glued) {
-          const glueProperties = this.parent.properties.filter(
-            (p) => p.name === "Glued",
-          );
-          if (glueProperties.length > 0) {
-            await this.parent.deleteEmbeddedDocuments(
-              "ActiveEffect",
-              glueProperties.map((p) => p.id),
-            );
-          }
-          if (this.glued) {
-            await this.parent.update({ "system.glued": false });
-          }
+          await this.parent.update({ "system.glued": false });
         }
       }
     }

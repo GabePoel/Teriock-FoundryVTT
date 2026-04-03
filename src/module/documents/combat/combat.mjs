@@ -50,8 +50,8 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
           actorUuid === expiration.who.source) ||
         (expiration.who.type === "target" && actorUuid === effect.actor.uuid))
     ) {
-      if (expiration.when.skip <= 0) {
-        effect.actor?.defaultUser?.query("teriock.inCombatExpiration", {
+      if (expiration.when.skip <= 0 && effect.actor) {
+        effect.actor.defaultUser?.query("teriock.inCombatExpiration", {
           uuid: effect.uuid,
         });
       } else if (expiration.when.skip > 0) {

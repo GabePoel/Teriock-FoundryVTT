@@ -25,7 +25,7 @@ export default (Base) =>
     /**
      * Context menu entry to create a given document type.
      * @param {Teriock.Documents.ChildType} type
-     * @returns {Teriock.Foundry.ContextMenuEntry}
+     * @returns {ContextMenuEntry}
      */
     #createContextMenuEntry(type) {
       return {

@@ -23,7 +23,7 @@ export default function AccessDataMixin(Base) {
        * @returns {AnyActor}
        */
       get actor() {
-        return this.parent.actor;
+        return this.parent?.actor;
       }
 
       /**
@@ -31,7 +31,7 @@ export default function AccessDataMixin(Base) {
        * @returns {AnyCommonDocument}
        */
       get document() {
-        return this.parent.document;
+        return this.parent?.document;
       }
 
       /**
@@ -99,7 +99,7 @@ export default function AccessDataMixin(Base) {
        * @returns {object}
        */
       getRollData() {
-        return this.parent.getRollData();
+        return this.parent?.getRollData() || {};
       }
     }
   );

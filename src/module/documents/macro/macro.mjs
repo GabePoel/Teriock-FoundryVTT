@@ -93,9 +93,7 @@ export default class TeriockMacro extends mix(
         m.getFlag("teriock", "macroType" === "useLinked") &&
         m.getFlag("teriock", "macroUuid" === doc.uuid),
     );
-    if (macro) {
-      return macro;
-    }
+    if (macro) return macro;
     return this.makeLinkedUseMacro(doc);
   }
 
@@ -215,10 +213,10 @@ export default class TeriockMacro extends mix(
 
   /** @inheritDoc */
   get embedParts() {
-    const parts = super.embedParts;
-    parts.usable = true;
-    parts.action = "execute";
-    return parts;
+    return Object.assign(super.embedParts, {
+      usable: true,
+      action: "execute",
+    });
   }
 
   /** @inheritDoc */

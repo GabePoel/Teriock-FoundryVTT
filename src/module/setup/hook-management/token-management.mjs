@@ -36,11 +36,8 @@ export default function registerTokenManagementHooks() {
       const activeGM = game.users.activeGM;
       let tokenEditor;
       const user = game.user;
-      if (activeGM) {
-        tokenEditor = Boolean(user.isActiveGM);
-      } else {
-        tokenEditor = token.isOwner;
-      }
+      if (activeGM) tokenEditor = Boolean(user.isActiveGM);
+      else tokenEditor = token.isOwner;
       if (
         token.document.getSetting("autoMagic") &&
         game.modules.get("tokenmagic")?.active &&
@@ -49,13 +46,10 @@ export default function registerTokenManagementHooks() {
       ) {
         if (Object.keys(TERIOCK.display.tokenMagic).includes(statusId)) {
           const params = TERIOCK.display.tokenMagic[statusId];
-          if (active) {
-            //eslint-disable-next-line no-undef
-            await TokenMagic.addFilters(token, [params]);
-          } else {
-            //eslint-disable-next-line no-undef
-            await TokenMagic.deleteFilters(token, params.filterId);
-          }
+          //eslint-disable-next-line no-undef
+          if (active) await TokenMagic.addFilters(token, [params]);
+          //eslint-disable-next-line no-undef
+          else await TokenMagic.deleteFilters(token, params.filterId);
         }
       }
     },

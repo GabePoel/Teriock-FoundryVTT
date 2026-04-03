@@ -51,11 +51,8 @@ export function downgradeDeterministicFormula(value, delta) {
 export function downgradeIndeterministicFormula(value, delta) {
   const valueTotal = game.teriock.Roll.meanValue(value);
   const deltaTotal = game.teriock.Roll.meanValue(delta);
-  if (deltaTotal <= valueTotal) {
-    return delta;
-  } else {
-    return value;
-  }
+  if (deltaTotal <= valueTotal) return delta;
+  return value;
 }
 
 /**
@@ -65,13 +62,9 @@ export function downgradeIndeterministicFormula(value, delta) {
  * @returns {Teriock.System.FormulaString}
  */
 export function multiplyFormula(value, delta) {
-  if (Number(delta) === 1) {
-    return value;
-  }
+  if (Number(delta) === 1) return value;
   const terms = new game.teriock.Roll(value, {}).terms;
-  if (terms.length > 1) {
-    return `(${value}) * ${delta}`;
-  }
+  if (terms.length > 1) return `(${value}) * ${delta}`;
   return `${value} * ${delta}`;
 }
 
@@ -98,11 +91,8 @@ export function upgradeDeterministicFormula(value, delta) {
 export function upgradeIndeterministicFormula(value, delta) {
   const valueTotal = game.teriock.Roll.meanValue(value);
   const deltaTotal = game.teriock.Roll.meanValue(delta);
-  if (deltaTotal >= valueTotal) {
-    return delta;
-  } else {
-    return value;
-  }
+  if (deltaTotal >= valueTotal) return delta;
+  return value;
 }
 
 /**
@@ -136,9 +126,7 @@ export function manipulateFormula(value, delta, mode) {
  * @returns {boolean}
  */
 export function formulaExists(formula) {
-  if (!formula) {
-    return false;
-  }
+  if (!formula) return false;
   if (typeof formula === "string") {
     formula = formula.trim();
     return Boolean(formula.length > 0 && formula !== "0");

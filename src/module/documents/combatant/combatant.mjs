@@ -1,4 +1,5 @@
 import { dotJoin } from "../../helpers/string.mjs";
+import { mix } from "../../helpers/utils.mjs";
 import {
   BaseDocumentMixin,
   EmbedCardDocumentMixin,
@@ -15,30 +16,33 @@ const { Combatant } = foundry.documents;
  * @mixes BaseDocument
  * @mixes EmbedCardDocument
  */
-export default class TeriockCombatant extends EmbedCardDocumentMixin(
-  BaseDocumentMixin(Combatant),
+export default class TeriockCombatant extends mix(
+  Combatant,
+  BaseDocumentMixin,
+  EmbedCardDocumentMixin,
 ) {
   /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
-    parts.text = dotJoin([
-      this.isDefeated
-        ? game.i18n.localize("TERIOCK.SYSTEMS.Combatant.EMBED.defeated")
-        : "",
-      this.hidden
-        ? game.i18n.localize("TERIOCK.SYSTEMS.Combatant.EMBED.hidden")
-        : "",
-      parts.text,
-    ]);
-    parts.inactive = this.isDefeated;
-    parts.struck = this.isDefeated;
-    return parts;
+    return Object.assign(parts, {
+      text: dotJoin([
+        this.isDefeated
+          ? game.i18n.localize("TERIOCK.SYSTEMS.Combatant.EMBED.defeated")
+          : "",
+        this.hidden
+          ? game.i18n.localize("TERIOCK.SYSTEMS.Combatant.EMBED.hidden")
+          : "",
+        parts.text,
+      ]),
+      inactive: this.isDefeated,
+      struck: this.isDefeated,
+    });
   }
 
   /**
    * Modified to allow for custom initiative and advantage/disadvantage on alt and shift clicks.
    * @see {TeriockCombatTracker._onCombatantControl}
-   * @see {Teriock.Models.ActorCombatPartInterface.initiative}
+   * @see {Teriock.Models.ActorCombatPartData}
    * @inheritDoc
    * @returns {string}
    */

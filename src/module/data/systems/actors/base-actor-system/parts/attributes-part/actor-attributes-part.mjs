@@ -72,7 +72,7 @@ export default (Base) => {
        * - [Feat Interaction](https://wiki.teriock.com/index.php/Core:Feat_Interaction)
        *
        * @param {Teriock.Keys.Attribute} attribute - The attribute to roll a feat save for.
-       * @param {Partial<Teriock.Execution.FeatSaveExecutionOptions>} [options] - Options for the roll.
+       * @param {Partial<Teriock.Execution.FeatExecutionOptions>} [options] - Options for the roll.
        */
       async rollFeatSave(attribute, options = { attribute }) {
         await this.attributes[attribute].use(options);

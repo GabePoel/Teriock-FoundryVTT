@@ -35,12 +35,7 @@ export default async function createHotbarFolderQuery(queryData, { _timeout }) {
       name: folderName,
       type: "Macro",
       folder: macroFolder,
-      flags: {
-        teriock: {
-          user: id,
-          hotbarFolder: true,
-        },
-      },
+      flags: { teriock: { user: id, hotbarFolder: true } },
     });
   }
 }

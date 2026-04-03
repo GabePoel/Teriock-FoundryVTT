@@ -19,7 +19,7 @@ import { wikiToUuid } from "../../helpers/wiki.mjs";
 
 /**
  * Wiki link enricher. Designed to mimic the `@EMBED` and `@UUID` enrichers as well as the `{{L}}` wiki syntax.
- * @type {Teriock.Foundry.TextEditorEnricherConfig}
+ * @type {TextEditorEnricherConfig}
  */
 const wikiLinkEnricher = {
   pattern: /@L\[(.+?)\](?:\{(.+?)\})?/g,
@@ -77,7 +77,7 @@ const wikiLinkEnricher = {
 
 /**
  * Enricher to look up data in the document.
- * @type {Teriock.Foundry.TextEditorEnricherConfig}
+ * @type {TextEditorEnricherConfig}
  */
 const lookupEnricher = {
   pattern: /\[\[lookup\s+([^\]\s]+)(?:\s+((?:[^\]\s=]+=[^\]\s=]+\s*)+))?\]\]/gi,
@@ -201,7 +201,7 @@ async function executeCommandFromElement(target, operation, event) {
 /**
  * Enrich a command.
  * @param {RegExpMatchArray} match
- * @param {Teriock.Foundry.EnrichmentOptions} options
+ * @param {EnrichmentOptions} options
  * @returns {HTMLAnchorElement}
  */
 function enrichCommand(match, options) {

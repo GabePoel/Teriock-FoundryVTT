@@ -1,8 +1,6 @@
-import { TeriockDialog } from "../../applications/api/_module.mjs";
-import { icons } from "../../constants/display/icons.mjs";
 import { resolveDocument } from "../../helpers/resolve.mjs";
 import { toId } from "../../helpers/string.mjs";
-import { makeIcon, makeIconClass } from "../../helpers/utils.mjs";
+import { makeIcon } from "../../helpers/utils.mjs";
 
 /**
  * Base mixin.
@@ -142,7 +140,7 @@ export default function BaseDocumentMixin(Base) {
       /**
        * Context menu entries to display for cards that represent this document.
        * @param {TeriockDocument} doc
-       * @returns {Teriock.Foundry.ContextMenuEntry[]}
+       * @returns {ContextMenuEntry[]}
        */
       getCardContextMenuEntries(doc) {
         const entries = [];
@@ -161,7 +159,7 @@ export default function BaseDocumentMixin(Base) {
               ),
               callback: async () => {
                 const resolved = await resolveDocument(this.master);
-                await resolved?.sheet?.render(true);
+                if (resolved) await resolved.sheet?.render(true);
               },
               condition: () =>
                 this.master?.isViewer && doc?.uuid !== this.master?.uuid,
@@ -170,7 +168,7 @@ export default function BaseDocumentMixin(Base) {
             {
               name: game.i18n.localize("TERIOCK.SYSTEMS.Common.MENU.delete"),
               icon: makeIcon(TERIOCK.display.icons.ui.delete, "contextMenu"),
-              callback: async () => await this.safeDelete(),
+              callback: async () => await this.deleteDialog(),
               condition: () =>
                 this._checkValidEditorDocument(doc, { self: false }),
               group: "document",
@@ -193,31 +191,6 @@ export default function BaseDocumentMixin(Base) {
           schema = this.schema.getField(path);
         }
         return schema;
-      }
-
-      /**
-       * Ask for confirmation before deleting.
-       * @returns {Promise<void>}
-       */
-      async safeDelete() {
-        const remove = await TeriockDialog.confirm({
-          window: {
-            title: game.i18n.format("TERIOCK.SYSTEMS.Common.MENU.safeDelete", {
-              name: this.fullName || this.name,
-            }),
-            icon: makeIconClass(icons.ui.delete, "title"),
-          },
-          content: game.i18n.localize("TERIOCK.SYSTEMS.Common.DIALOG.delete"),
-          modal: true,
-          rejectClose: false,
-        });
-        if (remove) {
-          if (typeof this.system?.deleteThis === "function") {
-            await this.system.deleteThis();
-          } else {
-            await this.delete();
-          }
-        }
       }
     }
   );

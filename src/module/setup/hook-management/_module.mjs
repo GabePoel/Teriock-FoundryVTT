@@ -1,7 +1,11 @@
-//noinspection JSUnusedGlobalSymbols
+import registerChatManagementHooks from "./chat-management.mjs";
+import registerSheetManagementHooks from "./sheet-management.mjs";
+import registerTimeManagementHooks from "./time-management.mjs";
+import registerTokenManagementHooks from "./token-management.mjs";
 
-export { default as chatManagement } from "./chat-management.mjs";
-export { default as documentManagement } from "./document-management.mjs";
-export { default as timeManagement } from "./time-management.mjs";
-export { default as tokenManagement } from "./token-management.mjs";
-export { default as sheetManagement } from "./sheet-management.mjs";
+export function registerHooks() {
+  registerChatManagementHooks();
+  registerTimeManagementHooks();
+  registerTokenManagementHooks();
+  registerSheetManagementHooks();
+}

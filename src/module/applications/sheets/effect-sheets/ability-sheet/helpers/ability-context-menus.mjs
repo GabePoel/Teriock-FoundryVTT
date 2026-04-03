@@ -36,7 +36,7 @@ export default function abilityContextMenus(ability) {
    * @param {Record<string, string>} config - The configuration to use.
    * @param {string} updateKey - The system key to update when an option is selected.
    * @param {boolean|null} nullOption - Whether to include a "None" option.
-   * @returns {Teriock.Foundry.ContextMenuEntry[]}
+   * @returns {ContextMenuEntry[]}
    */
   function quickMenu(config, updateKey, nullOption = null) {
     const out = Object.entries(config).map(([key, value]) => ({

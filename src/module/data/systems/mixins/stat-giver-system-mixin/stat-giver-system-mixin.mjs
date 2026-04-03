@@ -79,7 +79,7 @@ export default function StatGiverSystemMixin(Base) {
       /**
        * Context menu entries to enable/disable HP and mana dice.
        * @param {TeriockDocument} doc
-       * @returns {Teriock.Foundry.ContextMenuEntry[]}
+       * @returns {ContextMenuEntry[]}
        */
       getCardContextMenuEntries(doc) {
         const entries = super.getCardContextMenuEntries(doc);

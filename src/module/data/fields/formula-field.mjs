@@ -46,11 +46,8 @@ export default class FormulaField extends EnhancedStringField {
   /** @inheritDoc */
   _applyChangeDowngrade(value, delta, _model, _change) {
     if (!value) return delta;
-    if (this.deterministic) {
-      return downgradeDeterministicFormula(value, delta);
-    } else {
-      return downgradeIndeterministicFormula(value, delta);
-    }
+    if (this.deterministic) return downgradeDeterministicFormula(value, delta);
+    return downgradeIndeterministicFormula(value, delta);
   }
 
   /** @inheritDoc */
@@ -62,11 +59,8 @@ export default class FormulaField extends EnhancedStringField {
   /** @inheritDoc */
   _applyChangeUpgrade(value, delta, _model, _change) {
     if (!value) return delta;
-    if (this.deterministic) {
-      return upgradeDeterministicFormula(value, delta);
-    } else {
-      return upgradeIndeterministicFormula(value, delta);
-    }
+    if (this.deterministic) return upgradeDeterministicFormula(value, delta);
+    return upgradeIndeterministicFormula(value, delta);
   }
 
   /** @inheritDoc */

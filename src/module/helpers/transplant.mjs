@@ -54,13 +54,9 @@ export function transplantOverrides(
 
   const transplant = {};
   for (const k of names) {
-    if (k === "constructor") {
-      continue;
-    }
+    if (k === "constructor") continue;
     const d = Object.getOwnPropertyDescriptor(Subclass.prototype, k);
-    if (!d) {
-      continue;
-    }
+    if (!d) continue;
     transplant[k] = normalizeDescriptor(d);
   }
   Object.defineProperties(Original.prototype, transplant);

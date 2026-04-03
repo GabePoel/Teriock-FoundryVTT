@@ -18,14 +18,6 @@ declare global {
       type?: "button";
     };
 
-    /**
-     * Simple button definition to be referenced repeatedly.
-     */
-    export type ButtonDefinition = {
-      icon: string;
-      label: string;
-    };
-
     /** Icon category */
     export type IconCategory = keyof typeof TERIOCK.display.iconManifest;
   }

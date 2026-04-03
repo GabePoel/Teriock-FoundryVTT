@@ -9,17 +9,13 @@ import { toId } from "./string.mjs";
  * @returns {Promise<TeriockItem|null>}
  */
 export async function getDocument(name, pack, options = {}) {
-  if (!pack.includes(".")) {
-    pack = `teriock.${pack}`;
-  }
+  if (!pack.includes(".")) pack = `teriock.${pack}`;
   const packs = game.packs;
   const compendium = packs.get(pack);
   const uuid = compendium?.index.getName(name).uuid;
   try {
     const item = await fromUuid(uuid);
-    if (item && options.clone) {
-      return item.clone();
-    }
+    if (item && options.clone) return item.clone();
     return item;
   } catch (error) {
     console.error(name, pack, error);
@@ -34,18 +30,6 @@ export async function getDocument(name, pack, options = {}) {
  */
 export async function copyItem(name, pack) {
   return await getDocument(name, pack, { clone: true });
-}
-
-/**
- * Get a {@link TeriockAbility} from a {@link CompendiumCollection}.
- * @param {string} name - Name of the {@link TeriockAbility}.
- * @param {object} options - Options.
- * @param {boolean} [options.clone] - Fetch a clone instead of the raw {@link TeriockAbility}.
- * @returns {Promise<TeriockAbility>}
- */
-export async function getAbility(name, options = {}) {
-  const item = await getDocument(name, "abilities", options);
-  return item.system.effect;
 }
 
 /**

@@ -24,7 +24,7 @@ export default class FluencySheet extends BaseEffectSheet {
 
   /**
    * Context menu for selecting a field.
-   * @returns {Teriock.Foundry.ContextMenuEntry[]}
+   * @returns {ContextMenuEntry[]}
    */
   #fieldContextMenuEntries() {
     const options = [];
@@ -49,7 +49,7 @@ export default class FluencySheet extends BaseEffectSheet {
 
   /**
    * Context menu entries for selecting a tradecraft.
-   * @returns {Teriock.Foundry.ContextMenuEntry[]}
+   * @returns {ContextMenuEntry[]}
    */
   #tradecraftContextMenuEntries() {
     const options = [];

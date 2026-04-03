@@ -1,4 +1,4 @@
-import { FeatSaveExecution } from "../../../executions/activity-executions/_module.mjs";
+import { FeatExecution } from "../../../executions/activity-executions/_module.mjs";
 import BaseModifierModel from "./base-modifier-model.mjs";
 
 export default class AttributeModel extends BaseModifierModel {
@@ -27,7 +27,7 @@ export default class AttributeModel extends BaseModifierModel {
       attribute: this.key,
       ...options,
     };
-    await new FeatSaveExecution(options).execute();
+    await new FeatExecution(options).execute();
   }
 
   /** @inheritDoc */

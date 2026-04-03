@@ -30,19 +30,6 @@ export default class PiercingModel extends EmbeddedDataModel {
     };
   }
 
-  /** @inheritDoc */
-  static migrateData(data) {
-    if (data.av0 === true) {
-      data.raw = 1;
-      delete data.av0;
-    }
-    if (data.ub === true) {
-      data.raw = 2;
-      delete data.ub;
-    }
-    return super.migrateData(data);
-  }
-
   /**
    * Whether this is AV0.
    * @returns {boolean}

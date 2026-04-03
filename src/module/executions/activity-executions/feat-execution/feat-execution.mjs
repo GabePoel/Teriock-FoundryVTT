@@ -7,15 +7,13 @@ import { ThresholdExecutionMixin } from "../../mixins/_module.mjs";
  * @extends {BaseExecution}
  * @mixes ThresholdExecution
  */
-export default class FeatSaveExecution extends ThresholdExecutionMixin(
+export default class FeatExecution extends ThresholdExecutionMixin(
   BaseExecution,
 ) {
   /**
-   * @param {Teriock.Execution.FeatSaveExecutionOptions} options
+   * @param {Partial<Teriock.Execution.FeatExecutionOptions>} options
    */
-  constructor(
-    options = /** @type {Teriock.Execution.FeatSaveExecutionOptions} */ {},
-  ) {
+  constructor(options = {}) {
     super(options);
     this.attribute = options.attribute;
     if (this.actor) {
@@ -67,7 +65,7 @@ export default class FeatSaveExecution extends ThresholdExecutionMixin(
 
   /**
    * @inheritDoc
-   * @param {Teriock.Execution.FeatSaveExecutionOptions} options
+   * @param {Teriock.Execution.FeatExecutionOptions} options
    */
   _determineCompetence(options) {
     if (this.actor) {

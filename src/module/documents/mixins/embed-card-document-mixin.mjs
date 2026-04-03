@@ -19,7 +19,7 @@ export default function EmbedCardDocumentMixin(Base) {
     class EmbedCardDocument extends Base {
       /**
        * Actions that can fire from an embedded element representing this.
-       * @returns {Record<string, Teriock.EmbedData.EmbedAction>}
+       * @returns {Record<string, Partial<Teriock.EmbedData.EmbedAction>>}
        */
       get embedActions() {
         const actions = {
@@ -35,7 +35,7 @@ export default function EmbedCardDocumentMixin(Base) {
 
       /**
        * Interactive icons to display in embedded elements.
-       * @returns {Teriock.EmbedData.EmbedIcon[]}
+       * @returns {Partial<Teriock.EmbedData.EmbedIcon>[]}
        */
       get embedIcons() {
         return [];
@@ -43,7 +43,7 @@ export default function EmbedCardDocumentMixin(Base) {
 
       /**
        * Parts that will be passed into a handlebar helper to asynchronously make an embedded element.
-       * @returns {Teriock.EmbedData.EmbedParts}
+       * @returns {Partial<Teriock.EmbedData.EmbedParts>}
        */
       get embedParts() {
         return {

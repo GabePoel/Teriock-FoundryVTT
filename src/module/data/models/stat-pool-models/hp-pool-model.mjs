@@ -3,13 +3,10 @@ import BaseStatPoolModel from "./base-stat-pool-model.mjs";
 
 export default class HpPoolModel extends BaseStatPoolModel {
   get callback() {
-    return /** @param {number} amount */ async (amount) => {
-      const criticallyWounded =
-        this.parent.actor?.statuses.has("criticallyWounded");
-      await this.parent.actor?.system.takeHealing(amount);
-      if (!criticallyWounded) {
-        await this.parent.actor?.system.takeAwaken();
-      }
+    return async (amount) => {
+      const criticallyWounded = this.actor?.statuses.has("criticallyWounded");
+      await this.actor?.system.takeHealing(amount);
+      if (!criticallyWounded) await this.actor?.system.takeAwaken();
     };
   }
 
@@ -41,7 +38,7 @@ export default class HpPoolModel extends BaseStatPoolModel {
         name: game.i18n.localize("TERIOCK.MODELS.HpPool.PANELS.name"),
       },
     ];
-    if (this.parent.actor?.statuses.has("criticallyWounded")) {
+    if (this.actor?.statuses.has("criticallyWounded")) {
       panels.push({
         bars: [],
         blocks: [
@@ -56,7 +53,7 @@ export default class HpPoolModel extends BaseStatPoolModel {
         image: TERIOCK.data.conditions.criticallyWounded.img,
         name: TERIOCK.data.conditions.criticallyWounded.name,
       });
-    } else if (this.parent.actor?.statuses.has("unconscious")) {
+    } else if (this.actor?.statuses.has("unconscious")) {
       panels.push({
         bars: [],
         blocks: [

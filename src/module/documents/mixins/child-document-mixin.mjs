@@ -135,17 +135,6 @@ export default function ChildDocumentMixin(Base) {
       async use(options = {}) {
         await this.system.use(options);
       }
-
-      /**
-       * Opens the document's page on [the Teriock wiki](https://wiki.teriock.com).
-       * @returns {Promise<void>}
-       */
-      async wikiOpen() {
-        ui.notifications.error("TERIOCK.SYSTEMS.Wiki.DIALOG.open.error", {
-          format: { value: this.name },
-          localize: true,
-        });
-      }
     }
   );
 }

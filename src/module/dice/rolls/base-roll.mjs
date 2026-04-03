@@ -21,16 +21,8 @@ export default class BaseRoll extends Roll {
       {
         hideRoll: false,
         styles: {
-          dice: {
-            classes: "",
-            tooltip: "",
-            icon: "",
-          },
-          total: {
-            classes: "",
-            tooltip: "",
-            icon: "",
-          },
+          dice: { classes: "", tooltip: "", icon: "" },
+          total: { classes: "", tooltip: "", icon: "" },
         },
         targets: [],
         threshold: null,
@@ -176,9 +168,7 @@ export default class BaseRoll extends Roll {
   get _allTerms() {
     const terms = [...this.terms];
     for (const t of /** @type {(ParentheticalTerm|Booster)[]} */ this.terms) {
-      if (t.roll && t.roll instanceof Roll) {
-        terms.push(...t.roll.terms);
-      }
+      if (t.roll && t.roll instanceof Roll) terms.push(...t.roll.terms);
       if (t.rolls) {
         for (const r of t.rolls) {
           if (r instanceof Roll) terms.push(...r.terms);
@@ -210,9 +200,7 @@ export default class BaseRoll extends Roll {
       for (const [type, options] of Object.entries(
         TERIOCK.options.die.styles,
       )) {
-        if (die.flavor.includes(type)) {
-          die.options.appearance = options;
-        }
+        if (die.flavor.includes(type)) die.options.appearance = options;
       }
     }
   }
@@ -359,12 +347,7 @@ export default class BaseRoll extends Roll {
     const buttons = await this.getButtons();
     const panels = await this.getPanels();
     messageData = foundry.utils.mergeObject(
-      {
-        system: {
-          panels: panels,
-          buttons: buttons,
-        },
-      },
+      { system: { panels: panels, buttons: buttons } },
       messageData,
     );
     return super.toMessage(messageData, { rollMode, create });

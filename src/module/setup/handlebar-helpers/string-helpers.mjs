@@ -17,16 +17,12 @@ export default function registerStringHelpers() {
   );
 
   Handlebars.registerHelper("prefix", (str, prefix) => {
-    if (str && str !== "0" && str !== "+0") {
-      return prefix + " " + str;
-    }
+    if (str && str !== "0" && str !== "+0") return prefix + " " + str;
     return "";
   });
 
   Handlebars.registerHelper("suffix", (str, suffix) => {
-    if (str && str !== "0" && str !== "+0") {
-      return str + " " + suffix;
-    }
+    if (str && str !== "0" && str !== "+0") return str + " " + suffix;
     return "";
   });
 
@@ -35,9 +31,7 @@ export default function registerStringHelpers() {
     let out = "";
     for (const arg of args) {
       if (arg && arg !== "0") {
-        if (out.length > 0) {
-          out += " · ";
-        }
+        if (out.length > 0) out += " · ";
         out += arg;
       }
     }
@@ -51,11 +45,7 @@ export default function registerStringHelpers() {
   Handlebars.registerHelper("concatArray", (...args) => {
     args.pop();
     let out = "";
-    for (const arg of args) {
-      if (Array.isArray(arg)) {
-        out += arg.join("").trim();
-      }
-    }
+    for (const arg of args) if (Array.isArray(arg)) out += arg.join("").trim();
     return out;
   });
 
@@ -66,18 +56,14 @@ export default function registerStringHelpers() {
 
   Handlebars.registerHelper("str", (val) => {
     let out = "";
-    if (!(val === undefined || val === null)) {
-      out = String(val).trim();
-    }
+    if (!(val === undefined || val === null)) out = String(val).trim();
     return out;
   });
 
   Handlebars.registerHelper("ruleUuid", ruleUuid);
 
   Handlebars.registerHelper("escapeAttr", function (html) {
-    if (html == null) {
-      return "";
-    }
+    if (html == null) return "";
     return new Handlebars.SafeString(
       String(html)
         .replace(/&/g, "&amp;")

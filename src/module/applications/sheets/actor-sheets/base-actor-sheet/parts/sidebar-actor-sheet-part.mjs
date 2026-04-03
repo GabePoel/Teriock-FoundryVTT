@@ -70,7 +70,7 @@ export default (Base) =>
     /**
      * Creates a context menu for selecting piercing type.
      * Provides options for none, AV0, and UB piercing types.
-     * @returns {Teriock.Foundry.ContextMenuEntry[]}
+     * @returns {ContextMenuEntry[]}
      */
     #piercingContextMenu() {
       return TeriockContextMenu.makeUpdateEntries(
@@ -100,7 +100,7 @@ export default (Base) =>
 
     /**
      * Creates a context menu for selecting scaling type.
-     * @returns {Teriock.Foundry.ContextMenuEntry[]}
+     * @returns {ContextMenuEntry[]}
      */
     #scalingContextMenu() {
       return TeriockContextMenu.makeUpdateEntries(

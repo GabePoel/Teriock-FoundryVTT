@@ -5,6 +5,7 @@
         systemFields.storage.fields.maxCount
         disabled=(not editable)
         value=system._source.storage.maxCount.raw
+        placeholder=(localize "TERIOCK.TERMS.Math.infinity")
       )
       icon=TERIOCK.display.icons.equipment.maxCount
       unselected=(concat system.storage.carriedCount " / " system.storage.maxCount.value)
@@ -17,11 +18,7 @@
       tooltip=(localize
         (concat
           "TERIOCK.MODELS.Storage.FIELDS.maxCount."
-          (ifThen
-            system.storage.isOverCountCapacity
-            "over"
-            "under"
-          )
+          (ifThen system.storage.isOverCountCapacity "over" "under")
         )
       )
     }}
@@ -30,6 +27,7 @@
         systemFields.storage.fields.maxWeight
         disabled=(not editable)
         value=system._source.storage.maxWeight.raw
+        placeholder=(localize "TERIOCK.TERMS.Math.infinity")
       )
       icon=TERIOCK.display.icons.equipment.maxWeight
       unselected=(concat system.storage.carriedWeight " / " system.storage.maxWeight.value)
@@ -42,11 +40,7 @@
       tooltip=(localize
         (concat
           "TERIOCK.MODELS.Storage.FIELDS.maxWeight."
-          (ifThen
-            system.storage.isOverWeightCapacity
-            "over"
-            "under"
-          )
+          (ifThen system.storage.isOverWeightCapacity "over" "under")
         )
       )
     }}
@@ -55,6 +49,7 @@
         systemFields.storage.fields.weightMultiplier
         disabled=(not editable)
         value=system._source.storage.weightMultiplier
+        placeholder="0"
       )
       icon=TERIOCK.display.icons.equipment.weightMultiplier
       unselected=system.storage.weightMultiplier

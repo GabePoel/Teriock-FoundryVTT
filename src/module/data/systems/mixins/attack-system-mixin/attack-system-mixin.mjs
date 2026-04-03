@@ -1,6 +1,5 @@
 import { FormulaField } from "../../../fields/_module.mjs";
 import { PiercingModel } from "../../../models/_module.mjs";
-import { migratePiercing } from "../../../shared/migrations/migrate-piercing.mjs";
 
 const { fields } = foundry.data;
 
@@ -35,12 +34,6 @@ export default function AttackSystemMixin(Base) {
             nullable: false,
           }),
         });
-      }
-
-      /** @inheritDoc */
-      static migrateData(data) {
-        data = migratePiercing(data);
-        return super.migrateData(data);
       }
 
       /** @inheritDoc */

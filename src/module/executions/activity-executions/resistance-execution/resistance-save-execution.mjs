@@ -7,7 +7,7 @@ import ImmunityExecution from "../immunity-execution/immunity-execution.mjs";
  * @extends {BaseExecution}
  * @mixes ThresholdExecution
  */
-export default class ResistanceSaveExecution extends ThresholdExecutionMixin(
+export default class ResistanceExecution extends ThresholdExecutionMixin(
   ImmunityExecution,
 ) {
   /**
@@ -15,9 +15,7 @@ export default class ResistanceSaveExecution extends ThresholdExecutionMixin(
    */
   constructor(options = {}) {
     super(options);
-    if (options.threshold === undefined) {
-      this.threshold = 10;
-    }
+    if (options.threshold === undefined) this.threshold = 10;
     this.image =
       options.image ||
       (this.hex

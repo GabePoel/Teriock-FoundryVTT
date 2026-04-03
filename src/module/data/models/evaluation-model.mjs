@@ -45,11 +45,8 @@ export default class EvaluationModel extends EmbeddedDataModel {
    * @returns {number}
    */
   get value() {
-    if (typeof this._value === "number") {
-      return this._value;
-    } else {
-      return this.#evaluate({ skipRollData: true });
-    }
+    if (typeof this._value === "number") return this._value;
+    return this.#evaluate({ skipRollData: true });
   }
 
   /**
@@ -65,9 +62,7 @@ export default class EvaluationModel extends EmbeddedDataModel {
    * @returns {Teriock.System.FormulaString}
    */
   get formula() {
-    if (this.raw) {
-      return this.raw;
-    }
+    if (this.raw) return this.raw;
     if (["number", "string"].includes(typeof this._derivationOptions.blank)) {
       return `${this._derivationOptions.blank}`;
     }
@@ -75,7 +70,7 @@ export default class EvaluationModel extends EmbeddedDataModel {
   }
 
   /**
-   * If this has a non-zero value.
+   * If this has a non-zero value. This does not handle `@` values very well.
    * @returns {boolean}
    */
   get nonZero() {
@@ -114,33 +109,21 @@ export default class EvaluationModel extends EmbeddedDataModel {
     const formula = this.formula;
     let needsEval = false;
     let value = this.quickValue;
-    if (formula.includes("Infinity")) {
-      value = Infinity;
-    } else if (!isNaN(Number(formula))) {
-      value = Number(formula);
-    } else {
-      needsEval = true;
-    }
+    if (formula.includes("Infinity")) value = Infinity;
+    else if (!isNaN(Number(formula))) value = Number(formula);
+    else needsEval = true;
     if (needsEval && !options.skipRollData) {
       let rollData = options.rollData;
       if (!rollData) rollData = this.getRollData();
       value = BaseRoll.minValue(formula, rollData);
     }
-    if (typeof options.max === "number") {
-      value = Math.min(value, options.max);
-    }
-    if (typeof options.min === "number") {
-      value = Math.max(value, options.min);
-    }
+    if (typeof options.max === "number") value = Math.min(value, options.max);
+    if (typeof options.min === "number") value = Math.max(value, options.min);
     if (typeof options.interval === "number") {
       value = value.toNearest(options.interval);
     }
-    if (options.floor) {
-      value = Math.floor(value);
-    }
-    if (options.ceil) {
-      value = Math.ceil(value);
-    }
+    if (options.floor) value = Math.floor(value);
+    if (options.ceil) value = Math.ceil(value);
     return value;
   }
 

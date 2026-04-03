@@ -164,20 +164,10 @@ export default class TeriockActor extends mix(
   }
 
   /**
-   * Transformations.
-   * @returns {TeriockLingering[]}
-   */
-  get transformations() {
-    const possibleEffects = [...this.consequences, ...this.conditions];
-    return possibleEffects.filter((c) => c.system.isTransformation);
-  }
-
-  /**
    * @inheritDoc
    * @returns {AnyActiveEffect[]}
    */
   get validEffects() {
-    //noinspection JSValidateTypes
     return Array.from(this.allApplicableEffects());
   }
 
@@ -315,7 +305,7 @@ export default class TeriockActor extends mix(
     const basicAbilitiesItem = await resolveDocument(
       game.teriock.packs.essentials.index.getName("Basic Abilities"),
     );
-    return [...this.abilities, ...basicAbilitiesItem.abilities];
+    return [...this.abilities, ...(basicAbilitiesItem?.abilities || [])];
   }
 
   /**
@@ -355,9 +345,7 @@ export default class TeriockActor extends mix(
       );
     }
     for (const info of Object.values(this.system.conditionInformation)) {
-      if (info.reasons.size > 0) {
-        info.locked = true;
-      }
+      if (info.reasons.size > 0) info.locked = true;
     }
   }
 

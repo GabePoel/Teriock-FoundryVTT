@@ -6,9 +6,7 @@ import {
 
 export default function registerFormattingHelpers() {
   Handlebars.registerHelper("firstDie", (str) => {
-    if (typeof str !== "string") {
-      str = "";
-    }
+    if (typeof str !== "string") str = "";
     return getRollIcon(str);
   });
 
@@ -52,13 +50,9 @@ export default function registerFormattingHelpers() {
     const min = part?.min || 0;
     const max = part?.max || 0;
     const value = part?.value || 0;
-    if (value === min) {
-      return "mic fa-solid";
-    } else if (value === max) {
-      return "mic fa-faint";
-    } else {
-      return "mic fa-intermediate";
-    }
+    if (value === min) return "mic fa-solid";
+    else if (value === max) return "mic fa-faint";
+    return "mic fa-intermediate";
   });
 
   Handlebars.registerHelper("frac", (value, max) => (value / max) * 100);
@@ -81,12 +75,8 @@ export default function registerFormattingHelpers() {
   });
 
   Handlebars.registerHelper("barTempHide", (value, max, temp = 0) => {
-    if (temp === 0) {
-      return "display: none;";
-    }
-    if (max === value) {
-      return "border-right: none;";
-    }
+    if (temp === 0) return "display: none;";
+    if (max === value) return "border-right: none;";
     return "";
   });
 

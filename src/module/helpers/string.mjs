@@ -95,9 +95,7 @@ export function toKebabCaseFull(str) {
  */
 export function toInt(str) {
   const result = parseInt(str, 10);
-  if (isNaN(result)) {
-    return 0;
-  }
+  if (isNaN(result)) return 0;
   return result;
 }
 
@@ -107,8 +105,7 @@ export function toInt(str) {
  * @returns {string}
  */
 export function dotJoin(strings) {
-  strings = strings.filter((s) => s);
-  return strings.join(" · ");
+  return strings.filter((s) => s).join(" · ");
 }
 
 /**

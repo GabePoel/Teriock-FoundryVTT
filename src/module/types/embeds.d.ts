@@ -13,6 +13,7 @@ declare global {
       tooltip?: string;
       condition?: boolean;
     };
+
     export type EmbedParts = {
       action?: string;
       color?: string;
@@ -37,6 +38,7 @@ declare global {
       usable?: boolean;
       uuid?: UUID<CommonDocument>;
     };
+
     export type EmbedAction = {
       primary: (
         event: PointerEvent,

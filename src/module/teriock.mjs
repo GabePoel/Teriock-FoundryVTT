@@ -476,17 +476,9 @@ Hooks.once("i18nInit", () => {
 // Register Hooks
 // ==============
 
-for (const hook of Object.values(setup.hookManagement)) {
-  if (typeof hook === "function") {
-    hook();
-  }
-}
+setup.hookManagement.registerHooks();
 
 // Register Handlebars Helpers
 // ===========================
 
-for (const helper of Object.values(setup.handlebarHelpers)) {
-  if (typeof helper === "function") {
-    helper();
-  }
-}
+setup.handlebarHelpers.registerHandlebarsHelpers();

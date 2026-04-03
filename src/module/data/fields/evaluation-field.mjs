@@ -27,9 +27,7 @@ export default class EvaluationField extends EmbeddedDataField {
   /** @inheritDoc */
   clean(value, options) {
     if (typeof value !== "undefined") {
-      if (typeof value !== "object") {
-        value = { raw: value };
-      }
+      if (typeof value !== "object") value = { raw: value };
       if (typeof value?.saved !== "undefined" && value?.saved !== null) {
         value.raw = value.saved;
         delete value.saved;

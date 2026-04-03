@@ -2,7 +2,6 @@ import { dieOptions } from "../constants/options/die-options.mjs";
 
 declare global {
   namespace Teriock.Rolls {
-    // noinspection SpellCheckingInspection
     export type RollMode =
       | "roll"
       | "publicroll"

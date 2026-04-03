@@ -136,12 +136,7 @@ export default class BaseExecution {
    */
   get chatData() {
     return {
-      speaker:
-        /** @type {Teriock.Foundry.ChatSpeakerData} */ TeriockChatMessage.getSpeaker(
-          {
-            actor: this.actor,
-          },
-        ),
+      speaker: TeriockChatMessage.getSpeaker({ actor: this.actor }),
       rolls: this.rolls,
       system: {
         avatar: this.actor?.img,

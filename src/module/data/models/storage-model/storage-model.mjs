@@ -44,7 +44,7 @@ export default class StorageModel extends EmbeddedDataModel {
    * @returns {number}
    */
   get carriedCount() {
-    return this.parent.parent.equipment
+    return this.document.equipment
       .map((e) => (e.system?.consumable ? e.system?.quantity : 1) || 1)
       .reduce((a, b) => a + b, 0);
   }
@@ -54,7 +54,7 @@ export default class StorageModel extends EmbeddedDataModel {
    * @returns {number}
    */
   get carriedWeight() {
-    return this.parent.parent.equipment
+    return this.document.equipment
       .map((e) => Number(e.system?.weight?.total))
       .reduce((a, b) => a + b, 0)
       .toNearest(equipmentOptions.weight.interval);

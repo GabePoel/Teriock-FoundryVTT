@@ -5,6 +5,7 @@ export default function WikiButtonSheetMixin(Base) {
   return (
     /**
      * @extends {TeriockDocumentSheet}
+     * @property {WikiSystem} document.system
      * @mixin
      */
     class WikiButtonSheet extends Base {

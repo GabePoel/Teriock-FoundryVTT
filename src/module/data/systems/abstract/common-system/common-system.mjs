@@ -385,7 +385,7 @@ export default class CommonSystem extends mix(
   /**
    * Context menu entries to display for cards that represent the parent document.
    * @param {TeriockDocument} _doc
-   * @returns {Teriock.Foundry.ContextMenuEntry[]}
+   * @returns {ContextMenuEntry[]}
    */
   getCardContextMenuEntries(_doc) {
     return [];

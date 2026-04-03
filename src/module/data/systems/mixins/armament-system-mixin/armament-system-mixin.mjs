@@ -405,6 +405,11 @@ export default function ArmamentSystemMixin(Base) {
       prepareBaseData() {
         super.prepareBaseData();
 
+        // Bring two-handed attacks up to parity with base
+        if (!formulaExists(this.damage.twoHanded)) {
+          this.damage.twoHanded = this.damage.base;
+        }
+
         // What this deals
         /** @type {Set<Teriock.Keys.RollImpact>} */
         this.deals = new Set(["damage"]);
