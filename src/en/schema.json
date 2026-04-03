@@ -1,0 +1,145 @@
+{
+  "TERIOCK": {
+    "SCHEMA": {
+      "Attribute": {
+        "hint": "What attribute this applies to.",
+        "label": "Attribute"
+      },
+      "BlackGapless": {
+        "default": "Child",
+        "hint": "Whether there shouldn't be gaps between {name} blocks on this document's sheet.",
+        "label": "{name} Black Gapless"
+      },
+      "BlockSize": {
+        "default": "Child",
+        "hint": "Size that {name} blocks will be displayed at on this document's sheet.",
+        "label": "{name} Block Size"
+      },
+      "CombatExpiration": {
+        "what": {
+          "roll": {
+            "hint": "If this expires on a roll, what is the roll that needs to be made?",
+            "label": "Roll"
+          },
+          "threshold": {
+            "hint": "What is the minimum value that needs to be rolled in order for this to expire?",
+            "label": "Threshold"
+          },
+          "type": {
+            "choices": {
+              "forced": "Expires Automatically",
+              "none": "Does not Expire on Turn",
+              "rolled": "Expires on Roll"
+            },
+            "hint": "What is the type of thing that causes this to expire?",
+            "label": "What"
+          }
+        },
+        "when": {
+          "skip": {
+            "hint": "A number of instances of the trigger firing to skip before this effect expires.",
+            "label": "Skip"
+          },
+          "time": {
+            "choices": {
+              "end": "End",
+              "start": "Start"
+            },
+            "hint": "What is the timing for the trigger of this effect expiring?",
+            "label": "When"
+          },
+          "trigger": {
+            "choices": {
+              "action": "Action",
+              "combat": "Combat",
+              "turn": "Turn"
+            },
+            "hint": "What is the trigger for this effect expiring?",
+            "label": "Trigger"
+          }
+        },
+        "who": {
+          "choices": {
+            "everyone": "Everyone",
+            "executor": "Executor",
+            "target": "Target"
+          },
+          "hint": "Whose turn should this effect attempt to expire on?",
+          "label": "Who"
+        }
+      },
+      "Competence": {
+        "choices": {
+          "0": "None",
+          "1": "Proficient",
+          "2": "Fluent"
+        },
+        "hint": "If this is proficient or fluent.",
+        "label": "Competence"
+      },
+      "QualifiedChange": {
+        "key": {
+          "label": "Key"
+        },
+        "mode": {
+          "label": "Mode"
+        },
+        "priority": {
+          "label": "Priority"
+        },
+        "qualifier": {
+          "label": "Qualifier"
+        },
+        "target": {
+          "label": "Target Document Type"
+        },
+        "time": {
+          "label": "Timing"
+        },
+        "value": {
+          "label": "Value"
+        }
+      },
+      "Transformation": {
+        "enabled": {
+          "hint": "Whether this effect causes a transformation. Note that this isn't just for \"transformation effect\"s, but for any case in which another species' stats should be applied (such as animating as an undead).",
+          "label": "Causes Transformation"
+        },
+        "img": {
+          "hint": "An image for transformed token art. Consequence transformation images are prioritized over species. This only applies if token art is overridden.",
+          "label": "Token Image"
+        },
+        "level": {
+          "hint": "How strong of a transformation this is.",
+          "label": "Transformation Level"
+        },
+        "override": {
+          "choices": {
+            "art": "Token Art",
+            "size": "Actor Size"
+          },
+          "hint": "Aspects of the actor and its token that should be overridden by this transformation.",
+          "label": "Override"
+        },
+        "reset": {
+          "hint": "Stats that should be reset by this transformation.",
+          "label": "Reset"
+        },
+        "ring": {
+          "hint": "Whether this transformation has a token ring or not. Consequence transformation rings are prioritized over species. This only applies if token art is overridden.",
+          "label": "Token Ring"
+        },
+        "suppress": {
+          "hint": "Types of documents this should turn off if they're not provided by the transformation.",
+          "label": "Suppress"
+        },
+        "uuids": {
+          "hint": "The species this transforms the target into.",
+          "itemHint": "A specific species this transforms the target into.",
+          "label": "Species",
+          "validationError": "Only species can be transformed into."
+        }
+      }
+    }
+  }
+}

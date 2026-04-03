@@ -1,4 +1,3 @@
-//noinspection JSUnusedGlobalSymbols
 // The index is like the reference but with names always in English.
 // We maintain a copy of this to access rules journals and the like.
 

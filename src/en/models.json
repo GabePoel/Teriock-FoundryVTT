@@ -1,0 +1,383 @@
+{
+  "TERIOCK": {
+    "MODELS": {
+      "AbilitySettings": {
+        "promptCostGp": {
+          "hint": "Prompt user to spend variable GP upon use.",
+          "label": "Prompt GP"
+        },
+        "promptCostHp": {
+          "hint": "Prompt user to spend variable HP upon use.",
+          "label": "Prompt HP"
+        },
+        "promptCostMp": {
+          "hint": "Prompt user to spend variable MP upon use.",
+          "label": "Prompt MP"
+        },
+        "promptHeighten": {
+          "hint": "Prompt user to heighten upon use.",
+          "label": "Prompt Heighten"
+        },
+        "promptTemplate": {
+          "hint": "Prompt user to place a template upon use.",
+          "label": "Prompt Template"
+        }
+      },
+      "ActorSettings": {
+        "automaticallyWound": {
+          "hint": "Automatically apply down, critically wounded, and dead statuses?",
+          "label": "Auto Wound"
+        },
+        "sheetBlockAbilitiesGapless": {
+          "label": "Abilities"
+        },
+        "sheetBlockAbilitiesSize": {
+          "label": "Abilities"
+        },
+        "sheetBlockClassesGapless": {
+          "label": "Classes"
+        },
+        "sheetBlockClassesSize": {
+          "label": "Classes"
+        },
+        "sheetBlockEffectsGapless": {
+          "label": "Effects"
+        },
+        "sheetBlockEffectsSize": {
+          "label": "Effects"
+        },
+        "sheetBlockInventoryGapless": {
+          "label": "Inventory"
+        },
+        "sheetBlockInventorySize": {
+          "label": "Inventory"
+        },
+        "sheetBlockPowersGapless": {
+          "label": "Powers"
+        },
+        "sheetBlockPowersSize": {
+          "label": "Powers"
+        },
+        "sheetBlockResourcesGapless": {
+          "label": "Resources"
+        },
+        "sheetBlockResourcesSize": {
+          "label": "Resources"
+        },
+        "sheetBlockTradecraftsGapless": {
+          "label": "Tradecrafts"
+        },
+        "sheetBlockTradecraftsSize": {
+          "label": "Tradecrafts"
+        }
+      },
+      "BaseStatPool": {
+        "FIELDS": {
+          "disabled": {
+            "hint": "If checked, these dice will not be given to the actor.",
+            "label": "Disabled"
+          },
+          "formula": {
+            "hint": "A formula for these stat dice. It can have variables and multiple terms, but it must be positive and must not have dice listed recursively. For instance, 1d4 and (@p)d4 are both valid. But -1d4 and (1d4)d4 are not.",
+            "label": "Formula"
+          }
+        },
+        "PANELS": {
+          "name": "Stat Die",
+          "text": "You have rolled a stat die.",
+          "title": "Description"
+        }
+      },
+      "BaseUnit": {
+        "FIELDS": {
+          "raw": {
+            "hint": "The quantity of the specified unit.",
+            "label": "Quantity"
+          },
+          "unit": {
+            "hint": "The unit of this value.",
+            "label": "Unit"
+          }
+        },
+        "UNITS": {
+          "unlimited": "No Limit"
+        },
+        "UPDATE": {
+          "basic": "Update {label}",
+          "slowExecutionTime": "Update Slow Execution Time"
+        }
+      },
+      "Duration": {
+        "FIELDS": {
+          "conditions": {
+            "absent": {
+              "hint": "What conditions must be absent in order for this ability to be active?",
+              "label": "Absent Conditions"
+            },
+            "present": {
+              "hint": "What conditions must be present in order for this ability to be active?",
+              "label": "Present Conditions"
+            }
+          },
+          "dawn": {
+            "hint": "Does the effect expire at dawn?",
+            "label": "Dawn"
+          },
+          "description": {
+            "hint": "Optional description that overrides the default duration text.",
+            "label": "Description"
+          },
+          "stationary": {
+            "hint": "Do you need to be stationary for this ability to be active?",
+            "label": "Stationary"
+          },
+          "triggers": {
+            "hint": "Things that will cause this ability's effect to expire.",
+            "label": "Triggers"
+          },
+          "unit": {
+            "hint": "The unit of time for this duration.",
+            "label": "Unit"
+          }
+        },
+        "PREREQUISITES": {
+          "notStatus": "Not {status}",
+          "ongoing": "While {partial}",
+          "text": "{start} {end}",
+          "untilTriggers": "Until {partial}"
+        },
+        "UNITS": {
+          "alwaysActive": "Always Active",
+          "instant": "Instant",
+          "passive": "Passive"
+        }
+      },
+      "HpPool": {
+        "PANELS": {
+          "name": "Hit Die",
+          "text": "You restore the rolled number of @L[Core:Hit Points and Mana Points]{HP} and are @L[Keyword:Awaken]{awakened}."
+        }
+      },
+      "Identification": {
+        "FIELDS": {
+          "flaws": {
+            "label": "Unidentified Flaws"
+          },
+          "identified": {
+            "inverse": "Unidentified",
+            "label": "Identified"
+          },
+          "name": {
+            "label": "Unidentified Name"
+          },
+          "notes": {
+            "label": "Unidentified Notes"
+          },
+          "powerLevel": {
+            "label": "Unidentified Power Level"
+          },
+          "read": {
+            "label": "Read"
+          }
+        },
+        "QUERY": {
+          "Identify": {
+            "ask": "Asking GMs to approve identification of {name}.",
+            "failPrefix": "Could not ask to identify.",
+            "failure": "{name} was not successfully identified.",
+            "hint": "Select effects to reveal.",
+            "noDocumentsMessage": "There are no effects to reveal.",
+            "question": "<p>Should {user} identify {item}?</p>",
+            "success": "{name} was successfully identified.",
+            "title": "Identify Item"
+          },
+          "ReadMagic": {
+            "ask": "Asking GMs to approve reading magic on {name}.",
+            "failPrefix": "Could not ask to read magic.",
+            "failure": "{name} was not successfully read magic on.",
+            "question": "<p>Should {user} read magic on {item}?</p>",
+            "success": "{name} was successfully read magic on.",
+            "title": "Read Magic"
+          },
+          "Unidentify": {
+            "alreadyUnidentified": "The item is already unidentified.",
+            "hint": "Select effects to hide",
+            "name": "Unidentified {type}",
+            "noDocumentsMessage": "There are no effects to hide."
+          }
+        },
+        "label": "Identification"
+      },
+      "LengthUnit": {
+        "UNITS": {
+          "cm": {
+            "label": "Centimeter",
+            "plural": "Centimeters"
+          },
+          "ft": {
+            "label": "Foot",
+            "plural": "Feet"
+          },
+          "in": {
+            "label": "Inch",
+            "plural": "Inches"
+          },
+          "km": {
+            "label": "Kilometer",
+            "plural": "Kilometers"
+          },
+          "m": {
+            "label": "Meter",
+            "plural": "Meters"
+          },
+          "mile": {
+            "label": "Mile",
+            "plural": "Miles"
+          }
+        }
+      },
+      "MpPool": {
+        "PANELS": {
+          "name": "Mana Die",
+          "text": "You restore the rolled number of @L[Core:Hit Points and Mana Points]{MP}."
+        }
+      },
+      "Piercing": {
+        "FIELDS": {
+          "raw": {
+            "hint": "How this interacts with armor and blocking.",
+            "label": "Piercing"
+          }
+        },
+        "MENU": {
+          "0": "None",
+          "1": "AV0",
+          "2": "UB"
+        }
+      },
+      "Range": {
+        "UNITS": {
+          "melee": {
+            "label": "Melee"
+          },
+          "self": {
+            "label": "Self"
+          }
+        }
+      },
+      "StatDie": {
+        "DIALOG": {
+          "Reroll": {
+            "content": "This stat die is already spent. Would you like to roll it anyways? If you just want to unroll it, right click on the stat die instead.",
+            "title": "Reroll Stat Die?"
+          }
+        }
+      },
+      "Storage": {
+        "FIELDS": {
+          "enabled": {
+            "hint": "If this should be able to store other equipment within it.",
+            "label": "Storage"
+          },
+          "maxCount": {
+            "hint": "The maximum number of other pieces of equipment this can store.",
+            "label": "Maximum Count",
+            "over": "Over Maximum Number of Items Carried",
+            "under": "Maximum Number of Items Carried"
+          },
+          "maxWeight": {
+            "hint": "The maximum weight this can store.",
+            "label": "Maximum Weight",
+            "over": "Over Maximum Weight Carried",
+            "under": "Maximum Weight Carried"
+          },
+          "weightMultiplier": {
+            "hint": "An amount to multiply the weight of all things this stores by.",
+            "label": "Weight Multiplier"
+          }
+        }
+      },
+      "TimeUnit": {
+        "UNITS": {
+          "day": {
+            "label": "Day",
+            "plural": "Days",
+            "short": "day"
+          },
+          "hour": {
+            "label": "Hour",
+            "plural": "Hours",
+            "short": "hr"
+          },
+          "minute": {
+            "label": "Minute",
+            "plural": "Minutes",
+            "short": "min"
+          },
+          "second": {
+            "label": "Second",
+            "plural": "Seconds",
+            "short": "sec"
+          },
+          "week": {
+            "label": "Week",
+            "plural": "Weeks",
+            "short": "week"
+          },
+          "year": {
+            "label": "Year",
+            "plural": "Years",
+            "short": "year"
+          },
+          "zeroSeconds": {
+            "label": "0 seconds",
+            "short": "0 sec"
+          }
+        }
+      },
+      "TokenSettings": {
+        "autoColoration": {
+          "hint": "Automatically change this token's tint color when its actor is wounded.",
+          "label": "Automatic Coloration"
+        },
+        "autoDetectionModes": {
+          "hint": "Automatically change this token's detection mode.",
+          "label": "Automatic Detection Modes"
+        },
+        "autoLighting": {
+          "hint": "Automatically configure light emitted from this token.",
+          "label": "Automatic Lighting"
+        },
+        "autoMagic": {
+          "hint": "Automatically apply Token Magic FX to this token for relevant conditions.",
+          "label": "Automatic Effects"
+        },
+        "autoScale": {
+          "hint": "Automatically scale this token to match its actor's size.",
+          "label": "Automatic Scale"
+        },
+        "autoTransformation": {
+          "hint": "Automatically change this token when its actor is transformed.",
+          "label": "Automatic Transformation"
+        },
+        "autoVisionAngle": {
+          "hint": "Automatically change this token's vision angle.",
+          "label": "Automatic Vision Angle"
+        },
+        "autoVisionModes": {
+          "hint": "Automatically change this token's vision mode.",
+          "label": "Automatic Vision Modes"
+        },
+        "autoVisionRange": {
+          "hint": "Automatically change this token's vision range.",
+          "label": "Automatic Vision Range"
+        }
+      },
+      "Usable": {
+        "USAGE": {
+          "use": "Use This"
+        }
+      }
+    }
+  }
+}

@@ -37,12 +37,12 @@ for (const asset of ASSETS) {
       filter: (src) => {
         const fileName = path.basename(src);
         if (fileName === "macros") return false;
+        if (fileName === "en") return false;
+        if (fileName === "categories") return false;
         if (fileName.endsWith(".d.ts")) return false;
         if (fileName.endsWith(".scss")) return false;
         if (fileName.endsWith(".yml")) return false;
-        if (fileName.startsWith("_")) {
-          return fileName === "_module.mjs";
-        }
+        if (fileName.startsWith("_")) return fileName === "_module.mjs";
         return true;
       },
     });
@@ -78,7 +78,7 @@ async function createZip() {
     });
     archive.on("error", (err) => reject(err));
     archive.pipe(output);
-    archive.directory(SYSTEM_DIR, false);
+    archive.directory(SYSTEM_DIR, "", (_) => _);
     archive.finalize();
   });
 }
