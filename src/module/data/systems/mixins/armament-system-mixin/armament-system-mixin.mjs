@@ -9,7 +9,7 @@ import {
   EvaluationField,
   FormulaField,
   IdentifierField,
-  PropagationField,
+  MultiChangeField,
   TextField,
 } from "../../../fields/_module.mjs";
 import { DefenseModel, RangeModel } from "../../../models/_module.mjs";
@@ -59,14 +59,14 @@ export default function ArmamentSystemMixin(Base) {
             min: 0,
             model: DefenseModel,
           }),
-          damage: new PropagationField(
+          damage: new MultiChangeField(
             {
               base: new FormulaField({ deterministic: false }),
               twoHanded: new FormulaField({ deterministic: false }),
               types: new fields.SetField(new IdentifierField()),
             },
             {
-              propagationPaths: ["base", "twoHanded"],
+              multiChangePaths: ["base", "twoHanded"],
             },
           ),
           equipmentClasses: new fields.SetField(

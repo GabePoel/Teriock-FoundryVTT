@@ -8,9 +8,9 @@ declare global {
       deterministic?: boolean;
     };
 
-    export type _PropagationFieldOptions = {
+    export type _MultiChangeFieldOptions = {
       /** Specific paths this should propagate to instead of all direct subfields */
-      propagationPaths?: string[];
+      multiChangePaths?: string[];
     };
 
     export type _LocalDocumentFieldOptions = {
