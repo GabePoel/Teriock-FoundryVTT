@@ -250,6 +250,11 @@ function cleanAbility(doc) {
   // Clean Common Defaults
   if (doc.system.attackPenalty === "-3") delete doc.system.attackPenalty;
 
+  // Clean Delivery
+  if (typeof doc.system.delivery?.base === "string") {
+    doc.system.delivery = doc.system.delivery.base;
+  }
+
   // Clean Retired Tags
   delete doc.system.secret;
   delete doc.system.prepared;

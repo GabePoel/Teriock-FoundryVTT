@@ -84,7 +84,7 @@ export default (Base) => {
           data.expansion.range = { raw: data.expansionRange };
         }
 
-        // Execution time
+        // Execution time migration
         if (typeof data.executionTime === "string") {
           data.executionTime = { base: data.executionTime };
           if (data.maneuver === "slow") {
@@ -107,6 +107,7 @@ export default (Base) => {
           }
         }
 
+        // Delivery migration
         if (data.delivery?.base) {
           data.delivery = data.delivery.base;
         }
