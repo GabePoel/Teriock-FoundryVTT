@@ -10,7 +10,6 @@ import "./journal-entry-category/_types";
 import "./journal-entry-page/_types";
 import "./journal-entry/_types";
 import "./macro/_types";
-import "./mixins/_types";
 import "./roll-table/_types";
 import "./scene/_types";
 import "./table-result/_types";

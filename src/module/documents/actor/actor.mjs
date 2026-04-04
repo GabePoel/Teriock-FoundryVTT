@@ -1,7 +1,6 @@
 import { characterOptions } from "../../constants/options/character-options.mjs";
 import { documentTypes } from "../../constants/system/_module.mjs";
 import { resolveDocument } from "../../helpers/resolve.mjs";
-import { toCamelCase } from "../../helpers/string.mjs";
 import { lookupDocument, mix } from "../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
 
@@ -146,21 +145,6 @@ export default class TeriockActor extends mix(
    */
   get isDrained() {
     return this.system.mp.value < this.system.mp.max;
-  }
-
-  /**
-   * Item keys by type.
-   * @returns {Teriock.Parent.ParentItemKeys}
-   */
-  get itemKeys() {
-    const out = {};
-    const itemTypes = this.itemTypes;
-    for (const key of Object.keys(TERIOCK.system.documentTypes.items)) {
-      out[key] = new Set(
-        (itemTypes[key] || []).map((i) => toCamelCase(i.name)),
-      );
-    }
-    return out;
   }
 
   /**

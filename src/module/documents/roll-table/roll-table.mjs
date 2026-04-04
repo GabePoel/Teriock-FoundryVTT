@@ -80,14 +80,12 @@ export default class TeriockRollTable extends mix(
       },
       messageData,
     );
-    if (this.displayRoll && roll) {
-      messageData.rolls.push(roll);
-    }
+    if (this.displayRoll && roll) messageData.rolls.push(roll);
     messageData.system.panels.forEach((panel) => {
       panel.blocks.push({
-        title: this.name,
-        text: this.description,
         classes: TERIOCK.display.panel.classes.derived,
+        text: this.description,
+        title: this.name,
       });
     });
     messageData.system.panels = await TeriockTextEditor.enrichPanels(

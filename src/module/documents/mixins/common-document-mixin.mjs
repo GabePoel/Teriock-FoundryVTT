@@ -8,7 +8,7 @@ import {
   ChangeableDocumentMixin,
   EmbedCardDocumentMixin,
   PanelDocumentMixin,
-  SettingsDocumentMixin,
+  SettingsDocumentMixin
 } from "./_module.mjs";
 
 /**
@@ -52,13 +52,9 @@ export default function CommonDocumentMixin(Base) {
        * The actor associated with this document if there is one.
        */
       get actor() {
-        if (this instanceof TeriockActor) {
-          return this;
-        } else if (this.parent) {
-          return this.parent.actor;
-        } else {
-          return null;
-        }
+        if (this instanceof TeriockActor) return this;
+        else if (this.parent) return this.parent.actor;
+        else return null;
       }
 
       /**
@@ -243,9 +239,7 @@ export default function CommonDocumentMixin(Base) {
 
       /** @inheritDoc */
       toDragData() {
-        const dragData = super.toDragData();
-        dragData.systemType = this.type;
-        return dragData;
+        return Object.assign(super.toDragData(), { systemType: this.type });
       }
 
       /**

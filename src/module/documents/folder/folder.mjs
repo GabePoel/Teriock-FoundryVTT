@@ -12,7 +12,6 @@ const { Folder } = foundry.documents;
  * @mixes BaseDocument
  */
 export default class TeriockFolder extends BaseDocumentMixin(Folder) {
-  //noinspection JSValidateJSDoc
   /**
    * Get all the entries recursively from a child node.
    * @param {FolderChildNode} node
@@ -36,15 +35,11 @@ export default class TeriockFolder extends BaseDocumentMixin(Folder) {
    */
   static async getContents(folder, options = {}) {
     const { types, uuids = true } = options;
-    if (typeof folder === "string") {
-      folder = await fromUuid(folder);
-    }
+    if (typeof folder === "string") folder = await fromUuid(folder);
     let out = [];
     if (folder) {
       out = folder.allContents;
-      if (types) {
-        out = out.filter((d) => types.includes(d.type));
-      }
+      if (types) out = out.filter((d) => types.includes(d.type));
       if (uuids) {
         out = out.map((d) => d.uuid);
       } else if (folder.inCompendium) {

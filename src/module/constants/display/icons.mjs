@@ -115,6 +115,8 @@ export const icons = {
     resource: "ms-tag",
     species: "ms-genetics",
     stone: "ms-circle",
+    table: "ms-table",
+    tableResult: "ms-table-rows",
     token: "ms-account-circle",
   },
   effect: {

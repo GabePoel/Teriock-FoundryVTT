@@ -106,8 +106,6 @@ function protectionOptions(event, target) {
       block?.querySelector(".teriock-block-subtitle")?.textContent || "",
     ],
   };
-  if (img?.src) {
-    options.image = img.src;
-  }
+  if (img?.src) options.img = img.src;
   return Object.assign(options, ThresholdRoll.parseEvent(event));
 }

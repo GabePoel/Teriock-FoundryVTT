@@ -84,7 +84,6 @@ export default (Base) =>
         return;
       }
       const field = new fields.NumberField({
-        initial: 0,
         label: toTitleCase(type),
         min: 0,
         integer: true,
@@ -98,13 +97,14 @@ export default (Base) =>
           title: TERIOCK.options.take[type]?.take,
           icon: makeIconClass(TERIOCK.options.take[type].icon, "title"),
         },
-        content: field.toFormGroup({}, { name: type }).outerHTML,
+        content: field.toFormGroup({}, { name: type, placeholder: "0" })
+          .outerHTML,
         ok: {
           label: game.i18n.localize(
             "TERIOCK.SHEETS.Actor.ACTIONS.TakeRollable.ok",
           ),
           callback: (_event, button) => {
-            let input = button.form.elements.namedItem(type).value;
+            let input = button.form.elements.namedItem(type).value ?? "0";
             this.document.system[`take${toTitleCase(type)}`](Number(input));
           },
         },

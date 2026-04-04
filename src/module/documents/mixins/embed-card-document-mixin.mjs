@@ -47,13 +47,13 @@ export default function EmbedCardDocumentMixin(Base) {
        */
       get embedParts() {
         return {
-          title: this.name,
           img: this.img,
-          subtitle: toTitleCase(this.documentName),
-          text: this.collectionName,
-          uuid: this.uuid,
           makeTooltip: false,
           openable: true,
+          subtitle: toTitleCase(this.documentName),
+          text: this.collectionName,
+          title: this.name,
+          uuid: this.uuid,
         };
       }
 

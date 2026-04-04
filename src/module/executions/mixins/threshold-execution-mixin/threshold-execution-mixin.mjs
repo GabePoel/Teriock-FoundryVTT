@@ -244,6 +244,21 @@ export default function ThresholdExecutionMixin(Base) {
         }
         if (!hasFields) return;
         await TeriockDialog.wait({
+          buttons: this._dialogButtons.map((b) => {
+            return {
+              action: b.action,
+              callback: (_event, button) => {
+                this.#updateFromRollDialog(button);
+                if (typeof b.callback === "function") b.callback();
+              },
+              default: b.default,
+              icon: makeIconClass(b.icon || this.icon, "button"),
+              label: game.i18n.localize(b.label),
+            };
+          }),
+          content: content.outerHTML,
+          modal: true,
+          position: { width: 550 },
           window: {
             icon: makeIconClass(this.icon, "title"),
             title: game.i18n
@@ -252,21 +267,6 @@ export default function ThresholdExecutionMixin(Base) {
               })
               .trim(),
           },
-          position: { width: 550 },
-          modal: true,
-          content: content.outerHTML,
-          buttons: this._dialogButtons.map((b) => {
-            return {
-              action: b.action,
-              icon: makeIconClass(b.icon || this.icon, "button"),
-              label: game.i18n.localize(b.label),
-              default: b.default,
-              callback: (_event, button) => {
-                this.#updateFromRollDialog(button);
-                if (typeof b.callback === "function") b.callback();
-              },
-            };
-          }),
         });
       }
     }

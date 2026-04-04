@@ -1,5 +1,6 @@
 //noinspection JSValidateJSDoc
 
+import { icons } from "../../constants/display/icons.mjs";
 import { TokenSettingsModel } from "../../data/models/settings-models/_module.mjs";
 import { convertUnits } from "../../helpers/unit.mjs";
 import { makeIcon, mix } from "../../helpers/utils.mjs";
@@ -45,6 +46,7 @@ export default class TeriockTokenDocument extends mix(
     parts.img = this.getSetting("autoTransformation")
       ? this.imageLive
       : this.texture.src;
+    parts.icon = icons.document.token;
     if (this.actor) {
       if (this.actor.fullName !== parts.title) {
         parts.text = this.actor.fullName;
@@ -139,9 +141,7 @@ export default class TeriockTokenDocument extends mix(
   /** @inheritDoc */
   _inferRingSubjectTexture() {
     let out = super._inferRingSubjectTexture();
-    if (this.isTransformed && this.actor) {
-      out = this.imageTransformed;
-    }
+    if (this.isTransformed && this.actor) out = this.imageTransformed;
     return out;
   }
 

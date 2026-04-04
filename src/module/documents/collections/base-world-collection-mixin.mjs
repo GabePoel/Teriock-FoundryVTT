@@ -1,6 +1,3 @@
-//eslint-disable-next-line @typescript-eslint/no-unused-vars
-const { WorldCollection } = foundry.abstract;
-
 /**
  * @param {typeof WorldCollection} Base
  */
@@ -9,7 +6,7 @@ export default function BaseWorldCollectionMixin(Base) {
   return (
     /**
      * @template TeriockDocument
-     * @extends WorldCollection
+     * @extends {WorldCollection<TeriockDocument>}
      * @mixin
      */
     class BaseWorldCollection extends Base {

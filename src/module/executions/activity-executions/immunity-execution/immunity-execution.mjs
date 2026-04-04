@@ -15,8 +15,8 @@ export default class ImmunityExecution extends BaseExecution {
         ? game.i18n.localize("TERIOCK.TERMS.Common.chosen")
         : game.i18n.localize("TERIOCK.TERMS.Common.automatic"),
     );
-    this.image =
-      options.image ||
+    this.img =
+      options.img ||
       (this.hex
         ? getImage("effect-types", "Hexseal")
         : getImage("effect-types", "Immunity"));
@@ -40,7 +40,7 @@ export default class ImmunityExecution extends BaseExecution {
   /** @inheritDoc */
   async _buildPanels() {
     this.panels.push({
-      image: this.image,
+      image: this.img,
       name: this.name,
       bars: [
         {

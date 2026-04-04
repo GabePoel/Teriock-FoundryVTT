@@ -19,8 +19,6 @@ export default class TeriockJournalEntry extends mix(
 ) {
   /** @inheritDoc */
   get embedParts() {
-    const parts = super.embedParts;
-    parts.img = "icons/svg/book.svg";
-    return parts;
+    return Object.assign(super.embedParts, { img: "icons/svg/book.svg" });
   }
 }

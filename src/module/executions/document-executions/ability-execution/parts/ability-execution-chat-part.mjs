@@ -168,9 +168,7 @@ export default function AbilityExecutionChatPart(Base) {
               triggers: Array.from(this.source.system.duration.triggers),
             },
             heightened: this.heightened,
-            identifier:
-              (this.source.system.identifier || this.source.defaultIdentifier) +
-              "-effect",
+            identifier: this.source.forcedIdentifier + "-effect",
             source: this.source.uuid,
             transformation: await this.#generateConsequenceTransformation(crit),
           },

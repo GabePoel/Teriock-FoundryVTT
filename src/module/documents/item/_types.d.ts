@@ -6,7 +6,6 @@ declare global {
   namespace Teriock.Documents {
     export interface ItemInterface {
       _id: ID<AnyItem>;
-      // @ts-expect-error Document construction.
       effects: DocumentCollection<AnyActiveEffect>;
       parent?: AnyActor;
       sheet: BaseItemSheet;

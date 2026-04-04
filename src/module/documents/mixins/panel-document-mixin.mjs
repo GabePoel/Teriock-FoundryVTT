@@ -137,9 +137,7 @@ export default function PanelDocumentMixin(Base) {
         // If this is part of a preview, it won't have a real UUID.
         if (this.getFlag("teriock", "previewUuid")) {
           const doc = await fromUuid(this.getFlag("teriock", "previewUuid"));
-          if (doc) {
-            parts = doc.panelParts;
-          }
+          if (doc) parts = doc.panelParts;
         }
         return await TeriockTextEditor.enrichPanel(parts, { relativeTo: this });
       }

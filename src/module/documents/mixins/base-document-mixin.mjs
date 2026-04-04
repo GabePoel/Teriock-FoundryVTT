@@ -50,6 +50,14 @@ export default function BaseDocumentMixin(Base) {
       }
 
       /**
+       * A guaranteed identifier for this.
+       * @returns {string}
+       */
+      get forcedIdentifier() {
+        return this.system?.identifier ?? this.defaultIdentifier;
+      }
+
+      /**
        * A modified version of this document's name that displays additional text if needed.
        * @returns {string}
        */

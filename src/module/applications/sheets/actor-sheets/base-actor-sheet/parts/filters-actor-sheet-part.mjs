@@ -1,3 +1,5 @@
+import { toCamelCase } from "../../../../../helpers/string.mjs";
+
 //noinspection JSClosureCompilerSyntax
 /**
  * @param {typeof BaseActorSheet} Base
@@ -70,12 +72,11 @@ export default (Base) =>
       }
       return equipment.filter(
         (e) =>
-          (!filters.properties ||
-            e.effectKeys.property.has(filters.properties)) &&
+          (!filters.properties || hasProperty(e, filters.properties)) &&
           (!filters.materialProperties ||
-            e.effectKeys.property.has(filters.materialProperties)) &&
+            hasProperty(e, filters.materialProperties)) &&
           (!filters.magicalProperties ||
-            e.effectKeys.property.has(filters.magicalProperties)) &&
+            hasProperty(e, filters.magicalProperties)) &&
           binaryFilter(filters.equipped, e.system.equipped) &&
           binaryFilter(filters.shattered, e.system.shattered) &&
           binaryFilter(
@@ -135,4 +136,16 @@ function binaryFilter(filterVal, actualVal) {
     out = filterVal === 1 ? actualVal : filterVal === -1 ? !actualVal : true;
   }
   return out;
+}
+
+/**
+ * Whether some equipment has a property that matches some key.
+ * @param {TeriockEquipment} equipment
+ * @param {string} propertyKey
+ * @returns {boolean}
+ */
+function hasProperty(equipment, propertyKey) {
+  return equipment.properties
+    .map((p) => toCamelCase(p.forcedIdentifier))
+    .includes(propertyKey);
 }

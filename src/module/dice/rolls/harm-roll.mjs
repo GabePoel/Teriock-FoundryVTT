@@ -18,7 +18,7 @@ export default class HarmRoll extends TakeRoll {
         Object.fromEntries(
           source.pages.contents
             .filter((p) => p.type === type)
-            .map((d) => [d.system.identifier || d.defaultIdentifier, d]),
+            .map((d) => [d.forcedIdentifier, d]),
         ),
       );
     });

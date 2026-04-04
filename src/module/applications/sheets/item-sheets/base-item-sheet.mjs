@@ -44,19 +44,15 @@ export default class BaseItemSheet extends mix(
     }
     const id = target.dataset.id;
     const onUseSet = new Set(this.document.system.onUse);
-    if (onUseSet.has(id)) {
-      onUseSet.delete(id);
-    } else {
-      onUseSet.add(id);
-    }
+    if (onUseSet.has(id)) onUseSet.delete(id);
+    else onUseSet.add(id);
     await this.document.update({ "system.onUse": Array.from(onUseSet) });
   }
 
   /** @inheritDoc */
   async _prepareContext(options = {}) {
-    const context = await super._prepareContext(options);
-    context.item = this.item;
-    context.baseEffects = this.document.effectTypes?.base || [];
-    return context;
+    return Object.assign(await super._prepareContext(options), {
+      item: this.item,
+    });
   }
 }

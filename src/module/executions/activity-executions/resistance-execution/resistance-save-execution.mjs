@@ -16,8 +16,8 @@ export default class ResistanceExecution extends ThresholdExecutionMixin(
   constructor(options = {}) {
     super(options);
     if (options.threshold === undefined) this.threshold = 10;
-    this.image =
-      options.image ||
+    this.img =
+      options.img ||
       (this.hex
         ? getImage("effect-types", "Hexproof")
         : getImage("effect-types", "Resistance"));

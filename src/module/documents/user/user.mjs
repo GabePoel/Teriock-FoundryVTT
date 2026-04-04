@@ -20,23 +20,8 @@ export default class TeriockUser extends mix(
   get embedParts() {
     const parts = super.embedParts;
     parts.img = this.avatar;
-    if (this.character) {
-      parts.subtitle = this.character.fullName;
-    }
+    if (this.character) parts.subtitle = this.character.fullName;
     return parts;
-  }
-
-  //noinspection JSUnusedGlobalSymbols
-  /**
-   * Is this user currently active?
-   * @returns {boolean}
-   */
-  get isActive() {
-    return (
-      this.active &&
-      (this.lastActivityTime === 0 ||
-        (Date.now() - this.lastActivityTime) / 1000 < 120)
-    );
   }
 
   /** @inheritDoc */

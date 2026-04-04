@@ -1,15 +1,13 @@
 import { TeriockActiveEffect, TeriockTokenDocument } from "../_module.mjs";
 import { BaseActorSystem } from "../../data/systems/actors/_module.mjs";
 import { BaseActorSheet } from "../../applications/sheets/actor-sheets/_module.mjs";
-import { DocumentCollection } from "../../../../foundry/client/documents/abstract/_module.mjs";
+import { DocumentCollection } from "@client/documents/abstract/_module.mjs";
 
 declare global {
   namespace Teriock.Documents {
     export interface ActorInterface {
       _id: ID<AnyActor>;
-      // @ts-expect-error Document construction.
       effects: DocumentCollection<AnyActiveEffect>;
-      // @ts-expect-error Document construction.
       items: DocumentCollection<AnyItem>;
       sheet: BaseActorSheet;
       statuses: Set<Teriock.Keys.Condition>;
@@ -24,8 +22,6 @@ declare global {
       getDependentTokens(): TeriockTokenDocument[];
 
       get id(): ID<AnyActor>;
-
-      get itemTypes(): Teriock.Parent.ParentItemTypes;
 
       get temporaryEffects(): TeriockActiveEffect[];
 

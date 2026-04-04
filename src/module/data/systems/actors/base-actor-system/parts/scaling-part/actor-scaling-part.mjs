@@ -64,8 +64,8 @@ export default (Base) => {
        */
       #getSpeciesRollData() {
         const data = {};
-        for (const species of this.parent.itemKeys.species || new Set()) {
-          data[`species.${species}`] = 1;
+        for (const s of this.parent.species) {
+          data[`species.${s.forcedIdentifier}`] = 1;
         }
         return data;
       }
