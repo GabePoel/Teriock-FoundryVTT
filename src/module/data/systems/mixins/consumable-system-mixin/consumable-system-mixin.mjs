@@ -155,6 +155,7 @@ export default function ConsumableSystemMixin(Base) {
           this.quantity = Math.clamp(this.quantity, 0, this.maxQuantity.value);
         } else {
           this.maxQuantity._value = Infinity;
+          this.quantity = 1;
         }
       }
 

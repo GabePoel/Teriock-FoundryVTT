@@ -40,7 +40,7 @@ export default function HierarchyDocumentMixin(Base) {
           docsWithRefs.map((d) => fromUuid(d.system._ref)),
         );
         const compendiums = new Set(
-          cachedDocs.filter((d) => d.inCompendium).map((d) => d.compendium),
+          cachedDocs.filter((d) => d?.inCompendium).map((d) => d.compendium),
         );
         await Promise.all(Array.from(compendiums).map((c) => c.getIndex()));
       }
