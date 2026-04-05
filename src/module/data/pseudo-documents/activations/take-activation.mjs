@@ -28,6 +28,7 @@ export default class TakeActivation extends BaseActivation {
     });
   }
 
+  /** @inheritDoc */
   get classes() {
     return [super.classes, this.take + "-button"].join(" ");
   }

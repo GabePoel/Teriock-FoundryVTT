@@ -1,0 +1,20 @@
+_id: cd1820f5e1a2f6fd
+_key: '!macros!cd1820f5e1a2f6fd'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.17
+author: teriockBuilder00
+command: |-
+  const dealsDamage = scope.execution.message?.system.activations.some(
+    (a) => a.type === "roll" && a.roll === "damage",
+  );
+  if (scope.execution.source.system.spell && dealsDamage) {
+    scope.execution?.effect?.delete();
+  }
+folder: SsB1D27Gn6q9lTTV
+img: icons/svg/dice-target.svg
+name: Bellows - Cast Spell
+scope: global
+type: script
