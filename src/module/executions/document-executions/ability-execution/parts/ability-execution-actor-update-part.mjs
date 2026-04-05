@@ -38,13 +38,15 @@ export default function AbilityExecutionActorUpdatePart(Base) {
           if (this.usesReaction) {
             this.updates["system.combat.hasReaction"] = false;
           }
-          for (const stat of ["hp", "mp"]) {
+          for (const stat of ["hp", "mp", "lp"]) {
             if (
               this.costs[stat] > 0 &&
               !this.options[`no${toTitleCase(stat)}`]
             ) {
               this.updates[`system.${stat}.value`] = Math.max(
-                this.actor.system[stat].value - this.costs[stat],
+                this.actor.system[stat].value +
+                  TERIOCK.options.cost.primary.keys[stat].multiplier *
+                    this.costs[stat],
                 this.actor.system[stat].min ?? 0,
               );
             }

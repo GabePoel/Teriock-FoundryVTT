@@ -18,19 +18,23 @@ export const transformationOptions = {
     },
   },
   reset: {
-    hp: {
-      initial: true,
-      update: { "system.hp.value": 99999999 },
-    },
-    mp: {
-      initial: false,
-      update: { "system.mp.value": 99999999 },
-    },
     gp: {
       initial: true,
       update: Object.fromEntries(
         Object.keys(currencyOptions).map((k) => [`system.money.${k}`, 0]),
       ),
+    },
+    hp: {
+      initial: true,
+      update: { "system.hp.value": 99999999 },
+    },
+    lp: {
+      initial: false,
+      update: { "system.lp.value": 20 },
+    },
+    mp: {
+      initial: false,
+      update: { "system.mp.value": 99999999 },
     },
   },
   suppress: {

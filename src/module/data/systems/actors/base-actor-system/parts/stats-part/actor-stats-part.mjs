@@ -25,7 +25,7 @@ export default (Base) => {
           hp: statField({ temp: true, morganti: true }),
           mp: statField({ temp: true, morganti: true }),
           presence: statField({ max: 1, value: 0 }),
-          wither: statField({ max: 100, value: 20 }),
+          lp: statField({ max: 100, value: 20 }),
         });
       }
 
@@ -49,12 +49,11 @@ export default (Base) => {
             this.animateStatChangeEffect(options.teriock.hpChange, color);
           }
           if (
-            options.teriock.witherChange !== 0 &&
-            options.teriock.witherChange < 999999
+            options.teriock.lpChange !== 0 &&
+            options.teriock.lpChange < 999999
           ) {
-            const color =
-              options.teriock.witherChange > 0 ? "#241F31" : "#5E5C64";
-            this.animateStatChangeEffect(options.teriock.witherChange, color);
+            const color = options.teriock.lpChange > 0 ? "#241F31" : "#5E5C64";
+            this.animateStatChangeEffect(options.teriock.lpChange, color);
           }
         }
       }
@@ -74,8 +73,8 @@ export default (Base) => {
           foundry.utils.getProperty(changes, "system.mp") || {},
         );
         const newWither = foundry.utils.mergeObject(
-          foundry.utils.deepClone(this.wither),
-          foundry.utils.getProperty(changes, "system.wither") || {},
+          foundry.utils.deepClone(this.lp),
+          foundry.utils.getProperty(changes, "system.lp") || {},
         );
         const realHpChange = newHp.value - this.hp.value;
         const tempHpChange = newHp.temp - this.hp.temp;
@@ -84,7 +83,7 @@ export default (Base) => {
         Object.assign(options.teriock, {
           hpChange: realHpChange + tempHpChange,
           mpChange: realMpChange + tempMpChange,
-          witherChange: newWither.value - this.wither.value,
+          lpChange: newWither.value - this.lp.value,
         });
       }
 
@@ -151,12 +150,12 @@ export default (Base) => {
           rollData,
           foundry.utils.flattenObject({
             hp: this.hp,
+            lp: this.lp,
             mp: this.mp,
             pres: this.presence.max,
             "pres.unused": this.attributes.unp.score,
             "pres.used": this.presence.value,
             usp: this.presence.value,
-            wither: this.wither,
           }),
         );
         return rollData;

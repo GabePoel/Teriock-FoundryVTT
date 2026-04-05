@@ -4,9 +4,11 @@ import { Collection } from "@common/utils/_module.mjs";
 declare global {
   namespace Teriock.Models {
     export type ActorStatsPartData = {
-      /** <schema> Hit points */
+      /** <schema> Hit points (damage) */
       hp: CoreStat;
-      /** <schema> Mana points */
+      /** <schema> Lifespan points (wither) */
+      lp: Teriock.Foundry.BarField;
+      /** <schema> Mana points (drain) */
       mp: CoreStat;
       statDice: {
         hp: {
@@ -18,8 +20,6 @@ declare global {
           html: string;
         };
       };
-      /** <schema> Wither */
-      wither: Teriock.Foundry.BarField;
     };
 
     export type CoreStat = Teriock.Foundry.BarField & {

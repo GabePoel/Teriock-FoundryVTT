@@ -20,18 +20,31 @@ export const costOptions = {
     keys: {
       gp: {
         abbreviation: "TERIOCK.STATS.gp.abbreviation",
+        harm: "pay",
         icon: icons.stat.gp,
         label: "TERIOCK.COSTS.Primary.gp",
+        multiplier: -1,
       },
       hp: {
         abbreviation: "TERIOCK.STATS.hp.abbreviation",
+        harm: "damage",
         icon: icons.stat.hp,
         label: "TERIOCK.COSTS.Primary.hp",
+        multiplier: -1,
       },
       mp: {
         abbreviation: "TERIOCK.STATS.mp.abbreviation",
+        harm: "drain",
         icon: icons.stat.mp,
         label: "TERIOCK.COSTS.Primary.mp",
+        multiplier: -1,
+      },
+      lp: {
+        abbreviation: "TERIOCK.STATS.lp.abbreviation",
+        harm: "wither",
+        icon: icons.stat.lp,
+        label: "TERIOCK.COSTS.Primary.lp",
+        multiplier: +1,
       },
     },
     types: {
@@ -41,21 +54,21 @@ export const costOptions = {
   },
   tweaks: {
     adept: {
-      amount: -1,
+      multiplier: -1,
       icon: icons.form.special,
       label: "TERIOCK.COSTS.Tweaks.adept",
       primary: "mp",
     },
     gifted: {
-      amount: 1,
+      multiplier: 1,
       icon: icons.form.gifted,
       label: "TERIOCK.COSTS.Tweaks.gifted",
       primary: "mp",
     },
     inept: {
-      amount: 1,
       icon: icons.form.flaw,
       label: "TERIOCK.COSTS.Tweaks.inept",
+      multiplier: 1,
       primary: "mp",
     },
   },

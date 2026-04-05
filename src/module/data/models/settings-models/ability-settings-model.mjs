@@ -24,6 +24,15 @@ export default class AbilitySettingsModel extends ChildSettingsModel {
           "TERIOCK.MODELS.AbilitySettings.promptCostHp.label",
         ),
       }),
+      promptCostLp: new fields.BooleanField({
+        hint: game.i18n.localize(
+          "TERIOCK.MODELS.AbilitySettings.promptCostLp.hint",
+        ),
+        initial: true,
+        label: game.i18n.localize(
+          "TERIOCK.MODELS.AbilitySettings.promptCostLp.label",
+        ),
+      }),
       promptCostMp: new fields.BooleanField({
         hint: game.i18n.localize(
           "TERIOCK.MODELS.AbilitySettings.promptCostMp.hint",

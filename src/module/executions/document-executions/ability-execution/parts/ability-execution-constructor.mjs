@@ -186,9 +186,10 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
    */
   #initializeCosts(options) {
     Object.assign(this.options, {
-      noMp: options.noMp ?? !this.source.getSetting("promptCostMp"),
       noGp: options.noGp ?? !this.source.getSetting("promptCostGp"),
       noHp: options.noHp ?? !this.source.getSetting("promptCostHp"),
+      noLp: options.noLp ?? !this.source.getSetting("promptCostLp"),
+      noMp: options.noMp ?? !this.source.getSetting("promptCostMp"),
     });
     this.costs = { hp: 0, mp: 0, gp: 0 };
   }

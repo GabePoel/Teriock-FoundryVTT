@@ -36,6 +36,9 @@
   </header>
   <div class="message-content">
     <div class="teriock-chat-message-content">
+      {{#if (and isContentVisible (exists system.content))}}
+        {{{system.content}}}
+      {{/if}}
       {{#if (exists message.system.panels)}}
         <div class="teriock-panels">
           {{#each message.system.panels as |panel|}}

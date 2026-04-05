@@ -33,12 +33,11 @@ export default class BaseMessageSystem extends ActivatableSystemMixin(
    */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      avatar: new fields.StringField(),
-      columns: new fields.NumberField({ initial: 2 }),
+      avatar: new fields.FilePathField({ categories: ["IMAGE"] }),
+      content: new fields.HTMLField(),
       panels: panelsField(),
-      tags: new fields.ArrayField(new fields.StringField()),
-      extraContent: new fields.HTMLField(),
       source: new fields.DocumentUUIDField(),
+      tags: new fields.ArrayField(new fields.StringField()),
     });
   }
 
@@ -82,17 +81,6 @@ export default class BaseMessageSystem extends ActivatableSystemMixin(
     this._connectActivationListeners(element);
     this.collapsePanels(element);
 
-    // Add an extra content div at the start of message-content if it exists
-    if (this.extraContent) {
-      const messageContent = element.querySelector(".message-content");
-      if (messageContent) {
-        const extraContentDiv = document.createElement("div");
-        extraContentDiv.classList.add("extra-content");
-        extraContentDiv.innerHTML = this.extraContent;
-        messageContent.insertAdjacentElement("afterbegin", extraContentDiv);
-      }
-    }
-
     // Remove custom content if it shouldn't be visible
     if (!this.document.isContentVisible) {
       element
@@ -116,6 +104,7 @@ export default class BaseMessageSystem extends ActivatableSystemMixin(
       );
     }
 
+    // Add target selection listeners
     element.querySelectorAll(".teriock-target-container").forEach(
       /** @param {HTMLElement} container */ (container) => {
         let clickTimeout = null;
@@ -158,15 +147,15 @@ export default class BaseMessageSystem extends ActivatableSystemMixin(
           const actor = /** @type {TeriockActor} */ await fromUuid(
             container.dataset.actorUuid,
           );
-          if (actor?.isOwner) {
-            await actor.sheet.render(true);
-          }
+          if (actor?.isOwner) await actor.sheet.render(true);
         });
       },
     );
 
+    // Bind common listeners
     bindCommonActions(element);
 
+    // Add roll boost and deboost context menus
     for (const roll of this.document.rolls) {
       const id = roll.id;
       new TeriockContextMenu(

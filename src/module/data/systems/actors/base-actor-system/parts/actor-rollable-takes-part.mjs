@@ -213,7 +213,7 @@ export default (Base) => {
       async takeWither(amount) {
         await this.parent.hookCall("takeWither", { scope: { amount } });
         await this.parent.update({
-          "system.wither.value": barClamp(this.wither, amount),
+          "system.lp.value": barClamp(this.lp, amount),
         });
       }
     }

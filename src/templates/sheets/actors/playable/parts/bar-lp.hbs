@@ -1,0 +1,48 @@
+<div class="character-lifespan-bar-container character-bar-container">
+  <div class="character-lifespan-bar character-bar toutline">
+    <div
+      class="character-bar-left"
+      style="width: {{barLeft system.lp.value system.lp.max 0}}%;"
+    ></div>
+    <div
+      class="character-bar-temp"
+      style="width: {{barTemp
+        system.lp.value
+        system.lp.max
+        0
+      }}%; {{barTempHide
+        system.lp.value
+      }}"
+    ></div>
+    <div
+      class="character-bar-lost"
+      style="width: {{barLost system.lp.value system.lp.max 0}}%;"
+    ></div>
+  </div>
+  <div class="character-bar-overlay">
+    <div
+      class="character-bar-overlay-row character-lifespan-bar-overlay-row"
+    >
+      {{numberInput
+        system.lp.value
+        name="system.lp.value"
+        max=system.lp.max
+        min=system.lp.min
+        class="thover-soft character-bar-overlay-left character-bar-overlay-label"
+        dataset=(object tooltip=(localize "TERIOCK.SHEETS.Actor.SIDEBAR.Bars.lp.current"))
+      }}
+      <div class="character-bar-overlay-max character-bar-overlay-label"
+           data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Bars.lp.max"}}">
+        <span>/ {{system.lp.max}}</span>
+      </div>
+    </div>
+    <div
+      class="take-harm-button thover take-wither-button"
+      data-action="takeRollable"
+      data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Bars.lp.take"}}"
+      data-type="wither"
+    >
+      {{makeIcon TERIOCK.display.icons.effect.wither "light"}}
+    </div>
+  </div>
+</div>

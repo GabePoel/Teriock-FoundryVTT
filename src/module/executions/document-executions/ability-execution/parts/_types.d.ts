@@ -12,6 +12,7 @@ declare global {
         noGp?: boolean;
         noHeighten?: boolean;
         noHp?: boolean;
+        noLp?: boolean;
         noMp?: boolean;
         noTemplate?: boolean;
         piercing?: Teriock.System.PiercingLevel;

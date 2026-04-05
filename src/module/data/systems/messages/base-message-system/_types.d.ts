@@ -9,10 +9,8 @@ declare global {
       activations: Record<ID, object>;
       /** <schema> Fallback avatar image to use. */
       avatar: string;
-      /** <schema> Custom number of columns */
-      columns: number;
-      /** <schema> Content to be displayed in addition to {@link BaseRoll} results */
-      extraContent: string;
+      /** <schema> Content to be displayed in addition to and above {@link BaseRoll} results */
+      content: string;
       /** <schema> Panels to render */
       panels: Teriock.MessageData.MessagePanel[];
       /** <schema> Document that the message is sourced from */

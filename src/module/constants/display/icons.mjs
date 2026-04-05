@@ -4,7 +4,7 @@ export const icons = {
     break: "ms-destruction",
     cost: "ms-toll",
     delivery: "ms-send",
-    duration: "ms-hourglass",
+    duration: "ms-timelapse",
     effectType: "ms-bolt",
     execution: "ms-start",
     expansion: "ms-open-run",
@@ -260,6 +260,7 @@ export const icons = {
   stat: {
     gp: "ms-poker-chip",
     hp: "ms-favorite",
+    lp: "ms-hourglass",
     mp: "ms-water-drop",
   },
   target: {

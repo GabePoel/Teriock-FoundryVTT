@@ -64,7 +64,7 @@ export function automationTransformationFields() {
       new fields.StringField({
         choices: choiceMap(
           transformationOptions.reset,
-          (k) => TERIOCK.options.cost.primary.keys[k].abbreviation,
+          (k) => TERIOCK.options.cost.primary.keys[k].label,
         ),
       }),
       {

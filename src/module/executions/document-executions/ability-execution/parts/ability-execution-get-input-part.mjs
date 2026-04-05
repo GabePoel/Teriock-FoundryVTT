@@ -124,7 +124,7 @@ export default function AbilityExecutionGetInputPart(Base) {
       #modifyCosts() {
         for (const [k, v] of Object.entries(TERIOCK.options.cost.tweaks)) {
           this.costs[v.primary] +=
-            v.amount * this.source.system.costs.tweaks[k];
+            v.multiplier * this.source.system.costs.tweaks[k];
         }
       }
 

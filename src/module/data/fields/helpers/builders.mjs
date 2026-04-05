@@ -16,6 +16,7 @@ const {
   SchemaField,
   SetField,
   StringField,
+  FilePathField,
 } = foundry.data.fields;
 
 /**
@@ -182,7 +183,9 @@ export function associationsField() {
             required: false,
           }),
           id: new DocumentIdField(),
-          img: new StringField(),
+          img: new FilePathField({
+            categories: ["IMAGE"],
+          }),
           makeTooltip: new BooleanField({
             initial: false,
             required: false,
