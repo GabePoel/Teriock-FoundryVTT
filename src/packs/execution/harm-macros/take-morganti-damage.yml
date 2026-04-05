@@ -6,10 +6,11 @@ _stats:
   systemId: teriock
   systemVersion: 0.10.5
 author: teriockBuilder00
-command: |-
-  const amount = scope.useData.amount;
-  const actors = scope.actors;
-  for (const a of actors) {
+command: >-
+  const amount = scope.message.system.activations.find((a) => a.type === "take"
+  && a.take === "damage")?.amount || 0;
+
+  for (const a of scope.actors || []) {
     if (a) {
       await a.system.takeDamage(amount, { morganti: true });
     }

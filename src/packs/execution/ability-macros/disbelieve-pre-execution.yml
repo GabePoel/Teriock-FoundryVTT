@@ -8,17 +8,21 @@ _stats:
 author: teriockBuilder00
 command: |-
   const illusionLevels = TERIOCK.options.illusion.level;
-  const chosenIllusionLevel = await tm.dialogs.selectDialog(illusionLevels, {
-    hint: game.i18n.localize("TERIOCK.DIALOGS.Select.IllusionLevel.hint"),
-    hintHtml: TERIOCK.content.keywords.illusionary,
-    hintTitle: game.i18n.localize(
-      "TERIOCK.DIALOGS.Select.IllusionLevel.hintTitle",
-    ),
-    initial: "minor",
-    label: game.i18n.localize("TERIOCK.DIALOGS.Select.IllusionLevel.label"),
-    other: true,
-    title: game.i18n.localize("TERIOCK.DIALOGS.Select.IllusionLevel.title"),
-  });
+  const chosenIllusionLevel =
+    /** @type {Teriock.Keys.IllusionLevel | null} */ await tm.dialogs.selectDialog(
+      illusionLevels,
+      {
+        hint: game.i18n.localize("TERIOCK.DIALOGS.Select.IllusionLevel.hint"),
+        hintHtml: TERIOCK.content.keywords.illusionary,
+        hintTitle: game.i18n.localize(
+          "TERIOCK.DIALOGS.Select.IllusionLevel.hintTitle",
+        ),
+        initial: "minor",
+        label: game.i18n.localize("TERIOCK.DIALOGS.Select.IllusionLevel.label"),
+        other: true,
+        title: game.i18n.localize("TERIOCK.DIALOGS.Select.IllusionLevel.title"),
+      },
+    );
   let dc = "none";
   if (chosenIllusionLevel === "minor") {
     dc = 6;
@@ -29,12 +33,12 @@ command: |-
   if (chosenIllusionLevel === "greater") {
     dc = 18;
   }
-  const buttons = scope.execution.buttons.filter(
-    (b) => b.dataset?.action === "feat" && b.dataset?.attribute === "int",
+  const activations = scope.execution.activations.filter(
+    (a) => a.type === "feat" && a.options.attribute === "int",
   );
   if (typeof dc === "number") {
-    for (const b of buttons) {
-      b.dataset.threshold = `${dc - 2 * scope.execution.heightened}`;
+    for (const a of activations) {
+      a._source.options.threshold = `${dc - 2 * scope.execution.heightened}`;
     }
   }
   for (let i = 0; i < scope.execution.rolls.length; i++) {

@@ -6,15 +6,16 @@ _stats:
   systemId: teriock
   systemVersion: 0.9.17
 author: teriockBuilder00
-command: |-
-  const buttons = scope.execution.buttons;
-  scope.execution.buttons = buttons.filter(
-    (button) => button.dataset.action === "apply-effect",
-  );
-  const button = scope.execution.buttons[0];
-  const effectObject = JSON.parse(button.dataset.normal);
+command: >-
+  const act = scope.execution.activations.find((a) => a.type ===
+  "addDocuments");
+
+  const effectObject = act._source.primary.root.data;
+
   const equipmentClass = await tm.dialogs.selectWeaponClassDialog();
+
   const changesId = foundry.utils.randomID();
+
   effectObject.system.automations[changesId] = {
     type: "changes",
     _id: changesId,
@@ -29,9 +30,10 @@ command: |-
       },
     ],
   };
-  const effectString = JSON.stringify(effectObject);
-  scope.execution.buttons[0].dataset.normal = effectString;
-  scope.execution.buttons[0].dataset.crit = effectString;
+
+  act._source.primary.root.data = effectObject;
+
+  act._source.secondary.root.data = effectObject;
 folder: SsB1D27Gn6q9lTTV
 img: icons/svg/dice-target.svg
 name: Might Strike - Pre-execution
