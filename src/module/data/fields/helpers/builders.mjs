@@ -1,13 +1,10 @@
 import { competenceOptions } from "../../../constants/options/competence-options.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
-import {
-  objectMap,
-  sortObject
-} from "../../../helpers/utils.mjs";
+import { objectMap, sortObject } from "../../../helpers/utils.mjs";
 import {
   EnhancedNumberField,
   EnhancedStringField,
-  FormulaField
+  FormulaField,
 } from "../_module.mjs";
 
 const {
