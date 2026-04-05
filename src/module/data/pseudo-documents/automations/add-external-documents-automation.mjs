@@ -3,6 +3,7 @@ import { CritAutomation } from "./abstract/_module.mjs";
 import {
   CompetenceAutomationMixin,
   ExternalDocumentsAutomationMixin,
+  OverrideDataAutomationMixin,
 } from "./mixins/_module.mjs";
 
 const { fields } = foundry.data;
@@ -12,11 +13,13 @@ const { fields } = foundry.data;
  * @extends {CritAutomation}
  * @mixes ExternalDocumentsAutomation
  * @mixes CompetenceAutomation
+ * @mixes OverrideDataAutomation
  */
 export default class AddExternalDocumentsAutomation extends mix(
   CritAutomation,
   ExternalDocumentsAutomationMixin,
   CompetenceAutomationMixin,
+  OverrideDataAutomationMixin,
 ) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
@@ -43,7 +46,12 @@ export default class AddExternalDocumentsAutomation extends mix(
 
   /** @inheritDoc */
   get _formPaths() {
-    return [...super._formPaths, ...super._selectionPaths, "attachDocuments"];
+    return [
+      ...super._formPaths,
+      ...super._selectionPaths,
+      "attachDocuments",
+      ...super._overrideDataPaths,
+    ];
   }
 
   /**
@@ -53,14 +61,15 @@ export default class AddExternalDocumentsAutomation extends mix(
   async choose() {
     const uuids = await super.choose();
     return uuids.map((uuid) => {
-      return {
-        uuid,
-        data: foundry.utils.expandObject({
-          "system.competence.raw": this.overrideCompetence
-            ? this.competence.raw
-            : this.document?.system?.competence?.value,
-        }),
-      };
+      const data = foundry.utils.expandObject({
+        "system.competence.raw": this.overrideCompetence
+          ? this.competence.raw
+          : this.document?.system?.competence?.value,
+      });
+      if (this.overrideData && this.data) {
+        foundry.utils.mergeObject(data, this.data, { inplace: true });
+      }
+      return { uuid, data };
     });
   }
 }

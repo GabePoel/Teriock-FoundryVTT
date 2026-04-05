@@ -8,7 +8,7 @@ import {
   ChangeableDocumentMixin,
   EmbedCardDocumentMixin,
   PanelDocumentMixin,
-  SettingsDocumentMixin
+  SettingsDocumentMixin,
 } from "./_module.mjs";
 
 /**
@@ -188,7 +188,7 @@ export default function CommonDocumentMixin(Base) {
 
       /**
        * Resolved array containing all children.
-       * @returns {Promise<CommonDocument[]>}
+       * @returns {Promise<AnyCommonDocument[]>}
        */
       async getChildArray() {
         return resolveDocuments(this.childArray);

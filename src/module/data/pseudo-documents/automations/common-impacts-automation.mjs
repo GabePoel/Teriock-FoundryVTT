@@ -1,10 +1,8 @@
 import TeriockDialog from "../../../applications/api/dialog.mjs";
-import {
-  buttonHandlers,
-  commands,
-} from "../../../helpers/interaction/_module.mjs";
+import { commands } from "../../../helpers/interaction/_module.mjs";
 import { formatJoin } from "../../../helpers/string.mjs";
 import { makeIconClass } from "../../../helpers/utils.mjs";
+import * as activations from "../activations/command-activations.mjs";
 import BaseAutomation from "./abstract/base-automation.mjs";
 import { TriggerAutomationMixin } from "./mixins/_module.mjs";
 
@@ -49,8 +47,11 @@ export default class CommonImpactsAutomation extends TriggerAutomationMixin(
   }
 
   /** @inheritDoc */
-  async _getButtons() {
-    return Array.from(this.common).map((c) => buttonHandlers[c].buildButton());
+  async _getActivations() {
+    return Array.from(this.common).map((c) => {
+      const Act = Object.values(activations).find((A) => A.TYPE === c);
+      return new Act();
+    });
   }
 
   /** @inheritDoc */

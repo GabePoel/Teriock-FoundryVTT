@@ -1,4 +1,4 @@
-import { TradecraftCheckHandler } from "../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
+import { TradecraftActivation } from "../activations/command-activations.mjs";
 import { ThresholdAutomation } from "./abstract/_module.mjs";
 
 const { fields } = foundry.data;
@@ -30,11 +30,15 @@ export default class CheckAutomation extends ThresholdAutomation {
   }
 
   /** @inheritDoc */
-  async getButtons() {
+  async getActivations() {
+    if (!this.tradecraft) return [];
     return [
-      TradecraftCheckHandler.buildButton(this.tradecraft, {
-        bonus: this.bonus,
-        threshold: this.threshold,
+      new TradecraftActivation({
+        options: {
+          tradecraft: this.tradecraft,
+          bonus: this.bonus,
+          threshold: this.threshold,
+        },
       }),
     ];
   }

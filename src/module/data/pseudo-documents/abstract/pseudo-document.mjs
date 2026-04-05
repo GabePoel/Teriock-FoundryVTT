@@ -1,3 +1,4 @@
+import { icons } from "../../../constants/display/icons.mjs";
 import { EmbeddedDataModel } from "../../models/_module.mjs";
 
 const { fields } = foundry.data;
@@ -7,6 +8,14 @@ const { fields } = foundry.data;
  * @property {ID<PseudoDocument>} _id
  */
 export default class PseudoDocument extends EmbeddedDataModel {
+  /**
+   * Icon for this pseudo-document class.
+   * @returns {string}
+   */
+  static get ICON() {
+    return icons.ui.document;
+  }
+
   /**
    * Label for this pseudo-document class.
    * @returns {string}
@@ -61,6 +70,25 @@ export default class PseudoDocument extends EmbeddedDataModel {
   }
 
   /**
+   * Format an array of pseudo-documents into a collection data object.
+   * @template T
+   * @param {T[]} docs
+   * @param {object} [options]
+   * @param {boolean} [options.keepId]
+   * @returns {Record<ID<T>, object>}
+   */
+  static toCollectionObject(docs, options = {}) {
+    return Object.fromEntries(
+      docs.map((d) => {
+        const id = options.keepId && d._id ? d._id : foundry.utils.randomID();
+        const data = d.toObject();
+        data._id = id;
+        return [id, data];
+      }),
+    );
+  }
+
+  /**
    * The document name of this pseudo-document.
    * @returns {null}
    */
@@ -77,6 +105,14 @@ export default class PseudoDocument extends EmbeddedDataModel {
     if (this.parent instanceof PseudoDocument)
       path = [this.parent.fieldPath, this.parent.id, path].join(".");
     return path;
+  }
+
+  /**
+   * Icon for this pseudo-document.
+   * @returns {string}
+   */
+  get icon() {
+    return this.constructor.ICON;
   }
 
   /**

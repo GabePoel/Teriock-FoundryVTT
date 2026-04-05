@@ -1,10 +1,3 @@
-import {
-  addFormula,
-  boostFormula,
-  formulaExists,
-} from "../../../helpers/formula.mjs";
-import { RollRollableTakeHandler } from "../../../helpers/interaction/button-handlers/rollable-takes-handlers.mjs";
-import { objectMap } from "../../../helpers/utils.mjs";
 import BaseExecution from "../../base-execution/base-execution.mjs";
 
 export default class BaseDocumentExecution extends BaseExecution {
@@ -48,58 +41,19 @@ export default class BaseDocumentExecution extends BaseExecution {
   }
 
   /** @inheritDoc */
-  async _buildButtons() {
-    const buttonLists = await Promise.all(
+  async _buildActivations() {
+    const activationLists = await Promise.all(
       this.activeAutomations.map((a) =>
-        a.getButtons({ rollData: this.rollData }),
+        a.getActivations({ rollData: this.rollData }),
       ),
     );
-    for (const buttons of buttonLists) {
-      this.buttons.push(...buttons);
+    for (const activations of activationLists) {
+      this.activations.push(...activations);
     }
-
-    // Get all buttons that need to be merged
-    const buttonsToMerge = this.buttons.filter(
-      (b) =>
-        b.dataset.action === RollRollableTakeHandler.ACTION && b.dataset.merge,
-    );
-
-    // Filter buttons to be merged out of the main button array
-    this.buttons = this.buttons.filter(
-      (b) =>
-        b.dataset.action !== RollRollableTakeHandler.ACTION || !b.dataset.merge,
-    );
-
-    // Create aggregate formulas from the merged buttons
-    const buttonsByRollType =
-      /** @type {Record<Teriock.Keys.RollImpact, Teriock.UI.HTMLButtonConfig[]>} */ {};
-    for (const button of buttonsToMerge) {
-      const rollType = button.dataset.type;
-      if (!Object.keys(buttonsByRollType).includes(rollType)) {
-        buttonsByRollType[rollType] = [button];
-      } else {
-        buttonsByRollType[rollType].push(button);
-      }
-    }
-    const formulasByRollType = objectMap(buttonsByRollType, (buttons) =>
-      buttons.reduce((a, b) => addFormula(a, b.dataset.formula), ""),
-    );
-
-    // Convert aggregate formulas back into buttons
-    Object.entries(formulasByRollType).forEach(([rollType, formula]) => {
-      const boostAmount = this.source.system.boosts[rollType];
-      if (formulaExists(boostAmount)) {
-        formula = boostFormula(formula, boostAmount);
-      }
-      formulasByRollType[rollType] = formula;
-    });
-
-    // Apply boosts from the source document
-    this.buttons.push(
-      ...Object.entries(formulasByRollType).map(([rollType, formula]) =>
-        RollRollableTakeHandler.buildButton(rollType, formula),
-      ),
-    );
+    this.activations =
+      teriock.data.pseudoDocuments.activations.RollActivation.mergeRolls(
+        this.activations,
+      );
   }
 
   /** @inheritDoc */

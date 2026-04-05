@@ -1,7 +1,7 @@
 import { commands } from "../../../helpers/interaction/_module.mjs";
-import { RollRollableTakeHandler } from "../../../helpers/interaction/button-handlers/rollable-takes-handlers.mjs";
 import { mix } from "../../../helpers/utils.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
+import { RollActivation } from "../activations/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 import * as mixins from "./mixins/_module.mjs";
 
@@ -11,7 +11,7 @@ const { fields } = foundry.data;
 /**
  * @extends {BaseAutomation}
  * @property {Teriock.Keys.RollImpact} roll
- * @property {string} formula
+ * @property {Teriock.System.FormulaString} formula
  * @property {boolean} merge
  * @mixes TriggerAutomation
  * @mixes LabelAutomation
@@ -40,14 +40,14 @@ export default class RollAutomation extends mix(
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      roll: new fields.StringField({
-        choices: TERIOCK.options.consequence.rolls,
-      }),
       formula: new FormulaField({
         nullable: true,
         deterministic: false,
       }),
       merge: new fields.BooleanField({ initial: true }),
+      roll: new fields.StringField({
+        choices: TERIOCK.options.consequence.rolls,
+      }),
     });
   }
 
@@ -61,11 +61,13 @@ export default class RollAutomation extends mix(
   }
 
   /** @inheritDoc */
-  async _getButtons() {
+  async _getActivations() {
     return [
-      RollRollableTakeHandler.buildButton(this.roll, this.formula, {
-        label: this.title,
+      new RollActivation({
+        display: { label: this.title },
+        formula: this.formula,
         merge: this.merge,
+        roll: this.roll,
       }),
     ];
   }

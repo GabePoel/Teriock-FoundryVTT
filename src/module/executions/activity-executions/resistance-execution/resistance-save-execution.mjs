@@ -1,4 +1,3 @@
-import { UseLocalHandler } from "../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
 import { getImage } from "../../../helpers/path.mjs";
 import { ThresholdExecutionMixin } from "../../mixins/_module.mjs";
 import ImmunityExecution from "../immunity-execution/immunity-execution.mjs";
@@ -44,9 +43,11 @@ export default class ResistanceExecution extends ThresholdExecutionMixin(
   }
 
   /** @inheritDoc */
-  async _buildButtons() {
-    this.buttons.push(
-      UseLocalHandler.buildButton("resist", { type: "ability" }),
+  async _buildActivations() {
+    this.activations.push(
+      new teriock.data.pseudoDocuments.activations.UseLocalActivation({
+        options: { lookup: "resist", type: "ability" },
+      }),
     );
   }
 

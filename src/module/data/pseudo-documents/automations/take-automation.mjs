@@ -1,4 +1,4 @@
-import { TakeRollableTakeHandler } from "../../../helpers/interaction/button-handlers/rollable-takes-handlers.mjs";
+import { TakeActivation } from "../activations/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 import { LabelAutomationMixin } from "./mixins/_module.mjs";
 
@@ -7,6 +7,8 @@ const { fields } = foundry.data;
 /**
  * @property {Teriock.Keys.RollImpact} take
  * @property {number | null} amount
+ * @mixes LabelAutomation
+ * @extends {BaseAutomation}
  */
 export default class TakeAutomation extends LabelAutomationMixin(
   BaseAutomation,
@@ -43,10 +45,12 @@ export default class TakeAutomation extends LabelAutomationMixin(
   }
 
   /** @inheritDoc */
-  async getButtons() {
+  async getActivations() {
     return [
-      TakeRollableTakeHandler.buildButton(this.take, this.amount, {
-        label: this.title,
+      new TakeActivation({
+        take: this.take,
+        amount: this.amount,
+        display: { label: this.title },
       }),
     ];
   }

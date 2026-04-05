@@ -14,7 +14,7 @@ export default function AutomatableSystemMixin(Base) {
      */
     class AutomatableSystem extends Base {
       /**
-       * Array of the types of automations that this document can have.
+       * Array of the types of automations that this system can have.
        * @returns {(typeof BaseAutomation)[]}
        */
       static get _automationTypes() {
@@ -22,7 +22,7 @@ export default function AutomatableSystemMixin(Base) {
       }
 
       /**
-       * The types of automations that this document can have.
+       * The types of automations that this system can have.
        * @returns {Record<string, BaseAutomation>}
        */
       static get automationTypes() {

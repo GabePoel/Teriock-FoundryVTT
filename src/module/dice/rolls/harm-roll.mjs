@@ -39,42 +39,21 @@ export default class HarmRoll extends TakeRoll {
   }
 
   /** @inheritDoc */
-  async getButtons() {
+  async getActivations() {
+    let activations = await super.getActivations();
     const harmArray = await this.getHarmArray();
-    let buttons = await super.getButtons();
-    buttons = buttons.filter(
-      (b) =>
-        !(
-          b.dataset.action === "take-rollable-take" &&
-          b.dataset.type === "other"
-        ),
-    );
     for (const h of harmArray) {
       const automations = h.system.automations.contents;
-      const buttonLists = await Promise.all(
-        automations.map((a) => a.getButtons()),
+      const activationLists = await Promise.all(
+        automations.map((a) => a.getActivations()),
       );
-      buttonLists.forEach((b) => {
-        buttons.push(...b);
-      });
+      activationLists.forEach((a) => activations.push(...a));
     }
-    buttons
-      .filter(
-        (b) => b.dataset.action === "take-rollable-take" && !b.dataset.amount,
-      )
-      .forEach((b) => (b.dataset.amount = this.total.toString()));
-    buttons
-      .filter((b) => b.dataset.action === "execute-macro")
-      .forEach((b) => {
-        const data = JSON.parse(b.dataset.use);
-        Object.assign(data, {
-          formula: this.formula,
-          amount: this.total,
-          take: this.take,
-        });
-        b.dataset.use = JSON.stringify(data);
-      });
-    return buttons;
+    activations =
+      teriock.data.pseudoDocuments.activations.RollActivation.mergeRolls(
+        activations,
+      );
+    return activations;
   }
 
   /**

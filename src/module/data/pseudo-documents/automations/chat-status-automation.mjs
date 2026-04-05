@@ -1,9 +1,9 @@
-import {
-  ApplyStatusHandler,
-  RemoveStatusHandler,
-  ToggleStatusHandler,
-} from "../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
+import {
+  ApplyStatusActivation,
+  RemoveStatusActivation,
+  ToggleStatusActivation,
+} from "../activations/command-activations.mjs";
 import { CritAutomation } from "./abstract/_module.mjs";
 
 const { fields } = foundry.data;
@@ -69,13 +69,13 @@ export default class ChatStatusAutomation extends CritAutomation {
   }
 
   /** @inheritDoc */
-  async getButtons() {
+  async getActivations() {
     if (this.relation === "apply") {
-      return [ApplyStatusHandler.buildButton(this.status)];
+      return [new ApplyStatusActivation({ options: { status: this.status } })];
     } else if (this.relation === "remove") {
-      return [RemoveStatusHandler.buildButton(this.status)];
+      return [new RemoveStatusActivation({ options: { status: this.status } })];
     } else if (this.relation === "toggle") {
-      return [ToggleStatusHandler.buildButton(this.status)];
+      return [new ToggleStatusActivation({ options: { status: this.status } })];
     } else {
       return [];
     }

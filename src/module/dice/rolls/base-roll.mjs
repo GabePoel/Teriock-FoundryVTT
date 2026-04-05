@@ -327,10 +327,10 @@ export default class BaseRoll extends Roll {
   }
 
   /**
-   * Buttons that are created by this roll.
-   * @returns {Promise<Teriock.UI.HTMLButtonConfig[]>}
+   * Activations that are created by this roll.
+   * @returns {Promise<BaseActivation[]>}
    */
-  async getButtons() {
+  async getActivations() {
     return [];
   }
 
@@ -344,10 +344,18 @@ export default class BaseRoll extends Roll {
 
   /** @inheritDoc */
   async toMessage(messageData = {}, { rollMode, create = true } = {}) {
-    const buttons = await this.getButtons();
+    const activations = await this.getActivations();
     const panels = await this.getPanels();
     messageData = foundry.utils.mergeObject(
-      { system: { panels: panels, buttons: buttons } },
+      {
+        system: {
+          panels: panels,
+          activations:
+            teriock.data.pseudoDocuments.abstract.PseudoDocument.toCollectionObject(
+              activations,
+            ),
+        },
+      },
       messageData,
     );
     return super.toMessage(messageData, { rollMode, create });

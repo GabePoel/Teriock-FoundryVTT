@@ -1,6 +1,3 @@
-import { makeIconClass } from "../utils.mjs";
-import BaseButtonHandler from "./button-handlers/base-button-handler.mjs";
-
 /**
  * Parse arguments from a string for an interaction.
  * @param {string} input
@@ -58,54 +55,4 @@ export function getInteractionEntryValue(interaction, property, options) {
   if (!interaction[property]) return "";
   if (typeof interaction[property] === "string") return interaction[property];
   else return interaction[property](options);
-}
-
-/**
- * Build a button handler from a command entry.
- * @param {Teriock.Interaction.CommandEntry} command
- * @returns {typeof BaseButtonHandler}
- */
-export function CommandButtonHandlerBuilder(command) {
-  return (
-    /**
-     * @mixin
-     */
-    class CommandButtonHandler extends BaseButtonHandler {
-      static ACTION = command.id;
-
-      /** @inheritDoc */
-      static buildButton(options = {}) {
-        const button = super.buildButton();
-        Object.assign(button.dataset, options);
-        button.icon = makeIconClass(
-          getInteractionEntryValue(command, "icon", options),
-          "button",
-        );
-        button.label = game.i18n.localize(
-          getInteractionEntryValue(command, "label", options),
-        );
-        return button;
-      }
-
-      /** @inheritDoc */
-      async primaryAction() {
-        for (const actor of this.actors) {
-          await command.primary(
-            actor,
-            Object.assign({ event: this.event }, this.options),
-          );
-        }
-      }
-
-      /** @inheritDoc */
-      async secondaryAction() {
-        for (const actor of this.actors) {
-          await command.secondary(
-            actor,
-            Object.assign({ event: this.event }, this.options),
-          );
-        }
-      }
-    }
-  );
 }

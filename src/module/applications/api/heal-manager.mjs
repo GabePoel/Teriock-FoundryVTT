@@ -1,5 +1,5 @@
 import { takeOptions } from "../../constants/options/take-options.mjs";
-import { buttonHandlers } from "../../helpers/interaction/_module.mjs";
+import { RollActivation } from "../../data/pseudo-documents/activations/_module.mjs";
 import { makeIconClass } from "../../helpers/utils.mjs";
 import TeriockStatManager from "./stat-manager.mjs";
 
@@ -66,15 +66,13 @@ export default class TeriockHealManager extends TeriockStatManager {
   static async _onRollStatDie(event, target) {
     const statDie = this._getStatDie(target);
     if (this._forHarm) {
-      const takeHandler = new buttonHandlers["roll-rollable-take"](
-        event,
-        target,
-      );
-      takeHandler.dataset = {
-        type: "damage",
+      const rollActivation = new RollActivation({
         formula: statDie.formula.replace("hp", "holy"),
-      };
-      await takeHandler.secondaryAction();
+        roll: "damage",
+      });
+      rollActivation.event = event;
+      await rollActivation.primaryAction();
+      if (this._consumeStatDice) await statDie.toggle(true);
     } else {
       await statDie.use(this._consumeStatDice);
     }

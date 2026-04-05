@@ -1,6 +1,6 @@
-import { UseLocalHandler } from "../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
 import { mix } from "../../../helpers/utils.mjs";
 import { IdentifierField } from "../../fields/_module.mjs";
+import { UseLocalActivation } from "../activations/command-activations.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 import {
   DocumentsAutomationMixin,
@@ -69,15 +69,19 @@ export default class UseLocalDocumentsAutomation extends mix(
   }
 
   /** @inheritDoc */
-  async _getButtons() {
-    return this.#parseIdentifiers().map((p) =>
-      UseLocalHandler.buildButton(p.identifier, {
-        type: p.type,
-        noHeighten: this.noHeighten,
-        competence: this.overrideCompetence
-          ? this.competence.raw
-          : this.document.system.competence.raw,
-      }),
+  async _getActivations() {
+    return this.#parseIdentifiers().map(
+      (p) =>
+        new UseLocalActivation({
+          options: {
+            lookup: p.identifier,
+            type: p.type,
+            noHeighten: this.noHeighten,
+            competence: this.overrideCompetence
+              ? this.competence.raw
+              : this.document.system.competence.raw,
+          },
+        }),
     );
   }
 

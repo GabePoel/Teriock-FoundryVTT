@@ -1,4 +1,4 @@
-import { HealHandler } from "../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
+import { HealActivation } from "../activations/command-activations.mjs";
 import { StatAutomation } from "./abstract/_module.mjs";
 
 const { fields } = foundry.data;
@@ -37,12 +37,14 @@ export default class HealAutomation extends StatAutomation {
   }
 
   /** @inheritDoc */
-  async _getButtons() {
+  async _getActivations() {
     return [
-      HealHandler.buildButton({
-        consumeStatDice: this.consumeStatDice,
-        forHarm: this.forHarm,
-        noStatDice: this.noStatDice,
+      new HealActivation({
+        options: {
+          consumeStatDice: this.consumeStatDice,
+          forHarm: this.forHarm,
+          noStatDice: this.noStatDice,
+        },
       }),
     ];
   }

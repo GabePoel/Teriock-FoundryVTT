@@ -1,10 +1,13 @@
 import { competenceOptions } from "../../../constants/options/competence-options.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
-import { sortObject } from "../../../helpers/utils.mjs";
+import {
+  objectMap,
+  sortObject
+} from "../../../helpers/utils.mjs";
 import {
   EnhancedNumberField,
   EnhancedStringField,
-  FormulaField,
+  FormulaField
 } from "../_module.mjs";
 
 const {
@@ -238,6 +241,91 @@ export function blocksField() {
 }
 
 /**
+ * Field that represents panel bars.
+ * @returns {ArrayField}
+ */
+export function barsField() {
+  return new ArrayField(
+    new SchemaField({
+      icon: new StringField({
+        initial: "",
+        required: false,
+      }),
+      label: new StringField({
+        nullable: true,
+        required: false,
+      }),
+      wrappers: new ArrayField(new StringField(), {
+        initial: [],
+        required: false,
+      }),
+    }),
+    {
+      initial: [],
+      required: false,
+    },
+  );
+}
+
+/**
+ * Field that represents panels.
+ * @returns {ArrayField}
+ */
+export function panelsField() {
+  return new ArrayField(
+    new SchemaField({
+      associations: associationsField(),
+      bars: barsField(),
+      blocks: blocksField(),
+      classes: new StringField({
+        nullable: true,
+        initial: null,
+        required: false,
+      }),
+      color: new StringField({
+        initial: null,
+        nullable: true,
+        required: false,
+      }),
+      font: new StringField({
+        nullable: true,
+        initial: null,
+        required: false,
+      }),
+      icon: new StringField({
+        nullable: true,
+        initial: null,
+        required: false,
+      }),
+      image: new StringField({
+        initial: null,
+        nullable: true,
+        required: false,
+      }),
+      label: new StringField({
+        nullable: true,
+        initial: null,
+        required: false,
+      }),
+      name: new StringField({
+        initial: null,
+        nullable: true,
+        required: false,
+      }),
+      uuid: new DocumentUUIDField({
+        initial: null,
+        nullable: true,
+        required: false,
+      }),
+    }),
+    {
+      initial: [],
+      required: false,
+    },
+  );
+}
+
+/**
  * Field that sets block sizes.
  * @param {object} [options]
  * @param {Teriock.Keys.CardDisplaySize} [options.initial]
@@ -331,5 +419,32 @@ export function conditionRequirementsField() {
     present: new SetField(
       new StringField({ choices: TERIOCK.reference.conditions }),
     ),
+  });
+}
+
+/**
+ * Field for a movement action.
+ * @returns {StringField}
+ */
+export function movementActionField() {
+  return new StringField({
+    choices: localizeChoices(
+      objectMap(
+        Object.fromEntries(
+          Object.entries(CONFIG.Token.movement.actions).filter(([_k, v]) => {
+            if (typeof v.canSelect === "function") {
+              return v.canSelect();
+            } else if (typeof v.canSelect === "boolean") {
+              return v.canSelect;
+            } else {
+              return true;
+            }
+          }),
+        ),
+        (t) => t.label,
+      ),
+    ),
+    initial: "walk",
+    nullable: false,
   });
 }

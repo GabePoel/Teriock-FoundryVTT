@@ -77,11 +77,11 @@ export default class ArmamentExecution extends BaseDocumentExecution {
   }
 
   /** @inheritDoc */
-  async _buildButtons() {
+  async _buildActivations() {
     for (const roll of this.#typedRolls) {
-      this.buttons.push(...(await roll.getButtons()));
+      this.activations.push(...(await roll.getActivations()));
     }
-    await super._buildButtons();
+    await super._buildActivations();
   }
 
   /** @inheritDoc */

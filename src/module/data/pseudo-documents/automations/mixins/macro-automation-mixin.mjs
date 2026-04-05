@@ -1,6 +1,7 @@
-import { ExecuteMacroHandler } from "../../../../helpers/interaction/button-handlers/execute-macro-handlers.mjs";
+import { resolveDocument } from "../../../../helpers/resolve.mjs";
 import { lcFirst } from "../../../../helpers/string.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
+import ExecuteMacroActivation from "../../activations/execute-macro-activation.mjs";
 import LabelAutomationMixin from "./label-automation-mixin.mjs";
 import TriggerAutomationMixin from "./trigger-automation-mixin.mjs";
 
@@ -89,16 +90,13 @@ export default function MacroAutomationMixin(Base) {
       }
 
       /** @inheritDoc */
-      async _getButtons() {
+      async _getActivations() {
+        const macro = await resolveDocument(this.macro);
         return [
-          ExecuteMacroHandler.buildButton(
-            this.macro,
-            {
-              proficient: this.document?.system.competence?.proficient,
-              fluent: this.document?.system.competence?.fluent,
-            },
-            { label: this.title },
-          ),
+          new ExecuteMacroActivation({
+            macro: this.macro,
+            display: { label: this.title || macro?.name || this.label },
+          }),
         ];
       }
 

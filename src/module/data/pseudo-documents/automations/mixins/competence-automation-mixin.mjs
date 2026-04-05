@@ -27,11 +27,19 @@ export default function CompetenceAutomationMixin(Base) {
         });
       }
 
-      /** @inheritDoc */
-      get _formPaths() {
-        const paths = [...super._formPaths, "overrideCompetence"];
+      /**
+       * Competence paths.
+       * @returns {string[]}
+       */
+      get _competencePaths() {
+        const paths = ["overrideCompetence"];
         if (this.overrideCompetence) paths.push("competence.raw");
         return paths;
+      }
+
+      /** @inheritDoc */
+      get _formPaths() {
+        return [...super._formPaths, ...this._competencePaths];
       }
     }
   );

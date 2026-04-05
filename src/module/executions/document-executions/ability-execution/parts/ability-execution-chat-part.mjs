@@ -4,18 +4,12 @@ import {
   ChangesAutomation,
   CombatExpirationAutomation,
   DurationAutomation,
+  ModifyEffectAutomation,
   StatusAutomation,
   TransformationAutomation,
 } from "../../../../data/pseudo-documents/automations/_module.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { manipulateFormula } from "../../../../helpers/formula.mjs";
-import { ApplyEffectHandler } from "../../../../helpers/interaction/button-handlers/apply-effect-handlers.mjs";
-import { RollRollableTakeHandler } from "../../../../helpers/interaction/button-handlers/rollable-takes-handlers.mjs";
-import {
-  FeatHandler,
-  StandardDamageHandler,
-  UseLocalHandler,
-} from "../../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
 import { safeUuid } from "../../../../helpers/resolve.mjs";
 
 /**
@@ -151,6 +145,7 @@ export default function AbilityExecutionChatPart(Base) {
             associations: [],
             automations: this.#generateConsequenceAutomations(crit),
             blocks: this.source.system.panelParts.blocks,
+            competence: { raw: this.competence.value },
             critical: crit,
             deleteOnExpire: true,
             expirations: {
@@ -335,28 +330,43 @@ export default function AbilityExecutionChatPart(Base) {
       }
 
       /** @inheritDoc */
-      async _buildButtons() {
-        // Build feat save button
-        if (this.source.system.interaction === "feat") {
-          this.buttons.push(
-            FeatHandler.buildButton(this.source.system.featSaveAttribute, {
-              threshold: this.rolls[0].total,
+      async _buildActivations() {
+        const acts = teriock.data.pseudoDocuments.activations;
+
+        // Add feat save activation
+        if (this.isFeat) {
+          this.activations.push(
+            new acts.FeatActivation({
+              options: {
+                attribute: this.source.system.featSaveAttribute,
+                threshold: this.rolls[0].total,
+              },
             }),
           );
         }
 
-        // Add block cone button
+        // Add block cone activation
         if (this.source.system.delivery === "cone" && !this.flags.noTemplate) {
-          this.buttons.push(
-            UseLocalHandler.buildButton("block-cone", "ability"),
+          this.activations.push(
+            new acts.UseLocalActivation({
+              options: {
+                lookup: "block-cone",
+                type: "ability",
+              },
+            }),
           );
         }
 
+        const modifyEffectAutomation = this.activeAutomations.find(
+          (a) => a.type === "modifyEffect",
+        );
+
         if (
           this.source.system.duration.unit !== "instant" &&
-          this.source.system.maneuver !== "passive"
+          this.source.system.maneuver !== "passive" &&
+          !modifyEffectAutomation?.prevent
         ) {
-          // Build apply effects button
+          // Add apply effects activation
           const normalData = await this.#generateConsequence(false);
           const critData = await this.#generateConsequence(true);
           await this.#generateConsequenceAssociations();
@@ -364,7 +374,11 @@ export default function AbilityExecutionChatPart(Base) {
           normalData.changes.push(...this.#trackerMap["normal"]);
           critData.system.associations = this.#associationMap["crit"];
           critData.changes.push(...this.#trackerMap["crit"]);
-          const normalChildren = this.source.subs.map((s) => s.uuid);
+          const normalChildren = this.source.subs.map((s) => {
+            return {
+              uuid: s.uuid,
+            };
+          });
           const critChildren = [...normalChildren];
           const normalDocuments = [];
           const critDocuments = [];
@@ -396,33 +410,83 @@ export default function AbilityExecutionChatPart(Base) {
               critData.system.transformation.uuids.push(...toAdd);
             }
           }
-          this.buttons.push(
-            ApplyEffectHandler.buildButton(normalData, {
-              critData,
-              normalChildren,
-              critChildren,
-              normalDocuments,
-              critDocuments,
+          this.#getCritAutomations(ModifyEffectAutomation, false).forEach(
+            (a) => {
+              if (a.overrideCompetence) {
+                foundry.utils.setProperty(
+                  normalData,
+                  "system.competence.raw",
+                  a.competence.value,
+                );
+              }
+              if (a.overrideData && a.data) {
+                foundry.utils.mergeObject(normalData, a.data, {
+                  inplace: true,
+                });
+              }
+            },
+          );
+          this.#getCritAutomations(ModifyEffectAutomation, true).forEach(
+            (a) => {
+              if (a.overrideCompetence) {
+                foundry.utils.setProperty(
+                  critData,
+                  "system.competence.raw",
+                  a.competence.value,
+                );
+              }
+              if (a.overrideData && a.data) {
+                foundry.utils.mergeObject(critData, a.data, {
+                  inplace: true,
+                });
+              }
+            },
+          );
+          this.activations.push(
+            new acts.AddDocumentsActivation({
+              display: {
+                label:
+                  modifyEffectAutomation?.title ||
+                  "TERIOCK.COMMANDS.ApplyEffect.label",
+              },
+              primary: {
+                root: {
+                  data: normalData,
+                },
+                children: normalChildren,
+                other: normalDocuments,
+              },
+              secondary: {
+                root: {
+                  data: critData,
+                },
+                children: critChildren,
+                other: critDocuments,
+              },
             }),
           );
         }
 
-        // Add all pre-defined buttons
-        await super._buildButtons();
+        // Add all pre-defined activations
+        await super._buildActivations();
 
-        // Add armament to the standard damage button
-        const standardDamageButton = this.buttons.find(
-          (b) => b.dataset?.action === StandardDamageHandler.ACTION,
+        // Add armament to the standard damage activation
+        const sda = this.activations.find(
+          (a) => a.type === acts.StandardDamageActivation.TYPE,
         );
-        if (standardDamageButton && this.armament) {
-          standardDamageButton.dataset.attacker = this.armament.uuid;
+        if (sda && this.armament) {
+          foundry.utils.setProperty(
+            sda,
+            "options.attacker",
+            this.armament.uuid,
+          );
         }
 
         // Replace `@h` with heighten amount in all rolls
-        this.buttons
-          .filter((b) => b.dataset?.action === RollRollableTakeHandler.ACTION)
-          .forEach((b) => {
-            b.dataset.formula = this._heightenString(b.dataset.formula);
+        this.activations
+          .filter((a) => a.type === acts.RollActivation.TYPE)
+          .forEach((a) => {
+            a.formula = this._heightenString(a.formula);
           });
       }
 

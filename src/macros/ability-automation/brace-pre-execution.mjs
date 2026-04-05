@@ -7,10 +7,8 @@ if (execution.competence.proficient) {
 if (execution.competence.fluent) {
   formula = `(1 + @f)d${dieSize}`;
 }
-const button = execution.buttons.find(
-  (b) => b.dataset.action === "apply-effect",
-);
-const consequenceData = JSON.parse(button.dataset.normal);
+const act = execution.activations.find((a) => a.type === "addDocuments");
+const consequenceData = act._source.primary.root.data;
 consequenceData.flags = { teriockEffect: { formula } };
-button.dataset.normal = JSON.stringify(consequenceData);
-button.dataset.crit = JSON.stringify(consequenceData);
+act._source.primary.root.data = consequenceData;
+act._source.secondary.root.data = consequenceData;

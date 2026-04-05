@@ -1,9 +1,5 @@
-const buttons = scope.execution.buttons;
-scope.execution.buttons = buttons.filter(
-  (button) => button.dataset.action === "apply-effect",
-);
-const button = scope.execution.buttons[0];
-const effectObject = JSON.parse(button.dataset.normal);
+const act = scope.execution.activations.find((a) => a.type === "addDocuments");
+const effectObject = act._source.primary.root.data;
 const equipmentClass = await tm.dialogs.selectWeaponClassDialog();
 const changesId = foundry.utils.randomID();
 effectObject.system.automations[changesId] = {
@@ -20,6 +16,5 @@ effectObject.system.automations[changesId] = {
     },
   ],
 };
-const effectString = JSON.stringify(effectObject);
-scope.execution.buttons[0].dataset.normal = effectString;
-scope.execution.buttons[0].dataset.crit = effectString;
+act._source.primary.root.data = effectObject;
+act._source.secondary.root.data = effectObject;

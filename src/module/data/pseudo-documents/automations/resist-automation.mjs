@@ -1,4 +1,4 @@
-import { ResistHandler } from "../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
+import { ResistActivation } from "../activations/command-activations.mjs";
 import { ThresholdAutomation } from "./abstract/_module.mjs";
 
 const { fields } = foundry.data;
@@ -37,11 +37,13 @@ export default class ResistAutomation extends ThresholdAutomation {
   }
 
   /** @inheritDoc */
-  async getButtons() {
+  async getActivations() {
     return [
-      ResistHandler.buildButton({
-        bonus: this.bonus,
-        hex: this.hex,
+      new ResistActivation({
+        options: {
+          bonus: this.bonus,
+          hex: this.hex,
+        },
       }),
     ];
   }

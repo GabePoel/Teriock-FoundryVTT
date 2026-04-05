@@ -1,4 +1,4 @@
-import { FeatHandler } from "../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
+import { FeatActivation } from "../activations/command-activations.mjs";
 import { ThresholdAutomation } from "./abstract/_module.mjs";
 
 const { fields } = foundry.data;
@@ -30,11 +30,14 @@ export default class FeatAutomation extends ThresholdAutomation {
   }
 
   /** @inheritDoc */
-  async getButtons() {
+  async getActivations() {
     return [
-      FeatHandler.buildButton(this.attribute, {
-        bonus: this.bonus,
-        threshold: this.threshold,
+      new FeatActivation({
+        options: {
+          attribute: this.attribute,
+          bonus: this.bonus,
+          threshold: this.threshold,
+        },
       }),
     ];
   }

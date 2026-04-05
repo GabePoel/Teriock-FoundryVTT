@@ -46,4 +46,27 @@
       {{{message.content}}}
     </div>
   </div>
+  {{#if (and isContentVisible (or (exists system.tags) (exists system.activations.contents)))}}
+    <footer>
+      {{#if (exists system.tags)}}
+        <div class="message-tags">
+          {{#each system.tags as |tag|}}
+            <span class="message-tag">{{tag}}</span>
+          {{/each}}
+        </div>
+      {{/if}}
+      {{#if (exists system.activations.contents)}}
+        <div class="message-activations">
+          {{#each system.activations as |activation|}}
+            <button
+              class="activation-button {{activation.classes}}"
+              data-action="activate-activation" data-id="{{activation.id}}"
+            >
+              {{makeIcon activation.icon "button"}}{{localize activation.label}}
+            </button>
+          {{/each}}
+        </div>
+      {{/if}}
+    </footer>
+  {{/if}}
 </li>

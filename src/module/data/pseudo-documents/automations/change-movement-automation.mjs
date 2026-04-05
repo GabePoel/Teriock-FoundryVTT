@@ -1,9 +1,6 @@
-import { ChangeMovementButtonHandler } from "../../../helpers/interaction/button-handlers/change-movement-button-handler.mjs";
-import { localizeChoices } from "../../../helpers/localization.mjs";
-import { objectMap } from "../../../helpers/utils.mjs";
+import { movementActionField } from "../../fields/helpers/builders.mjs";
+import { ChangeMovementActivation } from "../activations/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
-
-const { fields } = foundry.data;
 
 export default class ChangeMovementAutomation extends BaseAutomation {
   /** @inheritDoc */
@@ -25,28 +22,7 @@ export default class ChangeMovementAutomation extends BaseAutomation {
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      movementAction: new fields.StringField({
-        choices: localizeChoices(
-          objectMap(
-            Object.fromEntries(
-              Object.entries(CONFIG.Token.movement.actions).filter(
-                ([_k, v]) => {
-                  if (typeof v.canSelect === "function") {
-                    return v.canSelect();
-                  } else if (typeof v.canSelect === "boolean") {
-                    return v.canSelect;
-                  } else {
-                    return true;
-                  }
-                },
-              ),
-            ),
-            (t) => t.label,
-          ),
-        ),
-        initial: "walk",
-        nullable: false,
-      }),
+      movementAction: movementActionField(),
     });
   }
 
@@ -56,7 +32,9 @@ export default class ChangeMovementAutomation extends BaseAutomation {
   }
 
   /** @inheritDoc */
-  async getButtons() {
-    return [ChangeMovementButtonHandler.buildButton(this.movementAction)];
+  async getActivations() {
+    return [
+      new ChangeMovementActivation({ movementAction: this.movementAction }),
+    ];
   }
 }

@@ -18,11 +18,12 @@ export default class TakeRoll extends BaseRoll {
   }
 
   /** @inheritDoc */
-  async getButtons() {
+  async getActivations() {
     return [
-      teriock.helpers.interaction.buttonHandlers[
-        "take-rollable-take"
-      ].buildButton(this.take, this.total),
+      new teriock.data.pseudoDocuments.activations.TakeActivation({
+        take: this.take,
+        amount: this.total,
+      }),
     ];
   }
 }

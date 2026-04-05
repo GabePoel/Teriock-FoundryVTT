@@ -1,4 +1,4 @@
-import { RevitalizeHandler } from "../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
+import { RevitalizeActivation } from "../activations/command-activations.mjs";
 import { StatAutomation } from "./abstract/_module.mjs";
 
 export default class RevitalizeAutomation extends StatAutomation {
@@ -19,11 +19,13 @@ export default class RevitalizeAutomation extends StatAutomation {
   }
 
   /** @inheritDoc */
-  async _getButtons() {
+  async _getActivations() {
     return [
-      RevitalizeHandler.buildButton({
-        consumeStatDice: this.consumeStatDice,
-        forHarm: this.forHarm,
+      new RevitalizeActivation({
+        options: {
+          consumeStatDice: this.consumeStatDice,
+          forHarm: this.forHarm,
+        },
       }),
     ];
   }

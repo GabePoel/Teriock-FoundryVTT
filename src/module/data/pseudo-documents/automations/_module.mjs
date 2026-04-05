@@ -15,6 +15,7 @@ export { default as DurationAutomation } from "./duration-automation.mjs";
 export { default as FeatAutomation } from "./feat-automation.mjs";
 export { default as HacksAutomation } from "./hacks-automation.mjs";
 export { default as HealAutomation } from "./heal-automation.mjs";
+export { default as ModifyEffectAutomation } from "./modify-effect-automation.mjs";
 export { default as PropertyMacroAutomation } from "./property-macro-automation.mjs";
 export { default as ProtectionAutomation } from "./protection-automation.mjs";
 export { default as RegainUsesAutomation } from "./regain-uses-automation.mjs";

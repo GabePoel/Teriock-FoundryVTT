@@ -1,9 +1,9 @@
-import {
-  TakeHackHandler,
-  TakeUnhackHandler,
-} from "../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
+import {
+  TakeHackActivation,
+  TakeUnhackActivation,
+} from "../activations/command-activations.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 
 const { fields } = foundry.data;
@@ -51,14 +51,20 @@ export default class HacksAutomation extends BaseAutomation {
   }
 
   /** @inheritDoc */
-  async getButtons() {
+  async getActivations() {
     if (this.reverse) {
-      return Array.from(this.hacks).map((hack) =>
-        TakeUnhackHandler.buildButton(hack),
+      return Array.from(this.hacks).map(
+        (h) =>
+          new TakeUnhackActivation({
+            options: { part: h },
+          }),
       );
     } else {
-      return Array.from(this.hacks).map((hack) =>
-        TakeHackHandler.buildButton(hack),
+      return Array.from(this.hacks).map(
+        (h) =>
+          new TakeHackActivation({
+            options: { part: h },
+          }),
       );
     }
   }

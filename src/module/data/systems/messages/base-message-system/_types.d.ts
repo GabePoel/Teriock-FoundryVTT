@@ -1,18 +1,18 @@
 import { TeriockChatMessage } from "../../../../documents/_module.mjs";
+import { TypeCollection } from "../../../../documents/collections/_module.mjs";
+import { BaseActivation } from "../../../pseudo-documents/activations/abstract/_module.mjs";
 
 declare global {
   namespace Teriock.Data {
     export type BaseMessageData = {
+      /** <schema> Activations */
+      activations: Record<ID, object>;
       /** <schema> Fallback avatar image to use. */
       avatar: string;
-      /** <schema> Buttons to display below the content of the message */
-      buttons: Teriock.UI.HTMLButtonConfig[];
       /** <schema> Custom number of columns */
       columns: number;
       /** <schema> Content to be displayed in addition to {@link BaseRoll} results */
       extraContent: string;
-      /** <schema> Elder Sorcery spell circle overlay */
-      overlay: string;
       /** <schema> Panels to render */
       panels: Teriock.MessageData.MessagePanel[];
       /** <schema> Document that the message is sourced from */
@@ -24,6 +24,8 @@ declare global {
 
   namespace Teriock.Models {
     export type BaseMessageSystemData = Teriock.Data.BaseMessageData & {
+      activations: TypeCollection<ID<BaseActivation>, BaseActivation>;
+
       get parent(): TeriockChatMessage;
     };
   }

@@ -15,21 +15,15 @@ const chosenIllusionLevel =
     },
   );
 let dc = "none";
-if (chosenIllusionLevel === "minor") {
-  dc = 6;
-}
-if (chosenIllusionLevel === "full") {
-  dc = 12;
-}
-if (chosenIllusionLevel === "greater") {
-  dc = 18;
-}
-const buttons = scope.execution.buttons.filter(
-  (b) => b.dataset?.action === "feat" && b.dataset?.attribute === "int",
+if (chosenIllusionLevel === "minor") dc = 6;
+if (chosenIllusionLevel === "full") dc = 12;
+if (chosenIllusionLevel === "greater") dc = 18;
+const activations = scope.execution.activations.filter(
+  (a) => a.type === "feat" && a.options.attribute === "int",
 );
 if (typeof dc === "number") {
-  for (const b of buttons) {
-    b.dataset.threshold = `${dc - 2 * scope.execution.heightened}`;
+  for (const a of activations) {
+    a._source.options.threshold = `${dc - 2 * scope.execution.heightened}`;
   }
 }
 for (let i = 0; i < scope.execution.rolls.length; i++) {

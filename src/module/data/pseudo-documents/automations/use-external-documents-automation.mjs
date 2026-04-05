@@ -1,6 +1,6 @@
-import { UseExternalHandler } from "../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
 import { resolveDocument } from "../../../helpers/resolve.mjs";
 import { mix } from "../../../helpers/utils.mjs";
+import { UseExternalActivation } from "../activations/command-activations.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 import {
   ExternalDocumentsAutomationMixin,
@@ -52,29 +52,32 @@ export default class UseExternalDocumentsAutomation extends mix(
   }
 
   /**
-   * Make a button for a given document.
+   * Make an activation for a given document.
    * @param {UUID<AnyChildDocument>} uuid
-   * @return {Promise<Teriock.UI.HTMLButtonConfig>}
+   * @returns {Promise<UseExternalActivation>}
    */
-  async #makeButton(uuid) {
+  async #makeActivation(uuid) {
     const doc = await resolveDocument(uuid);
-    const label = doc.name;
-    const icon = TERIOCK.options.document[doc.type]?.icon;
-    return UseExternalHandler.buildButton(uuid, {
-      competence: this.overrideCompetence
-        ? this.competence.raw
-        : this.document.system.competence.raw,
-      expandTables: this.expandTables,
-      icon,
-      label,
-      noHeighten: this.noHeighten,
+    const title = doc.name;
+    const symbol = TERIOCK.options.document[doc.type]?.icon;
+    return new UseExternalActivation({
+      title,
+      symbol,
+      options: {
+        uuid,
+        competence: this.overrideCompetence
+          ? this.competence.raw
+          : this.document.system.competence.raw,
+        expandTables: this.expandTables,
+        noHeighten: this.noHeighten,
+      },
     });
   }
 
   /** @inheritDoc */
-  async _getButtons() {
+  async _getActivations() {
     return Promise.all(
-      Array.from(this.documents).map((d) => this.#makeButton(d)),
+      Array.from(this.documents).map((d) => this.#makeActivation(d)),
     );
   }
 

@@ -148,10 +148,12 @@ export default function TriggerAutomationMixin(Base) {
       }
 
       /**
-       * The buttons this generates when this is used.
-       * @returns {Teriock.UI.HTMLButtonConfig[]}
+       * The activations this generates when used.
+       * @param {object} [_options]
+       * @param {object} [_options.rollData]
+       * @returns {BaseActivation[]}
        */
-      async _getButtons() {
+      async _getActivations(_options = { rollData: {} }) {
         return [];
       }
 
@@ -207,8 +209,8 @@ export default function TriggerAutomationMixin(Base) {
       }
 
       /** @inheritDoc */
-      async getButtons() {
-        if (this._hasButtons) return this._getButtons();
+      async getActivations() {
+        if (this._hasButtons) return this._getActivations();
         else return [];
       }
     }

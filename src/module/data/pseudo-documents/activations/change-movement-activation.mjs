@@ -1,24 +1,24 @@
-import { makeIconClass } from "../../utils.mjs";
-import BaseButtonHandler from "./base-button-handler.mjs";
+import { movementActionField } from "../../fields/helpers/builders.mjs";
+import { BaseActivation } from "./abstract/_module.mjs";
 
-export class ChangeMovementButtonHandler extends BaseButtonHandler {
+/**
+ * @property {string} movementAction
+ */
+export default class ChangeMovementActivation extends BaseActivation {
   /** @inheritDoc */
-  static ACTION = "change-movement";
+  static get ICON() {
+    return "ms-sprint";
+  }
 
-  /**
-   * @inheritDoc
-   * @param {string} movementAction
-   * @param {object} [options]
-   * @param {string} [options.label]
-   */
-  static buildButton(movementAction, options = {}) {
-    const button = super.buildButton();
-    button.icon =
-      CONFIG.Token.movement.actions[movementAction]?.icon ||
-      makeIconClass("ms-sprint");
-    button.label = options.label || this.getLabel(movementAction);
-    button.dataset.movementAction = movementAction;
-    return button;
+  /** @inheritDoc */
+  static get TYPE() {
+    return "changeMovement";
+  }
+
+  static defineSchema() {
+    return Object.assign(super.defineSchema(), {
+      movementAction: movementActionField(),
+    });
   }
 
   /**
@@ -31,11 +31,22 @@ export class ChangeMovementButtonHandler extends BaseButtonHandler {
     );
   }
 
-  /**
-   * @return {string}
-   */
-  get movementAction() {
-    return this.dataset.movementAction || "walk";
+  /** @inheritDoc */
+  get icon() {
+    return (
+      this.symbol ||
+      CONFIG.Token.movement.actions[this.movementAction]?.icon ||
+      this.constructor.ICON
+    );
+  }
+
+  /** @inheritDoc */
+  get label() {
+    return (
+      this.title ||
+      ChangeMovementActivation.getLabel(this.movementAction) ||
+      this.constructor.LABEL
+    );
   }
 
   /** @inheritDoc */
@@ -49,8 +60,8 @@ export class ChangeMovementButtonHandler extends BaseButtonHandler {
         });
         ui.notifications.success("TERIOCK.COMMANDS.ChangeMovement.changed", {
           format: {
-            new: ChangeMovementButtonHandler.getLabel(this.movementAction),
-            old: ChangeMovementButtonHandler.getLabel(old),
+            new: ChangeMovementActivation.getLabel(this.movementAction),
+            old: ChangeMovementActivation.getLabel(old),
             token: t.name,
           },
           localize: true,
@@ -58,7 +69,7 @@ export class ChangeMovementButtonHandler extends BaseButtonHandler {
       } else {
         ui.notifications.warn("TERIOCK.COMMANDS.ChangeMovement.already", {
           format: {
-            movement: ChangeMovementButtonHandler.getLabel(this.movementAction),
+            movement: ChangeMovementActivation.getLabel(this.movementAction),
             token: t.name,
           },
           localize: true,
@@ -81,8 +92,8 @@ export class ChangeMovementButtonHandler extends BaseButtonHandler {
         });
         ui.notifications.success("TERIOCK.COMMANDS.ChangeMovement.reverted", {
           format: {
-            new: ChangeMovementButtonHandler.getLabel(t.movementAction),
-            old: ChangeMovementButtonHandler.getLabel(this.movementAction),
+            new: ChangeMovementActivation.getLabel(t.movementAction),
+            old: ChangeMovementActivation.getLabel(this.movementAction),
             token: t.name,
           },
           localize: true,
@@ -90,7 +101,7 @@ export class ChangeMovementButtonHandler extends BaseButtonHandler {
       } else {
         ui.notifications.warn("TERIOCK.COMMANDS.ChangeMovement.notFount", {
           format: {
-            movement: ChangeMovementButtonHandler.getLabel(this.movementAction),
+            movement: ChangeMovementActivation.getLabel(this.movementAction),
             token: t.name,
           },
           localize: true,

@@ -19,8 +19,8 @@ export default class BaseExecution {
     options.competence = this.competence.raw;
   }
 
-  /** @type {Teriock.UI.HTMLButtonConfig[]} */
-  buttons = [];
+  /** @type {BaseActivation[]} */
+  activations = [];
 
   /** @type {CompetenceModel} */
   competence = new CompetenceModel();
@@ -136,9 +136,13 @@ export default class BaseExecution {
    */
   get chatData() {
     return {
-      speaker: TeriockChatMessage.getSpeaker({ actor: this.actor }),
       rolls: this.rolls,
+      speaker: TeriockChatMessage.getSpeaker({ actor: this.actor }),
       system: {
+        activations:
+          teriock.data.pseudoDocuments.abstract.PseudoDocument.toCollectionObject(
+            this.activations,
+          ),
         avatar: this.actor?.img,
         buttons: this.buttons,
         panels: this.panels,
@@ -169,10 +173,10 @@ export default class BaseExecution {
   }
 
   /**
-   * Build buttons displayed in this execution's chat message.
+   * Build activations to attach to this execution's chat message.
    * @returns {Promise<void>}
    */
-  async _buildButtons() {}
+  async _buildActivations() {}
 
   /**
    * Build panels displayed in this execution's chat message.
@@ -339,7 +343,7 @@ export default class BaseExecution {
     await this._buildRolls();
     await this._evaluateRolls();
     await this._buildPanels();
-    await this._buildButtons();
+    await this._buildActivations();
     await this._buildTags();
     const yes = await this._preExecute();
     if (yes === false) return;

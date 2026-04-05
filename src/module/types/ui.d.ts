@@ -8,16 +8,6 @@ declare global {
     /** Icon style */
     export type IconStyle = keyof typeof iconStyles;
 
-    /** Parameters to construct an HTML button. */
-    export type HTMLButtonConfig = {
-      classes?: string[];
-      dataset?: Record<string, string>;
-      disabled?: boolean;
-      icon?: string;
-      label?: string;
-      type?: "button";
-    };
-
     /** Icon category */
     export type IconCategory = keyof typeof TERIOCK.display.iconManifest;
   }

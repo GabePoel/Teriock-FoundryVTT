@@ -44,7 +44,7 @@ export default (Base) => {
        */
       #getRankRollData() {
         const data = {};
-        const ranks = this.parent.itemTypes.rank;
+        const ranks = this.parent.ranks;
         for (const c of Object.keys(TERIOCK.index.classes)) {
           const count = ranks.filter((r) => r.system.className === c).length;
           data[`rank.${c}`] = count;

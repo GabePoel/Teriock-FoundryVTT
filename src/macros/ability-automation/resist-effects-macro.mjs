@@ -1,5 +1,6 @@
-const buttons = scope.execution.buttons;
-const applyButton = buttons.find((b) => b.label === "Apply Effect");
+const applyActivation = scope.execution.activations.find(
+  (a) => a.type === "addDocuments",
+);
 
 const choices = teriock.helpers.localization.localizeChoices({
   awakening: "TERIOCK.TERMS.EffectTypes.awakening",
@@ -33,16 +34,13 @@ const choice = await tm.dialogs.selectDocumentDialog(documents, {
   hint: "Select an effect type to resist.",
 });
 
-function modifyData(data) {
-  const effectObject = JSON.parse(data);
-  effectObject.changes.push({
+if (choice) {
+  const change = {
     key: "system.protections.resistances.effectTypes",
     value: choice.uuid,
     mode: 2,
     priority: 10,
-  });
-  return JSON.stringify(effectObject);
+  };
+  applyActivation._source.primary.root.data.changes.push(change);
+  applyActivation._source.secondary.root.data.changes.push(change);
 }
-
-applyButton.dataset.normal = modifyData(applyButton.dataset.normal);
-applyButton.dataset.crit = modifyData(applyButton.dataset.crit);

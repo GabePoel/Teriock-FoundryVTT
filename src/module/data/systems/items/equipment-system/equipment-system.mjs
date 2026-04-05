@@ -6,6 +6,7 @@ import {
 } from "../../../../helpers/string.mjs";
 import { inferNameFromIdentifier, mix } from "../../../../helpers/utils.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
+import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
 import * as parts from "./parts/_module.mjs";
@@ -60,6 +61,19 @@ export default class EquipmentSystem extends mix(
     "system.powerLevel",
     ...super.PRESERVED_PROPERTIES,
   ];
+
+  static get _automationTypes() {
+    return [
+      ...super._automationTypes,
+      automations.ChatMacroAutomation,
+      automations.CommonImpactsAutomation,
+      automations.HacksAutomation,
+      automations.RollAutomation,
+      automations.TakeAutomaton,
+      automations.UseExternalDocumentsAutomation,
+      automations.UseLocalDocumentsAutomation,
+    ];
+  }
 
   /** @inheritDoc */
   static get metadata() {

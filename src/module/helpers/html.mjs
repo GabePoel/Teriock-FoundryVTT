@@ -1,30 +1,4 @@
 /**
- * A helper method for constructing an HTML button based on given parameters.
- * @param {Teriock.UI.HTMLButtonConfig} config Options forwarded to the button
- * @returns {HTMLButtonElement}
- */
-export function buildHTMLButton(config) {
-  let {
-    label,
-    dataset = /** @type {Record<string, string>} */ {},
-    classes = [],
-    icon = "",
-    type = "button",
-    disabled = false,
-  } = config;
-  const button = document.createElement("button");
-  button.type = type;
-  for (const [key, value] of Object.entries(dataset)) {
-    button.dataset[key] = value;
-  }
-  button.classList.add(...classes);
-  if (icon) icon = `<i class="${icon}"></i> `;
-  if (disabled) button.disabled = true;
-  button.innerHTML = `${icon}${label}`;
-  return button;
-}
-
-/**
  * Make a CSS class for a given array of elements.
  * @param {Set<Teriock.Keys.Element>} elements
  * @returns {string}

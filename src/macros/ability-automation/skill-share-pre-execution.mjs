@@ -5,13 +5,15 @@ const ability = await tm.dialogs.selectDocumentDialog(validAbilities, {
   hint: game.i18n.localize("TERIOCK.DIALOGS.Select.Ability.hint"),
   title: game.i18n.localize("TERIOCK.DIALOGS.Select.Ability.title"),
 });
-const buttons = scope.execution.buttons.filter(
-  (button) => button.dataset.action === "apply-effect",
-);
-const button = buttons.find((b) => b.dataset.action === "apply-effect");
-if (button) {
-  button.dataset.children = JSON.stringify([ability.uuid]);
+if (ability) {
+  const children = [{ uuid: ability.uuid }];
+  const apply = scope.execution.activations.find(
+    (a) => a.type === "addDocuments",
+  );
+  const data = apply.toObject();
+  foundry.utils.setProperty(data, "primary.children", children);
+  foundry.utils.setProperty(data, "secondary.children", children);
+  scope.execution.activations = [
+    new teriock.data.pseudoDocuments.activations.AddDocumentsActivation(data),
+  ];
 }
-scope.execution.buttons = buttons;
-scope.execution.proficient = false;
-scope.execution.fluent = false;

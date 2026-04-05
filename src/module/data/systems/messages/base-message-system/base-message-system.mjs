@@ -4,284 +4,87 @@ import {
   TeriockChatMessage,
   TeriockItem,
 } from "../../../../documents/_module.mjs";
-import { buildHTMLButton } from "../../../../helpers/html.mjs";
-import { buttonHandlers } from "../../../../helpers/interaction/_module.mjs";
 import { makeIcon } from "../../../../helpers/utils.mjs";
-import {
-  associationsField,
-  blocksField,
-} from "../../../fields/helpers/builders.mjs";
+import { panelsField } from "../../../fields/helpers/builders.mjs";
+import * as activations from "../../../pseudo-documents/activations/_module.mjs";
+import { BaseActivation } from "../../../pseudo-documents/activations/abstract/_module.mjs";
 import { BaseSystem } from "../../abstract/_module.mjs";
+import { ActivatableSystemMixin } from "../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
  * @extends {Teriock.Models.BaseMessageSystemData}
  * @extends {Teriock.Data.BaseMessageData}
+ * @mixes ActivatableSystem
  */
-export default class BaseMessageSystem extends BaseSystem {
+export default class BaseMessageSystem extends ActivatableSystemMixin(
+  BaseSystem,
+) {
+  static get _activationTypes() {
+    return Object.values(activations).filter((a) =>
+      foundry.utils.isSubclass(a, BaseActivation),
+    );
+  }
+
   /**
    * @inheritDoc
    * @returns {Record<string, DataField>}
    */
   static defineSchema() {
-    return {
-      avatar: new fields.StringField({
-        initial: null,
-        nullable: true,
-        required: false,
-      }),
+    return Object.assign(super.defineSchema(), {
+      avatar: new fields.StringField(),
       columns: new fields.NumberField({ initial: 2 }),
-      overlay: new fields.HTMLField({
-        initial: null,
-        nullable: true,
-        required: false,
-      }),
-      panels: new fields.ArrayField(
-        new fields.SchemaField({
-          associations: associationsField(),
-          bars: new fields.ArrayField(
-            new fields.SchemaField({
-              icon: new fields.StringField({
-                initial: "",
-                required: false,
-              }),
-              label: new fields.StringField({
-                nullable: true,
-                required: false,
-              }),
-              wrappers: new fields.ArrayField(new fields.StringField(), {
-                initial: [],
-                required: false,
-              }),
-            }),
-            {
-              initial: [],
-              required: false,
-            },
-          ),
-          blocks: blocksField(),
-          classes: new fields.StringField({
-            nullable: true,
-            initial: null,
-            required: false,
-          }),
-          color: new fields.StringField({
-            initial: null,
-            nullable: true,
-            required: false,
-          }),
-          font: new fields.StringField({
-            nullable: true,
-            initial: null,
-            required: false,
-          }),
-          icon: new fields.StringField({
-            nullable: true,
-            initial: null,
-            required: false,
-          }),
-          image: new fields.StringField({
-            initial: null,
-            nullable: true,
-            required: false,
-          }),
-          label: new fields.StringField({
-            nullable: true,
-            initial: null,
-            required: false,
-          }),
-          name: new fields.StringField({
-            initial: null,
-            nullable: true,
-            required: false,
-          }),
-          uuid: new fields.DocumentUUIDField({
-            initial: null,
-            nullable: true,
-            required: false,
-          }),
-        }),
-        {
-          initial: [],
-          required: false,
-        },
-      ),
-      buttons: new fields.ArrayField(
-        new fields.SchemaField({
-          label: new fields.StringField(),
-          dataset: new fields.TypedObjectField(
-            new fields.StringField({
-              initial: "",
-              required: false,
-            }),
-          ),
-          classes: new fields.SetField(new fields.StringField(), {
-            initial: ["teriock-chat-button"],
-            required: false,
-          }),
-          icon: new fields.StringField({
-            initial: "",
-            required: false,
-          }),
-          type: new fields.StringField({
-            initial: "",
-            required: false,
-          }),
-          disabled: new fields.BooleanField({ required: false }),
-        }),
-        {
-          initial: [],
-          required: false,
-        },
-      ),
-      tags: new fields.ArrayField(new fields.StringField(), {
-        initial: [],
-        required: false,
-      }),
-      extraContent: new fields.HTMLField({
-        initial: "",
-        required: false,
-      }),
-      source: new fields.DocumentUUIDField({
-        nullable: true,
-        initial: null,
-        required: false,
-      }),
-    };
+      panels: panelsField(),
+      tags: new fields.ArrayField(new fields.StringField()),
+      extraContent: new fields.HTMLField(),
+      source: new fields.DocumentUUIDField(),
+    });
+  }
+
+  /** @returns {TeriockActor|null} */
+  get actor() {
+    return game.actors.default;
   }
 
   /** @returns {TeriockChatMessage} */
-  get parent() {
-    return super.parent;
+  get document() {
+    return this.parent;
   }
 
   /**
-   * Construct the footer element with tags and buttons
-   * @returns {HTMLElement} The footer element
-   * @protected
+   * Generate the data for a collection object with take amounts updated.
+   * @param {number} amount
+   * @returns {Record<ID<V>, Object>}
    */
-  _constructFooter() {
-    const footer = document.createElement("footer");
-    footer.className = "teriock-message-footer";
-
-    // Create and add a tag container
-    const tagContainer = this._createTagContainer();
-    if (tagContainer) footer.appendChild(tagContainer);
-    const buttonContainer = this._createButtonContainer();
-    if (buttonContainer) footer.appendChild(buttonContainer);
-    return footer;
-  }
-
-  /**
-   * Build an array of buttons to insert into the footer of the document
-   * @returns {HTMLButtonElement[]}
-   * @protected
-   */
-  _constructFooterButtons() {
-    return this.buttons.map((button) => buildHTMLButton(button));
-  }
-
-  /**
-   * Create the button container with grid layout
-   * @returns {HTMLElement|null} The button container element or null if no buttons
-   * @protected
-   */
-  _createButtonContainer() {
-    const buttons = this._constructFooterButtons();
-    if (buttons.length === 0) {
-      return null;
+  #amountAlteredCollection(amount) {
+    const collectionObject =
+      teriock.data.pseudoDocuments.abstract.PseudoDocument.toCollectionObject(
+        this.activations.contents,
+      );
+    for (const obj of Object.values(collectionObject)) {
+      if (obj.type === "take") obj.amount = amount;
     }
-
-    const buttonContainer = document.createElement("div");
-    buttonContainer.classList.add("teriock-buttons");
-
-    const totalButtons = buttons.length;
-    const columns = this.columns;
-    const remainder = totalButtons % columns;
-
-    if (remainder === 0) {
-      // Clean multiple - all buttons the same width
-      buttonContainer.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
-      buttons.forEach((button) => {
-        button.classList.remove("full-width", "full-row");
-        buttonContainer.appendChild(button);
-      });
-    } else {
-      // Uneven distribution - top row gets special treatment
-      const topRowButtons = remainder;
-      const topRowButtonWidth = columns / topRowButtons;
-
-      // Set up a grid for the full layout
-      buttonContainer.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
-
-      // Add top row buttons with special spanning
-      for (let i = 0; i < topRowButtons; i++) {
-        const button = buttons[i];
-        button.classList.remove("full-width", "full-row");
-        button.style.gridColumn = `span ${topRowButtonWidth}`;
-        buttonContainer.appendChild(button);
-      }
-
-      // Add remaining buttons in a normal grid
-      for (let i = topRowButtons; i < totalButtons; i++) {
-        const button = buttons[i];
-        button.classList.remove("full-width", "full-row");
-        buttonContainer.appendChild(button);
-      }
-    }
-
-    return buttonContainer;
+    return collectionObject;
   }
 
   /**
-   * Create the tag container element
-   * @returns {HTMLElement|null} The tag container element or null if no tags
-   * @protected
+   * Perform subtype-specific alterations to the final chat message HTML.
+   * @param {object} _context
+   * @param {object} options
+   * @param {HTMLLIElement} options.element
    */
-  _createTagContainer() {
-    if (!this.tags || this.tags.length === 0) {
-      return null;
-    }
-
-    const messageElement = document.createElement("div");
-    messageElement.className = "tmessage teriock-bottom-tags";
-
-    const barBox = document.createElement("div");
-    barBox.className = "tmes-bar-box";
-
-    const bar = document.createElement("div");
-    bar.className = "abm-bar";
-
-    const tags = document.createElement("div");
-    tags.className = "abm-bar-tags";
-
-    for (const tag of this.tags) {
-      const labelDiv = document.createElement("div");
-      labelDiv.className = "abm-label tsubtle";
-      labelDiv.textContent = tag;
-      tags.appendChild(labelDiv);
-    }
-
-    bar.appendChild(tags);
-    barBox.appendChild(bar);
-    messageElement.appendChild(barBox);
-
-    return messageElement;
-  }
-
-  /**
-   * Perform subtype-specific alterations to the final chat message html
-   * @param {HTMLLIElement} htmlElement The pending HTML
-   */
-  async alterMessageHTML(htmlElement) {
-    htmlElement.classList.add("teriock");
-    TeriockItem.bindPanelListeners(htmlElement);
-    this.collapsePanels(htmlElement);
+  async _onRender(_context, options) {
+    const element = options.element;
+    if (!element) return;
+    element.classList.add("teriock");
+    TeriockItem.bindPanelListeners(element);
+    this._connectActivationListeners(element);
+    this.collapsePanels(element);
 
     // Add an extra content div at the start of message-content if it exists
     if (this.extraContent) {
-      const messageContent = htmlElement.querySelector(".message-content");
+      const messageContent = element.querySelector(".message-content");
       if (messageContent) {
         const extraContentDiv = document.createElement("div");
         extraContentDiv.classList.add("extra-content");
@@ -290,29 +93,22 @@ export default class BaseMessageSystem extends BaseSystem {
       }
     }
 
-    const hasContent =
-      (this.tags && this.tags.length > 0) || this.buttons.length > 0;
-    if (hasContent && this.parent.isContentVisible) {
-      const footer = this._constructFooter();
-      htmlElement.insertAdjacentElement("beforeend", footer);
-    }
-
     // Remove custom content if it shouldn't be visible
-    if (!this.parent.isContentVisible) {
-      htmlElement
+    if (!this.document.isContentVisible) {
+      element
         .querySelectorAll(".teriock-target-container, .teriock-dice-total-icon")
         .forEach((el) => el.remove());
-      htmlElement
+      element
         .querySelectorAll(".dice-total.teriock-dice-total")
         .forEach((el) => {
           el.className = "dice-total teriock-dice-total";
         });
-      htmlElement
+      element
         .querySelectorAll(".dice-formula.teriock-dice-formula")
         .forEach((el) => {
           el.className = "dice-formula teriock-dice-formula";
         });
-      htmlElement.querySelectorAll(".dice-total, .dice-formula").forEach(
+      element.querySelectorAll(".dice-total, .dice-formula").forEach(
         /** @param {HTMLElement} el */ (el) => {
           delete el.dataset.tooltip;
           delete el.dataset.tooltipHtml;
@@ -320,17 +116,7 @@ export default class BaseMessageSystem extends BaseSystem {
       );
     }
 
-    if (this.overlay) {
-      const overlay = document.createElement("div");
-      overlay.innerHTML = this.overlay;
-      htmlElement.insertAdjacentElement(
-        "afterbegin",
-        overlay.firstElementChild,
-      );
-      htmlElement.style.position = "relative";
-    }
-
-    htmlElement.querySelectorAll(".teriock-target-container").forEach(
+    element.querySelectorAll(".teriock-target-container").forEach(
       /** @param {HTMLElement} container */ (container) => {
         let clickTimeout = null;
 
@@ -379,69 +165,38 @@ export default class BaseMessageSystem extends BaseSystem {
       },
     );
 
-    bindCommonActions(htmlElement);
+    bindCommonActions(element);
 
-    const buttonActionElements = htmlElement
-      .querySelector(".teriock-buttons")
-      ?.querySelectorAll("[data-action]");
-    if (buttonActionElements) {
-      for (const /** @type {HTMLElement} */ element of buttonActionElements) {
-        const action = element.dataset.action;
-        const HandlerClass = Object.values(buttonHandlers).find(
-          (Handler) => Handler.ACTION === action,
-        );
-        if (!HandlerClass) {
-          continue;
-        }
-        element.addEventListener("click", async (event) => {
-          event.preventDefault();
-          event.stopPropagation();
-          const handler = new HandlerClass(event, element);
-          await handler.primaryAction();
-        });
-        element.addEventListener("contextmenu", async (event) => {
-          event.preventDefault();
-          event.stopPropagation();
-          const handler = new HandlerClass(event, element);
-          await handler.secondaryAction();
-        });
-      }
-    }
-
-    for (const roll of this.parent.rolls) {
+    for (const roll of this.document.rolls) {
       const id = roll.id;
       new TeriockContextMenu(
-        htmlElement,
+        element,
         `.dice-formula[data-id="${id}"]`,
         [
           {
-            name: "Boost",
+            name: "TERIOCK.DIALOGS.Boost.FIELDS.boosts.single",
             icon: makeIcon(TERIOCK.display.icons.roll.boost, "contextMenu"),
             callback: async () => {
               const boostedRoll = await roll.boost(roll.options);
               await boostedRoll.toMessage({
                 speaker: TeriockChatMessage.getSpeaker(),
                 system: {
-                  buttons: this.buttons.map((b) => {
-                    b.dataset.amount = boostedRoll.total.toString();
-                    return b;
-                  }),
+                  activations: this.#amountAlteredCollection(boostedRoll.total),
                 },
               });
             },
           },
           {
-            name: "Deboost",
+            name: "TERIOCK.DIALOGS.Boost.FIELDS.deboosts.single",
             icon: makeIcon(TERIOCK.display.icons.roll.deboost, "contextMenu"),
             callback: async () => {
               const deboostedRoll = await roll.deboost(roll.options);
               await deboostedRoll.toMessage({
                 speaker: TeriockChatMessage.getSpeaker(),
                 system: {
-                  buttons: this.buttons.map((b) => {
-                    b.dataset.amount = deboostedRoll.total.toString();
-                    return b;
-                  }),
+                  activations: this.#amountAlteredCollection(
+                    deboostedRoll.total,
+                  ),
                 },
               });
             },
@@ -453,6 +208,19 @@ export default class BaseMessageSystem extends BaseSystem {
         },
       );
     }
+  }
+
+  /**
+   * Prepare chat message render context.
+   * @param {object} options
+   * @returns {Promise<object>}
+   */
+  async _prepareContext(options = {}) {
+    return {
+      system: this,
+      isContentVisible: this.document.isContentVisible,
+      ...options,
+    };
   }
 
   /**
@@ -471,7 +239,7 @@ export default class BaseMessageSystem extends BaseSystem {
       autoCollapse = false;
     } else {
       autoCollapse =
-        this.parent.timestamp <
+        this.document.timestamp <
         Date.now() -
           game.teriock.getSetting("automaticPanelCollapseTime") * 60 * 1000;
     }

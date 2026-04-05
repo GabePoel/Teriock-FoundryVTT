@@ -31,7 +31,9 @@ const consequenceData = {
   },
   type: "consequence",
 };
-const button = teriock.helpers.interaction.buttonHandlers[
-  "apply-effect"
-].buildButton(consequenceData, { sustainingAbility: scope.effect });
-scope.execution.buttons.push(button);
+
+const activation =
+  new teriock.data.pseudoDocuments.activations.AddDocumentsActivation({
+    primary: { root: { data: consequenceData } },
+  });
+scope.execution.activations.push(activation);
