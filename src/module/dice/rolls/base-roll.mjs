@@ -4,7 +4,10 @@ import { selectWeightedMaxFaceDie } from "../helpers.mjs";
 
 const { Roll } = foundry.dice;
 
-/** @inheritDoc */
+/**
+ * @inheritDoc
+ * @property {ID<BaseRoll>} id
+ */
 export default class BaseRoll extends Roll {
   /** @inheritDoc */
   static CHAT_TEMPLATE = "teriock/ui/roll";
@@ -12,81 +15,44 @@ export default class BaseRoll extends Roll {
   /**
    * @param {Teriock.System.FormulaString} formula
    * @param {object} data
-   * @param {Teriock.Dice.RollOptions} options
+   * @param {Partial<Teriock.Dice.BaseRollOptions>} options
    */
   constructor(formula, data, options = {}) {
     super(formula, data, options);
-    /** @type {Teriock.Dice.RollOptions} */
-    const userOptions = foundry.utils.mergeObject(
-      {
-        hideRoll: false,
-        styles: {
-          dice: { classes: "", tooltip: "", icon: "" },
-          total: { classes: "", tooltip: "", icon: "" },
-        },
-        targets: [],
-        threshold: null,
-        comparison: "gte",
-      },
+    this.options = foundry.utils.mergeObject(
+      this.constructor.defaultOptions,
       options,
     );
-    this.id = foundry.utils.randomID();
-    if (userOptions.threshold) {
-      this.threshold = Number(userOptions.threshold);
+    if (this.options._id && this.options.keepId) {
+      delete this.options.keepId;
+      this._id = this.options._id;
+    } else {
+      this._id = foundry.utils.randomID();
     }
-    this.styles = userOptions.styles;
-    this.hideRoll = userOptions.hideRoll;
-    this.comparison = userOptions.comparison;
-    /** @type {Teriock.Dice.RollTarget[]} */
-    this.targets = [];
-    for (const target of userOptions.targets) {
-      let img = "";
-      let name = "";
-      let rescale = false;
-      /** @type {TeriockActor} */
-      let actor;
-      /** @type {TeriockTokenDocument} */
-      let token;
-      // Handling for token placeables
-      if (target.document) {
-        token = target.document;
-        actor = target.actor;
-      }
-      // Handling for documents
-      if (target.documentName === "TokenDocument") {
-        token = target;
-        actor = actor || token.actor;
-      } else if (target.documentName === "Actor") {
-        token = target.token;
-        actor = actor || target;
-      }
-      // Prioritize name and image from the token over the actor
-      if (actor) {
-        img = actor.img;
-        name = actor.name;
-      }
-      if (token) {
-        img = token.imageLive;
-        rescale = token.rescale;
-        name = token.name;
-      }
-      this.targets.push({
-        actorUuid: actor?.uuid || target?.actorUuid,
-        img: img || target?.img || systemPath("icons/documents/character.svg"),
-        name: name || target?.name,
-        rescale: rescale || target?.rescale,
-        tokenUuid: token?.uuid || target?.tokenUuid,
-      });
-    }
-    options.targets = this.targets;
-    this.options.targets = options.targets;
+  }
+
+  /**
+   * Default roll options.
+   * @returns {Teriock.Dice.BaseRollOptions}
+   */
+  static get defaultOptions() {
+    return {
+      hideRoll: false,
+      styles: {
+        dice: { classes: "", tooltip: "", icon: "" },
+        total: { classes: "", tooltip: "", icon: "" },
+      },
+      targets: [],
+      threshold: null,
+      comparison: "gte",
+    };
   }
 
   /**
    * A value the formula evaluates to.
    * @param {string} formula
    * @param {object} data
-   * @param {Teriock.Dice.RollOptions} options
+   * @param {Partial<Teriock.Dice.BaseRollOptions>} options
    * @returns {Promise<number>}
    */
   static async getValue(formula, data, options = {}) {
@@ -99,10 +65,11 @@ export default class BaseRoll extends Roll {
    * Minimum value formula evaluates to.
    * @param {string} formula
    * @param {object} data
+   * @param {Partial<Teriock.Dice.BaseRollOptions>} options
    * @returns {number}
    */
-  static maxValue(formula, data = {}) {
-    const maxRoll = new BaseRoll(formula + " + 0", data);
+  static maxValue(formula, data = {}, options = {}) {
+    const maxRoll = new BaseRoll(formula + " + 0", data, options);
     return maxRoll.evaluateSync({ allowStrings: true, maximize: true }).total;
   }
 
@@ -110,11 +77,12 @@ export default class BaseRoll extends Roll {
    * Mean value formula evaluates to.
    * @param {string} formula
    * @param {object} data
+   * @param {Partial<Teriock.Dice.BaseRollOptions>} options
    * @returns {number}
    */
-  static meanValue(formula, data = {}) {
-    const maxValue = this.maxValue(formula, data);
-    const minValue = this.minValue(formula, data);
+  static meanValue(formula, data = {}, options = {}) {
+    const maxValue = this.maxValue(formula, data, options);
+    const minValue = this.minValue(formula, data, options);
     return (maxValue + minValue) / 2;
   }
 
@@ -122,10 +90,11 @@ export default class BaseRoll extends Roll {
    * Maximum value formula evaluates to.
    * @param {string} formula
    * @param {object} data
+   * @param {Partial<Teriock.Dice.BaseRollOptions>} options
    * @returns {number}
    */
-  static minValue(formula, data = {}) {
-    const minRoll = new BaseRoll(formula + " + 0", data);
+  static minValue(formula, data = {}, options = {}) {
+    const minRoll = new BaseRoll(formula + " + 0", data, options);
     return minRoll.evaluateSync({ allowStrings: true, minimize: true }).total;
   }
 
@@ -148,14 +117,8 @@ export default class BaseRoll extends Roll {
    */
   static resetFormulas(roll) {
     for (const term of roll.terms) {
-      if (term?.rolls) {
-        term.rolls.forEach((r) => {
-          this.resetFormulas(r);
-        });
-      }
-      if (term?.isBooster) {
-        term.result = term.rolls[0].total;
-      }
+      if (term?.rolls) term.rolls.forEach((r) => this.resetFormulas(r));
+      if (term?.isBooster) term.result = term.rolls[0].total;
     }
     roll.resetFormula();
     roll._total = roll._evaluateTotal();
@@ -178,6 +141,49 @@ export default class BaseRoll extends Roll {
     return terms;
   }
 
+  /** @returns {Teriock.Fields.ComparisonCheck} */
+  get comparison() {
+    return this.options.comparison ?? "gte";
+  }
+
+  /** @param {Teriock.Fields.ComparisonCheck} comparison */
+  set comparison(comparison) {
+    this.options.comparison = comparison;
+  }
+
+  /**
+   * Whether this has a threshold.
+   * @returns {boolean}
+   */
+  get hasThreshold() {
+    return typeof this.threshold === "number";
+  }
+
+  /** @returns {boolean} */
+  get hideRoll() {
+    return this.options.hideRoll ?? false;
+  }
+
+  /** @param {boolean} hideRoll */
+  set hideRoll(hideRoll) {
+    this.options.hideRoll = !!hideRoll;
+  }
+
+  /**
+   * The ID for this roll.
+   * @returns {UUID<BaseRoll>}
+   */
+  get id() {
+    return this._id;
+  }
+
+  /** @returns {Teriock.Dice.DieStyles} */
+  get styles() {
+    return foundry.utils.deepClone(
+      this.options.styles ?? this.constructor.defaultOptions.styles,
+    );
+  }
+
   /**
    * Whether this threshold has been met.
    * @returns {null|boolean}
@@ -190,6 +196,30 @@ export default class BaseRoll extends Roll {
       return Boolean(comparisonRoll.total);
     }
     return null;
+  }
+
+  /** @returns {Teriock.Dice.DieTarget[]} */
+  get targets() {
+    return this.options.targets ?? [];
+  }
+
+  /** @param {Teriock.Dice.RawDieTarget[]} targets */
+  set targets(targets) {
+    this.options.targets = targets.map((t) => this.#parseTarget(t));
+  }
+
+  /** @returns {number|null} */
+  get threshold() {
+    if (["number", "string"].includes(typeof this.options.threshold)) {
+      const th = Number(this.options.threshold);
+      if (Number.isNumeric(th)) return th;
+    }
+    return null;
+  }
+
+  /** @param {number} threshold */
+  set threshold(threshold) {
+    this.options.threshold = threshold;
   }
 
   /**
@@ -205,15 +235,61 @@ export default class BaseRoll extends Roll {
     }
   }
 
+  /**
+   * @param {Teriock.Dice.RawDieTarget} target
+   * @returns {Teriock.Dice.DieTarget}
+   */
+  #parseTarget(target) {
+    let img = "";
+    let name = "";
+    let rescale = false;
+    /** @type {TeriockActor} */
+    let actor;
+    /** @type {TeriockTokenDocument} */
+    let token;
+    // Handling for token placeables
+    if (target.document) {
+      token = target.document;
+      actor = target.actor;
+    }
+    // Handling for documents
+    if (target.documentName === "TokenDocument") {
+      token = target;
+      actor = actor || token.actor;
+    } else if (target.documentName === "Actor") {
+      token = target.token;
+      actor = actor || target;
+    }
+    // Prioritize name and image from the token over the actor
+    if (actor) {
+      img = actor.img;
+      name = actor.name;
+    }
+    if (token) {
+      img = token.imageLive;
+      rescale = token.rescale;
+      name = token.name;
+    }
+    return {
+      actorUuid: actor?.uuid || target.actorUuid,
+      img: img || target?.img || systemPath("icons/documents/character.svg"),
+      name: name || target?.name,
+      rescale: rescale || target?.rescale,
+      tokenUuid: token?.uuid || target.tokenUuid,
+    };
+  }
+
   /** @inheritDoc */
   async _prepareChatRenderContext(options = {}) {
     const context = await super._prepareChatRenderContext(options);
-    context.targets = this.targets;
-    context.threshold = this.threshold;
-    context.hasThreshold = typeof this.threshold === "number";
-    context.styles = this.styles;
-    context.hideRoll = this.hideRoll;
-    context.id = this.id;
+    Object.assign(context, {
+      targets: this.targets,
+      threshold: this.threshold,
+      hasThreshold: this.hasThreshold,
+      styles: this.styles,
+      hideRoll: this.hideRoll,
+      id: this.id,
+    });
     if (context.hasThreshold) {
       context.styles.total.classes = "";
       context.styles.total.tooltip = "";
@@ -242,16 +318,14 @@ export default class BaseRoll extends Roll {
   async boost(options = {}) {
     const clone = this.clone({ evaluated: true });
     const formula = clone.formula;
-    if (!clone._evaluated) {
-      await clone.evaluate();
-    }
+    if (!clone._evaluated) await clone.evaluate();
     const die = selectWeightedMaxFaceDie(clone.dice);
     die._number += 1;
     const dieRoll = new BaseRoll(die.formula);
     await dieRoll.evaluate();
     die.results.push(dieRoll.dice[0].results.at(-1));
     BaseRoll.resetFormulas(clone);
-    return /** @type {BaseRoll} */ BaseRoll.fromTerms(
+    return BaseRoll.fromTerms(
       [
         new Booster({
           fn: "b",
@@ -273,11 +347,9 @@ export default class BaseRoll extends Roll {
   clone(options = {}) {
     const { evaluated } = options;
     if (evaluated) {
-      return /** @type {BaseRoll} */ BaseRoll.fromData(
-        foundry.utils.deepClone(this.toJSON()),
-      );
+      return this.constructor.fromData(foundry.utils.deepClone(this.toJSON()));
     }
-    return /** @type {BaseRoll} */ super.clone();
+    return super.clone();
   }
 
   /**
@@ -288,14 +360,12 @@ export default class BaseRoll extends Roll {
   async deboost(options = {}) {
     const clone = this.clone({ evaluated: true });
     const formula = clone.formula;
-    if (!clone._evaluated) {
-      await clone.evaluate();
-    }
+    if (!clone._evaluated) await clone.evaluate();
     const die = selectWeightedMaxFaceDie(clone.dice);
     die._number = Math.max(0, die._number - 1);
     die.results.pop();
-    BaseRoll.resetFormulas(clone);
-    return /** @type {BaseRoll} */ BaseRoll.fromTerms(
+    this.constructor.resetFormulas(clone);
+    return this.constructor.fromTerms(
       [
         new Booster({
           fn: "db",

@@ -8,11 +8,19 @@ export default class ImpactRoll extends BaseRoll {
   /**
    * @param {Teriock.System.FormulaString} formula
    * @param {object} data
-   * @param {Teriock.Dice.ImpactRollOptions} options
+   * @param {Partial<Teriock.Dice.ImpactRollOptions>} options
    */
   constructor(formula, data, options = {}) {
     super(formula, data, options);
     this.#setImpactFlavor();
+  }
+
+  /**
+   * @inheritDoc
+   * @returns {Teriock.Dice.ImpactRollOptions}
+   */
+  static get defaultOptions() {
+    return Object.assign(super.defaultOptions, { impact: "other" });
   }
 
   /**
