@@ -61,8 +61,8 @@ export default class HarmRoll extends ImpactRoll {
    * @returns {Promise<TeriockJournalEntryPage[]>}
    */
   async getHarmArray() {
-    if (!["damage", "drain"].includes(this.take)) return [];
-    const harmMap = await HarmRoll.getHarmTypes(this.take);
+    if (!["damage", "drain"].includes(this.impact)) return [];
+    const harmMap = await HarmRoll.getHarmTypes(this.impact);
     const harms = [];
     for (const type of this.harmTypes) {
       if (Object.keys(harmMap).includes(type)) harms.push(harmMap[type]);

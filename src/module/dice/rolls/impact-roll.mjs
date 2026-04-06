@@ -13,12 +13,11 @@ export default class ImpactRoll extends BaseRoll {
   constructor(formula, data, options = {}) {
     super(formula, data, options);
     this.impact = options.impact;
-    this.options.flavor =
-      (this.options.flavor ?? (this.impact && this.impact !== "other"))
-        ? game.i18n.format("TERIOCK.ROLLS.Base.name", {
-            value: impactOptions[this.impact]?.label,
-          })
-        : "";
+    if (this.impact && this.impact !== "other") {
+      this.options.flavor ??= game.i18n.format("TERIOCK.ROLLS.Base.name", {
+        value: impactOptions[this.impact]?.label,
+      });
+    }
   }
 
   /** @inheritDoc */
