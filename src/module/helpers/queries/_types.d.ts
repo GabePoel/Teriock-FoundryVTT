@@ -24,11 +24,6 @@ declare global {
       uuid: UUID<TeriockConsequence>;
     };
 
-    export type AddToSustaining = {
-      sustainingUuid: UUID<TeriockAbility>;
-      sustainedUuids: UUID<TeriockConsequence>[];
-    };
-
     export type FireTrigger = {
       uuid: UUID<AnyCommonDocument>;
       trigger: Teriock.System.Trigger;
@@ -39,14 +34,6 @@ declare global {
       uuid: UUID<TeriockEquipment>;
     };
 
-    export type SustainedExpiration = {
-      sustainedUuid: UUID<TeriockConsequence>;
-    };
-
-    export type TimeAdvance = {
-      delta: number;
-    };
-
     export type ResetAttackPenalties = {
       actorUuids: UUID<TeriockActor>[];
     };
@@ -54,13 +41,6 @@ declare global {
     export type CreateHotbarFolder = {
       name: string;
       id: ID<TeriockUser>;
-    };
-
-    export type UpdateEmbeddedDocuments = {
-      uuid: UUID<TeriockActor> | UUID<TeriockItem>;
-      embeddedName: "Item" | "ActiveEffect";
-      updates: object[];
-      operation?: object;
     };
 
     export type Update = {
