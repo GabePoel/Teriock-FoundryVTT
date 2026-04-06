@@ -10,12 +10,12 @@ export default class ProtectionAutomation extends CritAutomation {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
     ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.AUTOMATIONS.ProtectionAutomation",
+    "TERIOCK.AUTOMATIONS.Protection",
   ];
 
   /** @inheritDoc */
   static get LABEL() {
-    return "TERIOCK.AUTOMATIONS.ProtectionAutomation.LABEL";
+    return "TERIOCK.AUTOMATIONS.Protection.LABEL";
   }
 
   /** @inheritDoc */

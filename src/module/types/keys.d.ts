@@ -61,8 +61,8 @@ declare global {
     export type PayMode = "exact" | "greedy";
     export type DeathBagStoneColor =
       keyof typeof options.die.deathBagStoneColor;
-    export type RollImpact = keyof typeof options.consequence.rolls;
-    export type CommonImpact = keyof typeof options.consequence.common;
+    export type Impact = keyof typeof options.impact;
+    export type CommonOperation = keyof typeof options.consequence.common;
 
     // Armament Keys
     export type EquipmentClass = keyof typeof index.equipmentClasses;

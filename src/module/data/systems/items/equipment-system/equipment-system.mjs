@@ -69,7 +69,7 @@ export default class EquipmentSystem extends mix(
       automations.CommonImpactsAutomation,
       automations.HacksAutomation,
       automations.RollAutomation,
-      automations.TakeAutomaton,
+      automations.TakeAutomation,
       automations.UseExternalDocumentsAutomation,
       automations.UseLocalDocumentsAutomation,
     ];

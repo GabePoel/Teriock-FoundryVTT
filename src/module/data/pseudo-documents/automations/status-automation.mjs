@@ -11,7 +11,7 @@ export default class StatusAutomation extends ChatStatusAutomation {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
     ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.AUTOMATIONS.StatusAutomation",
+    "TERIOCK.AUTOMATIONS.Status",
   ];
 
   /** @inheritDoc */
@@ -23,7 +23,7 @@ export default class StatusAutomation extends ChatStatusAutomation {
     return {
       ...super._relationChoices,
       include: game.i18n.localize(
-        "TERIOCK.AUTOMATIONS.StatusAutomation.FIELDS.relation.choices.include",
+        "TERIOCK.AUTOMATIONS.Status.FIELDS.relation.choices.include",
       ),
     };
   }

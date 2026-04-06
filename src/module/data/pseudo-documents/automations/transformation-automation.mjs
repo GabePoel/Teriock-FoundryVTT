@@ -19,7 +19,7 @@ export default class TransformationAutomation extends mix(
 ) {
   /** @inheritDoc */
   static get LABEL() {
-    return "TERIOCK.AUTOMATIONS.TransformationAutomation.LABEL";
+    return "TERIOCK.AUTOMATIONS.Transformation.LABEL";
   }
 
   /** @inheritDoc */

@@ -10,7 +10,7 @@ export default class HealAutomation extends StatAutomation {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
     ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.AUTOMATIONS.HealAutomation",
+    "TERIOCK.AUTOMATIONS.Heal",
   ];
 
   /** @inheritDoc */

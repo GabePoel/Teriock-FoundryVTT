@@ -10,7 +10,7 @@ const { fields } = foundry.data;
 export default class ChangesAutomation extends CritAutomation {
   /** @inheritDoc */
   static get LABEL() {
-    return "TERIOCK.AUTOMATIONS.ChangesAutomation.LABEL";
+    return "TERIOCK.AUTOMATIONS.Changes.LABEL";
   }
 
   /** @inheritDoc */

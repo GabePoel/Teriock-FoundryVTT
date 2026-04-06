@@ -15,6 +15,7 @@ import { effectOptions } from "./effect-options.mjs";
 import { equipmentOptions } from "./equipment-options.mjs";
 import { hackOptions } from "./hack-options.mjs";
 import { illusionOptions } from "./illusion-options.mjs";
+import { impactOptions } from "./impact-options.mjs";
 import { indexOptions } from "./index-options.mjs";
 import { piercingOptions } from "./piercing-options.mjs";
 import { powerOptions } from "./power-options.mjs";
@@ -22,7 +23,6 @@ import { protectionOptions } from "./protection-options.mjs";
 import { rankOptions } from "./rank-options.mjs";
 import { scalingOptions } from "./scaling-options.mjs";
 import { speciesOptions } from "./species-options.mjs";
-import { takeOptions } from "./take-options.mjs";
 import { targetOptions } from "./target-options.mjs";
 import { tradecraftOptions } from "./tradecraft-options.mjs";
 import { transformationOptions } from "./transformation-options.mjs";
@@ -53,7 +53,7 @@ const options = {
   rank: rankOptions,
   scaling: scalingOptions,
   species: speciesOptions,
-  take: takeOptions,
+  impact: impactOptions,
   target: targetOptions,
   tradecraft: tradecraftOptions,
   transformation: transformationOptions,

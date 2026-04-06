@@ -1,4 +1,4 @@
-import { takeOptions } from "../../constants/options/take-options.mjs";
+import { impactOptions } from "../../constants/options/impact-options.mjs";
 import { RollActivation } from "../../data/pseudo-documents/activations/_module.mjs";
 import { makeIconClass } from "../../helpers/utils.mjs";
 import TeriockStatManager from "./stat-manager.mjs";
@@ -16,7 +16,7 @@ export default class TeriockHealManager extends TeriockStatManager {
       takeHack: this._onTakeUnhack,
     },
     window: {
-      icon: makeIconClass(takeOptions.healing.icon, "title"),
+      icon: makeIconClass(impactOptions.healing.icon, "title"),
       title: "TERIOCK.DIALOGS.Heal.title",
       resizable: false,
     },
@@ -40,21 +40,19 @@ export default class TeriockHealManager extends TeriockStatManager {
     const { noStatDice = false } = options;
     this._noDice = noStatDice;
     this._forHarmField = new fields.BooleanField({
-      hint: game.i18n.localize(
-        "TERIOCK.AUTOMATIONS.HealAutomation.FIELDS.forHarm.hint",
-      ),
+      hint: game.i18n.localize("TERIOCK.AUTOMATIONS.Heal.FIELDS.forHarm.hint"),
       initial: false,
       label: game.i18n.localize(
-        "TERIOCK.AUTOMATIONS.HealAutomation.FIELDS.forHarm.label",
+        "TERIOCK.AUTOMATIONS.Heal.FIELDS.forHarm.label",
       ),
     });
     this._consumeStatDiceField = new fields.BooleanField({
       hint: game.i18n.localize(
-        "TERIOCK.AUTOMATIONS.HealAutomation.FIELDS.consumeStatDice.hint",
+        "TERIOCK.AUTOMATIONS.Heal.FIELDS.consumeStatDice.hint",
       ),
       initial: true,
       label: game.i18n.localize(
-        "TERIOCK.AUTOMATIONS.HealAutomation.FIELDS.consumeStatDice.label",
+        "TERIOCK.AUTOMATIONS.Heal.FIELDS.consumeStatDice.label",
       ),
     });
   }

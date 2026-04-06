@@ -1,7 +1,7 @@
 import { preLocalize } from "../../helpers/localization.mjs";
 import { icons } from "../display/icons.mjs";
 
-export const takeOptions = {
+export const impactOptions = {
   damage: {
     aliases: ["dmg"],
     apply: async (actor, amt) => await actor?.system.takeDamage(amt),
@@ -115,4 +115,4 @@ export const takeOptions = {
   },
 };
 
-preLocalize("options.take", { keys: ["label", "deal", "take"] });
+preLocalize("options.impact", { keys: ["label", "deal", "take"] });

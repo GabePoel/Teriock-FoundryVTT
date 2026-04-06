@@ -13,7 +13,7 @@ export default function DocumentsAutomationMixin(Base) {
       /** @inheritDoc */
       static LOCALIZATION_PREFIXES = [
         ...super.LOCALIZATION_PREFIXES,
-        "TERIOCK.AUTOMATIONS.DocumentsAutomation",
+        "TERIOCK.AUTOMATIONS.Documents",
       ];
 
       /** @inheritDoc */

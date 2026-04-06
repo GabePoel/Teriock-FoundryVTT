@@ -24,12 +24,12 @@ export default class AddExternalDocumentsAutomation extends mix(
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
     ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.AUTOMATIONS.AddExternalDocumentsAutomation",
+    "TERIOCK.AUTOMATIONS.AddExternalDocuments",
   ];
 
   /** @inheritDoc */
   static get LABEL() {
-    return "TERIOCK.AUTOMATIONS.AddExternalDocumentsAutomation.LABEL";
+    return "TERIOCK.AUTOMATIONS.AddExternalDocuments.LABEL";
   }
 
   /** @inheritDoc */

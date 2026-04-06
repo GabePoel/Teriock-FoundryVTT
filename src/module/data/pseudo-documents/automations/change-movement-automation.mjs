@@ -6,12 +6,12 @@ export default class ChangeMovementAutomation extends BaseAutomation {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
     ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.AUTOMATIONS.ChangeMovementAutomation",
+    "TERIOCK.AUTOMATIONS.ChangeMovement",
   ];
 
   /** @inheritDoc */
   static get LABEL() {
-    return "TERIOCK.AUTOMATIONS.ChangeMovementAutomation.LABEL";
+    return "TERIOCK.AUTOMATIONS.ChangeMovement.LABEL";
   }
 
   /** @inheritDoc */

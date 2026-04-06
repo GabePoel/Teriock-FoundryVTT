@@ -1,4 +1,4 @@
-import { takeOptions } from "../../constants/options/take-options.mjs";
+import { impactOptions } from "../../constants/options/impact-options.mjs";
 import { RollActivation } from "../../data/pseudo-documents/activations/_module.mjs";
 import { makeIconClass } from "../../helpers/utils.mjs";
 import TeriockStatManager from "./stat-manager.mjs";
@@ -15,7 +15,7 @@ export default class TeriockRevitalizeManager extends TeriockStatManager {
       rollStatDie: this._onRollStatDie,
     },
     window: {
-      icon: makeIconClass(takeOptions.revitalizing.icon, "title"),
+      icon: makeIconClass(impactOptions.revitalizing.icon, "title"),
       title: "TERIOCK.DIALOGS.Revitalize.title",
       resizable: false,
     },
@@ -37,21 +37,15 @@ export default class TeriockRevitalizeManager extends TeriockStatManager {
   constructor(actor, options, ...args) {
     super(actor, options, ...args);
     this._forHarmField = new fields.BooleanField({
-      hint: game.i18n.localize(
-        "TERIOCK.AUTOMATIONS.RevitalizeAutomation.forHarm.hint",
-      ),
+      hint: game.i18n.localize("TERIOCK.AUTOMATIONS.Revitalize.forHarm.hint"),
       initial: false,
-      label: game.i18n.localize(
-        "TERIOCK.AUTOMATIONS.RevitalizeAutomation.forHarm.label",
-      ),
+      label: game.i18n.localize("TERIOCK.AUTOMATIONS.Revitalize.forHarm.label"),
     });
     this._consumeStatDiceField = new fields.BooleanField({
-      hint: game.i18n.localize(
-        "TERIOCK.AUTOMATIONS.RevitalizeAutomation.forHarm.hint",
-      ),
+      hint: game.i18n.localize("TERIOCK.AUTOMATIONS.Revitalize.forHarm.hint"),
       initial: true,
       label: game.i18n.localize(
-        "TERIOCK.AUTOMATIONS.RevitalizeAutomation.consumeStatDice.label",
+        "TERIOCK.AUTOMATIONS.Revitalize.consumeStatDice.label",
       ),
     });
   }

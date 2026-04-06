@@ -18,7 +18,7 @@ export default function ExternalDocumentsAutomationMixin(Base) {
       /** @inheritDoc */
       static LOCALIZATION_PREFIXES = [
         ...super.LOCALIZATION_PREFIXES,
-        "TERIOCK.AUTOMATIONS.ExternalDocumentsAutomation",
+        "TERIOCK.AUTOMATIONS.ExternalDocuments",
       ];
 
       /** @inheritDoc */

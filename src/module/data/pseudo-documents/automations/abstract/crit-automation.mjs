@@ -14,8 +14,8 @@ export default class CritAutomation extends BaseAutomation {
         new fields.NumberField({
           choices: localizeChoices(
             {
-              0: "TERIOCK.AUTOMATIONS.CritAutomation.FIELDS.crit.choices.0",
-              1: "TERIOCK.AUTOMATIONS.CritAutomation.FIELDS.crit.choices.1",
+              0: "TERIOCK.AUTOMATIONS.Crit.FIELDS.crit.choices.0",
+              1: "TERIOCK.AUTOMATIONS.Crit.FIELDS.crit.choices.1",
             },
             { sort: false },
           ),

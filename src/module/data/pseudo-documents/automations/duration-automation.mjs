@@ -12,12 +12,12 @@ export default class DurationAutomation extends CritAutomation {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
     ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.AUTOMATIONS.DurationAutomation",
+    "TERIOCK.AUTOMATIONS.Duration",
   ];
 
   /** @inheritDoc */
   static get LABEL() {
-    return "TERIOCK.AUTOMATIONS.DurationAutomation.LABEL";
+    return "TERIOCK.AUTOMATIONS.Duration.LABEL";
   }
 
   /** @inheritDoc */

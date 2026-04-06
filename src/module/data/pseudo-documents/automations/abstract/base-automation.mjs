@@ -17,8 +17,18 @@ export default class BaseAutomation extends PropagationDataMixin(
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
     ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.AUTOMATIONS.BaseAutomation",
+    "TERIOCK.AUTOMATIONS.Base",
   ];
+
+  /** @inheritDoc */
+  static get LABEL() {
+    return "TERIOCK.AUTOMATIONS.Base.LABEL";
+  }
+
+  /** @inheritDoc */
+  static get TYPE() {
+    return "base";
+  }
 
   /**
    * @inheritDoc
@@ -40,8 +50,8 @@ export default class BaseAutomation extends PropagationDataMixin(
       heighten: new fields.SetField(
         new fields.NumberField({
           choices: localizeChoices({
-            0: "TERIOCK.AUTOMATIONS.BaseAutomation.FIELDS.heighten.choices.0",
-            1: "TERIOCK.AUTOMATIONS.BaseAutomation.FIELDS.heighten.choices.1",
+            0: "TERIOCK.AUTOMATIONS.Base.FIELDS.heighten.choices.0",
+            1: "TERIOCK.AUTOMATIONS.Base.FIELDS.heighten.choices.1",
           }),
         }),
         {

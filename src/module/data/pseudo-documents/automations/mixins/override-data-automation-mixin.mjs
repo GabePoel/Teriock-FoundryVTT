@@ -12,7 +12,7 @@ export default function OverrideDataAutomationMixin(Base) {
       /** @inheritDoc */
       static LOCALIZATION_PREFIXES = [
         ...super.LOCALIZATION_PREFIXES,
-        "TERIOCK.AUTOMATIONS.OverrideDataAutomation",
+        "TERIOCK.AUTOMATIONS.OverrideData",
       ];
 
       static defineSchema() {

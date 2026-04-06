@@ -411,7 +411,7 @@ export default function ArmamentSystemMixin(Base) {
         }
 
         // What this deals
-        /** @type {Set<Teriock.Keys.RollImpact>} */
+        /** @type {Set<Teriock.Keys.Impact>} */
         this.deals = new Set(["damage"]);
 
         // Properties

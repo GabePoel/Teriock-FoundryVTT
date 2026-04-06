@@ -2,39 +2,20 @@ import { icons } from "../../../constants/display/icons.mjs";
 import { addFormula } from "../../../helpers/formula.mjs";
 import commands from "../../../helpers/interaction/commands/_module.mjs";
 import { getRollIcon, objectMap } from "../../../helpers/utils.mjs";
-import { FormulaField } from "../../fields/_module.mjs";
-import { BaseActivation } from "./abstract/_module.mjs";
-
-const { fields } = foundry.data;
+import RollAutomation from "../automations/roll-automation.mjs";
+import { AutomationActivationFactory } from "./abstract/_module.mjs";
 
 /**
- * @property {Teriock.Keys.RollImpact} roll
+ * @property {Teriock.Keys.Impact} impact
  * @property {Teriock.System.FormulaString} formula
  * @property {boolean} merge
  */
-export default class RollActivation extends BaseActivation {
+export default class RollActivation extends AutomationActivationFactory(
+  RollAutomation,
+) {
   /** @inheritDoc */
   static get ICON() {
     return icons.ui.dice;
-  }
-
-  /** @inheritDoc */
-  static get TYPE() {
-    return "roll";
-  }
-
-  /** @inheritDoc */
-  static defineSchema() {
-    return Object.assign(super.defineSchema(), {
-      formula: new FormulaField({
-        nullable: true,
-        deterministic: false,
-      }),
-      merge: new fields.BooleanField({ initial: true }),
-      roll: new fields.StringField({
-        choices: TERIOCK.options.consequence.rolls,
-      }),
-    });
   }
 
   /**
@@ -50,12 +31,12 @@ export default class RollActivation extends BaseActivation {
     const out = activations.filter((a) => !mergeIds.includes(a.id));
 
     // Create aggregate formula from the merged activations
-    /** @type {Partial<Record<Teriock.Keys.RollImpact, RollActivation[]>>} */
+    /** @type {Partial<Record<Teriock.Keys.Impact, RollActivation[]>>} */
     const activationsByType = {};
     for (const a of toMerge) {
-      const rollType = a.roll;
-      if (!activationsByType[rollType]) activationsByType[rollType] = [];
-      activationsByType[rollType].push(a);
+      const impact = a.impact;
+      if (!activationsByType[impact]) activationsByType[impact] = [];
+      activationsByType[impact].push(a);
     }
     const formulasByType = objectMap(activationsByType, (acts) =>
       acts.reduce((a, b) => addFormula(a, b.formula), ""),
@@ -65,7 +46,7 @@ export default class RollActivation extends BaseActivation {
     out.push(
       ...Object.entries(formulasByType).map(
         ([rollType, formula]) =>
-          new RollActivation({ roll: rollType, formula: formula }),
+          new RollActivation({ impact: rollType, formula: formula }),
       ),
     );
     return out;
@@ -80,7 +61,9 @@ export default class RollActivation extends BaseActivation {
   get label() {
     return (
       this.display.label ||
-      `Roll ${TERIOCK.options.take[this.roll]?.label}` ||
+      game.i18n.format("TERIOCK.ACTIVATIONS.Roll.BUTTON", {
+        impact: TERIOCK.options.impact[this.impact]?.label,
+      }) ||
       super.label()
     );
   }
@@ -88,9 +71,9 @@ export default class RollActivation extends BaseActivation {
   /** @inheritDoc */
   async primaryAction() {
     for (const actor of this.actors) {
-      await commands[this.roll].primary(actor, {
+      await commands[this.impact].primary(actor, {
         formula: this.formula,
-        type: this.roll,
+        type: this.impact,
         boost: true,
       });
     }
@@ -99,9 +82,9 @@ export default class RollActivation extends BaseActivation {
   /** @inheritDoc */
   async secondaryAction() {
     for (const actor of this.actors) {
-      await commands[this.roll].primary(actor, {
+      await commands[this.impact].primary(actor, {
         formula: this.formula,
-        type: this.roll,
+        type: this.impact,
         boost: true,
       });
     }

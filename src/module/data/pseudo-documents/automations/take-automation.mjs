@@ -1,27 +1,29 @@
+import { localizeChoices } from "../../../helpers/localization.mjs";
+import { objectMap } from "../../../helpers/utils.mjs";
 import { TakeActivation } from "../activations/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
-import { LabelAutomationMixin } from "./mixins/_module.mjs";
+import { DisplayAutomationMixin } from "./mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
- * @property {Teriock.Keys.RollImpact} take
+ * @property {Teriock.Keys.Impact} impact
  * @property {number | null} amount
- * @mixes LabelAutomation
+ * @mixes DisplayAutomation
  * @extends {BaseAutomation}
  */
-export default class TakeAutomation extends LabelAutomationMixin(
+export default class TakeAutomation extends DisplayAutomationMixin(
   BaseAutomation,
 ) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
     ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.AUTOMATIONS.TakeAutomation",
+    "TERIOCK.AUTOMATIONS.Take",
   ];
 
   /** @inheritDoc */
   static get LABEL() {
-    return "TERIOCK.AUTOMATIONS.TakeAutomation.LABEL";
+    return "TERIOCK.AUTOMATIONS.Take.LABEL";
   }
 
   /** @inheritDoc */
@@ -32,26 +34,37 @@ export default class TakeAutomation extends LabelAutomationMixin(
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      take: new fields.StringField({
-        choices: TERIOCK.options.consequence.takes,
+      impact: new fields.StringField({
+        choices: localizeChoices(
+          objectMap(TERIOCK.options.impact, (i) => i.take),
+        ),
       }),
       amount: new fields.NumberField({ nullable: true }),
     });
   }
 
   /** @inheritDoc */
+  static migrateData(data) {
+    if (data.take) data.impact = data.take;
+    return super.migrateData(data);
+  }
+
+  /** @inheritDoc */
   get _formPaths() {
-    return ["take", "amount", "title"];
+    return ["impact", "amount", "display.label"];
   }
 
   /** @inheritDoc */
   async getActivations() {
-    return [
-      new TakeActivation({
-        take: this.take,
-        amount: this.amount,
-        display: { label: this.title },
-      }),
-    ];
+    if (this.amount && this.impact && this.impact !== "other") {
+      return [
+        new TakeActivation({
+          impact: this.impact,
+          amount: this.amount,
+          display: this.display,
+        }),
+      ];
+    }
+    return [];
   }
 }

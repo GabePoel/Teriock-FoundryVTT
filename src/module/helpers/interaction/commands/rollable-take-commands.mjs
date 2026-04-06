@@ -1,5 +1,5 @@
 import { boostDialog } from "../../../applications/dialogs/_module.mjs";
-import { takeOptions } from "../../../constants/options/take-options.mjs";
+import { impactOptions } from "../../../constants/options/impact-options.mjs";
 import { BaseRoll, HarmRoll } from "../../../dice/rolls/_module.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
 import { cleanDataset } from "../../html.mjs";
@@ -13,8 +13,8 @@ import { formulaCommand } from "./abstract-command.mjs";
 async function abstractTakeOperation(actor, options) {
   options = cleanDataset(options);
   let formula = options.formula || "0";
-  const type = options.type || "damage";
-  const take = TERIOCK.options.take[type];
+  const impact = options.impact || "damage";
+  const take = TERIOCK.options.impact[impact];
   if (options.apply) {
     const amount = await BaseRoll.getValue(formula, actor?.getRollData() || {});
     if (options.reverse) await take.reverse(actor, amount);
@@ -24,32 +24,30 @@ async function abstractTakeOperation(actor, options) {
   const rollData = actor?.getRollData() || {};
   if (options.boost) {
     formula = await boostDialog(formula, {
-      type: TERIOCK.options.take[type].label,
+      type: TERIOCK.options.impact[impact].label,
       rollData,
     });
   }
   if (!formula) return;
-  const roll = new HarmRoll(formula, rollData, { take: type });
+  const roll = new HarmRoll(formula, rollData, { impact: impact });
   if (options.crit) roll.alter(2, 0, { multiplyNumeric: false });
   await roll.evaluate();
   const messageData = {
     speaker: TeriockChatMessage.getSpeaker({ actor: actor }),
-    system: {
-      avatar: actor?.img,
-    },
+    system: { avatar: actor?.img },
   };
   await roll.toMessage(messageData);
 }
 
 /**
  * Build a take function.
- * @param {Teriock.Interaction.TakeKey} type
+ * @param {Teriock.Keys.Impact} impact
  * @param {"primary" | "secondary"} operation
  * @returns {function(actor: TeriockActor, options: Teriock.Interaction.TakeOptions): Promise<void>}
  */
-function takeOperationFactory(type, operation) {
+function takeOperationFactory(impact, operation) {
   return async function (actor, options) {
-    options.type = type;
+    options.impact = impact;
     delete options.boost;
     if (operation === "primary") {
       options.boost = game.teriock.getSetting("showRollDialogs");
@@ -63,17 +61,19 @@ function takeOperationFactory(type, operation) {
   };
 }
 
-const rollableTakeCommands = Object.entries(takeOptions).map(([type, take]) => {
-  return {
-    ...formulaCommand,
-    aliases: take?.aliases || [],
-    id: type,
-    label: (options) => options.formula,
-    tooltip: (options) => (options.apply ? take.take : take.deal),
-    icon: take.icon,
-    primary: takeOperationFactory(type, "primary"),
-    secondary: takeOperationFactory(type, "secondary"),
-  };
-});
+const rollableTakeCommands = Object.entries(impactOptions).map(
+  ([impact, config]) => {
+    return {
+      ...formulaCommand,
+      aliases: config?.aliases || [],
+      id: impact,
+      label: (options) => options.formula,
+      tooltip: (options) => (options.apply ? config.take : config.deal),
+      icon: config.icon,
+      primary: takeOperationFactory(impact, "primary"),
+      secondary: takeOperationFactory(impact, "secondary"),
+    };
+  },
+);
 
 export default rollableTakeCommands;

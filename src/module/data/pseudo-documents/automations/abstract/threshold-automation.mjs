@@ -5,7 +5,7 @@ export default class ThresholdAutomation extends BaseAutomation {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
     ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.AUTOMATIONS.ThresholdAutomation",
+    "TERIOCK.AUTOMATIONS.Threshold",
   ];
 
   /** @inheritDoc */

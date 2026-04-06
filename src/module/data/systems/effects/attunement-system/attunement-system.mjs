@@ -50,6 +50,13 @@ export default class AttunementSystem extends BaseEffectSystem {
   }
 
   /** @inheritDoc */
+  get color() {
+    return this.targetDocument
+      ? TERIOCK.display.colors.green
+      : TERIOCK.display.colors.orange;
+  }
+
+  /** @inheritDoc */
   get embedIcons() {
     return [
       {

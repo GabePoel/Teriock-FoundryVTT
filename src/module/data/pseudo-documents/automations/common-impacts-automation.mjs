@@ -9,7 +9,7 @@ import { TriggerAutomationMixin } from "./mixins/_module.mjs";
 const { fields } = foundry.data;
 
 /**
- * @property {Set<Teriock.Keys.CommonImpact>} common
+ * @property {Set<Teriock.Keys.CommonOperation>} common
  */
 export default class CommonImpactsAutomation extends TriggerAutomationMixin(
   BaseAutomation,
@@ -17,12 +17,12 @@ export default class CommonImpactsAutomation extends TriggerAutomationMixin(
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
     ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.AUTOMATIONS.CommonImpactsAutomation",
+    "TERIOCK.AUTOMATIONS.CommonImpacts",
   ];
 
   /** @inheritDoc */
   static get LABEL() {
-    return "TERIOCK.AUTOMATIONS.CommonImpactsAutomation.LABEL";
+    return "TERIOCK.AUTOMATIONS.CommonImpacts.LABEL";
   }
 
   /** @inheritDoc */
@@ -66,7 +66,7 @@ export default class CommonImpactsAutomation extends TriggerAutomationMixin(
         ),
       },
       content: game.i18n.format(
-        "TERIOCK.AUTOMATIONS.CommonImpactsAutomation.DIALOG.content",
+        "TERIOCK.AUTOMATIONS.CommonImpacts.DIALOG.content",
         {
           impacts: formatJoin(
             Array.from(this.common).map(

@@ -5,7 +5,7 @@ export default class RevitalizeAutomation extends StatAutomation {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
     ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.AUTOMATIONS.RevitalizeAutomation",
+    "TERIOCK.AUTOMATIONS.Revitalize",
   ];
 
   /** @inheritDoc */

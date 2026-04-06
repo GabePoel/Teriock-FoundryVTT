@@ -16,7 +16,7 @@ export default class ChatStatusAutomation extends CritAutomation {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
     ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.AUTOMATIONS.ChatStatusAutomation",
+    "TERIOCK.AUTOMATIONS.ChatStatus",
   ];
 
   /** @inheritDoc */
@@ -34,12 +34,9 @@ export default class ChatStatusAutomation extends CritAutomation {
    */
   static get _relationChoices() {
     return localizeChoices({
-      apply:
-        "TERIOCK.AUTOMATIONS.ChatStatusAutomation.FIELDS.relation.choices.apply",
-      remove:
-        "TERIOCK.AUTOMATIONS.ChatStatusAutomation.FIELDS.relation.choices.remove",
-      toggle:
-        "TERIOCK.AUTOMATIONS.ChatStatusAutomation.FIELDS.relation.choices.toggle",
+      apply: "TERIOCK.AUTOMATIONS.ChatStatus.FIELDS.relation.choices.apply",
+      remove: "TERIOCK.AUTOMATIONS.ChatStatus.FIELDS.relation.choices.remove",
+      toggle: "TERIOCK.AUTOMATIONS.ChatStatus.FIELDS.relation.choices.toggle",
     });
   }
 
@@ -53,7 +50,7 @@ export default class ChatStatusAutomation extends CritAutomation {
       relation: new fields.StringField({
         choices: this._relationChoices,
         initial: this._relationInitial,
-        label: "TERIOCK.AUTOMATIONS.BaseAutomation.FIELDS.relation.label",
+        label: "TERIOCK.AUTOMATIONS.Base.FIELDS.relation.label",
         nullable: false,
       }),
       status: new fields.StringField({

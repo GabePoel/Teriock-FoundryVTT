@@ -7,7 +7,7 @@ export default class ResistAutomation extends ThresholdAutomation {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
     ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.AUTOMATIONS.ResistAutomation",
+    "TERIOCK.AUTOMATIONS.Resist",
   ];
 
   /** @inheritDoc */

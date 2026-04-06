@@ -19,7 +19,7 @@ export default function TriggerAutomationMixin(Base) {
       /** @inheritDoc */
       static LOCALIZATION_PREFIXES = [
         ...super.LOCALIZATION_PREFIXES,
-        "TERIOCK.AUTOMATIONS.TriggerAutomation",
+        "TERIOCK.AUTOMATIONS.Trigger",
       ];
 
       /**

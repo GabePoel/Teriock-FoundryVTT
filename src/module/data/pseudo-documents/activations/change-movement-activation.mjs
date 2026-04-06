@@ -1,24 +1,15 @@
-import { movementActionField } from "../../fields/helpers/builders.mjs";
-import { BaseActivation } from "./abstract/_module.mjs";
+import ChangeMovementAutomation from "../automations/change-movement-automation.mjs";
+import { AutomationActivationFactory } from "./abstract/_module.mjs";
 
 /**
  * @property {string} movementAction
  */
-export default class ChangeMovementActivation extends BaseActivation {
+export default class ChangeMovementActivation extends AutomationActivationFactory(
+  ChangeMovementAutomation,
+) {
   /** @inheritDoc */
   static get ICON() {
     return "ms-sprint";
-  }
-
-  /** @inheritDoc */
-  static get TYPE() {
-    return "changeMovement";
-  }
-
-  static defineSchema() {
-    return Object.assign(super.defineSchema(), {
-      movementAction: movementActionField(),
-    });
   }
 
   /**
@@ -43,7 +34,7 @@ export default class ChangeMovementActivation extends BaseActivation {
   /** @inheritDoc */
   get label() {
     return (
-      this.title ||
+      this.display.label ||
       ChangeMovementActivation.getLabel(this.movementAction) ||
       this.constructor.LABEL
     );

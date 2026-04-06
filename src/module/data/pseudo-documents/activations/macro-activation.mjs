@@ -8,7 +8,7 @@ const { fields } = foundry.data;
  * @property {UUID<TeriockMacro>} macro
  * @property {object} scope
  */
-export default class ExecuteMacroActivation extends BaseActivation {
+export default class MacroActivation extends BaseActivation {
   /** @inheritDoc */
   static get ICON() {
     return icons.document.macro;
@@ -16,7 +16,7 @@ export default class ExecuteMacroActivation extends BaseActivation {
 
   /** @inheritDoc */
   static get TYPE() {
-    return "executeMacro";
+    return "macro";
   }
 
   /** @inheritDoc */

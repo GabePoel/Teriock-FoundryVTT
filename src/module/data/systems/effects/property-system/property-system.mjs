@@ -45,7 +45,7 @@ export default class PropertySystem extends mix(
       automations.HacksAutomation,
       automations.PropertyMacroAutomation,
       automations.RollAutomation,
-      automations.TakeAutomaton,
+      automations.TakeAutomation,
       automations.UseExternalDocumentsAutomation,
       automations.UseLocalDocumentsAutomation,
     ];

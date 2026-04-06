@@ -45,10 +45,10 @@ export default async function placeTemplateDialog(templateData = {}) {
     {
       rootId,
       label: game.i18n.localize(
-        "TERIOCK.AUTOMATIONS.TemplateAutomation.FIELDS.movable.label",
+        "TERIOCK.AUTOMATIONS.Template.FIELDS.movable.label",
       ),
       hint: game.i18n.localize(
-        "TERIOCK.AUTOMATIONS.TemplateAutomation.FIELDS.movable.hint",
+        "TERIOCK.AUTOMATIONS.Template.FIELDS.movable.hint",
       ),
     },
     {

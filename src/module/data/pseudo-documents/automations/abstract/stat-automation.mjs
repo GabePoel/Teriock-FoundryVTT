@@ -13,7 +13,7 @@ export default class StatAutomation extends TriggerAutomationMixin(
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
     ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.AUTOMATIONS.StatAutomation",
+    "TERIOCK.AUTOMATIONS.Stat",
   ];
 
   /** @inheritDoc */

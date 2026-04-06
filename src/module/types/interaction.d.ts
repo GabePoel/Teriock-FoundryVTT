@@ -1,9 +1,9 @@
 import { TeriockActor } from "../documents/_module.mjs";
-import { takeOptions } from "../constants/options/take-options.mjs";
+import { impactOptions } from "../constants/options/impact-options.mjs";
 
 declare global {
   namespace Teriock.Interaction {
-    export type TakeKey = keyof typeof takeOptions;
+    export type TakeKey = keyof typeof impactOptions;
 
     export type InteractionEntry = {
       icon: string | ((options: object) => string);
@@ -64,10 +64,10 @@ declare global {
     };
 
     export type TakeOptions = FormulaOptions & {
-      type?: TakeKey;
-      crit?: boolean;
-      boost?: boolean;
       apply?: boolean;
+      boost?: boolean;
+      crit?: boolean;
+      impact?: Teriock.Keys.Impact;
       reverse?: boolean;
     };
 

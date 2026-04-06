@@ -15,13 +15,13 @@ export default class TemplateAutomation extends BaseAutomation {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
     ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.AUTOMATIONS.TemplateAutomation",
+    "TERIOCK.AUTOMATIONS.Template",
     "TEMPLATE",
   ];
 
   /** @inheritDoc */
   static get LABEL() {
-    return "TERIOCK.AUTOMATIONS.TemplateAutomation.LABEL";
+    return "TERIOCK.AUTOMATIONS.Template.LABEL";
   }
 
   /** @inheritDoc */

@@ -417,7 +417,7 @@ foundry.helpers.Hooks.once("init", function () {
     ...[
       dice.rolls.BaseRoll,
       dice.rolls.ThresholdRoll,
-      dice.rolls.TakeRoll,
+      dice.rolls.ImpactRoll,
       dice.rolls.HarmRoll,
     ],
   );

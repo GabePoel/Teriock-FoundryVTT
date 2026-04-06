@@ -2,7 +2,7 @@ import { mix } from "../../../helpers/utils.mjs";
 import { CritAutomation } from "./abstract/_module.mjs";
 import {
   CompetenceAutomationMixin,
-  LabelAutomationMixin,
+  DisplayAutomationMixin,
   OverrideDataAutomationMixin,
 } from "./mixins/_module.mjs";
 
@@ -11,24 +11,24 @@ const { fields } = foundry.data;
 /**
  * @extends {CritAutomation}
  * @mixes CompetenceAutomation
- * @mixes LabelAutomation
+ * @mixes DisplayAutomation
  * @mixes OverrideDataAutomation
  */
 export default class ModifyEffectAutomation extends mix(
   CritAutomation,
-  LabelAutomationMixin,
+  DisplayAutomationMixin,
   OverrideDataAutomationMixin,
   CompetenceAutomationMixin,
 ) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
     ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.AUTOMATIONS.ModifyEffectAutomation",
+    "TERIOCK.AUTOMATIONS.ModifyEffect",
   ];
 
   /** @inheritDoc */
   static get LABEL() {
-    return "TERIOCK.AUTOMATIONS.ModifyEffectAutomation.LABEL";
+    return "TERIOCK.AUTOMATIONS.ModifyEffect.LABEL";
   }
 
   /** @inheritDoc */
@@ -46,7 +46,7 @@ export default class ModifyEffectAutomation extends mix(
   /** @inheritDoc */
   get _formPaths() {
     return [
-      "title",
+      "display.label",
       "prevent",
       ...this._competencePaths,
       ...this._overrideDataPaths,

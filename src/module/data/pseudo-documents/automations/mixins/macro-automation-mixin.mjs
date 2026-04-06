@@ -1,8 +1,8 @@
 import { resolveDocument } from "../../../../helpers/resolve.mjs";
 import { lcFirst } from "../../../../helpers/string.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
-import ExecuteMacroActivation from "../../activations/execute-macro-activation.mjs";
-import LabelAutomationMixin from "./label-automation-mixin.mjs";
+import { MacroActivation } from "../../activations/_module.mjs";
+import DisplayAutomationMixin from "./display-automation-mixin.mjs";
 import TriggerAutomationMixin from "./trigger-automation-mixin.mjs";
 
 const { fields } = foundry.data;
@@ -16,25 +16,24 @@ export default function MacroAutomationMixin(Base) {
     /**
      * @extends {BaseAutomation}
      * @mixes TriggerAutomation
-     * @mixes LabelAutomation
+     * @mixes DisplayAutomation
      * @mixin
      * @property {UUID<TeriockMacro>} macro
-     * @property {string} title
      */
     class MacroAutomation extends mix(
       Base,
       TriggerAutomationMixin,
-      LabelAutomationMixin,
+      DisplayAutomationMixin,
     ) {
       /** @inheritDoc */
       static LOCALIZATION_PREFIXES = [
         ...super.LOCALIZATION_PREFIXES,
-        "TERIOCK.AUTOMATIONS.MacroAutomation",
+        "TERIOCK.AUTOMATIONS.Macro",
       ];
 
       /** @inheritDoc */
       static get LABEL() {
-        return "TERIOCK.AUTOMATIONS.MacroAutomation.LABEL";
+        return "TERIOCK.AUTOMATIONS.Macro.LABEL";
       }
 
       /** @inheritDoc */
@@ -71,8 +70,8 @@ export default function MacroAutomationMixin(Base) {
 
       /** @inheritDoc */
       get _formPaths() {
-        let paths = ["macro", ...super._formPaths];
-        if (this.trigger) paths = paths.filter((p) => p !== "title");
+        const paths = ["macro", ...super._formPaths];
+        if (!this.trigger) paths.push("display.label");
         return paths;
       }
 
@@ -93,9 +92,9 @@ export default function MacroAutomationMixin(Base) {
       async _getActivations() {
         const macro = await resolveDocument(this.macro);
         return [
-          new ExecuteMacroActivation({
+          new MacroActivation({
             macro: this.macro,
-            display: { label: this.title || macro?.name || this.label },
+            display: { label: this.display.label || macro?.name || this.label },
           }),
         ];
       }

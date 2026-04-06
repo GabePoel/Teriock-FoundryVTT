@@ -1,43 +1,29 @@
 import { icons } from "../../../constants/display/icons.mjs";
-import { BaseActivation } from "./abstract/_module.mjs";
-
-const { fields } = foundry.data;
+import TakeAutomation from "../automations/take-automation.mjs";
+import { AutomationActivationFactory } from "./abstract/_module.mjs";
 
 /**
- * @property {Teriock.Keys.RollImpact} take
+ * @property {Teriock.Keys.Impact} impact
  * @property {number} amount
  */
-export default class TakeActivation extends BaseActivation {
+export default class TakeActivation extends AutomationActivationFactory(
+  TakeAutomation,
+) {
   /** @inheritDoc */
   static get ICON() {
     return icons.consequence.crit;
   }
 
   /** @inheritDoc */
-  static get TYPE() {
-    return "take";
-  }
-
-  /** @inheritDoc */
-  static defineSchema() {
-    return Object.assign(super.defineSchema(), {
-      take: new fields.StringField({
-        choices: TERIOCK.options.consequence.takes,
-      }),
-      amount: new fields.NumberField({ nullable: true }),
-    });
-  }
-
-  /** @inheritDoc */
   get classes() {
-    return [super.classes, this.take + "-button"].join(" ");
+    return [super.classes, this.impact + "-button"].join(" ");
   }
 
   /** @inheritDoc */
   get icon() {
     return (
       this.display.icon ||
-      TERIOCK.options.take[this.take]?.icon ||
+      TERIOCK.options.impact[this.impact]?.icon ||
       this.constructor.ICON
     );
   }
@@ -46,7 +32,7 @@ export default class TakeActivation extends BaseActivation {
   get label() {
     return (
       this.display.label ||
-      TERIOCK.options.take[this.take]?.take ||
+      TERIOCK.options.impact[this.impact]?.take ||
       this.constructor.LABEL
     );
   }
@@ -54,14 +40,14 @@ export default class TakeActivation extends BaseActivation {
   /** @inheritDoc */
   async primaryAction() {
     for (const actor of this.actors) {
-      TERIOCK.options.take[this.take].apply(actor, this.amount);
+      TERIOCK.options.impact[this.impact].apply(actor, this.amount);
     }
   }
 
   /** @inheritDoc */
   async secondaryAction() {
     for (const actor of this.actors) {
-      TERIOCK.options.take[this.take].reverse(actor, this.amount);
+      TERIOCK.options.impact[this.impact].reverse(actor, this.amount);
     }
   }
 }

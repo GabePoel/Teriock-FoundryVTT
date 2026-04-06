@@ -36,22 +36,22 @@ export default (Base) =>
           initial: actor.system[stat].morganti ?? 0,
           label: game.i18n.format(
             "TERIOCK.SHEETS.Actor.ACTIONS.ApplyMorganti.label",
-            { effect: TERIOCK.options.take[type]?.label },
+            { effect: TERIOCK.options.impact[type]?.label },
           ),
           min: 0,
           integer: true,
           hint: game.i18n.format(
             "TERIOCK.SHEETS.Actor.ACTIONS.ApplyMorganti.hint",
-            { effect: TERIOCK.options.take[type]?.label?.toLowerCase() },
+            { effect: TERIOCK.options.impact[type]?.label?.toLowerCase() },
           ),
         });
         await TeriockDialog.prompt({
           window: {
             title: game.i18n.format(
               "TERIOCK.SHEETS.Actor.ACTIONS.ApplyMorganti.title",
-              { effect: TERIOCK.options.take[type]?.label },
+              { effect: TERIOCK.options.impact[type]?.label },
             ),
-            icon: makeIconClass(TERIOCK.options.take[type].icon, "title"),
+            icon: makeIconClass(TERIOCK.options.impact[type].icon, "title"),
           },
           content: field.toFormGroup({}, { name: type }).outerHTML,
           ok: {
@@ -89,13 +89,13 @@ export default (Base) =>
         integer: true,
         hint: game.i18n.format(
           "TERIOCK.SHEETS.Actor.ACTIONS.TakeRollable.hint",
-          { effect: TERIOCK.options.take[type]?.label?.toLowerCase() },
+          { effect: TERIOCK.options.impact[type]?.label?.toLowerCase() },
         ),
       });
       await TeriockDialog.prompt({
         window: {
-          title: TERIOCK.options.take[type]?.take,
-          icon: makeIconClass(TERIOCK.options.take[type].icon, "title"),
+          title: TERIOCK.options.impact[type]?.impact,
+          icon: makeIconClass(TERIOCK.options.impact[type].icon, "title"),
         },
         content: field.toFormGroup({}, { name: type, placeholder: "0" })
           .outerHTML,

@@ -18,12 +18,12 @@ export default class RegainUsesAutomation extends TriggerAutomationMixin(
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
     ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.AUTOMATIONS.RegainUsesAutomation",
+    "TERIOCK.AUTOMATIONS.RegainUses",
   ];
 
   /** @inheritDoc */
   static get LABEL() {
-    return "TERIOCK.AUTOMATIONS.RegainUsesAutomation.LABEL";
+    return "TERIOCK.AUTOMATIONS.RegainUses.LABEL";
   }
 
   /** @inheritDoc */
@@ -59,10 +59,9 @@ export default class RegainUsesAutomation extends TriggerAutomationMixin(
     const regain = await TeriockDialog.confirm({
       content: await TeriockTextEditor.enrichHTML(
         "<p>" +
-          game.i18n.format(
-            "TERIOCK.AUTOMATIONS.RegainUsesAutomation.DIALOG.text",
-            { name: `@UUID[${this.document.uuid}]` },
-          ) +
+          game.i18n.format("TERIOCK.AUTOMATIONS.RegainUses.DIALOG.text", {
+            name: `@UUID[${this.document.uuid}]`,
+          }) +
           "</p>",
       ),
       window: {
@@ -70,16 +69,12 @@ export default class RegainUsesAutomation extends TriggerAutomationMixin(
           TERIOCK.options.document[this.document.type].icon,
           "title",
         ),
-        title: game.i18n.localize(
-          "TERIOCK.AUTOMATIONS.RegainUsesAutomation.LABEL",
-        ),
+        title: game.i18n.localize("TERIOCK.AUTOMATIONS.RegainUses.LABEL"),
       },
     });
     if (!regain) return;
     const roll = new BaseRoll(this.formula, this.getRollData(), {
-      flavor: game.i18n.localize(
-        "TERIOCK.AUTOMATIONS.RegainUsesAutomation.USAGE.roll",
-      ),
+      flavor: game.i18n.localize("TERIOCK.AUTOMATIONS.RegainUses.USAGE.roll"),
     });
     await roll.evaluate();
     /** @type {Teriock.MessageData.MessagePanel} */
@@ -91,7 +86,7 @@ export default class RegainUsesAutomation extends TriggerAutomationMixin(
           ),
           icon: TERIOCK.display.icons.pseudoDocument.automation,
           wrappers: [
-            game.i18n.localize("TERIOCK.AUTOMATIONS.BaseAutomation.LABEL"),
+            game.i18n.localize("TERIOCK.AUTOMATIONS.Base.LABEL"),
             this.constructor._processedTriggerChoices[this.trigger].label,
           ],
         },
@@ -99,7 +94,7 @@ export default class RegainUsesAutomation extends TriggerAutomationMixin(
       blocks: [
         {
           text: game.i18n.format(
-            "TERIOCK.AUTOMATIONS.RegainUsesAutomation.USAGE.description",
+            "TERIOCK.AUTOMATIONS.RegainUses.USAGE.description",
             { name: this.document.fullName },
           ),
           title: game.i18n.localize(
@@ -109,12 +104,8 @@ export default class RegainUsesAutomation extends TriggerAutomationMixin(
       ],
       icon: TERIOCK.display.icons.pseudoDocument.automation,
       image: this.document.img,
-      label: game.i18n.localize(
-        "TERIOCK.AUTOMATIONS.RegainUsesAutomation.LABEL",
-      ),
-      name: game.i18n.localize(
-        "TERIOCK.AUTOMATIONS.RegainUsesAutomation.LABEL",
-      ),
+      label: game.i18n.localize("TERIOCK.AUTOMATIONS.RegainUses.LABEL"),
+      name: game.i18n.localize("TERIOCK.AUTOMATIONS.RegainUses.LABEL"),
     };
     const panel = await TeriockTextEditor.enrichPanel(panelData);
     const messageData = {

@@ -23,7 +23,7 @@ export { default as ResistAutomation } from "./resist-automation.mjs";
 export { default as RevitalizeAutomation } from "./revitalize-automation.mjs";
 export { default as RollAutomation } from "./roll-automation.mjs";
 export { default as StatusAutomation } from "./status-automation.mjs";
-export { default as TakeAutomaton } from "./take-automation.mjs";
+export { default as TakeAutomation } from "./take-automation.mjs";
 export { default as TemplateAutomation } from "./template-automation.mjs";
 export { default as TransformationAutomation } from "./transformation-automation.mjs";
 export { default as UseExternalDocumentsAutomation } from "./use-external-documents-automation.mjs";

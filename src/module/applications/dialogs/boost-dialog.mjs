@@ -1,3 +1,4 @@
+import { impactOptions } from "../../constants/options/impact-options.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
 import { makeIconClass } from "../../helpers/utils.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
@@ -18,7 +19,7 @@ export default async function boostDialog(rollFormula, options = {}) {
   const {
     crit = false,
     label = game.i18n.localize("TERIOCK.DIALOGS.Boost.BUTTONS.ok"),
-    type,
+    impact,
   } = options;
   let formula = rollFormula;
   const formulaField = new fields.StringField({
@@ -99,8 +100,10 @@ export default async function boostDialog(rollFormula, options = {}) {
     },
     window: {
       icon: makeIconClass(TERIOCK.display.icons.ui.dice, "title"),
-      title: type
-        ? game.i18n.format("TERIOCK.DIALOGS.Boost.typeTitle", { type })
+      title: impact
+        ? game.i18n.format("TERIOCK.DIALOGS.Boost.typeTitle", {
+            type: impactOptions[impact]?.label,
+          })
         : game.i18n.localize("TERIOCK.DIALOGS.Boost.title"),
     },
   });

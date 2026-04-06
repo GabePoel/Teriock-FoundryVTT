@@ -27,7 +27,7 @@ export default class HarmSystem extends mix(
       automations.CommonImpactsAutomation,
       automations.HacksAutomation,
       automations.RollAutomation,
-      automations.TakeAutomaton,
+      automations.TakeAutomation,
     ];
   }
 
@@ -61,7 +61,7 @@ export default class HarmSystem extends mix(
   get fullName() {
     return game.i18n.format("TERIOCK.SYSTEMS.Harm.EMBED.fullName", {
       name: super.fullName,
-      type: TERIOCK.options.take[this.parent.type]?.label || "",
+      type: TERIOCK.options.impact[this.parent.type]?.label || "",
     });
   }
 

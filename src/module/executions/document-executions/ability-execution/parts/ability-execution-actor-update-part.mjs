@@ -1,3 +1,5 @@
+import { costOptions } from "../../../../constants/options/cost-options.mjs";
+import { impactOptions } from "../../../../constants/options/impact-options.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { formulaExists } from "../../../../helpers/formula.mjs";
 import { toTitleCase } from "../../../../helpers/string.mjs";
@@ -12,6 +14,16 @@ export default function AbilityExecutionActorUpdatePart(Base) {
      * @mixin
      */
     class AbilityExecutionActorUpdate extends Base {
+      /**
+       * Costs that are being paid.
+       * @returns {string[]}
+       */
+      get #paidCosts() {
+        return Object.keys(costOptions.primary.keys).filter(
+          (c) => this.costs[c] > 0 && !this.options[`no${toTitleCase(c)}`],
+        );
+      }
+
       /**
        * Prepare attack penalty.
        * @returns {Promise<void>}
@@ -38,16 +50,13 @@ export default function AbilityExecutionActorUpdatePart(Base) {
           if (this.usesReaction) {
             this.updates["system.combat.hasReaction"] = false;
           }
-          for (const stat of ["hp", "mp", "lp"]) {
-            if (
-              this.costs[stat] > 0 &&
-              !this.options[`no${toTitleCase(stat)}`]
-            ) {
-              this.updates[`system.${stat}.value`] = Math.max(
-                this.actor.system[stat].value +
-                  TERIOCK.options.cost.primary.keys[stat].multiplier *
-                    this.costs[stat],
-                this.actor.system[stat].min ?? 0,
+          for (const c of this.#paidCosts) {
+            const config = costOptions.primary.keys[c];
+            if (config?.barStat) {
+              this.updates[`system.${c}.value`] = Math.max(
+                this.actor.system[c].value +
+                  (config?.multiplier ?? 1) * this.costs[c],
+                this.actor.system[c].min ?? 0,
               );
             }
           }
@@ -61,8 +70,14 @@ export default function AbilityExecutionActorUpdatePart(Base) {
           this.actor.getSetting("automaticallyPayAbilityCosts") &&
           game.teriock.getSetting("automaticallyPayAbilityCosts")
         ) {
-          if (this.costs.gp > 0 && !this.options.noGp) {
-            await this.actor.system.takePay(this.costs.gp);
+          for (const c of this.#paidCosts) {
+            const config = costOptions.primary.keys[c];
+            if (!config?.barStat) {
+              await impactOptions[config?.impact]?.apply(
+                this.actor,
+                this.costs[c],
+              );
+            }
           }
           if (Object.keys(this.updates).length > 0) {
             await this.actor.update(this.updates);

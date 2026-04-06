@@ -15,12 +15,12 @@ export default class HacksAutomation extends BaseAutomation {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
     ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.AUTOMATIONS.HacksAutomation",
+    "TERIOCK.AUTOMATIONS.Hacks",
   ];
 
   /** @inheritDoc */
   static get LABEL() {
-    return "TERIOCK.AUTOMATIONS.HacksAutomation.LABEL";
+    return "TERIOCK.AUTOMATIONS.Hacks.LABEL";
   }
 
   /** @inheritDoc */

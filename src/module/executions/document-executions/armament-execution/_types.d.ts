@@ -3,7 +3,7 @@ declare global {
     export type ArmamentExecutionOptions = DocumentExecutionOptions & {
       bonusDamage?: Teriock.System.FormulaString;
       crit?: boolean;
-      deals?: Iterable<Teriock.Keys.RollImpact>;
+      deals?: Iterable<Teriock.Keys.Impact>;
       source?: TeriockArmament;
       twoHanded?: boolean;
     };

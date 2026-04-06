@@ -1,6 +1,6 @@
-import TakeRoll from "./take-roll.mjs";
+import ImpactRoll from "./impact-roll.mjs";
 
-export default class HarmRoll extends TakeRoll {
+export default class HarmRoll extends ImpactRoll {
   /**
    * Get a mapping to all the registered harms of a certain type.
    * @param {string} type

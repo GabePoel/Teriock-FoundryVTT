@@ -1,4 +1,5 @@
 import { conditionDialog } from "../../../../applications/dialogs/select-token-dialog.mjs";
+import { costOptions } from "../../../../constants/options/cost-options.mjs";
 import {
   AddExternalDocumentsAutomation,
   ChangesAutomation,
@@ -446,7 +447,7 @@ export default function AbilityExecutionChatPart(Base) {
             new acts.AddDocumentsActivation({
               display: {
                 label:
-                  modifyEffectAutomation?.title ||
+                  modifyEffectAutomation?.display?.label ||
                   "TERIOCK.COMMANDS.ApplyEffect.label",
               },
               primary: {
@@ -569,24 +570,13 @@ export default function AbilityExecutionChatPart(Base) {
             );
           }
         }
-        if (this.costs.mp > 0) {
+        for (const c of Object.keys(this.costs).filter(
+          (c) => this.costs[c] > 0,
+        )) {
           this.tags.push(
-            game.i18n.format("TERIOCK.SYSTEMS.Consequence.PANELS.spentMp", {
-              amount: this.costs.mp,
-            }),
-          );
-        }
-        if (this.costs.hp > 0) {
-          this.tags.push(
-            game.i18n.format("TERIOCK.SYSTEMS.Consequence.PANELS.spentHp", {
-              amount: this.costs.hp,
-            }),
-          );
-        }
-        if (this.costs.gp > 0) {
-          this.tags.push(
-            game.i18n.format("TERIOCK.SYSTEMS.Consequence.PANELS.spentGp", {
-              amount: this.costs.gp,
+            game.i18n.format("TERIOCK.SYSTEMS.Consequence.PANELS.spent", {
+              amount: this.costs[c],
+              label: costOptions.primary.keys[c]?.abbreviation,
             }),
           );
         }

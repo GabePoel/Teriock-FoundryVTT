@@ -306,7 +306,7 @@ export default class ChildSystem extends mix(
     super.prepareBaseData();
     this.qualifiers.suppressed.evaluate();
     this.qualifiers.ephemeral.evaluate();
-    this.boosts = /** @type {Record<Teriock.Keys.RollImpact, string>} */ {};
+    this.boosts = /** @type {Record<Teriock.Keys.Impact, string>} */ {};
   }
 
   /** @inheritDoc */

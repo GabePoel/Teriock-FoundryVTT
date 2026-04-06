@@ -39,10 +39,12 @@ export default class ArmamentExecution extends BaseDocumentExecution {
   get #typedRolls() {
     if (this.rolls.length === 0) return [];
     const roll = this.rolls[0];
-    return Array.from(this.deals).map((take) => {
-      const takeRoll = /** @type {HarmRoll} */ roll.clone({ evaluated: true });
-      takeRoll.take = take;
-      return takeRoll;
+    return Array.from(this.deals).map((impact) => {
+      const impactRoll = /** @type {HarmRoll} */ roll.clone({
+        evaluated: true,
+      });
+      impactRoll.impact = impact;
+      return impactRoll;
     });
   }
 
@@ -69,7 +71,7 @@ export default class ArmamentExecution extends BaseDocumentExecution {
   get flavor() {
     if (this.deals.size === 1) {
       return game.i18n.format("TERIOCK.ROLLS.Base.name", {
-        value: TERIOCK.options.take[Array.from(this.deals)[0]].label,
+        value: TERIOCK.options.impact[Array.from(this.deals)[0]].label,
       });
     } else {
       return game.i18n.localize("TERIOCK.ROLLS.Harm.multi");
