@@ -12,8 +12,39 @@ export default class ImpactRoll extends BaseRoll {
    */
   constructor(formula, data, options = {}) {
     super(formula, data, options);
-    this.impact = options.impact;
-    if (this.impact && this.impact !== "other") {
+    this.#setImpactFlavor();
+  }
+
+  /**
+   * Whether this roll has an impact associated with it.
+   * @returns {boolean}
+   */
+  get hasImpact() {
+    return this.impact && this.impact !== "other";
+  }
+
+  /**
+   * The impact associated with this roll.
+   * @returns {Teriock.Keys.Impact}
+   */
+  get impact() {
+    return this.options.impact;
+  }
+
+  /**
+   * The impact associated with this roll.
+   * @param impact
+   */
+  set impact(impact) {
+    this.options.impact = impact;
+    this.#setImpactFlavor();
+  }
+
+  /**
+   * Set the flavor if there's not one already defined.
+   */
+  #setImpactFlavor() {
+    if (this.hasImpact) {
       this.options.flavor ??= game.i18n.format("TERIOCK.ROLLS.Base.name", {
         value: impactOptions[this.impact]?.label,
       });
@@ -22,7 +53,7 @@ export default class ImpactRoll extends BaseRoll {
 
   /** @inheritDoc */
   async getActivations() {
-    if (this.impact && this.impact !== "other") {
+    if (this.hasImpact) {
       return [
         new teriock.data.pseudoDocuments.activations.TakeActivation({
           impact: this.impact,

@@ -9,6 +9,7 @@ import BaseDocumentExecution from "../base-document-execution/base-document-exec
 
 /**
  * @implements {Teriock.Execution.ArmamentExecutionInterface}
+ * @param {HarmRoll[]} rolls
  */
 export default class ArmamentExecution extends BaseDocumentExecution {
   /**
@@ -40,10 +41,7 @@ export default class ArmamentExecution extends BaseDocumentExecution {
     if (this.rolls.length === 0) return [];
     const roll = this.rolls[0];
     return Array.from(this.deals).map((impact) => {
-      const impactRoll = /** @type {HarmRoll} */ roll.clone({
-        evaluated: true,
-      });
-      foundry.utils.setProperty(impactRoll, "options.impact", impact);
+      const impactRoll = roll.clone({ evaluated: true });
       impactRoll.impact = impact;
       return impactRoll;
     });
@@ -100,14 +98,8 @@ export default class ArmamentExecution extends BaseDocumentExecution {
     await super._buildRolls();
     if (this.crit) {
       for (const roll of this.rolls) {
-        if (this.deals.size === 1) {
-          const impact = Array.from(this.deals)[0];
-          foundry.utils.setProperty(roll, "options.impact", impact);
-          roll.impact = impact;
-        } else {
-          foundry.utils.deleteProperty(roll, "options.impact");
-          delete roll.impact;
-        }
+        if (this.deals.size === 1) roll.impact = Array.from(this.deals)[0];
+        else roll.impact = undefined;
         roll.alter(2, 0, { multiplyNumeric: false });
       }
     }
