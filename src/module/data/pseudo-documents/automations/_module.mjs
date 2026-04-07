@@ -7,7 +7,6 @@ export { default as ChangeMovementAutomation } from "./change-movement-automatio
 export { default as ChangesAutomation } from "./changes-automation.mjs";
 export { default as ChatMacroAutomation } from "./chat-macro-automation.mjs";
 export { default as ChatStatusAutomation } from "./chat-status-automation.mjs";
-export { default as CheckAutomation } from "./check-automation.mjs";
 export { default as CombatExpirationAutomation } from "./combat-expiration-automation.mjs";
 export { default as CommonImpactsAutomation } from "./common-impacts-automation.mjs";
 export { default as CommonMacroAutomation } from "./common-macro-automation.mjs";
@@ -25,6 +24,7 @@ export { default as RollAutomation } from "./roll-automation.mjs";
 export { default as StatusAutomation } from "./status-automation.mjs";
 export { default as TakeAutomation } from "./take-automation.mjs";
 export { default as TemplateAutomation } from "./template-automation.mjs";
+export { default as TradecraftAutomation } from "./tradecraft-automation.mjs";
 export { default as TransformationAutomation } from "./transformation-automation.mjs";
 export { default as UseExternalDocumentsAutomation } from "./use-external-documents-automation.mjs";
 export { default as UseLocalDocumentsAutomation } from "./use-local-documents-automation.mjs";

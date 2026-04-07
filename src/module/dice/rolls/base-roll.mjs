@@ -227,7 +227,13 @@ export default class BaseRoll extends Roll {
 
   /** @returns {number|null} */
   get threshold() {
-    if (["number", "string"].includes(typeof this.options.threshold)) {
+    if (["number"].includes(typeof this.options.threshold)) {
+      if (
+        typeof this.options.threshold === "string" &&
+        !this.options.threshold
+      ) {
+        return null;
+      }
       const th = Number(this.options.threshold);
       if (Number.isNumeric(th)) return th;
     }

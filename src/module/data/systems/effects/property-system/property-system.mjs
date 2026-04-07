@@ -40,7 +40,7 @@ export default class PropertySystem extends mix(
     return [
       ...super._automationTypes,
       automations.ChangesAutomation,
-      automations.CheckAutomation,
+      automations.TradecraftAutomation,
       automations.CommonImpactsAutomation,
       automations.HacksAutomation,
       automations.PropertyMacroAutomation,

@@ -3,7 +3,7 @@ import { ThresholdAutomation } from "./abstract/_module.mjs";
 
 const { fields } = foundry.data;
 
-export default class CheckAutomation extends ThresholdAutomation {
+export default class TradecraftAutomation extends ThresholdAutomation {
   /** @inheritDoc */
   static get LABEL() {
     return "TERIOCK.ROLLS.Tradecraft.label";
@@ -11,7 +11,7 @@ export default class CheckAutomation extends ThresholdAutomation {
 
   /** @inheritDoc */
   static get TYPE() {
-    return "check";
+    return "tradecraft";
   }
 
   /** @inheritDoc */

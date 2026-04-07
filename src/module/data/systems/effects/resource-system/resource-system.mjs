@@ -20,7 +20,7 @@ export default class ResourceSystem extends mix(
   static get _automationTypes() {
     return [
       ...super._automationTypes,
-      automations.CheckAutomation,
+      automations.TradecraftAutomation,
       automations.CommonImpactsAutomation,
       automations.CommonMacroAutomation,
       automations.HacksAutomation,
