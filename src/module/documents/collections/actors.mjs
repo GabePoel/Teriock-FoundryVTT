@@ -47,6 +47,18 @@ export default class TeriockActors extends BaseWorldCollectionMixin(Actors) {
   }
 
   /**
+   * Selected actors.
+   * @returns {TeriockActor[]}
+   */
+  get selected() {
+    return game.canvas.tokens.controlled
+      .map((t) => t?.actor)
+      .filter((_) => _) || this.default
+      ? [this.default]
+      : [];
+  }
+
+  /**
    * All the actors visible in the current scene.
    * @returns {TeriockActor[]}
    */

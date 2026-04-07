@@ -31,7 +31,7 @@ export default class HarmRoll extends ImpactRoll {
    */
   get harmTypes() {
     const types = new Set();
-    for (const term of this._allTerms) {
+    for (const term of [...this._allTerms, ...this.dice]) {
       const flavor = term.flavor.split(" ");
       flavor.forEach((type) => types.add(type.trim()));
     }

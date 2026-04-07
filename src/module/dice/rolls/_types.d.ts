@@ -3,6 +3,8 @@ import {
   TeriockTokenDocument,
 } from "../../documents/_module.mjs";
 import { TeriockToken } from "../../canvas/placeables/_module.mjs";
+import { RollOptions } from "@client/dice/_types.mjs";
+import { BaseRoll } from "./_module.mjs";
 
 declare global {
   namespace Teriock.Dice {
@@ -31,16 +33,23 @@ declare global {
       | TeriockTokenDocument
       | DieTarget;
 
-    type BaseRollOptions = {
+    type BaseRollOptions = RollOptions & {
+      _id?: ID<BaseRoll>;
+      comparison?: Teriock.Fields.ComparisonCheck;
       hideRoll: boolean;
+      keepId?: boolean;
       styles: DieStyles;
       targets: DieTarget[];
       threshold?: number | null;
-      comparison?: Teriock.Fields.ComparisonCheck;
     };
 
     type ImpactRollOptions = BaseRollOptions & {
       impact: Teriock.Keys.Impact;
+    };
+
+    type ThresholdRollOptions = BaseRollOptions & {
+      critFailureThreshold: number;
+      critSuccessThreshold: number;
     };
   }
 }

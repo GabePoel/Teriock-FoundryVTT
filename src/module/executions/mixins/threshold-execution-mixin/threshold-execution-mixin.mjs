@@ -2,6 +2,7 @@ import { TeriockDialog } from "../../../applications/api/_module.mjs";
 import { icons } from "../../../constants/display/icons.mjs";
 import { FormulaField } from "../../../data/fields/_module.mjs";
 import { CompetenceModel } from "../../../data/models/_module.mjs";
+import { ThresholdRoll } from "../../../dice/rolls/_module.mjs";
 import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
 import { makeIconClass } from "../../../helpers/utils.mjs";
 
@@ -37,6 +38,11 @@ export default function ThresholdExecutionMixin(Base) {
         this.bonus = `${bonus}`;
         this.comparison = comparison;
         this.showDialog = showDialog;
+      }
+
+      /** @inheritDoc */
+      get _RollClass() {
+        return ThresholdRoll;
       }
 
       /**

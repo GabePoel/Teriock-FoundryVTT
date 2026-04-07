@@ -1,4 +1,6 @@
 import { impactOptions } from "../../constants/options/impact-options.mjs";
+import { TeriockChatMessage } from "../../documents/_module.mjs";
+import { makeIcon } from "../../helpers/utils.mjs";
 import BaseRoll from "./base-roll.mjs";
 
 /**
@@ -57,6 +59,48 @@ export default class ImpactRoll extends BaseRoll {
         value: impactOptions[this.impact]?.label,
       });
     }
+  }
+
+  /** @inheritDoc */
+  _getFormulaContextOptions(options = {}) {
+    return [
+      {
+        name: "TERIOCK.DIALOGS.Boost.FIELDS.boosts.single",
+        icon: makeIcon(TERIOCK.display.icons.roll.boost, "contextMenu"),
+        callback: async () => {
+          const boostedRoll = await this.boost(this.options);
+          await boostedRoll.toMessage(
+            options.messageData ?? { speaker: TeriockChatMessage.getSpeaker() },
+          );
+        },
+      },
+      {
+        name: "TERIOCK.DIALOGS.Boost.FIELDS.deboosts.single",
+        icon: makeIcon(TERIOCK.display.icons.roll.deboost, "contextMenu"),
+        callback: async () => {
+          const deboostedRoll = await this.deboost(this.options);
+          await deboostedRoll.toMessage(
+            options.messageData ?? { speaker: TeriockChatMessage.getSpeaker() },
+          );
+        },
+      },
+      ...super._getFormulaContextOptions(options),
+    ];
+  }
+
+  /** @inheritDoc */
+  _getTotalContextOptions(_options = {}) {
+    return [
+      ...Object.values(impactOptions).map((option) => {
+        return {
+          name: option.take,
+          icon: makeIcon(option.icon, "contextMenu"),
+          callback: async () =>
+            game.actors.selected.forEach((a) => option.apply(a, this.total)),
+        };
+      }),
+      ...super._getTotalContextOptions(_options),
+    ];
   }
 
   /** @inheritDoc */

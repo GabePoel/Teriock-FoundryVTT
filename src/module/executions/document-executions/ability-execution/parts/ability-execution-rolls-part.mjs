@@ -1,5 +1,5 @@
 import { targetOptions } from "../../../../constants/options/target-options.mjs";
-import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
+import { BaseRoll, ThresholdRoll } from "../../../../dice/rolls/_module.mjs";
 
 /**
  * @param {typeof AbilityExecutionConstructor} Base
@@ -59,7 +59,7 @@ export default function AbilityExecutionRollsPart(Base) {
             classes: this.source.system.interaction,
           },
         };
-        if (this.source.system.interaction === "attack") {
+        if (this.isAttack) {
           const generalRollOptions = {
             flavor: this.flavor,
             targets: [],
@@ -92,12 +92,16 @@ export default function AbilityExecutionRollsPart(Base) {
               }
             }
             this.rolls.push(
-              new BaseRoll(this.formula, this.rollData, rollOptions),
+              new ThresholdRoll(this.formula, this.rollData, rollOptions),
             );
           }
           if (this.rolls.length === 0) {
             this.rolls.push(
-              new BaseRoll(this.formula, this.rollData, generalRollOptions),
+              new ThresholdRoll(
+                this.formula,
+                this.rollData,
+                generalRollOptions,
+              ),
             );
           }
         } else if (this.isFeat) {

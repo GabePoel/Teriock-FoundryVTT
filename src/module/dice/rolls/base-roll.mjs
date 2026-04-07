@@ -1,4 +1,7 @@
+import { TeriockContextMenu } from "../../applications/ux/_module.mjs";
+import { TeriockChatMessage } from "../../documents/_module.mjs";
 import { systemPath } from "../../helpers/path.mjs";
+import { makeIcon } from "../../helpers/utils.mjs";
 import Booster from "../booster.mjs";
 import { selectWeightedMaxFaceDie } from "../helpers.mjs";
 
@@ -7,6 +10,7 @@ const { Roll } = foundry.dice;
 /**
  * @inheritDoc
  * @property {ID<BaseRoll>} id
+ * @property {Teriock.Dice.BaseRollOptions} options
  */
 export default class BaseRoll extends Roll {
   /** @inheritDoc */
@@ -23,6 +27,11 @@ export default class BaseRoll extends Roll {
       this.constructor.defaultOptions,
       options,
     );
+
+    // If we don't do this then the targets will be raw classes instead of JSON parsable objects
+    this.targets = this.options.targets;
+
+    // Ensure roll has an ID that can be referenced in chat messages
     if (this.options._id && this.options.keepId) {
       delete this.options.keepId;
       this._id = this.options._id;
@@ -33,7 +42,7 @@ export default class BaseRoll extends Roll {
 
   /**
    * Default roll options.
-   * @returns {Teriock.Dice.BaseRollOptions}
+   * @returns {Partial<Teriock.Dice.BaseRollOptions>}
    */
   static get defaultOptions() {
     return {
@@ -152,6 +161,14 @@ export default class BaseRoll extends Roll {
   }
 
   /**
+   * Whether this threshold has not been met.
+   * @returns {boolean}
+   */
+  get failure() {
+    return this.hasThreshold && !this.success;
+  }
+
+  /**
    * Whether this has a threshold.
    * @returns {boolean}
    */
@@ -186,16 +203,16 @@ export default class BaseRoll extends Roll {
 
   /**
    * Whether this threshold has been met.
-   * @returns {null|boolean}
+   * @returns {boolean}
    */
   get success() {
-    if (typeof this.threshold === "number") {
+    if (this.hasThreshold) {
       const comparisonFormula = `${this.comparison}(${this.total}, ${this.threshold})`;
       const comparisonRoll = new BaseRoll(comparisonFormula, {});
       comparisonRoll.evaluateSync();
       return Boolean(comparisonRoll.total);
     }
-    return null;
+    return false;
   }
 
   /** @returns {Teriock.Dice.DieTarget[]} */
@@ -279,6 +296,36 @@ export default class BaseRoll extends Roll {
     };
   }
 
+  /**
+   * Context menu entries for the roll formula.
+   * @param {object} [options]
+   * @returns {ContextMenuEntry[]}
+   */
+  _getFormulaContextOptions(options = {}) {
+    return [
+      {
+        name: game.i18n.localize("TERIOCK.ROLLS.Base.reroll"),
+        icon: makeIcon(TERIOCK.display.icons.roll.reroll, "contextMenu"),
+        callback: async () => {
+          const reroll = this.clone();
+          await reroll.evaluate();
+          await reroll.toMessage(
+            options.messageData ?? { speaker: TeriockChatMessage.getSpeaker() },
+          );
+        },
+      },
+    ];
+  }
+
+  /**
+   * Context menu entries for the roll total.
+   * @param {object} [_options]
+   * @returns {ContextMenuEntry[]}
+   */
+  _getTotalContextOptions(_options = {}) {
+    return [];
+  }
+
   /** @inheritDoc */
   async _prepareChatRenderContext(options = {}) {
     const context = await super._prepareChatRenderContext(options);
@@ -290,24 +337,46 @@ export default class BaseRoll extends Roll {
       hideRoll: this.hideRoll,
       id: this.id,
     });
-    if (context.hasThreshold) {
-      context.styles.total.classes = "";
-      context.styles.total.tooltip = "";
-      if (this.success) {
-        context.styles.total.classes += " success";
-        context.styles.total.tooltip += game.i18n.localize(
-          "TERIOCK.ROLLS.Base.success",
-        );
-        context.styles.total.icon = TERIOCK.display.icons.ui.enable;
-      } else {
-        context.styles.total.classes += " failure";
-        context.styles.total.tooltip += game.i18n.localize(
-          "TERIOCK.ROLLS.Base.failure",
-        );
-        context.styles.total.icon = TERIOCK.display.icons.ui.disable;
-      }
+    if (this.success) {
+      context.styles.total.classes += " success";
+      context.styles.total.tooltip += game.i18n.localize(
+        "TERIOCK.ROLLS.Base.success",
+      );
+      context.styles.total.icon = TERIOCK.display.icons.ui.enable;
+    } else if (this.failure) {
+      context.styles.total.classes += " failure";
+      context.styles.total.tooltip += game.i18n.localize(
+        "TERIOCK.ROLLS.Base.failure",
+      );
+      context.styles.total.icon = TERIOCK.display.icons.ui.disable;
     }
     return context;
+  }
+
+  /**
+   * Bind context menu entries to some HTML element.
+   * @param {HTMLElement} element
+   * @param {object} [options]
+   */
+  bindContextMenus(element, options = {}) {
+    new TeriockContextMenu(
+      element,
+      `.dice-formula[data-id="${this.id}"]`,
+      this._getFormulaContextOptions(options),
+      {
+        fixed: false,
+        jQuery: false,
+      },
+    );
+    new TeriockContextMenu(
+      element,
+      `.dice-total[data-id="${this.id}"]`,
+      this._getTotalContextOptions(options),
+      {
+        fixed: false,
+        jQuery: false,
+      },
+    );
   }
 
   /**
@@ -325,7 +394,7 @@ export default class BaseRoll extends Roll {
     await dieRoll.evaluate();
     die.results.push(dieRoll.dice[0].results.at(-1));
     BaseRoll.resetFormulas(clone);
-    return BaseRoll.fromTerms(
+    return this.constructor.fromTerms(
       [
         new Booster({
           fn: "b",

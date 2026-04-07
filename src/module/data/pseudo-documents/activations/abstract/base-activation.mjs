@@ -51,11 +51,7 @@ export default class BaseActivation extends TypedPseudoDocument {
    * @returns {TeriockActor[]}
    */
   get selectedActors() {
-    const defaultActor = game.actors.default;
-    return this.selectedTokens.map((t) => t.actor).filter((_) => _) ||
-      defaultActor
-      ? [defaultActor]
-      : [];
+    return game.actors.selected;
   }
 
   /**

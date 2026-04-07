@@ -239,6 +239,7 @@ export const icons = {
   roll: {
     boost: "ms-arrow-warm-up",
     deboost: "ms-arrow-cool-down",
+    reroll: "ms-replay",
   },
   settings: {
     alternateRules: "mdi-dice-multiple",

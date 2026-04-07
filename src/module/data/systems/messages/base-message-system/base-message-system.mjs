@@ -1,10 +1,5 @@
 import { bindCommonActions } from "../../../../applications/shared/_module.mjs";
-import { TeriockContextMenu } from "../../../../applications/ux/_module.mjs";
-import {
-  TeriockChatMessage,
-  TeriockItem,
-} from "../../../../documents/_module.mjs";
-import { makeIcon } from "../../../../helpers/utils.mjs";
+import { TeriockItem } from "../../../../documents/_module.mjs";
 import { panelsField } from "../../../fields/helpers/builders.mjs";
 import * as activations from "../../../pseudo-documents/activations/_module.mjs";
 import { BaseActivation } from "../../../pseudo-documents/activations/abstract/_module.mjs";
@@ -49,22 +44,6 @@ export default class BaseMessageSystem extends ActivatableSystemMixin(
   /** @returns {TeriockChatMessage} */
   get document() {
     return this.parent;
-  }
-
-  /**
-   * Generate the data for a collection object with take amounts updated.
-   * @param {number} amount
-   * @returns {Record<ID<V>, Object>}
-   */
-  #amountAlteredCollection(amount) {
-    const collectionObject =
-      teriock.data.pseudoDocuments.abstract.PseudoDocument.toCollectionObject(
-        this.activations.contents,
-      );
-    for (const obj of Object.values(collectionObject)) {
-      if (obj.type === "take") obj.amount = amount;
-    }
-    return collectionObject;
   }
 
   /**
@@ -155,47 +134,9 @@ export default class BaseMessageSystem extends ActivatableSystemMixin(
     // Bind common listeners
     bindCommonActions(element);
 
-    // Add roll boost and deboost context menus
+    // Add roll context menus
     for (const roll of this.document.rolls) {
-      const id = roll.id;
-      new TeriockContextMenu(
-        element,
-        `.dice-formula[data-id="${id}"]`,
-        [
-          {
-            name: "TERIOCK.DIALOGS.Boost.FIELDS.boosts.single",
-            icon: makeIcon(TERIOCK.display.icons.roll.boost, "contextMenu"),
-            callback: async () => {
-              const boostedRoll = await roll.boost(roll.options);
-              await boostedRoll.toMessage({
-                speaker: TeriockChatMessage.getSpeaker(),
-                system: {
-                  activations: this.#amountAlteredCollection(boostedRoll.total),
-                },
-              });
-            },
-          },
-          {
-            name: "TERIOCK.DIALOGS.Boost.FIELDS.deboosts.single",
-            icon: makeIcon(TERIOCK.display.icons.roll.deboost, "contextMenu"),
-            callback: async () => {
-              const deboostedRoll = await roll.deboost(roll.options);
-              await deboostedRoll.toMessage({
-                speaker: TeriockChatMessage.getSpeaker(),
-                system: {
-                  activations: this.#amountAlteredCollection(
-                    deboostedRoll.total,
-                  ),
-                },
-              });
-            },
-          },
-        ],
-        {
-          fixed: false,
-          jQuery: false,
-        },
-      );
+      roll.bindContextMenus(element);
     }
   }
 
@@ -222,11 +163,9 @@ export default class BaseMessageSystem extends ActivatableSystemMixin(
       "teriock",
       "defaultPanelCollapseState",
     );
-    if (defaultCollapse === "closed") {
-      autoCollapse = true;
-    } else if (defaultCollapse === "open") {
-      autoCollapse = false;
-    } else {
+    if (defaultCollapse === "closed") autoCollapse = true;
+    else if (defaultCollapse === "open") autoCollapse = false;
+    else {
       autoCollapse =
         this.document.timestamp <
         Date.now() -
