@@ -136,30 +136,89 @@ export function formulaExists(formula) {
 }
 
 /**
+ * @param {RollTerm} term
+ * @returns Set<string>
+ */
+function getTermTypes(term) {
+  return new Set(
+    term.flavor
+      .toLowerCase()
+      .split(" ")
+      .map((type) => type.trim())
+      .filter((_) => _),
+  );
+}
+
+/**
+ * @param {RollTerm} term
+ * @param {Set<string>} types
+ */
+function setTermTypes(term, types) {
+  term.options.flavor = Array.from(types)
+    .filter((_) => _)
+    .join(" ");
+}
+
+/**
+ * @param {RollTerm} term
+ * @param {Set<string>} types
+ */
+function removeTermTypes(term, types) {
+  const existingTypes = getTermTypes(term);
+  for (const type of types) existingTypes.delete(type);
+  setTermTypes(term, existingTypes);
+}
+
+/**
+ * @param {RollTerm} term
+ * @param {Set<string>} types
+ */
+function addTermTypes(term, types) {
+  const existingTypes = getTermTypes(term);
+  for (const type of types) existingTypes.add(type);
+  setTermTypes(term, existingTypes);
+}
+
+/**
+ * @param {Teriock.System.FormulaString} formula
+ * @param {Iterable<Teriock.System.IdentifierString>} types
+ * @param {(term: RollTerm, types: Set<string>) => void} fn
+ * @returns {Teriock.System.FormulaString}
+ */
+function processFormula(formula, types, fn) {
+  if (!formulaExists(formula)) return formula;
+  types = new Set(Array.from(types).filter((t) => isKebabCase(t)));
+  const roll = new BaseRoll(formula);
+  for (const term of roll._allTerms) fn(term, types);
+  return roll.formula;
+}
+
+/**
  * Add types to a formula that supports them. All types must be identifiers.
  * @param {Teriock.System.FormulaString} formula
  * @param {Iterable<Teriock.System.IdentifierString>} types
  * @returns {Teriock.System.FormulaString}
  */
 export function addTypesToFormula(formula, types) {
-  types = Array.from(types).filter((t) => isKebabCase(t));
-  if (formulaExists(formula)) {
-    const roll = new BaseRoll(formula);
-    const terms = roll.terms.filter(
-      (t) => !t.isDeterministic && !isNaN(Number(t.expression)),
-    );
-    terms.push(...roll.dice);
-    terms.forEach((term) => {
-      const existingTypes = term.flavor
-        .toLowerCase()
-        .split(" ")
-        .map((type) => type.trim());
-      existingTypes.push(...types);
-      const reducedTypes = Array.from(new Set(types)).filter((t) => t);
-      reducedTypes.sort((a, b) => a.localeCompare(b));
-      term.options.flavor = reducedTypes.join(" ");
-    });
-    return roll.formula;
-  }
-  return formula;
+  return processFormula(formula, types, addTermTypes);
+}
+
+/**
+ * Remove types from a formula that supports them. All types must be identifiers.
+ * @param {Teriock.System.FormulaString} formula
+ * @param {Iterable<Teriock.System.IdentifierString>} types
+ * @returns {Teriock.System.FormulaString}
+ */
+export function removeTypesFromFormula(formula, types) {
+  return processFormula(formula, types, removeTermTypes);
+}
+
+/**
+ * Set types of a formula that supports them. All types must be identifiers.
+ * @param {Teriock.System.FormulaString} formula
+ * @param {Iterable<Teriock.System.IdentifierString>} types
+ * @returns {Teriock.System.FormulaString}
+ */
+export function setTypesOfFormula(formula, types) {
+  return processFormula(formula, types, setTermTypes);
 }
