@@ -43,14 +43,6 @@ export default function AccessDataMixin(Base) {
       }
 
       /**
-       * The UUID of this data model's document.
-       * @returns {string}
-       */
-      get uuid() {
-        return this.document.uuid;
-      }
-
-      /**
        * Forms that go into a simple editor for this data model.
        * @returns {Promise<HTMLDivElement>}
        */
