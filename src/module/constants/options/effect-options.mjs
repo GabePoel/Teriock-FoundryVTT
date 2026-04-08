@@ -15,12 +15,11 @@ const foundryChangeMode = {
 };
 
 export const effectOptions = {
-  simpleChangeMode,
-  foundryChangeMode,
   changeMode: {
     0: "TERIOCK.CHANGES.Mode.boost",
     ...foundryChangeMode,
   },
+  cover: ["halfCover", "threeQuartersCover", "fullCover"],
   form: {
     special: {
       name: "TERIOCK.TERMS.EffectForm.special",
@@ -53,6 +52,8 @@ export const effectOptions = {
       color: colors.red,
     },
   },
+  foundryChangeMode,
+  simpleChangeMode,
 };
 
 preLocalize("options.effect.simpleChangeMode");

@@ -88,8 +88,8 @@ export default (Base) => {
       }
 
       /** @inheritDoc */
-      get changes() {
-        const changes = super.changes;
+      get qualifiedChanges() {
+        const changes = super.qualifiedChanges;
         if (this.upgrades.score.attribute) {
           changes.push({
             key: `system.attributes.${this.upgrades.score.attribute}.score`,

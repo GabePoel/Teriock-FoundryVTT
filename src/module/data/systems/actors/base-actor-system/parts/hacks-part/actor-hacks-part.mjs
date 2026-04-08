@@ -72,7 +72,7 @@ export default (Base) => {
         const min = Math.max(value - amount, 0);
         const ids = [];
         for (let i = value; i > min; i--) {
-          const id = (hackOptions[part]?.statuses ?? [])[i];
+          const id = (hackOptions[part]?.statuses ?? [])[i - 1];
           if (id) ids.push(id);
         }
         await this.parent.removeStatusEffects(ids);
