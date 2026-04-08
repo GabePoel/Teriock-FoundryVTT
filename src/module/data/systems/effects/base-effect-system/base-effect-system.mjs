@@ -63,29 +63,6 @@ export default class BaseEffectSystem extends ChildSystemMixin(
     return !!this.automations.contents.find((a) => validTypes.includes(a.type));
   }
 
-  /**
-   * Gets the changes this ability would provide.
-   * @returns {Teriock.Changes.QualifiedChangeData[]}
-   */
-  get changes() {
-    const changes = [];
-    const changesAutomations =
-      /** @type {ChangesAutomation[]} */ this.activeAutomations.filter(
-        (a) => a.type === ChangesAutomation.TYPE,
-      );
-    changesAutomations.forEach((a) => {
-      changes.push(...a.changes);
-    });
-    const protectionAutomations =
-      /** @type {ProtectionAutomation[]} */ this.activeAutomations.filter(
-        (a) => a.type === ProtectionAutomation.TYPE,
-      );
-    protectionAutomations.forEach((a) => {
-      if (a.protectionChange) changes.push(a.protectionChange);
-    });
-    return changes;
-  }
-
   /** @inheritDoc */
   get displayToggles() {
     return [
@@ -113,6 +90,29 @@ export default class BaseEffectSystem extends ChildSystemMixin(
    */
   get modifies() {
     return this.metadata.modifies;
+  }
+
+  /**
+   * Gets the changes this ability would provide.
+   * @returns {Teriock.Changes.QualifiedChangeData[]}
+   */
+  get qualifiedChanges() {
+    const changes = [];
+    const changesAutomations =
+      /** @type {ChangesAutomation[]} */ this.activeAutomations.filter(
+        (a) => a.type === ChangesAutomation.TYPE,
+      );
+    changesAutomations.forEach((a) => {
+      changes.push(...a.changes);
+    });
+    const protectionAutomations =
+      /** @type {ProtectionAutomation[]} */ this.activeAutomations.filter(
+        (a) => a.type === ProtectionAutomation.TYPE,
+      );
+    protectionAutomations.forEach((a) => {
+      if (a.protectionChange) changes.push(a.protectionChange);
+    });
+    return changes;
   }
 
   /**

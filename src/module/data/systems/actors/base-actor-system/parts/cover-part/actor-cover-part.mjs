@@ -1,4 +1,4 @@
-import { coverData } from "../../../../../../constants/data/cover.mjs";
+import { effectOptions } from "../../../../../../constants/options/effect-options.mjs";
 import { addFormula } from "../../../../../../helpers/formula.mjs";
 
 /**
@@ -22,9 +22,7 @@ export default (Base) => {
         const value = this.parent.system.cover;
         const min = Math.max(0, value - amount);
         const ids = [];
-        for (let i = value; i > min; i--) {
-          ids.push(coverData["cover" + i.toString()].id);
-        }
+        for (let i = value; i > min; i--) ids.push(effectOptions.cover[i - 1]);
         await this.parent.removeStatusEffects(ids);
       }
 
@@ -37,9 +35,7 @@ export default (Base) => {
         const value = this.parent.system.cover;
         const max = Math.min(3, value + amount);
         const ids = [];
-        for (let i = value; i < max; i++) {
-          ids.push(coverData["cover" + (i + 1).toString()].id);
-        }
+        for (let i = value; i < max; i++) ids.push(effectOptions.cover[i]);
         await this.parent.applyStatusEffects(ids);
       }
 
