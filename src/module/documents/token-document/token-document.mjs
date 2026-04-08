@@ -34,23 +34,19 @@ export default class TeriockTokenDocument extends mix(
    * @returns {Point}
    */
   get center() {
-    return {
-      x: this.x + this.sizeX / 2,
-      y: this.y + this.sizeY / 2,
-    };
+    return { x: this.x + this.sizeX / 2, y: this.y + this.sizeY / 2 };
   }
 
   /** @inheritDoc */
   get embedParts() {
-    const parts = super.embedParts;
-    parts.img = this.getSetting("autoTransformation")
-      ? this.imageLive
-      : this.texture.src;
-    parts.icon = icons.document.token;
-    if (this.actor) {
-      if (this.actor.fullName !== parts.title) {
-        parts.text = this.actor.fullName;
-      }
+    const parts = Object.assign(super.embedParts, {
+      img: this.getSetting("autoTransformation")
+        ? this.imageLive
+        : this.texture.src,
+      icon: icons.document.token,
+    });
+    if (this.actor && this.actor.fullName !== parts.title) {
+      parts.text = this.actor.fullName;
     }
     return parts;
   }
@@ -60,8 +56,7 @@ export default class TeriockTokenDocument extends mix(
    * @returns {string}
    */
   get imageLive() {
-    if (this.isTransformed) return this.imageTransformed;
-    return this.imageRaw;
+    return this.isTransformed ? this.imageTransformed : this.imageRaw;
   }
 
   /**
@@ -86,8 +81,7 @@ export default class TeriockTokenDocument extends mix(
    * @returns {boolean}
    */
   get isTransformed() {
-    if (this.actor) return this.actor.system.isTransformed;
-    return false;
+    return this.actor && this.actor.system.isTransformed;
   }
 
   /**
@@ -115,8 +109,7 @@ export default class TeriockTokenDocument extends mix(
    * @returns {boolean}
    */
   get ringLive() {
-    if (this.isTransformed) return this.ringTransformed;
-    return this.ringRaw;
+    return this.isTransformed ? this.ringTransformed : this.ringRaw;
   }
 
   /**
@@ -145,9 +138,7 @@ export default class TeriockTokenDocument extends mix(
     return out;
   }
 
-  /**
-   * @inheritDoc
-   */
+  /** @inheritDoc */
   _onRelatedUpdate(update = {}, operation = {}) {
     if (this.getSetting("autoVisionModes")) this.deriveVision();
     if (this.getSetting("autoLighting")) this.deriveLighting();

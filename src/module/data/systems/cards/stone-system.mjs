@@ -1,7 +1,10 @@
 import { getImage } from "../../../helpers/path.mjs";
-import { BaseSystem } from "../abstract/_module.mjs";
+import BaseCardsSystem from "./base-cards-system.mjs";
 
-export default class StoneSystem extends BaseSystem {
+/**
+ * @extends {BaseCardsSystem}
+ */
+export default class StoneSystem extends BaseCardsSystem {
   /** @inheritDoc */
   async _preCreate(data, options, user) {
     const yes = await super._preCreate(data, options, user);

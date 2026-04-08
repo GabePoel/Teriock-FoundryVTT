@@ -1,12 +1,15 @@
 import { dotJoin } from "../../../../helpers/string.mjs";
 import { makeIcon, mix } from "../../../../helpers/utils.mjs";
 import { ActorSettingsModel } from "../../../models/settings-models/_module.mjs";
-import { CommonSystem } from "../../abstract/_module.mjs";
+import { CommonSystemMixin } from "../../mixins/_module.mjs";
 import * as parts from "./parts/_module.mjs";
+
+const { TypeDataModel } = foundry.abstract;
 
 //noinspection JSClosureCompilerSyntax
 /**
  * Base {@link TeriockActor} data model.
+ * @extends {TypeDataModel}
  * @extends {Teriock.Models.BaseActorSystemData}
  * @mixes CommonSystem
  * @mixes ActorAttributesPart
@@ -31,7 +34,8 @@ import * as parts from "./parts/_module.mjs";
  * @mixes ActorTransformationPart
  */
 export default class BaseActorSystem extends mix(
-  CommonSystem,
+  TypeDataModel,
+  CommonSystemMixin,
   parts.ActorStatsPart,
   parts.ActorAutomationPart,
   parts.ActorScalingPart,

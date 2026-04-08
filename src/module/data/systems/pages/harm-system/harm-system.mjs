@@ -2,19 +2,24 @@ import { getImage } from "../../../../helpers/path.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import { AccessDataMixin } from "../../../shared/mixins/_module.mjs";
-import { RulesSystem } from "../../abstract/_module.mjs";
-import { AutomatableSystemMixin } from "../../mixins/_module.mjs";
+import {
+  AutomatableSystemMixin,
+  RulesSystemMixin,
+} from "../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
+const { TypeDataModel } = foundry.abstract;
 
 /**
- * @extends {RulesSystem}
+ * @extends {TypeDataModel}
  * @extends {Teriock.Models.HarmSystemData}
+ * @mixes RulesSystem
  * @mixes AccessData
  * @mixes AutomatableSystem
  */
 export default class HarmSystem extends mix(
-  RulesSystem,
+  TypeDataModel,
+  RulesSystemMixin,
   AccessDataMixin,
   AutomatableSystemMixin,
 ) {

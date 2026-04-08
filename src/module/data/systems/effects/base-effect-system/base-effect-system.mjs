@@ -5,16 +5,18 @@ import {
   ProtectionAutomation,
   StatusAutomation,
 } from "../../../pseudo-documents/automations/_module.mjs";
-import { ChildSystem } from "../../abstract/_module.mjs";
+import { ChildSystemMixin } from "../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
+const { TypeDataModel } = foundry.abstract;
 
 /**
  * Base effect data model.
+ * @extends {TypeDataModel}
  * @extends {Teriock.Models.BaseEffectSystemData}
- * @extends {ChildSystem}
+ * @mixes ChildSystem
  */
-export default class BaseEffectSystem extends ChildSystem {
+export default class BaseEffectSystem extends ChildSystemMixin(TypeDataModel) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
     ...super.LOCALIZATION_PREFIXES,

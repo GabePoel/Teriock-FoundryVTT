@@ -160,7 +160,7 @@ foundry.helpers.Hooks.once("init", function () {
     },
     Card: {
       dataModels: {
-        card: data.systems.abstract.BaseSystem,
+        card: data.systems.cards.BaseCardsSystem,
         stone: data.systems.cards.StoneSystem,
       },
       documentClass: documents.TeriockCard,

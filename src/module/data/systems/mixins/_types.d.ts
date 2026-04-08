@@ -1,10 +1,16 @@
+import "./activatable-system-mixin/_types.js";
+import "./adjustable-system-mixin/_types.js";
 import "./armament-system-mixin/_types";
+import "./attack-system-mixin/_types.js";
 import "./attunable-system-mixin/_types";
+import "./automatable-system-mixin/_types.js";
+import "./child-system-mixin/_types.js";
+import "./common-system-mixin/_types.js";
 import "./consumable-system-mixin/_types";
 import "./executable-system-mixin/_types";
 import "./hierarchy-system-mixin/_types";
 import "./revelation-system-mixin/_types";
+import "./rules-system-mixin/_types.js";
 import "./stat-giver-system-mixin/_types";
 import "./transformation-system-mixin/_types";
-import "../../shared/mixins/usable-data-mixin/_types";
 import "./wielded-data-mixin/_types";

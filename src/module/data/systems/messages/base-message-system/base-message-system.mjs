@@ -1,20 +1,28 @@
 import { bindCommonActions } from "../../../../applications/shared/_module.mjs";
 import { TeriockItem } from "../../../../documents/_module.mjs";
+import { mix } from "../../../../helpers/utils.mjs";
 import { panelsField } from "../../../fields/helpers/builders.mjs";
 import * as activations from "../../../pseudo-documents/activations/_module.mjs";
 import { BaseActivation } from "../../../pseudo-documents/activations/abstract/_module.mjs";
-import { BaseSystem } from "../../abstract/_module.mjs";
-import { ActivatableSystemMixin } from "../../mixins/_module.mjs";
+import {
+  ActivatableSystemMixin,
+  BaseSystemMixin,
+} from "../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
+const { TypeDataModel } = foundry.abstract;
 
 /**
+ * @extends {TypeDataModel}
  * @extends {Teriock.Models.BaseMessageSystemData}
  * @extends {Teriock.Data.BaseMessageData}
+ * @mixes BaseSystem
  * @mixes ActivatableSystem
  */
-export default class BaseMessageSystem extends ActivatableSystemMixin(
-  BaseSystem,
+export default class BaseMessageSystem extends mix(
+  TypeDataModel,
+  BaseSystemMixin,
+  ActivatableSystemMixin,
 ) {
   static get _activationTypes() {
     return Object.values(activations).filter((a) =>

@@ -1,15 +1,17 @@
 import { TextField } from "../../../fields/_module.mjs";
-import { ChildSystem } from "../../abstract/_module.mjs";
+import { ChildSystemMixin } from "../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
+const { TypeDataModel } = foundry.abstract;
 
 /**
  * Base item data model for all Teriock items.
  * Provides common functionality for disabled state and update tracking.
- * @extends {ChildSystem}
+ * @extends {TypeDataModel}
  * @extends {Teriock.Models.BaseItemSystemData}
+ * @mixes ChildSystem
  */
-export default class BaseItemSystem extends ChildSystem {
+export default class BaseItemSystem extends ChildSystemMixin(TypeDataModel) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
     ...super.LOCALIZATION_PREFIXES,
