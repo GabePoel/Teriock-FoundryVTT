@@ -15,14 +15,8 @@ export default class StatDieModel extends EmbeddedDataModel {
   static defineSchema() {
     return {
       _id: new fields.DocumentIdField({ required: true }),
-      faces: new fields.NumberField({
-        integer: true,
-        required: true,
-      }),
-      index: new fields.NumberField({
-        integer: true,
-        required: true,
-      }),
+      faces: new fields.NumberField({ integer: true, required: true }),
+      index: new fields.NumberField({ integer: true, required: true }),
     };
   }
 
@@ -101,9 +95,7 @@ export default class StatDieModel extends EmbeddedDataModel {
     if (spent) spentCopy.add(this.index);
     else spentCopy.delete(this.index);
     const updatePath = `system.statDice.${this.parent.stat}.spent`;
-    await this.parent.parent.parent.update({
-      [updatePath]: Array.from(spentCopy),
-    });
+    await this.document.update({ [updatePath]: Array.from(spentCopy) });
   }
 
   /**
@@ -152,15 +144,10 @@ export default class StatDieModel extends EmbeddedDataModel {
         speaker: TeriockChatMessage.getSpeaker({
           actor: this.parent.parent.parent.actor,
         }),
-        system: {
-          avatar: this.parent.parent.parent.actor.img,
-          panels: panels,
-        },
+        system: { avatar: this.parent.parent.parent.actor.img, panels: panels },
       };
       await TeriockChatMessage.create(messageData, { defaultMode: true });
-      if (spend) {
-        await this.toggle(true);
-      }
+      if (spend) await this.toggle(true);
     }
   }
 }
