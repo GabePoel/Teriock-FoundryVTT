@@ -138,10 +138,11 @@ export default class PseudoDocument extends EmbeddedDataModel {
 
   /**
    * The UUID of this pseudo-document.
-   * @returns {string}
+   * @returns {UUID<PseudoDocument> | null}
    */
   get uuid() {
-    return [this.parent.uuid, this.documentName, this.id].join(".");
+    if (!parent) return this.id ? `${this.documentName}.${this.id}` : null;
+    return [this.parent?.uuid || "", this.documentName, this.id].join(".");
   }
 
   /**
