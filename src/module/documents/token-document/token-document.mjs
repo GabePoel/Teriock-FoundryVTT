@@ -193,33 +193,23 @@ export default class TeriockTokenDocument extends mix(
   _prepareDetectionModes() {
     super._prepareDetectionModes();
     if (!this.getSetting("autoDetectionModes")) return;
-    const basicMode = this.detectionModes.find((m) => m.id === "basicSight");
+    const basicMode = this.detectionModes.basicSight;
     if (basicMode) basicMode.enabled = false;
     const enabledIds = ["lightPerception"];
     const disabledIds = Object.values(TERIOCK.options.character.senseTypes)
       .map((c) => c?.detectionMode)
       .filter((_) => _);
-    this.detectionModes.push(
-      ...enabledIds
-        .filter((id) => !this.detectionModes.find((mode) => mode.id === id))
-        .map((id) => {
-          return {
-            id: id,
-            enabled: true,
-            range: Infinity,
-          };
-        }),
+    enabledIds.forEach((id) =>
+      Object.assign(this.detectionModes[id] ?? {}, {
+        enabled: true,
+        range: Infinity,
+      }),
     );
-    this.detectionModes.push(
-      ...disabledIds
-        .filter((id) => !this.detectionModes.find((mode) => mode.id === id))
-        .map((id) => {
-          return {
-            id: id,
-            enabled: false,
-            range: 0,
-          };
-        }),
+    disabledIds.forEach((id) =>
+      Object.assign(this.detectionModes[id] ?? {}, {
+        enabled: false,
+        range: 0,
+      }),
     );
   }
 
@@ -232,9 +222,7 @@ export default class TeriockTokenDocument extends mix(
       TERIOCK.options.character.senseTypes,
     )) {
       if (config?.detectionMode) {
-        const mode = this.detectionModes.find(
-          (m) => m.id === config.detectionMode,
-        );
+        const mode = this.detectionModes[config.detectionMode];
         if (!mode) continue;
         mode.range = convertUnits(
           this.actor.system.senses[sense],

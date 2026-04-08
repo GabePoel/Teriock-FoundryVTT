@@ -7,16 +7,17 @@ import {
 } from "../../../pseudo-documents/automations/_module.mjs";
 import { ChildSystemMixin } from "../../mixins/_module.mjs";
 
-const { fields } = foundry.data;
-const { TypeDataModel } = foundry.abstract;
+const { fields, ActiveEffectTypeDataModel } = foundry.data;
 
 /**
  * Base effect data model.
- * @extends {TypeDataModel}
+ * @extends {ActiveEffectTypeDataModel}
  * @extends {Teriock.Models.BaseEffectSystemData}
  * @mixes ChildSystem
  */
-export default class BaseEffectSystem extends ChildSystemMixin(TypeDataModel) {
+export default class BaseEffectSystem extends ChildSystemMixin(
+  ActiveEffectTypeDataModel,
+) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
     ...super.LOCALIZATION_PREFIXES,
@@ -42,7 +43,8 @@ export default class BaseEffectSystem extends ChildSystemMixin(TypeDataModel) {
 
   /** @inheritDoc */
   static defineSchema() {
-    return foundry.utils.mergeObject(super.defineSchema(), {
+    return Object.assign(ActiveEffectTypeDataModel.defineSchema(), {
+      ...super.defineSchema(),
       deleteOnExpire: new fields.BooleanField({ initial: false }),
     });
   }
