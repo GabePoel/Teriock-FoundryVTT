@@ -137,6 +137,7 @@ foundry.helpers.Hooks.once("init", function () {
 
   assign({
     ActiveEffect: {
+      compendiumIndexFields: ["system._sup"],
       dataModels: {
         ability: data.systems.effects.AbilitySystem,
         attunement: data.systems.effects.AttunementSystem,
