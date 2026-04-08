@@ -1,5 +1,5 @@
 import { TeriockItem } from "../../../../../../documents/_module.mjs";
-import { copyItem } from "../../../../../../helpers/fetch.mjs";
+import { getObject } from "../../../../../../helpers/fetch.mjs";
 import { getImage } from "../../../../../../helpers/path.mjs";
 import { toTitleCase } from "../../../../../../helpers/string.mjs";
 import { makeIcon } from "../../../../../../helpers/utils.mjs";
@@ -80,15 +80,14 @@ export default (Base) => {
         entries.push({
           callback: async () => {
             const data = await this.toScroll();
+            const op = { keepEmbeddedIds: true, renderSheet: true };
             if (
               doc?.actor?.documentName === "Actor" &&
               doc?.actor?.uuid === this.actor?.uuid
             ) {
-              await this.actor.createEmbeddedDocuments("Item", [data], {
-                keepEmbeddedIds: true,
-              });
+              await this.actor.createEmbeddedDocuments("Item", [data], op);
             } else {
-              TeriockItem.create(data, { keepEmbeddedIds: true });
+              TeriockItem.create(data, op);
             }
           },
           condition:
@@ -138,10 +137,11 @@ export default (Base) => {
        * @returns {Promise<object>}
        */
       async toScroll(data = {}, equipmentType = "scroll") {
-        const reference = await copyItem(
+        const reference = (await getObject(
           TERIOCK.index.equipment[equipmentType] || equipmentType || "Scroll",
           "equipment",
-        );
+          { source: true, stats: false },
+        )) || { type: "equipment", system: { equipmentType: "scroll" } };
         let img;
         if (toTitleCase(equipmentType) === "Scroll") {
           if (this.elements.size === 1) {
@@ -153,7 +153,7 @@ export default (Base) => {
             img = getImage("consumables", "Celestial Spell Scroll");
           }
         }
-        let out = foundry.utils.mergeObject(reference.toObject(true), {
+        let out = foundry.utils.mergeObject(reference, {
           name: game.i18n.format(
             "TERIOCK.SYSTEMS.Ability.DIALOG.MakeScroll.scrollName",
             { name: this.parent.fullName },

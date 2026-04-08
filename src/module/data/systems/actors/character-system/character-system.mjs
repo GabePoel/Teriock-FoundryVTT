@@ -1,4 +1,4 @@
-import { copyItem } from "../../../../helpers/fetch.mjs";
+import { getObject } from "../../../../helpers/fetch.mjs";
 import BaseActorSystem from "../base-actor-system/base-actor-system.mjs";
 
 //noinspection JSClosureCompilerSyntax
@@ -27,23 +27,14 @@ export default class CharacterSystem extends BaseActorSystem {
 
     // Ensure default items
     const defaultItems = [
-      {
-        name: "Created Elder Sorceries",
-        pack: "essentials",
-      },
-      {
-        name: "Learned Elder Sorceries",
-        pack: "essentials",
-      },
-      {
-        name: "Journeyman",
-        pack: "classes",
-      },
+      { name: "Created Elder Sorceries", pack: "essentials" },
+      { name: "Learned Elder Sorceries", pack: "essentials" },
+      { name: "Journeyman", pack: "classes" },
     ];
     const items = [];
     for (const item of defaultItems) {
       if (!this.parent.items.find((i) => i.name === item.name)) {
-        items.push((await copyItem(item.name, item.pack)).toObject());
+        items.push(await getObject(item.name, item.pack, { stats: true }));
       }
     }
 
