@@ -150,7 +150,7 @@ export default class PseudoDocument extends EmbeddedDataModel {
    * @returns {Promise<Document|undefined>}
    */
   async delete(operation = {}) {
-    const updateData = { [`${this.fieldPath}.-=${this.id}`]: null };
+    const updateData = { [`${this.fieldPath}.${this.id}`]: _del };
     return this.document.update(updateData, operation);
   }
 }

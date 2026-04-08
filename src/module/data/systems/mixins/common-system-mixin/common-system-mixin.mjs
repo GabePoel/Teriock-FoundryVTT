@@ -487,8 +487,7 @@ export default function CommonSystemMixin(Base) {
               /** @type {BaseAutomation[]} */ this.automations?.contents;
             if (automations) {
               for (const automation of automations) {
-                updateObject[`${automation.fieldPath}.-=${automation.id}`] =
-                  null;
+                updateObject[`${automation.fieldPath}.${automation.id}`] = _del;
               }
               await this.parent.update(updateObject);
             }

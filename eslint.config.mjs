@@ -59,12 +59,14 @@ const globalClient = {
   Handlebars: "readonly",
   PIXI: "readonly",
   ProseMirror: "readonly",
+  _del: "readonly",
+  _replace: "readonly",
+  canvas: "readonly",
   foundry: "readonly",
+  game: "readonly",
   getDocumentClass: "readonly",
   io: "readonly",
   ui: "readonly",
-  canvas: "readonly",
-  game: "readonly",
 };
 
 const globalMacro = {
