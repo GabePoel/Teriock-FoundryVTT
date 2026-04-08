@@ -1,3 +1,4 @@
+import { resolveDocument } from "./resolve.mjs";
 import { toId } from "./string.mjs";
 
 /**
@@ -10,38 +11,12 @@ import { toId } from "./string.mjs";
  */
 export async function getDocument(name, pack, options = {}) {
   if (!pack.includes(".")) pack = `teriock.${pack}`;
-  const packs = game.packs;
-  const compendium = packs.get(pack);
+  const compendium = game.packs.get(pack);
   const uuid = compendium?.index.getName(name).uuid;
-  try {
-    const item = await fromUuid(uuid);
-    if (item && options.clone) return item.clone();
-    return item;
-  } catch (error) {
-    console.error(name, pack, error);
-  }
-}
-
-/**
- * Copy a {@link TeriockItem} from a {@link CompendiumCollection}.
- * @param {string} name - Name of the {@link TeriockItem}.
- * @param {string} pack - Key corresponding to some {@link CompendiumCollection}.
- * @returns {Promise<TeriockItem|null>}
- */
-export async function copyItem(name, pack) {
-  return await getDocument(name, pack, { clone: true });
-}
-
-/**
- * Get a {@link TeriockProperty} from a {@link CompendiumCollection}.
- * @param {string} name - Name of the {@link TeriockProperty}.
- * @param {object} options - Options.
- * @param {boolean} [options.clone] - Fetch a clone instead of the raw {@link TeriockProperty}.
- * @returns {Promise<TeriockProperty>}
- */
-export async function getProperty(name, options = {}) {
-  const item = await getDocument(name, "properties", options);
-  return item.effects.getName(name);
+  const item = await fromUuid(uuid);
+  if (!item) return null;
+  if (item && options.clone) return item.clone();
+  return item;
 }
 
 /**
@@ -84,4 +59,28 @@ export function ruleUuid(namespace, pageName) {
   const nsId = toId(namespace, { hash: false });
   const pnId = toId(pageName, { hash: false });
   return `Compendium.teriock.rules.JournalEntry.${nsId}.JournalEntryPage.${pnId}`;
+}
+
+/**
+ * Get the object corresponding to some document.
+ * @param {string} name - Name of the document.
+ * @param {string} pack - Pack to find document in.
+ * @param {object} [options]
+ * @param {boolean} [options.stats]
+ * @param {boolean} [options.source]
+ * @returns {Promise<object|null>}
+ */
+export async function getObject(name, pack, options = {}) {
+  const { source = true, stats = false } = options;
+  if (!pack.includes(".")) pack = `teriock.${pack}`;
+  const compendium = game.packs.get(pack);
+  const doc = await resolveDocument(compendium?.index.getName(name).uuid);
+  if (!doc) return null;
+  const obj = doc.toObject(source);
+  if (stats) {
+    let srcUuid = doc.uuid;
+    if (doc.parent?.type === "wrapper") srcUuid = doc.parent.uuid;
+    foundry.utils.setProperty(obj, "_stats.compendiumSource", srcUuid);
+  }
+  return obj;
 }
