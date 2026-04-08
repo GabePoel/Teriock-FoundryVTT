@@ -4,9 +4,9 @@ const { OutlineOverlayFilter } = foundry.canvas.rendering.filters;
 
 /**
  * Relevant wiki pages:
- * - [Scent Seeing](https://wiki.teriock.com/index.php/Ability:Scent_Seeing)
+ * - [Advanced Hearing](https://wiki.teriock.com/index.php/Ability:Advanced_Hearing)
  */
-export default class DetectionModeScentPerception extends BaseDetectionMode {
+export default class SoundDetectionMode extends BaseDetectionMode {
   /** @inheritDoc */
   static getDetectionFilter() {
     return (this._detectionFilter ??= OutlineOverlayFilter.create({
@@ -14,10 +14,5 @@ export default class DetectionModeScentPerception extends BaseDetectionMode {
       knockout: true,
       wave: true,
     }));
-  }
-
-  /** @inheritDoc */
-  get isScent() {
-    return true;
   }
 }

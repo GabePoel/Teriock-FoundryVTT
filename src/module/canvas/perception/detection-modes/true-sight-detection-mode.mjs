@@ -1,4 +1,4 @@
-import InvisiblePerception from "./invisible-perception.mjs";
+import InvisiblePerception from "./invisible-detection-mode.mjs";
 
 const { OutlineOverlayFilter } = foundry.canvas.rendering.filters;
 
@@ -6,7 +6,7 @@ const { OutlineOverlayFilter } = foundry.canvas.rendering.filters;
  * Relevant wiki pages:
  * - [True Sight](https://wiki.teriock.com/index.php/Ability:True_Sight)
  */
-export default class DetectionModeTrueSightPerception extends InvisiblePerception {
+export default class TrueSightDetectionMode extends InvisiblePerception {
   /** @inheritDoc */
   static getDetectionFilter() {
     return (this._detectionFilter ??= OutlineOverlayFilter.create({

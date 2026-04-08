@@ -181,10 +181,19 @@ export function sortObject(obj, options = {}) {
  * @template U
  * @param {Record<string, T>} obj
  * @param {(T) => U} fn
+ * @param {object} [options]
+ * @param {(T) => boolean} [options.filter]
+ * @param {boolean} [options.localize] - The output can only be localized if the output is a string.
  * @returns {Record<string, U>}
  */
-export function objectMap(obj, fn) {
-  return Object.fromEntries(Object.entries(obj).map(([k, v]) => [k, fn(v)]));
+export function objectMap(obj, fn, options = {}) {
+  const { filter = () => true, localize = false } = options;
+  const out = Object.fromEntries(
+    Object.entries(obj)
+      .filter(([_k, v]) => filter(v))
+      .map(([k, v]) => [k, fn(v)]),
+  );
+  return localize ? localizeChoices(out) : out;
 }
 
 /**

@@ -91,14 +91,16 @@ export default class ImpactRoll extends BaseRoll {
   /** @inheritDoc */
   _getTotalContextOptions(_options = {}) {
     return [
-      ...Object.values(impactOptions).map((option) => {
-        return {
-          name: option.take,
-          icon: makeIcon(option.icon, "contextMenu"),
-          callback: async () =>
-            game.actors.selected.forEach((a) => option.apply(a, this.total)),
-        };
-      }),
+      ...Object.values(impactOptions)
+        .filter((option) => !option?.hidden)
+        .map((option) => {
+          return {
+            name: option.take,
+            icon: makeIcon(option.icon, "contextMenu"),
+            callback: async () =>
+              game.actors.selected.forEach((a) => option.apply(a, this.total)),
+          };
+        }),
       ...super._getTotalContextOptions(_options),
     ];
   }

@@ -90,25 +90,52 @@ export const characterOptions = {
       label: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.swim",
     },
   },
-  senseMap: {
-    blind: "blindFighting",
-    dark: "darkVision",
-    ethereal: "seeEthereal",
-    etherealLight: "etherealLight",
-    hearing: "soundPerception",
-    invisible: "seeInvisible",
-    smell: "scentPerception",
-    truth: "trueSight",
-  },
-  senses: {
-    blind: "TERIOCK.TERMS.Senses.blind",
-    dark: "TERIOCK.TERMS.Senses.dark",
-    ethereal: "TERIOCK.TERMS.Senses.ethereal",
-    hearing: "TERIOCK.TERMS.Senses.hearing",
-    invisible: "TERIOCK.TERMS.Senses.invisible",
-    sight: "TERIOCK.TERMS.Senses.sight",
-    smell: "TERIOCK.TERMS.Senses.smell",
-    truth: "TERIOCK.TERMS.Senses.truth",
+  senseTypes: {
+    blind: {
+      detectionMode: "blindsight",
+      grantsSight: false,
+      label: "TERIOCK.TERMS.Senses.blind",
+    },
+    dark: {
+      visionMode: "darkvision",
+      grantsSight: true,
+      label: "TERIOCK.TERMS.Senses.dark",
+    },
+    ethereal: {
+      detectionMode: "seeEthereal",
+      grantsSight: false,
+      label: "TERIOCK.TERMS.Senses.ethereal",
+    },
+    hearing: {
+      detectionMode: "soundPerception",
+      grantsSight: false,
+      label: "TERIOCK.TERMS.Senses.hearing",
+    },
+    invisible: {
+      detectionMode: "seeInvisible",
+      grantsSight: false,
+      label: "TERIOCK.TERMS.Senses.invisible",
+    },
+    sight: {
+      grantsSight: true,
+      label: "TERIOCK.TERMS.Senses.sight",
+    },
+    smell: {
+      detectionMode: "scentPerception",
+      grantsSight: false,
+      label: "TERIOCK.TERMS.Senses.smell",
+    },
+    spectral: {
+      hidden: true,
+      detectionMode: "spectral",
+      grantsSight: true,
+      label: "TERIOCK.TERMS.Senses.spectral",
+    },
+    truth: {
+      detectionMode: "trueSight",
+      grantsSight: true,
+      label: "TERIOCK.TERMS.Senses.truth",
+    },
   },
   sizes: /** @type {Teriock.Config.SizeConfig[]} */ [
     {
@@ -169,7 +196,7 @@ export const characterOptions = {
   },
 };
 
-preLocalize("options.character.senses");
+preLocalize("options.character.senseTypes", { key: "label", sort: true });
 preLocalize("options.character.speedAdjustments", { keys: ["label"] });
-preLocalize("options.character.movementTypes", { keys: ["label"] });
+preLocalize("options.character.movementTypes", { key: "label", sort: true });
 preLocalize("options.character.sizes", { keys: ["category"] });

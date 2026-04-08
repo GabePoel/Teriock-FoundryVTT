@@ -1,10 +1,10 @@
-import LightPerception from "./light-perception.mjs";
+import LightPerception from "./light-detection-mode.mjs";
 
 /**
  * Relevant wiki pages:
  * - [See Invisible](https://wiki.teriock.com/index.php/Ability:See_Invisible)
  */
-export default class DetectionModeInvisiblePerception extends LightPerception {
+export default class InvisibleDetectionMode extends LightPerception {
   /** @inheritDoc */
   static BLOCKING_STATUSES = {
     sight: {

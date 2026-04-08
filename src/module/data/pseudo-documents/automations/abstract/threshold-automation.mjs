@@ -12,10 +12,7 @@ export default class ThresholdAutomation extends BaseAutomation {
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       bonus: new FormulaField({ initial: "0" }),
-      threshold: new FormulaField({
-        initial: null,
-        nullable: true,
-      }),
+      threshold: new FormulaField({ initial: null, nullable: true }),
     });
   }
 

@@ -203,21 +203,11 @@ export default class TeriockTokenDocument extends mix(
     super._prepareDetectionModes();
     if (!this.getSetting("autoDetectionModes")) return;
     const basicMode = this.detectionModes.find((m) => m.id === "basicSight");
-    if (basicMode) {
-      basicMode.enabled = false;
-    }
+    if (basicMode) basicMode.enabled = false;
     const enabledIds = ["lightPerception"];
-    const disabledIds = [
-      "blindFighting",
-      "darkVision",
-      "etherealLight",
-      "nightVision",
-      "scentPerception",
-      "seeEthereal",
-      "seeInvisible",
-      "soundPerception",
-      "trueSight",
-    ];
+    const disabledIds = Object.values(TERIOCK.options.character.senseTypes)
+      .map((c) => c?.detectionMode)
+      .filter((_) => _);
     this.detectionModes.push(
       ...enabledIds
         .filter((id) => !this.detectionModes.find((mode) => mode.id === id))
@@ -246,19 +236,21 @@ export default class TeriockTokenDocument extends mix(
    * Derive the detection modes from the {@link TeriockActor}.
    */
   deriveDetectionModes() {
-    if (this.actor) {
-      for (const [sense, id] of Object.entries(
-        TERIOCK.options.character.senseMap,
-      )) {
-        const mode = this.detectionModes.find((m) => m.id === id);
-        if (mode) {
-          mode.range = convertUnits(
-            this.actor.system.senses[sense],
-            "ft",
-            this.parent?.grid.units || "",
-          );
-          mode.enabled = this.actor.system.senses[sense] > 0;
-        }
+    if (!this.actor) return;
+    for (const [sense, config] of Object.entries(
+      TERIOCK.options.character.senseTypes,
+    )) {
+      if (config?.detectionMode) {
+        const mode = this.detectionModes.find(
+          (m) => m.id === config.detectionMode,
+        );
+        if (!mode) continue;
+        mode.range = convertUnits(
+          this.actor.system.senses[sense],
+          "ft",
+          this.parent?.grid.units || "",
+        );
+        mode.enabled = this.actor.system.senses[sense] > 0;
       }
     }
   }
@@ -290,15 +282,15 @@ export default class TeriockTokenDocument extends mix(
       game.teriock.getSetting("automaticallyChangeVisionModes") &&
       this.actor
     ) {
-      if (this.actor.system.senses.dark > 0) {
-        visionMode = "darkvision";
+      let maxRange = 0;
+      for (const [k, v] of Object.entries(this.actor.system.senses)) {
+        const senseVisionMode =
+          TERIOCK.options.character.senseTypes[k]?.visionMode;
+        if (senseVisionMode && v > maxRange) {
+          maxRange = v;
+          visionMode = senseVisionMode;
+        }
       }
-      //if (
-      //  this.actor?.system.senses.night > 0 &&
-      //  this.actor?.system.senses.night >= this.actor?.system.senses.dark
-      //) {
-      //  visionMode = "lightAmplification";
-      //}
       if (this.hasStatusEffect("ethereal")) {
         visionMode = "ethereal";
         angle = this.actor.system.light.angle || angle;
@@ -309,18 +301,15 @@ export default class TeriockTokenDocument extends mix(
       ) {
         visionMode = "invisibleEthereal";
       }
-      if (this.hasStatusEffect("down")) {
-        visionMode = "down";
-      }
-      if (this.hasStatusEffect("dead")) {
-        visionMode = "dead";
-      }
+      if (this.hasStatusEffect("down")) visionMode = "down";
+      if (this.hasStatusEffect("dead")) visionMode = "dead";
       range = Math.max(
-        this.actor.system.senses.dark,
-        //this.actor.system.senses.night,
-        this.actor.system.senses.blind,
-        this.actor.system.senses.hearing,
-        this.actor.system.senses.etherealLight,
+        ...Object.entries(this.actor.system.senses)
+          .filter(
+            ([_k, v]) => TERIOCK.options.character.senseTypes[v]?.grantsSight,
+          )
+          .map(([_k, v]) => v),
+        this.actor.system.senses.spectral,
       );
       if (
         this.getSetting("autoVisionModes") &&
@@ -329,11 +318,7 @@ export default class TeriockTokenDocument extends mix(
         this.sight.color = "";
       }
     }
-    return {
-      visionMode,
-      range,
-      angle,
-    };
+    return { visionMode, range, angle };
   }
 
   /** @inheritDoc */
@@ -358,20 +343,14 @@ export default class TeriockTokenDocument extends mix(
     const updateOptions = {};
     if (this.getSetting("autoColoration")) {
       const tint = this.hasStatusEffect("down") ? "#ff0000" : "#ffffff";
-      if (this.texture.tint.css !== tint) {
-        updateData["texture.tint"] = tint;
-      }
+      if (this.texture.tint.css !== tint) updateData["texture.tint"] = tint;
     }
     const { visionMode, range, angle } = this.deriveVision();
     if (this.getSetting("autoVisionRange")) {
-      if (this.sight.range !== range) {
-        updateData["sight.range"] = range;
-      }
+      if (this.sight.range !== range) updateData["sight.range"] = range;
     }
     if (this.getSetting("autoVisionAngle")) {
-      if (this.sight.angle !== angle) {
-        updateData["sight.angle"] = angle;
-      }
+      if (this.sight.angle !== angle) updateData["sight.angle"] = angle;
     }
     if (this.actor) {
       if (this.getSetting("autoScale")) {

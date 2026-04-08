@@ -20,9 +20,6 @@ export default (Base) => {
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           // TODO: Consider moving all senses to token in v14.
-          senses: new fields.SchemaField({
-            ...objectMap(characterOptions.senses, (o) => senseField(0, o)),
-          }),
           detection: new fields.SchemaField({
             hiding: new EvaluationField({
               blank: characterOptions.defaults.hiding,
@@ -36,6 +33,13 @@ export default (Base) => {
               floor: true,
               initial: characterOptions.defaults.perceiving,
             }),
+          }),
+          senses: new fields.SchemaField({
+            ...objectMap(
+              characterOptions.senseTypes,
+              (c) => senseField(0, c.label),
+              { filter: (c) => !c?.hidden },
+            ),
           }),
         });
       }
@@ -54,12 +58,12 @@ export default (Base) => {
         this.detection.perceiving.evaluate();
         // TODO: Move light controls to token overrides in v14.
         if (this.parent.statuses.has("ethereal")) {
-          this.senses.etherealLight = Math.max(
+          this.senses.spectral = Math.max(
             this.light.dim || 0,
             this.light.bright || 0,
           );
         } else {
-          this.senses.etherealLight = 0;
+          this.senses.spectral = 0;
         }
       }
     }

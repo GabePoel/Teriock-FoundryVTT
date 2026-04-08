@@ -112,6 +112,7 @@ export const impactOptions = {
     deal: "TERIOCK.EFFECTS.RollableEffects.other.label",
     take: "TERIOCK.EFFECTS.RollableEffects.other.label",
     reverse: () => null,
+    hidden: true,
   },
 };
 

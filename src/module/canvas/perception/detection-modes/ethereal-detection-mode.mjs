@@ -1,5 +1,5 @@
 import EtherealFilter from "../../rendering/ethereal-filter.mjs";
-import DetectionModeLightPerception from "./light-perception.mjs";
+import LightDetectionMode from "./light-detection-mode.mjs";
 
 const { Token } = foundry.canvas.placeables;
 
@@ -11,7 +11,7 @@ const { Token } = foundry.canvas.placeables;
  * - [Ethereal Senses](https://wiki.teriock.com/index.php/Ability:Ethereal_Senses)
  * - [Spirit Guide](https://wiki.teriock.com/index.php/Ability:Spirit_Guide)
  */
-export default class DetectionModeEthereal extends DetectionModeLightPerception {
+export default class EtherealDetectionMode extends LightDetectionMode {
   /** @inheritDoc */
   static getDetectionFilter() {
     //noinspection JSUnresolvedReference

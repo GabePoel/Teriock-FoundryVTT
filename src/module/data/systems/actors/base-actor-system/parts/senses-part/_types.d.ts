@@ -31,10 +31,10 @@ declare global {
         sight: number;
         /** <schema> Advanced smell */
         smell: number;
+        /** <schema> Spectral (ethereal lighting) */
+        spectral: number;
         /** <schema> True sight */
         truth: number;
-        /** <schema> Ethereal light */
-        etherealLight: number;
       };
     };
   }

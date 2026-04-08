@@ -42,22 +42,24 @@
             <div class="tcenter tsubtle">
               {{localize "TERIOCK.SHEETS.Actor.TABS.Details.sense.range"}}
             </div>
-            {{#each TERIOCK.options.character.senses as |name key|}}
-              <div class="gi2">
-                {{{name}}}
-              </div>
-              <div class="tcenter affix">
-                <div class="unselected">
-                  <span class="tcolored tcenter ttransparent">{{path ../system.senses key}} ft</span>
+            {{#each TERIOCK.options.character.senseTypes as |config key|}}
+              {{#if (not config.hidden)}}
+                <div class="gi2">
+                  {{{config.label}}}
                 </div>
-                <div class="tcolored">
-                  {{formInput
-                    (path ../systemFields "senses.fields" key)
-                    value=(path ../system._source.senses key)
-                    classes="tcolored tcenter ttransparent selected"
-                  }}
+                <div class="tcenter affix">
+                  <div class="unselected">
+                    <span class="tcolored tcenter ttransparent">{{path ../system.senses key}} ft</span>
+                  </div>
+                  <div class="tcolored">
+                    {{formInput
+                      (path ../systemFields "senses.fields" key)
+                      value=(path ../system._source.senses key)
+                      classes="tcolored tcenter ttransparent selected"
+                    }}
+                  </div>
                 </div>
-              </div>
+              {{/if}}
             {{/each}}
           </div>
         </div>

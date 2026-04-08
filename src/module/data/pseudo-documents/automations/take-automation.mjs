@@ -1,4 +1,3 @@
-import { localizeChoices } from "../../../helpers/localization.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
 import { TakeActivation } from "../activations/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
@@ -35,9 +34,10 @@ export default class TakeAutomation extends DisplayAutomationMixin(
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       impact: new fields.StringField({
-        choices: localizeChoices(
-          objectMap(TERIOCK.options.impact, (i) => i.take),
-        ),
+        choices: objectMap(TERIOCK.options.impact, (i) => i.take, {
+          filter: (c) => !c?.hidden,
+          localize: true,
+        }),
       }),
       amount: new fields.NumberField({ nullable: true }),
     });
