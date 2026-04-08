@@ -1,4 +1,3 @@
-import { hacksData } from "../../../../../../constants/data/hacks.mjs";
 import { hackOptions } from "../../../../../../constants/options/hack-options.mjs";
 import { objectMap } from "../../../../../../helpers/utils.mjs";
 
@@ -51,7 +50,8 @@ export default (Base) => {
         const max = Math.min(value + amount, hackOptions[part].max);
         const ids = [];
         for (let i = value; i < max; i++) {
-          ids.push(hacksData[part + (i + 1).toString()].id);
+          const id = (hackOptions[part]?.statuses ?? [])[i];
+          if (id) ids.push(id);
         }
         await this.parent.applyStatusEffects(ids);
       }
@@ -72,7 +72,8 @@ export default (Base) => {
         const min = Math.max(value - amount, 0);
         const ids = [];
         for (let i = value; i > min; i--) {
-          ids.push(hacksData[part + i.toString()].id);
+          const id = (hackOptions[part]?.statuses ?? [])[i];
+          if (id) ids.push(id);
         }
         await this.parent.removeStatusEffects(ids);
       }

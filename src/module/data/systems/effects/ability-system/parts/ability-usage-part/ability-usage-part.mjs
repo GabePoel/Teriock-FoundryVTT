@@ -29,20 +29,13 @@ export default (Base) => {
           }),
           executionTime: new fields.SchemaField({
             base: new fields.StringField({ initial: "a1" }),
-            slow: new EvaluationField({
-              model: SlowExecutionTimeModel,
-            }),
+            slow: new EvaluationField({ model: SlowExecutionTimeModel }),
           }),
           expansion: new fields.SchemaField({
-            cap: new EvaluationField({
-              deterministic: false,
-            }),
+            cap: new EvaluationField({ deterministic: false }),
             featSaveAttribute: new fields.StringField({ initial: "mov" }),
             range: new EvaluationField({ model: RangeModel }),
-            type: new fields.StringField({
-              initial: null,
-              nullable: true,
-            }),
+            type: new fields.StringField({ initial: null, nullable: true }),
           }),
           featSaveAttribute: new fields.StringField({
             initial: "mov",
@@ -69,9 +62,7 @@ export default (Base) => {
       /** @inheritDoc */
       static migrateData(data) {
         // Range migration
-        if (typeof data.range === "string") {
-          data.range = { raw: data.range };
-        }
+        if (typeof data.range === "string") data.range = { raw: data.range };
 
         // Expansion migration
         if (typeof data.expansion === "string") {
@@ -100,19 +91,14 @@ export default (Base) => {
                 raw = lower.trim().split(" ")[0];
               }
             }
-            data.executionTime.slow = {
-              unit,
-              raw,
-            };
+            data.executionTime.slow = { unit, raw };
           }
         }
 
         // Delivery migration
-        if (data.delivery?.base) {
-          data.delivery = data.delivery.base;
-        }
+        if (data.delivery?.base) data.delivery = data.delivery.base;
 
-        super.migrateData(data);
+        return super.migrateData(data);
       }
 
       /**

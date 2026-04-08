@@ -43,7 +43,7 @@ export default (Base) =>
       context.tradecraftMacros = Object.fromEntries(
         Object.entries(TERIOCK.index.tradecrafts).map(([tc, name]) => [
           tc,
-          index.getName(`Make ${name} Check`).uuid,
+          index.getName(`Make ${name} Check`)?.uuid,
         ]),
       );
       return context;

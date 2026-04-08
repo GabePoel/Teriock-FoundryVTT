@@ -75,7 +75,7 @@ export default (Base) => {
           }
           delete data.improvements;
         }
-        super.migrateData(data);
+        return super.migrateData(data);
       }
 
       /** @inheritDoc */

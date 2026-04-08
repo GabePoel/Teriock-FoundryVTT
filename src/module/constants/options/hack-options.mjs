@@ -11,6 +11,7 @@ export const hackOptions = {
     max: 2,
     part: "TERIOCK.EFFECTS.Hacks.arm.part",
     remove: "TERIOCK.EFFECTS.Hacks.arm.remove",
+    statuses: ["armHack1", "armHack2"],
   },
   leg: {
     icon: icons.hack.leg,
@@ -18,6 +19,7 @@ export const hackOptions = {
     max: 2,
     part: "TERIOCK.EFFECTS.Hacks.leg.part",
     remove: "TERIOCK.EFFECTS.Hacks.leg.remove",
+    statuses: ["legHack1", "legHack2"],
   },
   body: {
     icon: icons.hack.body,
@@ -25,6 +27,7 @@ export const hackOptions = {
     max: 1,
     part: "TERIOCK.EFFECTS.Hacks.body.part",
     remove: "TERIOCK.EFFECTS.Hacks.body.remove",
+    statuses: ["bodyHack"],
   },
   eye: {
     icon: icons.hack.eye,
@@ -32,6 +35,7 @@ export const hackOptions = {
     max: 1,
     part: "TERIOCK.EFFECTS.Hacks.eye.part",
     remove: "TERIOCK.EFFECTS.Hacks.eye.remove",
+    statuses: ["eyeHack"],
   },
   ear: {
     icon: icons.hack.ear,
@@ -39,6 +43,7 @@ export const hackOptions = {
     max: 1,
     part: "TERIOCK.EFFECTS.Hacks.ear.part",
     remove: "TERIOCK.EFFECTS.Hacks.ear.remove",
+    statuses: ["earHack"],
   },
   mouth: {
     icon: icons.hack.mouth,
@@ -46,6 +51,7 @@ export const hackOptions = {
     max: 1,
     part: "TERIOCK.EFFECTS.Hacks.mouth.part",
     remove: "TERIOCK.EFFECTS.Hacks.mouth.remove",
+    statuses: ["mouthHack"],
   },
   nose: {
     icon: icons.hack.nose,
@@ -53,6 +59,7 @@ export const hackOptions = {
     max: 1,
     part: "TERIOCK.EFFECTS.Hacks.nose.part",
     remove: "TERIOCK.EFFECTS.Hacks.nose.remove",
+    statuses: ["noseHack"],
   },
 };
 

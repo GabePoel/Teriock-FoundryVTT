@@ -84,7 +84,7 @@ export default (Base) =>
       context.attributeMacros = Object.fromEntries(
         Object.keys(TERIOCK.index.attributesFull).map((att) => [
           att,
-          index.getName(`Make ${att.toUpperCase()} Feat Save`).uuid,
+          index.getName(`Make ${att.toUpperCase()} Feat Save`)?.uuid,
         ]),
       );
       return context;
