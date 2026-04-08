@@ -48,7 +48,7 @@ export default class PseudoDocument extends EmbeddedDataModel {
     /** @type {CommonSystem} */
     const directParent = foundry.utils.isSubclass(
       parent,
-      teriock.data.systems.abstract.BaseSystem,
+      foundry.abstract.TypeDataModel,
     )
       ? parent
       : parent.system;
