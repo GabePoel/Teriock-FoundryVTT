@@ -78,34 +78,34 @@ export default (Base) =>
      * @returns {Promise<void>}
      */
     static async _onTakeRollable(event, target) {
-      const type = target.dataset.type;
+      const impact = target.dataset.impact;
       if (event.button === 2) {
-        await TakingActorSheetPart._applyMorganti(type, this.document);
+        await TakingActorSheetPart._applyMorganti(impact, this.document);
         return;
       }
       const field = new fields.NumberField({
-        label: toTitleCase(type),
+        label: toTitleCase(impact),
         min: 0,
         integer: true,
         hint: game.i18n.format(
           "TERIOCK.SHEETS.Actor.ACTIONS.TakeRollable.hint",
-          { effect: TERIOCK.options.impact[type]?.label?.toLowerCase() },
+          { effect: TERIOCK.options.impact[impact]?.label?.toLowerCase() },
         ),
       });
       await TeriockDialog.prompt({
         window: {
-          title: TERIOCK.options.impact[type]?.impact,
-          icon: makeIconClass(TERIOCK.options.impact[type].icon, "title"),
+          title: TERIOCK.options.impact[impact]?.label,
+          icon: makeIconClass(TERIOCK.options.impact[impact].icon, "title"),
         },
-        content: field.toFormGroup({}, { name: type, placeholder: "0" })
+        content: field.toFormGroup({}, { name: impact, placeholder: "0" })
           .outerHTML,
         ok: {
           label: game.i18n.localize(
             "TERIOCK.SHEETS.Actor.ACTIONS.TakeRollable.ok",
           ),
           callback: (_event, button) => {
-            let input = button.form.elements.namedItem(type).value ?? "0";
-            this.document.system[`take${toTitleCase(type)}`](Number(input));
+            let input = button.form.elements.namedItem(impact).value ?? "0";
+            this.document.system[`take${toTitleCase(impact)}`](Number(input));
           },
         },
       });
