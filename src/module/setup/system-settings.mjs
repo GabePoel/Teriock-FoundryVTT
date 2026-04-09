@@ -151,6 +151,27 @@ export const settings = {
     },
   },
   gameContent: {
+    compendiumAbilitySources: {
+      default: ["teriock.abilities"],
+      hint: "TERIOCK.SETTINGS.compendiumAbilitySources.hint",
+      name: "TERIOCK.SETTINGS.compendiumAbilitySources.name",
+      scope: "world",
+      type: new fields.SetField(new fields.StringField()),
+    },
+    compendiumEquipmentSources: {
+      default: ["teriock.equipment"],
+      hint: "TERIOCK.SETTINGS.compendiumEquipmentSources.hint",
+      name: "TERIOCK.SETTINGS.compendiumEquipmentSources.name",
+      scope: "world",
+      type: new fields.SetField(new fields.StringField()),
+    },
+    compendiumPropertySources: {
+      default: ["teriock.properties"],
+      hint: "TERIOCK.SETTINGS.compendiumPropertySources.hint",
+      name: "TERIOCK.SETTINGS.compendiumPropertySources.name",
+      scope: "world",
+      type: new fields.SetField(new fields.StringField()),
+    },
     damageTypeSources: {
       default: ["Compendium.teriock.rules.JournalEntry.damage0000000000"],
       hint: "TERIOCK.SETTINGS.damageTypeSources.hint",
