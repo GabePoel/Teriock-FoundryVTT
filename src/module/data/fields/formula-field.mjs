@@ -1,16 +1,5 @@
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
-import {
-  addFormula,
-  addTypesToFormula,
-  boostFormula,
-  downgradeDeterministicFormula,
-  downgradeIndeterministicFormula,
-  multiplyFormula,
-  removeTypesFromFormula,
-  setTypesOfFormula,
-  upgradeDeterministicFormula,
-  upgradeIndeterministicFormula,
-} from "../../helpers/formula.mjs";
+import * as formula from "../../helpers/formula.mjs";
 import EnhancedStringField from "./enhanced-string-field.mjs";
 
 /**
@@ -36,8 +25,7 @@ export default class FormulaField extends EnhancedStringField {
 
   /** @inheritDoc */
   _applyChangeAdd(value, delta, _model, _change) {
-    if (!value) return delta;
-    return addFormula(value, delta);
+    return formula.addFormula(value ?? "", delta);
   }
 
   /**
@@ -50,26 +38,25 @@ export default class FormulaField extends EnhancedStringField {
    */
   _applyChangeBoost(value, delta, _model, _change) {
     if (!delta || this.deterministic) return value;
-    return boostFormula(value, delta);
-  }
-
-  /** @inheritDoc */
-  _applyChangeCustom(value, delta, _model, _change) {
-    if (!delta || this.deterministic) return value;
-    return boostFormula(value, delta);
+    return formula.boostFormula(value, delta);
   }
 
   /** @inheritDoc */
   _applyChangeDowngrade(value, delta, _model, _change) {
     if (!value) return delta;
-    if (this.deterministic) return downgradeDeterministicFormula(value, delta);
-    return downgradeIndeterministicFormula(value, delta);
+    return this.deterministic
+      ? formula.downgradeDeterministicFormula(value, delta)
+      : formula.downgradeIndeterministicFormula(value, delta);
   }
 
   /** @inheritDoc */
   _applyChangeMultiply(value, delta, _model, _change) {
-    if (!value) return delta;
-    return multiplyFormula(value, delta);
+    return formula.multiplyFormula(value ?? "0", delta);
+  }
+
+  /** @inheritDoc */
+  _applyChangeSubtract(value, delta, _model, _change) {
+    return formula.subtractFormula(value ?? "", delta);
   }
 
   /**
@@ -82,7 +69,7 @@ export default class FormulaField extends EnhancedStringField {
    */
   _applyChangeTypeAdd(value, delta, _model, _change) {
     if (!delta || this.deterministic) return value;
-    return addTypesToFormula(value, delta);
+    return formula.addTypesToFormula(value, delta);
   }
 
   /**
@@ -95,7 +82,7 @@ export default class FormulaField extends EnhancedStringField {
    */
   _applyChangeTypeRemove(value, delta, _model, _change) {
     if (!delta || this.deterministic) return value;
-    return removeTypesFromFormula(value, delta);
+    return formula.removeTypesFromFormula(value, delta);
   }
 
   /**
@@ -108,14 +95,15 @@ export default class FormulaField extends EnhancedStringField {
    */
   _applyChangeTypeSet(value, delta, _model, _change) {
     if (!delta || this.deterministic) return value;
-    return setTypesOfFormula(value, delta);
+    return formula.setTypesOfFormula(value, delta);
   }
 
   /** @inheritDoc */
   _applyChangeUpgrade(value, delta, _model, _change) {
     if (!value) return delta;
-    if (this.deterministic) return upgradeDeterministicFormula(value, delta);
-    return upgradeIndeterministicFormula(value, delta);
+    return this.deterministic
+      ? formula.upgradeDeterministicFormula(value, delta)
+      : formula.upgradeIndeterministicFormula(value, delta);
   }
 
   /** @inheritDoc */

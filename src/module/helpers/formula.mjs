@@ -9,8 +9,24 @@ import { isKebabCase } from "./string.mjs";
  */
 export function addFormula(value, delta) {
   const operator = delta.startsWith("-") ? "-" : "+";
+  const minus = operator === "-" ? "-" : "";
   delta = delta.replace(/^[+-]/, "").trim();
-  if (!formulaExists(value)) return delta;
+  if (!formulaExists(value)) return `${minus} ${delta}`.trim();
+  if (!formulaExists(delta)) return value;
+  return `${value} ${operator} ${delta}`;
+}
+
+/**
+ * Subtract something from a formula.
+ * @param {Teriock.System.FormulaString} value
+ * @param {Teriock.System.FormulaString} delta
+ * @returns {Teriock.System.FormulaString}
+ */
+export function subtractFormula(value, delta) {
+  const operator = delta.startsWith("-") ? "+" : "-";
+  const minus = operator === "-" ? "-" : "";
+  delta = delta.replace(/^[+-]/, "").trim();
+  if (!formulaExists(value)) return `${minus} ${delta}`.trim();
   if (!formulaExists(delta)) return value;
   return `${value} ${operator} ${delta}`;
 }
