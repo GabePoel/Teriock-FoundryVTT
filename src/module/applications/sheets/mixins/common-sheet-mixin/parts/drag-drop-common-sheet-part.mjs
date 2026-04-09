@@ -115,7 +115,7 @@ export default (Base) => {
           doc = doc.system.effect;
         }
         const uuid =
-          doc.documentName === "ActiveEffect" ? doc.parent.uuid : doc.uuid;
+          doc.parent?.type === "wrapper" ? doc.parent.uuid : doc.uuid;
         const obj = doc.toObject();
         if (doc.inCompendium && !doc._stats.compendiumSource) {
           obj["_stats.compendiumSource"] = uuid;

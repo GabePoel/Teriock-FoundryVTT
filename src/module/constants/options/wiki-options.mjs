@@ -76,7 +76,7 @@ export const wikiOptions = {
     Property: {
       collection: "effects",
       icon: documentOptions.property.icon,
-      packs: ["teriock.abilities"],
+      packs: ["teriock.properties"],
       parentKey: "name",
       type: "property",
     },
