@@ -37,7 +37,7 @@ export default class BodySystem extends mix(
   /** @inheritDoc */
   get embedParts() {
     return Object.assign(super.embedParts, {
-      subtitle: game.i18n.localize("TYPES.Item.body"),
+      subtitle: _loc("TYPES.Item.body"),
     });
   }
 
@@ -50,7 +50,7 @@ export default class BodySystem extends mix(
         this._defenseBar,
         {
           icon: TERIOCK.display.icons.equipment.equipmentClasses,
-          label: game.i18n.localize(
+          label: _loc(
             "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentClasses.label",
           ),
           wrappers: [

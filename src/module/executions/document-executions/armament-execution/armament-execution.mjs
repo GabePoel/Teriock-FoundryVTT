@@ -69,11 +69,11 @@ export default class ArmamentExecution extends BaseDocumentExecution {
   /** @inheritDoc */
   get flavor() {
     if (this.deals.size === 1) {
-      return game.i18n.format("TERIOCK.ROLLS.Base.name", {
+      return _loc("TERIOCK.ROLLS.Base.name", {
         value: TERIOCK.options.impact[Array.from(this.deals)[0]].label,
       });
     } else {
-      return game.i18n.localize("TERIOCK.ROLLS.Harm.multi");
+      return _loc("TERIOCK.ROLLS.Harm.multi");
     }
   }
 
@@ -122,12 +122,10 @@ export default class ArmamentExecution extends BaseDocumentExecution {
       .filter((a) => a);
     if (onUseAbilities.length > 0) {
       const usedAbilities = await selectDocumentsDialog(onUseAbilities, {
-        hint: game.i18n.format("TERIOCK.SYSTEMS.Equipment.DIALOG.onUse.hint", {
+        hint: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.onUse.hint", {
           name: this.source.name,
         }),
-        title: game.i18n.localize(
-          "TERIOCK.SYSTEMS.Equipment.DIALOG.onUse.title",
-        ),
+        title: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.onUse.title"),
       });
       for (const ability of usedAbilities) {
         if (ability.system.consumable && this.source.system.consumable) {

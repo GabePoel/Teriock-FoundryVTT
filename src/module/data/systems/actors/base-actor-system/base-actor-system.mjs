@@ -112,13 +112,13 @@ export default class BaseActorSystem extends mix(
     const parts = super.embedParts;
     parts.subtitle = this.metadata.type;
     parts.text = dotJoin([
-      game.i18n.format("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.lvl", {
+      _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.lvl", {
         number: this.scaling.lvl,
       }),
-      game.i18n.format("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.br", {
+      _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.br", {
         number: this.scaling.br,
       }),
-      game.i18n.format("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.size", {
+      _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.size", {
         number: this.size.number.value,
       }),
     ]);
@@ -132,15 +132,15 @@ export default class BaseActorSystem extends mix(
     parts.bars = [
       {
         icon: TERIOCK.display.icons.ui.info,
-        label: game.i18n.localize("TERIOCK.SYSTEMS.Ability.PANELS.info"),
+        label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.info"),
         wrappers: [
-          game.i18n.format("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.lvl", {
+          _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.lvl", {
             number: this.scaling.lvl,
           }),
-          game.i18n.format("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.br", {
+          _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.br", {
             number: this.scaling.br,
           }),
-          game.i18n.format("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.size", {
+          _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.size", {
             number: this.size.number.value,
           }),
         ],
@@ -148,7 +148,7 @@ export default class BaseActorSystem extends mix(
     ];
     parts.blocks = [
       {
-        title: game.i18n.localize("TERIOCK.SYSTEMS.BaseActor.PANELS.notes"),
+        title: _loc("TERIOCK.SYSTEMS.BaseActor.PANELS.notes"),
         text: this.notes,
       },
     ];
@@ -178,7 +178,7 @@ export default class BaseActorSystem extends mix(
   getCardContextMenuEntries(doc) {
     return [
       {
-        name: game.i18n.localize("TERIOCK.SYSTEMS.BaseActor.MENU.openToken"),
+        name: _loc("TERIOCK.SYSTEMS.BaseActor.MENU.openToken"),
         icon: makeIcon(TERIOCK.display.icons.document.token, "contextMenu"),
         condition: () => this.parent.token && this.parent.token.isViewer,
         callback: async () => this.parent.token.sheet.render(true),

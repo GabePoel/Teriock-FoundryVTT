@@ -241,11 +241,11 @@ function enrichCommand(match, options) {
     ),
   );
   if (!label) {
-    label = game.i18n.localize(
+    label = _loc(
       getInteractionEntryValue(command, "label", interactionOptions),
     );
   }
-  link.appendChild(document.createTextNode(game.i18n.localize(label)));
+  link.appendChild(document.createTextNode(_loc(label)));
   return link;
 }
 

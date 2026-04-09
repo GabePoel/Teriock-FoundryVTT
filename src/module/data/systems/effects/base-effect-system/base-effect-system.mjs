@@ -68,9 +68,7 @@ export default class BaseEffectSystem extends ChildSystemMixin(
     return [
       ...super.displayToggles,
       {
-        label: game.i18n.localize(
-          "TERIOCK.SYSTEMS.BaseItem.FIELDS.disabled.label",
-        ),
+        label: _loc("TERIOCK.SYSTEMS.BaseItem.FIELDS.disabled.label"),
         path: "disabled",
       },
     ];

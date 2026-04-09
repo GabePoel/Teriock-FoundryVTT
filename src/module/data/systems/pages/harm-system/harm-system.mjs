@@ -64,7 +64,7 @@ export default class HarmSystem extends mix(
 
   /** @inheritDoc */
   get fullName() {
-    return game.i18n.format("TERIOCK.SYSTEMS.Harm.EMBED.fullName", {
+    return _loc("TERIOCK.SYSTEMS.Harm.EMBED.fullName", {
       name: super.fullName,
       type: TERIOCK.options.impact[this.parent.type]?.label || "",
     });
@@ -90,9 +90,7 @@ export default class HarmSystem extends mix(
       foundry.utils.mergeObject(
         {
           text: {
-            content: game.i18n.localize(
-              "TERIOCK.SYSTEMS.Harm.DATA.description",
-            ),
+            content: _loc("TERIOCK.SYSTEMS.Harm.DATA.description"),
           },
           system: { img: getImage("effect-types", ref) },
         },

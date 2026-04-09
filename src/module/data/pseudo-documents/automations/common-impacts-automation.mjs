@@ -65,16 +65,13 @@ export default class CommonImpactsAutomation extends TriggerAutomationMixin(
           "title",
         ),
       },
-      content: game.i18n.format(
-        "TERIOCK.AUTOMATIONS.CommonImpacts.DIALOG.content",
-        {
-          impacts: formatJoin(
-            Array.from(this.common).map(
-              (c) => TERIOCK.options.consequence.common[c],
-            ),
+      content: _loc("TERIOCK.AUTOMATIONS.CommonImpacts.DIALOG.content", {
+        impacts: formatJoin(
+          Array.from(this.common).map(
+            (c) => TERIOCK.options.consequence.common[c],
           ),
-        },
-      ),
+        ),
+      }),
     }).then((proceed) => {
       if (!proceed) return;
       for (const c of this.common) {

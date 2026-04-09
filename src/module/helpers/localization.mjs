@@ -16,7 +16,7 @@ import { sortObject } from "./utils.mjs";
  */
 export function localizeChoices(choices, options = { sort: true }) {
   const out = Object.fromEntries(
-    Object.entries(choices).map(([k, v]) => [k, game.i18n.localize(v)]),
+    Object.entries(choices).map(([k, v]) => [k, _loc(v)]),
   );
   if (options.sort) return sortObject(out, { value: true });
   return out;
@@ -95,7 +95,7 @@ export function performPreLocalization(config) {
   }
 
   // Localize & sort status effects
-  CONFIG.statusEffects.forEach((s) => (s.name = game.i18n.localize(s.name)));
+  CONFIG.statusEffects.forEach((s) => (s.name = _loc(s.name)));
   CONFIG.statusEffects.sort((lhs, rhs) =>
     lhs?.name.localeCompare(rhs?.name, game.i18n.lang),
   );
@@ -117,9 +117,7 @@ export function localizeObject(
   for (const [k, v] of Object.entries(obj)) {
     const type = typeof v;
     if (type === "string") {
-      obj[k] = game.i18n.localize(
-        prefix + transformValue(v, transform) + suffix,
-      );
+      obj[k] = _loc(prefix + transformValue(v, transform) + suffix);
       continue;
     }
 
@@ -146,7 +144,7 @@ export function localizeObject(
       foundry.utils.setProperty(
         v,
         key,
-        game.i18n.localize(prefix + transformValue(value, transform) + suffix),
+        _loc(prefix + transformValue(value, transform) + suffix),
       );
     }
   }

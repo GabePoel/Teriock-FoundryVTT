@@ -20,8 +20,8 @@ const command = {
   id: "resist",
   label: (options) =>
     options?.hex
-      ? game.i18n.localize("TERIOCK.ROLLS.Hexproof.button")
-      : game.i18n.localize("TERIOCK.ROLLS.Resist.button"),
+      ? _loc("TERIOCK.ROLLS.Hexproof.button")
+      : _loc("TERIOCK.ROLLS.Resist.button"),
   primary: use,
   secondary: use,
 };

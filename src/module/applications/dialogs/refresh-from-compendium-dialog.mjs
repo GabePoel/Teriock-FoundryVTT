@@ -26,7 +26,7 @@ export default async function refreshFromCompendiumDialog(doc) {
       );
     figureElement.style.margin = "0";
   } else {
-    const noSourceText = game.i18n.format(
+    const noSourceText = _loc(
       "TERIOCK.DIALOGS.RefreshFromCompendium.noSource",
       { document: `@UUID[${doc.uuid}]` },
     );
@@ -34,7 +34,7 @@ export default async function refreshFromCompendiumDialog(doc) {
       await TeriockTextEditor.enrichHTML(noSourceText);
   }
   const sourceLegendElement = document.createElement("legend");
-  sourceLegendElement.innerText = game.i18n.localize(
+  sourceLegendElement.innerText = _loc(
     "TERIOCK.DIALOGS.RefreshFromCompendium.sourceLegend",
   );
   sourceEmbedElement.insertAdjacentElement("afterbegin", sourceLegendElement);
@@ -42,56 +42,54 @@ export default async function refreshFromCompendiumDialog(doc) {
   contentElement.append(sourceEmbedElement);
   const optionsElement = document.createElement("fieldset");
   const optionsLegendElement = document.createElement("legend");
-  optionsLegendElement.innerText = game.i18n.localize(
+  optionsLegendElement.innerText = _loc(
     "TERIOCK.DIALOGS.RefreshFromCompendium.optionsLegend",
   );
   optionsElement.append(optionsLegendElement);
   contentElement.append(optionsElement);
   let fields = {
     updateDocument: new BooleanField({
-      label: game.i18n.localize(
+      label: _loc(
         "TERIOCK.DIALOGS.RefreshFromCompendium.FIELDS.updateDocument.label",
       ),
       initial: true,
-      hint: game.i18n.localize(
+      hint: _loc(
         "TERIOCK.DIALOGS.RefreshFromCompendium.FIELDS.updateDocument.hint",
       ),
     }),
     deleteChildren: new BooleanField({
-      label: game.i18n.localize(
+      label: _loc(
         "TERIOCK.DIALOGS.RefreshFromCompendium.FIELDS.deleteChildren.label",
       ),
       initial: true,
-      hint: game.i18n.localize(
+      hint: _loc(
         "TERIOCK.DIALOGS.RefreshFromCompendium.FIELDS.deleteChildren.hint",
       ),
     }),
     createChildren: new BooleanField({
-      label: game.i18n.localize(
+      label: _loc(
         "TERIOCK.DIALOGS.RefreshFromCompendium.FIELDS.createChildren.label",
       ),
       initial: !(doc.type === "rank" && doc.system.classRank >= 3),
-      hint: game.i18n.localize(
+      hint: _loc(
         "TERIOCK.DIALOGS.RefreshFromCompendium.FIELDS.createChildren.hint",
       ),
     }),
     updateChildren: new BooleanField({
-      label: game.i18n.localize(
+      label: _loc(
         "TERIOCK.DIALOGS.RefreshFromCompendium.FIELDS.updateChildren.label",
       ),
       initial: true,
-      hint: game.i18n.localize(
+      hint: _loc(
         "TERIOCK.DIALOGS.RefreshFromCompendium.FIELDS.updateChildren.hint",
       ),
     }),
     recursive: new BooleanField({
-      label: game.i18n.localize(
+      label: _loc(
         "TERIOCK.DIALOGS.RefreshFromCompendium.FIELDS.recursive.label",
       ),
       initial: true,
-      hint: game.i18n.localize(
-        "TERIOCK.DIALOGS.RefreshFromCompendium.FIELDS.recursive.hint",
-      ),
+      hint: _loc("TERIOCK.DIALOGS.RefreshFromCompendium.FIELDS.recursive.hint"),
     }),
   };
   for (const [key, field] of Object.entries(fields)) {
@@ -111,16 +109,14 @@ export default async function refreshFromCompendiumDialog(doc) {
         await doc.system.refreshFromCompendiumSource(options);
       },
       icon: makeIconClass(TERIOCK.display.icons.ui.select, "button"),
-      label: game.i18n.localize(
-        "TERIOCK.DIALOGS.RefreshFromCompendium.BUTTONS.refresh",
-      ),
+      label: _loc("TERIOCK.DIALOGS.RefreshFromCompendium.BUTTONS.refresh"),
     },
     position: {
       width: 450,
     },
     window: {
       icon: makeIconClass("fa-book-atlas", "title"),
-      title: game.i18n.format("TERIOCK.DIALOGS.RefreshFromCompendium.title", {
+      title: _loc("TERIOCK.DIALOGS.RefreshFromCompendium.title", {
         name: doc.fullName,
       }),
     },

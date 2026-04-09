@@ -44,7 +44,7 @@ export default function UsableDataMixin(Base) {
        * @returns {string}
        */
       get useText() {
-        return game.i18n.localize("TERIOCK.MODELS.Usable.USAGE.use");
+        return _loc("TERIOCK.MODELS.Usable.USAGE.use");
       }
 
       /**

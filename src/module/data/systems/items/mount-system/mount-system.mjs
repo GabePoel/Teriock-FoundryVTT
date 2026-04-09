@@ -65,8 +65,8 @@ export default class MountSystem extends mix(
         icon: this.mounted ? icons.ui.enabled : icons.ui.disabled,
         action: "toggleMountedDoc",
         tooltip: this.mounted
-          ? game.i18n.localize("TERIOCK.SYSTEMS.Mount.EMBED.mounted")
-          : game.i18n.localize("TERIOCK.SYSTEMS.Mount.EMBED.unmounted"),
+          ? _loc("TERIOCK.SYSTEMS.Mount.EMBED.mounted")
+          : _loc("TERIOCK.SYSTEMS.Mount.EMBED.unmounted"),
         condition: this.parent.isOwner,
         callback: async () => {
           if (this.mounted) await this.unmount();
@@ -96,9 +96,9 @@ export default class MountSystem extends mix(
       this._statBar,
       {
         icon: TERIOCK.display.icons.armament.load,
-        label: game.i18n.localize("TERIOCK.SYSTEMS.Mount.PANELS.load"),
+        label: _loc("TERIOCK.SYSTEMS.Mount.PANELS.load"),
         wrappers: [
-          game.i18n.format("TERIOCK.SYSTEMS.Attunable.PANELS.tier", {
+          _loc("TERIOCK.SYSTEMS.Attunable.PANELS.tier", {
             value: this.tier.text,
           }) || "0",
           this.mountType,
@@ -112,7 +112,7 @@ export default class MountSystem extends mix(
     return [
       ...super.getCardContextMenuEntries(doc),
       {
-        name: game.i18n.localize("TERIOCK.SYSTEMS.Mount.MENU.mount"),
+        name: _loc("TERIOCK.SYSTEMS.Mount.MENU.mount"),
         icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
         callback: this.mount.bind(this),
         condition:
@@ -122,7 +122,7 @@ export default class MountSystem extends mix(
         group: "control",
       },
       {
-        name: game.i18n.localize("TERIOCK.SYSTEMS.Mount.MENU.unmount"),
+        name: _loc("TERIOCK.SYSTEMS.Mount.MENU.unmount"),
         icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
         callback: this.unmount.bind(this),
         condition:

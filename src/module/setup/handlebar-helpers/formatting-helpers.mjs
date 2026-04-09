@@ -22,7 +22,7 @@ export default function registerFormattingHelpers() {
 
   Handlebars.registerHelper("elements", (elements) => {
     elements = Array.from(elements);
-    let out = game.i18n.localize("TERIOCK.TERMS.Common.celestial");
+    let out = _loc("TERIOCK.TERMS.Common.celestial");
     if (elements && elements.length > 0) {
       out = elements
         .map((e) => e.charAt(0).toUpperCase() + e.slice(1))
@@ -30,7 +30,7 @@ export default function registerFormattingHelpers() {
           elements.length > 2
             ? ", "
             : elements.length === 2
-              ? ` ${game.i18n.localize("TERIOCK.SYSTEMS.Ability.FIELDS.elderSorcery.elementJoin")} `
+              ? ` ${_loc("TERIOCK.SYSTEMS.Ability.FIELDS.elderSorcery.elementJoin")} `
               : "",
         );
       if (elements.length > 1) {
@@ -38,7 +38,7 @@ export default function registerFormattingHelpers() {
         if (lastComma !== -1) {
           out =
             out.substring(0, lastComma) +
-            ` ${game.i18n.localize("TERIOCK.SYSTEMS.Ability.FIELDS.elderSorcery.elementJoin")}` +
+            ` ${_loc("TERIOCK.SYSTEMS.Ability.FIELDS.elderSorcery.elementJoin")}` +
             out.substring(lastComma + 1);
         }
       }

@@ -30,11 +30,11 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
 export async function selectDialog(choices, options = {}) {
   const {
     initial = null,
-    label = game.i18n.localize("TERIOCK.DIALOGS.Select.defaults.label"),
-    hint = game.i18n.localize("TERIOCK.DIALOGS.Select.defaults.hint"),
+    label = _loc("TERIOCK.DIALOGS.Select.defaults.label"),
+    hint = _loc("TERIOCK.DIALOGS.Select.defaults.hint"),
     hintHtml = "",
     hintTitle = "",
-    title = game.i18n.localize("TERIOCK.DIALOGS.Select.defaults.title"),
+    title = _loc("TERIOCK.DIALOGS.Select.defaults.title"),
     other = false,
     genericOther = true,
     icon = makeIconClass(icons.ui.select, "title"),
@@ -111,7 +111,7 @@ export async function selectDialog(choices, options = {}) {
     buttons: [
       {
         action: "other",
-        label: game.i18n.localize("TERIOCK.DIALOGS.Select.otherButton"),
+        label: _loc("TERIOCK.DIALOGS.Select.otherButton"),
         callback: async (_event, _button, dialog) => {
           dialog.classList.add("force-hidden");
           if (genericOther) {
@@ -142,9 +142,9 @@ export async function selectDialog(choices, options = {}) {
  */
 export async function selectEquipmentClassDialog() {
   return await selectDialog(TERIOCK.reference.equipmentClasses, {
-    label: game.i18n.localize("TERIOCK.DIALOGS.Select.EquipmentClass.label"),
-    hint: game.i18n.localize("TERIOCK.DIALOGS.Select.EquipmentClass.hint"),
-    title: game.i18n.localize("TERIOCK.DIALOGS.Select.EquipmentClass.title"),
+    label: _loc("TERIOCK.DIALOGS.Select.EquipmentClass.label"),
+    hint: _loc("TERIOCK.DIALOGS.Select.EquipmentClass.hint"),
+    title: _loc("TERIOCK.DIALOGS.Select.EquipmentClass.title"),
   });
 }
 
@@ -154,9 +154,9 @@ export async function selectEquipmentClassDialog() {
  */
 export async function selectWeaponClassDialog() {
   return await selectDialog(TERIOCK.reference.weaponClasses, {
-    label: game.i18n.localize("TERIOCK.DIALOGS.Select.WeaponClass.label"),
-    hint: game.i18n.localize("TERIOCK.DIALOGS.Select.WeaponClass.hint"),
-    title: game.i18n.localize("TERIOCK.DIALOGS.Select.WeaponClass.title"),
+    label: _loc("TERIOCK.DIALOGS.Select.WeaponClass.label"),
+    hint: _loc("TERIOCK.DIALOGS.Select.WeaponClass.hint"),
+    title: _loc("TERIOCK.DIALOGS.Select.WeaponClass.title"),
   });
 }
 
@@ -166,9 +166,9 @@ export async function selectWeaponClassDialog() {
  */
 export async function selectConditionDialog() {
   return await selectDialog(TERIOCK.reference.conditions, {
-    label: game.i18n.localize("TERIOCK.DIALOGS.Select.Condition.label"),
-    hint: game.i18n.localize("TERIOCK.DIALOGS.Select.Condition.hint"),
-    title: game.i18n.localize("TERIOCK.DIALOGS.Select.Condition.title"),
+    label: _loc("TERIOCK.DIALOGS.Select.Condition.label"),
+    hint: _loc("TERIOCK.DIALOGS.Select.Condition.hint"),
+    title: _loc("TERIOCK.DIALOGS.Select.Condition.title"),
   });
 }
 
@@ -179,8 +179,8 @@ export async function selectConditionDialog() {
 export async function selectPropertyDialog() {
   return await resolveDocument(
     await selectDocumentDialog(game.teriock.packs.properties.index.contents, {
-      hint: game.i18n.localize("TERIOCK.DIALOGS.Select.Property.hint"),
-      title: game.i18n.localize("TERIOCK.DIALOGS.Select.Property.title"),
+      hint: _loc("TERIOCK.DIALOGS.Select.Property.hint"),
+      title: _loc("TERIOCK.DIALOGS.Select.Property.title"),
       tooltipAsync: true,
       openable: true,
     }),
@@ -203,8 +203,8 @@ export async function selectTradecraftDialog() {
     }),
   );
   const chosen = await selectDocumentDialog(choices, {
-    hint: game.i18n.localize("TERIOCK.DIALOGS.Select.Tradecraft.hint"),
-    title: game.i18n.localize("TERIOCK.DIALOGS.Select.Tradecraft.title"),
+    hint: _loc("TERIOCK.DIALOGS.Select.Tradecraft.hint"),
+    title: _loc("TERIOCK.DIALOGS.Select.Tradecraft.title"),
     tooltipKey: "tooltip",
     openable: true,
   });
@@ -222,8 +222,8 @@ export async function selectTradecraftDialog() {
 export async function selectAbilityDialog() {
   return await resolveDocument(
     await selectDocumentDialog(await noSup(game.teriock.packs.abilities), {
-      hint: game.i18n.localize("TERIOCK.DIALOGS.Select.Ability.hint"),
-      title: game.i18n.localize("TERIOCK.DIALOGS.Select.Ability.title"),
+      hint: _loc("TERIOCK.DIALOGS.Select.Ability.hint"),
+      title: _loc("TERIOCK.DIALOGS.Select.Ability.title"),
       tooltipAsync: true,
       openable: true,
     }),
@@ -240,7 +240,7 @@ export async function selectCompendiumsDialog(selected = true) {
     .filter((p) => !p.locked)
     .map((p) => {
       return {
-        name: game.i18n.localize(p.title),
+        name: _loc(p.title),
         uuid: p.collection,
         img: p.banner || "icons/svg/book.svg",
       };
@@ -249,8 +249,8 @@ export async function selectCompendiumsDialog(selected = true) {
   const chosen = await tm.dialogs.selectDocumentsDialog(packDocs, {
     tooltip: false,
     tooltipAsync: false,
-    hint: game.i18n.localize("TERIOCK.DIALOGS.Select.Compendiums.hint"),
-    title: game.i18n.localize("TERIOCK.DIALOGS.Select.Compendiums.title"),
+    hint: _loc("TERIOCK.DIALOGS.Select.Compendiums.hint"),
+    title: _loc("TERIOCK.DIALOGS.Select.Compendiums.title"),
     checked: packDocs.map((p) => p.uuid && selected),
   });
   return chosen.map((c) => game.packs.get(c.uuid));
@@ -263,8 +263,8 @@ export async function selectCompendiumsDialog(selected = true) {
 export async function selectEquipmentTypeDialog() {
   return resolveDocument(
     await selectDocumentDialog(await noSup(game.teriock.packs.equipment), {
-      hint: game.i18n.localize("TERIOCK.DIALOGS.Select.EquipmentType.hint"),
-      title: game.i18n.localize("TERIOCK.DIALOGS.Select.EquipmentType.title"),
+      hint: _loc("TERIOCK.DIALOGS.Select.EquipmentType.hint"),
+      title: _loc("TERIOCK.DIALOGS.Select.EquipmentType.title"),
       tooltipAsync: true,
       openable: true,
     }),
@@ -278,8 +278,8 @@ export async function selectEquipmentTypeDialog() {
 export async function selectSpeciesDialog() {
   return resolveDocument(
     await selectDocumentDialog(await noSup(game.teriock.packs.species), {
-      hint: game.i18n.localize("TERIOCK.DIALOGS.Select.Species.hint"),
-      title: game.i18n.localize("TERIOCK.DIALOGS.Select.Species.title"),
+      hint: _loc("TERIOCK.DIALOGS.Select.Species.hint"),
+      title: _loc("TERIOCK.DIALOGS.Select.Species.title"),
       tooltipAsync: true,
       openable: true,
     }),
@@ -293,8 +293,8 @@ export async function selectSpeciesDialog() {
 export async function selectBodyPartDialog() {
   return resolveDocument(
     await selectDocumentDialog(await noSup(game.teriock.packs.bodyParts), {
-      hint: game.i18n.localize("TERIOCK.DIALOGS.Select.BodyPart.hint"),
-      title: game.i18n.localize("TERIOCK.DIALOGS.Select.BodyPart.title"),
+      hint: _loc("TERIOCK.DIALOGS.Select.BodyPart.hint"),
+      title: _loc("TERIOCK.DIALOGS.Select.BodyPart.title"),
       tooltipAsync: true,
       openable: true,
     }),
@@ -321,8 +321,8 @@ export async function selectClassDialog() {
     }),
   );
   const chosen = await selectDocumentDialog(choices, {
-    hint: game.i18n.localize("TERIOCK.DIALOGS.Select.Class.hint"),
-    title: game.i18n.localize("TERIOCK.DIALOGS.Select.Class.title"),
+    hint: _loc("TERIOCK.DIALOGS.Select.Class.hint"),
+    title: _loc("TERIOCK.DIALOGS.Select.Class.title"),
     tooltipKey: "tooltip",
   });
   if (chosen) {
@@ -339,7 +339,7 @@ async function noSup(pack) {
   if (!pack.indexed) {
     ui.notifications.info("TERIOCK.DIALOGS.NewDocument.loading", {
       localize: true,
-      format: { name: game.i18n.localize(pack.title) },
+      format: { name: _loc(pack.title) },
     });
   }
   const index = await pack.getIndex({ fields: "system._sup" });

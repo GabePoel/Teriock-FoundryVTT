@@ -118,13 +118,13 @@ export function formatJoin(strings, or = false) {
   if (strings.length === 0) return "";
   if (strings.length === 1) return strings[0];
   if (strings.length === 2)
-    return game.i18n.format(`TERIOCK.FORMAT.${or ? "or" : "and"}.two`, {
+    return _loc(`TERIOCK.FORMAT.${or ? "or" : "and"}.two`, {
       start: strings[0],
       end: strings[1],
     });
   const end = strings.pop();
-  const separator = game.i18n.localize("TERIOCK.FORMAT.separator");
-  return game.i18n.format(`TERIOCK.FORMAT.${or ? "or" : "and"}.many`, {
+  const separator = _loc("TERIOCK.FORMAT.separator");
+  return _loc(`TERIOCK.FORMAT.${or ? "or" : "and"}.many`, {
     start: strings.join(separator),
     end: end,
   });

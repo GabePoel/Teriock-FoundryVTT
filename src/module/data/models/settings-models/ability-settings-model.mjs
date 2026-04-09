@@ -7,58 +7,34 @@ export default class AbilitySettingsModel extends ChildSettingsModel {
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       promptCostGp: new fields.BooleanField({
-        hint: game.i18n.localize(
-          "TERIOCK.MODELS.AbilitySettings.promptCostGp.hint",
-        ),
+        hint: _loc("TERIOCK.MODELS.AbilitySettings.promptCostGp.hint"),
         initial: true,
-        label: game.i18n.localize(
-          "TERIOCK.MODELS.AbilitySettings.promptCostGp.label",
-        ),
+        label: _loc("TERIOCK.MODELS.AbilitySettings.promptCostGp.label"),
       }),
       promptCostHp: new fields.BooleanField({
-        hint: game.i18n.localize(
-          "TERIOCK.MODELS.AbilitySettings.promptCostHp.hint",
-        ),
+        hint: _loc("TERIOCK.MODELS.AbilitySettings.promptCostHp.hint"),
         initial: true,
-        label: game.i18n.localize(
-          "TERIOCK.MODELS.AbilitySettings.promptCostHp.label",
-        ),
+        label: _loc("TERIOCK.MODELS.AbilitySettings.promptCostHp.label"),
       }),
       promptCostLp: new fields.BooleanField({
-        hint: game.i18n.localize(
-          "TERIOCK.MODELS.AbilitySettings.promptCostLp.hint",
-        ),
+        hint: _loc("TERIOCK.MODELS.AbilitySettings.promptCostLp.hint"),
         initial: true,
-        label: game.i18n.localize(
-          "TERIOCK.MODELS.AbilitySettings.promptCostLp.label",
-        ),
+        label: _loc("TERIOCK.MODELS.AbilitySettings.promptCostLp.label"),
       }),
       promptCostMp: new fields.BooleanField({
-        hint: game.i18n.localize(
-          "TERIOCK.MODELS.AbilitySettings.promptCostMp.hint",
-        ),
+        hint: _loc("TERIOCK.MODELS.AbilitySettings.promptCostMp.hint"),
         initial: true,
-        label: game.i18n.localize(
-          "TERIOCK.MODELS.AbilitySettings.promptCostMp.label",
-        ),
+        label: _loc("TERIOCK.MODELS.AbilitySettings.promptCostMp.label"),
       }),
       promptHeighten: new fields.BooleanField({
-        hint: game.i18n.localize(
-          "TERIOCK.MODELS.AbilitySettings.promptHeighten.hint",
-        ),
+        hint: _loc("TERIOCK.MODELS.AbilitySettings.promptHeighten.hint"),
         initial: true,
-        label: game.i18n.localize(
-          "TERIOCK.MODELS.AbilitySettings.promptHeighten.label",
-        ),
+        label: _loc("TERIOCK.MODELS.AbilitySettings.promptHeighten.label"),
       }),
       promptTemplate: new fields.BooleanField({
-        hint: game.i18n.localize(
-          "TERIOCK.MODELS.AbilitySettings.promptTemplate.hint",
-        ),
+        hint: _loc("TERIOCK.MODELS.AbilitySettings.promptTemplate.hint"),
         initial: true,
-        label: game.i18n.localize(
-          "TERIOCK.MODELS.AbilitySettings.promptTemplate.label",
-        ),
+        label: _loc("TERIOCK.MODELS.AbilitySettings.promptTemplate.label"),
       }),
     });
   }

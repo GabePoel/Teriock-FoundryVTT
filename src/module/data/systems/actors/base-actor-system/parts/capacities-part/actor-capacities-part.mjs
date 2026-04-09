@@ -178,25 +178,25 @@ export default (Base) => {
           if (this.encumbranceLevel >= 2) {
             this.parent.statuses.add("slowed");
             this.conditionInformation.slowed.reasons.add(
-              game.i18n.localize("TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.2"),
+              _loc("TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.2"),
             );
           }
-          let encumbranceReason = game.i18n.localize(
+          let encumbranceReason = _loc(
             "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.0",
           );
           switch (this.encumbranceLevel) {
             case 1:
-              encumbranceReason = game.i18n.localize(
+              encumbranceReason = _loc(
                 "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.1",
               );
               break;
             case 2:
-              encumbranceReason = game.i18n.localize(
+              encumbranceReason = _loc(
                 "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.2",
               );
               break;
             case 3:
-              encumbranceReason = game.i18n.localize(
+              encumbranceReason = _loc(
                 "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.3",
               );
               break;

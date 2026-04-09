@@ -39,9 +39,7 @@ export default class ProtectionAutomation extends CritAutomation {
         initial: "abilities",
       }),
       description: new fields.StringField({
-        label: game.i18n.localize(
-          "TERIOCK.SYSTEMS.Child.FIELDS.description.label",
-        ),
+        label: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
       }),
       value: new fields.StringField(),
     });

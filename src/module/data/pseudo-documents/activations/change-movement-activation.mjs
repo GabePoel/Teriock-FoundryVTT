@@ -17,9 +17,7 @@ export default class ChangeMovementActivation extends AutomationActivationFactor
    * @return {string}
    */
   static getLabel(movementAction) {
-    return game.i18n.localize(
-      CONFIG.Token.movement.actions[movementAction].label,
-    );
+    return _loc(CONFIG.Token.movement.actions[movementAction].label);
   }
 
   /** @inheritDoc */

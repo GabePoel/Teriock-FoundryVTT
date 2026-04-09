@@ -35,12 +35,12 @@ export default function TradecraftExecutionMixin(Base) {
       /** @inheritDoc */
       get flavor() {
         if (this.threshold !== undefined) {
-          return game.i18n.format("TERIOCK.ROLLS.Tradecraft.thresholded", {
+          return _loc("TERIOCK.ROLLS.Tradecraft.thresholded", {
             threshold: this.threshold,
             value: TERIOCK.reference.tradecrafts[this.tradecraft],
           });
         }
-        return game.i18n.format("TERIOCK.ROLLS.Tradecraft.name", {
+        return _loc("TERIOCK.ROLLS.Tradecraft.name", {
           value: TERIOCK.reference.tradecrafts[this.tradecraft],
         });
       }

@@ -11,7 +11,7 @@ abilities = abilities
   )
   .sort((a, b) => a.name.localeCompare(b.name));
 const ability = await tm.dialogs.selectDocumentDialog(abilities, {
-  hint: game.i18n.localize("TERIOCK.DIALOGS.Select.Ability.hint"),
-  title: game.i18n.localize("TERIOCK.DIALOGS.Select.Ability.title"),
+  hint: _loc("TERIOCK.DIALOGS.Select.Ability.hint"),
+  title: _loc("TERIOCK.DIALOGS.Select.Ability.title"),
 });
 await ability.system.use(options);

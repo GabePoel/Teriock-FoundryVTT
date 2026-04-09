@@ -34,20 +34,14 @@ export default class TeriockTableResult extends mix(
     /** @type {Teriock.MessageData.MessagePanel} */
     const parts = super.panelParts;
     parts.icon = icons.document.tableResult;
-    parts.label = game.i18n.localize(
-      "TERIOCK.SYSTEMS.TableResult.PANELS.tableResult",
-    );
+    parts.label = _loc("TERIOCK.SYSTEMS.TableResult.PANELS.tableResult");
     parts.image = this.icon;
     parts.blocks.push({
-      title: game.i18n.localize(
-        "TERIOCK.SYSTEMS.Child.FIELDS.description.label",
-      ),
+      title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
       text: this.description,
     });
     parts.bars.push({
-      label: game.i18n.localize(
-        "TERIOCK.SYSTEMS.TableResult.PANELS.resultType",
-      ),
+      label: _loc("TERIOCK.SYSTEMS.TableResult.PANELS.resultType"),
       icon: TERIOCK.display.icons.ui.info,
       wrappers: [this.type],
     });
@@ -67,9 +61,7 @@ export default class TeriockTableResult extends mix(
             },
           ],
           icon: TERIOCK.display.icons.ui.document,
-          title: game.i18n.localize(
-            "TERIOCK.SYSTEMS.TableResult.PANELS.documents",
-          ),
+          title: _loc("TERIOCK.SYSTEMS.TableResult.PANELS.documents"),
         },
       ];
     }
@@ -84,7 +76,7 @@ export default class TeriockTableResult extends mix(
           await (await fromUuid(this.documentUuid))?.sheet.render(true),
         condition: () => this.documentUuid,
         icon: makeIcon(TERIOCK.display.icons.ui.document, "contextMenu"),
-        name: game.i18n.localize("TERIOCK.SYSTEMS.TableResult.MENU.open"),
+        name: _loc("TERIOCK.SYSTEMS.TableResult.MENU.open"),
       },
       ...super.getCardContextMenuEntries(doc),
     ];

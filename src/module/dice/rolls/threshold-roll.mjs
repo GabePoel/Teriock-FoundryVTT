@@ -61,7 +61,7 @@ export default class ThresholdRoll extends BaseRoll {
       setProperty(
         context,
         "styles.total.tooltip",
-        game.i18n.localize("TERIOCK.ROLLS.Base.critSuccess"),
+        _loc("TERIOCK.ROLLS.Base.critSuccess"),
       );
     }
     if (this.critFailure) {
@@ -70,7 +70,7 @@ export default class ThresholdRoll extends BaseRoll {
       setProperty(
         context,
         "styles.total.tooltip",
-        game.i18n.localize("TERIOCK.ROLLS.Base.critFailure"),
+        _loc("TERIOCK.ROLLS.Base.critFailure"),
       );
     }
     return context;

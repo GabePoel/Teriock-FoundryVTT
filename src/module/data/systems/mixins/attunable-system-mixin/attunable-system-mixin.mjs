@@ -48,7 +48,7 @@ export default function AttunableSystemMixin(Base) {
       get _attunableWrappers() {
         return formulaExists(this.tier.text)
           ? [
-              game.i18n.format("TERIOCK.SYSTEMS.Attunable.PANELS.tier", {
+              _loc("TERIOCK.SYSTEMS.Attunable.PANELS.tier", {
                 value: this.tier.text,
               }),
             ]
@@ -77,10 +77,8 @@ export default function AttunableSystemMixin(Base) {
               : TERIOCK.display.icons.attunable.deattune,
             action: "toggleAttunedDoc",
             tooltip: this.isAttuned
-              ? game.i18n.localize("TERIOCK.SYSTEMS.Attunement.USAGE.attuned")
-              : game.i18n.localize(
-                  "TERIOCK.SYSTEMS.Attunement.USAGE.deattuned",
-                ),
+              ? _loc("TERIOCK.SYSTEMS.Attunement.USAGE.attuned")
+              : _loc("TERIOCK.SYSTEMS.Attunement.USAGE.deattuned"),
             condition: this.parent.isOwner,
             callback: async () => {
               if (this.isAttuned) await this.deattune();
@@ -128,10 +126,9 @@ export default function AttunableSystemMixin(Base) {
         if (attunement) return attunement;
         const attunementData = {
           type: "attunement",
-          name: game.i18n.format(
-            "TERIOCK.SYSTEMS.Attunable.USAGE.Attune.defaultName",
-            { name: this.parent.name },
-          ),
+          name: _loc("TERIOCK.SYSTEMS.Attunable.USAGE.Attune.defaultName", {
+            name: this.parent.name,
+          }),
           img: this.parent.img,
           system: {
             type: this.parent.type,
@@ -227,7 +224,7 @@ export default function AttunableSystemMixin(Base) {
         return [
           ...super.getCardContextMenuEntries(doc),
           {
-            name: game.i18n.localize("TERIOCK.SYSTEMS.Attunable.MENU.attune"),
+            name: _loc("TERIOCK.SYSTEMS.Attunable.MENU.attune"),
             icon: makeIcon(
               TERIOCK.display.icons.attunable.attune,
               "contextMenu",
@@ -240,7 +237,7 @@ export default function AttunableSystemMixin(Base) {
             group: "control",
           },
           {
-            name: game.i18n.localize("TERIOCK.SYSTEMS.Attunable.MENU.deattune"),
+            name: _loc("TERIOCK.SYSTEMS.Attunable.MENU.deattune"),
             icon: makeIcon(
               TERIOCK.display.icons.attunable.deattune,
               "contextMenu",

@@ -14,13 +14,13 @@ export default async function placeTemplateDialog(templateData = {}) {
   const schema = TemplateAutomation.defineSchema();
   const temp = new TemplateAutomation();
   const tForm = schema.t.toFormGroup(
-    { rootId, label: game.i18n.localize("TEMPLATE.FIELDS.t.label") },
+    { rootId, label: _loc("TEMPLATE.FIELDS.t.label") },
     { name: "t", value: t },
   );
   const distanceForm = temp.schema.fields.distance.toFormGroup(
     {
       rootId,
-      label: game.i18n.localize("TEMPLATE.FIELDS.distance.label"),
+      label: _loc("TEMPLATE.FIELDS.distance.label"),
     },
     {
       name: "distance",
@@ -28,7 +28,7 @@ export default async function placeTemplateDialog(templateData = {}) {
     },
   );
   const angleForm = temp.schema.fields.angle.toFormGroup(
-    { rootId, label: game.i18n.localize("TEMPLATE.FIELDS.angle.label") },
+    { rootId, label: _loc("TEMPLATE.FIELDS.angle.label") },
     {
       name: "angle",
       value: angle,
@@ -44,12 +44,8 @@ export default async function placeTemplateDialog(templateData = {}) {
   const movableForm = temp.schema.fields.movable.toFormGroup(
     {
       rootId,
-      label: game.i18n.localize(
-        "TERIOCK.AUTOMATIONS.Template.FIELDS.movable.label",
-      ),
-      hint: game.i18n.localize(
-        "TERIOCK.AUTOMATIONS.Template.FIELDS.movable.hint",
-      ),
+      label: _loc("TERIOCK.AUTOMATIONS.Template.FIELDS.movable.label"),
+      hint: _loc("TERIOCK.AUTOMATIONS.Template.FIELDS.movable.hint"),
     },
     {
       name: "movable",
@@ -61,15 +57,11 @@ export default async function placeTemplateDialog(templateData = {}) {
   let out = false;
   await TeriockDialog.prompt({
     window: {
-      title: game.i18n.localize(
-        "TERIOCK.SYSTEMS.Ability.DIALOG.PlaceTemplate.title",
-      ),
+      title: _loc("TERIOCK.SYSTEMS.Ability.DIALOG.PlaceTemplate.title"),
     },
     content,
     ok: {
-      label: game.i18n.localize(
-        "TERIOCK.SYSTEMS.Ability.DIALOG.PlaceTemplate.yes",
-      ),
+      label: _loc("TERIOCK.SYSTEMS.Ability.DIALOG.PlaceTemplate.yes"),
       callback: (_event, button) => {
         out = {
           angle: button.form.elements.namedItem("angle").value,
@@ -82,9 +74,7 @@ export default async function placeTemplateDialog(templateData = {}) {
     },
     buttons: [
       {
-        label: game.i18n.localize(
-          "TERIOCK.SYSTEMS.Ability.DIALOG.PlaceTemplate.no",
-        ),
+        label: _loc("TERIOCK.SYSTEMS.Ability.DIALOG.PlaceTemplate.no"),
         icon: makeIconClass(TERIOCK.display.icons.ui.disable, "button"),
       },
     ],

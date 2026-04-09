@@ -24,7 +24,7 @@ export default function ChangesSheetMixin(Base) {
         let valuePath = target.dataset.valuePath;
         if (!(typeof valuePath === "string")) valuePath = path;
         if (!path) {
-          console.error(game.i18n.localize("TERIOCK.CHANGES.Errors.noAddPath"));
+          console.error(_loc("TERIOCK.CHANGES.Errors.noAddPath"));
           return;
         }
         const changes =
@@ -58,9 +58,7 @@ export default function ChangesSheetMixin(Base) {
         let valuePath = target.dataset.valuePath;
         if (!(typeof valuePath === "string")) valuePath = path;
         if (!path) {
-          console.error(
-            game.i18n.localize("TERIOCK.CHANGES.Errors.noDeletePath"),
-          );
+          console.error(_loc("TERIOCK.CHANGES.Errors.noDeletePath"));
           return;
         }
         const changes = foundry.utils.deepClone(
@@ -68,7 +66,7 @@ export default function ChangesSheetMixin(Base) {
         );
         if (!changes || !Array.isArray(changes)) {
           console.error(
-            game.i18n.format("TERIOCK.CHANGES.Errors.noDeleteArray", {
+            _loc("TERIOCK.CHANGES.Errors.noDeleteArray", {
               path: valuePath,
             }),
           );

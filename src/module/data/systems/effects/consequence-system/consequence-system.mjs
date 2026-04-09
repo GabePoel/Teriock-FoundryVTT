@@ -96,9 +96,7 @@ export default class ConsequenceSystem extends mix(
   get _nameTags() {
     const tags = super._nameTags;
     if (this.critical) {
-      tags.unshift(
-        game.i18n.localize("TERIOCK.SYSTEMS.Consequence.PANELS.critical"),
-      );
+      tags.unshift(_loc("TERIOCK.SYSTEMS.Consequence.PANELS.critical"));
     }
     return tags;
   }
@@ -130,16 +128,12 @@ export default class ConsequenceSystem extends mix(
     parts.bars = [
       {
         icon: TERIOCK.display.icons.ability.duration,
-        label: game.i18n.localize(
-          "TERIOCK.SYSTEMS.Consequence.PANELS.duration",
-        ),
+        label: _loc("TERIOCK.SYSTEMS.Consequence.PANELS.duration"),
         wrappers: [this.parent.remainingString],
       },
       {
         icon: TERIOCK.display.icons.document.condition,
-        label: game.i18n.localize(
-          "TERIOCK.SYSTEMS.Consequence.PANELS.conditions",
-        ),
+        label: _loc("TERIOCK.SYSTEMS.Consequence.PANELS.conditions"),
         wrappers: [
           ...Array.from(
             this.parent.statuses.map(
@@ -147,17 +141,14 @@ export default class ConsequenceSystem extends mix(
             ),
           ),
           this.critical
-            ? game.i18n.localize("TERIOCK.SYSTEMS.Consequence.PANELS.critical")
+            ? _loc("TERIOCK.SYSTEMS.Consequence.PANELS.critical")
             : "",
           this.heightened
             ? this.heightened === 1
-              ? game.i18n.localize(
-                  "TERIOCK.SYSTEMS.Consequence.PANELS.heightenedSingle",
-                )
-              : game.i18n.format(
-                  "TERIOCK.SYSTEMS.Consequence.PANELS.heightenedPlural",
-                  { value: this.heightened },
-                )
+              ? _loc("TERIOCK.SYSTEMS.Consequence.PANELS.heightenedSingle")
+              : _loc("TERIOCK.SYSTEMS.Consequence.PANELS.heightenedPlural", {
+                  value: this.heightened,
+                })
             : "",
         ],
       },
@@ -168,7 +159,7 @@ export default class ConsequenceSystem extends mix(
 
   /** @inheritDoc */
   get useText() {
-    return game.i18n.format("TERIOCK.SYSTEMS.Condition.USAGE.use", {
+    return _loc("TERIOCK.SYSTEMS.Condition.USAGE.use", {
       value: this.parent.name,
     });
   }

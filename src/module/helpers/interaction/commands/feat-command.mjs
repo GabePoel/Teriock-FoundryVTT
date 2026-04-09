@@ -21,10 +21,10 @@ const command = {
   id: "feat",
   label: (options) =>
     TERIOCK.options.attribute[options?.attribute]?.label
-      ? game.i18n.format("TERIOCK.ROLLS.Feat.name", {
+      ? _loc("TERIOCK.ROLLS.Feat.name", {
           value: TERIOCK.options.attribute[options?.attribute]?.label,
         })
-      : game.i18n.localize("TERIOCK.ROLLS.Feat.label"),
+      : _loc("TERIOCK.ROLLS.Feat.label"),
   primary: use,
   secondary: use,
 };

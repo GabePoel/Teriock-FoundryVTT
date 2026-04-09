@@ -117,7 +117,7 @@ export default class FluencySystem extends mix(
           icon: TERIOCK.options.tradecraft[this.field].tradecrafts[
             this.tradecraft
           ].icon,
-          label: game.i18n.localize("TERIOCK.TERMS.Common.tradecraft"),
+          label: _loc("TERIOCK.TERMS.Common.tradecraft"),
           wrappers: [
             TERIOCK.options.tradecraft[this.field].name,
             TERIOCK.options.tradecraft[this.field].tradecrafts[this.tradecraft]

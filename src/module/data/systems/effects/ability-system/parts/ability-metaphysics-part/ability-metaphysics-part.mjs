@@ -88,7 +88,7 @@ export default (Base) => {
        */
       get elementString() {
         if (this.elements.size === 0) {
-          return game.i18n.localize("TERIOCK.TERMS.Common.celestial");
+          return _loc("TERIOCK.TERMS.Common.celestial");
         }
         const elements = Array.from(
           this.elements.map((e) => TERIOCK.reference.elements[e]),

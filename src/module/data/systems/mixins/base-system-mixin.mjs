@@ -30,24 +30,18 @@ export default function BaseSystemMixin(Base) {
       get fullName() {
         let name = this.parent?.name ?? "";
         if (this._nameBadge) {
-          name = game.i18n.format(
-            "TERIOCK.SYSTEMS.Base.EMBED.valueNameString",
-            {
-              name,
-              value: this._nameBadge.trim(),
-            },
-          );
+          name = _loc("TERIOCK.SYSTEMS.Base.EMBED.valueNameString", {
+            name,
+            value: this._nameBadge.trim(),
+          });
         }
         if (this._nameTags.length > 0) {
-          name = game.i18n.format(
-            "TERIOCK.SYSTEMS.Base.EMBED.taggedNameString",
-            {
-              name,
-              tags: this._nameTags.join(
-                game.i18n.localize("TERIOCK.SYSTEMS.Base.EMBED.valueSeparator"),
-              ),
-            },
-          );
+          name = _loc("TERIOCK.SYSTEMS.Base.EMBED.taggedNameString", {
+            name,
+            tags: this._nameTags.join(
+              _loc("TERIOCK.SYSTEMS.Base.EMBED.valueSeparator"),
+            ),
+          });
         }
         return name.trim();
       }

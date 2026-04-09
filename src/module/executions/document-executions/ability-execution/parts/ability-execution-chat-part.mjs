@@ -68,10 +68,9 @@ export default function AbilityExecutionChatPart(Base) {
       #attachTrackedStatusAutomationUuids(automation, uuids) {
         /** @type {Teriock.MessageData.MessageAssociation} */
         const association = {
-          title: game.i18n.format(
-            "TERIOCK.SYSTEMS.Ability.PANELS.statusWithRespectTo",
-            { status: TERIOCK.reference.conditions[automation.status] },
-          ),
+          title: _loc("TERIOCK.SYSTEMS.Ability.PANELS.statusWithRespectTo", {
+            status: TERIOCK.reference.conditions[automation.status],
+          }),
           icon: TERIOCK.options.document.creature.icon,
           cards: uuids.map((uuid) => this.#generateAssociationCard(uuid)),
         };
@@ -132,10 +131,9 @@ export default function AbilityExecutionChatPart(Base) {
             seconds: await this.#generateConsequenceDuration(crit),
           },
           img: this.source.img,
-          name: game.i18n.format(
-            "TERIOCK.SYSTEMS.Ability.EXECUTION.effectName",
-            { name: this.source.name },
-          ),
+          name: _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.effectName", {
+            name: this.source.name,
+          }),
           statuses: this.#generateConsequenceStatuses(crit),
           system: {
             _dep:
@@ -497,9 +495,7 @@ export default function AbilityExecutionChatPart(Base) {
         const proficientBlock = panel.blocks.find(
           (b) =>
             b.title ===
-            game.i18n.localize(
-              "TERIOCK.SYSTEMS.Ability.FIELDS.overview.proficient.label",
-            ),
+            _loc("TERIOCK.SYSTEMS.Ability.FIELDS.overview.proficient.label"),
         );
         if (proficientBlock) {
           if (this.competence.proficient) {
@@ -511,9 +507,7 @@ export default function AbilityExecutionChatPart(Base) {
         const fluentBlock = panel.blocks.find(
           (b) =>
             b.title ===
-            game.i18n.localize(
-              "TERIOCK.SYSTEMS.Ability.FIELDS.overview.fluent.label",
-            ),
+            _loc("TERIOCK.SYSTEMS.Ability.FIELDS.overview.fluent.label"),
         );
         if (fluentBlock) {
           if (this.competence.fluent) {
@@ -524,10 +518,7 @@ export default function AbilityExecutionChatPart(Base) {
         }
         const heightenedBlock = panel.blocks.find(
           (b) =>
-            b.title ===
-            game.i18n.localize(
-              "TERIOCK.SYSTEMS.Ability.FIELDS.heightened.label",
-            ),
+            b.title === _loc("TERIOCK.SYSTEMS.Ability.FIELDS.heightened.label"),
         );
         if (heightenedBlock) {
           if (this.heightened) {
@@ -542,31 +533,24 @@ export default function AbilityExecutionChatPart(Base) {
       /** @inheritDoc */
       async _buildTags() {
         if (this.source.system.interaction === "attack" && this.ub) {
-          this.tags.push(
-            game.i18n.localize("TERIOCK.TERMS.Properties.unblockable"),
-          );
+          this.tags.push(_loc("TERIOCK.TERMS.Properties.unblockable"));
         }
         if (this.warded) {
-          this.tags.push(
-            game.i18n.localize("TERIOCK.SYSTEMS.Attack.FIELDS.warded.label"),
-          );
+          this.tags.push(_loc("TERIOCK.SYSTEMS.Attack.FIELDS.warded.label"));
         }
         if (this.vitals) {
-          this.tags.push(game.i18n.localize("TERIOCK.TERMS.Targets.vitals"));
+          this.tags.push(_loc("TERIOCK.TERMS.Targets.vitals"));
         }
         if (this.heightened > 0) {
           if (this.heightened === 1) {
             this.tags.push(
-              game.i18n.localize(
-                "TERIOCK.SYSTEMS.Consequence.PANELS.heightenedSingle",
-              ),
+              _loc("TERIOCK.SYSTEMS.Consequence.PANELS.heightenedSingle"),
             );
           } else {
             this.tags.push(
-              game.i18n.format(
-                "TERIOCK.SYSTEMS.Consequence.PANELS.heightenedPlural",
-                { value: this.heightened },
-              ),
+              _loc("TERIOCK.SYSTEMS.Consequence.PANELS.heightenedPlural", {
+                value: this.heightened,
+              }),
             );
           }
         }
@@ -574,7 +558,7 @@ export default function AbilityExecutionChatPart(Base) {
           (c) => this.costs[c] > 0,
         )) {
           this.tags.push(
-            game.i18n.format("TERIOCK.SYSTEMS.Consequence.PANELS.spent", {
+            _loc("TERIOCK.SYSTEMS.Consequence.PANELS.spent", {
               amount: this.costs[c],
               label: costOptions.primary.keys[c]?.abbreviation,
             }),

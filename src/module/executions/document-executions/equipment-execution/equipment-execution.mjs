@@ -24,7 +24,7 @@ export default class EquipmentExecution extends ArmamentExecution {
     if (this.secret) {
       return {
         icon: TERIOCK.options.document.equipment.icon,
-        name: game.i18n.format("TERIOCK.SYSTEMS.Equipment.PANELS.unknown", {
+        name: _loc("TERIOCK.SYSTEMS.Equipment.PANELS.unknown", {
           type: inferNameFromIdentifier(
             this.source.system.equipmentType,
             "equipment",
@@ -32,10 +32,8 @@ export default class EquipmentExecution extends ArmamentExecution {
         }),
         blocks: [
           {
-            title: game.i18n.localize(
-              "TERIOCK.SYSTEMS.Child.FIELDS.description.label",
-            ),
-            text: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.PANELS.used"),
+            title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
+            text: _loc("TERIOCK.SYSTEMS.Equipment.PANELS.used"),
           },
         ],
         image: getImage("equipment", this.source.system.equipmentType),

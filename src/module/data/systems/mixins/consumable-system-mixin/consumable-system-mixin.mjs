@@ -64,16 +64,14 @@ export default function ConsumableSystemMixin(Base) {
       get _consumableBar() {
         return {
           icon: TERIOCK.display.icons.ui.quantity,
-          label: game.i18n.localize(
-            "TERIOCK.SYSTEMS.Consumable.FIELDS.quantity.label",
-          ),
+          label: _loc("TERIOCK.SYSTEMS.Consumable.FIELDS.quantity.label"),
           wrappers: [
-            game.i18n.format("TERIOCK.SYSTEMS.Consumable.PANELS.remaining", {
+            _loc("TERIOCK.SYSTEMS.Consumable.PANELS.remaining", {
               value: this.quantity,
             }),
             this.maxQuantity.value === Infinity
-              ? game.i18n.localize("TERIOCK.SYSTEMS.Consumable.PANELS.noMax")
-              : game.i18n.format("TERIOCK.SYSTEMS.Consumable.PANELS.max", {
+              ? _loc("TERIOCK.SYSTEMS.Consumable.PANELS.noMax")
+              : _loc("TERIOCK.SYSTEMS.Consumable.PANELS.max", {
                   value: this.maxQuantity.value,
                 }),
           ],
@@ -95,21 +93,18 @@ export default function ConsumableSystemMixin(Base) {
         const parts = super.embedParts;
         if (this.consumable) {
           parts.subtitleAction = "useOneDoc";
-          parts.subtitleTooltip = game.i18n.localize(
+          parts.subtitleTooltip = _loc(
             "TERIOCK.SYSTEMS.Consumable.EMBED.consumeOne",
           );
           parts.subtitle =
             this.maxQuantity.value === Infinity
-              ? game.i18n.format("TERIOCK.SYSTEMS.Consumable.EMBED.remaining", {
+              ? _loc("TERIOCK.SYSTEMS.Consumable.EMBED.remaining", {
                   value: this.quantity,
                 })
-              : game.i18n.format(
-                  "TERIOCK.SYSTEMS.Consumable.EMBED.remainingMax",
-                  {
-                    value: this.quantity,
-                    max: this.maxQuantity.value,
-                  },
-                );
+              : _loc("TERIOCK.SYSTEMS.Consumable.EMBED.remainingMax", {
+                  value: this.quantity,
+                  max: this.maxQuantity.value,
+                });
         }
         return parts;
       }

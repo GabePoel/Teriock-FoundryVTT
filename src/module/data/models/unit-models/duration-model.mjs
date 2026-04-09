@@ -110,14 +110,13 @@ export default class DurationModel extends TimeUnitModel {
           .replace("Not Unconscious", "Conscious"),
       ),
     ];
-    let triggerPart = game.i18n.format(
+    let triggerPart = _loc(
       "TERIOCK.MODELS.Duration.PREREQUISITES.untilTriggers",
       { partial: formatJoin(triggers, true) },
     );
-    let conditionsPart = game.i18n.format(
-      "TERIOCK.MODELS.Duration.PREREQUISITES.ongoing",
-      { partial: formatJoin(conditions, false) },
-    );
+    let conditionsPart = _loc("TERIOCK.MODELS.Duration.PREREQUISITES.ongoing", {
+      partial: formatJoin(conditions, false),
+    });
     if (triggers.length === 0) triggerPart = "";
     if (conditions.length === 0) conditionsPart = "";
     return game.i18n
@@ -136,15 +135,13 @@ export default class DurationModel extends TimeUnitModel {
     if (prerequisite.length > 1) {
       if (prerequisite.length > 0 && this.unit === "unlimited") duration = "";
       if (this.unit === "passive") duration = "";
-      return game.i18n.format("TERIOCK.MODELS.Duration.PREREQUISITES.text", {
+      return _loc("TERIOCK.MODELS.Duration.PREREQUISITES.text", {
         start: duration,
         end: prerequisite,
       });
     }
     if (this.unit === "passive")
-      duration = game.i18n.localize(
-        "TERIOCK.MODELS.Duration.UNITS.alwaysActive",
-      );
+      duration = _loc("TERIOCK.MODELS.Duration.UNITS.alwaysActive");
     return duration;
   }
 }

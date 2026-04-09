@@ -48,18 +48,12 @@ export default class RankSystem extends mix(
     return Object.assign(super.defineSchema(), {
       archetype: new fields.StringField({ initial: "everyman" }),
       className: new fields.StringField({ initial: "journeyman" }),
-      classRank: new fields.NumberField({
-        initial: 0,
-        integer: true,
-        min: 0,
-      }),
+      classRank: new fields.NumberField({ initial: 0, integer: true, min: 0 }),
       competence: new fields.EmbeddedDataField(CompetenceModel, {
         initial: { raw: 1 },
       }),
       description: new TextField({
-        initial: game.i18n.localize(
-          "TERIOCK.SYSTEMS.Rank.FIELDS.description.initial",
-        ),
+        initial: _loc("TERIOCK.SYSTEMS.Rank.FIELDS.description.initial"),
       }),
       innate: new fields.BooleanField({ initial: false }),
       maxAv: new fields.NumberField({ initial: 2, integer: true, min: 0 }),
@@ -94,8 +88,8 @@ export default class RankSystem extends mix(
     parts.text =
       parts.text ||
       (this.innate
-        ? game.i18n.localize("TERIOCK.TERMS.PowerType.innate")
-        : game.i18n.localize("TERIOCK.TERMS.PowerType.learned"));
+        ? _loc("TERIOCK.TERMS.PowerType.innate")
+        : _loc("TERIOCK.TERMS.PowerType.learned"));
     return parts;
   }
 
@@ -123,11 +117,11 @@ export default class RankSystem extends mix(
     return [
       {
         icon: TERIOCK.options.rank[this.archetype].classes[this.className].icon,
-        label: game.i18n.localize("TERIOCK.SYSTEMS.Rank.PANELS.class"),
+        label: _loc("TERIOCK.SYSTEMS.Rank.PANELS.class"),
         wrappers: [
           TERIOCK.options.rank[this.archetype].name,
           TERIOCK.options.rank[this.archetype].classes[this.className].name,
-          game.i18n.format("TERIOCK.SYSTEMS.Rank.PANELS.rank", {
+          _loc("TERIOCK.SYSTEMS.Rank.PANELS.rank", {
             value: this.classRank,
           }),
         ],
@@ -135,16 +129,16 @@ export default class RankSystem extends mix(
       this._statBar,
       {
         icon: icons.armament.av,
-        label: game.i18n.localize("TERIOCK.SYSTEMS.Rank.PANELS.details"),
+        label: _loc("TERIOCK.SYSTEMS.Rank.PANELS.details"),
         wrappers: [
           this.maxAv === 0
-            ? game.i18n.localize("TERIOCK.SYSTEMS.Power.PANELS.noArmor")
-            : game.i18n.format("TERIOCK.SYSTEMS.Power.PANELS.maxAv", {
+            ? _loc("TERIOCK.SYSTEMS.Power.PANELS.noArmor")
+            : _loc("TERIOCK.SYSTEMS.Power.PANELS.maxAv", {
                 value: this.maxAv,
               }),
           this.innate
-            ? game.i18n.localize("TERIOCK.SYSTEMS.Rank.PANELS.innate")
-            : game.i18n.localize("TERIOCK.SYSTEMS.Rank.PANELS.learned"),
+            ? _loc("TERIOCK.SYSTEMS.Rank.PANELS.innate")
+            : _loc("TERIOCK.SYSTEMS.Rank.PANELS.learned"),
         ],
       },
     ];

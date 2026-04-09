@@ -3,15 +3,13 @@ const chosenIllusionLevel =
   /** @type {Teriock.Keys.IllusionLevel | null} */ await tm.dialogs.selectDialog(
     illusionLevels,
     {
-      hint: game.i18n.localize("TERIOCK.DIALOGS.Select.IllusionLevel.hint"),
+      hint: _loc("TERIOCK.DIALOGS.Select.IllusionLevel.hint"),
       hintHtml: TERIOCK.content.keywords.illusionary,
-      hintTitle: game.i18n.localize(
-        "TERIOCK.DIALOGS.Select.IllusionLevel.hintTitle",
-      ),
+      hintTitle: _loc("TERIOCK.DIALOGS.Select.IllusionLevel.hintTitle"),
       initial: "minor",
-      label: game.i18n.localize("TERIOCK.DIALOGS.Select.IllusionLevel.label"),
+      label: _loc("TERIOCK.DIALOGS.Select.IllusionLevel.label"),
       other: true,
-      title: game.i18n.localize("TERIOCK.DIALOGS.Select.IllusionLevel.title"),
+      title: _loc("TERIOCK.DIALOGS.Select.IllusionLevel.title"),
     },
   );
 let dc = "none";
@@ -34,10 +32,9 @@ for (let i = 0; i < scope.execution.rolls.length; i++) {
         `${dc} - 2 * @h`,
         scope.execution.rollData,
         {
-          flavor: game.i18n.format(
-            "TERIOCK.DIALOGS.Select.IllusionLevel.flavor",
-            { level: illusionLevels[chosenIllusionLevel] },
-          ),
+          flavor: _loc("TERIOCK.DIALOGS.Select.IllusionLevel.flavor", {
+            level: illusionLevels[chosenIllusionLevel],
+          }),
           styles: {
             dice: {
               classes: "feat",

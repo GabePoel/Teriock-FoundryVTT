@@ -152,20 +152,19 @@ export default function ArmamentSystemMixin(Base) {
       get _attackBar() {
         return {
           icon: TERIOCK.display.icons.interaction.attack,
-          label: game.i18n.localize("TERIOCK.SYSTEMS.Armament.PANELS.attack"),
+          label: _loc("TERIOCK.SYSTEMS.Armament.PANELS.attack"),
           wrappers: [
             this.piercing.value,
             ...this._damageWrappers,
             formulaExists(this.hitBonus)
-              ? game.i18n.format("TERIOCK.SYSTEMS.Armament.PANELS.hitBonus", {
+              ? _loc("TERIOCK.SYSTEMS.Armament.PANELS.hitBonus", {
                   value: this.hitBonus,
                 })
               : "",
             this.attackPenalty
-              ? game.i18n.format(
-                  "TERIOCK.SYSTEMS.Armament.PANELS.attackPenalty",
-                  { value: this.attackPenalty },
-                )
+              ? _loc("TERIOCK.SYSTEMS.Armament.PANELS.attackPenalty", {
+                  value: this.attackPenalty,
+                })
               : "",
           ],
         };
@@ -180,10 +179,10 @@ export default function ArmamentSystemMixin(Base) {
       get _defenseBar() {
         return {
           icon: TERIOCK.display.icons.interaction.block,
-          label: game.i18n.format("TERIOCK.SYSTEMS.Armament.PANELS.defense"),
+          label: _loc("TERIOCK.SYSTEMS.Armament.PANELS.defense"),
           wrappers: [
             this.av.value
-              ? game.i18n.format("TERIOCK.SYSTEMS.Armament.PANELS.av", {
+              ? _loc("TERIOCK.SYSTEMS.Armament.PANELS.av", {
                   value: this.av.value,
                 })
               : "",
@@ -256,14 +255,9 @@ export default function ArmamentSystemMixin(Base) {
           {
             classes: TERIOCK.display.panel.classes.derived,
             editable: false,
-            label: game.i18n.format(
-              "TERIOCK.SYSTEMS.Armament.FIELDS.fightingStyle.named",
-              {
-                name: TERIOCK.reference.weaponFightingStyles[
-                  this.fightingStyle
-                ],
-              },
-            ),
+            label: _loc("TERIOCK.SYSTEMS.Armament.FIELDS.fightingStyle.named", {
+              name: TERIOCK.reference.weaponFightingStyles[this.fightingStyle],
+            }),
             path: "system.specialRules",
           },
         ];
@@ -317,7 +311,7 @@ export default function ArmamentSystemMixin(Base) {
        * @returns {string}
        */
       get summarizedAttack() {
-        return game.i18n.format("TERIOCK.SYSTEMS.Armament.PANELS.damage", {
+        return _loc("TERIOCK.SYSTEMS.Armament.PANELS.damage", {
           value: this.hasTwoHandedAttack
             ? `${this.damage.base} / ${this.damage.twoHanded}`
             : this.damage.base,
@@ -329,7 +323,7 @@ export default function ArmamentSystemMixin(Base) {
        * @returns {string}
        */
       get summarizedBlock() {
-        return game.i18n.format("TERIOCK.SYSTEMS.Armament.PANELS.bv", {
+        return _loc("TERIOCK.SYSTEMS.Armament.PANELS.bv", {
           value: this.bv.formula,
         });
       }
@@ -357,9 +351,7 @@ export default function ArmamentSystemMixin(Base) {
       getCardContextMenuEntries(doc) {
         const entries = [
           {
-            name: game.i18n.localize(
-              "TERIOCK.SYSTEMS.Equipment.USAGE.twoHanded",
-            ),
+            name: _loc("TERIOCK.SYSTEMS.Equipment.USAGE.twoHanded"),
             icon: makeIcon(
               TERIOCK.display.icons.equipment.twoHanded,
               "contextMenu",

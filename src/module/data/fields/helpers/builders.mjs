@@ -46,22 +46,14 @@ export function combatExpirationSourceTypeField() {
 export function combatExpirationMethodField() {
   return new SchemaField({
     roll: new StringField({
-      hint: game.i18n.localize(
-        "TERIOCK.SCHEMA.CombatExpiration.what.roll.hint",
-      ),
+      hint: _loc("TERIOCK.SCHEMA.CombatExpiration.what.roll.hint"),
       initial: "2d4kh1",
-      label: game.i18n.localize(
-        "TERIOCK.SCHEMA.CombatExpiration.what.roll.label",
-      ),
+      label: _loc("TERIOCK.SCHEMA.CombatExpiration.what.roll.label"),
     }),
     threshold: new NumberField({
-      hint: game.i18n.localize(
-        "TERIOCK.SCHEMA.CombatExpiration.what.threshold.hint",
-      ),
+      hint: _loc("TERIOCK.SCHEMA.CombatExpiration.what.threshold.hint"),
       initial: 4,
-      label: game.i18n.localize(
-        "TERIOCK.SCHEMA.CombatExpiration.what.threshold.label",
-      ),
+      label: _loc("TERIOCK.SCHEMA.CombatExpiration.what.threshold.label"),
     }),
     type: new StringField({
       choices: localizeChoices({
@@ -69,13 +61,9 @@ export function combatExpirationMethodField() {
         rolled: "TERIOCK.SCHEMA.CombatExpiration.what.type.choices.rolled",
         none: "TERIOCK.SCHEMA.CombatExpiration.what.type.choices.none",
       }),
-      hint: game.i18n.localize(
-        "TERIOCK.SCHEMA.CombatExpiration.what.type.hint",
-      ),
+      hint: _loc("TERIOCK.SCHEMA.CombatExpiration.what.type.hint"),
       initial: "none",
-      label: game.i18n.localize(
-        "TERIOCK.SCHEMA.CombatExpiration.what.type.label",
-      ),
+      label: _loc("TERIOCK.SCHEMA.CombatExpiration.what.type.label"),
     }),
   });
 }
@@ -337,13 +325,13 @@ export function panelsField() {
 export function blockSizeField(options = {}) {
   const {
     initial = "medium",
-    label = game.i18n.localize("TERIOCK.SCHEMA.BlockSize.default"),
+    label = _loc("TERIOCK.SCHEMA.BlockSize.default"),
   } = options;
   return new StringField({
     initial,
     choices: TERIOCK.options.display.sizes,
-    label: game.i18n.format("TERIOCK.SCHEMA.BlockSize.label", { name: label }),
-    hint: game.i18n.format("TERIOCK.SCHEMA.BlockSize.hint", {
+    label: _loc("TERIOCK.SCHEMA.BlockSize.label", { name: label }),
+    hint: _loc("TERIOCK.SCHEMA.BlockSize.hint", {
       name: label.toLocaleLowerCase(),
     }),
   });
@@ -359,14 +347,14 @@ export function blockSizeField(options = {}) {
 export function blockGaplessField(options = {}) {
   const {
     initial = false,
-    label = game.i18n.localize("TERIOCK.SCHEMA.BlackGapless.default"),
+    label = _loc("TERIOCK.SCHEMA.BlackGapless.default"),
   } = options;
   return new BooleanField({
     initial,
-    label: game.i18n.format("TERIOCK.SCHEMA.BlackGapless.label", {
+    label: _loc("TERIOCK.SCHEMA.BlackGapless.label", {
       name: label,
     }),
-    hint: game.i18n.format("TERIOCK.SCHEMA.BlackGapless.hint", {
+    hint: _loc("TERIOCK.SCHEMA.BlackGapless.hint", {
       name: label.toLocaleLowerCase(),
     }),
   });
@@ -379,9 +367,9 @@ export function blockGaplessField(options = {}) {
 export function competenceField() {
   return new NumberField({
     choices: localizeChoices(competenceOptions.levels, { sort: false }),
-    hint: game.i18n.localize("TERIOCK.SCHEMA.Competence.hint"),
+    hint: _loc("TERIOCK.SCHEMA.Competence.hint"),
     initial: 0,
-    label: game.i18n.localize("TERIOCK.SCHEMA.Competence.label"),
+    label: _loc("TERIOCK.SCHEMA.Competence.label"),
     max: 2,
     min: 0,
     nullable: false,
@@ -401,9 +389,9 @@ export function attributeField(options = { unp: false, nullable: true }) {
     choices: options.unp
       ? TERIOCK.reference.statAttributes
       : TERIOCK.reference.attributes,
-    hint: game.i18n.localize("TERIOCK.SCHEMA.Attribute.hint"),
+    hint: _loc("TERIOCK.SCHEMA.Attribute.hint"),
     initial: options.nullable ? null : "int",
-    label: game.i18n.localize("TERIOCK.SCHEMA.Attribute.label"),
+    label: _loc("TERIOCK.SCHEMA.Attribute.label"),
     nullable: options.nullable,
     required: false,
   });

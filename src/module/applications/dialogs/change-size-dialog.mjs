@@ -16,7 +16,7 @@ export default async function changeSizeDialog(actor, species) {
     content = await TeriockTextEditor.enrichHTML(content);
     const dialog = new TeriockDialog({
       window: {
-        title: game.i18n.localize("TERIOCK.DIALOGS.ChangeSize.title"),
+        title: _loc("TERIOCK.DIALOGS.ChangeSize.title"),
         icon: makeIconClass(TERIOCK.display.icons.ui.confirm, "title"),
       },
       modal: true,
@@ -30,12 +30,12 @@ export default async function changeSizeDialog(actor, species) {
           },
           default: true,
           icon: makeIconClass(TERIOCK.display.icons.ui.enable, "button"),
-          label: game.i18n.localize("TERIOCK.DIALOGS.ChangeSize.BUTTONS.yes"),
+          label: _loc("TERIOCK.DIALOGS.ChangeSize.BUTTONS.yes"),
         },
         {
           action: "no",
           icon: makeIconClass(TERIOCK.display.icons.ui.remove, "button"),
-          label: game.i18n.localize("TERIOCK.DIALOGS.ChangeSize.BUTTONS.no"),
+          label: _loc("TERIOCK.DIALOGS.ChangeSize.BUTTONS.no"),
         },
       ],
       content,

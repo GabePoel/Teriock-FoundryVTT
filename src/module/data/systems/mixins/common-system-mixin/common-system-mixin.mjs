@@ -420,9 +420,7 @@ export default function CommonSystemMixin(Base) {
           if (notesJournal) {
             const notesCategoryName =
               TERIOCK.options.document[this.parent.type]?.name ||
-              game.i18n.localize(
-                "TERIOCK.SYSTEMS.Common.FIELDS.gmNotes.otherCategory",
-              );
+              _loc("TERIOCK.SYSTEMS.Common.FIELDS.gmNotes.otherCategory");
             notesPage = notesJournal.pages.find(
               (p) =>
                 p.name === this.parent.name &&

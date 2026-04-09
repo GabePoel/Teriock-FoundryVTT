@@ -158,9 +158,7 @@ export default function BaseDocumentMixin(Base) {
         entries.push(
           ...[
             {
-              name: game.i18n.localize(
-                "TERIOCK.SYSTEMS.Common.MENU.openSource",
-              ),
+              name: _loc("TERIOCK.SYSTEMS.Common.MENU.openSource"),
               icon: makeIcon(
                 TERIOCK.display.icons.ui.openWindow,
                 "contextMenu",
@@ -174,7 +172,7 @@ export default function BaseDocumentMixin(Base) {
               group: "open",
             },
             {
-              name: game.i18n.localize("TERIOCK.SYSTEMS.Common.MENU.delete"),
+              name: _loc("TERIOCK.SYSTEMS.Common.MENU.delete"),
               icon: makeIcon(TERIOCK.display.icons.ui.delete, "contextMenu"),
               callback: async () => await this.deleteDialog(),
               condition: () =>

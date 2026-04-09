@@ -10,7 +10,7 @@ export default class MpPoolModel extends BaseStatPoolModel {
 
   /** @inheritDoc */
   get dieName() {
-    return game.i18n.localize("TERIOCK.MODELS.MpPool.PANELS.name");
+    return _loc("TERIOCK.MODELS.MpPool.PANELS.name");
   }
 
   /** @inheritDoc */
@@ -25,15 +25,13 @@ export default class MpPoolModel extends BaseStatPoolModel {
         bars: [],
         blocks: [
           {
-            text: game.i18n.localize("TERIOCK.MODELS.MpPool.PANELS.text"),
-            title: game.i18n.localize(
-              "TERIOCK.MODELS.BaseStatPool.PANELS.title",
-            ),
+            text: _loc("TERIOCK.MODELS.MpPool.PANELS.text"),
+            title: _loc("TERIOCK.MODELS.BaseStatPool.PANELS.title"),
           },
         ],
         icon: TERIOCK.display.icons.stat.mp,
         image: getImage("misc", "Mana Die"),
-        name: game.i18n.localize("TERIOCK.MODELS.MpPool.PANELS.name"),
+        name: _loc("TERIOCK.MODELS.MpPool.PANELS.name"),
       },
     ];
   }

@@ -182,9 +182,7 @@ export default class PropertySystem extends mix(
     return [
       {
         icon: TERIOCK.options.effect.form[this.form].icon,
-        label: game.i18n.localize(
-          "TERIOCK.SYSTEMS.BaseEffect.FIELDS.form.label",
-        ),
+        label: _loc("TERIOCK.SYSTEMS.BaseEffect.FIELDS.form.label"),
         wrappers: [
           TERIOCK.options.effect.form[this.form].name,
           ...simplifyTags(this._metaphysicsTags),

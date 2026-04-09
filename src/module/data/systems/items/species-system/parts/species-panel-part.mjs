@@ -15,7 +15,7 @@ export default (Base) => {
       get panelParts() {
         const statBar = this._statBar;
         statBar.wrappers.push(
-          game.i18n.format("TERIOCK.SYSTEMS.Species.PANELS.br", {
+          _loc("TERIOCK.SYSTEMS.Species.PANELS.br", {
             value: this.br,
           }),
         );
@@ -23,67 +23,46 @@ export default (Base) => {
           statBar,
           {
             icon: icons.species.lifespan,
-            label: game.i18n.localize(
-              "TERIOCK.SYSTEMS.Species.PANELS.lifespan.label",
-            ),
+            label: _loc("TERIOCK.SYSTEMS.Species.PANELS.lifespan.label"),
             wrappers: [
               this.adult
-                ? game.i18n.format(
-                    "TERIOCK.SYSTEMS.Species.PANELS.lifespan.adult",
-                    {
-                      value: this.adult,
-                    },
-                  )
+                ? _loc("TERIOCK.SYSTEMS.Species.PANELS.lifespan.adult", {
+                    value: this.adult,
+                  })
                 : "",
               this.adult
                 ? this.lifespan
-                  ? game.i18n.format(
-                      "TERIOCK.SYSTEMS.Species.PANELS.lifespan.max",
-                      { value: this.lifespan },
-                    )
-                  : game.i18n.localize(
-                      "TERIOCK.SYSTEMS.Species.PANELS.lifespan.infinite",
-                    )
+                  ? _loc("TERIOCK.SYSTEMS.Species.PANELS.lifespan.max", {
+                      value: this.lifespan,
+                    })
+                  : _loc("TERIOCK.SYSTEMS.Species.PANELS.lifespan.infinite")
                 : "",
             ],
           },
           {
             icon: icons.species.size,
-            label: game.i18n.localize(
-              "TERIOCK.SYSTEMS.Species.FIELDS.size.enabled.label",
-            ),
+            label: _loc("TERIOCK.SYSTEMS.Species.FIELDS.size.enabled.label"),
             wrappers: this.size.enabled
               ? [
-                  game.i18n.format(
-                    "TERIOCK.SYSTEMS.Species.PANELS.size.value",
-                    {
-                      value: this.size.value,
-                    },
-                  ),
+                  _loc("TERIOCK.SYSTEMS.Species.PANELS.size.value", {
+                    value: this.size.value,
+                  }),
                   this.size.min && this.size.max
-                    ? game.i18n.format(
-                        "TERIOCK.SYSTEMS.Species.PANELS.size.min",
-                        {
-                          value: this.size.min,
-                        },
-                      )
+                    ? _loc("TERIOCK.SYSTEMS.Species.PANELS.size.min", {
+                        value: this.size.min,
+                      })
                     : "",
                   this.size.min && this.size.max
-                    ? game.i18n.format(
-                        "TERIOCK.SYSTEMS.Species.PANELS.size.max",
-                        {
-                          value: this.size.max,
-                        },
-                      )
+                    ? _loc("TERIOCK.SYSTEMS.Species.PANELS.size.max", {
+                        value: this.size.max,
+                      })
                     : "",
                 ]
               : [],
           },
           {
             icon: icons.species.traits,
-            label: game.i18n.localize(
-              "TERIOCK.SYSTEMS.Species.FIELDS.traits.label",
-            ),
+            label: _loc("TERIOCK.SYSTEMS.Species.FIELDS.traits.label"),
             wrappers: simplifyTags(this._traitTags),
           },
         ];

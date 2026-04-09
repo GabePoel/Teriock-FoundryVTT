@@ -61,7 +61,7 @@ export default class RollActivation extends AutomationActivationFactory(
   get label() {
     return (
       this.display.label ||
-      game.i18n.format("TERIOCK.ACTIVATIONS.Roll.BUTTON", {
+      _loc("TERIOCK.ACTIVATIONS.Roll.BUTTON", {
         impact: TERIOCK.options.impact[this.impact]?.label,
       }) ||
       super.label()

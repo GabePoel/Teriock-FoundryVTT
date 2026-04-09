@@ -15,19 +15,17 @@ if (baseActivation) {
     const children = [{ uuid: flankingSub.uuid }];
     flankingData.primary.children = children;
     flankingData.secondary.children = children;
-    flankingData.display.label = game.i18n.format(
-      "TERIOCK.COMMANDS.Status.applyNamed",
-      { name: flankingSub.name },
-    );
+    flankingData.display.label = _loc("TERIOCK.COMMANDS.Status.applyNamed", {
+      name: flankingSub.name,
+    });
   }
   if (snareSub) {
     const children = [{ uuid: snareSub.uuid }];
     snareData.primary.children = children;
     snareData.secondary.children = children;
-    snareData.display.label = game.i18n.format(
-      "TERIOCK.COMMANDS.Status.applyNamed",
-      { name: snareSub.name },
-    );
+    snareData.display.label = _loc("TERIOCK.COMMANDS.Status.applyNamed", {
+      name: snareSub.name,
+    });
   }
   const flankingActivation =
     new teriock.data.pseudoDocuments.activations.AddDocumentsActivation(

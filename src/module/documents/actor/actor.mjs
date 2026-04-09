@@ -175,7 +175,7 @@ export default class TeriockActor extends mix(
     let { localize = true } = options;
     if (!reason) reason = TERIOCK.reference.conditions[condition];
     this.system.conditionInformation[condition]?.reasons?.add(
-      localize ? game.i18n.localize(reason) : reason,
+      localize ? _loc(reason) : reason,
     );
     this.statuses.add(condition);
   }
@@ -312,20 +312,20 @@ export default class TeriockActor extends mix(
   cleanConditionInformation() {
     if (
       this.system.conditionInformation.hacked.reasons.has(
-        game.i18n.localize("TERIOCK.STATUSES.Hacks.armHack2"),
+        _loc("TERIOCK.STATUSES.Hacks.armHack2"),
       )
     ) {
       this.system.conditionInformation.hacked.reasons.delete(
-        game.i18n.localize("TERIOCK.STATUSES.Hacks.armHack1"),
+        _loc("TERIOCK.STATUSES.Hacks.armHack1"),
       );
     }
     if (
       this.system.conditionInformation.hacked.reasons.has(
-        game.i18n.localize("TERIOCK.STATUSES.Hacks.legHack2"),
+        _loc("TERIOCK.STATUSES.Hacks.legHack2"),
       )
     ) {
       this.system.conditionInformation.hacked.reasons.delete(
-        game.i18n.localize("TERIOCK.STATUSES.Hacks.legHack1"),
+        _loc("TERIOCK.STATUSES.Hacks.legHack1"),
       );
     }
     for (const info of Object.values(this.system.conditionInformation)) {

@@ -62,14 +62,12 @@ export default function StatGiverSystemMixin(Base) {
       get _statBar() {
         return {
           icon: icons.ui.dice,
-          label: game.i18n.localize(
-            "TERIOCK.SYSTEMS.StatGiver.PANELS.statDice",
-          ),
+          label: _loc("TERIOCK.SYSTEMS.StatGiver.PANELS.statDice"),
           wrappers: [
-            game.i18n.format("TERIOCK.SYSTEMS.StatGiver.PANELS.hp", {
+            _loc("TERIOCK.SYSTEMS.StatGiver.PANELS.hp", {
               value: this.statDice.hp.formula,
             }),
-            game.i18n.format("TERIOCK.SYSTEMS.StatGiver.PANELS.mp", {
+            _loc("TERIOCK.SYSTEMS.StatGiver.PANELS.mp", {
               value: this.statDice.mp.formula,
             }),
           ],
@@ -86,9 +84,7 @@ export default function StatGiverSystemMixin(Base) {
         if (!doc?.isOwner) return entries;
         entries.push(
           {
-            name: game.i18n.localize(
-              "TERIOCK.SYSTEMS.StatGiver.MENU.enableHpDice",
-            ),
+            name: _loc("TERIOCK.SYSTEMS.StatGiver.MENU.enableHpDice"),
             icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
             callback: async () => {
               await this.parent.update({
@@ -102,9 +98,7 @@ export default function StatGiverSystemMixin(Base) {
             group: "control",
           },
           {
-            name: game.i18n.localize(
-              "TERIOCK.SYSTEMS.StatGiver.MENU.disableHpDice",
-            ),
+            name: _loc("TERIOCK.SYSTEMS.StatGiver.MENU.disableHpDice"),
             icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
             callback: async () => {
               await this.parent.update({ "system.statDice.hp.disabled": true });
@@ -116,9 +110,7 @@ export default function StatGiverSystemMixin(Base) {
             group: "control",
           },
           {
-            name: game.i18n.localize(
-              "TERIOCK.SYSTEMS.StatGiver.MENU.enableMpDice",
-            ),
+            name: _loc("TERIOCK.SYSTEMS.StatGiver.MENU.enableMpDice"),
             icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
             callback: async () => {
               await this.parent.update({
@@ -132,9 +124,7 @@ export default function StatGiverSystemMixin(Base) {
             group: "control",
           },
           {
-            name: game.i18n.localize(
-              "TERIOCK.SYSTEMS.StatGiver.MENU.disableMpDice",
-            ),
+            name: _loc("TERIOCK.SYSTEMS.StatGiver.MENU.disableMpDice"),
             icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
             callback: async () => {
               await this.parent.update({ "system.statDice.mp.disabled": true });

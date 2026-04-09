@@ -77,17 +77,17 @@ export default (Base) =>
         this.actor,
         [
           {
-            name: game.i18n.localize("TERIOCK.MODELS.Piercing.MENU.0"),
+            name: _loc("TERIOCK.MODELS.Piercing.MENU.0"),
             icon: TERIOCK.display.icons.piercing.none,
             value: 0,
           },
           {
-            name: game.i18n.localize("TERIOCK.MODELS.Piercing.MENU.1"),
+            name: _loc("TERIOCK.MODELS.Piercing.MENU.1"),
             icon: TERIOCK.display.icons.piercing.av0,
             value: 1,
           },
           {
-            name: game.i18n.localize("TERIOCK.MODELS.Piercing.MENU.2"),
+            name: _loc("TERIOCK.MODELS.Piercing.MENU.2"),
             icon: TERIOCK.display.icons.piercing.ub,
             value: 2,
           },
@@ -107,16 +107,12 @@ export default (Base) =>
         this.actor,
         [
           {
-            name: game.i18n.localize(
-              "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.type.lvl",
-            ),
+            name: _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.type.lvl"),
             icon: TERIOCK.display.icons.document.rank,
             value: false,
           },
           {
-            name: game.i18n.localize(
-              "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.type.br",
-            ),
+            name: _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.type.br"),
             icon: TERIOCK.display.icons.species.br,
             value: true,
           },

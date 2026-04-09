@@ -177,7 +177,7 @@ export default class SpeciesSystem extends mix(
   get embedParts() {
     const parts = super.embedParts;
     parts.text = dotJoin([...simplifyTags(this._traitTags), parts.text]);
-    parts.subtitle = game.i18n.localize("TYPES.Item.species");
+    parts.subtitle = _loc("TYPES.Item.species");
     return parts;
   }
 
@@ -236,14 +236,10 @@ export default class SpeciesSystem extends mix(
     if (this.transformationEffect) {
       const proceed = await TeriockDialog.confirm({
         window: {
-          title: game.i18n.localize(
-            "TERIOCK.SYSTEMS.Species.DIALOG.deleteEffect.title",
-          ),
+          title: _loc("TERIOCK.SYSTEMS.Species.DIALOG.deleteEffect.title"),
           icon: makeIconClass(TERIOCK.display.icons.effect.transform, "title"),
         },
-        content: game.i18n.localize(
-          "TERIOCK.SYSTEMS.Species.DIALOG.deleteEffect.content",
-        ),
+        content: _loc("TERIOCK.SYSTEMS.Species.DIALOG.deleteEffect.content"),
         modal: true,
         rejectClose: false,
       });
@@ -262,9 +258,7 @@ export default class SpeciesSystem extends mix(
     return [
       ...super.getCardContextMenuEntries(doc),
       {
-        name: game.i18n.localize(
-          "TERIOCK.SYSTEMS.Species.MENU.setPrimaryTransformation",
-        ),
+        name: _loc("TERIOCK.SYSTEMS.Species.MENU.setPrimaryTransformation"),
         icon: makeIcon(TERIOCK.display.icons.effect.transform, "contextMenu"),
         callback: this.setPrimaryTransformation.bind(this),
         condition: this.isTransformation && !this.isPrimaryTransformation,

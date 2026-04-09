@@ -15,7 +15,7 @@ function addWikiOpenToHeader(application, controls) {
     controls.push({
       action: "wikiOpenThis",
       icon: makeIconClass(TERIOCK.display.icons.ui.wiki, "contextMenu"),
-      label: game.i18n.localize("TERIOCK.SYSTEMS.Common.MENU.viewOnWiki"),
+      label: _loc("TERIOCK.SYSTEMS.Common.MENU.viewOnWiki"),
     });
   }
 }
@@ -29,7 +29,7 @@ function addShareImageToHeader(application, controls) {
   controls.push({
     action: "shareImageInChat",
     icon: makeIconClass(TERIOCK.display.icons.ui.shareImage, "contextMenu"),
-    label: game.i18n.localize("TERIOCK.SYSTEMS.Child.MENU.shareInChat"),
+    label: _loc("TERIOCK.SYSTEMS.Child.MENU.shareInChat"),
     onClick: () => {
       chatImage(application.options.src);
     },
@@ -111,9 +111,7 @@ export default function registerSheetManagementHooks() {
      * @param {ApplicationHeaderControlsEntry[]} controls
      */
     (_application, controls) => {
-      controls.sort((a, b) =>
-        game.i18n.format(a.label).localeCompare(game.i18n.format(b.label)),
-      );
+      controls.sort((a, b) => _loc(a.label).localeCompare(_loc(b.label)));
     },
   );
 

@@ -26,21 +26,19 @@ export default async function hotbarDropDialog(doc) {
     choice = await TeriockDialog.prompt({
       window: {
         icon: makeIconClass(TERIOCK.display.icons.ui.confirm, "title"),
-        title: game.i18n.localize("TERIOCK.DIALOGS.HotbarDrop.title"),
+        title: _loc("TERIOCK.DIALOGS.HotbarDrop.title"),
       },
       modal: true,
       content: content,
       ok: {
         default: true,
-        label: game.i18n.localize("TERIOCK.DIALOGS.HotbarDrop.BUTTONS.general"),
+        label: _loc("TERIOCK.DIALOGS.HotbarDrop.BUTTONS.general"),
         callback: () => "general",
       },
       buttons: [
         {
           action: "linked",
-          label: game.i18n.localize(
-            "TERIOCK.DIALOGS.HotbarDrop.BUTTONS.linked",
-          ),
+          label: _loc("TERIOCK.DIALOGS.HotbarDrop.BUTTONS.linked"),
           callback: () => "linked",
         },
       ],

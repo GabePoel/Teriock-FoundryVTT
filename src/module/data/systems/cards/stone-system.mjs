@@ -16,7 +16,7 @@ export default class StoneSystem extends BaseCardsSystem {
         {
           back: {
             img: getImage("death-bag-stones", "Unknown"),
-            name: game.i18n.localize("TERIOCK.SYSTEMS.Stone.DEFAULTS.back"),
+            name: _loc("TERIOCK.SYSTEMS.Stone.DEFAULTS.back"),
           },
         },
         data,
@@ -30,7 +30,7 @@ export default class StoneSystem extends BaseCardsSystem {
         faces: [
           {
             img: getImage("death-bag-stones", "Brown"),
-            name: game.i18n.localize("TERIOCK.SYSTEMS.Stone.DEFAULTS.faces"),
+            name: _loc("TERIOCK.SYSTEMS.Stone.DEFAULTS.faces"),
           },
         ],
       });

@@ -5,8 +5,8 @@ const armaments = actor.armaments.filter(
 );
 if (armaments.length > 0) {
   const selectedArmament = await tm.dialogs.selectDocumentDialog(armaments, {
-    hint: game.i18n.localize("TERIOCK.DIALOGS.Select.Armament.hint"),
-    title: game.i18n.localize("TERIOCK.DIALOGS.Select.Armament.title"),
+    hint: _loc("TERIOCK.DIALOGS.Select.Armament.hint"),
+    title: _loc("TERIOCK.DIALOGS.Select.Armament.title"),
   });
   let abilities = await actor.allAbilities();
   abilities = abilities
@@ -19,8 +19,8 @@ if (armaments.length > 0) {
     )
     .sort((a, b) => a.name.localeCompare(b.name));
   const ability = await tm.dialogs.selectDocumentDialog(abilities, {
-    hint: game.i18n.localize("TERIOCK.DIALOGS.Select.Ability.hint"),
-    title: game.i18n.localize("TERIOCK.DIALOGS.Select.Ability.title"),
+    hint: _loc("TERIOCK.DIALOGS.Select.Ability.hint"),
+    title: _loc("TERIOCK.DIALOGS.Select.Ability.title"),
   });
   options.armament = selectedArmament;
   await ability.system.use(options);

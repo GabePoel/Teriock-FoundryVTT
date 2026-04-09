@@ -7,81 +7,49 @@ export default class TokenSettingsModel extends EmbeddedDataModel {
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       autoColoration: new fields.BooleanField({
-        label: game.i18n.localize(
-          "TERIOCK.MODELS.TokenSettings.autoColoration.label",
-        ),
+        label: _loc("TERIOCK.MODELS.TokenSettings.autoColoration.label"),
         initial: true,
-        hint: game.i18n.localize(
-          "TERIOCK.MODELS.TokenSettings.autoColoration.hint",
-        ),
+        hint: _loc("TERIOCK.MODELS.TokenSettings.autoColoration.hint"),
       }),
       autoDetectionModes: new fields.BooleanField({
-        hint: game.i18n.localize(
-          "TERIOCK.MODELS.TokenSettings.autoDetectionModes.hint",
-        ),
+        hint: _loc("TERIOCK.MODELS.TokenSettings.autoDetectionModes.hint"),
         initial: true,
-        label: game.i18n.localize(
-          "TERIOCK.MODELS.TokenSettings.autoDetectionModes.label",
-        ),
+        label: _loc("TERIOCK.MODELS.TokenSettings.autoDetectionModes.label"),
       }),
       autoLighting: new fields.BooleanField({
-        label: game.i18n.localize(
-          "TERIOCK.MODELS.TokenSettings.autoLighting.label",
-        ),
+        label: _loc("TERIOCK.MODELS.TokenSettings.autoLighting.label"),
         initial: true,
-        hint: game.i18n.localize(
-          "TERIOCK.MODELS.TokenSettings.autoLighting.hint",
-        ),
+        hint: _loc("TERIOCK.MODELS.TokenSettings.autoLighting.hint"),
       }),
       autoMagic: new fields.BooleanField({
-        label: game.i18n.localize(
-          "TERIOCK.MODELS.TokenSettings.autoMagic.label",
-        ),
+        label: _loc("TERIOCK.MODELS.TokenSettings.autoMagic.label"),
         initial: true,
-        hint: game.i18n.localize("TERIOCK.MODELS.TokenSettings.autoMagic.hint"),
+        hint: _loc("TERIOCK.MODELS.TokenSettings.autoMagic.hint"),
       }),
       autoScale: new fields.BooleanField({
-        label: game.i18n.localize(
-          "TERIOCK.MODELS.TokenSettings.autoScale.label",
-        ),
+        label: _loc("TERIOCK.MODELS.TokenSettings.autoScale.label"),
         initial: true,
-        hint: game.i18n.localize("TERIOCK.MODELS.TokenSettings.autoScale.hint"),
+        hint: _loc("TERIOCK.MODELS.TokenSettings.autoScale.hint"),
       }),
       autoTransformation: new fields.BooleanField({
-        label: game.i18n.localize(
-          "TERIOCK.MODELS.TokenSettings.autoTransformation.label",
-        ),
+        label: _loc("TERIOCK.MODELS.TokenSettings.autoTransformation.label"),
         initial: true,
-        hint: game.i18n.localize(
-          "TERIOCK.MODELS.TokenSettings.autoTransformation.hint",
-        ),
+        hint: _loc("TERIOCK.MODELS.TokenSettings.autoTransformation.hint"),
       }),
       autoVisionAngle: new fields.BooleanField({
-        hint: game.i18n.localize(
-          "TERIOCK.MODELS.TokenSettings.autoVisionAngle.hint",
-        ),
+        hint: _loc("TERIOCK.MODELS.TokenSettings.autoVisionAngle.hint"),
         initial: true,
-        label: game.i18n.localize(
-          "TERIOCK.MODELS.TokenSettings.autoVisionAngle.label",
-        ),
+        label: _loc("TERIOCK.MODELS.TokenSettings.autoVisionAngle.label"),
       }),
       autoVisionModes: new fields.BooleanField({
-        label: game.i18n.localize(
-          "TERIOCK.MODELS.TokenSettings.autoVisionModes.label",
-        ),
+        label: _loc("TERIOCK.MODELS.TokenSettings.autoVisionModes.label"),
         initial: true,
-        hint: game.i18n.localize(
-          "TERIOCK.MODELS.TokenSettings.autoVisionModes.hint",
-        ),
+        hint: _loc("TERIOCK.MODELS.TokenSettings.autoVisionModes.hint"),
       }),
       autoVisionRange: new fields.BooleanField({
-        label: game.i18n.localize(
-          "TERIOCK.MODELS.TokenSettings.autoVisionRange.label",
-        ),
+        label: _loc("TERIOCK.MODELS.TokenSettings.autoVisionRange.label"),
         initial: true,
-        hint: game.i18n.localize(
-          "TERIOCK.MODELS.TokenSettings.autoVisionRange.hint",
-        ),
+        hint: _loc("TERIOCK.MODELS.TokenSettings.autoVisionRange.hint"),
       }),
     });
   }

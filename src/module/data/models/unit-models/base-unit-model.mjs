@@ -65,7 +65,7 @@ export default class BaseUnitModel extends EvaluationModel {
    */
   static get choices() {
     return Object.fromEntries(
-      this.choiceEntries.map((e) => [e.id, game.i18n.localize(e.label)]),
+      this.choiceEntries.map((e) => [e.id, _loc(e.label)]),
     );
   }
 
@@ -82,7 +82,7 @@ export default class BaseUnitModel extends EvaluationModel {
     return [
       {
         id: "unlimited",
-        label: game.i18n.localize("TERIOCK.MODELS.BaseUnit.UNITS.unlimited"),
+        label: _loc("TERIOCK.MODELS.BaseUnit.UNITS.unlimited"),
       },
     ];
   }
@@ -113,7 +113,7 @@ export default class BaseUnitModel extends EvaluationModel {
    * @returns {string}
    */
   get _updateTitle() {
-    return game.i18n.format("TERIOCK.MODELS.BaseUnit.UPDATE.basic", {
+    return _loc("TERIOCK.MODELS.BaseUnit.UPDATE.basic", {
       label: this.schema.label,
     });
   }
@@ -187,7 +187,7 @@ export default class BaseUnitModel extends EvaluationModel {
       const entry = this.constructor.finiteChoiceEntries.find(
         (e) => e.id === this.unit,
       );
-      return `${this.raw} ${this.raw === "1" ? game.i18n.localize(entry.label) : game.i18n.localize(entry.plural)}`;
+      return `${this.raw} ${this.raw === "1" ? _loc(entry.label) : _loc(entry.plural)}`;
     } else {
       return this.constructor.choices[this.unit];
     }
@@ -271,7 +271,7 @@ export default class BaseUnitModel extends EvaluationModel {
           },
           default: true,
           icon: makeIconClass(TERIOCK.display.icons.ui.enable, "button"),
-          label: game.i18n.localize("TERIOCK.DIALOGS.Update.BUTTONS.update"),
+          label: _loc("TERIOCK.DIALOGS.Update.BUTTONS.update"),
         },
       ],
       content: group.outerHTML,

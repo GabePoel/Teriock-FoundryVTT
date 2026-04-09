@@ -114,9 +114,7 @@ export default function ChildSystemMixin(Base) {
           {
             icon: TERIOCK.display.icons.ui.chat,
             action: "chatDoc",
-            tooltip: game.i18n.localize(
-              "TERIOCK.SYSTEMS.Child.MENU.shareWriteup",
-            ),
+            tooltip: _loc("TERIOCK.SYSTEMS.Child.MENU.shareWriteup"),
             callback: async () => {
               await this.parent.toMessage();
             },
@@ -129,8 +127,8 @@ export default function ChildSystemMixin(Base) {
             action: "toggleDisabledDoc",
             callback: () => this.parent.toggleDisabled(),
             tooltip: this.parent.disabled
-              ? game.i18n.localize("TERIOCK.SYSTEMS.Child.EMBED.disabled")
-              : game.i18n.localize("TERIOCK.SYSTEMS.Child.EMBED.enabled"),
+              ? _loc("TERIOCK.SYSTEMS.Child.EMBED.disabled")
+              : _loc("TERIOCK.SYSTEMS.Child.EMBED.enabled"),
             condition: this.parent.isOwner,
           },
         ];
@@ -177,7 +175,7 @@ export default function ChildSystemMixin(Base) {
 
       /** @inheritDoc */
       get useText() {
-        return game.i18n.format("TERIOCK.SYSTEMS.Child.USAGE.use", {
+        return _loc("TERIOCK.SYSTEMS.Child.USAGE.use", {
           value: this.parent.name,
         });
       }
@@ -214,7 +212,7 @@ export default function ChildSystemMixin(Base) {
               group: "usage",
             },
             {
-              name: game.i18n.localize("TERIOCK.SYSTEMS.Child.MENU.enable"),
+              name: _loc("TERIOCK.SYSTEMS.Child.MENU.enable"),
               icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
               callback: this.parent.enable.bind(this.parent),
               condition:
@@ -226,7 +224,7 @@ export default function ChildSystemMixin(Base) {
               group: "control",
             },
             {
-              name: game.i18n.localize("TERIOCK.SYSTEMS.Child.MENU.disable"),
+              name: _loc("TERIOCK.SYSTEMS.Child.MENU.disable"),
               icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
               callback: this.parent.disable.bind(this.parent),
               condition:
@@ -239,9 +237,7 @@ export default function ChildSystemMixin(Base) {
               group: "control",
             },
             {
-              name: game.i18n.localize(
-                "TERIOCK.SYSTEMS.Child.MENU.openGmNotes",
-              ),
+              name: _loc("TERIOCK.SYSTEMS.Child.MENU.openGmNotes"),
               icon: makeIcon(TERIOCK.display.icons.ui.notes, "contextMenu"),
               callback: async () => {
                 await this.gmNotesOpen();
@@ -250,7 +246,7 @@ export default function ChildSystemMixin(Base) {
               group: "open",
             },
             {
-              name: game.i18n.localize("TERIOCK.SYSTEMS.Child.MENU.openImage"),
+              name: _loc("TERIOCK.SYSTEMS.Child.MENU.openImage"),
               icon: makeIcon(TERIOCK.display.icons.ui.image, "contextMenu"),
               callback: async () => {
                 await new ImagePopout({
@@ -262,7 +258,7 @@ export default function ChildSystemMixin(Base) {
               group: "open",
             },
             {
-              name: game.i18n.localize("TERIOCK.SYSTEMS.Child.MENU.shareImage"),
+              name: _loc("TERIOCK.SYSTEMS.Child.MENU.shareImage"),
               icon: makeIcon(
                 TERIOCK.display.icons.ui.shareImage,
                 "contextMenu",
@@ -271,15 +267,13 @@ export default function ChildSystemMixin(Base) {
               group: "share",
             },
             {
-              name: game.i18n.localize(
-                "TERIOCK.SYSTEMS.Child.MENU.shareWriteup",
-              ),
+              name: _loc("TERIOCK.SYSTEMS.Child.MENU.shareWriteup"),
               icon: makeIcon(TERIOCK.display.icons.ui.shareText, "contextMenu"),
               callback: this.parent.toMessage.bind(this.parent),
               group: "share",
             },
             {
-              name: game.i18n.localize("TERIOCK.SYSTEMS.Common.MENU.duplicate"),
+              name: _loc("TERIOCK.SYSTEMS.Common.MENU.duplicate"),
               icon: makeIcon(TERIOCK.display.icons.ui.duplicate, "contextMenu"),
               callback: async () => {
                 await this.parent.duplicate();

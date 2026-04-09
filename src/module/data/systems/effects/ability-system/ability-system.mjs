@@ -120,7 +120,7 @@ export default class AbilitySystem extends mix(
       }
     }
     if (this.grantOnly) {
-      tags.push(game.i18n.localize("TERIOCK.SYSTEMS.Ability.NAME.granted"));
+      tags.push(_loc("TERIOCK.SYSTEMS.Ability.NAME.granted"));
     }
     return [...tags, ...super._nameTags];
   }
@@ -134,11 +134,11 @@ export default class AbilitySystem extends mix(
   get displayFields() {
     const fields = [
       {
-        button: game.i18n.localize(
+        button: _loc(
           "TERIOCK.SYSTEMS.Ability.FIELDS.elderSorceryIncant.button",
         ),
         classes: TERIOCK.display.panel.classes.elderSorcery,
-        label: game.i18n.format(
+        label: _loc(
           "TERIOCK.SYSTEMS.Ability.FIELDS.elderSorceryIncant.elements",
           { elements: this.elementString },
         ),
@@ -218,9 +218,7 @@ export default class AbilitySystem extends mix(
             action: "updatePaths",
             paths:
               "system.upgrades.score.attribute system.upgrades.score.value",
-            title: game.i18n.localize(
-              "TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.score.update",
-            ),
+            title: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.score.update"),
             icon: TERIOCK.display.icons.ui.numerical,
           },
           editable: false,
@@ -235,7 +233,7 @@ export default class AbilitySystem extends mix(
             action: "updatePaths",
             paths:
               "system.upgrades.competence.attribute system.upgrades.competence.value",
-            title: game.i18n.localize(
+            title: _loc(
               "TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.competence.update",
             ),
             icon: TERIOCK.display.icons.competence.fluent,
@@ -284,7 +282,7 @@ export default class AbilitySystem extends mix(
       icons.push({
         icon: TERIOCK.display.icons.ui.locked,
         action: "toggleDisableLocked",
-        tooltip: game.i18n.localize("TERIOCK.SYSTEMS.Ability.EMBED.locked"),
+        tooltip: _loc("TERIOCK.SYSTEMS.Ability.EMBED.locked"),
         callback: () => {
           ui.notifications.error("TERIOCK.SYSTEMS.Ability.EMBED.basic", {
             localize: true,
@@ -350,7 +348,7 @@ export default class AbilitySystem extends mix(
     return Array.from(this.targets)
       .map((t) => TERIOCK.options.ability.targets[t])
       .sort((a, b) => a.localeCompare(b))
-      .join(game.i18n.localize("TERIOCK.SYSTEMS.Base.EMBED.valueSeparator"));
+      .join(_loc("TERIOCK.SYSTEMS.Base.EMBED.valueSeparator"));
   }
 
   /** @inheritDoc */
@@ -361,7 +359,7 @@ export default class AbilitySystem extends mix(
   /** @inheritDoc */
   get useText() {
     if (this.spell) {
-      return game.i18n.format("TERIOCK.SYSTEMS.Ability.USAGE.cast", {
+      return _loc("TERIOCK.SYSTEMS.Ability.USAGE.cast", {
         value: this.parent.name,
       });
     }

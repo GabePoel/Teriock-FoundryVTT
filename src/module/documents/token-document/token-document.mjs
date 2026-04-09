@@ -304,7 +304,7 @@ export default class TeriockTokenDocument extends mix(
   getCardContextMenuEntries(doc) {
     return [
       {
-        name: game.i18n.localize("TERIOCK.SYSTEMS.Common.MENU.openSource"),
+        name: _loc("TERIOCK.SYSTEMS.Common.MENU.openSource"),
         icon: makeIcon(TERIOCK.options.document.character.icon, "contextMenu"),
         condition: () => this.actor && this.actor.isViewer,
         callback: async () => this.actor.sheet.render(true),

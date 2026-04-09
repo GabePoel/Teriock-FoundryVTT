@@ -2,8 +2,8 @@ const validAbilities = actor.abilities
   .filter((a) => !a.isReference && a.system.standard)
   .sort((a, b) => a.name.localeCompare(b.name));
 const ability = await tm.dialogs.selectDocumentDialog(validAbilities, {
-  hint: game.i18n.localize("TERIOCK.DIALOGS.Select.Ability.hint"),
-  title: game.i18n.localize("TERIOCK.DIALOGS.Select.Ability.title"),
+  hint: _loc("TERIOCK.DIALOGS.Select.Ability.hint"),
+  title: _loc("TERIOCK.DIALOGS.Select.Ability.title"),
 });
 if (ability) {
   const children = [{ uuid: ability.uuid }];

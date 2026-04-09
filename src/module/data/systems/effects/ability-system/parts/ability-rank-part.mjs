@@ -17,17 +17,13 @@ export default (Base) => {
           if (this.parent.getFlag("teriock", "category") === "combat") {
             return {
               icon: TERIOCK.display.icons.rank.combatAbility,
-              tooltip: game.i18n.localize(
-                "TERIOCK.SYSTEMS.Ability.EMBED.combat",
-              ),
+              tooltip: _loc("TERIOCK.SYSTEMS.Ability.EMBED.combat"),
               classes: "ability-category-tag-icon",
             };
           } else if (this.parent.getFlag("teriock", "category") === "support") {
             return {
               icon: TERIOCK.display.icons.rank.supportAbility,
-              tooltip: game.i18n.localize(
-                "TERIOCK.SYSTEMS.Ability.EMBED.support",
-              ),
+              tooltip: _loc("TERIOCK.SYSTEMS.Ability.EMBED.support"),
               classes: "ability-category-tag-icon",
             };
           }
@@ -45,9 +41,7 @@ export default (Base) => {
           doc?.sheet?.isEditable
         ) {
           entries.push({
-            name: game.i18n.localize(
-              "TERIOCK.SYSTEMS.Ability.EMBED.setCombatCategory",
-            ),
+            name: _loc("TERIOCK.SYSTEMS.Ability.EMBED.setCombatCategory"),
             icon: makeIcon(
               TERIOCK.display.icons.rank.combatAbility,
               "contextMenu",
@@ -58,9 +52,7 @@ export default (Base) => {
             group: "edit",
           });
           entries.push({
-            name: game.i18n.localize(
-              "TERIOCK.SYSTEMS.Ability.EMBED.setSupportCategory",
-            ),
+            name: _loc("TERIOCK.SYSTEMS.Ability.EMBED.setSupportCategory"),
             icon: makeIcon(
               TERIOCK.display.icons.rank.supportAbility,
               "contextMenu",
@@ -71,9 +63,7 @@ export default (Base) => {
             group: "edit",
           });
           entries.push({
-            name: game.i18n.localize(
-              "TERIOCK.SYSTEMS.Ability.EMBED.unsetCategory",
-            ),
+            name: _loc("TERIOCK.SYSTEMS.Ability.EMBED.unsetCategory"),
             icon: makeIcon(TERIOCK.display.icons.ui.unset, "contextMenu"),
             callback: async () =>
               await this.parent.unsetFlag("teriock", "category"),

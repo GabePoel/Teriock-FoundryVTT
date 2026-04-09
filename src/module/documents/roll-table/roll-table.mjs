@@ -64,7 +64,7 @@ export default class TeriockRollTable extends mix(
       {
         author: game.user.id,
         flags: { "core.RollTable": this.id },
-        flavor: game.i18n.format(flavorKey, {
+        flavor: _loc(flavorKey, {
           number: results.length,
           name: foundry.utils.escapeHTML(this.name),
         }),

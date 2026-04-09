@@ -33,8 +33,8 @@ export default (Base) => {
           costs: new fields.SchemaField({
             primary: new fields.SchemaField(
               objectMap(costOptions.primary.keys, (v) => {
-                const label = game.i18n.format("TERIOCK.COSTS.Long.primary", {
-                  key: game.i18n.localize(v.label),
+                const label = _loc("TERIOCK.COSTS.Long.primary", {
+                  key: _loc(v.label),
                 });
                 return new fields.SchemaField(
                   {
@@ -53,8 +53,8 @@ export default (Base) => {
             ),
             components: new fields.SchemaField(
               objectMap(costOptions.components.keys, (v) => {
-                const label = game.i18n.format("TERIOCK.COSTS.Long.component", {
-                  key: game.i18n.localize(v),
+                const label = _loc("TERIOCK.COSTS.Long.component", {
+                  key: _loc(v),
                 });
                 return new fields.SchemaField(
                   {
@@ -157,12 +157,12 @@ export default (Base) => {
         return [
           ...Object.entries(TERIOCK.options.cost.primary.keys).map(([k, v]) =>
             this.costs.primary[k].type === "formula"
-              ? game.i18n.format("TERIOCK.SYSTEMS.Ability.PANELS.constant", {
+              ? _loc("TERIOCK.SYSTEMS.Ability.PANELS.constant", {
                   value: this.costs.primary[k].formula,
                   cost: v.abbreviation,
                 })
               : this.costs.primary[k].type === "description"
-                ? game.i18n.format("TERIOCK.SYSTEMS.Ability.PANELS.variable", {
+                ? _loc("TERIOCK.SYSTEMS.Ability.PANELS.variable", {
                     cost: v.abbreviation,
                   })
                 : "",

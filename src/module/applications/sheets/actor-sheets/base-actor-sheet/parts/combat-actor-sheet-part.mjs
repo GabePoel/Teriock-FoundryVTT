@@ -49,12 +49,8 @@ export default (Base) =>
           ...this.document.bodyParts,
         ].filter((a) => a.active),
         {
-          hint: game.i18n.localize(
-            "TERIOCK.SHEETS.Actor.ACTIONS.SelectAttacker.hint",
-          ),
-          label: game.i18n.localize(
-            "TERIOCK.SHEETS.Actor.ACTIONS.SelectAttacker.label",
-          ),
+          hint: _loc("TERIOCK.SHEETS.Actor.ACTIONS.SelectAttacker.hint"),
+          label: _loc("TERIOCK.SHEETS.Actor.ACTIONS.SelectAttacker.label"),
           openable: true,
           textKey: "system.summarizedAttack",
           checked: this.document.system.wielding.attacker?.uuid,
@@ -78,12 +74,8 @@ export default (Base) =>
           ...this.document.bodyParts,
         ].filter((a) => a.active),
         {
-          hint: game.i18n.localize(
-            "TERIOCK.SHEETS.Actor.ACTIONS.SelectBlocker.hint",
-          ),
-          label: game.i18n.localize(
-            "TERIOCK.SHEETS.Actor.ACTIONS.SelectBlocker.label",
-          ),
+          hint: _loc("TERIOCK.SHEETS.Actor.ACTIONS.SelectBlocker.hint"),
+          label: _loc("TERIOCK.SHEETS.Actor.ACTIONS.SelectBlocker.label"),
           openable: true,
           textKey: "system.summarizedBlock",
           checked: this.document.system.wielding.blocker?.uuid,

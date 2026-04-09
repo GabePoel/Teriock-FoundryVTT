@@ -61,6 +61,7 @@ const globalClient = {
   ProseMirror: "readonly",
   _del: "readonly",
   _replace: "readonly",
+  _loc: "readonly",
   canvas: "readonly",
   foundry: "readonly",
   game: "readonly",

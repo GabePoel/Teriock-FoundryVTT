@@ -68,6 +68,6 @@ function stoneField(color, initial) {
     initial: `${initial}`,
     nullable: false,
     deterministic: false,
-    label: game.i18n.localize(`TERIOCK.TERMS.Stones.${color}`),
+    label: _loc(`TERIOCK.TERMS.Stones.${color}`),
   });
 }

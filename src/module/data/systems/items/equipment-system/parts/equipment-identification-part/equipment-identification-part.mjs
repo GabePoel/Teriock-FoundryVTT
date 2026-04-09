@@ -78,7 +78,7 @@ export default (Base) => {
         return [
           ...super.getCardContextMenuEntries(doc),
           {
-            name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.identify"),
+            name: _loc("TERIOCK.SYSTEMS.Equipment.MENU.identify"),
             icon: makeIcon(
               TERIOCK.display.icons.equipment.identify,
               "contextMenu",
@@ -88,9 +88,7 @@ export default (Base) => {
             group: "usage",
           },
           {
-            name: game.i18n.localize(
-              "TERIOCK.SYSTEMS.Equipment.MENU.readMagic",
-            ),
+            name: _loc("TERIOCK.SYSTEMS.Equipment.MENU.readMagic"),
             icon: makeIcon(
               TERIOCK.display.icons.equipment.readMagic,
               "contextMenu",
@@ -103,9 +101,7 @@ export default (Base) => {
             group: "usage",
           },
           {
-            name: game.i18n.localize(
-              "TERIOCK.SYSTEMS.Equipment.MENU.unidentify",
-            ),
+            name: _loc("TERIOCK.SYSTEMS.Equipment.MENU.unidentify"),
             icon: makeIcon(
               TERIOCK.display.icons.equipment.unidentify,
               "contextMenu",

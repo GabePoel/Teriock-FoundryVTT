@@ -86,12 +86,11 @@ export default class TeriockActiveEffect extends mix(
   get remainingString() {
     const remaining = this.remaining;
     if (remaining !== null) {
-      return game.i18n.format(
-        "TERIOCK.SYSTEMS.BaseEffect.PANELS.timeRemaining",
-        { time: secondsToReadable(remaining) },
-      );
+      return _loc("TERIOCK.SYSTEMS.BaseEffect.PANELS.timeRemaining", {
+        time: secondsToReadable(remaining),
+      });
     }
-    return game.i18n.localize("TERIOCK.SYSTEMS.BaseEffect.PANELS.noTimeLimit");
+    return _loc("TERIOCK.SYSTEMS.BaseEffect.PANELS.noTimeLimit");
   }
 
   /** @inheritDoc */

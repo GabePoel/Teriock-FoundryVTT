@@ -48,9 +48,7 @@ export default class TeriockJournalEntryPage extends mix(
         {
           title:
             this.getFlag("teriock", "journalTitle") ||
-            game.i18n.localize(
-              "TERIOCK.SYSTEMS.Child.FIELDS.description.label",
-            ),
+            _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
           text: html,
         },
       ],

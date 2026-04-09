@@ -8,7 +8,7 @@ export default class TeriockTextEditor extends TextEditor {
   static get loadingPanelHTML() {
     return TERIOCK.display.panel.loading.replace(
       "TERIOCK.LOADING",
-      game.i18n.localize("TERIOCK.TERMS.Common.loading"),
+      _loc("TERIOCK.TERMS.Common.loading"),
     );
   }
 

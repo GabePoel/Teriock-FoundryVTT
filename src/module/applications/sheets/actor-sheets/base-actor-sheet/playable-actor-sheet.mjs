@@ -47,9 +47,7 @@ export default class TeriockPlayableActorSheet extends mix(
       ui.notifications.warn("TERIOCK.SHEETS.Actor.NOTIFICATIONS.noSpecies", {
         format: {
           name: this.document.name,
-          compendium: game.i18n.localize(
-            game.packs.get("teriock.species").title,
-          ),
+          compendium: _loc(game.packs.get("teriock.species").title),
         },
         localize: true,
       });

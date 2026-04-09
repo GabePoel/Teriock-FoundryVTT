@@ -153,7 +153,7 @@ export default class EquipmentSystem extends mix(
         : parts.subtitle,
       text: dotJoin([
         ...this._attunableWrappers,
-        game.i18n.format("TERIOCK.SYSTEMS.Equipment.PANELS.weight", {
+        _loc("TERIOCK.SYSTEMS.Equipment.PANELS.weight", {
           value: this.weight.total + this.storage.carriedWeight,
         }),
         parts.text,

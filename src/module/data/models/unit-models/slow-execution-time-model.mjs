@@ -23,9 +23,7 @@ export default class SlowExecutionTimeModel extends TimeUnitModel {
 
   /** @inheritDoc */
   get _updateTitle() {
-    return game.i18n.localize(
-      "TERIOCK.MODELS.BaseUnit.UPDATE.slowExecutionTime",
-    );
+    return _loc("TERIOCK.MODELS.BaseUnit.UPDATE.slowExecutionTime");
   }
 
   /** @inheritDoc */

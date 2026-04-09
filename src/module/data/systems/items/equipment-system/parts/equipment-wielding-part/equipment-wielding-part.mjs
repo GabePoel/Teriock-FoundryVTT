@@ -65,8 +65,8 @@ export default (Base) => {
             icon: this.glued ? icons.equipment.glue : icons.equipment.unglue,
             action: "toggleGluedDoc",
             tooltip: this.glued
-              ? game.i18n.localize("TERIOCK.SYSTEMS.Equipment.EMBED.glued")
-              : game.i18n.localize("TERIOCK.SYSTEMS.Equipment.EMBED.unglued"),
+              ? _loc("TERIOCK.SYSTEMS.Equipment.EMBED.glued")
+              : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unglued"),
             condition: this.parent.isOwner,
             callback: async () => {
               if (this.glued) await this.unglue();
@@ -80,10 +80,8 @@ export default (Base) => {
             icon: this.equipped ? icons.ui.enabled : icons.ui.disabled,
             action: "toggleEquippedDoc",
             tooltip: this.equipped
-              ? game.i18n.localize("TERIOCK.SYSTEMS.Equipment.EMBED.equipped")
-              : game.i18n.localize(
-                  "TERIOCK.SYSTEMS.Equipment.EMBED.unequipped",
-                ),
+              ? _loc("TERIOCK.SYSTEMS.Equipment.EMBED.equipped")
+              : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unequipped"),
             condition: this.parent.isOwner,
             callback: async () => {
               if (this.equipped) await this.unequip();
@@ -123,7 +121,7 @@ export default (Base) => {
         return [
           ...super.getCardContextMenuEntries(doc),
           {
-            name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.equip"),
+            name: _loc("TERIOCK.SYSTEMS.Equipment.MENU.equip"),
             icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
             callback: this.equip.bind(this),
             condition:
@@ -132,7 +130,7 @@ export default (Base) => {
             group: "control",
           },
           {
-            name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.unequip"),
+            name: _loc("TERIOCK.SYSTEMS.Equipment.MENU.unequip"),
             icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
             callback: this.unequip.bind(this),
             condition:
@@ -141,7 +139,7 @@ export default (Base) => {
             group: "control",
           },
           {
-            name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.glue"),
+            name: _loc("TERIOCK.SYSTEMS.Equipment.MENU.glue"),
             icon: makeIcon(TERIOCK.display.icons.equipment.glue, "contextMenu"),
             callback: this.glue.bind(this),
             condition:
@@ -151,7 +149,7 @@ export default (Base) => {
             group: "control",
           },
           {
-            name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.unglue"),
+            name: _loc("TERIOCK.SYSTEMS.Equipment.MENU.unglue"),
             icon: makeIcon(
               TERIOCK.display.icons.equipment.unglue,
               "contextMenu",

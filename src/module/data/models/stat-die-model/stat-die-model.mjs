@@ -110,16 +110,12 @@ export default class StatDieModel extends EmbeddedDataModel {
         proceed = true;
       } else {
         proceed = await TeriockDialog.confirm({
-          content: game.i18n.localize(
-            "TERIOCK.MODELS.StatDie.DIALOG.Reroll.content",
-          ),
+          content: _loc("TERIOCK.MODELS.StatDie.DIALOG.Reroll.content"),
           modal: true,
           rejectClose: false,
           window: {
             icon: makeIconClass(getRollIcon(this.formula), "title"),
-            title: game.i18n.localize(
-              "TERIOCK.MODELS.StatDie.DIALOG.Reroll.title",
-            ),
+            title: _loc("TERIOCK.MODELS.StatDie.DIALOG.Reroll.title"),
           },
         });
       }
@@ -131,7 +127,7 @@ export default class StatDieModel extends EmbeddedDataModel {
         this.formula,
         {},
         {
-          flavor: game.i18n.format("TERIOCK.ROLLS.Base.name", {
+          flavor: _loc("TERIOCK.ROLLS.Base.name", {
             value: this.parent.dieName,
           }),
         },

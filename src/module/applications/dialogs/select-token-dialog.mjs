@@ -10,7 +10,7 @@ import { selectDocumentsDialog } from "./select-document-dialog.mjs";
 export async function selectTokensDialog(options = {}) {
   options = foundry.utils.mergeObject(
     {
-      title: game.i18n.localize("TERIOCK.DIALOGS.SelectToken.defaults.title"),
+      title: _loc("TERIOCK.DIALOGS.SelectToken.defaults.title"),
       hint: "",
     },
     options,
@@ -40,9 +40,7 @@ export async function selectTokensDialog(options = {}) {
 export async function conditionDialog(condition) {
   const conditionName = TERIOCK.reference.conditions[condition].toLowerCase();
   return await selectTokensDialog({
-    title: game.i18n.localize("TERIOCK.DIALOGS.SelectToken.Condition.title"),
-    hint: game.i18n.format("TERIOCK.DIALOGS.SelectToken.Condition.hint", {
-      conditionName,
-    }),
+    title: _loc("TERIOCK.DIALOGS.SelectToken.Condition.title"),
+    hint: _loc("TERIOCK.DIALOGS.SelectToken.Condition.hint", { conditionName }),
   });
 }

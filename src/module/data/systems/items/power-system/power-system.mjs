@@ -63,7 +63,7 @@ export default class PowerSystem extends mix(
   get embedParts() {
     const parts = super.embedParts;
     parts.text = dotJoin([powerOptions.type[this.type].name, parts.text]);
-    parts.subtitle = game.i18n.localize("TYPES.Item.power");
+    parts.subtitle = _loc("TYPES.Item.power");
     return parts;
   }
 
@@ -86,12 +86,12 @@ export default class PowerSystem extends mix(
     return [
       {
         icon: powerOptions.type[this.type].icon,
-        label: game.i18n.localize("TERIOCK.SYSTEMS.Power.FIELDS.type.label"),
+        label: _loc("TERIOCK.SYSTEMS.Power.FIELDS.type.label"),
         wrappers: [
           powerOptions.type[this.type].name,
           this.maxAv === 0
-            ? game.i18n.localize("TERIOCK.SYSTEMS.Power.PANELS.noArmor")
-            : game.i18n.format("TERIOCK.SYSTEMS.Power.PANELS.maxAv", {
+            ? _loc("TERIOCK.SYSTEMS.Power.PANELS.noArmor")
+            : _loc("TERIOCK.SYSTEMS.Power.PANELS.maxAv", {
                 value: this.maxAv,
               }),
         ],

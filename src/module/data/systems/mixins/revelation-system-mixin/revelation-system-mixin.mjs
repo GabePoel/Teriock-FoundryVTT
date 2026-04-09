@@ -41,9 +41,7 @@ export default function RevelationSystemMixin(Base) {
       get _nameTags() {
         const tags = super._nameTags;
         if (!this.revealed) {
-          tags.unshift(
-            game.i18n.localize("TERIOCK.SYSTEMS.Revelation.NAME.unrevealed"),
-          );
+          tags.unshift(_loc("TERIOCK.SYSTEMS.Revelation.NAME.unrevealed"));
         }
         return tags;
       }
@@ -53,7 +51,7 @@ export default function RevelationSystemMixin(Base) {
         return [
           ...super.getCardContextMenuEntries(doc),
           {
-            name: game.i18n.localize("TERIOCK.SYSTEMS.Revelation.MENU.reveal"),
+            name: _loc("TERIOCK.SYSTEMS.Revelation.MENU.reveal"),
             icon: makeIcon(TERIOCK.display.icons.ui.show, "contextMenu"),
             callback: async () =>
               this.parent.update({
@@ -64,9 +62,7 @@ export default function RevelationSystemMixin(Base) {
             group: "reveal",
           },
           {
-            name: game.i18n.localize(
-              "TERIOCK.SYSTEMS.Revelation.MENU.unreveal",
-            ),
+            name: _loc("TERIOCK.SYSTEMS.Revelation.MENU.unreveal"),
             icon: makeIcon(TERIOCK.display.icons.ui.hide, "contextMenu"),
             callback: async () =>
               this.parent.update({

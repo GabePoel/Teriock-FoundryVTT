@@ -26,12 +26,8 @@ export default class TeriockCombatant extends mix(
     const parts = super.embedParts;
     return Object.assign(parts, {
       text: dotJoin([
-        this.isDefeated
-          ? game.i18n.localize("TERIOCK.SYSTEMS.Combatant.EMBED.defeated")
-          : "",
-        this.hidden
-          ? game.i18n.localize("TERIOCK.SYSTEMS.Combatant.EMBED.hidden")
-          : "",
+        this.isDefeated ? _loc("TERIOCK.SYSTEMS.Combatant.EMBED.defeated") : "",
+        this.hidden ? _loc("TERIOCK.SYSTEMS.Combatant.EMBED.hidden") : "",
         parts.text,
       ]),
       inactive: this.isDefeated,

@@ -22,7 +22,7 @@ export default class StatusAutomation extends ChatStatusAutomation {
   static get _relationChoices() {
     return {
       ...super._relationChoices,
-      include: game.i18n.localize(
+      include: _loc(
         "TERIOCK.AUTOMATIONS.Status.FIELDS.relation.choices.include",
       ),
     };

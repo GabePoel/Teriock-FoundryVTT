@@ -27,21 +27,21 @@ export default class TeriockUsers extends BaseWorldCollectionMixin(Users) {
   async queryGM(queryName, queryData, queryOptions) {
     let {
       notifyFailure = true,
-      failPrefix = game.i18n.localize("TERIOCK.SYSTEMS.User.QUERY.failPrefix"),
-      failReason = game.i18n.localize("TERIOCK.SYSTEMS.User.QUERY.failReason"),
+      failPrefix = _loc("TERIOCK.SYSTEMS.User.QUERY.failPrefix"),
+      failReason = _loc("TERIOCK.SYSTEMS.User.QUERY.failReason"),
       failMessage = "",
     } = queryOptions;
     if (queryOptions.localize) {
       if (queryOptions.format && Object.keys(queryOptions.format).length > 0) {
-        failPrefix = game.i18n.format(failPrefix, queryOptions.format);
-        failReason = game.i18n.format(failReason, queryOptions.format);
+        failPrefix = _loc(failPrefix, queryOptions.format);
+        failReason = _loc(failReason, queryOptions.format);
       } else {
-        failPrefix = game.i18n.localize(failPrefix);
-        failReason = game.i18n.localize(failReason);
+        failPrefix = _loc(failPrefix);
+        failReason = _loc(failReason);
       }
     }
     if (!failMessage) {
-      failMessage = game.i18n.format("TERIOCK.SYSTEMS.User.QUERY.failFormat", {
+      failMessage = _loc("TERIOCK.SYSTEMS.User.QUERY.failFormat", {
         prefix: failPrefix,
         reason: failReason,
       });

@@ -224,14 +224,10 @@ export function formatDynamicSelectOptions(choices = {}, options = {}) {
     choiceArray.push(...choices);
   } else {
     for (const group of Object.values(choices)) {
-      const groupLabel = options.localize
-        ? game.i18n.localize(group.label)
-        : group.label;
+      const groupLabel = options.localize ? _loc(group.label) : group.label;
       for (const [choiceValue, choiceLabel] of Object.entries(group.choices)) {
         choiceArray.push({
-          label: options.localize
-            ? game.i18n.localize(choiceLabel)
-            : choiceLabel,
+          label: options.localize ? _loc(choiceLabel) : choiceLabel,
           value: choiceValue,
           group: groupLabel,
         });

@@ -90,7 +90,7 @@ export default class BaseStatPoolModel extends EmbeddedDataModel {
    * @returns {string}
    */
   get dieName() {
-    return game.i18n.localize("TERIOCK.MODELS.BaseStatPool.PANELS.name");
+    return _loc("TERIOCK.MODELS.BaseStatPool.PANELS.name");
   }
 
   /**
@@ -110,15 +110,13 @@ export default class BaseStatPoolModel extends EmbeddedDataModel {
         bars: [],
         blocks: [
           {
-            text: game.i18n.localize("TERIOCK.MODELS.BaseStatPool.PANELS.text"),
-            title: game.i18n.localize(
-              "TERIOCK.MODELS.BaseStatPool.PANELS.title",
-            ),
+            text: _loc("TERIOCK.MODELS.BaseStatPool.PANELS.text"),
+            title: _loc("TERIOCK.MODELS.BaseStatPool.PANELS.title"),
           },
         ],
         icon: getRollIcon(this.formula),
         image: getImage("equipment", "Die"),
-        name: game.i18n.localize("TERIOCK.MODELS.BaseStatPool.PANELS.name"),
+        name: _loc("TERIOCK.MODELS.BaseStatPool.PANELS.name"),
       },
     ];
   }

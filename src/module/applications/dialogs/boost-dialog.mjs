@@ -18,31 +18,31 @@ const { fields } = foundry.data;
 export default async function boostDialog(rollFormula, options = {}) {
   const {
     crit = false,
-    label = game.i18n.localize("TERIOCK.DIALOGS.Boost.BUTTONS.ok"),
+    label = _loc("TERIOCK.DIALOGS.Boost.BUTTONS.ok"),
     impact,
   } = options;
   let formula = rollFormula;
   const formulaField = new fields.StringField({
     initial: rollFormula,
-    label: game.i18n.localize("TERIOCK.DIALOGS.Boost.FIELDS.formula.label"),
-    hint: game.i18n.localize("TERIOCK.DIALOGS.Boost.FIELDS.formula.hint"),
+    label: _loc("TERIOCK.DIALOGS.Boost.FIELDS.formula.label"),
+    hint: _loc("TERIOCK.DIALOGS.Boost.FIELDS.formula.hint"),
   });
   const boostsField = new fields.NumberField({
     min: 0,
     initial: 0,
-    label: game.i18n.localize("TERIOCK.DIALOGS.Boost.FIELDS.boosts.label"),
-    hint: game.i18n.localize("TERIOCK.DIALOGS.Boost.FIELDS.boosts.hint"),
+    label: _loc("TERIOCK.DIALOGS.Boost.FIELDS.boosts.label"),
+    hint: _loc("TERIOCK.DIALOGS.Boost.FIELDS.boosts.hint"),
   });
   const deboostsField = new fields.NumberField({
     min: 0,
     initial: 0,
-    label: game.i18n.localize("TERIOCK.DIALOGS.Boost.FIELDS.deboosts.label"),
-    hint: game.i18n.localize("TERIOCK.DIALOGS.Boost.FIELDS.deboosts.hint"),
+    label: _loc("TERIOCK.DIALOGS.Boost.FIELDS.deboosts.label"),
+    hint: _loc("TERIOCK.DIALOGS.Boost.FIELDS.deboosts.hint"),
   });
   const critField = new fields.BooleanField({
-    label: game.i18n.localize("TERIOCK.DIALOGS.Boost.FIELDS.crit.label"),
+    label: _loc("TERIOCK.DIALOGS.Boost.FIELDS.crit.label"),
     initial: crit,
-    hint: game.i18n.localize("TERIOCK.DIALOGS.Boost.FIELDS.crit.hint"),
+    hint: _loc("TERIOCK.DIALOGS.Boost.FIELDS.crit.hint"),
   });
   const contentHtml = document.createElement("div");
   contentHtml.append(
@@ -101,10 +101,10 @@ export default async function boostDialog(rollFormula, options = {}) {
     window: {
       icon: makeIconClass(TERIOCK.display.icons.ui.dice, "title"),
       title: impact
-        ? game.i18n.format("TERIOCK.DIALOGS.Boost.typeTitle", {
+        ? _loc("TERIOCK.DIALOGS.Boost.typeTitle", {
             type: impactOptions[impact]?.label,
           })
-        : game.i18n.localize("TERIOCK.DIALOGS.Boost.title"),
+        : _loc("TERIOCK.DIALOGS.Boost.title"),
     },
   });
 }

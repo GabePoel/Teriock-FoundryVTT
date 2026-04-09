@@ -32,11 +32,7 @@ export default (Base) => {
       get _nameTags() {
         const tags = super._nameTags;
         if (this.stashed) {
-          tags.push(
-            game.i18n.localize(
-              "TERIOCK.SYSTEMS.Equipment.FIELDS.stashed.label",
-            ),
-          );
+          tags.push(_loc("TERIOCK.SYSTEMS.Equipment.FIELDS.stashed.label"));
         }
         return tags;
       }
@@ -53,12 +49,8 @@ export default (Base) => {
               : TERIOCK.display.icons.equipment.undampen,
             action: "toggleDampenedDoc",
             tooltip: this.dampened
-              ? game.i18n.localize(
-                  "TERIOCK.SYSTEMS.Equipment.FIELDS.dampened.label",
-                )
-              : game.i18n.localize(
-                  "TERIOCK.SYSTEMS.Equipment.EMBED.undampened",
-                ),
+              ? _loc("TERIOCK.SYSTEMS.Equipment.FIELDS.dampened.label")
+              : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.undampened"),
             condition: this.parent.isOwner,
             callback: async () => {
               if (this.dampened) await this.undampen();
@@ -71,10 +63,8 @@ export default (Base) => {
               : TERIOCK.display.icons.break.repair,
             action: "toggleShatteredDoc",
             tooltip: this.shattered
-              ? game.i18n.localize("TERIOCK.TERMS.Properties.shattered")
-              : game.i18n.localize(
-                  "TERIOCK.SYSTEMS.Equipment.EMBED.unshatterd",
-                ),
+              ? _loc("TERIOCK.TERMS.Properties.shattered")
+              : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unshatterd"),
             condition: this.parent.isOwner,
             callback: async () => {
               if (this.shattered) await this.repair();
@@ -132,7 +122,7 @@ export default (Base) => {
         return [
           ...super.getCardContextMenuEntries(doc),
           {
-            name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.shatter"),
+            name: _loc("TERIOCK.SYSTEMS.Equipment.MENU.shatter"),
             icon: makeIcon(TERIOCK.display.icons.break.shatter, "contextMenu"),
             callback: this.shatter.bind(this),
             condition:
@@ -141,7 +131,7 @@ export default (Base) => {
             group: "control",
           },
           {
-            name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.repair"),
+            name: _loc("TERIOCK.SYSTEMS.Equipment.MENU.repair"),
             icon: makeIcon(TERIOCK.display.icons.break.repair, "contextMenu"),
             callback: this.repair.bind(this),
             condition:
@@ -150,7 +140,7 @@ export default (Base) => {
             group: "control",
           },
           {
-            name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.destroy"),
+            name: _loc("TERIOCK.SYSTEMS.Equipment.MENU.destroy"),
             icon: makeIcon(TERIOCK.display.icons.break.destroy, "contextMenu"),
             callback: this.destroy.bind(this),
             condition:
@@ -159,7 +149,7 @@ export default (Base) => {
             group: "control",
           },
           {
-            name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.reforge"),
+            name: _loc("TERIOCK.SYSTEMS.Equipment.MENU.reforge"),
             icon: makeIcon(TERIOCK.display.icons.break.reforge, "contextMenu"),
             callback: this.reforge.bind(this),
             condition:
@@ -168,7 +158,7 @@ export default (Base) => {
             group: "control",
           },
           {
-            name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.dampen"),
+            name: _loc("TERIOCK.SYSTEMS.Equipment.MENU.dampen"),
             icon: makeIcon(
               TERIOCK.display.icons.equipment.dampen,
               "contextMenu",
@@ -180,7 +170,7 @@ export default (Base) => {
             group: "control",
           },
           {
-            name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.undampen"),
+            name: _loc("TERIOCK.SYSTEMS.Equipment.MENU.undampen"),
             icon: makeIcon(
               TERIOCK.display.icons.equipment.undampen,
               "contextMenu",
@@ -192,7 +182,7 @@ export default (Base) => {
             group: "control",
           },
           {
-            name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.stash"),
+            name: _loc("TERIOCK.SYSTEMS.Equipment.MENU.stash"),
             icon: makeIcon(
               TERIOCK.display.icons.equipment.stash,
               "contextMenu",
@@ -205,7 +195,7 @@ export default (Base) => {
             group: "control",
           },
           {
-            name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.unstash"),
+            name: _loc("TERIOCK.SYSTEMS.Equipment.MENU.unstash"),
             icon: makeIcon(
               TERIOCK.display.icons.equipment.unstash,
               "contextMenu",

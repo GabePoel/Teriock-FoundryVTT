@@ -46,8 +46,8 @@ export default (Base) => {
             : TERIOCK.display.icons.ability.notOnUse,
           action: "toggleOnUseDoc",
           tooltip: this.parent.isOnUse
-            ? game.i18n.localize("TERIOCK.SYSTEMS.Ability.USAGE.onlyOnUse")
-            : game.i18n.localize("TERIOCK.SYSTEMS.Ability.USAGE.alwaysActive"),
+            ? _loc("TERIOCK.SYSTEMS.Ability.USAGE.onlyOnUse")
+            : _loc("TERIOCK.SYSTEMS.Ability.USAGE.alwaysActive"),
           condition: this.parent.isOwner,
           callback: async () => {
             const onUseSet = this.parent.parent?.system.onUse;
@@ -97,7 +97,7 @@ export default (Base) => {
             doc.sheet.isEditable,
           group: "control",
           icon: makeIcon(TERIOCK.display.icons.ability.scroll, "contextMenu"),
-          name: game.i18n.localize("TERIOCK.SYSTEMS.Ability.EMBED.makeScroll"),
+          name: _loc("TERIOCK.SYSTEMS.Ability.EMBED.makeScroll"),
         });
         return entries;
       }
@@ -114,19 +114,15 @@ export default (Base) => {
         super.prepareDerivedData();
         this.consumeSourceText =
           this.consumeSource && this.parent.parent?.type !== "wrapper"
-            ? game.i18n.format(
-                "TERIOCK.SYSTEMS.Ability.FIELDS.consumeSourceText.derived",
-                { uuid: this.parent.parent?.uuid },
-              )
+            ? _loc("TERIOCK.SYSTEMS.Ability.FIELDS.consumeSourceText.derived", {
+                uuid: this.parent.parent?.uuid,
+              })
             : "";
         this.grantOnlyText =
           this.grantOnly && this.parent.parent?.type !== "wrapper"
-            ? game.i18n.format(
-                "TERIOCK.SYSTEMS.Ability.FIELDS.grantOnlyText.derived",
-                {
-                  uuid: this.parent.parent?.uuid,
-                },
-              )
+            ? _loc("TERIOCK.SYSTEMS.Ability.FIELDS.grantOnlyText.derived", {
+                uuid: this.parent.parent?.uuid,
+              })
             : "";
       }
 
@@ -154,10 +150,9 @@ export default (Base) => {
           }
         }
         let out = foundry.utils.mergeObject(reference, {
-          name: game.i18n.format(
-            "TERIOCK.SYSTEMS.Ability.DIALOG.MakeScroll.scrollName",
-            { name: this.parent.fullName },
-          ),
+          name: _loc("TERIOCK.SYSTEMS.Ability.DIALOG.MakeScroll.scrollName", {
+            name: this.parent.fullName,
+          }),
           system: {
             consumable: true,
             onUse: [this.parent.id],
