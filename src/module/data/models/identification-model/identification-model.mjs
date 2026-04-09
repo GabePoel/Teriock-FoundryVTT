@@ -226,7 +226,12 @@ export default class IdentificationModel extends EmbeddedDataModel {
       await this.parent.parent.update({
         name: game.i18n.format(
           "TERIOCK.MODELS.Identification.QUERY.Unidentify.name",
-          { type: this.parent.equipmentType },
+          {
+            type: inferNameFromIdentifier(
+              this.parent.equipmentType,
+              "equipment",
+            ),
+          },
         ),
         "system.flaws": "",
         "system.identification.flaws": this.parent.flaws,
