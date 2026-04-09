@@ -9,7 +9,7 @@ export default function ExternalDocumentsAutomationMixin(Base) {
     /**
      * @extends {BaseAutomation}
      * @mixes DocumentsAutomation
-     * @property {UUID<TeriockDocument>[]} documents
+     * @property {Set<UUID<TeriockDocument>>} documents
      */
     class ExternalDocumentsAutomation extends mix(
       Base,

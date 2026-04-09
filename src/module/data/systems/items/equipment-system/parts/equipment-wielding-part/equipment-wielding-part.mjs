@@ -87,7 +87,7 @@ export default (Base) => {
             condition: this.parent.isOwner,
             callback: async () => {
               if (this.equipped) await this.unequip();
-              await this.equip();
+              else await this.equip();
             },
           },
         ];

@@ -212,9 +212,8 @@ export default function AttunableSystemMixin(Base) {
         await this.parent.hookCall(`deattune`, {
           scope: { attunable: this.parent },
         });
-        const attunement = this.attunement;
-        if (attunement) {
-          await attunement.delete();
+        if (this.attunement) {
+          await this.attunement.delete();
           ui.notifications.success(
             "TERIOCK.SYSTEMS.Attunable.USAGE.Deattune.success",
             { format: { name: this.parent.fullName }, localize: true },
@@ -236,7 +235,7 @@ export default function AttunableSystemMixin(Base) {
             condition:
               !this.isAttuned &&
               this.actor &&
-              this.parent._checkValidEditorDocument({ self: false }),
+              this.parent._checkValidEditorDocument(doc, { self: false }),
             group: "control",
           },
           {
@@ -249,7 +248,7 @@ export default function AttunableSystemMixin(Base) {
             condition:
               this.isAttuned &&
               this.actor &&
-              this.parent._checkValidEditorDocument({ self: false }),
+              this.parent._checkValidEditorDocument(doc, { self: false }),
             group: "control",
           },
         ];

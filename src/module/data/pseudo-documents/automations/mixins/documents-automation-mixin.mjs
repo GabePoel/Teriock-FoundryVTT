@@ -33,6 +33,26 @@ export default function DocumentsAutomationMixin(Base) {
       }
 
       /** @inheritDoc */
+      get formMessages() {
+        const messages = super.formMessages;
+        if (!this.hasDocuments) {
+          messages.unshift({
+            text: "TERIOCK.AUTOMATIONS.Documents.NOTIFICATIONS.noDocuments",
+            level: "warning",
+          });
+        }
+        return messages;
+      }
+
+      /**
+       * Whether this has valid documents set.
+       * @returns {boolean}
+       */
+      get hasDocuments() {
+        return true;
+      }
+
+      /** @inheritDoc */
       get wantsDialog() {
         return super.wantsDialog || !this.overrideCompetence;
       }

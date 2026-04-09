@@ -26,6 +26,20 @@ export default (Base) => {
       }
 
       /** @inheritDoc */
+      get makeSuppressed() {
+        let conditionSuppressed = false;
+        if (this.maneuver === "passive" && this.actor) {
+          for (const condition of this.duration.conditions.present) {
+            if (!this.actor.statuses.has(condition)) conditionSuppressed = true;
+          }
+          for (const condition of this.duration.conditions.absent) {
+            if (this.actor.statuses.has(condition)) conditionSuppressed = true;
+          }
+        }
+        return conditionSuppressed || super.makeSuppressed;
+      }
+
+      /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
 

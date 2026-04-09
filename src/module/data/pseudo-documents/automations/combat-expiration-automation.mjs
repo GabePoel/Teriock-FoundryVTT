@@ -42,4 +42,16 @@ export default class CombatExpirationAutomation extends CritAutomation {
     paths.push(...super._formPaths);
     return paths;
   }
+
+  /** @inheritDoc */
+  get formMessages() {
+    const messages = super.formMessages;
+    if (!this.isPassive) {
+      messages.unshift({
+        level: "error",
+        text: "TERIOCK.AUTOMATIONS.CombatExpiration.NOTIFICATIONS.passive",
+      });
+    }
+    return messages;
+  }
 }
