@@ -1,4 +1,5 @@
-import { ChildSystem } from "../../../systems/abstract/_module.mjs";
+import { BaseItemSystem } from "../../../systems/items/_module.mjs";
+import { BaseEffectSystem } from "../../../systems/effects/_module.mjs";
 
 declare global {
   namespace Teriock.Automations {
@@ -6,7 +7,7 @@ declare global {
       competencies: Set<number>;
       heighten: Set<number>;
 
-      get parent(): ChildSystem;
+      get parent(): BaseItemSystem | BaseEffectSystem;
     };
   }
 }

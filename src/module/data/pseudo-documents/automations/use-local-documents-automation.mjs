@@ -12,6 +12,7 @@ const { fields } = foundry.data;
 /**
  * @extends {BaseAutomation}
  * @mixes UseDocumentsAutomation
+ * @property {Set<Teriock.System.IdentifierString>} identifiers
  */
 export default class UseLocalDocumentsAutomation extends mix(
   BaseAutomation,
@@ -46,6 +47,11 @@ export default class UseLocalDocumentsAutomation extends mix(
   /** @inheritDoc */
   get _formPaths() {
     return ["identifiers", ...super._formPaths];
+  }
+
+  /** @inheritDoc */
+  get hasDocuments() {
+    return this.identifiers.size > 0;
   }
 
   /**

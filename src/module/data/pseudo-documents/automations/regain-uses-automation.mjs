@@ -41,6 +41,11 @@ export default class RegainUsesAutomation extends TriggerAutomationMixin(
   }
 
   /** @inheritDoc */
+  get _canRunPassively() {
+    return true;
+  }
+
+  /** @inheritDoc */
   get _documentActive() {
     return true;
   }
@@ -48,6 +53,18 @@ export default class RegainUsesAutomation extends TriggerAutomationMixin(
   /** @inheritDoc */
   get _formPaths() {
     return ["formula", ...super._formPaths];
+  }
+
+  /** @inheritDoc */
+  get formMessages() {
+    const messages = super.formMessages;
+    if (!this.parent.consumable) {
+      messages.unshift({
+        level: "error",
+        text: "TERIOCK.AUTOMATIONS.RegainUses.NOTIFICATIONS.notConsumable",
+      });
+    }
+    return messages;
   }
 
   /**

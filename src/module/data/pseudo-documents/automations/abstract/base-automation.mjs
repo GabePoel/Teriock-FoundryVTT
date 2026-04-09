@@ -86,6 +86,14 @@ export default class BaseAutomation extends PropagationDataMixin(
   }
 
   /**
+   * Notification-style messages that appear in the editor form.
+   * @returns {Teriock.UI.FormMessage[]}
+   */
+  get formMessages() {
+    return [];
+  }
+
+  /**
    * Whether this is passive or not.
    * @returns {boolean}
    */

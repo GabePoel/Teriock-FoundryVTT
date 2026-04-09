@@ -2,6 +2,13 @@ import { iconStyles } from "../constants/display/icon-styles.mjs";
 
 declare global {
   namespace Teriock.UI {
+    /** Notification-style messages that appear in application */
+    export type FormMessage = {
+      icon?: string;
+      text?: string;
+      level?: "success" | "info" | "warning" | "error";
+    };
+
     /** Three-way toggle */
     export type ThreeToggle = -1 | 0 | 1;
 

@@ -169,6 +169,15 @@
     </div>
   </header>
   <div class="teriock-automation-content teriock-form-container">
+    {{#if (exists messages)}}
+      <ul class="notification-container">
+        {{#each messages as |message|}}
+          <li class="notification {{#if message.level}}{{message.level}}{{else}}info{{/if}}">
+            <span>{{localize message.text}}</span>
+          </li>
+        {{/each}}
+      </ul>
+    {{/if}}
     {{{formEditor}}}
   </div>
 </div>
