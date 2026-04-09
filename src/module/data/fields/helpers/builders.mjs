@@ -136,11 +136,6 @@ export function qualifiedChangeField() {
       initial: "",
       label: "TERIOCK.SCHEMA.QualifiedChange.key.label",
     }),
-    mode: new EnhancedNumberField({
-      choices: TERIOCK.options.effect.changeMode,
-      initial: 4,
-      label: "TERIOCK.SCHEMA.QualifiedChange.mode.label",
-    }),
     priority: new EnhancedNumberField({
       initial: 20,
       label: "TERIOCK.SCHEMA.QualifiedChange.priority.label",
@@ -161,6 +156,13 @@ export function qualifiedChangeField() {
       initial: "normal",
       label: "TERIOCK.SCHEMA.QualifiedChange.time.label",
       nullable: false,
+    }),
+    type: new EnhancedStringField({
+      choices: objectMap(ActiveEffect.CHANGE_TYPES, (t) => t.label, {
+        localize: true,
+      }),
+      initial: "add",
+      label: "TERIOCK.SCHEMA.QualifiedChange.type.label",
     }),
     value: new EnhancedStringField({
       initial: "",

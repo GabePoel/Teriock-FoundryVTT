@@ -70,11 +70,11 @@ export default class ProtectionAutomation extends CritAutomation {
       return null;
     return {
       key: `system.protections.${this.relation}.${this.category}`,
-      mode: 2,
       priority: 5,
       qualifier: "1",
       target: "Actor",
       time: "normal",
+      type: "add",
       value: this.value,
     };
   }

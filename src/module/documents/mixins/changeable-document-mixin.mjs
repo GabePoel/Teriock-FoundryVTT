@@ -50,12 +50,12 @@ export default function ChangeableDocumentMixin(Base) {
           let changes = [...effect.system.qualifiedChanges];
           for (const change of changes) {
             const conditionalChange = {
-              key: change.key,
-              mode: change.mode,
-              priority: change.priority,
-              value: change.value,
-              qualifier: change.qualifier || "1",
               effect: effect,
+              key: change.key,
+              priority: change.priority,
+              qualifier: change.qualifier || "1",
+              type: change.type,
+              value: change.value,
             };
             const time = change.time || "normal";
             const target = change.target || "Actor";
