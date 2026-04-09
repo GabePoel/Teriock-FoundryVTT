@@ -18,6 +18,7 @@ export function cleanDocument(doc) {
   if (doc.system) {
     cleanCommon(doc);
     cleanActiveEffect(doc);
+    if (doc.type === "character" || doc.type === "creature") cleanActor(doc);
     if (doc.system.automations) cleanAutomations(doc.system.automations);
     if (doc.type === "ability") cleanAbility(doc);
     if (doc.type === "body") cleanBody(doc);
@@ -76,6 +77,36 @@ function cleanActiveEffect(doc) {
   if (doc.transfer) delete doc.transfer;
   if (doc.showIcon) delete doc.showIcon;
   if (doc.system.revealed) delete doc.system.revealed;
+}
+
+/**
+ * @param {TeriockActor} doc
+ */
+function cleanActor(doc) {
+  if (doc.prototypeToken) {
+    delete doc.prototypeToken.depth;
+    delete doc.prototypeToken.light;
+    delete doc.prototypeToken.lockRotation;
+    delete doc.prototypeToken.occludable;
+    delete doc.prototypeToken.prependAdjective;
+    delete doc.prototypeToken.randomImg;
+    delete doc.prototypeToken.sight;
+    delete doc.prototypeToken.rotation;
+    if (doc.prototypeToken.ring) {
+      delete doc.prototypeToken.ring.colors;
+      delete doc.prototypeToken.ring.effects;
+      delete doc.prototypeToken.ring.subject;
+    }
+    if (doc.prototypeToken.texture) {
+      delete doc.prototypeToken.texture.alphaThreshold;
+      delete doc.prototypeToken.texture.anchorX;
+      delete doc.prototypeToken.texture.anchorY;
+      delete doc.prototypeToken.texture.fit;
+      delete doc.prototypeToken.texture.scaleX;
+      delete doc.prototypeToken.texture.scaleY;
+      delete doc.prototypeToken.texture.tint;
+    }
+  }
 }
 
 /**
