@@ -201,7 +201,11 @@ export default function CommonSystemMixin(Base) {
           if (typeMap[type]) {
             let docs = typeMap[type];
             if (TERIOCK.options.document[type].doc === "ActiveEffect") {
-              docs = docs.filter((e) => e.system.revealed);
+              docs = docs.filter(
+                (e) =>
+                  !foundry.utils.hasProperty(e, "system.revealed") ||
+                  e.system.revealed,
+              );
             }
             docs = TERIOCK.options.document[type].sorter(docs);
             docs = docs.filter((d) => !d.isEphemeral);
