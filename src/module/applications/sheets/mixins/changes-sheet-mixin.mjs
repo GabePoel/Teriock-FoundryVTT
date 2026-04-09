@@ -34,8 +34,11 @@ export default function ChangesSheetMixin(Base) {
         const newChange = {
           key: "",
           mode: 0,
-          value: "",
           priority: 0,
+          qualifier: "1",
+          target: "Actor",
+          time: "normal",
+          value: "",
         };
         changes.push(newChange);
         const updateData = { [path]: changes };
