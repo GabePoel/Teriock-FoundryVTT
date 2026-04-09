@@ -137,6 +137,12 @@ foundry.helpers.Hooks.once("init", function () {
 
   assign({
     ActiveEffect: {
+      changeTypes: {
+        boost: setup.changeConfigs.boostConfig,
+        typeAdd: setup.changeConfigs.addTypesConfig,
+        typeRemove: setup.changeConfigs.removeTypesConfig,
+        typeSet: setup.changeConfigs.setTypesConfig,
+      },
       compendiumIndexFields: ["system._sup"],
       dataModels: {
         ability: data.systems.effects.AbilitySystem,

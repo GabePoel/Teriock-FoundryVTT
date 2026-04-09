@@ -181,11 +181,12 @@ function addTermTypes(term, types) {
 
 /**
  * @param {Teriock.System.FormulaString} formula
- * @param {Iterable<Teriock.System.IdentifierString>} types
+ * @param {Iterable<Teriock.System.IdentifierString> | Teriock.System.IdentifierString} types
  * @param {(term: RollTerm, types: Set<string>) => void} fn
  * @returns {Teriock.System.FormulaString}
  */
 function processFormula(formula, types, fn) {
+  if (["string", "number"].includes(typeof types)) types = [types.toString()];
   if (!formulaExists(formula)) return formula;
   types = new Set(Array.from(types).filter((t) => isKebabCase(t)));
   const roll = new BaseRoll(formula);
@@ -196,7 +197,7 @@ function processFormula(formula, types, fn) {
 /**
  * Add types to a formula that supports them. All types must be identifiers.
  * @param {Teriock.System.FormulaString} formula
- * @param {Iterable<Teriock.System.IdentifierString>} types
+ * @param {Iterable<Teriock.System.IdentifierString> | Teriock.System.IdentifierString} types
  * @returns {Teriock.System.FormulaString}
  */
 export function addTypesToFormula(formula, types) {
@@ -206,7 +207,7 @@ export function addTypesToFormula(formula, types) {
 /**
  * Remove types from a formula that supports them. All types must be identifiers.
  * @param {Teriock.System.FormulaString} formula
- * @param {Iterable<Teriock.System.IdentifierString>} types
+ * @param {Iterable<Teriock.System.IdentifierString> | Teriock.System.IdentifierString} types
  * @returns {Teriock.System.FormulaString}
  */
 export function removeTypesFromFormula(formula, types) {
@@ -216,7 +217,7 @@ export function removeTypesFromFormula(formula, types) {
 /**
  * Set types of a formula that supports them. All types must be identifiers.
  * @param {Teriock.System.FormulaString} formula
- * @param {Iterable<Teriock.System.IdentifierString>} types
+ * @param {Iterable<Teriock.System.IdentifierString> | Teriock.System.IdentifierString} types
  * @returns {Teriock.System.FormulaString}
  */
 export function setTypesOfFormula(formula, types) {

@@ -1,10 +1,13 @@
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
 import {
   addFormula,
+  addTypesToFormula,
   boostFormula,
   downgradeDeterministicFormula,
   downgradeIndeterministicFormula,
   multiplyFormula,
+  removeTypesFromFormula,
+  setTypesOfFormula,
   upgradeDeterministicFormula,
   upgradeIndeterministicFormula,
 } from "../../helpers/formula.mjs";
@@ -37,6 +40,19 @@ export default class FormulaField extends EnhancedStringField {
     return addFormula(value, delta);
   }
 
+  /**
+   * Apply a "boost" change to this field.
+   * @param {Teriock.System.FormulaString} value
+   * @param {string|string[]} delta
+   * @param {DataModel} _model
+   * @param {ActiveEffectChangeData} _change
+   * @returns {Teriock.System.FormulaString}
+   */
+  _applyChangeBoost(value, delta, _model, _change) {
+    if (!delta || this.deterministic) return value;
+    return boostFormula(value, delta);
+  }
+
   /** @inheritDoc */
   _applyChangeCustom(value, delta, _model, _change) {
     if (!delta || this.deterministic) return value;
@@ -54,6 +70,45 @@ export default class FormulaField extends EnhancedStringField {
   _applyChangeMultiply(value, delta, _model, _change) {
     if (!value) return delta;
     return multiplyFormula(value, delta);
+  }
+
+  /**
+   * Apply a "typeAdd" change to this field.
+   * @param {Teriock.System.FormulaString} value
+   * @param {string|string[]} delta
+   * @param {DataModel} _model
+   * @param {ActiveEffectChangeData} _change
+   * @returns {Teriock.System.FormulaString}
+   */
+  _applyChangeTypeAdd(value, delta, _model, _change) {
+    if (!delta || this.deterministic) return value;
+    return addTypesToFormula(value, delta);
+  }
+
+  /**
+   * Apply a "typeRemove" change to this field.
+   * @param {Teriock.System.FormulaString} value
+   * @param {string|string[]} delta
+   * @param {DataModel} _model
+   * @param {ActiveEffectChangeData} _change
+   * @returns {Teriock.System.FormulaString}
+   */
+  _applyChangeTypeRemove(value, delta, _model, _change) {
+    if (!delta || this.deterministic) return value;
+    return removeTypesFromFormula(value, delta);
+  }
+
+  /**
+   * Apply a "typeSet" change to this field.
+   * @param {Teriock.System.FormulaString} value
+   * @param {string|string[]} delta
+   * @param {DataModel} _model
+   * @param {ActiveEffectChangeData} _change
+   * @returns {Teriock.System.FormulaString}
+   */
+  _applyChangeTypeSet(value, delta, _model, _change) {
+    if (!delta || this.deterministic) return value;
+    return setTypesOfFormula(value, delta);
   }
 
   /** @inheritDoc */
@@ -77,5 +132,23 @@ export default class FormulaField extends EnhancedStringField {
       }
     }
     super._validateType(value);
+  }
+
+  /** @inheritDoc */
+  applyChange(value, model, change, { replacementData = {} } = {}) {
+    let updated;
+    const delta = change.value;
+    if (change.type === "boost") {
+      updated = this._applyChangeBoost(value, delta, model, change);
+    } else if (change.type === "typeAdd") {
+      updated = this._applyChangeTypeAdd(value, delta, model, change);
+    } else if (change.type === "typeRemove") {
+      updated = this._applyChangeTypeRemove(value, delta, model, change);
+    } else if (change.type === "typeSet") {
+      updated = this._applyChangeTypeSet(value, delta, model, change);
+    } else {
+      return super.applyChange(value, model, change, { replacementData });
+    }
+    return this.initialize(updated, model);
   }
 }
