@@ -33,14 +33,7 @@ export default function ChangeableDocumentMixin(Base) {
                         ),
                       )
                     : {};
-                  return [
-                    documentName,
-                    {
-                      untyped: [],
-                      uuids: {},
-                      typed,
-                    },
-                  ];
+                  return [documentName, { untyped: [], uuids: {}, typed }];
                 }),
               ),
             ]),
@@ -120,12 +113,20 @@ export default function ChangeableDocumentMixin(Base) {
        * @returns {boolean}
        */
       get _canChange() {
-        return (
-          !!this.collection &&
-          (!this.parent ||
-            !["Actor", "Item"].includes(this.parent.documentName) ||
-            this.parent._embeddedPreparation)
-        );
+        return !!this.collection && this._allChanges;
+      }
+
+      /** @type {object} */
+      _changeReplacementData;
+
+      get changeReplacementData() {
+        if (this.parent?.changeReplacementData) {
+          return this.parent.changeReplacementData;
+        } else if (this._changeReplacementData) {
+          return this._changeReplacementData;
+        } else {
+          return this._buildChangeReplacementData();
+        }
       }
 
       /** @type {Teriock.Changes.ChangeTree} */
@@ -136,14 +137,9 @@ export default function ChangeableDocumentMixin(Base) {
        * @returns {Teriock.Changes.ChangeTree}
        */
       get changeTree() {
-        if (this.parent?.changeTree) {
-          return this.parent.changeTree;
-        } else if (this._changeTree) {
-          return this._changeTree;
-        } else {
-          this._buildChangeTree();
-          return this._changeTree;
-        }
+        if (this.parent?.changeTree) return this.parent.changeTree;
+        else if (this._changeTree) return this._changeTree;
+        else return this._buildChangeTree();
       }
 
       /**
@@ -164,10 +160,7 @@ export default function ChangeableDocumentMixin(Base) {
             }
             shouldApply = !!BaseRoll.minValue(change.qualifier, rollData);
           }
-          if (shouldApply) {
-            const changeOverrides = change.effect.apply(this, change);
-            Object.assign(this.overrides, changeOverrides);
-          }
+          if (shouldApply) this._applyIndividualChange(change);
         }
       }
 
@@ -177,12 +170,6 @@ export default function ChangeableDocumentMixin(Base) {
        */
       _applyChangesByTime(time) {
         if (!this._canChange) return;
-        if (
-          (time !== "normal" || this.documentName === "ActiveEffect") &&
-          !this._allChanges
-        ) {
-          return;
-        }
         const partialTree = this.changeTree[time][this.documentName];
         const changesToApply = partialTree.uuids[this.uuid] || [];
         if (!this._allChanges) {
@@ -197,7 +184,30 @@ export default function ChangeableDocumentMixin(Base) {
       }
 
       /**
+       * Apply one change.
+       * @param {Teriock.Changes.QualifiedChangeData} change
+       */
+      _applyIndividualChange(change) {
+        const changeOverrides = ActiveEffect.applyChange(this, change, {
+          replacementData: this.changeReplacementData,
+        });
+        Object.assign(this.overrides, changeOverrides);
+      }
+
+      /**
+       * Build change replacement data even if it already exists.
+       * @returns {object}
+       */
+      _buildChangeReplacementData() {
+        if (!this.parent?.changeReplacementData) {
+          this._changeReplacementData = this.getRollData();
+        }
+        return this._changeReplacementData;
+      }
+
+      /**
        * Build a change tree even if one already exists.
+       * @returns {Teriock.Changes.ChangeTree}
        */
       _buildChangeTree() {
         if (!this.parent?.changeTree) {
@@ -206,6 +216,7 @@ export default function ChangeableDocumentMixin(Base) {
             { allChanges: this._allChanges },
           );
         }
+        return this._changeTree;
       }
 
       /**
@@ -237,27 +248,51 @@ export default function ChangeableDocumentMixin(Base) {
         super.prepareBaseData();
         if (this._allChanges) {
           this._applyChangesByTime("base");
-          this._applyChangesByTime("proficiency");
-          this._buildChangeTree();
-          this._applyChangesByTime("fluency");
+          if (this.isTop) {
+            this._buildChangeTree();
+            this._buildChangeReplacementData();
+          }
         }
-        this._buildChangeTree();
-      }
-
-      /** @inheritDoc */
-      prepareDerivedData() {
-        super.prepareDerivedData();
-        this._applyChangesByTime("derivation");
-        this._applyChangesByTime("final");
-        this.overrides = foundry.utils.expandObject(this.overrides);
       }
 
       /** @inheritDoc */
       prepareEmbeddedDocuments() {
-        this._embeddedPreparation = true;
         super.prepareEmbeddedDocuments();
         this._applyChangesByTime("normal");
-        delete this._embeddedPreparation;
+      }
+
+      /** @inheritDoc */
+      prepareFluencyData() {
+        super.prepareFluencyData();
+        if (this._allChanges) {
+          this._applyChangesByTime("fluency");
+          if (this.isTop) {
+            this._buildChangeTree();
+            this._buildChangeReplacementData();
+          }
+        }
+      }
+
+      /** @inheritDoc */
+      prepareProficiencyData() {
+        super.prepareProficiencyData();
+        if (this._allChanges) {
+          this._applyChangesByTime("proficiency");
+          if (this.isTop) {
+            this._buildChangeTree();
+            this._buildChangeReplacementData();
+          }
+        }
+      }
+
+      /** @inheritDoc */
+      prepareSpecialData() {
+        super.prepareSpecialData();
+        if (this._allChanges) {
+          this._applyChangesByTime("derivation");
+          this._applyChangesByTime("final");
+        }
+        this.overrides = foundry.utils.expandObject(this.overrides);
       }
     }
   );

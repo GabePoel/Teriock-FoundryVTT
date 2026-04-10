@@ -12,6 +12,7 @@ export default function BaseDocumentMixin(Base) {
     /**
      * @extends {ClientDocument}
      * @property {Readonly<boolean>} isOwner
+     * @property {Readonly<boolean>} isEmbedded
      * @mixin
      */
     class BaseDocument extends Base {
@@ -72,6 +73,14 @@ export default function BaseDocumentMixin(Base) {
       get isSecret() {
         if (this.system) return this.system.isSecret;
         return false;
+      }
+
+      /**
+       * If this is the top of an embedded document hierarchy.
+       * @returns {boolean}
+       */
+      get isTop() {
+        return !this.isEmbedded;
       }
 
       /**

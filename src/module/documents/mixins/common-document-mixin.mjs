@@ -19,8 +19,8 @@ export default function CommonDocumentMixin(Base) {
   //noinspection JSUnusedGlobalSymbols
   return (
     /**
-     * @extends BaseDocument
      * @mixes PropagationData
+     * @mixes BaseDocument
      * @mixes ChangeableDocument
      * @mixes EmbedCardDocument
      * @mixes PanelDocument
@@ -243,6 +243,15 @@ export default function CommonDocumentMixin(Base) {
         if (!skipCall) {
           return Hooks.call(`teriock.${trigger}`, this, this.getScope(scope));
         }
+      }
+
+      /** @inheritDoc */
+      prepareData() {
+        super.prepareData();
+        if (this.isTop) this.prepareProficiencyData();
+        if (this.isTop) this.prepareFluencyData();
+        if (this.isTop) this.prepareSpecialData();
+        if (this.isTop) this.prepareVirtualEffects();
       }
 
       /** @inheritDoc */

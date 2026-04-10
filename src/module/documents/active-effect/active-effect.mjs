@@ -1,5 +1,4 @@
 import { documentTypes } from "../../constants/system/document-types.mjs";
-import { secondsToReadable } from "../../helpers/unit.mjs";
 import { mix } from "../../helpers/utils.mjs";
 import TeriockItem from "../item/item.mjs";
 import * as mixins from "../mixins/_module.mjs";
@@ -37,14 +36,6 @@ export default class TeriockActiveEffect extends mix(
   }
 
   /**
-   * Alternative to {@link TeriockActiveEffect.isTemporary} that only references duration.
-   * @returns {boolean}
-   */
-  get hasDuration() {
-    return !!this.duration.seconds;
-  }
-
-  /**
    * Checks if this effect is supposed to activate on the use of its parent {@link TeriockItem}.
    * @returns {boolean}
    */
@@ -67,30 +58,13 @@ export default class TeriockActiveEffect extends mix(
   }
 
   /**
-   * The number of seconds remaining before this effect expires.
-   * @returns {number|null}
-   */
-  get remaining() {
-    if (this.hasDuration) {
-      return (
-        this.duration.startTime + this.duration.seconds - game.time.worldTime
-      );
-    }
-    return null;
-  }
-
-  /**
    * The time remaining before this effect expires, as a string.
    * @returns {string|null}
    */
   get remainingString() {
-    const remaining = this.remaining;
-    if (remaining !== null) {
-      return _loc("TERIOCK.SYSTEMS.BaseEffect.PANELS.timeRemaining", {
-        time: secondsToReadable(remaining),
-      });
-    }
-    return _loc("TERIOCK.SYSTEMS.BaseEffect.PANELS.noTimeLimit");
+    return this.duration.remaining < Infinity
+      ? this.duration.label
+      : _loc("TERIOCK.SYSTEMS.BaseEffect.PANELS.noTimeLimit");
   }
 
   /** @inheritDoc */

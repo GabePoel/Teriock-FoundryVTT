@@ -66,11 +66,19 @@ export default class TeriockActor extends mix(
     );
   }
 
+  /** @type {Teriock.Changes.QualifiedChangeData[]} */
+  _qualifiedTokenChanges;
+
   /** @type Set<UUID<TeriockItem>> */
   _stagedItemCreations;
 
   /** @type Set<ID<TeriockItem>> */
   _stagedItemDeletions;
+
+  /** @inheritDoc */
+  get _canChange() {
+    return true;
+  }
 
   /**
    * Is this actor active?
@@ -147,6 +155,11 @@ export default class TeriockActor extends mix(
     return this.system.mp.value < this.system.mp.max;
   }
 
+  /** @inheritDoc */
+  get isTop() {
+    return true;
+  }
+
   /**
    * @inheritDoc
    * @returns {AnyActiveEffect[]}
@@ -190,6 +203,28 @@ export default class TeriockActor extends mix(
   _addVirtualStatuses(conditions, reason, options = {}) {
     for (const condition of conditions) {
       this._addVirtualStatus(condition, reason, options);
+    }
+  }
+
+  /** @inheritDoc */
+  _applyChangesByTime(time) {
+    if (!this._canChange) return;
+    this._qualifiedTokenChanges = [];
+    super._applyChangesByTime(time);
+    if (this.tokenActiveEffectChanges[time]) {
+      this.tokenActiveEffectChanges[time].push(...this._qualifiedTokenChanges);
+    } else {
+      this.tokenActiveEffectChanges[time] = this._qualifiedTokenChanges;
+    }
+  }
+
+  /** @inheritDoc */
+  _applyIndividualChange(change) {
+    if (change?.key?.startsWith("token.")) {
+      change.key = change.key.slice(6);
+      this._qualifiedTokenChanges.push(change);
+    } else {
+      super._applyIndividualChange(change);
     }
   }
 

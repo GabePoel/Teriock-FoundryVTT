@@ -123,15 +123,6 @@ export default function ChildDocumentMixin(Base) {
       }
 
       /** @inheritDoc */
-      prepareData() {
-        super.prepareData();
-        if (!this.isEmbedded) {
-          this.prepareSpecialData();
-          this.prepareVirtualEffects();
-        }
-      }
-
-      /** @inheritDoc */
       async use(options = {}) {
         await this.system.use(options);
       }

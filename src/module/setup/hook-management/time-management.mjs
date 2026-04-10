@@ -19,11 +19,6 @@ export default function registerTimeManagementHooks() {
               "system.money.debt": newDebt.toNearest(0.01),
             });
           }
-
-          // Expire overdue consequences
-          for (const c of actor.consequences.filter((c) => c.hasDuration)) {
-            c.system.checkExpiration();
-          }
         }
         massUpdate("Actor", updateData);
       }

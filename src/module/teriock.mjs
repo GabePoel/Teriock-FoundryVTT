@@ -132,6 +132,7 @@ foundry.helpers.Hooks.once("init", function () {
 
   assign({
     ActiveEffect: {
+      changePhases: constants.options.change.time,
       changeTypes: {
         boost: setup.changeConfigs.boostConfig,
         typeAdd: setup.changeConfigs.addTypesConfig,

@@ -376,4 +376,15 @@ export default class TeriockTokenDocument extends mix(
     if (this.getSetting("autoLighting")) this.deriveLighting();
     if (this.getSetting("autoDetectionModes")) this.deriveDetectionModes();
   }
+
+  /** @inheritDoc */
+  prepareEmbeddedDocuments() {
+    if (this.isLazyDelta) return;
+    super.prepareEmbeddedDocuments();
+    this.applyActiveEffects("base");
+    this.applyActiveEffects("normal");
+    this.applyActiveEffects("proficiency");
+    this.applyActiveEffects("fluency");
+    this.applyActiveEffects("derivation");
+  }
 }

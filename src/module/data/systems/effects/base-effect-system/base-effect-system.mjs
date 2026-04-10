@@ -26,7 +26,6 @@ export default class BaseEffectSystem extends ChildSystemMixin(
 
   /** @inheritDoc */
   static PRESERVED_PROPERTIES = [
-    "changes",
     "disabled",
     "duration",
     "tint",
