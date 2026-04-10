@@ -435,8 +435,8 @@ export async function fromHarmIdentifier(identifier) {
   const parsed = parseIdentifier(identifier);
   if (!parsed?.type) return null;
   let setting;
-  if (parsed.type === "damage") setting = "damageTypeSources";
-  if (parsed.type === "drain") setting = "drainTypeSources";
+  if (parsed.type === "damage") setting = "documentDamageSources";
+  if (parsed.type === "drain") setting = "documentDrainSources";
   if (!setting) return null;
   const sourcesUuids = game.teriock.getSetting(setting);
   const sources = await Promise.all(
