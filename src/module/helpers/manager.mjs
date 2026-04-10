@@ -1,4 +1,5 @@
 import { BaseRoll } from "../dice/rolls/_module.mjs";
+import { TypeCollection } from "../documents/collections/_module.mjs";
 import TeriockMacro from "../documents/macro/macro.mjs";
 import { DependentsRegistry } from "./_module.mjs";
 
@@ -29,6 +30,18 @@ export default class TeriockManager {
    * @type {TeriockPacks}
    */
   packs = new TeriockPacks();
+
+  /**
+   * A collection of wrapped effects that resembles a world collection.
+   * @returns {TypeCollection<ID<TeriockActiveEffect>, TeriockActiveEffect>}
+   */
+  get effects() {
+    return new TypeCollection(
+      game.items.contents
+        .filter((i) => i.type === "wrapper" && i.system.effect)
+        .map((i) => [i.id, i.system.effect]),
+    );
+  }
 
   /**
    * Get the value of some Teriock setting.

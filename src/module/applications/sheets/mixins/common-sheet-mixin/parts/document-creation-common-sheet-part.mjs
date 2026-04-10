@@ -1,5 +1,5 @@
-import { copyRank, getRank } from "../../../../../helpers/fetch.mjs";
 import { getImage } from "../../../../../helpers/path.mjs";
+import { toKebabCase } from "../../../../../helpers/string.mjs";
 import { newDocumentDialog } from "../../../../dialogs/_module.mjs";
 import {
   selectAbilityDialog,
@@ -179,17 +179,16 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       static async _onCreateRank() {
-        const rankClass = await selectClassDialog();
+        let rankClass = await selectClassDialog();
         const innate = this.document.documentName !== "Actor";
-        if (!rankClass) {
-          return;
-        }
+        if (!rankClass) return;
+        const classIdentifier = toKebabCase(rankClass);
         const possibleRanks = await Promise.all([
-          getRank(rankClass, 1),
-          getRank(rankClass, 2),
-          getRank(rankClass, 3),
-          getRank(rankClass, 4),
-          getRank(rankClass, 5),
+          teriock.fromIdentifier(`rank:rank-1-${classIdentifier}`),
+          teriock.fromIdentifier(`rank:rank-2-${classIdentifier}`),
+          teriock.fromIdentifier(`rank:rank-3-${classIdentifier}`),
+          teriock.fromIdentifier(`rank:rank-4-${classIdentifier}`),
+          teriock.fromIdentifier(`rank:rank-5-${classIdentifier}`),
         ]);
         const referenceRank =
           /**@type {TeriockRank} */ await selectDocumentDialog(possibleRanks, {
@@ -197,7 +196,7 @@ export default (Base) => {
             openable: true,
           });
         const rankNumber = referenceRank.system.classRank;
-        let rank = await copyRank(rankClass, rankNumber);
+        let rank = referenceRank.clone();
         if (rankNumber <= 2) {
           const toCreate = rank.toObject();
           toCreate.system = foundry.utils.mergeObject(toCreate.system || {}, {

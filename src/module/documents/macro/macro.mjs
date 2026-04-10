@@ -1,5 +1,5 @@
 import { dedent } from "../../helpers/string.mjs";
-import { mix } from "../../helpers/utils.mjs";
+import { findBestDocument, mix } from "../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
 
 const { Macro } = foundry.documents;
@@ -34,15 +34,6 @@ export default class TeriockMacro extends mix(
   }
 
   /**
-   * Determined the lookup key for some document.
-   * @param {TeriockDocument} doc
-   * @return {string}
-   */
-  static documentLookupKey(doc) {
-    return foundry.utils.getProperty(doc, "system.identifier") || doc.name;
-  }
-
-  /**
    * Get the hotbar folder for the current user.
    * @returns {Promise<TeriockFolder>|null}
    */
@@ -74,9 +65,7 @@ export default class TeriockMacro extends mix(
       (m) =>
         m.getFlag("teriock", "user") === game.user.id &&
         m.getFlag("teriock", "macroType") === "useGeneral" &&
-        m.getFlag("teriock", "macroDocumentType") === doc.type &&
-        m.getFlag("teriock", "macroDocumentName") ===
-          this.documentLookupKey(doc),
+        m.getFlag("teriock", "macroLookupKey") === doc.lookupKey,
     );
     if (macro) return macro;
     return this.makeGeneralUseMacro(doc);
@@ -103,9 +92,9 @@ export default class TeriockMacro extends mix(
    * @returns {Promise<TeriockMacro>}
    */
   static async makeGeneralUseMacro(doc) {
-    const lookup = this.documentLookupKey(doc);
+    const lookup = doc.lookupKey;
     const command = dedent(`
-    await game.teriock.Macro.useDocumentGeneral("${lookup}", { actor, type: "${doc.type}", event })`);
+    await game.teriock.Macro.useDocumentGeneral("${lookup}", { actor, event })`);
     const macroData = {
       name: _loc("TERIOCK.SYSTEMS.Child.USAGE.use", {
         value: doc.name,
@@ -118,8 +107,7 @@ export default class TeriockMacro extends mix(
         teriock: {
           user: game.user.id,
           macroType: "useGeneral",
-          macroDocumentType: doc.type,
-          macroDocumentName: this.documentLookupKey(doc),
+          macroLookupKey: lookup,
         },
       },
     };
@@ -163,29 +151,24 @@ export default class TeriockMacro extends mix(
    * @returns {Promise<void>}
    */
   static async useDocumentGeneral(lookup, options) {
-    const { actor, type, event } = options;
+    const { actor, event } = options;
     const tokens = /** @type {TeriockToken[]} */ game.canvas.tokens.controlled;
     const actors = tokens.map((t) => t.actor).filter((_) => _);
-    if (actors.length === 0 && options.actor) {
-      actors.push(actor);
-    }
+    if (actors.length === 0 && options.actor) actors.push(actor);
     if (actors.length === 0) {
       ui.notifications.warn("TERIOCK.DIALOGS.Common.ERRORS.noActor", {
         localize: true,
       });
     }
     for (const a of actors) {
-      const doc = await a.getDocument(lookup, type);
+      const doc = await findBestDocument(lookup, a);
       if (doc) await doc.system.use({ actor: a, event });
       else {
         ui.notifications.warn("TERIOCK.SYSTEMS.Macro.EXECUTION.noDocument", {
           localize: true,
           format: {
             actor: a.name,
-            name: lookup,
-            type: type
-              ? TERIOCK.options.document[type].name.toLowerCase()
-              : TERIOCK.options.document.document.name.toLowerCase(),
+            lookup,
           },
         });
       }

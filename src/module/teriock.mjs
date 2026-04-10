@@ -17,23 +17,18 @@ const { DocumentSheetConfig } = foundry.applications.apps;
 Object.assign(globalThis, {
   TERIOCK: constants,
   teriock: {
-    applications: applications,
-    canvas: canvas,
-    data: data,
-    dice: dice,
-    documents: documents,
-    helpers: helpers,
+    applications,
+    canvas,
+    data,
+    dice,
+    documents,
+    fromIdentifier: helpers.utils.fromIdentifier,
+    fromIdentifierSync: helpers.utils.fromIdentifierSync,
+    helpers,
   },
   tm: {
+    ...helpers,
     dialogs: applications.dialogs,
-    fetch: helpers.fetch,
-    html: helpers.html,
-    path: helpers.path,
-    resolve: helpers.resolve,
-    sort: helpers.sort,
-    string: helpers.string,
-    unit: helpers.unit,
-    utils: helpers.utils,
   },
 });
 

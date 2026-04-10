@@ -106,9 +106,12 @@ declare global {
     export type ImageString = string;
 
     /**
-     * A string that represents a document's identifier.
+     * A parsed identifier.
      */
-    export type IdentifierString = string;
+    export type ResolvedIdentifier = {
+      type?: Teriock.Documents.CommonType;
+      identifier: Identifier;
+    };
 
     /**
      * Options that control how a single document is resolved.

@@ -80,7 +80,7 @@ export default class MountSystem extends mix(
   get embedParts() {
     const parts = super.embedParts;
     return Object.assign(parts, {
-      subtitle: inferNameFromIdentifier(this.mountType, "mount"),
+      subtitle: inferNameFromIdentifier(`mount:${this.mountType}`),
       text: dotJoin([...this._attunableWrappers, parts.text]),
     });
   }

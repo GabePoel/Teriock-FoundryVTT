@@ -1,35 +1,12 @@
+import { fromHarmIdentifier } from "../../helpers/utils.mjs";
 import ImpactRoll from "./impact-roll.mjs";
 
 export default class HarmRoll extends ImpactRoll {
   /**
-   * Get a mapping to all the registered harms of a certain type.
-   * @param {string} type
-   * @returns {Promise<Record<string, TeriockJournalEntryPage>>}
-   */
-  static async getHarmTypes(type) {
-    const sourceUuids = game.settings.get("teriock", `${type}TypeSources`);
-    const sources = /** @type {TeriockJournalEntry[]} */ await Promise.all(
-      Array.from(sourceUuids).map((uuid) => foundry.utils.fromUuid(uuid)),
-    );
-    const types = {};
-    sources.forEach((source) => {
-      Object.assign(
-        types,
-        Object.fromEntries(
-          source.pages.contents
-            .filter((p) => p.type === type)
-            .map((d) => [d.forcedIdentifier, d]),
-        ),
-      );
-    });
-    return types;
-  }
-
-  /**
    * The types of this harm.
-   * @returns {string[]}
+   * @returns {Identifier[]}
    */
-  get harmTypes() {
+  get harmIdentifiers() {
     const types = new Set();
     for (const term of [...this._allTerms, ...this.dice]) {
       const flavor = term.flavor.split(" ");
@@ -62,12 +39,11 @@ export default class HarmRoll extends ImpactRoll {
    */
   async getHarmArray() {
     if (!["damage", "drain"].includes(this.impact)) return [];
-    const harmMap = await HarmRoll.getHarmTypes(this.impact);
-    const harms = [];
-    for (const type of this.harmTypes) {
-      if (Object.keys(harmMap).includes(type)) harms.push(harmMap[type]);
-    }
-    return harms;
+    const identifiers = this.harmIdentifiers.map((i) => `${this.impact}:${i}`);
+    const harms = await Promise.all(
+      identifiers.map((i) => fromHarmIdentifier(i)),
+    );
+    return harms.filter((_) => _);
   }
 
   /** @inheritDoc */

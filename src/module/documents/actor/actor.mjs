@@ -1,7 +1,7 @@
 import { characterOptions } from "../../constants/options/character-options.mjs";
 import { documentTypes } from "../../constants/system/_module.mjs";
 import { resolveDocument } from "../../helpers/resolve.mjs";
-import { lookupDocument, mix } from "../../helpers/utils.mjs";
+import { findBestDocument, mix } from "../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
 
 const { Actor } = foundry.documents;
@@ -333,18 +333,14 @@ export default class TeriockActor extends mix(
     }
   }
 
-  /**
-   * Get a document if this actor has it.
-   * @param {string} lookup - An identifier or name. Identifiers are preferred.
-   * @param {Teriock.Documents.ChildType} [type] - The type of document.
-   * @return {Promise<AnyChildDocument|null>}
-   */
-  async getDocument(lookup, type) {
-    let candidates = this.visibleChildren.filter((c) => c.type !== "ability");
+  /** @inheritDoc */
+  async getEffectiveChildren() {
+    const children = (await super.getEffectiveChildren()).filter(
+      (c) => c.type !== "ability",
+    );
     const abilities = await this.allAbilities();
-    candidates.push(...abilities);
-    if (type) candidates = candidates.filter((c) => c.type === type);
-    return lookupDocument(candidates, lookup) || null;
+    children.push(...abilities);
+    return children;
   }
 
   /**
@@ -491,7 +487,7 @@ export default class TeriockActor extends mix(
    * @return {Promise<void>}
    */
   async useDocument(lookup, options = {}) {
-    const doc = await this.getDocument(lookup, options.type);
+    const doc = await findBestDocument(lookup, this);
     if (doc) await doc.use(Object.assign(options, { actor: this }));
     else {
       ui.notifications.warn("TERIOCK.SYSTEMS.Macro.EXECUTION.noDocument", {

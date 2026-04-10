@@ -1,4 +1,4 @@
-import { ruleUuid } from "../../helpers/fetch.mjs";
+import { ruleUuid } from "../../helpers/resolve.mjs";
 import { toCamelCase, toKebabCase, ucFirst } from "../../helpers/string.mjs";
 
 export default function registerStringHelpers() {

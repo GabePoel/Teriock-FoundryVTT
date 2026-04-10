@@ -1,9 +1,9 @@
 import { TeriockDialog } from "../../../applications/api/_module.mjs";
 import { selectDocumentsDialog } from "../../../applications/dialogs/select-document-dialog.mjs";
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
-import { getDocument } from "../../../helpers/fetch.mjs";
 import { toCamelCase } from "../../../helpers/string.mjs";
 import {
+  fromIdentifier,
   inferNameFromIdentifier,
   makeIconClass,
 } from "../../../helpers/utils.mjs";
@@ -110,10 +110,13 @@ export default class IdentificationModel extends EmbeddedDataModel {
         { format: { name: this.parent.parent.fullName }, localize: true },
       );
       const content = await TeriockTextEditor.enrichHTML(
-        _loc("TERIOCK.MODELS.Identification.QUERY.ReadMagic.question", {
-          user: `@UUID[${game.user.uuid}]`,
-          item: `@UUID[${this.parent.parent.uuid}]{${this.name}}`,
-        }),
+        game.i18n.format(
+          "TERIOCK.MODELS.Identification.QUERY.ReadMagic.question",
+          {
+            user: `@UUID[${game.user.uuid}]`,
+            item: `@UUID[${this.parent.parent.uuid}]{${this.name}}`,
+          },
+        ),
       );
       const doReadMagic = await TeriockDialog.query(activeGM, "confirm", {
         content: content,
@@ -123,7 +126,9 @@ export default class IdentificationModel extends EmbeddedDataModel {
             TERIOCK.display.icons.equipment.readMagic,
             "title",
           ),
-          title: _loc("TERIOCK.MODELS.Identification.QUERY.ReadMagic.title"),
+          title: game.i18n.localize(
+            "TERIOCK.MODELS.Identification.QUERY.ReadMagic.title",
+          ),
         },
       });
       if (doReadMagic) {
@@ -178,9 +183,8 @@ export default class IdentificationModel extends EmbeddedDataModel {
           toCamelCase(this.parent.equipmentType),
         )
       ) {
-        const reference = await getDocument(
-          inferNameFromIdentifier(this.parent.equipmentType, "equipment"),
-          "equipment",
+        const reference = await fromIdentifier(
+          `equipment:${this.parent.equipmentType}`,
         );
         if (reference) {
           uncheckedPropertyIdentifiers.push(
@@ -203,8 +207,10 @@ export default class IdentificationModel extends EmbeddedDataModel {
         .map((e) => e.uuid);
       const toReveal = await selectDocumentsDialog(revealed, {
         checked: checked,
-        hint: _loc("TERIOCK.MODELS.Identification.QUERY.Unidentify.hint"),
-        noDocumentsMessage: _loc(
+        hint: game.i18n.localize(
+          "TERIOCK.MODELS.Identification.QUERY.Unidentify.hint",
+        ),
+        noDocumentsMessage: game.i18n.localize(
           "TERIOCK.MODELS.Identification.QUERY.Unidentify.noDocumentsMessage",
         ),
         silent: true,
@@ -217,9 +223,14 @@ export default class IdentificationModel extends EmbeddedDataModel {
         }),
       );
       await this.parent.parent.update({
-        name: _loc("TERIOCK.MODELS.Identification.QUERY.Unidentify.name", {
-          type: inferNameFromIdentifier(this.parent.equipmentType, "equipment"),
-        }),
+        name: game.i18n.format(
+          "TERIOCK.MODELS.Identification.QUERY.Unidentify.name",
+          {
+            type: inferNameFromIdentifier(
+              `equipment:${this.parent.equipmentType}`,
+            ),
+          },
+        ),
         "system.flaws": "",
         "system.identification.flaws": this.parent.flaws,
         "system.identification.identified": false,

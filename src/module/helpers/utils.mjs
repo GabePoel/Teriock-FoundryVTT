@@ -1,6 +1,7 @@
 import { iconStyles } from "../constants/display/_module.mjs";
 import { BaseRoll } from "../dice/rolls/_module.mjs";
 import { localizeChoices } from "./localization.mjs";
+import { resolveDocument } from "./resolve.mjs";
 import { toCamelCase, toTitleCase } from "./string.mjs";
 
 /**
@@ -304,35 +305,197 @@ export async function massUpdate(documentName, updateData, operation = {}) {
 }
 
 /**
- * Try and find a document from an array of candidates.
- * @param {TeriockDocument[]} candidates
- * @param {string} lookup - A term to search for. Either an identifier or a name. Identifiers are preferred.
- * @returns {TeriockDocument | null}
+ * See if the document has a specified name.
+ * @param {string} identifier
+ * @return {string}
  */
-export function lookupDocument(candidates, lookup) {
-  return (
-    candidates.find(
-      (c) => foundry.utils.getProperty(c, "system.identifier") === lookup,
-    ) ||
-    candidates.find((c) => c.name === lookup) ||
-    null
-  );
+export function inferNameFromIdentifier(identifier) {
+  const parsed = parseIdentifier(identifier);
+  if (parsed.identifier) identifier = parsed.identifier;
+  const type = parsed?.type;
+  let out = toTitleCase(identifier.replaceAll("-", " "));
+  if (!type) return out;
+  const reference = TERIOCK.reference[TERIOCK.options.document[type]?.index];
+  if (reference) out = reference[toCamelCase(identifier)] || out;
+  return out;
 }
 
 /**
- * See if the document has a specified name.
- * @param {string} identifier
- * @param {Teriock.Documents.ChildType} [type]
- * @return {string}
+ * Infer a document's icon from an identifier.
+ * @param {TypedIdentifier|Identifier} identifier
+ * @returns {string}
  */
-export function inferNameFromIdentifier(identifier, type) {
-  if (identifier.includes(":") && !type) {
+export function inferIconFromIdentifier(identifier) {
+  let icon = TERIOCK.options.document.document.icon;
+  const parsed = parseIdentifier(identifier);
+  if (parsed?.type) icon = TERIOCK.options.document[parsed.type]?.icon ?? icon;
+  return icon;
+}
+
+/**
+ * Parse an identifier into its component parts.
+ * @param {Identifier} identifier
+ * @returns {Teriock.System.ResolvedIdentifier | null}
+ */
+export function parseIdentifier(identifier) {
+  let type = null;
+  if (identifier.includes(":")) {
     const parts = identifier.split(":");
     type = parts[0];
     identifier = parts[1];
   }
-  let out = toTitleCase(identifier.replaceAll("-", " "));
-  const reference = TERIOCK.reference[TERIOCK.options.document[type]?.index];
-  if (reference) out = reference[toCamelCase(identifier)] || out;
-  return out;
+  return { type, identifier };
+}
+
+/**
+ * Find the best document from a string that describes it. Typed identifiers are preferred over plain identifiers
+ * which are preferred over names.
+ * @param {TypedIdentifier|Identifier|string} lookup
+ * @param {AnyCommonDocument} localDocument
+ * @param {object} [options]
+ * @param {boolean} [options.localOnly]
+ * @returns {Promise<AnyCommonDocument|null>}
+ */
+export async function findBestDocument(lookup, localDocument, options = {}) {
+  if (typeof localDocument?.getEffectiveChildren !== "function") return null;
+  if (!lookup) return null;
+  const doc = await fromIdentifier(lookup, {
+    localDocument,
+    localOnly: !!options.localOnly,
+  });
+  if (doc) return doc;
+  const children = await localDocument.getEffectiveChildren();
+  return children.find((c) => c.lookupKey === lookup) ?? null;
+}
+
+/**
+ * Get a local document from its identifier.
+ * @param {Identifier|TypedIdentifier} identifier
+ * @param {AnyCommonDocument} localDocument - The document to compare against.
+ * @returns {Promise<AnyCommonDocument|null>}
+ */
+export async function fromIdentifierLocal(identifier, localDocument) {
+  if (typeof localDocument?.getEffectiveChildren !== "function") return null;
+  if (!identifier) return null;
+  const children = await localDocument.getEffectiveChildren();
+  return (
+    children.find(
+      (c) =>
+        c?.typedIdentifier === identifier ||
+        c?.system?.identifier === identifier,
+    ) ?? null
+  );
+}
+
+/**
+ * Get a world document from its identifier.
+ * @param {Identifier|TypedIdentifier} identifier
+ * @returns {AnyCommonDocument|null}
+ */
+export function fromIdentifierSync(identifier) {
+  if (!identifier) return null;
+  const parsed = parseIdentifier(identifier);
+  if (!parsed?.identifier) return null;
+  if (parsed?.type) {
+    const documentName = TERIOCK.options.document[parsed.type]?.doc;
+    if (!documentName) return null;
+    let collection;
+    if (documentName === "Actor") collection = game.actors;
+    if (documentName === "Item") collection = game.items;
+    if (documentName === "ActiveEffect") collection = game.teriock.effects;
+    if (!collection) return null;
+    return (
+      collection.find(
+        (d) =>
+          d.type === parsed.type && d.system?.identifier === parsed.identifier,
+      ) ?? null
+    );
+  }
+  const candidates = [
+    ...game.items.contents,
+    ...game.actors.contents,
+    ...game.teriock.effects.contents,
+  ];
+  return (
+    candidates.find((d) => d.system?.identifier === parsed.identifier) ?? null
+  );
+}
+
+/**
+ * Get a harm type from its identifier. Can only retrieve if the source of the harm type has been registered in the
+ * world settings.
+ * @param {TypedIdentifier} identifier
+ * @returns {Promise<TeriockJournalEntryPage|null>}
+ */
+export async function fromHarmIdentifier(identifier) {
+  const parsed = parseIdentifier(identifier);
+  if (!parsed?.type) return null;
+  let setting;
+  if (parsed.type === "damage") setting = "damageTypeSources";
+  if (parsed.type === "drain") setting = "drainTypeSources";
+  if (!setting) return null;
+  const sourcesUuids = game.teriock.getSetting(setting);
+  const sources = await Promise.all(
+    Array.from(sourcesUuids).map((uuid) => foundry.utils.fromUuid(uuid)),
+  );
+  for (const source of sources) {
+    const doc = source?.pages?.contents?.find(
+      (p) => p.type === parsed.type && p.forcedIdentifier === parsed.identifier,
+    );
+    if (doc) return doc;
+  }
+  return null;
+}
+
+/**
+ * Get a document from its identifier. Prefers compendium documents over world documents.
+ * @param {Identifier|TypedIdentifier} identifier
+ * @param {object} [options]
+ * @param {AnyCommonDocument} [options.localDocument] - An optional local document to compare against.
+ * @param {boolean} [options.localOnly] - Only search the local document.
+ * @returns {Promise<TeriockDocument|null>}
+ */
+export async function fromIdentifier(identifier, options = {}) {
+  if (!identifier) return null;
+  if (options.localOnly && !options.localDocument) return null;
+  if (options.localDocument) {
+    const doc = await fromIdentifierLocal(identifier, options.localDocument);
+    if (doc) return doc;
+    if (options.localOnly) return null;
+  }
+  const parsed = parseIdentifier(identifier);
+  if (parsed?.type) {
+    if (["damage", "drain"].includes(parsed.type)) {
+      return fromHarmIdentifier(identifier);
+    }
+    const documentName = TERIOCK.options.document[parsed.type]?.doc;
+    if (!documentName) return null;
+    const packs = game.packs.contents.filter(
+      (p) => p.documentName === documentName,
+    );
+    for (const pack of packs) {
+      const docs = await pack.getDocuments({
+        system: { identifier: parsed.identifier },
+        type: parsed.type,
+      });
+      if (docs.length > 0) return docs[0];
+    }
+    if (documentName === "ActiveEffect") {
+      let setting;
+      if (parsed.type === "ability") setting = "compendiumAbilitySources";
+      if (parsed.type === "property") setting = "compendiumPropertySources";
+      if (setting) {
+        const keys = game.teriock.getSetting(setting);
+        const packs = Array.from(keys)
+          .map((k) => game.packs.get(k))
+          .filter((_) => _);
+        const name = inferNameFromIdentifier(identifier);
+        for (const pack of packs) {
+          const doc = await resolveDocument(pack.index.getName(name));
+          if (doc?.type === parsed.type) return doc;
+        }
+      }
+    }
+  }
+  return fromIdentifierSync(identifier);
 }

@@ -1,5 +1,5 @@
 import { resolveDocument } from "../../helpers/resolve.mjs";
-import { toId } from "../../helpers/string.mjs";
+import { toId, toKebabCase } from "../../helpers/string.mjs";
 import { makeIcon } from "../../helpers/utils.mjs";
 
 /**
@@ -38,7 +38,7 @@ export default function BaseDocumentMixin(Base) {
 
       /**
        * The default identifier for this document.
-       * @returns {string}
+       * @returns {Identifier}
        */
       get defaultIdentifier() {
         return tm.string.toKebabCase(this.name);
@@ -51,7 +51,7 @@ export default function BaseDocumentMixin(Base) {
 
       /**
        * A guaranteed identifier for this.
-       * @returns {string}
+       * @returns {Identifier}
        */
       get forcedIdentifier() {
         return this.system?.identifier ?? this.defaultIdentifier;
@@ -83,11 +83,32 @@ export default function BaseDocumentMixin(Base) {
       }
 
       /**
+       * A key that can be looked up to find this document.
+       * @returns {string}
+       */
+      get lookupKey() {
+        if (this.typedIdentifier) return this.typedIdentifier;
+        if (this.type) return `${this.type}:${this.forcedIdentifier}`;
+        return `${toKebabCase(this.documentName)}:${this.forcedIdentifier}`;
+      }
+
+      /**
        * That document that has the most control over this one.
        * @return {SyncDoc<CommonDocument>}
        */
       get master() {
         return this.parent;
+      }
+
+      /**
+       * This document's typed identifier, if it has one.
+       * @returns {TypedIdentifier|null}
+       */
+      get typedIdentifier() {
+        const type = this.type;
+        const identifier = this.system?.identifier;
+        if (!type || !identifier) return null;
+        return `${type}:${identifier}`;
       }
 
       /**

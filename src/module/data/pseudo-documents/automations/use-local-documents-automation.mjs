@@ -1,4 +1,4 @@
-import { mix } from "../../../helpers/utils.mjs";
+import { fromIdentifierLocal, mix } from "../../../helpers/utils.mjs";
 import { IdentifierField } from "../../fields/_module.mjs";
 import { UseLocalActivation } from "../activations/command-activations.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
@@ -12,7 +12,7 @@ const { fields } = foundry.data;
 /**
  * @extends {BaseAutomation}
  * @mixes UseDocumentsAutomation
- * @property {Set<Teriock.System.IdentifierString>} identifiers
+ * @property {Set<TypedIdentifier|Identifier>} identifiers
  */
 export default class UseLocalDocumentsAutomation extends mix(
   BaseAutomation,
@@ -54,34 +54,13 @@ export default class UseLocalDocumentsAutomation extends mix(
     return this.identifiers.size > 0;
   }
 
-  /**
-   * Parse this automation's identifiers.
-   * @return {{type: string|null, identifier: string}[]}
-   */
-  #parseIdentifiers() {
-    return Array.from(this.identifiers).map((i) => {
-      let type = null;
-      let identifier = i;
-      if (i.includes(":")) {
-        const parts = i.split(":");
-        type = parts[0];
-        identifier = parts[1];
-      }
-      return {
-        type,
-        identifier,
-      };
-    });
-  }
-
   /** @inheritDoc */
   async _getActivations() {
-    return this.#parseIdentifiers().map(
-      (p) =>
+    return this.identifiers.map(
+      (i) =>
         new UseLocalActivation({
           options: {
-            lookup: p.identifier,
-            type: p.type,
+            lookup: i,
             noHeighten: this.noHeighten,
             competence: this.overrideCompetence
               ? this.competence.raw
@@ -93,11 +72,12 @@ export default class UseLocalDocumentsAutomation extends mix(
 
   /** @inheritDoc */
   async getDocuments(options = {}) {
+    const actor = options.actor || this.actor;
     const out = await Promise.all(
-      this.#parseIdentifiers().map((p) =>
-        (options.actor || this.actor)?.getDocument(p.identifier, p.type),
+      this.identifiers.map((identifier) =>
+        fromIdentifierLocal(identifier, actor),
       ),
     );
-    return out.filter((d) => d && typeof d.use === "function");
+    return out.filter((d) => d && typeof d?.use === "function");
   }
 }
