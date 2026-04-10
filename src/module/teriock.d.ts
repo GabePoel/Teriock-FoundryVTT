@@ -24,6 +24,17 @@ declare global {
   type ID<T = unknown> = string & {
     [__brand]: T;
   };
+
+  /**
+   * A string that represents a document's identifier.
+   */
+  type Identifier = string;
+
+  /**
+   * A string that represents a document's typed identifier.
+   */
+  type TypedIdentifier = string;
+
   /** Safe Teriock UUID */
   type SafeUUID<T = unknown> = string & {
     [__brand]: T;

@@ -204,6 +204,14 @@ export default function CommonDocumentMixin(Base) {
       }
 
       /**
+       * Resolved children, either real or effective.
+       * @returns {Promise<AnyCommonDocument[]>}
+       */
+      async getEffectiveChildren() {
+        return this.getVisibleChildren();
+      }
+
+      /**
        * Roll data.
        * @returns {object}
        */

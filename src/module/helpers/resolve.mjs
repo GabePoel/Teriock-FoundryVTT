@@ -1,4 +1,5 @@
 import { TypeCollection } from "../documents/collections/_module.mjs";
+import { toId } from "./string.mjs";
 
 const { Document } = foundry.abstract;
 
@@ -19,7 +20,7 @@ export function safeUuid(uuid) {
  * @returns {UUID<T>} The original UUID.
  */
 export function pureUuid(safeUuid) {
-  return /** @type {UUID<T>} */ (safeUuid.replace(/_/g, "."));
+  return /** @type {UUID} */ (safeUuid.replace(/_/g, "."));
 }
 
 /**
@@ -178,4 +179,15 @@ export async function inferChildCompendiumSources(document) {
       }
     }
   }
+}
+/**
+ * Get the UUID for a rules journal entry page.
+ * @param {string} namespace
+ * @param {string} pageName
+ * @returns {string}
+ */
+export function ruleUuid(namespace, pageName) {
+  const nsId = toId(namespace, { hash: false });
+  const pnId = toId(pageName, { hash: false });
+  return `Compendium.teriock.rules.JournalEntry.${nsId}.JournalEntryPage.${pnId}`;
 }

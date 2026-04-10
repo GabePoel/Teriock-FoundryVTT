@@ -1,8 +1,7 @@
 import { BaseRoll } from "../dice/rolls/_module.mjs";
+import { TypeCollection } from "../documents/collections/_module.mjs";
 import TeriockMacro from "../documents/macro/macro.mjs";
 import { DependentsRegistry } from "./_module.mjs";
-import { resolveDocument } from "./resolve.mjs";
-import { inferNameFromIdentifier } from "./utils.mjs";
 
 /**
  * Singleton class that manages Teriock-specific states and functionality.
@@ -33,61 +32,15 @@ export default class TeriockManager {
   packs = new TeriockPacks();
 
   /**
-   * Get a document from its identifier.
-   * @param {Teriock.System.IdentifierString} identifier
-   * @param {Teriock.Documents.CommonType} type
-   * @returns {Promise<TeriockDocument|null>}
+   * A collection of wrapped effects that resembles a world collection.
+   * @returns {TypeCollection<ID<TeriockActiveEffect>, TeriockActiveEffect>}
    */
-  async getDocument(identifier, type) {
-    const documentName = TERIOCK.options.document[type]?.doc;
-    if (!documentName) return null;
-    const packs = game.packs.contents.filter(
-      (p) => p.documentName === documentName,
+  get effects() {
+    return new TypeCollection(
+      game.items.contents
+        .filter((i) => i.type === "wrapper" && i.system.effect)
+        .map((i) => [i.id, i.system.effect]),
     );
-    if (type === "ability") {
-      for (const key of this.getSetting("compendiumAbilitySources")) {
-        const pack = game.packs.get(key);
-        if (pack && !packs.includes(pack)) packs.push(pack);
-      }
-    }
-    if (type === "property") {
-      for (const key of this.getSetting("compendiumPropertySources")) {
-        const pack = game.packs.get(key);
-        if (pack && !packs.includes(pack)) packs.push(pack);
-      }
-    }
-    for (const p of packs) {
-      const docs = await p.getDocuments({ system: { identifier } });
-      if (docs.length > 0) return docs[0];
-      if (documentName === "ActiveEffect" && p.documentName === "Item") {
-        const doc = await resolveDocument(
-          p.index.getName(inferNameFromIdentifier(identifier, type)),
-        );
-        if (doc?.type === type) return doc;
-      }
-    }
-    const collectionName =
-      foundry.utils.getDocumentClass(documentName)?.collectionName;
-    if (collectionName === "effects") {
-      const collection = game.items;
-      const candidate = collection.find(
-        (d) =>
-          d.type === "wrapper" &&
-          d.system?.effect?.type === type &&
-          d.system?.effect?.system?.identifier === identifier,
-      );
-      if (candidate) return candidate.system.effect;
-    } else {
-      const collection = game[collectionName];
-      if (!collection) return null;
-      const candidate = collection.find(
-        (d) =>
-          foundry.utils.getProperty(d, "system.identifier") === identifier &&
-          d.type === type,
-      );
-      if (candidate) return candidate;
-    }
-    return null;
   }
 
   /**

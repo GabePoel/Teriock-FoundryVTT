@@ -14,7 +14,7 @@ declare global {
         /** <schema> The amount of damage this deals in two hands */
         twoHanded: Teriock.System.FormulaString;
         /** <base> Additional damage types that will be added to damage this deals */
-        types: Set<Teriock.System.IdentifierString>;
+        types: Set<Identifier>;
       };
       /** <schema> Equipment Classes */
       equipmentClasses: Set<Teriock.Keys.EquipmentClass>;

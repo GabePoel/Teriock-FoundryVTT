@@ -8,7 +8,7 @@ declare global {
       /** <schema> Applies even if the parent {@link TeriockEquipment} is unequipped */
       applyIfUnequipped: boolean;
       /** <schema> Damage type */
-      damageType: Teriock.System.IdentifierString;
+      damageType: Identifier;
       /** <schema> Extra damage dealt by the parent {@link TeriockEquipment} */
       extraDamage: Teriock.System.FormulaString;
       /** <schema> Power sources */

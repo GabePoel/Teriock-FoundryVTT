@@ -343,6 +343,7 @@ export const icons = {
     image: "ms-image",
     import: "ms-download",
     info: "ms-info",
+    linked: "ms-link",
     locked: "ms-lock",
     longRest: "ms-camping",
     maximum: "ms-all-inclusive",

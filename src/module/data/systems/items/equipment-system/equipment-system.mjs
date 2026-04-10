@@ -149,7 +149,7 @@ export default class EquipmentSystem extends mix(
     const parts = super.embedParts;
     return Object.assign(parts, {
       subtitle: !this.consumable
-        ? inferNameFromIdentifier(this.equipmentType, "equipment")
+        ? inferNameFromIdentifier(`equipment:${this.equipmentType}`)
         : parts.subtitle,
       text: dotJoin([
         ...this._attunableWrappers,
@@ -163,7 +163,7 @@ export default class EquipmentSystem extends mix(
 
   /** @inheritDoc */
   get wikiPage() {
-    return `Equipment:${inferNameFromIdentifier(this.equipmentType, "equipment")}`;
+    return `Equipment:${inferNameFromIdentifier(`equipment:${this.equipmentType}`)}`;
   }
 
   /** @inheritDoc */

@@ -1,8 +1,7 @@
 import { TeriockItem } from "../../../../../../documents/_module.mjs";
-import { getObject } from "../../../../../../helpers/fetch.mjs";
 import { getImage } from "../../../../../../helpers/path.mjs";
 import { toTitleCase } from "../../../../../../helpers/string.mjs";
-import { makeIcon } from "../../../../../../helpers/utils.mjs";
+import { fromIdentifier, makeIcon } from "../../../../../../helpers/utils.mjs";
 import { TextField } from "../../../../../fields/_module.mjs";
 
 const { fields } = foundry.data;
@@ -137,11 +136,12 @@ export default (Base) => {
        * @returns {Promise<object>}
        */
       async toScroll(data = {}, equipmentType = "scroll") {
-        const reference = (await getObject(
-          TERIOCK.index.equipment[equipmentType] || equipmentType || "Scroll",
-          "equipment",
-          { source: true, stats: false },
-        )) || { type: "equipment", system: { equipmentType: "scroll" } };
+        const reference = (
+          await fromIdentifier("equipment:scroll")
+        )?.toObject() || {
+          type: "equipment",
+          system: { equipmentType: "scroll" },
+        };
         let img;
         if (toTitleCase(equipmentType) === "Scroll") {
           if (this.elements.size === 1) {
@@ -159,6 +159,7 @@ export default (Base) => {
             { name: this.parent.fullName },
           ),
           system: {
+            identifier: `scroll-of-${this.parent.forcedIdentifier}`,
             consumable: true,
             onUse: [this.parent.id],
             powerLevel: "enchanted",

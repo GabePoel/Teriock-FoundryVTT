@@ -26,8 +26,7 @@ export default class EquipmentExecution extends ArmamentExecution {
         icon: TERIOCK.options.document.equipment.icon,
         name: game.i18n.format("TERIOCK.SYSTEMS.Equipment.PANELS.unknown", {
           type: inferNameFromIdentifier(
-            this.source.system.equipmentType,
-            "equipment",
+            `equipment:${this.source.system.equipmentType}`,
           ),
         }),
         blocks: [

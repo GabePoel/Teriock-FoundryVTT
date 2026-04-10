@@ -158,13 +158,6 @@ export const settings = {
       scope: "world",
       type: new fields.SetField(new fields.StringField()),
     },
-    compendiumEquipmentSources: {
-      default: ["teriock.equipment"],
-      hint: "TERIOCK.SETTINGS.compendiumEquipmentSources.hint",
-      name: "TERIOCK.SETTINGS.compendiumEquipmentSources.name",
-      scope: "world",
-      type: new fields.SetField(new fields.StringField()),
-    },
     compendiumPropertySources: {
       default: ["teriock.properties"],
       hint: "TERIOCK.SETTINGS.compendiumPropertySources.hint",

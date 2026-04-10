@@ -1,9 +1,9 @@
 import { TeriockDialog } from "../../../applications/api/_module.mjs";
 import { selectDocumentsDialog } from "../../../applications/dialogs/select-document-dialog.mjs";
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
-import { getDocument } from "../../../helpers/fetch.mjs";
 import { toCamelCase } from "../../../helpers/string.mjs";
 import {
+  fromIdentifier,
   inferNameFromIdentifier,
   makeIconClass,
 } from "../../../helpers/utils.mjs";
@@ -183,9 +183,8 @@ export default class IdentificationModel extends EmbeddedDataModel {
           toCamelCase(this.parent.equipmentType),
         )
       ) {
-        const reference = await getDocument(
-          inferNameFromIdentifier(this.parent.equipmentType, "equipment"),
-          "equipment",
+        const reference = await fromIdentifier(
+          `equipment:${this.parent.equipmentType}`,
         );
         if (reference) {
           uncheckedPropertyIdentifiers.push(
@@ -228,8 +227,7 @@ export default class IdentificationModel extends EmbeddedDataModel {
           "TERIOCK.MODELS.Identification.QUERY.Unidentify.name",
           {
             type: inferNameFromIdentifier(
-              this.parent.equipmentType,
-              "equipment",
+              `equipment:${this.parent.equipmentType}`,
             ),
           },
         ),

@@ -1,5 +1,5 @@
 import { icons } from "../../constants/display/icons.mjs";
-import { toCamelCase } from "../../helpers/string.mjs";
+import { toCamelCase, toKebabCase } from "../../helpers/string.mjs";
 import { makeIcon } from "../../helpers/utils.mjs";
 
 const wikiContextMenuOptions = [
@@ -102,7 +102,7 @@ const wikiContextMenuOptions = [
     name: "TERIOCK.COMMANDS.UseAbility.useResist",
     icon: makeIcon(icons.document.ability, "contextMenu"),
     callback: async () => {
-      await game.actors.default.useDocument("resist", { type: "ability" });
+      await game.actors.default.useDocument("ability:resist");
     },
     condition: (target) =>
       ["Keyword: Resistance", "Keyword: Hexproof"].includes(
@@ -114,7 +114,9 @@ const wikiContextMenuOptions = [
     icon: makeIcon(icons.document.ability, "contextMenu"),
     callback: async (target) => {
       const abilityName = target.dataset.tooltip.split("Ability: ")[1];
-      await game.actors.default.useDocument(abilityName, { type: "ability" });
+      await game.actors.default.useDocument(
+        `ability:${toKebabCase(abilityName)}`,
+      );
     },
     condition: (target) =>
       target.dataset.tooltip?.startsWith("Ability: ") && game.actors.default,

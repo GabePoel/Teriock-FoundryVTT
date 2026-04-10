@@ -12,10 +12,10 @@ export default async function hotbarDropDialog(doc) {
   if (doc.actor) {
     const label = TERIOCK.options.document[doc.type].name.toLowerCase();
     const context = {
+      actor: `@UUID[${doc.actor.uuid}]`,
+      child: `@UUID[${doc.uuid}]`,
       label,
       name: doc.name,
-      child: `@UUID[${doc.uuid}]`,
-      actor: `@UUID[${doc.actor.uuid}]`,
     };
     const content = await TeriockTextEditor.enrichHTML(
       await TeriockTextEditor.renderTemplate(
@@ -24,26 +24,27 @@ export default async function hotbarDropDialog(doc) {
       ),
     );
     choice = await TeriockDialog.prompt({
+      buttons: [
+        {
+          action: "linked",
+          callback: () => "linked",
+          icon: makeIconClass(TERIOCK.display.icons.ui.linked),
+          label: game.i18n.localize(
+            "TERIOCK.DIALOGS.HotbarDrop.BUTTONS.linked",
+          ),
+        },
+      ],
+      content: content,
+      modal: true,
+      ok: {
+        callback: () => "general",
+        default: true,
+        label: game.i18n.localize("TERIOCK.DIALOGS.HotbarDrop.BUTTONS.general"),
+      },
       window: {
         icon: makeIconClass(TERIOCK.display.icons.ui.confirm, "title"),
         title: game.i18n.localize("TERIOCK.DIALOGS.HotbarDrop.title"),
       },
-      modal: true,
-      content: content,
-      ok: {
-        default: true,
-        label: game.i18n.localize("TERIOCK.DIALOGS.HotbarDrop.BUTTONS.general"),
-        callback: () => "general",
-      },
-      buttons: [
-        {
-          action: "linked",
-          label: game.i18n.localize(
-            "TERIOCK.DIALOGS.HotbarDrop.BUTTONS.linked",
-          ),
-          callback: () => "linked",
-        },
-      ],
     });
   }
   return choice;

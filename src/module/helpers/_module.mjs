@@ -1,4 +1,3 @@
-export * as fetch from "./fetch.mjs";
 export * as formula from "./formula.mjs";
 export * as html from "./html.mjs";
 export * as interaction from "./interaction/_module.mjs";

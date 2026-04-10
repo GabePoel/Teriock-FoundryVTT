@@ -1,7 +1,10 @@
 import { selectDocumentsDialog } from "../../../applications/dialogs/select-document-dialog.mjs";
 import { icons } from "../../../constants/display/icons.mjs";
 import { resolveDocuments } from "../../resolve.mjs";
-import { inferNameFromIdentifier } from "../../utils.mjs";
+import {
+  inferIconFromIdentifier,
+  inferNameFromIdentifier,
+} from "../../utils.mjs";
 import { thresholdCommand } from "./abstract-command.mjs";
 
 /**
@@ -68,11 +71,11 @@ export const useLocalCommand = {
   ...thresholdCommand,
   aliases: ["use"],
   args: ["lookup"],
-  icon: (options) => TERIOCK.options.document[options?.type || "document"].icon,
+  icon: (options) => inferIconFromIdentifier(options?.lookup),
   id: "use-local",
   label: (options) =>
     game.i18n.format("TERIOCK.COMMANDS.UseDocument.useNamed", {
-      name: inferNameFromIdentifier(options?.lookup, options?.type) || "",
+      name: inferNameFromIdentifier(options?.lookup) || "",
     }),
   primary: useLocal,
   secondary: useLocal,

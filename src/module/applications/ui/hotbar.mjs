@@ -1,5 +1,5 @@
 import { TeriockMacro } from "../../documents/_module.mjs";
-import { makeIcon } from "../../helpers/utils.mjs";
+import { findBestDocument, makeIcon } from "../../helpers/utils.mjs";
 import { hotbarDropDialog } from "../dialogs/_module.mjs";
 
 const { Hotbar } = foundry.applications.ui;
@@ -13,9 +13,7 @@ export default class TeriockHotbar extends Hotbar {
   #getMacroForSlot(element) {
     const slot = element.dataset.slot;
     const macroId = game.user.hotbar[slot];
-    if (!macroId) {
-      return null;
-    }
+    if (!macroId) return null;
     return game.macros.get(macroId) ?? null;
   }
 
@@ -40,21 +38,13 @@ export default class TeriockHotbar extends Hotbar {
   _getContextMenuOptions() {
     const options = super._getContextMenuOptions();
     options.push({
-      name: "Open Document Sheet",
-      icon: makeIcon(TERIOCK.display.icons.ui.openWindow, "contextMenu"),
-      condition: (li) => {
-        const macro = this.#getMacroForSlot(li);
-        return ["useGeneral", "useLinked"].includes(
-          macro.getFlag("teriock", "macroType"),
-        );
-      },
       callback: async (li) => {
         const macro = this.#getMacroForSlot(li);
         if (macro.getFlag("teriock", "macroType") === "useGeneral") {
           const actor = game.actors.default;
-          const doc = await actor.getDocument(
-            macro.getFlag("teriock", "macroDocumentName"),
-            macro.getFlag("teriock", "macroDocumentType"),
+          const doc = await findBestDocument(
+            actor,
+            macro.getFlag("teriock", "macroLookupKey"),
           );
           await doc?.sheet.render(true);
         } else {
@@ -63,6 +53,14 @@ export default class TeriockHotbar extends Hotbar {
           await doc?.sheet.render(true);
         }
       },
+      condition: (li) => {
+        const macro = this.#getMacroForSlot(li);
+        return ["useGeneral", "useLinked"].includes(
+          macro.getFlag("teriock", "macroType"),
+        );
+      },
+      icon: makeIcon(TERIOCK.display.icons.ui.openWindow, "contextMenu"),
+      name: "Open Document Sheet",
     });
     return options;
   }

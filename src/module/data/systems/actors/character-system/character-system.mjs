@@ -1,4 +1,4 @@
-import { getObject } from "../../../../helpers/fetch.mjs";
+import { fromIdentifier } from "../../../../helpers/utils.mjs";
 import BaseActorSystem from "../base-actor-system/base-actor-system.mjs";
 
 //noinspection JSClosureCompilerSyntax
@@ -25,18 +25,28 @@ export default class CharacterSystem extends BaseActorSystem {
     const yes = await super._preCreate(data, options, user);
     if (yes === false) return false;
 
-    // Ensure default items
-    const defaultItems = [
-      { name: "Created Elder Sorceries", pack: "essentials" },
-      { name: "Learned Elder Sorceries", pack: "essentials" },
-      { name: "Journeyman", pack: "classes" },
+    const defaultItemIdentifiers = [
+      "power:created-elder-sorceries",
+      "power:learned-elder-sorceries",
+      "rank:journeyman",
     ];
-    const items = [];
-    for (const item of defaultItems) {
-      if (!this.parent.items.find((i) => i.name === item.name)) {
-        items.push(await getObject(item.name, item.pack, { stats: true }));
-      }
-    }
+    const items = await Promise.all(
+      defaultItemIdentifiers
+        .filter(
+          (identifier) =>
+            !this.parent.items.find((i) => i.typedIdentifier === identifier),
+        )
+        .map((identifier) => fromIdentifier(identifier)),
+    );
+    const itemData = items
+      .filter((_) => _)
+      .map((item) => {
+        const obj = item?.toObject();
+        if (item?.inCompendium) {
+          foundry.utils.setProperty(item, "_stats.compendiumSource", item.uuid);
+        }
+        return obj;
+      });
 
     // Add Essential Items
     this.parent.updateSource(
@@ -47,7 +57,7 @@ export default class CharacterSystem extends BaseActorSystem {
             disposition: 0,
             sight: { enabled: true },
           },
-          items: items,
+          items: itemData,
         },
         data,
       ),
