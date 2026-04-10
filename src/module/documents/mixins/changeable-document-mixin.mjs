@@ -44,11 +44,11 @@ export default function ChangeableDocumentMixin(Base) {
           for (const change of changes) {
             const conditionalChange = {
               effect: effect,
-              key: change.key,
-              priority: change.priority,
+              key: change?.key,
+              priority: change?.priority,
               qualifier: change.qualifier || "1",
-              type: change.type,
-              value: change.value,
+              type: change?.type,
+              value: change?.value,
             };
             const time = change.time || "normal";
             const target = change.target || "Actor";
@@ -147,11 +147,11 @@ export default function ChangeableDocumentMixin(Base) {
        * @param {Teriock.Changes.PreparedChangeData[]} changes
        */
       _applyChanges(changes) {
-        changes.sort((a, b) => a.priority - b.priority);
+        changes.sort((a, b) => a?.priority - b?.priority);
         let rollData = {};
         let rollDataComputed = false;
         for (const change of changes) {
-          if (!change.key || !change.qualifier) continue;
+          if (!change?.key || !change.qualifier) continue;
           let shouldApply = change.qualifier === "1";
           if (!shouldApply) {
             if (!rollDataComputed) {
