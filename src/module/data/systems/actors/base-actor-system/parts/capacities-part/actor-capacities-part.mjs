@@ -2,6 +2,10 @@ import { characterOptions } from "../../../../../../constants/options/character-
 import { equipmentOptions } from "../../../../../../constants/options/equipment-options.mjs";
 import { TeriockActor } from "../../../../../../documents/_module.mjs";
 import { EvaluationField } from "../../../../../fields/_module.mjs";
+import {
+  initialNumber,
+  initialString,
+} from "../../../../../fields/helpers/initializers.mjs";
 
 const { fields } = foundry.data;
 const { utils } = foundry;
@@ -22,6 +26,8 @@ export default (Base) => {
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           size: new fields.SchemaField({
+            category: initialString(),
+            length: initialNumber(),
             number: new EvaluationField({
               blank: "3",
               ceil: false,
@@ -32,8 +38,12 @@ export default (Base) => {
               max: 30,
               min: 0.25,
             }),
+            reach: initialNumber(),
           }),
           weight: new fields.SchemaField({
+            carried: initialNumber(),
+            equipment: initialNumber(),
+            money: initialNumber(),
             self: new EvaluationField({
               blank: characterOptions.defaults.weight,
               deterministic: true,
@@ -41,6 +51,7 @@ export default (Base) => {
               interval: equipmentOptions.weight.interval,
               min: 0,
             }),
+            value: initialNumber(),
           }),
         });
       }
@@ -138,7 +149,6 @@ export default (Base) => {
       /** @inheritDoc */
       prepareBaseData() {
         super.prepareBaseData();
-        this.encumbranceLevel = 0;
         this.attunements = new Set(
           this.parent.attunements.map((a) => a.system.target),
         );

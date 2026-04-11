@@ -66,11 +66,7 @@ export default function ChangeableDocumentMixin(Base) {
               changeTree[time][target].untyped.push(conditionalChange);
             } else if (target === "armament") {
               changeTree[time].Item.typed.equipment.push(conditionalChange);
-              if (
-                !conditionalChange.key.startsWith("system.damage.twoHanded")
-              ) {
-                changeTree[time].Item.typed.body.push(conditionalChange);
-              }
+              changeTree[time].Item.typed.body.push(conditionalChange);
             } else {
               const documentName = TERIOCK.options.document[target]?.doc;
               if (documentName) {

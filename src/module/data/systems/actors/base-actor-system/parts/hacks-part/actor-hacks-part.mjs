@@ -1,5 +1,9 @@
 import { hackOptions } from "../../../../../../constants/options/hack-options.mjs";
 import { objectMap } from "../../../../../../helpers/utils.mjs";
+import {
+  initialBar,
+  initialSchema,
+} from "../../../../../fields/helpers/initializers.mjs";
 
 /**
  * Actor data model mixin that handles hacks.
@@ -14,24 +18,21 @@ export default (Base) => {
      */
     class ActorHacksPart extends Base {
       /** @inheritDoc */
+      static defineSchema() {
+        return Object.assign(super.defineSchema(), {
+          hacks: new initialSchema(
+            objectMap(hackOptions, (conf) => initialBar({ max: conf.max })),
+          ),
+        });
+      }
+
+      /** @inheritDoc */
       getRollData() {
         const rollData = super.getRollData();
         for (const [k, v] of Object.entries(this.hacks || {})) {
           rollData[`hack.${k}`] = v.value;
         }
         return rollData;
-      }
-
-      /** @inheritDoc */
-      prepareBaseData() {
-        super.prepareBaseData();
-        this.hacks = objectMap(hackOptions, (conf) => {
-          return {
-            min: 0,
-            max: conf.max,
-            value: 0,
-          };
-        });
       }
 
       /**

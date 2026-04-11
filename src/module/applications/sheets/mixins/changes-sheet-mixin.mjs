@@ -93,7 +93,9 @@ export default function ChangesSheetMixin(Base) {
               const changes = foundry.utils.deepClone(
                 foundry.utils.getProperty(this.document._source, path),
               );
-              changes[Number(index)][property] = el.value;
+              let value = el.value;
+              if (property === "priority") value = Number(value);
+              changes[Number(index)][property] = value;
               this.document.update({ [path]: changes });
             });
           },

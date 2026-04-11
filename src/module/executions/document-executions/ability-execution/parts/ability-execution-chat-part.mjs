@@ -1,5 +1,6 @@
 import { conditionDialog } from "../../../../applications/dialogs/select-token-dialog.mjs";
 import { costOptions } from "../../../../constants/options/cost-options.mjs";
+import { FormulaField } from "../../../../data/fields/_module.mjs";
 import {
   AddExternalDocumentsAutomation,
   ChangesAutomation,
@@ -10,7 +11,6 @@ import {
   TransformationAutomation,
 } from "../../../../data/pseudo-documents/automations/_module.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
-import { manipulateFormula } from "../../../../helpers/formula.mjs";
 import { safeUuid } from "../../../../helpers/resolve.mjs";
 
 /**
@@ -255,9 +255,23 @@ export default function AbilityExecutionChatPart(Base) {
           crit,
         );
         let durationFormula = this.source.system.duration.formula;
+        const formulaField = new FormulaField({ deterministic: false });
         durationAutomations.forEach((a) => {
           const formula = a.duration.formula;
-          durationFormula = manipulateFormula(durationFormula, formula, a.mode);
+          const change = {
+            type: a.changeType,
+            effect: this.source,
+            value: formula,
+            phase: "initial",
+            priority: 5,
+            key: "duration",
+          };
+          durationFormula = formulaField.applyChange(
+            durationFormula,
+            null,
+            change,
+            { replacementData: this.rollData },
+          );
         });
         let durationValue = await BaseRoll.getValue(
           durationFormula,

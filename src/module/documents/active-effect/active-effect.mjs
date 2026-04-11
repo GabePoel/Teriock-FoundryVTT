@@ -51,9 +51,7 @@ export default class TeriockActiveEffect extends mix(
    * @returns {boolean}
    */
   get isReference() {
-    if (this.isOnUse) {
-      return true;
-    }
+    if (this.isOnUse) return true;
     return this.system.isReference;
   }
 
@@ -65,18 +63,6 @@ export default class TeriockActiveEffect extends mix(
     return this.duration.remaining < Infinity
       ? this.duration.label
       : _loc("TERIOCK.SYSTEMS.BaseEffect.PANELS.noTimeLimit");
-  }
-
-  /** @inheritDoc */
-  _applyAdd(actor, change, current, delta, changes) {
-    if (foundry.utils.getType(current) === "Set") current.add(delta);
-    else super._applyAdd(actor, change, current, delta, changes);
-  }
-
-  /** @inheritDoc */
-  _applyOverride(actor, change, current, delta, changes) {
-    if (foundry.utils.getType(current) === "Set") delta = new Set([delta]);
-    super._applyOverride(actor, change, current, delta, changes);
   }
 
   /** @inheritDoc */

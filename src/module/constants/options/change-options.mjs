@@ -24,8 +24,8 @@ export const phase = {
     label: "TERIOCK.CHANGES.Phase.derivation.label",
   },
   completion: {
-    hint: "TERIOCK.CHANGES.Phase.final.hint",
-    label: "TERIOCK.CHANGES.Phase.final.label",
+    hint: "TERIOCK.CHANGES.Phase.completion.hint",
+    label: "TERIOCK.CHANGES.Phase.completion.label",
   },
 };
 

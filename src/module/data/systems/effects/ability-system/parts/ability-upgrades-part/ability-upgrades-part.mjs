@@ -26,6 +26,7 @@ export default (Base) => {
               attribute: attributeField(),
               text: new TextField({
                 initial: "",
+                persisted: false,
                 required: false,
               }),
               value: competenceField(),
@@ -34,6 +35,7 @@ export default (Base) => {
               attribute: attributeField(),
               text: new TextField({
                 initial: "",
+                persisted: false,
                 required: false,
               }),
               value: new fields.NumberField({

@@ -4,7 +4,7 @@ import {
   formulaExists,
 } from "../../../../helpers/formula.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
-import { makeIcon } from "../../../../helpers/utils.mjs";
+import { makeIcon, objectMap } from "../../../../helpers/utils.mjs";
 import {
   EvaluationField,
   FormulaField,
@@ -79,32 +79,28 @@ export default function ArmamentSystemMixin(Base) {
             nullable: true,
             choices: TERIOCK.reference.weaponFightingStyles,
           }),
-          notes: new TextField({
-            initial: "",
-          }),
+          impacts: new fields.SetField(
+            new fields.StringField({
+              choices: objectMap(TERIOCK.options.impact, (i) => i.take, {
+                filter: (c) => !c?.hidden,
+                localize: true,
+              }),
+            }),
+            { initial: ["damage"] },
+          ),
+          notes: new TextField({ initial: "" }),
           range: new fields.SchemaField({
             long: new EvaluationField({ model: RangeModel, label: "Range" }),
-            melee: new fields.BooleanField({
-              initial: true,
-            }),
-            ranged: new fields.BooleanField({
-              initial: false,
-            }),
-            short: new EvaluationField({
-              model: RangeModel,
-            }),
+            melee: new fields.BooleanField({ initial: true }),
+            ranged: new fields.BooleanField({ initial: false }),
+            short: new EvaluationField({ model: RangeModel }),
           }),
-          specialRules: new TextField({
-            initial: "",
-          }),
+          specialRules: new TextField({ initial: "", persisted: false }),
           spellTurning: new fields.BooleanField({
             initial: false,
             nullable: false,
           }),
-          vitals: new fields.BooleanField({
-            initial: false,
-            nullable: false,
-          }),
+          vitals: new fields.BooleanField({ initial: false, nullable: false }),
         });
       }
 
@@ -343,7 +339,7 @@ export default function ArmamentSystemMixin(Base) {
         if (game.teriock.getSetting("rollAttackOnArmamentUse")) {
           await this.actor?.useDocument("basic-attack", { type: "ability" });
         }
-        options.deals ??= this.deals;
+        options.impacts ??= this.impacts;
         await new ArmamentExecution(options).execute();
       }
 
@@ -387,6 +383,9 @@ export default function ArmamentSystemMixin(Base) {
         for (const p of this.props || new Set()) {
           data[`prop.${p}`] = 1;
         }
+        for (const impact of this.impacts) {
+          data[`impact.${impact}`] = 1;
+        }
         for (const equipmentClass of this.equipmentClasses) {
           data[`class.${equipmentClass}`] = 1;
         }
@@ -401,10 +400,6 @@ export default function ArmamentSystemMixin(Base) {
         if (!formulaExists(this.damage.twoHanded)) {
           this.damage.twoHanded = this.damage.base;
         }
-
-        // What this deals
-        /** @type {Set<Teriock.Keys.Impact>} */
-        this.deals = new Set(["damage"]);
 
         // Properties
         const properties =

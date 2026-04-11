@@ -4,6 +4,7 @@ export const characterOptions = {
   defaults: {
     hiding: "@snk.pas",
     initiative: "1d20 + @mov",
+    maxPresence: 1,
     perceiving: "@per.pas",
     weight: "pow(3 + @size, 3)",
   },

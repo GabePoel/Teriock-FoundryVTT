@@ -1,5 +1,6 @@
 import { characterOptions } from "../../../../../../constants/options/character-options.mjs";
 import { objectMap } from "../../../../../../helpers/utils.mjs";
+import { initialNumber } from "../../../../../fields/helpers/initializers.mjs";
 
 const { fields } = foundry.data;
 
@@ -10,7 +11,7 @@ const { fields } = foundry.data;
 export default (Base) => {
   return (
     /**
-     * @extends {CommonSystem}
+     * @extends {AbstractActorSystem}
      * @extends {Teriock.Models.ActorMovementPartData}
      * @mixin
      */
@@ -18,6 +19,7 @@ export default (Base) => {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
+          movementSpeed: initialNumber(30),
           speedAdjustments: new fields.SchemaField(
             objectMap(characterOptions.movementTypes, (t) =>
               speedField(t.initial, t.label),
@@ -86,6 +88,7 @@ function speedField(initial, name) {
     label: `${name} Speed Adjustment`,
     max: 4,
     min: 0,
+    persisted: false,
     step: 1,
   });
 }

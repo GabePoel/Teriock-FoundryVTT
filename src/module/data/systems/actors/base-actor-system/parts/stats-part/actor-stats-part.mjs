@@ -3,6 +3,7 @@ import {
   revitalizeDialog,
 } from "../../../../../../applications/dialogs/_module.mjs";
 import { docSort, rankSort } from "../../../../../../helpers/sort.mjs";
+import { initialNumber } from "../../../../../fields/helpers/initializers.mjs";
 
 const { fields } = foundry.data;
 
@@ -298,6 +299,7 @@ function statField(options = {}) {
       integer: true,
       min: 0,
     });
+    schema.poolLimit = initialNumber();
   }
   if (options.morganti) {
     schema.morganti = new fields.NumberField({

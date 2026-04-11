@@ -102,6 +102,21 @@ export function combatExpirationTimingField() {
 }
 
 /**
+ * A change type field.
+ * @returns {EnhancedStringField}
+ */
+export function changeTypeField() {
+  return new EnhancedStringField({
+    choices: objectMap(ActiveEffect.CHANGE_TYPES, (t) => t.label, {
+      localize: true,
+    }),
+    initial: "add",
+    label: "TERIOCK.SCHEMA.QualifiedChange.type.label",
+    required: false,
+  });
+}
+
+/**
  * Field that represents an expanded change.
  * @returns {SchemaField}
  */
@@ -147,13 +162,7 @@ export function qualifiedChangeField() {
       label: "TERIOCK.SCHEMA.QualifiedChange.phase.label",
       nullable: false,
     }),
-    type: new EnhancedStringField({
-      choices: objectMap(ActiveEffect.CHANGE_TYPES, (t) => t.label, {
-        localize: true,
-      }),
-      initial: "add",
-      label: "TERIOCK.SCHEMA.QualifiedChange.type.label",
-    }),
+    type: changeTypeField(),
     value: new EnhancedStringField({
       initial: "",
       label: "TERIOCK.SCHEMA.QualifiedChange.value.label",

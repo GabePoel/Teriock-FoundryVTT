@@ -1,3 +1,10 @@
+import { characterOptions } from "../../../../../../constants/options/character-options.mjs";
+import {
+  initialBoolean,
+  initialNumber,
+  initialSchema,
+} from "../../../../../fields/helpers/initializers.mjs";
+
 const { fields } = foundry.data;
 
 /**
@@ -15,13 +22,19 @@ export default (Base) => {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
+          presence: initialSchema({
+            max: initialNumber(characterOptions.defaults.maxPresence),
+            min: initialNumber(),
+            over: initialBoolean(),
+            value: initialNumber(),
+          }),
           scaling: new fields.SchemaField({
-            lvl: new fields.NumberField({
-              initial: 1,
-              integer: true,
-              min: 1,
-            }),
             brScale: new fields.BooleanField({ initial: false }),
+            f: initialNumber(),
+            lvl: new fields.NumberField({ initial: 1, integer: true, min: 1 }),
+            p: initialNumber(),
+            rank: initialNumber(),
+            scale: initialNumber(),
           }),
         });
       }
@@ -83,12 +96,10 @@ export default (Base) => {
 
       /** @inheritDoc */
       prepareBaseData() {
-        this.presence = {
-          max: Math.max(1, Math.floor(1 + (this.scaling.lvl + 1) / 5)),
-          min: 0,
-          overflow: false,
-          value: 0,
-        };
+        this.presence.max = Math.max(
+          characterOptions.defaults.maxPresence,
+          Math.floor(1 + (this.scaling.lvl + 1) / 5),
+        );
         this.scaling.br = Math.max(
           0,
           ...this.parent.species.map((s) => s.system.br),

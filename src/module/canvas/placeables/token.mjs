@@ -15,7 +15,7 @@ export default class TeriockToken extends Token {
     const promises = [];
     if (
       this.document.hasStatusEffect("encumbered") &&
-      this.document?.actor.system.encumbranceLevel > 0
+      this.document?.actor?.system.encumbranceLevel > 0
     ) {
       promises.push(this._drawEffect(getImage("conditions", "Encumbered")));
     }
