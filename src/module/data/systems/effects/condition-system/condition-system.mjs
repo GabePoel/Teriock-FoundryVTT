@@ -1,5 +1,6 @@
 import { inCombatExpirationDialog } from "../../../../applications/dialogs/_module.mjs";
-import { makeIcon, mix } from "../../../../helpers/utils.mjs";
+import { mix } from "../../../../helpers/construction.mjs";
+import { makeIcon } from "../../../../helpers/utils.mjs";
 import { combatExpirationMethodField } from "../../../fields/helpers/builders.mjs";
 import { ThresholdDataMixin } from "../../../shared/mixins/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";

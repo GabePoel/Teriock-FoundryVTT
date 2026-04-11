@@ -1,4 +1,5 @@
-import { fromIdentifierLocal, mix } from "../../../helpers/utils.mjs";
+import { mix } from "../../../helpers/construction.mjs";
+import { fromIdentifierLocal } from "../../../helpers/utils.mjs";
 import { IdentifierField } from "../../fields/_module.mjs";
 import { UseLocalActivation } from "../activations/command-activations.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";

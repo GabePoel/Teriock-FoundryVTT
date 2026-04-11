@@ -132,7 +132,7 @@ foundry.helpers.Hooks.once("init", function () {
 
   assign({
     ActiveEffect: {
-      changePhases: constants.options.change.time,
+      changePhases: constants.options.change.phase,
       changeTypes: {
         boost: setup.changeConfigs.boostConfig,
         typeAdd: setup.changeConfigs.addTypesConfig,
@@ -180,7 +180,7 @@ foundry.helpers.Hooks.once("init", function () {
     Combat: {
       initiative: {
         decimals: 2,
-        formula: TERIOCK.options.character.initiative,
+        formula: TERIOCK.options.character.defaults.initiative,
       },
       documentClass: documents.TeriockCombat,
     },

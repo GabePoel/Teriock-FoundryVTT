@@ -1,5 +1,5 @@
 import { TeriockTextEditor } from "../../applications/ux/_module.mjs";
-import { mix } from "../../helpers/utils.mjs";
+import { mix } from "../../helpers/construction.mjs";
 import TeriockChatMessage from "../chat-message/chat-message.mjs";
 import * as mixins from "../mixins/_module.mjs";
 

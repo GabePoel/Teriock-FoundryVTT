@@ -1,5 +1,5 @@
+import { mix } from "../../../../helpers/construction.mjs";
 import { simplifyTags } from "../../../../helpers/panel.mjs";
-import { mix } from "../../../../helpers/utils.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
 

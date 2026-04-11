@@ -1,5 +1,5 @@
+import { mix } from "../../../../helpers/construction.mjs";
 import { getImage } from "../../../../helpers/path.mjs";
-import { mix } from "../../../../helpers/utils.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import { AccessDataMixin } from "../../../shared/mixins/_module.mjs";
 import {
@@ -89,9 +89,7 @@ export default class HarmSystem extends mix(
     this.parent.updateSource(
       foundry.utils.mergeObject(
         {
-          text: {
-            content: _loc("TERIOCK.SYSTEMS.Harm.DATA.description"),
-          },
+          text: { content: _loc("TERIOCK.SYSTEMS.Harm.DATA.description") },
           system: { img: getImage("effect-types", ref) },
         },
         data,

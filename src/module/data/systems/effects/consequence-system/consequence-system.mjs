@@ -1,5 +1,5 @@
 import { inCombatExpirationDialog } from "../../../../applications/dialogs/_module.mjs";
-import { mix } from "../../../../helpers/utils.mjs";
+import { mix } from "../../../../helpers/construction.mjs";
 import { builders } from "../../../fields/helpers/_module.mjs";
 import { conditionRequirementsField } from "../../../fields/helpers/builders.mjs";
 import DurationModel from "../../../models/unit-models/duration-model.mjs";

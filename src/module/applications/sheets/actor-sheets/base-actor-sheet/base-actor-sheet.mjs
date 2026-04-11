@@ -1,5 +1,6 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
-import { makeIconClass, mix } from "../../../../helpers/utils.mjs";
+import { mix } from "../../../../helpers/construction.mjs";
+import { makeIconClass } from "../../../../helpers/utils.mjs";
 import HackStatApplicationMixin from "../../../shared/mixins/hack-stat-application-mixin.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import defaultSheetSettings from "./helpers/default-sheet-settings.mjs";

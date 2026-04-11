@@ -1,7 +1,8 @@
 import { characterOptions } from "../../constants/options/character-options.mjs";
 import { documentTypes } from "../../constants/system/_module.mjs";
+import { mix } from "../../helpers/construction.mjs";
 import { resolveDocument } from "../../helpers/resolve.mjs";
-import { findBestDocument, mix } from "../../helpers/utils.mjs";
+import { findBestDocument } from "../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
 
 const { Actor } = foundry.documents;
@@ -10,6 +11,7 @@ const { Actor } = foundry.documents;
 /**
  * The Teriock Actor implementation.
  * @implements {Teriock.Documents.ActorInterface}
+ * @implements {Teriock.Data.ActorPropagator}
  * @extends {Actor}
  * @extends {ClientDocument}
  * @mixes BaseDocument
@@ -112,20 +114,16 @@ export default class TeriockActor extends mix(
    */
   get defaultUser() {
     let selected;
-
     // See if any user has the actor as a character
     selected = game.users.active.find(
       (u) => u.character === this && this.canUserModify(u, "update"),
     );
-
     // See if any players have control over the actor
     selected ??= game.users.active.find(
       (u) => !u.isActiveGM && this.canUserModify(u, "update"),
     );
-
     // If all else fails, fall back to the active GM
     selected ??= game.users.activeGM;
-
     return selected;
   }
 
@@ -391,6 +389,18 @@ export default class TeriockActor extends mix(
     super.prepareData();
     this.prepareSpecialData();
     this.prepareVirtualEffects();
+  }
+
+  /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    this._propagatePostDerivationChanges();
+  }
+
+  /** @inheritDoc */
+  prepareEmbeddedDocuments() {
+    super.prepareEmbeddedDocuments();
+    this._propagatePreDerivationChanges();
   }
 
   /** @inheritDoc */

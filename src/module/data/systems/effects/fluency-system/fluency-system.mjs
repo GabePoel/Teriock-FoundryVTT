@@ -1,8 +1,8 @@
 import { iconManifest } from "../../../../constants/display/_module.mjs";
 import { FluencyExecution } from "../../../../executions/document-executions/_module.mjs";
+import { mix } from "../../../../helpers/construction.mjs";
 import { getImage } from "../../../../helpers/path.mjs";
 import { dotJoin } from "../../../../helpers/string.mjs";
-import { mix } from "../../../../helpers/utils.mjs";
 import { TextField } from "../../../fields/_module.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
 import { CommonMacroAutomation } from "../../../pseudo-documents/automations/_module.mjs";

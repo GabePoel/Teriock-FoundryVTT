@@ -1,7 +1,7 @@
 {{~#with @root.document.flags.teriockDocumentSettings as |settings|~}}
-  <div class="teriock-block-container
-              {{#if (lookup settings ../gapless)}}gapless{{/if}}
-    {{lookup settings ../size}}">
+  <div
+    class="teriock-block-container {{#if (path settings ../gapless)}}gapless{{/if}} {{path settings ../size}}"
+  >
     {{#each ../docs as |doc|}}
       {{> "teriock/ui/block"
         (merge

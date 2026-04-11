@@ -1,5 +1,6 @@
+import { mix } from "../../helpers/construction.mjs";
 import { dedent } from "../../helpers/string.mjs";
-import { findBestDocument, mix } from "../../helpers/utils.mjs";
+import { findBestDocument } from "../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
 
 const { Macro } = foundry.documents;

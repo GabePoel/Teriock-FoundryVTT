@@ -1,5 +1,5 @@
+import { mix } from "../../../helpers/construction.mjs";
 import { resolveDocument } from "../../../helpers/resolve.mjs";
-import { mix } from "../../../helpers/utils.mjs";
 import { UseExternalActivation } from "../activations/command-activations.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 import {

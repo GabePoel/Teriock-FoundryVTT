@@ -108,27 +108,6 @@ export default function PropagationDataMixin(Base) {
       prepareSpecialData() {
         this._propagateOperation("prepareSpecialData", false);
       }
-
-      /**
-       * Preparation for data that relies on proficiency.
-       */
-      prepareProficiencyData() {
-        this._propagateOperation("prepareProficiencyData", false);
-      }
-
-      /**
-       * Preparation for data that relies on fluency.
-       */
-      prepareFluencyData() {
-        this._propagateOperation("prepareFluencyData", false);
-      }
-
-      /**
-       * Add statuses and explanations for "virtual effects". These are things that would otherwise be represented with
-       * {@link TeriockActiveEffect}s, but that we want to be able to add synchronously during the update cycle. Any of
-       * these effects that should be shown on the token need to be manually added to {@link TeriockToken._drawEffects}.
-       */
-      prepareVirtualEffects() {}
     }
   );
 }

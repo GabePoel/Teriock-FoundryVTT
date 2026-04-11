@@ -1,6 +1,7 @@
 import { TeriockJournalEntry } from "../../../../documents/_module.mjs";
+import { mix } from "../../../../helpers/construction.mjs";
 import { quickAddAssociation } from "../../../../helpers/panel.mjs";
-import { fancifyFields, mix } from "../../../../helpers/utils.mjs";
+import { fancifyFields } from "../../../../helpers/utils.mjs";
 import {
   AccessDataMixin,
   PropagationDataMixin,
@@ -92,14 +93,14 @@ export default function CommonSystemMixin(Base) {
         });
       }
 
+      /** @returns {typeof EmbeddedDataModel|null} */
+      get SettingsFlagsDataModel() {
+        return null;
+      }
+
       /** @returns {string} */
       get _masterText() {
         return this.parent.master?.fullName || "";
-      }
-
-      /** @returns {typeof EmbeddedDataModel|null} */
-      get _settingsFlagsDataModel() {
-        return null;
       }
 
       /** @returns {BaseAutomation[]} */

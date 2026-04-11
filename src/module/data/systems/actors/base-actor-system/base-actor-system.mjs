@@ -1,15 +1,13 @@
+import { mix } from "../../../../helpers/construction.mjs";
 import { dotJoin } from "../../../../helpers/string.mjs";
-import { makeIcon, mix } from "../../../../helpers/utils.mjs";
+import { makeIcon } from "../../../../helpers/utils.mjs";
 import { ActorSettingsModel } from "../../../models/settings-models/_module.mjs";
-import { CommonSystemMixin } from "../../mixins/_module.mjs";
+import AbstractActorSystem from "./abstract-actor-system.mjs";
 import * as parts from "./parts/_module.mjs";
 
-const { TypeDataModel } = foundry.abstract;
-
-//noinspection JSClosureCompilerSyntax
 /**
  * Base {@link TeriockActor} data model.
- * @extends {TypeDataModel}
+ * @extends {AbstractActorSystem}
  * @extends {Teriock.Models.BaseActorSystemData}
  * @mixes CommonSystem
  * @mixes ActorAttributesPart
@@ -34,8 +32,7 @@ const { TypeDataModel } = foundry.abstract;
  * @mixes ActorTransformationPart
  */
 export default class BaseActorSystem extends mix(
-  TypeDataModel,
-  CommonSystemMixin,
+  AbstractActorSystem,
   parts.ActorStatsPart,
   parts.ActorAutomationPart,
   parts.ActorScalingPart,
@@ -56,6 +53,7 @@ export default class BaseActorSystem extends mix(
   parts.ActorSensesPart,
   parts.ActorProtectionsPart,
   parts.ActorRestingPart,
+  parts.ActorTokenPart,
 ) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
@@ -98,7 +96,7 @@ export default class BaseActorSystem extends mix(
   }
 
   /** @inheritDoc */
-  get _settingsFlagsDataModel() {
+  get SettingsFlagsDataModel() {
     return ActorSettingsModel;
   }
 

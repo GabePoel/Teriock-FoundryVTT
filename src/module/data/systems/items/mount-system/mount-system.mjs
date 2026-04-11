@@ -1,9 +1,9 @@
 import { icons } from "../../../../constants/display/icons.mjs";
+import { mix } from "../../../../helpers/construction.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
 import {
   inferNameFromIdentifier,
   makeIcon,
-  mix,
 } from "../../../../helpers/utils.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";

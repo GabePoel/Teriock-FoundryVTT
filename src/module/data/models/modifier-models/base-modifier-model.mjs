@@ -1,5 +1,5 @@
+import { mix } from "../../../helpers/construction.mjs";
 import { toCamelCase } from "../../../helpers/string.mjs";
-import { mix } from "../../../helpers/utils.mjs";
 import {
   ThresholdDataMixin,
   UsableDataMixin,

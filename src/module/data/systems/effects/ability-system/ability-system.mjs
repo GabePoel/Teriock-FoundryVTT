@@ -1,6 +1,6 @@
 import { costOptions } from "../../../../constants/options/cost-options.mjs";
 import { AbilityExecution } from "../../../../executions/document-executions/_module.mjs";
-import { mix } from "../../../../helpers/utils.mjs";
+import { mix } from "../../../../helpers/construction.mjs";
 import { AbilitySettingsModel } from "../../../models/settings-models/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import * as shared from "../../../shared/mixins/_module.mjs";
@@ -112,6 +112,11 @@ export default class AbilitySystem extends mix(
   }
 
   /** @inheritDoc */
+  get SettingsFlagsDataModel() {
+    return AbilitySettingsModel;
+  }
+
+  /** @inheritDoc */
   get _nameTags() {
     const tags = [];
     for (const [k, v] of Object.entries(TERIOCK.options.cost.tweaks)) {
@@ -123,11 +128,6 @@ export default class AbilitySystem extends mix(
       tags.push(_loc("TERIOCK.SYSTEMS.Ability.NAME.granted"));
     }
     return [...tags, ...super._nameTags];
-  }
-
-  /** @inheritDoc */
-  get _settingsFlagsDataModel() {
-    return AbilitySettingsModel;
   }
 
   /** @inheritDoc */

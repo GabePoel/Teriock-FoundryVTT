@@ -1,5 +1,6 @@
 import { icons } from "../../constants/display/icons.mjs";
-import { makeIcon, mix } from "../../helpers/utils.mjs";
+import { mix } from "../../helpers/construction.mjs";
+import { makeIcon } from "../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
 
 const { TableResult } = foundry.documents;

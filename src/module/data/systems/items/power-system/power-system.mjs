@@ -1,7 +1,8 @@
 import { powerOptions } from "../../../../constants/options/power-options.mjs";
+import { mix } from "../../../../helpers/construction.mjs";
 import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
-import { mix, objectMap } from "../../../../helpers/utils.mjs";
+import { objectMap } from "../../../../helpers/utils.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";

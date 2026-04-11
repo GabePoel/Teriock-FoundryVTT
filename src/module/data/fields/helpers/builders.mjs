@@ -139,10 +139,12 @@ export function qualifiedChangeField() {
       label: "TERIOCK.SCHEMA.QualifiedChange.target.label",
       nullable: false,
     }),
-    time: new EnhancedStringField({
-      choices: TERIOCK.options.change.timeLabels,
+    phase: new EnhancedStringField({
+      choices: objectMap(TERIOCK.options.change.phase, (p) => p.label, {
+        localize: true,
+      }),
       initial: "normal",
-      label: "TERIOCK.SCHEMA.QualifiedChange.time.label",
+      label: "TERIOCK.SCHEMA.QualifiedChange.phase.label",
       nullable: false,
     }),
     type: new EnhancedStringField({
@@ -319,20 +321,18 @@ export function panelsField() {
  * Field that sets block sizes.
  * @param {object} [options]
  * @param {Teriock.Keys.CardDisplaySize} [options.initial]
- * @param {string} [options.label]
+ * @param {string} [options.child]
  * @returns {StringField}
  */
 export function blockSizeField(options = {}) {
-  const {
-    initial = "medium",
-    label = _loc("TERIOCK.SCHEMA.BlockSize.default"),
-  } = options;
+  const { initial = "medium", child = "TERIOCK.SCHEMA.BlockSize.default" } =
+    options;
   return new StringField({
     initial,
     choices: TERIOCK.options.display.sizes,
-    label: _loc("TERIOCK.SCHEMA.BlockSize.label", { name: label }),
+    label: _loc("TERIOCK.SCHEMA.BlockSize.label", { name: _loc(child) }),
     hint: _loc("TERIOCK.SCHEMA.BlockSize.hint", {
-      name: label.toLocaleLowerCase(),
+      name: _loc(child).toLocaleLowerCase(),
     }),
   });
 }
@@ -341,21 +341,19 @@ export function blockSizeField(options = {}) {
  * Field that sets block gaps.
  * @param {object} [options]
  * @param {boolean} [options.initial]
- * @param {string} [options.label]
+ * @param {string} [options.child]
  * @returns {BooleanField}
  */
 export function blockGaplessField(options = {}) {
-  const {
-    initial = false,
-    label = _loc("TERIOCK.SCHEMA.BlackGapless.default"),
-  } = options;
+  const { initial = false, child = "TERIOCK.SCHEMA.BlackGapless.default" } =
+    options;
   return new BooleanField({
     initial,
     label: _loc("TERIOCK.SCHEMA.BlackGapless.label", {
-      name: label,
+      name: _loc(child),
     }),
     hint: _loc("TERIOCK.SCHEMA.BlackGapless.hint", {
-      name: label.toLocaleLowerCase(),
+      name: _loc(child).toLocaleLowerCase(),
     }),
   });
 }

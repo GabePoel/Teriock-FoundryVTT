@@ -1,6 +1,7 @@
+import { mix } from "../../../helpers/construction.mjs";
 import { commands } from "../../../helpers/interaction/_module.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
-import { mix, objectMap } from "../../../helpers/utils.mjs";
+import { objectMap } from "../../../helpers/utils.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 import { RollActivation } from "../activations/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";

@@ -1,5 +1,6 @@
+import { mix } from "../../../../helpers/construction.mjs";
 import { ucFirst } from "../../../../helpers/string.mjs";
-import { makeIcon, mix } from "../../../../helpers/utils.mjs";
+import { makeIcon } from "../../../../helpers/utils.mjs";
 import { EvaluationField, TextField } from "../../../fields/_module.mjs";
 import { ChildSettingsModel } from "../../../models/settings-models/_module.mjs";
 import { UsableDataMixin } from "../../../shared/mixins/_module.mjs";
@@ -65,15 +66,15 @@ export default function ChildSystemMixin(Base) {
       }
 
       /** @inheritDoc */
+      get SettingsFlagsDataModel() {
+        return ChildSettingsModel;
+      }
+
+      /** @inheritDoc */
       get _masterText() {
         return this.parent.master?.documentName === "Actor"
           ? ""
           : super._masterText;
-      }
-
-      /** @inheritDoc */
-      get _settingsFlagsDataModel() {
-        return ChildSettingsModel;
       }
 
       /** @returns {Teriock.Sheet.DisplayTag[]} */

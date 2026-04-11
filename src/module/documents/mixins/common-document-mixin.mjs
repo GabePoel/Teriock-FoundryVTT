@@ -1,7 +1,7 @@
 import PropagationDataMixin from "../../data/shared/mixins/propagation-data-mixin.mjs";
+import { mix } from "../../helpers/construction.mjs";
 import { systemPath } from "../../helpers/path.mjs";
 import { resolveDocuments } from "../../helpers/resolve.mjs";
-import { mix } from "../../helpers/utils.mjs";
 import { TeriockActor } from "../_module.mjs";
 import { TypeCollection } from "../collections/_module.mjs";
 import {
@@ -44,8 +44,8 @@ export default function CommonDocumentMixin(Base) {
       }
 
       /** @inheritDoc */
-      get _settingsFlagsDataModel() {
-        return this.system._settingsFlagsDataModel;
+      get SettingsFlagsDataModel() {
+        return this.system.SettingsFlagsDataModel;
       }
 
       /**
@@ -243,15 +243,6 @@ export default function CommonDocumentMixin(Base) {
         if (!skipCall) {
           return Hooks.call(`teriock.${trigger}`, this, this.getScope(scope));
         }
-      }
-
-      /** @inheritDoc */
-      prepareData() {
-        super.prepareData();
-        if (this.isTop) this.prepareProficiencyData();
-        if (this.isTop) this.prepareFluencyData();
-        if (this.isTop) this.prepareSpecialData();
-        if (this.isTop) this.prepareVirtualEffects();
       }
 
       /** @inheritDoc */

@@ -11,7 +11,7 @@ export default function SettingsDocumentMixin(Base) {
       /**
        * @returns {typeof EmbeddedDataModel|null}
        */
-      get _settingsFlagsDataModel() {
+      get SettingsFlagsDataModel() {
         return null;
       }
 
@@ -34,8 +34,10 @@ export default function SettingsDocumentMixin(Base) {
 
       /** @inheritDoc */
       prepareData() {
-        if (this._settingsFlagsDataModel) {
-          this.flags.teriockDocumentSettings = new this._settingsFlagsDataModel(
+        if (this.SettingsFlagsDataModel) {
+          const model = this.SettingsFlagsDataModel;
+          foundry.helpers.Localization.localizeDataModel(model);
+          this.flags.teriockDocumentSettings = new model(
             this._source.flags.teriockDocumentSettings,
             { parent: this },
           );

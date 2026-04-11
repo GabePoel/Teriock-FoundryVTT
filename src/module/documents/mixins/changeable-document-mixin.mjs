@@ -22,7 +22,7 @@ export default function ChangeableDocumentMixin(Base) {
       static buildChangeTree(effects, options = {}) {
         const changeTree =
           /** @type {Teriock.Changes.ChangeTree} */ Object.fromEntries(
-            Object.keys(TERIOCK.options.change.time).map((time) => [
+            Object.keys(TERIOCK.options.change.phase).map((time) => [
               time,
               Object.fromEntries(
                 ["Actor", "Item", "ActiveEffect"].map((documentName) => {
@@ -104,7 +104,8 @@ export default function ChangeableDocumentMixin(Base) {
       get _allChanges() {
         return (
           game.teriock.getSetting("nonHierarchicalChanges") &&
-          this.actor?.getSetting("nonHierarchicalChanges")
+          (!this.actor ||
+            this.actor?.getSetting("automation.nonHierarchicalChanges"))
         );
       }
 
@@ -166,7 +167,7 @@ export default function ChangeableDocumentMixin(Base) {
 
       /**
        * Apply changes to this document based on the time the changes should apply
-       * @param {Teriock.Changes.ChangeTime} time
+       * @param {Teriock.Changes.Phase} time
        */
       _applyChangesByTime(time) {
         if (!this._canChange) return;
@@ -231,6 +232,50 @@ export default function ChangeableDocumentMixin(Base) {
       }
 
       /**
+       * Apply qualified changes for the specified phase to all embedded documents and then this one.
+       * @param {Teriock.Changes.Phase} phase
+       * @param {boolean} rebuildTree
+       * @param {boolean} rebuildData
+       */
+      _propagateChanges(phase, rebuildTree, rebuildData) {
+        this._propagateOperation("_propagateChanges", false, [
+          phase,
+          rebuildTree,
+          rebuildData,
+        ]);
+        if (this._allChanges) {
+          this._applyChangesByTime(phase);
+          if (rebuildTree && this.isTop) this._buildChangeTree();
+          if (rebuildData && this.isTop) this._buildChangeReplacementData();
+        }
+      }
+
+      /**
+       * Propagate all the changes that happen after {@link TeriockActor} data is derived.
+       * All document types propagate this after data is derived.
+       * This always runs after {@link _propagatePreDerivationChanges}.
+       */
+      _propagatePostDerivationChanges() {
+        if (this.isTop) {
+          this._propagateChanges("derivation", false, true);
+          this._propagateChanges("completion", false, false);
+        }
+      }
+
+      /**
+       * Propagate all the changes that happen before {@link TeriockActor} data is derived.
+       * For documents other than actors, these propagate after data is derived.
+       * This always runs before {@link _propagatePostDerivationChanges}.
+       */
+      _propagatePreDerivationChanges() {
+        if (this.isTop) {
+          this._propagateChanges("proficiency", true, true);
+          this._propagateChanges("fluency", true, true);
+          this._propagateChanges("normal", false, true);
+        }
+      }
+
+      /**
        * Get all ActiveEffects that may have changes.
        * @returns {Generator<AnyActiveEffect, void, void>}
        */
@@ -246,52 +291,11 @@ export default function ChangeableDocumentMixin(Base) {
         this._changeTree = undefined;
         this._cachedCandidateEffects = undefined;
         super.prepareBaseData();
-        if (this._allChanges) {
-          this._applyChangesByTime("base");
-          if (this.isTop) {
-            this._buildChangeTree();
-            this._buildChangeReplacementData();
-          }
-        }
-      }
-
-      /** @inheritDoc */
-      prepareEmbeddedDocuments() {
-        super.prepareEmbeddedDocuments();
-        this._applyChangesByTime("normal");
-      }
-
-      /** @inheritDoc */
-      prepareFluencyData() {
-        super.prepareFluencyData();
-        if (this._allChanges) {
-          this._applyChangesByTime("fluency");
-          if (this.isTop) {
-            this._buildChangeTree();
-            this._buildChangeReplacementData();
-          }
-        }
-      }
-
-      /** @inheritDoc */
-      prepareProficiencyData() {
-        super.prepareProficiencyData();
-        if (this._allChanges) {
-          this._applyChangesByTime("proficiency");
-          if (this.isTop) {
-            this._buildChangeTree();
-            this._buildChangeReplacementData();
-          }
-        }
       }
 
       /** @inheritDoc */
       prepareSpecialData() {
         super.prepareSpecialData();
-        if (this._allChanges) {
-          this._applyChangesByTime("derivation");
-          this._applyChangesByTime("final");
-        }
         this.overrides = foundry.utils.expandObject(this.overrides);
       }
     }

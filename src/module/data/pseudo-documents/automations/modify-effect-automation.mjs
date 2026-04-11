@@ -1,4 +1,4 @@
-import { mix } from "../../../helpers/utils.mjs";
+import { mix } from "../../../helpers/construction.mjs";
 import { CritAutomation } from "./abstract/_module.mjs";
 import {
   CompetenceAutomationMixin,

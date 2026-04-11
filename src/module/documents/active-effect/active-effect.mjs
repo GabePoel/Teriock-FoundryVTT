@@ -1,5 +1,5 @@
 import { documentTypes } from "../../constants/system/document-types.mjs";
-import { mix } from "../../helpers/utils.mjs";
+import { mix } from "../../helpers/construction.mjs";
 import TeriockItem from "../item/item.mjs";
 import * as mixins from "../mixins/_module.mjs";
 

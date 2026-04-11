@@ -1,4 +1,4 @@
-import { mix } from "../../helpers/utils.mjs";
+import { mix } from "../../helpers/construction.mjs";
 import { TeriockChatMessage } from "../_module.mjs";
 import { HierarchyDocumentMixin } from "./_module.mjs";
 import UsableDocumentMixin from "./usable-document-mixin.mjs";
@@ -120,6 +120,13 @@ export default function ChildDocumentMixin(Base) {
           copyDocument = await this.constructor.create(copy);
         }
         return copyDocument[0];
+      }
+
+      /** @inheritDoc */
+      prepareDerivedData() {
+        super.prepareDerivedData();
+        this._propagatePreDerivationChanges();
+        this._propagatePostDerivationChanges();
       }
 
       /** @inheritDoc */

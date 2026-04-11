@@ -1,5 +1,5 @@
 import { TextField } from "../../../data/fields/_module.mjs";
-import { mix } from "../../../helpers/utils.mjs";
+import { mix } from "../../../helpers/construction.mjs";
 import { bindCommonActions } from "../../shared/_module.mjs";
 import { TeriockTextEditor } from "../../ux/_module.mjs";
 import { ConfigButtonSheetMixin } from "../mixins/button-mixins/_module.mjs";

@@ -14,28 +14,21 @@ const { Token } = foundry.canvas.placeables;
 export default class EtherealDetectionMode extends LightDetectionMode {
   /** @inheritDoc */
   static getDetectionFilter() {
-    //noinspection JSUnresolvedReference
     if (
       !game.modules.get("tokenmagic")?.active ||
-      !game.teriock.getSetting("automaticTokenMagicConditionEffects")
+      !game.teriock.getSetting("autoTokenMagicConditionEffects")
     ) {
-      //noinspection JSValidateTypes
-      return (this._detectionFilter ??= EtherealFilter.create({
-        blur: 10,
-      }));
+      return (this._detectionFilter ??= EtherealFilter.create({ blur: 10 }));
     } else {
       return super.getDetectionFilter();
     }
   }
 
   _canDetect(visionSource, target) {
-    if (!super._canDetect(visionSource, target)) {
-      return false;
-    }
+    if (!super._canDetect(visionSource, target)) return false;
+
     if (target instanceof Token) {
-      if (!target.document.hasStatusEffect("ethereal")) {
-        return false;
-      }
+      if (!target.document.hasStatusEffect("ethereal")) return false;
     }
     return true;
   }

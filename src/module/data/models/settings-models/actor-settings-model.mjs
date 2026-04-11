@@ -8,92 +8,88 @@ const { fields } = foundry.data;
 
 export default class ActorSettingsModel extends EmbeddedDataModel {
   /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [
+    ...super.LOCALIZATION_PREFIXES,
+    "TERIOCK.MODELS.ActorSettings",
+    "TERIOCK.MODELS.CommonSettings",
+  ];
+
+  /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      automaticallyWound: new fields.BooleanField({
-        hint: _loc("TERIOCK.MODELS.ActorSettings.automaticallyWound.hint"),
-        initial: true,
-        label: _loc("TERIOCK.MODELS.ActorSettings.automaticallyWound.label"),
+      automation: new fields.SchemaField({
+        nonHierarchicalChanges: new fields.BooleanField({
+          hint: "TERIOCK.SETTINGS.nonHierarchicalChanges.hint",
+          initial: true,
+          label: "TERIOCK.SETTINGS.nonHierarchicalChanges.name",
+        }),
+        payAbilityCosts: new fields.BooleanField({
+          hint: "TERIOCK.SETTINGS.autoPayAbilityCosts.hint",
+          initial: true,
+          label: "TERIOCK.SETTINGS.autoPayAbilityCosts.name",
+        }),
+        wound: new fields.BooleanField({ initial: true }),
       }),
-      automaticallyPayAbilityCosts: new fields.BooleanField({
-        hint: _loc("TERIOCK.SETTINGS.automaticallyPayAbilityCosts.hint"),
-        initial: true,
-        label: _loc("TERIOCK.SETTINGS.automaticallyPayAbilityCosts.name"),
+      sheet: new fields.SchemaField({
+        blockAbilitiesGapless: new blockGaplessField({
+          initial: true,
+          child: "TERIOCK.SHEETS.Actor.TABS.Abilities.title",
+        }),
+        blockAbilitiesSize: new blockSizeField({
+          initial: "small",
+          child: "TERIOCK.SHEETS.Actor.TABS.Abilities.title",
+        }),
+        blockClassesGapless: new blockGaplessField({
+          child: "TERIOCK.SHEETS.Actor.TABS.Classes.title",
+        }),
+        blockClassesSize: new blockSizeField({
+          child: "TERIOCK.SHEETS.Actor.TABS.Classes.title",
+        }),
+        blockEffectsGapless: new blockGaplessField({
+          initial: true,
+          child: "TERIOCK.SHEETS.Actor.TABS.Effects.title",
+        }),
+        blockEffectsSize: new blockSizeField({
+          initial: "small",
+          child: "TERIOCK.SHEETS.Actor.TABS.Effects.title",
+        }),
+        blockInventoryGapless: new blockGaplessField({
+          initial: true,
+          child: "TERIOCK.SHEETS.Actor.TABS.Inventory.title",
+        }),
+        blockInventorySize: new blockSizeField({
+          initial: "small",
+          child: "TERIOCK.SHEETS.Actor.TABS.Inventory.title",
+        }),
+        blockPowersGapless: new blockGaplessField({
+          child: "TERIOCK.SHEETS.Actor.TABS.Powers.title",
+        }),
+        blockPowersSize: new blockSizeField({
+          child: "TERIOCK.SHEETS.Actor.TABS.Powers.title",
+        }),
+        blockResourcesGapless: new blockGaplessField({
+          child: "TERIOCK.SHEETS.Actor.TABS.Resources.title",
+        }),
+        blockResourcesSize: new blockSizeField({
+          child: "TERIOCK.SHEETS.Actor.TABS.Resources.title",
+        }),
+        blockTradecraftsGapless: new blockGaplessField({
+          child: "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.title",
+        }),
+        blockTradecraftsSize: new blockSizeField({
+          child: "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.title",
+        }),
       }),
-      nonHierarchicalChanges: new fields.BooleanField({
-        hint: _loc("TERIOCK.SETTINGS.nonHierarchicalChanges.hint"),
-        initial: true,
-        label: _loc("TERIOCK.SETTINGS.nonHierarchicalChanges.name"),
-      }),
-      sheetBlockAbilitiesGapless: new blockGaplessField({
-        initial: true,
-        label: _loc(
-          "TERIOCK.MODELS.ActorSettings.sheetBlockAbilitiesGapless.label",
-        ),
-      }),
-      sheetBlockAbilitiesSize: new blockSizeField({
-        initial: "small",
-        label: _loc(
-          "TERIOCK.MODELS.ActorSettings.sheetBlockAbilitiesSize.label",
-        ),
-      }),
-      sheetBlockClassesGapless: new blockGaplessField({
-        label: _loc(
-          "TERIOCK.MODELS.ActorSettings.sheetBlockClassesGapless.label",
-        ),
-      }),
-      sheetBlockClassesSize: new blockSizeField({
-        label: _loc("TERIOCK.MODELS.ActorSettings.sheetBlockClassesSize.label"),
-      }),
-      sheetBlockEffectsGapless: new blockGaplessField({
-        initial: true,
-        label: _loc(
-          "TERIOCK.MODELS.ActorSettings.sheetBlockEffectsGapless.label",
-        ),
-      }),
-      sheetBlockEffectsSize: new blockSizeField({
-        initial: "small",
-        label: _loc("TERIOCK.MODELS.ActorSettings.sheetBlockEffectsSize.label"),
-      }),
-      sheetBlockInventoryGapless: new blockGaplessField({
-        initial: true,
-        label: _loc(
-          "TERIOCK.MODELS.ActorSettings.sheetBlockInventoryGapless.label",
-        ),
-      }),
-      sheetBlockInventorySize: new blockSizeField({
-        initial: "small",
-        label: _loc(
-          "TERIOCK.MODELS.ActorSettings.sheetBlockInventorySize.label",
-        ),
-      }),
-      sheetBlockPowersGapless: new blockGaplessField({
-        label: _loc(
-          "TERIOCK.MODELS.ActorSettings.sheetBlockPowersGapless.label",
-        ),
-      }),
-      sheetBlockPowersSize: new blockSizeField({
-        label: _loc("TERIOCK.MODELS.ActorSettings.sheetBlockPowersSize.label"),
-      }),
-      sheetBlockResourcesGapless: new blockGaplessField({
-        label: _loc(
-          "TERIOCK.MODELS.ActorSettings.sheetBlockResourcesGapless.label",
-        ),
-      }),
-      sheetBlockResourcesSize: new blockSizeField({
-        label: _loc(
-          "TERIOCK.MODELS.ActorSettings.sheetBlockResourcesSize.label",
-        ),
-      }),
-      sheetBlockTradecraftsGapless: new blockGaplessField({
-        label: _loc(
-          "TERIOCK.MODELS.ActorSettings.sheetBlockTradecraftsGapless.label",
-        ),
-      }),
-      sheetBlockTradecraftsSize: new blockSizeField({
-        label: _loc(
-          "TERIOCK.MODELS.ActorSettings.sheetBlockTradecraftsSize.label",
-        ),
+      token: new fields.SchemaField({
+        autoColoration: new fields.BooleanField({ initial: true }),
+        autoDetectionModes: new fields.BooleanField({ initial: true }),
+        autoLighting: new fields.BooleanField({ initial: true }),
+        autoMagic: new fields.BooleanField({ initial: true }),
+        autoScale: new fields.BooleanField({ initial: true }),
+        autoTransformation: new fields.BooleanField({ initial: true }),
+        autoVisionAngle: new fields.BooleanField({ initial: true }),
+        autoVisionModes: new fields.BooleanField({ initial: true }),
+        autoVisionRange: new fields.BooleanField({ initial: true }),
       }),
     });
   }

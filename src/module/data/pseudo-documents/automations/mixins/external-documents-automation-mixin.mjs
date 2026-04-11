@@ -1,5 +1,5 @@
+import { mix } from "../../../../helpers/construction.mjs";
 import { resolveDocuments } from "../../../../helpers/resolve.mjs";
-import { mix } from "../../../../helpers/utils.mjs";
 import DocumentsAutomationMixin from "./documents-automation-mixin.mjs";
 
 const { fields } = foundry.data;

@@ -1,7 +1,7 @@
 import { BaseDocumentExecution } from "../../../../executions/document-executions/_module.mjs";
+import { mix } from "../../../../helpers/construction.mjs";
 import { simplifyTags } from "../../../../helpers/panel.mjs";
 import { toKebabCase } from "../../../../helpers/string.mjs";
-import { mix } from "../../../../helpers/utils.mjs";
 import { FormulaField, IdentifierField } from "../../../fields/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";

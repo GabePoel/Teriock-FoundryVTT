@@ -1,5 +1,6 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
-import { makeIconClass, mix } from "../../../../helpers/utils.mjs";
+import { mix } from "../../../../helpers/construction.mjs";
+import { makeIconClass } from "../../../../helpers/utils.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseItemSheet from "../base-item-sheet.mjs";
 import {
@@ -52,18 +53,11 @@ export default class RankSheet extends mix(
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
-    if (!this.isEditable) {
-      return;
-    }
+    if (!this.isEditable) return;
+
     [
-      {
-        selector: ".class-box",
-        menu: classContextMenu,
-      },
-      {
-        selector: ".archetype-box",
-        menu: archetypeContextMenu,
-      },
+      { selector: ".class-box", menu: classContextMenu },
+      { selector: ".archetype-box", menu: archetypeContextMenu },
     ].forEach(({ selector, menu }) => {
       this._connectContextMenu(selector, menu(this.item), "click");
     });

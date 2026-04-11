@@ -1,5 +1,5 @@
 import { icons } from "../../../../constants/display/icons.mjs";
-import { mix } from "../../../../helpers/utils.mjs";
+import { mix } from "../../../../helpers/construction.mjs";
 import { TextField } from "../../../fields/_module.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";

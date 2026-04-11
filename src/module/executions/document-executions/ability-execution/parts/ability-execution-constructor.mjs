@@ -186,10 +186,10 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
    */
   #initializeCosts(options) {
     Object.assign(this.options, {
-      noGp: options.noGp ?? !this.source.getSetting("promptCostGp"),
-      noHp: options.noHp ?? !this.source.getSetting("promptCostHp"),
-      noLp: options.noLp ?? !this.source.getSetting("promptCostLp"),
-      noMp: options.noMp ?? !this.source.getSetting("promptCostMp"),
+      noGp: options.noGp ?? !this.source.getSetting("execution.promptCostGp"),
+      noHp: options.noHp ?? !this.source.getSetting("execution.promptCostHp"),
+      noLp: options.noLp ?? !this.source.getSetting("execution.promptCostLp"),
+      noMp: options.noMp ?? !this.source.getSetting("execution.promptCostMp"),
     });
     this.costs = { hp: 0, mp: 0, gp: 0 };
   }
@@ -201,9 +201,11 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
   #initializeFlags(options) {
     this.flags = {
       noHeighten:
-        options.noHeighten ?? !this.source.getSetting("promptHeighten"),
+        options.noHeighten ??
+        !this.source.getSetting("execution.promptHeighten"),
       noTemplate:
-        options.noTemplate ?? !this.source.getSetting("promptTemplate"),
+        options.noTemplate ??
+        !this.source.getSetting("execution.promptTemplate"),
     };
   }
 

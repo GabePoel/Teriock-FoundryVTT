@@ -1,4 +1,4 @@
-import { mix } from "../../../../helpers/utils.mjs";
+import { mix } from "../../../../helpers/construction.mjs";
 import BaseActorSheet from "./base-actor-sheet.mjs";
 import * as parts from "./parts/_module.mjs";
 

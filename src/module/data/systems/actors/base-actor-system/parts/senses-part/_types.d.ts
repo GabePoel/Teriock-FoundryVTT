@@ -1,5 +1,4 @@
 import { EvaluationModel } from "../../../../../models/_module.mjs";
-import { characterOptions } from "../../../../../../constants/options/character-options.mjs";
 
 declare global {
   namespace Teriock.Models {
@@ -11,8 +10,6 @@ declare global {
         /** <schema> Perceiving based on perception */
         perceiving: EvaluationModel;
       };
-      /** <base> */
-      light: typeof characterOptions.defaultLight;
       /** <schema> Senses */
       senses: {
         /** <schema> Blind fighting */

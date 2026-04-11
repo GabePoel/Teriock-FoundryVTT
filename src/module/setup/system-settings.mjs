@@ -68,17 +68,17 @@ export const settings = {
     },
   },
   automatedBehavior: {
-    automaticallyChangeVisionModes: {
+    autoChangeVisionModes: {
       default: true,
-      hint: "TERIOCK.SETTINGS.automaticallyChangeVisionModes.hint",
-      name: "TERIOCK.SETTINGS.automaticallyChangeVisionModes.name",
+      hint: "TERIOCK.SETTINGS.autoChangeVisionModes.hint",
+      name: "TERIOCK.SETTINGS.autoChangeVisionModes.name",
       scope: "user",
       type: Boolean,
     },
-    automaticallyPayAbilityCosts: {
+    autoPayAbilityCosts: {
       default: true,
-      hint: "TERIOCK.SETTINGS.automaticallyPayAbilityCosts.hint",
-      name: "TERIOCK.SETTINGS.automaticallyPayAbilityCosts.name",
+      hint: "TERIOCK.SETTINGS.autoPayAbilityCosts.hint",
+      name: "TERIOCK.SETTINGS.autoPayAbilityCosts.name",
       scope: "user",
       type: Boolean,
     },
@@ -229,10 +229,10 @@ export const settings = {
     },
   },
   generalDisplay: {
-    automaticTokenMagicConditionEffects: {
+    autoTokenMagicConditionEffects: {
       default: true,
-      hint: "TERIOCK.SETTINGS.automaticTokenMagicConditionEffects.hint",
-      name: "TERIOCK.SETTINGS.automaticTokenMagicConditionEffects.name",
+      hint: "TERIOCK.SETTINGS.autoTokenMagicConditionEffects.hint",
+      name: "TERIOCK.SETTINGS.autoTokenMagicConditionEffects.name",
       scope: "world",
       type: Boolean,
     },
@@ -252,10 +252,10 @@ export const settings = {
     },
   },
   panel: {
-    automaticPanelCollapseTime: {
+    autoPanelCollapseTime: {
       default: 5,
-      hint: "TERIOCK.SETTINGS.automaticPanelCollapseTime.hint",
-      name: "TERIOCK.SETTINGS.automaticPanelCollapseTime.name",
+      hint: "TERIOCK.SETTINGS.autoPanelCollapseTime.hint",
+      name: "TERIOCK.SETTINGS.autoPanelCollapseTime.name",
       scope: "user",
       type: Number,
     },

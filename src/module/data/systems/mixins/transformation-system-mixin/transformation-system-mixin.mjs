@@ -127,6 +127,44 @@ export default function TransformationSystemMixin(Base) {
       }
 
       /**
+       * Pull species data, configure it, and att it to the actor.
+       * @returns {Promise<void>}
+       */
+      async #createTransformedSpecies() {
+        if (this.isTransformation && this.actor) {
+          const uuids = this.transformation.uuids;
+          const flags = this._buildTransformationFlags();
+          this.parent.updateSource({ flags });
+          let species = /** @type {TeriockSpecies[]} */ await Promise.all(
+            uuids.map((uuid) => fromUuid(uuid)),
+          );
+          species = species.filter((s) => s);
+          if (species) {
+            const itemData = /** @type {TeriockSpecies[]} */ species.map((s) =>
+              s.toObject(),
+            );
+            itemData.forEach((s) => {
+              s.system._dep = this.parent.id;
+              s.system.transformationLevel = this.transformation.level;
+              s.system.statDice.hp.disabled =
+                !this.transformation.reset.has("hp");
+              s.system.statDice.mp.disabled =
+                !this.transformation.reset.has("mp");
+              s.system.competence.raw = this.transformation.competence.value;
+              if (s.system.size.min && s.system.size.max) {
+                s.system.size.value = Math.clamp(
+                  this.parent.actor.system.size.number.value,
+                  s.system.size.min,
+                  s.system.size.max,
+                );
+              }
+            });
+            await this.actor.createEmbeddedDocuments("Item", itemData);
+          }
+        }
+      }
+
+      /**
        * Filter an array of documents to include only the ones that aren't disabled.
        * @param {AnyChildDocument[]} docs
        * @return {AnyChildDocument[]}
@@ -262,14 +300,16 @@ export default function TransformationSystemMixin(Base) {
         ) {
           return;
         }
-        this._applyTransformationUpdates();
-        const actor = this.parent.actor;
-        const updateData = {
-          "system.transformation.primary": this.parent.id,
-          "flags.teriock.lastTransformation": this.parent.id,
-          ...this.#resetUpdateData,
-        };
-        actor.update(updateData);
+        this.#createTransformedSpecies().then(() =>
+          this._applyTransformationUpdates().then(() => {
+            const updateData = {
+              "system.transformation.primary": this.parent.id,
+              "flags.teriock.lastTransformation": this.parent.id,
+              ...this.#resetUpdateData,
+            };
+            this.actor.update(updateData);
+          }),
+        );
       }
 
       /** @inheritDoc */
@@ -303,44 +343,6 @@ export default function TransformationSystemMixin(Base) {
                 this.actor.update(this.#resetUpdateData);
               }
             });
-          }
-        }
-      }
-
-      /** @inheritDoc */
-      async _preCreate(data, options, user) {
-        const yes = await super._preCreate(data, options, user);
-        if (yes === false) return false;
-
-        if (this.isTransformation && this.actor) {
-          const uuids = this.transformation.uuids;
-          const flags = this._buildTransformationFlags();
-          this.parent.updateSource({ flags });
-          let species = /** @type {TeriockSpecies[]} */ await Promise.all(
-            uuids.map((uuid) => fromUuid(uuid)),
-          );
-          species = species.filter((s) => s);
-          if (species) {
-            const itemData = /** @type {TeriockSpecies[]} */ species.map((s) =>
-              s.toObject(),
-            );
-            itemData.forEach((s) => {
-              s.system._dep = this.parent.id;
-              s.system.transformationLevel = this.transformation.level;
-              s.system.statDice.hp.disabled =
-                !this.transformation.reset.has("hp");
-              s.system.statDice.mp.disabled =
-                !this.transformation.reset.has("mp");
-              s.system.competence.raw = this.transformation.competence.value;
-              if (s.system.size.min && s.system.size.max) {
-                s.system.size.value = Math.clamp(
-                  this.parent.actor.system.size.number.value,
-                  s.system.size.min,
-                  s.system.size.max,
-                );
-              }
-            });
-            await this.actor.createEmbeddedDocuments("Item", itemData);
           }
         }
       }
@@ -425,6 +427,42 @@ export default function TransformationSystemMixin(Base) {
               }
             }
           }
+        }
+      }
+
+      /** @inheritDoc */
+      prepareDerivedData() {
+        super.prepareDerivedData();
+        if (
+          this.isPrimaryTransformation &&
+          this.actor?.getSetting("token.autoTransformation") &&
+          this.transformation.img
+        ) {
+          this.changes.push(
+            ...[
+              {
+                key: "token.texture.src",
+                phase: "initial",
+                priority: 5,
+                type: "override",
+                value: this.transformation.img,
+              },
+              {
+                key: "token.ring.subject.texture",
+                phase: "initial",
+                priority: 5,
+                type: "override",
+                value: this.transformation.img,
+              },
+              {
+                key: "token.ring.enabled",
+                phase: "initial",
+                priority: 5,
+                type: "override",
+                value: this.transformation.ring,
+              },
+            ],
+          );
         }
       }
 

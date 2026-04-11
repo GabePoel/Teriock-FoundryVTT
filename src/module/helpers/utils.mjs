@@ -150,16 +150,6 @@ export function prefixObject(obj, prefix) {
 }
 
 /**
- * Mixes a base class with any number of mixins.
- * @param {Class} Base - The class to be extended.
- * @param {Function[]} Mixins - The mixin functions to apply.
- * @returns {Class} The combined class.
- */
-export function mix(Base, ...Mixins) {
-  return Mixins.reduce((cls, mixin) => mixin(cls), Base);
-}
-
-/**
  * Sort an object by its keys.
  * @template T
  * @param {T} obj

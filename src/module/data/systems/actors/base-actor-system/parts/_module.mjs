@@ -16,5 +16,6 @@ export { default as ActorRollableTakesPart } from "./actor-rollable-takes-part.m
 export { default as ActorScalingPart } from "./scaling-part/actor-scaling-part.mjs";
 export { default as ActorSensesPart } from "./senses-part/actor-senses-part.mjs";
 export { default as ActorStatsPart } from "./stats-part/actor-stats-part.mjs";
+export { default as ActorTokenPart } from "./actor-token-part.mjs";
 export { default as ActorTradecraftsPart } from "./tradecrafts-part/actor-tradecrafts-part.mjs";
 export { default as ActorTransformationPart } from "./transformation-part/actor-transformation-part.mjs";
