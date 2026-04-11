@@ -11,31 +11,27 @@ export default async function placeTemplateDialog(templateData = {}) {
     movable = false,
     angle = "45",
   } = templateData;
-  const schema = TemplateAutomation.defineSchema();
   const temp = new TemplateAutomation();
-  const tForm = schema.t.toFormGroup(
-    { rootId, label: _loc("TEMPLATE.FIELDS.t.label") },
+  const tForm = temp.schema.fields.t.toFormGroup(
+    { rootId, label: _loc("SHAPE.label") },
     { name: "t", value: t },
   );
   const distanceForm = temp.schema.fields.distance.toFormGroup(
-    {
-      rootId,
-      label: _loc("TEMPLATE.FIELDS.distance.label"),
-    },
+    { rootId, label: _loc("MEASUREMENT.Distance") },
     {
       name: "distance",
       value: distance,
     },
   );
   const angleForm = temp.schema.fields.angle.toFormGroup(
-    { rootId, label: _loc("TEMPLATE.FIELDS.angle.label") },
+    { rootId, label: _loc("MEASUREMENT.Angle") },
     {
       name: "angle",
       value: angle,
     },
   );
   const widthForm = temp.schema.fields.width.toFormGroup(
-    { rootId },
+    { rootId, label: _loc("MEASUREMENT.Width") },
     {
       name: "width",
       value: width,

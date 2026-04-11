@@ -362,10 +362,7 @@ export default function AbilityExecutionChatPart(Base) {
         if (this.source.system.delivery === "cone" && !this.flags.noTemplate) {
           this.activations.push(
             new acts.UseLocalActivation({
-              options: {
-                lookup: "block-cone",
-                type: "ability",
-              },
+              options: { lookup: "ability:block-cone" },
             }),
           );
         }
