@@ -54,10 +54,10 @@ export default class BaseEffectSystem extends ChildSystemMixin(
    */
   get canChange() {
     const validTypes = [
-      ChangesAutomation.TYPE,
-      ProtectionAutomation.TYPE,
       AbilityMacroAutomation.TYPE,
+      ChangesAutomation.TYPE,
       PropertyMacroAutomation.TYPE,
+      ProtectionAutomation.TYPE,
     ];
     return !!this.automations.contents.find((a) => validTypes.includes(a.type));
   }

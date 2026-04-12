@@ -40,7 +40,6 @@ import {
   PowerSheet,
   RankSheet,
   SpeciesSheet,
-  WrapperSheet,
 } from "../applications/sheets/item-sheets/_module.mjs";
 import {
   BodySystem,
@@ -49,7 +48,6 @@ import {
   PowerSystem,
   RankSystem,
   SpeciesSystem,
-  WrapperSystem,
 } from "../data/systems/items/_module.mjs";
 import {
   CharacterSheet,
@@ -153,14 +151,6 @@ declare global {
     get id(): ID<TeriockMount>;
     get uuid(): UUID<TeriockMount>;
   };
-  export type TeriockWrapper = TeriockItem & {
-    sheet: WrapperSheet;
-    system: WrapperSystem;
-    type: "wrapper";
-    _id: ID<TeriockWrapper>;
-    get id(): ID<TeriockWrapper>;
-    get uuid(): UUID<TeriockWrapper>;
-  };
 }
 
 // Effects
@@ -243,8 +233,7 @@ declare global {
     | TeriockPower
     | TeriockRank
     | TeriockSpecies
-    | TeriockMount
-    | TeriockWrapper;
+    | TeriockMount;
   export type AnyActor = TeriockCharacter | TeriockCreature;
   export type AnyParent = AnyActor | AnyItem;
   export type AnyCommonDocument = AnyActor | AnyItem | AnyActiveEffect;

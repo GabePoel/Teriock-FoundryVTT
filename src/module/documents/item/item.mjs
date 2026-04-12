@@ -95,17 +95,6 @@ export default class TeriockItem extends mix(
     return !this.isSuppressed && !this.disabled;
   }
 
-  /** @inheritDoc */
-  get apps() {
-    if (this.type === "wrapper" && this.system?.effect) {
-      return {
-        [this.system?.effect.sheet.id]: this.system?.effect.sheet,
-      };
-    } else {
-      return super.apps;
-    }
-  }
-
   /**
    * Checks if the item is disabled.
    * @returns {boolean} True if the item is disabled, false otherwise.

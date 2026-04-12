@@ -1,4 +1,5 @@
 import { icons } from "../../constants/display/icons.mjs";
+import { migrateUuid } from "../../data/shared/migrations/source-migrations.mjs";
 import { mix } from "../../helpers/construction.mjs";
 import { makeIcon } from "../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
@@ -21,6 +22,12 @@ export default class TeriockTableResult extends mix(
   mixins.PanelDocumentMixin,
   mixins.EmbedCardDocumentMixin,
 ) {
+  /** @inheritDoc */
+  static migrateData(data) {
+    this.documentUuid = migrateUuid(this.documentUuid);
+    return super.migrateData(data);
+  }
+
   /** @inheritDoc */
   get embedParts() {
     return Object.assign(super.embedParts, {

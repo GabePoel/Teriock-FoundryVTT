@@ -21,7 +21,7 @@ export function migrateChangeType(change, dst = "type") {
  */
 export function migrateChange(change) {
   if (change.time) {
-    change.time = change.phase;
+    change.phase = change.time;
     delete change.time;
   }
   migrateChangeType(change);

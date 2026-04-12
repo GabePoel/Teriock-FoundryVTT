@@ -111,11 +111,7 @@ export default (Base) => {
         const Cls = foundry.utils.getDocumentClass(dropData.type);
         let doc =
           /** @type {AnyChildDocument} */ await Cls.fromDropData(dropData);
-        if (doc.type === "wrapper") {
-          doc = doc.system.effect;
-        }
-        const uuid =
-          doc.parent?.type === "wrapper" ? doc.parent.uuid : doc.uuid;
+        const uuid = doc.uuid;
         const obj = doc.toObject();
         if (doc.inCompendium && !doc._stats.compendiumSource) {
           obj["_stats.compendiumSource"] = uuid;

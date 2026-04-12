@@ -113,9 +113,7 @@ export default function HierarchyDocumentMixin(Base) {
                 clones.push(subClone);
               }
               for (const clone of clones) {
-                clone.updateSource({
-                  "system._sup": idMap[clone.system._sup],
-                });
+                clone.updateSource({ "system._sup": idMap[clone.system._sup] });
               }
               toCreate.push(...clones);
             } else if (create) {

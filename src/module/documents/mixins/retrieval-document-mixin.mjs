@@ -117,14 +117,6 @@ export default function RetrievalDocumentMixin(Base) {
       }
 
       /**
-       * Child wrappers.
-       * @returns {TeriockWrapper[]}
-       */
-      get wrappers() {
-        return this.visibleChildren.filter((c) => c.type === "wrapper");
-      }
-
-      /**
        * Resolved child abilities.
        * @returns {Promise<TeriockAbility[]>}
        */
@@ -226,14 +218,6 @@ export default function RetrievalDocumentMixin(Base) {
        */
       async getSpecies() {
         return resolveDocuments(this.species);
-      }
-
-      /**
-       * Resolved child wrappers.
-       * @returns {Promise<TeriockWrapper[]>}
-       */
-      async getWrappers() {
-        return resolveDocuments(this.wrappers);
       }
     }
   );

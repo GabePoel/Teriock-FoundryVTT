@@ -95,7 +95,6 @@ export default (Base) => {
       get embedParts() {
         return Object.assign(super.embedParts, {
           struck: !this.equipped,
-          shattered: this.shattered,
         });
       }
 
@@ -182,7 +181,7 @@ export default (Base) => {
         await this.parent.hookCall("glue", {
           scope: { equipment: this.parent },
         });
-        await ensureChildren(this.parent, "property", ["Glued"]);
+        await ensureChildren(this.parent, ["property:glued"]);
       }
 
       /** @inheritDoc */
@@ -216,7 +215,7 @@ export default (Base) => {
         await this.parent.hookCall("unglue", {
           scope: { equipment: this.parent },
         });
-        await ensureNoChildren(this.parent, "property", ["Glued"]);
+        await ensureNoChildren(this.parent, "property:glued");
         if (this.glued) {
           await this.parent.update({ "system.glued": false });
         }

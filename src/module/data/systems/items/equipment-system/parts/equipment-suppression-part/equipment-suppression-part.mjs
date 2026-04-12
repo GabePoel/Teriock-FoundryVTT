@@ -3,6 +3,7 @@ import {
   ensureNoChildren,
 } from "../../../../../../helpers/resolve.mjs";
 import { makeIcon } from "../../../../../../helpers/utils.mjs";
+import { initialBoolean } from "../../../../../fields/helpers/initializers.mjs";
 
 const { fields } = foundry.data;
 
@@ -21,9 +22,9 @@ export default (Base) => {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          dampened: new fields.BooleanField({ initial: false }),
-          destroyed: new fields.BooleanField({ initial: false }),
-          shattered: new fields.BooleanField({ initial: false }),
+          dampened: initialBoolean(),
+          destroyed: initialBoolean(),
+          shattered: initialBoolean(),
           stashed: new fields.BooleanField({ initial: false }),
         });
       }
@@ -78,6 +79,13 @@ export default (Base) => {
       }
 
       /** @inheritDoc */
+      get embedParts() {
+        return Object.assign(super.embedParts, {
+          shattered: this.shattered,
+        });
+      }
+
+      /** @inheritDoc */
       get makeSuppressed() {
         return (
           super.makeSuppressed ||
@@ -99,7 +107,7 @@ export default (Base) => {
         await this.parent.hookCall("dampen", {
           scope: { equipment: this.parent },
         });
-        await ensureChildren(this.parent, "property", ["Dampened"]);
+        await ensureChildren(this.parent, ["property:dampened"]);
       }
 
       /**
@@ -114,7 +122,7 @@ export default (Base) => {
         await this.parent.hookCall("destroy", {
           scope: { equipment: this.parent },
         });
-        await ensureChildren(this.parent, "property", ["Destroyed"]);
+        await ensureChildren(this.parent, ["property:destroyed"]);
       }
 
       /** @inheritdoc */
@@ -215,7 +223,9 @@ export default (Base) => {
         const data = super.getLocalRollData();
         Object.assign(data, {
           dampened: Number(this.dampened),
+          destroyed: Number(this.destroyed),
           shattered: Number(this.shattered),
+          stashed: Number(this.stashed),
         });
         return data;
       }
@@ -232,7 +242,7 @@ export default (Base) => {
         await this.parent.hookCall("reforge", {
           scope: { equipment: this.parent },
         });
-        await ensureNoChildren(this.parent, "property", ["Destroyed"]);
+        await ensureNoChildren(this.parent, "property:destroyed");
       }
 
       /**
@@ -247,7 +257,7 @@ export default (Base) => {
         await this.parent.hookCall("repair", {
           scope: { equipment: this.parent },
         });
-        await ensureNoChildren(this.parent, "property", ["Shattered"]);
+        await ensureNoChildren(this.parent, "property:shattered");
         if (this.shattered) {
           await this.parent.update({ "system.shattered": false });
         }
@@ -265,7 +275,7 @@ export default (Base) => {
         await this.parent.hookCall("shatter", {
           scope: { equipment: this.parent },
         });
-        await ensureChildren(this.parent, "property", ["Shattered"]);
+        await ensureChildren(this.parent, ["property:shattered"]);
       }
 
       /**
@@ -288,7 +298,7 @@ export default (Base) => {
         await this.parent.hookCall("undampen", {
           scope: { equipment: this.parent },
         });
-        await ensureNoChildren(this.parent, "property", ["Dampened"]);
+        await ensureNoChildren(this.parent, "property:dampened");
       }
 
       /**

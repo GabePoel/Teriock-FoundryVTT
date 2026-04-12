@@ -114,17 +114,9 @@ declare global {
     };
 
     /**
-     * Options that control how a single document is resolved.
-     */
-    export type ResolveDocumentOptions = {
-      /** Whether to preserve wrappers instead of resolving to their effects. */
-      preserveWrappers?: boolean;
-    };
-
-    /**
      * Options that control how multiple documents are resolved.
      */
-    export type ResolveDocumentsOptions = ResolveDocumentOptions & {
+    export type ResolveDocumentsOptions = {
       /** Whether to expand folders while resolving. */
       expandFolders?: boolean;
       /** Whether to expand tables while resolving. */

@@ -1,5 +1,7 @@
 //noinspection JSUnresolvedReference
 
+import { migrateUuid } from "../../src/module/data/shared/migrations/source-migrations.mjs";
+
 /**
  * Clean excess terms from a document.
  * @param {AnyCommonDocument} doc
@@ -9,11 +11,17 @@ export function cleanDocument(doc) {
   delete doc.ownership;
   if (!doc.folder) delete doc.folder;
   if (doc._stats) {
+    if (doc._stats.compendiumSource) {
+      doc._stats.compendiumSource = migrateUuid(doc._stats.compendiumSource);
+    }
     delete doc._stats.createdTime;
     delete doc._stats.duplicateSource;
     delete doc._stats.exportSource;
     delete doc._stats.modifiedTime;
     delete doc._stats.ownership;
+  }
+  if (doc.documentUuid) {
+    doc.documentUuid = migrateUuid(doc.documentUuid);
   }
   if (doc.system) {
     cleanCommon(doc);

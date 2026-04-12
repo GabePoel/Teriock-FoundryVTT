@@ -201,7 +201,6 @@ foundry.helpers.Hooks.once("init", function () {
         power: data.systems.items.PowerSystem,
         rank: data.systems.items.RankSystem,
         species: data.systems.items.SpeciesSystem,
-        wrapper: data.systems.items.WrapperSystem,
       },
       documentClass: documents.TeriockItem,
     },
@@ -327,12 +326,6 @@ foundry.helpers.Hooks.once("init", function () {
       doc: documents.TeriockItem,
       label: "TYPES.Item.species",
       types: ["species"],
-    },
-    {
-      cls: applications.sheets.item.WrapperSheet,
-      doc: documents.TeriockItem,
-      label: "TYPES.Item.wrapper",
-      types: ["wrapper"],
     },
     // Effects
     {

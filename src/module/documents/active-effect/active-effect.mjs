@@ -1,4 +1,5 @@
 import { documentTypes } from "../../constants/system/document-types.mjs";
+import { migrateUuid } from "../../data/shared/migrations/source-migrations.mjs";
 import { mix } from "../../helpers/construction.mjs";
 import TeriockItem from "../item/item.mjs";
 import * as mixins from "../mixins/_module.mjs";
@@ -28,6 +29,18 @@ export default class TeriockActiveEffect extends mix(
     return Object.assign(super.documentMetadata, {
       types: Object.keys(documentTypes.effects),
     });
+  }
+
+  /** @inheritDoc */
+  static migrateData(data) {
+    if (foundry.utils.hasProperty(data, "_stats.compendiumSource")) {
+      foundry.utils.setProperty(
+        data,
+        "_stats.compendiumSource",
+        migrateUuid(foundry.utils.getProperty(data, "_stats.compendiumSource")),
+      );
+    }
+    return super.migrateData(data);
   }
 
   /** @inheritDoc */
@@ -73,44 +86,6 @@ export default class TeriockActiveEffect extends mix(
     const elder = await this.getElder();
     if (elder && !elder.metadata.childEffectTypes.includes(this.type)) {
       return false;
-    }
-  }
-
-  /** @inheritDoc */
-  async _preDelete(options, user) {
-    const yes = await super._preDelete(options, user);
-    if (yes === false) return false;
-
-    if (this.elder?.type === "wrapper") {
-      const elder = await this.getElder();
-      await elder.delete();
-      return false;
-    }
-  }
-
-  /** @inheritDoc */
-  async _preUpdate(changes, options, user) {
-    const yes = await super._preUpdate(changes, options, user);
-    if (yes === false) return false;
-
-    if (
-      this.elder?.type === "wrapper" &&
-      foundry.utils.getProperty(this.elder, "system.effect.id") === this.id
-    ) {
-      const wrapperKeys = ["name", "img"];
-      const wrapperUpdates = {};
-      for (const key of wrapperKeys) {
-        if (
-          foundry.utils.hasProperty(changes, key) &&
-          foundry.utils.getProperty(changes, key) !==
-            foundry.utils.getProperty(this.elder, key)
-        ) {
-          wrapperUpdates[key] = foundry.utils.getProperty(changes, key);
-        }
-      }
-      if (Object.keys(wrapperUpdates).length > 0) {
-        await this.elder?.update(wrapperUpdates);
-      }
     }
   }
 

@@ -51,7 +51,7 @@ export function boostFormula(value, delta) {
  * @returns {Teriock.System.FormulaString}
  */
 export function downgradeDeterministicFormula(value, delta) {
-  const terms = new game.teriock.Roll(value, {}).terms;
+  const terms = new teriock.dice.rolls.BaseRoll(value, {}).terms;
   if (terms.length === 1 && terms[0]?.fn === "min") {
     return value.replace(/\)$/, `, ${delta})`);
   }
@@ -65,8 +65,8 @@ export function downgradeDeterministicFormula(value, delta) {
  * @returns {Teriock.System.FormulaString}
  */
 export function downgradeIndeterministicFormula(value, delta) {
-  const valueTotal = game.teriock.Roll.meanValue(value);
-  const deltaTotal = game.teriock.Roll.meanValue(delta);
+  const valueTotal = teriock.dice.rolls.BaseRoll.meanValue(value);
+  const deltaTotal = teriock.dice.rolls.BaseRoll.meanValue(delta);
   if (deltaTotal <= valueTotal) return delta;
   return value;
 }
@@ -79,7 +79,7 @@ export function downgradeIndeterministicFormula(value, delta) {
  */
 export function multiplyFormula(value, delta) {
   if (Number(delta) === 1) return value;
-  const terms = new game.teriock.Roll(value, {}).terms;
+  const terms = new teriock.dice.rolls.BaseRoll(value, {}).terms;
   if (terms.length > 1) return `(${value}) * ${delta}`;
   return `${value} * ${delta}`;
 }
@@ -91,7 +91,7 @@ export function multiplyFormula(value, delta) {
  * @returns {Teriock.System.FormulaString}
  */
 export function upgradeDeterministicFormula(value, delta) {
-  const terms = new game.teriock.Roll(value, {}).terms;
+  const terms = new teriock.dice.rolls.BaseRoll(value, {}).terms;
   if (terms.length === 1 && terms[0]?.fn === "max") {
     return value.replace(/\)$/, `, ${delta})`);
   }
@@ -105,8 +105,8 @@ export function upgradeDeterministicFormula(value, delta) {
  * @returns {Teriock.System.FormulaString}
  */
 export function upgradeIndeterministicFormula(value, delta) {
-  const valueTotal = game.teriock.Roll.meanValue(value);
-  const deltaTotal = game.teriock.Roll.meanValue(delta);
+  const valueTotal = teriock.dice.rolls.BaseRoll.meanValue(value);
+  const deltaTotal = teriock.dice.rolls.BaseRoll.meanValue(delta);
   if (deltaTotal >= valueTotal) return delta;
   return value;
 }

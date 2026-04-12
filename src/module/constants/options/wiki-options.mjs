@@ -4,7 +4,7 @@ import { documentOptions } from "./document-options.mjs";
 export const wikiOptions = {
   namespaces: {
     Ability: {
-      collection: "effects",
+      collection: null,
       icon: documentOptions.ability.icon,
       packs: ["teriock.abilities"],
       parentKey: "name",
@@ -74,7 +74,7 @@ export const wikiOptions = {
       type: "text",
     },
     Property: {
-      collection: "effects",
+      collection: null,
       icon: documentOptions.property.icon,
       packs: ["teriock.properties"],
       parentKey: "name",

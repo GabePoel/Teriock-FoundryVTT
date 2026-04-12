@@ -17,11 +17,6 @@ await tm.utils.progressBar(
           if (doc?.defaultIdentifier) {
             const identifier = doc.defaultIdentifier;
             await doc.update({ "system.identifier": identifier });
-            if (doc.type === "wrapper") {
-              await doc.system.effect.update({
-                "system.identifier": identifier,
-              });
-            }
           }
           if (typeof doc?.system?.refreshFromCompendiumSource === "function") {
             const options = {};

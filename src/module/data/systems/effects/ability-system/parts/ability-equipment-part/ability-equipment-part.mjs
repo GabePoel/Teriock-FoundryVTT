@@ -111,18 +111,16 @@ export default (Base) => {
       /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
-        this.consumeSourceText =
-          this.consumeSource && this.parent.parent?.type !== "wrapper"
-            ? _loc("TERIOCK.SYSTEMS.Ability.FIELDS.consumeSourceText.derived", {
-                uuid: this.parent.parent?.uuid,
-              })
-            : "";
-        this.grantOnlyText =
-          this.grantOnly && this.parent.parent?.type !== "wrapper"
-            ? _loc("TERIOCK.SYSTEMS.Ability.FIELDS.grantOnlyText.derived", {
-                uuid: this.parent.parent?.uuid,
-              })
-            : "";
+        this.consumeSourceText = this.consumeSource
+          ? _loc("TERIOCK.SYSTEMS.Ability.FIELDS.consumeSourceText.derived", {
+              uuid: this.parent.parent?.uuid,
+            })
+          : "";
+        this.grantOnlyText = this.grantOnly
+          ? _loc("TERIOCK.SYSTEMS.Ability.FIELDS.grantOnlyText.derived", {
+              uuid: this.parent.parent?.uuid,
+            })
+          : "";
       }
 
       /**

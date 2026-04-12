@@ -52,9 +52,7 @@ export default (Base) => {
           const out = await selectAbilityDialog();
           if (!out) return;
           obj = out.toObject();
-          if (out.parent?.type === "wrapper") {
-            obj["_stats.compendiumSource"] = out.parent.uuid;
-          }
+          obj["_stats.compendiumSource"] = out.uuid;
         }
         if (decision && obj) {
           await this.document.createChildDocuments("ActiveEffect", [obj]);
@@ -165,9 +163,7 @@ export default (Base) => {
           const out = await selectPropertyDialog();
           if (!out) return;
           obj = out.toObject();
-          if (out.parent?.type === "wrapper") {
-            obj["_stats.compendiumSource"] = out.parent.uuid;
-          }
+          obj["_stats.compendiumSource"] = out.uuid;
         }
         if (decision && obj) {
           await this.document.createChildDocuments("ActiveEffect", [obj]);

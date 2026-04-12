@@ -14,9 +14,6 @@ export default async function refreshFromCompendiumDialog(doc) {
   const sourceEmbedElement = document.createElement("fieldset");
   if (doc._stats.compendiumSource) {
     source = await fromUuid(doc._stats.compendiumSource);
-    if (source.type === "wrapper") {
-      source = source.system.effect;
-    }
     sourceEmbedElement.innerHTML = await TeriockTextEditor.enrichHTML(
       `@Embed[${source.uuid}]`,
     );

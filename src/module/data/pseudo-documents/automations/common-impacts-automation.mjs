@@ -48,10 +48,13 @@ export default class CommonImpactsAutomation extends TriggerAutomationMixin(
 
   /** @inheritDoc */
   async _getActivations() {
-    return Array.from(this.common).map((c) => {
-      const Act = Object.values(activations).find((A) => A.TYPE === c);
-      return new Act();
-    });
+    return Array.from(this.common)
+      .filter((_) => _)
+      .map((c) => {
+        const Act = Object.values(activations).find((A) => A.TYPE === c);
+        if (Act) return new Act();
+      })
+      .filter((_) => _);
   }
 
   /** @inheritDoc */

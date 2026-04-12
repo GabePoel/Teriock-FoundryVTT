@@ -1,7 +1,6 @@
 import { iconStyles } from "../constants/display/_module.mjs";
 import { BaseRoll } from "../dice/rolls/_module.mjs";
 import { localizeChoices } from "./localization.mjs";
-import { resolveDocument } from "./resolve.mjs";
 import { toCamelCase, toTitleCase } from "./string.mjs";
 
 /**
@@ -392,7 +391,6 @@ export function fromIdentifierSync(identifier) {
     let collection;
     if (documentName === "Actor") collection = game.actors;
     if (documentName === "Item") collection = game.items;
-    if (documentName === "ActiveEffect") collection = game.teriock.effects;
     if (!collection) return null;
     return (
       collection.find(
@@ -401,11 +399,7 @@ export function fromIdentifierSync(identifier) {
       ) ?? null
     );
   }
-  const candidates = [
-    ...game.items.contents,
-    ...game.actors.contents,
-    ...game.teriock.effects.contents,
-  ];
+  const candidates = [...game.items.contents, ...game.actors.contents];
   return (
     candidates.find((d) => d.system?.identifier === parsed.identifier) ?? null
   );
@@ -469,22 +463,6 @@ export async function fromIdentifier(identifier, options = {}) {
         type: parsed.type,
       });
       if (docs.length > 0) return docs[0];
-    }
-    if (documentName === "ActiveEffect") {
-      let setting;
-      if (parsed.type === "ability") setting = "compendiumAbilitySources";
-      if (parsed.type === "property") setting = "compendiumPropertySources";
-      if (setting) {
-        const keys = game.teriock.getSetting(setting);
-        const packs = Array.from(keys)
-          .map((k) => game.packs.get(k))
-          .filter((_) => _);
-        const name = inferNameFromIdentifier(identifier);
-        for (const pack of packs) {
-          const doc = await resolveDocument(pack.index.getName(name));
-          if (doc?.type === parsed.type) return doc;
-        }
-      }
     }
   }
   return fromIdentifierSync(identifier);

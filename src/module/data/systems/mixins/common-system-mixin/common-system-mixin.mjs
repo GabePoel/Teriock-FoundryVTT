@@ -351,12 +351,6 @@ export default function CommonSystemMixin(Base) {
       async getCompendiumSource() {
         const reference = await fromUuid(this.parent._stats.compendiumSource);
         if (!reference) return;
-        if (
-          reference.type === "wrapper" &&
-          this.parent.documentName === "ActiveEffect"
-        ) {
-          return reference.system.effect;
-        }
         return reference;
       }
 
