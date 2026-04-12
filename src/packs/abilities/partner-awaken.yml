@@ -1,172 +1,51 @@
 _id: 5451b5caee0b5380
-_key: '!items!5451b5caee0b5380'
+_key: '!effects!5451b5caee0b5380'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 5451b5caee0b5380
-    _key: '!items.effects!5451b5caee0b5380.5451b5caee0b5380'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/partner-awaken.webp
-    name: Partner Awaken
-    system:
-      class: veteran
-      competence:
-        raw: 0
-      delivery: sight
-      duration:
-        raw: '1'
-        unit: hour
-      endCondition: <p>You use [[lookup name]] again.</p>
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: partner-awaken
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>You and the target gain @L[Keyword:Limited]{Limited}
-          @L[Ability:Instant Awaken]{Instant Awaken} and
-          @L[Keyword:Limited]{Limited} @L[Ability:Reactive Awaken]{Reactive
-          Awaken} (only usable on each other). You may only have this active on
-          one creature at a time.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        raw: '30'
-        unit: ft
-      skill: true
-      standard: true
-      targets:
-        - creature
-    type: ability
-  - _id: KSc5b3gBge7kPOQW
-    _key: '!items.effects!5451b5caee0b5380.KSc5b3gBge7kPOQW'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.f970c72f5043d109
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/abilities/instant-awaken.webp
-    name: Instant Awaken
-    system:
-      _sup: 5451b5caee0b5380
-      automations:
-        1728b3a84ea27844:
-          _id: 1728b3a84ea27844
-          common:
-            - awaken
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: common
-      competence:
-        raw: 0
-      delivery: hand
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - awakening
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: instant-awaken
-      interaction: attack
-      limitation: <p>Only usable on the other participant in the Partner Awaken.</p>
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: contact
-      results:
-        hit: <p>Target is @L[Keyword:Awaken]{awakened}.</p>
-      skill: true
-      standard: true
-      targets:
-        - creature
-    type: ability
-  - _id: R0pdidN8MQYS1sar
-    _key: '!items.effects!5451b5caee0b5380.R0pdidN8MQYS1sar'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.8d55640ef65f1e81
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/abilities/reactive-awaken.webp
-    name: Reactive Awaken
-    system:
-      _sup: 5451b5caee0b5380
-      automations:
-        1728b3a84ea27844:
-          _id: 1728b3a84ea27844
-          common:
-            - awaken
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: common
-      competence:
-        raw: 0
-      delivery: hand
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - awakening
-      executionTime: r1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: reactive-awaken
-      interaction: attack
-      limitation: <p>Only usable on the other participant in the Partner Awaken.</p>
-      maneuver: reactive
-      overview:
-        base: <p>Target is @L[Keyword:Awaken]{awakened}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: contact
-      skill: true
-      standard: true
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/partner-awaken.webp
 name: Partner Awaken
-type: wrapper
+system:
+  class: veteran
+  competence:
+    raw: 0
+  delivery: sight
+  duration:
+    raw: '1'
+    unit: hour
+  endCondition: <p>You use [[lookup name]] again.</p>
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: partner-awaken
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>You and the target gain @L[Keyword:Limited]{Limited} @L[Ability:Instant
+      Awaken]{Instant Awaken} and @L[Keyword:Limited]{Limited}
+      @L[Ability:Reactive Awaken]{Reactive Awaken} (only usable on each other).
+      You may only have this active on one creature at a time.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    raw: '30'
+    unit: ft
+  skill: true
+  standard: true
+  targets:
+    - creature
+transfer: true
+type: ability

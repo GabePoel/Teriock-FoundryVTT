@@ -1,94 +1,93 @@
 _id: 10b183fc18323af5
-_key: '!items!10b183fc18323af5'
+_key: '!effects!10b183fc18323af5'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 10b183fc18323af5
-    _key: '!items.effects!10b183fc18323af5.10b183fc18323af5'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/smash-overslow-potion.webp
-    name: Smash Overslow Potion
-    system:
-      automations:
-        ca0696ba7cfc9ec1:
-          _id: ca0696ba7cfc9ec1
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: include
-          status: slowed
-          type: status
-        d635eb44dba086dd:
-          _id: d635eb44dba086dd
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: combatExpiration
-          what:
-            roll: 2d4kh1
-            threshold: 4
-            type: rolled
-          when:
-            skip: 0
-            time: start
-            trigger: turn
-          who:
-            type: target
-      competence:
-        raw: 0
-      consumeSource: true
-      delivery: aura
-      duration:
-        raw: '1'
-        unit: minute
-      endCondition: >-
-        <p>At the start of each of the target's @L[Core:Turn]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: unp
-      form: normal
-      identifier: smash-overslow-potion
-      interaction: feat
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - alchemical
-      range:
-        raw: '50'
-        unit: ft
-      requirements: >-
-        <p>Use [[lookup name]] by interacting with the
-        @L[Category:Equipment]{equipment} that provides it. That counts as the
-        @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
-        the ability.</p>
-      results:
-        fail: <p>Target becomes @L[Condition:Slowed]{slowed}.</p>
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/smash-overslow-potion.webp
 name: Smash Overslow Potion
-type: wrapper
+system:
+  automations:
+    ca0696ba7cfc9ec1:
+      _id: ca0696ba7cfc9ec1
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: include
+      status: slowed
+      target: false
+      type: status
+    d635eb44dba086dd:
+      _id: d635eb44dba086dd
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: combatExpiration
+      what:
+        roll: 2d4kh1
+        threshold: 4
+        type: rolled
+      when:
+        skip: 0
+        time: start
+        trigger: turn
+      who:
+        type: target
+  competence:
+    raw: 0
+  consumeSource: true
+  delivery: aura
+  duration:
+    raw: '1'
+    unit: minute
+  endCondition: >-
+    <p>At the start of each of the target's @L[Core:Turn]{turns}, they roll
+    [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: unp
+  form: normal
+  identifier: smash-overslow-potion
+  interaction: feat
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - alchemical
+  range:
+    raw: '50'
+    unit: ft
+  requirements: >-
+    <p>Use [[lookup name]] by interacting with the
+    @L[Category:Equipment]{equipment} that provides it. That counts as the
+    @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for the
+    ability.</p>
+  results:
+    fail: <p>Target becomes @L[Condition:Slowed]{slowed}.</p>
+  targets:
+    - creature
+transfer: true
+type: ability

@@ -1,72 +1,73 @@
 _id: 096e4fe03c38ec16
-_key: '!items!096e4fe03c38ec16'
+_key: '!effects!096e4fe03c38ec16'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 096e4fe03c38ec16
-    _key: '!items.effects!096e4fe03c38ec16.096e4fe03c38ec16'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/displace.webp
-    name: Displace
-    system:
-      automations:
-        0J3hhorbG6wtm6pD:
-          _id: 0J3hhorbG6wtm6pD
-          movementAction: blink
-          type: changeMovement
-      class: stormMage
-      competence:
-        raw: 0
-      delivery: sight
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - displacement
-      elements:
-        - storm
-      executionTime: r0
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the range increases by 10
-        feet.</p>
-      identifier: displace
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>You are instantly transported to a location you can see within
-          range.</p>
-        fluent: <p>The range becomes 10 × @L[Core:Fluency Bonus]{F} feet.</p>
-        proficient: <p>The range becomes 10 × @L[Core:Proficiency Bonus]{P} feet.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        raw: '10'
-        unit: ft
-      rotator: true
-      spell: true
-      standard: true
-      targets:
-        - area
-      trigger: >-
-        <p>You cast a @L[Category:Missile delivery spells]{missile} or
-        @L[Category:Weapon delivery spells]{weapon delivery spell}.</p>
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/displace.webp
 name: Displace
-type: wrapper
+system:
+  automations:
+    0J3hhorbG6wtm6pD:
+      _id: 0J3hhorbG6wtm6pD
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 0
+        - 1
+      movementAction: blink
+      type: changeMovement
+  class: stormMage
+  competence:
+    raw: 0
+  delivery: sight
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - displacement
+  elements:
+    - storm
+  executionTime:
+    base: r0
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  heightened: >-
+    <p>For each additional @L[Core:MP]{MP} spent, the range increases by 10
+    feet.</p>
+  identifier: displace
+  interaction: manifest
+  maneuver: reactive
+  mundane: false
+  overview:
+    base: >-
+      <p>You are instantly transported to a location you can see within
+      range.</p>
+    fluent: <p>The range becomes 10 × @L[Core:Fluency Bonus]{F} feet.</p>
+    proficient: <p>The range becomes 10 × @L[Core:Proficiency Bonus]{P} feet.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    raw: '10'
+    unit: ft
+  rotator: true
+  spell: true
+  standard: true
+  targets:
+    - area
+  trigger: >-
+    <p>You cast a @L[Category:Missile delivery spells]{missile} or
+    @L[Category:Weapon delivery spells]{weapon delivery spell}.</p>
+transfer: true
+type: ability

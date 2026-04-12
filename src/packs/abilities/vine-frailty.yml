@@ -1,70 +1,63 @@
 _id: de25ca1d06be7974
-_key: '!items!de25ca1d06be7974'
+_key: '!effects!de25ca1d06be7974'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: de25ca1d06be7974
-    _key: '!items.effects!de25ca1d06be7974.de25ca1d06be7974'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/vine-frailty.webp
-    name: Vine Frailty
-    system:
-      automations:
-        29b275994cf9f5b1:
-          _id: 29b275994cf9f5b1
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: 1d10[vine]
-          heighten:
-            - 1
-            - 0
-          merge: true
-          roll: damage
-          type: roll
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: flaw
-      identifier: vine-frailty
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You take @L[Keyword:Boosted]{boosted} @L[Core:Damage]{damage} from
-          @L[Damage:Vine]{vine}, are @L[Keyword:Vulnerable]{vulnerable} to being
-          @L[Condition:Snared]{snared}, and becoming
-          @L[Condition:Snared]{snared} deals you [[/damage 1d10[vine]]]
-          @L[Core:Damage]{damage} if it was not caused due to dropping from
-          @L[Damage:Vine]{vine} @L[Core:Damage]{damage}. The
-          @L[Core:Damage]{damage} from becoming @L[Condition:Snared]{snared} is
-          not @L[Keyword:Boosted]{boosted}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/vine-frailty.webp
 name: Vine Frailty
-type: wrapper
+system:
+  automations:
+    29b275994cf9f5b1:
+      _id: 29b275994cf9f5b1
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: 1d10[vine]
+      heighten:
+        - 1
+        - 0
+      impact: damage
+      merge: true
+      type: roll
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: unlimited
+  executionTime:
+    base: passive
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: flaw
+  identifier: vine-frailty
+  interaction: manifest
+  maneuver: passive
+  mundane: false
+  overview:
+    base: >-
+      <p>You take @L[Keyword:Boosted]{boosted} @L[Core:Damage]{damage} from
+      @L[Damage:Vine]{vine}, are @L[Keyword:Vulnerable]{vulnerable} to being
+      @L[Condition:Snared]{snared}, and becoming @L[Condition:Snared]{snared}
+      deals you [[/damage 1d10[vine]]] @L[Core:Damage]{damage} if it was not
+      caused due to dropping from @L[Damage:Vine]{vine} @L[Core:Damage]{damage}.
+      The @L[Core:Damage]{damage} from becoming @L[Condition:Snared]{snared} is
+      not @L[Keyword:Boosted]{boosted}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  targets:
+    - self
+transfer: true
+type: ability

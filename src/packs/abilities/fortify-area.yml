@@ -1,101 +1,95 @@
 _id: 1a2785f526c7ad57
-_key: '!items!1a2785f526c7ad57'
+_key: '!effects!1a2785f526c7ad57'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 1a2785f526c7ad57
-    _key: '!items.effects!1a2785f526c7ad57.1a2785f526c7ad57'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/fortify-area.webp
-    name: Fortify Area
-    system:
-      automations:
-        a678f22a0f730677:
-          _id: a678f22a0f730677
-          competencies:
-            - 2
-          formula: 1d10 + (@f)d10
-          heighten:
-            - 1
-            - 0
-          merge: true
-          roll: gainTempHp
-          type: roll
-        eb15e1b671a010f5:
-          _id: eb15e1b671a010f5
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: 1d10
-          heighten:
-            - 1
-            - 0
-          merge: true
-          roll: gainTempHp
-          type: roll
-        fc2613f22401a088:
-          _id: fc2613f22401a088
-          competencies:
-            - 1
-            - 2
-          formula: 1d10 + (@p)d10
-          heighten:
-            - 1
-            - 0
-          merge: true
-          roll: gainTempHp
-          type: roll
-      class: veteran
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '24'
-        unit: hour
-      executionTime: Short Rest
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: fortify-area
-      interaction: manifest
-      maneuver: slow
-      overview:
-        base: >-
-          <p>You may spend a @L[Core:Short Rest]{short rest} building defensive
-          fortifications around the area you are resting in. You and your allies
-          that are in this are when @L[Core:Combat]{combat} begins gain
-          [[/gainTempHp 1d10]] @L[Core:Temporary Hit Points]{temporary HP} for
-          the duration of that @L[Core:Combat]{combat}. This area counts as
-          having been "fortified".</p>
-        fluent: >-
-          <p>You and your allies instead gain [[/gainTempHp 1d10 + (@f)d10]]
-          @L[Core:Temporary Hit Points]{temporary HP}.</p>
-        proficient: >-
-          <p>You and your allies instead gain [[/gainTempHp 1d10 + (@p)d10]]
-          @L[Core:Temporary Hit Points]{temporary HP}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      requirements: <p>You remain in the targeted area.</p>
-      skill: true
-      standard: true
-      targets:
-        - area
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/fortify-area.webp
 name: Fortify Area
-type: wrapper
+system:
+  automations:
+    a678f22a0f730677:
+      _id: a678f22a0f730677
+      competencies:
+        - 2
+      formula: 1d10 + (@f)d10
+      heighten:
+        - 1
+        - 0
+      impact: gainTempHp
+      merge: true
+      type: roll
+    eb15e1b671a010f5:
+      _id: eb15e1b671a010f5
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: 1d10
+      heighten:
+        - 1
+        - 0
+      impact: gainTempHp
+      merge: true
+      type: roll
+    fc2613f22401a088:
+      _id: fc2613f22401a088
+      competencies:
+        - 1
+        - 2
+      formula: 1d10 + (@p)d10
+      heighten:
+        - 1
+        - 0
+      impact: gainTempHp
+      merge: true
+      type: roll
+  class: veteran
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '24'
+    unit: hour
+  executionTime:
+    base: Short Rest
+    slow:
+      unit: shortRest
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: fortify-area
+  interaction: manifest
+  maneuver: slow
+  mundane: false
+  overview:
+    base: >-
+      <p>You may spend a @L[Core:Short Rest]{short rest} building defensive
+      fortifications around the area you are resting in. You and your allies
+      that are in this are when @L[Core:Combat]{combat} begins gain
+      [[/gainTempHp 1d10]] @L[Core:Temporary Hit Points]{temporary HP} for the
+      duration of that @L[Core:Combat]{combat}. This area counts as having been
+      "fortified".</p>
+    fluent: >-
+      <p>You and your allies instead gain [[/gainTempHp 1d10 + (@f)d10]]
+      @L[Core:Temporary Hit Points]{temporary HP}.</p>
+    proficient: >-
+      <p>You and your allies instead gain [[/gainTempHp 1d10 + (@p)d10]]
+      @L[Core:Temporary Hit Points]{temporary HP}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  requirements: <p>You remain in the targeted area.</p>
+  skill: true
+  standard: true
+  targets:
+    - area
+transfer: true
+type: ability

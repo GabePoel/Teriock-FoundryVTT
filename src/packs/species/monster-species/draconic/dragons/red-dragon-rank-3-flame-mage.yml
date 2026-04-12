@@ -2,7 +2,7 @@ _id: TGJ7VUCmlXZs6exe
 _key: '!items!TGJ7VUCmlXZs6exe'
 _stats:
   compendiumSource: Compendium.teriock.classes.Item.0615c1e02cf44dbd
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.23
@@ -10,11 +10,11 @@ effects:
   - _id: CaTTWTstOULxfkrp
     _key: '!items.effects!TGJ7VUCmlXZs6exe.CaTTWTstOULxfkrp'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.7dbf0f42e843d563
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.7dbf0f42e843d563
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: combat
@@ -53,15 +53,16 @@ effects:
       skill: true
       targets:
         - self
+    transfer: true
     type: ability
   - _id: Of9sOoo4szd2CEOp
     _key: '!items.effects!TGJ7VUCmlXZs6exe.Of9sOoo4szd2CEOp'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.2496ec9ba004a8e2
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.2496ec9ba004a8e2
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/cremate.webp
     name: Cremate
     system:
@@ -162,15 +163,16 @@ effects:
       standard: true
       targets:
         - vitals
+    transfer: true
     type: ability
   - _id: EjA48yTYBOoAhMOD
     _key: '!items.effects!TGJ7VUCmlXZs6exe.EjA48yTYBOoAhMOD'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.f4719f88dc5f8192
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.f4719f88dc5f8192
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: support
@@ -184,25 +186,25 @@ effects:
           _id: f025905e157ac261
           changes:
             - key: system.competence.raw
-              mode: 4
+              phase: fluency
               priority: 10
               qualifier: '@identifier.elder-sorcery-creation'
               target: ability
-              time: fluency
+              type: upgrade
               value: '2'
             - key: system.competence.raw
-              mode: 4
+              phase: fluency
               priority: 10
               qualifier: '@identifier.celestial-elder-sorcery-words'
               target: ability
-              time: fluency
+              type: upgrade
               value: '2'
             - key: system.competence.raw
-              mode: 4
+              phase: fluency
               priority: 10
               qualifier: '@identifier.flame-elder-sorcery-words'
               target: ability
-              time: fluency
+              type: upgrade
               value: '2'
           competencies:
             - 1
@@ -273,15 +275,16 @@ effects:
       standard: true
       targets:
         - self
+    transfer: true
     type: ability
   - _id: OFPEJ5NINFBzzVjj
     _key: '!items.effects!TGJ7VUCmlXZs6exe.OFPEJ5NINFBzzVjj'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.7e1e0b3ce0953833
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.7e1e0b3ce0953833
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/minor-weapon-enchantment.webp
     name: Minor Weapon Enchantment
     system:
@@ -289,6 +292,7 @@ effects:
       automations:
         72ce567009179bea:
           _id: 72ce567009179bea
+          changeType: add
           competencies:
             - 0
             - 1
@@ -301,7 +305,6 @@ effects:
             unit: second
           heighten:
             - 1
-          mode: 5
           type: duration
       class: flameMage
       competence:
@@ -360,6 +363,7 @@ effects:
       standard: true
       targets:
         - weapon
+    transfer: true
     type: ability
 folder: 997cd433ccad17d7
 img: systems/teriock/src/icons/ranks/rank-3-flame-mage.webp

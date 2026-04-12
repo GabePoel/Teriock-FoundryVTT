@@ -1,67 +1,61 @@
 _id: a99c5ea04337e1f4
-_key: '!items!a99c5ea04337e1f4'
+_key: '!effects!a99c5ea04337e1f4'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: a99c5ea04337e1f4
-    _key: '!items.effects!a99c5ea04337e1f4.a99c5ea04337e1f4'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/triumphant-awaken.webp
-    name: Triumphant Awaken
-    system:
-      automations:
-        1728b3a84ea27844:
-          _id: 1728b3a84ea27844
-          common:
-            - awaken
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: common
-      class: knight
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - awakening
-      executionTime: r0
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: triumphant-awaken
-      interaction: attack
-      maneuver: reactive
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      results:
-        hit: <p>Target is @L[Keyword:Awaken]{awakened}.</p>
-      skill: true
-      standard: true
-      targets:
-        - creature
-      trigger: <p>@L[Condition:Down]{Dropping} an opponent.</p>
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/triumphant-awaken.webp
 name: Triumphant Awaken
-type: wrapper
+system:
+  automations:
+    1728b3a84ea27844:
+      _id: 1728b3a84ea27844
+      common:
+        - awaken
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 1
+        - 0
+      type: common
+  class: knight
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - awakening
+  executionTime:
+    base: r0
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: triumphant-awaken
+  interaction: attack
+  maneuver: reactive
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  results:
+    hit: <p>Target is @L[Keyword:Awaken]{awakened}.</p>
+  skill: true
+  standard: true
+  targets:
+    - creature
+  trigger: <p>@L[Condition:Down]{Dropping} an opponent.</p>
+transfer: true
+type: ability

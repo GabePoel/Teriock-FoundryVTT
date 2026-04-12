@@ -1,7 +1,7 @@
 _id: 2d956f82dca6786f
 _key: '!items!2d956f82dca6786f'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.53
@@ -9,11 +9,11 @@ effects:
   - _id: iYl1sblFlotOhUBe
     _key: '!items.effects!2d956f82dca6786f.iYl1sblFlotOhUBe'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.73273ca803e0c18d
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.73273ca803e0c18d
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/drink-freezing-liquid.webp
     name: Drink Freezing Liquid
     system:
@@ -45,15 +45,16 @@ effects:
         unit: self
       targets:
         - self
+    transfer: true
     type: ability
   - _id: oRXAa1HQGWzcVYLt
     _key: '!items.effects!2d956f82dca6786f.oRXAa1HQGWzcVYLt'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.7b3e6d546e3b26f7
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.7b3e6d546e3b26f7
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.63
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/properties/fragile.webp
     name: Fragile
     system:
@@ -70,15 +71,16 @@ effects:
       form: flaw
       identifier: fragile
       mundane: true
+    transfer: true
     type: property
   - _id: VpMWvn5pbQRYM67N
     _key: '!items.effects!2d956f82dca6786f.VpMWvn5pbQRYM67N'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.fb7771ce17fca88f
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.fb7771ce17fca88f
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/pour-freezing-liquid.webp
     name: Pour Freezing Liquid
     system:
@@ -158,15 +160,16 @@ effects:
         hit: <p>Target becomes @L[Condition:Frozen]{frozen}.</p>
       targets:
         - creature
+    transfer: true
     type: ability
   - _id: x6sjcsIVaOkVZOFD
     _key: '!items.effects!2d956f82dca6786f.x6sjcsIVaOkVZOFD'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.35a4dd6673f4ecd9
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.35a4dd6673f4ecd9
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/properties/searchable.webp
     name: Searchable
     system:
@@ -178,15 +181,37 @@ effects:
         @L[Ability:Search]{Search}.</p>
       form: flaw
       identifier: searchable
+    transfer: true
     type: property
-  - _id: QFd01KsFD5APsHtE
-    _key: '!items.effects!2d956f82dca6786f.QFd01KsFD5APsHtE'
+  - _id: VQDFXr0oJQZ7Waxe
+    _key: '!items.effects!2d956f82dca6786f.VQDFXr0oJQZ7Waxe'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.4d4cbf6dfd95efca
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.3d2cc8d952adebec
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/properties/small.webp
+    name: Small
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>An item with this property is easily concealed and can often be used
+        in the same hand as a @L[Category:Shields]{shield}.</p>
+      form: intrinsic
+      identifier: small
+      mundane: true
+    transfer: true
+    type: property
+  - _id: 9tt2AqtPryEtX270
+    _key: '!items.effects!2d956f82dca6786f.9tt2AqtPryEtX270'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.4d4cbf6dfd95efca
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/shock-touch.webp
     name: Shock Touch
     system:
@@ -274,6 +299,8 @@ effects:
             type: tag
           verbal:
             type: tag
+        tweaks:
+          gifted: 1
       delivery: hand
       duration:
         raw: '1'
@@ -285,7 +312,10 @@ effects:
       endCondition: >-
         <p>At the end of each of the target's actions, they roll [[/roll 2d4]].
         If either of these dice roll a 4, this effect ends.</p>
-      executionTime: a1
+      executionTime:
+        base: a1
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -299,6 +329,7 @@ effects:
       interaction: attack
       invoked: true
       maneuver: active
+      mundane: false
       piercing:
         raw: 2
       powerSources:
@@ -312,27 +343,8 @@ effects:
       standard: true
       targets:
         - creature
+    transfer: true
     type: ability
-  - _id: VQDFXr0oJQZ7Waxe
-    _key: '!items.effects!2d956f82dca6786f.VQDFXr0oJQZ7Waxe'
-    _stats:
-      compendiumSource: Compendium.teriock.properties.Item.3d2cc8d952adebec
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.63
-    img: systems/teriock/src/icons/properties/small.webp
-    name: Small
-    system:
-      competence:
-        raw: 0
-      description: >-
-        <p>An item with this property is easily concealed and can often be used
-        in the same hand as a @L[Category:Shields]{shield}.</p>
-      form: intrinsic
-      identifier: small
-      mundane: true
-    type: property
 folder: 64a9d9ba60f26294
 img: systems/teriock/src/icons/consumables/freezing-liquid.webp
 name: Freezing Liquid

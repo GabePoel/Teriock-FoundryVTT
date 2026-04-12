@@ -1,7 +1,7 @@
 _id: 3c3003c23cb3c4a1
 _key: '!items!3c3003c23cb3c4a1'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.23
@@ -9,11 +9,11 @@ effects:
   - _id: Tn5EQuAwOZUq3KZv
     _key: '!items.effects!3c3003c23cb3c4a1.Tn5EQuAwOZUq3KZv'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.d7349a2e714a29ff
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.d7349a2e714a29ff
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: combat
@@ -52,15 +52,16 @@ effects:
       skill: true
       targets:
         - self
+    transfer: true
     type: ability
   - _id: 0J9CrQq9kLFUU4Iu
     _key: '!items.effects!3c3003c23cb3c4a1.0J9CrQq9kLFUU4Iu'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.4e84d0efca8837f5
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.4e84d0efca8837f5
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: combat
@@ -106,102 +107,16 @@ effects:
       standard: true
       targets:
         - self
-    type: ability
-  - _id: 4kaakalA0ipM6sCL
-    _key: '!items.effects!3c3003c23cb3c4a1.4kaakalA0ipM6sCL'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.36c0ec02f2b411fd
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/abilities/augment-undead.webp
-    name: Augment Undead
-    system:
-      _sup: Tn5EQuAwOZUq3KZv
-      automations:
-        R3YSJHv94rQAJx84:
-          _id: R3YSJHv94rQAJx84
-          attachDocuments: true
-          automatic: true
-          competence:
-            raw: 0
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          documents:
-            - Compendium.teriock.tables.RollTable.4c4a8524b4719a2f
-          heighten:
-            - 0
-            - 1
-          multi: false
-          overrideCompetence: false
-          overrideData: false
-          type: addExternal
-      class: necromancer
-      competence:
-        raw: 0
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: sight
-      duration:
-        raw: '24'
-        unit: hour
-      elements:
-        - necromancy
-      endCondition: <p>Target is no longer @L[Category:Undead creatures]{undead}.</p>
-      executionTime: 10 Minutes
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: augment-undead
-      interaction: manifest
-      invoked: true
-      maneuver: slow
-      overview:
-        base: >-
-          <p>Target gains 1 @L[Core:Common Undead Abilities]{common undead
-          ability} of your
-          choice.</p><p>@Embed[Compendium.teriock.tables.RollTable.4c4a8524b4719a2f
-          rollable]</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        raw: '5'
-        unit: ft
-      requirements: <p>Target is @L[Category:Undead creatures]{undead}.</p>
-      ritual: true
-      rotator: true
-      spell: true
-      standard: true
-      targets:
-        - creature
+    transfer: true
     type: ability
   - _id: 1r9NkHHxpXmJ6sLN
     _key: '!items.effects!3c3003c23cb3c4a1.1r9NkHHxpXmJ6sLN'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.e7abca04120b4496
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.e7abca04120b4496
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: support
@@ -214,25 +129,25 @@ effects:
           _id: f025905e157ac261
           changes:
             - key: system.competence.raw
-              mode: 4
+              phase: fluency
               priority: 10
               qualifier: '@identifier.elder-sorcery-creation'
               target: ability
-              time: fluency
+              type: upgrade
               value: '2'
             - key: system.competence.raw
-              mode: 4
+              phase: fluency
               priority: 10
               qualifier: '@identifier.celestial-elder-sorcery-words'
               target: ability
-              time: fluency
+              type: upgrade
               value: '2'
             - key: system.competence.raw
-              mode: 4
+              phase: fluency
               priority: 10
               qualifier: '@identifier.necromancy-elder-sorcery-words'
               target: ability
-              time: fluency
+              type: upgrade
               value: '2'
           competencies:
             - 1
@@ -303,67 +218,16 @@ effects:
       standard: true
       targets:
         - self
-    type: ability
-  - _id: CimaoSOwSuQMLfZt
-    _key: '!items.effects!3c3003c23cb3c4a1.CimaoSOwSuQMLfZt'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.efe54d38aacf546f
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/intrusive-casting.webp
-    name: Intrusive Casting
-    system:
-      _sup: AEhBZiAA4BX4QZVf
-      class: necromancer
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: self
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: r0
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: intrusive-casting
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>The range of the triggering @L[Category:Spells]{spell} is
-          doubled.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - spell
-      trigger: >-
-        <p>You are casting a @L[Category:Spells]{spell} with a range other than
-        @L[Category:Self target spells]{self}.</p>
+    transfer: true
     type: ability
   - _id: AEhBZiAA4BX4QZVf
     _key: '!items.effects!3c3003c23cb3c4a1.AEhBZiAA4BX4QZVf'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.82f855db7bb879dd
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.82f855db7bb879dd
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: support
@@ -418,15 +282,16 @@ effects:
         competence:
           attribute: int
           value: 1
+    transfer: true
     type: ability
   - _id: cCxUqjkZ41n5NbD3
     _key: '!items.effects!3c3003c23cb3c4a1.cCxUqjkZ41n5NbD3'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.8b5c0113b30f150d
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8b5c0113b30f150d
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: combat
@@ -438,11 +303,11 @@ effects:
           _id: f025905e157ac261
           changes:
             - key: system.competence.raw
-              mode: 4
+              phase: fluency
               priority: 10
               qualifier: '@identifier.necromancy-rotators'
               target: ability
-              time: fluency
+              type: upgrade
               value: '2'
           competencies:
             - 1
@@ -492,15 +357,16 @@ effects:
       standard: true
       targets:
         - self
+    transfer: true
     type: ability
   - _id: TdPnxVkYeZuUtZkM
     _key: '!items.effects!3c3003c23cb3c4a1.TdPnxVkYeZuUtZkM'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.1a33da97f159afc7
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1a33da97f159afc7
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: support
@@ -538,129 +404,16 @@ effects:
       standard: true
       targets:
         - self
+    transfer: true
     type: ability
-  - _id: fcVGlOmoekfnCQb0
-    _key: '!items.effects!3c3003c23cb3c4a1.fcVGlOmoekfnCQb0'
+  - _id: SSu6tdI6uIcgBQ2L
+    _key: '!items.effects!3c3003c23cb3c4a1.SSu6tdI6uIcgBQ2L'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.4269f3e018a6c618
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.a627d9246b32a094
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/oppressive-casting.webp
-    name: Oppressive Casting
-    system:
-      _sup: AEhBZiAA4BX4QZVf
-      class: necromancer
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: self
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: r0
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: oppressive-casting
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>If the triggering @L[Category:Spells]{spell} is an
-          @L[Category:Attack spells]{attack spell}, you make the @L[Core:Attack
-          Interaction]{attack roll} with @L[Core:Advantage]{advantage}. If it is
-          a @L[Category:Feat spells]{feat spell}, its targets make their
-          @L[Core:Feat Interaction]{feat save} with
-          @L[Core:Disadvantage]{disadvantage}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - spell
-      trigger: >-
-        <p>You cast an @L[Category:Attack spells]{attack} or @L[Category:Feat
-        spells]{feat interaction spell}.</p>
-    type: ability
-  - _id: ymBaBKtses6TjlSD
-    _key: '!items.effects!3c3003c23cb3c4a1.ymBaBKtses6TjlSD'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.ea1ecd00bc4430e1
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/spell-strike.webp
-    name: Spell Strike
-    system:
-      _sup: TdPnxVkYeZuUtZkM
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: weapon
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: r0
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: spell-strike
-      interaction: manifest
-      limitation: >-
-        <p>Only usable with @L[Ability:Death Ray]{Death Ray} and
-        @L[Ability:Terror Ball]{Terror Ball}.</p>
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>Target takes the "on hit" effect of a @L[Category:Missile delivery
-          spells]{missile spell} that you are @L[Core:Proficiency
-          Bonus]{proficient} in. If the triggering hit was a critical hit, then
-          the target takes the "on critical hit" effect instead.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      skill: true
-      standard: true
-      targets:
-        - creature
-      trigger: >-
-        <p>You have just landed a hit with a @L[Category:Weapon delivery
-        abilities]{weapon} or @L[Category:Bite delivery abilities]{bite}
-        @L[Category:Attack abilities]{attack} on another creature and the effect
-        has successfully applied.</p>
-    type: ability
-  - _id: OBTMPgCkpTxBRiWQ
-    _key: '!items.effects!3c3003c23cb3c4a1.OBTMPgCkpTxBRiWQ'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.a627d9246b32a094
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/spirit-pact.webp
     name: Spirit Pact
     system:
@@ -690,7 +443,10 @@ effects:
         - contract
       elements:
         - necromancy
-      executionTime: Short Rest
+      executionTime:
+        base: Short Rest
+        slow:
+          unit: shortRest
       expansion:
         featSaveAttribute: mov
         range:
@@ -701,6 +457,7 @@ effects:
       interaction: manifest
       invoked: true
       maneuver: slow
+      mundane: false
       overview:
         base: >-
           <p>You make a pact with some spirit, @L[Category:Elemental
@@ -741,6 +498,281 @@ effects:
       sustained: true
       targets:
         - other
+    transfer: true
+    type: ability
+  - _id: 0k2U5g1aEeeT87nl
+    _key: '!items.effects!3c3003c23cb3c4a1.0k2U5g1aEeeT87nl'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.36c0ec02f2b411fd
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/augment-undead.webp
+    name: Augment Undead
+    system:
+      _sup: Tn5EQuAwOZUq3KZv
+      automations:
+        R3YSJHv94rQAJx84:
+          _id: R3YSJHv94rQAJx84
+          attachDocuments: true
+          automatic: true
+          competence:
+            raw: 0
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          documents:
+            - Compendium.teriock.tables.RollTable.4c4a8524b4719a2f
+          heighten:
+            - 0
+            - 1
+          multi: false
+          overrideCompetence: false
+          overrideData: false
+          type: addExternal
+      class: necromancer
+      competence:
+        raw: 0
+      costs:
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+        primary:
+          mp:
+            formula: '1'
+            type: formula
+      delivery: sight
+      duration:
+        raw: '24'
+        unit: hour
+      elements:
+        - necromancy
+      endCondition: <p>Target is no longer @L[Category:Undead creatures]{undead}.</p>
+      executionTime:
+        base: 10 Minutes
+        slow:
+          raw: '10'
+          unit: minute
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      identifier: augment-undead
+      interaction: manifest
+      invoked: true
+      maneuver: slow
+      mundane: false
+      overview:
+        base: >-
+          <p>Target gains 1 @L[Core:Common Undead Abilities]{common undead
+          ability} of your
+          choice.</p><p>@Embed[Compendium.teriock.tables.RollTable.4c4a8524b4719a2f
+          rollable]</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        raw: '5'
+        unit: ft
+      requirements: <p>Target is @L[Category:Undead creatures]{undead}.</p>
+      ritual: true
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    transfer: true
+    type: ability
+  - _id: n1g2Midr5VSAKc2u
+    _key: '!items.effects!3c3003c23cb3c4a1.n1g2Midr5VSAKc2u'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.4269f3e018a6c618
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/oppressive-casting.webp
+    name: Oppressive Casting
+    system:
+      _sup: AEhBZiAA4BX4QZVf
+      class: necromancer
+      competence:
+        raw: 0
+      costs:
+        primary:
+          mp:
+            formula: '1'
+            type: formula
+      delivery: self
+      duration:
+        raw: '0'
+        unit: instant
+      executionTime:
+        base: r0
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: oppressive-casting
+      interaction: manifest
+      maneuver: reactive
+      mundane: false
+      overview:
+        base: >-
+          <p>If the triggering @L[Category:Spells]{spell} is an
+          @L[Category:Attack spells]{attack spell}, you make the @L[Core:Attack
+          Interaction]{attack roll} with @L[Core:Advantage]{advantage}. If it is
+          a @L[Category:Feat spells]{feat spell}, its targets make their
+          @L[Core:Feat Interaction]{feat save} with
+          @L[Core:Disadvantage]{disadvantage}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - spell
+      trigger: >-
+        <p>You cast an @L[Category:Attack spells]{attack} or @L[Category:Feat
+        spells]{feat interaction spell}.</p>
+    transfer: true
+    type: ability
+  - _id: TukUrTIOjMDCoNAj
+    _key: '!items.effects!3c3003c23cb3c4a1.TukUrTIOjMDCoNAj'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.YCSGNa0EM2gEFOhu
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/intrusive-casting.webp
+    name: Intrusive Casting
+    system:
+      _sup: AEhBZiAA4BX4QZVf
+      class: necromancer
+      competence:
+        raw: 0
+      costs:
+        primary:
+          mp:
+            formula: '1'
+            type: formula
+      delivery: self
+      duration:
+        raw: '0'
+        unit: instant
+      executionTime:
+        base: r0
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: intrusive-casting
+      interaction: manifest
+      maneuver: reactive
+      mundane: false
+      overview:
+        base: >-
+          <p>The range of the triggering @L[Category:Spells]{spell} is
+          doubled.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - spell
+      trigger: >-
+        <p>You are casting a @L[Category:Spells]{spell} with a range other than
+        @L[Category:Self target spells]{self}.</p>
+    transfer: true
+    type: ability
+  - _id: wGuxEv3HRPoGcJo5
+    _key: '!items.effects!3c3003c23cb3c4a1.wGuxEv3HRPoGcJo5'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.HXidffXqZoxo8wog
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/spell-strike.webp
+    name: Spell Strike
+    system:
+      _sup: TdPnxVkYeZuUtZkM
+      competence:
+        raw: 0
+      costs:
+        primary:
+          mp:
+            formula: '1'
+            type: formula
+      delivery: weapon
+      duration:
+        raw: '0'
+        unit: instant
+      executionTime:
+        base: r0
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: spell-strike
+      interaction: manifest
+      limitation: >-
+        <p>Only usable with @L[Ability:Death Ray]{Death Ray} and
+        @L[Ability:Terror Ball]{Terror Ball}.</p>
+      maneuver: reactive
+      mundane: false
+      overview:
+        base: >-
+          <p>Target takes the "on hit" effect of a @L[Category:Missile delivery
+          spells]{missile spell} that you are @L[Core:Proficiency
+          Bonus]{proficient} in. If the triggering hit was a critical hit, then
+          the target takes the "on critical hit" effect instead.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: contact
+      skill: true
+      standard: true
+      targets:
+        - creature
+      trigger: >-
+        <p>You have just landed a hit with a @L[Category:Weapon delivery
+        abilities]{weapon} or @L[Category:Bite delivery abilities]{bite}
+        @L[Category:Attack abilities]{attack} on another creature and the effect
+        has successfully applied.</p>
+    transfer: true
     type: ability
 folder: 5776174f35755cf8
 img: systems/teriock/src/icons/ranks/rank-3-necromancer.webp

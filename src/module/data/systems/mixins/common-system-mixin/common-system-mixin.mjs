@@ -194,8 +194,12 @@ export default function CommonSystemMixin(Base) {
           image: this.parent.img,
           name: this.parent.fullName,
           uuid: this.parent.uuid,
-          icon: TERIOCK.options.document[this.metadata.type].icon,
-          label: TERIOCK.options.document[this.metadata.type].name,
+          icon:
+            TERIOCK.options.document[this.metadata.type]?.icon ||
+            TERIOCK.options.document.document.icon,
+          label:
+            TERIOCK.options.document[this.metadata.type]?.name ||
+            TERIOCK.options.document.document.name,
         };
         const typeMap = this.parent.children.typeMap;
         for (const type of this.metadata.visibleTypes) {
@@ -347,11 +351,10 @@ export default function CommonSystemMixin(Base) {
         return [];
       }
 
-      /** @returns {Promise<CommonDocument|void>} */
+      /** @returns {Promise<CommonDocument|null>} */
       async getCompendiumSource() {
         const reference = await fromUuid(this.parent._stats.compendiumSource);
-        if (!reference) return;
-        return reference;
+        return reference || null;
       }
 
       /** @returns {Promise<object>} */
@@ -484,7 +487,7 @@ export default function CommonSystemMixin(Base) {
               /** @type {BaseAutomation[]} */ this.automations?.contents;
             if (automations) {
               for (const automation of automations) {
-                updateObject[`${automation.fieldPath}.${automation.id}`] = _del;
+                updateObject[automation.localPath] = _del;
               }
               await this.parent.update(updateObject);
             }

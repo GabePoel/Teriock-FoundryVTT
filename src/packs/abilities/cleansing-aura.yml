@@ -1,64 +1,58 @@
 _id: e4d029d4855829d0
-_key: '!items!e4d029d4855829d0'
+_key: '!effects!e4d029d4855829d0'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: e4d029d4855829d0
-    _key: '!items.effects!e4d029d4855829d0.e4d029d4855829d0'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/cleansing-aura.webp
-    name: Cleansing Aura
-    system:
-      class: paladin
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: aura
-      duration:
-        raw: '0'
-        unit: instant
-      elements:
-        - life
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: unp
-      form: normal
-      identifier: cleansing-aura
-      interaction: feat
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - divine
-      range:
-        raw: '10'
-        unit: ft
-      results:
-        fail: >-
-          <p>Target is no longer @L[Condition:Poisoned]{poisoned},
-          @L[Condition:Charmed]{charmed}, nor @L[Condition:Terrored]{terrored}.
-          If the target is reanimated by an ongoing @L[Category:Reanimation
-          effects]{reanimation effect} with a duration less than 1 month, they
-          @L[Condition:Dead]{die}.</p>
-      skill: true
-      standard: true
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/cleansing-aura.webp
 name: Cleansing Aura
-type: wrapper
+system:
+  class: paladin
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: aura
+  duration:
+    raw: '0'
+    unit: instant
+  elements:
+    - life
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: unp
+  form: normal
+  identifier: cleansing-aura
+  interaction: feat
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - divine
+  range:
+    raw: '10'
+    unit: ft
+  results:
+    fail: >-
+      <p>Target is no longer @L[Condition:Poisoned]{poisoned},
+      @L[Condition:Charmed]{charmed}, nor @L[Condition:Terrored]{terrored}. If
+      the target is reanimated by an ongoing @L[Category:Reanimation
+      effects]{reanimation effect} with a duration less than 1 month, they
+      @L[Condition:Dead]{die}.</p>
+  skill: true
+  standard: true
+  targets:
+    - creature
+transfer: true
+type: ability

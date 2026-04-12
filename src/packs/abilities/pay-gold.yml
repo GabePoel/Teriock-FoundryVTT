@@ -1,110 +1,114 @@
 _id: ec08fec8a8fc0959
-_key: '!items!ec08fec8a8fc0959'
+_key: '!effects!ec08fec8a8fc0959'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: ec08fec8a8fc0959
-    _key: '!items.effects!ec08fec8a8fc0959.ec08fec8a8fc0959'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/pay-gold.webp
-    name: Pay Gold
-    system:
-      automations:
-        32520e32fd3b4c52:
-          _id: 32520e32fd3b4c52
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: remove
-          status: hollied
-          type: end
-        5fade7b6596f9b62:
-          _id: 5fade7b6596f9b62
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: remove
-          status: terrored
-          type: end
-        b3b08fea19af4b1d:
-          _id: b3b08fea19af4b1d
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: remove
-          status: terrored
-          type: status
-        fa7d6876f0a73137:
-          _id: fa7d6876f0a73137
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: remove
-          status: hollied
-          type: status
-      basic: true
-      competence:
-        raw: 0
-      costs:
-        components:
-          material:
-            type: tag
-        primary:
-          gp:
-            description: <p>An amount of @L[Equipment:Coin]{gold} of your choosing.</p>
-            type: description
-      delivery: self
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: intrinsic
-      identifier: pay-gold
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>If the target is "@L[Damage:Financial]{indebted}", this pays off an
-          amount of their debt equal to the amount paid upon using [[lookup
-          name]].</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - divine
-        - financial
-      range:
-        unit: self
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/pay-gold.webp
 name: Pay Gold
-type: wrapper
+system:
+  automations:
+    32520e32fd3b4c52:
+      _id: 32520e32fd3b4c52
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 1
+        - 0
+      relation: remove
+      status: hollied
+      type: end
+    5fade7b6596f9b62:
+      _id: 5fade7b6596f9b62
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 1
+        - 0
+      relation: remove
+      status: terrored
+      type: end
+    b3b08fea19af4b1d:
+      _id: b3b08fea19af4b1d
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: remove
+      status: terrored
+      target: false
+      type: status
+    fa7d6876f0a73137:
+      _id: fa7d6876f0a73137
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: remove
+      status: hollied
+      target: false
+      type: status
+  basic: true
+  competence:
+    raw: 0
+  costs:
+    components:
+      material:
+        type: tag
+    primary:
+      gp:
+        description: <p>An amount of @L[Equipment:Coin]{gold} of your choosing.</p>
+        type: description
+  delivery: self
+  duration:
+    raw: '0'
+    unit: instant
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: intrinsic
+  identifier: pay-gold
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>If the target is "@L[Damage:Financial]{indebted}", this pays off an
+      amount of their debt equal to the amount paid upon using [[lookup
+      name]].</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - divine
+    - financial
+  range:
+    unit: self
+  targets:
+    - creature
+transfer: true
+type: ability

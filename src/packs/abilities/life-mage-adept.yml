@@ -1,70 +1,67 @@
 _id: 123bf411d4893d0f
-_key: '!items!123bf411d4893d0f'
+_key: '!effects!123bf411d4893d0f'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 123bf411d4893d0f
-    _key: '!items.effects!123bf411d4893d0f.123bf411d4893d0f'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/life-mage-adept.webp
-    name: Life Mage Adept
-    system:
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.costs.tweaks.adept
-              mode: 4
-              priority: 10
-              qualifier: '@class.lifeMage'
-              target: ability
-              time: normal
-              value: '1'
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: changes
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: life-mage-adept
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You are @L[Keyword:Adept]{adept} at @L[Category:Life Mage class
-          abilities]{abilities} you get from ranks in @L[Class:Life Mage]{Life
-          Mage}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/life-mage-adept.webp
 name: Life Mage Adept
-type: wrapper
+system:
+  automations:
+    e789ed5e109ebd1a:
+      _id: e789ed5e109ebd1a
+      changes:
+        - key: system.costs.tweaks.adept
+          phase: normal
+          priority: 10
+          qualifier: '@class.lifeMage'
+          target: ability
+          type: upgrade
+          value: '1'
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: changes
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: unlimited
+  executionTime:
+    base: passive
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  identifier: life-mage-adept
+  interaction: manifest
+  maneuver: passive
+  mundane: false
+  overview:
+    base: >-
+      <p>You are @L[Keyword:Adept]{adept} at @L[Category:Life Mage class
+      abilities]{abilities} you get from ranks in @L[Class:Life Mage]{Life
+      Mage}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  targets:
+    - self
+transfer: true
+type: ability

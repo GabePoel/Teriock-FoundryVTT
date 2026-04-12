@@ -1,7 +1,7 @@
 _id: ca8f56b359af60db
 _key: '!items!ca8f56b359af60db'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.23
@@ -9,11 +9,11 @@ effects:
   - _id: 2H75N4zuZ4n1quED
     _key: '!items.effects!ca8f56b359af60db.2H75N4zuZ4n1quED'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.1968a54017984712
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1968a54017984712
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/cannot-swim.webp
     name: Cannot Swim
     system:
@@ -22,11 +22,11 @@ effects:
           _id: e789ed5e109ebd1a
           changes:
             - key: system.speedAdjustments.swim
-              mode: 5
+              phase: normal
               priority: 20
               qualifier: '1'
               target: Actor
-              time: normal
+              type: override
               value: '0'
           competencies:
             - 0
@@ -67,15 +67,16 @@ effects:
         unit: self
       targets:
         - self
+    transfer: true
     type: ability
   - _id: ejcum5I8FTIrn8iI
     _key: '!items.effects!ca8f56b359af60db.ejcum5I8FTIrn8iI'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.1c495caf2efacbdf
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1c495caf2efacbdf
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/fire-damage-resistance.webp
     name: Fire Damage Resistance
     system:
@@ -96,11 +97,11 @@ effects:
           _id: e789ed5e109ebd1a
           changes:
             - key: system.protections.resistances.damageTypes
-              mode: 2
+              phase: normal
               priority: 10
               qualifier: '1'
               target: Actor
-              time: normal
+              type: add
               value: fire
           competencies:
             - 0
@@ -143,6 +144,7 @@ effects:
         unit: self
       targets:
         - self
+    transfer: true
     type: ability
 folder: 111191792288f1c7
 img: icons/magic/fire/flame-burning-yellow-orange.webp

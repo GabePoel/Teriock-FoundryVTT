@@ -1,61 +1,53 @@
 _id: faa997d23ed5a73a
-_key: '!items!faa997d23ed5a73a'
+_key: '!effects!faa997d23ed5a73a'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: faa997d23ed5a73a
-    _key: '!items.effects!faa997d23ed5a73a.faa997d23ed5a73a'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/intercept-magic.webp
-    name: Intercept Magic
-    system:
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: hand
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: r1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: intercept-magic
-      interaction: attack
-      maneuver: reactive
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      results:
-        hit: >-
-          <p>The triggering effect targets you instead of the creature you
-          hit.</p>
-      rotator: true
-      spell: true
-      standard: true
-      targets:
-        - creature
-      trigger: >-
-        <p>A creature within range is targeted by a @L[Category:Magically
-        powered abilities]{magical effect.}</p>
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/intercept-magic.webp
 name: Intercept Magic
-type: wrapper
+system:
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: hand
+  duration:
+    raw: '0'
+    unit: instant
+  executionTime:
+    base: r1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  identifier: intercept-magic
+  interaction: attack
+  maneuver: reactive
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: contact
+  results:
+    hit: <p>The triggering effect targets you instead of the creature you hit.</p>
+  rotator: true
+  spell: true
+  standard: true
+  targets:
+    - creature
+  trigger: >-
+    <p>A creature within range is targeted by a @L[Category:Magically powered
+    abilities]{magical effect.}</p>
+transfer: true
+type: ability

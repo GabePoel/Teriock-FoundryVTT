@@ -1,185 +1,47 @@
 _id: 5bb5b13ca45f582b
-_key: '!items!5bb5b13ca45f582b'
+_key: '!effects!5bb5b13ca45f582b'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 5bb5b13ca45f582b
-    _key: '!items.effects!5bb5b13ca45f582b.5bb5b13ca45f582b'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/bow-out.webp
-    name: Bow Out
-    system:
-      class: duelist
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: bow-out
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Active Bow Out]{Active Bow Out} and
-          @L[Ability:Reactive Bow Out]{Reactive Bow Out}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-    type: ability
-  - _id: Gs4jCmyXyojxu0WM
-    _key: '!items.effects!5bb5b13ca45f582b.Gs4jCmyXyojxu0WM'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.c9aece1ec4094d53
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/abilities/active-bow-out.webp
-    name: Active Bow Out
-    system:
-      _sup: 5bb5b13ca45f582b
-      automations:
-        824b5b01e1a4efec:
-          _id: 824b5b01e1a4efec
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          executor: false
-          heighten:
-            - 1
-            - 0
-          relation: remove
-          status: dueling
-          target: false
-          type: status
-        e9c69ec96993ccc5:
-          _id: e9c69ec96993ccc5
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: remove
-          status: dueling
-          type: end
-      class: duelist
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - duelModifying
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: active-bow-out
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>You end a @L[Condition:Dueling]{duel} you are currently in. You do
-          not count as "forfeiting" or "losing" if you use [[lookup name]] to
-          stop @L[Condition:Dueling]{dueling}.</p>
-        proficient: >-
-          <p>If you want, everyone in the @L[Condition:Dueling]{duel} returns to
-          the number of @L[Core:Hit Points and Mana Points]{HP} they had prior
-          to @L[Condition:Dueling]{dueling}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - spiritual
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-    type: ability
-  - _id: midDxLrK2XuMivRI
-    _key: '!items.effects!5bb5b13ca45f582b.midDxLrK2XuMivRI'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.c0042e5fff873fda
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/reactive-bow-out.webp
-    name: Reactive Bow Out
-    system:
-      _sup: 5bb5b13ca45f582b
-      class: duelist
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: r1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: reactive-bow-out
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>The effect causing you to enter a @L[Condition:Dueling]{duel} or
-          that would @L[Category:Duel modifying effects]{modify} a
-          @L[Condition:Dueling]{duel} you are in @L[Core:Fizzles]{fizzles}. You
-          do not count as "forfeiting" or "losing" if you use [[lookup name]] to
-          stop @L[Condition:Dueling]{dueling}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - spiritual
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-      trigger: >-
-        <p>Some effect would cause you to start @L[Condition:Dueling]{dueling}
-        or @L[Category:Duel modifying effects]{modify} a
-        @L[Condition:Dueling]{duel} you are in.</p>
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/bow-out.webp
 name: Bow Out
-type: wrapper
+system:
+  class: duelist
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: unlimited
+  executionTime:
+    base: passive
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: bow-out
+  interaction: manifest
+  maneuver: passive
+  mundane: false
+  overview:
+    base: >-
+      <p>You gain @L[Ability:Active Bow Out]{Active Bow Out} and
+      @L[Ability:Reactive Bow Out]{Reactive Bow Out}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  skill: true
+  standard: true
+  targets:
+    - self
+transfer: true
+type: ability

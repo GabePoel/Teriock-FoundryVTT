@@ -1,76 +1,19 @@
 _id: cf356ada636a721b
 _key: '!items!cf356ada636a721b'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.23
 effects:
-  - _id: kHkM1mJ1kv0yVG2w
-    _key: '!items.effects!cf356ada636a721b.kHkM1mJ1kv0yVG2w'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.f970c72f5043d109
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/abilities/instant-awaken.webp
-    name: Instant Awaken
-    system:
-      _sup: 06gYLlgdZFFHQH0g
-      automations:
-        1728b3a84ea27844:
-          _id: 1728b3a84ea27844
-          common:
-            - awaken
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: common
-      competence:
-        raw: 0
-      delivery: hand
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - awakening
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: instant-awaken
-      interaction: attack
-      limitation: Only usable on the other participant in the Partner Awaken.
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: contact
-      results:
-        hit: <p>Target is @L[Keyword:Awaken]{awakened}.</p>
-      skill: true
-      standard: true
-      targets:
-        - creature
-    type: ability
   - _id: 06gYLlgdZFFHQH0g
     _key: '!items.effects!cf356ada636a721b.06gYLlgdZFFHQH0g'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.5451b5caee0b5380
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.5451b5caee0b5380
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/partner-awaken.webp
     name: Partner Awaken
     system:
@@ -110,15 +53,79 @@ effects:
       standard: true
       targets:
         - creature
+    transfer: true
     type: ability
-  - _id: br7PSW0EMORpXkP4
-    _key: '!items.effects!cf356ada636a721b.br7PSW0EMORpXkP4'
+  - _id: s5LNJrBIvwgnAc7y
+    _key: '!items.effects!cf356ada636a721b.s5LNJrBIvwgnAc7y'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.8d55640ef65f1e81
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.GTwa9EG1h2n986ZO
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/instant-awaken.webp
+    name: Instant Awaken
+    system:
+      _sup: 06gYLlgdZFFHQH0g
+      automations:
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          common:
+            - awaken
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: common
+      competence:
+        raw: 0
+      costs: {}
+      delivery: hand
+      duration:
+        raw: '0'
+        unit: instant
+      effectTypes:
+        - awakening
+      executionTime:
+        base: a1
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: instant-awaken
+      interaction: attack
+      limitation: <p>Only usable on the other participant in the Partner Awaken.</p>
+      maneuver: active
+      mundane: false
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: contact
+      results:
+        hit: <p>Target is @L[Keyword:Awaken]{awakened}.</p>
+      skill: true
+      standard: true
+      targets:
+        - creature
+    transfer: true
+    type: ability
+  - _id: AdxxkDVoZCDPpW12
+    _key: '!items.effects!cf356ada636a721b.AdxxkDVoZCDPpW12'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8d55640ef65f1e81
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/reactive-awaken.webp
     name: Reactive Awaken
     system:
@@ -138,13 +145,17 @@ effects:
           type: common
       competence:
         raw: 0
+      costs: {}
       delivery: hand
       duration:
         raw: '0'
         unit: instant
       effectTypes:
         - awakening
-      executionTime: r1
+      executionTime:
+        base: r1
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -153,8 +164,9 @@ effects:
       form: normal
       identifier: reactive-awaken
       interaction: attack
-      limitation: Only usable on the other participant in the Partner Awaken.
+      limitation: <p>Only usable on the other participant in the Partner Awaken.</p>
       maneuver: reactive
+      mundane: false
       overview:
         base: <p>Target is @L[Keyword:Awaken]{awakened}.</p>
       piercing:
@@ -167,6 +179,7 @@ effects:
       standard: true
       targets:
         - creature
+    transfer: true
     type: ability
 folder: 5cabb085721fa30c
 img: icons/creatures/reptiles/lizard-iguana-green.webp

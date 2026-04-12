@@ -1,84 +1,83 @@
 _id: e0a69565292eb4bc
-_key: '!items!e0a69565292eb4bc'
+_key: '!effects!e0a69565292eb4bc'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: e0a69565292eb4bc
-    _key: '!items.effects!e0a69565292eb4bc.e0a69565292eb4bc'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/zone-of-light-or-darkness.webp
-    name: Zone of Light or Darkness
-    system:
-      automations:
-        72ce567009179bea:
-          _id: 72ce567009179bea
-          competencies:
-            - 0
-            - 1
-            - 2
-          duration:
-            raw: '@h * 86400'
-          heighten:
-            - 1
-          type: duration
-      class: paladin
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: hand
-      duration:
-        raw: '8'
-        unit: hour
-      elements:
-        - nature
-      executionTime: 10 Minutes
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 24 hours.</p>
-      identifier: zone-of-light-or-darkness
-      interaction: manifest
-      maneuver: slow
-      overview:
-        base: >-
-          <p>You enchant an area no larger than 30 feet in any direction. As you
-          enchant this area, you must choose whether it is a zone of "light" or
-          "darkness".</p><dl><dt>Light</dt><dd>The zone is fully illuminated
-          with magical light. Creatures cannot be @L[Condition:Hidden]{hidden}
-          within the zone and no shadows are cast. Creatures cannot be
-          @L[Condition:Blind]{blind} within the
-          zone.</dd><dt>Darkness</dt><dd>The zone is filled with magical
-          darkness. All creatures within the zone are
-          @L[Condition:Blind]{blinded} and cannot see anything.</dd></dl>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      ritual: true
-      rotator: true
-      spell: true
-      standard: true
-      targets:
-        - area
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/zone-of-light-or-darkness.webp
 name: Zone of Light or Darkness
-type: wrapper
+system:
+  automations:
+    72ce567009179bea:
+      _id: 72ce567009179bea
+      changeType: add
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      duration:
+        raw: '@h * 86400'
+        unit: second
+      heighten:
+        - 1
+      type: duration
+  class: paladin
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: hand
+  duration:
+    raw: '8'
+    unit: hour
+  elements:
+    - nature
+  executionTime:
+    base: 10 Minutes
+    slow:
+      raw: '10'
+      unit: minute
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  heightened: >-
+    <p>For each additional @L[Core:MP]{MP} spent, the duration of this effect
+    increases by 24 hours.</p>
+  identifier: zone-of-light-or-darkness
+  interaction: manifest
+  maneuver: slow
+  mundane: false
+  overview:
+    base: >-
+      <p>You enchant an area no larger than 30 feet in any direction. As you
+      enchant this area, you must choose whether it is a zone of "light" or
+      "darkness".</p><dl><dt>Light</dt><dd>The zone is fully illuminated with
+      magical light. Creatures cannot be @L[Condition:Hidden]{hidden} within the
+      zone and no shadows are cast. Creatures cannot be
+      @L[Condition:Blind]{blind} within the zone.</dd><dt>Darkness</dt><dd>The
+      zone is filled with magical darkness. All creatures within the zone are
+      @L[Condition:Blind]{blinded} and cannot see anything.</dd></dl>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: contact
+  ritual: true
+  rotator: true
+  spell: true
+  standard: true
+  targets:
+    - area
+transfer: true
+type: ability

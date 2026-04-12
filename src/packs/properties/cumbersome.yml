@@ -1,50 +1,50 @@
 _id: eac47e503515cd7d
-_key: '!items!eac47e503515cd7d'
+_key: '!effects!eac47e503515cd7d'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: eac47e503515cd7d
-    _key: '!items.effects!eac47e503515cd7d.eac47e503515cd7d'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.68
-    img: systems/teriock/src/icons/properties/cumbersome.webp
-    name: Cumbersome
-    system:
-      applyIfUnequipped: false
-      automations:
-        parameterChanges:
-          _id: parameterChanges
-          changes:
-            - key: system.encumbranceLevel
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '1'
-          type: changes
-      competence:
-        raw: 0
-      description: >-
-        <p>A <b>[[lookup name style=lc]]</b> @L[Category:Equipment]{item}
-        <i>always</i> makes its user @L[Condition:Encumbered]{encumbered},
-        regardless of how much they are @L[Core:Carrying Capacity]{carrying}. If
-        the user would have not been @L[Condition:Encumbered]{encumbered}
-        otherwise, they are @L[Condition:Encumbered]{lightly encumbered}. If
-        they would have been @L[Condition:Encumbered]{lightly encumbered}
-        otherwise, they are @L[Condition:Encumbered]{heavily encumbered}. And if
-        they would have been @L[Condition:Encumbered]{heavily encumbered}
-        otherwise, they are rendered @L[Condition:Immobile]{immobile}.</p>
-      form: flaw
-      identifier: cumbersome
-      modifiesActor: true
-    type: property
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/properties/cumbersome.webp
 name: Cumbersome
-type: wrapper
+system:
+  applyIfUnequipped: false
+  automations:
+    parameterChanges:
+      _id: parameterChanges
+      changes:
+        - key: system.encumbranceLevel
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: Actor
+          type: add
+          value: '1'
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 0
+        - 1
+      type: changes
+  competence:
+    raw: 0
+  description: >-
+    <p>A <b>[[lookup name style=lc]]</b> @L[Category:Equipment]{item}
+    <i>always</i> makes its user @L[Condition:Encumbered]{encumbered},
+    regardless of how much they are @L[Core:Carrying Capacity]{carrying}. If the
+    user would have not been @L[Condition:Encumbered]{encumbered} otherwise,
+    they are @L[Condition:Encumbered]{lightly encumbered}. If they would have
+    been @L[Condition:Encumbered]{lightly encumbered} otherwise, they are
+    @L[Condition:Encumbered]{heavily encumbered}. And if they would have been
+    @L[Condition:Encumbered]{heavily encumbered} otherwise, they are rendered
+    @L[Condition:Immobile]{immobile}.</p>
+  form: flaw
+  identifier: cumbersome
+  mundane: false
+transfer: true
+type: property

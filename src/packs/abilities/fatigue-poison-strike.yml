@@ -1,68 +1,67 @@
 _id: 04ceacc6934e000c
-_key: '!items!04ceacc6934e000c'
+_key: '!effects!04ceacc6934e000c'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 04ceacc6934e000c
-    _key: '!items.effects!04ceacc6934e000c.04ceacc6934e000c'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/fatigue-poison-strike.webp
-    name: Fatigue Poison Strike
-    system:
-      automations:
-        743730f25f256b10:
-          _id: 743730f25f256b10
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: include
-          status: poisoned
-          type: status
-      competence:
-        raw: 0
-      delivery: weapon
-      duration:
-        raw: '24'
-        unit: hour
-      effectTypes:
-        - poison
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: fatigue-poison-strike
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - alchemical
-      range:
-        unit: contact
-      results:
-        hit: >-
-          <p>Target is @L[Condition:Poisoned]{poisoned}. The
-          @L[Condition:Poisoned]{poison} causes the target to become
-          @L[Condition:Slowed]{slowed}. If the target is already
-          @L[Condition:Slowed]{slowed} by this @L[Condition:Poisoned]{poison},
-          then they become @L[Condition:Immobilized]{immobilized}.</p>
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/fatigue-poison-strike.webp
 name: Fatigue Poison Strike
-type: wrapper
+system:
+  automations:
+    743730f25f256b10:
+      _id: 743730f25f256b10
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: include
+      status: poisoned
+      target: false
+      type: status
+  competence:
+    raw: 0
+  delivery: weapon
+  duration:
+    raw: '24'
+    unit: hour
+  effectTypes:
+    - poison
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: fatigue-poison-strike
+  interaction: attack
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - alchemical
+  range:
+    unit: contact
+  results:
+    hit: >-
+      <p>Target is @L[Condition:Poisoned]{poisoned}. The
+      @L[Condition:Poisoned]{poison} causes the target to become
+      @L[Condition:Slowed]{slowed}. If the target is already
+      @L[Condition:Slowed]{slowed} by this @L[Condition:Poisoned]{poison}, then
+      they become @L[Condition:Immobilized]{immobilized}.</p>
+  targets:
+    - creature
+transfer: true
+type: ability

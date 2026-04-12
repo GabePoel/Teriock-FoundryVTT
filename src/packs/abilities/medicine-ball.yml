@@ -1,74 +1,81 @@
 _id: 91cdb554fcab2b2a
-_key: '!items!91cdb554fcab2b2a'
+_key: '!effects!91cdb554fcab2b2a'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 91cdb554fcab2b2a
-    _key: '!items.effects!91cdb554fcab2b2a.91cdb554fcab2b2a'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/medicine-ball.webp
-    name: Medicine Ball
-    system:
-      automations:
-        SzYkTqcVV5k6LOGg:
-          _id: SzYkTqcVV5k6LOGg
-          consumeStatDice: false
-          heighten:
-            - 1
-          type: heal
-        T6TT7QmjNrgdtZT7:
-          _id: T6TT7QmjNrgdtZT7
-          heighten:
-            - 0
-          type: heal
-      class: lifeMage
-      competence:
-        raw: 0
-      delivery: missile
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - healing
-      elements:
-        - life
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, @L[Core:Healing]{heal} the
-        target again. This does not consume their @L[Core:Hit Dice]{hit dice}
-        (including the @L[Core:Hit Dice]{hit dice} for the initial
-        @L[Core:Healing]{healing}).</p>
-      identifier: medicine-ball
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 2
-      powerSources:
-        - magical
-      range:
-        raw: '30'
-        unit: ft
-      results:
-        critHit: <p>Double the amount of times target @L[Core:Healing]{heals}.</p>
-        hit: <p>Target @L[Core:Healing]{heals}.</p>
-      spell: true
-      standard: true
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/medicine-ball.webp
 name: Medicine Ball
-type: wrapper
+system:
+  automations:
+    SzYkTqcVV5k6LOGg:
+      _id: SzYkTqcVV5k6LOGg
+      competencies:
+        - 0
+        - 1
+        - 2
+      consumeStatDice: false
+      forHarm: false
+      heighten:
+        - 1
+      noStatDice: false
+      type: heal
+    T6TT7QmjNrgdtZT7:
+      _id: T6TT7QmjNrgdtZT7
+      competencies:
+        - 0
+        - 1
+        - 2
+      consumeStatDice: true
+      forHarm: false
+      heighten:
+        - 0
+      noStatDice: false
+      type: heal
+  class: lifeMage
+  competence:
+    raw: 0
+  delivery: missile
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - healing
+  elements:
+    - life
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  heightened: >-
+    <p>For each additional @L[Core:MP]{MP} spent, @L[Core:Healing]{heal} the
+    target again. This does not consume their @L[Core:Hit Dice]{hit dice}
+    (including the @L[Core:Hit Dice]{hit dice} for the initial
+    @L[Core:Healing]{healing}).</p>
+  identifier: medicine-ball
+  interaction: attack
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 2
+  powerSources:
+    - magical
+  range:
+    raw: '30'
+    unit: ft
+  results:
+    critHit: <p>Double the amount of times target @L[Core:Healing]{heals}.</p>
+    hit: <p>Target @L[Core:Healing]{heals}.</p>
+  spell: true
+  standard: true
+  targets:
+    - creature
+transfer: true
+type: ability

@@ -1,108 +1,113 @@
 _id: 3b0ab4b52326316f
-_key: '!items!3b0ab4b52326316f'
+_key: '!effects!3b0ab4b52326316f'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 3b0ab4b52326316f
-    _key: '!items.effects!3b0ab4b52326316f.3b0ab4b52326316f'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/light.webp
-    name: Light
-    system:
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.light.bright
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '50'
-            - key: system.light.dim
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '100'
-            - key: system.light.color
-              mode: 5
-              priority: 5
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '#C64600'
-            - key: system.light.animation.type
-              mode: 5
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: pulse
-            - key: system.light.angle
-              mode: 5
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '60'
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: changes
-        wihgUWmZmHchxOw5:
-          _id: wihgUWmZmHchxOw5
-          type: template
-      class: flameMage
-      competence:
-        raw: 0
-      delivery: cone
-      duration:
-        raw: '1'
-        unit: minute
-      elements:
-        - flame
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: light
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>The area is illuminated. This [[lookup name style=lc]] emanates
-          from your hand and moves with you. You may change its direction at
-          will.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        raw: '100'
-        unit: ft
-      spell: true
-      standard: true
-      sustained: true
-      targets:
-        - area
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/light.webp
 name: Light
-type: wrapper
+system:
+  automations:
+    e789ed5e109ebd1a:
+      _id: e789ed5e109ebd1a
+      changes:
+        - key: token.light.bright
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: Actor
+          type: upgrade
+          value: '50'
+        - key: token.light.dim
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: Actor
+          type: upgrade
+          value: '100'
+        - key: token.light.color
+          phase: normal
+          priority: 5
+          qualifier: '1'
+          target: Actor
+          type: override
+          value: '#C64600'
+        - key: token.light.animation.type
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: Actor
+          type: override
+          value: pulse
+        - key: token.light.angle
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: Actor
+          type: override
+          value: '60'
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: changes
+    wihgUWmZmHchxOw5:
+      _id: wihgUWmZmHchxOw5
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 0
+        - 1
+      movable: false
+      t: none
+      type: template
+  class: flameMage
+  competence:
+    raw: 0
+  delivery: cone
+  duration:
+    raw: '1'
+    unit: minute
+  elements:
+    - flame
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: light
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>The area is illuminated. This [[lookup name style=lc]] emanates from
+      your hand and moves with you. You may change its direction at will.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    raw: '100'
+    unit: ft
+  spell: true
+  standard: true
+  sustained: true
+  targets:
+    - area
+transfer: true
+type: ability

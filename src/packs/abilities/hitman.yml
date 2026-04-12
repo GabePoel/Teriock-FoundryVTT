@@ -1,183 +1,51 @@
 _id: 773f566eb2423de6
-_key: '!items!773f566eb2423de6'
+_key: '!effects!773f566eb2423de6'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 773f566eb2423de6
-    _key: '!items.effects!773f566eb2423de6.773f566eb2423de6'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/hitman.webp
-    name: Hitman
-    system:
-      class: assassin
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '1'
-        unit: hour
-      executionTime: a2
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: hitman
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>You prepare a 5 foot by 5 foot area. While in this area, you may
-          make a limited improved @L[Ability:Hide]{Hide} action.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - area
-      upgrades:
-        score:
-          attribute: snk
-          value: 1
-    type: ability
-  - _id: D4mYFuZBV5F9AZv0
-    _key: '!items.effects!773f566eb2423de6.D4mYFuZBV5F9AZv0'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.9df212d89cab196d
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/abilities/hide.webp
-    name: Hide
-    system:
-      _sup: 773f566eb2423de6
-      automations:
-        0b0d1426453abb55:
-          _id: 0b0d1426453abb55
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          executor: false
-          heighten:
-            - 1
-            - 0
-          relation: apply
-          status: hidden
-          target: false
-          type: status
-        A25PQyqCKh9KSIOn:
-          _id: A25PQyqCKh9KSIOn
-          competencies:
-            - 2
-          formula: 1d20 + (2 * @snk) + @f
-          heighten:
-            - 0
-            - 1
-          impact: other
-          merge: true
-          type: roll
-        BX4BpxxrakLUlUDW:
-          _id: BX4BpxxrakLUlUDW
-          competencies:
-            - 1
-          formula: 1d20 + (2 * @snk) + @p
-          heighten:
-            - 0
-            - 1
-          impact: other
-          merge: true
-          type: roll
-        KEpGIyw0WsM5fRYd:
-          _id: KEpGIyw0WsM5fRYd
-          competencies:
-            - 0
-          formula: 1d20 + (2 * @snk)
-          heighten:
-            - 0
-            - 1
-          impact: other
-          merge: true
-          type: roll
-      class: thief
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: hide
-      improvement: >-
-        <p>You may [[lookup name]] regardless of the environment (cover,
-        lighting, etc.) that you prepare.</p>
-      interaction: manifest
-      limitation: >-
-        <p>You may only [[lookup name]] in the location you have prepared and
-        you do not get the attribute improvement from this ability. You also do
-        not remain @L[Condition:Hidden]{hidden} if you leave this location.</p>
-      maneuver: active
-      overview:
-        base: >-
-          <p>You become @L[Condition:Hidden]{hidden}. As you do this, you may
-          roll [[/roll 1d20 + (2 * @snk)]]. If this is greater than your
-          @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak} (10 + 2 ×
-          @L[Core:Sneak]{SNK}), then you use it as your hidden DC. If not, use
-          your @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak}.</p>
-        fluent: >-
-          <p>Instead roll [[/roll 1d20 + (2 * @snk) + @f]] for your hidden DC
-          (if it's greater than your @L[Core:Passive Attributes]{passive}
-          @L[Core:Sneak]{sneak}).</p>
-        proficient: >-
-          <p>Instead roll [[/roll 1d20 + (2 * @snk) + @p]] for your hidden DC
-          (if it's greater than your @L[Core:Passive Attributes]{passive}
-          @L[Core:Sneak]{sneak}).</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      requirements: >-
-        <p>You are in a location with shadows, dim light,
-        @L[Core:Cover]{three-quarters cover}, or some other feature which the
-        @L[Core:Game Master]{GM} determines is appropriate for being
-        @L[Condition:Hidden]{hidden}. You must remain in areas that maintain
-        these conditions to stay @L[Condition:Hidden]{hidden}.</p>
-      skill: true
-      standard: true
-      targets:
-        - self
-      upgrades:
-        competence:
-          attribute: snk
-          value: 1
-        score:
-          attribute: snk
-          value: 2
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/hitman.webp
 name: Hitman
-type: wrapper
+system:
+  class: assassin
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '1'
+    unit: hour
+  executionTime:
+    base: a2
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: hitman
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>You prepare a 5 foot by 5 foot area. While in this area, you may make a
+      limited improved @L[Ability:Hide]{Hide} action.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  skill: true
+  standard: true
+  targets:
+    - area
+  upgrades:
+    score:
+      attribute: snk
+      value: 1
+transfer: true
+type: ability

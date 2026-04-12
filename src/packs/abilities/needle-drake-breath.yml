@@ -1,71 +1,65 @@
 _id: 04b759f19a37946b
-_key: '!items!04b759f19a37946b'
+_key: '!effects!04b759f19a37946b'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 04b759f19a37946b
-    _key: '!items.effects!04b759f19a37946b.04b759f19a37946b'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/needle-drake-breath.webp
-    name: Needle Drake Breath
-    system:
-      automations:
-        29b275994cf9f5b1:
-          _id: 29b275994cf9f5b1
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: 4d4[magic]
-          heighten:
-            - 1
-            - 0
-          merge: true
-          roll: damage
-          type: roll
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '2'
-            type: formula
-      delivery: cone
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - damaging
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: needle-drake-breath
-      interaction: feat
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        raw: '15'
-        unit: ft
-      results:
-        fail: <p>Target takes [[/damage 4d4[magic]]] @L[Core:Damage]{damage}.</p>
-      targets:
-        - creature
-      warded: true
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/needle-drake-breath.webp
 name: Needle Drake Breath
-type: wrapper
+system:
+  automations:
+    29b275994cf9f5b1:
+      _id: 29b275994cf9f5b1
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: 4d4[magic]
+      heighten:
+        - 1
+        - 0
+      impact: damage
+      merge: true
+      type: roll
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '2'
+        type: formula
+  delivery: cone
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - damaging
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  identifier: needle-drake-breath
+  interaction: feat
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    raw: '15'
+    unit: ft
+  results:
+    fail: <p>Target takes [[/damage 4d4[magic]]] @L[Core:Damage]{damage}.</p>
+  targets:
+    - creature
+  warded: true
+transfer: true
+type: ability

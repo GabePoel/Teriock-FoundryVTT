@@ -1,64 +1,56 @@
 _id: 3052f170f9c05893
-_key: '!items!3052f170f9c05893'
+_key: '!effects!3052f170f9c05893'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 3052f170f9c05893
-    _key: '!items.effects!3052f170f9c05893.3052f170f9c05893'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/intercept-necromancy-magic.webp
-    name: Intercept Necromancy Magic
-    system:
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: hand
-      duration:
-        raw: '0'
-        unit: instant
-      elements:
-        - necromancy
-      executionTime: r1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: intercept-necromancy-magic
-      interaction: attack
-      maneuver: reactive
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      results:
-        hit: >-
-          <p>The triggering effect targets you instead of the creature you
-          hit.</p>
-      rotator: true
-      spell: true
-      standard: true
-      targets:
-        - creature
-      trigger: >-
-        <p>A creature within range is targeted by a @L[Category:Magically
-        powered abilities]{magical} @L[Category:Necromancy element
-        abilities]{necromancy effect}.</p>
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/intercept-necromancy-magic.webp
 name: Intercept Necromancy Magic
-type: wrapper
+system:
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: hand
+  duration:
+    raw: '0'
+    unit: instant
+  elements:
+    - necromancy
+  executionTime:
+    base: r1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  identifier: intercept-necromancy-magic
+  interaction: attack
+  maneuver: reactive
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: contact
+  results:
+    hit: <p>The triggering effect targets you instead of the creature you hit.</p>
+  rotator: true
+  spell: true
+  standard: true
+  targets:
+    - creature
+  trigger: >-
+    <p>A creature within range is targeted by a @L[Category:Magically powered
+    abilities]{magical} @L[Category:Necromancy element abilities]{necromancy
+    effect}.</p>
+transfer: true
+type: ability

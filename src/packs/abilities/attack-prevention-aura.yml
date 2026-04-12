@@ -1,64 +1,56 @@
 _id: cd784ef37b0477f2
-_key: '!items!cd784ef37b0477f2'
+_key: '!effects!cd784ef37b0477f2'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: cd784ef37b0477f2
-    _key: '!items.effects!cd784ef37b0477f2.cd784ef37b0477f2'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/attack-prevention-aura.webp
-    name: Attack Prevention Aura
-    system:
-      class: paladin
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: aura
-      duration:
-        raw: '0'
-        unit: instant
-      elements:
-        - life
-      executionTime: r1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: unp
-      form: normal
-      identifier: attack-prevention-aura
-      interaction: manifest
-      maneuver: reactive
-      piercing:
-        raw: 0
-      powerSources:
-        - divine
-      range:
-        raw: '10'
-        unit: ft
-      results:
-        fail: >-
-          <p>The @L[Core:Damage]{damage} is
-          @L[Keyword:Deboosted]{deboosted}.</p>
-      skill: true
-      standard: true
-      targets:
-        - creature
-      trigger: >-
-        <p>One or more creature within range would take or deal
-        @L[Core:Damage]{damage}.</p>
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/attack-prevention-aura.webp
 name: Attack Prevention Aura
-type: wrapper
+system:
+  class: paladin
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: aura
+  duration:
+    raw: '0'
+    unit: instant
+  elements:
+    - life
+  executionTime:
+    base: r1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: unp
+  form: normal
+  identifier: attack-prevention-aura
+  interaction: manifest
+  maneuver: reactive
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - divine
+  range:
+    raw: '10'
+    unit: ft
+  results:
+    fail: <p>The @L[Core:Damage]{damage} is @L[Keyword:Deboosted]{deboosted}.</p>
+  skill: true
+  standard: true
+  targets:
+    - creature
+  trigger: >-
+    <p>One or more creature within range would take or deal
+    @L[Core:Damage]{damage}.</p>
+transfer: true
+type: ability

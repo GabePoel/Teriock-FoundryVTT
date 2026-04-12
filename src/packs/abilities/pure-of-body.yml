@@ -1,75 +1,71 @@
 _id: 78b7cd2ba2d56860
-_key: '!items!78b7cd2ba2d56860'
+_key: '!effects!78b7cd2ba2d56860'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 78b7cd2ba2d56860
-    _key: '!items.effects!78b7cd2ba2d56860.78b7cd2ba2d56860'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/pure-of-body.webp
-    name: Pure of Body
-    system:
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.protections.immunities.Being Touched by Undead
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: other
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: changes
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - immunity
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: pure-of-body
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You are @L[Keyword:Immunity]{immune} to being touched by
-          @L[Category:Undead creatures]{undead creatures}. This protects from
-          @L[Category:Hand delivery abilities]{hand delivery abilities},
-          @L[Category:Bite delivery abilities]{bite delivery abilities}, or
-          anything else where a @L[Category:Body parts]{body part} is the
-          source..</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - divine
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/pure-of-body.webp
 name: Pure of Body
-type: wrapper
+system:
+  automations:
+    e789ed5e109ebd1a:
+      _id: e789ed5e109ebd1a
+      changes:
+        - key: system.protections.immunities.Being Touched by Undead
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: Actor
+          type: add
+          value: other
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: changes
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: unlimited
+  effectTypes:
+    - immunity
+  executionTime:
+    base: passive
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  identifier: pure-of-body
+  interaction: manifest
+  maneuver: passive
+  mundane: false
+  overview:
+    base: >-
+      <p>You are @L[Keyword:Immunity]{immune} to being touched by
+      @L[Category:Undead creatures]{undead creatures}. This protects from
+      @L[Category:Hand delivery abilities]{hand delivery abilities},
+      @L[Category:Bite delivery abilities]{bite delivery abilities}, or anything
+      else where a @L[Category:Body parts]{body part} is the source..</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - divine
+  range:
+    unit: self
+  targets:
+    - self
+transfer: true
+type: ability

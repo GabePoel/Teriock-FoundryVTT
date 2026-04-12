@@ -1,98 +1,97 @@
 _id: c019c97359a678b9
-_key: '!items!c019c97359a678b9'
+_key: '!effects!c019c97359a678b9'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: c019c97359a678b9
-    _key: '!items.effects!c019c97359a678b9.c019c97359a678b9'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/circle-of-protection.webp
-    name: Circle of Protection
-    system:
-      automations:
-        72ce567009179bea:
-          _id: 72ce567009179bea
-          competencies:
-            - 0
-            - 1
-            - 2
-          duration:
-            raw: '@h * 86400'
-          heighten:
-            - 1
-          type: duration
-      class: paladin
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: hand
-      duration:
-        raw: '8'
-        unit: hour
-      elements:
-        - life
-      executionTime: 10 Minutes
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 24 hours.</p>
-      identifier: circle-of-protection
-      interaction: manifest
-      maneuver: slow
-      overview:
-        base: >-
-          <p>You enchant an area no larger than 30 feet in any direction. This
-          area is surrounded by a barrier of light that creatures cannot easily
-          pass into or out of this area by any means, including
-          @L[Category:Displacement effects]{displacement effects}. However,
-          @L[Category:Ranged equipment]{items} can move in and out.
-          @L[Category:Missile delivery abilities]{missile abilities} and other
-          ones with a sufficiently large range can cross this barrier so long as
-          their executor remains on one side and makes a @L[Core:Strength]{STR}
-          @L[Core:Feat Interaction]{feat save}. A creature that's higher
-          @L[Core:Leveling Up]{level} than you may pass across this barrier
-          without issue. Any other creature may attempt to pass by making a
-          @L[Tradecraft:Priest]{priest check} with a DC equal to the difference
-          between @L[Core:Leveling Up]{your level} and theirs.</p>
-        fluent: >-
-          <p>You may select up to 2 × @L[Core:Fluency Bonus]{F} creatures that
-          can pass through this barrier without issue. You may also select up to
-          2 × @L[Core:Fluency Bonus]{F} creatures that cannot pass through this
-          barrier at all.</p>
-        proficient: >-
-          <p>You may select up to 2 × @L[Core:Proficiency Bonus]{P} creatures
-          that can pass through this barrier without issue. You may also select
-          up to 2 × @L[Core:Proficiency Bonus]{P} creatures that cannot pass
-          through this barrier at all.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      ritual: true
-      rotator: true
-      spell: true
-      standard: true
-      targets:
-        - area
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/circle-of-protection.webp
 name: Circle of Protection
-type: wrapper
+system:
+  automations:
+    72ce567009179bea:
+      _id: 72ce567009179bea
+      changeType: add
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      duration:
+        raw: '@h * 86400'
+        unit: second
+      heighten:
+        - 1
+      type: duration
+  class: paladin
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: hand
+  duration:
+    raw: '8'
+    unit: hour
+  elements:
+    - life
+  executionTime:
+    base: 10 Minutes
+    slow:
+      raw: '10'
+      unit: minute
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  heightened: >-
+    <p>For each additional @L[Core:MP]{MP} spent, the duration of this effect
+    increases by 24 hours.</p>
+  identifier: circle-of-protection
+  interaction: manifest
+  maneuver: slow
+  mundane: false
+  overview:
+    base: >-
+      <p>You enchant an area no larger than 30 feet in any direction. This area
+      is surrounded by a barrier of light that creatures cannot easily pass into
+      or out of this area by any means, including @L[Category:Displacement
+      effects]{displacement effects}. However, @L[Category:Ranged
+      equipment]{items} can move in and out. @L[Category:Missile delivery
+      abilities]{missile abilities} and other ones with a sufficiently large
+      range can cross this barrier so long as their executor remains on one side
+      and makes a @L[Core:Strength]{STR} @L[Core:Feat Interaction]{feat save}. A
+      creature that's higher @L[Core:Leveling Up]{level} than you may pass
+      across this barrier without issue. Any other creature may attempt to pass
+      by making a @L[Tradecraft:Priest]{priest check} with a DC equal to the
+      difference between @L[Core:Leveling Up]{your level} and theirs.</p>
+    fluent: >-
+      <p>You may select up to 2 × @L[Core:Fluency Bonus]{F} creatures that can
+      pass through this barrier without issue. You may also select up to 2 ×
+      @L[Core:Fluency Bonus]{F} creatures that cannot pass through this barrier
+      at all.</p>
+    proficient: >-
+      <p>You may select up to 2 × @L[Core:Proficiency Bonus]{P} creatures that
+      can pass through this barrier without issue. You may also select up to 2 ×
+      @L[Core:Proficiency Bonus]{P} creatures that cannot pass through this
+      barrier at all.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: contact
+  ritual: true
+  rotator: true
+  spell: true
+  standard: true
+  targets:
+    - area
+transfer: true
+type: ability

@@ -1,62 +1,56 @@
 _id: 5c693a8ba90502ed
-_key: '!items!5c693a8ba90502ed'
+_key: '!effects!5c693a8ba90502ed'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 5c693a8ba90502ed
-    _key: '!items.effects!5c693a8ba90502ed.5c693a8ba90502ed'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/berserk.webp
-    name: Berserk
-    system:
-      class: berserker
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '5'
-        unit: minute
-      endCondition: <p>You die or 1 minute passes without combat.</p>
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: berserk
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>You gain 15 @L[Core:Temporary Hit Points]{temporary HP} and become
-          @L[Condition:Frenzied]{frenzied}.</p>
-        fluent: >-
-          <p>You instead gain an additional 5 × @L[Core:Fluency Bonus]{F}
-          @L[Core:Temporary Hit Points]{temporary HP} and gain
-          @L[Ability:Swift]{Swift}.</p>
-        proficient: >-
-          <p>You gain an additional 5 × @L[Core:Proficiency Bonus]{P}
-          @L[Core:Temporary Hit Points]{temporary HP} and gain
-          @L[Ability:Fast]{Fast}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/berserk.webp
 name: Berserk
-type: wrapper
+system:
+  class: berserker
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '5'
+    unit: minute
+  endCondition: <p>You die or 1 minute passes without combat.</p>
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: berserk
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>You gain 15 @L[Core:Temporary Hit Points]{temporary HP} and become
+      @L[Condition:Frenzied]{frenzied}.</p>
+    fluent: >-
+      <p>You instead gain an additional 5 × @L[Core:Fluency Bonus]{F}
+      @L[Core:Temporary Hit Points]{temporary HP} and gain
+      @L[Ability:Swift]{Swift}.</p>
+    proficient: >-
+      <p>You gain an additional 5 × @L[Core:Proficiency Bonus]{P}
+      @L[Core:Temporary Hit Points]{temporary HP} and gain
+      @L[Ability:Fast]{Fast}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  skill: true
+  standard: true
+  targets:
+    - self
+transfer: true
+type: ability

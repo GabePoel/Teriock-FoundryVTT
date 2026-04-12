@@ -1,74 +1,73 @@
 _id: 2f4f5e357e9b92c7
-_key: '!items!2f4f5e357e9b92c7'
+_key: '!effects!2f4f5e357e9b92c7'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 2f4f5e357e9b92c7
-    _key: '!items.effects!2f4f5e357e9b92c7.2f4f5e357e9b92c7'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/ethereal-shift.webp
-    name: Ethereal Shift
-    system:
-      automations:
-        067cb526e2f9e98f:
-          _id: 067cb526e2f9e98f
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: include
-          status: ethereal
-          type: status
-      class: necromancer
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: self
-      duration:
-        raw: '1'
-        unit: hour
-      elements:
-        - necromancy
-      executionTime: a3
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: ethereal-shift
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>You go @L[Condition:Ethereal]{Ethereal} or manifest back into the
-          Material Realm.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      rotator: true
-      spell: true
-      standard: true
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/ethereal-shift.webp
 name: Ethereal Shift
-type: wrapper
+system:
+  automations:
+    067cb526e2f9e98f:
+      _id: 067cb526e2f9e98f
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: include
+      status: ethereal
+      target: false
+      type: status
+  class: necromancer
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: self
+  duration:
+    raw: '1'
+    unit: hour
+  elements:
+    - necromancy
+  executionTime:
+    base: a3
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  identifier: ethereal-shift
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>You go @L[Condition:Ethereal]{Ethereal} or manifest back into the
+      Material Realm.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: self
+  rotator: true
+  spell: true
+  standard: true
+  targets:
+    - self
+transfer: true
+type: ability

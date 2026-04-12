@@ -1,79 +1,73 @@
 _id: 9d2b1c5b20cc42f6
-_key: '!items!9d2b1c5b20cc42f6'
+_key: '!effects!9d2b1c5b20cc42f6'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 9d2b1c5b20cc42f6
-    _key: '!items.effects!9d2b1c5b20cc42f6.9d2b1c5b20cc42f6'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/constrict.webp
-    name: Constrict
-    system:
-      automations:
-        d635eb44dba086dd:
-          _id: d635eb44dba086dd
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: combatExpiration
-          what:
-            roll: 2d4kh1
-            threshold: 4
-            type: forced
-          when:
-            skip: 0
-            time: start
-            trigger: turn
-          who:
-            type: executor
-      competence:
-        raw: 0
-      delivery: hand
-      duration:
-        raw: '0'
-        triggers:
-          - movement
-        unit: unlimited
-      endCondition: <p>The start of your next @L[Core:Turn]{turn}.</p>
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: str
-      form: normal
-      identifier: constrict
-      interaction: feat
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: contact
-      requirements: <p>Target is your @L[Core:Size]{SIZE} or smaller.</p>
-      results:
-        fail: >-
-          <p>Target is @L[Condition:Suffocating]{suffocating} and
-          @L[Condition:Snared]{snared}.</p>
-      sustained: true
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/constrict.webp
 name: Constrict
-type: wrapper
+system:
+  automations:
+    d635eb44dba086dd:
+      _id: d635eb44dba086dd
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: combatExpiration
+      what:
+        roll: 2d4kh1
+        threshold: 4
+        type: forced
+      when:
+        skip: 0
+        time: start
+        trigger: turn
+      who:
+        type: executor
+  competence:
+    raw: 0
+  delivery: hand
+  duration:
+    raw: '0'
+    triggers:
+      - movement
+    unit: unlimited
+  endCondition: <p>The start of your next @L[Core:Turn]{turn}.</p>
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: str
+  form: normal
+  identifier: constrict
+  interaction: feat
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: contact
+  requirements: <p>Target is your @L[Core:Size]{SIZE} or smaller.</p>
+  results:
+    fail: >-
+      <p>Target is @L[Condition:Suffocating]{suffocating} and
+      @L[Condition:Snared]{snared}.</p>
+  sustained: true
+  targets:
+    - creature
+transfer: true
+type: ability

@@ -1,7 +1,7 @@
 _id: 9168673883a5dcc0
 _key: '!actors!9168673883a5dcc0'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.23
@@ -12,20 +12,20 @@ items:
     _key: '!actors.items!9168673883a5dcc0.9168673883a5dcc0'
     _stats:
       compendiumSource: Compendium.teriock.species.Item.9168673883a5dcc0
-      coreVersion: '13'
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     effects:
       - _id: CZNNIYanYN7IjNGz
         _key: >-
           !actors.items.effects!9168673883a5dcc0.9168673883a5dcc0.CZNNIYanYN7IjNGz
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.66f276dcbe210dd0
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.66f276dcbe210dd0
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/charm.webp
         name: Charm
         system:
@@ -56,8 +56,7 @@ items:
                 type: formula
           delivery: hand
           duration:
-            raw: '1'
-            unit: hour
+            unit: instant
           effectTypes:
             - mental
             - control
@@ -88,16 +87,17 @@ items:
             hit: <p>Target is @L[Condition:Charmed]{charmed}.</p>
           targets:
             - creature
+        transfer: true
         type: ability
       - _id: gBvpeZhiR2R8VcAK
         _key: >-
           !actors.items.effects!9168673883a5dcc0.9168673883a5dcc0.gBvpeZhiR2R8VcAK
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.55db54d205333a5b
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.55db54d205333a5b
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/feeding.webp
         name: Feeding
         system:
@@ -105,8 +105,7 @@ items:
             raw: 0
           delivery: self
           duration:
-            raw: '0'
-            unit: unlimited
+            unit: instant
           elements:
             - necromancy
           executionTime:
@@ -145,16 +144,183 @@ items:
             unit: self
           targets:
             - self
+        transfer: true
         type: ability
-      - _id: 5knaN7QJa0LlA1O4
+      - _id: zQF4QDxZRplgxvFW
         _key: >-
-          !actors.items.effects!9168673883a5dcc0.9168673883a5dcc0.5knaN7QJa0LlA1O4
+          !actors.items.effects!9168673883a5dcc0.9168673883a5dcc0.zQF4QDxZRplgxvFW
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.646bdfc53ff71572
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.d855ff1ebb086f7f
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
+        img: systems/teriock/src/icons/abilities/partial-undead.webp
+        name: Partial Undead
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: instant
+          elements:
+            - necromancy
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: partial-undead
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          overview:
+            base: >-
+              <p>You count as being @L[Keyword:Undead]{undead} for the purposes
+              of @L[Category:Abilities]{abilities}, @L[Category:Damage
+              types]{damage}, and other @L[Category:Effects]{effects}. You also
+              gain @L[Ability:Healing Sensitivity]{Healing Sensitivity}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: qVVcljp60fiIY8b7
+        _key: >-
+          !actors.items.effects!9168673883a5dcc0.9168673883a5dcc0.qVVcljp60fiIY8b7
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.e28835d466325678
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.0
+        img: systems/teriock/src/icons/abilities/sunlight-sensitivity.webp
+        name: Sunlight Sensitivity
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: instant
+          elements:
+            - necromancy
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          identifier: sunlight-sensitivity
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          overview:
+            base: >-
+              <p>If you end your @L[Core:Turns]{turn} in direct sunlight, you
+              roll your <i>largest</i> @L[Core:HP]{hit die} and take that much
+              @L[Damage:Holy]{holy} @L[Damage:Magic]{magic damage} instead of
+              the normal @L[Core:Healing]{healing} effect. This does not consume
+              any of your @L[Core:HP]{hit dice}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: whSRR9lPVOKiqPit
+        _key: >-
+          !actors.items.effects!9168673883a5dcc0.9168673883a5dcc0.whSRR9lPVOKiqPit
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.5564a55f109e75bf
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.0
+        img: icons/skills/social/diplomacy-handshake-blue.webp
+        name: Talented Courtier
+        system:
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.tradecrafts.courtier.score
+                  phase: normal
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  type: upgrade
+                  value: '1'
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 1
+                - 0
+              type: changes
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: instant
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: talented-courtier
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          overview:
+            base: >-
+              <p>You are a @L[Keyword:Talented]{talented}
+              @L[Tradecraft:Courtier]{courtier}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: ySYNpxOrNLSEvcET
+        _key: >-
+          !actors.items.effects!9168673883a5dcc0.9168673883a5dcc0.ySYNpxOrNLSEvcET
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.646bdfc53ff71572
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
         name: Healing Sensitivity
         system:
@@ -198,172 +364,7 @@ items:
             unit: self
           targets:
             - self
-        type: ability
-      - _id: zQF4QDxZRplgxvFW
-        _key: >-
-          !actors.items.effects!9168673883a5dcc0.9168673883a5dcc0.zQF4QDxZRplgxvFW
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.d855ff1ebb086f7f
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.11.6
-        img: systems/teriock/src/icons/abilities/partial-undead.webp
-        name: Partial Undead
-        system:
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          elements:
-            - necromancy
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: partial-undead
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          overview:
-            base: >-
-              <p>You count as being @L[Keyword:Undead]{undead} for the purposes
-              of @L[Category:Abilities]{abilities}, @L[Category:Damage
-              types]{damage}, and other @L[Category:Effects]{effects}. You also
-              gain @L[Ability:Healing Sensitivity]{Healing Sensitivity}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - magical
-          range:
-            unit: self
-          targets:
-            - self
-        type: ability
-      - _id: qVVcljp60fiIY8b7
-        _key: >-
-          !actors.items.effects!9168673883a5dcc0.9168673883a5dcc0.qVVcljp60fiIY8b7
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.e28835d466325678
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.11.6
-        img: systems/teriock/src/icons/abilities/sunlight-sensitivity.webp
-        name: Sunlight Sensitivity
-        system:
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          elements:
-            - necromancy
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: flaw
-          identifier: sunlight-sensitivity
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          overview:
-            base: >-
-              <p>If you end your @L[Core:Turns]{turn} in direct sunlight, you
-              roll your <i>largest</i> @L[Core:HP]{hit die} and take that much
-              @L[Damage:Holy]{holy} @L[Damage:Magic]{magic damage} instead of
-              the normal @L[Core:Healing]{healing} effect. This does not consume
-              any of your @L[Core:HP]{hit dice}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - magical
-          range:
-            unit: self
-          targets:
-            - self
-        type: ability
-      - _id: whSRR9lPVOKiqPit
-        _key: >-
-          !actors.items.effects!9168673883a5dcc0.9168673883a5dcc0.whSRR9lPVOKiqPit
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.5564a55f109e75bf
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.11.6
-        img: icons/skills/social/diplomacy-handshake-blue.webp
-        name: Talented Courtier
-        system:
-          automations:
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
-              changes:
-                - key: system.tradecrafts.courtier.score
-                  mode: 4
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: '1'
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
-              type: changes
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: talented-courtier
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          overview:
-            base: >-
-              <p>You are a @L[Keyword:Talented]{talented}
-              @L[Tradecraft:Courtier]{courtier}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          targets:
-            - self
+        transfer: true
         type: ability
     folder: 65fbed36e42b583a
     img: systems/teriock/src/icons/creatures/sired-by-vampire.webp
@@ -400,20 +401,20 @@ items:
     _key: '!actors.items!9168673883a5dcc0.SQSUBNMRC9ZZz9a8'
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.b6d2df0aa412d60c
-      coreVersion: '13'
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     effects:
       - _id: ozGDVg02SHRX2hCr
         _key: >-
           !actors.items.effects!9168673883a5dcc0.SQSUBNMRC9ZZz9a8.ozGDVg02SHRX2hCr
         _stats:
-          compendiumSource: Compendium.teriock.properties.Item.870df3b7da4ce4b8
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.870df3b7da4ce4b8
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: icons/creatures/abilities/mouth-teeth-long-red.webp
         name: Biting
         system:
@@ -425,16 +426,17 @@ items:
           form: intrinsic
           identifier: biting
           mundane: true
+        transfer: true
         type: property
       - _id: u9pZ8QANF4C7gKB9
         _key: >-
           !actors.items.effects!9168673883a5dcc0.SQSUBNMRC9ZZz9a8.u9pZ8QANF4C7gKB9
         _stats:
-          compendiumSource: Compendium.teriock.properties.Item.891de334396620e1
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.891de334396620e1
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -446,6 +448,7 @@ items:
           form: intrinsic
           identifier: weapon
           mundane: true
+        transfer: true
         type: property
     folder: 65fbed36e42b583a
     img: systems/teriock/src/icons/body-parts/fanged-jaw.webp
@@ -461,6 +464,8 @@ items:
         base: 1d6
       fightingStyle: savage
       identifier: fanged-jaw
+      impacts:
+        - damage
       range:
         long:
           unit: melee
@@ -486,9 +491,6 @@ prototypeToken:
   ring:
     enabled: true
   texture:
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     src: systems/teriock/src/icons/tokens/sired-by-vampire.webp
   turnMarker:
     disposition: false

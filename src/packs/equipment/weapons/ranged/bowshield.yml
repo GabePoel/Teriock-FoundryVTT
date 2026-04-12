@@ -1,7 +1,7 @@
 _id: 166ea77529f40962
 _key: '!items!166ea77529f40962'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.64
@@ -9,11 +9,11 @@ effects:
   - _id: M2AkhrgOW5mJ1f7j
     _key: '!items.effects!166ea77529f40962.M2AkhrgOW5mJ1f7j'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.db4302ece692ddea
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.db4302ece692ddea
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.64
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/properties/ammunition.webp
     name: Ammunition
     system:
@@ -26,15 +26,16 @@ effects:
       form: intrinsic
       identifier: ammunition
       mundane: true
+    transfer: true
     type: property
   - _id: blking0000000000
     _key: '!items.effects!166ea77529f40962.blking0000000000'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.6460ecfb7079aa5e
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.6460ecfb7079aa5e
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.63
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/properties/blocking.webp
     name: Blocking
     system:
@@ -47,15 +48,16 @@ effects:
       form: intrinsic
       identifier: blocking
       mundane: true
+    transfer: true
     type: property
   - _id: loading000000000
     _key: '!items.effects!166ea77529f40962.loading000000000'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.b59d68ed12d46377
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.b59d68ed12d46377
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.63
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/properties/loading.webp
     name: Loading
     system:
@@ -68,15 +70,127 @@ effects:
       form: flaw
       identifier: loading
       mundane: true
+    transfer: true
     type: property
-  - _id: WheTWsIhitFwAk9Z
-    _key: '!items.effects!166ea77529f40962.WheTWsIhitFwAk9Z'
+  - _id: towerShielding00
+    _key: '!items.effects!166ea77529f40962.towerShielding00'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.87e86f2640702582
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.1483c70a3de8938d
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/properties/tower-shielding.webp
+    name: Tower Shielding
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>Only @L[Category:Small equipment]{small equipment} can be held in an
+        arm that's @L[Keyword:Using]{using} @L[Category:Tower Shielding
+        equipment]{tower shielding equipment}. But but no
+        @L[Category:Equipment]{equipment} can be used to @L[Core:Attack
+        Interaction]{attack} or @L[Core:Block Interaction]{block}.</p>
+      form: flaw
+      identifier: tower-shielding
+      mundane: true
+    transfer: true
+    type: property
+  - _id: twoHanded0000000
+    _key: '!items.effects!166ea77529f40962.twoHanded0000000'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.5409959443770534
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/properties/two-handed.webp
+    name: Two-Handed
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>An item with the <b>[[lookup name style=lc]]</b> property cannot be
+        @L[Category:Attack abilities]{attacked} with unless it is wielded in two
+        hands.</p>
+      form: flaw
+      identifier: two-handed
+      mundane: true
+    transfer: true
+    type: property
+  - _id: wep0000000000000
+    _key: '!items.effects!166ea77529f40962.wep0000000000000'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.891de334396620e1
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/properties/weapon.webp
+    name: Weapon
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
+        @L[Category:Attack abilities]{attack}.</p>
+      form: intrinsic
+      identifier: weapon
+      mundane: true
+    transfer: true
+    type: property
+  - _id: UPoWfM4OfSFkRol2
+    _key: '!items.effects!166ea77529f40962.UPoWfM4OfSFkRol2'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.b528592e5a4583e3
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/properties/missile.webp
+    name: Missile
+    system:
+      automations:
+        parameterChanges:
+          _id: parameterChanges
+          changes:
+            - key: system.range.melee
+              phase: normal
+              priority: 10
+              qualifier: '1'
+              target: parent
+              type: override
+              value: 'false'
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 0
+            - 1
+          type: changes
+      competence:
+        raw: 0
+      description: >-
+        <p>A <b>[[lookup name style=lc]]</b> item cannot be used to make melee
+        @L[Category:Attack abilities]{attacks}.</p>
+      form: flaw
+      identifier: missile
+      material: false
+      mundane: true
+    transfer: true
+    type: property
+  - _id: laAfS0juP3uPBrYU
+    _key: '!items.effects!166ea77529f40962.laAfS0juP3uPBrYU'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.87e86f2640702582
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/properties/ranged.webp
     name: Ranged
     system:
@@ -86,11 +200,11 @@ effects:
           _id: parameterChanges
           changes:
             - key: system.range.ranged
-              mode: 5
+              phase: normal
               priority: 10
               qualifier: '1'
               target: parent
-              time: normal
+              type: override
               value: 'true'
           competencies:
             - 0
@@ -119,113 +233,7 @@ effects:
       form: intrinsic
       identifier: ranged
       mundane: true
-    type: property
-  - _id: towerShielding00
-    _key: '!items.effects!166ea77529f40962.towerShielding00'
-    _stats:
-      compendiumSource: Compendium.teriock.properties.Item.1483c70a3de8938d
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.63
-    img: systems/teriock/src/icons/properties/tower-shielding.webp
-    name: Tower Shielding
-    system:
-      competence:
-        raw: 0
-      description: >-
-        <p>Only @L[Category:Small equipment]{small equipment} can be held in an
-        arm that's @L[Keyword:Using]{using} @L[Category:Tower Shielding
-        equipment]{tower shielding equipment}. But but no
-        @L[Category:Equipment]{equipment} can be used to @L[Core:Attack
-        Interaction]{attack} or @L[Core:Block Interaction]{block}.</p>
-      form: flaw
-      identifier: tower-shielding
-      mundane: true
-    type: property
-  - _id: twoHanded0000000
-    _key: '!items.effects!166ea77529f40962.twoHanded0000000'
-    _stats:
-      compendiumSource: Compendium.teriock.properties.Item.5409959443770534
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.63
-    img: systems/teriock/src/icons/properties/two-handed.webp
-    name: Two-Handed
-    system:
-      competence:
-        raw: 0
-      description: >-
-        <p>An item with the <b>[[lookup name style=lc]]</b> property cannot be
-        @L[Category:Attack abilities]{attacked} with unless it is wielded in two
-        hands.</p>
-      form: flaw
-      identifier: two-handed
-      mundane: true
-    type: property
-  - _id: wep0000000000000
-    _key: '!items.effects!166ea77529f40962.wep0000000000000'
-    _stats:
-      compendiumSource: Compendium.teriock.properties.Item.891de334396620e1
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.63
-    img: systems/teriock/src/icons/properties/weapon.webp
-    name: Weapon
-    system:
-      competence:
-        raw: 0
-      description: >-
-        <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-        @L[Category:Attack abilities]{attack}.</p>
-      form: intrinsic
-      identifier: weapon
-      mundane: true
-    type: property
-  - _id: UPoWfM4OfSFkRol2
-    _key: '!items.effects!166ea77529f40962.UPoWfM4OfSFkRol2'
-    _stats:
-      compendiumSource: Compendium.teriock.properties.Item.b528592e5a4583e3
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/properties/missile.webp
-    name: Missile
-    system:
-      automations:
-        parameterChanges:
-          _id: parameterChanges
-          changes:
-            - key: system.range.melee
-              mode: 5
-              priority: 10
-              qualifier: '1'
-              target: parent
-              time: normal
-              value: 'false'
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 0
-            - 1
-          type: changes
-      competence:
-        raw: 0
-      description: >-
-        <p>A <b>[[lookup name style=lc]]</b> item cannot be used to make melee
-        @L[Category:Attack abilities]{attacks}.</p>
-      form: flaw
-      identifier: missile
-      material: false
-      mundane: true
+    transfer: true
     type: property
 folder: 87e86f2640702582
 img: systems/teriock/src/icons/equipment/bowshield.webp

@@ -1,83 +1,77 @@
 _id: 8fbe385fdebca862
-_key: '!items!8fbe385fdebca862'
+_key: '!effects!8fbe385fdebca862'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 8fbe385fdebca862
-    _key: '!items.effects!8fbe385fdebca862.8fbe385fdebca862'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/miraculous-recovery.webp
-    name: Miraculous Recovery
-    system:
-      automations:
-        1728b3a84ea27844:
-          _id: 1728b3a84ea27844
-          common:
-            - heal
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: common
-      class: paladin
-      competence:
-        raw: 0
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: hand
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - healing
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, @L[Core:Healing]{heal} the
-        target again. This does not consume their @L[Core:Hit Dice]{hit dice}
-        (including the @L[Core:Hit Dice]{hit dice} for the initial
-        @L[Core:Healing]{healing}).</p>
-      identifier: miraculous-recovery
-      interaction: attack
-      invoked: true
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - divine
-      range:
-        unit: contact
-      results:
-        critHit: <p>Double the amount of times target @L[Core:Healing]{heals}.</p>
-        hit: <p>Target @L[Core:Healing]{heals}.</p>
-      skill: true
-      standard: true
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/miraculous-recovery.webp
 name: Miraculous Recovery
-type: wrapper
+system:
+  automations:
+    1728b3a84ea27844:
+      _id: 1728b3a84ea27844
+      common:
+        - null
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 1
+        - 0
+      type: common
+  class: paladin
+  competence:
+    raw: 0
+  costs:
+    components:
+      somatic:
+        type: tag
+      verbal:
+        type: tag
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: hand
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - healing
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  heightened: >-
+    <p>For each additional @L[Core:MP]{MP} spent, @L[Core:Healing]{heal} the
+    target again. This does not consume their @L[Core:Hit Dice]{hit dice}
+    (including the @L[Core:Hit Dice]{hit dice} for the initial
+    @L[Core:Healing]{healing}).</p>
+  identifier: miraculous-recovery
+  interaction: attack
+  invoked: true
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - divine
+  range:
+    unit: contact
+  results:
+    critHit: <p>Double the amount of times target @L[Core:Healing]{heals}.</p>
+    hit: <p>Target @L[Core:Healing]{heals}.</p>
+  skill: true
+  standard: true
+  targets:
+    - creature
+transfer: true
+type: ability

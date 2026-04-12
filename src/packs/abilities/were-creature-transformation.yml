@@ -1,176 +1,65 @@
 _id: c4099e67f11fdc4f
-_key: '!items!c4099e67f11fdc4f'
+_key: '!effects!c4099e67f11fdc4f'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: c4099e67f11fdc4f
-    _key: '!items.effects!c4099e67f11fdc4f.c4099e67f11fdc4f'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/were-creature-transformation.webp
-    name: Were-Creature Transformation
-    system:
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '24'
-        unit: hour
-      effectTypes:
-        - transformation
-        - disease
-        - automatic
-      executionTime: 10 Minutes
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: were-creature-transformation
-      interaction: manifest
-      maneuver: slow
-      overview:
-        base: >-
-          <p>You undergo a @L[Condition:Transformed]{greater transformation}
-          that cannot be reverted from into a particular @L[Category:Common
-          animal creatures]{animal}. This is typically the type of
-          @L[Category:Common animal creatures]{animal} that the
-          @L[Creature:Were-Creature]{were-creature} that first bit you was. Your
-          @L[Core:Size]{SIZE} is 1 greater than that @L[Category:Common animal
-          creatures]{animal} normally is and you maintain all
-          @L[Creature:Were-Creature]{were-creature}
-          @L[Category:Abilities]{abilities}, @L[Core:Hit Points and Mana
-          Points]{hit dice}, and @L[Core:Hit Points and Mana Points]{HP}. You
-          also have @L[Ability:Impure Durability]{Impure Durability}, and become
-          @L[Ability:Aggressive]{Aggressive} while
-          @L[Condition:Transformed]{transformed}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      targets:
-        - self
-      trigger: >-
-        <p>The moon is in a particular phase. This is typically the phase in
-        which you were first bitten by a
-        @L[Creature:Were-Creature]{were-creature}. This triggers automatically.
-        You cannot choose to not use it if you are able to.</p>
-    type: ability
-  - _id: X5lX6B8Oa0MgXNef
-    _key: '!items.effects!c4099e67f11fdc4f.X5lX6B8Oa0MgXNef'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.97218864bf0987c8
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/abilities/impure-durability.webp
-    name: Impure Durability
-    system:
-      _sup: c4099e67f11fdc4f
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.protections.immunities.damageTypes
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: Non-magical Non-silver
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - immunity
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: impure-durability
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You are @L[Keyword:Immunity]{immune} to non-@L[Damage:Magic]{magic}
-          non-@L[Damage:Silver]{silver} @L[Core:Damage]{damage}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
-  - _id: Or2dOBsiDgdgGq0K
-    _key: '!items.effects!c4099e67f11fdc4f.Or2dOBsiDgdgGq0K'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.67aa47433b535449
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/aggressive.webp
-    name: Aggressive
-    system:
-      _sup: c4099e67f11fdc4f
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: flaw
-      identifier: aggressive
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You will not leave combat willingly and are
-          @L[Keyword:Inept]{inept} at not killing anyone who opposes you.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/were-creature-transformation.webp
 name: Were-Creature Transformation
-type: wrapper
+system:
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '24'
+    unit: hour
+  effectTypes:
+    - transformation
+    - disease
+    - automatic
+  executionTime:
+    base: 10 Minutes
+    slow:
+      raw: '10'
+      unit: minute
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  identifier: were-creature-transformation
+  interaction: manifest
+  maneuver: slow
+  mundane: false
+  overview:
+    base: >-
+      <p>You undergo a @L[Condition:Transformed]{greater transformation} that
+      cannot be reverted from into a particular @L[Category:Common animal
+      creatures]{animal}. This is typically the type of @L[Category:Common
+      animal creatures]{animal} that the
+      @L[Creature:Were-Creature]{were-creature} that first bit you was. Your
+      @L[Core:Size]{SIZE} is 1 greater than that @L[Category:Common animal
+      creatures]{animal} normally is and you maintain all
+      @L[Creature:Were-Creature]{were-creature}
+      @L[Category:Abilities]{abilities}, @L[Core:Hit Points and Mana Points]{hit
+      dice}, and @L[Core:Hit Points and Mana Points]{HP}. You also have
+      @L[Ability:Impure Durability]{Impure Durability}, and become
+      @L[Ability:Aggressive]{Aggressive} while
+      @L[Condition:Transformed]{transformed}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: self
+  targets:
+    - self
+  trigger: >-
+    <p>The moon is in a particular phase. This is typically the phase in which
+    you were first bitten by a @L[Creature:Were-Creature]{were-creature}. This
+    triggers automatically. You cannot choose to not use it if you are able
+    to.</p>
+transfer: true
+type: ability

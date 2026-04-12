@@ -1,7 +1,7 @@
 _id: d22a0c803d95b9e4
 _key: '!items!d22a0c803d95b9e4'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.23
@@ -9,11 +9,11 @@ effects:
   - _id: a5cW5ipaWf6PskIV
     _key: '!items.effects!d22a0c803d95b9e4.a5cW5ipaWf6PskIV'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.1f6b1e4ae24febc1
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1f6b1e4ae24febc1
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/evasive-shimmering.webp
     name: Evasive Shimmering
     system:
@@ -34,25 +34,25 @@ effects:
           _id: e789ed5e109ebd1a
           changes:
             - key: system.protections.resistances.statuses
-              mode: 2
+              phase: normal
               priority: 10
               qualifier: '1'
               target: Actor
-              time: normal
+              type: add
               value: snared
             - key: system.protections.resistances.statuses
-              mode: 2
+              phase: normal
               priority: 10
               qualifier: '1'
               target: Actor
-              time: normal
+              type: add
               value: immobilized
             - key: system.protections.resistances.damageTypes
-              mode: 2
+              phase: normal
               priority: 10
               qualifier: '1'
               target: Actor
-              time: normal
+              type: add
               value: hack
           competencies:
             - 0
@@ -99,11 +99,12 @@ effects:
       requirements: <p>You are not within 10 feet of any enemy creature.</p>
       targets:
         - self
+    transfer: true
     type: ability
   - _id: lizardTamer00000
     _key: '!items.effects!d22a0c803d95b9e4.lizardTamer00000'
     _stats:
-      coreVersion: '13'
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.10.23
@@ -116,15 +117,16 @@ effects:
       field: survivalist
       identifier: lizard-tamer
       tradecraft: tamer
+    transfer: true
     type: fluency
   - _id: W4GdepVIJomaQC75
     _key: '!items.effects!d22a0c803d95b9e4.W4GdepVIJomaQC75'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.ae7478f48ccbf072
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.ae7478f48ccbf072
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/natural-hide.webp
     name: Natural Hide
     system:
@@ -133,11 +135,11 @@ effects:
           _id: e789ed5e109ebd1a
           changes:
             - key: system.defense.av.natural
-              mode: 4
+              phase: normal
               priority: 10
               qualifier: '1'
               target: Actor
-              time: normal
+              type: upgrade
               value: '1'
           competencies:
             - 0
@@ -178,6 +180,7 @@ effects:
         unit: self
       targets:
         - self
+    transfer: true
     type: ability
 folder: 31fe961f0b485187
 img: systems/teriock/src/icons/abilities/familiar-bond.webp

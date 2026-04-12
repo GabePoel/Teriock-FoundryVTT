@@ -1,7 +1,7 @@
 _id: b2cf4db29c3637e5
 _key: '!items!b2cf4db29c3637e5'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.53
@@ -9,11 +9,11 @@ effects:
   - _id: ClG0GBLDYmlAaPMT
     _key: '!items.effects!b2cf4db29c3637e5.ClG0GBLDYmlAaPMT'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.12c437e5de0552df
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.12c437e5de0552df
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/drink-displacement-potion.webp
     name: Drink Displacement Potion
     system:
@@ -28,7 +28,7 @@ effects:
             - 1
             - 2
           documents:
-            - Compendium.teriock.abilities.Item.096e4fe03c38ec16
+            - Compendium.teriock.abilities.ActiveEffect.096e4fe03c38ec16
           expandTables: false
           heighten:
             - 0
@@ -75,15 +75,16 @@ effects:
         the ability.</p>
       targets:
         - self
+    transfer: true
     type: ability
   - _id: g6Ae2i83zSrDNcPl
     _key: '!items.effects!b2cf4db29c3637e5.g6Ae2i83zSrDNcPl'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.7b3e6d546e3b26f7
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.7b3e6d546e3b26f7
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.63
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/properties/fragile.webp
     name: Fragile
     system:
@@ -100,15 +101,58 @@ effects:
       form: flaw
       identifier: fragile
       mundane: true
+    transfer: true
     type: property
-  - _id: pigJ1OPSQjiHBoMU
-    _key: '!items.effects!b2cf4db29c3637e5.pigJ1OPSQjiHBoMU'
+  - _id: x6sjcsIVaOkVZOFD
+    _key: '!items.effects!b2cf4db29c3637e5.x6sjcsIVaOkVZOFD'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.75ecaec1dd531ac4
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.35a4dd6673f4ecd9
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/properties/searchable.webp
+    name: Searchable
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>A <b>[[lookup name style=lc]]</b> item is something that is easy to
+        steal through @L[Category:Abilities]{abilities} like
+        @L[Ability:Search]{Search}.</p>
+      form: flaw
+      identifier: searchable
+    transfer: true
+    type: property
+  - _id: VQDFXr0oJQZ7Waxe
+    _key: '!items.effects!b2cf4db29c3637e5.VQDFXr0oJQZ7Waxe'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.3d2cc8d952adebec
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/properties/small.webp
+    name: Small
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>An item with this property is easily concealed and can often be used
+        in the same hand as a @L[Category:Shields]{shield}.</p>
+      form: intrinsic
+      identifier: small
+      mundane: true
+    transfer: true
+    type: property
+  - _id: tC1ChR8Znx0llYiQ
+    _key: '!items.effects!b2cf4db29c3637e5.tC1ChR8Znx0llYiQ'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.75ecaec1dd531ac4
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/quivering-vitals.webp
     name: Quivering Vitals
     system:
@@ -129,13 +173,17 @@ effects:
           type: roll
       competence:
         raw: 0
+      costs: {}
       delivery: self
       duration:
         raw: '0'
         unit: unlimited
       effectTypes:
         - displacement
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -145,6 +193,7 @@ effects:
       identifier: quivering-vitals
       interaction: manifest
       maneuver: passive
+      mundane: false
       overview:
         base: >-
           <p>@L[Category:Vitals target abilities]{Vitals target abilities} that
@@ -161,47 +210,8 @@ effects:
         unit: self
       targets:
         - self
+    transfer: true
     type: ability
-  - _id: x6sjcsIVaOkVZOFD
-    _key: '!items.effects!b2cf4db29c3637e5.x6sjcsIVaOkVZOFD'
-    _stats:
-      compendiumSource: Compendium.teriock.properties.Item.35a4dd6673f4ecd9
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.42
-    img: systems/teriock/src/icons/properties/searchable.webp
-    name: Searchable
-    system:
-      competence:
-        raw: 0
-      description: >-
-        <p>A <b>[[lookup name style=lc]]</b> item is something that is easy to
-        steal through @L[Category:Abilities]{abilities} like
-        @L[Ability:Search]{Search}.</p>
-      form: flaw
-      identifier: searchable
-    type: property
-  - _id: VQDFXr0oJQZ7Waxe
-    _key: '!items.effects!b2cf4db29c3637e5.VQDFXr0oJQZ7Waxe'
-    _stats:
-      compendiumSource: Compendium.teriock.properties.Item.3d2cc8d952adebec
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.63
-    img: systems/teriock/src/icons/properties/small.webp
-    name: Small
-    system:
-      competence:
-        raw: 0
-      description: >-
-        <p>An item with this property is easily concealed and can often be used
-        in the same hand as a @L[Category:Shields]{shield}.</p>
-      form: intrinsic
-      identifier: small
-      mundane: true
-    type: property
 folder: 64a9d9ba60f26294
 img: systems/teriock/src/icons/consumables/displacement-potion.webp
 name: Displacement Potion

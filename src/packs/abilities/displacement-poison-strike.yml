@@ -1,66 +1,67 @@
 _id: 3e9eaca345fe2f04
-_key: '!items!3e9eaca345fe2f04'
+_key: '!effects!3e9eaca345fe2f04'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 3e9eaca345fe2f04
-    _key: '!items.effects!3e9eaca345fe2f04.3e9eaca345fe2f04'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/displacement-poison-strike.webp
-    name: Displacement Poison Strike
-    system:
-      automations:
-        axPz3ay2Zto1zGXh:
-          _id: axPz3ay2Zto1zGXh
-          movementAction: blink
-          type: changeMovement
-      competence:
-        raw: 0
-      delivery: weapon
-      duration:
-        raw: '24'
-        unit: hour
-      effectTypes:
-        - poison
-        - displacement
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: displacement-poison-strike
-      interaction: attack
-      maneuver: active
-      overview:
-        fluent: >-
-          <p>The @L[Condition:Poisoned]{poison} instead transports the target 10
-          × @L[Core:Fluency Bonus]{F} feet.</p>
-        proficient: >-
-          <p>The @L[Condition:Poisoned]{poison} instead transports the target 10
-          × @L[Core:Proficiency Bonus]{P} feet.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      results:
-        hit: >-
-          <p>Target is @L[Condition:Poisoned]{poisoned}. The
-          @L[Condition:Poisoned]{poison} causes the target to be instantly
-          transported 10 feet in a random direction.</p>
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/displacement-poison-strike.webp
 name: Displacement Poison Strike
-type: wrapper
+system:
+  automations:
+    axPz3ay2Zto1zGXh:
+      _id: axPz3ay2Zto1zGXh
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 0
+        - 1
+      movementAction: blink
+      type: changeMovement
+  competence:
+    raw: 0
+  delivery: weapon
+  duration:
+    raw: '24'
+    unit: hour
+  effectTypes:
+    - poison
+    - displacement
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: displacement-poison-strike
+  interaction: attack
+  maneuver: active
+  mundane: false
+  overview:
+    fluent: >-
+      <p>The @L[Condition:Poisoned]{poison} instead transports the target 10 ×
+      @L[Core:Fluency Bonus]{F} feet.</p>
+    proficient: >-
+      <p>The @L[Condition:Poisoned]{poison} instead transports the target 10 ×
+      @L[Core:Proficiency Bonus]{P} feet.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: contact
+  results:
+    hit: >-
+      <p>Target is @L[Condition:Poisoned]{poisoned}. The
+      @L[Condition:Poisoned]{poison} causes the target to be instantly
+      transported 10 feet in a random direction.</p>
+  targets:
+    - creature
+transfer: true
+type: ability

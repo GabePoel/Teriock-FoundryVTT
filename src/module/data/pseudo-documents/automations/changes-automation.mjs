@@ -38,10 +38,10 @@ export default class ChangesAutomation extends CritAutomation {
       "teriock/sheets/shared/changes",
       {
         changesData: this.changes,
-        changesPath: `${this.fieldPath}.${this.id}.changes`,
+        changesPath: `${this.localPath}.changes`,
         editable: this.document.sheet.isEditable,
         fieldDefs: this.schema.fields.changes.element.fields,
-        valuePath: `_source.${this.fieldPath}.${this.id}.changes`,
+        valuePath: `_source.${this.localPath}.changes`,
       },
     );
     return /** @type {HTMLDivElement} */ foundry.utils.parseHTML(html);

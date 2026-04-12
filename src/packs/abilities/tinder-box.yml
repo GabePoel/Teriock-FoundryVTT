@@ -1,71 +1,65 @@
 _id: fa4334f5eefe523e
-_key: '!items!fa4334f5eefe523e'
+_key: '!effects!fa4334f5eefe523e'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: fa4334f5eefe523e
-    _key: '!items.effects!fa4334f5eefe523e.fa4334f5eefe523e'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/tinder-box.webp
-    name: Tinder Box
-    system:
-      automations:
-        29b275994cf9f5b1:
-          _id: 29b275994cf9f5b1
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: 1d10[fire]
-          heighten:
-            - 1
-            - 0
-          merge: true
-          roll: damage
-          type: roll
-      competence:
-        raw: 0
-      delivery: aura
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - damaging
-        - automatic
-      executionTime: r0
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: tinder-box
-      interaction: feat
-      maneuver: reactive
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        raw: '10'
-        unit: ft
-      results:
-        fail: >-
-          <p>Target creatures take [[/damage 1d10[fire]]]
-          @L[Core:Damage]{damage}.</p>
-      targets:
-        - creature
-      trigger: >-
-        <p>You take @L[Damage:Fire]{fire damage}. This triggers automatically.
-        You cannot choose to not use it if you are able to.</p>
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/tinder-box.webp
 name: Tinder Box
-type: wrapper
+system:
+  automations:
+    29b275994cf9f5b1:
+      _id: 29b275994cf9f5b1
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: 1d10[fire]
+      heighten:
+        - 1
+        - 0
+      impact: damage
+      merge: true
+      type: roll
+  competence:
+    raw: 0
+  delivery: aura
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - damaging
+    - automatic
+  executionTime:
+    base: r0
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: tinder-box
+  interaction: feat
+  maneuver: reactive
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    raw: '10'
+    unit: ft
+  results:
+    fail: >-
+      <p>Target creatures take [[/damage 1d10[fire]]]
+      @L[Core:Damage]{damage}.</p>
+  targets:
+    - creature
+  trigger: >-
+    <p>You take @L[Damage:Fire]{fire damage}. This triggers automatically. You
+    cannot choose to not use it if you are able to.</p>
+transfer: true
+type: ability

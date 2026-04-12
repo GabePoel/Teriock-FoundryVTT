@@ -1,43 +1,42 @@
 _id: ba2e5441ff3a18b0
-_key: '!items!ba2e5441ff3a18b0'
+_key: '!effects!ba2e5441ff3a18b0'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: ba2e5441ff3a18b0
-    _key: '!items.effects!ba2e5441ff3a18b0.ba2e5441ff3a18b0'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.68
-    img: systems/teriock/src/icons/properties/dragon-scale.webp
-    name: Dragon Scale
-    system:
-      automations:
-        parameterChanges:
-          _id: parameterChanges
-          changes:
-            - key: system.av.bonus
-              mode: 4
-              priority: 10
-              qualifier: '@av'
-              target: parent
-              time: normal
-              value: '2'
-          type: changes
-      competence:
-        raw: 0
-      description: >-
-        <p>@L[Category:Armor]{Armor} that's <b>[[lookup name style=lc]]</b> has
-        its @L[Core:Armor Class]{AV} increased by 2.</p>
-      form: intrinsic
-      identifier: dragon-scale
-      material: true
-      mundane: true
-    type: property
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/properties/dragon-scale.webp
 name: Dragon Scale
-type: wrapper
+system:
+  automations:
+    parameterChanges:
+      _id: parameterChanges
+      changes:
+        - key: system.av.bonus
+          phase: normal
+          priority: 10
+          qualifier: '@av'
+          target: parent
+          type: upgrade
+          value: '2'
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 0
+        - 1
+      type: changes
+  competence:
+    raw: 0
+  description: >-
+    <p>@L[Category:Armor]{Armor} that's <b>[[lookup name style=lc]]</b> has its
+    @L[Core:Armor Class]{AV} increased by 2.</p>
+  form: intrinsic
+  identifier: dragon-scale
+  mundane: true
+transfer: true
+type: property

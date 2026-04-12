@@ -1,64 +1,64 @@
 _id: d541e7e60ee1830a
-_key: '!items!d541e7e60ee1830a'
+_key: '!effects!d541e7e60ee1830a'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: d541e7e60ee1830a
-    _key: '!items.effects!d541e7e60ee1830a.d541e7e60ee1830a'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/read-magic.webp
-    name: Read Magic
-    system:
-      automations:
-        5MJ9my8NzZstwPbl:
-          _id: 5MJ9my8NzZstwPbl
-          common:
-            - readMagic
-          type: common
-      basic: true
-      competence:
-        raw: 0
-      delivery: hand
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - truthDetecting
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: intrinsic
-      identifier: read-magic
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      results:
-        hit: >-
-          <p>If the target is an item, you know if it is
-          @L[Property:Magic]{magical} or not. If it is a creature, then you know
-          if they have any @L[Category:Sustained abilities]{sustained}
-          @L[Category:Magically powered abilities]{magical abilities} currently
-          active on them or if they themselves are intrinsically magical in some
-          way.</p>
-      targets:
-        - creature
-        - item
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/read-magic.webp
 name: Read Magic
-type: wrapper
+system:
+  automations:
+    5MJ9my8NzZstwPbl:
+      _id: 5MJ9my8NzZstwPbl
+      common:
+        - readMagic
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 0
+        - 1
+      type: common
+  basic: true
+  competence:
+    raw: 0
+  delivery: hand
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - truthDetecting
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: intrinsic
+  identifier: read-magic
+  interaction: attack
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: contact
+  results:
+    hit: >-
+      <p>If the target is an item, you know if it is @L[Property:Magic]{magical}
+      or not. If it is a creature, then you know if they have any
+      @L[Category:Sustained abilities]{sustained} @L[Category:Magically powered
+      abilities]{magical abilities} currently active on them or if they
+      themselves are intrinsically magical in some way.</p>
+  targets:
+    - creature
+    - item
+transfer: true
+type: ability

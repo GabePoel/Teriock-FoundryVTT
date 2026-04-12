@@ -1,84 +1,79 @@
 _id: 5e14d2a1432e9a93
-_key: '!items!5e14d2a1432e9a93'
+_key: '!effects!5e14d2a1432e9a93'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 5e14d2a1432e9a93
-    _key: '!items.effects!5e14d2a1432e9a93.5e14d2a1432e9a93'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/penetrate.webp
-    name: Penetrate
-    system:
-      automations:
-        1728b3a84ea27844:
-          _id: 1728b3a84ea27844
-          common:
-            - standardDamage
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: common
-        d873eb939c3b5951:
-          _id: d873eb939c3b5951
-          competencies:
-            - 0
-            - 1
-            - 2
-          hacks:
-            - body
-          heighten:
-            - 1
-            - 0
-          type: hacks
-      class: corsair
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: weapon
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: penetrate
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 2
-      powerSources:
-        - martial
-      range:
-        unit: contact
-      results:
-        critHit: >-
-          <p>If you want, target takes @L[Core:Standard and Critical
-          Damage]{standard damage} as well.</p>
-        hit: <p>Target takes a @L[Damage:Hack]{body hack}.</p>
-      skill: true
-      standard: true
-      targets:
-        - vitals
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/penetrate.webp
 name: Penetrate
-type: wrapper
+system:
+  automations:
+    1728b3a84ea27844:
+      _id: 1728b3a84ea27844
+      common:
+        - standardDamage
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 1
+        - 0
+      type: common
+    d873eb939c3b5951:
+      _id: d873eb939c3b5951
+      competencies:
+        - 0
+        - 1
+        - 2
+      hacks:
+        - body
+      heighten:
+        - 1
+        - 0
+      reverse: false
+      type: hacks
+  class: corsair
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: weapon
+  duration:
+    raw: '0'
+    unit: instant
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: penetrate
+  interaction: attack
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 2
+  powerSources:
+    - martial
+  range:
+    unit: contact
+  results:
+    critHit: >-
+      <p>If you want, target takes @L[Core:Standard and Critical
+      Damage]{standard damage} as well.</p>
+    hit: <p>Target takes a @L[Damage:Hack]{body hack}.</p>
+  skill: true
+  standard: true
+  targets:
+    - vitals
+transfer: true
+type: ability

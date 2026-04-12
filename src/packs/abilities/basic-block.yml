@@ -1,53 +1,47 @@
 _id: 085135acb4c1abd8
-_key: '!items!085135acb4c1abd8'
+_key: '!effects!085135acb4c1abd8'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 085135acb4c1abd8
-    _key: '!items.effects!085135acb4c1abd8.085135acb4c1abd8'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/basic-block.webp
-    name: Basic Block
-    system:
-      basic: true
-      competence:
-        raw: 0
-      delivery: item
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: r0
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: intrinsic
-      identifier: basic-block
-      interaction: block
-      maneuver: reactive
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: contact
-      results:
-        fail: <p>The @L[Core:Interactions]{attack's} effect applies.</p>
-        save: >-
-          <p>The @L[Core:Interactions]{attack's} effect
-          @L[Core:Fizzles]{fizzles}.</p>
-      targets:
-        - attack
-      trigger: <p>You are being @L[Core:Interactions]{attacked}.</p>
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/basic-block.webp
 name: Basic Block
-type: wrapper
+system:
+  basic: true
+  competence:
+    raw: 0
+  delivery: item
+  duration:
+    raw: '0'
+    unit: instant
+  executionTime:
+    base: r0
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: intrinsic
+  identifier: basic-block
+  interaction: block
+  maneuver: reactive
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: contact
+  results:
+    fail: <p>The @L[Core:Interactions]{attack's} effect applies.</p>
+    save: >-
+      <p>The @L[Core:Interactions]{attack's} effect
+      @L[Core:Fizzles]{fizzles}.</p>
+  targets:
+    - attack
+  trigger: <p>You are being @L[Core:Interactions]{attacked}.</p>
+transfer: true
+type: ability

@@ -1,88 +1,87 @@
 _id: 5b812ca38efec9de
-_key: '!items!5b812ca38efec9de'
+_key: '!effects!5b812ca38efec9de'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 5b812ca38efec9de
-    _key: '!items.effects!5b812ca38efec9de.5b812ca38efec9de'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/terror-ink-spray.webp
-    name: Terror Ink Spray
-    system:
-      automations:
-        29b275994cf9f5b1:
-          _id: 29b275994cf9f5b1
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: 2d10[terror]
-          heighten:
-            - 1
-            - 0
-          merge: true
-          roll: damage
-          type: roll
-        5f92ecb1bcd34991:
-          _id: 5f92ecb1bcd34991
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: include
-          status: hidden
-          type: status
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: cone
-      duration:
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - damaging
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: terror-ink-spray
-      interaction: feat
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        raw: '45'
-        unit: ft
-      results:
-        fail: >-
-          <p>The target gets covered with a pitch black ink. Creatures and items
-          take [[/damage 2d10[terror]]] @L[Core:Damage]{damage} and become
-          @L[Condition:Hidden]{hidden} with a hidden DC of 15 while in affected
-          areas until this is cleaned off.</p>
-      targets:
-        - area
-        - creature
-        - item
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/terror-ink-spray.webp
 name: Terror Ink Spray
-type: wrapper
+system:
+  automations:
+    29b275994cf9f5b1:
+      _id: 29b275994cf9f5b1
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: 2d10[terror]
+      heighten:
+        - 1
+        - 0
+      impact: damage
+      merge: true
+      type: roll
+    5f92ecb1bcd34991:
+      _id: 5f92ecb1bcd34991
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: include
+      status: hidden
+      target: false
+      type: status
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: cone
+  duration:
+    raw: '0'
+    unit: unlimited
+  effectTypes:
+    - damaging
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  identifier: terror-ink-spray
+  interaction: feat
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    raw: '45'
+    unit: ft
+  results:
+    fail: >-
+      <p>The target gets covered with a pitch black ink. Creatures and items
+      take [[/damage 2d10[terror]]] @L[Core:Damage]{damage} and become
+      @L[Condition:Hidden]{hidden} with a hidden DC of 15 while in affected
+      areas until this is cleaned off.</p>
+  targets:
+    - area
+    - creature
+    - item
+transfer: true
+type: ability

@@ -1,91 +1,98 @@
 _id: 10276e5737bb39bf
-_key: '!items!10276e5737bb39bf'
+_key: '!effects!10276e5737bb39bf'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 10276e5737bb39bf
-    _key: '!items.effects!10276e5737bb39bf.10276e5737bb39bf'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/super-digging.webp
-    name: Super Digging
-    system:
-      automations:
-        LqTagydCNLvoPlLm:
-          _id: LqTagydCNLvoPlLm
-          movementAction: burrow
-          type: changeMovement
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.speedAdjustments.dig
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '2'
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: changes
-        f025905e157ac261:
-          _id: f025905e157ac261
-          changes:
-            - key: system.speedAdjustments.dig
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '3'
-          competencies:
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: changes
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - movement
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: super-digging
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: <p>You dig at @L[Core:Movement Speed]{half speed}.</p>
-        proficient: <p>You instead dig at @L[Core:Movement Speed]{normal speed}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/super-digging.webp
 name: Super Digging
-type: wrapper
+system:
+  automations:
+    LqTagydCNLvoPlLm:
+      _id: LqTagydCNLvoPlLm
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 0
+        - 1
+      movementAction: burrow
+      type: changeMovement
+    e789ed5e109ebd1a:
+      _id: e789ed5e109ebd1a
+      changes:
+        - key: system.speedAdjustments.dig
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: Actor
+          type: upgrade
+          value: '2'
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: changes
+    f025905e157ac261:
+      _id: f025905e157ac261
+      changes:
+        - key: system.speedAdjustments.dig
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: Actor
+          type: upgrade
+          value: '3'
+      competencies:
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: changes
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: unlimited
+  effectTypes:
+    - movement
+  executionTime:
+    base: passive
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: super-digging
+  interaction: manifest
+  maneuver: passive
+  mundane: false
+  overview:
+    base: <p>You dig at @L[Core:Movement Speed]{half speed}.</p>
+    proficient: <p>You instead dig at @L[Core:Movement Speed]{normal speed}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  targets:
+    - self
+transfer: true
+type: ability

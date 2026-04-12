@@ -1,7 +1,7 @@
 _id: c8dbb79bc421731e
 _key: '!items!c8dbb79bc421731e'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.23
@@ -9,11 +9,11 @@ effects:
   - _id: JaShmZEdTQvQsx4l
     _key: '!items.effects!c8dbb79bc421731e.JaShmZEdTQvQsx4l'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.aaaa08a40cf32777
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.aaaa08a40cf32777
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/night-vision.webp
     name: Night Vision
     system:
@@ -22,11 +22,11 @@ effects:
           _id: e789ed5e109ebd1a
           changes:
             - key: system.senses.dark
-              mode: 4
+              phase: normal
               priority: 10
               qualifier: '1'
               target: Actor
-              time: normal
+              type: upgrade
               value: '120'
           competencies:
             - 0
@@ -69,11 +69,12 @@ effects:
         unit: self
       targets:
         - self
+    transfer: true
     type: ability
   - _id: opossumTamer0000
     _key: '!items.effects!c8dbb79bc421731e.opossumTamer0000'
     _stats:
-      coreVersion: '13'
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.10.23
@@ -86,21 +87,23 @@ effects:
       field: survivalist
       identifier: opossum-tamer
       tradecraft: tamer
+    transfer: true
     type: fluency
   - _id: 1Eu5rkZFZJUrtkok
     _key: '!items.effects!c8dbb79bc421731e.1Eu5rkZFZJUrtkok'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.24a2a3db4a940311
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.24a2a3db4a940311
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/zombify.webp
     name: Zombify
     system:
       automations:
         72ce567009179bea:
           _id: 72ce567009179bea
+          changeType: add
           competencies:
             - 0
             - 1
@@ -113,10 +116,10 @@ effects:
             unit: second
           heighten:
             - 1
-          mode: 5
           type: duration
         838ba57012685987:
           _id: 838ba57012685987
+          changeType: add
           competencies:
             - 2
           crit:
@@ -128,7 +131,6 @@ effects:
           heighten:
             - 1
             - 0
-          mode: 5
           type: duration
         ngQVntiCQ8Ruot8n:
           _id: ngQVntiCQ8Ruot8n
@@ -221,6 +223,7 @@ effects:
       standard: true
       targets:
         - creature
+    transfer: true
     type: ability
 folder: 31fe961f0b485187
 img: systems/teriock/src/icons/abilities/familiar-bond.webp

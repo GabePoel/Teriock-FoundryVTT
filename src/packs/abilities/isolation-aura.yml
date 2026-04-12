@@ -1,65 +1,58 @@
 _id: 587753f24362c76e
-_key: '!items!587753f24362c76e'
+_key: '!effects!587753f24362c76e'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 587753f24362c76e
-    _key: '!items.effects!587753f24362c76e.587753f24362c76e'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/isolation-aura.webp
-    name: Isolation Aura
-    system:
-      class: paladin
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: aura
-      duration:
-        raw: '1'
-        unit: minute
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: unp
-      form: normal
-      identifier: isolation-aura
-      interaction: feat
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - divine
-      range:
-        raw: '10'
-        unit: ft
-      results:
-        fail: >-
-          <p>Target cannot touch other creatures of their own volition. This
-          keeps them from using @L[Category:Hand delivery abilities]{hand
-          delivery abilities}, @L[Category:Bite delivery abilities]{bite
-          delivery abilities}, or anything else where a @L[Category:Body
-          parts]{body part} is the source.</p><div class="note"><b>Note:</b>
-          This also applies to touching other creatures using
-          @L[Property:Magelore]{magelore} and @L[Ability:Staff Touch]{Staff
-          Touch}.</div>
-      skill: true
-      standard: true
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/isolation-aura.webp
 name: Isolation Aura
-type: wrapper
+system:
+  class: paladin
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: aura
+  duration:
+    raw: '1'
+    unit: minute
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: unp
+  form: normal
+  identifier: isolation-aura
+  interaction: feat
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - divine
+  range:
+    raw: '10'
+    unit: ft
+  results:
+    fail: >-
+      <p>Target cannot touch other creatures of their own volition. This keeps
+      them from using @L[Category:Hand delivery abilities]{hand delivery
+      abilities}, @L[Category:Bite delivery abilities]{bite delivery abilities},
+      or anything else where a @L[Category:Body parts]{body part} is the
+      source.</p><div class="note"><b>Note:</b> This also applies to touching
+      other creatures using @L[Property:Magelore]{magelore} and @L[Ability:Staff
+      Touch]{Staff Touch}.</div>
+  skill: true
+  standard: true
+  targets:
+    - creature
+transfer: true
+type: ability

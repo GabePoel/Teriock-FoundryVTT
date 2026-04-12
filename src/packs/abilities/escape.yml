@@ -1,61 +1,55 @@
 _id: 1b61db587d3e3f26
-_key: '!items!1b61db587d3e3f26'
+_key: '!effects!1b61db587d3e3f26'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 1b61db587d3e3f26
-    _key: '!items.effects!1b61db587d3e3f26.1b61db587d3e3f26'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/escape.webp
-    name: Escape
-    system:
-      class: assassin
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: r1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: escape
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>You move on a distance up to your @L[Core:Movement Speed]{movement
-          speed} on the ground. If you have a @L[Core:Movement Speed]{fly speed}
-          or @L[Core:Movement Speed]{swim speed} then you may move in the air or
-          in water accordingly. This movement doesn't trigger
-          @L[Category:Reactive abilities]{reactive abilities}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-      trigger: <p>You @L[Category:Attack abilities]{attack} another creature.</p>
-      upgrades:
-        competence:
-          attribute: mov
-          value: 2
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/escape.webp
 name: Escape
-type: wrapper
+system:
+  class: assassin
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: instant
+  executionTime:
+    base: r1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: escape
+  interaction: manifest
+  maneuver: reactive
+  mundane: false
+  overview:
+    base: >-
+      <p>You move on a distance up to your @L[Core:Movement Speed]{movement
+      speed} on the ground. If you have a @L[Core:Movement Speed]{fly speed} or
+      @L[Core:Movement Speed]{swim speed} then you may move in the air or in
+      water accordingly. This movement doesn't trigger @L[Category:Reactive
+      abilities]{reactive abilities}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  skill: true
+  standard: true
+  targets:
+    - self
+  trigger: <p>You @L[Category:Attack abilities]{attack} another creature.</p>
+  upgrades:
+    competence:
+      attribute: mov
+      value: 2
+transfer: true
+type: ability

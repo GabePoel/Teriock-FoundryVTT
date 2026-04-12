@@ -1,66 +1,65 @@
 _id: 49da45aecffdba52
-_key: '!items!49da45aecffdba52'
+_key: '!effects!49da45aecffdba52'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 49da45aecffdba52
-    _key: '!items.effects!49da45aecffdba52.49da45aecffdba52'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/maul.webp
-    name: Maul
-    system:
-      automations:
-        a8f16680cc9e1162:
-          _id: a8f16680cc9e1162
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: include
-          status: terrored
-          type: status
-      competence:
-        raw: 0
-      delivery: hand
-      duration:
-        conditions:
-          present:
-            - down
-        raw: '0'
-        unit: unlimited
-      endCondition: <p>Target is @L[Condition:Up]{up}.</p>
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: maul
-      interaction: attack
-      maneuver: active
-      overview:
-        base: <p>Target is @L[Condition:Terrored]{terrored}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: contact
-      requirements: <p>Target is @L[Condition:Down]{down}.</p>
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/maul.webp
 name: Maul
-type: wrapper
+system:
+  automations:
+    a8f16680cc9e1162:
+      _id: a8f16680cc9e1162
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: include
+      status: terrored
+      target: false
+      type: status
+  competence:
+    raw: 0
+  delivery: hand
+  duration:
+    conditions:
+      present:
+        - down
+    raw: '0'
+    unit: unlimited
+  endCondition: <p>Target is @L[Condition:Up]{up}.</p>
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: maul
+  interaction: attack
+  maneuver: active
+  mundane: false
+  overview:
+    base: <p>Target is @L[Condition:Terrored]{terrored}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: contact
+  requirements: <p>Target is @L[Condition:Down]{down}.</p>
+  targets:
+    - creature
+transfer: true
+type: ability

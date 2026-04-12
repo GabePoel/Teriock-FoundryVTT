@@ -1,7 +1,7 @@
 _id: aa3ada62f9c9dc33
 _key: '!items!aa3ada62f9c9dc33'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.68
@@ -9,11 +9,11 @@ effects:
   - _id: 4uKguVOa8fZuCBXp
     _key: '!items.effects!aa3ada62f9c9dc33.4uKguVOa8fZuCBXp'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.5014ce25fdaf968b
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1DpSwqGbKUAvbn3q
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/battle-cry.webp
     name: Battle Cry
     system:
@@ -48,191 +48,16 @@ effects:
       standard: true
       targets:
         - self
-    type: ability
-  - _id: pgyOKqRq2RiPW4Oh
-    _key: '!items.effects!aa3ada62f9c9dc33.pgyOKqRq2RiPW4Oh'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.3bf8b295f6088182
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
-    name: Battle Cry Aura
-    system:
-      _sup: 4uKguVOa8fZuCBXp
-      automations:
-        b4960732f0b9ed9f:
-          _id: b4960732f0b9ed9f
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          executor: false
-          heighten:
-            - 1
-            - 0
-          relation: include
-          status: frightened
-          target: false
-          type: status
-        d635eb44dba086dd:
-          _id: d635eb44dba086dd
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: combatExpiration
-          what:
-            roll: 2d4kh1
-            threshold: 4
-            type: rolled
-          when:
-            skip: 0
-            time: start
-            trigger: turn
-          who:
-            type: target
-      class: berserker
-      competence:
-        raw: 0
-      costs:
-        components:
-          verbal:
-            type: tag
-      delivery: aura
-      duration:
-        raw: '1'
-        unit: minute
-      effectTypes:
-        - loud
-      endCondition: >-
-        <p>At the start of each of the targets' @L[Core:Turn]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: int
-      form: normal
-      identifier: battle-cry-aura
-      interaction: feat
-      maneuver: active
-      overview:
-        base: <p>This ability cannot affect @L[Condition:Deaf]{deaf} creatures.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        raw: '10'
-        unit: ft
-      results:
-        fail: <p>Targets become @L[Condition:Frightened]{frightened}.</p>
-      skill: true
-      standard: true
-      targets:
-        - creature
-    type: ability
-  - _id: Z3SrwK0p4fvDVLF4
-    _key: '!items.effects!aa3ada62f9c9dc33.Z3SrwK0p4fvDVLF4'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.b14089485b6e949c
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
-    name: Battle Cry Resistance
-    system:
-      _sup: 4uKguVOa8fZuCBXp
-      automations:
-        8f623097f9f2a087:
-          _id: 8f623097f9f2a087
-          bonus: '0'
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          hex: false
-          type: resist
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.protections.resistances.statuses
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: frightened
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-      class: berserker
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '5'
-        unit: minute
-      effectTypes:
-        - resistance
-      endCondition: <p>You die or 1 minute passes without combat.</p>
-      executionTime: a0
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: battle-cry-resistance
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>You @L[Keyword:Resistance]{resist} being
-          @L[Condition:Frightened]{frightened}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
+    transfer: true
     type: ability
   - _id: MJfnbX5k5F3ynQWL
     _key: '!items.effects!aa3ada62f9c9dc33.MJfnbX5k5F3ynQWL'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.07a0880b230cdb14
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.07a0880b230cdb14
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/beastly-strength.webp
     name: Beastly Strength
     system:
@@ -273,15 +98,16 @@ effects:
         score:
           attribute: str
           value: 1
+    transfer: true
     type: ability
   - _id: WstiXo2jwgwbR5FX
     _key: '!items.effects!aa3ada62f9c9dc33.WstiXo2jwgwbR5FX'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.4ec75837c926c1f6
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.4ec75837c926c1f6
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/blue-drake-breath.webp
     name: Blue Drake Breath
     system:
@@ -348,15 +174,16 @@ effects:
         fail: <p>Target is @L[Condition:Frozen]{frozen}.</p>
       targets:
         - creature
+    transfer: true
     type: ability
   - _id: r84KSlBIJKnQ17VT
     _key: '!items.effects!aa3ada62f9c9dc33.r84KSlBIJKnQ17VT'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.184f6f0ddbd9247e
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.184f6f0ddbd9247e
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/flying.webp
     name: Flying
     system:
@@ -376,11 +203,11 @@ effects:
           _id: e789ed5e109ebd1a
           changes:
             - key: system.speedAdjustments.fly
-              mode: 4
+              phase: normal
               priority: 10
               qualifier: '1'
               target: Actor
-              time: normal
+              type: upgrade
               value: '2'
           competencies:
             - 0
@@ -397,11 +224,11 @@ effects:
           _id: f025905e157ac261
           changes:
             - key: system.speedAdjustments.fly
-              mode: 4
+              phase: normal
               priority: 10
               qualifier: '1'
               target: Actor
-              time: normal
+              type: upgrade
               value: '3'
           competencies:
             - 1
@@ -445,15 +272,16 @@ effects:
       standard: true
       targets:
         - self
+    transfer: true
     type: ability
   - _id: GMn9YzGeaRmZ23RU
     _key: '!items.effects!aa3ada62f9c9dc33.GMn9YzGeaRmZ23RU'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.aaaa08a40cf32777
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.aaaa08a40cf32777
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/night-vision.webp
     name: Night Vision
     system:
@@ -462,11 +290,11 @@ effects:
           _id: e789ed5e109ebd1a
           changes:
             - key: system.senses.dark
-              mode: 4
+              phase: normal
               priority: 10
               qualifier: '1'
               target: Actor
-              time: normal
+              type: upgrade
               value: '120'
           competencies:
             - 0
@@ -509,15 +337,16 @@ effects:
         unit: self
       targets:
         - self
+    transfer: true
     type: ability
   - _id: xuR0DQYVNEIxm31B
     _key: '!items.effects!aa3ada62f9c9dc33.xuR0DQYVNEIxm31B'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.4c9ba7e67dd8d160
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.4c9ba7e67dd8d160
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/no-hands.webp
     name: No Hands
     system:
@@ -547,15 +376,16 @@ effects:
         unit: self
       targets:
         - self
+    transfer: true
     type: ability
   - _id: 7HjbVhFo4SJRW8yH
     _key: '!items.effects!aa3ada62f9c9dc33.7HjbVhFo4SJRW8yH'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.8249d99c527d09b1
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8249d99c527d09b1
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/normal-perception.webp
     name: Normal Perception
     system:
@@ -587,15 +417,16 @@ effects:
         score:
           attribute: per
           value: 0
+    transfer: true
     type: ability
   - _id: rL9cbs5x5yZy01x4
     _key: '!items.effects!aa3ada62f9c9dc33.rL9cbs5x5yZy01x4'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.1d13190e5b38bda6
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1d13190e5b38bda6
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/normal-sneak.webp
     name: Normal Sneak
     system:
@@ -627,15 +458,16 @@ effects:
         score:
           attribute: snk
           value: 0
+    transfer: true
     type: ability
   - _id: bxU9oZGLnrAsMvLN
     _key: '!items.effects!aa3ada62f9c9dc33.bxU9oZGLnrAsMvLN'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.dbd0be0b5f33cdfd
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.dbd0be0b5f33cdfd
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/stupid-intelligence.webp
     name: Stupid Intelligence
     system:
@@ -667,15 +499,16 @@ effects:
         score:
           attribute: int
           value: -3
+    transfer: true
     type: ability
   - _id: Q2dgOrlZUHKN96DA
     _key: '!items.effects!aa3ada62f9c9dc33.Q2dgOrlZUHKN96DA'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.967b3e6ad5497a37
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.967b3e6ad5497a37
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/super-speed.webp
     name: Super Speed
     system:
@@ -707,6 +540,193 @@ effects:
         score:
           attribute: mov
           value: 4
+    transfer: true
+    type: ability
+  - _id: QC9JiSiaGOVQAfrA
+    _key: '!items.effects!aa3ada62f9c9dc33.QC9JiSiaGOVQAfrA'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.3bf8b295f6088182
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
+    name: Battle Cry Aura
+    system:
+      _sup: 4uKguVOa8fZuCBXp
+      automations:
+        b4960732f0b9ed9f:
+          _id: b4960732f0b9ed9f
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          executor: false
+          heighten:
+            - 1
+            - 0
+          relation: include
+          status: frightened
+          target: false
+          type: status
+        d635eb44dba086dd:
+          _id: d635eb44dba086dd
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: combatExpiration
+          what:
+            roll: 2d4kh1
+            threshold: 4
+            type: rolled
+          when:
+            skip: 0
+            time: start
+            trigger: turn
+          who:
+            type: target
+      class: berserker
+      competence:
+        raw: 0
+      costs:
+        components:
+          verbal:
+            type: tag
+      delivery: aura
+      duration:
+        raw: '1'
+        unit: minute
+      effectTypes:
+        - loud
+      endCondition: >-
+        <p>At the start of each of the targets' @L[Core:Turn]{turns}, they roll
+        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+      executionTime:
+        base: a1
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: int
+      form: normal
+      identifier: battle-cry-aura
+      interaction: feat
+      maneuver: active
+      mundane: false
+      overview:
+        base: <p>This ability cannot affect @L[Condition:Deaf]{deaf} creatures.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        raw: '10'
+        unit: ft
+      results:
+        fail: <p>Targets become @L[Condition:Frightened]{frightened}.</p>
+      skill: true
+      standard: true
+      targets:
+        - creature
+    transfer: true
+    type: ability
+  - _id: fu177LAGnHbt35BY
+    _key: '!items.effects!aa3ada62f9c9dc33.fu177LAGnHbt35BY'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.AyDa3orgfgOAAjM3
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
+    name: Battle Cry Resistance
+    system:
+      _sup: 4uKguVOa8fZuCBXp
+      automations:
+        8f623097f9f2a087:
+          _id: 8f623097f9f2a087
+          bonus: '0'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          hex: false
+          type: resist
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.protections.resistances.statuses
+              phase: normal
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              type: add
+              value: frightened
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+      class: berserker
+      competence:
+        raw: 0
+      costs: {}
+      delivery: self
+      duration:
+        unit: instant
+      effectTypes:
+        - resistance
+      endCondition: <p>You die or 1 minute passes without combat.</p>
+      executionTime:
+        base: a0
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: battle-cry-resistance
+      interaction: manifest
+      maneuver: active
+      mundane: false
+      overview:
+        base: >-
+          <p>You @L[Keyword:Resistance]{resist} being
+          @L[Condition:Frightened]{frightened}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
     type: ability
 folder: c2095fb63315614f
 img: systems/teriock/src/icons/creatures/blue-speed-drake.webp

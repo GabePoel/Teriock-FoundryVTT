@@ -1,127 +1,50 @@
 _id: 32f0310ea8b6f03c
-_key: '!items!32f0310ea8b6f03c'
+_key: '!effects!32f0310ea8b6f03c'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 32f0310ea8b6f03c
-    _key: '!items.effects!32f0310ea8b6f03c.32f0310ea8b6f03c'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/watchman.webp
-    name: Watchman
-    system:
-      class: archer
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '24'
-        unit: hour
-      executionTime: Short Rest
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: watchman
-      interaction: manifest
-      maneuver: slow
-      overview:
-        base: >-
-          <p>You may spend a @L[Core:Short Rest]{short rest} setting up a watch
-          on an area. You and your allies that are in this area during the
-          @L[Core:Short Rest]{short rest} or when @L[Core:Combat]{combat} begins
-          may each spend 1 @L[Core:MP]{MP} to gain @L[Ability:Cat Sense]{Cat
-          Sense}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      requirements: <p>You remain in the targeted area.</p>
-      skill: true
-      standard: true
-      targets:
-        - area
-    type: ability
-  - _id: i37I3oMZkOL6gmUP
-    _key: '!items.effects!32f0310ea8b6f03c.i37I3oMZkOL6gmUP'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.fda17c958a217559
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/abilities/cat-sense.webp
-    name: Cat Sense
-    system:
-      _sup: 32f0310ea8b6f03c
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.senses.ethereal
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: Infinity
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - sensory
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: cat-sense
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You can see @L[Condition:Ethereal]{Ethereal} creatures and have
-          @L[Core:Advantage]{advantage} on checks made with
-          @L[Ability:Perceive]{Perceive}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - spiritual
-      range:
-        unit: self
-      targets:
-        - self
-      upgrades:
-        score:
-          attribute: per
-          value: 2
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/watchman.webp
 name: Watchman
-type: wrapper
+system:
+  class: archer
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '24'
+    unit: hour
+  executionTime:
+    base: Short Rest
+    slow:
+      unit: shortRest
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: watchman
+  interaction: manifest
+  maneuver: slow
+  mundane: false
+  overview:
+    base: >-
+      <p>You may spend a @L[Core:Short Rest]{short rest} setting up a watch on
+      an area. You and your allies that are in this area during the
+      @L[Core:Short Rest]{short rest} or when @L[Core:Combat]{combat} begins may
+      each spend 1 @L[Core:MP]{MP} to gain @L[Ability:Cat Sense]{Cat Sense}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  requirements: <p>You remain in the targeted area.</p>
+  skill: true
+  standard: true
+  targets:
+    - area
+transfer: true
+type: ability

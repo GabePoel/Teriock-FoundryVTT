@@ -1,65 +1,64 @@
 _id: c431236ddaf7ccb4
-_key: '!items!c431236ddaf7ccb4'
+_key: '!effects!c431236ddaf7ccb4'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: c431236ddaf7ccb4
-    _key: '!items.effects!c431236ddaf7ccb4.c431236ddaf7ccb4'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/instant-ethereal.webp
-    name: Instant Ethereal
-    system:
-      automations:
-        067cb526e2f9e98f:
-          _id: 067cb526e2f9e98f
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: include
-          status: ethereal
-          type: status
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '1'
-        unit: hour
-      elements:
-        - necromancy
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: instant-ethereal
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>You go @L[Condition:Ethereal]{Ethereal} or manifest back into the
-          Material Realm.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/instant-ethereal.webp
 name: Instant Ethereal
-type: wrapper
+system:
+  automations:
+    067cb526e2f9e98f:
+      _id: 067cb526e2f9e98f
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: include
+      status: ethereal
+      target: false
+      type: status
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '1'
+    unit: hour
+  elements:
+    - necromancy
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  identifier: instant-ethereal
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>You go @L[Condition:Ethereal]{Ethereal} or manifest back into the
+      Material Realm.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: self
+  targets:
+    - self
+transfer: true
+type: ability

@@ -1,85 +1,85 @@
-_id: b14089485b6e949c
-_key: '!items!b14089485b6e949c'
+_id: EORCpLPDSV6sGlHv
+_key: '!effects!EORCpLPDSV6sGlHv'
 _stats:
-  coreVersion: '13'
+  compendiumSource: Compendium.world.abilities-backup.ActiveEffect.EORCpLPDSV6sGlHv
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: b14089485b6e949c
-    _key: '!items.effects!b14089485b6e949c.b14089485b6e949c'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
-    name: Battle Cry Resistance
-    system:
-      automations:
-        8f623097f9f2a087:
-          _id: 8f623097f9f2a087
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: resist
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.protections.resistances.statuses
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: frightened
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: changes
-      class: berserker
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '5'
-        unit: minute
-      effectTypes:
-        - resistance
-      endCondition: <p>You die or 1 minute passes without combat.</p>
-      executionTime: a0
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: battle-cry-resistance
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>You @L[Keyword:Resistance]{resist} being
-          @L[Condition:Frightened]{frightened}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
 name: Battle Cry Resistance
-type: wrapper
+system:
+  automations:
+    8f623097f9f2a087:
+      _id: 8f623097f9f2a087
+      bonus: '0'
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 1
+        - 0
+      hex: false
+      type: resist
+    e789ed5e109ebd1a:
+      _id: e789ed5e109ebd1a
+      changes:
+        - key: system.protections.resistances.statuses
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: Actor
+          type: add
+          value: frightened
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: changes
+  class: berserker
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '5'
+    unit: minute
+  effectTypes:
+    - resistance
+  endCondition: <p>You die or 1 minute passes without combat.</p>
+  executionTime:
+    base: a0
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: battle-cry-resistance
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>You @L[Keyword:Resistance]{resist} being
+      @L[Condition:Frightened]{frightened}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  skill: true
+  standard: true
+  targets:
+    - self
+transfer: true
+type: ability

@@ -1,165 +1,71 @@
 _id: f17e1c273c579c38
-_key: '!items!f17e1c273c579c38'
+_key: '!effects!f17e1c273c579c38'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: f17e1c273c579c38
-    _key: '!items.effects!f17e1c273c579c38.f17e1c273c579c38'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/gamesman.webp
-    name: Gamesman
-    system:
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.tradecrafts.hunter.score
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '2'
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: changes
-      class: archer
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: gamesman
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You are an @L[Keyword:Expertise]{expert}
-          @L[Tradecraft:Hunter]{hunter}. In addition, you have
-          @L[Keyword:Adept]{adept} @L[Ability:Slay]{Slay} for one species of
-          your choice. You can change the species once per a @L[Core:Short
-          Rest]{short rest}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-    type: ability
-  - _id: fO1kGxGm89oQGvrV
-    _key: '!items.effects!f17e1c273c579c38.fO1kGxGm89oQGvrV'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.91b30624f59c08d8
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/abilities/slay.webp
-    name: Slay
-    system:
-      _sup: f17e1c273c579c38
-      automations:
-        1728b3a84ea27844:
-          _id: 1728b3a84ea27844
-          common:
-            - bag
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: common
-        29b275994cf9f5b1:
-          _id: 29b275994cf9f5b1
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: 5[lethal]
-          heighten:
-            - 1
-            - 0
-          impact: damage
-          merge: true
-          type: roll
-      class: assassin
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-        tweaks:
-          adept: 1
-      delivery: weapon
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - killing
-        - damaging
-      executionTime: r0
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: slay
-      interaction: manifest
-      limitation: >-
-        <p>Only usable against one species, as specified when you use <a
-        class="mw-selflink selflink">Gamesman</a>.</p>
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>Target takes an additional [[/damage 5[lethal]]]
-          @L[Core:Damage]{damage}. This also has all @L[Category:Damage
-          types]{damage types} of the triggering @L[Category:Attack
-          abilities]{attack}. If the triggering @L[Category:Attack
-          abilities]{attack} was a critical hit, this deals 10
-          @L[Core:Damage]{damage} instead.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: contact
-      skill: true
-      standard: true
-      targets:
-        - creature
-      trigger: >-
-        <p>You have just hit a creature with an @L[Category:Attack
-        abilities]{attack} that dealt them @L[Core:Damage]{damage} from it.</p>
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/gamesman.webp
 name: Gamesman
-type: wrapper
+system:
+  automations:
+    e789ed5e109ebd1a:
+      _id: e789ed5e109ebd1a
+      changes:
+        - key: system.tradecrafts.hunter.score
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: Actor
+          type: upgrade
+          value: '2'
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: changes
+  class: archer
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: unlimited
+  executionTime:
+    base: passive
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: gamesman
+  interaction: manifest
+  maneuver: passive
+  mundane: false
+  overview:
+    base: >-
+      <p>You are an @L[Keyword:Expertise]{expert} @L[Tradecraft:Hunter]{hunter}.
+      In addition, you have @L[Keyword:Adept]{adept} @L[Ability:Slay]{Slay} for
+      one species of your choice. You can change the species once per a
+      @L[Core:Short Rest]{short rest}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  skill: true
+  standard: true
+  targets:
+    - self
+transfer: true
+type: ability

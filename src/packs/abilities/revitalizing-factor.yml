@@ -1,69 +1,70 @@
 _id: a98d249d1f688c7e
-_key: '!items!a98d249d1f688c7e'
+_key: '!effects!a98d249d1f688c7e'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: a98d249d1f688c7e
-    _key: '!items.effects!a98d249d1f688c7e.a98d249d1f688c7e'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.5
-    img: systems/teriock/src/icons/abilities/revitalizing-factor.webp
-    name: Revitalizing Factor
-    system:
-      automations:
-        9bz4uD8seuEOCOeq:
-          _id: 9bz4uD8seuEOCOeq
-          conditions:
-            absent:
-              - down
-              - frozen
-          consumeStatDice: false
-          trigger: turnStart
-          type: revitalize
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        conditions:
-          absent:
-            - down
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - primal
-        - regeneration
-        - revitalization
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: revitalizing-factor
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>At the start of each of your @L[Core:Turns]{turns}, you 
-          @L[Core:Revitalizing]{revitalize} and regain that many @L[Core:Hit
-          Points and Mana Points]{MP}. This does <i>not</i> consume your
-          @L[Core:MP]{mana die}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - primal
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/revitalizing-factor.webp
 name: Revitalizing Factor
-type: wrapper
+system:
+  automations:
+    9bz4uD8seuEOCOeq:
+      _id: 9bz4uD8seuEOCOeq
+      competencies:
+        - 0
+        - 1
+        - 2
+      conditions:
+        absent:
+          - down
+          - frozen
+      consumeStatDice: false
+      forHarm: false
+      heighten:
+        - 0
+        - 1
+      trigger: turnStart
+      type: revitalize
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    conditions:
+      absent:
+        - down
+    raw: '0'
+    unit: unlimited
+  effectTypes:
+    - regeneration
+    - revitalization
+  executionTime:
+    base: passive
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: revitalizing-factor
+  interaction: manifest
+  maneuver: passive
+  mundane: false
+  overview:
+    base: >-
+      <p>At the start of each of your @L[Core:Turns]{turns}, you 
+      @L[Core:Revitalizing]{revitalize} and regain that many @L[Core:Hit Points
+      and Mana Points]{MP}. This does <i>not</i> consume your @L[Core:MP]{mana
+      die}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - primal
+  range:
+    unit: self
+  targets:
+    - self
+transfer: true
+type: ability

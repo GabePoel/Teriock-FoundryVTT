@@ -1,29 +1,55 @@
 _id: e1b75179bb3b775e
-_key: '!items!e1b75179bb3b775e'
+_key: '!effects!e1b75179bb3b775e'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: e1b75179bb3b775e
-    _key: '!items.effects!e1b75179bb3b775e.e1b75179bb3b775e'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.68
-    img: systems/teriock/src/icons/properties/withering.webp
-    name: Withering
-    system:
-      competence:
-        raw: 0
-      description: >-
-        <p>A <b>[[lookup name style=lc]]</b> item deals @L[Drain:Wither]{wither}
-        instead of @L[Core:Damage]{damage}.</p>
-      form: intrinsic
-      identifier: withering
-    type: property
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/properties/withering.webp
 name: Withering
-type: wrapper
+system:
+  automations:
+    KrYAcDzYur17YLq9:
+      _id: KrYAcDzYur17YLq9
+      changes:
+        - key: system.impacts
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: parent
+          type: add
+          value: wither
+        - key: system.impacts
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: parent
+          type: subtract
+          value: damage
+        - key: system.damage
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: parent
+          type: typeSet
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 0
+        - 1
+      type: changes
+  competence:
+    raw: 0
+  description: >-
+    <p>A <b>[[lookup name style=lc]]</b> item deals @L[Drain:Wither]{wither}
+    instead of @L[Core:Damage]{damage}.</p>
+  form: intrinsic
+  identifier: withering
+  mundane: false
+transfer: true
+type: property

@@ -1,104 +1,98 @@
 _id: b231c43502dd9d39
-_key: '!items!b231c43502dd9d39'
+_key: '!effects!b231c43502dd9d39'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: b231c43502dd9d39
-    _key: '!items.effects!b231c43502dd9d39.b231c43502dd9d39'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/death-ray.webp
-    name: Death Ray
-    system:
-      automations:
-        1728b3a84ea27844:
-          _id: 1728b3a84ea27844
-          common:
-            - bag
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: common
-        3b974a93d7736980:
-          _id: 3b974a93d7736980
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: 2d6
-          heighten:
-            - 1
-            - 0
-          merge: true
-          roll: kill
-          type: roll
-        71e51b18552837f1:
-          _id: 71e51b18552837f1
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: (@h)d6
-          heighten:
-            - 1
-          merge: true
-          roll: kill
-          type: roll
-      class: necromancer
-      competence:
-        raw: 0
-      delivery: missile
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - killing
-      elements:
-        - necromancy
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, roll an additional [[/kill
-        1d6]].</p>
-      identifier: death-ray
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 1
-      powerSources:
-        - magical
-      range:
-        raw: '60'
-        unit: ft
-      requirements: >-
-        <p>Target is neither @L[Condition:Dead]{dead} nor @L[Category:Undead
-        creatures]{undead}.</p>
-      results:
-        critHit: <p>Double the number of dice rolled.</p>
-        hit: >-
-          <p>Roll [[/kill 2d6]] if this is greater than or equal to the number
-          of @L[Core:HP]{HP} the target has, they @L[Condition:Dead]{die}. This
-          does not deal @L[Core:Damage]{damage}.</p>
-      spell: true
-      standard: true
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/death-ray.webp
 name: Death Ray
-type: wrapper
+system:
+  automations:
+    1728b3a84ea27844:
+      _id: 1728b3a84ea27844
+      common:
+        - bag
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 1
+        - 0
+      type: common
+    3b974a93d7736980:
+      _id: 3b974a93d7736980
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: 2d6
+      heighten:
+        - 1
+        - 0
+      impact: kill
+      merge: true
+      type: roll
+    71e51b18552837f1:
+      _id: 71e51b18552837f1
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: (@h)d6
+      heighten:
+        - 1
+      impact: kill
+      merge: true
+      type: roll
+  class: necromancer
+  competence:
+    raw: 0
+  delivery: missile
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - killing
+  elements:
+    - necromancy
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  heightened: >-
+    <p>For each additional @L[Core:MP]{MP} spent, roll an additional [[/kill
+    1d6]].</p>
+  identifier: death-ray
+  interaction: attack
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 1
+  powerSources:
+    - magical
+  range:
+    raw: '60'
+    unit: ft
+  requirements: >-
+    <p>Target is neither @L[Condition:Dead]{dead} nor @L[Category:Undead
+    creatures]{undead}.</p>
+  results:
+    critHit: <p>Double the number of dice rolled.</p>
+    hit: >-
+      <p>Roll [[/kill 2d6]] if this is greater than or equal to the number of
+      @L[Core:HP]{HP} the target has, they @L[Condition:Dead]{die}. This does
+      not deal @L[Core:Damage]{damage}.</p>
+  spell: true
+  standard: true
+  targets:
+    - creature
+transfer: true
+type: ability

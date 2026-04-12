@@ -1,44 +1,45 @@
 _id: a793413f078300e8
-_key: '!items!a793413f078300e8'
+_key: '!effects!a793413f078300e8'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: a793413f078300e8
-    _key: '!items.effects!a793413f078300e8.a793413f078300e8'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.68
-    img: systems/teriock/src/icons/properties/spell-turning.webp
-    name: Spell Turning
-    system:
-      automations:
-        parameterChanges:
-          _id: parameterChanges
-          changes:
-            - key: system.spellTurning
-              mode: 5
-              priority: 10
-              qualifier: '1'
-              target: parent
-              time: normal
-              value: 'true'
-          type: changes
-      competence:
-        raw: 0
-      description: >-
-        <p>A <b>[[lookup name style=lc]]</b> @L[Category:Equipment]{item} can be
-        used to @L[Core:Block Interaction]{block} non-warded @L[Keyword:UB]{UB}
-        @L[Category:Attack abilities]{attacks}. Any effects that would turn off
-        or cut through @L[Keyword:Resistance]{resistances} can turn off or cut
-        through this protection as well.</p>
-      form: normal
-      identifier: spell-turning
-    type: property
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/properties/spell-turning.webp
 name: Spell Turning
-type: wrapper
+system:
+  automations:
+    parameterChanges:
+      _id: parameterChanges
+      changes:
+        - key: system.spellTurning
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: parent
+          type: override
+          value: 'true'
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 0
+        - 1
+      type: changes
+  competence:
+    raw: 0
+  description: >-
+    <p>A <b>[[lookup name style=lc]]</b> @L[Category:Equipment]{item} can be
+    used to @L[Core:Block Interaction]{block} non-warded @L[Keyword:UB]{UB}
+    @L[Category:Attack abilities]{attacks}. Any effects that would turn off or
+    cut through @L[Keyword:Resistance]{resistances} can turn off or cut through
+    this protection as well.</p>
+  form: normal
+  identifier: spell-turning
+  mundane: false
+transfer: true
+type: property

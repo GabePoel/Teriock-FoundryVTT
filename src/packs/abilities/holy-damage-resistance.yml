@@ -1,81 +1,78 @@
 _id: 4df1f1aaaa0d729d
-_key: '!items!4df1f1aaaa0d729d'
+_key: '!effects!4df1f1aaaa0d729d'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 4df1f1aaaa0d729d
-    _key: '!items.effects!4df1f1aaaa0d729d.4df1f1aaaa0d729d'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/holy-damage-resistance.webp
-    name: Holy Damage Resistance
-    system:
-      automations:
-        8f623097f9f2a087:
-          _id: 8f623097f9f2a087
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: resist
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.protections.resistances.damageTypes
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: holy
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: changes
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - resistance
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: holy-damage-resistance
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You @L[Keyword:Resistance]{resist} @L[Damage:Holy]{holy
-          damage}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/holy-damage-resistance.webp
 name: Holy Damage Resistance
-type: wrapper
+system:
+  automations:
+    8f623097f9f2a087:
+      _id: 8f623097f9f2a087
+      bonus: '0'
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 1
+        - 0
+      hex: false
+      type: resist
+    e789ed5e109ebd1a:
+      _id: e789ed5e109ebd1a
+      changes:
+        - key: system.protections.resistances.damageTypes
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: Actor
+          type: add
+          value: holy
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: changes
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: unlimited
+  effectTypes:
+    - resistance
+  executionTime:
+    base: passive
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: holy-damage-resistance
+  interaction: manifest
+  maneuver: passive
+  mundane: false
+  overview:
+    base: <p>You @L[Keyword:Resistance]{resist} @L[Damage:Holy]{holy damage}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: self
+  targets:
+    - self
+transfer: true
+type: ability

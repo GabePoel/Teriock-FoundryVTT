@@ -1,74 +1,68 @@
 _id: e2bc1833beccf499
-_key: '!items!e2bc1833beccf499'
+_key: '!effects!e2bc1833beccf499'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: e2bc1833beccf499
-    _key: '!items.effects!e2bc1833beccf499.e2bc1833beccf499'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/black-drake-breath.webp
-    name: Black Drake Breath
-    system:
-      automations:
-        29b275994cf9f5b1:
-          _id: 29b275994cf9f5b1
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: 2d10[magic terror]
-          heighten:
-            - 1
-            - 0
-          merge: true
-          roll: damage
-          type: roll
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '2'
-            type: formula
-      delivery: cone
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - damaging
-      elements:
-        - necromancy
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: black-drake-breath
-      interaction: feat
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        raw: '15'
-        unit: ft
-      results:
-        fail: >-
-          <p>Target takes [[/damage 2d10[magic terror]]]
-          @L[Core:Damage]{damage}.</p>
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/black-drake-breath.webp
 name: Black Drake Breath
-type: wrapper
+system:
+  automations:
+    29b275994cf9f5b1:
+      _id: 29b275994cf9f5b1
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: 2d10[magic terror]
+      heighten:
+        - 1
+        - 0
+      impact: damage
+      merge: true
+      type: roll
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '2'
+        type: formula
+  delivery: cone
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - damaging
+  elements:
+    - necromancy
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  identifier: black-drake-breath
+  interaction: feat
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    raw: '15'
+    unit: ft
+  results:
+    fail: >-
+      <p>Target takes [[/damage 2d10[magic terror]]]
+      @L[Core:Damage]{damage}.</p>
+  targets:
+    - creature
+transfer: true
+type: ability

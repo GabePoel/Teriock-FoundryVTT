@@ -1,87 +1,89 @@
 _id: 3430e2a3463e15f9
-_key: '!items!3430e2a3463e15f9'
+_key: '!effects!3430e2a3463e15f9'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 3430e2a3463e15f9
-    _key: '!items.effects!3430e2a3463e15f9.3430e2a3463e15f9'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/leather-dragon-breath.webp
-    name: Leather Dragon Breath
-    system:
-      automations:
-        46d652e970305101:
-          _id: 46d652e970305101
-          angle: '@angle.dragon'
-          distance: 30 + 5 * @h
-          t: cone
-          type: template
-        800c70e6560525a8:
-          _id: 800c70e6560525a8
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: (2 * @h)d10[magic]
-          heighten:
-            - 1
-          merge: true
-          roll: damage
-          type: roll
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: cone
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 2d10[magic]]] @L[Core:Damage]{damage}. Additionally, the
-        @L[Core:Range]{range} of this increases by 5 feet.</p>
-      identifier: leather-dragon-breath
-      interaction: feat
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        raw: '30'
-        unit: ft
-      results:
-        fail: >-
-          <p>All non-@L[Property:Magic]{magic} @L[Category:Equipment]{items}
-          targeted and @L[Keyword:Bearing]{beared} by targets are
-          @L[Property:Shattered]{shattered}.</p>
-        save: >-
-          <p>Only the @L[Category:Equipment]{items} that are not being
-          @L[Keyword:Using]{used} are @L[Property:Shattered]{shattered}. Target
-          takes half as much @L[Core:Damage]{damage} from this as they would
-          otherwise. This is calculated after any @L[Keyword:Boosted]{boosts} or
-          @L[Keyword:Deboosted]{deboosts}.</p>
-      targets:
-        - creature
-        - item
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/leather-dragon-breath.webp
 name: Leather Dragon Breath
-type: wrapper
+system:
+  automations:
+    46d652e970305101:
+      _id: 46d652e970305101
+      angle: '@angle.dragon'
+      competencies:
+        - 0
+        - 1
+        - 2
+      distance: 30 + 5 * @h
+      heighten:
+        - 0
+        - 1
+      movable: false
+      t: cone
+      type: template
+    800c70e6560525a8:
+      _id: 800c70e6560525a8
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: (2 * @h)d10[magic]
+      heighten:
+        - 1
+      impact: damage
+      merge: true
+      type: roll
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: cone
+  duration:
+    raw: '0'
+    unit: instant
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  heightened: >-
+    <p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage
+    2d10[magic]]] @L[Core:Damage]{damage}. Additionally, the
+    @L[Core:Range]{range} of this increases by 5 feet.</p>
+  identifier: leather-dragon-breath
+  interaction: feat
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    raw: '30'
+    unit: ft
+  results:
+    fail: >-
+      <p>All non-@L[Property:Magic]{magic} @L[Category:Equipment]{items}
+      targeted and @L[Keyword:Bearing]{beared} by targets are
+      @L[Property:Shattered]{shattered}.</p>
+    save: >-
+      <p>Only the @L[Category:Equipment]{items} that are not being
+      @L[Keyword:Using]{used} are @L[Property:Shattered]{shattered}. Target
+      takes half as much @L[Core:Damage]{damage} from this as they would
+      otherwise. This is calculated after any @L[Keyword:Boosted]{boosts} or
+      @L[Keyword:Deboosted]{deboosts}.</p>
+  targets:
+    - creature
+    - item
+transfer: true
+type: ability

@@ -1,70 +1,73 @@
 _id: 2ec8c915bc58079a
-_key: '!items!2ec8c915bc58079a'
+_key: '!effects!2ec8c915bc58079a'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 2ec8c915bc58079a
-    _key: '!items.effects!2ec8c915bc58079a.2ec8c915bc58079a'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.5
-    img: systems/teriock/src/icons/abilities/improved-healing-factor.webp
-    name: Improved Healing Factor
-    system:
-      automations:
-        Suc9ayhHqRkmjAwZ:
-          _id: Suc9ayhHqRkmjAwZ
-          conditions:
-            absent:
-              - burned
-              - dead
-              - frozen
-          consumeStatDice: false
-          trigger: turnStart
-          type: heal
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        conditions:
-          absent:
-            - dead
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - healing
-        - regeneration
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: improved-healing-factor
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>At the start of each of your @L[Core:Turns]{turns}, you 
-          @L[Core:Healing]{heal} and regain that many @L[Core:Hit Points and
-          Mana Points]{HP}. This does <i>not</i> consume your @L[Core:HP]{hit
-          die}. If you take @L[Damage:Fire]{fire damage}, this effect doesn't
-          apply on your next @L[Core:Turns]{turn}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - primal
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/improved-healing-factor.webp
 name: Improved Healing Factor
-type: wrapper
+system:
+  automations:
+    Suc9ayhHqRkmjAwZ:
+      _id: Suc9ayhHqRkmjAwZ
+      competencies:
+        - 0
+        - 1
+        - 2
+      conditions:
+        absent:
+          - burned
+          - dead
+          - frozen
+      consumeStatDice: false
+      forHarm: false
+      heighten:
+        - 0
+        - 1
+      noStatDice: false
+      trigger: turnStart
+      type: heal
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    conditions:
+      absent:
+        - dead
+    raw: '0'
+    unit: unlimited
+  effectTypes:
+    - healing
+    - regeneration
+  executionTime:
+    base: passive
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  identifier: improved-healing-factor
+  interaction: manifest
+  maneuver: passive
+  mundane: false
+  overview:
+    base: >-
+      <p>At the start of each of your @L[Core:Turns]{turns}, you 
+      @L[Core:Healing]{heal} and regain that many @L[Core:Hit Points and Mana
+      Points]{HP}. This does <i>not</i> consume your @L[Core:HP]{hit die}. If
+      you take @L[Damage:Fire]{fire damage}, this effect doesn't apply on your
+      next @L[Core:Turns]{turn}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - primal
+  range:
+    unit: self
+  targets:
+    - self
+transfer: true
+type: ability

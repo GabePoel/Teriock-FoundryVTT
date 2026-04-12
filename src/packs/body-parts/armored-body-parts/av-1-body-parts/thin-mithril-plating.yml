@@ -1,42 +1,19 @@
 _id: 8352d5d3d83ae364
 _key: '!items!8352d5d3d83ae364'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.65
 effects:
-  - _id: 6pPVWKGIeoKngA9O
-    _key: '!items.effects!8352d5d3d83ae364.6pPVWKGIeoKngA9O'
-    _stats:
-      compendiumSource: Compendium.teriock.properties.Item.1b0ae28f7a0a0448
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.42
-    img: systems/teriock/src/icons/properties/durable.webp
-    name: Durable
-    system:
-      _sup: lbxMeuBybxv1FO1l
-      competence:
-        raw: 0
-      description: >-
-        <p>An item that is <b>[[lookup name style=lc]]</b> is
-        @L[Keyword:Resistance]{resistant} to becoming
-        @L[Property:Shattered]{shattered} and effects that would render it
-        @L[Property:Destroyed]{destroyed} cause it to be
-        @L[Property:Shattered]{shattered} instead.</p>
-      form: intrinsic
-      identifier: durable
-    type: property
   - _id: lbxMeuBybxv1FO1l
     _key: '!items.effects!8352d5d3d83ae364.lbxMeuBybxv1FO1l'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.c7e6ac1b9d2cc5ba
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.c7e6ac1b9d2cc5ba
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/properties/mithril.webp
     name: Mithril
     system:
@@ -45,18 +22,18 @@ effects:
           _id: parameterChanges
           changes:
             - key: system.weight.raw
-              mode: 1
+              phase: normal
               priority: 10
               qualifier: '1'
               target: parent
-              time: normal
+              type: multiply
               value: '0.5'
             - key: system.minStr.raw
-              mode: 2
+              phase: normal
               priority: 10
               qualifier: '1'
               target: parent
-              time: normal
+              type: add
               value: '-1'
           competencies:
             - 0
@@ -79,15 +56,16 @@ effects:
       form: intrinsic
       identifier: mithril
       material: true
+    transfer: true
     type: property
-  - _id: StSlzvdFIbE2YP3V
-    _key: '!items.effects!8352d5d3d83ae364.StSlzvdFIbE2YP3V'
+  - _id: uwuUNPH1NLL1r64g
+    _key: '!items.effects!8352d5d3d83ae364.uwuUNPH1NLL1r64g'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.752e9d67325b0faf
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.752e9d67325b0faf
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/properties/unbreachable.webp
     name: Unbreachable
     system:
@@ -97,11 +75,11 @@ effects:
           _id: parameterChanges
           changes:
             - key: system.av.bonus
-              mode: 4
+              phase: normal
               priority: 10
               qualifier: '@av'
               target: parent
-              time: normal
+              type: upgrade
               value: '1'
           competencies:
             - 0
@@ -122,6 +100,32 @@ effects:
       form: intrinsic
       identifier: unbreachable
       mundane: true
+    transfer: true
+    type: property
+  - _id: fUEczyyMTERUm4Sj
+    _key: '!items.effects!8352d5d3d83ae364.fUEczyyMTERUm4Sj'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.1b0ae28f7a0a0448
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/properties/durable.webp
+    name: Durable
+    system:
+      _sup: lbxMeuBybxv1FO1l
+      competence:
+        raw: 0
+      description: >-
+        <p>An item that is <b>[[lookup name style=lc]]</b> is
+        @L[Keyword:Resistance]{resistant} to becoming
+        @L[Property:Shattered]{shattered} and effects that would render it
+        @L[Property:Destroyed]{destroyed} cause it to be
+        @L[Property:Shattered]{shattered} instead.</p>
+      form: intrinsic
+      identifier: durable
+      mundane: false
+    transfer: true
     type: property
 folder: 936a335c5b23c2f1
 img: systems/teriock/src/icons/body-parts/thin-mithril-plating.webp

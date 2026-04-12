@@ -1,89 +1,83 @@
 _id: fe210e6f35d67501
-_key: '!items!fe210e6f35d67501'
+_key: '!effects!fe210e6f35d67501'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: fe210e6f35d67501
-    _key: '!items.effects!fe210e6f35d67501.fe210e6f35d67501'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/lightning-ray.webp
-    name: Lightning Ray
-    system:
-      automations:
-        29b275994cf9f5b1:
-          _id: 29b275994cf9f5b1
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: 1d6[magic]
-          heighten:
-            - 1
-            - 0
-          merge: true
-          roll: damage
-          type: roll
-        800c70e6560525a8:
-          _id: 800c70e6560525a8
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: (@h)d6[magic]
-          heighten:
-            - 1
-          merge: true
-          roll: damage
-          type: roll
-      class: stormMage
-      competence:
-        raw: 0
-      delivery: missile
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - damaging
-        - lightning
-      elements:
-        - storm
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d6[magic]]] @L[Core:Damage]{damage}.</p>
-      identifier: lightning-ray
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 1
-      powerSources:
-        - magical
-      range:
-        raw: '60'
-        unit: ft
-      results:
-        critHit: >-
-          <p>Double the @L[Core:Damage]{damage dice} dealt by this
-          @L[Category:Abilities]{ability}.</p>
-        hit: <p>Deal [[/damage 1d6[magic]]] @L[Core:Damage]{damage} to target.</p>
-      spell: true
-      standard: true
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/lightning-ray.webp
 name: Lightning Ray
-type: wrapper
+system:
+  automations:
+    29b275994cf9f5b1:
+      _id: 29b275994cf9f5b1
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: 1d6[magic]
+      heighten:
+        - 1
+        - 0
+      impact: damage
+      merge: true
+      type: roll
+    800c70e6560525a8:
+      _id: 800c70e6560525a8
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: (@h)d6[magic]
+      heighten:
+        - 1
+      impact: damage
+      merge: true
+      type: roll
+  class: stormMage
+  competence:
+    raw: 0
+  delivery: missile
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - damaging
+    - lightning
+  elements:
+    - storm
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  heightened: >-
+    <p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage
+    1d6[magic]]] @L[Core:Damage]{damage}.</p>
+  identifier: lightning-ray
+  interaction: attack
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 1
+  powerSources:
+    - magical
+  range:
+    raw: '60'
+    unit: ft
+  results:
+    critHit: >-
+      <p>Double the @L[Core:Damage]{damage dice} dealt by this
+      @L[Category:Abilities]{ability}.</p>
+    hit: <p>Deal [[/damage 1d6[magic]]] @L[Core:Damage]{damage} to target.</p>
+  spell: true
+  standard: true
+  targets:
+    - creature
+transfer: true
+type: ability

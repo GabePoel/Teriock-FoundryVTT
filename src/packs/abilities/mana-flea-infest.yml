@@ -1,75 +1,74 @@
 _id: 18371c254c379643
-_key: '!items!18371c254c379643'
+_key: '!effects!18371c254c379643'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 18371c254c379643
-    _key: '!items.effects!18371c254c379643.18371c254c379643'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/mana-flea-infest.webp
-    name: Mana Flea Infest
-    system:
-      automations:
-        32463e5ed7bb6967:
-          _id: 32463e5ed7bb6967
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: apply
-          status: paralyzed
-          type: status
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - draining
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: mana-flea-infest
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      results:
-        hit: >-
-          <p>You bury yourself into the body of the creature you're infesting.
-          On your own, this does nothing. But if many creatures are infested in
-          someone, they start taking negative consequences. For every 25
-          creatures [[lookup name]]ed into the target, they lose 1 @L[Core:Hit
-          Points and Mana Points]{mana die}. If they have no @L[Core:Hit Points
-          and Mana Points]{mana dice} remaining, they become
-          @L[Condition:Paralyzed]{paralyzed}. At that point, if 25 additional
-          infestations occur, the target is dealt enough @L[Drain:Mana]{mana
-          drain} to @L[Condition:Dead]{dead} kill them the next time they fall
-          @L[Condition:Unconscious]{unconscious}. While infested in someone, you
-          cannot be target by @L[Category:Attack abilities]{attacks}, but you
-          are @L[Condition:Paralyzed]{paralyzed}.</p>
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/mana-flea-infest.webp
 name: Mana Flea Infest
-type: wrapper
+system:
+  automations:
+    32463e5ed7bb6967:
+      _id: 32463e5ed7bb6967
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: apply
+      status: paralyzed
+      target: false
+      type: status
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: unlimited
+  effectTypes:
+    - draining
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: mana-flea-infest
+  interaction: attack
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  results:
+    hit: >-
+      <p>You bury yourself into the body of the creature you're infesting. On
+      your own, this does nothing. But if many creatures are infested in
+      someone, they start taking negative consequences. For every 25 creatures
+      [[lookup name]]ed into the target, they lose 1 @L[Core:Hit Points and Mana
+      Points]{mana die}. If they have no @L[Core:Hit Points and Mana
+      Points]{mana dice} remaining, they become
+      @L[Condition:Paralyzed]{paralyzed}. At that point, if 25 additional
+      infestations occur, the target is dealt enough @L[Drain:Mana]{mana drain}
+      to @L[Condition:Dead]{dead} kill them the next time they fall
+      @L[Condition:Unconscious]{unconscious}. While infested in someone, you
+      cannot be target by @L[Category:Attack abilities]{attacks}, but you are
+      @L[Condition:Paralyzed]{paralyzed}.</p>
+  targets:
+    - creature
+transfer: true
+type: ability

@@ -1,69 +1,75 @@
 _id: a2f63e82f90e7b12
-_key: '!items!a2f63e82f90e7b12'
+_key: '!effects!a2f63e82f90e7b12'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: a2f63e82f90e7b12
-    _key: '!items.effects!a2f63e82f90e7b12.a2f63e82f90e7b12'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/drop-prone.webp
-    name: Drop Prone
-    system:
-      automations:
-        8941220db1fa8721:
-          _id: 8941220db1fa8721
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: apply
-          status: prone
-          type: status
-        i0HV7tVtPfJRw0rm:
-          _id: i0HV7tVtPfJRw0rm
-          movementAction: crawl
-          type: changeMovement
-      basic: true
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - movement
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: intrinsic
-      identifier: drop-prone
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: <p>You fall @L[Condition:Prone]{prone}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      requirements: <p>You are not @L[Condition:Prone]{prone}.</p>
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/drop-prone.webp
 name: Drop Prone
-type: wrapper
+system:
+  automations:
+    8941220db1fa8721:
+      _id: 8941220db1fa8721
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: apply
+      status: prone
+      target: false
+      type: status
+    i0HV7tVtPfJRw0rm:
+      _id: i0HV7tVtPfJRw0rm
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 0
+        - 1
+      movementAction: crawl
+      type: changeMovement
+  basic: true
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - movement
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: intrinsic
+  identifier: drop-prone
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: <p>You fall @L[Condition:Prone]{prone}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  requirements: <p>You are not @L[Condition:Prone]{prone}.</p>
+  targets:
+    - self
+transfer: true
+type: ability

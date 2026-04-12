@@ -1,749 +1,128 @@
 _id: d0b84764493398aa
-_key: '!items!d0b84764493398aa'
+_key: '!effects!d0b84764493398aa'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: d0b84764493398aa
-    _key: '!items.effects!d0b84764493398aa.d0b84764493398aa'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/flame-rotators.webp
-    name: Flame Rotators
-    system:
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.magic.maxRotators.raw
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '@rank.mag - 1'
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: changes
-        f025905e157ac261:
-          _id: f025905e157ac261
-          changes:
-            - key: system.magic.maxRotators.raw
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: 2 * (@rank.mag - 1)
-          competencies:
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: changes
-        f7da3b5e1992a724:
-          _id: f7da3b5e1992a724
-          changes:
-            - key: system.magic.maxRotators.raw
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: 2 * (@rank.mag - 1) + @p
-          competencies:
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: changes
-      class: flameMage
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: flame-rotators
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>Having mastered the basic techniques in this field of magic, you
-          are able to cast more advanced @L[Category:Spells]{spells}. If you
-          create any @L[Core:Elder Sorcery]{Elder Sorcery}
-          @L[Category:Spells]{spells} of your own, they get added to this list.
-          However, just because you "know" how to cast these spells, doesn't
-          mean you are always prepared to. Although all @L[Category:Mage
-          classes]{mage classes} grant their own @L[Core:Elder Sorcery]{Elder
-          Sorcery} and @L[Category:Rotator spells]{rotator spells}, you may only
-          have a maximum of @L[Category:Mage classes]{MR} - 1 of these spells
-          rotated into your spell list at any given time across <i>all</i>
-          classes. @L[Category:Mage classes]{MR} refers to the number of
-          @L[Core:Leveling Up]{ranks} you have in @L[Category:Mage classes]{mage
-          classes}. During a @L[Core:Long Rest]{long rest}, you can "rotate"
-          which spells you have prepared. The @L[Category:Rotator
-          spells]{rotator spells} automatically available to you are
-          @L[Ability:Bellows]{Bellows}, @L[Ability:Control and Resist
-          Fire]{Control and Resist Fire}, @L[Ability:Crown of Flame]{Crown of
-          Flame}, @L[Ability:Melting Grasp]{Melting Grasp}, and
-          @L[Ability:Rupture Mark]{Rupture Mark}.</p>
-        fluent: >-
-          <p>You may instead prepare 2 × (MR - 1) + @L[Core:Proficiency
-          Bonus]{P} of these @L[Category:Spells]{spells}.</p>
-        proficient: >-
-          <p>You may instead prepare 2 × (MR - 1) of these
-          @L[Category:Spells]{spells}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      targets:
-        - self
-    type: ability
-  - _id: 1QbMxtzwRThtJgm8
-    _key: '!items.effects!d0b84764493398aa.1QbMxtzwRThtJgm8'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.4e33d0516a15a1af
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/abilities/bellows.webp
-    name: Bellows
-    system:
-      _sup: d0b84764493398aa
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.boosts.damage
-              mode: 2
-              priority: 10
-              qualifier: '@spell'
-              target: ability
-              time: normal
-              value: '1'
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-        e789ee5e109ebecd:
-          _id: e789ee5e109ebecd
-          changes:
-            - key: system.boosts.damage
-              mode: 2
-              priority: 10
-              qualifier: '@spell'
-              target: ability
-              time: normal
-              value: '@h'
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-          type: changes
-        hEOQSeJ8HpNRH1gY:
-          _id: hEOQSeJ8HpNRH1gY
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 0
-            - 1
-          macro: Compendium.teriock.execution.Macro.cd1820f5e1a2f6fd
-          trigger: executeSpell
-          type: abilityMacro
-      class: flameMage
-      competence:
-        raw: 0
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: self
-      duration:
-        raw: '1'
-        unit: minute
-      elements:
-        - flame
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the next
-        @L[Category:Spells]{spell} you cast is @L[Keyword:Boosted]{boosted}
-        again.</p>
-      identifier: bellows
-      interaction: manifest
-      invoked: true
-      maneuver: active
-      overview:
-        base: >-
-          <p>The next @L[Category:Spells]{spell} you cast that would deal
-          @L[Core:Damage]{damage} is @L[Keyword:Boosted]{boosted}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      rotator: true
-      spell: true
-      standard: true
-      sustained: true
-      targets:
-        - self
-    type: ability
-  - _id: 2WkstCMZkBBJDAJA
-    _key: '!items.effects!d0b84764493398aa.2WkstCMZkBBJDAJA'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.1794713e6e1eaa6d
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/abilities/control-and-resist-fire.webp
-    name: Control and Resist Fire
-    system:
-      _sup: d0b84764493398aa
-      automations:
-        29b275994cf9f5b1:
-          _id: 29b275994cf9f5b1
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: 1d4[fire magic]
-          heighten:
-            - 1
-            - 0
-          impact: damage
-          merge: true
-          type: roll
-        8f623097f9f2a087:
-          _id: 8f623097f9f2a087
-          bonus: '0'
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          hex: false
-          type: resist
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.damage
-              mode: 2
-              priority: 30
-              qualifier: '@dmg'
-              target: armament
-              time: normal
-              value: 1d4[fire magic]
-            - key: system.protections.resistances.damageTypes
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: fire
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-      class: flameMage
-      competence:
-        raw: 0
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: self
-      duration:
-        raw: '1'
-        unit: hour
-      effectTypes:
-        - resistance
-      elements:
-        - flame
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: control-and-resist-fire
-      interaction: manifest
-      invoked: true
-      maneuver: active
-      overview:
-        base: >-
-          <p>Your @L[Core:Standard and Critical Damage]{standard damage}
-          increases by [[/damage 1d4[fire magic]]] @L[Core:Damage]{damage}. You
-          also @L[Keyword:Resistance]{resist} @L[Damage:Fire]{fire damage}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      rotator: true
-      spell: true
-      standard: true
-      sustained: true
-      targets:
-        - self
-    type: ability
-  - _id: xM229v7K5qeUVqTK
-    _key: '!items.effects!d0b84764493398aa.xM229v7K5qeUVqTK'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.5b0849eece36c49e
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/abilities/crown-of-flame.webp
-    name: Crown of Flame
-    system:
-      _sup: d0b84764493398aa
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.light.dim
-              mode: 4
-              priority: 3
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '0.01'
-            - key: system.light.color
-              mode: 5
-              priority: 3
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '#E01B24'
-            - key: system.light.animation.type
-              mode: 5
-              priority: 3
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: sunburst
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-      class: flameMage
-      competence:
-        raw: 0
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: self
-      duration:
-        raw: '8'
-        unit: hour
-      elements:
-        - flame
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: crown-of-flame
-      interaction: manifest
-      invoked: true
-      maneuver: active
-      overview:
-        base: >-
-          <p>A small circle of smokeless fire circles above your head. You gain
-          @L[Ability:Burning Touch]{Burning Touch} and @L[Ability:Inferno
-          Aura]{Inferno Aura}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      rotator: true
-      spell: true
-      standard: true
-      sustained: true
-      targets:
-        - self
-    type: ability
-  - _id: 5mq2yWHo9SivIxO9
-    _key: '!items.effects!d0b84764493398aa.5mq2yWHo9SivIxO9'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.d75976fc51986c97
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/abilities/burning-touch.webp
-    name: Burning Touch
-    system:
-      _sup: xM229v7K5qeUVqTK
-      automations:
-        29b275994cf9f5b1:
-          _id: 29b275994cf9f5b1
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: 1d6[fire magic]
-          heighten:
-            - 1
-            - 0
-          impact: damage
-          merge: true
-          type: roll
-        800c70e6560525a8:
-          _id: 800c70e6560525a8
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: (@h)d6[magic fire]
-          heighten:
-            - 1
-          impact: damage
-          merge: true
-          type: roll
-      class: flameMage
-      competence:
-        raw: 0
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-      delivery: hand
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - damaging
-      elements:
-        - flame
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage}.</p>
-      identifier: burning-touch
-      interaction: attack
-      invoked: true
-      maneuver: active
-      piercing:
-        raw: 2
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      results:
-        critHit: >-
-          <p>Double the @L[Core:Damage]{damage dice} dealt by this
-          @L[Category:Abilities]{ability}.</p>
-        hit: >-
-          <p>Deal [[/damage 1d6[fire magic]]] @L[Core:Damage]{damage} to
-          target.</p>
-      spell: true
-      standard: true
-      targets:
-        - creature
-    type: ability
-  - _id: paI0l1vtL2yFd7LA
-    _key: '!items.effects!d0b84764493398aa.paI0l1vtL2yFd7LA'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.ba299f89c12a9887
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/abilities/inferno-aura.webp
-    name: Inferno Aura
-    system:
-      _sup: xM229v7K5qeUVqTK
-      automations:
-        29b275994cf9f5b1:
-          _id: 29b275994cf9f5b1
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: 1d6[magic fire]
-          heighten:
-            - 1
-            - 0
-          impact: damage
-          merge: true
-          type: roll
-        800c70e6560525a8:
-          _id: 800c70e6560525a8
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: (@h)d6[magic fire]
-          heighten:
-            - 1
-          impact: damage
-          merge: true
-          type: roll
-      class: flameMage
-      competence:
-        raw: 0
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: aura
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - damaging
-      elements:
-        - flame
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage}.</p>
-      identifier: inferno-aura
-      interaction: feat
-      invoked: true
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        raw: '10'
-        unit: ft
-      results:
-        fail: >-
-          <p>Deal [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage} to
-          target.</p>
-      spell: true
-      standard: true
-      targets:
-        - creature
-    type: ability
-  - _id: vcwFoiTAvTJYDaAy
-    _key: '!items.effects!d0b84764493398aa.vcwFoiTAvTJYDaAy'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.6078c188ebffa71a
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/melting-grasp.webp
-    name: Melting Grasp
-    system:
-      _sup: d0b84764493398aa
-      class: flameMage
-      competence:
-        raw: 0
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: hand
-      duration:
-        raw: '0'
-        unit: instant
-      elements:
-        - flame
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: melting-grasp
-      interaction: attack
-      invoked: true
-      maneuver: active
-      piercing:
-        raw: 1
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      results:
-        hit: <p>Item is @L[Property:Shattered]{shattered}.</p>
-      rotator: true
-      spell: true
-      standard: true
-      targets:
-        - item
-    type: ability
-  - _id: 7rCKfysWgfkAxS8b
-    _key: '!items.effects!d0b84764493398aa.7rCKfysWgfkAxS8b'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.811ab950e960cf8f
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/rupture-mark.webp
-    name: Rupture Mark
-    system:
-      _sup: d0b84764493398aa
-      class: flameMage
-      competence:
-        raw: 0
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: hand
-      duration:
-        raw: '1'
-        unit: minute
-      elements:
-        - flame
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: rupture-mark
-      interaction: attack
-      invoked: true
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      results:
-        hit: >-
-          <p>Target's next @L[Category:Conjured spells]{conjured spell} does not
-          trigger @L[Category:Reaction abilities]{reactions}.</p>
-      rotator: true
-      spell: true
-      standard: true
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/flame-rotators.webp
 name: Flame Rotators
-type: wrapper
+system:
+  automations:
+    e789ed5e109ebd1a:
+      _id: e789ed5e109ebd1a
+      changes:
+        - key: system.magic.maxRotators.raw
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: Actor
+          type: upgrade
+          value: '@rank.mag - 1'
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: changes
+    f025905e157ac261:
+      _id: f025905e157ac261
+      changes:
+        - key: system.magic.maxRotators.raw
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: Actor
+          type: upgrade
+          value: 2 * (@rank.mag - 1)
+      competencies:
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: changes
+    f7da3b5e1992a724:
+      _id: f7da3b5e1992a724
+      changes:
+        - key: system.magic.maxRotators.raw
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: Actor
+          type: upgrade
+          value: 2 * (@rank.mag - 1) + @p
+      competencies:
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: changes
+  class: flameMage
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: unlimited
+  executionTime:
+    base: passive
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: flame-rotators
+  interaction: manifest
+  maneuver: passive
+  mundane: false
+  overview:
+    base: >-
+      <p>Having mastered the basic techniques in this field of magic, you are
+      able to cast more advanced @L[Category:Spells]{spells}. If you create any
+      @L[Core:Elder Sorcery]{Elder Sorcery} @L[Category:Spells]{spells} of your
+      own, they get added to this list. However, just because you "know" how to
+      cast these spells, doesn't mean you are always prepared to. Although all
+      @L[Category:Mage classes]{mage classes} grant their own @L[Core:Elder
+      Sorcery]{Elder Sorcery} and @L[Category:Rotator spells]{rotator spells},
+      you may only have a maximum of @L[Category:Mage classes]{MR} - 1 of these
+      spells rotated into your spell list at any given time across <i>all</i>
+      classes. @L[Category:Mage classes]{MR} refers to the number of
+      @L[Core:Leveling Up]{ranks} you have in @L[Category:Mage classes]{mage
+      classes}. During a @L[Core:Long Rest]{long rest}, you can "rotate" which
+      spells you have prepared. The @L[Category:Rotator spells]{rotator spells}
+      automatically available to you are @L[Ability:Bellows]{Bellows},
+      @L[Ability:Control and Resist Fire]{Control and Resist Fire},
+      @L[Ability:Crown of Flame]{Crown of Flame}, @L[Ability:Melting
+      Grasp]{Melting Grasp}, and @L[Ability:Rupture Mark]{Rupture Mark}.</p>
+    fluent: >-
+      <p>You may instead prepare 2 × (MR - 1) + @L[Core:Proficiency Bonus]{P} of
+      these @L[Category:Spells]{spells}.</p>
+    proficient: >-
+      <p>You may instead prepare 2 × (MR - 1) of these
+      @L[Category:Spells]{spells}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  skill: true
+  targets:
+    - self
+transfer: true
+type: ability

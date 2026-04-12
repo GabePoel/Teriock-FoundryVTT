@@ -1,0 +1,125 @@
+_id: 3KYBHa7iIM4XBDIM
+_key: '!effects!3KYBHa7iIM4XBDIM'
+_stats:
+  compendiumSource: Compendium.teriock.abilities.ActiveEffect.1QbMxtzwRThtJgm8
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.12.0
+img: systems/teriock/src/icons/abilities/bellows.webp
+name: Bellows
+system:
+  _sup: d0b84764493398aa
+  automations:
+    e789ed5e109ebd1a:
+      _id: e789ed5e109ebd1a
+      changes:
+        - key: system.boosts.damage
+          phase: normal
+          priority: 10
+          qualifier: '@spell'
+          target: ability
+          type: add
+          value: '1'
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: changes
+    e789ee5e109ebecd:
+      _id: e789ee5e109ebecd
+      changes:
+        - key: system.boosts.damage
+          phase: normal
+          priority: 10
+          qualifier: '@spell'
+          target: ability
+          type: add
+          value: '@h'
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+      type: changes
+    hEOQSeJ8HpNRH1gY:
+      _id: hEOQSeJ8HpNRH1gY
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 0
+        - 1
+      macro: Compendium.teriock.execution.Macro.cd1820f5e1a2f6fd
+      trigger: executeSpell
+      type: abilityMacro
+  class: flameMage
+  competence:
+    raw: 0
+  costs:
+    components:
+      somatic:
+        type: tag
+      verbal:
+        type: tag
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: self
+  duration:
+    raw: '1'
+    unit: minute
+  elements:
+    - flame
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  heightened: >-
+    <p>For each additional @L[Core:MP]{MP} spent, the next
+    @L[Category:Spells]{spell} you cast is @L[Keyword:Boosted]{boosted}
+    again.</p>
+  identifier: bellows
+  interaction: manifest
+  invoked: true
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>The next @L[Category:Spells]{spell} you cast that would deal
+      @L[Core:Damage]{damage} is @L[Keyword:Boosted]{boosted}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: self
+  rotator: true
+  spell: true
+  standard: true
+  sustained: true
+  targets:
+    - self
+transfer: true
+type: ability

@@ -1,77 +1,75 @@
 _id: f67ff91c514d9752
-_key: '!items!f67ff91c514d9752'
+_key: '!effects!f67ff91c514d9752'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: f67ff91c514d9752
-    _key: '!items.effects!f67ff91c514d9752.f67ff91c514d9752'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/allure.webp
-    name: Allure
-    system:
-      automations:
-        8527e8c75eedfc1a:
-          _id: 8527e8c75eedfc1a
-          competencies:
-            - 0
-            - 1
-            - 2
-          executor: true
-          heighten:
-            - 1
-            - 0
-          relation: include
-          status: allured
-          type: status
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '2'
-            type: formula
-      delivery: sight
-      duration:
-        raw: '1'
-        unit: hour
-      effectTypes:
-        - mental
-        - control
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: unp
-      form: special
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the range of [[lookup
-        name]] increases by 5 feet.</p>
-      identifier: allure
-      interaction: feat
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        raw: '5'
-        unit: ft
-      requirements: >-
-        <p>A creature may only have up to @L[Core:Presence]{PRES} creatures
-        @L[Condition:Allured]{allured} at a time.</p>
-      results:
-        fail: <p>Target is @L[Condition:Allured]{allured} to you.</p>
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/allure.webp
 name: Allure
-type: wrapper
+system:
+  automations:
+    8527e8c75eedfc1a:
+      _id: 8527e8c75eedfc1a
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: true
+      heighten:
+        - 1
+        - 0
+      relation: include
+      status: allured
+      target: false
+      type: status
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '2'
+        type: formula
+  delivery: sight
+  duration:
+    raw: '1'
+    unit: hour
+  effectTypes:
+    - mental
+    - control
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: unp
+  form: special
+  heightened: >-
+    <p>For each additional @L[Core:MP]{MP} spent, the range of [[lookup name]]
+    increases by 5 feet.</p>
+  identifier: allure
+  interaction: feat
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    raw: '5'
+    unit: ft
+  requirements: >-
+    <p>A creature may only have up to @L[Core:Presence]{PRES} creatures
+    @L[Condition:Allured]{allured} at a time.</p>
+  results:
+    fail: <p>Target is @L[Condition:Allured]{allured} to you.</p>
+  targets:
+    - creature
+transfer: true
+type: ability

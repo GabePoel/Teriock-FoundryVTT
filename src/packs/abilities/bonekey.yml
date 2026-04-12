@@ -1,65 +1,60 @@
 _id: 6dae66925b35b776
-_key: '!items!6dae66925b35b776'
+_key: '!effects!6dae66925b35b776'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 6dae66925b35b776
-    _key: '!items.effects!6dae66925b35b776.6dae66925b35b776'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/bonekey.webp
-    name: Bonekey
-    system:
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '4'
-            type: formula
-      delivery: aura
-      duration:
-        raw: '8'
-        unit: hour
-      elderSorcery: true
-      elements:
-        - necromancy
-      executionTime: 10 Minutes
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: bonekey
-      interaction: manifest
-      maneuver: slow
-      overview:
-        base: >-
-          <p>You create a spherical bubble that remains centered on you. Bodies
-          within it cannot become @L[Condition:Ruined]{ruined}, creatures cannot
-          start @L[Condition:Wisping]{wisping} against their will, and
-          @L[Creature:Wisp]{wisps} @L[Keyword:Deboosted]{deboost}
-          @L[Core:Damage]{damage} and @L[Category:Drain types]{drain} within 60
-          feet even if they're @L[Condition:Ethereal]{Ethereal}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        raw: '60'
-        unit: ft
-      spell: true
-      sustained: true
-      targets:
-        - other
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/bonekey.webp
 name: Bonekey
-type: wrapper
+system:
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '4'
+        type: formula
+  delivery: aura
+  duration:
+    raw: '8'
+    unit: hour
+  elderSorcery: true
+  elements:
+    - necromancy
+  executionTime:
+    base: 10 Minutes
+    slow:
+      raw: '10'
+      unit: minute
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  identifier: bonekey
+  interaction: manifest
+  maneuver: slow
+  mundane: false
+  overview:
+    base: >-
+      <p>You create a spherical bubble that remains centered on you. Bodies
+      within it cannot become @L[Condition:Ruined]{ruined}, creatures cannot
+      start @L[Condition:Wisping]{wisping} against their will, and
+      @L[Creature:Wisp]{wisps} @L[Keyword:Deboosted]{deboost}
+      @L[Core:Damage]{damage} and @L[Category:Drain types]{drain} within 60 feet
+      even if they're @L[Condition:Ethereal]{Ethereal}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    raw: '60'
+    unit: ft
+  spell: true
+  sustained: true
+  targets:
+    - other
+transfer: true
+type: ability

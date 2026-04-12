@@ -2,7 +2,7 @@ _id: B5jNDij8cTBQ0mkR
 _key: '!items!B5jNDij8cTBQ0mkR'
 _stats:
   compendiumSource: Compendium.teriock.classes.Item.bedec58b28a6c43a
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.23
@@ -10,11 +10,11 @@ effects:
   - _id: QEczhwfNaJmkOSOw
     _key: '!items.effects!B5jNDij8cTBQ0mkR.QEczhwfNaJmkOSOw'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.4f65a97250628523
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.4f65a97250628523
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: combat
@@ -61,69 +61,16 @@ effects:
       standard: true
       targets:
         - self
-    type: ability
-  - _id: UCXDnOIkZGTvDLNX
-    _key: '!items.effects!B5jNDij8cTBQ0mkR.UCXDnOIkZGTvDLNX'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.f4dfb6440689d45e
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/bombastic-casting.webp
-    name: Bombastic Casting
-    system:
-      _sup: ZmjFFlMRQIBtml1N
-      class: flameMage
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: self
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - loud
-      executionTime: r0
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: bombastic-casting
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>The triggering @L[Category:Spells]{spell} becomes extremely visible
-          and loud. Visually the @L[Category:Spells]{spell} extends 10 feet in
-          all directions from a line between the caster and each of its targets.
-          The spell can be heard up to 600 feet away.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - spell
-      trigger: <p>You are casting a @L[Category:Spells]{spell}.</p>
+    transfer: true
     type: ability
   - _id: ZmjFFlMRQIBtml1N
     _key: '!items.effects!B5jNDij8cTBQ0mkR.ZmjFFlMRQIBtml1N'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.e866e9dd3b3358f7
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.e866e9dd3b3358f7
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: support
@@ -179,15 +126,16 @@ effects:
         competence:
           attribute: int
           value: 1
+    transfer: true
     type: ability
-  - _id: l7jDMypW1zTIhmA3
-    _key: '!items.effects!B5jNDij8cTBQ0mkR.l7jDMypW1zTIhmA3'
+  - _id: LgxBlVwqw4oOZDIz
+    _key: '!items.effects!B5jNDij8cTBQ0mkR.LgxBlVwqw4oOZDIz'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.ab321f874c30c33b
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.4iSvMXAxC3yvpRQ5
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/sudden-casting.webp
     name: Sudden Casting
     system:
@@ -206,7 +154,10 @@ effects:
         unit: instant
       effectTypes:
         - sensory
-      executionTime: r1
+      executionTime:
+        base: r1
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -216,6 +167,7 @@ effects:
       identifier: sudden-casting
       interaction: manifest
       maneuver: reactive
+      mundane: false
       overview:
         base: >-
           <p>You cast a @L[Category:Single action spells]{single action spell}
@@ -237,6 +189,66 @@ effects:
         <p>Another creatures would move out of sight or out of range of a
         @L[Category:Single action spells]{single action spell} you could
         cast.</p>
+    transfer: true
+    type: ability
+  - _id: 4PK3U9ckmtchC8sG
+    _key: '!items.effects!B5jNDij8cTBQ0mkR.4PK3U9ckmtchC8sG'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.D4zf8b3n9RnHOVWd
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/bombastic-casting.webp
+    name: Bombastic Casting
+    system:
+      _sup: ZmjFFlMRQIBtml1N
+      class: flameMage
+      competence:
+        raw: 0
+      costs:
+        primary:
+          mp:
+            formula: '1'
+            type: formula
+      delivery: self
+      duration:
+        raw: '0'
+        unit: instant
+      effectTypes:
+        - loud
+      executionTime:
+        base: r0
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: bombastic-casting
+      interaction: manifest
+      maneuver: reactive
+      mundane: false
+      overview:
+        base: >-
+          <p>The triggering @L[Category:Spells]{spell} becomes extremely visible
+          and loud. Visually the @L[Category:Spells]{spell} extends 10 feet in
+          all directions from a line between the caster and each of its targets.
+          The spell can be heard up to 600 feet away.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - spell
+      trigger: <p>You are casting a @L[Category:Spells]{spell}.</p>
+    transfer: true
     type: ability
 folder: da5b8437ae291af1
 img: systems/teriock/src/icons/ranks/rank-4-flame-mage.webp

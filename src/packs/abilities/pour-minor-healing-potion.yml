@@ -1,63 +1,66 @@
 _id: 61579e937dc3a703
-_key: '!items!61579e937dc3a703'
+_key: '!effects!61579e937dc3a703'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 61579e937dc3a703
-    _key: '!items.effects!61579e937dc3a703.61579e937dc3a703'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/pour-minor-healing-potion.webp
-    name: Pour Minor Healing Potion
-    system:
-      automations:
-        OsM3AW76R67PriLM:
-          _id: OsM3AW76R67PriLM
-          consumeStatDice: false
-          type: heal
-      competence:
-        raw: 0
-      consumeSource: true
-      delivery: item
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - healing
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: pour-minor-healing-potion
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>The target @L[Core:Healing]{heals} without consuming @L[Core:Hit
-          Points and Mana Points]{hit dice}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - alchemical
-      range:
-        unit: contact
-      requirements: >-
-        <p>Use [[lookup name]] by interacting with the
-        @L[Category:Equipment]{equipment} that provides it. That counts as the
-        @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
-        the ability.</p>
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/pour-minor-healing-potion.webp
 name: Pour Minor Healing Potion
-type: wrapper
+system:
+  automations:
+    OsM3AW76R67PriLM:
+      _id: OsM3AW76R67PriLM
+      competencies:
+        - 0
+        - 1
+        - 2
+      consumeStatDice: false
+      forHarm: false
+      heighten:
+        - 0
+        - 1
+      noStatDice: false
+      type: heal
+  competence:
+    raw: 0
+  consumeSource: true
+  delivery: item
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - healing
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: pour-minor-healing-potion
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>The target @L[Core:Healing]{heals} without consuming @L[Core:Hit Points
+      and Mana Points]{hit dice}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - alchemical
+  range:
+    unit: contact
+  requirements: >-
+    <p>Use [[lookup name]] by interacting with the
+    @L[Category:Equipment]{equipment} that provides it. That counts as the
+    @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for the
+    ability.</p>
+  targets:
+    - self
+transfer: true
+type: ability

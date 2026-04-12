@@ -1,82 +1,81 @@
 _id: 9b1a53c3c7610467
-_key: '!items!9b1a53c3c7610467'
+_key: '!effects!9b1a53c3c7610467'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 9b1a53c3c7610467
-    _key: '!items.effects!9b1a53c3c7610467.9b1a53c3c7610467'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/wave-crash.webp
-    name: Wave Crash
-    system:
-      automations:
-        29b275994cf9f5b1:
-          _id: 29b275994cf9f5b1
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: 1d8
-          heighten:
-            - 1
-            - 0
-          merge: true
-          roll: damage
-          type: roll
-        8941220db1fa8721:
-          _id: 8941220db1fa8721
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: apply
-          status: prone
-          type: status
-      competence:
-        raw: 0
-      delivery: missile
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - damaging
-        - loud
-        - knockout
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: wave-crash
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 2
-      powerSources:
-        - magical
-        - primal
-      range:
-        raw: '30'
-        unit: ft
-      results:
-        hit: >-
-          <p>Deal [[/damage 1d8]] @L[Core:Damage]{damage} to target. They are
-          knocked @L[Condition:Prone]{prone}.</p>
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/wave-crash.webp
 name: Wave Crash
-type: wrapper
+system:
+  automations:
+    29b275994cf9f5b1:
+      _id: 29b275994cf9f5b1
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: 1d8
+      heighten:
+        - 1
+        - 0
+      impact: damage
+      merge: true
+      type: roll
+    8941220db1fa8721:
+      _id: 8941220db1fa8721
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: apply
+      status: prone
+      target: false
+      type: status
+  competence:
+    raw: 0
+  delivery: missile
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - damaging
+    - loud
+    - knockout
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: wave-crash
+  interaction: attack
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 2
+  powerSources:
+    - magical
+    - primal
+  range:
+    raw: '30'
+    unit: ft
+  results:
+    hit: >-
+      <p>Deal [[/damage 1d8]] @L[Core:Damage]{damage} to target. They are
+      knocked @L[Condition:Prone]{prone}.</p>
+  targets:
+    - creature
+transfer: true
+type: ability

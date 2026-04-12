@@ -1,236 +1,73 @@
 _id: 4a062a304b141fc0
-_key: '!items!4a062a304b141fc0'
+_key: '!effects!4a062a304b141fc0'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 4a062a304b141fc0
-    _key: '!items.effects!4a062a304b141fc0.4a062a304b141fc0'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/hunting-party.webp
-    name: Hunting Party
-    system:
-      automations:
-        9b7d937fb93aaace:
-          _id: 9b7d937fb93aaace
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          macro: Compendium.teriock.execution.Macro.UqkWyQDB563ezNf8
-          trigger: preExecute
-          type: abilityMacro
-      class: ranger
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '8'
-        unit: hour
-      executionTime: Short Rest
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: hunting-party
-      interaction: manifest
-      maneuver: slow
-      overview:
-        base: >-
-          <p>Pick 1 species you're familiar with. Your allies have
-          @L[Keyword:Gifted]{Gifted} @L[Ability:Snare]{Snare} against creatures
-          of that species. You also have @L[Keyword:Limited]{Limited}
-          @L[Ability:Flanking]{Flanking} against creatures of that species.</p>
-        fluent: >-
-          <p>You may instead pick up to @L[Core:Fluency Bonus]{F} species you're
-          familiar with.</p>
-        proficient: >-
-          <p>You may instead pick up to @L[Core:Proficiency Bonus]{P} species
-          you're familiar with.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      requirements: <p>You are not @L[Core:Sustained]{sustaining} [[lookup name]].</p>
-      skill: true
-      standard: true
-      sustained: true
-      targets:
-        - other
-    type: ability
-  - _id: o2X5X7JCbgNccKfI
-    _key: '!items.effects!4a062a304b141fc0.o2X5X7JCbgNccKfI'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.795b20cad643ecbb
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/flanking.webp
-    name: Flanking
-    system:
-      _sup: 4a062a304b141fc0
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: flanking
-      interaction: manifest
-      limitation: >-
-        <p>You only get the benefits of [[lookup name]] against creatures of the
-        chosen species.</p>
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You have @L[Core:Advantage]{advantage} on @L[Core:Attack
-          Interaction]{attack rolls} against creatures that are within 5 feet of
-          an ally of yours that isn't incapacitated and that you can see.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
-  - _id: NovXBW2RZRbE4oPg
-    _key: '!items.effects!4a062a304b141fc0.NovXBW2RZRbE4oPg'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.6f1e35c05a5589d6
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/abilities/snare.webp
-    name: Snare
-    system:
-      _sup: 4a062a304b141fc0
-      automations:
-        5d57231066693cee:
-          _id: 5d57231066693cee
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          executor: false
-          heighten:
-            - 1
-            - 0
-          relation: include
-          status: snared
-          target: false
-          type: status
-        d5717000e99ee582:
-          _id: d5717000e99ee582
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: combatExpiration
-          what:
-            roll: 2d4kh1
-            threshold: 4
-            type: rolled
-          when:
-            skip: 1
-            time: end
-            trigger: turn
-          who:
-            type: target
-        d635eb44dba086dd:
-          _id: d635eb44dba086dd
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-          heighten:
-            - 1
-            - 0
-          type: combatExpiration
-          what:
-            roll: 2d4kh1
-            threshold: 4
-            type: rolled
-          when:
-            skip: 0
-            time: end
-            trigger: turn
-          who:
-            type: target
-      class: ranger
-      competence:
-        raw: 0
-      costs:
-        tweaks:
-          gifted: 1
-      delivery: weapon
-      duration:
-        raw: '0'
-        unit: unlimited
-      endCondition: >-
-        <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime:
-        base: a1
-        slow:
-          unit: second
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: snare
-      interaction: attack
-      limitation: <p>You can only use [[lookup name]] against the chosen species.</p>
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: contact
-      results:
-        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
-        hit: <p>Target is @L[Condition:Snared]{snared}.</p>
-      skill: true
-      standard: true
-      targets:
-        - leg
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/hunting-party.webp
 name: Hunting Party
-type: wrapper
+system:
+  automations:
+    9b7d937fb93aaace:
+      _id: 9b7d937fb93aaace
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      macro: Compendium.teriock.execution.Macro.UqkWyQDB563ezNf8
+      trigger: preExecute
+      type: abilityMacro
+  class: ranger
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '8'
+    unit: hour
+  executionTime:
+    base: Short Rest
+    slow:
+      unit: shortRest
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: hunting-party
+  interaction: manifest
+  maneuver: slow
+  mundane: false
+  overview:
+    base: >-
+      <p>Pick 1 species you're familiar with. Your allies have
+      @L[Keyword:Gifted]{Gifted} @L[Ability:Snare]{Snare} against creatures of
+      that species. You also have @L[Keyword:Limited]{Limited}
+      @L[Ability:Flanking]{Flanking} against creatures of that species.</p>
+    fluent: >-
+      <p>You may instead pick up to @L[Core:Fluency Bonus]{F} species you're
+      familiar with.</p>
+    proficient: >-
+      <p>You may instead pick up to @L[Core:Proficiency Bonus]{P} species you're
+      familiar with.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  requirements: <p>You are not @L[Core:Sustained]{sustaining} [[lookup name]].</p>
+  skill: true
+  standard: true
+  sustained: true
+  targets:
+    - other
+transfer: true
+type: ability

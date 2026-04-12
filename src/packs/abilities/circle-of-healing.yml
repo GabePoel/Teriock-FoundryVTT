@@ -1,83 +1,93 @@
 _id: 6a8a47ffaed9e67c
-_key: '!items!6a8a47ffaed9e67c'
+_key: '!effects!6a8a47ffaed9e67c'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 6a8a47ffaed9e67c
-    _key: '!items.effects!6a8a47ffaed9e67c.6a8a47ffaed9e67c'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/circle-of-healing.webp
-    name: Circle of Healing
-    system:
-      automations:
-        72ce567009179bea:
-          _id: 72ce567009179bea
-          competencies:
-            - 0
-            - 1
-            - 2
-          duration:
-            raw: '@h * 86400'
-          heighten:
-            - 1
-          type: duration
-        UFyGuFVBP9a4cKMY:
-          _id: UFyGuFVBP9a4cKMY
-          type: heal
-      class: paladin
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: hand
-      duration:
-        raw: '8'
-        unit: hour
-      effectTypes:
-        - healing
-      elements:
-        - life
-      executionTime: 10 Minutes
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 24 hours.</p>
-      identifier: circle-of-healing
-      interaction: manifest
-      maneuver: slow
-      overview:
-        base: >-
-          <p>You enchant an area no larger than 30 feet in any direction. Any
-          creature within this area @L[Core:Healing]{heals} at the start of each
-          of their @L[Core:Turns]{turns}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      ritual: true
-      rotator: true
-      spell: true
-      standard: true
-      targets:
-        - area
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/circle-of-healing.webp
 name: Circle of Healing
-type: wrapper
+system:
+  automations:
+    72ce567009179bea:
+      _id: 72ce567009179bea
+      changeType: add
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      duration:
+        raw: '@h * 86400'
+        unit: second
+      heighten:
+        - 1
+      type: duration
+    UFyGuFVBP9a4cKMY:
+      _id: UFyGuFVBP9a4cKMY
+      competencies:
+        - 0
+        - 1
+        - 2
+      consumeStatDice: true
+      forHarm: false
+      heighten:
+        - 0
+        - 1
+      noStatDice: false
+      type: heal
+  class: paladin
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: hand
+  duration:
+    raw: '8'
+    unit: hour
+  effectTypes:
+    - healing
+  elements:
+    - life
+  executionTime:
+    base: 10 Minutes
+    slow:
+      raw: '10'
+      unit: minute
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  heightened: >-
+    <p>For each additional @L[Core:MP]{MP} spent, the duration of this effect
+    increases by 24 hours.</p>
+  identifier: circle-of-healing
+  interaction: manifest
+  maneuver: slow
+  mundane: false
+  overview:
+    base: >-
+      <p>You enchant an area no larger than 30 feet in any direction. Any
+      creature within this area @L[Core:Healing]{heals} at the start of each of
+      their @L[Core:Turns]{turns}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: contact
+  ritual: true
+  rotator: true
+  spell: true
+  standard: true
+  targets:
+    - area
+transfer: true
+type: ability

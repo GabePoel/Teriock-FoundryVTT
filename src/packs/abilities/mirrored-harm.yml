@@ -1,58 +1,52 @@
 _id: bb7fd053ef3aa933
-_key: '!items!bb7fd053ef3aa933'
+_key: '!effects!bb7fd053ef3aa933'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: bb7fd053ef3aa933
-    _key: '!items.effects!bb7fd053ef3aa933.bb7fd053ef3aa933'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/mirrored-harm.webp
-    name: Mirrored Harm
-    system:
-      competence:
-        raw: 0
-      costs:
-        primary:
-          hp:
-            formula: 1d12
-            type: formula
-      delivery: weapon
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - automatic
-      elements:
-        - life
-      executionTime: r0
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: flaw
-      identifier: mirrored-harm
-      interaction: manifest
-      maneuver: reactive
-      piercing:
-        raw: 0
-      powerSources:
-        - divine
-      range:
-        unit: contact
-      targets:
-        - creature
-      trigger: >-
-        <p>You @L[Condition:Down]{drop} another creature. This triggers
-        automatically. You cannot choose to not use it if you are able to.</p>
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/mirrored-harm.webp
 name: Mirrored Harm
-type: wrapper
+system:
+  competence:
+    raw: 0
+  costs:
+    primary:
+      hp:
+        formula: 1d12
+        type: formula
+  delivery: weapon
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - automatic
+  elements:
+    - life
+  executionTime:
+    base: r0
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: flaw
+  identifier: mirrored-harm
+  interaction: manifest
+  maneuver: reactive
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - divine
+  range:
+    unit: contact
+  targets:
+    - creature
+  trigger: >-
+    <p>You @L[Condition:Down]{drop} another creature. This triggers
+    automatically. You cannot choose to not use it if you are able to.</p>
+transfer: true
+type: ability

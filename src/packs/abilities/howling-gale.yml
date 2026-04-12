@@ -1,64 +1,58 @@
 _id: d925d61a1bd38260
-_key: '!items!d925d61a1bd38260'
+_key: '!effects!d925d61a1bd38260'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: d925d61a1bd38260
-    _key: '!items.effects!d925d61a1bd38260.d925d61a1bd38260'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/howling-gale.webp
-    name: Howling Gale
-    system:
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: aura
-      duration:
-        raw: '0'
-        triggers:
-          - movement
-        unit: unlimited
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: str
-      form: normal
-      identifier: howling-gale
-      interaction: feat
-      maneuver: active
-      overview:
-        base: >-
-          <p>Targets make their @L[Core:Feat Interaction]{feat save} for
-          [[lookup name]] when it is first executed, when they first enter its
-          range, and every @L[Core:Turns]{turn} they start within its range.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        raw: '10'
-        unit: ft
-      results:
-        fail: >-
-          <p>Target is moved away from you until they are out of range of
-          [[lookup name]].</p>
-      sustained: true
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/howling-gale.webp
 name: Howling Gale
-type: wrapper
+system:
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: aura
+  duration:
+    raw: '0'
+    triggers:
+      - movement
+    unit: unlimited
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: str
+  form: normal
+  identifier: howling-gale
+  interaction: feat
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>Targets make their @L[Core:Feat Interaction]{feat save} for [[lookup
+      name]] when it is first executed, when they first enter its range, and
+      every @L[Core:Turns]{turn} they start within its range.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    raw: '10'
+    unit: ft
+  results:
+    fail: >-
+      <p>Target is moved away from you until they are out of range of [[lookup
+      name]].</p>
+  sustained: true
+  targets:
+    - creature
+transfer: true
+type: ability

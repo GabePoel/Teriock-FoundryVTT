@@ -1,0 +1,113 @@
+_id: EpRvRfd3739PhOP3
+_key: '!effects!EpRvRfd3739PhOP3'
+_stats:
+  compendiumSource: Compendium.teriock.abilities.ActiveEffect.1a046cd851f312b9
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.12.0
+img: systems/teriock/src/icons/abilities/poison-strike.webp
+name: Poison Strike
+system:
+  _sup: 9db3f09e7a942624
+  automations:
+    29b275994cf9f5b1:
+      _id: 29b275994cf9f5b1
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: 1d6[toxic]
+      heighten:
+        - 1
+        - 0
+      impact: damage
+      merge: true
+      type: roll
+    3f7fa7707643426f:
+      _id: 3f7fa7707643426f
+      competencies:
+        - 2
+      formula: 1d10[toxic]
+      heighten:
+        - 1
+        - 0
+      impact: damage
+      merge: true
+      type: roll
+    5e4d195ed81a10cc:
+      _id: 5e4d195ed81a10cc
+      competencies:
+        - 1
+        - 2
+      formula: 1d8[toxic]
+      heighten:
+        - 1
+        - 0
+      impact: damage
+      merge: true
+      type: roll
+    743730f25f256b10:
+      _id: 743730f25f256b10
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: include
+      status: poisoned
+      target: false
+      type: status
+  class: assassin
+  competence:
+    raw: 0
+  delivery: weapon
+  duration:
+    raw: '24'
+    unit: hour
+  effectTypes:
+    - poison
+  endCondition: <p>Target @L[Condition:Dead]{dies}.</p>
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: poison-strike
+  interaction: attack
+  maneuver: active
+  mundane: false
+  overview:
+    fluent: >-
+      <p>The @L[Condition:Poisoned]{poison} instead deals [[/damage
+      1d10[toxic]]] @L[Core:Damage]{damage}.</p>
+    proficient: >-
+      <p>The @L[Condition:Poisoned]{poison} instead deals [[/damage 1d8[toxic]]]
+      @L[Core:Damage]{damage}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - alchemical
+  range:
+    unit: contact
+  results:
+    hit: >-
+      <p>Target is @L[Condition:Poisoned]{poisoned}. The
+      @L[Condition:Poisoned]{poison} deals [[/damage 1d6[toxic]]]
+      @L[Core:Damage]{damage}.</p>
+  skill: true
+  targets:
+    - creature
+transfer: true
+type: ability

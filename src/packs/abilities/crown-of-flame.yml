@@ -1,278 +1,99 @@
 _id: 5b0849eece36c49e
-_key: '!items!5b0849eece36c49e'
+_key: '!effects!5b0849eece36c49e'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 5b0849eece36c49e
-    _key: '!items.effects!5b0849eece36c49e.5b0849eece36c49e'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/crown-of-flame.webp
-    name: Crown of Flame
-    system:
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.light.dim
-              mode: 4
-              priority: 3
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '0.01'
-            - key: system.light.color
-              mode: 5
-              priority: 3
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '#E01B24'
-            - key: system.light.animation.type
-              mode: 5
-              priority: 3
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: sunburst
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: changes
-      class: flameMage
-      competence:
-        raw: 0
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: self
-      duration:
-        raw: '8'
-        unit: hour
-      elements:
-        - flame
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: crown-of-flame
-      interaction: manifest
-      invoked: true
-      maneuver: active
-      overview:
-        base: >-
-          <p>A small circle of smokeless fire circles above your head. You gain
-          @L[Ability:Burning Touch]{Burning Touch} and @L[Ability:Inferno
-          Aura]{Inferno Aura}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      rotator: true
-      spell: true
-      standard: true
-      sustained: true
-      targets:
-        - self
-    type: ability
-  - _id: gzWnxJ7aFXIhf45z
-    _key: '!items.effects!5b0849eece36c49e.gzWnxJ7aFXIhf45z'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.d75976fc51986c97
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/abilities/burning-touch.webp
-    name: Burning Touch
-    system:
-      _sup: 5b0849eece36c49e
-      automations:
-        29b275994cf9f5b1:
-          _id: 29b275994cf9f5b1
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: 1d6[fire magic]
-          heighten:
-            - 1
-            - 0
-          impact: damage
-          merge: true
-          type: roll
-        800c70e6560525a8:
-          _id: 800c70e6560525a8
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: (@h)d6[magic fire]
-          heighten:
-            - 1
-          impact: damage
-          merge: true
-          type: roll
-      class: flameMage
-      competence:
-        raw: 0
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-      delivery: hand
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - damaging
-      elements:
-        - flame
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage}.</p>
-      identifier: burning-touch
-      interaction: attack
-      invoked: true
-      maneuver: active
-      piercing:
-        raw: 2
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      results:
-        critHit: >-
-          <p>Double the @L[Core:Damage]{damage dice} dealt by this
-          @L[Category:Abilities]{ability}.</p>
-        hit: >-
-          <p>Deal [[/damage 1d6[fire magic]]] @L[Core:Damage]{damage} to
-          target.</p>
-      spell: true
-      standard: true
-      targets:
-        - creature
-    type: ability
-  - _id: TjGzX2qZGteBzniJ
-    _key: '!items.effects!5b0849eece36c49e.TjGzX2qZGteBzniJ'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.ba299f89c12a9887
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/abilities/inferno-aura.webp
-    name: Inferno Aura
-    system:
-      _sup: 5b0849eece36c49e
-      automations:
-        29b275994cf9f5b1:
-          _id: 29b275994cf9f5b1
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: 1d6[magic fire]
-          heighten:
-            - 1
-            - 0
-          impact: damage
-          merge: true
-          type: roll
-        800c70e6560525a8:
-          _id: 800c70e6560525a8
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: (@h)d6[magic fire]
-          heighten:
-            - 1
-          impact: damage
-          merge: true
-          type: roll
-      class: flameMage
-      competence:
-        raw: 0
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: aura
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - damaging
-      elements:
-        - flame
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage}.</p>
-      identifier: inferno-aura
-      interaction: feat
-      invoked: true
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        raw: '10'
-        unit: ft
-      results:
-        fail: >-
-          <p>Deal [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage} to
-          target.</p>
-      spell: true
-      standard: true
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/crown-of-flame.webp
 name: Crown of Flame
-type: wrapper
+system:
+  automations:
+    e789ed5e109ebd1a:
+      _id: e789ed5e109ebd1a
+      changes:
+        - key: token.light.dim
+          phase: normal
+          priority: 3
+          qualifier: '1'
+          target: Actor
+          type: upgrade
+          value: '0.01'
+        - key: token.light.color
+          phase: normal
+          priority: 3
+          qualifier: '1'
+          target: Actor
+          type: override
+          value: '#E01B24'
+        - key: token.light.animation.type
+          phase: normal
+          priority: 3
+          qualifier: '1'
+          target: Actor
+          type: override
+          value: sunburst
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: changes
+  class: flameMage
+  competence:
+    raw: 0
+  costs:
+    components:
+      somatic:
+        type: tag
+      verbal:
+        type: tag
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: self
+  duration:
+    raw: '8'
+    unit: hour
+  elements:
+    - flame
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  identifier: crown-of-flame
+  interaction: manifest
+  invoked: true
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>A small circle of smokeless fire circles above your head. You gain
+      @L[Ability:Burning Touch]{Burning Touch} and @L[Ability:Inferno
+      Aura]{Inferno Aura}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: self
+  rotator: true
+  spell: true
+  standard: true
+  sustained: true
+  targets:
+    - self
+transfer: true
+type: ability

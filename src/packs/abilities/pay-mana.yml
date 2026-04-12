@@ -1,58 +1,52 @@
 _id: a41c839412dab38c
-_key: '!items!a41c839412dab38c'
+_key: '!effects!a41c839412dab38c'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: a41c839412dab38c
-    _key: '!items.effects!a41c839412dab38c.a41c839412dab38c'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/pay-mana.webp
-    name: Pay Mana
-    system:
-      basic: true
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            description: <p>An amount of @L[Core:MP]{MP} of your choosing.</p>
-            type: description
-      delivery: hand
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: intrinsic
-      identifier: pay-mana
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>The @L[Core:MP]{MP} is spent into the target. Any effects are
-          determined by the @L[Core:GM]{GM}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - spiritual
-      range:
-        unit: contact
-      targets:
-        - area
-        - creature
-        - item
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/pay-mana.webp
 name: Pay Mana
-type: wrapper
+system:
+  basic: true
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        description: <p>An amount of @L[Core:MP]{MP} of your choosing.</p>
+        type: description
+  delivery: hand
+  duration:
+    raw: '0'
+    unit: instant
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: intrinsic
+  identifier: pay-mana
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>The @L[Core:MP]{MP} is spent into the target. Any effects are
+      determined by the @L[Core:GM]{GM}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - spiritual
+  range:
+    unit: contact
+  targets:
+    - area
+    - creature
+    - item
+transfer: true
+type: ability

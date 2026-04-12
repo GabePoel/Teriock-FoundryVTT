@@ -1,76 +1,79 @@
 _id: 3ddde616d16291fa
-_key: '!items!3ddde616d16291fa'
+_key: '!effects!3ddde616d16291fa'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 3ddde616d16291fa
-    _key: '!items.effects!3ddde616d16291fa.3ddde616d16291fa'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/advanced-hack-healing.webp
-    name: Advanced Hack Healing
-    system:
-      automations:
-        GIaNK1awGEA4VBA6:
-          _id: GIaNK1awGEA4VBA6
-          noStatDice: true
-          type: heal
-      class: natureMage
-      competence:
-        raw: 0
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: self
-      duration:
-        raw: '8'
-        unit: hour
-      effectTypes:
-        - healing
-        - regeneration
-      elements:
-        - nature
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: advanced-hack-healing
-      interaction: manifest
-      invoked: true
-      maneuver: active
-      overview:
-        base: >-
-          <p>Whenever you @L[Core:Healing]{heal}, you may @L[Core:Healing]{heal}
-          a @L[Damage:Hack]{hack} as well.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-        - primal
-      range:
-        unit: self
-      rotator: true
-      spell: true
-      standard: true
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/advanced-hack-healing.webp
 name: Advanced Hack Healing
-type: wrapper
+system:
+  automations:
+    GIaNK1awGEA4VBA6:
+      _id: GIaNK1awGEA4VBA6
+      competencies:
+        - 0
+        - 1
+        - 2
+      consumeStatDice: true
+      forHarm: false
+      heighten:
+        - 0
+        - 1
+      noStatDice: true
+      type: heal
+  class: natureMage
+  competence:
+    raw: 0
+  costs:
+    components:
+      somatic:
+        type: tag
+      verbal:
+        type: tag
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: self
+  duration:
+    raw: '8'
+    unit: hour
+  effectTypes:
+    - healing
+    - regeneration
+  elements:
+    - nature
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  identifier: advanced-hack-healing
+  interaction: manifest
+  invoked: true
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>Whenever you @L[Core:Healing]{heal}, you may @L[Core:Healing]{heal} a
+      @L[Damage:Hack]{hack} as well.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+    - primal
+  range:
+    unit: self
+  rotator: true
+  spell: true
+  standard: true
+  targets:
+    - self
+transfer: true
+type: ability

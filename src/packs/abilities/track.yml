@@ -1,144 +1,76 @@
 _id: 9e85800d3700e31c
-_key: '!items!9e85800d3700e31c'
+_key: '!effects!9e85800d3700e31c'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 9e85800d3700e31c
-    _key: '!items.effects!9e85800d3700e31c.9e85800d3700e31c'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/track.webp
-    name: Track
-    system:
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.tradecrafts.tracker.score
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '2'
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: changes
-      class: ranger
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - sensory
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: track
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You are an @L[Keyword:Expertise]{expert}
-          @L[Tradecraft:Tracker]{tracker}. In addition, you gain
-          @L[Ability:Agile]{Agile} outside towns and other urban areas.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-      upgrades:
-        score:
-          attribute: per
-          value: 1
-    type: ability
-  - _id: uW90HSNXZR2H2O1x
-    _key: '!items.effects!9e85800d3700e31c.uW90HSNXZR2H2O1x'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.b8d50a2611bb6b4b
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/abilities/agile.webp
-    name: Agile
-    system:
-      _sup: 9e85800d3700e31c
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.speedAdjustments.difficultTerrain
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '3'
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - movement
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: agile
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You walk through difficult terrain at @L[Core:Movement
-          Speed]{normal speed}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/track.webp
 name: Track
-type: wrapper
+system:
+  automations:
+    e789ed5e109ebd1a:
+      _id: e789ed5e109ebd1a
+      changes:
+        - key: system.tradecrafts.tracker.score
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: Actor
+          type: upgrade
+          value: '2'
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: changes
+  class: ranger
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: unlimited
+  effectTypes:
+    - sensory
+  executionTime:
+    base: passive
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: track
+  interaction: manifest
+  maneuver: passive
+  mundane: false
+  overview:
+    base: >-
+      <p>You are an @L[Keyword:Expertise]{expert}
+      @L[Tradecraft:Tracker]{tracker}. In addition, you gain
+      @L[Ability:Agile]{Agile} outside towns and other urban areas.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  skill: true
+  standard: true
+  targets:
+    - self
+  upgrades:
+    score:
+      attribute: per
+      value: 1
+transfer: true
+type: ability

@@ -1,132 +1,149 @@
 _id: 47728b72f6c25e3b
-_key: '!items!47728b72f6c25e3b'
+_key: '!effects!47728b72f6c25e3b'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 47728b72f6c25e3b
-    _key: '!items.effects!47728b72f6c25e3b.47728b72f6c25e3b'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.74
-    img: systems/teriock/src/icons/abilities/duel.webp
-    name: Duel
-    system:
-      automations:
-        52f4d0b87363b1c1:
-          _id: 52f4d0b87363b1c1
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: apply
-          status: dueling
-          type: status
-        6f7374b1f63be8d9:
-          _id: 6f7374b1f63be8d9
-          competencies:
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: useAbilities
-        747b3e9c9b617af6:
-          _id: 747b3e9c9b617af6
-          competencies:
-            - 0
-            - 1
-            - 2
-          executor: true
-          heighten:
-            - 1
-            - 0
-          relation: include
-          status: lighted
-          type: status
-        d635eb44dba086dd:
-          _id: d635eb44dba086dd
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: combatExpiration
-          what:
-            roll: 2d4kh1
-            threshold: 4
-            type: forced
-          when:
-            skip: 0
-            time: end
-            trigger: turn
-          who:
-            type: executor
-        sGyei1adB2IsKjZP:
-          _id: sGyei1adB2IsKjZP
-          data: '{ "name": "Lighted Duel Effect" }'
-          overrideData: true
-          title: Apply Lighted
-          type: modifyEffect
-      class: duelist
-      competence:
-        raw: 0
-      delivery: sight
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: duel
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>You challenge the target to advance and fight you. They may
-          immediately @L[Ability:Move]{Move} towards you as a @L[Core:Reactive
-          Maneuvers]{free reaction} to this and begin
-          @L[Condition:Dueling]{dueling} with you. If they choose not to or are
-          unable to do so, then they are considered to have "forfeited" the
-          [[lookup name style=lc]] (but are not considered to have "lost" it)
-          and become @L[Condition:Lighted]{lighted} to you until the end of your
-          next @L[Core:Turns]{turn}.</p>
-        proficient: >-
-          <p>You may also @L[Ability:Move]{Move} or make a @L[Category:Single
-          action abilities]{single action} @L[Category:Duelist class
-          abilities]{Duelist ability} as a @L[Core:Reactive Maneuvers]{free
-          reaction} to the target's decision and subsequent movement.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - spiritual
-      range:
-        raw: '30'
-        unit: ft
-      requirements: >-
-        <p>You are not @L[Condition:Dueling]{dueling} and can only use this on
-        an opponent.</p>
-      skill: true
-      standard: true
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/duel.webp
 name: Duel
-type: wrapper
+system:
+  automations:
+    52f4d0b87363b1c1:
+      _id: 52f4d0b87363b1c1
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: apply
+      status: dueling
+      target: false
+      type: status
+    6f7374b1f63be8d9:
+      _id: 6f7374b1f63be8d9
+      competencies:
+        - 1
+        - 2
+      heighten:
+        - 1
+        - 0
+      type: useAbilities
+    747b3e9c9b617af6:
+      _id: 747b3e9c9b617af6
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: true
+      heighten:
+        - 1
+        - 0
+      relation: include
+      status: lighted
+      target: false
+      type: status
+    d635eb44dba086dd:
+      _id: d635eb44dba086dd
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: combatExpiration
+      what:
+        roll: 2d4kh1
+        threshold: 4
+        type: forced
+      when:
+        skip: 0
+        time: end
+        trigger: turn
+      who:
+        type: executor
+    sGyei1adB2IsKjZP:
+      _id: sGyei1adB2IsKjZP
+      competence:
+        raw: 0
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      data: '{ "name": "Lighted Duel Effect" }'
+      display:
+        label: Apply Lighted
+      heighten:
+        - 0
+        - 1
+      overrideCompetence: false
+      overrideData: true
+      prevent: false
+      type: modifyEffect
+  class: duelist
+  competence:
+    raw: 0
+  delivery: sight
+  duration:
+    raw: '0'
+    unit: unlimited
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: duel
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>You challenge the target to advance and fight you. They may immediately
+      @L[Ability:Move]{Move} towards you as a @L[Core:Reactive Maneuvers]{free
+      reaction} to this and begin @L[Condition:Dueling]{dueling} with you. If
+      they choose not to or are unable to do so, then they are considered to
+      have "forfeited" the [[lookup name style=lc]] (but are not considered to
+      have "lost" it) and become @L[Condition:Lighted]{lighted} to you until the
+      end of your next @L[Core:Turns]{turn}.</p>
+    proficient: >-
+      <p>You may also @L[Ability:Move]{Move} or make a @L[Category:Single action
+      abilities]{single action} @L[Category:Duelist class abilities]{Duelist
+      ability} as a @L[Core:Reactive Maneuvers]{free reaction} to the target's
+      decision and subsequent movement.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - spiritual
+  range:
+    raw: '30'
+    unit: ft
+  requirements: >-
+    <p>You are not @L[Condition:Dueling]{dueling} and can only use this on an
+    opponent.</p>
+  skill: true
+  standard: true
+  targets:
+    - creature
+transfer: true
+type: ability

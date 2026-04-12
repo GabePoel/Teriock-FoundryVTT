@@ -1,65 +1,64 @@
 _id: 7395e721b52f256e
-_key: '!items!7395e721b52f256e'
+_key: '!effects!7395e721b52f256e'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 7395e721b52f256e
-    _key: '!items.effects!7395e721b52f256e.7395e721b52f256e'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/reactive-hide.webp
-    name: Reactive Hide
-    system:
-      automations:
-        0b0d1426453abb55:
-          _id: 0b0d1426453abb55
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: apply
-          status: hidden
-          type: status
-      class: assassin
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: r0
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: reactive-hide
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: <p>You become @L[Condition:Hidden]{hidden}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-      trigger: <p>You @L[Condition:Down]{drop} another creature.</p>
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/reactive-hide.webp
 name: Reactive Hide
-type: wrapper
+system:
+  automations:
+    0b0d1426453abb55:
+      _id: 0b0d1426453abb55
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: apply
+      status: hidden
+      target: false
+      type: status
+  class: assassin
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: instant
+  executionTime:
+    base: r0
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: reactive-hide
+  interaction: manifest
+  maneuver: reactive
+  mundane: false
+  overview:
+    base: <p>You become @L[Condition:Hidden]{hidden}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  skill: true
+  standard: true
+  targets:
+    - self
+  trigger: <p>You @L[Condition:Down]{drop} another creature.</p>
+transfer: true
+type: ability

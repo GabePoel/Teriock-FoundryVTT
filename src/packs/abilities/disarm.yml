@@ -1,99 +1,47 @@
 _id: 63b8c75f371412f7
-_key: '!items!63b8c75f371412f7'
+_key: '!effects!63b8c75f371412f7'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 63b8c75f371412f7
-    _key: '!items.effects!63b8c75f371412f7.63b8c75f371412f7'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/disarm.webp
-    name: Disarm
-    system:
-      class: thief
-      competence:
-        raw: 0
-      delivery: weapon
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: disarm
-      interaction: attack
-      maneuver: active
-      overview:
-        base: >-
-          <p>Anything held in the targeted arm is knocked out of their hand.
-          This triggers @L[Ability:Catch Item]{Catch Item}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: contact
-      skill: true
-      standard: true
-      targets:
-        - arm
-    type: ability
-  - _id: 6E1L4yHlYGd0QT0l
-    _key: '!items.effects!63b8c75f371412f7.6E1L4yHlYGd0QT0l'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.9f5d7c7000f6759b
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/catch-item.webp
-    name: Catch Item
-    system:
-      _sup: 63b8c75f371412f7
-      basic: true
-      competence:
-        raw: 0
-      delivery: hand
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: r1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: intrinsic
-      identifier: catch-item
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>You catch the item. If multiple creatures are all trying to catch
-          the same item, they all roll [[/roll 1d20]]. The creature with the
-          highest roll catches the item.</p>
-        fluent: <p>You instead roll [[/roll 1d20 + @f]].</p>
-        proficient: <p>You instead roll [[/roll 1d20 + @p]].</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: contact
-      targets:
-        - item
-      trigger: <p>An item within range is falling or flying by.</p>
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/disarm.webp
 name: Disarm
-type: wrapper
+system:
+  class: thief
+  competence:
+    raw: 0
+  delivery: weapon
+  duration:
+    raw: '0'
+    unit: instant
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: disarm
+  interaction: attack
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>Anything held in the targeted arm is knocked out of their hand. This
+      triggers @L[Ability:Catch Item]{Catch Item}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: contact
+  skill: true
+  standard: true
+  targets:
+    - arm
+transfer: true
+type: ability

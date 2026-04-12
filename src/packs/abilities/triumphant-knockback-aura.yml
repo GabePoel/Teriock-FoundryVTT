@@ -1,52 +1,46 @@
 _id: 0e817786b9894c71
-_key: '!items!0e817786b9894c71'
+_key: '!effects!0e817786b9894c71'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 0e817786b9894c71
-    _key: '!items.effects!0e817786b9894c71.0e817786b9894c71'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/triumphant-knockback-aura.webp
-    name: Triumphant Knockback Aura
-    system:
-      competence:
-        raw: 0
-      delivery: aura
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - movement
-      executionTime: r0
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: str
-      form: normal
-      identifier: triumphant-knockback-aura
-      interaction: feat
-      maneuver: reactive
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        raw: '10'
-        unit: ft
-      results:
-        fail: <p>Target is moved 10 feet away from you.</p>
-      targets:
-        - creature
-      trigger: <p>@L[Condition:Down]{Dropping} an opponent.</p>
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/triumphant-knockback-aura.webp
 name: Triumphant Knockback Aura
-type: wrapper
+system:
+  competence:
+    raw: 0
+  delivery: aura
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - movement
+  executionTime:
+    base: r0
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: str
+  form: normal
+  identifier: triumphant-knockback-aura
+  interaction: feat
+  maneuver: reactive
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    raw: '10'
+    unit: ft
+  results:
+    fail: <p>Target is moved 10 feet away from you.</p>
+  targets:
+    - creature
+  trigger: <p>@L[Condition:Down]{Dropping} an opponent.</p>
+transfer: true
+type: ability

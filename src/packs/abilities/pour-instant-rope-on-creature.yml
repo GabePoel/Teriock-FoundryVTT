@@ -1,72 +1,71 @@
 _id: 5e3f448163acb5a8
-_key: '!items!5e3f448163acb5a8'
+_key: '!effects!5e3f448163acb5a8'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 5e3f448163acb5a8
-    _key: '!items.effects!5e3f448163acb5a8.5e3f448163acb5a8'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/pour-instant-rope-on-creature.webp
-    name: Pour Instant Rope on Creature
-    system:
-      automations:
-        74ccbc11edb57c44:
-          _id: 74ccbc11edb57c44
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: apply
-          status: immobilized
-          type: status
-      competence:
-        raw: 0
-      consumeSource: true
-      delivery: item
-      duration:
-        raw: '10'
-        unit: minute
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: pour-instant-rope-on-creature
-      interaction: manifest
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - alchemical
-      range:
-        unit: contact
-      requirements: >-
-        <p>Use [[lookup name]] by interacting with the
-        @L[Category:Equipment]{equipment} that provides it. That counts as the
-        @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
-        the ability.</p>
-      results:
-        hit: >-
-          <p>Create a 30 foot @L[Category:Equipment]{rope} that lasts for the
-          @L[Core:Duration]{duration} of this effect. The target is tied up and
-          @L[Condition:Immobilized]{immobilized}. They are not considered to
-          have any @L[Equipment:Hand]{hands} or @L[Equipment:Foot]{feet} free
-          while tied up.</p>
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/pour-instant-rope-on-creature.webp
 name: Pour Instant Rope on Creature
-type: wrapper
+system:
+  automations:
+    74ccbc11edb57c44:
+      _id: 74ccbc11edb57c44
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: apply
+      status: immobilized
+      target: false
+      type: status
+  competence:
+    raw: 0
+  consumeSource: true
+  delivery: item
+  duration:
+    raw: '10'
+    unit: minute
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: pour-instant-rope-on-creature
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - alchemical
+  range:
+    unit: contact
+  requirements: >-
+    <p>Use [[lookup name]] by interacting with the
+    @L[Category:Equipment]{equipment} that provides it. That counts as the
+    @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for the
+    ability.</p>
+  results:
+    hit: >-
+      <p>Create a 30 foot @L[Category:Equipment]{rope} that lasts for the
+      @L[Core:Duration]{duration} of this effect. The target is tied up and
+      @L[Condition:Immobilized]{immobilized}. They are not considered to have
+      any @L[Equipment:Hand]{hands} or @L[Equipment:Foot]{feet} free while tied
+      up.</p>
+  targets:
+    - creature
+transfer: true
+type: ability

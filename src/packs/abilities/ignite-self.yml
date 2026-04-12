@@ -1,104 +1,106 @@
 _id: c2620c6ebb7e826f
-_key: '!items!c2620c6ebb7e826f'
+_key: '!effects!c2620c6ebb7e826f'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: c2620c6ebb7e826f
-    _key: '!items.effects!c2620c6ebb7e826f.c2620c6ebb7e826f'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/ignite-self.webp
-    name: Ignite Self
-    system:
-      automations:
-        29b275994cf9f5b1:
-          _id: 29b275994cf9f5b1
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: 1d4[fire]
-          heighten:
-            - 1
-            - 0
-          merge: true
-          roll: damage
-          type: roll
-        b48fe6066c4cf8f1:
-          _id: b48fe6066c4cf8f1
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: include
-          status: burned
-          type: status
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.damage.base.raw
-              mode: 2
-              priority: 30
-              qualifier: '@dmg'
-              target: equipment
-              time: normal
-              value: 1d4[fire]
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: changes
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '10'
-        unit: minute
-      effectTypes:
-        - automatic
-      executionTime: r0
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: ignite-self
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>You immediately catch ablaze! While on fire, your @L[Core:Standard
-          and Critical Damage]{standard damage} increases by [[/damage
-          1d4[fire]]] @L[Core:Damage]{damage} and you take [[/damage 1d4[fire]]]
-          @L[Core:Damage]{damage} at the start of each of your
-          @L[Core:Turns]{turns}. You also count as @L[Condition:Burned]{burned}
-          regardless of whether you're @L[Condition:Up]{up} or
-          @L[Condition:Down]{down}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - alchemical
-      range:
-        unit: self
-      targets:
-        - self
-      trigger: >-
-        <p>You take @L[Damage:Fire]{fire damage}. This triggers automatically.
-        You cannot choose to not use it if you are able to.</p>
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/ignite-self.webp
 name: Ignite Self
-type: wrapper
+system:
+  automations:
+    29b275994cf9f5b1:
+      _id: 29b275994cf9f5b1
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: 1d4[fire]
+      heighten:
+        - 1
+        - 0
+      impact: damage
+      merge: true
+      type: roll
+    b48fe6066c4cf8f1:
+      _id: b48fe6066c4cf8f1
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: include
+      status: burned
+      target: false
+      type: status
+    e789ed5e109ebd1a:
+      _id: e789ed5e109ebd1a
+      changes:
+        - key: system.damage.base.raw
+          phase: normal
+          priority: 30
+          qualifier: '@dmg'
+          target: equipment
+          type: add
+          value: 1d4[fire]
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: changes
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '10'
+    unit: minute
+  effectTypes:
+    - automatic
+  executionTime:
+    base: r0
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: ignite-self
+  interaction: manifest
+  maneuver: reactive
+  mundane: false
+  overview:
+    base: >-
+      <p>You immediately catch ablaze! While on fire, your @L[Core:Standard and
+      Critical Damage]{standard damage} increases by [[/damage 1d4[fire]]]
+      @L[Core:Damage]{damage} and you take [[/damage 1d4[fire]]]
+      @L[Core:Damage]{damage} at the start of each of your
+      @L[Core:Turns]{turns}. You also count as @L[Condition:Burned]{burned}
+      regardless of whether you're @L[Condition:Up]{up} or
+      @L[Condition:Down]{down}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - alchemical
+  range:
+    unit: self
+  targets:
+    - self
+  trigger: >-
+    <p>You take @L[Damage:Fire]{fire damage}. This triggers automatically. You
+    cannot choose to not use it if you are able to.</p>
+transfer: true
+type: ability

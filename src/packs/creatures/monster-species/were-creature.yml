@@ -1,7 +1,7 @@
 _id: b9a89312847ea5a2
 _key: '!actors!b9a89312847ea5a2'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.23
@@ -12,20 +12,20 @@ items:
     _key: '!actors.items!b9a89312847ea5a2.b9a89312847ea5a2'
     _stats:
       compendiumSource: Compendium.teriock.species.Item.b9a89312847ea5a2
-      coreVersion: '13'
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     effects:
       - _id: ZbL3a01B2CpnHyeA
         _key: >-
           !actors.items.effects!b9a89312847ea5a2.b9a89312847ea5a2.ZbL3a01B2CpnHyeA
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.67aa47433b535449
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.67aa47433b535449
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/aggressive.webp
         name: Aggressive
         system:
@@ -33,8 +33,7 @@ items:
             raw: 0
           delivery: self
           duration:
-            raw: '0'
-            unit: unlimited
+            unit: instant
           executionTime:
             base: passive
             slow:
@@ -62,63 +61,17 @@ items:
             unit: self
           targets:
             - self
-        type: ability
-      - _id: Vlazby2fryKHroaD
-        _key: >-
-          !actors.items.effects!b9a89312847ea5a2.b9a89312847ea5a2.Vlazby2fryKHroaD
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.67aa47433b535449
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.11.6
-        img: systems/teriock/src/icons/abilities/aggressive.webp
-        name: Aggressive
-        system:
-          _sup: RtMEY8aqa4eHI00G
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: flaw
-          identifier: aggressive
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          overview:
-            base: >-
-              <p>You will not leave combat willingly and are
-              @L[Keyword:Inept]{inept} at not killing anyone who opposes
-              you.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          targets:
-            - self
+        transfer: true
         type: ability
       - _id: jSzvK1rc2l64f2hb
         _key: >-
           !actors.items.effects!b9a89312847ea5a2.b9a89312847ea5a2.jSzvK1rc2l64f2hb
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.09653aa7d237cf8f
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.09653aa7d237cf8f
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/bite.webp
         name: Bite
         system:
@@ -163,11 +116,11 @@ items:
               _id: e789ed5e109ebd1a
               changes:
                 - key: system.damage.base.raw
-                  mode: 4
+                  phase: normal
                   priority: 10
                   qualifier: '@prop.biting'
                   target: body
-                  time: normal
+                  type: upgrade
                   value: 1d4
               competencies:
                 - 0
@@ -184,11 +137,11 @@ items:
               _id: f025905e157ac261
               changes:
                 - key: system.damage.base.raw
-                  mode: 4
+                  phase: normal
                   priority: 10
                   qualifier: '@prop.biting'
                   target: body
-                  time: normal
+                  type: upgrade
                   value: 1d6
               competencies:
                 - 1
@@ -204,11 +157,11 @@ items:
               _id: f7da3b5e1992a724
               changes:
                 - key: system.damage.base.raw
-                  mode: 4
+                  phase: normal
                   priority: 10
                   qualifier: '@prop.biting'
                   target: body
-                  time: normal
+                  type: upgrade
                   value: 1d8
               competencies:
                 - 2
@@ -223,8 +176,7 @@ items:
             raw: 0
           delivery: self
           duration:
-            raw: '0'
-            unit: unlimited
+            unit: instant
           executionTime:
             base: passive
             slow:
@@ -258,87 +210,17 @@ items:
             unit: self
           targets:
             - self
-        type: ability
-      - _id: 0Rxt59A3TYYaLSAv
-        _key: >-
-          !actors.items.effects!b9a89312847ea5a2.b9a89312847ea5a2.0Rxt59A3TYYaLSAv
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.97218864bf0987c8
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.11.6
-        img: systems/teriock/src/icons/abilities/impure-durability.webp
-        name: Impure Durability
-        system:
-          _sup: RtMEY8aqa4eHI00G
-          automations:
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
-              changes:
-                - key: system.protections.immunities.damageTypes
-                  mode: 2
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: Non-magical Non-silver
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
-              type: changes
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          effectTypes:
-            - immunity
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: special
-          identifier: impure-durability
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          overview:
-            base: >-
-              <p>You are @L[Keyword:Immunity]{immune} to
-              non-@L[Damage:Magic]{magic} non-@L[Damage:Silver]{silver}
-              @L[Core:Damage]{damage}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - magical
-          range:
-            unit: self
-          targets:
-            - self
+        transfer: true
         type: ability
       - _id: jOpk6hSRIBGNKKTI
         _key: >-
           !actors.items.effects!b9a89312847ea5a2.b9a89312847ea5a2.jOpk6hSRIBGNKKTI
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.997e18ba323899eb
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.997e18ba323899eb
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/infertile.webp
         name: Infertile
         system:
@@ -346,8 +228,7 @@ items:
             raw: 0
           delivery: self
           duration:
-            raw: '0'
-            unit: unlimited
+            unit: instant
           executionTime:
             base: passive
             slow:
@@ -372,16 +253,17 @@ items:
             unit: self
           targets:
             - self
+        transfer: true
         type: ability
       - _id: xxFPN16hk4bsDEOp
         _key: >-
           !actors.items.effects!b9a89312847ea5a2.b9a89312847ea5a2.xxFPN16hk4bsDEOp
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.873114c38f087ff8
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.873114c38f087ff8
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/regenerating.webp
         name: Regenerating
         system:
@@ -389,8 +271,8 @@ items:
             1728b3a84ea27844:
               _id: 1728b3a84ea27844
               common:
-                - bag
                 - revive
+                - bag
               competencies:
                 - 0
                 - 1
@@ -421,8 +303,7 @@ items:
             raw: 0
           delivery: self
           duration:
-            raw: '0'
-            unit: unlimited
+            unit: instant
           effectTypes:
             - revival
             - healing
@@ -465,16 +346,17 @@ items:
             unit: self
           targets:
             - self
+        transfer: true
         type: ability
       - _id: jmmTmmuLr9wz59jN
         _key: >-
           !actors.items.effects!b9a89312847ea5a2.b9a89312847ea5a2.jmmTmmuLr9wz59jN
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.b4ddf2af6bd8975f
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.b4ddf2af6bd8975f
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/were-creature-infect.webp
         name: Were-Creature Infect
         system:
@@ -482,8 +364,7 @@ items:
             raw: 0
           delivery: bite
           duration:
-            raw: '0'
-            unit: unlimited
+            unit: instant
           effectTypes:
             - disease
           executionTime:
@@ -522,16 +403,17 @@ items:
             <p>You have just @L[Core:Damage]{damaged} a @L[Category:Humanoid
             creatures]{humanoid creature} with your @L[Category:Biting
             equipment]{bite}.</p>
+        transfer: true
         type: ability
       - _id: RtMEY8aqa4eHI00G
         _key: >-
           !actors.items.effects!b9a89312847ea5a2.b9a89312847ea5a2.RtMEY8aqa4eHI00G
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.c4099e67f11fdc4f
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.c4099e67f11fdc4f
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/were-creature-transformation.webp
         name: Were-Creature Transformation
         system:
@@ -539,8 +421,7 @@ items:
             raw: 0
           delivery: self
           duration:
-            raw: '24'
-            unit: hour
+            unit: instant
           effectTypes:
             - transformation
             - disease
@@ -589,6 +470,127 @@ items:
             @L[Creature:Were-Creature]{were-creature}. This triggers
             automatically. You cannot choose to not use it if you are able
             to.</p>
+        transfer: true
+        type: ability
+      - _id: A44lgPQxsnTYAptn
+        _key: >-
+          !actors.items.effects!b9a89312847ea5a2.b9a89312847ea5a2.A44lgPQxsnTYAptn
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.97218864bf0987c8
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.0
+        img: systems/teriock/src/icons/abilities/impure-durability.webp
+        name: Impure Durability
+        system:
+          _sup: RtMEY8aqa4eHI00G
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.protections.immunities.damageTypes
+                  phase: normal
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  type: add
+                  value: Non-magical Non-silver
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 1
+                - 0
+              type: changes
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            raw: '0'
+            unit: unlimited
+          effectTypes:
+            - immunity
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          identifier: impure-durability
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          overview:
+            base: >-
+              <p>You are @L[Keyword:Immunity]{immune} to
+              non-@L[Damage:Magic]{magic} non-@L[Damage:Silver]{silver}
+              @L[Core:Damage]{damage}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: YQeN2sPqmAheMciV
+        _key: >-
+          !actors.items.effects!b9a89312847ea5a2.b9a89312847ea5a2.YQeN2sPqmAheMciV
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.67aa47433b535449
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.0
+        img: systems/teriock/src/icons/abilities/aggressive.webp
+        name: Aggressive
+        system:
+          _sup: RtMEY8aqa4eHI00G
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            raw: '0'
+            unit: unlimited
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          identifier: aggressive
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          overview:
+            base: >-
+              <p>You will not leave combat willingly and are
+              @L[Keyword:Inept]{inept} at not killing anyone who opposes
+              you.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+        transfer: true
         type: ability
     folder: 13ef6e80a087d7cf
     img: systems/teriock/src/icons/creatures/were-creature.webp
@@ -643,9 +645,6 @@ prototypeToken:
   ring:
     enabled: true
   texture:
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     src: systems/teriock/src/icons/tokens/were-creature.webp
   turnMarker:
     disposition: false

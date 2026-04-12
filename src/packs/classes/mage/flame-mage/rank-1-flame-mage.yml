@@ -1,7 +1,7 @@
 _id: 678069c1b38b8e6b
 _key: '!items!678069c1b38b8e6b'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.23
@@ -9,11 +9,11 @@ effects:
   - _id: wKxfL6pzdYHJceL0
     _key: '!items.effects!678069c1b38b8e6b.wKxfL6pzdYHJceL0'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.59fbc7ba847855be
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.59fbc7ba847855be
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/fire-ball.webp
     name: Fire Ball
     system:
@@ -85,15 +85,16 @@ effects:
       standard: true
       targets:
         - creature
+    transfer: true
     type: ability
   - _id: jNVwWGftQrYicpwi
     _key: '!items.effects!678069c1b38b8e6b.jNVwWGftQrYicpwi'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.ae9bbe52072963a4
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.ae9bbe52072963a4
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/flame-ray.webp
     name: Flame Ray
     system:
@@ -165,231 +166,16 @@ effects:
       standard: true
       targets:
         - creature
-    type: ability
-  - _id: ltZA2RRIcCYTzW0J
-    _key: '!items.effects!678069c1b38b8e6b.ltZA2RRIcCYTzW0J'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.9fca66d84679dd1f
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/abilities/ignite.webp
-    name: Ignite
-    system:
-      _sup: LbLjjWiopqGfltmW
-      automations:
-        72ce567009179bea:
-          _id: 72ce567009179bea
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          duration:
-            raw: '@h * 3600'
-            unit: second
-          heighten:
-            - 1
-          mode: 5
-          type: duration
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.light.dim
-              mode: 4
-              priority: 5
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '10'
-            - key: system.light.color
-              mode: 5
-              priority: 5
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '#C64600'
-            - key: system.light.animation.type
-              mode: 5
-              priority: 5
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: torch
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-      class: flameMage
-      competence:
-        raw: 0
-      delivery: hand
-      duration:
-        raw: '1'
-        unit: hour
-      elements:
-        - flame
-      executionTime: a0
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 1 hour.</p>
-      identifier: ignite
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>Target is set @L[Property:On Fire]{on fire} or put out. Your hand
-          counts as a torch for the purpose of this @L[Category:Spells]{spell}.
-          When @L[Property:On Fire]{on fire}, your hand produces no smoke and
-          being set @L[Property:On Fire]{on fire} does not harm it.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      requirements: <p>Target must be a torch.</p>
-      spell: true
-      standard: true
-      sustained: true
-      targets:
-        - item
-    type: ability
-  - _id: DEJ3d4VyZch9MA2u
-    _key: '!items.effects!678069c1b38b8e6b.DEJ3d4VyZch9MA2u'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.3b0ab4b52326316f
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/abilities/light.webp
-    name: Light
-    system:
-      _sup: LbLjjWiopqGfltmW
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.light.bright
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '50'
-            - key: system.light.dim
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '100'
-            - key: system.light.color
-              mode: 5
-              priority: 5
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '#C64600'
-            - key: system.light.animation.type
-              mode: 5
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: pulse
-            - key: system.light.angle
-              mode: 5
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '60'
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-        wihgUWmZmHchxOw5:
-          _id: wihgUWmZmHchxOw5
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 0
-            - 1
-          movable: false
-          t: none
-          type: template
-      class: flameMage
-      competence:
-        raw: 0
-      delivery: cone
-      duration:
-        raw: '1'
-        unit: minute
-      elements:
-        - flame
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: light
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>The area is illuminated. This [[lookup name style=lc]] emanates
-          from your hand and moves with you. You may change its direction at
-          will.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        raw: '100'
-        unit: ft
-      spell: true
-      standard: true
-      sustained: true
-      targets:
-        - area
+    transfer: true
     type: ability
   - _id: LbLjjWiopqGfltmW
     _key: '!items.effects!678069c1b38b8e6b.LbLjjWiopqGfltmW'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.27733508134aba43
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.27733508134aba43
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/mage-light.webp
     name: Mage Light
     system:
@@ -424,15 +210,16 @@ effects:
       standard: true
       targets:
         - self
+    transfer: true
     type: ability
   - _id: yHA67BqutokLx7uo
     _key: '!items.effects!678069c1b38b8e6b.yHA67BqutokLx7uo'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.6de6fc2f99a96881
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.6de6fc2f99a96881
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/self-detonate.webp
     name: Self Detonate
     system:
@@ -500,6 +287,235 @@ effects:
       sustained: true
       targets:
         - creature
+    transfer: true
+    type: ability
+  - _id: ydtGMqMCPJPJoPxK
+    _key: '!items.effects!678069c1b38b8e6b.ydtGMqMCPJPJoPxK'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.3b0ab4b52326316f
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/light.webp
+    name: Light
+    system:
+      _sup: LbLjjWiopqGfltmW
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: token.light.bright
+              phase: normal
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              type: upgrade
+              value: '50'
+            - key: token.light.dim
+              phase: normal
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              type: upgrade
+              value: '100'
+            - key: token.light.color
+              phase: normal
+              priority: 5
+              qualifier: '1'
+              target: Actor
+              type: override
+              value: '#C64600'
+            - key: token.light.animation.type
+              phase: normal
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              type: override
+              value: pulse
+            - key: token.light.angle
+              phase: normal
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              type: override
+              value: '60'
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+        wihgUWmZmHchxOw5:
+          _id: wihgUWmZmHchxOw5
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 0
+            - 1
+          movable: false
+          t: none
+          type: template
+      class: flameMage
+      competence:
+        raw: 0
+      costs: {}
+      delivery: cone
+      duration:
+        raw: '1'
+        unit: minute
+      elements:
+        - flame
+      executionTime:
+        base: a1
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: light
+      interaction: manifest
+      maneuver: active
+      mundane: false
+      overview:
+        base: >-
+          <p>The area is illuminated. This [[lookup name style=lc]] emanates
+          from your hand and moves with you. You may change its direction at
+          will.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        raw: '100'
+        unit: ft
+      spell: true
+      standard: true
+      sustained: true
+      targets:
+        - area
+    transfer: true
+    type: ability
+  - _id: 8alBICw39gOBRM43
+    _key: '!items.effects!678069c1b38b8e6b.8alBICw39gOBRM43'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.9fca66d84679dd1f
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/ignite.webp
+    name: Ignite
+    system:
+      _sup: LbLjjWiopqGfltmW
+      automations:
+        72ce567009179bea:
+          _id: 72ce567009179bea
+          changeType: add
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          duration:
+            raw: '@h * 3600'
+            unit: second
+          heighten:
+            - 1
+          type: duration
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: token.light.dim
+              phase: normal
+              priority: 5
+              qualifier: '1'
+              target: Actor
+              type: upgrade
+              value: '10'
+            - key: token.light.color
+              phase: normal
+              priority: 5
+              qualifier: '1'
+              target: Actor
+              type: override
+              value: '#C64600'
+            - key: token.light.animation.type
+              phase: normal
+              priority: 5
+              qualifier: '1'
+              target: Actor
+              type: override
+              value: torch
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+      class: flameMage
+      competence:
+        raw: 0
+      costs: {}
+      delivery: hand
+      duration:
+        raw: '1'
+        unit: hour
+      elements:
+        - flame
+      executionTime:
+        base: a0
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
+        effect increases by 1 hour.</p>
+      identifier: ignite
+      interaction: manifest
+      maneuver: active
+      mundane: false
+      overview:
+        base: >-
+          <p>Target is set @L[Property:On Fire]{on fire} or put out. Your hand
+          counts as a torch for the purpose of this @L[Category:Spells]{spell}.
+          When @L[Property:On Fire]{on fire}, your hand produces no smoke and
+          being set @L[Property:On Fire]{on fire} does not harm it.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: contact
+      requirements: <p>Target must be a torch.</p>
+      spell: true
+      standard: true
+      sustained: true
+      targets:
+        - item
+    transfer: true
     type: ability
 folder: abd25a387353ae4e
 img: systems/teriock/src/icons/ranks/rank-1-flame-mage.webp

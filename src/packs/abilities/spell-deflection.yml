@@ -1,65 +1,58 @@
 _id: 112ffa17a23ea71c
-_key: '!items!112ffa17a23ea71c'
+_key: '!effects!112ffa17a23ea71c'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 112ffa17a23ea71c
-    _key: '!items.effects!112ffa17a23ea71c.112ffa17a23ea71c'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/spell-deflection.webp
-    name: Spell Deflection
-    system:
-      competence:
-        raw: 0
-      delivery: weapon
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: r1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: spell-deflection
-      interaction: block
-      maneuver: reactive
-      overview:
-        fluent: >-
-          <p>Add @L[Core:Fluency Bonus]{F} to your @L[Core:Attack
-          Interaction]{attack roll} (instead of @L[Core:Proficiency
-          Bonus]{P}).</p>
-        proficient: >-
-          <p>Add @L[Core:Proficiency Bonus]{P} to your @L[Core:Attack
-          Interaction]{attack roll}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      requirements: >-
-        <p>Target is a @L[Category:Missile delivery spells]{missile attack
-        spell}.</p>
-      results:
-        save: >-
-          <p>The @L[Category:Missile delivery spells]{spell} does not hit its
-          original target. Instead, you may pick a new target within 30 feet of
-          you and make an @L[Core:Attack Interaction]{attack roll} without
-          @L[Core:Proficiency Bonus]{proficiency} against it. This is
-          @L[Keyword:AV0]{AV0} or @L[Keyword:Unblockable]{UB} if the original
-          @L[Category:Missile delivery spells]{spell} was.</p>
-      targets:
-        - spell
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/spell-deflection.webp
 name: Spell Deflection
-type: wrapper
+system:
+  competence:
+    raw: 0
+  delivery: weapon
+  duration:
+    raw: '0'
+    unit: instant
+  executionTime:
+    base: r1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: spell-deflection
+  interaction: block
+  maneuver: reactive
+  mundane: false
+  overview:
+    fluent: >-
+      <p>Add @L[Core:Fluency Bonus]{F} to your @L[Core:Attack
+      Interaction]{attack roll} (instead of @L[Core:Proficiency Bonus]{P}).</p>
+    proficient: >-
+      <p>Add @L[Core:Proficiency Bonus]{P} to your @L[Core:Attack
+      Interaction]{attack roll}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: contact
+  requirements: >-
+    <p>Target is a @L[Category:Missile delivery spells]{missile attack
+    spell}.</p>
+  results:
+    save: >-
+      <p>The @L[Category:Missile delivery spells]{spell} does not hit its
+      original target. Instead, you may pick a new target within 30 feet of you
+      and make an @L[Core:Attack Interaction]{attack roll} without
+      @L[Core:Proficiency Bonus]{proficiency} against it. This is
+      @L[Keyword:AV0]{AV0} or @L[Keyword:Unblockable]{UB} if the original
+      @L[Category:Missile delivery spells]{spell} was.</p>
+  targets:
+    - spell
+transfer: true
+type: ability

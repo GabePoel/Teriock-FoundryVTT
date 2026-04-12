@@ -1,7 +1,7 @@
 _id: 715d16fa7048f72f
 _key: '!items!715d16fa7048f72f'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.68
@@ -9,11 +9,11 @@ effects:
   - _id: MBHU8WD3A7tjees6
     _key: '!items.effects!715d16fa7048f72f.MBHU8WD3A7tjees6'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.0e75f7075511721e
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.0e75f7075511721e
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/acrobatics.webp
     name: Acrobatics
     system:
@@ -54,15 +54,16 @@ effects:
         competence:
           attribute: mov
           value: 1
+    transfer: true
     type: ability
   - _id: WUQ1ff7T28tZXflK
     _key: '!items.effects!715d16fa7048f72f.WUQ1ff7T28tZXflK'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.7f9e17153212f5a6
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.7f9e17153212f5a6
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/adrenaline.webp
     name: Adrenaline
     system:
@@ -83,18 +84,18 @@ effects:
           _id: e789ed5e109ebd1a
           changes:
             - key: system.protections.resistances.other
-              mode: 2
+              phase: normal
               priority: 10
               qualifier: '1'
               target: Actor
-              time: normal
+              type: add
               value: Dropping From Negative HP
             - key: system.protections.resistances.statuses
-              mode: 2
+              phase: normal
               priority: 10
               qualifier: '1'
               target: Actor
-              time: normal
+              type: add
               value: unconscious
           competencies:
             - 0
@@ -141,160 +142,16 @@ effects:
         unit: self
       targets:
         - self
-    type: ability
-  - _id: wVayEPW0VZMJijwx
-    _key: '!items.effects!715d16fa7048f72f.wVayEPW0VZMJijwx'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.07a0880b230cdb14
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/beastly-strength.webp
-    name: Beastly Strength
-    system:
-      _sup: uMJbKJu1QfX2eD8O
-      class: knight
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: beastly-strength
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
-          hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
-          Piercing]{Armor piercing} weapons must still be wielded in two hands
-          to be @L[Keyword:Armor Voiding]{AV0}.</div>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-      upgrades:
-        score:
-          attribute: str
-          value: 1
-    type: ability
-  - _id: A3FnxTwtY2cFlC13
-    _key: '!items.effects!715d16fa7048f72f.A3FnxTwtY2cFlC13'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.9a907b978a24ebd6
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/abilities/climbing.webp
-    name: Climbing
-    system:
-      _sup: MBHU8WD3A7tjees6
-      automations:
-        AXwLjBzDx4XcVcAJ:
-          _id: AXwLjBzDx4XcVcAJ
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 0
-            - 1
-          movementAction: climb
-          type: changeMovement
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.speedAdjustments.climb
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '2'
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-        f025905e157ac261:
-          _id: f025905e157ac261
-          changes:
-            - key: system.speedAdjustments.climb
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '3'
-          competencies:
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - movement
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: climbing
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: <p>You climb at @L[Core:Movement Speed]{half speed}.</p>
-        proficient: <p>You instead climb at @L[Core:Movement Speed]{normal speed}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
+    transfer: true
     type: ability
   - _id: tFpSCRn4kEcArfMK
     _key: '!items.effects!715d16fa7048f72f.tFpSCRn4kEcArfMK'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.0d78f7478e1024cb
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.0d78f7478e1024cb
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/dark-vision.webp
     name: Dark Vision
     system:
@@ -303,11 +160,11 @@ effects:
           _id: e789ed5e109ebd1a
           changes:
             - key: system.senses.dark
-              mode: 4
+              phase: normal
               priority: 10
               qualifier: '1'
               target: Actor
-              time: normal
+              type: upgrade
               value: '60'
           competencies:
             - 0
@@ -350,15 +207,16 @@ effects:
         unit: self
       targets:
         - self
+    transfer: true
     type: ability
   - _id: EIHV2KA6wP6zDeGt
     _key: '!items.effects!715d16fa7048f72f.EIHV2KA6wP6zDeGt'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.2463fd01df79572f
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.2463fd01df79572f
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/dense-intelligence.webp
     name: Dense Intelligence
     system:
@@ -390,15 +248,16 @@ effects:
         score:
           attribute: int
           value: -2
+    transfer: true
     type: ability
   - _id: kAM8D1Gn7DMZXoAL
     _key: '!items.effects!715d16fa7048f72f.kAM8D1Gn7DMZXoAL'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.f927c5a43cc3b312
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.f927c5a43cc3b312
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/devour.webp
     name: Devour
     system:
@@ -432,59 +291,16 @@ effects:
           @L[Core:Size]{SIZE} was already less than 1, it is reduced to 0.</p>
       targets:
         - creature
-    type: ability
-  - _id: IayltzrBbj3550pT
-    _key: '!items.effects!715d16fa7048f72f.IayltzrBbj3550pT'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.54f63d63ae4376a9
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
-    name: Improved Armor Piercing
-    system:
-      _sup: uMJbKJu1QfX2eD8O
-      class: knight
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: improved-armor-piercing
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
-          piercing}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
+    transfer: true
     type: ability
   - _id: uMJbKJu1QfX2eD8O
     _key: '!items.effects!715d16fa7048f72f.uMJbKJu1QfX2eD8O'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.8aa8167e9f40cbb2
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8aa8167e9f40cbb2
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/improved-strength.webp
     name: Improved Strength
     system:
@@ -523,131 +339,16 @@ effects:
         score:
           attribute: str
           value: 2
-    type: ability
-  - _id: jVhNlapvHMiIDsrw
-    _key: '!items.effects!715d16fa7048f72f.jVhNlapvHMiIDsrw'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.5c8394c74c689c25
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/abilities/leaping.webp
-    name: Leaping
-    system:
-      _sup: MBHU8WD3A7tjees6
-      automations:
-        Arm4CqvFyyRVggkV:
-          _id: Arm4CqvFyyRVggkV
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 0
-            - 1
-          movementAction: jump
-          type: changeMovement
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.speedAdjustments.leapVertical
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '1'
-            - key: system.speedAdjustments.leapHorizontal
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '2'
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-        f025905e157ac261:
-          _id: f025905e157ac261
-          changes:
-            - key: system.speedAdjustments.leapVertical
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '2'
-            - key: system.speedAdjustments.leapHorizontal
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '3'
-          competencies:
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-      class: assassin
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - movement
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: leaping
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You vertically leap at @L[Core:Movement Speed]{quarter speed} and
-          horizontally leap at @L[Core:Movement Speed]{half speed}.</p>
-        proficient: >-
-          <p>You instead vertically leap at @L[Core:Movement Speed]{half speed}
-          and horizontally leap at @L[Core:Movement Speed]{full speed}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
+    transfer: true
     type: ability
   - _id: HjUeNrL7w0Leawa7
     _key: '!items.effects!715d16fa7048f72f.HjUeNrL7w0Leawa7'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.4c9ba7e67dd8d160
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.4c9ba7e67dd8d160
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/no-hands.webp
     name: No Hands
     system:
@@ -677,15 +378,16 @@ effects:
         unit: self
       targets:
         - self
+    transfer: true
     type: ability
   - _id: aKyQetsmkT2VWnUX
     _key: '!items.effects!715d16fa7048f72f.aKyQetsmkT2VWnUX'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.1c52eda8919d34a7
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1c52eda8919d34a7
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/normal-movement.webp
     name: Normal Movement
     system:
@@ -717,15 +419,16 @@ effects:
         score:
           attribute: mov
           value: 0
+    transfer: true
     type: ability
   - _id: VWuY2A5Eg4ZeWzqp
     _key: '!items.effects!715d16fa7048f72f.VWuY2A5Eg4ZeWzqp'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.8249d99c527d09b1
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8249d99c527d09b1
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/normal-perception.webp
     name: Normal Perception
     system:
@@ -757,15 +460,16 @@ effects:
         score:
           attribute: per
           value: 0
+    transfer: true
     type: ability
   - _id: XZPImsaDRu0FXTuG
     _key: '!items.effects!715d16fa7048f72f.XZPImsaDRu0FXTuG'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.1a046cd851f312b9
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1a046cd851f312b9
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/poison-strike.webp
     name: Poison Strike
     system:
@@ -865,15 +569,16 @@ effects:
       skill: true
       targets:
         - creature
+    transfer: true
     type: ability
   - _id: rzQSEh0hwHj6bGpK
     _key: '!items.effects!715d16fa7048f72f.rzQSEh0hwHj6bGpK'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.6f1e35c05a5589d6
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.6f1e35c05a5589d6
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/snare.webp
     name: Snare
     system:
@@ -972,15 +677,16 @@ effects:
       standard: true
       targets:
         - leg
+    transfer: true
     type: ability
   - _id: YMd7wfngWcWbW9sP
     _key: '!items.effects!715d16fa7048f72f.YMd7wfngWcWbW9sP'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.e2ede5b6049bda5a
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.e2ede5b6049bda5a
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/sneaky.webp
     name: Sneaky
     system:
@@ -1012,15 +718,16 @@ effects:
         score:
           attribute: snk
           value: 1
+    transfer: true
     type: ability
   - _id: 0FlVMLrIBgzEmuS9
     _key: '!items.effects!715d16fa7048f72f.0FlVMLrIBgzEmuS9'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.4f0fea9742a070ef
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.4f0fea9742a070ef
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/unbreachability.webp
     name: Unbreachability
     system:
@@ -1029,18 +736,18 @@ effects:
           _id: e789ed5e109ebd1a
           changes:
             - key: system.av.bonus
-              mode: 4
+              phase: normal
               priority: 10
               qualifier: '@av'
               target: equipment
-              time: normal
+              type: upgrade
               value: '1'
             - key: system.props
-              mode: 2
+              phase: normal
               priority: 10
               qualifier: '@av'
               target: body
-              time: normal
+              type: add
               value: unbreachable
           competencies:
             - 0
@@ -1082,15 +789,16 @@ effects:
       standard: true
       targets:
         - self
+    transfer: true
     type: ability
   - _id: SfZq1nn4l5aB5qRP
     _key: '!items.effects!715d16fa7048f72f.SfZq1nn4l5aB5qRP'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.d3ce50677dca3446
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.d3ce50677dca3446
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/web-ball.webp
     name: Web Ball
     system:
@@ -1165,15 +873,16 @@ effects:
         hit: <p>Target is @L[Condition:Snared]{snared}.</p>
       targets:
         - creature
+    transfer: true
     type: ability
   - _id: wwDq2RDIPBg8vMI4
     _key: '!items.effects!715d16fa7048f72f.wwDq2RDIPBg8vMI4'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.f38bdb084e8eed6f
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.f38bdb084e8eed6f
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/web-packet.webp
     name: Web Packet
     system:
@@ -1248,6 +957,336 @@ effects:
         hit: <p>Target is @L[Condition:Snared]{snared}.</p>
       targets:
         - creature
+    transfer: true
+    type: ability
+  - _id: sUcMe37tfiACS2jy
+    _key: '!items.effects!715d16fa7048f72f.sUcMe37tfiACS2jy'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.3TtZLD3ppn1UO5vG
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/leaping.webp
+    name: Leaping
+    system:
+      _sup: MBHU8WD3A7tjees6
+      automations:
+        Arm4CqvFyyRVggkV:
+          _id: Arm4CqvFyyRVggkV
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 0
+            - 1
+          movementAction: jump
+          type: changeMovement
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.speedAdjustments.leapVertical
+              phase: normal
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              type: upgrade
+              value: '1'
+            - key: system.speedAdjustments.leapHorizontal
+              phase: normal
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              type: upgrade
+              value: '2'
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+        f025905e157ac261:
+          _id: f025905e157ac261
+          changes:
+            - key: system.speedAdjustments.leapVertical
+              phase: normal
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              type: upgrade
+              value: '2'
+            - key: system.speedAdjustments.leapHorizontal
+              phase: normal
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              type: upgrade
+              value: '3'
+          competencies:
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+      class: assassin
+      competence:
+        raw: 0
+      costs: {}
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      effectTypes:
+        - movement
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: leaping
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>You vertically leap at @L[Core:Movement Speed]{quarter speed} and
+          horizontally leap at @L[Core:Movement Speed]{half speed}.</p>
+        proficient: >-
+          <p>You instead vertically leap at @L[Core:Movement Speed]{half speed}
+          and horizontally leap at @L[Core:Movement Speed]{full speed}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: h8GRX4C8MSYiEck3
+    _key: '!items.effects!715d16fa7048f72f.h8GRX4C8MSYiEck3'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.9a907b978a24ebd6
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/climbing.webp
+    name: Climbing
+    system:
+      _sup: MBHU8WD3A7tjees6
+      automations:
+        AXwLjBzDx4XcVcAJ:
+          _id: AXwLjBzDx4XcVcAJ
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 0
+            - 1
+          movementAction: climb
+          type: changeMovement
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.speedAdjustments.climb
+              phase: normal
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              type: upgrade
+              value: '2'
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+        f025905e157ac261:
+          _id: f025905e157ac261
+          changes:
+            - key: system.speedAdjustments.climb
+              phase: normal
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              type: upgrade
+              value: '3'
+          competencies:
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+      competence:
+        raw: 0
+      costs: {}
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      effectTypes:
+        - movement
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: climbing
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: <p>You climb at @L[Core:Movement Speed]{half speed}.</p>
+        proficient: <p>You instead climb at @L[Core:Movement Speed]{normal speed}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: AFpQ8Cc2NiBSQvwW
+    _key: '!items.effects!715d16fa7048f72f.AFpQ8Cc2NiBSQvwW'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.07a0880b230cdb14
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/beastly-strength.webp
+    name: Beastly Strength
+    system:
+      _sup: uMJbKJu1QfX2eD8O
+      class: knight
+      competence:
+        raw: 0
+      costs: {}
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: beastly-strength
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
+          hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
+          Piercing]{Armor piercing} weapons must still be wielded in two hands
+          to be @L[Keyword:Armor Voiding]{AV0}.</div>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: 1
+    transfer: true
+    type: ability
+  - _id: Yc1hGACGA3gC4UBH
+    _key: '!items.effects!715d16fa7048f72f.Yc1hGACGA3gC4UBH'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.54f63d63ae4376a9
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
+    name: Improved Armor Piercing
+    system:
+      _sup: uMJbKJu1QfX2eD8O
+      class: knight
+      competence:
+        raw: 0
+      costs: {}
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: improved-armor-piercing
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
+          piercing}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
     type: ability
 folder: 334a64a756ec6a7a
 img: systems/teriock/src/icons/creatures/huge-spider.webp

@@ -1,98 +1,91 @@
-_id: ba299f89c12a9887
-_key: '!items!ba299f89c12a9887'
+_id: TjGzX2qZGteBzniJ
+_key: '!effects!TjGzX2qZGteBzniJ'
 _stats:
-  coreVersion: '13'
+  compendiumSource: Compendium.world.abilities-backup.ActiveEffect.TjGzX2qZGteBzniJ
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: ba299f89c12a9887
-    _key: '!items.effects!ba299f89c12a9887.ba299f89c12a9887'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/inferno-aura.webp
-    name: Inferno Aura
-    system:
-      automations:
-        29b275994cf9f5b1:
-          _id: 29b275994cf9f5b1
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: 1d6[magic fire]
-          heighten:
-            - 1
-            - 0
-          merge: true
-          roll: damage
-          type: roll
-        800c70e6560525a8:
-          _id: 800c70e6560525a8
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: (@h)d6[magic fire]
-          heighten:
-            - 1
-          merge: true
-          roll: damage
-          type: roll
-      class: flameMage
-      competence:
-        raw: 0
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: aura
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - damaging
-      elements:
-        - flame
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage}.</p>
-      identifier: inferno-aura
-      interaction: feat
-      invoked: true
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        raw: '10'
-        unit: ft
-      results:
-        fail: >-
-          <p>Deal [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage} to
-          target.</p>
-      spell: true
-      standard: true
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/inferno-aura.webp
 name: Inferno Aura
-type: wrapper
+system:
+  automations:
+    29b275994cf9f5b1:
+      _id: 29b275994cf9f5b1
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: 1d6[magic fire]
+      heighten:
+        - 1
+        - 0
+      impact: damage
+      merge: true
+      type: roll
+    800c70e6560525a8:
+      _id: 800c70e6560525a8
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: (@h)d6[magic fire]
+      heighten:
+        - 1
+      impact: damage
+      merge: true
+      type: roll
+  class: flameMage
+  competence:
+    raw: 0
+  costs:
+    components:
+      somatic:
+        type: tag
+      verbal:
+        type: tag
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: aura
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - damaging
+  elements:
+    - flame
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  heightened: >-
+    <p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage
+    1d6[magic fire]]] @L[Core:Damage]{damage}.</p>
+  identifier: inferno-aura
+  interaction: feat
+  invoked: true
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    raw: '10'
+    unit: ft
+  results:
+    fail: <p>Deal [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage} to target.</p>
+  spell: true
+  standard: true
+  targets:
+    - creature
+transfer: true
+type: ability

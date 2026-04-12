@@ -1,84 +1,105 @@
 _id: cd0bced492df3a52
-_key: '!items!cd0bced492df3a52'
+_key: '!effects!cd0bced492df3a52'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: cd0bced492df3a52
-    _key: '!items.effects!cd0bced492df3a52.cd0bced492df3a52'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/drink-potion-of-bones.webp
-    name: Drink Potion of Bones
-    system:
-      automations:
-        6sco3FpwhF3NicD6:
-          _id: 6sco3FpwhF3NicD6
-          img: systems/teriock/src/icons/tokens/skeleton.webp
-          override:
-            - art
-          ring: true
-          type: transformation
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.transformation.img
-              mode: 5
-              priority: 30
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: icons/magic/death/undead-skeleton-energy-green.webp
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: changes
-      competence:
-        raw: 0
-      consumeSource: true
-      delivery: item
-      duration:
-        raw: '1'
-        unit: hour
-      effectTypes:
-        - illusion
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: drink-potion-of-bones
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>You appear as a @L[Creature:Skeleton]{skeleton}. This is a
-          @L[Keyword:Illusionary]{minor illusion}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - alchemical
-      range:
-        unit: contact
-      requirements: >-
-        <p>Use [[lookup name]] by interacting with the
-        @L[Category:Equipment]{equipment} that provides it. That counts as the
-        @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
-        the ability.</p>
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/drink-potion-of-bones.webp
 name: Drink Potion of Bones
-type: wrapper
+system:
+  automations:
+    6sco3FpwhF3NicD6:
+      _id: 6sco3FpwhF3NicD6
+      automatic: true
+      competence:
+        raw: 0
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 0
+        - 1
+      img: systems/teriock/src/icons/tokens/skeleton.webp
+      multi: false
+      override:
+        - art
+      overrideCompetence: false
+      reset:
+        - gp
+        - hp
+      ring: true
+      suppress:
+        - body
+        - equipment
+        - fluency
+        - rank
+        - species
+      type: transformation
+    e789ed5e109ebd1a:
+      _id: e789ed5e109ebd1a
+      changes:
+        - key: system.transformation.img
+          phase: normal
+          priority: 30
+          qualifier: '1'
+          target: Actor
+          type: override
+          value: icons/magic/death/undead-skeleton-energy-green.webp
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: changes
+  competence:
+    raw: 0
+  consumeSource: true
+  delivery: item
+  duration:
+    raw: '1'
+    unit: hour
+  effectTypes:
+    - illusion
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: drink-potion-of-bones
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>You appear as a @L[Creature:Skeleton]{skeleton}. This is a
+      @L[Keyword:Illusionary]{minor illusion}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - alchemical
+  range:
+    unit: contact
+  requirements: >-
+    <p>Use [[lookup name]] by interacting with the
+    @L[Category:Equipment]{equipment} that provides it. That counts as the
+    @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for the
+    ability.</p>
+  targets:
+    - self
+transfer: true
+type: ability

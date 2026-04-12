@@ -1,172 +1,47 @@
 _id: 1ea706273a40abd1
-_key: '!items!1ea706273a40abd1'
+_key: '!effects!1ea706273a40abd1'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 1ea706273a40abd1
-    _key: '!items.effects!1ea706273a40abd1.1ea706273a40abd1'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/weapon-master.webp
-    name: Weapon Master
-    system:
-      class: knight
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: weapon-master
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Master Weapon Smith]{Master Weapon Smith} and
-          @L[Ability:Runic Weapons]{Runic Weapons}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-    type: ability
-  - _id: x5TGrDtgvlc4RFuN
-    _key: '!items.effects!1ea706273a40abd1.x5TGrDtgvlc4RFuN'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.29d83a03609fbb9a
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/abilities/master-weapon-smith.webp
-    name: Master Weapon Smith
-    system:
-      _sup: 1ea706273a40abd1
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.tradecrafts.blacksmith.score
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '2'
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-      class: knight
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: master-weapon-smith
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You are an @L[Keyword:Expertise]{expert}
-          @L[Tradecraft:Blacksmith]{blacksmith}. In addition, you gain the
-          ability to create @L[Property:Master Crafted]{Master Crafted}
-          weapons.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-    type: ability
-  - _id: k0mSbIPYtnrMh6ue
-    _key: '!items.effects!1ea706273a40abd1.k0mSbIPYtnrMh6ue'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.f48c3fc32a01ac3b
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/runic-weapons.webp
-    name: Runic Weapons
-    system:
-      _sup: 1ea706273a40abd1
-      class: knight
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: sight
-      duration:
-        raw: '24'
-        unit: hour
-      executionTime: 10 Minutes
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: runic-weapons
-      interaction: manifest
-      maneuver: slow
-      overview:
-        base: >-
-          <p>The targeted @L[Category:Weapons]{weapon} becomes
-          @L[Property:Runic]{runic}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        raw: '5'
-        unit: ft
-      ritual: true
-      skill: true
-      standard: true
-      targets:
-        - weapon
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/weapon-master.webp
 name: Weapon Master
-type: wrapper
+system:
+  class: knight
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: unlimited
+  executionTime:
+    base: passive
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: weapon-master
+  interaction: manifest
+  maneuver: passive
+  mundane: false
+  overview:
+    base: >-
+      <p>You gain @L[Ability:Master Weapon Smith]{Master Weapon Smith} and
+      @L[Ability:Runic Weapons]{Runic Weapons}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  skill: true
+  standard: true
+  targets:
+    - self
+transfer: true
+type: ability

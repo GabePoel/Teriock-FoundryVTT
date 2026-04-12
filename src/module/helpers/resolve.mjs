@@ -162,19 +162,8 @@ export async function ensureNoChildren(document, identifiers) {
  * @returns {Promise<void>}
  */
 export async function inferCompendiumSource(document) {
-  const pack = game.packs.get(
-    "teriock." + TERIOCK.options.document[document.type]["pack"],
-  );
-  if (pack) {
-    const ref = pack.index.getName(document.name);
-    if (ref) {
-      let uuid = ref.uuid;
-      if (document.uuid.includes(uuid)) uuid = null;
-      await document.update({ "_stats.compendiumSource": uuid });
-    } else {
-      console.warn(`Could not find a compendium source for ${document.name}`);
-    }
-  }
+  const ref = await fromIdentifier(document.typedIdentifier);
+  if (ref?.uuid) await document.update({ "_stats.compendiumSource": ref.uuid });
 }
 
 /**
@@ -183,20 +172,8 @@ export async function inferCompendiumSource(document) {
  * @returns {Promise<void>}
  */
 export async function inferChildCompendiumSources(document) {
-  for (const d of await document.getChildArray()) {
-    const pack = game.packs.get(
-      "teriock." + TERIOCK.options.document[d.type]["pack"],
-    );
-    if (pack) {
-      const ref = pack.index.getName(d.name);
-      if (ref) {
-        let uuid = ref.uuid;
-        if (d.uuid.includes(uuid)) uuid = null;
-        await d.update({ "_stats.compendiumSource": uuid });
-        await inferChildCompendiumSources(d);
-      }
-    }
-  }
+  const children = (await document.getChildArray()).map((_) => _);
+  await Promise.all(children.map(async (c) => await inferCompendiumSource(c)));
 }
 /**
  * Get the UUID for a rules journal entry page.

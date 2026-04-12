@@ -20,10 +20,8 @@ export function migrateChangeType(change, dst = "type") {
  * @param {object} change
  */
 export function migrateChange(change) {
-  if (change.time) {
-    change.phase = change.time;
-    delete change.time;
-  }
+  if (change.time && !change.phase) change.phase = change.time;
+  delete change.time;
   migrateChangeType(change);
   if (change.key && change.key.startsWith("system.light")) {
     change.key = change.key.replace("system.light", "token.light");

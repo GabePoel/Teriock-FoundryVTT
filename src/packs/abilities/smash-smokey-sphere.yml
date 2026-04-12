@@ -1,68 +1,67 @@
 _id: bb29439f6c5c63c2
-_key: '!items!bb29439f6c5c63c2'
+_key: '!effects!bb29439f6c5c63c2'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: bb29439f6c5c63c2
-    _key: '!items.effects!bb29439f6c5c63c2.bb29439f6c5c63c2'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/smash-smokey-sphere.webp
-    name: Smash Smokey Sphere
-    system:
-      automations:
-        270d4c101b6df930:
-          _id: 270d4c101b6df930
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: apply
-          status: blind
-          type: status
-      competence:
-        raw: 0
-      consumeSource: true
-      delivery: item
-      duration:
-        raw: '1'
-        unit: minute
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: per
-      form: normal
-      identifier: smash-smokey-sphere
-      interaction: feat
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - alchemical
-      range:
-        raw: '30'
-        unit: ft
-      requirements: >-
-        <p>Use [[lookup name]] by interacting with the
-        @L[Category:Equipment]{equipment} that provides it. That counts as the
-        @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
-        the ability.</p>
-      results:
-        fail: <p>Target becomes @L[Condition:Blind]{blind}.</p>
-      targets:
-        - area
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/smash-smokey-sphere.webp
 name: Smash Smokey Sphere
-type: wrapper
+system:
+  automations:
+    270d4c101b6df930:
+      _id: 270d4c101b6df930
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: apply
+      status: blind
+      target: false
+      type: status
+  competence:
+    raw: 0
+  consumeSource: true
+  delivery: item
+  duration:
+    raw: '1'
+    unit: minute
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: per
+  form: normal
+  identifier: smash-smokey-sphere
+  interaction: feat
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - alchemical
+  range:
+    raw: '30'
+    unit: ft
+  requirements: >-
+    <p>Use [[lookup name]] by interacting with the
+    @L[Category:Equipment]{equipment} that provides it. That counts as the
+    @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for the
+    ability.</p>
+  results:
+    fail: <p>Target becomes @L[Condition:Blind]{blind}.</p>
+  targets:
+    - area
+transfer: true
+type: ability

@@ -86,7 +86,7 @@ export default class ProtectionAutomation extends CritAutomation {
         choices: this._choices,
         value: this.value,
         fields: this.schema.fields,
-        path: `${this.fieldPath}.${this.id}`,
+        path: this.localPath,
         relation: this.relation,
         uuid: this.uuid,
       },

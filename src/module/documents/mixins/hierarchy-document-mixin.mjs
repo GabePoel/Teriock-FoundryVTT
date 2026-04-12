@@ -256,7 +256,7 @@ export default function HierarchyDocumentMixin(Base) {
           collection = document.siblingCollection;
         }
         if (document.system?._sup) {
-          return collection.get(document.system._sup);
+          return collection?.get(document.system._sup);
         }
       }
 

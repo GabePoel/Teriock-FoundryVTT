@@ -1,85 +1,90 @@
 _id: b0056a7a1a2931f1
-_key: '!items!b0056a7a1a2931f1'
+_key: '!effects!b0056a7a1a2931f1'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: b0056a7a1a2931f1
-    _key: '!items.effects!b0056a7a1a2931f1.b0056a7a1a2931f1'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/avoid-aura.webp
-    name: Avoid Aura
-    system:
-      automations:
-        66d7d1b1f15fe392:
-          _id: 66d7d1b1f15fe392
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: useAbilities
-        u9QnKhzwEZ3zTwBn:
-          _id: u9QnKhzwEZ3zTwBn
-          identifiers:
-            - ability:stand-up
-            - ability:drop-prone
-          type: useLocal
-      class: paladin
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: aura
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: r1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: unp
-      form: normal
-      identifier: avoid-aura
-      interaction: manifest
-      maneuver: reactive
-      piercing:
-        raw: 0
-      powerSources:
-        - divine
-      range:
-        raw: '10'
-        unit: ft
-      results:
-        fail: >-
-          <p>Target may @L[Ability:Stand Up]{Stand Up} or @L[Ability:Drop
-          Prone]{Drop Prone}. If, after doing this, they would no longer be able
-          to be hit by the triggering @L[Category:Abilities]{ability}, it
-          @L[Core:Fizzles]{fizzles} against them and any
-          @L[Category:Equipment]{equipment} they bear.</p>
-      skill: true
-      standard: true
-      targets:
-        - creature
-      trigger: >-
-        <p>One or more creature within range or some
-        @L[Category:Equipment]{equipment} they @L[Keyword:Bearing]{bear} would
-        be hit by an @L[Category:Active abilities]{active} or
-        @L[Category:Reactive abilities]{reactive} @L[Category:Attack
-        abilities]{attack} you can see.</p>
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/avoid-aura.webp
 name: Avoid Aura
-type: wrapper
+system:
+  automations:
+    66d7d1b1f15fe392:
+      _id: 66d7d1b1f15fe392
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 1
+        - 0
+      type: useAbilities
+    u9QnKhzwEZ3zTwBn:
+      _id: u9QnKhzwEZ3zTwBn
+      automatic: true
+      competence:
+        raw: 0
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 0
+        - 1
+      identifiers:
+        - ability:stand-up
+        - ability:drop-prone
+      multi: false
+      overrideCompetence: false
+      type: useLocal
+  class: paladin
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: aura
+  duration:
+    raw: '0'
+    unit: instant
+  executionTime:
+    base: r1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: unp
+  form: normal
+  identifier: avoid-aura
+  interaction: manifest
+  maneuver: reactive
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - divine
+  range:
+    raw: '10'
+    unit: ft
+  results:
+    fail: >-
+      <p>Target may @L[Ability:Stand Up]{Stand Up} or @L[Ability:Drop
+      Prone]{Drop Prone}. If, after doing this, they would no longer be able to
+      be hit by the triggering @L[Category:Abilities]{ability}, it
+      @L[Core:Fizzles]{fizzles} against them and any
+      @L[Category:Equipment]{equipment} they bear.</p>
+  skill: true
+  standard: true
+  targets:
+    - creature
+  trigger: >-
+    <p>One or more creature within range or some
+    @L[Category:Equipment]{equipment} they @L[Keyword:Bearing]{bear} would be
+    hit by an @L[Category:Active abilities]{active} or @L[Category:Reactive
+    abilities]{reactive} @L[Category:Attack abilities]{attack} you can see.</p>
+transfer: true
+type: ability

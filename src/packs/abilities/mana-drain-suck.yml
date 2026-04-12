@@ -1,79 +1,82 @@
 _id: 8b8f8493cf28a27e
-_key: '!items!8b8f8493cf28a27e'
+_key: '!effects!8b8f8493cf28a27e'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 8b8f8493cf28a27e
-    _key: '!items.effects!8b8f8493cf28a27e.8b8f8493cf28a27e'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/mana-drain-suck.webp
-    name: Mana Drain Suck
-    system:
-      automations:
-        157afc517847f562:
-          _id: 157afc517847f562
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: 1d8[mana]
-          heighten:
-            - 1
-            - 0
-          merge: true
-          roll: drain
-          type: roll
-        grBibq1mL7ug5J3v:
-          _id: grBibq1mL7ug5J3v
-          type: revitalize
-      competence:
-        raw: 0
-      delivery: bite
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - revitalization
-        - draining
-      executionTime: a2
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: mana-drain-suck
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      results:
-        critHit: >-
-          <p>Deal [[/drain 2d8[mana]]] @L[Category:Drain types]{drain} to the
-          target. If this @L[Condition:Dead]{kills} the target, you
-          @L[Core:Revitalizing]{revitalize} twice. This
-          @L[Core:Revitalizing]{revitalization} is the only part of this that is
-          a @L[Category:Revitalization effects]{revitalization effect}.</p>
-        hit: >-
-          <p>Deal [[/drain 1d8[mana]]] @L[Category:Drain types]{drain} to the
-          target. If this @L[Condition:Dead]{kills} the target, you
-          @L[Core:Revitalizing]{revitalize}.  This
-          @L[Core:Revitalizing]{revitalization} is the only part of this that is
-          a @L[Category:Revitalization effects]{revitalization effect}.</p>
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/mana-drain-suck.webp
 name: Mana Drain Suck
-type: wrapper
+system:
+  automations:
+    157afc517847f562:
+      _id: 157afc517847f562
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: 1d8[mana]
+      heighten:
+        - 1
+        - 0
+      impact: drain
+      merge: true
+      type: roll
+    grBibq1mL7ug5J3v:
+      _id: grBibq1mL7ug5J3v
+      competencies:
+        - 0
+        - 1
+        - 2
+      consumeStatDice: true
+      forHarm: false
+      heighten:
+        - 0
+        - 1
+      type: revitalize
+  competence:
+    raw: 0
+  delivery: bite
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - revitalization
+    - draining
+  executionTime:
+    base: a2
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  identifier: mana-drain-suck
+  interaction: attack
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: contact
+  results:
+    critHit: >-
+      <p>Deal [[/drain 2d8[mana]]] @L[Category:Drain types]{drain} to the
+      target. If this @L[Condition:Dead]{kills} the target, you
+      @L[Core:Revitalizing]{revitalize} twice. This
+      @L[Core:Revitalizing]{revitalization} is the only part of this that is a
+      @L[Category:Revitalization effects]{revitalization effect}.</p>
+    hit: >-
+      <p>Deal [[/drain 1d8[mana]]] @L[Category:Drain types]{drain} to the
+      target. If this @L[Condition:Dead]{kills} the target, you
+      @L[Core:Revitalizing]{revitalize}.  This
+      @L[Core:Revitalizing]{revitalization} is the only part of this that is a
+      @L[Category:Revitalization effects]{revitalization effect}.</p>
+  targets:
+    - creature
+transfer: true
+type: ability

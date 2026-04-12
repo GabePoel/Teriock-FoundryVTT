@@ -1,67 +1,44 @@
 _id: 0d496a11b2eb7366
-_key: '!items!0d496a11b2eb7366'
+_key: '!effects!0d496a11b2eb7366'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 0d496a11b2eb7366
-    _key: '!items.effects!0d496a11b2eb7366.0d496a11b2eb7366'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.68
-    img: systems/teriock/src/icons/properties/spiga-silk.webp
-    name: Spiga Silk
-    system:
-      automations:
-        parameterChanges:
-          _id: parameterChanges
-          changes:
-            - key: system.av.bonus
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: parent
-              time: normal
-              value: '2'
-          type: changes
-      competence:
-        raw: 0
-      description: >-
-        <p>@L[Category:Clothing]{Clothing} that is <b>[[lookup name
-        style=lc]]</b> is made from the thread of @L[Category:Spigas]{spigas}.
-        It is @L[Property:Durable]{durable} and has its @L[Core:Armor Class]{AV}
-        increased by 2 even if it is not @L[Category:Armor]{armor}.</p>
-      form: intrinsic
-      identifier: spiga-silk
-      material: true
-    type: property
-  - _id: eXScCTHjaokZSz4h
-    _key: '!items.effects!0d496a11b2eb7366.eXScCTHjaokZSz4h'
-    _stats:
-      compendiumSource: Compendium.teriock.properties.Item.1b0ae28f7a0a0448
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.41
-    img: systems/teriock/src/icons/properties/durable.webp
-    name: Durable
-    system:
-      _sup: 0d496a11b2eb7366
-      competence:
-        raw: 0
-      description: >-
-        <p>An item that is <b>[[lookup name style=lc]]</b> is
-        @L[Keyword:Resistance]{resistant} to becoming
-        @L[Property:Shattered]{shattered} and effects that would render it
-        @L[Property:Destroyed]{destroyed} cause it to be
-        @L[Property:Shattered]{shattered} instead.</p>
-      form: intrinsic
-      identifier: durable
-    type: property
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/properties/spiga-silk.webp
 name: Spiga Silk
-type: wrapper
+system:
+  automations:
+    parameterChanges:
+      _id: parameterChanges
+      changes:
+        - key: system.av.bonus
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: parent
+          type: upgrade
+          value: '2'
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 0
+        - 1
+      type: changes
+  competence:
+    raw: 0
+  description: >-
+    <p>@L[Category:Clothing]{Clothing} that is <b>[[lookup name style=lc]]</b>
+    is made from the thread of @L[Category:Spigas]{spigas}. It is
+    @L[Property:Durable]{durable} and has its @L[Core:Armor Class]{AV} increased
+    by 2 even if it is not @L[Category:Armor]{armor}.</p>
+  form: intrinsic
+  identifier: spiga-silk
+  mundane: false
+transfer: true
+type: property

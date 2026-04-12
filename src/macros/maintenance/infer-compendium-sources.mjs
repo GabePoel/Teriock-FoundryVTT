@@ -9,7 +9,7 @@ await tm.utils.progressBar(
       );
       await tm.utils.progressBar(
         indexes,
-        `Refreshing ${p.title} Sources`,
+        `Refreshing ${_loc(p.title)} Sources`,
         async (i) => {
           const doc = await tm.resolve.resolveDocument(i);
           if (doc?.documentMetadata.common) {

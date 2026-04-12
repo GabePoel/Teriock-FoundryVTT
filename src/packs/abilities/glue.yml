@@ -1,64 +1,66 @@
 _id: cf1a117e14199f5c
-_key: '!items!cf1a117e14199f5c'
+_key: '!effects!cf1a117e14199f5c'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: cf1a117e14199f5c
-    _key: '!items.effects!cf1a117e14199f5c.cf1a117e14199f5c'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/glue.webp
-    name: Glue
-    system:
-      automations:
-        NhF7DmbiQ667ivp2:
-          _id: NhF7DmbiQ667ivp2
-          common:
-            - glue
-          type: common
-      class: thief
-      competence:
-        raw: 0
-      delivery: sight
-      duration:
-        raw: '24'
-        unit: hour
-      effectTypes:
-        - immunity
-      executionTime: 10 Minutes
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: glue
-      interaction: manifest
-      maneuver: slow
-      overview:
-        base: >-
-          <p>Target is @L[Property:Glued]{glued} to the creature
-          @L[Keyword:Bearing]{bearing} it.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - spiritual
-      range:
-        raw: '5'
-        unit: ft
-      requirements: <p>Target item must be @L[Keyword:Bearing]{beared} by a creature.</p>
-      ritual: true
-      skill: true
-      standard: true
-      targets:
-        - item
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/glue.webp
 name: Glue
-type: wrapper
+system:
+  automations:
+    NhF7DmbiQ667ivp2:
+      _id: NhF7DmbiQ667ivp2
+      common:
+        - glue
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 0
+        - 1
+      type: common
+  class: thief
+  competence:
+    raw: 0
+  delivery: sight
+  duration:
+    raw: '24'
+    unit: hour
+  effectTypes:
+    - immunity
+  executionTime:
+    base: 10 Minutes
+    slow:
+      raw: '10'
+      unit: minute
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: glue
+  interaction: manifest
+  maneuver: slow
+  mundane: false
+  overview:
+    base: >-
+      <p>Target is @L[Property:Glued]{glued} to the creature
+      @L[Keyword:Bearing]{bearing} it.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - spiritual
+  range:
+    raw: '5'
+    unit: ft
+  requirements: <p>Target item must be @L[Keyword:Bearing]{beared} by a creature.</p>
+  ritual: true
+  skill: true
+  standard: true
+  targets:
+    - item
+transfer: true
+type: ability

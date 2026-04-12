@@ -1,40 +1,40 @@
 _id: 7de0d6d87ef04c0b
-_key: '!items!7de0d6d87ef04c0b'
+_key: '!effects!7de0d6d87ef04c0b'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 7de0d6d87ef04c0b
-    _key: '!items.effects!7de0d6d87ef04c0b.7de0d6d87ef04c0b'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.68
-    img: systems/teriock/src/icons/properties/unblockable.webp
-    name: Unblockable
-    system:
-      automations:
-        parameterChanges:
-          _id: parameterChanges
-          changes:
-            - key: system.piercing.raw
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: parent
-              time: normal
-              value: '2'
-          type: changes
-      competence:
-        raw: 0
-      description: <p>An item with this property is always @L[Keyword:UB]{UB}.</p>
-      form: intrinsic
-      identifier: unblockable
-      mundane: true
-    type: property
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/properties/unblockable.webp
 name: Unblockable
-type: wrapper
+system:
+  automations:
+    parameterChanges:
+      _id: parameterChanges
+      changes:
+        - key: system.piercing.raw
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: parent
+          type: upgrade
+          value: '2'
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 0
+        - 1
+      type: changes
+  competence:
+    raw: 0
+  description: <p>An item with this property is always @L[Keyword:UB]{UB}.</p>
+  form: intrinsic
+  identifier: unblockable
+  mundane: true
+transfer: true
+type: property

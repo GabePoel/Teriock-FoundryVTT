@@ -2,7 +2,7 @@ _id: oCYlfWJfiEpZegoh
 _key: '!items!oCYlfWJfiEpZegoh'
 _stats:
   compendiumSource: Compendium.teriock.classes.Item.9f64a79ff1b0a15f
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.23
@@ -10,11 +10,11 @@ effects:
   - _id: SIKeU2QEaZhXtXeq
     _key: '!items.effects!oCYlfWJfiEpZegoh.SIKeU2QEaZhXtXeq'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.fe7bea7b8d14cba3
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.fe7bea7b8d14cba3
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: combat
@@ -27,11 +27,11 @@ effects:
           _id: f025905e157ac261
           changes:
             - key: system.competence.raw
-              mode: 4
+              phase: fluency
               priority: 10
               qualifier: '@identifier.flame-rotators'
               target: ability
-              time: fluency
+              type: upgrade
               value: '2'
           competencies:
             - 1
@@ -79,15 +79,16 @@ effects:
       standard: true
       targets:
         - self
+    transfer: true
     type: ability
   - _id: hi6DT2tdldx5HKNj
     _key: '!items.effects!oCYlfWJfiEpZegoh.hi6DT2tdldx5HKNj'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.74698480298e4de5
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.74698480298e4de5
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: support
@@ -126,15 +127,16 @@ effects:
       standard: true
       targets:
         - self
+    transfer: true
     type: ability
-  - _id: ZDonwc8lbjV7TsmD
-    _key: '!items.effects!oCYlfWJfiEpZegoh.ZDonwc8lbjV7TsmD'
+  - _id: jBINDM2yN10naojF
+    _key: '!items.effects!oCYlfWJfiEpZegoh.jBINDM2yN10naojF'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.ea1ecd00bc4430e1
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.HXidffXqZoxo8wog
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/spell-strike.webp
     name: Spell Strike
     system:
@@ -150,7 +152,10 @@ effects:
       duration:
         raw: '0'
         unit: instant
-      executionTime: r0
+      executionTime:
+        base: r0
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -163,6 +168,7 @@ effects:
         <p>Only usable with @L[Ability:Flame Ray]{Flame Ray} and @L[Ability:Fire
         Ball]{Fire Ball}.</p>
       maneuver: reactive
+      mundane: false
       overview:
         base: >-
           <p>Target takes the "on hit" effect of a @L[Category:Missile delivery
@@ -184,6 +190,7 @@ effects:
         abilities]{weapon} or @L[Category:Bite delivery abilities]{bite}
         @L[Category:Attack abilities]{attack} on another creature and the effect
         has successfully applied.</p>
+    transfer: true
     type: ability
 folder: da5b8437ae291af1
 img: systems/teriock/src/icons/ranks/rank-5-flame-mage.webp

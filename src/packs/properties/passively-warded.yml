@@ -1,41 +1,42 @@
 _id: 17e29e60b2c9c52c
-_key: '!items!17e29e60b2c9c52c'
+_key: '!effects!17e29e60b2c9c52c'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 17e29e60b2c9c52c
-    _key: '!items.effects!17e29e60b2c9c52c.17e29e60b2c9c52c'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.68
-    img: systems/teriock/src/icons/properties/passively-warded.webp
-    name: Passively Warded
-    system:
-      automations:
-        parameterChanges:
-          _id: parameterChanges
-          changes:
-            - key: system.warded
-              mode: 5
-              priority: 10
-              qualifier: '1'
-              target: parent
-              time: normal
-              value: 'true'
-          type: changes
-      competence:
-        raw: 0
-      description: >-
-        <p>All @L[Category:Attack abilities]{attacks} made with a <b>[[lookup
-        name style=lc]]</b> item are @L[Keyword:Warded]{warded}.</p>
-      form: special
-      identifier: passively-warded
-    type: property
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/properties/passively-warded.webp
 name: Passively Warded
-type: wrapper
+system:
+  automations:
+    parameterChanges:
+      _id: parameterChanges
+      changes:
+        - key: system.warded
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: parent
+          type: override
+          value: 'true'
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 0
+        - 1
+      type: changes
+  competence:
+    raw: 0
+  description: >-
+    <p>All @L[Category:Attack abilities]{attacks} made with a <b>[[lookup name
+    style=lc]]</b> item are @L[Keyword:Warded]{warded}.</p>
+  form: special
+  identifier: passively-warded
+  mundane: false
+transfer: true
+type: property

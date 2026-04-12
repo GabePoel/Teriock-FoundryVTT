@@ -2,7 +2,7 @@ _id: 2g67zMpSHl6nn5n8
 _key: '!items!2g67zMpSHl6nn5n8'
 _stats:
   compendiumSource: Compendium.teriock.classes.Item.678069c1b38b8e6b
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.23
@@ -10,11 +10,11 @@ effects:
   - _id: wKxfL6pzdYHJceL0
     _key: '!items.effects!2g67zMpSHl6nn5n8.wKxfL6pzdYHJceL0'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.59fbc7ba847855be
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.59fbc7ba847855be
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/fire-ball.webp
     name: Fire Ball
     system:
@@ -86,15 +86,16 @@ effects:
       standard: true
       targets:
         - creature
+    transfer: true
     type: ability
   - _id: jNVwWGftQrYicpwi
     _key: '!items.effects!2g67zMpSHl6nn5n8.jNVwWGftQrYicpwi'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.ae9bbe52072963a4
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.ae9bbe52072963a4
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/flame-ray.webp
     name: Flame Ray
     system:
@@ -166,15 +167,16 @@ effects:
       standard: true
       targets:
         - creature
+    transfer: true
     type: ability
   - _id: ltZA2RRIcCYTzW0J
     _key: '!items.effects!2g67zMpSHl6nn5n8.ltZA2RRIcCYTzW0J'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.9fca66d84679dd1f
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.9fca66d84679dd1f
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/ignite.webp
     name: Ignite
     system:
@@ -182,6 +184,7 @@ effects:
       automations:
         72ce567009179bea:
           _id: 72ce567009179bea
+          changeType: add
           competencies:
             - 0
             - 1
@@ -194,31 +197,30 @@ effects:
             unit: second
           heighten:
             - 1
-          mode: 5
           type: duration
         e789ed5e109ebd1a:
           _id: e789ed5e109ebd1a
           changes:
-            - key: system.light.dim
-              mode: 4
+            - key: token.light.dim
+              phase: normal
               priority: 5
               qualifier: '1'
               target: Actor
-              time: normal
+              type: upgrade
               value: '10'
-            - key: system.light.color
-              mode: 5
+            - key: token.light.color
+              phase: normal
               priority: 5
               qualifier: '1'
               target: Actor
-              time: normal
+              type: override
               value: '#C64600'
-            - key: system.light.animation.type
-              mode: 5
+            - key: token.light.animation.type
+              phase: normal
               priority: 5
               qualifier: '1'
               target: Actor
-              time: normal
+              type: override
               value: torch
           competencies:
             - 0
@@ -271,15 +273,16 @@ effects:
       sustained: true
       targets:
         - item
+    transfer: true
     type: ability
   - _id: DEJ3d4VyZch9MA2u
     _key: '!items.effects!2g67zMpSHl6nn5n8.DEJ3d4VyZch9MA2u'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.3b0ab4b52326316f
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.3b0ab4b52326316f
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/light.webp
     name: Light
     system:
@@ -288,40 +291,40 @@ effects:
         e789ed5e109ebd1a:
           _id: e789ed5e109ebd1a
           changes:
-            - key: system.light.bright
-              mode: 4
+            - key: token.light.bright
+              phase: normal
               priority: 10
               qualifier: '1'
               target: Actor
-              time: normal
+              type: upgrade
               value: '50'
-            - key: system.light.dim
-              mode: 4
+            - key: token.light.dim
+              phase: normal
               priority: 10
               qualifier: '1'
               target: Actor
-              time: normal
+              type: upgrade
               value: '100'
-            - key: system.light.color
-              mode: 5
+            - key: token.light.color
+              phase: normal
               priority: 5
               qualifier: '1'
               target: Actor
-              time: normal
+              type: override
               value: '#C64600'
-            - key: system.light.animation.type
-              mode: 5
+            - key: token.light.animation.type
+              phase: normal
               priority: 10
               qualifier: '1'
               target: Actor
-              time: normal
+              type: override
               value: pulse
-            - key: system.light.angle
-              mode: 5
+            - key: token.light.angle
+              phase: normal
               priority: 10
               qualifier: '1'
               target: Actor
-              time: normal
+              type: override
               value: '60'
           competencies:
             - 0
@@ -382,15 +385,16 @@ effects:
       sustained: true
       targets:
         - area
+    transfer: true
     type: ability
   - _id: LbLjjWiopqGfltmW
     _key: '!items.effects!2g67zMpSHl6nn5n8.LbLjjWiopqGfltmW'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.27733508134aba43
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.27733508134aba43
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/mage-light.webp
     name: Mage Light
     system:
@@ -425,15 +429,16 @@ effects:
       standard: true
       targets:
         - self
+    transfer: true
     type: ability
   - _id: yHA67BqutokLx7uo
     _key: '!items.effects!2g67zMpSHl6nn5n8.yHA67BqutokLx7uo'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.6de6fc2f99a96881
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.6de6fc2f99a96881
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/self-detonate.webp
     name: Self Detonate
     system:
@@ -501,6 +506,7 @@ effects:
       sustained: true
       targets:
         - creature
+    transfer: true
     type: ability
 folder: da5b8437ae291af1
 img: systems/teriock/src/icons/ranks/rank-1-flame-mage.webp

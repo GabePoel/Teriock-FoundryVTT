@@ -1,59 +1,53 @@
 _id: 8d90fdbbec5b331d
-_key: '!items!8d90fdbbec5b331d'
+_key: '!effects!8d90fdbbec5b331d'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 8d90fdbbec5b331d
-    _key: '!items.effects!8d90fdbbec5b331d.8d90fdbbec5b331d'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/territorial-casting.webp
-    name: Territorial Casting
-    system:
-      class: natureMage
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: self
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: r1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: territorial-casting
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>You cast a @L[Category:Single action spells]{single action spell}
-          at the triggering creature.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - spell
-      trigger: <p>Another creature moves within 5 feet of you.</p>
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/territorial-casting.webp
 name: Territorial Casting
-type: wrapper
+system:
+  class: natureMage
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: self
+  duration:
+    raw: '0'
+    unit: instant
+  executionTime:
+    base: r1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: territorial-casting
+  interaction: manifest
+  maneuver: reactive
+  mundane: false
+  overview:
+    base: >-
+      <p>You cast a @L[Category:Single action spells]{single action spell} at
+      the triggering creature.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: self
+  skill: true
+  standard: true
+  targets:
+    - spell
+  trigger: <p>Another creature moves within 5 feet of you.</p>
+transfer: true
+type: ability

@@ -1,52 +1,45 @@
 _id: ba75d39b81deebc1
-_key: '!items!ba75d39b81deebc1'
+_key: '!effects!ba75d39b81deebc1'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: ba75d39b81deebc1
-    _key: '!items.effects!ba75d39b81deebc1.ba75d39b81deebc1'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/instant-devour.webp
-    name: Instant Devour
-    system:
-      competence:
-        raw: 0
-      delivery: bite
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: instant-devour
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 2
-      powerSources:
-        - martial
-      range:
-        unit: contact
-      results:
-        hit: >-
-          <p>Target is @L[Condition:Dead]{dead}, @L[Condition:Ruined]{ruined},
-          and their @L[Core:Size]{SIZE} is reduced by 2. If their
-          @L[Core:Size]{SIZE} was already 2 or less, their body is completely
-          consumed.</p>
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/instant-devour.webp
 name: Instant Devour
-type: wrapper
+system:
+  competence:
+    raw: 0
+  delivery: bite
+  duration:
+    raw: '0'
+    unit: instant
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: instant-devour
+  interaction: attack
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 2
+  powerSources:
+    - martial
+  range:
+    unit: contact
+  results:
+    hit: >-
+      <p>Target is @L[Condition:Dead]{dead}, @L[Condition:Ruined]{ruined}, and
+      their @L[Core:Size]{SIZE} is reduced by 2. If their @L[Core:Size]{SIZE}
+      was already 2 or less, their body is completely consumed.</p>
+  targets:
+    - creature
+transfer: true
+type: ability

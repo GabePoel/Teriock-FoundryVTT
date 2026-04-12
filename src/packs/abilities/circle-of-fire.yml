@@ -1,108 +1,108 @@
 _id: 44f59abe3805e31e
-_key: '!items!44f59abe3805e31e'
+_key: '!effects!44f59abe3805e31e'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 44f59abe3805e31e
-    _key: '!items.effects!44f59abe3805e31e.44f59abe3805e31e'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/circle-of-fire.webp
-    name: Circle of Fire
-    system:
-      automations:
-        29b275994cf9f5b1:
-          _id: 29b275994cf9f5b1
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: 1d4[magic fire]
-          heighten:
-            - 1
-            - 0
-          merge: true
-          roll: damage
-          type: roll
-        5e4d195ed81a10cc:
-          _id: 5e4d195ed81a10cc
-          competencies:
-            - 1
-            - 2
-          formula: 1d4[magic fire]
-          heighten:
-            - 1
-            - 0
-          merge: true
-          roll: damage
-          type: roll
-        72ce567009179bea:
-          _id: 72ce567009179bea
-          competencies:
-            - 0
-            - 1
-            - 2
-          duration:
-            raw: '@h * 86400'
-          heighten:
-            - 1
-          type: duration
-      class: paladin
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: hand
-      duration:
-        raw: '8'
-        unit: hour
-      elements:
-        - flame
-      executionTime: 10 Minutes
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 24 hours.</p>
-      identifier: circle-of-fire
-      interaction: manifest
-      maneuver: slow
-      overview:
-        base: >-
-          <p>You enchant an area no larger than 30 feet in any direction. Any
-          creature within this area takes [[/damage 1d4[magic fire]]]
-          @L[Core:Damage]{damage} at the end of each of their
-          @L[Core:Turns]{turns}.</p>
-        proficient: >-
-          <p>Creatures within this area take [[/damage 1d4[magic fire]]]
-          @L[Core:Damage]{damage} at the start of each of their
-          @L[Core:Turns]{turns} as well.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      ritual: true
-      rotator: true
-      spell: true
-      standard: true
-      targets:
-        - area
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/circle-of-fire.webp
 name: Circle of Fire
-type: wrapper
+system:
+  automations:
+    29b275994cf9f5b1:
+      _id: 29b275994cf9f5b1
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: 1d4[magic fire]
+      heighten:
+        - 1
+        - 0
+      impact: damage
+      merge: true
+      type: roll
+    5e4d195ed81a10cc:
+      _id: 5e4d195ed81a10cc
+      competencies:
+        - 1
+        - 2
+      formula: 1d4[magic fire]
+      heighten:
+        - 1
+        - 0
+      impact: damage
+      merge: true
+      type: roll
+    72ce567009179bea:
+      _id: 72ce567009179bea
+      changeType: add
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      duration:
+        raw: '@h * 86400'
+        unit: second
+      heighten:
+        - 1
+      type: duration
+  class: paladin
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: hand
+  duration:
+    raw: '8'
+    unit: hour
+  elements:
+    - flame
+  executionTime:
+    base: 10 Minutes
+    slow:
+      raw: '10'
+      unit: minute
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  heightened: >-
+    <p>For each additional @L[Core:MP]{MP} spent, the duration of this effect
+    increases by 24 hours.</p>
+  identifier: circle-of-fire
+  interaction: manifest
+  maneuver: slow
+  mundane: false
+  overview:
+    base: >-
+      <p>You enchant an area no larger than 30 feet in any direction. Any
+      creature within this area takes [[/damage 1d4[magic fire]]]
+      @L[Core:Damage]{damage} at the end of each of their
+      @L[Core:Turns]{turns}.</p>
+    proficient: >-
+      <p>Creatures within this area take [[/damage 1d4[magic fire]]]
+      @L[Core:Damage]{damage} at the start of each of their
+      @L[Core:Turns]{turns} as well.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: contact
+  ritual: true
+  rotator: true
+  spell: true
+  standard: true
+  targets:
+    - area
+transfer: true
+type: ability

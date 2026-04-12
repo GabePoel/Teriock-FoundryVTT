@@ -1,111 +1,60 @@
 _id: dccbed24e9bf8cf1
-_key: '!items!dccbed24e9bf8cf1'
+_key: '!effects!dccbed24e9bf8cf1'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: dccbed24e9bf8cf1
-    _key: '!items.effects!dccbed24e9bf8cf1.dccbed24e9bf8cf1'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/hibernation-shield.webp
-    name: Hibernation Shield
-    system:
-      class: lifeMage
-      competence:
-        raw: 0
-      delivery: sight
-      duration:
-        conditions:
-          present:
-            - down
-        raw: '0'
-        triggers:
-          - dawn
-        unit: unlimited
-      elements:
-        - life
-      endCondition: <p>Target is no longer @L[Condition:Down]{down}.</p>
-      executionTime: r1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: hibernation-shield
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>Target gains @L[Ability:Hibernation]{Hibernation}. You may target
-          yourself with this as you go @L[Condition:Down]{down}.</p>
-        fluent: <p>You may target up to @L[Core:Fluency Bonus]{F} creatures.</p>
-        proficient: <p>You may target up to @L[Core:Proficiency Bonus]{P} creatures.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        raw: '10'
-        unit: ft
-      requirements: <p>Target must be @L[Condition:Down]{down}.</p>
-      spell: true
-      standard: true
-      targets:
-        - creature
-      trigger: <p>You go @L[Condition:Down]{down}.</p>
-    type: ability
-  - _id: TfU94FNqZY4NPZTc
-    _key: '!items.effects!dccbed24e9bf8cf1.TfU94FNqZY4NPZTc'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.4c77fd6fd5cfe2b8
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/hibernation.webp
-    name: Hibernation
-    system:
-      _sup: dccbed24e9bf8cf1
-      class: ranger
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        conditions:
-          present:
-            - down
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: hibernation
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: <p>All damage is @L[Keyword:Deboosted]{deboosted} against you.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - primal
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/hibernation-shield.webp
 name: Hibernation Shield
-type: wrapper
+system:
+  class: lifeMage
+  competence:
+    raw: 0
+  delivery: sight
+  duration:
+    conditions:
+      present:
+        - down
+    raw: '0'
+    triggers:
+      - dawn
+    unit: unlimited
+  elements:
+    - life
+  endCondition: <p>Target is no longer @L[Condition:Down]{down}.</p>
+  executionTime:
+    base: r1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: hibernation-shield
+  interaction: manifest
+  maneuver: reactive
+  mundane: false
+  overview:
+    base: >-
+      <p>Target gains @L[Ability:Hibernation]{Hibernation}. You may target
+      yourself with this as you go @L[Condition:Down]{down}.</p>
+    fluent: <p>You may target up to @L[Core:Fluency Bonus]{F} creatures.</p>
+    proficient: <p>You may target up to @L[Core:Proficiency Bonus]{P} creatures.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    raw: '10'
+    unit: ft
+  requirements: <p>Target must be @L[Condition:Down]{down}.</p>
+  spell: true
+  standard: true
+  targets:
+    - creature
+  trigger: <p>You go @L[Condition:Down]{down}.</p>
+transfer: true
+type: ability

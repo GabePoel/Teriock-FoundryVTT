@@ -1,7 +1,7 @@
 _id: 33b4e759080c18ad
 _key: '!items!33b4e759080c18ad'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.23
@@ -9,11 +9,11 @@ effects:
   - _id: CPc5MjhB7WFWYUiR
     _key: '!items.effects!33b4e759080c18ad.CPc5MjhB7WFWYUiR'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.86b86d9d502f0687
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.86b86d9d502f0687
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/cannot-climb.webp
     name: Cannot Climb
     system:
@@ -22,11 +22,11 @@ effects:
           _id: e789ed5e109ebd1a
           changes:
             - key: system.speedAdjustments.climb
-              mode: 5
+              phase: normal
               priority: 20
               qualifier: '1'
               target: Actor
-              time: normal
+              type: override
               value: '0'
           competencies:
             - 0
@@ -67,15 +67,16 @@ effects:
         unit: self
       targets:
         - self
+    transfer: true
     type: ability
   - _id: VwKOn8e99fmfSXV4
     _key: '!items.effects!33b4e759080c18ad.VwKOn8e99fmfSXV4'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.5c8394c74c689c25
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.3TtZLD3ppn1UO5vG
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/leaping.webp
     name: Leaping
     system:
@@ -95,18 +96,18 @@ effects:
           _id: e789ed5e109ebd1a
           changes:
             - key: system.speedAdjustments.leapVertical
-              mode: 4
+              phase: normal
               priority: 10
               qualifier: '1'
               target: Actor
-              time: normal
+              type: upgrade
               value: '1'
             - key: system.speedAdjustments.leapHorizontal
-              mode: 4
+              phase: normal
               priority: 10
               qualifier: '1'
               target: Actor
-              time: normal
+              type: upgrade
               value: '2'
           competencies:
             - 0
@@ -123,18 +124,18 @@ effects:
           _id: f025905e157ac261
           changes:
             - key: system.speedAdjustments.leapVertical
-              mode: 4
+              phase: normal
               priority: 10
               qualifier: '1'
               target: Actor
-              time: normal
+              type: upgrade
               value: '2'
             - key: system.speedAdjustments.leapHorizontal
-              mode: 4
+              phase: normal
               priority: 10
               qualifier: '1'
               target: Actor
-              time: normal
+              type: upgrade
               value: '3'
           competencies:
             - 1
@@ -182,6 +183,7 @@ effects:
       standard: true
       targets:
         - self
+    transfer: true
     type: ability
 folder: 111191792288f1c7
 img: icons/magic/air/weather-wind-gust.webp

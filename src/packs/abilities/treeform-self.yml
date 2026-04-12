@@ -1,83 +1,103 @@
 _id: 5dd79b5c15a16247
-_key: '!items!5dd79b5c15a16247'
+_key: '!effects!5dd79b5c15a16247'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 5dd79b5c15a16247
-    _key: '!items.effects!5dd79b5c15a16247.5dd79b5c15a16247'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/treeform-self.webp
-    name: Treeform Self
-    system:
-      automations:
-        9f08fabc1d2bcac2:
-          _id: 9f08fabc1d2bcac2
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: include
-          status: transformed
-          type: status
-        AjiJDtn4fs82jWgF:
-          _id: AjiJDtn4fs82jWgF
-          documents:
-            - Compendium.teriock.species.Item.85b3b9fb528f2775
-          level: minor
-          override:
-            - art
-          overrideCompetence: true
-          reset:
-            - gp
-            - hp
-          type: transformation
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        triggers:
-          - dawn
-        unit: unlimited
-      effectTypes:
-        - transformation
-      elements:
-        - nature
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: treeform-self
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>You are @L[Condition:Transformed]{minorly transformed} into a
-          @L[Creature:Tree]{tree} or revert from being one. You may do this even
-          if you are @L[Condition:Transformed]{minorly transformed} into a
-          @L[Creature:Tree]{tree}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/treeform-self.webp
 name: Treeform Self
-type: wrapper
+system:
+  automations:
+    9f08fabc1d2bcac2:
+      _id: 9f08fabc1d2bcac2
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: include
+      status: transformed
+      target: false
+      type: status
+    AjiJDtn4fs82jWgF:
+      _id: AjiJDtn4fs82jWgF
+      automatic: true
+      competence:
+        raw: 0
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      documents:
+        - Compendium.teriock.species.Item.85b3b9fb528f2775
+      heighten:
+        - 0
+        - 1
+      level: minor
+      multi: false
+      override:
+        - art
+      overrideCompetence: true
+      reset:
+        - gp
+        - hp
+      ring: false
+      suppress:
+        - body
+        - equipment
+        - fluency
+        - rank
+        - species
+      type: transformation
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    triggers:
+      - dawn
+    unit: unlimited
+  effectTypes:
+    - transformation
+  elements:
+    - nature
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: treeform-self
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>You are @L[Condition:Transformed]{minorly transformed} into a
+      @L[Creature:Tree]{tree} or revert from being one. You may do this even if
+      you are @L[Condition:Transformed]{minorly transformed} into a
+      @L[Creature:Tree]{tree}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: self
+  targets:
+    - self
+transfer: true
+type: ability

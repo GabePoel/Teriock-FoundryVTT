@@ -2,7 +2,7 @@ _id: NXAZRXvKLoec9F2i
 _key: '!items!NXAZRXvKLoec9F2i'
 _stats:
   compendiumSource: Compendium.teriock.classes.Item.0615c1e02cf44dbd
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.23
@@ -10,11 +10,11 @@ effects:
   - _id: CaTTWTstOULxfkrp
     _key: '!items.effects!NXAZRXvKLoec9F2i.CaTTWTstOULxfkrp'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.7dbf0f42e843d563
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.7dbf0f42e843d563
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: combat
@@ -53,15 +53,221 @@ effects:
       skill: true
       targets:
         - self
+    transfer: true
     type: ability
-  - _id: Of9sOoo4szd2CEOp
-    _key: '!items.effects!NXAZRXvKLoec9F2i.Of9sOoo4szd2CEOp'
+  - _id: EjA48yTYBOoAhMOD
+    _key: '!items.effects!NXAZRXvKLoec9F2i.EjA48yTYBOoAhMOD'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.2496ec9ba004a8e2
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.f4719f88dc5f8192
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
+    flags:
+      teriock:
+        category: support
+        defaultAbility: true
+        dontConsume: false
+    img: systems/teriock/src/icons/abilities/expanded-flame-elder-sorcery.webp
+    name: Expanded Flame Elder Sorcery
+    system:
+      automations:
+        f025905e157ac261:
+          _id: f025905e157ac261
+          changes:
+            - key: system.competence.raw
+              phase: fluency
+              priority: 10
+              qualifier: '@identifier.elder-sorcery-creation'
+              target: ability
+              type: upgrade
+              value: '2'
+            - key: system.competence.raw
+              phase: fluency
+              priority: 10
+              qualifier: '@identifier.celestial-elder-sorcery-words'
+              target: ability
+              type: upgrade
+              value: '2'
+            - key: system.competence.raw
+              phase: fluency
+              priority: 10
+              qualifier: '@identifier.flame-elder-sorcery-words'
+              target: ability
+              type: upgrade
+              value: '2'
+          competencies:
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+      class: flameMage
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: instant
+      elderSorcery: true
+      elements:
+        - flame
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: int
+      form: special
+      identifier: expanded-flame-elder-sorcery
+      interaction: feat
+      maneuver: passive
+      overview:
+        base: >-
+          <p>In addition to the custom rotator spells you create, you can learn
+          @L[Category:Rotator spells]{spells} created by others. When you come
+          across a fully created spell using only words you are @L[Core:Fluency
+          Bonus]{fluent} in, can make a DC 12 + OP @L[Core:INT]{INT}
+          @L[Core:Feat Interaction]{feat save} to attempt to learn it over the
+          course of a @L[Core:Long Rest]{long rest}. If you succeed, you can add
+          it to your rotator spell list. If you fail, you are
+          @L[Keyword:Incapable]{incapable} of attempting to learn that spell
+          again. The @L[Core:Game Master]{GM} may modify the DC based on the
+          spell's complexity, your knowledge of the spell, any special training
+          you receive, if the spell's creator is there to assist you, or for any
+          other factors they see fit. You may also attempt to learn words that
+          you come across as long as they are of elements you are
+          @L[Core:Fluency Bonus]{fluent} in. The @L[Core:Game Master]{GM} may
+          adjust the DC for these as they see fit as well, but the default is DC
+          15 + OP @L[Core:Intelligence]{INT} @L[Core:Feat Interaction]{feat
+          save}.</p>
+        proficient: >-
+          <p>You are @L[Core:Fluency Bonus]{fluent} in @L[Ability:Elder Sorcery
+          Creation]{Elder Sorcery Creation}, @L[Ability:Celestial Elder Sorcery
+          Words]{Celestial Elder Sorcery Words}, and @L[Ability:Flame Elder
+          Sorcery Words]{Flame Elder Sorcery Words}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      results:
+        fail: >-
+          <p>You are @L[Keyword:Incapable]{incapable} of attempting to learn
+          that spell or word again.</p>
+        save: <p>You learn the spell or word.</p>
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: 1kZZWRw38qxY84xG
+    _key: '!items.effects!NXAZRXvKLoec9F2i.1kZZWRw38qxY84xG'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.7e1e0b3ce0953833
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/minor-weapon-enchantment.webp
+    name: Minor Weapon Enchantment
+    system:
+      _sup: CaTTWTstOULxfkrp
+      automations:
+        72ce567009179bea:
+          _id: 72ce567009179bea
+          changeType: add
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          duration:
+            raw: '@h * 3600'
+            unit: second
+          heighten:
+            - 1
+          type: duration
+      class: flameMage
+      competence:
+        raw: 0
+      costs:
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+        primary:
+          mp:
+            formula: '1'
+            type: formula
+      delivery: sight
+      duration:
+        raw: '1'
+        unit: hour
+      elements:
+        - flame
+      executionTime:
+        base: 10 Minutes
+        slow:
+          raw: '10'
+          unit: minute
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
+        effect increases by 1 hour.</p>
+      identifier: minor-weapon-enchantment
+      interaction: manifest
+      invoked: true
+      maneuver: slow
+      mundane: false
+      overview:
+        base: >-
+          <p>Target weapon is enchanted to deal @L[Damage:Magic]{magic damage}
+          and @L[Property:Granting]{grant} a @L[Category:Conjured
+          spells]{conjured} @L[Category:Ray delivery spells]{ray spell} that you
+          know. Except, the spell has the @L[Category:AV0 spells]{AV0}
+          @L[Category:Weapon delivery spells]{weapon delivery} instead, is
+          @L[Keyword:Gifted]{gifted}, and can only be delivered with the
+          enchanted weapon. The enchanted weapon is @L[Core:Presence]{tier 1}.
+          If the weapon is @L[Property:Shattered]{shattered}, this enchantment
+          fades.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        raw: '5'
+        unit: ft
+      ritual: true
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - weapon
+    transfer: true
+    type: ability
+  - _id: 6VLcWrX97rttZ0fF
+    _key: '!items.effects!NXAZRXvKLoec9F2i.6VLcWrX97rttZ0fF'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.2496ec9ba004a8e2
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/cremate.webp
     name: Cremate
     system:
@@ -135,7 +341,10 @@ effects:
         - damaging
       elements:
         - flame
-      executionTime: a1
+      executionTime:
+        base: a1
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -146,6 +355,7 @@ effects:
       interaction: attack
       invoked: true
       maneuver: active
+      mundane: false
       piercing:
         raw: 0
       powerSources:
@@ -162,204 +372,7 @@ effects:
       standard: true
       targets:
         - vitals
-    type: ability
-  - _id: EjA48yTYBOoAhMOD
-    _key: '!items.effects!NXAZRXvKLoec9F2i.EjA48yTYBOoAhMOD'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.f4719f88dc5f8192
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    flags:
-      teriock:
-        category: support
-        defaultAbility: true
-        dontConsume: false
-    img: systems/teriock/src/icons/abilities/expanded-flame-elder-sorcery.webp
-    name: Expanded Flame Elder Sorcery
-    system:
-      automations:
-        f025905e157ac261:
-          _id: f025905e157ac261
-          changes:
-            - key: system.competence.raw
-              mode: 4
-              priority: 10
-              qualifier: '@identifier.elder-sorcery-creation'
-              target: ability
-              time: fluency
-              value: '2'
-            - key: system.competence.raw
-              mode: 4
-              priority: 10
-              qualifier: '@identifier.celestial-elder-sorcery-words'
-              target: ability
-              time: fluency
-              value: '2'
-            - key: system.competence.raw
-              mode: 4
-              priority: 10
-              qualifier: '@identifier.flame-elder-sorcery-words'
-              target: ability
-              time: fluency
-              value: '2'
-          competencies:
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-      class: flameMage
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: instant
-      elderSorcery: true
-      elements:
-        - flame
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: int
-      form: special
-      identifier: expanded-flame-elder-sorcery
-      interaction: feat
-      maneuver: passive
-      overview:
-        base: >-
-          <p>In addition to the custom rotator spells you create, you can learn
-          @L[Category:Rotator spells]{spells} created by others. When you come
-          across a fully created spell using only words you are @L[Core:Fluency
-          Bonus]{fluent} in, can make a DC 12 + OP @L[Core:INT]{INT}
-          @L[Core:Feat Interaction]{feat save} to attempt to learn it over the
-          course of a @L[Core:Long Rest]{long rest}. If you succeed, you can add
-          it to your rotator spell list. If you fail, you are
-          @L[Keyword:Incapable]{incapable} of attempting to learn that spell
-          again. The @L[Core:Game Master]{GM} may modify the DC based on the
-          spell's complexity, your knowledge of the spell, any special training
-          you receive, if the spell's creator is there to assist you, or for any
-          other factors they see fit. You may also attempt to learn words that
-          you come across as long as they are of elements you are
-          @L[Core:Fluency Bonus]{fluent} in. The @L[Core:Game Master]{GM} may
-          adjust the DC for these as they see fit as well, but the default is DC
-          15 + OP @L[Core:Intelligence]{INT} @L[Core:Feat Interaction]{feat
-          save}.</p>
-        proficient: >-
-          <p>You are @L[Core:Fluency Bonus]{fluent} in @L[Ability:Elder Sorcery
-          Creation]{Elder Sorcery Creation}, @L[Ability:Celestial Elder Sorcery
-          Words]{Celestial Elder Sorcery Words}, and @L[Ability:Flame Elder
-          Sorcery Words]{Flame Elder Sorcery Words}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      results:
-        fail: >-
-          <p>You are @L[Keyword:Incapable]{incapable} of attempting to learn
-          that spell or word again.</p>
-        save: <p>You learn the spell or word.</p>
-      skill: true
-      standard: true
-      targets:
-        - self
-    type: ability
-  - _id: OFPEJ5NINFBzzVjj
-    _key: '!items.effects!NXAZRXvKLoec9F2i.OFPEJ5NINFBzzVjj'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.7e1e0b3ce0953833
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/abilities/minor-weapon-enchantment.webp
-    name: Minor Weapon Enchantment
-    system:
-      _sup: CaTTWTstOULxfkrp
-      automations:
-        72ce567009179bea:
-          _id: 72ce567009179bea
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          duration:
-            raw: '@h * 3600'
-            unit: second
-          heighten:
-            - 1
-          mode: 5
-          type: duration
-      class: flameMage
-      competence:
-        raw: 0
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: sight
-      duration:
-        raw: '1'
-        unit: hour
-      elements:
-        - flame
-      executionTime: 10 Minutes
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 1 hour.</p>
-      identifier: minor-weapon-enchantment
-      interaction: manifest
-      invoked: true
-      maneuver: slow
-      overview:
-        base: >-
-          <p>Target weapon is enchanted to deal @L[Damage:Magic]{magic damage}
-          and @L[Property:Granting]{grant} a @L[Category:Conjured
-          spells]{conjured} @L[Category:Ray delivery spells]{ray spell} that you
-          know. Except, the spell has the @L[Category:AV0 spells]{AV0}
-          @L[Category:Weapon delivery spells]{weapon delivery} instead, is
-          @L[Keyword:Gifted]{gifted}, and can only be delivered with the
-          enchanted weapon. The enchanted weapon is @L[Core:Presence]{tier 1}.
-          If the weapon is @L[Property:Shattered]{shattered}, this enchantment
-          fades.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        raw: '5'
-        unit: ft
-      ritual: true
-      rotator: true
-      spell: true
-      standard: true
-      targets:
-        - weapon
+    transfer: true
     type: ability
 folder: da5b8437ae291af1
 img: systems/teriock/src/icons/ranks/rank-3-flame-mage.webp

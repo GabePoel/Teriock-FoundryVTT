@@ -1,7 +1,7 @@
 _id: 21b38d71792642dd
 _key: '!items!21b38d71792642dd'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.29
@@ -9,11 +9,11 @@ effects:
   - _id: QfYIvnVdhSo69Db6
     _key: '!items.effects!21b38d71792642dd.QfYIvnVdhSo69Db6'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.891de334396620e1
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.891de334396620e1
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.63
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/properties/weapon.webp
     name: Weapon
     system:
@@ -25,15 +25,16 @@ effects:
       form: intrinsic
       identifier: weapon
       mundane: true
+    transfer: true
     type: property
   - _id: YO5TamPRhJOmWbtw
     _key: '!items.effects!21b38d71792642dd.YO5TamPRhJOmWbtw'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.9d87c75655012284
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.9d87c75655012284
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: icons/magic/symbols/runes-star-pentagon-orange-purple.webp
     name: Spell Store
     system:
@@ -82,79 +83,16 @@ effects:
       ritual: true
       targets:
         - weapon
-    type: ability
-  - _id: 0U6JLkgiwD6swAVF
-    _key: '!items.effects!21b38d71792642dd.0U6JLkgiwD6swAVF'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.ea1ecd00bc4430e1
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/spell-strike.webp
-    name: Spell Strike
-    system:
-      _sup: YO5TamPRhJOmWbtw
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: weapon
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime:
-        base: r0
-        slow:
-          unit: second
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: spell-strike
-      improvement: >-
-        <p>You are considered to have and be @L[Core:Proficiency
-        Bonus]{proficient} in the stored spell for this purpose.</p>
-      interaction: manifest
-      limitation: >-
-        <p>Can only be used with the stored spell and the item it is stored
-        in.</p>
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>Target takes the "on hit" effect of a @L[Category:Missile delivery
-          spells]{missile spell} that you are @L[Core:Proficiency
-          Bonus]{proficient} in. If the triggering hit was a critical hit, then
-          the target takes the "on critical hit" effect instead.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      skill: true
-      standard: true
-      targets:
-        - creature
-      trigger: >-
-        <p>You have just landed a hit with a @L[Category:Weapon delivery
-        abilities]{weapon} or @L[Category:Bite delivery abilities]{bite}
-        @L[Category:Attack abilities]{attack} on another creature and the effect
-        has successfully applied.</p>
+    transfer: true
     type: ability
   - _id: tFJU61ATYk8dIyh4
     _key: '!items.effects!21b38d71792642dd.tFJU61ATYk8dIyh4'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.25a219e3670cd776
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.25a219e3670cd776
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: icons/magic/defensive/shield-barrier-flaming-pentagon-purple-orange.webp
     name: Spell Catch
     system:
@@ -199,19 +137,20 @@ effects:
           @L[Category:Weapons]{weapon} at a time.</p>
       targets:
         - spell
+    transfer: true
     type: ability
-  - _id: dzBSdtII82tEEhhC
-    _key: '!items.effects!21b38d71792642dd.dzBSdtII82tEEhhC'
+  - _id: NTCbBXMzdHq3sNGN
+    _key: '!items.effects!21b38d71792642dd.NTCbBXMzdHq3sNGN'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.ea1ecd00bc4430e1
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.HXidffXqZoxo8wog
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/spell-strike.webp
     name: Spell Strike
     system:
-      _sup: tFJU61ATYk8dIyh4
+      _sup: YO5TamPRhJOmWbtw
       competence:
         raw: 0
       costs:
@@ -242,6 +181,7 @@ effects:
         <p>Can only be used with the stored spell and the item it is stored
         in.</p>
       maneuver: reactive
+      mundane: false
       overview:
         base: >-
           <p>Target takes the "on hit" effect of a @L[Category:Missile delivery
@@ -263,6 +203,75 @@ effects:
         abilities]{weapon} or @L[Category:Bite delivery abilities]{bite}
         @L[Category:Attack abilities]{attack} on another creature and the effect
         has successfully applied.</p>
+    transfer: true
+    type: ability
+  - _id: ZG9WKnKHUHzyfY8X
+    _key: '!items.effects!21b38d71792642dd.ZG9WKnKHUHzyfY8X'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.HXidffXqZoxo8wog
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/spell-strike.webp
+    name: Spell Strike
+    system:
+      _sup: tFJU61ATYk8dIyh4
+      competence:
+        raw: 0
+      costs:
+        primary:
+          mp:
+            formula: '1'
+            type: formula
+        tweaks:
+          adept: 1
+      delivery: weapon
+      duration:
+        raw: '0'
+        unit: instant
+      executionTime:
+        base: r0
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: spell-strike
+      improvement: >-
+        <p>You are considered to have and be @L[Core:Proficiency
+        Bonus]{proficient} in the stored spell for this purpose.</p>
+      interaction: manifest
+      limitation: >-
+        <p>Can only be used with the stored spell and the item it is stored
+        in.</p>
+      maneuver: reactive
+      mundane: false
+      overview:
+        base: >-
+          <p>Target takes the "on hit" effect of a @L[Category:Missile delivery
+          spells]{missile spell} that you are @L[Core:Proficiency
+          Bonus]{proficient} in. If the triggering hit was a critical hit, then
+          the target takes the "on critical hit" effect instead.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: contact
+      skill: true
+      standard: true
+      targets:
+        - creature
+      trigger: >-
+        <p>You have just landed a hit with a @L[Category:Weapon delivery
+        abilities]{weapon} or @L[Category:Bite delivery abilities]{bite}
+        @L[Category:Attack abilities]{attack} on another creature and the effect
+        has successfully applied.</p>
+    transfer: true
     type: ability
 folder: 9e47cf966e0cd702
 img: systems/teriock/src/assets/items/tordils-spellmace.webp

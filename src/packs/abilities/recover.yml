@@ -1,62 +1,65 @@
 _id: 39fe143046e00a5b
-_key: '!items!39fe143046e00a5b'
+_key: '!effects!39fe143046e00a5b'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 39fe143046e00a5b
-    _key: '!items.effects!39fe143046e00a5b.39fe143046e00a5b'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/recover.webp
-    name: Recover
-    system:
-      automations:
-        t4npARbkhkr306IB:
-          _id: t4npARbkhkr306IB
-          type: heal
-      basic: true
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: Short Rest
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: intrinsic
-      identifier: recover
-      interaction: manifest
-      maneuver: slow
-      overview:
-        base: >-
-          <p>You can spend one or more @L[Core:Hit Points and Mana Points]{hit
-          dice} at the end of a @L[Core:Short Rest]{short rest}, up to the
-          creature's total number of @L[Core:Hit Points and Mana Points]{hit
-          dice}. For each @L[Core:Hit Points and Mana Points]{hit die} spent in
-          this way, the creature regains that many @L[Core:Hit Points and Mana
-          Points]{HP} as well as an additional @L[Core:Proficiency Bonus]{P}
-          @L[Core:Hit Points and Mana Points]{HP}. A creature regains all spent
-          @L[Core:Hit Points and Mana Points]{hit dice} when it finishes a
-          @L[Core:Long Rest]{long rest}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/recover.webp
 name: Recover
-type: wrapper
+system:
+  automations:
+    t4npARbkhkr306IB:
+      _id: t4npARbkhkr306IB
+      competencies:
+        - 0
+        - 1
+        - 2
+      consumeStatDice: true
+      forHarm: false
+      heighten:
+        - 0
+        - 1
+      noStatDice: false
+      type: heal
+  basic: true
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: instant
+  executionTime:
+    base: Short Rest
+    slow:
+      unit: shortRest
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: intrinsic
+  identifier: recover
+  interaction: manifest
+  maneuver: slow
+  mundane: false
+  overview:
+    base: >-
+      <p>You can spend one or more @L[Core:Hit Points and Mana Points]{hit dice}
+      at the end of a @L[Core:Short Rest]{short rest}, up to the creature's
+      total number of @L[Core:Hit Points and Mana Points]{hit dice}. For each
+      @L[Core:Hit Points and Mana Points]{hit die} spent in this way, the
+      creature regains that many @L[Core:Hit Points and Mana Points]{HP} as well
+      as an additional @L[Core:Proficiency Bonus]{P} @L[Core:Hit Points and Mana
+      Points]{HP}. A creature regains all spent @L[Core:Hit Points and Mana
+      Points]{hit dice} when it finishes a @L[Core:Long Rest]{long rest}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  targets:
+    - self
+transfer: true
+type: ability

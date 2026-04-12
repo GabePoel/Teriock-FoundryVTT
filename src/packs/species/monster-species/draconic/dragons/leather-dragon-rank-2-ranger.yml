@@ -2,7 +2,7 @@ _id: jzRchmcHSYC6ydHI
 _key: '!items!jzRchmcHSYC6ydHI'
 _stats:
   compendiumSource: Compendium.teriock.classes.Item.31e542529bb7e382
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.23
@@ -10,11 +10,11 @@ effects:
   - _id: 5BKsotRMe1Ct9xju
     _key: '!items.effects!jzRchmcHSYC6ydHI.5BKsotRMe1Ct9xju'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.68e0e3a2bab7ce3e
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.68e0e3a2bab7ce3e
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/avoid.webp
     name: Avoid
     system:
@@ -121,60 +121,16 @@ effects:
         @L[Keyword:Bearing]{bear} would be hit by an @L[Category:Active
         abilities]{active} or @L[Category:Reactive abilities]{reactive}
         @L[Category:Attack abilities]{attack} you can see.</p>
-    type: ability
-  - _id: jNRYUCzD7eGgwniV
-    _key: '!items.effects!jzRchmcHSYC6ydHI.jNRYUCzD7eGgwniV'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.795b20cad643ecbb
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/flanking.webp
-    name: Flanking
-    system:
-      _sup: jvjQqGr5JQAC23oS
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: flanking
-      interaction: manifest
-      limitation: >-
-        <p>You only get the benefits of [[lookup name]] against creatures of the
-        species you chose.</p>
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You have @L[Core:Advantage]{advantage} on @L[Core:Attack
-          Interaction]{attack rolls} against creatures that are within 5 feet of
-          an ally of yours that isn't incapacitated and that you can see.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
+    transfer: true
     type: ability
   - _id: jvjQqGr5JQAC23oS
     _key: '!items.effects!jzRchmcHSYC6ydHI.jvjQqGr5JQAC23oS'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.4a062a304b141fc0
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.4a062a304b141fc0
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/hunting-party.webp
     name: Hunting Party
     system:
@@ -235,19 +191,32 @@ effects:
       sustained: true
       targets:
         - other
+    transfer: true
     type: ability
   - _id: ZHDQLo3vsrJJfcsa
     _key: '!items.effects!jzRchmcHSYC6ydHI.ZHDQLo3vsrJJfcsa'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.109e84275b290363
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.109e84275b290363
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/species-lore.webp
     name: Species Lore
     system:
       automations:
+        98a4b88702a87417:
+          _id: 98a4b88702a87417
+          bonus: '0'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          tradecraft: hunter
+          type: tradecraft
         fc88a9817ac8a299:
           _id: fc88a9817ac8a299
           bonus: '0'
@@ -312,15 +281,16 @@ effects:
       standard: true
       targets:
         - creature
+    transfer: true
     type: ability
   - _id: V7lXEXqPJXLHnbds
     _key: '!items.effects!jzRchmcHSYC6ydHI.V7lXEXqPJXLHnbds'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.88756c8c064b2bad
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.88756c8c064b2bad
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/spell-turning-weapons.webp
     name: Spell Turning Weapons
     system:
@@ -341,18 +311,18 @@ effects:
           _id: e789ed5e109ebd1a
           changes:
             - key: system.props
-              mode: 2
+              phase: normal
               priority: 10
               qualifier: '@prop.weapon'
               target: equipment
-              time: normal
+              type: add
               value: spellTurning
             - key: system.spellTurning
-              mode: 5
+              phase: normal
               priority: 10
               qualifier: '@prop.weapon'
               target: equipment
-              time: normal
+              type: override
               value: 'true'
           competencies:
             - 0
@@ -398,15 +368,16 @@ effects:
       standard: true
       targets:
         - self
+    transfer: true
     type: ability
-  - _id: fOatt4sy1ArYFDhy
-    _key: '!items.effects!jzRchmcHSYC6ydHI.fOatt4sy1ArYFDhy'
+  - _id: kK0yZc9aMB0GqMFt
+    _key: '!items.effects!jzRchmcHSYC6ydHI.kK0yZc9aMB0GqMFt'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.6f1e35c05a5589d6
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.6f1e35c05a5589d6
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/snare.webp
     name: Snare
     system:
@@ -500,6 +471,7 @@ effects:
       interaction: attack
       limitation: <p>You can only use [[lookup name]] against the chosen species.</p>
       maneuver: active
+      mundane: false
       piercing:
         raw: 0
       powerSources:
@@ -513,6 +485,58 @@ effects:
       standard: true
       targets:
         - leg
+    transfer: true
+    type: ability
+  - _id: SYF3zfvNitUeJkzT
+    _key: '!items.effects!jzRchmcHSYC6ydHI.SYF3zfvNitUeJkzT'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.795b20cad643ecbb
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/flanking.webp
+    name: Flanking
+    system:
+      _sup: jvjQqGr5JQAC23oS
+      competence:
+        raw: 0
+      costs: {}
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: flanking
+      interaction: manifest
+      limitation: >-
+        <p>You only get the benefits of [[lookup name]] against creatures of the
+        chosen species.</p>
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>You have @L[Core:Advantage]{advantage} on @L[Core:Attack
+          Interaction]{attack rolls} against creatures that are within 5 feet of
+          an ally of yours that isn't incapacitated and that you can see.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    transfer: true
     type: ability
 folder: 997cd433ccad17d7
 img: systems/teriock/src/icons/ranks/rank-2-ranger.webp

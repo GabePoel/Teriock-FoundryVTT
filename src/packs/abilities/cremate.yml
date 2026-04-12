@@ -1,108 +1,112 @@
 _id: 2496ec9ba004a8e2
-_key: '!items!2496ec9ba004a8e2'
+_key: '!effects!2496ec9ba004a8e2'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 2496ec9ba004a8e2
-    _key: '!items.effects!2496ec9ba004a8e2.2496ec9ba004a8e2'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/cremate.webp
-    name: Cremate
-    system:
-      automations:
-        1728b3a84ea27844:
-          _id: 1728b3a84ea27844
-          common:
-            - bag
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: common
-        3a62dd96319ca135:
-          _id: 3a62dd96319ca135
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: apply
-          status: burned
-          type: status
-        5e9e1d2033fe152a:
-          _id: 5e9e1d2033fe152a
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: apply
-          status: ruined
-          type: status
-      class: flameMage
-      competence:
-        raw: 0
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: weapon
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - killing
-        - damaging
-      elements:
-        - flame
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: cremate
-      interaction: attack
-      invoked: true
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      requirements: <p>Target is @L[Condition:Down]{down}.</p>
-      results:
-        hit: >-
-          <p>Target is @L[Condition:Burned]{burned}, and
-          @L[Condition:Ruined]{ruined}.</p>
-      rotator: true
-      spell: true
-      standard: true
-      targets:
-        - vitals
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/cremate.webp
 name: Cremate
-type: wrapper
+system:
+  automations:
+    1728b3a84ea27844:
+      _id: 1728b3a84ea27844
+      common:
+        - bag
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 1
+        - 0
+      type: common
+    3a62dd96319ca135:
+      _id: 3a62dd96319ca135
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: apply
+      status: burned
+      target: false
+      type: status
+    5e9e1d2033fe152a:
+      _id: 5e9e1d2033fe152a
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: apply
+      status: ruined
+      target: false
+      type: status
+  class: flameMage
+  competence:
+    raw: 0
+  costs:
+    components:
+      somatic:
+        type: tag
+      verbal:
+        type: tag
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: weapon
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - killing
+    - damaging
+  elements:
+    - flame
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  identifier: cremate
+  interaction: attack
+  invoked: true
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: contact
+  requirements: <p>Target is @L[Condition:Down]{down}.</p>
+  results:
+    hit: >-
+      <p>Target is @L[Condition:Burned]{burned}, and
+      @L[Condition:Ruined]{ruined}.</p>
+  rotator: true
+  spell: true
+  standard: true
+  targets:
+    - vitals
+transfer: true
+type: ability

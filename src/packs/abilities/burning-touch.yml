@@ -1,96 +1,89 @@
-_id: d75976fc51986c97
-_key: '!items!d75976fc51986c97'
+_id: 5mq2yWHo9SivIxO9
+_key: '!effects!5mq2yWHo9SivIxO9'
 _stats:
-  coreVersion: '13'
+  compendiumSource: Compendium.world.abilities-backup.ActiveEffect.5mq2yWHo9SivIxO9
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: d75976fc51986c97
-    _key: '!items.effects!d75976fc51986c97.d75976fc51986c97'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/burning-touch.webp
-    name: Burning Touch
-    system:
-      automations:
-        29b275994cf9f5b1:
-          _id: 29b275994cf9f5b1
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: 1d6[fire magic]
-          heighten:
-            - 1
-            - 0
-          merge: true
-          roll: damage
-          type: roll
-        800c70e6560525a8:
-          _id: 800c70e6560525a8
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: (@h)d6[magic fire]
-          heighten:
-            - 1
-          merge: true
-          roll: damage
-          type: roll
-      class: flameMage
-      competence:
-        raw: 0
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-      delivery: hand
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - damaging
-      elements:
-        - flame
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage}.</p>
-      identifier: burning-touch
-      interaction: attack
-      invoked: true
-      maneuver: active
-      piercing:
-        raw: 2
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      results:
-        critHit: >-
-          <p>Double the @L[Core:Damage]{damage dice} dealt by this
-          @L[Category:Abilities]{ability}.</p>
-        hit: >-
-          <p>Deal [[/damage 1d6[fire magic]]] @L[Core:Damage]{damage} to
-          target.</p>
-      spell: true
-      standard: true
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/burning-touch.webp
 name: Burning Touch
-type: wrapper
+system:
+  automations:
+    29b275994cf9f5b1:
+      _id: 29b275994cf9f5b1
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: 1d6[fire magic]
+      heighten:
+        - 1
+        - 0
+      impact: damage
+      merge: true
+      type: roll
+    800c70e6560525a8:
+      _id: 800c70e6560525a8
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: (@h)d6[magic fire]
+      heighten:
+        - 1
+      impact: damage
+      merge: true
+      type: roll
+  class: flameMage
+  competence:
+    raw: 0
+  costs:
+    components:
+      somatic:
+        type: tag
+      verbal:
+        type: tag
+  delivery: hand
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - damaging
+  elements:
+    - flame
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  heightened: >-
+    <p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage
+    1d6[magic fire]]] @L[Core:Damage]{damage}.</p>
+  identifier: burning-touch
+  interaction: attack
+  invoked: true
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 2
+  powerSources:
+    - magical
+  range:
+    unit: contact
+  results:
+    critHit: >-
+      <p>Double the @L[Core:Damage]{damage dice} dealt by this
+      @L[Category:Abilities]{ability}.</p>
+    hit: <p>Deal [[/damage 1d6[fire magic]]] @L[Core:Damage]{damage} to target.</p>
+  spell: true
+  standard: true
+  targets:
+    - creature
+transfer: true
+type: ability

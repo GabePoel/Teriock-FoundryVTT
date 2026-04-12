@@ -1,59 +1,53 @@
 _id: a8e167d299055705
-_key: '!items!a8e167d299055705'
+_key: '!effects!a8e167d299055705'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: a8e167d299055705
-    _key: '!items.effects!a8e167d299055705.a8e167d299055705'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/cursed-blessings.webp
-    name: Cursed Blessings
-    system:
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      elements:
-        - necromancy
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: cursed-blessings
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>When you are @L[Condition:Dead]{killed}, any
-          @L[Keyword:Blessing]{blessings} on you "invert" and become
-          @L[Keyword:Curse]{curses} on the creature that
-          @L[Condition:Dead]{killed} you. For instance, if you have a
-          @L[Keyword:Blessing]{blessing} of @L[Ability:Flying]{Flying}, the
-          creature that @L[Condition:Dead]{killed} you may be cursed to be
-          eternally @L[Condition:Grounded]{grounded}. The nature and strength of
-          this inversion is determined by the @L[Core:Game Master]{GM}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-        - divine
-      range:
-        unit: self
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/cursed-blessings.webp
 name: Cursed Blessings
-type: wrapper
+system:
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: unlimited
+  elements:
+    - necromancy
+  executionTime:
+    base: passive
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  identifier: cursed-blessings
+  interaction: manifest
+  maneuver: passive
+  mundane: false
+  overview:
+    base: >-
+      <p>When you are @L[Condition:Dead]{killed}, any
+      @L[Keyword:Blessing]{blessings} on you "invert" and become
+      @L[Keyword:Curse]{curses} on the creature that @L[Condition:Dead]{killed}
+      you. For instance, if you have a @L[Keyword:Blessing]{blessing} of
+      @L[Ability:Flying]{Flying}, the creature that @L[Condition:Dead]{killed}
+      you may be cursed to be eternally @L[Condition:Grounded]{grounded}. The
+      nature and strength of this inversion is determined by the @L[Core:Game
+      Master]{GM}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+    - divine
+  range:
+    unit: self
+  targets:
+    - creature
+transfer: true
+type: ability

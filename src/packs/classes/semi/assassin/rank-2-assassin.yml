@@ -1,7 +1,7 @@
 _id: f11823bdfbc329f2
 _key: '!items!f11823bdfbc329f2'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.23
@@ -9,11 +9,11 @@ effects:
   - _id: 3jZPi7VXyvPT6qYL
     _key: '!items.effects!f11823bdfbc329f2.3jZPi7VXyvPT6qYL'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.6b570aa53edcf9a4
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.6b570aa53edcf9a4
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/careful-planning.webp
     name: Careful Planning
     system:
@@ -34,11 +34,11 @@ effects:
           _id: e789ed5e109ebd1a
           changes:
             - key: system.protections.resistances.other
-              mode: 2
+              phase: normal
               priority: 10
               qualifier: '1'
               target: Actor
-              time: normal
+              type: add
               value: Being Surprised (Inside Towns)
           competencies:
             - 0
@@ -93,76 +93,16 @@ effects:
       standard: true
       targets:
         - self
-    type: ability
-  - _id: iywHXVzwQTpsfsCr
-    _key: '!items.effects!f11823bdfbc329f2.iywHXVzwQTpsfsCr'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.7395e721b52f256e
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/abilities/reactive-hide.webp
-    name: Reactive Hide
-    system:
-      _sup: 3jZPi7VXyvPT6qYL
-      automations:
-        0b0d1426453abb55:
-          _id: 0b0d1426453abb55
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          executor: false
-          heighten:
-            - 1
-            - 0
-          relation: apply
-          status: hidden
-          target: false
-          type: status
-      class: assassin
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: r0
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: reactive-hide
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: <p>You become @L[Condition:Hidden]{hidden}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-      trigger: <p>You @L[Condition:Down]{drop} another creature.</p>
+    transfer: true
     type: ability
   - _id: Qp4EozMa6bGC47pj
     _key: '!items.effects!f11823bdfbc329f2.Qp4EozMa6bGC47pj'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.91b30624f59c08d8
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.91b30624f59c08d8
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/slay.webp
     name: Slay
     system:
@@ -238,15 +178,16 @@ effects:
       trigger: >-
         <p>You have just hit a creature with an @L[Category:Attack
         abilities]{attack} that dealt them @L[Core:Damage]{damage} from it.</p>
+    transfer: true
     type: ability
   - _id: 2pTkWDwm4qO9nGUR
     _key: '!items.effects!f11823bdfbc329f2.2pTkWDwm4qO9nGUR'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.c7c6d2ea32608e7b
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.c7c6d2ea32608e7b
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/weapons-mastery.webp
     name: Weapons Mastery
     system:
@@ -310,6 +251,74 @@ effects:
       standard: true
       targets:
         - self
+    transfer: true
+    type: ability
+  - _id: 6jwrf1SbqfiqiyAb
+    _key: '!items.effects!f11823bdfbc329f2.6jwrf1SbqfiqiyAb'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.7395e721b52f256e
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/reactive-hide.webp
+    name: Reactive Hide
+    system:
+      _sup: 3jZPi7VXyvPT6qYL
+      automations:
+        0b0d1426453abb55:
+          _id: 0b0d1426453abb55
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          executor: false
+          heighten:
+            - 1
+            - 0
+          relation: apply
+          status: hidden
+          target: false
+          type: status
+      class: assassin
+      competence:
+        raw: 0
+      costs: {}
+      delivery: self
+      duration:
+        raw: '0'
+        unit: instant
+      executionTime:
+        base: r0
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: reactive-hide
+      interaction: manifest
+      maneuver: reactive
+      mundane: false
+      overview:
+        base: <p>You become @L[Condition:Hidden]{hidden}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+      trigger: <p>You @L[Condition:Down]{drop} another creature.</p>
+    transfer: true
     type: ability
 folder: c00337a27e3585c4
 img: systems/teriock/src/icons/ranks/rank-2-assassin.webp

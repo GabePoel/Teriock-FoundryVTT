@@ -1,105 +1,95 @@
 _id: f63ae9581ed77486
-_key: '!items!f63ae9581ed77486'
+_key: '!effects!f63ae9581ed77486'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: f63ae9581ed77486
-    _key: '!items.effects!f63ae9581ed77486.f63ae9581ed77486'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/wind-shuriken.webp
-    name: Wind Shuriken
-    system:
-      automations:
-        29b275994cf9f5b1:
-          _id: 29b275994cf9f5b1
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: 1d8
-          heighten:
-            - 1
-            - 0
-          merge: true
-          roll: damage
-          type: roll
-        3f7fa7707643426f:
-          _id: 3f7fa7707643426f
-          competencies:
-            - 2
-          formula: 1d12
-          heighten:
-            - 1
-            - 0
-          merge: true
-          roll: damage
-          type: roll
-        5e4d195ed81a10cc:
-          _id: 5e4d195ed81a10cc
-          competencies:
-            - 1
-            - 2
-          formula: 1d10
-          heighten:
-            - 1
-            - 0
-          merge: true
-          roll: damage
-          type: roll
-      class: corsair
-      competence:
-        raw: 0
-      delivery: missile
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - damaging
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: wind-shuriken
-      interaction: attack
-      maneuver: active
-      overview:
-        base: >-
-          <p>[[lookup name]] counts as a @L[Category:Weapons]{weapon} in the
-          @L[Category:Daggers]{dagger weapon class}.</p><div
-          class="note"><b>Note:</b> Although [[lookup name]] does not deal
-          @L[Damage:Magic]{magic damage}, it can be made to using
-          @L[Ability:Might Strike]{Might Strike}.</div>
-        fluent: >-
-          <p>Instead, deal [[/damage 1d12]] @L[Core:Damage]{damage} to
-          target.</p>
-        proficient: >-
-          <p>Instead, deal [[/damage 1d10]] @L[Core:Damage]{damage} to
-          target.</p>
-      piercing:
-        raw: 1
-      powerSources:
-        - magical
-      range:
-        raw: '300'
-        unit: ft
-      results:
-        critHit: <p>Double @L[Core:Damage]{damage dice}.</p>
-        hit: <p>Deal [[/damage 1d8]] @L[Core:Damage]{damage} to target.</p>
-      skill: true
-      standard: true
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/wind-shuriken.webp
 name: Wind Shuriken
-type: wrapper
+system:
+  automations:
+    29b275994cf9f5b1:
+      _id: 29b275994cf9f5b1
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: 1d8
+      heighten:
+        - 1
+        - 0
+      impact: damage
+      merge: true
+      type: roll
+    3f7fa7707643426f:
+      _id: 3f7fa7707643426f
+      competencies:
+        - 2
+      formula: 1d12
+      heighten:
+        - 1
+        - 0
+      impact: damage
+      merge: true
+      type: roll
+    5e4d195ed81a10cc:
+      _id: 5e4d195ed81a10cc
+      competencies:
+        - 1
+        - 2
+      formula: 1d10
+      heighten:
+        - 1
+        - 0
+      impact: damage
+      merge: true
+      type: roll
+  class: corsair
+  competence:
+    raw: 0
+  delivery: missile
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - damaging
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: wind-shuriken
+  interaction: attack
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>[[lookup name]] counts as a @L[Category:Weapons]{weapon} in the
+      @L[Category:Daggers]{dagger weapon class}.</p><div
+      class="note"><b>Note:</b> Although [[lookup name]] does not deal
+      @L[Damage:Magic]{magic damage}, it can be made to using @L[Ability:Might
+      Strike]{Might Strike}.</div>
+    fluent: <p>Instead, deal [[/damage 1d12]] @L[Core:Damage]{damage} to target.</p>
+    proficient: <p>Instead, deal [[/damage 1d10]] @L[Core:Damage]{damage} to target.</p>
+  piercing:
+    raw: 1
+  powerSources:
+    - magical
+  range:
+    raw: '300'
+    unit: ft
+  results:
+    critHit: <p>Double @L[Core:Damage]{damage dice}.</p>
+    hit: <p>Deal [[/damage 1d8]] @L[Core:Damage]{damage} to target.</p>
+  skill: true
+  standard: true
+  targets:
+    - creature
+transfer: true
+type: ability

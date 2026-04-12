@@ -1,76 +1,81 @@
 _id: 578a6aa729b3079a
-_key: '!items!578a6aa729b3079a'
+_key: '!effects!578a6aa729b3079a'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 578a6aa729b3079a
-    _key: '!items.effects!578a6aa729b3079a.578a6aa729b3079a'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/fluent-cast-ray.webp
-    name: Fluent Cast Ray
-    system:
-      automations:
-        jXoLCDYUDYApcLy7:
-          _id: jXoLCDYUDYApcLy7
-          documents:
-            - Compendium.teriock.tables.RollTable.412794b2cb657a29
-          expandTables: true
-          trigger: execute
-          type: useExternal
-      competence:
-        raw: 0
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-      delivery: self
-      duration:
-        raw: '0'
-        unit: instant
-      elderSorcery: true
-      executionTime: a0
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: fluent-cast-ray
-      interaction: manifest
-      invoked: true
-      maneuver: active
-      overview:
-        base: >-
-          <p>You create a cluster of magical energy to cast with. You may
-          immediately cast any of the following. You are not @L[Core:Proficiency
-          Bonus]{proficient} with this
-          casting.</p><p>@Embed[Compendium.teriock.tables.RollTable.412794b2cb657a29]</p><div
-          class="note"><b>Note:</b> Even though you are doing this
-          "immediately", all normal @L[Core:Active Maneuvers]{active} and
-          @L[Core:Reactive Maneuvers]{reactive} requirements still apply.</div>
-        fluent: <p>You are @L[Core:Fluency Bonus]{fluent} with this casting.</p>
-        proficient: >-
-          <p>You are @L[Core:Proficiency Bonus]{proficient} with this
-          casting.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      spell: true
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/fluent-cast-ray.webp
 name: Fluent Cast Ray
-type: wrapper
+system:
+  automations:
+    jXoLCDYUDYApcLy7:
+      _id: jXoLCDYUDYApcLy7
+      automatic: true
+      competence:
+        raw: 0
+      competencies:
+        - 0
+        - 1
+        - 2
+      documents:
+        - Compendium.teriock.tables.RollTable.412794b2cb657a29
+      expandTables: true
+      heighten:
+        - 0
+        - 1
+      multi: false
+      noHeighten: false
+      overrideCompetence: false
+      trigger: execute
+      type: useExternal
+  competence:
+    raw: 0
+  costs:
+    components:
+      somatic:
+        type: tag
+      verbal:
+        type: tag
+  delivery: self
+  duration:
+    raw: '0'
+    unit: instant
+  elderSorcery: true
+  executionTime:
+    base: a0
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  identifier: fluent-cast-ray
+  interaction: manifest
+  invoked: true
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>You create a cluster of magical energy to cast with. You may
+      immediately cast any of the following. You are not @L[Core:Proficiency
+      Bonus]{proficient} with this
+      casting.</p><p>@Embed[Compendium.teriock.tables.RollTable.412794b2cb657a29]</p><div
+      class="note"><b>Note:</b> Even though you are doing this "immediately",
+      all normal @L[Core:Active Maneuvers]{active} and @L[Core:Reactive
+      Maneuvers]{reactive} requirements still apply.</div>
+    fluent: <p>You are @L[Core:Fluency Bonus]{fluent} with this casting.</p>
+    proficient: <p>You are @L[Core:Proficiency Bonus]{proficient} with this casting.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: self
+  spell: true
+  targets:
+    - self
+transfer: true
+type: ability

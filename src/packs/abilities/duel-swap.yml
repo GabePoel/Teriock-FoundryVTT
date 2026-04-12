@@ -1,104 +1,108 @@
 _id: f59e54740feac012
-_key: '!items!f59e54740feac012'
+_key: '!effects!f59e54740feac012'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: f59e54740feac012
-    _key: '!items.effects!f59e54740feac012.f59e54740feac012'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/duel-swap.webp
-    name: Duel Swap
-    system:
-      automations:
-        52f4d0b87363b1c1:
-          _id: 52f4d0b87363b1c1
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: apply
-          status: dueling
-          type: status
-        824b5b01e1a4efec:
-          _id: 824b5b01e1a4efec
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: remove
-          status: dueling
-          type: status
-        e9c69ec96993ccc5:
-          _id: e9c69ec96993ccc5
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: remove
-          status: dueling
-          type: end
-      class: duelist
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: sight
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: duel-swap
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>The target leaves their @L[Condition:Dueling]{duel} and you enter
-          in their place. This does not end the @L[Condition:Dueling]{duel} and
-          the target is not considered to have "lost" or "forfeited". Any
-          @L[Category:Duel modifying effects]{duel modifying effects} remain in
-          place.</p><div class="note"><b>Note:</b> This ability costs no
-          @L[Core:MP]{MP} to use on creatures you have sworn @L[Ability:Clan
-          Fealty]{Clan Fealty} with.</div>
-      piercing:
-        raw: 0
-      powerSources:
-        - spiritual
-      range:
-        raw: '15'
-        unit: ft
-      requirements: >-
-        <p>Target must be an allied creature in a @L[Condition:Dueling]{duel}
-        within range.</p>
-      skill: true
-      standard: true
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/duel-swap.webp
 name: Duel Swap
-type: wrapper
+system:
+  automations:
+    52f4d0b87363b1c1:
+      _id: 52f4d0b87363b1c1
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: apply
+      status: dueling
+      target: false
+      type: status
+    824b5b01e1a4efec:
+      _id: 824b5b01e1a4efec
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: remove
+      status: dueling
+      target: false
+      type: status
+    e9c69ec96993ccc5:
+      _id: e9c69ec96993ccc5
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 1
+        - 0
+      relation: remove
+      status: dueling
+      type: end
+  class: duelist
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: sight
+  duration:
+    raw: '0'
+    unit: instant
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: duel-swap
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>The target leaves their @L[Condition:Dueling]{duel} and you enter in
+      their place. This does not end the @L[Condition:Dueling]{duel} and the
+      target is not considered to have "lost" or "forfeited". Any
+      @L[Category:Duel modifying effects]{duel modifying effects} remain in
+      place.</p><div class="note"><b>Note:</b> This ability costs no
+      @L[Core:MP]{MP} to use on creatures you have sworn @L[Ability:Clan
+      Fealty]{Clan Fealty} with.</div>
+  piercing:
+    raw: 0
+  powerSources:
+    - spiritual
+  range:
+    raw: '15'
+    unit: ft
+  requirements: >-
+    <p>Target must be an allied creature in a @L[Condition:Dueling]{duel} within
+    range.</p>
+  skill: true
+  standard: true
+  targets:
+    - creature
+transfer: true
+type: ability

@@ -1,101 +1,100 @@
 _id: 9c9a75c65c73fc72
-_key: '!items!9c9a75c65c73fc72'
+_key: '!effects!9c9a75c65c73fc72'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 9c9a75c65c73fc72
-    _key: '!items.effects!9c9a75c65c73fc72.9c9a75c65c73fc72'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/crit-elite.webp
-    name: Crit Elite
-    system:
-      automations:
-        c73c482eea0aaf6c:
-          _id: c73c482eea0aaf6c
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          macro: Compendium.teriock.execution.Macro.1389cba93223924f
-          trigger: executeArmament
-          type: abilityMacro
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.damage
-              mode: 0
-              priority: 100
-              qualifier: '@dmg'
-              target: armament
-              time: normal
-              value: '1'
-            - key: system.vitals
-              mode: 5
-              priority: 10
-              qualifier: '1'
-              target: armament
-              time: normal
-              value: 'true'
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: changes
-      class: archer
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        triggers:
-          - movement
-        unit: unlimited
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: crit-elite
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>You aim with deadly precision, causing the next @L[Category:Attack
-          abilities]{attack} you make with an item to be
-          @L[Keyword:Boosted]{boosted}. This @L[Category:Attack
-          abilities]{attack} must hit the target's @L[Core:Vitals
-          Target]{vitals} (@L[Core:Armor Class]{AC} + 3) or the
-          @L[Category:Attack abilities]{attack} does nothing. Only the
-          @L[Core:Damage]{damage} from the item itself can be
-          @L[Keyword:Boosted]{boosted} in this way.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      requirements: <p>You are not @L[Core:Sustained]{sustaining} [[lookup name]].</p>
-      skill: true
-      standard: true
-      sustained: true
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/crit-elite.webp
 name: Crit Elite
-type: wrapper
+system:
+  automations:
+    c73c482eea0aaf6c:
+      _id: c73c482eea0aaf6c
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      macro: Compendium.teriock.execution.Macro.1389cba93223924f
+      trigger: executeArmament
+      type: abilityMacro
+    e789ed5e109ebd1a:
+      _id: e789ed5e109ebd1a
+      changes:
+        - key: system.damage
+          phase: normal
+          priority: 100
+          qualifier: '@dmg'
+          target: armament
+          type: boost
+          value: '1'
+        - key: system.vitals
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: armament
+          type: override
+          value: 'true'
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: changes
+  class: archer
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    triggers:
+      - movement
+    unit: unlimited
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: crit-elite
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>You aim with deadly precision, causing the next @L[Category:Attack
+      abilities]{attack} you make with an item to be
+      @L[Keyword:Boosted]{boosted}. This @L[Category:Attack abilities]{attack}
+      must hit the target's @L[Core:Vitals Target]{vitals} (@L[Core:Armor
+      Class]{AC} + 3) or the @L[Category:Attack abilities]{attack} does nothing.
+      Only the @L[Core:Damage]{damage} from the item itself can be
+      @L[Keyword:Boosted]{boosted} in this way.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  requirements: <p>You are not @L[Core:Sustained]{sustaining} [[lookup name]].</p>
+  skill: true
+  standard: true
+  sustained: true
+  targets:
+    - self
+transfer: true
+type: ability

@@ -1,66 +1,65 @@
 _id: 081dc5b1f20835fe
-_key: '!items!081dc5b1f20835fe'
+_key: '!effects!081dc5b1f20835fe'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 081dc5b1f20835fe
-    _key: '!items.effects!081dc5b1f20835fe.081dc5b1f20835fe'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/blinding-poison-strike.webp
-    name: Blinding Poison Strike
-    system:
-      automations:
-        18537e76761a45dc:
-          _id: 18537e76761a45dc
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: include
-          status: blind
-          type: status
-      competence:
-        raw: 0
-      delivery: weapon
-      duration:
-        raw: '24'
-        unit: hour
-      effectTypes:
-        - poison
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: blinding-poison-strike
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - alchemical
-      range:
-        unit: contact
-      results:
-        hit: >-
-          <p>Target is @L[Condition:Poisoned]{poisoned}. The
-          @L[Condition:Poisoned]{poison} causes the target to become
-          @L[Condition:Blind]{blind}.</p>
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/blinding-poison-strike.webp
 name: Blinding Poison Strike
-type: wrapper
+system:
+  automations:
+    18537e76761a45dc:
+      _id: 18537e76761a45dc
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: include
+      status: blind
+      target: false
+      type: status
+  competence:
+    raw: 0
+  delivery: weapon
+  duration:
+    raw: '24'
+    unit: hour
+  effectTypes:
+    - poison
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: blinding-poison-strike
+  interaction: attack
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - alchemical
+  range:
+    unit: contact
+  results:
+    hit: >-
+      <p>Target is @L[Condition:Poisoned]{poisoned}. The
+      @L[Condition:Poisoned]{poison} causes the target to become
+      @L[Condition:Blind]{blind}.</p>
+  targets:
+    - creature
+transfer: true
+type: ability

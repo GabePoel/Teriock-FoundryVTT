@@ -80,9 +80,10 @@ function cleanCommon(doc) {
  */
 function cleanActiveEffect(doc) {
   if (doc.tint === "#ffffff") delete doc.tint;
+  if (doc.type === "ability" || doc.type === "property") doc.transfer = true;
   delete doc.duration;
+  delete doc.start;
   if (!doc.disabled) delete doc.disabled;
-  if (doc.transfer) delete doc.transfer;
   if (doc.showIcon) delete doc.showIcon;
   if (doc.system.revealed) delete doc.system.revealed;
 }

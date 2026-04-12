@@ -1,68 +1,61 @@
 _id: 118631dc5df12c98
-_key: '!items!118631dc5df12c98'
+_key: '!effects!118631dc5df12c98'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 118631dc5df12c98
-    _key: '!items.effects!118631dc5df12c98.118631dc5df12c98'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/delay.webp
-    name: Delay
-    system:
-      basic: true
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '5'
-        unit: second
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: intrinsic
-      identifier: delay
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>Rather than acting now, you [[lookup name style=lc]] until a later
-          time. The rest of your @L[Core:Turns]{turn} doesn't happen yet.
-          Instead, you're removed from the initiative order. You can return to
-          the initiative order at the end of any other creature's turn. This
-          permanently changes your initiative to the new position. You can't use
-          any @L[Category:Reaction abilities]{reaction abilities} until you
-          return to the initiative order. If you [[lookup name]] for an entire
-          @L[Core:Rounds]{round} without returning to the initiative order, the
-          actions from the [[lookup name style=lc]]ed turn are lost, your
-          initiative order doesn't change, and your next turn occurs at your
-          original position in the initiative order.<br><br>When you use
-          [[lookup name]], any negative effects that normally occur at the start
-          or end of your turn occur immediately when you use the [[lookup name
-          style=lc]]ed action. Any beneficial effects that would end at any
-          point during your turn also end. The @L[Core:Game Master]{GM} might
-          determine that other effects end when you use [[lookup name]] as well.
-          Essentially, you can't [[lookup name]] to avoid negative consequences
-          that would happen on your turn or to extend beneficial effects that
-          would end on your turn.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/delay.webp
 name: Delay
-type: wrapper
+system:
+  basic: true
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '5'
+    unit: second
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: intrinsic
+  identifier: delay
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>Rather than acting now, you [[lookup name style=lc]] until a later
+      time. The rest of your @L[Core:Turns]{turn} doesn't happen yet. Instead,
+      you're removed from the initiative order. You can return to the initiative
+      order at the end of any other creature's turn. This permanently changes
+      your initiative to the new position. You can't use any
+      @L[Category:Reaction abilities]{reaction abilities} until you return to
+      the initiative order. If you [[lookup name]] for an entire
+      @L[Core:Rounds]{round} without returning to the initiative order, the
+      actions from the [[lookup name style=lc]]ed turn are lost, your initiative
+      order doesn't change, and your next turn occurs at your original position
+      in the initiative order.<br><br>When you use [[lookup name]], any negative
+      effects that normally occur at the start or end of your turn occur
+      immediately when you use the [[lookup name style=lc]]ed action. Any
+      beneficial effects that would end at any point during your turn also end.
+      The @L[Core:Game Master]{GM} might determine that other effects end when
+      you use [[lookup name]] as well. Essentially, you can't [[lookup name]] to
+      avoid negative consequences that would happen on your turn or to extend
+      beneficial effects that would end on your turn.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  targets:
+    - self
+transfer: true
+type: ability

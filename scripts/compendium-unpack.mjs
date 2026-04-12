@@ -4,6 +4,7 @@ import { extractPack } from "@foundryvtt/foundryvtt-cli";
 import { promises as fs } from "fs";
 import path from "path";
 import { toKebabCase, toKebabCaseFull } from "../src/module/helpers/string.mjs";
+import { default as system } from "../system.json" with { type: "json" };
 import { cleanDocument } from "./compendium/clean-fields.mjs";
 
 const BUILDER_NAME = "teriockBuilder00";
@@ -89,7 +90,8 @@ function cleanEntry(doc) {
   cleanDocument(doc);
   if (doc.author) doc.author = BUILDER_NAME;
   if (doc._stats) {
-    if (doc._stats.coreVersion) doc._stats.coreVersion = "13";
+    if (doc._stats.coreVersion)
+      doc._stats.coreVersion = system.compatibility.verified.toString();
     doc._stats.lastModifiedBy = BUILDER_NAME;
   }
   if (doc.prototypeToken) delete doc.prototypeToken.disposition;

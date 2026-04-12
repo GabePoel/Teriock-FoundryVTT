@@ -1,78 +1,74 @@
 _id: bf8bea124d3e3bf7
-_key: '!items!bf8bea124d3e3bf7'
+_key: '!effects!bf8bea124d3e3bf7'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: bf8bea124d3e3bf7
-    _key: '!items.effects!bf8bea124d3e3bf7.bf8bea124d3e3bf7'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/bane-of-elves.webp
-    name: Bane of Elves
-    system:
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.protections.immunities.other
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: Elves
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: changes
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - longRange
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: bane-of-elves
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You are @L[Keyword:Immunity]{immune} to @L[Category:Elves]{elves}.
-          If they see you, they have an odd supernatural sense that there is
-          something off about you, but not any further details. This sense
-          extends over larger distances as well, causing
-          @L[Category:Elves]{elves} to be occasionally drawn near you and for
-          you to have more encounters with them that you might otherwise. The
-          details of this effect are determined by the @L[Core:Game
-          Master]{GM}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      targets:
-        - creature
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/bane-of-elves.webp
 name: Bane of Elves
-type: wrapper
+system:
+  automations:
+    e789ed5e109ebd1a:
+      _id: e789ed5e109ebd1a
+      changes:
+        - key: system.protections.immunities.other
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: Actor
+          type: add
+          value: Elves
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: changes
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: unlimited
+  effectTypes:
+    - longRange
+  executionTime:
+    base: passive
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  identifier: bane-of-elves
+  interaction: manifest
+  maneuver: passive
+  mundane: false
+  overview:
+    base: >-
+      <p>You are @L[Keyword:Immunity]{immune} to @L[Category:Elves]{elves}. If
+      they see you, they have an odd supernatural sense that there is something
+      off about you, but not any further details. This sense extends over larger
+      distances as well, causing @L[Category:Elves]{elves} to be occasionally
+      drawn near you and for you to have more encounters with them that you
+      might otherwise. The details of this effect are determined by the
+      @L[Core:Game Master]{GM}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: self
+  targets:
+    - creature
+    - self
+transfer: true
+type: ability

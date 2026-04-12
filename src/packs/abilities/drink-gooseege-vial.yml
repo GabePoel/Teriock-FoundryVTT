@@ -1,87 +1,89 @@
 _id: 2d4ee71d9531efc7
-_key: '!items!2d4ee71d9531efc7'
+_key: '!effects!2d4ee71d9531efc7'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 2d4ee71d9531efc7
-    _key: '!items.effects!2d4ee71d9531efc7.2d4ee71d9531efc7'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/drink-gooseege-vial.webp
-    name: Drink Gooseege Vial
-    system:
-      automations:
-        ca0696ba7cfc9ec1:
-          _id: ca0696ba7cfc9ec1
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: include
-          status: slowed
-          type: status
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.size.number.raw
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '1'
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: changes
-      competence:
-        raw: 0
-      consumeSource: true
-      delivery: item
-      duration:
-        raw: '10'
-        unit: minute
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: drink-gooseege-vial
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>Your @L[Core:Size]{SIZE} is increased by 1, but you are
-          @L[Condition:Slowed]{slowed}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - alchemical
-      range:
-        unit: contact
-      requirements: >-
-        <p>Use [[lookup name]] by interacting with the
-        @L[Category:Equipment]{equipment} that provides it. That counts as the
-        @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
-        the ability.</p>
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/drink-gooseege-vial.webp
 name: Drink Gooseege Vial
-type: wrapper
+system:
+  automations:
+    ca0696ba7cfc9ec1:
+      _id: ca0696ba7cfc9ec1
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: include
+      status: slowed
+      target: false
+      type: status
+    e789ed5e109ebd1a:
+      _id: e789ed5e109ebd1a
+      changes:
+        - key: system.size.number.raw
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: Actor
+          type: add
+          value: '1'
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: changes
+  competence:
+    raw: 0
+  consumeSource: true
+  delivery: item
+  duration:
+    raw: '10'
+    unit: minute
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: drink-gooseege-vial
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>Your @L[Core:Size]{SIZE} is increased by 1, but you are
+      @L[Condition:Slowed]{slowed}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - alchemical
+  range:
+    unit: contact
+  requirements: >-
+    <p>Use [[lookup name]] by interacting with the
+    @L[Category:Equipment]{equipment} that provides it. That counts as the
+    @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for the
+    ability.</p>
+  targets:
+    - self
+transfer: true
+type: ability

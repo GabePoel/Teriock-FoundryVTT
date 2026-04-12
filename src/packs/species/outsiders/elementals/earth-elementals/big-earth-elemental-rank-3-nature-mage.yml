@@ -2,7 +2,7 @@ _id: NoMItR3gCOkgeooi
 _key: '!items!NoMItR3gCOkgeooi'
 _stats:
   compendiumSource: Compendium.teriock.classes.Item.765ca279be49af15
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.23
@@ -10,11 +10,11 @@ effects:
   - _id: jbDXpSjfQaxxp5lb
     _key: '!items.effects!NoMItR3gCOkgeooi.jbDXpSjfQaxxp5lb'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.07956e3c22ee4a4b
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.07956e3c22ee4a4b
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: combat
@@ -53,91 +53,16 @@ effects:
       skill: true
       targets:
         - self
-    type: ability
-  - _id: so3ACT211AphzOjJ
-    _key: '!items.effects!NoMItR3gCOkgeooi.so3ACT211AphzOjJ'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.3ddde616d16291fa
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/abilities/advanced-hack-healing.webp
-    name: Advanced Hack Healing
-    system:
-      _sup: jbDXpSjfQaxxp5lb
-      automations:
-        GIaNK1awGEA4VBA6:
-          _id: GIaNK1awGEA4VBA6
-          competencies:
-            - 0
-            - 1
-            - 2
-          consumeStatDice: true
-          forHarm: false
-          heighten:
-            - 0
-            - 1
-          noStatDice: true
-          type: heal
-      class: natureMage
-      competence:
-        raw: 0
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: self
-      duration:
-        raw: '8'
-        unit: hour
-      effectTypes:
-        - healing
-        - regeneration
-      elements:
-        - nature
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: advanced-hack-healing
-      interaction: manifest
-      invoked: true
-      maneuver: active
-      overview:
-        base: >-
-          <p>Whenever you @L[Core:Healing]{heal}, you may @L[Core:Healing]{heal}
-          a @L[Damage:Hack]{hack} as well.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-        - primal
-      range:
-        unit: self
-      rotator: true
-      spell: true
-      standard: true
-      targets:
-        - self
+    transfer: true
     type: ability
   - _id: YJcITkDfr8DrRLtf
     _key: '!items.effects!NoMItR3gCOkgeooi.YJcITkDfr8DrRLtf'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.a2da7de653802e32
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.a2da7de653802e32
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: support
@@ -150,25 +75,25 @@ effects:
           _id: f025905e157ac261
           changes:
             - key: system.competence.raw
-              mode: 4
+              phase: fluency
               priority: 10
               qualifier: '@identifier.elder-sorcery-creation'
               target: ability
-              time: fluency
+              type: upgrade
               value: '2'
             - key: system.competence.raw
-              mode: 4
+              phase: fluency
               priority: 10
               qualifier: '@identifier.celestial-elder-sorcery-words'
               target: ability
-              time: fluency
+              type: upgrade
               value: '2'
             - key: system.competence.raw
-              mode: 4
+              phase: fluency
               priority: 10
               qualifier: '@identifier.nature-elder-sorcery-words'
               target: ability
-              time: fluency
+              type: upgrade
               value: '2'
           competencies:
             - 1
@@ -239,15 +164,97 @@ effects:
       standard: true
       targets:
         - self
+    transfer: true
     type: ability
-  - _id: ygnVzct8zmZgxnMW
-    _key: '!items.effects!NoMItR3gCOkgeooi.ygnVzct8zmZgxnMW'
+  - _id: 5md8YRKFXz7mk2rF
+    _key: '!items.effects!NoMItR3gCOkgeooi.5md8YRKFXz7mk2rF'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.11a9a31c8fe1cb60
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.3ddde616d16291fa
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/advanced-hack-healing.webp
+    name: Advanced Hack Healing
+    system:
+      _sup: jbDXpSjfQaxxp5lb
+      automations:
+        GIaNK1awGEA4VBA6:
+          _id: GIaNK1awGEA4VBA6
+          competencies:
+            - 0
+            - 1
+            - 2
+          consumeStatDice: true
+          forHarm: false
+          heighten:
+            - 0
+            - 1
+          noStatDice: true
+          type: heal
+      class: natureMage
+      competence:
+        raw: 0
+      costs:
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+        primary:
+          mp:
+            formula: '1'
+            type: formula
+      delivery: self
+      duration:
+        raw: '8'
+        unit: hour
+      effectTypes:
+        - healing
+        - regeneration
+      elements:
+        - nature
+      executionTime:
+        base: a1
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      identifier: advanced-hack-healing
+      interaction: manifest
+      invoked: true
+      maneuver: active
+      mundane: false
+      overview:
+        base: >-
+          <p>Whenever you @L[Core:Healing]{heal}, you may @L[Core:Healing]{heal}
+          a @L[Damage:Hack]{hack} as well.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+        - primal
+      range:
+        unit: self
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: Js3NZfZChIECk75r
+    _key: '!items.effects!NoMItR3gCOkgeooi.Js3NZfZChIECk75r'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.11a9a31c8fe1cb60
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/transmute.webp
     name: Transmute
     system:
@@ -291,7 +298,10 @@ effects:
         - transformation
       elements:
         - nature
-      executionTime: r1
+      executionTime:
+        base: r1
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -301,6 +311,7 @@ effects:
       identifier: transmute
       interaction: manifest
       maneuver: reactive
+      mundane: false
       overview:
         base: >-
           <p>The triggering @L[Category:Standard abilities]{ability} is
@@ -336,6 +347,7 @@ effects:
       trigger: >-
         <p>You would take a @L[Category:Standard abilities]{standard
         ability}.</p>
+    transfer: true
     type: ability
 folder: 26a3b429ac70d5ab
 img: systems/teriock/src/icons/ranks/rank-3-nature-mage.webp

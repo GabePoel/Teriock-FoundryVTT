@@ -1,59 +1,53 @@
 _id: 507877ee802b0850
-_key: '!items!507877ee802b0850'
+_key: '!effects!507877ee802b0850'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 507877ee802b0850
-    _key: '!items.effects!507877ee802b0850.507877ee802b0850'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/whirlwind-aura.webp
-    name: Whirlwind Aura
-    system:
-      class: corsair
-      competence:
-        raw: 0
-      delivery: aura
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: r0
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: str
-      form: normal
-      identifier: whirlwind-aura
-      interaction: feat
-      maneuver: reactive
-      overview:
-        proficient: >-
-          <p>If you want, target is moved a distance away from you equal to the
-          distance you descended (with a maximum distance of 100 feet).</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        raw: '10'
-        unit: ft
-      results:
-        fail: >-
-          <p>Target is moved 10 feet away from you and
-          @L[Keyword:Awaken]{awakened}.</p>
-      skill: true
-      standard: true
-      targets:
-        - creature
-      trigger: <p>You descend at least 15 feet to the ground.</p>
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/whirlwind-aura.webp
 name: Whirlwind Aura
-type: wrapper
+system:
+  class: corsair
+  competence:
+    raw: 0
+  delivery: aura
+  duration:
+    raw: '0'
+    unit: instant
+  executionTime:
+    base: r0
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: str
+  form: normal
+  identifier: whirlwind-aura
+  interaction: feat
+  maneuver: reactive
+  mundane: false
+  overview:
+    proficient: >-
+      <p>If you want, target is moved a distance away from you equal to the
+      distance you descended (with a maximum distance of 100 feet).</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    raw: '10'
+    unit: ft
+  results:
+    fail: >-
+      <p>Target is moved 10 feet away from you and
+      @L[Keyword:Awaken]{awakened}.</p>
+  skill: true
+  standard: true
+  targets:
+    - creature
+  trigger: <p>You descend at least 15 feet to the ground.</p>
+transfer: true
+type: ability

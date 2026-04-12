@@ -1,70 +1,67 @@
 _id: 304904989df7e9b6
-_key: '!items!304904989df7e9b6'
+_key: '!effects!304904989df7e9b6'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 304904989df7e9b6
-    _key: '!items.effects!304904989df7e9b6.304904989df7e9b6'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/life-magic-inept.webp
-    name: Life Magic Inept
-    system:
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.costs.tweaks.inept
-              mode: 2
-              priority: 10
-              qualifier: '@element.life'
-              target: ability
-              time: normal
-              value: '1'
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: changes
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: flaw
-      identifier: life-magic-inept
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You are @L[Keyword:Inept]{inept} at @L[Category:Magically powered
-          abilities]{magical} @L[Category:Life element abilities]{life
-          abilities}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/life-magic-inept.webp
 name: Life Magic Inept
-type: wrapper
+system:
+  automations:
+    e789ed5e109ebd1a:
+      _id: e789ed5e109ebd1a
+      changes:
+        - key: system.costs.tweaks.inept
+          phase: normal
+          priority: 10
+          qualifier: '@element.life'
+          target: ability
+          type: add
+          value: '1'
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: changes
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: unlimited
+  executionTime:
+    base: passive
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: flaw
+  identifier: life-magic-inept
+  interaction: manifest
+  maneuver: passive
+  mundane: false
+  overview:
+    base: >-
+      <p>You are @L[Keyword:Inept]{inept} at @L[Category:Magically powered
+      abilities]{magical} @L[Category:Life element abilities]{life
+      abilities}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  targets:
+    - self
+transfer: true
+type: ability

@@ -1,80 +1,73 @@
 _id: 7e1a78d82e2bfdaf
-_key: '!items!7e1a78d82e2bfdaf'
+_key: '!effects!7e1a78d82e2bfdaf'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 7e1a78d82e2bfdaf
-    _key: '!items.effects!7e1a78d82e2bfdaf.7e1a78d82e2bfdaf'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/chi-thunder.webp
-    name: Chi Thunder
-    system:
-      automations:
-        29b275994cf9f5b1:
-          _id: 29b275994cf9f5b1
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: 2d6[magic spiritual]
-          heighten:
-            - 1
-            - 0
-          merge: true
-          roll: damage
-          type: roll
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: missile
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - contract
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: chi-thunder
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 2
-      powerSources:
-        - spiritual
-      range:
-        raw: '30'
-        unit: ft
-      results:
-        critHit: >-
-          <p>Double the @L[Core:Damage]{damage dice} dealt by this
-          @L[Category:Abilities]{ability}. This may differ if the effect of
-          [[lookup name]] is different as determined by the @L[Core:Game
-          Master]{GM}.</p>
-        hit: >-
-          <p>By default, deal [[/damage 2d6[magic spiritual]]]
-          @L[Core:Damage]{damage} to target. For some creatures, the effect of
-          their [[lookup name]] is something different. This may be caused by a
-          spiritual journey, a deeply held belief, or some other trait of the
-          creature as determined by the @L[Core:Game Master]{GM}.</p>
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/chi-thunder.webp
 name: Chi Thunder
-type: wrapper
+system:
+  automations:
+    29b275994cf9f5b1:
+      _id: 29b275994cf9f5b1
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: 2d6[magic spiritual]
+      heighten:
+        - 1
+        - 0
+      impact: damage
+      merge: true
+      type: roll
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: missile
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - contract
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: chi-thunder
+  interaction: attack
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 2
+  powerSources:
+    - spiritual
+  range:
+    raw: '30'
+    unit: ft
+  results:
+    critHit: >-
+      <p>Double the @L[Core:Damage]{damage dice} dealt by this
+      @L[Category:Abilities]{ability}. This may differ if the effect of [[lookup
+      name]] is different as determined by the @L[Core:Game Master]{GM}.</p>
+    hit: >-
+      <p>By default, deal [[/damage 2d6[magic spiritual]]]
+      @L[Core:Damage]{damage} to target. For some creatures, the effect of their
+      [[lookup name]] is something different. This may be caused by a spiritual
+      journey, a deeply held belief, or some other trait of the creature as
+      determined by the @L[Core:Game Master]{GM}.</p>
+  targets:
+    - creature
+transfer: true
+type: ability

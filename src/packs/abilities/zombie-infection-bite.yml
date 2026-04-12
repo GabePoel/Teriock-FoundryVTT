@@ -1,58 +1,52 @@
 _id: ee9229443ae03da8
-_key: '!items!ee9229443ae03da8'
+_key: '!effects!ee9229443ae03da8'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: ee9229443ae03da8
-    _key: '!items.effects!ee9229443ae03da8.ee9229443ae03da8'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/zombie-infection-bite.webp
-    name: Zombie Infection Bite
-    system:
-      competence:
-        raw: 0
-      delivery: bite
-      duration:
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - reanimation
-        - disease
-      elements:
-        - necromancy
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: zombie-infection-bite
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      requirements: <p>Target is @L[Condition:Alive]{alive}.</p>
-      results:
-        hit: >-
-          <p>Target becomes a @L[Creature:Zombie]{zombie} when they
-          @L[Condition:Dead]{die}. This is an illness that can be cured with a
-          DC 8 @L[Tradecraft:Herbalist]{herbalist} check during @L[Ability:Cure
-          Illness]{Cure Illness}.</p>
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/zombie-infection-bite.webp
 name: Zombie Infection Bite
-type: wrapper
+system:
+  competence:
+    raw: 0
+  delivery: bite
+  duration:
+    raw: '0'
+    unit: unlimited
+  effectTypes:
+    - reanimation
+    - disease
+  elements:
+    - necromancy
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: zombie-infection-bite
+  interaction: attack
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: contact
+  requirements: <p>Target is @L[Condition:Alive]{alive}.</p>
+  results:
+    hit: >-
+      <p>Target becomes a @L[Creature:Zombie]{zombie} when they
+      @L[Condition:Dead]{die}. This is an illness that can be cured with a DC 8
+      @L[Tradecraft:Herbalist]{herbalist} check during @L[Ability:Cure
+      Illness]{Cure Illness}.</p>
+  targets:
+    - creature
+transfer: true
+type: ability

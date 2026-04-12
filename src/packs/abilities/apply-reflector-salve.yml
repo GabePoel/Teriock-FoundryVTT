@@ -1,55 +1,50 @@
 _id: b0566ed037b6aba6
-_key: '!items!b0566ed037b6aba6'
+_key: '!effects!b0566ed037b6aba6'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: b0566ed037b6aba6
-    _key: '!items.effects!b0566ed037b6aba6.b0566ed037b6aba6'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/apply-reflector-salve.webp
-    name: Apply Reflector Salve
-    system:
-      competence:
-        raw: 0
-      consumeSource: true
-      delivery: item
-      duration:
-        raw: '1'
-        unit: minute
-      executionTime: 10 Minutes
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: apply-reflector-salve
-      interaction: manifest
-      maneuver: slow
-      overview:
-        base: >-
-          <p>Cover a surface no greater than 25 square feet with the source of
-          this ability to make it @L[Property:Spell Turning]{spell turning}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - alchemical
-      range:
-        unit: contact
-      requirements: >-
-        <p>Use [[lookup name]] by interacting with the
-        @L[Category:Equipment]{equipment} that provides it.</p>
-      targets:
-        - area
-        - item
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/apply-reflector-salve.webp
 name: Apply Reflector Salve
-type: wrapper
+system:
+  competence:
+    raw: 0
+  consumeSource: true
+  delivery: item
+  duration:
+    raw: '1'
+    unit: minute
+  executionTime:
+    base: 10 Minutes
+    slow:
+      raw: '10'
+      unit: minute
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: apply-reflector-salve
+  interaction: manifest
+  maneuver: slow
+  mundane: false
+  overview:
+    base: >-
+      <p>Cover a surface no greater than 25 square feet with the source of this
+      ability to make it @L[Property:Spell Turning]{spell turning}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - alchemical
+  range:
+    unit: contact
+  requirements: >-
+    <p>Use [[lookup name]] by interacting with the
+    @L[Category:Equipment]{equipment} that provides it.</p>
+  targets:
+    - area
+    - item
+transfer: true
+type: ability

@@ -1,98 +1,108 @@
 _id: 40562e31a7f1563f
-_key: '!items!40562e31a7f1563f'
+_key: '!effects!40562e31a7f1563f'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 40562e31a7f1563f
-    _key: '!items.effects!40562e31a7f1563f.40562e31a7f1563f'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/familiar-bond.webp
-    name: Familiar Bond
-    system:
-      automations:
-        s830o7SWhITduNHX:
-          _id: s830o7SWhITduNHX
-          attachDocuments: true
-          documents:
-            - Compendium.teriock.powers.Folder.31fe961f0b485187
-          type: addExternal
-      class: natureMage
-      competence:
-        raw: 0
-      costs:
-        components:
-          material:
-            description: >-
-              <p>Something symbolic of the animal you wish to bond with and the
-              relationship you wish to have with it.</p>
-            type: description
-        primary:
-          mp:
-            formula: '3'
-            type: formula
-      delivery: sight
-      duration:
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - longRange
-        - contract
-      elements:
-        - nature
-      executionTime: Short Rest
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: familiar-bond
-      interaction: manifest
-      maneuver: slow
-      overview:
-        base: >-
-          <p>[[lookup name]] is a ritual that allows you to bond with an animal
-          companion. As part of this ritual, you call an animal to you and it
-          chooses whether or not to become your <b>familiar</b>. If it chooses
-          to be your familiar, you and it are @L[Category:Spiritual
-          effects]{spiritually} bonded. You can sense feelings and emotions from
-          your familiar and speak to other animals of the same species. Your
-          familiar can sense your feelings and emotions as well. You also gain
-          an @L[Tradecraft:Animal Tamer]{animal tamer} @L[Core:Fluency
-          Bonus]{fluency} for your familiar's species. This does not grant you
-          @L[Core:Proficiency Bonus]{proficiency} with @L[Tradecraft:Animal
-          Tamer]{animal tamer} in general. If your familiar is in combat with
-          you, treat it as a @L[Core:Minions]{minion} under your command.</p>
-        proficient: >-
-          <p>You also gain an @L[Category:Abilities]{ability} chosen by the
-          @L[Core:Game Master]{GM} when your familiar is within 100 feet of you.
-          The @L[Category:Abilities]{ability} is something your familiar can do
-          naturally, is symbolic of, or that is related to your relationship
-          with it.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-        - spiritual
-        - primal
-      range:
-        raw: '5'
-        unit: ft
-      requirements: <p>This ritual can typically be used only once.</p>
-      ritual: true
-      spell: true
-      standard: true
-      sustained: true
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/familiar-bond.webp
 name: Familiar Bond
-type: wrapper
+system:
+  automations:
+    s830o7SWhITduNHX:
+      _id: s830o7SWhITduNHX
+      attachDocuments: true
+      automatic: true
+      competence:
+        raw: 0
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      documents:
+        - Compendium.teriock.powers.Folder.31fe961f0b485187
+      heighten:
+        - 0
+        - 1
+      multi: false
+      overrideCompetence: false
+      overrideData: false
+      type: addExternal
+  class: natureMage
+  competence:
+    raw: 0
+  costs:
+    components:
+      material:
+        description: >-
+          <p>Something symbolic of the animal you wish to bond with and the
+          relationship you wish to have with it.</p>
+        type: description
+    primary:
+      mp:
+        formula: '3'
+        type: formula
+  delivery: sight
+  duration:
+    raw: '0'
+    unit: unlimited
+  effectTypes:
+    - longRange
+    - contract
+  elements:
+    - nature
+  executionTime:
+    base: Short Rest
+    slow:
+      unit: shortRest
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: familiar-bond
+  interaction: manifest
+  maneuver: slow
+  mundane: false
+  overview:
+    base: >-
+      <p>[[lookup name]] is a ritual that allows you to bond with an animal
+      companion. As part of this ritual, you call an animal to you and it
+      chooses whether or not to become your <b>familiar</b>. If it chooses to be
+      your familiar, you and it are @L[Category:Spiritual effects]{spiritually}
+      bonded. You can sense feelings and emotions from your familiar and speak
+      to other animals of the same species. Your familiar can sense your
+      feelings and emotions as well. You also gain an @L[Tradecraft:Animal
+      Tamer]{animal tamer} @L[Core:Fluency Bonus]{fluency} for your familiar's
+      species. This does not grant you @L[Core:Proficiency Bonus]{proficiency}
+      with @L[Tradecraft:Animal Tamer]{animal tamer} in general. If your
+      familiar is in combat with you, treat it as a @L[Core:Minions]{minion}
+      under your command.</p>
+    proficient: >-
+      <p>You also gain an @L[Category:Abilities]{ability} chosen by the
+      @L[Core:Game Master]{GM} when your familiar is within 100 feet of you. The
+      @L[Category:Abilities]{ability} is something your familiar can do
+      naturally, is symbolic of, or that is related to your relationship with
+      it.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+    - spiritual
+    - primal
+  range:
+    raw: '5'
+    unit: ft
+  requirements: <p>This ritual can typically be used only once.</p>
+  ritual: true
+  spell: true
+  standard: true
+  sustained: true
+  targets:
+    - creature
+transfer: true
+type: ability

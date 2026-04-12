@@ -1,60 +1,63 @@
 _id: 129d97137ddfd71d
-_key: '!items!129d97137ddfd71d'
+_key: '!effects!129d97137ddfd71d'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 129d97137ddfd71d
-    _key: '!items.effects!129d97137ddfd71d.129d97137ddfd71d'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/slow-memory-drain.webp
-    name: Slow Memory Drain
-    system:
-      automations:
-        ayMsOLDq3hV7Ug93:
-          _id: ayMsOLDq3hV7Ug93
-          type: revitalize
-      competence:
-        raw: 0
-      delivery: hand
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - displacement
-        - revitalization
-        - draining
-      executionTime: 10 Minutes
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: slow-memory-drain
-      interaction: manifest
-      maneuver: slow
-      overview:
-        base: >-
-          <p>Deal enough @L[Drain:Memory]{memory drain} to
-          @L[Condition:Dead]{kill} the target. If this successfully
-          @L[Condition:Dead]{kills} the target, you
-          @L[Core:Revitalizing]{revitalize}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/slow-memory-drain.webp
 name: Slow Memory Drain
-type: wrapper
+system:
+  automations:
+    ayMsOLDq3hV7Ug93:
+      _id: ayMsOLDq3hV7Ug93
+      competencies:
+        - 0
+        - 1
+        - 2
+      consumeStatDice: true
+      forHarm: false
+      heighten:
+        - 0
+        - 1
+      type: revitalize
+  competence:
+    raw: 0
+  delivery: hand
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - displacement
+    - revitalization
+    - draining
+  executionTime:
+    base: 10 Minutes
+    slow:
+      raw: '10'
+      unit: minute
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: slow-memory-drain
+  interaction: manifest
+  maneuver: slow
+  mundane: false
+  overview:
+    base: >-
+      <p>Deal enough @L[Drain:Memory]{memory drain} to @L[Condition:Dead]{kill}
+      the target. If this successfully @L[Condition:Dead]{kills} the target, you
+      @L[Core:Revitalizing]{revitalize}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: contact
+  targets:
+    - creature
+transfer: true
+type: ability

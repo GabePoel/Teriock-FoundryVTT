@@ -1,70 +1,64 @@
 _id: 52059c0e7876241a
-_key: '!items!52059c0e7876241a'
+_key: '!effects!52059c0e7876241a'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 52059c0e7876241a
-    _key: '!items.effects!52059c0e7876241a.52059c0e7876241a'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/terror-frailty.webp
-    name: Terror Frailty
-    system:
-      automations:
-        29b275994cf9f5b1:
-          _id: 29b275994cf9f5b1
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: 1d10[terror]
-          heighten:
-            - 1
-            - 0
-          merge: true
-          roll: damage
-          type: roll
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: flaw
-      identifier: terror-frailty
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You take @L[Keyword:Boosted]{boosted} @L[Core:Damage]{damage} from
-          @L[Damage:Terror]{terror}, are @L[Keyword:Vulnerable]{vulnerable} to
-          being @L[Condition:Terrored]{terrored}, and becoming
-          @L[Condition:Terrored]{terrored} deals you [[/damage 1d10[terror]]]
-          @L[Core:Damage]{damage} if it was not caused due to dropping from
-          @L[Damage:Terror]{terror} @L[Core:Damage]{damage}. The
-          @L[Core:Damage]{damage} from becoming @L[Condition:Terrored]{terrored}
-          is not @L[Keyword:Boosted]{boosted}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/terror-frailty.webp
 name: Terror Frailty
-type: wrapper
+system:
+  automations:
+    29b275994cf9f5b1:
+      _id: 29b275994cf9f5b1
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: 1d10[terror]
+      heighten:
+        - 1
+        - 0
+      impact: damage
+      merge: true
+      type: roll
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: unlimited
+  executionTime:
+    base: passive
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: flaw
+  identifier: terror-frailty
+  interaction: manifest
+  maneuver: passive
+  mundane: false
+  overview:
+    base: >-
+      <p>You take @L[Keyword:Boosted]{boosted} @L[Core:Damage]{damage} from
+      @L[Damage:Terror]{terror}, are @L[Keyword:Vulnerable]{vulnerable} to being
+      @L[Condition:Terrored]{terrored}, and becoming
+      @L[Condition:Terrored]{terrored} deals you [[/damage 1d10[terror]]]
+      @L[Core:Damage]{damage} if it was not caused due to dropping from
+      @L[Damage:Terror]{terror} @L[Core:Damage]{damage}. The
+      @L[Core:Damage]{damage} from becoming @L[Condition:Terrored]{terrored} is
+      not @L[Keyword:Boosted]{boosted}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  targets:
+    - self
+transfer: true
+type: ability

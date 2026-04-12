@@ -1,98 +1,118 @@
 _id: f55f8feaed060d94
-_key: '!items!f55f8feaed060d94'
+_key: '!effects!f55f8feaed060d94'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: f55f8feaed060d94
-    _key: '!items.effects!f55f8feaed060d94.f55f8feaed060d94'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/treeform-ball.webp
-    name: Treeform Ball
-    system:
-      automations:
-        9f08fabc1d2bcac2:
-          _id: 9f08fabc1d2bcac2
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: include
-          status: transformed
-          type: status
-        iB9yugE9ZXYHDeCK:
-          _id: iB9yugE9ZXYHDeCK
-          documents:
-            - Compendium.teriock.species.Item.85b3b9fb528f2775
-          level: minor
-          override:
-            - art
-          overrideCompetence: true
-          reset:
-            - gp
-            - hp
-          type: transformation
-      class: natureMage
-      competence:
-        raw: 0
-      delivery: missile
-      duration:
-        raw: '0'
-        triggers:
-          - dawn
-        unit: unlimited
-      effectTypes:
-        - transformation
-      elements:
-        - nature
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, this effect lasts an
-        addition turn without the target being able to @L[Ability:Self
-        Revert]{Self Revert}.</p>
-      identifier: treeform-ball
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 2
-      powerSources:
-        - magical
-      range:
-        raw: '30'
-        unit: ft
-      results:
-        critHit: >-
-          <p>If you want, the target must spend 1 @L[Core:MP]{MP} to be able to
-          @L[Ability:Self Revert]{Self Revert}.</p>
-        hit: >-
-          <p>Target is @L[Condition:Transformed]{minorly transformed} into a
-          @L[Creature:Tree]{tree} or revert a @L[Condition:Transformed]{minor
-          transformation}. The @L[Core:Size]{size} of the tree is equal to the
-          target's @L[Core:Size]{SIZE} prior to being
-          @L[Condition:Transformed]{transformed}. If a treeformed creature is
-          reduced to 0 @L[Core:Hit Points and Mana Points]{HP}, then they revert
-          and any remaining @L[Core:Damage]{damage} carries over to their
-          reverted state. </p>
-      spell: true
-      standard: true
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/treeform-ball.webp
 name: Treeform Ball
-type: wrapper
+system:
+  automations:
+    9f08fabc1d2bcac2:
+      _id: 9f08fabc1d2bcac2
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: include
+      status: transformed
+      target: false
+      type: status
+    iB9yugE9ZXYHDeCK:
+      _id: iB9yugE9ZXYHDeCK
+      automatic: true
+      competence:
+        raw: 0
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      documents:
+        - Compendium.teriock.species.Item.85b3b9fb528f2775
+      heighten:
+        - 0
+        - 1
+      level: minor
+      multi: false
+      override:
+        - art
+      overrideCompetence: true
+      reset:
+        - gp
+        - hp
+      ring: false
+      suppress:
+        - body
+        - equipment
+        - fluency
+        - rank
+        - species
+      type: transformation
+  class: natureMage
+  competence:
+    raw: 0
+  delivery: missile
+  duration:
+    raw: '0'
+    triggers:
+      - dawn
+    unit: unlimited
+  effectTypes:
+    - transformation
+  elements:
+    - nature
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  heightened: >-
+    <p>For each additional @L[Core:MP]{MP} spent, this effect lasts an addition
+    turn without the target being able to @L[Ability:Self Revert]{Self
+    Revert}.</p>
+  identifier: treeform-ball
+  interaction: attack
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 2
+  powerSources:
+    - magical
+  range:
+    raw: '30'
+    unit: ft
+  results:
+    critHit: >-
+      <p>If you want, the target must spend 1 @L[Core:MP]{MP} to be able to
+      @L[Ability:Self Revert]{Self Revert}.</p>
+    hit: >-
+      <p>Target is @L[Condition:Transformed]{minorly transformed} into a
+      @L[Creature:Tree]{tree} or revert a @L[Condition:Transformed]{minor
+      transformation}. The @L[Core:Size]{size} of the tree is equal to the
+      target's @L[Core:Size]{SIZE} prior to being
+      @L[Condition:Transformed]{transformed}. If a treeformed creature is
+      reduced to 0 @L[Core:Hit Points and Mana Points]{HP}, then they revert and
+      any remaining @L[Core:Damage]{damage} carries over to their reverted
+      state. </p>
+  spell: true
+  standard: true
+  targets:
+    - creature
+transfer: true
+type: ability

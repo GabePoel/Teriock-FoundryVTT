@@ -1,99 +1,119 @@
 _id: 57b86e5fa48c73e7
-_key: '!items!57b86e5fa48c73e7'
+_key: '!effects!57b86e5fa48c73e7'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 57b86e5fa48c73e7
-    _key: '!items.effects!57b86e5fa48c73e7.57b86e5fa48c73e7'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/bestial-shift.webp
-    name: Bestial Shift
-    system:
-      automations:
-        9f08fabc1d2bcac2:
-          _id: 9f08fabc1d2bcac2
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: include
-          status: transformed
-          type: status
-        tFay48bnLpOcsj70:
-          _id: tFay48bnLpOcsj70
-          level: full
-          override:
-            - size
-            - art
-          overrideCompetence: true
-          reset:
-            - gp
-            - hp
-          type: transformation
-      competence:
-        raw: 0
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-      delivery: self
-      duration:
-        raw: '10'
-        unit: minute
-      effectTypes:
-        - transformation
-      elements:
-        - nature
-      executionTime: a3
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the maximum
-        @L[Core:BR]{BR} available to you increases by 2.</p>
-      identifier: bestial-shift
-      interaction: manifest
-      invoked: true
-      maneuver: active
-      overview:
-        base: >-
-          <p>You are @L[Condition:Transformed]{fully transformed} into a
-          @L[Category:Common animal creatures]{common animal}. The maximum
-          @L[Core:BR]{BR} of @L[Category:Common animal creatures]{animals} you
-          can choose is 2.</p>
-        fluent: >-
-          <p>The maximum @L[Core:BR]{BR} available to you is now 2 ×
-          @L[Core:Fluency Bonus]{F}.</p>
-        proficient: >-
-          <p>The maximum @L[Core:BR]{BR} available to you is now 2 ×
-          @L[Core:Proficiency Bonus]{P}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      rotator: true
-      spell: true
-      standard: true
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/bestial-shift.webp
 name: Bestial Shift
-type: wrapper
+system:
+  automations:
+    9f08fabc1d2bcac2:
+      _id: 9f08fabc1d2bcac2
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: include
+      status: transformed
+      target: false
+      type: status
+    tFay48bnLpOcsj70:
+      _id: tFay48bnLpOcsj70
+      automatic: true
+      competence:
+        raw: 0
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 0
+        - 1
+      level: full
+      multi: false
+      override:
+        - size
+        - art
+      overrideCompetence: true
+      reset:
+        - gp
+        - hp
+      ring: false
+      suppress:
+        - body
+        - equipment
+        - fluency
+        - rank
+        - species
+      type: transformation
+  competence:
+    raw: 0
+  costs:
+    components:
+      somatic:
+        type: tag
+      verbal:
+        type: tag
+  delivery: self
+  duration:
+    raw: '10'
+    unit: minute
+  effectTypes:
+    - transformation
+  elements:
+    - nature
+  executionTime:
+    base: a3
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  heightened: >-
+    <p>For each additional @L[Core:MP]{MP} spent, the maximum @L[Core:BR]{BR}
+    available to you increases by 2.</p>
+  identifier: bestial-shift
+  interaction: manifest
+  invoked: true
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>You are @L[Condition:Transformed]{fully transformed} into a
+      @L[Category:Common animal creatures]{common animal}. The maximum
+      @L[Core:BR]{BR} of @L[Category:Common animal creatures]{animals} you can
+      choose is 2.</p>
+    fluent: >-
+      <p>The maximum @L[Core:BR]{BR} available to you is now 2 × @L[Core:Fluency
+      Bonus]{F}.</p>
+    proficient: >-
+      <p>The maximum @L[Core:BR]{BR} available to you is now 2 ×
+      @L[Core:Proficiency Bonus]{P}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: self
+  rotator: true
+  spell: true
+  standard: true
+  targets:
+    - self
+transfer: true
+type: ability

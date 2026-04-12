@@ -1,70 +1,69 @@
 _id: b4146186ab766d31
-_key: '!items!b4146186ab766d31'
+_key: '!effects!b4146186ab766d31'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: b4146186ab766d31
-    _key: '!items.effects!b4146186ab766d31.b4146186ab766d31'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: icons/creatures/webs/web-sparse-pink.webp
-    name: Spiga Web Packet
-    system:
-      automations:
-        5d57231066693cee:
-          _id: 5d57231066693cee
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: include
-          status: snared
-          type: status
-      competence:
-        raw: 0
-      delivery: missile
-      duration:
-        raw: '0'
-        unit: unlimited
-      endCondition: >-
-        <p>The @L[Condition:Snared]{snare} caused by this ability does not end
-        on its own. It can be escaped by @L[Ability:Interact]{interacting} with
-        the web making a DC 25 @L[Core:Strength]{STR} @L[Core:Feat
-        Interaction]{feat save}. This can be done either by the creature that is
-        @L[Condition:Snared]{snared} or by another that attempts to free them.
-        The DC is reduced by 1 for every additional creature of
-        @L[Core:Size]{SIZE} 1 or larger that is assisting the target.</p>
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: spiga-web-packet
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 1
-      powerSources:
-        - martial
-      range:
-        raw: '60'
-        unit: ft
-      results:
-        hit: <p>Target is @L[Condition:Snared]{snared}.</p>
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: icons/creatures/webs/web-sparse-pink.webp
 name: Spiga Web Packet
-type: wrapper
+system:
+  automations:
+    5d57231066693cee:
+      _id: 5d57231066693cee
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: include
+      status: snared
+      target: false
+      type: status
+  competence:
+    raw: 0
+  delivery: missile
+  duration:
+    raw: '0'
+    unit: unlimited
+  endCondition: >-
+    <p>The @L[Condition:Snared]{snare} caused by this ability does not end on
+    its own. It can be escaped by @L[Ability:Interact]{interacting} with the web
+    making a DC 25 @L[Core:Strength]{STR} @L[Core:Feat Interaction]{feat save}.
+    This can be done either by the creature that is @L[Condition:Snared]{snared}
+    or by another that attempts to free them. The DC is reduced by 1 for every
+    additional creature of @L[Core:Size]{SIZE} 1 or larger that is assisting the
+    target.</p>
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: spiga-web-packet
+  interaction: attack
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 1
+  powerSources:
+    - martial
+  range:
+    raw: '60'
+    unit: ft
+  results:
+    hit: <p>Target is @L[Condition:Snared]{snared}.</p>
+  targets:
+    - creature
+transfer: true
+type: ability

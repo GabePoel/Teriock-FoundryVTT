@@ -1,64 +1,58 @@
 _id: fcc64ee64dce98a1
-_key: '!items!fcc64ee64dce98a1'
+_key: '!effects!fcc64ee64dce98a1'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: fcc64ee64dce98a1
-    _key: '!items.effects!fcc64ee64dce98a1.fcc64ee64dce98a1'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/ayla-binding-strike.webp
-    name: Ayla Binding Strike
-    system:
-      competence:
-        raw: 0
-      delivery: weapon
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - control
-        - disease
-      elements:
-        - necromancy
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: ayla-binding-strike
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - spiritual
-        - primal
-      range:
-        unit: contact
-      requirements: <p>Target is dead.</p>
-      results:
-        hit: >-
-          <p>Target is infected with a disease that takes 10 minutes to
-          manifest. During this time, the disease can be removed with
-          @L[Ability:Cure Illness]{Cure Illness} and a DC 15
-          @L[Tradecraft:Herbalist]{herbalist} check. Afterwards, it can only be
-          removed with effects akin to @L[Ability:Exorcism]{Exorcism}. Once the
-          disease is manifested, the target's spirit must follow directions you
-          provide to it. You do not need to share any language with the target
-          or their spirit. This is more akin to a "hive mind", where they
-          implicitly understand you needs and directives.</p>
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/ayla-binding-strike.webp
 name: Ayla Binding Strike
-type: wrapper
+system:
+  competence:
+    raw: 0
+  delivery: weapon
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - control
+    - disease
+  elements:
+    - necromancy
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  identifier: ayla-binding-strike
+  interaction: attack
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - spiritual
+    - primal
+  range:
+    unit: contact
+  requirements: <p>Target is dead.</p>
+  results:
+    hit: >-
+      <p>Target is infected with a disease that takes 10 minutes to manifest.
+      During this time, the disease can be removed with @L[Ability:Cure
+      Illness]{Cure Illness} and a DC 15 @L[Tradecraft:Herbalist]{herbalist}
+      check. Afterwards, it can only be removed with effects akin to
+      @L[Ability:Exorcism]{Exorcism}. Once the disease is manifested, the
+      target's spirit must follow directions you provide to it. You do not need
+      to share any language with the target or their spirit. This is more akin
+      to a "hive mind", where they implicitly understand you needs and
+      directives.</p>
+  targets:
+    - creature
+transfer: true
+type: ability

@@ -1,87 +1,86 @@
 _id: 2463bfe6bbd3d9ec
-_key: '!items!2463bfe6bbd3d9ec'
+_key: '!effects!2463bfe6bbd3d9ec'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 2463bfe6bbd3d9ec
-    _key: '!items.effects!2463bfe6bbd3d9ec.2463bfe6bbd3d9ec'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/elder-mind-control.webp
-    name: Elder Mind Control
-    system:
-      automations:
-        f004b5e5538cefe9:
-          _id: f004b5e5538cefe9
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: include
-          status: charmed
-          type: status
-      competence:
-        raw: 0
-      costs:
-        components:
-          verbal:
-            type: tag
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: sight
-      duration:
-        raw: '1'
-        unit: minute
-      effectTypes:
-        - mental
-        - control
-      elderSorcery: true
-      elderSorceryIncant: <p>I control your mind.</p>
-      elements:
-        - storm
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: int
-      form: special
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the maximum length of the
-        command can be increased by 1 word.</p>
-      identifier: elder-mind-control
-      interaction: feat
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        raw: '60'
-        unit: ft
-      results:
-        fail: >-
-          <p>Target is @L[Condition:Charmed]{charmed}. In addition, you may
-          provide a 1 word command that the target must follow for the duration
-          of this spell. If the command is directly harmful to the target, this
-          spell @L[Core:Fizzles]{fizzles} and they do not need to follow it. The
-          target must understand the language that the command was given in.</p>
-      spell: true
-      targets:
-        - creature
-      warded: true
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/elder-mind-control.webp
 name: Elder Mind Control
-type: wrapper
+system:
+  automations:
+    f004b5e5538cefe9:
+      _id: f004b5e5538cefe9
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: include
+      status: charmed
+      target: false
+      type: status
+  competence:
+    raw: 0
+  costs:
+    components:
+      verbal:
+        type: tag
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: sight
+  duration:
+    raw: '1'
+    unit: minute
+  effectTypes:
+    - mental
+    - control
+  elderSorcery: true
+  elderSorceryIncant: <p>I control your mind.</p>
+  elements:
+    - storm
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: int
+  form: special
+  heightened: >-
+    <p>For each additional @L[Core:MP]{MP} spent, the maximum length of the
+    command can be increased by 1 word.</p>
+  identifier: elder-mind-control
+  interaction: feat
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    raw: '60'
+    unit: ft
+  results:
+    fail: >-
+      <p>Target is @L[Condition:Charmed]{charmed}. In addition, you may provide
+      a 1 word command that the target must follow for the duration of this
+      spell. If the command is directly harmful to the target, this spell
+      @L[Core:Fizzles]{fizzles} and they do not need to follow it. The target
+      must understand the language that the command was given in.</p>
+  spell: true
+  targets:
+    - creature
+  warded: true
+transfer: true
+type: ability

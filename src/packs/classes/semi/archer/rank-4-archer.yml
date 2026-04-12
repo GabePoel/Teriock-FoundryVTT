@@ -1,7 +1,7 @@
 _id: e55b7bdfc9a44e5e
 _key: '!items!e55b7bdfc9a44e5e'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.23
@@ -9,11 +9,11 @@ effects:
   - _id: K5FK5yk4NHOEpHef
     _key: '!items.effects!e55b7bdfc9a44e5e.K5FK5yk4NHOEpHef'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.c91617045c521c39
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.c91617045c521c39
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: combat
@@ -97,15 +97,16 @@ effects:
       standard: true
       targets:
         - self
+    transfer: true
     type: ability
   - _id: IaI9g2Rz0OYG1Kpy
     _key: '!items.effects!e55b7bdfc9a44e5e.IaI9g2Rz0OYG1Kpy'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.8b11706e4310b221
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8b11706e4310b221
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: support
@@ -143,15 +144,16 @@ effects:
       standard: true
       targets:
         - self
+    transfer: true
     type: ability
   - _id: 0qq9MUxz5NFJh1tW
     _key: '!items.effects!e55b7bdfc9a44e5e.0qq9MUxz5NFJh1tW'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.f17e1c273c579c38
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.f17e1c273c579c38
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: support
@@ -164,11 +166,11 @@ effects:
           _id: e789ed5e109ebd1a
           changes:
             - key: system.tradecrafts.hunter.score
-              mode: 4
+              phase: normal
               priority: 10
               qualifier: '1'
               target: Actor
-              time: normal
+              type: upgrade
               value: '2'
           competencies:
             - 0
@@ -215,15 +217,16 @@ effects:
       standard: true
       targets:
         - self
+    transfer: true
     type: ability
   - _id: W9ekYaonCEkM8hNy
     _key: '!items.effects!e55b7bdfc9a44e5e.W9ekYaonCEkM8hNy'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.a4f96105cc140a51
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.a4f96105cc140a51
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: combat
@@ -293,15 +296,16 @@ effects:
       targets:
         - attack
       trigger: <p>You are being @L[Core:Interactions]{attacked}.</p>
+    transfer: true
     type: ability
   - _id: 1C0jsWbWQHRAU0PO
     _key: '!items.effects!e55b7bdfc9a44e5e.1C0jsWbWQHRAU0PO'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.3bd2540824523148
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.3bd2540824523148
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: support
@@ -340,103 +344,16 @@ effects:
       standard: true
       targets:
         - self
-    type: ability
-  - _id: W9yFGFrMmg1QF4lK
-    _key: '!items.effects!e55b7bdfc9a44e5e.W9yFGFrMmg1QF4lK'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.91b30624f59c08d8
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/abilities/slay.webp
-    name: Slay
-    system:
-      _sup: 0qq9MUxz5NFJh1tW
-      automations:
-        1728b3a84ea27844:
-          _id: 1728b3a84ea27844
-          common:
-            - bag
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: common
-        29b275994cf9f5b1:
-          _id: 29b275994cf9f5b1
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: 5[lethal]
-          heighten:
-            - 1
-            - 0
-          impact: damage
-          merge: true
-          type: roll
-      class: assassin
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: weapon
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - killing
-        - damaging
-      executionTime: r0
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: slay
-      interaction: manifest
-      limitation: >-
-        <p>Only usable against one species, as specified when you use <a
-        class="mw-selflink selflink">Gamesman</a>.</p>
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>Target takes an additional [[/damage 5[lethal]]]
-          @L[Core:Damage]{damage}. This also has all @L[Category:Damage
-          types]{damage types} of the triggering @L[Category:Attack
-          abilities]{attack}. If the triggering @L[Category:Attack
-          abilities]{attack} was a critical hit, this deals 10
-          @L[Core:Damage]{damage} instead.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: contact
-      skill: true
-      standard: true
-      targets:
-        - creature
-      trigger: >-
-        <p>You have just hit a creature with an @L[Category:Attack
-        abilities]{attack} that dealt them @L[Core:Damage]{damage} from it.</p>
+    transfer: true
     type: ability
   - _id: ZKcH3xktroS6otxI
     _key: '!items.effects!e55b7bdfc9a44e5e.ZKcH3xktroS6otxI'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.26880b8e1f2a3443
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.26880b8e1f2a3443
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: combat
@@ -505,6 +422,102 @@ effects:
       standard: true
       targets:
         - vitals
+    transfer: true
+    type: ability
+  - _id: I0DIcRBibiNHB0vB
+    _key: '!items.effects!e55b7bdfc9a44e5e.I0DIcRBibiNHB0vB'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.91b30624f59c08d8
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/slay.webp
+    name: Slay
+    system:
+      _sup: 0qq9MUxz5NFJh1tW
+      automations:
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          common:
+            - bag
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          type: common
+        29b275994cf9f5b1:
+          _id: 29b275994cf9f5b1
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: 5[lethal]
+          heighten:
+            - 1
+            - 0
+          impact: damage
+          merge: true
+          type: roll
+      class: assassin
+      competence:
+        raw: 0
+      costs:
+        primary:
+          mp:
+            formula: '1'
+            type: formula
+        tweaks:
+          adept: 1
+      delivery: weapon
+      duration:
+        raw: '0'
+        unit: instant
+      effectTypes:
+        - killing
+        - damaging
+      executionTime:
+        base: r0
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: slay
+      interaction: manifest
+      limitation: >-
+        <p>Only usable against one species, as specified when you use <a
+        class="mw-selflink selflink">Gamesman</a>.</p>
+      maneuver: reactive
+      mundane: false
+      overview:
+        base: >-
+          <p>Target takes an additional [[/damage 5[lethal]]]
+          @L[Core:Damage]{damage}. This also has all @L[Category:Damage
+          types]{damage types} of the triggering @L[Category:Attack
+          abilities]{attack}. If the triggering @L[Category:Attack
+          abilities]{attack} was a critical hit, this deals 10
+          @L[Core:Damage]{damage} instead.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: contact
+      skill: true
+      standard: true
+      targets:
+        - creature
+      trigger: >-
+        <p>You have just hit a creature with an @L[Category:Attack
+        abilities]{attack} that dealt them @L[Core:Damage]{damage} from it.</p>
+    transfer: true
     type: ability
 folder: 2066ab65e0fb1342
 img: systems/teriock/src/icons/ranks/rank-4-archer.webp

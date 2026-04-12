@@ -1,73 +1,75 @@
 _id: 482911f78a64a6c5
-_key: '!items!482911f78a64a6c5'
+_key: '!effects!482911f78a64a6c5'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 482911f78a64a6c5
-    _key: '!items.effects!482911f78a64a6c5.482911f78a64a6c5'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/mystic-weapon-repair.webp
-    name: Mystic Weapon Repair
-    system:
-      automations:
-        GT2hZSyAU5MxBZ06:
-          _id: GT2hZSyAU5MxBZ06
-          common:
-            - repair
-            - reforge
-          type: common
-      class: knight
-      competence:
-        raw: 0
-      costs:
-        components:
-          somatic:
-            type: tag
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: sight
-      duration:
-        raw: '8'
-        unit: hour
-      executionTime: 10 Minutes
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: mystic-weapon-repair
-      interaction: manifest
-      maneuver: slow
-      overview:
-        base: >-
-          <p>You wave your hand over a weapon as arcane runes appear on its
-          surface. While you are @L[Core:Presence]{attuned} to the targeted
-          weapon, it is @L[Property:Runic]{runic} and effects that would render
-          it @L[Property:Destroyed]{destroyed} cause it to be
-          @L[Property:Shattered]{shattered} instead.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        raw: '5'
-        unit: ft
-      ritual: true
-      skill: true
-      standard: true
-      targets:
-        - weapon
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/mystic-weapon-repair.webp
 name: Mystic Weapon Repair
-type: wrapper
+system:
+  automations:
+    GT2hZSyAU5MxBZ06:
+      _id: GT2hZSyAU5MxBZ06
+      common:
+        - repair
+        - reforge
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 0
+        - 1
+      type: common
+  class: knight
+  competence:
+    raw: 0
+  costs:
+    components:
+      somatic:
+        type: tag
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: sight
+  duration:
+    raw: '8'
+    unit: hour
+  executionTime:
+    base: 10 Minutes
+    slow:
+      raw: '10'
+      unit: minute
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: mystic-weapon-repair
+  interaction: manifest
+  maneuver: slow
+  mundane: false
+  overview:
+    base: >-
+      <p>You wave your hand over a weapon as arcane runes appear on its surface.
+      While you are @L[Core:Presence]{attuned} to the targeted weapon, it is
+      @L[Property:Runic]{runic} and effects that would render it
+      @L[Property:Destroyed]{destroyed} cause it to be
+      @L[Property:Shattered]{shattered} instead.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    raw: '5'
+    unit: ft
+  ritual: true
+  skill: true
+  standard: true
+  targets:
+    - weapon
+transfer: true
+type: ability

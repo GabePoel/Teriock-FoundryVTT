@@ -1,71 +1,68 @@
 _id: af98c06b062a4f8a
-_key: '!items!af98c06b062a4f8a'
+_key: '!effects!af98c06b062a4f8a'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: af98c06b062a4f8a
-    _key: '!items.effects!af98c06b062a4f8a.af98c06b062a4f8a'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/opportunity-attack.webp
-    name: Opportunity Attack
-    system:
-      automations:
-        6afebccafd349212:
-          _id: 6afebccafd349212
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          macro: Compendium.teriock.execution.Macro.4864770a8b8e747b
-          trigger: execute
-          type: abilityMacro
-      basic: true
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: r1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: intrinsic
-      identifier: opportunity-attack
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>You may make a @L[Category:Single action abilities]{single action}
-          @L[Category:Weapon delivery abilities]{weapon} or @L[Category:Hand
-          delivery abilities]{hand} @L[Category:Attack abilities]{attack}
-          against the triggering creature.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-      trigger: >-
-        <p>A creature moves outside of your reach. This is also triggered when a
-        creature @L[Ability:Reload]{reloads}, @L[Category:Attack
-        abilities]{attacks} with, or @L[Ability:Interact]{interacts} to activate
-        an @L[Property:Involved]{involved} item.</p>
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/opportunity-attack.webp
 name: Opportunity Attack
-type: wrapper
+system:
+  automations:
+    6afebccafd349212:
+      _id: 6afebccafd349212
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      macro: Compendium.teriock.execution.Macro.4864770a8b8e747b
+      trigger: execute
+      type: abilityMacro
+  basic: true
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: instant
+  executionTime:
+    base: r1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: intrinsic
+  identifier: opportunity-attack
+  interaction: manifest
+  maneuver: reactive
+  mundane: false
+  overview:
+    base: >-
+      <p>You may make a @L[Category:Single action abilities]{single action}
+      @L[Category:Weapon delivery abilities]{weapon} or @L[Category:Hand
+      delivery abilities]{hand} @L[Category:Attack abilities]{attack} against
+      the triggering creature.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  targets:
+    - self
+  trigger: >-
+    <p>A creature moves outside of your reach. This is also triggered when a
+    creature @L[Ability:Reload]{reloads}, @L[Category:Attack abilities]{attacks}
+    with, or @L[Ability:Interact]{interacts} to activate an
+    @L[Property:Involved]{involved} item.</p>
+transfer: true
+type: ability

@@ -1,82 +1,78 @@
 _id: 69c4f40fef4f6344
-_key: '!items!69c4f40fef4f6344'
+_key: '!effects!69c4f40fef4f6344'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 69c4f40fef4f6344
-    _key: '!items.effects!69c4f40fef4f6344.69c4f40fef4f6344'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/gladiator-skills.webp
-    name: Gladiator Skills
-    system:
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.hp.base
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '7'
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: changes
-      class: berserker
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        conditions:
-          present:
-            - dueling
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: gladiator-skills
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>While @L[Condition:Dueling]{dueling} or in a staged battle
-          (gladiator fights, ceremonial battles, etc.) you gain an extra
-          @L[Core:Hit Die]{warrior hit die} (+7 HP, [[/roll 1d12]]).
-          Additionally, any allies @L[Condition:Dueling]{dueled} with you or
-          with you in a staged fight may pay 1 @L[Core:MP]{MP} at the beginning
-          of the fight to gain @L[Ability:Hack]{Hack} for that fight.
-          @L[Category:Gladiator fighting style weapons]{Weapons you use with the
-          gladiator fighting style} are @L[Property:Armor Voiding]{AV0} as
-          well.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/gladiator-skills.webp
 name: Gladiator Skills
-type: wrapper
+system:
+  automations:
+    e789ed5e109ebd1a:
+      _id: e789ed5e109ebd1a
+      changes:
+        - key: system.hp.base
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: Actor
+          type: add
+          value: '7'
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: changes
+  class: berserker
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    conditions:
+      present:
+        - dueling
+    raw: '0'
+    unit: unlimited
+  executionTime:
+    base: passive
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: gladiator-skills
+  interaction: manifest
+  maneuver: passive
+  mundane: false
+  overview:
+    base: >-
+      <p>While @L[Condition:Dueling]{dueling} or in a staged battle (gladiator
+      fights, ceremonial battles, etc.) you gain an extra @L[Core:Hit
+      Die]{warrior hit die} (+7 HP, [[/roll 1d12]]). Additionally, any allies
+      @L[Condition:Dueling]{dueled} with you or with you in a staged fight may
+      pay 1 @L[Core:MP]{MP} at the beginning of the fight to gain
+      @L[Ability:Hack]{Hack} for that fight. @L[Category:Gladiator fighting
+      style weapons]{Weapons you use with the gladiator fighting style} are
+      @L[Property:Armor Voiding]{AV0} as well.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  skill: true
+  standard: true
+  targets:
+    - self
+transfer: true
+type: ability

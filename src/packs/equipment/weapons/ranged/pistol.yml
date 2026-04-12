@@ -1,7 +1,7 @@
 _id: 9fbfefa835da8476
 _key: '!items!9fbfefa835da8476'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.64
@@ -9,11 +9,11 @@ effects:
   - _id: z91AYKb21UJdbAUo
     _key: '!items.effects!9fbfefa835da8476.z91AYKb21UJdbAUo'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.db4302ece692ddea
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.db4302ece692ddea
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.64
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/properties/ammunition.webp
     name: Ammunition
     system:
@@ -26,15 +26,16 @@ effects:
       form: intrinsic
       identifier: ammunition
       mundane: true
+    transfer: true
     type: property
   - _id: fragile000000000
     _key: '!items.effects!9fbfefa835da8476.fragile000000000'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.7b3e6d546e3b26f7
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.7b3e6d546e3b26f7
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.63
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/properties/fragile.webp
     name: Fragile
     system:
@@ -51,15 +52,16 @@ effects:
       form: flaw
       identifier: fragile
       mundane: true
+    transfer: true
     type: property
   - _id: loading000000000
     _key: '!items.effects!9fbfefa835da8476.loading000000000'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.b59d68ed12d46377
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.b59d68ed12d46377
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.63
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/properties/loading.webp
     name: Loading
     system:
@@ -72,15 +74,102 @@ effects:
       form: flaw
       identifier: loading
       mundane: true
+    transfer: true
     type: property
-  - _id: vl0ZxCDkICAWB9i6
-    _key: '!items.effects!9fbfefa835da8476.vl0ZxCDkICAWB9i6'
+  - _id: small00000000000
+    _key: '!items.effects!9fbfefa835da8476.small00000000000'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.87e86f2640702582
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.3d2cc8d952adebec
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/properties/small.webp
+    name: Small
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>An item with this property is easily concealed and can often be used
+        in the same hand as a @L[Category:Shields]{shield}.</p>
+      form: intrinsic
+      identifier: small
+      mundane: true
+    transfer: true
+    type: property
+  - _id: wep0000000000000
+    _key: '!items.effects!9fbfefa835da8476.wep0000000000000'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.891de334396620e1
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/properties/weapon.webp
+    name: Weapon
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
+        @L[Category:Attack abilities]{attack}.</p>
+      form: intrinsic
+      identifier: weapon
+      mundane: true
+    transfer: true
+    type: property
+  - _id: stVY0n1fYnFCjzL6
+    _key: '!items.effects!9fbfefa835da8476.stVY0n1fYnFCjzL6'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.b528592e5a4583e3
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/properties/missile.webp
+    name: Missile
+    system:
+      automations:
+        parameterChanges:
+          _id: parameterChanges
+          changes:
+            - key: system.range.melee
+              phase: normal
+              priority: 10
+              qualifier: '1'
+              target: parent
+              type: override
+              value: 'false'
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 0
+            - 1
+          type: changes
+      competence:
+        raw: 0
+      description: >-
+        <p>A <b>[[lookup name style=lc]]</b> item cannot be used to make melee
+        @L[Category:Attack abilities]{attacks}.</p>
+      form: flaw
+      identifier: missile
+      material: false
+      mundane: true
+    transfer: true
+    type: property
+  - _id: f34vUQ1sWeQ7ahc5
+    _key: '!items.effects!9fbfefa835da8476.f34vUQ1sWeQ7ahc5'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.87e86f2640702582
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/properties/ranged.webp
     name: Ranged
     system:
@@ -90,11 +179,11 @@ effects:
           _id: parameterChanges
           changes:
             - key: system.range.ranged
-              mode: 5
+              phase: normal
               priority: 10
               qualifier: '1'
               target: parent
-              time: normal
+              type: override
               value: 'true'
           competencies:
             - 0
@@ -123,89 +212,7 @@ effects:
       form: intrinsic
       identifier: ranged
       mundane: true
-    type: property
-  - _id: small00000000000
-    _key: '!items.effects!9fbfefa835da8476.small00000000000'
-    _stats:
-      compendiumSource: Compendium.teriock.properties.Item.3d2cc8d952adebec
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.63
-    img: systems/teriock/src/icons/properties/small.webp
-    name: Small
-    system:
-      competence:
-        raw: 0
-      description: >-
-        <p>An item with this property is easily concealed and can often be used
-        in the same hand as a @L[Category:Shields]{shield}.</p>
-      form: intrinsic
-      identifier: small
-      mundane: true
-    type: property
-  - _id: wep0000000000000
-    _key: '!items.effects!9fbfefa835da8476.wep0000000000000'
-    _stats:
-      compendiumSource: Compendium.teriock.properties.Item.891de334396620e1
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.63
-    img: systems/teriock/src/icons/properties/weapon.webp
-    name: Weapon
-    system:
-      competence:
-        raw: 0
-      description: >-
-        <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-        @L[Category:Attack abilities]{attack}.</p>
-      form: intrinsic
-      identifier: weapon
-      mundane: true
-    type: property
-  - _id: stVY0n1fYnFCjzL6
-    _key: '!items.effects!9fbfefa835da8476.stVY0n1fYnFCjzL6'
-    _stats:
-      compendiumSource: Compendium.teriock.properties.Item.b528592e5a4583e3
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/properties/missile.webp
-    name: Missile
-    system:
-      automations:
-        parameterChanges:
-          _id: parameterChanges
-          changes:
-            - key: system.range.melee
-              mode: 5
-              priority: 10
-              qualifier: '1'
-              target: parent
-              time: normal
-              value: 'false'
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 0
-            - 1
-          type: changes
-      competence:
-        raw: 0
-      description: >-
-        <p>A <b>[[lookup name style=lc]]</b> item cannot be used to make melee
-        @L[Category:Attack abilities]{attacks}.</p>
-      form: flaw
-      identifier: missile
-      material: false
-      mundane: true
+    transfer: true
     type: property
 folder: 87e86f2640702582
 img: systems/teriock/src/icons/equipment/pistol.webp

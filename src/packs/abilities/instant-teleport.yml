@@ -1,58 +1,59 @@
 _id: 24c1391491c56f39
-_key: '!items!24c1391491c56f39'
+_key: '!effects!24c1391491c56f39'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 24c1391491c56f39
-    _key: '!items.effects!24c1391491c56f39.24c1391491c56f39'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/instant-teleport.webp
-    name: Instant Teleport
-    system:
-      automations:
-        ApvwadoYnAMaI4v9:
-          _id: ApvwadoYnAMaI4v9
-          movementAction: blink
-          type: changeMovement
-      competence:
-        raw: 0
-      delivery: sight
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - displacement
-      elements:
-        - storm
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: instant-teleport
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: <p>You are instantly transported to the targeted location.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        raw: '1000'
-        unit: ft
-      targets:
-        - area
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/instant-teleport.webp
 name: Instant Teleport
-type: wrapper
+system:
+  automations:
+    ApvwadoYnAMaI4v9:
+      _id: ApvwadoYnAMaI4v9
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 0
+        - 1
+      movementAction: blink
+      type: changeMovement
+  competence:
+    raw: 0
+  delivery: sight
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - displacement
+  elements:
+    - storm
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: instant-teleport
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: <p>You are instantly transported to the targeted location.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    raw: '1000'
+    unit: ft
+  targets:
+    - area
+transfer: true
+type: ability

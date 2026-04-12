@@ -1,73 +1,72 @@
 _id: 747e6b8e50ae3cad
-_key: '!items!747e6b8e50ae3cad'
+_key: '!effects!747e6b8e50ae3cad'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 747e6b8e50ae3cad
-    _key: '!items.effects!747e6b8e50ae3cad.747e6b8e50ae3cad'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/block-cone.webp
-    name: Block Cone
-    system:
-      automations:
-        Vp5FDV41hGwhiq9v:
-          _id: Vp5FDV41hGwhiq9v
-          common:
-            - shatter
-          type: common
-      basic: true
-      competence:
-        raw: 0
-      costs:
-        components:
-          break:
-            description: >-
-              <p>When [[lookup name]] is used, the item that delivers it becomes
-              @L[Property:Shattered]{shattered}.</p>
-            type: description
-      delivery: shield
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: r1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: intrinsic
-      identifier: block-cone
-      interaction: manifest
-      maneuver: reactive
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: contact
-      requirements: >-
-        <p>The item you're using [[lookup name]] with has the
-        @L[Property:Blocking]{blocking property}. The
-        @L[Category:Abilities]{ability} targeting you is a @L[Category:Cone
-        delivery abilities]{cone}.</p>
-      results:
-        fail: >-
-          <p>The @L[Category:Cone delivery abilities]{cone's} effect
-          applies.</p>
-        save: >-
-          <p>The @L[Category:Cone delivery abilities]{cone's} effect
-          @L[Core:Fizzles]{fizzles}.</p>
-      targets:
-        - ability
-      trigger: <p>A @L[Category:Cone delivery abilities]{cone} would target you.</p>
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/block-cone.webp
 name: Block Cone
-type: wrapper
+system:
+  automations:
+    Vp5FDV41hGwhiq9v:
+      _id: Vp5FDV41hGwhiq9v
+      common:
+        - shatter
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 0
+        - 1
+      type: common
+  basic: true
+  competence:
+    raw: 0
+  costs:
+    components:
+      break:
+        description: >-
+          <p>When [[lookup name]] is used, the item that delivers it becomes
+          @L[Property:Shattered]{shattered}.</p>
+        type: description
+  delivery: shield
+  duration:
+    raw: '0'
+    unit: instant
+  executionTime:
+    base: r1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: intrinsic
+  identifier: block-cone
+  interaction: manifest
+  maneuver: reactive
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: contact
+  requirements: >-
+    <p>The item you're using [[lookup name]] with has the
+    @L[Property:Blocking]{blocking property}. The
+    @L[Category:Abilities]{ability} targeting you is a @L[Category:Cone delivery
+    abilities]{cone}.</p>
+  results:
+    fail: <p>The @L[Category:Cone delivery abilities]{cone's} effect applies.</p>
+    save: >-
+      <p>The @L[Category:Cone delivery abilities]{cone's} effect
+      @L[Core:Fizzles]{fizzles}.</p>
+  targets:
+    - ability
+  trigger: <p>A @L[Category:Cone delivery abilities]{cone} would target you.</p>
+transfer: true
+type: ability

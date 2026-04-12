@@ -1,58 +1,52 @@
 _id: 83cd0ae93184d347
-_key: '!items!83cd0ae93184d347'
+_key: '!effects!83cd0ae93184d347'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 83cd0ae93184d347
-    _key: '!items.effects!83cd0ae93184d347.83cd0ae93184d347'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/leather-drake-breath.webp
-    name: Leather Drake Breath
-    system:
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '2'
-            type: formula
-      delivery: cone
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: leather-drake-breath
-      interaction: feat
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        raw: '15'
-        unit: ft
-      results:
-        fail: >-
-          <p>All non-@L[Property:Magic]{magic} @L[Category:Equipment]{items}
-          targeted and @L[Keyword:Bearing]{beared} by targets are
-          @L[Property:Shattered]{shattered}.</p>
-      targets:
-        - creature
-        - item
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/leather-drake-breath.webp
 name: Leather Drake Breath
-type: wrapper
+system:
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '2'
+        type: formula
+  delivery: cone
+  duration:
+    raw: '0'
+    unit: instant
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  identifier: leather-drake-breath
+  interaction: feat
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    raw: '15'
+    unit: ft
+  results:
+    fail: >-
+      <p>All non-@L[Property:Magic]{magic} @L[Category:Equipment]{items}
+      targeted and @L[Keyword:Bearing]{beared} by targets are
+      @L[Property:Shattered]{shattered}.</p>
+  targets:
+    - creature
+    - item
+transfer: true
+type: ability

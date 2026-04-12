@@ -2,7 +2,7 @@ _id: A0A12kO0F6LGoWHI
 _key: '!items!A0A12kO0F6LGoWHI'
 _stats:
   compendiumSource: Compendium.teriock.classes.Item.e55b7bdfc9a44e5e
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.23
@@ -10,11 +10,11 @@ effects:
   - _id: 0qq9MUxz5NFJh1tW
     _key: '!items.effects!A0A12kO0F6LGoWHI.0qq9MUxz5NFJh1tW'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.f17e1c273c579c38
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.f17e1c273c579c38
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: support
@@ -27,11 +27,11 @@ effects:
           _id: e789ed5e109ebd1a
           changes:
             - key: system.tradecrafts.hunter.score
-              mode: 4
+              phase: normal
               priority: 10
               qualifier: '1'
               target: Actor
-              time: normal
+              type: upgrade
               value: '2'
           competencies:
             - 0
@@ -78,15 +78,16 @@ effects:
       standard: true
       targets:
         - self
+    transfer: true
     type: ability
   - _id: W9ekYaonCEkM8hNy
     _key: '!items.effects!A0A12kO0F6LGoWHI.W9ekYaonCEkM8hNy'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.a4f96105cc140a51
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.a4f96105cc140a51
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: combat
@@ -156,15 +157,16 @@ effects:
       targets:
         - attack
       trigger: <p>You are being @L[Core:Interactions]{attacked}.</p>
+    transfer: true
     type: ability
-  - _id: W9yFGFrMmg1QF4lK
-    _key: '!items.effects!A0A12kO0F6LGoWHI.W9yFGFrMmg1QF4lK'
+  - _id: 2Rm3NVAnWtQ4mivJ
+    _key: '!items.effects!A0A12kO0F6LGoWHI.2Rm3NVAnWtQ4mivJ'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.91b30624f59c08d8
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.91b30624f59c08d8
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/slay.webp
     name: Slay
     system:
@@ -203,6 +205,8 @@ effects:
           mp:
             formula: '1'
             type: formula
+        tweaks:
+          adept: 1
       delivery: weapon
       duration:
         raw: '0'
@@ -210,7 +214,10 @@ effects:
       effectTypes:
         - killing
         - damaging
-      executionTime: r0
+      executionTime:
+        base: r0
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -223,6 +230,7 @@ effects:
         <p>Only usable against one species, as specified when you use <a
         class="mw-selflink selflink">Gamesman</a>.</p>
       maneuver: reactive
+      mundane: false
       overview:
         base: >-
           <p>Target takes an additional [[/damage 5[lethal]]]
@@ -244,6 +252,7 @@ effects:
       trigger: >-
         <p>You have just hit a creature with an @L[Category:Attack
         abilities]{attack} that dealt them @L[Core:Damage]{damage} from it.</p>
+    transfer: true
     type: ability
 folder: 997cd433ccad17d7
 img: systems/teriock/src/icons/ranks/rank-4-archer.webp

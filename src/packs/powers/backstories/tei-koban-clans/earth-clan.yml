@@ -1,7 +1,7 @@
 _id: 099a9cd7de8c9d6d
 _key: '!items!099a9cd7de8c9d6d'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.23
@@ -9,11 +9,11 @@ effects:
   - _id: E0KYNyNESAsugboD
     _key: '!items.effects!099a9cd7de8c9d6d.E0KYNyNESAsugboD'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.e81c966a2a197d78
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.e81c966a2a197d78
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/cannot-leap.webp
     name: Cannot Leap
     system:
@@ -22,18 +22,18 @@ effects:
           _id: e789ed5e109ebd1a
           changes:
             - key: system.speedAdjustments.leapVertical
-              mode: 5
+              phase: normal
               priority: 20
               qualifier: '1'
               target: Actor
-              time: normal
+              type: override
               value: '0'
             - key: system.speedAdjustments.leapHorizontal
-              mode: 5
+              phase: normal
               priority: 20
               qualifier: '1'
               target: Actor
-              time: normal
+              type: override
               value: '0'
           competencies:
             - 0
@@ -75,15 +75,16 @@ effects:
         unit: self
       targets:
         - self
+    transfer: true
     type: ability
   - _id: VcokuyklCSwturoB
     _key: '!items.effects!099a9cd7de8c9d6d.VcokuyklCSwturoB'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.1c495caf2efacbdf
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1c495caf2efacbdf
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/fire-damage-resistance.webp
     name: Fire Damage Resistance
     system:
@@ -104,11 +105,11 @@ effects:
           _id: e789ed5e109ebd1a
           changes:
             - key: system.protections.resistances.damageTypes
-              mode: 2
+              phase: normal
               priority: 10
               qualifier: '1'
               target: Actor
-              time: normal
+              type: add
               value: fire
           competencies:
             - 0
@@ -151,6 +152,7 @@ effects:
         unit: self
       targets:
         - self
+    transfer: true
     type: ability
 folder: 111191792288f1c7
 img: icons/magic/earth/projectile-stone-landslide.webp

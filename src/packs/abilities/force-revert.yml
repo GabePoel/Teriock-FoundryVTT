@@ -1,82 +1,81 @@
 _id: 647281a76d60124a
-_key: '!items!647281a76d60124a'
+_key: '!effects!647281a76d60124a'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 647281a76d60124a
-    _key: '!items.effects!647281a76d60124a.647281a76d60124a'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/force-revert.webp
-    name: Force Revert
-    system:
-      automations:
-        0de8ced768f08913:
-          _id: 0de8ced768f08913
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: remove
-          status: transformed
-          type: status
-        ebf9c2749a0ef8c2:
-          _id: ebf9c2749a0ef8c2
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: remove
-          status: transformed
-          type: end
-      basic: true
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: hand
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: intrinsic
-      identifier: force-revert
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - spiritual
-      range:
-        unit: contact
-      results:
-        hit: >-
-          <p>If the target was @L[Condition:Transformed]{minorly transformed},
-          they revert to their original form.</p>
-      targets:
-        - creature
-        - item
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/force-revert.webp
 name: Force Revert
-type: wrapper
+system:
+  automations:
+    0de8ced768f08913:
+      _id: 0de8ced768f08913
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: remove
+      status: transformed
+      target: false
+      type: status
+    ebf9c2749a0ef8c2:
+      _id: ebf9c2749a0ef8c2
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 1
+        - 0
+      relation: remove
+      status: transformed
+      type: end
+  basic: true
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: hand
+  duration:
+    raw: '0'
+    unit: instant
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: intrinsic
+  identifier: force-revert
+  interaction: attack
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - spiritual
+  range:
+    unit: contact
+  results:
+    hit: >-
+      <p>If the target was @L[Condition:Transformed]{minorly transformed}, they
+      revert to their original form.</p>
+  targets:
+    - creature
+    - item
+transfer: true
+type: ability

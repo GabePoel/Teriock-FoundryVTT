@@ -1,4 +1,5 @@
 import { iconStyles } from "../constants/display/_module.mjs";
+import { costOptions } from "../constants/options/cost-options.mjs";
 import { BaseRoll } from "../dice/rolls/_module.mjs";
 import { localizeChoices } from "./localization.mjs";
 import { toCamelCase, toTitleCase } from "./string.mjs";
@@ -454,15 +455,32 @@ export async function fromIdentifier(identifier, options = {}) {
     }
     const documentName = TERIOCK.options.document[parsed.type]?.doc;
     if (!documentName) return null;
-    const packs = game.packs.contents.filter(
-      (p) => p.documentName === documentName,
-    );
+    const packs = game.packs.contents
+      .filter((p) => p.documentName === documentName)
+      .sort(
+        (a, b) =>
+          b.collection.startsWith("teriock.") -
+          a.collection.startsWith("teriock."),
+      );
     for (const pack of packs) {
       const docs = await pack.getDocuments({
         system: { identifier: parsed.identifier },
         type: parsed.type,
       });
-      if (docs.length > 0) return docs[0];
+      const filtered = docs.filter((d) => {
+        const mutationFields = [
+          "system.improvement",
+          "system.limitation",
+          ...Object.keys(costOptions.tweaks).map(
+            (t) => `system.costs.tweaks.${t}`,
+          ),
+        ];
+        for (const field of mutationFields) {
+          if (foundry.utils.getProperty(d, field)) return false;
+        }
+        return true;
+      });
+      if (filtered.length > 0) return docs[0];
     }
   }
   return fromIdentifierSync(identifier);

@@ -1,75 +1,70 @@
 _id: 5894bcd8755bdac8
-_key: '!items!5894bcd8755bdac8'
+_key: '!effects!5894bcd8755bdac8'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 5894bcd8755bdac8
-    _key: '!items.effects!5894bcd8755bdac8.5894bcd8755bdac8'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/hack.webp
-    name: Hack
-    system:
-      automations:
-        d873eb939c3b5951:
-          _id: d873eb939c3b5951
-          competencies:
-            - 0
-            - 1
-            - 2
-          hacks:
-            - arm
-            - leg
-          heighten:
-            - 1
-            - 0
-          type: hacks
-      class: berserker
-      competence:
-        raw: 0
-      delivery: weapon
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: hack
-      interaction: attack
-      maneuver: active
-      overview:
-        base: >-
-          <p>As you attack, choose either <i>arm</i> or <i>leg</i>. The damage
-          gets dealt accordingly.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: contact
-      results:
-        critHit: >-
-          <p>The target takes 2 @L[Damage:Hack]{hack damage} on either arms or
-          legs, depending on what you chose.</p>
-        hit: >-
-          <p>The target takes 1 @L[Damage:Hack]{hack damage} on either an arm or
-          leg, depending on what you chose.</p>
-      skill: true
-      standard: true
-      targets:
-        - arm
-        - leg
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/hack.webp
 name: Hack
-type: wrapper
+system:
+  automations:
+    d873eb939c3b5951:
+      _id: d873eb939c3b5951
+      competencies:
+        - 0
+        - 1
+        - 2
+      hacks:
+        - arm
+        - leg
+      heighten:
+        - 1
+        - 0
+      reverse: false
+      type: hacks
+  class: berserker
+  competence:
+    raw: 0
+  delivery: weapon
+  duration:
+    raw: '0'
+    unit: instant
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: hack
+  interaction: attack
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>As you attack, choose either <i>arm</i> or <i>leg</i>. The damage gets
+      dealt accordingly.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: contact
+  results:
+    critHit: >-
+      <p>The target takes 2 @L[Damage:Hack]{hack damage} on either arms or legs,
+      depending on what you chose.</p>
+    hit: >-
+      <p>The target takes 1 @L[Damage:Hack]{hack damage} on either an arm or
+      leg, depending on what you chose.</p>
+  skill: true
+  standard: true
+  targets:
+    - arm
+    - leg
+transfer: true
+type: ability

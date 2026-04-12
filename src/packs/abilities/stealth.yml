@@ -1,68 +1,62 @@
 _id: 93d9bac5c9d0fa9c
-_key: '!items!93d9bac5c9d0fa9c'
+_key: '!effects!93d9bac5c9d0fa9c'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 93d9bac5c9d0fa9c
-    _key: '!items.effects!93d9bac5c9d0fa9c.93d9bac5c9d0fa9c'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/stealth.webp
-    name: Stealth
-    system:
-      class: thief
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: stealth
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You crawl at @L[Core:Movement Speed]{half speed} and can
-          @L[Ability:Move]{Move} at @L[Core:Movement Speed]{half speed} speed
-          while @L[Condition:Hidden]{hidden}. Additionally, @L[Category:Movement
-          effects]{movement effects} only require a DC 10 @L[Core:SNK]{SNK}
-          @L[Core:Feat Interaction]{feat save} to keep from breaking your
-          @L[Condition:Hidden]{hiding}.</p>
-        proficient: >-
-          <p>You crawl at @L[Core:Movement Speed]{full speed} and can
-          @L[Ability:Move]{Move} at @L[Core:Movement Speed]{full speed} while
-          @L[Condition:Hidden]{hidden}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-      upgrades:
-        competence:
-          attribute: snk
-          value: 2
-        score:
-          attribute: snk
-          value: 3
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/stealth.webp
 name: Stealth
-type: wrapper
+system:
+  class: thief
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: unlimited
+  executionTime:
+    base: passive
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: stealth
+  interaction: manifest
+  maneuver: passive
+  mundane: false
+  overview:
+    base: >-
+      <p>You crawl at @L[Core:Movement Speed]{half speed} and can
+      @L[Ability:Move]{Move} at @L[Core:Movement Speed]{half speed} speed while
+      @L[Condition:Hidden]{hidden}. Additionally, @L[Category:Movement
+      effects]{movement effects} only require a DC 10 @L[Core:SNK]{SNK}
+      @L[Core:Feat Interaction]{feat save} to keep from breaking your
+      @L[Condition:Hidden]{hiding}.</p>
+    proficient: >-
+      <p>You crawl at @L[Core:Movement Speed]{full speed} and can
+      @L[Ability:Move]{Move} at @L[Core:Movement Speed]{full speed} while
+      @L[Condition:Hidden]{hidden}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  skill: true
+  standard: true
+  targets:
+    - self
+  upgrades:
+    competence:
+      attribute: snk
+      value: 2
+    score:
+      attribute: snk
+      value: 3
+transfer: true
+type: ability

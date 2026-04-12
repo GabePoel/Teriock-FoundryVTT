@@ -1,63 +1,65 @@
 _id: 0095a623efc8d7c3
-_key: '!items!0095a623efc8d7c3'
+_key: '!effects!0095a623efc8d7c3'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 0095a623efc8d7c3
-    _key: '!items.effects!0095a623efc8d7c3.0095a623efc8d7c3'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/pour-minor-revitalizing-potion.webp
-    name: Pour Minor Revitalizing Potion
-    system:
-      automations:
-        XAwAu7gGlDiNLOsu:
-          _id: XAwAu7gGlDiNLOsu
-          consumeStatDice: false
-          type: revitalize
-      competence:
-        raw: 0
-      consumeSource: true
-      delivery: item
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - revitalization
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: pour-minor-revitalizing-potion
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>The target @L[Core:Revitalizing]{revitalizes} without consuming
-          @L[Core:Hit Points and Mana Points]{mana dice}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - alchemical
-      range:
-        unit: contact
-      requirements: >-
-        <p>Use [[lookup name]] by interacting with the
-        @L[Category:Equipment]{equipment} that provides it. That counts as the
-        @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
-        the ability.</p>
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/pour-minor-revitalizing-potion.webp
 name: Pour Minor Revitalizing Potion
-type: wrapper
+system:
+  automations:
+    XAwAu7gGlDiNLOsu:
+      _id: XAwAu7gGlDiNLOsu
+      competencies:
+        - 0
+        - 1
+        - 2
+      consumeStatDice: false
+      forHarm: false
+      heighten:
+        - 0
+        - 1
+      type: revitalize
+  competence:
+    raw: 0
+  consumeSource: true
+  delivery: item
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - revitalization
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: pour-minor-revitalizing-potion
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>The target @L[Core:Revitalizing]{revitalizes} without consuming
+      @L[Core:Hit Points and Mana Points]{mana dice}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - alchemical
+  range:
+    unit: contact
+  requirements: >-
+    <p>Use [[lookup name]] by interacting with the
+    @L[Category:Equipment]{equipment} that provides it. That counts as the
+    @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for the
+    ability.</p>
+  targets:
+    - self
+transfer: true
+type: ability

@@ -95,7 +95,7 @@ export default class TeriockMacro extends mix(
   static async makeGeneralUseMacro(doc) {
     const lookup = doc.lookupKey;
     const command = dedent(`
-    await game.teriock.Macro.useDocumentGeneral("${lookup}", { actor, event })`);
+    await Macro.implementation.useDocumentGeneral("${lookup}", { actor, event })`);
     const macroData = {
       name: _loc("TERIOCK.SYSTEMS.Child.USAGE.use", {
         value: doc.name,
@@ -122,7 +122,7 @@ export default class TeriockMacro extends mix(
    */
   static async makeLinkedUseMacro(doc) {
     const command = dedent(`
-    await game.teriock.Macro.useDocumentLinked("${doc.uuid}", { event: event })`);
+    await Macro.implementation.useDocumentLinked("${doc.uuid}", { event: event })`);
     const macroData = {
       name: _loc("TERIOCK.SYSTEMS.Child.USAGE.use", {
         value: doc.name,

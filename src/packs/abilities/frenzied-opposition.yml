@@ -1,66 +1,65 @@
 _id: 6dbdf952757e4bca
-_key: '!items!6dbdf952757e4bca'
+_key: '!effects!6dbdf952757e4bca'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 6dbdf952757e4bca
-    _key: '!items.effects!6dbdf952757e4bca.6dbdf952757e4bca'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/frenzied-opposition.webp
-    name: Frenzied Opposition
-    system:
-      automations:
-        05d91a1d40464b4e:
-          _id: 05d91a1d40464b4e
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: include
-          status: frenzied
-          type: status
-      competence:
-        raw: 0
-      delivery: weapon
-      duration:
-        raw: '10'
-        unit: minute
-      effectTypes:
-        - automatic
-      executionTime: r0
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: flaw
-      identifier: frenzied-opposition
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: <p>You become @L[Condition:Frenzied]{frenzied}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: contact
-      targets:
-        - creature
-      trigger: >-
-        <p>You are @L[Condition:Down]{dropped}. This triggers automatically. You
-        cannot choose to not use it if you are able to.</p>
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/frenzied-opposition.webp
 name: Frenzied Opposition
-type: wrapper
+system:
+  automations:
+    05d91a1d40464b4e:
+      _id: 05d91a1d40464b4e
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: include
+      status: frenzied
+      target: false
+      type: status
+  competence:
+    raw: 0
+  delivery: weapon
+  duration:
+    raw: '10'
+    unit: minute
+  effectTypes:
+    - automatic
+  executionTime:
+    base: r0
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: flaw
+  identifier: frenzied-opposition
+  interaction: manifest
+  maneuver: reactive
+  mundane: false
+  overview:
+    base: <p>You become @L[Condition:Frenzied]{frenzied}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: contact
+  targets:
+    - creature
+  trigger: >-
+    <p>You are @L[Condition:Down]{dropped}. This triggers automatically. You
+    cannot choose to not use it if you are able to.</p>
+transfer: true
+type: ability

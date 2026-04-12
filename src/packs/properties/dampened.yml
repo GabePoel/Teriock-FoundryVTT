@@ -1,49 +1,49 @@
 _id: 6916b713ea43bf45
-_key: '!items!6916b713ea43bf45'
+_key: '!effects!6916b713ea43bf45'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 6916b713ea43bf45
-    _key: '!items.effects!6916b713ea43bf45.6916b713ea43bf45'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.68
-    img: systems/teriock/src/icons/properties/dampened.webp
-    name: Dampened
-    system:
-      applyIfDampened: true
-      automations:
-        parameterChanges:
-          _id: parameterChanges
-          changes:
-            - key: system.dampened
-              mode: 5
-              priority: 10
-              qualifier: '1'
-              target: parent
-              time: normal
-              value: 'true'
-          type: changes
-      competence:
-        raw: 0
-      description: >-
-        <p>A <b>[[lookup name style=lc]]</b> item has all its
-        @L[Category:Magical properties]{magical properties} suppressed. This
-        means, for instance, that it cannot @L[Property:Granting]{grant}
-        @L[Category:Abilities]{abilities} to its @L[Keyword:Using]{user}.
-        However, any mundane @L[Category:Martially powered abilities]{martially
-        powered abilities} that are intrinsic to the item itself (those marked
-        with black text in live action <a target="_blank" rel="nofollow
-        noreferrer noopener" class="external text"
-        href="https://www.fanwar.com/">FanWar</a>) continue to function.</p>
-      form: flaw
-      identifier: dampened
-    type: property
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/properties/dampened.webp
 name: Dampened
-type: wrapper
+system:
+  applyIfDampened: true
+  automations:
+    parameterChanges:
+      _id: parameterChanges
+      changes:
+        - key: system.dampened
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: parent
+          type: override
+          value: 'true'
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 0
+        - 1
+      type: changes
+  competence:
+    raw: 0
+  description: >-
+    <p>A <b>[[lookup name style=lc]]</b> item has all its @L[Category:Magical
+    properties]{magical properties} suppressed. This means, for instance, that
+    it cannot @L[Property:Granting]{grant} @L[Category:Abilities]{abilities} to
+    its @L[Keyword:Using]{user}. However, any mundane @L[Category:Martially
+    powered abilities]{martially powered abilities} that are intrinsic to the
+    item itself (those marked with black text in live action <a target="_blank"
+    rel="nofollow noreferrer noopener" class="external text"
+    href="https://www.fanwar.com/">FanWar</a>) continue to function.</p>
+  form: flaw
+  identifier: dampened
+  mundane: false
+transfer: true
+type: property

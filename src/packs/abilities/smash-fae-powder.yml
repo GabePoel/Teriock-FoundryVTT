@@ -1,84 +1,83 @@
 _id: 5cd5d9f6431bb960
-_key: '!items!5cd5d9f6431bb960'
+_key: '!effects!5cd5d9f6431bb960'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 5cd5d9f6431bb960
-    _key: '!items.effects!5cd5d9f6431bb960.5cd5d9f6431bb960'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/smash-fae-powder.webp
-    name: Smash Fae Powder
-    system:
-      automations:
-        83f5eb25d65d72f1:
-          _id: 83f5eb25d65d72f1
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: remove
-          status: burned
-          type: end
-        dbaecf76cab189d2:
-          _id: dbaecf76cab189d2
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: remove
-          status: burned
-          type: status
-      competence:
-        raw: 0
-      consumeSource: true
-      delivery: aura
-      duration:
-        raw: '1'
-        unit: minute
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: smash-fae-powder
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>Extinguish all flames and neutralize all acids within range. Any
-          creatures within range are no longer @L[Condition:Burned]{burned}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - alchemical
-      range:
-        raw: '10'
-        unit: ft
-      requirements: >-
-        <p>Use [[lookup name]] by interacting with the
-        @L[Category:Equipment]{equipment} that provides it. That counts as the
-        @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
-        the ability.</p>
-      targets:
-        - area
-        - creature
-        - item
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/smash-fae-powder.webp
 name: Smash Fae Powder
-type: wrapper
+system:
+  automations:
+    83f5eb25d65d72f1:
+      _id: 83f5eb25d65d72f1
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 1
+        - 0
+      relation: remove
+      status: burned
+      type: end
+    dbaecf76cab189d2:
+      _id: dbaecf76cab189d2
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: remove
+      status: burned
+      target: false
+      type: status
+  competence:
+    raw: 0
+  consumeSource: true
+  delivery: aura
+  duration:
+    raw: '1'
+    unit: minute
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: smash-fae-powder
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>Extinguish all flames and neutralize all acids within range. Any
+      creatures within range are no longer @L[Condition:Burned]{burned}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - alchemical
+  range:
+    raw: '10'
+    unit: ft
+  requirements: >-
+    <p>Use [[lookup name]] by interacting with the
+    @L[Category:Equipment]{equipment} that provides it. That counts as the
+    @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for the
+    ability.</p>
+  targets:
+    - area
+    - creature
+    - item
+transfer: true
+type: ability

@@ -1,102 +1,98 @@
 _id: 61411e7ffa05eaae
-_key: '!items!61411e7ffa05eaae'
+_key: '!effects!61411e7ffa05eaae'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 61411e7ffa05eaae
-    _key: '!items.effects!61411e7ffa05eaae.61411e7ffa05eaae'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/shield-bash.webp
-    name: Shield Bash
-    system:
-      automations:
-        29b275994cf9f5b1:
-          _id: 29b275994cf9f5b1
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: 1d8
-          heighten:
-            - 1
-            - 0
-          merge: true
-          roll: damage
-          type: roll
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.damage.base.raw
-              mode: 2
-              priority: 10
-              qualifier: '@type.bucklerShield'
-              target: equipment
-              time: normal
-              value: 1d4
-            - key: system.damage.base.raw
-              mode: 2
-              priority: 10
-              qualifier: '@type.largeShield'
-              target: equipment
-              time: normal
-              value: 1d6
-            - key: system.damage.base.raw
-              mode: 2
-              priority: 10
-              qualifier: '@type.towerShield'
-              target: equipment
-              time: normal
-              value: 1d8
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: changes
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: shield-bash
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>Your @L[Category:Shields]{shields} count as
-          @L[Category:Weapons]{weapons} for the purposes of abilities that
-          target or are delivered by them. You may @L[Core:Attack
-          Interaction]{attack} with them and their damage die is determined by
-          the @L[Category:Shields]{type of shield} they
-          are.</p><ul><li><b>Buckler Shield:</b> [[/damage
-          1d4]]</li><li><b>Large Shield:</b> [[/damage 1d6]]</li><li><b>Tower
-          Shield:</b> [[/damage 1d8]]</li></ul>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/shield-bash.webp
 name: Shield Bash
-type: wrapper
+system:
+  automations:
+    29b275994cf9f5b1:
+      _id: 29b275994cf9f5b1
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: 1d8
+      heighten:
+        - 1
+        - 0
+      impact: damage
+      merge: true
+      type: roll
+    e789ed5e109ebd1a:
+      _id: e789ed5e109ebd1a
+      changes:
+        - key: system.damage.base.raw
+          phase: normal
+          priority: 10
+          qualifier: '@type.bucklerShield'
+          target: equipment
+          type: add
+          value: 1d4
+        - key: system.damage.base.raw
+          phase: normal
+          priority: 10
+          qualifier: '@type.largeShield'
+          target: equipment
+          type: add
+          value: 1d6
+        - key: system.damage.base.raw
+          phase: normal
+          priority: 10
+          qualifier: '@type.towerShield'
+          target: equipment
+          type: add
+          value: 1d8
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: changes
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: unlimited
+  executionTime:
+    base: passive
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: shield-bash
+  interaction: manifest
+  maneuver: passive
+  mundane: false
+  overview:
+    base: >-
+      <p>Your @L[Category:Shields]{shields} count as
+      @L[Category:Weapons]{weapons} for the purposes of abilities that target or
+      are delivered by them. You may @L[Core:Attack Interaction]{attack} with
+      them and their damage die is determined by the @L[Category:Shields]{type
+      of shield} they are.</p><ul><li><b>Buckler Shield:</b> [[/damage
+      1d4]]</li><li><b>Large Shield:</b> [[/damage 1d6]]</li><li><b>Tower
+      Shield:</b> [[/damage 1d8]]</li></ul>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  targets:
+    - self
+transfer: true
+type: ability

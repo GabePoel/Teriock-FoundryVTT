@@ -1,66 +1,65 @@
 _id: 783d9211b5e431e3
-_key: '!items!783d9211b5e431e3'
+_key: '!effects!783d9211b5e431e3'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 783d9211b5e431e3
-    _key: '!items.effects!783d9211b5e431e3.783d9211b5e431e3'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/paralysis-poison-strike.webp
-    name: Paralysis Poison Strike
-    system:
-      automations:
-        743730f25f256b10:
-          _id: 743730f25f256b10
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: include
-          status: poisoned
-          type: status
-      competence:
-        raw: 0
-      delivery: weapon
-      duration:
-        raw: '24'
-        unit: hour
-      effectTypes:
-        - poison
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: paralysis-poison-strike
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - alchemical
-      range:
-        unit: contact
-      results:
-        hit: >-
-          <p>Target is @L[Condition:Poisoned]{poisoned}. The
-          @L[Condition:Poisoned]{poison} causes the target to become
-          @L[Condition:Paralyzed]{paralyzed}.</p>
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/paralysis-poison-strike.webp
 name: Paralysis Poison Strike
-type: wrapper
+system:
+  automations:
+    743730f25f256b10:
+      _id: 743730f25f256b10
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: include
+      status: poisoned
+      target: false
+      type: status
+  competence:
+    raw: 0
+  delivery: weapon
+  duration:
+    raw: '24'
+    unit: hour
+  effectTypes:
+    - poison
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: paralysis-poison-strike
+  interaction: attack
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - alchemical
+  range:
+    unit: contact
+  results:
+    hit: >-
+      <p>Target is @L[Condition:Poisoned]{poisoned}. The
+      @L[Condition:Poisoned]{poison} causes the target to become
+      @L[Condition:Paralyzed]{paralyzed}.</p>
+  targets:
+    - creature
+transfer: true
+type: ability
