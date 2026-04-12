@@ -60,7 +60,7 @@ export default function ConsumableSystemMixin(Base) {
         });
       }
 
-      /** @returns {Teriock.MessageData.MessageBar} */
+      /** @returns {Teriock.Messages.MessageBar} */
       get _consumableBar() {
         return {
           icon: TERIOCK.display.icons.ui.quantity,

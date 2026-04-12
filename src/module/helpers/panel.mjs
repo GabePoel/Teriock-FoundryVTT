@@ -5,7 +5,7 @@ import { getImage } from "./path.mjs";
 /**
  * Get the panel for an attribute.
  * @param {Teriock.Keys.Attribute} attribute
- * @returns {Promise<Teriock.MessageData.MessagePanel>}
+ * @returns {Promise<Teriock.Messages.MessagePanel>}
  */
 export async function attributePanel(attribute) {
   return TeriockTextEditor.enrichPanel({
@@ -25,7 +25,7 @@ export async function attributePanel(attribute) {
 /**
  * Get the panel for a tradecraft.
  * @param {Teriock.Keys.Tradecraft} tradecraft
- * @returns {Promise<Teriock.MessageData.MessagePanel>}
+ * @returns {Promise<Teriock.Messages.MessagePanel>}
  */
 export async function tradecraftPanel(tradecraft) {
   let field;
@@ -58,7 +58,7 @@ export async function tradecraftPanel(tradecraft) {
 /**
  * Get the panel for a class.
  * @param {Teriock.Keys.Class} className
- * @returns {Promise<Teriock.MessageData.MessagePanel>}
+ * @returns {Promise<Teriock.Messages.MessagePanel>}
  */
 export async function classPanel(className) {
   let archetype;

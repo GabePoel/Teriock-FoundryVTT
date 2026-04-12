@@ -53,7 +53,8 @@
 
         {{! Before Overview }}
         {{#each TERIOCK.options.cost.tweaks as |value key|}}
-          {{#if (eq (path @root/system.costs.tweaks key) 0)}}
+          {{log value}} {{log key}} {{log (lookup @root/system.costs.tweaks key)}}
+          {{#if (eq (lookup @root/system.costs.tweaks key) 0)}}
             <div class="tgrid-item">
               <button class="ab-menu-button ab-tweak-{{key}}-button"
                 {{#if (not @root/editable)}}

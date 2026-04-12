@@ -28,7 +28,7 @@ export default class BaseExecution {
   /** @type {TeriockChatMessage|undefined} */
   message;
 
-  /** @type {Teriock.MessageData.MessagePanel[]} */
+  /** @type {Teriock.Messages.MessagePanel[]} */
   panels = [];
 
   /** @type {BaseRoll[]} */
@@ -205,13 +205,13 @@ export default class BaseExecution {
   /**
    * Create a chat message from this execution.
    * @param {object} [options]
-   * @param {Teriock.Rolls.RollMode} [options.rollMode]
+   * @param {Teriock.Messages.Mode} [options.mode]
    * @returns {Promise<void>}
    */
   async _createChatMessage(options = {}) {
-    const { rollMode = game.settings.get("core", "rollMode") } = options;
+    const { mode = game.settings.get("core", "messageMode") } = options;
     const chatData = this.chatData;
-    TeriockChatMessage.applyRollMode(chatData, rollMode);
+    TeriockChatMessage.applyMode(chatData, mode);
     this.message = await TeriockChatMessage.create(chatData);
   }
 

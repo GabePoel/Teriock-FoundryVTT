@@ -477,7 +477,7 @@ export default class BaseRoll extends Roll {
 
   /**
    * Panels that are created by this roll.
-   * @returns {Promise<Teriock.MessageData.MessagePanel[]>}
+   * @returns {Promise<Teriock.Messages.MessagePanel[]>}
    */
   async getPanels() {
     return [];

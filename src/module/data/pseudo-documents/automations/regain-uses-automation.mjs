@@ -94,7 +94,7 @@ export default class RegainUsesAutomation extends TriggerAutomationMixin(
       flavor: _loc("TERIOCK.AUTOMATIONS.RegainUses.USAGE.roll"),
     });
     await roll.evaluate();
-    /** @type {Teriock.MessageData.MessagePanel} */
+    /** @type {Teriock.Messages.MessagePanel} */
     const panelData = {
       bars: [
         {

@@ -73,7 +73,7 @@ export default function PanelDocumentMixin(Base) {
         }
       }
 
-      /** @returns {Teriock.MessageData.MessagePanel} */
+      /** @returns {Teriock.Messages.MessagePanel} */
       get panelParts() {
         return {
           name: this.fullName || this.name,
@@ -131,7 +131,7 @@ export default function PanelDocumentMixin(Base) {
         return TeriockChatMessage.create(messageData, { defaultMode: true });
       }
 
-      /** @returns {Promise<Teriock.MessageData.MessagePanel>} */
+      /** @returns {Promise<Teriock.Messages.MessagePanel>} */
       async toPanel() {
         let parts = this.panelParts;
         // If this is part of a preview, it won't have a real UUID.

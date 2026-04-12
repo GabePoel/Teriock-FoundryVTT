@@ -140,7 +140,7 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
         pulledCount,
         pulledStones,
       };
-      /** @type {Teriock.MessageData.MessagePanel} */
+      /** @type {Teriock.Messages.MessagePanel} */
       const panelParts = {
         bars: [
           {

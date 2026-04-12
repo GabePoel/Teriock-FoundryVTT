@@ -144,7 +144,7 @@ export default function ArmamentSystemMixin(Base) {
         return [...this._propertyTags, ...this._rangeTags];
       }
 
-      /** @returns {Teriock.MessageData.MessageBar} */
+      /** @returns {Teriock.Messages.MessageBar} */
       get _attackBar() {
         return {
           icon: TERIOCK.display.icons.interaction.attack,
@@ -171,7 +171,7 @@ export default function ArmamentSystemMixin(Base) {
         return this.hasAttack ? [this.summarizedAttack] : [];
       }
 
-      /** @returns {Teriock.MessageData.MessageBar} */
+      /** @returns {Teriock.Messages.MessageBar} */
       get _defenseBar() {
         return {
           icon: TERIOCK.display.icons.interaction.block,

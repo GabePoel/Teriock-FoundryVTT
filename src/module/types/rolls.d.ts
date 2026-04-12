@@ -2,13 +2,6 @@ import { dieOptions } from "../constants/options/die-options.mjs";
 
 declare global {
   namespace Teriock.Rolls {
-    export type RollMode =
-      | "roll"
-      | "publicroll"
-      | "gmroll"
-      | "blindroll"
-      | "selfroll";
-
     /**
      * Allowable number of dice faces.
      */

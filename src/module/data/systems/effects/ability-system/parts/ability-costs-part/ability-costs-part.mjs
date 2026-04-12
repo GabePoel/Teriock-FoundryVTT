@@ -75,10 +75,11 @@ export default (Base) => {
                 costOptions.tweaks,
                 (v) =>
                   new fields.NumberField({
-                    label: v.label,
                     initial: 0,
                     integer: true,
+                    label: v.label,
                     min: 0,
+                    nullable: false,
                   }),
               ),
             ),

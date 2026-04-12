@@ -59,7 +59,7 @@ export default (Base) =>
           .map((uuid) => fromUuidSync(pureUuid(uuid)))
           .filter((t) => t);
         if (tokenDocs.length > 0) {
-          /** @type {Teriock.MessageData.MessageAssociation} */
+          /** @type {Teriock.Messages.MessageAssociation} */
           const association = {
             title: _loc("TERIOCK.SHEETS.Actor.CONDITIONS.Associations.title"),
             icon: TERIOCK.options.document.creature.icon,

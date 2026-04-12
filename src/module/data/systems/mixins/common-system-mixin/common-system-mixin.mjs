@@ -154,12 +154,12 @@ export default function CommonSystemMixin(Base) {
         };
       }
 
-      /** @returns {Teriock.MessageData.MessageBar[]} */
+      /** @returns {Teriock.Messages.MessageBar[]} */
       get messageBars() {
         return [];
       }
 
-      /** @returns {Teriock.MessageData.MessageBlock[]} */
+      /** @returns {Teriock.Messages.MessageBlock[]} */
       get messageBlocks() {
         return fancifyFields(this.displayFields)
           .map((f) => {
@@ -181,12 +181,11 @@ export default function CommonSystemMixin(Base) {
         return this.constructor.metadata;
       }
 
-      /** @returns {Partial<Teriock.MessageData.MessagePanel>} */
+      /** @returns {Partial<Teriock.Messages.MessagePanel>} */
       get panelParts() {
-        /** @type {Partial<Teriock.MessageData.MessagePanel>} */
+        /** @type {Partial<Teriock.Messages.MessagePanel>} */
         const parts = {
-          associations:
-            /** @type {Teriock.MessageData.MessageAssociation[]} */ [],
+          associations: /** @type {Teriock.Messages.MessageAssociation[]} */ [],
           bars: this.messageBars,
           blocks: this.messageBlocks,
           color: this.color || undefined,

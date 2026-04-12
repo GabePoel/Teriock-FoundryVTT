@@ -23,14 +23,14 @@ export default function AbilityExecutionChatPart(Base) {
      * @mixin
      */
     class AbilityExecutionChat extends Base {
-      /** @type {Record<string, Teriock.MessageData.MessageAssociation[]>} */
+      /** @type {Record<string, Teriock.Messages.MessageAssociation[]>} */
       #associationMap;
 
       /** @type {Record<string, Teriock.Changes.QualifiedChangeData[]>} */
       #trackerMap;
 
       /**
-       * @param {Teriock.MessageData.MessageAssociation} association
+       * @param {Teriock.Messages.MessageAssociation} association
        * @param {string} key
        */
       #addAssociationToMap(association, key) {
@@ -66,7 +66,7 @@ export default function AbilityExecutionChatPart(Base) {
        * @param {UUID<TeriockTokenDocument|TeriockActor>[]} uuids
        */
       #attachTrackedStatusAutomationUuids(automation, uuids) {
-        /** @type {Teriock.MessageData.MessageAssociation} */
+        /** @type {Teriock.Messages.MessageAssociation} */
         const association = {
           title: _loc("TERIOCK.SYSTEMS.Ability.PANELS.statusWithRespectTo", {
             status: TERIOCK.reference.conditions[automation.status],
@@ -90,7 +90,7 @@ export default function AbilityExecutionChatPart(Base) {
       /**
        * Generate an association card.
        * @param {UUID<TeriockTokenDocument|TeriockActor>} uuid
-       * @returns {Teriock.MessageData.MessageAssociationCard}
+       * @returns {Teriock.Messages.MessageAssociationCard}
        */
       #generateAssociationCard(uuid) {
         const doc = fromUuidSync(uuid);

@@ -2,11 +2,20 @@
   {{#each tabs as |tab|}}
     {{#if (eq tab.group "primary")}}
       <div
-        class="character-tabber ui-controls {{tabActive @root/activeTab tab.id}}"
+        class="character-tabber ui-controls {{tabActive @root/activeTab tab.id}} attached-tab"
         data-action="changeTab"
         data-tab="{{tab.id}}"
         data-tooltip="{{tab.label}}"
-        data-tooltip-direction="{{#if @root/windowNavigation}}LEFT{{else}}RIGHT{{/if}}"
+        data-tooltip-direction="RIGHT"
+      >
+        {{makeIcon tab.icon "solid"}}
+      </div>
+      <div
+        class="character-tabber ui-controls {{tabActive @root/activeTab tab.id}} detached-tab"
+        data-action="changeTab"
+        data-tab="{{tab.id}}"
+        data-tooltip="{{tab.label}}"
+        data-tooltip-direction="LEFT"
       >
         {{makeIcon tab.icon "solid"}}
       </div>

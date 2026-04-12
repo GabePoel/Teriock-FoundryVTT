@@ -39,7 +39,7 @@ export default class TeriockTableResult extends mix(
 
   /** @inheritDoc */
   get panelParts() {
-    /** @type {Teriock.MessageData.MessagePanel} */
+    /** @type {Teriock.Messages.MessagePanel} */
     const parts = super.panelParts;
     parts.icon = icons.document.tableResult;
     parts.label = _loc("TERIOCK.SYSTEMS.TableResult.PANELS.tableResult");
