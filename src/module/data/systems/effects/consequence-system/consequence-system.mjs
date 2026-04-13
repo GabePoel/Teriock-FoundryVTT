@@ -103,9 +103,9 @@ export default class ConsequenceSystem extends mix(
 
   /** @inheritDoc */
   get embedParts() {
-    const parts = super.embedParts;
-    parts.subtitle = this.parent.remainingString;
-    return parts;
+    return Object.assign(super.embedParts, {
+      subtitle: this.parent.remainingString,
+    });
   }
 
   /**
@@ -123,8 +123,42 @@ export default class ConsequenceSystem extends mix(
   }
 
   /** @inheritDoc */
-  get panelParts() {
-    const parts = super.panelParts;
+  get useText() {
+    return _loc("TERIOCK.SYSTEMS.Condition.USAGE.use", {
+      value: this.parent.name,
+    });
+  }
+
+  /** @inheritDoc */
+  _onCreate(data, options, userId) {
+    super._onCreate(data, options, userId);
+    if (this.parent.checkEditor(userId) && this.actor) {
+      this.parent.fireTrigger("applyEffect", this.parent.getScope());
+    }
+  }
+
+  /** @inheritDoc */
+  _onFireTrigger(trigger) {
+    super._onFireTrigger(trigger);
+    if (this.expirations.triggers.has(trigger)) this.expire();
+  }
+
+  /** @inheritDoc */
+  async _preDelete(options, user) {
+    const yes = await super._preDelete(options, user);
+    if (yes === false) return false;
+
+    this.parent.fireTrigger("expireEffect", this.parent.getScope());
+  }
+
+  /** @inheritDoc */
+  async _use(_options = {}) {
+    await this.inCombatExpiration(true);
+  }
+
+  /** @inheritDoc */
+  async getPanelParts() {
+    const parts = await super.getPanelParts();
     parts.bars = [
       {
         icon: TERIOCK.display.icons.ability.duration,
@@ -155,42 +189,6 @@ export default class ConsequenceSystem extends mix(
     ];
     parts.associations.push(...this.associations);
     return parts;
-  }
-
-  /** @inheritDoc */
-  get useText() {
-    return _loc("TERIOCK.SYSTEMS.Condition.USAGE.use", {
-      value: this.parent.name,
-    });
-  }
-
-  /** @inheritDoc */
-  _onCreate(data, options, userId) {
-    super._onCreate(data, options, userId);
-    if (this.parent.checkEditor(userId) && this.actor) {
-      this.parent.fireTrigger("applyEffect", this.parent.getScope());
-    }
-  }
-
-  /** @inheritDoc */
-  _onFireTrigger(trigger) {
-    super._onFireTrigger(trigger);
-    if (this.expirations.triggers.has(trigger)) {
-      this.expire();
-    }
-  }
-
-  /** @inheritDoc */
-  async _preDelete(options, user) {
-    const yes = await super._preDelete(options, user);
-    if (yes === false) return false;
-
-    this.parent.fireTrigger("expireEffect", this.parent.getScope());
-  }
-
-  /** @inheritDoc */
-  async _use(_options = {}) {
-    await this.inCombatExpiration(true);
   }
 
   /**

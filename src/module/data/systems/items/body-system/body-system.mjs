@@ -42,9 +42,9 @@ export default class BodySystem extends mix(
   }
 
   /** @inheritDoc */
-  get panelParts() {
+  async getPanelParts() {
     return {
-      ...super.panelParts,
+      ...(await super.getPanelParts()),
       bars: [
         this._attackBar,
         this._defenseBar,

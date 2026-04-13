@@ -41,19 +41,13 @@ export default class HarmSystem extends mix(
    * @return {{pseudos: {Automation: string}}}
    */
   static get metadata() {
-    return {
-      pseudos: {
-        Automation: "system.automations",
-      },
-    };
+    return { pseudos: { Automation: "system.automations" } };
   }
 
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      img: new fields.FilePathField({
-        categories: ["IMAGE"],
-      }),
+      img: new fields.FilePathField({ categories: ["IMAGE"] }),
     });
   }
 

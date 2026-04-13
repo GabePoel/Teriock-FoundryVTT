@@ -16,7 +16,7 @@ export default (Base) => {
      */
     class EquipmentPanelPart extends Base {
       /** @inheritDoc */
-      get panelParts() {
+      async getPanelParts() {
         const bars = [
           {
             icon: TERIOCK.options.equipment.powerLevel[this.powerLevel].icon,
@@ -76,7 +76,7 @@ export default (Base) => {
           },
         ];
         return {
-          ...super.panelParts,
+          ...(await super.getPanelParts()),
           bars,
         };
       }

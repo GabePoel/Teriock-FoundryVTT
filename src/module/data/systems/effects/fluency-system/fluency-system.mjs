@@ -109,26 +109,6 @@ export default class FluencySystem extends mix(
   }
 
   /** @inheritDoc */
-  get panelParts() {
-    return {
-      ...super.panelParts,
-      bars: [
-        {
-          icon: TERIOCK.options.tradecraft[this.field].tradecrafts[
-            this.tradecraft
-          ].icon,
-          label: _loc("TERIOCK.TERMS.Common.tradecraft"),
-          wrappers: [
-            TERIOCK.options.tradecraft[this.field].name,
-            TERIOCK.options.tradecraft[this.field].tradecrafts[this.tradecraft]
-              .name,
-          ],
-        },
-      ],
-    };
-  }
-
-  /** @inheritDoc */
   get wikiPage() {
     const namespace = this.constructor.metadata.namespace;
     const pageName =
@@ -185,6 +165,26 @@ export default class FluencySystem extends mix(
       field: this.field,
       tc: this.tradecraft,
       tradecraft: this.tradecraft,
+    };
+  }
+
+  /** @inheritDoc */
+  async getPanelParts() {
+    return {
+      ...(await super.getPanelParts()),
+      bars: [
+        {
+          icon: TERIOCK.options.tradecraft[this.field].tradecrafts[
+            this.tradecraft
+          ].icon,
+          label: _loc("TERIOCK.TERMS.Common.tradecraft"),
+          wrappers: [
+            TERIOCK.options.tradecraft[this.field].name,
+            TERIOCK.options.tradecraft[this.field].tradecrafts[this.tradecraft]
+              .name,
+          ],
+        },
+      ],
     };
   }
 

@@ -126,35 +126,6 @@ export default class BaseActorSystem extends mix(
   }
 
   /** @inheritDoc */
-  get panelParts() {
-    const parts = super.panelParts;
-    parts.bars = [
-      {
-        icon: TERIOCK.display.icons.ui.info,
-        label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.info"),
-        wrappers: [
-          _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.lvl", {
-            number: this.scaling.lvl,
-          }),
-          _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.br", {
-            number: this.scaling.br,
-          }),
-          _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.size", {
-            number: this.size.number.value,
-          }),
-        ],
-      },
-    ];
-    parts.blocks = [
-      {
-        title: _loc("TERIOCK.SYSTEMS.BaseActor.PANELS.notes"),
-        text: this.notes,
-      },
-    ];
-    return parts;
-  }
-
-  /** @inheritDoc */
   async _preCreate(data, options, user) {
     const yes = await super._preCreate(data, options, user);
     if (yes === false) return false;
@@ -184,6 +155,35 @@ export default class BaseActorSystem extends mix(
       },
       ...super.getCardContextMenuEntries(doc),
     ];
+  }
+
+  /** @inheritDoc */
+  async getPanelParts() {
+    const parts = await super.getPanelParts();
+    parts.bars = [
+      {
+        icon: TERIOCK.display.icons.ui.info,
+        label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.info"),
+        wrappers: [
+          _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.lvl", {
+            number: this.scaling.lvl,
+          }),
+          _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.br", {
+            number: this.scaling.br,
+          }),
+          _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.size", {
+            number: this.size.number.value,
+          }),
+        ],
+      },
+    ];
+    parts.blocks = [
+      {
+        title: _loc("TERIOCK.SYSTEMS.BaseActor.PANELS.notes"),
+        text: this.notes,
+      },
+    ];
+    return parts;
   }
 
   /** @inheritDoc */

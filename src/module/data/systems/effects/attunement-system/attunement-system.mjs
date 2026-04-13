@@ -37,10 +37,7 @@ export default class AttunementSystem extends BaseEffectSystem {
           objectMap(attunementOptions.type, (v) => v.label),
         ),
       }),
-      target: new fields.DocumentIdField({
-        nullable: true,
-        initial: null,
-      }),
+      target: new fields.DocumentIdField({ nullable: true, initial: null }),
       inheritTier: new fields.BooleanField({ initial: true }),
       tier: new fields.NumberField({
         label: "TERIOCK.SYSTEMS.Attunable.FIELDS.tier.raw.label",
@@ -83,42 +80,6 @@ export default class AttunementSystem extends BaseEffectSystem {
   /** @inheritDoc */
   get messageBlocks() {
     return [];
-  }
-
-  /** @inheritDoc */
-  get panelParts() {
-    const parts = super.panelParts;
-    parts.bars = [
-      {
-        icon: TERIOCK.display.icons.attunable.tier,
-        label: _loc("TERIOCK.SYSTEMS.Attunable.FIELDS.tier.raw.label"),
-        wrappers: [
-          attunementOptions.type[this.type].label,
-          _loc("TERIOCK.SYSTEMS.Attunable.PANELS.tier", {
-            value: this.tier || 0,
-          }),
-        ],
-      },
-    ];
-    if (this.targetDocument) {
-      parts.associations = [
-        {
-          title: _loc("TERIOCK.SYSTEMS.Attunement.PANELS.for"),
-          icon: TERIOCK.options.document.attunement.icon,
-          cards: [
-            {
-              name: this.targetDocument.fullName,
-              uuid: this.targetDocument.uuid,
-              makeTooltip: true,
-              img: this.targetDocument.img,
-              color: this.targetDocument.system.color,
-              type: this.targetDocument.type,
-            },
-          ],
-        },
-      ];
-    }
-    return parts;
   }
 
   /**
@@ -195,6 +156,42 @@ export default class AttunementSystem extends BaseEffectSystem {
       tier: this.tier,
       target: this.targetDocument ? 1 : 0,
     };
+  }
+
+  /** @inheritDoc */
+  async getPanelParts() {
+    const parts = await super.getPanelParts();
+    parts.bars = [
+      {
+        icon: TERIOCK.display.icons.attunable.tier,
+        label: _loc("TERIOCK.SYSTEMS.Attunable.FIELDS.tier.raw.label"),
+        wrappers: [
+          attunementOptions.type[this.type].label,
+          _loc("TERIOCK.SYSTEMS.Attunable.PANELS.tier", {
+            value: this.tier || 0,
+          }),
+        ],
+      },
+    ];
+    if (this.targetDocument) {
+      parts.associations = [
+        {
+          title: _loc("TERIOCK.SYSTEMS.Attunement.PANELS.for"),
+          icon: TERIOCK.options.document.attunement.icon,
+          cards: [
+            {
+              name: this.targetDocument.fullName,
+              uuid: this.targetDocument.uuid,
+              makeTooltip: true,
+              img: this.targetDocument.img,
+              color: this.targetDocument.system.color,
+              type: this.targetDocument.type,
+            },
+          ],
+        },
+      ];
+    }
+    return parts;
   }
 
   /** @inheritDoc */

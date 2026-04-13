@@ -15,9 +15,7 @@ export default function PanelDocumentMixin(Base) {
     class PanelDocument extends Base {
       /** @inheritDoc */
       static get documentMetadata() {
-        return Object.assign(super.documentMetadata, {
-          tooltip: true,
-        });
+        return Object.assign(super.documentMetadata, { tooltip: true });
       }
 
       /**
@@ -73,23 +71,12 @@ export default function PanelDocumentMixin(Base) {
         }
       }
 
-      /** @returns {Teriock.Messages.MessagePanel} */
-      get panelParts() {
-        return {
-          name: this.fullName || this.name,
-          image: systemPath("icons/documents/uncertainty.svg"),
-          icon: TERIOCK.display.icons.ui.document,
-          blocks: [],
-          bars: [],
-        };
-      }
-
       /** @inheritDoc */
       async _buildEmbedHTML(config, options = {}) {
         if (config.values.includes("panel")) {
           if (!config.label) config.caption = false;
           return foundry.utils.parseHTML(
-            await TeriockTextEditor.makeTooltip(this.panelParts, {
+            await TeriockTextEditor.makeTooltip(await this.getPanelParts(), {
               noAssociations: config.values.includes("noAssociations"),
               noBars: config.values.includes("noBars"),
               noBlocks: config.values.includes("noBlocks"),
@@ -98,6 +85,17 @@ export default function PanelDocumentMixin(Base) {
           );
         }
         return super._buildEmbedHTML(config, options);
+      }
+
+      /** @returns {Promise<Partial<Teriock.Messages.MessagePanel>>} */
+      async getPanelParts() {
+        return {
+          name: this.fullName || this.name,
+          image: systemPath("icons/documents/uncertainty.svg"),
+          icon: TERIOCK.display.icons.ui.document,
+          blocks: [],
+          bars: [],
+        };
       }
 
       /** @inheritDoc */
@@ -133,18 +131,18 @@ export default function PanelDocumentMixin(Base) {
 
       /** @returns {Promise<Teriock.Messages.MessagePanel>} */
       async toPanel() {
-        let parts = this.panelParts;
+        let parts = await this.getPanelParts();
         // If this is part of a preview, it won't have a real UUID.
         if (this.getFlag("teriock", "previewUuid")) {
           const doc = await fromUuid(this.getFlag("teriock", "previewUuid"));
-          if (doc) parts = doc.panelParts;
+          if (doc) parts = await doc.getPanelParts();
         }
         return await TeriockTextEditor.enrichPanel(parts, { relativeTo: this });
       }
 
       /** @inheritDoc */
       async toTooltip() {
-        return await TeriockTextEditor.makeTooltip(this.panelParts, {
+        return await TeriockTextEditor.makeTooltip(await this.getPanelParts(), {
           relativeTo: this,
         });
       }

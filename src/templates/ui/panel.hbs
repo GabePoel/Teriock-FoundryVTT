@@ -29,23 +29,19 @@
   <div class="teriock-panel-content">
     <div class="teriock-panel-spacer">
       <div class="teriock-panel-body">
-        {{#if (exists bars)}}
+        {{#if (exists (cleanBars bars))}}
           <div class="teriock-panel-bars">
-            {{#each bars}}
-              {{#if (exists (concatArray wrappers))}}
-                <div class="teriock-panel-bar">
-                  <div class="teriock-panel-bar-icon" data-tooltip="{{{label}}}" data-tooltip-direction="LEFT">
-                    {{makeIcon icon "light"}}
-                  </div>
-                  <div class="teriock-panel-bar-wrappers">
-                    {{#each wrappers as |wrapper|}}
-                      {{#if (exists wrapper)}}
-                        <span class="teriock-panel-bar-wrapper">{{{wrapper}}}</span>
-                      {{/if}}
-                    {{/each}}
-                  </div>
+            {{#each (cleanBars bars)}}
+              <div class="teriock-panel-bar">
+                <div class="teriock-panel-bar-icon" data-tooltip="{{{label}}}" data-tooltip-direction="LEFT">
+                  {{makeIcon icon "light"}}
                 </div>
-              {{/if}}
+                <div class="teriock-panel-bar-wrappers">
+                  {{#each wrappers as |wrapper|}}
+                    <span class="teriock-panel-bar-wrapper">{{{wrapper}}}</span>
+                  {{/each}}
+                </div>
+              </div>
             {{/each}}
           </div>
         {{/if}}

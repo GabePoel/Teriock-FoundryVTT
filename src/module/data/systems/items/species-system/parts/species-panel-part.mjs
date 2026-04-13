@@ -12,7 +12,7 @@ export default (Base) => {
      */
     class SpeciesPanelPart extends Base {
       /** @inheritDoc */
-      get panelParts() {
+      async getPanelParts() {
         const statBar = this._statBar;
         statBar.wrappers.push(
           _loc("TERIOCK.SYSTEMS.Species.PANELS.br", {
@@ -67,7 +67,7 @@ export default (Base) => {
           },
         ];
         return {
-          ...super.panelParts,
+          ...(await super.getPanelParts()),
           bars,
         };
       }

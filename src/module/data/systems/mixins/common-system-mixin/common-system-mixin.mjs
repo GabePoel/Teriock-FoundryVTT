@@ -65,9 +65,7 @@ export default function CommonSystemMixin(Base) {
           pageNameKey: "name",
           passive: false,
           preservedProperties: this.PRESERVED_PROPERTIES,
-          pseudos: {
-            Automation: "system.automations",
-          },
+          pseudos: { Automation: "system.automations" },
           revealable: false,
           stats: false,
           tooltip: true,
@@ -182,49 +180,6 @@ export default function CommonSystemMixin(Base) {
         return this.constructor.metadata;
       }
 
-      /** @returns {Partial<Teriock.Messages.MessagePanel>} */
-      get panelParts() {
-        /** @type {Partial<Teriock.Messages.MessagePanel>} */
-        const parts = {
-          associations: /** @type {Teriock.Messages.MessageAssociation[]} */ [],
-          bars: this.messageBars,
-          blocks: this.messageBlocks,
-          color: this.color || undefined,
-          font: this.font,
-          image: this.parent.img,
-          name: this.parent.fullName,
-          uuid: this.parent.uuid,
-          icon:
-            TERIOCK.options.document[this.metadata.type]?.icon ||
-            TERIOCK.options.document.document.icon,
-          label:
-            TERIOCK.options.document[this.metadata.type]?.name ||
-            TERIOCK.options.document.document.name,
-        };
-        const typeMap = this.parent.children.typeMap;
-        for (const type of this.metadata.visibleTypes) {
-          if (typeMap[type]) {
-            let docs = typeMap[type];
-            if (TERIOCK.options.document[type].doc === "ActiveEffect") {
-              docs = docs.filter(
-                (e) =>
-                  !foundry.utils.hasProperty(e, "system.revealed") ||
-                  e.system.revealed,
-              );
-            }
-            docs = TERIOCK.options.document[type].sorter(docs);
-            docs = docs.filter((d) => !d.isEphemeral);
-            quickAddAssociation(
-              docs,
-              TERIOCK.options.document[type].plural,
-              TERIOCK.options.document[type].icon,
-              parts.associations,
-            );
-          }
-        }
-        return parts;
-      }
-
       /** @returns {Teriock.EmbedData.EmbedIcon|undefined} */
       get tagIcon() {
         return undefined;
@@ -260,13 +215,9 @@ export default function CommonSystemMixin(Base) {
             const srcDiffNames = srcNames.filter((s) => !dstNames.includes(s));
             const dstDiffNames = dstNames.filter((d) => !srcNames.includes(d));
             const diffNames = [...srcNames, ...dstNames];
-            if (mapType === "diffSrc") {
-              names = srcDiffNames;
-            } else if (mapType === "diffDst") {
-              names = dstDiffNames;
-            } else if (mapType === "diff") {
-              names = diffNames;
-            }
+            if (mapType === "diffSrc") names = srcDiffNames;
+            else if (mapType === "diffDst") names = dstDiffNames;
+            else if (mapType === "diff") names = diffNames;
           }
           const srcDocs = srcChildren.filter((s) => names.includes(s.name));
           const dstDocs = dstChildren.filter((d) => names.includes(d.name));
@@ -379,6 +330,49 @@ export default function CommonSystemMixin(Base) {
           type: this.parent.type,
           [`type.${this.parent.type}`]: 1,
         };
+      }
+
+      /** @returns {Promise<Partial<Teriock.Messages.MessagePanel>>} */
+      async getPanelParts() {
+        /** @type {Partial<Teriock.Messages.MessagePanel>} */
+        const parts = {
+          associations: /** @type {Teriock.Messages.MessageAssociation[]} */ [],
+          bars: this.messageBars,
+          blocks: this.messageBlocks,
+          color: this.color || undefined,
+          font: this.font,
+          image: this.parent.img,
+          name: this.parent.fullName,
+          uuid: this.parent.uuid,
+          icon:
+            TERIOCK.options.document[this.metadata.type]?.icon ||
+            TERIOCK.options.document.document.icon,
+          label:
+            TERIOCK.options.document[this.metadata.type]?.name ||
+            TERIOCK.options.document.document.name,
+        };
+        const typeMap = (await this.parent.getChildren()).typeMap;
+        for (const type of this.metadata.visibleTypes) {
+          if (typeMap[type]) {
+            let docs = typeMap[type];
+            if (TERIOCK.options.document[type].doc === "ActiveEffect") {
+              docs = docs.filter(
+                (e) =>
+                  !foundry.utils.hasProperty(e, "system.revealed") ||
+                  e.system.revealed,
+              );
+            }
+            docs = TERIOCK.options.document[type].sorter(docs);
+            docs = docs.filter((d) => !d.isEphemeral);
+            quickAddAssociation(
+              docs,
+              TERIOCK.options.document[type].plural,
+              TERIOCK.options.document[type].icon,
+              parts.associations,
+            );
+          }
+        }
+        return parts;
       }
 
       /** @inheritDoc */

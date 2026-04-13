@@ -75,7 +75,7 @@ export default class TeriockRollTable extends mix(
           avatar: TeriockChatMessage.getSpeakerActor(
             TeriockChatMessage.getSpeaker(),
           )?.img,
-          panels: results.map((r) => r.panelParts),
+          panels: await Promise.all(results.map((r) => r.getPanelParts())),
         },
       },
       messageData,

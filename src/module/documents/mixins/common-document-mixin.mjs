@@ -99,11 +99,6 @@ export default function CommonDocumentMixin(Base) {
         return this.system.constructor.metadata;
       }
 
-      /** @inheritDoc */
-      get panelParts() {
-        return this.system.panelParts;
-      }
-
       /**
        * Array containing all visible children.
        * @returns {ChildDocument[]}
@@ -212,6 +207,11 @@ export default function CommonDocumentMixin(Base) {
        */
       async getEffectiveChildren() {
         return this.getVisibleChildren();
+      }
+
+      /** @inheritDoc */
+      async getPanelParts() {
+        return this.system.getPanelParts();
       }
 
       /**

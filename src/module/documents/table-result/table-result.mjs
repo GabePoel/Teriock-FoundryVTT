@@ -38,9 +38,23 @@ export default class TeriockTableResult extends mix(
   }
 
   /** @inheritDoc */
-  get panelParts() {
+  getCardContextMenuEntries(doc) {
+    return [
+      {
+        onClick: async () =>
+          await (await fromUuid(this.documentUuid))?.sheet.render(true),
+        visible: () => this.documentUuid,
+        icon: makeIcon(TERIOCK.display.icons.ui.document, "contextMenu"),
+        label: _loc("TERIOCK.SYSTEMS.TableResult.MENU.open"),
+      },
+      ...super.getCardContextMenuEntries(doc),
+    ];
+  }
+
+  /** @inheritDoc */
+  async getPanelParts() {
     /** @type {Teriock.Messages.MessagePanel} */
-    const parts = super.panelParts;
+    const parts = await super.getPanelParts();
     parts.icon = icons.document.tableResult;
     parts.label = _loc("TERIOCK.SYSTEMS.TableResult.PANELS.tableResult");
     parts.image = this.icon;
@@ -74,19 +88,5 @@ export default class TeriockTableResult extends mix(
       ];
     }
     return parts;
-  }
-
-  /** @inheritDoc */
-  getCardContextMenuEntries(doc) {
-    return [
-      {
-        onClick: async () =>
-          await (await fromUuid(this.documentUuid))?.sheet.render(true),
-        visible: () => this.documentUuid,
-        icon: makeIcon(TERIOCK.display.icons.ui.document, "contextMenu"),
-        label: _loc("TERIOCK.SYSTEMS.TableResult.MENU.open"),
-      },
-      ...super.getCardContextMenuEntries(doc),
-    ];
   }
 }

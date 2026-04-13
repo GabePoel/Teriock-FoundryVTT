@@ -49,14 +49,14 @@ export default class ResourceSystem extends mix(
   }
 
   /** @inheritDoc */
-  get panelParts() {
-    const parts = super.panelParts;
-    parts.bars.push(this._consumableBar);
-    return parts;
+  async _use(options = {}) {
+    await new BaseDocumentExecution(options).execute();
   }
 
   /** @inheritDoc */
-  async _use(options = {}) {
-    await new BaseDocumentExecution(options).execute();
+  async getPanelParts() {
+    const parts = await super.getPanelParts();
+    parts.bars.push(this._consumableBar);
+    return parts;
   }
 }

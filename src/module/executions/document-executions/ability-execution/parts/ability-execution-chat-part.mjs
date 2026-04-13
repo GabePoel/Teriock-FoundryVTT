@@ -143,7 +143,7 @@ export default function AbilityExecutionChatPart(Base) {
                 : undefined,
             associations: [],
             automations: this.#generateConsequenceAutomations(crit),
-            blocks: this.source.system.panelParts.blocks,
+            blocks: (await this.source.system.getPanelParts()).blocks,
             competence: { raw: this.competence.value },
             critical: crit,
             deleteOnExpire: true,
@@ -234,11 +234,7 @@ export default function AbilityExecutionChatPart(Base) {
         combatExpirationAutomations.forEach((a) => {
           Object.assign(
             combatExpiration,
-            foundry.utils.deepClone({
-              what: a.what,
-              when: a.when,
-              who: a.who,
-            }),
+            foundry.utils.deepClone({ what: a.what, when: a.when, who: a.who }),
           );
           combatExpiration.who.source = this.actor?.uuid;
         });
@@ -385,9 +381,7 @@ export default function AbilityExecutionChatPart(Base) {
           critData.system.associations = this.#associationMap["crit"];
           critData.changes.push(...this.#trackerMap["crit"]);
           const normalChildren = this.source.subs.map((s) => {
-            return {
-              uuid: s.uuid,
-            };
+            return { uuid: s.uuid };
           });
           const critChildren = [...normalChildren];
           const normalDocuments = [];
@@ -446,9 +440,7 @@ export default function AbilityExecutionChatPart(Base) {
                 );
               }
               if (a.overrideData && a.data) {
-                foundry.utils.mergeObject(critData, a.data, {
-                  inplace: true,
-                });
+                foundry.utils.mergeObject(critData, a.data, { inplace: true });
               }
             },
           );
@@ -460,18 +452,14 @@ export default function AbilityExecutionChatPart(Base) {
                   "TERIOCK.COMMANDS.ApplyEffect.label",
               },
               primary: {
-                root: {
-                  data: normalData,
-                },
                 children: normalChildren,
                 other: normalDocuments,
+                root: { data: normalData },
               },
               secondary: {
-                root: {
-                  data: critData,
-                },
                 children: critChildren,
                 other: critDocuments,
+                root: { data: critData },
               },
             }),
           );

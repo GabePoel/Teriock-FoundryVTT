@@ -57,8 +57,7 @@ export default function RevelationSystemMixin(Base) {
               this.parent.update({
                 "system.revealed": true,
               }),
-            visible:
-              !this.revealed && game.user.isGM && doc?.sheet?.isEditable,
+            visible: !this.revealed && game.user.isGM && doc?.sheet?.isEditable,
             group: "reveal",
           },
           {
@@ -68,8 +67,7 @@ export default function RevelationSystemMixin(Base) {
               this.parent.update({
                 "system.revealed": false,
               }),
-            visible:
-              this.revealed && game.user.isGM && doc?.sheet?.isEditable,
+            visible: this.revealed && game.user.isGM && doc?.sheet?.isEditable,
             group: "reveal",
           },
         ];

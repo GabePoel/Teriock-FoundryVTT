@@ -23,7 +23,7 @@ export default (Base) => {
      */
     class AbilityPanelPart extends Base {
       /** @inheritDoc */
-      get panelParts() {
+      async getPanelParts() {
         const bars = [
           {
             icon: icons.ability.execution,
@@ -60,7 +60,7 @@ export default (Base) => {
           },
         ];
         return {
-          ...super.panelParts,
+          ...(await super.getPanelParts()),
           classes: this.elderSorcery
             ? `elder-sorcery ${elementClass(this.elements)}`
             : "",

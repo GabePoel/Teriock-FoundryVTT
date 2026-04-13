@@ -179,48 +179,21 @@ export function associationsField() {
     new SchemaField({
       cards: new ArrayField(
         new SchemaField({
-          color: new StringField({
-            nullable: true,
-            required: false,
-          }),
+          color: new StringField({ nullable: true, required: false }),
           id: new DocumentIdField(),
-          img: new FilePathField({
-            categories: ["IMAGE"],
-          }),
-          makeTooltip: new BooleanField({
-            initial: false,
-            required: false,
-          }),
+          img: new FilePathField({ categories: ["IMAGE"] }),
+          makeTooltip: new BooleanField({ initial: false, required: false }),
           name: new StringField(),
-          rescale: new BooleanField({
-            initial: false,
-            required: false,
-          }),
-          type: new StringField({
-            initial: "base",
-            required: false,
-          }),
+          rescale: new BooleanField({ initial: false, required: false }),
+          type: new StringField({ initial: "base", required: false }),
           uuid: new DocumentUUIDField(),
         }),
-        {
-          initial: [],
-          required: false,
-        },
+        { initial: [], required: false },
       ),
-      icon: new StringField({
-        nullable: true,
-        required: false,
-        initial: null,
-      }),
-      title: new StringField({
-        initial: "Associations",
-        required: false,
-      }),
+      icon: new StringField({ nullable: true, required: false, initial: null }),
+      title: new StringField({ initial: "Associations", required: false }),
     }),
-    {
-      initial: [],
-      required: false,
-    },
+    { initial: [], required: false },
   );
 }
 
@@ -248,24 +221,23 @@ export function blocksField() {
 export function barsField() {
   return new ArrayField(
     new SchemaField({
-      icon: new StringField({
-        initial: "",
-        required: false,
-      }),
-      label: new StringField({
-        nullable: true,
-        required: false,
-      }),
+      icon: new StringField({ initial: "", required: false }),
+      label: new StringField({ nullable: true, required: false }),
       wrappers: new ArrayField(new StringField(), {
         initial: [],
         required: false,
       }),
     }),
-    {
-      initial: [],
-      required: false,
-    },
+    { initial: [], required: false },
   );
+}
+
+/**
+ * A string that is usually null.
+ * @returns {StringField}
+ */
+function nullString() {
+  return new StringField({ initial: null, nullable: true, required: false });
 }
 
 /**
@@ -278,51 +250,16 @@ export function panelsField() {
       associations: associationsField(),
       bars: barsField(),
       blocks: blocksField(),
-      classes: new StringField({
-        nullable: true,
-        initial: null,
-        required: false,
-      }),
-      color: new StringField({
-        initial: null,
-        nullable: true,
-        required: false,
-      }),
-      font: new StringField({
-        nullable: true,
-        initial: null,
-        required: false,
-      }),
-      icon: new StringField({
-        nullable: true,
-        initial: null,
-        required: false,
-      }),
-      image: new StringField({
-        initial: null,
-        nullable: true,
-        required: false,
-      }),
-      label: new StringField({
-        nullable: true,
-        initial: null,
-        required: false,
-      }),
-      name: new StringField({
-        initial: null,
-        nullable: true,
-        required: false,
-      }),
-      uuid: new DocumentUUIDField({
-        initial: null,
-        nullable: true,
-        required: false,
-      }),
+      classes: nullString(),
+      color: nullString(),
+      font: nullString(),
+      icon: nullString(),
+      image: nullString(),
+      label: nullString(),
+      name: nullString(),
+      uuid: new DocumentUUIDField({ initial: null, nullable: true }),
     }),
-    {
-      initial: [],
-      required: false,
-    },
+    { initial: [], required: false },
   );
 }
 
@@ -429,13 +366,9 @@ export function movementActionField() {
       objectMap(
         Object.fromEntries(
           Object.entries(CONFIG.Token.movement.actions).filter(([_k, v]) => {
-            if (typeof v.canSelect === "function") {
-              return v.canSelect();
-            } else if (typeof v.canSelect === "boolean") {
-              return v.canSelect;
-            } else {
-              return true;
-            }
+            if (typeof v.canSelect === "function") return v.canSelect();
+            else if (typeof v.canSelect === "boolean") return v.canSelect;
+            else return true;
           }),
         ),
         (t) => t.label,
