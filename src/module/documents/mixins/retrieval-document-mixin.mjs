@@ -77,6 +77,14 @@ export default function RetrievalDocumentMixin(Base) {
       }
 
       /**
+       * Child imbuements.
+       * @returns {TeriockImbuement[]}
+       */
+      get imbuements() {
+        return this.visibleChildren.filter((c) => c.type === "imbuement");
+      }
+
+      /**
        * Child mounds.
        * @returns {TeriockMount[]}
        */
@@ -186,6 +194,14 @@ export default function RetrievalDocumentMixin(Base) {
        */
       async getFluencies() {
         return resolveDocuments(this.fluencies);
+      }
+
+      /**
+       * Resolved child abilities.
+       * @returns {Promise<TeriockImbuement[]>}
+       */
+      async getImbuements() {
+        return resolveDocuments(this.imbuements);
       }
 
       /**

@@ -122,6 +122,14 @@ export const documentOptions = {
     plural: "TERIOCK.DOCUMENTS.fluency.plural",
     sorter: docSort,
   },
+  imbuement: {
+    doc: "ActiveEffect",
+    getter: "imbuements",
+    icon: icons.document.imbuement,
+    name: "TYPES.ActiveEffect.imbuement",
+    plural: "TERIOCK.DOCUMENTS.imbuement.plural",
+    sorter: docSort,
+  },
   mount: {
     doc: "Item",
     getter: "mounts",

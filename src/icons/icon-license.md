@@ -5,8 +5,8 @@ The webp icons in this directory and its subdirectories are licensed from [Craft
 The icons in [`./documents`]() are from [game-icons.net]() ([License](https://creativecommons.org/licenses/by/3.0/)).
 Links to the original pages with the authors can be found below.
 
-- [`./documents/archetype.svg`](https://game-icons.net/1x1/delapouite/star-altar.html)
 - [`./documents/ability.svg`](https://game-icons.net/1x1/delapouite/sparkles.html)
+- [`./documents/archetype.svg`](https://game-icons.net/1x1/delapouite/star-altar.html)
 - [`./documents/attunement.svg`](https://game-icons.net/1x1/lorc/high-five.html)
 - [`./documents/body.svg`](https://game-icons.net/1x1/lorc/ribcage.html)
 - [`./documents/chest.svg`](https://game-icons.net/1x1/delapouite/chest.html)
@@ -15,6 +15,7 @@ Links to the original pages with the authors can be found below.
 - [`./documents/creature.svg`](https://game-icons.net/1x1/caro-asercion/barn-owl.html)
 - [`./documents/effect.svg`](https://game-icons.net/1x1/lorc/embrassed-energy.html)
 - [`./documents/fluency.svg`](https://game-icons.net/1x1/delapouite/freemasonry.html)
+- [`./documents/imbuement.svg`](https://game-icons.net/1x1/delapouite/mesh-network.html)
 - [`./documents/mechanic.svg`](https://game-icons.net/1x1/lorc/gears.html)
 - [`./documents/mount.svg`](https://game-icons.net/1x1/skoll/mounted-knight.html)
 - [`./documents/power.svg`](https://game-icons.net/1x1/lorc/aura.html)

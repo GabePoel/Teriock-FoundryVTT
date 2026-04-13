@@ -48,5 +48,11 @@ declare global {
       data: object;
       operation?: object;
     };
+
+    export type MassUpdate = {
+      documentName: string;
+      updateData: object[];
+      operation?: object;
+    };
   }
 }

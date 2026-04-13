@@ -113,60 +113,10 @@ export default function AbilityExecutionChatPart(Base) {
       #generateConditionTracker(status, uuid) {
         return {
           key: `system.conditionInformation.${status}.trackers`,
-          value: safeUuid(uuid),
-          mode: 2,
+          phase: "initial",
           priority: 10,
-        };
-      }
-
-      /**
-       * Generate the JSON serializable data for a consequence.
-       * @param {boolean} crit
-       * @returns {Promise<object>}
-       */
-      async #generateConsequence(crit = false) {
-        return {
-          changes: [],
-          duration: {
-            seconds: await this.#generateConsequenceDuration(crit),
-          },
-          img: this.source.img,
-          name: _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.effectName", {
-            name: this.source.name,
-          }),
-          statuses: this.#generateConsequenceStatuses(crit),
-          system: {
-            _dep:
-              this.source.system.sustained &&
-              game.teriock.getSetting("trackSustainedConsequences")
-                ? this.source.uuid
-                : undefined,
-            associations: [],
-            automations: this.#generateConsequenceAutomations(crit),
-            blocks: (await this.source.system.getPanelParts()).blocks,
-            competence: { raw: this.competence.value },
-            critical: crit,
-            deleteOnExpire: true,
-            expirations: {
-              combat: this.#generateConsequenceCombatExpiration(crit),
-              conditions: {
-                absent: Array.from(
-                  this.source.system.duration.conditions.absent,
-                ),
-                present: Array.from(
-                  this.source.system.duration.conditions.present,
-                ),
-              },
-              description: this.source.system.endCondition,
-              sustained: this.source.system.sustained,
-              triggers: Array.from(this.source.system.duration.triggers),
-            },
-            heightened: this.heightened,
-            identifier: this.source.forcedIdentifier + "-effect",
-            source: this.source.uuid,
-            transformation: await this.#generateConsequenceTransformation(crit),
-          },
-          type: "consequence",
+          type: "add",
+          value: safeUuid(uuid),
         };
       }
 
@@ -175,8 +125,14 @@ export default function AbilityExecutionChatPart(Base) {
        * @returns {Promise<void>}
        */
       async #generateConsequenceAssociations() {
-        this.#associationMap = { crit: [], normal: [] };
-        this.#trackerMap = { crit: [], normal: [] };
+        this.#associationMap = {
+          crit: [],
+          normal: [],
+        };
+        this.#trackerMap = {
+          crit: [],
+          normal: [],
+        };
         const statusAutomations =
           /** @type {StatusAutomation[]} */ this.activeAutomations.filter(
             (a) => a.type === StatusAutomation.TYPE,
@@ -189,7 +145,7 @@ export default function AbilityExecutionChatPart(Base) {
         const executorAutomations = statusAutomations.filter((a) => a.executor);
         for (const a of executorAutomations) {
           const uuid =
-            this.actor.defaultToken?.document?.uuid || this.actor?.uuid;
+            this.actor?.defaultToken?.document?.uuid || this.actor?.uuid;
           if (uuid) {
             this.#attachTrackedStatusAutomationUuids(a, [uuid]);
           }
@@ -198,9 +154,55 @@ export default function AbilityExecutionChatPart(Base) {
 
       /**
        * @param {boolean} crit
+       * @returns {Teriock.Keys.Status[]}
+       */
+      #generateConsequenceStatuses(crit = false) {
+        const statusAutomations = this.#getCritAutomations(
+          StatusAutomation,
+          crit,
+        );
+        return statusAutomations
+          .filter((a) => a.relation === "include")
+          .map((a) => a.status);
+      }
+
+      /**
+       * @param {boolean} crit
+       * @returns {Promise<Partial<EffectTransformationConfig>>}
+       */
+      async #generateConsequenceTransformation(crit = false) {
+        const transformationAutomations = this.#getCritAutomations(
+          TransformationAutomation,
+          crit,
+        );
+        const transformation = {
+          enabled: !!transformationAutomations.length,
+          uuids: [],
+        };
+        if (transformation.enabled) {
+          const a = transformationAutomations[0];
+          const competence = a.competence.toObject();
+          if (!a.overrideCompetence) {
+            competence.raw = this.competence.value;
+          }
+          Object.assign(transformation, {
+            competence,
+            img: a.img,
+            level: a.level,
+            override: Array.from(a.override),
+            reset: Array.from(a.reset),
+            ring: a.ring,
+            suppress: Array.from(a.suppress),
+          });
+        }
+        return transformation;
+      }
+
+      /**
+       * @param {boolean} crit
        * @returns {Record<string, object>}
        */
-      #generateConsequenceAutomations(crit = false) {
+      #generateEffectAutomations(crit = false) {
         const types =
           CONFIG.ActiveEffect.dataModels.consequence._automationTypes;
         const out = {};
@@ -224,7 +226,7 @@ export default function AbilityExecutionChatPart(Base) {
        * @param {boolean} crit
        * @returns {Partial<CombatExpiration>}
        */
-      #generateConsequenceCombatExpiration(crit = false) {
+      #generateEffectCombatExpiration(crit = false) {
         /** @type {Partial<CombatExpiration>} */
         const combatExpiration = {};
         const combatExpirationAutomations = this.#getCritAutomations(
@@ -234,7 +236,11 @@ export default function AbilityExecutionChatPart(Base) {
         combatExpirationAutomations.forEach((a) => {
           Object.assign(
             combatExpiration,
-            foundry.utils.deepClone({ what: a.what, when: a.when, who: a.who }),
+            foundry.utils.deepClone({
+              what: a.what,
+              when: a.when,
+              who: a.who,
+            }),
           );
           combatExpiration.who.source = this.actor?.uuid;
         });
@@ -242,10 +248,31 @@ export default function AbilityExecutionChatPart(Base) {
       }
 
       /**
+       * Generate the JSON serializable data for a consequence.
+       * @param {boolean} crit
+       * @returns {Promise<object>}
+       */
+      async #generateEffectConsequence(crit = false) {
+        return foundry.utils.mergeObject(
+          await this.#generateEffectImbuement(crit),
+          {
+            showIcon: 1,
+            statuses: this.#generateConsequenceStatuses(crit),
+            system: {
+              associations: [],
+              transformation:
+                await this.#generateConsequenceTransformation(crit),
+            },
+            type: "consequence",
+          },
+        );
+      }
+
+      /**
        * @param {boolean} crit
        * @returns {Promise<number>}
        */
-      async #generateConsequenceDuration(crit = false) {
+      async #generateEffectDuration(crit = false) {
         const durationAutomations = this.#getCritAutomations(
           DurationAutomation,
           crit,
@@ -280,47 +307,52 @@ export default function AbilityExecutionChatPart(Base) {
       }
 
       /**
+       * Generate the JSON serializable data for an imbuement.
        * @param {boolean} crit
-       * @returns {Teriock.Keys.Status[]}
+       * @returns {Promise<object>}
        */
-      #generateConsequenceStatuses(crit = false) {
-        const statusAutomations = this.#getCritAutomations(
-          StatusAutomation,
-          crit,
-        );
-        return statusAutomations
-          .filter((a) => a.relation === "include")
-          .map((a) => a.status);
-      }
-
-      /**
-       * @param {boolean} crit
-       * @returns {Promise<Partial<EffectTransformationConfig>>}
-       */
-      async #generateConsequenceTransformation(crit = false) {
-        const transformationAutomations = this.#getCritAutomations(
-          TransformationAutomation,
-          crit,
-        );
-        const transformation = {
-          enabled: !!transformationAutomations.length,
-          uuids: [],
+      async #generateEffectImbuement(crit = false) {
+        return {
+          changes: [],
+          duration: {
+            seconds: await this.#generateEffectDuration(crit),
+          },
+          img: this.source.img,
+          name: _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.effectName", {
+            name: this.source.name,
+          }),
+          showIcon: 0,
+          system: {
+            _dep:
+              this.source.system.sustained &&
+              game.teriock.getSetting("trackSustainedConsequences")
+                ? this.source.uuid
+                : undefined,
+            automations: this.#generateEffectAutomations(crit),
+            blocks: (await this.source.system.getPanelParts()).blocks,
+            competence: { raw: this.competence.value },
+            critical: crit,
+            deleteOnExpire: true,
+            expirations: {
+              combat: this.#generateEffectCombatExpiration(crit),
+              conditions: {
+                absent: Array.from(
+                  this.source.system.duration.conditions.absent,
+                ),
+                present: Array.from(
+                  this.source.system.duration.conditions.present,
+                ),
+              },
+              description: this.source.system.endCondition,
+              sustained: this.source.system.sustained,
+              triggers: Array.from(this.source.system.duration.triggers),
+            },
+            heightened: this.heightened,
+            identifier: this.source.forcedIdentifier + "-effect",
+            source: this.source.uuid,
+          },
+          type: "imbuement",
         };
-        if (transformation.enabled) {
-          const a = transformationAutomations[0];
-          const competence = a.competence.toObject();
-          if (!a.overrideCompetence) competence.raw = this.competence.value;
-          Object.assign(transformation, {
-            competence,
-            img: a.img,
-            level: a.level,
-            override: Array.from(a.override),
-            reset: Array.from(a.reset),
-            ring: a.ring,
-            suppress: Array.from(a.suppress),
-          });
-        }
-        return transformation;
       }
 
       /**
@@ -368,24 +400,30 @@ export default function AbilityExecutionChatPart(Base) {
         );
 
         if (
-          this.source.system.duration.unit !== "instant" &&
-          this.source.system.maneuver !== "passive" &&
-          !modifyEffectAutomation?.prevent
+          (this.source.system.duration.unit !== "instant" &&
+            this.source.system.maneuver !== "passive" &&
+            !modifyEffectAutomation?.prevent &&
+            this.targetsActor) ||
+          this.targetsArmament
         ) {
           // Add apply effects activation
-          const normalData = await this.#generateConsequence(false);
-          const critData = await this.#generateConsequence(true);
+          const normConData = await this.#generateEffectConsequence(false);
+          const critConData = await this.#generateEffectConsequence(true);
+          const normImbData = await this.#generateEffectImbuement(false);
+          const critImbData = await this.#generateEffectImbuement(true);
           await this.#generateConsequenceAssociations();
-          normalData.system.associations = this.#associationMap["normal"];
-          normalData.changes.push(...this.#trackerMap["normal"]);
-          critData.system.associations = this.#associationMap["crit"];
-          critData.changes.push(...this.#trackerMap["crit"]);
-          const normalChildren = this.source.subs.map((s) => {
+          normConData.system.associations = this.#associationMap["normal"];
+          normConData.changes.push(...this.#trackerMap["normal"]);
+          critConData.system.associations = this.#associationMap["crit"];
+          critConData.changes.push(...this.#trackerMap["crit"]);
+          const normConChildren = this.source.subs.map((s) => {
             return { uuid: s.uuid };
           });
-          const critChildren = [...normalChildren];
-          const normalDocuments = [];
-          const critDocuments = [];
+          const critConChildren = [...normConChildren];
+          const normImbChildren = [];
+          const critImbChildren = [];
+          const normDocs = [];
+          const critDocs = [];
           const childAutomations =
             /** @type {AddExternalDocumentsAutomation[]} */ this.activeAutomations.filter(
               (a) => [AddExternalDocumentsAutomation.TYPE].includes(a.type),
@@ -393,12 +431,20 @@ export default function AbilityExecutionChatPart(Base) {
           for (const a of childAutomations) {
             const toAdd = await a.choose();
             if (a.crit.has(0)) {
-              if (a.attachDocuments) normalChildren.push(...toAdd);
-              else normalDocuments.push(...toAdd);
+              if (a.attachDocuments) {
+                normConChildren.push(...toAdd);
+                normImbChildren.push(...toAdd);
+              } else {
+                normDocs.push(...toAdd);
+              }
             }
             if (a.crit.has(1)) {
-              if (a.attachDocuments) critChildren.push(...toAdd);
-              else critDocuments.push(...toAdd);
+              if (a.attachDocuments) {
+                critConChildren.push(...toAdd);
+                critImbChildren.push(...toAdd);
+              } else {
+                critDocs.push(...toAdd);
+              }
             }
           }
           const transformationAutomations =
@@ -408,23 +454,31 @@ export default function AbilityExecutionChatPart(Base) {
           for (const a of transformationAutomations) {
             const toAdd = await a.choose();
             if (a.crit.has(0)) {
-              normalData.system.transformation.uuids.push(...toAdd);
+              normConData.system.transformation.uuids.push(...toAdd);
             }
             if (a.crit.has(1)) {
-              critData.system.transformation.uuids.push(...toAdd);
+              critConData.system.transformation.uuids.push(...toAdd);
             }
           }
           this.#getCritAutomations(ModifyEffectAutomation, false).forEach(
             (a) => {
               if (a.overrideCompetence) {
                 foundry.utils.setProperty(
-                  normalData,
+                  normConData,
+                  "system.competence.raw",
+                  a.competence.value,
+                );
+                foundry.utils.setProperty(
+                  normImbData,
                   "system.competence.raw",
                   a.competence.value,
                 );
               }
               if (a.overrideData && a.data) {
-                foundry.utils.mergeObject(normalData, a.data, {
+                foundry.utils.mergeObject(normConData, a.data, {
+                  inplace: true,
+                });
+                foundry.utils.mergeObject(normImbData, a.data, {
                   inplace: true,
                 });
               }
@@ -434,35 +488,70 @@ export default function AbilityExecutionChatPart(Base) {
             (a) => {
               if (a.overrideCompetence) {
                 foundry.utils.setProperty(
-                  critData,
+                  critConData,
+                  "system.competence.raw",
+                  a.competence.value,
+                );
+                foundry.utils.setProperty(
+                  critImbData,
                   "system.competence.raw",
                   a.competence.value,
                 );
               }
               if (a.overrideData && a.data) {
-                foundry.utils.mergeObject(critData, a.data, { inplace: true });
+                foundry.utils.mergeObject(critConData, a.data, {
+                  inplace: true,
+                });
+                foundry.utils.mergeObject(critImbData, a.data, {
+                  inplace: true,
+                });
               }
             },
           );
-          this.activations.push(
-            new acts.AddDocumentsActivation({
-              display: {
-                label:
-                  modifyEffectAutomation?.display?.label ||
-                  "TERIOCK.COMMANDS.ApplyEffect.label",
-              },
-              primary: {
-                children: normalChildren,
-                other: normalDocuments,
-                root: { data: normalData },
-              },
-              secondary: {
-                children: critChildren,
-                other: critDocuments,
-                root: { data: critData },
-              },
-            }),
-          );
+          if (this.targetsActor) {
+            this.activations.push(
+              new acts.AddDocumentsActivation({
+                display: {
+                  label:
+                    modifyEffectAutomation?.display?.label ||
+                    "TERIOCK.COMMANDS.ApplyEffect.label",
+                },
+                primary: {
+                  children: normConChildren,
+                  other: normDocs,
+                  root: { data: normConData },
+                },
+                secondary: {
+                  children: critConChildren,
+                  other: critDocs,
+                  root: { data: critConData },
+                },
+                target: "actor",
+              }),
+            );
+          }
+          if (this.targetsArmament) {
+            this.activations.push(
+              new acts.AddDocumentsActivation({
+                display: {
+                  label:
+                    modifyEffectAutomation?.display?.label ||
+                    "TERIOCK.COMMANDS.ApplyEffect.armament",
+                },
+                primary: {
+                  children: normImbChildren,
+                  other: normDocs,
+                  root: { data: normImbData },
+                },
+                secondary: {
+                  children: critImbChildren,
+                  other: critDocs,
+                  root: { data: critImbData },
+                },
+                target: "armament",
+              }),
+            );
+          }
         }
 
         // Add all pre-defined activations
@@ -543,11 +632,11 @@ export default function AbilityExecutionChatPart(Base) {
         if (this.heightened > 0) {
           if (this.heightened === 1) {
             this.tags.push(
-              _loc("TERIOCK.SYSTEMS.Consequence.PANELS.heightenedSingle"),
+              _loc("TERIOCK.SYSTEMS.Imbuement.PANELS.heightenedSingle"),
             );
           } else {
             this.tags.push(
-              _loc("TERIOCK.SYSTEMS.Consequence.PANELS.heightenedPlural", {
+              _loc("TERIOCK.SYSTEMS.Imbuement.PANELS.heightenedPlural", {
                 value: this.heightened,
               }),
             );
@@ -557,7 +646,7 @@ export default function AbilityExecutionChatPart(Base) {
           (c) => this.costs[c] > 0,
         )) {
           this.tags.push(
-            _loc("TERIOCK.SYSTEMS.Consequence.PANELS.spent", {
+            _loc("TERIOCK.SYSTEMS.Imbuement.PANELS.spent", {
               amount: this.costs[c],
               label: costOptions.primary.keys[c]?.abbreviation,
             }),

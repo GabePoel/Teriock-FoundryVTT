@@ -139,15 +139,10 @@ export default function AttunableSystemMixin(Base) {
           changes: [
             {
               key: "system.attunements",
-              mode: 2,
+              phase: "initial",
+              priority: 10,
+              type: "add",
               value: this.parent._id,
-              priority: 10,
-            },
-            {
-              key: "system.presence.value",
-              mode: 2,
-              value: this.tier.value,
-              priority: 10,
             },
           ],
         };

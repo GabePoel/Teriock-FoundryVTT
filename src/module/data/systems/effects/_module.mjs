@@ -4,5 +4,6 @@ export { default as BaseEffectSystem } from "./base-effect-system/base-effect-sy
 export { default as ConditionSystem } from "./condition-system/condition-system.mjs";
 export { default as ConsequenceSystem } from "./consequence-system/consequence-system.mjs";
 export { default as FluencySystem } from "./fluency-system/fluency-system.mjs";
+export { default as ImbuementSystem } from "./imbuement-system/imbuement-system.mjs";
 export { default as PropertySystem } from "./property-system/property-system.mjs";
 export { default as ResourceSystem } from "./resource-system/resource-system.mjs";

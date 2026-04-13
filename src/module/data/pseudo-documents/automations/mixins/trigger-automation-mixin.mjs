@@ -70,6 +70,7 @@ export default function TriggerAutomationMixin(Base) {
       static defineSchema() {
         const schema = Object.assign(super.defineSchema(), {
           trigger: new fields.StringField({
+            blank: true,
             choices: this._processedTriggerChoices,
             initial: this._initialTrigger,
             nullable: this._nullableTrigger,

@@ -1,25 +1,17 @@
-import { inCombatExpirationDialog } from "../../../../applications/dialogs/_module.mjs";
 import { mix } from "../../../../helpers/construction.mjs";
-import { builders } from "../../../fields/helpers/_module.mjs";
-import { conditionRequirementsField } from "../../../fields/helpers/builders.mjs";
-import DurationModel from "../../../models/unit-models/duration-model.mjs";
-import * as automations from "../../../pseudo-documents/automations/_module.mjs";
-import { ThresholdDataMixin } from "../../../shared/mixins/_module.mjs";
+import { associationsField } from "../../../fields/helpers/builders.mjs";
 import * as mixins from "../../mixins/_module.mjs";
-import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
-
-const { fields } = foundry.data;
+import ImbuementSystem from "../imbuement-system/imbuement-system.mjs";
 
 /**
  * Effect-specific effect data model.
- * @extends {BaseEffectSystem}
+ * @extends {ImbuementSystem}
  * @extends {Teriock.Models.ConsequenceSystemData}
  * @mixes TransformationSystem
  */
 export default class ConsequenceSystem extends mix(
-  BaseEffectSystem,
+  ImbuementSystem,
   mixins.TransformationSystemMixin,
-  ThresholdDataMixin,
 ) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
@@ -27,22 +19,10 @@ export default class ConsequenceSystem extends mix(
     "TERIOCK.SYSTEMS.Consequence",
   ];
 
-  static get _automationTypes() {
-    return [
-      ...super._automationTypes,
-      automations.AbilityMacroAutomation,
-      automations.ChangesAutomation,
-      automations.HealAutomation,
-      automations.ProtectionAutomation,
-      automations.RevitalizeAutomation,
-    ];
-  }
-
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       type: "consequence",
-      usable: true,
       childEffectTypes: ["ability", "fluency", "resource"],
       childItemTypes: ["body", "equipment", "power", "rank", "species"],
       visibleTypes: [
@@ -60,164 +40,15 @@ export default class ConsequenceSystem extends mix(
 
   /** @inheritDoc */
   static defineSchema() {
-    return foundry.utils.mergeObject(super.defineSchema(), {
-      associations: builders.associationsField(),
-      blocks: builders.blocksField(),
-      critical: new fields.BooleanField({ initial: false }),
-      source: new fields.StringField({
-        initial: "",
-        nullable: true,
-      }),
-      expirations: new fields.SchemaField({
-        combat: new fields.SchemaField({
-          who: new fields.SchemaField({
-            type: builders.combatExpirationSourceTypeField(),
-            source: new fields.DocumentUUIDField({
-              type: "Actor",
-              nullable: true,
-            }),
-          }),
-          what: builders.combatExpirationMethodField(),
-          when: builders.combatExpirationTimingField(),
-        }),
-        conditions: conditionRequirementsField(),
-        description: new fields.StringField(),
-        sustained: new fields.BooleanField({ initial: false }),
-        triggers: new fields.SetField(
-          new fields.StringField({ choices: DurationModel._triggerChoices }),
-        ),
-      }),
-      sourceDescription: new fields.HTMLField(),
-      heightened: new fields.NumberField(),
+    return Object.assign(super.defineSchema(), {
+      associations: associationsField(),
     });
-  }
-
-  /** @inheritDoc */
-  get _nameTags() {
-    const tags = super._nameTags;
-    if (this.critical) {
-      tags.unshift(_loc("TERIOCK.SYSTEMS.Consequence.PANELS.critical"));
-    }
-    return tags;
-  }
-
-  /** @inheritDoc */
-  get embedParts() {
-    return Object.assign(super.embedParts, {
-      subtitle: this.parent.remainingString,
-    });
-  }
-
-  /**
-   * Gets the maneuver type for this effect.
-   * Effects are always passive maneuvers.
-   * @returns {string} The maneuver type ("passive").
-   */
-  get maneuver() {
-    return "passive";
-  }
-
-  /** @inheritDoc */
-  get messageBlocks() {
-    return this.blocks;
-  }
-
-  /** @inheritDoc */
-  get useText() {
-    return _loc("TERIOCK.SYSTEMS.Condition.USAGE.use", {
-      value: this.parent.name,
-    });
-  }
-
-  /** @inheritDoc */
-  _onCreate(data, options, userId) {
-    super._onCreate(data, options, userId);
-    if (this.parent.checkEditor(userId) && this.actor) {
-      this.parent.fireTrigger("applyEffect", this.parent.getScope());
-    }
-  }
-
-  /** @inheritDoc */
-  _onFireTrigger(trigger) {
-    super._onFireTrigger(trigger);
-    if (this.expirations.triggers.has(trigger)) this.expire();
-  }
-
-  /** @inheritDoc */
-  async _preDelete(options, user) {
-    const yes = await super._preDelete(options, user);
-    if (yes === false) return false;
-
-    this.parent.fireTrigger("expireEffect", this.parent.getScope());
-  }
-
-  /** @inheritDoc */
-  async _use(_options = {}) {
-    await this.inCombatExpiration(true);
   }
 
   /** @inheritDoc */
   async getPanelParts() {
     const parts = await super.getPanelParts();
-    parts.bars = [
-      {
-        icon: TERIOCK.display.icons.ability.duration,
-        label: _loc("TERIOCK.SYSTEMS.Consequence.PANELS.duration"),
-        wrappers: [this.parent.remainingString],
-      },
-      {
-        icon: TERIOCK.display.icons.document.condition,
-        label: _loc("TERIOCK.SYSTEMS.Consequence.PANELS.conditions"),
-        wrappers: [
-          ...Array.from(
-            this.parent.statuses.map(
-              (status) => TERIOCK.reference.conditions[status],
-            ),
-          ),
-          this.critical
-            ? _loc("TERIOCK.SYSTEMS.Consequence.PANELS.critical")
-            : "",
-          this.heightened
-            ? this.heightened === 1
-              ? _loc("TERIOCK.SYSTEMS.Consequence.PANELS.heightenedSingle")
-              : _loc("TERIOCK.SYSTEMS.Consequence.PANELS.heightenedPlural", {
-                  value: this.heightened,
-                })
-            : "",
-        ],
-      },
-    ];
     parts.associations.push(...this.associations);
     return parts;
-  }
-
-  /**
-   * Trigger in-combat expiration.
-   * @param {boolean} [forceDialog] - Force a dialog to show up.
-   * @returns {Promise<void>}
-   */
-  async inCombatExpiration(forceDialog = false) {
-    await inCombatExpirationDialog(this.parent, forceDialog);
-  }
-
-  /** @inheritDoc */
-  async shouldExpire() {
-    if (this.shouldExpireFromConditions()) return true;
-    return super.shouldExpire();
-  }
-
-  /**
-   * Checks if this should expire due to its actor's conditions.
-   * @returns {boolean}
-   */
-  shouldExpireFromConditions() {
-    if (!this.actor) return false;
-    for (const c of this.expirations.conditions.present) {
-      if (!this.actor.statuses.has(c)) return true;
-    }
-    for (const c of this.expirations.conditions.absent) {
-      if (this.actor.statuses.has(c)) return true;
-    }
-    return false;
   }
 }

@@ -6,6 +6,7 @@ import {
   ConditionSystem,
   ConsequenceSystem,
   FluencySystem,
+  ImbuementSystem,
   PropertySystem,
   ResourceSystem,
 } from "../data/systems/effects/_module.mjs";
@@ -15,6 +16,7 @@ import {
   ConditionSheet,
   ConsequenceSheet,
   FluencySheet,
+  ImbuementSheet,
   PropertySheet,
   ResourceSheet,
 } from "../applications/sheets/effect-sheets/_module.mjs";
@@ -207,6 +209,14 @@ declare global {
     get id(): ID<TeriockFluency>;
     get uuid(): UUID<TeriockFluency>;
   };
+  export type TeriockImbuement = TeriockActiveEffect & {
+    sheet: ImbuementSheet;
+    system: ImbuementSystem;
+    type: "imbuement";
+    _id: ID<TeriockImbuement>;
+    get id(): ID<TeriockImbuement>;
+    get uuid(): UUID<TeriockImbuement>;
+  };
   export type TeriockProperty = TeriockActiveEffect & {
     sheet: PropertySheet;
     system: PropertySystem;
@@ -235,6 +245,7 @@ declare global {
     | TeriockCondition
     | TeriockConsequence
     | TeriockFluency
+    | TeriockImbuement
     | TeriockProperty
     | TeriockResource;
   export type AnyItem =

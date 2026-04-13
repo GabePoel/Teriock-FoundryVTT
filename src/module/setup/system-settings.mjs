@@ -150,7 +150,7 @@ export const settings = {
     },
   },
   gameContent: {
-    damageTypeSources: {
+    documentDamageSources: {
       default: ["Compendium.teriock.rules.JournalEntry.damage0000000000"],
       hint: "TERIOCK.SETTINGS.damageTypeSources.hint",
       name: "TERIOCK.SETTINGS.damageTypeSources.name",
@@ -159,7 +159,7 @@ export const settings = {
         new fields.DocumentUUIDField({ type: "JournalEntry" }),
       ),
     },
-    drainTypeSources: {
+    documentDrainSources: {
       default: ["Compendium.teriock.rules.JournalEntry.drain00000000000"],
       hint: "TERIOCK.SETTINGS.drainTypeSources.hint",
       name: "TERIOCK.SETTINGS.drainTypeSources.name",

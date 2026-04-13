@@ -114,6 +114,7 @@ export const icons = {
     effect: "ms-microbiology",
     equipment: "ms-package-2",
     fluency: "mdi-ruler-square-compass",
+    imbuement: "ms-graph-3",
     keyword: "ms-format-quote",
     macro: "ms-code",
     mount: "ms-chess-knight",

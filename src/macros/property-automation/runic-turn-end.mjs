@@ -32,7 +32,7 @@ if (
     },
   });
   if (proceed) {
-    const roll = new game.teriock.Roll(
+    const roll = new teriock.dice.rolls.BaseRoll(
       "2d4kh1",
       {},
       {

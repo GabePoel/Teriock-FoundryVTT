@@ -32,6 +32,7 @@ export default (Base) => {
           createConsequence: this._onCreateConsequence,
           createEquipment: this._onCreateEquipment,
           createFluency: this._onCreateFluency,
+          createImbuement: this._onCreateImbuement,
           createMount: this._onCreateMount,
           createPower: this._onCreatePower,
           createProperty: this._onCreateProperty,
@@ -130,6 +131,16 @@ export default (Base) => {
             },
           ]);
         }
+      }
+
+      /**
+       * Adds a new {@link TeriockImbuement} to the current document.
+       * @returns {Promise<void>}
+       */
+      static async _onCreateImbuement() {
+        await this.document.createChildDocuments("ActiveEffect", [
+          newDocumentObj("imbuement"),
+        ]);
       }
 
       /**

@@ -56,7 +56,7 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
         });
       } else if (expiration.when.skip > 0) {
         updates.push({
-          _id: effect.id,
+          uuid: effect.uuid,
           "system.expirations.combat.when.skip": expiration.when.skip - 1,
         });
       }
@@ -113,16 +113,20 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
    */
   #tryExpirations(effectActor, timeActor, trigger, time) {
     const updates = [];
-    for (const effect of effectActor?.consequences || []) {
+    const mightExpire = [];
+    if (effectActor) {
+      mightExpire.push(...effectActor.consequences);
+      mightExpire.push(...effectActor.imbuements);
+    }
+    for (const effect of mightExpire) {
       this.#checkExpiration(effect, trigger, time, timeActor?.uuid, updates);
     }
     if (updates.length > 0) {
       game.users.queryGM(
-        "teriock.updateEmbeddedDocuments",
+        "teriock.massUpdate",
         {
-          uuid: effectActor.uuid,
-          embeddedName: "ActiveEffect",
-          updates: updates,
+          documentName: "ActiveEffect",
+          updateData: updates,
         },
         {
           failPrefix:
