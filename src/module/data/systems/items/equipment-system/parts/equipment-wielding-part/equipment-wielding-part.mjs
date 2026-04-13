@@ -62,31 +62,31 @@ export default (Base) => {
       get embedIcons() {
         return [
           {
-            icon: this.glued ? icons.equipment.glue : icons.equipment.unglue,
             action: "toggleGluedDoc",
-            tooltip: this.glued
-              ? _loc("TERIOCK.SYSTEMS.Equipment.EMBED.glued")
-              : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unglued"),
-            condition: this.parent.isOwner,
-            callback: async () => {
+            icon: this.glued ? icons.equipment.glue : icons.equipment.unglue,
+            onClick: async () => {
               if (this.glued) await this.unglue();
               else await this.glue();
             },
+            tooltip: this.glued
+              ? _loc("TERIOCK.SYSTEMS.Equipment.EMBED.glued")
+              : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unglued"),
+            visible: this.parent.isOwner,
           },
           ...super.embedIcons.filter(
             (i) => !i.action?.toLowerCase().includes("disabled"),
           ),
           {
-            icon: this.equipped ? icons.ui.enabled : icons.ui.disabled,
             action: "toggleEquippedDoc",
-            tooltip: this.equipped
-              ? _loc("TERIOCK.SYSTEMS.Equipment.EMBED.equipped")
-              : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unequipped"),
-            condition: this.parent.isOwner,
-            callback: async () => {
+            icon: this.equipped ? icons.ui.enabled : icons.ui.disabled,
+            onClick: async () => {
               if (this.equipped) await this.unequip();
               else await this.equip();
             },
+            tooltip: this.equipped
+              ? _loc("TERIOCK.SYSTEMS.Equipment.EMBED.equipped")
+              : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unequipped"),
+            visible: this.parent.isOwner,
           },
         ];
       }

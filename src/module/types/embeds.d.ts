@@ -2,16 +2,16 @@ declare global {
   namespace Teriock.EmbedData {
     export type EmbedIcon = {
       action?: string;
-      callback?: (
-        event: PointerEvent,
-        relative: TeriockDocument,
-      ) => Promise<void>;
       classes?: string;
       clickable?: boolean;
       dataset?: object;
       icon?: Teriock.EmbedData.EmbedIcon;
+      onClick?: (
+        event: PointerEvent,
+        relative: TeriockDocument,
+      ) => Promise<void>;
       tooltip?: string;
-      condition?: boolean;
+      visible?: boolean;
     };
 
     export type EmbedParts = {

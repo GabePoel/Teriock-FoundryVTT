@@ -40,15 +40,11 @@ export default (Base) => {
        */
       get onUseIcon() {
         return {
+          action: "toggleOnUseDoc",
           icon: this.parent.isOnUse
             ? TERIOCK.display.icons.ability.onUse
             : TERIOCK.display.icons.ability.notOnUse,
-          action: "toggleOnUseDoc",
-          tooltip: this.parent.isOnUse
-            ? _loc("TERIOCK.SYSTEMS.Ability.USAGE.onlyOnUse")
-            : _loc("TERIOCK.SYSTEMS.Ability.USAGE.alwaysActive"),
-          condition: this.parent.isOwner,
-          callback: async () => {
+          onClick: async () => {
             const onUseSet = this.parent.parent?.system.onUse;
             if (onUseSet.has(this.parent.id)) {
               onUseSet.delete(this.parent.id);
@@ -59,6 +55,10 @@ export default (Base) => {
               "system.onUse": Array.from(onUseSet),
             });
           },
+          tooltip: this.parent.isOnUse
+            ? _loc("TERIOCK.SYSTEMS.Ability.USAGE.onlyOnUse")
+            : _loc("TERIOCK.SYSTEMS.Ability.USAGE.alwaysActive"),
+          visible: this.parent.isOwner,
         };
       }
 

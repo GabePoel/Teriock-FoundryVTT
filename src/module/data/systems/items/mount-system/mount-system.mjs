@@ -32,8 +32,8 @@ export default class MountSystem extends mix(
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
-      type: "mount",
       childEffectTypes: ["ability", "fluency", "resource"],
+      type: "mount",
     });
   }
 
@@ -57,16 +57,16 @@ export default class MountSystem extends mix(
         (i) => !i.action.toLowerCase().includes("disabled"),
       ),
       {
-        icon: this.mounted ? icons.ui.enabled : icons.ui.disabled,
         action: "toggleMountedDoc",
-        tooltip: this.mounted
-          ? _loc("TERIOCK.SYSTEMS.Mount.EMBED.mounted")
-          : _loc("TERIOCK.SYSTEMS.Mount.EMBED.unmounted"),
-        condition: this.parent.isOwner,
-        callback: async () => {
+        icon: this.mounted ? icons.ui.enabled : icons.ui.disabled,
+        onClick: async () => {
           if (this.mounted) await this.unmount();
           else await this.mount();
         },
+        tooltip: this.mounted
+          ? _loc("TERIOCK.SYSTEMS.Mount.EMBED.mounted")
+          : _loc("TERIOCK.SYSTEMS.Mount.EMBED.unmounted"),
+        visible: this.parent.isOwner,
       },
     ];
   }

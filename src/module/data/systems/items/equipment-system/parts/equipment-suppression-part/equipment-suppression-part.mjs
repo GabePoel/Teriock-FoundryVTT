@@ -45,32 +45,32 @@ export default (Base) => {
             i.action?.toLowerCase().includes("attuned"),
           ),
           {
+            action: "toggleDampenedDoc",
             icon: this.dampened
               ? TERIOCK.display.icons.equipment.dampen
               : TERIOCK.display.icons.equipment.undampen,
-            action: "toggleDampenedDoc",
-            tooltip: this.dampened
-              ? _loc("TERIOCK.SYSTEMS.Equipment.FIELDS.dampened.label")
-              : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.undampened"),
-            condition: this.parent.isOwner,
-            callback: async () => {
+            onClick: async () => {
               if (this.dampened) await this.undampen();
               else await this.dampen();
             },
+            tooltip: this.dampened
+              ? _loc("TERIOCK.SYSTEMS.Equipment.FIELDS.dampened.label")
+              : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.undampened"),
+            visible: this.parent.isOwner,
           },
           {
+            action: "toggleShatteredDoc",
             icon: this.shattered
               ? TERIOCK.display.icons.break.shatter
               : TERIOCK.display.icons.break.repair,
-            action: "toggleShatteredDoc",
-            tooltip: this.shattered
-              ? _loc("TERIOCK.TERMS.Properties.shattered")
-              : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unshatterd"),
-            condition: this.parent.isOwner,
-            callback: async () => {
+            onClick: async () => {
               if (this.shattered) await this.repair();
               else await this.shatter();
             },
+            tooltip: this.shattered
+              ? _loc("TERIOCK.TERMS.Properties.shattered")
+              : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unshatterd"),
+            visible: this.parent.isOwner,
           },
           ...super.embedIcons.filter(
             (i) => !i.action?.toLowerCase().includes("attuned"),

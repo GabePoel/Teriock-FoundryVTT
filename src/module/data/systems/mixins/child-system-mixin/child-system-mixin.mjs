@@ -113,24 +113,24 @@ export default function ChildSystemMixin(Base) {
         return [
           ...super.embedIcons,
           {
-            icon: TERIOCK.display.icons.ui.chat,
             action: "chatDoc",
-            tooltip: _loc("TERIOCK.SYSTEMS.Child.MENU.shareWriteup"),
-            callback: async () => {
+            icon: TERIOCK.display.icons.ui.chat,
+            onClick: async () => {
               await this.parent.toMessage();
             },
-            condition: this.parent.isViewer,
+            tooltip: _loc("TERIOCK.SYSTEMS.Child.MENU.shareWriteup"),
+            visible: this.parent.isViewer,
           },
           {
+            action: "toggleDisabledDoc",
             icon: this.parent.disabled
               ? TERIOCK.display.icons.ui.disabled
               : TERIOCK.display.icons.ui.enabled,
-            action: "toggleDisabledDoc",
-            callback: () => this.parent.toggleDisabled(),
+            onClick: () => this.parent.toggleDisabled(),
             tooltip: this.parent.disabled
               ? _loc("TERIOCK.SYSTEMS.Child.EMBED.disabled")
               : _loc("TERIOCK.SYSTEMS.Child.EMBED.enabled"),
-            condition: this.parent.isOwner,
+            visible: this.parent.isOwner,
           },
         ];
       }

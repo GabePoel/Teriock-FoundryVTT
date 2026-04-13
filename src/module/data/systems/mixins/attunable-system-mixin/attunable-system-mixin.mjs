@@ -72,18 +72,18 @@ export default function AttunableSystemMixin(Base) {
       get embedIcons() {
         return [
           {
+            action: "toggleAttunedDoc",
             icon: this.isAttuned
               ? TERIOCK.display.icons.attunable.attune
               : TERIOCK.display.icons.attunable.deattune,
-            action: "toggleAttunedDoc",
-            tooltip: this.isAttuned
-              ? _loc("TERIOCK.SYSTEMS.Attunement.USAGE.attuned")
-              : _loc("TERIOCK.SYSTEMS.Attunement.USAGE.deattuned"),
-            condition: this.parent.isOwner,
-            callback: async () => {
+            onClick: async () => {
               if (this.isAttuned) await this.deattune();
               else await this.attune();
             },
+            tooltip: this.isAttuned
+              ? _loc("TERIOCK.SYSTEMS.Attunement.USAGE.attuned")
+              : _loc("TERIOCK.SYSTEMS.Attunement.USAGE.deattuned"),
+            visible: this.parent.isOwner,
           },
           ...super.embedIcons,
         ];

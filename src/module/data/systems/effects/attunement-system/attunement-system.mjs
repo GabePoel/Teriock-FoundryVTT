@@ -60,11 +60,11 @@ export default class AttunementSystem extends BaseEffectSystem {
   get embedIcons() {
     return [
       {
-        icon: TERIOCK.display.icons.attunable.deattune,
         action: "deattuneDoc",
+        icon: TERIOCK.display.icons.attunable.deattune,
+        onClick: async () => await this.deattune(),
         tooltip: _loc("TERIOCK.SYSTEMS.Attunable.MENU.deattune"),
-        condition: this.parent.isOwner,
-        callback: async () => await this.deattune(),
+        visible: this.parent.isOwner,
       },
       ...super.embedIcons,
     ];

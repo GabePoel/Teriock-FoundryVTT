@@ -65,9 +65,9 @@
           class="ticon
             {{makeIconClass icon (ifThen (exists style) style "light")}}
             {{classes}}
-            {{#if (and clickable condition)}}teriock-block-clickable{{/if}}
+            {{#if (and clickable visible)}}teriock-block-clickable{{/if}}
           "
-          {{#if (and (or (not (defined condition)) condition) action)}}data-action="{{action}}" {{/if}}
+          {{#if (and (or (not (defined visible)) visible) action)}}data-action="{{action}}" {{/if}}
           {{#if tooltip}}data-tooltip="{{tooltip}}" {{/if}}
           {{#if dataset}}
             {{#each dataset as |value key|}}data-{{key}}="{{value}}"{{/each}}

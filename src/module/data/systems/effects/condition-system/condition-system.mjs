@@ -67,11 +67,11 @@ export default class ConditionSystem extends mix(
   get embedIcons() {
     return [
       {
-        icon: "dice-d4",
-        tooltip: _loc("TERIOCK.SYSTEMS.Condition.EMBED.rollToRemove"),
-        condition: true,
-        callback: async () => this.parent.use(),
         action: "removeConditionDoc",
+        icon: "dice-d4",
+        onClick: async () => this.parent.use(),
+        tooltip: _loc("TERIOCK.SYSTEMS.Condition.EMBED.rollToRemove"),
+        visible: true,
       },
     ];
   }

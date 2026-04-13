@@ -280,15 +280,15 @@ export default class AbilitySystem extends mix(
     );
     if (this.isBasic) {
       icons.push({
-        icon: TERIOCK.display.icons.ui.locked,
         action: "toggleDisableLocked",
-        tooltip: _loc("TERIOCK.SYSTEMS.Ability.EMBED.locked"),
-        callback: () => {
+        icon: TERIOCK.display.icons.ui.locked,
+        onClick: () => {
           ui.notifications.error("TERIOCK.SYSTEMS.Ability.EMBED.basic", {
             localize: true,
           });
         },
-        condition: this.basic,
+        tooltip: _loc("TERIOCK.SYSTEMS.Ability.EMBED.locked"),
+        visible: this.basic,
       });
     }
     if (
