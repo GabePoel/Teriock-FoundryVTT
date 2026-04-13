@@ -26,7 +26,7 @@ export default function BaseApplicationMixin(Base) {
         this.window.header
           .querySelectorAll("[data-action=copyUuid]")
           .forEach((el) => {
-            el.addEventListener("contextmenu", (e) => {
+            el.addEventListener("auxclick", (e) => {
               e.preventDefault();
               e.stopPropagation();
               e.stopImmediatePropagation();

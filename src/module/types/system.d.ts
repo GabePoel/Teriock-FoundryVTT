@@ -122,13 +122,5 @@ declare global {
       /** Whether to expand tables while resolving. */
       expandTables?: boolean;
     };
-
-    /**
-     * Generic minimal drag data.
-     */
-    export type DragData<T> = {
-      type: string;
-      uuid: UUID<T>;
-    };
   }
 }

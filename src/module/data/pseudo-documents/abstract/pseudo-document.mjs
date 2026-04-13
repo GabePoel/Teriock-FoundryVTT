@@ -71,7 +71,7 @@ export default class PseudoDocument extends EmbeddedDataModel {
 
   /**
    * Helper function to obtain the relevant pseudo-document from drop data.
-   * @param {Teriock.System.DragData<PseudoDocument>} data
+   * @param {Teriock.Sheet.DropData<PseudoDocument>} data
    * @returns {Promise<PseudoDocument>}
    */
   static async fromDropData(data) {
@@ -170,7 +170,7 @@ export default class PseudoDocument extends EmbeddedDataModel {
 
   /**
    * Drag data for storing on initiated drag events.
-   * @returns {Teriock.System.DragData<PseudoDocument>}
+   * @returns {Teriock.Sheet.DropData<PseudoDocument>}
    */
   toDragData() {
     return { type: this.documentName, uuid: this.puuid };

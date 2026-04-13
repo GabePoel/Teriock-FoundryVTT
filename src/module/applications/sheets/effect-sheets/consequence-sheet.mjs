@@ -2,6 +2,7 @@ import { icons } from "../../../constants/display/icons.mjs";
 import { documentOptions } from "../../../constants/options/document-options.mjs";
 import { mix } from "../../../helpers/construction.mjs";
 import { makeIconClass } from "../../../helpers/utils.mjs";
+import { BaseApplicationMixin } from "../../shared/mixins/_module.mjs";
 import {
   ChangesSheetMixin,
   ConfigButtonSheetMixin,
@@ -18,9 +19,11 @@ const { ActiveEffectConfig } = foundry.applications.sheets;
  * {@link TeriockConsequence} sheet.
  * @property {TeriockConsequence} document
  * @extends {ActiveEffectConfig}
+ * @mixes AutomationsCommonSheetPart
  */
 export default class ConsequenceSheet extends mix(
   ActiveEffectConfig,
+  BaseApplicationMixin,
   ConfigButtonSheetMixin,
   ChangesSheetMixin,
   AutomationsCommonSheetPart,
@@ -71,6 +74,11 @@ export default class ConsequenceSheet extends mix(
       labelPrefix: super.TABS.sheet.labelPrefix,
     },
   };
+
+  /** @inheritDoc */
+  get _canDropAutomations() {
+    return true;
+  }
 
   /** @inheritDoc */
   async _onRender(context, options) {
