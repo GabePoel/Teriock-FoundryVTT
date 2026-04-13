@@ -8,7 +8,7 @@ const ROOT = ".";
 const DIST_DIR = path.join(ROOT, "dist");
 const SYSTEM_DIR = path.join(DIST_DIR, "teriock");
 const MANIFEST_DST = path.join(DIST_DIR, "manifest.json");
-const MANIFEST_VESTIONED_DST = path.join(DIST_DIR, `manifest-v${VERSION}.json`);
+const MANIFEST_VERSIONED_DST = path.join(DIST_DIR, `manifest-v${VERSION}.json`);
 const ZIP_PATH = path.join(DIST_DIR, `release.zip`);
 const ASSETS = ["css", "src", "packs", "lang", "system.json", "README.md"];
 
@@ -19,7 +19,7 @@ if (fs.existsSync(DIST_DIR)) {
 }
 fs.mkdirSync(SYSTEM_DIR, { recursive: true });
 
-for (const dst of [MANIFEST_DST, MANIFEST_VESTIONED_DST]) {
+for (const dst of [MANIFEST_DST, MANIFEST_VERSIONED_DST]) {
   await fs.promises.writeFile(dst, JSON.stringify(manifest, null, 2), "utf8");
 }
 
