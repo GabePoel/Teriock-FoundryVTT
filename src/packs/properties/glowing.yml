@@ -1,62 +1,61 @@
 _id: 639b14658b0d2e1c
-_key: '!items!639b14658b0d2e1c'
+_key: '!effects!639b14658b0d2e1c'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 639b14658b0d2e1c
-    _key: '!items.effects!639b14658b0d2e1c.639b14658b0d2e1c'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.68
-    img: systems/teriock/src/icons/properties/glowing.webp
-    name: Glowing
-    system:
-      applyIfUnequipped: false
-      automations:
-        parameterChanges:
-          _id: parameterChanges
-          changes:
-            - key: system.light.dim
-              mode: 4
-              priority: 5
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '10'
-            - key: system.light.color
-              mode: 5
-              priority: 5
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '#C64600'
-            - key: system.light.animation.type
-              mode: 5
-              priority: 5
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: torch
-          type: changes
-      competence:
-        raw: 0
-      description: >-
-        <p>If an item is <b>[[lookup name style=lc]]</b>, it is visible in the
-        dark and produces light that makes other things visible. When an item
-        specifies if it's [[lookup name style=lc]], it may have a value in
-        parentheses that indicates the radius of the light. If no value is
-        specified, then the item is visible, but glows faintly enough that it
-        doesn't illuminate other objects unless they are held <i>right</i> next
-        to it.</p>
-      form: intrinsic
-      identifier: glowing
-      modifiesActor: true
-    type: property
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/properties/glowing.webp
 name: Glowing
-type: wrapper
+system:
+  applyIfUnequipped: false
+  automations:
+    parameterChanges:
+      _id: parameterChanges
+      changes:
+        - key: token.light.dim
+          phase: normal
+          priority: 5
+          qualifier: '1'
+          target: Actor
+          type: upgrade
+          value: '10'
+        - key: token.light.color
+          phase: normal
+          priority: 5
+          qualifier: '1'
+          target: Actor
+          type: override
+          value: '#C64600'
+        - key: token.light.animation.type
+          phase: normal
+          priority: 5
+          qualifier: '1'
+          target: Actor
+          type: override
+          value: torch
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 0
+        - 1
+      type: changes
+  competence:
+    raw: 0
+  description: >-
+    <p>If an item is <b>[[lookup name style=lc]]</b>, it is visible in the dark
+    and produces light that makes other things visible. When an item specifies
+    if it's [[lookup name style=lc]], it may have a value in parentheses that
+    indicates the radius of the light. If no value is specified, then the item
+    is visible, but glows faintly enough that it doesn't illuminate other
+    objects unless they are held <i>right</i> next to it.</p>
+  form: intrinsic
+  identifier: glowing
+  mundane: false
+transfer: true
+type: property

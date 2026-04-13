@@ -1,5 +1,5 @@
 import { EvaluationField } from "../../../fields/_module.mjs";
-import { RegainUsesAutomation } from "../../../pseudo-documents/automations/_module.mjs";
+import { ChangeQuantityAutomation } from "../../../pseudo-documents/automations/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -30,7 +30,7 @@ export default function ConsumableSystemMixin(Base) {
 
       /** @inheritDoc */
       static get _automationTypes() {
-        return [...super._automationTypes, RegainUsesAutomation];
+        return [...super._automationTypes, ChangeQuantityAutomation];
       }
 
       /** @inheritDoc */
@@ -46,6 +46,12 @@ export default function ConsumableSystemMixin(Base) {
           consumable: new fields.BooleanField({
             initial: true,
           }),
+          consumptionAmount: new fields.NumberField({
+            initial: 1,
+            integer: true,
+            nullable: false,
+            placeholder: "1",
+          }),
           maxQuantity: new EvaluationField({
             blank: Infinity,
             deterministic: true,
@@ -53,29 +59,32 @@ export default function ConsumableSystemMixin(Base) {
             min: 0,
           }),
           quantity: new fields.NumberField({
-            integer: true,
             initial: 1,
+            integer: true,
             min: 0,
+            nullable: false,
+            placeholder: "0",
           }),
         });
       }
 
-      /** @returns {Teriock.MessageData.MessageBar} */
+      /** @returns {Teriock.Messages.MessageBar} */
       get _consumableBar() {
         return {
           icon: TERIOCK.display.icons.ui.quantity,
-          label: game.i18n.localize(
-            "TERIOCK.SYSTEMS.Consumable.FIELDS.quantity.label",
-          ),
+          label: _loc("TERIOCK.SYSTEMS.Consumable.FIELDS.quantity.label"),
           wrappers: [
-            game.i18n.format("TERIOCK.SYSTEMS.Consumable.PANELS.remaining", {
+            _loc("TERIOCK.SYSTEMS.Consumable.EMBED.remaining", {
               value: this.quantity,
             }),
             this.maxQuantity.value === Infinity
-              ? game.i18n.localize("TERIOCK.SYSTEMS.Consumable.PANELS.noMax")
-              : game.i18n.format("TERIOCK.SYSTEMS.Consumable.PANELS.max", {
+              ? _loc("TERIOCK.SYSTEMS.Consumable.PANELS.noMax")
+              : _loc("TERIOCK.SYSTEMS.Consumable.PANELS.max", {
                   value: this.maxQuantity.value,
                 }),
+            _loc("TERIOCK.SYSTEMS.Consumable.EMBED.perUse", {
+              value: this.consumptionAmount,
+            }),
           ],
         };
       }
@@ -95,21 +104,18 @@ export default function ConsumableSystemMixin(Base) {
         const parts = super.embedParts;
         if (this.consumable) {
           parts.subtitleAction = "useOneDoc";
-          parts.subtitleTooltip = game.i18n.localize(
+          parts.subtitleTooltip = _loc(
             "TERIOCK.SYSTEMS.Consumable.EMBED.consumeOne",
           );
           parts.subtitle =
             this.maxQuantity.value === Infinity
-              ? game.i18n.format("TERIOCK.SYSTEMS.Consumable.EMBED.remaining", {
+              ? _loc("TERIOCK.SYSTEMS.Consumable.EMBED.remaining", {
                   value: this.quantity,
                 })
-              : game.i18n.format(
-                  "TERIOCK.SYSTEMS.Consumable.EMBED.remainingMax",
-                  {
-                    value: this.quantity,
-                    max: this.maxQuantity.value,
-                  },
-                );
+              : _loc("TERIOCK.SYSTEMS.Consumable.EMBED.remainingMax", {
+                  value: this.quantity,
+                  max: this.maxQuantity.value,
+                });
         }
         return parts;
       }
@@ -180,9 +186,12 @@ export default function ConsumableSystemMixin(Base) {
        * @returns {Promise<void>}
        */
       async useOne() {
-        if (this.consumable) {
+        if (this.consumable && this.consumptionAmount) {
           await this.parent.update({
-            "system.quantity": Math.max(0, this.quantity - 1),
+            "system.quantity": Math.max(
+              0,
+              this.quantity - this.consumptionAmount,
+            ),
           });
         }
       }

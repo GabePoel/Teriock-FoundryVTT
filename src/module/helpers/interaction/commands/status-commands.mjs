@@ -43,10 +43,10 @@ export const applyStatusCommand = {
   id: "apply",
   label: (options) =>
     options?.status
-      ? game.i18n.format("TERIOCK.COMMANDS.Status.applyNamed", {
+      ? _loc("TERIOCK.COMMANDS.Status.applyNamed", {
           name: TERIOCK.reference.conditions[options.status],
         })
-      : game.i18n.localize("TERIOCK.COMMANDS.Status.applyUnnamed"),
+      : _loc("TERIOCK.COMMANDS.Status.applyUnnamed"),
   primary: apply,
   secondary: remove,
 };
@@ -61,10 +61,10 @@ export const removeStatusCommand = {
   id: "remove",
   label: (options) =>
     options?.status
-      ? game.i18n.format("TERIOCK.COMMANDS.Status.removeNamed", {
+      ? _loc("TERIOCK.COMMANDS.Status.removeNamed", {
           name: TERIOCK.reference.conditions[options.status],
         })
-      : game.i18n.localize("TERIOCK.COMMANDS.Status.removeUnnamed"),
+      : _loc("TERIOCK.COMMANDS.Status.removeUnnamed"),
   primary: remove,
   secondary: apply,
 };
@@ -79,9 +79,9 @@ export const toggleStatusCommand = {
   id: "toggle",
   label: (options) =>
     options?.status
-      ? game.i18n.format("TERIOCK.COMMANDS.Status.toggleNamed", {
+      ? _loc("TERIOCK.COMMANDS.Status.toggleNamed", {
           name: TERIOCK.index.conditions[options.status],
         })
-      : game.i18n.localize("TERIOCK.COMMANDS.Status.toggleUnnamed"),
+      : _loc("TERIOCK.COMMANDS.Status.toggleUnnamed"),
   primary: toggle,
 };

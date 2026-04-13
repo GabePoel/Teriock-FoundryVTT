@@ -1,43 +1,43 @@
 _id: b87f53a7accc3245
-_key: '!items!b87f53a7accc3245'
+_key: '!effects!b87f53a7accc3245'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: b87f53a7accc3245
-    _key: '!items.effects!b87f53a7accc3245.b87f53a7accc3245'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.68
-    img: systems/teriock/src/icons/properties/spider-silk.webp
-    name: Spider Silk
-    system:
-      automations:
-        parameterChanges:
-          _id: parameterChanges
-          changes:
-            - key: system.av.bonus
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: parent
-              time: normal
-              value: '1'
-          type: changes
-      competence:
-        raw: 0
-      description: >-
-        <p>@L[Category:Clothing]{Clothing} that is <b>[[lookup name
-        style=lc]]</b> has its @L[Core:Armor Class]{AV} increased by 1 even if
-        it is not @L[Category:Armor]{armor}.</p>
-      form: intrinsic
-      identifier: spider-silk
-      material: true
-    type: property
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/properties/spider-silk.webp
 name: Spider Silk
-type: wrapper
+system:
+  automations:
+    parameterChanges:
+      _id: parameterChanges
+      changes:
+        - key: system.av.bonus
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: parent
+          type: upgrade
+          value: '1'
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 0
+        - 1
+      type: changes
+  competence:
+    raw: 0
+  description: >-
+    <p>@L[Category:Clothing]{Clothing} that is <b>[[lookup name style=lc]]</b>
+    has its @L[Core:Armor Class]{AV} increased by 1 even if it is not
+    @L[Category:Armor]{armor}.</p>
+  form: intrinsic
+  identifier: spider-silk
+  mundane: false
+transfer: true
+type: property

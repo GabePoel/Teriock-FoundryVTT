@@ -1,7 +1,7 @@
 _id: a14fd6f72d42a432
 _key: '!items!a14fd6f72d42a432'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.64
@@ -9,11 +9,11 @@ effects:
   - _id: cumbersome000000
     _key: '!items.effects!a14fd6f72d42a432.cumbersome000000'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.eac47e503515cd7d
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.eac47e503515cd7d
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/properties/cumbersome.webp
     name: Cumbersome
     system:
@@ -23,11 +23,11 @@ effects:
           _id: parameterChanges
           changes:
             - key: system.encumbranceLevel
-              mode: 2
+              phase: normal
               priority: 10
               qualifier: '1'
               target: Actor
-              time: normal
+              type: add
               value: '1'
           competencies:
             - 0
@@ -55,15 +55,16 @@ effects:
       form: flaw
       identifier: cumbersome
       modifiesActor: true
+    transfer: true
     type: property
   - _id: missile000000000
     _key: '!items.effects!a14fd6f72d42a432.missile000000000'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.b528592e5a4583e3
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.b528592e5a4583e3
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/properties/missile.webp
     name: Missile
     system:
@@ -72,11 +73,11 @@ effects:
           _id: parameterChanges
           changes:
             - key: system.range.melee
-              mode: 5
+              phase: normal
               priority: 10
               qualifier: '1'
               target: parent
-              time: normal
+              type: override
               value: 'false'
           competencies:
             - 0
@@ -97,15 +98,99 @@ effects:
       form: flaw
       identifier: missile
       mundane: true
+    transfer: true
     type: property
-  - _id: w55HTaazw873jxOr
-    _key: '!items.effects!a14fd6f72d42a432.w55HTaazw873jxOr'
+  - _id: PONgej6hhXAitw8j
+    _key: '!items.effects!a14fd6f72d42a432.PONgej6hhXAitw8j'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.87e86f2640702582
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.61fbeeda5169ef73
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/properties/thrown.webp
+    name: Thrown
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>A weapon with this property can be tossed to make a
+        @L[Property:Ranged]{ranged} attack.</p>
+      form: intrinsic
+      identifier: thrown
+      mundane: true
+    transfer: true
+    type: property
+  - _id: unblockable00000
+    _key: '!items.effects!a14fd6f72d42a432.unblockable00000'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.7de0d6d87ef04c0b
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/properties/unblockable.webp
+    name: Unblockable
+    system:
+      automations:
+        parameterChanges:
+          _id: parameterChanges
+          changes:
+            - key: system.piercing.raw
+              phase: normal
+              priority: 10
+              qualifier: '1'
+              target: parent
+              type: upgrade
+              value: '2'
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 0
+            - 1
+          type: changes
+      competence:
+        raw: 0
+      description: <p>An item with this property is always @L[Keyword:UB]{UB}.</p>
+      form: intrinsic
+      identifier: unblockable
+      mundane: true
+    transfer: true
+    type: property
+  - _id: wep0000000000000
+    _key: '!items.effects!a14fd6f72d42a432.wep0000000000000'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.891de334396620e1
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/properties/weapon.webp
+    name: Weapon
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
+        @L[Category:Attack abilities]{attack}.</p>
+      form: intrinsic
+      identifier: weapon
+      mundane: true
+    transfer: true
+    type: property
+  - _id: p46y1qYrQwMzdBSa
+    _key: '!items.effects!a14fd6f72d42a432.p46y1qYrQwMzdBSa'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.87e86f2640702582
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/properties/ranged.webp
     name: Ranged
     system:
@@ -115,11 +200,11 @@ effects:
           _id: parameterChanges
           changes:
             - key: system.range.ranged
-              mode: 5
+              phase: normal
               priority: 10
               qualifier: '1'
               target: parent
-              time: normal
+              type: override
               value: 'true'
           competencies:
             - 0
@@ -148,86 +233,7 @@ effects:
       form: intrinsic
       identifier: ranged
       mundane: true
-    type: property
-  - _id: PONgej6hhXAitw8j
-    _key: '!items.effects!a14fd6f72d42a432.PONgej6hhXAitw8j'
-    _stats:
-      compendiumSource: Compendium.teriock.properties.Item.61fbeeda5169ef73
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.64
-    img: systems/teriock/src/icons/properties/thrown.webp
-    name: Thrown
-    system:
-      competence:
-        raw: 0
-      description: >-
-        <p>A weapon with this property can be tossed to make a
-        @L[Property:Ranged]{ranged} attack.</p>
-      form: intrinsic
-      identifier: thrown
-      mundane: true
-    type: property
-  - _id: unblockable00000
-    _key: '!items.effects!a14fd6f72d42a432.unblockable00000'
-    _stats:
-      compendiumSource: Compendium.teriock.properties.Item.7de0d6d87ef04c0b
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/properties/unblockable.webp
-    name: Unblockable
-    system:
-      automations:
-        parameterChanges:
-          _id: parameterChanges
-          changes:
-            - key: system.piercing.raw
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: parent
-              time: normal
-              value: '2'
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 0
-            - 1
-          type: changes
-      competence:
-        raw: 0
-      description: <p>An item with this property is always @L[Keyword:UB]{UB}.</p>
-      form: intrinsic
-      identifier: unblockable
-      mundane: true
-    type: property
-  - _id: wep0000000000000
-    _key: '!items.effects!a14fd6f72d42a432.wep0000000000000'
-    _stats:
-      compendiumSource: Compendium.teriock.properties.Item.891de334396620e1
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.63
-    img: systems/teriock/src/icons/properties/weapon.webp
-    name: Weapon
-    system:
-      competence:
-        raw: 0
-      description: >-
-        <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-        @L[Category:Attack abilities]{attack}.</p>
-      form: intrinsic
-      identifier: weapon
-      mundane: true
+    transfer: true
     type: property
 folder: 87e86f2640702582
 img: systems/teriock/src/icons/equipment/boulder.webp

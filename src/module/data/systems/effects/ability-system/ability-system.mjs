@@ -1,6 +1,6 @@
 import { costOptions } from "../../../../constants/options/cost-options.mjs";
 import { AbilityExecution } from "../../../../executions/document-executions/_module.mjs";
-import { mix } from "../../../../helpers/utils.mjs";
+import { mix } from "../../../../helpers/construction.mjs";
 import { AbilitySettingsModel } from "../../../models/settings-models/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import * as shared from "../../../shared/mixins/_module.mjs";
@@ -77,7 +77,7 @@ export default class AbilitySystem extends mix(
       automations.ChangesAutomation,
       automations.TradecraftAutomation,
       automations.CombatExpirationAutomation,
-      automations.CommonImpactsAutomation,
+      automations.CommonOutcomesAutomation,
       automations.DurationAutomation,
       automations.FeatAutomation,
       automations.HacksAutomation,
@@ -112,6 +112,11 @@ export default class AbilitySystem extends mix(
   }
 
   /** @inheritDoc */
+  get SettingsFlagsDataModel() {
+    return AbilitySettingsModel;
+  }
+
+  /** @inheritDoc */
   get _nameTags() {
     const tags = [];
     for (const [k, v] of Object.entries(TERIOCK.options.cost.tweaks)) {
@@ -120,25 +125,20 @@ export default class AbilitySystem extends mix(
       }
     }
     if (this.grantOnly) {
-      tags.push(game.i18n.localize("TERIOCK.SYSTEMS.Ability.NAME.granted"));
+      tags.push(_loc("TERIOCK.SYSTEMS.Ability.NAME.granted"));
     }
     return [...tags, ...super._nameTags];
-  }
-
-  /** @inheritDoc */
-  get _settingsFlagsDataModel() {
-    return AbilitySettingsModel;
   }
 
   /** @inheritDoc */
   get displayFields() {
     const fields = [
       {
-        button: game.i18n.localize(
+        button: _loc(
           "TERIOCK.SYSTEMS.Ability.FIELDS.elderSorceryIncant.button",
         ),
         classes: TERIOCK.display.panel.classes.elderSorcery,
-        label: game.i18n.format(
+        label: _loc(
           "TERIOCK.SYSTEMS.Ability.FIELDS.elderSorceryIncant.elements",
           { elements: this.elementString },
         ),
@@ -218,9 +218,7 @@ export default class AbilitySystem extends mix(
             action: "updatePaths",
             paths:
               "system.upgrades.score.attribute system.upgrades.score.value",
-            title: game.i18n.localize(
-              "TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.score.update",
-            ),
+            title: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.score.update"),
             icon: TERIOCK.display.icons.ui.numerical,
           },
           editable: false,
@@ -235,7 +233,7 @@ export default class AbilitySystem extends mix(
             action: "updatePaths",
             paths:
               "system.upgrades.competence.attribute system.upgrades.competence.value",
-            title: game.i18n.localize(
+            title: _loc(
               "TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.competence.update",
             ),
             icon: TERIOCK.display.icons.competence.fluent,
@@ -282,15 +280,15 @@ export default class AbilitySystem extends mix(
     );
     if (this.isBasic) {
       icons.push({
-        icon: TERIOCK.display.icons.ui.locked,
         action: "toggleDisableLocked",
-        tooltip: game.i18n.localize("TERIOCK.SYSTEMS.Ability.EMBED.locked"),
-        callback: () => {
+        icon: TERIOCK.display.icons.ui.locked,
+        onClick: () => {
           ui.notifications.error("TERIOCK.SYSTEMS.Ability.EMBED.basic", {
             localize: true,
           });
         },
-        condition: this.basic,
+        tooltip: _loc("TERIOCK.SYSTEMS.Ability.EMBED.locked"),
+        visible: this.basic,
       });
     }
     if (
@@ -350,7 +348,7 @@ export default class AbilitySystem extends mix(
     return Array.from(this.targets)
       .map((t) => TERIOCK.options.ability.targets[t])
       .sort((a, b) => a.localeCompare(b))
-      .join(game.i18n.localize("TERIOCK.SYSTEMS.Base.EMBED.valueSeparator"));
+      .join(_loc("TERIOCK.SYSTEMS.Base.EMBED.valueSeparator"));
   }
 
   /** @inheritDoc */
@@ -361,7 +359,7 @@ export default class AbilitySystem extends mix(
   /** @inheritDoc */
   get useText() {
     if (this.spell) {
-      return game.i18n.format("TERIOCK.SYSTEMS.Ability.USAGE.cast", {
+      return _loc("TERIOCK.SYSTEMS.Ability.USAGE.cast", {
         value: this.parent.name,
       });
     }

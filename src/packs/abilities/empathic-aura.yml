@@ -1,108 +1,101 @@
 _id: c9897680878187fb
-_key: '!items!c9897680878187fb'
+_key: '!effects!c9897680878187fb'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: c9897680878187fb
-    _key: '!items.effects!c9897680878187fb.c9897680878187fb'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/empathic-aura.webp
-    name: Empathic Aura
-    system:
-      automations:
-        1728b3a84ea27844:
-          _id: 1728b3a84ea27844
-          common:
-            - heal
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: common
-        29b275994cf9f5b1:
-          _id: 29b275994cf9f5b1
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: 1d6[magic]
-          heighten:
-            - 1
-            - 0
-          merge: true
-          roll: damage
-          type: roll
-      class: paladin
-      competence:
-        raw: 0
-      costs:
-        primary:
-          hp:
-            formula: 1d4
-            type: formula
-          mp:
-            formula: '1'
-            type: formula
-      delivery: aura
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - healing
-        - regeneration
-        - damaging
-      elements:
-        - nature
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: unp
-      form: normal
-      identifier: empathic-aura
-      interaction: feat
-      maneuver: active
-      overview:
-        base: >-
-          <p>As you execute [[lookup name]], choose either "damage" or
-          "healing". The effect varies depending on what you choose. [[lookup
-          name]] only counts as a @L[Category:Damaging effects]{damaging effect}
-          if you choose "damage" and only as a @L[Category:Healing
-          effects]{healing effect} if you choose "healing". <br>If you do not
-          take any damage before the start of your next @L[Core:Turns]{turn},
-          you regain the @L[Core:Hit Points and Mana Points]{HP} you spent on
-          [[lookup name]]. This counts as a @L[Category:Regeneration
-          effects]{regeneration effect} and a @L[Category:Healing
-          effects]{healing effect}. This is the only part of [[lookup name]]
-          that counts as a @L[Category:Regeneration effects]{regeneration
-          effect}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - divine
-      range:
-        raw: '10'
-        unit: ft
-      results:
-        fail: >-
-          <p>Deal [[/damage 1d6[magic]]] @L[Core:Damage]{damage} to target or
-          @L[Core:Healing]{heal} them (depending on what you chose).</p>
-      skill: true
-      standard: true
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/empathic-aura.webp
 name: Empathic Aura
-type: wrapper
+system:
+  automations:
+    1728b3a84ea27844:
+      _id: 1728b3a84ea27844
+      common:
+        - null
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 1
+        - 0
+      type: common
+    29b275994cf9f5b1:
+      _id: 29b275994cf9f5b1
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: 1d6[magic]
+      heighten:
+        - 1
+        - 0
+      impact: damage
+      merge: true
+      type: roll
+  class: paladin
+  competence:
+    raw: 0
+  costs:
+    primary:
+      hp:
+        formula: 1d4
+        type: formula
+      mp:
+        formula: '1'
+        type: formula
+  delivery: aura
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - healing
+    - regeneration
+    - damaging
+  elements:
+    - nature
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: unp
+  form: normal
+  identifier: empathic-aura
+  interaction: feat
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>As you execute [[lookup name]], choose either "damage" or "healing".
+      The effect varies depending on what you choose. [[lookup name]] only
+      counts as a @L[Category:Damaging effects]{damaging effect} if you choose
+      "damage" and only as a @L[Category:Healing effects]{healing effect} if you
+      choose "healing". <br>If you do not take any damage before the start of
+      your next @L[Core:Turns]{turn}, you regain the @L[Core:Hit Points and Mana
+      Points]{HP} you spent on [[lookup name]]. This counts as a
+      @L[Category:Regeneration effects]{regeneration effect} and a
+      @L[Category:Healing effects]{healing effect}. This is the only part of
+      [[lookup name]] that counts as a @L[Category:Regeneration
+      effects]{regeneration effect}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - divine
+  range:
+    raw: '10'
+    unit: ft
+  results:
+    fail: >-
+      <p>Deal [[/damage 1d6[magic]]] @L[Core:Damage]{damage} to target or
+      @L[Core:Healing]{heal} them (depending on what you chose).</p>
+  skill: true
+  standard: true
+  targets:
+    - creature
+transfer: true
+type: ability

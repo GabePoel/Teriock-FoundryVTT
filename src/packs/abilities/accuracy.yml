@@ -1,69 +1,63 @@
 _id: 6c02f2ec8c3f52a4
-_key: '!items!6c02f2ec8c3f52a4'
+_key: '!effects!6c02f2ec8c3f52a4'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 6c02f2ec8c3f52a4
-    _key: '!items.effects!6c02f2ec8c3f52a4.6c02f2ec8c3f52a4'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/accuracy.webp
-    name: Accuracy
-    system:
-      class: archer
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        triggers:
-          - movement
-        unit: unlimited
-      endCondition: <p>You move or are moved.</p>
-      executionTime: a2
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: accuracy
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>You aim your weapon with deadly precision, causing
-          @L[Category:Weapon delivery abilities]{weapon attacks} you make to be
-          @L[Keyword:Warded]{warded}.</p>
-        fluent: >-
-          <p>If the @L[Category:Weapon delivery abilities]{weapon attack} is a
-          @L[Category:Ranged equipment]{ranged attack}, then its range is
-          instead tripled.</p>
-        proficient: >-
-          <p>If the @L[Category:Weapon delivery abilities]{weapon attack} is a
-          @L[Category:Ranged equipment]{ranged attack}, then its range is
-          doubled.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      requirements: >-
-        <p>You must remain stationary until you make the
-        @L[Keyword:Warded]{warded} @L[Category:Attack abilities]{attack}.</p>
-      skill: true
-      standard: true
-      sustained: true
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/accuracy.webp
 name: Accuracy
-type: wrapper
+system:
+  class: archer
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    triggers:
+      - movement
+    unit: unlimited
+  endCondition: <p>You move or are moved.</p>
+  executionTime:
+    base: a2
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: accuracy
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>You aim your weapon with deadly precision, causing @L[Category:Weapon
+      delivery abilities]{weapon attacks} you make to be
+      @L[Keyword:Warded]{warded}.</p>
+    fluent: >-
+      <p>If the @L[Category:Weapon delivery abilities]{weapon attack} is a
+      @L[Category:Ranged equipment]{ranged attack}, then its range is instead
+      tripled.</p>
+    proficient: >-
+      <p>If the @L[Category:Weapon delivery abilities]{weapon attack} is a
+      @L[Category:Ranged equipment]{ranged attack}, then its range is
+      doubled.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  requirements: >-
+    <p>You must remain stationary until you make the @L[Keyword:Warded]{warded}
+    @L[Category:Attack abilities]{attack}.</p>
+  skill: true
+  standard: true
+  sustained: true
+  targets:
+    - self
+transfer: true
+type: ability

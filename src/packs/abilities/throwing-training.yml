@@ -1,78 +1,75 @@
 _id: e3d01d3859cf7b5d
-_key: '!items!e3d01d3859cf7b5d'
+_key: '!effects!e3d01d3859cf7b5d'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: e3d01d3859cf7b5d
-    _key: '!items.effects!e3d01d3859cf7b5d.e3d01d3859cf7b5d'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/throwing-training.webp
-    name: Throwing Training
-    system:
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.equipmentChanges.upgrades.properties.thrown.av0
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: 'true'
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: changes
-      class: corsair
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: throwing-training
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>All @L[Category:Thrown equipment]{thrown}
-          @L[Category:Weapons]{weapons} are @L[Property:AV0]{AV0} for you.</p>
-        fluent: >-
-          <p>Instead, the range of all @L[Category:Thrown equipment]{thrown}
-          @L[Category:Weapons]{weapons} you use is tripled.</p>
-        proficient: >-
-          <p>The range of all @L[Category:Thrown equipment]{thrown}
-          @L[Category:Weapons]{weapons} you use is doubled.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/throwing-training.webp
 name: Throwing Training
-type: wrapper
+system:
+  automations:
+    e789ed5e109ebd1a:
+      _id: e789ed5e109ebd1a
+      changes:
+        - key: system.equipmentChanges.upgrades.properties.thrown.av0
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: Actor
+          type: upgrade
+          value: 'true'
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: changes
+  class: corsair
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: unlimited
+  executionTime:
+    base: passive
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: throwing-training
+  interaction: manifest
+  maneuver: passive
+  mundane: false
+  overview:
+    base: >-
+      <p>All @L[Category:Thrown equipment]{thrown} @L[Category:Weapons]{weapons}
+      are @L[Property:AV0]{AV0} for you.</p>
+    fluent: >-
+      <p>Instead, the range of all @L[Category:Thrown equipment]{thrown}
+      @L[Category:Weapons]{weapons} you use is tripled.</p>
+    proficient: >-
+      <p>The range of all @L[Category:Thrown equipment]{thrown}
+      @L[Category:Weapons]{weapons} you use is doubled.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  skill: true
+  standard: true
+  targets:
+    - self
+transfer: true
+type: ability

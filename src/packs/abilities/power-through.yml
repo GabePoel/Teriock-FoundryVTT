@@ -1,81 +1,75 @@
 _id: c6ef7bdb1f16f36b
-_key: '!items!c6ef7bdb1f16f36b'
+_key: '!effects!c6ef7bdb1f16f36b'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: c6ef7bdb1f16f36b
-    _key: '!items.effects!c6ef7bdb1f16f36b.c6ef7bdb1f16f36b'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/power-through.webp
-    name: Power Through
-    system:
-      automations:
-        d635eb44dba086dd:
-          _id: d635eb44dba086dd
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: combatExpiration
-          what:
-            roll: 2d4kh1
-            threshold: 4
-            type: forced
-          when:
-            skip: 0
-            time: end
-            trigger: turn
-          who:
-            type: everyone
-      basic: true
-      competence:
-        raw: 0
-      costs:
-        primary:
-          hp:
-            formula: '5'
-            type: formula
-      delivery: weapon
-      duration:
-        raw: '5'
-        unit: second
-      endCondition: <p>The turn ends.</p>
-      executionTime: a0
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: intrinsic
-      identifier: power-through
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>You can treat a type of @L[Damage:Hack]{hack damage} you've taken
-          as though it is one step lower.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: contact
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/power-through.webp
 name: Power Through
-type: wrapper
+system:
+  automations:
+    d635eb44dba086dd:
+      _id: d635eb44dba086dd
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: combatExpiration
+      what:
+        roll: 2d4kh1
+        threshold: 4
+        type: forced
+      when:
+        skip: 0
+        time: end
+        trigger: turn
+      who:
+        type: everyone
+  basic: true
+  competence:
+    raw: 0
+  costs:
+    primary:
+      hp:
+        formula: '5'
+        type: formula
+  delivery: weapon
+  duration:
+    raw: '5'
+    unit: second
+  endCondition: <p>The turn ends.</p>
+  executionTime:
+    base: a0
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: intrinsic
+  identifier: power-through
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>You can treat a type of @L[Damage:Hack]{hack damage} you've taken as
+      though it is one step lower.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: contact
+  targets:
+    - creature
+transfer: true
+type: ability

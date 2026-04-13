@@ -1,42 +1,19 @@
 _id: 45a7794fb181560c
 _key: '!items!45a7794fb181560c'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.65
 effects:
-  - _id: 7aP9kWMx4gS0Lnkp
-    _key: '!items.effects!45a7794fb181560c.7aP9kWMx4gS0Lnkp'
-    _stats:
-      compendiumSource: Compendium.teriock.properties.Item.1b0ae28f7a0a0448
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.42
-    img: systems/teriock/src/icons/properties/durable.webp
-    name: Durable
-    system:
-      _sup: k1kdbn6dX7zSRgwb
-      competence:
-        raw: 0
-      description: >-
-        <p>An item that is <b>[[lookup name style=lc]]</b> is
-        @L[Keyword:Resistance]{resistant} to becoming
-        @L[Property:Shattered]{shattered} and effects that would render it
-        @L[Property:Destroyed]{destroyed} cause it to be
-        @L[Property:Shattered]{shattered} instead.</p>
-      form: intrinsic
-      identifier: durable
-    type: property
   - _id: k1kdbn6dX7zSRgwb
     _key: '!items.effects!45a7794fb181560c.k1kdbn6dX7zSRgwb'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.c7e6ac1b9d2cc5ba
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.c7e6ac1b9d2cc5ba
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/properties/mithril.webp
     name: Mithril
     system:
@@ -45,18 +22,18 @@ effects:
           _id: parameterChanges
           changes:
             - key: system.weight.raw
-              mode: 1
+              phase: normal
               priority: 10
               qualifier: '1'
               target: parent
-              time: normal
+              type: multiply
               value: '0.5'
             - key: system.minStr.raw
-              mode: 2
+              phase: normal
               priority: 10
               qualifier: '1'
               target: parent
-              time: normal
+              type: add
               value: '-1'
           competencies:
             - 0
@@ -79,15 +56,41 @@ effects:
       form: intrinsic
       identifier: mithril
       material: true
+    transfer: true
     type: property
-  - _id: eck1vu0CBDPaYE9Q
-    _key: '!items.effects!45a7794fb181560c.eck1vu0CBDPaYE9Q'
+  - _id: c2RqUzf31vo3FFX1
+    _key: '!items.effects!45a7794fb181560c.c2RqUzf31vo3FFX1'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.752e9d67325b0faf
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.1b0ae28f7a0a0448
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/properties/durable.webp
+    name: Durable
+    system:
+      _sup: k1kdbn6dX7zSRgwb
+      competence:
+        raw: 0
+      description: >-
+        <p>An item that is <b>[[lookup name style=lc]]</b> is
+        @L[Keyword:Resistance]{resistant} to becoming
+        @L[Property:Shattered]{shattered} and effects that would render it
+        @L[Property:Destroyed]{destroyed} cause it to be
+        @L[Property:Shattered]{shattered} instead.</p>
+      form: intrinsic
+      identifier: durable
+      mundane: false
+    transfer: true
+    type: property
+  - _id: corOUe1YJV6SdtGt
+    _key: '!items.effects!45a7794fb181560c.corOUe1YJV6SdtGt'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.752e9d67325b0faf
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/properties/unbreachable.webp
     name: Unbreachable
     system:
@@ -97,11 +100,11 @@ effects:
           _id: parameterChanges
           changes:
             - key: system.av.bonus
-              mode: 4
+              phase: normal
               priority: 10
               qualifier: '@av'
               target: parent
-              time: normal
+              type: upgrade
               value: '1'
           competencies:
             - 0
@@ -122,6 +125,7 @@ effects:
       form: intrinsic
       identifier: unbreachable
       mundane: true
+    transfer: true
     type: property
 folder: 5623dbde63adf484
 img: systems/teriock/src/icons/body-parts/reinforced-mithril-plating.webp

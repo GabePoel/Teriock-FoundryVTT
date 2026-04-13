@@ -1,87 +1,86 @@
 _id: 1590289ddbf253d6
-_key: '!items!1590289ddbf253d6'
+_key: '!effects!1590289ddbf253d6'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 1590289ddbf253d6
-    _key: '!items.effects!1590289ddbf253d6.1590289ddbf253d6'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/remove-charm.webp
-    name: Remove Charm
-    system:
-      automations:
-        6ad96a468d8c3de9:
-          _id: 6ad96a468d8c3de9
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: remove
-          status: charmed
-          type: end
-        e56d4fc4e7bf6ac0:
-          _id: e56d4fc4e7bf6ac0
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: remove
-          status: charmed
-          type: status
-      class: paladin
-      competence:
-        raw: 0
-      costs:
-        components:
-          verbal:
-            type: tag
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: hand
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: remove-charm
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - divine
-      range:
-        unit: contact
-      results:
-        hit: >-
-          <p>Target is no longer @L[Condition:Charmed]{charmed} and any other
-          @L[Category:Mental effects]{mental effects} on them
-          @L[Core:Fizzles]{fizzles}.</p>
-      skill: true
-      standard: true
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/remove-charm.webp
 name: Remove Charm
-type: wrapper
+system:
+  automations:
+    6ad96a468d8c3de9:
+      _id: 6ad96a468d8c3de9
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 1
+        - 0
+      relation: remove
+      status: charmed
+      type: end
+    e56d4fc4e7bf6ac0:
+      _id: e56d4fc4e7bf6ac0
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: remove
+      status: charmed
+      target: false
+      type: status
+  class: paladin
+  competence:
+    raw: 0
+  costs:
+    components:
+      verbal:
+        type: tag
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: hand
+  duration:
+    raw: '0'
+    unit: instant
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: remove-charm
+  interaction: attack
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - divine
+  range:
+    unit: contact
+  results:
+    hit: >-
+      <p>Target is no longer @L[Condition:Charmed]{charmed} and any other
+      @L[Category:Mental effects]{mental effects} on them
+      @L[Core:Fizzles]{fizzles}.</p>
+  skill: true
+  standard: true
+  targets:
+    - creature
+transfer: true
+type: ability

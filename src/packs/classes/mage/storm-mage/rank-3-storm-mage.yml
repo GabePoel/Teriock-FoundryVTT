@@ -1,7 +1,7 @@
 _id: 7d54cce2fb2443db
 _key: '!items!7d54cce2fb2443db'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.23
@@ -9,11 +9,11 @@ effects:
   - _id: BVSGkZaYwHz2UPKP
     _key: '!items.effects!7d54cce2fb2443db.BVSGkZaYwHz2UPKP'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.6ae94df41a06b229
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.6ae94df41a06b229
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: combat
@@ -52,15 +52,16 @@ effects:
       skill: true
       targets:
         - self
+    transfer: true
     type: ability
   - _id: j4OqsC7vHMFL273K
     _key: '!items.effects!7d54cce2fb2443db.j4OqsC7vHMFL273K'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.e5d1e2700eada085
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.e5d1e2700eada085
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: combat
@@ -106,78 +107,16 @@ effects:
       standard: true
       targets:
         - self
-    type: ability
-  - _id: 0TFJOmAPQbkQotsr
-    _key: '!items.effects!7d54cce2fb2443db.0TFJOmAPQbkQotsr'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.05be51aae1ccc8d4
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/bouncy-casting.webp
-    name: Bouncy Casting
-    system:
-      _sup: xizvvncphqwGSJXe
-      class: stormMage
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: self
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - displacement
-      executionTime: r0
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: bouncy-casting
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>You may choose a new target for the @L[Category:Spells]{spell}. All
-          @L[Core:Attack Interaction]{attack rolls}, @L[Core:Feat
-          Interaction]{feat saves}, and other dice rolls or effects are
-          re-rolled or re-calculated as if the @L[Category:Spells]{spell} was
-          cast on the new target. The range of the @L[Category:Spells]{spell}
-          remains unchanged, but is calculated from the new target instead of
-          from you.</p><div class="note"><b>Note:</b> If the
-          @L[Category:Spells]{spell} was @L[Core:Heightening]{heightened}, or
-          you spent any other @L[Category:Cost spells]{costs} on the
-          @L[Category:Spells]{spell}, those remain unchanged and do not need to
-          be re-spent.</div>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - spell
-      trigger: >-
-        <p>The target of a @L[Category:Spells]{spell} does not get affected by
-        your @L[Category:Spells]{spell}.</p>
+    transfer: true
     type: ability
   - _id: zxnrJAzQWxbgpBqf
     _key: '!items.effects!7d54cce2fb2443db.zxnrJAzQWxbgpBqf'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.388e8e4ac752e0d8
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.388e8e4ac752e0d8
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: support
@@ -190,25 +129,25 @@ effects:
           _id: f025905e157ac261
           changes:
             - key: system.competence.raw
-              mode: 4
+              phase: fluency
               priority: 10
               qualifier: '@identifier.elder-sorcery-creation'
               target: ability
-              time: fluency
+              type: upgrade
               value: '2'
             - key: system.competence.raw
-              mode: 4
+              phase: fluency
               priority: 10
               qualifier: '@identifier.celestial-elder-sorcery-words'
               target: ability
-              time: fluency
+              type: upgrade
               value: '2'
             - key: system.competence.raw
-              mode: 4
+              phase: fluency
               priority: 10
               qualifier: '@identifier.storm-elder-sorcery-words'
               target: ability
-              time: fluency
+              type: upgrade
               value: '2'
           competencies:
             - 1
@@ -279,214 +218,16 @@ effects:
       standard: true
       targets:
         - self
-    type: ability
-  - _id: LU6fw1OjbOfF64GL
-    _key: '!items.effects!7d54cce2fb2443db.LU6fw1OjbOfF64GL'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.d496e9ad1d6603e7
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/illusive-casting.webp
-    name: Illusive Casting
-    system:
-      _sup: xizvvncphqwGSJXe
-      class: stormMage
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: self
-      duration:
-        raw: '24'
-        unit: hour
-      effectTypes:
-        - mental
-      endCondition: >-
-        <p>You ar no longer casting the triggering
-        @L[Category:Spells]{spell}.</p>
-      executionTime: r0
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: illusive-casting
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>The triggering @L[Category:Spells]{spell} appears to be a different
-          @L[Category:Abilities]{ability} of the same @L[Category:Delivery
-          abilities]{delivery}. This is a @L[Keyword:Illusionary]{minor
-          illusion}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - spell
-      trigger: <p>You are casting a @L[Category:Spells]{spell}.</p>
-    type: ability
-  - _id: aojUxv17gVm6riy8
-    _key: '!items.effects!7d54cce2fb2443db.aojUxv17gVm6riy8'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.45d262c72421007d
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    flags:
-      teriock:
-        dontConsume: false
-    img: systems/teriock/src/icons/abilities/reflect-magic.webp
-    name: Reflect Magic
-    system:
-      _sup: BVSGkZaYwHz2UPKP
-      automations:
-        ItjOVKhyHTBLMQ20:
-          _id: ItjOVKhyHTBLMQ20
-          competencies:
-            - 0
-            - 1
-            - 2
-          distance: 10 + 15 * @h
-          heighten:
-            - 0
-            - 1
-          movable: false
-          t: circle
-          type: template
-      class: stormMage
-      competence:
-        raw: 0
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: aura
-      duration:
-        raw: '0'
-        unit: instant
-      elements:
-        - storm
-      executionTime: r1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the range of [[lookup
-        name]] increases by 15 feet.</p>
-      identifier: reflect-magic
-      interaction: manifest
-      invoked: true
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>Target @L[Category:Conjured spells]{spell}
-          @L[Core:Fizzles]{fizzles}, as do any others cast simultaneously within
-          range. Their casters take the spells' effects instead.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        raw: '10'
-        unit: ft
-      requirements: <p>Target is a @L[Category:Conjured spells]{conjured spell}.</p>
-      rotator: true
-      spell: true
-      standard: true
-      targets:
-        - spell
-      trigger: >-
-        <p>A @L[Category:Conjured spells]{conjured spell} is used within
-        range.</p>
-    type: ability
-  - _id: Pk68K8LvL0XdAGLz
-    _key: '!items.effects!7d54cce2fb2443db.Pk68K8LvL0XdAGLz'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.ea1ecd00bc4430e1
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/spell-strike.webp
-    name: Spell Strike
-    system:
-      _sup: tbrnvDL0hRSTxu73
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: weapon
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: r0
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: spell-strike
-      interaction: manifest
-      limitation: >-
-        <p>Only usable with @L[Ability:Lightning Ray]{Lightning Ray} and
-        @L[Ability:Ice Ball]{Ice Ball}.</p>
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>Target takes the "on hit" effect of a @L[Category:Missile delivery
-          spells]{missile spell} that you are @L[Core:Proficiency
-          Bonus]{proficient} in. If the triggering hit was a critical hit, then
-          the target takes the "on critical hit" effect instead.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      skill: true
-      standard: true
-      targets:
-        - creature
-      trigger: >-
-        <p>You have just landed a hit with a @L[Category:Weapon delivery
-        abilities]{weapon} or @L[Category:Bite delivery abilities]{bite}
-        @L[Category:Attack abilities]{attack} on another creature and the effect
-        has successfully applied.</p>
+    transfer: true
     type: ability
   - _id: xizvvncphqwGSJXe
     _key: '!items.effects!7d54cce2fb2443db.xizvvncphqwGSJXe'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.64d640170188e34d
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.64d640170188e34d
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: support
@@ -541,15 +282,16 @@ effects:
         competence:
           attribute: int
           value: 1
+    transfer: true
     type: ability
   - _id: eNyO14VyiXUtWM5L
     _key: '!items.effects!7d54cce2fb2443db.eNyO14VyiXUtWM5L'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.e7535d6612f7bddd
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.e7535d6612f7bddd
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: combat
@@ -561,11 +303,11 @@ effects:
           _id: f025905e157ac261
           changes:
             - key: system.competence.raw
-              mode: 4
+              phase: fluency
               priority: 10
               qualifier: '@identifier.storm-rotators'
               target: ability
-              time: fluency
+              type: upgrade
               value: '2'
           competencies:
             - 1
@@ -613,15 +355,16 @@ effects:
       standard: true
       targets:
         - self
+    transfer: true
     type: ability
   - _id: tbrnvDL0hRSTxu73
     _key: '!items.effects!7d54cce2fb2443db.tbrnvDL0hRSTxu73'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.21bdfdd1792ee097
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.21bdfdd1792ee097
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: support
@@ -659,15 +402,16 @@ effects:
       standard: true
       targets:
         - self
+    transfer: true
     type: ability
-  - _id: vsigFigSZyZlUNmP
-    _key: '!items.effects!7d54cce2fb2443db.vsigFigSZyZlUNmP'
+  - _id: 3F97HQBgj3xyW81F
+    _key: '!items.effects!7d54cce2fb2443db.3F97HQBgj3xyW81F'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.5fcca28d2423539e
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.5fcca28d2423539e
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/teleport.webp
     name: Teleport
     system:
@@ -694,7 +438,11 @@ effects:
         - longRange
       elements:
         - storm
-      executionTime: 10 Minutes
+      executionTime:
+        base: 10 Minutes
+        slow:
+          raw: '10'
+          unit: minute
       expansion:
         featSaveAttribute: mov
         range:
@@ -708,6 +456,7 @@ effects:
       interaction: manifest
       invoked: true
       maneuver: slow
+      mundane: false
       overview:
         base: >-
           <p>Target creature is moved to a location you have studied within your
@@ -739,6 +488,286 @@ effects:
       targets:
         - area
         - creature
+    transfer: true
+    type: ability
+  - _id: TpAwHfQSQzGzXdzI
+    _key: '!items.effects!7d54cce2fb2443db.TpAwHfQSQzGzXdzI'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.45d262c72421007d
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/reflect-magic.webp
+    name: Reflect Magic
+    system:
+      _sup: BVSGkZaYwHz2UPKP
+      automations:
+        ItjOVKhyHTBLMQ20:
+          _id: ItjOVKhyHTBLMQ20
+          competencies:
+            - 0
+            - 1
+            - 2
+          distance: 10 + 15 * @h
+          heighten:
+            - 0
+            - 1
+          movable: false
+          t: circle
+          type: template
+      class: stormMage
+      competence:
+        raw: 0
+      costs:
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+        primary:
+          mp:
+            formula: '1'
+            type: formula
+      delivery: aura
+      duration:
+        raw: '0'
+        unit: instant
+      elements:
+        - storm
+      executionTime:
+        base: r1
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, the range of [[lookup
+        name]] increases by 15 feet.</p>
+      identifier: reflect-magic
+      interaction: manifest
+      invoked: true
+      maneuver: reactive
+      mundane: false
+      overview:
+        base: >-
+          <p>Target @L[Category:Conjured spells]{spell}
+          @L[Core:Fizzles]{fizzles}, as do any others cast simultaneously within
+          range. Their casters take the spells' effects instead.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        raw: '10'
+        unit: ft
+      requirements: <p>Target is a @L[Category:Conjured spells]{conjured spell}.</p>
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - spell
+      trigger: >-
+        <p>A @L[Category:Conjured spells]{conjured spell} is used within
+        range.</p>
+    transfer: true
+    type: ability
+  - _id: oVBbGOgblNMe80Rr
+    _key: '!items.effects!7d54cce2fb2443db.oVBbGOgblNMe80Rr'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.05be51aae1ccc8d4
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/bouncy-casting.webp
+    name: Bouncy Casting
+    system:
+      _sup: xizvvncphqwGSJXe
+      class: stormMage
+      competence:
+        raw: 0
+      costs:
+        primary:
+          mp:
+            formula: '1'
+            type: formula
+      delivery: self
+      duration:
+        raw: '0'
+        unit: instant
+      effectTypes:
+        - displacement
+      executionTime:
+        base: r0
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: bouncy-casting
+      interaction: manifest
+      maneuver: reactive
+      mundane: false
+      overview:
+        base: >-
+          <p>You may choose a new target for the @L[Category:Spells]{spell}. All
+          @L[Core:Attack Interaction]{attack rolls}, @L[Core:Feat
+          Interaction]{feat saves}, and other dice rolls or effects are
+          re-rolled or re-calculated as if the @L[Category:Spells]{spell} was
+          cast on the new target. The range of the @L[Category:Spells]{spell}
+          remains unchanged, but is calculated from the new target instead of
+          from you.</p><div class="note"><b>Note:</b> If the
+          @L[Category:Spells]{spell} was @L[Core:Heightening]{heightened}, or
+          you spent any other @L[Category:Cost spells]{costs} on the
+          @L[Category:Spells]{spell}, those remain unchanged and do not need to
+          be re-spent.</div>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - spell
+      trigger: >-
+        <p>The target of a @L[Category:Spells]{spell} does not get affected by
+        your @L[Category:Spells]{spell}.</p>
+    transfer: true
+    type: ability
+  - _id: SWxGRMMjvfNzfqrO
+    _key: '!items.effects!7d54cce2fb2443db.SWxGRMMjvfNzfqrO'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1QM3oXhyj81ZXmp3
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/illusive-casting.webp
+    name: Illusive Casting
+    system:
+      _sup: xizvvncphqwGSJXe
+      class: stormMage
+      competence:
+        raw: 0
+      costs:
+        primary:
+          mp:
+            formula: '1'
+            type: formula
+      delivery: self
+      duration:
+        raw: '24'
+        unit: hour
+      effectTypes:
+        - mental
+      endCondition: >-
+        <p>You ar no longer casting the triggering
+        @L[Category:Spells]{spell}.</p>
+      executionTime:
+        base: r0
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: illusive-casting
+      interaction: manifest
+      maneuver: reactive
+      mundane: false
+      overview:
+        base: >-
+          <p>The triggering @L[Category:Spells]{spell} appears to be a different
+          @L[Category:Abilities]{ability} of the same @L[Category:Delivery
+          abilities]{delivery}. This is a @L[Keyword:Illusionary]{minor
+          illusion}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - spell
+      trigger: <p>You are casting a @L[Category:Spells]{spell}.</p>
+    transfer: true
+    type: ability
+  - _id: 1cWfLgZRJAp3tlLD
+    _key: '!items.effects!7d54cce2fb2443db.1cWfLgZRJAp3tlLD'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.HXidffXqZoxo8wog
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/spell-strike.webp
+    name: Spell Strike
+    system:
+      _sup: tbrnvDL0hRSTxu73
+      competence:
+        raw: 0
+      costs:
+        primary:
+          mp:
+            formula: '1'
+            type: formula
+      delivery: weapon
+      duration:
+        raw: '0'
+        unit: instant
+      executionTime:
+        base: r0
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: spell-strike
+      interaction: manifest
+      limitation: >-
+        <p>Only usable with @L[Ability:Lightning Ray]{Lightning Ray} and
+        @L[Ability:Ice Ball]{Ice Ball}.</p>
+      maneuver: reactive
+      mundane: false
+      overview:
+        base: >-
+          <p>Target takes the "on hit" effect of a @L[Category:Missile delivery
+          spells]{missile spell} that you are @L[Core:Proficiency
+          Bonus]{proficient} in. If the triggering hit was a critical hit, then
+          the target takes the "on critical hit" effect instead.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: contact
+      skill: true
+      standard: true
+      targets:
+        - creature
+      trigger: >-
+        <p>You have just landed a hit with a @L[Category:Weapon delivery
+        abilities]{weapon} or @L[Category:Bite delivery abilities]{bite}
+        @L[Category:Attack abilities]{attack} on another creature and the effect
+        has successfully applied.</p>
+    transfer: true
     type: ability
 folder: df169041e7e45124
 img: systems/teriock/src/icons/ranks/rank-3-storm-mage.webp

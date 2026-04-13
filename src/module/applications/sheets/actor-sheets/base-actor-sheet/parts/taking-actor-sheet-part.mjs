@@ -34,30 +34,25 @@ export default (Base) =>
       if (["damage", "drain"].includes(type)) {
         const field = new fields.NumberField({
           initial: actor.system[stat].morganti ?? 0,
-          label: game.i18n.format(
-            "TERIOCK.SHEETS.Actor.ACTIONS.ApplyMorganti.label",
-            { effect: TERIOCK.options.impact[type]?.label },
-          ),
+          label: _loc("TERIOCK.SHEETS.Actor.ACTIONS.ApplyMorganti.label", {
+            effect: TERIOCK.options.impact[type]?.label,
+          }),
           min: 0,
           integer: true,
-          hint: game.i18n.format(
-            "TERIOCK.SHEETS.Actor.ACTIONS.ApplyMorganti.hint",
-            { effect: TERIOCK.options.impact[type]?.label?.toLowerCase() },
-          ),
+          hint: _loc("TERIOCK.SHEETS.Actor.ACTIONS.ApplyMorganti.hint", {
+            effect: TERIOCK.options.impact[type]?.label?.toLowerCase(),
+          }),
         });
         await TeriockDialog.prompt({
           window: {
-            title: game.i18n.format(
-              "TERIOCK.SHEETS.Actor.ACTIONS.ApplyMorganti.title",
-              { effect: TERIOCK.options.impact[type]?.label },
-            ),
+            title: _loc("TERIOCK.SHEETS.Actor.ACTIONS.ApplyMorganti.title", {
+              effect: TERIOCK.options.impact[type]?.label,
+            }),
             icon: makeIconClass(TERIOCK.options.impact[type].icon, "title"),
           },
           content: field.toFormGroup({}, { name: type }).outerHTML,
           ok: {
-            label: game.i18n.localize(
-              "TERIOCK.SHEETS.Actor.ACTIONS.ApplyMorganti.ok",
-            ),
+            label: _loc("TERIOCK.SHEETS.Actor.ACTIONS.ApplyMorganti.ok"),
             callback: async (_event, button) => {
               let input = button.form.elements.namedItem(type).value;
               if (input) {
@@ -87,10 +82,9 @@ export default (Base) =>
         label: toTitleCase(impact),
         min: 0,
         integer: true,
-        hint: game.i18n.format(
-          "TERIOCK.SHEETS.Actor.ACTIONS.TakeRollable.hint",
-          { effect: TERIOCK.options.impact[impact]?.label?.toLowerCase() },
-        ),
+        hint: _loc("TERIOCK.SHEETS.Actor.ACTIONS.TakeRollable.hint", {
+          effect: TERIOCK.options.impact[impact]?.label?.toLowerCase(),
+        }),
       });
       await TeriockDialog.prompt({
         window: {
@@ -100,9 +94,7 @@ export default (Base) =>
         content: field.toFormGroup({}, { name: impact, placeholder: "0" })
           .outerHTML,
         ok: {
-          label: game.i18n.localize(
-            "TERIOCK.SHEETS.Actor.ACTIONS.TakeRollable.ok",
-          ),
+          label: _loc("TERIOCK.SHEETS.Actor.ACTIONS.TakeRollable.ok"),
           callback: (_event, button) => {
             let input = button.form.elements.namedItem(impact).value ?? "0";
             this.document.system[`take${toTitleCase(impact)}`](Number(input));

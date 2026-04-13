@@ -1,7 +1,7 @@
 _id: 127d950b1eb312bd
 _key: '!actors!127d950b1eb312bd'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.23
@@ -12,75 +12,20 @@ items:
     _key: '!actors.items!127d950b1eb312bd.127d950b1eb312bd'
     _stats:
       compendiumSource: Compendium.teriock.species.Item.127d950b1eb312bd
-      coreVersion: '13'
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     effects:
-      - _id: rXRLpcxTOM4HyrmM
-        _key: >-
-          !actors.items.effects!127d950b1eb312bd.127d950b1eb312bd.rXRLpcxTOM4HyrmM
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.07a0880b230cdb14
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.11.6
-        img: systems/teriock/src/icons/abilities/beastly-strength.webp
-        name: Beastly Strength
-        system:
-          _sup: q8jtGxnO3gaS41Nk
-          class: knight
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: beastly-strength
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          overview:
-            base: >-
-              <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
-              hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
-              Piercing]{Armor piercing} weapons must still be wielded in two
-              hands to be @L[Keyword:Armor Voiding]{AV0}.</div>
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          skill: true
-          standard: true
-          targets:
-            - self
-          upgrades:
-            score:
-              attribute: str
-              value: 1
-        type: ability
       - _id: lkJEbqAlWzGFlyds
         _key: >-
           !actors.items.effects!127d950b1eb312bd.127d950b1eb312bd.lkJEbqAlWzGFlyds
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.0d78f7478e1024cb
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.0d78f7478e1024cb
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/dark-vision.webp
         name: Dark Vision
         system:
@@ -89,11 +34,11 @@ items:
               _id: e789ed5e109ebd1a
               changes:
                 - key: system.senses.dark
-                  mode: 4
+                  phase: normal
                   priority: 10
                   qualifier: '1'
                   target: Actor
-                  time: normal
+                  type: upgrade
                   value: '60'
               competencies:
                 - 0
@@ -110,8 +55,7 @@ items:
             raw: 0
           delivery: self
           duration:
-            raw: '0'
-            unit: unlimited
+            unit: instant
           effectTypes:
             - sensory
           executionTime:
@@ -140,16 +84,17 @@ items:
             unit: self
           targets:
             - self
+        transfer: true
         type: ability
       - _id: wnIjhCudfJ5hHeaY
         _key: >-
           !actors.items.effects!127d950b1eb312bd.127d950b1eb312bd.wnIjhCudfJ5hHeaY
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.cfa6c62d0f29d2ab
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.ElgNURrH9OTECkbk
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/giant-strength.webp
         name: Giant Strength
         system:
@@ -158,8 +103,7 @@ items:
             raw: 0
           delivery: self
           duration:
-            raw: '0'
-            unit: unlimited
+            unit: instant
           executionTime:
             base: passive
             slow:
@@ -194,27 +138,255 @@ items:
             score:
               attribute: str
               value: 3
+        transfer: true
         type: ability
-      - _id: S8oQAm5c8YFhnnOT
+      - _id: knJdJA1YoiglASlt
         _key: >-
-          !actors.items.effects!127d950b1eb312bd.127d950b1eb312bd.S8oQAm5c8YFhnnOT
+          !actors.items.effects!127d950b1eb312bd.127d950b1eb312bd.knJdJA1YoiglASlt
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.54f63d63ae4376a9
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.P5i3FWFMMYPBuVtV
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
-        img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
-        name: Improved Armor Piercing
+          systemVersion: 0.12.0
+        img: systems/teriock/src/icons/abilities/magical-durability.webp
+        name: Magical Durability
         system:
-          _sup: q8jtGxnO3gaS41Nk
-          class: knight
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.protections.immunities.damageTypes
+                  phase: normal
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  type: add
+                  value: mundane
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 1
+                - 0
+              type: changes
           competence:
             raw: 0
           delivery: self
           duration:
-            raw: '0'
-            unit: unlimited
+            unit: instant
+          effectTypes:
+            - immunity
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          identifier: magical-durability
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          overview:
+            base: >-
+              <p>You are @L[Keyword:Immunity]{immune} to
+              @L[Damage:Mundane]{mundane} @L[Core:Damage]{damage}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: r4U8taWuV86kc2To
+        _key: >-
+          !actors.items.effects!127d950b1eb312bd.127d950b1eb312bd.r4U8taWuV86kc2To
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.192c6cfdb6473a4f
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.0
+        img: systems/teriock/src/icons/abilities/mana-regenerating.webp
+        name: Mana Regenerating
+        system:
+          automations:
+            1728b3a84ea27844:
+              _id: 1728b3a84ea27844
+              common:
+                - revive
+                - bag
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: common
+            7OuG6efyOs2VWpp3:
+              _id: 7OuG6efyOs2VWpp3
+              competencies:
+                - 0
+                - 1
+                - 2
+              conditions:
+                absent:
+                  - frozen
+              consumeStatDice: false
+              forHarm: false
+              heighten:
+                - 0
+                - 1
+              trigger: turnStart
+              type: revitalize
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: instant
+          effectTypes:
+            - revival
+            - regeneration
+            - revitalization
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          identifier: mana-regenerating
+          interaction: manifest
+          limitation: >-
+            <p>Can only @L[Core:Revitalizing]{revitalize} @L[Core:Hit Points and
+            Mana Points]{MP} spent on @L[Category:Necromancy element
+            abilities]{necromancy element abilities}.</p>
+          maneuver: passive
+          mundane: false
+          overview:
+            base: >-
+              <p>At the start of each of your @L[Core:Turns]{turns}, you 
+              @L[Core:Revitalizing]{revitalize} and regain that many @L[Core:Hit
+              Points and Mana Points]{MP}. This does <i>not</i> consume your
+              @L[Core:MP]{mana die}. If you were @L[Condition:Dead]{dead} due to
+              @L[Core:Hit Points and Mana Points]{MP} loss, this brings you
+              @L[Condition:Alive]{back to life}. You only
+              @L[Condition:Dead]{die} due to @L[Core:Hit Points and Mana
+              Points]{MP} loss if you start your @L[Core:Turns]{turn} without
+              successfully regenerating @L[Core:Hit Points and Mana
+              Points]{MP}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - primal
+          range:
+            unit: self
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: lPc8ubBmmf3WmeFv
+        _key: >-
+          !actors.items.effects!127d950b1eb312bd.127d950b1eb312bd.lPc8ubBmmf3WmeFv
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.2ce6ac373f19f4dd
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.0
+        img: systems/teriock/src/icons/abilities/necromancy-magic-hexseal.webp
+        name: Necromancy Magic Hexseal
+        system:
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.protections.hexseals.elements
+                  phase: normal
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  type: add
+                  value: necromancy
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 1
+                - 0
+              type: changes
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: instant
+          effectTypes:
+            - hexseal
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          identifier: necromancy-magic-hexseal
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          overview:
+            base: >-
+              <p>You are @L[Keyword:Hexseal]{hexseal} to @L[Category:Magically
+              powered abilities]{magical} @L[Category:Necromancy element
+              abilities]{necromancy abilities}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: B169TTFFsDI7IaD1
+        _key: >-
+          !actors.items.effects!127d950b1eb312bd.127d950b1eb312bd.B169TTFFsDI7IaD1
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.1c52eda8919d34a7
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.0
+        img: systems/teriock/src/icons/abilities/normal-movement.webp
+        name: Normal Movement
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: instant
           executionTime:
             base: passive
             slow:
@@ -225,34 +397,303 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          identifier: improved-armor-piercing
+          identifier: normal-movement
           interaction: manifest
           maneuver: passive
           mundane: false
-          overview:
-            base: >-
-              <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
-              piercing}.</p>
           piercing:
             raw: 0
           powerSources:
             - martial
           range:
             unit: self
-          skill: true
-          standard: true
           targets:
             - self
+          upgrades:
+            score:
+              attribute: mov
+              value: 0
+        transfer: true
         type: ability
-      - _id: q8jtGxnO3gaS41Nk
+      - _id: n7J9TNVyyJZ0I2sL
         _key: >-
-          !actors.items.effects!127d950b1eb312bd.127d950b1eb312bd.q8jtGxnO3gaS41Nk
+          !actors.items.effects!127d950b1eb312bd.127d950b1eb312bd.n7J9TNVyyJZ0I2sL
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.8aa8167e9f40cbb2
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.8249d99c527d09b1
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
+        img: systems/teriock/src/icons/abilities/normal-perception.webp
+        name: Normal Perception
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: instant
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: normal-perception
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: per
+              value: 0
+        transfer: true
+        type: ability
+      - _id: ioYU14e3MyfYwv4N
+        _key: >-
+          !actors.items.effects!127d950b1eb312bd.127d950b1eb312bd.ioYU14e3MyfYwv4N
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.1d13190e5b38bda6
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.0
+        img: systems/teriock/src/icons/abilities/normal-sneak.webp
+        name: Normal Sneak
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: instant
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: normal-sneak
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: snk
+              value: 0
+        transfer: true
+        type: ability
+      - _id: Xu2Er1ArjWyKw3kL
+        _key: >-
+          !actors.items.effects!127d950b1eb312bd.127d950b1eb312bd.Xu2Er1ArjWyKw3kL
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.d1dcb2211545f54b
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.0
+        img: systems/teriock/src/icons/abilities/take-amorphous-elemental-form.webp
+        name: Take Amorphous Elemental Form
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: instant
+          effectTypes:
+            - transformation
+          executionTime:
+            base: a1
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          identifier: take-amorphous-elemental-form
+          interaction: manifest
+          maneuver: active
+          mundane: false
+          overview:
+            base: >-
+              <p>You take on an amorphous form of pure elemental magic. While in
+              this state you have all the innate
+              @L[Category:Abilities]{abilities} and @L[Category:Classes]{ranks}
+              of your @L[Category:Elemental creatures]{creature type}. However,
+              you have no @L[Body:Hand]{hands}, @L[Body:Foot]{feet},
+              @L[Body:Mouth]{mouth}, nor any other @L[Category:Body parts]{body
+              parts}. The one exception to this are the
+              @L[Category:Tendrils]{tendrils} of your @L[Category:Elemental
+              creatures]{creature type}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          requirements: >-
+            <p>You are in a @L[Ability:Take Humanoid Elemental Form]{humanoid
+            elemental form}.</p>
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: 0sGICDURgHlYZLSl
+        _key: >-
+          !actors.items.effects!127d950b1eb312bd.127d950b1eb312bd.0sGICDURgHlYZLSl
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.f28d714fdaac6dce
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.0
+        img: systems/teriock/src/icons/abilities/take-humanoid-elemental-form.webp
+        name: Take Humanoid Elemental Form
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: instant
+          effectTypes:
+            - transformation
+          executionTime:
+            base: a1
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          identifier: take-humanoid-elemental-form
+          interaction: manifest
+          maneuver: active
+          mundane: false
+          overview:
+            base: >-
+              <p>You take on a @L[Category:Humanoid creatures]{humanoid} form.
+              While in this state you have @L[Body:Hand]{hands},
+              @L[Body:Foot]{feet}, and a @L[Body:Mouth]{mouth}. You keep all the
+              innate @L[Category:Abilities]{abilities} of your @L[Ability:Take
+              Amorphous Elemental Form]{amorphous elemental form}, but lose all
+              innate @L[Category:Classes]{ranks} that you gain from it.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          requirements: >-
+            <p>You are in an @L[Ability:Take Amorphous Elemental Form]{amorphous
+            elemental form}.</p>
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: meVW1134h6GgikN3
+        _key: >-
+          !actors.items.effects!127d950b1eb312bd.127d950b1eb312bd.meVW1134h6GgikN3
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.be49083356b0f9c7
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.0
+        img: systems/teriock/src/icons/abilities/unconsciousness-immunity.webp
+        name: Unconsciousness Immunity
+        system:
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.protections.immunities.statuses
+                  phase: normal
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  type: add
+                  value: unconscious
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 1
+                - 0
+              type: changes
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: instant
+          effectTypes:
+            - immunity
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: unconsciousness-immunity
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          overview:
+            base: >-
+              <p>You are @L[Keyword:Immunity]{immune} to falling
+              @L[Condition:Unconscious]{unconscious}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: uLTzPFIIXLOz5Trr
+        _key: >-
+          !actors.items.effects!127d950b1eb312bd.127d950b1eb312bd.uLTzPFIIXLOz5Trr
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.8aa8167e9f40cbb2
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/improved-strength.webp
         name: Improved Strength
         system:
@@ -296,49 +737,28 @@ items:
             score:
               attribute: str
               value: 2
+        transfer: true
         type: ability
-      - _id: knJdJA1YoiglASlt
+      - _id: peLQD0NFSWV8RY9j
         _key: >-
-          !actors.items.effects!127d950b1eb312bd.127d950b1eb312bd.knJdJA1YoiglASlt
+          !actors.items.effects!127d950b1eb312bd.127d950b1eb312bd.peLQD0NFSWV8RY9j
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.fd30dcae55669994
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.07a0880b230cdb14
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
-        img: systems/teriock/src/icons/abilities/magical-durability.webp
-        name: Magical Durability
+          systemVersion: 0.12.0
+        img: systems/teriock/src/icons/abilities/beastly-strength.webp
+        name: Beastly Strength
         system:
-          automations:
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
-              changes:
-                - key: system.protections.immunities.damageTypes
-                  mode: 2
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: mundane
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
-              type: changes
+          _sup: uLTzPFIIXLOz5Trr
+          class: knight
           competence:
             raw: 0
           delivery: self
           duration:
             raw: '0'
             unit: unlimited
-          effectTypes:
-            - immunity
           executionTime:
             base: passive
             slow:
@@ -348,76 +768,53 @@ items:
             range:
               unit: self
           featSaveAttribute: mov
-          form: special
-          identifier: magical-durability
+          form: normal
+          identifier: beastly-strength
           interaction: manifest
           maneuver: passive
           mundane: false
           overview:
             base: >-
-              <p>You are @L[Keyword:Immunity]{immune} to
-              @L[Damage:Mundane]{mundane} @L[Core:Damage]{damage}.</p>
+              <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
+              hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
+              Piercing]{Armor piercing} weapons must still be wielded in two
+              hands to be @L[Keyword:Armor Voiding]{AV0}.</div>
           piercing:
             raw: 0
           powerSources:
-            - magical
+            - martial
           range:
             unit: self
+          skill: true
+          standard: true
           targets:
             - self
+          upgrades:
+            score:
+              attribute: str
+              value: 1
+        transfer: true
         type: ability
-      - _id: r4U8taWuV86kc2To
+      - _id: tX90f2RtX1011ggI
         _key: >-
-          !actors.items.effects!127d950b1eb312bd.127d950b1eb312bd.r4U8taWuV86kc2To
+          !actors.items.effects!127d950b1eb312bd.127d950b1eb312bd.tX90f2RtX1011ggI
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.192c6cfdb6473a4f
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.54f63d63ae4376a9
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
-        img: systems/teriock/src/icons/abilities/mana-regenerating.webp
-        name: Mana Regenerating
+          systemVersion: 0.12.0
+        img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
+        name: Improved Armor Piercing
         system:
-          automations:
-            1728b3a84ea27844:
-              _id: 1728b3a84ea27844
-              common:
-                - bag
-                - revive
-              competencies:
-                - 0
-                - 1
-                - 2
-              heighten:
-                - 1
-                - 0
-              type: common
-            7OuG6efyOs2VWpp3:
-              _id: 7OuG6efyOs2VWpp3
-              competencies:
-                - 0
-                - 1
-                - 2
-              conditions:
-                absent:
-                  - frozen
-              consumeStatDice: false
-              forHarm: false
-              heighten:
-                - 0
-                - 1
-              trigger: turnStart
-              type: revitalize
+          _sup: uLTzPFIIXLOz5Trr
+          class: knight
           competence:
             raw: 0
           delivery: self
           duration:
             raw: '0'
             unit: unlimited
-          effectTypes:
-            - revival
-            - regeneration
-            - revitalization
           executionTime:
             base: passive
             slow:
@@ -427,45 +824,36 @@ items:
             range:
               unit: self
           featSaveAttribute: mov
-          form: special
-          identifier: mana-regenerating
+          form: normal
+          identifier: improved-armor-piercing
           interaction: manifest
-          limitation: >-
-            <p>Can only @L[Core:Revitalizing]{revitalize} @L[Core:Hit Points and
-            Mana Points]{MP} spent on @L[Category:Necromancy element
-            abilities]{necromancy element abilities}.</p>
           maneuver: passive
           mundane: false
           overview:
             base: >-
-              <p>At the start of each of your @L[Core:Turns]{turns}, you 
-              @L[Core:Revitalizing]{revitalize} and regain that many @L[Core:Hit
-              Points and Mana Points]{MP}. This does <i>not</i> consume your
-              @L[Core:MP]{mana die}. If you were @L[Condition:Dead]{dead} due to
-              @L[Core:Hit Points and Mana Points]{MP} loss, this brings you
-              @L[Condition:Alive]{back to life}. You only
-              @L[Condition:Dead]{die} due to @L[Core:Hit Points and Mana
-              Points]{MP} loss if you start your @L[Core:Turns]{turn} without
-              successfully regenerating @L[Core:Hit Points and Mana
-              Points]{MP}.</p>
+              <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
+              piercing}.</p>
           piercing:
             raw: 0
           powerSources:
-            - primal
+            - martial
           range:
             unit: self
+          skill: true
+          standard: true
           targets:
             - self
+        transfer: true
         type: ability
-      - _id: 8IvvRYqwAzSbKD24
+      - _id: nehTnYT5tpi8j9b6
         _key: >-
-          !actors.items.effects!127d950b1eb312bd.127d950b1eb312bd.8IvvRYqwAzSbKD24
+          !actors.items.effects!127d950b1eb312bd.127d950b1eb312bd.nehTnYT5tpi8j9b6
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.9d37cc177d5750df
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.5pnQBaF30VIQrAZO
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
         name: Melee Damage Boost
         system:
@@ -516,394 +904,7 @@ items:
             <p>You have hit a creature with a @L[Category:Damaging
             effects]{damaging} melee @L[Category:Weapon delivery
             abilities]{weapon} @L[Category:Attack abilities]{attack}.</p>
-        type: ability
-      - _id: lPc8ubBmmf3WmeFv
-        _key: >-
-          !actors.items.effects!127d950b1eb312bd.127d950b1eb312bd.lPc8ubBmmf3WmeFv
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.2ce6ac373f19f4dd
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.11.6
-        img: systems/teriock/src/icons/abilities/necromancy-magic-hexseal.webp
-        name: Necromancy Magic Hexseal
-        system:
-          automations:
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
-              changes:
-                - key: system.protections.hexseals.elements
-                  mode: 2
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: necromancy
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
-              type: changes
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            conditions:
-              absent:
-                - down
-            raw: '0'
-            unit: unlimited
-          effectTypes:
-            - hexseal
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: special
-          identifier: necromancy-magic-hexseal
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          overview:
-            base: >-
-              <p>You are @L[Keyword:Hexseal]{hexseal} to @L[Category:Magically
-              powered abilities]{magical} @L[Category:Necromancy element
-              abilities]{necromancy abilities}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - magical
-          range:
-            unit: self
-          targets:
-            - self
-        type: ability
-      - _id: B169TTFFsDI7IaD1
-        _key: >-
-          !actors.items.effects!127d950b1eb312bd.127d950b1eb312bd.B169TTFFsDI7IaD1
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.1c52eda8919d34a7
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.11.6
-        img: systems/teriock/src/icons/abilities/normal-movement.webp
-        name: Normal Movement
-        system:
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: normal-movement
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          targets:
-            - self
-          upgrades:
-            score:
-              attribute: mov
-              value: 0
-        type: ability
-      - _id: n7J9TNVyyJZ0I2sL
-        _key: >-
-          !actors.items.effects!127d950b1eb312bd.127d950b1eb312bd.n7J9TNVyyJZ0I2sL
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.8249d99c527d09b1
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.11.6
-        img: systems/teriock/src/icons/abilities/normal-perception.webp
-        name: Normal Perception
-        system:
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: normal-perception
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          targets:
-            - self
-          upgrades:
-            score:
-              attribute: per
-              value: 0
-        type: ability
-      - _id: ioYU14e3MyfYwv4N
-        _key: >-
-          !actors.items.effects!127d950b1eb312bd.127d950b1eb312bd.ioYU14e3MyfYwv4N
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.1d13190e5b38bda6
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.11.6
-        img: systems/teriock/src/icons/abilities/normal-sneak.webp
-        name: Normal Sneak
-        system:
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: normal-sneak
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          targets:
-            - self
-          upgrades:
-            score:
-              attribute: snk
-              value: 0
-        type: ability
-      - _id: Xu2Er1ArjWyKw3kL
-        _key: >-
-          !actors.items.effects!127d950b1eb312bd.127d950b1eb312bd.Xu2Er1ArjWyKw3kL
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.d1dcb2211545f54b
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.11.6
-        img: systems/teriock/src/icons/abilities/take-amorphous-elemental-form.webp
-        name: Take Amorphous Elemental Form
-        system:
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: instant
-          effectTypes:
-            - transformation
-          executionTime:
-            base: a1
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: special
-          identifier: take-amorphous-elemental-form
-          interaction: manifest
-          maneuver: active
-          mundane: false
-          overview:
-            base: >-
-              <p>You take on an amorphous form of pure elemental magic. While in
-              this state you have all the innate
-              @L[Category:Abilities]{abilities} and @L[Category:Classes]{ranks}
-              of your @L[Category:Elemental creatures]{creature type}. However,
-              you have no @L[Body:Hand]{hands}, @L[Body:Foot]{feet},
-              @L[Body:Mouth]{mouth}, nor any other @L[Category:Body parts]{body
-              parts}. The one exception to this are the
-              @L[Category:Tendrils]{tendrils} of your @L[Category:Elemental
-              creatures]{creature type}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - magical
-          range:
-            unit: self
-          requirements: >-
-            <p>You are in a @L[Ability:Take Humanoid Elemental Form]{humanoid
-            elemental form}.</p>
-          targets:
-            - self
-        type: ability
-      - _id: 0sGICDURgHlYZLSl
-        _key: >-
-          !actors.items.effects!127d950b1eb312bd.127d950b1eb312bd.0sGICDURgHlYZLSl
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.f28d714fdaac6dce
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.11.6
-        img: systems/teriock/src/icons/abilities/take-humanoid-elemental-form.webp
-        name: Take Humanoid Elemental Form
-        system:
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: instant
-          effectTypes:
-            - transformation
-          executionTime:
-            base: a1
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: special
-          identifier: take-humanoid-elemental-form
-          interaction: manifest
-          maneuver: active
-          mundane: false
-          overview:
-            base: >-
-              <p>You take on a @L[Category:Humanoid creatures]{humanoid} form.
-              While in this state you have @L[Body:Hand]{hands},
-              @L[Body:Foot]{feet}, and a @L[Body:Mouth]{mouth}. You keep all the
-              innate @L[Category:Abilities]{abilities} of your @L[Ability:Take
-              Amorphous Elemental Form]{amorphous elemental form}, but lose all
-              innate @L[Category:Classes]{ranks} that you gain from it.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - magical
-          range:
-            unit: self
-          requirements: >-
-            <p>You are in an @L[Ability:Take Amorphous Elemental Form]{amorphous
-            elemental form}.</p>
-          targets:
-            - self
-        type: ability
-      - _id: meVW1134h6GgikN3
-        _key: >-
-          !actors.items.effects!127d950b1eb312bd.127d950b1eb312bd.meVW1134h6GgikN3
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.be49083356b0f9c7
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.11.6
-        img: systems/teriock/src/icons/abilities/unconsciousness-immunity.webp
-        name: Unconsciousness Immunity
-        system:
-          automations:
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
-              changes:
-                - key: system.protections.immunities.statuses
-                  mode: 2
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: unconscious
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
-              type: changes
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          effectTypes:
-            - immunity
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: unconsciousness-immunity
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          overview:
-            base: >-
-              <p>You are @L[Keyword:Immunity]{immune} to falling
-              @L[Condition:Unconscious]{unconscious}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - magical
-          range:
-            unit: self
-          targets:
-            - self
+        transfer: true
         type: ability
     folder: a4e3527bf26a4ba9
     img: systems/teriock/src/icons/creatures/large-shadow-elemental.webp
@@ -946,20 +947,20 @@ items:
     _key: '!actors.items!127d950b1eb312bd.I4Su8PsVWBgQ95OJ'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.deec37fc79f62f14
-      coreVersion: '13'
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     effects:
       - _id: 0J9CrQq9kLFUU4Iu
         _key: >-
           !actors.items.effects!127d950b1eb312bd.I4Su8PsVWBgQ95OJ.0J9CrQq9kLFUU4Iu
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.4e84d0efca8837f5
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.4e84d0efca8837f5
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         flags:
           teriock:
             category: combat
@@ -1010,73 +1011,17 @@ items:
           standard: true
           targets:
             - self
-        type: ability
-      - _id: BJB7gS2iyaE1o3wj
-        _key: >-
-          !actors.items.effects!127d950b1eb312bd.I4Su8PsVWBgQ95OJ.BJB7gS2iyaE1o3wj
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.efe54d38aacf546f
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.11.6
-        img: systems/teriock/src/icons/abilities/intrusive-casting.webp
-        name: Intrusive Casting
-        system:
-          _sup: c03uQvPFAXLocKls
-          class: necromancer
-          competence:
-            raw: 0
-          costs:
-            primary:
-              mp:
-                formula: '1'
-                type: formula
-          delivery: self
-          duration:
-            raw: '0'
-            unit: instant
-          executionTime:
-            base: r0
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: intrusive-casting
-          interaction: manifest
-          maneuver: reactive
-          mundane: false
-          overview:
-            base: >-
-              <p>The range of the triggering @L[Category:Spells]{spell} is
-              doubled.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - magical
-          range:
-            unit: self
-          skill: true
-          standard: true
-          targets:
-            - spell
-          trigger: >-
-            <p>You are casting a @L[Category:Spells]{spell} with a range other
-            than @L[Category:Self target spells]{self}.</p>
+        transfer: true
         type: ability
       - _id: c03uQvPFAXLocKls
         _key: >-
           !actors.items.effects!127d950b1eb312bd.I4Su8PsVWBgQ95OJ.c03uQvPFAXLocKls
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.82f855db7bb879dd
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.82f855db7bb879dd
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         flags:
           teriock:
             category: support
@@ -1137,16 +1082,17 @@ items:
             competence:
               attribute: int
               value: 1
+        transfer: true
         type: ability
-      - _id: BNurBexkjTBc6BeZ
+      - _id: lpUWHUpqJ0hbW0f8
         _key: >-
-          !actors.items.effects!127d950b1eb312bd.I4Su8PsVWBgQ95OJ.BNurBexkjTBc6BeZ
+          !actors.items.effects!127d950b1eb312bd.I4Su8PsVWBgQ95OJ.lpUWHUpqJ0hbW0f8
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.4269f3e018a6c618
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.4269f3e018a6c618
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/oppressive-casting.webp
         name: Oppressive Casting
         system:
@@ -1199,6 +1145,65 @@ items:
           trigger: >-
             <p>You cast an @L[Category:Attack spells]{attack} or
             @L[Category:Feat spells]{feat interaction spell}.</p>
+        transfer: true
+        type: ability
+      - _id: loBAh8ktDqMPW2ox
+        _key: >-
+          !actors.items.effects!127d950b1eb312bd.I4Su8PsVWBgQ95OJ.loBAh8ktDqMPW2ox
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.YCSGNa0EM2gEFOhu
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.0
+        img: systems/teriock/src/icons/abilities/intrusive-casting.webp
+        name: Intrusive Casting
+        system:
+          _sup: c03uQvPFAXLocKls
+          class: necromancer
+          competence:
+            raw: 0
+          costs:
+            primary:
+              mp:
+                formula: '1'
+                type: formula
+          delivery: self
+          duration:
+            raw: '0'
+            unit: instant
+          executionTime:
+            base: r0
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: intrusive-casting
+          interaction: manifest
+          maneuver: reactive
+          mundane: false
+          overview:
+            base: >-
+              <p>The range of the triggering @L[Category:Spells]{spell} is
+              doubled.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - spell
+          trigger: >-
+            <p>You are casting a @L[Category:Spells]{spell} with a range other
+            than @L[Category:Self target spells]{self}.</p>
+        transfer: true
         type: ability
     folder: a4e3527bf26a4ba9
     img: systems/teriock/src/icons/ranks/rank-4-necromancer.webp
@@ -1233,20 +1238,20 @@ items:
     _key: '!actors.items!127d950b1eb312bd.WuozFCWgtrg9Z4o1'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.3c3003c23cb3c4a1
-      coreVersion: '13'
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     effects:
       - _id: Tn5EQuAwOZUq3KZv
         _key: >-
           !actors.items.effects!127d950b1eb312bd.WuozFCWgtrg9Z4o1.Tn5EQuAwOZUq3KZv
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.d7349a2e714a29ff
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.d7349a2e714a29ff
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         flags:
           teriock:
             category: combat
@@ -1290,16 +1295,136 @@ items:
           skill: true
           targets:
             - self
+        transfer: true
         type: ability
-      - _id: 4kaakalA0ipM6sCL
+      - _id: 1r9NkHHxpXmJ6sLN
         _key: >-
-          !actors.items.effects!127d950b1eb312bd.WuozFCWgtrg9Z4o1.4kaakalA0ipM6sCL
+          !actors.items.effects!127d950b1eb312bd.WuozFCWgtrg9Z4o1.1r9NkHHxpXmJ6sLN
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.36c0ec02f2b411fd
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.e7abca04120b4496
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
+        flags:
+          teriock:
+            category: support
+            defaultAbility: true
+        img: >-
+          systems/teriock/src/icons/abilities/expanded-necromancy-elder-sorcery.webp
+        name: Expanded Necromancy Elder Sorcery
+        system:
+          automations:
+            f025905e157ac261:
+              _id: f025905e157ac261
+              changes:
+                - key: system.competence.raw
+                  phase: fluency
+                  priority: 10
+                  qualifier: '@identifier.elder-sorcery-creation'
+                  target: ability
+                  type: upgrade
+                  value: '2'
+                - key: system.competence.raw
+                  phase: fluency
+                  priority: 10
+                  qualifier: '@identifier.celestial-elder-sorcery-words'
+                  target: ability
+                  type: upgrade
+                  value: '2'
+                - key: system.competence.raw
+                  phase: fluency
+                  priority: 10
+                  qualifier: '@identifier.necromancy-elder-sorcery-words'
+                  target: ability
+                  type: upgrade
+                  value: '2'
+              competencies:
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 1
+                - 0
+              type: changes
+          class: necromancer
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            raw: '0'
+            unit: instant
+          elderSorcery: true
+          elements:
+            - necromancy
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: int
+          form: special
+          identifier: expanded-necromancy-elder-sorcery
+          interaction: feat
+          maneuver: passive
+          mundane: false
+          overview:
+            base: >-
+              <p>In addition to the custom rotator spells you create, you can
+              learn @L[Category:Rotator spells]{spells} created by others. When
+              you come across a fully created spell using only words you are
+              @L[Core:Fluency Bonus]{fluent} in, can make a DC 12 + OP
+              @L[Core:INT]{INT} @L[Core:Feat Interaction]{feat save} to attempt
+              to learn it over the course of a @L[Core:Long Rest]{long rest}. If
+              you succeed, you can add it to your rotator spell list. If you
+              fail, you are @L[Keyword:Incapable]{incapable} of attempting to
+              learn that spell again. The @L[Core:Game Master]{GM} may modify
+              the DC based on the spell's complexity, your knowledge of the
+              spell, any special training you receive, if the spell's creator is
+              there to assist you, or for any other factors they see fit. You
+              may also attempt to learn words that you come across as long as
+              they are of elements you are @L[Core:Fluency Bonus]{fluent} in.
+              The @L[Core:Game Master]{GM} may adjust the DC for these as they
+              see fit as well, but the default is DC 15 + OP
+              @L[Core:Intelligence]{INT} @L[Core:Feat Interaction]{feat
+              save}.</p>
+            proficient: >-
+              <p>You are @L[Core:Fluency Bonus]{fluent} in @L[Ability:Elder
+              Sorcery Creation]{Elder Sorcery Creation}, @L[Ability:Celestial
+              Elder Sorcery Words]{Celestial Elder Sorcery Words}, and
+              @L[Ability:Necromancy Elder Sorcery Words]{Necromancy Elder
+              Sorcery Words}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          results:
+            fail: >-
+              <p>You are @L[Keyword:Incapable]{incapable} of attempting to learn
+              that spell or word again.</p>
+            save: <p>You learn the spell or word.</p>
+          skill: true
+          standard: true
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: DK8j2MQFH0kAgUzu
+        _key: >-
+          !actors.items.effects!127d950b1eb312bd.WuozFCWgtrg9Z4o1.DK8j2MQFH0kAgUzu
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.36c0ec02f2b411fd
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/augment-undead.webp
         name: Augment Undead
         system:
@@ -1383,134 +1508,17 @@ items:
           standard: true
           targets:
             - creature
+        transfer: true
         type: ability
-      - _id: 1r9NkHHxpXmJ6sLN
+      - _id: E6AtnPoFQYRKra0A
         _key: >-
-          !actors.items.effects!127d950b1eb312bd.WuozFCWgtrg9Z4o1.1r9NkHHxpXmJ6sLN
+          !actors.items.effects!127d950b1eb312bd.WuozFCWgtrg9Z4o1.E6AtnPoFQYRKra0A
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.e7abca04120b4496
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.a627d9246b32a094
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
-        flags:
-          teriock:
-            category: support
-            defaultAbility: true
-        img: >-
-          systems/teriock/src/icons/abilities/expanded-necromancy-elder-sorcery.webp
-        name: Expanded Necromancy Elder Sorcery
-        system:
-          automations:
-            f025905e157ac261:
-              _id: f025905e157ac261
-              changes:
-                - key: system.competence.raw
-                  mode: 4
-                  priority: 10
-                  qualifier: '@identifier.elder-sorcery-creation'
-                  target: ability
-                  time: fluency
-                  value: '2'
-                - key: system.competence.raw
-                  mode: 4
-                  priority: 10
-                  qualifier: '@identifier.celestial-elder-sorcery-words'
-                  target: ability
-                  time: fluency
-                  value: '2'
-                - key: system.competence.raw
-                  mode: 4
-                  priority: 10
-                  qualifier: '@identifier.necromancy-elder-sorcery-words'
-                  target: ability
-                  time: fluency
-                  value: '2'
-              competencies:
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
-              type: changes
-          class: necromancer
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: instant
-          elderSorcery: true
-          elements:
-            - necromancy
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: int
-          form: special
-          identifier: expanded-necromancy-elder-sorcery
-          interaction: feat
-          maneuver: passive
-          mundane: false
-          overview:
-            base: >-
-              <p>In addition to the custom rotator spells you create, you can
-              learn @L[Category:Rotator spells]{spells} created by others. When
-              you come across a fully created spell using only words you are
-              @L[Core:Fluency Bonus]{fluent} in, can make a DC 12 + OP
-              @L[Core:INT]{INT} @L[Core:Feat Interaction]{feat save} to attempt
-              to learn it over the course of a @L[Core:Long Rest]{long rest}. If
-              you succeed, you can add it to your rotator spell list. If you
-              fail, you are @L[Keyword:Incapable]{incapable} of attempting to
-              learn that spell again. The @L[Core:Game Master]{GM} may modify
-              the DC based on the spell's complexity, your knowledge of the
-              spell, any special training you receive, if the spell's creator is
-              there to assist you, or for any other factors they see fit. You
-              may also attempt to learn words that you come across as long as
-              they are of elements you are @L[Core:Fluency Bonus]{fluent} in.
-              The @L[Core:Game Master]{GM} may adjust the DC for these as they
-              see fit as well, but the default is DC 15 + OP
-              @L[Core:Intelligence]{INT} @L[Core:Feat Interaction]{feat
-              save}.</p>
-            proficient: >-
-              <p>You are @L[Core:Fluency Bonus]{fluent} in @L[Ability:Elder
-              Sorcery Creation]{Elder Sorcery Creation}, @L[Ability:Celestial
-              Elder Sorcery Words]{Celestial Elder Sorcery Words}, and
-              @L[Ability:Necromancy Elder Sorcery Words]{Necromancy Elder
-              Sorcery Words}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - magical
-          range:
-            unit: self
-          results:
-            fail: >-
-              <p>You are @L[Keyword:Incapable]{incapable} of attempting to learn
-              that spell or word again.</p>
-            save: <p>You learn the spell or word.</p>
-          skill: true
-          standard: true
-          targets:
-            - self
-        type: ability
-      - _id: OBTMPgCkpTxBRiWQ
-        _key: >-
-          !actors.items.effects!127d950b1eb312bd.WuozFCWgtrg9Z4o1.OBTMPgCkpTxBRiWQ
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.a627d9246b32a094
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/spirit-pact.webp
         name: Spirit Pact
         system:
@@ -1598,6 +1606,7 @@ items:
           sustained: true
           targets:
             - other
+        transfer: true
         type: ability
     folder: a4e3527bf26a4ba9
     img: systems/teriock/src/icons/ranks/rank-3-necromancer.webp
@@ -1632,20 +1641,20 @@ items:
     _key: '!actors.items!127d950b1eb312bd.fZ1DoLm88KZWXicC'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.2bd7d6c9b89adbcf
-      coreVersion: '13'
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     effects:
       - _id: Q3bElOKJWjw3DI9t
         _key: >-
           !actors.items.effects!127d950b1eb312bd.fZ1DoLm88KZWXicC.Q3bElOKJWjw3DI9t
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.b231c43502dd9d39
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.b231c43502dd9d39
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/death-ray.webp
         name: Death Ray
         system:
@@ -1736,16 +1745,17 @@ items:
           standard: true
           targets:
             - creature
+        transfer: true
         type: ability
       - _id: 15t1ifTnUgXbHDY7
         _key: >-
           !actors.items.effects!127d950b1eb312bd.fZ1DoLm88KZWXicC.15t1ifTnUgXbHDY7
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.cb297af126bd9530
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.cb297af126bd9530
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/spirit-guide.webp
         name: Spirit Guide
         system:
@@ -1754,11 +1764,11 @@ items:
               _id: e789ed5e109ebd1a
               changes:
                 - key: system.senses.ethereal
-                  mode: 4
+                  phase: normal
                   priority: 10
                   qualifier: '1'
                   target: Actor
-                  time: normal
+                  type: upgrade
                   value: '120'
               competencies:
                 - 0
@@ -1836,16 +1846,17 @@ items:
           sustained: true
           targets:
             - creature
+        transfer: true
         type: ability
       - _id: 6ouKT638ARM4Cphm
         _key: >-
           !actors.items.effects!127d950b1eb312bd.fZ1DoLm88KZWXicC.6ouKT638ARM4Cphm
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.e03c8211ae426819
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.e03c8211ae426819
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/summon-the-dead.webp
         name: Summon the Dead
         system:
@@ -1919,16 +1930,17 @@ items:
           standard: true
           targets:
             - creature
+        transfer: true
         type: ability
       - _id: epbHgxy8x6bO3jkQ
         _key: >-
           !actors.items.effects!127d950b1eb312bd.fZ1DoLm88KZWXicC.epbHgxy8x6bO3jkQ
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.c86ef5877a48d710
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.c86ef5877a48d710
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/terror-ball.webp
         name: Terror Ball
         system:
@@ -2004,6 +2016,7 @@ items:
           standard: true
           targets:
             - creature
+        transfer: true
         type: ability
     folder: a4e3527bf26a4ba9
     img: systems/teriock/src/icons/ranks/rank-1-necromancer.webp
@@ -2038,47 +2051,32 @@ items:
     _key: '!actors.items!127d950b1eb312bd.p6bcXHlxm3IGcpde'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.6e5114a61a5eb4b2
-      coreVersion: '13'
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     effects:
-      - _id: fsBv5b4tQSp6BeUJ
+      - _id: JFQwPusSGXNlFxzg
         _key: >-
-          !actors.items.effects!127d950b1eb312bd.p6bcXHlxm3IGcpde.fsBv5b4tQSp6BeUJ
+          !actors.items.effects!127d950b1eb312bd.p6bcXHlxm3IGcpde.JFQwPusSGXNlFxzg
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.a04434f696dc637e
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.24ca0fecea593c33
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
-        img: systems/teriock/src/icons/abilities/animate-dead.webp
-        name: Animate Dead
+          systemVersion: 0.12.0
+        img: systems/teriock/src/icons/abilities/necromancy-elder-sorcery.webp
+        name: Necromancy Elder Sorcery
         system:
-          _sup: WrBepGdTXcu03wfx
           class: necromancer
           competence:
             raw: 0
-          costs:
-            components:
-              somatic:
-                type: tag
-              verbal:
-                type: tag
-            primary:
-              mp:
-                formula: '1'
-                type: formula
-          delivery: hand
+          delivery: self
           duration:
             raw: '0'
-            unit: instant
-          effectTypes:
-            - reanimation
-          elements:
-            - necromancy
+            unit: unlimited
           executionTime:
-            base: a1
+            base: passive
             slow:
               unit: second
           expansion:
@@ -2087,50 +2085,169 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          identifier: animate-dead
-          interaction: attack
-          invoked: true
-          maneuver: active
+          identifier: necromancy-elder-sorcery
+          interaction: manifest
+          maneuver: passive
           mundane: false
           overview:
             base: >-
-              <p>Target is @L[Condition:Alive]{alive} (but still
-              @L[Category:Undead creatures]{undead}) at 1 @L[Core:Hit Points and
-              Mana Points]{HP}, although its maximum @L[Core:Hit Points and Mana
-              Points]{HP} is halved (minimum of 1) until it completes a
-              @L[Core:Short Rest]{short rest}. This does not count as a
-              @L[Category:Revival effects]{revival effect}.</p>
-            fluent: <p>Target's @L[Core:HP]{HP} is no longer halved.</p>
-            proficient: >-
-              <p>Target has all @L[Core:HP]{HP} restored, but its maximum
-              @L[Core:HP]{HP} is still halved. This does not count as a
-              @L[Category:Healing effects]{healing effect}.</p>
+              <p>You gain @L[Ability:Elder Sorcery Creation]{Elder Sorcery
+              Creation}, @L[Ability:Celestial Elder Sorcery Words]{Celestial
+              Elder Sorcery Words}, and @L[Ability:Necromancy Elder Sorcery
+              Words]{Necromancy Elder Sorcery Words}.</p>
           piercing:
-            raw: 2
+            raw: 0
           powerSources:
-            - magical
+            - martial
           range:
-            unit: contact
-          requirements: >-
-            <p>Target is @L[Condition:Dead]{dead} and @L[Category:Undead
-            creatures]{undead}.</p>
-          spell: true
-          standard: true
+            unit: self
+          skill: true
           targets:
-            - creature
+            - self
+        transfer: true
         type: ability
-      - _id: 8bcybu7QjARUBouS
+      - _id: GF9CzLYvEuHeIKIm
         _key: >-
-          !actors.items.effects!127d950b1eb312bd.p6bcXHlxm3IGcpde.8bcybu7QjARUBouS
+          !actors.items.effects!127d950b1eb312bd.p6bcXHlxm3IGcpde.GF9CzLYvEuHeIKIm
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.41ba9670a628fc21
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.e28f577c843bc530
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
-        flags:
-          teriock:
-            dontConsume: false
+          systemVersion: 0.12.0
+        img: systems/teriock/src/icons/abilities/necromancy-rotators.webp
+        name: Necromancy Rotators
+        system:
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.magic.maxRotators.raw
+                  phase: normal
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  type: upgrade
+                  value: '@rank.mag - 1'
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 1
+                - 0
+              type: changes
+            f025905e157ac261:
+              _id: f025905e157ac261
+              changes:
+                - key: system.magic.maxRotators.raw
+                  phase: normal
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  type: upgrade
+                  value: 2 * (@rank.mag - 1)
+              competencies:
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 1
+                - 0
+              type: changes
+            f7da3b5e1992a724:
+              _id: f7da3b5e1992a724
+              changes:
+                - key: system.magic.maxRotators.raw
+                  phase: normal
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  type: upgrade
+                  value: 2 * (@rank.mag - 1) + @p
+              competencies:
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 1
+                - 0
+              type: changes
+          class: necromancer
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            raw: '0'
+            unit: unlimited
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: necromancy-rotators
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          overview:
+            base: >-
+              <p>Having mastered the basic techniques in this field of magic,
+              you are able to cast more advanced @L[Category:Spells]{spells}. If
+              you create any @L[Core:Elder Sorcery]{Elder Sorcery}
+              @L[Category:Spells]{spells} of your own, they get added to this
+              list. However, just because you "know" how to cast these spells,
+              doesn't mean you are always prepared to. Although all
+              @L[Category:Mage classes]{mage classes} grant their own
+              @L[Core:Elder Sorcery]{Elder Sorcery} and @L[Category:Rotator
+              spells]{rotator spells}, you may only have a maximum of
+              @L[Category:Mage classes]{MR} - 1 of these spells rotated into
+              your spell list at any given time across <i>all</i> classes.
+              @L[Category:Mage classes]{MR} refers to the number of
+              @L[Core:Leveling Up]{ranks} you have in @L[Category:Mage
+              classes]{mage classes}. During a @L[Core:Long Rest]{long rest},
+              you can "rotate" which spells you have prepared. The
+              @L[Category:Rotator spells]{rotator spells} automatically
+              available to you are @L[Ability:Crown of Fear]{Crown of Fear},
+              @L[Ability:Death Rattle]{Death Rattle}, @L[Ability:Ethereal
+              Shift]{Ethereal Shift}, @L[Ability:Spirit Bury]{Spirit Bury}, and
+              @L[Ability:Undead Reanimation]{Undead Reanimation}.</p>
+            fluent: >-
+              <p>You may instead prepare 2 × (MR - 1) + @L[Core:Proficiency
+              Bonus]{P} of these @L[Category:Spells]{spells}.</p>
+            proficient: >-
+              <p>You may instead prepare 2 × (MR - 1) of these
+              @L[Category:Spells]{spells}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          skill: true
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: TSd8pe0l6OSCKrVP
+        _key: >-
+          !actors.items.effects!127d950b1eb312bd.p6bcXHlxm3IGcpde.TSd8pe0l6OSCKrVP
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.41ba9670a628fc21
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/celestial-elder-sorcery-words.webp
         name: Celestial Elder Sorcery Words
         system:
@@ -2261,174 +2378,17 @@ items:
           skill: true
           targets:
             - self
+        transfer: true
         type: ability
-      - _id: 1BAPtC9VK930dc26
+      - _id: 6MSGCrrZWWMXKJ6P
         _key: >-
-          !actors.items.effects!127d950b1eb312bd.p6bcXHlxm3IGcpde.1BAPtC9VK930dc26
+          !actors.items.effects!127d950b1eb312bd.p6bcXHlxm3IGcpde.6MSGCrrZWWMXKJ6P
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.a29a6c7e09abbb9d
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.0q5khIx32nw3ihVe
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
-        img: systems/teriock/src/icons/abilities/crown-of-fear.webp
-        name: Crown of Fear
-        system:
-          _sup: GF9CzLYvEuHeIKIm
-          automations:
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
-              changes:
-                - key: system.light.dim
-                  mode: 4
-                  priority: 3
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: '0.01'
-                - key: system.light.color
-                  mode: 5
-                  priority: 3
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: '#9141AC'
-                - key: system.light.animation.type
-                  mode: 5
-                  priority: 3
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: sunburst
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
-              type: changes
-          class: necromancer
-          competence:
-            raw: 0
-          costs:
-            primary:
-              mp:
-                formula: '1'
-                type: formula
-          delivery: self
-          duration:
-            raw: '8'
-            unit: hour
-          elements:
-            - necromancy
-          executionTime:
-            base: a1
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: special
-          identifier: crown-of-fear
-          interaction: manifest
-          maneuver: active
-          mundane: false
-          overview:
-            base: >-
-              <p>A small circle of glowing purple mist circles above your head.
-              You gain @L[Ability:Fear Touch]{Fear Touch} and @L[Ability:Fear
-              Aura]{Fear Aura}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - magical
-          range:
-            unit: self
-          rotator: true
-          spell: true
-          standard: true
-          sustained: true
-          targets:
-            - self
-        type: ability
-      - _id: YTuNmIhZ34t0Jc7O
-        _key: >-
-          !actors.items.effects!127d950b1eb312bd.p6bcXHlxm3IGcpde.YTuNmIhZ34t0Jc7O
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.a117c508ccc3bbe5
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.11.6
-        img: systems/teriock/src/icons/abilities/death-rattle.webp
-        name: Death Rattle
-        system:
-          _sup: GF9CzLYvEuHeIKIm
-          class: necromancer
-          competence:
-            raw: 0
-          costs:
-            components:
-              somatic:
-                type: tag
-              verbal:
-                type: tag
-          delivery: self
-          duration:
-            raw: '0'
-            unit: instant
-          elements:
-            - necromancy
-          executionTime:
-            base: r1
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: special
-          identifier: death-rattle
-          interaction: manifest
-          invoked: true
-          maneuver: reactive
-          mundane: false
-          overview:
-            base: >-
-              <p>You execute one @L[Category:Single action abilities]{single
-              action ability} you have.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - magical
-          range:
-            unit: self
-          rotator: true
-          spell: true
-          standard: true
-          targets:
-            - self
-          trigger: <p>You @L[Condition:Dead]{die}.</p>
-        type: ability
-      - _id: 80I3FDOR0od0PN6D
-        _key: >-
-          !actors.items.effects!127d950b1eb312bd.p6bcXHlxm3IGcpde.80I3FDOR0od0PN6D
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.a0e331dd4f67e25b
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.11.6
-        flags:
-          teriock:
-            dontConsume: false
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/elder-sorcery-creation.webp
         name: Elder Sorcery Creation
         system:
@@ -2506,16 +2466,103 @@ items:
           skill: true
           targets:
             - self
+        transfer: true
         type: ability
-      - _id: Fn5cxrm9VCmp1T6A
+      - _id: sL0V2uWNtqvC1wbm
         _key: >-
-          !actors.items.effects!127d950b1eb312bd.p6bcXHlxm3IGcpde.Fn5cxrm9VCmp1T6A
+          !actors.items.effects!127d950b1eb312bd.p6bcXHlxm3IGcpde.sL0V2uWNtqvC1wbm
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.2f4f5e357e9b92c7
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.44b9f6ea2a6750be
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
+        img: >-
+          systems/teriock/src/icons/abilities/necromancy-elder-sorcery-words.webp
+        name: Necromancy Elder Sorcery Words
+        system:
+          _sup: JFQwPusSGXNlFxzg
+          class: necromancer
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            raw: '0'
+            unit: unlimited
+          elderSorcery: true
+          elements:
+            - necromancy
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          identifier: necromancy-elder-sorcery-words
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          overview:
+            base: >-
+              <p>You know @L[Core:Elder Sorcery]{OP} 1 @L[Core:Necromancy Elder
+              Sorcery Words]{Necromancy Elder Sorcery words}.</p><table
+              class="wikitable sortable"><caption style="white-space:nowrap">OP
+              1 Necromancy @L[Core:Elder Sorcery Words]{Elder Sorcery
+              Words}</caption><tbody><tr><th
+              style="background-color:#e5a50a1A">OP</th><th
+              style="background-color:#0000001A">@L[Class:Necromancer]{Necromancy
+              Nouns}</th><th
+              style="background-color:#0000001A">@L[Class:Necromancer]{Necromancy
+              Verbs}</th></tr><tr><td rowspan="9"
+              style="background-color:#f9f06b1A">1</td><td
+              style="background-color:#77767b1A">blemish</td><td
+              style="background-color:#77767b1A">force</td></tr> <tr><td
+              style="background-color:#0000001A">darkness</td><td
+              style="background-color:#0000001A">intimidate</td></tr> <tr><td
+              style="background-color:#77767b1A">filth</td><td
+              style="background-color:#77767b1A">shame</td></tr> <tr><td
+              style="background-color:#0000001A">grave</td><td
+              style="background-color:#0000001A">sicken</td></tr> <tr><td
+              style="background-color:#77767b1A">pain</td><td
+              style="background-color:#77767b1A">spoil</td></tr> <tr><td
+              style="background-color:#0000001A">seizure</td><td
+              style="background-color:#0000001A">summon</td></tr> <tr><td
+              style="background-color:#77767b1A">stench</td><td
+              style="background-color:#77767b1A">taint</td></tr> <tr><td
+              style="background-color:#0000001A">tears</td><td
+              style="background-color:#0000001A">twist</td></tr> <tr><td
+              style="background-color:#77767b1A">woe</td><td
+              style="background-color:#77767b1A">wrench</td></tr></tbody></table><p></p>
+            fluent: >-
+              <p>The @L[Core:Elder Sorcery]{OP} of words you know is 1 + (3 ×
+              @L[Core:Fluency Bonus]{F}).</p>
+            proficient: >-
+              <p>The @L[Core:Elder Sorcery]{OP} of words you know is 1 + (3 ×
+              @L[Core:Proficiency Bonus]{P}).</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          skill: true
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: 6tAKo9OpEP5DbSoj
+        _key: >-
+          !actors.items.effects!127d950b1eb312bd.p6bcXHlxm3IGcpde.6tAKo9OpEP5DbSoj
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.2f4f5e357e9b92c7
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/ethereal-shift.webp
         name: Ethereal Shift
         system:
@@ -2581,93 +2628,238 @@ items:
           standard: true
           targets:
             - self
+        transfer: true
         type: ability
-      - _id: MUxdMBbkGw9PDEow
+      - _id: 1PFyXq4oMO3GTOEM
         _key: >-
-          !actors.items.effects!127d950b1eb312bd.p6bcXHlxm3IGcpde.MUxdMBbkGw9PDEow
+          !actors.items.effects!127d950b1eb312bd.p6bcXHlxm3IGcpde.1PFyXq4oMO3GTOEM
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.b20dfffeead6b25e
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.42x5ExJDC2KutTTJ
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
-        img: systems/teriock/src/icons/abilities/fear-aura.webp
-        name: Fear Aura
+          systemVersion: 0.12.0
+        img: systems/teriock/src/icons/abilities/undead-reanimation.webp
+        name: Undead Reanimation
         system:
-          _sup: 1BAPtC9VK930dc26
-          automations:
-            800c70e6560525a8:
-              _id: 800c70e6560525a8
-              competencies:
-                - 0
-                - 1
-                - 2
-              formula: (@h)d4[magic terror]
-              heighten:
-                - 1
-              impact: damage
-              merge: true
-              type: roll
-            b4960732f0b9ed9f:
-              _id: b4960732f0b9ed9f
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              executor: true
-              heighten:
-                - 1
-                - 0
-              relation: include
-              status: frightened
-              target: false
-              type: status
-            d635eb44dba086dd:
-              _id: d635eb44dba086dd
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
-              type: combatExpiration
-              what:
-                roll: 2d4kh1
-                threshold: 4
-                type: rolled
-              when:
-                skip: 0
-                time: end
-                trigger: turn
-              who:
-                type: target
+          _sup: GF9CzLYvEuHeIKIm
           class: necromancer
           competence:
             raw: 0
           costs:
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
+          delivery: self
+          duration:
+            raw: '8'
+            unit: hour
+          elements:
+            - necromancy
+          executionTime:
+            base: a1
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          identifier: undead-reanimation
+          interaction: manifest
+          invoked: true
+          maneuver: active
+          mundane: false
+          overview:
+            base: >-
+              <p>You gain @L[Ability:Zombify]{Zombify} and @L[Ability:Animate
+              Dead]{Animate Dead}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          rotator: true
+          spell: true
+          standard: true
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: u0aMXwNkqO61exUI
+        _key: >-
+          !actors.items.effects!127d950b1eb312bd.p6bcXHlxm3IGcpde.u0aMXwNkqO61exUI
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.ANPHEgI4HifPcpuS
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.0
+        img: systems/teriock/src/icons/abilities/animate-dead.webp
+        name: Animate Dead
+        system:
+          _sup: 1PFyXq4oMO3GTOEM
+          class: necromancer
+          competence:
+            raw: 0
+          costs:
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
             primary:
               mp:
                 formula: '1'
                 type: formula
-          delivery: aura
+          delivery: hand
+          duration:
+            unit: instant
+          effectTypes:
+            - reanimation
+          elements:
+            - necromancy
+          executionTime:
+            base: a1
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: animate-dead
+          interaction: attack
+          invoked: true
+          maneuver: active
+          mundane: false
+          overview:
+            base: >-
+              <p>Target is @L[Condition:Alive]{alive} (but still
+              @L[Category:Undead creatures]{undead}) at 1 @L[Core:Hit Points and
+              Mana Points]{HP}, although its maximum @L[Core:Hit Points and Mana
+              Points]{HP} is halved (minimum of 1) until it completes a
+              @L[Core:Short Rest]{short rest}. This does not count as a
+              @L[Category:Revival effects]{revival effect}.</p>
+            fluent: <p>Target's @L[Core:HP]{HP} is no longer halved.</p>
+            proficient: >-
+              <p>Target has all @L[Core:HP]{HP} restored, but its maximum
+              @L[Core:HP]{HP} is still halved. This does not count as a
+              @L[Category:Healing effects]{healing effect}.</p>
+          piercing:
+            raw: 2
+          powerSources:
+            - magical
+          range:
+            unit: contact
+          requirements: >-
+            <p>Target is @L[Condition:Dead]{dead} and @L[Category:Undead
+            creatures]{undead}.</p>
+          spell: true
+          standard: true
+          targets:
+            - creature
+        transfer: true
+        type: ability
+      - _id: VfBm7aIhFbCFO9zY
+        _key: >-
+          !actors.items.effects!127d950b1eb312bd.p6bcXHlxm3IGcpde.VfBm7aIhFbCFO9zY
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.24a2a3db4a940311
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.0
+        img: systems/teriock/src/icons/abilities/zombify.webp
+        name: Zombify
+        system:
+          _sup: 1PFyXq4oMO3GTOEM
+          automations:
+            72ce567009179bea:
+              _id: 72ce567009179bea
+              changeType: add
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              duration:
+                raw: '@h * 3600'
+                unit: second
+              heighten:
+                - 1
+              type: duration
+            838ba57012685987:
+              _id: 838ba57012685987
+              changeType: add
+              competencies:
+                - 2
+              crit:
+                - 0
+                - 1
+              duration:
+                raw: '3600'
+                unit: second
+              heighten:
+                - 1
+                - 0
+              type: duration
+            ngQVntiCQ8Ruot8n:
+              _id: ngQVntiCQ8Ruot8n
+              automatic: true
+              competence:
+                raw: 0
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              documents:
+                - Compendium.teriock.species.Item.b3708edf8c3c5c9f
+              heighten:
+                - 0
+                - 1
+              multi: false
+              override:
+                - art
+              overrideCompetence: true
+              reset:
+                - hp
+                - mp
+              ring: false
+              suppress:
+                - body
+                - fluency
+                - rank
+                - species
+              type: transformation
+          class: necromancer
+          competence:
+            raw: 0
+          costs:
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
+          delivery: hand
           duration:
             raw: '1'
             unit: minute
           effectTypes:
-            - mental
+            - control
+            - reanimation
           elements:
             - necromancy
-          endCondition: >-
-            <p>At the end of each of the target's @L[Core:Turn]{turns}, they
-            roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
-            ends.</p>
           executionTime:
             base: a1
             slow:
@@ -2679,39 +2871,308 @@ items:
           featSaveAttribute: mov
           form: normal
           heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-            [[/damage 1d4[magic terror]]] @L[Core:Damage]{damage}  as well.</p>
-          identifier: fear-aura
-          interaction: feat
+            <p>For each additional @L[Core:MP]{MP} spent, the duration of this
+            effect increases by 1 hour.</p>
+          identifier: zombify
+          interaction: attack
+          invoked: true
           maneuver: active
           mundane: false
+          overview:
+            fluent: >-
+              <p>The base duration of this effect is 1 hour and the
+              @L[Creature:Zombie]{zombie} is a @L[Core:Minions]{minion} under
+              your command.</p>
+            proficient: <p>[[lookup name]] is @L[Keyword:Warded]{warded}.</p>
+          piercing:
+            raw: 2
+          powerSources:
+            - magical
+          range:
+            unit: contact
+          requirements: <p>Target is @L[Condition:Dead]{dead}.</p>
+          results:
+            hit: >-
+              <p>Target is reanimated as a @L[Creature:Zombie]{zombie}. It is
+              not under your command, but is hostile to everyone other than you
+              that is not @L[Category:Zombies]{another zombie}. The
+              @L[Creature:Zombie]{zombie} keeps the @L[Core:Size]{SIZE} it had
+              before, but loses all other traits and abilities. If the target
+              was already @L[Category:Zombies]{some kind of zombie}, then it is
+              reanimated as that type.</p>
+          spell: true
+          standard: true
+          targets:
+            - creature
+        transfer: true
+        type: ability
+      - _id: g7SpayF8igKmmj2R
+        _key: >-
+          !actors.items.effects!127d950b1eb312bd.p6bcXHlxm3IGcpde.g7SpayF8igKmmj2R
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.22c986b97b5f3050
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.0
+        img: systems/teriock/src/icons/abilities/spirit-bury.webp
+        name: Spirit Bury
+        system:
+          _sup: GF9CzLYvEuHeIKIm
+          automations:
+            6a329470043b61f6:
+              _id: 6a329470043b61f6
+              changeType: add
+              competencies:
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              duration:
+                raw: '600'
+                unit: second
+              heighten:
+                - 1
+                - 0
+              type: duration
+            72ce567009179bea:
+              _id: 72ce567009179bea
+              changeType: add
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              duration:
+                raw: '@h * 3600'
+                unit: second
+              heighten:
+                - 1
+              type: duration
+          class: necromancer
+          competence:
+            raw: 0
+          costs:
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
+          delivery: hand
+          duration:
+            raw: '1'
+            unit: minute
+          elements:
+            - necromancy
+          executionTime:
+            base: a1
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          heightened: >-
+            <p>For each additional @L[Core:MP]{MP} spent, the duration of this
+            effect increases by 1 hour.</p>
+          identifier: spirit-bury
+          interaction: attack
+          invoked: true
+          maneuver: active
+          mundane: false
+          overview:
+            proficient: <p>This effect lasts 10 minutes instead of 1. </p>
           piercing:
             raw: 0
           powerSources:
             - magical
           range:
-            raw: '10'
-            unit: ft
+            unit: contact
+          requirements: <p>Target is @L[Condition:Dead]{dead}.</p>
           results:
-            fail: <p>Target is @L[Condition:Frightened]{frightened}.</p>
+            hit: <p>Target cannot become @L[Condition:Wisping]{wisping}.</p>
+          rotator: true
           spell: true
           standard: true
           targets:
             - creature
+        transfer: true
         type: ability
-      - _id: 3SL7OaAwx1etVSb5
+      - _id: rnsDmeBUWZ3FWDeD
         _key: >-
-          !actors.items.effects!127d950b1eb312bd.p6bcXHlxm3IGcpde.3SL7OaAwx1etVSb5
+          !actors.items.effects!127d950b1eb312bd.p6bcXHlxm3IGcpde.rnsDmeBUWZ3FWDeD
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.12c2bc74fed2e058
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.EZt37ToLutUxjQ2r
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
+        img: systems/teriock/src/icons/abilities/death-rattle.webp
+        name: Death Rattle
+        system:
+          _sup: GF9CzLYvEuHeIKIm
+          class: necromancer
+          competence:
+            raw: 0
+          costs:
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
+          delivery: self
+          duration:
+            raw: '0'
+            unit: instant
+          elements:
+            - necromancy
+          executionTime:
+            base: r1
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          identifier: death-rattle
+          interaction: manifest
+          invoked: true
+          maneuver: reactive
+          mundane: false
+          overview:
+            base: >-
+              <p>You execute one @L[Category:Single action abilities]{single
+              action ability} you have.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          rotator: true
+          spell: true
+          standard: true
+          targets:
+            - self
+          trigger: <p>You @L[Condition:Dead]{die}.</p>
+        transfer: true
+        type: ability
+      - _id: 9YaKtU9qIwpFdK1w
+        _key: >-
+          !actors.items.effects!127d950b1eb312bd.p6bcXHlxm3IGcpde.9YaKtU9qIwpFdK1w
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.a29a6c7e09abbb9d
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.0
+        img: systems/teriock/src/icons/abilities/crown-of-fear.webp
+        name: Crown of Fear
+        system:
+          _sup: GF9CzLYvEuHeIKIm
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: token.light.dim
+                  phase: normal
+                  priority: 3
+                  qualifier: '1'
+                  target: Actor
+                  type: upgrade
+                  value: '0.01'
+                - key: token.light.color
+                  phase: normal
+                  priority: 3
+                  qualifier: '1'
+                  target: Actor
+                  type: override
+                  value: '#9141AC'
+                - key: token.light.animation.type
+                  phase: normal
+                  priority: 3
+                  qualifier: '1'
+                  target: Actor
+                  type: override
+                  value: sunburst
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 1
+                - 0
+              type: changes
+          class: necromancer
+          competence:
+            raw: 0
+          costs:
+            primary:
+              mp:
+                formula: '1'
+                type: formula
+          delivery: self
+          duration:
+            raw: '8'
+            unit: hour
+          elements:
+            - necromancy
+          executionTime:
+            base: a1
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          identifier: crown-of-fear
+          interaction: manifest
+          maneuver: active
+          mundane: false
+          overview:
+            base: >-
+              <p>A small circle of glowing purple mist circles above your head.
+              You gain @L[Ability:Fear Touch]{Fear Touch} and @L[Ability:Fear
+              Aura]{Fear Aura}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          rotator: true
+          spell: true
+          standard: true
+          sustained: true
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: gKuZih57fKseeT6I
+        _key: >-
+          !actors.items.effects!127d950b1eb312bd.p6bcXHlxm3IGcpde.gKuZih57fKseeT6I
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.12c2bc74fed2e058
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/fear-touch.webp
         name: Fear Touch
         system:
-          _sup: 1BAPtC9VK930dc26
+          _sup: 9YaKtU9qIwpFdK1w
           automations:
             800c70e6560525a8:
               _id: 800c70e6560525a8
@@ -2833,164 +3294,53 @@ items:
           standard: true
           targets:
             - creature
+        transfer: true
         type: ability
-      - _id: JFQwPusSGXNlFxzg
+      - _id: zZzZ4btFHgEgY2J0
         _key: >-
-          !actors.items.effects!127d950b1eb312bd.p6bcXHlxm3IGcpde.JFQwPusSGXNlFxzg
+          !actors.items.effects!127d950b1eb312bd.p6bcXHlxm3IGcpde.zZzZ4btFHgEgY2J0
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.24ca0fecea593c33
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.C6frBNJPvLFOMnx9
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
-        img: systems/teriock/src/icons/abilities/necromancy-elder-sorcery.webp
-        name: Necromancy Elder Sorcery
+          systemVersion: 0.12.0
+        img: systems/teriock/src/icons/abilities/fear-aura.webp
+        name: Fear Aura
         system:
-          class: necromancer
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: necromancy-elder-sorcery
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          overview:
-            base: >-
-              <p>You gain @L[Ability:Elder Sorcery Creation]{Elder Sorcery
-              Creation}, @L[Ability:Celestial Elder Sorcery Words]{Celestial
-              Elder Sorcery Words}, and @L[Ability:Necromancy Elder Sorcery
-              Words]{Necromancy Elder Sorcery Words}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          skill: true
-          targets:
-            - self
-        type: ability
-      - _id: K8EJXv7LY5PpOXuY
-        _key: >-
-          !actors.items.effects!127d950b1eb312bd.p6bcXHlxm3IGcpde.K8EJXv7LY5PpOXuY
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.44b9f6ea2a6750be
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.11.6
-        img: >-
-          systems/teriock/src/icons/abilities/necromancy-elder-sorcery-words.webp
-        name: Necromancy Elder Sorcery Words
-        system:
-          _sup: JFQwPusSGXNlFxzg
-          class: necromancer
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          elderSorcery: true
-          elements:
-            - necromancy
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: special
-          identifier: necromancy-elder-sorcery-words
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          overview:
-            base: >-
-              <p>You know @L[Core:Elder Sorcery]{OP} 1 @L[Core:Necromancy Elder
-              Sorcery Words]{Necromancy Elder Sorcery words}.</p><table
-              class="wikitable sortable"><caption style="white-space:nowrap">OP
-              1 Necromancy @L[Core:Elder Sorcery Words]{Elder Sorcery
-              Words}</caption><tbody><tr><th
-              style="background-color:#e5a50a1A">OP</th><th
-              style="background-color:#0000001A">@L[Class:Necromancer]{Necromancy
-              Nouns}</th><th
-              style="background-color:#0000001A">@L[Class:Necromancer]{Necromancy
-              Verbs}</th></tr><tr><td rowspan="9"
-              style="background-color:#f9f06b1A">1</td><td
-              style="background-color:#77767b1A">blemish</td><td
-              style="background-color:#77767b1A">force</td></tr> <tr><td
-              style="background-color:#0000001A">darkness</td><td
-              style="background-color:#0000001A">intimidate</td></tr> <tr><td
-              style="background-color:#77767b1A">filth</td><td
-              style="background-color:#77767b1A">shame</td></tr> <tr><td
-              style="background-color:#0000001A">grave</td><td
-              style="background-color:#0000001A">sicken</td></tr> <tr><td
-              style="background-color:#77767b1A">pain</td><td
-              style="background-color:#77767b1A">spoil</td></tr> <tr><td
-              style="background-color:#0000001A">seizure</td><td
-              style="background-color:#0000001A">summon</td></tr> <tr><td
-              style="background-color:#77767b1A">stench</td><td
-              style="background-color:#77767b1A">taint</td></tr> <tr><td
-              style="background-color:#0000001A">tears</td><td
-              style="background-color:#0000001A">twist</td></tr> <tr><td
-              style="background-color:#77767b1A">woe</td><td
-              style="background-color:#77767b1A">wrench</td></tr></tbody></table><p></p>
-            fluent: >-
-              <p>The @L[Core:Elder Sorcery]{OP} of words you know is 1 + (3 ×
-              @L[Core:Fluency Bonus]{F}).</p>
-            proficient: >-
-              <p>The @L[Core:Elder Sorcery]{OP} of words you know is 1 + (3 ×
-              @L[Core:Proficiency Bonus]{P}).</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - magical
-          range:
-            unit: self
-          skill: true
-          targets:
-            - self
-        type: ability
-      - _id: GF9CzLYvEuHeIKIm
-        _key: >-
-          !actors.items.effects!127d950b1eb312bd.p6bcXHlxm3IGcpde.GF9CzLYvEuHeIKIm
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.e28f577c843bc530
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.11.6
-        img: systems/teriock/src/icons/abilities/necromancy-rotators.webp
-        name: Necromancy Rotators
-        system:
+          _sup: 9YaKtU9qIwpFdK1w
           automations:
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
-              changes:
-                - key: system.magic.maxRotators.raw
-                  mode: 4
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: '@rank.mag - 1'
+            800c70e6560525a8:
+              _id: 800c70e6560525a8
+              competencies:
+                - 0
+                - 1
+                - 2
+              formula: (@h)d4[magic terror]
+              heighten:
+                - 1
+              impact: damage
+              merge: true
+              type: roll
+            b4960732f0b9ed9f:
+              _id: b4960732f0b9ed9f
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              executor: true
+              heighten:
+                - 1
+                - 0
+              relation: include
+              status: frightened
+              target: false
+              type: status
+            d635eb44dba086dd:
+              _id: d635eb44dba086dd
               competencies:
                 - 0
                 - 1
@@ -3001,354 +3351,37 @@ items:
               heighten:
                 - 1
                 - 0
-              type: changes
-            f025905e157ac261:
-              _id: f025905e157ac261
-              changes:
-                - key: system.magic.maxRotators.raw
-                  mode: 4
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: 2 * (@rank.mag - 1)
-              competencies:
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
-              type: changes
-            f7da3b5e1992a724:
-              _id: f7da3b5e1992a724
-              changes:
-                - key: system.magic.maxRotators.raw
-                  mode: 4
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: 2 * (@rank.mag - 1) + @p
-              competencies:
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
-              type: changes
-          class: necromancer
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: necromancy-rotators
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          overview:
-            base: >-
-              <p>Having mastered the basic techniques in this field of magic,
-              you are able to cast more advanced @L[Category:Spells]{spells}. If
-              you create any @L[Core:Elder Sorcery]{Elder Sorcery}
-              @L[Category:Spells]{spells} of your own, they get added to this
-              list. However, just because you "know" how to cast these spells,
-              doesn't mean you are always prepared to. Although all
-              @L[Category:Mage classes]{mage classes} grant their own
-              @L[Core:Elder Sorcery]{Elder Sorcery} and @L[Category:Rotator
-              spells]{rotator spells}, you may only have a maximum of
-              @L[Category:Mage classes]{MR} - 1 of these spells rotated into
-              your spell list at any given time across <i>all</i> classes.
-              @L[Category:Mage classes]{MR} refers to the number of
-              @L[Core:Leveling Up]{ranks} you have in @L[Category:Mage
-              classes]{mage classes}. During a @L[Core:Long Rest]{long rest},
-              you can "rotate" which spells you have prepared. The
-              @L[Category:Rotator spells]{rotator spells} automatically
-              available to you are @L[Ability:Crown of Fear]{Crown of Fear},
-              @L[Ability:Death Rattle]{Death Rattle}, @L[Ability:Ethereal
-              Shift]{Ethereal Shift}, @L[Ability:Spirit Bury]{Spirit Bury}, and
-              @L[Ability:Undead Reanimation]{Undead Reanimation}.</p>
-            fluent: >-
-              <p>You may instead prepare 2 × (MR - 1) + @L[Core:Proficiency
-              Bonus]{P} of these @L[Category:Spells]{spells}.</p>
-            proficient: >-
-              <p>You may instead prepare 2 × (MR - 1) of these
-              @L[Category:Spells]{spells}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          skill: true
-          targets:
-            - self
-        type: ability
-      - _id: TnpiUvoqLIbNgTgF
-        _key: >-
-          !actors.items.effects!127d950b1eb312bd.p6bcXHlxm3IGcpde.TnpiUvoqLIbNgTgF
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.22c986b97b5f3050
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.11.6
-        img: systems/teriock/src/icons/abilities/spirit-bury.webp
-        name: Spirit Bury
-        system:
-          _sup: GF9CzLYvEuHeIKIm
-          automations:
-            6a329470043b61f6:
-              _id: 6a329470043b61f6
-              competencies:
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              duration:
-                raw: '600'
-                unit: second
-              heighten:
-                - 1
-                - 0
-              mode: 5
-              type: duration
-            72ce567009179bea:
-              _id: 72ce567009179bea
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              duration:
-                raw: '@h * 3600'
-                unit: second
-              heighten:
-                - 1
-              mode: 5
-              type: duration
+              type: combatExpiration
+              what:
+                roll: 2d4kh1
+                threshold: 4
+                type: rolled
+              when:
+                skip: 0
+                time: end
+                trigger: turn
+              who:
+                type: target
           class: necromancer
           competence:
             raw: 0
           costs:
-            components:
-              somatic:
-                type: tag
-              verbal:
-                type: tag
-          delivery: hand
-          duration:
-            raw: '1'
-            unit: minute
-          elements:
-            - necromancy
-          executionTime:
-            base: a1
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: special
-          heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-            effect increases by 1 hour.</p>
-          identifier: spirit-bury
-          interaction: attack
-          invoked: true
-          maneuver: active
-          mundane: false
-          overview:
-            proficient: <p>This effect lasts 10 minutes instead of 1. </p>
-          piercing:
-            raw: 0
-          powerSources:
-            - magical
-          range:
-            unit: contact
-          requirements: <p>Target is @L[Condition:Dead]{dead}.</p>
-          results:
-            hit: <p>Target cannot become @L[Condition:Wisping]{wisping}.</p>
-          rotator: true
-          spell: true
-          standard: true
-          targets:
-            - creature
-        type: ability
-      - _id: WrBepGdTXcu03wfx
-        _key: >-
-          !actors.items.effects!127d950b1eb312bd.p6bcXHlxm3IGcpde.WrBepGdTXcu03wfx
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.d55e95fe50086ba1
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.11.6
-        img: systems/teriock/src/icons/abilities/undead-reanimation.webp
-        name: Undead Reanimation
-        system:
-          _sup: GF9CzLYvEuHeIKIm
-          class: necromancer
-          competence:
-            raw: 0
-          costs:
-            components:
-              somatic:
-                type: tag
-              verbal:
-                type: tag
-          delivery: self
-          duration:
-            raw: '8'
-            unit: hour
-          elements:
-            - necromancy
-          executionTime:
-            base: a1
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: special
-          identifier: undead-reanimation
-          interaction: manifest
-          invoked: true
-          maneuver: active
-          mundane: false
-          overview:
-            base: >-
-              <p>You gain @L[Ability:Zombify]{Zombify} and @L[Ability:Animate
-              Dead]{Animate Dead}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - magical
-          range:
-            unit: self
-          rotator: true
-          spell: true
-          standard: true
-          targets:
-            - self
-        type: ability
-      - _id: Zb6qxYcPtA9HYMMB
-        _key: >-
-          !actors.items.effects!127d950b1eb312bd.p6bcXHlxm3IGcpde.Zb6qxYcPtA9HYMMB
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.24a2a3db4a940311
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.11.6
-        img: systems/teriock/src/icons/abilities/zombify.webp
-        name: Zombify
-        system:
-          _sup: WrBepGdTXcu03wfx
-          automations:
-            72ce567009179bea:
-              _id: 72ce567009179bea
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              duration:
-                raw: '@h * 3600'
-                unit: second
-              heighten:
-                - 1
-              mode: 5
-              type: duration
-            838ba57012685987:
-              _id: 838ba57012685987
-              competencies:
-                - 2
-              crit:
-                - 0
-                - 1
-              duration:
-                raw: '3600'
-                unit: second
-              heighten:
-                - 1
-                - 0
-              mode: 5
-              type: duration
-            ngQVntiCQ8Ruot8n:
-              _id: ngQVntiCQ8Ruot8n
-              automatic: true
-              competence:
-                raw: 0
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              documents:
-                - Compendium.teriock.species.Item.b3708edf8c3c5c9f
-              heighten:
-                - 0
-                - 1
-              multi: false
-              override:
-                - art
-              overrideCompetence: true
-              reset:
-                - hp
-                - mp
-              ring: false
-              suppress:
-                - body
-                - fluency
-                - rank
-                - species
-              type: transformation
-          class: necromancer
-          competence:
-            raw: 0
-          costs:
-            components:
-              somatic:
-                type: tag
-              verbal:
-                type: tag
-          delivery: hand
+            primary:
+              mp:
+                formula: '1'
+                type: formula
+          delivery: aura
           duration:
             raw: '1'
             unit: minute
           effectTypes:
-            - control
-            - reanimation
+            - mental
           elements:
             - necromancy
+          endCondition: >-
+            <p>At the end of each of the target's @L[Core:Turn]{turns}, they
+            roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
+            ends.</p>
           executionTime:
             base: a1
             slow:
@@ -3360,39 +3393,26 @@ items:
           featSaveAttribute: mov
           form: normal
           heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-            effect increases by 1 hour.</p>
-          identifier: zombify
-          interaction: attack
-          invoked: true
+            <p>For each additional @L[Core:MP]{MP} spent, deal an additional
+            [[/damage 1d4[magic terror]]] @L[Core:Damage]{damage}  as well.</p>
+          identifier: fear-aura
+          interaction: feat
           maneuver: active
           mundane: false
-          overview:
-            fluent: >-
-              <p>The base duration of this effect is 1 hour and the
-              @L[Creature:Zombie]{zombie} is a @L[Core:Minions]{minion} under
-              your command.</p>
-            proficient: <p>[[lookup name]] is @L[Keyword:Warded]{warded}.</p>
           piercing:
-            raw: 2
+            raw: 0
           powerSources:
             - magical
           range:
-            unit: contact
-          requirements: <p>Target is @L[Condition:Dead]{dead}.</p>
+            raw: '10'
+            unit: ft
           results:
-            hit: >-
-              <p>Target is reanimated as a @L[Creature:Zombie]{zombie}. It is
-              not under your command, but is hostile to everyone other than you
-              that is not @L[Category:Zombies]{another zombie}. The
-              @L[Creature:Zombie]{zombie} keeps the @L[Core:Size]{SIZE} it had
-              before, but loses all other traits and abilities. If the target
-              was already @L[Category:Zombies]{some kind of zombie}, then it is
-              reanimated as that type.</p>
+            fail: <p>Target is @L[Condition:Frightened]{frightened}.</p>
           spell: true
           standard: true
           targets:
             - creature
+        transfer: true
         type: ability
     folder: a4e3527bf26a4ba9
     img: systems/teriock/src/icons/ranks/rank-2-necromancer.webp
@@ -3427,20 +3447,20 @@ items:
     _key: '!actors.items!127d950b1eb312bd.uZ7knAa963eravM0'
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.6f07eadb146296ed
-      coreVersion: '13'
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     effects:
       - _id: Evxc3U5JhwQGQ20q
         _key: >-
           !actors.items.effects!127d950b1eb312bd.uZ7knAa963eravM0.Evxc3U5JhwQGQ20q
         _stats:
-          compendiumSource: Compendium.teriock.properties.Item.417457cfa2643f5b
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.417457cfa2643f5b
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -3452,16 +3472,17 @@ items:
           form: intrinsic
           identifier: handy
           mundane: true
+        transfer: true
         type: property
       - _id: DQzt6pNKPtRnFanT
         _key: >-
           !actors.items.effects!127d950b1eb312bd.uZ7knAa963eravM0.DQzt6pNKPtRnFanT
         _stats:
-          compendiumSource: Compendium.teriock.properties.Item.2b089d071e86e644
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.2b089d071e86e644
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/properties/terrorizing.webp
         name: Terrorizing
         system:
@@ -3474,16 +3495,17 @@ items:
           form: intrinsic
           identifier: terrorizing
           mundane: false
+        transfer: true
         type: property
       - _id: H2zNAUHrLOP1xW5j
         _key: >-
           !actors.items.effects!127d950b1eb312bd.uZ7knAa963eravM0.H2zNAUHrLOP1xW5j
         _stats:
-          compendiumSource: Compendium.teriock.properties.Item.891de334396620e1
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.891de334396620e1
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -3495,6 +3517,7 @@ items:
           form: intrinsic
           identifier: weapon
           mundane: true
+        transfer: true
         type: property
     folder: a4e3527bf26a4ba9
     img: systems/teriock/src/icons/body-parts/shadow-tendril.webp
@@ -3510,6 +3533,8 @@ items:
         base: 1d6
       fightingStyle: savage
       identifier: shadow-tendril
+      impacts:
+        - damage
       range:
         long:
           unit: melee
@@ -3519,24 +3544,24 @@ items:
           unit: self
       vitals: false
     type: body
-  - _id: ftT9tkSYRGHyOIRk
-    _key: '!actors.items!127d950b1eb312bd.ftT9tkSYRGHyOIRk'
+  - _id: j0ibuL5VmE1nvomG
+    _key: '!actors.items!127d950b1eb312bd.j0ibuL5VmE1nvomG'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.4a095aaed0254ec3
-      coreVersion: '13'
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     effects:
       - _id: NGCuRUaVtXnxAbRe
         _key: >-
-          !actors.items.effects!127d950b1eb312bd.ftT9tkSYRGHyOIRk.NGCuRUaVtXnxAbRe
+          !actors.items.effects!127d950b1eb312bd.j0ibuL5VmE1nvomG.NGCuRUaVtXnxAbRe
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.ac35fb736d8bd407
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.ac35fb736d8bd407
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/arcane-ray.webp
         name: Arcane Ray
         system:
@@ -3609,16 +3634,17 @@ items:
           standard: true
           targets:
             - creature
+        transfer: true
         type: ability
       - _id: aCWLNsvSFjEuLTyl
         _key: >-
-          !actors.items.effects!127d950b1eb312bd.ftT9tkSYRGHyOIRk.aCWLNsvSFjEuLTyl
+          !actors.items.effects!127d950b1eb312bd.j0ibuL5VmE1nvomG.aCWLNsvSFjEuLTyl
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.30358f2e8d9b3a0a
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.30358f2e8d9b3a0a
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/staff-touch.webp
         name: Staff Touch
         system:
@@ -3673,11 +3699,13 @@ items:
           standard: true
           targets:
             - self
+        transfer: true
         type: ability
     flags:
       teriockDocumentSettings:
-        sheetBlockChildGapless: false
-        sheetBlockChildSize: medium
+        sheet:
+          blockChildGapless: false
+          blockChildSize: medium
     folder: 4a095aaed0254ec3
     img: systems/teriock/src/icons/archetypes/mage.webp
     name: Mage
@@ -3692,12 +3720,10 @@ items:
         control the flow of a battle while avoiding messy melees.</p>
       identifier: mage
       maxAv: 0
-      type: learned
-    type: power
+    type: archetype
 name: Large Shadow Elemental
 prototypeToken:
   actorLink: false
-  alpha: 1
   appendNumber: false
   bar1:
     attribute: hp
@@ -3710,36 +3736,22 @@ prototypeToken:
   ring:
     enabled: true
   texture:
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     src: systems/teriock/src/icons/tokens/large-shadow-elemental.webp
   turnMarker:
     disposition: false
     mode: 1
   width: 2
 system:
-  combat:
-    attackPenalty: 0
-    hasReaction: true
   detection:
     hiding:
       raw: '@snk.pas'
     perceiving:
       raw: '@per.pas'
   hp:
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
     value: 28
   identifier: large-shadow-elemental
   initiative: 1d20 + @mov
   mp:
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
     value: 20
   presence:
     max: 1
@@ -3747,13 +3759,9 @@ system:
     value: 0
   scaling:
     brScale: true
-    lvl: 1
   size:
     number:
       raw: '7'
-  weight:
-    self:
-      raw: pow(3 + @size, 3)
   wielding:
     attacker: uZ7knAa963eravM0
     blocker: uZ7knAa963eravM0

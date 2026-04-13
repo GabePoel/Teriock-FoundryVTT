@@ -1,122 +1,53 @@
 _id: 25a219e3670cd776
-_key: '!items!25a219e3670cd776'
+_key: '!effects!25a219e3670cd776'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 25a219e3670cd776
-    _key: '!items.effects!25a219e3670cd776.25a219e3670cd776'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: icons/magic/defensive/shield-barrier-flaming-pentagon-purple-orange.webp
-    name: Spell Catch
-    system:
-      competence:
-        raw: 0
-      delivery: weapon
-      duration:
-        raw: '1'
-        unit: hour
-      executionTime: r1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: spell-catch
-      interaction: block
-      maneuver: reactive
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      requirements: >-
-        <p>Target is a @L[Category:Missile delivery spells]{missile attack
-        spell} being cast by an opponent.</p>
-      results:
-        save: >-
-          <p>The target @L[Core:Interactions]{attack} @L[Category:Missile
-          delivery spells]{spell} @L[Core:Fizzles]{fizzles} and gets "stored" in
-          the @L[Category:Weapons]{weapon} used to deliver [[lookup name]]. For
-          the duration of [[lookup name]], you gain @L[Keyword:Adept]{Adept}
-          @L[Keyword:Limited]{Limited} @L[Keyword:Improved]{Improved}
-          @L[Ability:Spell Strike]{Spell Strike}. Only one @L[Category:Missile
-          delivery spells]{spell} can be stored in the
-          @L[Category:Weapons]{weapon} at a time.</p>
-      targets:
-        - spell
-    type: ability
-  - _id: qtyp13EYb61o4g3y
-    _key: '!items.effects!25a219e3670cd776.qtyp13EYb61o4g3y'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.ea1ecd00bc4430e1
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/spell-strike.webp
-    name: Spell Strike
-    system:
-      _sup: 25a219e3670cd776
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-        tweaks:
-          adept: 1
-      delivery: weapon
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: r0
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: spell-strike
-      improvement: >-
-        <p>You are considered to have and be @L[Core:Proficiency
-        Bonus]{proficient} in the stored spell for this purpose.</p>
-      interaction: manifest
-      limitation: >-
-        <p>Can only be used with the stored spell and the item it is stored
-        in.</p>
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>Target takes the "on hit" effect of a @L[Category:Missile delivery
-          spells]{missile spell} that you are @L[Core:Proficiency
-          Bonus]{proficient} in. If the triggering hit was a critical hit, then
-          the target takes the "on critical hit" effect instead.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      skill: true
-      standard: true
-      targets:
-        - creature
-      trigger: >-
-        <p>You have just landed a hit with a @L[Category:Weapon delivery
-        abilities]{weapon} or @L[Category:Bite delivery abilities]{bite}
-        @L[Category:Attack abilities]{attack} on another creature and the effect
-        has successfully applied.</p>
-    type: ability
+  systemVersion: 0.12.0
 img: icons/magic/defensive/shield-barrier-flaming-pentagon-purple-orange.webp
 name: Spell Catch
-type: wrapper
+system:
+  competence:
+    raw: 0
+  delivery: weapon
+  duration:
+    raw: '1'
+    unit: hour
+  executionTime:
+    base: r1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  identifier: spell-catch
+  interaction: block
+  maneuver: reactive
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: contact
+  requirements: >-
+    <p>Target is a @L[Category:Missile delivery spells]{missile attack spell}
+    being cast by an opponent.</p>
+  results:
+    save: >-
+      <p>The target @L[Core:Interactions]{attack} @L[Category:Missile delivery
+      spells]{spell} @L[Core:Fizzles]{fizzles} and gets "stored" in the
+      @L[Category:Weapons]{weapon} used to deliver [[lookup name]]. For the
+      duration of [[lookup name]], you gain @L[Keyword:Adept]{Adept}
+      @L[Keyword:Limited]{Limited} @L[Keyword:Improved]{Improved}
+      @L[Ability:Spell Strike]{Spell Strike}. Only one @L[Category:Missile
+      delivery spells]{spell} can be stored in the @L[Category:Weapons]{weapon}
+      at a time.</p>
+  targets:
+    - spell
+transfer: true
+type: ability

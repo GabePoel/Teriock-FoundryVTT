@@ -1,67 +1,68 @@
 _id: aaa59cf7fb2b88ab
-_key: '!items!aaa59cf7fb2b88ab'
+_key: '!effects!aaa59cf7fb2b88ab'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: aaa59cf7fb2b88ab
-    _key: '!items.effects!aaa59cf7fb2b88ab.aaa59cf7fb2b88ab'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/unglue.webp
-    name: Unglue
-    system:
-      automations:
-        Kd7EJ2F01l6h5bzk:
-          _id: Kd7EJ2F01l6h5bzk
-          common:
-            - unglue
-          type: common
-      class: thief
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: hand
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - stealing
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: unglue
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: <p>Target is no longer @L[Property:Glued]{glued} and you take it.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - spiritual
-      range:
-        unit: contact
-      requirements: >-
-        <p>Target's bearer is @L[Condition:Down]{down} or target it
-        @L[Property:Searchable]{searchable}.</p>
-      skill: true
-      standard: true
-      targets:
-        - item
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/unglue.webp
 name: Unglue
-type: wrapper
+system:
+  automations:
+    Kd7EJ2F01l6h5bzk:
+      _id: Kd7EJ2F01l6h5bzk
+      common:
+        - unglue
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 0
+        - 1
+      type: common
+  class: thief
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: hand
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - stealing
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: unglue
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: <p>Target is no longer @L[Property:Glued]{glued} and you take it.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - spiritual
+  range:
+    unit: contact
+  requirements: >-
+    <p>Target's bearer is @L[Condition:Down]{down} or target it
+    @L[Property:Searchable]{searchable}.</p>
+  skill: true
+  standard: true
+  targets:
+    - item
+transfer: true
+type: ability

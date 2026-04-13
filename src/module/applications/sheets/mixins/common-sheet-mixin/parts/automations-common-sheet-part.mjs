@@ -2,6 +2,7 @@ import { BaseAutomation } from "../../../../../data/pseudo-documents/automations
 import { localizeChoices } from "../../../../../helpers/localization.mjs";
 import { objectMap } from "../../../../../helpers/utils.mjs";
 import { selectDialog } from "../../../../dialogs/select-dialog.mjs";
+import { TeriockTextEditor } from "../../../../ux/_module.mjs";
 
 /**
  * @param {typeof TeriockDocumentSheet} Base
@@ -19,15 +20,21 @@ export default (Base) => {
           createAutomation: this._onCreateAutomation,
           deleteAutomation: this._onDeleteAutomation,
           setToggle: this._onSetToggle,
+          toggleAutomationCollapse: this._onToggleAutomationCollapse,
         },
       };
+
+      /** @inheritDoc */
+      constructor(...args) {
+        super(...args);
+        this._automationCollapsedIds = new Set();
+      }
 
       /**
        * Create an automation.
        * @returns {Promise<void>}
        */
       static async _onCreateAutomation() {
-        //noinspection JSUnresolvedReference
         const choices = localizeChoices(
           objectMap(
             this.document.system.constructor.automationTypes,
@@ -41,13 +48,9 @@ export default (Base) => {
           choice = Object.keys(choices)[0];
         } else {
           choice = await selectDialog(choices, {
-            hint: game.i18n.localize(
-              "TERIOCK.DIALOGS.Select.AddAutomation.hint",
-            ),
+            hint: _loc("TERIOCK.DIALOGS.Select.AddAutomation.hint"),
             icon: TERIOCK.display.icons.pseudoDocument.automation,
-            title: game.i18n.localize(
-              "TERIOCK.DIALOGS.Select.AddAutomation.title",
-            ),
+            title: _loc("TERIOCK.DIALOGS.Select.AddAutomation.title"),
           });
         }
         if (!choice) return;
@@ -65,9 +68,7 @@ export default (Base) => {
        */
       static async _onDeleteAutomation(_event, target) {
         const id = target.dataset.id;
-        const automation =
-          /** @type {BaseAutomation} */
-          this.document.system.automations.get(id);
+        const automation = this.document.system.automations.get(id);
         await automation.delete();
       }
 
@@ -91,6 +92,57 @@ export default (Base) => {
         await this.document.update({ [path]: Array.from(set) });
       }
 
+      /**
+       * Toggle an automation section's collapsed state.
+       * @param {PointerEvent} event
+       * @param {HTMLElement} target
+       * @this {AutomationsCommonSheetPart}
+       */
+      static _onToggleAutomationCollapse(event, target) {
+        if (event.target.closest(".teriock-automation-header-buttons")) return;
+        const container = target.closest(".teriock-automation-container");
+        const id = container?.dataset.automationId;
+        if (!id || !container) return;
+        if (this._automationCollapsedIds.has(id)) {
+          this._automationCollapsedIds.delete(id);
+          container.classList.remove("collapsed");
+        } else {
+          this._automationCollapsedIds.add(id);
+          container.classList.add("collapsed");
+        }
+      }
+
+      /**
+       * Whether automations can be dropped.
+       * @returns {boolean}
+       */
+      get _canDropAutomations() {
+        return this._tab === "automations";
+      }
+
+      /**
+       * Create an automation on drop.
+       * @param {Teriock.Sheet.EmbedDragEvent} event
+       * @returns {Promise<void>}
+       */
+      async _onDropAutomation(event) {
+        if (!this._canDropAutomations) return;
+        const dropData = TeriockTextEditor.getDragEventData(event);
+        if (dropData.startSheet === this.id) return;
+        if (dropData.type !== "Automation") return;
+        const auto = await BaseAutomation.fromDropData(dropData);
+        if (!auto) return;
+        const data = auto.toObject();
+        if (
+          !Object.keys(
+            this.document.system.constructor.automationTypes,
+          ).includes(data.type)
+        ) {
+          return;
+        }
+        await BaseAutomation.create(data, { parent: this.document });
+      }
+
       /** @inheritDoc */
       async _prepareContext(options = {}) {
         const context = await super._prepareContext(options);
@@ -100,7 +152,14 @@ export default (Base) => {
             automations.map(async (automation) => {
               const formEditor = await automation.getEditor();
               const messages = automation.formMessages;
-              return { automation, formEditor: formEditor.outerHTML, messages };
+              return {
+                automation,
+                automationCollapsed: this._automationCollapsedIds.has(
+                  automation.id,
+                ),
+                formEditor: formEditor.outerHTML,
+                messages,
+              };
             }),
           );
         }

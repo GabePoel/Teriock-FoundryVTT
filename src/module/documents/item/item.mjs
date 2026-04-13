@@ -1,5 +1,5 @@
 import { documentTypes } from "../../constants/system/document-types.mjs";
-import { mix } from "../../helpers/utils.mjs";
+import { mix } from "../../helpers/construction.mjs";
 import * as mixins from "../mixins/_module.mjs";
 
 const { Item } = foundry.documents;
@@ -93,17 +93,6 @@ export default class TeriockItem extends mix(
    */
   get active() {
     return !this.isSuppressed && !this.disabled;
-  }
-
-  /** @inheritDoc */
-  get apps() {
-    if (this.type === "wrapper" && this.system?.effect) {
-      return {
-        [this.system?.effect.sheet.id]: this.system?.effect.sheet,
-      };
-    } else {
-      return super.apps;
-    }
   }
 
   /**

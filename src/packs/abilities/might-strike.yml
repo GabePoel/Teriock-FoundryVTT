@@ -1,110 +1,107 @@
 _id: 21aacc3415e6c532
-_key: '!items!21aacc3415e6c532'
+_key: '!effects!21aacc3415e6c532'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 21aacc3415e6c532
-    _key: '!items.effects!21aacc3415e6c532.21aacc3415e6c532'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/might-strike.webp
-    name: Might Strike
-    system:
-      automations:
-        29b275994cf9f5b1:
-          _id: 29b275994cf9f5b1
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: 1d4
-          heighten:
-            - 1
-            - 0
-          merge: true
-          roll: damage
-          type: roll
-        9ad6dfd8be12f59a:
-          _id: 9ad6dfd8be12f59a
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          macro: Compendium.teriock.execution.Macro.e805e3fad6cedde3
-          trigger: preExecute
-          type: abilityMacro
-      class: paladin
-      competence:
-        raw: 0
-      costs:
-        components:
-          material:
-            description: <p>Something symbolic of your deity.</p>
-            type: description
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: self
-      duration:
-        raw: '0'
-        triggers:
-          - dawn
-        unit: unlimited
-      executionTime: 10 Minutes
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: might-strike
-      interaction: manifest
-      maneuver: slow
-      overview:
-        base: >-
-          <p>Choose a @L[Category:Weapon classes]{class of weapons}. All
-          @L[Category:Weapons]{weapons} you use of the chosen @L[Category:Weapon
-          classes]{class} deal either an additional [[/damage 1d4[holy]]]
-          @L[Core:Damage]{damage} or [[/damage 1d4]] @L[Core:Damage]{damage} of
-          a type corresponding to the @L[Core:Domains]{domain} of your deity.
-          You may decide which of these benefits a @L[Category:Weapons]{weapon}
-          gets every time you attempt an @L[Category:Attack abilities]{attack}
-          with it. In addition, all @L[Core:Damage]{damage} dealt by a single
-          chosen @L[Category:Weapons]{weapon} of that @L[Category:Weapon
-          classes]{class} is @L[Damage:Magic]{magic} as long as you are
-          @L[Core:Presence]{attuned} to it.<table class="wikitable
-          sortable"><caption>Benefits by
-          Domain</caption><tbody><tr><th>Domain</th><th><a class="mw-selflink
-          selflink">Might Strike</a> Damage
-          Type</th></tr><tr><td>Celestial</td><td>@L[Damage:Silver]{Silver}</td></tr><tr><td>Crafting</td><td>@L[Damage:Fire]{Fire}</td></tr><tr><td>Death</td><td>@L[Damage:Terror]{Terror}</td></tr><tr><td>Destruction</td><td>@L[Damage:Fire]{Fire}</td></tr><tr><td>Fortune</td><td>@L[Damage:Ice]{Ice}</td></tr><tr><td>Healing</td><td>@L[Damage:Terror]{Terror}</td></tr><tr><td>Hearth</td><td>@L[Damage:Fire]{Fire}</td></tr><tr><td>Knowledge</td><td>@L[Damage:Psychic]{Psychic}</td></tr><tr><td>Nature</td><td>@L[Damage:Vine]{Vine}</td></tr><tr><td>Spirit</td><td>@L[Damage:Spiritual]{Spiritual}</td></tr><tr><td>Trickster</td><td>@L[Damage:Vine]{Vine}</td></tr><tr><td>Value</td><td>@L[Damage:Financial]{Financial}</td></tr><tr><td>Weather</td><td>@L[Damage:Ice]{Ice}</td></tr></tbody></table></p>
-      piercing:
-        raw: 0
-      powerSources:
-        - divine
-      range:
-        unit: self
-      requirements: <p>You are not @L[Core:Sustained]{sustaining} [[lookup name]].</p>
-      ritual: true
-      skill: true
-      standard: true
-      sustained: true
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/might-strike.webp
 name: Might Strike
-type: wrapper
+system:
+  automations:
+    29b275994cf9f5b1:
+      _id: 29b275994cf9f5b1
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: 1d4
+      heighten:
+        - 1
+        - 0
+      impact: damage
+      merge: true
+      type: roll
+    9ad6dfd8be12f59a:
+      _id: 9ad6dfd8be12f59a
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      macro: Compendium.teriock.execution.Macro.e805e3fad6cedde3
+      trigger: preExecute
+      type: abilityMacro
+  class: paladin
+  competence:
+    raw: 0
+  costs:
+    components:
+      material:
+        description: <p>Something symbolic of your deity.</p>
+        type: description
+      somatic:
+        type: tag
+      verbal:
+        type: tag
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: self
+  duration:
+    raw: '0'
+    triggers:
+      - dawn
+    unit: unlimited
+  executionTime:
+    base: 10 Minutes
+    slow:
+      raw: '10'
+      unit: minute
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: might-strike
+  interaction: manifest
+  maneuver: slow
+  mundane: false
+  overview:
+    base: >-
+      <p>Choose a @L[Category:Weapon classes]{class of weapons}. All
+      @L[Category:Weapons]{weapons} you use of the chosen @L[Category:Weapon
+      classes]{class} deal either an additional [[/damage 1d4[holy]]]
+      @L[Core:Damage]{damage} or [[/damage 1d4]] @L[Core:Damage]{damage} of a
+      type corresponding to the @L[Core:Domains]{domain} of your deity. You may
+      decide which of these benefits a @L[Category:Weapons]{weapon} gets every
+      time you attempt an @L[Category:Attack abilities]{attack} with it. In
+      addition, all @L[Core:Damage]{damage} dealt by a single chosen
+      @L[Category:Weapons]{weapon} of that @L[Category:Weapon classes]{class} is
+      @L[Damage:Magic]{magic} as long as you are @L[Core:Presence]{attuned} to
+      it.</p><table class="wikitable sortable"><caption>Benefits by
+      Domain</caption><tbody><tr><th>Domain</th><th><a class="mw-selflink
+      selflink">Might Strike</a> Damage
+      Type</th></tr><tr><td>Celestial</td><td>@L[Damage:Silver]{Silver}</td></tr><tr><td>Crafting</td><td>@L[Damage:Fire]{Fire}</td></tr><tr><td>Death</td><td>@L[Damage:Terror]{Terror}</td></tr><tr><td>Destruction</td><td>@L[Damage:Fire]{Fire}</td></tr><tr><td>Fortune</td><td>@L[Damage:Ice]{Ice}</td></tr><tr><td>Healing</td><td>@L[Damage:Terror]{Terror}</td></tr><tr><td>Hearth</td><td>@L[Damage:Fire]{Fire}</td></tr><tr><td>Knowledge</td><td>@L[Damage:Psychic]{Psychic}</td></tr><tr><td>Nature</td><td>@L[Damage:Vine]{Vine}</td></tr><tr><td>Spirit</td><td>@L[Damage:Spiritual]{Spiritual}</td></tr><tr><td>Trickster</td><td>@L[Damage:Vine]{Vine}</td></tr><tr><td>Value</td><td>@L[Damage:Financial]{Financial}</td></tr><tr><td>Weather</td><td>@L[Damage:Ice]{Ice}</td></tr></tbody></table><p></p>
+  piercing:
+    raw: 0
+  powerSources:
+    - divine
+  range:
+    unit: self
+  requirements: <p>You are not @L[Core:Sustained]{sustaining} [[lookup name]].</p>
+  ritual: true
+  skill: true
+  standard: true
+  sustained: true
+  targets:
+    - self
+transfer: true
+type: ability

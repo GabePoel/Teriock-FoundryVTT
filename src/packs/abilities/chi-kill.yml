@@ -1,73 +1,72 @@
 _id: f28118176b1f4a8f
-_key: '!items!f28118176b1f4a8f'
+_key: '!effects!f28118176b1f4a8f'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: f28118176b1f4a8f
-    _key: '!items.effects!f28118176b1f4a8f.f28118176b1f4a8f'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/chi-kill.webp
-    name: Chi Kill
-    system:
-      automations:
-        4c81ef1b5374cbfb:
-          _id: 4c81ef1b5374cbfb
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: apply
-          status: dead
-          type: status
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            description: >-
-              <p>You may pay any amount of @L[Core:Hit Points and Mana
-              Points]{MP} when using [[lookup name]].</p>
-            type: description
-      delivery: self
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: a2
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: unp
-      form: special
-      identifier: chi-kill
-      interaction: feat
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - spiritual
-      range:
-        unit: self
-      requirements: <p>You are @L[Condition:Dueling]{dueling} the target.</p>
-      results:
-        fail: >-
-          <p>Target must spend the amount of @L[Core:Hit Points and Mana
-          Points]{MP} you paid on [[lookup name]] or @L[Condition:Dead]{die}.
-          They are aware of how much @L[Core:Hit Points and Mana Points]{MP}
-          they would need to spend.</p>
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/chi-kill.webp
 name: Chi Kill
-type: wrapper
+system:
+  automations:
+    4c81ef1b5374cbfb:
+      _id: 4c81ef1b5374cbfb
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: apply
+      status: dead
+      target: false
+      type: status
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        description: >-
+          <p>You may pay any amount of @L[Core:Hit Points and Mana Points]{MP}
+          when using [[lookup name]].</p>
+        type: description
+  delivery: self
+  duration:
+    raw: '0'
+    unit: instant
+  executionTime:
+    base: a2
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: unp
+  form: special
+  identifier: chi-kill
+  interaction: feat
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - spiritual
+  range:
+    unit: self
+  requirements: <p>You are @L[Condition:Dueling]{dueling} the target.</p>
+  results:
+    fail: >-
+      <p>Target must spend the amount of @L[Core:Hit Points and Mana Points]{MP}
+      you paid on [[lookup name]] or @L[Condition:Dead]{die}. They are aware of
+      how much @L[Core:Hit Points and Mana Points]{MP} they would need to
+      spend.</p>
+  targets:
+    - creature
+transfer: true
+type: ability

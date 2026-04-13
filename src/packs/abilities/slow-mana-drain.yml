@@ -1,58 +1,63 @@
-_id: 698fbd39f541d799
-_key: '!items!698fbd39f541d799'
+_id: 0xeUItY3xpmcwjmG
+_key: '!effects!0xeUItY3xpmcwjmG'
 _stats:
-  coreVersion: '13'
+  compendiumSource: Compendium.world.abilities-backup.ActiveEffect.0xeUItY3xpmcwjmG
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 698fbd39f541d799
-    _key: '!items.effects!698fbd39f541d799.698fbd39f541d799'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/slow-mana-drain.webp
-    name: Slow Mana Drain
-    system:
-      automations:
-        8XZ7f1wVBuhfreru:
-          _id: 8XZ7f1wVBuhfreru
-          type: revitalize
-      competence:
-        raw: 0
-      delivery: hand
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - revitalization
-        - draining
-      executionTime: 10 Minutes
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: slow-mana-drain
-      interaction: manifest
-      maneuver: slow
-      overview:
-        base: >-
-          <p>Deal enough @L[Drain:Mana]{mana drain} to @L[Condition:Dead]{kill}
-          the target. If this successfully @L[Condition:Dead]{kills} the target,
-          you @L[Core:Revitalizing]{revitalize}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/slow-mana-drain.webp
 name: Slow Mana Drain
-type: wrapper
+system:
+  automations:
+    8XZ7f1wVBuhfreru:
+      _id: 8XZ7f1wVBuhfreru
+      competencies:
+        - 0
+        - 1
+        - 2
+      consumeStatDice: true
+      forHarm: false
+      heighten:
+        - 0
+        - 1
+      type: revitalize
+  competence:
+    raw: 0
+  delivery: hand
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - revitalization
+    - draining
+  executionTime:
+    base: 10 Minutes
+    slow:
+      raw: '10'
+      unit: minute
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: slow-mana-drain
+  interaction: manifest
+  maneuver: slow
+  mundane: false
+  overview:
+    base: >-
+      <p>Deal enough @L[Drain:Mana]{mana drain} to @L[Condition:Dead]{kill} the
+      target. If this successfully @L[Condition:Dead]{kills} the target, you
+      @L[Core:Revitalizing]{revitalize}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: contact
+  targets:
+    - creature
+transfer: true
+type: ability

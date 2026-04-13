@@ -1,5 +1,5 @@
 import { TeriockTextEditor } from "../../applications/ux/_module.mjs";
-import { mix } from "../../helpers/utils.mjs";
+import { mix } from "../../helpers/construction.mjs";
 import TeriockChatMessage from "../chat-message/chat-message.mjs";
 import * as mixins from "../mixins/_module.mjs";
 
@@ -64,7 +64,7 @@ export default class TeriockRollTable extends mix(
       {
         author: game.user.id,
         flags: { "core.RollTable": this.id },
-        flavor: game.i18n.format(flavorKey, {
+        flavor: _loc(flavorKey, {
           number: results.length,
           name: foundry.utils.escapeHTML(this.name),
         }),
@@ -75,7 +75,7 @@ export default class TeriockRollTable extends mix(
           avatar: TeriockChatMessage.getSpeakerActor(
             TeriockChatMessage.getSpeaker(),
           )?.img,
-          panels: results.map((r) => r.panelParts),
+          panels: await Promise.all(results.map((r) => r.getPanelParts())),
         },
       },
       messageData,

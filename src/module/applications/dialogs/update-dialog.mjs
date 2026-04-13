@@ -14,8 +14,7 @@ export default async function updateDialog(
   title,
   icon = "file-pen",
 ) {
-  const resolvedTitle =
-    title ?? game.i18n.localize("TERIOCK.DIALOGS.Update.defaults.title");
+  const resolvedTitle = title ?? _loc("TERIOCK.DIALOGS.Update.defaults.title");
   const content = document.createElement("div");
   content.classList.add("teriock-form-container");
   for (const path of paths) {
@@ -34,7 +33,7 @@ export default async function updateDialog(
     buttons: [
       {
         action: "update",
-        label: game.i18n.localize("TERIOCK.DIALOGS.Update.BUTTONS.update"),
+        label: _loc("TERIOCK.DIALOGS.Update.BUTTONS.update"),
         default: true,
         icon: makeIconClass(TERIOCK.display.icons.ui.enable, "button"),
         callback: async function (_event, button) {

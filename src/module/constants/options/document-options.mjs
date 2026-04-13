@@ -17,6 +17,14 @@ export const documentOptions = {
     plural: "TERIOCK.DOCUMENTS.ability.plural",
     sorter: effectSort,
   },
+  archetype: {
+    doc: "Item",
+    getter: "archetypes",
+    icon: icons.document.archetype,
+    name: "TYPES.Item.archetype",
+    plural: "TERIOCK.DOCUMENTS.archetype.plural",
+    sorter: docSort,
+  },
   attunement: {
     doc: "ActiveEffect",
     getter: "attunements",

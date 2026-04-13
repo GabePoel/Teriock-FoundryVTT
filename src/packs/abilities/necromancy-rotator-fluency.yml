@@ -1,78 +1,74 @@
 _id: 8b5c0113b30f150d
-_key: '!items!8b5c0113b30f150d'
+_key: '!effects!8b5c0113b30f150d'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 8b5c0113b30f150d
-    _key: '!items.effects!8b5c0113b30f150d.8b5c0113b30f150d'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/necromancy-rotator-fluency.webp
-    name: Necromancy Rotator Fluency
-    system:
-      automations:
-        f025905e157ac261:
-          _id: f025905e157ac261
-          changes:
-            - key: system.competence.raw
-              mode: 4
-              priority: 10
-              qualifier: '@identifier.necromancy-rotators'
-              target: ability
-              time: fluency
-              value: '2'
-          competencies:
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: changes
-      class: necromancer
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: necromancy-rotator-fluency
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You may rotate between @L[Category:Necromancy element
-          spells]{necromancy} rotator @L[Category:Spells]{spells} during a
-          @L[Core:Short Rest]{short rest} instead of a @L[Core:Long Rest]{long
-          rest}.</p>
-        proficient: >-
-          <p>You are @L[Core:Fluency Bonus]{fluent} in @L[Ability:Necromancy
-          Rotators]{Necromancy Rotators}. (This does not make you
-          @L[Core:Fluency Bonus]{fluent} in the @L[Category:Spells]{spells}
-          themselves.)</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/necromancy-rotator-fluency.webp
 name: Necromancy Rotator Fluency
-type: wrapper
+system:
+  automations:
+    f025905e157ac261:
+      _id: f025905e157ac261
+      changes:
+        - key: system.competence.raw
+          phase: fluency
+          priority: 10
+          qualifier: '@identifier.necromancy-rotators'
+          target: ability
+          type: upgrade
+          value: '2'
+      competencies:
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: changes
+  class: necromancer
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: unlimited
+  executionTime:
+    base: passive
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: necromancy-rotator-fluency
+  interaction: manifest
+  maneuver: passive
+  mundane: false
+  overview:
+    base: >-
+      <p>You may rotate between @L[Category:Necromancy element
+      spells]{necromancy} rotator @L[Category:Spells]{spells} during a
+      @L[Core:Short Rest]{short rest} instead of a @L[Core:Long Rest]{long
+      rest}.</p>
+    proficient: >-
+      <p>You are @L[Core:Fluency Bonus]{fluent} in @L[Ability:Necromancy
+      Rotators]{Necromancy Rotators}. (This does not make you @L[Core:Fluency
+      Bonus]{fluent} in the @L[Category:Spells]{spells} themselves.)</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  skill: true
+  standard: true
+  targets:
+    - self
+transfer: true
+type: ability

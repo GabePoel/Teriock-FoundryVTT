@@ -39,9 +39,7 @@ export default class ProtectionAutomation extends CritAutomation {
         initial: "abilities",
       }),
       description: new fields.StringField({
-        label: game.i18n.localize(
-          "TERIOCK.SYSTEMS.Child.FIELDS.description.label",
-        ),
+        label: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
       }),
       value: new fields.StringField(),
     });
@@ -70,11 +68,11 @@ export default class ProtectionAutomation extends CritAutomation {
       return null;
     return {
       key: `system.protections.${this.relation}.${this.category}`,
-      mode: 2,
       priority: 5,
       qualifier: "1",
       target: "Actor",
       time: "normal",
+      type: "add",
       value: this.value,
     };
   }
@@ -88,7 +86,7 @@ export default class ProtectionAutomation extends CritAutomation {
         choices: this._choices,
         value: this.value,
         fields: this.schema.fields,
-        path: `${this.fieldPath}.${this.id}`,
+        path: this.localPath,
         relation: this.relation,
         uuid: this.uuid,
       },

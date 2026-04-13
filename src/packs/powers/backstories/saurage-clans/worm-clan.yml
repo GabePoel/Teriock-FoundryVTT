@@ -1,19 +1,67 @@
 _id: 236394a36c98f092
 _key: '!items!236394a36c98f092'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.23
 effects:
-  - _id: YunCcYNm9qnGvYTp
-    _key: '!items.effects!236394a36c98f092.YunCcYNm9qnGvYTp'
+  - _id: iMnqdHqM1cssgp0L
+    _key: '!items.effects!236394a36c98f092.iMnqdHqM1cssgp0L'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.9df212d89cab196d
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.773f566eb2423de6
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/hitman.webp
+    name: Hitman
+    system:
+      class: assassin
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '1'
+        unit: hour
+      executionTime: a2
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: hitman
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>You prepare a 5 foot by 5 foot area. While in this area, you may
+          make a limited improved @L[Ability:Hide]{Hide} action.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - area
+      upgrades:
+        score:
+          attribute: snk
+          value: 1
+    transfer: true
+    type: ability
+  - _id: 44vOCsbsWjYys1PR
+    _key: '!items.effects!236394a36c98f092.44vOCsbsWjYys1PR'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.9df212d89cab196d
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/hide.webp
     name: Hide
     system:
@@ -76,7 +124,10 @@ effects:
       duration:
         raw: '0'
         unit: instant
-      executionTime: a1
+      executionTime:
+        base: a1
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -85,14 +136,15 @@ effects:
       form: normal
       identifier: hide
       improvement: >-
-        You may Hide regardless of the environment (cover, lighting, etc.) that
-        you prepare.
+        <p>You may [[lookup name]] regardless of the environment (cover,
+        lighting, etc.) that you prepare.</p>
       interaction: manifest
       limitation: >-
-        You may only Hide in the location you have prepared and you do not get
-        the attribute improvement from this ability. You also do not remain
-        hidden if you leave this location.
+        <p>You may only [[lookup name]] in the location you have prepared and
+        you do not get the attribute improvement from this ability. You also do
+        not remain @L[Condition:Hidden]{hidden} if you leave this location.</p>
       maneuver: active
+      mundane: false
       overview:
         base: >-
           <p>You become @L[Condition:Hidden]{hidden}. As you do this, you may
@@ -131,53 +183,7 @@ effects:
         score:
           attribute: snk
           value: 2
-    type: ability
-  - _id: iMnqdHqM1cssgp0L
-    _key: '!items.effects!236394a36c98f092.iMnqdHqM1cssgp0L'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.773f566eb2423de6
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/hitman.webp
-    name: Hitman
-    system:
-      class: assassin
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '1'
-        unit: hour
-      executionTime: a2
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: hitman
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>You prepare a 5 foot by 5 foot area. While in this area, you may
-          make a limited improved @L[Ability:Hide]{Hide} action.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - area
-      upgrades:
-        score:
-          attribute: snk
-          value: 1
+    transfer: true
     type: ability
 folder: 5cabb085721fa30c
 img: icons/environment/creatures/bug-worm-glow.webp

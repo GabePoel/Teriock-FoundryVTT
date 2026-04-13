@@ -1,9 +1,9 @@
 declare global {
   namespace Teriock.Execution {
     export type ArmamentExecutionOptions = DocumentExecutionOptions & {
-      bonusDamage?: Teriock.System.FormulaString;
+      bonus?: Teriock.System.FormulaString;
       crit?: boolean;
-      deals?: Iterable<Teriock.Keys.Impact>;
+      impacts?: Iterable<Teriock.Keys.Impact>;
       source?: TeriockArmament;
       twoHanded?: boolean;
     };

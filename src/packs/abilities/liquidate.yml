@@ -1,115 +1,129 @@
 _id: d1fdaeae27facc5f
-_key: '!items!d1fdaeae27facc5f'
+_key: '!effects!d1fdaeae27facc5f'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: d1fdaeae27facc5f
-    _key: '!items.effects!d1fdaeae27facc5f.d1fdaeae27facc5f'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/liquidate.webp
-    name: Liquidate
-    system:
-      automations:
-        7fe78a2b814687c0:
-          _id: 7fe78a2b814687c0
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          tradecraft: priest
-          type: tradecraft
-        zuDpm7TxWHVUlum9:
-          _id: zuDpm7TxWHVUlum9
-          common:
-            - destroy
-          type: common
-      class: paladin
-      competence:
-        raw: 0
-      costs:
-        primary:
-          hp:
-            description: >-
-              <p>An amount of @L[Core:Hit Points and Mana Points]{HP} equal to
-              the [[/tc priest]]{priest check's} DC. Paid only on failure.</p>
-            type: description
-          mp:
-            description: >-
-              <p>An amount of @L[Core:Hit Points and Mana Points]{MP} equal to
-              the [[/tc priest]]{priest check's} DC. Paid only on failure.</p>
-            type: description
-      delivery: sight
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - destruction
-      executionTime: 10 Minutes
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: liquidate
-      interaction: manifest
-      maneuver: slow
-      overview:
-        base: >-
-          <p>When this ritual is completed, make a [[/tc priest]]{priest check}
-          to see if the targeted item is [[lookup name style=lc]]d. The check's
-          DC is entirely up to @L[Core:Game Master]{GM} discretion, but the
-          following can be used as a benchmark.</p><ul><li>Non-passively magic
-          items: 4</li><li>Common passively magic items: 8</li><li>Uncommon
-          passively magic items: 12</li><li>Rare passively magic items:
-          16</li><li>Mythic passively magic items: 20</li><li>Legendary
-          passively magic items: 50+</li></ul>These benchmarks are for reference
-          only and the @L[Core:Game Master]{GM} may adjust them as they see fit.
-          Item rarity may or may not correspond to how challenging it is to
-          [[lookup name style=lc]].
-        fluent: >-
-          <p>You may add @L[Core:Fluency Bonus]{F} to the [[/tc priest]]{priest
-          check} regardless of whether or not you are fluent in
-          @L[Tradecraft:Priest]{priest}.</p>
-        proficient: >-
-          <p>You may add @L[Core:Proficiency Bonus]{P} to the [[/tc
-          priest]]{priest check} regardless of whether or not you are proficient
-          in @L[Tradecraft:Priest]{priest}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - divine
-        - financial
-      range:
-        raw: '5'
-        unit: ft
-      results:
-        fail: >-
-          <p>You pay an amount of @L[Core:Hit Points and Mana Points]{MP} and
-          @L[Core:Hit Points and Mana Points]{HP} equal to the [[/tc
-          priest]]{priest check's} DC.</p>
-        save: >-
-          <p>The item is @L[Property:Destroyed]{destroyed} and the economic
-          value of its raw materials and @L[Category:Magical properties]{magical
-          properties} are extracted. This is very inefficient. Only 20% of the
-          value of the item's materials and @L[Category:Properties]{properties}
-          are extracted.</p>
-      ritual: true
-      skill: true
-      standard: true
-      targets:
-        - item
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/liquidate.webp
 name: Liquidate
-type: wrapper
+system:
+  automations:
+    6743b131768d36be:
+      _id: 6743b131768d36be
+      bonus: '0'
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 1
+        - 0
+      tradecraft: priest
+      type: tradecraft
+    7fe78a2b814687c0:
+      _id: 7fe78a2b814687c0
+      bonus: '0'
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 1
+        - 0
+      tradecraft: priest
+      type: tradecraft
+    zuDpm7TxWHVUlum9:
+      _id: zuDpm7TxWHVUlum9
+      common:
+        - destroy
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 0
+        - 1
+      type: common
+  class: paladin
+  competence:
+    raw: 0
+  costs:
+    primary:
+      hp:
+        description: >-
+          <p>An amount of @L[Core:Hit Points and Mana Points]{HP} equal to the
+          [[/tc priest]]{priest check's} DC. Paid only on failure.</p>
+        type: description
+      mp:
+        description: >-
+          <p>An amount of @L[Core:Hit Points and Mana Points]{MP} equal to the
+          [[/tc priest]]{priest check's} DC. Paid only on failure.</p>
+        type: description
+  delivery: sight
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - destruction
+  executionTime:
+    base: 10 Minutes
+    slow:
+      raw: '10'
+      unit: minute
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: liquidate
+  interaction: manifest
+  maneuver: slow
+  mundane: false
+  overview:
+    base: >-
+      <p>When this ritual is completed, make a [[/tc priest]]{priest check} to
+      see if the targeted item is [[lookup name style=lc]]d. The check's DC is
+      entirely up to @L[Core:Game Master]{GM} discretion, but the following can
+      be used as a benchmark.</p><ul><li>Non-passively magic items:
+      4</li><li>Common passively magic items: 8</li><li>Uncommon passively magic
+      items: 12</li><li>Rare passively magic items: 16</li><li>Mythic passively
+      magic items: 20</li><li>Legendary passively magic items:
+      50+</li></ul>These benchmarks are for reference only and the @L[Core:Game
+      Master]{GM} may adjust them as they see fit. Item rarity may or may not
+      correspond to how challenging it is to [[lookup name style=lc]].
+    fluent: >-
+      <p>You may add @L[Core:Fluency Bonus]{F} to the [[/tc priest]]{priest
+      check} regardless of whether or not you are fluent in
+      @L[Tradecraft:Priest]{priest}.</p>
+    proficient: >-
+      <p>You may add @L[Core:Proficiency Bonus]{P} to the [[/tc priest]]{priest
+      check} regardless of whether or not you are proficient in
+      @L[Tradecraft:Priest]{priest}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - divine
+    - financial
+  range:
+    raw: '5'
+    unit: ft
+  results:
+    fail: >-
+      <p>You pay an amount of @L[Core:Hit Points and Mana Points]{MP} and
+      @L[Core:Hit Points and Mana Points]{HP} equal to the [[/tc priest]]{priest
+      check's} DC.</p>
+    save: >-
+      <p>The item is @L[Property:Destroyed]{destroyed} and the economic value of
+      its raw materials and @L[Category:Magical properties]{magical properties}
+      are extracted. This is very inefficient. Only 20% of the value of the
+      item's materials and @L[Category:Properties]{properties} are
+      extracted.</p>
+  ritual: true
+  skill: true
+  standard: true
+  targets:
+    - item
+transfer: true
+type: ability

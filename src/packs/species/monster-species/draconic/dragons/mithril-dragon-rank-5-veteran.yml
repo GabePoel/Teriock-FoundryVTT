@@ -2,7 +2,7 @@ _id: C9RnXmhxd6iXheUR
 _key: '!items!C9RnXmhxd6iXheUR'
 _stats:
   compendiumSource: Compendium.teriock.classes.Item.6a4c29966ff94257
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.23
@@ -10,11 +10,11 @@ effects:
   - _id: nEWl3ZXUcMWe83ed
     _key: '!items.effects!C9RnXmhxd6iXheUR.nEWl3ZXUcMWe83ed'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.c4cd252b5b66fa15
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.c4cd252b5b66fa15
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: combat
@@ -68,15 +68,16 @@ effects:
       targets:
         - creature
       trigger: <p>A creature within range would be @L[Condition:Down]{dropped}.</p>
+    transfer: true
     type: ability
   - _id: DDCszBLFPaksOMMq
     _key: '!items.effects!C9RnXmhxd6iXheUR.DDCszBLFPaksOMMq'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.e48f632c646a6e4a
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.e48f632c646a6e4a
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: support
@@ -101,25 +102,25 @@ effects:
           _id: e789ed5e109ebd1a
           changes:
             - key: system.protections.resistances.other
-              mode: 2
+              phase: normal
               priority: 10
               qualifier: '1'
               target: Actor
-              time: normal
+              type: add
               value: Being Surprised (Braced, Fortified Areas, Guard Duty)
             - key: system.protections.resistances.other
-              mode: 2
+              phase: normal
               priority: 10
               qualifier: '1'
               target: Actor
-              time: normal
+              type: add
               value: Frightened (Braced, Fortified Areas, Guard Duty)
             - key: system.protections.resistances.other
-              mode: 2
+              phase: normal
               priority: 10
               qualifier: '1'
               target: Actor
-              time: normal
+              type: add
               value: Mediator Tradecrafts (Braced, Fortified Areas, Guard Duty)
           competencies:
             - 0
@@ -180,6 +181,7 @@ effects:
       standard: true
       targets:
         - self
+    transfer: true
     type: ability
 folder: 997cd433ccad17d7
 img: systems/teriock/src/icons/ranks/rank-5-veteran.webp

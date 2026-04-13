@@ -1,75 +1,70 @@
 _id: 896d98c58238c8d7
-_key: '!items!896d98c58238c8d7'
+_key: '!effects!896d98c58238c8d7'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 896d98c58238c8d7
-    _key: '!items.effects!896d98c58238c8d7.896d98c58238c8d7'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/withstand.webp
-    name: Withstand
-    system:
-      automations:
-        d873eb939c3b5951:
-          _id: d873eb939c3b5951
-          competencies:
-            - 0
-            - 1
-            - 2
-          hacks:
-            - body
-          heighten:
-            - 1
-            - 0
-          type: hacks
-      class: knight
-      competence:
-        raw: 0
-      costs:
-        components:
-          hack:
-            type: tag
-      delivery: self
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - damaging
-      executionTime: r1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: withstand
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>You take the triggering @L[Core:Damage]{damage} as a
-          @L[Damage:Hack]{body hack} instead. All @L[Category:Damage
-          types]{damage types} still apply.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      requirements: <p>You are not @L[Damage:Hack]{body hacked}.</p>
-      skill: true
-      standard: true
-      targets:
-        - self
-      trigger: <p>You would take @L[Core:Damage]{damage}.</p>
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/withstand.webp
 name: Withstand
-type: wrapper
+system:
+  automations:
+    d873eb939c3b5951:
+      _id: d873eb939c3b5951
+      competencies:
+        - 0
+        - 1
+        - 2
+      hacks:
+        - body
+      heighten:
+        - 1
+        - 0
+      reverse: false
+      type: hacks
+  class: knight
+  competence:
+    raw: 0
+  costs:
+    components:
+      hack:
+        type: tag
+  delivery: self
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - damaging
+  executionTime:
+    base: r1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: withstand
+  interaction: manifest
+  maneuver: reactive
+  mundane: false
+  overview:
+    base: >-
+      <p>You take the triggering @L[Core:Damage]{damage} as a
+      @L[Damage:Hack]{body hack} instead. All @L[Category:Damage types]{damage
+      types} still apply.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  requirements: <p>You are not @L[Damage:Hack]{body hacked}.</p>
+  skill: true
+  standard: true
+  targets:
+    - self
+  trigger: <p>You would take @L[Core:Damage]{damage}.</p>
+transfer: true
+type: ability

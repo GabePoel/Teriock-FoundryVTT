@@ -23,34 +23,26 @@ export default (Base) => {
      */
     class AbilityPanelPart extends Base {
       /** @inheritDoc */
-      get panelParts() {
+      async getPanelParts() {
         const bars = [
           {
             icon: icons.ability.execution,
-            label: game.i18n.localize(
-              "TERIOCK.SYSTEMS.Ability.PANELS.execution",
-            ),
+            label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.execution"),
             wrappers: this._executionWrappers,
           },
           {
             icon: icons.ability.target,
-            label: game.i18n.localize(
-              "TERIOCK.SYSTEMS.Ability.PANELS.targeting",
-            ),
+            label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.targeting"),
             wrappers: this._targetingWrappers,
           },
           {
             icon: icons.ability.expansion,
-            label: game.i18n.localize(
-              "TERIOCK.SYSTEMS.Ability.FIELDS.expansion.label",
-            ),
+            label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.expansion.label"),
             wrappers: this._expansionWrappers,
           },
           {
             icon: icons.ability.cost,
-            label: game.i18n.localize(
-              "TERIOCK.SYSTEMS.Ability.FIELDS.costs.label",
-            ),
+            label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.costs.label"),
             wrappers: this._costWrappers,
           },
           {
@@ -60,17 +52,15 @@ export default (Base) => {
           },
           {
             icon: TERIOCK.options.effect.form[this.form].icon,
-            label: game.i18n.localize(
-              "TERIOCK.SYSTEMS.Ability.PANELS.metaphysics",
-            ),
+            label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.metaphysics"),
             wrappers: [
-              TERIOCK.options.effect.form[this.form].name || "",
+              TERIOCK.options.effect.form[this.form].label || "",
               ...simplifyTags(this._metaphysicsTags),
             ],
           },
         ];
         return {
-          ...super.panelParts,
+          ...(await super.getPanelParts()),
           classes: this.elderSorcery
             ? `elder-sorcery ${elementClass(this.elements)}`
             : "",

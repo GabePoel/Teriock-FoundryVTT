@@ -17,7 +17,7 @@ export default class AttributeModel extends BaseModifierModel {
 
   /** @inheritDoc */
   get useText() {
-    return game.i18n.format("TERIOCK.ROLLS.Feat.name", { value: this.name });
+    return _loc("TERIOCK.ROLLS.Feat.name", { value: this.name });
   }
 
   /** @inheritDoc */

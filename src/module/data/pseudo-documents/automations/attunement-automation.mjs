@@ -42,10 +42,9 @@ export default class AttunementAutomation extends BaseAutomation {
     const tier = await BaseRoll.getValue(this.tier, rollData);
     const attunementData = {
       img: this.document.img,
-      name: game.i18n.format(
-        "TERIOCK.SYSTEMS.Attunable.USAGE.Attune.defaultName",
-        { name: this.document.name },
-      ),
+      name: _loc("TERIOCK.SYSTEMS.Attunable.USAGE.Attune.defaultName", {
+        name: this.document.name,
+      }),
       system: { inheritTier: false, tier, type: "effect" },
       type: "attunement",
     };
@@ -53,8 +52,8 @@ export default class AttunementAutomation extends BaseAutomation {
       new AddDocumentsActivation({
         display: {
           icon: icons.attunable.attune,
-          label: game.i18n.format("TERIOCK.COMMANDS.Status.applyNamed", {
-            name: game.i18n.localize("TYPES.ActiveEffect.attunement"),
+          label: _loc("TERIOCK.COMMANDS.Status.applyNamed", {
+            name: _loc("TYPES.ActiveEffect.attunement"),
           }),
         },
         primary: { root: { data: attunementData } },

@@ -1,91 +1,90 @@
 _id: 2c8b71b1f4604456
-_key: '!items!2c8b71b1f4604456'
+_key: '!effects!2c8b71b1f4604456'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 2c8b71b1f4604456
-    _key: '!items.effects!2c8b71b1f4604456.2c8b71b1f4604456'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/spell-turning-shields.webp
-    name: Spell Turning Shields
-    system:
-      automations:
-        8f623097f9f2a087:
-          _id: 8f623097f9f2a087
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: resist
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.props
-              mode: 2
-              priority: 10
-              qualifier: '@class.shields'
-              target: equipment
-              time: normal
-              value: spellTurning
-            - key: system.spellTurning
-              mode: 5
-              priority: 10
-              qualifier: '@class.shields'
-              target: equipment
-              time: normal
-              value: 'true'
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: changes
-      class: paladin
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - resistance
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: spell-turning-shields
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>@L[Category:Shields]{Shields} you use are @L[Property:Spell
-          Turning]{spell turning}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - divine
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/spell-turning-shields.webp
 name: Spell Turning Shields
-type: wrapper
+system:
+  automations:
+    8f623097f9f2a087:
+      _id: 8f623097f9f2a087
+      bonus: '0'
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 1
+        - 0
+      hex: false
+      type: resist
+    e789ed5e109ebd1a:
+      _id: e789ed5e109ebd1a
+      changes:
+        - key: system.props
+          phase: normal
+          priority: 10
+          qualifier: '@class.shields'
+          target: equipment
+          type: add
+          value: spellTurning
+        - key: system.spellTurning
+          phase: normal
+          priority: 10
+          qualifier: '@class.shields'
+          target: equipment
+          type: override
+          value: 'true'
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: changes
+  class: paladin
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: unlimited
+  effectTypes:
+    - resistance
+  executionTime:
+    base: passive
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: spell-turning-shields
+  interaction: manifest
+  maneuver: passive
+  mundane: false
+  overview:
+    base: >-
+      <p>@L[Category:Shields]{Shields} you use are @L[Property:Spell
+      Turning]{spell turning}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - divine
+  range:
+    unit: self
+  skill: true
+  standard: true
+  targets:
+    - self
+transfer: true
+type: ability

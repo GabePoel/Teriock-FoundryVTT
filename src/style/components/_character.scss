@@ -95,7 +95,8 @@
 }
 
 body > form:only-child section .character-page,
-.detached {
+.detached,
+.no-floating-tabs {
   .character-tabbers {
     align-items: center;
     display: flex;
@@ -144,6 +145,28 @@ body > form:only-child section .character-page,
     flex: none;
     height: 100%;
     width: calc(34px + 0.5em);
+  }
+}
+
+.system-teriock {
+  &:not(.detached) {
+    .character-tabber.attached-tab {
+      display: flex;
+    }
+
+    .character-tabber.detached-tab {
+      display: none;
+    }
+  }
+
+  &.detached {
+    .character-tabber.attached-tab {
+      display: none;
+    }
+
+    .character-tabber.detached-tab {
+      display: flex;
+    }
   }
 }
 
@@ -510,7 +533,6 @@ body > form:only-child section .character-page,
           var(--color-presence-bar) 2px,
           var(--color-presence-bar-dark) 2px,
           var(--color-presence-bar-dark) 8px
-            /* gap between lines: 2px line + 6px gap */
         );
       }
 

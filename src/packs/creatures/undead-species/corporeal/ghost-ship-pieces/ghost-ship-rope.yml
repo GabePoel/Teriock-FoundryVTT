@@ -1,7 +1,7 @@
 _id: 42eaff563cd42b62
 _key: '!actors!42eaff563cd42b62'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.23
@@ -12,20 +12,20 @@ items:
     _key: '!actors.items!42eaff563cd42b62.42eaff563cd42b62'
     _stats:
       compendiumSource: Compendium.teriock.species.Item.42eaff563cd42b62
-      coreVersion: '13'
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     effects:
       - _id: uiKPtqoIRAYeM0UC
         _key: >-
           !actors.items.effects!42eaff563cd42b62.42eaff563cd42b62.uiKPtqoIRAYeM0UC
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.cf282d75ba3feff2
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.cf282d75ba3feff2
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/construct-mind.webp
         name: Construct Mind
         system:
@@ -34,32 +34,32 @@ items:
               _id: e789ed5e109ebd1a
               changes:
                 - key: system.protections.immunities.statuses
-                  mode: 2
+                  phase: normal
                   priority: 10
                   qualifier: '1'
                   target: Actor
-                  time: normal
+                  type: add
                   value: frightened
                 - key: system.protections.immunities.statuses
-                  mode: 2
+                  phase: normal
                   priority: 10
                   qualifier: '1'
                   target: Actor
-                  time: normal
+                  type: add
                   value: frenzied
                 - key: system.protections.immunities.statuses
-                  mode: 2
+                  phase: normal
                   priority: 10
                   qualifier: '1'
                   target: Actor
-                  time: normal
+                  type: add
                   value: charmed
                 - key: system.protections.immunities.statuses
-                  mode: 2
+                  phase: normal
                   priority: 10
                   qualifier: '1'
                   target: Actor
-                  time: normal
+                  type: add
                   value: allured
               competencies:
                 - 0
@@ -76,8 +76,7 @@ items:
             raw: 0
           delivery: self
           duration:
-            raw: '0'
-            unit: unlimited
+            unit: instant
           effectTypes:
             - immunity
           executionTime:
@@ -108,16 +107,17 @@ items:
             unit: self
           targets:
             - self
+        transfer: true
         type: ability
       - _id: bQ0m6BwDa4B83umE
         _key: >-
           !actors.items.effects!42eaff563cd42b62.42eaff563cd42b62.bQ0m6BwDa4B83umE
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.235923981d1ebd09
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.235923981d1ebd09
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/constructed-body.webp
         name: Constructed Body
         system:
@@ -139,8 +139,7 @@ items:
             raw: 0
           delivery: self
           duration:
-            raw: '0'
-            unit: unlimited
+            unit: instant
           executionTime:
             base: passive
             slow:
@@ -198,16 +197,17 @@ items:
             unit: self
           targets:
             - self
+        transfer: true
         type: ability
       - _id: EgkodTs003gLgRKM
         _key: >-
           !actors.items.effects!42eaff563cd42b62.42eaff563cd42b62.EgkodTs003gLgRKM
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.63b8c75f371412f7
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.63b8c75f371412f7
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/disarm.webp
         name: Disarm
         system:
@@ -216,7 +216,6 @@ items:
             raw: 0
           delivery: weapon
           duration:
-            raw: '0'
             unit: instant
           executionTime:
             base: a1
@@ -246,67 +245,17 @@ items:
           standard: true
           targets:
             - arm
-        type: ability
-      - _id: OPSOsT65MZDq7N4M
-        _key: >-
-          !actors.items.effects!42eaff563cd42b62.42eaff563cd42b62.OPSOsT65MZDq7N4M
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.9f5d7c7000f6759b
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.11.6
-        img: systems/teriock/src/icons/abilities/catch-item.webp
-        name: Catch Item
-        system:
-          _sup: EgkodTs003gLgRKM
-          basic: true
-          competence:
-            raw: 0
-          delivery: hand
-          duration:
-            raw: '0'
-            unit: instant
-          executionTime:
-            base: r1
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: intrinsic
-          identifier: catch-item
-          interaction: manifest
-          maneuver: reactive
-          mundane: false
-          overview:
-            base: >-
-              <p>You catch the item. If multiple creatures are all trying to
-              catch the same item, they all roll [[/roll 1d20]]. The creature
-              with the highest roll catches the item.</p>
-            fluent: <p>You instead roll [[/roll 1d20 + @f]].</p>
-            proficient: <p>You instead roll [[/roll 1d20 + @p]].</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: contact
-          targets:
-            - item
-          trigger: <p>An item within range is falling or flying by.</p>
+        transfer: true
         type: ability
       - _id: ygGn5sOChCijXSMo
         _key: >-
           !actors.items.effects!42eaff563cd42b62.42eaff563cd42b62.ygGn5sOChCijXSMo
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.8ea02a3133560e2d
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.8ea02a3133560e2d
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: icons/skills/trades/profession-sailing-ship.webp
         name: Expert Mariner
         system:
@@ -315,11 +264,11 @@ items:
               _id: e789ed5e109ebd1a
               changes:
                 - key: system.tradecrafts.mariner.score
-                  mode: 4
+                  phase: normal
                   priority: 10
                   qualifier: '1'
                   target: Actor
-                  time: normal
+                  type: upgrade
                   value: '2'
               competencies:
                 - 0
@@ -336,8 +285,7 @@ items:
             raw: 0
           delivery: self
           duration:
-            raw: '0'
-            unit: unlimited
+            unit: instant
           executionTime:
             base: passive
             slow:
@@ -364,16 +312,17 @@ items:
             unit: self
           targets:
             - self
+        transfer: true
         type: ability
       - _id: bCMkIPI3hOB5WChd
         _key: >-
           !actors.items.effects!42eaff563cd42b62.42eaff563cd42b62.bCMkIPI3hOB5WChd
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.e138089ee679e115
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.e138089ee679e115
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/gliding.webp
         name: Gliding
         system:
@@ -393,11 +342,11 @@ items:
               _id: e789ed5e109ebd1a
               changes:
                 - key: system.speedAdjustments.fly
-                  mode: 4
+                  phase: normal
                   priority: 10
                   qualifier: '1'
                   target: Actor
-                  time: normal
+                  type: upgrade
                   value: '1'
               competencies:
                 - 0
@@ -414,8 +363,7 @@ items:
             raw: 0
           delivery: self
           duration:
-            raw: '0'
-            unit: unlimited
+            unit: instant
           effectTypes:
             - movement
           executionTime:
@@ -447,16 +395,17 @@ items:
             unit: self
           targets:
             - self
+        transfer: true
         type: ability
       - _id: aLd2miQ2fnE6DGrz
         _key: >-
           !actors.items.effects!42eaff563cd42b62.42eaff563cd42b62.aLd2miQ2fnE6DGrz
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.29762569f91d2950
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.29762569f91d2950
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/low-intelligence.webp
         name: Low Intelligence
         system:
@@ -464,8 +413,7 @@ items:
             raw: 0
           delivery: self
           duration:
-            raw: '0'
-            unit: unlimited
+            unit: instant
           executionTime:
             base: passive
             slow:
@@ -492,16 +440,17 @@ items:
             score:
               attribute: int
               value: -1
+        transfer: true
         type: ability
       - _id: a7TUOy2WgluQLBK8
         _key: >-
           !actors.items.effects!42eaff563cd42b62.42eaff563cd42b62.a7TUOy2WgluQLBK8
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.ae7478f48ccbf072
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.ae7478f48ccbf072
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/natural-hide.webp
         name: Natural Hide
         system:
@@ -510,11 +459,11 @@ items:
               _id: e789ed5e109ebd1a
               changes:
                 - key: system.defense.av.natural
-                  mode: 4
+                  phase: normal
                   priority: 10
                   qualifier: '1'
                   target: Actor
-                  time: normal
+                  type: upgrade
                   value: '1'
               competencies:
                 - 0
@@ -531,8 +480,7 @@ items:
             raw: 0
           delivery: self
           duration:
-            raw: '0'
-            unit: unlimited
+            unit: instant
           executionTime:
             base: passive
             slow:
@@ -559,16 +507,17 @@ items:
             unit: self
           targets:
             - self
+        transfer: true
         type: ability
       - _id: tLN9cppJEK3Evs1X
         _key: >-
           !actors.items.effects!42eaff563cd42b62.42eaff563cd42b62.tLN9cppJEK3Evs1X
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.1c52eda8919d34a7
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.1c52eda8919d34a7
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
@@ -576,8 +525,7 @@ items:
             raw: 0
           delivery: self
           duration:
-            raw: '0'
-            unit: unlimited
+            unit: instant
           executionTime:
             base: passive
             slow:
@@ -604,16 +552,17 @@ items:
             score:
               attribute: mov
               value: 0
+        transfer: true
         type: ability
       - _id: jw9ycXXfQ36v4AVM
         _key: >-
           !actors.items.effects!42eaff563cd42b62.42eaff563cd42b62.jw9ycXXfQ36v4AVM
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.8249d99c527d09b1
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.8249d99c527d09b1
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
@@ -621,8 +570,7 @@ items:
             raw: 0
           delivery: self
           duration:
-            raw: '0'
-            unit: unlimited
+            unit: instant
           executionTime:
             base: passive
             slow:
@@ -649,16 +597,17 @@ items:
             score:
               attribute: per
               value: 0
+        transfer: true
         type: ability
       - _id: jf0w9ZchdhAmKSbF
         _key: >-
           !actors.items.effects!42eaff563cd42b62.42eaff563cd42b62.jf0w9ZchdhAmKSbF
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.14d28d6322eec2ff
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.14d28d6322eec2ff
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/normal-strength.webp
         name: Normal Strength
         system:
@@ -666,8 +615,7 @@ items:
             raw: 0
           delivery: self
           duration:
-            raw: '0'
-            unit: unlimited
+            unit: instant
           executionTime:
             base: passive
             slow:
@@ -694,16 +642,17 @@ items:
             score:
               attribute: str
               value: 0
+        transfer: true
         type: ability
       - _id: kJNvE9qU80XW2UBL
         _key: >-
           !actors.items.effects!42eaff563cd42b62.42eaff563cd42b62.kJNvE9qU80XW2UBL
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.d855ff1ebb086f7f
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.d855ff1ebb086f7f
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/partial-undead.webp
         name: Partial Undead
         system:
@@ -711,8 +660,7 @@ items:
             raw: 0
           delivery: self
           duration:
-            raw: '0'
-            unit: unlimited
+            unit: instant
           elements:
             - necromancy
           executionTime:
@@ -743,69 +691,17 @@ items:
             unit: self
           targets:
             - self
-        type: ability
-      - _id: ksuwID2fQRdCDO1M
-        _key: >-
-          !actors.items.effects!42eaff563cd42b62.42eaff563cd42b62.ksuwID2fQRdCDO1M
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.646bdfc53ff71572
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.11.6
-        img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
-        name: Healing Sensitivity
-        system:
-          _sup: kJNvE9qU80XW2UBL
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          elements:
-            - necromancy
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: flaw
-          identifier: healing-sensitivity
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          overview:
-            base: >-
-              <p>@L[Core:Healing]{Healing} can be used to
-              @L[Core:Damage]{damage} you. If the creature providing you
-              @L[Core:Healing]{healing} specifies that they are doing so "for
-              damage" then you roll your <i>largest</i> @L[Core:HP]{hit die} and
-              take that much @L[Damage:Holy]{holy} @L[Damage:Magic]{magic
-              damage} instead of the normal @L[Core:Healing]{healing} effect.
-              This does not consume any of your @L[Core:HP]{hit dice}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - magical
-          range:
-            unit: self
-          targets:
-            - self
+        transfer: true
         type: ability
       - _id: v4FGNByXkgOrhlBR
         _key: >-
           !actors.items.effects!42eaff563cd42b62.42eaff563cd42b62.v4FGNByXkgOrhlBR
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.4de7b266c76e79f5
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.4de7b266c76e79f5
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/prehensile-appendage.webp
         name: Prehensile Appendage
         system:
@@ -813,8 +709,7 @@ items:
             raw: 0
           delivery: self
           duration:
-            raw: '0'
-            unit: unlimited
+            unit: instant
           executionTime:
             base: passive
             slow:
@@ -845,16 +740,17 @@ items:
             unit: self
           targets:
             - self
+        transfer: true
         type: ability
       - _id: grGXoM87zBBwvXFL
         _key: >-
           !actors.items.effects!42eaff563cd42b62.42eaff563cd42b62.grGXoM87zBBwvXFL
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.9bfc89548d1236b8
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.9bfc89548d1236b8
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/reach.webp
         name: Reach
         system:
@@ -862,8 +758,7 @@ items:
             raw: 0
           delivery: self
           duration:
-            raw: '0'
-            unit: unlimited
+            unit: instant
           executionTime:
             base: passive
             slow:
@@ -890,16 +785,17 @@ items:
             unit: self
           targets:
             - self
+        transfer: true
         type: ability
       - _id: jzNIszTuC07PFQ0Z
         _key: >-
           !actors.items.effects!42eaff563cd42b62.42eaff563cd42b62.jzNIszTuC07PFQ0Z
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.e98ca0f35a33ebe7
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.e98ca0f35a33ebe7
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/reflexes.webp
         name: Reflexes
         system:
@@ -920,11 +816,11 @@ items:
               _id: e789ed5e109ebd1a
               changes:
                 - key: system.protections.resistances.abilities
-                  mode: 2
+                  phase: normal
                   priority: 10
                   qualifier: '1'
                   target: Actor
-                  time: normal
+                  type: add
                   value: Disarm
               competencies:
                 - 0
@@ -942,8 +838,7 @@ items:
             raw: 0
           delivery: self
           duration:
-            raw: '0'
-            unit: unlimited
+            unit: instant
           effectTypes:
             - resistance
           executionTime:
@@ -980,85 +875,17 @@ items:
             competence:
               attribute: mov
               value: 1
-        type: ability
-      - _id: yWsrbSVojpB6aRFw
-        _key: >-
-          !actors.items.effects!42eaff563cd42b62.42eaff563cd42b62.yWsrbSVojpB6aRFw
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.ac8fdcff69199bc3
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.11.6
-        img: systems/teriock/src/icons/abilities/missile-reflexes.webp
-        name: Missile Reflexes
-        system:
-          _sup: jzNIszTuC07PFQ0Z
-          automations:
-            8f623097f9f2a087:
-              _id: 8f623097f9f2a087
-              bonus: '0'
-              competencies:
-                - 0
-                - 1
-                - 2
-              heighten:
-                - 1
-                - 0
-              hex: false
-              type: resist
-          class: archer
-          competence:
-            raw: 0
-          delivery: hand
-          duration:
-            raw: '0'
-            unit: instant
-          effectTypes:
-            - resistance
-          executionTime:
-            base: r1
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: missile-reflexes
-          interaction: block
-          maneuver: reactive
-          mundane: false
-          overview:
-            base: >-
-              <p>You @L[Keyword:Resistance]{resist} the @L[Core:Attack
-              Interaction]{attack}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: contact
-          skill: true
-          standard: true
-          targets:
-            - attack
-            - item
-          trigger: >-
-            <p>You would be hit by a @L[Property:Ranged]{ranged weapon} or
-            @L[Category:Missile delivery abilities]{missile delivery}
-            @L[Core:Attack Interaction]{attack}.</p>
+        transfer: true
         type: ability
       - _id: Ly21LKgSra0CmolS
         _key: >-
           !actors.items.effects!42eaff563cd42b62.42eaff563cd42b62.Ly21LKgSra0CmolS
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.6f1e35c05a5589d6
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.6f1e35c05a5589d6
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/snare.webp
         name: Snare
         system:
@@ -1129,8 +956,7 @@ items:
             raw: 0
           delivery: weapon
           duration:
-            raw: '0'
-            unit: unlimited
+            unit: instant
           endCondition: >-
             <p>At the end of each of the target's @L[Core:Turn]{turns}, they
             roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
@@ -1164,16 +990,17 @@ items:
           standard: true
           targets:
             - leg
+        transfer: true
         type: ability
       - _id: hv42tQbRrofG63cb
         _key: >-
           !actors.items.effects!42eaff563cd42b62.42eaff563cd42b62.hv42tQbRrofG63cb
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.e2ede5b6049bda5a
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.e2ede5b6049bda5a
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/sneaky.webp
         name: Sneaky
         system:
@@ -1181,8 +1008,7 @@ items:
             raw: 0
           delivery: self
           duration:
-            raw: '0'
-            unit: unlimited
+            unit: instant
           executionTime:
             base: passive
             slow:
@@ -1209,16 +1035,17 @@ items:
             score:
               attribute: snk
               value: 1
+        transfer: true
         type: ability
       - _id: 4EVj9S6KqO3G95yM
         _key: >-
           !actors.items.effects!42eaff563cd42b62.42eaff563cd42b62.4EVj9S6KqO3G95yM
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.43e713fbe3b3e0b9
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.43e713fbe3b3e0b9
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/spell-immunity.webp
         name: Spell Immunity
         system:
@@ -1227,11 +1054,11 @@ items:
               _id: e789ed5e109ebd1a
               changes:
                 - key: system.protections.immunities.other
-                  mode: 2
+                  phase: normal
                   priority: 10
                   qualifier: '1'
                   target: Actor
-                  time: normal
+                  type: add
                   value: Spells
               competencies:
                 - 0
@@ -1248,11 +1075,7 @@ items:
             raw: 0
           delivery: self
           duration:
-            conditions:
-              absent:
-                - down
-            raw: '0'
-            unit: unlimited
+            unit: instant
           effectTypes:
             - immunity
           executionTime:
@@ -1281,6 +1104,183 @@ items:
             unit: self
           targets:
             - self
+        transfer: true
+        type: ability
+      - _id: sJG3uvoHipa0uuAm
+        _key: >-
+          !actors.items.effects!42eaff563cd42b62.42eaff563cd42b62.sJG3uvoHipa0uuAm
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.6E1L4yHlYGd0QT0l
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.0
+        img: systems/teriock/src/icons/abilities/catch-item.webp
+        name: Catch Item
+        system:
+          _sup: EgkodTs003gLgRKM
+          basic: true
+          competence:
+            raw: 0
+          delivery: hand
+          duration:
+            raw: '0'
+            unit: instant
+          executionTime:
+            base: r1
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: intrinsic
+          identifier: catch-item
+          interaction: manifest
+          maneuver: reactive
+          mundane: false
+          overview:
+            base: >-
+              <p>You catch the item. If multiple creatures are all trying to
+              catch the same item, they all roll [[/roll 1d20]]. The creature
+              with the highest roll catches the item.</p>
+            fluent: <p>You instead roll [[/roll 1d20 + @f]].</p>
+            proficient: <p>You instead roll [[/roll 1d20 + @p]].</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: contact
+          targets:
+            - item
+          trigger: <p>An item within range is falling or flying by.</p>
+        transfer: true
+        type: ability
+      - _id: CZRaZtH4ACWPn8lU
+        _key: >-
+          !actors.items.effects!42eaff563cd42b62.42eaff563cd42b62.CZRaZtH4ACWPn8lU
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.646bdfc53ff71572
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.0
+        img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
+        name: Healing Sensitivity
+        system:
+          _sup: kJNvE9qU80XW2UBL
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            raw: '0'
+            unit: unlimited
+          elements:
+            - necromancy
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          identifier: healing-sensitivity
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          overview:
+            base: >-
+              <p>@L[Core:Healing]{Healing} can be used to
+              @L[Core:Damage]{damage} you. If the creature providing you
+              @L[Core:Healing]{healing} specifies that they are doing so "for
+              damage" then you roll your <i>largest</i> @L[Core:HP]{hit die} and
+              take that much @L[Damage:Holy]{holy} @L[Damage:Magic]{magic
+              damage} instead of the normal @L[Core:Healing]{healing} effect.
+              This does not consume any of your @L[Core:HP]{hit dice}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: ajeLyoaXwrGBa44J
+        _key: >-
+          !actors.items.effects!42eaff563cd42b62.42eaff563cd42b62.ajeLyoaXwrGBa44J
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.8NdHAvgIG1I61Chs
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.0
+        img: systems/teriock/src/icons/abilities/missile-reflexes.webp
+        name: Missile Reflexes
+        system:
+          _sup: jzNIszTuC07PFQ0Z
+          automations:
+            8f623097f9f2a087:
+              _id: 8f623097f9f2a087
+              bonus: '0'
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              hex: false
+              type: resist
+          class: archer
+          competence:
+            raw: 0
+          delivery: hand
+          duration:
+            raw: '0'
+            unit: instant
+          effectTypes:
+            - resistance
+          executionTime:
+            base: r1
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: missile-reflexes
+          interaction: block
+          maneuver: reactive
+          mundane: false
+          overview:
+            base: >-
+              <p>You @L[Keyword:Resistance]{resist} the @L[Core:Attack
+              Interaction]{attack}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: contact
+          skill: true
+          standard: true
+          targets:
+            - attack
+            - item
+          trigger: >-
+            <p>You would be hit by a @L[Property:Ranged]{ranged weapon} or
+            @L[Category:Missile delivery abilities]{missile delivery}
+            @L[Core:Attack Interaction]{attack}.</p>
+        transfer: true
         type: ability
     folder: b7395e9186081f19
     img: systems/teriock/src/icons/creatures/ghost-ship-rope.webp
@@ -1317,11 +1317,11 @@ items:
   - _id: Bd44ZvP8CjUtqYGb
     _key: '!actors.items!42eaff563cd42b62.Bd44ZvP8CjUtqYGb'
     _stats:
-      compendiumSource: Compendium.teriock.equipment.Item.cadf1d2befa4b1ad
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.species.Item.Bd44ZvP8CjUtqYGb
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     folder: b7395e9186081f19
     img: systems/teriock/src/icons/equipment/rope.webp
     name: Rope
@@ -1340,6 +1340,8 @@ items:
       equipped: true
       fightingStyle: wraparound
       identifier: rope
+      impacts:
+        - damage
       minStr:
         raw: '-3'
       powerLevel: mundane
@@ -1358,7 +1360,6 @@ items:
 name: Ghost Ship Rope
 prototypeToken:
   actorLink: false
-  alpha: 1
   appendNumber: false
   bar1:
     attribute: hp
@@ -1371,36 +1372,22 @@ prototypeToken:
   ring:
     enabled: true
   texture:
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     src: systems/teriock/src/icons/tokens/ghost-ship-rope.webp
   turnMarker:
     disposition: false
     mode: 1
   width: 0.5
 system:
-  combat:
-    attackPenalty: 0
-    hasReaction: true
   detection:
     hiding:
       raw: '@snk.pas'
     perceiving:
       raw: '@per.pas'
   hp:
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
     value: 6
   identifier: ghost-ship-rope
   initiative: 1d20 + @mov
   mp:
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
     value: 4
   presence:
     max: 1
@@ -1408,13 +1395,9 @@ system:
     value: 0
   scaling:
     brScale: true
-    lvl: 1
   size:
     number:
       raw: '0.5'
-  weight:
-    self:
-      raw: pow(3 + @size, 3)
   wielding:
     attacker: Bd44ZvP8CjUtqYGb
     blocker: Bd44ZvP8CjUtqYGb

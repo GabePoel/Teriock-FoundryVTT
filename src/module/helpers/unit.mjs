@@ -101,33 +101,31 @@ export function convertUnits(range, fromUnits, toUnits) {
  */
 export function secondsToReadable(totalSeconds) {
   if (totalSeconds < 0) {
-    return game.i18n.localize(
-      "TERIOCK.MODELS.TimeUnit.UNITS.zeroSeconds.label",
-    );
+    return _loc("TERIOCK.MODELS.TimeUnit.UNITS.zeroSeconds.label");
   }
   const units = [
     {
-      name: game.i18n.localize("TERIOCK.MODELS.TimeUnit.UNITS.year.short"),
+      name: _loc("TERIOCK.MODELS.TimeUnit.UNITS.year.short"),
       seconds: 365.25 * 24 * 60 * 60,
     },
     {
-      name: game.i18n.localize("TERIOCK.MODELS.TimeUnit.UNITS.week.short"),
+      name: _loc("TERIOCK.MODELS.TimeUnit.UNITS.week.short"),
       seconds: 7 * 24 * 60 * 60,
     },
     {
-      name: game.i18n.localize("TERIOCK.MODELS.TimeUnit.UNITS.day.short"),
+      name: _loc("TERIOCK.MODELS.TimeUnit.UNITS.day.short"),
       seconds: 24 * 60 * 60,
     },
     {
-      name: game.i18n.localize("TERIOCK.MODELS.TimeUnit.UNITS.hour.short"),
+      name: _loc("TERIOCK.MODELS.TimeUnit.UNITS.hour.short"),
       seconds: 60 * 60,
     },
     {
-      name: game.i18n.localize("TERIOCK.MODELS.TimeUnit.UNITS.minute.short"),
+      name: _loc("TERIOCK.MODELS.TimeUnit.UNITS.minute.short"),
       seconds: 60,
     },
     {
-      name: game.i18n.localize("TERIOCK.MODELS.TimeUnit.UNITS.second.short"),
+      name: _loc("TERIOCK.MODELS.TimeUnit.UNITS.second.short"),
       seconds: 1,
     },
   ];
@@ -142,5 +140,5 @@ export function secondsToReadable(totalSeconds) {
   }
   return parts.length > 0
     ? parts.join(", ")
-    : game.i18n.localize("TERIOCK.MODELS.TimeUnit.UNITS.zeroSeconds.short");
+    : _loc("TERIOCK.MODELS.TimeUnit.UNITS.zeroSeconds.short");
 }

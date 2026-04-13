@@ -1,4 +1,5 @@
-import { mix } from "../../../helpers/utils.mjs";
+import { mix } from "../../../helpers/construction.mjs";
+import { BaseApplicationMixin } from "../../shared/mixins/_module.mjs";
 import * as mixins from "../mixins/_module.mjs";
 
 const { TokenConfig } = foundry.applications.sheets;
@@ -10,5 +11,6 @@ const { TokenConfig } = foundry.applications.sheets;
  */
 export default class BaseTokenSheet extends mix(
   TokenConfig,
+  BaseApplicationMixin,
   mixins.ConfigButtonSheetMixin,
 ) {}

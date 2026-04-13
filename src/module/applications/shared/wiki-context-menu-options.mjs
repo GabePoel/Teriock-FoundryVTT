@@ -4,20 +4,20 @@ import { makeIcon } from "../../helpers/utils.mjs";
 
 const wikiContextMenuOptions = [
   {
-    name: "TERIOCK.SYSTEMS.Common.MENU.viewOnWiki",
+    label: "TERIOCK.SYSTEMS.Common.MENU.viewOnWiki",
     icon: makeIcon(icons.ui.wiki, "contextMenu"),
-    callback: /** @param {HTMLElement} target */ (target) => {
+    onClick: (_ev, target) => {
       const address = target.dataset.wikiAddress;
       if (address) {
         window.open(address, "_blank", "noopener,noreferrer");
       }
     },
-    condition: () => game.teriock.getSetting("systemLinks"),
+    visible: () => game.teriock.getSetting("systemLinks"),
   },
   {
-    name: "TERIOCK.SYSTEMS.Common.MENU.viewInFoundry",
+    label: "TERIOCK.SYSTEMS.Common.MENU.viewInFoundry",
     icon: makeIcon(icons.ui.openWindow, "contextMenu"),
-    callback: /** @param {HTMLElement} target */ async (target) => {
+    onClick: async (_ev, target) => {
       const uuid = target.dataset.uuid;
       if (uuid) {
         const doc = await fromUuid(uuid);
@@ -32,18 +32,18 @@ const wikiContextMenuOptions = [
         }
       }
     },
-    condition: () => !game.teriock.getSetting("systemLinks"),
+    visible: () => !game.teriock.getSetting("systemLinks"),
   },
   {
-    name: "TERIOCK.COMMANDS.Status.toggleUnnamed",
+    label: "TERIOCK.COMMANDS.Status.toggleUnnamed",
     icon: makeIcon(icons.ui.toggle, "contextMenu"),
-    callback: async (target) => {
+    onClick: async (_ev, target) => {
       const condition = toCamelCase(
         target.dataset.tooltip.split("Condition: ")[1],
       );
       await game.actors.default.toggleStatusEffect(condition);
     },
-    condition: (target) =>
+    visible: (target) =>
       target.dataset.tooltip?.startsWith("Condition: ") &&
       Object.keys(TERIOCK.data.conditions).includes(
         toCamelCase(target.dataset.tooltip.split("Condition: ")[1]),
@@ -51,74 +51,74 @@ const wikiContextMenuOptions = [
       game.actors.default,
   },
   {
-    name: "TERIOCK.EFFECTS.Common.bag",
+    label: "TERIOCK.EFFECTS.Common.bag",
     icon: makeIcon(icons.ui.deathBag, "contextMenu"),
-    callback: async () => {
+    onClick: async () => {
       await game.actors.default.system.deathBagPull();
     },
-    condition: (target) =>
+    visible: (target) =>
       ["Condition: Dead", "Core: Death Bag"].includes(target.dataset.tooltip) &&
       game.actors.default,
   },
   {
-    name: "TERIOCK.EFFECTS.Common.heal",
+    label: "TERIOCK.EFFECTS.Common.heal",
     icon: makeIcon(icons.effect.heal, "contextMenu"),
-    callback: async () => {
+    onClick: async () => {
       await game.actors.default.system.takeHeal();
     },
-    condition: (target) =>
+    visible: (target) =>
       target.dataset.tooltip === "Core: Healing" && game.actors.default,
   },
   {
-    name: "TERIOCK.EFFECTS.Common.revitalize",
+    label: "TERIOCK.EFFECTS.Common.revitalize",
     icon: makeIcon(icons.effect.heal, "contextMenu"),
-    callback: async () => {
+    onClick: async () => {
       await game.actors.default.system.takeRevitalize();
     },
-    condition: (target) =>
+    visible: (target) =>
       target.dataset.tooltip === "Core: Revitalizing" && game.actors.default,
   },
   {
-    name: "TERIOCK.EFFECTS.Common.awaken",
+    label: "TERIOCK.EFFECTS.Common.awaken",
     icon: makeIcon(icons.effect.awaken, "contextMenu"),
-    callback: async () => {
+    onClick: async () => {
       await game.actors.default.system.takeAwaken();
     },
-    condition: (target) =>
+    visible: (target) =>
       target.dataset.tooltip === "Keyword: Awaken" && game.actors.default,
   },
   {
-    name: "TERIOCK.ROLLS.Resist.button",
+    label: "TERIOCK.ROLLS.Resist.button",
     icon: makeIcon(icons.effect.resist, "contextMenu"),
-    callback: async () => {
+    onClick: async () => {
       await game.actors.default.system.rollResistance();
     },
-    condition: (target) =>
+    visible: (target) =>
       ["Keyword: Resistance", "Keyword: Hexproof"].includes(
         target.dataset.tooltip,
       ) && game.actors.default,
   },
   {
-    name: "TERIOCK.COMMANDS.UseAbility.useResist",
+    label: "TERIOCK.COMMANDS.UseAbility.useResist",
     icon: makeIcon(icons.document.ability, "contextMenu"),
-    callback: async () => {
+    onClick: async () => {
       await game.actors.default.useDocument("ability:resist");
     },
-    condition: (target) =>
+    visible: (target) =>
       ["Keyword: Resistance", "Keyword: Hexproof"].includes(
         target.dataset.tooltip,
       ) && game.actors.default,
   },
   {
-    name: "TERIOCK.COMMANDS.UseAbility.useUnnamed",
+    label: "TERIOCK.COMMANDS.UseAbility.useUnnamed",
     icon: makeIcon(icons.document.ability, "contextMenu"),
-    callback: async (target) => {
+    onClick: async (_ev, target) => {
       const abilityName = target.dataset.tooltip.split("Ability: ")[1];
       await game.actors.default.useDocument(
         `ability:${toKebabCase(abilityName)}`,
       );
     },
-    condition: (target) =>
+    visible: (target) =>
       target.dataset.tooltip?.startsWith("Ability: ") && game.actors.default,
   },
 ];

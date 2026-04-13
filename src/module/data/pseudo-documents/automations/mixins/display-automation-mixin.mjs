@@ -22,10 +22,10 @@ export default function DisplayAutomationMixin(Base) {
         return Object.assign(super.defineSchema(), {
           display: new fields.SchemaField({
             label: new fields.StringField({
-              label: game.i18n.localize(
+              label: _loc(
                 "TERIOCK.AUTOMATIONS.Display.FIELDS.display.label.label",
               ),
-              hint: game.i18n.localize(
+              hint: _loc(
                 "TERIOCK.AUTOMATIONS.Display.FIELDS.display.label.hint",
               ),
             }),

@@ -19,7 +19,7 @@
             name=""
             value=change.key
             disabled=(not @root/editable)
-            icon=@root/TERIOCK.display.icons.ui.changeKey
+            icon=@root/TERIOCK.display.icons.change.key
             id=(concat @root/appId ../../changesPath "." i ".key")
             classes="teriock-change-input"
             dataset=(object
@@ -31,7 +31,7 @@
             changeFields.value
             name=""
             value=change.value
-            icon=@root/TERIOCK.display.icons.ui.changeValue
+            icon=@root/TERIOCK.display.icons.change.value
             disabled=(not @root/editable)
             id=(concat @root/appId ../../changesPath "." i ".value")
             classes="teriock-change-input"
@@ -60,7 +60,7 @@
               changeFields.priority
               name=""
               value=change.priority
-              icon=@root/TERIOCK.display.icons.ui.priority
+              icon=@root/TERIOCK.display.icons.change.priority
               placeholder=(lookup ../../priorities change.mode)
               disabled=(not @root/editable)
               id=(concat @root/appId ../../changesPath "." i ".priority")
@@ -73,23 +73,22 @@
           </div>
           <div class="change-assignment">
             {{formInput
-              changeFields.mode
+              changeFields.type
               name=""
-              value=change.mode
-              icon=@root/TERIOCK.display.icons.ui.changeMode
-              choices=@root/TERIOCK.options.effect.changeMode
+              value=change.type
+              icon=@root/TERIOCK.display.icons.change.type
               disabled=(not @root/editable)
-              id=(concat @root/appId ../../changesPath "." i ".mode")
+              id=(concat @root/appId ../../changesPath "." i ".type")
               classes="teriock-change-input"
               dataset=(object
-                property="mode"
+                property="type"
               )
             }}
             {{formInput
               changeFields.target
               name=""
               value=change.target
-              icon=@root/TERIOCK.display.icons.ui.changeTarget
+              icon=@root/TERIOCK.display.icons.change.target
               disabled=(not @root/editable)
               id=(concat @root/appId ../../changesPath "." i ".target")
               classes="teriock-change-input"
@@ -98,16 +97,16 @@
               )
             }}
             {{formInput
-              changeFields.time
+              changeFields.phase
               name=""
-              icon=@root/TERIOCK.display.icons.ui.time
-              value=change.time
+              icon=@root/TERIOCK.display.icons.change.phase
+              value=change.phase
               disabled=(not @root/editable)
-              id=(concat @root/appId ../../changesPath "." i ".time")
+              id=(concat @root/appId ../../changesPath "." i ".phase")
               classes="teriock-change-input"
               dataset=(object
-                tooltip=(path @root/TERIOCK.options.change.time change.time "hint")
-                property="time"
+                tooltip=(path @root/TERIOCK.options.change.phase change.phase "hint")
+                property="phase"
               )
             }}
           </div>

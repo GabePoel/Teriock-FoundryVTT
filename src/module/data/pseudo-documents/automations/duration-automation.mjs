@@ -1,8 +1,8 @@
 import { EvaluationField } from "../../fields/_module.mjs";
+import { changeTypeField } from "../../fields/helpers/builders.mjs";
 import { TimeUnitModel } from "../../models/unit-models/_module.mjs";
+import { migrateChangeType } from "../../shared/migrations/change-migrations.mjs";
 import { CritAutomation } from "./abstract/_module.mjs";
-
-const { fields } = foundry.data;
 
 /**
  * @property {TimeUnitModel} duration
@@ -28,16 +28,19 @@ export default class DurationAutomation extends CritAutomation {
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
+      changeType: changeTypeField(),
       duration: new EvaluationField({ model: TimeUnitModel }),
-      mode: new fields.NumberField({
-        choices: TERIOCK.options.effect.simpleChangeMode,
-        initial: 5,
-      }),
     });
   }
 
   /** @inheritDoc */
+  static migrateData(data) {
+    migrateChangeType(data, "changeType");
+    return super.migrateData(data);
+  }
+
+  /** @inheritDoc */
   get _formPaths() {
-    return ["duration.unit", "duration.raw", "mode", ...super._formPaths];
+    return ["duration.unit", "duration.raw", "changeType", ...super._formPaths];
   }
 }

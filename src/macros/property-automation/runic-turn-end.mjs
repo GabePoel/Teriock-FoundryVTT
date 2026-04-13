@@ -6,12 +6,12 @@ if (
 ) {
   const content = await TextEditor.implementation.enrichHTML(
     teriock.helpers.string.dedent(`
-      <p>${game.i18n.format("TERIOCK.COMMANDS.Repair.prompt", { name: `@UUID[${scope.item.uuid}]` })}</p>
+      <p>${_loc("TERIOCK.COMMANDS.Repair.prompt", { name: `@UUID[${scope.item.uuid}]` })}</p>
       <p>@EMBED[${scope.effect.uuid} panel cite=false]</p>`),
   );
   const proceed = await teriock.applications.api.TeriockDialog.confirm({
     window: {
-      title: game.i18n.format("TERIOCK.MODELS.Duration.PREREQUISITES.text", {
+      title: _loc("TERIOCK.MODELS.Duration.PREREQUISITES.text", {
         start: scope.effect.fullName,
         end: scope.item.fullName,
       }),
@@ -22,8 +22,8 @@ if (
     },
     content,
     yes: {
-      label: game.i18n.format("TERIOCK.ROLLS.Base.name", {
-        value: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.repair"),
+      label: _loc("TERIOCK.ROLLS.Base.name", {
+        value: _loc("TERIOCK.SYSTEMS.Equipment.MENU.repair"),
       }),
       icon: teriock.helpers.utils.makeIconClass(
         TERIOCK.display.icons.ui.dice,
@@ -36,8 +36,8 @@ if (
       "2d4kh1",
       {},
       {
-        flavor: game.i18n.format("TERIOCK.ROLLS.Base.name", {
-          value: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.repair"),
+        flavor: _loc("TERIOCK.ROLLS.Base.name", {
+          value: _loc("TERIOCK.SYSTEMS.Equipment.MENU.repair"),
         }),
         threshold: 4,
       },

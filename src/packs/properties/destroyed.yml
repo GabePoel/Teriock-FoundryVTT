@@ -1,83 +1,84 @@
 _id: 25a147555f2c106c
-_key: '!items!25a147555f2c106c'
+_key: '!effects!25a147555f2c106c'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 25a147555f2c106c
-    _key: '!items.effects!25a147555f2c106c.25a147555f2c106c'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.68
-    img: systems/teriock/src/icons/properties/destroyed.webp
-    name: Destroyed
-    system:
-      automations:
-        parameterChanges:
-          _id: parameterChanges
-          changes:
-            - key: system.destroyed
-              mode: 5
-              priority: 10
-              qualifier: '1'
-              target: parent
-              time: normal
-              value: 'true'
-            - key: system.av.raw
-              mode: 5
-              priority: 100
-              qualifier: '1'
-              target: parent
-              time: normal
-              value: '0'
-            - key: system.av.bonus
-              mode: 5
-              priority: 100
-              qualifier: '1'
-              target: parent
-              time: normal
-              value: '0'
-            - key: system.bv.raw
-              mode: 5
-              priority: 100
-              qualifier: '1'
-              target: parent
-              time: normal
-              value: '0'
-            - key: system.bv.bonus
-              mode: 5
-              priority: 100
-              qualifier: '1'
-              target: parent
-              time: normal
-              value: '0'
-            - key: system.damage
-              mode: 5
-              priority: 100
-              qualifier: '1'
-              target: parent
-              time: normal
-              value: '0'
-            - key: system.weight.raw
-              mode: 5
-              priority: 100
-              qualifier: '1'
-              target: parent
-              time: normal
-              value: '0'
-          type: changes
-      competence:
-        raw: 0
-      description: >-
-        <p>An item that's <b>[[lookup name style=lc]]</b> has been reduced to
-        dust and can not be repaired through any known means.</p>
-      form: intrinsic
-      identifier: destroyed
-    type: property
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/properties/destroyed.webp
 name: Destroyed
-type: wrapper
+system:
+  automations:
+    parameterChanges:
+      _id: parameterChanges
+      changes:
+        - key: system.destroyed
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: parent
+          type: override
+          value: 'true'
+        - key: system.av.raw
+          phase: normal
+          priority: 100
+          qualifier: '1'
+          target: parent
+          type: override
+          value: '0'
+        - key: system.av.bonus
+          phase: normal
+          priority: 100
+          qualifier: '1'
+          target: parent
+          type: override
+          value: '0'
+        - key: system.bv.raw
+          phase: normal
+          priority: 100
+          qualifier: '1'
+          target: parent
+          type: override
+          value: '0'
+        - key: system.bv.bonus
+          phase: normal
+          priority: 100
+          qualifier: '1'
+          target: parent
+          type: override
+          value: '0'
+        - key: system.damage
+          phase: normal
+          priority: 100
+          qualifier: '1'
+          target: parent
+          type: override
+          value: '0'
+        - key: system.weight.raw
+          phase: normal
+          priority: 100
+          qualifier: '1'
+          target: parent
+          type: override
+          value: '0'
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 0
+        - 1
+      type: changes
+  competence:
+    raw: 0
+  description: >-
+    <p>An item that's <b>[[lookup name style=lc]]</b> has been reduced to dust
+    and can not be repaired through any known means.</p>
+  form: intrinsic
+  identifier: destroyed
+  mundane: false
+transfer: true
+type: property

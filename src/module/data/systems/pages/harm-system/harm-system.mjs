@@ -1,5 +1,5 @@
+import { mix } from "../../../../helpers/construction.mjs";
 import { getImage } from "../../../../helpers/path.mjs";
-import { mix } from "../../../../helpers/utils.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import { AccessDataMixin } from "../../../shared/mixins/_module.mjs";
 import {
@@ -29,7 +29,7 @@ export default class HarmSystem extends mix(
       automations.AttunementAutomation,
       automations.ChatMacroAutomation,
       automations.ChatStatusAutomation,
-      automations.CommonImpactsAutomation,
+      automations.CommonOutcomesAutomation,
       automations.HacksAutomation,
       automations.RollAutomation,
       automations.TakeAutomation,
@@ -41,19 +41,13 @@ export default class HarmSystem extends mix(
    * @return {{pseudos: {Automation: string}}}
    */
   static get metadata() {
-    return {
-      pseudos: {
-        Automation: "system.automations",
-      },
-    };
+    return { pseudos: { Automation: "system.automations" } };
   }
 
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      img: new fields.FilePathField({
-        categories: ["IMAGE"],
-      }),
+      img: new fields.FilePathField({ categories: ["IMAGE"] }),
     });
   }
 
@@ -64,7 +58,7 @@ export default class HarmSystem extends mix(
 
   /** @inheritDoc */
   get fullName() {
-    return game.i18n.format("TERIOCK.SYSTEMS.Harm.EMBED.fullName", {
+    return _loc("TERIOCK.SYSTEMS.Harm.EMBED.fullName", {
       name: super.fullName,
       type: TERIOCK.options.impact[this.parent.type]?.label || "",
     });
@@ -89,11 +83,7 @@ export default class HarmSystem extends mix(
     this.parent.updateSource(
       foundry.utils.mergeObject(
         {
-          text: {
-            content: game.i18n.localize(
-              "TERIOCK.SYSTEMS.Harm.DATA.description",
-            ),
-          },
+          text: { content: _loc("TERIOCK.SYSTEMS.Harm.DATA.description") },
           system: { img: getImage("effect-types", ref) },
         },
         data,

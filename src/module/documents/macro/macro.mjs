@@ -1,5 +1,6 @@
+import { mix } from "../../helpers/construction.mjs";
 import { dedent } from "../../helpers/string.mjs";
-import { findBestDocument, mix } from "../../helpers/utils.mjs";
+import { findBestDocument } from "../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
 
 const { Macro } = foundry.documents;
@@ -94,9 +95,9 @@ export default class TeriockMacro extends mix(
   static async makeGeneralUseMacro(doc) {
     const lookup = doc.lookupKey;
     const command = dedent(`
-    await game.teriock.Macro.useDocumentGeneral("${lookup}", { actor, event })`);
+    await Macro.implementation.useDocumentGeneral("${lookup}", { actor, event })`);
     const macroData = {
-      name: game.i18n.format("TERIOCK.SYSTEMS.Child.USAGE.use", {
+      name: _loc("TERIOCK.SYSTEMS.Child.USAGE.use", {
         value: doc.name,
       }),
       type: "script",
@@ -121,9 +122,9 @@ export default class TeriockMacro extends mix(
    */
   static async makeLinkedUseMacro(doc) {
     const command = dedent(`
-    await game.teriock.Macro.useDocumentLinked("${doc.uuid}", { event: event })`);
+    await Macro.implementation.useDocumentLinked("${doc.uuid}", { event: event })`);
     const macroData = {
-      name: game.i18n.format("TERIOCK.SYSTEMS.Child.USAGE.use", {
+      name: _loc("TERIOCK.SYSTEMS.Child.USAGE.use", {
         value: doc.name,
       }),
       type: "script",

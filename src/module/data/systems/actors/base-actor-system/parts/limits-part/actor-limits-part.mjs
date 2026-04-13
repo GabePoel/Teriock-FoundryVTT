@@ -1,4 +1,5 @@
 import { EvaluationField } from "../../../../../fields/_module.mjs";
+import { initialBar } from "../../../../../fields/helpers/initializers.mjs";
 
 const { fields } = foundry.data;
 
@@ -23,18 +24,16 @@ export default (Base) => {
               floor: true,
             }),
           }),
+          curses: initialBar({ max: 3 }),
         });
       }
 
       /** @inheritDoc */
       prepareBaseData() {
         super.prepareBaseData();
-        this.curses = {
-          max: 3,
-          min: 0,
-          value: this.parent.powers.filter((p) => p.system.type === "curse")
-            .length,
-        };
+        this.curses.value = this.parent.powers.filter(
+          (p) => p.system.type === "curse",
+        ).length;
       }
 
       /** @inheritDoc */

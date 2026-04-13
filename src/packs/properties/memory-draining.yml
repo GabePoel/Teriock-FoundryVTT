@@ -1,29 +1,56 @@
 _id: 1d9a808b630056f0
-_key: '!items!1d9a808b630056f0'
+_key: '!effects!1d9a808b630056f0'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 1d9a808b630056f0
-    _key: '!items.effects!1d9a808b630056f0.1d9a808b630056f0'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.68
-    img: systems/teriock/src/icons/properties/memory-draining.webp
-    name: Memory Draining
-    system:
-      competence:
-        raw: 0
-      description: >-
-        <p>A <b>[[lookup name style=lc]]</b> item deals @L[Drain:Memory]{memory}
-        instead of @L[Core:Damage]{damage}.</p>
-      form: intrinsic
-      identifier: memory-draining
-    type: property
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/properties/memory-draining.webp
 name: Memory Draining
-type: wrapper
+system:
+  automations:
+    vgqgut1GV9OQ4R6h:
+      _id: vgqgut1GV9OQ4R6h
+      changes:
+        - key: system.impacts
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: parent
+          type: add
+          value: drain
+        - key: system.impacts
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: parent
+          type: subtract
+          value: damage
+        - key: system.damage
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: parent
+          type: typeSet
+          value: memory
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 0
+        - 1
+      type: changes
+  competence:
+    raw: 0
+  description: >-
+    <p>A <b>[[lookup name style=lc]]</b> item deals @L[Drain:Memory]{memory}
+    instead of @L[Core:Damage]{damage}.</p>
+  form: intrinsic
+  identifier: memory-draining
+  mundane: false
+transfer: true
+type: property

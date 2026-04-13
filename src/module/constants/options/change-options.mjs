@@ -6,35 +6,27 @@ export const targets = {
 };
 preLocalize("options.change.targets");
 
-export const time = {
-  base: {
-    hint: "TERIOCK.CHANGES.Time.base.hint",
-    label: "TERIOCK.CHANGES.Time.base.label",
-  },
+export const phase = {
   proficiency: {
-    hint: "TERIOCK.CHANGES.Time.proficiency.hint",
-    label: "TERIOCK.CHANGES.Time.proficiency.label",
+    hint: "TERIOCK.CHANGES.Phase.proficiency.hint",
+    label: "TERIOCK.CHANGES.Phase.proficiency.label",
   },
   fluency: {
-    hint: "TERIOCK.CHANGES.Time.fluency.hint",
-    label: "TERIOCK.CHANGES.Time.fluency.label",
+    hint: "TERIOCK.CHANGES.Phase.fluency.hint",
+    label: "TERIOCK.CHANGES.Phase.fluency.label",
   },
   normal: {
-    hint: "TERIOCK.CHANGES.Time.normal.hint",
-    label: "TERIOCK.CHANGES.Time.normal.label",
+    hint: "TERIOCK.CHANGES.Phase.normal.hint",
+    label: "TERIOCK.CHANGES.Phase.normal.label",
   },
   derivation: {
-    hint: "TERIOCK.CHANGES.Time.derivation.hint",
-    label: "TERIOCK.CHANGES.Time.derivation.label",
+    hint: "TERIOCK.CHANGES.Phase.derivation.hint",
+    label: "TERIOCK.CHANGES.Phase.derivation.label",
   },
-  final: {
-    hint: "TERIOCK.CHANGES.Time.final.hint",
-    label: "TERIOCK.CHANGES.Time.final.label",
+  completion: {
+    hint: "TERIOCK.CHANGES.Phase.completion.hint",
+    label: "TERIOCK.CHANGES.Phase.completion.label",
   },
 };
-preLocalize("options.change.time", { keys: ["hint", "label"] });
 
-export const timeLabels = Object.fromEntries(
-  Object.entries(time).map(([k, v]) => [k, v.label]),
-);
-preLocalize("options.change.timeLabels");
+preLocalize("options.change.phase", { keys: ["hint", "label"] });

@@ -1,148 +1,76 @@
 _id: 3f3c91722a78563d
-_key: '!items!3f3c91722a78563d'
+_key: '!effects!3f3c91722a78563d'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 3f3c91722a78563d
-    _key: '!items.effects!3f3c91722a78563d.3f3c91722a78563d'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/protective-mental-link.webp
-    name: Protective Mental Link
-    system:
-      automations:
-        d635eb44dba086dd:
-          _id: d635eb44dba086dd
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: combatExpiration
-          what:
-            roll: 2d4kh1
-            threshold: 4
-            type: rolled
-          when:
-            skip: 0
-            time: end
-            trigger: turn
-          who:
-            type: target
-      competence:
-        raw: 0
-      delivery: hand
-      duration:
-        raw: '1'
-        unit: minute
-      effectTypes:
-        - mental
-      endCondition: >-
-        <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: protective-mental-link
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 2
-      powerSources:
-        - unknown
-      range:
-        unit: contact
-      requirements: >-
-        <p>You are @L[Keyword:Immunity]{immune} to @L[Category:Mental
-        effects]{mental effects}.</p>
-      results:
-        hit: >-
-          <p>Target gains @L[Ability:Mental Effect Immunity]{Mental Effect
-          Immunity}.</p>
-      targets:
-        - creature
-    type: ability
-  - _id: uX6Xgp4368Zil8Mr
-    _key: '!items.effects!3f3c91722a78563d.uX6Xgp4368Zil8Mr'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.fbc7e6040e8dcf89
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/abilities/mental-effect-immunity.webp
-    name: Mental Effect Immunity
-    system:
-      _sup: 3f3c91722a78563d
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.protections.immunities.effects
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: mental
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - immunity
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: mental-effect-immunity
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You are @L[Keyword:Immunity]{immune} to @L[Category:Mental
-          effects]{mental effects}. The effects of [[lookup name]] are
-          maintained even if @L[Condition:Transformed]{transformed}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - unknown
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/protective-mental-link.webp
 name: Protective Mental Link
-type: wrapper
+system:
+  automations:
+    d635eb44dba086dd:
+      _id: d635eb44dba086dd
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: combatExpiration
+      what:
+        roll: 2d4kh1
+        threshold: 4
+        type: rolled
+      when:
+        skip: 0
+        time: end
+        trigger: turn
+      who:
+        type: target
+  competence:
+    raw: 0
+  delivery: hand
+  duration:
+    raw: '1'
+    unit: minute
+  effectTypes:
+    - mental
+  endCondition: >-
+    <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
+    [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  identifier: protective-mental-link
+  interaction: attack
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 2
+  powerSources:
+    - unknown
+  range:
+    unit: contact
+  requirements: >-
+    <p>You are @L[Keyword:Immunity]{immune} to @L[Category:Mental
+    effects]{mental effects}.</p>
+  results:
+    hit: >-
+      <p>Target gains @L[Ability:Mental Effect Immunity]{Mental Effect
+      Immunity}.</p>
+  targets:
+    - creature
+transfer: true
+type: ability

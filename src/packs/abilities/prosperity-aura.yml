@@ -1,60 +1,54 @@
 _id: 6471df925cf25a9f
-_key: '!items!6471df925cf25a9f'
+_key: '!effects!6471df925cf25a9f'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 6471df925cf25a9f
-    _key: '!items.effects!6471df925cf25a9f.6471df925cf25a9f'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/prosperity-aura.webp
-    name: Prosperity Aura
-    system:
-      class: paladin
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: aura
-      duration:
-        raw: '8'
-        unit: hour
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: unp
-      form: normal
-      identifier: prosperity-aura
-      interaction: feat
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - divine
-        - financial
-      range:
-        raw: '10'
-        unit: ft
-      results:
-        fail: >-
-          <p>The interest rate the target pays on debt they owe is halved. This
-          does not stack with itself.</p>
-      skill: true
-      standard: true
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/prosperity-aura.webp
 name: Prosperity Aura
-type: wrapper
+system:
+  class: paladin
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: aura
+  duration:
+    raw: '8'
+    unit: hour
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: unp
+  form: normal
+  identifier: prosperity-aura
+  interaction: feat
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - divine
+    - financial
+  range:
+    raw: '10'
+    unit: ft
+  results:
+    fail: >-
+      <p>The interest rate the target pays on debt they owe is halved. This does
+      not stack with itself.</p>
+  skill: true
+  standard: true
+  targets:
+    - creature
+transfer: true
+type: ability

@@ -1,65 +1,19 @@
 _id: 391d0f8b89e39fc7
 _key: '!items!391d0f8b89e39fc7'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.23
 effects:
-  - _id: 9ECdsGO3JA96S6FJ
-    _key: '!items.effects!391d0f8b89e39fc7.9ECdsGO3JA96S6FJ'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.9f5d7c7000f6759b
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/catch-item.webp
-    name: Catch Item
-    system:
-      _sup: z7i2gC8kIWPNzvxl
-      basic: true
-      competence:
-        raw: 0
-      delivery: hand
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: r1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: intrinsic
-      identifier: catch-item
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>You catch the item. If multiple creatures are all trying to catch
-          the same item, they all roll [[/roll 1d20]]. The creature with the
-          highest roll catches the item.</p>
-        fluent: <p>You instead roll [[/roll 1d20 + @f]].</p>
-        proficient: <p>You instead roll [[/roll 1d20 + @p]].</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: contact
-      targets:
-        - item
-      trigger: <p>An item within range is falling or flying by.</p>
-    type: ability
   - _id: z7i2gC8kIWPNzvxl
     _key: '!items.effects!391d0f8b89e39fc7.z7i2gC8kIWPNzvxl'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.63b8c75f371412f7
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.63b8c75f371412f7
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/disarm.webp
     name: Disarm
     system:
@@ -97,15 +51,16 @@ effects:
       standard: true
       targets:
         - arm
+    transfer: true
     type: ability
   - _id: d1dRqZrY8Gc6jYl1
     _key: '!items.effects!391d0f8b89e39fc7.d1dRqZrY8Gc6jYl1'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.5894bcd8755bdac8
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.5894bcd8755bdac8
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/hack.webp
     name: Hack
     system:
@@ -163,11 +118,12 @@ effects:
       targets:
         - arm
         - leg
+    transfer: true
     type: ability
   - _id: hABJFOt5F7OJim6b
     _key: '!items.effects!391d0f8b89e39fc7.hABJFOt5F7OJim6b'
     _stats:
-      coreVersion: '13'
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.17
@@ -178,19 +134,32 @@ effects:
         raw: 0
       description: <p>Not usable by neutral creatures.</p>
       form: flaw
+    transfer: true
     type: property
   - _id: ZBmupzN5yrmjo8qp
     _key: '!items.effects!391d0f8b89e39fc7.ZBmupzN5yrmjo8qp'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.109e84275b290363
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.109e84275b290363
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/species-lore.webp
     name: Species Lore
     system:
       automations:
+        98a4b88702a87417:
+          _id: 98a4b88702a87417
+          bonus: '0'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          tradecraft: hunter
+          type: tradecraft
         fc88a9817ac8a299:
           _id: fc88a9817ac8a299
           bonus: '0'
@@ -255,15 +224,16 @@ effects:
       standard: true
       targets:
         - creature
+    transfer: true
     type: ability
   - _id: YXkj0Qmqht2RsBux
     _key: '!items.effects!391d0f8b89e39fc7.YXkj0Qmqht2RsBux'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.1b64c8a7cc5847a8
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1b64c8a7cc5847a8
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/swimming.webp
     name: Swimming
     system:
@@ -283,11 +253,11 @@ effects:
           _id: e789ed5e109ebd1a
           changes:
             - key: system.speedAdjustments.swim
-              mode: 4
+              phase: normal
               priority: 10
               qualifier: '1'
               target: Actor
-              time: normal
+              type: upgrade
               value: '3'
           competencies:
             - 0
@@ -332,15 +302,16 @@ effects:
       standard: true
       targets:
         - self
+    transfer: true
     type: ability
   - _id: FmZgTQM1RxS29QW4
     _key: '!items.effects!391d0f8b89e39fc7.FmZgTQM1RxS29QW4'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.891de334396620e1
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.891de334396620e1
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.63
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/properties/weapon.webp
     name: Weapon
     system:
@@ -352,7 +323,59 @@ effects:
       form: intrinsic
       identifier: weapon
       mundane: true
+    transfer: true
     type: property
+  - _id: VAaducPKWzKSbMlO
+    _key: '!items.effects!391d0f8b89e39fc7.VAaducPKWzKSbMlO'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.6E1L4yHlYGd0QT0l
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/catch-item.webp
+    name: Catch Item
+    system:
+      _sup: z7i2gC8kIWPNzvxl
+      basic: true
+      competence:
+        raw: 0
+      delivery: hand
+      duration:
+        raw: '0'
+        unit: instant
+      executionTime:
+        base: r1
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: intrinsic
+      identifier: catch-item
+      interaction: manifest
+      maneuver: reactive
+      mundane: false
+      overview:
+        base: >-
+          <p>You catch the item. If multiple creatures are all trying to catch
+          the same item, they all roll [[/roll 1d20]]. The creature with the
+          highest roll catches the item.</p>
+        fluent: <p>You instead roll [[/roll 1d20 + @f]].</p>
+        proficient: <p>You instead roll [[/roll 1d20 + @p]].</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: contact
+      targets:
+        - item
+      trigger: <p>An item within range is falling or flying by.</p>
+    transfer: true
+    type: ability
 folder: 9e47cf966e0cd702
 img: systems/teriock/src/assets/items/saber-of-uther-nall.webp
 name: Saber of Uther-nall

@@ -1,67 +1,60 @@
 _id: 26050cd2981e46d6
-_key: '!items!26050cd2981e46d6'
+_key: '!effects!26050cd2981e46d6'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 26050cd2981e46d6
-    _key: '!items.effects!26050cd2981e46d6.26050cd2981e46d6'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/harmed-by-immobilization.webp
-    name: Harmed by Immobilization
-    system:
-      automations:
-        29b275994cf9f5b1:
-          _id: 29b275994cf9f5b1
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: 1d10
-          heighten:
-            - 1
-            - 0
-          merge: true
-          roll: damage
-          type: roll
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: flaw
-      identifier: harmed-by-immobilization
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>Whenever you take an effect that would make you
-          @L[Condition:Immobilized]{immobilized}, you take [[/damage 1d10]]
-          @L[Core:Damage]{damage}. If the effect was @L[Category:Magically
-          powered abilities]{magical}, the damage is @L[Damage:Magic]{magic
-          damage}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - divine
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/harmed-by-immobilization.webp
 name: Harmed by Immobilization
-type: wrapper
+system:
+  automations:
+    29b275994cf9f5b1:
+      _id: 29b275994cf9f5b1
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: 1d10
+      heighten:
+        - 1
+        - 0
+      impact: damage
+      merge: true
+      type: roll
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: unlimited
+  executionTime:
+    base: passive
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: flaw
+  identifier: harmed-by-immobilization
+  interaction: manifest
+  maneuver: passive
+  mundane: false
+  overview:
+    base: >-
+      <p>Whenever you take an effect that would make you
+      @L[Condition:Immobilized]{immobilized}, you take [[/damage 1d10]]
+      @L[Core:Damage]{damage}. If the effect was @L[Category:Magically powered
+      abilities]{magical}, the damage is @L[Damage:Magic]{magic damage}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - divine
+  range:
+    unit: self
+  targets:
+    - self
+transfer: true
+type: ability

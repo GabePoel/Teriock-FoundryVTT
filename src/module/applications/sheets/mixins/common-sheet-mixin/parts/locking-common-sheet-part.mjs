@@ -48,8 +48,8 @@ export default (Base) => {
         toggleButton.setAttribute(
           "data-tooltip",
           this.isEditable
-            ? game.i18n.localize("TERIOCK.SHEETS.Common.ACTIONS.LockSheet.off")
-            : game.i18n.localize("TERIOCK.SHEETS.Common.ACTIONS.LockSheet.on"),
+            ? _loc("TERIOCK.SHEETS.Common.ACTIONS.LockSheet.off")
+            : _loc("TERIOCK.SHEETS.Common.ACTIONS.LockSheet.on"),
         );
       }
 

@@ -12,9 +12,9 @@ declare global {
   namespace Teriock.Models {
     export type ConsequenceSystemData = {
       /** <schema> Associations */
-      associations: Teriock.MessageData.MessageAssociation[];
+      associations: Teriock.Messages.MessageAssociation[];
       /** <schema> Blocks representing the source */
-      blocks: Teriock.MessageData.MessageBlock[];
+      blocks: Teriock.Messages.MessageBlock[];
       /** <schema> If this was the result of an effect that went critical */
       critical: boolean;
       /** <schema> Circumstances in which this effect is active or expires */

@@ -19,7 +19,7 @@ export default class TeriockChatMessage extends BaseDocumentMixin(ChatMessage) {
    */
   static async create(data = {}, operation = {}) {
     if (operation.defaultMode) {
-      this.applyRollMode(data, game.settings.get("core", "rollMode"));
+      this.applyMode(data, game.settings.get("core", "messageMode"));
     }
     return super.create(data, operation);
   }

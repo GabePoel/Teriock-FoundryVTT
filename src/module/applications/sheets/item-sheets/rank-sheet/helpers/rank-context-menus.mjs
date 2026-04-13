@@ -11,9 +11,9 @@ export function archetypeContextMenu(rank) {
   for (const [aKey, aData] of Object.entries(TERIOCK.options.rank)) {
     const firstClass = Object.keys(aData.classes)[0];
     const option = {
-      name: aData.name,
+      label: aData.name,
       icon: makeIcon(aData.icon, "contextMenu"),
-      callback: async () => {
+      onClick: async () => {
         await rank.update({
           system: {
             archetype: aKey,
@@ -40,9 +40,9 @@ export function classContextMenu(rank) {
   for (const [aKey, aData] of Object.entries(TERIOCK.options.rank)) {
     for (const [cKey, cData] of Object.entries(aData.classes)) {
       const option = {
-        name: cData.name,
+        label: cData.name,
         icon: makeIcon(cData.icon, "contextMenu"),
-        callback: async () => {
+        onClick: async () => {
           await rank.update({
             system: {
               className: cKey,
@@ -50,7 +50,7 @@ export function classContextMenu(rank) {
             },
           });
         },
-        condition: () => {
+        visible: () => {
           return foundry.utils.getProperty(rank.system, "archetype") === aKey;
         },
       };

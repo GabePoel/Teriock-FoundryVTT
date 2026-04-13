@@ -1,81 +1,87 @@
 _id: 879873d707bc1d1c
-_key: '!items!879873d707bc1d1c'
+_key: '!effects!879873d707bc1d1c'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 879873d707bc1d1c
-    _key: '!items.effects!879873d707bc1d1c.879873d707bc1d1c'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/stand-up.webp
-    name: Stand Up
-    system:
-      automations:
-        3d7fd86e8b76943d:
-          _id: 3d7fd86e8b76943d
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: remove
-          status: prone
-          type: end
-        582d8b8b97c3fb78:
-          _id: 582d8b8b97c3fb78
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: remove
-          status: prone
-          type: status
-        64cofMiPIXRM9RKW:
-          _id: 64cofMiPIXRM9RKW
-          movementAction: walk
-          type: changeMovement
-      basic: true
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - movement
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: intrinsic
-      identifier: stand-up
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: <p>You are no longer @L[Condition:Prone]{prone}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      requirements: <p>You are @L[Condition:Prone]{prone}.</p>
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/stand-up.webp
 name: Stand Up
-type: wrapper
+system:
+  automations:
+    3d7fd86e8b76943d:
+      _id: 3d7fd86e8b76943d
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 1
+        - 0
+      relation: remove
+      status: prone
+      type: end
+    582d8b8b97c3fb78:
+      _id: 582d8b8b97c3fb78
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: remove
+      status: prone
+      target: false
+      type: status
+    64cofMiPIXRM9RKW:
+      _id: 64cofMiPIXRM9RKW
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 0
+        - 1
+      movementAction: walk
+      type: changeMovement
+  basic: true
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - movement
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: intrinsic
+  identifier: stand-up
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: <p>You are no longer @L[Condition:Prone]{prone}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  requirements: <p>You are @L[Condition:Prone]{prone}.</p>
+  targets:
+    - self
+transfer: true
+type: ability

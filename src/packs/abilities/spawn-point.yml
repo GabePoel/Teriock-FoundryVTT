@@ -1,78 +1,78 @@
 _id: efecd8f8bb8a1c1e
-_key: '!items!efecd8f8bb8a1c1e'
+_key: '!effects!efecd8f8bb8a1c1e'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: efecd8f8bb8a1c1e
-    _key: '!items.effects!efecd8f8bb8a1c1e.efecd8f8bb8a1c1e'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/spawn-point.webp
-    name: Spawn Point
-    system:
-      automations:
-        72ce567009179bea:
-          _id: 72ce567009179bea
-          competencies:
-            - 0
-            - 1
-            - 2
-          duration:
-            raw: '@h * 86400'
-          heighten:
-            - 1
-          type: duration
-      class: paladin
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: hand
-      duration:
-        raw: '8'
-        unit: hour
-      elements:
-        - necromancy
-      executionTime: 10 Minutes
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 24 hours.</p>
-      identifier: spawn-point
-      interaction: manifest
-      maneuver: slow
-      overview:
-        base: >-
-          <p>You enchant an area no larger than 30 feet in any direction. This
-          area casts @L[Ability:Zombify]{Zombify} on all creatures within it at
-          the start of each @L[Core:Turns]{turn}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      ritual: true
-      rotator: true
-      spell: true
-      standard: true
-      targets:
-        - area
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/spawn-point.webp
 name: Spawn Point
-type: wrapper
+system:
+  automations:
+    72ce567009179bea:
+      _id: 72ce567009179bea
+      changeType: add
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      duration:
+        raw: '@h * 86400'
+        unit: second
+      heighten:
+        - 1
+      type: duration
+  class: paladin
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: hand
+  duration:
+    raw: '8'
+    unit: hour
+  elements:
+    - necromancy
+  executionTime:
+    base: 10 Minutes
+    slow:
+      raw: '10'
+      unit: minute
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  heightened: >-
+    <p>For each additional @L[Core:MP]{MP} spent, the duration of this effect
+    increases by 24 hours.</p>
+  identifier: spawn-point
+  interaction: manifest
+  maneuver: slow
+  mundane: false
+  overview:
+    base: >-
+      <p>You enchant an area no larger than 30 feet in any direction. This area
+      casts @L[Ability:Zombify]{Zombify} on all creatures within it at the start
+      of each @L[Core:Turns]{turn}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: contact
+  ritual: true
+  rotator: true
+  spell: true
+  standard: true
+  targets:
+    - area
+transfer: true
+type: ability

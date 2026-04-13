@@ -1,56 +1,50 @@
 _id: 97a9e73ffa792999
-_key: '!items!97a9e73ffa792999'
+_key: '!effects!97a9e73ffa792999'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 97a9e73ffa792999
-    _key: '!items.effects!97a9e73ffa792999.97a9e73ffa792999'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/jumpstart-search.webp
-    name: Jumpstart Search
-    system:
-      class: paladin
-      competence:
-        raw: 0
-      delivery: hand
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - stealing
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: jumpstart-search
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - divine
-        - financial
-      range:
-        unit: contact
-      results:
-        hit: >-
-          <p>At the start of the target's next turn, you take all of one type of
-          @L[Property:Searchable]{searchable} item from them.</p>
-      skill: true
-      standard: true
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/jumpstart-search.webp
 name: Jumpstart Search
-type: wrapper
+system:
+  class: paladin
+  competence:
+    raw: 0
+  delivery: hand
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - stealing
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: jumpstart-search
+  interaction: attack
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - divine
+    - financial
+  range:
+    unit: contact
+  results:
+    hit: >-
+      <p>At the start of the target's next turn, you take all of one type of
+      @L[Property:Searchable]{searchable} item from them.</p>
+  skill: true
+  standard: true
+  targets:
+    - creature
+transfer: true
+type: ability

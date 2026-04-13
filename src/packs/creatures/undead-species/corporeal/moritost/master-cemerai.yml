@@ -1,10 +1,10 @@
 _id: fe39a707e5e065ad
 _key: '!actors!fe39a707e5e065ad'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.68
+  systemVersion: 0.12.0
 folder: 0b00935e53673daa
 img: systems/teriock/src/icons/creatures/master-cemerai.webp
 items:
@@ -12,20 +12,20 @@ items:
     _key: '!actors.items!fe39a707e5e065ad.fe39a707e5e065ad'
     _stats:
       compendiumSource: Compendium.teriock.species.Item.fe39a707e5e065ad
-      coreVersion: '13'
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     effects:
       - _id: 0zPUDQLEpw50C5dM
         _key: >-
           !actors.items.effects!fe39a707e5e065ad.fe39a707e5e065ad.0zPUDQLEpw50C5dM
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.a04434f696dc637e
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.ANPHEgI4HifPcpuS
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/animate-dead.webp
         name: Animate Dead
         system:
@@ -44,7 +44,6 @@ items:
                 type: formula
           delivery: hand
           duration:
-            raw: '0'
             unit: instant
           effectTypes:
             - reanimation
@@ -92,16 +91,17 @@ items:
           standard: true
           targets:
             - creature
+        transfer: true
         type: ability
       - _id: BYFrWfsfIKy1D5Xu
         _key: >-
           !actors.items.effects!fe39a707e5e065ad.fe39a707e5e065ad.BYFrWfsfIKy1D5Xu
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.235923981d1ebd09
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.235923981d1ebd09
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/constructed-body.webp
         name: Constructed Body
         system:
@@ -123,8 +123,7 @@ items:
             raw: 0
           delivery: self
           duration:
-            raw: '0'
-            unit: unlimited
+            unit: instant
           executionTime:
             base: passive
             slow:
@@ -177,16 +176,17 @@ items:
             unit: self
           targets:
             - self
+        transfer: true
         type: ability
       - _id: uEW2QScjjElCGJPe
         _key: >-
           !actors.items.effects!fe39a707e5e065ad.fe39a707e5e065ad.uEW2QScjjElCGJPe
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.a117c508ccc3bbe5
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.EZt37ToLutUxjQ2r
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/death-rattle.webp
         name: Death Rattle
         system:
@@ -201,7 +201,6 @@ items:
                 type: tag
           delivery: self
           duration:
-            raw: '0'
             unit: instant
           elements:
             - necromancy
@@ -237,16 +236,296 @@ items:
           targets:
             - self
           trigger: <p>You @L[Condition:Dead]{die}.</p>
+        transfer: true
         type: ability
-      - _id: TXpJVaN4RZ67dclw
+      - _id: cUvORPjyPFEfBBnu
         _key: >-
-          !actors.items.effects!fe39a707e5e065ad.fe39a707e5e065ad.TXpJVaN4RZ67dclw
+          !actors.items.effects!fe39a707e5e065ad.fe39a707e5e065ad.cUvORPjyPFEfBBnu
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.5f8896d1928dfede
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.a3ba1215e06bfb82
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
+        img: systems/teriock/src/icons/abilities/greater-undead.webp
+        name: Greater Undead
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: instant
+          elements:
+            - necromancy
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          identifier: greater-undead
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          overview:
+            base: >-
+              <p>You count as being @L[Keyword:Undead]{undead} for the purposes
+              of @L[Category:Abilities]{abilities}, @L[Category:Damage
+              types]{damage}, and other @L[Category:Effects]{effects}. You also
+              gain @L[Ability:Ethereal Senses]{Ethereal Senses},
+              @L[Ability:Healing Sensitivity]{Healing Sensitivity},
+              @L[Ability:Magical Durability]{Magical Durability},
+              @L[Ability:Mana Drain Touch]{Mana Drain Touch}, @L[Ability:Undead
+              Mind]{Undead Mind}, and @L[Ability:Undying Durability]{Undying
+              Durability}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: hZ5KPVZ8ida58YOd
+        _key: >-
+          !actors.items.effects!fe39a707e5e065ad.fe39a707e5e065ad.hZ5KPVZ8ida58YOd
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.db77687509a7309d
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.0
+        img: systems/teriock/src/icons/abilities/normal-intelligence.webp
+        name: Normal Intelligence
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: instant
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: normal-intelligence
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: int
+              value: 0
+        transfer: true
+        type: ability
+      - _id: hjOaktLHbnEqAkhS
+        _key: >-
+          !actors.items.effects!fe39a707e5e065ad.fe39a707e5e065ad.hjOaktLHbnEqAkhS
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.1c52eda8919d34a7
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.0
+        img: systems/teriock/src/icons/abilities/normal-movement.webp
+        name: Normal Movement
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: instant
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: normal-movement
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: mov
+              value: 0
+        transfer: true
+        type: ability
+      - _id: hAVwGSBBkBg5PvvH
+        _key: >-
+          !actors.items.effects!fe39a707e5e065ad.fe39a707e5e065ad.hAVwGSBBkBg5PvvH
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.8249d99c527d09b1
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.0
+        img: systems/teriock/src/icons/abilities/normal-perception.webp
+        name: Normal Perception
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: instant
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: normal-perception
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: per
+              value: 0
+        transfer: true
+        type: ability
+      - _id: njZ92ryGdr4oDCmT
+        _key: >-
+          !actors.items.effects!fe39a707e5e065ad.fe39a707e5e065ad.njZ92ryGdr4oDCmT
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.1d13190e5b38bda6
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.0
+        img: systems/teriock/src/icons/abilities/normal-sneak.webp
+        name: Normal Sneak
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: instant
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: normal-sneak
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: snk
+              value: 0
+        transfer: true
+        type: ability
+      - _id: kJPEGi5HeY4OBQpP
+        _key: >-
+          !actors.items.effects!fe39a707e5e065ad.fe39a707e5e065ad.kJPEGi5HeY4OBQpP
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.14d28d6322eec2ff
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.0
+        img: systems/teriock/src/icons/abilities/normal-strength.webp
+        name: Normal Strength
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: instant
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: normal-strength
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: str
+              value: 0
+        transfer: true
+        type: ability
+      - _id: IoNHFfWa3rQzttjy
+        _key: >-
+          !actors.items.effects!fe39a707e5e065ad.fe39a707e5e065ad.IoNHFfWa3rQzttjy
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.2rxzRucyitmqyDmQ
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/ethereal-senses.webp
         name: Ethereal Senses
         system:
@@ -256,11 +535,11 @@ items:
               _id: e789ed5e109ebd1a
               changes:
                 - key: system.senses.ethereal
-                  mode: 4
+                  phase: normal
                   priority: 10
                   qualifier: '1'
                   target: Actor
-                  time: normal
+                  type: upgrade
                   value: '120'
               competencies:
                 - 0
@@ -300,7 +579,7 @@ items:
           overview:
             base: >-
               <p>You can see and hear spirits and
-              @L[Condition:Ethereal]{Ethereal} creatures.</p>
+              @L[Condition:Ethereal]{Ethereal} creatures within 120 feet.</p>
           piercing:
             raw: 0
           powerSources:
@@ -311,70 +590,17 @@ items:
             unit: self
           targets:
             - self
+        transfer: true
         type: ability
-      - _id: cUvORPjyPFEfBBnu
+      - _id: 1B3i5BWpvlWlYbFs
         _key: >-
-          !actors.items.effects!fe39a707e5e065ad.fe39a707e5e065ad.cUvORPjyPFEfBBnu
+          !actors.items.effects!fe39a707e5e065ad.fe39a707e5e065ad.1B3i5BWpvlWlYbFs
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.a3ba1215e06bfb82
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.646bdfc53ff71572
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
-        img: systems/teriock/src/icons/abilities/greater-undead.webp
-        name: Greater Undead
-        system:
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          elements:
-            - necromancy
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: special
-          identifier: greater-undead
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          overview:
-            base: >-
-              <p>You count as being @L[Keyword:Undead]{undead} for the purposes
-              of @L[Category:Abilities]{abilities}, @L[Category:Damage
-              types]{damage}, and other @L[Category:Effects]{effects}. You also
-              gain @L[Ability:Ethereal Senses]{Ethereal Senses},
-              @L[Ability:Healing Sensitivity]{Healing Sensitivity},
-              @L[Ability:Magical Durability]{Magical Durability},
-              @L[Ability:Mana Drain Touch]{Mana Drain Touch}, @L[Ability:Undead
-              Mind]{Undead Mind}, and @L[Ability:Undying Durability]{Undying
-              Durability}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - magical
-          range:
-            unit: self
-          targets:
-            - self
-        type: ability
-      - _id: eWuxVw1W5ToMTsqB
-        _key: >-
-          !actors.items.effects!fe39a707e5e065ad.fe39a707e5e065ad.eWuxVw1W5ToMTsqB
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.646bdfc53ff71572
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
         name: Healing Sensitivity
         system:
@@ -418,31 +644,39 @@ items:
             unit: self
           targets:
             - self
+        transfer: true
         type: ability
-      - _id: wRxadIPBgNWH3IVB
+      - _id: kYz70ZuceVOGQmVy
         _key: >-
-          !actors.items.effects!fe39a707e5e065ad.fe39a707e5e065ad.wRxadIPBgNWH3IVB
+          !actors.items.effects!fe39a707e5e065ad.fe39a707e5e065ad.kYz70ZuceVOGQmVy
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.fd30dcae55669994
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.1e47c2f1c0cd5428
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
-        img: systems/teriock/src/icons/abilities/magical-durability.webp
-        name: Magical Durability
+          systemVersion: 0.12.0
+        img: systems/teriock/src/icons/abilities/undead-mind.webp
+        name: Undead Mind
         system:
           _sup: cUvORPjyPFEfBBnu
           automations:
             e789ed5e109ebd1a:
               _id: e789ed5e109ebd1a
               changes:
-                - key: system.protections.immunities.damageTypes
-                  mode: 2
+                - key: system.protections.immunities.statuses
+                  phase: normal
                   priority: 10
                   qualifier: '1'
                   target: Actor
-                  time: normal
-                  value: mundane
+                  type: add
+                  value: frightened
+                - key: system.protections.immunities.statuses
+                  phase: normal
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  type: add
+                  value: charmed
               competencies:
                 - 0
                 - 1
@@ -462,6 +696,8 @@ items:
             unit: unlimited
           effectTypes:
             - immunity
+          elements:
+            - necromancy
           executionTime:
             base: passive
             slow:
@@ -472,14 +708,16 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          identifier: magical-durability
+          identifier: undead-mind
           interaction: manifest
           maneuver: passive
           mundane: false
           overview:
             base: >-
-              <p>You are @L[Keyword:Immunity]{immune} to
-              @L[Damage:Mundane]{mundane} @L[Core:Damage]{damage}.</p>
+              <p>You are @L[Keyword:Immunity]{immune} to being
+              @L[Condition:Frightened]{frightened} and
+              @L[Condition:Charmed]{charmed}. The effects of [[lookup name]] are
+              maintained even if @L[Condition:Transformed]{transformed}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -488,16 +726,17 @@ items:
             unit: self
           targets:
             - self
+        transfer: true
         type: ability
-      - _id: XIN8gW6rDqMqvgXI
+      - _id: Y5SpatRyF6PQMdFo
         _key: >-
-          !actors.items.effects!fe39a707e5e065ad.fe39a707e5e065ad.XIN8gW6rDqMqvgXI
+          !actors.items.effects!fe39a707e5e065ad.fe39a707e5e065ad.Y5SpatRyF6PQMdFo
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.267a2993fd42e843
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.267a2993fd42e843
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/mana-drain-touch.webp
         name: Mana Drain Touch
         system:
@@ -574,263 +813,32 @@ items:
               effect}.</p>
           targets:
             - creature
+        transfer: true
         type: ability
-      - _id: hZ5KPVZ8ida58YOd
+      - _id: Mh0binJ4DFdSr6cg
         _key: >-
-          !actors.items.effects!fe39a707e5e065ad.fe39a707e5e065ad.hZ5KPVZ8ida58YOd
+          !actors.items.effects!fe39a707e5e065ad.fe39a707e5e065ad.Mh0binJ4DFdSr6cg
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.db77687509a7309d
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.P5i3FWFMMYPBuVtV
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
-        img: systems/teriock/src/icons/abilities/normal-intelligence.webp
-        name: Normal Intelligence
-        system:
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: normal-intelligence
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          targets:
-            - self
-          upgrades:
-            score:
-              attribute: int
-              value: 0
-        type: ability
-      - _id: hjOaktLHbnEqAkhS
-        _key: >-
-          !actors.items.effects!fe39a707e5e065ad.fe39a707e5e065ad.hjOaktLHbnEqAkhS
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.1c52eda8919d34a7
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.11.6
-        img: systems/teriock/src/icons/abilities/normal-movement.webp
-        name: Normal Movement
-        system:
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: normal-movement
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          targets:
-            - self
-          upgrades:
-            score:
-              attribute: mov
-              value: 0
-        type: ability
-      - _id: hAVwGSBBkBg5PvvH
-        _key: >-
-          !actors.items.effects!fe39a707e5e065ad.fe39a707e5e065ad.hAVwGSBBkBg5PvvH
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.8249d99c527d09b1
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.11.6
-        img: systems/teriock/src/icons/abilities/normal-perception.webp
-        name: Normal Perception
-        system:
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: normal-perception
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          targets:
-            - self
-          upgrades:
-            score:
-              attribute: per
-              value: 0
-        type: ability
-      - _id: njZ92ryGdr4oDCmT
-        _key: >-
-          !actors.items.effects!fe39a707e5e065ad.fe39a707e5e065ad.njZ92ryGdr4oDCmT
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.1d13190e5b38bda6
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.11.6
-        img: systems/teriock/src/icons/abilities/normal-sneak.webp
-        name: Normal Sneak
-        system:
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: normal-sneak
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          targets:
-            - self
-          upgrades:
-            score:
-              attribute: snk
-              value: 0
-        type: ability
-      - _id: kJPEGi5HeY4OBQpP
-        _key: >-
-          !actors.items.effects!fe39a707e5e065ad.fe39a707e5e065ad.kJPEGi5HeY4OBQpP
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.14d28d6322eec2ff
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.11.6
-        img: systems/teriock/src/icons/abilities/normal-strength.webp
-        name: Normal Strength
-        system:
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: normal-strength
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          targets:
-            - self
-          upgrades:
-            score:
-              attribute: str
-              value: 0
-        type: ability
-      - _id: WFBJLYgDesIGXRHv
-        _key: >-
-          !actors.items.effects!fe39a707e5e065ad.fe39a707e5e065ad.WFBJLYgDesIGXRHv
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.1e47c2f1c0cd5428
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.11.6
-        img: systems/teriock/src/icons/abilities/undead-mind.webp
-        name: Undead Mind
+          systemVersion: 0.12.0
+        img: systems/teriock/src/icons/abilities/magical-durability.webp
+        name: Magical Durability
         system:
           _sup: cUvORPjyPFEfBBnu
           automations:
             e789ed5e109ebd1a:
               _id: e789ed5e109ebd1a
               changes:
-                - key: system.protections.immunities.statuses
-                  mode: 2
+                - key: system.protections.immunities.damageTypes
+                  phase: normal
                   priority: 10
                   qualifier: '1'
                   target: Actor
-                  time: normal
-                  value: frightened
-                - key: system.protections.immunities.statuses
-                  mode: 2
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: charmed
+                  type: add
+                  value: mundane
               competencies:
                 - 0
                 - 1
@@ -850,8 +858,6 @@ items:
             unit: unlimited
           effectTypes:
             - immunity
-          elements:
-            - necromancy
           executionTime:
             base: passive
             slow:
@@ -862,16 +868,14 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          identifier: undead-mind
+          identifier: magical-durability
           interaction: manifest
           maneuver: passive
           mundane: false
           overview:
             base: >-
-              <p>You are @L[Keyword:Immunity]{immune} to being
-              @L[Condition:Frightened]{frightened} and
-              @L[Condition:Charmed]{charmed}. The effects of [[lookup name]] are
-              maintained even if @L[Condition:Transformed]{transformed}.</p>
+              <p>You are @L[Keyword:Immunity]{immune} to
+              @L[Damage:Mundane]{mundane} @L[Core:Damage]{damage}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -880,16 +884,17 @@ items:
             unit: self
           targets:
             - self
+        transfer: true
         type: ability
-      - _id: EeNoRzxasyXei0pi
+      - _id: 5sqJkyXIQws1p8as
         _key: >-
-          !actors.items.effects!fe39a707e5e065ad.fe39a707e5e065ad.EeNoRzxasyXei0pi
+          !actors.items.effects!fe39a707e5e065ad.fe39a707e5e065ad.5sqJkyXIQws1p8as
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.3a19d7ff7a1f3b26
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.3a19d7ff7a1f3b26
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/undying-durability.webp
         name: Undying Durability
         system:
@@ -899,25 +904,25 @@ items:
               _id: e789ed5e109ebd1a
               changes:
                 - key: system.protections.immunities.statuses
-                  mode: 2
+                  phase: normal
                   priority: 10
                   qualifier: '1'
                   target: Actor
-                  time: normal
+                  type: add
                   value: unconscious
                 - key: system.protections.immunities.statuses
-                  mode: 2
+                  phase: normal
                   priority: 10
                   qualifier: '1'
                   target: Actor
-                  time: normal
+                  type: add
                   value: suffocating
                 - key: system.protections.immunities.statuses
-                  mode: 2
+                  phase: normal
                   priority: 10
                   qualifier: '1'
                   target: Actor
-                  time: normal
+                  type: add
                   value: poisoned
               competencies:
                 - 0
@@ -973,6 +978,7 @@ items:
             unit: self
           targets:
             - self
+        transfer: true
         type: ability
     folder: 0b00935e53673daa
     img: systems/teriock/src/icons/creatures/master-cemerai.webp
@@ -1014,20 +1020,20 @@ items:
     _key: '!actors.items!fe39a707e5e065ad.22lAEeC4XER5NefD'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.f9cbc2c251e4f966
-      coreVersion: '13'
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     effects:
       - _id: Ra88uHOPc8IZzLb4
         _key: >-
           !actors.items.effects!fe39a707e5e065ad.22lAEeC4XER5NefD.Ra88uHOPc8IZzLb4
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.fa250fcc3c870227
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.fa250fcc3c870227
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         flags:
           teriock:
             category: support
@@ -1075,16 +1081,17 @@ items:
           standard: true
           targets:
             - self
+        transfer: true
         type: ability
       - _id: BTg0NGa5swlixgtF
         _key: >-
           !actors.items.effects!fe39a707e5e065ad.22lAEeC4XER5NefD.BTg0NGa5swlixgtF
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.b3c6b1b76ac377a9
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.b3c6b1b76ac377a9
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         flags:
           teriock:
             category: combat
@@ -1185,6 +1192,7 @@ items:
           targets:
             - creature
           trigger: <p>A creature forfeits a @L[Condition:Dueling]{duel} with you.</p>
+        transfer: true
         type: ability
     folder: 0b00935e53673daa
     img: systems/teriock/src/icons/ranks/rank-5-duelist.webp
@@ -1220,20 +1228,20 @@ items:
     _key: '!actors.items!fe39a707e5e065ad.BPYNbShb9TpiSOyb'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.4d084b2bd2d58aec
-      coreVersion: '13'
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     effects:
       - _id: QxDyN7VLtCaq1ppD
         _key: >-
           !actors.items.effects!fe39a707e5e065ad.BPYNbShb9TpiSOyb.QxDyN7VLtCaq1ppD
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.03678a933c57b548
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.03678a933c57b548
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         flags:
           teriock:
             category: support
@@ -1296,16 +1304,17 @@ items:
           standard: true
           targets:
             - self
+        transfer: true
         type: ability
       - _id: yCLjgtUua4ROR3qi
         _key: >-
           !actors.items.effects!fe39a707e5e065ad.BPYNbShb9TpiSOyb.yCLjgtUua4ROR3qi
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.f59e54740feac012
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.f59e54740feac012
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         flags:
           teriock:
             category: combat
@@ -1410,6 +1419,7 @@ items:
           standard: true
           targets:
             - creature
+        transfer: true
         type: ability
     folder: 0b00935e53673daa
     img: systems/teriock/src/icons/ranks/rank-3-duelist.webp
@@ -1445,20 +1455,20 @@ items:
     _key: '!actors.items!fe39a707e5e065ad.QbKGKlDc7YEycp2c'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.c9ac57bad8e1fbb5
-      coreVersion: '13'
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     effects:
       - _id: ygSqYQJfPOv9a0Fr
         _key: >-
           !actors.items.effects!fe39a707e5e065ad.QbKGKlDc7YEycp2c.ygSqYQJfPOv9a0Fr
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.2979c948c07b8151
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.2979c948c07b8151
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         flags:
           teriock:
             category: combat
@@ -1526,16 +1536,17 @@ items:
           standard: true
           targets:
             - self
+        transfer: true
         type: ability
       - _id: yZ3N79vChFytd8iT
         _key: >-
           !actors.items.effects!fe39a707e5e065ad.QbKGKlDc7YEycp2c.yZ3N79vChFytd8iT
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.07806fe5345b9727
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.07806fe5345b9727
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         flags:
           teriock:
             category: support
@@ -1597,6 +1608,7 @@ items:
           sustained: true
           targets:
             - creature
+        transfer: true
         type: ability
     folder: 0b00935e53673daa
     img: systems/teriock/src/icons/ranks/rank-4-duelist.webp
@@ -1632,20 +1644,20 @@ items:
     _key: '!actors.items!fe39a707e5e065ad.Wcwfixi7jvFL7HzY'
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.079ffd850d9567f9
-      coreVersion: '13'
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     effects:
       - _id: LwntE76DWV8LsMYk
         _key: >-
           !actors.items.effects!fe39a707e5e065ad.Wcwfixi7jvFL7HzY.LwntE76DWV8LsMYk
         _stats:
-          compendiumSource: Compendium.teriock.properties.Item.294cd7a4f1545ed9
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.294cd7a4f1545ed9
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -1658,16 +1670,17 @@ items:
           form: intrinsic
           identifier: bashing
           mundane: true
+        transfer: true
         type: property
       - _id: 70oASdJA4Iza7rlK
         _key: >-
           !actors.items.effects!fe39a707e5e065ad.Wcwfixi7jvFL7HzY.70oASdJA4Iza7rlK
         _stats:
-          compendiumSource: Compendium.teriock.properties.Item.3d2cc8d952adebec
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.3d2cc8d952adebec
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -1679,6 +1692,7 @@ items:
           form: intrinsic
           identifier: small
           mundane: true
+        transfer: true
         type: property
     folder: 0b00935e53673daa
     img: systems/teriock/src/icons/body-parts/foot.webp
@@ -1691,6 +1705,8 @@ items:
       damage:
         base: '1'
       identifier: foot
+      impacts:
+        - damage
       range:
         long:
           unit: melee
@@ -1704,106 +1720,20 @@ items:
     _key: '!actors.items!fe39a707e5e065ad.Z4uVPolbqzSOKYko'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.8e0c2b8d16a120d3
-      coreVersion: '13'
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     effects:
-      - _id: azq2YepcyMcJsrp2
-        _key: >-
-          !actors.items.effects!fe39a707e5e065ad.Z4uVPolbqzSOKYko.azq2YepcyMcJsrp2
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.c9aece1ec4094d53
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.11.6
-        img: systems/teriock/src/icons/abilities/active-bow-out.webp
-        name: Active Bow Out
-        system:
-          _sup: vU4DiB0u1DAfzrs5
-          automations:
-            824b5b01e1a4efec:
-              _id: 824b5b01e1a4efec
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              executor: false
-              heighten:
-                - 1
-                - 0
-              relation: remove
-              status: dueling
-              target: false
-              type: status
-            e9c69ec96993ccc5:
-              _id: e9c69ec96993ccc5
-              competencies:
-                - 0
-                - 1
-                - 2
-              heighten:
-                - 1
-                - 0
-              relation: remove
-              status: dueling
-              type: end
-          class: duelist
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: instant
-          effectTypes:
-            - duelModifying
-          executionTime:
-            base: a1
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: active-bow-out
-          interaction: manifest
-          maneuver: active
-          mundane: false
-          overview:
-            base: >-
-              <p>You end a @L[Condition:Dueling]{duel} you are currently in. You
-              do not count as "forfeiting" or "losing" if you use [[lookup
-              name]] to stop @L[Condition:Dueling]{dueling}.</p>
-            proficient: >-
-              <p>If you want, everyone in the @L[Condition:Dueling]{duel}
-              returns to the number of @L[Core:Hit Points and Mana Points]{HP}
-              they had prior to @L[Condition:Dueling]{dueling}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - spiritual
-          range:
-            unit: self
-          skill: true
-          standard: true
-          targets:
-            - self
-        type: ability
       - _id: vU4DiB0u1DAfzrs5
         _key: >-
           !actors.items.effects!fe39a707e5e065ad.Z4uVPolbqzSOKYko.vU4DiB0u1DAfzrs5
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.5bb5b13ca45f582b
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.5bb5b13ca45f582b
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/bow-out.webp
         name: Bow Out
         system:
@@ -1842,104 +1772,17 @@ items:
           standard: true
           targets:
             - self
-        type: ability
-      - _id: YjmoMRnYDjIZ7YKZ
-        _key: >-
-          !actors.items.effects!fe39a707e5e065ad.Z4uVPolbqzSOKYko.YjmoMRnYDjIZ7YKZ
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.3e3bec7c2738ffa5
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.11.6
-        img: systems/teriock/src/icons/abilities/chi-strike.webp
-        name: Chi Strike
-        system:
-          _sup: Ckzn261n62CcGUwr
-          automations:
-            1728b3a84ea27844:
-              _id: 1728b3a84ea27844
-              common:
-                - standardDamage
-              competencies:
-                - 0
-                - 1
-                - 2
-              heighten:
-                - 1
-                - 0
-              type: common
-          class: duelist
-          competence:
-            raw: 0
-          costs:
-            primary:
-              mp:
-                formula: '1'
-                type: formula
-          delivery: weapon
-          duration:
-            raw: '0'
-            unit: instant
-          effectTypes:
-            - draining
-          executionTime:
-            base: a1
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: chi-strike
-          interaction: attack
-          limitation: >-
-            <p>May only be delivered with the @L[Category:Weapons]{weapon} you
-            made @L[Property:AV0]{AV0} and only against creatures you are
-            @L[Condition:Dueling]{dueling}.</p>
-          maneuver: active
-          mundane: false
-          overview:
-            base: >-
-              <p>This strike deals @L[Drain:Mana]{mana drain} instead of
-              @L[Core:Damage]{damage}. It has no @L[Category:Damage
-              types]{damage types}, but is otherwise treated as any other
-              @L[Category:Attack abilities]{attack} <i>prior</i> to hitting. So,
-              @L[Ability:Triumphant Damage Boost]{Triumphant Damage Boost} would
-              @L[Keyword:Boosted]{boost} it, but @L[Ability:Improved
-              Brace]{Improved Brace} would not @L[Keyword:Deboosted]{deboost}
-              it.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - spiritual
-          range:
-            unit: contact
-          results:
-            critHit: >-
-              <p>Deal an amount of @L[Drain:Mana]{mana drain} equal to the
-              amount of @L[Core:Standard and Critical Damage]{critical damage}
-              you would otherwise deal.</p>
-            hit: >-
-              <p>Deal an amount of @L[Drain:Mana]{mana drain} equal to the
-              @L[Core:Standard and Critical Damage]{standard damage} you would
-              otherwise deal.</p>
-          skill: true
-          standard: true
-          targets:
-            - creature
+        transfer: true
         type: ability
       - _id: Ckzn261n62CcGUwr
         _key: >-
           !actors.items.effects!fe39a707e5e065ad.Z4uVPolbqzSOKYko.Ckzn261n62CcGUwr
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.2670da014614edb4
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.2670da014614edb4
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/dueling-techniques.webp
         name: Dueling Techniques
         system:
@@ -1992,72 +1835,17 @@ items:
           standard: true
           targets:
             - weapon
-        type: ability
-      - _id: FSNN7eraWqSNTFKY
-        _key: >-
-          !actors.items.effects!fe39a707e5e065ad.Z4uVPolbqzSOKYko.FSNN7eraWqSNTFKY
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.c0042e5fff873fda
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.11.6
-        img: systems/teriock/src/icons/abilities/reactive-bow-out.webp
-        name: Reactive Bow Out
-        system:
-          _sup: vU4DiB0u1DAfzrs5
-          class: duelist
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: instant
-          executionTime:
-            base: r1
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: reactive-bow-out
-          interaction: manifest
-          maneuver: reactive
-          mundane: false
-          overview:
-            base: >-
-              <p>The effect causing you to enter a @L[Condition:Dueling]{duel}
-              or that would @L[Category:Duel modifying effects]{modify} a
-              @L[Condition:Dueling]{duel} you are in @L[Core:Fizzles]{fizzles}.
-              You do not count as "forfeiting" or "losing" if you use [[lookup
-              name]] to stop @L[Condition:Dueling]{dueling}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - spiritual
-          range:
-            unit: self
-          skill: true
-          standard: true
-          targets:
-            - self
-          trigger: >-
-            <p>Some effect would cause you to start
-            @L[Condition:Dueling]{dueling} or @L[Category:Duel modifying
-            effects]{modify} a @L[Condition:Dueling]{duel} you are in.</p>
+        transfer: true
         type: ability
       - _id: aMpBM1gwJl2mau2J
         _key: >-
           !actors.items.effects!fe39a707e5e065ad.Z4uVPolbqzSOKYko.aMpBM1gwJl2mau2J
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.43df205ab1de2597
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.43df205ab1de2597
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/tea-ceremony.webp
         name: Tea Ceremony
         system:
@@ -2138,6 +1926,240 @@ items:
           standard: true
           targets:
             - creature
+        transfer: true
+        type: ability
+      - _id: yGXgoZzhBnjda8WN
+        _key: >-
+          !actors.items.effects!fe39a707e5e065ad.Z4uVPolbqzSOKYko.yGXgoZzhBnjda8WN
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.Gs4jCmyXyojxu0WM
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.0
+        img: systems/teriock/src/icons/abilities/active-bow-out.webp
+        name: Active Bow Out
+        system:
+          _sup: vU4DiB0u1DAfzrs5
+          automations:
+            824b5b01e1a4efec:
+              _id: 824b5b01e1a4efec
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              executor: false
+              heighten:
+                - 1
+                - 0
+              relation: remove
+              status: dueling
+              target: false
+              type: status
+            e9c69ec96993ccc5:
+              _id: e9c69ec96993ccc5
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              relation: remove
+              status: dueling
+              type: end
+          class: duelist
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            raw: '0'
+            unit: instant
+          effectTypes:
+            - duelModifying
+          executionTime:
+            base: a1
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: active-bow-out
+          interaction: manifest
+          maneuver: active
+          mundane: false
+          overview:
+            base: >-
+              <p>You end a @L[Condition:Dueling]{duel} you are currently in. You
+              do not count as "forfeiting" or "losing" if you use [[lookup
+              name]] to stop @L[Condition:Dueling]{dueling}.</p>
+            proficient: >-
+              <p>If you want, everyone in the @L[Condition:Dueling]{duel}
+              returns to the number of @L[Core:Hit Points and Mana Points]{HP}
+              they had prior to @L[Condition:Dueling]{dueling}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - spiritual
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: sknYJxXarLZC53rE
+        _key: >-
+          !actors.items.effects!fe39a707e5e065ad.Z4uVPolbqzSOKYko.sknYJxXarLZC53rE
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.c0042e5fff873fda
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.0
+        img: systems/teriock/src/icons/abilities/reactive-bow-out.webp
+        name: Reactive Bow Out
+        system:
+          _sup: vU4DiB0u1DAfzrs5
+          class: duelist
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            raw: '0'
+            unit: instant
+          executionTime:
+            base: r1
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: reactive-bow-out
+          interaction: manifest
+          maneuver: reactive
+          mundane: false
+          overview:
+            base: >-
+              <p>The effect causing you to enter a @L[Condition:Dueling]{duel}
+              or that would @L[Category:Duel modifying effects]{modify} a
+              @L[Condition:Dueling]{duel} you are in @L[Core:Fizzles]{fizzles}.
+              You do not count as "forfeiting" or "losing" if you use [[lookup
+              name]] to stop @L[Condition:Dueling]{dueling}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - spiritual
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
+          trigger: >-
+            <p>Some effect would cause you to start
+            @L[Condition:Dueling]{dueling} or @L[Category:Duel modifying
+            effects]{modify} a @L[Condition:Dueling]{duel} you are in.</p>
+        transfer: true
+        type: ability
+      - _id: QqGywdQ1kzPNB4d0
+        _key: >-
+          !actors.items.effects!fe39a707e5e065ad.Z4uVPolbqzSOKYko.QqGywdQ1kzPNB4d0
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.3e3bec7c2738ffa5
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.0
+        img: systems/teriock/src/icons/abilities/chi-strike.webp
+        name: Chi Strike
+        system:
+          _sup: Ckzn261n62CcGUwr
+          automations:
+            1728b3a84ea27844:
+              _id: 1728b3a84ea27844
+              common:
+                - standardDamage
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              type: common
+          class: duelist
+          competence:
+            raw: 0
+          costs:
+            primary:
+              mp:
+                formula: '1'
+                type: formula
+          delivery: weapon
+          duration:
+            raw: '0'
+            unit: instant
+          effectTypes:
+            - draining
+          executionTime:
+            base: a1
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: chi-strike
+          interaction: attack
+          limitation: >-
+            <p>May only be delivered with the @L[Category:Weapons]{weapon} you
+            made @L[Property:Armor Voiding]{AV0} and only against creatures you
+            are @L[Condition:Dueling]{dueling}.</p>
+          maneuver: active
+          mundane: false
+          overview:
+            base: >-
+              <p>This strike deals @L[Drain:Mana]{mana drain} instead of
+              @L[Core:Damage]{damage}. It has no @L[Category:Damage
+              types]{damage types}, but is otherwise treated as any other
+              @L[Category:Attack abilities]{attack} <i>prior</i> to hitting. So,
+              @L[Ability:Triumphant Damage Boost]{Triumphant Damage Boost} would
+              @L[Keyword:Boosted]{boost} it, but @L[Ability:Improved
+              Brace]{Improved Brace} would not @L[Keyword:Deboosted]{deboost}
+              it.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - spiritual
+          range:
+            unit: contact
+          results:
+            critHit: >-
+              <p>Deal an amount of @L[Drain:Mana]{mana drain} equal to the
+              amount of @L[Core:Standard and Critical Damage]{critical damage}
+              you would otherwise deal.</p>
+            hit: >-
+              <p>Deal an amount of @L[Drain:Mana]{mana drain} equal to the
+              @L[Core:Standard and Critical Damage]{standard damage} you would
+              otherwise deal.</p>
+          skill: true
+          standard: true
+          targets:
+            - creature
+        transfer: true
         type: ability
     folder: 0b00935e53673daa
     img: systems/teriock/src/icons/ranks/rank-2-duelist.webp
@@ -2173,20 +2195,20 @@ items:
     _key: '!actors.items!fe39a707e5e065ad.pjh6a2mry4XrnFcn'
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.58ba95d8757c67c0
-      coreVersion: '13'
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     effects:
       - _id: FAUPXdLk1A1fD0k8
         _key: >-
           !actors.items.effects!fe39a707e5e065ad.pjh6a2mry4XrnFcn.FAUPXdLk1A1fD0k8
         _stats:
-          compendiumSource: Compendium.teriock.properties.Item.294cd7a4f1545ed9
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.294cd7a4f1545ed9
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -2199,16 +2221,17 @@ items:
           form: intrinsic
           identifier: bashing
           mundane: true
+        transfer: true
         type: property
       - _id: wGdRsURrcXoNZsur
         _key: >-
           !actors.items.effects!fe39a707e5e065ad.pjh6a2mry4XrnFcn.wGdRsURrcXoNZsur
         _stats:
-          compendiumSource: Compendium.teriock.properties.Item.417457cfa2643f5b
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.417457cfa2643f5b
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -2220,16 +2243,17 @@ items:
           form: intrinsic
           identifier: handy
           mundane: true
+        transfer: true
         type: property
       - _id: 1eIcI58ulvhlFYKA
         _key: >-
           !actors.items.effects!fe39a707e5e065ad.pjh6a2mry4XrnFcn.1eIcI58ulvhlFYKA
         _stats:
-          compendiumSource: Compendium.teriock.properties.Item.9e0c23ad80fe566a
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.9e0c23ad80fe566a
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/properties/prehensile.webp
         name: Prehensile
         system:
@@ -2241,16 +2265,17 @@ items:
           form: intrinsic
           identifier: prehensile
           mundane: true
+        transfer: true
         type: property
       - _id: r6jJPWhMBH4YpEKr
         _key: >-
           !actors.items.effects!fe39a707e5e065ad.pjh6a2mry4XrnFcn.r6jJPWhMBH4YpEKr
         _stats:
-          compendiumSource: Compendium.teriock.properties.Item.3d2cc8d952adebec
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.3d2cc8d952adebec
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -2262,6 +2287,7 @@ items:
           form: intrinsic
           identifier: small
           mundane: true
+        transfer: true
         type: property
     folder: 0b00935e53673daa
     img: systems/teriock/src/icons/body-parts/hand.webp
@@ -2274,6 +2300,8 @@ items:
       damage:
         base: '1'
       identifier: hand
+      impacts:
+        - damage
       range:
         long:
           unit: melee
@@ -2287,20 +2315,20 @@ items:
     _key: '!actors.items!fe39a707e5e065ad.uwTzyYq6LRGFO8KM'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.f49c6d015bc8589a
-      coreVersion: '13'
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     effects:
       - _id: Uz1hvRPju7UkGtEK
         _key: >-
           !actors.items.effects!fe39a707e5e065ad.uwTzyYq6LRGFO8KM.Uz1hvRPju7UkGtEK
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.043078efb9756b45
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.043078efb9756b45
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/defy-death.webp
         name: Defy Death
         system:
@@ -2369,81 +2397,17 @@ items:
           targets:
             - self
           trigger: <p>You would @L[Condition:Down]{drop}.</p>
-        type: ability
-      - _id: WCJUDTZBY0DrItAn
-        _key: >-
-          !actors.items.effects!fe39a707e5e065ad.uwTzyYq6LRGFO8KM.WCJUDTZBY0DrItAn
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.f908a2d44f50a6e0
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.11.6
-        img: systems/teriock/src/icons/abilities/detect-lie.webp
-        name: Detect Lie
-        system:
-          _sup: ez42WB6ZV9yzul09
-          class: duelist
-          competence:
-            raw: 0
-          costs:
-            primary:
-              mp:
-                formula: '1'
-                type: formula
-          delivery: sight
-          duration:
-            raw: '0'
-            unit: instant
-          effectTypes:
-            - truthDetecting
-          executionTime:
-            base: r0
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: snk
-          form: normal
-          identifier: detect-lie
-          interaction: feat
-          maneuver: reactive
-          mundane: false
-          piercing:
-            raw: 0
-          powerSources:
-            - spiritual
-          range:
-            raw: '15'
-            unit: ft
-          results:
-            fail: >-
-              <p>You detect whether the target believes the statement is true or
-              false.</p>
-            save: >-
-              <p>You detect that the statement is true, regardless of what the
-              target actually believes. This also applies if [[lookup name]] is
-              @L[Keyword:Resistance]{resisted} or @L[Core:Fizzles]{fizzles} for
-              some other reason.</p>
-          skill: true
-          standard: true
-          targets:
-            - creature
-          trigger: >-
-            <p>Someone makes a statement which could, in principle, be true or
-            false.</p>
+        transfer: true
         type: ability
       - _id: A4WZCzLVp8Jq9ykR
         _key: >-
           !actors.items.effects!fe39a707e5e065ad.uwTzyYq6LRGFO8KM.A4WZCzLVp8Jq9ykR
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.47728b72f6c25e3b
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.47728b72f6c25e3b
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/duel.webp
         name: Duel
         system:
@@ -2586,16 +2550,17 @@ items:
           standard: true
           targets:
             - creature
+        transfer: true
         type: ability
       - _id: ez42WB6ZV9yzul09
         _key: >-
           !actors.items.effects!fe39a707e5e065ad.uwTzyYq6LRGFO8KM.ez42WB6ZV9yzul09
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.10797b5ac88b2f6b
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.10797b5ac88b2f6b
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/resolve-conflict.webp
         name: Resolve Conflict
         system:
@@ -2604,11 +2569,11 @@ items:
               _id: e789ed5e109ebd1a
               changes:
                 - key: system.tradecrafts.peacekeeper.score
-                  mode: 4
+                  phase: normal
                   priority: 10
                   qualifier: '1'
                   target: Actor
-                  time: normal
+                  type: upgrade
                   value: '2'
               competencies:
                 - 0
@@ -2657,6 +2622,73 @@ items:
           standard: true
           targets:
             - self
+        transfer: true
+        type: ability
+      - _id: TmSdc6k0x1XMOmm4
+        _key: >-
+          !actors.items.effects!fe39a707e5e065ad.uwTzyYq6LRGFO8KM.TmSdc6k0x1XMOmm4
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.BtsHXqEsRV6Snbao
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.0
+        img: systems/teriock/src/icons/abilities/detect-lie.webp
+        name: Detect Lie
+        system:
+          _sup: ez42WB6ZV9yzul09
+          class: duelist
+          competence:
+            raw: 0
+          costs:
+            primary:
+              mp:
+                formula: '1'
+                type: formula
+          delivery: sight
+          duration:
+            raw: '0'
+            unit: instant
+          effectTypes:
+            - truthDetecting
+          executionTime:
+            base: r0
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: snk
+          form: normal
+          identifier: detect-lie
+          interaction: feat
+          maneuver: reactive
+          mundane: false
+          piercing:
+            raw: 0
+          powerSources:
+            - spiritual
+          range:
+            raw: '15'
+            unit: ft
+          results:
+            fail: >-
+              <p>You detect whether the target believes the statement is true or
+              false.</p>
+            save: >-
+              <p>You detect that the statement is true, regardless of what the
+              target actually believes. This also applies if [[lookup name]] is
+              @L[Keyword:Resistance]{resisted} or @L[Core:Fizzles]{fizzles} for
+              some other reason.</p>
+          skill: true
+          standard: true
+          targets:
+            - creature
+          trigger: >-
+            <p>Someone makes a statement which could, in principle, be true or
+            false.</p>
+        transfer: true
         type: ability
     folder: 0b00935e53673daa
     img: systems/teriock/src/icons/ranks/rank-1-duelist.webp
@@ -2691,11 +2723,11 @@ items:
   - _id: zaTTxzNtlxHqyg8b
     _key: '!actors.items!fe39a707e5e065ad.zaTTxzNtlxHqyg8b'
     _stats:
-      compendiumSource: Compendium.teriock.equipment.Item.abd8733cb795a7e0
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.species.Item.0uSRnCfr8vIfnnWW
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     folder: 0b00935e53673daa
     img: systems/teriock/src/icons/equipment/full-plate.webp
     name: Full Plate
@@ -2715,6 +2747,8 @@ items:
       equipmentType: full-plate
       equipped: true
       identifier: full-plate
+      impacts:
+        - damage
       minStr:
         raw: '-1'
       powerLevel: mundane
@@ -2730,24 +2764,75 @@ items:
       weight:
         raw: '65'
     type: equipment
-  - _id: wmcYewbw6drTXXJl
-    _key: '!actors.items!fe39a707e5e065ad.wmcYewbw6drTXXJl'
+  - _id: ffCwsBOSwGhP1IQU
+    _key: '!actors.items!fe39a707e5e065ad.ffCwsBOSwGhP1IQU'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.380dac2710b593e9
-      coreVersion: '13'
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     effects:
-      - _id: 4tKZWhHPGEJoR7dR
+      - _id: 8e9roKoeCSmTjbbo
         _key: >-
-          !actors.items.effects!fe39a707e5e065ad.wmcYewbw6drTXXJl.4tKZWhHPGEJoR7dR
+          !actors.items.effects!fe39a707e5e065ad.ffCwsBOSwGhP1IQU.8e9roKoeCSmTjbbo
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.9713dc6aaadc794a
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.d97a0e2c8e3d8730
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
+        img: systems/teriock/src/icons/abilities/warrior-techniques.webp
+        name: Warrior Techniques
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            raw: '0'
+            unit: unlimited
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: warrior-techniques
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          overview:
+            base: >-
+              <p>For every 2 ranks you train in @L[Category:Warrior
+              classes]{warrior classes}, you gain a @L[Category:Warrior
+              guildmaster abilities]{warrior guildmaster ability} of your
+              choice. You also gain @L[Keyword:Limited]{Limited}
+              @L[Ability:Defensive Martial Arts]{Defensive Martial Arts}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: zEnWU6LqBT9NqB2I
+        _key: >-
+          !actors.items.effects!fe39a707e5e065ad.ffCwsBOSwGhP1IQU.zEnWU6LqBT9NqB2I
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.8axMH45Og1OFpGIu
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/defensive-martial-arts.webp
         name: Defensive Martial Arts
         system:
@@ -2757,11 +2842,11 @@ items:
               _id: e789ed5e109ebd1a
               changes:
                 - key: system.bv.raw
-                  mode: 4
+                  phase: normal
                   priority: 10
                   qualifier: '@prop.handy'
                   target: body
-                  time: normal
+                  type: upgrade
                   value: '1'
               competencies:
                 - 0
@@ -2778,11 +2863,11 @@ items:
               _id: f025905e157ac261
               changes:
                 - key: system.bv.raw
-                  mode: 4
+                  phase: normal
                   priority: 10
                   qualifier: '@prop.handy'
                   target: body
-                  time: normal
+                  type: upgrade
                   value: '2'
               competencies:
                 - 1
@@ -2798,11 +2883,11 @@ items:
               _id: f7da3b5e1992a724
               changes:
                 - key: system.bv.raw
-                  mode: 4
+                  phase: normal
                   priority: 10
                   qualifier: '@prop.handy'
                   target: body
-                  time: normal
+                  type: upgrade
                   value: '3'
               competencies:
                 - 2
@@ -2857,61 +2942,13 @@ items:
           standard: true
           targets:
             - self
-        type: ability
-      - _id: 8e9roKoeCSmTjbbo
-        _key: >-
-          !actors.items.effects!fe39a707e5e065ad.wmcYewbw6drTXXJl.8e9roKoeCSmTjbbo
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.d97a0e2c8e3d8730
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.11.6
-        img: systems/teriock/src/icons/abilities/warrior-techniques.webp
-        name: Warrior Techniques
-        system:
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: warrior-techniques
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          overview:
-            base: >-
-              <p>For every 2 ranks you train in @L[Category:Warrior
-              classes]{warrior classes}, you gain a @L[Category:Warrior
-              guildmaster abilities]{warrior guildmaster ability} of your
-              choice. You also gain @L[Keyword:Limited]{Limited}
-              @L[Ability:Defensive Martial Arts]{Defensive Martial Arts}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          skill: true
-          standard: true
-          targets:
-            - self
+        transfer: true
         type: ability
     flags:
       teriockDocumentSettings:
-        sheetBlockChildGapless: false
-        sheetBlockChildSize: medium
+        sheet:
+          blockChildGapless: false
+          blockChildSize: medium
     folder: 380dac2710b593e9
     img: systems/teriock/src/icons/archetypes/warrior.webp
     name: Warrior
@@ -2925,12 +2962,10 @@ items:
         objective.</p>
       identifier: warrior
       maxAv: 4
-      type: learned
-    type: power
+    type: archetype
 name: Master Cemerai
 prototypeToken:
   actorLink: false
-  alpha: 1
   appendNumber: false
   bar1:
     attribute: hp
@@ -2943,36 +2978,22 @@ prototypeToken:
   ring:
     enabled: true
   texture:
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     src: systems/teriock/src/icons/tokens/master-cemerai.webp
   turnMarker:
     disposition: false
     mode: 1
   width: 1
 system:
-  combat:
-    attackPenalty: 0
-    hasReaction: true
   detection:
     hiding:
       raw: '@snk.pas'
     perceiving:
       raw: '@per.pas'
   hp:
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
     value: 30
   identifier: master-cemerai
   initiative: 1d20 + @mov
   mp:
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
     value: 6
   presence:
     max: 1
@@ -2980,13 +3001,9 @@ system:
     value: 0
   scaling:
     brScale: true
-    lvl: 1
   size:
     number:
       raw: '3'
-  weight:
-    self:
-      raw: pow(3 + @size, 3)
   wielding:
     attacker: zaTTxzNtlxHqyg8b
     blocker: pjh6a2mry4XrnFcn

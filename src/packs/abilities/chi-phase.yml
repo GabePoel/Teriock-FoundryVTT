@@ -1,66 +1,65 @@
 _id: b27da0ee7509ea9a
-_key: '!items!b27da0ee7509ea9a'
+_key: '!effects!b27da0ee7509ea9a'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: b27da0ee7509ea9a
-    _key: '!items.effects!b27da0ee7509ea9a.b27da0ee7509ea9a'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/chi-phase.webp
-    name: Chi Phase
-    system:
-      automations:
-        067cb526e2f9e98f:
-          _id: 067cb526e2f9e98f
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: include
-          status: ethereal
-          type: status
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: hand
-      duration:
-        raw: '1'
-        unit: minute
-      executionTime: a2
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: chi-phase
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - spiritual
-      range:
-        unit: contact
-      results:
-        hit: <p>Target is sent @L[Condition:Ethereal]{Ethereal}.</p>
-      targets:
-        - vitals
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/chi-phase.webp
 name: Chi Phase
-type: wrapper
+system:
+  automations:
+    067cb526e2f9e98f:
+      _id: 067cb526e2f9e98f
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: include
+      status: ethereal
+      target: false
+      type: status
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: hand
+  duration:
+    raw: '1'
+    unit: minute
+  executionTime:
+    base: a2
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: chi-phase
+  interaction: attack
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - spiritual
+  range:
+    unit: contact
+  results:
+    hit: <p>Target is sent @L[Condition:Ethereal]{Ethereal}.</p>
+  targets:
+    - vitals
+transfer: true
+type: ability

@@ -1,6 +1,7 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
+import { mix } from "../../../../helpers/construction.mjs";
 import { elementClass } from "../../../../helpers/html.mjs";
-import { makeIconClass, mix } from "../../../../helpers/utils.mjs";
+import { makeIconClass } from "../../../../helpers/utils.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseEffectSheet from "../base-effect-sheet.mjs";
 import abilityContextMenus from "./helpers/ability-context-menus.mjs";

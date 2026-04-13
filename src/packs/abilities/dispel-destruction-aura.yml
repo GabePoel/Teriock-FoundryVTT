@@ -1,61 +1,55 @@
 _id: 4eeb4efb385c721b
-_key: '!items!4eeb4efb385c721b'
+_key: '!effects!4eeb4efb385c721b'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 4eeb4efb385c721b
-    _key: '!items.effects!4eeb4efb385c721b.4eeb4efb385c721b'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/dispel-destruction-aura.webp
-    name: Dispel Destruction Aura
-    system:
-      class: paladin
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: aura
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: r1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: unp
-      form: normal
-      identifier: dispel-destruction-aura
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: <p>The triggering effect @L[Core:Fizzles]{fizzles}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - divine
-      range:
-        raw: '10'
-        unit: ft
-      skill: true
-      standard: true
-      targets:
-        - creature
-      trigger: >-
-        <p>An item is being @L[Property:Destroyed]{destroyed} or
-        @L[Property:Shattered]{shattered} or a @L[Category:Destruction
-        effects]{destruction effect} is being executed within range.</p>
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/dispel-destruction-aura.webp
 name: Dispel Destruction Aura
-type: wrapper
+system:
+  class: paladin
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: aura
+  duration:
+    raw: '0'
+    unit: instant
+  executionTime:
+    base: r1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: unp
+  form: normal
+  identifier: dispel-destruction-aura
+  interaction: manifest
+  maneuver: reactive
+  mundane: false
+  overview:
+    base: <p>The triggering effect @L[Core:Fizzles]{fizzles}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - divine
+  range:
+    raw: '10'
+    unit: ft
+  skill: true
+  standard: true
+  targets:
+    - creature
+  trigger: >-
+    <p>An item is being @L[Property:Destroyed]{destroyed} or
+    @L[Property:Shattered]{shattered} or a @L[Category:Destruction
+    effects]{destruction effect} is being executed within range.</p>
+transfer: true
+type: ability

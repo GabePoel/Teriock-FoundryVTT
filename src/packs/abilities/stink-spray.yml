@@ -1,93 +1,89 @@
 _id: ed731092e7a1c6d7
-_key: '!items!ed731092e7a1c6d7'
+_key: '!effects!ed731092e7a1c6d7'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: ed731092e7a1c6d7
-    _key: '!items.effects!ed731092e7a1c6d7.ed731092e7a1c6d7'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/stink-spray.webp
-    name: Stink Spray
-    system:
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.attributes.snk.score.raw
-              mode: 3
-              priority: 50
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '-3'
-            - key: system.protections.immunities.hidden
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: statuses
-            - key: system.protections.immunities.odorless
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: statuses
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: changes
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: cone
-      duration:
-        raw: '1'
-        unit: week
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: stink-spray
-      interaction: feat
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - alchemical
-      range:
-        raw: '15'
-        unit: ft
-      results:
-        fail: >-
-          <p>Target is covered with a terrible stench that is extremely hard to
-          remove. Their @L[Core:Sneak]{SNK} is set to a maximum of -3, they are
-          @L[Keyword:Incapable]{incapable} of and @L[Keyword:Immunity]{immune}
-          to becoming @L[Condition:Odorless]{odorless} or
-          @L[Condition:Hidden]{hidden} to creatures that are not
-          @L[Condition:Anosmatic]{anosmatic}.</p>
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/stink-spray.webp
 name: Stink Spray
-type: wrapper
+system:
+  automations:
+    e789ed5e109ebd1a:
+      _id: e789ed5e109ebd1a
+      changes:
+        - key: system.attributes.snk.score.raw
+          phase: normal
+          priority: 50
+          qualifier: '1'
+          target: Actor
+          type: downgrade
+          value: '-3'
+        - key: system.protections.immunities.hidden
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: Actor
+          type: add
+          value: statuses
+        - key: system.protections.immunities.odorless
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: Actor
+          type: add
+          value: statuses
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: changes
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: cone
+  duration:
+    raw: '1'
+    unit: week
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: stink-spray
+  interaction: feat
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - alchemical
+  range:
+    raw: '15'
+    unit: ft
+  results:
+    fail: >-
+      <p>Target is covered with a terrible stench that is extremely hard to
+      remove. Their @L[Core:Sneak]{SNK} is set to a maximum of -3, they are
+      @L[Keyword:Incapable]{incapable} of and @L[Keyword:Immunity]{immune} to
+      becoming @L[Condition:Odorless]{odorless} or @L[Condition:Hidden]{hidden}
+      to creatures that are not @L[Condition:Anosmatic]{anosmatic}.</p>
+  targets:
+    - creature
+transfer: true
+type: ability

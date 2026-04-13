@@ -1,121 +1,121 @@
-_id: b08e7b4738d3b31e
-_key: '!items!b08e7b4738d3b31e'
+_id: 4doSo1ScTm6iEC2E
+_key: '!effects!4doSo1ScTm6iEC2E'
 _stats:
-  coreVersion: '13'
+  compendiumSource: Compendium.world.abilities-backup.ActiveEffect.4doSo1ScTm6iEC2E
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: b08e7b4738d3b31e
-    _key: '!items.effects!b08e7b4738d3b31e.b08e7b4738d3b31e'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/blizzard-aura.webp
-    name: Blizzard Aura
-    system:
-      automations:
-        09ed285450c5de7b:
-          _id: 09ed285450c5de7b
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: include
-          status: frozen
-          type: status
-        800c70e6560525a8:
-          _id: 800c70e6560525a8
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: (@h)d4[magic ice]
-          heighten:
-            - 1
-          merge: true
-          roll: damage
-          type: roll
-        d635eb44dba086dd:
-          _id: d635eb44dba086dd
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: combatExpiration
-          what:
-            roll: 2d4kh1
-            threshold: 4
-            type: rolled
-          when:
-            skip: 0
-            time: start
-            trigger: action
-          who:
-            type: target
-      class: stormMage
-      competence:
-        raw: 0
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: aura
-      duration:
-        raw: '1'
-        unit: minute
-      effectTypes:
-        - temporal
-      elements:
-        - storm
-      endCondition: >-
-        <p>At the start of each of the target's actions, they roll [[/roll
-        2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d4[magic ice]]] @L[Core:Damage]{damage}  as well.</p>
-      identifier: blizzard-aura
-      interaction: feat
-      invoked: true
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        raw: '10'
-        unit: ft
-      results:
-        fail: <p>Target is @L[Condition:Frozen]{frozen}.</p>
-      spell: true
-      standard: true
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/blizzard-aura.webp
 name: Blizzard Aura
-type: wrapper
+system:
+  automations:
+    09ed285450c5de7b:
+      _id: 09ed285450c5de7b
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: include
+      status: frozen
+      target: false
+      type: status
+    800c70e6560525a8:
+      _id: 800c70e6560525a8
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: (@h)d4[magic ice]
+      heighten:
+        - 1
+      impact: damage
+      merge: true
+      type: roll
+    d635eb44dba086dd:
+      _id: d635eb44dba086dd
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: combatExpiration
+      what:
+        roll: 2d4kh1
+        threshold: 4
+        type: rolled
+      when:
+        skip: 0
+        time: start
+        trigger: action
+      who:
+        type: target
+  class: stormMage
+  competence:
+    raw: 0
+  costs:
+    components:
+      somatic:
+        type: tag
+      verbal:
+        type: tag
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: aura
+  duration:
+    raw: '1'
+    unit: minute
+  effectTypes:
+    - temporal
+  elements:
+    - storm
+  endCondition: >-
+    <p>At the start of each of the target's actions, they roll [[/roll 2d4]]. If
+    either of these dice roll a 4, this effect ends.</p>
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  heightened: >-
+    <p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage
+    1d4[magic ice]]] @L[Core:Damage]{damage}  as well.</p>
+  identifier: blizzard-aura
+  interaction: feat
+  invoked: true
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    raw: '10'
+    unit: ft
+  results:
+    fail: <p>Target is @L[Condition:Frozen]{frozen}.</p>
+  spell: true
+  standard: true
+  targets:
+    - creature
+transfer: true
+type: ability

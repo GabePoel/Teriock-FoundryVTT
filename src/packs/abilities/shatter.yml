@@ -1,64 +1,65 @@
 _id: 54ccd7fb2b5ff7ee
-_key: '!items!54ccd7fb2b5ff7ee'
+_key: '!effects!54ccd7fb2b5ff7ee'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 54ccd7fb2b5ff7ee
-    _key: '!items.effects!54ccd7fb2b5ff7ee.54ccd7fb2b5ff7ee'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/shatter.webp
-    name: Shatter
-    system:
-      automations:
-        z19OrBHuoZ8ihlgP:
-          _id: z19OrBHuoZ8ihlgP
-          common:
-            - shatter
-          type: common
-      class: ranger
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: weapon
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - destruction
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: shatter
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 1
-      powerSources:
-        - martial
-      range:
-        unit: contact
-      results:
-        hit: <p>Item is @L[Property:Shattered]{shattered}.</p>
-      skill: true
-      standard: true
-      targets:
-        - item
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/shatter.webp
 name: Shatter
-type: wrapper
+system:
+  automations:
+    z19OrBHuoZ8ihlgP:
+      _id: z19OrBHuoZ8ihlgP
+      common:
+        - shatter
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 0
+        - 1
+      type: common
+  class: ranger
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: weapon
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - destruction
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: shatter
+  interaction: attack
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 1
+  powerSources:
+    - martial
+  range:
+    unit: contact
+  results:
+    hit: <p>Item is @L[Property:Shattered]{shattered}.</p>
+  skill: true
+  standard: true
+  targets:
+    - item
+transfer: true
+type: ability

@@ -1,65 +1,58 @@
 _id: 4269f3e018a6c618
-_key: '!items!4269f3e018a6c618'
+_key: '!effects!4269f3e018a6c618'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 4269f3e018a6c618
-    _key: '!items.effects!4269f3e018a6c618.4269f3e018a6c618'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/oppressive-casting.webp
-    name: Oppressive Casting
-    system:
-      class: necromancer
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: self
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: r0
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: oppressive-casting
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>If the triggering @L[Category:Spells]{spell} is an
-          @L[Category:Attack spells]{attack spell}, you make the @L[Core:Attack
-          Interaction]{attack roll} with @L[Core:Advantage]{advantage}. If it is
-          a @L[Category:Feat spells]{feat spell}, its targets make their
-          @L[Core:Feat Interaction]{feat save} with
-          @L[Core:Disadvantage]{disadvantage}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - spell
-      trigger: >-
-        <p>You cast an @L[Category:Attack spells]{attack} or @L[Category:Feat
-        spells]{feat interaction spell}.</p>
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/oppressive-casting.webp
 name: Oppressive Casting
-type: wrapper
+system:
+  class: necromancer
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: self
+  duration:
+    raw: '0'
+    unit: instant
+  executionTime:
+    base: r0
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: oppressive-casting
+  interaction: manifest
+  maneuver: reactive
+  mundane: false
+  overview:
+    base: >-
+      <p>If the triggering @L[Category:Spells]{spell} is an @L[Category:Attack
+      spells]{attack spell}, you make the @L[Core:Attack Interaction]{attack
+      roll} with @L[Core:Advantage]{advantage}. If it is a @L[Category:Feat
+      spells]{feat spell}, its targets make their @L[Core:Feat Interaction]{feat
+      save} with @L[Core:Disadvantage]{disadvantage}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: self
+  skill: true
+  standard: true
+  targets:
+    - spell
+  trigger: >-
+    <p>You cast an @L[Category:Attack spells]{attack} or @L[Category:Feat
+    spells]{feat interaction spell}.</p>
+transfer: true
+type: ability

@@ -2,7 +2,7 @@ _id: CHzrs3ToyUkrKDl4
 _key: '!items!CHzrs3ToyUkrKDl4'
 _stats:
   compendiumSource: Compendium.teriock.classes.Item.8c729f062c7bed72
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.23
@@ -10,11 +10,11 @@ effects:
   - _id: byYbma8NDzi77Mh0
     _key: '!items.effects!CHzrs3ToyUkrKDl4.byYbma8NDzi77Mh0'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.6b9c057fc7cf8e78
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.6b9c057fc7cf8e78
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: combat
@@ -53,15 +53,16 @@ effects:
       skill: true
       targets:
         - self
+    transfer: true
     type: ability
   - _id: H7xLb8uTY3Fv0E7P
     _key: '!items.effects!CHzrs3ToyUkrKDl4.H7xLb8uTY3Fv0E7P'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.07691331e877e0f7
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.07691331e877e0f7
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: support
@@ -74,25 +75,25 @@ effects:
           _id: f025905e157ac261
           changes:
             - key: system.competence.raw
-              mode: 4
+              phase: fluency
               priority: 10
               qualifier: '@identifier.elder-sorcery-creation'
               target: ability
-              time: fluency
+              type: upgrade
               value: '2'
             - key: system.competence.raw
-              mode: 4
+              phase: fluency
               priority: 10
               qualifier: '@identifier.celestial-elder-sorcery-words'
               target: ability
-              time: fluency
+              type: upgrade
               value: '2'
             - key: system.competence.raw
-              mode: 4
+              phase: fluency
               priority: 10
               qualifier: '@identifier.life-elder-sorcery-words'
               target: ability
-              time: fluency
+              type: upgrade
               value: '2'
           competencies:
             - 1
@@ -163,15 +164,16 @@ effects:
       standard: true
       targets:
         - self
+    transfer: true
     type: ability
-  - _id: OM13kQaRTAUkBcB6
-    _key: '!items.effects!CHzrs3ToyUkrKDl4.OM13kQaRTAUkBcB6'
+  - _id: maJfWce24u630VGW
+    _key: '!items.effects!CHzrs3ToyUkrKDl4.maJfWce24u630VGW'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.26b16c55de4bc804
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.26b16c55de4bc804
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/minor-item-enchantment.webp
     name: Minor Item Enchantment
     system:
@@ -179,6 +181,7 @@ effects:
       automations:
         72ce567009179bea:
           _id: 72ce567009179bea
+          changeType: add
           competencies:
             - 0
             - 1
@@ -191,7 +194,6 @@ effects:
             unit: second
           heighten:
             - 1
-          mode: 5
           type: duration
       class: lifeMage
       competence:
@@ -212,7 +214,11 @@ effects:
         unit: hour
       elements:
         - life
-      executionTime: 10 Minutes
+      executionTime:
+        base: 10 Minutes
+        slow:
+          raw: '10'
+          unit: minute
       expansion:
         featSaveAttribute: mov
         range:
@@ -226,6 +232,7 @@ effects:
       interaction: manifest
       invoked: true
       maneuver: slow
+      mundane: false
       overview:
         base: >-
           <p>Target item is enchanted to be @L[Property:Magelore]{magelore} and
@@ -251,15 +258,16 @@ effects:
       standard: true
       targets:
         - weapon
+    transfer: true
     type: ability
-  - _id: rq4naxQ5OEabu5zH
-    _key: '!items.effects!CHzrs3ToyUkrKDl4.rq4naxQ5OEabu5zH'
+  - _id: fvOvml5oE3pt1FDX
+    _key: '!items.effects!CHzrs3ToyUkrKDl4.fvOvml5oE3pt1FDX'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.7060a27da46df3f2
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.7060a27da46df3f2
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/swift-sleep-aura.webp
     name: Swift Sleep Aura
     system:
@@ -335,7 +343,10 @@ effects:
       elements:
         - life
       endCondition: <p>Target is successfully @L[Keyword:Awaken]{awakened}.</p>
-      executionTime: a1
+      executionTime:
+        base: a1
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -350,6 +361,7 @@ effects:
       interaction: feat
       invoked: true
       maneuver: active
+      mundane: false
       overview:
         base: >-
           <p>A hypnotizing shimmer spreads through the air around you. Roll
@@ -373,6 +385,7 @@ effects:
       standard: true
       targets:
         - creature
+    transfer: true
     type: ability
 folder: c0c0ec104c5cd2eb
 img: systems/teriock/src/icons/ranks/rank-3-life-mage.webp

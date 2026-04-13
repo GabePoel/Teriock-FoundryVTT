@@ -1,6 +1,6 @@
 <div id="condition-results" class="teriock-block-results">
-  <div class="teriock-block-container {{{document.flags.teriockDocumentSettings.sheetBlockEffectsSize}}} {{#if
-    document.flags.teriockDocumentSettings.sheetBlockEffectsGapless}}gapless{{/if}}">
+  <div class="teriock-block-container {{{document.flags.teriockDocumentSettings.sheet.blockEffectsSize}}} {{#if
+    document.flags.teriockDocumentSettings.sheet.blockEffectsGapless}}gapless{{/if}}">
     {{#each conditions as |condition|}}
       {{#if (not (path ../system.conditionInformation condition "locked"))}}
         {{> "teriock/ui/block"
@@ -48,7 +48,7 @@
         }}
       {{/if}}
     {{/each}}
-    <div class="no-results {{{document.flags.teriockDocumentSettings.sheetBlockEffectsSize}}}">
+    <div class="no-results {{{document.flags.teriockDocumentSettings.sheet.blockEffectsSize}}}">
       <p>{{localize "TERIOCK.SHEETS.Common.SEARCH.noConditions"}}</p>
     </div>
   </div>

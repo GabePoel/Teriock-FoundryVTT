@@ -34,27 +34,30 @@ export default class TemplateAutomation extends BaseAutomation {
     return Object.assign(super.defineSchema(), {
       angle: new FormulaField({
         initial: 0,
+        label: "MEASUREMENT.Angle",
         min: 0,
         step: 0.01,
       }),
       distance: new FormulaField({
         initial: 0,
+        label: "MEASUREMENT.Distance",
         min: 0,
       }),
       movable: new fields.BooleanField(),
       t: new fields.StringField({
         choices: localizeChoices({
           none: "None",
-          circle: "TEMPLATE.TYPES.circle",
-          cone: "TEMPLATE.TYPES.cone",
-          rect: "TEMPLATE.TYPES.rect",
-          ray: "TEMPLATE.TYPES.ray",
+          circle: "SHAPE.TYPES.circle.name",
+          cone: "SHAPE.TYPES.cone.name",
+          rect: "SHAPE.TYPES.rectangle.name",
+          ray: "SHAPE.TYPES.line.name",
         }),
         initial: "none",
+        label: "SHAPE.label",
       }),
       width: new FormulaField({
         initial: 0,
-        label: "Width",
+        label: "MEASUREMENT.Width",
         min: 0,
         step: 0.01,
       }),

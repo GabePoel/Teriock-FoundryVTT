@@ -12,8 +12,8 @@ export default class ImmunityExecution extends BaseExecution {
     this.wrappers = options.wrappers || [];
     this.wrappers.push(
       this.hex
-        ? game.i18n.localize("TERIOCK.TERMS.Common.chosen")
-        : game.i18n.localize("TERIOCK.TERMS.Common.automatic"),
+        ? _loc("TERIOCK.TERMS.Common.chosen")
+        : _loc("TERIOCK.TERMS.Common.automatic"),
     );
     this.img =
       options.img ||
@@ -32,9 +32,9 @@ export default class ImmunityExecution extends BaseExecution {
   /** @inheritDoc */
   get name() {
     if (this.hex) {
-      return game.i18n.localize("TERIOCK.TERMS.Protections.hexseal.single");
+      return _loc("TERIOCK.TERMS.Protections.hexseal.single");
     }
-    return game.i18n.localize("TERIOCK.TERMS.Protections.immunity.single");
+    return _loc("TERIOCK.TERMS.Protections.immunity.single");
   }
 
   /** @inheritDoc */
@@ -45,7 +45,7 @@ export default class ImmunityExecution extends BaseExecution {
       bars: [
         {
           icon: TERIOCK.display.icons.effect.immune,
-          label: game.i18n.localize("TERIOCK.TERMS.Common.protection"),
+          label: _loc("TERIOCK.TERMS.Common.protection"),
           wrappers: this.wrappers,
         },
       ],
@@ -56,7 +56,7 @@ export default class ImmunityExecution extends BaseExecution {
         },
       ],
       icon: TERIOCK.display.icons.effect.protection,
-      label: game.i18n.localize("TERIOCK.TERMS.Common.protection"),
+      label: _loc("TERIOCK.TERMS.Common.protection"),
     });
     await TeriockTextEditor.enrichPanels(this.panels);
   }

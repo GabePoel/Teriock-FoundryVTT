@@ -1,70 +1,64 @@
 _id: 239ecae3bde86a79
-_key: '!items!239ecae3bde86a79'
+_key: '!effects!239ecae3bde86a79'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 239ecae3bde86a79
-    _key: '!items.effects!239ecae3bde86a79.239ecae3bde86a79'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/steel-drake-breath.webp
-    name: Steel Drake Breath
-    system:
-      automations:
-        29b275994cf9f5b1:
-          _id: 29b275994cf9f5b1
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: 2d10[magic]
-          heighten:
-            - 1
-            - 0
-          merge: true
-          roll: damage
-          type: roll
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '2'
-            type: formula
-      delivery: cone
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: steel-drake-breath
-      interaction: feat
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        raw: '15'
-        unit: ft
-      results:
-        fail: >-
-          <p>Target takes [[/damage 2d10[magic]]] @L[Core:Damage]{damage} and is
-          moved 15 feet away from you.</p>
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/steel-drake-breath.webp
 name: Steel Drake Breath
-type: wrapper
+system:
+  automations:
+    29b275994cf9f5b1:
+      _id: 29b275994cf9f5b1
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: 2d10[magic]
+      heighten:
+        - 1
+        - 0
+      impact: damage
+      merge: true
+      type: roll
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '2'
+        type: formula
+  delivery: cone
+  duration:
+    raw: '0'
+    unit: instant
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  identifier: steel-drake-breath
+  interaction: feat
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    raw: '15'
+    unit: ft
+  results:
+    fail: >-
+      <p>Target takes [[/damage 2d10[magic]]] @L[Core:Damage]{damage} and is
+      moved 15 feet away from you.</p>
+  targets:
+    - creature
+transfer: true
+type: ability

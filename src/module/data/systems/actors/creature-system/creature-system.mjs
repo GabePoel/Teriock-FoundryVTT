@@ -21,26 +21,25 @@ export default class CreatureSystem extends BaseActorSystem {
   }
 
   /** @inheritDoc */
-  get panelParts() {
-    const parts = super.panelParts;
-    for (const species of this.parent.species) {
-      parts.blocks.push(...species.system.panelParts.blocks);
-    }
-    return parts;
-  }
-
-  /** @inheritDoc */
   async _preCreate(data, options, user) {
     const yes = await super._preCreate(data, options, user);
     if (yes === false) return false;
 
     this.parent.updateSource(
       foundry.utils.mergeObject(
-        {
-          system: { scaling: { brScale: true } },
-        },
+        { system: { scaling: { brScale: true } } },
         data,
       ),
     );
+  }
+
+  /** @inheritDoc */
+  async getPanelParts() {
+    const parts = await super.getPanelParts();
+    for (const species of this.parent.species) {
+      const speciesParts = await species.system.getPanelParts();
+      parts.blocks.push(...speciesParts.blocks);
+    }
+    return parts;
   }
 }

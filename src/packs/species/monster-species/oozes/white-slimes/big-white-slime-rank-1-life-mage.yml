@@ -2,64 +2,19 @@ _id: p9gpBSUK0Vl1dWR4
 _key: '!items!p9gpBSUK0Vl1dWR4'
 _stats:
   compendiumSource: Compendium.teriock.classes.Item.2eb28f45a753186c
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.23
 effects:
-  - _id: adgcgL2LDEbLUjHa
-    _key: '!items.effects!p9gpBSUK0Vl1dWR4.adgcgL2LDEbLUjHa'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.4c77fd6fd5cfe2b8
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/hibernation.webp
-    name: Hibernation
-    system:
-      _sup: 06z0wz68hsmApPL9
-      class: ranger
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        conditions:
-          present:
-            - down
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: hibernation
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: <p>All damage is @L[Keyword:Deboosted]{deboosted} against you.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - primal
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-    type: ability
   - _id: 06z0wz68hsmApPL9
     _key: '!items.effects!p9gpBSUK0Vl1dWR4.06z0wz68hsmApPL9'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.dccbed24e9bf8cf1
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.dccbed24e9bf8cf1
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/hibernation-shield.webp
     name: Hibernation Shield
     system:
@@ -107,15 +62,16 @@ effects:
       targets:
         - creature
       trigger: <p>You go @L[Condition:Down]{down}.</p>
+    transfer: true
     type: ability
   - _id: JhNbjfOBP4vq6fDO
     _key: '!items.effects!p9gpBSUK0Vl1dWR4.JhNbjfOBP4vq6fDO'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.3dea135aaa9525d7
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.3dea135aaa9525d7
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     flags:
       teriock:
         dontConsume: false
@@ -236,15 +192,16 @@ effects:
       standard: true
       targets:
         - creature
+    transfer: true
     type: ability
   - _id: oGy0WqGTsolvIjRT
     _key: '!items.effects!p9gpBSUK0Vl1dWR4.oGy0WqGTsolvIjRT'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.91cdb554fcab2b2a
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.91cdb554fcab2b2a
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/medicine-ball.webp
     name: Medicine Ball
     system:
@@ -313,15 +270,16 @@ effects:
       standard: true
       targets:
         - creature
+    transfer: true
     type: ability
   - _id: DuPrz66O8MibMz5a
     _key: '!items.effects!p9gpBSUK0Vl1dWR4.DuPrz66O8MibMz5a'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.5e1e504688ac1250
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.5e1e504688ac1250
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/resurrect.webp
     name: Resurrect
     system:
@@ -410,6 +368,57 @@ effects:
       standard: true
       targets:
         - creature
+    transfer: true
+    type: ability
+  - _id: P75buFyx1u2QuMCX
+    _key: '!items.effects!p9gpBSUK0Vl1dWR4.P75buFyx1u2QuMCX'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.4c77fd6fd5cfe2b8
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/hibernation.webp
+    name: Hibernation
+    system:
+      _sup: 06z0wz68hsmApPL9
+      class: ranger
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        conditions:
+          present:
+            - down
+        raw: '0'
+        unit: unlimited
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: hibernation
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: <p>All damage is @L[Keyword:Deboosted]{deboosted} against you.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - primal
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
     type: ability
 folder: ab73d338653acde3
 img: systems/teriock/src/icons/ranks/rank-1-life-mage.webp

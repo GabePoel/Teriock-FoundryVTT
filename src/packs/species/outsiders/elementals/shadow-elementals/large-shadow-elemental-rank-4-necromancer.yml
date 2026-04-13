@@ -2,7 +2,7 @@ _id: I4Su8PsVWBgQ95OJ
 _key: '!items!I4Su8PsVWBgQ95OJ'
 _stats:
   compendiumSource: Compendium.teriock.classes.Item.deec37fc79f62f14
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.23
@@ -10,11 +10,11 @@ effects:
   - _id: 0J9CrQq9kLFUU4Iu
     _key: '!items.effects!I4Su8PsVWBgQ95OJ.0J9CrQq9kLFUU4Iu'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.4e84d0efca8837f5
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.4e84d0efca8837f5
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: combat
@@ -61,67 +61,16 @@ effects:
       standard: true
       targets:
         - self
-    type: ability
-  - _id: BJB7gS2iyaE1o3wj
-    _key: '!items.effects!I4Su8PsVWBgQ95OJ.BJB7gS2iyaE1o3wj'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.efe54d38aacf546f
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/intrusive-casting.webp
-    name: Intrusive Casting
-    system:
-      _sup: c03uQvPFAXLocKls
-      class: necromancer
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: self
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: r0
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: intrusive-casting
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>The range of the triggering @L[Category:Spells]{spell} is
-          doubled.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - spell
-      trigger: >-
-        <p>You are casting a @L[Category:Spells]{spell} with a range other than
-        @L[Category:Self target spells]{self}.</p>
+    transfer: true
     type: ability
   - _id: c03uQvPFAXLocKls
     _key: '!items.effects!I4Su8PsVWBgQ95OJ.c03uQvPFAXLocKls'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.82f855db7bb879dd
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.82f855db7bb879dd
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: support
@@ -177,15 +126,16 @@ effects:
         competence:
           attribute: int
           value: 1
+    transfer: true
     type: ability
-  - _id: BNurBexkjTBc6BeZ
-    _key: '!items.effects!I4Su8PsVWBgQ95OJ.BNurBexkjTBc6BeZ'
+  - _id: lpUWHUpqJ0hbW0f8
+    _key: '!items.effects!I4Su8PsVWBgQ95OJ.lpUWHUpqJ0hbW0f8'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.4269f3e018a6c618
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.4269f3e018a6c618
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/oppressive-casting.webp
     name: Oppressive Casting
     system:
@@ -202,7 +152,10 @@ effects:
       duration:
         raw: '0'
         unit: instant
-      executionTime: r0
+      executionTime:
+        base: r0
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -212,6 +165,7 @@ effects:
       identifier: oppressive-casting
       interaction: manifest
       maneuver: reactive
+      mundane: false
       overview:
         base: >-
           <p>If the triggering @L[Category:Spells]{spell} is an
@@ -233,6 +187,64 @@ effects:
       trigger: >-
         <p>You cast an @L[Category:Attack spells]{attack} or @L[Category:Feat
         spells]{feat interaction spell}.</p>
+    transfer: true
+    type: ability
+  - _id: loBAh8ktDqMPW2ox
+    _key: '!items.effects!I4Su8PsVWBgQ95OJ.loBAh8ktDqMPW2ox'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.YCSGNa0EM2gEFOhu
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/intrusive-casting.webp
+    name: Intrusive Casting
+    system:
+      _sup: c03uQvPFAXLocKls
+      class: necromancer
+      competence:
+        raw: 0
+      costs:
+        primary:
+          mp:
+            formula: '1'
+            type: formula
+      delivery: self
+      duration:
+        raw: '0'
+        unit: instant
+      executionTime:
+        base: r0
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: intrusive-casting
+      interaction: manifest
+      maneuver: reactive
+      mundane: false
+      overview:
+        base: >-
+          <p>The range of the triggering @L[Category:Spells]{spell} is
+          doubled.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - spell
+      trigger: >-
+        <p>You are casting a @L[Category:Spells]{spell} with a range other than
+        @L[Category:Self target spells]{self}.</p>
+    transfer: true
     type: ability
 folder: a4e3527bf26a4ba9
 img: systems/teriock/src/icons/ranks/rank-4-necromancer.webp

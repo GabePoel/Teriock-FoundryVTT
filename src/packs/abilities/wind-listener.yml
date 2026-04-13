@@ -1,62 +1,56 @@
 _id: 8e248d06ee768571
-_key: '!items!8e248d06ee768571'
+_key: '!effects!8e248d06ee768571'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 8e248d06ee768571
-    _key: '!items.effects!8e248d06ee768571.8e248d06ee768571'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/wind-listener.webp
-    name: Wind Listener
-    system:
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        conditions:
-          absent:
-            - deaf
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - sensory
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: wind-listener
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You can hear far away sounds and conversations carried by the wind
-          as if you were adjacent to the source of the sound. Any conversation
-          happening within range that is not in an enclosed area physically
-          separated from you is audible. At @L[Core:Game Master]{GM} discretion,
-          you may occasionally hear distant sounds from further away.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-        - primal
-      range:
-        unit: self
-      requirements: >-
-        <p>You are not @L[Condition:Deaf]{deaf} and there is moving air in the
-        area.</p>
-      targets:
-        - area
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/wind-listener.webp
 name: Wind Listener
-type: wrapper
+system:
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    conditions:
+      absent:
+        - deaf
+    raw: '0'
+    unit: unlimited
+  effectTypes:
+    - sensory
+  executionTime:
+    base: passive
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  identifier: wind-listener
+  interaction: manifest
+  maneuver: passive
+  mundane: false
+  overview:
+    base: >-
+      <p>You can hear far away sounds and conversations carried by the wind as
+      if you were adjacent to the source of the sound. Any conversation
+      happening within range that is not in an enclosed area physically
+      separated from you is audible. At @L[Core:Game Master]{GM} discretion, you
+      may occasionally hear distant sounds from further away.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+    - primal
+  range:
+    unit: self
+  requirements: >-
+    <p>You are not @L[Condition:Deaf]{deaf} and there is moving air in the
+    area.</p>
+  targets:
+    - area
+transfer: true
+type: ability

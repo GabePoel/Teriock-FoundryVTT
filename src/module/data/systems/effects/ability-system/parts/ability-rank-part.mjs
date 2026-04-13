@@ -17,17 +17,13 @@ export default (Base) => {
           if (this.parent.getFlag("teriock", "category") === "combat") {
             return {
               icon: TERIOCK.display.icons.rank.combatAbility,
-              tooltip: game.i18n.localize(
-                "TERIOCK.SYSTEMS.Ability.EMBED.combat",
-              ),
+              tooltip: _loc("TERIOCK.SYSTEMS.Ability.EMBED.combat"),
               classes: "ability-category-tag-icon",
             };
           } else if (this.parent.getFlag("teriock", "category") === "support") {
             return {
               icon: TERIOCK.display.icons.rank.supportAbility,
-              tooltip: game.i18n.localize(
-                "TERIOCK.SYSTEMS.Ability.EMBED.support",
-              ),
+              tooltip: _loc("TERIOCK.SYSTEMS.Ability.EMBED.support"),
               classes: "ability-category-tag-icon",
             };
           }
@@ -45,39 +41,33 @@ export default (Base) => {
           doc?.sheet?.isEditable
         ) {
           entries.push({
-            name: game.i18n.localize(
-              "TERIOCK.SYSTEMS.Ability.EMBED.setCombatCategory",
-            ),
+            label: _loc("TERIOCK.SYSTEMS.Ability.EMBED.setCombatCategory"),
             icon: makeIcon(
               TERIOCK.display.icons.rank.combatAbility,
               "contextMenu",
             ),
-            callback: async () =>
+            onClick: async () =>
               await this.parent.setFlag("teriock", "category", "combat"),
-            condition: this.parent.getFlag("teriock", "category") !== "combat",
+            visible: this.parent.getFlag("teriock", "category") !== "combat",
             group: "edit",
           });
           entries.push({
-            name: game.i18n.localize(
-              "TERIOCK.SYSTEMS.Ability.EMBED.setSupportCategory",
-            ),
+            label: _loc("TERIOCK.SYSTEMS.Ability.EMBED.setSupportCategory"),
             icon: makeIcon(
               TERIOCK.display.icons.rank.supportAbility,
               "contextMenu",
             ),
-            callback: async () =>
+            onClick: async () =>
               await this.parent.setFlag("teriock", "category", "support"),
-            condition: this.parent.getFlag("teriock", "category") !== "support",
+            visible: this.parent.getFlag("teriock", "category") !== "support",
             group: "edit",
           });
           entries.push({
-            name: game.i18n.localize(
-              "TERIOCK.SYSTEMS.Ability.EMBED.unsetCategory",
-            ),
+            label: _loc("TERIOCK.SYSTEMS.Ability.EMBED.unsetCategory"),
             icon: makeIcon(TERIOCK.display.icons.ui.unset, "contextMenu"),
-            callback: async () =>
+            onClick: async () =>
               await this.parent.unsetFlag("teriock", "category"),
-            condition: !!this.parent.getFlag("teriock", "category"),
+            visible: !!this.parent.getFlag("teriock", "category"),
             group: "edit",
           });
         }

@@ -1,41 +1,39 @@
 _id: 38f0a8d0a4e3298e
-_key: '!items!38f0a8d0a4e3298e'
+_key: '!effects!38f0a8d0a4e3298e'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 38f0a8d0a4e3298e
-    _key: '!items.effects!38f0a8d0a4e3298e.38f0a8d0a4e3298e'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.68
-    img: systems/teriock/src/icons/properties/runic.webp
-    name: Runic
-    system:
-      applyIfShattered: true
-      automations:
-        AVyYZU3I7PUjW16I:
-          _id: AVyYZU3I7PUjW16I
-          macro: Compendium.teriock.execution.Macro.9Nxi7Z2H6ghBp6Vd
-          trigger: turnEnd
-          type: propertyMacro
-      competence:
-        raw: 0
-      description: >-
-        <p><b>[[lookup name]]</b> items repair themselves. If a [[lookup name
-        style=lc]] item is also @L[Property:Shattered]{shattered}, it retains
-        the [[lookup name style=lc]] property. When a creature is
-        @L[Core:Attunement]{attuned} to a @L[Property:Shattered]{shattered}
-        [[lookup name style=lc]] item, they roll [[/roll 2d4]] at the end of
-        each of their turns. If at least 1 die rolls a 4, the item is no longer
-        @L[Property:Shattered]{shattered}.</p>
-      form: normal
-      identifier: runic
-    type: property
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/properties/runic.webp
 name: Runic
-type: wrapper
+system:
+  applyIfShattered: true
+  automations:
+    AVyYZU3I7PUjW16I:
+      _id: AVyYZU3I7PUjW16I
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 0
+        - 1
+      macro: Compendium.teriock.execution.Macro.9Nxi7Z2H6ghBp6Vd
+      trigger: turnEnd
+      type: propertyMacro
+  competence:
+    raw: 0
+  description: >-
+    <p><b>[[lookup name]]</b> items repair themselves. If a [[lookup name
+    style=lc]] item is also @L[Property:Shattered]{shattered}, it retains the
+    [[lookup name style=lc]] property. When a creature is
+    @L[Core:Attunement]{attuned} to a @L[Property:Shattered]{shattered} [[lookup
+    name style=lc]] item, they roll [[/roll 2d4]] at the end of each of their
+    turns. If at least 1 die rolls a 4, the item is no longer
+    @L[Property:Shattered]{shattered}.</p>
+  form: normal
+  identifier: runic
+  mundane: false
+transfer: true
+type: property

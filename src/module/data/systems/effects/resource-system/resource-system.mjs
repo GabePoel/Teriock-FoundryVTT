@@ -1,5 +1,5 @@
 import { BaseDocumentExecution } from "../../../../executions/document-executions/_module.mjs";
-import { mix } from "../../../../helpers/utils.mjs";
+import { mix } from "../../../../helpers/construction.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
@@ -21,7 +21,7 @@ export default class ResourceSystem extends mix(
     return [
       ...super._automationTypes,
       automations.TradecraftAutomation,
-      automations.CommonImpactsAutomation,
+      automations.CommonOutcomesAutomation,
       automations.CommonMacroAutomation,
       automations.HacksAutomation,
       automations.RollAutomation,
@@ -49,14 +49,14 @@ export default class ResourceSystem extends mix(
   }
 
   /** @inheritDoc */
-  get panelParts() {
-    const parts = super.panelParts;
-    parts.bars.push(this._consumableBar);
-    return parts;
+  async _use(options = {}) {
+    await new BaseDocumentExecution(options).execute();
   }
 
   /** @inheritDoc */
-  async _use(options = {}) {
-    await new BaseDocumentExecution(options).execute();
+  async getPanelParts() {
+    const parts = await super.getPanelParts();
+    parts.bars.push(this._consumableBar);
+    return parts;
   }
 }

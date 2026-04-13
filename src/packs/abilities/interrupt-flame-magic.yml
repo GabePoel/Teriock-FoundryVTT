@@ -1,91 +1,84 @@
 _id: 2a40a6b92cd8c298
-_key: '!items!2a40a6b92cd8c298'
+_key: '!effects!2a40a6b92cd8c298'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 2a40a6b92cd8c298
-    _key: '!items.effects!2a40a6b92cd8c298.2a40a6b92cd8c298'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/interrupt-flame-magic.webp
-    name: Interrupt Flame Magic
-    system:
-      automations:
-        d635eb44dba086dd:
-          _id: d635eb44dba086dd
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: combatExpiration
-          what:
-            roll: 2d4kh1
-            threshold: 4
-            type: rolled
-          when:
-            skip: 0
-            time: end
-            trigger: turn
-          who:
-            type: target
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: aura
-      duration:
-        raw: '1'
-        unit: minute
-      elements:
-        - flame
-      endCondition: >-
-        <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: unp
-      form: special
-      identifier: interrupt-flame-magic
-      interaction: feat
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        raw: '10'
-        unit: ft
-      results:
-        fail: >-
-          <p>Target is @L[Keyword:Incapable]{incapable} of using
-          @L[Ability:Sustain]{Sustain} on @L[Category:Magically powered
-          abilities]{magical} @L[Category:Flame element abilities]{flame
-          abilities}. Any @L[Category:Magically powered abilities]{magical}
-          @L[Category:Sustained abilities]{sustained} @L[Category:Flame element
-          abilities]{flame element abilities} on them
-          @L[Core:Fizzles]{fizzle}.</p>
-      rotator: true
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/interrupt-flame-magic.webp
 name: Interrupt Flame Magic
-type: wrapper
+system:
+  automations:
+    d635eb44dba086dd:
+      _id: d635eb44dba086dd
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: combatExpiration
+      what:
+        roll: 2d4kh1
+        threshold: 4
+        type: rolled
+      when:
+        skip: 0
+        time: end
+        trigger: turn
+      who:
+        type: target
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: aura
+  duration:
+    raw: '1'
+    unit: minute
+  elements:
+    - flame
+  endCondition: >-
+    <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
+    [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: unp
+  form: special
+  identifier: interrupt-flame-magic
+  interaction: feat
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    raw: '10'
+    unit: ft
+  results:
+    fail: >-
+      <p>Target is @L[Keyword:Incapable]{incapable} of using
+      @L[Ability:Sustain]{Sustain} on @L[Category:Magically powered
+      abilities]{magical} @L[Category:Flame element abilities]{flame abilities}.
+      Any @L[Category:Magically powered abilities]{magical}
+      @L[Category:Sustained abilities]{sustained} @L[Category:Flame element
+      abilities]{flame element abilities} on them @L[Core:Fizzles]{fizzle}.</p>
+  rotator: true
+  targets:
+    - creature
+transfer: true
+type: ability

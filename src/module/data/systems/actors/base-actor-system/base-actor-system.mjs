@@ -1,15 +1,13 @@
+import { mix } from "../../../../helpers/construction.mjs";
 import { dotJoin } from "../../../../helpers/string.mjs";
-import { makeIcon, mix } from "../../../../helpers/utils.mjs";
+import { makeIcon } from "../../../../helpers/utils.mjs";
 import { ActorSettingsModel } from "../../../models/settings-models/_module.mjs";
-import { CommonSystemMixin } from "../../mixins/_module.mjs";
+import AbstractActorSystem from "./abstract-actor-system.mjs";
 import * as parts from "./parts/_module.mjs";
 
-const { TypeDataModel } = foundry.abstract;
-
-//noinspection JSClosureCompilerSyntax
 /**
  * Base {@link TeriockActor} data model.
- * @extends {TypeDataModel}
+ * @extends {AbstractActorSystem}
  * @extends {Teriock.Models.BaseActorSystemData}
  * @mixes CommonSystem
  * @mixes ActorAttributesPart
@@ -34,8 +32,7 @@ const { TypeDataModel } = foundry.abstract;
  * @mixes ActorTransformationPart
  */
 export default class BaseActorSystem extends mix(
-  TypeDataModel,
-  CommonSystemMixin,
+  AbstractActorSystem,
   parts.ActorStatsPart,
   parts.ActorAutomationPart,
   parts.ActorScalingPart,
@@ -56,6 +53,7 @@ export default class BaseActorSystem extends mix(
   parts.ActorSensesPart,
   parts.ActorProtectionsPart,
   parts.ActorRestingPart,
+  parts.ActorTokenPart,
 ) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
@@ -85,6 +83,7 @@ export default class BaseActorSystem extends mix(
         "resource",
       ],
       childItemTypes: [
+        "archetype",
         "body",
         "equipment",
         "mount",
@@ -98,7 +97,7 @@ export default class BaseActorSystem extends mix(
   }
 
   /** @inheritDoc */
-  get _settingsFlagsDataModel() {
+  get SettingsFlagsDataModel() {
     return ActorSettingsModel;
   }
 
@@ -112,46 +111,17 @@ export default class BaseActorSystem extends mix(
     const parts = super.embedParts;
     parts.subtitle = this.metadata.type;
     parts.text = dotJoin([
-      game.i18n.format("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.lvl", {
+      _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.lvl", {
         number: this.scaling.lvl,
       }),
-      game.i18n.format("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.br", {
+      _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.br", {
         number: this.scaling.br,
       }),
-      game.i18n.format("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.size", {
+      _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.size", {
         number: this.size.number.value,
       }),
     ]);
     parts.makeTooltip = this.parent.isViewer;
-    return parts;
-  }
-
-  /** @inheritDoc */
-  get panelParts() {
-    const parts = super.panelParts;
-    parts.bars = [
-      {
-        icon: TERIOCK.display.icons.ui.info,
-        label: game.i18n.localize("TERIOCK.SYSTEMS.Ability.PANELS.info"),
-        wrappers: [
-          game.i18n.format("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.lvl", {
-            number: this.scaling.lvl,
-          }),
-          game.i18n.format("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.br", {
-            number: this.scaling.br,
-          }),
-          game.i18n.format("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.size", {
-            number: this.size.number.value,
-          }),
-        ],
-      },
-    ];
-    parts.blocks = [
-      {
-        title: game.i18n.localize("TERIOCK.SYSTEMS.BaseActor.PANELS.notes"),
-        text: this.notes,
-      },
-    ];
     return parts;
   }
 
@@ -178,13 +148,42 @@ export default class BaseActorSystem extends mix(
   getCardContextMenuEntries(doc) {
     return [
       {
-        name: game.i18n.localize("TERIOCK.SYSTEMS.BaseActor.MENU.openToken"),
+        label: _loc("TERIOCK.SYSTEMS.BaseActor.MENU.openToken"),
         icon: makeIcon(TERIOCK.display.icons.document.token, "contextMenu"),
-        condition: () => this.parent.token && this.parent.token.isViewer,
-        callback: async () => this.parent.token.sheet.render(true),
+        visible: () => this.parent.token && this.parent.token.isViewer,
+        onClick: async () => this.parent.token.sheet.render(true),
       },
       ...super.getCardContextMenuEntries(doc),
     ];
+  }
+
+  /** @inheritDoc */
+  async getPanelParts() {
+    const parts = await super.getPanelParts();
+    parts.bars = [
+      {
+        icon: TERIOCK.display.icons.ui.info,
+        label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.info"),
+        wrappers: [
+          _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.lvl", {
+            number: this.scaling.lvl,
+          }),
+          _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.br", {
+            number: this.scaling.br,
+          }),
+          _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.size", {
+            number: this.size.number.value,
+          }),
+        ],
+      },
+    ];
+    parts.blocks = [
+      {
+        title: _loc("TERIOCK.SYSTEMS.BaseActor.PANELS.notes"),
+        text: this.notes,
+      },
+    ];
+    return parts;
   }
 
   /** @inheritDoc */

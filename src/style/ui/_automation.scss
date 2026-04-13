@@ -12,27 +12,61 @@
   width: 100%;
   @include mixins.inverse-roll-style;
 
+  .teriock-automation-collapse-target {
+    @include mixins.collapsible;
+    @include mixins.collapsible-open;
+    @include mixins.pseudo-top-border;
+
+    .teriock-automation-spacer {
+      overflow: hidden;
+    }
+  }
+
+  &.collapsed {
+    .teriock-automation-collapse-target {
+      @include mixins.collapsible-closed;
+    }
+  }
+
   .teriock-automation-header {
-    align-items: center;
-    border-bottom: 1px solid var(--color-panel-edge);
+    align-items: stretch;
+    cursor: pointer;
     display: flex;
     flex-direction: row;
     min-height: 2rem;
     padding: 0.25rem;
     width: 100%;
 
+    &:hover {
+      background-color: var(--color-panel-header-hover);
+    }
+
+    &:active {
+      background-color: var(--color-panel-header-active);
+    }
+
+    &:hover:has(.teriock-automation-header-buttons:hover) {
+      background-color: unset;
+    }
+
     .teriock-automation-header-name {
+      align-items: center;
+      display: flex;
       flex: 1;
       font-family: "Modesto Condensed", serif;
       font-size: large;
       line-height: 1rem;
-      padding-left: 0.25rem;
+      min-width: 0;
+      padding: 0.125rem 0.25rem 0.125rem 0.35rem;
+      user-select: none;
     }
 
     .teriock-automation-header-buttons {
       align-items: center;
+      align-self: center;
+      cursor: default;
       display: flex;
-      flex: 1;
+      flex: 0 0 auto;
       flex-direction: row;
       gap: 0.25rem;
       justify-content: flex-end;
@@ -56,6 +90,7 @@
 
         button {
           border: none;
+          cursor: pointer;
           height: 1.5rem;
           min-height: unset;
           padding: 0;

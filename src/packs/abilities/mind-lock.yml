@@ -1,137 +1,132 @@
 _id: b1bde599c17a5bc4
-_key: '!items!b1bde599c17a5bc4'
+_key: '!effects!b1bde599c17a5bc4'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: b1bde599c17a5bc4
-    _key: '!items.effects!b1bde599c17a5bc4.b1bde599c17a5bc4'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/mind-lock.webp
-    name: Mind Lock
-    system:
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.protections.immunities.effects
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: mental
-            - key: system.protections.immunities.effects
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: control
-            - key: system.protections.immunities.statuses
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: frightened
-            - key: system.protections.immunities.statuses
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: charmed
-            - key: system.protections.immunities.statuses
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: bound
-            - key: system.protections.immunities.statuses
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: frenzied
-            - key: system.protections.immunities.other
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: Having your behavior changed
-            - key: system.protections.immunities.other
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: Having your INT changed
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: changes
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - immunity
-      elements:
-        - storm
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: mind-lock
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You are @L[Keyword:Immunity]{immune} to @L[Category:Mental
-          effects]{mental} and @L[Category:Control effects]{control effects},
-          being @L[Condition:Frightened]{frightened},
-          @L[Condition:Charmed]{charmed}, @L[Condition:Bound]{bound}, or
-          @L[Condition:Frenzied]{frenzied}, and having your
-          @L[Core:Intelligence]{INT} change. This makes you
-          @L[Keyword:Incapable]{incapable} of @L[Category:INT setting
-          abilities]{INT setting abilities} that you gain while this ability is
-          active (but not ones that you already had). In addition, you maintain
-          control over your own mind when being @L[Category:Reanimation
-          effects]{reanimated} and are immune to
-          @L[Category:Abilities]{abilities} that would change your behavior such
-          as @L[Ability:Taunt]{Taunt}.@L[Ability:Taunt]{Taunt}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      targets:
-        - self
-      upgrades:
-        competence:
-          attribute: int
-          value: 2
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/mind-lock.webp
 name: Mind Lock
-type: wrapper
+system:
+  automations:
+    e789ed5e109ebd1a:
+      _id: e789ed5e109ebd1a
+      changes:
+        - key: system.protections.immunities.effects
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: Actor
+          type: add
+          value: mental
+        - key: system.protections.immunities.effects
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: Actor
+          type: add
+          value: control
+        - key: system.protections.immunities.statuses
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: Actor
+          type: add
+          value: frightened
+        - key: system.protections.immunities.statuses
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: Actor
+          type: add
+          value: charmed
+        - key: system.protections.immunities.statuses
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: Actor
+          type: add
+          value: bound
+        - key: system.protections.immunities.statuses
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: Actor
+          type: add
+          value: frenzied
+        - key: system.protections.immunities.other
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: Actor
+          type: add
+          value: Having your behavior changed
+        - key: system.protections.immunities.other
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: Actor
+          type: add
+          value: Having your INT changed
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: changes
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: unlimited
+  effectTypes:
+    - immunity
+  elements:
+    - storm
+  executionTime:
+    base: passive
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: mind-lock
+  interaction: manifest
+  maneuver: passive
+  mundane: false
+  overview:
+    base: >-
+      <p>You are @L[Keyword:Immunity]{immune} to @L[Category:Mental
+      effects]{mental} and @L[Category:Control effects]{control effects}, being
+      @L[Condition:Frightened]{frightened}, @L[Condition:Charmed]{charmed},
+      @L[Condition:Bound]{bound}, or @L[Condition:Frenzied]{frenzied}, and
+      having your @L[Core:Intelligence]{INT} change. This makes you
+      @L[Keyword:Incapable]{incapable} of @L[Category:INT setting abilities]{INT
+      setting abilities} that you gain while this ability is active (but not
+      ones that you already had). In addition, you maintain control over your
+      own mind when being @L[Category:Reanimation effects]{reanimated} and are
+      immune to @L[Category:Abilities]{abilities} that would change your
+      behavior such as @L[Ability:Taunt]{Taunt}.@L[Ability:Taunt]{Taunt}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: self
+  targets:
+    - self
+  upgrades:
+    competence:
+      attribute: int
+      value: 2
+transfer: true
+type: ability

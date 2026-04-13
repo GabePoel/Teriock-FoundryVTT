@@ -1,86 +1,80 @@
 _id: 6de6fc2f99a96881
-_key: '!items!6de6fc2f99a96881'
+_key: '!effects!6de6fc2f99a96881'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 6de6fc2f99a96881
-    _key: '!items.effects!6de6fc2f99a96881.6de6fc2f99a96881'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/self-detonate.webp
-    name: Self Detonate
-    system:
-      class: flameMage
-      competence:
-        raw: 0
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: sight
-      duration:
-        raw: '8'
-        unit: hour
-      elements:
-        - flame
-      executionTime: 10 Minutes
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, you may target an
-        additional person.</p>
-      identifier: self-detonate
-      interaction: manifest
-      maneuver: slow
-      overview:
-        base: >-
-          <p>The next @L[Category:Conjured spells]{conjured} @L[Category:Missile
-          delivery spells]{missile spell} cast on the target @L[Core:Detonate
-          Expansion]{detonates} (emanates in a 10 foot radius @L[Core:Aura
-          Delivery]{aura} from the target). This is a @L[Core:MOV]{MOV}
-          @L[Core:Feat Interaction]{feat save} using <i>your</i> DC. Do not add
-          your @L[Core:Proficiency Bonus]{proficiency bonus} to the DC. This
-          detonating @L[Core:Aura Delivery]{aura} is @L[Category:Loud
-          effects]{loud}.</p>
-        fluent: >-
-          <p>Your @L[Core:Fluency Bonus]{fluency bonus} is now included in the
-          @L[Core:Feat Interaction]{feat save DC}.</p>
-        proficient: >-
-          <p>Your @L[Core:Proficiency Bonus]{proficiency bonus} is now included
-          in the @L[Core:Feat Interaction]{feat save DC}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        raw: '5'
-        unit: ft
-      requirements: >-
-        <p>Unless @L[Core:Proficiency Bonus]{proficient}, you may only target
-        yourself.</p>
-      ritual: true
-      spell: true
-      standard: true
-      sustained: true
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/self-detonate.webp
 name: Self Detonate
-type: wrapper
+system:
+  class: flameMage
+  competence:
+    raw: 0
+  costs:
+    components:
+      somatic:
+        type: tag
+      verbal:
+        type: tag
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: sight
+  duration:
+    raw: '8'
+    unit: hour
+  elements:
+    - flame
+  executionTime:
+    base: 10 Minutes
+    slow:
+      raw: '10'
+      unit: minute
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  heightened: >-
+    <p>For each additional @L[Core:MP]{MP} spent, you may target an additional
+    person.</p>
+  identifier: self-detonate
+  interaction: manifest
+  maneuver: slow
+  mundane: false
+  overview:
+    base: >-
+      <p>The next @L[Category:Conjured spells]{conjured} @L[Category:Missile
+      delivery spells]{missile spell} cast on the target @L[Core:Detonate
+      Expansion]{detonates} (emanates in a 10 foot radius @L[Core:Aura
+      Delivery]{aura} from the target). This is a @L[Core:MOV]{MOV} @L[Core:Feat
+      Interaction]{feat save} using <i>your</i> DC. Do not add your
+      @L[Core:Proficiency Bonus]{proficiency bonus} to the DC. This detonating
+      @L[Core:Aura Delivery]{aura} is @L[Category:Loud effects]{loud}.</p>
+    fluent: >-
+      <p>Your @L[Core:Fluency Bonus]{fluency bonus} is now included in the
+      @L[Core:Feat Interaction]{feat save DC}.</p>
+    proficient: >-
+      <p>Your @L[Core:Proficiency Bonus]{proficiency bonus} is now included in
+      the @L[Core:Feat Interaction]{feat save DC}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    raw: '5'
+    unit: ft
+  requirements: >-
+    <p>Unless @L[Core:Proficiency Bonus]{proficient}, you may only target
+    yourself.</p>
+  ritual: true
+  spell: true
+  standard: true
+  sustained: true
+  targets:
+    - creature
+transfer: true
+type: ability

@@ -14,16 +14,12 @@ export default class PseudoCollectionField extends TypedObjectField {
   constructor(model, options = {}, context = {}) {
     if (!foundry.utils.isSubclass(model, TypedPseudoDocument)) {
       throw new Error(
-        game.i18n.localize(
-          "TERIOCK.FIELDS.PseudoCollectionField.notPseudoDocument",
-        ),
+        _loc("TERIOCK.FIELDS.PseudoCollectionField.notPseudoDocument"),
       );
     }
     const types = (options.types ||= model.TYPES);
     if (!types) {
-      throw new Error(
-        game.i18n.localize("TERIOCK.FIELDS.PseudoCollectionField.noTypes"),
-      );
+      throw new Error(_loc("TERIOCK.FIELDS.PseudoCollectionField.noTypes"));
     }
     super(new PseudoTypedSchemaField(types), options, context);
     this.#documentClass = model;

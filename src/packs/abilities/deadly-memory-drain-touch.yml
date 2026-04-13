@@ -1,84 +1,74 @@
 _id: bb4961996495b70e
-_key: '!items!bb4961996495b70e'
+_key: '!effects!bb4961996495b70e'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: bb4961996495b70e
-    _key: '!items.effects!bb4961996495b70e.bb4961996495b70e'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/deadly-memory-drain-touch.webp
-    name: Deadly Memory Drain Touch
-    system:
-      automations:
-        157afc517847f562:
-          _id: 157afc517847f562
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: 3d8[memory lethal]
-          heighten:
-            - 1
-            - 0
-          merge: true
-          roll: drain
-          type: roll
-        1728b3a84ea27844:
-          _id: 1728b3a84ea27844
-          common:
-            - bag
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: common
-      competence:
-        raw: 0
-      delivery: hand
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - mental
-        - displacement
-        - killing
-        - draining
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: deadly-memory-drain-touch
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 2
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      results:
-        critHit: >-
-          <p>Deal [[/drain 6d8[memory lethal]]] @L[Category:Drain
-          types]{drain}.</p>
-        hit: >-
-          <p>Deal [[/drain 3d8[memory lethal]]] @L[Category:Drain
-          types]{drain}.</p>
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/deadly-memory-drain-touch.webp
 name: Deadly Memory Drain Touch
-type: wrapper
+system:
+  automations:
+    157afc517847f562:
+      _id: 157afc517847f562
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: 3d8[memory lethal]
+      heighten:
+        - 1
+        - 0
+      impact: drain
+      merge: true
+      type: roll
+    1728b3a84ea27844:
+      _id: 1728b3a84ea27844
+      common:
+        - bag
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 1
+        - 0
+      type: common
+  competence:
+    raw: 0
+  delivery: hand
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - mental
+    - displacement
+    - killing
+    - draining
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: deadly-memory-drain-touch
+  interaction: attack
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 2
+  powerSources:
+    - magical
+  range:
+    unit: contact
+  results:
+    critHit: <p>Deal [[/drain 6d8[memory lethal]]] @L[Category:Drain types]{drain}.</p>
+    hit: <p>Deal [[/drain 3d8[memory lethal]]] @L[Category:Drain types]{drain}.</p>
+  targets:
+    - creature
+transfer: true
+type: ability

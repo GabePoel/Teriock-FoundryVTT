@@ -1,7 +1,7 @@
 _id: 7d6264ecf59c69af
 _key: '!items!7d6264ecf59c69af'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.64
@@ -9,11 +9,11 @@ effects:
   - _id: sYJZWSmsd14AIKjV
     _key: '!items.effects!7d6264ecf59c69af.sYJZWSmsd14AIKjV'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.7b3e6d546e3b26f7
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.7b3e6d546e3b26f7
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.63
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/properties/fragile.webp
     name: Fragile
     system:
@@ -30,15 +30,16 @@ effects:
       form: flaw
       identifier: fragile
       mundane: true
+    transfer: true
     type: property
   - _id: wDcmaxQA5JlQOwyq
     _key: '!items.effects!7d6264ecf59c69af.wDcmaxQA5JlQOwyq'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.639b14658b0d2e1c
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.639b14658b0d2e1c
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/properties/glowing.webp
     name: Glowing
     system:
@@ -47,26 +48,26 @@ effects:
         parameterChanges:
           _id: parameterChanges
           changes:
-            - key: system.light.dim
-              mode: 4
+            - key: token.light.dim
+              phase: normal
               priority: 5
               qualifier: '1'
               target: Actor
-              time: normal
+              type: upgrade
               value: '10'
-            - key: system.light.color
-              mode: 5
+            - key: token.light.color
+              phase: normal
               priority: 5
               qualifier: '1'
               target: Actor
-              time: normal
+              type: override
               value: '#C64600'
-            - key: system.light.animation.type
-              mode: 5
+            - key: token.light.animation.type
+              phase: normal
               priority: 5
               qualifier: '1'
               target: Actor
-              time: normal
+              type: override
               value: torch
           competencies:
             - 0
@@ -92,6 +93,7 @@ effects:
       form: intrinsic
       identifier: glowing
       modifiesActor: true
+    transfer: true
     type: property
 folder: a133b0539876f28f
 img: systems/teriock/src/icons/equipment/lantern.webp

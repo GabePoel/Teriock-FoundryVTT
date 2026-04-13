@@ -1,5 +1,6 @@
 import { effectOptions } from "../../../../../../constants/options/effect-options.mjs";
 import { addFormula } from "../../../../../../helpers/formula.mjs";
+import { initialNumber } from "../../../../../fields/helpers/initializers.mjs";
 
 /**
  * Actor data model that handles cover.
@@ -13,6 +14,13 @@ export default (Base) => {
      * @mixin
      */
     class ActorCoverPart extends Base {
+      /** @inheritDoc */
+      static defineSchema() {
+        return Object.assign(super.defineSchema(), {
+          cover: initialNumber(),
+        });
+      }
+
       /**
        * Decrease cover by one step.
        * @param {number} [amount]
@@ -37,12 +45,6 @@ export default (Base) => {
         const ids = [];
         for (let i = value; i < max; i++) ids.push(effectOptions.cover[i]);
         await this.parent.applyStatusEffects(ids);
-      }
-
-      /** @inheritDoc */
-      prepareBaseData() {
-        super.prepareBaseData();
-        this.cover = 0;
       }
 
       /** @inheritDoc */

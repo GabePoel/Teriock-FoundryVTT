@@ -1,79 +1,86 @@
 _id: 1e40086ba38f33cb
-_key: '!items!1e40086ba38f33cb'
+_key: '!effects!1e40086ba38f33cb'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 1e40086ba38f33cb
-    _key: '!items.effects!1e40086ba38f33cb.1e40086ba38f33cb'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/first-aid.webp
-    name: First Aid
-    system:
-      automations:
-        06acda516847cfdb:
-          _id: 06acda516847cfdb
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          tradecraft: herbalist
-          type: tradecraft
-        1728b3a84ea27844:
-          _id: 1728b3a84ea27844
-          common:
-            - awaken
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: common
-      basic: true
-      competence:
-        raw: 0
-      delivery: hand
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - awakening
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: intrinsic
-      identifier: first-aid
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: <p>Make a DC 10 [[/tc herbalist]]{herbalist check}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: contact
-      requirements: <p>Target is @L[Condition:Unconscious]{unconscious}.</p>
-      results:
-        fail: <p>Target remains @L[Condition:Unconscious]{unconscious}.</p>
-        save: <p>Target is @L[Keyword:Awaken]{awakened}.</p>
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/first-aid.webp
 name: First Aid
-type: wrapper
+system:
+  automations:
+    06acda516847cfdb:
+      _id: 06acda516847cfdb
+      bonus: '0'
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 1
+        - 0
+      tradecraft: herbalist
+      type: tradecraft
+    1728b3a84ea27844:
+      _id: 1728b3a84ea27844
+      common:
+        - awaken
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 1
+        - 0
+      type: common
+    f040e7fac700bed1:
+      _id: f040e7fac700bed1
+      bonus: '0'
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 1
+        - 0
+      tradecraft: herbalist
+      type: tradecraft
+  basic: true
+  competence:
+    raw: 0
+  delivery: hand
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - awakening
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: intrinsic
+  identifier: first-aid
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: <p>Make a DC 10 [[/tc herbalist]]{herbalist check}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: contact
+  requirements: <p>Target is @L[Condition:Unconscious]{unconscious}.</p>
+  results:
+    fail: <p>Target remains @L[Condition:Unconscious]{unconscious}.</p>
+    save: <p>Target is @L[Keyword:Awaken]{awakened}.</p>
+  targets:
+    - creature
+transfer: true
+type: ability

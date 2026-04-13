@@ -1,128 +1,80 @@
-_id: a3f943a3203c8bc2
-_key: '!items!a3f943a3203c8bc2'
+_id: 04dRC1WFIiPcIyFD
+_key: '!effects!04dRC1WFIiPcIyFD'
 _stats:
-  coreVersion: '13'
+  compendiumSource: Compendium.world.abilities-backup.ActiveEffect.04dRC1WFIiPcIyFD
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: a3f943a3203c8bc2
-    _key: '!items.effects!a3f943a3203c8bc2.a3f943a3203c8bc2'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/prethaw.webp
-    name: Prethaw
-    system:
-      automations:
-        d9532d73bad6587b:
-          _id: d9532d73bad6587b
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: remove
-          status: frozen
-          type: end
-        e5fd10094b33ef98:
-          _id: e5fd10094b33ef98
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: remove
-          status: frozen
-          type: status
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '1'
-        unit: hour
-      effectTypes:
-        - temporal
-      elements:
-        - storm
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: prethaw
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>You immediately stop being @L[Condition:Frozen]{frozen}. You may
-          use this ability even while @L[Condition:Frozen]{frozen}. However, you
-          also gain @L[Ability:Temporal Lethargy]{Temporal Lethargy}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
-  - _id: E3Urk5MxdT0kC0F7
-    _key: '!items.effects!a3f943a3203c8bc2.E3Urk5MxdT0kC0F7'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.05b3ffb3ba1f30b1
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/temporal-lethargy.webp
-    name: Temporal Lethargy
-    system:
-      _sup: a3f943a3203c8bc2
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - temporal
-      elements:
-        - storm
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: flaw
-      identifier: temporal-lethargy
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>Negative effects tend to linger on you longer than they would
-          otherwise. Effects placed on you by opponents have their duration
-          doubled. Additionally, if you would roll some number of [[/roll d4]]s
-          to end effects placed on you by opponents, you roll one less [[/roll
-          d4]] than you would otherwise.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/prethaw.webp
 name: Prethaw
-type: wrapper
+system:
+  automations:
+    d9532d73bad6587b:
+      _id: d9532d73bad6587b
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 1
+        - 0
+      relation: remove
+      status: frozen
+      type: end
+    e5fd10094b33ef98:
+      _id: e5fd10094b33ef98
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: remove
+      status: frozen
+      target: false
+      type: status
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '1'
+    unit: hour
+  effectTypes:
+    - temporal
+  elements:
+    - storm
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: prethaw
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>You immediately stop being @L[Condition:Frozen]{frozen}. You may use
+      this ability even while @L[Condition:Frozen]{frozen}. However, you also
+      gain @L[Ability:Temporal Lethargy]{Temporal Lethargy}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: self
+  targets:
+    - self
+transfer: true
+type: ability

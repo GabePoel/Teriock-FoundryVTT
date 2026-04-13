@@ -7,16 +7,17 @@ import {
 } from "../../../pseudo-documents/automations/_module.mjs";
 import { ChildSystemMixin } from "../../mixins/_module.mjs";
 
-const { fields } = foundry.data;
-const { TypeDataModel } = foundry.abstract;
+const { fields, ActiveEffectTypeDataModel } = foundry.data;
 
 /**
  * Base effect data model.
- * @extends {TypeDataModel}
+ * @extends {ActiveEffectTypeDataModel}
  * @extends {Teriock.Models.BaseEffectSystemData}
  * @mixes ChildSystem
  */
-export default class BaseEffectSystem extends ChildSystemMixin(TypeDataModel) {
+export default class BaseEffectSystem extends ChildSystemMixin(
+  ActiveEffectTypeDataModel,
+) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
     ...super.LOCALIZATION_PREFIXES,
@@ -25,7 +26,6 @@ export default class BaseEffectSystem extends ChildSystemMixin(TypeDataModel) {
 
   /** @inheritDoc */
   static PRESERVED_PROPERTIES = [
-    "changes",
     "disabled",
     "duration",
     "tint",
@@ -42,7 +42,8 @@ export default class BaseEffectSystem extends ChildSystemMixin(TypeDataModel) {
 
   /** @inheritDoc */
   static defineSchema() {
-    return foundry.utils.mergeObject(super.defineSchema(), {
+    return Object.assign(ActiveEffectTypeDataModel.defineSchema(), {
+      ...super.defineSchema(),
       deleteOnExpire: new fields.BooleanField({ initial: false }),
     });
   }
@@ -53,10 +54,10 @@ export default class BaseEffectSystem extends ChildSystemMixin(TypeDataModel) {
    */
   get canChange() {
     const validTypes = [
-      ChangesAutomation.TYPE,
-      ProtectionAutomation.TYPE,
       AbilityMacroAutomation.TYPE,
+      ChangesAutomation.TYPE,
       PropertyMacroAutomation.TYPE,
+      ProtectionAutomation.TYPE,
     ];
     return !!this.automations.contents.find((a) => validTypes.includes(a.type));
   }
@@ -66,9 +67,7 @@ export default class BaseEffectSystem extends ChildSystemMixin(TypeDataModel) {
     return [
       ...super.displayToggles,
       {
-        label: game.i18n.localize(
-          "TERIOCK.SYSTEMS.BaseItem.FIELDS.disabled.label",
-        ),
+        label: _loc("TERIOCK.SYSTEMS.BaseItem.FIELDS.disabled.label"),
         path: "disabled",
       },
     ];

@@ -23,9 +23,7 @@ export default async function deathBagDialog(actor) {
   );
   const stonesHTML = document.createElement("fieldset");
   const stonesLegendHTML = document.createElement("legend");
-  stonesLegendHTML.innerText = game.i18n.localize(
-    "TERIOCK.DIALOGS.DeathBag.legend",
-  );
+  stonesLegendHTML.innerText = _loc("TERIOCK.DIALOGS.DeathBag.legend");
   stonesHTML.append(stonesLegendHTML);
   for (const color of ["black", "red", "white"]) {
     stonesHTML.append(
@@ -44,13 +42,13 @@ export default async function deathBagDialog(actor) {
   await new TeriockDialog({
     window: {
       icon: makeIconClass(TERIOCK.display.icons.ui.deathBag, "title"),
-      title: game.i18n.localize("TERIOCK.DIALOGS.DeathBag.title"),
+      title: _loc("TERIOCK.DIALOGS.DeathBag.title"),
     },
     content: contentHTML,
     buttons: [
       {
         action: "makePull",
-        label: game.i18n.localize("TERIOCK.DIALOGS.DeathBag.BUTTONS.makePull"),
+        label: _loc("TERIOCK.DIALOGS.DeathBag.BUTTONS.makePull"),
         default: true,
         callback: async (_event, button) => {
           const stonesFormulas = {};
@@ -116,7 +114,7 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
       }
     }
     wrappers.push(
-      game.i18n.format("TERIOCK.DIALOGS.DeathBag.PANEL.total", {
+      _loc("TERIOCK.DIALOGS.DeathBag.PANEL.total", {
         count: bag.length,
       }),
     );
@@ -142,52 +140,40 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
         pulledCount,
         pulledStones,
       };
-      /** @type {Teriock.MessageData.MessagePanel} */
+      /** @type {Teriock.Messages.MessagePanel} */
       const panelParts = {
         bars: [
           {
             icon: TERIOCK.options.document.stone.icon,
-            label: game.i18n.localize(
-              "TERIOCK.DIALOGS.DeathBag.PANEL.initialStonesInBag",
-            ),
+            label: _loc("TERIOCK.DIALOGS.DeathBag.PANEL.initialStonesInBag"),
             wrappers: wrappers,
           },
         ],
         blocks: [
           {
             italic: true,
-            text: game.i18n.localize(
-              "TERIOCK.DIALOGS.DeathBag.PANEL.descriptionText",
-            ),
-            title: game.i18n.localize(
-              "TERIOCK.DIALOGS.DeathBag.PANEL.description",
-            ),
+            text: _loc("TERIOCK.DIALOGS.DeathBag.PANEL.descriptionText"),
+            title: _loc("TERIOCK.DIALOGS.DeathBag.PANEL.description"),
           },
         ],
         icon: TERIOCK.display.icons.ui.deathBag,
         image: getImage("misc", "Death Bag"),
-        name: game.i18n.localize("TERIOCK.DIALOGS.DeathBag.PANEL.name"),
+        name: _loc("TERIOCK.DIALOGS.DeathBag.PANEL.name"),
       };
       let outcome = "";
       switch (pulledStones.black ?? 0) {
         case 1:
-          outcome = game.i18n.localize(
-            "TERIOCK.DIALOGS.DeathBag.PANEL.outcome1",
-          );
+          outcome = _loc("TERIOCK.DIALOGS.DeathBag.PANEL.outcome1");
           break;
         case 2:
-          outcome = game.i18n.localize(
-            "TERIOCK.DIALOGS.DeathBag.PANEL.outcome2",
-          );
+          outcome = _loc("TERIOCK.DIALOGS.DeathBag.PANEL.outcome2");
           break;
         case 3:
-          outcome = game.i18n.localize(
-            "TERIOCK.DIALOGS.DeathBag.PANEL.outcome3",
-          );
+          outcome = _loc("TERIOCK.DIALOGS.DeathBag.PANEL.outcome3");
           break;
       }
       panelParts.blocks.push({
-        title: game.i18n.localize("TERIOCK.DIALOGS.DeathBag.PANEL.outcome"),
+        title: _loc("TERIOCK.DIALOGS.DeathBag.PANEL.outcome"),
         text: outcome,
       });
       const pullContent = await TeriockTextEditor.renderTemplate(
@@ -201,7 +187,7 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
         system: {
           panels: [panel],
           tags: [
-            game.i18n.format("TERIOCK.DIALOGS.DeathBag.PANEL.pulledStonesTag", {
+            _loc("TERIOCK.DIALOGS.DeathBag.PANEL.pulledStonesTag", {
               count: toPullCount,
             }),
           ],

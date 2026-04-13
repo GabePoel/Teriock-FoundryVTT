@@ -1,5 +1,6 @@
+import { mix } from "../../../../helpers/construction.mjs";
 import { ucFirst } from "../../../../helpers/string.mjs";
-import { makeIcon, mix } from "../../../../helpers/utils.mjs";
+import { makeIcon } from "../../../../helpers/utils.mjs";
 import { EvaluationField, TextField } from "../../../fields/_module.mjs";
 import { ChildSettingsModel } from "../../../models/settings-models/_module.mjs";
 import { UsableDataMixin } from "../../../shared/mixins/_module.mjs";
@@ -65,15 +66,15 @@ export default function ChildSystemMixin(Base) {
       }
 
       /** @inheritDoc */
+      get SettingsFlagsDataModel() {
+        return ChildSettingsModel;
+      }
+
+      /** @inheritDoc */
       get _masterText() {
         return this.parent.master?.documentName === "Actor"
           ? ""
           : super._masterText;
-      }
-
-      /** @inheritDoc */
-      get _settingsFlagsDataModel() {
-        return ChildSettingsModel;
       }
 
       /** @returns {Teriock.Sheet.DisplayTag[]} */
@@ -112,26 +113,24 @@ export default function ChildSystemMixin(Base) {
         return [
           ...super.embedIcons,
           {
-            icon: TERIOCK.display.icons.ui.chat,
             action: "chatDoc",
-            tooltip: game.i18n.localize(
-              "TERIOCK.SYSTEMS.Child.MENU.shareWriteup",
-            ),
-            callback: async () => {
+            icon: TERIOCK.display.icons.ui.chat,
+            onClick: async () => {
               await this.parent.toMessage();
             },
-            condition: this.parent.isViewer,
+            tooltip: _loc("TERIOCK.SYSTEMS.Child.MENU.shareWriteup"),
+            visible: this.parent.isViewer,
           },
           {
+            action: "toggleDisabledDoc",
             icon: this.parent.disabled
               ? TERIOCK.display.icons.ui.disabled
               : TERIOCK.display.icons.ui.enabled,
-            action: "toggleDisabledDoc",
-            callback: () => this.parent.toggleDisabled(),
+            onClick: () => this.parent.toggleDisabled(),
             tooltip: this.parent.disabled
-              ? game.i18n.localize("TERIOCK.SYSTEMS.Child.EMBED.disabled")
-              : game.i18n.localize("TERIOCK.SYSTEMS.Child.EMBED.enabled"),
-            condition: this.parent.isOwner,
+              ? _loc("TERIOCK.SYSTEMS.Child.EMBED.disabled")
+              : _loc("TERIOCK.SYSTEMS.Child.EMBED.enabled"),
+            visible: this.parent.isOwner,
           },
         ];
       }
@@ -161,7 +160,7 @@ export default function ChildSystemMixin(Base) {
       /** @returns {boolean} */
       get makeSuppressed() {
         return (
-          !!(this.parent.elder && !this.parent.elder?.active) ||
+          this.parent.elder?.active === false ||
           !!this.qualifiers.suppressed.value ||
           !!this.parent.isEphemeral
         );
@@ -177,7 +176,7 @@ export default function ChildSystemMixin(Base) {
 
       /** @inheritDoc */
       get useText() {
-        return game.i18n.format("TERIOCK.SYSTEMS.Child.USAGE.use", {
+        return _loc("TERIOCK.SYSTEMS.Child.USAGE.use", {
           value: this.parent.name,
         });
       }
@@ -205,19 +204,19 @@ export default function ChildSystemMixin(Base) {
         entries.push(
           ...[
             {
-              name: this.useText,
+              label: this.useText,
               icon: makeIcon(this.useIcon, "contextMenu"),
-              callback: async () => {
+              onClick: async () => {
                 await this.use();
               },
-              condition: this.isUsable,
+              visible: this.isUsable,
               group: "usage",
             },
             {
-              name: game.i18n.localize("TERIOCK.SYSTEMS.Child.MENU.enable"),
+              label: _loc("TERIOCK.SYSTEMS.Child.MENU.enable"),
               icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
-              callback: this.parent.enable.bind(this.parent),
-              condition:
+              onClick: this.parent.enable.bind(this.parent),
+              visible:
                 this.parent.parent?.isOwner &&
                 this.parent.disabled &&
                 this.parent.type !== "equipment" &&
@@ -226,10 +225,10 @@ export default function ChildSystemMixin(Base) {
               group: "control",
             },
             {
-              name: game.i18n.localize("TERIOCK.SYSTEMS.Child.MENU.disable"),
+              label: _loc("TERIOCK.SYSTEMS.Child.MENU.disable"),
               icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
-              callback: this.parent.disable.bind(this.parent),
-              condition:
+              onClick: this.parent.disable.bind(this.parent),
+              visible:
                 this.parent.parent?.isOwner &&
                 !this.parent.disabled &&
                 this.parent.type !== "equipment" &&
@@ -239,20 +238,18 @@ export default function ChildSystemMixin(Base) {
               group: "control",
             },
             {
-              name: game.i18n.localize(
-                "TERIOCK.SYSTEMS.Child.MENU.openGmNotes",
-              ),
+              label: _loc("TERIOCK.SYSTEMS.Child.MENU.openGmNotes"),
               icon: makeIcon(TERIOCK.display.icons.ui.notes, "contextMenu"),
-              callback: async () => {
+              onClick: async () => {
                 await this.gmNotesOpen();
               },
-              condition: game.user.isGM,
+              visible: game.user.isGM,
               group: "open",
             },
             {
-              name: game.i18n.localize("TERIOCK.SYSTEMS.Child.MENU.openImage"),
+              label: _loc("TERIOCK.SYSTEMS.Child.MENU.openImage"),
               icon: makeIcon(TERIOCK.display.icons.ui.image, "contextMenu"),
-              callback: async () => {
+              onClick: async () => {
                 await new ImagePopout({
                   src: this.parent.img,
                   uuid: this.parent.uuid,
@@ -262,29 +259,27 @@ export default function ChildSystemMixin(Base) {
               group: "open",
             },
             {
-              name: game.i18n.localize("TERIOCK.SYSTEMS.Child.MENU.shareImage"),
+              label: _loc("TERIOCK.SYSTEMS.Child.MENU.shareImage"),
               icon: makeIcon(
                 TERIOCK.display.icons.ui.shareImage,
                 "contextMenu",
               ),
-              callback: this.parent.chatImage.bind(this.parent),
+              onClick: this.parent.chatImage.bind(this.parent),
               group: "share",
             },
             {
-              name: game.i18n.localize(
-                "TERIOCK.SYSTEMS.Child.MENU.shareWriteup",
-              ),
+              label: _loc("TERIOCK.SYSTEMS.Child.MENU.shareWriteup"),
               icon: makeIcon(TERIOCK.display.icons.ui.shareText, "contextMenu"),
-              callback: this.parent.toMessage.bind(this.parent),
+              onClick: this.parent.toMessage.bind(this.parent),
               group: "share",
             },
             {
-              name: game.i18n.localize("TERIOCK.SYSTEMS.Common.MENU.duplicate"),
+              label: _loc("TERIOCK.SYSTEMS.Common.MENU.duplicate"),
               icon: makeIcon(TERIOCK.display.icons.ui.duplicate, "contextMenu"),
-              callback: async () => {
+              onClick: async () => {
                 await this.parent.duplicate();
               },
-              condition: () =>
+              visible: () =>
                 this.parent._checkValidEditorDocument(doc, { self: false }),
               group: "document",
             },

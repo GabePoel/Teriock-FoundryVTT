@@ -52,9 +52,7 @@ export default (Base) => {
           const out = await selectAbilityDialog();
           if (!out) return;
           obj = out.toObject();
-          if (out.parent?.type === "wrapper") {
-            obj["_stats.compendiumSource"] = out.parent.uuid;
-          }
+          obj["_stats.compendiumSource"] = out.uuid;
         }
         if (decision && obj) {
           await this.document.createChildDocuments("ActiveEffect", [obj]);
@@ -123,10 +121,9 @@ export default (Base) => {
           )[0];
           await this.document.createChildDocuments("ActiveEffect", [
             {
-              name: game.i18n.format(
-                "TERIOCK.SHEETS.Common.MENU.Create.fluency",
-                { tradecraft: TERIOCK.reference.tradecrafts[tc] },
-              ),
+              name: _loc("TERIOCK.SHEETS.Common.MENU.Create.fluency", {
+                tradecraft: TERIOCK.reference.tradecrafts[tc],
+              }),
               type: "fluency",
               img: getImage("tradecrafts", TERIOCK.index.tradecrafts[tc]),
               system: { tradecraft: tc, field: f },
@@ -166,9 +163,7 @@ export default (Base) => {
           const out = await selectPropertyDialog();
           if (!out) return;
           obj = out.toObject();
-          if (out.parent?.type === "wrapper") {
-            obj["_stats.compendiumSource"] = out.parent.uuid;
-          }
+          obj["_stats.compendiumSource"] = out.uuid;
         }
         if (decision && obj) {
           await this.document.createChildDocuments("ActiveEffect", [obj]);
@@ -193,9 +188,7 @@ export default (Base) => {
         ]);
         const referenceRank =
           /**@type {TeriockRank} */ await selectDocumentDialog(possibleRanks, {
-            title: game.i18n.localize(
-              "TERIOCK.SHEETS.Common.MENU.CreateRank.title",
-            ),
+            title: _loc("TERIOCK.SHEETS.Common.MENU.CreateRank.title"),
             openable: true,
           });
         const rankNumber = referenceRank.system.classRank;
@@ -243,9 +236,7 @@ export default (Base) => {
           const chosenCombatAbility = await selectDocumentDialog(
             availableCombatAbilities,
             {
-              title: game.i18n.localize(
-                "TERIOCK.SHEETS.Common.MENU.CreateRank.selectCombat",
-              ),
+              title: _loc("TERIOCK.SHEETS.Common.MENU.CreateRank.selectCombat"),
               openable: true,
             },
           );
@@ -261,7 +252,7 @@ export default (Base) => {
           const chosenSupportAbility = await selectDocumentDialog(
             availableSupportAbilities,
             {
-              title: game.i18n.localize(
+              title: _loc(
                 "TERIOCK.SHEETS.Common.MENU.CreateRank.selectSupport",
               ),
               openable: true,
@@ -358,10 +349,8 @@ export default (Base) => {
 
 function newDocumentObj(type) {
   return {
-    name: game.i18n.format("TERIOCK.SHEETS.Common.MENU.Create.document", {
-      type: game.i18n.localize(
-        `TYPES.${TERIOCK.options.document[type].doc}.${type}`,
-      ),
+    name: _loc("TERIOCK.SHEETS.Common.MENU.Create.document", {
+      type: _loc(`TYPES.${TERIOCK.options.document[type].doc}.${type}`),
     }),
     type,
   };

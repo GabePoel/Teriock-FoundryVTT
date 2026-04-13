@@ -46,22 +46,14 @@ export function combatExpirationSourceTypeField() {
 export function combatExpirationMethodField() {
   return new SchemaField({
     roll: new StringField({
-      hint: game.i18n.localize(
-        "TERIOCK.SCHEMA.CombatExpiration.what.roll.hint",
-      ),
+      hint: _loc("TERIOCK.SCHEMA.CombatExpiration.what.roll.hint"),
       initial: "2d4kh1",
-      label: game.i18n.localize(
-        "TERIOCK.SCHEMA.CombatExpiration.what.roll.label",
-      ),
+      label: _loc("TERIOCK.SCHEMA.CombatExpiration.what.roll.label"),
     }),
     threshold: new NumberField({
-      hint: game.i18n.localize(
-        "TERIOCK.SCHEMA.CombatExpiration.what.threshold.hint",
-      ),
+      hint: _loc("TERIOCK.SCHEMA.CombatExpiration.what.threshold.hint"),
       initial: 4,
-      label: game.i18n.localize(
-        "TERIOCK.SCHEMA.CombatExpiration.what.threshold.label",
-      ),
+      label: _loc("TERIOCK.SCHEMA.CombatExpiration.what.threshold.label"),
     }),
     type: new StringField({
       choices: localizeChoices({
@@ -69,13 +61,9 @@ export function combatExpirationMethodField() {
         rolled: "TERIOCK.SCHEMA.CombatExpiration.what.type.choices.rolled",
         none: "TERIOCK.SCHEMA.CombatExpiration.what.type.choices.none",
       }),
-      hint: game.i18n.localize(
-        "TERIOCK.SCHEMA.CombatExpiration.what.type.hint",
-      ),
+      hint: _loc("TERIOCK.SCHEMA.CombatExpiration.what.type.hint"),
       initial: "none",
-      label: game.i18n.localize(
-        "TERIOCK.SCHEMA.CombatExpiration.what.type.label",
-      ),
+      label: _loc("TERIOCK.SCHEMA.CombatExpiration.what.type.label"),
     }),
   });
 }
@@ -114,6 +102,21 @@ export function combatExpirationTimingField() {
 }
 
 /**
+ * A change type field.
+ * @returns {EnhancedStringField}
+ */
+export function changeTypeField() {
+  return new EnhancedStringField({
+    choices: objectMap(ActiveEffect.CHANGE_TYPES, (t) => t.label, {
+      localize: true,
+    }),
+    initial: "add",
+    label: "TERIOCK.SCHEMA.QualifiedChange.type.label",
+    required: false,
+  });
+}
+
+/**
  * Field that represents an expanded change.
  * @returns {SchemaField}
  */
@@ -136,11 +139,6 @@ export function qualifiedChangeField() {
       initial: "",
       label: "TERIOCK.SCHEMA.QualifiedChange.key.label",
     }),
-    mode: new EnhancedNumberField({
-      choices: TERIOCK.options.effect.changeMode,
-      initial: 4,
-      label: "TERIOCK.SCHEMA.QualifiedChange.mode.label",
-    }),
     priority: new EnhancedNumberField({
       initial: 20,
       label: "TERIOCK.SCHEMA.QualifiedChange.priority.label",
@@ -156,12 +154,15 @@ export function qualifiedChangeField() {
       label: "TERIOCK.SCHEMA.QualifiedChange.target.label",
       nullable: false,
     }),
-    time: new EnhancedStringField({
-      choices: TERIOCK.options.change.timeLabels,
+    phase: new EnhancedStringField({
+      choices: objectMap(TERIOCK.options.change.phase, (p) => p.label, {
+        localize: true,
+      }),
       initial: "normal",
-      label: "TERIOCK.SCHEMA.QualifiedChange.time.label",
+      label: "TERIOCK.SCHEMA.QualifiedChange.phase.label",
       nullable: false,
     }),
+    type: changeTypeField(),
     value: new EnhancedStringField({
       initial: "",
       label: "TERIOCK.SCHEMA.QualifiedChange.value.label",
@@ -178,48 +179,21 @@ export function associationsField() {
     new SchemaField({
       cards: new ArrayField(
         new SchemaField({
-          color: new StringField({
-            nullable: true,
-            required: false,
-          }),
+          color: new StringField({ nullable: true, required: false }),
           id: new DocumentIdField(),
-          img: new FilePathField({
-            categories: ["IMAGE"],
-          }),
-          makeTooltip: new BooleanField({
-            initial: false,
-            required: false,
-          }),
+          img: new FilePathField({ categories: ["IMAGE"] }),
+          makeTooltip: new BooleanField({ initial: false, required: false }),
           name: new StringField(),
-          rescale: new BooleanField({
-            initial: false,
-            required: false,
-          }),
-          type: new StringField({
-            initial: "base",
-            required: false,
-          }),
+          rescale: new BooleanField({ initial: false, required: false }),
+          type: new StringField({ initial: "base", required: false }),
           uuid: new DocumentUUIDField(),
         }),
-        {
-          initial: [],
-          required: false,
-        },
+        { initial: [], required: false },
       ),
-      icon: new StringField({
-        nullable: true,
-        required: false,
-        initial: null,
-      }),
-      title: new StringField({
-        initial: "Associations",
-        required: false,
-      }),
+      icon: new StringField({ nullable: true, required: false, initial: null }),
+      title: new StringField({ initial: "Associations", required: false }),
     }),
-    {
-      initial: [],
-      required: false,
-    },
+    { initial: [], required: false },
   );
 }
 
@@ -247,24 +221,23 @@ export function blocksField() {
 export function barsField() {
   return new ArrayField(
     new SchemaField({
-      icon: new StringField({
-        initial: "",
-        required: false,
-      }),
-      label: new StringField({
-        nullable: true,
-        required: false,
-      }),
+      icon: new StringField({ initial: "", required: false }),
+      label: new StringField({ nullable: true, required: false }),
       wrappers: new ArrayField(new StringField(), {
         initial: [],
         required: false,
       }),
     }),
-    {
-      initial: [],
-      required: false,
-    },
+    { initial: [], required: false },
   );
+}
+
+/**
+ * A string that is usually null.
+ * @returns {StringField}
+ */
+function nullString() {
+  return new StringField({ initial: null, nullable: true, required: false });
 }
 
 /**
@@ -277,51 +250,16 @@ export function panelsField() {
       associations: associationsField(),
       bars: barsField(),
       blocks: blocksField(),
-      classes: new StringField({
-        nullable: true,
-        initial: null,
-        required: false,
-      }),
-      color: new StringField({
-        initial: null,
-        nullable: true,
-        required: false,
-      }),
-      font: new StringField({
-        nullable: true,
-        initial: null,
-        required: false,
-      }),
-      icon: new StringField({
-        nullable: true,
-        initial: null,
-        required: false,
-      }),
-      image: new StringField({
-        initial: null,
-        nullable: true,
-        required: false,
-      }),
-      label: new StringField({
-        nullable: true,
-        initial: null,
-        required: false,
-      }),
-      name: new StringField({
-        initial: null,
-        nullable: true,
-        required: false,
-      }),
-      uuid: new DocumentUUIDField({
-        initial: null,
-        nullable: true,
-        required: false,
-      }),
+      classes: nullString(),
+      color: nullString(),
+      font: nullString(),
+      icon: nullString(),
+      image: nullString(),
+      label: nullString(),
+      name: nullString(),
+      uuid: new DocumentUUIDField({ initial: null, nullable: true }),
     }),
-    {
-      initial: [],
-      required: false,
-    },
+    { initial: [], required: false },
   );
 }
 
@@ -329,20 +267,18 @@ export function panelsField() {
  * Field that sets block sizes.
  * @param {object} [options]
  * @param {Teriock.Keys.CardDisplaySize} [options.initial]
- * @param {string} [options.label]
+ * @param {string} [options.child]
  * @returns {StringField}
  */
 export function blockSizeField(options = {}) {
-  const {
-    initial = "medium",
-    label = game.i18n.localize("TERIOCK.SCHEMA.BlockSize.default"),
-  } = options;
+  const { initial = "medium", child = "TERIOCK.SCHEMA.BlockSize.default" } =
+    options;
   return new StringField({
     initial,
     choices: TERIOCK.options.display.sizes,
-    label: game.i18n.format("TERIOCK.SCHEMA.BlockSize.label", { name: label }),
-    hint: game.i18n.format("TERIOCK.SCHEMA.BlockSize.hint", {
-      name: label.toLocaleLowerCase(),
+    label: _loc("TERIOCK.SCHEMA.BlockSize.label", { name: _loc(child) }),
+    hint: _loc("TERIOCK.SCHEMA.BlockSize.hint", {
+      name: _loc(child).toLocaleLowerCase(),
     }),
   });
 }
@@ -351,21 +287,19 @@ export function blockSizeField(options = {}) {
  * Field that sets block gaps.
  * @param {object} [options]
  * @param {boolean} [options.initial]
- * @param {string} [options.label]
+ * @param {string} [options.child]
  * @returns {BooleanField}
  */
 export function blockGaplessField(options = {}) {
-  const {
-    initial = false,
-    label = game.i18n.localize("TERIOCK.SCHEMA.BlackGapless.default"),
-  } = options;
+  const { initial = false, child = "TERIOCK.SCHEMA.BlackGapless.default" } =
+    options;
   return new BooleanField({
     initial,
-    label: game.i18n.format("TERIOCK.SCHEMA.BlackGapless.label", {
-      name: label,
+    label: _loc("TERIOCK.SCHEMA.BlackGapless.label", {
+      name: _loc(child),
     }),
-    hint: game.i18n.format("TERIOCK.SCHEMA.BlackGapless.hint", {
-      name: label.toLocaleLowerCase(),
+    hint: _loc("TERIOCK.SCHEMA.BlackGapless.hint", {
+      name: _loc(child).toLocaleLowerCase(),
     }),
   });
 }
@@ -377,9 +311,9 @@ export function blockGaplessField(options = {}) {
 export function competenceField() {
   return new NumberField({
     choices: localizeChoices(competenceOptions.levels, { sort: false }),
-    hint: game.i18n.localize("TERIOCK.SCHEMA.Competence.hint"),
+    hint: _loc("TERIOCK.SCHEMA.Competence.hint"),
     initial: 0,
-    label: game.i18n.localize("TERIOCK.SCHEMA.Competence.label"),
+    label: _loc("TERIOCK.SCHEMA.Competence.label"),
     max: 2,
     min: 0,
     nullable: false,
@@ -399,9 +333,9 @@ export function attributeField(options = { unp: false, nullable: true }) {
     choices: options.unp
       ? TERIOCK.reference.statAttributes
       : TERIOCK.reference.attributes,
-    hint: game.i18n.localize("TERIOCK.SCHEMA.Attribute.hint"),
+    hint: _loc("TERIOCK.SCHEMA.Attribute.hint"),
     initial: options.nullable ? null : "int",
-    label: game.i18n.localize("TERIOCK.SCHEMA.Attribute.label"),
+    label: _loc("TERIOCK.SCHEMA.Attribute.label"),
     nullable: options.nullable,
     required: false,
   });
@@ -432,13 +366,9 @@ export function movementActionField() {
       objectMap(
         Object.fromEntries(
           Object.entries(CONFIG.Token.movement.actions).filter(([_k, v]) => {
-            if (typeof v.canSelect === "function") {
-              return v.canSelect();
-            } else if (typeof v.canSelect === "boolean") {
-              return v.canSelect;
-            } else {
-              return true;
-            }
+            if (typeof v.canSelect === "function") return v.canSelect();
+            else if (typeof v.canSelect === "boolean") return v.canSelect;
+            else return true;
           }),
         ),
         (t) => t.label,

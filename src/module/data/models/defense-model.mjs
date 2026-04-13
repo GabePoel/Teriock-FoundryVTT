@@ -1,14 +1,13 @@
+import { initialNumber } from "../fields/helpers/initializers.mjs";
 import EvaluationModel from "./evaluation-model.mjs";
 
 export default class DefenseModel extends EvaluationModel {
   /** @inheritDoc */
-  constructor(...args) {
-    super(...args);
-    this.bonus = 0;
+  static defineSchema() {
+    return Object.assign(super.defineSchema(), {
+      bonus: initialNumber(0),
+    });
   }
-
-  /** @type {number} */
-  bonus;
 
   /** @inheritDoc */
   get currentValue() {

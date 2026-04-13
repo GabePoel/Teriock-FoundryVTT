@@ -1,60 +1,54 @@
 _id: 94397b58f45081c1
-_key: '!items!94397b58f45081c1'
+_key: '!effects!94397b58f45081c1'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 94397b58f45081c1
-    _key: '!items.effects!94397b58f45081c1.94397b58f45081c1'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/green-drake-breath.webp
-    name: Green Drake Breath
-    system:
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '2'
-            type: formula
-      delivery: cone
-      duration:
-        raw: '0'
-        unit: instant
-      elements:
-        - nature
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: green-drake-breath
-      interaction: feat
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        raw: '15'
-        unit: ft
-      results:
-        fail: >-
-          <p>All @L[Property:Magic]{magic} @L[Category:Equipment]{items}
-          targeted and @L[Keyword:Bearing]{beared} by targets are
-          @L[Property:Destroyed]{destroyed}.</p>
-      targets:
-        - creature
-        - item
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/green-drake-breath.webp
 name: Green Drake Breath
-type: wrapper
+system:
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '2'
+        type: formula
+  delivery: cone
+  duration:
+    raw: '0'
+    unit: instant
+  elements:
+    - nature
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  identifier: green-drake-breath
+  interaction: feat
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    raw: '15'
+    unit: ft
+  results:
+    fail: >-
+      <p>All @L[Property:Magic]{magic} @L[Category:Equipment]{items} targeted
+      and @L[Keyword:Bearing]{beared} by targets are
+      @L[Property:Destroyed]{destroyed}.</p>
+  targets:
+    - creature
+    - item
+transfer: true
+type: ability

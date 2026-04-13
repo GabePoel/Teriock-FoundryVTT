@@ -1,56 +1,50 @@
 _id: 62dcc02fc8e87bc0
-_key: '!items!62dcc02fc8e87bc0'
+_key: '!effects!62dcc02fc8e87bc0'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 62dcc02fc8e87bc0
-    _key: '!items.effects!62dcc02fc8e87bc0.62dcc02fc8e87bc0'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/chi-rupture.webp
-    name: Chi Rupture
-    system:
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: missile
-      duration:
-        raw: '1'
-        unit: minute
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: chi-rupture
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 2
-      powerSources:
-        - spiritual
-      range:
-        raw: '30'
-        unit: ft
-      results:
-        hit: >-
-          <p>Target is @L[Keyword:Vulnerable]{vulnerable} to all
-          @L[Category:Attack abilities]{attacks}.</p>
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/chi-rupture.webp
 name: Chi Rupture
-type: wrapper
+system:
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: missile
+  duration:
+    raw: '1'
+    unit: minute
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: chi-rupture
+  interaction: attack
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 2
+  powerSources:
+    - spiritual
+  range:
+    raw: '30'
+    unit: ft
+  results:
+    hit: >-
+      <p>Target is @L[Keyword:Vulnerable]{vulnerable} to all @L[Category:Attack
+      abilities]{attacks}.</p>
+  targets:
+    - creature
+transfer: true
+type: ability

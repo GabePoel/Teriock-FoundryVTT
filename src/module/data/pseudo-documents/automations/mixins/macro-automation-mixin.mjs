@@ -1,6 +1,6 @@
+import { mix } from "../../../../helpers/construction.mjs";
 import { resolveDocument } from "../../../../helpers/resolve.mjs";
 import { lcFirst } from "../../../../helpers/string.mjs";
-import { mix } from "../../../../helpers/utils.mjs";
 import { MacroActivation } from "../../activations/_module.mjs";
 import DisplayAutomationMixin from "./display-automation-mixin.mjs";
 import TriggerAutomationMixin from "./trigger-automation-mixin.mjs";

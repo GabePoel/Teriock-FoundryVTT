@@ -1,57 +1,50 @@
 _id: 379c18aec5654894
-_key: '!items!379c18aec5654894'
+_key: '!effects!379c18aec5654894'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 379c18aec5654894
-    _key: '!items.effects!379c18aec5654894.379c18aec5654894'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/move.webp
-    name: Move
-    system:
-      basic: true
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - movement
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: intrinsic
-      identifier: move
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>You [[lookup name style=lc]] on a distance up to your
-          @L[Core:Movement Speed]{movement speed} on the ground. If you have a
-          @L[Core:Movement Speed]{fly speed} or @L[Core:Movement Speed]{swim
-          speed} then you may [[lookup name style=lc]] in the air or in water
-          accordingly. The same applies for other types of [[lookup name
-          style=lc]]ment as well.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/move.webp
 name: Move
-type: wrapper
+system:
+  basic: true
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - movement
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: intrinsic
+  identifier: move
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>You [[lookup name style=lc]] on a distance up to your @L[Core:Movement
+      Speed]{movement speed} on the ground. If you have a @L[Core:Movement
+      Speed]{fly speed} or @L[Core:Movement Speed]{swim speed} then you may
+      [[lookup name style=lc]] in the air or in water accordingly. The same
+      applies for other types of [[lookup name style=lc]]ment as well.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  targets:
+    - self
+transfer: true
+type: ability

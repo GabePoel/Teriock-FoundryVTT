@@ -43,6 +43,18 @@ export function rankSort(ranks) {
     if (a.system.innate !== b.system.innate) {
       return a.system.innate ? -1 : 1;
     }
+    if (
+      a.system.archetype === "everyman" &&
+      b.system.archetype !== "everyman"
+    ) {
+      return -1;
+    }
+    if (
+      a.system.archetype !== "everyman" &&
+      b.system.archetype === "everyman"
+    ) {
+      return 1;
+    }
     if (a.system.className !== b.system.className) {
       return a.system.className.localeCompare(b.system.className);
     }

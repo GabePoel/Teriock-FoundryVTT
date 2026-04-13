@@ -8,24 +8,24 @@ export default class TeriockChatLog extends ChatLog {
     return [
       ...super._getEntryContextOptions(),
       {
-        name: "Expand All",
+        label: "TERIOCK.MESSAGE.Menu.expandAll",
         icon: makeIcon(TERIOCK.display.icons.ui.expand, "contextMenu"),
-        callback: (li) => {
+        onClick: (_ev, li) => {
           li.querySelectorAll(".collapsable").forEach((el) => {
             el.classList.toggle("collapsed", false);
           });
         },
-        condition: (li) => !!li.querySelector(".collapsable.collapsed"),
+        visible: (li) => !!li.querySelector(".collapsable.collapsed"),
       },
       {
-        name: "Collapse All",
+        label: "TERIOCK.MESSAGE.Menu.collapseAll",
         icon: makeIcon(TERIOCK.display.icons.ui.collapse, "contextMenu"),
-        callback: (li) => {
+        onClick: (_ev, li) => {
           li.querySelectorAll(".collapsable").forEach((el) => {
             el.classList.toggle("collapsed", true);
           });
         },
-        condition: (li) => !!li.querySelector(".collapsable:not(.collapsed)"),
+        visible: (li) => !!li.querySelector(".collapsable:not(.collapsed)"),
       },
     ];
   }

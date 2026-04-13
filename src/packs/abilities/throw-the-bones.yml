@@ -1,60 +1,55 @@
 _id: 0cdeb668abfa5c63
-_key: '!items!0cdeb668abfa5c63'
+_key: '!effects!0cdeb668abfa5c63'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 0cdeb668abfa5c63
-    _key: '!items.effects!0cdeb668abfa5c63.0cdeb668abfa5c63'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/throw-the-bones.webp
-    name: Throw the Bones
-    system:
-      class: berserker
-      competence:
-        raw: 0
-      delivery: sight
-      duration:
-        raw: '24'
-        unit: hour
-      effectTypes:
-        - immunity
-      endCondition: >-
-        <p>Once the @L[Keyword:Immune]{immunity} provided by [[lookup name]] is
-        used, this effect ends.</p>
-      executionTime: 10 Minutes
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: throw-the-bones
-      interaction: manifest
-      maneuver: slow
-      overview:
-        base: >-
-          <p>Target is @L[Keyword:Immune]{immune} to the next use of a
-          @L[Category:Spells]{spells} that would affect them.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - primal
-      range:
-        raw: '5'
-        unit: ft
-      ritual: true
-      skill: true
-      standard: true
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/throw-the-bones.webp
 name: Throw the Bones
-type: wrapper
+system:
+  class: berserker
+  competence:
+    raw: 0
+  delivery: sight
+  duration:
+    raw: '24'
+    unit: hour
+  effectTypes:
+    - immunity
+  endCondition: >-
+    <p>Once the @L[Keyword:Immune]{immunity} provided by [[lookup name]] is
+    used, this effect ends.</p>
+  executionTime:
+    base: 10 Minutes
+    slow:
+      raw: '10'
+      unit: minute
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: throw-the-bones
+  interaction: manifest
+  maneuver: slow
+  mundane: false
+  overview:
+    base: >-
+      <p>Target is @L[Keyword:Immune]{immune} to the next use of a
+      @L[Category:Spells]{spells} that would affect them.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - primal
+  range:
+    raw: '5'
+    unit: ft
+  ritual: true
+  skill: true
+  standard: true
+  targets:
+    - creature
+transfer: true
+type: ability

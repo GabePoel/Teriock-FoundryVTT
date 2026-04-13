@@ -1,7 +1,11 @@
-<div class="teriock-automation-container collapsible">
+<div
+  class="teriock-automation-container collapsable{{#if automationCollapsed}} collapsed{{/if}}"
+  data-automation-id="{{automation.id}}"
+>
   <header
-    class="teriock-automation-header"
-    data-action="toggle-collapse"
+    class="teriock-automation-header draggable"
+    data-action="toggleAutomationCollapse"
+    data-uuid="{{automation.puuid}}"
   >
     <div class="teriock-automation-header-name">{{localize automation.label}}</div>
     <div class="teriock-automation-header-buttons">
@@ -18,8 +22,8 @@
             {{else}}
             data-tooltip="{{localize "TERIOCK.AUTOMATIONS.Base.TOOLTIPS.crit.base.off"}}"
             {{/if}}
-            data-path="{{automation.fieldPath}}.{{automation.id}}.crit"
-            name="_source.{{automation.fieldPath}}.{{automation.id}}.crit"
+            data-path="{{automation.localPath}}.crit"
+            name="_source.{{automation.localPath}}.crit"
           >
             {{makeIcon @root/TERIOCK.display.icons.consequence.none (ifThen
               (has automation.crit 0)
@@ -38,8 +42,8 @@
             {{else}}
             data-tooltip="{{localize "TERIOCK.AUTOMATIONS.Base.TOOLTIPS.crit.critical.off"}}"
             {{/if}}
-            data-path="{{automation.fieldPath}}.{{automation.id}}.crit"
-            name="_source.{{automation.fieldPath}}.{{automation.id}}.crit"
+            data-path="{{automation.localPath}}.crit"
+            name="_source.{{automation.localPath}}.crit"
           >
             {{makeIcon @root/TERIOCK.display.icons.consequence.crit (ifThen
               (has automation.crit 1)
@@ -62,8 +66,8 @@
             {{else}}
             data-tooltip="{{localize "TERIOCK.AUTOMATIONS.Base.TOOLTIPS.competence.base.off"}}"
             {{/if}}
-            data-path="{{automation.fieldPath}}.{{automation.id}}.competencies"
-            name="_source.{{automation.fieldPath}}.{{automation.id}}.competencies"
+            data-path="{{automation.localPath}}.competencies"
+            name="_source.{{automation.localPath}}.competencies"
           >
             {{makeIcon @root/TERIOCK.display.icons.competence.none (ifThen
               (has automation.competencies 0)
@@ -82,8 +86,8 @@
             {{else}}
             data-tooltip="{{localize "TERIOCK.AUTOMATIONS.Base.TOOLTIPS.competence.proficient.off"}}"
             {{/if}}
-            data-path="{{automation.fieldPath}}.{{automation.id}}.competencies"
-            name="_source.{{automation.fieldPath}}.{{automation.id}}.competencies"
+            data-path="{{automation.localPath}}.competencies"
+            name="_source.{{automation.localPath}}.competencies"
           >
             {{makeIcon @root/TERIOCK.display.icons.competence.proficient (ifThen
               (has automation.competencies 1)
@@ -102,8 +106,8 @@
             {{else}}
             data-tooltip="{{localize "TERIOCK.AUTOMATIONS.Base.TOOLTIPS.competence.fluent.off"}}"
             {{/if}}
-            data-path="{{automation.fieldPath}}.{{automation.id}}.competencies"
-            name="_source.{{automation.fieldPath}}.{{automation.id}}.competencies"
+            data-path="{{automation.localPath}}.competencies"
+            name="_source.{{automation.localPath}}.competencies"
           >
             {{makeIcon @root/TERIOCK.display.icons.competence.fluent (ifThen
               (has automation.competencies 2)
@@ -126,8 +130,8 @@
             {{else}}
             data-tooltip="{{localize "TERIOCK.AUTOMATIONS.Base.TOOLTIPS.heighten.base.off"}}"
             {{/if}}
-            data-path="{{automation.fieldPath}}.{{automation.id}}.heighten"
-            name="_source.{{automation.fieldPath}}.{{automation.id}}.heighten"
+            data-path="{{automation.localPath}}.heighten"
+            name="_source.{{automation.localPath}}.heighten"
           >
             {{makeIcon @root/TERIOCK.display.icons.ability.unheightened (ifThen
               (has automation.heighten 0)
@@ -146,8 +150,8 @@
             {{else}}
             data-tooltip="{{localize "TERIOCK.AUTOMATIONS.Base.TOOLTIPS.heighten.heightened.off"}}"
             {{/if}}
-            data-path="{{automation.fieldPath}}.{{automation.id}}.heighten"
-            name="_source.{{automation.fieldPath}}.{{automation.id}}.heighten"
+            data-path="{{automation.localPath}}.heighten"
+            name="_source.{{automation.localPath}}.heighten"
           >
             {{makeIcon @root/TERIOCK.display.icons.ability.heightened (ifThen
               (has automation.heighten 1)
@@ -168,16 +172,20 @@
       </div>
     </div>
   </header>
-  <div class="teriock-automation-content teriock-form-container">
-    {{#if (exists messages)}}
-      <ul class="notification-container">
-        {{#each messages as |message|}}
-          <li class="notification {{#if message.level}}{{message.level}}{{else}}info{{/if}}">
-            <span>{{localize message.text}}</span>
-          </li>
-        {{/each}}
-      </ul>
-    {{/if}}
-    {{{formEditor}}}
+  <div class="teriock-automation-collapse-target">
+    <div class="teriock-automation-spacer">
+      <div class="teriock-automation-content teriock-form-container">
+        {{#if (exists messages)}}
+          <ul class="notification-container">
+            {{#each messages as |message|}}
+              <li class="notification {{#if message.level}}{{message.level}}{{else}}info{{/if}}">
+                <span>{{localize message.text}}</span>
+              </li>
+            {{/each}}
+          </ul>
+        {{/if}}
+        {{{formEditor}}}
+      </div>
+    </div>
   </div>
 </div>

@@ -1,7 +1,7 @@
 import PropagationDataMixin from "../../data/shared/mixins/propagation-data-mixin.mjs";
+import { mix } from "../../helpers/construction.mjs";
 import { systemPath } from "../../helpers/path.mjs";
 import { resolveDocuments } from "../../helpers/resolve.mjs";
-import { mix } from "../../helpers/utils.mjs";
 import { TeriockActor } from "../_module.mjs";
 import { TypeCollection } from "../collections/_module.mjs";
 import {
@@ -19,8 +19,8 @@ export default function CommonDocumentMixin(Base) {
   //noinspection JSUnusedGlobalSymbols
   return (
     /**
-     * @extends BaseDocument
      * @mixes PropagationData
+     * @mixes BaseDocument
      * @mixes ChangeableDocument
      * @mixes EmbedCardDocument
      * @mixes PanelDocument
@@ -44,8 +44,8 @@ export default function CommonDocumentMixin(Base) {
       }
 
       /** @inheritDoc */
-      get _settingsFlagsDataModel() {
-        return this.system._settingsFlagsDataModel;
+      get SettingsFlagsDataModel() {
+        return this.system.SettingsFlagsDataModel;
       }
 
       /**
@@ -99,11 +99,6 @@ export default function CommonDocumentMixin(Base) {
         return this.system.constructor.metadata;
       }
 
-      /** @inheritDoc */
-      get panelParts() {
-        return this.system.panelParts;
-      }
-
       /**
        * Array containing all visible children.
        * @returns {ChildDocument[]}
@@ -140,7 +135,10 @@ export default function CommonDocumentMixin(Base) {
         const yes = await super._preCreate(data, options, user);
         if (yes === false) return false;
 
-        if (!data.img) {
+        if (
+          !data.img &&
+          TERIOCK.options.document[this.type]?.doc === this.documentName
+        ) {
           this.updateSource({
             img: systemPath(`icons/documents/${data.type}.svg`),
           });
@@ -209,6 +207,11 @@ export default function CommonDocumentMixin(Base) {
        */
       async getEffectiveChildren() {
         return this.getVisibleChildren();
+      }
+
+      /** @inheritDoc */
+      async getPanelParts() {
+        return this.system.getPanelParts();
       }
 
       /**

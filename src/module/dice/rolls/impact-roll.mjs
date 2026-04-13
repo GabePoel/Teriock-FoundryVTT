@@ -55,7 +55,7 @@ export default class ImpactRoll extends BaseRoll {
    */
   #setImpactFlavor() {
     if (this.hasImpact) {
-      this.options.flavor ??= game.i18n.format("TERIOCK.ROLLS.Base.name", {
+      this.options.flavor ??= _loc("TERIOCK.ROLLS.Base.name", {
         value: impactOptions[this.impact]?.label,
       });
     }

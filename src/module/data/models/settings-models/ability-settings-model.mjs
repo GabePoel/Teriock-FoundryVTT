@@ -4,61 +4,21 @@ const { fields } = foundry.data;
 
 export default class AbilitySettingsModel extends ChildSettingsModel {
   /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [
+    ...super.LOCALIZATION_PREFIXES,
+    "TERIOCK.MODELS.AbilitySettings",
+  ];
+
+  /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      promptCostGp: new fields.BooleanField({
-        hint: game.i18n.localize(
-          "TERIOCK.MODELS.AbilitySettings.promptCostGp.hint",
-        ),
-        initial: true,
-        label: game.i18n.localize(
-          "TERIOCK.MODELS.AbilitySettings.promptCostGp.label",
-        ),
-      }),
-      promptCostHp: new fields.BooleanField({
-        hint: game.i18n.localize(
-          "TERIOCK.MODELS.AbilitySettings.promptCostHp.hint",
-        ),
-        initial: true,
-        label: game.i18n.localize(
-          "TERIOCK.MODELS.AbilitySettings.promptCostHp.label",
-        ),
-      }),
-      promptCostLp: new fields.BooleanField({
-        hint: game.i18n.localize(
-          "TERIOCK.MODELS.AbilitySettings.promptCostLp.hint",
-        ),
-        initial: true,
-        label: game.i18n.localize(
-          "TERIOCK.MODELS.AbilitySettings.promptCostLp.label",
-        ),
-      }),
-      promptCostMp: new fields.BooleanField({
-        hint: game.i18n.localize(
-          "TERIOCK.MODELS.AbilitySettings.promptCostMp.hint",
-        ),
-        initial: true,
-        label: game.i18n.localize(
-          "TERIOCK.MODELS.AbilitySettings.promptCostMp.label",
-        ),
-      }),
-      promptHeighten: new fields.BooleanField({
-        hint: game.i18n.localize(
-          "TERIOCK.MODELS.AbilitySettings.promptHeighten.hint",
-        ),
-        initial: true,
-        label: game.i18n.localize(
-          "TERIOCK.MODELS.AbilitySettings.promptHeighten.label",
-        ),
-      }),
-      promptTemplate: new fields.BooleanField({
-        hint: game.i18n.localize(
-          "TERIOCK.MODELS.AbilitySettings.promptTemplate.hint",
-        ),
-        initial: true,
-        label: game.i18n.localize(
-          "TERIOCK.MODELS.AbilitySettings.promptTemplate.label",
-        ),
+      execution: new fields.SchemaField({
+        promptCostGp: new fields.BooleanField({ initial: true }),
+        promptCostHp: new fields.BooleanField({ initial: true }),
+        promptCostLp: new fields.BooleanField({ initial: true }),
+        promptCostMp: new fields.BooleanField({ initial: true }),
+        promptHeighten: new fields.BooleanField({ initial: true }),
+        promptTemplate: new fields.BooleanField({ initial: true }),
       }),
     });
   }

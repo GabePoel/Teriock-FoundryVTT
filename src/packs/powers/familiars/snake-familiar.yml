@@ -1,7 +1,7 @@
 _id: 177f14009521cab2
 _key: '!items!177f14009521cab2'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.23
@@ -9,11 +9,11 @@ effects:
   - _id: iaIlHIRvPyhxJuQV
     _key: '!items.effects!177f14009521cab2.iaIlHIRvPyhxJuQV'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.9c9a75c65c73fc72
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.9c9a75c65c73fc72
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/crit-elite.webp
     name: Crit Elite
     system:
@@ -37,18 +37,18 @@ effects:
           _id: e789ed5e109ebd1a
           changes:
             - key: system.damage
-              mode: 0
+              phase: normal
               priority: 100
               qualifier: '@dmg'
               target: armament
-              time: normal
+              type: boost
               value: '1'
             - key: system.vitals
-              mode: 5
+              phase: normal
               priority: 10
               qualifier: '1'
               target: armament
-              time: normal
+              type: override
               value: 'true'
           competencies:
             - 0
@@ -102,15 +102,16 @@ effects:
       sustained: true
       targets:
         - self
+    transfer: true
     type: ability
   - _id: 208X9rXRFVKMIllx
     _key: '!items.effects!177f14009521cab2.208X9rXRFVKMIllx'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.91b30624f59c08d8
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.91b30624f59c08d8
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/slay.webp
     name: Slay
     system:
@@ -188,11 +189,12 @@ effects:
       trigger: >-
         <p>You have just hit a creature with an @L[Category:Attack
         abilities]{attack} that dealt them @L[Core:Damage]{damage} from it.</p>
+    transfer: true
     type: ability
   - _id: snakeTamer000000
     _key: '!items.effects!177f14009521cab2.snakeTamer000000'
     _stats:
-      coreVersion: '13'
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.10.23
@@ -205,6 +207,7 @@ effects:
       field: survivalist
       identifier: snake-tamer
       tradecraft: tamer
+    transfer: true
     type: fluency
 folder: 31fe961f0b485187
 img: systems/teriock/src/icons/abilities/familiar-bond.webp

@@ -1,70 +1,63 @@
 _id: f9f109071131cc03
-_key: '!items!f9f109071131cc03'
+_key: '!effects!f9f109071131cc03'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: f9f109071131cc03
-    _key: '!items.effects!f9f109071131cc03.f9f109071131cc03'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/reveal-unseen-aura.webp
-    name: Reveal Unseen Aura
-    system:
-      class: paladin
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: aura
-      duration:
-        raw: '0'
-        unit: instant
-      elements:
-        - storm
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: unp
-      form: normal
-      identifier: reveal-unseen-aura
-      interaction: feat
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - divine
-      range:
-        raw: '10'
-        unit: ft
-      results:
-        fail: >-
-          <p>Targets are no longer @L[Condition:Hidden]{hidden} nor
-          @L[Condition:Invisible]{invisible} and you can see any hidden doors,
-          traps, and invisible ink within range. You can also sense the presence
-          of any @L[Keyword:Illusionary]{illusions} within range, although they
-          are not @L[Ability:Disbelieve]{disbelieved}. Likewise, you detect the
-          presence of any @L[Condition:Ethereal]{Ethereal} or
-          @L[Condition:Disguised]{disguised} creatures within range, but they
-          remain @L[Condition:Ethereal]{Ethereal} or
-          @L[Condition:Disguised]{disguised}.</p>
-      skill: true
-      standard: true
-      targets:
-        - area
-        - creature
-        - item
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/reveal-unseen-aura.webp
 name: Reveal Unseen Aura
-type: wrapper
+system:
+  class: paladin
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: aura
+  duration:
+    raw: '0'
+    unit: instant
+  elements:
+    - storm
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: unp
+  form: normal
+  identifier: reveal-unseen-aura
+  interaction: feat
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - divine
+  range:
+    raw: '10'
+    unit: ft
+  results:
+    fail: >-
+      <p>Targets are no longer @L[Condition:Hidden]{hidden} nor
+      @L[Condition:Invisible]{invisible} and you can see any hidden doors,
+      traps, and invisible ink within range. You can also sense the presence of
+      any @L[Keyword:Illusionary]{illusions} within range, although they are not
+      @L[Ability:Disbelieve]{disbelieved}. Likewise, you detect the presence of
+      any @L[Condition:Ethereal]{Ethereal} or @L[Condition:Disguised]{disguised}
+      creatures within range, but they remain @L[Condition:Ethereal]{Ethereal}
+      or @L[Condition:Disguised]{disguised}.</p>
+  skill: true
+  standard: true
+  targets:
+    - area
+    - creature
+    - item
+transfer: true
+type: ability

@@ -1,7 +1,7 @@
 _id: 84f4744c0bf02229
 _key: '!actors!84f4744c0bf02229'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.23
@@ -12,20 +12,20 @@ items:
     _key: '!actors.items!84f4744c0bf02229.84f4744c0bf02229'
     _stats:
       compendiumSource: Compendium.teriock.species.Item.84f4744c0bf02229
-      coreVersion: '13'
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     effects:
       - _id: NYznSyAyu41c5m15
         _key: >-
           !actors.items.effects!84f4744c0bf02229.84f4744c0bf02229.NYznSyAyu41c5m15
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.235923981d1ebd09
-          coreVersion: '13'
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.235923981d1ebd09
+          coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.11.6
+          systemVersion: 0.12.0
         img: systems/teriock/src/icons/abilities/constructed-body.webp
         name: Constructed Body
         system:
@@ -101,6 +101,7 @@ items:
             unit: self
           targets:
             - self
+        transfer: true
         type: ability
     folder: 13ef6e80a087d7cf
     img: systems/teriock/src/icons/creatures/artifact-animal.webp
@@ -142,7 +143,6 @@ items:
 name: Artifact Animal
 prototypeToken:
   actorLink: false
-  alpha: 1
   appendNumber: false
   bar1:
     attribute: hp
@@ -155,36 +155,22 @@ prototypeToken:
   ring:
     enabled: true
   texture:
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     src: systems/teriock/src/icons/tokens/artifact-animal.webp
   turnMarker:
     disposition: false
     mode: 1
   width: 1
 system:
-  combat:
-    attackPenalty: 0
-    hasReaction: true
   detection:
     hiding:
       raw: '@snk.pas'
     perceiving:
       raw: '@per.pas'
   hp:
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
     value: 1
   identifier: artifact-animal
   initiative: 1d20 + @mov
   mp:
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
     value: 1
   presence:
     max: 1
@@ -192,11 +178,7 @@ system:
     value: 0
   scaling:
     brScale: true
-    lvl: 1
   size:
     number:
       raw: '3'
-  weight:
-    self:
-      raw: pow(3 + @size, 3)
 type: creature

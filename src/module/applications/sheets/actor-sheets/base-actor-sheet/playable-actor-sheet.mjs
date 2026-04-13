@@ -1,4 +1,4 @@
-import { mix } from "../../../../helpers/utils.mjs";
+import { mix } from "../../../../helpers/construction.mjs";
 import BaseActorSheet from "./base-actor-sheet.mjs";
 import * as parts from "./parts/_module.mjs";
 
@@ -47,9 +47,7 @@ export default class TeriockPlayableActorSheet extends mix(
       ui.notifications.warn("TERIOCK.SHEETS.Actor.NOTIFICATIONS.noSpecies", {
         format: {
           name: this.document.name,
-          compendium: game.i18n.localize(
-            game.packs.get("teriock.species").title,
-          ),
+          compendium: _loc(game.packs.get("teriock.species").title),
         },
         localize: true,
       });

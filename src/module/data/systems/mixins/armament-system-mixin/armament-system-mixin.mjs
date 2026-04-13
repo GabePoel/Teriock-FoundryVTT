@@ -4,7 +4,7 @@ import {
   formulaExists,
 } from "../../../../helpers/formula.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
-import { makeIcon } from "../../../../helpers/utils.mjs";
+import { makeIcon, objectMap } from "../../../../helpers/utils.mjs";
 import {
   EvaluationField,
   FormulaField,
@@ -79,32 +79,28 @@ export default function ArmamentSystemMixin(Base) {
             nullable: true,
             choices: TERIOCK.reference.weaponFightingStyles,
           }),
-          notes: new TextField({
-            initial: "",
-          }),
+          impacts: new fields.SetField(
+            new fields.StringField({
+              choices: objectMap(TERIOCK.options.impact, (i) => i.take, {
+                filter: (c) => !c?.hidden,
+                localize: true,
+              }),
+            }),
+            { initial: ["damage"] },
+          ),
+          notes: new TextField({ initial: "" }),
           range: new fields.SchemaField({
             long: new EvaluationField({ model: RangeModel, label: "Range" }),
-            melee: new fields.BooleanField({
-              initial: true,
-            }),
-            ranged: new fields.BooleanField({
-              initial: false,
-            }),
-            short: new EvaluationField({
-              model: RangeModel,
-            }),
+            melee: new fields.BooleanField({ initial: true }),
+            ranged: new fields.BooleanField({ initial: false }),
+            short: new EvaluationField({ model: RangeModel }),
           }),
-          specialRules: new TextField({
-            initial: "",
-          }),
+          specialRules: new TextField({ initial: "", persisted: false }),
           spellTurning: new fields.BooleanField({
             initial: false,
             nullable: false,
           }),
-          vitals: new fields.BooleanField({
-            initial: false,
-            nullable: false,
-          }),
+          vitals: new fields.BooleanField({ initial: false, nullable: false }),
         });
       }
 
@@ -148,24 +144,23 @@ export default function ArmamentSystemMixin(Base) {
         return [...this._propertyTags, ...this._rangeTags];
       }
 
-      /** @returns {Teriock.MessageData.MessageBar} */
+      /** @returns {Teriock.Messages.MessageBar} */
       get _attackBar() {
         return {
           icon: TERIOCK.display.icons.interaction.attack,
-          label: game.i18n.localize("TERIOCK.SYSTEMS.Armament.PANELS.attack"),
+          label: _loc("TERIOCK.SYSTEMS.Armament.PANELS.attack"),
           wrappers: [
             this.piercing.value,
             ...this._damageWrappers,
             formulaExists(this.hitBonus)
-              ? game.i18n.format("TERIOCK.SYSTEMS.Armament.PANELS.hitBonus", {
+              ? _loc("TERIOCK.SYSTEMS.Armament.PANELS.hitBonus", {
                   value: this.hitBonus,
                 })
               : "",
             this.attackPenalty
-              ? game.i18n.format(
-                  "TERIOCK.SYSTEMS.Armament.PANELS.attackPenalty",
-                  { value: this.attackPenalty },
-                )
+              ? _loc("TERIOCK.SYSTEMS.Armament.PANELS.attackPenalty", {
+                  value: this.attackPenalty,
+                })
               : "",
           ],
         };
@@ -176,14 +171,14 @@ export default function ArmamentSystemMixin(Base) {
         return this.hasAttack ? [this.summarizedAttack] : [];
       }
 
-      /** @returns {Teriock.MessageData.MessageBar} */
+      /** @returns {Teriock.Messages.MessageBar} */
       get _defenseBar() {
         return {
           icon: TERIOCK.display.icons.interaction.block,
-          label: game.i18n.format("TERIOCK.SYSTEMS.Armament.PANELS.defense"),
+          label: _loc("TERIOCK.SYSTEMS.Armament.PANELS.defense"),
           wrappers: [
             this.av.value
-              ? game.i18n.format("TERIOCK.SYSTEMS.Armament.PANELS.av", {
+              ? _loc("TERIOCK.SYSTEMS.Armament.PANELS.av", {
                   value: this.av.value,
                 })
               : "",
@@ -250,20 +245,14 @@ export default function ArmamentSystemMixin(Base) {
       /** @inheritDoc */
       get displayFields() {
         return [
-          "system.description",
           "system.notes",
-          "system.flaws",
+          ...super.displayFields,
           {
             classes: TERIOCK.display.panel.classes.derived,
             editable: false,
-            label: game.i18n.format(
-              "TERIOCK.SYSTEMS.Armament.FIELDS.fightingStyle.named",
-              {
-                name: TERIOCK.reference.weaponFightingStyles[
-                  this.fightingStyle
-                ],
-              },
-            ),
+            label: _loc("TERIOCK.SYSTEMS.Armament.FIELDS.fightingStyle.named", {
+              name: TERIOCK.reference.weaponFightingStyles[this.fightingStyle],
+            }),
             path: "system.specialRules",
           },
         ];
@@ -317,7 +306,7 @@ export default function ArmamentSystemMixin(Base) {
        * @returns {string}
        */
       get summarizedAttack() {
-        return game.i18n.format("TERIOCK.SYSTEMS.Armament.PANELS.damage", {
+        return _loc("TERIOCK.SYSTEMS.Armament.PANELS.damage", {
           value: this.hasTwoHandedAttack
             ? `${this.damage.base} / ${this.damage.twoHanded}`
             : this.damage.base,
@@ -329,7 +318,7 @@ export default function ArmamentSystemMixin(Base) {
        * @returns {string}
        */
       get summarizedBlock() {
-        return game.i18n.format("TERIOCK.SYSTEMS.Armament.PANELS.bv", {
+        return _loc("TERIOCK.SYSTEMS.Armament.PANELS.bv", {
           value: this.bv.formula,
         });
       }
@@ -349,7 +338,7 @@ export default function ArmamentSystemMixin(Base) {
         if (game.teriock.getSetting("rollAttackOnArmamentUse")) {
           await this.actor?.useDocument("basic-attack", { type: "ability" });
         }
-        options.deals ??= this.deals;
+        options.impacts ??= this.impacts;
         await new ArmamentExecution(options).execute();
       }
 
@@ -357,15 +346,13 @@ export default function ArmamentSystemMixin(Base) {
       getCardContextMenuEntries(doc) {
         const entries = [
           {
-            name: game.i18n.localize(
-              "TERIOCK.SYSTEMS.Equipment.USAGE.twoHanded",
-            ),
+            label: _loc("TERIOCK.SYSTEMS.Equipment.USAGE.twoHanded"),
             icon: makeIcon(
               TERIOCK.display.icons.equipment.twoHanded,
               "contextMenu",
             ),
-            callback: this.use.bind(this, { twoHanded: true }),
-            condition: this.parent.isOwner && this.hasTwoHandedAttack,
+            onClick: this.use.bind(this, { twoHanded: true }),
+            visible: this.parent.isOwner && this.hasTwoHandedAttack,
             group: "usage",
           },
         ];
@@ -395,6 +382,9 @@ export default function ArmamentSystemMixin(Base) {
         for (const p of this.props || new Set()) {
           data[`prop.${p}`] = 1;
         }
+        for (const impact of this.impacts) {
+          data[`impact.${impact}`] = 1;
+        }
         for (const equipmentClass of this.equipmentClasses) {
           data[`class.${equipmentClass}`] = 1;
         }
@@ -409,10 +399,6 @@ export default function ArmamentSystemMixin(Base) {
         if (!formulaExists(this.damage.twoHanded)) {
           this.damage.twoHanded = this.damage.base;
         }
-
-        // What this deals
-        /** @type {Set<Teriock.Keys.Impact>} */
-        this.deals = new Set(["damage"]);
 
         // Properties
         const properties =

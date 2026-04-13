@@ -1,88 +1,19 @@
 _id: af963a7d2fb3f5f1
 _key: '!items!af963a7d2fb3f5f1'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.68
 effects:
-  - _id: mDSGloDF5RNfXtMX
-    _key: '!items.effects!af963a7d2fb3f5f1.mDSGloDF5RNfXtMX'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.5f8896d1928dfede
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/abilities/ethereal-senses.webp
-    name: Ethereal Senses
-    system:
-      _sup: EYkQ8hqgyBcXcV20
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.senses.ethereal
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '120'
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - sensory
-      elements:
-        - necromancy
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: ethereal-senses
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You can see and hear spirits and @L[Condition:Ethereal]{Ethereal}
-          creatures.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-        - spiritual
-        - primal
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
   - _id: Xw3HnjcogjitdBUz
     _key: '!items.effects!af963a7d2fb3f5f1.Xw3HnjcogjitdBUz'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.d70b014ba545c121
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.d70b014ba545c121
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/grafted-weapons.webp
     name: Grafted Weapons
     system:
@@ -91,18 +22,18 @@ effects:
           _id: e789ed5e109ebd1a
           changes:
             - key: system.protections.immunities.Losing Grafted Items
-              mode: 2
+              phase: normal
               priority: 10
               qualifier: '1'
               target: Actor
-              time: normal
+              type: add
               value: other
             - key: system.protections.immunities.Disarm
-              mode: 2
+              phase: normal
               priority: 10
               qualifier: '1'
               target: Actor
-              time: normal
+              type: add
               value: abilities
           competencies:
             - 0
@@ -152,63 +83,16 @@ effects:
         unit: self
       targets:
         - self
-    type: ability
-  - _id: PNhT6yEY9o2ZV6cU
-    _key: '!items.effects!af963a7d2fb3f5f1.PNhT6yEY9o2ZV6cU'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.646bdfc53ff71572
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
-    name: Healing Sensitivity
-    system:
-      _sup: EYkQ8hqgyBcXcV20
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      elements:
-        - necromancy
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: flaw
-      identifier: healing-sensitivity
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>@L[Core:Healing]{Healing} can be used to @L[Core:Damage]{damage}
-          you. If the creature providing you @L[Core:Healing]{healing} specifies
-          that they are doing so "for damage" then you roll your <i>largest</i>
-          @L[Core:HP]{hit die} and take that much @L[Damage:Holy]{holy}
-          @L[Damage:Magic]{magic damage} instead of the normal
-          @L[Core:Healing]{healing} effect. This does not consume any of your
-          @L[Core:HP]{hit dice}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      targets:
-        - self
+    transfer: true
     type: ability
   - _id: 8n5LCapPG5Sstmrl
     _key: '!items.effects!af963a7d2fb3f5f1.8n5LCapPG5Sstmrl'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.29762569f91d2950
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.29762569f91d2950
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/low-intelligence.webp
     name: Low Intelligence
     system:
@@ -240,15 +124,16 @@ effects:
         score:
           attribute: int
           value: -1
+    transfer: true
     type: ability
   - _id: EYkQ8hqgyBcXcV20
     _key: '!items.effects!af963a7d2fb3f5f1.EYkQ8hqgyBcXcV20'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.ea5fdb566d959db3
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.ea5fdb566d959db3
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/minor-undead.webp
     name: Minor Undead
     system:
@@ -287,15 +172,16 @@ effects:
         unit: self
       targets:
         - self
+    transfer: true
     type: ability
   - _id: NwhbkKgPKzZL2NVB
     _key: '!items.effects!af963a7d2fb3f5f1.NwhbkKgPKzZL2NVB'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.4c9ba7e67dd8d160
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.4c9ba7e67dd8d160
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/no-hands.webp
     name: No Hands
     system:
@@ -325,15 +211,16 @@ effects:
         unit: self
       targets:
         - self
+    transfer: true
     type: ability
   - _id: rAFnggfr07ETipYK
     _key: '!items.effects!af963a7d2fb3f5f1.rAFnggfr07ETipYK'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.db77687509a7309d
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.db77687509a7309d
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/normal-intelligence.webp
     name: Normal Intelligence
     system:
@@ -366,15 +253,16 @@ effects:
         score:
           attribute: int
           value: 0
+    transfer: true
     type: ability
   - _id: xBnUdcRmBQfH7AKS
     _key: '!items.effects!af963a7d2fb3f5f1.xBnUdcRmBQfH7AKS'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.1c52eda8919d34a7
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1c52eda8919d34a7
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/normal-movement.webp
     name: Normal Movement
     system:
@@ -406,15 +294,16 @@ effects:
         score:
           attribute: mov
           value: 0
+    transfer: true
     type: ability
   - _id: V5QarRbPaeUgtNQ2
     _key: '!items.effects!af963a7d2fb3f5f1.V5QarRbPaeUgtNQ2'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.8249d99c527d09b1
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8249d99c527d09b1
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/normal-perception.webp
     name: Normal Perception
     system:
@@ -446,15 +335,16 @@ effects:
         score:
           attribute: per
           value: 0
+    transfer: true
     type: ability
   - _id: fAK2Qx7V4Cr8FrIp
     _key: '!items.effects!af963a7d2fb3f5f1.fAK2Qx7V4Cr8FrIp'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.1d13190e5b38bda6
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1d13190e5b38bda6
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/normal-sneak.webp
     name: Normal Sneak
     system:
@@ -486,15 +376,16 @@ effects:
         score:
           attribute: snk
           value: 0
+    transfer: true
     type: ability
   - _id: p6JrbYQJlUki3Fuh
     _key: '!items.effects!af963a7d2fb3f5f1.p6JrbYQJlUki3Fuh'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.14d28d6322eec2ff
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.14d28d6322eec2ff
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/normal-strength.webp
     name: Normal Strength
     system:
@@ -526,15 +417,235 @@ effects:
         score:
           attribute: str
           value: 0
+    transfer: true
     type: ability
-  - _id: FIyOLjhxZYuDmLJ0
-    _key: '!items.effects!af963a7d2fb3f5f1.FIyOLjhxZYuDmLJ0'
+  - _id: gm9esKCSD6ZAhpMC
+    _key: '!items.effects!af963a7d2fb3f5f1.gm9esKCSD6ZAhpMC'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.698fbd39f541d799
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.2rxzRucyitmqyDmQ
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/ethereal-senses.webp
+    name: Ethereal Senses
+    system:
+      _sup: EYkQ8hqgyBcXcV20
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.senses.ethereal
+              phase: normal
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              type: upgrade
+              value: '120'
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      effectTypes:
+        - sensory
+      elements:
+        - necromancy
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: ethereal-senses
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>You can see and hear spirits and @L[Condition:Ethereal]{Ethereal}
+          creatures within 120 feet.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+        - spiritual
+        - primal
+      range:
+        unit: self
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: HhnV8ihccF47DXvi
+    _key: '!items.effects!af963a7d2fb3f5f1.HhnV8ihccF47DXvi'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.646bdfc53ff71572
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
+    name: Healing Sensitivity
+    system:
+      _sup: EYkQ8hqgyBcXcV20
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      elements:
+        - necromancy
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: flaw
+      identifier: healing-sensitivity
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>@L[Core:Healing]{Healing} can be used to @L[Core:Damage]{damage}
+          you. If the creature providing you @L[Core:Healing]{healing} specifies
+          that they are doing so "for damage" then you roll your <i>largest</i>
+          @L[Core:HP]{hit die} and take that much @L[Damage:Holy]{holy}
+          @L[Damage:Magic]{magic damage} instead of the normal
+          @L[Core:Healing]{healing} effect. This does not consume any of your
+          @L[Core:HP]{hit dice}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: cqCflfzUgqklJOJJ
+    _key: '!items.effects!af963a7d2fb3f5f1.cqCflfzUgqklJOJJ'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.3a19d7ff7a1f3b26
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/undying-durability.webp
+    name: Undying Durability
+    system:
+      _sup: EYkQ8hqgyBcXcV20
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.protections.immunities.statuses
+              phase: normal
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              type: add
+              value: unconscious
+            - key: system.protections.immunities.statuses
+              phase: normal
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              type: add
+              value: suffocating
+            - key: system.protections.immunities.statuses
+              phase: normal
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              type: add
+              value: poisoned
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      effectTypes:
+        - immunity
+      elements:
+        - necromancy
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      identifier: undying-durability
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>You are @L[Keyword:Immunity]{immune} to
+          @L[Condition:Unconscious]{unconsciousness},
+          @L[Condition:Suffocating]{suffocating}, and being
+          @L[Condition:Poisoned]{poisoned}. You do not @L[Condition:Down]{drop}
+          due to being at negative @L[Core:Hit Points and Mana Points]{HP}. You
+          still @L[Condition:Dead]{die} when you reach half your maximum
+          @L[Core:Hit Points and Mana Points]{HP} below zero. You also do not
+          have to @L[Core:Drowning]{breathe}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: uEejhRJJ4JjTGf4U
+    _key: '!items.effects!af963a7d2fb3f5f1.uEejhRJJ4JjTGf4U'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.0xeUItY3xpmcwjmG
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/slow-mana-drain.webp
     name: Slow Mana Drain
     system:
@@ -561,7 +672,11 @@ effects:
       effectTypes:
         - revitalization
         - draining
-      executionTime: 10 Minutes
+      executionTime:
+        base: 10 Minutes
+        slow:
+          raw: '10'
+          unit: minute
       expansion:
         featSaveAttribute: mov
         range:
@@ -571,6 +686,7 @@ effects:
       identifier: slow-mana-drain
       interaction: manifest
       maneuver: slow
+      mundane: false
       overview:
         base: >-
           <p>Deal enough @L[Drain:Mana]{mana drain} to @L[Condition:Dead]{kill}
@@ -584,15 +700,16 @@ effects:
         unit: contact
       targets:
         - creature
+    transfer: true
     type: ability
-  - _id: DQuqwhhCkIrGAt4r
-    _key: '!items.effects!af963a7d2fb3f5f1.DQuqwhhCkIrGAt4r'
+  - _id: FG8ShPbF0lVAdG0E
+    _key: '!items.effects!af963a7d2fb3f5f1.FG8ShPbF0lVAdG0E'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.1e47c2f1c0cd5428
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1e47c2f1c0cd5428
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/undead-mind.webp
     name: Undead Mind
     system:
@@ -602,18 +719,18 @@ effects:
           _id: e789ed5e109ebd1a
           changes:
             - key: system.protections.immunities.statuses
-              mode: 2
+              phase: normal
               priority: 10
               qualifier: '1'
               target: Actor
-              time: normal
+              type: add
               value: frightened
             - key: system.protections.immunities.statuses
-              mode: 2
+              phase: normal
               priority: 10
               qualifier: '1'
               target: Actor
-              time: normal
+              type: add
               value: charmed
           competencies:
             - 0
@@ -636,7 +753,10 @@ effects:
         - immunity
       elements:
         - necromancy
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -646,6 +766,7 @@ effects:
       identifier: undead-mind
       interaction: manifest
       maneuver: passive
+      mundane: false
       overview:
         base: >-
           <p>You are @L[Keyword:Immunity]{immune} to being
@@ -660,93 +781,7 @@ effects:
         unit: self
       targets:
         - self
-    type: ability
-  - _id: Xg7Iw6nIDGVLVJAe
-    _key: '!items.effects!af963a7d2fb3f5f1.Xg7Iw6nIDGVLVJAe'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.3a19d7ff7a1f3b26
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/abilities/undying-durability.webp
-    name: Undying Durability
-    system:
-      _sup: EYkQ8hqgyBcXcV20
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.protections.immunities.statuses
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: unconscious
-            - key: system.protections.immunities.statuses
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: suffocating
-            - key: system.protections.immunities.statuses
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: poisoned
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - immunity
-      elements:
-        - necromancy
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: undying-durability
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You are @L[Keyword:Immunity]{immune} to
-          @L[Condition:Unconscious]{unconsciousness},
-          @L[Condition:Suffocating]{suffocating}, and being
-          @L[Condition:Poisoned]{poisoned}. You do not @L[Condition:Down]{drop}
-          due to being at negative @L[Core:Hit Points and Mana Points]{HP}. You
-          still @L[Condition:Dead]{die} when you reach half your maximum
-          @L[Core:Hit Points and Mana Points]{HP} below zero. You also do not
-          have to @L[Core:Drowning]{breathe}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      targets:
-        - self
+    transfer: true
     type: ability
 folder: 73a4af85b706784e
 img: systems/teriock/src/icons/creatures/bone-warrior.webp

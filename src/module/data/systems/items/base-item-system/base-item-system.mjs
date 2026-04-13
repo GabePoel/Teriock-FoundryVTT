@@ -46,6 +46,11 @@ export default class BaseItemSystem extends ChildSystemMixin(TypeDataModel) {
   }
 
   /** @inheritDoc */
+  get displayFields() {
+    return ["system.description", "system.flaws"];
+  }
+
+  /** @inheritDoc */
   get displayToggles() {
     return [...super.displayToggles, "system.disabled"];
   }

@@ -1,111 +1,130 @@
 _id: bce535080e9a9b41
-_key: '!items!bce535080e9a9b41'
+_key: '!effects!bce535080e9a9b41'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: bce535080e9a9b41
-    _key: '!items.effects!bce535080e9a9b41.bce535080e9a9b41'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/jumpstart-zombify.webp
-    name: Jumpstart Zombify
-    system:
-      automations:
-        72ce567009179bea:
-          _id: 72ce567009179bea
-          competencies:
-            - 0
-            - 1
-            - 2
-          duration:
-            raw: '@h * 3600'
-          heighten:
-            - 1
-          type: duration
-        838ba57012685987:
-          _id: 838ba57012685987
-          competencies:
-            - 2
-          duration:
-            raw: '3600'
-          heighten:
-            - 1
-            - 0
-          type: duration
-        NPWpKFGYaHcADPNW:
-          _id: NPWpKFGYaHcADPNW
-          documents:
-            - Compendium.teriock.species.Item.b3708edf8c3c5c9f
-          override:
-            - art
-          overrideCompetence: true
-          reset:
-            - hp
-            - mp
-          suppress:
-            - body
-            - fluency
-            - rank
-            - species
-          type: transformation
-      competence:
-        raw: 0
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-      delivery: hand
-      duration:
-        raw: '1'
-        unit: minute
-      effectTypes:
-        - control
-        - reanimation
-      elements:
-        - necromancy
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 1 hour.</p>
-      identifier: jumpstart-zombify
-      interaction: attack
-      invoked: true
-      maneuver: active
-      overview:
-        fluent: <p>The base duration of this effect is 1 hour.</p>
-        proficient: <p>Zombify is @L[Keyword:Warded]{warded}.</p>
-      piercing:
-        raw: 2
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      requirements: <p>Target is @L[Condition:Dead]{dead}.</p>
-      results:
-        hit: >-
-          <p>At the start of the target's next turn, they are reanimated as a
-          @L[Creature:Zombie]{zombie}. It is not under your command, but is
-          hostile to everyone but you. The @L[Creature:Zombie]{zombie} keeps the
-          @L[Core:Size]{SIZE} it had before, but loses all other traits and
-          abilities. If the target was already @L[Category:Zombies]{some kind of
-          zombie}, then it is reanimated as that type.</p>
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/jumpstart-zombify.webp
 name: Jumpstart Zombify
-type: wrapper
+system:
+  automations:
+    72ce567009179bea:
+      _id: 72ce567009179bea
+      changeType: add
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      duration:
+        raw: '@h * 3600'
+        unit: second
+      heighten:
+        - 1
+      type: duration
+    838ba57012685987:
+      _id: 838ba57012685987
+      changeType: add
+      competencies:
+        - 2
+      crit:
+        - 0
+        - 1
+      duration:
+        raw: '3600'
+        unit: second
+      heighten:
+        - 1
+        - 0
+      type: duration
+    NPWpKFGYaHcADPNW:
+      _id: NPWpKFGYaHcADPNW
+      automatic: true
+      competence:
+        raw: 0
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      documents:
+        - Compendium.teriock.species.Item.b3708edf8c3c5c9f
+      heighten:
+        - 0
+        - 1
+      multi: false
+      override:
+        - art
+      overrideCompetence: true
+      reset:
+        - hp
+        - mp
+      ring: false
+      suppress:
+        - body
+        - fluency
+        - rank
+        - species
+      type: transformation
+  competence:
+    raw: 0
+  costs:
+    components:
+      somatic:
+        type: tag
+      verbal:
+        type: tag
+  delivery: hand
+  duration:
+    raw: '1'
+    unit: minute
+  effectTypes:
+    - control
+    - reanimation
+  elements:
+    - necromancy
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  heightened: >-
+    <p>For each additional @L[Core:MP]{MP} spent, the duration of this effect
+    increases by 1 hour.</p>
+  identifier: jumpstart-zombify
+  interaction: attack
+  invoked: true
+  maneuver: active
+  mundane: false
+  overview:
+    fluent: <p>The base duration of this effect is 1 hour.</p>
+    proficient: <p>Zombify is @L[Keyword:Warded]{warded}.</p>
+  piercing:
+    raw: 2
+  powerSources:
+    - magical
+  range:
+    unit: contact
+  requirements: <p>Target is @L[Condition:Dead]{dead}.</p>
+  results:
+    hit: >-
+      <p>At the start of the target's next turn, they are reanimated as a
+      @L[Creature:Zombie]{zombie}. It is not under your command, but is hostile
+      to everyone but you. The @L[Creature:Zombie]{zombie} keeps the
+      @L[Core:Size]{SIZE} it had before, but loses all other traits and
+      abilities. If the target was already @L[Category:Zombies]{some kind of
+      zombie}, then it is reanimated as that type.</p>
+  targets:
+    - creature
+transfer: true
+type: ability

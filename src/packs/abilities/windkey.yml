@@ -1,68 +1,63 @@
 _id: 4d625e7f797cf8be
-_key: '!items!4d625e7f797cf8be'
+_key: '!effects!4d625e7f797cf8be'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 4d625e7f797cf8be
-    _key: '!items.effects!4d625e7f797cf8be.4d625e7f797cf8be'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/windkey.webp
-    name: Windkey
-    system:
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '4'
-            type: formula
-      delivery: aura
-      duration:
-        raw: '8'
-        unit: hour
-      elderSorcery: true
-      elements:
-        - storm
-      executionTime: 10 Minutes
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: windkey
-      interaction: manifest
-      maneuver: slow
-      overview:
-        base: >-
-          <p>You create a spherical bubble that remains centered on you. Stormy
-          weather within it is calmed. Any @L[Core:Damage]{damage} it would deal
-          is @L[Keyword:Deboosted]{deboosted} twice and it cannot
-          @L[Category:Movement effects]{move} creatures or objects. Any wind
-          from the weather blows roughly in the direction you desire. If a boat
-          or other object with sails is within the range of this effect, it
-          travels in the direction you choose. If multiple creatures are using
-          [[lookup name]] to move objects in different directions, then these
-          effects cancel each other out and the objects are not moved.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        raw: '60'
-        unit: ft
-      spell: true
-      sustained: true
-      targets:
-        - other
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/windkey.webp
 name: Windkey
-type: wrapper
+system:
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '4'
+        type: formula
+  delivery: aura
+  duration:
+    raw: '8'
+    unit: hour
+  elderSorcery: true
+  elements:
+    - storm
+  executionTime:
+    base: 10 Minutes
+    slow:
+      raw: '10'
+      unit: minute
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  identifier: windkey
+  interaction: manifest
+  maneuver: slow
+  mundane: false
+  overview:
+    base: >-
+      <p>You create a spherical bubble that remains centered on you. Stormy
+      weather within it is calmed. Any @L[Core:Damage]{damage} it would deal is
+      @L[Keyword:Deboosted]{deboosted} twice and it cannot @L[Category:Movement
+      effects]{move} creatures or objects. Any wind from the weather blows
+      roughly in the direction you desire. If a boat or other object with sails
+      is within the range of this effect, it travels in the direction you
+      choose. If multiple creatures are using [[lookup name]] to move objects in
+      different directions, then these effects cancel each other out and the
+      objects are not moved.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    raw: '60'
+    unit: ft
+  spell: true
+  sustained: true
+  targets:
+    - other
+transfer: true
+type: ability

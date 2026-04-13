@@ -22,6 +22,18 @@ export default function BaseApplicationMixin(Base) {
     async _onRender(options = {}) {
       await super._onRender(options);
       bindCommonActions(this.element);
+      if (game.teriock.getSetting("developerMode")) {
+        this.window.header
+          .querySelectorAll("[data-action=copyUuid]")
+          .forEach((el) => {
+            el.addEventListener("auxclick", (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              e.stopImmediatePropagation();
+              console.log("Debug", this.document, this);
+            });
+          });
+      }
       this.element.querySelectorAll("[data-never-disable]").forEach(
         /** @param {HTMLButtonElement|HTMLInputElement} e */
         (e) => (e.disabled = false),
@@ -30,12 +42,10 @@ export default function BaseApplicationMixin(Base) {
 
     /** @inheritDoc */
     async _prepareContext(options = {}) {
-      const context = await super._prepareContext(options);
-      Object.assign(context, {
+      return Object.assign(await super._prepareContext(options), {
         TERIOCK,
         appId: this.id,
       });
-      return context;
     }
   }
   return BaseApplication;

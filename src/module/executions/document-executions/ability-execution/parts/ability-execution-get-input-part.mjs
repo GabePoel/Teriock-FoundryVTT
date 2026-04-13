@@ -152,7 +152,7 @@ export default function AbilityExecutionGetInputPart(Base) {
           if (this.#shouldShowCostPrompt(k)) {
             dialogs.push(
               createDialogFieldset(
-                game.i18n.format("TERIOCK.COSTS.Long.primary", {
+                _loc("TERIOCK.COSTS.Long.primary", {
                   key: v.label,
                 }),
                 await TeriockTextEditor.enrichHTML(
@@ -172,9 +172,7 @@ export default function AbilityExecutionGetInputPart(Base) {
           );
           dialogs.push(
             createDialogFieldset(
-              game.i18n.localize(
-                "TERIOCK.SYSTEMS.Ability.DIALOG.VariableCosts.heightened",
-              ),
+              _loc("TERIOCK.SYSTEMS.Ability.DIALOG.VariableCosts.heightened"),
               heightenDescription,
               "heightened",
               this.actor?.system.scaling.p || Infinity,
@@ -183,10 +181,10 @@ export default function AbilityExecutionGetInputPart(Base) {
         }
         if (dialogs.length > 0) {
           const title = this.source.system.spell
-            ? game.i18n.format("TERIOCK.SYSTEMS.Ability.EXECUTION.casting", {
+            ? _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.casting", {
                 name: this.source.name,
               })
-            : game.i18n.format("TERIOCK.SYSTEMS.Ability.EXECUTION.executing", {
+            : _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.executing", {
                 name: this.source.name,
               });
           await TeriockDialog.prompt({
@@ -200,9 +198,7 @@ export default function AbilityExecutionGetInputPart(Base) {
             content: dialogs.join(""),
             modal: true,
             ok: {
-              label: game.i18n.localize(
-                "TERIOCK.SYSTEMS.Ability.DIALOG.VariableCosts.ok",
-              ),
+              label: _loc("TERIOCK.SYSTEMS.Ability.DIALOG.VariableCosts.ok"),
               callback: (_event, button) => {
                 for (const k of Object.keys(
                   TERIOCK.options.cost.primary.keys,

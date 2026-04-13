@@ -1,7 +1,7 @@
 _id: 1fd458d03e168a82
 _key: '!items!1fd458d03e168a82'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.23
@@ -9,11 +9,11 @@ effects:
   - _id: 2H75N4zuZ4n1quED
     _key: '!items.effects!1fd458d03e168a82.2H75N4zuZ4n1quED'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.1968a54017984712
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1968a54017984712
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/cannot-swim.webp
     name: Cannot Swim
     system:
@@ -22,11 +22,11 @@ effects:
           _id: e789ed5e109ebd1a
           changes:
             - key: system.speedAdjustments.swim
-              mode: 5
+              phase: normal
               priority: 20
               qualifier: '1'
               target: Actor
-              time: normal
+              type: override
               value: '0'
           competencies:
             - 0
@@ -67,15 +67,16 @@ effects:
         unit: self
       targets:
         - self
+    transfer: true
     type: ability
   - _id: RCdcPbQoM4u0xUN7
     _key: '!items.effects!1fd458d03e168a82.RCdcPbQoM4u0xUN7'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.9a907b978a24ebd6
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.9a907b978a24ebd6
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/climbing.webp
     name: Climbing
     system:
@@ -95,11 +96,11 @@ effects:
           _id: e789ed5e109ebd1a
           changes:
             - key: system.speedAdjustments.climb
-              mode: 4
+              phase: normal
               priority: 10
               qualifier: '1'
               target: Actor
-              time: normal
+              type: upgrade
               value: '2'
           competencies:
             - 0
@@ -116,11 +117,11 @@ effects:
           _id: f025905e157ac261
           changes:
             - key: system.speedAdjustments.climb
-              mode: 4
+              phase: normal
               priority: 10
               qualifier: '1'
               target: Actor
-              time: normal
+              type: upgrade
               value: '3'
           competencies:
             - 1
@@ -161,6 +162,7 @@ effects:
         unit: self
       targets:
         - self
+    transfer: true
     type: ability
 folder: 111191792288f1c7
 img: icons/magic/earth/volcano-explosion-lava-teal.webp

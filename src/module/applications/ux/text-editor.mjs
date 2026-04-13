@@ -8,15 +8,15 @@ export default class TeriockTextEditor extends TextEditor {
   static get loadingPanelHTML() {
     return TERIOCK.display.panel.loading.replace(
       "TERIOCK.LOADING",
-      game.i18n.localize("TERIOCK.TERMS.Common.loading"),
+      _loc("TERIOCK.TERMS.Common.loading"),
     );
   }
 
   /**
    * Enrich all the blocks within a panel.
-   * @param {Teriock.MessageData.MessagePanel} panel
+   * @param {Teriock.Messages.MessagePanel} panel
    * @param {object} [options]
-   * @returns {Promise<Teriock.MessageData.MessagePanel>}
+   * @returns {Promise<Teriock.Messages.MessagePanel>}
    */
   static async enrichPanel(panel, options = {}) {
     for (const block of panel.blocks || []) {
@@ -34,9 +34,9 @@ export default class TeriockTextEditor extends TextEditor {
 
   /**
    * Enrich an array of panels.
-   * @param {Teriock.MessageData.MessagePanel[]} panels
+   * @param {Teriock.Messages.MessagePanel[]} panels
    * @param {object} [options]
-   * @returns {Promise<Teriock.MessageData.MessagePanel[]>}
+   * @returns {Promise<Teriock.Messages.MessagePanel[]>}
    */
   static async enrichPanels(panels, options = {}) {
     for (const panel of panels) {
@@ -47,7 +47,7 @@ export default class TeriockTextEditor extends TextEditor {
 
   /**
    * Convert the panel to an HTML string.
-   * @param {Teriock.MessageData.MessagePanel} parts
+   * @param {Teriock.Messages.MessagePanel} parts
    * @param {object} [options]
    * @param {boolean} [options.noBars]
    * @param {boolean} [options.noBlocks]

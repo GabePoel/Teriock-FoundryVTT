@@ -1,75 +1,71 @@
 _id: 17fc3243bc095d3c
-_key: '!items!17fc3243bc095d3c'
+_key: '!effects!17fc3243bc095d3c'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 17fc3243bc095d3c
-    _key: '!items.effects!17fc3243bc095d3c.17fc3243bc095d3c'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/off-hand-attack.webp
-    name: Off-Hand Attack
-    system:
-      automations:
-        72c8a14d538c6b0d:
-          _id: 72c8a14d538c6b0d
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          macro: Compendium.teriock.execution.Macro.29b994da873c13a9
-          trigger: execute
-          type: abilityMacro
-      basic: true
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: r1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: intrinsic
-      identifier: off-hand-attack
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>You may make a @L[Category:Single action abilities]{single action}
-          @L[Category:Weapon delivery abilities]{weapon} or @L[Category:Hand
-          delivery abilities]{hand} @L[Category:Attack abilities]{attack}
-          against the triggering creature using a different
-          @L[Category:Weapons]{weapon} or hand than the triggering
-          @L[Category:Attack abilities]{attack}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      requirements: >-
-        <p>You have a second @L[Category:Weapons]{weapon} or hand that is
-        capable of making an @L[Category:Attack abilities]{attack} and that did
-        not make the triggering @L[Category:Attack abilities]{attack}.</p>
-      targets:
-        - self
-      trigger: >-
-        <p>You have just made an @L[Category:Attack abilities]{attack} against a
-        creature other than yourself.</p>
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/off-hand-attack.webp
 name: Off-Hand Attack
-type: wrapper
+system:
+  automations:
+    72c8a14d538c6b0d:
+      _id: 72c8a14d538c6b0d
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      macro: Compendium.teriock.execution.Macro.29b994da873c13a9
+      trigger: execute
+      type: abilityMacro
+  basic: true
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: instant
+  executionTime:
+    base: r1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: intrinsic
+  identifier: off-hand-attack
+  interaction: manifest
+  maneuver: reactive
+  mundane: false
+  overview:
+    base: >-
+      <p>You may make a @L[Category:Single action abilities]{single action}
+      @L[Category:Weapon delivery abilities]{weapon} or @L[Category:Hand
+      delivery abilities]{hand} @L[Category:Attack abilities]{attack} against
+      the triggering creature using a different @L[Category:Weapons]{weapon} or
+      hand than the triggering @L[Category:Attack abilities]{attack}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  requirements: >-
+    <p>You have a second @L[Category:Weapons]{weapon} or hand that is capable of
+    making an @L[Category:Attack abilities]{attack} and that did not make the
+    triggering @L[Category:Attack abilities]{attack}.</p>
+  targets:
+    - self
+  trigger: >-
+    <p>You have just made an @L[Category:Attack abilities]{attack} against a
+    creature other than yourself.</p>
+transfer: true
+type: ability

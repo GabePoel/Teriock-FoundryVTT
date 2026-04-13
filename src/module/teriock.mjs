@@ -132,6 +132,14 @@ foundry.helpers.Hooks.once("init", function () {
 
   assign({
     ActiveEffect: {
+      changePhases: constants.options.change.phase,
+      changeTypes: {
+        boost: setup.changeConfigs.boostConfig,
+        typeAdd: setup.changeConfigs.addTypesConfig,
+        typeRemove: setup.changeConfigs.removeTypesConfig,
+        typeSet: setup.changeConfigs.setTypesConfig,
+      },
+      compendiumIndexFields: ["system._sup"],
       dataModels: {
         ability: data.systems.effects.AbilitySystem,
         attunement: data.systems.effects.AttunementSystem,
@@ -172,7 +180,7 @@ foundry.helpers.Hooks.once("init", function () {
     Combat: {
       initiative: {
         decimals: 2,
-        formula: TERIOCK.options.character.initiative,
+        formula: TERIOCK.options.character.defaults.initiative,
       },
       documentClass: documents.TeriockCombat,
     },
@@ -187,13 +195,13 @@ foundry.helpers.Hooks.once("init", function () {
       collection: documents.collections.TeriockItems,
       compendiumIndexFields: ["system._sup"],
       dataModels: {
+        archetype: data.systems.items.ArchetypeSystem,
         body: data.systems.items.BodySystem,
         equipment: data.systems.items.EquipmentSystem,
         mount: data.systems.items.MountSystem,
         power: data.systems.items.PowerSystem,
         rank: data.systems.items.RankSystem,
         species: data.systems.items.SpeciesSystem,
-        wrapper: data.systems.items.WrapperSystem,
       },
       documentClass: documents.TeriockItem,
     },
@@ -285,6 +293,12 @@ foundry.helpers.Hooks.once("init", function () {
     },
     // Items
     {
+      cls: applications.sheets.item.ArchetypeSheet,
+      doc: documents.TeriockItem,
+      label: "TYPES.Item.Archetype",
+      types: ["archetype"],
+    },
+    {
       cls: applications.sheets.item.BodySheet,
       doc: documents.TeriockItem,
       label: "TYPES.Item.body",
@@ -319,12 +333,6 @@ foundry.helpers.Hooks.once("init", function () {
       doc: documents.TeriockItem,
       label: "TYPES.Item.species",
       types: ["species"],
-    },
-    {
-      cls: applications.sheets.item.WrapperSheet,
-      doc: documents.TeriockItem,
-      label: "TYPES.Item.wrapper",
-      types: ["wrapper"],
     },
     // Effects
     {

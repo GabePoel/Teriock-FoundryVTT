@@ -25,9 +25,7 @@ export async function wikiToUuid(namespace, name) {
   for (const p of packs) {
     const parentIndex = p.index.getName(parentName);
     if (parentIndex && config.collection) {
-      const parent = await resolveDocument(parentIndex, {
-        preserveWrappers: true,
-      });
+      const parent = await resolveDocument(parentIndex);
       const embed = parent[config.collection]?.getName(name);
       if (embed) candidates.push(embed.uuid);
     } else if (parentIndex) candidates.push(parentIndex.uuid);

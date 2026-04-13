@@ -53,20 +53,18 @@ export default function WikiSystemMixin(Base) {
        * Navigates to the wiki page URL for manual viewing and editing.
        */
       wikiOpen() {
-        const pageTitle = this.wikiPage;
+        const title = this.wikiPage;
         if (this.isOnWiki) {
-          ui.notifications.info(
-            game.i18n.format("TERIOCK.SYSTEMS.Wiki.DIALOG.open.opening", {
-              value: pageTitle,
-            }),
-          );
-          openWikiPage(pageTitle);
+          ui.notifications.info("TERIOCK.SYSTEMS.Wiki.DIALOG.open.opening", {
+            format: { value: title },
+            localize: true,
+          });
+          openWikiPage(title);
         } else {
-          ui.notifications.error(
-            game.i18n.format("TERIOCK.SYSTEMS.Wiki.DIALOG.open.error", {
-              value: pageTitle,
-            }),
-          );
+          ui.notifications.error("TERIOCK.SYSTEMS.Wiki.DIALOG.open.error", {
+            format: { value: title },
+            localize: true,
+          });
         }
       }
     }

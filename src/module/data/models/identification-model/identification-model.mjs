@@ -110,13 +110,10 @@ export default class IdentificationModel extends EmbeddedDataModel {
         { format: { name: this.parent.parent.fullName }, localize: true },
       );
       const content = await TeriockTextEditor.enrichHTML(
-        game.i18n.format(
-          "TERIOCK.MODELS.Identification.QUERY.ReadMagic.question",
-          {
-            user: `@UUID[${game.user.uuid}]`,
-            item: `@UUID[${this.parent.parent.uuid}]{${this.name}}`,
-          },
-        ),
+        _loc("TERIOCK.MODELS.Identification.QUERY.ReadMagic.question", {
+          user: `@UUID[${game.user.uuid}]`,
+          item: `@UUID[${this.parent.parent.uuid}]{${this.name}}`,
+        }),
       );
       const doReadMagic = await TeriockDialog.query(activeGM, "confirm", {
         content: content,
@@ -126,9 +123,7 @@ export default class IdentificationModel extends EmbeddedDataModel {
             TERIOCK.display.icons.equipment.readMagic,
             "title",
           ),
-          title: game.i18n.localize(
-            "TERIOCK.MODELS.Identification.QUERY.ReadMagic.title",
-          ),
+          title: _loc("TERIOCK.MODELS.Identification.QUERY.ReadMagic.title"),
         },
       });
       if (doReadMagic) {
@@ -207,10 +202,8 @@ export default class IdentificationModel extends EmbeddedDataModel {
         .map((e) => e.uuid);
       const toReveal = await selectDocumentsDialog(revealed, {
         checked: checked,
-        hint: game.i18n.localize(
-          "TERIOCK.MODELS.Identification.QUERY.Unidentify.hint",
-        ),
-        noDocumentsMessage: game.i18n.localize(
+        hint: _loc("TERIOCK.MODELS.Identification.QUERY.Unidentify.hint"),
+        noDocumentsMessage: _loc(
           "TERIOCK.MODELS.Identification.QUERY.Unidentify.noDocumentsMessage",
         ),
         silent: true,
@@ -223,14 +216,11 @@ export default class IdentificationModel extends EmbeddedDataModel {
         }),
       );
       await this.parent.parent.update({
-        name: game.i18n.format(
-          "TERIOCK.MODELS.Identification.QUERY.Unidentify.name",
-          {
-            type: inferNameFromIdentifier(
-              `equipment:${this.parent.equipmentType}`,
-            ),
-          },
-        ),
+        name: _loc("TERIOCK.MODELS.Identification.QUERY.Unidentify.name", {
+          type: inferNameFromIdentifier(
+            `equipment:${this.parent.equipmentType}`,
+          ),
+        }),
         "system.flaws": "",
         "system.identification.flaws": this.parent.flaws,
         "system.identification.identified": false,

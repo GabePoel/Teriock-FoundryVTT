@@ -3,6 +3,7 @@ import {
   ensureNoChildren,
 } from "../../../../../../helpers/resolve.mjs";
 import { makeIcon } from "../../../../../../helpers/utils.mjs";
+import { initialBoolean } from "../../../../../fields/helpers/initializers.mjs";
 
 const { fields } = foundry.data;
 
@@ -21,9 +22,9 @@ export default (Base) => {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          dampened: new fields.BooleanField({ initial: false }),
-          destroyed: new fields.BooleanField({ initial: false }),
-          shattered: new fields.BooleanField({ initial: false }),
+          dampened: initialBoolean(),
+          destroyed: initialBoolean(),
+          shattered: initialBoolean(),
           stashed: new fields.BooleanField({ initial: false }),
         });
       }
@@ -32,11 +33,7 @@ export default (Base) => {
       get _nameTags() {
         const tags = super._nameTags;
         if (this.stashed) {
-          tags.push(
-            game.i18n.localize(
-              "TERIOCK.SYSTEMS.Equipment.FIELDS.stashed.label",
-            ),
-          );
+          tags.push(_loc("TERIOCK.SYSTEMS.Equipment.FIELDS.stashed.label"));
         }
         return tags;
       }
@@ -48,43 +45,44 @@ export default (Base) => {
             i.action?.toLowerCase().includes("attuned"),
           ),
           {
+            action: "toggleDampenedDoc",
             icon: this.dampened
               ? TERIOCK.display.icons.equipment.dampen
               : TERIOCK.display.icons.equipment.undampen,
-            action: "toggleDampenedDoc",
-            tooltip: this.dampened
-              ? game.i18n.localize(
-                  "TERIOCK.SYSTEMS.Equipment.FIELDS.dampened.label",
-                )
-              : game.i18n.localize(
-                  "TERIOCK.SYSTEMS.Equipment.EMBED.undampened",
-                ),
-            condition: this.parent.isOwner,
-            callback: async () => {
+            onClick: async () => {
               if (this.dampened) await this.undampen();
               else await this.dampen();
             },
+            tooltip: this.dampened
+              ? _loc("TERIOCK.SYSTEMS.Equipment.FIELDS.dampened.label")
+              : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.undampened"),
+            visible: this.parent.isOwner,
           },
           {
+            action: "toggleShatteredDoc",
             icon: this.shattered
               ? TERIOCK.display.icons.break.shatter
               : TERIOCK.display.icons.break.repair,
-            action: "toggleShatteredDoc",
-            tooltip: this.shattered
-              ? game.i18n.localize("TERIOCK.TERMS.Properties.shattered")
-              : game.i18n.localize(
-                  "TERIOCK.SYSTEMS.Equipment.EMBED.unshatterd",
-                ),
-            condition: this.parent.isOwner,
-            callback: async () => {
+            onClick: async () => {
               if (this.shattered) await this.repair();
               else await this.shatter();
             },
+            tooltip: this.shattered
+              ? _loc("TERIOCK.TERMS.Properties.shattered")
+              : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unshatterd"),
+            visible: this.parent.isOwner,
           },
           ...super.embedIcons.filter(
             (i) => !i.action?.toLowerCase().includes("attuned"),
           ),
         ];
+      }
+
+      /** @inheritDoc */
+      get embedParts() {
+        return Object.assign(super.embedParts, {
+          shattered: this.shattered,
+        });
       }
 
       /** @inheritDoc */
@@ -109,7 +107,7 @@ export default (Base) => {
         await this.parent.hookCall("dampen", {
           scope: { equipment: this.parent },
         });
-        await ensureChildren(this.parent, "property", ["Dampened"]);
+        await ensureChildren(this.parent, ["property:dampened"]);
       }
 
       /**
@@ -124,7 +122,7 @@ export default (Base) => {
         await this.parent.hookCall("destroy", {
           scope: { equipment: this.parent },
         });
-        await ensureChildren(this.parent, "property", ["Destroyed"]);
+        await ensureChildren(this.parent, ["property:destroyed"]);
       }
 
       /** @inheritdoc */
@@ -132,86 +130,86 @@ export default (Base) => {
         return [
           ...super.getCardContextMenuEntries(doc),
           {
-            name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.shatter"),
+            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.shatter"),
             icon: makeIcon(TERIOCK.display.icons.break.shatter, "contextMenu"),
-            callback: this.shatter.bind(this),
-            condition:
+            onClick: this.shatter.bind(this),
+            visible:
               !this.shattered &&
               this.parent._checkValidEditorDocument(doc, { self: false }),
             group: "control",
           },
           {
-            name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.repair"),
+            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.repair"),
             icon: makeIcon(TERIOCK.display.icons.break.repair, "contextMenu"),
-            callback: this.repair.bind(this),
-            condition:
+            onClick: this.repair.bind(this),
+            visible:
               this.shattered &&
               this.parent._checkValidEditorDocument(doc, { self: false }),
             group: "control",
           },
           {
-            name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.destroy"),
+            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.destroy"),
             icon: makeIcon(TERIOCK.display.icons.break.destroy, "contextMenu"),
-            callback: this.destroy.bind(this),
-            condition:
+            onClick: this.destroy.bind(this),
+            visible:
               !this.destroyed &&
               this.parent._checkValidEditorDocument(doc, { self: false }),
             group: "control",
           },
           {
-            name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.reforge"),
+            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.reforge"),
             icon: makeIcon(TERIOCK.display.icons.break.reforge, "contextMenu"),
-            callback: this.reforge.bind(this),
-            condition:
+            onClick: this.reforge.bind(this),
+            visible:
               this.destroyed &&
               this.parent._checkValidEditorDocument(doc, { self: false }),
             group: "control",
           },
           {
-            name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.dampen"),
+            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.dampen"),
             icon: makeIcon(
               TERIOCK.display.icons.equipment.dampen,
               "contextMenu",
             ),
-            callback: this.dampen.bind(this),
-            condition:
+            onClick: this.dampen.bind(this),
+            visible:
               !this.dampened &&
               this.parent._checkValidEditorDocument(doc, { self: false }),
             group: "control",
           },
           {
-            name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.undampen"),
+            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.undampen"),
             icon: makeIcon(
               TERIOCK.display.icons.equipment.undampen,
               "contextMenu",
             ),
-            callback: this.undampen.bind(this),
-            condition:
+            onClick: this.undampen.bind(this),
+            visible:
               this.dampened &&
               this.parent._checkValidEditorDocument(doc, { self: false }),
             group: "control",
           },
           {
-            name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.stash"),
+            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.stash"),
             icon: makeIcon(
               TERIOCK.display.icons.equipment.stash,
               "contextMenu",
             ),
-            callback: this.stash.bind(this),
-            condition:
+            onClick: this.stash.bind(this),
+            visible:
               !this.stashed &&
               this.actor &&
               this.parent._checkValidEditorDocument(doc, { self: false }),
             group: "control",
           },
           {
-            name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.unstash"),
+            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.unstash"),
             icon: makeIcon(
               TERIOCK.display.icons.equipment.unstash,
               "contextMenu",
             ),
-            callback: this.unstash.bind(this),
-            condition:
+            onClick: this.unstash.bind(this),
+            visible:
               this.stashed &&
               this.actor &&
               this.parent._checkValidEditorDocument(doc, { self: false }),
@@ -225,7 +223,9 @@ export default (Base) => {
         const data = super.getLocalRollData();
         Object.assign(data, {
           dampened: Number(this.dampened),
+          destroyed: Number(this.destroyed),
           shattered: Number(this.shattered),
+          stashed: Number(this.stashed),
         });
         return data;
       }
@@ -242,7 +242,7 @@ export default (Base) => {
         await this.parent.hookCall("reforge", {
           scope: { equipment: this.parent },
         });
-        await ensureNoChildren(this.parent, "property", ["Destroyed"]);
+        await ensureNoChildren(this.parent, "property:destroyed");
       }
 
       /**
@@ -257,7 +257,7 @@ export default (Base) => {
         await this.parent.hookCall("repair", {
           scope: { equipment: this.parent },
         });
-        await ensureNoChildren(this.parent, "property", ["Shattered"]);
+        await ensureNoChildren(this.parent, "property:shattered");
         if (this.shattered) {
           await this.parent.update({ "system.shattered": false });
         }
@@ -275,7 +275,7 @@ export default (Base) => {
         await this.parent.hookCall("shatter", {
           scope: { equipment: this.parent },
         });
-        await ensureChildren(this.parent, "property", ["Shattered"]);
+        await ensureChildren(this.parent, ["property:shattered"]);
       }
 
       /**
@@ -298,7 +298,7 @@ export default (Base) => {
         await this.parent.hookCall("undampen", {
           scope: { equipment: this.parent },
         });
-        await ensureNoChildren(this.parent, "property", ["Dampened"]);
+        await ensureNoChildren(this.parent, "property:dampened");
       }
 
       /**

@@ -2,7 +2,7 @@ _id: yyJeHm5M2183YM8R
 _key: '!items!yyJeHm5M2183YM8R'
 _stats:
   compendiumSource: Compendium.teriock.classes.Item.76ecd499038f932d
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.23
@@ -10,11 +10,11 @@ effects:
   - _id: 3BwWzaXNK7xpgHyB
     _key: '!items.effects!yyJeHm5M2183YM8R.3BwWzaXNK7xpgHyB'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.72ad9d9dc0d0731a
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.72ad9d9dc0d0731a
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/backstab.webp
     name: Backstab
     system:
@@ -58,61 +58,16 @@ effects:
       standard: true
       targets:
         - self
-    type: ability
-  - _id: S3EBtbZXvy3pqXmf
-    _key: '!items.effects!yyJeHm5M2183YM8R.S3EBtbZXvy3pqXmf'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.9f5d7c7000f6759b
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/catch-item.webp
-    name: Catch Item
-    system:
-      _sup: qmInozATjv0fezJv
-      basic: true
-      competence:
-        raw: 0
-      delivery: hand
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: r1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: intrinsic
-      identifier: catch-item
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>You catch the item. If multiple creatures are all trying to catch
-          the same item, they all roll [[/roll 1d20]]. The creature with the
-          highest roll catches the item.</p>
-        fluent: <p>You instead roll [[/roll 1d20 + @f]].</p>
-        proficient: <p>You instead roll [[/roll 1d20 + @p]].</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: contact
-      targets:
-        - item
-      trigger: <p>An item within range is falling or flying by.</p>
+    transfer: true
     type: ability
   - _id: qmInozATjv0fezJv
     _key: '!items.effects!yyJeHm5M2183YM8R.qmInozATjv0fezJv'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.63b8c75f371412f7
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.63b8c75f371412f7
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/disarm.webp
     name: Disarm
     system:
@@ -147,15 +102,16 @@ effects:
       standard: true
       targets:
         - arm
+    transfer: true
     type: ability
   - _id: fUr78poZ60HGPImG
     _key: '!items.effects!yyJeHm5M2183YM8R.fUr78poZ60HGPImG'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.48d8189483f5be7f
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.48d8189483f5be7f
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: icons/skills/trades/security-locksmith-key-gray.webp
     name: Expert Locksmith
     system:
@@ -164,11 +120,11 @@ effects:
           _id: e789ed5e109ebd1a
           changes:
             - key: system.tradecrafts.locksmith.score
-              mode: 4
+              phase: normal
               priority: 10
               qualifier: '1'
               target: Actor
-              time: normal
+              type: upgrade
               value: '2'
           competencies:
             - 0
@@ -209,15 +165,16 @@ effects:
         unit: self
       targets:
         - self
+    transfer: true
     type: ability
   - _id: kz2VevDUvHNBXZh9
     _key: '!items.effects!yyJeHm5M2183YM8R.kz2VevDUvHNBXZh9'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.24ec8519b87f0119
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.24ec8519b87f0119
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/lie.webp
     name: Lie
     system:
@@ -238,11 +195,11 @@ effects:
           _id: e789ed5e109ebd1a
           changes:
             - key: system.protections.resistances.effects
-              mode: 2
+              phase: normal
               priority: 10
               qualifier: '1'
               target: Actor
-              time: normal
+              type: add
               value: truthDetecting
           competencies:
             - 0
@@ -292,15 +249,16 @@ effects:
       standard: true
       targets:
         - self
+    transfer: true
     type: ability
   - _id: 2Tp8goFHbA9jqZR1
     _key: '!items.effects!yyJeHm5M2183YM8R.2Tp8goFHbA9jqZR1'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.93d9bac5c9d0fa9c
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.93d9bac5c9d0fa9c
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/stealth.webp
     name: Stealth
     system:
@@ -350,6 +308,58 @@ effects:
         score:
           attribute: snk
           value: 3
+    transfer: true
+    type: ability
+  - _id: GGTGLwBd74kBPqn1
+    _key: '!items.effects!yyJeHm5M2183YM8R.GGTGLwBd74kBPqn1'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.6E1L4yHlYGd0QT0l
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/catch-item.webp
+    name: Catch Item
+    system:
+      _sup: qmInozATjv0fezJv
+      basic: true
+      competence:
+        raw: 0
+      delivery: hand
+      duration:
+        raw: '0'
+        unit: instant
+      executionTime:
+        base: r1
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: intrinsic
+      identifier: catch-item
+      interaction: manifest
+      maneuver: reactive
+      mundane: false
+      overview:
+        base: >-
+          <p>You catch the item. If multiple creatures are all trying to catch
+          the same item, they all roll [[/roll 1d20]]. The creature with the
+          highest roll catches the item.</p>
+        fluent: <p>You instead roll [[/roll 1d20 + @f]].</p>
+        proficient: <p>You instead roll [[/roll 1d20 + @p]].</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: contact
+      targets:
+        - item
+      trigger: <p>An item within range is falling or flying by.</p>
+    transfer: true
     type: ability
 folder: bd7120d756dc6f4f
 img: systems/teriock/src/icons/ranks/rank-2-thief.webp

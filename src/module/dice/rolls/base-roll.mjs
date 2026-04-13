@@ -310,9 +310,9 @@ export default class BaseRoll extends Roll {
   _getFormulaContextOptions(options = {}) {
     return [
       {
-        name: game.i18n.localize("TERIOCK.ROLLS.Base.reroll"),
+        label: _loc("TERIOCK.ROLLS.Base.reroll"),
         icon: makeIcon(TERIOCK.display.icons.roll.reroll, "contextMenu"),
-        callback: async () => {
+        onClick: async () => {
           const reroll = this.clone();
           await reroll.evaluate();
           await reroll.toMessage(
@@ -345,15 +345,11 @@ export default class BaseRoll extends Roll {
     });
     if (this.success) {
       context.styles.total.classes += " success";
-      context.styles.total.tooltip += game.i18n.localize(
-        "TERIOCK.ROLLS.Base.success",
-      );
+      context.styles.total.tooltip += _loc("TERIOCK.ROLLS.Base.success");
       context.styles.total.icon = TERIOCK.display.icons.ui.enable;
     } else if (this.failure) {
       context.styles.total.classes += " failure";
-      context.styles.total.tooltip += game.i18n.localize(
-        "TERIOCK.ROLLS.Base.failure",
-      );
+      context.styles.total.tooltip += _loc("TERIOCK.ROLLS.Base.failure");
       context.styles.total.icon = TERIOCK.display.icons.ui.disable;
     }
     return context;
@@ -481,7 +477,7 @@ export default class BaseRoll extends Roll {
 
   /**
    * Panels that are created by this roll.
-   * @returns {Promise<Teriock.MessageData.MessagePanel[]>}
+   * @returns {Promise<Teriock.Messages.MessagePanel[]>}
    */
   async getPanels() {
     return [];

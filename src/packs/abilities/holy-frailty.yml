@@ -1,70 +1,64 @@
 _id: 06b81bb1cb9f7456
-_key: '!items!06b81bb1cb9f7456'
+_key: '!effects!06b81bb1cb9f7456'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 06b81bb1cb9f7456
-    _key: '!items.effects!06b81bb1cb9f7456.06b81bb1cb9f7456'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/holy-frailty.webp
-    name: Holy Frailty
-    system:
-      automations:
-        29b275994cf9f5b1:
-          _id: 29b275994cf9f5b1
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: 1d10[holy]
-          heighten:
-            - 1
-            - 0
-          merge: true
-          roll: damage
-          type: roll
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: flaw
-      identifier: holy-frailty
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You take @L[Keyword:Boosted]{boosted} @L[Core:Damage]{damage} from
-          @L[Damage:Holy]{holy}, are @L[Keyword:Vulnerable]{vulnerable} to being
-          @L[Condition:Hollied]{hollied}, and becoming
-          @L[Condition:Hollied]{hollied} deals you [[/damage 1d10[holy]]]
-          @L[Core:Damage]{damage} if it was not caused due to dropping from
-          @L[Damage:Holy]{holy} @L[Core:Damage]{damage}. The
-          @L[Core:Damage]{damage} from becoming @L[Condition:Hollied]{hollied}
-          is not @L[Keyword:Boosted]{boosted}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/holy-frailty.webp
 name: Holy Frailty
-type: wrapper
+system:
+  automations:
+    29b275994cf9f5b1:
+      _id: 29b275994cf9f5b1
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: 1d10[holy]
+      heighten:
+        - 1
+        - 0
+      impact: damage
+      merge: true
+      type: roll
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: unlimited
+  executionTime:
+    base: passive
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: flaw
+  identifier: holy-frailty
+  interaction: manifest
+  maneuver: passive
+  mundane: false
+  overview:
+    base: >-
+      <p>You take @L[Keyword:Boosted]{boosted} @L[Core:Damage]{damage} from
+      @L[Damage:Holy]{holy}, are @L[Keyword:Vulnerable]{vulnerable} to being
+      @L[Condition:Hollied]{hollied}, and becoming
+      @L[Condition:Hollied]{hollied} deals you [[/damage 1d10[holy]]]
+      @L[Core:Damage]{damage} if it was not caused due to dropping from
+      @L[Damage:Holy]{holy} @L[Core:Damage]{damage}. The @L[Core:Damage]{damage}
+      from becoming @L[Condition:Hollied]{hollied} is not
+      @L[Keyword:Boosted]{boosted}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  targets:
+    - self
+transfer: true
+type: ability

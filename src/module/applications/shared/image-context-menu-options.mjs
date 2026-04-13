@@ -13,9 +13,9 @@ const { ImagePopout } = foundry.applications.apps;
  */
 const imageContextMenuOptions = [
   {
-    name: "TERIOCK.SYSTEMS.Child.MENU.openImage",
+    label: "TERIOCK.SYSTEMS.Child.MENU.openImage",
     icon: makeIcon(icons.ui.image, "contextMenu"),
-    callback: async (target) => {
+    onClick: async (_ev, target) => {
       await new ImagePopout({
         src: target.getAttribute("src"),
         window: {
@@ -23,7 +23,7 @@ const imageContextMenuOptions = [
         },
       }).render(true);
     },
-    condition: (target) => {
+    visible: (target) => {
       const src = target.getAttribute("src");
       return (
         src &&
@@ -34,20 +34,20 @@ const imageContextMenuOptions = [
     },
   },
   {
-    name: "TERIOCK.SYSTEMS.Child.MENU.shareImage",
+    label: "TERIOCK.SYSTEMS.Child.MENU.shareImage",
     icon: makeIcon(icons.ui.shareImage, "contextMenu"),
-    callback: async (target) => {
+    onClick: async (_ev, target) => {
       await chatImage(target.getAttribute("src"));
     },
-    condition: (target) => {
+    visible: (target) => {
       const src = target.getAttribute("src");
       return src && src.length > 0 && target.getAttribute("data-shareable");
     },
   },
   {
-    name: "TERIOCK.SYSTEMS.Child.MENU.openDocument",
+    label: "TERIOCK.SYSTEMS.Child.MENU.openDocument",
     icon: makeIcon(icons.ui.openWindow, "contextMenu"),
-    callback: async (target) => {
+    onClick: async (_ev, target) => {
       const uuid = target.getAttribute("data-uuid");
       if (uuid) {
         const doc = await fromUuid(uuid);
@@ -56,7 +56,7 @@ const imageContextMenuOptions = [
         }
       }
     },
-    condition: (target) =>
+    visible: (target) =>
       target.getAttribute("data-openable-document") &&
       target.getAttribute("data-uuid") &&
       (game.user.isGM || game.teriock.getSetting("openChatDocuments")),

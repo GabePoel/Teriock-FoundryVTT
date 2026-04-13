@@ -1,6 +1,6 @@
 import { bindCommonActions } from "../../../../applications/shared/_module.mjs";
 import { TeriockItem } from "../../../../documents/_module.mjs";
-import { mix } from "../../../../helpers/utils.mjs";
+import { mix } from "../../../../helpers/construction.mjs";
 import { panelsField } from "../../../fields/helpers/builders.mjs";
 import * as activations from "../../../pseudo-documents/activations/_module.mjs";
 import { BaseActivation } from "../../../pseudo-documents/activations/abstract/_module.mjs";
@@ -177,7 +177,7 @@ export default class BaseMessageSystem extends mix(
       autoCollapse =
         this.document.timestamp <
         Date.now() -
-          game.teriock.getSetting("automaticPanelCollapseTime") * 60 * 1000;
+          game.teriock.getSetting("autoPanelCollapseTime") * 60 * 1000;
     }
     TeriockItem.toggleCollapse(htmlElement, {
       autoCollapse: true,

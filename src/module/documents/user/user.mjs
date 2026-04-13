@@ -1,4 +1,5 @@
-import { makeIcon, mix } from "../../helpers/utils.mjs";
+import { mix } from "../../helpers/construction.mjs";
+import { makeIcon } from "../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
 
 const { User } = foundry.documents;
@@ -28,10 +29,10 @@ export default class TeriockUser extends mix(
   getCardContextMenuEntries(doc) {
     return [
       {
-        name: game.i18n.localize("TERIOCK.SYSTEMS.User.EMBED.openCharacter"),
+        label: _loc("TERIOCK.SYSTEMS.User.EMBED.openCharacter"),
         icon: makeIcon(TERIOCK.options.document.character.icon, "contextMenu"),
-        callback: async () => await this.character.sheet.render(true),
-        condition: () => this.character && this.character.isViewer,
+        onClick: async () => await this.character.sheet.render(true),
+        visible: () => this.character && this.character.isViewer,
       },
       ...super.getCardContextMenuEntries(doc),
     ];

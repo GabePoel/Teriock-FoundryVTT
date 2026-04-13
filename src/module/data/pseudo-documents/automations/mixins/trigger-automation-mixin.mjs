@@ -71,8 +71,8 @@ export default function TriggerAutomationMixin(Base) {
         const schema = Object.assign(super.defineSchema(), {
           trigger: new fields.StringField({
             choices: this._processedTriggerChoices,
-            nullable: this._nullableTrigger,
             initial: this._initialTrigger,
+            nullable: this._nullableTrigger,
           }),
         });
         if (this._conditions) schema.conditions = conditionRequirementsField();

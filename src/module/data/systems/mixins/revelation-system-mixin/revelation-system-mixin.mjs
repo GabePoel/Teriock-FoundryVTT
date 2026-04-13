@@ -41,9 +41,7 @@ export default function RevelationSystemMixin(Base) {
       get _nameTags() {
         const tags = super._nameTags;
         if (!this.revealed) {
-          tags.unshift(
-            game.i18n.localize("TERIOCK.SYSTEMS.Revelation.NAME.unrevealed"),
-          );
+          tags.unshift(_loc("TERIOCK.SYSTEMS.Revelation.NAME.unrevealed"));
         }
         return tags;
       }
@@ -53,27 +51,23 @@ export default function RevelationSystemMixin(Base) {
         return [
           ...super.getCardContextMenuEntries(doc),
           {
-            name: game.i18n.localize("TERIOCK.SYSTEMS.Revelation.MENU.reveal"),
+            label: _loc("TERIOCK.SYSTEMS.Revelation.MENU.reveal"),
             icon: makeIcon(TERIOCK.display.icons.ui.show, "contextMenu"),
-            callback: async () =>
+            onClick: async () =>
               this.parent.update({
                 "system.revealed": true,
               }),
-            condition:
-              !this.revealed && game.user.isGM && doc?.sheet?.isEditable,
+            visible: !this.revealed && game.user.isGM && doc?.sheet?.isEditable,
             group: "reveal",
           },
           {
-            name: game.i18n.localize(
-              "TERIOCK.SYSTEMS.Revelation.MENU.unreveal",
-            ),
+            label: _loc("TERIOCK.SYSTEMS.Revelation.MENU.unreveal"),
             icon: makeIcon(TERIOCK.display.icons.ui.hide, "contextMenu"),
-            callback: async () =>
+            onClick: async () =>
               this.parent.update({
                 "system.revealed": false,
               }),
-            condition:
-              this.revealed && game.user.isGM && doc?.sheet?.isEditable,
+            visible: this.revealed && game.user.isGM && doc?.sheet?.isEditable,
             group: "reveal",
           },
         ];

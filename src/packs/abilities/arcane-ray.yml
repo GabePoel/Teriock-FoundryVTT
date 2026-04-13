@@ -1,85 +1,79 @@
 _id: ac35fb736d8bd407
-_key: '!items!ac35fb736d8bd407'
+_key: '!effects!ac35fb736d8bd407'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: ac35fb736d8bd407
-    _key: '!items.effects!ac35fb736d8bd407.ac35fb736d8bd407'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/arcane-ray.webp
-    name: Arcane Ray
-    system:
-      automations:
-        29b275994cf9f5b1:
-          _id: 29b275994cf9f5b1
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: 1d4[magic]
-          heighten:
-            - 1
-            - 0
-          merge: true
-          roll: damage
-          type: roll
-        800c70e6560525a8:
-          _id: 800c70e6560525a8
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: (@h)d4[magic]
-          heighten:
-            - 1
-          merge: true
-          roll: damage
-          type: roll
-      competence:
-        raw: 0
-      delivery: missile
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - damaging
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d4[magic]]] @L[Core:Damage]{damage}.</p>
-      identifier: arcane-ray
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 1
-      powerSources:
-        - magical
-      range:
-        raw: '60'
-        unit: ft
-      results:
-        critHit: >-
-          <p>Double the @L[Core:Damage]{damage dice} dealt by this
-          @L[Category:Abilities]{ability}.</p>
-        hit: <p>Deal [[/damage 1d4[magic]]] @L[Core:Damage]{damage} to target.</p>
-      spell: true
-      standard: true
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/arcane-ray.webp
 name: Arcane Ray
-type: wrapper
+system:
+  automations:
+    29b275994cf9f5b1:
+      _id: 29b275994cf9f5b1
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: 1d4[magic]
+      heighten:
+        - 1
+        - 0
+      impact: damage
+      merge: true
+      type: roll
+    800c70e6560525a8:
+      _id: 800c70e6560525a8
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: (@h)d4[magic]
+      heighten:
+        - 1
+      impact: damage
+      merge: true
+      type: roll
+  competence:
+    raw: 0
+  delivery: missile
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - damaging
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  heightened: >-
+    <p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage
+    1d4[magic]]] @L[Core:Damage]{damage}.</p>
+  identifier: arcane-ray
+  interaction: attack
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 1
+  powerSources:
+    - magical
+  range:
+    raw: '60'
+    unit: ft
+  results:
+    critHit: >-
+      <p>Double the @L[Core:Damage]{damage dice} dealt by this
+      @L[Category:Abilities]{ability}.</p>
+    hit: <p>Deal [[/damage 1d4[magic]]] @L[Core:Damage]{damage} to target.</p>
+  spell: true
+  standard: true
+  targets:
+    - creature
+transfer: true
+type: ability

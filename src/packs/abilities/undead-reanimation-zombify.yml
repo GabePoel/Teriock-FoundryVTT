@@ -1,0 +1,138 @@
+_id: StXApwbbbA9zS73E
+_key: '!effects!StXApwbbbA9zS73E'
+_stats:
+  compendiumSource: Compendium.teriock.abilities.ActiveEffect.24a2a3db4a940311
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.12.0
+img: systems/teriock/src/icons/abilities/zombify.webp
+name: Zombify
+system:
+  _sup: 42x5ExJDC2KutTTJ
+  automations:
+    72ce567009179bea:
+      _id: 72ce567009179bea
+      changeType: add
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      duration:
+        raw: '@h * 3600'
+        unit: second
+      heighten:
+        - 1
+      type: duration
+    838ba57012685987:
+      _id: 838ba57012685987
+      changeType: add
+      competencies:
+        - 2
+      crit:
+        - 0
+        - 1
+      duration:
+        raw: '3600'
+        unit: second
+      heighten:
+        - 1
+        - 0
+      type: duration
+    ngQVntiCQ8Ruot8n:
+      _id: ngQVntiCQ8Ruot8n
+      automatic: true
+      competence:
+        raw: 0
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      documents:
+        - Compendium.teriock.species.Item.b3708edf8c3c5c9f
+      heighten:
+        - 0
+        - 1
+      multi: false
+      override:
+        - art
+      overrideCompetence: true
+      reset:
+        - hp
+        - mp
+      ring: false
+      suppress:
+        - body
+        - fluency
+        - rank
+        - species
+      type: transformation
+  class: necromancer
+  competence:
+    raw: 0
+  costs:
+    components:
+      somatic:
+        type: tag
+      verbal:
+        type: tag
+  delivery: hand
+  duration:
+    raw: '1'
+    unit: minute
+  effectTypes:
+    - control
+    - reanimation
+  elements:
+    - necromancy
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  heightened: >-
+    <p>For each additional @L[Core:MP]{MP} spent, the duration of this effect
+    increases by 1 hour.</p>
+  identifier: zombify
+  interaction: attack
+  invoked: true
+  maneuver: active
+  mundane: false
+  overview:
+    fluent: >-
+      <p>The base duration of this effect is 1 hour and the
+      @L[Creature:Zombie]{zombie} is a @L[Core:Minions]{minion} under your
+      command.</p>
+    proficient: <p>[[lookup name]] is @L[Keyword:Warded]{warded}.</p>
+  piercing:
+    raw: 2
+  powerSources:
+    - magical
+  range:
+    unit: contact
+  requirements: <p>Target is @L[Condition:Dead]{dead}.</p>
+  results:
+    hit: >-
+      <p>Target is reanimated as a @L[Creature:Zombie]{zombie}. It is not under
+      your command, but is hostile to everyone other than you that is not
+      @L[Category:Zombies]{another zombie}. The @L[Creature:Zombie]{zombie}
+      keeps the @L[Core:Size]{SIZE} it had before, but loses all other traits
+      and abilities. If the target was already @L[Category:Zombies]{some kind of
+      zombie}, then it is reanimated as that type.</p>
+  spell: true
+  standard: true
+  targets:
+    - creature
+transfer: true
+type: ability

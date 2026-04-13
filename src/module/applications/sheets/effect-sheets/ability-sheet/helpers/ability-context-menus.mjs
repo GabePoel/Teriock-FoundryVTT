@@ -40,15 +40,15 @@ export default function abilityContextMenus(ability) {
    */
   function quickMenu(config, updateKey, nullOption = null) {
     const out = Object.entries(config).map(([key, value]) => ({
-      name: value,
+      label: value,
       icon: makeIcon(findIconByKey(key) ?? key, "contextMenu"),
-      callback: () => ability.update({ [updateKey]: key }),
+      onClick: () => ability.update({ [updateKey]: key }),
     }));
     if (nullOption) {
       out.unshift({
-        name: game.i18n.localize("TERIOCK.SCHEMA.Competence.choices.0"),
+        label: _loc("TERIOCK.SCHEMA.Competence.choices.0"),
         icon: makeIcon(TERIOCK.display.icons.ui.remove, "contextMenu"),
-        callback: () => ability.update({ [updateKey]: null }),
+        onClick: () => ability.update({ [updateKey]: null }),
       });
     }
     return out;
@@ -74,9 +74,9 @@ export default function abilityContextMenus(ability) {
       "system.featSaveAttribute",
     ),
     form: Object.entries(TERIOCK.options.effect.form).map(([key, value]) => ({
-      name: value.name,
+      label: value.label,
       icon: makeIcon(value.icon, TERIOCK.display.iconStyles.contextMenu),
-      callback: async () => {
+      onClick: async () => {
         await ability.update({
           "system.form": key,
         });
@@ -88,7 +88,7 @@ export default function abilityContextMenus(ability) {
     ),
     maneuver: [
       {
-        callback: async () => {
+        onClick: async () => {
           await ability.update({
             "system.executionTime.base": "a1",
             "system.maneuver": "active",
@@ -96,10 +96,10 @@ export default function abilityContextMenus(ability) {
           await ability.deleteSubDocuments(ability.subs.map((s) => s._id));
         },
         icon: makeIcon(TERIOCK.display.icons.maneuver.active, "contextMenu"),
-        name: game.i18n.localize("TERIOCK.TERMS.Maneuver.active"),
+        label: _loc("TERIOCK.TERMS.Maneuver.active"),
       },
       {
-        callback: async () => {
+        onClick: async () => {
           await ability.update({
             "system.executionTime.base": "r1",
             "system.maneuver": "reactive",
@@ -107,19 +107,19 @@ export default function abilityContextMenus(ability) {
           await ability.deleteSubDocuments(ability.subs.map((s) => s._id));
         },
         icon: makeIcon(TERIOCK.display.icons.maneuver.reactive, "contextMenu"),
-        name: game.i18n.localize("TERIOCK.TERMS.Maneuver.reactive"),
+        label: _loc("TERIOCK.TERMS.Maneuver.reactive"),
       },
       {
-        callback: async () =>
+        onClick: async () =>
           await ability.update({
             "system.executionTime.base": "passive",
             "system.maneuver": "passive",
           }),
         icon: makeIcon(TERIOCK.display.icons.maneuver.passive, "contextMenu"),
-        name: game.i18n.localize("TERIOCK.TERMS.Maneuver.passive"),
+        label: _loc("TERIOCK.TERMS.Maneuver.passive"),
       },
       {
-        callback: async () => {
+        onClick: async () => {
           await ability.update({
             "system.executionTime.slow.raw": "10",
             "system.executionTime.slow.unit": "minute",
@@ -128,7 +128,7 @@ export default function abilityContextMenus(ability) {
           await ability.deleteSubDocuments(ability.subs.map((s) => s._id));
         },
         icon: makeIcon(TERIOCK.display.icons.maneuver.slow, "contextMenu"),
-        name: game.i18n.localize("TERIOCK.TERMS.Maneuver.slow"),
+        label: _loc("TERIOCK.TERMS.Maneuver.slow"),
       },
     ],
     piercing: TeriockContextMenu.makeUpdateEntries(
@@ -136,17 +136,17 @@ export default function abilityContextMenus(ability) {
       [
         {
           icon: TERIOCK.display.icons.piercing.none,
-          name: game.i18n.localize("TERIOCK.MODELS.Piercing.MENU.0"),
+          label: _loc("TERIOCK.MODELS.Piercing.MENU.0"),
           value: 0,
         },
         {
           icon: TERIOCK.display.icons.piercing.av0,
-          name: game.i18n.localize("TERIOCK.MODELS.Piercing.MENU.1"),
+          label: _loc("TERIOCK.MODELS.Piercing.MENU.1"),
           value: 1,
         },
         {
           icon: TERIOCK.display.icons.piercing.ub,
-          name: game.i18n.localize("TERIOCK.MODELS.Piercing.MENU.2"),
+          label: _loc("TERIOCK.MODELS.Piercing.MENU.2"),
           value: 2,
         },
       ],

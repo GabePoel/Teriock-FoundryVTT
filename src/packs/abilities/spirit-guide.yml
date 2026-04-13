@@ -1,101 +1,99 @@
 _id: cb297af126bd9530
-_key: '!items!cb297af126bd9530'
+_key: '!effects!cb297af126bd9530'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: cb297af126bd9530
-    _key: '!items.effects!cb297af126bd9530.cb297af126bd9530'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/spirit-guide.webp
-    name: Spirit Guide
-    system:
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.senses.ethereal
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '120'
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: changes
-      class: necromancer
-      competence:
-        raw: 0
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-      delivery: sight
-      duration:
-        raw: '24'
-        unit: hour
-      effectTypes:
-        - sensory
-      elements:
-        - necromancy
-      executionTime: 10 Minutes
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, you may target an
-        additional creature.</p>
-      identifier: spirit-guide
-      interaction: manifest
-      maneuver: slow
-      overview:
-        base: >-
-          <p>You can see, hear, and speak to spirits and
-          @L[Condition:Ethereal]{Ethereal} creatures within 120 feet.</p>
-        fluent: >-
-          <p>You can target @L[Condition:Ethereal]{Ethereal} creatures with
-          @L[Category:Spiritually powered abilities]{spiritual}
-          @L[Category:Ritual delivery spells]{ritual spells} such as
-          @L[Ability:Tea Ceremony]{Tea Ceremony}.</p>
-        proficient: >-
-          <p>You can target @L[Condition:Ethereal]{Ethereal} creatures with
-          @L[Category:Necromancy element abilities]{necromancy}
-          @L[Category:Ritual delivery spells]{ritual spells} such as
-          @L[Ability:Summon the Dead]{Summon the Dead}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        raw: '5'
-        unit: ft
-      requirements: >-
-        <p>Unless @L[Core:Proficiency Bonus]{proficient}, you may only target
-        yourself.</p>
-      ritual: true
-      spell: true
-      standard: true
-      sustained: true
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/spirit-guide.webp
 name: Spirit Guide
-type: wrapper
+system:
+  automations:
+    e789ed5e109ebd1a:
+      _id: e789ed5e109ebd1a
+      changes:
+        - key: system.senses.ethereal
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: Actor
+          type: upgrade
+          value: '120'
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: changes
+  class: necromancer
+  competence:
+    raw: 0
+  costs:
+    components:
+      somatic:
+        type: tag
+      verbal:
+        type: tag
+  delivery: sight
+  duration:
+    raw: '24'
+    unit: hour
+  effectTypes:
+    - sensory
+  elements:
+    - necromancy
+  executionTime:
+    base: 10 Minutes
+    slow:
+      raw: '10'
+      unit: minute
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  heightened: >-
+    <p>For each additional @L[Core:MP]{MP} spent, you may target an additional
+    creature.</p>
+  identifier: spirit-guide
+  interaction: manifest
+  maneuver: slow
+  mundane: false
+  overview:
+    base: >-
+      <p>You can see, hear, and speak to spirits and
+      @L[Condition:Ethereal]{Ethereal} creatures within 120 feet.</p>
+    fluent: >-
+      <p>You can target @L[Condition:Ethereal]{Ethereal} creatures with
+      @L[Category:Spiritually powered abilities]{spiritual} @L[Category:Ritual
+      delivery spells]{ritual spells} such as @L[Ability:Tea Ceremony]{Tea
+      Ceremony}.</p>
+    proficient: >-
+      <p>You can target @L[Condition:Ethereal]{Ethereal} creatures with
+      @L[Category:Necromancy element abilities]{necromancy} @L[Category:Ritual
+      delivery spells]{ritual spells} such as @L[Ability:Summon the Dead]{Summon
+      the Dead}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    raw: '5'
+    unit: ft
+  requirements: >-
+    <p>Unless @L[Core:Proficiency Bonus]{proficient}, you may only target
+    yourself.</p>
+  ritual: true
+  spell: true
+  standard: true
+  sustained: true
+  targets:
+    - creature
+transfer: true
+type: ability

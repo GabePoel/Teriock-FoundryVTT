@@ -1,12 +1,12 @@
 import { TeriockActiveEffect } from "../documents/_module.mjs";
-import { time } from "../constants/options/change-options.mjs";
+import { phase } from "../constants/options/change-options.mjs";
 import { EffectChangeData } from "@common/documents/_types.mjs";
 
 declare global {
   namespace Teriock.Changes {
-    export type ChangeTime = keyof typeof time;
+    export type Phase = keyof typeof phase;
 
-    export type ChangeTarget =
+    export type Target =
       | Teriock.Documents.CommonType
       | "Actor"
       | "Item"
@@ -20,8 +20,8 @@ declare global {
 
     export type QualifiedChangeData = EffectChangeData & {
       qualifier: string;
-      target: ChangeTarget;
-      time: ChangeTime;
+      target: Target;
+      time: Phase;
     };
 
     export type PartialChangeTypeTree<keys extends string> = {
@@ -36,6 +36,6 @@ declare global {
       Effect: PartialChangeTypeTree<Teriock.Documents.EffectType>;
     };
 
-    export type ChangeTree = Record<ChangeTime, PartialChangeDocumentTree>;
+    export type ChangeTree = Record<Phase, PartialChangeDocumentTree>;
   }
 }

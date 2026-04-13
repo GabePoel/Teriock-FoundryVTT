@@ -20,11 +20,7 @@ export default function bindCommonActions(rootElement) {
     rootElement,
     "[data-wiki-context]",
     wikiContextMenuOptions,
-    {
-      eventName: "contextmenu",
-      jQuery: false,
-      fixed: true,
-    },
+    { eventName: "contextmenu", jQuery: false, fixed: true },
   );
   queryAll(rootElement, ".content-link[data-uuid]").forEach((el) => {
     if (game.teriock.getSetting("contentLinkTooltips")) {

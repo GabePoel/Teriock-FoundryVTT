@@ -46,7 +46,7 @@ export default class CombatExpirationAutomation extends CritAutomation {
   /** @inheritDoc */
   get formMessages() {
     const messages = super.formMessages;
-    if (!this.isPassive) {
+    if (this.isPassive) {
       messages.unshift({
         level: "error",
         text: "TERIOCK.AUTOMATIONS.CombatExpiration.NOTIFICATIONS.passive",

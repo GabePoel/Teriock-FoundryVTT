@@ -1,56 +1,49 @@
 _id: 303d316df08a928a
-_key: '!items!303d316df08a928a'
+_key: '!effects!303d316df08a928a'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 303d316df08a928a
-    _key: '!items.effects!303d316df08a928a.303d316df08a928a'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/sustain.webp
-    name: Sustain
-    system:
-      basic: true
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: intrinsic
-      identifier: sustain
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>Either start or continue some @L[Category:Slow abilities]{slow
-          ability} that has an execution time that's well defined in one of the
-          following
-          units.</p><ul><li>Seconds</li><li>Minutes</li><li>Hours</li><li>Days</li><li>Weeks</li><li>Months</li><li>Years</li></ul><div
-          class="note"><b>Note:</b> If you do not use [[lookup name]] at least
-          once per turn, then the @L[Category:Slow abilities]{slow ability}
-          @L[Core:Fizzles]{fizzles}. You will have to restart it.</div>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/sustain.webp
 name: Sustain
-type: wrapper
+system:
+  basic: true
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: instant
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: intrinsic
+  identifier: sustain
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>Either start or continue some @L[Category:Slow abilities]{slow ability}
+      that has an execution time that's well defined in one of the following
+      units.</p><ul><li>Seconds</li><li>Minutes</li><li>Hours</li><li>Days</li><li>Weeks</li><li>Months</li><li>Years</li></ul><div
+      class="note"><b>Note:</b> If you do not use [[lookup name]] at least once
+      per turn, then the @L[Category:Slow abilities]{slow ability}
+      @L[Core:Fizzles]{fizzles}. You will have to restart it.</div>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  targets:
+    - self
+transfer: true
+type: ability

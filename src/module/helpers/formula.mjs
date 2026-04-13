@@ -9,8 +9,24 @@ import { isKebabCase } from "./string.mjs";
  */
 export function addFormula(value, delta) {
   const operator = delta.startsWith("-") ? "-" : "+";
+  const minus = operator === "-" ? "-" : "";
   delta = delta.replace(/^[+-]/, "").trim();
-  if (!formulaExists(value)) return delta;
+  if (!formulaExists(value)) return `${minus} ${delta}`.trim();
+  if (!formulaExists(delta)) return value;
+  return `${value} ${operator} ${delta}`;
+}
+
+/**
+ * Subtract something from a formula.
+ * @param {Teriock.System.FormulaString} value
+ * @param {Teriock.System.FormulaString} delta
+ * @returns {Teriock.System.FormulaString}
+ */
+export function subtractFormula(value, delta) {
+  const operator = delta.startsWith("-") ? "+" : "-";
+  const minus = operator === "-" ? "-" : "";
+  delta = delta.replace(/^[+-]/, "").trim();
+  if (!formulaExists(value)) return `${minus} ${delta}`.trim();
   if (!formulaExists(delta)) return value;
   return `${value} ${operator} ${delta}`;
 }
@@ -35,7 +51,7 @@ export function boostFormula(value, delta) {
  * @returns {Teriock.System.FormulaString}
  */
 export function downgradeDeterministicFormula(value, delta) {
-  const terms = new game.teriock.Roll(value, {}).terms;
+  const terms = new teriock.dice.rolls.BaseRoll(value, {}).terms;
   if (terms.length === 1 && terms[0]?.fn === "min") {
     return value.replace(/\)$/, `, ${delta})`);
   }
@@ -49,8 +65,8 @@ export function downgradeDeterministicFormula(value, delta) {
  * @returns {Teriock.System.FormulaString}
  */
 export function downgradeIndeterministicFormula(value, delta) {
-  const valueTotal = game.teriock.Roll.meanValue(value);
-  const deltaTotal = game.teriock.Roll.meanValue(delta);
+  const valueTotal = teriock.dice.rolls.BaseRoll.meanValue(value);
+  const deltaTotal = teriock.dice.rolls.BaseRoll.meanValue(delta);
   if (deltaTotal <= valueTotal) return delta;
   return value;
 }
@@ -63,7 +79,7 @@ export function downgradeIndeterministicFormula(value, delta) {
  */
 export function multiplyFormula(value, delta) {
   if (Number(delta) === 1) return value;
-  const terms = new game.teriock.Roll(value, {}).terms;
+  const terms = new teriock.dice.rolls.BaseRoll(value, {}).terms;
   if (terms.length > 1) return `(${value}) * ${delta}`;
   return `${value} * ${delta}`;
 }
@@ -75,7 +91,7 @@ export function multiplyFormula(value, delta) {
  * @returns {Teriock.System.FormulaString}
  */
 export function upgradeDeterministicFormula(value, delta) {
-  const terms = new game.teriock.Roll(value, {}).terms;
+  const terms = new teriock.dice.rolls.BaseRoll(value, {}).terms;
   if (terms.length === 1 && terms[0]?.fn === "max") {
     return value.replace(/\)$/, `, ${delta})`);
   }
@@ -89,34 +105,9 @@ export function upgradeDeterministicFormula(value, delta) {
  * @returns {Teriock.System.FormulaString}
  */
 export function upgradeIndeterministicFormula(value, delta) {
-  const valueTotal = game.teriock.Roll.meanValue(value);
-  const deltaTotal = game.teriock.Roll.meanValue(delta);
+  const valueTotal = teriock.dice.rolls.BaseRoll.meanValue(value);
+  const deltaTotal = teriock.dice.rolls.BaseRoll.meanValue(delta);
   if (deltaTotal >= valueTotal) return delta;
-  return value;
-}
-
-/**
- * Transform a formula indeterministically.
- * @param {Teriock.System.FormulaString} value
- * @param {Teriock.System.FormulaString} delta
- * @param {number} mode
- * @returns {Teriock.System.FormulaString}
- */
-export function manipulateFormula(value, delta, mode) {
-  switch (mode) {
-    case CONST.ACTIVE_EFFECT_MODES.ADD:
-      return addFormula(value, delta);
-    case CONST.ACTIVE_EFFECT_MODES.MULTIPLY:
-      return multiplyFormula(value, delta);
-    case CONST.ACTIVE_EFFECT_MODES.UPGRADE:
-      return upgradeIndeterministicFormula(value, delta);
-    case CONST.ACTIVE_EFFECT_MODES.DOWNGRADE:
-      return downgradeIndeterministicFormula(value, delta);
-    case CONST.ACTIVE_EFFECT_MODES.OVERRIDE:
-      return delta;
-    case CONST.ACTIVE_EFFECT_MODES.CUSTOM:
-      return boostFormula(value, delta);
-  }
   return value;
 }
 
@@ -186,6 +177,7 @@ function addTermTypes(term, types) {
  * @returns {Teriock.System.FormulaString}
  */
 function processFormula(formula, types, fn) {
+  if (["string", "number"].includes(typeof types)) types = [types.toString()];
   if (!formulaExists(formula)) return formula;
   types = new Set(Array.from(types).filter((t) => isKebabCase(t)));
   const roll = new BaseRoll(formula);

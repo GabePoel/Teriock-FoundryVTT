@@ -1,6 +1,7 @@
 import { TeriockJournalEntry } from "../../../../documents/_module.mjs";
+import { mix } from "../../../../helpers/construction.mjs";
 import { quickAddAssociation } from "../../../../helpers/panel.mjs";
-import { fancifyFields, mix } from "../../../../helpers/utils.mjs";
+import { fancifyFields } from "../../../../helpers/utils.mjs";
 import {
   AccessDataMixin,
   PropagationDataMixin,
@@ -64,9 +65,7 @@ export default function CommonSystemMixin(Base) {
           pageNameKey: "name",
           passive: false,
           preservedProperties: this.PRESERVED_PROPERTIES,
-          pseudos: {
-            Automation: "system.automations",
-          },
+          pseudos: { Automation: "system.automations" },
           revealable: false,
           stats: false,
           tooltip: true,
@@ -92,14 +91,14 @@ export default function CommonSystemMixin(Base) {
         });
       }
 
+      /** @returns {typeof EmbeddedDataModel|null} */
+      get SettingsFlagsDataModel() {
+        return null;
+      }
+
       /** @returns {string} */
       get _masterText() {
         return this.parent.master?.fullName || "";
-      }
-
-      /** @returns {typeof EmbeddedDataModel|null} */
-      get _settingsFlagsDataModel() {
-        return null;
       }
 
       /** @returns {BaseAutomation[]} */
@@ -137,28 +136,29 @@ export default function CommonSystemMixin(Base) {
       /** @returns {Partial<Teriock.EmbedData.EmbedParts>} */
       get embedParts() {
         return {
-          title: this.parent.fullName,
-          img: this.parent.img,
-          text: this._masterText,
           color: this.color,
-          openable: true,
           draggable: true,
-          inactive: !this.parent.active,
-          struck: this.parent.disabled,
-          makeTooltip: false,
-          uuid: this.parent.uuid,
-          id: this.parent.id,
-          parentId: this.parent.parent?.id,
           icons: this.embedIcons,
+          id: this.parent.id,
+          img: this.parent.img,
+          inactive: !this.parent.active,
+          makeTooltip: false,
+          openable: true,
+          parentId: this.parent.parent?.id,
+          struck: this.parent.disabled,
+          subtitle: TERIOCK.options.document[this.parent.type].name,
+          text: this._masterText,
+          title: this.parent.fullName,
+          uuid: this.parent.uuid,
         };
       }
 
-      /** @returns {Teriock.MessageData.MessageBar[]} */
+      /** @returns {Teriock.Messages.MessageBar[]} */
       get messageBars() {
         return [];
       }
 
-      /** @returns {Teriock.MessageData.MessageBlock[]} */
+      /** @returns {Teriock.Messages.MessageBlock[]} */
       get messageBlocks() {
         return fancifyFields(this.displayFields)
           .map((f) => {
@@ -178,46 +178,6 @@ export default function CommonSystemMixin(Base) {
       /** @returns {Teriock.Documents.ModelMetadata} */
       get metadata() {
         return this.constructor.metadata;
-      }
-
-      /** @returns {Partial<Teriock.MessageData.MessagePanel>} */
-      get panelParts() {
-        /** @type {Partial<Teriock.MessageData.MessagePanel>} */
-        const parts = {
-          associations:
-            /** @type {Teriock.MessageData.MessageAssociation[]} */ [],
-          bars: this.messageBars,
-          blocks: this.messageBlocks,
-          color: this.color || undefined,
-          font: this.font,
-          image: this.parent.img,
-          name: this.parent.fullName,
-          uuid: this.parent.uuid,
-          icon: TERIOCK.options.document[this.metadata.type].icon,
-          label: TERIOCK.options.document[this.metadata.type].name,
-        };
-        const typeMap = this.parent.children.typeMap;
-        for (const type of this.metadata.visibleTypes) {
-          if (typeMap[type]) {
-            let docs = typeMap[type];
-            if (TERIOCK.options.document[type].doc === "ActiveEffect") {
-              docs = docs.filter(
-                (e) =>
-                  !foundry.utils.hasProperty(e, "system.revealed") ||
-                  e.system.revealed,
-              );
-            }
-            docs = TERIOCK.options.document[type].sorter(docs);
-            docs = docs.filter((d) => !d.isEphemeral);
-            quickAddAssociation(
-              docs,
-              TERIOCK.options.document[type].plural,
-              TERIOCK.options.document[type].icon,
-              parts.associations,
-            );
-          }
-        }
-        return parts;
       }
 
       /** @returns {Teriock.EmbedData.EmbedIcon|undefined} */
@@ -255,13 +215,9 @@ export default function CommonSystemMixin(Base) {
             const srcDiffNames = srcNames.filter((s) => !dstNames.includes(s));
             const dstDiffNames = dstNames.filter((d) => !srcNames.includes(d));
             const diffNames = [...srcNames, ...dstNames];
-            if (mapType === "diffSrc") {
-              names = srcDiffNames;
-            } else if (mapType === "diffDst") {
-              names = dstDiffNames;
-            } else if (mapType === "diff") {
-              names = diffNames;
-            }
+            if (mapType === "diffSrc") names = srcDiffNames;
+            else if (mapType === "diffDst") names = dstDiffNames;
+            else if (mapType === "diff") names = diffNames;
           }
           const srcDocs = srcChildren.filter((s) => names.includes(s.name));
           const dstDocs = dstChildren.filter((d) => names.includes(d.name));
@@ -346,17 +302,10 @@ export default function CommonSystemMixin(Base) {
         return [];
       }
 
-      /** @returns {Promise<CommonDocument|void>} */
+      /** @returns {Promise<CommonDocument|null>} */
       async getCompendiumSource() {
         const reference = await fromUuid(this.parent._stats.compendiumSource);
-        if (!reference) return;
-        if (
-          reference.type === "wrapper" &&
-          this.parent.documentName === "ActiveEffect"
-        ) {
-          return reference.system.effect;
-        }
-        return reference;
+        return reference || null;
       }
 
       /** @returns {Promise<object>} */
@@ -381,6 +330,49 @@ export default function CommonSystemMixin(Base) {
           type: this.parent.type,
           [`type.${this.parent.type}`]: 1,
         };
+      }
+
+      /** @returns {Promise<Partial<Teriock.Messages.MessagePanel>>} */
+      async getPanelParts() {
+        /** @type {Partial<Teriock.Messages.MessagePanel>} */
+        const parts = {
+          associations: /** @type {Teriock.Messages.MessageAssociation[]} */ [],
+          bars: this.messageBars,
+          blocks: this.messageBlocks,
+          color: this.color || undefined,
+          font: this.font,
+          image: this.parent.img,
+          name: this.parent.fullName,
+          uuid: this.parent.uuid,
+          icon:
+            TERIOCK.options.document[this.metadata.type]?.icon ||
+            TERIOCK.options.document.document.icon,
+          label:
+            TERIOCK.options.document[this.metadata.type]?.name ||
+            TERIOCK.options.document.document.name,
+        };
+        const typeMap = (await this.parent.getChildren()).typeMap;
+        for (const type of this.metadata.visibleTypes) {
+          if (typeMap[type]) {
+            let docs = typeMap[type];
+            if (TERIOCK.options.document[type].doc === "ActiveEffect") {
+              docs = docs.filter(
+                (e) =>
+                  !foundry.utils.hasProperty(e, "system.revealed") ||
+                  e.system.revealed,
+              );
+            }
+            docs = TERIOCK.options.document[type].sorter(docs);
+            docs = docs.filter((d) => !d.isEphemeral);
+            quickAddAssociation(
+              docs,
+              TERIOCK.options.document[type].plural,
+              TERIOCK.options.document[type].icon,
+              parts.associations,
+            );
+          }
+        }
+        return parts;
       }
 
       /** @inheritDoc */
@@ -424,9 +416,7 @@ export default function CommonSystemMixin(Base) {
           if (notesJournal) {
             const notesCategoryName =
               TERIOCK.options.document[this.parent.type]?.name ||
-              game.i18n.localize(
-                "TERIOCK.SYSTEMS.Common.FIELDS.gmNotes.otherCategory",
-              );
+              _loc("TERIOCK.SYSTEMS.Common.FIELDS.gmNotes.otherCategory");
             notesPage = notesJournal.pages.find(
               (p) =>
                 p.name === this.parent.name &&
@@ -491,8 +481,7 @@ export default function CommonSystemMixin(Base) {
               /** @type {BaseAutomation[]} */ this.automations?.contents;
             if (automations) {
               for (const automation of automations) {
-                updateObject[`${automation.fieldPath}.-=${automation.id}`] =
-                  null;
+                updateObject[automation.localPath] = _del;
               }
               await this.parent.update(updateObject);
             }

@@ -1,79 +1,78 @@
 _id: 22b92ba643f899ac
-_key: '!items!22b92ba643f899ac'
+_key: '!effects!22b92ba643f899ac'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 22b92ba643f899ac
-    _key: '!items.effects!22b92ba643f899ac.22b92ba643f899ac'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/pour-universal-antidote.webp
-    name: Pour Universal Antidote
-    system:
-      automations:
-        2af3b227ebf6f510:
-          _id: 2af3b227ebf6f510
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: remove
-          status: poisoned
-          type: end
-        b247bd0433a95723:
-          _id: b247bd0433a95723
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: remove
-          status: poisoned
-          type: status
-      competence:
-        raw: 0
-      consumeSource: true
-      delivery: item
-      duration:
-        raw: '1'
-        unit: minute
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: pour-universal-antidote
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: <p>Target is no longer @L[Condition:Poisoned]{poisoned}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - alchemical
-      range:
-        unit: contact
-      requirements: >-
-        <p>Use [[lookup name]] by interacting with the
-        @L[Category:Equipment]{equipment} that provides it. That counts as the
-        @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
-        the ability.</p>
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/pour-universal-antidote.webp
 name: Pour Universal Antidote
-type: wrapper
+system:
+  automations:
+    2af3b227ebf6f510:
+      _id: 2af3b227ebf6f510
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 1
+        - 0
+      relation: remove
+      status: poisoned
+      type: end
+    b247bd0433a95723:
+      _id: b247bd0433a95723
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: remove
+      status: poisoned
+      target: false
+      type: status
+  competence:
+    raw: 0
+  consumeSource: true
+  delivery: item
+  duration:
+    raw: '1'
+    unit: minute
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: pour-universal-antidote
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: <p>Target is no longer @L[Condition:Poisoned]{poisoned}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - alchemical
+  range:
+    unit: contact
+  requirements: >-
+    <p>Use [[lookup name]] by interacting with the
+    @L[Category:Equipment]{equipment} that provides it. That counts as the
+    @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for the
+    ability.</p>
+  targets:
+    - creature
+transfer: true
+type: ability

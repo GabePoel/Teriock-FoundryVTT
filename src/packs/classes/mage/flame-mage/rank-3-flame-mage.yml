@@ -1,7 +1,7 @@
 _id: 0615c1e02cf44dbd
 _key: '!items!0615c1e02cf44dbd'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.23
@@ -9,11 +9,11 @@ effects:
   - _id: CaTTWTstOULxfkrp
     _key: '!items.effects!0615c1e02cf44dbd.CaTTWTstOULxfkrp'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.7dbf0f42e843d563
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.7dbf0f42e843d563
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: combat
@@ -52,15 +52,16 @@ effects:
       skill: true
       targets:
         - self
+    transfer: true
     type: ability
   - _id: QEczhwfNaJmkOSOw
     _key: '!items.effects!0615c1e02cf44dbd.QEczhwfNaJmkOSOw'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.4f65a97250628523
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.4f65a97250628523
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: combat
@@ -106,49 +107,168 @@ effects:
       standard: true
       targets:
         - self
+    transfer: true
     type: ability
-  - _id: o7ggXXYpiPqlhgry
-    _key: '!items.effects!0615c1e02cf44dbd.o7ggXXYpiPqlhgry'
+  - _id: EjA48yTYBOoAhMOD
+    _key: '!items.effects!0615c1e02cf44dbd.EjA48yTYBOoAhMOD'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.f4dfb6440689d45e
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.f4719f88dc5f8192
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/bombastic-casting.webp
-    name: Bombastic Casting
+      systemVersion: 0.12.0
+    flags:
+      teriock:
+        category: support
+        defaultAbility: true
+        dontConsume: false
+    img: systems/teriock/src/icons/abilities/expanded-flame-elder-sorcery.webp
+    name: Expanded Flame Elder Sorcery
     system:
-      _sup: 12XEx0cPJzWyXTJE
+      automations:
+        f025905e157ac261:
+          _id: f025905e157ac261
+          changes:
+            - key: system.competence.raw
+              phase: fluency
+              priority: 10
+              qualifier: '@identifier.elder-sorcery-creation'
+              target: ability
+              type: upgrade
+              value: '2'
+            - key: system.competence.raw
+              phase: fluency
+              priority: 10
+              qualifier: '@identifier.celestial-elder-sorcery-words'
+              target: ability
+              type: upgrade
+              value: '2'
+            - key: system.competence.raw
+              phase: fluency
+              priority: 10
+              qualifier: '@identifier.flame-elder-sorcery-words'
+              target: ability
+              type: upgrade
+              value: '2'
+          competencies:
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
       class: flameMage
       competence:
         raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
       delivery: self
       duration:
         raw: '0'
         unit: instant
-      effectTypes:
-        - loud
-      executionTime: r0
+      elderSorcery: true
+      elements:
+        - flame
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: int
+      form: special
+      identifier: expanded-flame-elder-sorcery
+      interaction: feat
+      maneuver: passive
+      overview:
+        base: >-
+          <p>In addition to the custom rotator spells you create, you can learn
+          @L[Category:Rotator spells]{spells} created by others. When you come
+          across a fully created spell using only words you are @L[Core:Fluency
+          Bonus]{fluent} in, can make a DC 12 + OP @L[Core:INT]{INT}
+          @L[Core:Feat Interaction]{feat save} to attempt to learn it over the
+          course of a @L[Core:Long Rest]{long rest}. If you succeed, you can add
+          it to your rotator spell list. If you fail, you are
+          @L[Keyword:Incapable]{incapable} of attempting to learn that spell
+          again. The @L[Core:Game Master]{GM} may modify the DC based on the
+          spell's complexity, your knowledge of the spell, any special training
+          you receive, if the spell's creator is there to assist you, or for any
+          other factors they see fit. You may also attempt to learn words that
+          you come across as long as they are of elements you are
+          @L[Core:Fluency Bonus]{fluent} in. The @L[Core:Game Master]{GM} may
+          adjust the DC for these as they see fit as well, but the default is DC
+          15 + OP @L[Core:Intelligence]{INT} @L[Core:Feat Interaction]{feat
+          save}.</p>
+        proficient: >-
+          <p>You are @L[Core:Fluency Bonus]{fluent} in @L[Ability:Elder Sorcery
+          Creation]{Elder Sorcery Creation}, @L[Ability:Celestial Elder Sorcery
+          Words]{Celestial Elder Sorcery Words}, and @L[Ability:Flame Elder
+          Sorcery Words]{Flame Elder Sorcery Words}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      results:
+        fail: >-
+          <p>You are @L[Keyword:Incapable]{incapable} of attempting to learn
+          that spell or word again.</p>
+        save: <p>You learn the spell or word.</p>
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: 12XEx0cPJzWyXTJE
+    _key: '!items.effects!0615c1e02cf44dbd.12XEx0cPJzWyXTJE'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.e866e9dd3b3358f7
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    flags:
+      teriock:
+        category: support
+    img: systems/teriock/src/icons/abilities/flame-disciplines.webp
+    name: Flame Disciplines
+    system:
+      class: flameMage
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      executionTime: passive
       expansion:
         featSaveAttribute: mov
         range:
           unit: self
       featSaveAttribute: mov
       form: normal
-      identifier: bombastic-casting
+      identifier: flame-disciplines
       interaction: manifest
-      maneuver: reactive
+      maneuver: passive
       overview:
         base: >-
-          <p>The triggering @L[Category:Spells]{spell} becomes extremely visible
-          and loud. Visually the @L[Category:Spells]{spell} extends 10 feet in
-          all directions from a line between the caster and each of its targets.
-          The spell can be heard up to 600 feet away.</p>
+          <p>Once per @L[Core:Short Rest]{short rest}, you may cast a
+          @L[Category:Ritual delivery spells]{ritual} @L[Category:Flame element
+          spells]{flame spell} in half the time it would normally take.
+          Additionally, once per long rest, you may cast a @L[Category:Flame
+          element spells]{flame spell} as though you were
+          @L[Keyword:Adept]{adept} at it.</p><p>You also gain the
+          @L[Ability:Bombastic Casting]{Bombastic} and @L[Ability:Sudden
+          Casting]{Sudden} casting styles.</p>
+        fluent: >-
+          <p>You may now use the benefits from [[lookup name]] @L[Core:Fluency
+          Bonus]{F} times per @L[Core:Short Rest]{short rest}.</p>
+        proficient: >-
+          <p>You may now use the benefits from [[lookup name]]
+          @L[Core:Proficiency Bonus]{P} times per @L[Core:Long Rest]{long
+          rest}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -158,17 +278,141 @@ effects:
       skill: true
       standard: true
       targets:
-        - spell
-      trigger: <p>You are casting a @L[Category:Spells]{spell}.</p>
+        - self
+      upgrades:
+        competence:
+          attribute: int
+          value: 1
+    transfer: true
     type: ability
-  - _id: Of9sOoo4szd2CEOp
-    _key: '!items.effects!0615c1e02cf44dbd.Of9sOoo4szd2CEOp'
+  - _id: SIKeU2QEaZhXtXeq
+    _key: '!items.effects!0615c1e02cf44dbd.SIKeU2QEaZhXtXeq'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.2496ec9ba004a8e2
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.fe7bea7b8d14cba3
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
+    flags:
+      teriock:
+        category: combat
+    img: systems/teriock/src/icons/abilities/flame-rotator-fluency.webp
+    name: Flame Rotator Fluency
+    system:
+      automations:
+        f025905e157ac261:
+          _id: f025905e157ac261
+          changes:
+            - key: system.competence.raw
+              phase: fluency
+              priority: 10
+              qualifier: '@identifier.flame-rotators'
+              target: ability
+              type: upgrade
+              value: '2'
+          competencies:
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+      class: flameMage
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: flame-rotator-fluency
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You may rotate between @L[Category:Flame element spells]{flame}
+          rotator @L[Category:Spells]{spells} during a @L[Core:Short Rest]{short
+          rest} instead of a @L[Core:Long Rest]{long rest}.</p>
+        proficient: >-
+          <p>You are @L[Core:Fluency Bonus]{fluent} in @L[Ability:Flame
+          Rotators]{Flame Rotators}. (This does not make you @L[Core:Fluency
+          Bonus]{fluent} in the @L[Category:Spells]{spells} themselves.)</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: 8MbKNAuiNlYyDOmq
+    _key: '!items.effects!0615c1e02cf44dbd.8MbKNAuiNlYyDOmq'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.74698480298e4de5
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    flags:
+      teriock:
+        category: support
+    img: systems/teriock/src/icons/abilities/flame-spell-strikes.webp
+    name: Flame Spell Strikes
+    system:
+      class: flameMage
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: flame-spell-strikes
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @L[Keyword:Limited]{Limited} @L[Ability:Spell
+          Strike]{Spell Strike}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: tulzdly3RQvqvqc5
+    _key: '!items.effects!0615c1e02cf44dbd.tulzdly3RQvqvqc5'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.2496ec9ba004a8e2
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/cremate.webp
     name: Cremate
     system:
@@ -242,7 +486,10 @@ effects:
         - damaging
       elements:
         - flame
-      executionTime: a1
+      executionTime:
+        base: a1
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -253,6 +500,7 @@ effects:
       interaction: attack
       invoked: true
       maneuver: active
+      mundane: false
       piercing:
         raw: 0
       powerSources:
@@ -269,307 +517,16 @@ effects:
       standard: true
       targets:
         - vitals
+    transfer: true
     type: ability
-  - _id: EjA48yTYBOoAhMOD
-    _key: '!items.effects!0615c1e02cf44dbd.EjA48yTYBOoAhMOD'
+  - _id: Vfu24CMf8KZVisDO
+    _key: '!items.effects!0615c1e02cf44dbd.Vfu24CMf8KZVisDO'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.f4719f88dc5f8192
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.7e1e0b3ce0953833
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
-    flags:
-      teriock:
-        category: support
-        defaultAbility: true
-        dontConsume: false
-    img: systems/teriock/src/icons/abilities/expanded-flame-elder-sorcery.webp
-    name: Expanded Flame Elder Sorcery
-    system:
-      automations:
-        f025905e157ac261:
-          _id: f025905e157ac261
-          changes:
-            - key: system.competence.raw
-              mode: 4
-              priority: 10
-              qualifier: '@identifier.elder-sorcery-creation'
-              target: ability
-              time: fluency
-              value: '2'
-            - key: system.competence.raw
-              mode: 4
-              priority: 10
-              qualifier: '@identifier.celestial-elder-sorcery-words'
-              target: ability
-              time: fluency
-              value: '2'
-            - key: system.competence.raw
-              mode: 4
-              priority: 10
-              qualifier: '@identifier.flame-elder-sorcery-words'
-              target: ability
-              time: fluency
-              value: '2'
-          competencies:
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-      class: flameMage
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: instant
-      elderSorcery: true
-      elements:
-        - flame
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: int
-      form: special
-      identifier: expanded-flame-elder-sorcery
-      interaction: feat
-      maneuver: passive
-      overview:
-        base: >-
-          <p>In addition to the custom rotator spells you create, you can learn
-          @L[Category:Rotator spells]{spells} created by others. When you come
-          across a fully created spell using only words you are @L[Core:Fluency
-          Bonus]{fluent} in, can make a DC 12 + OP @L[Core:INT]{INT}
-          @L[Core:Feat Interaction]{feat save} to attempt to learn it over the
-          course of a @L[Core:Long Rest]{long rest}. If you succeed, you can add
-          it to your rotator spell list. If you fail, you are
-          @L[Keyword:Incapable]{incapable} of attempting to learn that spell
-          again. The @L[Core:Game Master]{GM} may modify the DC based on the
-          spell's complexity, your knowledge of the spell, any special training
-          you receive, if the spell's creator is there to assist you, or for any
-          other factors they see fit. You may also attempt to learn words that
-          you come across as long as they are of elements you are
-          @L[Core:Fluency Bonus]{fluent} in. The @L[Core:Game Master]{GM} may
-          adjust the DC for these as they see fit as well, but the default is DC
-          15 + OP @L[Core:Intelligence]{INT} @L[Core:Feat Interaction]{feat
-          save}.</p>
-        proficient: >-
-          <p>You are @L[Core:Fluency Bonus]{fluent} in @L[Ability:Elder Sorcery
-          Creation]{Elder Sorcery Creation}, @L[Ability:Celestial Elder Sorcery
-          Words]{Celestial Elder Sorcery Words}, and @L[Ability:Flame Elder
-          Sorcery Words]{Flame Elder Sorcery Words}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      results:
-        fail: >-
-          <p>You are @L[Keyword:Incapable]{incapable} of attempting to learn
-          that spell or word again.</p>
-        save: <p>You learn the spell or word.</p>
-      skill: true
-      standard: true
-      targets:
-        - self
-    type: ability
-  - _id: 12XEx0cPJzWyXTJE
-    _key: '!items.effects!0615c1e02cf44dbd.12XEx0cPJzWyXTJE'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.e866e9dd3b3358f7
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    flags:
-      teriock:
-        category: support
-    img: systems/teriock/src/icons/abilities/flame-disciplines.webp
-    name: Flame Disciplines
-    system:
-      class: flameMage
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: flame-disciplines
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>Once per @L[Core:Short Rest]{short rest}, you may cast a
-          @L[Category:Ritual delivery spells]{ritual} @L[Category:Flame element
-          spells]{flame spell} in half the time it would normally take.
-          Additionally, once per long rest, you may cast a @L[Category:Flame
-          element spells]{flame spell} as though you were
-          @L[Keyword:Adept]{adept} at it.</p><p>You also gain the
-          @L[Ability:Bombastic Casting]{Bombastic} and @L[Ability:Sudden
-          Casting]{Sudden} casting styles.</p>
-        fluent: >-
-          <p>You may now use the benefits from [[lookup name]] @L[Core:Fluency
-          Bonus]{F} times per @L[Core:Short Rest]{short rest}.</p>
-        proficient: >-
-          <p>You may now use the benefits from [[lookup name]]
-          @L[Core:Proficiency Bonus]{P} times per @L[Core:Long Rest]{long
-          rest}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-      upgrades:
-        competence:
-          attribute: int
-          value: 1
-    type: ability
-  - _id: SIKeU2QEaZhXtXeq
-    _key: '!items.effects!0615c1e02cf44dbd.SIKeU2QEaZhXtXeq'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.fe7bea7b8d14cba3
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    flags:
-      teriock:
-        category: combat
-    img: systems/teriock/src/icons/abilities/flame-rotator-fluency.webp
-    name: Flame Rotator Fluency
-    system:
-      automations:
-        f025905e157ac261:
-          _id: f025905e157ac261
-          changes:
-            - key: system.competence.raw
-              mode: 4
-              priority: 10
-              qualifier: '@identifier.flame-rotators'
-              target: ability
-              time: fluency
-              value: '2'
-          competencies:
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-      class: flameMage
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: flame-rotator-fluency
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You may rotate between @L[Category:Flame element spells]{flame}
-          rotator @L[Category:Spells]{spells} during a @L[Core:Short Rest]{short
-          rest} instead of a @L[Core:Long Rest]{long rest}.</p>
-        proficient: >-
-          <p>You are @L[Core:Fluency Bonus]{fluent} in @L[Ability:Flame
-          Rotators]{Flame Rotators}. (This does not make you @L[Core:Fluency
-          Bonus]{fluent} in the @L[Category:Spells]{spells} themselves.)</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-    type: ability
-  - _id: 8MbKNAuiNlYyDOmq
-    _key: '!items.effects!0615c1e02cf44dbd.8MbKNAuiNlYyDOmq'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.74698480298e4de5
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    flags:
-      teriock:
-        category: support
-    img: systems/teriock/src/icons/abilities/flame-spell-strikes.webp
-    name: Flame Spell Strikes
-    system:
-      class: flameMage
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: flame-spell-strikes
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You gain @L[Keyword:Limited]{Limited} @L[Ability:Spell
-          Strike]{Spell Strike}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-    type: ability
-  - _id: OFPEJ5NINFBzzVjj
-    _key: '!items.effects!0615c1e02cf44dbd.OFPEJ5NINFBzzVjj'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.7e1e0b3ce0953833
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/minor-weapon-enchantment.webp
     name: Minor Weapon Enchantment
     system:
@@ -577,6 +534,7 @@ effects:
       automations:
         72ce567009179bea:
           _id: 72ce567009179bea
+          changeType: add
           competencies:
             - 0
             - 1
@@ -589,7 +547,6 @@ effects:
             unit: second
           heighten:
             - 1
-          mode: 5
           type: duration
       class: flameMage
       competence:
@@ -610,7 +567,11 @@ effects:
         unit: hour
       elements:
         - flame
-      executionTime: 10 Minutes
+      executionTime:
+        base: 10 Minutes
+        slow:
+          raw: '10'
+          unit: minute
       expansion:
         featSaveAttribute: mov
         range:
@@ -624,6 +585,7 @@ effects:
       interaction: manifest
       invoked: true
       maneuver: slow
+      mundane: false
       overview:
         base: >-
           <p>Target weapon is enchanted to deal @L[Damage:Magic]{magic damage}
@@ -648,19 +610,21 @@ effects:
       standard: true
       targets:
         - weapon
+    transfer: true
     type: ability
-  - _id: zu0t82wuWpQOldc4
-    _key: '!items.effects!0615c1e02cf44dbd.zu0t82wuWpQOldc4'
+  - _id: zSRKENocc0ubbAM9
+    _key: '!items.effects!0615c1e02cf44dbd.zSRKENocc0ubbAM9'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.ea1ecd00bc4430e1
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.D4zf8b3n9RnHOVWd
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/spell-strike.webp
-    name: Spell Strike
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/bombastic-casting.webp
+    name: Bombastic Casting
     system:
-      _sup: 8MbKNAuiNlYyDOmq
+      _sup: 12XEx0cPJzWyXTJE
+      class: flameMage
       competence:
         raw: 0
       costs:
@@ -668,53 +632,53 @@ effects:
           mp:
             formula: '1'
             type: formula
-      delivery: weapon
+      delivery: self
       duration:
         raw: '0'
         unit: instant
-      executionTime: r0
+      effectTypes:
+        - loud
+      executionTime:
+        base: r0
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
           unit: self
       featSaveAttribute: mov
       form: normal
-      identifier: spell-strike
+      identifier: bombastic-casting
       interaction: manifest
-      limitation: >-
-        <p>Only usable with @L[Ability:Flame Ray]{Flame Ray} and @L[Ability:Fire
-        Ball]{Fire Ball}.</p>
       maneuver: reactive
+      mundane: false
       overview:
         base: >-
-          <p>Target takes the "on hit" effect of a @L[Category:Missile delivery
-          spells]{missile spell} that you are @L[Core:Proficiency
-          Bonus]{proficient} in. If the triggering hit was a critical hit, then
-          the target takes the "on critical hit" effect instead.</p>
+          <p>The triggering @L[Category:Spells]{spell} becomes extremely visible
+          and loud. Visually the @L[Category:Spells]{spell} extends 10 feet in
+          all directions from a line between the caster and each of its targets.
+          The spell can be heard up to 600 feet away.</p>
       piercing:
         raw: 0
       powerSources:
         - magical
       range:
-        unit: contact
+        unit: self
       skill: true
       standard: true
       targets:
-        - creature
-      trigger: >-
-        <p>You have just landed a hit with a @L[Category:Weapon delivery
-        abilities]{weapon} or @L[Category:Bite delivery abilities]{bite}
-        @L[Category:Attack abilities]{attack} on another creature and the effect
-        has successfully applied.</p>
+        - spell
+      trigger: <p>You are casting a @L[Category:Spells]{spell}.</p>
+    transfer: true
     type: ability
-  - _id: mjjnkDszlGBvlrc6
-    _key: '!items.effects!0615c1e02cf44dbd.mjjnkDszlGBvlrc6'
+  - _id: Yt4J8tanizk4vKrk
+    _key: '!items.effects!0615c1e02cf44dbd.Yt4J8tanizk4vKrk'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.ab321f874c30c33b
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.4iSvMXAxC3yvpRQ5
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/sudden-casting.webp
     name: Sudden Casting
     system:
@@ -733,7 +697,10 @@ effects:
         unit: instant
       effectTypes:
         - sensory
-      executionTime: r1
+      executionTime:
+        base: r1
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -743,6 +710,7 @@ effects:
       identifier: sudden-casting
       interaction: manifest
       maneuver: reactive
+      mundane: false
       overview:
         base: >-
           <p>You cast a @L[Category:Single action spells]{single action spell}
@@ -764,6 +732,70 @@ effects:
         <p>Another creatures would move out of sight or out of range of a
         @L[Category:Single action spells]{single action spell} you could
         cast.</p>
+    transfer: true
+    type: ability
+  - _id: crAUOoa5RVpmbTyS
+    _key: '!items.effects!0615c1e02cf44dbd.crAUOoa5RVpmbTyS'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.HXidffXqZoxo8wog
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/spell-strike.webp
+    name: Spell Strike
+    system:
+      _sup: 8MbKNAuiNlYyDOmq
+      competence:
+        raw: 0
+      costs:
+        primary:
+          mp:
+            formula: '1'
+            type: formula
+      delivery: weapon
+      duration:
+        raw: '0'
+        unit: instant
+      executionTime:
+        base: r0
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: spell-strike
+      interaction: manifest
+      limitation: >-
+        <p>Only usable with @L[Ability:Flame Ray]{Flame Ray} and @L[Ability:Fire
+        Ball]{Fire Ball}.</p>
+      maneuver: reactive
+      mundane: false
+      overview:
+        base: >-
+          <p>Target takes the "on hit" effect of a @L[Category:Missile delivery
+          spells]{missile spell} that you are @L[Core:Proficiency
+          Bonus]{proficient} in. If the triggering hit was a critical hit, then
+          the target takes the "on critical hit" effect instead.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: contact
+      skill: true
+      standard: true
+      targets:
+        - creature
+      trigger: >-
+        <p>You have just landed a hit with a @L[Category:Weapon delivery
+        abilities]{weapon} or @L[Category:Bite delivery abilities]{bite}
+        @L[Category:Attack abilities]{attack} on another creature and the effect
+        has successfully applied.</p>
+    transfer: true
     type: ability
 folder: abd25a387353ae4e
 img: systems/teriock/src/icons/ranks/rank-3-flame-mage.webp

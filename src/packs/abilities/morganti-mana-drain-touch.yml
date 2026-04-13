@@ -1,79 +1,82 @@
 _id: bb1d7a774a1786ac
-_key: '!items!bb1d7a774a1786ac'
+_key: '!effects!bb1d7a774a1786ac'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: bb1d7a774a1786ac
-    _key: '!items.effects!bb1d7a774a1786ac.bb1d7a774a1786ac'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/morganti-mana-drain-touch.webp
-    name: Morganti Mana Drain Touch
-    system:
-      automations:
-        157afc517847f562:
-          _id: 157afc517847f562
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: 1d8[morganti mana]
-          heighten:
-            - 1
-            - 0
-          merge: true
-          roll: drain
-          type: roll
-        kfZjJDSpK2NnY7Qk:
-          _id: kfZjJDSpK2NnY7Qk
-          type: revitalize
-      competence:
-        raw: 0
-      delivery: hand
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - revitalization
-        - draining
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: morganti-mana-drain-touch
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 2
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      results:
-        critHit: >-
-          <p>Deal [[/drain 2d8[morganti morganti]]] @L[Category:Drain
-          types]{drain} to the target. If this @L[Condition:Dead]{kills} the
-          target, you @L[Core:Revitalizing]{revitalize} twice. This
-          @L[Core:Revitalizing]{revitalization} is the only part of this that is
-          a @L[Category:Revitalization effects]{revitalization effect}.</p>
-        hit: >-
-          <p>Deal [[/drain 1d8[morganti mana]]] @L[Category:Drain types]{drain}
-          to the target. If this @L[Condition:Dead]{kills} the target, you
-          @L[Core:Revitalizing]{revitalize}.  This
-          @L[Core:Revitalizing]{revitalization} is the only part of this that is
-          a @L[Category:Revitalization effects]{revitalization effect}.</p>
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/morganti-mana-drain-touch.webp
 name: Morganti Mana Drain Touch
-type: wrapper
+system:
+  automations:
+    157afc517847f562:
+      _id: 157afc517847f562
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: 1d8[morganti mana]
+      heighten:
+        - 1
+        - 0
+      impact: drain
+      merge: true
+      type: roll
+    kfZjJDSpK2NnY7Qk:
+      _id: kfZjJDSpK2NnY7Qk
+      competencies:
+        - 0
+        - 1
+        - 2
+      consumeStatDice: true
+      forHarm: false
+      heighten:
+        - 0
+        - 1
+      type: revitalize
+  competence:
+    raw: 0
+  delivery: hand
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - revitalization
+    - draining
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  identifier: morganti-mana-drain-touch
+  interaction: attack
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 2
+  powerSources:
+    - magical
+  range:
+    unit: contact
+  results:
+    critHit: >-
+      <p>Deal [[/drain 2d8[morganti morganti]]] @L[Category:Drain types]{drain}
+      to the target. If this @L[Condition:Dead]{kills} the target, you
+      @L[Core:Revitalizing]{revitalize} twice. This
+      @L[Core:Revitalizing]{revitalization} is the only part of this that is a
+      @L[Category:Revitalization effects]{revitalization effect}.</p>
+    hit: >-
+      <p>Deal [[/drain 1d8[morganti mana]]] @L[Category:Drain types]{drain} to
+      the target. If this @L[Condition:Dead]{kills} the target, you
+      @L[Core:Revitalizing]{revitalize}.  This
+      @L[Core:Revitalizing]{revitalization} is the only part of this that is a
+      @L[Category:Revitalization effects]{revitalization effect}.</p>
+  targets:
+    - creature
+transfer: true
+type: ability

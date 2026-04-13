@@ -1,119 +1,121 @@
 _id: 611a5488618a2eed
-_key: '!items!611a5488618a2eed'
+_key: '!effects!611a5488618a2eed'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 611a5488618a2eed
-    _key: '!items.effects!611a5488618a2eed.611a5488618a2eed'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/platinum-dragonfly-breath.webp
-    name: Platinum Dragonfly Breath
-    system:
-      automations:
-        1728b3a84ea27844:
-          _id: 1728b3a84ea27844
-          common:
-            - bag
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: common
-        29b275994cf9f5b1:
-          _id: 29b275994cf9f5b1
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: 4d10[holy lethal magic]
-          heighten:
-            - 1
-            - 0
-          merge: true
-          roll: damage
-          type: roll
-        46d652e970305101:
-          _id: 46d652e970305101
-          angle: '@angle.dragon'
-          distance: 15 + 5 * @h
-          t: cone
-          type: template
-        800c70e6560525a8:
-          _id: 800c70e6560525a8
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: (2 * @h)d10[magic holy]
-          heighten:
-            - 1
-          merge: true
-          roll: damage
-          type: roll
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: cone
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - killing
-        - damaging
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 2d10[magic holy]]] @L[Core:Damage]{damage}. This extra
-        @L[Core:Damage]{damage} applies regardless of whether or not the target
-        is @L[Category:Undead creatures]{undead}. Additionally, the
-        @L[Core:Range]{range} of this increases by 5 feet.</p>
-      identifier: platinum-dragonfly-breath
-      interaction: feat
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-        - divine
-      range:
-        raw: '15'
-        unit: ft
-      results:
-        fail: >-
-          <p>Target takes [[/damage 4d10[holy lethal magic]]]
-          @L[Core:Damage]{damage} if they are @L[Category:Undead
-          creatures]{undead}. If this @L[Condition:Dead]{kills} the target, they
-          are instantly "exorcised" (as though an @L[Ability:Exorcism]{Exorcism}
-          @L[Category:Ritual delivery abilities]{ritual} had just been completed
-          on them).</p>
-        save: >-
-          <p>Target takes half as much @L[Core:Damage]{damage} from this as they
-          would otherwise and has no other non-@L[Core:Damage]{damage} effects
-          applied to them. This is calculated after any
-          @L[Keyword:Boosted]{boosts} or @L[Keyword:Deboosted]{deboosts}.</p>
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/platinum-dragonfly-breath.webp
 name: Platinum Dragonfly Breath
-type: wrapper
+system:
+  automations:
+    1728b3a84ea27844:
+      _id: 1728b3a84ea27844
+      common:
+        - bag
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 1
+        - 0
+      type: common
+    29b275994cf9f5b1:
+      _id: 29b275994cf9f5b1
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: 4d10[holy lethal magic]
+      heighten:
+        - 1
+        - 0
+      impact: damage
+      merge: true
+      type: roll
+    46d652e970305101:
+      _id: 46d652e970305101
+      angle: '@angle.dragon'
+      competencies:
+        - 0
+        - 1
+        - 2
+      distance: 15 + 5 * @h
+      heighten:
+        - 0
+        - 1
+      movable: false
+      t: cone
+      type: template
+    800c70e6560525a8:
+      _id: 800c70e6560525a8
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: (2 * @h)d10[magic holy]
+      heighten:
+        - 1
+      impact: damage
+      merge: true
+      type: roll
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: cone
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - killing
+    - damaging
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  heightened: >-
+    <p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage
+    2d10[magic holy]]] @L[Core:Damage]{damage}. This extra
+    @L[Core:Damage]{damage} applies regardless of whether or not the target is
+    @L[Category:Undead creatures]{undead}. Additionally, the
+    @L[Core:Range]{range} of this increases by 5 feet.</p>
+  identifier: platinum-dragonfly-breath
+  interaction: feat
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+    - divine
+  range:
+    raw: '15'
+    unit: ft
+  results:
+    fail: >-
+      <p>Target takes [[/damage 4d10[holy lethal magic]]]
+      @L[Core:Damage]{damage} if they are @L[Category:Undead creatures]{undead}.
+      If this @L[Condition:Dead]{kills} the target, they are instantly
+      "exorcised" (as though an @L[Ability:Exorcism]{Exorcism}
+      @L[Category:Ritual delivery abilities]{ritual} had just been completed on
+      them).</p>
+    save: >-
+      <p>Target takes half as much @L[Core:Damage]{damage} from this as they
+      would otherwise and has no other non-@L[Core:Damage]{damage} effects
+      applied to them. This is calculated after any @L[Keyword:Boosted]{boosts}
+      or @L[Keyword:Deboosted]{deboosts}.</p>
+  targets:
+    - creature
+transfer: true
+type: ability

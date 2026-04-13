@@ -1,117 +1,51 @@
 _id: c7e6ac1b9d2cc5ba
-_key: '!items!c7e6ac1b9d2cc5ba'
+_key: '!effects!c7e6ac1b9d2cc5ba'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: c7e6ac1b9d2cc5ba
-    _key: '!items.effects!c7e6ac1b9d2cc5ba.c7e6ac1b9d2cc5ba'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.68
-    img: systems/teriock/src/icons/properties/mithril.webp
-    name: Mithril
-    system:
-      automations:
-        parameterChanges:
-          _id: parameterChanges
-          changes:
-            - key: system.weight.raw
-              mode: 1
-              priority: 10
-              qualifier: '1'
-              target: parent
-              time: normal
-              value: '0.5'
-            - key: system.minStr.raw
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: parent
-              time: normal
-              value: '-1'
-          type: changes
-      competence:
-        raw: 0
-      description: >-
-        <p><b>[[lookup name]]</b> items are @L[Property:Durable]{durable}, weigh
-        half as much, have their minimum @L[Core:Strength]{STR} decreased by 1,
-        and are @L[Property:Unbreachable]{unbreachable} if they are
-        @L[Category:Armor]{armor}.</p>
-      form: intrinsic
-      identifier: mithril
-      material: true
-    type: property
-  - _id: UAvVqDL2VXNALNoX
-    _key: '!items.effects!c7e6ac1b9d2cc5ba.UAvVqDL2VXNALNoX'
-    _stats:
-      compendiumSource: Compendium.teriock.properties.Item.1b0ae28f7a0a0448
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.41
-    img: systems/teriock/src/icons/properties/durable.webp
-    name: Durable
-    system:
-      _sup: c7e6ac1b9d2cc5ba
-      competence:
-        raw: 0
-      description: >-
-        <p>An item that is <b>[[lookup name style=lc]]</b> is
-        @L[Keyword:Resistance]{resistant} to becoming
-        @L[Property:Shattered]{shattered} and effects that would render it
-        @L[Property:Destroyed]{destroyed} cause it to be
-        @L[Property:Shattered]{shattered} instead.</p>
-      form: intrinsic
-      identifier: durable
-    type: property
-  - _id: vW1J3ItiBwOKbh80
-    _key: '!items.effects!c7e6ac1b9d2cc5ba.vW1J3ItiBwOKbh80'
-    _stats:
-      compendiumSource: Compendium.teriock.properties.Item.752e9d67325b0faf
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/properties/unbreachable.webp
-    name: Unbreachable
-    system:
-      _sup: c7e6ac1b9d2cc5ba
-      automations:
-        parameterChanges:
-          _id: parameterChanges
-          changes:
-            - key: system.av.bonus
-              mode: 4
-              priority: 10
-              qualifier: '@av'
-              target: parent
-              time: normal
-              value: '1'
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 0
-            - 1
-          type: changes
-      competence:
-        raw: 0
-      description: >-
-        <p>@L[Category:Armor]{Armor} that's <b>[[lookup name style=lc]]</b> has
-        its @L[Core:Armor Class]{AV} increased by 1.</p>
-      form: intrinsic
-      identifier: unbreachable
-      mundane: true
-    type: property
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/properties/mithril.webp
 name: Mithril
-type: wrapper
+system:
+  automations:
+    parameterChanges:
+      _id: parameterChanges
+      changes:
+        - key: system.weight.raw
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: parent
+          type: multiply
+          value: '0.5'
+        - key: system.minStr.raw
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: parent
+          type: add
+          value: '-1'
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 0
+        - 1
+      type: changes
+  competence:
+    raw: 0
+  description: >-
+    <p><b>[[lookup name]]</b> items are @L[Property:Durable]{durable}, weigh
+    half as much, have their minimum @L[Core:Strength]{STR} decreased by 1, and
+    are @L[Property:Unbreachable]{unbreachable} if they are
+    @L[Category:Armor]{armor}.</p>
+  form: intrinsic
+  identifier: mithril
+  mundane: false
+transfer: true
+type: property

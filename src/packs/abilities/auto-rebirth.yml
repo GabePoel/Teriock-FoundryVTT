@@ -1,100 +1,99 @@
 _id: e4fa4466f9dbabdd
-_key: '!items!e4fa4466f9dbabdd'
+_key: '!effects!e4fa4466f9dbabdd'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: e4fa4466f9dbabdd
-    _key: '!items.effects!e4fa4466f9dbabdd.e4fa4466f9dbabdd'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/auto-rebirth.webp
-    name: Auto-Rebirth
-    system:
-      automations:
-        1728b3a84ea27844:
-          _id: 1728b3a84ea27844
-          common:
-            - revive
-            - bag
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: common
-        72ce567009179bea:
-          _id: 72ce567009179bea
-          competencies:
-            - 0
-            - 1
-            - 2
-          duration:
-            raw: '@h * 3600'
-          heighten:
-            - 1
-          type: duration
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: self
-      duration:
-        raw: '1'
-        unit: minute
-      effectTypes:
-        - revival
-        - automatic
-      elements:
-        - life
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 1 hour.</p>
-      identifier: auto-rebirth
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>If you @L[Condition:Dead]{die}, you are brought back to
-          @L[Condition:Alive]{life} at the end of the @L[Core:Turns]{turn}. If
-          you had less than 1 @L[Core:Hit Points and Mana Points]{HP}, you are
-          brought back with 1 @L[Core:Hit Points and Mana Points]{HP}. If you
-          had less than 1 @L[Core:Hit Points and Mana Points]{MP}, you are
-          brought back with 1 @L[Core:Hit Points and Mana Points]{MP}.
-          Otherwise, your @L[Core:Hit Points and Mana Points]{HP} and
-          @L[Core:Hit Points and Mana Points]{MP} do not change.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      rotator: true
-      spell: true
-      standard: true
-      targets:
-        - self
-      trigger: >-
-        <p> This triggers automatically. You cannot choose to not use it if you
-        are able to.</p>
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/auto-rebirth.webp
 name: Auto-Rebirth
-type: wrapper
+system:
+  automations:
+    1728b3a84ea27844:
+      _id: 1728b3a84ea27844
+      common:
+        - revive
+        - bag
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 1
+        - 0
+      type: common
+    72ce567009179bea:
+      _id: 72ce567009179bea
+      changeType: add
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      duration:
+        raw: '@h * 3600'
+        unit: second
+      heighten:
+        - 1
+      type: duration
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: self
+  duration:
+    raw: '1'
+    unit: minute
+  effectTypes:
+    - revival
+    - automatic
+  elements:
+    - life
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  heightened: >-
+    <p>For each additional @L[Core:MP]{MP} spent, the duration of this effect
+    increases by 1 hour.</p>
+  identifier: auto-rebirth
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>If you @L[Condition:Dead]{die}, you are brought back to
+      @L[Condition:Alive]{life} at the end of the @L[Core:Turns]{turn}. If you
+      had less than 1 @L[Core:Hit Points and Mana Points]{HP}, you are brought
+      back with 1 @L[Core:Hit Points and Mana Points]{HP}. If you had less than
+      1 @L[Core:Hit Points and Mana Points]{MP}, you are brought back with 1
+      @L[Core:Hit Points and Mana Points]{MP}. Otherwise, your @L[Core:Hit
+      Points and Mana Points]{HP} and @L[Core:Hit Points and Mana Points]{MP} do
+      not change.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: self
+  rotator: true
+  spell: true
+  standard: true
+  targets:
+    - self
+  trigger: >-
+    <p> This triggers automatically. You cannot choose to not use it if you are
+    able to.</p>
+transfer: true
+type: ability

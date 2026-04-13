@@ -1,7 +1,6 @@
 import js from "@eslint/js";
 import { defineConfig } from "eslint/config";
 import globals from "globals";
-//noinspection SpellCheckingInspection
 import tseslint from "typescript-eslint";
 
 const globalDocuments = {
@@ -59,12 +58,15 @@ const globalClient = {
   Handlebars: "readonly",
   PIXI: "readonly",
   ProseMirror: "readonly",
+  _del: "readonly",
+  _replace: "readonly",
+  _loc: "readonly",
+  canvas: "readonly",
   foundry: "readonly",
+  game: "readonly",
   getDocumentClass: "readonly",
   io: "readonly",
   ui: "readonly",
-  canvas: "readonly",
-  game: "readonly",
 };
 
 const globalMacro = {

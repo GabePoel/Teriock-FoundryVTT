@@ -1,99 +1,97 @@
 _id: 24ab6e2a6601860e
-_key: '!items!24ab6e2a6601860e'
+_key: '!effects!24ab6e2a6601860e'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 24ab6e2a6601860e
-    _key: '!items.effects!24ab6e2a6601860e.24ab6e2a6601860e'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/virtuous-circle.webp
-    name: Virtuous Circle
-    system:
-      automations:
-        72ce567009179bea:
-          _id: 72ce567009179bea
-          competencies:
-            - 0
-            - 1
-            - 2
-          duration:
-            raw: '@h * 86400'
-          heighten:
-            - 1
-          type: duration
-      class: paladin
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: hand
-      duration:
-        raw: '8'
-        unit: hour
-      elements:
-        - storm
-        - necromancy
-      executionTime: 10 Minutes
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 24 hours.</p>
-      identifier: virtuous-circle
-      interaction: manifest
-      maneuver: slow
-      overview:
-        base: >-
-          <p>You enchant an area no larger than 30 feet in any direction. As you
-          enchant this area, you must choose whether it provides "good luck" or
-          "bad luck".</p><dl><dt>Good Luck</dt><dd>All physical (in game) dice
-          rolls that creatures make in the area are made with
-          @L[Core:Advantage]{advantage}. Any time a card is drawn from a deck,
-          the player playing the creature instead draws two cards, picks one of
-          them to have actually drawn, and shuffles the other card back into the
-          deck. Additionally, creatures within the area may choose to spend 1
-          @L[Core:Hit Points and Mana Points]{MP} to have
-          @L[Core:Advantage]{advantage} on any @L[Core:Attack
-          Interaction]{attack roll}, @L[Core:Feat Interaction]{feat save}, or
-          @L[Keyword:Resistance]{resistance save} they make.</dd><dt>Bad
-          Luck</dt><dd>All physical (in game) dice rolls that creatures make in
-          the area are made with @L[Core:Disadvantage]{disadvantage}. Any time a
-          card is drawn from a deck, the player playing the creature instead
-          draws two cards, the @L[Core:Game Master]{GM} picks one of them that
-          they suspect to be the "worse" draw, and that is the card that is
-          actually drawn. The other card is shuffled back into the deck.
-          Additionally, creatures within the area must spend 1 @L[Core:Hit
-          Points and Mana Points]{MP} or else they have
-          @L[Core:Disadvantage]{disadvantage} on any @L[Core:Attack
-          Interaction]{attack roll}, @L[Core:Feat Interaction]{feat save}, or
-          @L[Keyword:Resistance]{resistance save} they make.</dd></dl>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      ritual: true
-      rotator: true
-      spell: true
-      standard: true
-      targets:
-        - area
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/virtuous-circle.webp
 name: Virtuous Circle
-type: wrapper
+system:
+  automations:
+    72ce567009179bea:
+      _id: 72ce567009179bea
+      changeType: add
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      duration:
+        raw: '@h * 86400'
+        unit: second
+      heighten:
+        - 1
+      type: duration
+  class: paladin
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: hand
+  duration:
+    raw: '8'
+    unit: hour
+  elements:
+    - storm
+    - necromancy
+  executionTime:
+    base: 10 Minutes
+    slow:
+      raw: '10'
+      unit: minute
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  heightened: >-
+    <p>For each additional @L[Core:MP]{MP} spent, the duration of this effect
+    increases by 24 hours.</p>
+  identifier: virtuous-circle
+  interaction: manifest
+  maneuver: slow
+  mundane: false
+  overview:
+    base: >-
+      <p>You enchant an area no larger than 30 feet in any direction. As you
+      enchant this area, you must choose whether it provides "good luck" or "bad
+      luck".</p><dl><dt>Good Luck</dt><dd>All physical (in game) dice rolls that
+      creatures make in the area are made with @L[Core:Advantage]{advantage}.
+      Any time a card is drawn from a deck, the player playing the creature
+      instead draws two cards, picks one of them to have actually drawn, and
+      shuffles the other card back into the deck. Additionally, creatures within
+      the area may choose to spend 1 @L[Core:Hit Points and Mana Points]{MP} to
+      have @L[Core:Advantage]{advantage} on any @L[Core:Attack
+      Interaction]{attack roll}, @L[Core:Feat Interaction]{feat save}, or
+      @L[Keyword:Resistance]{resistance save} they make.</dd><dt>Bad
+      Luck</dt><dd>All physical (in game) dice rolls that creatures make in the
+      area are made with @L[Core:Disadvantage]{disadvantage}. Any time a card is
+      drawn from a deck, the player playing the creature instead draws two
+      cards, the @L[Core:Game Master]{GM} picks one of them that they suspect to
+      be the "worse" draw, and that is the card that is actually drawn. The
+      other card is shuffled back into the deck. Additionally, creatures within
+      the area must spend 1 @L[Core:Hit Points and Mana Points]{MP} or else they
+      have @L[Core:Disadvantage]{disadvantage} on any @L[Core:Attack
+      Interaction]{attack roll}, @L[Core:Feat Interaction]{feat save}, or
+      @L[Keyword:Resistance]{resistance save} they make.</dd></dl>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: contact
+  ritual: true
+  rotator: true
+  spell: true
+  standard: true
+  targets:
+    - area
+transfer: true
+type: ability

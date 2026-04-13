@@ -1,10 +1,11 @@
 import { EquipmentExecution } from "../../../../executions/document-executions/_module.mjs";
+import { mix } from "../../../../helpers/construction.mjs";
 import {
   dotJoin,
   toCamelCase,
   toKebabCase,
 } from "../../../../helpers/string.mjs";
-import { inferNameFromIdentifier, mix } from "../../../../helpers/utils.mjs";
+import { inferNameFromIdentifier } from "../../../../helpers/utils.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
@@ -66,7 +67,7 @@ export default class EquipmentSystem extends mix(
     return [
       ...super._automationTypes,
       automations.ChatMacroAutomation,
-      automations.CommonImpactsAutomation,
+      automations.CommonOutcomesAutomation,
       automations.HacksAutomation,
       automations.RollAutomation,
       automations.TakeAutomation,
@@ -153,7 +154,7 @@ export default class EquipmentSystem extends mix(
         : parts.subtitle,
       text: dotJoin([
         ...this._attunableWrappers,
-        game.i18n.format("TERIOCK.SYSTEMS.Equipment.PANELS.weight", {
+        _loc("TERIOCK.SYSTEMS.Equipment.PANELS.weight", {
           value: this.weight.total + this.storage.carriedWeight,
         }),
         parts.text,

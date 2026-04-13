@@ -1,103 +1,97 @@
 _id: 82515b3b4af635f5
-_key: '!items!82515b3b4af635f5'
+_key: '!effects!82515b3b4af635f5'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 82515b3b4af635f5
-    _key: '!items.effects!82515b3b4af635f5.82515b3b4af635f5'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/wild-strike.webp
-    name: Wild Strike
-    system:
-      automations:
-        d635eb44dba086dd:
-          _id: d635eb44dba086dd
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: combatExpiration
-          what:
-            roll: 2d4kh1
-            threshold: 4
-            type: forced
-          when:
-            skip: 0
-            time: start
-            trigger: turn
-          who:
-            type: executor
-        d873eb939c3b5951:
-          _id: d873eb939c3b5951
-          competencies:
-            - 0
-            - 1
-            - 2
-          hacks:
-            - arm
-            - leg
-            - body
-          heighten:
-            - 1
-            - 0
-          type: hacks
-      class: berserker
-      competence:
-        raw: 0
-      costs:
-        components:
-          hack:
-            type: tag
-      delivery: self
-      duration:
-        raw: '5'
-        unit: second
-      endCondition: >-
-        <p>The start of your next @L[Core:Turn]{turn}. This also ends the next
-        time you make a melee @L[Category:Attack abilities]{attack}.</p>
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: wild-strike
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>The next melee @L[Category:Attack abilities]{attack} you make
-          before the start of your next @L[Core:Turns]{turn} is
-          @L[Keyword:Boosted]{boosted} and @L[Keyword:Armor Voiding]{AV0}. As
-          you make this @L[Category:Attack abilities]{attack}, take a limb or
-          body @L[Condition:Hacked]{hack} as a cost. You do not pay this cost
-          unless you make the corresponding @L[Category:Attack
-          abilities]{attack}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/wild-strike.webp
 name: Wild Strike
-type: wrapper
+system:
+  automations:
+    d635eb44dba086dd:
+      _id: d635eb44dba086dd
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: combatExpiration
+      what:
+        roll: 2d4kh1
+        threshold: 4
+        type: forced
+      when:
+        skip: 0
+        time: start
+        trigger: turn
+      who:
+        type: executor
+    d873eb939c3b5951:
+      _id: d873eb939c3b5951
+      competencies:
+        - 0
+        - 1
+        - 2
+      hacks:
+        - arm
+        - leg
+        - body
+      heighten:
+        - 1
+        - 0
+      reverse: false
+      type: hacks
+  class: berserker
+  competence:
+    raw: 0
+  costs:
+    components:
+      hack:
+        type: tag
+  delivery: self
+  duration:
+    raw: '5'
+    unit: second
+  endCondition: >-
+    <p>The start of your next @L[Core:Turn]{turn}. This also ends the next time
+    you make a melee @L[Category:Attack abilities]{attack}.</p>
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: wild-strike
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>The next melee @L[Category:Attack abilities]{attack} you make before
+      the start of your next @L[Core:Turns]{turn} is
+      @L[Keyword:Boosted]{boosted} and @L[Keyword:Armor Voiding]{AV0}. As you
+      make this @L[Category:Attack abilities]{attack}, take a limb or body
+      @L[Condition:Hacked]{hack} as a cost. You do not pay this cost unless you
+      make the corresponding @L[Category:Attack abilities]{attack}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  skill: true
+  standard: true
+  targets:
+    - self
+transfer: true
+type: ability

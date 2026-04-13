@@ -20,9 +20,7 @@ export default class TradecraftModel extends BaseModifierModel {
 
   /** @inheritDoc */
   get useText() {
-    return game.i18n.format("TERIOCK.ROLLS.Tradecraft.name", {
-      value: this.name,
-    });
+    return _loc("TERIOCK.ROLLS.Tradecraft.name", { value: this.name });
   }
 
   /** @inheritDoc */

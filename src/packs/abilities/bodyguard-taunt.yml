@@ -1,98 +1,96 @@
 _id: e5f8ee3fe3112156
-_key: '!items!e5f8ee3fe3112156'
+_key: '!effects!e5f8ee3fe3112156'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: e5f8ee3fe3112156
-    _key: '!items.effects!e5f8ee3fe3112156.e5f8ee3fe3112156'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/bodyguard-taunt.webp
-    name: Bodyguard Taunt
-    system:
-      automations:
-        6cebaedf0c5c1507:
-          _id: 6cebaedf0c5c1507
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: include
-          status: goaded
-          target: true
-          type: status
-        d635eb44dba086dd:
-          _id: d635eb44dba086dd
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: combatExpiration
-          what:
-            roll: 2d4kh1
-            threshold: 4
-            type: forced
-          when:
-            skip: 0
-            time: start
-            trigger: turn
-          who:
-            type: executor
-      class: veteran
-      competence:
-        raw: 0
-      delivery: weapon
-      duration:
-        raw: '5'
-        unit: second
-      executionTime: r0
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: bodyguard-taunt
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>Pick another creature within range. They are
-          @L[Condition:Goaded]{goaded} until the start of your next
-          @L[Core:Turns]{turn}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        raw: '5'
-        unit: ft
-      requirements: >-
-        <p>You are not also using @L[Ability:Bodyguard Backup]{Bodyguard
-        Backup}.</p>
-      skill: true
-      standard: true
-      targets:
-        - creature
-      trigger: >-
-        <p>You attempt an @L[Core:Attack Interaction]{attack} against another
-        creature.</p>
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/bodyguard-taunt.webp
 name: Bodyguard Taunt
-type: wrapper
+system:
+  automations:
+    6cebaedf0c5c1507:
+      _id: 6cebaedf0c5c1507
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: include
+      status: goaded
+      target: true
+      type: status
+    d635eb44dba086dd:
+      _id: d635eb44dba086dd
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: combatExpiration
+      what:
+        roll: 2d4kh1
+        threshold: 4
+        type: forced
+      when:
+        skip: 0
+        time: start
+        trigger: turn
+      who:
+        type: executor
+  class: veteran
+  competence:
+    raw: 0
+  delivery: weapon
+  duration:
+    raw: '5'
+    unit: second
+  executionTime:
+    base: r0
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: bodyguard-taunt
+  interaction: manifest
+  maneuver: reactive
+  mundane: false
+  overview:
+    base: >-
+      <p>Pick another creature within range. They are
+      @L[Condition:Goaded]{goaded} until the start of your next
+      @L[Core:Turns]{turn}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    raw: '5'
+    unit: ft
+  requirements: >-
+    <p>You are not also using @L[Ability:Bodyguard Backup]{Bodyguard
+    Backup}.</p>
+  skill: true
+  standard: true
+  targets:
+    - creature
+  trigger: >-
+    <p>You attempt an @L[Core:Attack Interaction]{attack} against another
+    creature.</p>
+transfer: true
+type: ability

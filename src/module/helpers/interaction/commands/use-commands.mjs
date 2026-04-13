@@ -74,7 +74,7 @@ export const useLocalCommand = {
   icon: (options) => inferIconFromIdentifier(options?.lookup),
   id: "use-local",
   label: (options) =>
-    game.i18n.format("TERIOCK.COMMANDS.UseDocument.useNamed", {
+    _loc("TERIOCK.COMMANDS.UseDocument.useNamed", {
       name: inferNameFromIdentifier(options?.lookup) || "",
     }),
   primary: useLocal,
@@ -91,8 +91,7 @@ export const useExternalCommand = {
   icon: (options) => options?.icon || icons.ui.document,
   id: "use-external",
   label: (options) =>
-    options?.label ||
-    game.i18n.localize("TERIOCK.COMMANDS.UseDocument.useUnnamed"),
+    options?.label || _loc("TERIOCK.COMMANDS.UseDocument.useUnnamed"),
   primary: useExternal,
   secondary: useExternal,
 };

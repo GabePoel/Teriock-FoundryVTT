@@ -1,77 +1,104 @@
 _id: 3a70b947e9786d4f
-_key: '!items!3a70b947e9786d4f'
+_key: '!effects!3a70b947e9786d4f'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 3a70b947e9786d4f
-    _key: '!items.effects!3a70b947e9786d4f.3a70b947e9786d4f'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/humanoid-transformation.webp
-    name: Humanoid Transformation
-    system:
-      automations:
-        9f08fabc1d2bcac2:
-          _id: 9f08fabc1d2bcac2
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: include
-          status: transformed
-          type: status
-        vV8FBC6maqIdaOl8:
-          _id: vV8FBC6maqIdaOl8
-          documents:
-            - Compendium.teriock.tables.RollTable.950c47d6d7f79470
-          type: transformation
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '1'
-        unit: minute
-      effectTypes:
-        - transformation
-      elements:
-        - nature
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: humanoid-transformation
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>You are @L[Condition:Transformed]{fully transformed} into a
-          @L[Core:Common Humanoid Species]{common humanoid
-          species}.</p><p>@Embed[Compendium.teriock.tables.RollTable.950c47d6d7f79470
-          rollable]</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      rotator: true
-      spell: true
-      standard: true
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/humanoid-transformation.webp
 name: Humanoid Transformation
-type: wrapper
+system:
+  automations:
+    9f08fabc1d2bcac2:
+      _id: 9f08fabc1d2bcac2
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: include
+      status: transformed
+      target: false
+      type: status
+    vV8FBC6maqIdaOl8:
+      _id: vV8FBC6maqIdaOl8
+      automatic: true
+      competence:
+        raw: 0
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      documents:
+        - Compendium.teriock.tables.RollTable.950c47d6d7f79470
+      heighten:
+        - 0
+        - 1
+      multi: false
+      override:
+        - art
+        - size
+      overrideCompetence: false
+      reset:
+        - gp
+        - hp
+      ring: false
+      suppress:
+        - body
+        - equipment
+        - fluency
+        - rank
+        - species
+      type: transformation
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '1'
+    unit: minute
+  effectTypes:
+    - transformation
+  elements:
+    - nature
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  identifier: humanoid-transformation
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>You are @L[Condition:Transformed]{fully transformed} into a
+      @L[Core:Common Humanoid Species]{common humanoid
+      species}.</p><p>@Embed[Compendium.teriock.tables.RollTable.950c47d6d7f79470
+      rollable]</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: self
+  rotator: true
+  spell: true
+  standard: true
+  targets:
+    - self
+transfer: true
+type: ability

@@ -1,165 +1,47 @@
 _id: 7ead47c000eea565
-_key: '!items!7ead47c000eea565'
+_key: '!effects!7ead47c000eea565'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 7ead47c000eea565
-    _key: '!items.effects!7ead47c000eea565.7ead47c000eea565'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/motive-discovery.webp
-    name: Motive Discovery
-    system:
-      class: paladin
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: motive-discovery
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Sense Motive]{Sense Motive} and
-          @L[Ability:Detect Alignment]{Detect Alignment}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - divine
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-    type: ability
-  - _id: zBJLz9grSUNzJeGr
-    _key: '!items.effects!7ead47c000eea565.zBJLz9grSUNzJeGr'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.4416620fb784b675
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/sense-motive.webp
-    name: Sense Motive
-    system:
-      _sup: 7ead47c000eea565
-      class: paladin
-      competence:
-        raw: 0
-      delivery: aura
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - truthDetecting
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: unp
-      form: normal
-      identifier: sense-motive
-      interaction: feat
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - divine
-      range:
-        raw: '10'
-        unit: ft
-      results:
-        fail: >-
-          <p>You know whether the target is hostile, neutral, or friendly
-          towards you and your party.</p>
-        save: >-
-          <p>You do not learn the target's disposition towards you and your
-          party.</p>
-      skill: true
-      standard: true
-      targets:
-        - creature
-    type: ability
-  - _id: oQMPwuTk82rgSoOn
-    _key: '!items.effects!7ead47c000eea565.oQMPwuTk82rgSoOn'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.ba2f16b739e6be3b
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/detect-alignment.webp
-    name: Detect Alignment
-    system:
-      _sup: 7ead47c000eea565
-      class: paladin
-      competence:
-        raw: 0
-      costs:
-        components:
-          material:
-            description: <p>Something symbolic of your deity.</p>
-            type: description
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: sight
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - truthDetecting
-      executionTime: 10 Minutes
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: detect-alignment
-      interaction: manifest
-      maneuver: slow
-      overview:
-        base: >-
-          <p>You learn whether your deity considers the alignment of the target.
-          (Good/neutral/evil, chaotic/neutral/lawful, etc.)</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - divine
-      range:
-        raw: '5'
-        unit: ft
-      ritual: true
-      skill: true
-      standard: true
-      targets:
-        - creature
-        - item
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/motive-discovery.webp
 name: Motive Discovery
-type: wrapper
+system:
+  class: paladin
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: unlimited
+  executionTime:
+    base: passive
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: motive-discovery
+  interaction: manifest
+  maneuver: passive
+  mundane: false
+  overview:
+    base: >-
+      <p>You gain @L[Ability:Sense Motive]{Sense Motive} and @L[Ability:Detect
+      Alignment]{Detect Alignment}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - divine
+  range:
+    unit: self
+  skill: true
+  standard: true
+  targets:
+    - self
+transfer: true
+type: ability

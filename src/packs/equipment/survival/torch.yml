@@ -1,7 +1,7 @@
 _id: 2333d7e3e52b61c1
 _key: '!items!2333d7e3e52b61c1'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.64
@@ -9,11 +9,11 @@ effects:
   - _id: bashing000000000
     _key: '!items.effects!2333d7e3e52b61c1.bashing000000000'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.294cd7a4f1545ed9
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.294cd7a4f1545ed9
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.63
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/properties/bashing.webp
     name: Bashing
     system:
@@ -26,37 +26,16 @@ effects:
       form: intrinsic
       identifier: bashing
       mundane: true
-    type: property
-  - _id: dIVwDeC6OjdthY4a
-    _key: '!items.effects!2333d7e3e52b61c1.dIVwDeC6OjdthY4a'
-    _stats:
-      compendiumSource: Compendium.teriock.properties.Item.05897268aa513ad0
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.41
-    img: systems/teriock/src/icons/properties/burning.webp
-    name: Burning
-    system:
-      _sup: W7zBwBVrBOlOAAnp
-      competence:
-        raw: 0
-      damageType: Fire
-      description: >-
-        <p>An item that is <b>[[lookup name style=lc]]</b>, deals
-        @L[Damage:Fire]{fire damage} and can be used to deliver
-        @L[Ability:Burn]{Burn}.</p>
-      form: intrinsic
-      identifier: burning
+    transfer: true
     type: property
   - _id: W7zBwBVrBOlOAAnp
     _key: '!items.effects!2333d7e3e52b61c1.W7zBwBVrBOlOAAnp'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.db88dee8cee2e2db
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.db88dee8cee2e2db
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.41
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/properties/flaming.webp
     name: Flaming
     system:
@@ -68,15 +47,40 @@ effects:
         @L[Property:Burning]{burning}.</p>
       form: intrinsic
       identifier: flaming
+    transfer: true
     type: property
-  - _id: WkmvIShmSbN9O6yz
-    _key: '!items.effects!2333d7e3e52b61c1.WkmvIShmSbN9O6yz'
+  - _id: tbIedUChOXRnAC91
+    _key: '!items.effects!2333d7e3e52b61c1.tbIedUChOXRnAC91'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.639b14658b0d2e1c
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.05897268aa513ad0
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/properties/burning.webp
+    name: Burning
+    system:
+      _sup: W7zBwBVrBOlOAAnp
+      competence:
+        raw: 0
+      damageType: fire
+      description: >-
+        <p>An item that is <b>[[lookup name style=lc]]</b>, deals
+        @L[Damage:Fire]{fire damage} and can be used to deliver
+        @L[Ability:Burn]{Burn}.</p>
+      form: intrinsic
+      identifier: burning
+      mundane: false
+    transfer: true
+    type: property
+  - _id: LnVpASC0wbp7hFGE
+    _key: '!items.effects!2333d7e3e52b61c1.LnVpASC0wbp7hFGE'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.639b14658b0d2e1c
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/properties/glowing.webp
     name: Glowing
     system:
@@ -86,26 +90,26 @@ effects:
         parameterChanges:
           _id: parameterChanges
           changes:
-            - key: system.light.dim
-              mode: 4
+            - key: token.light.dim
+              phase: normal
               priority: 5
               qualifier: '1'
               target: Actor
-              time: normal
+              type: upgrade
               value: '10'
-            - key: system.light.color
-              mode: 5
+            - key: token.light.color
+              phase: normal
               priority: 5
               qualifier: '1'
               target: Actor
-              time: normal
+              type: override
               value: '#C64600'
-            - key: system.light.animation.type
-              mode: 5
+            - key: token.light.animation.type
+              phase: normal
               priority: 5
               qualifier: '1'
               target: Actor
-              time: normal
+              type: override
               value: torch
           competencies:
             - 0
@@ -130,7 +134,8 @@ effects:
         to it.</p>
       form: intrinsic
       identifier: glowing
-      modifiesActor: true
+      mundane: false
+    transfer: true
     type: property
 folder: a133b0539876f28f
 img: systems/teriock/src/icons/equipment/torch.webp

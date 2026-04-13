@@ -120,14 +120,14 @@ export default class BaseConfig extends TeriockBaseApplication {
       field: isDataField
         ? setting.type
         : new Field({ required: true, blank: false }),
-      hint: game.i18n.localize(setting.hint),
-      label: game.i18n.localize(setting.name),
+      hint: _loc(setting.hint),
+      label: _loc(setting.name),
       value: game.settings.get("teriock", name),
     };
     if (setting.choices)
       data.options = Object.entries(setting.choices).map(([value, label]) => ({
         value,
-        label: game.i18n.localize(label),
+        label: _loc(label),
       }));
     return data;
   }

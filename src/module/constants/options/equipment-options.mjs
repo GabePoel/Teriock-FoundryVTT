@@ -8,22 +8,22 @@ export const equipmentOptions = {
   equipmentType: index.equipment,
   powerLevel: {
     mundane: {
-      name: "TERIOCK.TERMS.PowerLevel.mundane",
+      label: "TERIOCK.TERMS.PowerLevel.mundane",
       icon: icons.powerLevel.mundane,
       color: colors.brown,
     },
     enchanted: {
-      name: "TERIOCK.TERMS.PowerLevel.enchanted",
+      label: "TERIOCK.TERMS.PowerLevel.enchanted",
       icon: icons.powerLevel.enchanted,
       color: colors.blue,
     },
     magic: {
-      name: "TERIOCK.TERMS.PowerLevel.magic",
+      label: "TERIOCK.TERMS.PowerLevel.magic",
       icon: icons.powerLevel.magic,
       color: colors.purple,
     },
     unknown: {
-      name: "TERIOCK.TERMS.PowerLevel.unknown",
+      label: "TERIOCK.TERMS.PowerLevel.unknown",
       icon: icons.powerLevel.unknown,
       color: colors.grey,
     },
@@ -47,5 +47,5 @@ export const equipmentOptions = {
   weight: { interval: 0.01 },
 };
 
-preLocalize("options.equipment.powerLevel", { keys: ["name"] });
+preLocalize("options.equipment.powerLevel", { keys: ["label"] });
 preLocalize("options.equipment.powerLevelShort");

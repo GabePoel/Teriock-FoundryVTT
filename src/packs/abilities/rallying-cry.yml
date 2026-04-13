@@ -1,97 +1,106 @@
 _id: 2e216f53b653a40d
-_key: '!items!2e216f53b653a40d'
+_key: '!effects!2e216f53b653a40d'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 2e216f53b653a40d
-    _key: '!items.effects!2e216f53b653a40d.2e216f53b653a40d'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/rallying-cry.webp
-    name: Rallying Cry
-    system:
-      automations:
-        Mny7BIO5WvYIRRfr:
-          _id: Mny7BIO5WvYIRRfr
-          type: heal
-        b4960732f0b9ed9f:
-          _id: b4960732f0b9ed9f
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: include
-          status: frightened
-          type: status
-      class: knight
-      competence:
-        raw: 0
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: aura
-      duration:
-        raw: '5'
-        unit: minute
-      effectTypes:
-        - mental
-        - healing
-        - loud
-      endCondition: >-
-        <p>At the start of each of the enemy target's turns, they roll [[/roll
-        2d4]]. On a 4, this effect ends.</p>
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: int
-      form: normal
-      identifier: rallying-cry
-      interaction: feat
-      maneuver: active
-      overview:
-        base: >-
-          <p>[[lookup name]] only counts as a @L[Category:Mental effects]{mental
-          effect} on your enemies and a @L[Category:Healing effects]{healing
-          effect} on your allies. The @L[Core:Healing]{healing's} duration is
-          @L[Category:Instant duration abilities]{instant}.</p><div
-          class="note"><b>Note:</b> People may choose to fail @L[Category:Feat
-          abilities]{feat saves}.</div>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-        - martial
-      range:
-        raw: '10'
-        unit: ft
-      results:
-        fail: >-
-          <p>If you consider the targeted creature to be an ally of yours, they
-          @L[Core:Healing]{heal}. If you consider the targeted creature to be an
-          enemy, they become @L[Condition:Frightened]{frightened}.</p>
-      skill: true
-      standard: true
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/rallying-cry.webp
 name: Rallying Cry
-type: wrapper
+system:
+  automations:
+    Mny7BIO5WvYIRRfr:
+      _id: Mny7BIO5WvYIRRfr
+      competencies:
+        - 0
+        - 1
+        - 2
+      consumeStatDice: true
+      forHarm: false
+      heighten:
+        - 0
+        - 1
+      noStatDice: false
+      type: heal
+    b4960732f0b9ed9f:
+      _id: b4960732f0b9ed9f
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: include
+      status: frightened
+      target: false
+      type: status
+  class: knight
+  competence:
+    raw: 0
+  costs:
+    components:
+      somatic:
+        type: tag
+      verbal:
+        type: tag
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: aura
+  duration:
+    raw: '5'
+    unit: minute
+  effectTypes:
+    - mental
+    - healing
+    - loud
+  endCondition: >-
+    <p>At the start of each of the enemy target's turns, they roll [[/roll
+    2d4]]. On a 4, this effect ends.</p>
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: int
+  form: normal
+  identifier: rallying-cry
+  interaction: feat
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>[[lookup name]] only counts as a @L[Category:Mental effects]{mental
+      effect} on your enemies and a @L[Category:Healing effects]{healing effect}
+      on your allies. The @L[Core:Healing]{healing's} duration is
+      @L[Category:Instant duration abilities]{instant}.</p><div
+      class="note"><b>Note:</b> People may choose to fail @L[Category:Feat
+      abilities]{feat saves}.</div>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+    - martial
+  range:
+    raw: '10'
+    unit: ft
+  results:
+    fail: >-
+      <p>If you consider the targeted creature to be an ally of yours, they
+      @L[Core:Healing]{heal}. If you consider the targeted creature to be an
+      enemy, they become @L[Condition:Frightened]{frightened}.</p>
+  skill: true
+  standard: true
+  targets:
+    - creature
+transfer: true
+type: ability

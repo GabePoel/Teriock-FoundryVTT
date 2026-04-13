@@ -10,23 +10,23 @@ export default async function newDocumentDialog(type) {
   const name = TERIOCK.options.document[type].name;
   const typeName = name.toLowerCase();
   return await TeriockDialog.prompt({
-    content: game.i18n.format("TERIOCK.DIALOGS.NewDocument.content", {
+    content: _loc("TERIOCK.DIALOGS.NewDocument.content", {
       typeName,
     }),
     window: {
-      title: game.i18n.format("TERIOCK.DIALOGS.NewDocument.title", { name }),
+      title: _loc("TERIOCK.DIALOGS.NewDocument.title", { name }),
       icon: makeIconClass(TERIOCK.display.icons.ui.add, "title"),
     },
     modal: true,
     ok: {
-      label: game.i18n.localize("TERIOCK.DIALOGS.NewDocument.BUTTONS.import"),
+      label: _loc("TERIOCK.DIALOGS.NewDocument.BUTTONS.import"),
       default: true,
       callback: () => "import",
       icon: makeIconClass(TERIOCK.display.icons.ui.import, "button"),
     },
     buttons: [
       {
-        label: game.i18n.localize("TERIOCK.DIALOGS.NewDocument.BUTTONS.create"),
+        label: _loc("TERIOCK.DIALOGS.NewDocument.BUTTONS.create"),
         callback: () => "create",
         icon: makeIconClass(TERIOCK.display.icons.ui.custom, "button"),
       },

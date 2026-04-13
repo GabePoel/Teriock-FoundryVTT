@@ -1,58 +1,52 @@
 _id: 4887e9d7d044c4dc
-_key: '!items!4887e9d7d044c4dc'
+_key: '!effects!4887e9d7d044c4dc'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 4887e9d7d044c4dc
-    _key: '!items.effects!4887e9d7d044c4dc.4887e9d7d044c4dc'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/whirlpool-aura.webp
-    name: Whirlpool Aura
-    system:
-      competence:
-        raw: 0
-      delivery: aura
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: r0
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: str
-      form: normal
-      identifier: whirlpool-aura
-      interaction: feat
-      maneuver: reactive
-      overview:
-        proficient: >-
-          <p>If you want, target is moved a distance towards you equal to the
-          distance you descended this turn (with a maximum distance of 100
-          feet).</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        raw: '10'
-        unit: ft
-      requirements: <p>Target is in the same body of water as you.</p>
-      results:
-        fail: >-
-          <p>Target is moved 10 feet towards you, is pulled underwater, and
-          starts @L[Condition:Suffocating]{suffocating} accordingly.</p>
-      targets:
-        - creature
-      trigger: <p>You descend at least 15 feet underwater from the surface.</p>
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/whirlpool-aura.webp
 name: Whirlpool Aura
-type: wrapper
+system:
+  competence:
+    raw: 0
+  delivery: aura
+  duration:
+    raw: '0'
+    unit: instant
+  executionTime:
+    base: r0
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: str
+  form: normal
+  identifier: whirlpool-aura
+  interaction: feat
+  maneuver: reactive
+  mundane: false
+  overview:
+    proficient: >-
+      <p>If you want, target is moved a distance towards you equal to the
+      distance you descended this turn (with a maximum distance of 100
+      feet).</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    raw: '10'
+    unit: ft
+  requirements: <p>Target is in the same body of water as you.</p>
+  results:
+    fail: >-
+      <p>Target is moved 10 feet towards you, is pulled underwater, and starts
+      @L[Condition:Suffocating]{suffocating} accordingly.</p>
+  targets:
+    - creature
+  trigger: <p>You descend at least 15 feet underwater from the surface.</p>
+transfer: true
+type: ability

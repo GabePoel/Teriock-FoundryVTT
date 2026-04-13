@@ -1,0 +1,126 @@
+_id: dW9fdUzjjY7BbJHA
+_key: '!effects!dW9fdUzjjY7BbJHA'
+_stats:
+  compendiumSource: Compendium.teriock.abilities.ActiveEffect.7060a27da46df3f2
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.12.0
+img: systems/teriock/src/icons/abilities/swift-sleep-aura.webp
+name: Swift Sleep Aura
+system:
+  _sup: 6b9c057fc7cf8e78
+  automations:
+    1c16bc58d6a930a0:
+      _id: 1c16bc58d6a930a0
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: (@h)d8
+      heighten:
+        - 1
+      impact: sleep
+      merge: true
+      type: roll
+    a394fca7e6444945:
+      _id: a394fca7e6444945
+      competencies:
+        - 2
+      formula: (@f)d8
+      heighten:
+        - 1
+        - 0
+      impact: sleep
+      merge: true
+      type: roll
+    e1c7d7174b360e93:
+      _id: e1c7d7174b360e93
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: 1d8
+      heighten:
+        - 1
+        - 0
+      impact: sleep
+      merge: true
+      type: roll
+    ebd880725105dde4:
+      _id: ebd880725105dde4
+      competencies:
+        - 1
+        - 2
+      formula: (@p)d8
+      heighten:
+        - 1
+        - 0
+      impact: sleep
+      merge: true
+      type: roll
+  class: lifeMage
+  competence:
+    raw: 0
+  costs:
+    components:
+      somatic:
+        type: tag
+      verbal:
+        type: tag
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: aura
+  duration:
+    raw: '0'
+    triggers:
+      - dawn
+    unit: unlimited
+  elements:
+    - life
+  endCondition: <p>Target is successfully @L[Keyword:Awaken]{awakened}.</p>
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: per
+  form: special
+  heightened: >-
+    <p>For each additional @L[Core:MP]{MP} spent, roll an additional [[/sleep
+    1d8]]. Target is also @L[Keyword:Resistance]{resistant} to being
+    @L[Keyword:Awaken]{awakened}.</p>
+  identifier: swift-sleep-aura
+  interaction: feat
+  invoked: true
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>A hypnotizing shimmer spreads through the air around you. Roll [[/sleep
+      1d8]] to determine the strength of this effect.</p>
+    fluent: <p>Instead roll [[/sleep (@f)d8]].</p>
+    proficient: <p>Instead roll [[/sleep (@p)d8]].</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    raw: '10'
+    unit: ft
+  results:
+    fail: >-
+      <p>Any creatures who have fewer @L[Core:HP]{HP} than the result of the die
+      roll are rendered @L[Condition:Asleep]{asleep} until this effect ends.</p>
+  rotator: true
+  spell: true
+  standard: true
+  targets:
+    - creature
+transfer: true
+type: ability

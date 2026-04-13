@@ -1,5 +1,5 @@
 import { inCombatExpirationDialog } from "../../../../applications/dialogs/_module.mjs";
-import { mix } from "../../../../helpers/utils.mjs";
+import { mix } from "../../../../helpers/construction.mjs";
 import { builders } from "../../../fields/helpers/_module.mjs";
 import { conditionRequirementsField } from "../../../fields/helpers/builders.mjs";
 import DurationModel from "../../../models/unit-models/duration-model.mjs";
@@ -96,18 +96,16 @@ export default class ConsequenceSystem extends mix(
   get _nameTags() {
     const tags = super._nameTags;
     if (this.critical) {
-      tags.unshift(
-        game.i18n.localize("TERIOCK.SYSTEMS.Consequence.PANELS.critical"),
-      );
+      tags.unshift(_loc("TERIOCK.SYSTEMS.Consequence.PANELS.critical"));
     }
     return tags;
   }
 
   /** @inheritDoc */
   get embedParts() {
-    const parts = super.embedParts;
-    parts.subtitle = this.parent.remainingString;
-    return parts;
+    return Object.assign(super.embedParts, {
+      subtitle: this.parent.remainingString,
+    });
   }
 
   /**
@@ -125,50 +123,8 @@ export default class ConsequenceSystem extends mix(
   }
 
   /** @inheritDoc */
-  get panelParts() {
-    const parts = super.panelParts;
-    parts.bars = [
-      {
-        icon: TERIOCK.display.icons.ability.duration,
-        label: game.i18n.localize(
-          "TERIOCK.SYSTEMS.Consequence.PANELS.duration",
-        ),
-        wrappers: [this.parent.remainingString],
-      },
-      {
-        icon: TERIOCK.display.icons.document.condition,
-        label: game.i18n.localize(
-          "TERIOCK.SYSTEMS.Consequence.PANELS.conditions",
-        ),
-        wrappers: [
-          ...Array.from(
-            this.parent.statuses.map(
-              (status) => TERIOCK.reference.conditions[status],
-            ),
-          ),
-          this.critical
-            ? game.i18n.localize("TERIOCK.SYSTEMS.Consequence.PANELS.critical")
-            : "",
-          this.heightened
-            ? this.heightened === 1
-              ? game.i18n.localize(
-                  "TERIOCK.SYSTEMS.Consequence.PANELS.heightenedSingle",
-                )
-              : game.i18n.format(
-                  "TERIOCK.SYSTEMS.Consequence.PANELS.heightenedPlural",
-                  { value: this.heightened },
-                )
-            : "",
-        ],
-      },
-    ];
-    parts.associations.push(...this.associations);
-    return parts;
-  }
-
-  /** @inheritDoc */
   get useText() {
-    return game.i18n.format("TERIOCK.SYSTEMS.Condition.USAGE.use", {
+    return _loc("TERIOCK.SYSTEMS.Condition.USAGE.use", {
       value: this.parent.name,
     });
   }
@@ -184,9 +140,7 @@ export default class ConsequenceSystem extends mix(
   /** @inheritDoc */
   _onFireTrigger(trigger) {
     super._onFireTrigger(trigger);
-    if (this.expirations.triggers.has(trigger)) {
-      this.expire();
-    }
+    if (this.expirations.triggers.has(trigger)) this.expire();
   }
 
   /** @inheritDoc */
@@ -200,6 +154,41 @@ export default class ConsequenceSystem extends mix(
   /** @inheritDoc */
   async _use(_options = {}) {
     await this.inCombatExpiration(true);
+  }
+
+  /** @inheritDoc */
+  async getPanelParts() {
+    const parts = await super.getPanelParts();
+    parts.bars = [
+      {
+        icon: TERIOCK.display.icons.ability.duration,
+        label: _loc("TERIOCK.SYSTEMS.Consequence.PANELS.duration"),
+        wrappers: [this.parent.remainingString],
+      },
+      {
+        icon: TERIOCK.display.icons.document.condition,
+        label: _loc("TERIOCK.SYSTEMS.Consequence.PANELS.conditions"),
+        wrappers: [
+          ...Array.from(
+            this.parent.statuses.map(
+              (status) => TERIOCK.reference.conditions[status],
+            ),
+          ),
+          this.critical
+            ? _loc("TERIOCK.SYSTEMS.Consequence.PANELS.critical")
+            : "",
+          this.heightened
+            ? this.heightened === 1
+              ? _loc("TERIOCK.SYSTEMS.Consequence.PANELS.heightenedSingle")
+              : _loc("TERIOCK.SYSTEMS.Consequence.PANELS.heightenedPlural", {
+                  value: this.heightened,
+                })
+            : "",
+        ],
+      },
+    ];
+    parts.associations.push(...this.associations);
+    return parts;
   }
 
   /**

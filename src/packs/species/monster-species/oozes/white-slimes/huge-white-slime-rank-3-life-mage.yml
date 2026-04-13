@@ -2,7 +2,7 @@ _id: slvFnSauWRNs8Bm6
 _key: '!items!slvFnSauWRNs8Bm6'
 _stats:
   compendiumSource: Compendium.teriock.classes.Item.8c729f062c7bed72
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.23
@@ -10,11 +10,11 @@ effects:
   - _id: byYbma8NDzi77Mh0
     _key: '!items.effects!slvFnSauWRNs8Bm6.byYbma8NDzi77Mh0'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.6b9c057fc7cf8e78
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.6b9c057fc7cf8e78
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: combat
@@ -53,15 +53,16 @@ effects:
       skill: true
       targets:
         - self
+    transfer: true
     type: ability
   - _id: H7xLb8uTY3Fv0E7P
     _key: '!items.effects!slvFnSauWRNs8Bm6.H7xLb8uTY3Fv0E7P'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.07691331e877e0f7
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.07691331e877e0f7
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: support
@@ -74,25 +75,25 @@ effects:
           _id: f025905e157ac261
           changes:
             - key: system.competence.raw
-              mode: 4
+              phase: fluency
               priority: 10
               qualifier: '@identifier.elder-sorcery-creation'
               target: ability
-              time: fluency
+              type: upgrade
               value: '2'
             - key: system.competence.raw
-              mode: 4
+              phase: fluency
               priority: 10
               qualifier: '@identifier.celestial-elder-sorcery-words'
               target: ability
-              time: fluency
+              type: upgrade
               value: '2'
             - key: system.competence.raw
-              mode: 4
+              phase: fluency
               priority: 10
               qualifier: '@identifier.life-elder-sorcery-words'
               target: ability
-              time: fluency
+              type: upgrade
               value: '2'
           competencies:
             - 1
@@ -163,103 +164,16 @@ effects:
       standard: true
       targets:
         - self
+    transfer: true
     type: ability
-  - _id: OM13kQaRTAUkBcB6
-    _key: '!items.effects!slvFnSauWRNs8Bm6.OM13kQaRTAUkBcB6'
+  - _id: 3RVue05IR3lN3AAq
+    _key: '!items.effects!slvFnSauWRNs8Bm6.3RVue05IR3lN3AAq'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.26b16c55de4bc804
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.7060a27da46df3f2
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/abilities/minor-item-enchantment.webp
-    name: Minor Item Enchantment
-    system:
-      _sup: byYbma8NDzi77Mh0
-      automations:
-        72ce567009179bea:
-          _id: 72ce567009179bea
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          duration:
-            raw: '@h * 3600'
-            unit: second
-          heighten:
-            - 1
-          mode: 5
-          type: duration
-      class: lifeMage
-      competence:
-        raw: 0
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: sight
-      duration:
-        raw: '1'
-        unit: hour
-      elements:
-        - life
-      executionTime: 10 Minutes
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 1 hour.</p>
-      identifier: minor-item-enchantment
-      interaction: manifest
-      invoked: true
-      maneuver: slow
-      overview:
-        base: >-
-          <p>Target item is enchanted to be @L[Property:Magelore]{magelore} and
-          @L[Property:Granting]{grant} a @L[Category:Conjured spells]{conjured}
-          @L[Category:Ray delivery spells]{ray spell} that you know. Except, the
-          spell is @L[Keyword:Gifted]{gifted} and must be <a
-          href="/index.php?title=Category:Invoked_component_abilities&amp;action=edit&amp;redlink=1"
-          class="new" title="Category:Invoked component abilities (page does not
-          exist)">invoked</a> for. The enchanted item is @L[Core:Presence]{tier
-          1}. If the item is @L[Property:Shattered]{shattered}, this enchantment
-          fades.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        raw: '5'
-        unit: ft
-      requirements: <p>Target is not a @L[Category:Weapons]{weapon}.</p>
-      ritual: true
-      rotator: true
-      spell: true
-      standard: true
-      targets:
-        - weapon
-    type: ability
-  - _id: rq4naxQ5OEabu5zH
-    _key: '!items.effects!slvFnSauWRNs8Bm6.rq4naxQ5OEabu5zH'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.7060a27da46df3f2
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/swift-sleep-aura.webp
     name: Swift Sleep Aura
     system:
@@ -335,7 +249,10 @@ effects:
       elements:
         - life
       endCondition: <p>Target is successfully @L[Keyword:Awaken]{awakened}.</p>
-      executionTime: a1
+      executionTime:
+        base: a1
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -350,6 +267,7 @@ effects:
       interaction: feat
       invoked: true
       maneuver: active
+      mundane: false
       overview:
         base: >-
           <p>A hypnotizing shimmer spreads through the air around you. Roll
@@ -373,6 +291,101 @@ effects:
       standard: true
       targets:
         - creature
+    transfer: true
+    type: ability
+  - _id: W3IZCaEZZBuba1Rd
+    _key: '!items.effects!slvFnSauWRNs8Bm6.W3IZCaEZZBuba1Rd'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.26b16c55de4bc804
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/minor-item-enchantment.webp
+    name: Minor Item Enchantment
+    system:
+      _sup: byYbma8NDzi77Mh0
+      automations:
+        72ce567009179bea:
+          _id: 72ce567009179bea
+          changeType: add
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          duration:
+            raw: '@h * 3600'
+            unit: second
+          heighten:
+            - 1
+          type: duration
+      class: lifeMage
+      competence:
+        raw: 0
+      costs:
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+        primary:
+          mp:
+            formula: '1'
+            type: formula
+      delivery: sight
+      duration:
+        raw: '1'
+        unit: hour
+      elements:
+        - life
+      executionTime:
+        base: 10 Minutes
+        slow:
+          raw: '10'
+          unit: minute
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
+        effect increases by 1 hour.</p>
+      identifier: minor-item-enchantment
+      interaction: manifest
+      invoked: true
+      maneuver: slow
+      mundane: false
+      overview:
+        base: >-
+          <p>Target item is enchanted to be @L[Property:Magelore]{magelore} and
+          @L[Property:Granting]{grant} a @L[Category:Conjured spells]{conjured}
+          @L[Category:Ray delivery spells]{ray spell} that you know. Except, the
+          spell is @L[Keyword:Gifted]{gifted} and must be <a
+          href="/index.php?title=Category:Invoked_component_abilities&amp;action=edit&amp;redlink=1"
+          class="new" title="Category:Invoked component abilities (page does not
+          exist)">invoked</a> for. The enchanted item is @L[Core:Presence]{tier
+          1}. If the item is @L[Property:Shattered]{shattered}, this enchantment
+          fades.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        raw: '5'
+        unit: ft
+      requirements: <p>Target is not a @L[Category:Weapons]{weapon}.</p>
+      ritual: true
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - weapon
+    transfer: true
     type: ability
 folder: ab73d338653acde3
 img: systems/teriock/src/icons/ranks/rank-3-life-mage.webp

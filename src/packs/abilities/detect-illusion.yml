@@ -1,63 +1,57 @@
 _id: 16e6d790f80ca4e1
-_key: '!items!16e6d790f80ca4e1'
+_key: '!effects!16e6d790f80ca4e1'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 16e6d790f80ca4e1
-    _key: '!items.effects!16e6d790f80ca4e1.16e6d790f80ca4e1'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/detect-illusion.webp
-    name: Detect Illusion
-    system:
-      class: stormMage
-      competence:
-        raw: 0
-      delivery: hand
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - mental
-      elements:
-        - storm
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: detect-illusion
-      interaction: attack
-      maneuver: active
-      overview:
-        proficient: >-
-          <p>You also know what <i>type</i> of @L[Keyword:Illusionary]{illusion}
-          it is (Minor, Full, or Greater) as well as the DC needed to
-          @L[Ability:Disbelieve]{Disbelieve} it. This does not count as
-          "disbelieving" the illusion.</p>
-      piercing:
-        raw: 2
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      results:
-        hit: <p>You know if the target is @L[Keyword:Illusionary]{illusionary}.</p>
-      spell: true
-      standard: true
-      targets:
-        - area
-        - creature
-        - item
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/detect-illusion.webp
 name: Detect Illusion
-type: wrapper
+system:
+  class: stormMage
+  competence:
+    raw: 0
+  delivery: hand
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - mental
+  elements:
+    - storm
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: detect-illusion
+  interaction: attack
+  maneuver: active
+  mundane: false
+  overview:
+    proficient: >-
+      <p>You also know what <i>type</i> of @L[Keyword:Illusionary]{illusion} it
+      is (Minor, Full, or Greater) as well as the DC needed to
+      @L[Ability:Disbelieve]{Disbelieve} it. This does not count as
+      "disbelieving" the illusion.</p>
+  piercing:
+    raw: 2
+  powerSources:
+    - magical
+  range:
+    unit: contact
+  results:
+    hit: <p>You know if the target is @L[Keyword:Illusionary]{illusionary}.</p>
+  spell: true
+  standard: true
+  targets:
+    - area
+    - creature
+    - item
+transfer: true
+type: ability

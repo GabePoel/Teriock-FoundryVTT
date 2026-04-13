@@ -1,75 +1,72 @@
 _id: 1fd6eaadc9c772ad
-_key: '!items!1fd6eaadc9c772ad'
+_key: '!effects!1fd6eaadc9c772ad'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 1fd6eaadc9c772ad
-    _key: '!items.effects!1fd6eaadc9c772ad.1fd6eaadc9c772ad'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/storm-magic-hexseal.webp
-    name: Storm Magic Hexseal
-    system:
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.protections.hexseals.elements
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: storm
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: changes
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        conditions:
-          absent:
-            - down
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - hexseal
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: storm-magic-hexseal
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You are @L[Keyword:Hexseal]{hexseal} to @L[Category:Magically
-          powered abilities]{magical} @L[Category:Storm element abilities]{storm
-          abilities}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/storm-magic-hexseal.webp
 name: Storm Magic Hexseal
-type: wrapper
+system:
+  automations:
+    e789ed5e109ebd1a:
+      _id: e789ed5e109ebd1a
+      changes:
+        - key: system.protections.hexseals.elements
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: Actor
+          type: add
+          value: storm
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: changes
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    conditions:
+      absent:
+        - down
+    raw: '0'
+    unit: unlimited
+  effectTypes:
+    - hexseal
+  executionTime:
+    base: passive
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  identifier: storm-magic-hexseal
+  interaction: manifest
+  maneuver: passive
+  mundane: false
+  overview:
+    base: >-
+      <p>You are @L[Keyword:Hexseal]{hexseal} to @L[Category:Magically powered
+      abilities]{magical} @L[Category:Storm element abilities]{storm
+      abilities}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: self
+  targets:
+    - self
+transfer: true
+type: ability

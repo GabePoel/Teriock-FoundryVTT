@@ -22,7 +22,7 @@ export default function ChangeableDocumentMixin(Base) {
       static buildChangeTree(effects, options = {}) {
         const changeTree =
           /** @type {Teriock.Changes.ChangeTree} */ Object.fromEntries(
-            Object.keys(TERIOCK.options.change.time).map((time) => [
+            Object.keys(TERIOCK.options.change.phase).map((time) => [
               time,
               Object.fromEntries(
                 ["Actor", "Item", "ActiveEffect"].map((documentName) => {
@@ -33,14 +33,7 @@ export default function ChangeableDocumentMixin(Base) {
                         ),
                       )
                     : {};
-                  return [
-                    documentName,
-                    {
-                      untyped: [],
-                      uuids: {},
-                      typed,
-                    },
-                  ];
+                  return [documentName, { untyped: [], uuids: {}, typed }];
                 }),
               ),
             ]),
@@ -50,12 +43,12 @@ export default function ChangeableDocumentMixin(Base) {
           let changes = [...effect.system.qualifiedChanges];
           for (const change of changes) {
             const conditionalChange = {
-              key: change.key,
-              mode: change.mode,
-              priority: change.priority,
-              value: change.value,
-              qualifier: change.qualifier || "1",
               effect: effect,
+              key: change?.key,
+              priority: change?.priority,
+              qualifier: change.qualifier || "1",
+              type: change?.type,
+              value: change?.value,
             };
             const time = change.time || "normal";
             const target = change.target || "Actor";
@@ -73,11 +66,7 @@ export default function ChangeableDocumentMixin(Base) {
               changeTree[time][target].untyped.push(conditionalChange);
             } else if (target === "armament") {
               changeTree[time].Item.typed.equipment.push(conditionalChange);
-              if (
-                !conditionalChange.key.startsWith("system.damage.twoHanded")
-              ) {
-                changeTree[time].Item.typed.body.push(conditionalChange);
-              }
+              changeTree[time].Item.typed.body.push(conditionalChange);
             } else {
               const documentName = TERIOCK.options.document[target]?.doc;
               if (documentName) {
@@ -111,7 +100,8 @@ export default function ChangeableDocumentMixin(Base) {
       get _allChanges() {
         return (
           game.teriock.getSetting("nonHierarchicalChanges") &&
-          this.actor?.getSetting("nonHierarchicalChanges")
+          (!this.actor ||
+            this.actor?.getSetting("automation.nonHierarchicalChanges"))
         );
       }
 
@@ -120,12 +110,20 @@ export default function ChangeableDocumentMixin(Base) {
        * @returns {boolean}
        */
       get _canChange() {
-        return (
-          !!this.collection &&
-          (!this.parent ||
-            !["Actor", "Item"].includes(this.parent.documentName) ||
-            this.parent._embeddedPreparation)
-        );
+        return !!this.collection && this._allChanges;
+      }
+
+      /** @type {object} */
+      _changeReplacementData;
+
+      get changeReplacementData() {
+        if (this.parent?.changeReplacementData) {
+          return this.parent.changeReplacementData;
+        } else if (this._changeReplacementData) {
+          return this._changeReplacementData;
+        } else {
+          return this._buildChangeReplacementData();
+        }
       }
 
       /** @type {Teriock.Changes.ChangeTree} */
@@ -136,14 +134,9 @@ export default function ChangeableDocumentMixin(Base) {
        * @returns {Teriock.Changes.ChangeTree}
        */
       get changeTree() {
-        if (this.parent?.changeTree) {
-          return this.parent.changeTree;
-        } else if (this._changeTree) {
-          return this._changeTree;
-        } else {
-          this._buildChangeTree();
-          return this._changeTree;
-        }
+        if (this.parent?.changeTree) return this.parent.changeTree;
+        else if (this._changeTree) return this._changeTree;
+        else return this._buildChangeTree();
       }
 
       /**
@@ -151,11 +144,11 @@ export default function ChangeableDocumentMixin(Base) {
        * @param {Teriock.Changes.PreparedChangeData[]} changes
        */
       _applyChanges(changes) {
-        changes.sort((a, b) => a.priority - b.priority);
+        changes.sort((a, b) => a?.priority - b?.priority);
         let rollData = {};
         let rollDataComputed = false;
         for (const change of changes) {
-          if (!change.key || !change.qualifier) continue;
+          if (!change?.key || !change.qualifier) continue;
           let shouldApply = change.qualifier === "1";
           if (!shouldApply) {
             if (!rollDataComputed) {
@@ -164,25 +157,16 @@ export default function ChangeableDocumentMixin(Base) {
             }
             shouldApply = !!BaseRoll.minValue(change.qualifier, rollData);
           }
-          if (shouldApply) {
-            const changeOverrides = change.effect.apply(this, change);
-            Object.assign(this.overrides, changeOverrides);
-          }
+          if (shouldApply) this._applyIndividualChange(change);
         }
       }
 
       /**
        * Apply changes to this document based on the time the changes should apply
-       * @param {Teriock.Changes.ChangeTime} time
+       * @param {Teriock.Changes.Phase} time
        */
       _applyChangesByTime(time) {
         if (!this._canChange) return;
-        if (
-          (time !== "normal" || this.documentName === "ActiveEffect") &&
-          !this._allChanges
-        ) {
-          return;
-        }
         const partialTree = this.changeTree[time][this.documentName];
         const changesToApply = partialTree.uuids[this.uuid] || [];
         if (!this._allChanges) {
@@ -197,7 +181,30 @@ export default function ChangeableDocumentMixin(Base) {
       }
 
       /**
+       * Apply one change.
+       * @param {Teriock.Changes.QualifiedChangeData} change
+       */
+      _applyIndividualChange(change) {
+        const changeOverrides = ActiveEffect.applyChange(this, change, {
+          replacementData: this.changeReplacementData,
+        });
+        Object.assign(this.overrides, changeOverrides);
+      }
+
+      /**
+       * Build change replacement data even if it already exists.
+       * @returns {object}
+       */
+      _buildChangeReplacementData() {
+        if (!this.parent?.changeReplacementData) {
+          this._changeReplacementData = this.getRollData();
+        }
+        return this._changeReplacementData;
+      }
+
+      /**
        * Build a change tree even if one already exists.
+       * @returns {Teriock.Changes.ChangeTree}
        */
       _buildChangeTree() {
         if (!this.parent?.changeTree) {
@@ -206,6 +213,7 @@ export default function ChangeableDocumentMixin(Base) {
             { allChanges: this._allChanges },
           );
         }
+        return this._changeTree;
       }
 
       /**
@@ -217,6 +225,50 @@ export default function ChangeableDocumentMixin(Base) {
           this._cachedCandidateEffects = [...this.candidateChanges()];
         }
         return this._cachedCandidateEffects;
+      }
+
+      /**
+       * Apply qualified changes for the specified phase to all embedded documents and then this one.
+       * @param {Teriock.Changes.Phase} phase
+       * @param {boolean} rebuildTree
+       * @param {boolean} rebuildData
+       */
+      _propagateChanges(phase, rebuildTree, rebuildData) {
+        this._propagateOperation("_propagateChanges", false, [
+          phase,
+          rebuildTree,
+          rebuildData,
+        ]);
+        if (this._allChanges) {
+          this._applyChangesByTime(phase);
+          if (rebuildTree && this.isTop) this._buildChangeTree();
+          if (rebuildData && this.isTop) this._buildChangeReplacementData();
+        }
+      }
+
+      /**
+       * Propagate all the changes that happen after {@link TeriockActor} data is derived.
+       * All document types propagate this after data is derived.
+       * This always runs after {@link _propagatePreDerivationChanges}.
+       */
+      _propagatePostDerivationChanges() {
+        if (this.isTop) {
+          this._propagateChanges("derivation", false, true);
+          this._propagateChanges("completion", false, false);
+        }
+      }
+
+      /**
+       * Propagate all the changes that happen before {@link TeriockActor} data is derived.
+       * For documents other than actors, these propagate after data is derived.
+       * This always runs before {@link _propagatePostDerivationChanges}.
+       */
+      _propagatePreDerivationChanges() {
+        if (this.isTop) {
+          this._propagateChanges("proficiency", true, true);
+          this._propagateChanges("fluency", true, true);
+          this._propagateChanges("normal", false, true);
+        }
       }
 
       /**
@@ -235,29 +287,12 @@ export default function ChangeableDocumentMixin(Base) {
         this._changeTree = undefined;
         this._cachedCandidateEffects = undefined;
         super.prepareBaseData();
-        if (this._allChanges) {
-          this._applyChangesByTime("base");
-          this._applyChangesByTime("proficiency");
-          this._buildChangeTree();
-          this._applyChangesByTime("fluency");
-        }
-        this._buildChangeTree();
       }
 
       /** @inheritDoc */
-      prepareDerivedData() {
-        super.prepareDerivedData();
-        this._applyChangesByTime("derivation");
-        this._applyChangesByTime("final");
+      prepareSpecialData() {
+        super.prepareSpecialData();
         this.overrides = foundry.utils.expandObject(this.overrides);
-      }
-
-      /** @inheritDoc */
-      prepareEmbeddedDocuments() {
-        this._embeddedPreparation = true;
-        super.prepareEmbeddedDocuments();
-        this._applyChangesByTime("normal");
-        delete this._embeddedPreparation;
       }
     }
   );

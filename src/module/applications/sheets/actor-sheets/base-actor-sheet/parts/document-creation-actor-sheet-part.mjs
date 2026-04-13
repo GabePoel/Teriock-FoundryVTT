@@ -30,10 +30,10 @@ export default (Base) =>
     #createContextMenuEntry(type) {
       return {
         icon: makeIconClass(TERIOCK.options.document[type].icon, "contextMenu"),
-        name: game.i18n.format("TERIOCK.DIALOGS.NewDocument.title", {
+        label: _loc("TERIOCK.DIALOGS.NewDocument.title", {
           name: TERIOCK.options.document[type].name,
         }),
-        callback: this.constructor[`_onCreate${ucFirst(type)}`].bind(this),
+        onClick: this.constructor[`_onCreate${ucFirst(type)}`].bind(this),
       };
     }
 

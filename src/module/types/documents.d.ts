@@ -40,7 +40,6 @@ import {
   PowerSheet,
   RankSheet,
   SpeciesSheet,
-  WrapperSheet,
 } from "../applications/sheets/item-sheets/_module.mjs";
 import {
   BodySystem,
@@ -49,7 +48,6 @@ import {
   PowerSystem,
   RankSystem,
   SpeciesSystem,
-  WrapperSystem,
 } from "../data/systems/items/_module.mjs";
 import {
   CharacterSheet,
@@ -59,6 +57,8 @@ import {
   CharacterSystem,
   CreatureSystem,
 } from "../data/systems/actors/_module.mjs";
+import type ArchetypeSheet from "../applications/sheets/item-sheets/archetype-sheet.mjs";
+import type ArchetypeSystem from "../data/systems/items/archetype-system/archetype-system.mjs";
 
 // Base Document Classes
 // =====================
@@ -105,6 +105,14 @@ declare global {
 // =====
 
 declare global {
+  export type TeriockArchetype = TeriockItem & {
+    sheet: ArchetypeSheet;
+    system: ArchetypeSystem;
+    type: "archetype";
+    _id: ID<TeriockArchetype>;
+    get id(): ID<TeriockArchetype>;
+    get uuid(): UUID<TeriockArchetype>;
+  };
   export type TeriockBody = TeriockItem & {
     sheet: BodySheet;
     system: BodySystem;
@@ -152,14 +160,6 @@ declare global {
     _id: ID<TeriockMount>;
     get id(): ID<TeriockMount>;
     get uuid(): UUID<TeriockMount>;
-  };
-  export type TeriockWrapper = TeriockItem & {
-    sheet: WrapperSheet;
-    system: WrapperSystem;
-    type: "wrapper";
-    _id: ID<TeriockWrapper>;
-    get id(): ID<TeriockWrapper>;
-    get uuid(): UUID<TeriockWrapper>;
   };
 }
 
@@ -238,13 +238,13 @@ declare global {
     | TeriockProperty
     | TeriockResource;
   export type AnyItem =
+    | TeriockArchetype
     | TeriockBody
     | TeriockEquipment
     | TeriockPower
     | TeriockRank
     | TeriockSpecies
-    | TeriockMount
-    | TeriockWrapper;
+    | TeriockMount;
   export type AnyActor = TeriockCharacter | TeriockCreature;
   export type AnyParent = AnyActor | AnyItem;
   export type AnyCommonDocument = AnyActor | AnyItem | AnyActiveEffect;

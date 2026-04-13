@@ -44,9 +44,7 @@ export default (Base) =>
           blocks: [
             {
               text: TERIOCK.data.conditions[condition].description,
-              title: game.i18n.localize(
-                "TERIOCK.SYSTEMS.Child.FIELDS.description.label",
-              ),
+              title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
             },
           ],
           image: TERIOCK.data.conditions[condition].img,
@@ -61,11 +59,9 @@ export default (Base) =>
           .map((uuid) => fromUuidSync(pureUuid(uuid)))
           .filter((t) => t);
         if (tokenDocs.length > 0) {
-          /** @type {Teriock.MessageData.MessageAssociation} */
+          /** @type {Teriock.Messages.MessageAssociation} */
           const association = {
-            title: game.i18n.localize(
-              "TERIOCK.SHEETS.Actor.CONDITIONS.Associations.title",
-            ),
+            title: _loc("TERIOCK.SHEETS.Actor.CONDITIONS.Associations.title"),
             icon: TERIOCK.options.document.creature.icon,
             cards: [],
           };

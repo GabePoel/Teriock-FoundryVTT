@@ -1,7 +1,7 @@
 _id: 89cfa5957c900f6a
 _key: '!items!89cfa5957c900f6a'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.23
@@ -9,11 +9,11 @@ effects:
   - _id: riGYdtYQjiCU4jSG
     _key: '!items.effects!89cfa5957c900f6a.riGYdtYQjiCU4jSG'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.21aacc3415e6c532
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.21aacc3415e6c532
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/might-strike.webp
     name: Might Strike
     system:
@@ -90,11 +90,11 @@ effects:
           with it. In addition, all @L[Core:Damage]{damage} dealt by a single
           chosen @L[Category:Weapons]{weapon} of that @L[Category:Weapon
           classes]{class} is @L[Damage:Magic]{magic} as long as you are
-          @L[Core:Presence]{attuned} to it.<table class="wikitable
+          @L[Core:Presence]{attuned} to it.</p><table class="wikitable
           sortable"><caption>Benefits by
           Domain</caption><tbody><tr><th>Domain</th><th><a class="mw-selflink
           selflink">Might Strike</a> Damage
-          Type</th></tr><tr><td>Celestial</td><td>@L[Damage:Silver]{Silver}</td></tr><tr><td>Crafting</td><td>@L[Damage:Fire]{Fire}</td></tr><tr><td>Death</td><td>@L[Damage:Terror]{Terror}</td></tr><tr><td>Destruction</td><td>@L[Damage:Fire]{Fire}</td></tr><tr><td>Fortune</td><td>@L[Damage:Ice]{Ice}</td></tr><tr><td>Healing</td><td>@L[Damage:Terror]{Terror}</td></tr><tr><td>Hearth</td><td>@L[Damage:Fire]{Fire}</td></tr><tr><td>Knowledge</td><td>@L[Damage:Psychic]{Psychic}</td></tr><tr><td>Nature</td><td>@L[Damage:Vine]{Vine}</td></tr><tr><td>Spirit</td><td>@L[Damage:Spiritual]{Spiritual}</td></tr><tr><td>Trickster</td><td>@L[Damage:Vine]{Vine}</td></tr><tr><td>Value</td><td>@L[Damage:Financial]{Financial}</td></tr><tr><td>Weather</td><td>@L[Damage:Ice]{Ice}</td></tr></tbody></table></p>
+          Type</th></tr><tr><td>Celestial</td><td>@L[Damage:Silver]{Silver}</td></tr><tr><td>Crafting</td><td>@L[Damage:Fire]{Fire}</td></tr><tr><td>Death</td><td>@L[Damage:Terror]{Terror}</td></tr><tr><td>Destruction</td><td>@L[Damage:Fire]{Fire}</td></tr><tr><td>Fortune</td><td>@L[Damage:Ice]{Ice}</td></tr><tr><td>Healing</td><td>@L[Damage:Terror]{Terror}</td></tr><tr><td>Hearth</td><td>@L[Damage:Fire]{Fire}</td></tr><tr><td>Knowledge</td><td>@L[Damage:Psychic]{Psychic}</td></tr><tr><td>Nature</td><td>@L[Damage:Vine]{Vine}</td></tr><tr><td>Spirit</td><td>@L[Damage:Spiritual]{Spiritual}</td></tr><tr><td>Trickster</td><td>@L[Damage:Vine]{Vine}</td></tr><tr><td>Value</td><td>@L[Damage:Financial]{Financial}</td></tr><tr><td>Weather</td><td>@L[Damage:Ice]{Ice}</td></tr></tbody></table><p></p>
       piercing:
         raw: 0
       powerSources:
@@ -108,11 +108,12 @@ effects:
       sustained: true
       targets:
         - self
+    transfer: true
     type: ability
   - _id: rhinocerosTamer0
     _key: '!items.effects!89cfa5957c900f6a.rhinocerosTamer0'
     _stats:
-      coreVersion: '13'
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.10.23
@@ -125,15 +126,16 @@ effects:
       field: survivalist
       identifier: rhinoceros-tamer
       tradecraft: tamer
+    transfer: true
     type: fluency
   - _id: LJTFYxAqMchkbwFR
     _key: '!items.effects!89cfa5957c900f6a.LJTFYxAqMchkbwFR'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.2c8b71b1f4604456
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.2c8b71b1f4604456
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/spell-turning-shields.webp
     name: Spell Turning Shields
     system:
@@ -154,18 +156,18 @@ effects:
           _id: e789ed5e109ebd1a
           changes:
             - key: system.props
-              mode: 2
+              phase: normal
               priority: 10
               qualifier: '@class.shields'
               target: equipment
-              time: normal
+              type: add
               value: spellTurning
             - key: system.spellTurning
-              mode: 5
+              phase: normal
               priority: 10
               qualifier: '@class.shields'
               target: equipment
-              time: normal
+              type: override
               value: 'true'
           competencies:
             - 0
@@ -211,6 +213,7 @@ effects:
       standard: true
       targets:
         - self
+    transfer: true
     type: ability
 folder: 31fe961f0b485187
 img: systems/teriock/src/icons/abilities/familiar-bond.webp

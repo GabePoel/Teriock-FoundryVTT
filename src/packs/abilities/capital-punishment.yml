@@ -1,169 +1,72 @@
 _id: d5eadb23f5aed300
-_key: '!items!d5eadb23f5aed300'
+_key: '!effects!d5eadb23f5aed300'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: d5eadb23f5aed300
-    _key: '!items.effects!d5eadb23f5aed300.d5eadb23f5aed300'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/capital-punishment.webp
-    name: Capital Punishment
-    system:
-      class: paladin
-      competence:
-        raw: 0
-      costs:
-        components:
-          material:
-            description: <p>Something symbolic of your deity.</p>
-            type: description
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: self
-      duration:
-        raw: '0'
-        triggers:
-          - dawn
-        unit: unlimited
-      executionTime: 10 Minutes
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: capital-punishment
-      interaction: manifest
-      maneuver: slow
-      overview:
-        base: >-
-          <p>Choose a @L[Category:Weapon classes]{class of weapons}. You may use
-          @L[Keyword:Limited]{Limited} @L[Ability:Slay]{Slay} with all
-          @L[Category:Weapons]{weapons} of the chosen @L[Category:Weapon
-          classes]{class}. In addition, all @L[Core:Damage]{damage} dealt by a
-          single chosen @L[Category:Weapons]{weapon} of that @L[Category:Weapon
-          classes]{class} is @L[Damage:Magic]{magic} as long as you are
-          @L[Core:Presence]{attuned} to it.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - divine
-        - financial
-      range:
-        unit: self
-      requirements: <p>You are not @L[Core:Sustained]{sustaining} [[lookup name]].</p>
-      ritual: true
-      skill: true
-      standard: true
-      sustained: true
-      targets:
-        - self
-    type: ability
-  - _id: WtPUa4QQQL7q3L1A
-    _key: '!items.effects!d5eadb23f5aed300.WtPUa4QQQL7q3L1A'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.91b30624f59c08d8
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/abilities/slay.webp
-    name: Slay
-    system:
-      _sup: d5eadb23f5aed300
-      automations:
-        1728b3a84ea27844:
-          _id: 1728b3a84ea27844
-          common:
-            - bag
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: common
-        29b275994cf9f5b1:
-          _id: 29b275994cf9f5b1
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: 5[lethal]
-          heighten:
-            - 1
-            - 0
-          impact: damage
-          merge: true
-          type: roll
-      class: assassin
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: weapon
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - killing
-        - damaging
-      executionTime: r0
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: slay
-      interaction: manifest
-      limitation: >-
-        <p>With @L[Category:Weapons]{weapons} of the chosen
-        @L[Category:Equipment classes]{class} only. This may only be used
-        against people that are in violation of contracts that you or an entity
-        you officially represent are a party in. You may also use this against
-        creatures that have stolen from you or that you have stolen from within
-        the past hour.</p>
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>Target takes an additional [[/damage 5[lethal]]]
-          @L[Core:Damage]{damage}. This also has all @L[Category:Damage
-          types]{damage types} of the triggering @L[Category:Attack
-          abilities]{attack}. If the triggering @L[Category:Attack
-          abilities]{attack} was a critical hit, this deals 10
-          @L[Core:Damage]{damage} instead.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: contact
-      skill: true
-      standard: true
-      targets:
-        - creature
-      trigger: >-
-        <p>You have just hit a creature with an @L[Category:Attack
-        abilities]{attack} that dealt them @L[Core:Damage]{damage} from it.</p>
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/capital-punishment.webp
 name: Capital Punishment
-type: wrapper
+system:
+  class: paladin
+  competence:
+    raw: 0
+  costs:
+    components:
+      material:
+        description: <p>Something symbolic of your deity.</p>
+        type: description
+      somatic:
+        type: tag
+      verbal:
+        type: tag
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: self
+  duration:
+    raw: '0'
+    triggers:
+      - dawn
+    unit: unlimited
+  executionTime:
+    base: 10 Minutes
+    slow:
+      raw: '10'
+      unit: minute
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: capital-punishment
+  interaction: manifest
+  maneuver: slow
+  mundane: false
+  overview:
+    base: >-
+      <p>Choose a @L[Category:Weapon classes]{class of weapons}. You may use
+      @L[Keyword:Limited]{Limited} @L[Ability:Slay]{Slay} with all
+      @L[Category:Weapons]{weapons} of the chosen @L[Category:Weapon
+      classes]{class}. In addition, all @L[Core:Damage]{damage} dealt by a
+      single chosen @L[Category:Weapons]{weapon} of that @L[Category:Weapon
+      classes]{class} is @L[Damage:Magic]{magic} as long as you are
+      @L[Core:Presence]{attuned} to it.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - divine
+    - financial
+  range:
+    unit: self
+  requirements: <p>You are not @L[Core:Sustained]{sustaining} [[lookup name]].</p>
+  ritual: true
+  skill: true
+  standard: true
+  sustained: true
+  targets:
+    - self
+transfer: true
+type: ability

@@ -1,9 +1,8 @@
-//noinspection JSUnusedGlobalSymbols
-
 import { extractPack } from "@foundryvtt/foundryvtt-cli";
 import { promises as fs } from "fs";
 import path from "path";
 import { toKebabCase, toKebabCaseFull } from "../src/module/helpers/string.mjs";
+import { default as system } from "../system.json" with { type: "json" };
 import { cleanDocument } from "./compendium/clean-fields.mjs";
 
 const BUILDER_NAME = "teriockBuilder00";
@@ -11,9 +10,42 @@ const EXPAND_ADVENTURES = true;
 const FOLDERS = true;
 const YAML = true;
 
-const tree = {};
-let packTree = {};
-let buildTree = true;
+/**
+ * @typedef {object} CompendiumNode
+ * @property {string} name
+ * @property {string|null} sup
+ */
+
+/** @type {Record<string, Record<string, CompendiumNode>>} */
+const PACK_REGISTRY = {};
+
+let CURRENT_PACK;
+let BUILD_REGISTRY = true;
+
+/**
+ * Register a document to the pack registry.
+ * @param {string} pack
+ * @param {object} doc
+ */
+function registerDocument(pack, doc) {
+  /** @type {CompendiumNode} */
+  const node = { name: toKebabCase(doc.name), sup: null };
+  if (doc.system?._sup) node.sup = doc.system._sup;
+  if (!PACK_REGISTRY[pack]) PACK_REGISTRY[pack] = {};
+  PACK_REGISTRY[pack][doc._id] = node;
+}
+
+/**
+ * Derive the name for a document by searching through the pack registry.
+ * @param {string} pack
+ * @param {string} id
+ * @returns {string}
+ */
+function deriveName(pack, id) {
+  const node = PACK_REGISTRY[pack][id];
+  if (node.sup) return `${deriveName(pack, node.sup)}-${node.name}`;
+  return node.name;
+}
 
 // Execution Loop
 // ==============
@@ -34,11 +66,8 @@ for (const pack of packs) {
   } catch (error) {
     if (error.code !== "ENOENT") console.log(error);
   }
-
-  buildTree = true;
-  packTree = {};
-  tree[pack] = packTree;
-
+  CURRENT_PACK = pack;
+  BUILD_REGISTRY = true;
   const extractOptions = {
     yaml: YAML,
     transformName,
@@ -47,13 +76,12 @@ for (const pack of packs) {
     expandAdventures: EXPAND_ADVENTURES,
     folders: FOLDERS,
   };
-
   await extractPack(
     `./packs/${pack}`,
     `./src/packs/${toKebabCaseFull(pack)}`,
     extractOptions,
   );
-  buildTree = false;
+  BUILD_REGISTRY = false;
   await extractPack(
     `./packs/${pack}`,
     `./src/packs/${toKebabCaseFull(pack)}`,
@@ -64,48 +92,47 @@ for (const pack of packs) {
 // Transformers
 // ============
 
+/**
+ * @param {object} doc
+ * @param {object} context
+ * @returns {string}
+ */
 function transformName(doc, context) {
-  let safeFileName = toKebabCase(doc.name);
-  if (!buildTree && doc.system?._sup) {
-    safeFileName = `${packTree[doc.system._sup]}-${toKebabCase(doc.name)}`;
-  }
-  let name =
-    `${doc.name ? safeFileName : doc._id}.${YAML ? "yml" : "json"}`.replace(
-      "---",
-      "-",
-    );
-  return context.folder ? path.join(context.folder, name) : name;
+  let name = toKebabCase(doc.name);
+  if (!BUILD_REGISTRY) name = deriveName(CURRENT_PACK, doc._id);
+  name = `${name}.${YAML ? "yml" : "json"}`;
+  if (context.folder) name = path.join(context.folder, name);
+  return name;
 }
 
+/**
+ * @param {object} doc
+ * @returns {string}
+ */
 function transformFolderName(doc) {
   return toKebabCase(doc.name);
 }
 
-/**
- * Clean a document using the DELETION_MAP.
- */
 function cleanEntry(doc) {
-  if (buildTree) packTree[doc._id] = toKebabCase(doc.name);
   cleanDocument(doc);
-  if (doc.author) doc.author = BUILDER_NAME;
+  delete doc.author;
+  delete doc.ownership;
   if (doc._stats) {
-    if (doc._stats.coreVersion) doc._stats.coreVersion = "13";
+    doc._stats.coreVersion = system.compatibility.verified.toString();
     doc._stats.lastModifiedBy = BUILDER_NAME;
-  }
-  if (doc.prototypeToken) delete doc.prototypeToken.disposition;
-  if (doc.ownership) doc.ownership = { default: doc.ownership.default };
-  if (doc.type === "wrapper") delete doc.system;
-  if (doc.system) {
-    // Enforce default actor combat states
-    if (typeof doc.system.combat?.attackPenalty === "number")
-      doc.system.combat.attackPenalty = 0;
-    if (typeof doc.system.combat?.hasReaction === "boolean")
-      doc.system.combat.hasReaction = true;
   }
   sortKeys(doc);
 }
+
+/**
+ * @param {object} doc
+ * @returns {boolean|void}
+ */
 function transformEntry(doc) {
-  if (buildTree && doc.system?._sup) return false;
+  if (BUILD_REGISTRY) {
+    registerDocument(CURRENT_PACK, doc);
+    return false;
+  }
   cleanEntry(doc);
   if (doc.system) removeEmptyValues(doc.system);
   [
@@ -116,13 +143,7 @@ function transformEntry(doc) {
     "notes",
     "pages",
     "results",
-  ].forEach((key) => {
-    // Sorting embedded breaks wrappers
-    //sortEmbedded(doc[key]);
-    doc[key]?.forEach((d) => {
-      transformEntry(d);
-    });
-  });
+  ].forEach((key) => doc[key]?.forEach((d) => transformEntry(d)));
   removeEmptyValues(doc);
 }
 
@@ -134,24 +155,19 @@ function sortKeys(obj) {
   if (typeof obj !== "object" || !obj) return;
   const keys = Object.keys(obj).sort();
   const cache = { ...obj };
-  for (const key in obj) {
-    delete obj[key];
-  }
+  for (const key in obj) delete obj[key];
   for (const key of keys) {
     obj[key] = cache[key];
     if (typeof obj[key] === "object" && !Array.isArray(obj[key])) {
       sortKeys(obj[key]);
     }
     if (typeof obj[key] === "object" && Array.isArray(obj[key])) {
-      for (const i of obj[key]) {
-        sortKeys(i);
-      }
+      for (const i of obj[key]) sortKeys(i);
     }
   }
 }
 
 /**
- *
  * @param {object} obj
  * @returns {object}
  */
@@ -166,18 +182,13 @@ function removeEmptyValues(obj) {
     }
   } else {
     for (const key in obj) {
-      if (obj[key] === "") {
-        delete obj[key];
-      } else if (obj[key] === null) {
-        delete obj[key];
-      } else if (Array.isArray(obj[key]) && obj[key].length === 0) {
+      if (obj[key] === "") delete obj[key];
+      else if (obj[key] === null) delete obj[key];
+      else if (Array.isArray(obj[key]) && obj[key].length === 0) {
         delete obj[key];
       } else if (typeof obj[key] === "object" && obj[key] !== null) {
-        if (Object.keys(obj[key]).length === 0) {
-          delete obj[key];
-        } else {
-          removeEmptyValues(obj[key]);
-        }
+        if (Object.keys(obj[key]).length === 0) delete obj[key];
+        else removeEmptyValues(obj[key]);
       }
     }
   }

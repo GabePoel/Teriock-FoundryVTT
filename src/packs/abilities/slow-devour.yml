@@ -1,51 +1,45 @@
 _id: 9214c97ac2aad437
-_key: '!items!9214c97ac2aad437'
+_key: '!effects!9214c97ac2aad437'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 9214c97ac2aad437
-    _key: '!items.effects!9214c97ac2aad437.9214c97ac2aad437'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/slow-devour.webp
-    name: Slow Devour
-    system:
-      competence:
-        raw: 0
-      delivery: bite
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: Short Rest
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: slow-devour
-      interaction: manifest
-      maneuver: slow
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: contact
-      requirements: <p>Target is @L[Condition:Down]{down}.</p>
-      results:
-        hit: >-
-          <p>Target is @L[Condition:Dead]{dead}, @L[Condition:Ruined]{ruined}
-          and their @L[Core:Size]{size} is reduced to 0.</p>
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/slow-devour.webp
 name: Slow Devour
-type: wrapper
+system:
+  competence:
+    raw: 0
+  delivery: bite
+  duration:
+    raw: '0'
+    unit: instant
+  executionTime:
+    base: Short Rest
+    slow:
+      unit: shortRest
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: slow-devour
+  interaction: manifest
+  maneuver: slow
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: contact
+  requirements: <p>Target is @L[Condition:Down]{down}.</p>
+  results:
+    hit: >-
+      <p>Target is @L[Condition:Dead]{dead}, @L[Condition:Ruined]{ruined} and
+      their @L[Core:Size]{size} is reduced to 0.</p>
+  targets:
+    - creature
+transfer: true
+type: ability

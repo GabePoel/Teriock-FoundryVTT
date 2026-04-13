@@ -1,58 +1,52 @@
 _id: f773b30985ce56ab
-_key: '!items!f773b30985ce56ab'
+_key: '!effects!f773b30985ce56ab'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: f773b30985ce56ab
-    _key: '!items.effects!f773b30985ce56ab.f773b30985ce56ab'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/storytelling.webp
-    name: Storytelling
-    system:
-      class: ranger
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        triggers:
-          - dawn
-        unit: unlimited
-      executionTime: Short Rest
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: storytelling
-      interaction: manifest
-      maneuver: slow
-      overview:
-        base: >-
-          <p>Pick a @L[Category:Tradecrafts]{tradecraft} and @L[Core:Fluency
-          Bonus]{fluency} relating to the moral of your story (subject to
-          @L[Core:GM]{GM} approval). All creatures that listened to your story
-          in full gain that @L[Category:Tradecrafts]{tradecraft} and
-          @L[Core:Fluency Bonus]{fluency} for the duration of this ability.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/storytelling.webp
 name: Storytelling
-type: wrapper
+system:
+  class: ranger
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    triggers:
+      - dawn
+    unit: unlimited
+  executionTime:
+    base: Short Rest
+    slow:
+      unit: shortRest
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: storytelling
+  interaction: manifest
+  maneuver: slow
+  mundane: false
+  overview:
+    base: >-
+      <p>Pick a @L[Category:Tradecrafts]{tradecraft} and @L[Core:Fluency
+      Bonus]{fluency} relating to the moral of your story (subject to
+      @L[Core:GM]{GM} approval). All creatures that listened to your story in
+      full gain that @L[Category:Tradecrafts]{tradecraft} and @L[Core:Fluency
+      Bonus]{fluency} for the duration of this ability.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  skill: true
+  standard: true
+  targets:
+    - creature
+transfer: true
+type: ability

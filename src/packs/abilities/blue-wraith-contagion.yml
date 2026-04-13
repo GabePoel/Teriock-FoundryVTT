@@ -1,82 +1,88 @@
 _id: 04e83ed24d589e22
-_key: '!items!04e83ed24d589e22'
+_key: '!effects!04e83ed24d589e22'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 04e83ed24d589e22
-    _key: '!items.effects!04e83ed24d589e22.04e83ed24d589e22'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/blue-wraith-contagion.webp
-    name: Blue Wraith Contagion
-    system:
-      automations:
-        iShmKJVk38YllA02:
-          _id: iShmKJVk38YllA02
-          competence:
-            raw: 1
-          documents:
-            - Compendium.teriock.species.Item.b53b0b4c488fa6f8
-          override:
-            - art
-          overrideCompetence: true
-          reset:
-            - hp
-            - mp
-          suppress:
-            - body
-            - fluency
-            - rank
-            - species
-          type: transformation
-      competence:
-        raw: 0
-      delivery: hand
-      duration:
-        raw: '1'
-        unit: week
-      effectTypes:
-        - control
-        - reanimation
-        - automatic
-      elements:
-        - necromancy
-      executionTime: r0
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: blue-wraith-contagion
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>The creature you @L[Drain:Mana]{mana drained} to
-          @L[Condition:Dead]{death} is immediately reanimated as a
-          @L[Creature:Blue Wraith]{blue wraith} under your control. This effect
-          clears if the target is @L[Condition:Dead]{killed} and
-          @L[Ability:Exorcism]{exorcised}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      targets:
-        - creature
-      trigger: >-
-        <p>You @L[Drain:Mana]{mana drain} a creature to
-        @L[Condition:Dead]{death}. This triggers automatically. You cannot
-        choose to not use it if you are able to.</p>
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/blue-wraith-contagion.webp
 name: Blue Wraith Contagion
-type: wrapper
+system:
+  automations:
+    iShmKJVk38YllA02:
+      _id: iShmKJVk38YllA02
+      automatic: true
+      competence:
+        raw: 1
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      documents:
+        - Compendium.teriock.species.Item.b53b0b4c488fa6f8
+      heighten:
+        - 0
+        - 1
+      multi: false
+      override:
+        - art
+      overrideCompetence: true
+      reset:
+        - hp
+        - mp
+      ring: false
+      suppress:
+        - body
+        - fluency
+        - rank
+        - species
+      type: transformation
+  competence:
+    raw: 0
+  delivery: hand
+  duration:
+    raw: '1'
+    unit: week
+  effectTypes:
+    - control
+    - reanimation
+    - automatic
+  elements:
+    - necromancy
+  executionTime:
+    base: r0
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  identifier: blue-wraith-contagion
+  interaction: manifest
+  maneuver: reactive
+  mundane: false
+  overview:
+    base: >-
+      <p>The creature you @L[Drain:Mana]{mana drained} to
+      @L[Condition:Dead]{death} is immediately reanimated as a @L[Creature:Blue
+      Wraith]{blue wraith} under your control. This effect clears if the target
+      is @L[Condition:Dead]{killed} and @L[Ability:Exorcism]{exorcised}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: contact
+  targets:
+    - creature
+  trigger: >-
+    <p>You @L[Drain:Mana]{mana drain} a creature to @L[Condition:Dead]{death}.
+    This triggers automatically. You cannot choose to not use it if you are able
+    to.</p>
+transfer: true
+type: ability

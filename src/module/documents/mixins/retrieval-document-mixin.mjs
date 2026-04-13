@@ -21,6 +21,14 @@ export default function RetrievalDocumentMixin(Base) {
       }
 
       /**
+       * Child archetypes.
+       * @returns {TeriockArchetype[]}
+       */
+      get archetypes() {
+        return this.visibleChildren.filter((c) => c.type === "archetype");
+      }
+
+      /**
        * Child attunements.
        * @returns {TeriockAttunement[]}
        */
@@ -117,19 +125,19 @@ export default function RetrievalDocumentMixin(Base) {
       }
 
       /**
-       * Child wrappers.
-       * @returns {TeriockWrapper[]}
-       */
-      get wrappers() {
-        return this.visibleChildren.filter((c) => c.type === "wrapper");
-      }
-
-      /**
        * Resolved child abilities.
        * @returns {Promise<TeriockAbility[]>}
        */
       async getAbilities() {
         return resolveDocuments(this.abilities);
+      }
+
+      /**
+       * Resolved child archetypes.
+       * @returns {Promise<TeriockArchetype[]>}
+       */
+      async getArchetypes() {
+        return resolveDocuments(this.archetypes);
       }
 
       /**
@@ -226,14 +234,6 @@ export default function RetrievalDocumentMixin(Base) {
        */
       async getSpecies() {
         return resolveDocuments(this.species);
-      }
-
-      /**
-       * Resolved child wrappers.
-       * @returns {Promise<TeriockWrapper[]>}
-       */
-      async getWrappers() {
-        return resolveDocuments(this.wrappers);
       }
     }
   );

@@ -1,73 +1,70 @@
 _id: 47e45d199cfe1616
-_key: '!items!47e45d199cfe1616'
+_key: '!effects!47e45d199cfe1616'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 47e45d199cfe1616
-    _key: '!items.effects!47e45d199cfe1616.47e45d199cfe1616'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/chi-armor.webp
-    name: Chi Armor
-    system:
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.defense.ac
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '1'
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: changes
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: self
-      duration:
-        raw: '1'
-        unit: minute
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: chi-armor
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: <p>Your @L[Core:Armor Class]{AC} is increased by 1.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - spiritual
-      range:
-        unit: self
-      requirements: <p>You do not have [[lookup name]] active.</p>
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/chi-armor.webp
 name: Chi Armor
-type: wrapper
+system:
+  automations:
+    e789ed5e109ebd1a:
+      _id: e789ed5e109ebd1a
+      changes:
+        - key: system.defense.ac
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: Actor
+          type: add
+          value: '1'
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: changes
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: self
+  duration:
+    raw: '1'
+    unit: minute
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: chi-armor
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: <p>Your @L[Core:Armor Class]{AC} is increased by 1.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - spiritual
+  range:
+    unit: self
+  requirements: <p>You do not have [[lookup name]] active.</p>
+  targets:
+    - self
+transfer: true
+type: ability

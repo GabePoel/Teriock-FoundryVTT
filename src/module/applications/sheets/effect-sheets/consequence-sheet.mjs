@@ -1,6 +1,8 @@
 import { icons } from "../../../constants/display/icons.mjs";
 import { documentOptions } from "../../../constants/options/document-options.mjs";
-import { makeIconClass, mix } from "../../../helpers/utils.mjs";
+import { mix } from "../../../helpers/construction.mjs";
+import { makeIconClass } from "../../../helpers/utils.mjs";
+import { BaseApplicationMixin } from "../../shared/mixins/_module.mjs";
 import {
   ChangesSheetMixin,
   ConfigButtonSheetMixin,
@@ -17,9 +19,11 @@ const { ActiveEffectConfig } = foundry.applications.sheets;
  * {@link TeriockConsequence} sheet.
  * @property {TeriockConsequence} document
  * @extends {ActiveEffectConfig}
+ * @mixes AutomationsCommonSheetPart
  */
 export default class ConsequenceSheet extends mix(
   ActiveEffectConfig,
+  BaseApplicationMixin,
   ConfigButtonSheetMixin,
   ChangesSheetMixin,
   AutomationsCommonSheetPart,
@@ -72,6 +76,11 @@ export default class ConsequenceSheet extends mix(
   };
 
   /** @inheritDoc */
+  get _canDropAutomations() {
+    return true;
+  }
+
+  /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
     this.element.querySelector("footer")?.remove();
@@ -88,8 +97,9 @@ export default class ConsequenceSheet extends mix(
       transformation: ["enabled", "level", "img", "ring"].map((p) => {
         return {
           field: this.document.system.schema.getField(`transformation.${p}`),
-          value: this.document.system.transformation[p],
           localize: true,
+          placeholder: this.document.system.transformation[p],
+          value: this.document.system._source.transformation[p],
         };
       }),
     });

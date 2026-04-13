@@ -1,64 +1,58 @@
 _id: 0bce6b50086f9459
-_key: '!items!0bce6b50086f9459'
+_key: '!effects!0bce6b50086f9459'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 0bce6b50086f9459
-    _key: '!items.effects!0bce6b50086f9459.0bce6b50086f9459'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: icons/skills/melee/sword-damaged-broken-purple.webp
-    name: Echoed Item Damage
-    system:
-      competence:
-        raw: 0
-      costs:
-        primary:
-          hp:
-            formula: 1d6
-            type: formula
-      delivery: weapon
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - automatic
-      executionTime: r0
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: flaw
-      identifier: echoed-item-damage
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>If the item was @L[Property:Destroyed]{destroyed}, the @L[Core:Hit
-          Points and Mana Points]{HP} you pay for this ability is
-          @L[Damage:Lethal]{lethal}. This functions as @L[Damage:Lethal]{lethal
-          damage} despite being a cost.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - divine
-      range:
-        unit: contact
-      targets:
-        - creature
-      trigger: >-
-        <p>An item you @L[Keyword:Bearing]{bear} is
-        @L[Property:Shattered]{shattered} or @L[Property:Destroyed]{destroyed}.
-        This triggers automatically. You cannot choose to not use it if you are
-        able to.</p>
-    type: ability
+  systemVersion: 0.12.0
 img: icons/skills/melee/sword-damaged-broken-purple.webp
 name: Echoed Item Damage
-type: wrapper
+system:
+  competence:
+    raw: 0
+  costs:
+    primary:
+      hp:
+        formula: 1d6
+        type: formula
+  delivery: weapon
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - automatic
+  executionTime:
+    base: r0
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: flaw
+  identifier: echoed-item-damage
+  interaction: manifest
+  maneuver: reactive
+  mundane: false
+  overview:
+    base: >-
+      <p>If the item was @L[Property:Destroyed]{destroyed}, the @L[Core:Hit
+      Points and Mana Points]{HP} you pay for this ability is
+      @L[Damage:Lethal]{lethal}. This functions as @L[Damage:Lethal]{lethal
+      damage} despite being a cost.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - divine
+  range:
+    unit: contact
+  targets:
+    - creature
+  trigger: >-
+    <p>An item you @L[Keyword:Bearing]{bear} is
+    @L[Property:Shattered]{shattered} or @L[Property:Destroyed]{destroyed}. This
+    triggers automatically. You cannot choose to not use it if you are able
+    to.</p>
+transfer: true
+type: ability

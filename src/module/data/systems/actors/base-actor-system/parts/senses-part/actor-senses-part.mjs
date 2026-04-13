@@ -45,26 +45,10 @@ export default (Base) => {
       }
 
       /** @inheritDoc */
-      prepareBaseData() {
-        super.prepareBaseData();
-        // TODO: Move light controls to token overrides in v14.
-        this.light = foundry.utils.deepClone(characterOptions.defaultLight);
-      }
-
-      /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
         this.detection.hiding.evaluate();
         this.detection.perceiving.evaluate();
-        // TODO: Move light controls to token overrides in v14.
-        if (this.parent.statuses.has("ethereal")) {
-          this.senses.spectral = Math.max(
-            this.light.dim || 0,
-            this.light.bright || 0,
-          );
-        } else {
-          this.senses.spectral = 0;
-        }
       }
     }
   );

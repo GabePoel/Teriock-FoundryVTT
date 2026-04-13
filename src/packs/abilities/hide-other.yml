@@ -1,96 +1,107 @@
 _id: 830ae015c264e103
-_key: '!items!830ae015c264e103'
+_key: '!effects!830ae015c264e103'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 830ae015c264e103
-    _key: '!items.effects!830ae015c264e103.830ae015c264e103'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/hide-other.webp
-    name: Hide Other
-    system:
-      automations:
-        0b0d1426453abb55:
-          _id: 0b0d1426453abb55
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: apply
-          status: hidden
-          type: status
-        V8gaLVZW5hwcT0cJ:
-          _id: V8gaLVZW5hwcT0cJ
-          competencies:
-            - 0
-          formula: 1d20 + (2 * @snk)
-          roll: other
-          type: roll
-        dR63oSfk3w1AnCHS:
-          _id: dR63oSfk3w1AnCHS
-          competencies:
-            - 1
-          formula: 1d20 + (2 * @snk) + @p
-          roll: other
-          type: roll
-        duQdHEEd9RODJ6px:
-          _id: duQdHEEd9RODJ6px
-          competencies:
-            - 2
-          formula: 1d20 + (2 * @snk) + @f
-          roll: other
-          type: roll
-      class: thief
-      competence:
-        raw: 0
-      delivery: hand
-      duration:
-        raw: '0'
-        unit: instant
-      endCondition: >-
-        <p>Target moves or is no longer in a location with shadows, dim light,
-        or @L[Core:Cover]{three-quarters cover}.</p>
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: hide-other
-      interaction: attack
-      maneuver: active
-      overview:
-        base: >-
-          <p>Target becomes @L[Condition:Hidden]{hidden}. As you hide them, you
-          may roll [[/roll 1d20 + @snk]]. You may choose to use this as their
-          hidden DC.</p>
-        fluent: <p>Instead roll [[/roll 1d20 + @snk + @f]] for their hidden DC.</p>
-        proficient: <p>Instead roll [[/roll 1d20 + @snk + @p]] for their hidden DC.</p>
-      piercing:
-        raw: 2
-      powerSources:
-        - spiritual
-      range:
-        unit: contact
-      requirements: >-
-        <p>Target is in a location with shadows, dim light, or
-        @L[Core:Cover]{three-quarters cover}.</p>
-      skill: true
-      standard: true
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/hide-other.webp
 name: Hide Other
-type: wrapper
+system:
+  automations:
+    0b0d1426453abb55:
+      _id: 0b0d1426453abb55
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: apply
+      status: hidden
+      target: false
+      type: status
+    V8gaLVZW5hwcT0cJ:
+      _id: V8gaLVZW5hwcT0cJ
+      competencies:
+        - 0
+      formula: 1d20 + (2 * @snk)
+      heighten:
+        - 0
+        - 1
+      impact: other
+      merge: true
+      type: roll
+    dR63oSfk3w1AnCHS:
+      _id: dR63oSfk3w1AnCHS
+      competencies:
+        - 1
+      formula: 1d20 + (2 * @snk) + @p
+      heighten:
+        - 0
+        - 1
+      impact: other
+      merge: true
+      type: roll
+    duQdHEEd9RODJ6px:
+      _id: duQdHEEd9RODJ6px
+      competencies:
+        - 2
+      formula: 1d20 + (2 * @snk) + @f
+      heighten:
+        - 0
+        - 1
+      impact: other
+      merge: true
+      type: roll
+  class: thief
+  competence:
+    raw: 0
+  delivery: hand
+  duration:
+    raw: '0'
+    unit: instant
+  endCondition: >-
+    <p>Target moves or is no longer in a location with shadows, dim light, or
+    @L[Core:Cover]{three-quarters cover}.</p>
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: hide-other
+  interaction: attack
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>Target becomes @L[Condition:Hidden]{hidden}. As you hide them, you may
+      roll [[/roll 1d20 + @snk]]. You may choose to use this as their hidden
+      DC.</p>
+    fluent: <p>Instead roll [[/roll 1d20 + @snk + @f]] for their hidden DC.</p>
+    proficient: <p>Instead roll [[/roll 1d20 + @snk + @p]] for their hidden DC.</p>
+  piercing:
+    raw: 2
+  powerSources:
+    - spiritual
+  range:
+    unit: contact
+  requirements: >-
+    <p>Target is in a location with shadows, dim light, or
+    @L[Core:Cover]{three-quarters cover}.</p>
+  skill: true
+  standard: true
+  targets:
+    - creature
+transfer: true
+type: ability

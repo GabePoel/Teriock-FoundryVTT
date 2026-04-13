@@ -1,94 +1,93 @@
 _id: a4763220481e88cc
-_key: '!items!a4763220481e88cc'
+_key: '!effects!a4763220481e88cc'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: a4763220481e88cc
-    _key: '!items.effects!a4763220481e88cc.a4763220481e88cc'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/melee-dodge.webp
-    name: Melee Dodge
-    system:
-      automations:
-        96383c76a745415d:
-          _id: 96383c76a745415d
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: include
-          status: meleeDodging
-          type: status
-        d635eb44dba086dd:
-          _id: d635eb44dba086dd
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: combatExpiration
-          what:
-            roll: 2d4kh1
-            threshold: 4
-            type: forced
-          when:
-            skip: 0
-            time: start
-            trigger: turn
-          who:
-            type: executor
-      basic: true
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '5'
-        unit: second
-      effectTypes:
-        - movement
-      endCondition: <p>The start of your next @L[Core:Turn]{turn}.</p>
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: intrinsic
-      identifier: melee-dodge
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>You are @L[Condition:Melee Dodging]{melee dodging} until the start
-          of your next @L[Core:Turns]{turn}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      requirements: >-
-        <p>You are not @L[Condition:Prone]{prone}, @L[Condition:Snared]{snared},
-        or @L[Condition:Immobile]{immobile}.</p>
-      sustained: true
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/melee-dodge.webp
 name: Melee Dodge
-type: wrapper
+system:
+  automations:
+    96383c76a745415d:
+      _id: 96383c76a745415d
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: include
+      status: meleeDodging
+      target: false
+      type: status
+    d635eb44dba086dd:
+      _id: d635eb44dba086dd
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: combatExpiration
+      what:
+        roll: 2d4kh1
+        threshold: 4
+        type: forced
+      when:
+        skip: 0
+        time: start
+        trigger: turn
+      who:
+        type: executor
+  basic: true
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '5'
+    unit: second
+  effectTypes:
+    - movement
+  endCondition: <p>The start of your next @L[Core:Turn]{turn}.</p>
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: intrinsic
+  identifier: melee-dodge
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>You are @L[Condition:Melee Dodging]{melee dodging} until the start of
+      your next @L[Core:Turns]{turn}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  requirements: >-
+    <p>You are not @L[Condition:Prone]{prone}, @L[Condition:Snared]{snared}, or
+    @L[Condition:Immobile]{immobile}.</p>
+  sustained: true
+  targets:
+    - self
+transfer: true
+type: ability

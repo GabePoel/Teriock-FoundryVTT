@@ -27,7 +27,7 @@ export default class TradecraftCheckExecution extends TradecraftExecutionMixin(
 
   /** @inheritDoc */
   get name() {
-    return game.i18n.format("TERIOCK.ROLLS.Tradecraft.name", {
+    return _loc("TERIOCK.ROLLS.Tradecraft.name", {
       value: TERIOCK.reference.tradecrafts[this.tradecraft],
     });
   }

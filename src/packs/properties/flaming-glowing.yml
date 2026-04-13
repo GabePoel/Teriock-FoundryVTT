@@ -1,0 +1,63 @@
+_id: ArkWczsz40lDHHoV
+_key: '!effects!ArkWczsz40lDHHoV'
+_stats:
+  compendiumSource: Compendium.teriock.properties.ActiveEffect.639b14658b0d2e1c
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.12.0
+img: systems/teriock/src/icons/properties/glowing.webp
+name: Glowing
+system:
+  _sup: db88dee8cee2e2db
+  applyIfUnequipped: false
+  automations:
+    parameterChanges:
+      _id: parameterChanges
+      changes:
+        - key: token.light.dim
+          phase: normal
+          priority: 5
+          qualifier: '1'
+          target: Actor
+          type: upgrade
+          value: '10'
+        - key: token.light.color
+          phase: normal
+          priority: 5
+          qualifier: '1'
+          target: Actor
+          type: override
+          value: '#C64600'
+        - key: token.light.animation.type
+          phase: normal
+          priority: 5
+          qualifier: '1'
+          target: Actor
+          type: override
+          value: torch
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 0
+        - 1
+      type: changes
+  competence:
+    raw: 0
+  description: >-
+    <p>If an item is <b>[[lookup name style=lc]]</b>, it is visible in the dark
+    and produces light that makes other things visible. When an item specifies
+    if it's [[lookup name style=lc]], it may have a value in parentheses that
+    indicates the radius of the light. If no value is specified, then the item
+    is visible, but glows faintly enough that it doesn't illuminate other
+    objects unless they are held <i>right</i> next to it.</p>
+  form: intrinsic
+  identifier: glowing
+  mundane: false
+transfer: true
+type: property

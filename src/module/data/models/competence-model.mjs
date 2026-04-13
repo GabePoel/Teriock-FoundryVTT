@@ -33,7 +33,7 @@ export default class CompetenceModel extends EmbeddedDataModel {
     let out = "TERIOCK.SCHEMA.Competence.choices.0";
     if (this.proficient) out = "TERIOCK.SCHEMA.Competence.choices.1";
     if (this.fluent) out = "TERIOCK.SCHEMA.Competence.choices.2";
-    return game.i18n.localize(out);
+    return _loc(out);
   }
 
   /**

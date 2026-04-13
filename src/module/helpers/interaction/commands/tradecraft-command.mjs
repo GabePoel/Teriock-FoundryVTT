@@ -27,10 +27,10 @@ const command = {
   id: "tradecraft",
   label: (options) =>
     allOptions[options?.tradecraft]?.name
-      ? game.i18n.format("TERIOCK.ROLLS.Tradecraft.name", {
+      ? _loc("TERIOCK.ROLLS.Tradecraft.name", {
           value: allOptions[options?.tradecraft].name,
         })
-      : game.i18n.localize("TERIOCK.ROLLS.Tradecraft.label"),
+      : _loc("TERIOCK.ROLLS.Tradecraft.label"),
   primary: use,
   secondary: use,
 };

@@ -1,112 +1,111 @@
 _id: 895e9d07d1ee287c
-_key: '!items!895e9d07d1ee287c'
+_key: '!effects!895e9d07d1ee287c'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 895e9d07d1ee287c
-    _key: '!items.effects!895e9d07d1ee287c.895e9d07d1ee287c'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/mind-control.webp
-    name: Mind Control
-    system:
-      automations:
-        d635eb44dba086dd:
-          _id: d635eb44dba086dd
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: combatExpiration
-          what:
-            roll: 2d4kh1
-            threshold: 4
-            type: rolled
-          when:
-            skip: 0
-            time: start
-            trigger: turn
-          who:
-            type: target
-        f004b5e5538cefe9:
-          _id: f004b5e5538cefe9
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: include
-          status: charmed
-          type: status
-      competence:
-        raw: 0
-      costs:
-        components:
-          verbal:
-            type: tag
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: sight
-      duration:
-        raw: '1'
-        unit: minute
-      effectTypes:
-        - mental
-        - control
-      elements:
-        - storm
-      endCondition: >-
-        <p>At the start of each of the target's @L[Core:Turn]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: int
-      form: special
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the maximum length of the
-        command can be increased by 1 word.</p>
-      identifier: mind-control
-      interaction: feat
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        raw: '60'
-        unit: ft
-      results:
-        fail: >-
-          <p>Target is @L[Condition:Charmed]{charmed}. In addition, you may
-          provide a 1 word command that the target must follow for the duration
-          of this spell. If the command is directly harmful to the target, this
-          spell @L[Core:Fizzles]{fizzles} and they do not need to follow it. The
-          target must understand the language that the command was given in.</p>
-      rotator: true
-      spell: true
-      standard: true
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/mind-control.webp
 name: Mind Control
-type: wrapper
+system:
+  automations:
+    d635eb44dba086dd:
+      _id: d635eb44dba086dd
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: combatExpiration
+      what:
+        roll: 2d4kh1
+        threshold: 4
+        type: rolled
+      when:
+        skip: 0
+        time: start
+        trigger: turn
+      who:
+        type: target
+    f004b5e5538cefe9:
+      _id: f004b5e5538cefe9
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: include
+      status: charmed
+      target: false
+      type: status
+  competence:
+    raw: 0
+  costs:
+    components:
+      verbal:
+        type: tag
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: sight
+  duration:
+    raw: '1'
+    unit: minute
+  effectTypes:
+    - mental
+    - control
+  elements:
+    - storm
+  endCondition: >-
+    <p>At the start of each of the target's @L[Core:Turn]{turns}, they roll
+    [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: int
+  form: special
+  heightened: >-
+    <p>For each additional @L[Core:MP]{MP} spent, the maximum length of the
+    command can be increased by 1 word.</p>
+  identifier: mind-control
+  interaction: feat
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    raw: '60'
+    unit: ft
+  results:
+    fail: >-
+      <p>Target is @L[Condition:Charmed]{charmed}. In addition, you may provide
+      a 1 word command that the target must follow for the duration of this
+      spell. If the command is directly harmful to the target, this spell
+      @L[Core:Fizzles]{fizzles} and they do not need to follow it. The target
+      must understand the language that the command was given in.</p>
+  rotator: true
+  spell: true
+  standard: true
+  targets:
+    - creature
+transfer: true
+type: ability

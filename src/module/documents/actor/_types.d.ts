@@ -4,10 +4,23 @@ import { BaseActorSheet } from "../../applications/sheets/actor-sheets/_module.m
 import { DocumentCollection } from "@client/documents/abstract/_module.mjs";
 
 declare global {
+  namespace Teriock.Data {
+    export interface ActorPropagator {
+      /**
+       * Add statuses and explanations for "virtual effects". These are things that would otherwise be represented with
+       * {@link TeriockActiveEffect}s, but that we want to be able to add synchronously during the update cycle. Any of
+       * these effects that should be shown on the token need to be manually added to {@link TeriockToken._drawEffects}.
+       */
+      prepareVirtualEffects(): void;
+    }
+  }
+
   namespace Teriock.Documents {
     export interface ActorInterface {
       _id: ID<AnyActor>;
+      // @ts-expect-error DocumentConstructionContext
       effects: DocumentCollection<AnyActiveEffect>;
+      // @ts-expect-error DocumentConstructionContext
       items: DocumentCollection<AnyItem>;
       sheet: BaseActorSheet;
       statuses: Set<Teriock.Keys.Condition>;

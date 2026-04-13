@@ -1,138 +1,19 @@
 _id: 8b78a3aa0ca9aa71
 _key: '!items!8b78a3aa0ca9aa71'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.68
 effects:
-  - _id: yyxUb2HT0HXHkxDR
-    _key: '!items.effects!8b78a3aa0ca9aa71.yyxUb2HT0HXHkxDR'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.103a1d356ae8fc20
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/diving.webp
-    name: Diving
-    system:
-      _sup: 1FfsX0XkXFuC079B
-      class: corsair
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: diving
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You no longer have to stay on the surface of water while
-          @L[Ability:Swimming]{Swimming}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-    type: ability
-  - _id: SnTXFRbOQdLzbQwT
-    _key: '!items.effects!8b78a3aa0ca9aa71.SnTXFRbOQdLzbQwT'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.1b64c8a7cc5847a8
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/abilities/swimming.webp
-    name: Swimming
-    system:
-      _sup: 1FfsX0XkXFuC079B
-      automations:
-        3MU324Tac2hBbZe2:
-          _id: 3MU324Tac2hBbZe2
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 0
-            - 1
-          movementAction: swim
-          type: changeMovement
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.speedAdjustments.swim
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '3'
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-      class: corsair
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: swimming
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: <p>You swim at @L[Core:Movement Speed]{full speed}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-    type: ability
   - _id: 1FfsX0XkXFuC079B
     _key: '!items.effects!8b78a3aa0ca9aa71.1FfsX0XkXFuC079B'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.d95453884a713aab
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.d95453884a713aab
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/water-native.webp
     name: Water Native
     system:
@@ -165,6 +46,136 @@ effects:
         unit: self
       targets:
         - self
+    transfer: true
+    type: ability
+  - _id: Gio3SpAdRKkYJCVl
+    _key: '!items.effects!8b78a3aa0ca9aa71.Gio3SpAdRKkYJCVl'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1b64c8a7cc5847a8
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/swimming.webp
+    name: Swimming
+    system:
+      _sup: 1FfsX0XkXFuC079B
+      automations:
+        3MU324Tac2hBbZe2:
+          _id: 3MU324Tac2hBbZe2
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 0
+            - 1
+          movementAction: swim
+          type: changeMovement
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.speedAdjustments.swim
+              phase: normal
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              type: upgrade
+              value: '3'
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+      class: corsair
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: swimming
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: <p>You swim at @L[Core:Movement Speed]{full speed}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: 7soZt65Y0tmGl4gj
+    _key: '!items.effects!8b78a3aa0ca9aa71.7soZt65Y0tmGl4gj'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.103a1d356ae8fc20
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/diving.webp
+    name: Diving
+    system:
+      _sup: 1FfsX0XkXFuC079B
+      class: corsair
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: diving
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>You no longer have to stay on the surface of water while
+          @L[Ability:Swimming]{Swimming}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
     type: ability
 folder: 2703b16cbd907cde
 img: systems/teriock/src/icons/creatures/merfolk.webp

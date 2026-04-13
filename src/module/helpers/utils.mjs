@@ -1,7 +1,7 @@
 import { iconStyles } from "../constants/display/_module.mjs";
+import { costOptions } from "../constants/options/cost-options.mjs";
 import { BaseRoll } from "../dice/rolls/_module.mjs";
 import { localizeChoices } from "./localization.mjs";
-import { resolveDocument } from "./resolve.mjs";
 import { toCamelCase, toTitleCase } from "./string.mjs";
 
 /**
@@ -150,16 +150,6 @@ export function prefixObject(obj, prefix) {
 }
 
 /**
- * Mixes a base class with any number of mixins.
- * @param {Class} Base - The class to be extended.
- * @param {Function[]} Mixins - The mixin functions to apply.
- * @returns {Class} The combined class.
- */
-export function mix(Base, ...Mixins) {
-  return Mixins.reduce((cls, mixin) => mixin(cls), Base);
-}
-
-/**
  * Sort an object by its keys.
  * @template T
  * @param {T} obj
@@ -225,14 +215,10 @@ export function formatDynamicSelectOptions(choices = {}, options = {}) {
     choiceArray.push(...choices);
   } else {
     for (const group of Object.values(choices)) {
-      const groupLabel = options.localize
-        ? game.i18n.localize(group.label)
-        : group.label;
+      const groupLabel = options.localize ? _loc(group.label) : group.label;
       for (const [choiceValue, choiceLabel] of Object.entries(group.choices)) {
         choiceArray.push({
-          label: options.localize
-            ? game.i18n.localize(choiceLabel)
-            : choiceLabel,
+          label: options.localize ? _loc(choiceLabel) : choiceLabel,
           value: choiceValue,
           group: groupLabel,
         });
@@ -302,9 +288,7 @@ export async function massUpdate(documentName, updateData, operation = {}) {
     }),
   ]);
   const documents = [];
-  for (const ud of resolvedUpdates) {
-    documents.push(...ud);
-  }
+  for (const ud of resolvedUpdates) documents.push(...ud);
   return documents;
 }
 
@@ -406,7 +390,6 @@ export function fromIdentifierSync(identifier) {
     let collection;
     if (documentName === "Actor") collection = game.actors;
     if (documentName === "Item") collection = game.items;
-    if (documentName === "ActiveEffect") collection = game.teriock.effects;
     if (!collection) return null;
     return (
       collection.find(
@@ -415,11 +398,7 @@ export function fromIdentifierSync(identifier) {
       ) ?? null
     );
   }
-  const candidates = [
-    ...game.items.contents,
-    ...game.actors.contents,
-    ...game.teriock.effects.contents,
-  ];
+  const candidates = [...game.items.contents, ...game.actors.contents];
   return (
     candidates.find((d) => d.system?.identifier === parsed.identifier) ?? null
   );
@@ -474,31 +453,32 @@ export async function fromIdentifier(identifier, options = {}) {
     }
     const documentName = TERIOCK.options.document[parsed.type]?.doc;
     if (!documentName) return null;
-    const packs = game.packs.contents.filter(
-      (p) => p.documentName === documentName,
-    );
+    const packs = game.packs.contents
+      .filter((p) => p.documentName === documentName)
+      .sort(
+        (a, b) =>
+          b.collection.startsWith("teriock.") -
+          a.collection.startsWith("teriock."),
+      );
     for (const pack of packs) {
       const docs = await pack.getDocuments({
         system: { identifier: parsed.identifier },
         type: parsed.type,
       });
-      if (docs.length > 0) return docs[0];
-    }
-    if (documentName === "ActiveEffect") {
-      let setting;
-      if (parsed.type === "ability") setting = "compendiumAbilitySources";
-      if (parsed.type === "property") setting = "compendiumPropertySources";
-      if (setting) {
-        const keys = game.teriock.getSetting(setting);
-        const packs = Array.from(keys)
-          .map((k) => game.packs.get(k))
-          .filter((_) => _);
-        const name = inferNameFromIdentifier(identifier);
-        for (const pack of packs) {
-          const doc = await resolveDocument(pack.index.getName(name));
-          if (doc?.type === parsed.type) return doc;
+      const filtered = docs.filter((d) => {
+        const mutationFields = [
+          "system.improvement",
+          "system.limitation",
+          ...Object.keys(costOptions.tweaks).map(
+            (t) => `system.costs.tweaks.${t}`,
+          ),
+        ];
+        for (const field of mutationFields) {
+          if (foundry.utils.getProperty(d, field)) return false;
         }
-      }
+        return true;
+      });
+      if (filtered.length > 0) return docs[0];
     }
   }
   return fromIdentifierSync(identifier);

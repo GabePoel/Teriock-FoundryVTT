@@ -1,74 +1,71 @@
 _id: 64a165a73dcf9f00
-_key: '!items!64a165a73dcf9f00'
+_key: '!effects!64a165a73dcf9f00'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 64a165a73dcf9f00
-    _key: '!items.effects!64a165a73dcf9f00.64a165a73dcf9f00'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/ethereal-full-plate.webp
-    name: Ethereal Full Plate
-    system:
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.naturalAv
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '4'
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: changes
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        conditions:
-          present:
-            - ethereal
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: ethereal-full-plate
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>While @L[Condition:Ethereal]{Ethereal}, have at least 4
-          @L[Core:AV]{AV} and appear to be wearing @L[Category:Equipment]{full
-          plate}. This is the case even when you are not actually wearing
-          @L[Category:Armor]{armor}. </p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/ethereal-full-plate.webp
 name: Ethereal Full Plate
-type: wrapper
+system:
+  automations:
+    e789ed5e109ebd1a:
+      _id: e789ed5e109ebd1a
+      changes:
+        - key: system.naturalAv
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: Actor
+          type: upgrade
+          value: '4'
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: changes
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    conditions:
+      present:
+        - ethereal
+    raw: '0'
+    unit: unlimited
+  executionTime:
+    base: passive
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: ethereal-full-plate
+  interaction: manifest
+  maneuver: passive
+  mundane: false
+  overview:
+    base: >-
+      <p>While @L[Condition:Ethereal]{Ethereal}, have at least 4 @L[Core:AV]{AV}
+      and appear to be wearing @L[Category:Equipment]{full plate}. This is the
+      case even when you are not actually wearing @L[Category:Armor]{armor}.
+      </p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  targets:
+    - self
+transfer: true
+type: ability

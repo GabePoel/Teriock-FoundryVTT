@@ -1,112 +1,111 @@
 _id: 9a08aa637390ebba
-_key: '!items!9a08aa637390ebba'
+_key: '!effects!9a08aa637390ebba'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 9a08aa637390ebba
-    _key: '!items.effects!9a08aa637390ebba.9a08aa637390ebba'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/memory-drain-poison-strike.webp
-    name: Memory Drain Poison Strike
-    system:
-      automations:
-        157afc517847f562:
-          _id: 157afc517847f562
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: 1d6[memory]
-          heighten:
-            - 1
-            - 0
-          merge: true
-          roll: drain
-          type: roll
-        42c1a8a5aeb16ded:
-          _id: 42c1a8a5aeb16ded
-          competencies:
-            - 1
-            - 2
-          formula: 1d8[memory]
-          heighten:
-            - 1
-            - 0
-          merge: true
-          roll: drain
-          type: roll
-        743730f25f256b10:
-          _id: 743730f25f256b10
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: include
-          status: poisoned
-          type: status
-        b2b2c506da712b40:
-          _id: b2b2c506da712b40
-          competencies:
-            - 2
-          formula: 1d10[memory]
-          heighten:
-            - 1
-            - 0
-          merge: true
-          roll: drain
-          type: roll
-      competence:
-        raw: 0
-      delivery: weapon
-      duration:
-        raw: '24'
-        unit: hour
-      effectTypes:
-        - mental
-        - poison
-        - displacement
-        - draining
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: memory-drain-poison-strike
-      interaction: attack
-      maneuver: active
-      overview:
-        fluent: >-
-          <p>The @L[Condition:Poisoned]{poison} instead deals [[/drain
-          1d10[memory]]] @L[Category:Drain types]{drain}.</p>
-        proficient: >-
-          <p>The @L[Condition:Poisoned]{poison} instead deals [[/drain
-          1d8[memory]]] @L[Category:Drain types]{drain}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      results:
-        hit: >-
-          <p>Target is @L[Condition:Poisoned]{poisoned}. The
-          @L[Condition:Poisoned]{poison} deals [[/drain 1d6[memory]]]
-          @L[Category:Drain types]{drain}.</p>
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/memory-drain-poison-strike.webp
 name: Memory Drain Poison Strike
-type: wrapper
+system:
+  automations:
+    157afc517847f562:
+      _id: 157afc517847f562
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: 1d6[memory]
+      heighten:
+        - 1
+        - 0
+      impact: drain
+      merge: true
+      type: roll
+    42c1a8a5aeb16ded:
+      _id: 42c1a8a5aeb16ded
+      competencies:
+        - 1
+        - 2
+      formula: 1d8[memory]
+      heighten:
+        - 1
+        - 0
+      impact: drain
+      merge: true
+      type: roll
+    743730f25f256b10:
+      _id: 743730f25f256b10
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: include
+      status: poisoned
+      target: false
+      type: status
+    b2b2c506da712b40:
+      _id: b2b2c506da712b40
+      competencies:
+        - 2
+      formula: 1d10[memory]
+      heighten:
+        - 1
+        - 0
+      impact: drain
+      merge: true
+      type: roll
+  competence:
+    raw: 0
+  delivery: weapon
+  duration:
+    raw: '24'
+    unit: hour
+  effectTypes:
+    - mental
+    - poison
+    - displacement
+    - draining
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: memory-drain-poison-strike
+  interaction: attack
+  maneuver: active
+  mundane: false
+  overview:
+    fluent: >-
+      <p>The @L[Condition:Poisoned]{poison} instead deals [[/drain
+      1d10[memory]]] @L[Category:Drain types]{drain}.</p>
+    proficient: >-
+      <p>The @L[Condition:Poisoned]{poison} instead deals [[/drain 1d8[memory]]]
+      @L[Category:Drain types]{drain}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: contact
+  results:
+    hit: >-
+      <p>Target is @L[Condition:Poisoned]{poisoned}. The
+      @L[Condition:Poisoned]{poison} deals [[/drain 1d6[memory]]]
+      @L[Category:Drain types]{drain}.</p>
+  targets:
+    - creature
+transfer: true
+type: ability

@@ -28,5 +28,16 @@
       )
       tooltip=(localize "TERIOCK.SYSTEMS.Consumable.FIELDS.maxQuantity.raw.label")
     }}
+    {{formBox
+      (formInput
+        systemFields.consumptionAmount
+        disabled=(not editable)
+        value=system.consumptionAmount
+        placeholder="0"
+      )
+      icon=TERIOCK.display.icons.ui.amount
+      unselected=(localize "TERIOCK.SYSTEMS.Consumable.EMBED.perUse" value=system.consumptionAmount)
+      tooltip=(localize "TERIOCK.SYSTEMS.Consumable.FIELDS.consumptionAmount.label")
+    }}
   </div>
 {{/if}}

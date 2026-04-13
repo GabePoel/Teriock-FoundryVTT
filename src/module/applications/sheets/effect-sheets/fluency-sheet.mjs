@@ -30,9 +30,9 @@ export default class FluencySheet extends BaseEffectSheet {
     const options = [];
     for (const [fKey, fData] of Object.entries(TERIOCK.options.tradecraft)) {
       const option = {
-        name: fData.name,
+        label: fData.name,
         icon: makeIcon(fData.icon, "contextMenu"),
-        callback: async () => {
+        onClick: async () => {
           const updateData = {
             system: {
               field: fKey,
@@ -56,9 +56,9 @@ export default class FluencySheet extends BaseEffectSheet {
     for (const [fKey, fData] of Object.entries(TERIOCK.options.tradecraft)) {
       for (const [tcKey, tcData] of Object.entries(fData.tradecrafts)) {
         const option = {
-          name: tcData.name,
+          label: tcData.name,
           icon: makeIcon(tcData.icon, "contextMenu"),
-          callback: async () => {
+          onClick: async () => {
             const updateData = {
               system: {
                 field: fKey,
@@ -67,7 +67,7 @@ export default class FluencySheet extends BaseEffectSheet {
             };
             await this.document.update(updateData);
           },
-          condition: () => {
+          visible: () => {
             return (
               foundry.utils.getProperty(this.document.system, "field") === fKey
             );

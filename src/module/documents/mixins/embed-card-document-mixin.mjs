@@ -26,8 +26,8 @@ export default function EmbedCardDocumentMixin(Base) {
           openDoc: { primary: async () => this.sheet.render(true) },
         };
         for (const embedIcon of this.embedIcons) {
-          if (embedIcon.action && embedIcon.callback) {
-            actions[embedIcon.action] = { primary: embedIcon.callback };
+          if (embedIcon.action && embedIcon.onClick) {
+            actions[embedIcon.action] = { primary: embedIcon.onClick };
           }
         }
         return actions;

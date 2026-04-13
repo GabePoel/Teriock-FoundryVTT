@@ -13,7 +13,7 @@ export default async function identifyItemQuery(queryData, { _timeout }) {
   const uuid = queryData.uuid;
   const item = await fromUuid(uuid);
   const content = await TeriockTextEditor.enrichHTML(
-    game.i18n.format("TERIOCK.MODELS.Identification.QUERY.Identify.question", {
+    _loc("TERIOCK.MODELS.Identification.QUERY.Identify.question", {
       user: `@UUID[${game.user.uuid}]`,
       item: `@UUID[${item.uuid}]{${item.system.identification.name}}`,
     }),
@@ -23,9 +23,7 @@ export default async function identifyItemQuery(queryData, { _timeout }) {
     modal: false,
     window: {
       icon: makeIconClass(TERIOCK.display.icons.equipment.identify, "title"),
-      title: game.i18n.localize(
-        "TERIOCK.MODELS.Identification.QUERY.Identify.title",
-      ),
+      title: _loc("TERIOCK.MODELS.Identification.QUERY.Identify.title"),
     },
   });
   if (doIdentify) {
@@ -37,12 +35,10 @@ export default async function identifyItemQuery(queryData, { _timeout }) {
     ];
     const toReveal = await selectDocumentsDialog(unrevealed, {
       checked: unrevealed.map((r) => r.uuid),
-      hint: game.i18n.localize(
-        "TERIOCK.MODELS.Identification.QUERY.Identify.hint",
-      ),
+      hint: _loc("TERIOCK.MODELS.Identification.QUERY.Identify.hint"),
       silent: true,
       tooltipAsync: false,
-      noDocumentsMessage: game.i18n.localize(
+      noDocumentsMessage: _loc(
         "TERIOCK.MODELS.Identification.QUERY.Identify.noDocumentsMessage",
       ),
     });

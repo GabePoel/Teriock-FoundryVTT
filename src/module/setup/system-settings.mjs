@@ -4,15 +4,14 @@ const { fields } = foundry.data;
 
 export const settings = {
   actorSheet: {
-    // TODO: Implement as part of V14.
-    //floatingActorTabs: {
-    //  default: true,
-    //  hint: "TERIOCK.SETTINGS.floatingActorTabs.hint",
-    //  name: "TERIOCK.SETTINGS.floatingActorTabs.name",
-    //  requiresReload: true,
-    //  scope: "client",
-    //  type: Boolean,
-    //},
+    floatingActorTabs: {
+      default: true,
+      hint: "TERIOCK.SETTINGS.floatingActorTabs.hint",
+      name: "TERIOCK.SETTINGS.floatingActorTabs.name",
+      requiresReload: true,
+      scope: "client",
+      type: Boolean,
+    },
     hideBasicAbilitiesByDefault: {
       default: false,
       hint: "TERIOCK.SETTINGS.hideBasicAbilitiesByDefault.hint",
@@ -68,17 +67,17 @@ export const settings = {
     },
   },
   automatedBehavior: {
-    automaticallyChangeVisionModes: {
+    autoChangeVisionModes: {
       default: true,
-      hint: "TERIOCK.SETTINGS.automaticallyChangeVisionModes.hint",
-      name: "TERIOCK.SETTINGS.automaticallyChangeVisionModes.name",
+      hint: "TERIOCK.SETTINGS.autoChangeVisionModes.hint",
+      name: "TERIOCK.SETTINGS.autoChangeVisionModes.name",
       scope: "user",
       type: Boolean,
     },
-    automaticallyPayAbilityCosts: {
+    autoPayAbilityCosts: {
       default: true,
-      hint: "TERIOCK.SETTINGS.automaticallyPayAbilityCosts.hint",
-      name: "TERIOCK.SETTINGS.automaticallyPayAbilityCosts.name",
+      hint: "TERIOCK.SETTINGS.autoPayAbilityCosts.hint",
+      name: "TERIOCK.SETTINGS.autoPayAbilityCosts.name",
       scope: "user",
       type: Boolean,
     },
@@ -151,33 +150,19 @@ export const settings = {
     },
   },
   gameContent: {
-    compendiumAbilitySources: {
-      default: ["teriock.abilities"],
-      hint: "TERIOCK.SETTINGS.compendiumAbilitySources.hint",
-      name: "TERIOCK.SETTINGS.compendiumAbilitySources.name",
-      scope: "world",
-      type: new fields.SetField(new fields.StringField()),
-    },
-    compendiumPropertySources: {
-      default: ["teriock.properties"],
-      hint: "TERIOCK.SETTINGS.compendiumPropertySources.hint",
-      name: "TERIOCK.SETTINGS.compendiumPropertySources.name",
-      scope: "world",
-      type: new fields.SetField(new fields.StringField()),
-    },
-    documentDamageSources: {
+    damageTypeSources: {
       default: ["Compendium.teriock.rules.JournalEntry.damage0000000000"],
-      hint: "TERIOCK.SETTINGS.documentDamageSources.hint",
-      name: "TERIOCK.SETTINGS.documentDamageSources.name",
+      hint: "TERIOCK.SETTINGS.damageTypeSources.hint",
+      name: "TERIOCK.SETTINGS.damageTypeSources.name",
       scope: "world",
       type: new fields.SetField(
         new fields.DocumentUUIDField({ type: "JournalEntry" }),
       ),
     },
-    documentDrainSources: {
+    drainTypeSources: {
       default: ["Compendium.teriock.rules.JournalEntry.drain00000000000"],
-      hint: "TERIOCK.SETTINGS.documentDrainSources.hint",
-      name: "TERIOCK.SETTINGS.documentDrainSources.name",
+      hint: "TERIOCK.SETTINGS.drainTypeSources.hint",
+      name: "TERIOCK.SETTINGS.drainTypeSources.name",
       scope: "world",
       type: new fields.SetField(
         new fields.DocumentUUIDField({ type: "JournalEntry" }),
@@ -229,10 +214,10 @@ export const settings = {
     },
   },
   generalDisplay: {
-    automaticTokenMagicConditionEffects: {
+    autoTokenMagicConditionEffects: {
       default: true,
-      hint: "TERIOCK.SETTINGS.automaticTokenMagicConditionEffects.hint",
-      name: "TERIOCK.SETTINGS.automaticTokenMagicConditionEffects.name",
+      hint: "TERIOCK.SETTINGS.autoTokenMagicConditionEffects.hint",
+      name: "TERIOCK.SETTINGS.autoTokenMagicConditionEffects.name",
       scope: "world",
       type: Boolean,
     },
@@ -252,10 +237,10 @@ export const settings = {
     },
   },
   panel: {
-    automaticPanelCollapseTime: {
+    autoPanelCollapseTime: {
       default: 5,
-      hint: "TERIOCK.SETTINGS.automaticPanelCollapseTime.hint",
-      name: "TERIOCK.SETTINGS.automaticPanelCollapseTime.name",
+      hint: "TERIOCK.SETTINGS.autoPanelCollapseTime.hint",
+      name: "TERIOCK.SETTINGS.autoPanelCollapseTime.name",
       scope: "user",
       type: Number,
     },

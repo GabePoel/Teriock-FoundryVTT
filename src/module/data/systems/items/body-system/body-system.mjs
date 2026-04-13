@@ -1,5 +1,5 @@
+import { mix } from "../../../../helpers/construction.mjs";
 import { simplifyTags } from "../../../../helpers/panel.mjs";
-import { mix } from "../../../../helpers/utils.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
 
@@ -37,20 +37,20 @@ export default class BodySystem extends mix(
   /** @inheritDoc */
   get embedParts() {
     return Object.assign(super.embedParts, {
-      subtitle: game.i18n.localize("TYPES.Item.body"),
+      subtitle: _loc("TYPES.Item.body"),
     });
   }
 
   /** @inheritDoc */
-  get panelParts() {
+  async getPanelParts() {
     return {
-      ...super.panelParts,
+      ...(await super.getPanelParts()),
       bars: [
         this._attackBar,
         this._defenseBar,
         {
           icon: TERIOCK.display.icons.equipment.equipmentClasses,
-          label: game.i18n.localize(
+          label: _loc(
             "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentClasses.label",
           ),
           wrappers: [

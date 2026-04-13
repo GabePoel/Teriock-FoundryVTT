@@ -1,5 +1,7 @@
 declare global {
-  namespace Teriock.MessageData {
+  namespace Teriock.Messages {
+    export type Mode = "public" | "gm" | "blind" | "self" | "ic";
+
     /** Pieces of a bar within a chat message. */
     export type MessageBar = {
       /** Name of FontAwesome icon to display in the message bar. */
@@ -52,14 +54,14 @@ declare global {
       /** Icon for this association. */
       icon?: string;
       /** Documents this message is associated with. */
-      cards: Teriock.MessageData.MessageAssociationCard[];
+      cards: Teriock.Messages.MessageAssociationCard[];
     };
 
     /** Represents the individual rules-parts that make up a message. */
     export type MessagePanel = {
-      associations?: Teriock.MessageData.MessageAssociation[];
-      bars?: Teriock.MessageData.MessageBar[];
-      blocks?: Teriock.MessageData.MessageBlock[];
+      associations?: Teriock.Messages.MessageAssociation[];
+      bars?: Teriock.Messages.MessageBar[];
+      blocks?: Teriock.Messages.MessageBlock[];
       /** Additional CSS classes to add */
       classes?: string;
       /** Color to assign to the image border. */

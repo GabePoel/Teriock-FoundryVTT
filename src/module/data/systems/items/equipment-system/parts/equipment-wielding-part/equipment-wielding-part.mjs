@@ -62,33 +62,31 @@ export default (Base) => {
       get embedIcons() {
         return [
           {
-            icon: this.glued ? icons.equipment.glue : icons.equipment.unglue,
             action: "toggleGluedDoc",
-            tooltip: this.glued
-              ? game.i18n.localize("TERIOCK.SYSTEMS.Equipment.EMBED.glued")
-              : game.i18n.localize("TERIOCK.SYSTEMS.Equipment.EMBED.unglued"),
-            condition: this.parent.isOwner,
-            callback: async () => {
+            icon: this.glued ? icons.equipment.glue : icons.equipment.unglue,
+            onClick: async () => {
               if (this.glued) await this.unglue();
               else await this.glue();
             },
+            tooltip: this.glued
+              ? _loc("TERIOCK.SYSTEMS.Equipment.EMBED.glued")
+              : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unglued"),
+            visible: this.parent.isOwner,
           },
           ...super.embedIcons.filter(
             (i) => !i.action?.toLowerCase().includes("disabled"),
           ),
           {
-            icon: this.equipped ? icons.ui.enabled : icons.ui.disabled,
             action: "toggleEquippedDoc",
-            tooltip: this.equipped
-              ? game.i18n.localize("TERIOCK.SYSTEMS.Equipment.EMBED.equipped")
-              : game.i18n.localize(
-                  "TERIOCK.SYSTEMS.Equipment.EMBED.unequipped",
-                ),
-            condition: this.parent.isOwner,
-            callback: async () => {
+            icon: this.equipped ? icons.ui.enabled : icons.ui.disabled,
+            onClick: async () => {
               if (this.equipped) await this.unequip();
               else await this.equip();
             },
+            tooltip: this.equipped
+              ? _loc("TERIOCK.SYSTEMS.Equipment.EMBED.equipped")
+              : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unequipped"),
+            visible: this.parent.isOwner,
           },
         ];
       }
@@ -97,7 +95,6 @@ export default (Base) => {
       get embedParts() {
         return Object.assign(super.embedParts, {
           struck: !this.equipped,
-          shattered: this.shattered,
         });
       }
 
@@ -123,41 +120,41 @@ export default (Base) => {
         return [
           ...super.getCardContextMenuEntries(doc),
           {
-            name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.equip"),
+            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.equip"),
             icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
-            callback: this.equip.bind(this),
-            condition:
+            onClick: this.equip.bind(this),
+            visible:
               this.canEquip &&
               this.parent._checkValidEditorDocument(doc, { self: false }),
             group: "control",
           },
           {
-            name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.unequip"),
+            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.unequip"),
             icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
-            callback: this.unequip.bind(this),
-            condition:
+            onClick: this.unequip.bind(this),
+            visible:
               this.canUnequip &&
               this.parent._checkValidEditorDocument(doc, { self: false }),
             group: "control",
           },
           {
-            name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.glue"),
+            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.glue"),
             icon: makeIcon(TERIOCK.display.icons.equipment.glue, "contextMenu"),
-            callback: this.glue.bind(this),
-            condition:
+            onClick: this.glue.bind(this),
+            visible:
               !this.glued &&
               this.actor &&
               this.parent._checkValidEditorDocument(doc, { self: false }),
             group: "control",
           },
           {
-            name: game.i18n.localize("TERIOCK.SYSTEMS.Equipment.MENU.unglue"),
+            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.unglue"),
             icon: makeIcon(
               TERIOCK.display.icons.equipment.unglue,
               "contextMenu",
             ),
-            callback: this.unglue.bind(this),
-            condition:
+            onClick: this.unglue.bind(this),
+            visible:
               this.glued &&
               this.actor &&
               this.parent._checkValidEditorDocument(doc, { self: false }),
@@ -184,7 +181,7 @@ export default (Base) => {
         await this.parent.hookCall("glue", {
           scope: { equipment: this.parent },
         });
-        await ensureChildren(this.parent, "property", ["Glued"]);
+        await ensureChildren(this.parent, ["property:glued"]);
       }
 
       /** @inheritDoc */
@@ -218,7 +215,7 @@ export default (Base) => {
         await this.parent.hookCall("unglue", {
           scope: { equipment: this.parent },
         });
-        await ensureNoChildren(this.parent, "property", ["Glued"]);
+        await ensureNoChildren(this.parent, "property:glued");
         if (this.glued) {
           await this.parent.update({ "system.glued": false });
         }

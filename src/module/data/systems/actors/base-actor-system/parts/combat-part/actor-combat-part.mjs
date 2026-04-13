@@ -4,6 +4,10 @@ import {
   FormulaField,
   LocalDocumentField,
 } from "../../../../../fields/_module.mjs";
+import {
+  initialNumber,
+  initialSchema,
+} from "../../../../../fields/helpers/initializers.mjs";
 import { PiercingModel } from "../../../../../models/_module.mjs";
 
 const { fields } = foundry.data;
@@ -43,6 +47,17 @@ export default (Base) => {
           initiative: new FormulaField({
             initial: characterOptions.defaults.initiative,
             deterministic: false,
+          }),
+          defense: initialSchema({
+            av: initialSchema({
+              base: initialNumber(),
+              natural: initialNumber(),
+              value: initialNumber(),
+              worn: initialNumber(),
+            }),
+            ac: initialNumber(10),
+            bv: initialNumber(),
+            cc: initialNumber(10),
           }),
           offense: new fields.SchemaField({
             piercing: new fields.EmbeddedDataField(PiercingModel),
@@ -143,18 +158,7 @@ export default (Base) => {
         const armor = this.parent.equipment.filter(
           (e) => e.system.equipped && e.system.equipmentClasses.has("armor"),
         );
-        const baseAv = Math.max(armor.map((a) => a.system.av.value));
-        this.defense = {
-          av: {
-            base: baseAv,
-            natural: 0,
-            value: 0,
-            worn: 0,
-          },
-          ac: 10,
-          bv: 0,
-          cc: 10,
-        };
+        this.defense.av.base = Math.max(armor.map((a) => a.system.av.value));
       }
 
       /** @inheritDoc */

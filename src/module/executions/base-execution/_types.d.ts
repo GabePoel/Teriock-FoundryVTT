@@ -6,7 +6,7 @@ declare global {
       actor?: TeriockActor;
       competence?: Teriock.System.CompetenceLevel;
       event?: PointerEvent;
-      formula?: string;
+      formula?: Teriock.System.FormulaString;
       rollData?: object;
       rollOptions?: object;
       showDialog?: boolean;

@@ -1,5 +1,6 @@
 import { inCombatExpirationDialog } from "../../../../applications/dialogs/_module.mjs";
-import { makeIcon, mix } from "../../../../helpers/utils.mjs";
+import { mix } from "../../../../helpers/construction.mjs";
+import { makeIcon } from "../../../../helpers/utils.mjs";
 import { combatExpirationMethodField } from "../../../fields/helpers/builders.mjs";
 import { ThresholdDataMixin } from "../../../shared/mixins/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
@@ -66,20 +67,18 @@ export default class ConditionSystem extends mix(
   get embedIcons() {
     return [
       {
-        icon: "dice-d4",
-        tooltip: game.i18n.localize(
-          "TERIOCK.SYSTEMS.Condition.EMBED.rollToRemove",
-        ),
-        condition: true,
-        callback: async () => this.parent.use(),
         action: "removeConditionDoc",
+        icon: "dice-d4",
+        onClick: async () => this.parent.use(),
+        tooltip: _loc("TERIOCK.SYSTEMS.Condition.EMBED.rollToRemove"),
+        visible: true,
       },
     ];
   }
 
   /** @inheritDoc */
   get useText() {
-    return game.i18n.format("TERIOCK.SYSTEMS.Condition.USAGE.use", {
+    return _loc("TERIOCK.SYSTEMS.Condition.USAGE.use", {
       value: this.parent.name,
     });
   }
@@ -107,10 +106,10 @@ export default class ConditionSystem extends mix(
   getCardContextMenuEntries(_doc) {
     return [
       {
-        name: this.useText,
+        label: this.useText,
         icon: makeIcon(this.useIcon, "contextMenu"),
-        callback: this.use.bind(this),
-        condition: this.parent.isOwner,
+        onClick: this.use.bind(this),
+        visible: this.parent.isOwner,
         group: "usage",
       },
     ];

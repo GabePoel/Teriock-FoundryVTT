@@ -8,6 +8,13 @@ import * as vision from "./vision-modes/_module.mjs";
  * @type {Record<string, BaseDetectionMode>}
  */
 export const detectionModes = {
+  /** Overwrite default basic sight */
+  basicSight: new detection.BaseDetectionMode({
+    angle: false,
+    id: "basicSight",
+    label: "TERIOCK.PERCEPTION.DetectionModes.basicSight",
+    type: BaseDetectionMode.DETECTION_TYPES.MOVE,
+  }),
   /** Blind fighting detection mode */
   blindFighting: new detection.BlindFightingDetectionMode({
     angle: false,

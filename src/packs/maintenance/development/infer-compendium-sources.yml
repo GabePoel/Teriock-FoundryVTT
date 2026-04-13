@@ -1,16 +1,15 @@
 _id: fe4066656544f95a
 _key: '!macros!fe4066656544f95a'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.9.17
-author: teriockBuilder00
 command: |-
   await tm.utils.progressBar(
     await tm.dialogs.selectCompendiumsDialog(),
     "Refreshing Compendium Sources",
-    /** @param {TeriockCompendiumCollection<TeriockDocument>} p */ async (p) => {
+    /** @param {CompendiumCollection<TeriockDocument>} p */ async (p) => {
       if (!p.locked) {
         await p.getIndex();
         const indexes = tm.sort.docSort(
@@ -18,10 +17,10 @@ command: |-
         );
         await tm.utils.progressBar(
           indexes,
-          `Refreshing ${p.title} Sources`,
+          `Refreshing ${_loc(p.title)} Sources`,
           async (i) => {
             const doc = await tm.resolve.resolveDocument(i);
-            if (doc.documentMetadata.common) {
+            if (doc?.documentMetadata.common) {
               await tm.resolve.inferChildCompendiumSources(doc);
             }
           },

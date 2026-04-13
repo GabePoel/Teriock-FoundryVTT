@@ -1,56 +1,50 @@
 _id: 3c07df0ef3481aa6
-_key: '!items!3c07df0ef3481aa6'
+_key: '!effects!3c07df0ef3481aa6'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 3c07df0ef3481aa6
-    _key: '!items.effects!3c07df0ef3481aa6.3c07df0ef3481aa6'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/perceive.webp
-    name: Perceive
-    system:
-      basic: true
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - sensory
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: per
-      form: intrinsic
-      identifier: perceive
-      interaction: feat
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      results:
-        fail: >-
-          <p>You do not see any @L[Condition:Hidden]{hidden} creatures with a
-          hidden DC greater than your roll.</p>
-        save: >-
-          <p>You see any @L[Condition:Hidden]{hidden} creatures with a hidden DC
-          less than or equal to your roll.</p>
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/perceive.webp
 name: Perceive
-type: wrapper
+system:
+  basic: true
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - sensory
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: per
+  form: intrinsic
+  identifier: perceive
+  interaction: feat
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  results:
+    fail: >-
+      <p>You do not see any @L[Condition:Hidden]{hidden} creatures with a hidden
+      DC greater than your roll.</p>
+    save: >-
+      <p>You see any @L[Condition:Hidden]{hidden} creatures with a hidden DC
+      less than or equal to your roll.</p>
+  targets:
+    - self
+transfer: true
+type: ability

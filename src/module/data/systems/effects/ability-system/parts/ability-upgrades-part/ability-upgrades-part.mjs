@@ -26,6 +26,7 @@ export default (Base) => {
               attribute: attributeField(),
               text: new TextField({
                 initial: "",
+                persisted: false,
                 required: false,
               }),
               value: competenceField(),
@@ -34,6 +35,7 @@ export default (Base) => {
               attribute: attributeField(),
               text: new TextField({
                 initial: "",
+                persisted: false,
                 required: false,
               }),
               value: new fields.NumberField({
@@ -93,22 +95,22 @@ export default (Base) => {
         if (this.upgrades.score.attribute) {
           changes.push({
             key: `system.attributes.${this.upgrades.score.attribute}.score`,
-            mode: 4,
             priority: 20,
             qualifier: "1",
             target: "Actor",
             time: "normal",
+            type: "upgrade",
             value: `${this.upgrades.score.value}`,
           });
         }
         if (this.upgrades.competence.attribute) {
           changes.push({
             key: `system.attributes.${this.upgrades.competence.attribute}.competence.raw`,
-            mode: 4,
             priority: 20,
             qualifier: "1",
             target: "Actor",
             time: "normal",
+            type: "upgrade",
             value: `${this.upgrades.competence.value}`,
           });
         }

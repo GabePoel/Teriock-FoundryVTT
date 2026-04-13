@@ -16,7 +16,7 @@ export default (Base) => {
        * @returns {boolean}
        */
       _canDragStart() {
-        return this.isEditable;
+        return true;
       }
 
       /**
@@ -56,7 +56,6 @@ export default (Base) => {
 
       /**
        * Handles drag start events.
-       * @param {Teriock.Sheet.EmbedDragEvent} event
        * @returns {Promise<void>}
        */
       _onDragStart(event) {
@@ -88,11 +87,14 @@ export default (Base) => {
        */
       async _onDrop(event) {
         const dropData = TeriockTextEditor.getDragEventData(event);
-        if (dropData.startSheet === this.id) {
-          return false;
-        }
+        if (dropData.startSheet === this.id) return false;
         let out;
-        if (["ActiveEffect", "Item", "Actor"].includes(dropData.type)) {
+        if (
+          dropData.type === "Automation" &&
+          typeof this._onDropAutomation === "function"
+        ) {
+          this._onDropAutomation(event);
+        } else if (["ActiveEffect", "Item", "Actor"].includes(dropData.type)) {
           out = await this._onDropChild(event, dropData);
         } else if (dropData.type === "JournalEntryPage") {
           out = await this._onDropJournalEntryPage(event, dropData);
@@ -111,22 +113,17 @@ export default (Base) => {
         const Cls = foundry.utils.getDocumentClass(dropData.type);
         let doc =
           /** @type {AnyChildDocument} */ await Cls.fromDropData(dropData);
-        if (doc.type === "wrapper") {
-          doc = doc.system.effect;
-        }
-        const uuid =
-          doc.parent?.type === "wrapper" ? doc.parent.uuid : doc.uuid;
+        const uuid = doc.uuid;
         const obj = doc.toObject();
         if (doc.inCompendium && !doc._stats.compendiumSource) {
           obj["_stats.compendiumSource"] = uuid;
         }
-        if (this._canDrop(doc)) {
-          const created = await this.document.createChildDocuments(
-            doc.documentName,
-            [obj],
-          );
-          return created[0];
-        }
+        if (!this._canDrop(doc)) return;
+        const created = await this.document.createChildDocuments(
+          doc.documentName,
+          [obj],
+        );
+        return created[0];
       }
 
       /**
@@ -146,13 +143,13 @@ export default (Base) => {
       /** @inheritDoc */
       async _onRender(context, options) {
         new TeriockDragDrop({
-          dragSelector: ".draggable",
-          dropSelector: null,
           callbacks: {
             dragstart: this._onDragStart.bind(this),
             dragover: this._onDragOver.bind(this),
             drop: this._onDrop.bind(this),
           },
+          dragSelector: ".draggable",
+          dropSelector: null,
           permissions: {
             dragstart: this._canDragStart.bind(this),
             drop: this._canDrop.bind(this),

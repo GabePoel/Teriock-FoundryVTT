@@ -1,58 +1,52 @@
 _id: 00a390d0b3957cf9
-_key: '!items!00a390d0b3957cf9'
+_key: '!effects!00a390d0b3957cf9'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 00a390d0b3957cf9
-    _key: '!items.effects!00a390d0b3957cf9.00a390d0b3957cf9'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/golden-drake-breath.webp
-    name: Golden Drake Breath
-    system:
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '2'
-            type: formula
-      delivery: cone
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: golden-drake-breath
-      interaction: feat
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-        - spiritual
-      range:
-        raw: '15'
-        unit: ft
-      results:
-        fail: >-
-          <p>The next time the target would pull from the @L[Core:Death
-          Bag]{death bag}, they pull 5 additional stones. If they attacked you,
-          they instead pull 10.</p>
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/golden-drake-breath.webp
 name: Golden Drake Breath
-type: wrapper
+system:
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '2'
+        type: formula
+  delivery: cone
+  duration:
+    raw: '0'
+    unit: instant
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  identifier: golden-drake-breath
+  interaction: feat
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+    - spiritual
+  range:
+    raw: '15'
+    unit: ft
+  results:
+    fail: >-
+      <p>The next time the target would pull from the @L[Core:Death Bag]{death
+      bag}, they pull 5 additional stones. If they attacked you, they instead
+      pull 10.</p>
+  targets:
+    - creature
+transfer: true
+type: ability

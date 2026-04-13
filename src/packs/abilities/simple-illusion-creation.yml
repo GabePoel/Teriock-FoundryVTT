@@ -1,73 +1,72 @@
 _id: 6d663fd2b1fa3a13
-_key: '!items!6d663fd2b1fa3a13'
+_key: '!effects!6d663fd2b1fa3a13'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 6d663fd2b1fa3a13
-    _key: '!items.effects!6d663fd2b1fa3a13.6d663fd2b1fa3a13'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/simple-illusion-creation.webp
-    name: Simple Illusion Creation
-    system:
-      automations:
-        72ce567009179bea:
-          _id: 72ce567009179bea
-          competencies:
-            - 0
-            - 1
-            - 2
-          duration:
-            raw: '@h * 3600'
-          heighten:
-            - 1
-          type: duration
-      class: stormMage
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '1'
-        unit: minute
-      effectTypes:
-        - illusion
-      elements:
-        - storm
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 1 hour.</p>
-      identifier: simple-illusion-creation
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>You create a @L[Keyword:Illusionary]{minor illusion} of a simple
-          object or effect that fits within your hand. As soon as it leaves your
-          hand, the illusion fades.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      spell: true
-      standard: true
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/simple-illusion-creation.webp
 name: Simple Illusion Creation
-type: wrapper
+system:
+  automations:
+    72ce567009179bea:
+      _id: 72ce567009179bea
+      changeType: add
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      duration:
+        raw: '@h * 3600'
+        unit: second
+      heighten:
+        - 1
+      type: duration
+  class: stormMage
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '1'
+    unit: minute
+  effectTypes:
+    - illusion
+  elements:
+    - storm
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  heightened: >-
+    <p>For each additional @L[Core:MP]{MP} spent, the duration of this effect
+    increases by 1 hour.</p>
+  identifier: simple-illusion-creation
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>You create a @L[Keyword:Illusionary]{minor illusion} of a simple object
+      or effect that fits within your hand. As soon as it leaves your hand, the
+      illusion fades.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: self
+  spell: true
+  standard: true
+  targets:
+    - self
+transfer: true
+type: ability

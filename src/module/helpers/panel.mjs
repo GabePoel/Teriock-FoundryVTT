@@ -5,7 +5,7 @@ import { getImage } from "./path.mjs";
 /**
  * Get the panel for an attribute.
  * @param {Teriock.Keys.Attribute} attribute
- * @returns {Promise<Teriock.MessageData.MessagePanel>}
+ * @returns {Promise<Teriock.Messages.MessagePanel>}
  */
 export async function attributePanel(attribute) {
   return TeriockTextEditor.enrichPanel({
@@ -13,21 +13,19 @@ export async function attributePanel(attribute) {
     name: TERIOCK.reference.attributesFull[attribute],
     blocks: [
       {
-        title: game.i18n.localize(
-          "TERIOCK.SYSTEMS.Child.FIELDS.description.label",
-        ),
+        title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
         text: TERIOCK.data.attributes[attribute],
       },
     ],
     icon: TERIOCK.display.icons.interaction.feat,
-    label: game.i18n.localize("TERIOCK.TERMS.Common.attribute"),
+    label: _loc("TERIOCK.TERMS.Common.attribute"),
   });
 }
 
 /**
  * Get the panel for a tradecraft.
  * @param {Teriock.Keys.Tradecraft} tradecraft
- * @returns {Promise<Teriock.MessageData.MessagePanel>}
+ * @returns {Promise<Teriock.Messages.MessagePanel>}
  */
 export async function tradecraftPanel(tradecraft) {
   let field;
@@ -42,27 +40,25 @@ export async function tradecraftPanel(tradecraft) {
     bars: [
       {
         icon: TERIOCK.options.tradecraft[field].icon,
-        label: game.i18n.localize("TERIOCK.SYSTEMS.Fluency.FIELDS.field.label"),
+        label: _loc("TERIOCK.SYSTEMS.Fluency.FIELDS.field.label"),
         wrappers: [TERIOCK.options.tradecraft[field].name],
       },
     ],
     blocks: [
       {
-        title: game.i18n.localize(
-          "TERIOCK.SYSTEMS.Child.FIELDS.description.label",
-        ),
+        title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
         text: TERIOCK.content.tradecrafts[tradecraft],
       },
     ],
     icon: documentOptions.fluency.icon,
-    label: game.i18n.localize("TERIOCK.TERMS.Common.tradecraft"),
+    label: _loc("TERIOCK.TERMS.Common.tradecraft"),
   });
 }
 
 /**
  * Get the panel for a class.
  * @param {Teriock.Keys.Class} className
- * @returns {Promise<Teriock.MessageData.MessagePanel>}
+ * @returns {Promise<Teriock.Messages.MessagePanel>}
  */
 export async function classPanel(className) {
   let archetype;
@@ -75,22 +71,18 @@ export async function classPanel(className) {
     bars: [
       {
         icon: TERIOCK.options.rank[archetype].icon,
-        label: game.i18n.localize(
-          "TERIOCK.SYSTEMS.Rank.FIELDS.archetype.label",
-        ),
+        label: _loc("TERIOCK.SYSTEMS.Rank.FIELDS.archetype.label"),
         wrappers: [TERIOCK.options.rank[archetype].name],
       },
     ],
     blocks: [
       {
-        title: game.i18n.localize(
-          "TERIOCK.SYSTEMS.Child.FIELDS.description.label",
-        ),
+        title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
         text: TERIOCK.content.classes[className],
       },
     ],
     icon: documentOptions.rank.icon,
-    label: game.i18n.localize("TERIOCK.SYSTEMS.Rank.PANELS.class"),
+    label: _loc("TERIOCK.SYSTEMS.Rank.PANELS.class"),
   });
 }
 
@@ -139,8 +131,8 @@ export function quickAddAssociation(
  * @returns {string}
  */
 export function simplifyTag(tag) {
-  if (typeof tag === "string") return game.i18n.localize(tag);
-  if (typeof tag.label === "string") return game.i18n.localize(tag.label);
+  if (typeof tag === "string") return _loc(tag);
+  if (typeof tag.label === "string") return _loc(tag.label);
   return "";
 }
 

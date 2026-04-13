@@ -1,7 +1,7 @@
 _id: 6a4c29966ff94257
 _key: '!items!6a4c29966ff94257'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.23
@@ -9,11 +9,11 @@ effects:
   - _id: 16u6C5BMXaOmLloI
     _key: '!items.effects!6a4c29966ff94257.16u6C5BMXaOmLloI'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.b0c96045f72875ba
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.b0c96045f72875ba
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: support
@@ -51,15 +51,16 @@ effects:
       standard: true
       targets:
         - self
+    transfer: true
     type: ability
   - _id: vLlgfZ2tZq02juSg
     _key: '!items.effects!6a4c29966ff94257.vLlgfZ2tZq02juSg'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.0787d6514c191157
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.0787d6514c191157
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: combat
@@ -120,15 +121,16 @@ effects:
       targets:
         - self
       trigger: <p>You would take damage.</p>
+    transfer: true
     type: ability
   - _id: v0Xb1GopbJqrtB0N
     _key: '!items.effects!6a4c29966ff94257.v0Xb1GopbJqrtB0N'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.4fcc59a8f11a75a2
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.4fcc59a8f11a75a2
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: combat
@@ -140,11 +142,11 @@ effects:
           _id: e789ed5e109ebd1a
           changes:
             - key: flags.teriockEffect.braceDieSize
-              mode: 5
+              phase: normal
               priority: 10
               qualifier: '1'
               target: Actor
-              time: normal
+              type: override
               value: '10'
           competencies:
             - 0
@@ -199,15 +201,16 @@ effects:
       standard: true
       targets:
         - self
+    transfer: true
     type: ability
   - _id: nEWl3ZXUcMWe83ed
     _key: '!items.effects!6a4c29966ff94257.nEWl3ZXUcMWe83ed'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.c4cd252b5b66fa15
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.c4cd252b5b66fa15
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: combat
@@ -261,83 +264,16 @@ effects:
       targets:
         - creature
       trigger: <p>A creature within range would be @L[Condition:Down]{dropped}.</p>
-    type: ability
-  - _id: ctz5mnKG4gRMvQCT
-    _key: '!items.effects!6a4c29966ff94257.ctz5mnKG4gRMvQCT'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.cc00864651dabb3b
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/abilities/master-armor-smith.webp
-    name: Master Armor Smith
-    system:
-      _sup: 16u6C5BMXaOmLloI
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.tradecrafts.blacksmith.score
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '2'
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-      class: veteran
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: master-armor-smith
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You are an @L[Keyword:Expertise]{expert}
-          @L[Tradecraft:Blacksmith]{blacksmith}. In addition, you gain the
-          ability to create @L[Property:Master Crafted]{master crafted}
-          armor.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
+    transfer: true
     type: ability
   - _id: VBoKPDCDrZYSanpd
     _key: '!items.effects!6a4c29966ff94257.VBoKPDCDrZYSanpd'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.72171ab5cf29dd50
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.72171ab5cf29dd50
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: support
@@ -403,68 +339,16 @@ effects:
       standard: true
       targets:
         - item
-    type: ability
-  - _id: Ub9ofLVyce3YI2TW
-    _key: '!items.effects!6a4c29966ff94257.Ub9ofLVyce3YI2TW'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.d6ecf2b11e6a3fc1
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/runic-armor.webp
-    name: Runic Armor
-    system:
-      _sup: 16u6C5BMXaOmLloI
-      class: veteran
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            description: >-
-              <p>[[lookup name]] costs an amount of @L[Core:MP]{MP} equal to the
-              armor's @L[Core:AV]{AV}.</p>
-            type: description
-      delivery: sight
-      duration:
-        raw: '24'
-        unit: hour
-      executionTime: 10 Minutes
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: runic-armor
-      interaction: manifest
-      maneuver: slow
-      overview:
-        base: >-
-          <p>The targeted @L[Category:Armor]{armor} becomes
-          @L[Property:Runic]{runic}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        raw: '5'
-        unit: ft
-      ritual: true
-      skill: true
-      standard: true
-      targets:
-        - armor
+    transfer: true
     type: ability
   - _id: DDCszBLFPaksOMMq
     _key: '!items.effects!6a4c29966ff94257.DDCszBLFPaksOMMq'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.e48f632c646a6e4a
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.e48f632c646a6e4a
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: support
@@ -489,25 +373,25 @@ effects:
           _id: e789ed5e109ebd1a
           changes:
             - key: system.protections.resistances.other
-              mode: 2
+              phase: normal
               priority: 10
               qualifier: '1'
               target: Actor
-              time: normal
+              type: add
               value: Being Surprised (Braced, Fortified Areas, Guard Duty)
             - key: system.protections.resistances.other
-              mode: 2
+              phase: normal
               priority: 10
               qualifier: '1'
               target: Actor
-              time: normal
+              type: add
               value: Frightened (Braced, Fortified Areas, Guard Duty)
             - key: system.protections.resistances.other
-              mode: 2
+              phase: normal
               priority: 10
               qualifier: '1'
               target: Actor
-              time: normal
+              type: add
               value: Mediator Tradecrafts (Braced, Fortified Areas, Guard Duty)
           competencies:
             - 0
@@ -568,6 +452,139 @@ effects:
       standard: true
       targets:
         - self
+    transfer: true
+    type: ability
+  - _id: i3orR38pv1ijIwhz
+    _key: '!items.effects!6a4c29966ff94257.i3orR38pv1ijIwhz'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.Y7MbOSBjwwdMPo90
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/runic-armor.webp
+    name: Runic Armor
+    system:
+      _sup: 16u6C5BMXaOmLloI
+      class: veteran
+      competence:
+        raw: 0
+      costs:
+        primary:
+          mp:
+            description: >-
+              <p>[[lookup name]] costs an amount of @L[Core:MP]{MP} equal to the
+              armor's @L[Core:AV]{AV}.</p>
+            type: description
+      delivery: sight
+      duration:
+        raw: '24'
+        unit: hour
+      executionTime:
+        base: 10 Minutes
+        slow:
+          raw: '10'
+          unit: minute
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: runic-armor
+      interaction: manifest
+      maneuver: slow
+      mundane: false
+      overview:
+        base: >-
+          <p>The targeted @L[Category:Armor]{armor} becomes
+          @L[Property:Runic]{runic}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        raw: '5'
+        unit: ft
+      ritual: true
+      skill: true
+      standard: true
+      targets:
+        - armor
+    transfer: true
+    type: ability
+  - _id: 7CdVo4Jnpdmybf7P
+    _key: '!items.effects!6a4c29966ff94257.7CdVo4Jnpdmybf7P'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1FOF5FOKhsdzaKby
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/master-armor-smith.webp
+    name: Master Armor Smith
+    system:
+      _sup: 16u6C5BMXaOmLloI
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.tradecrafts.blacksmith.score
+              phase: normal
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              type: upgrade
+              value: '2'
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+      class: veteran
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: master-armor-smith
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>You are an @L[Keyword:Expertise]{expert}
+          @L[Tradecraft:Blacksmith]{blacksmith}. In addition, you gain the
+          ability to create @L[Property:Master Crafted]{master crafted}
+          armor.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
     type: ability
 folder: a32988faf943d834
 img: systems/teriock/src/icons/ranks/rank-5-veteran.webp

@@ -42,7 +42,13 @@ declare global {
     export type DropData<T> = {
       data?: T;
       systemType?: Teriock.Documents.CommonType;
-      type: "ActiveEffect" | "Item" | "Macro" | "Actor" | "JournalEntryPage";
+      type:
+        | "ActiveEffect"
+        | "Actor"
+        | "Automation"
+        | "Item"
+        | "JournalEntryPage"
+        | "Macro";
       uuid: UUID<T>;
     };
 

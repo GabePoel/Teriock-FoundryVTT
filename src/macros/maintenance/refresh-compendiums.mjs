@@ -1,6 +1,6 @@
 await tm.utils.progressBar(
   await tm.dialogs.selectCompendiumsDialog(),
-  game.i18n.localize("TERIOCK.DIALOGS.RefreshCompendium.messageUnnamed"),
+  _loc("TERIOCK.DIALOGS.RefreshCompendium.messageUnnamed"),
   /** @param {CompendiumCollection<TeriockDocument>} p */ async (p) => {
     if (!p.locked) {
       await p.getIndex();
@@ -9,19 +9,14 @@ await tm.utils.progressBar(
       );
       await tm.utils.progressBar(
         indexes,
-        game.i18n.format("TERIOCK.DIALOGS.RefreshCompendium.messageNamed", {
-          name: game.i18n.localize(p.title),
+        _loc("TERIOCK.DIALOGS.RefreshCompendium.messageNamed", {
+          name: _loc(p.title),
         }),
         async (i) => {
           const doc = await tm.resolve.resolveDocument(i);
           if (doc?.defaultIdentifier) {
             const identifier = doc.defaultIdentifier;
             await doc.update({ "system.identifier": identifier });
-            if (doc.type === "wrapper") {
-              await doc.system.effect.update({
-                "system.identifier": identifier,
-              });
-            }
           }
           if (typeof doc?.system?.refreshFromCompendiumSource === "function") {
             const options = {};

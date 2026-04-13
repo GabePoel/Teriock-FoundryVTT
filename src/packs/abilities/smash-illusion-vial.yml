@@ -1,88 +1,87 @@
 _id: 80e350d38ee1a66a
-_key: '!items!80e350d38ee1a66a'
+_key: '!effects!80e350d38ee1a66a'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 80e350d38ee1a66a
-    _key: '!items.effects!80e350d38ee1a66a.80e350d38ee1a66a'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/smash-illusion-vial.webp
-    name: Smash Illusion Vial
-    system:
-      automations:
-        0b0d1426453abb55:
-          _id: 0b0d1426453abb55
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: apply
-          status: hidden
-          type: status
-      competence:
-        raw: 0
-      consumeSource: true
-      delivery: aura
-      duration:
-        raw: '1'
-        unit: minute
-      effectTypes:
-        - illusion
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: smash-illusion-vial
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>All @L[Category:Creatures]{creatures} and
-          @L[Category:Equipment]{objects} within the area of effect are
-          @L[Condition:Hidden]{hidden} with a hidden DC of 10 +
-          @L[Core:Presence]{UNP} (your @L[Core:Presence]{UNP}, not theirs). This
-          is a @L[Keyword:Illusionary]{minor illusion}. If a creature
-          successfully @L[Ability:Disbelieve]{Disbelieves} it, then they can see
-          everything that was @L[Condition:Hidden]{hidden} in this area.
-          Creatures that become @L[Condition:Hidden]{hidden} by this effect can
-          move freely within the area and remain @L[Condition:Hidden]{hidden} as
-          long as they do not leave the area. If they leave the area, they are
-          no longer @L[Condition:Hidden]{hidden} and they do not become
-          @L[Condition:Hidden]{hidden} if they re-enter it. At the start of each
-          of each @L[Core:Rounds]{round}, the @L[Core:Game Master]{GM} rolls
-          [[/roll 1d100]]. On a 75 or higher, some unexpected additional random
-          @L[Keyword:Illusionary]{illusion} occurs in the area as determined by
-          the @L[Core:Game Master]{GM}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - alchemical
-      range:
-        raw: '10'
-        unit: ft
-      requirements: >-
-        <p>Use [[lookup name]] by interacting with the
-        @L[Category:Equipment]{equipment} that provides it. That counts as the
-        @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
-        the ability.</p>
-      targets:
-        - area
-        - creature
-        - item
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/smash-illusion-vial.webp
 name: Smash Illusion Vial
-type: wrapper
+system:
+  automations:
+    0b0d1426453abb55:
+      _id: 0b0d1426453abb55
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: apply
+      status: hidden
+      target: false
+      type: status
+  competence:
+    raw: 0
+  consumeSource: true
+  delivery: aura
+  duration:
+    raw: '1'
+    unit: minute
+  effectTypes:
+    - illusion
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: smash-illusion-vial
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>All @L[Category:Creatures]{creatures} and
+      @L[Category:Equipment]{objects} within the area of effect are
+      @L[Condition:Hidden]{hidden} with a hidden DC of 10 +
+      @L[Core:Presence]{UNP} (your @L[Core:Presence]{UNP}, not theirs). This is
+      a @L[Keyword:Illusionary]{minor illusion}. If a creature successfully
+      @L[Ability:Disbelieve]{Disbelieves} it, then they can see everything that
+      was @L[Condition:Hidden]{hidden} in this area. Creatures that become
+      @L[Condition:Hidden]{hidden} by this effect can move freely within the
+      area and remain @L[Condition:Hidden]{hidden} as long as they do not leave
+      the area. If they leave the area, they are no longer
+      @L[Condition:Hidden]{hidden} and they do not become
+      @L[Condition:Hidden]{hidden} if they re-enter it. At the start of each of
+      each @L[Core:Rounds]{round}, the @L[Core:Game Master]{GM} rolls [[/roll
+      1d100]]. On a 75 or higher, some unexpected additional random
+      @L[Keyword:Illusionary]{illusion} occurs in the area as determined by the
+      @L[Core:Game Master]{GM}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - alchemical
+  range:
+    raw: '10'
+    unit: ft
+  requirements: >-
+    <p>Use [[lookup name]] by interacting with the
+    @L[Category:Equipment]{equipment} that provides it. That counts as the
+    @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for the
+    ability.</p>
+  targets:
+    - area
+    - creature
+    - item
+transfer: true
+type: ability

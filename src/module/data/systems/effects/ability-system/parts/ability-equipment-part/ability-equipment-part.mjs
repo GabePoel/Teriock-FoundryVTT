@@ -40,15 +40,11 @@ export default (Base) => {
        */
       get onUseIcon() {
         return {
+          action: "toggleOnUseDoc",
           icon: this.parent.isOnUse
             ? TERIOCK.display.icons.ability.onUse
             : TERIOCK.display.icons.ability.notOnUse,
-          action: "toggleOnUseDoc",
-          tooltip: this.parent.isOnUse
-            ? game.i18n.localize("TERIOCK.SYSTEMS.Ability.USAGE.onlyOnUse")
-            : game.i18n.localize("TERIOCK.SYSTEMS.Ability.USAGE.alwaysActive"),
-          condition: this.parent.isOwner,
-          callback: async () => {
+          onClick: async () => {
             const onUseSet = this.parent.parent?.system.onUse;
             if (onUseSet.has(this.parent.id)) {
               onUseSet.delete(this.parent.id);
@@ -59,6 +55,10 @@ export default (Base) => {
               "system.onUse": Array.from(onUseSet),
             });
           },
+          tooltip: this.parent.isOnUse
+            ? _loc("TERIOCK.SYSTEMS.Ability.USAGE.onlyOnUse")
+            : _loc("TERIOCK.SYSTEMS.Ability.USAGE.alwaysActive"),
+          visible: this.parent.isOwner,
         };
       }
 
@@ -77,7 +77,7 @@ export default (Base) => {
       getCardContextMenuEntries(doc) {
         const entries = super.getCardContextMenuEntries(doc);
         entries.push({
-          callback: async () => {
+          onClick: async () => {
             const data = await this.toScroll();
             const op = { keepEmbeddedIds: true, renderSheet: true };
             if (
@@ -89,14 +89,14 @@ export default (Base) => {
               TeriockItem.create(data, op);
             }
           },
-          condition:
+          visible:
             this.parent.parent?.isOwner &&
             this.spell &&
             doc !== this.parent &&
             doc.sheet.isEditable,
           group: "control",
           icon: makeIcon(TERIOCK.display.icons.ability.scroll, "contextMenu"),
-          name: game.i18n.localize("TERIOCK.SYSTEMS.Ability.EMBED.makeScroll"),
+          label: _loc("TERIOCK.SYSTEMS.Ability.EMBED.makeScroll"),
         });
         return entries;
       }
@@ -111,22 +111,16 @@ export default (Base) => {
       /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
-        this.consumeSourceText =
-          this.consumeSource && this.parent.parent?.type !== "wrapper"
-            ? game.i18n.format(
-                "TERIOCK.SYSTEMS.Ability.FIELDS.consumeSourceText.derived",
-                { uuid: this.parent.parent?.uuid },
-              )
-            : "";
-        this.grantOnlyText =
-          this.grantOnly && this.parent.parent?.type !== "wrapper"
-            ? game.i18n.format(
-                "TERIOCK.SYSTEMS.Ability.FIELDS.grantOnlyText.derived",
-                {
-                  uuid: this.parent.parent?.uuid,
-                },
-              )
-            : "";
+        this.consumeSourceText = this.consumeSource
+          ? _loc("TERIOCK.SYSTEMS.Ability.FIELDS.consumeSourceText.derived", {
+              uuid: this.parent.parent?.uuid,
+            })
+          : "";
+        this.grantOnlyText = this.grantOnly
+          ? _loc("TERIOCK.SYSTEMS.Ability.FIELDS.grantOnlyText.derived", {
+              uuid: this.parent.parent?.uuid,
+            })
+          : "";
       }
 
       /**
@@ -154,10 +148,9 @@ export default (Base) => {
           }
         }
         let out = foundry.utils.mergeObject(reference, {
-          name: game.i18n.format(
-            "TERIOCK.SYSTEMS.Ability.DIALOG.MakeScroll.scrollName",
-            { name: this.parent.fullName },
-          ),
+          name: _loc("TERIOCK.SYSTEMS.Ability.DIALOG.MakeScroll.scrollName", {
+            name: this.parent.fullName,
+          }),
           system: {
             identifier: `scroll-of-${this.parent.forcedIdentifier}`,
             consumable: true,

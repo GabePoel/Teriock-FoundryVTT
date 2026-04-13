@@ -80,7 +80,7 @@ export default function ChildSheetMixin(Base) {
       static async _onPopulateField(_event, target) {
         await this.document.update({
           [target.dataset.path]:
-            `<p>${game.i18n.localize("TERIOCK.SHEETS.Child.DEFAULTS.populateField")}</p>`,
+            `<p>${_loc("TERIOCK.SHEETS.Child.DEFAULTS.populateField")}</p>`,
         });
       }
 
@@ -106,9 +106,7 @@ export default function ChildSheetMixin(Base) {
             ...{
               schema: this.document.getSchema(f.path),
               value,
-              label:
-                f?.label ||
-                game.i18n.localize(this.document.getSchema(f.path)?.label),
+              label: f?.label || _loc(this.document.getSchema(f.path)?.label),
               button: f?.button,
               editable: f.editable === false ? false : value === sourceValue,
             },
@@ -124,19 +122,19 @@ export default function ChildSheetMixin(Base) {
       #expandTags(tags) {
         /** @type {Teriock.Sheet.FancyDisplayTag[]} */
         let out = [];
-        const defaultTooltip = game.i18n.localize(
+        const defaultTooltip = _loc(
           "TERIOCK.SHEETS.Child.DISPLAY.defaultTagTooltip",
         );
         tags.forEach((t) => {
           if (typeof t === "string") {
             out.push({
-              label: game.i18n.localize(t),
+              label: _loc(t),
               tooltip: defaultTooltip,
             });
           } else {
             out.push({
-              label: game.i18n.localize(t.label),
-              tooltip: game.i18n.localize(t.tooltip),
+              label: _loc(t.label),
+              tooltip: _loc(t.tooltip),
             });
           }
         });

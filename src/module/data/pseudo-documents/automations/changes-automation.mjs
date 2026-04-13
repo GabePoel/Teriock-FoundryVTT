@@ -1,5 +1,6 @@
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { qualifiedChangeField } from "../../fields/helpers/builders.mjs";
+import { migrateChange } from "../../shared/migrations/change-migrations.mjs";
 import { CritAutomation } from "./abstract/_module.mjs";
 
 const { fields } = foundry.data;
@@ -26,15 +27,21 @@ export default class ChangesAutomation extends CritAutomation {
   }
 
   /** @inheritDoc */
+  static migrateData(data) {
+    if (data.changes) for (const change of data.changes) migrateChange(change);
+    return super.migrateData(data);
+  }
+
+  /** @inheritDoc */
   async getEditor() {
     const html = await TeriockTextEditor.renderTemplate(
       "teriock/sheets/shared/changes",
       {
         changesData: this.changes,
-        changesPath: `${this.fieldPath}.${this.id}.changes`,
+        changesPath: `${this.localPath}.changes`,
         editable: this.document.sheet.isEditable,
         fieldDefs: this.schema.fields.changes.element.fields,
-        valuePath: `_source.${this.fieldPath}.${this.id}.changes`,
+        valuePath: `_source.${this.localPath}.changes`,
       },
     );
     return /** @type {HTMLDivElement} */ foundry.utils.parseHTML(html);

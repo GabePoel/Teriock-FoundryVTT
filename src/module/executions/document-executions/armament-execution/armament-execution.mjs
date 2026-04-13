@@ -18,10 +18,10 @@ export default class ArmamentExecution extends BaseDocumentExecution {
   constructor(options = {}) {
     super(options);
     this.crit = options.crit ?? false;
-    this.deals = new Set(
-      options.deals ?? Array.from(this.source.system.deals) ?? ["damage"],
+    this.impacts = new Set(
+      options.impacts ?? Array.from(this.source.system.impacts) ?? ["damage"],
     );
-    this.bonusDamage = options.bonusDamage ?? "";
+    this.bonus = options.bonus ?? "";
     this.showDialog = options.showDialog;
     this.twoHanded = options.twoHanded && this.source.system.hasTwoHandedAttack;
     this.formula =
@@ -34,13 +34,13 @@ export default class ArmamentExecution extends BaseDocumentExecution {
   crit = false;
 
   /**
-   * A copy of the roll for each thing this deals.
+   * A copy of the roll for each impact this deals.
    * @returns {HarmRoll[]}
    */
   get #typedRolls() {
     if (this.rolls.length === 0) return [];
     const roll = this.rolls[0];
-    return Array.from(this.deals).map((impact) => {
+    return Array.from(this.impacts).map((impact) => {
       const impactRoll = roll.clone({ evaluated: true });
       impactRoll.impact = impact;
       return impactRoll;
@@ -68,12 +68,12 @@ export default class ArmamentExecution extends BaseDocumentExecution {
 
   /** @inheritDoc */
   get flavor() {
-    if (this.deals.size === 1) {
-      return game.i18n.format("TERIOCK.ROLLS.Base.name", {
-        value: TERIOCK.options.impact[Array.from(this.deals)[0]].label,
+    if (this.impacts.size === 1) {
+      return _loc("TERIOCK.ROLLS.Base.name", {
+        value: TERIOCK.options.impact[Array.from(this.impacts)[0]].label,
       });
     } else {
-      return game.i18n.localize("TERIOCK.ROLLS.Harm.multi");
+      return _loc("TERIOCK.ROLLS.Harm.multi");
     }
   }
 
@@ -98,7 +98,7 @@ export default class ArmamentExecution extends BaseDocumentExecution {
     await super._buildRolls();
     if (this.crit) {
       for (const roll of this.rolls) {
-        if (this.deals.size === 1) roll.impact = Array.from(this.deals)[0];
+        if (this.impacts.size === 1) roll.impact = Array.from(this.impacts)[0];
         else roll.impact = undefined;
         roll.alter(2, 0, { multiplyNumeric: false });
       }
@@ -122,12 +122,10 @@ export default class ArmamentExecution extends BaseDocumentExecution {
       .filter((a) => a);
     if (onUseAbilities.length > 0) {
       const usedAbilities = await selectDocumentsDialog(onUseAbilities, {
-        hint: game.i18n.format("TERIOCK.SYSTEMS.Equipment.DIALOG.onUse.hint", {
+        hint: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.onUse.hint", {
           name: this.source.name,
         }),
-        title: game.i18n.localize(
-          "TERIOCK.SYSTEMS.Equipment.DIALOG.onUse.title",
-        ),
+        title: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.onUse.title"),
       });
       for (const ability of usedAbilities) {
         if (ability.system.consumable && this.source.system.consumable) {
@@ -147,8 +145,8 @@ export default class ArmamentExecution extends BaseDocumentExecution {
 
   /** @inheritDoc */
   async _prepareFormula() {
-    if (formulaExists(this.bonusDamage)) {
-      this.formula = addFormula(this.formula, this.bonusDamage);
+    if (formulaExists(this.bonus)) {
+      this.formula = addFormula(this.formula, this.bonus);
     }
   }
 

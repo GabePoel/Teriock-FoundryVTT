@@ -5,6 +5,7 @@ The webp icons in this directory and its subdirectories are licensed from [Craft
 The icons in [`./documents`]() are from [game-icons.net]() ([License](https://creativecommons.org/licenses/by/3.0/)).
 Links to the original pages with the authors can be found below.
 
+- [`./documents/archetype.svg`](https://game-icons.net/1x1/delapouite/star-altar.html)
 - [`./documents/ability.svg`](https://game-icons.net/1x1/delapouite/sparkles.html)
 - [`./documents/attunement.svg`](https://game-icons.net/1x1/lorc/high-five.html)
 - [`./documents/body.svg`](https://game-icons.net/1x1/lorc/ribcage.html)

@@ -1,67 +1,61 @@
 _id: 90b16e779bf054ff
-_key: '!items!90b16e779bf054ff'
+_key: '!effects!90b16e779bf054ff'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 90b16e779bf054ff
-    _key: '!items.effects!90b16e779bf054ff.90b16e779bf054ff'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/memory-drain-touch.webp
-    name: Memory Drain Touch
-    system:
-      automations:
-        157afc517847f562:
-          _id: 157afc517847f562
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: 1d8[memory]
-          heighten:
-            - 1
-            - 0
-          merge: true
-          roll: drain
-          type: roll
-      competence:
-        raw: 0
-      delivery: hand
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - mental
-        - displacement
-        - draining
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: memory-drain-touch
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 2
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      results:
-        critHit: <p>Deal [[/drain 2d8[memory]]] @L[Category:Drain types]{drain}.</p>
-        hit: <p>Deal [[/drain 1d8[memory]]] @L[Category:Drain types]{drain}.</p>
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/memory-drain-touch.webp
 name: Memory Drain Touch
-type: wrapper
+system:
+  automations:
+    157afc517847f562:
+      _id: 157afc517847f562
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: 1d8[memory]
+      heighten:
+        - 1
+        - 0
+      impact: drain
+      merge: true
+      type: roll
+  competence:
+    raw: 0
+  delivery: hand
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - mental
+    - displacement
+    - draining
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: memory-drain-touch
+  interaction: attack
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 2
+  powerSources:
+    - magical
+  range:
+    unit: contact
+  results:
+    critHit: <p>Deal [[/drain 2d8[memory]]] @L[Category:Drain types]{drain}.</p>
+    hit: <p>Deal [[/drain 1d8[memory]]] @L[Category:Drain types]{drain}.</p>
+  targets:
+    - creature
+transfer: true
+type: ability

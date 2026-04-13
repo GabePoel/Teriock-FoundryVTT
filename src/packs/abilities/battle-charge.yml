@@ -1,64 +1,58 @@
 _id: 3bf50ff94a38d2e1
-_key: '!items!3bf50ff94a38d2e1'
+_key: '!effects!3bf50ff94a38d2e1'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 3bf50ff94a38d2e1
-    _key: '!items.effects!3bf50ff94a38d2e1.3bf50ff94a38d2e1'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/battle-charge.webp
-    name: Battle Charge
-    system:
-      class: knight
-      competence:
-        raw: 0
-      delivery: weapon
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: r0
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: battle-charge
-      interaction: attack
-      maneuver: reactive
-      overview:
-        base: >-
-          <div class="note"><b>Note:</b> A target moving due to [[lookup name]]
-          can still provoke reactions like @L[Ability:Opportunity
-          Attack]{Opportunity Attack}.</div><div class="note"><b>Note:</b> This
-          ability can trigger in the middle of @L[Ability:Move]{moving}. You
-          could approach an enemy, trigger this ability, take an
-          @L[Ability:Opportunity Attack]{Opportunity Attack} against them, keep
-          moving towards them, and trigger this ability again.</div>
-      piercing:
-        raw: 2
-      powerSources:
-        - martial
-      range:
-        unit: contact
-      results:
-        critHit: <p>Target moves 20 feet away from you.</p>
-        hit: <p>Target moves 10 feet away from you.</p>
-      skill: true
-      standard: true
-      targets:
-        - creature
-      trigger: >-
-        <p>Moving at least 10 feet in a straight line towards the target and
-        becoming adjacent to them.</p>
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/battle-charge.webp
 name: Battle Charge
-type: wrapper
+system:
+  class: knight
+  competence:
+    raw: 0
+  delivery: weapon
+  duration:
+    raw: '0'
+    unit: instant
+  executionTime:
+    base: r0
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: battle-charge
+  interaction: attack
+  maneuver: reactive
+  mundane: false
+  overview:
+    base: >-
+      <div class="note"><b>Note:</b> A target moving due to [[lookup name]] can
+      still provoke reactions like @L[Ability:Opportunity Attack]{Opportunity
+      Attack}.</div><div class="note"><b>Note:</b> This ability can trigger in
+      the middle of @L[Ability:Move]{moving}. You could approach an enemy,
+      trigger this ability, take an @L[Ability:Opportunity Attack]{Opportunity
+      Attack} against them, keep moving towards them, and trigger this ability
+      again.</div>
+  piercing:
+    raw: 2
+  powerSources:
+    - martial
+  range:
+    unit: contact
+  results:
+    critHit: <p>Target moves 20 feet away from you.</p>
+    hit: <p>Target moves 10 feet away from you.</p>
+  skill: true
+  standard: true
+  targets:
+    - creature
+  trigger: >-
+    <p>Moving at least 10 feet in a straight line towards the target and
+    becoming adjacent to them.</p>
+transfer: true
+type: ability

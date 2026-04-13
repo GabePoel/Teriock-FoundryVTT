@@ -233,8 +233,8 @@ export default function ThresholdExecutionMixin(Base) {
         for (const f of this._dialogFields) {
           if (typeof f.condition === "boolean" && !f.condition) continue;
           if (typeof f.condition == "function" && !f.condition()) continue;
-          const groupConfig = { label: game.i18n.localize(f.label), rootId };
-          if (f.hint) groupConfig.hint = game.i18n.localize(f.hint);
+          const groupConfig = { label: _loc(f.label), rootId };
+          if (f.hint) groupConfig.hint = _loc(f.hint);
           const inputConfig = {
             id: `${rootId}-${f.name}`,
             integer: f.integer,
@@ -259,7 +259,7 @@ export default function ThresholdExecutionMixin(Base) {
               },
               default: b.default,
               icon: makeIconClass(b.icon || this.icon, "button"),
-              label: game.i18n.localize(b.label),
+              label: _loc(b.label),
             };
           }),
           content: content.outerHTML,

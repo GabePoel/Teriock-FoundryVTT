@@ -29,9 +29,7 @@ export default async function hotbarDropDialog(doc) {
           action: "linked",
           callback: () => "linked",
           icon: makeIconClass(TERIOCK.display.icons.ui.linked),
-          label: game.i18n.localize(
-            "TERIOCK.DIALOGS.HotbarDrop.BUTTONS.linked",
-          ),
+          label: _loc("TERIOCK.DIALOGS.HotbarDrop.BUTTONS.linked"),
         },
       ],
       content: content,
@@ -39,11 +37,11 @@ export default async function hotbarDropDialog(doc) {
       ok: {
         callback: () => "general",
         default: true,
-        label: game.i18n.localize("TERIOCK.DIALOGS.HotbarDrop.BUTTONS.general"),
+        label: _loc("TERIOCK.DIALOGS.HotbarDrop.BUTTONS.general"),
       },
       window: {
         icon: makeIconClass(TERIOCK.display.icons.ui.confirm, "title"),
-        title: game.i18n.localize("TERIOCK.DIALOGS.HotbarDrop.title"),
+        title: _loc("TERIOCK.DIALOGS.HotbarDrop.title"),
       },
     });
   }

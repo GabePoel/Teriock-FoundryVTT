@@ -1,128 +1,74 @@
 _id: 12c437e5de0552df
-_key: '!items!12c437e5de0552df'
+_key: '!effects!12c437e5de0552df'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 12c437e5de0552df
-    _key: '!items.effects!12c437e5de0552df.12c437e5de0552df'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/drink-displacement-potion.webp
-    name: Drink Displacement Potion
-    system:
-      automations:
-        CipwMKFdaLYfvSYB:
-          _id: CipwMKFdaLYfvSYB
-          documents:
-            - Compendium.teriock.abilities.Item.096e4fe03c38ec16
-          overrideCompetence: true
-          type: useExternal
-      competence:
-        raw: 0
-      consumeSource: true
-      delivery: item
-      duration:
-        raw: '1'
-        unit: minute
-      effectTypes:
-        - displacement
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: drink-displacement-potion
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>You immediately use @L[Ability:Displace]{Displace} as a free
-          action. It is not @L[Core:Proficiency Bonus]{proficient} nor
-          @L[Core:Fluency Bonus]{fluent}. You also gain @L[Ability:Quivering
-          Vitals]{Quivering Vitals}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - alchemical
-      range:
-        unit: contact
-      requirements: >-
-        <p>Use [[lookup name]] by interacting with the
-        @L[Category:Equipment]{equipment} that provides it. That counts as the
-        @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
-        the ability.</p>
-      targets:
-        - self
-    type: ability
-  - _id: Uac2GtCvHsCIpRo5
-    _key: '!items.effects!12c437e5de0552df.Uac2GtCvHsCIpRo5'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.75ecaec1dd531ac4
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/abilities/quivering-vitals.webp
-    name: Quivering Vitals
-    system:
-      _sup: 12c437e5de0552df
-      automations:
-        29b275994cf9f5b1:
-          _id: 29b275994cf9f5b1
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: 1d4[lethal]
-          heighten:
-            - 1
-            - 0
-          impact: damage
-          merge: true
-          type: roll
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - displacement
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: flaw
-      identifier: quivering-vitals
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>@L[Category:Vitals target abilities]{Vitals target abilities} that
-          deal @L[Core:Damage]{damage} are @L[Keyword:Boosted Damage]{boosted}
-          against you @L[Core:Damage]{damage} they deal is
-          @L[Damage:Lethal]{lethal} in addition to its other types. Those that
-          don't normally deal @L[Core:Damage]{damage} deal [[/damage
-          1d4[lethal]]] @L[Core:Damage]{damage}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/drink-displacement-potion.webp
 name: Drink Displacement Potion
-type: wrapper
+system:
+  automations:
+    CipwMKFdaLYfvSYB:
+      _id: CipwMKFdaLYfvSYB
+      automatic: true
+      competence:
+        raw: 0
+      competencies:
+        - 0
+        - 1
+        - 2
+      documents:
+        - Compendium.teriock.abilities.ActiveEffect.096e4fe03c38ec16
+      expandTables: false
+      heighten:
+        - 0
+        - 1
+      multi: false
+      noHeighten: false
+      overrideCompetence: true
+      type: useExternal
+  competence:
+    raw: 0
+  consumeSource: true
+  delivery: item
+  duration:
+    raw: '1'
+    unit: minute
+  effectTypes:
+    - displacement
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: drink-displacement-potion
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>You immediately use @L[Ability:Displace]{Displace} as a free action. It
+      is not @L[Core:Proficiency Bonus]{proficient} nor @L[Core:Fluency
+      Bonus]{fluent}. You also gain @L[Ability:Quivering Vitals]{Quivering
+      Vitals}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - alchemical
+  range:
+    unit: contact
+  requirements: >-
+    <p>Use [[lookup name]] by interacting with the
+    @L[Category:Equipment]{equipment} that provides it. That counts as the
+    @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for the
+    ability.</p>
+  targets:
+    - self
+transfer: true
+type: ability

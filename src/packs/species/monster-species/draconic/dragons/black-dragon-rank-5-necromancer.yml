@@ -2,7 +2,7 @@ _id: QdsIi6Rqaf4WpFIa
 _key: '!items!QdsIi6Rqaf4WpFIa'
 _stats:
   compendiumSource: Compendium.teriock.classes.Item.66235c18e1398433
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.23
@@ -10,11 +10,11 @@ effects:
   - _id: cCxUqjkZ41n5NbD3
     _key: '!items.effects!QdsIi6Rqaf4WpFIa.cCxUqjkZ41n5NbD3'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.8b5c0113b30f150d
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8b5c0113b30f150d
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: combat
@@ -27,11 +27,11 @@ effects:
           _id: f025905e157ac261
           changes:
             - key: system.competence.raw
-              mode: 4
+              phase: fluency
               priority: 10
               qualifier: '@identifier.necromancy-rotators'
               target: ability
-              time: fluency
+              type: upgrade
               value: '2'
           competencies:
             - 1
@@ -81,15 +81,16 @@ effects:
       standard: true
       targets:
         - self
+    transfer: true
     type: ability
   - _id: NV2xRIOWuOeqby2I
     _key: '!items.effects!QdsIi6Rqaf4WpFIa.NV2xRIOWuOeqby2I'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.1a33da97f159afc7
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1a33da97f159afc7
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: support
@@ -128,15 +129,16 @@ effects:
       standard: true
       targets:
         - self
+    transfer: true
     type: ability
-  - _id: VNyuykzJP4NOUraT
-    _key: '!items.effects!QdsIi6Rqaf4WpFIa.VNyuykzJP4NOUraT'
+  - _id: tmdyDUU5GSvYuynP
+    _key: '!items.effects!QdsIi6Rqaf4WpFIa.tmdyDUU5GSvYuynP'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.ea1ecd00bc4430e1
-      coreVersion: '13'
+      compendiumSource: Compendium.world.abilities-backup.ActiveEffect.HXidffXqZoxo8wog
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/spell-strike.webp
     name: Spell Strike
     system:
@@ -152,7 +154,10 @@ effects:
       duration:
         raw: '0'
         unit: instant
-      executionTime: r0
+      executionTime:
+        base: r0
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -165,6 +170,7 @@ effects:
         <p>Only usable with @L[Ability:Death Ray]{Death Ray} and
         @L[Ability:Terror Ball]{Terror Ball}.</p>
       maneuver: reactive
+      mundane: false
       overview:
         base: >-
           <p>Target takes the "on hit" effect of a @L[Category:Missile delivery
@@ -186,6 +192,7 @@ effects:
         abilities]{weapon} or @L[Category:Bite delivery abilities]{bite}
         @L[Category:Attack abilities]{attack} on another creature and the effect
         has successfully applied.</p>
+    transfer: true
     type: ability
 folder: 997cd433ccad17d7
 img: systems/teriock/src/icons/ranks/rank-5-necromancer.webp

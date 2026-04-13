@@ -1,5 +1,6 @@
 import { conditionDialog } from "../../../../applications/dialogs/select-token-dialog.mjs";
 import { costOptions } from "../../../../constants/options/cost-options.mjs";
+import { FormulaField } from "../../../../data/fields/_module.mjs";
 import {
   AddExternalDocumentsAutomation,
   ChangesAutomation,
@@ -10,7 +11,6 @@ import {
   TransformationAutomation,
 } from "../../../../data/pseudo-documents/automations/_module.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
-import { manipulateFormula } from "../../../../helpers/formula.mjs";
 import { safeUuid } from "../../../../helpers/resolve.mjs";
 
 /**
@@ -23,14 +23,14 @@ export default function AbilityExecutionChatPart(Base) {
      * @mixin
      */
     class AbilityExecutionChat extends Base {
-      /** @type {Record<string, Teriock.MessageData.MessageAssociation[]>} */
+      /** @type {Record<string, Teriock.Messages.MessageAssociation[]>} */
       #associationMap;
 
       /** @type {Record<string, Teriock.Changes.QualifiedChangeData[]>} */
       #trackerMap;
 
       /**
-       * @param {Teriock.MessageData.MessageAssociation} association
+       * @param {Teriock.Messages.MessageAssociation} association
        * @param {string} key
        */
       #addAssociationToMap(association, key) {
@@ -66,12 +66,11 @@ export default function AbilityExecutionChatPart(Base) {
        * @param {UUID<TeriockTokenDocument|TeriockActor>[]} uuids
        */
       #attachTrackedStatusAutomationUuids(automation, uuids) {
-        /** @type {Teriock.MessageData.MessageAssociation} */
+        /** @type {Teriock.Messages.MessageAssociation} */
         const association = {
-          title: game.i18n.format(
-            "TERIOCK.SYSTEMS.Ability.PANELS.statusWithRespectTo",
-            { status: TERIOCK.reference.conditions[automation.status] },
-          ),
+          title: _loc("TERIOCK.SYSTEMS.Ability.PANELS.statusWithRespectTo", {
+            status: TERIOCK.reference.conditions[automation.status],
+          }),
           icon: TERIOCK.options.document.creature.icon,
           cards: uuids.map((uuid) => this.#generateAssociationCard(uuid)),
         };
@@ -91,7 +90,7 @@ export default function AbilityExecutionChatPart(Base) {
       /**
        * Generate an association card.
        * @param {UUID<TeriockTokenDocument|TeriockActor>} uuid
-       * @returns {Teriock.MessageData.MessageAssociationCard}
+       * @returns {Teriock.Messages.MessageAssociationCard}
        */
       #generateAssociationCard(uuid) {
         const doc = fromUuidSync(uuid);
@@ -132,10 +131,9 @@ export default function AbilityExecutionChatPart(Base) {
             seconds: await this.#generateConsequenceDuration(crit),
           },
           img: this.source.img,
-          name: game.i18n.format(
-            "TERIOCK.SYSTEMS.Ability.EXECUTION.effectName",
-            { name: this.source.name },
-          ),
+          name: _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.effectName", {
+            name: this.source.name,
+          }),
           statuses: this.#generateConsequenceStatuses(crit),
           system: {
             _dep:
@@ -145,7 +143,7 @@ export default function AbilityExecutionChatPart(Base) {
                 : undefined,
             associations: [],
             automations: this.#generateConsequenceAutomations(crit),
-            blocks: this.source.system.panelParts.blocks,
+            blocks: (await this.source.system.getPanelParts()).blocks,
             competence: { raw: this.competence.value },
             critical: crit,
             deleteOnExpire: true,
@@ -236,11 +234,7 @@ export default function AbilityExecutionChatPart(Base) {
         combatExpirationAutomations.forEach((a) => {
           Object.assign(
             combatExpiration,
-            foundry.utils.deepClone({
-              what: a.what,
-              when: a.when,
-              who: a.who,
-            }),
+            foundry.utils.deepClone({ what: a.what, when: a.when, who: a.who }),
           );
           combatExpiration.who.source = this.actor?.uuid;
         });
@@ -257,9 +251,23 @@ export default function AbilityExecutionChatPart(Base) {
           crit,
         );
         let durationFormula = this.source.system.duration.formula;
+        const formulaField = new FormulaField({ deterministic: false });
         durationAutomations.forEach((a) => {
           const formula = a.duration.formula;
-          durationFormula = manipulateFormula(durationFormula, formula, a.mode);
+          const change = {
+            type: a.changeType,
+            effect: this.source,
+            value: formula,
+            phase: "initial",
+            priority: 5,
+            key: "duration",
+          };
+          durationFormula = formulaField.applyChange(
+            durationFormula,
+            null,
+            change,
+            { replacementData: this.rollData },
+          );
         });
         let durationValue = await BaseRoll.getValue(
           durationFormula,
@@ -350,10 +358,7 @@ export default function AbilityExecutionChatPart(Base) {
         if (this.source.system.delivery === "cone" && !this.flags.noTemplate) {
           this.activations.push(
             new acts.UseLocalActivation({
-              options: {
-                lookup: "block-cone",
-                type: "ability",
-              },
+              options: { lookup: "ability:block-cone" },
             }),
           );
         }
@@ -376,9 +381,7 @@ export default function AbilityExecutionChatPart(Base) {
           critData.system.associations = this.#associationMap["crit"];
           critData.changes.push(...this.#trackerMap["crit"]);
           const normalChildren = this.source.subs.map((s) => {
-            return {
-              uuid: s.uuid,
-            };
+            return { uuid: s.uuid };
           });
           const critChildren = [...normalChildren];
           const normalDocuments = [];
@@ -437,9 +440,7 @@ export default function AbilityExecutionChatPart(Base) {
                 );
               }
               if (a.overrideData && a.data) {
-                foundry.utils.mergeObject(critData, a.data, {
-                  inplace: true,
-                });
+                foundry.utils.mergeObject(critData, a.data, { inplace: true });
               }
             },
           );
@@ -451,18 +452,14 @@ export default function AbilityExecutionChatPart(Base) {
                   "TERIOCK.COMMANDS.ApplyEffect.label",
               },
               primary: {
-                root: {
-                  data: normalData,
-                },
                 children: normalChildren,
                 other: normalDocuments,
+                root: { data: normalData },
               },
               secondary: {
-                root: {
-                  data: critData,
-                },
                 children: critChildren,
                 other: critDocuments,
+                root: { data: critData },
               },
             }),
           );
@@ -497,9 +494,7 @@ export default function AbilityExecutionChatPart(Base) {
         const proficientBlock = panel.blocks.find(
           (b) =>
             b.title ===
-            game.i18n.localize(
-              "TERIOCK.SYSTEMS.Ability.FIELDS.overview.proficient.label",
-            ),
+            _loc("TERIOCK.SYSTEMS.Ability.FIELDS.overview.proficient.label"),
         );
         if (proficientBlock) {
           if (this.competence.proficient) {
@@ -511,9 +506,7 @@ export default function AbilityExecutionChatPart(Base) {
         const fluentBlock = panel.blocks.find(
           (b) =>
             b.title ===
-            game.i18n.localize(
-              "TERIOCK.SYSTEMS.Ability.FIELDS.overview.fluent.label",
-            ),
+            _loc("TERIOCK.SYSTEMS.Ability.FIELDS.overview.fluent.label"),
         );
         if (fluentBlock) {
           if (this.competence.fluent) {
@@ -524,10 +517,7 @@ export default function AbilityExecutionChatPart(Base) {
         }
         const heightenedBlock = panel.blocks.find(
           (b) =>
-            b.title ===
-            game.i18n.localize(
-              "TERIOCK.SYSTEMS.Ability.FIELDS.heightened.label",
-            ),
+            b.title === _loc("TERIOCK.SYSTEMS.Ability.FIELDS.heightened.label"),
         );
         if (heightenedBlock) {
           if (this.heightened) {
@@ -542,31 +532,24 @@ export default function AbilityExecutionChatPart(Base) {
       /** @inheritDoc */
       async _buildTags() {
         if (this.source.system.interaction === "attack" && this.ub) {
-          this.tags.push(
-            game.i18n.localize("TERIOCK.TERMS.Properties.unblockable"),
-          );
+          this.tags.push(_loc("TERIOCK.TERMS.Properties.unblockable"));
         }
         if (this.warded) {
-          this.tags.push(
-            game.i18n.localize("TERIOCK.SYSTEMS.Attack.FIELDS.warded.label"),
-          );
+          this.tags.push(_loc("TERIOCK.SYSTEMS.Attack.FIELDS.warded.label"));
         }
         if (this.vitals) {
-          this.tags.push(game.i18n.localize("TERIOCK.TERMS.Targets.vitals"));
+          this.tags.push(_loc("TERIOCK.TERMS.Targets.vitals"));
         }
         if (this.heightened > 0) {
           if (this.heightened === 1) {
             this.tags.push(
-              game.i18n.localize(
-                "TERIOCK.SYSTEMS.Consequence.PANELS.heightenedSingle",
-              ),
+              _loc("TERIOCK.SYSTEMS.Consequence.PANELS.heightenedSingle"),
             );
           } else {
             this.tags.push(
-              game.i18n.format(
-                "TERIOCK.SYSTEMS.Consequence.PANELS.heightenedPlural",
-                { value: this.heightened },
-              ),
+              _loc("TERIOCK.SYSTEMS.Consequence.PANELS.heightenedPlural", {
+                value: this.heightened,
+              }),
             );
           }
         }
@@ -574,7 +557,7 @@ export default function AbilityExecutionChatPart(Base) {
           (c) => this.costs[c] > 0,
         )) {
           this.tags.push(
-            game.i18n.format("TERIOCK.SYSTEMS.Consequence.PANELS.spent", {
+            _loc("TERIOCK.SYSTEMS.Consequence.PANELS.spent", {
               amount: this.costs[c],
               label: costOptions.primary.keys[c]?.abbreviation,
             }),

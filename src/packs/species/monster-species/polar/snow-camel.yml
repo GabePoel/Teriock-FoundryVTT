@@ -1,126 +1,19 @@
 _id: efae73b9e1536f04
 _key: '!items!efae73b9e1536f04'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.68
 effects:
-  - _id: g8dz9fQMdiNLmDqj
-    _key: '!items.effects!efae73b9e1536f04.g8dz9fQMdiNLmDqj'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.b8d50a2611bb6b4b
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/abilities/agile.webp
-    name: Agile
-    system:
-      _sup: lH2SHgqNAT54i2sE
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.speedAdjustments.difficultTerrain
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '3'
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - movement
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: agile
-      interaction: manifest
-      limitation: <p>Arctic terrain only.</p>
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You walk through difficult terrain at @L[Core:Movement
-          Speed]{normal speed}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
-  - _id: 6ZgLwfnssESlp4q1
-    _key: '!items.effects!efae73b9e1536f04.6ZgLwfnssESlp4q1'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.234b842af537988e
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/arctic-resilience.webp
-    name: Arctic Resilience
-    system:
-      _sup: lH2SHgqNAT54i2sE
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: arctic-resilience
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You @L[Keyword:Deboosted]{deboost} @L[Core:Damage]{damage} caused
-          by arctic weather.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
   - _id: phLLZRLs3fYUXvRe
     _key: '!items.effects!efae73b9e1536f04.phLLZRLs3fYUXvRe'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.09653aa7d237cf8f
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.09653aa7d237cf8f
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/bite.webp
     name: Bite
     system:
@@ -165,11 +58,11 @@ effects:
           _id: e789ed5e109ebd1a
           changes:
             - key: system.damage.base.raw
-              mode: 4
+              phase: normal
               priority: 10
               qualifier: '@prop.biting'
               target: body
-              time: normal
+              type: upgrade
               value: 1d4
           competencies:
             - 0
@@ -186,11 +79,11 @@ effects:
           _id: f025905e157ac261
           changes:
             - key: system.damage.base.raw
-              mode: 4
+              phase: normal
               priority: 10
               qualifier: '@prop.biting'
               target: body
-              time: normal
+              type: upgrade
               value: 1d6
           competencies:
             - 1
@@ -206,11 +99,11 @@ effects:
           _id: f7da3b5e1992a724
           changes:
             - key: system.damage.base.raw
-              mode: 4
+              phase: normal
               priority: 10
               qualifier: '@prop.biting'
               target: body
-              time: normal
+              type: upgrade
               value: 1d8
           competencies:
             - 2
@@ -256,15 +149,16 @@ effects:
         unit: self
       targets:
         - self
+    transfer: true
     type: ability
   - _id: jMPmxqErNM8u0Aca
     _key: '!items.effects!efae73b9e1536f04.jMPmxqErNM8u0Aca'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.2b190c2b5101cd3a
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.2b190c2b5101cd3a
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/blinding-spit.webp
     name: Blinding Spit
     system:
@@ -339,15 +233,16 @@ effects:
         unit: ft
       targets:
         - vitals
+    transfer: true
     type: ability
   - _id: ft26v6ZpYLNlXavX
     _key: '!items.effects!efae73b9e1536f04.ft26v6ZpYLNlXavX'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.2463fd01df79572f
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.2463fd01df79572f
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/dense-intelligence.webp
     name: Dense Intelligence
     system:
@@ -379,15 +274,16 @@ effects:
         score:
           attribute: int
           value: -2
+    transfer: true
     type: ability
   - _id: fBSL6ovUmSfaUDYD
     _key: '!items.effects!efae73b9e1536f04.fBSL6ovUmSfaUDYD'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.b40cffa9b0adf7c6
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.b40cffa9b0adf7c6
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/endurance.webp
     name: Endurance
     system:
@@ -421,15 +317,16 @@ effects:
         unit: self
       targets:
         - self
+    transfer: true
     type: ability
   - _id: tKGuyqr3rnfKDwm4
     _key: '!items.effects!efae73b9e1536f04.tKGuyqr3rnfKDwm4'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.cb60aa83fa29ecbe
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.cb60aa83fa29ecbe
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: icons/containers/bags/pack-simple-stitched-leather-tan.webp
     name: Improved Carrying Capacity
     system:
@@ -461,15 +358,16 @@ effects:
         score:
           attribute: str
           value: 2
+    transfer: true
     type: ability
   - _id: aIaVyNymTdfLRkrG
     _key: '!items.effects!efae73b9e1536f04.aIaVyNymTdfLRkrG'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.1c52eda8919d34a7
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1c52eda8919d34a7
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/normal-movement.webp
     name: Normal Movement
     system:
@@ -501,15 +399,16 @@ effects:
         score:
           attribute: mov
           value: 0
+    transfer: true
     type: ability
   - _id: EyRxM5PwqLSvUaY6
     _key: '!items.effects!efae73b9e1536f04.EyRxM5PwqLSvUaY6'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.8249d99c527d09b1
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8249d99c527d09b1
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/normal-perception.webp
     name: Normal Perception
     system:
@@ -541,15 +440,16 @@ effects:
         score:
           attribute: per
           value: 0
+    transfer: true
     type: ability
   - _id: ZzviVOC5W1iGy2D0
     _key: '!items.effects!efae73b9e1536f04.ZzviVOC5W1iGy2D0'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.1d13190e5b38bda6
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1d13190e5b38bda6
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/normal-sneak.webp
     name: Normal Sneak
     system:
@@ -581,15 +481,16 @@ effects:
         score:
           attribute: snk
           value: 0
+    transfer: true
     type: ability
   - _id: lH2SHgqNAT54i2sE
     _key: '!items.effects!efae73b9e1536f04.lH2SHgqNAT54i2sE'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.7eb20929de2c9431
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.7eb20929de2c9431
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/snow-native.webp
     name: Snow Native
     system:
@@ -621,6 +522,124 @@ effects:
         unit: self
       targets:
         - self
+    transfer: true
+    type: ability
+  - _id: LgWa54Smx1sUNJve
+    _key: '!items.effects!efae73b9e1536f04.LgWa54Smx1sUNJve'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.234b842af537988e
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/arctic-resilience.webp
+    name: Arctic Resilience
+    system:
+      _sup: lH2SHgqNAT54i2sE
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: arctic-resilience
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>You @L[Keyword:Deboosted]{deboost} @L[Core:Damage]{damage} caused
+          by arctic weather.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: dlYvBgA2qteNUARF
+    _key: '!items.effects!efae73b9e1536f04.dlYvBgA2qteNUARF'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.0S4l1JqVpE7OUDZL
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/agile.webp
+    name: Agile
+    system:
+      _sup: lH2SHgqNAT54i2sE
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.speedAdjustments.difficultTerrain
+              phase: normal
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              type: upgrade
+              value: '3'
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      effectTypes:
+        - movement
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: agile
+      interaction: manifest
+      limitation: <p>Arctic terrain only.</p>
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>You walk through difficult terrain at @L[Core:Movement
+          Speed]{normal speed}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    transfer: true
     type: ability
 folder: a37e0f96dceceb97
 img: systems/teriock/src/icons/creatures/snow-camel.webp

@@ -10,12 +10,8 @@ export default async function setStatDiceDialog(pool) {
   const formulaForm = pool.schema.fields.formula.toFormGroup(
     {
       rootId: foundry.utils.randomID(),
-      hint: game.i18n.localize(
-        "TERIOCK.MODELS.BaseStatPool.FIELDS.formula.hint",
-      ),
-      label: game.i18n.localize(
-        "TERIOCK.MODELS.BaseStatPool.FIELDS.formula.label",
-      ),
+      hint: _loc("TERIOCK.MODELS.BaseStatPool.FIELDS.formula.hint"),
+      label: _loc("TERIOCK.MODELS.BaseStatPool.FIELDS.formula.label"),
     },
     {
       name: "formula",
@@ -24,7 +20,7 @@ export default async function setStatDiceDialog(pool) {
   );
   const canToggle = pool.parent[`_canToggle${ucFirst(pool.stat)}Dice`];
   const tooltip = !canToggle
-    ? game.i18n.localize("TERIOCK.SYSTEMS.StatGiver.DIALOG.cantToggle")
+    ? _loc("TERIOCK.SYSTEMS.StatGiver.DIALOG.cantToggle")
     : "";
   const dataset = {};
   if (tooltip.length > 0) {
@@ -61,11 +57,11 @@ export default async function setStatDiceDialog(pool) {
         }
       },
       icon: makeIconClass(TERIOCK.display.icons.ui.enable, "button"),
-      label: game.i18n.localize("TERIOCK.DIALOGS.SetStatDice.BUTTONS.confirm"),
+      label: _loc("TERIOCK.DIALOGS.SetStatDice.BUTTONS.confirm"),
     },
     window: {
       icon: makeIconClass(TERIOCK.display.icons.ui.dice, "title"),
-      title: game.i18n.format("TERIOCK.DIALOGS.SetStatDice.title", {
+      title: _loc("TERIOCK.DIALOGS.SetStatDice.title", {
         dieName: pool.dieName,
       }),
     },

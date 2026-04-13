@@ -1,91 +1,84 @@
 _id: 7521f8bdad437902
-_key: '!items!7521f8bdad437902'
+_key: '!effects!7521f8bdad437902'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 7521f8bdad437902
-    _key: '!items.effects!7521f8bdad437902.7521f8bdad437902'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/tumble.webp
-    name: Tumble
-    system:
-      automations:
-        d635eb44dba086dd:
-          _id: d635eb44dba086dd
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: combatExpiration
-          what:
-            roll: 2d4kh1
-            threshold: 4
-            type: rolled
-          when:
-            skip: 0
-            time: start
-            trigger: turn
-          who:
-            type: executor
-      class: veteran
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - movement
-      endCondition: >-
-        <p>At the start of each of your @L[Core:Turn]{turns}, you roll [[/roll
-        2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime: r1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: tumble
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>You take only half the triggering @L[Core:Damage]{damage}.</p><div
-          class="note"><b>Note:</b> You must be able to @L[Core:Movement
-          Speed]{move} to use [[lookup name]]. This means you cannot use it
-          while @L[Condition:Snared]{snared}.</div><div
-          class="note"><b>Note:</b> The @L[Core:Damage]{damage} is rounded
-          <i>down</i>. If there are multiple independent @L[Category:Damage
-          types]{types of damage} then they are halved independently. If you
-          were originally dealt 15 @L[Damage:Fire]{fire damage} and 3
-          @L[Damage:Holy]{holy damage} then you would only take 7
-          @L[Damage:Fire]{fire damage} and 1 @L[Damage:Holy]{holy damage}.</div>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-      trigger: <p>You would take @L[Core:Damage]{damage}.</p>
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/tumble.webp
 name: Tumble
-type: wrapper
+system:
+  automations:
+    d635eb44dba086dd:
+      _id: d635eb44dba086dd
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: combatExpiration
+      what:
+        roll: 2d4kh1
+        threshold: 4
+        type: rolled
+      when:
+        skip: 0
+        time: start
+        trigger: turn
+      who:
+        type: executor
+  class: veteran
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - movement
+  endCondition: >-
+    <p>At the start of each of your @L[Core:Turn]{turns}, you roll [[/roll
+    2d4]]. If either of these dice roll a 4, this effect ends.</p>
+  executionTime:
+    base: r1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: tumble
+  interaction: manifest
+  maneuver: reactive
+  mundane: false
+  overview:
+    base: >-
+      <p>You take only half the triggering @L[Core:Damage]{damage}.</p><div
+      class="note"><b>Note:</b> You must be able to @L[Core:Movement
+      Speed]{move} to use [[lookup name]]. This means you cannot use it while
+      @L[Condition:Snared]{snared}.</div><div class="note"><b>Note:</b> The
+      @L[Core:Damage]{damage} is rounded <i>down</i>. If there are multiple
+      independent @L[Category:Damage types]{types of damage} then they are
+      halved independently. If you were originally dealt 15 @L[Damage:Fire]{fire
+      damage} and 3 @L[Damage:Holy]{holy damage} then you would only take 7
+      @L[Damage:Fire]{fire damage} and 1 @L[Damage:Holy]{holy damage}.</div>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  skill: true
+  standard: true
+  targets:
+    - self
+  trigger: <p>You would take @L[Core:Damage]{damage}.</p>
+transfer: true
+type: ability

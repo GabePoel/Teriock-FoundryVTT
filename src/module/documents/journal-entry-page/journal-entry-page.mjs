@@ -1,6 +1,6 @@
 import { documentOptions } from "../../constants/options/document-options.mjs";
+import { mix } from "../../helpers/construction.mjs";
 import { getImage } from "../../helpers/path.mjs";
-import { mix } from "../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
 
 const { JournalEntryPage } = foundry.documents;
@@ -32,13 +32,13 @@ export default class TeriockJournalEntryPage extends mix(
   }
 
   /** @inheritDoc */
-  get panelParts() {
+  async getPanelParts() {
     const div = document.createElement("div");
     div.innerHTML = this.text.content;
     div.querySelectorAll("table").forEach((t) => t.remove());
     const html = div.innerHTML;
     return {
-      ...super.panelParts,
+      ...(await super.getPanelParts()),
       image: this.img,
       icon:
         documentOptions[this.type]?.icon ||
@@ -48,9 +48,7 @@ export default class TeriockJournalEntryPage extends mix(
         {
           title:
             this.getFlag("teriock", "journalTitle") ||
-            game.i18n.localize(
-              "TERIOCK.SYSTEMS.Child.FIELDS.description.label",
-            ),
+            _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
           text: html,
         },
       ],

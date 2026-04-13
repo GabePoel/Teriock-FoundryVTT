@@ -12,6 +12,7 @@ export default function BaseDocumentMixin(Base) {
     /**
      * @extends {ClientDocument}
      * @property {Readonly<boolean>} isOwner
+     * @property {Readonly<boolean>} isEmbedded
      * @mixin
      */
     class BaseDocument extends Base {
@@ -75,6 +76,14 @@ export default function BaseDocumentMixin(Base) {
       }
 
       /**
+       * If this is the top of an embedded document hierarchy.
+       * @returns {boolean}
+       */
+      get isTop() {
+        return !this.isEmbedded;
+      }
+
+      /**
        * Can this be viewed?
        * @returns {boolean}
        */
@@ -98,6 +107,14 @@ export default function BaseDocumentMixin(Base) {
        */
       get master() {
         return this.parent;
+      }
+
+      /**
+       * The pseudo-document collections.
+       * @returns {Record<string, TypeCollection>}
+       */
+      get pseudoCollections() {
+        return this.system?.pseudoCollections ?? {};
       }
 
       /**
@@ -179,32 +196,38 @@ export default function BaseDocumentMixin(Base) {
         entries.push(
           ...[
             {
-              name: game.i18n.localize(
-                "TERIOCK.SYSTEMS.Common.MENU.openSource",
-              ),
+              label: _loc("TERIOCK.SYSTEMS.Common.MENU.openSource"),
               icon: makeIcon(
                 TERIOCK.display.icons.ui.openWindow,
                 "contextMenu",
               ),
-              callback: async () => {
+              onClick: async () => {
                 const resolved = await resolveDocument(this.master);
                 if (resolved) await resolved.sheet?.render(true);
               },
-              condition: () =>
-                this.master?.isViewer && doc?.uuid !== this.master?.uuid,
+              visible: () =>
+                this.master?.isViewer !== false &&
+                doc?.uuid !== this.master?.uuid,
               group: "open",
             },
             {
-              name: game.i18n.localize("TERIOCK.SYSTEMS.Common.MENU.delete"),
+              label: _loc("TERIOCK.SYSTEMS.Common.MENU.delete"),
               icon: makeIcon(TERIOCK.display.icons.ui.delete, "contextMenu"),
-              callback: async () => await this.deleteDialog(),
-              condition: () =>
-                this._checkValidEditorDocument(doc, { self: false }),
+              onClick: async () => await this.deleteDialog(),
+              visible: () => this._checkValidEditorDocument(doc),
               group: "document",
             },
           ],
         );
         return entries;
+      }
+
+      /** @inheritdoc */
+      getEmbeddedCollection(embeddedName) {
+        return (
+          this.pseudoCollections[embeddedName] ??
+          super.getEmbeddedCollection(embeddedName)
+        );
       }
 
       /**

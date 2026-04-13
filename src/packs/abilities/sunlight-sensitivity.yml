@@ -1,55 +1,49 @@
 _id: e28835d466325678
-_key: '!items!e28835d466325678'
+_key: '!effects!e28835d466325678'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: e28835d466325678
-    _key: '!items.effects!e28835d466325678.e28835d466325678'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/sunlight-sensitivity.webp
-    name: Sunlight Sensitivity
-    system:
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      elements:
-        - necromancy
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: flaw
-      identifier: sunlight-sensitivity
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>If you end your @L[Core:Turns]{turn} in direct sunlight, you roll
-          your <i>largest</i> @L[Core:HP]{hit die} and take that much
-          @L[Damage:Holy]{holy} @L[Damage:Magic]{magic damage} instead of the
-          normal @L[Core:Healing]{healing} effect. This does not consume any of
-          your @L[Core:HP]{hit dice}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/sunlight-sensitivity.webp
 name: Sunlight Sensitivity
-type: wrapper
+system:
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: unlimited
+  elements:
+    - necromancy
+  executionTime:
+    base: passive
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: flaw
+  identifier: sunlight-sensitivity
+  interaction: manifest
+  maneuver: passive
+  mundane: false
+  overview:
+    base: >-
+      <p>If you end your @L[Core:Turns]{turn} in direct sunlight, you roll your
+      <i>largest</i> @L[Core:HP]{hit die} and take that much
+      @L[Damage:Holy]{holy} @L[Damage:Magic]{magic damage} instead of the normal
+      @L[Core:Healing]{healing} effect. This does not consume any of your
+      @L[Core:HP]{hit dice}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: self
+  targets:
+    - self
+transfer: true
+type: ability

@@ -1,8 +1,9 @@
 import { TeriockDialog } from "../../../../applications/api/_module.mjs";
 import { TeriockActor } from "../../../../documents/_module.mjs";
+import { mix } from "../../../../helpers/construction.mjs";
 import { simplifyTags } from "../../../../helpers/panel.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
-import { makeIcon, makeIconClass, mix } from "../../../../helpers/utils.mjs";
+import { makeIcon, makeIconClass } from "../../../../helpers/utils.mjs";
 import { TextField } from "../../../fields/_module.mjs";
 import { speciesTransformationFields } from "../../../fields/helpers/transformation-fields.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
@@ -177,7 +178,7 @@ export default class SpeciesSystem extends mix(
   get embedParts() {
     const parts = super.embedParts;
     parts.text = dotJoin([...simplifyTags(this._traitTags), parts.text]);
-    parts.subtitle = game.i18n.localize("TYPES.Item.species");
+    parts.subtitle = _loc("TYPES.Item.species");
     return parts;
   }
 
@@ -236,14 +237,10 @@ export default class SpeciesSystem extends mix(
     if (this.transformationEffect) {
       const proceed = await TeriockDialog.confirm({
         window: {
-          title: game.i18n.localize(
-            "TERIOCK.SYSTEMS.Species.DIALOG.deleteEffect.title",
-          ),
+          title: _loc("TERIOCK.SYSTEMS.Species.DIALOG.deleteEffect.title"),
           icon: makeIconClass(TERIOCK.display.icons.effect.transform, "title"),
         },
-        content: game.i18n.localize(
-          "TERIOCK.SYSTEMS.Species.DIALOG.deleteEffect.content",
-        ),
+        content: _loc("TERIOCK.SYSTEMS.Species.DIALOG.deleteEffect.content"),
         modal: true,
         rejectClose: false,
       });
@@ -262,12 +259,10 @@ export default class SpeciesSystem extends mix(
     return [
       ...super.getCardContextMenuEntries(doc),
       {
-        name: game.i18n.localize(
-          "TERIOCK.SYSTEMS.Species.MENU.setPrimaryTransformation",
-        ),
+        label: _loc("TERIOCK.SYSTEMS.Species.MENU.setPrimaryTransformation"),
         icon: makeIcon(TERIOCK.display.icons.effect.transform, "contextMenu"),
-        callback: this.setPrimaryTransformation.bind(this),
-        condition: this.isTransformation && !this.isPrimaryTransformation,
+        onClick: this.setPrimaryTransformation.bind(this),
+        visible: this.isTransformation && !this.isPrimaryTransformation,
         group: "control",
       },
     ];

@@ -1,60 +1,53 @@
 _id: 299e5994f7ccf05e
-_key: '!items!299e5994f7ccf05e'
+_key: '!effects!299e5994f7ccf05e'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 299e5994f7ccf05e
-    _key: '!items.effects!299e5994f7ccf05e.299e5994f7ccf05e'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/celestial-rescue.webp
-    name: Celestial Rescue
-    system:
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '2'
-            type: formula
-      delivery: hand
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - displacement
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: celestial-rescue
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - divine
-      range:
-        unit: contact
-      requirements: <p>Target is @L[Condition:Down]{down}.</p>
-      results:
-        hit: >-
-          <p>The target is immediately moved to a location between 100 feet and
-          1 mile away where they are not at immediate risk (if such a place
-          exists). The location is determined by the @L[Core:Game
-          Master]{GM}.</p>
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/celestial-rescue.webp
 name: Celestial Rescue
-type: wrapper
+system:
+  competence:
+    raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '2'
+        type: formula
+  delivery: hand
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - displacement
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: celestial-rescue
+  interaction: attack
+  maneuver: active
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - divine
+  range:
+    unit: contact
+  requirements: <p>Target is @L[Condition:Down]{down}.</p>
+  results:
+    hit: >-
+      <p>The target is immediately moved to a location between 100 feet and 1
+      mile away where they are not at immediate risk (if such a place exists).
+      The location is determined by the @L[Core:Game Master]{GM}.</p>
+  targets:
+    - creature
+transfer: true
+type: ability

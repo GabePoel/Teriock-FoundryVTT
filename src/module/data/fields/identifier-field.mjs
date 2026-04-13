@@ -16,9 +16,7 @@ export default class IdentifierField extends StringField {
   _validateType(value) {
     if (!identifierValidator(value, { allowType: this.allowType })) {
       throw new Error(
-        game.i18n.localize(
-          "TERIOCK.SYSTEMS.Rules.FIELDS.identifier.validationError",
-        ),
+        _loc("TERIOCK.SYSTEMS.Rules.FIELDS.identifier.validationError"),
       );
     }
   }

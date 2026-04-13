@@ -35,12 +35,12 @@ export default class FeatExecution extends ThresholdExecutionMixin(
   /** @inheritDoc */
   get flavor() {
     if (this.threshold !== undefined) {
-      return game.i18n.format("TERIOCK.ROLLS.Feat.thresholded", {
+      return _loc("TERIOCK.ROLLS.Feat.thresholded", {
         threshold: this.threshold,
         value: this.attribute.toUpperCase(),
       });
     } else {
-      return game.i18n.format("TERIOCK.ROLLS.Feat.unthresholded", {
+      return _loc("TERIOCK.ROLLS.Feat.unthresholded", {
         value: this.attribute.toUpperCase(),
       });
     }
@@ -53,7 +53,7 @@ export default class FeatExecution extends ThresholdExecutionMixin(
 
   /** @inheritDoc */
   get name() {
-    return game.i18n.format("TERIOCK.ROLLS.Feat.name", {
+    return _loc("TERIOCK.ROLLS.Feat.name", {
       value: TERIOCK.reference.attributesFull[this.attribute],
     });
   }

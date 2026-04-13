@@ -1,7 +1,7 @@
 _id: 2aec4f7a72d3cff1
 _key: '!items!2aec4f7a72d3cff1'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.23
@@ -9,17 +9,18 @@ effects:
   - _id: yx0k4q4qNtNjndHx
     _key: '!items.effects!2aec4f7a72d3cff1.yx0k4q4qNtNjndHx'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.c019c97359a678b9
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.c019c97359a678b9
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/circle-of-protection.webp
     name: Circle of Protection
     system:
       automations:
         72ce567009179bea:
           _id: 72ce567009179bea
+          changeType: add
           competencies:
             - 0
             - 1
@@ -32,7 +33,6 @@ effects:
             unit: second
           heighten:
             - 1
-          mode: 5
           type: duration
       class: paladin
       competence:
@@ -98,11 +98,12 @@ effects:
       standard: true
       targets:
         - area
+    transfer: true
     type: ability
   - _id: 1KbJcAiYgOJ4d6gn
     _key: '!items.effects!2aec4f7a72d3cff1.1KbJcAiYgOJ4d6gn'
     _stats:
-      coreVersion: '13'
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.17
@@ -113,11 +114,12 @@ effects:
         raw: 0
       description: <p>This item glows blue in the presence of evil.</p>
       form: normal
+    transfer: true
     type: property
   - _id: 823nqH198nACfJpj
     _key: '!items.effects!2aec4f7a72d3cff1.823nqH198nACfJpj'
     _stats:
-      coreVersion: '13'
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.17
@@ -152,19 +154,35 @@ effects:
         unit: self
       targets:
         - self
+    transfer: true
     type: ability
   - _id: rBXjfjPMo5CdyY32
     _key: '!items.effects!2aec4f7a72d3cff1.rBXjfjPMo5CdyY32'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.faf4afc8f41e5518
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.faf4afc8f41e5518
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/properties/mana-storing.webp
     name: Mana Storing
     system:
       automations:
+        l4rM5VwfWLCUKVDc:
+          _id: l4rM5VwfWLCUKVDc
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: (@property.max / 4)d4
+          heighten:
+            - 0
+            - 1
+          showConfirmationDialog: true
+          showDialog: true
+          targetParent: true
+          trigger: dawn
+          type: changeQuantity
         q7NnSZ2OIzRup4jF:
           _id: q7NnSZ2OIzRup4jF
           amount: 1
@@ -179,18 +197,6 @@ effects:
             - 1
           impact: revitalizing
           type: take
-        zX38VgUzQi4kOQ5N:
-          _id: zX38VgUzQi4kOQ5N
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: (@property.max / 4)d4
-          heighten:
-            - 0
-            - 1
-          trigger: dawn
-          type: regain
       badge: '1'
       competence:
         raw: 0
@@ -213,11 +219,12 @@ effects:
         raw: '4'
       quantity: 0
       tag: '1'
+    transfer: true
     type: property
   - _id: RE7zCZxS63ZOlyXr
     _key: '!items.effects!2aec4f7a72d3cff1.RE7zCZxS63ZOlyXr'
     _stats:
-      coreVersion: '13'
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.17
@@ -285,15 +292,16 @@ effects:
       standard: true
       targets:
         - creature
+    transfer: true
     type: ability
   - _id: OSUfWN5SzN62RVpC
     _key: '!items.effects!2aec4f7a72d3cff1.OSUfWN5SzN62RVpC'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.35a4dd6673f4ecd9
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.35a4dd6673f4ecd9
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.42
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/properties/searchable.webp
     name: Searchable
     system:
@@ -305,15 +313,16 @@ effects:
         @L[Ability:Search]{Search}.</p>
       form: flaw
       identifier: searchable
+    transfer: true
     type: property
   - _id: BLwO7Qmml5jRDg7y
     _key: '!items.effects!2aec4f7a72d3cff1.BLwO7Qmml5jRDg7y'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.3d2cc8d952adebec
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.3d2cc8d952adebec
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.63
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/properties/small.webp
     name: Small
     system:
@@ -325,21 +334,23 @@ effects:
       form: intrinsic
       identifier: small
       mundane: true
+    transfer: true
     type: property
   - _id: lzGFuje40zyadBDE
     _key: '!items.effects!2aec4f7a72d3cff1.lzGFuje40zyadBDE'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.22c986b97b5f3050
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.22c986b97b5f3050
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/spirit-bury.webp
     name: Spirit Bury
     system:
       automations:
         6a329470043b61f6:
           _id: 6a329470043b61f6
+          changeType: add
           competencies:
             - 1
             - 2
@@ -352,10 +363,10 @@ effects:
           heighten:
             - 1
             - 0
-          mode: 5
           type: duration
         72ce567009179bea:
           _id: 72ce567009179bea
+          changeType: add
           competencies:
             - 0
             - 1
@@ -368,7 +379,6 @@ effects:
             unit: second
           heighten:
             - 1
-          mode: 5
           type: duration
       class: necromancer
       competence:
@@ -415,6 +425,7 @@ effects:
       standard: true
       targets:
         - creature
+    transfer: true
     type: ability
 flags:
   teriockDocumentSettings:

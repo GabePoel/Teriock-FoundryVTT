@@ -1,7 +1,7 @@
 _id: 3741f219c32abe78
 _key: '!items!3741f219c32abe78'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.64
@@ -9,11 +9,11 @@ effects:
   - _id: 2z1b2XhcCsmYGFlR
     _key: '!items.effects!3741f219c32abe78.2z1b2XhcCsmYGFlR'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.a5b0cb01f66d9f54
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.a5b0cb01f66d9f54
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/immobilize.webp
     name: Immobilize
     system:
@@ -70,15 +70,102 @@ effects:
         hit: <p>Target is @L[Condition:Immobilized]{immobilized}.</p>
       targets:
         - creature
+    transfer: true
     type: ability
-  - _id: LgFMuv7xbMFDF4Sa
-    _key: '!items.effects!3741f219c32abe78.LgFMuv7xbMFDF4Sa'
+  - _id: NFe70l3rQdXI2qP2
+    _key: '!items.effects!3741f219c32abe78.NFe70l3rQdXI2qP2'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.87e86f2640702582
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.61fbeeda5169ef73
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/properties/thrown.webp
+    name: Thrown
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>A weapon with this property can be tossed to make a
+        @L[Property:Ranged]{ranged} attack.</p>
+      form: intrinsic
+      identifier: thrown
+      mundane: true
+    transfer: true
+    type: property
+  - _id: wep0000000000000
+    _key: '!items.effects!3741f219c32abe78.wep0000000000000'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.891de334396620e1
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/properties/weapon.webp
+    name: Weapon
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
+        @L[Category:Attack abilities]{attack}.</p>
+      form: intrinsic
+      identifier: weapon
+      mundane: true
+    transfer: true
+    type: property
+  - _id: xEx5SN5o2h6HJfng
+    _key: '!items.effects!3741f219c32abe78.xEx5SN5o2h6HJfng'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.12e9b70930bc7182
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/properties/armor-voiding.webp
+    name: Armor Voiding
+    system:
+      automations:
+        parameterChanges:
+          _id: parameterChanges
+          changes:
+            - key: system.piercing.raw
+              phase: normal
+              priority: 10
+              qualifier: '1'
+              target: parent
+              type: upgrade
+              value: '1'
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 0
+            - 1
+          type: changes
+      competence:
+        raw: 0
+      description: >-
+        <p>An item with this property is always @L[Keyword:Armor
+        Voiding]{AV0}.</p>
+      form: intrinsic
+      identifier: armor-voiding
+      material: false
+      mundane: true
+    transfer: true
+    type: property
+  - _id: iRkyEtF9tgy2nPp1
+    _key: '!items.effects!3741f219c32abe78.iRkyEtF9tgy2nPp1'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.87e86f2640702582
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/properties/ranged.webp
     name: Ranged
     system:
@@ -88,11 +175,11 @@ effects:
           _id: parameterChanges
           changes:
             - key: system.range.ranged
-              mode: 5
+              phase: normal
               priority: 10
               qualifier: '1'
               target: parent
-              time: normal
+              type: override
               value: 'true'
           competencies:
             - 0
@@ -121,89 +208,7 @@ effects:
       form: intrinsic
       identifier: ranged
       mundane: true
-    type: property
-  - _id: NFe70l3rQdXI2qP2
-    _key: '!items.effects!3741f219c32abe78.NFe70l3rQdXI2qP2'
-    _stats:
-      compendiumSource: Compendium.teriock.properties.Item.61fbeeda5169ef73
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.64
-    img: systems/teriock/src/icons/properties/thrown.webp
-    name: Thrown
-    system:
-      competence:
-        raw: 0
-      description: >-
-        <p>A weapon with this property can be tossed to make a
-        @L[Property:Ranged]{ranged} attack.</p>
-      form: intrinsic
-      identifier: thrown
-      mundane: true
-    type: property
-  - _id: wep0000000000000
-    _key: '!items.effects!3741f219c32abe78.wep0000000000000'
-    _stats:
-      compendiumSource: Compendium.teriock.properties.Item.891de334396620e1
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.63
-    img: systems/teriock/src/icons/properties/weapon.webp
-    name: Weapon
-    system:
-      competence:
-        raw: 0
-      description: >-
-        <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-        @L[Category:Attack abilities]{attack}.</p>
-      form: intrinsic
-      identifier: weapon
-      mundane: true
-    type: property
-  - _id: xEx5SN5o2h6HJfng
-    _key: '!items.effects!3741f219c32abe78.xEx5SN5o2h6HJfng'
-    _stats:
-      compendiumSource: Compendium.teriock.properties.Item.AoJ1VgxHZiiBaH5v
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/properties/armor-voiding.webp
-    name: Armor Voiding
-    system:
-      automations:
-        parameterChanges:
-          _id: parameterChanges
-          changes:
-            - key: system.piercing.raw
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: parent
-              time: normal
-              value: '1'
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 0
-            - 1
-          type: changes
-      competence:
-        raw: 0
-      description: >-
-        <p>An item with this property is always @L[Keyword:Armor
-        Voiding]{AV0}.</p>
-      form: intrinsic
-      identifier: armor-voiding
-      material: false
-      mundane: true
+    transfer: true
     type: property
 folder: 6032372e5812d743
 img: systems/teriock/src/icons/equipment/net.webp

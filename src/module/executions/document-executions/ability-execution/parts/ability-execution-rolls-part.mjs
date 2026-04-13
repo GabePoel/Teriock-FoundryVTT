@@ -14,38 +14,24 @@ export default function AbilityExecutionRollsPart(Base) {
       /** @inheritDoc */
       get flavor() {
         if (this.isAttack) {
-          let flavor = game.i18n.localize(
-            "TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.attack",
-          );
+          let flavor = _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.attack");
           if (this.piercing.ub) {
-            flavor = game.i18n.format(
-              "TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.ub",
-              {
-                flavor,
-              },
-            );
+            flavor = _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.ub", {
+              flavor,
+            });
           }
           if (this.warded) {
-            flavor = game.i18n.format(
-              "TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.warded",
-              {
-                flavor,
-              },
-            );
+            flavor = _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.warded", {
+              flavor,
+            });
           }
           return flavor;
         } else if (this.isFeat) {
-          return game.i18n.localize(
-            "TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.feat",
-          );
+          return _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.feat");
         } else if (this.isBlock) {
-          return game.i18n.localize(
-            "TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.block",
-          );
+          return _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.block");
         } else {
-          return game.i18n.localize(
-            "TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.manifest",
-          );
+          return _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.manifest");
         }
       }
 
@@ -67,7 +53,7 @@ export default function AbilityExecutionRollsPart(Base) {
           };
           if (this.piercing.ub) {
             generalRollOptions.styles.dice.classes += " ub";
-            generalRollOptions.styles.dice.tooltip = game.i18n.localize(
+            generalRollOptions.styles.dice.tooltip = _loc(
               "TERIOCK.TERMS.Properties.unblockable",
             );
           }

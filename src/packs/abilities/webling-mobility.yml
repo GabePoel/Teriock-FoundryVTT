@@ -1,67 +1,63 @@
 _id: 6a64a83171b3a8e2
-_key: '!items!6a64a83171b3a8e2'
+_key: '!effects!6a64a83171b3a8e2'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 6a64a83171b3a8e2
-    _key: '!items.effects!6a64a83171b3a8e2.6a64a83171b3a8e2'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/webling-mobility.webp
-    name: Webling Mobility
-    system:
-      automations:
-        8f623097f9f2a087:
-          _id: 8f623097f9f2a087
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: resist
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - resistance
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: webling-mobility
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You are @L[Keyword:Resistance]{resistant} to effects that would
-          make you @L[Condition:Snared]{snared} or
-          @L[Condition:Immobilized]{immobilized}. The DC for you to escape
-          @L[Condition:Snared]{snares} caused by @L[Ability:Spiga Webbing]{Spiga
-          Webbing} and the @L[Category:Abilities]{abilities} it provides is
-          reduced by 8.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/webling-mobility.webp
 name: Webling Mobility
-type: wrapper
+system:
+  automations:
+    8f623097f9f2a087:
+      _id: 8f623097f9f2a087
+      bonus: '0'
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 1
+        - 0
+      hex: false
+      type: resist
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: unlimited
+  effectTypes:
+    - resistance
+  executionTime:
+    base: passive
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: webling-mobility
+  interaction: manifest
+  maneuver: passive
+  mundane: false
+  overview:
+    base: >-
+      <p>You are @L[Keyword:Resistance]{resistant} to effects that would make
+      you @L[Condition:Snared]{snared} or
+      @L[Condition:Immobilized]{immobilized}. The DC for you to escape
+      @L[Condition:Snared]{snares} caused by @L[Ability:Spiga Webbing]{Spiga
+      Webbing} and the @L[Category:Abilities]{abilities} it provides is reduced
+      by 8.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: self
+  targets:
+    - self
+transfer: true
+type: ability

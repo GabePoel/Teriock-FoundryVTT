@@ -1,38 +1,13 @@
 import { preLocalize } from "../../helpers/localization.mjs";
 
 export const characterOptions = {
-  defaultLight: {
-    negative: false,
-    priority: 0,
-    alpha: 0.5,
-    angle: 360,
-    bright: 0,
-    color: "#000000",
-    coloration: 1,
-    dim: 0,
-    attenuation: 0.5,
-    luminosity: 0.5,
-    saturation: 0,
-    contrast: 0,
-    shadows: 0,
-    animation: {
-      type: null,
-      speed: 5,
-      intensity: 5,
-      reverse: false,
-    },
-    darkness: {
-      min: 0,
-      max: 1,
-    },
-  },
   defaults: {
     hiding: "@snk.pas",
     initiative: "1d20 + @mov",
+    maxPresence: 1,
     perceiving: "@per.pas",
     weight: "pow(3 + @size, 3)",
   },
-  initiative: "1d20 + @mov",
   movementTypes: {
     walk: {
       abbreviation: "wal",
@@ -92,14 +67,15 @@ export const characterOptions = {
   },
   senseTypes: {
     blind: {
-      detectionMode: "blindsight",
+      detectionMode: "blindFighting",
       grantsSight: false,
       label: "TERIOCK.TERMS.Senses.blind",
     },
     dark: {
-      visionMode: "darkvision",
+      detectionMode: "darkVision",
       grantsSight: true,
       label: "TERIOCK.TERMS.Senses.dark",
+      visionMode: "darkvision",
     },
     ethereal: {
       detectionMode: "seeEthereal",

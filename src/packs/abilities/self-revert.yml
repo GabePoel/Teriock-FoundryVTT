@@ -1,92 +1,94 @@
 _id: 6d40ef344cb537d3
-_key: '!items!6d40ef344cb537d3'
+_key: '!effects!6d40ef344cb537d3'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 6d40ef344cb537d3
-    _key: '!items.effects!6d40ef344cb537d3.6d40ef344cb537d3'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/self-revert.webp
-    name: Self Revert
-    system:
-      automations:
-        0de8ced768f08913:
-          _id: 0de8ced768f08913
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: remove
-          status: transformed
-          type: status
-        d9265af9e6f79615:
-          _id: d9265af9e6f79615
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          macro: Compendium.teriock.execution.Macro.66118e00b87f9946
-          trigger: preExecute
-          type: abilityMacro
-        ebf9c2749a0ef8c2:
-          _id: ebf9c2749a0ef8c2
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: remove
-          status: transformed
-          type: end
-      basic: true
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: int
-      form: intrinsic
-      identifier: self-revert
-      interaction: feat
-      maneuver: active
-      overview:
-        base: >-
-          <p>Instead of your normal @L[Core:Feat Interaction]{feat save DC}, the
-          DC of [[lookup name]] is determined by the type of
-          @L[Condition:Transformed]{transformation}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - primal
-      range:
-        unit: self
-      requirements: <p>You are @L[Condition:Transformed]{transformed}.</p>
-      results:
-        save: <p>You cease being @L[Condition:Transformed]{transformed}.</p>
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/self-revert.webp
 name: Self Revert
-type: wrapper
+system:
+  automations:
+    0de8ced768f08913:
+      _id: 0de8ced768f08913
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: remove
+      status: transformed
+      target: false
+      type: status
+    d9265af9e6f79615:
+      _id: d9265af9e6f79615
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      macro: Compendium.teriock.execution.Macro.66118e00b87f9946
+      trigger: preExecute
+      type: abilityMacro
+    ebf9c2749a0ef8c2:
+      _id: ebf9c2749a0ef8c2
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 1
+        - 0
+      relation: remove
+      status: transformed
+      type: end
+  basic: true
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: instant
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: int
+  form: intrinsic
+  identifier: self-revert
+  interaction: feat
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>Instead of your normal @L[Core:Feat Interaction]{feat save DC}, the DC
+      of [[lookup name]] is determined by the type of
+      @L[Condition:Transformed]{transformation}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - primal
+  range:
+    unit: self
+  requirements: <p>You are @L[Condition:Transformed]{transformed}.</p>
+  results:
+    save: <p>You cease being @L[Condition:Transformed]{transformed}.</p>
+  targets:
+    - self
+transfer: true
+type: ability

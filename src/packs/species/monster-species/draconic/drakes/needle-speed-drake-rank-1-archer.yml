@@ -2,7 +2,7 @@ _id: A02zoPJ1Ryt2ojMD
 _key: '!items!A02zoPJ1Ryt2ojMD'
 _stats:
   compendiumSource: Compendium.teriock.classes.Item.d0a34cca4f5a8a7b
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.23
@@ -10,11 +10,11 @@ effects:
   - _id: IVnTbfny3bXUHzhY
     _key: '!items.effects!A02zoPJ1Ryt2ojMD.IVnTbfny3bXUHzhY'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.9c4f05f971df8b65
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.9c4f05f971df8b65
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/archery-training.webp
     name: Archery Training
     system:
@@ -49,81 +49,16 @@ effects:
       standard: true
       targets:
         - self
-    type: ability
-  - _id: qAF62J1i4sqAhczW
-    _key: '!items.effects!A02zoPJ1Ryt2ojMD.qAF62J1i4sqAhczW'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.8bcdde0881ed580a
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/abilities/bow-blocking.webp
-    name: Bow Blocking
-    system:
-      _sup: IVnTbfny3bXUHzhY
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.equipmentChanges.upgrades.classes.bows.bv
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '2'
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-      class: archer
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: bow-blocking
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>@L[Category:Bows]{Bows} you use have their @L[Core:BV]{BV}
-          increased by 2.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
+    transfer: true
     type: ability
   - _id: kicVfFFQVM83uIGK
     _key: '!items.effects!A02zoPJ1Ryt2ojMD.kicVfFFQVM83uIGK'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.9c9a75c65c73fc72
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.9c9a75c65c73fc72
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.11.6
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/crit-elite.webp
     name: Crit Elite
     system:
@@ -147,18 +82,18 @@ effects:
           _id: e789ed5e109ebd1a
           changes:
             - key: system.damage
-              mode: 0
+              phase: normal
               priority: 100
               qualifier: '@dmg'
               target: armament
-              time: normal
+              type: boost
               value: '1'
             - key: system.vitals
-              mode: 5
+              phase: normal
               priority: 10
               qualifier: '1'
               target: armament
-              time: normal
+              type: override
               value: 'true'
           competencies:
             - 0
@@ -212,58 +147,16 @@ effects:
       sustained: true
       targets:
         - self
-    type: ability
-  - _id: duNoV5jOnOxkTHXI
-    _key: '!items.effects!A02zoPJ1Ryt2ojMD.duNoV5jOnOxkTHXI'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.e3f8464e5ee15088
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/free-reload.webp
-    name: Free Reload
-    system:
-      _sup: IVnTbfny3bXUHzhY
-      class: archer
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: a0
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: free-reload
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: <p>Target is reloaded.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      requirements: <p>Target has the @L[Property:Loading]{loading property}.</p>
-      skill: true
-      standard: true
-      targets:
-        - item
+    transfer: true
     type: ability
   - _id: gGESbPOeFPXUymWp
     _key: '!items.effects!A02zoPJ1Ryt2ojMD.gGESbPOeFPXUymWp'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.972b0fc767390b61
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.972b0fc767390b61
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/improvised-items.webp
     name: Improvised Items
     system:
@@ -308,15 +201,16 @@ effects:
       standard: true
       targets:
         - other
+    transfer: true
     type: ability
   - _id: XbFCbez2nXLc0aqO
     _key: '!items.effects!A02zoPJ1Ryt2ojMD.XbFCbez2nXLc0aqO'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.a0c35128baad7e9d
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.a0c35128baad7e9d
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/multi-shot.webp
     name: Multi-Shot
     system:
@@ -358,6 +252,126 @@ effects:
       standard: true
       targets:
         - self
+    transfer: true
+    type: ability
+  - _id: fhEHgroicqg1mNED
+    _key: '!items.effects!A02zoPJ1Ryt2ojMD.fhEHgroicqg1mNED'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.L4Q1MaAAm7rtdqje
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/free-reload.webp
+    name: Free Reload
+    system:
+      _sup: IVnTbfny3bXUHzhY
+      class: archer
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: instant
+      executionTime:
+        base: a0
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: free-reload
+      interaction: manifest
+      maneuver: active
+      mundane: false
+      overview:
+        base: <p>Target is reloaded.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      requirements: <p>Target has the @L[Property:Loading]{loading property}.</p>
+      skill: true
+      standard: true
+      targets:
+        - item
+    transfer: true
+    type: ability
+  - _id: LT1OlTgHYmVP6z2a
+    _key: '!items.effects!A02zoPJ1Ryt2ojMD.LT1OlTgHYmVP6z2a'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8bcdde0881ed580a
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/bow-blocking.webp
+    name: Bow Blocking
+    system:
+      _sup: IVnTbfny3bXUHzhY
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.equipmentChanges.upgrades.classes.bows.bv
+              phase: normal
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              type: add
+              value: '2'
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+      class: archer
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: bow-blocking
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>@L[Category:Bows]{Bows} you use have their @L[Core:BV]{BV}
+          increased by 2.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
     type: ability
 folder: c2095fb63315614f
 img: systems/teriock/src/icons/ranks/rank-1-archer.webp

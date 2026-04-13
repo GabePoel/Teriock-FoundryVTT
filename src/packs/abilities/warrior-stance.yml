@@ -1,183 +1,51 @@
 _id: ae0660890181252f
-_key: '!items!ae0660890181252f'
+_key: '!effects!ae0660890181252f'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: ae0660890181252f
-    _key: '!items.effects!ae0660890181252f.ae0660890181252f'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/warrior-stance.webp
-    name: Warrior Stance
-    system:
-      class: knight
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: warrior-stance
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Triumphant Healing Surge]{Triumphant Healing
-          Surge} and @L[Ability:Withstand]{Withstand}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-      upgrades:
-        competence:
-          attribute: str
-          value: 2
-    type: ability
-  - _id: V19QruKf6ryAQzzg
-    _key: '!items.effects!ae0660890181252f.V19QruKf6ryAQzzg'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.7d0230842661c0e5
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/abilities/triumphant-healing-surge.webp
-    name: Triumphant Healing Surge
-    system:
-      _sup: ae0660890181252f
-      automations:
-        3KyeBPhhzYfwX8ch:
-          _id: 3KyeBPhhzYfwX8ch
-          competencies:
-            - 0
-            - 1
-            - 2
-          consumeStatDice: true
-          forHarm: false
-          heighten:
-            - 0
-            - 1
-          noStatDice: false
-          type: heal
-      class: knight
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - healing
-      executionTime: r0
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: triumphant-healing-surge
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: <p>You @L[Core:Healing]{heal}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-      trigger: <p>@L[Condition:Down]{Dropping} an opponent.</p>
-    type: ability
-  - _id: sGNkdZgYtwUjDM2E
-    _key: '!items.effects!ae0660890181252f.sGNkdZgYtwUjDM2E'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.896d98c58238c8d7
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.11.6
-    img: systems/teriock/src/icons/abilities/withstand.webp
-    name: Withstand
-    system:
-      _sup: ae0660890181252f
-      automations:
-        d873eb939c3b5951:
-          _id: d873eb939c3b5951
-          competencies:
-            - 0
-            - 1
-            - 2
-          hacks:
-            - body
-          heighten:
-            - 1
-            - 0
-          reverse: false
-          type: hacks
-      class: knight
-      competence:
-        raw: 0
-      costs:
-        components:
-          hack:
-            type: tag
-      delivery: self
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - damaging
-      executionTime: r1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: withstand
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>You take the triggering @L[Core:Damage]{damage} as a
-          @L[Damage:Hack]{body hack} instead. All @L[Category:Damage
-          types]{damage types} still apply.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      requirements: <p>You are not @L[Damage:Hack]{body hacked}.</p>
-      skill: true
-      standard: true
-      targets:
-        - self
-      trigger: <p>You would take @L[Core:Damage]{damage}.</p>
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/warrior-stance.webp
 name: Warrior Stance
-type: wrapper
+system:
+  class: knight
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: unlimited
+  executionTime:
+    base: passive
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: warrior-stance
+  interaction: manifest
+  maneuver: passive
+  mundane: false
+  overview:
+    base: >-
+      <p>You gain @L[Ability:Triumphant Healing Surge]{Triumphant Healing Surge}
+      and @L[Ability:Withstand]{Withstand}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  skill: true
+  standard: true
+  targets:
+    - self
+  upgrades:
+    competence:
+      attribute: str
+      value: 2
+transfer: true
+type: ability

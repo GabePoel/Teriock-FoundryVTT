@@ -1,7 +1,7 @@
 import { BaseDocumentExecution } from "../../../../executions/document-executions/_module.mjs";
+import { mix } from "../../../../helpers/construction.mjs";
 import { simplifyTags } from "../../../../helpers/panel.mjs";
 import { toKebabCase } from "../../../../helpers/string.mjs";
-import { mix } from "../../../../helpers/utils.mjs";
 import { FormulaField, IdentifierField } from "../../../fields/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
@@ -41,7 +41,7 @@ export default class PropertySystem extends mix(
       ...super._automationTypes,
       automations.ChangesAutomation,
       automations.TradecraftAutomation,
-      automations.CommonImpactsAutomation,
+      automations.CommonOutcomesAutomation,
       automations.HacksAutomation,
       automations.PropertyMacroAutomation,
       automations.RollAutomation,
@@ -127,7 +127,7 @@ export default class PropertySystem extends mix(
   get embedParts() {
     const parts = super.embedParts;
     if (!this.consumable) {
-      parts.subtitle = TERIOCK.options.effect.form[this.form].name;
+      parts.subtitle = TERIOCK.options.effect.form[this.form].label;
     }
     return parts;
   }
@@ -182,11 +182,9 @@ export default class PropertySystem extends mix(
     return [
       {
         icon: TERIOCK.options.effect.form[this.form].icon,
-        label: game.i18n.localize(
-          "TERIOCK.SYSTEMS.BaseEffect.FIELDS.form.label",
-        ),
+        label: _loc("TERIOCK.SYSTEMS.BaseEffect.FIELDS.form.label"),
         wrappers: [
-          TERIOCK.options.effect.form[this.form].name,
+          TERIOCK.options.effect.form[this.form].label,
           ...simplifyTags(this._metaphysicsTags),
         ],
       },

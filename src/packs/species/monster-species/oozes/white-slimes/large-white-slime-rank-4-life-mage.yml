@@ -2,7 +2,7 @@ _id: zt1a2e1iXu17VsJ1
 _key: '!items!zt1a2e1iXu17VsJ1'
 _stats:
   compendiumSource: Compendium.teriock.classes.Item.be25f9a8217037d7
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.10.23
@@ -10,11 +10,11 @@ effects:
   - _id: i5ClxMJqr4B84tsr
     _key: '!items.effects!zt1a2e1iXu17VsJ1.i5ClxMJqr4B84tsr'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.fbddb3658dcb042e
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.fbddb3658dcb042e
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: combat
@@ -61,67 +61,16 @@ effects:
       standard: true
       targets:
         - self
-    type: ability
-  - _id: iCWPFDiRoNzXJdEM
-    _key: '!items.effects!zt1a2e1iXu17VsJ1.iCWPFDiRoNzXJdEM'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.f68fe7471c02cad3
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/emergency-casting.webp
-    name: Emergency Casting
-    system:
-      _sup: rOcOIi3HSAQOJwRg
-      class: lifeMage
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: self
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: r1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: emergency-casting
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>You cast a @L[Category:Single action spells]{single action spell}
-          at the triggering creature.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - spell
-      trigger: >-
-        <p>You are being @L[Category:Attack abilities]{attacked} by another
-        creature.</p>
+    transfer: true
     type: ability
   - _id: rOcOIi3HSAQOJwRg
     _key: '!items.effects!zt1a2e1iXu17VsJ1.rOcOIi3HSAQOJwRg'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.8725fc3082965adc
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8725fc3082965adc
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     flags:
       teriock:
         category: support
@@ -177,15 +126,16 @@ effects:
         competence:
           attribute: int
           value: 1
+    transfer: true
     type: ability
-  - _id: OMUnhxIHMhSpLVfl
-    _key: '!items.effects!zt1a2e1iXu17VsJ1.OMUnhxIHMhSpLVfl'
+  - _id: 3k51h2iAhNCndDWr
+    _key: '!items.effects!zt1a2e1iXu17VsJ1.3k51h2iAhNCndDWr'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.671450423362e586
-      coreVersion: '13'
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.671450423362e586
+      coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.73
+      systemVersion: 0.12.0
     img: systems/teriock/src/icons/abilities/sheltered-casting.webp
     name: Sheltered Casting
     system:
@@ -202,7 +152,10 @@ effects:
       duration:
         raw: '0'
         unit: instant
-      executionTime: r0
+      executionTime:
+        base: r0
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -212,6 +165,7 @@ effects:
       identifier: sheltered-casting
       interaction: manifest
       maneuver: reactive
+      mundane: false
       overview:
         base: >-
           <p>You may keep the triggering @L[Category:Spells]{spell} from
@@ -228,6 +182,64 @@ effects:
       targets:
         - spell
       trigger: <p>You are casting a @L[Category:Spells]{spell}.</p>
+    transfer: true
+    type: ability
+  - _id: O2hyxRhD5X9Gwe1h
+    _key: '!items.effects!zt1a2e1iXu17VsJ1.O2hyxRhD5X9Gwe1h'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.f68fe7471c02cad3
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.0
+    img: systems/teriock/src/icons/abilities/emergency-casting.webp
+    name: Emergency Casting
+    system:
+      _sup: rOcOIi3HSAQOJwRg
+      class: lifeMage
+      competence:
+        raw: 0
+      costs:
+        primary:
+          mp:
+            formula: '1'
+            type: formula
+      delivery: self
+      duration:
+        raw: '0'
+        unit: instant
+      executionTime:
+        base: r1
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: emergency-casting
+      interaction: manifest
+      maneuver: reactive
+      mundane: false
+      overview:
+        base: >-
+          <p>You cast a @L[Category:Single action spells]{single action spell}
+          at the triggering creature.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - spell
+      trigger: >-
+        <p>You are being @L[Category:Attack abilities]{attacked} by another
+        creature.</p>
+    transfer: true
     type: ability
 folder: ab73d338653acde3
 img: systems/teriock/src/icons/ranks/rank-4-life-mage.webp

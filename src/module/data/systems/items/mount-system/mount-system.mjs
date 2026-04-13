@@ -1,9 +1,9 @@
 import { icons } from "../../../../constants/display/icons.mjs";
+import { mix } from "../../../../helpers/construction.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
 import {
   inferNameFromIdentifier,
   makeIcon,
-  mix,
 } from "../../../../helpers/utils.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
@@ -32,8 +32,8 @@ export default class MountSystem extends mix(
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
-      type: "mount",
       childEffectTypes: ["ability", "fluency", "resource"],
+      type: "mount",
     });
   }
 
@@ -43,11 +43,6 @@ export default class MountSystem extends mix(
       mountType: new IdentifierField({ initial: "" }),
       mounted: new fields.BooleanField({ initial: false, required: false }),
     });
-  }
-
-  /** @inheritDoc */
-  get displayFields() {
-    return ["system.description", "system.flaws"];
   }
 
   /** @inheritDoc */
@@ -62,16 +57,16 @@ export default class MountSystem extends mix(
         (i) => !i.action.toLowerCase().includes("disabled"),
       ),
       {
-        icon: this.mounted ? icons.ui.enabled : icons.ui.disabled,
         action: "toggleMountedDoc",
-        tooltip: this.mounted
-          ? game.i18n.localize("TERIOCK.SYSTEMS.Mount.EMBED.mounted")
-          : game.i18n.localize("TERIOCK.SYSTEMS.Mount.EMBED.unmounted"),
-        condition: this.parent.isOwner,
-        callback: async () => {
+        icon: this.mounted ? icons.ui.enabled : icons.ui.disabled,
+        onClick: async () => {
           if (this.mounted) await this.unmount();
           else await this.mount();
         },
+        tooltip: this.mounted
+          ? _loc("TERIOCK.SYSTEMS.Mount.EMBED.mounted")
+          : _loc("TERIOCK.SYSTEMS.Mount.EMBED.unmounted"),
+        visible: this.parent.isOwner,
       },
     ];
   }
@@ -96,9 +91,9 @@ export default class MountSystem extends mix(
       this._statBar,
       {
         icon: TERIOCK.display.icons.armament.load,
-        label: game.i18n.localize("TERIOCK.SYSTEMS.Mount.PANELS.load"),
+        label: _loc("TERIOCK.SYSTEMS.Mount.PANELS.load"),
         wrappers: [
-          game.i18n.format("TERIOCK.SYSTEMS.Attunable.PANELS.tier", {
+          _loc("TERIOCK.SYSTEMS.Attunable.PANELS.tier", {
             value: this.tier.text,
           }) || "0",
           this.mountType,
@@ -112,20 +107,20 @@ export default class MountSystem extends mix(
     return [
       ...super.getCardContextMenuEntries(doc),
       {
-        name: game.i18n.localize("TERIOCK.SYSTEMS.Mount.MENU.mount"),
+        label: _loc("TERIOCK.SYSTEMS.Mount.MENU.mount"),
         icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
-        callback: this.mount.bind(this),
-        condition:
+        onClick: this.mount.bind(this),
+        visible:
           !this.mounted &&
           this.actor &&
           this.parent._checkValidEditorDocument(doc, { self: false }),
         group: "control",
       },
       {
-        name: game.i18n.localize("TERIOCK.SYSTEMS.Mount.MENU.unmount"),
+        label: _loc("TERIOCK.SYSTEMS.Mount.MENU.unmount"),
         icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
-        callback: this.unmount.bind(this),
-        condition:
+        onClick: this.unmount.bind(this),
+        visible:
           this.mounted &&
           this.actor &&
           this.parent._checkValidEditorDocument(doc, { self: false }),

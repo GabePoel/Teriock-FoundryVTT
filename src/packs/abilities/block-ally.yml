@@ -1,58 +1,52 @@
 _id: 5b580a9f5c496734
-_key: '!items!5b580a9f5c496734'
+_key: '!effects!5b580a9f5c496734'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 5b580a9f5c496734
-    _key: '!items.effects!5b580a9f5c496734.5b580a9f5c496734'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/block-ally.webp
-    name: Block Ally
-    system:
-      basic: true
-      competence:
-        raw: 0
-      delivery: shield
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: r1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: intrinsic
-      identifier: block-ally
-      interaction: block
-      maneuver: reactive
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: contact
-      requirements: >-
-        <p>The item you're using to @L[Core:Block Interaction]{block} has the
-        @L[Property:Blocking]{blocking property}.</p>
-      results:
-        fail: <p>The @L[Core:Attack Interaction]{attack's} effect applies.</p>
-        save: >-
-          <p>The @L[Core:Attack Interaction]{attack's} effect
-          @L[Core:Fizzles]{fizzles}.</p>
-      targets:
-        - attack
-      trigger: >-
-        <p>Another creature within range is being @L[Core:Attack
-        Interaction]{attacked}.</p>
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/block-ally.webp
 name: Block Ally
-type: wrapper
+system:
+  basic: true
+  competence:
+    raw: 0
+  delivery: shield
+  duration:
+    raw: '0'
+    unit: instant
+  executionTime:
+    base: r1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: intrinsic
+  identifier: block-ally
+  interaction: block
+  maneuver: reactive
+  mundane: false
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: contact
+  requirements: >-
+    <p>The item you're using to @L[Core:Block Interaction]{block} has the
+    @L[Property:Blocking]{blocking property}.</p>
+  results:
+    fail: <p>The @L[Core:Attack Interaction]{attack's} effect applies.</p>
+    save: >-
+      <p>The @L[Core:Attack Interaction]{attack's} effect
+      @L[Core:Fizzles]{fizzles}.</p>
+  targets:
+    - attack
+  trigger: >-
+    <p>Another creature within range is being @L[Core:Attack
+    Interaction]{attacked}.</p>
+transfer: true
+type: ability

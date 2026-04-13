@@ -1,53 +1,47 @@
 _id: 8264868fae988d5b
-_key: '!items!8264868fae988d5b'
+_key: '!effects!8264868fae988d5b'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 8264868fae988d5b
-    _key: '!items.effects!8264868fae988d5b.8264868fae988d5b'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/web-capture.webp
-    name: Web Capture
-    system:
-      competence:
-        raw: 0
-      delivery: hand
-      duration:
-        conditions:
-          present:
-            - down
-        raw: '0'
-        unit: unlimited
-      executionTime: a2
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: web-capture
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>Target is @L[Condition:Snared]{snared} and
-          @L[Condition:Terrored]{terrored}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: contact
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/web-capture.webp
 name: Web Capture
-type: wrapper
+system:
+  competence:
+    raw: 0
+  delivery: hand
+  duration:
+    conditions:
+      present:
+        - down
+    raw: '0'
+    unit: unlimited
+  executionTime:
+    base: a2
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: web-capture
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>Target is @L[Condition:Snared]{snared} and
+      @L[Condition:Terrored]{terrored}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: contact
+  targets:
+    - creature
+transfer: true
+type: ability

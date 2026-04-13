@@ -1,87 +1,92 @@
 _id: c91617045c521c39
-_key: '!items!c91617045c521c39'
+_key: '!effects!c91617045c521c39'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: c91617045c521c39
-    _key: '!items.effects!c91617045c521c39.c91617045c521c39'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/arcane-archery.webp
-    name: Arcane Archery
-    system:
-      automations:
-        vU1UGaCECO021oqj:
-          _id: vU1UGaCECO021oqj
-          documents:
-            - Compendium.teriock.tables.RollTable.412794b2cb657a29
-            - Compendium.teriock.tables.RollTable.3b1c5fce9a12eb06
-          expandTables: true
-          noHeighten: true
-          trigger: execute
-          type: useExternal
-      class: archer
-      competence:
-        raw: 0
-      costs:
-        components:
-          material:
-            description: <p>An arrow.</p>
-            type: description
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: self
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: a0
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: arcane-archery
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>You turn an arrow into a @L[Category:Conjured spells]{conjured}
-          @L[Category:Ray delivery spells]{ray spell} of your choice and may
-          cast it as your next @L[Core:Attack Interaction]{attack}. If you
-          choose to make it @L[Keyword:UB]{UB} using @L[Ability:Energy Blast
-          Arrow]{Energy Blast Arrow}, you may turn it into a
-          @L[Category:Conjured spells]{conjured} @L[Category:Ball delivery
-          spells]{ball spell} instead. You are not @L[Core:Proficiency
-          Bonus]{proficient} with this @L[Category:Attack abilities]{attack} and
-          cannot @L[Core:Heightening]{heighten}
-          it.</p><p>@Embed[Compendium.teriock.tables.RollTable.412794b2cb657a29]</p><p>@Embed[Compendium.teriock.tables.RollTable.3b1c5fce9a12eb06]</p>
-        fluent: >-
-          <p>You are now @L[Core:Fluency Bonus]{fluent} with the
-          @L[Category:Spells]{spells} you arrows turn into.</p>
-        proficient: >-
-          <p>You are now @L[Core:Proficiency Bonus]{proficient} with the
-          @L[Category:Spells]{spells} you arrows turn into. You still cannot
-          @L[Core:Heightening]{heighten} them.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/arcane-archery.webp
 name: Arcane Archery
-type: wrapper
+system:
+  automations:
+    vU1UGaCECO021oqj:
+      _id: vU1UGaCECO021oqj
+      automatic: true
+      competence:
+        raw: 0
+      competencies:
+        - 0
+        - 1
+        - 2
+      documents:
+        - Compendium.teriock.tables.RollTable.412794b2cb657a29
+        - Compendium.teriock.tables.RollTable.3b1c5fce9a12eb06
+      expandTables: true
+      heighten:
+        - 0
+        - 1
+      multi: false
+      noHeighten: true
+      overrideCompetence: false
+      trigger: execute
+      type: useExternal
+  class: archer
+  competence:
+    raw: 0
+  costs:
+    components:
+      material:
+        description: <p>An arrow.</p>
+        type: description
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: self
+  duration:
+    raw: '0'
+    unit: instant
+  executionTime:
+    base: a0
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: arcane-archery
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>You turn an arrow into a @L[Category:Conjured spells]{conjured}
+      @L[Category:Ray delivery spells]{ray spell} of your choice and may cast it
+      as your next @L[Core:Attack Interaction]{attack}. If you choose to make it
+      @L[Keyword:UB]{UB} using @L[Ability:Energy Blast Arrow]{Energy Blast
+      Arrow}, you may turn it into a @L[Category:Conjured spells]{conjured}
+      @L[Category:Ball delivery spells]{ball spell} instead. You are not
+      @L[Core:Proficiency Bonus]{proficient} with this @L[Category:Attack
+      abilities]{attack} and cannot @L[Core:Heightening]{heighten}
+      it.</p><p>@Embed[Compendium.teriock.tables.RollTable.412794b2cb657a29]</p><p>@Embed[Compendium.teriock.tables.RollTable.3b1c5fce9a12eb06]</p>
+    fluent: >-
+      <p>You are now @L[Core:Fluency Bonus]{fluent} with the
+      @L[Category:Spells]{spells} you arrows turn into.</p>
+    proficient: >-
+      <p>You are now @L[Core:Proficiency Bonus]{proficient} with the
+      @L[Category:Spells]{spells} you arrows turn into. You still cannot
+      @L[Core:Heightening]{heighten} them.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: self
+  skill: true
+  standard: true
+  targets:
+    - self
+transfer: true
+type: ability

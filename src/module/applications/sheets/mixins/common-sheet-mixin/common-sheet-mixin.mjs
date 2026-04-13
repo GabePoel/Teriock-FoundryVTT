@@ -1,4 +1,4 @@
-import { mix } from "../../../../helpers/utils.mjs";
+import { mix } from "../../../../helpers/construction.mjs";
 import { TeriockTextEditor } from "../../../ux/_module.mjs";
 import { ConfigButtonSheetMixin, IndexButtonSheetMixin } from "../_module.mjs";
 import BaseSheetMixin from "../base-sheet-mixin.mjs";
@@ -79,16 +79,6 @@ export default function CommonSheetMixin(Base) {
               relativeTo: this.document,
             })
           : undefined;
-      }
-
-      /** @inheritDoc */
-      async _onRender(context, options) {
-        await super._onRender(context, options);
-        this._connect("[data-debug]", "contextmenu", () => {
-          if (game.teriock.getSetting("developerMode")) {
-            console.log("Debug", this.document, this);
-          }
-        });
       }
 
       /** @inheritDoc */

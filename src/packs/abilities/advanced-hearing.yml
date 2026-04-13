@@ -1,79 +1,76 @@
 _id: 4b64f37f4f6bc9e7
-_key: '!items!4b64f37f4f6bc9e7'
+_key: '!effects!4b64f37f4f6bc9e7'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 4b64f37f4f6bc9e7
-    _key: '!items.effects!4b64f37f4f6bc9e7.4b64f37f4f6bc9e7'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/advanced-hearing.webp
-    name: Advanced Hearing
-    system:
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.senses.hearing
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '30'
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: changes
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        conditions:
-          absent:
-            - down
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - sensory
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: advanced-hearing
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You can hear all moving creatures within 30 feet. If the creature
-          is breathing, you can hear it even if it is not moving. You can not
-          detect @L[Condition:Silent]{silent} creatures in this way.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-      upgrades:
-        score:
-          attribute: per
-          value: 2
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/advanced-hearing.webp
 name: Advanced Hearing
-type: wrapper
+system:
+  automations:
+    e789ed5e109ebd1a:
+      _id: e789ed5e109ebd1a
+      changes:
+        - key: system.senses.hearing
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: Actor
+          type: upgrade
+          value: '30'
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: changes
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    conditions:
+      absent:
+        - down
+    raw: '0'
+    unit: unlimited
+  effectTypes:
+    - sensory
+  executionTime:
+    base: passive
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: advanced-hearing
+  interaction: manifest
+  maneuver: passive
+  mundane: false
+  overview:
+    base: >-
+      <p>You can hear all moving creatures within 30 feet. If the creature is
+      breathing, you can hear it even if it is not moving. You can not detect
+      @L[Condition:Silent]{silent} creatures in this way.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  targets:
+    - self
+  upgrades:
+    score:
+      attribute: per
+      value: 2
+transfer: true
+type: ability

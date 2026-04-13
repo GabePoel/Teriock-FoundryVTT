@@ -1,71 +1,67 @@
 _id: 588f8a30011c331a
-_key: '!items!588f8a30011c331a'
+_key: '!effects!588f8a30011c331a'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 588f8a30011c331a
-    _key: '!items.effects!588f8a30011c331a.588f8a30011c331a'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/attempt-check.webp
-    name: Attempt Check
-    system:
-      automations:
-        e7f542952fb8fa4a:
-          _id: e7f542952fb8fa4a
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          macro: Compendium.teriock.execution.Macro.3dc3eae66ffb6cab
-          trigger: execute
-          type: abilityMacro
-      basic: true
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: intrinsic
-      identifier: attempt-check
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>You attempt a @L[Core:Tradecrafts]{tradecraft check}. The
-          @L[Core:Game Master]{GM} chooses which
-          @L[Category:Tradecrafts]{tradecraft} and what the DC is. They may also
-          specify who should or shouldn't have knowledge of the result of the
-          [[/roll d20]] roll.
-          </p><p>@Embed[Compendium.teriock.tables.RollTable.07f337f8052ff4fe]</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      results:
-        fail: <p>Results are determined by the @L[Core:Game Master]{GM}.</p>
-        save: <p>Results are determined by the @L[Core:Game Master]{GM}.</p>
-      targets:
-        - other
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/attempt-check.webp
 name: Attempt Check
-type: wrapper
+system:
+  automations:
+    e7f542952fb8fa4a:
+      _id: e7f542952fb8fa4a
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      macro: Compendium.teriock.execution.Macro.3dc3eae66ffb6cab
+      trigger: execute
+      type: abilityMacro
+  basic: true
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: instant
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: intrinsic
+  identifier: attempt-check
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>You attempt a @L[Core:Tradecrafts]{tradecraft check}. The @L[Core:Game
+      Master]{GM} chooses which @L[Category:Tradecrafts]{tradecraft} and what
+      the DC is. They may also specify who should or shouldn't have knowledge of
+      the result of the [[/roll d20]] roll.
+      </p><p>@Embed[Compendium.teriock.tables.RollTable.07f337f8052ff4fe]</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  results:
+    fail: <p>Results are determined by the @L[Core:Game Master]{GM}.</p>
+    save: <p>Results are determined by the @L[Core:Game Master]{GM}.</p>
+  targets:
+    - other
+transfer: true
+type: ability

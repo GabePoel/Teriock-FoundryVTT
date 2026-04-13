@@ -1,90 +1,100 @@
 _id: 4c4cc918d2ab8080
-_key: '!items!4c4cc918d2ab8080'
+_key: '!effects!4c4cc918d2ab8080'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 4c4cc918d2ab8080
-    _key: '!items.effects!4c4cc918d2ab8080.4c4cc918d2ab8080'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/golem-reactivation.webp
-    name: Golem Reactivation
-    system:
-      automations:
-        1728b3a84ea27844:
-          _id: 1728b3a84ea27844
-          common:
-            - revive
-            - bag
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: common
-        8HKmB76Ft338yIWV:
-          _id: 8HKmB76Ft338yIWV
-          consumeStatDice: false
-          type: heal
-        JBf8TF0QndAYSO6i:
-          _id: JBf8TF0QndAYSO6i
-          consumeStatDice: false
-          type: revitalize
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        conditions:
-          present:
-            - down
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - revival
-        - healing
-        - revitalization
-        - automatic
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: golem-reactivation
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You instantly regain all @L[Core:Hit Points and Mana Points]{hit
-          dice} and @L[Core:Hit Points and Mana Points]{mana dice},
-          @L[Category:Revival effects]{revive}, @L[Core:Healing]{heal} once for
-          each of your @L[Core:Hit Points and Mana Points]{hit dice}, and
-          @L[Core:Revitalizing]{revitalize} once for each of your @L[Core:Hit
-          Points and Mana Points]{mana dice}. This does not consume any
-          @L[Core:Hit Points and Mana Points]{hit dice} or @L[Core:Hit Points
-          and Mana Points]{mana dice}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      targets:
-        - self
-      trigger: >-
-        <p>Another creatures @L[Ability:Pay Mana]{spends} 1 or more @L[Core:Hit
-        Points and Mana Points]{MP} into you. This triggers automatically. You
-        cannot choose to not use it if you are able to.</p>
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/golem-reactivation.webp
 name: Golem Reactivation
-type: wrapper
+system:
+  automations:
+    1728b3a84ea27844:
+      _id: 1728b3a84ea27844
+      common:
+        - revive
+        - bag
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 1
+        - 0
+      type: common
+    8HKmB76Ft338yIWV:
+      _id: 8HKmB76Ft338yIWV
+      competencies:
+        - 0
+        - 1
+        - 2
+      consumeStatDice: false
+      forHarm: false
+      heighten:
+        - 0
+        - 1
+      noStatDice: false
+      type: heal
+    JBf8TF0QndAYSO6i:
+      _id: JBf8TF0QndAYSO6i
+      competencies:
+        - 0
+        - 1
+        - 2
+      consumeStatDice: false
+      forHarm: false
+      heighten:
+        - 0
+        - 1
+      type: revitalize
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    conditions:
+      present:
+        - down
+    raw: '0'
+    unit: unlimited
+  effectTypes:
+    - revival
+    - healing
+    - revitalization
+    - automatic
+  executionTime:
+    base: passive
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: golem-reactivation
+  interaction: manifest
+  maneuver: passive
+  mundane: false
+  overview:
+    base: >-
+      <p>You instantly regain all @L[Core:Hit Points and Mana Points]{hit dice}
+      and @L[Core:Hit Points and Mana Points]{mana dice}, @L[Category:Revival
+      effects]{revive}, @L[Core:Healing]{heal} once for each of your @L[Core:Hit
+      Points and Mana Points]{hit dice}, and @L[Core:Revitalizing]{revitalize}
+      once for each of your @L[Core:Hit Points and Mana Points]{mana dice}. This
+      does not consume any @L[Core:Hit Points and Mana Points]{hit dice} or
+      @L[Core:Hit Points and Mana Points]{mana dice}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: self
+  targets:
+    - self
+  trigger: >-
+    <p>Another creatures @L[Ability:Pay Mana]{spends} 1 or more @L[Core:Hit
+    Points and Mana Points]{MP} into you. This triggers automatically. You
+    cannot choose to not use it if you are able to.</p>
+transfer: true
+type: ability

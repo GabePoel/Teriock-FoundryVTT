@@ -1,66 +1,67 @@
 _id: f011ddb94a535975
-_key: '!items!f011ddb94a535975'
+_key: '!effects!f011ddb94a535975'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: f011ddb94a535975
-    _key: '!items.effects!f011ddb94a535975.f011ddb94a535975'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/shattering-armor.webp
-    name: Shattering Armor
-    system:
-      automations:
-        mhGxVy8CcJTEyM2q:
-          _id: mhGxVy8CcJTEyM2q
-          common:
-            - shatter
-          type: common
-      competence:
-        raw: 0
-      delivery: armor
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - destruction
-      executionTime: r1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: shattering-armor
-      interaction: block
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>You may @L[Core:Block Interaction]{block} with a @L[Core:Block
-          Interaction]{BV} equal to your @L[Core:Armor Class]{AV} for the
-          purpose of [[lookup name]]. </p><div class="note"><b>Note:</b> This
-          does not allow you to delivery other @L[Core:Block
-          Interaction]{blocks} in this way.</div>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      results:
-        save: >-
-          <p>@L[Category:Equipment]{Equipment} that delivers @L[Category:Attack
-          abilities]{attack} you @L[Core:Block Interaction]{block} becomes
-          @L[Property:Shattered]{shattered}.</p>
-      targets:
-        - item
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/shattering-armor.webp
 name: Shattering Armor
-type: wrapper
+system:
+  automations:
+    mhGxVy8CcJTEyM2q:
+      _id: mhGxVy8CcJTEyM2q
+      common:
+        - shatter
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 0
+        - 1
+      type: common
+  competence:
+    raw: 0
+  delivery: armor
+  duration:
+    raw: '0'
+    unit: instant
+  effectTypes:
+    - destruction
+  executionTime:
+    base: r1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: shattering-armor
+  interaction: block
+  maneuver: reactive
+  mundane: false
+  overview:
+    base: >-
+      <p>You may @L[Core:Block Interaction]{block} with a @L[Core:Block
+      Interaction]{BV} equal to your @L[Core:Armor Class]{AV} for the purpose of
+      [[lookup name]]. </p><div class="note"><b>Note:</b> This does not allow
+      you to delivery other @L[Core:Block Interaction]{blocks} in this
+      way.</div>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: contact
+  results:
+    save: >-
+      <p>@L[Category:Equipment]{Equipment} that delivers @L[Category:Attack
+      abilities]{attack} you @L[Core:Block Interaction]{block} becomes
+      @L[Property:Shattered]{shattered}.</p>
+  targets:
+    - item
+transfer: true
+type: ability

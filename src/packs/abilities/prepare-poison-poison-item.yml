@@ -1,0 +1,115 @@
+_id: veJknTa8aC7418wv
+_key: '!effects!veJknTa8aC7418wv'
+_stats:
+  compendiumSource: Compendium.teriock.abilities.ActiveEffect.15e9b598e41c0f04
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.12.0
+img: systems/teriock/src/icons/abilities/poison-item.webp
+name: Poison Item
+system:
+  _sup: 9db3f09e7a942624
+  automations:
+    29b275994cf9f5b1:
+      _id: 29b275994cf9f5b1
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: 1d6[toxic]
+      heighten:
+        - 1
+        - 0
+      impact: damage
+      merge: true
+      type: roll
+    3f7fa7707643426f:
+      _id: 3f7fa7707643426f
+      competencies:
+        - 2
+      formula: 1d10[toxic]
+      heighten:
+        - 1
+        - 0
+      impact: damage
+      merge: true
+      type: roll
+    5e4d195ed81a10cc:
+      _id: 5e4d195ed81a10cc
+      competencies:
+        - 1
+        - 2
+      formula: 1d8[toxic]
+      heighten:
+        - 1
+        - 0
+      impact: damage
+      merge: true
+      type: roll
+    743730f25f256b10:
+      _id: 743730f25f256b10
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: include
+      status: poisoned
+      target: false
+      type: status
+  class: assassin
+  competence:
+    raw: 0
+  delivery: hand
+  duration:
+    raw: '24'
+    unit: hour
+  endCondition: <p>Target @L[Condition:Dead]{dies}.</p>
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: poison-item
+  interaction: manifest
+  maneuver: active
+  mundane: false
+  overview:
+    base: >-
+      <p>Target makes a creature become @L[Condition:Poisoned]{poisoned}. The
+      @L[Condition:Poisoned]{poison} deals [[/damage 1d6[toxic]]]
+      @L[Core:Damage]{damage}. The way the item delivers this to its user
+      depends on the nature of the item. If it's food or drink, it's when the
+      item is consumed. The @L[Core:GM]{GM} may approve other cases as well. The
+      item only delivers the @L[Condition:Poisoned]{poison} effect once.</p>
+    fluent: >-
+      <p>The @L[Condition:Poisoned]{poison} instead deals [[/damage
+      1d10[toxic]]] @L[Core:Damage]{damage}.</p>
+    proficient: >-
+      <p>The @L[Condition:Poisoned]{poison} instead deals [[/damage 1d8[toxic]]]
+      @L[Core:Damage]{damage}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - alchemical
+  range:
+    unit: contact
+  requirements: <p>Target is not a weapon.</p>
+  skill: true
+  standard: true
+  targets:
+    - item
+transfer: true
+type: ability

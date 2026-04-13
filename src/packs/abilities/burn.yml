@@ -1,65 +1,64 @@
 _id: 29ffc7a7e41b1e78
-_key: '!items!29ffc7a7e41b1e78'
+_key: '!effects!29ffc7a7e41b1e78'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 29ffc7a7e41b1e78
-    _key: '!items.effects!29ffc7a7e41b1e78.29ffc7a7e41b1e78'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/burn.webp
-    name: Burn
-    system:
-      automations:
-        3a62dd96319ca135:
-          _id: 3a62dd96319ca135
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          relation: apply
-          status: burned
-          type: status
-      basic: true
-      competence:
-        raw: 0
-      delivery: item
-      duration:
-        raw: '0'
-        unit: instant
-      elements:
-        - flame
-      executionTime: a3
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: intrinsic
-      identifier: burn
-      interaction: attack
-      maneuver: active
-      overview:
-        base: <p>Target is @L[Condition:Burned]{burned}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: contact
-      requirements: <p>Delivery item must be @L[Property:Burning]{burning}.</p>
-      targets:
-        - creature
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/burn.webp
 name: Burn
-type: wrapper
+system:
+  automations:
+    3a62dd96319ca135:
+      _id: 3a62dd96319ca135
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      executor: false
+      heighten:
+        - 1
+        - 0
+      relation: apply
+      status: burned
+      target: false
+      type: status
+  basic: true
+  competence:
+    raw: 0
+  delivery: item
+  duration:
+    raw: '0'
+    unit: instant
+  elements:
+    - flame
+  executionTime:
+    base: a3
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: intrinsic
+  identifier: burn
+  interaction: attack
+  maneuver: active
+  mundane: false
+  overview:
+    base: <p>Target is @L[Condition:Burned]{burned}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: contact
+  requirements: <p>Delivery item must be @L[Property:Burning]{burning}.</p>
+  targets:
+    - creature
+transfer: true
+type: ability

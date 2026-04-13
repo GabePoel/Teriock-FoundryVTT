@@ -139,10 +139,9 @@ export default (Base) => {
               TERIOCK.options.ability.expansion[this.expansion.type] || "",
               this.expansion.range.abbreviation,
               formulaExists(this.expansion.cap.raw)
-                ? game.i18n.format(
-                    "TERIOCK.SYSTEMS.Ability.PANELS.expansionCap",
-                    { value: this.expansion.cap.raw },
-                  )
+                ? _loc("TERIOCK.SYSTEMS.Ability.PANELS.expansionCap", {
+                    value: this.expansion.cap.raw,
+                  })
                 : "",
             ]
           : [];

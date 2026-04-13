@@ -26,7 +26,7 @@ export default class ResistanceExecution extends ThresholdExecutionMixin(
 
   /** @inheritDoc */
   get flavor() {
-    return game.i18n.localize("TERIOCK.ROLLS.Resist.label");
+    return _loc("TERIOCK.ROLLS.Resist.label");
   }
 
   /** @inheritDoc */
@@ -37,9 +37,9 @@ export default class ResistanceExecution extends ThresholdExecutionMixin(
   /** @inheritDoc */
   get name() {
     if (this.hex) {
-      return game.i18n.localize("TERIOCK.TERMS.Protections.hexproof.single");
+      return _loc("TERIOCK.TERMS.Protections.hexproof.single");
     }
-    return game.i18n.localize("TERIOCK.TERMS.Protections.resistance.single");
+    return _loc("TERIOCK.TERMS.Protections.resistance.single");
   }
 
   /** @inheritDoc */

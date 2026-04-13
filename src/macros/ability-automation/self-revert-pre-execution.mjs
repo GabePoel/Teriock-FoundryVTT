@@ -2,19 +2,13 @@ const transformationLevels = TERIOCK.options.transformation.level;
 const chosenTransformationLevel = await tm.dialogs.selectDialog(
   transformationLevels,
   {
-    hint: game.i18n.localize("TERIOCK.DIALOGS.Select.TransformationLevel.hint"),
+    hint: _loc("TERIOCK.DIALOGS.Select.TransformationLevel.hint"),
     hintHtml: TERIOCK.content.conditions.transformed,
-    hintTitle: game.i18n.localize(
-      "TERIOCK.DIALOGS.Select.TransformationLevel.hintTitle",
-    ),
+    hintTitle: _loc("TERIOCK.DIALOGS.Select.TransformationLevel.hintTitle"),
     initial: "minor",
-    label: game.i18n.localize(
-      "TERIOCK.DIALOGS.Select.TransformationLevel.label",
-    ),
+    label: _loc("TERIOCK.DIALOGS.Select.TransformationLevel.label"),
     other: true,
-    title: game.i18n.localize(
-      "TERIOCK.DIALOGS.Select.TransformationLevel.title",
-    ),
+    title: _loc("TERIOCK.DIALOGS.Select.TransformationLevel.title"),
   },
 );
 let dc = "none";
@@ -46,10 +40,9 @@ for (let i = 0; i < scope.execution.rolls.length; i++) {
               icon: TERIOCK.display.icons.interaction.feat,
             },
           },
-          flavor: game.i18n.format(
-            "TERIOCK.DIALOGS.Select.TransformationLevel.flavor",
-            { level: transformationLevels[chosenTransformationLevel] },
-          ),
+          flavor: _loc("TERIOCK.DIALOGS.Select.TransformationLevel.flavor", {
+            level: transformationLevels[chosenTransformationLevel],
+          }),
         },
       );
       await newRoll.evaluate();

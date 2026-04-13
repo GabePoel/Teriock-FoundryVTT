@@ -43,8 +43,8 @@ export default (Base) =>
       toggleButton.setAttribute(
         "data-tooltip",
         this._hideInactive
-          ? game.i18n.localize("TERIOCK.SHEETS.Actor.ACTIONS.HideInactive.on")
-          : game.i18n.localize("TERIOCK.SHEETS.Actor.ACTIONS.HideInactive.off"),
+          ? _loc("TERIOCK.SHEETS.Actor.ACTIONS.HideInactive.on")
+          : _loc("TERIOCK.SHEETS.Actor.ACTIONS.HideInactive.off"),
       );
     }
 

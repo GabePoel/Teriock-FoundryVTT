@@ -102,17 +102,17 @@
           "passive": "The effect this is automating is passive and cannot expire in combat."
         }
       },
-      "CommonImpacts": {
+      "CommonOutcomes": {
         "DIALOG": {
-          "content": "Would you like to take the following common impacts? {impacts}"
+          "content": "Would you like to take the following common outcomes?<br />{outcomes}"
         },
         "FIELDS": {
           "common": {
             "hint": "Simple one-off effects that don't require customization.",
-            "label": "Impacts"
+            "label": "Outcomes"
           }
         },
-        "LABEL": "Common Impacts"
+        "LABEL": "Common Outcomes"
       },
       "Competence": {
         "FIELDS": {
@@ -258,27 +258,48 @@
         },
         "LABEL": "Protection"
       },
-      "RegainUses": {
-        "NOTIFICATIONS": {
-          "notConsumable": "The document this is automating is not consumable."
+      "ConfirmationDialog": {
+        "FIELDS": {
+          "showConfirmationDialog": {
+            "label": "Show Confirmation Dialog"
+          }
         },
         "DIALOG": {
-          "text": "Would you like {name} to regain uses?"
+          "title": "{document} {automation} Confirmation",
+          "content": "Would you like to proceed?"
+        },
+        "NOTIFICATIONS": {
+          "noConfirmation": "Running this without a confirmation dialog may cause performance issues or unexpected results."
+        }
+      },
+      "ChangeQuantity": {
+        "NOTIFICATIONS": {
+          "parentNotConsumable": "The parent document of this automation is not consumable."
+        },
+        "DIALOG": {
+          "content": "Would you like to change the quantity of {name} by {amount}?"
         },
         "FIELDS": {
           "formula": {
-            "hint": "An amount of consumable uses to regain. Can be negative.",
+            "hint": "How much to change the consumable's quantity by. Can be positive or negative.",
             "label": "Formula"
           },
+          "identifier": {
+            "label": "Target Identifier"
+          },
+          "targetParent": {
+            "hint": "Whether the document providing this automation should be the one that has its quantity changed.",
+            "label": "Target Parent Document"
+          },
           "trigger": {
-            "hint": "The event that causes this to regain consumable uses.",
+            "hint": "The event that causes the consumable to have its quantity changed.",
             "label": "Trigger"
           }
         },
-        "LABEL": "Regain Uses",
+        "LABEL": "Change Quantity",
         "USAGE": {
-          "description": "Regain uses of {name}.",
-          "roll": "Regain Uses Roll"
+          "description": "The quantity of {name} has changed by {amount}.",
+          "roll": "Change Quantity Roll"
         }
       },
       "Resist": {

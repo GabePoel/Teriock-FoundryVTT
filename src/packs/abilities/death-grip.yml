@@ -1,94 +1,93 @@
 _id: c153d46cde047cf7
-_key: '!items!c153d46cde047cf7'
+_key: '!effects!c153d46cde047cf7'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: c153d46cde047cf7
-    _key: '!items.effects!c153d46cde047cf7.c153d46cde047cf7'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/death-grip.webp
-    name: Death Grip
-    system:
-      automations:
-        8f623097f9f2a087:
-          _id: 8f623097f9f2a087
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: resist
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.protections.resistances.effects
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: stealing
-            - key: system.protections.resistances.abilities
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: Unglue
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: changes
-      class: thief
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - resistance
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: death-grip
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You and items you're @L[Keyword:Bearing]{bearing}
-          @L[Keyword:Resistance]{resist} being @L[Category:Stealing
-          effects]{stolen} or @L[Ability:Unglue]{unglued}. All items that you
-          @L[Keyword:Bearing]{bear} that are @L[Property:Glued]{glued} to you,
-          travel with you when you're @L[Condition:Wisping]{wisping}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - spiritual
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/death-grip.webp
 name: Death Grip
-type: wrapper
+system:
+  automations:
+    8f623097f9f2a087:
+      _id: 8f623097f9f2a087
+      bonus: '0'
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 1
+        - 0
+      hex: false
+      type: resist
+    e789ed5e109ebd1a:
+      _id: e789ed5e109ebd1a
+      changes:
+        - key: system.protections.resistances.effects
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: Actor
+          type: add
+          value: stealing
+        - key: system.protections.resistances.abilities
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: Actor
+          type: add
+          value: Unglue
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: changes
+  class: thief
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: unlimited
+  effectTypes:
+    - resistance
+  executionTime:
+    base: passive
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: death-grip
+  interaction: manifest
+  maneuver: passive
+  mundane: false
+  overview:
+    base: >-
+      <p>You and items you're @L[Keyword:Bearing]{bearing}
+      @L[Keyword:Resistance]{resist} being @L[Category:Stealing effects]{stolen}
+      or @L[Ability:Unglue]{unglued}. All items that you
+      @L[Keyword:Bearing]{bear} that are @L[Property:Glued]{glued} to you,
+      travel with you when you're @L[Condition:Wisping]{wisping}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - spiritual
+  range:
+    unit: self
+  skill: true
+  standard: true
+  targets:
+    - self
+transfer: true
+type: ability

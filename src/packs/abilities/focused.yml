@@ -1,86 +1,85 @@
 _id: 2ab26cf23c7f5232
-_key: '!items!2ab26cf23c7f5232'
+_key: '!effects!2ab26cf23c7f5232'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: 2ab26cf23c7f5232
-    _key: '!items.effects!2ab26cf23c7f5232.2ab26cf23c7f5232'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/focused.webp
-    name: Focused
-    system:
-      automations:
-        8f623097f9f2a087:
-          _id: 8f623097f9f2a087
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: resist
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.protections.resistances.other
-              mode: 2
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: Abilities Fizzling if not Sustained
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          type: changes
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - resistance
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: focused
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>If an effect would interfere with your maintenance of a
-          @L[Category:Sustained abilities]{sustained ability}, you
-          @L[Keyword:Resistance]{resist} your having your
-          @L[Core:Sustained]{sustainment} on it end. In addition, you
-          @L[Keyword:Resistance]{resist} having a @L[Category:Slow
-          abilities]{slow ability} @L[Core:Fizzles]{fizzle} if you fail to use
-          @L[Ability:Sustain]{Sustain} it on your turn.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/focused.webp
 name: Focused
-type: wrapper
+system:
+  automations:
+    8f623097f9f2a087:
+      _id: 8f623097f9f2a087
+      bonus: '0'
+      competencies:
+        - 0
+        - 1
+        - 2
+      heighten:
+        - 1
+        - 0
+      hex: false
+      type: resist
+    e789ed5e109ebd1a:
+      _id: e789ed5e109ebd1a
+      changes:
+        - key: system.protections.resistances.other
+          phase: normal
+          priority: 10
+          qualifier: '1'
+          target: Actor
+          type: add
+          value: Abilities Fizzling if not Sustained
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 1
+        - 0
+      type: changes
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '0'
+    unit: unlimited
+  effectTypes:
+    - resistance
+  executionTime:
+    base: passive
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  identifier: focused
+  interaction: manifest
+  maneuver: passive
+  mundane: false
+  overview:
+    base: >-
+      <p>If an effect would interfere with your maintenance of a
+      @L[Category:Sustained abilities]{sustained ability}, you
+      @L[Keyword:Resistance]{resist} your having your
+      @L[Core:Sustained]{sustainment} on it end. In addition, you
+      @L[Keyword:Resistance]{resist} having a @L[Category:Slow abilities]{slow
+      ability} @L[Core:Fizzles]{fizzle} if you fail to use
+      @L[Ability:Sustain]{Sustain} it on your turn.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  targets:
+    - self
+transfer: true
+type: ability

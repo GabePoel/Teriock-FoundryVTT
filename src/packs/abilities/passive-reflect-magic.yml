@@ -1,59 +1,51 @@
 _id: c863aba184d6edf4
-_key: '!items!c863aba184d6edf4'
+_key: '!effects!c863aba184d6edf4'
 _stats:
-  coreVersion: '13'
+  coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.57
-effects:
-  - _id: c863aba184d6edf4
-    _key: '!items.effects!c863aba184d6edf4.c863aba184d6edf4'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.10.73
-    img: systems/teriock/src/icons/abilities/passive-reflect-magic.webp
-    name: Passive Reflect Magic
-    system:
-      competence:
-        raw: 0
-      delivery: aura
-      duration:
-        raw: '0'
-        unit: instant
-      elements:
-        - storm
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: passive-reflect-magic
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>Target @L[Category:Conjured spells]{spell}
-          @L[Core:Fizzles]{fizzles}, as do any others cast simultaneously within
-          range. Their casters take the spells' effects instead.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-        - divine
-      range:
-        raw: '10'
-        unit: ft
-      requirements: <p>Target is a @L[Category:Conjured spells]{conjured spell}.</p>
-      targets:
-        - spell
-      trigger: >-
-        <p>A @L[Category:Conjured spells]{conjured spell} is used within
-        range.</p>
-    type: ability
+  systemVersion: 0.12.0
 img: systems/teriock/src/icons/abilities/passive-reflect-magic.webp
 name: Passive Reflect Magic
-type: wrapper
+system:
+  competence:
+    raw: 0
+  delivery: aura
+  duration:
+    raw: '0'
+    unit: instant
+  elements:
+    - storm
+  executionTime:
+    base: passive
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: normal
+  identifier: passive-reflect-magic
+  interaction: manifest
+  maneuver: passive
+  mundane: false
+  overview:
+    base: >-
+      <p>Target @L[Category:Conjured spells]{spell} @L[Core:Fizzles]{fizzles},
+      as do any others cast simultaneously within range. Their casters take the
+      spells' effects instead.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+    - divine
+  range:
+    raw: '10'
+    unit: ft
+  requirements: <p>Target is a @L[Category:Conjured spells]{conjured spell}.</p>
+  targets:
+    - spell
+  trigger: <p>A @L[Category:Conjured spells]{conjured spell} is used within range.</p>
+transfer: true
+type: ability

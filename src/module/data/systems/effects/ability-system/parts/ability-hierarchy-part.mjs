@@ -13,9 +13,7 @@ export default (Base) => {
       /** @inheritDoc */
       get makeSuppressed() {
         let suppressed = super.makeSuppressed;
-        if (!suppressed && this.parent.isReference) {
-          suppressed = true;
-        }
+        if (!suppressed && this.parent.isReference) suppressed = true;
         if (!suppressed && this.parent.parent?.type === "equipment") {
           if (!this.parent.parent?.system.equipped) suppressed = true;
           if (
@@ -29,9 +27,7 @@ export default (Base) => {
         }
         if (!suppressed && this.actor && this.parent.sup) {
           const sups = this.parent.allSups;
-          if (sups.some((sup) => !sup.modifiesActor)) {
-            suppressed = true;
-          }
+          if (sups.some((sup) => !sup.modifiesActor)) suppressed = true;
         }
         return suppressed;
       }
