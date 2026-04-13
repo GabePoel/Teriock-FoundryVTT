@@ -3,12 +3,14 @@ import { EvaluationModel } from "../../../models/_module.mjs";
 declare global {
   namespace Teriock.Models {
     export type ConsumableSystemData = {
-      /** <schema> Whether this item is consumable */
+      /** <schema> Whether this document is consumable */
       consumable: boolean;
       /** <schema> Maximum quantity configuration */
       maxQuantity: EvaluationModel;
-      /** <schema> Current quantity of the item */
+      /** <schema> Current quantity of the document */
       quantity: number;
+      /** <schema> The amount of the document to consumer per use */
+      consumptionAmount: number;
     };
   }
 }

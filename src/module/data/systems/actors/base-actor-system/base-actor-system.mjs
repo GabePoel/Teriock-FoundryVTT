@@ -83,6 +83,7 @@ export default class BaseActorSystem extends mix(
         "resource",
       ],
       childItemTypes: [
+        "archetype",
         "body",
         "equipment",
         "mount",

@@ -140,7 +140,10 @@ export default function CommonDocumentMixin(Base) {
         const yes = await super._preCreate(data, options, user);
         if (yes === false) return false;
 
-        if (!data.img) {
+        if (
+          !data.img &&
+          TERIOCK.options.document[this.type]?.doc === this.documentName
+        ) {
           this.updateSource({
             img: systemPath(`icons/documents/${data.type}.svg`),
           });

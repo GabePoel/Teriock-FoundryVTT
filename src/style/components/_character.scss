@@ -95,7 +95,8 @@
 }
 
 body > form:only-child section .character-page,
-.detached {
+.detached,
+.no-floating-tabs {
   .character-tabbers {
     align-items: center;
     display: flex;
@@ -148,15 +149,23 @@ body > form:only-child section .character-page,
 }
 
 .system-teriock {
-  &.detached {
+  &:not(.detached) {
     .character-tabber.attached-tab {
+      display: flex;
+    }
+
+    .character-tabber.detached-tab {
       display: none;
     }
   }
 
-  &:not(.detached) {
-    .character-tabber.detached-tab {
+  &.detached {
+    .character-tabber.attached-tab {
       display: none;
+    }
+
+    .character-tabber.detached-tab {
+      display: flex;
     }
   }
 }

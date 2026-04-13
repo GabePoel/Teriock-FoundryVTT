@@ -25,6 +25,17 @@
         gapless="sheet.blockClassesGapless"
         size="sheet.blockClassesSize"
       }}
+      {{#if (exists archetypes)}}
+        <div class="teriock-block-display-divider"></div>
+        {{> "teriock/sheets/actors/playable/results/search-results"
+          docs=archetypes
+          searchKey="ranks"
+          displayKey="rank"
+          empty=TERIOCK.options.document.archetype.plural
+          gapless="sheet.blockClassesGapless"
+          size="sheet.blockClassesSize"
+        }}
+      {{/if}}
     </div>
   </div>
 </div>

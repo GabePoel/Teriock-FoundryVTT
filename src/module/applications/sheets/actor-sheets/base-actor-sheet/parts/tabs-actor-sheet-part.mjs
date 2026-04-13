@@ -111,12 +111,10 @@ export default (Base) =>
     /** @inheritDoc */
     async _prepareContext(options = {}) {
       const context = await super._prepareContext(options);
-      //context.windowNavigation = !game.settings.get(
-      //  "teriock",
-      //  "floatingActorTabs",
-      //);
-      context.activeTab = this._activeTab;
-      return context;
+      return Object.assign(context, {
+        activeTab: this._activeTab,
+        floatingTabs: game.teriock.getSetting("floatingActorTabs"),
+      });
     }
 
     /**

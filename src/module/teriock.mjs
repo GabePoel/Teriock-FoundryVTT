@@ -195,6 +195,7 @@ foundry.helpers.Hooks.once("init", function () {
       collection: documents.collections.TeriockItems,
       compendiumIndexFields: ["system._sup"],
       dataModels: {
+        archetype: data.systems.items.ArchetypeSystem,
         body: data.systems.items.BodySystem,
         equipment: data.systems.items.EquipmentSystem,
         mount: data.systems.items.MountSystem,
@@ -291,6 +292,12 @@ foundry.helpers.Hooks.once("init", function () {
       makeDefault: false,
     },
     // Items
+    {
+      cls: applications.sheets.item.ArchetypeSheet,
+      doc: documents.TeriockItem,
+      label: "TYPES.Item.Archetype",
+      types: ["archetype"],
+    },
     {
       cls: applications.sheets.item.BodySheet,
       doc: documents.TeriockItem,

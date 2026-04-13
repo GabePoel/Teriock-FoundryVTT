@@ -1,3 +1,4 @@
+export { default as ArchetypeSystem } from "./archetype-system/archetype-system.mjs";
 export { default as BaseItemSystem } from "./base-item-system/base-item-system.mjs";
 export { default as BodySystem } from "./body-system/body-system.mjs";
 export { default as EquipmentSystem } from "./equipment-system/equipment-system.mjs";

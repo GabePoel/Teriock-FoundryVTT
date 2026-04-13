@@ -67,7 +67,7 @@ export default class EquipmentSystem extends mix(
     return [
       ...super._automationTypes,
       automations.ChatMacroAutomation,
-      automations.CommonImpactsAutomation,
+      automations.CommonOutcomesAutomation,
       automations.HacksAutomation,
       automations.RollAutomation,
       automations.TakeAutomation,

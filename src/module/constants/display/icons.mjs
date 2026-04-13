@@ -103,6 +103,7 @@ export const icons = {
   },
   document: {
     ability: "mdi-creation",
+    archetype: "ms-stars",
     attunement: "ms-approval-delegation",
     body: "ms-rib-cage",
     character: "ms-person",
@@ -312,6 +313,7 @@ export const icons = {
   },
   ui: {
     add: "ms-add",
+    amount: "mdi-plus-minus",
     apply: "ms-forward",
     back: "ms-arrow-back",
     badge: "ms-label",

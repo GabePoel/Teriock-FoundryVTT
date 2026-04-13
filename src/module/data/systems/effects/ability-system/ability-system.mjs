@@ -77,7 +77,7 @@ export default class AbilitySystem extends mix(
       automations.ChangesAutomation,
       automations.TradecraftAutomation,
       automations.CombatExpirationAutomation,
-      automations.CommonImpactsAutomation,
+      automations.CommonOutcomesAutomation,
       automations.DurationAutomation,
       automations.FeatAutomation,
       automations.HacksAutomation,

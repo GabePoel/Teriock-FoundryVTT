@@ -77,11 +77,6 @@ export default class RankSystem extends mix(
   }
 
   /** @inheritDoc */
-  get displayFields() {
-    return ["system.description", "system.flaws"];
-  }
-
-  /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
     parts.subtitle = TERIOCK.options.rank[this.archetype].name;
@@ -170,8 +165,8 @@ export default class RankSystem extends mix(
     if (this.parent.checkEditor(userId) && this.actor && this.classRank === 1) {
       if (
         this.archetype !== "everyman" &&
-        !this.actor.powers
-          .map((p) => p.system.identifier)
+        !this.actor.archetypes
+          .map((a) => a.system.identifier)
           .includes(this.archetype)
       ) {
         const archetypeName = TERIOCK.options.rank[this.archetype].name;
@@ -186,14 +181,14 @@ export default class RankSystem extends mix(
   _onDelete(options, userId) {
     super._onDelete(options, userId);
     if (this.parent.checkEditor(userId) && this.actor) {
-      const archetypePowers = this.actor.powers.filter(
-        (p) => p.system.identifier === this.archetype,
+      const archetypes = this.actor.archetypes.filter(
+        (a) => a.system.identifier === this.archetype,
       );
       const needsArchetype =
         this.actor.ranks.filter((r) => r.system.archetype === this.archetype)
           .length > 0;
-      if (!needsArchetype && archetypePowers.length > 0) {
-        for (const p of archetypePowers) {
+      if (!needsArchetype && archetypes.length > 0) {
+        for (const p of archetypes) {
           this.actor._stagedItemDeletions.add(p.id);
         }
       }

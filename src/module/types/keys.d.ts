@@ -62,7 +62,7 @@ declare global {
     export type DeathBagStoneColor =
       keyof typeof options.die.deathBagStoneColor;
     export type Impact = keyof typeof options.impact;
-    export type CommonOperation = keyof typeof options.consequence.common;
+    export type CommonOutcome = keyof typeof options.consequence.common;
 
     // Armament Keys
     export type EquipmentClass = keyof typeof index.equipmentClasses;
@@ -95,9 +95,7 @@ declare global {
     export type Condition = keyof typeof index.conditions;
     export type Cover = (typeof data.cover)[keyof typeof data.cover]["id"];
     export type Hack = (typeof data.hacks)[keyof typeof data.hacks]["id"];
-    export type Transformation =
-      (typeof data.transformations)[keyof typeof data.transformations]["id"];
-    export type Status = Condition | Cover | Hack | Transformation;
+    export type Status = Condition | Cover | Hack;
 
     // Attunement Keys
     export type AttunementType = keyof typeof options.attunement.type;

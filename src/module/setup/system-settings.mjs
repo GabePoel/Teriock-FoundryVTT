@@ -4,15 +4,14 @@ const { fields } = foundry.data;
 
 export const settings = {
   actorSheet: {
-    // TODO: Implement as part of V14.
-    //floatingActorTabs: {
-    //  default: true,
-    //  hint: "TERIOCK.SETTINGS.floatingActorTabs.hint",
-    //  name: "TERIOCK.SETTINGS.floatingActorTabs.name",
-    //  requiresReload: true,
-    //  scope: "client",
-    //  type: Boolean,
-    //},
+    floatingActorTabs: {
+      default: true,
+      hint: "TERIOCK.SETTINGS.floatingActorTabs.hint",
+      name: "TERIOCK.SETTINGS.floatingActorTabs.name",
+      requiresReload: true,
+      scope: "client",
+      type: Boolean,
+    },
     hideBasicAbilitiesByDefault: {
       default: false,
       hint: "TERIOCK.SETTINGS.hideBasicAbilitiesByDefault.hint",

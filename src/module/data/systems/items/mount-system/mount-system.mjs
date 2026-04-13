@@ -46,11 +46,6 @@ export default class MountSystem extends mix(
   }
 
   /** @inheritDoc */
-  get displayFields() {
-    return ["system.description", "system.flaws"];
-  }
-
-  /** @inheritDoc */
   get displayTags() {
     return [...super.displayTags, ...this._attunableTags];
   }

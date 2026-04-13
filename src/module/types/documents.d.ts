@@ -57,6 +57,8 @@ import {
   CharacterSystem,
   CreatureSystem,
 } from "../data/systems/actors/_module.mjs";
+import type ArchetypeSheet from "../applications/sheets/item-sheets/archetype-sheet.mjs";
+import type ArchetypeSystem from "../data/systems/items/archetype-system/archetype-system.mjs";
 
 // Base Document Classes
 // =====================
@@ -103,6 +105,14 @@ declare global {
 // =====
 
 declare global {
+  export type TeriockArchetype = TeriockItem & {
+    sheet: ArchetypeSheet;
+    system: ArchetypeSystem;
+    type: "archetype";
+    _id: ID<TeriockArchetype>;
+    get id(): ID<TeriockArchetype>;
+    get uuid(): UUID<TeriockArchetype>;
+  };
   export type TeriockBody = TeriockItem & {
     sheet: BodySheet;
     system: BodySystem;
@@ -228,6 +238,7 @@ declare global {
     | TeriockProperty
     | TeriockResource;
   export type AnyItem =
+    | TeriockArchetype
     | TeriockBody
     | TeriockEquipment
     | TeriockPower

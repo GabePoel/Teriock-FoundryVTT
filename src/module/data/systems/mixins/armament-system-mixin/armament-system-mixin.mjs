@@ -245,9 +245,8 @@ export default function ArmamentSystemMixin(Base) {
       /** @inheritDoc */
       get displayFields() {
         return [
-          "system.description",
           "system.notes",
-          "system.flaws",
+          ...super.displayFields,
           {
             classes: TERIOCK.display.panel.classes.derived,
             editable: false,

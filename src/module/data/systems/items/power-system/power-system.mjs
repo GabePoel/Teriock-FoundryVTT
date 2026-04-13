@@ -56,11 +56,6 @@ export default class PowerSystem extends mix(
   }
 
   /** @inheritDoc */
-  get displayFields() {
-    return ["system.description", "system.flaws"];
-  }
-
-  /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
     parts.text = dotJoin([powerOptions.type[this.type].name, parts.text]);

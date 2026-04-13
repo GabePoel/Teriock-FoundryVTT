@@ -21,6 +21,14 @@ export default function RetrievalDocumentMixin(Base) {
       }
 
       /**
+       * Child archetypes.
+       * @returns {TeriockArchetype[]}
+       */
+      get archetypes() {
+        return this.visibleChildren.filter((c) => c.type === "archetype");
+      }
+
+      /**
        * Child attunements.
        * @returns {TeriockAttunement[]}
        */
@@ -122,6 +130,14 @@ export default function RetrievalDocumentMixin(Base) {
        */
       async getAbilities() {
         return resolveDocuments(this.abilities);
+      }
+
+      /**
+       * Resolved child archetypes.
+       * @returns {Promise<TeriockArchetype[]>}
+       */
+      async getArchetypes() {
+        return resolveDocuments(this.archetypes);
       }
 
       /**

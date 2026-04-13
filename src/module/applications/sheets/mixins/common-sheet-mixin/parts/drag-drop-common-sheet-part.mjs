@@ -16,7 +16,7 @@ export default (Base) => {
        * @returns {boolean}
        */
       _canDragStart() {
-        return this.isEditable;
+        return true;
       }
 
       /**

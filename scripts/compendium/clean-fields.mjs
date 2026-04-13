@@ -69,6 +69,7 @@ function cleanCommon(doc) {
   if (!doc.system.consumable) {
     delete doc.system.quantity;
     delete doc.system.maxQuantity;
+    delete doc.system.consumptionAmount;
   }
 
   // Clean Retired Tags
@@ -93,14 +94,16 @@ function cleanActiveEffect(doc) {
  */
 function cleanActor(doc) {
   if (doc.prototypeToken) {
+    delete doc.prototypeToken.alpha;
     delete doc.prototypeToken.depth;
+    delete doc.prototypeToken.disposition;
     delete doc.prototypeToken.light;
     delete doc.prototypeToken.lockRotation;
     delete doc.prototypeToken.occludable;
     delete doc.prototypeToken.prependAdjective;
     delete doc.prototypeToken.randomImg;
-    delete doc.prototypeToken.sight;
     delete doc.prototypeToken.rotation;
+    delete doc.prototypeToken.sight;
     if (doc.prototypeToken.ring) {
       delete doc.prototypeToken.ring.colors;
       delete doc.prototypeToken.ring.effects;
@@ -116,6 +119,25 @@ function cleanActor(doc) {
       delete doc.prototypeToken.texture.tint;
     }
   }
+  if (doc.system?.combat) {
+    delete doc.system.combat.attackPenalty;
+    delete doc.system.combat.hasReaction;
+  }
+  if (doc.system.hp) {
+    delete doc.system.hp.max;
+    delete doc.system.hp.min;
+    delete doc.system.hp.morganti;
+    delete doc.system.hp.temp;
+  }
+  if (doc.system.mp) {
+    delete doc.system.mp.max;
+    delete doc.system.mp.min;
+    delete doc.system.mp.morganti;
+    delete doc.system.mp.temp;
+  }
+  delete doc.system.lp;
+  delete doc.system.weight;
+  if (doc.system.scaling) delete doc.system.scaling.lvl;
 }
 
 /**
@@ -223,34 +245,7 @@ function cleanAbility(doc) {
 
   // Clean Costs
   if (doc.system.costs) {
-    delete doc.system.adept;
-    delete doc.system.costs.break;
-    delete doc.system.costs.gp;
-    delete doc.system.costs.hp;
-    delete doc.system.costs.material;
-    delete doc.system.costs.materialCost;
-    delete doc.system.costs.mp;
-    delete doc.system.costs.somatic;
-    delete doc.system.costs.verbal;
-    delete doc.system.gifted;
-    if (doc.system.costs.tweaks) {
-      if (!doc.system.costs.tweaks.adept) {
-        delete doc.system.costs.tweaks.adept;
-      }
-      if (!doc.system.costs.tweaks.gifted) {
-        delete doc.system.costs.tweaks.gifted;
-      }
-      if (!doc.system.costs.tweaks.inept) {
-        delete doc.system.costs.tweaks.inept;
-      }
-      if (
-        !doc.system.costs.tweaks.adept &&
-        !doc.system.costs.tweaks.gifted &&
-        !doc.system.costs.tweaks.inept
-      ) {
-        delete doc.system.costs.tweaks;
-      }
-    }
+    trimObject(doc.system.costs);
   }
 
   // Clean Equipment Connections
@@ -327,4 +322,17 @@ function isZero(formula) {
     (typeof formula === "string" || typeof formula === "number") &&
     (!formula || formula === "0")
   );
+}
+
+/** @param {object} obj */
+function trimObject(obj) {
+  if (!obj) return;
+  if (typeof obj !== "object") return;
+  for (const [k, v] of Object.entries(obj)) {
+    if (!v) delete obj[k];
+    if (typeof v === "object") {
+      trimObject(v);
+      if (v && Object.keys(v).length === 0) delete obj[k];
+    }
+  }
 }

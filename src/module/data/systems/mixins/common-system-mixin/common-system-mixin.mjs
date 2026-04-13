@@ -138,19 +138,20 @@ export default function CommonSystemMixin(Base) {
       /** @returns {Partial<Teriock.EmbedData.EmbedParts>} */
       get embedParts() {
         return {
-          title: this.parent.fullName,
-          img: this.parent.img,
-          text: this._masterText,
           color: this.color,
-          openable: true,
           draggable: true,
-          inactive: !this.parent.active,
-          struck: this.parent.disabled,
-          makeTooltip: false,
-          uuid: this.parent.uuid,
-          id: this.parent.id,
-          parentId: this.parent.parent?.id,
           icons: this.embedIcons,
+          id: this.parent.id,
+          img: this.parent.img,
+          inactive: !this.parent.active,
+          makeTooltip: false,
+          openable: true,
+          parentId: this.parent.parent?.id,
+          struck: this.parent.disabled,
+          subtitle: TERIOCK.options.document[this.parent.type].name,
+          text: this._masterText,
+          title: this.parent.fullName,
+          uuid: this.parent.uuid,
         };
       }
 

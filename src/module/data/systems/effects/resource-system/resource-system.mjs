@@ -21,7 +21,7 @@ export default class ResourceSystem extends mix(
     return [
       ...super._automationTypes,
       automations.TradecraftAutomation,
-      automations.CommonImpactsAutomation,
+      automations.CommonOutcomesAutomation,
       automations.CommonMacroAutomation,
       automations.HacksAutomation,
       automations.RollAutomation,

@@ -288,9 +288,7 @@ export async function massUpdate(documentName, updateData, operation = {}) {
     }),
   ]);
   const documents = [];
-  for (const ud of resolvedUpdates) {
-    documents.push(...ud);
-  }
+  for (const ud of resolvedUpdates) documents.push(...ud);
   return documents;
 }
 
