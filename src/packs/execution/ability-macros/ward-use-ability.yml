@@ -1,0 +1,21 @@
+_id: VTttYAvc7gP0Uwgd
+_key: '!macros!VTttYAvc7gP0Uwgd'
+_stats:
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.12.1
+command: >-
+  const isAttack = !!scope?.execution?.isAttack;
+
+  const thisArmament = !!(scope?.execution?.armament?.uuid ===
+  scope?.item?.uuid);
+
+  if (isAttack && thisArmament) {
+    scope.effect?.delete();
+  }
+folder: SsB1D27Gn6q9lTTV
+img: icons/svg/dice-target.svg
+name: Ward - Use Ability
+scope: global
+type: script
