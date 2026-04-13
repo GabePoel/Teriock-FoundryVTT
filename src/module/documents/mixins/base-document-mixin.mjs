@@ -110,6 +110,14 @@ export default function BaseDocumentMixin(Base) {
       }
 
       /**
+       * The pseudo-document collections.
+       * @returns {Record<string, TypeCollection>}
+       */
+      get pseudoCollections() {
+        return this.system?.pseudoCollections ?? {};
+      }
+
+      /**
        * This document's typed identifier, if it has one.
        * @returns {TypedIdentifier|null}
        */
@@ -211,6 +219,14 @@ export default function BaseDocumentMixin(Base) {
           ],
         );
         return entries;
+      }
+
+      /** @inheritdoc */
+      getEmbeddedCollection(embeddedName) {
+        return (
+          this.pseudoCollections[embeddedName] ??
+          super.getEmbeddedCollection(embeddedName)
+        );
       }
 
       /**

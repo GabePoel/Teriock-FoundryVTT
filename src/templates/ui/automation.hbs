@@ -1,7 +1,10 @@
-<div class="teriock-automation-container collapsible">
+<div
+  class="teriock-automation-container collapsable{{#if automationCollapsed}} collapsed{{/if}}"
+  data-automation-id="{{automation.id}}"
+>
   <header
     class="teriock-automation-header"
-    data-action="toggle-collapse"
+    data-action="toggleAutomationCollapse"
   >
     <div class="teriock-automation-header-name">{{localize automation.label}}</div>
     <div class="teriock-automation-header-buttons">
@@ -168,16 +171,20 @@
       </div>
     </div>
   </header>
-  <div class="teriock-automation-content teriock-form-container">
-    {{#if (exists messages)}}
-      <ul class="notification-container">
-        {{#each messages as |message|}}
-          <li class="notification {{#if message.level}}{{message.level}}{{else}}info{{/if}}">
-            <span>{{localize message.text}}</span>
-          </li>
-        {{/each}}
-      </ul>
-    {{/if}}
-    {{{formEditor}}}
+  <div class="teriock-automation-collapse-target">
+    <div class="teriock-automation-spacer">
+      <div class="teriock-automation-content teriock-form-container">
+        {{#if (exists messages)}}
+          <ul class="notification-container">
+            {{#each messages as |message|}}
+              <li class="notification {{#if message.level}}{{message.level}}{{else}}info{{/if}}">
+                <span>{{localize message.text}}</span>
+              </li>
+            {{/each}}
+          </ul>
+        {{/if}}
+        {{{formEditor}}}
+      </div>
+    </div>
   </div>
 </div>

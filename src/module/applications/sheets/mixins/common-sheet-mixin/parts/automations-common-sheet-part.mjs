@@ -19,8 +19,15 @@ export default (Base) => {
           createAutomation: this._onCreateAutomation,
           deleteAutomation: this._onDeleteAutomation,
           setToggle: this._onSetToggle,
+          toggleAutomationCollapse: this._onToggleAutomationCollapse,
         },
       };
+
+      /** @inheritDoc */
+      constructor(...args) {
+        super(...args);
+        this._automationCollapsedIds = new Set();
+      }
 
       /**
        * Create an automation.
@@ -87,6 +94,26 @@ export default (Base) => {
         await this.document.update({ [path]: Array.from(set) });
       }
 
+      /**
+       * Toggle an automation section's collapsed state.
+       * @param {PointerEvent} event
+       * @param {HTMLElement} target
+       * @this {AutomationsCommonSheetPart}
+       */
+      static _onToggleAutomationCollapse(event, target) {
+        if (event.target.closest(".teriock-automation-header-buttons")) return;
+        const container = target.closest(".teriock-automation-container");
+        const id = container?.dataset.automationId;
+        if (!id || !container) return;
+        if (this._automationCollapsedIds.has(id)) {
+          this._automationCollapsedIds.delete(id);
+          container.classList.remove("collapsed");
+        } else {
+          this._automationCollapsedIds.add(id);
+          container.classList.add("collapsed");
+        }
+      }
+
       /** @inheritDoc */
       async _prepareContext(options = {}) {
         const context = await super._prepareContext(options);
@@ -96,7 +123,14 @@ export default (Base) => {
             automations.map(async (automation) => {
               const formEditor = await automation.getEditor();
               const messages = automation.formMessages;
-              return { automation, formEditor: formEditor.outerHTML, messages };
+              return {
+                automation,
+                automationCollapsed: this._automationCollapsedIds.has(
+                  automation.id,
+                ),
+                formEditor: formEditor.outerHTML,
+                messages,
+              };
             }),
           );
         }

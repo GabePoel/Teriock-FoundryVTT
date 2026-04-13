@@ -70,6 +70,20 @@ export default class PseudoDocument extends EmbeddedDataModel {
   }
 
   /**
+   * Helper function to obtain the relevant pseudo-document from drop data.
+   * @param {Teriock.System.DragData<PseudoDocument>} data
+   * @returns {Promise<PseudoDocument>}
+   */
+  static async fromDropData(data) {
+    const pseudo = await fromUuid(data.uuid);
+    if (!pseudo) throw new Error("Failed to resolve PseudoDocument.");
+    if (pseudo.documentName !== this.metadata.documentName) {
+      throw new Error(`Invalid type provided.`, pseudo);
+    }
+    return pseudo;
+  }
+
+  /**
    * Format an array of pseudo-documents into a collection data object.
    * @template T
    * @param {T[]} docs
@@ -140,9 +154,8 @@ export default class PseudoDocument extends EmbeddedDataModel {
    * The UUID of this pseudo-document.
    * @returns {UUID<PseudoDocument> | null}
    */
-  get uuid() {
-    if (!parent) return this.id ? `${this.documentName}.${this.id}` : null;
-    return [this.parent?.uuid || "", this.documentName, this.id].join(".");
+  get puuid() {
+    return [this.document?.uuid || "", this.documentName, this.id].join(".");
   }
 
   /**
@@ -153,5 +166,13 @@ export default class PseudoDocument extends EmbeddedDataModel {
   async delete(operation = {}) {
     const updateData = { [this.localPath]: _del };
     return this.document.update(updateData, operation);
+  }
+
+  /**
+   * Drag data for storing on initiated drag events.
+   * @returns {Teriock.System.DragData<PseudoDocument>}
+   */
+  toDragData() {
+    return { type: this.documentName, uuid: this.puuid };
   }
 }

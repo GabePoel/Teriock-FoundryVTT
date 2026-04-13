@@ -42,6 +42,13 @@ export default function AutomatableSystemMixin(Base) {
           }),
         });
       }
+
+      /** @inheritDoc */
+      get pseudoCollections() {
+        return Object.assign(super.pseudoCollections, {
+          Automation: this.automations,
+        });
+      }
     }
   );
 }

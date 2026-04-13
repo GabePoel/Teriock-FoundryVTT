@@ -42,12 +42,10 @@ export default function BaseApplicationMixin(Base) {
 
     /** @inheritDoc */
     async _prepareContext(options = {}) {
-      const context = await super._prepareContext(options);
-      Object.assign(context, {
+      return Object.assign(await super._prepareContext(options), {
         TERIOCK,
         appId: this.id,
       });
-      return context;
     }
   }
   return BaseApplication;

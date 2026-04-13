@@ -16,6 +16,14 @@ export default function BaseSystemMixin(Base) {
         return {};
       }
 
+      /**
+       * The pseudo-document collections.
+       * @returns {Record<string, TypeCollection>}
+       */
+      get pseudoCollections() {
+        return {};
+      }
+
       /** @returns {string} */
       get _nameBadge() {
         return "";
