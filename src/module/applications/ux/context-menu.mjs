@@ -27,7 +27,7 @@ export default class TeriockContextMenu extends ContextMenu {
   /**
    * Helper method to quickly generate context menu entries.
    * @param {TeriockDocument} document - Document to be updated.
-   * @param {{name: string; icon: string; value: any; path?: string;}[]} choices - Map to build entries from.
+   * @param {{label: string; icon: string; value: any; path?: string;}[]} choices - Map to build entries from.
    * @param {object} [options] - Options.
    * @param {string} [options.path] - Default path to use for updates.
    * @return {ContextMenuEntry[]}
@@ -35,9 +35,9 @@ export default class TeriockContextMenu extends ContextMenu {
   static makeUpdateEntries(document, choices, options) {
     return choices.map((c) => {
       return {
-        name: c.name,
+        label: c.label,
         icon: c.icon,
-        callback: async () => {
+        onClick: async () => {
           await document.update({
             [c.path || options.path]: c.value,
           });

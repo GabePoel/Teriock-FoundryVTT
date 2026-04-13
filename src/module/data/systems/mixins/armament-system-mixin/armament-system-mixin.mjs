@@ -346,13 +346,13 @@ export default function ArmamentSystemMixin(Base) {
       getCardContextMenuEntries(doc) {
         const entries = [
           {
-            name: _loc("TERIOCK.SYSTEMS.Equipment.USAGE.twoHanded"),
+            label: _loc("TERIOCK.SYSTEMS.Equipment.USAGE.twoHanded"),
             icon: makeIcon(
               TERIOCK.display.icons.equipment.twoHanded,
               "contextMenu",
             ),
-            callback: this.use.bind(this, { twoHanded: true }),
-            condition: this.parent.isOwner && this.hasTwoHandedAttack,
+            onClick: this.use.bind(this, { twoHanded: true }),
+            visible: this.parent.isOwner && this.hasTwoHandedAttack,
             group: "usage",
           },
         ];

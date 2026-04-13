@@ -107,20 +107,20 @@ export default class MountSystem extends mix(
     return [
       ...super.getCardContextMenuEntries(doc),
       {
-        name: _loc("TERIOCK.SYSTEMS.Mount.MENU.mount"),
+        label: _loc("TERIOCK.SYSTEMS.Mount.MENU.mount"),
         icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
-        callback: this.mount.bind(this),
-        condition:
+        onClick: this.mount.bind(this),
+        visible:
           !this.mounted &&
           this.actor &&
           this.parent._checkValidEditorDocument(doc, { self: false }),
         group: "control",
       },
       {
-        name: _loc("TERIOCK.SYSTEMS.Mount.MENU.unmount"),
+        label: _loc("TERIOCK.SYSTEMS.Mount.MENU.unmount"),
         icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
-        callback: this.unmount.bind(this),
-        condition:
+        onClick: this.unmount.bind(this),
+        visible:
           this.mounted &&
           this.actor &&
           this.parent._checkValidEditorDocument(doc, { self: false }),

@@ -259,10 +259,10 @@ export default class SpeciesSystem extends mix(
     return [
       ...super.getCardContextMenuEntries(doc),
       {
-        name: _loc("TERIOCK.SYSTEMS.Species.MENU.setPrimaryTransformation"),
+        label: _loc("TERIOCK.SYSTEMS.Species.MENU.setPrimaryTransformation"),
         icon: makeIcon(TERIOCK.display.icons.effect.transform, "contextMenu"),
-        callback: this.setPrimaryTransformation.bind(this),
-        condition: this.isTransformation && !this.isPrimaryTransformation,
+        onClick: this.setPrimaryTransformation.bind(this),
+        visible: this.isTransformation && !this.isPrimaryTransformation,
         group: "control",
       },
     ];

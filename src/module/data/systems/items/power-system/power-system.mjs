@@ -45,7 +45,7 @@ export default class PowerSystem extends mix(
       }),
       type: new fields.StringField({
         initial: "other",
-        choices: localizeChoices(objectMap(powerOptions.type, (v) => v.name)),
+        choices: localizeChoices(objectMap(powerOptions.type, (v) => v.label)),
       }),
     });
   }
@@ -58,7 +58,7 @@ export default class PowerSystem extends mix(
   /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
-    parts.text = dotJoin([powerOptions.type[this.type].name, parts.text]);
+    parts.text = dotJoin([powerOptions.type[this.type].label, parts.text]);
     parts.subtitle = _loc("TYPES.Item.power");
     return parts;
   }
@@ -84,7 +84,7 @@ export default class PowerSystem extends mix(
         icon: powerOptions.type[this.type].icon,
         label: _loc("TERIOCK.SYSTEMS.Power.FIELDS.type.label"),
         wrappers: [
-          powerOptions.type[this.type].name,
+          powerOptions.type[this.type].label,
           this.maxAv === 0
             ? _loc("TERIOCK.SYSTEMS.Power.PANELS.noArmor")
             : _loc("TERIOCK.SYSTEMS.Power.PANELS.maxAv", {

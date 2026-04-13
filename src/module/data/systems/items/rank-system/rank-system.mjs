@@ -1,6 +1,6 @@
 import { icons } from "../../../../constants/display/icons.mjs";
 import { mix } from "../../../../helpers/construction.mjs";
-import { TextField } from "../../../fields/_module.mjs";
+import { IdentifierField, TextField } from "../../../fields/_module.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
@@ -46,7 +46,7 @@ export default class RankSystem extends mix(
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      archetype: new fields.StringField({ initial: "everyman" }),
+      archetype: new IdentifierField({ initial: "everyman" }),
       className: new fields.StringField({ initial: "journeyman" }),
       classRank: new fields.NumberField({ initial: 0, integer: true, min: 0 }),
       competence: new fields.EmbeddedDataField(CompetenceModel, {

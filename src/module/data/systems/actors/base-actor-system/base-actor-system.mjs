@@ -177,10 +177,10 @@ export default class BaseActorSystem extends mix(
   getCardContextMenuEntries(doc) {
     return [
       {
-        name: _loc("TERIOCK.SYSTEMS.BaseActor.MENU.openToken"),
+        label: _loc("TERIOCK.SYSTEMS.BaseActor.MENU.openToken"),
         icon: makeIcon(TERIOCK.display.icons.document.token, "contextMenu"),
-        condition: () => this.parent.token && this.parent.token.isViewer,
-        callback: async () => this.parent.token.sheet.render(true),
+        visible: () => this.parent.token && this.parent.token.isViewer,
+        onClick: async () => this.parent.token.sheet.render(true),
       },
       ...super.getCardContextMenuEntries(doc),
     ];

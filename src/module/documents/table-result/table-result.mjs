@@ -80,11 +80,11 @@ export default class TeriockTableResult extends mix(
   getCardContextMenuEntries(doc) {
     return [
       {
-        callback: async () =>
+        onClick: async () =>
           await (await fromUuid(this.documentUuid))?.sheet.render(true),
-        condition: () => this.documentUuid,
+        visible: () => this.documentUuid,
         icon: makeIcon(TERIOCK.display.icons.ui.document, "contextMenu"),
-        name: _loc("TERIOCK.SYSTEMS.TableResult.MENU.open"),
+        label: _loc("TERIOCK.SYSTEMS.TableResult.MENU.open"),
       },
       ...super.getCardContextMenuEntries(doc),
     ];

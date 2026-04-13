@@ -78,36 +78,36 @@ export default (Base) => {
         return [
           ...super.getCardContextMenuEntries(doc),
           {
-            name: _loc("TERIOCK.SYSTEMS.Equipment.MENU.identify"),
+            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.identify"),
             icon: makeIcon(
               TERIOCK.display.icons.equipment.identify,
               "contextMenu",
             ),
-            callback: this.identification.identify.bind(this.identification),
-            condition: this.parent.isOwner && !this.identification.identified,
+            onClick: this.identification.identify.bind(this.identification),
+            visible: this.parent.isOwner && !this.identification.identified,
             group: "usage",
           },
           {
-            name: _loc("TERIOCK.SYSTEMS.Equipment.MENU.readMagic"),
+            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.readMagic"),
             icon: makeIcon(
               TERIOCK.display.icons.equipment.readMagic,
               "contextMenu",
             ),
-            callback: this.identification.readMagic.bind(this.identification),
-            condition:
+            onClick: this.identification.readMagic.bind(this.identification),
+            visible:
               this.parent.isOwner &&
               !this.identification.identified &&
               !this.identification.read,
             group: "usage",
           },
           {
-            name: _loc("TERIOCK.SYSTEMS.Equipment.MENU.unidentify"),
+            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.unidentify"),
             icon: makeIcon(
               TERIOCK.display.icons.equipment.unidentify,
               "contextMenu",
             ),
-            callback: this.identification.unidentify.bind(this.identification),
-            condition:
+            onClick: this.identification.unidentify.bind(this.identification),
+            visible:
               this.parent.isOwner &&
               this.identification.identified &&
               game.user.isGM,

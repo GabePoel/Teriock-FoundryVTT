@@ -120,41 +120,41 @@ export default (Base) => {
         return [
           ...super.getCardContextMenuEntries(doc),
           {
-            name: _loc("TERIOCK.SYSTEMS.Equipment.MENU.equip"),
+            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.equip"),
             icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
-            callback: this.equip.bind(this),
-            condition:
+            onClick: this.equip.bind(this),
+            visible:
               this.canEquip &&
               this.parent._checkValidEditorDocument(doc, { self: false }),
             group: "control",
           },
           {
-            name: _loc("TERIOCK.SYSTEMS.Equipment.MENU.unequip"),
+            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.unequip"),
             icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
-            callback: this.unequip.bind(this),
-            condition:
+            onClick: this.unequip.bind(this),
+            visible:
               this.canUnequip &&
               this.parent._checkValidEditorDocument(doc, { self: false }),
             group: "control",
           },
           {
-            name: _loc("TERIOCK.SYSTEMS.Equipment.MENU.glue"),
+            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.glue"),
             icon: makeIcon(TERIOCK.display.icons.equipment.glue, "contextMenu"),
-            callback: this.glue.bind(this),
-            condition:
+            onClick: this.glue.bind(this),
+            visible:
               !this.glued &&
               this.actor &&
               this.parent._checkValidEditorDocument(doc, { self: false }),
             group: "control",
           },
           {
-            name: _loc("TERIOCK.SYSTEMS.Equipment.MENU.unglue"),
+            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.unglue"),
             icon: makeIcon(
               TERIOCK.display.icons.equipment.unglue,
               "contextMenu",
             ),
-            callback: this.unglue.bind(this),
-            condition:
+            onClick: this.unglue.bind(this),
+            visible:
               this.glued &&
               this.actor &&
               this.parent._checkValidEditorDocument(doc, { self: false }),

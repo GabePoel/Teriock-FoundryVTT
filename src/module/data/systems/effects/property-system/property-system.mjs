@@ -127,7 +127,7 @@ export default class PropertySystem extends mix(
   get embedParts() {
     const parts = super.embedParts;
     if (!this.consumable) {
-      parts.subtitle = TERIOCK.options.effect.form[this.form].name;
+      parts.subtitle = TERIOCK.options.effect.form[this.form].label;
     }
     return parts;
   }
@@ -184,7 +184,7 @@ export default class PropertySystem extends mix(
         icon: TERIOCK.options.effect.form[this.form].icon,
         label: _loc("TERIOCK.SYSTEMS.BaseEffect.FIELDS.form.label"),
         wrappers: [
-          TERIOCK.options.effect.form[this.form].name,
+          TERIOCK.options.effect.form[this.form].label,
           ...simplifyTags(this._metaphysicsTags),
         ],
       },

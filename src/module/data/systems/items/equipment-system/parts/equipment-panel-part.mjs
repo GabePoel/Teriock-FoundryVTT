@@ -22,7 +22,7 @@ export default (Base) => {
             icon: TERIOCK.options.equipment.powerLevel[this.powerLevel].icon,
             label: _loc("TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentType.label"),
             wrappers: [
-              TERIOCK.options.equipment.powerLevel[this.powerLevel].name,
+              TERIOCK.options.equipment.powerLevel[this.powerLevel].label,
               inferNameFromIdentifier(this.equipmentType, "equipment"),
               this.range.description,
               ...simplifyTags(this._armamentTags),

@@ -31,7 +31,7 @@ export default (Base) => {
       /**
        * Build and connect context menu entries that update this document from some object.
        * @param {string} cssClass - The CSS class for elements to attach the menu to.
-       * @param {object} obj - Object with keys, names, and icons.
+       * @param {object} obj - Object with keys, labels, and icons.
        * @param {string} path - Path of document to update.
        * @param {string} eventName - The event name to trigger the menu.
        */
@@ -40,9 +40,9 @@ export default (Base) => {
           cssClass,
           Object.entries(obj).map(([k, v]) => {
             return {
-              name: v.name || toTitleCase(k),
+              label: v.name || toTitleCase(k),
               icon: makeIcon(v.icon, "contextMenu"),
-              callback: async () => {
+              onClick: async () => {
                 await this.document.update({ [path]: k });
               },
             };

@@ -204,19 +204,19 @@ export default function ChildSystemMixin(Base) {
         entries.push(
           ...[
             {
-              name: this.useText,
+              label: this.useText,
               icon: makeIcon(this.useIcon, "contextMenu"),
-              callback: async () => {
+              onClick: async () => {
                 await this.use();
               },
-              condition: this.isUsable,
+              visible: this.isUsable,
               group: "usage",
             },
             {
-              name: _loc("TERIOCK.SYSTEMS.Child.MENU.enable"),
+              label: _loc("TERIOCK.SYSTEMS.Child.MENU.enable"),
               icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
-              callback: this.parent.enable.bind(this.parent),
-              condition:
+              onClick: this.parent.enable.bind(this.parent),
+              visible:
                 this.parent.parent?.isOwner &&
                 this.parent.disabled &&
                 this.parent.type !== "equipment" &&
@@ -225,10 +225,10 @@ export default function ChildSystemMixin(Base) {
               group: "control",
             },
             {
-              name: _loc("TERIOCK.SYSTEMS.Child.MENU.disable"),
+              label: _loc("TERIOCK.SYSTEMS.Child.MENU.disable"),
               icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
-              callback: this.parent.disable.bind(this.parent),
-              condition:
+              onClick: this.parent.disable.bind(this.parent),
+              visible:
                 this.parent.parent?.isOwner &&
                 !this.parent.disabled &&
                 this.parent.type !== "equipment" &&
@@ -238,18 +238,18 @@ export default function ChildSystemMixin(Base) {
               group: "control",
             },
             {
-              name: _loc("TERIOCK.SYSTEMS.Child.MENU.openGmNotes"),
+              label: _loc("TERIOCK.SYSTEMS.Child.MENU.openGmNotes"),
               icon: makeIcon(TERIOCK.display.icons.ui.notes, "contextMenu"),
-              callback: async () => {
+              onClick: async () => {
                 await this.gmNotesOpen();
               },
-              condition: game.user.isGM,
+              visible: game.user.isGM,
               group: "open",
             },
             {
-              name: _loc("TERIOCK.SYSTEMS.Child.MENU.openImage"),
+              label: _loc("TERIOCK.SYSTEMS.Child.MENU.openImage"),
               icon: makeIcon(TERIOCK.display.icons.ui.image, "contextMenu"),
-              callback: async () => {
+              onClick: async () => {
                 await new ImagePopout({
                   src: this.parent.img,
                   uuid: this.parent.uuid,
@@ -259,27 +259,27 @@ export default function ChildSystemMixin(Base) {
               group: "open",
             },
             {
-              name: _loc("TERIOCK.SYSTEMS.Child.MENU.shareImage"),
+              label: _loc("TERIOCK.SYSTEMS.Child.MENU.shareImage"),
               icon: makeIcon(
                 TERIOCK.display.icons.ui.shareImage,
                 "contextMenu",
               ),
-              callback: this.parent.chatImage.bind(this.parent),
+              onClick: this.parent.chatImage.bind(this.parent),
               group: "share",
             },
             {
-              name: _loc("TERIOCK.SYSTEMS.Child.MENU.shareWriteup"),
+              label: _loc("TERIOCK.SYSTEMS.Child.MENU.shareWriteup"),
               icon: makeIcon(TERIOCK.display.icons.ui.shareText, "contextMenu"),
-              callback: this.parent.toMessage.bind(this.parent),
+              onClick: this.parent.toMessage.bind(this.parent),
               group: "share",
             },
             {
-              name: _loc("TERIOCK.SYSTEMS.Common.MENU.duplicate"),
+              label: _loc("TERIOCK.SYSTEMS.Common.MENU.duplicate"),
               icon: makeIcon(TERIOCK.display.icons.ui.duplicate, "contextMenu"),
-              callback: async () => {
+              onClick: async () => {
                 await this.parent.duplicate();
               },
-              condition: () =>
+              visible: () =>
                 this.parent._checkValidEditorDocument(doc, { self: false }),
               group: "document",
             },

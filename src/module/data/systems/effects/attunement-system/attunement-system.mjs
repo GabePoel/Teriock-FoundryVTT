@@ -34,7 +34,7 @@ export default class AttunementSystem extends BaseEffectSystem {
       type: new fields.StringField({
         initial: "effect",
         choices: localizeChoices(
-          objectMap(attunementOptions.type, (v) => v.name),
+          objectMap(attunementOptions.type, (v) => v.label),
         ),
       }),
       target: new fields.DocumentIdField({
@@ -76,7 +76,7 @@ export default class AttunementSystem extends BaseEffectSystem {
     parts.subtitle = _loc("TERIOCK.SYSTEMS.Attunement.PANELS.subtitle", {
       tier: this.tier || 0,
     });
-    parts.text = dotJoin([attunementOptions.type[this.type].name, this.usage]);
+    parts.text = dotJoin([attunementOptions.type[this.type].label, this.usage]);
     return parts;
   }
 
@@ -93,7 +93,7 @@ export default class AttunementSystem extends BaseEffectSystem {
         icon: TERIOCK.display.icons.attunable.tier,
         label: _loc("TERIOCK.SYSTEMS.Attunable.FIELDS.tier.raw.label"),
         wrappers: [
-          attunementOptions.type[this.type].name,
+          attunementOptions.type[this.type].label,
           _loc("TERIOCK.SYSTEMS.Attunable.PANELS.tier", {
             value: this.tier || 0,
           }),
@@ -174,14 +174,14 @@ export default class AttunementSystem extends BaseEffectSystem {
           ![
             _loc("TERIOCK.SYSTEMS.Common.MENU.delete"),
             _loc("TERIOCK.SYSTEMS.Common.MENU.duplicate"),
-          ].includes(e.name),
+          ].includes(e.label),
       );
     return [
       ...entries,
       {
-        name: _loc("TERIOCK.SYSTEMS.Attunable.MENU.deattune"),
+        label: _loc("TERIOCK.SYSTEMS.Attunable.MENU.deattune"),
         icon: makeIcon(TERIOCK.display.icons.attunable.deattune, "contextMenu"),
-        callback: async () => await this.deattune(),
+        onClick: async () => await this.deattune(),
         group: "attunement",
       },
     ];

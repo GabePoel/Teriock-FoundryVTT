@@ -155,18 +155,14 @@ function sortKeys(obj) {
   if (typeof obj !== "object" || !obj) return;
   const keys = Object.keys(obj).sort();
   const cache = { ...obj };
-  for (const key in obj) {
-    delete obj[key];
-  }
+  for (const key in obj) delete obj[key];
   for (const key of keys) {
     obj[key] = cache[key];
     if (typeof obj[key] === "object" && !Array.isArray(obj[key])) {
       sortKeys(obj[key]);
     }
     if (typeof obj[key] === "object" && Array.isArray(obj[key])) {
-      for (const i of obj[key]) {
-        sortKeys(i);
-      }
+      for (const i of obj[key]) sortKeys(i);
     }
   }
 }

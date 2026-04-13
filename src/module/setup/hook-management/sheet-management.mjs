@@ -59,13 +59,13 @@ function addCardContextMenuEntriesToHeader(application, controls) {
   Object.values(groups).forEach((g) => sorted.push(...g));
   sorted.push(...ungrouped);
   controls.push(
-    ...sorted.map((e) => {
+    ...entries.map((e) => {
       return {
         group: e.group,
         icon: e.icon.split('class="')[1].split('">')[0],
-        label: e.name,
-        onClick: e.callback,
-        visible: e.condition,
+        label: e.label,
+        onClick: e.onClick,
+        visible: e.visible,
       };
     }),
   );

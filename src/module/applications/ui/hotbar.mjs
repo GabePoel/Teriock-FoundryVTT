@@ -38,7 +38,7 @@ export default class TeriockHotbar extends Hotbar {
   _getContextMenuOptions() {
     const options = super._getContextMenuOptions();
     options.push({
-      callback: async (li) => {
+      onClick: async (li) => {
         const macro = this.#getMacroForSlot(li);
         if (macro.getFlag("teriock", "macroType") === "useGeneral") {
           const actor = game.actors.default;
@@ -53,14 +53,14 @@ export default class TeriockHotbar extends Hotbar {
           await doc?.sheet.render(true);
         }
       },
-      condition: (li) => {
+      visible: (li) => {
         const macro = this.#getMacroForSlot(li);
         return ["useGeneral", "useLinked"].includes(
           macro.getFlag("teriock", "macroType"),
         );
       },
       icon: makeIcon(TERIOCK.display.icons.ui.openWindow, "contextMenu"),
-      name: "Open Document Sheet",
+      label: "Open Document Sheet",
     });
     return options;
   }

@@ -22,32 +22,32 @@ export const effectOptions = {
   cover: ["halfCover", "threeQuartersCover", "fullCover"],
   form: {
     special: {
-      name: "TERIOCK.TERMS.EffectForm.special",
+      label: "TERIOCK.TERMS.EffectForm.special",
       icon: icons.form.special,
       color: colors.purple,
     },
     normal: {
-      name: "TERIOCK.TERMS.EffectForm.normal",
+      label: "TERIOCK.TERMS.EffectForm.normal",
       icon: icons.form.normal,
       color: colors.green,
     },
     gifted: {
-      name: "TERIOCK.TERMS.EffectForm.gifted",
+      label: "TERIOCK.TERMS.EffectForm.gifted",
       icon: icons.form.gifted,
       color: colors.blue,
     },
     echo: {
-      name: "TERIOCK.TERMS.EffectForm.echo",
+      label: "TERIOCK.TERMS.EffectForm.echo",
       icon: icons.form.echo,
       color: colors.orange,
     },
     intrinsic: {
-      name: "TERIOCK.TERMS.EffectForm.intrinsic",
+      label: "TERIOCK.TERMS.EffectForm.intrinsic",
       icon: icons.form.intrinsic,
       color: colors.grey,
     },
     flaw: {
-      name: "TERIOCK.TERMS.EffectForm.flaw",
+      label: "TERIOCK.TERMS.EffectForm.flaw",
       icon: icons.form.flaw,
       color: colors.red,
     },
@@ -59,4 +59,4 @@ export const effectOptions = {
 preLocalize("options.effect.simpleChangeMode");
 preLocalize("options.effect.foundryChangeMode");
 preLocalize("options.effect.changeMode");
-preLocalize("options.effect.form", { key: "name" });
+preLocalize("options.effect.form", { key: "label" });

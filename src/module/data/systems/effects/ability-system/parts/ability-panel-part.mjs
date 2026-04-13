@@ -54,7 +54,7 @@ export default (Base) => {
             icon: TERIOCK.options.effect.form[this.form].icon,
             label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.metaphysics"),
             wrappers: [
-              TERIOCK.options.effect.form[this.form].name || "",
+              TERIOCK.options.effect.form[this.form].label || "",
               ...simplifyTags(this._metaphysicsTags),
             ],
           },

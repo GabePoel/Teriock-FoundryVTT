@@ -188,24 +188,24 @@ export default function BaseDocumentMixin(Base) {
         entries.push(
           ...[
             {
-              name: _loc("TERIOCK.SYSTEMS.Common.MENU.openSource"),
+              label: _loc("TERIOCK.SYSTEMS.Common.MENU.openSource"),
               icon: makeIcon(
                 TERIOCK.display.icons.ui.openWindow,
                 "contextMenu",
               ),
-              callback: async () => {
+              onClick: async () => {
                 const resolved = await resolveDocument(this.master);
                 if (resolved) await resolved.sheet?.render(true);
               },
-              condition: () =>
+              visible: () =>
                 this.master?.isViewer && doc?.uuid !== this.master?.uuid,
               group: "open",
             },
             {
-              name: _loc("TERIOCK.SYSTEMS.Common.MENU.delete"),
+              label: _loc("TERIOCK.SYSTEMS.Common.MENU.delete"),
               icon: makeIcon(TERIOCK.display.icons.ui.delete, "contextMenu"),
-              callback: async () => await this.deleteDialog(),
-              condition: () => this._checkValidEditorDocument(doc),
+              onClick: async () => await this.deleteDialog(),
+              visible: () => this._checkValidEditorDocument(doc),
               group: "document",
             },
           ],

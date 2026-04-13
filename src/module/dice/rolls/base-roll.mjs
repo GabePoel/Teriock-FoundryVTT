@@ -310,9 +310,9 @@ export default class BaseRoll extends Roll {
   _getFormulaContextOptions(options = {}) {
     return [
       {
-        name: _loc("TERIOCK.ROLLS.Base.reroll"),
+        label: _loc("TERIOCK.ROLLS.Base.reroll"),
         icon: makeIcon(TERIOCK.display.icons.roll.reroll, "contextMenu"),
-        callback: async () => {
+        onClick: async () => {
           const reroll = this.clone();
           await reroll.evaluate();
           await reroll.toMessage(
