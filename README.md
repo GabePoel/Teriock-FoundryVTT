@@ -12,7 +12,7 @@ Teriock can be installed by copying the following [manifest link](./system.json)
 window.
 
 ```
-https://raw.githubusercontent.com/GabePoel/Teriock-FoundryVTT/refs/heads/main/system.json
+https://github.com/GabePoel/Teriock-FoundryVTT/releases/latest/download/manifest.json
 ```
 
 ## Features
