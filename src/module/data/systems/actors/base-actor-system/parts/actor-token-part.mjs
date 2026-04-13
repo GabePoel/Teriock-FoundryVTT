@@ -59,31 +59,6 @@ export default (Base) => {
       }
 
       /**
-       * Prepare token lighting changes.
-       */
-      _prepareTokenLighting() {
-        if (
-          this.actor.statuses.has("ethereal") &&
-          this.actor.getSetting("token.autoLighting")
-        ) {
-          this._tokenChanges.push({
-            key: "light.dim",
-            phase: "initial",
-            priority: 60,
-            type: "override",
-            value: 0,
-          });
-          this._tokenChanges.push({
-            key: "light.bright",
-            phase: "initial",
-            priority: 60,
-            type: "override",
-            value: 0,
-          });
-        }
-      }
-
-      /**
        * Prepare token vision changes.
        */
       _prepareTokenVision() {
@@ -170,7 +145,6 @@ export default (Base) => {
         super.prepareDerivedData();
         this._prepareTokenColor();
         this._prepareTokenDetectionModes();
-        this._prepareTokenLighting();
         this._prepareTokenVision();
         this.actor.tokenActiveEffectChanges["initial"].push(
           ...this._tokenChanges,

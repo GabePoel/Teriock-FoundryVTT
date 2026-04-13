@@ -2,7 +2,7 @@ import { BaseAutomation } from "../../../../../data/pseudo-documents/automations
 import { localizeChoices } from "../../../../../helpers/localization.mjs";
 import { objectMap } from "../../../../../helpers/utils.mjs";
 import { selectDialog } from "../../../../dialogs/select-dialog.mjs";
-import { TeriockDragDrop, TeriockTextEditor } from "../../../../ux/_module.mjs";
+import { TeriockTextEditor } from "../../../../ux/_module.mjs";
 
 /**
  * @param {typeof TeriockDocumentSheet} Base
@@ -141,24 +141,6 @@ export default (Base) => {
           return;
         }
         await BaseAutomation.create(data, { parent: this.document });
-      }
-
-      /** @inheritDoc */
-      async _onRender(context, options) {
-        await super._onRender(context, options);
-        new TeriockDragDrop({
-          callbacks: {
-            dragstart: this._onDragStart.bind(this),
-            dragover: this._onDragOver.bind(this),
-            drop: this._onDropAutomation.bind(this),
-          },
-          dragSelector: ".teriock-automation-header",
-          dropSelector: null,
-          permissions: {
-            dragstart: this._canDragStart.bind(this),
-            drop: this._canDrop.bind(this),
-          },
-        }).bind(this.element);
       }
 
       /** @inheritDoc */

@@ -160,7 +160,7 @@ export default function ChildSystemMixin(Base) {
       /** @returns {boolean} */
       get makeSuppressed() {
         return (
-          !!(this.parent.elder && !this.parent.elder?.active) ||
+          this.parent.elder?.active === false ||
           !!this.qualifiers.suppressed.value ||
           !!this.parent.isEphemeral
         );

@@ -124,6 +124,22 @@ export default class TeriockTokenDocument extends mix(
     super.prepareDerivedData();
     this.applyActiveEffects("derivation");
     this.applyActiveEffects("completion");
+    if (
+      this.hasStatusEffect("ethereal") &&
+      this.actor.getSetting("token.autoLighting")
+    ) {
+      const lightRange = Math.max(this.light.bright, this.light.dim);
+      foundry.utils.setProperty(this, "detectionModes.spectral.enabled", true);
+      foundry.utils.setProperty(
+        this,
+        "detectionModes.spectral.range",
+        lightRange,
+      );
+      this.sight.range = lightRange;
+      this.sight.angle = this.light.angle;
+      this.light.bright = 0;
+      this.light.dim = 0;
+    }
   }
 
   /** @inheritDoc */

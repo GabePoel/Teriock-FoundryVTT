@@ -89,7 +89,12 @@ export default (Base) => {
         const dropData = TeriockTextEditor.getDragEventData(event);
         if (dropData.startSheet === this.id) return false;
         let out;
-        if (["ActiveEffect", "Item", "Actor"].includes(dropData.type)) {
+        if (
+          dropData.type === "Automation" &&
+          typeof this._onDropAutomation === "function"
+        ) {
+          this._onDropAutomation(event);
+        } else if (["ActiveEffect", "Item", "Actor"].includes(dropData.type)) {
           out = await this._onDropChild(event, dropData);
         } else if (dropData.type === "JournalEntryPage") {
           out = await this._onDropJournalEntryPage(event, dropData);

@@ -206,7 +206,8 @@ export default function BaseDocumentMixin(Base) {
                 if (resolved) await resolved.sheet?.render(true);
               },
               visible: () =>
-                this.master?.isViewer && doc?.uuid !== this.master?.uuid,
+                this.master?.isViewer !== false &&
+                doc?.uuid !== this.master?.uuid,
               group: "open",
             },
             {
