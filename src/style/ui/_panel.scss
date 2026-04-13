@@ -74,18 +74,7 @@
 }
 
 .teriock-panel-content {
-  position: relative;
-
-  &::after {
-    background: transparent;
-    border-top: 1px var(--panel-divider-style) var(--color-panel-divider);
-    content: "";
-    height: 0;
-    left: var(--panel-padding);
-    position: absolute;
-    right: var(--panel-padding);
-    top: 0;
-  }
+  @include mixins.pseudo-top-border(var(--panel-padding));
 
   &:has(.teriock-panel-spacer .teriock-panel-body:not(:has(*))) {
     display: none;
@@ -164,6 +153,10 @@
       .teriock-panel-header-expander {
         opacity: 1;
       }
+    }
+
+    &:active {
+      background-color: var(--color-panel-header-active);
     }
 
     .teriock-panel-image {

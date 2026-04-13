@@ -15,6 +15,7 @@
   .teriock-automation-collapse-target {
     @include mixins.collapsible;
     @include mixins.collapsible-open;
+    @include mixins.pseudo-top-border;
 
     .teriock-automation-spacer {
       overflow: hidden;
@@ -25,15 +26,10 @@
     .teriock-automation-collapse-target {
       @include mixins.collapsible-closed;
     }
-
-    .teriock-automation-header {
-      border-bottom: none;
-    }
   }
 
   .teriock-automation-header {
     align-items: stretch;
-    border-bottom: 1px solid var(--color-panel-edge);
     cursor: pointer;
     display: flex;
     flex-direction: row;
@@ -43,6 +39,10 @@
 
     &:hover {
       background-color: var(--color-panel-header-hover);
+    }
+
+    &:active {
+      background-color: var(--color-panel-header-active);
     }
 
     &:hover:has(.teriock-automation-header-buttons:hover) {

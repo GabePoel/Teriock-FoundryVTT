@@ -8,14 +8,18 @@ const { AbstractBaseFilter } = foundry.canvas.rendering.filters;
  */
 export default class EtherealFilter extends AbstractBaseFilter {
   /** @inheritDoc */
-  static defaultUniforms = {
-    blur: 1.0,
-    desaturate: 1.0,
-    time: 0,
-  };
+  static get defaultUniforms() {
+    return {
+      ...super.defaultUniforms,
+      blur: 1.0,
+      desaturate: 1.0,
+      time: 0,
+    };
+  }
 
-  /** @inheritDoc */
-  static fragmentShader = `
+  /** @override */
+  static _createFragmentShader() {
+    return `
     precision mediump float;
     varying vec2 vTextureCoord;
 
@@ -66,9 +70,11 @@ export default class EtherealFilter extends AbstractBaseFilter {
       gl_FragColor = result;
     }
   `;
+  }
 
-  /** @inheritDoc */
-  static vertexShader = `
+  /** @override */
+  static _createVertexShader() {
+    return `
     precision mediump float;
     attribute vec2 aVertexPosition;
     uniform mat3 projectionMatrix;
@@ -82,12 +88,16 @@ export default class EtherealFilter extends AbstractBaseFilter {
       vTextureCoord = aVertexPosition * (outputFrame.zw * inputSize.zw);
     }
   `;
+  }
 
   /** @inheritDoc */
   static create(initialUniforms = {}) {
     const uniforms = { ...this.defaultUniforms, ...initialUniforms };
-    const filter = new this(this.vertexShader, this.fragmentShader, uniforms);
-    //noinspection JSUnresolvedReference
+    const filter = new this(
+      this._createVertexShader(),
+      this._createFragmentShader(),
+      uniforms,
+    );
     filter.blendMode = PIXI.BLEND_MODES.NORMAL;
     return filter;
   }

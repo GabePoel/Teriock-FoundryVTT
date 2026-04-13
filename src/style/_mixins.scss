@@ -296,3 +296,18 @@
   align-items: center;
   justify-content: center;
 }
+
+@mixin pseudo-top-border($padding: 0) {
+  position: relative;
+
+  &::after {
+    background: transparent;
+    border-top: 1px var(--panel-divider-style) var(--color-panel-divider);
+    content: "";
+    height: 0;
+    left: $padding;
+    position: absolute;
+    right: $padding;
+    top: 0px;
+  }
+}
