@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.4
     effects:
       - _id: 5v5ltdayWvJPnazo
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.2
+          systemVersion: 0.12.4
         img: systems/teriock/src/icons/abilities/advanced-smell.webp
         name: Advanced Smell
         system:
@@ -34,7 +34,11 @@ items:
             raw: 0
           delivery: self
           duration:
-            unit: instant
+            conditions:
+              absent:
+                - down
+            raw: '0'
+            unit: unlimited
           effectTypes:
             - sensory
           executionTime:
@@ -84,7 +88,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.2
+          systemVersion: 0.12.4
         img: systems/teriock/src/icons/abilities/beastly-strength.webp
         name: Beastly Strength
         system:
@@ -93,7 +97,8 @@ items:
             raw: 0
           delivery: self
           duration:
-            unit: instant
+            raw: '0'
+            unit: unlimited
           executionTime:
             base: passive
             slow:
@@ -141,7 +146,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.2
+          systemVersion: 0.12.4
         img: systems/teriock/src/icons/abilities/climbing.webp
         name: Climbing
         system:
@@ -202,7 +207,8 @@ items:
             raw: 0
           delivery: self
           duration:
-            unit: instant
+            raw: '0'
+            unit: unlimited
           effectTypes:
             - movement
           executionTime:
@@ -240,7 +246,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.2
+          systemVersion: 0.12.4
         img: systems/teriock/src/icons/abilities/constrict.webp
         name: Constrict
         system:
@@ -272,7 +278,10 @@ items:
             raw: 0
           delivery: hand
           duration:
-            unit: instant
+            raw: '0'
+            triggers:
+              - movement
+            unit: unlimited
           endCondition: <p>The start of your next @L[Core:Turn]{turn}.</p>
           executionTime:
             base: a1
@@ -312,7 +321,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.2
+          systemVersion: 0.12.4
         img: systems/teriock/src/icons/abilities/dense-intelligence.webp
         name: Dense Intelligence
         system:
@@ -320,7 +329,8 @@ items:
             raw: 0
           delivery: self
           duration:
-            unit: instant
+            raw: '0'
+            unit: unlimited
           executionTime:
             base: passive
             slow:
@@ -357,7 +367,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.2
+          systemVersion: 0.12.4
         img: systems/teriock/src/icons/abilities/giant-strength.webp
         name: Giant Strength
         system:
@@ -366,7 +376,8 @@ items:
             raw: 0
           delivery: self
           duration:
-            unit: instant
+            raw: '0'
+            unit: unlimited
           executionTime:
             base: passive
             slow:
@@ -414,7 +425,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.2
+          systemVersion: 0.12.4
         img: systems/teriock/src/icons/abilities/hack.webp
         name: Hack
         system:
@@ -438,6 +449,7 @@ items:
             raw: 0
           delivery: weapon
           duration:
+            raw: '0'
             unit: instant
           executionTime:
             base: a1
@@ -486,7 +498,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.2
+          systemVersion: 0.12.4
         img: systems/teriock/src/icons/abilities/hide.webp
         name: Hide
         system:
@@ -508,44 +520,32 @@ items:
               status: hidden
               target: false
               type: status
-            A25PQyqCKh9KSIOn:
-              _id: A25PQyqCKh9KSIOn
+            Hd5o6s1SdA8C7IfT:
+              _id: Hd5o6s1SdA8C7IfT
+              competence:
+                raw: 0
               competencies:
+                - 0
+                - 1
                 - 2
-              formula: 1d20 + (2 * @snk) + @f
+              crit:
+                - 0
+                - 1
               heighten:
                 - 0
                 - 1
-              impact: other
-              merge: true
-              type: roll
-            BX4BpxxrakLUlUDW:
-              _id: BX4BpxxrakLUlUDW
-              competencies:
-                - 1
-              formula: 1d20 + (2 * @snk) + @p
-              heighten:
-                - 0
-                - 1
-              impact: other
-              merge: true
-              type: roll
-            KEpGIyw0WsM5fRYd:
-              _id: KEpGIyw0WsM5fRYd
-              competencies:
-                - 0
-              formula: 1d20 + (2 * @snk)
-              heighten:
-                - 0
-                - 1
-              impact: other
-              merge: true
-              type: roll
+              overrideCompetence: false
+              overrideData: false
+              preventEffect: false
+              preventFeat: false
+              preventThreshold: true
+              type: modifyEffect
           class: thief
           competence:
             raw: 0
           delivery: self
           duration:
+            raw: '0'
             unit: instant
           executionTime:
             base: a1
@@ -555,28 +555,20 @@ items:
             featSaveAttribute: mov
             range:
               unit: self
-          featSaveAttribute: mov
+          featSaveAttribute: snk
           form: normal
           identifier: hide
-          interaction: manifest
+          interaction: feat
           maneuver: active
           mundane: false
           overview:
             base: >-
-              <p>You become @L[Condition:Hidden]{hidden}. As you do this, you
-              may roll [[/roll 1d20 + (2 * @snk)]]. If this is greater than your
-              @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak} (10 + 2
-              × @L[Core:Sneak]{SNK}), then you use it as your hidden DC. If not,
-              use your @L[Core:Passive Attributes]{passive}
-              @L[Core:Sneak]{sneak}.</p>
-            fluent: >-
-              <p>Instead roll [[/roll 1d20 + (2 * @snk) + @f]] for your hidden
-              DC (if it's greater than your @L[Core:Passive Attributes]{passive}
-              @L[Core:Sneak]{sneak}).</p>
-            proficient: >-
-              <p>Instead roll [[/roll 1d20 + (2 * @snk) + @p]] for your hidden
-              DC (if it's greater than your @L[Core:Passive Attributes]{passive}
-              @L[Core:Sneak]{sneak}).</p>
+              <p>You become @L[Condition:Hidden]{hidden}. If the result of your
+              @L[Core:Sneak]{SNK} @L[Core:Feat Interaction]{save} is greater
+              than your @L[Core:Passive Attributes]{passive}
+              @L[Core:Sneak]{sneak} (10 + 2 × @L[Core:Sneak]{SNK}), then you use
+              it as your hidden DC. If not, use your @L[Core:Passive
+              Attributes]{passive} @L[Core:Sneak]{sneak}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -610,7 +602,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.2
+          systemVersion: 0.12.4
         img: systems/teriock/src/icons/abilities/impale.webp
         name: Impale
         system:
@@ -646,6 +638,7 @@ items:
             raw: 0
           delivery: weapon
           duration:
+            raw: '0'
             unit: instant
           executionTime:
             base: a1
@@ -687,7 +680,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.2
+          systemVersion: 0.12.4
         img: systems/teriock/src/icons/abilities/improved-strength.webp
         name: Improved Strength
         system:
@@ -696,7 +689,8 @@ items:
             raw: 0
           delivery: self
           duration:
-            unit: instant
+            raw: '0'
+            unit: unlimited
           executionTime:
             base: passive
             slow:
@@ -742,7 +736,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.2
+          systemVersion: 0.12.4
         img: systems/teriock/src/icons/abilities/no-hands.webp
         name: No Hands
         system:
@@ -750,7 +744,8 @@ items:
             raw: 0
           delivery: self
           duration:
-            unit: instant
+            raw: '0'
+            unit: unlimited
           executionTime:
             base: passive
             slow:
@@ -785,7 +780,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.2
+          systemVersion: 0.12.4
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
@@ -793,7 +788,8 @@ items:
             raw: 0
           delivery: self
           duration:
-            unit: instant
+            raw: '0'
+            unit: unlimited
           executionTime:
             base: passive
             slow:
@@ -830,7 +826,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.2
+          systemVersion: 0.12.4
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
@@ -838,7 +834,8 @@ items:
             raw: 0
           delivery: self
           duration:
-            unit: instant
+            raw: '0'
+            unit: unlimited
           executionTime:
             base: passive
             slow:
@@ -875,7 +872,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.2
+          systemVersion: 0.12.4
         img: systems/teriock/src/icons/abilities/normal-sneak.webp
         name: Normal Sneak
         system:
@@ -883,7 +880,8 @@ items:
             raw: 0
           delivery: self
           duration:
-            unit: instant
+            raw: '0'
+            unit: unlimited
           executionTime:
             base: passive
             slow:
@@ -920,7 +918,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.2
+          systemVersion: 0.12.4
         img: systems/teriock/src/icons/abilities/normal-strength.webp
         name: Normal Strength
         system:
@@ -928,7 +926,8 @@ items:
             raw: 0
           delivery: self
           duration:
-            unit: instant
+            raw: '0'
+            unit: unlimited
           executionTime:
             base: passive
             slow:
@@ -968,7 +967,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.2
+          systemVersion: 0.12.4
         img: systems/teriock/src/icons/abilities/vitals-hack.webp
         name: Vitals Hack
         system:
@@ -1006,6 +1005,7 @@ items:
             raw: 0
           delivery: weapon
           duration:
+            raw: '0'
             unit: instant
           effectTypes:
             - damaging
@@ -1049,7 +1049,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.2
+          systemVersion: 0.12.4
         img: systems/teriock/src/icons/abilities/scent-seeing.webp
         name: Scent Seeing
         system:
@@ -1081,7 +1081,11 @@ items:
             raw: 0
           delivery: aura
           duration:
-            unit: instant
+            conditions:
+              absent:
+                - down
+            raw: '0'
+            unit: unlimited
           effectTypes:
             - sensory
           executionTime:
@@ -1128,7 +1132,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.2
+          systemVersion: 0.12.4
         img: systems/teriock/src/icons/abilities/improved-strength.webp
         name: Improved Strength
         system:
@@ -1138,7 +1142,8 @@ items:
             raw: 0
           delivery: self
           duration:
-            unit: instant
+            raw: '0'
+            unit: unlimited
           executionTime:
             base: passive
             slow:
@@ -1181,7 +1186,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.2
+          systemVersion: 0.12.4
         img: systems/teriock/src/icons/abilities/beastly-strength.webp
         name: Beastly Strength
         system:
@@ -1191,7 +1196,8 @@ items:
             raw: 0
           delivery: self
           duration:
-            unit: instant
+            raw: '0'
+            unit: unlimited
           executionTime:
             base: passive
             slow:
@@ -1236,7 +1242,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.2
+          systemVersion: 0.12.4
         img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
         name: Improved Armor Piercing
         system:
@@ -1246,7 +1252,8 @@ items:
             raw: 0
           delivery: self
           duration:
-            unit: instant
+            raw: '0'
+            unit: unlimited
           executionTime:
             base: passive
             slow:
@@ -1285,7 +1292,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.2
+          systemVersion: 0.12.4
         img: systems/teriock/src/icons/abilities/beastly-strength.webp
         name: Beastly Strength
         system:
@@ -1295,7 +1302,8 @@ items:
             raw: 0
           delivery: self
           duration:
-            unit: instant
+            raw: '0'
+            unit: unlimited
           executionTime:
             base: passive
             slow:
@@ -1340,7 +1348,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.2
+          systemVersion: 0.12.4
         img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
         name: Improved Armor Piercing
         system:
@@ -1350,7 +1358,8 @@ items:
             raw: 0
           delivery: self
           duration:
-            unit: instant
+            raw: '0'
+            unit: unlimited
           executionTime:
             base: passive
             slow:
@@ -1389,7 +1398,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.2
+          systemVersion: 0.12.4
         img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
         name: Melee Damage Boost
         system:
@@ -1483,7 +1492,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.4
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/icons/body-parts/hardened-scales.webp
     name: Hardened Scales
@@ -1515,7 +1524,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.4
     effects:
       - _id: ozGDVg02SHRX2hCr
         _key: >-
@@ -1525,7 +1534,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.2
+          systemVersion: 0.12.4
         img: icons/creatures/abilities/mouth-teeth-long-red.webp
         name: Biting
         system:
@@ -1547,7 +1556,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.2
+          systemVersion: 0.12.4
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:

@@ -31,11 +31,53 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.4
     img: systems/teriock/src/icons/abilities/skill-share.webp
     name: Skill Share
     system:
       automations:
+        DKrkwLcllE5f9bjQ:
+          _id: DKrkwLcllE5f9bjQ
+          attachDocuments: true
+          automatic: true
+          competence:
+            raw: 0
+          competencies:
+            - 1
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 0
+            - 1
+          multi: false
+          overrideCompetence: false
+          overrideData: false
+          qualifier: >-
+            and(@ability, @parent.rank, not(@es), not(@effect.contract), @pro,
+            lte(@class.rank, 1 + @p))
+          type: addDocuments
+        LTtFZkqLk2QnwOfK:
+          _id: LTtFZkqLk2QnwOfK
+          attachDocuments: true
+          automatic: true
+          competence:
+            raw: 0
+          competencies:
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 0
+            - 1
+          multi: false
+          overrideCompetence: false
+          overrideData: false
+          qualifier: >-
+            and(@ability, @parent.rank, not(@es), not(@effect.contract), @pro,
+            lte(@class.rank, 1 + @f))
+          type: addDocuments
         XdlHsYQu4RHDULLu:
           _id: XdlHsYQu4RHDULLu
           competence:
@@ -52,23 +94,31 @@ effects:
             - 1
           overrideCompetence: true
           overrideData: false
-          prevent: false
+          preventEffect: false
+          preventFeat: false
+          preventThreshold: false
           type: modifyEffect
-        a51c9f122b46afc9:
-          _id: a51c9f122b46afc9
+        pZTzCOb2arggrQQw:
+          _id: pZTzCOb2arggrQQw
+          attachDocuments: true
+          automatic: true
+          competence:
+            raw: 0
           competencies:
             - 0
-            - 1
-            - 2
           crit:
             - 0
             - 1
           heighten:
-            - 1
             - 0
-          macro: Compendium.teriock.execution.Macro.b20a3ed766f6438c
-          trigger: preExecute
-          type: abilityMacro
+            - 1
+          multi: false
+          overrideCompetence: false
+          overrideData: false
+          qualifier: >-
+            and(@ability, @parent.rank, not(@es), not(@effect.contract), @pro,
+            lte(@class.rank, 1))
+          type: addDocuments
       class: corsair
       competence:
         raw: 0
@@ -78,6 +128,7 @@ effects:
         unit: hour
       effectTypes:
         - contract
+        - magical
       endCondition: <p>You use [[lookup name]] again.</p>
       executionTime: a1
       expansion:
@@ -102,11 +153,11 @@ effects:
           this active on one creature at a time.</p>
         fluent: >-
           <p>You can now share @L[Category:Abilities]{abilities} you have from
-          any of your first @L[Core:Fluency Bonus]{F} ranks in a
+          any of your first 1 + @L[Core:Fluency Bonus]{F} ranks in a
           @L[Category:Classes]{class}.</p>
         proficient: >-
           <p>You can now share @L[Category:Abilities]{abilities} you have from
-          any of your first @L[Core:Proficiency Bonus]{P} ranks in a
+          any of your first 1 + @L[Core:Proficiency Bonus]{P} ranks in a
           @L[Category:Classes]{class}.</p>
       piercing:
         raw: 0
@@ -129,7 +180,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.4
     img: systems/teriock/src/icons/abilities/swimming.webp
     name: Swimming
     system:

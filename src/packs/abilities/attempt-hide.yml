@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.2
+  systemVersion: 0.12.3
 img: systems/teriock/src/icons/abilities/attempt-hide.webp
 name: Attempt Hide
 system:
@@ -26,39 +26,30 @@ system:
       status: hidden
       target: false
       type: status
-    1VB7TSHWw5Kgd8e2:
-      _id: 1VB7TSHWw5Kgd8e2
+    djJtvPmsCICnQ8CS:
+      _id: djJtvPmsCICnQ8CS
+      competence:
+        raw: 0
       competencies:
+        - 0
+        - 1
         - 2
-      formula: 1d20 + (2 * @snk) + @f
+      crit:
+        - 0
+        - 1
       heighten:
         - 0
         - 1
-      impact: other
-      merge: true
-      type: roll
-    5LESMviSV1E0R66Y:
-      _id: 5LESMviSV1E0R66Y
-      competencies:
-        - 0
-      formula: 1d20 + (2 * @snk)
-      heighten:
-        - 0
-        - 1
-      impact: other
-      merge: true
-      type: roll
-    wPAlF9R9ArgQXRHW:
-      _id: wPAlF9R9ArgQXRHW
-      competencies:
-        - 1
-      formula: 1d20 + (2 * @snk) + @p
-      heighten:
-        - 0
-        - 1
-      impact: other
-      merge: true
-      type: roll
+      overrideCompetence: false
+      overrideData: false
+      preventEffect: false
+      preventFeat: false
+      preventThreshold: true
+      type: modifyEffect
+    oRDEyFjcyGdwdT9K:
+      overrideCompetence: false
+      overrideData: false
+      prevent: false
   basic: true
   competence:
     raw: 0
@@ -74,22 +65,20 @@ system:
     featSaveAttribute: mov
     range:
       unit: self
-  featSaveAttribute: mov
+  featSaveAttribute: snk
   form: intrinsic
   identifier: attempt-hide
-  interaction: manifest
+  interaction: feat
   maneuver: active
   mundane: false
   overview:
     base: >-
-      <p>You attempt to become @L[Condition:Hidden]{hidden}. As you do this, you
-      roll [[/roll 1d20 + (2 * @snk)]]. If this is greater than the
-      @L[Core:Perception]{passive perception} (10 + 2 ×
+      <p>You attempt to become @L[Condition:Hidden]{hidden}. If the result of
+      your @L[Core:Sneak]{SNK} @L[Core:Feat Interaction]{save} is greater than
+      the @L[Core:Perception]{passive perception} (10 + 2 ×
       @L[Core:Perception]{PER}) of any creatures that could see you, you become
       @L[Condition:Hidden]{hidden} from them. The value you rolled is your
       hidden DC.</p>
-    fluent: <p>Instead roll [[/roll 1d20 + (2 * @snk) + @f]] for your hidden DC.</p>
-    proficient: <p>Instead roll [[/roll 1d20 + (2 * @snk) + @p]] for your hidden DC.</p>
   piercing:
     raw: 0
   powerSources:

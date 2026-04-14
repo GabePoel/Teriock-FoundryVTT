@@ -161,7 +161,9 @@ export default function BaseDocumentMixin(Base) {
         return (
           this.isOwner &&
           (this.checkAncestor(doc) || this.master === doc || this === doc) &&
-          (doc?.sheet.isEditable || !editable)
+          (doc?.sheet.isEditable ||
+            !editable ||
+            ["consequence", "imbuement"].includes(this.type))
         );
       }
 
@@ -214,7 +216,12 @@ export default function BaseDocumentMixin(Base) {
               label: _loc("TERIOCK.SYSTEMS.Common.MENU.delete"),
               icon: makeIcon(TERIOCK.display.icons.ui.delete, "contextMenu"),
               onClick: async () => await this.deleteDialog(),
-              visible: () => this._checkValidEditorDocument(doc),
+              visible: () =>
+                this._checkValidEditorDocument(doc) ||
+                (this.documentName ===
+                  TERIOCK.options.document[doc.type]?.doc &&
+                  this.isOwner &&
+                  this.inCompendium),
               group: "document",
             },
           ],

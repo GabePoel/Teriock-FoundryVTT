@@ -14,7 +14,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.4
     img: systems/teriock/src/icons/abilities/defy-death.webp
     name: Defy Death
     system:
@@ -149,11 +149,28 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.4
     img: systems/teriock/src/icons/abilities/duel.webp
     name: Duel
     system:
       automations:
+        52f4d0b87363b1c1:
+          _id: 52f4d0b87363b1c1
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          executor: false
+          heighten:
+            - 1
+            - 0
+          relation: apply
+          status: dueling
+          target: false
+          type: status
         6f7374b1f63be8d9:
           _id: 6f7374b1f63be8d9
           competencies:
@@ -163,6 +180,69 @@ effects:
             - 1
             - 0
           type: useAbilities
+        747b3e9c9b617af6:
+          _id: 747b3e9c9b617af6
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          executor: true
+          heighten:
+            - 1
+            - 0
+          relation: include
+          status: lighted
+          target: false
+          type: status
+        d635eb44dba086dd:
+          _id: d635eb44dba086dd
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: combatExpiration
+          what:
+            roll: 2d4kh1
+            threshold: 4
+            type: forced
+          when:
+            skip: 0
+            time: end
+            trigger: turn
+          who:
+            type: executor
+        sGyei1adB2IsKjZP:
+          _id: sGyei1adB2IsKjZP
+          competence:
+            raw: 0
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          data: '{ "name": "Lighted Duel Effect" }'
+          display:
+            label: Apply Lighted
+          heighten:
+            - 0
+            - 1
+          overrideCompetence: false
+          overrideData: true
+          preventEffect: false
+          preventFeat: false
+          preventThreshold: false
+          type: modifyEffect
       class: duelist
       competence:
         raw: 0
@@ -218,7 +298,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.4
     img: systems/teriock/src/icons/abilities/resolve-conflict.webp
     name: Resolve Conflict
     system:

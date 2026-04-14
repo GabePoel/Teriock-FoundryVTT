@@ -10,31 +10,19 @@ command: |-
   const chosenTransformationLevel = await tm.dialogs.selectDialog(
     transformationLevels,
     {
-      hint: game.i18n.localize("TERIOCK.DIALOGS.Select.TransformationLevel.hint"),
+      hint: _loc("TERIOCK.DIALOGS.Select.TransformationLevel.hint"),
       hintHtml: TERIOCK.content.conditions.transformed,
-      hintTitle: game.i18n.localize(
-        "TERIOCK.DIALOGS.Select.TransformationLevel.hintTitle",
-      ),
+      hintTitle: _loc("TERIOCK.DIALOGS.Select.TransformationLevel.hintTitle"),
       initial: "minor",
-      label: game.i18n.localize(
-        "TERIOCK.DIALOGS.Select.TransformationLevel.label",
-      ),
+      label: _loc("TERIOCK.DIALOGS.Select.TransformationLevel.label"),
       other: true,
-      title: game.i18n.localize(
-        "TERIOCK.DIALOGS.Select.TransformationLevel.title",
-      ),
+      title: _loc("TERIOCK.DIALOGS.Select.TransformationLevel.title"),
     },
   );
   let dc = "none";
-  if (chosenTransformationLevel === "minor") {
-    dc = 6;
-  }
-  if (chosenTransformationLevel === "full") {
-    dc = 12;
-  }
-  if (chosenTransformationLevel === "greater") {
-    dc = 18;
-  }
+  if (chosenTransformationLevel === "minor") dc = 6;
+  if (chosenTransformationLevel === "full") dc = 12;
+  if (chosenTransformationLevel === "greater") dc = 18;
   const activations = scope.execution.activations.filter(
     (a) => a.type === "feat" && a.options.attribute === "int",
   );
@@ -47,7 +35,7 @@ command: |-
     const r = scope.execution.rolls[i];
     if (r.styles.dice.classes === "feat") {
       if (typeof dc === "number") {
-        const newRoll = new game.teriock.Roll(
+        const newRoll = new teriock.dice.rolls.BaseRoll(
           `${dc}`,
           {},
           {
@@ -60,10 +48,9 @@ command: |-
                 icon: TERIOCK.display.icons.interaction.feat,
               },
             },
-            flavor: game.i18n.format(
-              "TERIOCK.DIALOGS.Select.TransformationLevel.flavor",
-              { level: transformationLevels[chosenTransformationLevel] },
-            ),
+            flavor: _loc("TERIOCK.DIALOGS.Select.TransformationLevel.flavor", {
+              level: transformationLevels[chosenTransformationLevel],
+            }),
           },
         );
         await newRoll.evaluate();
