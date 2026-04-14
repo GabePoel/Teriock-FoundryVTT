@@ -28,9 +28,7 @@ export default class InventorySystem extends BaseActorSystem {
 
   /** @inheritDoc */
   get embedParts() {
-    return Object.assign(super.embedParts, {
-      subtitle: this.containing,
-    });
+    return Object.assign(super.embedParts, { subtitle: this.containing });
   }
 
   /** @inheritDoc */

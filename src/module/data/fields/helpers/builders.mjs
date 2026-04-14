@@ -138,6 +138,14 @@ export function qualifiedChangeField() {
       initial: "",
       label: "TERIOCK.SCHEMA.QualifiedChange.key.label",
     }),
+    phase: new EnhancedStringField({
+      choices: objectMap(TERIOCK.options.change.phase, (p) => p.label, {
+        localize: true,
+      }),
+      initial: "normal",
+      label: "TERIOCK.SCHEMA.QualifiedChange.phase.label",
+      nullable: false,
+    }),
     priority: new EnhancedNumberField({
       initial: 20,
       label: "TERIOCK.SCHEMA.QualifiedChange.priority.label",
@@ -151,14 +159,6 @@ export function qualifiedChangeField() {
       choices: localizeChoices(allTypes),
       initial: "Actor",
       label: "TERIOCK.SCHEMA.QualifiedChange.target.label",
-      nullable: false,
-    }),
-    phase: new EnhancedStringField({
-      choices: objectMap(TERIOCK.options.change.phase, (p) => p.label, {
-        localize: true,
-      }),
-      initial: "normal",
-      label: "TERIOCK.SCHEMA.QualifiedChange.phase.label",
       nullable: false,
     }),
     type: changeTypeField(),
