@@ -95,6 +95,7 @@ export default (Base) => {
         ) {
           this._onDropAutomation(event);
         } else if (["ActiveEffect", "Item", "Actor"].includes(dropData.type)) {
+          if (this._tab === "automations") return false;
           out = await this._onDropChild(event, dropData);
         } else if (dropData.type === "JournalEntryPage") {
           out = await this._onDropJournalEntryPage(event, dropData);

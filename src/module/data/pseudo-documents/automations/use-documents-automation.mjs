@@ -45,6 +45,11 @@ export default class UseDocumentsAutomation extends mix(
   }
 
   /** @inheritDoc */
+  static get _conditions() {
+    return false;
+  }
+
+  /** @inheritDoc */
   static get _triggerChoices() {
     return {
       execution: triggers.execution,
