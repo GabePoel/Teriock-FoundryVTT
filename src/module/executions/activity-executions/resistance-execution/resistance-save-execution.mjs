@@ -46,7 +46,7 @@ export default class ResistanceExecution extends ThresholdExecutionMixin(
   async _buildActivations() {
     this.activations.push(
       new teriock.data.pseudoDocuments.activations.UseLocalActivation({
-        options: { lookup: "resist", type: "ability" },
+        options: { lookup: "ability:resist" },
       }),
     );
   }
