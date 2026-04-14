@@ -14,6 +14,12 @@ import {
 
 const { fields } = foundry.data;
 
+/**
+ * @extends {ThresholdAutomation}
+ * @mixes SelectAutomation
+ * @mixes TriggerAutomation
+ * @mixes CompetenceAutomation
+ */
 export default class TradecraftAutomation extends mix(
   ThresholdAutomation,
   SelectAutomationMixin,
