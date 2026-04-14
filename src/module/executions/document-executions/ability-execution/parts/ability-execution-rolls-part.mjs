@@ -1,4 +1,3 @@
-import { targetOptions } from "../../../../constants/options/target-options.mjs";
 import { BaseRoll, ThresholdRoll } from "../../../../dice/rolls/_module.mjs";
 
 /**
@@ -37,6 +36,10 @@ export default function AbilityExecutionRollsPart(Base) {
 
       /** @inheritDoc */
       async _buildRolls() {
+        const modifyEffectAutomation = this.activeAutomations.find(
+          (a) => a.type === "modifyEffect",
+        );
+        const preventThreshold = !!modifyEffectAutomation?.preventThreshold;
         const styles = {
           dice: {
             classes: this.source.system.interaction,
@@ -72,9 +75,9 @@ export default function AbilityExecutionRollsPart(Base) {
                 rollOptions.comparison = "gt";
               }
               if (this.limb) {
-                rollOptions.threshold += targetOptions.limb;
+                rollOptions.threshold += TERIOCK.options.target.limb;
               } else if (this.vitals) {
-                rollOptions.threshold += targetOptions.vitals;
+                rollOptions.threshold += TERIOCK.options.target.vitals;
               }
             }
             this.rolls.push(
@@ -93,8 +96,9 @@ export default function AbilityExecutionRollsPart(Base) {
         } else if (this.isFeat) {
           styles.total.icon = "star";
           this.rolls.push(
-            new BaseRoll(this.formula, this.rollData, {
+            new BaseRoll(preventThreshold ? "0" : this.formula, this.rollData, {
               flavor: this.flavor,
+              hideRoll: preventThreshold,
               targets: Array.from(this.targets),
               styles: styles,
             }),

@@ -39,15 +39,28 @@ export default class ModifyEffectAutomation extends mix(
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      prevent: new fields.BooleanField({ initial: false }),
+      preventEffect: new fields.BooleanField({ initial: false }),
+      preventFeat: new fields.BooleanField({ initial: false }),
+      preventThreshold: new fields.BooleanField({ initial: false }),
     });
+  }
+
+  /** @inheritDoc */
+  static migrateData(data) {
+    if (data.prevent !== undefined && data.preventEffect === undefined) {
+      data.preventEffect = data.prevent;
+    }
+    delete data.prevent;
+    return super.migrateData(data);
   }
 
   /** @inheritDoc */
   get _formPaths() {
     return [
       "display.label",
-      "prevent",
+      "preventFeat",
+      "preventEffect",
+      "preventThreshold",
       ...this._competencePaths,
       ...this._overrideDataPaths,
     ];

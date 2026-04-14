@@ -59,6 +59,24 @@ export default class FeatExecution extends ThresholdExecutionMixin(
   }
 
   /** @inheritDoc */
+  async _buildActivations() {
+    const impactByAttribute = {
+      per: "perceive",
+      snk: "hide",
+    };
+    const impact = impactByAttribute[this.attribute];
+    const amount = this.rolls[0]?.total;
+    if (impact && Number.isFinite(amount)) {
+      this.activations.push(
+        new teriock.data.pseudoDocuments.activations.TakeActivation({
+          impact,
+          amount,
+        }),
+      );
+    }
+  }
+
+  /** @inheritDoc */
   async _buildPanels() {
     this.panels = [await attributePanel(this.attribute)];
   }

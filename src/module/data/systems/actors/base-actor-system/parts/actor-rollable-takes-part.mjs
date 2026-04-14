@@ -120,6 +120,18 @@ export default (Base) => {
       }
 
       /**
+       * Sets the actor's hiding detection formula.
+       * @param {number|string} amount - The formula/value for hiding detection.
+       * @returns {Promise<void>}
+       */
+      async takeHide(amount) {
+        await this.parent.hookCall("takeHide", { scope: { amount } });
+        await this.parent.update({
+          "system.detection.hiding": amount,
+        });
+      }
+
+      /**
        * Applies kill effect to the actor.
        *
        * Relevant wiki pages:
@@ -136,6 +148,18 @@ export default (Base) => {
             overlay: true,
           });
         }
+      }
+
+      /**
+       * Sets the actor's perceiving detection formula.
+       * @param {number|string} amount - The formula/value for perceiving detection.
+       * @returns {Promise<void>}
+       */
+      async takePerceive(amount) {
+        await this.parent.hookCall("takePerceive", { scope: { amount } });
+        await this.parent.update({
+          "system.detection.perceiving": amount,
+        });
       }
 
       /**

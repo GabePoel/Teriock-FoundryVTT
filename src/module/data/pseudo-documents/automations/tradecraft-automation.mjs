@@ -27,6 +27,12 @@ export default class TradecraftAutomation extends mix(
   CompetenceAutomationMixin,
 ) {
   /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [
+    ...super.LOCALIZATION_PREFIXES,
+    "TERIOCK.AUTOMATIONS.Tradecraft",
+  ];
+
+  /** @inheritDoc */
   static get LABEL() {
     return "TERIOCK.ROLLS.Tradecraft.label";
   }
@@ -54,7 +60,6 @@ export default class TradecraftAutomation extends mix(
       tradecrafts: new fields.SetField(
         new fields.StringField({
           choices: TERIOCK.reference.tradecrafts,
-          label: "TERIOCK.TERMS.Common.tradecraft",
         }),
       ),
     });
@@ -130,11 +135,7 @@ export default class TradecraftAutomation extends mix(
         selected = [chosen];
       }
     }
-    const actor =
-      scope.actor ??
-      scope.execution?.actor ??
-      this.actor ??
-      this.document?.actor;
+    const actor = scope.actor ?? scope.execution?.actor ?? this.actor;
     if (!actor) return;
     await Promise.all(
       selected.map((tradecraft) =>

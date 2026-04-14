@@ -19,19 +19,20 @@ export default (Base) => {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          // TODO: Consider moving all senses to token in v14.
           detection: new fields.SchemaField({
             hiding: new EvaluationField({
               blank: characterOptions.defaults.hiding,
               deterministic: true,
               floor: true,
               initial: characterOptions.defaults.hiding,
+              min: -Infinity,
             }),
             perceiving: new EvaluationField({
               blank: characterOptions.defaults.perceiving,
               deterministic: true,
               floor: true,
               initial: characterOptions.defaults.perceiving,
+              min: -Infinity,
             }),
           }),
           senses: new fields.SchemaField({

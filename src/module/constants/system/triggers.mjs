@@ -1,4 +1,6 @@
 import { preLocalize } from "../../helpers/localization.mjs";
+import { objectMap } from "../../helpers/utils.mjs";
+import { impactOptions } from "../options/impact-options.mjs";
 
 const triggers = {
   activity: {
@@ -60,27 +62,9 @@ const triggers = {
   },
   impact: {
     label: "TERIOCK.TRIGGERS.Impact.label",
-    choices: {
-      takeAwaken: "TERIOCK.TRIGGERS.Impact.choices.takeAwaken",
-      takeDamage: "TERIOCK.TRIGGERS.Impact.choices.takeDamage",
-      takeDrain: "TERIOCK.TRIGGERS.Impact.choices.takeDrain",
-      takeGainTempHp: "TERIOCK.TRIGGERS.Impact.choices.takeGainTempHp",
-      takeGainTempMp: "TERIOCK.TRIGGERS.Impact.choices.takeGainTempMp",
-      takeHack: "TERIOCK.TRIGGERS.Impact.choices.takeHack",
-      takeHeal: "TERIOCK.TRIGGERS.Impact.choices.takeHeal",
-      takeKill: "TERIOCK.TRIGGERS.Impact.choices.takeKill",
-      takeNormalHeal: "TERIOCK.TRIGGERS.Impact.choices.takeNormalHeal",
-      takeNormalRevitalize:
-        "TERIOCK.TRIGGERS.Impact.choices.takeNormalRevitalize",
-      takePay: "TERIOCK.TRIGGERS.Impact.choices.takePay",
-      takeRevitalize: "TERIOCK.TRIGGERS.Impact.choices.takeRevitalize",
-      takeRevive: "TERIOCK.TRIGGERS.Impact.choices.takeRevive",
-      takeSetTempHp: "TERIOCK.TRIGGERS.Impact.choices.takeSetTempHp",
-      takeSetTempMp: "TERIOCK.TRIGGERS.Impact.choices.takeSetTempMp",
-      takeSleep: "TERIOCK.TRIGGERS.Impact.choices.takeSleep",
-      takeUnhack: "TERIOCK.TRIGGERS.Impact.choices.takeUnhack",
-      takeWither: "TERIOCK.TRIGGERS.Impact.choices.takeWither",
-    },
+    choices: objectMap(impactOptions, (c) => c.take, {
+      filter: (c) => !c?.hidden,
+    }),
   },
   mount: {
     label: "TYPES.Item.mount",

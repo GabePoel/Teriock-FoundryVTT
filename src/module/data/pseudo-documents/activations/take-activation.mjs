@@ -40,14 +40,36 @@ export default class TakeActivation extends AutomationActivationFactory(
   /** @inheritDoc */
   async primaryAction() {
     for (const actor of this.actors) {
-      TERIOCK.options.impact[this.impact].apply(actor, this.amount);
+      await TERIOCK.options.impact[this.impact].apply(actor, this.amount);
+      ui.notifications.success(
+        "TERIOCK.ACTIVATIONS.Take.NOTIFICATIONS.applied",
+        {
+          format: {
+            amount: this.amount,
+            impact: this.label,
+            actor: actor.fullName,
+          },
+          localize: true,
+        },
+      );
     }
   }
 
   /** @inheritDoc */
   async secondaryAction() {
     for (const actor of this.actors) {
-      TERIOCK.options.impact[this.impact].reverse(actor, this.amount);
+      await TERIOCK.options.impact[this.impact].reverse(actor, this.amount);
+      ui.notifications.success(
+        "TERIOCK.ACTIVATIONS.Take.NOTIFICATIONS.reversed",
+        {
+          format: {
+            amount: this.amount,
+            impact: this.label,
+            actor: actor.fullName,
+          },
+          localize: true,
+        },
+      );
     }
   }
 }

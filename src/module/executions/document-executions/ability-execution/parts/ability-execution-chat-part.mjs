@@ -373,15 +373,21 @@ export default function AbilityExecutionChatPart(Base) {
       /** @inheritDoc */
       async _buildActivations() {
         const acts = teriock.data.pseudoDocuments.activations;
+        const modifyEffectAutomation = this.activeAutomations.find(
+          (a) => a.type === "modifyEffect",
+        );
 
         // Add feat save activation
-        if (this.isFeat) {
+        if (this.isFeat && !modifyEffectAutomation?.preventFeat) {
+          const featOptions = {
+            attribute: this.source.system.featSaveAttribute,
+          };
+          if (!modifyEffectAutomation?.preventThreshold) {
+            featOptions.threshold = this.rolls[0].total;
+          }
           this.activations.push(
             new acts.FeatActivation({
-              options: {
-                attribute: this.source.system.featSaveAttribute,
-                threshold: this.rolls[0].total,
-              },
+              options: featOptions,
             }),
           );
         }
@@ -395,14 +401,10 @@ export default function AbilityExecutionChatPart(Base) {
           );
         }
 
-        const modifyEffectAutomation = this.activeAutomations.find(
-          (a) => a.type === "modifyEffect",
-        );
-
         if (
           this.source.system.duration.unit !== "instant" &&
           this.source.system.maneuver !== "passive" &&
-          !modifyEffectAutomation?.prevent &&
+          !modifyEffectAutomation?.preventEffect &&
           (this.targetsActor || this.targetsArmament)
         ) {
           // Add apply effects activation
