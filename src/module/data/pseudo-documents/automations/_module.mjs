@@ -1,7 +1,7 @@
 export * as abstract from "./abstract/_module.mjs";
 export * as mixins from "./mixins/_module.mjs";
 export { default as AbilityMacroAutomation } from "./ability-macro-automation.mjs";
-export { default as AddExternalDocumentsAutomation } from "./add-external-documents-automation.mjs";
+export { default as AddDocumentsAutomation } from "./add-documents-automation.mjs";
 export { default as AttunementAutomation } from "./attunement-automation.mjs";
 export { default as ChangeMovementAutomation } from "./change-movement-automation.mjs";
 export { default as ChangeQuantityAutomation } from "./change-quantity-automation.mjs";
@@ -26,5 +26,4 @@ export { default as TakeAutomation } from "./take-automation.mjs";
 export { default as TemplateAutomation } from "./template-automation.mjs";
 export { default as TradecraftAutomation } from "./tradecraft-automation.mjs";
 export { default as TransformationAutomation } from "./transformation-automation.mjs";
-export { default as UseExternalDocumentsAutomation } from "./use-external-documents-automation.mjs";
-export { default as UseLocalDocumentsAutomation } from "./use-local-documents-automation.mjs";
+export { default as UseDocumentsAutomation } from "./use-documents-automation.mjs";

@@ -71,7 +71,7 @@ export default class AbilitySystem extends mix(
     return [
       ...super._automationTypes,
       automations.AbilityMacroAutomation,
-      automations.AddExternalDocumentsAutomation,
+      automations.AddDocumentsAutomation,
       automations.AttunementAutomation,
       automations.ChangeMovementAutomation,
       automations.ChangesAutomation,
@@ -91,8 +91,7 @@ export default class AbilitySystem extends mix(
       automations.TakeAutomation,
       automations.TemplateAutomation,
       automations.TransformationAutomation,
-      automations.UseExternalDocumentsAutomation,
-      automations.UseLocalDocumentsAutomation,
+      automations.UseDocumentsAutomation,
     ];
   }
 

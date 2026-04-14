@@ -3,18 +3,18 @@ import { automationTransformationFields } from "../../fields/helpers/transformat
 import { CritAutomation } from "./abstract/_module.mjs";
 import {
   CompetenceAutomationMixin,
-  ExternalDocumentsAutomationMixin,
+  SelectExternalDocumentsAutomationMixin,
 } from "./mixins/_module.mjs";
 
 /**
  * @extends {CritAutomation}
  * @extends {AutomationTransformationConfig}
- * @mixes ExternalDocumentsAutomation
+ * @mixes SelectExternalDocumentsAutomation
  * @mixes CompetenceAutomation
  */
 export default class TransformationAutomation extends mix(
   CritAutomation,
-  ExternalDocumentsAutomationMixin,
+  SelectExternalDocumentsAutomationMixin,
   CompetenceAutomationMixin,
 ) {
   /** @inheritDoc */

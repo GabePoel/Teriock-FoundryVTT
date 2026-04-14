@@ -71,8 +71,7 @@ export default class EquipmentSystem extends mix(
       automations.HacksAutomation,
       automations.RollAutomation,
       automations.TakeAutomation,
-      automations.UseExternalDocumentsAutomation,
-      automations.UseLocalDocumentsAutomation,
+      automations.UseDocumentsAutomation,
     ];
   }
 

@@ -1,27 +1,51 @@
 import { selectDocumentsDialog } from "../../../../applications/dialogs/select-document-dialog.mjs";
+import { mix } from "../../../../helpers/construction.mjs";
+import { resolveDocuments } from "../../../../helpers/resolve.mjs";
+import { migrateUuid } from "../../../shared/migrations/source-migrations.mjs";
 
 const { fields } = foundry.data;
 
-export default function DocumentsAutomationMixin(Base) {
+export default function SelectExternalDocumentsAutomationMixin(Base) {
   return (
     /**
      * @extends {BaseAutomation}
      * @property {boolean} automatic
      * @property {boolean} multi
+     * @property {Set<UUID<TeriockDocument>>} uuids
      */
-    class DocumentsAutomation extends Base {
+    class SelectExternalDocumentsAutomation extends mix(Base) {
       /** @inheritDoc */
       static LOCALIZATION_PREFIXES = [
         ...super.LOCALIZATION_PREFIXES,
         "TERIOCK.AUTOMATIONS.Documents",
+        "TERIOCK.AUTOMATIONS.ExternalDocuments",
       ];
 
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           automatic: new fields.BooleanField({ initial: true }),
+          uuids: new fields.SetField(new fields.DocumentUUIDField()),
           multi: new fields.BooleanField(),
         });
+      }
+
+      /** @inheritDoc */
+      static migrateData(data) {
+        if (data.documents) {
+          data.uuids ??= [];
+          data.uuids.push(...data.documents);
+          foundry.utils.deleteProperty(data, "documents");
+        }
+        if (data.uuids) {
+          data.uuids = data.uuids.map((d) => migrateUuid(d));
+        }
+        return super.migrateData(data);
+      }
+
+      /** @inheritDoc */
+      get _formPaths() {
+        return ["uuids", ...super._formPaths];
       }
 
       /**
@@ -37,7 +61,7 @@ export default function DocumentsAutomationMixin(Base) {
        * @returns {boolean}
        */
       get hasDocuments() {
-        return true;
+        return this.uuids.size > 0;
       }
 
       /** @inheritDoc */
@@ -75,16 +99,9 @@ export default function DocumentsAutomationMixin(Base) {
         return docs.map((d) => d.uuid);
       }
 
-      /**
-       * The raw documents.
-       * @param {object} [_options]
-       * @param {AnyActor} [_options.actor]
-       * @param {boolean} [_options.expandFolders]
-       * @param {boolean} [_options.expandTables]
-       * @return {Promise<TeriockDocument[]>}
-       */
-      async getDocuments(_options = {}) {
-        return [];
+      /** @inheritDoc */
+      async getDocuments(options = {}) {
+        return resolveDocuments(this.uuids, options);
       }
     }
   );

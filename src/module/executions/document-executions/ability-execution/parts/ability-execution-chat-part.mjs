@@ -2,7 +2,7 @@ import { conditionDialog } from "../../../../applications/dialogs/select-token-d
 import { costOptions } from "../../../../constants/options/cost-options.mjs";
 import { FormulaField } from "../../../../data/fields/_module.mjs";
 import {
-  AddExternalDocumentsAutomation,
+  AddDocumentsAutomation,
   ChangesAutomation,
   CombatExpirationAutomation,
   DurationAutomation,
@@ -424,8 +424,8 @@ export default function AbilityExecutionChatPart(Base) {
           const normDocs = [];
           const critDocs = [];
           const childAutomations =
-            /** @type {AddExternalDocumentsAutomation[]} */ this.activeAutomations.filter(
-              (a) => [AddExternalDocumentsAutomation.TYPE].includes(a.type),
+            /** @type {AddDocumentsAutomation[]} */ this.activeAutomations.filter(
+              (a) => [AddDocumentsAutomation.TYPE].includes(a.type),
             );
           for (const a of childAutomations) {
             const toAdd = await a.choose();
