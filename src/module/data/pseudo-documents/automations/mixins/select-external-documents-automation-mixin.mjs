@@ -2,6 +2,7 @@ import { selectDocumentsDialog } from "../../../../applications/dialogs/select-d
 import { mix } from "../../../../helpers/construction.mjs";
 import { resolveDocuments } from "../../../../helpers/resolve.mjs";
 import { migrateUuid } from "../../../shared/migrations/source-migrations.mjs";
+import SelectAutomationMixin from "./select-automation-mixin.mjs";
 
 const { fields } = foundry.data;
 
@@ -13,20 +14,20 @@ export default function SelectExternalDocumentsAutomationMixin(Base) {
      * @property {boolean} multi
      * @property {Set<UUID<TeriockDocument>>} uuids
      */
-    class SelectExternalDocumentsAutomation extends mix(Base) {
+    class SelectExternalDocumentsAutomation extends mix(
+      Base,
+      SelectAutomationMixin,
+    ) {
       /** @inheritDoc */
       static LOCALIZATION_PREFIXES = [
         ...super.LOCALIZATION_PREFIXES,
-        "TERIOCK.AUTOMATIONS.Documents",
         "TERIOCK.AUTOMATIONS.ExternalDocuments",
       ];
 
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          automatic: new fields.BooleanField({ initial: true }),
           uuids: new fields.SetField(new fields.DocumentUUIDField()),
-          multi: new fields.BooleanField(),
         });
       }
 
@@ -46,14 +47,6 @@ export default function SelectExternalDocumentsAutomationMixin(Base) {
       /** @inheritDoc */
       get _formPaths() {
         return [...this._selectionPaths, ...super._formPaths];
-      }
-
-      /**
-       * Paths relating to selection options.
-       * @returns {string[]}
-       */
-      get _selectionOptionPaths() {
-        return ["multi", "automatic"];
       }
 
       /**

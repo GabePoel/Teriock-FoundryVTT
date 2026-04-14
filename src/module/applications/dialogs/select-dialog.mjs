@@ -7,7 +7,10 @@ import { resolveDocument } from "../../helpers/resolve.mjs";
 import { makeIconClass } from "../../helpers/utils.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
 import { TeriockTextEditor } from "../ux/_module.mjs";
-import { selectDocumentDialog } from "./select-document-dialog.mjs";
+import {
+  selectDocumentDialog,
+  selectDocumentsDialog,
+} from "./select-document-dialog.mjs";
 
 const { fields } = foundry.data;
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
@@ -188,12 +191,17 @@ export async function selectPropertyDialog() {
 }
 
 /**
- * Dialog to select a tradecraft.
- * @returns {Promise<Teriock.Keys.Tradecraft|null>}
+ * Internal helper to build tradecraft dialog choices.
+ * @param {Teriock.Keys.Tradecraft[]} [tradecrafts]
+ * @returns {Promise<Index<TeriockDocument>[]>}
  */
-export async function selectTradecraftDialog() {
-  const choices = await Promise.all(
-    Object.keys(TERIOCK.reference.tradecrafts).map(async (tc) => {
+async function _tradecraftChoices(tradecrafts) {
+  const tradecraftList = tradecrafts?.length
+    ? tradecrafts
+    : Object.keys(TERIOCK.reference.tradecrafts);
+  if (tradecraftList.length === 0) return [];
+  return Promise.all(
+    tradecraftList.map(async (tc) => {
       return {
         name: TERIOCK.reference.tradecrafts[tc],
         uuid: tc,
@@ -202,17 +210,40 @@ export async function selectTradecraftDialog() {
       };
     }),
   );
-  const chosen = await selectDocumentDialog(choices, {
+}
+
+/**
+ * Dialog to select a tradecraft.
+ * @param {Teriock.Keys.Tradecraft[]} [tradecrafts]
+ * @returns {Promise<Teriock.Keys.Tradecraft|null>}
+ */
+export async function selectTradecraftDialog(tradecrafts) {
+  const chosen = await selectTradecraftsDialog(tradecrafts, { multi: false });
+  return chosen?.[0] ?? null;
+}
+
+/**
+ * Dialog to select one or more tradecrafts.
+ * @param {Teriock.Keys.Tradecraft[]} [tradecrafts]
+ * @param {object} [options]
+ * @param {boolean} [options.multi=true]
+ * @returns {Promise<Teriock.Keys.Tradecraft[]>}
+ */
+export async function selectTradecraftsDialog(
+  tradecrafts,
+  { multi = true } = {},
+) {
+  const choices = await _tradecraftChoices(tradecrafts);
+  if (choices.length === 0) return [];
+  const chosen = await selectDocumentsDialog(choices, {
     hint: _loc("TERIOCK.DIALOGS.Select.Tradecraft.hint"),
+    multi,
     title: _loc("TERIOCK.DIALOGS.Select.Tradecraft.title"),
     tooltipKey: "tooltip",
     openable: true,
   });
-  if (chosen) {
-    return chosen.uuid;
-  } else {
-    return null;
-  }
+  if (!chosen) return [];
+  return chosen.map((c) => c.uuid);
 }
 
 /**
