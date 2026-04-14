@@ -573,6 +573,7 @@ export default function AbilityExecutionChatPart(Base) {
           .filter((a) => a.type === acts.RollActivation.TYPE)
           .forEach((a) => {
             a.formula = this._heightenString(a.formula);
+            a._source.formula = this._heightenString(a.formula);
           });
       }
 

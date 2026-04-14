@@ -24,10 +24,10 @@ export default class LocalDocumentField extends DocumentIdField {
   /** @inheritDoc */
   static get _defaults() {
     return foundry.utils.mergeObject(super._defaults, {
+      fallback: false,
+      idOnly: false,
       nullable: true,
       readonly: false,
-      idOnly: false,
-      fallback: false,
     });
   }
 

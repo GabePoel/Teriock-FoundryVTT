@@ -10,6 +10,7 @@ const { fields } = foundry.data;
 export function speciesTransformationFields() {
   return {
     img: new fields.FilePathField({
+      blank: true,
       categories: ["IMAGE"],
       hint: "TERIOCK.SCHEMA.Transformation.img.hint",
       initial: null,
@@ -39,6 +40,7 @@ export function actorTransformationConfig() {
 export function automationTransformationFields() {
   return Object.assign(speciesTransformationFields(), {
     level: new fields.StringField({
+      blank: true,
       choices: TERIOCK.options.transformation.level,
       hint: "TERIOCK.SCHEMA.Transformation.level.hint",
       initial: null,

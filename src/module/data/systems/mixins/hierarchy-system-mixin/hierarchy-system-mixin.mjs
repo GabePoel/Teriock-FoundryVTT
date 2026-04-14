@@ -22,14 +22,17 @@ export default function HierarchySystemMixin(Base) {
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           _dep: new fields.StringField({
+            blank: true,
             nullable: true,
             required: false,
           }),
           _ref: new fields.DocumentUUIDField({
+            blank: true,
             nullable: true,
             required: false,
           }),
           _sup: new fields.DocumentIdField({
+            blank: true,
             nullable: true,
             required: false,
           }),

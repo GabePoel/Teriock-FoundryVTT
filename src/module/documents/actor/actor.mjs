@@ -168,11 +168,12 @@ export default class TeriockActor extends mix(
 
   /** @inheritDoc */
   get visibleChildren() {
-    return [...this.validEffects, ...this.items.contents]
-      .filter((c) => !c.isEphemeral)
-      .filter(
-        (c) => !c.metadata.revealable || c.system.revealed || game.user.isGM,
-      );
+    return [...this.validEffects, ...this.items.contents].filter(
+      (c) =>
+        !c.isEphemeral &&
+        !c.isReference &&
+        (!c.metadata.revealable || c.system.revealed || game.user.isGM),
+    );
   }
 
   /**

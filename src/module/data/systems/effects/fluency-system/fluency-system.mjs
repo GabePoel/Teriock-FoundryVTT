@@ -56,6 +56,9 @@ export default class FluencySystem extends mix(
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
+      competence: new fields.EmbeddedDataField(CompetenceModel, {
+        initial: { raw: 2 },
+      }),
       field: new fields.StringField({ initial: "artisan" }),
       tradecraft: new fields.StringField({
         initial: "artist",
@@ -64,9 +67,7 @@ export default class FluencySystem extends mix(
       tradecraftDescription: new TextField({
         initial: "",
         label: "TERIOCK.TERMS.Common.tradecraft",
-      }),
-      competence: new fields.EmbeddedDataField(CompetenceModel, {
-        initial: { raw: 2 },
+        persisted: false,
       }),
     });
   }
@@ -93,6 +94,17 @@ export default class FluencySystem extends mix(
       parts.text,
     ]);
     return parts;
+  }
+
+  /** @inheritDoc */
+  get isReference() {
+    const sups = /** @type {TeriockAbility[]} */ this.parent.allSups.contents;
+    for (const sup of sups) {
+      if (sup.type === "ability" && sup.system?.maneuver !== "passive") {
+        return true;
+      }
+    }
+    return super.isReference;
   }
 
   /** @inheritDoc */
@@ -191,5 +203,6 @@ export default class FluencySystem extends mix(
   /** @inheritDoc */
   prepareDerivedData() {
     this.tradecraftDescription = TERIOCK.content.tradecrafts[this.tradecraft];
+    this.parent.transfer = true;
   }
 }

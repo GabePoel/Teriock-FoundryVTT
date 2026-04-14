@@ -99,7 +99,7 @@ export default class AbilitySystem extends mix(
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
-      childEffectTypes: ["ability"],
+      childEffectTypes: ["ability", "fluency"],
       hierarchy: true,
       indexCategoryKey: "abilities",
       indexCompendiumKey: "abilities",
@@ -107,7 +107,7 @@ export default class AbilitySystem extends mix(
       passive: true,
       type: "ability",
       usable: true,
-      visibleTypes: ["ability"],
+      visibleTypes: ["ability", "fluency"],
     });
   }
 
@@ -319,7 +319,9 @@ export default class AbilitySystem extends mix(
   get isReference() {
     const sups = /** @type {TeriockAbility[]} */ this.parent.allSups.contents;
     for (const sup of sups) {
-      if (sup.system?.maneuver !== "passive") return true;
+      if (sup.type === "ability" && sup.system?.maneuver !== "passive") {
+        return true;
+      }
     }
     return super.isReference;
   }

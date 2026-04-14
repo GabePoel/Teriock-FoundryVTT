@@ -76,11 +76,7 @@ export default function abilityContextMenus(ability) {
     form: Object.entries(TERIOCK.options.effect.form).map(([key, value]) => ({
       label: value.label,
       icon: makeIcon(value.icon, TERIOCK.display.iconStyles.contextMenu),
-      onClick: async () => {
-        await ability.update({
-          "system.form": key,
-        });
-      },
+      onClick: async () => await ability.update({ "system.form": key }),
     })),
     interaction: quickMenu(
       TERIOCK.options.ability.interaction,
@@ -93,7 +89,6 @@ export default function abilityContextMenus(ability) {
             "system.executionTime.base": "a1",
             "system.maneuver": "active",
           });
-          await ability.deleteSubDocuments(ability.subs.map((s) => s._id));
         },
         icon: makeIcon(TERIOCK.display.icons.maneuver.active, "contextMenu"),
         label: _loc("TERIOCK.TERMS.Maneuver.active"),
@@ -104,7 +99,6 @@ export default function abilityContextMenus(ability) {
             "system.executionTime.base": "r1",
             "system.maneuver": "reactive",
           });
-          await ability.deleteSubDocuments(ability.subs.map((s) => s._id));
         },
         icon: makeIcon(TERIOCK.display.icons.maneuver.reactive, "contextMenu"),
         label: _loc("TERIOCK.TERMS.Maneuver.reactive"),
@@ -125,7 +119,6 @@ export default function abilityContextMenus(ability) {
             "system.executionTime.slow.unit": "minute",
             "system.maneuver": "slow",
           });
-          await ability.deleteSubDocuments(ability.subs.map((s) => s._id));
         },
         icon: makeIcon(TERIOCK.display.icons.maneuver.slow, "contextMenu"),
         label: _loc("TERIOCK.TERMS.Maneuver.slow"),

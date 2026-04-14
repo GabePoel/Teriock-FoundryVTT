@@ -208,7 +208,7 @@ export function blocksField() {
       classes: new StringField({ initial: "" }),
       italic: new BooleanField({ initial: false, required: false }),
       special: new StringField({ nullable: true }),
-      text: new StringField({ nullable: true }),
+      text: new StringField({ blank: true, nullable: true }),
       title: new StringField(),
     }),
   );
@@ -222,7 +222,7 @@ export function barsField() {
   return new ArrayField(
     new SchemaField({
       icon: new StringField({ initial: "", required: false }),
-      label: new StringField({ nullable: true, required: false }),
+      label: new StringField({ blank: true, nullable: true, required: false }),
       wrappers: new ArrayField(new StringField(), {
         initial: [],
         required: false,
@@ -237,7 +237,12 @@ export function barsField() {
  * @returns {StringField}
  */
 function nullString() {
-  return new StringField({ initial: null, nullable: true, required: false });
+  return new StringField({
+    blank: true,
+    initial: null,
+    nullable: true,
+    required: false,
+  });
 }
 
 /**
@@ -257,7 +262,11 @@ export function panelsField() {
       image: nullString(),
       label: nullString(),
       name: nullString(),
-      uuid: new DocumentUUIDField({ initial: null, nullable: true }),
+      uuid: new DocumentUUIDField({
+        blank: true,
+        initial: null,
+        nullable: true,
+      }),
     }),
     { initial: [], required: false },
   );
