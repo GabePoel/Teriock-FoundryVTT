@@ -1,6 +1,7 @@
 import { iconStyles } from "../constants/display/_module.mjs";
 import { costOptions } from "../constants/options/cost-options.mjs";
 import { BaseRoll } from "../dice/rolls/_module.mjs";
+import { formulaExists } from "./formula.mjs";
 import { localizeChoices } from "./localization.mjs";
 import { toCamelCase, toTitleCase } from "./string.mjs";
 
@@ -373,6 +374,27 @@ export async function fromIdentifierLocal(identifier, localDocument) {
         c?.system?.identifier === identifier,
     ) ?? null
   );
+}
+
+/**
+ * Effective children of a document for which the qualifier formula's minimum
+ * value is truthy against each child's local roll data.
+ * @param {AnyCommonDocument} document
+ * @param {Teriock.System.FormulaString} qualifier
+ * @returns {Promise<AnyCommonDocument[]>}
+ */
+export async function fromQualifier(document, qualifier) {
+  if (!document || !formulaExists(qualifier)) return [];
+  if (typeof document.getEffectiveChildren !== "function") return [];
+  const children = await document.getEffectiveChildren();
+  const matched = [];
+  for (const child of children) {
+    const rollData = child.system?.getLocalRollData?.();
+    if (rollData === undefined) continue;
+    const value = BaseRoll.minValue(qualifier, rollData, {});
+    if (value) matched.push(child);
+  }
+  return matched;
 }
 
 /**

@@ -66,14 +66,19 @@ export default class UseDocumentsAutomation extends mix(
 
   /** @inheritDoc */
   get _formPaths() {
-    return [...super._formPaths, "noHeighten", "expandTables"];
+    return [
+      ...this._selectionPaths,
+      "hr",
+      ...this._triggerPaths,
+      "hr",
+      "noHeighten",
+      ...this._competencePaths,
+    ];
   }
 
   /** @inheritDoc */
-  get _triggerPaths() {
-    const paths = super._triggerPaths;
-    if (this.trigger) paths.push(...this._selectionPaths);
-    return paths;
+  get _selectionPaths() {
+    return [...super._selectionPaths, "expandTables"];
   }
 
   /**
@@ -137,8 +142,9 @@ export default class UseDocumentsAutomation extends mix(
    * @return {Promise<void>}
    */
   async executeDocuments(scope = {}) {
+    const actor = scope.execution?.actor ?? this.actor;
     await this.use({
-      actor: scope.execution?.actor || this.actor,
+      actor,
       edge: scope.execution?.edge,
       event: scope.execution?.options?.event,
       competence: this.overrideCompetence
@@ -162,13 +168,15 @@ export default class UseDocumentsAutomation extends mix(
   async use(options = {}) {
     options = Object.assign(
       {
-        actor: options.actor || this.document.actor,
         noHeighten: this.noHeighten,
       },
       options,
     );
+    if (options.actor == null) {
+      options.actor = this.actor ?? this.document?.actor ?? null;
+    }
     const chosen = await this._choose({
-      actor: options.actor || this.document.actor,
+      actor: options.actor,
       expandFolders: true,
       expandTables: this.expandTables,
     });

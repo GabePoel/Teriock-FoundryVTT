@@ -38,7 +38,10 @@ export default class TransformationAutomation extends mix(
   /** @inheritDoc */
   get _formPaths() {
     return [
-      ...super._formPaths,
+      ...this._selectionPaths,
+      "hr",
+      ...this._competencePaths,
+      "hr",
       "level",
       "img",
       "ring",

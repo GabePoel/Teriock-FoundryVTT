@@ -45,7 +45,15 @@ export default function SelectExternalDocumentsAutomationMixin(Base) {
 
       /** @inheritDoc */
       get _formPaths() {
-        return ["uuids", ...super._formPaths];
+        return [...this._selectionPaths, ...super._formPaths];
+      }
+
+      /**
+       * Paths relating to selection options.
+       * @returns {string[]}
+       */
+      get _selectionOptionPaths() {
+        return ["multi", "automatic"];
       }
 
       /**
@@ -53,7 +61,7 @@ export default function SelectExternalDocumentsAutomationMixin(Base) {
        * @return {string[]}
        */
       get _selectionPaths() {
-        return ["multi", "automatic"];
+        return ["uuids", "hr", ...this._selectionOptionPaths];
       }
 
       /**
@@ -89,12 +97,17 @@ export default function SelectExternalDocumentsAutomationMixin(Base) {
 
       /**
        * Choose documents to add.
-       * @return {Promise<TeriockDocument[]>}
+       * @param {object} [options]
+       * @param {AnyActor} [options.actor]
+       * @param {boolean} [options.expandFolders]
+       * @param {boolean} [options.expandTables]
+       * @return {Promise<UUID<TeriockDocument>[]>}
        */
-      async choose() {
+      async choose(options = {}) {
         const docs = await this._choose({
           expandFolders: true,
           expandTables: true,
+          ...options,
         });
         return docs.map((d) => d.uuid);
       }

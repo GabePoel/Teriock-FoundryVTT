@@ -243,8 +243,8 @@ export default (Base) => {
           [`maneuver.${this.maneuver}`]: 1,
           interaction: this.interaction,
           [`interaction.${this.interaction}`]: 1,
-          time: this.executionTime,
-          [`time.${this.executionTime}`]: 1,
+          time: this.executionTime.base,
+          [`time.${this.executionTime.base}`]: 1,
           range: this.range.value,
         });
         // Add deliveries

@@ -73,6 +73,18 @@ export default (Base) => {
         }
         return entries;
       }
+
+      /** @inheritDoc */
+      getLocalRollData() {
+        const data = super.getLocalRollData();
+        if (this.parent.parent?.type === "rank") {
+          const rank = /** @type {TeriockRank} */ this.parent.parent;
+          data[`class.${rank.system.className.slice(0, 3).toLowerCase()}`] = 1;
+          data[`class.${rank.system.className}`] = 1;
+          data[`class.rank`] = rank.system.classRank;
+        }
+        return data;
+      }
     }
   );
 };

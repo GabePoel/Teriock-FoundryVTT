@@ -47,19 +47,22 @@ export default class AddDocumentsAutomation extends mix(
   /** @inheritDoc */
   get _formPaths() {
     return [
-      ...super._formPaths,
-      ...super._selectionPaths,
+      ...this._selectionPaths,
+      "hr",
       "attachDocuments",
+      ...this._competencePaths,
       ...super._overrideDataPaths,
     ];
   }
 
   /**
    * @inheritDoc
+   * @param {object} [options]
+   * @param {AnyActor} [options.actor]
    * @return {Promise<Teriock.System.Attachment<ChildDocument>[]>}
    */
-  async choose() {
-    const uuids = await super.choose();
+  async choose(options = {}) {
+    const uuids = await super.choose(options);
     return uuids.map((uuid) => {
       const data = foundry.utils.expandObject({
         "system.competence.raw": this.overrideCompetence

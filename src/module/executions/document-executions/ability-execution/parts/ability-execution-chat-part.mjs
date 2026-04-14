@@ -428,7 +428,7 @@ export default function AbilityExecutionChatPart(Base) {
               (a) => [AddDocumentsAutomation.TYPE].includes(a.type),
             );
           for (const a of childAutomations) {
-            const toAdd = await a.choose();
+            const toAdd = await a.choose({ actor: this.actor });
             if (a.crit.has(0)) {
               if (a.attachDocuments) {
                 normConChildren.push(...toAdd);
@@ -451,7 +451,7 @@ export default function AbilityExecutionChatPart(Base) {
               (a) => [TransformationAutomation.TYPE].includes(a.type),
             );
           for (const a of transformationAutomations) {
-            const toAdd = await a.choose();
+            const toAdd = await a.choose({ actor: this.actor });
             if (a.crit.has(0)) {
               normConData.system.transformation.uuids.push(...toAdd);
             }

@@ -73,15 +73,13 @@ export default (Base) => {
       get isBasic() {
         return (
           this.basic &&
-          this.parent.parent.name === "Basic Abilities" &&
-          this.parent.inCompendium
+          this.parent.parent?.typedIdentifier === "power:basic-abilities"
         );
       }
 
       /** @inheritDoc */
       getLocalRollData() {
-        const data = super.getLocalRollData();
-        Object.assign(data, {
+        return Object.assign(super.getLocalRollData(), {
           basic: Number(this.basic),
           elderSorcery: Number(this.elderSorcery),
           es: Number(this.elderSorcery),
@@ -96,12 +94,6 @@ export default (Base) => {
           sustained: Number(this.sustained),
           warded: Number(this.warded),
         });
-        if (this.parent.parent?.type === "rank") {
-          const rank = /** @type {TeriockRank} */ this.parent.parent;
-          data[`class.${rank.system.className.slice(0, 3).toLowerCase()}`] = 1;
-          data[`class.${rank.system.className}`] = 1;
-        }
-        return data;
       }
     }
   );

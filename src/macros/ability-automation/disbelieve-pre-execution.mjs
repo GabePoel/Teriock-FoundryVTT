@@ -28,7 +28,7 @@ for (let i = 0; i < scope.execution.rolls.length; i++) {
   const r = scope.execution.rolls[i];
   if (r.styles.dice.classes === "feat") {
     if (typeof dc === "number") {
-      const newRoll = new game.teriock.Roll(
+      const newRoll = new teriock.dice.rolls.BaseRoll(
         `${dc} - 2 * @h`,
         scope.execution.rollData,
         {

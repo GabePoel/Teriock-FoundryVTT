@@ -1,5 +1,5 @@
 const formula = scope.effect?.flags?.teriockEffect?.formula || "1d6";
-const roll = new game.teriock.Roll(formula, actor.getRollData());
+const roll = new teriock.dice.rolls.BaseRoll(formula, actor.getRollData());
 await roll.evaluate();
 await roll.toMessage(
   {

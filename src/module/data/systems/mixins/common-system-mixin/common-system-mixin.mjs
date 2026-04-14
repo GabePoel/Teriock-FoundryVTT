@@ -323,13 +323,20 @@ export default function CommonSystemMixin(Base) {
 
       /** @inheritDoc */
       getLocalRollData() {
-        return {
+        const rollData = {
           name: this.parent.name,
           identifier: this.identifier,
           [`identifier.${this.identifier}`]: 1,
           type: this.parent.type,
           [`type.${this.parent.type}`]: 1,
+          [this.parent.type]: 1,
         };
+        if (this.parent.parent?.type) {
+          rollData[`parent.${this.parent.parent.type}`] = 1;
+        }
+        const actor = this.actor;
+        if (actor) Object.assign(rollData, actor.system.getScalingRollData());
+        return rollData;
       }
 
       /** @returns {Promise<Partial<Teriock.Messages.MessagePanel>>} */

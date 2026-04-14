@@ -40,18 +40,6 @@ export default (Base) => {
       }
 
       /**
-       * Get base roll data.
-       * @returns {object}
-       */
-      #getBaseRollData() {
-        return {
-          f: this.scaling.f,
-          lvl: this.scaling.lvl,
-          p: this.scaling.p,
-        };
-      }
-
-      /**
        * Get rank roll data.
        * @returns {object}
        */
@@ -83,11 +71,23 @@ export default (Base) => {
         return data;
       }
 
+      /**
+       * Get base roll data.
+       * @returns {object}
+       */
+      getScalingRollData() {
+        return {
+          f: this.scaling.f,
+          lvl: this.scaling.lvl,
+          p: this.scaling.p,
+        };
+      }
+
       /** @inheritDoc */
       getRollData() {
         const rollData = super.getRollData();
         Object.assign(rollData, {
-          ...this.#getBaseRollData(),
+          ...this.getScalingRollData(),
           ...this.#getRankRollData(),
           ...this.#getSpeciesRollData(),
         });

@@ -59,15 +59,16 @@ export default function AccessDataMixin(Base) {
        * @returns {HTMLDivElement[]}
        */
       _makeFormGroups(paths) {
-        return paths.map((p) =>
-          this.schema.getField(p).toFormGroup(
+        return paths.map((p) => {
+          if (p === "hr") return document.createElement("hr");
+          return this.schema.getField(p).toFormGroup(
             { rootId: foundry.utils.randomID(), localize: true },
             {
               name: `${this.localPath}.${p}`,
               value: foundry.utils.getProperty(this, p),
             },
-          ),
-        );
+          );
+        });
       }
 
       /**
