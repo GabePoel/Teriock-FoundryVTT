@@ -400,11 +400,10 @@ export default function AbilityExecutionChatPart(Base) {
         );
 
         if (
-          (this.source.system.duration.unit !== "instant" &&
-            this.source.system.maneuver !== "passive" &&
-            !modifyEffectAutomation?.prevent &&
-            this.targetsActor) ||
-          this.targetsArmament
+          this.source.system.duration.unit !== "instant" &&
+          this.source.system.maneuver !== "passive" &&
+          !modifyEffectAutomation?.prevent &&
+          (this.targetsActor || this.targetsArmament)
         ) {
           // Add apply effects activation
           const normConData = await this.#generateEffectConsequence(false);
