@@ -16,6 +16,7 @@ Links to the original pages with the authors can be found below.
 - [`./documents/effect.svg`](https://game-icons.net/1x1/lorc/embrassed-energy.html)
 - [`./documents/fluency.svg`](https://game-icons.net/1x1/delapouite/freemasonry.html)
 - [`./documents/imbuement.svg`](https://game-icons.net/1x1/delapouite/mesh-network.html)
+- [`./documents/inventor.svg`](https://game-icons.net/1x1/delapouite/backpack.html)
 - [`./documents/mechanic.svg`](https://game-icons.net/1x1/lorc/gears.html)
 - [`./documents/mount.svg`](https://game-icons.net/1x1/skoll/mounted-knight.html)
 - [`./documents/power.svg`](https://game-icons.net/1x1/lorc/aura.html)

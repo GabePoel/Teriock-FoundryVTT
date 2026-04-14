@@ -218,10 +218,10 @@ export default function BaseDocumentMixin(Base) {
               onClick: async () => await this.deleteDialog(),
               visible: () =>
                 this._checkValidEditorDocument(doc) ||
-                (this.documentName ===
-                  TERIOCK.options.document[doc.type]?.doc &&
-                  this.isOwner &&
-                  this.inCompendium),
+                (this.inCompendium &&
+                  !this.compendium.locked &&
+                  !this.parent &&
+                  this.sup?.uuid === doc?.uuid),
               group: "document",
             },
           ],

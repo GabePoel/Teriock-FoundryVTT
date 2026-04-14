@@ -2,7 +2,7 @@ import { attunementOptions } from "../../../../constants/options/attunement-opti
 import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
 import { makeIcon, objectMap } from "../../../../helpers/utils.mjs";
-import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
+import CleanedEffectSystem from "../cleaned-effect-system.mjs";
 
 const { fields } = foundry.data;
 
@@ -14,7 +14,7 @@ const { fields } = foundry.data;
  *
  * @extends {Teriock.Models.AttunementSystemData}
  */
-export default class AttunementSystem extends BaseEffectSystem {
+export default class AttunementSystem extends CleanedEffectSystem {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
     ...super.LOCALIZATION_PREFIXES,

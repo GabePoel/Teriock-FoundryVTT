@@ -128,8 +128,6 @@ export default class TeriockItem extends mix(
    * @returns {Generator<AnyActiveEffect, void, void>}
    */
   *allApplicableEffects() {
-    for (const effect of this.effects) {
-      yield effect;
-    }
+    for (const effect of this.effects) yield effect;
   }
 }

@@ -54,10 +54,12 @@ import {
 import {
   CharacterSheet,
   CreatureSheet,
+  InventorySheet,
 } from "../applications/sheets/actor-sheets/_module.mjs";
 import {
   CharacterSystem,
   CreatureSystem,
+  InventorySystem,
 } from "../data/systems/actors/_module.mjs";
 import type ArchetypeSheet from "../applications/sheets/item-sheets/archetype-sheet.mjs";
 import type ArchetypeSystem from "../data/systems/items/archetype-system/archetype-system.mjs";
@@ -100,6 +102,14 @@ declare global {
     _id: ID<TeriockCreature>;
     get id(): ID<TeriockCreature>;
     get uuid(): UUID<TeriockCreature>;
+  };
+  export type TeriockInventory = TeriockActor & {
+    sheet: InventorySheet;
+    system: InventorySystem;
+    type: "inventory";
+    _id: ID<TeriockInventory>;
+    get id(): ID<TeriockInventory>;
+    get uuid(): UUID<TeriockInventory>;
   };
 }
 

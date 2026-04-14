@@ -130,6 +130,14 @@ export const documentOptions = {
     plural: "TERIOCK.DOCUMENTS.imbuement.plural",
     sorter: docSort,
   },
+  inventory: {
+    doc: "Actor",
+    getter: "inventories",
+    icon: icons.document.inventory,
+    name: "TYPES.Actor.inventory",
+    plural: "TERIOCK.DOCUMENTS.inventory.plural",
+    sorter: docSort,
+  },
   mount: {
     doc: "Item",
     getter: "mounts",

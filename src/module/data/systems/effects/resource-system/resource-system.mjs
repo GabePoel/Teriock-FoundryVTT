@@ -2,17 +2,17 @@ import { BaseDocumentExecution } from "../../../../executions/document-execution
 import { mix } from "../../../../helpers/construction.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
-import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
+import CleanedEffectSystem from "../cleaned-effect-system.mjs";
 
 /**
  * Resource-specific effect data model.
- * @extends {BaseEffectSystem}
+ * @extends {CleanedEffectSystem}
  * @extends {Teriock.Models.ResourceSystemData}
  * @mixes ConsumableSystem
  * @mixes RevelationSystem
  */
 export default class ResourceSystem extends mix(
-  BaseEffectSystem,
+  CleanedEffectSystem,
   mixins.ConsumableSystemMixin,
   mixins.RevelationSystemMixin,
 ) {

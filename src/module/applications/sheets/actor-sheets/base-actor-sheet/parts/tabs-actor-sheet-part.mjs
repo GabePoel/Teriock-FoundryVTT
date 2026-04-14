@@ -35,7 +35,7 @@ export default (Base) =>
           },
           {
             id: "inventory",
-            icon: documentOptions.equipment.icon,
+            icon: documentOptions.inventory.icon,
             label: "TERIOCK.SHEETS.Actor.TABS.Inventory.title",
           },
           {

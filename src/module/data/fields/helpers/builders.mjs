@@ -112,7 +112,6 @@ export function changeTypeField() {
     }),
     initial: "add",
     label: "TERIOCK.SCHEMA.QualifiedChange.type.label",
-    required: false,
   });
 }
 

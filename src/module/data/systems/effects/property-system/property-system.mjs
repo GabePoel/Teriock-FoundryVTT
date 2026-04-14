@@ -5,7 +5,7 @@ import { toKebabCase } from "../../../../helpers/string.mjs";
 import { FormulaField, IdentifierField } from "../../../fields/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
-import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
+import CleanedEffectSystem from "../cleaned-effect-system.mjs";
 
 const { fields } = foundry.data;
 
@@ -15,7 +15,7 @@ const { fields } = foundry.data;
  * Relevant wiki pages:
  * - [Properties](https://wiki.teriock.com/index.php/Category:Properties)
  *
- * @extends {BaseEffectSystem}
+ * @extends {CleanedEffectSystem}
  * @extends {Teriock.Models.PropertySystemData}
  * @mixes AdjustableSystem
  * @mixes ConsumableSystem
@@ -23,7 +23,7 @@ const { fields } = foundry.data;
  * @mixes WikiSystem
  */
 export default class PropertySystem extends mix(
-  BaseEffectSystem,
+  CleanedEffectSystem,
   mixins.AdjustableSystemMixin,
   mixins.ConsumableSystemMixin,
   mixins.WikiSystemMixin,

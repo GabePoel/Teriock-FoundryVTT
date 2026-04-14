@@ -5,7 +5,7 @@ import { AbilitySettingsModel } from "../../../models/settings-models/_module.mj
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import * as shared from "../../../shared/mixins/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
-import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
+import CleanedEffectSystem from "../cleaned-effect-system.mjs";
 import * as parts from "./parts/_module.mjs";
 
 //noinspection JSClosureCompilerSyntax
@@ -15,7 +15,7 @@ import * as parts from "./parts/_module.mjs";
  * Relevant wiki pages:
  * - [Ability Rules](https://wiki.teriock.com/index.php/Category:Ability_rules)
  *
- * @extends {BaseEffectSystem}
+ * @extends {CleanedEffectSystem}
  * @implements {Teriock.Models.AbilitySystemData}
  * @mixes AbilityAutomationsPart
  * @mixes AbilityCostsPart
@@ -38,7 +38,7 @@ import * as parts from "./parts/_module.mjs";
  * @mixes WikiSystem
  */
 export default class AbilitySystem extends mix(
-  BaseEffectSystem,
+  CleanedEffectSystem,
   shared.ThresholdDataMixin,
   mixins.AttackSystemMixin,
   mixins.ConsumableSystemMixin,

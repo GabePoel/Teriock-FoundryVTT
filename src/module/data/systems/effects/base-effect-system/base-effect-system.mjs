@@ -117,9 +117,7 @@ export default class BaseEffectSystem extends ChildSystemMixin(
    * @returns {Promise<void>}
    */
   async checkExpiration() {
-    if (await this.shouldExpire()) {
-      await this.expire();
-    }
+    if (await this.shouldExpire()) await this.expire();
   }
 
   /**
@@ -130,11 +128,8 @@ export default class BaseEffectSystem extends ChildSystemMixin(
     if (!this.deleteOnExpire) {
       await this.parent.hookCall("effectExpiration");
     }
-    if (this.deleteOnExpire) {
-      await this.parent.delete();
-    } else {
-      await this.parent.update({ disabled: true });
-    }
+    if (this.deleteOnExpire) await this.parent.delete();
+    else await this.parent.update({ disabled: true });
   }
 
   /** @inheritDoc */

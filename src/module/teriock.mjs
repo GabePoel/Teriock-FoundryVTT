@@ -160,6 +160,7 @@ foundry.helpers.Hooks.once("init", function () {
       dataModels: {
         character: data.systems.actors.CharacterSystem,
         creature: data.systems.actors.CreatureSystem,
+        inventory: data.systems.actors.InventorySystem,
       },
       documentClass: documents.TeriockActor,
     },
@@ -276,21 +277,21 @@ foundry.helpers.Hooks.once("init", function () {
     {
       cls: applications.sheets.actor.CharacterSheet,
       doc: documents.TeriockActor,
-      label: "TYPES.Actor.character",
-      types: ["character"],
+      label: "TYPES.Actor.actor",
+      types: ["character", "creature"],
     },
     {
       cls: applications.sheets.actor.CreatureSheet,
       doc: documents.TeriockActor,
-      label: "TYPES.Actor.creature",
-      types: ["creature"],
+      label: "TYPES.Actor.actor",
+      types: ["inventory"],
+      makeDefault: false,
     },
     {
       cls: applications.sheets.actor.InventorySheet,
       doc: documents.TeriockActor,
-      label: "TERIOCK.SHEETS.Actor.TABS.Inventory.title",
-      types: ["character", "creature"],
-      makeDefault: false,
+      label: "TYPES.Actor.inventory",
+      types: ["inventory"],
     },
     // Items
     {

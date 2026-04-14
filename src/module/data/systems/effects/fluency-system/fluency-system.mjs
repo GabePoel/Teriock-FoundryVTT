@@ -8,7 +8,7 @@ import { CompetenceModel } from "../../../models/_module.mjs";
 import { CommonMacroAutomation } from "../../../pseudo-documents/automations/_module.mjs";
 import * as shared from "../../../shared/mixins/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
-import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
+import CleanedEffectSystem from "../cleaned-effect-system.mjs";
 
 const { fields } = foundry.data;
 
@@ -18,7 +18,7 @@ const { fields } = foundry.data;
  * Relevant wiki pages:
  * - [Tradecraft Fluencies](https://wiki.teriock.com/index.php/Core:Tradecraft_Fluencies)
  *
- * @extends {BaseEffectSystem}
+ * @extends {CleanedEffectSystem}
  * @extends {Teriock.Models.FluencySystemData}
  * @mixes CompetenceDisplaySystem
  * @mixes RevelationSystem
@@ -26,7 +26,7 @@ const { fields } = foundry.data;
  * @mixes WikiSystem
  */
 export default class FluencySystem extends mix(
-  BaseEffectSystem,
+  CleanedEffectSystem,
   mixins.WikiSystemMixin,
   mixins.RevelationSystemMixin,
   mixins.CompetenceDisplaySystemMixin,
@@ -203,6 +203,5 @@ export default class FluencySystem extends mix(
   /** @inheritDoc */
   prepareDerivedData() {
     this.tradecraftDescription = TERIOCK.content.tradecrafts[this.tradecraft];
-    this.parent.transfer = true;
   }
 }

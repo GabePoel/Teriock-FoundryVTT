@@ -13,7 +13,7 @@ export default class InventorySheet extends BaseActorSheet {
       height: 600,
     },
     window: {
-      icon: makeIconClass(documentOptions.equipment.icon, "title"),
+      icon: makeIconClass(documentOptions.inventory.icon, "title"),
     },
   };
 
