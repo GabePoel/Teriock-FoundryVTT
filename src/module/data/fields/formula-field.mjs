@@ -111,6 +111,14 @@ export default class FormulaField extends EnhancedStringField {
     return this._cast(delta).trim();
   }
 
+  /** @inheritDoc */
+  _toInput(config) {
+    const input = super._toInput(config);
+    if (input.tagName !== "INPUT") return input;
+    config.value ??= this.getInitialValue({}) ?? "";
+    return foundry.applications.elements.HTMLFormulaInputElement.create(config);
+  }
+
   /** @inheritdoc */
   _validateType(value) {
     if (this.deterministic) {
@@ -138,5 +146,12 @@ export default class FormulaField extends EnhancedStringField {
       return super.applyChange(value, model, change, { replacementData });
     }
     return this.initialize(updated, model);
+  }
+
+  /** @inheritDoc */
+  toFormGroup(groupConfig = {}, inputConfig = {}) {
+    groupConfig.classes ||= [];
+    groupConfig.classes.push("formula-input");
+    return super.toFormGroup(groupConfig, inputConfig);
   }
 }

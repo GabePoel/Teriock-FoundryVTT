@@ -195,7 +195,24 @@
       }
     }
 
-    input {
+    button {
+      height: unset;
+      min-height: unset;
+      transition: 50ms;
+      padding: 0;
+
+      &:before {
+        color: var(--color-text-subtle);
+        font-size: x-small;
+      }
+    }
+
+    formula-input {
+      flex-direction: row-reverse;
+    }
+
+    input,
+    formula-input {
       background: none;
       border: none;
       box-shadow: none;
@@ -207,6 +224,23 @@
       padding: 0;
       text-align: center;
       text-overflow: ellipsis;
+
+      &:not(:hover) {
+        button {
+          width: 0;
+          max-width: 0;
+          min-width: 0;
+          opacity: 0;
+        }
+      }
+
+      &:hover {
+        button {
+          width: 0.75em;
+          max-width: 0.75em;
+          min-width: 0.75em;
+        }
+      }
     }
   }
 }
