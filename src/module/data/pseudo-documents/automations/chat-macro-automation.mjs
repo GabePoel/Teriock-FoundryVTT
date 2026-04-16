@@ -19,7 +19,7 @@ export default class ChatMacroAutomation extends MacroAutomationMixin(
 
   /** @inheritDoc */
   get _formPaths() {
-    return ["macro", "title"];
+    return ["macro", "display.label"];
   }
 
   /**
