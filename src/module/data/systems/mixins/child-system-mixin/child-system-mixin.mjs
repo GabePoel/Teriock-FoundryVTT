@@ -46,12 +46,8 @@ export default function ChildSystemMixin(Base) {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          font: new fields.StringField({
-            initial: "",
-          }),
-          description: new TextField({
-            initial: "",
-          }),
+          font: new fields.StringField({ initial: "" }),
+          description: new TextField({ initial: "" }),
           qualifiers: new fields.SchemaField({
             ephemeral: new EvaluationField({
               deterministic: true,
@@ -286,16 +282,6 @@ export default function ChildSystemMixin(Base) {
           ],
         );
         return entries;
-      }
-
-      /** @inheritDoc */
-      getLocalRollData() {
-        return {
-          ...super.getLocalRollData(),
-          flu: Number(this.competence?.fluent),
-          pro: Number(this.competence?.proficient),
-          c: this.competence.bonus,
-        };
       }
 
       /** @inheritDoc */

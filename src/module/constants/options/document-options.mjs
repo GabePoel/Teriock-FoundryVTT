@@ -198,12 +198,6 @@ export const documentOptions = {
     name: "TYPES.Card.stone",
     plural: "TERIOCK.DOCUMENTS.stone.plural",
   },
-  wrapper: {
-    doc: "Item",
-    icon: icons.document.ability,
-    name: "TYPES.Item.wrapper",
-    plural: "TERIOCK.DOCUMENTS.wrapper.plural",
-  },
 };
 
 preLocalize("options.document", { keys: ["name", "plural"] });

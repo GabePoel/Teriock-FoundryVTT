@@ -39,12 +39,25 @@ export default class StorageModel extends EmbeddedDataModel {
     };
   }
 
+  /** @type {TeriockEquipment[]} */
+  _storedEquipment;
+
+  /**
+   * Equipment stored in this storage.
+   * @returns {TeriockEquipment[]}
+   */
+  get storedEquipment() {
+    if (!this.enabled) return [];
+    if (!this._storedEquipment) this._storedEquipment = this.document.equipment;
+    return this._storedEquipment;
+  }
+
   /**
    * Count of items carried.
    * @returns {number}
    */
   get carriedCount() {
-    return this.document.equipment
+    return this.storedEquipment
       .map((e) => (e.system?.consumable ? e.system?.quantity : 1) || 1)
       .reduce((a, b) => a + b, 0);
   }
@@ -54,7 +67,7 @@ export default class StorageModel extends EmbeddedDataModel {
    * @returns {number}
    */
   get carriedWeight() {
-    return this.document.equipment
+    return this.storedEquipment
       .map((e) => Number(e.system?.weight?.total))
       .reduce((a, b) => a + b, 0)
       .toNearest(equipmentOptions.weight.interval);

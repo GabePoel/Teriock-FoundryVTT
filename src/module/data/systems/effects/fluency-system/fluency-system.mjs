@@ -176,7 +176,6 @@ export default class FluencySystem extends mix(
       ...super.getLocalRollData(),
       field: this.field,
       tc: this.tradecraft,
-      tradecraft: this.tradecraft,
     };
   }
 

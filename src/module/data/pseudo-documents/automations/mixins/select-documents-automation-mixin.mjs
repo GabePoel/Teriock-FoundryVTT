@@ -37,6 +37,11 @@ export default function SelectDocumentsAutomationMixin(Base) {
       }
 
       /** @inheritDoc */
+      get _inputContextKey() {
+        return "child";
+      }
+
+      /** @inheritDoc */
       get _selectionPaths() {
         return [
           "uuids",

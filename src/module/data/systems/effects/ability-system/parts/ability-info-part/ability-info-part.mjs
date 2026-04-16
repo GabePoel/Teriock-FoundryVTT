@@ -81,7 +81,6 @@ export default (Base) => {
       getLocalRollData() {
         return Object.assign(super.getLocalRollData(), {
           basic: Number(this.basic),
-          elderSorcery: Number(this.elderSorcery),
           es: Number(this.elderSorcery),
           guildmaster: Number(this.guildmaster),
           invoked: Number(this.invoked),

@@ -101,7 +101,6 @@ export default function ThresholdExecutionMixin(Base) {
           },
           {
             condition: this.hasBonus,
-            context: "actor",
             field: new FormulaField({ deterministic: false }),
             hint: "TERIOCK.DIALOGS.ThresholdExecutionOptions.FIELDS.bonus.hint",
             label:
@@ -237,7 +236,6 @@ export default function ThresholdExecutionMixin(Base) {
           const groupConfig = { label: _loc(f.label), rootId };
           if (f.hint) groupConfig.hint = _loc(f.hint);
           const inputConfig = {
-            context: f.context,
             id: `${rootId}-${f.name}`,
             integer: f.integer,
             max: f.max,

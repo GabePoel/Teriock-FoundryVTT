@@ -1,7 +1,4 @@
-import {
-  localizeTypeContextKey,
-  preLocalize,
-} from "../../helpers/localization.mjs";
+import { preLocalize } from "../../helpers/localization.mjs";
 import { attributeOptions } from "../options/attribute-options.mjs";
 import { characterOptions } from "../options/character-options.mjs";
 import { documentOptions } from "../options/document-options.mjs";
@@ -9,37 +6,34 @@ import { hackOptions } from "../options/hack-options.mjs";
 import { rankOptions } from "../options/rank-options.mjs";
 
 const actorContext = {
-  character: "TERIOCK.ROLL_CONTEXT.Type.character",
-  creature: "TERIOCK.ROLL_CONTEXT.Type.creature",
-  inventory: "TERIOCK.ROLL_CONTEXT.Type.inventory",
   lvl: "TERIOCK.SYSTEMS.BaseActor.FIELDS.scaling.lvl.label",
   p: "TERIOCK.SYSTEMS.BaseActor.FIELDS.scaling.p.label",
   f: "TERIOCK.SYSTEMS.BaseActor.FIELDS.scaling.f.label",
 
-  "hp.value": "TERIOCK.SHEETS.Actor.SIDEBAR.Bars.hp.current",
-  "hp.max": "TERIOCK.SHEETS.Actor.SIDEBAR.Bars.hp.max",
-  "hp.min": "TERIOCK.ROLL_CONTEXT.Actor.hp.min",
-  "hp.temp": "TERIOCK.SHEETS.Actor.SIDEBAR.Bars.hp.temp",
-  "hp.morganti": "TERIOCK.ROLL_CONTEXT.Actor.hp.morganti",
+  "hp.value": "TERIOCK.SYSTEMS.BaseActor.FIELDS.hp.value.label",
+  "hp.max": "TERIOCK.SYSTEMS.BaseActor.FIELDS.hp.max.label",
+  "hp.min": "TERIOCK.SYSTEMS.BaseActor.FIELDS.hp.min.label",
+  "hp.temp": "TERIOCK.SYSTEMS.BaseActor.FIELDS.hp.temp.label",
+  "hp.morganti": "TERIOCK.SYSTEMS.BaseActor.FIELDS.hp.morganti.label",
 
-  "mp.value": "TERIOCK.SHEETS.Actor.SIDEBAR.Bars.mp.current",
-  "mp.max": "TERIOCK.SHEETS.Actor.SIDEBAR.Bars.mp.max",
-  "mp.min": "TERIOCK.ROLL_CONTEXT.Actor.mp.min",
-  "mp.temp": "TERIOCK.SHEETS.Actor.SIDEBAR.Bars.mp.temp",
-  "mp.morganti": "TERIOCK.ROLL_CONTEXT.Actor.mp.morganti",
+  "mp.value": "TERIOCK.SYSTEMS.BaseActor.FIELDS.mp.value.label",
+  "mp.max": "TERIOCK.SYSTEMS.BaseActor.FIELDS.mp.max.label",
+  "mp.min": "TERIOCK.SYSTEMS.BaseActor.FIELDS.mp.min.label",
+  "mp.temp": "TERIOCK.SYSTEMS.BaseActor.FIELDS.mp.temp.label",
+  "mp.morganti": "TERIOCK.SYSTEMS.BaseActor.FIELDS.mp.morganti.label",
 
-  "lp.value": "TERIOCK.SHEETS.Actor.SIDEBAR.Bars.lp.current",
-  "lp.max": "TERIOCK.SHEETS.Actor.SIDEBAR.Bars.lp.max",
-  "lp.min": "TERIOCK.ROLL_CONTEXT.Actor.lp.min",
+  "lp.value": "TERIOCK.SYSTEMS.BaseActor.FIELDS.lp.value.label",
+  "lp.max": "TERIOCK.SYSTEMS.BaseActor.FIELDS.lp.max.label",
+  "lp.min": "TERIOCK.SYSTEMS.BaseActor.FIELDS.lp.min.label",
 
-  pres: "TERIOCK.ROLL_CONTEXT.Actor.pres.max",
-  "pres.unused": "TERIOCK.ROLL_CONTEXT.Actor.pres.unused",
-  "pres.used": "TERIOCK.ROLL_CONTEXT.Actor.pres.used",
-  usp: "TERIOCK.ROLL_CONTEXT.Actor.usp",
+  pres: "TERIOCK.SYSTEMS.BaseActor.FIELDS.presence.max.label",
+  "pres.unused": "TERIOCK.SYSTEMS.BaseActor.FIELDS.presence.unused.label",
+  "pres.used": "TERIOCK.SYSTEMS.BaseActor.FIELDS.presence.used.label",
+  usp: "TERIOCK.SYSTEMS.BaseActor.FIELDS.presence.used.label",
 
-  speed: "TERIOCK.ROLL_CONTEXT.Actor.speed",
+  speed: "TERIOCK.SYSTEMS.BaseActor.FIELDS.speed.label",
   size: "TERIOCK.SHEETS.Actor.TABS.Details.size.label",
-  weight: "TERIOCK.ROLL_CONTEXT.Actor.weight",
+  weight: "TERIOCK.SYSTEMS.BaseActor.FIELDS.weight.label",
 
   "carry.factor": "TERIOCK.SHEETS.Actor.TABS.Details.carrying.factor",
   "carry.heavy": "TERIOCK.SHEETS.Actor.TABS.Details.carrying.heavyCapacity",
@@ -57,20 +51,32 @@ const actorContext = {
   cc: "TERIOCK.SYSTEMS.BaseActor.FIELDS.defense.cc.label",
   sb: "TERIOCK.SYSTEMS.BaseActor.FIELDS.offense.sb.label",
   ap: "TERIOCK.SYSTEMS.Attack.FIELDS.attackPenalty.label",
+  hit: "TERIOCK.SYSTEMS.Attack.FIELDS.hitBonus.label",
+  av0: "TERIOCK.TERMS.Properties.armorVoiding",
+  ub: "TERIOCK.TERMS.Properties.unblockable",
+  warded: "TERIOCK.SYSTEMS.Attack.FIELDS.warded.label",
+  h: "TERIOCK.ROLL_CONTEXT.Execution.h",
 
-  "db.stones.black": "TERIOCK.TERMS.Stones.black",
-  "db.stones.red": "TERIOCK.TERMS.Stones.red",
-  "db.stones.white": "TERIOCK.TERMS.Stones.white",
+  "db.stones.black":
+    "TERIOCK.SYSTEMS.BaseActor.FIELDS.deathBag.stones.black.label",
+  "db.stones.red": "TERIOCK.SYSTEMS.BaseActor.FIELDS.deathBag.stones.red.label",
+  "db.stones.white":
+    "TERIOCK.SYSTEMS.BaseActor.FIELDS.deathBag.stones.white.label",
   "db.pull": "TERIOCK.SYSTEMS.BaseActor.FIELDS.deathBag.pull.label",
 
-  "money.debt": "TERIOCK.ROLL_CONTEXT.Actor.money.debt",
-  "money.total": "TERIOCK.ROLL_CONTEXT.Actor.money.total",
+  "money.debt": "TERIOCK.SYSTEMS.BaseActor.FIELDS.money.debt.label",
+  "money.total": "TERIOCK.SYSTEMS.BaseActor.FIELDS.money.total.label",
 };
 
 export default actorContext;
 
 preLocalize("rollContext.actor");
 Hooks.once("i18nInit", () => {
+  Object.entries(documentOptions)
+    .filter(([_k, v]) => v.doc === "Actor")
+    .forEach(([k, v]) => {
+      actorContext[k] = _loc(v.name);
+    });
   Object.entries(attributeOptions).forEach(([k, v]) => {
     const name = _loc(v.label);
     Object.assign(actorContext, {
@@ -119,9 +125,4 @@ Hooks.once("i18nInit", () => {
       ),
     });
   });
-  Object.entries(documentOptions)
-    .filter(([_k, v]) => v.doc === "Actor")
-    .forEach(([k, _v]) => {
-      localizeTypeContextKey(actorContext, k);
-    });
 });

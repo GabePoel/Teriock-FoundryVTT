@@ -55,10 +55,11 @@ export const icons = {
   },
   change: {
     key: "ms-search",
-    type: "ms-calculate",
-    target: "ms-recenter",
-    value: "ms-subdirectory-arrow-right",
     phase: "ms-nest-clock-farsight-analog",
+    priority: "ms-low-priority",
+    target: "ms-recenter",
+    type: "ms-calculate",
+    value: "ms-subdirectory-arrow-right",
   },
   class: {
     flameMage: "ms-mode-heat",
@@ -362,7 +363,6 @@ export const icons = {
     on: "ms-check",
     openWindow: "ms-open-in-new",
     options: "ms-tune",
-    priority: "ms-low-priority",
     qualifier: "ms-mystery",
     quantity: "mdi-abacus",
     remove: "ms-close",

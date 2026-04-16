@@ -442,9 +442,9 @@ foundry.helpers.Hooks.once("init", function () {
   // Configure Formula Editor
   // ========================
 
-  CONFIG.formulaEditor.contexts.actor = {
-    labels: constants.rollContext.actor,
-  };
+  Object.entries(constants.rollContext).forEach(([k, v]) => {
+    CONFIG.formulaEditor.contexts[k] = { labels: v };
+  });
 
   // Configure Queries
   // =================
@@ -489,6 +489,22 @@ Hooks.once("i18nInit", () => {
     teriock.applications.shared.wikiContextMenuOptions,
     { keys: ["name"] },
   );
+  Object.assign(CONFIG.formulaEditor.contexts.child.labels, {
+    ...TERIOCK.rollContext.ability,
+    ...TERIOCK.rollContext.archetype,
+    ...TERIOCK.rollContext.armament,
+    ...TERIOCK.rollContext.attunement,
+    ...TERIOCK.rollContext.condition,
+    ...TERIOCK.rollContext.consequence,
+    ...TERIOCK.rollContext.fluency,
+    ...TERIOCK.rollContext.imbuement,
+    ...TERIOCK.rollContext.mount,
+    ...TERIOCK.rollContext.power,
+    ...TERIOCK.rollContext.property,
+    ...TERIOCK.rollContext.rank,
+    ...TERIOCK.rollContext.resource,
+    ...TERIOCK.rollContext.species,
+  });
 });
 
 // Register Hooks

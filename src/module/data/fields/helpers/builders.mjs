@@ -162,7 +162,8 @@ export function qualifiedChangeField() {
       nullable: false,
     }),
     type: changeTypeField(),
-    value: new EnhancedStringField({
+    value: new FormulaField({
+      deterministic: false,
       initial: "",
       label: "TERIOCK.SCHEMA.QualifiedChange.value.label",
     }),

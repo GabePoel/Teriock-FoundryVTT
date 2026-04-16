@@ -17,10 +17,7 @@ export default class FormulaField extends EnhancedStringField {
 
   /** @inheritdoc */
   static get _defaults() {
-    return foundry.utils.mergeObject(super._defaults, {
-      deterministic: false,
-      required: true,
-    });
+    return foundry.utils.mergeObject(super._defaults, { deterministic: false });
   }
 
   /** @inheritDoc */
@@ -113,10 +110,17 @@ export default class FormulaField extends EnhancedStringField {
 
   /** @inheritDoc */
   _toInput(config) {
-    const input = super._toInput(config);
-    if (input.tagName !== "INPUT") return input;
+    config.context ??= "actor";
+    const element = super._toInput(config);
+    const isInput = element.tagName === "INPUT";
+    const nestedInput = isInput ? null : element.querySelector("input");
+    if (!isInput && !nestedInput) return element;
     config.value ??= this.getInitialValue({}) ?? "";
-    return foundry.applications.elements.HTMLFormulaInputElement.create(config);
+    const formulaInput =
+      foundry.applications.elements.HTMLFormulaInputElement.create(config);
+    if (isInput) return formulaInput;
+    nestedInput.replaceWith(formulaInput);
+    return element;
   }
 
   /** @inheritdoc */
