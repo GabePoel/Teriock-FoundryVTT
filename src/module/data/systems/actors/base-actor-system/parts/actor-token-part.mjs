@@ -143,9 +143,14 @@ export default (Base) => {
       /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
-        this._prepareTokenColor();
         this._prepareTokenDetectionModes();
         this._prepareTokenVision();
+      }
+
+      /** @inheritDoc */
+      prepareVirtualEffects() {
+        super.prepareVirtualEffects();
+        this._prepareTokenColor();
         this.actor.tokenActiveEffectChanges["initial"].push(
           ...this._tokenChanges,
         );

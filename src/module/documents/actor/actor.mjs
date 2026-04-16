@@ -261,7 +261,6 @@ export default class TeriockActor extends mix(
     const yes = await super._preUpdate(changes, options, user);
     if (yes === false) return false;
 
-    // TODO: Refine token update process in V14
     const tokenUpdates =
       foundry.utils.getProperty(changes, "prototypeToken") || {};
     if (foundry.utils.hasProperty(changes, "system.size.raw")) {
@@ -272,19 +271,16 @@ export default class TeriockActor extends mix(
       }
       for (const token of this.getDependentTokens()) {
         if (token.parent?.grid?.type === 0) {
-          await token.resize({
-            width: tokenSize,
-            height: tokenSize,
-          });
+          await token.resize({ width: tokenSize, height: tokenSize });
         }
       }
     }
     if (Object.keys(tokenUpdates).length > 0) {
-      for (const token of this.getDependentTokens()) {
-        if (token.id) {
-          await token.update(tokenUpdates);
-        }
-      }
+      await Promise.all(
+        this.getDependentTokens()
+          .filter((t) => t.id)
+          .map((t) => t.update(foundry.utils.deepClone(tokenUpdates))),
+      );
     }
   }
 
@@ -413,8 +409,8 @@ export default class TeriockActor extends mix(
         }
       }
     }
-    this.system.prepareVirtualEffects();
     this.prepareVirtualWounds();
+    this.system.prepareVirtualEffects();
     this.cleanConditionInformation();
   }
 
@@ -422,7 +418,7 @@ export default class TeriockActor extends mix(
    * Add statuses and explanations for being wounded.
    */
   prepareVirtualWounds() {
-    if (!this.getSetting("automaticallyWound")) return;
+    if (!this.getSetting("automation.wound")) return;
     // Check what states are triggered in normal circumstances
     const hpUncn = this.system.hp.value < 1;
     const hpCrit =
