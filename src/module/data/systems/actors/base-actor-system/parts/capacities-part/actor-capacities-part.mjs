@@ -25,6 +25,7 @@ export default (Base) => {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
+          encumbranceLevel: initialNumber(),
           size: new fields.SchemaField({
             category: initialString(),
             length: initialNumber(),
@@ -103,7 +104,7 @@ export default (Base) => {
         if (this.weight.carried >= this.carryingCapacity.light) el = 1;
         if (this.weight.carried >= this.carryingCapacity.heavy) el = 2;
         if (this.weight.carried >= this.carryingCapacity.max) el = 3;
-        this.encumbranceLevel = Math.min(this.encumbranceLevel + el, 3);
+        this.encumbranceLevel = Math.clamp(this.encumbranceLevel + el, 0, 3);
       }
 
       /**
