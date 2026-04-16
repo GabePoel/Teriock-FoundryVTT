@@ -35,6 +35,15 @@ export default (Base) => {
         });
       }
 
+      /**
+       * Ensure tradecrafts have the correct keys assigned.
+       */
+      #prepareTradecrafts() {
+        for (const [k, v] of Object.entries(this.tradecrafts)) {
+          v._key = k;
+        }
+      }
+
       /** @inheritDoc */
       getRollData() {
         const rollData = super.getRollData();
@@ -45,6 +54,12 @@ export default (Base) => {
           );
         }
         return rollData;
+      }
+
+      /** @inheritDoc */
+      prepareBaseData() {
+        super.prepareBaseData();
+        this.#prepareTradecrafts();
       }
 
       /**

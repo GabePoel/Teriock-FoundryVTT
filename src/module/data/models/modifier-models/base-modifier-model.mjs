@@ -1,5 +1,5 @@
 import { mix } from "../../../helpers/construction.mjs";
-import { toCamelCase } from "../../../helpers/string.mjs";
+import { initialString } from "../../fields/helpers/initializers.mjs";
 import {
   ThresholdDataMixin,
   UsableDataMixin,
@@ -23,6 +23,7 @@ export default class BaseModifierModel extends mix(
     const { score = 0 } = options;
     return {
       ...super.defineSchema(options),
+      _key: initialString(),
       score: new fields.NumberField({ initial: score }),
     };
   }
@@ -37,7 +38,7 @@ export default class BaseModifierModel extends mix(
    * @returns {string}
    */
   get key() {
-    return toCamelCase(this.schema.fields.raw.label);
+    return this._key || "";
   }
 
   /**

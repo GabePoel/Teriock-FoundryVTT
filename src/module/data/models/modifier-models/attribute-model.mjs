@@ -1,9 +1,14 @@
 import { FeatExecution } from "../../../executions/activity-executions/_module.mjs";
+import { initialNumber } from "../../fields/helpers/initializers.mjs";
 import BaseModifierModel from "./base-modifier-model.mjs";
 
 export default class AttributeModel extends BaseModifierModel {
-  /** @type {number} */
-  passive;
+  /** @inheritDoc */
+  static defineSchema(options) {
+    return Object.assign(super.defineSchema(options), {
+      passive: initialNumber(4),
+    });
+  }
 
   /** @inheritDoc */
   get name() {
@@ -33,7 +38,6 @@ export default class AttributeModel extends BaseModifierModel {
   /** @inheritDoc */
   getLocalRollData() {
     return Object.assign(super.getLocalRollData(), {
-      passive: this.passive,
       pas: this.passive,
     });
   }

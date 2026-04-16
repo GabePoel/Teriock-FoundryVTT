@@ -9,7 +9,7 @@ export default class EvaluationField extends EmbeddedDataField {
    * @param {DataFieldContext} [context] - Additional context which describes the field.
    */
   constructor(options = {}, context = {}) {
-    const { model = EvaluationModel } = options;
+    const model = options.model ?? EvaluationModel;
     delete options.model;
     const evaluationOptions = foundry.utils.deepClone(options);
     delete evaluationOptions.initial;
@@ -23,20 +23,6 @@ export default class EvaluationField extends EmbeddedDataField {
 
   /** @type {StringFieldOptions & Teriock.Fields._EvaluationFieldOptions} */
   _derivationOptions;
-
-  /** @inheritDoc */
-  clean(value, options) {
-    if (typeof value !== "undefined") {
-      if (typeof value !== "object") value = { raw: value };
-      if (typeof value?.saved !== "undefined" && value?.saved !== null) {
-        value.raw = value.saved;
-        delete value.saved;
-      }
-    } else {
-      value = { raw: undefined };
-    }
-    return super.clean(value, options);
-  }
 
   /** @inheritDoc */
   initialize(value, model, options = {}) {

@@ -23,7 +23,7 @@ export default (Base) => {
           ([key, value]) =>
             (attributes[key] = new EvaluationField({
               deterministic: false,
-              initial: `2 * @{key}.score`,
+              initial: `2 * @${key}.score`,
               interval: 1,
               label: value,
               min: -Infinity,
@@ -34,6 +34,15 @@ export default (Base) => {
         return Object.assign(super.defineSchema(), {
           attributes: new SchemaField(attributes),
         });
+      }
+
+      /**
+       * Ensure attributes have the correct keys assigned.
+       */
+      #prepareAttributes() {
+        for (const [k, v] of Object.entries(this.attributes)) {
+          v._key = k;
+        }
       }
 
       /**
@@ -53,6 +62,12 @@ export default (Base) => {
           Object.assign(rollData, prefixObject(data, `${att.key}`));
         }
         return rollData;
+      }
+
+      /** @inheritDoc */
+      prepareBaseData() {
+        super.prepareBaseData();
+        this.#prepareAttributes();
       }
 
       /** @inheritDoc */
