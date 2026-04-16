@@ -23,7 +23,7 @@ export default (Base) => {
           ([key, value]) =>
             (attributes[key] = new EvaluationField({
               deterministic: false,
-              initial: `2 * @att.${key}.score`,
+              initial: `2 * @{key}.score`,
               interval: 1,
               label: value,
               min: -Infinity,
@@ -50,7 +50,6 @@ export default (Base) => {
         const rollData = super.getRollData();
         for (const att of Object.values(this.attributes)) {
           const data = att.getLocalRollData();
-          Object.assign(rollData, prefixObject(data, `att.${att.key}`));
           Object.assign(rollData, prefixObject(data, `${att.key}`));
         }
         return rollData;

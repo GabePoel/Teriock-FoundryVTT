@@ -97,7 +97,6 @@ foundry.helpers.Hooks.once("init", function () {
     },
     ux: {
       ContextMenu: applications.ux.TeriockContextMenu,
-      DragDrop: applications.ux.TeriockDragDrop,
       TextEditor: applications.ux.TeriockTextEditor,
       TooltipManager: helpers.interaction.TeriockTooltipManager,
     },
@@ -439,6 +438,13 @@ foundry.helpers.Hooks.once("init", function () {
       CONFIG.Dice.functions[k] = v;
     }
   }
+
+  // Configure Formula Editor
+  // ========================
+
+  CONFIG.formulaEditor.contexts.actor = {
+    labels: constants.rollContext.actor,
+  };
 
   // Configure Queries
   // =================

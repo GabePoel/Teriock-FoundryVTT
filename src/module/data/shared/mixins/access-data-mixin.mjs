@@ -54,6 +54,14 @@ export default function AccessDataMixin(Base) {
       }
 
       /**
+       * A key for what roll editor context to use when building forms.
+       * @returns {string}
+       */
+      get _inputContextKey() {
+        return "actor";
+      }
+
+      /**
        * Make form groups from specified field paths.
        * @param {string[]} paths
        * @returns {HTMLDivElement[]}
@@ -64,6 +72,7 @@ export default function AccessDataMixin(Base) {
           return this.schema.getField(p).toFormGroup(
             { rootId: foundry.utils.randomID(), localize: true },
             {
+              context: this._inputContextKey,
               name: `${this.localPath}.${p}`,
               value: foundry.utils.getProperty(this, p),
             },

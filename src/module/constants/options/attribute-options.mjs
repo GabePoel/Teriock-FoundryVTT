@@ -41,6 +41,6 @@ export const attributeOptions = {
 };
 
 preLocalize("options.attribute", {
-  keys: ["label", "name"],
+  keys: ["label", "name", "passive"],
   sort: true,
 });

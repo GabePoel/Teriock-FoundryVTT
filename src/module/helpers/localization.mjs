@@ -162,3 +162,14 @@ function transformValue(value, transform) {
   if (transform === "kc") return toKebabCase(value);
   return value;
 }
+
+/**
+ * Localize the type key in a roll context object.
+ * @param {object} context
+ * @param {string} type
+ */
+export function localizeTypeContextKey(context, type) {
+  context[type] = _loc("TERIOCK.ROLL_CONTEXT.Common.type", {
+    type: _loc(TERIOCK.options.document[type].name),
+  });
+}

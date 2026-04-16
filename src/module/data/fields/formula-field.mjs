@@ -124,7 +124,9 @@ export default class FormulaField extends EnhancedStringField {
     if (this.deterministic) {
       const roll = new BaseRoll(value, {});
       if (!roll.isDeterministic) {
-        throw new Error(`must not contain dice terms: ${value}`);
+        throw new Error(
+          `Deterministic formula must not contain dice terms: ${value}`,
+        );
       }
     }
     super._validateType(value);

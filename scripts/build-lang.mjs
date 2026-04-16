@@ -17,6 +17,7 @@ import { default as message } from "../src/en/message.json" with { type: "json" 
 import { default as models } from "../src/en/models.json" with { type: "json" };
 import { default as packs } from "../src/en/packs.json" with { type: "json" };
 import { default as perception } from "../src/en/perception.json" with { type: "json" };
+import { default as rollContext } from "../src/en/roll-context.json" with { type: "json" };
 import { default as rolls } from "../src/en/rolls.json" with { type: "json" };
 import { default as schema } from "../src/en/schema.json" with { type: "json" };
 import { default as settings } from "../src/en/settings.json" with { type: "json" };
@@ -132,6 +133,7 @@ mergeObjects(
   packs,
   perception,
   rolls,
+  rollContext,
   schema,
   settings,
   sheets,

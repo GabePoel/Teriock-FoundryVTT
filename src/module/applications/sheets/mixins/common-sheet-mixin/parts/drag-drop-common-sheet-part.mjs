@@ -1,4 +1,6 @@
-import { TeriockDragDrop, TeriockTextEditor } from "../../../../ux/_module.mjs";
+import { TeriockTextEditor } from "../../../../ux/_module.mjs";
+
+const DragDrop = foundry.applications.ux.DragDrop.implementation;
 
 /**
  * @param {typeof TeriockDocumentSheet} Base
@@ -143,7 +145,7 @@ export default (Base) => {
 
       /** @inheritDoc */
       async _onRender(context, options) {
-        new TeriockDragDrop({
+        new DragDrop({
           callbacks: {
             dragstart: this._onDragStart.bind(this),
             dragover: this._onDragOver.bind(this),

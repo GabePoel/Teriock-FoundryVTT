@@ -24,7 +24,7 @@ export default (Base) => {
             label: "Interest Rate",
           }),
           money: new fields.SchemaField({
-            ...objectMap(currencyOptions, (o) => currencyField(o.name)),
+            ...objectMap(currencyOptions, (o) => currencyField(o.label)),
             total: currencyField("Total Money", false),
             debt: currencyField("Debt", false),
           }),
@@ -34,16 +34,11 @@ export default (Base) => {
       /** @inheritDoc */
       getRollData() {
         const rollData = super.getRollData();
-        for (const v of Object.keys(currencyOptions)) {
-          const k = v.slice(0, 3);
-          rollData[`money.${k}.num`] = this.money[v];
-          rollData[`money.${k}.val`] =
-            TERIOCK.options.currency[v].value * this.money[v];
-          rollData[`money.${k}.weight`] =
-            TERIOCK.options.currency[v].weight * this.money[v];
+        for (const k of Object.keys(currencyOptions)) {
+          rollData[`money.${currencyOptions[k].abbreviation}`] = this.money[k];
         }
         rollData[`money.debt`] = this.money.debt;
-        rollData[`money.total`] = this.money.total;
+        rollData[`money`] = this.money.total;
         return rollData;
       }
 

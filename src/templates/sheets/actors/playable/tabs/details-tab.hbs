@@ -81,8 +81,8 @@
                 </div>
                 {{formInput
                   systemFields.size.fields.number
-                  value=system._source.size.number.raw
                   classes="character-size-input character-smallbox-value selected transparent-input"
+                  context="actor"
                   dataset=(object
                     tooltip=(localize
                       "TERIOCK.SHEETS.Actor.TABS.Details.size.description"
@@ -90,7 +90,9 @@
                       reach=system.size.reach
                     )
                     tooltipClass=""
-                    tooltipDirection="DOWN")
+                    tooltipDirection="DOWN"
+                  )
+                  value=system._source.size.number.raw
                 }}
               </div>
             </div>
@@ -106,9 +108,8 @@
                 </div>
                 {{formInput
                   systemFields.weight.fields.self
-                  value=system._source.weight.self.raw
                   classes="character-weight-input character-smallbox-value selected transparent-input"
-                  placeholder="pow(3 + @size, 3)"
+                  context="actor"
                   dataset=(object
                     tooltip=(localize
                       "TERIOCK.SHEETS.Actor.TABS.Details.weight.includingEquipment"
@@ -117,6 +118,8 @@
                     tooltipClass=""
                     tooltipDirection=""
                   )
+                  placeholder=TERIOCK.options.character.defaults.weight
+                  value=system._source.weight.self.raw
                 }}
               </div>
             </div>
@@ -211,6 +214,7 @@
                 classes="character-smallbox-value selected transparent-input"
                 dataset=(object tooltip=system.magic.maxRotators.formula)
                 placeholder=system.magic.maxRotators.raw
+                context="actor"
               }}
             </div>
           </div>
@@ -233,6 +237,7 @@
               classes="character-detection-input character-smallbox-value selected transparent-input"
               dataset=(object tooltip=system.detection.hiding.formula)
               placeholder=TERIOCK.options.character.defaults.hiding
+              context="actor"
             }}
           </div>
         </div>
@@ -252,6 +257,7 @@
               classes="character-detection-input character-smallbox-value selected transparent-input"
               dataset=(object tooltip=system.detection.perceiving.formula)
               placeholder=TERIOCK.options.character.defaults.perceiving
+              context="actor"
             }}
           </div>
         </div>

@@ -17,12 +17,8 @@ export default class TeriockStatManager extends HackStatMixin(
    */
   static DEFAULT_OPTIONS = {
     classes: ["dialog"],
-    actions: {
-      ok: this._onDone,
-    },
-    position: {
-      width: 425,
-    },
+    actions: { ok: this._onDone },
+    position: { width: 425 },
   };
 
   /**

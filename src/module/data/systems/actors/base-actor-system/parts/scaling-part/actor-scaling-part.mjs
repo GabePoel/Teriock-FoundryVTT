@@ -65,10 +65,23 @@ export default (Base) => {
        */
       #getSpeciesRollData() {
         const data = {};
-        for (const s of this.parent.species) {
-          data[`species.${s.forcedIdentifier}`] = 1;
+        for (const s of this.parent.species.filter(
+          (s) => s.active && s.system.identifier,
+        )) {
+          data[`species.${s.system.identifier}`] = 1;
         }
         return data;
+      }
+
+      /** @inheritDoc */
+      getRollData() {
+        const rollData = super.getRollData();
+        Object.assign(rollData, {
+          ...this.getScalingRollData(),
+          ...this.#getRankRollData(),
+          ...this.#getSpeciesRollData(),
+        });
+        return rollData;
       }
 
       /**
@@ -81,17 +94,6 @@ export default (Base) => {
           lvl: this.scaling.lvl,
           p: this.scaling.p,
         };
-      }
-
-      /** @inheritDoc */
-      getRollData() {
-        const rollData = super.getRollData();
-        Object.assign(rollData, {
-          ...this.getScalingRollData(),
-          ...this.#getRankRollData(),
-          ...this.#getSpeciesRollData(),
-        });
-        return rollData;
       }
 
       /** @inheritDoc */

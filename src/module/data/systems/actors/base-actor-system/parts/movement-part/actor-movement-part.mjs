@@ -33,12 +33,7 @@ export default (Base) => {
         const rollData = super.getRollData();
         rollData["speed"] = this.movementSpeed;
         for (const [k, v] of Object.entries(characterOptions.movementTypes)) {
-          const adjustment = this.speedAdjustments[k] || 0;
-          rollData[`speed.${v.abbreviation}`] = adjustment;
-          rollData[`speed.${v.abbreviation}.feet`] = (
-            this.movementSpeed *
-            characterOptions.speedAdjustments[adjustment].multiplier
-          ).toNearest(1, "floor");
+          rollData[`speed.${v.abbreviation}`] = this.speedAdjustments[k] || 0;
         }
         return rollData;
       }
