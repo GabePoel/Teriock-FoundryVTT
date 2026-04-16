@@ -181,37 +181,40 @@ export default (Base) => {
           this.encumbranceLevel > 0 &&
           !this.isProtected("statuses", "encumbered")
         ) {
-          this.parent.statuses.add("encumbered");
           if (this.encumbranceLevel >= 1) {
             this.movementSpeed = Math.max(this.movementSpeed - 10, 0);
           }
           if (this.encumbranceLevel >= 2) {
             this.parent.statuses.add("slowed");
-            this.conditionInformation.slowed.reasons.add(
-              _loc("TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.2"),
+            this.parent._addVirtualStatus(
+              "slowed",
+              "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.2",
+              { localize: true },
             );
           }
-          let encumbranceReason = _loc(
-            "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.0",
-          );
           switch (this.encumbranceLevel) {
             case 1:
-              encumbranceReason = _loc(
+              this.parent._addVirtualStatus(
+                "encumbered",
                 "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.1",
+                { localize: true },
               );
               break;
             case 2:
-              encumbranceReason = _loc(
+              this.parent._addVirtualStatus(
+                "encumbered",
                 "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.2",
+                { localize: true },
               );
               break;
             case 3:
-              encumbranceReason = _loc(
+              this.parent._addVirtualStatus(
+                "encumbered",
                 "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.3",
+                { localize: true },
               );
               break;
           }
-          this.conditionInformation.encumbered.reasons.add(encumbranceReason);
         }
       }
     }
