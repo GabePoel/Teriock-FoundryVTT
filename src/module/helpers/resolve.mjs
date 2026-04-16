@@ -103,7 +103,7 @@ export async function ensureChildren(document, identifiers) {
       if (existing.length) return;
       const doc = await fromIdentifier(identifier);
       if (!doc) return;
-      const obj = doc.toObject();
+      const obj = doc.toObject(true);
       console.log(doc, obj);
       foundry.utils.setProperty(obj, "_stats.compendiumSource", doc.uuid);
       return { documentName: doc.documentName, data: obj };

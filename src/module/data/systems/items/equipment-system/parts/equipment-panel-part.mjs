@@ -47,6 +47,7 @@ export default (Base) => {
               _loc("TERIOCK.SYSTEMS.Equipment.PANELS.minStr", {
                 value: this.minStr.value,
               }),
+              (this.identification.identified || this.isAttuned) &&
               formulaExists(this.tier.text)
                 ? _loc("TERIOCK.SYSTEMS.Attunable.PANELS.tier", {
                     value: this.tier.text,

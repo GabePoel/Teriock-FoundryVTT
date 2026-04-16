@@ -1,5 +1,7 @@
 <div class="ab-bar">
-  {{> "teriock/sheets/shared/forms/tier-form"}}
+  {{#if (or system.identification.identified system.isAttuned)}}
+    {{> "teriock/sheets/shared/forms/tier-form"}}
+  {{/if}}
   {{formBox
     (formInput
       systemFields.weight

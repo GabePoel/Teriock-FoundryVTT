@@ -243,7 +243,7 @@ export default function CommonSystemMixin(Base) {
         for (const [docName, children] of Object.entries(createMap)) {
           await this.parent.createChildDocuments(
             docName,
-            children.src.map((s) => s.toObject()),
+            children.src.map((s) => s.toObject(true)),
           );
         }
       }
@@ -312,7 +312,7 @@ export default function CommonSystemMixin(Base) {
       async getCompendiumSourceRefreshObject() {
         const reference = await this.getCompendiumSource();
         if (reference) {
-          const object = reference.toObject();
+          const object = reference.toObject(true);
           for (const property of this.metadata.preservedProperties || []) {
             foundry.utils.deleteProperty(object, property);
           }

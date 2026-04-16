@@ -72,7 +72,7 @@ export default class AddDocumentsActivation extends BaseActivation {
     let data = {};
     if (docConstruct.uuid) {
       const doc = await resolveDocument(docConstruct.uuid);
-      if (doc) Object.assign(data, doc.toObject());
+      if (doc) Object.assign(data, doc.toObject(true));
     }
     if (docConstruct.data) {
       foundry.utils.mergeObject(data, docConstruct.data, { inplace: true });

@@ -108,15 +108,15 @@ export default class EvaluationModel extends EmbeddedDataModel {
     };
     const formula = this.formula;
     let needsEval = false;
-    let value = this.quickValue;
+    let value;
     if (formula.includes("Infinity")) value = Infinity;
     else if (!isNaN(Number(formula))) value = Number(formula);
     else needsEval = true;
+    let rollData = options.rollData ?? {};
     if (needsEval && !options.skipRollData) {
-      let rollData = options.rollData;
-      if (!rollData) rollData = this.getRollData();
-      value = BaseRoll.minValue(formula, rollData);
+      rollData = this.getRollData();
     }
+    value = BaseRoll.minValue(formula, rollData);
     if (typeof options.max === "number") value = Math.min(value, options.max);
     if (typeof options.min === "number") value = Math.max(value, options.min);
     if (typeof options.interval === "number") {

@@ -8,7 +8,7 @@ export default async function previewSheet(doc) {
   } else {
     let root = doc;
     if (doc.documentName === "ActiveEffect") root = doc.parent;
-    const rootData = root.toObject();
+    const rootData = root.toObject(true);
     rootData.ownership = { [game.user.id]: 1 };
     assignRealUuid(rootData, root);
     const RootClass = foundry.utils.getDocumentClass(root.documentName);

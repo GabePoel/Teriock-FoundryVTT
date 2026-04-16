@@ -52,7 +52,7 @@ export default (Base) => {
         if (decision === "import") {
           const out = await selectAbilityDialog();
           if (!out) return;
-          obj = out.toObject();
+          obj = out.toObject(true);
           obj["_stats.compendiumSource"] = out.uuid;
         }
         if (decision && obj) {
@@ -103,7 +103,10 @@ export default (Base) => {
         const decision = await newDocumentDialog("equipment");
         let obj = newDocumentObj("equipment");
         if (decision === "import") {
-          obj = game.items.fromCompendium(await selectEquipmentTypeDialog());
+          const out = await selectEquipmentTypeDialog();
+          if (!out) return;
+          obj = out.toObject(true);
+          obj["_stats.compendiumSource"] = out.uuid;
         }
         if (decision && obj) {
           await this.document.createChildDocuments("Item", [obj]);
@@ -173,7 +176,7 @@ export default (Base) => {
         if (decision === "import") {
           const out = await selectPropertyDialog();
           if (!out) return;
-          obj = out.toObject();
+          obj = out.toObject(true);
           obj["_stats.compendiumSource"] = out.uuid;
         }
         if (decision && obj) {
@@ -205,7 +208,7 @@ export default (Base) => {
         const rankNumber = referenceRank.system.classRank;
         let rank = referenceRank.clone();
         if (rankNumber <= 2) {
-          const toCreate = rank.toObject();
+          const toCreate = rank.toObject(true);
           toCreate.system = foundry.utils.mergeObject(toCreate.system || {}, {
             innate: innate,
           });

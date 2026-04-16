@@ -24,10 +24,7 @@ export default class AttunementAutomation extends BaseAutomation {
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      tier: new FormulaField({
-        deterministic: false,
-        initial: "1",
-      }),
+      tier: new FormulaField({ deterministic: false, initial: "1" }),
     });
   }
 

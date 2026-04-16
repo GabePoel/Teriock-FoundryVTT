@@ -152,6 +152,14 @@ export default class EquipmentSystem extends mix(
   }
 
   /** @inheritDoc */
+  get _attunableWrappers() {
+    if (!this.identification.identified && !this.isAttuned) {
+      return [];
+    }
+    return super._attunableWrappers;
+  }
+
+  /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
     return Object.assign(parts, {
@@ -178,9 +186,7 @@ export default class EquipmentSystem extends mix(
     const yes = await super._preCreate(data, options, user);
     if (yes === false) return false;
 
-    if (this.parent.isEmbedded) {
-      this.updateSource({ equipped: true });
-    }
+    if (this.parent.isEmbedded) this.updateSource({ equipped: true });
   }
 
   /**
@@ -210,13 +216,5 @@ export default class EquipmentSystem extends mix(
       this.specialRules =
         TERIOCK.content.weaponFightingStyles[this.fightingStyle];
     }
-  }
-
-  /** @inheritDoc */
-  prepareSpecialData() {
-    if (!this.identification.identified && !this.isAttuned) {
-      this.tier.raw = "";
-    }
-    super.prepareSpecialData();
   }
 }

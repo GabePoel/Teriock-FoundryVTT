@@ -89,13 +89,14 @@ export default class PseudoDocument extends EmbeddedDataModel {
    * @param {T[]} docs
    * @param {object} [options]
    * @param {boolean} [options.keepId]
+   * @param {boolean} [options.source]
    * @returns {Record<ID<T>, object>}
    */
   static toCollectionObject(docs, options = {}) {
     return Object.fromEntries(
       docs.map((d) => {
         const id = options.keepId && d._id ? d._id : foundry.utils.randomID();
-        const data = d.toObject();
+        const data = d.toObject(options.source);
         data._id = id;
         return [id, data];
       }),

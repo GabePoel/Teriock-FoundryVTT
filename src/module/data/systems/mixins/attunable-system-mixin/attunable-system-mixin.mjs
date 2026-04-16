@@ -151,7 +151,7 @@ export default function AttunableSystemMixin(Base) {
             const ref = await fromUuid(this.reference);
             if (ref) {
               await this.parent.update({
-                "system.tier.saved": ref.system.tier.raw,
+                "system.tier.raw": ref.system.tier.raw,
               });
             }
           }

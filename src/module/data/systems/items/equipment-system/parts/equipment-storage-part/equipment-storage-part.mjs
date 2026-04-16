@@ -105,7 +105,7 @@ export default (Base) => {
           }
         }
         if (this.stashed) this.weight._value = 0;
-        else this.weight.evaluate();
+        this.weight.evaluate();
         this.weight.total = this.weight.value;
         if (this.consumable) {
           const total = this.weight.value * this.quantity;

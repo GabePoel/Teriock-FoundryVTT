@@ -130,9 +130,9 @@ export default (Base) => {
        * @returns {Promise<object>}
        */
       async toScroll(data = {}, equipmentType = "scroll") {
-        const reference = (
-          await fromIdentifier("equipment:scroll")
-        )?.toObject() || {
+        const reference = (await fromIdentifier("equipment:scroll"))?.toObject(
+          true,
+        ) || {
           type: "equipment",
           system: { equipmentType: "scroll" },
         };

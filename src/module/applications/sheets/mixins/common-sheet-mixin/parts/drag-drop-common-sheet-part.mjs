@@ -117,7 +117,7 @@ export default (Base) => {
         let doc =
           /** @type {AnyChildDocument} */ await Cls.fromDropData(dropData);
         const uuid = doc.uuid;
-        const obj = doc.toObject();
+        const obj = doc.toObject(true);
         if (doc.inCompendium && !doc._stats.compendiumSource) {
           obj["_stats.compendiumSource"] = uuid;
         }

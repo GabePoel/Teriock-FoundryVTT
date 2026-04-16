@@ -11,24 +11,6 @@ export default (Base) => {
     class EquipmentMigrationPart extends Base {
       /** @inheritDoc */
       static migrateData(data) {
-        if (!Object.prototype.hasOwnProperty.call(data, "tier")) {
-          if (!data.tier) {
-            data.tier = "";
-          }
-          if (data.tier) {
-            if (
-              typeof data.tier === "string" ||
-              typeof data.tier === "number"
-            ) {
-              const rawTier = String(data.tier) || "";
-              const derivedTier = Number(data.tier) || 0;
-              data.tier = {
-                raw: rawTier,
-                derived: derivedTier,
-              };
-            }
-          }
-        }
         if (typeof data.weight === "number") {
           data.weight = { saved: data.weight };
         }
