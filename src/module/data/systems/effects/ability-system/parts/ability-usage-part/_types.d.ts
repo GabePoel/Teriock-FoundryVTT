@@ -2,7 +2,6 @@ import {
   RangeModel,
   SlowExecutionTimeModel,
 } from "../../../../../models/unit-models/_module.mjs";
-import { EvaluationModel } from "../../../../../models/_module.mjs";
 
 declare global {
   namespace Teriock.Models {
@@ -17,7 +16,7 @@ declare global {
       /** <schema> This ability's expansion */
       expansion: {
         /** <schema> Maximum number of extra executions */
-        cap: EvaluationModel;
+        cap: Teriock.System.FormulaString;
         /** <schema> Type of ability's expansion */
         type: Teriock.Keys.Expansion | null;
         /** <schema> Range of expansion */

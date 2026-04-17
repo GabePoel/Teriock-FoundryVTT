@@ -1,5 +1,8 @@
 import { formulaExists } from "../../../../../../helpers/formula.mjs";
-import { EvaluationField } from "../../../../../fields/_module.mjs";
+import {
+  EvaluationField,
+  FormulaField,
+} from "../../../../../fields/_module.mjs";
 import {
   RangeModel,
   SlowExecutionTimeModel,
@@ -32,7 +35,7 @@ export default (Base) => {
             slow: new EvaluationField({ model: SlowExecutionTimeModel }),
           }),
           expansion: new fields.SchemaField({
-            cap: new EvaluationField({ deterministic: false }),
+            cap: new FormulaField({ deterministic: false }),
             featSaveAttribute: new fields.StringField({ initial: "mov" }),
             range: new EvaluationField({ model: RangeModel }),
             type: new fields.StringField({ initial: null, nullable: true }),
@@ -70,6 +73,17 @@ export default (Base) => {
         }
         if (typeof data.expansion !== "object") {
           data.expansion = {};
+        }
+        if (foundry.utils.hasProperty(data, "expansion.cap.raw")) {
+          foundry.utils.setProperty(
+            data,
+            "expansion.cap",
+            foundry.utils.getProperty(data, "expansion.cap.raw"),
+          );
+          foundry.utils.deleteProperty(data, "expansion.cap.raw");
+        }
+        if (typeof data.expansion?.cap === "number") {
+          data.expansion.cap = `${data.expansion.cap}`;
         }
         if (typeof data.expansionRange === "string") {
           data.expansion.range = { raw: data.expansionRange };
@@ -138,9 +152,9 @@ export default (Base) => {
                 : "",
               TERIOCK.options.ability.expansion[this.expansion.type] || "",
               this.expansion.range.abbreviation,
-              formulaExists(this.expansion.cap.raw)
+              formulaExists(this.expansion.cap)
                 ? _loc("TERIOCK.SYSTEMS.Ability.PANELS.expansionCap", {
-                    value: this.expansion.cap.raw,
+                    value: this.expansion.cap,
                   })
                 : "",
             ]

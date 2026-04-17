@@ -54,7 +54,7 @@ export default class AbilitySheet extends mix(
         "system.upgrades.score.attribute": "int",
       },
       ".ab-expansion-button": { "system.expansion": "detonate" },
-      ".ab-expansion-cap-button": { "system.expansion.cap.raw": "1" },
+      ".ab-expansion-cap-button": { "system.expansion.cap": "1" },
       ".ab-feat-save-improvement-button": {
         "system.upgrades.competence.attribute": "int",
         "system.upgrades.competence.value": 1,

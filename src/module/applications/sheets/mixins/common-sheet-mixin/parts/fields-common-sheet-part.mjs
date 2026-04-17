@@ -64,6 +64,7 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       static async #onUpdateUnit(_event, target) {
+        if (!this.isEditable) return;
         await foundry.utils
           .getProperty(this.document, target.dataset.path)
           .updateDialog();
