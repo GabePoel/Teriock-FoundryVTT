@@ -8,7 +8,11 @@
         placeholder=(localize "TERIOCK.TERMS.Math.infinity")
       )
       icon=TERIOCK.display.icons.equipment.maxCount
-      unselected=(concat system.storage.carriedCount " / " system.storage.effectiveMaxCount)
+      unselected=(ifThen
+        system.storage.maxCount
+        (concat system.storage.carriedCount " / " system.storage.maxCount)
+        system.storage.carriedCount
+      )
       label="ITEMS"
       iconColor=(ifThen
         system.storage.isOverCountCapacity
@@ -30,7 +34,11 @@
         placeholder=(localize "TERIOCK.TERMS.Math.infinity")
       )
       icon=TERIOCK.display.icons.equipment.maxWeight
-      unselected=(concat system.storage.carriedWeight " / " system.storage.effectiveMaxWeight)
+      unselected=(ifThen
+        system.storage.maxWeight
+        (concat system.storage.carriedWeight " / " system.storage.maxWeight)
+        system.storage.carriedWeight
+      )
       label="lb"
       iconColor=(ifThen
         system.storage.isOverWeightCapacity

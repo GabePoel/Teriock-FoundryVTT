@@ -81,14 +81,6 @@ export default class EvaluationModel extends EmbeddedDataModel {
   }
 
   /**
-   * A default value to use in quick evaluation.
-   * @returns {number}
-   */
-  get quickValue() {
-    return 0;
-  }
-
-  /**
    * Text that represents this formula.
    * @returns {string}
    */
@@ -112,11 +104,13 @@ export default class EvaluationModel extends EmbeddedDataModel {
     if (formula.includes("Infinity")) value = Infinity;
     else if (!isNaN(Number(formula))) value = Number(formula);
     else needsEval = true;
-    let rollData = options.rollData ?? {};
-    if (needsEval && !options.skipRollData) {
-      rollData = this.getRollData();
+    if (needsEval) {
+      let rollData = options.rollData ?? {};
+      if (needsEval && !options.skipRollData) {
+        rollData = this.getRollData();
+      }
+      value = BaseRoll.minValue(formula, rollData);
     }
-    value = BaseRoll.minValue(formula, rollData);
     if (typeof options.max === "number") value = Math.min(value, options.max);
     if (typeof options.min === "number") value = Math.max(value, options.min);
     if (typeof options.interval === "number") {

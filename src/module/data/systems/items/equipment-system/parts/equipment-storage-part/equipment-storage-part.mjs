@@ -20,8 +20,8 @@ export default (Base) => {
           ...super.defineSchema(),
           storage: new EmbeddedDataField(StorageModel),
           weight: new foundry.data.fields.NumberField({
-            interval: equipmentOptions.weight.interval,
             initial: 0,
+            nullable: false,
           }),
         };
       }
@@ -31,11 +31,36 @@ export default (Base) => {
         return ["system.storage.enabled", ...super.displayToggles];
       }
 
+      /**
+       * The total weight of this equipment and everything it carries.
+       * @returns {number}
+       */
+      get totalWeight() {
+        if (this.stashed) return 0;
+        let total =
+          this.weight *
+          (this.consumable ? this.quantity : 1) *
+          this.weightMultiplier;
+        if (this.storage.enabled) total += this.storage.carriedWeight;
+        return total.toNearest(equipmentOptions.weight.interval);
+      }
+
       /** @inheritDoc */
       get visibleTypes() {
         return this.storage.enabled
           ? super.visibleTypes
           : super.visibleTypes.filter((t) => t !== "equipment");
+      }
+
+      /**
+       * How much to adjust the weight of each individual instance of this equipment by.
+       * @returns {number}
+       */
+      get weightMultiplier() {
+        if (this.parent.elder?.type === "equipment") {
+          return this.parent.elder.system.storage.weightMultiplier;
+        }
+        return 1;
       }
 
       /** @inheritDoc */
@@ -82,29 +107,16 @@ export default (Base) => {
       /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
-        if (this.stashed) this.storage.weightMultiplier = "0";
-        this.totalWeight = this.weight;
+        if (this.stashed) {
+          this.weight = 0;
+          this.storage.weightMultiplier = 0;
+        }
       }
 
       /** @inheritDoc */
       prepareSpecialData() {
         super.prepareSpecialData();
-        let weight = this.weight;
-        if (
-          this.parent.elder?.type === "equipment" &&
-          this.parent.elder?.system?.storage?.enabled
-        ) {
-          const multiplier =
-            this.parent.elder?.system.storage.weightMultiplier ?? 1;
-          weight = this.weight * multiplier;
-        }
-        if (this.stashed) weight = 0;
-        this.weight = weight.toNearest(equipmentOptions.weight.interval);
-        this.totalWeight = this.weight;
-        if (this.consumable) {
-          const total = this.weight * this.quantity;
-          this.totalWeight = total.toNearest(equipmentOptions.weight.interval);
-        }
+        this.weight = this.weight.toNearest(equipmentOptions.weight.interval);
       }
     }
   );

@@ -127,6 +127,14 @@ export default class EquipmentSystem extends mix(
   }
 
   /** @inheritDoc */
+  get _attunableWrappers() {
+    if (!this.identification.identified && !this.isAttuned) {
+      return [];
+    }
+    return super._attunableWrappers;
+  }
+
+  /** @inheritDoc */
   get color() {
     if (this.isOverCapacity) {
       return TERIOCK.display.colors.red;
@@ -152,14 +160,6 @@ export default class EquipmentSystem extends mix(
   }
 
   /** @inheritDoc */
-  get _attunableWrappers() {
-    if (!this.identification.identified && !this.isAttuned) {
-      return [];
-    }
-    return super._attunableWrappers;
-  }
-
-  /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
     return Object.assign(parts, {
@@ -169,7 +169,7 @@ export default class EquipmentSystem extends mix(
       text: dotJoin([
         ...this._attunableWrappers,
         _loc("TERIOCK.SYSTEMS.Equipment.PANELS.weight", {
-          value: this.weight.total + this.storage.carriedWeight,
+          value: this.totalWeight,
         }),
         parts.text,
       ]),

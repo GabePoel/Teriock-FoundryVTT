@@ -19,11 +19,6 @@ export default class AttributeModel extends BaseModifierModel {
   }
 
   /** @inheritDoc */
-  get quickValue() {
-    return 2 * this.score;
-  }
-
-  /** @inheritDoc */
   get useText() {
     return _loc("TERIOCK.ROLLS.Feat.name", { value: this.name });
   }

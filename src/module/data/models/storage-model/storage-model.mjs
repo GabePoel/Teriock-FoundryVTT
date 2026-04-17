@@ -1,5 +1,4 @@
 import { equipmentOptions } from "../../../constants/options/equipment-options.mjs";
-import { FormulaField } from "../../fields/_module.mjs";
 import EmbeddedDataModel from "../embedded-data-model.mjs";
 
 const { fields } = foundry.data;
@@ -32,24 +31,11 @@ export default class StorageModel extends EmbeddedDataModel {
         nullable: true,
         required: false,
       }),
-      weightMultiplier: new FormulaField({
-        deterministic: true,
-        initial: "1",
+      weightMultiplier: new fields.NumberField({
+        initial: 1,
+        min: 0,
       }),
     };
-  }
-
-  /** @type {TeriockEquipment[]} */
-  _storedEquipment;
-
-  /**
-   * Equipment stored in this storage.
-   * @returns {TeriockEquipment[]}
-   */
-  get storedEquipment() {
-    if (!this.enabled) return [];
-    if (!this._storedEquipment) this._storedEquipment = this.document.equipment;
-    return this._storedEquipment;
   }
 
   /**
@@ -68,7 +54,7 @@ export default class StorageModel extends EmbeddedDataModel {
    */
   get carriedWeight() {
     return this.storedEquipment
-      .map((e) => Number(e.system?.totalWeight ?? e.system?.weight))
+      .map((e) => e.system.totalWeight)
       .reduce((a, b) => a + b, 0)
       .toNearest(equipmentOptions.weight.interval);
   }
@@ -95,5 +81,14 @@ export default class StorageModel extends EmbeddedDataModel {
    */
   get isOverWeightCapacity() {
     return this.maxWeight !== null && this.carriedWeight > this.maxWeight;
+  }
+
+  /**
+   * Equipment stored in this storage.
+   * @returns {TeriockEquipment[]}
+   */
+  get storedEquipment() {
+    if (!this.enabled) return [];
+    return this.document.equipment;
   }
 }

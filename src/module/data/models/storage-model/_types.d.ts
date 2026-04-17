@@ -10,7 +10,7 @@ declare global {
       /** <schema> Maximum weight that can go in container (`null` = unlimited) */
       maxWeight: number | null;
       /** <schema> Amount to multiply weight of each item in container by */
-      weightMultiplier: string;
+      weightMultiplier: number;
 
       get parent(): EquipmentSystem;
     };

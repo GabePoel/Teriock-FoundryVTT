@@ -4,7 +4,6 @@ import {
   ensureNoChildren,
 } from "../../../../../../helpers/resolve.mjs";
 import { makeIcon } from "../../../../../../helpers/utils.mjs";
-import { EvaluationField } from "../../../../../fields/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -26,9 +25,9 @@ export default (Base) => {
         return Object.assign(super.defineSchema(), {
           equipped: new fields.BooleanField({ initial: false }),
           glued: new fields.BooleanField({ initial: false }),
-          minStr: new EvaluationField({
-            deterministic: true,
+          minStr: new fields.NumberField({
             initial: -3,
+            integer: true,
             min: -3,
           }),
         });
@@ -168,8 +167,8 @@ export default (Base) => {
         return Object.assign(super.getLocalRollData(), {
           equipped: Number(this.equipped),
           glued: Number(this.glued),
-          minStr: this.minStr.value,
-          str: this.minStr.value,
+          minStr: this.minStr,
+          str: this.minStr,
         });
       }
 
@@ -188,12 +187,6 @@ export default (Base) => {
       prepareDerivedData() {
         super.prepareDerivedData();
         if (this.consumable && this.quantity === 0) this.equipped = false;
-      }
-
-      /** @inheritDoc */
-      prepareSpecialData() {
-        super.prepareSpecialData();
-        this.minStr.evaluate();
       }
 
       /**

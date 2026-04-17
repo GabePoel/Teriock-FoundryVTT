@@ -50,11 +50,6 @@ export default class BaseModifierModel extends mix(
   }
 
   /** @inheritDoc */
-  get quickValue() {
-    return this.score;
-  }
-
-  /** @inheritDoc */
   get value() {
     return this.#modify(super.value);
   }

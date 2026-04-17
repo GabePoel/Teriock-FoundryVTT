@@ -118,7 +118,7 @@ export default class BaseActorSystem extends mix(
         number: this.scaling.br,
       }),
       _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.size", {
-        number: this.size.number.value,
+        number: this.size.number,
       }),
     ]);
     parts.makeTooltip = this.parent.isViewer;
@@ -172,7 +172,7 @@ export default class BaseActorSystem extends mix(
             number: this.scaling.br,
           }),
           _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.size", {
-            number: this.size.number.value,
+            number: this.size.number,
           }),
         ],
       },
