@@ -4,11 +4,11 @@
       (formInput
         systemFields.storage.fields.maxCount
         disabled=(not editable)
-        value=system._source.storage.maxCount.raw
+        value=system._source.storage.maxCount
         placeholder=(localize "TERIOCK.TERMS.Math.infinity")
       )
       icon=TERIOCK.display.icons.equipment.maxCount
-      unselected=(concat system.storage.carriedCount " / " system.storage.maxCount.value)
+      unselected=(concat system.storage.carriedCount " / " system.storage.effectiveMaxCount)
       label="ITEMS"
       iconColor=(ifThen
         system.storage.isOverCountCapacity
@@ -26,11 +26,11 @@
       (formInput
         systemFields.storage.fields.maxWeight
         disabled=(not editable)
-        value=system._source.storage.maxWeight.raw
+        value=system._source.storage.maxWeight
         placeholder=(localize "TERIOCK.TERMS.Math.infinity")
       )
       icon=TERIOCK.display.icons.equipment.maxWeight
-      unselected=(concat system.storage.carriedWeight " / " system.storage.maxWeight.value)
+      unselected=(concat system.storage.carriedWeight " / " system.storage.effectiveMaxWeight)
       label="lb"
       iconColor=(ifThen
         system.storage.isOverWeightCapacity

@@ -83,6 +83,21 @@ export default class PropertySystem extends mix(
     return super.migrateData(data);
   }
 
+  /** @inheritDoc */
+  get _isSuppressedDampened() {
+    return !this.applyIfDampened && super._isSuppressedDampened;
+  }
+
+  /** @inheritDoc */
+  get _isSuppressedShattered() {
+    return !this.applyIfShattered && super._isSuppressedShattered;
+  }
+
+  /** @inheritDoc */
+  get _isSuppressedUnequipped() {
+    return !this.applyIfUnequipped && super._isSuppressedUnequipped;
+  }
+
   /**
    * Metaphysics tags.
    * @returns {Teriock.Sheet.DisplayTag[]}
@@ -129,51 +144,6 @@ export default class PropertySystem extends mix(
       parts.subtitle = TERIOCK.options.effect.form[this.form].label;
     }
     return parts;
-  }
-
-  /** @inheritDoc */
-  get makeSuppressed() {
-    let suppressed = this.consumable && this.quantity === 0;
-    if (this.parent.elder?.type !== "equipment") {
-      suppressed = !!(
-        this.parent.elder?.documentName === "Item" && !this.parent.elder?.active
-      );
-    }
-    if (!suppressed && this.parent.parent?.type === "equipment") {
-      if (this.parent.parent.system.stashed) {
-        suppressed = true;
-      }
-      if (
-        !suppressed &&
-        !this.parent.parent.system.equipped &&
-        !this.applyIfUnequipped
-      ) {
-        suppressed = true;
-      }
-      if (
-        !suppressed &&
-        this.parent.parent.system.dampened &&
-        this.form !== "intrinsic" &&
-        !this.mundane &&
-        !this.applyIfDampened
-      ) {
-        suppressed = true;
-      }
-      if (
-        !suppressed &&
-        this.parent.parent.system.shattered &&
-        !this.applyIfShattered
-      ) {
-        suppressed = true;
-      }
-    }
-    if (!suppressed && this.actor && this.parent.sup) {
-      const sups = this.parent.allSups;
-      if (sups.some((sup) => !sup.modifiesActor)) {
-        suppressed = true;
-      }
-    }
-    return suppressed;
   }
 
   /** @inheritDoc */

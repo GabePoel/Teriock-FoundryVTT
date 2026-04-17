@@ -167,7 +167,7 @@ export default (Base) => {
         this.defense.av.worn = Math.max(
           0,
           ...this.parent.equipment
-            .filter((e) => e.active)
+            .filter((e) => e.active && !e.system.shattered)
             .map((e) => e.system.av.value),
         );
         this.defense.av.natural = Math.max(

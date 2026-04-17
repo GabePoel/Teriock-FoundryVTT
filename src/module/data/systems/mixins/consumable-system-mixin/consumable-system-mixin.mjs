@@ -89,6 +89,14 @@ export default function ConsumableSystemMixin(Base) {
         };
       }
 
+      /**
+       * If this is suppressed due to being consumed.
+       * @returns {boolean}
+       */
+      get _isSuppressedConsumed() {
+        return this.consumable && this.quantity === 0;
+      }
+
       /** @inheritDoc */
       get embedActions() {
         return Object.assign(super.embedActions, {
@@ -122,7 +130,7 @@ export default function ConsumableSystemMixin(Base) {
 
       /** @inheritDoc */
       get makeSuppressed() {
-        return (this.consumable && this.quantity === 0) || super.makeSuppressed;
+        return this._isSuppressedConsumed || super.makeSuppressed;
       }
 
       /**

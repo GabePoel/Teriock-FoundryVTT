@@ -1,6 +1,5 @@
 import { preLocalize } from "../../helpers/localization.mjs";
 import { icons } from "../display/icons.mjs";
-import { characterOptions } from "./character-options.mjs";
 
 export const impactOptions = {
   damage: {
@@ -95,8 +94,7 @@ export const impactOptions = {
     label: "TERIOCK.EFFECTS.Impacts.hide.label",
     deal: "TERIOCK.EFFECTS.Impacts.hide.deal",
     take: "TERIOCK.EFFECTS.Impacts.hide.take",
-    reverse: async (actor) =>
-      await actor?.system.takeHide(characterOptions.defaults.hiding),
+    reverse: async (actor) => await actor?.system.takeHide(null),
   },
   perceive: {
     aliases: ["percieve"],
@@ -105,8 +103,7 @@ export const impactOptions = {
     label: "TERIOCK.EFFECTS.Impacts.perceive.label",
     deal: "TERIOCK.EFFECTS.Impacts.perceive.deal",
     take: "TERIOCK.EFFECTS.Impacts.perceive.take",
-    reverse: async (actor) =>
-      await actor?.system.takePerceive(characterOptions.defaults.perceiving),
+    reverse: async (actor) => await actor?.system.takePerceive(null),
   },
   kill: {
     apply: async (actor, amt) => await actor?.system.takeKill(amt),

@@ -88,7 +88,7 @@ export default class EquipmentSheet extends mix(
   get _buttonUpdates() {
     return {
       ...super._buttonUpdates,
-      ".ab-weight-button": { "system.weight.raw": "1" },
+      ".ab-weight-button": { "system.weight": 1 },
       ".ab-tier-button": { "system.tier.raw": "1" },
     };
   }

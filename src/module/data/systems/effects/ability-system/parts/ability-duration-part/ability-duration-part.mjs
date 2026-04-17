@@ -25,18 +25,25 @@ export default (Base) => {
         });
       }
 
-      /** @inheritDoc */
-      get makeSuppressed() {
-        let conditionSuppressed = false;
+      /**
+       * If this is suppressed due to its actor's conditions.
+       * @returns {boolean}
+       */
+      get _isSuppressedConditions() {
         if (this.maneuver === "passive" && this.actor) {
           for (const condition of this.duration.conditions.present) {
-            if (!this.actor.statuses.has(condition)) conditionSuppressed = true;
+            if (!this.actor.statuses.has(condition)) return true;
           }
           for (const condition of this.duration.conditions.absent) {
-            if (this.actor.statuses.has(condition)) conditionSuppressed = true;
+            if (this.actor.statuses.has(condition)) return true;
           }
         }
-        return conditionSuppressed || super.makeSuppressed;
+        return false;
+      }
+
+      /** @inheritDoc */
+      get makeSuppressed() {
+        return super.makeSuppressed || this._isSuppressedConditions;
       }
 
       /** @inheritDoc */

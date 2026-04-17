@@ -2,6 +2,9 @@ import { FeatExecution } from "../../../executions/activity-executions/_module.m
 import { initialNumber } from "../../fields/helpers/initializers.mjs";
 import BaseModifierModel from "./base-modifier-model.mjs";
 
+/**
+ * @property {number} passive
+ */
 export default class AttributeModel extends BaseModifierModel {
   /** @inheritDoc */
   static defineSchema(options) {

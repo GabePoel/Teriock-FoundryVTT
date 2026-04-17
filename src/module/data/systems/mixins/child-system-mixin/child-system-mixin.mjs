@@ -66,6 +66,22 @@ export default function ChildSystemMixin(Base) {
         return ChildSettingsModel;
       }
 
+      /**
+       * If this is suppressed due to its parent being inactive.
+       * @returns {boolean}
+       */
+      get _isSuppressedElder() {
+        return this.parent.elder?.active === false;
+      }
+
+      /**
+       * If this is suppressed due to qualifiers.
+       * @returns {boolean}
+       */
+      get _isSuppressedQualifier() {
+        return !!this.qualifiers.suppressed.value || !!this.parent.isEphemeral;
+      }
+
       /** @inheritDoc */
       get _masterText() {
         return this.parent.master?.documentName === "Actor"
@@ -155,11 +171,7 @@ export default function ChildSystemMixin(Base) {
 
       /** @returns {boolean} */
       get makeSuppressed() {
-        return (
-          this.parent.elder?.active === false ||
-          !!this.qualifiers.suppressed.value ||
-          !!this.parent.isEphemeral
-        );
+        return this._isSuppressedElder || this._isSuppressedQualifier;
       }
 
       /**
@@ -180,18 +192,6 @@ export default function ChildSystemMixin(Base) {
       /** @inheritDoc */
       async _use(options = {}) {
         await this.parent.toMessage(options);
-      }
-
-      /** @inheritDoc */
-      async deleteThis() {
-        if (this.parent.parent) {
-          await this.parent.parent.deleteEmbeddedDocuments(
-            this.parent.documentName,
-            [this.parent.id],
-          );
-        } else {
-          await super.deleteThis();
-        }
       }
 
       /** @inheritDoc */

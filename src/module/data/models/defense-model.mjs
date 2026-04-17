@@ -1,30 +1,35 @@
 import { initialNumber } from "../fields/helpers/initializers.mjs";
-import EvaluationModel from "./evaluation-model.mjs";
+import EmbeddedDataModel from "./embedded-data-model.mjs";
 
-export default class DefenseModel extends EvaluationModel {
+const { fields } = foundry.data;
+
+/**
+ * @property {number} bonus
+ * @property {number} raw
+ */
+export default class DefenseModel extends EmbeddedDataModel {
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       bonus: initialNumber(0),
+      raw: new fields.NumberField({ initial: 0, nullable: false }),
     });
   }
 
   /** @inheritDoc */
-  get currentValue() {
-    return this.#modify(super.currentValue);
-  }
-
-  /** @inheritDoc */
-  get value() {
-    return this.#modify(super.value);
+  static migrateData(data) {
+    if (typeof data.raw === "string") {
+      const n = Number(data.raw);
+      data.raw = isNaN(n) ? 0 : n;
+    }
+    return super.migrateData(data);
   }
 
   /**
-   * Modify a value with bonus.
-   * @param {number} value
+   * Total defense model value.
    * @returns {number}
    */
-  #modify(value) {
-    return value + this.bonus;
+  get value() {
+    return this.raw + this.bonus;
   }
 }

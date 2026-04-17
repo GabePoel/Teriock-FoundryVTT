@@ -42,10 +42,10 @@ export default (Base) => {
             label: _loc("TERIOCK.SYSTEMS.Armament.PANELS.load"),
             wrappers: [
               _loc("TERIOCK.SYSTEMS.Equipment.PANELS.weight", {
-                value: this.weight.value,
+                value: this.weight,
               }),
               _loc("TERIOCK.SYSTEMS.Equipment.PANELS.minStr", {
-                value: this.minStr.value,
+                value: this.minStr,
               }),
               (this.identification.identified || this.isAttuned) &&
               formulaExists(this.tier.text)
@@ -63,11 +63,11 @@ export default (Base) => {
               ? [
                   _loc("TERIOCK.SYSTEMS.Equipment.PANELS.carriedCount", {
                     value: this.storage.carriedCount,
-                    max: this.storage.maxCount.value,
+                    max: (this.storage.maxCount ?? Infinity).toString(),
                   }),
                   _loc("TERIOCK.SYSTEMS.Equipment.PANELS.carriedWeight", {
                     value: this.storage.carriedWeight,
-                    max: this.storage.maxWeight.value,
+                    max: (this.storage.maxWeight ?? Infinity).toString(),
                   }),
                   _loc("TERIOCK.SYSTEMS.Equipment.PANELS.weightMultiplier", {
                     value: this.storage.weightMultiplier,

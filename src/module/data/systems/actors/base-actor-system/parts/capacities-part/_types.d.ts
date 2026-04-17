@@ -1,5 +1,3 @@
-import { EvaluationModel } from "../../../../../models/_module.mjs";
-
 declare global {
   namespace Teriock.Models {
     export type ActorCapacitiesPartData = {
@@ -16,7 +14,7 @@ declare global {
       /** <schema> Size */
       size: {
         /** <schema> Numbered size */
-        number: EvaluationModel;
+        number: number;
         /** <derived> Named size category */
         category: string;
         /** <derived> */
@@ -33,7 +31,7 @@ declare global {
         /** <derived> Weight of the actor's money */
         money: number;
         /** <schema> Weight of the actor */
-        self: EvaluationModel;
+        self: number;
         /** <derived> Total weight of actor and everything they carry (self + carried) */
         value: number;
       };

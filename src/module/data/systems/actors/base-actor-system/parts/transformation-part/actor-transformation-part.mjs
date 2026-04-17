@@ -39,9 +39,9 @@ export default (Base) => {
           ) &&
           this.transformation.primary?.system.primarySpecies?.system.size.value
         ) {
-          this.size.number.raw =
-            this.transformation.primary?.system.primarySpecies.system.size.value.toString() ||
-            this.size.number.raw;
+          this.size.number =
+            this.transformation.primary?.system.primarySpecies.system.size
+              .value || this.size.number;
         }
       }
 

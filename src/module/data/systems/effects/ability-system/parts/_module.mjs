@@ -6,7 +6,6 @@ export { default as AbilityUsagePart } from "./ability-usage-part/ability-usage-
 export { default as AbilityOverviewPart } from "./ability-overview-part/ability-overview-part.mjs";
 export { default as AbilityResultsPart } from "./ability-results-part/ability-results-part.mjs";
 export { default as AbilityMetaphysicsPart } from "./ability-metaphysics-part/ability-metaphysics-part.mjs";
-export { default as AbilityHierarchyPart } from "./ability-hierarchy-part.mjs";
 export { default as AbilityAutomationsPart } from "./ability-automations-part.mjs";
 export { default as AbilityImprovementsPart } from "./ability-upgrades-part/ability-upgrades-part.mjs";
 export { default as AbilityPanelPart } from "./ability-panel-part.mjs";

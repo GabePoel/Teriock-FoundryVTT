@@ -9,9 +9,9 @@ import { TeriockTextEditor } from "../ux/_module.mjs";
  * @returns {Promise<void>}
  */
 export default async function changeSizeDialog(actor, species) {
-  if (Number(actor.system.size.number.raw) !== species.system.size.value) {
+  if (actor.system.size.number !== species.system.size.value) {
     let content =
-      `<p>@UUID[${actor.uuid}] is size ${actor.system.size.number.raw} and @UUID[${species.uuid}] is size` +
+      `<p>@UUID[${actor.uuid}] is size ${actor.system.size.number} and @UUID[${species.uuid}] is size` +
       ` ${species.system.size.value} by default. Would you like to update the actor's size?</p>`;
     content = await TeriockTextEditor.enrichHTML(content);
     const dialog = new TeriockDialog({
@@ -25,7 +25,7 @@ export default async function changeSizeDialog(actor, species) {
           action: "changeSize",
           callback: async () => {
             await actor.update({
-              "system.size.number.raw": species.system.size.value,
+              "system.size.number": species.system.size.value,
             });
           },
           default: true,

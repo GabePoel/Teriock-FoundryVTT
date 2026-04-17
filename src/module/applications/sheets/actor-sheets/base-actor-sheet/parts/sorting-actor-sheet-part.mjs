@@ -293,11 +293,11 @@ export default (Base) =>
         identified: (e) => Number(e.system.identification.identified),
         equipmentType: (e) => e.system.equipmentType ?? "",
         equipped: (e) => Number(e.system.equipped),
-        minStr: (e) => e.system.minStr.value ?? 0,
+        minStr: (e) => e.system.minStr ?? 0,
         powerLevel: (e) => e.system.powerLevel ?? 0,
         shattered: (e) => Number(e.system.shattered),
         tier: (e) => e.system.tier.value ?? 0,
-        weight: (e) => e.system.weight.value ?? 0,
+        weight: (e) => e.system.totalWeight ?? e.system.weight ?? 0,
       };
       return sortEmbedded(equipment, sortKey, ascending, sortMap);
     }

@@ -1,6 +1,5 @@
 import { characterOptions } from "../../../../../../constants/options/character-options.mjs";
 import { objectMap } from "../../../../../../helpers/utils.mjs";
-import { EvaluationField } from "../../../../../fields/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -20,19 +19,15 @@ export default (Base) => {
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           detection: new fields.SchemaField({
-            hiding: new EvaluationField({
-              blank: characterOptions.defaults.hiding,
-              deterministic: true,
-              floor: true,
-              initial: characterOptions.defaults.hiding,
-              min: -Infinity,
+            hiding: new fields.NumberField({
+              initial: null,
+              integer: true,
+              nullable: true,
             }),
-            perceiving: new EvaluationField({
-              blank: characterOptions.defaults.perceiving,
-              deterministic: true,
-              floor: true,
-              initial: characterOptions.defaults.perceiving,
-              min: -Infinity,
+            perceiving: new fields.NumberField({
+              initial: null,
+              integer: true,
+              nullable: true,
             }),
           }),
           senses: new fields.SchemaField({
@@ -45,11 +40,28 @@ export default (Base) => {
         });
       }
 
+      /**
+       * @inheritDoc
+       * @param {object} data
+       */
+      static migrateData(data) {
+        if (foundry.utils.hasProperty(data, "detection.hiding.raw")) {
+          foundry.utils.deleteProperty(data, "detection.hiding");
+        }
+        if (foundry.utils.hasProperty(data, "detection.perceiving.raw")) {
+          foundry.utils.deleteProperty(data, "detection.perceiving");
+        }
+        return super.migrateData(data);
+      }
+
       /** @inheritDoc */
-      prepareDerivedData() {
-        super.prepareDerivedData();
-        this.detection.hiding.evaluate();
-        this.detection.perceiving.evaluate();
+      getRollData() {
+        const rollData = super.getRollData();
+        Object.assign(rollData, {
+          "detection.hiding": this.detection.hiding,
+          "detection.perceiving": this.detection.perceiving,
+        });
+        return rollData;
       }
     }
   );

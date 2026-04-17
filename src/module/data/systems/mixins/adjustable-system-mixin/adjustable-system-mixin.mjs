@@ -4,12 +4,12 @@ import { TextField } from "../../../fields/_module.mjs";
 const { fields } = foundry.data;
 
 /**
- * @param {typeof ChildSystem} Base
+ * @param {typeof BaseEffectSystem} Base
  */
 export default function AdjustableSystemMixin(Base) {
   return (
     /**
-     * @extends {ChildSystem}
+     * @extends {BaseEffectSystem}
      * @extends {Teriock.Models.AdjustableSystemData}
      * @mixin
      */
@@ -46,6 +46,15 @@ export default function AdjustableSystemMixin(Base) {
           limitation: new TextField({ initial: "" }),
           mundane: new fields.BooleanField({ initial: false }),
         });
+      }
+
+      /** @inheritDoc */
+      get _isSuppressedDeattuned() {
+        return (
+          !this.mundane &&
+          this.form !== "intrinsic" &&
+          super._isSuppressedDeattuned
+        );
       }
 
       /** @inheritDoc */

@@ -1,6 +1,4 @@
 import { equipmentOptions } from "../../../../../../constants/options/equipment-options.mjs";
-import { multiplyFormula } from "../../../../../../helpers/formula.mjs";
-import { EvaluationField } from "../../../../../fields/_module.mjs";
 import { StorageModel } from "../../../../../models/_module.mjs";
 
 const { EmbeddedDataField } = foundry.data.fields;
@@ -21,11 +19,9 @@ export default (Base) => {
         return {
           ...super.defineSchema(),
           storage: new EmbeddedDataField(StorageModel),
-          weight: new EvaluationField({
-            ceil: false,
+          weight: new foundry.data.fields.NumberField({
             interval: equipmentOptions.weight.interval,
-            deterministic: true,
-            floor: false,
+            initial: 0,
           }),
         };
       }
@@ -72,13 +68,13 @@ export default (Base) => {
         Object.assign(data, {
           storage: Number(this.storage.enabled),
           "storage.count": this.storage.carriedCount,
-          "storage.count.max": this.storage.maxCount.value,
+          "storage.count.max": this.storage.maxCount,
           "storage.count.over": Number(this.storage.isOverCountCapacity),
           "storage.weight": this.storage.carriedWeight,
-          "storage.weight.max": this.storage.maxWeight.value,
+          "storage.weight.max": this.storage.maxWeight,
           "storage.weight.mult": this.storage.weightMultiplier,
           "storage.weight.over": Number(this.storage.isOverWeightCapacity),
-          weight: this.weight.total,
+          weight: this.totalWeight,
         });
         return data;
       }
@@ -87,29 +83,27 @@ export default (Base) => {
       prepareDerivedData() {
         super.prepareDerivedData();
         if (this.stashed) this.storage.weightMultiplier = "0";
+        this.totalWeight = this.weight;
       }
 
       /** @inheritDoc */
       prepareSpecialData() {
         super.prepareSpecialData();
-        if (this.storage.enabled) {
-          this.storage.maxCount.evaluate();
-          this.storage.maxWeight.evaluate();
+        let weight = this.weight;
+        if (
+          this.parent.elder?.type === "equipment" &&
+          this.parent.elder?.system?.storage?.enabled
+        ) {
+          const multiplier =
+            this.parent.elder?.system.storage.weightMultiplier ?? 1;
+          weight = this.weight * multiplier;
         }
-        if (this.parent.elder?.type === "equipment") {
-          if (this.parent.elder?.system?.storage?.enabled) {
-            this.weight.raw = multiplyFormula(
-              this.weight.raw,
-              this.parent.elder?.system.storage.weightMultiplier,
-            );
-          }
-        }
-        if (this.stashed) this.weight._value = 0;
-        this.weight.evaluate();
-        this.weight.total = this.weight.value;
+        if (this.stashed) weight = 0;
+        this.weight = weight.toNearest(equipmentOptions.weight.interval);
+        this.totalWeight = this.weight;
         if (this.consumable) {
-          const total = this.weight.value * this.quantity;
-          this.weight.total = total.toNearest(equipmentOptions.weight.interval);
+          const total = this.weight * this.quantity;
+          this.totalWeight = total.toNearest(equipmentOptions.weight.interval);
         }
       }
     }

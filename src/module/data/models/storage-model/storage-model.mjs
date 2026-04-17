@@ -1,5 +1,5 @@
 import { equipmentOptions } from "../../../constants/options/equipment-options.mjs";
-import { EvaluationField, FormulaField } from "../../fields/_module.mjs";
+import { FormulaField } from "../../fields/_module.mjs";
 import EmbeddedDataModel from "../embedded-data-model.mjs";
 
 const { fields } = foundry.data;
@@ -22,15 +22,15 @@ export default class StorageModel extends EmbeddedDataModel {
         initial: false,
         required: false,
       }),
-      maxCount: new EvaluationField({
-        blank: Infinity,
-        deterministic: true,
-        interval: 1,
+      maxCount: new fields.NumberField({
+        initial: null,
+        nullable: true,
+        required: false,
       }),
-      maxWeight: new EvaluationField({
-        blank: Infinity,
-        interval: equipmentOptions.weight.interval,
-        deterministic: true,
+      maxWeight: new fields.NumberField({
+        initial: null,
+        nullable: true,
+        required: false,
       }),
       weightMultiplier: new FormulaField({
         deterministic: true,
@@ -68,7 +68,7 @@ export default class StorageModel extends EmbeddedDataModel {
    */
   get carriedWeight() {
     return this.storedEquipment
-      .map((e) => Number(e.system?.weight?.total))
+      .map((e) => Number(e.system?.totalWeight ?? e.system?.weight))
       .reduce((a, b) => a + b, 0)
       .toNearest(equipmentOptions.weight.interval);
   }
@@ -86,7 +86,7 @@ export default class StorageModel extends EmbeddedDataModel {
    * @returns {boolean}
    */
   get isOverCountCapacity() {
-    return this.carriedCount > this.maxCount.value;
+    return this.maxCount !== null && this.carriedCount > this.maxCount;
   }
 
   /**
@@ -94,6 +94,6 @@ export default class StorageModel extends EmbeddedDataModel {
    * @returns {boolean}
    */
   get isOverWeightCapacity() {
-    return this.carriedWeight > this.maxWeight.value;
+    return this.maxWeight !== null && this.carriedWeight > this.maxWeight;
   }
 }

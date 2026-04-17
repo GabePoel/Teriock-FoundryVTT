@@ -23,11 +23,11 @@ export const displayOptions = {
     dampened: "TERIOCK.SYSTEMS.Equipment.FIELDS.dampened.label",
     equipmentType: "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentType.label",
     equipped: "TERIOCK.SYSTEMS.Equipment.FIELDS.equipped.label",
-    minStr: "TERIOCK.SYSTEMS.Equipment.FIELDS.minStr.raw.label",
+    minStr: "TERIOCK.SYSTEMS.Equipment.FIELDS.minStr.label",
     powerLevel: "TERIOCK.SYSTEMS.Equipment.FIELDS.powerLevel.label",
     shattered: "TERIOCK.SYSTEMS.Equipment.FIELDS.shattered.label",
     tier: "TERIOCK.SYSTEMS.Attunable.FIELDS.tier.raw.label",
-    weight: "TERIOCK.SYSTEMS.Equipment.FIELDS.weight.raw.label",
+    weight: "TERIOCK.SYSTEMS.Equipment.FIELDS.weight.label",
   },
 };
 

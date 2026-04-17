@@ -77,7 +77,7 @@
               </div>
               <div class="affix">
                 <div class="unselected">
-                  <span class="character-size-input character-smallbox-value">{{{system.size.number.value}}}</span>
+                  <span class="character-size-input character-smallbox-value">{{{system.size.number}}}</span>
                 </div>
                 {{formInput
                   systemFields.size.fields.number
@@ -92,7 +92,7 @@
                     tooltipClass=""
                     tooltipDirection="DOWN"
                   )
-                  value=system._source.size.number.raw
+                  value=system._source.size.number
                 }}
               </div>
             </div>
@@ -103,7 +103,7 @@
               <div class="affix">
                 <div class="unselected">
                   <span class="character-weight-input character-smallbox-value">
-                    {{{system.weight.self.value}}} {{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}
+                    {{{system.weight.self}}} {{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}
                   </span>
                 </div>
                 {{formInput
@@ -118,8 +118,8 @@
                     tooltipClass=""
                     tooltipDirection=""
                   )
-                  placeholder=TERIOCK.options.character.defaults.weight
-                  value=system._source.weight.self.raw
+                  placeholder=system.weight.self
+                  value=system._source.weight.self
                 }}
               </div>
             </div>
@@ -200,21 +200,25 @@
               }}
             </div>
           </div>
-          <div class="character-shortbox">
+          <div
+            class="character-shortbox"
+          >
             <div class="tsubtle tcenter">
-              {{localize "TERIOCK.SHEETS.Actor.TABS.Details.maxRotators.label"}}
+              {{localize "TERIOCK.SHEETS.Actor.TABS.Details.rotators.label"}}
             </div>
-            <div class="affix">
-              <div class="unselected">
-                <span class="character-smallbox-value">{{{system.magic.maxRotators.value}}}</span>
-              </div>
+            <div class="character-smallbox-value tcenter affix" style="height: 2rem;">
+              <span class="unselected">
+                {{localize
+                  "TERIOCK.SHEETS.Actor.TABS.Details.rotators.capacity"
+                  value=system.rotators.value
+                  max=system.rotators.max
+                }}
+              </span>
               {{formInput
-                systemFields.magic.fields.maxRotators
-                value=system._source.magic.maxRotators.raw
-                classes="character-smallbox-value selected transparent-input"
-                dataset=(object tooltip=system.magic.maxRotators.formula)
-                placeholder=system.magic.maxRotators.raw
-                context="actor"
+                systemFields.rotators.fields.max
+                value=system._source.rotators.max
+                classes="selected transparent-input"
+                placeholder="0"
               }}
             </div>
           </div>
@@ -225,41 +229,23 @@
           <div class="tsubtle tcenter">
             {{localize "TERIOCK.SHEETS.Actor.TABS.Details.hiding.label"}}
           </div>
-          <div class="affix">
-            <div class="unselected">
-                <span class="character-detection-input character-smallbox-value">
-                  {{{system.detection.hiding.value}}}
-                </span>
-            </div>
-            {{formInput
-              systemFields.detection.fields.hiding
-              value=system._source.detection.hiding.raw
-              classes="character-detection-input character-smallbox-value selected transparent-input"
-              dataset=(object tooltip=system.detection.hiding.formula)
-              placeholder=TERIOCK.options.character.defaults.hiding
-              context="actor"
-            }}
-          </div>
+          {{formInput
+            systemFields.detection.fields.hiding
+            value=system._source.detection.hiding
+            classes="character-detection-input character-smallbox-value selected transparent-input"
+            placeholder=system.attributes.snk.passive
+          }}
         </div>
         <div class="character-shortbox">
           <div class="tsubtle tcenter">
             {{localize "TERIOCK.SHEETS.Actor.TABS.Details.perceiving.label"}}
           </div>
-          <div class="affix">
-            <div class="unselected">
-          <span class="character-detection-input character-smallbox-value">
-            {{{system.detection.perceiving.value}}}
-          </span>
-            </div>
-            {{formInput
-              systemFields.detection.fields.perceiving
-              value=system._source.detection.perceiving.raw
-              classes="character-detection-input character-smallbox-value selected transparent-input"
-              dataset=(object tooltip=system.detection.perceiving.formula)
-              placeholder=TERIOCK.options.character.defaults.perceiving
-              context="actor"
-            }}
-          </div>
+          {{formInput
+            systemFields.detection.fields.perceiving
+            value=system._source.detection.perceiving
+            classes="character-detection-input character-smallbox-value selected transparent-input"
+            placeholder=system.attributes.per.passive
+          }}
         </div>
       </div>
     </div>

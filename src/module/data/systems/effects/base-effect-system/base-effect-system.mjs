@@ -49,6 +49,83 @@ export default class BaseEffectSystem extends ChildSystemMixin(
   }
 
   /**
+   * If this is suppressed due to its parent being dampened.
+   * @returns {boolean}
+   */
+  get _isSuppressedDampened() {
+    return !!(
+      this.parent.parent?.type === "equipment" &&
+      this.parent.parent.system.dampened
+    );
+  }
+
+  /**
+   * If this is suppressed due to its parent being deattuned.
+   * @returns {boolean}
+   */
+  get _isSuppressedDeattuned() {
+    return !!(
+      (this.parent.parent?.type === "equipment" ||
+        this.parent.parent?.type === "mount") &&
+      !this.parent.parent.system.isAttuned
+    );
+  }
+
+  /**
+   * If this is suppressed due to its parent being destroyed.
+   * @returns {boolean}
+   */
+  get _isSuppressedDestroyed() {
+    return !!(
+      this.parent.parent?.type === "equipment" &&
+      this.parent.parent.system.destroyed
+    );
+  }
+
+  /** @inheritDoc */
+  get _isSuppressedElder() {
+    return (
+      (this.parent.elder?.type !== "equipment" ||
+        (this.parent.elder?.type === "equipment" &&
+          this.parent.elder.system._isSuppressedConsumed)) &&
+      super._isSuppressedElder
+    );
+  }
+
+  /**
+   * If this is suppressed due to its parent being shattered.
+   * @returns {boolean}
+   */
+  get _isSuppressedShattered() {
+    return !!(
+      this.parent.parent?.type === "equipment" &&
+      this.parent.parent.system.shattered
+    );
+  }
+
+  /**
+   * If this is suppressed due to its parent being stashed.
+   * @returns {boolean}
+   */
+  get _isSuppressedStashed() {
+    return !!(
+      this.parent.parent?.type === "equipment" &&
+      this.parent.parent.system.stashed
+    );
+  }
+
+  /**
+   * If this is suppressed due to its parent being unequipped.
+   * @returns {boolean}
+   */
+  get _isSuppressedUnequipped() {
+    return !!(
+      this.parent.parent?.type === "equipment" &&
+      !this.parent.parent.system.equipped
+    );
+  }
+
+  /**
    * Whether this can change.
    * @returns {boolean}
    */
@@ -78,7 +155,26 @@ export default class BaseEffectSystem extends ChildSystemMixin(
    * @returns {boolean}
    */
   get isReference() {
-    return false;
+    const sups = /** @type {TeriockAbility[]} */ this.parent.allSups.contents;
+    for (const sup of sups) {
+      if (sup.type === "ability" && sup.system?.maneuver !== "passive") {
+        return true;
+      }
+    }
+    return super.isReference;
+  }
+
+  /** @inheritDoc */
+  get makeSuppressed() {
+    return (
+      super.makeSuppressed ||
+      this._isSuppressedDampened ||
+      this._isSuppressedDeattuned ||
+      this._isSuppressedDestroyed ||
+      this._isSuppressedShattered ||
+      this._isSuppressedStashed ||
+      this._isSuppressedUnequipped
+    );
   }
 
   /**
@@ -110,14 +206,6 @@ export default class BaseEffectSystem extends ChildSystemMixin(
       if (a.protectionChange) changes.push(a.protectionChange);
     });
     return changes;
-  }
-
-  /**
-   * Checks if the effect should expire and expires it if necessary.
-   * @returns {Promise<void>}
-   */
-  async checkExpiration() {
-    if (await this.shouldExpire()) await this.expire();
   }
 
   /**

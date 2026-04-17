@@ -64,8 +64,7 @@ export default class TeriockActiveEffect extends mix(
    * @returns {boolean}
    */
   get isReference() {
-    if (this.isOnUse) return true;
-    return this.system.isReference;
+    return this.isOnUse || this.system.isReference;
   }
 
   /**

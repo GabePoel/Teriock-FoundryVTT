@@ -1,12 +1,12 @@
-import { EvaluationModel, RangeModel } from "../../../models/_module.mjs";
+import { DefenseModel, RangeModel } from "../../../models/_module.mjs";
 
 declare global {
   namespace Teriock.Models {
     export type ArmamentSystemData = {
       /** <schema> Armor Value */
-      av: EvaluationModel;
+      av: DefenseModel;
       /** <schema> Block Value */
-      bv: EvaluationModel;
+      bv: DefenseModel;
       /** <schema> Damage Dice */
       damage: {
         /** <schema> The amount of damage this typically deals */

@@ -70,6 +70,16 @@ export default function TransformationSystemMixin(Base) {
       }
 
       /**
+       * If this is suppressed due to not being the primary transformation.
+       * @returns {boolean}
+       */
+      get _isSuppressedTransformation() {
+        return (
+          this.isTransformation && this.actor && !this.isPrimaryTransformation
+        );
+      }
+
+      /**
        * Whether this is the primary transformation.
        * @returns {boolean}
        */
@@ -94,11 +104,7 @@ export default function TransformationSystemMixin(Base) {
 
       /** @inheritDoc */
       get makeSuppressed() {
-        let suppressed = super.makeSuppressed;
-        if (this.isTransformation && this.parent.actor) {
-          suppressed = suppressed || !this.isPrimaryTransformation;
-        }
-        return suppressed;
+        return super.makeSuppressed || this._isSuppressedTransformation;
       }
 
       /**
@@ -153,7 +159,7 @@ export default function TransformationSystemMixin(Base) {
               s.system.competence.raw = this.transformation.competence.value;
               if (s.system.size.min && s.system.size.max) {
                 s.system.size.value = Math.clamp(
-                  this.parent.actor.system.size.number.value,
+                  this.parent.actor.system.size.number,
                   s.system.size.min,
                   s.system.size.max,
                 );

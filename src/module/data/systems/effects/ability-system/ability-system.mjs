@@ -21,7 +21,6 @@ import * as parts from "./parts/_module.mjs";
  * @mixes AbilityCostsPart
  * @mixes AbilityDurationPart
  * @mixes AbilityEquipmentPart
- * @mixes AbilityHierarchyPart
  * @mixes AbilityInfoPart
  * @mixes AbilityMetaphysicsPart
  * @mixes AbilityOverviewPart
@@ -52,7 +51,6 @@ export default class AbilitySystem extends mix(
   parts.AbilityEquipmentPart,
   parts.AbilityInfoPart,
   parts.AbilityUsagePart,
-  parts.AbilityHierarchyPart,
   parts.AbilityImprovementsPart,
   parts.AbilityOverviewPart,
   parts.AbilityPanelPart,
@@ -312,17 +310,6 @@ export default class AbilitySystem extends mix(
         ] ?? this.executionTime.slow?.text;
     }
     return parts;
-  }
-
-  /** @inheritDoc */
-  get isReference() {
-    const sups = /** @type {TeriockAbility[]} */ this.parent.allSups.contents;
-    for (const sup of sups) {
-      if (sup.type === "ability" && sup.system?.maneuver !== "passive") {
-        return true;
-      }
-    }
-    return super.isReference;
   }
 
   /** @inheritDoc */

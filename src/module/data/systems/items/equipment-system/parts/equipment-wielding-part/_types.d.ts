@@ -1,5 +1,3 @@
-import type { EvaluationModel } from "../../../../../models/_module.mjs";
-
 declare global {
   namespace Teriock.Models {
     export type EquipmentWieldingPartData = {
@@ -8,7 +6,7 @@ declare global {
       /** <schema> Is the equipment glued? */
       glued: boolean;
       /** <schema> Minimum STR */
-      minStr: EvaluationModel;
+      minStr: number;
     };
   }
 }

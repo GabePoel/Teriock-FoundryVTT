@@ -1,14 +1,12 @@
-import { EvaluationModel } from "../../../../../models/_module.mjs";
-
 declare global {
   namespace Teriock.Models {
     export type ActorSensesPartData = {
       /** <schema> Detection parameters */
       detection: {
         /** <schema> Hiding based on sneak */
-        hiding: EvaluationModel;
+        hiding: number | null;
         /** <schema> Perceiving based on perception */
-        perceiving: EvaluationModel;
+        perceiving: number | null;
       };
       /** <schema> Senses */
       senses: {

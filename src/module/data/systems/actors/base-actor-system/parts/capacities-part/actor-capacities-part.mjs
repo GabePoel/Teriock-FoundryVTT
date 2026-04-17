@@ -1,11 +1,10 @@
-import { characterOptions } from "../../../../../../constants/options/character-options.mjs";
 import { equipmentOptions } from "../../../../../../constants/options/equipment-options.mjs";
 import { TeriockActor } from "../../../../../../documents/_module.mjs";
-import { EvaluationField } from "../../../../../fields/_module.mjs";
 import {
   initialNumber,
   initialString,
 } from "../../../../../fields/helpers/initializers.mjs";
+import { migrateEvaluationToNumber } from "../../../../../shared/migrations/_module.mjs";
 
 const { fields } = foundry.data;
 const { utils } = foundry;
@@ -29,12 +28,8 @@ export default (Base) => {
           size: new fields.SchemaField({
             category: initialString(),
             length: initialNumber(),
-            number: new EvaluationField({
-              blank: "3",
-              ceil: false,
-              deterministic: true,
-              floor: false,
-              initial: "3",
+            number: new fields.NumberField({
+              initial: 3,
               label: "Size",
               max: 30,
               min: 0.25,
@@ -45,12 +40,11 @@ export default (Base) => {
             carried: initialNumber(),
             equipment: initialNumber(),
             money: initialNumber(),
-            self: new EvaluationField({
-              blank: characterOptions.defaults.weight,
-              deterministic: true,
-              initial: characterOptions.defaults.weight,
+            self: new fields.NumberField({
+              initial: null,
               interval: equipmentOptions.weight.interval,
               min: 0,
+              nullable: true,
             }),
             value: initialNumber(),
           }),
@@ -70,16 +64,8 @@ export default (Base) => {
             utils.getProperty(data, "weight").replace("lb", "").trim(),
           );
         }
-        if (
-          utils.getType(utils.getProperty(data, "size.number.saved")) ===
-          "number"
-        ) {
-          utils.setProperty(
-            data,
-            "size.number.raw",
-            data.size.number.saved.toString(),
-          );
-        }
+        migrateEvaluationToNumber(data, "size.number", { fallback: 3 });
+        migrateEvaluationToNumber(data, "weight.self", { fallback: null });
         return super.migrateData(data);
       }
 
@@ -113,7 +99,7 @@ export default (Base) => {
       #prepareWeightCarried() {
         let equipmentWeight = 0;
         for (const e of this.parent.equipment) {
-          equipmentWeight += e.system.weight.total;
+          equipmentWeight += e.system.totalWeight;
         }
         this.weight.equipment = equipmentWeight;
         const carried = this.weight.equipment + this.weight.money;
@@ -121,7 +107,7 @@ export default (Base) => {
           equipmentOptions.weight.interval,
         );
         const value =
-          this.weight.equipment + this.weight.money + this.weight.self.value;
+          this.weight.equipment + this.weight.money + this.weight.self;
         this.weight.value = value.toNearest(equipmentOptions.weight.interval);
       }
 
@@ -141,8 +127,8 @@ export default (Base) => {
           ),
           "carry.max": this.carryingCapacity.max,
           "carry.max.hit": Number(weightCarried >= this.carryingCapacity.max),
-          size: this.size.number.value,
-          weight: this.weight.self.value,
+          size: this.size.number,
+          weight: this.weight.self,
         });
         return rollData;
       }
@@ -159,12 +145,13 @@ export default (Base) => {
       /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
-        this.size.number.evaluate();
-        this.weight.self.evaluate();
-        const sizeDefinition = TeriockActor.sizeConfig(this.size.number.value);
+        const sizeDefinition = TeriockActor.sizeConfig(this.size.number);
         this.size.category = sizeDefinition.category;
         this.size.length = sizeDefinition.length;
         this.size.reach = sizeDefinition.reach;
+        if (this.weight.self === null) {
+          this.weight.self = Math.pow(3 + this.size.number, 3);
+        }
       }
 
       /** @inheritDoc */

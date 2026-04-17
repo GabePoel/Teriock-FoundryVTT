@@ -97,30 +97,6 @@ export default class FluencySystem extends mix(
   }
 
   /** @inheritDoc */
-  get isReference() {
-    const sups = /** @type {TeriockAbility[]} */ this.parent.allSups.contents;
-    for (const sup of sups) {
-      if (sup.type === "ability" && sup.system?.maneuver !== "passive") {
-        return true;
-      }
-    }
-    return super.isReference;
-  }
-
-  /** @inheritDoc */
-  get makeSuppressed() {
-    let suppressed = super.makeSuppressed;
-    if (
-      !suppressed &&
-      this.parent.parent &&
-      this.parent.parent.type === "equipment"
-    ) {
-      suppressed = !this.parent.parent?.system.isAttuned;
-    }
-    return suppressed;
-  }
-
-  /** @inheritDoc */
   get wikiPage() {
     const namespace = this.constructor.metadata.namespace;
     const pageName =

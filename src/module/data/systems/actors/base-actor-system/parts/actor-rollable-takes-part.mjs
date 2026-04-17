@@ -120,8 +120,8 @@ export default (Base) => {
       }
 
       /**
-       * Sets the actor's hiding detection formula.
-       * @param {number|string} amount - The formula/value for hiding detection.
+       * Sets the actor's hiding detection score (null = use SNK passive).
+       * @param {number|null} amount
        * @returns {Promise<void>}
        */
       async takeHide(amount) {
@@ -151,8 +151,8 @@ export default (Base) => {
       }
 
       /**
-       * Sets the actor's perceiving detection formula.
-       * @param {number|string} amount - The formula/value for perceiving detection.
+       * Sets the actor's perceiving detection score (null = use PER passive).
+       * @param {number|null} amount
        * @returns {Promise<void>}
        */
       async takePerceive(amount) {

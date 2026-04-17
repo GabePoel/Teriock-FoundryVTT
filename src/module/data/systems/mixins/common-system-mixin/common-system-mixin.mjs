@@ -98,7 +98,7 @@ export default function CommonSystemMixin(Base) {
 
       /** @returns {string} */
       get _masterText() {
-        return this.parent.master?.fullName || "";
+        return this.parent.master?.fullName || this.parent.master?.name || "";
       }
 
       /** @returns {BaseAutomation[]} */
@@ -287,11 +287,6 @@ export default function CommonSystemMixin(Base) {
           );
           await this.parent.updateChildDocuments(docName, updateArray);
         }
-      }
-
-      /** @returns {Promise<void>} */
-      async deleteThis() {
-        await this.parent.delete();
       }
 
       /**

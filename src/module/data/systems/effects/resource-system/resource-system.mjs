@@ -39,15 +39,6 @@ export default class ResourceSystem extends mix(
   }
 
   /** @inheritDoc */
-  get makeSuppressed() {
-    let suppressed = super.makeSuppressed;
-    if (!suppressed && this.parent.parent.type === "equipment") {
-      suppressed = !this.parent.parent?.system.isAttuned;
-    }
-    return suppressed;
-  }
-
-  /** @inheritDoc */
   async _use(options = {}) {
     await new BaseDocumentExecution(options).execute();
   }

@@ -162,7 +162,7 @@ export default function ArmamentSystemMixin(Base) {
           icon: TERIOCK.display.icons.interaction.attack,
           label: _loc("TERIOCK.SYSTEMS.Armament.PANELS.attack"),
           wrappers: [
-            this.piercing.value,
+            this.piercing.value > 0 ? this.piercing.label : "",
             ...this._damageWrappers,
             formulaExists(this.hitBonus)
               ? _loc("TERIOCK.SYSTEMS.Armament.PANELS.hitBonus", {
@@ -475,8 +475,6 @@ export default function ArmamentSystemMixin(Base) {
       /** @inheritDoc */
       prepareSpecialData() {
         super.prepareSpecialData();
-        this.av.evaluate();
-        this.bv.evaluate();
         if (!this.hasAttack) this.range.melee = false;
       }
     }

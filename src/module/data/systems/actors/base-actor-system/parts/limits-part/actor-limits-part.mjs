@@ -1,5 +1,7 @@
-import { EvaluationField } from "../../../../../fields/_module.mjs";
-import { initialBar } from "../../../../../fields/helpers/initializers.mjs";
+import {
+  initialBar,
+  initialNumber,
+} from "../../../../../fields/helpers/initializers.mjs";
 
 const { fields } = foundry.data;
 
@@ -18,13 +20,12 @@ export default (Base) => {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          magic: new fields.SchemaField({
-            maxRotators: new EvaluationField({
-              deterministic: true,
-              floor: true,
-            }),
-          }),
           curses: initialBar({ max: 3 }),
+          rotators: new fields.SchemaField({
+            min: initialNumber(),
+            max: new fields.NumberField({ initial: 0, nullable: false }),
+            value: initialNumber(),
+          }),
         });
       }
 
@@ -32,14 +33,15 @@ export default (Base) => {
       prepareBaseData() {
         super.prepareBaseData();
         this.curses.value = this.parent.powers.filter(
-          (p) => p.system.type === "curse",
+          (p) => p.system.type === "curse" && !p.disabled,
         ).length;
-      }
-
-      /** @inheritDoc */
-      prepareDerivedData() {
-        super.prepareDerivedData();
-        this.magic.maxRotators.evaluate();
+        this.rotators.value = this.parent.abilities.filter(
+          (a) =>
+            a.active &&
+            !a.isReference &&
+            (!a.parent || ["power", "rank"].includes(a.parent.type)) &&
+            a.system.rotator,
+        ).length;
       }
     }
   );

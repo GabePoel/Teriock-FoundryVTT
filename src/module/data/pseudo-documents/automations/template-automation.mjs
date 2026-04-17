@@ -5,11 +5,16 @@ import { BaseAutomation } from "./abstract/_module.mjs";
 const { fields } = foundry.data;
 
 /**
- * @property {number} angle
- * @property {number} distance
+ * @typedef TemplateConfig
+ * @property {Teriock.System.FormulaString} angle
+ * @property {Teriock.System.FormulaString} distance
  * @property {boolean} movable
  * @property {string} t
- * @property {number} width
+ * @property {Teriock.System.FormulaString} width
+ */
+
+/**
+ * @extends {TemplateConfig}
  */
 export default class TemplateAutomation extends BaseAutomation {
   /** @inheritDoc */
@@ -33,13 +38,13 @@ export default class TemplateAutomation extends BaseAutomation {
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       angle: new FormulaField({
-        initial: 0,
+        initial: "0",
         label: "MEASUREMENT.Angle",
         min: 0,
         step: 0.01,
       }),
       distance: new FormulaField({
-        initial: 0,
+        initial: "0",
         label: "MEASUREMENT.Distance",
         min: 0,
       }),
@@ -56,7 +61,7 @@ export default class TemplateAutomation extends BaseAutomation {
         label: "SHAPE.label",
       }),
       width: new FormulaField({
-        initial: 0,
+        initial: "0",
         label: "MEASUREMENT.Width",
         min: 0,
         step: 0.01,
@@ -71,7 +76,7 @@ export default class TemplateAutomation extends BaseAutomation {
 
   /**
    * Template options.
-   * @returns {{angle: number, distance: number, movable: boolean, t: string, width: number}}
+   * @returns {TemplateConfig}
    */
   get templateOptions() {
     return {

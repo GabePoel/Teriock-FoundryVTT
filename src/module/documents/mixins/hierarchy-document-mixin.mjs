@@ -313,7 +313,7 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * The document that most directly provides this one.
-       * @returns {SyncDoc<CommonDocument>}
+       * @returns {SyncDoc<AnyCommonDocument>}
        */
       get elder() {
         return this.sup || this.parent;
@@ -346,7 +346,7 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * The sup of this document or its index.
-       * @returns {SyncDoc<CommonDocument>|undefined}
+       * @returns {SyncDoc<AnyCommonDocument>|undefined}
        */
       get sup() {
         return HierarchyDocument.findSup(this, this.siblingCollection);

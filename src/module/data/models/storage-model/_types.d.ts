@@ -1,4 +1,3 @@
-import { EvaluationModel } from "../_module.mjs";
 import { EquipmentSystem } from "../../systems/items/_module.mjs";
 
 declare global {
@@ -6,10 +5,10 @@ declare global {
     export type StorageModelData = {
       /** <schema> Container enabled */
       enabled: boolean;
-      /** <schema> Maximum number of items that can go in container */
-      maxCount: EvaluationModel;
-      /** <schema> Maximum weight that can go in container */
-      maxWeight: EvaluationModel;
+      /** <schema> Maximum number of items that can go in container (`null` = unlimited) */
+      maxCount: number | null;
+      /** <schema> Maximum weight that can go in container (`null` = unlimited) */
+      maxWeight: number | null;
       /** <schema> Amount to multiply weight of each item in container by */
       weightMultiplier: string;
 
