@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.0
+  systemVersion: 0.12.15
 folder: 0b00935e53673daa
 img: systems/teriock/src/icons/creatures/greater-cemerai.webp
 items:
@@ -15,17 +15,17 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     effects:
-      - _id: VqkNRltU9N2VGfkh
+      - _id: exMJ2XGDWVzHLNPy
         _key: >-
-          !actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.VqkNRltU9N2VGfkh
+          !actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.exMJ2XGDWVzHLNPy
         _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.ANPHEgI4HifPcpuS
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.OJa7qEXpvUsuQzvQ
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/animate-dead.webp
         name: Animate Dead
         system:
@@ -44,6 +44,7 @@ items:
                 type: formula
           delivery: hand
           duration:
+            raw: '0'
             unit: instant
           effectTypes:
             - reanimation
@@ -93,15 +94,15 @@ items:
             - creature
         transfer: true
         type: ability
-      - _id: oKmmywCfiVXbTey2
+      - _id: kkl1nBcJWxwxxpp6
         _key: >-
-          !actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.oKmmywCfiVXbTey2
+          !actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.kkl1nBcJWxwxxpp6
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.235923981d1ebd09
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/constructed-body.webp
         name: Constructed Body
         system:
@@ -179,15 +180,15 @@ items:
             - self
         transfer: true
         type: ability
-      - _id: nMjymyuIWvPs9kS2
+      - _id: O1Cb3gEJKe3rmSO5
         _key: >-
-          !actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.nMjymyuIWvPs9kS2
+          !actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.O1Cb3gEJKe3rmSO5
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.EZt37ToLutUxjQ2r
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/death-rattle.webp
         name: Death Rattle
         system:
@@ -224,8 +225,6 @@ items:
           duration:
             raw: '0'
             unit: instant
-          effectTypes:
-            - magical
           elements:
             - necromancy
           executionTime:
@@ -262,15 +261,15 @@ items:
           trigger: <p>You @L[Condition:Dead]{die}.</p>
         transfer: true
         type: ability
-      - _id: ksC6RVP0dOLKkG3J
+      - _id: Lsy4GBwffna4MiZB
         _key: >-
-          !actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.ksC6RVP0dOLKkG3J
+          !actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.Lsy4GBwffna4MiZB
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.a3ba1215e06bfb82
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/greater-undead.webp
         name: Greater Undead
         system:
@@ -317,24 +316,27 @@ items:
             - self
         transfer: true
         type: ability
-      - _id: wKuk7kLw3XTWmcO0
+      - _id: gfFmkOPaFBVkYCJO
         _key: >-
-          !actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.wKuk7kLw3XTWmcO0
+          !actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.gfFmkOPaFBVkYCJO
         _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.db77687509a7309d
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.646bdfc53ff71572
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/abilities/normal-intelligence.webp
-        name: Normal Intelligence
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
+        name: Healing Sensitivity
         system:
+          _sup: Lsy4GBwffna4MiZB
           competence:
             raw: 0
           delivery: self
           duration:
             raw: '0'
             unit: unlimited
+          elements:
+            - necromancy
           executionTime:
             base: passive
             slow:
@@ -344,222 +346,43 @@ items:
             range:
               unit: self
           featSaveAttribute: mov
-          form: normal
-          identifier: normal-intelligence
+          form: flaw
+          identifier: healing-sensitivity
           interaction: manifest
           maneuver: passive
           mundane: false
+          overview:
+            base: >-
+              <p>@L[Core:Healing]{Healing} can be used to
+              @L[Core:Damage]{damage} you. If the creature providing you
+              @L[Core:Healing]{healing} specifies that they are doing so "for
+              damage" then you roll your <i>largest</i> @L[Core:HP]{hit die} and
+              take that much @L[Damage:Holy]{holy} @L[Damage:Magic]{magic
+              damage} instead of the normal @L[Core:Healing]{healing} effect.
+              This does not consume any of your @L[Core:HP]{hit dice}.</p>
           piercing:
             raw: 0
           powerSources:
-            - martial
+            - magical
           range:
             unit: self
           targets:
             - self
-          upgrades:
-            score:
-              attribute: int
-              value: 0
         transfer: true
         type: ability
-      - _id: yYkVzMacJ8NqZYiL
+      - _id: nqMHSZbJHa9Z1p7c
         _key: >-
-          !actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.yYkVzMacJ8NqZYiL
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.1c52eda8919d34a7
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/abilities/normal-movement.webp
-        name: Normal Movement
-        system:
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: normal-movement
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          targets:
-            - self
-          upgrades:
-            score:
-              attribute: mov
-              value: 0
-        transfer: true
-        type: ability
-      - _id: 4pQ5ZxhnPjwxtUMf
-        _key: >-
-          !actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.4pQ5ZxhnPjwxtUMf
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.8249d99c527d09b1
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/abilities/normal-perception.webp
-        name: Normal Perception
-        system:
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: normal-perception
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          targets:
-            - self
-          upgrades:
-            score:
-              attribute: per
-              value: 0
-        transfer: true
-        type: ability
-      - _id: gCnauGBjLL0ln9YZ
-        _key: >-
-          !actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.gCnauGBjLL0ln9YZ
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.1d13190e5b38bda6
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/abilities/normal-sneak.webp
-        name: Normal Sneak
-        system:
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: normal-sneak
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          targets:
-            - self
-          upgrades:
-            score:
-              attribute: snk
-              value: 0
-        transfer: true
-        type: ability
-      - _id: rpNepEaYHAU8mYwM
-        _key: >-
-          !actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.rpNepEaYHAU8mYwM
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.14d28d6322eec2ff
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/abilities/normal-strength.webp
-        name: Normal Strength
-        system:
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: normal-strength
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          targets:
-            - self
-          upgrades:
-            score:
-              attribute: str
-              value: 0
-        transfer: true
-        type: ability
-      - _id: GbQ7lz7UrZes7yGB
-        _key: >-
-          !actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.GbQ7lz7UrZes7yGB
+          !actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.nqMHSZbJHa9Z1p7c
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.2rxzRucyitmqyDmQ
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/ethereal-senses.webp
         name: Ethereal Senses
         system:
-          _sup: ksC6RVP0dOLKkG3J
+          _sup: Lsy4GBwffna4MiZB
           automations:
             e789ed5e109ebd1a:
               _id: e789ed5e109ebd1a
@@ -622,19 +445,90 @@ items:
             - self
         transfer: true
         type: ability
-      - _id: 6MEMVo9WuKN8zlcM
+      - _id: g86VBO0cP1MerZ8r
         _key: >-
-          !actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.6MEMVo9WuKN8zlcM
+          !actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.g86VBO0cP1MerZ8r
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.P5i3FWFMMYPBuVtV
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/abilities/magical-durability.webp
+        name: Magical Durability
+        system:
+          _sup: Lsy4GBwffna4MiZB
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.protections.immunities.damageTypes
+                  phase: normal
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  type: add
+                  value: mundane
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 1
+                - 0
+              type: changes
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            raw: '0'
+            unit: unlimited
+          effectTypes:
+            - immunity
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          identifier: magical-durability
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          overview:
+            base: >-
+              <p>You are @L[Keyword:Immunity]{immune} to
+              @L[Damage:Mundane]{mundane} @L[Core:Damage]{damage}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: UiWEdl44gxYo3v1w
+        _key: >-
+          !actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.UiWEdl44gxYo3v1w
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.1e47c2f1c0cd5428
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/undead-mind.webp
         name: Undead Mind
         system:
-          _sup: ksC6RVP0dOLKkG3J
+          _sup: Lsy4GBwffna4MiZB
           automations:
             e789ed5e109ebd1a:
               _id: e789ed5e109ebd1a
@@ -704,144 +598,19 @@ items:
             - self
         transfer: true
         type: ability
-      - _id: Iz86hTxiNu2lLsnu
+      - _id: GvFUWYggSf2JGfLn
         _key: >-
-          !actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.Iz86hTxiNu2lLsnu
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.646bdfc53ff71572
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
-        name: Healing Sensitivity
-        system:
-          _sup: ksC6RVP0dOLKkG3J
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          elements:
-            - necromancy
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: flaw
-          identifier: healing-sensitivity
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          overview:
-            base: >-
-              <p>@L[Core:Healing]{Healing} can be used to
-              @L[Core:Damage]{damage} you. If the creature providing you
-              @L[Core:Healing]{healing} specifies that they are doing so "for
-              damage" then you roll your <i>largest</i> @L[Core:HP]{hit die} and
-              take that much @L[Damage:Holy]{holy} @L[Damage:Magic]{magic
-              damage} instead of the normal @L[Core:Healing]{healing} effect.
-              This does not consume any of your @L[Core:HP]{hit dice}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - magical
-          range:
-            unit: self
-          targets:
-            - self
-        transfer: true
-        type: ability
-      - _id: 2JlNcU3wH3s0xrwz
-        _key: >-
-          !actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.2JlNcU3wH3s0xrwz
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.P5i3FWFMMYPBuVtV
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/abilities/magical-durability.webp
-        name: Magical Durability
-        system:
-          _sup: ksC6RVP0dOLKkG3J
-          automations:
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
-              changes:
-                - key: system.protections.immunities.damageTypes
-                  phase: normal
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  type: add
-                  value: mundane
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
-              type: changes
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          effectTypes:
-            - immunity
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: special
-          identifier: magical-durability
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          overview:
-            base: >-
-              <p>You are @L[Keyword:Immunity]{immune} to
-              @L[Damage:Mundane]{mundane} @L[Core:Damage]{damage}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - magical
-          range:
-            unit: self
-          targets:
-            - self
-        transfer: true
-        type: ability
-      - _id: 49CXPMsSLZZCs9pM
-        _key: >-
-          !actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.49CXPMsSLZZCs9pM
+          !actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.GvFUWYggSf2JGfLn
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.267a2993fd42e843
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/mana-drain-touch.webp
         name: Mana Drain Touch
         system:
-          _sup: ksC6RVP0dOLKkG3J
+          _sup: Lsy4GBwffna4MiZB
           automations:
             157afc517847f562:
               _id: 157afc517847f562
@@ -916,19 +685,19 @@ items:
             - creature
         transfer: true
         type: ability
-      - _id: yBef5bOwkMHPgZUA
+      - _id: lDUkpXes38yuT07C
         _key: >-
-          !actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.yBef5bOwkMHPgZUA
+          !actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.lDUkpXes38yuT07C
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.3a19d7ff7a1f3b26
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/undying-durability.webp
         name: Undying Durability
         system:
-          _sup: ksC6RVP0dOLKkG3J
+          _sup: Lsy4GBwffna4MiZB
           automations:
             e789ed5e109ebd1a:
               _id: e789ed5e109ebd1a
@@ -1010,11 +779,240 @@ items:
             - self
         transfer: true
         type: ability
+      - _id: 3eExHPlVjnSuEFbO
+        _key: >-
+          !actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.3eExHPlVjnSuEFbO
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.db77687509a7309d
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/abilities/normal-intelligence.webp
+        name: Normal Intelligence
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            raw: '0'
+            unit: unlimited
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: normal-intelligence
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: int
+              value: 0
+        transfer: true
+        type: ability
+      - _id: IPAF0EiHBDskF81c
+        _key: >-
+          !actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.IPAF0EiHBDskF81c
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.1c52eda8919d34a7
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/abilities/normal-movement.webp
+        name: Normal Movement
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            raw: '0'
+            unit: unlimited
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: normal-movement
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: mov
+              value: 0
+        transfer: true
+        type: ability
+      - _id: Tp5tJbsdcQB13DDx
+        _key: >-
+          !actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.Tp5tJbsdcQB13DDx
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.8249d99c527d09b1
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/abilities/normal-perception.webp
+        name: Normal Perception
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            raw: '0'
+            unit: unlimited
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: normal-perception
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: per
+              value: 0
+        transfer: true
+        type: ability
+      - _id: 1s4TEcO2u99Ewlcs
+        _key: >-
+          !actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.1s4TEcO2u99Ewlcs
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.1d13190e5b38bda6
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/abilities/normal-sneak.webp
+        name: Normal Sneak
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            raw: '0'
+            unit: unlimited
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: normal-sneak
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: snk
+              value: 0
+        transfer: true
+        type: ability
+      - _id: yYgwf5gULvjk2pJy
+        _key: >-
+          !actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.yYgwf5gULvjk2pJy
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.14d28d6322eec2ff
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/abilities/normal-strength.webp
+        name: Normal Strength
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            raw: '0'
+            unit: unlimited
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: normal-strength
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: str
+              value: 0
+        transfer: true
+        type: ability
     folder: 0b00935e53673daa
     img: systems/teriock/src/icons/creatures/greater-cemerai.webp
     name: Greater Cemerai
     system:
-      adult: 0
       appearance: >-
         <p>Complete suits of armor with full helm, walking around, with empty
         black voids where a face should be.</p>
@@ -1028,7 +1026,6 @@ items:
         way.</p>
       identifier: greater-cemerai
       innateRanks: <p>Innately @L[Category:Classes]{rank} 3 @L[Class:Duelist]{Duelist}.</p>
-      lifespan: 0
       size:
         enabled: true
         value: 3
@@ -1046,544 +1043,24 @@ items:
         img: systems/teriock/src/icons/tokens/greater-cemerai.webp
         ring: true
     type: species
-  - _id: 5an0tA8xG2gHrhlh
-    _key: '!actors.items!631ee800e7393cd3.5an0tA8xG2gHrhlh'
-    _stats:
-      compendiumSource: Compendium.teriock.classes.Item.8e0c2b8d16a120d3
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.4
-    effects:
-      - _id: vU4DiB0u1DAfzrs5
-        _key: >-
-          !actors.items.effects!631ee800e7393cd3.5an0tA8xG2gHrhlh.vU4DiB0u1DAfzrs5
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.5bb5b13ca45f582b
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/abilities/bow-out.webp
-        name: Bow Out
-        system:
-          class: duelist
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: bow-out
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          overview:
-            base: >-
-              <p>You gain @L[Ability:Active Bow Out]{Active Bow Out} and
-              @L[Ability:Reactive Bow Out]{Reactive Bow Out}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          skill: true
-          standard: true
-          targets:
-            - self
-        transfer: true
-        type: ability
-      - _id: Ckzn261n62CcGUwr
-        _key: >-
-          !actors.items.effects!631ee800e7393cd3.5an0tA8xG2gHrhlh.Ckzn261n62CcGUwr
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.2670da014614edb4
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/abilities/dueling-techniques.webp
-        name: Dueling Techniques
-        system:
-          class: duelist
-          competence:
-            raw: 0
-          costs:
-            components:
-              somatic:
-                type: tag
-          delivery: self
-          duration:
-            conditions:
-              present:
-                - dueling
-            raw: '0'
-            unit: unlimited
-          endCondition: <p>You are no longer @L[Condition:Dueling]{dueling}.</p>
-          executionTime:
-            base: a1
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: dueling-techniques
-          interaction: manifest
-          maneuver: active
-          mundane: false
-          overview:
-            base: >-
-              <p>A @L[Category:Weapons]{weapon} you are @L[Keyword:Using]{using}
-              of your choice becomes @L[Property:Armor Voiding]{AV0} against
-              creatures you are @L[Condition:Dueling]{dueling} and you gain
-              @L[Keyword:Limited]{Limited} @L[Ability:Chi Strike]{Chi
-              Strike}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - spiritual
-          range:
-            unit: self
-          requirements: >-
-            <p>You must be @L[Condition:Dueling]{dueling} and wielding the
-            targeted weapon.</p>
-          skill: true
-          standard: true
-          targets:
-            - weapon
-        transfer: true
-        type: ability
-      - _id: aMpBM1gwJl2mau2J
-        _key: >-
-          !actors.items.effects!631ee800e7393cd3.5an0tA8xG2gHrhlh.aMpBM1gwJl2mau2J
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.43df205ab1de2597
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/abilities/tea-ceremony.webp
-        name: Tea Ceremony
-        system:
-          class: duelist
-          competence:
-            raw: 0
-          costs:
-            primary:
-              mp:
-                description: >-
-                  <p>2 MP per participant. Each participant must pay at least 1
-                  MP. After that, the remaining cost of may be paid in any
-                  combination by any of the participants.</p>
-                type: description
-          delivery: sight
-          duration:
-            raw: '24'
-            unit: hour
-          effectTypes:
-            - truthDetecting
-          executionTime:
-            base: 10 Minutes
-            slow:
-              raw: '10'
-              unit: minute
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: tea-ceremony
-          interaction: manifest
-          maneuver: slow
-          mundane: false
-          overview:
-            base: >-
-              <p>[[lookup name]] is done in collaboration with up to 1 other
-              creature (although they do not need to have [[lookup name]]). It
-              requires willing and active participation from all targets. As
-              part of [[lookup name]], you must ask three questions about the
-              alignment, motives, or intentions of the group. Each participant
-              (including yourself) must individually answer these questions. The
-              questions are asked one at a time, and each participant must
-              answer before the next question is asked. If anyone refuses to
-              answer truthfully, the [[lookup name]] fails and all participants
-              are @L[Keyword:Vulnerable]{vulnerable} to @L[Drain:Mana]{mana
-              drain} and @L[Drain:Mana]{mana drain} is
-              @L[Keyword:Boosted]{boosted} against them for 24 hours. This
-              occurs once everyone has answered the latest question or
-              immediately if someone refuses to answer whatsoever. If the
-              [[lookup name]] is successful, all participants are
-              @L[Keyword:Resistance]{resistant} to @L[Drain:Mana]{mana drain}
-              for 24 hours and suffer no negative effects of @L[Core:MP]{mana
-              loss} other than @L[Condition:Dead]{death} and
-              @L[Condition:Unconscious]{unconsciousness}. [[lookup name]] can
-              only be performed once per @L[Core:Long Rest]{long rest}.</p><div
-              class="note"><b>Note:</b> [[lookup name]] detects only whether the
-              participants believe their answers to be true, not whether or not
-              they are.</div><div class="note"><b>Note:</b> If an effect such as
-              @L[Ability:Lie]{Lie} is used to deceive the [[lookup name]], it
-              continues as if the lie were true.</div>
-            fluent: >-
-              <p>You may now target up to 2 × @L[Core:Fluency Bonus]{F}
-              creatures (including yourself) with [[lookup name]].</p>
-            proficient: >-
-              <p>You may now target up to 2 × @L[Core:Proficiency Bonus]{P}
-              creatures (including yourself) with [[lookup name]].</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - spiritual
-          range:
-            raw: '5'
-            unit: ft
-          ritual: true
-          skill: true
-          standard: true
-          targets:
-            - creature
-        transfer: true
-        type: ability
-      - _id: aw3DqvoKmhniimRa
-        _key: >-
-          !actors.items.effects!631ee800e7393cd3.5an0tA8xG2gHrhlh.aw3DqvoKmhniimRa
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.c0042e5fff873fda
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/abilities/reactive-bow-out.webp
-        name: Reactive Bow Out
-        system:
-          _sup: vU4DiB0u1DAfzrs5
-          class: duelist
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: instant
-          executionTime:
-            base: r1
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: reactive-bow-out
-          interaction: manifest
-          maneuver: reactive
-          mundane: false
-          overview:
-            base: >-
-              <p>The effect causing you to enter a @L[Condition:Dueling]{duel}
-              or that would @L[Category:Duel modifying effects]{modify} a
-              @L[Condition:Dueling]{duel} you are in @L[Core:Fizzles]{fizzles}.
-              You do not count as "forfeiting" or "losing" if you use [[lookup
-              name]] to stop @L[Condition:Dueling]{dueling}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - spiritual
-          range:
-            unit: self
-          skill: true
-          standard: true
-          targets:
-            - self
-          trigger: >-
-            <p>Some effect would cause you to start
-            @L[Condition:Dueling]{dueling} or @L[Category:Duel modifying
-            effects]{modify} a @L[Condition:Dueling]{duel} you are in.</p>
-        transfer: true
-        type: ability
-      - _id: WAWhzsHSk8sfQ1Dc
-        _key: >-
-          !actors.items.effects!631ee800e7393cd3.5an0tA8xG2gHrhlh.WAWhzsHSk8sfQ1Dc
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.Gs4jCmyXyojxu0WM
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/abilities/active-bow-out.webp
-        name: Active Bow Out
-        system:
-          _sup: vU4DiB0u1DAfzrs5
-          automations:
-            824b5b01e1a4efec:
-              _id: 824b5b01e1a4efec
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              executor: false
-              heighten:
-                - 1
-                - 0
-              relation: remove
-              status: dueling
-              target: false
-              type: status
-            e9c69ec96993ccc5:
-              _id: e9c69ec96993ccc5
-              competencies:
-                - 0
-                - 1
-                - 2
-              heighten:
-                - 1
-                - 0
-              relation: remove
-              status: dueling
-              type: end
-          class: duelist
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: instant
-          effectTypes:
-            - duelModifying
-          executionTime:
-            base: a1
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: active-bow-out
-          interaction: manifest
-          maneuver: active
-          mundane: false
-          overview:
-            base: >-
-              <p>You end a @L[Condition:Dueling]{duel} you are currently in. You
-              do not count as "forfeiting" or "losing" if you use [[lookup
-              name]] to stop @L[Condition:Dueling]{dueling}.</p>
-            proficient: >-
-              <p>If you want, everyone in the @L[Condition:Dueling]{duel}
-              returns to the number of @L[Core:Hit Points and Mana Points]{HP}
-              they had prior to @L[Condition:Dueling]{dueling}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - spiritual
-          range:
-            unit: self
-          skill: true
-          standard: true
-          targets:
-            - self
-        transfer: true
-        type: ability
-      - _id: XuffmMZinqx4Aupx
-        _key: >-
-          !actors.items.effects!631ee800e7393cd3.5an0tA8xG2gHrhlh.XuffmMZinqx4Aupx
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.3e3bec7c2738ffa5
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/abilities/chi-strike.webp
-        name: Chi Strike
-        system:
-          _sup: Ckzn261n62CcGUwr
-          automations:
-            1728b3a84ea27844:
-              _id: 1728b3a84ea27844
-              common:
-                - standardDamage
-              competencies:
-                - 0
-                - 1
-                - 2
-              heighten:
-                - 1
-                - 0
-              showConfirmationDialog: true
-              type: common
-          class: duelist
-          competence:
-            raw: 0
-          costs:
-            primary:
-              mp:
-                formula: '1'
-                type: formula
-          delivery: weapon
-          duration:
-            raw: '0'
-            unit: instant
-          effectTypes:
-            - draining
-          executionTime:
-            base: a1
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: chi-strike
-          interaction: attack
-          limitation: >-
-            <p>May only be delivered with the @L[Category:Weapons]{weapon} you
-            made @L[Property:Armor Voiding]{AV0} and only against creatures you
-            are @L[Condition:Dueling]{dueling}.</p>
-          maneuver: active
-          mundane: false
-          overview:
-            base: >-
-              <p>This strike deals @L[Drain:Mana]{mana drain} instead of
-              @L[Core:Damage]{damage}. It has no @L[Category:Damage
-              types]{damage types}, but is otherwise treated as any other
-              @L[Category:Attack abilities]{attack} <i>prior</i> to hitting. So,
-              @L[Ability:Triumphant Damage Boost]{Triumphant Damage Boost} would
-              @L[Keyword:Boosted]{boost} it, but @L[Ability:Improved
-              Brace]{Improved Brace} would not @L[Keyword:Deboosted]{deboost}
-              it.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - spiritual
-          range:
-            unit: contact
-          results:
-            critHit: >-
-              <p>Deal an amount of @L[Drain:Mana]{mana drain} equal to the
-              amount of @L[Core:Standard and Critical Damage]{critical damage}
-              you would otherwise deal.</p>
-            hit: >-
-              <p>Deal an amount of @L[Drain:Mana]{mana drain} equal to the
-              @L[Core:Standard and Critical Damage]{standard damage} you would
-              otherwise deal.</p>
-          skill: true
-          standard: true
-          targets:
-            - creature
-        transfer: true
-        type: ability
-    folder: 0b00935e53673daa
-    img: systems/teriock/src/icons/ranks/rank-2-duelist.webp
-    name: Rank 2 Duelist
-    system:
-      _sup: 631ee800e7393cd3
-      archetype: warrior
-      className: duelist
-      classRank: 2
-      competence:
-        raw: 1
-      description: >-
-        <p>Honor-bound and honest to the core, Duelists are often judges and
-        referees for duels as well as devoted warriors. Duelists prize the honor
-        of their family above any sort of personal gain and thus strive for
-        excellence in everything that they do. A true Duelist wins the battle
-        before it has begun. Strategy and personal perfection are the Duelist's
-        way. If you are a Duelist, be calm, focused, well spoken and confident
-        in yourself.</p>
-      flaws: <p>Duelists cannot use @L[Category:Shields]{shields}.</p>
-      identifier: rank-2-duelist
-      innate: false
-      maxAv: 4
-      statDice:
-        hp:
-          disabled: false
-          formula: 1d12
-        mp:
-          disabled: false
-          formula: 1d8
-    type: rank
-  - _id: DB9OalTzPbJAQl1m
-    _key: '!actors.items!631ee800e7393cd3.DB9OalTzPbJAQl1m'
-    _stats:
-      compendiumSource: Compendium.teriock.species.Item.0uSRnCfr8vIfnnWW
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.4
-    folder: 0b00935e53673daa
-    img: systems/teriock/src/icons/equipment/full-plate.webp
-    name: Full Plate
-    system:
-      _sup: 631ee800e7393cd3
-      attackPenalty: '-3'
-      av:
-        raw: '4'
-      competence:
-        raw: 0
-      consumable: false
-      damage:
-        base: '0'
-      destroyed: false
-      equipmentClasses:
-        - armor
-      equipmentType: full-plate
-      equipped: true
-      identifier: full-plate
-      impacts:
-        - damage
-      minStr:
-        raw: '-1'
-      powerLevel: mundane
-      range:
-        long:
-          unit: self
-        melee: true
-        ranged: false
-        short:
-          unit: self
-      stashed: false
-      vitals: false
-      weight:
-        raw: '65'
-    type: equipment
-  - _id: K48Ke9iOIo9v8qPa
-    _key: '!actors.items!631ee800e7393cd3.K48Ke9iOIo9v8qPa'
+  - _id: PsiPloj0mj7VLXv5
+    _key: '!actors.items!631ee800e7393cd3.PsiPloj0mj7VLXv5'
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.079ffd850d9567f9
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     effects:
-      - _id: LwntE76DWV8LsMYk
+      - _id: TWk5AP5nzZgpXkaM
         _key: >-
-          !actors.items.effects!631ee800e7393cd3.K48Ke9iOIo9v8qPa.LwntE76DWV8LsMYk
+          !actors.items.effects!631ee800e7393cd3.PsiPloj0mj7VLXv5.TWk5AP5nzZgpXkaM
         _stats:
           compendiumSource: Compendium.teriock.properties.ActiveEffect.294cd7a4f1545ed9
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -1598,15 +1075,15 @@ items:
           mundane: true
         transfer: true
         type: property
-      - _id: 70oASdJA4Iza7rlK
+      - _id: IDLUUjkSFtpaiKuJ
         _key: >-
-          !actors.items.effects!631ee800e7393cd3.K48Ke9iOIo9v8qPa.70oASdJA4Iza7rlK
+          !actors.items.effects!631ee800e7393cd3.PsiPloj0mj7VLXv5.IDLUUjkSFtpaiKuJ
         _stats:
           compendiumSource: Compendium.teriock.properties.ActiveEffect.3d2cc8d952adebec
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -1631,8 +1108,6 @@ items:
       damage:
         base: '1'
       identifier: foot
-      impacts:
-        - damage
       range:
         long:
           unit: melee
@@ -1642,251 +1117,180 @@ items:
           unit: self
       vitals: false
     type: body
-  - _id: RjhJl3YgGCbnQvb1
-    _key: '!actors.items!631ee800e7393cd3.RjhJl3YgGCbnQvb1'
+  - _id: SzQmEtRvnFBIWoQa
+    _key: '!actors.items!631ee800e7393cd3.SzQmEtRvnFBIWoQa'
     _stats:
-      compendiumSource: Compendium.teriock.classes.Item.4d084b2bd2d58aec
+      compendiumSource: Compendium.teriock.bodyParts.Item.58ba95d8757c67c0
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     effects:
-      - _id: QxDyN7VLtCaq1ppD
+      - _id: H7Q5z5528FgfgbLp
         _key: >-
-          !actors.items.effects!631ee800e7393cd3.RjhJl3YgGCbnQvb1.QxDyN7VLtCaq1ppD
+          !actors.items.effects!631ee800e7393cd3.SzQmEtRvnFBIWoQa.H7Q5z5528FgfgbLp
         _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.03678a933c57b548
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.294cd7a4f1545ed9
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
-        flags:
-          teriock:
-            category: support
-            defaultAbility: true
-        img: systems/teriock/src/icons/abilities/clan-fealty.webp
-        name: Clan Fealty
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/properties/bashing.webp
+        name: Bashing
         system:
-          class: duelist
           competence:
             raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: clan-fealty
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          overview:
-            base: >-
-              <p>You may declare "fealty" 1 group or individual. You are said to
-              have declared fealty to these individuals and members of these
-              groups. They must accept your declaration of fealty and can revoke
-              it at any time. You get bonuses while defending, fighting with, or
-              doing a quest given by something or someone you have declared
-              fealty to, you get various bonuses. They are as
-              follows.</p><ul><li>@L[Keyword:Adept]{Adept} at @L[Ability:Duel
-              Swap]{Duel Swap} with creatures you have declared fealty
-              to.</li><li>If you have @L[Ability:Resolve Conflict]{Resolve
-              Conflict}, it is @L[Keyword:Warded]{warded} when used in defense
-              of those you have declared fealty to, or when used in the interest
-              of a quest given by them.</li><li>@L[Ability:Tea Ceremony]{Tea
-              Ceremony} is @L[Keyword:Warded]{warded} on those you have declared
-              fealty to and costs one less @L[Core:Hit Points and Mana
-              Points]{MP} per participant you've declared fealty
-              to.</li></ul><div style="padding:0em"></div>
-            fluent: >-
-              <p>You may declare "fealty" to up to @L[Core:Fluency Bonus]{F}
-              groups or individuals.</p>
-            proficient: >-
-              <p>You may declare "fealty" to up to @L[Core:Proficiency Bonus]{P}
-              groups or individuals.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - spiritual
-          range:
-            unit: self
-          skill: true
-          standard: true
-          targets:
-            - self
+          description: >-
+            <p>An item with the <b>[[lookup name style=lc]]</b> property is not
+            a weapon, but can still be used to make a @L[Ability:Basic
+            Attack]{Basic Attack}.</p>
+          form: intrinsic
+          identifier: bashing
+          mundane: true
         transfer: true
-        type: ability
-      - _id: yCLjgtUua4ROR3qi
+        type: property
+      - _id: lKaLyYYTTIEFOLb5
         _key: >-
-          !actors.items.effects!631ee800e7393cd3.RjhJl3YgGCbnQvb1.yCLjgtUua4ROR3qi
+          !actors.items.effects!631ee800e7393cd3.SzQmEtRvnFBIWoQa.lKaLyYYTTIEFOLb5
         _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.f59e54740feac012
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.417457cfa2643f5b
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
-        flags:
-          teriock:
-            category: combat
-            defaultAbility: true
-        img: systems/teriock/src/icons/abilities/duel-swap.webp
-        name: Duel Swap
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/properties/handy.webp
+        name: Handy
         system:
-          automations:
-            52f4d0b87363b1c1:
-              _id: 52f4d0b87363b1c1
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              executor: false
-              heighten:
-                - 1
-                - 0
-              relation: apply
-              status: dueling
-              target: false
-              type: status
-            824b5b01e1a4efec:
-              _id: 824b5b01e1a4efec
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              executor: false
-              heighten:
-                - 1
-                - 0
-              relation: remove
-              status: dueling
-              target: false
-              type: status
-            e9c69ec96993ccc5:
-              _id: e9c69ec96993ccc5
-              competencies:
-                - 0
-                - 1
-                - 2
-              heighten:
-                - 1
-                - 0
-              relation: remove
-              status: dueling
-              type: end
-          class: duelist
           competence:
             raw: 0
-          costs:
-            primary:
-              mp:
-                formula: '1'
-                type: formula
-          delivery: sight
-          duration:
-            raw: '0'
-            unit: instant
-          executionTime:
-            base: a1
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: duel-swap
-          interaction: manifest
-          maneuver: active
-          mundane: false
-          overview:
-            base: >-
-              <p>The target leaves their @L[Condition:Dueling]{duel} and you
-              enter in their place. This does not end the
-              @L[Condition:Dueling]{duel} and the target is not considered to
-              have "lost" or "forfeited". Any @L[Category:Duel modifying
-              effects]{duel modifying effects} remain in place.</p><div
-              class="note"><b>Note:</b> This ability costs no @L[Core:MP]{MP} to
-              use on creatures you have sworn @L[Ability:Clan Fealty]{Clan
-              Fealty} with.</div>
-          piercing:
-            raw: 0
-          powerSources:
-            - spiritual
-          range:
-            raw: '15'
-            unit: ft
-          requirements: >-
-            <p>Target must be an allied creature in a
-            @L[Condition:Dueling]{duel} within range.</p>
-          skill: true
-          standard: true
-          targets:
-            - creature
+          description: >-
+            <p>An item with this property can be used to deliver
+            @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
+          form: intrinsic
+          identifier: handy
+          mundane: true
         transfer: true
-        type: ability
+        type: property
+      - _id: m7Va2Fuah1K2t2Ab
+        _key: >-
+          !actors.items.effects!631ee800e7393cd3.SzQmEtRvnFBIWoQa.m7Va2Fuah1K2t2Ab
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.9e0c23ad80fe566a
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/properties/prehensile.webp
+        name: Prehensile
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item can be used to grasp, hold, or manipulate objects, such
+            as while using @L[Ability:Interact]{Interact}.</p>
+          form: intrinsic
+          identifier: prehensile
+          mundane: true
+        transfer: true
+        type: property
+      - _id: IJM1yhiyKnnwlbXh
+        _key: >-
+          !actors.items.effects!631ee800e7393cd3.SzQmEtRvnFBIWoQa.IJM1yhiyKnnwlbXh
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.3d2cc8d952adebec
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/properties/small.webp
+        name: Small
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with this property is easily concealed and can often be
+            used in the same hand as a @L[Category:Shields]{shield}.</p>
+          form: intrinsic
+          identifier: small
+          mundane: true
+        transfer: true
+        type: property
     folder: 0b00935e53673daa
-    img: systems/teriock/src/icons/ranks/rank-3-duelist.webp
-    name: Rank 3 Duelist
+    img: systems/teriock/src/icons/body-parts/hand.webp
+    name: Hand
     system:
       _sup: 631ee800e7393cd3
-      archetype: warrior
-      className: duelist
-      classRank: 3
+      attackPenalty: '-3'
       competence:
-        raw: 1
-      description: >-
-        <p>Honor-bound and honest to the core, Duelists are often judges and
-        referees for duels as well as devoted warriors. Duelists prize the honor
-        of their family above any sort of personal gain and thus strive for
-        excellence in everything that they do. A true Duelist wins the battle
-        before it has begun. Strategy and personal perfection are the Duelist's
-        way. If you are a Duelist, be calm, focused, well spoken and confident
-        in yourself.</p>
-      flaws: <p>Duelists cannot use @L[Category:Shields]{shields}.</p>
-      identifier: rank-3-duelist
-      innate: false
-      maxAv: 4
-      statDice:
-        hp:
-          disabled: false
-          formula: 1d12
-        mp:
-          disabled: false
-          formula: 1d8
-    type: rank
-  - _id: r5tPTQZBJ9vijhMg
-    _key: '!actors.items!631ee800e7393cd3.r5tPTQZBJ9vijhMg'
+        raw: 0
+      damage:
+        base: '1'
+      identifier: hand
+      range:
+        long:
+          unit: melee
+        melee: true
+        ranged: false
+        short:
+          unit: self
+      vitals: false
+    type: body
+  - _id: TSoqI1hEZavnDgna
+    _key: '!actors.items!631ee800e7393cd3.TSoqI1hEZavnDgna'
+    _stats:
+      compendiumSource: Compendium.teriock.equipment.Item.abd8733cb795a7e0
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    folder: 0b00935e53673daa
+    img: systems/teriock/src/icons/equipment/full-plate.webp
+    name: Full Plate
+    system:
+      _sup: 631ee800e7393cd3
+      attackPenalty: '-3'
+      av:
+        raw: 4
+      competence:
+        raw: 0
+      consumable: false
+      damage:
+        base: '0'
+      equipmentClasses:
+        - armor
+      equipmentType: full-plate
+      equipped: true
+      identifier: full-plate
+      minStr: -1
+      powerLevel: mundane
+      range:
+        long:
+          unit: self
+        melee: true
+        ranged: false
+        short:
+          unit: self
+      vitals: false
+      weight: 65
+    type: equipment
+  - _id: KLENiLsr670sxg55
+    _key: '!actors.items!631ee800e7393cd3.KLENiLsr670sxg55'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.f49c6d015bc8589a
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     effects:
       - _id: Uz1hvRPju7UkGtEK
         _key: >-
-          !actors.items.effects!631ee800e7393cd3.r5tPTQZBJ9vijhMg.Uz1hvRPju7UkGtEK
+          !actors.items.effects!631ee800e7393cd3.KLENiLsr670sxg55.Uz1hvRPju7UkGtEK
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.043078efb9756b45
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/defy-death.webp
         name: Defy Death
         system:
@@ -1959,13 +1363,13 @@ items:
         type: ability
       - _id: A4WZCzLVp8Jq9ykR
         _key: >-
-          !actors.items.effects!631ee800e7393cd3.r5tPTQZBJ9vijhMg.A4WZCzLVp8Jq9ykR
+          !actors.items.effects!631ee800e7393cd3.KLENiLsr670sxg55.A4WZCzLVp8Jq9ykR
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.47728b72f6c25e3b
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/duel.webp
         name: Duel
         system:
@@ -2114,13 +1518,13 @@ items:
         type: ability
       - _id: ez42WB6ZV9yzul09
         _key: >-
-          !actors.items.effects!631ee800e7393cd3.r5tPTQZBJ9vijhMg.ez42WB6ZV9yzul09
+          !actors.items.effects!631ee800e7393cd3.KLENiLsr670sxg55.ez42WB6ZV9yzul09
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.10797b5ac88b2f6b
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/resolve-conflict.webp
         name: Resolve Conflict
         system:
@@ -2184,15 +1588,15 @@ items:
             - self
         transfer: true
         type: ability
-      - _id: gD6YsKdc2HLh6TU1
+      - _id: 5uCQFHWjmYEXM5AK
         _key: >-
-          !actors.items.effects!631ee800e7393cd3.r5tPTQZBJ9vijhMg.gD6YsKdc2HLh6TU1
+          !actors.items.effects!631ee800e7393cd3.KLENiLsr670sxg55.5uCQFHWjmYEXM5AK
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.BtsHXqEsRV6Snbao
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/detect-lie.webp
         name: Detect Lie
         system:
@@ -2280,144 +1684,727 @@ items:
           disabled: false
           formula: 1d8
     type: rank
-  - _id: tcNQpEmgj7cjeegn
-    _key: '!actors.items!631ee800e7393cd3.tcNQpEmgj7cjeegn'
+  - _id: 5ynwnr447S30LpeO
+    _key: '!actors.items!631ee800e7393cd3.5ynwnr447S30LpeO'
     _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.58ba95d8757c67c0
+      compendiumSource: Compendium.teriock.classes.Item.8e0c2b8d16a120d3
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     effects:
-      - _id: FAUPXdLk1A1fD0k8
+      - _id: vU4DiB0u1DAfzrs5
         _key: >-
-          !actors.items.effects!631ee800e7393cd3.tcNQpEmgj7cjeegn.FAUPXdLk1A1fD0k8
+          !actors.items.effects!631ee800e7393cd3.5ynwnr447S30LpeO.vU4DiB0u1DAfzrs5
         _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.294cd7a4f1545ed9
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.5bb5b13ca45f582b
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/properties/bashing.webp
-        name: Bashing
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/abilities/bow-out.webp
+        name: Bow Out
         system:
+          class: duelist
           competence:
             raw: 0
-          description: >-
-            <p>An item with the <b>[[lookup name style=lc]]</b> property is not
-            a weapon, but can still be used to make a @L[Ability:Basic
-            Attack]{Basic Attack}.</p>
-          form: intrinsic
-          identifier: bashing
-          mundane: true
+          delivery: self
+          duration:
+            raw: '0'
+            unit: unlimited
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: bow-out
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          overview:
+            base: >-
+              <p>You gain @L[Ability:Active Bow Out]{Active Bow Out} and
+              @L[Ability:Reactive Bow Out]{Reactive Bow Out}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
         transfer: true
-        type: property
-      - _id: wGdRsURrcXoNZsur
+        type: ability
+      - _id: Ckzn261n62CcGUwr
         _key: >-
-          !actors.items.effects!631ee800e7393cd3.tcNQpEmgj7cjeegn.wGdRsURrcXoNZsur
+          !actors.items.effects!631ee800e7393cd3.5ynwnr447S30LpeO.Ckzn261n62CcGUwr
         _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.417457cfa2643f5b
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.2670da014614edb4
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/properties/handy.webp
-        name: Handy
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/abilities/dueling-techniques.webp
+        name: Dueling Techniques
         system:
+          class: duelist
           competence:
             raw: 0
-          description: >-
-            <p>An item with this property can be used to deliver
-            @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
-          form: intrinsic
-          identifier: handy
-          mundane: true
+          costs:
+            components:
+              somatic:
+                type: tag
+          delivery: self
+          duration:
+            conditions:
+              present:
+                - dueling
+            raw: '0'
+            unit: unlimited
+          endCondition: <p>You are no longer @L[Condition:Dueling]{dueling}.</p>
+          executionTime:
+            base: a1
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: dueling-techniques
+          interaction: manifest
+          maneuver: active
+          mundane: false
+          overview:
+            base: >-
+              <p>A @L[Category:Weapons]{weapon} you are @L[Keyword:Using]{using}
+              of your choice becomes @L[Property:Armor Voiding]{AV0} against
+              creatures you are @L[Condition:Dueling]{dueling} and you gain
+              @L[Keyword:Limited]{Limited} @L[Ability:Chi Strike]{Chi
+              Strike}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - spiritual
+          range:
+            unit: self
+          requirements: >-
+            <p>You must be @L[Condition:Dueling]{dueling} and wielding the
+            targeted weapon.</p>
+          skill: true
+          standard: true
+          targets:
+            - weapon
         transfer: true
-        type: property
-      - _id: 1eIcI58ulvhlFYKA
+        type: ability
+      - _id: aMpBM1gwJl2mau2J
         _key: >-
-          !actors.items.effects!631ee800e7393cd3.tcNQpEmgj7cjeegn.1eIcI58ulvhlFYKA
+          !actors.items.effects!631ee800e7393cd3.5ynwnr447S30LpeO.aMpBM1gwJl2mau2J
         _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.9e0c23ad80fe566a
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.43df205ab1de2597
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/properties/prehensile.webp
-        name: Prehensile
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/abilities/tea-ceremony.webp
+        name: Tea Ceremony
         system:
+          class: duelist
           competence:
             raw: 0
-          description: >-
-            <p>An item can be used to grasp, hold, or manipulate objects, such
-            as while using @L[Ability:Interact]{Interact}.</p>
-          form: intrinsic
-          identifier: prehensile
-          mundane: true
+          costs:
+            primary:
+              mp:
+                description: >-
+                  <p>2 MP per participant. Each participant must pay at least 1
+                  MP. After that, the remaining cost of may be paid in any
+                  combination by any of the participants.</p>
+                type: description
+          delivery: sight
+          duration:
+            raw: '24'
+            unit: hour
+          effectTypes:
+            - truthDetecting
+          executionTime:
+            base: 10 Minutes
+            slow:
+              raw: '10'
+              unit: minute
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: tea-ceremony
+          interaction: manifest
+          maneuver: slow
+          mundane: false
+          overview:
+            base: >-
+              <p>[[lookup name]] is done in collaboration with up to 1 other
+              creature (although they do not need to have [[lookup name]]). It
+              requires willing and active participation from all targets. As
+              part of [[lookup name]], you must ask three questions about the
+              alignment, motives, or intentions of the group. Each participant
+              (including yourself) must individually answer these questions. The
+              questions are asked one at a time, and each participant must
+              answer before the next question is asked. If anyone refuses to
+              answer truthfully, the [[lookup name]] fails and all participants
+              are @L[Keyword:Vulnerable]{vulnerable} to @L[Drain:Mana]{mana
+              drain} and @L[Drain:Mana]{mana drain} is
+              @L[Keyword:Boosted]{boosted} against them for 24 hours. This
+              occurs once everyone has answered the latest question or
+              immediately if someone refuses to answer whatsoever. If the
+              [[lookup name]] is successful, all participants are
+              @L[Keyword:Resistance]{resistant} to @L[Drain:Mana]{mana drain}
+              for 24 hours and suffer no negative effects of @L[Core:MP]{mana
+              loss} other than @L[Condition:Dead]{death} and
+              @L[Condition:Unconscious]{unconsciousness}. [[lookup name]] can
+              only be performed once per @L[Core:Long Rest]{long rest}.</p><div
+              class="note"><b>Note:</b> [[lookup name]] detects only whether the
+              participants believe their answers to be true, not whether or not
+              they are.</div><div class="note"><b>Note:</b> If an effect such as
+              @L[Ability:Lie]{Lie} is used to deceive the [[lookup name]], it
+              continues as if the lie were true.</div>
+            fluent: >-
+              <p>You may now target up to 2 × @L[Core:Fluency Bonus]{F}
+              creatures (including yourself) with [[lookup name]].</p>
+            proficient: >-
+              <p>You may now target up to 2 × @L[Core:Proficiency Bonus]{P}
+              creatures (including yourself) with [[lookup name]].</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - spiritual
+          range:
+            raw: '5'
+            unit: ft
+          ritual: true
+          skill: true
+          standard: true
+          targets:
+            - creature
         transfer: true
-        type: property
-      - _id: r6jJPWhMBH4YpEKr
+        type: ability
+      - _id: uVeAqGa6g93QayzR
         _key: >-
-          !actors.items.effects!631ee800e7393cd3.tcNQpEmgj7cjeegn.r6jJPWhMBH4YpEKr
+          !actors.items.effects!631ee800e7393cd3.5ynwnr447S30LpeO.uVeAqGa6g93QayzR
         _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.3d2cc8d952adebec
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.Gs4jCmyXyojxu0WM
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/properties/small.webp
-        name: Small
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/abilities/active-bow-out.webp
+        name: Active Bow Out
         system:
+          _sup: vU4DiB0u1DAfzrs5
+          automations:
+            824b5b01e1a4efec:
+              _id: 824b5b01e1a4efec
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              executor: false
+              heighten:
+                - 1
+                - 0
+              relation: remove
+              status: dueling
+              target: false
+              type: status
+            e9c69ec96993ccc5:
+              _id: e9c69ec96993ccc5
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              relation: remove
+              status: dueling
+              type: end
+          class: duelist
           competence:
             raw: 0
-          description: >-
-            <p>An item with this property is easily concealed and can often be
-            used in the same hand as a @L[Category:Shields]{shield}.</p>
-          form: intrinsic
-          identifier: small
-          mundane: true
+          delivery: self
+          duration:
+            raw: '0'
+            unit: instant
+          effectTypes:
+            - duelModifying
+          executionTime:
+            base: a1
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: active-bow-out
+          interaction: manifest
+          maneuver: active
+          mundane: false
+          overview:
+            base: >-
+              <p>You end a @L[Condition:Dueling]{duel} you are currently in. You
+              do not count as "forfeiting" or "losing" if you use [[lookup
+              name]] to stop @L[Condition:Dueling]{dueling}.</p>
+            proficient: >-
+              <p>If you want, everyone in the @L[Condition:Dueling]{duel}
+              returns to the number of @L[Core:Hit Points and Mana Points]{HP}
+              they had prior to @L[Condition:Dueling]{dueling}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - spiritual
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
         transfer: true
-        type: property
+        type: ability
+      - _id: WBiUo69COVnzYhbu
+        _key: >-
+          !actors.items.effects!631ee800e7393cd3.5ynwnr447S30LpeO.WBiUo69COVnzYhbu
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.c0042e5fff873fda
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/abilities/reactive-bow-out.webp
+        name: Reactive Bow Out
+        system:
+          _sup: vU4DiB0u1DAfzrs5
+          class: duelist
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            raw: '0'
+            unit: instant
+          executionTime:
+            base: r1
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: reactive-bow-out
+          interaction: manifest
+          maneuver: reactive
+          mundane: false
+          overview:
+            base: >-
+              <p>The effect causing you to enter a @L[Condition:Dueling]{duel}
+              or that would @L[Category:Duel modifying effects]{modify} a
+              @L[Condition:Dueling]{duel} you are in @L[Core:Fizzles]{fizzles}.
+              You do not count as "forfeiting" or "losing" if you use [[lookup
+              name]] to stop @L[Condition:Dueling]{dueling}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - spiritual
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
+          trigger: >-
+            <p>Some effect would cause you to start
+            @L[Condition:Dueling]{dueling} or @L[Category:Duel modifying
+            effects]{modify} a @L[Condition:Dueling]{duel} you are in.</p>
+        transfer: true
+        type: ability
+      - _id: 7kB1JtcWeY4CLVek
+        _key: >-
+          !actors.items.effects!631ee800e7393cd3.5ynwnr447S30LpeO.7kB1JtcWeY4CLVek
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.3e3bec7c2738ffa5
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/abilities/chi-strike.webp
+        name: Chi Strike
+        system:
+          _sup: Ckzn261n62CcGUwr
+          automations:
+            1728b3a84ea27844:
+              _id: 1728b3a84ea27844
+              common:
+                - standardDamage
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              showConfirmationDialog: true
+              type: common
+          class: duelist
+          competence:
+            raw: 0
+          costs:
+            primary:
+              mp:
+                formula: '1'
+                type: formula
+          delivery: weapon
+          duration:
+            raw: '0'
+            unit: instant
+          effectTypes:
+            - draining
+          executionTime:
+            base: a1
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: chi-strike
+          interaction: attack
+          limitation: >-
+            <p>May only be delivered with the @L[Category:Weapons]{weapon} you
+            made @L[Property:Armor Voiding]{AV0} and only against creatures you
+            are @L[Condition:Dueling]{dueling}.</p>
+          maneuver: active
+          mundane: false
+          overview:
+            base: >-
+              <p>This strike deals @L[Drain:Mana]{mana drain} instead of
+              @L[Core:Damage]{damage}. It has no @L[Category:Damage
+              types]{damage types}, but is otherwise treated as any other
+              @L[Category:Attack abilities]{attack} <i>prior</i> to hitting. So,
+              @L[Ability:Triumphant Damage Boost]{Triumphant Damage Boost} would
+              @L[Keyword:Boosted]{boost} it, but @L[Ability:Improved
+              Brace]{Improved Brace} would not @L[Keyword:Deboosted]{deboost}
+              it.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - spiritual
+          range:
+            unit: contact
+          results:
+            critHit: >-
+              <p>Deal an amount of @L[Drain:Mana]{mana drain} equal to the
+              amount of @L[Core:Standard and Critical Damage]{critical damage}
+              you would otherwise deal.</p>
+            hit: >-
+              <p>Deal an amount of @L[Drain:Mana]{mana drain} equal to the
+              @L[Core:Standard and Critical Damage]{standard damage} you would
+              otherwise deal.</p>
+          skill: true
+          standard: true
+          targets:
+            - creature
+        transfer: true
+        type: ability
     folder: 0b00935e53673daa
-    img: systems/teriock/src/icons/body-parts/hand.webp
-    name: Hand
+    img: systems/teriock/src/icons/ranks/rank-2-duelist.webp
+    name: Rank 2 Duelist
     system:
       _sup: 631ee800e7393cd3
-      attackPenalty: '-3'
+      archetype: warrior
+      className: duelist
+      classRank: 2
       competence:
-        raw: 0
-      damage:
-        base: '1'
-      identifier: hand
-      impacts:
-        - damage
-      range:
-        long:
-          unit: melee
-        melee: true
-        ranged: false
-        short:
-          unit: self
-      vitals: false
-    type: body
-  - _id: FT9ykWk6Y2bh43rj
-    _key: '!actors.items!631ee800e7393cd3.FT9ykWk6Y2bh43rj'
+        raw: 1
+      description: >-
+        <p>Honor-bound and honest to the core, Duelists are often judges and
+        referees for duels as well as devoted warriors. Duelists prize the honor
+        of their family above any sort of personal gain and thus strive for
+        excellence in everything that they do. A true Duelist wins the battle
+        before it has begun. Strategy and personal perfection are the Duelist's
+        way. If you are a Duelist, be calm, focused, well spoken and confident
+        in yourself.</p>
+      flaws: <p>Duelists cannot use @L[Category:Shields]{shields}.</p>
+      identifier: rank-2-duelist
+      innate: false
+      maxAv: 4
+      statDice:
+        hp:
+          disabled: false
+          formula: 1d12
+        mp:
+          disabled: false
+          formula: 1d8
+    type: rank
+  - _id: NnFHNoc9A3Dp1ix6
+    _key: '!actors.items!631ee800e7393cd3.NnFHNoc9A3Dp1ix6'
+    _stats:
+      compendiumSource: Compendium.teriock.classes.Item.4d084b2bd2d58aec
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    effects:
+      - _id: QxDyN7VLtCaq1ppD
+        _key: >-
+          !actors.items.effects!631ee800e7393cd3.NnFHNoc9A3Dp1ix6.QxDyN7VLtCaq1ppD
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.03678a933c57b548
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.15
+        flags:
+          teriock:
+            category: support
+            defaultAbility: true
+        img: systems/teriock/src/icons/abilities/clan-fealty.webp
+        name: Clan Fealty
+        system:
+          class: duelist
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            raw: '0'
+            unit: unlimited
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: clan-fealty
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          overview:
+            base: >-
+              <p>You may declare "fealty" 1 group or individual. You are said to
+              have declared fealty to these individuals and members of these
+              groups. They must accept your declaration of fealty and can revoke
+              it at any time. You get bonuses while defending, fighting with, or
+              doing a quest given by something or someone you have declared
+              fealty to, you get various bonuses. They are as
+              follows.</p><ul><li>@L[Keyword:Adept]{Adept} at @L[Ability:Duel
+              Swap]{Duel Swap} with creatures you have declared fealty
+              to.</li><li>If you have @L[Ability:Resolve Conflict]{Resolve
+              Conflict}, it is @L[Keyword:Warded]{warded} when used in defense
+              of those you have declared fealty to, or when used in the interest
+              of a quest given by them.</li><li>@L[Ability:Tea Ceremony]{Tea
+              Ceremony} is @L[Keyword:Warded]{warded} on those you have declared
+              fealty to and costs one less @L[Core:Hit Points and Mana
+              Points]{MP} per participant you've declared fealty
+              to.</li></ul><div style="padding:0em"></div>
+            fluent: >-
+              <p>You may declare "fealty" to up to @L[Core:Fluency Bonus]{F}
+              groups or individuals.</p>
+            proficient: >-
+              <p>You may declare "fealty" to up to @L[Core:Proficiency Bonus]{P}
+              groups or individuals.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - spiritual
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: yCLjgtUua4ROR3qi
+        _key: >-
+          !actors.items.effects!631ee800e7393cd3.NnFHNoc9A3Dp1ix6.yCLjgtUua4ROR3qi
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.f59e54740feac012
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.15
+        flags:
+          teriock:
+            category: combat
+            defaultAbility: true
+        img: systems/teriock/src/icons/abilities/duel-swap.webp
+        name: Duel Swap
+        system:
+          automations:
+            52f4d0b87363b1c1:
+              _id: 52f4d0b87363b1c1
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              executor: false
+              heighten:
+                - 1
+                - 0
+              relation: apply
+              status: dueling
+              target: false
+              type: status
+            824b5b01e1a4efec:
+              _id: 824b5b01e1a4efec
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              executor: false
+              heighten:
+                - 1
+                - 0
+              relation: remove
+              status: dueling
+              target: false
+              type: status
+            e9c69ec96993ccc5:
+              _id: e9c69ec96993ccc5
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              relation: remove
+              status: dueling
+              type: end
+          class: duelist
+          competence:
+            raw: 0
+          costs:
+            primary:
+              mp:
+                formula: '1'
+                type: formula
+          delivery: sight
+          duration:
+            raw: '0'
+            unit: instant
+          executionTime:
+            base: a1
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: duel-swap
+          interaction: manifest
+          maneuver: active
+          mundane: false
+          overview:
+            base: >-
+              <p>The target leaves their @L[Condition:Dueling]{duel} and you
+              enter in their place. This does not end the
+              @L[Condition:Dueling]{duel} and the target is not considered to
+              have "lost" or "forfeited". Any @L[Category:Duel modifying
+              effects]{duel modifying effects} remain in place.</p><div
+              class="note"><b>Note:</b> This ability costs no @L[Core:MP]{MP} to
+              use on creatures you have sworn @L[Ability:Clan Fealty]{Clan
+              Fealty} with.</div>
+          piercing:
+            raw: 0
+          powerSources:
+            - spiritual
+          range:
+            raw: '15'
+            unit: ft
+          requirements: >-
+            <p>Target must be an allied creature in a
+            @L[Condition:Dueling]{duel} within range.</p>
+          skill: true
+          standard: true
+          targets:
+            - creature
+        transfer: true
+        type: ability
+    folder: 0b00935e53673daa
+    img: systems/teriock/src/icons/ranks/rank-3-duelist.webp
+    name: Rank 3 Duelist
+    system:
+      _sup: 631ee800e7393cd3
+      archetype: warrior
+      className: duelist
+      classRank: 3
+      competence:
+        raw: 1
+      description: >-
+        <p>Honor-bound and honest to the core, Duelists are often judges and
+        referees for duels as well as devoted warriors. Duelists prize the honor
+        of their family above any sort of personal gain and thus strive for
+        excellence in everything that they do. A true Duelist wins the battle
+        before it has begun. Strategy and personal perfection are the Duelist's
+        way. If you are a Duelist, be calm, focused, well spoken and confident
+        in yourself.</p>
+      flaws: <p>Duelists cannot use @L[Category:Shields]{shields}.</p>
+      identifier: rank-3-duelist
+      innate: false
+      maxAv: 4
+      statDice:
+        hp:
+          disabled: false
+          formula: 1d12
+        mp:
+          disabled: false
+          formula: 1d8
+    type: rank
+  - _id: eME3x7nEBaq5FZDN
+    _key: '!actors.items!631ee800e7393cd3.eME3x7nEBaq5FZDN'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.380dac2710b593e9
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     effects:
       - _id: 8e9roKoeCSmTjbbo
         _key: >-
-          !actors.items.effects!631ee800e7393cd3.FT9ykWk6Y2bh43rj.8e9roKoeCSmTjbbo
+          !actors.items.effects!631ee800e7393cd3.eME3x7nEBaq5FZDN.8e9roKoeCSmTjbbo
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.d97a0e2c8e3d8730
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/warrior-techniques.webp
         name: Warrior Techniques
         system:
@@ -2460,15 +2447,15 @@ items:
             - self
         transfer: true
         type: ability
-      - _id: zEnWU6LqBT9NqB2I
+      - _id: aOvOlScH5bn7jX7m
         _key: >-
-          !actors.items.effects!631ee800e7393cd3.FT9ykWk6Y2bh43rj.zEnWU6LqBT9NqB2I
+          !actors.items.effects!631ee800e7393cd3.eME3x7nEBaq5FZDN.aOvOlScH5bn7jX7m
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.8axMH45Og1OFpGIu
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/defensive-martial-arts.webp
         name: Defensive Martial Arts
         system:
@@ -2640,6 +2627,6 @@ system:
     number:
       raw: '3'
   wielding:
-    attacker: DB9OalTzPbJAQl1m
-    blocker: tcNQpEmgj7cjeegn
+    attacker: TSoqI1hEZavnDgna
+    blocker: SzQmEtRvnFBIWoQa
 type: creature

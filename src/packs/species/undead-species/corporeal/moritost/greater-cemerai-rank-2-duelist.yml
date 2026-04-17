@@ -1,20 +1,20 @@
-_id: 5an0tA8xG2gHrhlh
-_key: '!items!5an0tA8xG2gHrhlh'
+_id: 5ynwnr447S30LpeO
+_key: '!items!5ynwnr447S30LpeO'
 _stats:
   compendiumSource: Compendium.teriock.classes.Item.8e0c2b8d16a120d3
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.23
+  systemVersion: 0.12.15
 effects:
   - _id: vU4DiB0u1DAfzrs5
-    _key: '!items.effects!5an0tA8xG2gHrhlh.vU4DiB0u1DAfzrs5'
+    _key: '!items.effects!5ynwnr447S30LpeO.vU4DiB0u1DAfzrs5'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.5bb5b13ca45f582b
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/bow-out.webp
     name: Bow Out
     system:
@@ -25,7 +25,10 @@ effects:
       duration:
         raw: '0'
         unit: unlimited
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -35,6 +38,7 @@ effects:
       identifier: bow-out
       interaction: manifest
       maneuver: passive
+      mundane: false
       overview:
         base: >-
           <p>You gain @L[Ability:Active Bow Out]{Active Bow Out} and
@@ -52,13 +56,13 @@ effects:
     transfer: true
     type: ability
   - _id: Ckzn261n62CcGUwr
-    _key: '!items.effects!5an0tA8xG2gHrhlh.Ckzn261n62CcGUwr'
+    _key: '!items.effects!5ynwnr447S30LpeO.Ckzn261n62CcGUwr'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.2670da014614edb4
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/dueling-techniques.webp
     name: Dueling Techniques
     system:
@@ -77,7 +81,10 @@ effects:
         raw: '0'
         unit: unlimited
       endCondition: <p>You are no longer @L[Condition:Dueling]{dueling}.</p>
-      executionTime: a1
+      executionTime:
+        base: a1
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -87,6 +94,7 @@ effects:
       identifier: dueling-techniques
       interaction: manifest
       maneuver: active
+      mundane: false
       overview:
         base: >-
           <p>A @L[Category:Weapons]{weapon} you are @L[Keyword:Using]{using} of
@@ -109,13 +117,13 @@ effects:
     transfer: true
     type: ability
   - _id: aMpBM1gwJl2mau2J
-    _key: '!items.effects!5an0tA8xG2gHrhlh.aMpBM1gwJl2mau2J'
+    _key: '!items.effects!5ynwnr447S30LpeO.aMpBM1gwJl2mau2J'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.43df205ab1de2597
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/tea-ceremony.webp
     name: Tea Ceremony
     system:
@@ -136,7 +144,11 @@ effects:
         unit: hour
       effectTypes:
         - truthDetecting
-      executionTime: 10 Minutes
+      executionTime:
+        base: 10 Minutes
+        slow:
+          raw: '10'
+          unit: minute
       expansion:
         featSaveAttribute: mov
         range:
@@ -146,6 +158,7 @@ effects:
       identifier: tea-ceremony
       interaction: manifest
       maneuver: slow
+      mundane: false
       overview:
         base: >-
           <p>[[lookup name]] is done in collaboration with up to 1 other
@@ -192,70 +205,14 @@ effects:
         - creature
     transfer: true
     type: ability
-  - _id: aw3DqvoKmhniimRa
-    _key: '!items.effects!5an0tA8xG2gHrhlh.aw3DqvoKmhniimRa'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.c0042e5fff873fda
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.2
-    img: systems/teriock/src/icons/abilities/reactive-bow-out.webp
-    name: Reactive Bow Out
-    system:
-      _sup: vU4DiB0u1DAfzrs5
-      class: duelist
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime:
-        base: r1
-        slow:
-          unit: second
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: reactive-bow-out
-      interaction: manifest
-      maneuver: reactive
-      mundane: false
-      overview:
-        base: >-
-          <p>The effect causing you to enter a @L[Condition:Dueling]{duel} or
-          that would @L[Category:Duel modifying effects]{modify} a
-          @L[Condition:Dueling]{duel} you are in @L[Core:Fizzles]{fizzles}. You
-          do not count as "forfeiting" or "losing" if you use [[lookup name]] to
-          stop @L[Condition:Dueling]{dueling}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - spiritual
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-      trigger: >-
-        <p>Some effect would cause you to start @L[Condition:Dueling]{dueling}
-        or @L[Category:Duel modifying effects]{modify} a
-        @L[Condition:Dueling]{duel} you are in.</p>
-    transfer: true
-    type: ability
-  - _id: WAWhzsHSk8sfQ1Dc
-    _key: '!items.effects!5an0tA8xG2gHrhlh.WAWhzsHSk8sfQ1Dc'
+  - _id: uVeAqGa6g93QayzR
+    _key: '!items.effects!5ynwnr447S30LpeO.uVeAqGa6g93QayzR'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.Gs4jCmyXyojxu0WM
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/active-bow-out.webp
     name: Active Bow Out
     system:
@@ -334,14 +291,70 @@ effects:
         - self
     transfer: true
     type: ability
-  - _id: XuffmMZinqx4Aupx
-    _key: '!items.effects!5an0tA8xG2gHrhlh.XuffmMZinqx4Aupx'
+  - _id: WBiUo69COVnzYhbu
+    _key: '!items.effects!5ynwnr447S30LpeO.WBiUo69COVnzYhbu'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.c0042e5fff873fda
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/reactive-bow-out.webp
+    name: Reactive Bow Out
+    system:
+      _sup: vU4DiB0u1DAfzrs5
+      class: duelist
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: instant
+      executionTime:
+        base: r1
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: reactive-bow-out
+      interaction: manifest
+      maneuver: reactive
+      mundane: false
+      overview:
+        base: >-
+          <p>The effect causing you to enter a @L[Condition:Dueling]{duel} or
+          that would @L[Category:Duel modifying effects]{modify} a
+          @L[Condition:Dueling]{duel} you are in @L[Core:Fizzles]{fizzles}. You
+          do not count as "forfeiting" or "losing" if you use [[lookup name]] to
+          stop @L[Condition:Dueling]{dueling}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - spiritual
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+      trigger: >-
+        <p>Some effect would cause you to start @L[Condition:Dueling]{dueling}
+        or @L[Category:Duel modifying effects]{modify} a
+        @L[Condition:Dueling]{duel} you are in.</p>
+    transfer: true
+    type: ability
+  - _id: 7kB1JtcWeY4CLVek
+    _key: '!items.effects!5ynwnr447S30LpeO.7kB1JtcWeY4CLVek'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.3e3bec7c2738ffa5
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/chi-strike.webp
     name: Chi Strike
     system:
@@ -446,12 +459,8 @@ system:
   statDice:
     hp:
       disabled: false
-      faces: 12
-      number:
-        raw: '1'
+      formula: 1d12
     mp:
       disabled: false
-      faces: 8
-      number:
-        raw: '1'
+      formula: 1d8
 type: rank

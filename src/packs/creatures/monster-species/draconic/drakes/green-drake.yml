@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.23
+  systemVersion: 0.12.15
 folder: c2095fb63315614f
 img: systems/teriock/src/icons/creatures/green-drake.webp
 items:
@@ -15,17 +15,17 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     effects:
-      - _id: e8rl0FZInba9t2mu
+      - _id: Kg5xfblKP5mhipsV
         _key: >-
-          !actors.items.effects!9f811e5f41d3b07d.9f811e5f41d3b07d.e8rl0FZInba9t2mu
+          !actors.items.effects!9f811e5f41d3b07d.9f811e5f41d3b07d.Kg5xfblKP5mhipsV
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.1DpSwqGbKUAvbn3q
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/battle-cry.webp
         name: Battle Cry
         system:
@@ -66,15 +66,205 @@ items:
             - self
         transfer: true
         type: ability
-      - _id: nl0U5Buk9pXWd6XJ
+      - _id: QA1qX5g2qNIK112e
         _key: >-
-          !actors.items.effects!9f811e5f41d3b07d.9f811e5f41d3b07d.nl0U5Buk9pXWd6XJ
+          !actors.items.effects!9f811e5f41d3b07d.9f811e5f41d3b07d.QA1qX5g2qNIK112e
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.AyDa3orgfgOAAjM3
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
+        name: Battle Cry Resistance
+        system:
+          _sup: Kg5xfblKP5mhipsV
+          automations:
+            8f623097f9f2a087:
+              _id: 8f623097f9f2a087
+              bonus: '0'
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              hex: false
+              type: resist
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.protections.resistances.statuses
+                  phase: normal
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  type: add
+                  value: frightened
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 1
+                - 0
+              type: changes
+          class: berserker
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: instant
+          effectTypes:
+            - resistance
+          endCondition: <p>You die or 1 minute passes without combat.</p>
+          executionTime:
+            base: a0
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: battle-cry-resistance
+          interaction: manifest
+          maneuver: active
+          mundane: false
+          overview:
+            base: >-
+              <p>You @L[Keyword:Resistance]{resist} being
+              @L[Condition:Frightened]{frightened}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: weexcLD9cLcbN9Wx
+        _key: >-
+          !actors.items.effects!9f811e5f41d3b07d.9f811e5f41d3b07d.weexcLD9cLcbN9Wx
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.3bf8b295f6088182
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
+        name: Battle Cry Aura
+        system:
+          _sup: Kg5xfblKP5mhipsV
+          automations:
+            b4960732f0b9ed9f:
+              _id: b4960732f0b9ed9f
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              executor: false
+              heighten:
+                - 1
+                - 0
+              relation: include
+              status: frightened
+              target: false
+              type: status
+            d635eb44dba086dd:
+              _id: d635eb44dba086dd
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 1
+                - 0
+              type: combatExpiration
+              what:
+                roll: 2d4kh1
+                threshold: 4
+                type: rolled
+              when:
+                skip: 0
+                time: start
+                trigger: turn
+              who:
+                type: target
+          class: berserker
+          competence:
+            raw: 0
+          costs:
+            components:
+              verbal:
+                type: tag
+          delivery: aura
+          duration:
+            raw: '1'
+            unit: minute
+          effectTypes:
+            - loud
+          endCondition: >-
+            <p>At the start of each of the targets' @L[Core:Turn]{turns}, they
+            roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
+            ends.</p>
+          executionTime:
+            base: a1
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: int
+          form: normal
+          identifier: battle-cry-aura
+          interaction: feat
+          maneuver: active
+          mundane: false
+          overview:
+            base: >-
+              <p>This ability cannot affect @L[Condition:Deaf]{deaf}
+              creatures.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            raw: '10'
+            unit: ft
+          results:
+            fail: <p>Targets become @L[Condition:Frightened]{frightened}.</p>
+          skill: true
+          standard: true
+          targets:
+            - creature
+        transfer: true
+        type: ability
+      - _id: kwAUc02Gig886PYf
+        _key: >-
+          !actors.items.effects!9f811e5f41d3b07d.9f811e5f41d3b07d.kwAUc02Gig886PYf
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.19e84b851836664f
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/fast.webp
         name: Fast
         system:
@@ -112,15 +302,15 @@ items:
               value: 1
         transfer: true
         type: ability
-      - _id: dpVuB3dvK91JiTcp
+      - _id: SBbsP9JepwtMIkRP
         _key: >-
-          !actors.items.effects!9f811e5f41d3b07d.9f811e5f41d3b07d.dpVuB3dvK91JiTcp
+          !actors.items.effects!9f811e5f41d3b07d.9f811e5f41d3b07d.SBbsP9JepwtMIkRP
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.184f6f0ddbd9247e
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/flying.webp
         name: Flying
         system:
@@ -215,15 +405,15 @@ items:
             - self
         transfer: true
         type: ability
-      - _id: O0Ku7OGlKKLMhPRG
+      - _id: q7AZBxmWLGybSndp
         _key: >-
-          !actors.items.effects!9f811e5f41d3b07d.9f811e5f41d3b07d.O0Ku7OGlKKLMhPRG
+          !actors.items.effects!9f811e5f41d3b07d.9f811e5f41d3b07d.q7AZBxmWLGybSndp
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.94397b58f45081c1
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/green-drake-breath.webp
         name: Green Drake Breath
         system:
@@ -285,15 +475,15 @@ items:
             - item
         transfer: true
         type: ability
-      - _id: LZ7jggIkvUYGekvG
+      - _id: 85FHgSe57c6OLqkG
         _key: >-
-          !actors.items.effects!9f811e5f41d3b07d.9f811e5f41d3b07d.LZ7jggIkvUYGekvG
+          !actors.items.effects!9f811e5f41d3b07d.9f811e5f41d3b07d.85FHgSe57c6OLqkG
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.8aa8167e9f40cbb2
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/improved-strength.webp
         name: Improved Strength
         system:
@@ -338,15 +528,121 @@ items:
               value: 2
         transfer: true
         type: ability
-      - _id: yqX0ySBUTuFyA2R9
+      - _id: kAESJBG6FDfuhL5y
         _key: >-
-          !actors.items.effects!9f811e5f41d3b07d.9f811e5f41d3b07d.yqX0ySBUTuFyA2R9
+          !actors.items.effects!9f811e5f41d3b07d.9f811e5f41d3b07d.kAESJBG6FDfuhL5y
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.07a0880b230cdb14
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/abilities/beastly-strength.webp
+        name: Beastly Strength
+        system:
+          _sup: 85FHgSe57c6OLqkG
+          class: knight
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            raw: '0'
+            unit: unlimited
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: beastly-strength
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          overview:
+            base: >-
+              <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
+              hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
+              Piercing]{Armor piercing} weapons must still be wielded in two
+              hands to be @L[Keyword:Armor Voiding]{AV0}.</div>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: str
+              value: 1
+        transfer: true
+        type: ability
+      - _id: iwyNFvkPU1oiP3Bs
+        _key: >-
+          !actors.items.effects!9f811e5f41d3b07d.9f811e5f41d3b07d.iwyNFvkPU1oiP3Bs
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.54f63d63ae4376a9
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
+        name: Improved Armor Piercing
+        system:
+          _sup: 85FHgSe57c6OLqkG
+          class: knight
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            raw: '0'
+            unit: unlimited
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: improved-armor-piercing
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          overview:
+            base: >-
+              <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
+              piercing}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: QTtFUsMGt1APiSCF
+        _key: >-
+          !actors.items.effects!9f811e5f41d3b07d.9f811e5f41d3b07d.QTtFUsMGt1APiSCF
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.aaaa08a40cf32777
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/night-vision.webp
         name: Night Vision
         system:
@@ -408,15 +704,15 @@ items:
             - self
         transfer: true
         type: ability
-      - _id: YHFvMEK9PI374eNi
+      - _id: nnR5XcepluUYdFvb
         _key: >-
-          !actors.items.effects!9f811e5f41d3b07d.9f811e5f41d3b07d.YHFvMEK9PI374eNi
+          !actors.items.effects!9f811e5f41d3b07d.9f811e5f41d3b07d.nnR5XcepluUYdFvb
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.4c9ba7e67dd8d160
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/no-hands.webp
         name: No Hands
         system:
@@ -452,15 +748,15 @@ items:
             - self
         transfer: true
         type: ability
-      - _id: LNnqqiqMDNPOfLNP
+      - _id: bspE3R6LfxhYS6UA
         _key: >-
-          !actors.items.effects!9f811e5f41d3b07d.9f811e5f41d3b07d.LNnqqiqMDNPOfLNP
+          !actors.items.effects!9f811e5f41d3b07d.9f811e5f41d3b07d.bspE3R6LfxhYS6UA
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.8249d99c527d09b1
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
@@ -498,15 +794,15 @@ items:
               value: 0
         transfer: true
         type: ability
-      - _id: ezUPM8PWA6n9XK3J
+      - _id: 0aAFxeLUjbi5l5Zp
         _key: >-
-          !actors.items.effects!9f811e5f41d3b07d.9f811e5f41d3b07d.ezUPM8PWA6n9XK3J
+          !actors.items.effects!9f811e5f41d3b07d.9f811e5f41d3b07d.0aAFxeLUjbi5l5Zp
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.1d13190e5b38bda6
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/normal-sneak.webp
         name: Normal Sneak
         system:
@@ -544,15 +840,15 @@ items:
               value: 0
         transfer: true
         type: ability
-      - _id: goUz8r7DFvPS21R5
+      - _id: VMZeuaOh5wGgRRih
         _key: >-
-          !actors.items.effects!9f811e5f41d3b07d.9f811e5f41d3b07d.goUz8r7DFvPS21R5
+          !actors.items.effects!9f811e5f41d3b07d.9f811e5f41d3b07d.VMZeuaOh5wGgRRih
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.dbd0be0b5f33cdfd
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/stupid-intelligence.webp
         name: Stupid Intelligence
         system:
@@ -590,307 +886,10 @@ items:
               value: -3
         transfer: true
         type: ability
-      - _id: 2EcsTIKNaVXMZ4ch
-        _key: >-
-          !actors.items.effects!9f811e5f41d3b07d.9f811e5f41d3b07d.2EcsTIKNaVXMZ4ch
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.AyDa3orgfgOAAjM3
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
-        name: Battle Cry Resistance
-        system:
-          _sup: e8rl0FZInba9t2mu
-          automations:
-            8f623097f9f2a087:
-              _id: 8f623097f9f2a087
-              bonus: '0'
-              competencies:
-                - 0
-                - 1
-                - 2
-              heighten:
-                - 1
-                - 0
-              hex: false
-              type: resist
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
-              changes:
-                - key: system.protections.resistances.statuses
-                  phase: normal
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  type: add
-                  value: frightened
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
-              type: changes
-          class: berserker
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            unit: instant
-          effectTypes:
-            - resistance
-          endCondition: <p>You die or 1 minute passes without combat.</p>
-          executionTime:
-            base: a0
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: battle-cry-resistance
-          interaction: manifest
-          maneuver: active
-          mundane: false
-          overview:
-            base: >-
-              <p>You @L[Keyword:Resistance]{resist} being
-              @L[Condition:Frightened]{frightened}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          skill: true
-          standard: true
-          targets:
-            - self
-        transfer: true
-        type: ability
-      - _id: EbEiQdJ6VUvpoAMo
-        _key: >-
-          !actors.items.effects!9f811e5f41d3b07d.9f811e5f41d3b07d.EbEiQdJ6VUvpoAMo
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.3bf8b295f6088182
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
-        name: Battle Cry Aura
-        system:
-          _sup: e8rl0FZInba9t2mu
-          automations:
-            b4960732f0b9ed9f:
-              _id: b4960732f0b9ed9f
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              executor: false
-              heighten:
-                - 1
-                - 0
-              relation: include
-              status: frightened
-              target: false
-              type: status
-            d635eb44dba086dd:
-              _id: d635eb44dba086dd
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
-              type: combatExpiration
-              what:
-                roll: 2d4kh1
-                threshold: 4
-                type: rolled
-              when:
-                skip: 0
-                time: start
-                trigger: turn
-              who:
-                type: target
-          class: berserker
-          competence:
-            raw: 0
-          costs:
-            components:
-              verbal:
-                type: tag
-          delivery: aura
-          duration:
-            raw: '1'
-            unit: minute
-          effectTypes:
-            - loud
-          endCondition: >-
-            <p>At the start of each of the targets' @L[Core:Turn]{turns}, they
-            roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
-            ends.</p>
-          executionTime:
-            base: a1
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: int
-          form: normal
-          identifier: battle-cry-aura
-          interaction: feat
-          maneuver: active
-          mundane: false
-          overview:
-            base: >-
-              <p>This ability cannot affect @L[Condition:Deaf]{deaf}
-              creatures.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            raw: '10'
-            unit: ft
-          results:
-            fail: <p>Targets become @L[Condition:Frightened]{frightened}.</p>
-          skill: true
-          standard: true
-          targets:
-            - creature
-        transfer: true
-        type: ability
-      - _id: 8ktL0IgLkoLY67v8
-        _key: >-
-          !actors.items.effects!9f811e5f41d3b07d.9f811e5f41d3b07d.8ktL0IgLkoLY67v8
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.07a0880b230cdb14
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/abilities/beastly-strength.webp
-        name: Beastly Strength
-        system:
-          _sup: LZ7jggIkvUYGekvG
-          class: knight
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: beastly-strength
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          overview:
-            base: >-
-              <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
-              hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
-              Piercing]{Armor piercing} weapons must still be wielded in two
-              hands to be @L[Keyword:Armor Voiding]{AV0}.</div>
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          skill: true
-          standard: true
-          targets:
-            - self
-          upgrades:
-            score:
-              attribute: str
-              value: 1
-        transfer: true
-        type: ability
-      - _id: 7cVuiMYRmIgaR23S
-        _key: >-
-          !actors.items.effects!9f811e5f41d3b07d.9f811e5f41d3b07d.7cVuiMYRmIgaR23S
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.54f63d63ae4376a9
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
-        name: Improved Armor Piercing
-        system:
-          _sup: LZ7jggIkvUYGekvG
-          class: knight
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: improved-armor-piercing
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          overview:
-            base: >-
-              <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
-              piercing}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          skill: true
-          standard: true
-          targets:
-            - self
-        transfer: true
-        type: ability
     folder: c2095fb63315614f
     img: systems/teriock/src/icons/creatures/green-drake.webp
     name: Green Drake
     system:
-      adult: 0
       appearance: >-
         <p>Similar to @L[Creature:Green Dragon]{green dragons}, but smaller and
         more bestial.</p>
@@ -907,7 +906,6 @@ items:
       innateRanks: >-
         <p>Innately @L[Category:Classes]{rank} 1 @L[Class:Nature Mage]{Nature
         Mage}.</p>
-      lifespan: 0
       size:
         enabled: true
         value: 5
@@ -925,102 +923,24 @@ items:
         img: systems/teriock/src/icons/tokens/green-drake.webp
         ring: true
     type: species
-  - _id: 2bpLJrqZ4yWlfxe0
-    _key: '!actors.items!9f811e5f41d3b07d.2bpLJrqZ4yWlfxe0'
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.e8b5eedfa8602242
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.4
-    effects:
-      - _id: Wez1JXmo9LjBU1oA
-        _key: >-
-          !actors.items.effects!9f811e5f41d3b07d.2bpLJrqZ4yWlfxe0.Wez1JXmo9LjBU1oA
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.417457cfa2643f5b
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/properties/handy.webp
-        name: Handy
-        system:
-          competence:
-            raw: 0
-          description: >-
-            <p>An item with this property can be used to deliver
-            @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
-          form: intrinsic
-          identifier: handy
-          mundane: true
-        transfer: true
-        type: property
-      - _id: 6CVqlpk3uf4VDbFY
-        _key: >-
-          !actors.items.effects!9f811e5f41d3b07d.2bpLJrqZ4yWlfxe0.6CVqlpk3uf4VDbFY
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.891de334396620e1
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/properties/weapon.webp
-        name: Weapon
-        system:
-          competence:
-            raw: 0
-          description: >-
-            <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-            @L[Category:Attack abilities]{attack}.</p>
-          form: intrinsic
-          identifier: weapon
-          mundane: true
-        transfer: true
-        type: property
-    folder: c2095fb63315614f
-    img: systems/teriock/src/icons/body-parts/sharp-claw.webp
-    name: Sharp Claw
-    system:
-      _sup: 9f811e5f41d3b07d
-      attackPenalty: '-3'
-      bv:
-        raw: '1'
-      competence:
-        raw: 0
-      damage:
-        base: 1d6
-      fightingStyle: savage
-      identifier: sharp-claw
-      impacts:
-        - damage
-      range:
-        long:
-          unit: melee
-        melee: true
-        ranged: false
-        short:
-          unit: self
-      vitals: false
-    type: body
-  - _id: 5oyy4E2tkRR3hVXc
-    _key: '!actors.items!9f811e5f41d3b07d.5oyy4E2tkRR3hVXc'
+  - _id: vvpueKim4LYWMkdC
+    _key: '!actors.items!9f811e5f41d3b07d.vvpueKim4LYWMkdC'
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.079ffd850d9567f9
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     effects:
-      - _id: LwntE76DWV8LsMYk
+      - _id: TWk5AP5nzZgpXkaM
         _key: >-
-          !actors.items.effects!9f811e5f41d3b07d.5oyy4E2tkRR3hVXc.LwntE76DWV8LsMYk
+          !actors.items.effects!9f811e5f41d3b07d.vvpueKim4LYWMkdC.TWk5AP5nzZgpXkaM
         _stats:
           compendiumSource: Compendium.teriock.properties.ActiveEffect.294cd7a4f1545ed9
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -1035,15 +955,15 @@ items:
           mundane: true
         transfer: true
         type: property
-      - _id: 70oASdJA4Iza7rlK
+      - _id: IDLUUjkSFtpaiKuJ
         _key: >-
-          !actors.items.effects!9f811e5f41d3b07d.5oyy4E2tkRR3hVXc.70oASdJA4Iza7rlK
+          !actors.items.effects!9f811e5f41d3b07d.vvpueKim4LYWMkdC.IDLUUjkSFtpaiKuJ
         _stats:
           compendiumSource: Compendium.teriock.properties.ActiveEffect.3d2cc8d952adebec
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -1068,8 +988,6 @@ items:
       damage:
         base: '1'
       identifier: foot
-      impacts:
-        - damage
       range:
         long:
           unit: melee
@@ -1079,46 +997,46 @@ items:
           unit: self
       vitals: false
     type: body
-  - _id: XDQHE28sqUIZwNrf
-    _key: '!actors.items!9f811e5f41d3b07d.XDQHE28sqUIZwNrf'
+  - _id: QfSaueHjajgKK3LV
+    _key: '!actors.items!9f811e5f41d3b07d.QfSaueHjajgKK3LV'
     _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.7c5e00d2a8866a3a
+      compendiumSource: Compendium.teriock.bodyParts.Item.e8b5eedfa8602242
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     effects:
-      - _id: eQUrKLYfdm3d2pbp
+      - _id: vgYp2OlY2QgragN9
         _key: >-
-          !actors.items.effects!9f811e5f41d3b07d.XDQHE28sqUIZwNrf.eQUrKLYfdm3d2pbp
+          !actors.items.effects!9f811e5f41d3b07d.QfSaueHjajgKK3LV.vgYp2OlY2QgragN9
         _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.870df3b7da4ce4b8
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.417457cfa2643f5b
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
-        img: icons/creatures/abilities/mouth-teeth-long-red.webp
-        name: Biting
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/properties/handy.webp
+        name: Handy
         system:
           competence:
             raw: 0
           description: >-
             <p>An item with this property can be used to deliver
-            @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
+            @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
           form: intrinsic
-          identifier: biting
+          identifier: handy
           mundane: true
         transfer: true
         type: property
-      - _id: 3UeX8RwGGyFvjqWm
+      - _id: rxHvNMZbvlGHFxTl
         _key: >-
-          !actors.items.effects!9f811e5f41d3b07d.XDQHE28sqUIZwNrf.3UeX8RwGGyFvjqWm
+          !actors.items.effects!9f811e5f41d3b07d.QfSaueHjajgKK3LV.rxHvNMZbvlGHFxTl
         _stats:
           compendiumSource: Compendium.teriock.properties.ActiveEffect.891de334396620e1
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -1132,15 +1050,91 @@ items:
           mundane: true
         transfer: true
         type: property
-      - _id: le7YdvR7d9bOGzcV
+    folder: c2095fb63315614f
+    img: systems/teriock/src/icons/body-parts/sharp-claw.webp
+    name: Sharp Claw
+    system:
+      _sup: 9f811e5f41d3b07d
+      attackPenalty: '-3'
+      bv:
+        raw: 1
+      competence:
+        raw: 0
+      damage:
+        base: 1d6
+      fightingStyle: savage
+      identifier: sharp-claw
+      range:
+        long:
+          unit: melee
+        melee: true
+        ranged: false
+        short:
+          unit: self
+      vitals: false
+    type: body
+  - _id: J9NLMOOzKocEeRLV
+    _key: '!actors.items!9f811e5f41d3b07d.J9NLMOOzKocEeRLV'
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.7c5e00d2a8866a3a
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    effects:
+      - _id: Q3eKznomGL4eVOGB
         _key: >-
-          !actors.items.effects!9f811e5f41d3b07d.XDQHE28sqUIZwNrf.le7YdvR7d9bOGzcV
+          !actors.items.effects!9f811e5f41d3b07d.J9NLMOOzKocEeRLV.Q3eKznomGL4eVOGB
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.870df3b7da4ce4b8
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.15
+        img: icons/creatures/abilities/mouth-teeth-long-red.webp
+        name: Biting
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with this property can be used to deliver
+            @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
+          form: intrinsic
+          identifier: biting
+          mundane: true
+        transfer: true
+        type: property
+      - _id: KcaZmxo03XNP3ZbE
+        _key: >-
+          !actors.items.effects!9f811e5f41d3b07d.J9NLMOOzKocEeRLV.KcaZmxo03XNP3ZbE
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.891de334396620e1
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/properties/weapon.webp
+        name: Weapon
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
+            @L[Category:Attack abilities]{attack}.</p>
+          form: intrinsic
+          identifier: weapon
+          mundane: true
+        transfer: true
+        type: property
+      - _id: dyRYEEhB3N7j2eaE
+        _key: >-
+          !actors.items.effects!9f811e5f41d3b07d.J9NLMOOzKocEeRLV.dyRYEEhB3N7j2eaE
         _stats:
           compendiumSource: Compendium.teriock.properties.ActiveEffect.12e9b70930bc7182
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/properties/armor-voiding.webp
         name: Armor Voiding
         system:
@@ -1183,15 +1177,13 @@ items:
       _sup: 9f811e5f41d3b07d
       attackPenalty: '-3'
       bv:
-        raw: '1'
+        raw: 1
       competence:
         raw: 0
       damage:
         base: 1d8
       fightingStyle: savage
       identifier: ferocious-jaw
-      impacts:
-        - damage
       range:
         long:
           unit: melee
@@ -1201,24 +1193,24 @@ items:
           unit: self
       vitals: false
     type: body
-  - _id: nBlveHastmkfNxjy
-    _key: '!actors.items!9f811e5f41d3b07d.nBlveHastmkfNxjy'
+  - _id: 1B0Ihc51j0sXNuHR
+    _key: '!actors.items!9f811e5f41d3b07d.1B0Ihc51j0sXNuHR'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.fae3aa04e82c5a63
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     effects:
       - _id: oy1A5zdakXd9Rhxu
         _key: >-
-          !actors.items.effects!9f811e5f41d3b07d.nBlveHastmkfNxjy.oy1A5zdakXd9Rhxu
+          !actors.items.effects!9f811e5f41d3b07d.1B0Ihc51j0sXNuHR.oy1A5zdakXd9Rhxu
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.559bdf5a1380888c
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/empathic-ray.webp
         name: Empathic Ray
         system:
@@ -1335,13 +1327,13 @@ items:
         type: ability
       - _id: 3B8CCaqeJdPsJBDU
         _key: >-
-          !actors.items.effects!9f811e5f41d3b07d.nBlveHastmkfNxjy.3B8CCaqeJdPsJBDU
+          !actors.items.effects!9f811e5f41d3b07d.1B0Ihc51j0sXNuHR.3B8CCaqeJdPsJBDU
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.40562e31a7f1563f
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/familiar-bond.webp
         name: Familiar Bond
         system:
@@ -1447,13 +1439,13 @@ items:
         type: ability
       - _id: xK4OnVF5jnqLxb3g
         _key: >-
-          !actors.items.effects!9f811e5f41d3b07d.nBlveHastmkfNxjy.xK4OnVF5jnqLxb3g
+          !actors.items.effects!9f811e5f41d3b07d.1B0Ihc51j0sXNuHR.xK4OnVF5jnqLxb3g
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.edbed0d0ed06dd37
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/oracle.webp
         name: Oracle
         system:
@@ -1526,13 +1518,13 @@ items:
         type: ability
       - _id: synfq4mv5z7bw03a
         _key: >-
-          !actors.items.effects!9f811e5f41d3b07d.nBlveHastmkfNxjy.synfq4mv5z7bw03a
+          !actors.items.effects!9f811e5f41d3b07d.1B0Ihc51j0sXNuHR.synfq4mv5z7bw03a
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.f55f8feaed060d94
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/treeform-ball.webp
         name: Treeform Ball
         system:
@@ -1674,24 +1666,24 @@ items:
           disabled: false
           formula: 1d12
     type: rank
-  - _id: pnLYYTZVSGuCIwCW
-    _key: '!actors.items!9f811e5f41d3b07d.pnLYYTZVSGuCIwCW'
+  - _id: scPhkWec5HS38YhW
+    _key: '!actors.items!9f811e5f41d3b07d.scPhkWec5HS38YhW'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.4a095aaed0254ec3
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     effects:
       - _id: NGCuRUaVtXnxAbRe
         _key: >-
-          !actors.items.effects!9f811e5f41d3b07d.pnLYYTZVSGuCIwCW.NGCuRUaVtXnxAbRe
+          !actors.items.effects!9f811e5f41d3b07d.scPhkWec5HS38YhW.NGCuRUaVtXnxAbRe
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.ac35fb736d8bd407
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/arcane-ray.webp
         name: Arcane Ray
         system:
@@ -1768,13 +1760,13 @@ items:
         type: ability
       - _id: aCWLNsvSFjEuLTyl
         _key: >-
-          !actors.items.effects!9f811e5f41d3b07d.pnLYYTZVSGuCIwCW.aCWLNsvSFjEuLTyl
+          !actors.items.effects!9f811e5f41d3b07d.scPhkWec5HS38YhW.aCWLNsvSFjEuLTyl
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.30358f2e8d9b3a0a
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/staff-touch.webp
         name: Staff Touch
         system:
@@ -1892,6 +1884,6 @@ system:
     number:
       raw: '5'
   wielding:
-    attacker: XDQHE28sqUIZwNrf
-    blocker: XDQHE28sqUIZwNrf
+    attacker: J9NLMOOzKocEeRLV
+    blocker: J9NLMOOzKocEeRLV
 type: creature

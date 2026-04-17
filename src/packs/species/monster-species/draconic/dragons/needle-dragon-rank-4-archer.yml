@@ -1,20 +1,20 @@
-_id: A0A12kO0F6LGoWHI
-_key: '!items!A0A12kO0F6LGoWHI'
+_id: 9goBty5ZLeja5Noc
+_key: '!items!9goBty5ZLeja5Noc'
 _stats:
   compendiumSource: Compendium.teriock.classes.Item.e55b7bdfc9a44e5e
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.23
+  systemVersion: 0.12.15
 effects:
   - _id: 0qq9MUxz5NFJh1tW
-    _key: '!items.effects!A0A12kO0F6LGoWHI.0qq9MUxz5NFJh1tW'
+    _key: '!items.effects!9goBty5ZLeja5Noc.0qq9MUxz5NFJh1tW'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.f17e1c273c579c38
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     flags:
       teriock:
         category: support
@@ -51,7 +51,10 @@ effects:
       duration:
         raw: '0'
         unit: unlimited
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -61,6 +64,7 @@ effects:
       identifier: gamesman
       interaction: manifest
       maneuver: passive
+      mundane: false
       overview:
         base: >-
           <p>You are an @L[Keyword:Expertise]{expert}
@@ -81,13 +85,13 @@ effects:
     transfer: true
     type: ability
   - _id: W9ekYaonCEkM8hNy
-    _key: '!items.effects!A0A12kO0F6LGoWHI.W9ekYaonCEkM8hNy'
+    _key: '!items.effects!9goBty5ZLeja5Noc.W9ekYaonCEkM8hNy'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.a4f96105cc140a51
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     flags:
       teriock:
         category: combat
@@ -129,7 +133,10 @@ effects:
       endCondition: >-
         <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime: r1
+      executionTime:
+        base: r1
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -139,6 +146,7 @@ effects:
       identifier: misdirect
       interaction: block
       maneuver: reactive
+      mundane: false
       piercing:
         raw: 0
       powerSources:
@@ -159,14 +167,14 @@ effects:
       trigger: <p>You are being @L[Core:Interactions]{attacked}.</p>
     transfer: true
     type: ability
-  - _id: 2Rm3NVAnWtQ4mivJ
-    _key: '!items.effects!A0A12kO0F6LGoWHI.2Rm3NVAnWtQ4mivJ'
+  - _id: qwr0qSToMIgn7ygY
+    _key: '!items.effects!9goBty5ZLeja5Noc.qwr0qSToMIgn7ygY'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.91b30624f59c08d8
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/slay.webp
     name: Slay
     system:
@@ -279,12 +287,8 @@ system:
   statDice:
     hp:
       disabled: false
-      faces: 10
-      number:
-        raw: '1'
+      formula: 1d10
     mp:
       disabled: false
-      faces: 10
-      number:
-        raw: '1'
+      formula: 1d10
 type: rank

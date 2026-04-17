@@ -4,16 +4,16 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.68
+  systemVersion: 0.12.15
 effects:
-  - _id: D89t9Qf5Xiejz8vR
-    _key: '!items.effects!fdd81e815b614df0.D89t9Qf5Xiejz8vR'
+  - _id: NuWIE3T7XWUe9s0j
+    _key: '!items.effects!fdd81e815b614df0.NuWIE3T7XWUe9s0j'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.13b3d010d6b4a76d
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/battle-roar.webp
     name: Battle Roar
     system:
@@ -45,7 +45,10 @@ effects:
       duration:
         raw: '0'
         unit: unlimited
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -55,6 +58,7 @@ effects:
       identifier: battle-roar
       interaction: manifest
       maneuver: passive
+      mundane: false
       overview:
         base: >-
           <p>You gain @L[Ability:Battle Roar Aura]{Battle Roar Aura} and
@@ -69,1194 +73,18 @@ effects:
         - self
     transfer: true
     type: ability
-  - _id: SlCneAcMO0QIkawI
-    _key: '!items.effects!fdd81e815b614df0.SlCneAcMO0QIkawI'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.9e03052c5178aca2
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.4
-    img: systems/teriock/src/icons/abilities/blue-dragon-breath.webp
-    name: Blue Dragon Breath
-    system:
-      automations:
-        46d652e970305101:
-          _id: 46d652e970305101
-          angle: '@angle.dragon'
-          competencies:
-            - 0
-            - 1
-            - 2
-          distance: 30 + 5 * @h
-          heighten:
-            - 0
-            - 1
-          movable: false
-          t: cone
-          type: template
-        800c70e6560525a8:
-          _id: 800c70e6560525a8
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: (2 * @h)d10[magic ice]
-          heighten:
-            - 1
-          impact: damage
-          merge: true
-          type: roll
-        d635eb44dba086dd:
-          _id: d635eb44dba086dd
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: combatExpiration
-          what:
-            roll: 2d4kh1
-            threshold: 4
-            type: rolled
-          when:
-            skip: 0
-            time: end
-            trigger: action
-          who:
-            type: target
-        dozfNCs9FQ7NhV4L:
-          _id: dozfNCs9FQ7NhV4L
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          executor: false
-          heighten:
-            - 0
-            - 1
-          relation: include
-          status: frozen
-          target: false
-          type: status
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: cone
-      duration:
-        raw: '10'
-        unit: minute
-      effectTypes:
-        - temporal
-      elements:
-        - storm
-      endCondition: >-
-        <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 2d10[magic ice]]] @L[Core:Damage]{damage}. Additionally, the
-        @L[Core:Range]{range} of this increases by 5 feet.</p>
-      identifier: blue-dragon-breath
-      interaction: feat
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        raw: '30'
-        unit: ft
-      results:
-        fail: <p>Target is @L[Condition:Frozen]{frozen}.</p>
-        save: >-
-          <p>Target is @L[Condition:Frozen]{frozen}. At the end of each of the
-          target's actions, they roll [[/roll 2d4]]. If either of these dice
-          roll a 4, this effect ends. Target takes half as much
-          @L[Core:Damage]{damage} from this as they would otherwise. This is
-          calculated after any @L[Keyword:Boosted]{boosts} or
-          @L[Keyword:Deboosted]{deboosts}.</p>
-      targets:
-        - creature
-    transfer: true
-    type: ability
-  - _id: Pk4urzy07YRH5Rkg
-    _key: '!items.effects!fdd81e815b614df0.Pk4urzy07YRH5Rkg'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.0a178e985ba3329b
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.4
-    img: systems/teriock/src/icons/abilities/dragon-elder-sorcery.webp
-    name: Dragon Elder Sorcery
-    system:
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.competence.raw
-              phase: fluency
-              priority: 10
-              qualifier: >-
-                or(@identifier.innate-elder-sorcery,
-                @identifier.elder-sorcery-adept, @identifier.dragon-snapcast)
-              target: ability
-              type: upgrade
-              value: '2'
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: dragon-elder-sorcery
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Innate Elder Sorcery]{Innate Elder Sorcery},
-          @L[Ability:Elder Sorcery Adept]{Elder Sorcery Adept}, and
-          @L[Ability:Dragon Snapcast]{Dragon Snapcast}. You are @L[Core:Fluency
-          Bonus]{fluent} in all of these. In addition, you automatically get a
-          +50 metaphysics bonus (a positive metaphysics penalty) to your
-          @L[Core:Elder Sorcery]{Elder Sorcery} creation. Beyond this, you have
-          an innate mastery of @L[Core:Elder Sorcery]{Elder Sorcery} akin to a
-          native language that manifests in various ways. For one, you know
-          words far beyond the ones listed on the formal @L[Core:Elder Sorcery
-          Words]{charts}. When creating, casting, and learning @L[Core:Elder
-          Sorcery]{Elder Sorcery}, you may assume to know all words (whether
-          they are on the @L[Core:Elder Sorcery Words]{charts} or not) so long
-          as they are of an OP that you would know from @L[Ability:Innate Elder
-          Sorcery]{Innate Elder Sorcery}. It is up to the @L[Core:Game
-          Master]{GM} to determine what the OP of a "nonstandard" word would be.
-          You also always have a universal +5 to your wording @L[Core:Elder
-          Sorcery]{Elder Sorcery} creation score and a +3 to all others. You may
-          also speak freely in @L[Core:Elder Sorcery]{Elder Sorcery} without
-          creating or casting it. This freeform speech can be understood by
-          anyone listening regardless of whether or not they know @L[Core:Elder
-          Sorcery]{Elder Sorcery}. However, it <i>must</i> be true. Otherwise,
-          you fumble as though you had cast @L[Core:Elder Sorcery]{Elder
-          Sorcery}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      targets:
-        - self
-    transfer: true
-    type: ability
-  - _id: 9bkjRLeHNFpNS6ST
-    _key: '!items.effects!fdd81e815b614df0.9bkjRLeHNFpNS6ST'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.f0038b1115f1662f
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.2
-    img: systems/teriock/src/icons/abilities/dragon-sight.webp
-    name: Dragon Sight
-    system:
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - sensory
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: dragon-sight
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Instant Identify Sight]{Instant Identify Sight}
-          and @L[Ability:True Sight]{True Sight}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      targets:
-        - self
-      upgrades:
-        score:
-          attribute: per
-          value: 5
-    transfer: true
-    type: ability
-  - _id: ktsZlgLe3Yh6qRK0
-    _key: '!items.effects!fdd81e815b614df0.ktsZlgLe3Yh6qRK0'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.ca13542fc2752512
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.2
-    img: systems/teriock/src/icons/abilities/extreme-intelligence.webp
-    name: Extreme Intelligence
-    system:
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: extreme-intelligence
-      interaction: manifest
-      maneuver: passive
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-      upgrades:
-        score:
-          attribute: int
-          value: 5
-    transfer: true
-    type: ability
-  - _id: UeJtQ1zMVLivw0U7
-    _key: '!items.effects!fdd81e815b614df0.UeJtQ1zMVLivw0U7'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.184f6f0ddbd9247e
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.4
-    img: systems/teriock/src/icons/abilities/flying.webp
-    name: Flying
-    system:
-      automations:
-        5KN7CIW4kc6fgrgW:
-          _id: 5KN7CIW4kc6fgrgW
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 0
-            - 1
-          movementAction: fly
-          type: changeMovement
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.speedAdjustments.fly
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: upgrade
-              value: '2'
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-        f025905e157ac261:
-          _id: f025905e157ac261
-          changes:
-            - key: system.speedAdjustments.fly
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: upgrade
-              value: '3'
-          competencies:
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-      class: corsair
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - movement
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: flying
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: <p>You fly at @L[Core:Movement Speed]{half speed}.</p>
-        proficient: <p>You instead fly at @L[Core:Movement Speed]{full speed}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-    transfer: true
-    type: ability
-  - _id: qJb49heJ1jCrCvJs
-    _key: '!items.effects!fdd81e815b614df0.qJb49heJ1jCrCvJs'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.2ec8c915bc58079a
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.4
-    img: systems/teriock/src/icons/abilities/improved-healing-factor.webp
-    name: Improved Healing Factor
-    system:
-      automations:
-        Suc9ayhHqRkmjAwZ:
-          _id: Suc9ayhHqRkmjAwZ
-          competencies:
-            - 0
-            - 1
-            - 2
-          conditions:
-            absent:
-              - burned
-              - dead
-              - frozen
-          consumeStatDice: false
-          forHarm: false
-          heighten:
-            - 0
-            - 1
-          noStatDice: false
-          trigger: turnStart
-          type: heal
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        conditions:
-          absent:
-            - dead
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - healing
-        - regeneration
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: improved-healing-factor
-      interaction: manifest
-      limitation: <p>Only in vicinity of lair.</p>
-      maneuver: passive
-      overview:
-        base: >-
-          <p>At the start of each of your @L[Core:Turns]{turns}, you 
-          @L[Core:Healing]{heal} and regain that many @L[Core:Hit Points and
-          Mana Points]{HP}. This does <i>not</i> consume your @L[Core:HP]{hit
-          die}. If you take @L[Damage:Fire]{fire damage}, this effect doesn't
-          apply on your next @L[Core:Turns]{turn}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - primal
-      range:
-        unit: self
-      targets:
-        - self
-    transfer: true
-    type: ability
-  - _id: Bh32chyZqlZCImrI
-    _key: '!items.effects!fdd81e815b614df0.Bh32chyZqlZCImrI'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.869a140ee9b11910
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.4
-    img: systems/teriock/src/icons/abilities/improved-revitalizing-factor.webp
-    name: Improved Revitalizing Factor
-    system:
-      automations:
-        T0uGlilXyRymTD1v:
-          _id: T0uGlilXyRymTD1v
-          competencies:
-            - 0
-            - 1
-            - 2
-          conditions:
-            absent:
-              - dead
-              - frozen
-          consumeStatDice: false
-          forHarm: false
-          heighten:
-            - 0
-            - 1
-          trigger: turnStart
-          type: revitalize
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        conditions:
-          absent:
-            - dead
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - regeneration
-        - revitalization
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: improved-revitalizing-factor
-      interaction: manifest
-      limitation: <p>Only in vicinity of lair.</p>
-      maneuver: passive
-      overview:
-        base: >-
-          <p>At the start of each of your @L[Core:Turns]{turns}, you 
-          @L[Core:Revitalizing]{revitalize} and regain that many @L[Core:Hit
-          Points and Mana Points]{MP}. This does <i>not</i> consume your
-          @L[Core:MP]{mana die}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - primal
-      range:
-        unit: self
-      targets:
-        - self
-    transfer: true
-    type: ability
-  - _id: NikvDA4aeizJhEhC
-    _key: '!items.effects!fdd81e815b614df0.NikvDA4aeizJhEhC'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.853ccc4345a2fb2a
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.2
-    img: systems/teriock/src/icons/abilities/lumbering.webp
-    name: Lumbering
-    system:
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: flaw
-      identifier: lumbering
-      interaction: manifest
-      maneuver: passive
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-      upgrades:
-        score:
-          attribute: snk
-          value: -3
-    transfer: true
-    type: ability
-  - _id: iodhcsWGywpj3qXA
-    _key: '!items.effects!fdd81e815b614df0.iodhcsWGywpj3qXA'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.eabb35503034070a
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.4
-    img: systems/teriock/src/icons/abilities/monstrous-strength.webp
-    name: Monstrous Strength
-    system:
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.damage
-              phase: normal
-              priority: 100
-              qualifier: and(@dmg, @range.melee)
-              target: armament
-              type: boost
-              value: '1'
-            - key: system.piercing.raw
-              phase: normal
-              priority: 10
-              qualifier: '@range.melee'
-              target: armament
-              type: add
-              value: '1'
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: monstrous-strength
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Supernatural Strength]{Supernatural Strength}.
-          In addition, you deal @L[Keyword:Boosted]{boosted} with all melee
-          @L[Category:Weapons]{weapon} @L[Category:Attack abilities]{attacks}
-          and they are @L[Keyword:AV0]{AV0} for you.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-      upgrades:
-        score:
-          attribute: str
-          value: 5
-    transfer: true
-    type: ability
-  - _id: D0UFjy4YMD3GPQwv
-    _key: '!items.effects!fdd81e815b614df0.D0UFjy4YMD3GPQwv'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.aaaa08a40cf32777
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.4
-    img: systems/teriock/src/icons/abilities/night-vision.webp
-    name: Night Vision
-    system:
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.senses.dark
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: upgrade
-              value: '120'
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - sensory
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: night-vision
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You can see in the dark up to 60 feet as though it is bright light
-          and up to 120 feet as though it is dim light.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-    transfer: true
-    type: ability
-  - _id: b3TxNQPBHEWzrYRr
-    _key: '!items.effects!fdd81e815b614df0.b3TxNQPBHEWzrYRr'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.f011ddb94a535975
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.4
-    img: systems/teriock/src/icons/abilities/shattering-armor.webp
-    name: Shattering Armor
-    system:
-      automations:
-        mhGxVy8CcJTEyM2q:
-          _id: mhGxVy8CcJTEyM2q
-          common:
-            - shatter
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 0
-            - 1
-          showConfirmationDialog: true
-          type: common
-      competence:
-        raw: 0
-      delivery: armor
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - destruction
-      executionTime: r1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: shattering-armor
-      interaction: block
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>You may @L[Core:Block Interaction]{block} with a @L[Core:Block
-          Interaction]{BV} equal to your @L[Core:Armor Class]{AV} for the
-          purpose of [[lookup name]]. </p><div class="note"><b>Note:</b> This
-          does not allow you to delivery other @L[Core:Block
-          Interaction]{blocks} in this way.</div>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      results:
-        save: >-
-          <p>@L[Category:Equipment]{Equipment} that delivers @L[Category:Attack
-          abilities]{attack} you @L[Core:Block Interaction]{block} becomes
-          @L[Property:Shattered]{shattered}.</p>
-      targets:
-        - item
-    transfer: true
-    type: ability
-  - _id: k6q9Ap5w41Ap66D9
-    _key: '!items.effects!fdd81e815b614df0.k6q9Ap5w41Ap66D9'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.e24130f1123560a0
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.2
-    img: systems/teriock/src/icons/abilities/speed.webp
-    name: Speed
-    system:
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: speed
-      interaction: manifest
-      maneuver: passive
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-      upgrades:
-        score:
-          attribute: mov
-          value: 3
-    transfer: true
-    type: ability
-  - _id: OvxsCuNMQyP19iFH
-    _key: '!items.effects!fdd81e815b614df0.OvxsCuNMQyP19iFH'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8c5210488cd87198
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.4
-    img: systems/teriock/src/icons/abilities/storm-mage-adept.webp
-    name: Storm Mage Adept
-    system:
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.costs.tweaks.adept
-              phase: normal
-              priority: 10
-              qualifier: '@class.stormMage'
-              target: ability
-              type: upgrade
-              value: '1'
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: storm-mage-adept
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You are @L[Keyword:Adept]{adept} at @L[Category:Storm Mage class
-          abilities]{abilities} you get from ranks in @L[Class:Storm Mage]{Storm
-          Mage}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-    transfer: true
-    type: ability
-  - _id: ICp5jqsEH5bupT5h
-    _key: '!items.effects!fdd81e815b614df0.ICp5jqsEH5bupT5h'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.4qlym1B7834oXLoB
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.4
-    img: systems/teriock/src/icons/abilities/instant-identify-sight.webp
-    name: Instant Identify Sight
-    system:
-      _sup: 9bkjRLeHNFpNS6ST
-      automations:
-        JT1XORoecAWXaZZi:
-          _id: JT1XORoecAWXaZZi
-          common:
-            - identify
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 0
-            - 1
-          showConfirmationDialog: true
-          type: common
-      competence:
-        raw: 0
-      delivery: sight
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - truthDetecting
-        - sensory
-      elements:
-        - storm
-      executionTime:
-        base: a1
-        slow:
-          unit: second
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: instant-identify-sight
-      interaction: manifest
-      maneuver: active
-      mundane: false
-      overview:
-        base: >-
-          <p>If the target is an item, you know if it is
-          @L[Property:Magic]{magical} and what its
-          @L[Category:Properties]{properties} or
-          @L[Category:Abilities]{abilities} are, as well as any ongoing spells
-          that are affecting the item. You also learn the name of the object, if
-          it has one. If the target is a creature, you learn what ongoing or
-          @L[Category:Sustained spells]{sustained spells}, if any, are affecting
-          it.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        raw: '60'
-        unit: ft
-      targets:
-        - creature
-        - item
-    transfer: true
-    type: ability
-  - _id: gOojj3V4edjPFuDF
-    _key: '!items.effects!fdd81e815b614df0.gOojj3V4edjPFuDF'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.f13e7972af002054
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.4
-    img: systems/teriock/src/icons/abilities/true-sight.webp
-    name: True Sight
-    system:
-      _sup: 9bkjRLeHNFpNS6ST
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.senses.truth
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: upgrade
-              value: '120'
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - sensory
-      executionTime:
-        base: passive
-        slow:
-          unit: second
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: true-sight
-      interaction: manifest
-      maneuver: passive
-      mundane: false
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Scouting]{Scouting} and @L[Ability:Ethereal
-          Senses]{Ethereal Senses} and can see
-          @L[Condition:Invisible]{invisible} things within 120 feet. You can
-          also see through @L[Keyword:Illusionary]{illusions} and
-          @L[Condition:Transformed]{transformations} within 120 feet. You may be
-          able to through other effects as well at @L[Core:Game Master]{GM}
-          discretion.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      targets:
-        - self
-      upgrades:
-        score:
-          attribute: per
-          value: 4
-    transfer: true
-    type: ability
-  - _id: QwG3JjGKiuozyInq
-    _key: '!items.effects!fdd81e815b614df0.QwG3JjGKiuozyInq'
-    _stats:
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.0
-    img: systems/teriock/src/icons/abilities/ethereal-senses.webp
-    name: Ethereal Senses
-    system:
-      _sup: gOojj3V4edjPFuDF
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.senses.ethereal
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: upgrade
-              value: '120'
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - sensory
-      elements:
-        - necromancy
-      executionTime:
-        base: passive
-        slow:
-          unit: second
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: ethereal-senses
-      interaction: manifest
-      maneuver: passive
-      mundane: false
-      overview:
-        base: >-
-          <p>You can see and hear spirits and @L[Condition:Ethereal]{Ethereal}
-          creatures within 120 feet.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-        - spiritual
-        - primal
-      range:
-        unit: self
-      targets:
-        - self
-    transfer: true
-    type: ability
-  - _id: MSLNzVBLwnM5BRnX
-    _key: '!items.effects!fdd81e815b614df0.MSLNzVBLwnM5BRnX'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.3RmQZ2V83ob5T8p7
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.2
-    img: systems/teriock/src/icons/abilities/scouting.webp
-    name: Scouting
-    system:
-      _sup: gOojj3V4edjPFuDF
-      class: ranger
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - sensory
-      executionTime:
-        base: passive
-        slow:
-          unit: second
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: scouting
-      interaction: manifest
-      maneuver: passive
-      mundane: false
-      overview:
-        base: >-
-          <p>You have @L[Core:Advantage]{advantage} on checks made with
-          @L[Ability:Perceive]{Perceive}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-      upgrades:
-        competence:
-          attribute: per
-          value: 1
-        score:
-          attribute: per
-          value: 2
-    transfer: true
-    type: ability
-  - _id: ywgZeVr1luT2bGdP
-    _key: '!items.effects!fdd81e815b614df0.ywgZeVr1luT2bGdP'
+  - _id: d6PD8eavdX0wfhGl
+    _key: '!items.effects!fdd81e815b614df0.d6PD8eavdX0wfhGl'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.1DpSwqGbKUAvbn3q
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/battle-cry.webp
     name: Battle Cry
     system:
-      _sup: D89t9Qf5Xiejz8vR
+      _sup: NuWIE3T7XWUe9s0j
       class: berserker
       competence:
         raw: 0
@@ -1297,17 +125,17 @@ effects:
         - self
     transfer: true
     type: ability
-  - _id: JtNicFFZELxL94fd
-    _key: '!items.effects!fdd81e815b614df0.JtNicFFZELxL94fd'
+  - _id: Y2ZIa1Fs2Z2dE6jt
+    _key: '!items.effects!fdd81e815b614df0.Y2ZIa1Fs2Z2dE6jt'
     _stats:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.0
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
     name: Battle Cry Resistance
     system:
-      _sup: ywgZeVr1luT2bGdP
+      _sup: d6PD8eavdX0wfhGl
       automations:
         8f623097f9f2a087:
           _id: 8f623097f9f2a087
@@ -1381,18 +209,18 @@ effects:
         - self
     transfer: true
     type: ability
-  - _id: cS89jtTYyb8qO5Yi
-    _key: '!items.effects!fdd81e815b614df0.cS89jtTYyb8qO5Yi'
+  - _id: llBWXovFO6YH6yb3
+    _key: '!items.effects!fdd81e815b614df0.llBWXovFO6YH6yb3'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.3bf8b295f6088182
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
     name: Battle Cry Aura
     system:
-      _sup: ywgZeVr1luT2bGdP
+      _sup: d6PD8eavdX0wfhGl
       automations:
         b4960732f0b9ed9f:
           _id: b4960732f0b9ed9f
@@ -1481,18 +309,18 @@ effects:
         - creature
     transfer: true
     type: ability
-  - _id: LzDV9X5SWi9hk7cX
-    _key: '!items.effects!fdd81e815b614df0.LzDV9X5SWi9hk7cX'
+  - _id: bOUekobwuFAm53sn
+    _key: '!items.effects!fdd81e815b614df0.bOUekobwuFAm53sn'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.15d5f45cbc367c6c
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/battle-roar-aura.webp
     name: Battle Roar Aura
     system:
-      _sup: D89t9Qf5Xiejz8vR
+      _sup: NuWIE3T7XWUe9s0j
       automations:
         b4960732f0b9ed9f:
           _id: b4960732f0b9ed9f
@@ -1578,18 +406,243 @@ effects:
         - creature
     transfer: true
     type: ability
-  - _id: C7TAcB0bFAW3C8lW
-    _key: '!items.effects!fdd81e815b614df0.C7TAcB0bFAW3C8lW'
+  - _id: dRR2QeePt2PSyvo6
+    _key: '!items.effects!fdd81e815b614df0.dRR2QeePt2PSyvo6'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.9e03052c5178aca2
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/blue-dragon-breath.webp
+    name: Blue Dragon Breath
+    system:
+      automations:
+        46d652e970305101:
+          _id: 46d652e970305101
+          angle: '@angle.dragon'
+          competencies:
+            - 0
+            - 1
+            - 2
+          distance: 30 + 5 * @h
+          heighten:
+            - 0
+            - 1
+          movable: false
+          t: cone
+          type: template
+          width: '0'
+        800c70e6560525a8:
+          _id: 800c70e6560525a8
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: (2 * @h)d10[magic ice]
+          heighten:
+            - 1
+          impact: damage
+          merge: true
+          type: roll
+        d635eb44dba086dd:
+          _id: d635eb44dba086dd
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: combatExpiration
+          what:
+            roll: 2d4kh1
+            threshold: 4
+            type: rolled
+          when:
+            skip: 0
+            time: end
+            trigger: action
+          who:
+            type: target
+        dozfNCs9FQ7NhV4L:
+          _id: dozfNCs9FQ7NhV4L
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          executor: false
+          heighten:
+            - 0
+            - 1
+          relation: include
+          status: frozen
+          target: false
+          type: status
+      competence:
+        raw: 0
+      costs:
+        primary:
+          mp:
+            formula: '1'
+            type: formula
+      delivery: cone
+      duration:
+        raw: '10'
+        unit: minute
+      effectTypes:
+        - temporal
+      elements:
+        - storm
+      endCondition: >-
+        <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
+        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+      executionTime:
+        base: a1
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
+        [[/damage 2d10[magic ice]]] @L[Core:Damage]{damage}. Additionally, the
+        @L[Core:Range]{range} of this increases by 5 feet.</p>
+      identifier: blue-dragon-breath
+      interaction: feat
+      maneuver: active
+      mundane: false
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        raw: '30'
+        unit: ft
+      results:
+        fail: <p>Target is @L[Condition:Frozen]{frozen}.</p>
+        save: >-
+          <p>Target is @L[Condition:Frozen]{frozen}. At the end of each of the
+          target's actions, they roll [[/roll 2d4]]. If either of these dice
+          roll a 4, this effect ends. Target takes half as much
+          @L[Core:Damage]{damage} from this as they would otherwise. This is
+          calculated after any @L[Keyword:Boosted]{boosts} or
+          @L[Keyword:Deboosted]{deboosts}.</p>
+      targets:
+        - creature
+    transfer: true
+    type: ability
+  - _id: PdOJumrJeIpDculA
+    _key: '!items.effects!fdd81e815b614df0.PdOJumrJeIpDculA'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.0a178e985ba3329b
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/dragon-elder-sorcery.webp
+    name: Dragon Elder Sorcery
+    system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.competence.raw
+              phase: fluency
+              priority: 10
+              qualifier: >-
+                or(@identifier.innate-elder-sorcery,
+                @identifier.elder-sorcery-adept, @identifier.dragon-snapcast)
+              target: ability
+              type: upgrade
+              value: '2'
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      identifier: dragon-elder-sorcery
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Innate Elder Sorcery]{Innate Elder Sorcery},
+          @L[Ability:Elder Sorcery Adept]{Elder Sorcery Adept}, and
+          @L[Ability:Dragon Snapcast]{Dragon Snapcast}. You are @L[Core:Fluency
+          Bonus]{fluent} in all of these. In addition, you automatically get a
+          +50 metaphysics bonus (a positive metaphysics penalty) to your
+          @L[Core:Elder Sorcery]{Elder Sorcery} creation. Beyond this, you have
+          an innate mastery of @L[Core:Elder Sorcery]{Elder Sorcery} akin to a
+          native language that manifests in various ways. For one, you know
+          words far beyond the ones listed on the formal @L[Core:Elder Sorcery
+          Words]{charts}. When creating, casting, and learning @L[Core:Elder
+          Sorcery]{Elder Sorcery}, you may assume to know all words (whether
+          they are on the @L[Core:Elder Sorcery Words]{charts} or not) so long
+          as they are of an OP that you would know from @L[Ability:Innate Elder
+          Sorcery]{Innate Elder Sorcery}. It is up to the @L[Core:Game
+          Master]{GM} to determine what the OP of a "nonstandard" word would be.
+          You also always have a universal +5 to your wording @L[Core:Elder
+          Sorcery]{Elder Sorcery} creation score and a +3 to all others. You may
+          also speak freely in @L[Core:Elder Sorcery]{Elder Sorcery} without
+          creating or casting it. This freeform speech can be understood by
+          anyone listening regardless of whether or not they know @L[Core:Elder
+          Sorcery]{Elder Sorcery}. However, it <i>must</i> be true. Otherwise,
+          you fumble as though you had cast @L[Core:Elder Sorcery]{Elder
+          Sorcery}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: ZIl3Vk5Y0YCf2poS
+    _key: '!items.effects!fdd81e815b614df0.ZIl3Vk5Y0YCf2poS'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.7f2c07ecd19cff4a
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/elder-sorcery-adept.webp
     name: Elder Sorcery Adept
     system:
-      _sup: Pk4urzy07YRH5Rkg
+      _sup: PdOJumrJeIpDculA
       automations:
         e789ed5e109ebd1a:
           _id: e789ed5e109ebd1a
@@ -1646,18 +699,18 @@ effects:
         - self
     transfer: true
     type: ability
-  - _id: s4OBFmViyH6k2z2F
-    _key: '!items.effects!fdd81e815b614df0.s4OBFmViyH6k2z2F'
+  - _id: zi2pFiiNiz9D1t1n
+    _key: '!items.effects!fdd81e815b614df0.zi2pFiiNiz9D1t1n'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.27zO2KeT0yhBfCL3
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/innate-elder-sorcery.webp
     name: Innate Elder Sorcery
     system:
-      _sup: Pk4urzy07YRH5Rkg
+      _sup: PdOJumrJeIpDculA
       automations:
         f025905e157ac261:
           _id: f025905e157ac261
@@ -1755,102 +808,18 @@ effects:
         - self
     transfer: true
     type: ability
-  - _id: kn2yqG7uSfWwnnrY
-    _key: '!items.effects!fdd81e815b614df0.kn2yqG7uSfWwnnrY'
-    _stats:
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.0
-    img: systems/teriock/src/icons/abilities/elder-sorcery-creation.webp
-    name: Elder Sorcery Creation
-    system:
-      _sup: s4OBFmViyH6k2z2F
-      competence:
-        raw: 0
-      costs:
-        components:
-          material:
-            description: >-
-              <p>Creation cost is at least 3 × the material components of the
-              spell itself.</p>
-            type: description
-        primary:
-          hp:
-            description: >-
-              <p>Creation cost is at least 3 × @L[Core:HP]{HP} of the spell
-              itself.</p>
-            type: description
-          mp:
-            description: >-
-              <p>Creation cost is at least 1 @L[Core:MP]{MP} per @L[Core:Elder
-              Sorcery]{OP} of <i>each</i> word in the spell plus 3 ×
-              @L[Core:MP]{MP} of the spell itself.</p>
-            type: description
-      delivery: sight
-      duration:
-        raw: '0'
-        unit: instant
-      elderSorcery: true
-      executionTime:
-        base: Long Rest
-        slow:
-          unit: longRest
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: elder-sorcery-creation
-      interaction: manifest
-      maneuver: slow
-      mundane: false
-      overview:
-        base: >-
-          <p>You may create 1 custom "rotator" @L[Category:Spells]{spells} using
-          @L[Core:Elder Sorcery]{Elder Sorcery} words that you know using
-          whatever @L[Core:Elder Sorcery]{Elder Sorcery} creation rules are
-          dictated to you by your @L[Core:Game Master]{GM}. As with other
-          rotators, this spell is not always available to you. You have to
-          "rotate" into having it prepared. This spell may have a maximum number
-          of words equal to your @L[Core:Leveling Up]{level}. Your @L[Core:Game
-          Master]{GM} may allow you to "improvise" @L[Category:Spells]{spells}
-          as well, using whatever rules they wish.</p>
-        fluent: >-
-          <p>In addition to the spells that you crate, you can learn
-          @L[Core:Proficiency Bonus]{P} additional spells from other
-          @L[Core:Elder Sorcery]{Elder Sorcery} users. See @L[Core:Elder
-          Sorcery]{Elder Sorcery} for more information.</p>
-        proficient: >-
-          <p>You may now create 2 × (@L[Category:Mage classes]{MR} - 1) custom
-          "rotator" @L[Category:Spells]{spells} where @L[Category:Mage
-          classes]{MR} is the number of @L[Core:Leveling Up]{ranks} you have in
-          @L[Category:Mage classes]{mage classes}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      ritual: true
-      skill: true
-      targets:
-        - self
-    transfer: true
-    type: ability
-  - _id: mT4mxcNEZ7TuKOOu
-    _key: '!items.effects!fdd81e815b614df0.mT4mxcNEZ7TuKOOu'
+  - _id: gGYmLliITZOjlHuO
+    _key: '!items.effects!fdd81e815b614df0.gGYmLliITZOjlHuO'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.868cdb05c34a7654
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/all-elder-sorcery-words.webp
     name: All Elder Sorcery Words
     system:
-      _sup: s4OBFmViyH6k2z2F
+      _sup: zi2pFiiNiz9D1t1n
       competence:
         raw: 0
       delivery: self
@@ -2106,18 +1075,856 @@ effects:
         - self
     transfer: true
     type: ability
-  - _id: tKN6971pyPWawSkC
-    _key: '!items.effects!fdd81e815b614df0.tKN6971pyPWawSkC'
+  - _id: Tj3MGtp0vXUleAGx
+    _key: '!items.effects!fdd81e815b614df0.Tj3MGtp0vXUleAGx'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.6gGveNuqx4izhbrl
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.0BxTrblkpcGWwCHe
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.0
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/elder-sorcery-creation.webp
+    name: Elder Sorcery Creation
+    system:
+      _sup: zi2pFiiNiz9D1t1n
+      competence:
+        raw: 0
+      costs:
+        components:
+          material:
+            description: >-
+              <p>Creation cost is at least 3 × the material components of the
+              spell itself.</p>
+            type: description
+        primary:
+          hp:
+            description: >-
+              <p>Creation cost is at least 3 × @L[Core:HP]{HP} of the spell
+              itself.</p>
+            type: description
+          mp:
+            description: >-
+              <p>Creation cost is at least 1 @L[Core:MP]{MP} per @L[Core:Elder
+              Sorcery]{OP} of <i>each</i> word in the spell plus 3 ×
+              @L[Core:MP]{MP} of the spell itself.</p>
+            type: description
+      delivery: sight
+      duration:
+        raw: '0'
+        unit: instant
+      elderSorcery: true
+      executionTime:
+        base: Long Rest
+        slow:
+          unit: longRest
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      identifier: elder-sorcery-creation
+      interaction: manifest
+      maneuver: slow
+      mundane: false
+      overview:
+        base: >-
+          <p>You may create 1 custom "rotator" @L[Category:Spells]{spells} using
+          @L[Core:Elder Sorcery]{Elder Sorcery} words that you know using
+          whatever @L[Core:Elder Sorcery]{Elder Sorcery} creation rules are
+          dictated to you by your @L[Core:Game Master]{GM}. As with other
+          rotators, this spell is not always available to you. You have to
+          "rotate" into having it prepared. This spell may have a maximum number
+          of words equal to your @L[Core:Leveling Up]{level}. Your @L[Core:Game
+          Master]{GM} may allow you to "improvise" @L[Category:Spells]{spells}
+          as well, using whatever rules they wish.</p>
+        fluent: >-
+          <p>In addition to the spells that you crate, you can learn
+          @L[Core:Proficiency Bonus]{P} additional spells from other
+          @L[Core:Elder Sorcery]{Elder Sorcery} users. See @L[Core:Elder
+          Sorcery]{Elder Sorcery} for more information.</p>
+        proficient: >-
+          <p>You may now create 2 × (@L[Category:Mage classes]{MR} - 1) custom
+          "rotator" @L[Category:Spells]{spells} where @L[Category:Mage
+          classes]{MR} is the number of @L[Core:Leveling Up]{ranks} you have in
+          @L[Category:Mage classes]{mage classes}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: contact
+      ritual: true
+      skill: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: qoKB2dBqwgiFpIEC
+    _key: '!items.effects!fdd81e815b614df0.qoKB2dBqwgiFpIEC'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.f0038b1115f1662f
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/dragon-sight.webp
+    name: Dragon Sight
+    system:
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      effectTypes:
+        - sensory
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      identifier: dragon-sight
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Instant Identify Sight]{Instant Identify Sight}
+          and @L[Ability:True Sight]{True Sight}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: per
+          value: 5
+    transfer: true
+    type: ability
+  - _id: uhE3ndClAi80jIVe
+    _key: '!items.effects!fdd81e815b614df0.uhE3ndClAi80jIVe'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.4qlym1B7834oXLoB
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/instant-identify-sight.webp
+    name: Instant Identify Sight
+    system:
+      _sup: qoKB2dBqwgiFpIEC
+      automations:
+        JT1XORoecAWXaZZi:
+          _id: JT1XORoecAWXaZZi
+          common:
+            - identify
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 0
+            - 1
+          showConfirmationDialog: true
+          type: common
+      competence:
+        raw: 0
+      delivery: sight
+      duration:
+        raw: '0'
+        unit: instant
+      effectTypes:
+        - truthDetecting
+        - sensory
+      elements:
+        - storm
+      executionTime:
+        base: a1
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      identifier: instant-identify-sight
+      interaction: manifest
+      maneuver: active
+      mundane: false
+      overview:
+        base: >-
+          <p>If the target is an item, you know if it is
+          @L[Property:Magic]{magical} and what its
+          @L[Category:Properties]{properties} or
+          @L[Category:Abilities]{abilities} are, as well as any ongoing spells
+          that are affecting the item. You also learn the name of the object, if
+          it has one. If the target is a creature, you learn what ongoing or
+          @L[Category:Sustained spells]{sustained spells}, if any, are affecting
+          it.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        raw: '60'
+        unit: ft
+      targets:
+        - creature
+        - item
+    transfer: true
+    type: ability
+  - _id: pv1ZOoHRH1gWbh4e
+    _key: '!items.effects!fdd81e815b614df0.pv1ZOoHRH1gWbh4e'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.f13e7972af002054
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/true-sight.webp
+    name: True Sight
+    system:
+      _sup: qoKB2dBqwgiFpIEC
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.senses.truth
+              phase: normal
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              type: upgrade
+              value: '120'
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      effectTypes:
+        - sensory
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      identifier: true-sight
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Scouting]{Scouting} and @L[Ability:Ethereal
+          Senses]{Ethereal Senses} and can see
+          @L[Condition:Invisible]{invisible} things within 120 feet. You can
+          also see through @L[Keyword:Illusionary]{illusions} and
+          @L[Condition:Transformed]{transformations} within 120 feet. You may be
+          able to through other effects as well at @L[Core:Game Master]{GM}
+          discretion.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: per
+          value: 4
+    transfer: true
+    type: ability
+  - _id: eKc8AqDvzeitUJDb
+    _key: '!items.effects!fdd81e815b614df0.eKc8AqDvzeitUJDb'
+    _stats:
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/ethereal-senses.webp
+    name: Ethereal Senses
+    system:
+      _sup: pv1ZOoHRH1gWbh4e
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.senses.ethereal
+              phase: normal
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              type: upgrade
+              value: '120'
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      effectTypes:
+        - sensory
+      elements:
+        - necromancy
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: ethereal-senses
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>You can see and hear spirits and @L[Condition:Ethereal]{Ethereal}
+          creatures within 120 feet.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+        - spiritual
+        - primal
+      range:
+        unit: self
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: 1Cfrzim5wkJwIRd4
+    _key: '!items.effects!fdd81e815b614df0.1Cfrzim5wkJwIRd4'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.3RmQZ2V83ob5T8p7
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/scouting.webp
+    name: Scouting
+    system:
+      _sup: pv1ZOoHRH1gWbh4e
+      class: ranger
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      effectTypes:
+        - sensory
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: scouting
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>You have @L[Core:Advantage]{advantage} on checks made with
+          @L[Ability:Perceive]{Perceive}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        competence:
+          attribute: per
+          value: 1
+        score:
+          attribute: per
+          value: 2
+    transfer: true
+    type: ability
+  - _id: vCCKUJfb8PYaey4e
+    _key: '!items.effects!fdd81e815b614df0.vCCKUJfb8PYaey4e'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.ca13542fc2752512
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/extreme-intelligence.webp
+    name: Extreme Intelligence
+    system:
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      identifier: extreme-intelligence
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: int
+          value: 5
+    transfer: true
+    type: ability
+  - _id: amGziUsiNBpCYAyD
+    _key: '!items.effects!fdd81e815b614df0.amGziUsiNBpCYAyD'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.184f6f0ddbd9247e
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/flying.webp
+    name: Flying
+    system:
+      automations:
+        5KN7CIW4kc6fgrgW:
+          _id: 5KN7CIW4kc6fgrgW
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 0
+            - 1
+          movementAction: fly
+          type: changeMovement
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.speedAdjustments.fly
+              phase: normal
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              type: upgrade
+              value: '2'
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+        f025905e157ac261:
+          _id: f025905e157ac261
+          changes:
+            - key: system.speedAdjustments.fly
+              phase: normal
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              type: upgrade
+              value: '3'
+          competencies:
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+      class: corsair
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      effectTypes:
+        - movement
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: flying
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: <p>You fly at @L[Core:Movement Speed]{half speed}.</p>
+        proficient: <p>You instead fly at @L[Core:Movement Speed]{full speed}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: 2hmzeN8Vs5TYtjmJ
+    _key: '!items.effects!fdd81e815b614df0.2hmzeN8Vs5TYtjmJ'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.2ec8c915bc58079a
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/improved-healing-factor.webp
+    name: Improved Healing Factor
+    system:
+      automations:
+        Suc9ayhHqRkmjAwZ:
+          _id: Suc9ayhHqRkmjAwZ
+          competencies:
+            - 0
+            - 1
+            - 2
+          conditions:
+            absent:
+              - burned
+              - dead
+              - frozen
+          consumeStatDice: false
+          forHarm: false
+          heighten:
+            - 0
+            - 1
+          noStatDice: false
+          trigger: turnStart
+          type: heal
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        conditions:
+          absent:
+            - dead
+        raw: '0'
+        unit: unlimited
+      effectTypes:
+        - healing
+        - regeneration
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      identifier: improved-healing-factor
+      interaction: manifest
+      limitation: <p>Only in vicinity of lair.</p>
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>At the start of each of your @L[Core:Turns]{turns}, you 
+          @L[Core:Healing]{heal} and regain that many @L[Core:Hit Points and
+          Mana Points]{HP}. This does <i>not</i> consume your @L[Core:HP]{hit
+          die}. If you take @L[Damage:Fire]{fire damage}, this effect doesn't
+          apply on your next @L[Core:Turns]{turn}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - primal
+      range:
+        unit: self
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: D42UQ0dfI2mzeOMg
+    _key: '!items.effects!fdd81e815b614df0.D42UQ0dfI2mzeOMg'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.869a140ee9b11910
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/improved-revitalizing-factor.webp
+    name: Improved Revitalizing Factor
+    system:
+      automations:
+        T0uGlilXyRymTD1v:
+          _id: T0uGlilXyRymTD1v
+          competencies:
+            - 0
+            - 1
+            - 2
+          conditions:
+            absent:
+              - dead
+              - frozen
+          consumeStatDice: false
+          forHarm: false
+          heighten:
+            - 0
+            - 1
+          trigger: turnStart
+          type: revitalize
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        conditions:
+          absent:
+            - dead
+        raw: '0'
+        unit: unlimited
+      effectTypes:
+        - regeneration
+        - revitalization
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      identifier: improved-revitalizing-factor
+      interaction: manifest
+      limitation: <p>Only in vicinity of lair.</p>
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>At the start of each of your @L[Core:Turns]{turns}, you 
+          @L[Core:Revitalizing]{revitalize} and regain that many @L[Core:Hit
+          Points and Mana Points]{MP}. This does <i>not</i> consume your
+          @L[Core:MP]{mana die}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - primal
+      range:
+        unit: self
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: Rv6ZM8kqzHyidGpi
+    _key: '!items.effects!fdd81e815b614df0.Rv6ZM8kqzHyidGpi'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.853ccc4345a2fb2a
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/lumbering.webp
+    name: Lumbering
+    system:
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: flaw
+      identifier: lumbering
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: snk
+          value: -3
+    transfer: true
+    type: ability
+  - _id: 0Mj64XuKzsFzlcSP
+    _key: '!items.effects!fdd81e815b614df0.0Mj64XuKzsFzlcSP'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.eabb35503034070a
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/monstrous-strength.webp
+    name: Monstrous Strength
+    system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.damage
+              phase: normal
+              priority: 100
+              qualifier: and(@dmg, @range.melee)
+              target: armament
+              type: boost
+              value: '1'
+            - key: system.piercing.raw
+              phase: normal
+              priority: 10
+              qualifier: '@range.melee'
+              target: armament
+              type: add
+              value: '1'
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      identifier: monstrous-strength
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Supernatural Strength]{Supernatural Strength}.
+          In addition, you deal @L[Keyword:Boosted]{boosted} with all melee
+          @L[Category:Weapons]{weapon} @L[Category:Attack abilities]{attacks}
+          and they are @L[Keyword:AV0]{AV0} for you.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: 5
+    transfer: true
+    type: ability
+  - _id: 3Js0okvczndeO5fs
+    _key: '!items.effects!fdd81e815b614df0.3Js0okvczndeO5fs'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.DZUSDnTjSxGhHTZI
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/supernatural-strength.webp
     name: Supernatural Strength
     system:
-      _sup: iodhcsWGywpj3qXA
+      _sup: 0Mj64XuKzsFzlcSP
       competence:
         raw: 0
       delivery: self
@@ -2159,18 +1966,289 @@ effects:
           value: 4
     transfer: true
     type: ability
-  - _id: itvMlbZgElkTrkw8
-    _key: '!items.effects!fdd81e815b614df0.itvMlbZgElkTrkw8'
+  - _id: Sos6eZv1C53mmUhj
+    _key: '!items.effects!fdd81e815b614df0.Sos6eZv1C53mmUhj'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.ElgNURrH9OTECkbk
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/giant-strength.webp
+    name: Giant Strength
+    system:
+      _sup: 3Js0okvczndeO5fs
+      class: knight
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: giant-strength
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Improved Strength]{Improved Strength} and
+          @L[Ability:Melee Damage Boost]{Melee Damage Boost}. In addition, you
+          are no longer suffer the consequences of
+          @L[Property:Cumbersome]{cumbersome} items.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: 3
+    transfer: true
+    type: ability
+  - _id: D02q5oVyxw1IX4ck
+    _key: '!items.effects!fdd81e815b614df0.D02q5oVyxw1IX4ck'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8aa8167e9f40cbb2
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/improved-strength.webp
+    name: Improved Strength
+    system:
+      _sup: Sos6eZv1C53mmUhj
+      class: knight
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: improved-strength
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
+          @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: 2
+    transfer: true
+    type: ability
+  - _id: 5e6KVQG48eNQkN2F
+    _key: '!items.effects!fdd81e815b614df0.5e6KVQG48eNQkN2F'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.07a0880b230cdb14
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/beastly-strength.webp
+    name: Beastly Strength
+    system:
+      _sup: D02q5oVyxw1IX4ck
+      class: knight
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: beastly-strength
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
+          hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
+          Piercing]{Armor piercing} weapons must still be wielded in two hands
+          to be @L[Keyword:Armor Voiding]{AV0}.</div>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: 1
+    transfer: true
+    type: ability
+  - _id: b8ftneX11DlYG4ZN
+    _key: '!items.effects!fdd81e815b614df0.b8ftneX11DlYG4ZN'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.54f63d63ae4376a9
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
+    name: Improved Armor Piercing
+    system:
+      _sup: D02q5oVyxw1IX4ck
+      class: knight
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: improved-armor-piercing
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
+          piercing}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: WFf9531lpH860MtW
+    _key: '!items.effects!fdd81e815b614df0.WFf9531lpH860MtW'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.5pnQBaF30VIQrAZO
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
+    name: Melee Damage Boost
+    system:
+      _sup: Sos6eZv1C53mmUhj
+      class: knight
+      competence:
+        raw: 0
+      delivery: weapon
+      duration:
+        raw: '0'
+        unit: instant
+      effectTypes:
+        - damaging
+      executionTime:
+        base: r0
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: melee-damage-boost
+      interaction: manifest
+      maneuver: reactive
+      mundane: false
+      overview:
+        base: >-
+          <p>You may spend an unused @L[Core:Active Maneuvers]{action} to
+          @L[Keyword:Boosted]{boost} the triggering @L[Core:Damage]{damage}.</p>
+        proficient: >-
+          <p>You may spend an additional unused @L[Core:Active
+          Maneuvers]{action} to @L[Keyword:Boosted]{boost} the triggering
+          @L[Core:Damage]{damage} again.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: contact
+      skill: true
+      standard: true
+      targets:
+        - creature
+      trigger: >-
+        <p>You have hit a creature with a @L[Category:Damaging
+        effects]{damaging} melee @L[Category:Weapon delivery abilities]{weapon}
+        @L[Category:Attack abilities]{attack}.</p>
+    transfer: true
+    type: ability
+  - _id: EEEbGXR2FULKNpFO
+    _key: '!items.effects!fdd81e815b614df0.EEEbGXR2FULKNpFO'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.DYr6GrWagYhH1EZW
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/shattering-grip.webp
     name: Shattering Grip
     system:
-      _sup: tKN6971pyPWawSkC
+      _sup: 3Js0okvczndeO5fs
       automations:
         MZ0HXunkUDN7yJiQ:
           _id: MZ0HXunkUDN7yJiQ
@@ -2225,25 +2303,47 @@ effects:
         - item
     transfer: true
     type: ability
-  - _id: ZVeatsHY6rBI9Yn8
-    _key: '!items.effects!fdd81e815b614df0.ZVeatsHY6rBI9Yn8'
+  - _id: UD3MhJLBGCHcC4p8
+    _key: '!items.effects!fdd81e815b614df0.UD3MhJLBGCHcC4p8'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.ElgNURrH9OTECkbk
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.aaaa08a40cf32777
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
-    img: systems/teriock/src/icons/abilities/giant-strength.webp
-    name: Giant Strength
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/night-vision.webp
+    name: Night Vision
     system:
-      _sup: tKN6971pyPWawSkC
-      class: knight
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.senses.dark
+              phase: normal
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              type: upgrade
+              value: '120'
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
       competence:
         raw: 0
       delivery: self
       duration:
         raw: '0'
         unit: unlimited
+      effectTypes:
+        - sensory
       executionTime:
         base: passive
         slow:
@@ -2254,212 +2354,59 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      identifier: giant-strength
+      identifier: night-vision
       interaction: manifest
       maneuver: passive
       mundane: false
       overview:
         base: >-
-          <p>You gain @L[Ability:Improved Strength]{Improved Strength} and
-          @L[Ability:Melee Damage Boost]{Melee Damage Boost}. In addition, you
-          are no longer suffer the consequences of
-          @L[Property:Cumbersome]{cumbersome} items.</p>
+          <p>You can see in the dark up to 60 feet as though it is bright light
+          and up to 120 feet as though it is dim light.</p>
       piercing:
         raw: 0
       powerSources:
         - martial
       range:
         unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-      upgrades:
-        score:
-          attribute: str
-          value: 3
-    transfer: true
-    type: ability
-  - _id: CsxXod9RugasMNVI
-    _key: '!items.effects!fdd81e815b614df0.CsxXod9RugasMNVI'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8aa8167e9f40cbb2
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.2
-    img: systems/teriock/src/icons/abilities/improved-strength.webp
-    name: Improved Strength
-    system:
-      _sup: ZVeatsHY6rBI9Yn8
-      class: knight
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime:
-        base: passive
-        slow:
-          unit: second
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: improved-strength
-      interaction: manifest
-      maneuver: passive
-      mundane: false
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
-          @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-      upgrades:
-        score:
-          attribute: str
-          value: 2
-    transfer: true
-    type: ability
-  - _id: dqpJlPHyp5ClrxJN
-    _key: '!items.effects!fdd81e815b614df0.dqpJlPHyp5ClrxJN'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.07a0880b230cdb14
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.2
-    img: systems/teriock/src/icons/abilities/beastly-strength.webp
-    name: Beastly Strength
-    system:
-      _sup: CsxXod9RugasMNVI
-      class: knight
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime:
-        base: passive
-        slow:
-          unit: second
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: beastly-strength
-      interaction: manifest
-      maneuver: passive
-      mundane: false
-      overview:
-        base: >-
-          <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
-          hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
-          Piercing]{Armor piercing} weapons must still be wielded in two hands
-          to be @L[Keyword:Armor Voiding]{AV0}.</div>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-      upgrades:
-        score:
-          attribute: str
-          value: 1
-    transfer: true
-    type: ability
-  - _id: PMivPS6X9WtesWgR
-    _key: '!items.effects!fdd81e815b614df0.PMivPS6X9WtesWgR'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.54f63d63ae4376a9
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.2
-    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
-    name: Improved Armor Piercing
-    system:
-      _sup: CsxXod9RugasMNVI
-      class: knight
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime:
-        base: passive
-        slow:
-          unit: second
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: improved-armor-piercing
-      interaction: manifest
-      maneuver: passive
-      mundane: false
-      overview:
-        base: >-
-          <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
-          piercing}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
       targets:
         - self
     transfer: true
     type: ability
-  - _id: GjP4AaX8EYMWNoME
-    _key: '!items.effects!fdd81e815b614df0.GjP4AaX8EYMWNoME'
+  - _id: 6FGzCZJ3RuGau4i9
+    _key: '!items.effects!fdd81e815b614df0.6FGzCZJ3RuGau4i9'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.5pnQBaF30VIQrAZO
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.f011ddb94a535975
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
-    img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
-    name: Melee Damage Boost
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/shattering-armor.webp
+    name: Shattering Armor
     system:
-      _sup: ZVeatsHY6rBI9Yn8
-      class: knight
+      automations:
+        mhGxVy8CcJTEyM2q:
+          _id: mhGxVy8CcJTEyM2q
+          common:
+            - shatter
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 0
+            - 1
+          showConfirmationDialog: true
+          type: common
       competence:
         raw: 0
-      delivery: weapon
+      delivery: armor
       duration:
         raw: '0'
         unit: instant
       effectTypes:
-        - damaging
+        - destruction
       executionTime:
-        base: r0
+        base: r1
         slow:
           unit: second
       expansion:
@@ -2468,32 +2415,143 @@ effects:
           unit: self
       featSaveAttribute: mov
       form: normal
-      identifier: melee-damage-boost
-      interaction: manifest
+      identifier: shattering-armor
+      interaction: block
       maneuver: reactive
       mundane: false
       overview:
         base: >-
-          <p>You may spend an unused @L[Core:Active Maneuvers]{action} to
-          @L[Keyword:Boosted]{boost} the triggering @L[Core:Damage]{damage}.</p>
-        proficient: >-
-          <p>You may spend an additional unused @L[Core:Active
-          Maneuvers]{action} to @L[Keyword:Boosted]{boost} the triggering
-          @L[Core:Damage]{damage} again.</p>
+          <p>You may @L[Core:Block Interaction]{block} with a @L[Core:Block
+          Interaction]{BV} equal to your @L[Core:Armor Class]{AV} for the
+          purpose of [[lookup name]]. </p><div class="note"><b>Note:</b> This
+          does not allow you to delivery other @L[Core:Block
+          Interaction]{blocks} in this way.</div>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: contact
+      results:
+        save: >-
+          <p>@L[Category:Equipment]{Equipment} that delivers @L[Category:Attack
+          abilities]{attack} you @L[Core:Block Interaction]{block} becomes
+          @L[Property:Shattered]{shattered}.</p>
+      targets:
+        - item
+    transfer: true
+    type: ability
+  - _id: swjE91yPHsDrcgqr
+    _key: '!items.effects!fdd81e815b614df0.swjE91yPHsDrcgqr'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.e24130f1123560a0
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/speed.webp
+    name: Speed
+    system:
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: speed
+      interaction: manifest
+      maneuver: passive
+      mundane: false
       piercing:
         raw: 0
       powerSources:
         - martial
       range:
-        unit: contact
-      skill: true
-      standard: true
+        unit: self
       targets:
-        - creature
-      trigger: >-
-        <p>You have hit a creature with a @L[Category:Damaging
-        effects]{damaging} melee @L[Category:Weapon delivery abilities]{weapon}
-        @L[Category:Attack abilities]{attack}.</p>
+        - self
+      upgrades:
+        score:
+          attribute: mov
+          value: 3
+    transfer: true
+    type: ability
+  - _id: LDpHxRmD0RYuwJcF
+    _key: '!items.effects!fdd81e815b614df0.LDpHxRmD0RYuwJcF'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8c5210488cd87198
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/storm-mage-adept.webp
+    name: Storm Mage Adept
+    system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.costs.tweaks.adept
+              phase: normal
+              priority: 10
+              qualifier: '@class.stormMage'
+              target: ability
+              type: upgrade
+              value: '1'
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      identifier: storm-mage-adept
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>You are @L[Keyword:Adept]{adept} at @L[Category:Storm Mage class
+          abilities]{abilities} you get from ranks in @L[Class:Storm Mage]{Storm
+          Mage}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
     transfer: true
     type: ability
 folder: 997cd433ccad17d7

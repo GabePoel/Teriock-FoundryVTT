@@ -4,16 +4,16 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.68
+  systemVersion: 0.12.15
 effects:
-  - _id: U2hjlss0CQWtTn3y
-    _key: '!items.effects!bf9664fa28ef61d6.U2hjlss0CQWtTn3y'
+  - _id: 4FfL5thSMduVECIu
+    _key: '!items.effects!bf9664fa28ef61d6.4FfL5thSMduVECIu'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.bc223260c6f1bc70
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/acidic-blood.webp
     name: Acidic Blood
     system:
@@ -25,7 +25,10 @@ effects:
         unit: unlimited
       effectTypes:
         - automatic
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -35,6 +38,7 @@ effects:
       identifier: acidic-blood
       interaction: manifest
       maneuver: passive
+      mundane: false
       overview:
         base: >-
           <p>Any @L[Category:Weapons]{weapon} that deals @L[Core:Damage]{damage}
@@ -53,14 +57,14 @@ effects:
         are able to.</p>
     transfer: true
     type: ability
-  - _id: mUyly3hRVePhgtyc
-    _key: '!items.effects!bf9664fa28ef61d6.mUyly3hRVePhgtyc'
+  - _id: 3C7YJ0e3lTyBFlIH
+    _key: '!items.effects!bf9664fa28ef61d6.3C7YJ0e3lTyBFlIH'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.6f6aa56d2e5c27c4
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/advanced-smell.webp
     name: Advanced Smell
     system:
@@ -76,7 +80,10 @@ effects:
         unit: unlimited
       effectTypes:
         - sensory
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -86,6 +93,7 @@ effects:
       identifier: advanced-smell
       interaction: manifest
       maneuver: passive
+      mundane: false
       overview:
         base: >-
           <p>You can passively smell the types of all living creatures within 30
@@ -110,14 +118,96 @@ effects:
           value: 2
     transfer: true
     type: ability
-  - _id: qO9fV9dCrNLPNO2H
-    _key: '!items.effects!bf9664fa28ef61d6.qO9fV9dCrNLPNO2H'
+  - _id: DDrsE1nFRJwCp6p4
+    _key: '!items.effects!bf9664fa28ef61d6.DDrsE1nFRJwCp6p4'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.6c43c5ea09e100d5
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/scent-seeing.webp
+    name: Scent Seeing
+    system:
+      _sup: 3C7YJ0e3lTyBFlIH
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.senses.smell
+              phase: normal
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              type: upgrade
+              value: '10'
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+      class: berserker
+      competence:
+        raw: 0
+      delivery: aura
+      duration:
+        conditions:
+          absent:
+            - down
+        raw: '0'
+        unit: unlimited
+      effectTypes:
+        - sensory
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: scent-seeing
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>You know the exact location of all target creatures. You continue
+          to know the location of all targets within 10 feet, whether they are
+          or you are moving or not, so long as they are still within 10 feet of
+          you.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        raw: '10'
+        unit: ft
+      requirements: >-
+        <p>You are not @L[Condition:Anosmatic]{anosmatic} and the target is not
+        @L[Condition:Odorless]{odorless}.</p>
+      skill: true
+      standard: true
+      targets:
+        - creature
+    transfer: true
+    type: ability
+  - _id: wYZqpEUtStspmMm8
+    _key: '!items.effects!bf9664fa28ef61d6.wYZqpEUtStspmMm8'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.c99638056493f146
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: icons/creatures/slimes/slime-giant-face-eyes.webp
     name: Blind Fighting
     system:
@@ -151,7 +241,10 @@ effects:
         unit: unlimited
       effectTypes:
         - sensory
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -161,6 +254,7 @@ effects:
       identifier: blind-fighting
       interaction: manifest
       maneuver: passive
+      mundane: false
       overview:
         base: >-
           <p>You can sense up to 60 feet around you even when you are
@@ -184,14 +278,14 @@ effects:
           value: 1
     transfer: true
     type: ability
-  - _id: gCk4Bms4F5mla5C3
-    _key: '!items.effects!bf9664fa28ef61d6.gCk4Bms4F5mla5C3'
+  - _id: NWZ9vlKt5agHUvDW
+    _key: '!items.effects!bf9664fa28ef61d6.NWZ9vlKt5agHUvDW'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.0d78f7478e1024cb
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/dark-vision.webp
     name: Dark Vision
     system:
@@ -225,7 +319,10 @@ effects:
         unit: unlimited
       effectTypes:
         - sensory
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -235,6 +332,7 @@ effects:
       identifier: dark-vision
       interaction: manifest
       maneuver: passive
+      mundane: false
       overview:
         base: >-
           <p>You can see in the dark up to 60 feet as though it is dim
@@ -249,14 +347,14 @@ effects:
         - self
     transfer: true
     type: ability
-  - _id: vO9ZXk1XuqqR2muc
-    _key: '!items.effects!bf9664fa28ef61d6.vO9ZXk1XuqqR2muc'
+  - _id: f1EpvWSfApzMbwYB
+    _key: '!items.effects!bf9664fa28ef61d6.f1EpvWSfApzMbwYB'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.f927c5a43cc3b312
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/devour.webp
     name: Devour
     system:
@@ -266,7 +364,10 @@ effects:
       duration:
         raw: '0'
         unit: instant
-      executionTime: a2
+      executionTime:
+        base: a2
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -276,6 +377,7 @@ effects:
       identifier: devour
       interaction: attack
       maneuver: active
+      mundane: false
       piercing:
         raw: 0
       powerSources:
@@ -292,14 +394,14 @@ effects:
         - creature
     transfer: true
     type: ability
-  - _id: EvXAJt9JaRDl9IEM
-    _key: '!items.effects!bf9664fa28ef61d6.EvXAJt9JaRDl9IEM'
+  - _id: WQ2Xr4M76I6NInMJ
+    _key: '!items.effects!bf9664fa28ef61d6.WQ2Xr4M76I6NInMJ'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.f74c24d6438b7fea
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     img: icons/creatures/slimes/slime-movement-splashing-yellow.webp
     name: Gooey Damage Reduction
     system:
@@ -309,7 +411,10 @@ effects:
       duration:
         raw: '0'
         unit: unlimited
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -319,6 +424,7 @@ effects:
       identifier: gooey-damage-reduction
       interaction: manifest
       maneuver: passive
+      mundane: false
       overview:
         base: >-
           <p>All @L[Core:Damage]{damage} you take is
@@ -333,17 +439,14 @@ effects:
         - self
     transfer: true
     type: ability
-  - _id: VSIud5pe9iqQHJ0P
-    _key: '!items.effects!bf9664fa28ef61d6.VSIud5pe9iqQHJ0P'
+  - _id: 3G0ZmkJzscYTXZNW
+    _key: '!items.effects!bf9664fa28ef61d6.3G0ZmkJzscYTXZNW'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.3dea135aaa9525d7
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
-    flags:
-      teriock:
-        dontConsume: false
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/light-ray.webp
     name: Light Ray
     system:
@@ -430,7 +533,10 @@ effects:
         unit: minute
       elements:
         - life
-      executionTime: a1
+      executionTime:
+        base: a1
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -443,6 +549,7 @@ effects:
       identifier: light-ray
       interaction: attack
       maneuver: active
+      mundane: false
       piercing:
         raw: 1
       powerSources:
@@ -463,14 +570,14 @@ effects:
         - creature
     transfer: true
     type: ability
-  - _id: IqH5wqgO1HtAXCEp
-    _key: '!items.effects!bf9664fa28ef61d6.IqH5wqgO1HtAXCEp'
+  - _id: cg7GQZ7IYKGRM1Si
+    _key: '!items.effects!bf9664fa28ef61d6.cg7GQZ7IYKGRM1Si'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.1d13190e5b38bda6
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/normal-sneak.webp
     name: Normal Sneak
     system:
@@ -480,7 +587,10 @@ effects:
       duration:
         raw: '0'
         unit: unlimited
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -490,6 +600,7 @@ effects:
       identifier: normal-sneak
       interaction: manifest
       maneuver: passive
+      mundane: false
       piercing:
         raw: 0
       powerSources:
@@ -504,14 +615,14 @@ effects:
           value: 0
     transfer: true
     type: ability
-  - _id: NfiWbZTiELvkYStf
-    _key: '!items.effects!bf9664fa28ef61d6.NfiWbZTiELvkYStf'
+  - _id: KOQ8xmXMrmE4WYPP
+    _key: '!items.effects!bf9664fa28ef61d6.KOQ8xmXMrmE4WYPP'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.1d13190e5b38bda6
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/normal-sneak.webp
     name: Normal Sneak
     system:
@@ -521,7 +632,10 @@ effects:
       duration:
         raw: '0'
         unit: unlimited
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -531,6 +645,7 @@ effects:
       identifier: normal-sneak
       interaction: manifest
       maneuver: passive
+      mundane: false
       piercing:
         raw: 0
       powerSources:
@@ -545,14 +660,14 @@ effects:
           value: 0
     transfer: true
     type: ability
-  - _id: Pq7TJYz2sJRI1Yan
-    _key: '!items.effects!bf9664fa28ef61d6.Pq7TJYz2sJRI1Yan'
+  - _id: BrhiGfLeYqduINYV
+    _key: '!items.effects!bf9664fa28ef61d6.BrhiGfLeYqduINYV'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.423d45de3530311a
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: icons/creatures/slimes/slime-movement-pseudopods-teal.webp
     name: Ooze Mind
     system:
@@ -607,7 +722,10 @@ effects:
         unit: unlimited
       effectTypes:
         - immunity
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -617,6 +735,7 @@ effects:
       identifier: ooze-mind
       interaction: manifest
       maneuver: passive
+      mundane: false
       overview:
         base: >-
           <p>You are @L[Keyword:Immunity]{immune} to being
@@ -633,14 +752,14 @@ effects:
         - self
     transfer: true
     type: ability
-  - _id: O63uzz1gEsi9JyJ1
-    _key: '!items.effects!bf9664fa28ef61d6.O63uzz1gEsi9JyJ1'
+  - _id: jXHfRkoZNjeiC6e2
+    _key: '!items.effects!bf9664fa28ef61d6.jXHfRkoZNjeiC6e2'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.2e92597058dd0b95
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/resist-effects.webp
     name: Resist Effects
     system:
@@ -688,7 +807,10 @@ effects:
         - resistance
       elements:
         - storm
-      executionTime: a1
+      executionTime:
+        base: a1
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -698,6 +820,7 @@ effects:
       identifier: resist-effects
       interaction: manifest
       maneuver: active
+      mundane: false
       overview:
         base: >-
           <p>Pick one of the following @L[Category:Effects]{effect types}. You
@@ -737,14 +860,14 @@ effects:
         - self
     transfer: true
     type: ability
-  - _id: UP4bKR0UYf7uPXJh
-    _key: '!items.effects!bf9664fa28ef61d6.UP4bKR0UYf7uPXJh'
+  - _id: SAY5OShwYEVnmQGB
+    _key: '!items.effects!bf9664fa28ef61d6.SAY5OShwYEVnmQGB'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.919e1424f589c498
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/slow.webp
     name: Slow
     system:
@@ -754,7 +877,10 @@ effects:
       duration:
         raw: '0'
         unit: unlimited
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -764,6 +890,7 @@ effects:
       identifier: slow
       interaction: manifest
       maneuver: passive
+      mundane: false
       piercing:
         raw: 0
       powerSources:
@@ -778,14 +905,14 @@ effects:
           value: -1
     transfer: true
     type: ability
-  - _id: KzGXI8BzPx4Pdupo
-    _key: '!items.effects!bf9664fa28ef61d6.KzGXI8BzPx4Pdupo'
+  - _id: eVrIbSgW7K6xjQEZ
+    _key: '!items.effects!bf9664fa28ef61d6.eVrIbSgW7K6xjQEZ'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.f1a9a7ab79b2dc14
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/tiny-strength.webp
     name: Tiny Strength
     system:
@@ -795,7 +922,10 @@ effects:
       duration:
         raw: '0'
         unit: unlimited
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -805,6 +935,7 @@ effects:
       identifier: tiny-strength
       interaction: manifest
       maneuver: passive
+      mundane: false
       piercing:
         raw: 0
       powerSources:
@@ -819,14 +950,14 @@ effects:
           value: -2
     transfer: true
     type: ability
-  - _id: rgVqWM8Pg5DUwdFx
-    _key: '!items.effects!bf9664fa28ef61d6.rgVqWM8Pg5DUwdFx'
+  - _id: t9onZaK0Iyr3y3Pb
+    _key: '!items.effects!bf9664fa28ef61d6.t9onZaK0Iyr3y3Pb'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.be49083356b0f9c7
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/unconsciousness-immunity.webp
     name: Unconsciousness Immunity
     system:
@@ -860,7 +991,10 @@ effects:
         unit: unlimited
       effectTypes:
         - immunity
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -870,6 +1004,7 @@ effects:
       identifier: unconsciousness-immunity
       interaction: manifest
       maneuver: passive
+      mundane: false
       overview:
         base: >-
           <p>You are @L[Keyword:Immunity]{immune} to falling
@@ -884,14 +1019,14 @@ effects:
         - self
     transfer: true
     type: ability
-  - _id: 8lL5utpmrl21kfTw
-    _key: '!items.effects!bf9664fa28ef61d6.8lL5utpmrl21kfTw'
+  - _id: bhiNrn0XBCTDkpBN
+    _key: '!items.effects!bf9664fa28ef61d6.bhiNrn0XBCTDkpBN'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.be255d05a54f0291
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/vitals-durability.webp
     name: Vitals Durability
     system:
@@ -932,7 +1067,10 @@ effects:
         unit: unlimited
       effectTypes:
         - immunity
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -942,6 +1080,7 @@ effects:
       identifier: vitals-durability
       interaction: manifest
       maneuver: passive
+      mundane: false
       overview:
         base: >-
           <p>You are @L[Keyword:Immunity]{immune} to @L[Category:Bows]{arrows}
@@ -954,88 +1093,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
-    type: ability
-  - _id: 1sKghF7G0FuJDbmk
-    _key: '!items.effects!bf9664fa28ef61d6.1sKghF7G0FuJDbmk'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.6c43c5ea09e100d5
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.4
-    img: systems/teriock/src/icons/abilities/scent-seeing.webp
-    name: Scent Seeing
-    system:
-      _sup: mUyly3hRVePhgtyc
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.senses.smell
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: upgrade
-              value: '10'
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-      class: berserker
-      competence:
-        raw: 0
-      delivery: aura
-      duration:
-        conditions:
-          absent:
-            - down
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - sensory
-      executionTime:
-        base: passive
-        slow:
-          unit: second
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: scent-seeing
-      interaction: manifest
-      maneuver: passive
-      mundane: false
-      overview:
-        base: >-
-          <p>You know the exact location of all target creatures. You continue
-          to know the location of all targets within 10 feet, whether they are
-          or you are moving or not, so long as they are still within 10 feet of
-          you.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        raw: '10'
-        unit: ft
-      requirements: >-
-        <p>You are not @L[Condition:Anosmatic]{anosmatic} and the target is not
-        @L[Condition:Odorless]{odorless}.</p>
-      skill: true
-      standard: true
-      targets:
-        - creature
     transfer: true
     type: ability
 folder: ab73d338653acde3

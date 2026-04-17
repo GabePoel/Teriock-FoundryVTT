@@ -1,20 +1,20 @@
-_id: LEh7AgAbYnqaYuVv
-_key: '!items!LEh7AgAbYnqaYuVv'
+_id: hKf8GDcXF4Ft5Z28
+_key: '!items!hKf8GDcXF4Ft5Z28'
 _stats:
   compendiumSource: Compendium.teriock.classes.Item.296ddd5ebb48aebd
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.23
+  systemVersion: 0.12.15
 effects:
   - _id: PioQvKwJDZKIYNi3
-    _key: '!items.effects!LEh7AgAbYnqaYuVv.PioQvKwJDZKIYNi3'
+    _key: '!items.effects!hKf8GDcXF4Ft5Z28.PioQvKwJDZKIYNi3'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.b0c96045f72875ba
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     flags:
       teriock:
         category: support
@@ -29,7 +29,10 @@ effects:
       duration:
         raw: '0'
         unit: unlimited
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -39,6 +42,7 @@ effects:
       identifier: armor-master
       interaction: manifest
       maneuver: passive
+      mundane: false
       overview:
         base: >-
           <p>You gain @L[Ability:Master Armor Smith]{Master Armor Smith} and
@@ -56,13 +60,13 @@ effects:
     transfer: true
     type: ability
   - _id: vLlgfZ2tZq02juSg
-    _key: '!items.effects!LEh7AgAbYnqaYuVv.vLlgfZ2tZq02juSg'
+    _key: '!items.effects!hKf8GDcXF4Ft5Z28.vLlgfZ2tZq02juSg'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.0787d6514c191157
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     flags:
       teriock:
         category: combat
@@ -98,7 +102,10 @@ effects:
       duration:
         raw: '0'
         unit: instant
-      executionTime: r1
+      executionTime:
+        base: r1
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -108,6 +115,7 @@ effects:
       identifier: armor-wound
       interaction: manifest
       maneuver: reactive
+      mundane: false
       overview:
         base: >-
           <p>The triggering effect @L[Core:Fizzles]{fizzles} against you (and
@@ -127,14 +135,14 @@ effects:
       trigger: <p>You would take damage.</p>
     transfer: true
     type: ability
-  - _id: p3zVByy7SOryHBZX
-    _key: '!items.effects!LEh7AgAbYnqaYuVv.p3zVByy7SOryHBZX'
+  - _id: vq3ihca92fDEpEkc
+    _key: '!items.effects!hKf8GDcXF4Ft5Z28.vq3ihca92fDEpEkc'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.1FOF5FOKhsdzaKby
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/master-armor-smith.webp
     name: Master Armor Smith
     system:
@@ -200,14 +208,14 @@ effects:
         - self
     transfer: true
     type: ability
-  - _id: zX8BrCxv5mIMg26E
-    _key: '!items.effects!LEh7AgAbYnqaYuVv.zX8BrCxv5mIMg26E'
+  - _id: 0g7fEaT1cE8QQyTd
+    _key: '!items.effects!hKf8GDcXF4Ft5Z28.0g7fEaT1cE8QQyTd'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.Y7MbOSBjwwdMPo90
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/runic-armor.webp
     name: Runic Armor
     system:
@@ -308,12 +316,8 @@ system:
   statDice:
     hp:
       disabled: false
-      faces: 12
-      number:
-        raw: '1'
+      formula: 1d12
     mp:
       disabled: false
-      faces: 8
-      number:
-        raw: '1'
+      formula: 1d8
 type: rank

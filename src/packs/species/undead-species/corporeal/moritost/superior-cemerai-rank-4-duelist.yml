@@ -1,20 +1,20 @@
-_id: 2wc7vk29VUbTTFZG
-_key: '!items!2wc7vk29VUbTTFZG'
+_id: c3vARGYgkapF7wTV
+_key: '!items!c3vARGYgkapF7wTV'
 _stats:
   compendiumSource: Compendium.teriock.classes.Item.c9ac57bad8e1fbb5
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.23
+  systemVersion: 0.12.15
 effects:
   - _id: ygSqYQJfPOv9a0Fr
-    _key: '!items.effects!2wc7vk29VUbTTFZG.ygSqYQJfPOv9a0Fr'
+    _key: '!items.effects!c3vARGYgkapF7wTV.ygSqYQJfPOv9a0Fr'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.2979c948c07b8151
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     flags:
       teriock:
         category: combat
@@ -50,7 +50,10 @@ effects:
             - down
         raw: '0'
         unit: unlimited
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -60,6 +63,7 @@ effects:
       identifier: final-fury
       interaction: manifest
       maneuver: passive
+      mundane: false
       overview:
         base: >-
           <p>While @L[Condition:Defying Death]{defying death}, your
@@ -81,13 +85,13 @@ effects:
     transfer: true
     type: ability
   - _id: yZ3N79vChFytd8iT
-    _key: '!items.effects!2wc7vk29VUbTTFZG.yZ3N79vChFytd8iT'
+    _key: '!items.effects!c3vARGYgkapF7wTV.yZ3N79vChFytd8iT'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.07806fe5345b9727
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     flags:
       teriock:
         category: support
@@ -102,7 +106,11 @@ effects:
       duration:
         raw: '0'
         unit: unlimited
-      executionTime: 10 Minutes
+      executionTime:
+        base: 10 Minutes
+        slow:
+          raw: '10'
+          unit: minute
       expansion:
         featSaveAttribute: mov
         range:
@@ -112,6 +120,7 @@ effects:
       identifier: hara-kiri
       interaction: manifest
       maneuver: slow
+      mundane: false
       overview:
         base: >-
           <p>The next time you would pull from the @L[Core:Death Bag]{death
@@ -167,12 +176,8 @@ system:
   statDice:
     hp:
       disabled: false
-      faces: 12
-      number:
-        raw: '1'
+      formula: 1d12
     mp:
       disabled: false
-      faces: 8
-      number:
-        raw: '1'
+      formula: 1d8
 type: rank

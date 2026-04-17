@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.64
+  systemVersion: 0.12.15
 effects:
   - _id: bashing000000000
     _key: '!items.effects!2333d7e3e52b61c1.bashing000000000'
@@ -49,6 +49,94 @@ effects:
       identifier: flaming
     transfer: true
     type: property
+  - _id: KTnNpMYI2qxddP3V
+    _key: '!items.effects!2333d7e3e52b61c1.KTnNpMYI2qxddP3V'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.639b14658b0d2e1c
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/properties/glowing.webp
+    name: Glowing
+    system:
+      _sup: W7zBwBVrBOlOAAnp
+      applyIfUnequipped: false
+      automations:
+        parameterChanges:
+          _id: parameterChanges
+          changes:
+            - key: token.light.dim
+              phase: normal
+              priority: 5
+              qualifier: '1'
+              target: Actor
+              type: upgrade
+              value: '10'
+            - key: token.light.color
+              phase: normal
+              priority: 5
+              qualifier: '1'
+              target: Actor
+              type: override
+              value: '#C64600'
+            - key: token.light.animation.type
+              phase: normal
+              priority: 5
+              qualifier: '1'
+              target: Actor
+              type: override
+              value: torch
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 0
+            - 1
+          type: changes
+      competence:
+        raw: 0
+      description: >-
+        <p>If an item is <b>[[lookup name style=lc]]</b>, it is visible in the
+        dark and produces light that makes other things visible. When an item
+        specifies if it's [[lookup name style=lc]], it may have a value in
+        parentheses that indicates the radius of the light. If no value is
+        specified, then the item is visible, but glows faintly enough that it
+        doesn't illuminate other objects unless they are held <i>right</i> next
+        to it.</p>
+      form: intrinsic
+      identifier: glowing
+      mundane: false
+    transfer: true
+    type: property
+  - _id: 1ZwMjsylEFU8BvWk
+    _key: '!items.effects!2333d7e3e52b61c1.1ZwMjsylEFU8BvWk'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.05897268aa513ad0
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/properties/burning.webp
+    name: Burning
+    system:
+      _sup: W7zBwBVrBOlOAAnp
+      competence:
+        raw: 0
+      damageType: fire
+      description: >-
+        <p>An item that is <b>[[lookup name style=lc]]</b>, deals
+        @L[Damage:Fire]{fire damage} and can be used to deliver
+        @L[Ability:Burn]{Burn}.</p>
+      form: intrinsic
+      identifier: burning
+      mundane: false
+    transfer: true
+    type: property
 folder: a133b0539876f28f
 img: systems/teriock/src/icons/equipment/torch.webp
 name: Torch
@@ -61,10 +149,9 @@ system:
     base: '1'
   equipmentClasses:
     - supplies
-  equipmentType: Torch
+  equipmentType: torch
   identifier: torch
-  minStr:
-    raw: '-3'
+  minStr: -3
   powerLevel: mundane
   range:
     long:
@@ -74,6 +161,5 @@ system:
     short:
       unit: melee
   vitals: false
-  weight:
-    raw: '1'
+  weight: 1
 type: equipment

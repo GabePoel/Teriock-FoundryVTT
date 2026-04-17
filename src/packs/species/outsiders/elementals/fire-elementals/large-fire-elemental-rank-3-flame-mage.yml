@@ -1,20 +1,20 @@
-_id: NXAZRXvKLoec9F2i
-_key: '!items!NXAZRXvKLoec9F2i'
+_id: XVzPMlAUvtd00Dze
+_key: '!items!XVzPMlAUvtd00Dze'
 _stats:
   compendiumSource: Compendium.teriock.classes.Item.0615c1e02cf44dbd
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.23
+  systemVersion: 0.12.15
 effects:
   - _id: CaTTWTstOULxfkrp
-    _key: '!items.effects!NXAZRXvKLoec9F2i.CaTTWTstOULxfkrp'
+    _key: '!items.effects!XVzPMlAUvtd00Dze.CaTTWTstOULxfkrp'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.7dbf0f42e843d563
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     flags:
       teriock:
         category: combat
@@ -29,7 +29,10 @@ effects:
       duration:
         raw: '0'
         unit: unlimited
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -39,6 +42,7 @@ effects:
       identifier: additional-flame-rotators
       interaction: manifest
       maneuver: passive
+      mundane: false
       overview:
         base: >-
           <p>Add @L[Ability:Cremate]{Cremate} and @L[Ability:Minor Weapon
@@ -56,13 +60,13 @@ effects:
     transfer: true
     type: ability
   - _id: EjA48yTYBOoAhMOD
-    _key: '!items.effects!NXAZRXvKLoec9F2i.EjA48yTYBOoAhMOD'
+    _key: '!items.effects!XVzPMlAUvtd00Dze.EjA48yTYBOoAhMOD'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.f4719f88dc5f8192
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     flags:
       teriock:
         category: support
@@ -116,7 +120,10 @@ effects:
       elderSorcery: true
       elements:
         - flame
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -126,6 +133,7 @@ effects:
       identifier: expanded-flame-elder-sorcery
       interaction: feat
       maneuver: passive
+      mundane: false
       overview:
         base: >-
           <p>In addition to the custom rotator spells you create, you can learn
@@ -167,14 +175,129 @@ effects:
         - self
     transfer: true
     type: ability
-  - _id: 1kZZWRw38qxY84xG
-    _key: '!items.effects!NXAZRXvKLoec9F2i.1kZZWRw38qxY84xG'
+  - _id: IGwlc5qWJqhIjQvn
+    _key: '!items.effects!XVzPMlAUvtd00Dze.IGwlc5qWJqhIjQvn'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.2496ec9ba004a8e2
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/cremate.webp
+    name: Cremate
+    system:
+      _sup: CaTTWTstOULxfkrp
+      automations:
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          common:
+            - bag
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          showConfirmationDialog: true
+          type: common
+        3a62dd96319ca135:
+          _id: 3a62dd96319ca135
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          executor: false
+          heighten:
+            - 1
+            - 0
+          relation: apply
+          status: burned
+          target: false
+          type: status
+        5e9e1d2033fe152a:
+          _id: 5e9e1d2033fe152a
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          executor: false
+          heighten:
+            - 1
+            - 0
+          relation: apply
+          status: ruined
+          target: false
+          type: status
+      class: flameMage
+      competence:
+        raw: 0
+      costs:
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+        primary:
+          mp:
+            formula: '1'
+            type: formula
+      delivery: weapon
+      duration:
+        raw: '0'
+        unit: instant
+      effectTypes:
+        - killing
+        - damaging
+      elements:
+        - flame
+      executionTime:
+        base: a1
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      identifier: cremate
+      interaction: attack
+      invoked: true
+      maneuver: active
+      mundane: false
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: contact
+      requirements: <p>Target is @L[Condition:Down]{down}.</p>
+      results:
+        hit: >-
+          <p>Target is @L[Condition:Burned]{burned}, and
+          @L[Condition:Ruined]{ruined}.</p>
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - vitals
+    transfer: true
+    type: ability
+  - _id: NMHRERuGVzVJdnox
+    _key: '!items.effects!XVzPMlAUvtd00Dze.NMHRERuGVzVJdnox'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.7e1e0b3ce0953833
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/minor-weapon-enchantment.webp
     name: Minor Weapon Enchantment
     system:
@@ -324,8 +447,6 @@ effects:
       duration:
         raw: '1'
         unit: hour
-      effectTypes:
-        - magical
       elements:
         - flame
       executionTime:
@@ -373,121 +494,6 @@ effects:
         - weapon
     transfer: true
     type: ability
-  - _id: 6VLcWrX97rttZ0fF
-    _key: '!items.effects!NXAZRXvKLoec9F2i.6VLcWrX97rttZ0fF'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.2496ec9ba004a8e2
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.4
-    img: systems/teriock/src/icons/abilities/cremate.webp
-    name: Cremate
-    system:
-      _sup: CaTTWTstOULxfkrp
-      automations:
-        1728b3a84ea27844:
-          _id: 1728b3a84ea27844
-          common:
-            - bag
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          showConfirmationDialog: true
-          type: common
-        3a62dd96319ca135:
-          _id: 3a62dd96319ca135
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          executor: false
-          heighten:
-            - 1
-            - 0
-          relation: apply
-          status: burned
-          target: false
-          type: status
-        5e9e1d2033fe152a:
-          _id: 5e9e1d2033fe152a
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          executor: false
-          heighten:
-            - 1
-            - 0
-          relation: apply
-          status: ruined
-          target: false
-          type: status
-      class: flameMage
-      competence:
-        raw: 0
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: weapon
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - killing
-        - damaging
-      elements:
-        - flame
-      executionTime:
-        base: a1
-        slow:
-          unit: second
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: cremate
-      interaction: attack
-      invoked: true
-      maneuver: active
-      mundane: false
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      requirements: <p>Target is @L[Condition:Down]{down}.</p>
-      results:
-        hit: >-
-          <p>Target is @L[Condition:Burned]{burned}, and
-          @L[Condition:Ruined]{ruined}.</p>
-      rotator: true
-      spell: true
-      standard: true
-      targets:
-        - vitals
-    transfer: true
-    type: ability
 folder: da5b8437ae291af1
 img: systems/teriock/src/icons/ranks/rank-3-flame-mage.webp
 name: Rank 3 Flame Mage
@@ -511,12 +517,8 @@ system:
   statDice:
     hp:
       disabled: false
-      faces: 8
-      number:
-        raw: '1'
+      formula: 1d8
     mp:
       disabled: false
-      faces: 12
-      number:
-        raw: '1'
+      formula: 1d12
 type: rank

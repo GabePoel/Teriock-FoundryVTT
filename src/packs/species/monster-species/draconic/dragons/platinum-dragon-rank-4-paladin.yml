@@ -1,83 +1,20 @@
-_id: 1UkKKoCc1g0rR1gy
-_key: '!items!1UkKKoCc1g0rR1gy'
+_id: PT4MX18MtzzxOPRU
+_key: '!items!PT4MX18MtzzxOPRU'
 _stats:
   compendiumSource: Compendium.teriock.classes.Item.b7be3bbbfdac8090
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.23
+  systemVersion: 0.12.15
 effects:
-  - _id: FBqLJrEYXzuFiQrr
-    _key: '!items.effects!1UkKKoCc1g0rR1gy.FBqLJrEYXzuFiQrr'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.ba2f16b739e6be3b
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.2
-    img: systems/teriock/src/icons/abilities/detect-alignment.webp
-    name: Detect Alignment
-    system:
-      _sup: 1cG0jJ1CR42WRMxp
-      class: paladin
-      competence:
-        raw: 0
-      costs:
-        components:
-          material:
-            description: <p>Something symbolic of your deity.</p>
-            type: description
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: sight
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - truthDetecting
-      executionTime: 10 Minutes
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: detect-alignment
-      interaction: manifest
-      maneuver: slow
-      overview:
-        base: >-
-          <p>You learn whether your deity considers the alignment of the target.
-          (Good/neutral/evil, chaotic/neutral/lawful, etc.)</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - divine
-      range:
-        raw: '5'
-        unit: ft
-      ritual: true
-      skill: true
-      standard: true
-      targets:
-        - creature
-        - item
-    transfer: true
-    type: ability
   - _id: vtIHdhj50rKsMcXQ
-    _key: '!items.effects!1UkKKoCc1g0rR1gy.vtIHdhj50rKsMcXQ'
+    _key: '!items.effects!PT4MX18MtzzxOPRU.vtIHdhj50rKsMcXQ'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.8fbe385fdebca862
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     flags:
       teriock:
         category: combat
@@ -118,7 +55,10 @@ effects:
         unit: instant
       effectTypes:
         - healing
-      executionTime: a1
+      executionTime:
+        base: a1
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -134,6 +74,7 @@ effects:
       interaction: attack
       invoked: true
       maneuver: active
+      mundane: false
       piercing:
         raw: 0
       powerSources:
@@ -150,13 +91,13 @@ effects:
     transfer: true
     type: ability
   - _id: 1cG0jJ1CR42WRMxp
-    _key: '!items.effects!1UkKKoCc1g0rR1gy.1cG0jJ1CR42WRMxp'
+    _key: '!items.effects!PT4MX18MtzzxOPRU.1cG0jJ1CR42WRMxp'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.7ead47c000eea565
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     flags:
       teriock:
         category: support
@@ -171,7 +112,10 @@ effects:
       duration:
         raw: '0'
         unit: unlimited
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -181,6 +125,7 @@ effects:
       identifier: motive-discovery
       interaction: manifest
       maneuver: passive
+      mundane: false
       overview:
         base: >-
           <p>You gain @L[Ability:Sense Motive]{Sense Motive} and
@@ -197,14 +142,82 @@ effects:
         - self
     transfer: true
     type: ability
-  - _id: rlQtKHjeWuOHut7V
-    _key: '!items.effects!1UkKKoCc1g0rR1gy.rlQtKHjeWuOHut7V'
+  - _id: OX1CwB2qfQqVPirk
+    _key: '!items.effects!PT4MX18MtzzxOPRU.OX1CwB2qfQqVPirk'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.ba2f16b739e6be3b
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/detect-alignment.webp
+    name: Detect Alignment
+    system:
+      _sup: 1cG0jJ1CR42WRMxp
+      class: paladin
+      competence:
+        raw: 0
+      costs:
+        components:
+          material:
+            description: <p>Something symbolic of your deity.</p>
+            type: description
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+        primary:
+          mp:
+            formula: '1'
+            type: formula
+      delivery: sight
+      duration:
+        raw: '0'
+        unit: instant
+      effectTypes:
+        - truthDetecting
+      executionTime:
+        base: 10 Minutes
+        slow:
+          raw: '10'
+          unit: minute
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: detect-alignment
+      interaction: manifest
+      maneuver: slow
+      mundane: false
+      overview:
+        base: >-
+          <p>You learn whether your deity considers the alignment of the target.
+          (Good/neutral/evil, chaotic/neutral/lawful, etc.)</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - divine
+      range:
+        raw: '5'
+        unit: ft
+      ritual: true
+      skill: true
+      standard: true
+      targets:
+        - creature
+        - item
+    transfer: true
+    type: ability
+  - _id: T5wfEf2qjZ5bwYl0
+    _key: '!items.effects!PT4MX18MtzzxOPRU.T5wfEf2qjZ5bwYl0'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.4416620fb784b675
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/sense-motive.webp
     name: Sense Motive
     system:
@@ -218,7 +231,10 @@ effects:
         unit: instant
       effectTypes:
         - truthDetecting
-      executionTime: a1
+      executionTime:
+        base: a1
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -228,6 +244,7 @@ effects:
       identifier: sense-motive
       interaction: feat
       maneuver: active
+      mundane: false
       piercing:
         raw: 0
       powerSources:
@@ -273,12 +290,8 @@ system:
   statDice:
     hp:
       disabled: false
-      faces: 12
-      number:
-        raw: '1'
+      formula: 1d12
     mp:
       disabled: false
-      faces: 8
-      number:
-        raw: '1'
+      formula: 1d8
 type: rank

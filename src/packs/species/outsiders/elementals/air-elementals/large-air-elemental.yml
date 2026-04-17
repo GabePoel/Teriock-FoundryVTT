@@ -4,16 +4,16 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.68
+  systemVersion: 0.12.15
 effects:
-  - _id: lF6vh8EPpVqTQgjo
-    _key: '!items.effects!bc5fa913f6756c0d.lF6vh8EPpVqTQgjo'
+  - _id: ggNzLkWyvjBc8ikB
+    _key: '!items.effects!bc5fa913f6756c0d.ggNzLkWyvjBc8ikB'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.0d78f7478e1024cb
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/dark-vision.webp
     name: Dark Vision
     system:
@@ -47,7 +47,10 @@ effects:
         unit: unlimited
       effectTypes:
         - sensory
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -57,6 +60,7 @@ effects:
       identifier: dark-vision
       interaction: manifest
       maneuver: passive
+      mundane: false
       overview:
         base: >-
           <p>You can see in the dark up to 60 feet as though it is dim
@@ -71,14 +75,14 @@ effects:
         - self
     transfer: true
     type: ability
-  - _id: YKEfXqjbobb6nVoF
-    _key: '!items.effects!bc5fa913f6756c0d.YKEfXqjbobb6nVoF'
+  - _id: Uxv3YwIvsJcRE2TA
+    _key: '!items.effects!bc5fa913f6756c0d.Uxv3YwIvsJcRE2TA'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.ElgNURrH9OTECkbk
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/giant-strength.webp
     name: Giant Strength
     system:
@@ -89,7 +93,10 @@ effects:
       duration:
         raw: '0'
         unit: unlimited
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -99,6 +106,7 @@ effects:
       identifier: giant-strength
       interaction: manifest
       maneuver: passive
+      mundane: false
       overview:
         base: >-
           <p>You gain @L[Ability:Improved Strength]{Improved Strength} and
@@ -121,686 +129,18 @@ effects:
           value: 3
     transfer: true
     type: ability
-  - _id: 6drG9ZOMq7JPlXgu
-    _key: '!items.effects!bc5fa913f6756c0d.6drG9ZOMq7JPlXgu'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.6f886cb96290d8d4
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.4
-    img: systems/teriock/src/icons/abilities/life-magic-hexseal.webp
-    name: Life Magic Hexseal
-    system:
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.protections.hexseals.elements
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: add
-              value: life
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        conditions:
-          absent:
-            - down
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - hexseal
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: life-magic-hexseal
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You are @L[Keyword:Hexseal]{hexseal} to @L[Category:Magically
-          powered abilities]{magical} @L[Category:Life element abilities]{life
-          abilities}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      targets:
-        - self
-    transfer: true
-    type: ability
-  - _id: WtAjOqscFIByGOpp
-    _key: '!items.effects!bc5fa913f6756c0d.WtAjOqscFIByGOpp'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.P5i3FWFMMYPBuVtV
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.4
-    img: systems/teriock/src/icons/abilities/magical-durability.webp
-    name: Magical Durability
-    system:
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.protections.immunities.damageTypes
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: add
-              value: mundane
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - immunity
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: magical-durability
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You are @L[Keyword:Immunity]{immune} to @L[Damage:Mundane]{mundane}
-          @L[Core:Damage]{damage}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      targets:
-        - self
-    transfer: true
-    type: ability
-  - _id: pXokvG7tSkZ6gg80
-    _key: '!items.effects!bc5fa913f6756c0d.pXokvG7tSkZ6gg80'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.192c6cfdb6473a4f
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.4
-    img: systems/teriock/src/icons/abilities/mana-regenerating.webp
-    name: Mana Regenerating
-    system:
-      automations:
-        1728b3a84ea27844:
-          _id: 1728b3a84ea27844
-          common:
-            - revive
-            - bag
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          showConfirmationDialog: true
-          type: common
-        7OuG6efyOs2VWpp3:
-          _id: 7OuG6efyOs2VWpp3
-          competencies:
-            - 0
-            - 1
-            - 2
-          conditions:
-            absent:
-              - frozen
-          consumeStatDice: false
-          forHarm: false
-          heighten:
-            - 0
-            - 1
-          trigger: turnStart
-          type: revitalize
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - revival
-        - regeneration
-        - revitalization
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: mana-regenerating
-      interaction: manifest
-      limitation: >-
-        <p>Can only @L[Core:Revitalizing]{revitalize} @L[Core:Hit Points and
-        Mana Points]{MP} spent on @L[Category:Life element abilities]{life
-        element abilities}.</p>
-      maneuver: passive
-      overview:
-        base: >-
-          <p>At the start of each of your @L[Core:Turns]{turns}, you 
-          @L[Core:Revitalizing]{revitalize} and regain that many @L[Core:Hit
-          Points and Mana Points]{MP}. This does <i>not</i> consume your
-          @L[Core:MP]{mana die}. If you were @L[Condition:Dead]{dead} due to
-          @L[Core:Hit Points and Mana Points]{MP} loss, this brings you
-          @L[Condition:Alive]{back to life}. You only @L[Condition:Dead]{die}
-          due to @L[Core:Hit Points and Mana Points]{MP} loss if you start your
-          @L[Core:Turns]{turn} without successfully regenerating @L[Core:Hit
-          Points and Mana Points]{MP}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - primal
-      range:
-        unit: self
-      targets:
-        - self
-    transfer: true
-    type: ability
-  - _id: HRV3RnbTvSqdYypB
-    _key: '!items.effects!bc5fa913f6756c0d.HRV3RnbTvSqdYypB'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1c52eda8919d34a7
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.2
-    img: systems/teriock/src/icons/abilities/normal-movement.webp
-    name: Normal Movement
-    system:
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: normal-movement
-      interaction: manifest
-      maneuver: passive
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-      upgrades:
-        score:
-          attribute: mov
-          value: 0
-    transfer: true
-    type: ability
-  - _id: l0g73Rzc2hg9b7EX
-    _key: '!items.effects!bc5fa913f6756c0d.l0g73Rzc2hg9b7EX'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8249d99c527d09b1
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.2
-    img: systems/teriock/src/icons/abilities/normal-perception.webp
-    name: Normal Perception
-    system:
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: normal-perception
-      interaction: manifest
-      maneuver: passive
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-      upgrades:
-        score:
-          attribute: per
-          value: 0
-    transfer: true
-    type: ability
-  - _id: RJ1y2CmRtMBTeSZY
-    _key: '!items.effects!bc5fa913f6756c0d.RJ1y2CmRtMBTeSZY'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1d13190e5b38bda6
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.2
-    img: systems/teriock/src/icons/abilities/normal-sneak.webp
-    name: Normal Sneak
-    system:
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: normal-sneak
-      interaction: manifest
-      maneuver: passive
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-      upgrades:
-        score:
-          attribute: snk
-          value: 0
-    transfer: true
-    type: ability
-  - _id: DpR8p21OivqeUtDo
-    _key: '!items.effects!bc5fa913f6756c0d.DpR8p21OivqeUtDo'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.d1dcb2211545f54b
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.2
-    img: systems/teriock/src/icons/abilities/take-amorphous-elemental-form.webp
-    name: Take Amorphous Elemental Form
-    system:
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - transformation
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: take-amorphous-elemental-form
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>You take on an amorphous form of pure elemental magic. While in
-          this state you have all the innate @L[Category:Abilities]{abilities}
-          and @L[Category:Classes]{ranks} of your @L[Category:Elemental
-          creatures]{creature type}. However, you have no @L[Body:Hand]{hands},
-          @L[Body:Foot]{feet}, @L[Body:Mouth]{mouth}, nor any other
-          @L[Category:Body parts]{body parts}. The one exception to this are the
-          @L[Category:Tendrils]{tendrils} of your @L[Category:Elemental
-          creatures]{creature type}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      requirements: >-
-        <p>You are in a @L[Ability:Take Humanoid Elemental Form]{humanoid
-        elemental form}.</p>
-      targets:
-        - self
-    transfer: true
-    type: ability
-  - _id: biU5tLlG6hyJ1mZL
-    _key: '!items.effects!bc5fa913f6756c0d.biU5tLlG6hyJ1mZL'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.f28d714fdaac6dce
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.2
-    img: systems/teriock/src/icons/abilities/take-humanoid-elemental-form.webp
-    name: Take Humanoid Elemental Form
-    system:
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - transformation
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: take-humanoid-elemental-form
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>You take on a @L[Category:Humanoid creatures]{humanoid} form. While
-          in this state you have @L[Body:Hand]{hands}, @L[Body:Foot]{feet}, and
-          a @L[Body:Mouth]{mouth}. You keep all the innate
-          @L[Category:Abilities]{abilities} of your @L[Ability:Take Amorphous
-          Elemental Form]{amorphous elemental form}, but lose all innate
-          @L[Category:Classes]{ranks} that you gain from it.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      requirements: >-
-        <p>You are in an @L[Ability:Take Amorphous Elemental Form]{amorphous
-        elemental form}.</p>
-      targets:
-        - self
-    transfer: true
-    type: ability
-  - _id: PuXcCUDCHlwY8w8v
-    _key: '!items.effects!bc5fa913f6756c0d.PuXcCUDCHlwY8w8v'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.be49083356b0f9c7
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.4
-    img: systems/teriock/src/icons/abilities/unconsciousness-immunity.webp
-    name: Unconsciousness Immunity
-    system:
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.protections.immunities.statuses
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: add
-              value: unconscious
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - immunity
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: unconsciousness-immunity
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You are @L[Keyword:Immunity]{immune} to falling
-          @L[Condition:Unconscious]{unconscious}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      targets:
-        - self
-    transfer: true
-    type: ability
-  - _id: L5IoPyjB13Z31oXk
-    _key: '!items.effects!bc5fa913f6756c0d.L5IoPyjB13Z31oXk'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8aa8167e9f40cbb2
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.2
-    img: systems/teriock/src/icons/abilities/improved-strength.webp
-    name: Improved Strength
-    system:
-      _sup: YKEfXqjbobb6nVoF
-      class: knight
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime:
-        base: passive
-        slow:
-          unit: second
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: improved-strength
-      interaction: manifest
-      maneuver: passive
-      mundane: false
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
-          @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-      upgrades:
-        score:
-          attribute: str
-          value: 2
-    transfer: true
-    type: ability
-  - _id: L9QFNgjJGtoGLtqC
-    _key: '!items.effects!bc5fa913f6756c0d.L9QFNgjJGtoGLtqC'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.07a0880b230cdb14
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.2
-    img: systems/teriock/src/icons/abilities/beastly-strength.webp
-    name: Beastly Strength
-    system:
-      _sup: L5IoPyjB13Z31oXk
-      class: knight
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime:
-        base: passive
-        slow:
-          unit: second
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: beastly-strength
-      interaction: manifest
-      maneuver: passive
-      mundane: false
-      overview:
-        base: >-
-          <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
-          hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
-          Piercing]{Armor piercing} weapons must still be wielded in two hands
-          to be @L[Keyword:Armor Voiding]{AV0}.</div>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-      upgrades:
-        score:
-          attribute: str
-          value: 1
-    transfer: true
-    type: ability
-  - _id: tMLedgbtl6ghEwpo
-    _key: '!items.effects!bc5fa913f6756c0d.tMLedgbtl6ghEwpo'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.54f63d63ae4376a9
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.2
-    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
-    name: Improved Armor Piercing
-    system:
-      _sup: L5IoPyjB13Z31oXk
-      class: knight
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime:
-        base: passive
-        slow:
-          unit: second
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: improved-armor-piercing
-      interaction: manifest
-      maneuver: passive
-      mundane: false
-      overview:
-        base: >-
-          <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
-          piercing}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-    transfer: true
-    type: ability
-  - _id: tt5vDDsbKPDvL7R1
-    _key: '!items.effects!bc5fa913f6756c0d.tt5vDDsbKPDvL7R1'
+  - _id: LC26jdEbmdpiYY8s
+    _key: '!items.effects!bc5fa913f6756c0d.LC26jdEbmdpiYY8s'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.5pnQBaF30VIQrAZO
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
     name: Melee Damage Boost
     system:
-      _sup: YKEfXqjbobb6nVoF
+      _sup: Uxv3YwIvsJcRE2TA
       class: knight
       competence:
         raw: 0
@@ -846,6 +186,710 @@ effects:
         <p>You have hit a creature with a @L[Category:Damaging
         effects]{damaging} melee @L[Category:Weapon delivery abilities]{weapon}
         @L[Category:Attack abilities]{attack}.</p>
+    transfer: true
+    type: ability
+  - _id: skAFi2TCcZGkg7bJ
+    _key: '!items.effects!bc5fa913f6756c0d.skAFi2TCcZGkg7bJ'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.0B7iFJ6L6hYyX6H6
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/improved-strength.webp
+    name: Improved Strength
+    system:
+      _sup: Uxv3YwIvsJcRE2TA
+      class: knight
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: improved-strength
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
+          @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: 2
+    transfer: true
+    type: ability
+  - _id: 7p21IC0w34CfxCcc
+    _key: '!items.effects!bc5fa913f6756c0d.7p21IC0w34CfxCcc'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.07a0880b230cdb14
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/beastly-strength.webp
+    name: Beastly Strength
+    system:
+      _sup: skAFi2TCcZGkg7bJ
+      class: knight
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: beastly-strength
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
+          hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
+          Piercing]{Armor piercing} weapons must still be wielded in two hands
+          to be @L[Keyword:Armor Voiding]{AV0}.</div>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: 1
+    transfer: true
+    type: ability
+  - _id: Nx9Lo4ceTbxhSk6s
+    _key: '!items.effects!bc5fa913f6756c0d.Nx9Lo4ceTbxhSk6s'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.54f63d63ae4376a9
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
+    name: Improved Armor Piercing
+    system:
+      _sup: skAFi2TCcZGkg7bJ
+      class: knight
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: improved-armor-piercing
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
+          piercing}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: pGyEerr3e8pvExKT
+    _key: '!items.effects!bc5fa913f6756c0d.pGyEerr3e8pvExKT'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.6f886cb96290d8d4
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/life-magic-hexseal.webp
+    name: Life Magic Hexseal
+    system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.protections.hexseals.elements
+              phase: normal
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              type: add
+              value: life
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        conditions:
+          absent:
+            - down
+        raw: '0'
+        unit: unlimited
+      effectTypes:
+        - hexseal
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      identifier: life-magic-hexseal
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>You are @L[Keyword:Hexseal]{hexseal} to @L[Category:Magically
+          powered abilities]{magical} @L[Category:Life element abilities]{life
+          abilities}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: 11BkRKk3ENUXydEG
+    _key: '!items.effects!bc5fa913f6756c0d.11BkRKk3ENUXydEG'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.P5i3FWFMMYPBuVtV
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/magical-durability.webp
+    name: Magical Durability
+    system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.protections.immunities.damageTypes
+              phase: normal
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              type: add
+              value: mundane
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      effectTypes:
+        - immunity
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      identifier: magical-durability
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>You are @L[Keyword:Immunity]{immune} to @L[Damage:Mundane]{mundane}
+          @L[Core:Damage]{damage}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: H0OcYy9P9qTnG8cZ
+    _key: '!items.effects!bc5fa913f6756c0d.H0OcYy9P9qTnG8cZ'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.192c6cfdb6473a4f
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/mana-regenerating.webp
+    name: Mana Regenerating
+    system:
+      automations:
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          common:
+            - revive
+            - bag
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          showConfirmationDialog: true
+          type: common
+        7OuG6efyOs2VWpp3:
+          _id: 7OuG6efyOs2VWpp3
+          competencies:
+            - 0
+            - 1
+            - 2
+          conditions:
+            absent:
+              - frozen
+          consumeStatDice: false
+          forHarm: false
+          heighten:
+            - 0
+            - 1
+          trigger: turnStart
+          type: revitalize
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      effectTypes:
+        - revival
+        - regeneration
+        - revitalization
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      identifier: mana-regenerating
+      interaction: manifest
+      limitation: >-
+        <p>Can only @L[Core:Revitalizing]{revitalize} @L[Core:Hit Points and
+        Mana Points]{MP} spent on @L[Category:Life element abilities]{life
+        element abilities}.</p>
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>At the start of each of your @L[Core:Turns]{turns}, you 
+          @L[Core:Revitalizing]{revitalize} and regain that many @L[Core:Hit
+          Points and Mana Points]{MP}. This does <i>not</i> consume your
+          @L[Core:MP]{mana die}. If you were @L[Condition:Dead]{dead} due to
+          @L[Core:Hit Points and Mana Points]{MP} loss, this brings you
+          @L[Condition:Alive]{back to life}. You only @L[Condition:Dead]{die}
+          due to @L[Core:Hit Points and Mana Points]{MP} loss if you start your
+          @L[Core:Turns]{turn} without successfully regenerating @L[Core:Hit
+          Points and Mana Points]{MP}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - primal
+      range:
+        unit: self
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: TL3K6SsJrKnKwI3Z
+    _key: '!items.effects!bc5fa913f6756c0d.TL3K6SsJrKnKwI3Z'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1c52eda8919d34a7
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/normal-movement.webp
+    name: Normal Movement
+    system:
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: normal-movement
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: mov
+          value: 0
+    transfer: true
+    type: ability
+  - _id: Z0p9uEGLO1ObqiPT
+    _key: '!items.effects!bc5fa913f6756c0d.Z0p9uEGLO1ObqiPT'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8249d99c527d09b1
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/normal-perception.webp
+    name: Normal Perception
+    system:
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: normal-perception
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: per
+          value: 0
+    transfer: true
+    type: ability
+  - _id: OnUiINZF99ihOt5g
+    _key: '!items.effects!bc5fa913f6756c0d.OnUiINZF99ihOt5g'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1d13190e5b38bda6
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/normal-sneak.webp
+    name: Normal Sneak
+    system:
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: normal-sneak
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: snk
+          value: 0
+    transfer: true
+    type: ability
+  - _id: ntSwS4VwDQoqKn68
+    _key: '!items.effects!bc5fa913f6756c0d.ntSwS4VwDQoqKn68'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.d1dcb2211545f54b
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/take-amorphous-elemental-form.webp
+    name: Take Amorphous Elemental Form
+    system:
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: instant
+      effectTypes:
+        - transformation
+      executionTime:
+        base: a1
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      identifier: take-amorphous-elemental-form
+      interaction: manifest
+      maneuver: active
+      mundane: false
+      overview:
+        base: >-
+          <p>You take on an amorphous form of pure elemental magic. While in
+          this state you have all the innate @L[Category:Abilities]{abilities}
+          and @L[Category:Classes]{ranks} of your @L[Category:Elemental
+          creatures]{creature type}. However, you have no @L[Body:Hand]{hands},
+          @L[Body:Foot]{feet}, @L[Body:Mouth]{mouth}, nor any other
+          @L[Category:Body parts]{body parts}. The one exception to this are the
+          @L[Category:Tendrils]{tendrils} of your @L[Category:Elemental
+          creatures]{creature type}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      requirements: >-
+        <p>You are in a @L[Ability:Take Humanoid Elemental Form]{humanoid
+        elemental form}.</p>
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: tFi1fmCWxt1qEvGF
+    _key: '!items.effects!bc5fa913f6756c0d.tFi1fmCWxt1qEvGF'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.f28d714fdaac6dce
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/take-humanoid-elemental-form.webp
+    name: Take Humanoid Elemental Form
+    system:
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: instant
+      effectTypes:
+        - transformation
+      executionTime:
+        base: a1
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      identifier: take-humanoid-elemental-form
+      interaction: manifest
+      maneuver: active
+      mundane: false
+      overview:
+        base: >-
+          <p>You take on a @L[Category:Humanoid creatures]{humanoid} form. While
+          in this state you have @L[Body:Hand]{hands}, @L[Body:Foot]{feet}, and
+          a @L[Body:Mouth]{mouth}. You keep all the innate
+          @L[Category:Abilities]{abilities} of your @L[Ability:Take Amorphous
+          Elemental Form]{amorphous elemental form}, but lose all innate
+          @L[Category:Classes]{ranks} that you gain from it.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      requirements: >-
+        <p>You are in an @L[Ability:Take Amorphous Elemental Form]{amorphous
+        elemental form}.</p>
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: M1dfKhDwMgfIvNOt
+    _key: '!items.effects!bc5fa913f6756c0d.M1dfKhDwMgfIvNOt'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.be49083356b0f9c7
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/unconsciousness-immunity.webp
+    name: Unconsciousness Immunity
+    system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.protections.immunities.statuses
+              phase: normal
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              type: add
+              value: unconscious
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      effectTypes:
+        - immunity
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: unconsciousness-immunity
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>You are @L[Keyword:Immunity]{immune} to falling
+          @L[Condition:Unconscious]{unconscious}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      targets:
+        - self
     transfer: true
     type: ability
 folder: c0c0ec104c5cd2eb

@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.14
     flags:
       teriock:
         category: combat
@@ -60,7 +60,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.14
     flags:
       teriock:
         category: combat
@@ -116,7 +116,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     flags:
       teriock:
         category: support
@@ -226,7 +226,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.14
     flags:
       teriock:
         category: support
@@ -291,7 +291,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     flags:
       teriock:
         category: combat
@@ -364,7 +364,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     flags:
       teriock:
         category: support
@@ -426,193 +426,14 @@ effects:
         - self
     transfer: true
     type: ability
-  - _id: tbSEY1zR0XJ0PFW7
-    _key: '!items.effects!be25f9a8217037d7.tbSEY1zR0XJ0PFW7'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.26b16c55de4bc804
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.4
-    img: systems/teriock/src/icons/abilities/minor-item-enchantment.webp
-    name: Minor Item Enchantment
-    system:
-      _sup: xyIWsA97TGTU2AYX
-      automations:
-        72ce567009179bea:
-          _id: 72ce567009179bea
-          changeType: add
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          duration:
-            raw: '@h * 3600'
-            unit: second
-          heighten:
-            - 1
-          type: duration
-        8v0Wg06rCbu8V2LX:
-          _id: 8v0Wg06rCbu8V2LX
-          changes:
-            - key: system.tier.raw
-              phase: normal
-              priority: 5
-              qualifier: '1'
-              target: parent
-              type: add
-              value: '1'
-            - key: system.powerLevel
-              phase: normal
-              priority: 5
-              qualifier: '1'
-              target: parent
-              type: override
-              value: enchanted
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 0
-            - 1
-          type: changes
-        cCWrBymDkUeOHKmQ:
-          _id: cCWrBymDkUeOHKmQ
-          attachDocuments: true
-          automatic: false
-          competence:
-            raw: 0
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          data: |-
-            {
-              "system": {
-                "costs": {
-                  "tweaks": {
-                    "gifted": 1
-                  }
-                },
-                "invoked": 1
-              }
-            }
-          heighten:
-            - 0
-            - 1
-          multi: false
-          overrideCompetence: false
-          overrideData: true
-          qualifier: and(@ability, @spell, not(@es), @delivery.ray)
-          type: addDocuments
-        g7vdRcjuuf35GPZ1:
-          _id: g7vdRcjuuf35GPZ1
-          attachDocuments: true
-          automatic: true
-          competence:
-            raw: 0
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 0
-            - 1
-          multi: false
-          overrideCompetence: false
-          overrideData: false
-          type: addDocuments
-          uuids:
-            - Compendium.teriock.properties.ActiveEffect.f1f52f7e8ae3eaab
-            - Compendium.teriock.properties.ActiveEffect.f1f52f7e8ae3eaab
-      class: lifeMage
-      competence:
-        raw: 0
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: sight
-      duration:
-        raw: '1'
-        unit: hour
-      effectTypes:
-        - magical
-      elements:
-        - life
-      executionTime:
-        base: 10 Minutes
-        slow:
-          raw: '10'
-          unit: minute
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 1 hour.</p>
-      identifier: minor-item-enchantment
-      interaction: manifest
-      invoked: true
-      maneuver: slow
-      mundane: false
-      overview:
-        base: >-
-          <p>Target item is enchanted to be @L[Property:Magelore]{magelore} and
-          @L[Property:Granting]{grant} a @L[Category:Conjured spells]{conjured}
-          @L[Category:Ray delivery spells]{ray spell} that you know. Except, the
-          spell is @L[Keyword:Gifted]{gifted} and must be <a
-          href="/index.php?title=Category:Invoked_component_abilities&amp;action=edit&amp;redlink=1"
-          class="new" title="Category:Invoked component abilities (page does not
-          exist)">invoked</a> for. The enchanted item is @L[Core:Presence]{tier
-          1}. If the item is @L[Property:Shattered]{shattered}, this enchantment
-          fades.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        raw: '5'
-        unit: ft
-      requirements: <p>Target is not a @L[Category:Weapons]{weapon}.</p>
-      ritual: true
-      rotator: true
-      spell: true
-      standard: true
-      targets:
-        - weapon
-    transfer: true
-    type: ability
-  - _id: TrLSwXJL2ErFcAYa
-    _key: '!items.effects!be25f9a8217037d7.TrLSwXJL2ErFcAYa'
+  - _id: uEiwvEsKKGuYkC6X
+    _key: '!items.effects!be25f9a8217037d7.uEiwvEsKKGuYkC6X'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.7060a27da46df3f2
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/swift-sleep-aura.webp
     name: Swift Sleep Aura
     system:
@@ -732,14 +553,248 @@ effects:
         - creature
     transfer: true
     type: ability
-  - _id: m9czcQH1PQqOlqMI
-    _key: '!items.effects!be25f9a8217037d7.m9czcQH1PQqOlqMI'
+  - _id: XqVOWSpiDSBPyd9f
+    _key: '!items.effects!be25f9a8217037d7.XqVOWSpiDSBPyd9f'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.26b16c55de4bc804
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/minor-item-enchantment.webp
+    name: Minor Item Enchantment
+    system:
+      _sup: xyIWsA97TGTU2AYX
+      automations:
+        72ce567009179bea:
+          _id: 72ce567009179bea
+          changeType: add
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          duration:
+            raw: '@h * 3600'
+            unit: second
+          heighten:
+            - 1
+          type: duration
+        8v0Wg06rCbu8V2LX:
+          _id: 8v0Wg06rCbu8V2LX
+          changes:
+            - key: system.tier.raw
+              phase: normal
+              priority: 5
+              qualifier: '1'
+              target: parent
+              type: add
+              value: '1'
+            - key: system.powerLevel
+              phase: normal
+              priority: 5
+              qualifier: '1'
+              target: parent
+              type: override
+              value: enchanted
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 0
+            - 1
+          type: changes
+        cCWrBymDkUeOHKmQ:
+          _id: cCWrBymDkUeOHKmQ
+          attachDocuments: true
+          automatic: false
+          competence:
+            raw: 0
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          data: |-
+            {
+              "system": {
+                "costs": {
+                  "tweaks": {
+                    "gifted": 1
+                  }
+                },
+                "invoked": 1
+              }
+            }
+          heighten:
+            - 0
+            - 1
+          multi: false
+          overrideCompetence: false
+          overrideData: true
+          qualifier: and(@ability, @spell, not(@es), @delivery.ray)
+          type: addDocuments
+        g7vdRcjuuf35GPZ1:
+          _id: g7vdRcjuuf35GPZ1
+          attachDocuments: true
+          automatic: true
+          competence:
+            raw: 0
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 0
+            - 1
+          multi: false
+          overrideCompetence: false
+          overrideData: false
+          qualifier: '0'
+          type: addDocuments
+          uuids:
+            - Compendium.teriock.properties.ActiveEffect.f1f52f7e8ae3eaab
+            - Compendium.teriock.properties.ActiveEffect.f1f52f7e8ae3eaab
+      class: lifeMage
+      competence:
+        raw: 0
+      costs:
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+        primary:
+          mp:
+            formula: '1'
+            type: formula
+      delivery: sight
+      duration:
+        raw: '1'
+        unit: hour
+      elements:
+        - life
+      executionTime:
+        base: 10 Minutes
+        slow:
+          raw: '10'
+          unit: minute
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
+        effect increases by 1 hour.</p>
+      identifier: minor-item-enchantment
+      interaction: manifest
+      invoked: true
+      maneuver: slow
+      mundane: false
+      overview:
+        base: >-
+          <p>Target item is enchanted to be @L[Property:Magelore]{magelore} and
+          @L[Property:Granting]{grant} a @L[Category:Conjured spells]{conjured}
+          @L[Category:Ray delivery spells]{ray spell} that you know. Except, the
+          spell is @L[Keyword:Gifted]{gifted} and must be <a
+          href="/index.php?title=Category:Invoked_component_abilities&amp;action=edit&amp;redlink=1"
+          class="new" title="Category:Invoked component abilities (page does not
+          exist)">invoked</a> for. The enchanted item is @L[Core:Presence]{tier
+          1}. If the item is @L[Property:Shattered]{shattered}, this enchantment
+          fades.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        raw: '5'
+        unit: ft
+      requirements: <p>Target is not a @L[Category:Weapons]{weapon}.</p>
+      ritual: true
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - weapon
+    transfer: true
+    type: ability
+  - _id: t5YnVN79iUTVdq4V
+    _key: '!items.effects!be25f9a8217037d7.t5YnVN79iUTVdq4V'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.671450423362e586
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/sheltered-casting.webp
+    name: Sheltered Casting
+    system:
+      _sup: rOcOIi3HSAQOJwRg
+      class: lifeMage
+      competence:
+        raw: 0
+      costs:
+        primary:
+          mp:
+            formula: '1'
+            type: formula
+      delivery: self
+      duration:
+        raw: '0'
+        unit: instant
+      executionTime:
+        base: r0
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: sheltered-casting
+      interaction: manifest
+      maneuver: reactive
+      mundane: false
+      overview:
+        base: >-
+          <p>You may keep the triggering @L[Category:Spells]{spell} from
+          targeting up to @L[Core:Proficiency Bonus]{P} targets of your choice
+          that it would otherwise target.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - spell
+      trigger: <p>You are casting a @L[Category:Spells]{spell}.</p>
+    transfer: true
+    type: ability
+  - _id: QEJ9uzrrgNLe0Yob
+    _key: '!items.effects!be25f9a8217037d7.QEJ9uzrrgNLe0Yob'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.f68fe7471c02cad3
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/emergency-casting.webp
     name: Emergency Casting
     system:
@@ -789,70 +844,14 @@ effects:
         creature.</p>
     transfer: true
     type: ability
-  - _id: K7cDg0cpddrJunkm
-    _key: '!items.effects!be25f9a8217037d7.K7cDg0cpddrJunkm'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.671450423362e586
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.2
-    img: systems/teriock/src/icons/abilities/sheltered-casting.webp
-    name: Sheltered Casting
-    system:
-      _sup: rOcOIi3HSAQOJwRg
-      class: lifeMage
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: self
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime:
-        base: r0
-        slow:
-          unit: second
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: sheltered-casting
-      interaction: manifest
-      maneuver: reactive
-      mundane: false
-      overview:
-        base: >-
-          <p>You may keep the triggering @L[Category:Spells]{spell} from
-          targeting up to @L[Core:Proficiency Bonus]{P} targets of your choice
-          that it would otherwise target.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - spell
-      trigger: <p>You are casting a @L[Category:Spells]{spell}.</p>
-    transfer: true
-    type: ability
-  - _id: t48AY9LRAgE19zQi
-    _key: '!items.effects!be25f9a8217037d7.t48AY9LRAgE19zQi'
+  - _id: gGEojswe8ZrA1p7X
+    _key: '!items.effects!be25f9a8217037d7.gGEojswe8ZrA1p7X'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.HXidffXqZoxo8wog
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/spell-strike.webp
     name: Spell Strike
     system:

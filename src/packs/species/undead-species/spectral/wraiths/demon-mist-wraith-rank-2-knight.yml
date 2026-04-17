@@ -1,20 +1,20 @@
-_id: sM0Rhny0g1pFOywe
-_key: '!items!sM0Rhny0g1pFOywe'
+_id: AzADSW620Pn5ugUM
+_key: '!items!AzADSW620Pn5ugUM'
 _stats:
   compendiumSource: Compendium.teriock.classes.Item.5be716a6424c4e12
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.23
+  systemVersion: 0.12.15
 effects:
   - _id: oZAr1DlSq7fE7LK9
-    _key: '!items.effects!sM0Rhny0g1pFOywe.oZAr1DlSq7fE7LK9'
+    _key: '!items.effects!AzADSW620Pn5ugUM.oZAr1DlSq7fE7LK9'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.ElgNURrH9OTECkbk
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/giant-strength.webp
     name: Giant Strength
     system:
@@ -25,7 +25,10 @@ effects:
       duration:
         raw: '0'
         unit: unlimited
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -35,6 +38,7 @@ effects:
       identifier: giant-strength
       interaction: manifest
       maneuver: passive
+      mundane: false
       overview:
         base: >-
           <p>You gain @L[Ability:Improved Strength]{Improved Strength} and
@@ -58,13 +62,13 @@ effects:
     transfer: true
     type: ability
   - _id: 1RoDv4VOGCSVPjzS
-    _key: '!items.effects!sM0Rhny0g1pFOywe.1RoDv4VOGCSVPjzS'
+    _key: '!items.effects!AzADSW620Pn5ugUM.1RoDv4VOGCSVPjzS'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.63e1cad65d5a28a3
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/military-and-battle-training.webp
     name: Military and Battle Training
     system:
@@ -75,7 +79,10 @@ effects:
       duration:
         raw: '24'
         unit: hour
-      executionTime: Short Rest
+      executionTime:
+        base: Short Rest
+        slow:
+          unit: shortRest
       expansion:
         featSaveAttribute: mov
         range:
@@ -85,6 +92,7 @@ effects:
       identifier: military-and-battle-training
       interaction: manifest
       maneuver: slow
+      mundane: false
       overview:
         base: >-
           <p>You may spend a @L[Core:Short Rest]{short rest} developing a battle
@@ -112,13 +120,13 @@ effects:
     transfer: true
     type: ability
   - _id: bSJT8yg5Fc4arsuk
-    _key: '!items.effects!sM0Rhny0g1pFOywe.bSJT8yg5Fc4arsuk'
+    _key: '!items.effects!AzADSW620Pn5ugUM.bSJT8yg5Fc4arsuk'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.7b787574c711d9c1
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/triumphant-damage-boost.webp
     name: Triumphant Damage Boost
     system:
@@ -130,7 +138,10 @@ effects:
         raw: '1'
         unit: minute
       endCondition: <p>You make another @L[Category:Attack abilities]{attack}.</p>
-      executionTime: r0
+      executionTime:
+        base: r0
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -140,6 +151,7 @@ effects:
       identifier: triumphant-damage-boost
       interaction: manifest
       maneuver: reactive
+      mundane: false
       overview:
         base: >-
           <p>Your next @L[Category:Attack abilities]{attack} is
@@ -157,14 +169,73 @@ effects:
       trigger: <p>@L[Condition:Down]{Dropping} an opponent.</p>
     transfer: true
     type: ability
-  - _id: WyXHo5I0YSVAPRXI
-    _key: '!items.effects!sM0Rhny0g1pFOywe.WyXHo5I0YSVAPRXI'
+  - _id: HYOL5MnjdNszPhaF
+    _key: '!items.effects!AzADSW620Pn5ugUM.HYOL5MnjdNszPhaF'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8aa8167e9f40cbb2
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.5pnQBaF30VIQrAZO
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
+    name: Melee Damage Boost
+    system:
+      _sup: oZAr1DlSq7fE7LK9
+      class: knight
+      competence:
+        raw: 0
+      delivery: weapon
+      duration:
+        raw: '0'
+        unit: instant
+      effectTypes:
+        - damaging
+      executionTime:
+        base: r0
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: melee-damage-boost
+      interaction: manifest
+      maneuver: reactive
+      mundane: false
+      overview:
+        base: >-
+          <p>You may spend an unused @L[Core:Active Maneuvers]{action} to
+          @L[Keyword:Boosted]{boost} the triggering @L[Core:Damage]{damage}.</p>
+        proficient: >-
+          <p>You may spend an additional unused @L[Core:Active
+          Maneuvers]{action} to @L[Keyword:Boosted]{boost} the triggering
+          @L[Core:Damage]{damage} again.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: contact
+      skill: true
+      standard: true
+      targets:
+        - creature
+      trigger: >-
+        <p>You have hit a creature with a @L[Category:Damaging
+        effects]{damaging} melee @L[Category:Weapon delivery abilities]{weapon}
+        @L[Category:Attack abilities]{attack}.</p>
+    transfer: true
+    type: ability
+  - _id: DtBcb5JBGJcOtR2H
+    _key: '!items.effects!AzADSW620Pn5ugUM.DtBcb5JBGJcOtR2H'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.0B7iFJ6L6hYyX6H6
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/improved-strength.webp
     name: Improved Strength
     system:
@@ -210,18 +281,18 @@ effects:
           value: 2
     transfer: true
     type: ability
-  - _id: PmfJQZ3IiC9We9uJ
-    _key: '!items.effects!sM0Rhny0g1pFOywe.PmfJQZ3IiC9We9uJ'
+  - _id: ZElg0hY9DgORYrXH
+    _key: '!items.effects!AzADSW620Pn5ugUM.ZElg0hY9DgORYrXH'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.07a0880b230cdb14
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/beastly-strength.webp
     name: Beastly Strength
     system:
-      _sup: WyXHo5I0YSVAPRXI
+      _sup: DtBcb5JBGJcOtR2H
       class: knight
       competence:
         raw: 0
@@ -265,18 +336,18 @@ effects:
           value: 1
     transfer: true
     type: ability
-  - _id: x3lrDKlBsCyjoz04
-    _key: '!items.effects!sM0Rhny0g1pFOywe.x3lrDKlBsCyjoz04'
+  - _id: ExEKREr6qW0Fy6pP
+    _key: '!items.effects!AzADSW620Pn5ugUM.ExEKREr6qW0Fy6pP'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.54f63d63ae4376a9
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
     name: Improved Armor Piercing
     system:
-      _sup: WyXHo5I0YSVAPRXI
+      _sup: DtBcb5JBGJcOtR2H
       class: knight
       competence:
         raw: 0
@@ -314,14 +385,14 @@ effects:
         - self
     transfer: true
     type: ability
-  - _id: ngWGQbxI7qQzCeeo
-    _key: '!items.effects!sM0Rhny0g1pFOywe.ngWGQbxI7qQzCeeo'
+  - _id: 7VehL8EtnFec2ASo
+    _key: '!items.effects!AzADSW620Pn5ugUM.7VehL8EtnFec2ASo'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.a99c5ea04337e1f4
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/triumphant-awaken.webp
     name: Triumphant Awaken
     system:
@@ -378,65 +449,6 @@ effects:
       trigger: <p>@L[Condition:Down]{Dropping} an opponent.</p>
     transfer: true
     type: ability
-  - _id: a6wy98JdMrqloBby
-    _key: '!items.effects!sM0Rhny0g1pFOywe.a6wy98JdMrqloBby'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.5pnQBaF30VIQrAZO
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.2
-    img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
-    name: Melee Damage Boost
-    system:
-      _sup: oZAr1DlSq7fE7LK9
-      class: knight
-      competence:
-        raw: 0
-      delivery: weapon
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - damaging
-      executionTime:
-        base: r0
-        slow:
-          unit: second
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: melee-damage-boost
-      interaction: manifest
-      maneuver: reactive
-      mundane: false
-      overview:
-        base: >-
-          <p>You may spend an unused @L[Core:Active Maneuvers]{action} to
-          @L[Keyword:Boosted]{boost} the triggering @L[Core:Damage]{damage}.</p>
-        proficient: >-
-          <p>You may spend an additional unused @L[Core:Active
-          Maneuvers]{action} to @L[Keyword:Boosted]{boost} the triggering
-          @L[Core:Damage]{damage} again.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: contact
-      skill: true
-      standard: true
-      targets:
-        - creature
-      trigger: >-
-        <p>You have hit a creature with a @L[Category:Damaging
-        effects]{damaging} melee @L[Category:Weapon delivery abilities]{weapon}
-        @L[Category:Attack abilities]{attack}.</p>
-    transfer: true
-    type: ability
 folder: bd7120d756dc6f4f
 img: systems/teriock/src/icons/ranks/rank-2-knight.webp
 name: Rank 2 Knight
@@ -461,12 +473,8 @@ system:
   statDice:
     hp:
       disabled: false
-      faces: 12
-      number:
-        raw: '1'
+      formula: 1d12
     mp:
       disabled: false
-      faces: 8
-      number:
-        raw: '1'
+      formula: 1d8
 type: rank

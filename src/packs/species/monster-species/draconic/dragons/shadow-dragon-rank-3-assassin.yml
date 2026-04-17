@@ -1,20 +1,20 @@
-_id: Y10ULyuX0CuT3OY4
-_key: '!items!Y10ULyuX0CuT3OY4'
+_id: ELCBZ2LW1dULbPXn
+_key: '!items!ELCBZ2LW1dULbPXn'
 _stats:
   compendiumSource: Compendium.teriock.classes.Item.44d96cbb7f74e56b
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.23
+  systemVersion: 0.12.15
 effects:
   - _id: 2CPWQZowBcI7kkZV
-    _key: '!items.effects!Y10ULyuX0CuT3OY4.2CPWQZowBcI7kkZV'
+    _key: '!items.effects!ELCBZ2LW1dULbPXn.2CPWQZowBcI7kkZV'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.ecd0e39a19ac7442
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     flags:
       teriock:
         category: support
@@ -29,7 +29,10 @@ effects:
       duration:
         raw: '24'
         unit: hour
-      executionTime: Short Rest
+      executionTime:
+        base: Short Rest
+        slow:
+          unit: shortRest
       expansion:
         featSaveAttribute: mov
         range:
@@ -39,6 +42,7 @@ effects:
       identifier: disguise
       interaction: manifest
       maneuver: slow
+      mundane: false
       overview:
         base: >-
           <p>You convincingly physically @L[Condition:Disguised]{disguise}
@@ -59,13 +63,13 @@ effects:
     transfer: true
     type: ability
   - _id: veKMhVNsQRJlXWtP
-    _key: '!items.effects!Y10ULyuX0CuT3OY4.veKMhVNsQRJlXWtP'
+    _key: '!items.effects!ELCBZ2LW1dULbPXn.veKMhVNsQRJlXWtP'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.1b61db587d3e3f26
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     flags:
       teriock:
         category: combat
@@ -80,7 +84,10 @@ effects:
       duration:
         raw: '0'
         unit: instant
-      executionTime: r1
+      executionTime:
+        base: r1
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -90,6 +97,7 @@ effects:
       identifier: escape
       interaction: manifest
       maneuver: reactive
+      mundane: false
       overview:
         base: >-
           <p>You move on a distance up to your @L[Core:Movement Speed]{movement
@@ -141,12 +149,8 @@ system:
   statDice:
     hp:
       disabled: false
-      faces: 10
-      number:
-        raw: '1'
+      formula: 1d10
     mp:
       disabled: false
-      faces: 10
-      number:
-        raw: '1'
+      formula: 1d10
 type: rank

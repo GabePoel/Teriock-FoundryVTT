@@ -1,20 +1,20 @@
-_id: P1314YhdG5rosycv
-_key: '!items!P1314YhdG5rosycv'
+_id: YE1dHBhvleKmYo3w
+_key: '!items!YE1dHBhvleKmYo3w'
 _stats:
   compendiumSource: Compendium.teriock.classes.Item.8c729f062c7bed72
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.23
+  systemVersion: 0.12.15
 effects:
   - _id: byYbma8NDzi77Mh0
-    _key: '!items.effects!P1314YhdG5rosycv.byYbma8NDzi77Mh0'
+    _key: '!items.effects!YE1dHBhvleKmYo3w.byYbma8NDzi77Mh0'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.6b9c057fc7cf8e78
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     flags:
       teriock:
         category: combat
@@ -29,7 +29,10 @@ effects:
       duration:
         raw: '0'
         unit: unlimited
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -39,6 +42,7 @@ effects:
       identifier: additional-life-rotators
       interaction: manifest
       maneuver: passive
+      mundane: false
       overview:
         base: >-
           <p>Add @L[Ability:Minor Item Enchantment]{Minor Item Enchantment} and
@@ -56,13 +60,13 @@ effects:
     transfer: true
     type: ability
   - _id: H7xLb8uTY3Fv0E7P
-    _key: '!items.effects!P1314YhdG5rosycv.H7xLb8uTY3Fv0E7P'
+    _key: '!items.effects!YE1dHBhvleKmYo3w.H7xLb8uTY3Fv0E7P'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.07691331e877e0f7
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     flags:
       teriock:
         category: support
@@ -115,7 +119,10 @@ effects:
       elderSorcery: true
       elements:
         - life
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -125,6 +132,7 @@ effects:
       identifier: expanded-life-elder-sorcery
       interaction: feat
       maneuver: passive
+      mundane: false
       overview:
         base: >-
           <p>In addition to the custom rotator spells you create, you can learn
@@ -166,14 +174,14 @@ effects:
         - self
     transfer: true
     type: ability
-  - _id: V8Mk5mZisg576s1x
-    _key: '!items.effects!P1314YhdG5rosycv.V8Mk5mZisg576s1x'
+  - _id: kg0QKTAVX1vMcucx
+    _key: '!items.effects!YE1dHBhvleKmYo3w.kg0QKTAVX1vMcucx'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.7060a27da46df3f2
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/swift-sleep-aura.webp
     name: Swift Sleep Aura
     system:
@@ -293,14 +301,14 @@ effects:
         - creature
     transfer: true
     type: ability
-  - _id: 0p4PQGQgGnJI9Grr
-    _key: '!items.effects!P1314YhdG5rosycv.0p4PQGQgGnJI9Grr'
+  - _id: lWx2e5ABlrh2Gem0
+    _key: '!items.effects!YE1dHBhvleKmYo3w.lWx2e5ABlrh2Gem0'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.26b16c55de4bc804
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/minor-item-enchantment.webp
     name: Minor Item Enchantment
     system:
@@ -401,6 +409,7 @@ effects:
           multi: false
           overrideCompetence: false
           overrideData: false
+          qualifier: '0'
           type: addDocuments
           uuids:
             - Compendium.teriock.properties.ActiveEffect.f1f52f7e8ae3eaab
@@ -422,8 +431,6 @@ effects:
       duration:
         raw: '1'
         unit: hour
-      effectTypes:
-        - magical
       elements:
         - life
       executionTime:
@@ -497,12 +504,8 @@ system:
   statDice:
     hp:
       disabled: false
-      faces: 8
-      number:
-        raw: '1'
+      formula: 1d8
     mp:
       disabled: false
-      faces: 12
-      number:
-        raw: '1'
+      formula: 1d12
 type: rank

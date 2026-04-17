@@ -1,20 +1,20 @@
-_id: rQX2shzlarBhzXcd
-_key: '!items!rQX2shzlarBhzXcd'
+_id: jVnLKxTs9Um0NCzk
+_key: '!items!jVnLKxTs9Um0NCzk'
 _stats:
   compendiumSource: Compendium.teriock.classes.Item.21153cc1c19f4078
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.23
+  systemVersion: 0.12.15
 effects:
   - _id: JkLji1ELigqkIeeA
-    _key: '!items.effects!rQX2shzlarBhzXcd.JkLji1ELigqkIeeA'
+    _key: '!items.effects!jVnLKxTs9Um0NCzk.JkLji1ELigqkIeeA'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.f01fd6d1dab77571
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     flags:
       teriock:
         category: combat
@@ -66,7 +66,10 @@ effects:
       endCondition: >-
         <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime: r1
+      executionTime:
+        base: r1
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -76,6 +79,7 @@ effects:
       identifier: disruption-ball
       interaction: attack
       maneuver: reactive
+      mundane: false
       overview:
         proficient: >-
           <p>This may be triggered by @L[Category:Basic abilities]{basic
@@ -105,13 +109,13 @@ effects:
     transfer: true
     type: ability
   - _id: X8v4zO1AAxXLZdD8
-    _key: '!items.effects!rQX2shzlarBhzXcd.X8v4zO1AAxXLZdD8'
+    _key: '!items.effects!jVnLKxTs9Um0NCzk.X8v4zO1AAxXLZdD8'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.830ae015c264e103
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     flags:
       teriock:
         category: support
@@ -159,7 +163,10 @@ effects:
       endCondition: >-
         <p>Target moves or is no longer in a location with shadows, dim light,
         or @L[Core:Cover]{three-quarters cover}.</p>
-      executionTime: a1
+      executionTime:
+        base: a1
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -169,6 +176,7 @@ effects:
       identifier: hide-other
       interaction: attack
       maneuver: active
+      mundane: false
       overview:
         base: >-
           <p>Target becomes @L[Condition:Hidden]{hidden}. As you hide them, you
@@ -214,12 +222,8 @@ system:
   statDice:
     hp:
       disabled: false
-      faces: 10
-      number:
-        raw: '1'
+      formula: 1d10
     mp:
       disabled: false
-      faces: 10
-      number:
-        raw: '1'
+      formula: 1d10
 type: rank

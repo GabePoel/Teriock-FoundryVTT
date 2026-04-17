@@ -4,16 +4,16 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.68
+  systemVersion: 0.12.15
 effects:
-  - _id: m8D3y6pLFSeSPSmM
-    _key: '!items.effects!4ee4511ef3f5f662.m8D3y6pLFSeSPSmM'
+  - _id: Rb3RqVni9Rxp1mTP
+    _key: '!items.effects!4ee4511ef3f5f662.Rb3RqVni9Rxp1mTP'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.7fa84c01e4f63a0e
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/fae-elder-sorcery.webp
     name: Fae Elder Sorcery
     system:
@@ -45,7 +45,10 @@ effects:
       duration:
         raw: '0'
         unit: unlimited
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -55,6 +58,7 @@ effects:
       identifier: fae-elder-sorcery
       interaction: manifest
       maneuver: passive
+      mundane: false
       overview:
         base: >-
           <p>You gain @L[Ability:Innate Elder Sorcery]{Innate Elder Sorcery} and
@@ -80,660 +84,18 @@ effects:
         - self
     transfer: true
     type: ability
-  - _id: 3K1UuKRIvW5INoW8
-    _key: '!items.effects!4ee4511ef3f5f662.3K1UuKRIvW5INoW8'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.184f6f0ddbd9247e
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.4
-    img: systems/teriock/src/icons/abilities/flying.webp
-    name: Flying
-    system:
-      automations:
-        5KN7CIW4kc6fgrgW:
-          _id: 5KN7CIW4kc6fgrgW
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 0
-            - 1
-          movementAction: fly
-          type: changeMovement
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.speedAdjustments.fly
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: upgrade
-              value: '2'
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-        f025905e157ac261:
-          _id: f025905e157ac261
-          changes:
-            - key: system.speedAdjustments.fly
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: upgrade
-              value: '3'
-          competencies:
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-      class: corsair
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - movement
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: flying
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: <p>You fly at @L[Core:Movement Speed]{half speed}.</p>
-        proficient: <p>You instead fly at @L[Core:Movement Speed]{full speed}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-    transfer: true
-    type: ability
-  - _id: QVfLI5zhRdU4dFBD
-    _key: '!items.effects!4ee4511ef3f5f662.QVfLI5zhRdU4dFBD'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.7fee2e5ac1b34f79
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.2
-    img: systems/teriock/src/icons/abilities/infinite-lifespan.webp
-    name: Infinite Lifespan
-    system:
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: infinite-lifespan
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You have no maximum lifespan. Your aging slows down with time and
-          seems to asymptote at around 500 years old, when you appear to be in
-          your mid 30s.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - unknown
-      range:
-        unit: self
-      targets:
-        - self
-    transfer: true
-    type: ability
-  - _id: OqOQTNIol2lZiGmp
-    _key: '!items.effects!4ee4511ef3f5f662.OqOQTNIol2lZiGmp'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.192c6cfdb6473a4f
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.4
-    img: systems/teriock/src/icons/abilities/mana-regenerating.webp
-    name: Mana Regenerating
-    system:
-      automations:
-        1728b3a84ea27844:
-          _id: 1728b3a84ea27844
-          common:
-            - revive
-            - bag
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          showConfirmationDialog: true
-          type: common
-        7OuG6efyOs2VWpp3:
-          _id: 7OuG6efyOs2VWpp3
-          competencies:
-            - 0
-            - 1
-            - 2
-          conditions:
-            absent:
-              - frozen
-          consumeStatDice: false
-          forHarm: false
-          heighten:
-            - 0
-            - 1
-          trigger: turnStart
-          type: revitalize
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - revival
-        - regeneration
-        - revitalization
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: mana-regenerating
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>At the start of each of your @L[Core:Turns]{turns}, you 
-          @L[Core:Revitalizing]{revitalize} and regain that many @L[Core:Hit
-          Points and Mana Points]{MP}. This does <i>not</i> consume your
-          @L[Core:MP]{mana die}. If you were @L[Condition:Dead]{dead} due to
-          @L[Core:Hit Points and Mana Points]{MP} loss, this brings you
-          @L[Condition:Alive]{back to life}. You only @L[Condition:Dead]{die}
-          due to @L[Core:Hit Points and Mana Points]{MP} loss if you start your
-          @L[Core:Turns]{turn} without successfully regenerating @L[Core:Hit
-          Points and Mana Points]{MP}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - primal
-      range:
-        unit: self
-      targets:
-        - self
-    transfer: true
-    type: ability
-  - _id: 48Is5zusUx0QffhP
-    _key: '!items.effects!4ee4511ef3f5f662.48Is5zusUx0QffhP'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.aaaa08a40cf32777
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.4
-    img: systems/teriock/src/icons/abilities/night-vision.webp
-    name: Night Vision
-    system:
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.senses.dark
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: upgrade
-              value: '120'
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - sensory
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: night-vision
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You can see in the dark up to 60 feet as though it is bright light
-          and up to 120 feet as though it is dim light.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-    transfer: true
-    type: ability
-  - _id: emAi72lCeFxgNCtY
-    _key: '!items.effects!4ee4511ef3f5f662.emAi72lCeFxgNCtY'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.db77687509a7309d
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.2
-    img: systems/teriock/src/icons/abilities/normal-intelligence.webp
-    name: Normal Intelligence
-    system:
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: normal-intelligence
-      interaction: manifest
-      maneuver: passive
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-      upgrades:
-        score:
-          attribute: int
-          value: 0
-    transfer: true
-    type: ability
-  - _id: ZkjDkHyiPfSTI54N
-    _key: '!items.effects!4ee4511ef3f5f662.ZkjDkHyiPfSTI54N'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1c52eda8919d34a7
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.2
-    img: systems/teriock/src/icons/abilities/normal-movement.webp
-    name: Normal Movement
-    system:
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: normal-movement
-      interaction: manifest
-      maneuver: passive
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-      upgrades:
-        score:
-          attribute: mov
-          value: 0
-    transfer: true
-    type: ability
-  - _id: BauMhOvNOIl2GFCB
-    _key: '!items.effects!4ee4511ef3f5f662.BauMhOvNOIl2GFCB'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8249d99c527d09b1
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.2
-    img: systems/teriock/src/icons/abilities/normal-perception.webp
-    name: Normal Perception
-    system:
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: normal-perception
-      interaction: manifest
-      maneuver: passive
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-      upgrades:
-        score:
-          attribute: per
-          value: 0
-    transfer: true
-    type: ability
-  - _id: eONf7r8Og60CS3Pu
-    _key: '!items.effects!4ee4511ef3f5f662.eONf7r8Og60CS3Pu'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1d13190e5b38bda6
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.2
-    img: systems/teriock/src/icons/abilities/normal-sneak.webp
-    name: Normal Sneak
-    system:
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: normal-sneak
-      interaction: manifest
-      maneuver: passive
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-      upgrades:
-        score:
-          attribute: snk
-          value: 0
-    transfer: true
-    type: ability
-  - _id: 6rAWTtFS9PVzVfp3
-    _key: '!items.effects!4ee4511ef3f5f662.6rAWTtFS9PVzVfp3'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.14d28d6322eec2ff
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.2
-    img: systems/teriock/src/icons/abilities/normal-strength.webp
-    name: Normal Strength
-    system:
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: normal-strength
-      interaction: manifest
-      maneuver: passive
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-      upgrades:
-        score:
-          attribute: str
-          value: 0
-    transfer: true
-    type: ability
-  - _id: 5uzkvF07w6nB5Dx0
-    _key: '!items.effects!4ee4511ef3f5f662.5uzkvF07w6nB5Dx0'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.873114c38f087ff8
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.4
-    img: systems/teriock/src/icons/abilities/regenerating.webp
-    name: Regenerating
-    system:
-      automations:
-        1728b3a84ea27844:
-          _id: 1728b3a84ea27844
-          common:
-            - revive
-            - bag
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          showConfirmationDialog: true
-          type: common
-        iCn9pFDIGFJWxm6H:
-          _id: iCn9pFDIGFJWxm6H
-          competencies:
-            - 0
-            - 1
-            - 2
-          conditions:
-            absent:
-              - burned
-              - frozen
-          consumeStatDice: false
-          forHarm: false
-          heighten:
-            - 0
-            - 1
-          noStatDice: false
-          trigger: turnStart
-          type: heal
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - revival
-        - healing
-        - regeneration
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: regenerating
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>At the start of each of your @L[Core:Turns]{turns}, you 
-          @L[Core:Healing]{heal} and regain that many @L[Core:Hit Points and
-          Mana Points]{HP}. This does <i>not</i> consume your @L[Core:HP]{hit
-          die}. If you were @L[Condition:Dead]{dead} due to @L[Core:Hit Points
-          and Mana Points]{HP} loss, this brings you @L[Condition:Alive]{back to
-          life}. If you take @L[Damage:Fire]{fire damage}, this effect doesn't
-          apply on your next @L[Core:Turns]{turn}. You only
-          @L[Condition:Dead]{die} due to @L[Core:Hit Points and Mana Points]{HP}
-          loss if you start your @L[Core:Turns]{turn} without successfully
-          [[lookup name style=lc]] @L[Core:Hit Points and Mana Points]{HP}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - primal
-      range:
-        unit: self
-      targets:
-        - self
-    transfer: true
-    type: ability
-  - _id: RTKtL30N9ox93MNa
-    _key: '!items.effects!4ee4511ef3f5f662.RTKtL30N9ox93MNa'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.dea6ac2f87245a09
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.4
-    img: systems/teriock/src/icons/abilities/thin-soul.webp
-    name: Thin Soul
-    system:
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.deathBag.pull
-              phase: normal
-              priority: 5
-              qualifier: '1'
-              target: Actor
-              type: upgrade
-              value: '15'
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: flaw
-      identifier: thin-soul
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You pull an additional 5 stones from the @L[Core:Death Bag]{death
-          bag}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - unknown
-      range:
-        unit: self
-      targets:
-        - self
-    transfer: true
-    type: ability
-  - _id: qk2BmiTjLUu0TvTM
-    _key: '!items.effects!4ee4511ef3f5f662.qk2BmiTjLUu0TvTM'
+  - _id: Racz73vd2gVRpzzn
+    _key: '!items.effects!4ee4511ef3f5f662.Racz73vd2gVRpzzn'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.27zO2KeT0yhBfCL3
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/innate-elder-sorcery.webp
     name: Innate Elder Sorcery
     system:
-      _sup: m8D3y6pLFSeSPSmM
+      _sup: Rb3RqVni9Rxp1mTP
       automations:
         f025905e157ac261:
           _id: f025905e157ac261
@@ -831,18 +193,18 @@ effects:
         - self
     transfer: true
     type: ability
-  - _id: ZNbMzyZpYU802r4p
-    _key: '!items.effects!4ee4511ef3f5f662.ZNbMzyZpYU802r4p'
+  - _id: AxrMNZ37tbLufdWu
+    _key: '!items.effects!4ee4511ef3f5f662.AxrMNZ37tbLufdWu'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.868cdb05c34a7654
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/all-elder-sorcery-words.webp
     name: All Elder Sorcery Words
     system:
-      _sup: qk2BmiTjLUu0TvTM
+      _sup: Racz73vd2gVRpzzn
       competence:
         raw: 0
       delivery: self
@@ -1098,18 +460,18 @@ effects:
         - self
     transfer: true
     type: ability
-  - _id: eQkOn6C4dUQ5bK52
-    _key: '!items.effects!4ee4511ef3f5f662.eQkOn6C4dUQ5bK52'
+  - _id: vz5BBr5tTHAZ5hjM
+    _key: '!items.effects!4ee4511ef3f5f662.vz5BBr5tTHAZ5hjM'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.0BxTrblkpcGWwCHe
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.0
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/elder-sorcery-creation.webp
     name: Elder Sorcery Creation
     system:
-      _sup: qk2BmiTjLUu0TvTM
+      _sup: Racz73vd2gVRpzzn
       competence:
         raw: 0
       costs:
@@ -1179,6 +541,692 @@ effects:
         unit: contact
       ritual: true
       skill: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: 4iy7zcY6pg0vb1CM
+    _key: '!items.effects!4ee4511ef3f5f662.4iy7zcY6pg0vb1CM'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.184f6f0ddbd9247e
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/flying.webp
+    name: Flying
+    system:
+      automations:
+        5KN7CIW4kc6fgrgW:
+          _id: 5KN7CIW4kc6fgrgW
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 0
+            - 1
+          movementAction: fly
+          type: changeMovement
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.speedAdjustments.fly
+              phase: normal
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              type: upgrade
+              value: '2'
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+        f025905e157ac261:
+          _id: f025905e157ac261
+          changes:
+            - key: system.speedAdjustments.fly
+              phase: normal
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              type: upgrade
+              value: '3'
+          competencies:
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+      class: corsair
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      effectTypes:
+        - movement
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: flying
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: <p>You fly at @L[Core:Movement Speed]{half speed}.</p>
+        proficient: <p>You instead fly at @L[Core:Movement Speed]{full speed}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: JETgK1RxYD1M29mJ
+    _key: '!items.effects!4ee4511ef3f5f662.JETgK1RxYD1M29mJ'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.7fee2e5ac1b34f79
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/infinite-lifespan.webp
+    name: Infinite Lifespan
+    system:
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      identifier: infinite-lifespan
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>You have no maximum lifespan. Your aging slows down with time and
+          seems to asymptote at around 500 years old, when you appear to be in
+          your mid 30s.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - unknown
+      range:
+        unit: self
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: w0blhaSQjjOGMvYX
+    _key: '!items.effects!4ee4511ef3f5f662.w0blhaSQjjOGMvYX'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.192c6cfdb6473a4f
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/mana-regenerating.webp
+    name: Mana Regenerating
+    system:
+      automations:
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          common:
+            - revive
+            - bag
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          showConfirmationDialog: true
+          type: common
+        7OuG6efyOs2VWpp3:
+          _id: 7OuG6efyOs2VWpp3
+          competencies:
+            - 0
+            - 1
+            - 2
+          conditions:
+            absent:
+              - frozen
+          consumeStatDice: false
+          forHarm: false
+          heighten:
+            - 0
+            - 1
+          trigger: turnStart
+          type: revitalize
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      effectTypes:
+        - revival
+        - regeneration
+        - revitalization
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      identifier: mana-regenerating
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>At the start of each of your @L[Core:Turns]{turns}, you 
+          @L[Core:Revitalizing]{revitalize} and regain that many @L[Core:Hit
+          Points and Mana Points]{MP}. This does <i>not</i> consume your
+          @L[Core:MP]{mana die}. If you were @L[Condition:Dead]{dead} due to
+          @L[Core:Hit Points and Mana Points]{MP} loss, this brings you
+          @L[Condition:Alive]{back to life}. You only @L[Condition:Dead]{die}
+          due to @L[Core:Hit Points and Mana Points]{MP} loss if you start your
+          @L[Core:Turns]{turn} without successfully regenerating @L[Core:Hit
+          Points and Mana Points]{MP}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - primal
+      range:
+        unit: self
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: 3ZmdnkTRQ6xGpkZK
+    _key: '!items.effects!4ee4511ef3f5f662.3ZmdnkTRQ6xGpkZK'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.aaaa08a40cf32777
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/night-vision.webp
+    name: Night Vision
+    system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.senses.dark
+              phase: normal
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              type: upgrade
+              value: '120'
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      effectTypes:
+        - sensory
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: night-vision
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>You can see in the dark up to 60 feet as though it is bright light
+          and up to 120 feet as though it is dim light.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: aSLls3BSL3b1EgcE
+    _key: '!items.effects!4ee4511ef3f5f662.aSLls3BSL3b1EgcE'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.db77687509a7309d
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/normal-intelligence.webp
+    name: Normal Intelligence
+    system:
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: normal-intelligence
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: int
+          value: 0
+    transfer: true
+    type: ability
+  - _id: m4SitYWws5Ih9IxH
+    _key: '!items.effects!4ee4511ef3f5f662.m4SitYWws5Ih9IxH'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1c52eda8919d34a7
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/normal-movement.webp
+    name: Normal Movement
+    system:
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: normal-movement
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: mov
+          value: 0
+    transfer: true
+    type: ability
+  - _id: mLgxBWBM4XTq72j7
+    _key: '!items.effects!4ee4511ef3f5f662.mLgxBWBM4XTq72j7'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8249d99c527d09b1
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/normal-perception.webp
+    name: Normal Perception
+    system:
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: normal-perception
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: per
+          value: 0
+    transfer: true
+    type: ability
+  - _id: XzXpBPYwlAk5maYE
+    _key: '!items.effects!4ee4511ef3f5f662.XzXpBPYwlAk5maYE'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1d13190e5b38bda6
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/normal-sneak.webp
+    name: Normal Sneak
+    system:
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: normal-sneak
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: snk
+          value: 0
+    transfer: true
+    type: ability
+  - _id: qIK0lqpWb4CFuPrj
+    _key: '!items.effects!4ee4511ef3f5f662.qIK0lqpWb4CFuPrj'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.14d28d6322eec2ff
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/normal-strength.webp
+    name: Normal Strength
+    system:
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: normal-strength
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: 0
+    transfer: true
+    type: ability
+  - _id: t68WY3XdIxIi3Rxj
+    _key: '!items.effects!4ee4511ef3f5f662.t68WY3XdIxIi3Rxj'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.873114c38f087ff8
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/regenerating.webp
+    name: Regenerating
+    system:
+      automations:
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          common:
+            - revive
+            - bag
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          showConfirmationDialog: true
+          type: common
+        iCn9pFDIGFJWxm6H:
+          _id: iCn9pFDIGFJWxm6H
+          competencies:
+            - 0
+            - 1
+            - 2
+          conditions:
+            absent:
+              - burned
+              - frozen
+          consumeStatDice: false
+          forHarm: false
+          heighten:
+            - 0
+            - 1
+          noStatDice: false
+          trigger: turnStart
+          type: heal
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      effectTypes:
+        - revival
+        - healing
+        - regeneration
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      identifier: regenerating
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>At the start of each of your @L[Core:Turns]{turns}, you 
+          @L[Core:Healing]{heal} and regain that many @L[Core:Hit Points and
+          Mana Points]{HP}. This does <i>not</i> consume your @L[Core:HP]{hit
+          die}. If you were @L[Condition:Dead]{dead} due to @L[Core:Hit Points
+          and Mana Points]{HP} loss, this brings you @L[Condition:Alive]{back to
+          life}. If you take @L[Damage:Fire]{fire damage}, this effect doesn't
+          apply on your next @L[Core:Turns]{turn}. You only
+          @L[Condition:Dead]{die} due to @L[Core:Hit Points and Mana Points]{HP}
+          loss if you start your @L[Core:Turns]{turn} without successfully
+          [[lookup name style=lc]] @L[Core:Hit Points and Mana Points]{HP}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - primal
+      range:
+        unit: self
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: DBw0J5oY995aK4z8
+    _key: '!items.effects!4ee4511ef3f5f662.DBw0J5oY995aK4z8'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.dea6ac2f87245a09
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/thin-soul.webp
+    name: Thin Soul
+    system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.deathBag.pull
+              phase: normal
+              priority: 5
+              qualifier: '1'
+              target: Actor
+              type: upgrade
+              value: '15'
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: flaw
+      identifier: thin-soul
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>You pull an additional 5 stones from the @L[Core:Death Bag]{death
+          bag}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - unknown
+      range:
+        unit: self
       targets:
         - self
     transfer: true

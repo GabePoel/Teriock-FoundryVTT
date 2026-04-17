@@ -1,20 +1,20 @@
-_id: fwDhyeuUrh25m3nO
-_key: '!items!fwDhyeuUrh25m3nO'
+_id: cgjomvc1fAcZQL8o
+_key: '!items!cgjomvc1fAcZQL8o'
 _stats:
   compendiumSource: Compendium.teriock.classes.Item.2bd7d6c9b89adbcf
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.23
+  systemVersion: 0.12.15
 effects:
   - _id: Q3bElOKJWjw3DI9t
-    _key: '!items.effects!fwDhyeuUrh25m3nO.Q3bElOKJWjw3DI9t'
+    _key: '!items.effects!cgjomvc1fAcZQL8o.Q3bElOKJWjw3DI9t'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.b231c43502dd9d39
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/death-ray.webp
     name: Death Ray
     system:
@@ -68,7 +68,10 @@ effects:
         - killing
       elements:
         - necromancy
-      executionTime: a1
+      executionTime:
+        base: a1
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -81,6 +84,7 @@ effects:
       identifier: death-ray
       interaction: attack
       maneuver: active
+      mundane: false
       piercing:
         raw: 1
       powerSources:
@@ -104,13 +108,13 @@ effects:
     transfer: true
     type: ability
   - _id: 15t1ifTnUgXbHDY7
-    _key: '!items.effects!fwDhyeuUrh25m3nO.15t1ifTnUgXbHDY7'
+    _key: '!items.effects!cgjomvc1fAcZQL8o.15t1ifTnUgXbHDY7'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.cb297af126bd9530
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/spirit-guide.webp
     name: Spirit Guide
     system:
@@ -153,7 +157,11 @@ effects:
         - sensory
       elements:
         - necromancy
-      executionTime: 10 Minutes
+      executionTime:
+        base: 10 Minutes
+        slow:
+          raw: '10'
+          unit: minute
       expansion:
         featSaveAttribute: mov
         range:
@@ -166,6 +174,7 @@ effects:
       identifier: spirit-guide
       interaction: manifest
       maneuver: slow
+      mundane: false
       overview:
         base: >-
           <p>You can see, hear, and speak to spirits and
@@ -199,13 +208,13 @@ effects:
     transfer: true
     type: ability
   - _id: 6ouKT638ARM4Cphm
-    _key: '!items.effects!fwDhyeuUrh25m3nO.6ouKT638ARM4Cphm'
+    _key: '!items.effects!cgjomvc1fAcZQL8o.6ouKT638ARM4Cphm'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.e03c8211ae426819
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/summon-the-dead.webp
     name: Summon the Dead
     system:
@@ -236,7 +245,11 @@ effects:
         - summoning
       elements:
         - necromancy
-      executionTime: 10 Minutes
+      executionTime:
+        base: 10 Minutes
+        slow:
+          raw: '10'
+          unit: minute
       expansion:
         featSaveAttribute: mov
         range:
@@ -246,6 +259,7 @@ effects:
       identifier: summon-the-dead
       interaction: manifest
       maneuver: slow
+      mundane: false
       overview:
         base: >-
           <p>If you have the body of the target in your possession, you can put
@@ -277,13 +291,13 @@ effects:
     transfer: true
     type: ability
   - _id: epbHgxy8x6bO3jkQ
-    _key: '!items.effects!fwDhyeuUrh25m3nO.epbHgxy8x6bO3jkQ'
+    _key: '!items.effects!cgjomvc1fAcZQL8o.epbHgxy8x6bO3jkQ'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.c86ef5877a48d710
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/terror-ball.webp
     name: Terror Ball
     system:
@@ -324,7 +338,10 @@ effects:
         - damaging
       elements:
         - necromancy
-      executionTime: a1
+      executionTime:
+        base: a1
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -337,6 +354,7 @@ effects:
       identifier: terror-ball
       interaction: attack
       maneuver: active
+      mundane: false
       piercing:
         raw: 2
       powerSources:
@@ -381,12 +399,8 @@ system:
   statDice:
     hp:
       disabled: false
-      faces: 8
-      number:
-        raw: '1'
+      formula: 1d8
     mp:
       disabled: false
-      faces: 12
-      number:
-        raw: '1'
+      formula: 1d12
 type: rank

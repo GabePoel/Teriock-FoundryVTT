@@ -204,6 +204,7 @@ function cleanArmament(doc) {
  */
 function cleanBody(doc) {
   cleanArmament(doc);
+  delete doc.system.impacts;
 }
 
 /**
@@ -216,6 +217,9 @@ function cleanEquipment(doc) {
   delete doc.system.identification;
   delete doc.system.reference;
   delete doc.system.shattered;
+  delete doc.system.stashed;
+  delete doc.system.destroyed;
+  delete doc.system.impacts;
   if (doc.system.storage && !doc.system.storage.enabled) {
     delete doc.system.storage;
   }

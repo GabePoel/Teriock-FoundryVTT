@@ -1,20 +1,20 @@
-_id: Mo0248PJ8S9o0zJp
-_key: '!items!Mo0248PJ8S9o0zJp'
+_id: jXBTccItoFIWiDfu
+_key: '!items!jXBTccItoFIWiDfu'
 _stats:
   compendiumSource: Compendium.teriock.classes.Item.ce7640052630fc9b
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.23
+  systemVersion: 0.12.15
 effects:
   - _id: j5OCoQExiifYlXXK
-    _key: '!items.effects!Mo0248PJ8S9o0zJp.j5OCoQExiifYlXXK'
+    _key: '!items.effects!jXBTccItoFIWiDfu.j5OCoQExiifYlXXK'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.746fee84700f8918
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/brace.webp
     name: Brace
     system:
@@ -73,7 +73,10 @@ effects:
         triggers:
           - movement
         unit: unlimited
-      executionTime: a1
+      executionTime:
+        base: a1
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -83,6 +86,7 @@ effects:
       identifier: brace
       interaction: manifest
       maneuver: active
+      mundane: false
       overview:
         base: >-
           <p>Lose all @L[Core:Temporary Hit Points]{temporary HP} and gain
@@ -108,13 +112,13 @@ effects:
     transfer: true
     type: ability
   - _id: Nel4kQU109RUj1k2
-    _key: '!items.effects!Mo0248PJ8S9o0zJp.Nel4kQU109RUj1k2'
+    _key: '!items.effects!jXBTccItoFIWiDfu.Nel4kQU109RUj1k2'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.612719b68991bdad
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/improvised-armor-and-shields.webp
     name: Improvised Armor and Shields
     system:
@@ -125,7 +129,10 @@ effects:
       duration:
         raw: '8'
         unit: hour
-      executionTime: Short Rest
+      executionTime:
+        base: Short Rest
+        slow:
+          unit: shortRest
       expansion:
         featSaveAttribute: mov
         range:
@@ -135,6 +142,7 @@ effects:
       identifier: improvised-armor-and-shields
       interaction: manifest
       maneuver: slow
+      mundane: false
       overview:
         base: >-
           <p>During a @L[Core:Short Rest]{short rest}, you may scavenge
@@ -161,13 +169,13 @@ effects:
     transfer: true
     type: ability
   - _id: shn8qx3LbBe4ktYg
-    _key: '!items.effects!Mo0248PJ8S9o0zJp.shn8qx3LbBe4ktYg'
+    _key: '!items.effects!jXBTccItoFIWiDfu.shn8qx3LbBe4ktYg'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.5451b5caee0b5380
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/partner-awaken.webp
     name: Partner Awaken
     system:
@@ -179,7 +187,10 @@ effects:
         raw: '1'
         unit: hour
       endCondition: <p>You use [[lookup name]] again.</p>
-      executionTime: a1
+      executionTime:
+        base: a1
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -189,6 +200,7 @@ effects:
       identifier: partner-awaken
       interaction: manifest
       maneuver: active
+      mundane: false
       overview:
         base: >-
           <p>You and the target gain @L[Keyword:Limited]{Limited}
@@ -209,77 +221,14 @@ effects:
         - creature
     transfer: true
     type: ability
-  - _id: c7BOgvYyZY4k6WRO
-    _key: '!items.effects!Mo0248PJ8S9o0zJp.c7BOgvYyZY4k6WRO'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8d55640ef65f1e81
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.4
-    img: systems/teriock/src/icons/abilities/reactive-awaken.webp
-    name: Reactive Awaken
-    system:
-      _sup: shn8qx3LbBe4ktYg
-      automations:
-        1728b3a84ea27844:
-          _id: 1728b3a84ea27844
-          common:
-            - awaken
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          showConfirmationDialog: true
-          type: common
-      competence:
-        raw: 0
-      delivery: hand
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - awakening
-      executionTime:
-        base: r1
-        slow:
-          unit: second
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: reactive-awaken
-      interaction: attack
-      limitation: <p>Only usable on the other participant in the Partner Awaken.</p>
-      maneuver: reactive
-      mundane: false
-      overview:
-        base: <p>Target is @L[Keyword:Awaken]{awakened}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: contact
-      skill: true
-      standard: true
-      targets:
-        - creature
-    transfer: true
-    type: ability
-  - _id: Ra9scqai2PEMafKq
-    _key: '!items.effects!Mo0248PJ8S9o0zJp.Ra9scqai2PEMafKq'
+  - _id: MenHrbutGNJS7obH
+    _key: '!items.effects!jXBTccItoFIWiDfu.MenHrbutGNJS7obH'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.GTwa9EG1h2n986ZO
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/instant-awaken.webp
     name: Instant Awaken
     system:
@@ -335,6 +284,69 @@ effects:
         - creature
     transfer: true
     type: ability
+  - _id: bVBOGTNlZJhonZzB
+    _key: '!items.effects!jXBTccItoFIWiDfu.bVBOGTNlZJhonZzB'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8d55640ef65f1e81
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/reactive-awaken.webp
+    name: Reactive Awaken
+    system:
+      _sup: shn8qx3LbBe4ktYg
+      automations:
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          common:
+            - awaken
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          showConfirmationDialog: true
+          type: common
+      competence:
+        raw: 0
+      delivery: hand
+      duration:
+        raw: '0'
+        unit: instant
+      effectTypes:
+        - awakening
+      executionTime:
+        base: r1
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: reactive-awaken
+      interaction: attack
+      limitation: <p>Only usable on the other participant in the Partner Awaken.</p>
+      maneuver: reactive
+      mundane: false
+      overview:
+        base: <p>Target is @L[Keyword:Awaken]{awakened}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: contact
+      skill: true
+      standard: true
+      targets:
+        - creature
+    transfer: true
+    type: ability
 folder: 0b00935e53673daa
 img: systems/teriock/src/icons/ranks/rank-1-veteran.webp
 name: Rank 1 Veteran
@@ -360,12 +372,8 @@ system:
   statDice:
     hp:
       disabled: false
-      faces: 12
-      number:
-        raw: '1'
+      formula: 1d12
     mp:
       disabled: false
-      faces: 8
-      number:
-        raw: '1'
+      formula: 1d8
 type: rank

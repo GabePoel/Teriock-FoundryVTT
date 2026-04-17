@@ -1,20 +1,20 @@
-_id: GyFieveVvvLyqQV4
-_key: '!items!GyFieveVvvLyqQV4'
+_id: NzYaOFCxcJBkdUUd
+_key: '!items!NzYaOFCxcJBkdUUd'
 _stats:
   compendiumSource: Compendium.teriock.classes.Item.2c16e58cb4fa959b
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.23
+  systemVersion: 0.12.15
 effects:
   - _id: AtUPPT2VKpl3SDUg
-    _key: '!items.effects!GyFieveVvvLyqQV4.AtUPPT2VKpl3SDUg'
+    _key: '!items.effects!NzYaOFCxcJBkdUUd.AtUPPT2VKpl3SDUg'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.1DpSwqGbKUAvbn3q
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     flags:
       teriock:
         category: combat
@@ -29,7 +29,10 @@ effects:
       duration:
         raw: '0'
         unit: unlimited
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -39,6 +42,7 @@ effects:
       identifier: battle-cry
       interaction: manifest
       maneuver: passive
+      mundane: false
       overview:
         base: >-
           <p>You gain @L[Ability:Battle Cry Aura]{Battle Cry Aura} and
@@ -55,14 +59,180 @@ effects:
         - self
     transfer: true
     type: ability
-  - _id: DKLJOu0AxsOK92sk
-    _key: '!items.effects!GyFieveVvvLyqQV4.DKLJOu0AxsOK92sk'
+  - _id: ss8nMvpGEnj5nnXU
+    _key: '!items.effects!NzYaOFCxcJBkdUUd.ss8nMvpGEnj5nnXU'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.187e38f244e18cbf
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    flags:
+      teriock:
+        category: support
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/berserker-healing-factor.webp
+    name: Berserker Healing Factor
+    system:
+      automations:
+        8QOdQYnnSxyi3PA8:
+          _id: 8QOdQYnnSxyi3PA8
+          competencies:
+            - 0
+            - 1
+            - 2
+          conditions:
+            absent:
+              - burned
+              - dead
+              - frozen
+            present:
+              - hacked
+          consumeStatDice: true
+          forHarm: false
+          heighten:
+            - 0
+            - 1
+          noStatDice: true
+          trigger: turnStart
+          type: heal
+      class: berserker
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        conditions:
+          absent:
+            - dead
+        raw: '0'
+        unit: unlimited
+      effectTypes:
+        - healing
+        - regeneration
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: berserker-healing-factor
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>At the start of each of your @L[Core:Turn]{turns}, you
+          @L[Core:Healing]{heal}. You cannot restore @L[Core:Hit Points and Mana
+          Points]{HP} in this way.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - primal
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: GdB9HOLG829lz7Sl
+    _key: '!items.effects!NzYaOFCxcJBkdUUd.GdB9HOLG829lz7Sl'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.AyDa3orgfgOAAjM3
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
+    name: Battle Cry Resistance
+    system:
+      _sup: AtUPPT2VKpl3SDUg
+      automations:
+        8f623097f9f2a087:
+          _id: 8f623097f9f2a087
+          bonus: '0'
+          competencies:
+            - 0
+            - 1
+            - 2
+          heighten:
+            - 1
+            - 0
+          hex: false
+          type: resist
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.protections.resistances.statuses
+              phase: normal
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              type: add
+              value: frightened
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+      class: berserker
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: instant
+      effectTypes:
+        - resistance
+      endCondition: <p>You die or 1 minute passes without combat.</p>
+      executionTime:
+        base: a0
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: battle-cry-resistance
+      interaction: manifest
+      maneuver: active
+      mundane: false
+      overview:
+        base: >-
+          <p>You @L[Keyword:Resistance]{resist} being
+          @L[Condition:Frightened]{frightened}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: dXZd9H8WZvzRjHrC
+    _key: '!items.effects!NzYaOFCxcJBkdUUd.dXZd9H8WZvzRjHrC'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.3bf8b295f6088182
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
     name: Battle Cry Aura
     system:
@@ -124,7 +294,10 @@ effects:
       endCondition: >-
         <p>At the start of each of the targets' @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime: a1
+      executionTime:
+        base: a1
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -134,6 +307,7 @@ effects:
       identifier: battle-cry-aura
       interaction: feat
       maneuver: active
+      mundane: false
       overview:
         base: <p>This ability cannot affect @L[Condition:Deaf]{deaf} creatures.</p>
       piercing:
@@ -149,164 +323,6 @@ effects:
       standard: true
       targets:
         - creature
-    transfer: true
-    type: ability
-  - _id: Rusv2sBLHPXJvDgF
-    _key: '!items.effects!GyFieveVvvLyqQV4.Rusv2sBLHPXJvDgF'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.AyDa3orgfgOAAjM3
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.4
-    img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
-    name: Battle Cry Resistance
-    system:
-      _sup: AtUPPT2VKpl3SDUg
-      automations:
-        8f623097f9f2a087:
-          _id: 8f623097f9f2a087
-          bonus: '0'
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          hex: false
-          type: resist
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.protections.resistances.statuses
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: add
-              value: frightened
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-      class: berserker
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        unit: instant
-      effectTypes:
-        - resistance
-      endCondition: <p>You die or 1 minute passes without combat.</p>
-      executionTime: a0
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: battle-cry-resistance
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>You @L[Keyword:Resistance]{resist} being
-          @L[Condition:Frightened]{frightened}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-    transfer: true
-    type: ability
-  - _id: ss8nMvpGEnj5nnXU
-    _key: '!items.effects!GyFieveVvvLyqQV4.ss8nMvpGEnj5nnXU'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.187e38f244e18cbf
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.4
-    flags:
-      teriock:
-        category: support
-        defaultAbility: true
-    img: systems/teriock/src/icons/abilities/berserker-healing-factor.webp
-    name: Berserker Healing Factor
-    system:
-      automations:
-        8QOdQYnnSxyi3PA8:
-          _id: 8QOdQYnnSxyi3PA8
-          competencies:
-            - 0
-            - 1
-            - 2
-          conditions:
-            absent:
-              - burned
-              - dead
-              - frozen
-            present:
-              - hacked
-          consumeStatDice: true
-          forHarm: false
-          heighten:
-            - 0
-            - 1
-          noStatDice: true
-          trigger: turnStart
-          type: heal
-      class: berserker
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        conditions:
-          absent:
-            - dead
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - healing
-        - regeneration
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: berserker-healing-factor
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>At the start of each of your @L[Core:Turn]{turns}, you
-          @L[Core:Healing]{heal}. You cannot restore @L[Core:Hit Points and Mana
-          Points]{HP} in this way.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - primal
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
     transfer: true
     type: ability
 folder: 997cd433ccad17d7
@@ -331,12 +347,8 @@ system:
   statDice:
     hp:
       disabled: false
-      faces: 12
-      number:
-        raw: '1'
+      formula: 1d12
     mp:
       disabled: false
-      faces: 8
-      number:
-        raw: '1'
+      formula: 1d8
 type: rank

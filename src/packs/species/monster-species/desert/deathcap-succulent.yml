@@ -4,16 +4,16 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.68
+  systemVersion: 0.12.15
 effects:
-  - _id: Q1SSsaZyZxAEhPVW
-    _key: '!items.effects!2f5f902b0f91aca3.Q1SSsaZyZxAEhPVW'
+  - _id: 4nQYEqwuDGrBi3OQ
+    _key: '!items.effects!2f5f902b0f91aca3.4nQYEqwuDGrBi3OQ'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.b231c43502dd9d39
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/death-ray.webp
     name: Death Ray
     system:
@@ -67,7 +67,10 @@ effects:
         - killing
       elements:
         - necromancy
-      executionTime: a1
+      executionTime:
+        base: a1
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -80,6 +83,7 @@ effects:
       identifier: death-ray
       interaction: attack
       maneuver: active
+      mundane: false
       piercing:
         raw: 1
       powerSources:
@@ -102,14 +106,14 @@ effects:
         - creature
     transfer: true
     type: ability
-  - _id: Q2QbifHpziiHr2h7
-    _key: '!items.effects!2f5f902b0f91aca3.Q2QbifHpziiHr2h7'
+  - _id: e1x2QhXlu8UzzprX
+    _key: '!items.effects!2f5f902b0f91aca3.e1x2QhXlu8UzzprX'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.2463fd01df79572f
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/dense-intelligence.webp
     name: Dense Intelligence
     system:
@@ -119,7 +123,10 @@ effects:
       duration:
         raw: '0'
         unit: unlimited
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -129,6 +136,7 @@ effects:
       identifier: dense-intelligence
       interaction: manifest
       maneuver: passive
+      mundane: false
       piercing:
         raw: 0
       powerSources:
@@ -143,14 +151,14 @@ effects:
           value: -2
     transfer: true
     type: ability
-  - _id: lAzmhJjEhR3ocyro
-    _key: '!items.effects!2f5f902b0f91aca3.lAzmhJjEhR3ocyro'
+  - _id: ihvwxnwxzPKCz2n4
+    _key: '!items.effects!2f5f902b0f91aca3.ihvwxnwxzPKCz2n4'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.afb836aee9c366cf
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/desert-native.webp
     name: Desert Native
     system:
@@ -160,7 +168,10 @@ effects:
       duration:
         raw: '0'
         unit: unlimited
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -170,6 +181,7 @@ effects:
       identifier: desert-native
       interaction: manifest
       maneuver: passive
+      mundane: false
       overview:
         base: >-
           <p>You gain @L[Ability:Desert Resilience]{Desert Resilience} and
@@ -184,14 +196,131 @@ effects:
         - self
     transfer: true
     type: ability
-  - _id: 90ooN69k4RDaK7Rr
-    _key: '!items.effects!2f5f902b0f91aca3.90ooN69k4RDaK7Rr'
+  - _id: VEszO1NKoGFGcQaG
+    _key: '!items.effects!2f5f902b0f91aca3.VEszO1NKoGFGcQaG'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.0S4l1JqVpE7OUDZL
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/agile.webp
+    name: Agile
+    system:
+      _sup: ihvwxnwxzPKCz2n4
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.speedAdjustments.difficultTerrain
+              phase: normal
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              type: upgrade
+              value: '3'
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      effectTypes:
+        - movement
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: agile
+      interaction: manifest
+      limitation: <p>Desert terrain only.</p>
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>You walk through difficult terrain at @L[Core:Movement
+          Speed]{normal speed}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: gIDJp9JBRblvTTza
+    _key: '!items.effects!2f5f902b0f91aca3.gIDJp9JBRblvTTza'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.b988f8f996a9d6d1
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/desert-resilience.webp
+    name: Desert Resilience
+    system:
+      _sup: ihvwxnwxzPKCz2n4
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: desert-resilience
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>You @L[Keyword:Deboosted]{deboost} @L[Core:Damage]{damage} caused
+          by desert weather.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: 9UNbTEz6uqv7D4oJ
+    _key: '!items.effects!2f5f902b0f91aca3.9UNbTEz6uqv7D4oJ'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.4ef7b58f3074bf1c
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/fire-damage-immunity.webp
     name: Fire Damage Immunity
     system:
@@ -225,7 +354,10 @@ effects:
         unit: unlimited
       effectTypes:
         - immunity
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -235,6 +367,7 @@ effects:
       identifier: fire-damage-immunity
       interaction: manifest
       maneuver: passive
+      mundane: false
       overview:
         base: >-
           <p>You are @L[Keyword:Immunity]{immune} to @L[Damage:Fire]{fire
@@ -249,14 +382,14 @@ effects:
         - self
     transfer: true
     type: ability
-  - _id: ZNnov7qQuNKBbO9g
-    _key: '!items.effects!2f5f902b0f91aca3.ZNnov7qQuNKBbO9g'
+  - _id: vo0z1oke3dZ8X5d4
+    _key: '!items.effects!2f5f902b0f91aca3.vo0z1oke3dZ8X5d4'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.9a47673c035f0ea5
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/lightning-immunity.webp
     name: Lightning Immunity
     system:
@@ -266,7 +399,10 @@ effects:
       duration:
         raw: '0'
         unit: unlimited
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -276,6 +412,7 @@ effects:
       identifier: lightning-immunity
       interaction: manifest
       maneuver: passive
+      mundane: false
       overview:
         base: >-
           <p>You are @L[Keyword:Immunity]{immune} to @L[Category:Lightning
@@ -290,14 +427,14 @@ effects:
         - self
     transfer: true
     type: ability
-  - _id: AmUccOj545Xpfd2h
-    _key: '!items.effects!2f5f902b0f91aca3.AmUccOj545Xpfd2h'
+  - _id: DsUnlp9878vRzWzs
+    _key: '!items.effects!2f5f902b0f91aca3.DsUnlp9878vRzWzs'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.072c1d93bd5ee956
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/low-strength.webp
     name: Low Strength
     system:
@@ -307,7 +444,10 @@ effects:
       duration:
         raw: '0'
         unit: unlimited
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -317,6 +457,7 @@ effects:
       identifier: low-strength
       interaction: manifest
       maneuver: passive
+      mundane: false
       piercing:
         raw: 0
       powerSources:
@@ -331,14 +472,14 @@ effects:
           value: -1
     transfer: true
     type: ability
-  - _id: ev3jrOeyt50bM3hq
-    _key: '!items.effects!2f5f902b0f91aca3.ev3jrOeyt50bM3hq'
+  - _id: 7x02r29vvMl3qxm5
+    _key: '!items.effects!2f5f902b0f91aca3.7x02r29vvMl3qxm5'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.1d13190e5b38bda6
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/normal-sneak.webp
     name: Normal Sneak
     system:
@@ -348,7 +489,10 @@ effects:
       duration:
         raw: '0'
         unit: unlimited
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -358,6 +502,7 @@ effects:
       identifier: normal-sneak
       interaction: manifest
       maneuver: passive
+      mundane: false
       piercing:
         raw: 0
       powerSources:
@@ -372,14 +517,14 @@ effects:
           value: 0
     transfer: true
     type: ability
-  - _id: eHTwZSRzRUP8cSUi
-    _key: '!items.effects!2f5f902b0f91aca3.eHTwZSRzRUP8cSUi'
+  - _id: xLVduSurLr3ohlSR
+    _key: '!items.effects!2f5f902b0f91aca3.xLVduSurLr3ohlSR'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.ffa31f0e63a34544
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/poor-perception.webp
     name: Poor Perception
     system:
@@ -389,7 +534,10 @@ effects:
       duration:
         raw: '0'
         unit: unlimited
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -399,6 +547,7 @@ effects:
       identifier: poor-perception
       interaction: manifest
       maneuver: passive
+      mundane: false
       piercing:
         raw: 0
       powerSources:
@@ -413,14 +562,14 @@ effects:
           value: -1
     transfer: true
     type: ability
-  - _id: 3B3Np7O8R9zZSXt9
-    _key: '!items.effects!2f5f902b0f91aca3.3B3Np7O8R9zZSXt9'
+  - _id: QRg853NX5TBaYSAY
+    _key: '!items.effects!2f5f902b0f91aca3.QRg853NX5TBaYSAY'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.919e1424f589c498
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/slow.webp
     name: Slow
     system:
@@ -430,7 +579,10 @@ effects:
       duration:
         raw: '0'
         unit: unlimited
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -440,6 +592,7 @@ effects:
       identifier: slow
       interaction: manifest
       maneuver: passive
+      mundane: false
       piercing:
         raw: 0
       powerSources:
@@ -454,14 +607,14 @@ effects:
           value: -1
     transfer: true
     type: ability
-  - _id: 5UQqad1ItpW1UbID
-    _key: '!items.effects!2f5f902b0f91aca3.5UQqad1ItpW1UbID'
+  - _id: u2YPGQwRXGOzViZj
+    _key: '!items.effects!2f5f902b0f91aca3.u2YPGQwRXGOzViZj'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.6f1e35c05a5589d6
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/snare.webp
     name: Snare
     system:
@@ -537,7 +690,10 @@ effects:
       endCondition: >-
         <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime: a1
+      executionTime:
+        base: a1
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -547,6 +703,7 @@ effects:
       identifier: snare
       interaction: attack
       maneuver: active
+      mundane: false
       piercing:
         raw: 0
       powerSources:
@@ -560,123 +717,6 @@ effects:
       standard: true
       targets:
         - leg
-    transfer: true
-    type: ability
-  - _id: 5QlKGkYgyO99e1w0
-    _key: '!items.effects!2f5f902b0f91aca3.5QlKGkYgyO99e1w0'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.0S4l1JqVpE7OUDZL
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.4
-    img: systems/teriock/src/icons/abilities/agile.webp
-    name: Agile
-    system:
-      _sup: lAzmhJjEhR3ocyro
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.speedAdjustments.difficultTerrain
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: upgrade
-              value: '3'
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      effectTypes:
-        - movement
-      executionTime:
-        base: passive
-        slow:
-          unit: second
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: agile
-      interaction: manifest
-      limitation: <p>Desert terrain only.</p>
-      maneuver: passive
-      mundane: false
-      overview:
-        base: >-
-          <p>You walk through difficult terrain at @L[Core:Movement
-          Speed]{normal speed}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-    transfer: true
-    type: ability
-  - _id: nIdyyCzADo0ynIs0
-    _key: '!items.effects!2f5f902b0f91aca3.nIdyyCzADo0ynIs0'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.b988f8f996a9d6d1
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.2
-    img: systems/teriock/src/icons/abilities/desert-resilience.webp
-    name: Desert Resilience
-    system:
-      _sup: lAzmhJjEhR3ocyro
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime:
-        base: passive
-        slow:
-          unit: second
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: desert-resilience
-      interaction: manifest
-      maneuver: passive
-      mundane: false
-      overview:
-        base: >-
-          <p>You @L[Keyword:Deboosted]{deboost} @L[Core:Damage]{damage} caused
-          by desert weather.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
     transfer: true
     type: ability
 folder: 8185a98b7551093c

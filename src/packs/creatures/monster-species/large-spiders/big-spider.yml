@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.68
+  systemVersion: 0.12.15
 folder: 334a64a756ec6a7a
 img: systems/teriock/src/icons/creatures/big-spider.webp
 items:
@@ -15,17 +15,17 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     effects:
-      - _id: iLonuB49vKplJDkr
+      - _id: PmzXgaOiu9BQLt7U
         _key: >-
-          !actors.items.effects!d937be39867e3cd6.d937be39867e3cd6.iLonuB49vKplJDkr
+          !actors.items.effects!d937be39867e3cd6.d937be39867e3cd6.PmzXgaOiu9BQLt7U
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.0e75f7075511721e
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/acrobatics.webp
         name: Acrobatics
         system:
@@ -72,122 +72,41 @@ items:
               value: 1
         transfer: true
         type: ability
-      - _id: iMq3dnTFuE6dIVfd
+      - _id: 2Rk9pQK3TGWehSM9
         _key: >-
-          !actors.items.effects!d937be39867e3cd6.d937be39867e3cd6.iMq3dnTFuE6dIVfd
+          !actors.items.effects!d937be39867e3cd6.d937be39867e3cd6.2Rk9pQK3TGWehSM9
         _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.7f9e17153212f5a6
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.9a907b978a24ebd6
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/abilities/adrenaline.webp
-        name: Adrenaline
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/abilities/climbing.webp
+        name: Climbing
         system:
+          _sup: PmzXgaOiu9BQLt7U
           automations:
-            8f623097f9f2a087:
-              _id: 8f623097f9f2a087
-              bonus: '0'
+            AXwLjBzDx4XcVcAJ:
+              _id: AXwLjBzDx4XcVcAJ
               competencies:
                 - 0
                 - 1
                 - 2
               heighten:
-                - 1
                 - 0
-              hex: false
-              type: resist
+                - 1
+              movementAction: climb
+              type: changeMovement
             e789ed5e109ebd1a:
               _id: e789ed5e109ebd1a
               changes:
-                - key: system.protections.resistances.other
-                  phase: normal
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  type: add
-                  value: Dropping From Negative HP
-                - key: system.protections.resistances.statuses
-                  phase: normal
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  type: add
-                  value: unconscious
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
-              type: changes
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          effectTypes:
-            - resistance
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: adrenaline
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          overview:
-            base: >-
-              <p>You @L[Keyword:Resistance]{resist}
-              @L[Condition:Unconscious]{unconsciousness} and
-              @L[Condition:Down]{dropping} due to being at negative @L[Core:Hit
-              Points and Mana Points]{HP}. You still @L[Condition:Dead]{die}
-              when you reach half your maximum @L[Core:Hit Points and Mana
-              Points]{HP} below zero.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          targets:
-            - self
-        transfer: true
-        type: ability
-      - _id: r1WhsgN2PE8XoYVA
-        _key: >-
-          !actors.items.effects!d937be39867e3cd6.d937be39867e3cd6.r1WhsgN2PE8XoYVA
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.0d78f7478e1024cb
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/abilities/dark-vision.webp
-        name: Dark Vision
-        system:
-          automations:
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
-              changes:
-                - key: system.senses.dark
+                - key: system.speedAdjustments.climb
                   phase: normal
                   priority: 10
                   qualifier: '1'
                   target: Actor
                   type: upgrade
-                  value: '60'
+                  value: '2'
               competencies:
                 - 0
                 - 1
@@ -199,634 +118,17 @@ items:
                 - 1
                 - 0
               type: changes
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          effectTypes:
-            - sensory
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: dark-vision
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          overview:
-            base: >-
-              <p>You can see in the dark up to 60 feet as though it is dim
-              light.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          targets:
-            - self
-        transfer: true
-        type: ability
-      - _id: afLJQ4zJHqsmalTH
-        _key: >-
-          !actors.items.effects!d937be39867e3cd6.d937be39867e3cd6.afLJQ4zJHqsmalTH
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.2463fd01df79572f
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/abilities/dense-intelligence.webp
-        name: Dense Intelligence
-        system:
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: flaw
-          identifier: dense-intelligence
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          targets:
-            - self
-          upgrades:
-            score:
-              attribute: int
-              value: -2
-        transfer: true
-        type: ability
-      - _id: ojq7qI0XdguKmE2s
-        _key: >-
-          !actors.items.effects!d937be39867e3cd6.d937be39867e3cd6.ojq7qI0XdguKmE2s
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.f927c5a43cc3b312
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/abilities/devour.webp
-        name: Devour
-        system:
-          competence:
-            raw: 0
-          delivery: bite
-          duration:
-            raw: '0'
-            unit: instant
-          executionTime:
-            base: a2
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: devour
-          interaction: attack
-          maneuver: active
-          mundane: false
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: contact
-          requirements: <p>Target is @L[Condition:Down]{down}.</p>
-          results:
-            hit: >-
-              <p>Target is @L[Condition:Dead]{dead},
-              @L[Condition:Ruined]{ruined}, and their @L[Core:Size]{SIZE} is
-              reduced by 1. If their @L[Core:Size]{SIZE} was already less than
-              1, it is reduced to 0.</p>
-          targets:
-            - creature
-        transfer: true
-        type: ability
-      - _id: NuUAkhlfcgrJxEFJ
-        _key: >-
-          !actors.items.effects!d937be39867e3cd6.d937be39867e3cd6.NuUAkhlfcgrJxEFJ
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.8aa8167e9f40cbb2
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/abilities/improved-strength.webp
-        name: Improved Strength
-        system:
-          class: knight
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: improved-strength
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          overview:
-            base: >-
-              <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
-              @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          skill: true
-          standard: true
-          targets:
-            - self
-          upgrades:
-            score:
-              attribute: str
-              value: 2
-        transfer: true
-        type: ability
-      - _id: 5vyayLr2gdLt3uCY
-        _key: >-
-          !actors.items.effects!d937be39867e3cd6.d937be39867e3cd6.5vyayLr2gdLt3uCY
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.4c9ba7e67dd8d160
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/abilities/no-hands.webp
-        name: No Hands
-        system:
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: flaw
-          identifier: no-hands
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          overview:
-            base: <p>You cannot use items in your @L[Equipment:Hand]{hands}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          targets:
-            - self
-        transfer: true
-        type: ability
-      - _id: GBDeC5bHN7LE0RoD
-        _key: >-
-          !actors.items.effects!d937be39867e3cd6.d937be39867e3cd6.GBDeC5bHN7LE0RoD
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.1c52eda8919d34a7
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/abilities/normal-movement.webp
-        name: Normal Movement
-        system:
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: normal-movement
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          targets:
-            - self
-          upgrades:
-            score:
-              attribute: mov
-              value: 0
-        transfer: true
-        type: ability
-      - _id: wYMsGVwOfBrZOFVZ
-        _key: >-
-          !actors.items.effects!d937be39867e3cd6.d937be39867e3cd6.wYMsGVwOfBrZOFVZ
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.8249d99c527d09b1
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/abilities/normal-perception.webp
-        name: Normal Perception
-        system:
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: normal-perception
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          targets:
-            - self
-          upgrades:
-            score:
-              attribute: per
-              value: 0
-        transfer: true
-        type: ability
-      - _id: h3f79vhj9ltwtrtG
-        _key: >-
-          !actors.items.effects!d937be39867e3cd6.d937be39867e3cd6.h3f79vhj9ltwtrtG
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.1a046cd851f312b9
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/abilities/poison-strike.webp
-        name: Poison Strike
-        system:
-          automations:
-            29b275994cf9f5b1:
-              _id: 29b275994cf9f5b1
-              competencies:
-                - 0
-                - 1
-                - 2
-              formula: 1d6[toxic]
-              heighten:
-                - 1
-                - 0
-              impact: damage
-              merge: true
-              type: roll
-            3f7fa7707643426f:
-              _id: 3f7fa7707643426f
-              competencies:
-                - 2
-              formula: 1d10[toxic]
-              heighten:
-                - 1
-                - 0
-              impact: damage
-              merge: true
-              type: roll
-            5e4d195ed81a10cc:
-              _id: 5e4d195ed81a10cc
-              competencies:
-                - 1
-                - 2
-              formula: 1d8[toxic]
-              heighten:
-                - 1
-                - 0
-              impact: damage
-              merge: true
-              type: roll
-            743730f25f256b10:
-              _id: 743730f25f256b10
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              executor: false
-              heighten:
-                - 1
-                - 0
-              relation: include
-              status: poisoned
-              target: false
-              type: status
-          class: assassin
-          competence:
-            raw: 0
-          delivery: weapon
-          duration:
-            raw: '24'
-            unit: hour
-          effectTypes:
-            - poison
-          endCondition: <p>Target @L[Condition:Dead]{dies}.</p>
-          executionTime:
-            base: a1
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: poison-strike
-          interaction: attack
-          limitation: <p>@L[Category:Biting equipment]{Biting items} only.</p>
-          maneuver: active
-          mundane: false
-          overview:
-            fluent: >-
-              <p>The @L[Condition:Poisoned]{poison} instead deals [[/damage
-              1d10[toxic]]] @L[Core:Damage]{damage}.</p>
-            proficient: >-
-              <p>The @L[Condition:Poisoned]{poison} instead deals [[/damage
-              1d8[toxic]]] @L[Core:Damage]{damage}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - alchemical
-          range:
-            unit: contact
-          results:
-            hit: >-
-              <p>Target is @L[Condition:Poisoned]{poisoned}. The
-              @L[Condition:Poisoned]{poison} deals [[/damage 1d6[toxic]]]
-              @L[Core:Damage]{damage}.</p>
-          skill: true
-          targets:
-            - creature
-        transfer: true
-        type: ability
-      - _id: wbyXSbIiMrnEyXFR
-        _key: >-
-          !actors.items.effects!d937be39867e3cd6.d937be39867e3cd6.wbyXSbIiMrnEyXFR
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.6f1e35c05a5589d6
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/abilities/snare.webp
-        name: Snare
-        system:
-          automations:
-            5d57231066693cee:
-              _id: 5d57231066693cee
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              executor: false
-              heighten:
-                - 1
-                - 0
-              relation: include
-              status: snared
-              target: false
-              type: status
-            d5717000e99ee582:
-              _id: d5717000e99ee582
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 1
-              heighten:
-                - 1
-                - 0
-              type: combatExpiration
-              what:
-                roll: 2d4kh1
-                threshold: 4
-                type: rolled
-              when:
-                skip: 1
-                time: end
-                trigger: turn
-              who:
-                type: target
-            d635eb44dba086dd:
-              _id: d635eb44dba086dd
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-              heighten:
-                - 1
-                - 0
-              type: combatExpiration
-              what:
-                roll: 2d4kh1
-                threshold: 4
-                type: rolled
-              when:
-                skip: 0
-                time: end
-                trigger: turn
-              who:
-                type: target
-          class: ranger
-          competence:
-            raw: 0
-          delivery: weapon
-          duration:
-            raw: '0'
-            unit: unlimited
-          endCondition: >-
-            <p>At the end of each of the target's @L[Core:Turn]{turns}, they
-            roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
-            ends.</p>
-          executionTime:
-            base: a1
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: snare
-          interaction: attack
-          maneuver: active
-          mundane: false
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: contact
-          results:
-            critHit: >-
-              <p>The target automatically fails the first [[/roll 2d4]]
-              roll.</p>
-            hit: <p>Target is @L[Condition:Snared]{snared}.</p>
-          skill: true
-          standard: true
-          targets:
-            - leg
-        transfer: true
-        type: ability
-      - _id: DkTn0pVeqElwsVvp
-        _key: >-
-          !actors.items.effects!d937be39867e3cd6.d937be39867e3cd6.DkTn0pVeqElwsVvp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.e2ede5b6049bda5a
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/abilities/sneaky.webp
-        name: Sneaky
-        system:
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: sneaky
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          targets:
-            - self
-          upgrades:
-            score:
-              attribute: snk
-              value: 1
-        transfer: true
-        type: ability
-      - _id: ctp04EgXiRa1DQEk
-        _key: >-
-          !actors.items.effects!d937be39867e3cd6.d937be39867e3cd6.ctp04EgXiRa1DQEk
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.4f0fea9742a070ef
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/abilities/unbreachability.webp
-        name: Unbreachability
-        system:
-          automations:
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
+            f025905e157ac261:
+              _id: f025905e157ac261
               changes:
-                - key: system.av.bonus
+                - key: system.speedAdjustments.climb
                   phase: normal
                   priority: 10
-                  qualifier: '@av'
-                  target: equipment
+                  qualifier: '1'
+                  target: Actor
                   type: upgrade
-                  value: '1'
-                - key: system.props
-                  phase: normal
-                  priority: 10
-                  qualifier: '@av'
-                  target: body
-                  type: add
-                  value: unbreachable
+                  value: '3'
               competencies:
-                - 0
                 - 1
                 - 2
               crit:
@@ -836,13 +138,14 @@ items:
                 - 1
                 - 0
               type: changes
-          class: veteran
           competence:
             raw: 0
           delivery: self
           duration:
             raw: '0'
             unit: unlimited
+          effectTypes:
+            - movement
           executionTime:
             base: passive
             slow:
@@ -853,217 +156,36 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          identifier: unbreachability
+          identifier: climbing
           interaction: manifest
           maneuver: passive
           mundane: false
           overview:
-            base: <p>Armor you wear is @L[Property:Unbreachable]{unbreachable}.</p>
+            base: <p>You climb at @L[Core:Movement Speed]{half speed}.</p>
+            proficient: <p>You instead climb at @L[Core:Movement Speed]{normal speed}.</p>
           piercing:
             raw: 0
           powerSources:
             - martial
           range:
             unit: self
-          skill: true
-          standard: true
           targets:
             - self
         transfer: true
         type: ability
-      - _id: 3VkVGxl3mSEReAP2
+      - _id: EPjkQBEN4BXfTPSt
         _key: >-
-          !actors.items.effects!d937be39867e3cd6.d937be39867e3cd6.3VkVGxl3mSEReAP2
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.d3ce50677dca3446
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/abilities/web-ball.webp
-        name: Web Ball
-        system:
-          automations:
-            5d57231066693cee:
-              _id: 5d57231066693cee
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              executor: false
-              heighten:
-                - 1
-                - 0
-              relation: include
-              status: snared
-              target: false
-              type: status
-            d635eb44dba086dd:
-              _id: d635eb44dba086dd
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
-              type: combatExpiration
-              what:
-                roll: 2d4kh1
-                threshold: 4
-                type: rolled
-              when:
-                skip: 0
-                time: start
-                trigger: turn
-              who:
-                type: target
-          competence:
-            raw: 0
-          delivery: missile
-          duration:
-            raw: '0'
-            unit: instant
-          endCondition: >-
-            <p>At the start of each of the target's @L[Core:Turn]{turns}, they
-            roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
-            ends.</p>
-          executionTime:
-            base: a1
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: web-ball
-          interaction: attack
-          maneuver: active
-          mundane: false
-          piercing:
-            raw: 2
-          powerSources:
-            - martial
-          range:
-            raw: '30'
-            unit: ft
-          results:
-            hit: <p>Target is @L[Condition:Snared]{snared}.</p>
-          targets:
-            - creature
-        transfer: true
-        type: ability
-      - _id: Ysw7sGvoCLYT7eFG
-        _key: >-
-          !actors.items.effects!d937be39867e3cd6.d937be39867e3cd6.Ysw7sGvoCLYT7eFG
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.f38bdb084e8eed6f
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/abilities/web-packet.webp
-        name: Web Packet
-        system:
-          automations:
-            5d57231066693cee:
-              _id: 5d57231066693cee
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              executor: false
-              heighten:
-                - 1
-                - 0
-              relation: include
-              status: snared
-              target: false
-              type: status
-            d635eb44dba086dd:
-              _id: d635eb44dba086dd
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
-              type: combatExpiration
-              what:
-                roll: 2d4kh1
-                threshold: 4
-                type: rolled
-              when:
-                skip: 0
-                time: end
-                trigger: turn
-              who:
-                type: target
-          competence:
-            raw: 0
-          delivery: missile
-          duration:
-            raw: '0'
-            unit: instant
-          endCondition: >-
-            <p>At the end of each of the target's @L[Core:Turn]{turns}, they
-            roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
-            ends.</p>
-          executionTime:
-            base: a1
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: web-packet
-          interaction: attack
-          maneuver: active
-          mundane: false
-          piercing:
-            raw: 1
-          powerSources:
-            - martial
-          range:
-            raw: '60'
-            unit: ft
-          results:
-            hit: <p>Target is @L[Condition:Snared]{snared}.</p>
-          targets:
-            - creature
-        transfer: true
-        type: ability
-      - _id: AW9lULCdg9G7YiYI
-        _key: >-
-          !actors.items.effects!d937be39867e3cd6.d937be39867e3cd6.AW9lULCdg9G7YiYI
+          !actors.items.effects!d937be39867e3cd6.d937be39867e3cd6.EPjkQBEN4BXfTPSt
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.3TtZLD3ppn1UO5vG
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/leaping.webp
         name: Leaping
         system:
-          _sup: iLonuB49vKplJDkr
+          _sup: PmzXgaOiu9BQLt7U
           automations:
             Arm4CqvFyyRVggkV:
               _id: Arm4CqvFyyRVggkV
@@ -1174,63 +296,50 @@ items:
             - self
         transfer: true
         type: ability
-      - _id: dW4zxDKbCwSI22j8
+      - _id: et2nRunTgI9sWimq
         _key: >-
-          !actors.items.effects!d937be39867e3cd6.d937be39867e3cd6.dW4zxDKbCwSI22j8
+          !actors.items.effects!d937be39867e3cd6.d937be39867e3cd6.et2nRunTgI9sWimq
         _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.9a907b978a24ebd6
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.7f9e17153212f5a6
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/abilities/climbing.webp
-        name: Climbing
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/abilities/adrenaline.webp
+        name: Adrenaline
         system:
-          _sup: iLonuB49vKplJDkr
           automations:
-            AXwLjBzDx4XcVcAJ:
-              _id: AXwLjBzDx4XcVcAJ
+            8f623097f9f2a087:
+              _id: 8f623097f9f2a087
+              bonus: '0'
               competencies:
                 - 0
                 - 1
                 - 2
               heighten:
-                - 0
                 - 1
-              movementAction: climb
-              type: changeMovement
+                - 0
+              hex: false
+              type: resist
             e789ed5e109ebd1a:
               _id: e789ed5e109ebd1a
               changes:
-                - key: system.speedAdjustments.climb
+                - key: system.protections.resistances.other
                   phase: normal
                   priority: 10
                   qualifier: '1'
                   target: Actor
-                  type: upgrade
-                  value: '2'
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
-              type: changes
-            f025905e157ac261:
-              _id: f025905e157ac261
-              changes:
-                - key: system.speedAdjustments.climb
+                  type: add
+                  value: Dropping From Negative HP
+                - key: system.protections.resistances.statuses
                   phase: normal
                   priority: 10
                   qualifier: '1'
                   target: Actor
-                  type: upgrade
-                  value: '3'
+                  type: add
+                  value: unconscious
               competencies:
+                - 0
                 - 1
                 - 2
               crit:
@@ -1247,7 +356,7 @@ items:
             raw: '0'
             unit: unlimited
           effectTypes:
-            - movement
+            - resistance
           executionTime:
             base: passive
             slow:
@@ -1258,13 +367,18 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          identifier: climbing
+          identifier: adrenaline
           interaction: manifest
           maneuver: passive
           mundane: false
           overview:
-            base: <p>You climb at @L[Core:Movement Speed]{half speed}.</p>
-            proficient: <p>You instead climb at @L[Core:Movement Speed]{normal speed}.</p>
+            base: >-
+              <p>You @L[Keyword:Resistance]{resist}
+              @L[Condition:Unconscious]{unconsciousness} and
+              @L[Condition:Down]{dropping} due to being at negative @L[Core:Hit
+              Points and Mana Points]{HP}. You still @L[Condition:Dead]{die}
+              when you reach half your maximum @L[Core:Hit Points and Mana
+              Points]{HP} below zero.</p>
           piercing:
             raw: 0
           powerSources:
@@ -1275,19 +389,237 @@ items:
             - self
         transfer: true
         type: ability
-      - _id: F8UWzu0DEf8iJaHB
+      - _id: zgkACPdjMrwddSAm
         _key: >-
-          !actors.items.effects!d937be39867e3cd6.d937be39867e3cd6.F8UWzu0DEf8iJaHB
+          !actors.items.effects!d937be39867e3cd6.d937be39867e3cd6.zgkACPdjMrwddSAm
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.0d78f7478e1024cb
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/abilities/dark-vision.webp
+        name: Dark Vision
+        system:
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.senses.dark
+                  phase: normal
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  type: upgrade
+                  value: '60'
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 1
+                - 0
+              type: changes
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            raw: '0'
+            unit: unlimited
+          effectTypes:
+            - sensory
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: dark-vision
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          overview:
+            base: >-
+              <p>You can see in the dark up to 60 feet as though it is dim
+              light.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: lHDo5L2QlTS02B3a
+        _key: >-
+          !actors.items.effects!d937be39867e3cd6.d937be39867e3cd6.lHDo5L2QlTS02B3a
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.2463fd01df79572f
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/abilities/dense-intelligence.webp
+        name: Dense Intelligence
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            raw: '0'
+            unit: unlimited
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          identifier: dense-intelligence
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: int
+              value: -2
+        transfer: true
+        type: ability
+      - _id: qyic8hCgJikNMiQn
+        _key: >-
+          !actors.items.effects!d937be39867e3cd6.d937be39867e3cd6.qyic8hCgJikNMiQn
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.f927c5a43cc3b312
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/abilities/devour.webp
+        name: Devour
+        system:
+          competence:
+            raw: 0
+          delivery: bite
+          duration:
+            raw: '0'
+            unit: instant
+          executionTime:
+            base: a2
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: devour
+          interaction: attack
+          maneuver: active
+          mundane: false
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: contact
+          requirements: <p>Target is @L[Condition:Down]{down}.</p>
+          results:
+            hit: >-
+              <p>Target is @L[Condition:Dead]{dead},
+              @L[Condition:Ruined]{ruined}, and their @L[Core:Size]{SIZE} is
+              reduced by 1. If their @L[Core:Size]{SIZE} was already less than
+              1, it is reduced to 0.</p>
+          targets:
+            - creature
+        transfer: true
+        type: ability
+      - _id: 5QmZFpnM0Bw5HxJW
+        _key: >-
+          !actors.items.effects!d937be39867e3cd6.d937be39867e3cd6.5QmZFpnM0Bw5HxJW
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.8aa8167e9f40cbb2
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/abilities/improved-strength.webp
+        name: Improved Strength
+        system:
+          class: knight
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            raw: '0'
+            unit: unlimited
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: improved-strength
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          overview:
+            base: >-
+              <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
+              @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: str
+              value: 2
+        transfer: true
+        type: ability
+      - _id: AddHRKApPqKgG6Kt
+        _key: >-
+          !actors.items.effects!d937be39867e3cd6.d937be39867e3cd6.AddHRKApPqKgG6Kt
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.07a0880b230cdb14
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/beastly-strength.webp
         name: Beastly Strength
         system:
-          _sup: NuUAkhlfcgrJxEFJ
+          _sup: 5QmZFpnM0Bw5HxJW
           class: knight
           competence:
             raw: 0
@@ -1331,19 +663,19 @@ items:
               value: 1
         transfer: true
         type: ability
-      - _id: I7Y5euasSbU3hcLt
+      - _id: 1AG8JLt6ergTiFtL
         _key: >-
-          !actors.items.effects!d937be39867e3cd6.d937be39867e3cd6.I7Y5euasSbU3hcLt
+          !actors.items.effects!d937be39867e3cd6.d937be39867e3cd6.1AG8JLt6ergTiFtL
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.54f63d63ae4376a9
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
         name: Improved Armor Piercing
         system:
-          _sup: NuUAkhlfcgrJxEFJ
+          _sup: 5QmZFpnM0Bw5HxJW
           class: knight
           competence:
             raw: 0
@@ -1381,11 +713,678 @@ items:
             - self
         transfer: true
         type: ability
+      - _id: gqlo9gGuEG2kBcab
+        _key: >-
+          !actors.items.effects!d937be39867e3cd6.d937be39867e3cd6.gqlo9gGuEG2kBcab
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.4c9ba7e67dd8d160
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/abilities/no-hands.webp
+        name: No Hands
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            raw: '0'
+            unit: unlimited
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          identifier: no-hands
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          overview:
+            base: <p>You cannot use items in your @L[Equipment:Hand]{hands}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: sJgdA0UiSBh3B3UJ
+        _key: >-
+          !actors.items.effects!d937be39867e3cd6.d937be39867e3cd6.sJgdA0UiSBh3B3UJ
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.1c52eda8919d34a7
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/abilities/normal-movement.webp
+        name: Normal Movement
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            raw: '0'
+            unit: unlimited
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: normal-movement
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: mov
+              value: 0
+        transfer: true
+        type: ability
+      - _id: GYsAEThrE1C53qy1
+        _key: >-
+          !actors.items.effects!d937be39867e3cd6.d937be39867e3cd6.GYsAEThrE1C53qy1
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.8249d99c527d09b1
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/abilities/normal-perception.webp
+        name: Normal Perception
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            raw: '0'
+            unit: unlimited
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: normal-perception
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: per
+              value: 0
+        transfer: true
+        type: ability
+      - _id: bPNL3AdyixwVBY9y
+        _key: >-
+          !actors.items.effects!d937be39867e3cd6.d937be39867e3cd6.bPNL3AdyixwVBY9y
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.1a046cd851f312b9
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/abilities/poison-strike.webp
+        name: Poison Strike
+        system:
+          automations:
+            29b275994cf9f5b1:
+              _id: 29b275994cf9f5b1
+              competencies:
+                - 0
+                - 1
+                - 2
+              formula: 1d6[toxic]
+              heighten:
+                - 1
+                - 0
+              impact: damage
+              merge: true
+              type: roll
+            3f7fa7707643426f:
+              _id: 3f7fa7707643426f
+              competencies:
+                - 2
+              formula: 1d10[toxic]
+              heighten:
+                - 1
+                - 0
+              impact: damage
+              merge: true
+              type: roll
+            5e4d195ed81a10cc:
+              _id: 5e4d195ed81a10cc
+              competencies:
+                - 1
+                - 2
+              formula: 1d8[toxic]
+              heighten:
+                - 1
+                - 0
+              impact: damage
+              merge: true
+              type: roll
+            743730f25f256b10:
+              _id: 743730f25f256b10
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              executor: false
+              heighten:
+                - 1
+                - 0
+              relation: include
+              status: poisoned
+              target: false
+              type: status
+          class: assassin
+          competence:
+            raw: 0
+          delivery: weapon
+          duration:
+            raw: '24'
+            unit: hour
+          effectTypes:
+            - poison
+          endCondition: <p>Target @L[Condition:Dead]{dies}.</p>
+          executionTime:
+            base: a1
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: poison-strike
+          interaction: attack
+          limitation: <p>@L[Category:Biting equipment]{Biting items} only.</p>
+          maneuver: active
+          mundane: false
+          overview:
+            fluent: >-
+              <p>The @L[Condition:Poisoned]{poison} instead deals [[/damage
+              1d10[toxic]]] @L[Core:Damage]{damage}.</p>
+            proficient: >-
+              <p>The @L[Condition:Poisoned]{poison} instead deals [[/damage
+              1d8[toxic]]] @L[Core:Damage]{damage}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - alchemical
+          range:
+            unit: contact
+          results:
+            hit: >-
+              <p>Target is @L[Condition:Poisoned]{poisoned}. The
+              @L[Condition:Poisoned]{poison} deals [[/damage 1d6[toxic]]]
+              @L[Core:Damage]{damage}.</p>
+          skill: true
+          targets:
+            - creature
+        transfer: true
+        type: ability
+      - _id: MsBXVEODZ912rFgz
+        _key: >-
+          !actors.items.effects!d937be39867e3cd6.d937be39867e3cd6.MsBXVEODZ912rFgz
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.6f1e35c05a5589d6
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/abilities/snare.webp
+        name: Snare
+        system:
+          automations:
+            5d57231066693cee:
+              _id: 5d57231066693cee
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              executor: false
+              heighten:
+                - 1
+                - 0
+              relation: include
+              status: snared
+              target: false
+              type: status
+            d5717000e99ee582:
+              _id: d5717000e99ee582
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 1
+              heighten:
+                - 1
+                - 0
+              type: combatExpiration
+              what:
+                roll: 2d4kh1
+                threshold: 4
+                type: rolled
+              when:
+                skip: 1
+                time: end
+                trigger: turn
+              who:
+                type: target
+            d635eb44dba086dd:
+              _id: d635eb44dba086dd
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+              heighten:
+                - 1
+                - 0
+              type: combatExpiration
+              what:
+                roll: 2d4kh1
+                threshold: 4
+                type: rolled
+              when:
+                skip: 0
+                time: end
+                trigger: turn
+              who:
+                type: target
+          class: ranger
+          competence:
+            raw: 0
+          delivery: weapon
+          duration:
+            raw: '0'
+            unit: unlimited
+          endCondition: >-
+            <p>At the end of each of the target's @L[Core:Turn]{turns}, they
+            roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
+            ends.</p>
+          executionTime:
+            base: a1
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: snare
+          interaction: attack
+          maneuver: active
+          mundane: false
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: contact
+          results:
+            critHit: >-
+              <p>The target automatically fails the first [[/roll 2d4]]
+              roll.</p>
+            hit: <p>Target is @L[Condition:Snared]{snared}.</p>
+          skill: true
+          standard: true
+          targets:
+            - leg
+        transfer: true
+        type: ability
+      - _id: KHUFnjxz75uZt1bn
+        _key: >-
+          !actors.items.effects!d937be39867e3cd6.d937be39867e3cd6.KHUFnjxz75uZt1bn
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.e2ede5b6049bda5a
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/abilities/sneaky.webp
+        name: Sneaky
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            raw: '0'
+            unit: unlimited
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: sneaky
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: snk
+              value: 1
+        transfer: true
+        type: ability
+      - _id: SSfWtiGdGQe1ckq9
+        _key: >-
+          !actors.items.effects!d937be39867e3cd6.d937be39867e3cd6.SSfWtiGdGQe1ckq9
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.4f0fea9742a070ef
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/abilities/unbreachability.webp
+        name: Unbreachability
+        system:
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.av.bonus
+                  phase: normal
+                  priority: 10
+                  qualifier: '@av'
+                  target: equipment
+                  type: upgrade
+                  value: '1'
+                - key: system.props
+                  phase: normal
+                  priority: 10
+                  qualifier: '@av'
+                  target: body
+                  type: add
+                  value: unbreachable
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 1
+                - 0
+              type: changes
+          class: veteran
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            raw: '0'
+            unit: unlimited
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: unbreachability
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          overview:
+            base: <p>Armor you wear is @L[Property:Unbreachable]{unbreachable}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: Cfdugx1LP5AaJVM9
+        _key: >-
+          !actors.items.effects!d937be39867e3cd6.d937be39867e3cd6.Cfdugx1LP5AaJVM9
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.d3ce50677dca3446
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/abilities/web-ball.webp
+        name: Web Ball
+        system:
+          automations:
+            5d57231066693cee:
+              _id: 5d57231066693cee
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              executor: false
+              heighten:
+                - 1
+                - 0
+              relation: include
+              status: snared
+              target: false
+              type: status
+            d635eb44dba086dd:
+              _id: d635eb44dba086dd
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 1
+                - 0
+              type: combatExpiration
+              what:
+                roll: 2d4kh1
+                threshold: 4
+                type: rolled
+              when:
+                skip: 0
+                time: start
+                trigger: turn
+              who:
+                type: target
+          competence:
+            raw: 0
+          delivery: missile
+          duration:
+            raw: '0'
+            unit: instant
+          endCondition: >-
+            <p>At the start of each of the target's @L[Core:Turn]{turns}, they
+            roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
+            ends.</p>
+          executionTime:
+            base: a1
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: web-ball
+          interaction: attack
+          maneuver: active
+          mundane: false
+          piercing:
+            raw: 2
+          powerSources:
+            - martial
+          range:
+            raw: '30'
+            unit: ft
+          results:
+            hit: <p>Target is @L[Condition:Snared]{snared}.</p>
+          targets:
+            - creature
+        transfer: true
+        type: ability
+      - _id: dwY8lRzm9qG3ZeFK
+        _key: >-
+          !actors.items.effects!d937be39867e3cd6.d937be39867e3cd6.dwY8lRzm9qG3ZeFK
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.f38bdb084e8eed6f
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/abilities/web-packet.webp
+        name: Web Packet
+        system:
+          automations:
+            5d57231066693cee:
+              _id: 5d57231066693cee
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              executor: false
+              heighten:
+                - 1
+                - 0
+              relation: include
+              status: snared
+              target: false
+              type: status
+            d635eb44dba086dd:
+              _id: d635eb44dba086dd
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 1
+                - 0
+              type: combatExpiration
+              what:
+                roll: 2d4kh1
+                threshold: 4
+                type: rolled
+              when:
+                skip: 0
+                time: end
+                trigger: turn
+              who:
+                type: target
+          competence:
+            raw: 0
+          delivery: missile
+          duration:
+            raw: '0'
+            unit: instant
+          endCondition: >-
+            <p>At the end of each of the target's @L[Core:Turn]{turns}, they
+            roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
+            ends.</p>
+          executionTime:
+            base: a1
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: web-packet
+          interaction: attack
+          maneuver: active
+          mundane: false
+          piercing:
+            raw: 1
+          powerSources:
+            - martial
+          range:
+            raw: '60'
+            unit: ft
+          results:
+            hit: <p>Target is @L[Condition:Snared]{snared}.</p>
+          targets:
+            - creature
+        transfer: true
+        type: ability
     folder: 334a64a756ec6a7a
     img: systems/teriock/src/icons/creatures/big-spider.webp
     name: Big Spider
     system:
-      adult: 0
       appearance: >-
         <p>Just like a normal spider, but about the size of a
         @L[Creature:Dog]{dog}.</p>
@@ -1393,7 +1392,6 @@ items:
       competence:
         raw: 1
       identifier: big-spider
-      lifespan: 0
       size:
         enabled: true
         value: 2
@@ -1411,14 +1409,88 @@ items:
         img: systems/teriock/src/icons/tokens/big-spider.webp
         ring: true
     type: species
-  - _id: A15vAZuYBvlFa9B4
-    _key: '!actors.items!d937be39867e3cd6.A15vAZuYBvlFa9B4'
+  - _id: dnh2i54xLbEK9lwf
+    _key: '!actors.items!d937be39867e3cd6.dnh2i54xLbEK9lwf'
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.079ffd850d9567f9
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    effects:
+      - _id: TWk5AP5nzZgpXkaM
+        _key: >-
+          !actors.items.effects!d937be39867e3cd6.dnh2i54xLbEK9lwf.TWk5AP5nzZgpXkaM
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.294cd7a4f1545ed9
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/properties/bashing.webp
+        name: Bashing
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with the <b>[[lookup name style=lc]]</b> property is not
+            a weapon, but can still be used to make a @L[Ability:Basic
+            Attack]{Basic Attack}.</p>
+          form: intrinsic
+          identifier: bashing
+          mundane: true
+        transfer: true
+        type: property
+      - _id: IDLUUjkSFtpaiKuJ
+        _key: >-
+          !actors.items.effects!d937be39867e3cd6.dnh2i54xLbEK9lwf.IDLUUjkSFtpaiKuJ
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.3d2cc8d952adebec
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/properties/small.webp
+        name: Small
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with this property is easily concealed and can often be
+            used in the same hand as a @L[Category:Shields]{shield}.</p>
+          form: intrinsic
+          identifier: small
+          mundane: true
+        transfer: true
+        type: property
+    folder: 334a64a756ec6a7a
+    img: systems/teriock/src/icons/body-parts/foot.webp
+    name: Foot
+    system:
+      _sup: d937be39867e3cd6
+      attackPenalty: '-3'
+      competence:
+        raw: 0
+      damage:
+        base: '1'
+      identifier: foot
+      range:
+        long:
+          unit: melee
+        melee: true
+        ranged: false
+        short:
+          unit: self
+      vitals: false
+    type: body
+  - _id: e4mhsLfJeQt6MVCH
+    _key: '!actors.items!d937be39867e3cd6.e4mhsLfJeQt6MVCH'
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.9df212d89cab196d
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     folder: 334a64a756ec6a7a
     img: systems/teriock/src/icons/body-parts/hide.webp
     name: Hide
@@ -1426,14 +1498,12 @@ items:
       _sup: d937be39867e3cd6
       attackPenalty: '-3'
       av:
-        raw: '1'
+        raw: 1
       competence:
         raw: 0
       damage:
         base: '0'
       identifier: hide
-      impacts:
-        - damage
       range:
         long:
           unit: self
@@ -1443,24 +1513,24 @@ items:
           unit: self
       vitals: false
     type: body
-  - _id: KAnox7DH8QfgOCYY
-    _key: '!actors.items!d937be39867e3cd6.KAnox7DH8QfgOCYY'
+  - _id: qKp7DgOBZ7D3fMYe
+    _key: '!actors.items!d937be39867e3cd6.qKp7DgOBZ7D3fMYe'
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.5b8d8919d83132d9
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     effects:
-      - _id: G0tdQXSp86EwqkNT
+      - _id: RPhAUSwovZYktIQm
         _key: >-
-          !actors.items.effects!d937be39867e3cd6.KAnox7DH8QfgOCYY.G0tdQXSp86EwqkNT
+          !actors.items.effects!d937be39867e3cd6.qKp7DgOBZ7D3fMYe.RPhAUSwovZYktIQm
         _stats:
           compendiumSource: Compendium.teriock.properties.ActiveEffect.870df3b7da4ce4b8
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: icons/creatures/abilities/mouth-teeth-long-red.webp
         name: Biting
         system:
@@ -1474,15 +1544,15 @@ items:
           mundane: true
         transfer: true
         type: property
-      - _id: 37rxckf9CC1HPsQd
+      - _id: StZ8lJiQ1zrTkWMW
         _key: >-
-          !actors.items.effects!d937be39867e3cd6.KAnox7DH8QfgOCYY.37rxckf9CC1HPsQd
+          !actors.items.effects!d937be39867e3cd6.qKp7DgOBZ7D3fMYe.StZ8lJiQ1zrTkWMW
         _stats:
           compendiumSource: Compendium.teriock.properties.ActiveEffect.891de334396620e1
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -1508,84 +1578,6 @@ items:
         base: 1d4
       fightingStyle: savage
       identifier: jaw
-      impacts:
-        - damage
-      range:
-        long:
-          unit: melee
-        melee: true
-        ranged: false
-        short:
-          unit: self
-      vitals: false
-    type: body
-  - _id: V8SnvwROBbqACxZB
-    _key: '!actors.items!d937be39867e3cd6.V8SnvwROBbqACxZB'
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.079ffd850d9567f9
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.4
-    effects:
-      - _id: LwntE76DWV8LsMYk
-        _key: >-
-          !actors.items.effects!d937be39867e3cd6.V8SnvwROBbqACxZB.LwntE76DWV8LsMYk
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.294cd7a4f1545ed9
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/properties/bashing.webp
-        name: Bashing
-        system:
-          competence:
-            raw: 0
-          description: >-
-            <p>An item with the <b>[[lookup name style=lc]]</b> property is not
-            a weapon, but can still be used to make a @L[Ability:Basic
-            Attack]{Basic Attack}.</p>
-          form: intrinsic
-          identifier: bashing
-          mundane: true
-        transfer: true
-        type: property
-      - _id: 70oASdJA4Iza7rlK
-        _key: >-
-          !actors.items.effects!d937be39867e3cd6.V8SnvwROBbqACxZB.70oASdJA4Iza7rlK
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.3d2cc8d952adebec
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/properties/small.webp
-        name: Small
-        system:
-          competence:
-            raw: 0
-          description: >-
-            <p>An item with this property is easily concealed and can often be
-            used in the same hand as a @L[Category:Shields]{shield}.</p>
-          form: intrinsic
-          identifier: small
-          mundane: true
-        transfer: true
-        type: property
-    folder: 334a64a756ec6a7a
-    img: systems/teriock/src/icons/body-parts/foot.webp
-    name: Foot
-    system:
-      _sup: d937be39867e3cd6
-      attackPenalty: '-3'
-      competence:
-        raw: 0
-      damage:
-        base: '1'
-      identifier: foot
-      impacts:
-        - damage
       range:
         long:
           unit: melee
@@ -1637,6 +1629,6 @@ system:
     number:
       raw: '2'
   wielding:
-    attacker: V8SnvwROBbqACxZB
-    blocker: V8SnvwROBbqACxZB
+    attacker: qKp7DgOBZ7D3fMYe
+    blocker: qKp7DgOBZ7D3fMYe
 type: creature

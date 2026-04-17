@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/properties/mithril.webp
     name: Mithril
     system:
@@ -21,19 +21,19 @@ effects:
         parameterChanges:
           _id: parameterChanges
           changes:
-            - key: system.weight.raw
+            - key: system.weight
               phase: normal
               priority: 10
               qualifier: '1'
               target: parent
               type: multiply
               value: '0.5'
-            - key: system.minStr.raw
+            - key: system.minStr
               phase: normal
               priority: 10
               qualifier: '1'
               target: parent
-              type: add
+              type: subtract
               value: '-1'
           competencies:
             - 0
@@ -56,6 +56,75 @@ effects:
       form: intrinsic
       identifier: mithril
       material: true
+    transfer: true
+    type: property
+  - _id: iYpoap9h4GWfHUCq
+    _key: '!items.effects!f197293383f359c1.iYpoap9h4GWfHUCq'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.1b0ae28f7a0a0448
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/properties/durable.webp
+    name: Durable
+    system:
+      _sup: fTuCA4bg5aVWHcPu
+      competence:
+        raw: 0
+      description: >-
+        <p>An item that is <b>[[lookup name style=lc]]</b> is
+        @L[Keyword:Resistance]{resistant} to becoming
+        @L[Property:Shattered]{shattered} and effects that would render it
+        @L[Property:Destroyed]{destroyed} cause it to be
+        @L[Property:Shattered]{shattered} instead.</p>
+      form: intrinsic
+      identifier: durable
+      mundane: false
+    transfer: true
+    type: property
+  - _id: t7sFMxylyfJLCtdF
+    _key: '!items.effects!f197293383f359c1.t7sFMxylyfJLCtdF'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.752e9d67325b0faf
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/properties/unbreachable.webp
+    name: Unbreachable
+    system:
+      _sup: fTuCA4bg5aVWHcPu
+      automations:
+        parameterChanges:
+          _id: parameterChanges
+          changes:
+            - key: system.av.bonus
+              phase: normal
+              priority: 10
+              qualifier: '@av'
+              target: parent
+              type: upgrade
+              value: '1'
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 0
+            - 1
+          type: changes
+      competence:
+        raw: 0
+      description: >-
+        <p>@L[Category:Armor]{Armor} that's <b>[[lookup name style=lc]]</b> has
+        its @L[Core:Armor Class]{AV} increased by 1.</p>
+      form: intrinsic
+      identifier: unbreachable
+      mundane: true
     transfer: true
     type: property
 folder: bcc342d72f2feaf7

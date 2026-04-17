@@ -1,20 +1,20 @@
-_id: RbSfwXlm3DlEkiYQ
-_key: '!items!RbSfwXlm3DlEkiYQ'
+_id: sAgL4SVK02cPPElG
+_key: '!items!sAgL4SVK02cPPElG'
 _stats:
   compendiumSource: Compendium.teriock.classes.Item.e9dcbdff7688435a
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.23
+  systemVersion: 0.12.15
 effects:
   - _id: oiO7LoAdcpYHdcMl
-    _key: '!items.effects!RbSfwXlm3DlEkiYQ.oiO7LoAdcpYHdcMl'
+    _key: '!items.effects!sAgL4SVK02cPPElG.oiO7LoAdcpYHdcMl'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.194c57e46f6245c7
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/nature-elder-sorcery.webp
     name: Nature Elder Sorcery
     system:
@@ -25,7 +25,10 @@ effects:
       duration:
         raw: '0'
         unit: unlimited
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -35,6 +38,7 @@ effects:
       identifier: nature-elder-sorcery
       interaction: manifest
       maneuver: passive
+      mundane: false
       overview:
         base: >-
           <p>You gain @L[Ability:Elder Sorcery Creation]{Elder Sorcery
@@ -53,13 +57,13 @@ effects:
     transfer: true
     type: ability
   - _id: Z2r70pjjG6JKLhqd
-    _key: '!items.effects!RbSfwXlm3DlEkiYQ.Z2r70pjjG6JKLhqd'
+    _key: '!items.effects!sAgL4SVK02cPPElG.Z2r70pjjG6JKLhqd'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.063b0cceb9b65c6c
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/nature-rotators.webp
     name: Nature Rotators
     system:
@@ -67,7 +71,7 @@ effects:
         e789ed5e109ebd1a:
           _id: e789ed5e109ebd1a
           changes:
-            - key: system.magic.maxRotators.raw
+            - key: system.rotators.max
               phase: normal
               priority: 10
               qualifier: '1'
@@ -88,7 +92,7 @@ effects:
         f025905e157ac261:
           _id: f025905e157ac261
           changes:
-            - key: system.magic.maxRotators.raw
+            - key: system.rotators.max
               phase: normal
               priority: 10
               qualifier: '1'
@@ -108,7 +112,7 @@ effects:
         f7da3b5e1992a724:
           _id: f7da3b5e1992a724
           changes:
-            - key: system.magic.maxRotators.raw
+            - key: system.{{{key}}}
               phase: normal
               priority: 10
               qualifier: '1'
@@ -131,7 +135,10 @@ effects:
       duration:
         raw: '0'
         unit: unlimited
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -141,6 +148,7 @@ effects:
       identifier: nature-rotators
       interaction: manifest
       maneuver: passive
+      mundane: false
       overview:
         base: >-
           <p>Having mastered the basic techniques in this field of magic, you
@@ -179,99 +187,99 @@ effects:
         - self
     transfer: true
     type: ability
-  - _id: Nq7UMnyJf3UFlPQQ
-    _key: '!items.effects!RbSfwXlm3DlEkiYQ.Nq7UMnyJf3UFlPQQ'
+  - _id: 0J0XaUquO6fsWfZh
+    _key: '!items.effects!sAgL4SVK02cPPElG.0J0XaUquO6fsWfZh'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.85943330704e2f0a
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.0q5khIx32nw3ihVe
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
-    img: systems/teriock/src/icons/abilities/nature-elder-sorcery-words.webp
-    name: Nature Elder Sorcery Words
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/elder-sorcery-creation.webp
+    name: Elder Sorcery Creation
     system:
       _sup: oiO7LoAdcpYHdcMl
-      class: natureMage
       competence:
         raw: 0
-      delivery: self
+      costs:
+        components:
+          material:
+            description: >-
+              <p>Creation cost is at least 3 × the material components of the
+              spell itself.</p>
+            type: description
+        primary:
+          hp:
+            description: >-
+              <p>Creation cost is at least 3 × @L[Core:HP]{HP} of the spell
+              itself.</p>
+            type: description
+          mp:
+            description: >-
+              <p>Creation cost is at least 1 @L[Core:MP]{MP} per @L[Core:Elder
+              Sorcery]{OP} of <i>each</i> word in the spell plus 3 ×
+              @L[Core:MP]{MP} of the spell itself.</p>
+            type: description
+      delivery: sight
       duration:
         raw: '0'
-        unit: unlimited
+        unit: instant
       elderSorcery: true
-      elements:
-        - nature
       executionTime:
-        base: passive
+        base: Long Rest
         slow:
-          unit: second
+          unit: longRest
       expansion:
         featSaveAttribute: mov
         range:
           unit: self
       featSaveAttribute: mov
       form: special
-      identifier: nature-elder-sorcery-words
+      identifier: elder-sorcery-creation
       interaction: manifest
-      maneuver: passive
+      maneuver: slow
       mundane: false
       overview:
         base: >-
-          <p>You know @L[Core:Elder Sorcery]{OP} 1 @L[Core:Nature Elder Sorcery
-          Words]{Nature Elder Sorcery words}.</p><table class="wikitable
-          sortable"><caption style="white-space:nowrap">OP 1 Nature
-          @L[Core:Elder Sorcery Words]{Elder Sorcery
-          Words}</caption><tbody><tr><th
-          style="background-color:#e5a50a1A">OP</th><th
-          style="background-color:#26a2691A">@L[Class:Nature Mage]{Nature
-          Nouns}</th><th style="background-color:#26a2691A">@L[Class:Nature
-          Mage]{Nature Verbs}</th></tr><tr><td rowspan="10"
-          style="background-color:#f9f06b1A">1</td><td
-          style="background-color:#8ff0a41A">dirt</td><td
-          style="background-color:#8ff0a41A">augment</td></tr> <tr><td
-          style="background-color:#26a2691A">fruit</td><td
-          style="background-color:#26a2691A">bloom</td></tr> <tr><td
-          style="background-color:#8ff0a41A">grass</td><td
-          style="background-color:#8ff0a41A">grow</td></tr> <tr><td
-          style="background-color:#26a2691A">leaf</td><td
-          style="background-color:#26a2691A">lull</td></tr> <tr><td
-          style="background-color:#8ff0a41A">path</td><td
-          style="background-color:#8ff0a41A">lure</td></tr> <tr><td
-          style="background-color:#26a2691A">reach</td><td
-          style="background-color:#26a2691A">nourish</td></tr> <tr><td
-          style="background-color:#8ff0a41A">size</td><td
-          style="background-color:#8ff0a41A">ripen</td></tr> <tr><td
-          style="background-color:#26a2691A">twig</td><td
-          style="background-color:#26a2691A">shrink</td></tr> <tr><td
-          style="background-color:#8ff0a41A">vine</td><td
-          style="background-color:#8ff0a41A">touch</td></tr> <tr><td
-          style="background-color:#26a2691A"><i>watermelon</i></td><td
-          style="background-color:#26a2691A"></td></tr></tbody></table><p></p>
+          <p>You may create 1 custom "rotator" @L[Category:Spells]{spells} using
+          @L[Core:Elder Sorcery]{Elder Sorcery} words that you know using
+          whatever @L[Core:Elder Sorcery]{Elder Sorcery} creation rules are
+          dictated to you by your @L[Core:Game Master]{GM}. As with other
+          rotators, this spell is not always available to you. You have to
+          "rotate" into having it prepared. This spell may have a maximum number
+          of words equal to your @L[Core:Leveling Up]{level}. Your @L[Core:Game
+          Master]{GM} may allow you to "improvise" @L[Category:Spells]{spells}
+          as well, using whatever rules they wish.</p>
         fluent: >-
-          <p>The @L[Core:Elder Sorcery]{OP} of words you know is 1 + (3 ×
-          @L[Core:Fluency Bonus]{F}).</p>
+          <p>In addition to the spells that you crate, you can learn
+          @L[Core:Proficiency Bonus]{P} additional spells from other
+          @L[Core:Elder Sorcery]{Elder Sorcery} users. See @L[Core:Elder
+          Sorcery]{Elder Sorcery} for more information.</p>
         proficient: >-
-          <p>The @L[Core:Elder Sorcery]{OP} of words you know is 1 + (3 ×
-          @L[Core:Proficiency Bonus]{P}).</p>
+          <p>You may now create 2 × (@L[Category:Mage classes]{MR} - 1) custom
+          "rotator" @L[Category:Spells]{spells} where @L[Category:Mage
+          classes]{MR} is the number of @L[Core:Leveling Up]{ranks} you have in
+          @L[Category:Mage classes]{mage classes}.</p>
       piercing:
         raw: 0
       powerSources:
         - magical
       range:
-        unit: self
+        unit: contact
+      ritual: true
       skill: true
       targets:
         - self
     transfer: true
     type: ability
-  - _id: wlmli46xFnoTMUx9
-    _key: '!items.effects!RbSfwXlm3DlEkiYQ.wlmli46xFnoTMUx9'
+  - _id: qUbg265wvG0eWXUN
+    _key: '!items.effects!sAgL4SVK02cPPElG.qUbg265wvG0eWXUN'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.41ba9670a628fc21
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/celestial-elder-sorcery-words.webp
     name: Celestial Elder Sorcery Words
     system:
@@ -403,99 +411,99 @@ effects:
         - self
     transfer: true
     type: ability
-  - _id: PSd5Yg05hIEVKzPH
-    _key: '!items.effects!RbSfwXlm3DlEkiYQ.PSd5Yg05hIEVKzPH'
+  - _id: 491pICCGJggoleWM
+    _key: '!items.effects!sAgL4SVK02cPPElG.491pICCGJggoleWM'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.0q5khIx32nw3ihVe
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.85943330704e2f0a
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
-    img: systems/teriock/src/icons/abilities/elder-sorcery-creation.webp
-    name: Elder Sorcery Creation
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/nature-elder-sorcery-words.webp
+    name: Nature Elder Sorcery Words
     system:
       _sup: oiO7LoAdcpYHdcMl
+      class: natureMage
       competence:
         raw: 0
-      costs:
-        components:
-          material:
-            description: >-
-              <p>Creation cost is at least 3 × the material components of the
-              spell itself.</p>
-            type: description
-        primary:
-          hp:
-            description: >-
-              <p>Creation cost is at least 3 × @L[Core:HP]{HP} of the spell
-              itself.</p>
-            type: description
-          mp:
-            description: >-
-              <p>Creation cost is at least 1 @L[Core:MP]{MP} per @L[Core:Elder
-              Sorcery]{OP} of <i>each</i> word in the spell plus 3 ×
-              @L[Core:MP]{MP} of the spell itself.</p>
-            type: description
-      delivery: sight
+      delivery: self
       duration:
         raw: '0'
-        unit: instant
+        unit: unlimited
       elderSorcery: true
+      elements:
+        - nature
       executionTime:
-        base: Long Rest
+        base: passive
         slow:
-          unit: longRest
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
           unit: self
       featSaveAttribute: mov
       form: special
-      identifier: elder-sorcery-creation
+      identifier: nature-elder-sorcery-words
       interaction: manifest
-      maneuver: slow
+      maneuver: passive
       mundane: false
       overview:
         base: >-
-          <p>You may create 1 custom "rotator" @L[Category:Spells]{spells} using
-          @L[Core:Elder Sorcery]{Elder Sorcery} words that you know using
-          whatever @L[Core:Elder Sorcery]{Elder Sorcery} creation rules are
-          dictated to you by your @L[Core:Game Master]{GM}. As with other
-          rotators, this spell is not always available to you. You have to
-          "rotate" into having it prepared. This spell may have a maximum number
-          of words equal to your @L[Core:Leveling Up]{level}. Your @L[Core:Game
-          Master]{GM} may allow you to "improvise" @L[Category:Spells]{spells}
-          as well, using whatever rules they wish.</p>
+          <p>You know @L[Core:Elder Sorcery]{OP} 1 @L[Core:Nature Elder Sorcery
+          Words]{Nature Elder Sorcery words}.</p><table class="wikitable
+          sortable"><caption style="white-space:nowrap">OP 1 Nature
+          @L[Core:Elder Sorcery Words]{Elder Sorcery
+          Words}</caption><tbody><tr><th
+          style="background-color:#e5a50a1A">OP</th><th
+          style="background-color:#26a2691A">@L[Class:Nature Mage]{Nature
+          Nouns}</th><th style="background-color:#26a2691A">@L[Class:Nature
+          Mage]{Nature Verbs}</th></tr><tr><td rowspan="10"
+          style="background-color:#f9f06b1A">1</td><td
+          style="background-color:#8ff0a41A">dirt</td><td
+          style="background-color:#8ff0a41A">augment</td></tr> <tr><td
+          style="background-color:#26a2691A">fruit</td><td
+          style="background-color:#26a2691A">bloom</td></tr> <tr><td
+          style="background-color:#8ff0a41A">grass</td><td
+          style="background-color:#8ff0a41A">grow</td></tr> <tr><td
+          style="background-color:#26a2691A">leaf</td><td
+          style="background-color:#26a2691A">lull</td></tr> <tr><td
+          style="background-color:#8ff0a41A">path</td><td
+          style="background-color:#8ff0a41A">lure</td></tr> <tr><td
+          style="background-color:#26a2691A">reach</td><td
+          style="background-color:#26a2691A">nourish</td></tr> <tr><td
+          style="background-color:#8ff0a41A">size</td><td
+          style="background-color:#8ff0a41A">ripen</td></tr> <tr><td
+          style="background-color:#26a2691A">twig</td><td
+          style="background-color:#26a2691A">shrink</td></tr> <tr><td
+          style="background-color:#8ff0a41A">vine</td><td
+          style="background-color:#8ff0a41A">touch</td></tr> <tr><td
+          style="background-color:#26a2691A"><i>watermelon</i></td><td
+          style="background-color:#26a2691A"></td></tr></tbody></table><p></p>
         fluent: >-
-          <p>In addition to the spells that you crate, you can learn
-          @L[Core:Proficiency Bonus]{P} additional spells from other
-          @L[Core:Elder Sorcery]{Elder Sorcery} users. See @L[Core:Elder
-          Sorcery]{Elder Sorcery} for more information.</p>
+          <p>The @L[Core:Elder Sorcery]{OP} of words you know is 1 + (3 ×
+          @L[Core:Fluency Bonus]{F}).</p>
         proficient: >-
-          <p>You may now create 2 × (@L[Category:Mage classes]{MR} - 1) custom
-          "rotator" @L[Category:Spells]{spells} where @L[Category:Mage
-          classes]{MR} is the number of @L[Core:Leveling Up]{ranks} you have in
-          @L[Category:Mage classes]{mage classes}.</p>
+          <p>The @L[Core:Elder Sorcery]{OP} of words you know is 1 + (3 ×
+          @L[Core:Proficiency Bonus]{P}).</p>
       piercing:
         raw: 0
       powerSources:
         - magical
       range:
-        unit: contact
-      ritual: true
+        unit: self
       skill: true
       targets:
         - self
     transfer: true
     type: ability
   - _id: ImkOXAw79U4AZ1Tn
-    _key: '!items.effects!RbSfwXlm3DlEkiYQ.ImkOXAw79U4AZ1Tn'
+    _key: '!items.effects!sAgL4SVK02cPPElG.ImkOXAw79U4AZ1Tn'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.2f6d6a0509902573
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/polymorph.webp
     name: Polymorph
     system:
@@ -615,14 +623,14 @@ effects:
         - creature
     transfer: true
     type: ability
-  - _id: JEduIHfrYAe0AOaH
-    _key: '!items.effects!RbSfwXlm3DlEkiYQ.JEduIHfrYAe0AOaH'
+  - _id: CmpxtzVqwaQxkXjH
+    _key: '!items.effects!sAgL4SVK02cPPElG.CmpxtzVqwaQxkXjH'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.374bdfd9bbeb3db0
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/crown-of-vines.webp
     name: Crown of Vines
     system:
@@ -710,18 +718,18 @@ effects:
         - self
     transfer: true
     type: ability
-  - _id: Z8meY9XxnqTCwNKa
-    _key: '!items.effects!RbSfwXlm3DlEkiYQ.Z8meY9XxnqTCwNKa'
+  - _id: swgxMEFhMZiWpts8
+    _key: '!items.effects!sAgL4SVK02cPPElG.swgxMEFhMZiWpts8'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.6nnLtZpILC9pSLa3
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/earthbind-aura.webp
     name: Earthbind Aura
     system:
-      _sup: JEduIHfrYAe0AOaH
+      _sup: CmpxtzVqwaQxkXjH
       automations:
         0b65894b82470568:
           _id: 0b65894b82470568
@@ -843,18 +851,18 @@ effects:
         - creature
     transfer: true
     type: ability
-  - _id: nruaLik2pw80vhwl
-    _key: '!items.effects!RbSfwXlm3DlEkiYQ.nruaLik2pw80vhwl'
+  - _id: p2MNXAkMPNbe5TNq
+    _key: '!items.effects!sAgL4SVK02cPPElG.p2MNXAkMPNbe5TNq'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.2385fa510bf78937
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/earthbind-touch.webp
     name: Earthbind Touch
     system:
-      _sup: JEduIHfrYAe0AOaH
+      _sup: CmpxtzVqwaQxkXjH
       automations:
         0b65894b82470568:
           _id: 0b65894b82470568
@@ -971,14 +979,14 @@ effects:
         - creature
     transfer: true
     type: ability
-  - _id: buJhvAksukf4rJiG
-    _key: '!items.effects!RbSfwXlm3DlEkiYQ.buJhvAksukf4rJiG'
+  - _id: dt3sKQ2oHecQfFde
+    _key: '!items.effects!sAgL4SVK02cPPElG.dt3sKQ2oHecQfFde'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.4oKL6zrNPkYdXkj1
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/regeneration-touch.webp
     name: Regeneration Touch
     system:
@@ -1059,18 +1067,18 @@ effects:
         - creature
     transfer: true
     type: ability
-  - _id: qsFTypGVwmRqb98l
-    _key: '!items.effects!RbSfwXlm3DlEkiYQ.qsFTypGVwmRqb98l'
+  - _id: VeATUjetthg4OGgn
+    _key: '!items.effects!sAgL4SVK02cPPElG.VeATUjetthg4OGgn'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.873114c38f087ff8
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/regenerating.webp
     name: Regenerating
     system:
-      _sup: buJhvAksukf4rJiG
+      _sup: dt3sKQ2oHecQfFde
       automations:
         1728b3a84ea27844:
           _id: 1728b3a84ea27844
@@ -1157,13 +1165,13 @@ effects:
     transfer: true
     type: ability
   - _id: SZjVQNe5HKzkoU2l
-    _key: '!items.effects!RbSfwXlm3DlEkiYQ.SZjVQNe5HKzkoU2l'
+    _key: '!items.effects!sAgL4SVK02cPPElG.SZjVQNe5HKzkoU2l'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.7a8ea392f1eca60e
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/wildborn.webp
     name: Wildborn
     system:
@@ -1250,13 +1258,13 @@ effects:
     transfer: true
     type: ability
   - _id: TPfJKSdaSdDxeFIl
-    _key: '!items.effects!RbSfwXlm3DlEkiYQ.TPfJKSdaSdDxeFIl'
+    _key: '!items.effects!sAgL4SVK02cPPElG.TPfJKSdaSdDxeFIl'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.057ebb23cd9bec3d
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/unforge.webp
     name: Unforge
     system:
@@ -1350,12 +1358,8 @@ system:
   statDice:
     hp:
       disabled: false
-      faces: 8
-      number:
-        raw: '1'
+      formula: 1d8
     mp:
       disabled: false
-      faces: 12
-      number:
-        raw: '1'
+      formula: 1d12
 type: rank

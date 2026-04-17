@@ -1,20 +1,20 @@
-_id: tDTXZ2ClFYIssv8K
-_key: '!items!tDTXZ2ClFYIssv8K'
+_id: jo8tfl6MaxkmndVi
+_key: '!items!jo8tfl6MaxkmndVi'
 _stats:
   compendiumSource: Compendium.teriock.classes.Item.5f40dd167e5eda8d
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.23
+  systemVersion: 0.12.15
 effects:
   - _id: eNyO14VyiXUtWM5L
-    _key: '!items.effects!tDTXZ2ClFYIssv8K.eNyO14VyiXUtWM5L'
+    _key: '!items.effects!jo8tfl6MaxkmndVi.eNyO14VyiXUtWM5L'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.e7535d6612f7bddd
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     flags:
       teriock:
         category: combat
@@ -50,7 +50,10 @@ effects:
       duration:
         raw: '0'
         unit: unlimited
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -60,6 +63,7 @@ effects:
       identifier: storm-rotator-fluency
       interaction: manifest
       maneuver: passive
+      mundane: false
       overview:
         base: >-
           <p>You may rotate between @L[Category:Storm element spells]{storm}
@@ -82,13 +86,13 @@ effects:
     transfer: true
     type: ability
   - _id: 0I3QIXHQZOPnIqJv
-    _key: '!items.effects!tDTXZ2ClFYIssv8K.0I3QIXHQZOPnIqJv'
+    _key: '!items.effects!jo8tfl6MaxkmndVi.0I3QIXHQZOPnIqJv'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.21bdfdd1792ee097
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     flags:
       teriock:
         category: support
@@ -125,9 +129,10 @@ effects:
       duration:
         raw: '0'
         unit: unlimited
-      effectTypes:
-        - magical
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -137,6 +142,7 @@ effects:
       identifier: storm-spell-strikes
       interaction: manifest
       maneuver: passive
+      mundane: false
       overview:
         base: >-
           <p>You gain @L[Keyword:Limited]{Limited} @L[Ability:Spell
@@ -153,14 +159,14 @@ effects:
         - self
     transfer: true
     type: ability
-  - _id: OaL2FfM7EyovAbKR
-    _key: '!items.effects!tDTXZ2ClFYIssv8K.OaL2FfM7EyovAbKR'
+  - _id: kqfb2BYdL2YWDVbs
+    _key: '!items.effects!jo8tfl6MaxkmndVi.kqfb2BYdL2YWDVbs'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.HXidffXqZoxo8wog
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/spell-strike.webp
     name: Spell Strike
     system:
@@ -239,12 +245,8 @@ system:
   statDice:
     hp:
       disabled: false
-      faces: 8
-      number:
-        raw: '1'
+      formula: 1d8
     mp:
       disabled: false
-      faces: 12
-      number:
-        raw: '1'
+      formula: 1d12
 type: rank

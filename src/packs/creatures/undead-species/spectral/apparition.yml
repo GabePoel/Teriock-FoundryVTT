@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.23
+  systemVersion: 0.12.15
 folder: b8dcf1ebf1b3e669
 img: systems/teriock/src/icons/creatures/apparition.webp
 items:
@@ -15,17 +15,17 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     effects:
-      - _id: p6s3oxNQf2fSWZK1
+      - _id: 04ERmkNRAtpjDnGr
         _key: >-
-          !actors.items.effects!6e183ea8375fbadc.6e183ea8375fbadc.p6s3oxNQf2fSWZK1
+          !actors.items.effects!6e183ea8375fbadc.6e183ea8375fbadc.04ERmkNRAtpjDnGr
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.1DpSwqGbKUAvbn3q
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/battle-cry.webp
         name: Battle Cry
         system:
@@ -66,15 +66,205 @@ items:
             - self
         transfer: true
         type: ability
-      - _id: lFHgUlinIfLvVt5E
+      - _id: dZOEmAfLNv3opShK
         _key: >-
-          !actors.items.effects!6e183ea8375fbadc.6e183ea8375fbadc.lFHgUlinIfLvVt5E
+          !actors.items.effects!6e183ea8375fbadc.6e183ea8375fbadc.dZOEmAfLNv3opShK
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.AyDa3orgfgOAAjM3
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
+        name: Battle Cry Resistance
+        system:
+          _sup: 04ERmkNRAtpjDnGr
+          automations:
+            8f623097f9f2a087:
+              _id: 8f623097f9f2a087
+              bonus: '0'
+              competencies:
+                - 0
+                - 1
+                - 2
+              heighten:
+                - 1
+                - 0
+              hex: false
+              type: resist
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.protections.resistances.statuses
+                  phase: normal
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  type: add
+                  value: frightened
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 1
+                - 0
+              type: changes
+          class: berserker
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: instant
+          effectTypes:
+            - resistance
+          endCondition: <p>You die or 1 minute passes without combat.</p>
+          executionTime:
+            base: a0
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: battle-cry-resistance
+          interaction: manifest
+          maneuver: active
+          mundane: false
+          overview:
+            base: >-
+              <p>You @L[Keyword:Resistance]{resist} being
+              @L[Condition:Frightened]{frightened}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: iwCzEzchDccYSzXA
+        _key: >-
+          !actors.items.effects!6e183ea8375fbadc.6e183ea8375fbadc.iwCzEzchDccYSzXA
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.3bf8b295f6088182
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
+        name: Battle Cry Aura
+        system:
+          _sup: 04ERmkNRAtpjDnGr
+          automations:
+            b4960732f0b9ed9f:
+              _id: b4960732f0b9ed9f
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              executor: false
+              heighten:
+                - 1
+                - 0
+              relation: include
+              status: frightened
+              target: false
+              type: status
+            d635eb44dba086dd:
+              _id: d635eb44dba086dd
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 1
+                - 0
+              type: combatExpiration
+              what:
+                roll: 2d4kh1
+                threshold: 4
+                type: rolled
+              when:
+                skip: 0
+                time: start
+                trigger: turn
+              who:
+                type: target
+          class: berserker
+          competence:
+            raw: 0
+          costs:
+            components:
+              verbal:
+                type: tag
+          delivery: aura
+          duration:
+            raw: '1'
+            unit: minute
+          effectTypes:
+            - loud
+          endCondition: >-
+            <p>At the start of each of the targets' @L[Core:Turn]{turns}, they
+            roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
+            ends.</p>
+          executionTime:
+            base: a1
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: int
+          form: normal
+          identifier: battle-cry-aura
+          interaction: feat
+          maneuver: active
+          mundane: false
+          overview:
+            base: >-
+              <p>This ability cannot affect @L[Condition:Deaf]{deaf}
+              creatures.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            raw: '10'
+            unit: ft
+          results:
+            fail: <p>Targets become @L[Condition:Frightened]{frightened}.</p>
+          skill: true
+          standard: true
+          targets:
+            - creature
+        transfer: true
+        type: ability
+      - _id: 1Gjy9po3ZpsRAw6L
+        _key: >-
+          !actors.items.effects!6e183ea8375fbadc.6e183ea8375fbadc.1Gjy9po3ZpsRAw6L
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.184f6f0ddbd9247e
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/flying.webp
         name: Flying
         system:
@@ -169,15 +359,15 @@ items:
             - self
         transfer: true
         type: ability
-      - _id: jHz4pXvkZinXroCl
+      - _id: HDozug2Xs23HVinN
         _key: >-
-          !actors.items.effects!6e183ea8375fbadc.6e183ea8375fbadc.jHz4pXvkZinXroCl
+          !actors.items.effects!6e183ea8375fbadc.6e183ea8375fbadc.HDozug2Xs23HVinN
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.a609aa9a4e997d71
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/full-undead.webp
         name: Full Undead
         system:
@@ -223,15 +413,479 @@ items:
             - self
         transfer: true
         type: ability
-      - _id: C9dwqh5mngMS2ffL
+      - _id: r2eOQQSvQsphUF0B
         _key: >-
-          !actors.items.effects!6e183ea8375fbadc.6e183ea8375fbadc.C9dwqh5mngMS2ffL
+          !actors.items.effects!6e183ea8375fbadc.6e183ea8375fbadc.r2eOQQSvQsphUF0B
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.3a19d7ff7a1f3b26
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/abilities/undying-durability.webp
+        name: Undying Durability
+        system:
+          _sup: HDozug2Xs23HVinN
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.protections.immunities.statuses
+                  phase: normal
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  type: add
+                  value: unconscious
+                - key: system.protections.immunities.statuses
+                  phase: normal
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  type: add
+                  value: suffocating
+                - key: system.protections.immunities.statuses
+                  phase: normal
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  type: add
+                  value: poisoned
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 1
+                - 0
+              type: changes
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            raw: '0'
+            unit: unlimited
+          effectTypes:
+            - immunity
+          elements:
+            - necromancy
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          identifier: undying-durability
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          overview:
+            base: >-
+              <p>You are @L[Keyword:Immunity]{immune} to
+              @L[Condition:Unconscious]{unconsciousness},
+              @L[Condition:Suffocating]{suffocating}, and being
+              @L[Condition:Poisoned]{poisoned}. You do not
+              @L[Condition:Down]{drop} due to being at negative @L[Core:Hit
+              Points and Mana Points]{HP}. You still @L[Condition:Dead]{die}
+              when you reach half your maximum @L[Core:Hit Points and Mana
+              Points]{HP} below zero. You also do not have to
+              @L[Core:Drowning]{breathe}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: aaYGEVNAzI0yTtqp
+        _key: >-
+          !actors.items.effects!6e183ea8375fbadc.6e183ea8375fbadc.aaYGEVNAzI0yTtqp
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.646bdfc53ff71572
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
+        name: Healing Sensitivity
+        system:
+          _sup: HDozug2Xs23HVinN
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            raw: '0'
+            unit: unlimited
+          elements:
+            - necromancy
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          identifier: healing-sensitivity
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          overview:
+            base: >-
+              <p>@L[Core:Healing]{Healing} can be used to
+              @L[Core:Damage]{damage} you. If the creature providing you
+              @L[Core:Healing]{healing} specifies that they are doing so "for
+              damage" then you roll your <i>largest</i> @L[Core:HP]{hit die} and
+              take that much @L[Damage:Holy]{holy} @L[Damage:Magic]{magic
+              damage} instead of the normal @L[Core:Healing]{healing} effect.
+              This does not consume any of your @L[Core:HP]{hit dice}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: KSqCWAGUVG45qyAc
+        _key: >-
+          !actors.items.effects!6e183ea8375fbadc.6e183ea8375fbadc.KSqCWAGUVG45qyAc
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.97218864bf0987c8
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/abilities/impure-durability.webp
+        name: Impure Durability
+        system:
+          _sup: HDozug2Xs23HVinN
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.protections.immunities.damageTypes
+                  phase: normal
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  type: add
+                  value: Non-magical Non-silver
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 1
+                - 0
+              type: changes
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            raw: '0'
+            unit: unlimited
+          effectTypes:
+            - immunity
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          identifier: impure-durability
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          overview:
+            base: >-
+              <p>You are @L[Keyword:Immunity]{immune} to
+              non-@L[Damage:Magic]{magic} non-@L[Damage:Silver]{silver}
+              @L[Core:Damage]{damage}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: OYv0KEJVEeqIA4NY
+        _key: >-
+          !actors.items.effects!6e183ea8375fbadc.6e183ea8375fbadc.OYv0KEJVEeqIA4NY
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.1e47c2f1c0cd5428
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/abilities/undead-mind.webp
+        name: Undead Mind
+        system:
+          _sup: HDozug2Xs23HVinN
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.protections.immunities.statuses
+                  phase: normal
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  type: add
+                  value: frightened
+                - key: system.protections.immunities.statuses
+                  phase: normal
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  type: add
+                  value: charmed
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 1
+                - 0
+              type: changes
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            raw: '0'
+            unit: unlimited
+          effectTypes:
+            - immunity
+          elements:
+            - necromancy
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          identifier: undead-mind
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          overview:
+            base: >-
+              <p>You are @L[Keyword:Immunity]{immune} to being
+              @L[Condition:Frightened]{frightened} and
+              @L[Condition:Charmed]{charmed}. The effects of [[lookup name]] are
+              maintained even if @L[Condition:Transformed]{transformed}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: tBlla8PofN04xYyq
+        _key: >-
+          !actors.items.effects!6e183ea8375fbadc.6e183ea8375fbadc.tBlla8PofN04xYyq
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.2rxzRucyitmqyDmQ
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/abilities/ethereal-senses.webp
+        name: Ethereal Senses
+        system:
+          _sup: HDozug2Xs23HVinN
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.senses.ethereal
+                  phase: normal
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  type: upgrade
+                  value: '120'
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 1
+                - 0
+              type: changes
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            raw: '0'
+            unit: unlimited
+          effectTypes:
+            - sensory
+          elements:
+            - necromancy
+          executionTime:
+            base: passive
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          identifier: ethereal-senses
+          interaction: manifest
+          maneuver: passive
+          mundane: false
+          overview:
+            base: >-
+              <p>You can see and hear spirits and
+              @L[Condition:Ethereal]{Ethereal} creatures within 120 feet.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+            - spiritual
+            - primal
+          range:
+            unit: self
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: t08HzHRX10vBRG36
+        _key: >-
+          !actors.items.effects!6e183ea8375fbadc.6e183ea8375fbadc.t08HzHRX10vBRG36
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.778a406e64cdfa53
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.15
+        img: systems/teriock/src/icons/abilities/mana-drain-grasp.webp
+        name: Mana Drain Grasp
+        system:
+          _sup: HDozug2Xs23HVinN
+          automations:
+            157afc517847f562:
+              _id: 157afc517847f562
+              competencies:
+                - 0
+                - 1
+                - 2
+              formula: 1d8[mana]
+              heighten:
+                - 1
+                - 0
+              impact: drain
+              merge: true
+              type: roll
+            iAyFzPzJgTNeDbbH:
+              _id: iAyFzPzJgTNeDbbH
+              competencies:
+                - 0
+                - 1
+                - 2
+              consumeStatDice: true
+              forHarm: false
+              heighten:
+                - 0
+                - 1
+              type: revitalize
+          competence:
+            raw: 0
+          delivery: hand
+          duration:
+            raw: '0'
+            unit: instant
+          effectTypes:
+            - revitalization
+            - draining
+          executionTime:
+            base: a2
+            slow:
+              unit: second
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          identifier: mana-drain-grasp
+          interaction: attack
+          maneuver: active
+          mundane: false
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: contact
+          results:
+            critHit: >-
+              <p>Deal [[/drain 2d8[mana]]] @L[Category:Drain types]{drain} to
+              the target. If this @L[Condition:Dead]{kills} the target, you
+              @L[Core:Revitalizing]{revitalize} twice. This
+              @L[Core:Revitalizing]{revitalization} is the only part of this
+              that is a @L[Category:Revitalization effects]{revitalization
+              effect}.</p>
+            hit: >-
+              <p>Deal [[/drain 1d8[mana]]] @L[Category:Drain types]{drain} to
+              the target. If this @L[Condition:Dead]{kills} the target, you
+              @L[Core:Revitalizing]{revitalize}.  This
+              @L[Core:Revitalizing]{revitalization} is the only part of this
+              that is a @L[Category:Revitalization effects]{revitalization
+              effect}.</p>
+          targets:
+            - creature
+        transfer: true
+        type: ability
+      - _id: GWmc9qcMY5e50UpX
+        _key: >-
+          !actors.items.effects!6e183ea8375fbadc.6e183ea8375fbadc.GWmc9qcMY5e50UpX
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.3a18ca3d154552f3
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/ghostlike.webp
         name: Ghostlike
         system:
@@ -269,15 +923,15 @@ items:
               value: 5
         transfer: true
         type: ability
-      - _id: XTXxdBfhhSDCMZ75
+      - _id: luc5wv4ZaIZ7AED3
         _key: >-
-          !actors.items.effects!6e183ea8375fbadc.6e183ea8375fbadc.XTXxdBfhhSDCMZ75
+          !actors.items.effects!6e183ea8375fbadc.6e183ea8375fbadc.luc5wv4ZaIZ7AED3
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.4c9a5b331aeeff5b
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/incorporeal.webp
         name: Incorporeal
         system:
@@ -285,7 +939,7 @@ items:
             e789ed5e109ebd1a:
               _id: e789ed5e109ebd1a
               changes:
-                - key: system.weight.self.raw
+                - key: system.weight.self
                   phase: normal
                   priority: 10
                   qualifier: '1'
@@ -330,8 +984,8 @@ items:
               <p>You cannot wear @L[Category:Armor]{armor} and you may pass
               through non-@L[Property:Silver]{silver} walls while
               @L[Condition:Ethereal]{Ethereal}. You are also
-              @L[Keyword:Immunity]{immune} to being
-              @L[Condition:Snared]{snared}.</p>
+              @L[Keyword:Immunity]{immune} to being @L[Condition:Snared]{snared}
+              and have no weight.</p>
           piercing:
             raw: 0
           powerSources:
@@ -342,15 +996,15 @@ items:
             - self
         transfer: true
         type: ability
-      - _id: SRrt2OsXDmHqWlO6
+      - _id: Xh6Z6LABifbavCk3
         _key: >-
-          !actors.items.effects!6e183ea8375fbadc.6e183ea8375fbadc.SRrt2OsXDmHqWlO6
+          !actors.items.effects!6e183ea8375fbadc.6e183ea8375fbadc.Xh6Z6LABifbavCk3
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.c431236ddaf7ccb4
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/instant-ethereal.webp
         name: Instant Ethereal
         system:
@@ -408,15 +1062,15 @@ items:
             - self
         transfer: true
         type: ability
-      - _id: wnIvQgwzNt3iNQtU
+      - _id: l7S4YsDVtMBaqsb6
         _key: >-
-          !actors.items.effects!6e183ea8375fbadc.6e183ea8375fbadc.wnIvQgwzNt3iNQtU
+          !actors.items.effects!6e183ea8375fbadc.6e183ea8375fbadc.l7S4YsDVtMBaqsb6
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.db77687509a7309d
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/normal-intelligence.webp
         name: Normal Intelligence
         system:
@@ -454,15 +1108,15 @@ items:
               value: 0
         transfer: true
         type: ability
-      - _id: p0fT7pVQASS5s4oe
+      - _id: k66eXexCPnPgYFCa
         _key: >-
-          !actors.items.effects!6e183ea8375fbadc.6e183ea8375fbadc.p0fT7pVQASS5s4oe
+          !actors.items.effects!6e183ea8375fbadc.6e183ea8375fbadc.k66eXexCPnPgYFCa
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.1c52eda8919d34a7
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
@@ -500,15 +1154,15 @@ items:
               value: 0
         transfer: true
         type: ability
-      - _id: pIJjJeIBFFmWE96I
+      - _id: fIh0VsJNiCxZaysz
         _key: >-
-          !actors.items.effects!6e183ea8375fbadc.6e183ea8375fbadc.pIJjJeIBFFmWE96I
+          !actors.items.effects!6e183ea8375fbadc.6e183ea8375fbadc.fIh0VsJNiCxZaysz
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.8249d99c527d09b1
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
@@ -546,15 +1200,15 @@ items:
               value: 0
         transfer: true
         type: ability
-      - _id: uZVGf4n17BPEUASI
+      - _id: hMe4ZvuEXyaJVjnZ
         _key: >-
-          !actors.items.effects!6e183ea8375fbadc.6e183ea8375fbadc.uZVGf4n17BPEUASI
+          !actors.items.effects!6e183ea8375fbadc.6e183ea8375fbadc.hMe4ZvuEXyaJVjnZ
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.14d28d6322eec2ff
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/normal-strength.webp
         name: Normal Strength
         system:
@@ -592,15 +1246,15 @@ items:
               value: 0
         transfer: true
         type: ability
-      - _id: a2zEQvfPEurUqm9K
+      - _id: GZfB8MWeLtSKafO9
         _key: >-
-          !actors.items.effects!6e183ea8375fbadc.6e183ea8375fbadc.a2zEQvfPEurUqm9K
+          !actors.items.effects!6e183ea8375fbadc.6e183ea8375fbadc.GZfB8MWeLtSKafO9
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.4d4cbf6dfd95efca
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/shock-touch.webp
         name: Shock Touch
         system:
@@ -733,15 +1387,15 @@ items:
             - creature
         transfer: true
         type: ability
-      - _id: LSo7ZnvRjwFdR9eQ
+      - _id: 2rdAhekdYNa1RvsG
         _key: >-
-          !actors.items.effects!6e183ea8375fbadc.6e183ea8375fbadc.LSo7ZnvRjwFdR9eQ
+          !actors.items.effects!6e183ea8375fbadc.6e183ea8375fbadc.2rdAhekdYNa1RvsG
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.91b30624f59c08d8
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/abilities/slay.webp
         name: Slay
         system:
@@ -825,665 +1479,10 @@ items:
             it.</p>
         transfer: true
         type: ability
-      - _id: 1XXwOjszPOQ4US96
-        _key: >-
-          !actors.items.effects!6e183ea8375fbadc.6e183ea8375fbadc.1XXwOjszPOQ4US96
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.AyDa3orgfgOAAjM3
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
-        name: Battle Cry Resistance
-        system:
-          _sup: p6s3oxNQf2fSWZK1
-          automations:
-            8f623097f9f2a087:
-              _id: 8f623097f9f2a087
-              bonus: '0'
-              competencies:
-                - 0
-                - 1
-                - 2
-              heighten:
-                - 1
-                - 0
-              hex: false
-              type: resist
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
-              changes:
-                - key: system.protections.resistances.statuses
-                  phase: normal
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  type: add
-                  value: frightened
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
-              type: changes
-          class: berserker
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            unit: instant
-          effectTypes:
-            - resistance
-          endCondition: <p>You die or 1 minute passes without combat.</p>
-          executionTime:
-            base: a0
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: battle-cry-resistance
-          interaction: manifest
-          maneuver: active
-          mundane: false
-          overview:
-            base: >-
-              <p>You @L[Keyword:Resistance]{resist} being
-              @L[Condition:Frightened]{frightened}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          skill: true
-          standard: true
-          targets:
-            - self
-        transfer: true
-        type: ability
-      - _id: Yk9YfPN8BELtUtqQ
-        _key: >-
-          !actors.items.effects!6e183ea8375fbadc.6e183ea8375fbadc.Yk9YfPN8BELtUtqQ
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.3bf8b295f6088182
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
-        name: Battle Cry Aura
-        system:
-          _sup: p6s3oxNQf2fSWZK1
-          automations:
-            b4960732f0b9ed9f:
-              _id: b4960732f0b9ed9f
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              executor: false
-              heighten:
-                - 1
-                - 0
-              relation: include
-              status: frightened
-              target: false
-              type: status
-            d635eb44dba086dd:
-              _id: d635eb44dba086dd
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
-              type: combatExpiration
-              what:
-                roll: 2d4kh1
-                threshold: 4
-                type: rolled
-              when:
-                skip: 0
-                time: start
-                trigger: turn
-              who:
-                type: target
-          class: berserker
-          competence:
-            raw: 0
-          costs:
-            components:
-              verbal:
-                type: tag
-          delivery: aura
-          duration:
-            raw: '1'
-            unit: minute
-          effectTypes:
-            - loud
-          endCondition: >-
-            <p>At the start of each of the targets' @L[Core:Turn]{turns}, they
-            roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
-            ends.</p>
-          executionTime:
-            base: a1
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: int
-          form: normal
-          identifier: battle-cry-aura
-          interaction: feat
-          maneuver: active
-          mundane: false
-          overview:
-            base: >-
-              <p>This ability cannot affect @L[Condition:Deaf]{deaf}
-              creatures.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            raw: '10'
-            unit: ft
-          results:
-            fail: <p>Targets become @L[Condition:Frightened]{frightened}.</p>
-          skill: true
-          standard: true
-          targets:
-            - creature
-        transfer: true
-        type: ability
-      - _id: 2PlXeB7tiEE5KwYM
-        _key: >-
-          !actors.items.effects!6e183ea8375fbadc.6e183ea8375fbadc.2PlXeB7tiEE5KwYM
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.3a19d7ff7a1f3b26
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/abilities/undying-durability.webp
-        name: Undying Durability
-        system:
-          _sup: jHz4pXvkZinXroCl
-          automations:
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
-              changes:
-                - key: system.protections.immunities.statuses
-                  phase: normal
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  type: add
-                  value: unconscious
-                - key: system.protections.immunities.statuses
-                  phase: normal
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  type: add
-                  value: suffocating
-                - key: system.protections.immunities.statuses
-                  phase: normal
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  type: add
-                  value: poisoned
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
-              type: changes
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          effectTypes:
-            - immunity
-          elements:
-            - necromancy
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: special
-          identifier: undying-durability
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          overview:
-            base: >-
-              <p>You are @L[Keyword:Immunity]{immune} to
-              @L[Condition:Unconscious]{unconsciousness},
-              @L[Condition:Suffocating]{suffocating}, and being
-              @L[Condition:Poisoned]{poisoned}. You do not
-              @L[Condition:Down]{drop} due to being at negative @L[Core:Hit
-              Points and Mana Points]{HP}. You still @L[Condition:Dead]{die}
-              when you reach half your maximum @L[Core:Hit Points and Mana
-              Points]{HP} below zero. You also do not have to
-              @L[Core:Drowning]{breathe}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - magical
-          range:
-            unit: self
-          targets:
-            - self
-        transfer: true
-        type: ability
-      - _id: cyPbZ8h57VNHP2M0
-        _key: >-
-          !actors.items.effects!6e183ea8375fbadc.6e183ea8375fbadc.cyPbZ8h57VNHP2M0
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.97218864bf0987c8
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/abilities/impure-durability.webp
-        name: Impure Durability
-        system:
-          _sup: jHz4pXvkZinXroCl
-          automations:
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
-              changes:
-                - key: system.protections.immunities.damageTypes
-                  phase: normal
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  type: add
-                  value: Non-magical Non-silver
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
-              type: changes
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          effectTypes:
-            - immunity
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: special
-          identifier: impure-durability
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          overview:
-            base: >-
-              <p>You are @L[Keyword:Immunity]{immune} to
-              non-@L[Damage:Magic]{magic} non-@L[Damage:Silver]{silver}
-              @L[Core:Damage]{damage}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - magical
-          range:
-            unit: self
-          targets:
-            - self
-        transfer: true
-        type: ability
-      - _id: JvD113UHZY8UPzfG
-        _key: >-
-          !actors.items.effects!6e183ea8375fbadc.6e183ea8375fbadc.JvD113UHZY8UPzfG
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.646bdfc53ff71572
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
-        name: Healing Sensitivity
-        system:
-          _sup: jHz4pXvkZinXroCl
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          elements:
-            - necromancy
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: flaw
-          identifier: healing-sensitivity
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          overview:
-            base: >-
-              <p>@L[Core:Healing]{Healing} can be used to
-              @L[Core:Damage]{damage} you. If the creature providing you
-              @L[Core:Healing]{healing} specifies that they are doing so "for
-              damage" then you roll your <i>largest</i> @L[Core:HP]{hit die} and
-              take that much @L[Damage:Holy]{holy} @L[Damage:Magic]{magic
-              damage} instead of the normal @L[Core:Healing]{healing} effect.
-              This does not consume any of your @L[Core:HP]{hit dice}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - magical
-          range:
-            unit: self
-          targets:
-            - self
-        transfer: true
-        type: ability
-      - _id: xV6ZjBBEnbDtcyuE
-        _key: >-
-          !actors.items.effects!6e183ea8375fbadc.6e183ea8375fbadc.xV6ZjBBEnbDtcyuE
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.1e47c2f1c0cd5428
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/abilities/undead-mind.webp
-        name: Undead Mind
-        system:
-          _sup: jHz4pXvkZinXroCl
-          automations:
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
-              changes:
-                - key: system.protections.immunities.statuses
-                  phase: normal
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  type: add
-                  value: frightened
-                - key: system.protections.immunities.statuses
-                  phase: normal
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  type: add
-                  value: charmed
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
-              type: changes
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          effectTypes:
-            - immunity
-          elements:
-            - necromancy
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: special
-          identifier: undead-mind
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          overview:
-            base: >-
-              <p>You are @L[Keyword:Immunity]{immune} to being
-              @L[Condition:Frightened]{frightened} and
-              @L[Condition:Charmed]{charmed}. The effects of [[lookup name]] are
-              maintained even if @L[Condition:Transformed]{transformed}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - magical
-          range:
-            unit: self
-          targets:
-            - self
-        transfer: true
-        type: ability
-      - _id: gy6a7MNFq54nNAEa
-        _key: >-
-          !actors.items.effects!6e183ea8375fbadc.6e183ea8375fbadc.gy6a7MNFq54nNAEa
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.2rxzRucyitmqyDmQ
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/abilities/ethereal-senses.webp
-        name: Ethereal Senses
-        system:
-          _sup: jHz4pXvkZinXroCl
-          automations:
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
-              changes:
-                - key: system.senses.ethereal
-                  phase: normal
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  type: upgrade
-                  value: '120'
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
-              type: changes
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          effectTypes:
-            - sensory
-          elements:
-            - necromancy
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: ethereal-senses
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          overview:
-            base: >-
-              <p>You can see and hear spirits and
-              @L[Condition:Ethereal]{Ethereal} creatures within 120 feet.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - magical
-            - spiritual
-            - primal
-          range:
-            unit: self
-          targets:
-            - self
-        transfer: true
-        type: ability
-      - _id: qgSYgztkBeU9Eq38
-        _key: >-
-          !actors.items.effects!6e183ea8375fbadc.6e183ea8375fbadc.qgSYgztkBeU9Eq38
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.778a406e64cdfa53
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.4
-        img: systems/teriock/src/icons/abilities/mana-drain-grasp.webp
-        name: Mana Drain Grasp
-        system:
-          _sup: jHz4pXvkZinXroCl
-          automations:
-            157afc517847f562:
-              _id: 157afc517847f562
-              competencies:
-                - 0
-                - 1
-                - 2
-              formula: 1d8[mana]
-              heighten:
-                - 1
-                - 0
-              impact: drain
-              merge: true
-              type: roll
-            iAyFzPzJgTNeDbbH:
-              _id: iAyFzPzJgTNeDbbH
-              competencies:
-                - 0
-                - 1
-                - 2
-              consumeStatDice: true
-              forHarm: false
-              heighten:
-                - 0
-                - 1
-              type: revitalize
-          competence:
-            raw: 0
-          delivery: hand
-          duration:
-            raw: '0'
-            unit: instant
-          effectTypes:
-            - revitalization
-            - draining
-          executionTime:
-            base: a2
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: special
-          identifier: mana-drain-grasp
-          interaction: attack
-          maneuver: active
-          mundane: false
-          piercing:
-            raw: 0
-          powerSources:
-            - magical
-          range:
-            unit: contact
-          results:
-            critHit: >-
-              <p>Deal [[/drain 2d8[mana]]] @L[Category:Drain types]{drain} to
-              the target. If this @L[Condition:Dead]{kills} the target, you
-              @L[Core:Revitalizing]{revitalize} twice. This
-              @L[Core:Revitalizing]{revitalization} is the only part of this
-              that is a @L[Category:Revitalization effects]{revitalization
-              effect}.</p>
-            hit: >-
-              <p>Deal [[/drain 1d8[mana]]] @L[Category:Drain types]{drain} to
-              the target. If this @L[Condition:Dead]{kills} the target, you
-              @L[Core:Revitalizing]{revitalize}.  This
-              @L[Core:Revitalizing]{revitalization} is the only part of this
-              that is a @L[Category:Revitalization effects]{revitalization
-              effect}.</p>
-          targets:
-            - creature
-        transfer: true
-        type: ability
     folder: b8dcf1ebf1b3e669
     img: systems/teriock/src/icons/creatures/apparition.webp
     name: Apparition
     system:
-      adult: 0
       appearance: >-
         <p>Transparent people or beings with sharp looking claws and hollow,
         empty-looking eyes like voids.</p>
@@ -1491,7 +1490,6 @@ items:
       competence:
         raw: 1
       identifier: apparition
-      lifespan: 0
       size:
         enabled: true
         value: 3
@@ -1508,24 +1506,24 @@ items:
         img: systems/teriock/src/icons/tokens/apparition.webp
         ring: true
     type: species
-  - _id: Slkv7tyuVvTgLwdm
-    _key: '!actors.items!6e183ea8375fbadc.Slkv7tyuVvTgLwdm'
+  - _id: Jqok4WDgKzJKy2pX
+    _key: '!actors.items!6e183ea8375fbadc.Jqok4WDgKzJKy2pX'
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.5fc9240e0297a542
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     effects:
-      - _id: sOhFvc8GVOKryoDz
+      - _id: Sp0ZJRJdCTJSSn9m
         _key: >-
-          !actors.items.effects!6e183ea8375fbadc.Slkv7tyuVvTgLwdm.sOhFvc8GVOKryoDz
+          !actors.items.effects!6e183ea8375fbadc.Jqok4WDgKzJKy2pX.Sp0ZJRJdCTJSSn9m
         _stats:
           compendiumSource: Compendium.teriock.properties.ActiveEffect.417457cfa2643f5b
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -1539,15 +1537,15 @@ items:
           mundane: true
         transfer: true
         type: property
-      - _id: WvMAuLt3N8RlGo44
+      - _id: BSADIipS65gkiSsK
         _key: >-
-          !actors.items.effects!6e183ea8375fbadc.Slkv7tyuVvTgLwdm.WvMAuLt3N8RlGo44
+          !actors.items.effects!6e183ea8375fbadc.Jqok4WDgKzJKy2pX.BSADIipS65gkiSsK
         _stats:
           compendiumSource: Compendium.teriock.properties.ActiveEffect.9e0c23ad80fe566a
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/properties/prehensile.webp
         name: Prehensile
         system:
@@ -1561,15 +1559,15 @@ items:
           mundane: true
         transfer: true
         type: property
-      - _id: DBAMgCzXFj7nPQiB
+      - _id: n6MmBcTDYrDSMa6C
         _key: >-
-          !actors.items.effects!6e183ea8375fbadc.Slkv7tyuVvTgLwdm.DBAMgCzXFj7nPQiB
+          !actors.items.effects!6e183ea8375fbadc.Jqok4WDgKzJKy2pX.n6MmBcTDYrDSMa6C
         _stats:
           compendiumSource: Compendium.teriock.properties.ActiveEffect.891de334396620e1
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -1583,15 +1581,15 @@ items:
           mundane: true
         transfer: true
         type: property
-      - _id: 88WdwdcbNA6tDJMs
+      - _id: up27i6uO2YFqMy5x
         _key: >-
-          !actors.items.effects!6e183ea8375fbadc.Slkv7tyuVvTgLwdm.88WdwdcbNA6tDJMs
+          !actors.items.effects!6e183ea8375fbadc.Jqok4WDgKzJKy2pX.up27i6uO2YFqMy5x
         _stats:
           compendiumSource: Compendium.teriock.properties.ActiveEffect.12e9b70930bc7182
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.4
+          systemVersion: 0.12.15
         img: systems/teriock/src/icons/properties/armor-voiding.webp
         name: Armor Voiding
         system:
@@ -1634,15 +1632,13 @@ items:
       _sup: 6e183ea8375fbadc
       attackPenalty: '-3'
       bv:
-        raw: '1'
+        raw: 1
       competence:
         raw: 0
       damage:
         base: 1d8
       fightingStyle: savage
       identifier: prehensile-rending-claw
-      impacts:
-        - damage
       range:
         long:
           unit: melee
@@ -1694,6 +1690,6 @@ system:
     number:
       raw: '3'
   wielding:
-    attacker: Slkv7tyuVvTgLwdm
-    blocker: Slkv7tyuVvTgLwdm
+    attacker: Jqok4WDgKzJKy2pX
+    blocker: Jqok4WDgKzJKy2pX
 type: creature

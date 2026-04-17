@@ -65,9 +65,7 @@ export default function HierarchyDocumentMixin(Base) {
         });
         const filteredDocuments = documents.filter((d) => {
           const collection = d.siblingCollection;
-          if (d?.system?._sup) {
-            return collection.has(d.system._sup);
-          }
+          if (d?.system?._sup) return collection.has(d.system._sup);
           return true;
         });
         if (!operation.allowDuplicateSubs) {
@@ -380,16 +378,12 @@ export default function HierarchyDocumentMixin(Base) {
       #renderSupSheets() {
         this.getAllSups().then((result) => {
           result.forEach((doc) => {
-            if (doc.isViewer) {
-              doc.sheet.render({ force: false });
-            }
+            if (doc.isViewer) doc.sheet.render({ force: false });
           });
         });
         if (this.collection.name === "CompendiumCollection") {
           this.collection.apps.forEach((app) => {
-            if (app.rendered) {
-              app.render();
-            }
+            if (app.rendered) app.render();
           });
         }
       }
@@ -478,9 +472,7 @@ export default function HierarchyDocumentMixin(Base) {
             operation,
           );
         } else {
-          if (this.inCompendium) {
-            operation.pack = this.collection.collection;
-          }
+          if (this.inCompendium) operation.pack = this.collection.collection;
           return await foundry.utils
             .getDocumentClass(this.documentName)
             .createDocuments(data, operation);
@@ -503,7 +495,7 @@ export default function HierarchyDocumentMixin(Base) {
        * @returns {Promise<AnyCommonDocument[]>}
        */
       async deleteSubDocuments(ids = [], operation = {}) {
-        ids = ids.filter((id) => this.subs.map((s) => s.id).includes(id));
+        ids = ids.filter((id) => this.subs.map((s) => s._id).includes(id));
         if (this.parent) {
           return this.parent.deleteEmbeddedDocuments(
             this.documentName,
@@ -511,9 +503,7 @@ export default function HierarchyDocumentMixin(Base) {
             operation,
           );
         } else {
-          if (this.inCompendium) {
-            operation.pack = this.collection.collection;
-          }
+          if (this.inCompendium) operation.pack = this.collection.collection;
           return await foundry.utils
             .getDocumentClass(this.documentName)
             .deleteDocuments(ids, operation);
@@ -600,7 +590,7 @@ export default function HierarchyDocumentMixin(Base) {
        */
       async updateSubDocuments(updates = [], operation = {}) {
         updates = updates.filter((update) =>
-          this.subs.map((s) => s.id).includes(update._id),
+          this.subs.map((s) => s._id).includes(update._id),
         );
         if (this.parent) {
           return this.parent.updateEmbeddedDocuments(
@@ -609,9 +599,7 @@ export default function HierarchyDocumentMixin(Base) {
             operation,
           );
         } else {
-          if (this.inCompendium) {
-            operation.pack = this.collection.collection;
-          }
+          if (this.inCompendium) operation.pack = this.collection.collection;
           return await foundry.utils
             .getDocumentClass(this.documentName)
             .updateDocuments(updates, operation);

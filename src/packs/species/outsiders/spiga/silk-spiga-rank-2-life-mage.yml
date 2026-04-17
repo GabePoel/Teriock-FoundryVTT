@@ -1,145 +1,284 @@
-_id: Qq0zEoa8IAgOjm6k
-_key: '!items!Qq0zEoa8IAgOjm6k'
+_id: BmNUjg8yCSO01zU8
+_key: '!items!BmNUjg8yCSO01zU8'
 _stats:
   compendiumSource: Compendium.teriock.classes.Item.9fe691de1c14c269
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.23
+  systemVersion: 0.12.15
 effects:
-  - _id: x5XXV4C0b6eHOH7Q
-    _key: '!items.effects!Qq0zEoa8IAgOjm6k.x5XXV4C0b6eHOH7Q'
+  - _id: aO1rApSYgJxjhJbo
+    _key: '!items.effects!BmNUjg8yCSO01zU8.aO1rApSYgJxjhJbo'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.2glVARVA7VNCOt4d
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.b975f4eaa1764fc6
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
-    img: systems/teriock/src/icons/abilities/blessing.webp
-    name: Blessing
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/life-elder-sorcery.webp
+    name: Life Elder Sorcery
     system:
-      _sup: BtjyB6cjHw37lX9f
+      class: lifeMage
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: life-elder-sorcery
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Elder Sorcery Creation]{Elder Sorcery
+          Creation}, @L[Ability:Celestial Elder Sorcery Words]{Celestial Elder
+          Sorcery Words}, and @L[Ability:Life Elder Sorcery Words]{Life Elder
+          Sorcery Words}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: BtjyB6cjHw37lX9f
+    _key: '!items.effects!BmNUjg8yCSO01zU8.BtjyB6cjHw37lX9f'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.4b97db69b122c193
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/life-rotators.webp
+    name: Life Rotators
+    system:
       automations:
-        PhMG9NY6ssZbobIQ:
-          _id: PhMG9NY6ssZbobIQ
-          attachDocuments: true
-          automatic: true
-          competence:
-            raw: 0
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.rotators.max
+              phase: normal
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              type: upgrade
+              value: '@rank.mag - 1'
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+        f025905e157ac261:
+          _id: f025905e157ac261
+          changes:
+            - key: system.rotators.max
+              phase: normal
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              type: upgrade
+              value: 2 * (@rank.mag - 1)
+          competencies:
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+        f7da3b5e1992a724:
+          _id: f7da3b5e1992a724
+          changes:
+            - key: system.{{{key}}}
+              phase: normal
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              type: upgrade
+              value: 2 * (@rank.mag - 1) + @p
           competencies:
             - 2
           crit:
             - 0
             - 1
           heighten:
-            - 0
             - 1
-          multi: true
-          overrideCompetence: false
-          overrideData: false
-          qualifier: '0'
-          type: addDocuments
-          uuids:
-            - Compendium.teriock.tables.RollTable.63d836072ece673b
-        b7Xi5bdZO77CsFw6:
-          _id: b7Xi5bdZO77CsFw6
-          attachDocuments: true
-          automatic: true
-          competence:
-            raw: 0
-          competencies:
             - 0
-            - 1
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 0
-            - 1
-          multi: false
-          overrideCompetence: false
-          overrideData: false
-          qualifier: '0'
-          type: addDocuments
-          uuids:
-            - Compendium.teriock.tables.RollTable.63d836072ece673b
+          type: changes
       class: lifeMage
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: life-rotators
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>Having mastered the basic techniques in this field of magic, you
+          are able to cast more advanced @L[Category:Spells]{spells}. If you
+          create any @L[Core:Elder Sorcery]{Elder Sorcery}
+          @L[Category:Spells]{spells} of your own, they get added to this list.
+          However, just because you "know" how to cast these spells, doesn't
+          mean you are always prepared to. Although all @L[Category:Mage
+          classes]{mage classes} grant their own @L[Core:Elder Sorcery]{Elder
+          Sorcery} and @L[Category:Rotator spells]{rotator spells}, you may only
+          have a maximum of @L[Category:Mage classes]{MR} - 1 of these spells
+          rotated into your spell list at any given time across <i>all</i>
+          classes. @L[Category:Mage classes]{MR} refers to the number of
+          @L[Core:Leveling Up]{ranks} you have in @L[Category:Mage classes]{mage
+          classes}. During a @L[Core:Long Rest]{long rest}, you can "rotate"
+          which spells you have prepared. The @L[Category:Rotator
+          spells]{rotator spells} automatically available to you are
+          @L[Ability:Blessing]{Blessing}, @L[Ability:Crown of Light]{Crown of
+          Light}, @L[Ability:Glow of Healing]{Glow of Healing},
+          @L[Ability:Rebirth]{Rebirth}, and @L[Ability:Ward]{Ward}.</p>
+        fluent: >-
+          <p>You may instead prepare 2 × (MR - 1) + @L[Core:Proficiency
+          Bonus]{P} of these @L[Category:Spells]{spells}.</p>
+        proficient: >-
+          <p>You may instead prepare 2 × (MR - 1) of these
+          @L[Category:Spells]{spells}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: WyS5QqPX3iV2oUxZ
+    _key: '!items.effects!BmNUjg8yCSO01zU8.WyS5QqPX3iV2oUxZ'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.0q5khIx32nw3ihVe
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/elder-sorcery-creation.webp
+    name: Elder Sorcery Creation
+    system:
+      _sup: aO1rApSYgJxjhJbo
       competence:
         raw: 0
       costs:
         components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
+          material:
+            description: >-
+              <p>Creation cost is at least 3 × the material components of the
+              spell itself.</p>
+            type: description
         primary:
+          hp:
+            description: >-
+              <p>Creation cost is at least 3 × @L[Core:HP]{HP} of the spell
+              itself.</p>
+            type: description
           mp:
-            formula: '1'
-            type: formula
+            description: >-
+              <p>Creation cost is at least 1 @L[Core:MP]{MP} per @L[Core:Elder
+              Sorcery]{OP} of <i>each</i> word in the spell plus 3 ×
+              @L[Core:MP]{MP} of the spell itself.</p>
+            type: description
       delivery: sight
       duration:
-        raw: '1'
-        unit: hour
-      effectTypes:
-        - contract
-      elements:
-        - life
-      executionTime: 10 Minutes
+        raw: '0'
+        unit: instant
+      elderSorcery: true
+      executionTime:
+        base: Long Rest
+        slow:
+          unit: longRest
       expansion:
         featSaveAttribute: mov
         range:
           unit: self
       featSaveAttribute: mov
       form: special
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, you may target 1
-        additional creature.</p>
-      identifier: blessing
+      identifier: elder-sorcery-creation
       interaction: manifest
-      invoked: true
       maneuver: slow
+      mundane: false
       overview:
         base: >-
-          <p>Choose 1 ability from your deity's @L[Core:Domains]{domains chart}.
-          You may @L[Keyword:Blessing]{bless} 1 target with this ability, which
-          counts as a @L[Keyword:Blessing]{blessing}.
-          </p><p>@Embed[Compendium.teriock.tables.RollTable.63d836072ece673b]</p>
+          <p>You may create 1 custom "rotator" @L[Category:Spells]{spells} using
+          @L[Core:Elder Sorcery]{Elder Sorcery} words that you know using
+          whatever @L[Core:Elder Sorcery]{Elder Sorcery} creation rules are
+          dictated to you by your @L[Core:Game Master]{GM}. As with other
+          rotators, this spell is not always available to you. You have to
+          "rotate" into having it prepared. This spell may have a maximum number
+          of words equal to your @L[Core:Leveling Up]{level}. Your @L[Core:Game
+          Master]{GM} may allow you to "improvise" @L[Category:Spells]{spells}
+          as well, using whatever rules they wish.</p>
         fluent: >-
-          <p>You may choose 2 × @L[Core:Fluency Bonus]{F} abilities from your
-          deity's @L[Core:Domains]{domains chart} and bless 2 × @L[Core:Fluency
-          Bonus]{F} targets with 2 of them.</p>
+          <p>In addition to the spells that you crate, you can learn
+          @L[Core:Proficiency Bonus]{P} additional spells from other
+          @L[Core:Elder Sorcery]{Elder Sorcery} users. See @L[Core:Elder
+          Sorcery]{Elder Sorcery} for more information.</p>
         proficient: >-
-          <p>You may choose 2 × @L[Core:Proficiency Bonus]{P} abilities from
-          your deity's @L[Core:Domains]{domains chart} and bless 2 ×
-          @L[Core:Proficiency Bonus]{P} targets with 1 of them.</p>
+          <p>You may now create 2 × (@L[Category:Mage classes]{MR} - 1) custom
+          "rotator" @L[Category:Spells]{spells} where @L[Category:Mage
+          classes]{MR} is the number of @L[Core:Leveling Up]{ranks} you have in
+          @L[Category:Mage classes]{mage classes}.</p>
       piercing:
         raw: 0
       powerSources:
         - magical
       range:
-        raw: '5'
-        unit: ft
-      requirements: <p>You are not @L[Core:Sustained]{sustaining} [[lookup name]].</p>
+        unit: contact
       ritual: true
-      rotator: true
-      spell: true
-      standard: true
-      sustained: true
+      skill: true
       targets:
-        - creature
+        - self
     transfer: true
     type: ability
-  - _id: t6Imk5bmlLdxXjmv
-    _key: '!items.effects!Qq0zEoa8IAgOjm6k.t6Imk5bmlLdxXjmv'
+  - _id: YscsoKsGx4wwIcLn
+    _key: '!items.effects!BmNUjg8yCSO01zU8.YscsoKsGx4wwIcLn'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.41ba9670a628fc21
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
-    flags:
-      teriock:
-        dontConsume: false
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/celestial-elder-sorcery-words.webp
     name: Celestial Elder Sorcery Words
     system:
@@ -151,7 +290,10 @@ effects:
         raw: '0'
         unit: unlimited
       elderSorcery: true
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -161,6 +303,7 @@ effects:
       identifier: celestial-elder-sorcery-words
       interaction: manifest
       maneuver: passive
+      mundane: false
       overview:
         base: >-
           <p>You know @L[Core:Elder Sorcery]{OP} 1 @L[Core:Celestial Elder
@@ -267,14 +410,324 @@ effects:
         - self
     transfer: true
     type: ability
-  - _id: umi3qR3XEax7uNOA
-    _key: '!items.effects!Qq0zEoa8IAgOjm6k.umi3qR3XEax7uNOA'
+  - _id: 7QgrpMRbwuWP3WS4
+    _key: '!items.effects!BmNUjg8yCSO01zU8.7QgrpMRbwuWP3WS4'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.f6220dffe11afbef
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/life-elder-sorcery-words.webp
+    name: Life Elder Sorcery Words
+    system:
+      _sup: aO1rApSYgJxjhJbo
+      class: lifeMage
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '0'
+        unit: unlimited
+      elderSorcery: true
+      elements:
+        - life
+      executionTime:
+        base: passive
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      identifier: life-elder-sorcery-words
+      interaction: manifest
+      maneuver: passive
+      mundane: false
+      overview:
+        base: >-
+          <p>You know @L[Core:Elder Sorcery]{OP} 1 @L[Core:Life Elder Sorcery
+          Words]{Life Elder Sorcery words}.</p><table class="wikitable
+          sortable"><caption style="white-space:nowrap">OP 1 Life @L[Core:Elder
+          Sorcery Words]{Elder Sorcery Words}</caption><tbody><tr><th
+          style="background-color:#e5a50a1A">OP</th><th
+          style="background-color:#9a99961A">@L[Class:Life Mage]{Life
+          Nouns}</th><th style="background-color:#9a99961A">@L[Class:Life
+          Mage]{Life Verbs}</th></tr><tr><td rowspan="9"
+          style="background-color:#f9f06b1A">1</td><td
+          style="background-color:#ffffff1A">amulet</td><td
+          style="background-color:#ffffff1A">calm</td></tr> <tr><td
+          style="background-color:#9a99961A">burn</td><td
+          style="background-color:#9a99961A">defend</td></tr> <tr><td
+          style="background-color:#ffffff1A">health</td><td
+          style="background-color:#ffffff1A">detect</td></tr> <tr><td
+          style="background-color:#9a99961A">hurt</td><td
+          style="background-color:#9a99961A">mend</td></tr> <tr><td
+          style="background-color:#ffffff1A">illness</td><td
+          style="background-color:#ffffff1A">prevent</td></tr> <tr><td
+          style="background-color:#9a99961A">symbol</td><td
+          style="background-color:#9a99961A">repel</td></tr> <tr><td
+          style="background-color:#ffffff1A">talisman</td><td
+          style="background-color:#ffffff1A">restrain</td></tr> <tr><td
+          style="background-color:#9a99961A">valor</td><td
+          style="background-color:#9a99961A">shelter</td></tr> <tr><td
+          style="background-color:#ffffff1A">wounds</td><td
+          style="background-color:#ffffff1A">soothe</td></tr></tbody></table><p></p>
+        fluent: >-
+          <p>The @L[Core:Elder Sorcery]{OP} of words you know is 1 + (3 ×
+          @L[Core:Fluency Bonus]{F}).</p>
+        proficient: >-
+          <p>The @L[Core:Elder Sorcery]{OP} of words you know is 1 + (3 ×
+          @L[Core:Proficiency Bonus]{P}).</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      skill: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: SHwIiiLACBUyCBR8
+    _key: '!items.effects!BmNUjg8yCSO01zU8.SHwIiiLACBUyCBR8'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.2glVARVA7VNCOt4d
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/blessing.webp
+    name: Blessing
+    system:
+      _sup: BtjyB6cjHw37lX9f
+      automations:
+        PhMG9NY6ssZbobIQ:
+          _id: PhMG9NY6ssZbobIQ
+          attachDocuments: true
+          automatic: true
+          competence:
+            raw: 0
+          competencies:
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 0
+            - 1
+          multi: true
+          overrideCompetence: false
+          overrideData: false
+          qualifier: '0'
+          type: addDocuments
+          uuids:
+            - Compendium.teriock.tables.RollTable.63d836072ece673b
+        b7Xi5bdZO77CsFw6:
+          _id: b7Xi5bdZO77CsFw6
+          attachDocuments: true
+          automatic: true
+          competence:
+            raw: 0
+          competencies:
+            - 0
+            - 1
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 0
+            - 1
+          multi: false
+          overrideCompetence: false
+          overrideData: false
+          qualifier: '0'
+          type: addDocuments
+          uuids:
+            - Compendium.teriock.tables.RollTable.63d836072ece673b
+      class: lifeMage
+      competence:
+        raw: 0
+      costs:
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+        primary:
+          mp:
+            formula: '1'
+            type: formula
+      delivery: sight
+      duration:
+        raw: '1'
+        unit: hour
+      effectTypes:
+        - contract
+      elements:
+        - life
+      executionTime:
+        base: 10 Minutes
+        slow:
+          raw: '10'
+          unit: minute
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, you may target 1
+        additional creature.</p>
+      identifier: blessing
+      interaction: manifest
+      invoked: true
+      maneuver: slow
+      mundane: false
+      overview:
+        base: >-
+          <p>Choose 1 ability from your deity's @L[Core:Domains]{domains chart}.
+          You may @L[Keyword:Blessing]{bless} 1 target with this ability, which
+          counts as a @L[Keyword:Blessing]{blessing}.
+          </p><p>@Embed[Compendium.teriock.tables.RollTable.63d836072ece673b]</p>
+        fluent: >-
+          <p>You may choose 2 × @L[Core:Fluency Bonus]{F} abilities from your
+          deity's @L[Core:Domains]{domains chart} and bless 2 × @L[Core:Fluency
+          Bonus]{F} targets with 2 of them.</p>
+        proficient: >-
+          <p>You may choose 2 × @L[Core:Proficiency Bonus]{P} abilities from
+          your deity's @L[Core:Domains]{domains chart} and bless 2 ×
+          @L[Core:Proficiency Bonus]{P} targets with 1 of them.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        raw: '5'
+        unit: ft
+      requirements: <p>You are not @L[Core:Sustained]{sustaining} [[lookup name]].</p>
+      ritual: true
+      rotator: true
+      spell: true
+      standard: true
+      sustained: true
+      targets:
+        - creature
+    transfer: true
+    type: ability
+  - _id: d94TIPhvfIM9h3MF
+    _key: '!items.effects!BmNUjg8yCSO01zU8.d94TIPhvfIM9h3MF'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.88c798022d5a9113
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/ward.webp
+    name: Ward
+    system:
+      _sup: BtjyB6cjHw37lX9f
+      automations:
+        PtV9W97cgaeTZC1z:
+          _id: PtV9W97cgaeTZC1z
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 0
+            - 1
+          macro: Compendium.teriock.execution.Macro.VTttYAvc7gP0Uwgd
+          trigger: executeAbility
+          type: abilityMacro
+        x3HLBJilnUoU4gKo:
+          _id: x3HLBJilnUoU4gKo
+          attachDocuments: true
+          automatic: true
+          competence:
+            raw: 0
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 0
+            - 1
+          multi: false
+          overrideCompetence: false
+          overrideData: false
+          qualifier: '0'
+          type: addDocuments
+          uuids:
+            - Compendium.teriock.properties.ActiveEffect.de1d0945b56997d2
+      class: lifeMage
+      competence:
+        raw: 0
+      costs:
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+      delivery: hand
+      duration:
+        raw: '1'
+        unit: minute
+      elements:
+        - life
+      executionTime:
+        base: a1
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      identifier: ward
+      interaction: attack
+      invoked: true
+      maneuver: active
+      mundane: false
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: contact
+      results:
+        hit: >-
+          <p>Target item's next @L[Category:Attack abilities]{attack} is
+          @L[Keyword:Warded]{warded}. You may also target a creature's hand. If
+          you do, the creature's next @L[Category:Hand delivery spells]{hand} or
+          @L[Category:Missile delivery spells]{missile spell} is
+          @L[Keyword:Warded]{warded}.</p>
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - item
+    transfer: true
+    type: ability
+  - _id: 2wkwrCsbm4GjRyF0
+    _key: '!items.effects!BmNUjg8yCSO01zU8.2wkwrCsbm4GjRyF0'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.8f93a8af7c11f7ed
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/crown-of-light.webp
     name: Crown of Light
     system:
@@ -329,7 +782,10 @@ effects:
         unit: hour
       elements:
         - life
-      executionTime: a1
+      executionTime:
+        base: a1
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -339,6 +795,7 @@ effects:
       identifier: crown-of-light
       interaction: manifest
       maneuver: active
+      mundane: false
       overview:
         base: >-
           <p>A small circle of golden light circles above your head. You gain
@@ -358,554 +815,18 @@ effects:
         - self
     transfer: true
     type: ability
-  - _id: QjL6aq8xoN4vEa4j
-    _key: '!items.effects!Qq0zEoa8IAgOjm6k.QjL6aq8xoN4vEa4j'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.3055b234b402b5ec
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.2
-    img: systems/teriock/src/icons/abilities/cure-illness.webp
-    name: Cure Illness
-    system:
-      _sup: c3b8UNtWzPa4rQya
-      class: lifeMage
-      competence:
-        raw: 0
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: sight
-      duration:
-        raw: '1'
-        unit: hour
-      effectTypes:
-        - healing
-      elements:
-        - life
-      executionTime: 10 Minutes
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, The DC of the check is
-        reduced by 1.</p>
-      identifier: cure-illness
-      interaction: manifest
-      invoked: true
-      maneuver: slow
-      overview:
-        base: >-
-          <p>Make an [[/tc herbalist]]{herbalist check} to remove a
-          @L[Category:Disease effects]{disease or illness} from some creature.
-          The @L[Core:GM]{GM} determines the difficulty based on the severity of
-          the illness. The @L[Core:GM]{GM} may also require you to have access
-          to specific ingredients or tools or put other conditions in place. If
-          the illness is mental in nature, then [[lookup name]] acts as a
-          @L[Category:Mental effects]{mental effect}.</p>
-        proficient: >-
-          <p>You are @L[Keyword:Adept]{adept} at [[lookup name]]. Before you
-          make the check, you may spend 1 additional @L[Core:MP]{MP} to know the
-          DC if it is less than your total level. You may also add your
-          @L[Core:Proficiency Bonus]{proficiency bonus} to the [[/tc
-          herbalist]]{herbalist check} regardless of whether or not you are
-          proficient in @L[Tradecraft:Herbalist]{herbalist}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        raw: '5'
-        unit: ft
-      results:
-        fail: >-
-          <p>The target is not cured, but the illness does not worsen for the
-          duration of Healing Touch. You may cast [[lookup name]] again to keep
-          the disease from progressing, but you may not attempt the check
-          again.</p>
-        save: <p>The target is cured of the illness.</p>
-      ritual: true
-      spell: true
-      standard: true
-      targets:
-        - creature
-    transfer: true
-    type: ability
-  - _id: IiFZZftBDMOYRlSH
-    _key: '!items.effects!Qq0zEoa8IAgOjm6k.IiFZZftBDMOYRlSH'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.0q5khIx32nw3ihVe
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.2
-    flags:
-      teriock:
-        dontConsume: false
-    img: systems/teriock/src/icons/abilities/elder-sorcery-creation.webp
-    name: Elder Sorcery Creation
-    system:
-      _sup: aO1rApSYgJxjhJbo
-      competence:
-        raw: 0
-      costs:
-        components:
-          material:
-            description: >-
-              <p>Creation cost is at least 3 × the material components of the
-              spell itself.</p>
-            type: description
-        primary:
-          hp:
-            description: >-
-              <p>Creation cost is at least 3 × @L[Core:HP]{HP} of the spell
-              itself.</p>
-            type: description
-          mp:
-            description: >-
-              <p>Creation cost is at least 1 @L[Core:MP]{MP} per @L[Core:Elder
-              Sorcery]{OP} of <i>each</i> word in the spell plus 3 ×
-              @L[Core:MP]{MP} of the spell itself.</p>
-            type: description
-      delivery: sight
-      duration:
-        raw: '0'
-        unit: instant
-      elderSorcery: true
-      executionTime: Long Rest
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: elder-sorcery-creation
-      interaction: manifest
-      maneuver: slow
-      overview:
-        base: >-
-          <p>You may create 1 custom "rotator" @L[Category:Spells]{spells} using
-          @L[Core:Elder Sorcery]{Elder Sorcery} words that you know using
-          whatever @L[Core:Elder Sorcery]{Elder Sorcery} creation rules are
-          dictated to you by your @L[Core:Game Master]{GM}. As with other
-          rotators, this spell is not always available to you. You have to
-          "rotate" into having it prepared. This spell may have a maximum number
-          of words equal to your @L[Core:Leveling Up]{level}. Your @L[Core:Game
-          Master]{GM} may allow you to "improvise" @L[Category:Spells]{spells}
-          as well, using whatever rules they wish.</p>
-        fluent: >-
-          <p>In addition to the spells that you crate, you can learn
-          @L[Core:Proficiency Bonus]{P} additional spells from other
-          @L[Core:Elder Sorcery]{Elder Sorcery} users. See @L[Core:Elder
-          Sorcery]{Elder Sorcery} for more information.</p>
-        proficient: >-
-          <p>You may now create 2 × (@L[Category:Mage classes]{MR} - 1) custom
-          "rotator" @L[Category:Spells]{spells} where @L[Category:Mage
-          classes]{MR} is the number of @L[Core:Leveling Up]{ranks} you have in
-          @L[Category:Mage classes]{mage classes}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      ritual: true
-      skill: true
-      targets:
-        - self
-    transfer: true
-    type: ability
-  - _id: c3b8UNtWzPa4rQya
-    _key: '!items.effects!Qq0zEoa8IAgOjm6k.c3b8UNtWzPa4rQya'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.3f919f2ab4945403
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.2
-    img: systems/teriock/src/icons/abilities/glow-of-healing.webp
-    name: Glow of Healing
-    system:
-      _sup: BtjyB6cjHw37lX9f
-      class: lifeMage
-      competence:
-        raw: 0
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: sight
-      duration:
-        raw: '8'
-        unit: hour
-      elements:
-        - life
-      executionTime: 10 Minutes
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: glow-of-healing
-      interaction: manifest
-      invoked: true
-      maneuver: slow
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Healing Touch]{Healing Touch} and
-          @L[Ability:Cure Illness]{Cure Illness}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      ritual: true
-      rotator: true
-      spell: true
-      standard: true
-      targets:
-        - self
-    transfer: true
-    type: ability
-  - _id: U6UAtdrBFO2n0UKO
-    _key: '!items.effects!Qq0zEoa8IAgOjm6k.U6UAtdrBFO2n0UKO'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.23dbmrZ4Rm0lCBPv
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.2
-    img: systems/teriock/src/icons/abilities/healing-touch.webp
-    name: Healing Touch
-    system:
-      _sup: c3b8UNtWzPa4rQya
-      class: lifeMage
-      competence:
-        raw: 0
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-      delivery: hand
-      duration:
-        raw: '0'
-        unit: instant
-      elements:
-        - life
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, target is
-        @L[Core:Healing]{healed} again at the start of your next
-        @L[Core:Turns]{turn}.</p>
-      identifier: healing-touch
-      interaction: attack
-      invoked: true
-      maneuver: active
-      piercing:
-        raw: 2
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      results:
-        hit: >-
-          <p>Target is no longer @L[Condition:Poisoned]{poisoned} and is
-          @L[Core:Healing]{healed} at the start of your next
-          @L[Core:Turns]{turn}.</p>
-      spell: true
-      standard: true
-      targets:
-        - creature
-    transfer: true
-    type: ability
-  - _id: aO1rApSYgJxjhJbo
-    _key: '!items.effects!Qq0zEoa8IAgOjm6k.aO1rApSYgJxjhJbo'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.b975f4eaa1764fc6
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.2
-    img: systems/teriock/src/icons/abilities/life-elder-sorcery.webp
-    name: Life Elder Sorcery
-    system:
-      class: lifeMage
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: life-elder-sorcery
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Elder Sorcery Creation]{Elder Sorcery
-          Creation}, @L[Ability:Celestial Elder Sorcery Words]{Celestial Elder
-          Sorcery Words}, and @L[Ability:Life Elder Sorcery Words]{Life Elder
-          Sorcery Words}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      targets:
-        - self
-    transfer: true
-    type: ability
-  - _id: c7PSyBa1CzTdxuvg
-    _key: '!items.effects!Qq0zEoa8IAgOjm6k.c7PSyBa1CzTdxuvg'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.f6220dffe11afbef
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.2
-    img: systems/teriock/src/icons/abilities/life-elder-sorcery-words.webp
-    name: Life Elder Sorcery Words
-    system:
-      _sup: aO1rApSYgJxjhJbo
-      class: lifeMage
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      elderSorcery: true
-      elements:
-        - life
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: life-elder-sorcery-words
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You know @L[Core:Elder Sorcery]{OP} 1 @L[Core:Life Elder Sorcery
-          Words]{Life Elder Sorcery words}.</p><table class="wikitable
-          sortable"><caption style="white-space:nowrap">OP 1 Life @L[Core:Elder
-          Sorcery Words]{Elder Sorcery Words}</caption><tbody><tr><th
-          style="background-color:#e5a50a1A">OP</th><th
-          style="background-color:#9a99961A">@L[Class:Life Mage]{Life
-          Nouns}</th><th style="background-color:#9a99961A">@L[Class:Life
-          Mage]{Life Verbs}</th></tr><tr><td rowspan="9"
-          style="background-color:#f9f06b1A">1</td><td
-          style="background-color:#ffffff1A">amulet</td><td
-          style="background-color:#ffffff1A">calm</td></tr> <tr><td
-          style="background-color:#9a99961A">burn</td><td
-          style="background-color:#9a99961A">defend</td></tr> <tr><td
-          style="background-color:#ffffff1A">health</td><td
-          style="background-color:#ffffff1A">detect</td></tr> <tr><td
-          style="background-color:#9a99961A">hurt</td><td
-          style="background-color:#9a99961A">mend</td></tr> <tr><td
-          style="background-color:#ffffff1A">illness</td><td
-          style="background-color:#ffffff1A">prevent</td></tr> <tr><td
-          style="background-color:#9a99961A">symbol</td><td
-          style="background-color:#9a99961A">repel</td></tr> <tr><td
-          style="background-color:#ffffff1A">talisman</td><td
-          style="background-color:#ffffff1A">restrain</td></tr> <tr><td
-          style="background-color:#9a99961A">valor</td><td
-          style="background-color:#9a99961A">shelter</td></tr> <tr><td
-          style="background-color:#ffffff1A">wounds</td><td
-          style="background-color:#ffffff1A">soothe</td></tr></tbody></table><p></p>
-        fluent: >-
-          <p>The @L[Core:Elder Sorcery]{OP} of words you know is 1 + (3 ×
-          @L[Core:Fluency Bonus]{F}).</p>
-        proficient: >-
-          <p>The @L[Core:Elder Sorcery]{OP} of words you know is 1 + (3 ×
-          @L[Core:Proficiency Bonus]{P}).</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      skill: true
-      targets:
-        - self
-    transfer: true
-    type: ability
-  - _id: BtjyB6cjHw37lX9f
-    _key: '!items.effects!Qq0zEoa8IAgOjm6k.BtjyB6cjHw37lX9f'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.4b97db69b122c193
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.4
-    img: systems/teriock/src/icons/abilities/life-rotators.webp
-    name: Life Rotators
-    system:
-      automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.magic.maxRotators.raw
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: upgrade
-              value: '@rank.mag - 1'
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-        f025905e157ac261:
-          _id: f025905e157ac261
-          changes:
-            - key: system.magic.maxRotators.raw
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: upgrade
-              value: 2 * (@rank.mag - 1)
-          competencies:
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-        f7da3b5e1992a724:
-          _id: f7da3b5e1992a724
-          changes:
-            - key: system.magic.maxRotators.raw
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: upgrade
-              value: 2 * (@rank.mag - 1) + @p
-          competencies:
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: changes
-      class: lifeMage
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '0'
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: life-rotators
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>Having mastered the basic techniques in this field of magic, you
-          are able to cast more advanced @L[Category:Spells]{spells}. If you
-          create any @L[Core:Elder Sorcery]{Elder Sorcery}
-          @L[Category:Spells]{spells} of your own, they get added to this list.
-          However, just because you "know" how to cast these spells, doesn't
-          mean you are always prepared to. Although all @L[Category:Mage
-          classes]{mage classes} grant their own @L[Core:Elder Sorcery]{Elder
-          Sorcery} and @L[Category:Rotator spells]{rotator spells}, you may only
-          have a maximum of @L[Category:Mage classes]{MR} - 1 of these spells
-          rotated into your spell list at any given time across <i>all</i>
-          classes. @L[Category:Mage classes]{MR} refers to the number of
-          @L[Core:Leveling Up]{ranks} you have in @L[Category:Mage classes]{mage
-          classes}. During a @L[Core:Long Rest]{long rest}, you can "rotate"
-          which spells you have prepared. The @L[Category:Rotator
-          spells]{rotator spells} automatically available to you are
-          @L[Ability:Blessing]{Blessing}, @L[Ability:Crown of Light]{Crown of
-          Light}, @L[Ability:Glow of Healing]{Glow of Healing},
-          @L[Ability:Rebirth]{Rebirth}, and @L[Ability:Ward]{Ward}.</p>
-        fluent: >-
-          <p>You may instead prepare 2 × (MR - 1) + @L[Core:Proficiency
-          Bonus]{P} of these @L[Category:Spells]{spells}.</p>
-        proficient: >-
-          <p>You may instead prepare 2 × (MR - 1) of these
-          @L[Category:Spells]{spells}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      targets:
-        - self
-    transfer: true
-    type: ability
-  - _id: zxwKbGvAG0x8dmZA
-    _key: '!items.effects!Qq0zEoa8IAgOjm6k.zxwKbGvAG0x8dmZA'
+  - _id: F6DxTzqDN14mzdOp
+    _key: '!items.effects!BmNUjg8yCSO01zU8.F6DxTzqDN14mzdOp'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.217dcd7aa8492a56
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/light-aura.webp
     name: Light Aura
     system:
-      _sup: umi3qR3XEax7uNOA
+      _sup: 2wkwrCsbm4GjRyF0
       automations:
         747b3e9c9b617af6:
           _id: 747b3e9c9b617af6
@@ -976,7 +897,10 @@ effects:
       endCondition: >-
         <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime: a1
+      executionTime:
+        base: a1
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -989,6 +913,7 @@ effects:
       identifier: light-aura
       interaction: feat
       maneuver: active
+      mundane: false
       piercing:
         raw: 0
       powerSources:
@@ -1006,18 +931,18 @@ effects:
         - creature
     transfer: true
     type: ability
-  - _id: JGMRls4pph2RzZ8S
-    _key: '!items.effects!Qq0zEoa8IAgOjm6k.JGMRls4pph2RzZ8S'
+  - _id: nuJ5txsKQC1EtXl1
+    _key: '!items.effects!BmNUjg8yCSO01zU8.nuJ5txsKQC1EtXl1'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.NrCsatKWGADDVSWS
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/light-touch.webp
     name: Light Touch
     system:
-      _sup: umi3qR3XEax7uNOA
+      _sup: 2wkwrCsbm4GjRyF0
       automations:
         747b3e9c9b617af6:
           _id: 747b3e9c9b617af6
@@ -1104,7 +1029,10 @@ effects:
       endCondition: >-
         <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime: a1
+      executionTime:
+        base: a1
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -1117,6 +1045,7 @@ effects:
       identifier: light-touch
       interaction: attack
       maneuver: active
+      mundane: false
       piercing:
         raw: 2
       powerSources:
@@ -1134,14 +1063,14 @@ effects:
         - creature
     transfer: true
     type: ability
-  - _id: SIRpg5TsfYyvKAj2
-    _key: '!items.effects!Qq0zEoa8IAgOjm6k.SIRpg5TsfYyvKAj2'
+  - _id: nkXFK64iZUbgdbvm
+    _key: '!items.effects!BmNUjg8yCSO01zU8.nkXFK64iZUbgdbvm'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.6d9709931a4aa169
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/rebirth.webp
     name: Rebirth
     system:
@@ -1196,7 +1125,10 @@ effects:
         - healing
       elements:
         - life
-      executionTime: a1
+      executionTime:
+        base: a1
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -1212,6 +1144,7 @@ effects:
       interaction: attack
       invoked: true
       maneuver: active
+      mundane: false
       overview:
         fluent: >-
           <p>If target is @L[Category:Undead creatures]{undead}, they are
@@ -1250,57 +1183,83 @@ effects:
         - creature
     transfer: true
     type: ability
-  - _id: i3QYjDbwYr8rJc1Y
-    _key: '!items.effects!Qq0zEoa8IAgOjm6k.i3QYjDbwYr8rJc1Y'
+  - _id: dNNA6B0ITz0iUv7o
+    _key: '!items.effects!BmNUjg8yCSO01zU8.dNNA6B0ITz0iUv7o'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.88c798022d5a9113
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.3f919f2ab4945403
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
-    img: systems/teriock/src/icons/abilities/ward.webp
-    name: Ward
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/glow-of-healing.webp
+    name: Glow of Healing
     system:
       _sup: BtjyB6cjHw37lX9f
-      automations:
-        PtV9W97cgaeTZC1z:
-          _id: PtV9W97cgaeTZC1z
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 0
-            - 1
-          macro: Compendium.teriock.execution.Macro.VTttYAvc7gP0Uwgd
-          trigger: executeAbility
-          type: abilityMacro
-        x3HLBJilnUoU4gKo:
-          _id: x3HLBJilnUoU4gKo
-          attachDocuments: true
-          automatic: true
-          competence:
-            raw: 0
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 0
-            - 1
-          multi: false
-          overrideCompetence: false
-          overrideData: false
-          qualifier: '0'
-          type: addDocuments
-          uuids:
-            - Compendium.teriock.properties.ActiveEffect.de1d0945b56997d2
+      class: lifeMage
+      competence:
+        raw: 0
+      costs:
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+        primary:
+          mp:
+            formula: '1'
+            type: formula
+      delivery: sight
+      duration:
+        raw: '8'
+        unit: hour
+      elements:
+        - life
+      executionTime:
+        base: 10 Minutes
+        slow:
+          raw: '10'
+          unit: minute
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      identifier: glow-of-healing
+      interaction: manifest
+      invoked: true
+      maneuver: slow
+      mundane: false
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Healing Touch]{Healing Touch} and
+          @L[Ability:Cure Illness]{Cure Illness}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: contact
+      ritual: true
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: CeFzIiUpMzRnGg36
+    _key: '!items.effects!BmNUjg8yCSO01zU8.CeFzIiUpMzRnGg36'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.23dbmrZ4Rm0lCBPv
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/healing-touch.webp
+    name: Healing Touch
+    system:
+      _sup: dNNA6B0ITz0iUv7o
       class: lifeMage
       competence:
         raw: 0
@@ -1312,39 +1271,133 @@ effects:
             type: tag
       delivery: hand
       duration:
-        raw: '1'
-        unit: minute
+        raw: '0'
+        unit: instant
       elements:
         - life
-      executionTime: a1
+      executionTime:
+        base: a1
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
           unit: self
       featSaveAttribute: mov
-      form: special
-      identifier: ward
+      form: normal
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, target is
+        @L[Core:Healing]{healed} again at the start of your next
+        @L[Core:Turns]{turn}.</p>
+      identifier: healing-touch
       interaction: attack
       invoked: true
       maneuver: active
+      mundane: false
       piercing:
-        raw: 0
+        raw: 2
       powerSources:
         - magical
       range:
         unit: contact
       results:
         hit: >-
-          <p>Target item's next @L[Category:Attack abilities]{attack} is
-          @L[Keyword:Warded]{warded}. You may also target a creature's hand. If
-          you do, the creature's next @L[Category:Hand delivery spells]{hand} or
-          @L[Category:Missile delivery spells]{missile spell} is
-          @L[Keyword:Warded]{warded}.</p>
-      rotator: true
+          <p>Target is no longer @L[Condition:Poisoned]{poisoned} and is
+          @L[Core:Healing]{healed} at the start of your next
+          @L[Core:Turns]{turn}.</p>
       spell: true
       standard: true
       targets:
-        - item
+        - creature
+    transfer: true
+    type: ability
+  - _id: lTR2BZqLgKMQe7Yw
+    _key: '!items.effects!BmNUjg8yCSO01zU8.lTR2BZqLgKMQe7Yw'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.3055b234b402b5ec
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/cure-illness.webp
+    name: Cure Illness
+    system:
+      _sup: dNNA6B0ITz0iUv7o
+      class: lifeMage
+      competence:
+        raw: 0
+      costs:
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+        primary:
+          mp:
+            formula: '1'
+            type: formula
+      delivery: sight
+      duration:
+        raw: '1'
+        unit: hour
+      effectTypes:
+        - healing
+      elements:
+        - life
+      executionTime:
+        base: 10 Minutes
+        slow:
+          raw: '10'
+          unit: minute
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, The DC of the check is
+        reduced by 1.</p>
+      identifier: cure-illness
+      interaction: manifest
+      invoked: true
+      maneuver: slow
+      mundane: false
+      overview:
+        base: >-
+          <p>Make an [[/tc herbalist]]{herbalist check} to remove a
+          @L[Category:Disease effects]{disease or illness} from some creature.
+          The @L[Core:GM]{GM} determines the difficulty based on the severity of
+          the illness. The @L[Core:GM]{GM} may also require you to have access
+          to specific ingredients or tools or put other conditions in place. If
+          the illness is mental in nature, then [[lookup name]] acts as a
+          @L[Category:Mental effects]{mental effect}.</p>
+        proficient: >-
+          <p>You are @L[Keyword:Adept]{adept} at [[lookup name]]. Before you
+          make the check, you may spend 1 additional @L[Core:MP]{MP} to know the
+          DC if it is less than your total level. You may also add your
+          @L[Core:Proficiency Bonus]{proficiency bonus} to the [[/tc
+          herbalist]]{herbalist check} regardless of whether or not you are
+          proficient in @L[Tradecraft:Herbalist]{herbalist}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        raw: '5'
+        unit: ft
+      results:
+        fail: >-
+          <p>The target is not cured, but the illness does not worsen for the
+          duration of Healing Touch. You may cast [[lookup name]] again to keep
+          the disease from progressing, but you may not attempt the check
+          again.</p>
+        save: <p>The target is cured of the illness.</p>
+      ritual: true
+      spell: true
+      standard: true
+      targets:
+        - creature
     transfer: true
     type: ability
 folder: 479155f14ad8612d
@@ -1372,12 +1425,8 @@ system:
   statDice:
     hp:
       disabled: false
-      faces: 8
-      number:
-        raw: '1'
+      formula: 1d8
     mp:
       disabled: false
-      faces: 12
-      number:
-        raw: '1'
+      formula: 1d12
 type: rank

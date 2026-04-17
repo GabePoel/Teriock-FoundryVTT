@@ -92,7 +92,7 @@ export async function resolveCollection(typeCollection) {
  */
 export async function ensureChildren(document, identifiers) {
   if (identifiers.length === 0) return [];
-  const typed = document.children.typeMap;
+  const typed = (await document.getChildren()).typeMap;
   const candidates = await Promise.all(
     identifiers.map(async (identifier) => {
       const parsed = parseIdentifier(identifier);
@@ -104,7 +104,6 @@ export async function ensureChildren(document, identifiers) {
       const doc = await fromIdentifier(identifier);
       if (!doc) return;
       const obj = doc.toObject(true);
-      console.log(doc, obj);
       foundry.utils.setProperty(obj, "_stats.compendiumSource", doc.uuid);
       return { documentName: doc.documentName, data: obj };
     }),
@@ -136,7 +135,7 @@ export async function ensureChildren(document, identifiers) {
  */
 export async function ensureNoChildren(document, identifiers) {
   if (identifiers.length === 0) return [];
-  const toDelete = document.children.contents.filter((c) =>
+  const toDelete = (await document.getChildArray()).filter((c) =>
     identifiers.includes(c.typedIdentifier),
   );
   if (toDelete.length === 0) return [];

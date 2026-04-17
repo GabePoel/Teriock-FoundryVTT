@@ -63,13 +63,9 @@ export function getRollIcon(rollFormula) {
   const dice = roll.dice;
   dice.sort((a, b) => b.faces - a.faces);
   for (const die of dice) {
-    if (polyhedralDice.includes(die.faces)) {
-      return `fa-dice-d${die.faces}`;
-    } else if (die.faces === 2) {
-      return "fa-coins";
-    } else if (die.faces === 100) {
-      return "fa-percent";
-    }
+    if (polyhedralDice.includes(die.faces)) return `fa-dice-d${die.faces}`;
+    else if (die.faces === 2) return "fa-coins";
+    else if (die.faces === 100) return "fa-percent";
   }
   return "fa-dice";
 }
@@ -83,11 +79,8 @@ export function fancifyFields(displayFields) {
   return displayFields
     .map((f) => {
       let fancy;
-      if (typeof f === "string") {
-        fancy = { path: f };
-      } else {
-        fancy = f;
-      }
+      if (typeof f === "string") fancy = { path: f };
+      else fancy = f;
       const {
         classes = "",
         dataset = {},
@@ -488,6 +481,7 @@ export async function fromIdentifier(identifier, options = {}) {
         type: parsed.type,
       });
       const filtered = docs.filter((d) => {
+        if (d.sup) return false;
         const mutationFields = [
           "system.improvement",
           "system.limitation",
@@ -500,7 +494,7 @@ export async function fromIdentifier(identifier, options = {}) {
         }
         return true;
       });
-      if (filtered.length > 0) return docs[0];
+      if (filtered.length > 0) return filtered[0];
     }
   }
   return fromIdentifierSync(identifier);

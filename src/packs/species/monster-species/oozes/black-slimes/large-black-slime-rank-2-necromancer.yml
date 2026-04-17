@@ -1,20 +1,20 @@
-_id: frlGQ7j8zr3uoBJn
-_key: '!items!frlGQ7j8zr3uoBJn'
+_id: 6YTGcTwKKboVav6x
+_key: '!items!6YTGcTwKKboVav6x'
 _stats:
   compendiumSource: Compendium.teriock.classes.Item.6e5114a61a5eb4b2
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.23
+  systemVersion: 0.12.15
 effects:
   - _id: JFQwPusSGXNlFxzg
-    _key: '!items.effects!frlGQ7j8zr3uoBJn.JFQwPusSGXNlFxzg'
+    _key: '!items.effects!6YTGcTwKKboVav6x.JFQwPusSGXNlFxzg'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.24ca0fecea593c33
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/necromancy-elder-sorcery.webp
     name: Necromancy Elder Sorcery
     system:
@@ -25,7 +25,10 @@ effects:
       duration:
         raw: '0'
         unit: unlimited
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -35,6 +38,7 @@ effects:
       identifier: necromancy-elder-sorcery
       interaction: manifest
       maneuver: passive
+      mundane: false
       overview:
         base: >-
           <p>You gain @L[Ability:Elder Sorcery Creation]{Elder Sorcery
@@ -53,13 +57,13 @@ effects:
     transfer: true
     type: ability
   - _id: GF9CzLYvEuHeIKIm
-    _key: '!items.effects!frlGQ7j8zr3uoBJn.GF9CzLYvEuHeIKIm'
+    _key: '!items.effects!6YTGcTwKKboVav6x.GF9CzLYvEuHeIKIm'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.e28f577c843bc530
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/necromancy-rotators.webp
     name: Necromancy Rotators
     system:
@@ -67,7 +71,7 @@ effects:
         e789ed5e109ebd1a:
           _id: e789ed5e109ebd1a
           changes:
-            - key: system.magic.maxRotators.raw
+            - key: system.rotators.max
               phase: normal
               priority: 10
               qualifier: '1'
@@ -88,7 +92,7 @@ effects:
         f025905e157ac261:
           _id: f025905e157ac261
           changes:
-            - key: system.magic.maxRotators.raw
+            - key: system.rotators.max
               phase: normal
               priority: 10
               qualifier: '1'
@@ -108,7 +112,7 @@ effects:
         f7da3b5e1992a724:
           _id: f7da3b5e1992a724
           changes:
-            - key: system.magic.maxRotators.raw
+            - key: system.{{{key}}}
               phase: normal
               priority: 10
               qualifier: '1'
@@ -131,7 +135,10 @@ effects:
       duration:
         raw: '0'
         unit: unlimited
-      executionTime: passive
+      executionTime:
+        base: passive
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -141,6 +148,7 @@ effects:
       identifier: necromancy-rotators
       interaction: manifest
       maneuver: passive
+      mundane: false
       overview:
         base: >-
           <p>Having mastered the basic techniques in this field of magic, you
@@ -179,99 +187,14 @@ effects:
         - self
     transfer: true
     type: ability
-  - _id: iuykvJkuEj0E9xsN
-    _key: '!items.effects!frlGQ7j8zr3uoBJn.iuykvJkuEj0E9xsN'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.0q5khIx32nw3ihVe
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.2
-    img: systems/teriock/src/icons/abilities/elder-sorcery-creation.webp
-    name: Elder Sorcery Creation
-    system:
-      _sup: JFQwPusSGXNlFxzg
-      competence:
-        raw: 0
-      costs:
-        components:
-          material:
-            description: >-
-              <p>Creation cost is at least 3 × the material components of the
-              spell itself.</p>
-            type: description
-        primary:
-          hp:
-            description: >-
-              <p>Creation cost is at least 3 × @L[Core:HP]{HP} of the spell
-              itself.</p>
-            type: description
-          mp:
-            description: >-
-              <p>Creation cost is at least 1 @L[Core:MP]{MP} per @L[Core:Elder
-              Sorcery]{OP} of <i>each</i> word in the spell plus 3 ×
-              @L[Core:MP]{MP} of the spell itself.</p>
-            type: description
-      delivery: sight
-      duration:
-        raw: '0'
-        unit: instant
-      elderSorcery: true
-      executionTime:
-        base: Long Rest
-        slow:
-          unit: longRest
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      identifier: elder-sorcery-creation
-      interaction: manifest
-      maneuver: slow
-      mundane: false
-      overview:
-        base: >-
-          <p>You may create 1 custom "rotator" @L[Category:Spells]{spells} using
-          @L[Core:Elder Sorcery]{Elder Sorcery} words that you know using
-          whatever @L[Core:Elder Sorcery]{Elder Sorcery} creation rules are
-          dictated to you by your @L[Core:Game Master]{GM}. As with other
-          rotators, this spell is not always available to you. You have to
-          "rotate" into having it prepared. This spell may have a maximum number
-          of words equal to your @L[Core:Leveling Up]{level}. Your @L[Core:Game
-          Master]{GM} may allow you to "improvise" @L[Category:Spells]{spells}
-          as well, using whatever rules they wish.</p>
-        fluent: >-
-          <p>In addition to the spells that you crate, you can learn
-          @L[Core:Proficiency Bonus]{P} additional spells from other
-          @L[Core:Elder Sorcery]{Elder Sorcery} users. See @L[Core:Elder
-          Sorcery]{Elder Sorcery} for more information.</p>
-        proficient: >-
-          <p>You may now create 2 × (@L[Category:Mage classes]{MR} - 1) custom
-          "rotator" @L[Category:Spells]{spells} where @L[Category:Mage
-          classes]{MR} is the number of @L[Core:Leveling Up]{ranks} you have in
-          @L[Category:Mage classes]{mage classes}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      ritual: true
-      skill: true
-      targets:
-        - self
-    transfer: true
-    type: ability
-  - _id: 0OKADEVI7XSYhF2V
-    _key: '!items.effects!frlGQ7j8zr3uoBJn.0OKADEVI7XSYhF2V'
+  - _id: XLYXXY01aiYu4id5
+    _key: '!items.effects!6YTGcTwKKboVav6x.XLYXXY01aiYu4id5'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.41ba9670a628fc21
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/celestial-elder-sorcery-words.webp
     name: Celestial Elder Sorcery Words
     system:
@@ -403,14 +326,99 @@ effects:
         - self
     transfer: true
     type: ability
-  - _id: SewvqfGQcTEN1EJ1
-    _key: '!items.effects!frlGQ7j8zr3uoBJn.SewvqfGQcTEN1EJ1'
+  - _id: 5cvuvNhVb14NAzaW
+    _key: '!items.effects!6YTGcTwKKboVav6x.5cvuvNhVb14NAzaW'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.0q5khIx32nw3ihVe
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.15
+    img: systems/teriock/src/icons/abilities/elder-sorcery-creation.webp
+    name: Elder Sorcery Creation
+    system:
+      _sup: JFQwPusSGXNlFxzg
+      competence:
+        raw: 0
+      costs:
+        components:
+          material:
+            description: >-
+              <p>Creation cost is at least 3 × the material components of the
+              spell itself.</p>
+            type: description
+        primary:
+          hp:
+            description: >-
+              <p>Creation cost is at least 3 × @L[Core:HP]{HP} of the spell
+              itself.</p>
+            type: description
+          mp:
+            description: >-
+              <p>Creation cost is at least 1 @L[Core:MP]{MP} per @L[Core:Elder
+              Sorcery]{OP} of <i>each</i> word in the spell plus 3 ×
+              @L[Core:MP]{MP} of the spell itself.</p>
+            type: description
+      delivery: sight
+      duration:
+        raw: '0'
+        unit: instant
+      elderSorcery: true
+      executionTime:
+        base: Long Rest
+        slow:
+          unit: longRest
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      identifier: elder-sorcery-creation
+      interaction: manifest
+      maneuver: slow
+      mundane: false
+      overview:
+        base: >-
+          <p>You may create 1 custom "rotator" @L[Category:Spells]{spells} using
+          @L[Core:Elder Sorcery]{Elder Sorcery} words that you know using
+          whatever @L[Core:Elder Sorcery]{Elder Sorcery} creation rules are
+          dictated to you by your @L[Core:Game Master]{GM}. As with other
+          rotators, this spell is not always available to you. You have to
+          "rotate" into having it prepared. This spell may have a maximum number
+          of words equal to your @L[Core:Leveling Up]{level}. Your @L[Core:Game
+          Master]{GM} may allow you to "improvise" @L[Category:Spells]{spells}
+          as well, using whatever rules they wish.</p>
+        fluent: >-
+          <p>In addition to the spells that you crate, you can learn
+          @L[Core:Proficiency Bonus]{P} additional spells from other
+          @L[Core:Elder Sorcery]{Elder Sorcery} users. See @L[Core:Elder
+          Sorcery]{Elder Sorcery} for more information.</p>
+        proficient: >-
+          <p>You may now create 2 × (@L[Category:Mage classes]{MR} - 1) custom
+          "rotator" @L[Category:Spells]{spells} where @L[Category:Mage
+          classes]{MR} is the number of @L[Core:Leveling Up]{ranks} you have in
+          @L[Category:Mage classes]{mage classes}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: contact
+      ritual: true
+      skill: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: iXVkn3t1ZjdZLYic
+    _key: '!items.effects!6YTGcTwKKboVav6x.iXVkn3t1ZjdZLYic'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.44b9f6ea2a6750be
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/necromancy-elder-sorcery-words.webp
     name: Necromancy Elder Sorcery Words
     system:
@@ -488,13 +496,13 @@ effects:
     transfer: true
     type: ability
   - _id: 6tAKo9OpEP5DbSoj
-    _key: '!items.effects!frlGQ7j8zr3uoBJn.6tAKo9OpEP5DbSoj'
+    _key: '!items.effects!6YTGcTwKKboVav6x.6tAKo9OpEP5DbSoj'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.2f4f5e357e9b92c7
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/ethereal-shift.webp
     name: Ethereal Shift
     system:
@@ -562,14 +570,14 @@ effects:
         - self
     transfer: true
     type: ability
-  - _id: EBJMH1zcsS4vMcoW
-    _key: '!items.effects!frlGQ7j8zr3uoBJn.EBJMH1zcsS4vMcoW'
+  - _id: AxXjKFqXIWZ6Hk8G
+    _key: '!items.effects!6YTGcTwKKboVav6x.AxXjKFqXIWZ6Hk8G'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.42x5ExJDC2KutTTJ
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/undead-reanimation.webp
     name: Undead Reanimation
     system:
@@ -621,18 +629,17 @@ effects:
         - self
     transfer: true
     type: ability
-  - _id: 7dAtbe59YugbOX3d
-    _key: '!items.effects!frlGQ7j8zr3uoBJn.7dAtbe59YugbOX3d'
+  - _id: 1IouDeLQTaN6Hge1
+    _key: '!items.effects!6YTGcTwKKboVav6x.1IouDeLQTaN6Hge1'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.ANPHEgI4HifPcpuS
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.0
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/animate-dead.webp
     name: Animate Dead
     system:
-      _sup: EBJMH1zcsS4vMcoW
+      _sup: AxXjKFqXIWZ6Hk8G
       class: necromancer
       competence:
         raw: 0
@@ -696,18 +703,18 @@ effects:
         - creature
     transfer: true
     type: ability
-  - _id: JlbaYEaHT6lVmSsC
-    _key: '!items.effects!frlGQ7j8zr3uoBJn.JlbaYEaHT6lVmSsC'
+  - _id: FhT75ZxiBMbmjcVT
+    _key: '!items.effects!6YTGcTwKKboVav6x.FhT75ZxiBMbmjcVT'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.24a2a3db4a940311
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/zombify.webp
     name: Zombify
     system:
-      _sup: EBJMH1zcsS4vMcoW
+      _sup: AxXjKFqXIWZ6Hk8G
       automations:
         72ce567009179bea:
           _id: 72ce567009179bea
@@ -836,13 +843,13 @@ effects:
     transfer: true
     type: ability
   - _id: g7SpayF8igKmmj2R
-    _key: '!items.effects!frlGQ7j8zr3uoBJn.g7SpayF8igKmmj2R'
+    _key: '!items.effects!6YTGcTwKKboVav6x.g7SpayF8igKmmj2R'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.22c986b97b5f3050
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/spirit-bury.webp
     name: Spirit Bury
     system:
@@ -932,13 +939,13 @@ effects:
     transfer: true
     type: ability
   - _id: rnsDmeBUWZ3FWDeD
-    _key: '!items.effects!frlGQ7j8zr3uoBJn.rnsDmeBUWZ3FWDeD'
+    _key: '!items.effects!6YTGcTwKKboVav6x.rnsDmeBUWZ3FWDeD'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.EZt37ToLutUxjQ2r
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/death-rattle.webp
     name: Death Rattle
     system:
@@ -976,8 +983,6 @@ effects:
       duration:
         raw: '0'
         unit: instant
-      effectTypes:
-        - magical
       elements:
         - necromancy
       executionTime:
@@ -1013,14 +1018,14 @@ effects:
       trigger: <p>You @L[Condition:Dead]{die}.</p>
     transfer: true
     type: ability
-  - _id: NlHwz8ecBy9bcfh9
-    _key: '!items.effects!frlGQ7j8zr3uoBJn.NlHwz8ecBy9bcfh9'
+  - _id: WLKSRPFw7JR6CWCI
+    _key: '!items.effects!6YTGcTwKKboVav6x.WLKSRPFw7JR6CWCI'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.a29a6c7e09abbb9d
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/crown-of-fear.webp
     name: Crown of Fear
     system:
@@ -1108,18 +1113,18 @@ effects:
         - self
     transfer: true
     type: ability
-  - _id: IakeXkfyhEmYXApS
-    _key: '!items.effects!frlGQ7j8zr3uoBJn.IakeXkfyhEmYXApS'
+  - _id: cR5sEvbXWAqG8o98
+    _key: '!items.effects!6YTGcTwKKboVav6x.cR5sEvbXWAqG8o98'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.12c2bc74fed2e058
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/fear-touch.webp
     name: Fear Touch
     system:
-      _sup: NlHwz8ecBy9bcfh9
+      _sup: WLKSRPFw7JR6CWCI
       automations:
         800c70e6560525a8:
           _id: 800c70e6560525a8
@@ -1240,18 +1245,18 @@ effects:
         - creature
     transfer: true
     type: ability
-  - _id: hiIex0icbQUQ3f6i
-    _key: '!items.effects!frlGQ7j8zr3uoBJn.hiIex0icbQUQ3f6i'
+  - _id: UncZ8qeCXBy3IKnf
+    _key: '!items.effects!6YTGcTwKKboVav6x.UncZ8qeCXBy3IKnf'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.C6frBNJPvLFOMnx9
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/fear-aura.webp
     name: Fear Aura
     system:
-      _sup: NlHwz8ecBy9bcfh9
+      _sup: WLKSRPFw7JR6CWCI
       automations:
         800c70e6560525a8:
           _id: 800c70e6560525a8
@@ -1380,12 +1385,8 @@ system:
   statDice:
     hp:
       disabled: false
-      faces: 8
-      number:
-        raw: '1'
+      formula: 1d8
     mp:
       disabled: false
-      faces: 12
-      number:
-        raw: '1'
+      formula: 1d12
 type: rank

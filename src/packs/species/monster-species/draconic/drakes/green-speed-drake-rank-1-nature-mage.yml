@@ -1,20 +1,20 @@
-_id: mabaT9ReBW5VMM30
-_key: '!items!mabaT9ReBW5VMM30'
+_id: IfIC7UtFbeFozZNW
+_key: '!items!IfIC7UtFbeFozZNW'
 _stats:
   compendiumSource: Compendium.teriock.classes.Item.fae3aa04e82c5a63
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.23
+  systemVersion: 0.12.15
 effects:
   - _id: oy1A5zdakXd9Rhxu
-    _key: '!items.effects!mabaT9ReBW5VMM30.oy1A5zdakXd9Rhxu'
+    _key: '!items.effects!IfIC7UtFbeFozZNW.oy1A5zdakXd9Rhxu'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.559bdf5a1380888c
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/empathic-ray.webp
     name: Empathic Ray
     system:
@@ -75,7 +75,10 @@ effects:
         - damaging
       elements:
         - nature
-      executionTime: a1
+      executionTime:
+        base: a1
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -89,6 +92,7 @@ effects:
       identifier: empathic-ray
       interaction: attack
       maneuver: active
+      mundane: false
       overview:
         base: >-
           <p>As you cast [[lookup name]], choose either "damage" or "healing".
@@ -124,13 +128,13 @@ effects:
     transfer: true
     type: ability
   - _id: 3B8CCaqeJdPsJBDU
-    _key: '!items.effects!mabaT9ReBW5VMM30.3B8CCaqeJdPsJBDU'
+    _key: '!items.effects!IfIC7UtFbeFozZNW.3B8CCaqeJdPsJBDU'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.40562e31a7f1563f
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/familiar-bond.webp
     name: Familiar Bond
     system:
@@ -181,7 +185,10 @@ effects:
         - contract
       elements:
         - nature
-      executionTime: Short Rest
+      executionTime:
+        base: Short Rest
+        slow:
+          unit: shortRest
       expansion:
         featSaveAttribute: mov
         range:
@@ -191,6 +198,7 @@ effects:
       identifier: familiar-bond
       interaction: manifest
       maneuver: slow
+      mundane: false
       overview:
         base: >-
           <p>[[lookup name]] is a ritual that allows you to bond with an animal
@@ -230,13 +238,13 @@ effects:
     transfer: true
     type: ability
   - _id: xK4OnVF5jnqLxb3g
-    _key: '!items.effects!mabaT9ReBW5VMM30.xK4OnVF5jnqLxb3g'
+    _key: '!items.effects!IfIC7UtFbeFozZNW.xK4OnVF5jnqLxb3g'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.edbed0d0ed06dd37
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.2
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/oracle.webp
     name: Oracle
     system:
@@ -254,7 +262,11 @@ effects:
         unit: instant
       elements:
         - nature
-      executionTime: 10 Minutes
+      executionTime:
+        base: 10 Minutes
+        slow:
+          raw: '10'
+          unit: minute
       expansion:
         featSaveAttribute: mov
         range:
@@ -264,6 +276,7 @@ effects:
       identifier: oracle
       interaction: manifest
       maneuver: slow
+      mundane: false
       overview:
         base: >-
           <p>You may ask a question to a deity or other supernatural being with
@@ -302,13 +315,13 @@ effects:
     transfer: true
     type: ability
   - _id: synfq4mv5z7bw03a
-    _key: '!items.effects!mabaT9ReBW5VMM30.synfq4mv5z7bw03a'
+    _key: '!items.effects!IfIC7UtFbeFozZNW.synfq4mv5z7bw03a'
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.f55f8feaed060d94
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.4
+      systemVersion: 0.12.15
     img: systems/teriock/src/icons/abilities/treeform-ball.webp
     name: Treeform Ball
     system:
@@ -376,7 +389,10 @@ effects:
         - transformation
       elements:
         - nature
-      executionTime: a1
+      executionTime:
+        base: a1
+        slow:
+          unit: second
       expansion:
         featSaveAttribute: mov
         range:
@@ -390,6 +406,7 @@ effects:
       identifier: treeform-ball
       interaction: attack
       maneuver: active
+      mundane: false
       piercing:
         raw: 2
       powerSources:
@@ -440,12 +457,8 @@ system:
   statDice:
     hp:
       disabled: false
-      faces: 8
-      number:
-        raw: '1'
+      formula: 1d8
     mp:
       disabled: false
-      faces: 12
-      number:
-        raw: '1'
+      formula: 1d12
 type: rank
