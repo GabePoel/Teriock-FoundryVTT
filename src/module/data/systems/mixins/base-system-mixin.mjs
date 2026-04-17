@@ -16,14 +16,6 @@ export default function BaseSystemMixin(Base) {
         return {};
       }
 
-      /**
-       * The pseudo-document collections.
-       * @returns {Record<string, TypeCollection>}
-       */
-      get pseudoCollections() {
-        return {};
-      }
-
       /** @returns {string} */
       get _nameBadge() {
         return "";
@@ -57,6 +49,14 @@ export default function BaseSystemMixin(Base) {
       /** @return {boolean} */
       get isSecret() {
         return false;
+      }
+
+      /**
+       * The pseudo-document collections.
+       * @returns {Record<string, TypeCollection>}
+       */
+      get pseudoCollections() {
+        return {};
       }
     }
   );

@@ -19,6 +19,14 @@ export default function AccessDataMixin(Base) {
       }
 
       /**
+       * A key for what roll editor context to use when building forms.
+       * @returns {string}
+       */
+      get _inputContextKey() {
+        return "actor";
+      }
+
+      /**
        * This data model's actor.
        * @returns {AnyActor}
        */
@@ -51,14 +59,6 @@ export default function AccessDataMixin(Base) {
         group.classList.add("teriock-form-container");
         this._makeFormGroups(this._formPaths).forEach((fg) => group.append(fg));
         return group;
-      }
-
-      /**
-       * A key for what roll editor context to use when building forms.
-       * @returns {string}
-       */
-      get _inputContextKey() {
-        return "actor";
       }
 
       /**

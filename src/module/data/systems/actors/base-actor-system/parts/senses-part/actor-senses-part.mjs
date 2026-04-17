@@ -58,8 +58,10 @@ export default (Base) => {
       getRollData() {
         const rollData = super.getRollData();
         Object.assign(rollData, {
-          "detection.hiding": this.detection.hiding ?? this.attributes.snk.passive,
-          "detection.perceiving": this.detection.perceiving ?? this.attributes.per.passive,
+          "detection.hiding":
+            this.detection.hiding ?? this.attributes.snk.passive,
+          "detection.perceiving":
+            this.detection.perceiving ?? this.attributes.per.passive,
         });
         return rollData;
       }
