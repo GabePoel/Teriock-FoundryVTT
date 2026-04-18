@@ -50,34 +50,34 @@ export default (Base) => {
       }
 
       /** @inheritDoc */
-      static migrateData(data) {
+      static migrateData(source, options, state) {
         //noinspection JSUnresolvedReference
-        if (data.improvements) {
+        if (source.improvements) {
           //noinspection JSUnresolvedReference
-          data.upgrades = {
+          source.upgrades = {
             competence: {
-              attribute: data.improvements.featSaveImprovement.attribute,
+              attribute: source.improvements.featSaveImprovement.attribute,
               value: 1,
             },
             score: {
-              attribute: data.improvements.attributeImprovement.attribute,
-              value: data.improvements.attributeImprovement.minVal,
+              attribute: source.improvements.attributeImprovement.attribute,
+              value: source.improvements.attributeImprovement.minVal,
             },
           };
-          switch (data.improvements.featSaveImprovement.amount) {
+          switch (source.improvements.featSaveImprovement.amount) {
             case "fluency":
-              data.upgrades.competence.value = 2;
+              source.upgrades.competence.value = 2;
               break;
             case "proficiency":
-              data.upgrades.competence.value = 1;
+              source.upgrades.competence.value = 1;
               break;
             default:
-              data.upgrades.competence.value = 0;
+              source.upgrades.competence.value = 0;
               break;
           }
-          delete data.improvements;
+          delete source.improvements;
         }
-        return super.migrateData(data);
+        return super.migrateData(source, options, state);
       }
 
       /** @inheritDoc */

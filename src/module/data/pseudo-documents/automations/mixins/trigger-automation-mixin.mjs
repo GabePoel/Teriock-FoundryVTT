@@ -1,6 +1,7 @@
 import { triggers } from "../../../../constants/system/_module.mjs";
 import { formatDynamicSelectOptions } from "../../../../helpers/utils.mjs";
 import { conditionRequirementsField } from "../../../fields/helpers/builders.mjs";
+import { migrateValue } from "../../../shared/migrations/source-migrations.mjs";
 
 const { fields } = foundry.data;
 
@@ -88,9 +89,9 @@ export default function TriggerAutomationMixin(Base) {
       }
 
       /** @inheritDoc */
-      static migrateData(data) {
-        if (data.trigger === "none") data.trigger = null;
-        return super.migrateData(data);
+      static migrateData(source, options, state) {
+        migrateValue(source, "trigger", "none", null);
+        return super.migrateData(source, options, state);
       }
 
       /**

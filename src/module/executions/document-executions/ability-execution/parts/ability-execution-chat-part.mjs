@@ -570,7 +570,7 @@ export default function AbilityExecutionChatPart(Base) {
           );
         }
 
-        // Replace `@h` with heighten amount in all rolls
+        // Replace `@h` with heightening amount in all rolls
         this.activations
           .filter((a) => a.type === acts.RollActivation.TYPE)
           .forEach((a) => {

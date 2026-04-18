@@ -245,6 +245,7 @@ export default function AbilityExecutionGetInputPart(Base) {
             this.targets.add(target);
           }
         }
+        if (!this.actor) return;
         const templateAutomation =
           /** @type {TemplateAutomation} */
           this.activeAutomations.find(
@@ -282,6 +283,7 @@ export default function AbilityExecutionGetInputPart(Base) {
           );
           if (token && !templateData.movable) distance += token.document.radius;
           const resolvedTemplateData = {
+            name: this.source.name,
             angle: BaseRoll.minValue(templateData.angle, this.rollData),
             distance,
             fillColor: game.user.color,
@@ -317,7 +319,19 @@ export default function AbilityExecutionGetInputPart(Base) {
               { localize: true },
             );
           }
-          await template?.drawPreview();
+          const placed = await template?.drawPreview();
+          if (!placed) return;
+          const region = placed.parent.regions.get(placed.id);
+          console.log(region);
+          console.log(game.scenes.viewed.tokens.contents);
+          for (const t of game.scenes.viewed.tokens.contents.filter(
+            (t) =>
+              t.hasStatusEffect("ethereal") ===
+                this.actor.statuses.has("ethereal") &&
+              t.testInsideRegion(region),
+          )) {
+            this.targets.add(t.object);
+          }
         }
       }
     }

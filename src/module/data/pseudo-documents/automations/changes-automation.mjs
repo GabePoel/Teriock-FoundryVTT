@@ -34,9 +34,9 @@ export default class ChangesAutomation extends CritAutomation {
   }
 
   /** @inheritDoc */
-  static migrateData(data) {
-    if (data.changes) for (const change of data.changes) migrateChange(change);
-    return super.migrateData(data);
+  static migrateData(source, options, state) {
+    for (const change of source.changes ?? []) migrateChange(change);
+    return super.migrateData(source, options, state);
   }
 
   /** @inheritDoc */

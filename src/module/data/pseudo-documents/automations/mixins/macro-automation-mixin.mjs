@@ -1,6 +1,10 @@
 import { mix } from "../../../../helpers/construction.mjs";
 import { resolveDocument } from "../../../../helpers/resolve.mjs";
 import { lcFirst } from "../../../../helpers/string.mjs";
+import {
+  migrateKey,
+  migrateValue,
+} from "../../../shared/migrations/source-migrations.mjs";
 import { MacroActivation } from "../../activations/_module.mjs";
 import DisplayAutomationMixin from "./display-automation-mixin.mjs";
 import TriggerAutomationMixin from "./trigger-automation-mixin.mjs";
@@ -51,21 +55,16 @@ export default function MacroAutomationMixin(Base) {
       }
 
       /** @inheritDoc */
-      static migrateData(data) {
-        if (data.pseudoHook) {
-          data.trigger = data.pseudoHook;
+      static migrateData(source, options, state) {
+        migrateKey(source, "pseudoHook", "trigger");
+        migrateValue(source, "relation", "pseudoHook", "trigger");
+        migrateValue(source, "trigger", "effectApplication", "applyEffect");
+        migrateValue(source, "trigger", "effectExpiration", "expireEffect");
+        if (source.trigger?.includes("equipment")) {
+          source.trigger = source.trigger.replace("equipment", "");
+          source.trigger = lcFirst(source.trigger);
         }
-        if (data.relation === "pseudoHook") {
-          data.relation = "trigger";
-        }
-        delete data.pseudoHook;
-        if (data.trigger?.includes("equipment")) {
-          data.trigger = data.trigger.replace("equipment", "");
-          data.trigger = lcFirst(data.trigger);
-        }
-        if (data.trigger === "effectApplication") data.trigger = "applyEffect";
-        if (data.trigger === "effectExpiration") data.trigger = "expireEffect";
-        return super.migrateData(data);
+        return super.migrateData(source, options, state);
       }
 
       /** @inheritDoc */

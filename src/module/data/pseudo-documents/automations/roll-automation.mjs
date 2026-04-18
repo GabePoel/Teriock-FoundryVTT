@@ -3,6 +3,7 @@ import { commands } from "../../../helpers/interaction/_module.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
+import { migrateKey } from "../../shared/migrations/source-migrations.mjs";
 import { RollActivation } from "../activations/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 import * as mixins from "./mixins/_module.mjs";
@@ -56,9 +57,9 @@ export default class RollAutomation extends mix(
   }
 
   /** @inheritDoc */
-  static migrateData(data) {
-    if (data.roll) data.impact = data.roll;
-    return super.migrateData(data);
+  static migrateData(source, options, state) {
+    migrateKey(source, "roll", "impact");
+    return super.migrateData(source, options, state);
   }
 
   /** @inheritDoc */

@@ -56,7 +56,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
    */
   async _onCancelPlacement(event) {
     await this._finishPlacement(event);
-    this.#events.reject();
+    this.#events.resolve(null);
   }
 
   /**
@@ -70,11 +70,11 @@ export default class AbilityTemplate extends MeasuredTemplate {
       y: this.document.y,
     });
     this.document.updateSource(destination);
-    this.#events.resolve(
-      canvas.scene.createEmbeddedDocuments("MeasuredTemplate", [
-        this.document.toObject(),
-      ]),
+    const templates = await canvas.scene.createEmbeddedDocuments(
+      "MeasuredTemplate",
+      [this.document.toObject()],
     );
+    this.#events.resolve(templates[0]);
   }
 
   /**
@@ -142,7 +142,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
 
   /**
    * Creates a preview of the ability template.
-   * @returns {Promise<void>} A promise that resolves with the final measured template if created.
+   * @returns {Promise<MeasuredTemplateDocument|null>} A promise that resolves to the created template.
    */
   async drawPreview() {
     const initialLayer = canvas.activeLayer;
@@ -163,9 +163,11 @@ export default class AbilityTemplate extends MeasuredTemplate {
         y: this.document.y,
       });
       this.document.updateSource(destination);
-      await canvas.scene.createEmbeddedDocuments("MeasuredTemplate", [
-        this.document.toObject(),
-      ]);
+      const templates = await canvas.scene.createEmbeddedDocuments(
+        "MeasuredTemplate",
+        [this.document.toObject()],
+      );
+      return templates[0];
     }
   }
 }

@@ -17,12 +17,12 @@ export default class DefenseModel extends EmbeddedDataModel {
   }
 
   /** @inheritDoc */
-  static migrateData(data) {
-    if (typeof data.raw === "string") {
-      const n = Number(data.raw);
-      data.raw = isNaN(n) ? 0 : n;
+  static migrateData(source, options, state) {
+    if (typeof source.raw === "string") {
+      const n = Number(source.raw);
+      source.raw = isNaN(n) ? 0 : n;
     }
-    return super.migrateData(data);
+    return super.migrateData(source, options, state);
   }
 
   /**

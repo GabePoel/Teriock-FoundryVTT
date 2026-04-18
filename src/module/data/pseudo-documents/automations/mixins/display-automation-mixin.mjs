@@ -1,3 +1,5 @@
+import { migrateKey } from "../../../shared/migrations/source-migrations.mjs";
+
 const { fields } = foundry.data;
 
 /**
@@ -34,11 +36,9 @@ export default function DisplayAutomationMixin(Base) {
       }
 
       /** @inheritDoc */
-      static migrateData(data) {
-        if (data.title) {
-          foundry.utils.setProperty(data, "display.label", data.title);
-        }
-        return super.migrateData(data);
+      static migrateData(source, options, state) {
+        migrateKey(source, "title", "display.label");
+        return super.migrateData(source, options, state);
       }
     }
   );

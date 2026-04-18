@@ -4,6 +4,7 @@ import { simplifyTags } from "../../../../helpers/panel.mjs";
 import { toKebabCase } from "../../../../helpers/string.mjs";
 import { FormulaField, IdentifierField } from "../../../fields/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
+import { migrateValueTransform } from "../../../shared/migrations/source-migrations.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import CleanedEffectSystem from "../cleaned-effect-system.mjs";
 
@@ -78,9 +79,9 @@ export default class PropertySystem extends mix(
   }
 
   /** @inheritDoc */
-  static migrateData(data) {
-    if (data.damageType) data.damageType = toKebabCase(data.damageType);
-    return super.migrateData(data);
+  static migrateData(source, options, state) {
+    migrateValueTransform(source, "damageType", toKebabCase);
+    return super.migrateData(source, options, state);
   }
 
   /** @inheritDoc */

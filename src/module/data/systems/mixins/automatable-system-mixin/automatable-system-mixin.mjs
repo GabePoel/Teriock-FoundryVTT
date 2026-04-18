@@ -44,20 +44,20 @@ export default function AutomatableSystemMixin(Base) {
       }
 
       /** @inheritDoc */
-      static migrateData(data) {
+      static migrateData(source, options, state) {
         const typeMigrations = {
           addExternal: "addDocuments",
           useExternal: "useDocuments",
           useLocal: "useDocuments",
         };
-        if (data.automations && typeof data.automations === "object") {
-          for (const automation of Object.values(data.automations)) {
+        if (source.automations && typeof source.automations === "object") {
+          for (const automation of Object.values(source.automations)) {
             if (!automation || typeof automation !== "object") continue;
             const migratedType = typeMigrations[automation.type];
             if (migratedType) automation.type = migratedType;
           }
         }
-        return super.migrateData(data);
+        return super.migrateData(source, options, state);
       }
 
       /** @inheritDoc */

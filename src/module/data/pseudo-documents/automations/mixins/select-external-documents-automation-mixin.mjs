@@ -1,7 +1,10 @@
 import { selectDocumentsDialog } from "../../../../applications/dialogs/select-document-dialog.mjs";
 import { mix } from "../../../../helpers/construction.mjs";
 import { resolveDocuments } from "../../../../helpers/resolve.mjs";
-import { migrateUuid } from "../../../shared/migrations/source-migrations.mjs";
+import {
+  migrateKey,
+  migrateUuid,
+} from "../../../shared/migrations/source-migrations.mjs";
 import SelectAutomationMixin from "./select-automation-mixin.mjs";
 
 const { fields } = foundry.data;
@@ -32,16 +35,9 @@ export default function SelectExternalDocumentsAutomationMixin(Base) {
       }
 
       /** @inheritDoc */
-      static migrateData(data) {
-        if (data.documents) {
-          data.uuids ??= [];
-          data.uuids.push(...data.documents);
-          foundry.utils.deleteProperty(data, "documents");
-        }
-        if (data.uuids) {
-          data.uuids = data.uuids.map((d) => migrateUuid(d));
-        }
-        return super.migrateData(data);
+      static migrateData(source, options, state) {
+        migrateKey(source, "documents", "uuids", migrateUuid);
+        return super.migrateData(source, options, state);
       }
 
       /** @inheritDoc */

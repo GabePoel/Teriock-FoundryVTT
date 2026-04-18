@@ -7,6 +7,7 @@ import {
   RangeModel,
   SlowExecutionTimeModel,
 } from "../../../../../models/unit-models/_module.mjs";
+import { migrateKey } from "../../../../../shared/migrations/source-migrations.mjs";
 
 const { fields } = foundry.data;
 
@@ -63,39 +64,38 @@ export default (Base) => {
       }
 
       /** @inheritDoc */
-      static migrateData(data) {
+      static migrateData(source, options, state) {
         // Range migration
-        if (typeof data.range === "string") data.range = { raw: data.range };
+        if (typeof source.range === "string")
+          source.range = { raw: source.range };
 
         // Expansion migration
-        if (typeof data.expansion === "string") {
-          data.expansion = { type: data.expansion };
+        if (typeof source.expansion === "string") {
+          source.expansion = { type: source.expansion };
         }
-        if (typeof data.expansion !== "object") {
-          data.expansion = {};
+        if (typeof source.expansion !== "object") {
+          source.expansion = {};
         }
-        if (foundry.utils.hasProperty(data, "expansion.cap.raw")) {
+        if (foundry.utils.hasProperty(source, "expansion.cap.raw")) {
           foundry.utils.setProperty(
-            data,
+            source,
             "expansion.cap",
-            foundry.utils.getProperty(data, "expansion.cap.raw"),
+            foundry.utils.getProperty(source, "expansion.cap.raw"),
           );
-          foundry.utils.deleteProperty(data, "expansion.cap.raw");
+          foundry.utils.deleteProperty(source, "expansion.cap.raw");
         }
-        if (typeof data.expansion?.cap === "number") {
-          data.expansion.cap = `${data.expansion.cap}`;
+        if (typeof source.expansion?.cap === "number") {
+          source.expansion.cap = `${source.expansion.cap}`;
         }
-        if (typeof data.expansionRange === "string") {
-          data.expansion.range = { raw: data.expansionRange };
-        }
+        migrateKey(source, "expansionRange", "source.expansion.range.raw");
 
         // Execution time migration
-        if (typeof data.executionTime === "string") {
-          data.executionTime = { base: data.executionTime };
-          if (data.maneuver === "slow") {
+        if (typeof source.executionTime === "string") {
+          source.executionTime = { base: source.executionTime };
+          if (source.maneuver === "slow") {
             let unit;
             let raw;
-            const lower = data.executionTime.base.toLowerCase();
+            const lower = source.executionTime.base.toLowerCase();
             if (lower.includes("short")) unit = "shortRest";
             if (lower.includes("long")) unit = "longRest";
             const units = ["second", "minute", "hour", "day", "week", "year"];
@@ -105,14 +105,14 @@ export default (Base) => {
                 raw = lower.trim().split(" ")[0];
               }
             }
-            data.executionTime.slow = { unit, raw };
+            source.executionTime.slow = { unit, raw };
           }
         }
 
         // Delivery migration
-        if (data.delivery?.base) data.delivery = data.delivery.base;
+        migrateKey(source, "delivery.base", "delivery");
 
-        return super.migrateData(data);
+        return super.migrateData(source, options, state);
       }
 
       /**

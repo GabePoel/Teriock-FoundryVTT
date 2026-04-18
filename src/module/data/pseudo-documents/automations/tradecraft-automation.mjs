@@ -4,6 +4,7 @@ import {
 } from "../../../applications/dialogs/_module.mjs";
 import { triggers } from "../../../constants/system/_module.mjs";
 import { mix } from "../../../helpers/construction.mjs";
+import { migrateKey } from "../../shared/migrations/source-migrations.mjs";
 import { TradecraftActivation } from "../activations/command-activations.mjs";
 import { ThresholdAutomation } from "./abstract/_module.mjs";
 import {
@@ -66,12 +67,9 @@ export default class TradecraftAutomation extends mix(
   }
 
   /** @inheritDoc */
-  static migrateData(data) {
-    if (data.tradecraft && !data.tradecrafts) {
-      data.tradecrafts = [data.tradecraft];
-      foundry.utils.deleteProperty(data, "tradecraft");
-    }
-    return super.migrateData(data);
+  static migrateData(source, options, state) {
+    migrateKey(source, "tradecraft", "tradecrafts", (v) => [v]);
+    return super.migrateData(source, options, state);
   }
 
   /** @inheritDoc */

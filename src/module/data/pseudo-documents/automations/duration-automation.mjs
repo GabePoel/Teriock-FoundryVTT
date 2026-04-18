@@ -34,9 +34,9 @@ export default class DurationAutomation extends CritAutomation {
   }
 
   /** @inheritDoc */
-  static migrateData(data) {
-    migrateChangeType(data, "changeType");
-    return super.migrateData(data);
+  static migrateData(source, options, state) {
+    migrateChangeType(source, "changeType");
+    return super.migrateData(source, options, state);
   }
 
   /** @inheritDoc */

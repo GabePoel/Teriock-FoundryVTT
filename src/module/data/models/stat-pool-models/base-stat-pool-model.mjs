@@ -39,18 +39,18 @@ export default class BaseStatPoolModel extends EmbeddedDataModel {
   }
 
   /** @inheritDoc */
-  static migrateData(data) {
+  static migrateData(source, options, state) {
     if (
-      foundry.utils.hasProperty(data, "faces") &&
-      !foundry.utils.hasProperty(data, "formula")
+      foundry.utils.hasProperty(source, "faces") &&
+      !foundry.utils.hasProperty(source, "formula")
     ) {
-      let number = data.number.raw || "1";
+      let number = source.number.raw || "1";
       if (!Number.isNumeric(Number(number))) number = `(${number})`;
-      data.formula = `${number}d${data.faces}`;
-      delete data.faces;
-      delete data.number;
+      source.formula = `${number}d${source.faces}`;
+      delete source.faces;
+      delete source.number;
     }
-    return super.migrateData(data);
+    return super.migrateData(source, options, state);
   }
 
   /**

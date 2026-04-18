@@ -40,18 +40,15 @@ export default (Base) => {
         });
       }
 
-      /**
-       * @inheritDoc
-       * @param {object} data
-       */
-      static migrateData(data) {
-        if (foundry.utils.hasProperty(data, "detection.hiding.raw")) {
-          foundry.utils.deleteProperty(data, "detection.hiding");
+      /** @inheritDoc */
+      static migrateData(source, options, state) {
+        if (foundry.utils.hasProperty(source, "detection.hiding.raw")) {
+          foundry.utils.deleteProperty(source, "detection.hiding");
         }
-        if (foundry.utils.hasProperty(data, "detection.perceiving.raw")) {
-          foundry.utils.deleteProperty(data, "detection.perceiving");
+        if (foundry.utils.hasProperty(source, "detection.perceiving.raw")) {
+          foundry.utils.deleteProperty(source, "detection.perceiving");
         }
-        return super.migrateData(data);
+        return super.migrateData(source, options, state);
       }
 
       /** @inheritDoc */

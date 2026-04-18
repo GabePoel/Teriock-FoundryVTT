@@ -88,12 +88,12 @@ export default (Base) => {
       }
 
       /** @inheritDoc */
-      static migrateData(data) {
+      static migrateData(source, options, state) {
         // 2025-12-18 HP and MP point cost migration
         for (const pointCost of ["mp", "hp"]) {
-          if (data.costs) {
-            if (data.costs[pointCost] === null) {
-              data.costs[pointCost] = {
+          if (source.costs) {
+            if (source.costs[pointCost] === null) {
+              source.costs[pointCost] = {
                 type: "none",
                 value: {
                   static: 0,
@@ -102,11 +102,11 @@ export default (Base) => {
                 },
               };
             }
-            if (typeof data.costs[pointCost] == "string") {
+            if (typeof source.costs[pointCost] == "string") {
               const variableCost = String(
                 pointCost === "mp" ? "manaCost" : "hitCost",
               );
-              data.costs[pointCost] = {
+              source.costs[pointCost] = {
                 type: "variable",
                 value: {
                   static: 0,
@@ -115,39 +115,39 @@ export default (Base) => {
                 },
               };
             }
-            if (typeof data.costs[pointCost] == "number") {
-              data.costs[pointCost] = {
+            if (typeof source.costs[pointCost] == "number") {
+              source.costs[pointCost] = {
                 type: "static",
                 value: {
-                  static: Number(data.costs[pointCost]),
+                  static: Number(source.costs[pointCost]),
                   formula: "",
                   variable: "",
                 },
               };
             }
-            if (typeof data.costs[pointCost]?.value == "number") {
-              data.costs[pointCost] = {
+            if (typeof source.costs[pointCost]?.value == "number") {
+              source.costs[pointCost] = {
                 type: "static",
                 value: {
-                  static: data.costs[pointCost].value,
+                  static: source.costs[pointCost].value,
                   formula: "",
                   variable: "",
                 },
               };
             }
-            if (typeof data.costs[pointCost]?.value == "string") {
-              data.costs[pointCost] = {
+            if (typeof source.costs[pointCost]?.value == "string") {
+              source.costs[pointCost] = {
                 type: "variable",
                 value: {
                   static: 0,
                   formula: "",
-                  variable: String(data.costs[pointCost].value),
+                  variable: String(source.costs[pointCost].value),
                 },
               };
             }
           }
         }
-        return super.migrateData(data);
+        return super.migrateData(source, options, state);
       }
 
       /**

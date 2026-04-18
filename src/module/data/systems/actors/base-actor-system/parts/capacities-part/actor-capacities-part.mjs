@@ -51,22 +51,19 @@ export default (Base) => {
         });
       }
 
-      /**
-       * @inheritDoc
-       * @param {object} data
-       */
-      static migrateData(data) {
+      /** @inheritDoc */
+      static migrateData(source, options, state) {
         if (
-          utils.getType(utils.getProperty(data, "weight")) === "string" &&
-          utils.getProperty(data, "weight").includes("lb")
+          utils.getType(utils.getProperty(source, "weight")) === "string" &&
+          utils.getProperty(source, "weight").includes("lb")
         ) {
-          data.weight = parseFloat(
-            utils.getProperty(data, "weight").replace("lb", "").trim(),
+          source.weight = parseFloat(
+            utils.getProperty(source, "weight").replace("lb", "").trim(),
           );
         }
-        migrateEvaluationToNumber(data, "size.number", { fallback: 3 });
-        migrateEvaluationToNumber(data, "weight.self", { fallback: null });
-        return super.migrateData(data);
+        migrateEvaluationToNumber(source, "size.number", { fallback: 3 });
+        migrateEvaluationToNumber(source, "weight.self", { fallback: null });
+        return super.migrateData(source, options, state);
       }
 
       /**

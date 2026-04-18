@@ -1,4 +1,5 @@
 import { mix } from "../../../helpers/construction.mjs";
+import { migrateKey } from "../../shared/migrations/source-migrations.mjs";
 import { CritAutomation } from "./abstract/_module.mjs";
 import {
   CompetenceAutomationMixin,
@@ -46,12 +47,9 @@ export default class ModifyEffectAutomation extends mix(
   }
 
   /** @inheritDoc */
-  static migrateData(data) {
-    if (data.prevent !== undefined && data.preventEffect === undefined) {
-      data.preventEffect = data.prevent;
-    }
-    delete data.prevent;
-    return super.migrateData(data);
+  static migrateData(source, options, state) {
+    migrateKey(source, "prevent", "preventEffect");
+    return super.migrateData(source, options, state);
   }
 
   /** @inheritDoc */

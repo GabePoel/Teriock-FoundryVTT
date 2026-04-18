@@ -1,5 +1,8 @@
 import { documentTypes } from "../../constants/system/document-types.mjs";
-import { migrateUuid } from "../../data/shared/migrations/source-migrations.mjs";
+import {
+  migrateUuid,
+  migrateValueTransform,
+} from "../../data/shared/migrations/source-migrations.mjs";
 import { mix } from "../../helpers/construction.mjs";
 import TeriockItem from "../item/item.mjs";
 import * as mixins from "../mixins/_module.mjs";
@@ -32,15 +35,9 @@ export default class TeriockActiveEffect extends mix(
   }
 
   /** @inheritDoc */
-  static migrateData(data) {
-    if (foundry.utils.hasProperty(data, "_stats.compendiumSource")) {
-      foundry.utils.setProperty(
-        data,
-        "_stats.compendiumSource",
-        migrateUuid(foundry.utils.getProperty(data, "_stats.compendiumSource")),
-      );
-    }
-    return super.migrateData(data);
+  static migrateData(source, options, state) {
+    migrateValueTransform(source, "_stats.compendiumSource", migrateUuid);
+    return super.migrateData(source, options, state);
   }
 
   /** @inheritDoc */

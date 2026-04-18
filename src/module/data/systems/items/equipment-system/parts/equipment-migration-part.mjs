@@ -12,12 +12,12 @@ export default (Base) => {
      */
     class EquipmentMigrationPart extends Base {
       /** @inheritDoc */
-      static migrateData(data) {
-        migrateEvaluationToNumber(data, "weight");
-        migrateEvaluationToNumber(data, "minStr");
-        migrateEvaluationToNumber(data, "storage.maxCount");
-        migrateEvaluationToNumber(data, "storage.maxWeight");
-        return super.migrateData(data);
+      static migrateData(source, options, state) {
+        migrateEvaluationToNumber(source, "weight");
+        migrateEvaluationToNumber(source, "minStr");
+        migrateEvaluationToNumber(source, "storage.maxCount");
+        migrateEvaluationToNumber(source, "storage.maxWeight");
+        return super.migrateData(source, options, state);
       }
     }
   );

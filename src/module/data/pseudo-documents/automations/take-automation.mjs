@@ -1,4 +1,5 @@
 import { objectMap } from "../../../helpers/utils.mjs";
+import { migrateKey } from "../../shared/migrations/source-migrations.mjs";
 import { TakeActivation } from "../activations/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 import { DisplayAutomationMixin } from "./mixins/_module.mjs";
@@ -44,9 +45,9 @@ export default class TakeAutomation extends DisplayAutomationMixin(
   }
 
   /** @inheritDoc */
-  static migrateData(data) {
-    if (data.take) data.impact = data.take;
-    return super.migrateData(data);
+  static migrateData(source, options, state) {
+    migrateKey(source, "take", "impact");
+    return super.migrateData(source, options, state);
   }
 
   /** @inheritDoc */

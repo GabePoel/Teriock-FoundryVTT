@@ -13,6 +13,7 @@ import {
   TextField,
 } from "../../../fields/_module.mjs";
 import { DefenseModel, RangeModel } from "../../../models/_module.mjs";
+import { migrateKey } from "../../../shared/migrations/source-migrations.mjs";
 import { AttackSystemMixin } from "../_module.mjs";
 
 const { fields } = foundry.data;
@@ -117,22 +118,16 @@ export default function ArmamentSystemMixin(Base) {
       }
 
       /** @inheritDoc */
-      static migrateData(data) {
+      static migrateData(source, options, state) {
         const evaluationMigrations = [
           "damage.base",
           "damage.twoHanded",
           "attackPenalty",
         ];
         for (const e of evaluationMigrations) {
-          if (foundry.utils.hasProperty(data, `${e}.raw`)) {
-            foundry.utils.setProperty(
-              data,
-              e,
-              foundry.utils.getProperty(data, `${e}.raw`),
-            );
-          }
+          migrateKey(source, `${e}.raw`, e);
         }
-        return super.migrateData(data);
+        return super.migrateData(source, options, state);
       }
 
       /**

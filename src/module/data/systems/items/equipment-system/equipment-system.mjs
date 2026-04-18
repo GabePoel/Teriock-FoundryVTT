@@ -8,6 +8,7 @@ import {
 import { inferNameFromIdentifier } from "../../../../helpers/utils.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
+import { migrateValueTransform } from "../../../shared/migrations/source-migrations.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
 import * as parts from "./parts/_module.mjs";
@@ -110,11 +111,9 @@ export default class EquipmentSystem extends mix(
   }
 
   /** @inheritDoc */
-  static migrateData(data) {
-    if (data.equipmentType) {
-      data.equipmentType = toKebabCase(data.equipmentType);
-    }
-    return super.migrateData(data);
+  static migrateData(source, options, state) {
+    migrateValueTransform(source, "equipmentType", toKebabCase);
+    return super.migrateData(source, options, state);
   }
 
   /** @inheritDoc */
