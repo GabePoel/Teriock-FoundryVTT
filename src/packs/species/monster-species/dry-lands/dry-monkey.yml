@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.15
+  systemVersion: 0.12.16
 effects:
   - _id: eC98tL9m8l2DrDPO
     _key: '!items.effects!3e14cea2df0b3abf.eC98tL9m8l2DrDPO'
@@ -67,7 +67,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/climbing.webp
     name: Climbing
     system:
@@ -167,7 +167,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/leaping.webp
     name: Leaping
     system:
@@ -288,7 +288,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/adrenaline.webp
     name: Adrenaline
     system:
@@ -305,23 +305,9 @@ effects:
             - 0
           hex: false
           type: resist
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.protections.resistances.other
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: add
-              value: Dropping From Negative HP
-            - key: system.protections.resistances.statuses
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: add
-              value: unconscious
+        WI1Odx3ncFMWs3tE:
+          _id: WI1Odx3ncFMWs3tE
+          category: other
           competencies:
             - 0
             - 1
@@ -330,9 +316,27 @@ effects:
             - 0
             - 1
           heighten:
-            - 1
             - 0
-          type: changes
+            - 1
+          relation: resistances
+          type: protection
+          value: Dropping From Negative HP
+        hVBGhvp2iMA3rtHg:
+          _id: hVBGhvp2iMA3rtHg
+          category: statuses
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 0
+            - 1
+          relation: resistances
+          type: protection
+          value: unconscious
       competence:
         raw: 0
       delivery: self
@@ -380,7 +384,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/called-magic-resistance.webp
     name: Called Magic Resistance
     system:
@@ -397,16 +401,9 @@ effects:
             - 0
           hex: false
           type: resist
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.protections.resistances.other
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: add
-              value: Conjured Spells
+        TvGlbqdqbeSBADzw:
+          _id: TvGlbqdqbeSBADzw
+          category: other
           competencies:
             - 0
             - 1
@@ -415,9 +412,11 @@ effects:
             - 0
             - 1
           heighten:
-            - 1
             - 0
-          type: changes
+            - 1
+          relation: resistances
+          type: protection
+          value: Non-Self Conjured Spells
       class: berserker
       competence:
         raw: 0
@@ -468,7 +467,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/hide.webp
     name: Hide
     system:
@@ -660,15 +659,112 @@ effects:
   - _id: b55GVhMIuyJCkndu
     _key: '!items.effects!3e14cea2df0b3abf.b55GVhMIuyJCkndu'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.RNCHRJvVyXZPEvoA
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.RyFFAAlAAYdNnAGF
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/offensive-martial-arts.webp
     name: Offensive Martial Arts
     system:
       _sup: tnkDdO6AkXLIbHbg
+      automations:
+        29b275994cf9f5b1:
+          _id: 29b275994cf9f5b1
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: 1d4
+          heighten:
+            - 1
+            - 0
+          impact: damage
+          merge: true
+          type: roll
+        3f7fa7707643426f:
+          _id: 3f7fa7707643426f
+          competencies:
+            - 2
+          formula: 1d8
+          heighten:
+            - 1
+            - 0
+          impact: damage
+          merge: true
+          type: roll
+        5e4d195ed81a10cc:
+          _id: 5e4d195ed81a10cc
+          competencies:
+            - 1
+            - 2
+          formula: 1d6
+          heighten:
+            - 1
+            - 0
+          impact: damage
+          merge: true
+          type: roll
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.damage.base.raw
+              phase: normal
+              priority: 10
+              qualifier: '@prop.handy'
+              target: body
+              type: upgrade
+              value: 1d4
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+        f025905e157ac261:
+          _id: f025905e157ac261
+          changes:
+            - key: system.damage.base.raw
+              phase: normal
+              priority: 10
+              qualifier: '@prop.handy'
+              target: body
+              type: upgrade
+              value: 1d6
+          competencies:
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+        f7da3b5e1992a724:
+          _id: f7da3b5e1992a724
+          changes:
+            - key: system.damage.base.raw
+              phase: normal
+              priority: 10
+              qualifier: '@prop.handy'
+              target: body
+              type: upgrade
+              value: 1d8
+          competencies:
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
       competence:
         raw: 0
       delivery: self
@@ -720,7 +816,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/defensive-martial-arts.webp
     name: Defensive Martial Arts
     system:

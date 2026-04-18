@@ -24,6 +24,13 @@ export default class ProtectionAutomation extends CritAutomation {
   }
 
   /** @inheritDoc */
+  static get metadata() {
+    return Object.assign(super.metadata, {
+      changes: true,
+    });
+  }
+
+  /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       relation: new fields.StringField({
@@ -56,25 +63,24 @@ export default class ProtectionAutomation extends CritAutomation {
     );
   }
 
-  /**
-   * A change that this protection applies to an actor.
-   * @returns {Teriock.Changes.QualifiedChangeData|null}
-   */
-  get protectionChange() {
+  /** @inheritDoc */
+  getChanges() {
     if (
       !this.value ||
       (this.category !== "other" && !this._choices[this.value])
     )
-      return null;
-    return {
-      key: `system.protections.${this.relation}.${this.category}`,
-      priority: 5,
-      qualifier: "1",
-      target: "Actor",
-      time: "normal",
-      type: "add",
-      value: this.value,
-    };
+      return [];
+    return [
+      {
+        key: `system.protections.${this.relation}.${this.category}`,
+        phase: "normal",
+        priority: 5,
+        qualifier: "1",
+        target: "Actor",
+        type: "add",
+        value: this.value,
+      },
+    ];
   }
 
   /** @inheritDoc */

@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.15
+  systemVersion: 0.12.16
 effects:
   - _id: vOnOGIIyiahsyEbW
     _key: '!items.effects!d59a15c94d432695.vOnOGIIyiahsyEbW'
@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/attack-resistance.webp
     name: Attack Resistance
     system:
@@ -30,16 +30,9 @@ effects:
             - 0
           hex: false
           type: resist
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.protections.resistances.other
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: add
-              value: Non-critical Attacks
+        VYVCQh90IYJBSK1s:
+          _id: VYVCQh90IYJBSK1s
+          category: other
           competencies:
             - 0
             - 1
@@ -48,9 +41,11 @@ effects:
             - 0
             - 1
           heighten:
-            - 1
             - 0
-          type: changes
+            - 1
+          relation: resistances
+          type: protection
+          value: Non-Critical Attacks
       competence:
         raw: 0
       delivery: self
@@ -94,21 +89,15 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/fae-elder-sorcery.webp
     name: Fae Elder Sorcery
     system:
       automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.competence.raw
-              phase: fluency
-              priority: 10
-              qualifier: '@identifier.innate-elder-sorcery'
-              target: ability
-              type: upgrade
-              value: '2'
+        EcZXEU06Mtg8nQ04:
+          _id: EcZXEU06Mtg8nQ04
+          competence:
+            raw: 2
           competencies:
             - 0
             - 1
@@ -117,9 +106,10 @@ effects:
             - 0
             - 1
           heighten:
-            - 1
             - 0
-          type: changes
+            - 1
+          identifier: ability:innate-elder-sorcery
+          type: changeCompetence
       competence:
         raw: 0
       delivery: self
@@ -172,55 +162,68 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/innate-elder-sorcery.webp
     name: Innate Elder Sorcery
     system:
       _sup: qOdmQtAS5RU6CXI7
       automations:
-        f025905e157ac261:
-          _id: f025905e157ac261
-          changes:
-            - key: system.competence.raw
-              phase: proficiency
-              priority: 10
-              qualifier: >-
-                or(@identifier.elder-sorcery-creation,
-                @identifier.all-elder-sorcery-words)
-              target: ability
-              type: upgrade
-              value: '1'
+        IcIHebYPkEqIqVWZ:
+          _id: IcIHebYPkEqIqVWZ
+          competence:
+            raw: 1
           competencies:
             - 1
-            - 2
           crit:
             - 0
             - 1
           heighten:
-            - 1
             - 0
-          type: changes
-        f7da3b5e1992a724:
-          _id: f7da3b5e1992a724
-          changes:
-            - key: system.competence.raw
-              phase: fluency
-              priority: 10
-              qualifier: >-
-                or(@identifier.elder-sorcery-creation,
-                @identifier.all-elder-sorcery-words)
-              target: ability
-              type: upgrade
-              value: '2'
+            - 1
+          identifier: ability:all-elder-sorcery-words
+          type: changeCompetence
+        K7UQWKx6i7WyBkLS:
+          _id: K7UQWKx6i7WyBkLS
+          competence:
+            raw: 2
           competencies:
             - 2
           crit:
             - 0
             - 1
           heighten:
-            - 1
             - 0
-          type: changes
+            - 1
+          identifier: ability:elder-sorcery-creation
+          type: changeCompetence
+        Kkl4bRexmERpCT2s:
+          _id: Kkl4bRexmERpCT2s
+          competence:
+            raw: 2
+          competencies:
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 0
+            - 1
+          identifier: ability:all-elder-sorcery-words
+          type: changeCompetence
+        bgZtShTjbCNE0vu7:
+          _id: bgZtShTjbCNE0vu7
+          competence:
+            raw: 1
+          competencies:
+            - 1
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 0
+            - 1
+          identifier: ability:elder-sorcery-creation
+          type: changeCompetence
       competence:
         raw: 0
       delivery: self
@@ -544,11 +547,11 @@ effects:
   - _id: c9SVk9BpKsJDxY3R
     _key: '!items.effects!d59a15c94d432695.c9SVk9BpKsJDxY3R'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.0BxTrblkpcGWwCHe
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.0q5khIx32nw3ihVe
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/elder-sorcery-creation.webp
     name: Elder Sorcery Creation
     system:
@@ -633,7 +636,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/instant-teleport.webp
     name: Instant Teleport
     system:
@@ -693,7 +696,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/night-vision.webp
     name: Night Vision
     system:
@@ -942,7 +945,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/regenerating.webp
     name: Regenerating
     system:
@@ -1077,7 +1080,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/true-invisibility.webp
     name: True Invisibility
     system:

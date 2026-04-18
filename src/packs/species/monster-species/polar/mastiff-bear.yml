@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.15
+  systemVersion: 0.12.16
 effects:
   - _id: 8184gukCfW5ALMOn
     _key: '!items.effects!bbd69df11325f89b.8184gukCfW5ALMOn'
@@ -74,7 +74,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/scent-seeing.webp
     name: Scent Seeing
     system:
@@ -200,11 +200,11 @@ effects:
   - _id: R5OqGQK05TLsZzaI
     _key: '!items.effects!bbd69df11325f89b.R5OqGQK05TLsZzaI'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.AyDa3orgfgOAAjM3
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.EORCpLPDSV6sGlHv
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
     name: Battle Cry Resistance
     system:
@@ -222,16 +222,9 @@ effects:
             - 0
           hex: false
           type: resist
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.protections.resistances.statuses
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: add
-              value: frightened
+        oJH3v7kvIbVGDlBS:
+          _id: oJH3v7kvIbVGDlBS
+          category: statuses
           competencies:
             - 0
             - 1
@@ -240,15 +233,18 @@ effects:
             - 0
             - 1
           heighten:
-            - 1
             - 0
-          type: changes
+            - 1
+          relation: resistances
+          type: protection
+          value: frightened
       class: berserker
       competence:
         raw: 0
       delivery: self
       duration:
-        unit: instant
+        raw: '5'
+        unit: minute
       effectTypes:
         - resistance
       endCondition: <p>You die or 1 minute passes without combat.</p>
@@ -289,7 +285,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
     name: Battle Cry Aura
     system:
@@ -492,54 +488,67 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/innate-elder-sorcery.webp
     name: Innate Elder Sorcery
     system:
       automations:
-        f025905e157ac261:
-          _id: f025905e157ac261
-          changes:
-            - key: system.competence.raw
-              phase: proficiency
-              priority: 10
-              qualifier: >-
-                or(@identifier.elder-sorcery-creation,
-                @identifier.all-elder-sorcery-words)
-              target: ability
-              type: upgrade
-              value: '1'
+        IcIHebYPkEqIqVWZ:
+          _id: IcIHebYPkEqIqVWZ
+          competence:
+            raw: 1
           competencies:
             - 1
-            - 2
           crit:
             - 0
             - 1
           heighten:
-            - 1
             - 0
-          type: changes
-        f7da3b5e1992a724:
-          _id: f7da3b5e1992a724
-          changes:
-            - key: system.competence.raw
-              phase: fluency
-              priority: 10
-              qualifier: >-
-                or(@identifier.elder-sorcery-creation,
-                @identifier.all-elder-sorcery-words)
-              target: ability
-              type: upgrade
-              value: '2'
+            - 1
+          identifier: ability:all-elder-sorcery-words
+          type: changeCompetence
+        K7UQWKx6i7WyBkLS:
+          _id: K7UQWKx6i7WyBkLS
+          competence:
+            raw: 2
           competencies:
             - 2
           crit:
             - 0
             - 1
           heighten:
-            - 1
             - 0
-          type: changes
+            - 1
+          identifier: ability:elder-sorcery-creation
+          type: changeCompetence
+        Kkl4bRexmERpCT2s:
+          _id: Kkl4bRexmERpCT2s
+          competence:
+            raw: 2
+          competencies:
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 0
+            - 1
+          identifier: ability:all-elder-sorcery-words
+          type: changeCompetence
+        bgZtShTjbCNE0vu7:
+          _id: bgZtShTjbCNE0vu7
+          competence:
+            raw: 1
+          competencies:
+            - 1
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 0
+            - 1
+          identifier: ability:elder-sorcery-creation
+          type: changeCompetence
       competence:
         raw: 0
       delivery: self
@@ -597,11 +606,11 @@ effects:
   - _id: kJx7NBp91sEH7jqh
     _key: '!items.effects!bbd69df11325f89b.kJx7NBp91sEH7jqh'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.0dYqrcEdYeXdRVSt
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.868cdb05c34a7654
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/all-elder-sorcery-words.webp
     name: All Elder Sorcery Words
     system:
@@ -1224,7 +1233,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/agile.webp
     name: Agile
     system:
@@ -1295,7 +1304,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/swimming.webp
     name: Swimming
     system:

@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     effects:
       - _id: 2GytKdzCXv2HpHHP
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/battle-cry.webp
         name: Battle Cry
         system:
@@ -70,11 +70,11 @@ items:
         _key: >-
           !actors.items.effects!813aea698d40aedf.813aea698d40aedf.9phKWxxDbRZZmfFj
         _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.AyDa3orgfgOAAjM3
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.EORCpLPDSV6sGlHv
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
         name: Battle Cry Resistance
         system:
@@ -92,16 +92,9 @@ items:
                 - 0
               hex: false
               type: resist
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
-              changes:
-                - key: system.protections.resistances.statuses
-                  phase: normal
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  type: add
-                  value: frightened
+            oJH3v7kvIbVGDlBS:
+              _id: oJH3v7kvIbVGDlBS
+              category: statuses
               competencies:
                 - 0
                 - 1
@@ -110,15 +103,18 @@ items:
                 - 0
                 - 1
               heighten:
-                - 1
                 - 0
-              type: changes
+                - 1
+              relation: resistances
+              type: protection
+              value: frightened
           class: berserker
           competence:
             raw: 0
           delivery: self
           duration:
-            unit: instant
+            raw: '5'
+            unit: minute
           effectTypes:
             - resistance
           endCondition: <p>You die or 1 minute passes without combat.</p>
@@ -160,7 +156,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
         name: Battle Cry Aura
         system:
@@ -264,7 +260,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/beastly-strength.webp
         name: Beastly Strength
         system:
@@ -319,7 +315,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/cursed-blessings.webp
         name: Cursed Blessings
         system:
@@ -375,7 +371,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/full-undead.webp
         name: Full Undead
         system:
@@ -429,36 +425,15 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/undying-durability.webp
         name: Undying Durability
         system:
           _sup: mQ8RonHlcyqh1lV1
           automations:
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
-              changes:
-                - key: system.protections.immunities.statuses
-                  phase: normal
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  type: add
-                  value: unconscious
-                - key: system.protections.immunities.statuses
-                  phase: normal
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  type: add
-                  value: suffocating
-                - key: system.protections.immunities.statuses
-                  phase: normal
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  type: add
-                  value: poisoned
+            HaVjAr78BgQGd92W:
+              _id: HaVjAr78BgQGd92W
+              category: statuses
               competencies:
                 - 0
                 - 1
@@ -467,9 +442,43 @@ items:
                 - 0
                 - 1
               heighten:
-                - 1
                 - 0
-              type: changes
+                - 1
+              relation: immunities
+              type: protection
+              value: poisoned
+            OlGtbdaImhaj6OiM:
+              _id: OlGtbdaImhaj6OiM
+              category: statuses
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 0
+                - 1
+              relation: immunities
+              type: protection
+              value: suffocating
+            W3eMyYlHd3WnCnAm:
+              _id: W3eMyYlHd3WnCnAm
+              category: statuses
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 0
+                - 1
+              relation: immunities
+              type: protection
+              value: unconscious
           competence:
             raw: 0
           delivery: self
@@ -523,7 +532,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
         name: Healing Sensitivity
         system:
@@ -577,22 +586,15 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/impure-durability.webp
         name: Impure Durability
         system:
           _sup: mQ8RonHlcyqh1lV1
           automations:
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
-              changes:
-                - key: system.protections.immunities.damageTypes
-                  phase: normal
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  type: add
-                  value: Non-magical Non-silver
+            uevhIJEJYaY0sz5X:
+              _id: uevhIJEJYaY0sz5X
+              category: other
               competencies:
                 - 0
                 - 1
@@ -601,9 +603,11 @@ items:
                 - 0
                 - 1
               heighten:
-                - 1
                 - 0
-              type: changes
+                - 1
+              relation: immunities
+              type: protection
+              value: Non-Magical Non-Silver Damage
           competence:
             raw: 0
           delivery: self
@@ -649,29 +653,15 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/undead-mind.webp
         name: Undead Mind
         system:
           _sup: mQ8RonHlcyqh1lV1
           automations:
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
-              changes:
-                - key: system.protections.immunities.statuses
-                  phase: normal
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  type: add
-                  value: frightened
-                - key: system.protections.immunities.statuses
-                  phase: normal
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  type: add
-                  value: charmed
+            EEiHRIyCxZhUuw07:
+              _id: EEiHRIyCxZhUuw07
+              category: statuses
               competencies:
                 - 0
                 - 1
@@ -680,9 +670,27 @@ items:
                 - 0
                 - 1
               heighten:
-                - 1
                 - 0
-              type: changes
+                - 1
+              relation: immunities
+              type: protection
+              value: charmed
+            Glnnr440sVehTfZ5:
+              _id: Glnnr440sVehTfZ5
+              category: statuses
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 0
+                - 1
+              relation: immunities
+              type: protection
+              value: frightened
           competence:
             raw: 0
           delivery: self
@@ -727,11 +735,11 @@ items:
         _key: >-
           !actors.items.effects!813aea698d40aedf.813aea698d40aedf.OxVl1QbarJOFGX97
         _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.2rxzRucyitmqyDmQ
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.iVgITml3cqPn1n2F
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/ethereal-senses.webp
         name: Ethereal Senses
         system:
@@ -806,7 +814,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/mana-drain-grasp.webp
         name: Mana Drain Grasp
         system:
@@ -893,7 +901,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/high-intelligence.webp
         name: High Intelligence
         system:
@@ -939,7 +947,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/ignite-self.webp
         name: Ignite Self
         system:
@@ -1048,7 +1056,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/martial-arts.webp
         name: Martial Arts
         system:
@@ -1094,15 +1102,112 @@ items:
         _key: >-
           !actors.items.effects!813aea698d40aedf.813aea698d40aedf.YGMMWXfLzXeXZAJa
         _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.RNCHRJvVyXZPEvoA
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.RyFFAAlAAYdNnAGF
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/offensive-martial-arts.webp
         name: Offensive Martial Arts
         system:
           _sup: 4fqjNQuAYkC0KVyJ
+          automations:
+            29b275994cf9f5b1:
+              _id: 29b275994cf9f5b1
+              competencies:
+                - 0
+                - 1
+                - 2
+              formula: 1d4
+              heighten:
+                - 1
+                - 0
+              impact: damage
+              merge: true
+              type: roll
+            3f7fa7707643426f:
+              _id: 3f7fa7707643426f
+              competencies:
+                - 2
+              formula: 1d8
+              heighten:
+                - 1
+                - 0
+              impact: damage
+              merge: true
+              type: roll
+            5e4d195ed81a10cc:
+              _id: 5e4d195ed81a10cc
+              competencies:
+                - 1
+                - 2
+              formula: 1d6
+              heighten:
+                - 1
+                - 0
+              impact: damage
+              merge: true
+              type: roll
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.damage.base.raw
+                  phase: normal
+                  priority: 10
+                  qualifier: '@prop.handy'
+                  target: body
+                  type: upgrade
+                  value: 1d4
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 1
+                - 0
+              type: changes
+            f025905e157ac261:
+              _id: f025905e157ac261
+              changes:
+                - key: system.damage.base.raw
+                  phase: normal
+                  priority: 10
+                  qualifier: '@prop.handy'
+                  target: body
+                  type: upgrade
+                  value: 1d6
+              competencies:
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 1
+                - 0
+              type: changes
+            f7da3b5e1992a724:
+              _id: f7da3b5e1992a724
+              changes:
+                - key: system.damage.base.raw
+                  phase: normal
+                  priority: 10
+                  qualifier: '@prop.handy'
+                  target: body
+                  type: upgrade
+                  value: 1d8
+              competencies:
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 1
+                - 0
+              type: changes
           competence:
             raw: 0
           delivery: self
@@ -1156,7 +1261,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/defensive-martial-arts.webp
         name: Defensive Martial Arts
         system:
@@ -1275,7 +1380,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
@@ -1321,7 +1426,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
@@ -1367,7 +1472,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/normal-sneak.webp
         name: Normal Sneak
         system:
@@ -1413,7 +1518,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/shatter.webp
         name: Shatter
         system:
@@ -1481,7 +1586,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/unbound-immunity.webp
         name: Unbound Immunity
         system:
@@ -1554,295 +1659,6 @@ items:
         img: systems/teriock/src/icons/tokens/clay-mummy.webp
         ring: true
     type: species
-  - _id: ExF0PFsr8JhHuc1H
-    _key: '!actors.items!813aea698d40aedf.ExF0PFsr8JhHuc1H'
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.58ba95d8757c67c0
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.15
-    effects:
-      - _id: H7Q5z5528FgfgbLp
-        _key: >-
-          !actors.items.effects!813aea698d40aedf.ExF0PFsr8JhHuc1H.H7Q5z5528FgfgbLp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.294cd7a4f1545ed9
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.15
-        img: systems/teriock/src/icons/properties/bashing.webp
-        name: Bashing
-        system:
-          competence:
-            raw: 0
-          description: >-
-            <p>An item with the <b>[[lookup name style=lc]]</b> property is not
-            a weapon, but can still be used to make a @L[Ability:Basic
-            Attack]{Basic Attack}.</p>
-          form: intrinsic
-          identifier: bashing
-          mundane: true
-        transfer: true
-        type: property
-      - _id: lKaLyYYTTIEFOLb5
-        _key: >-
-          !actors.items.effects!813aea698d40aedf.ExF0PFsr8JhHuc1H.lKaLyYYTTIEFOLb5
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.417457cfa2643f5b
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.15
-        img: systems/teriock/src/icons/properties/handy.webp
-        name: Handy
-        system:
-          competence:
-            raw: 0
-          description: >-
-            <p>An item with this property can be used to deliver
-            @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
-          form: intrinsic
-          identifier: handy
-          mundane: true
-        transfer: true
-        type: property
-      - _id: m7Va2Fuah1K2t2Ab
-        _key: >-
-          !actors.items.effects!813aea698d40aedf.ExF0PFsr8JhHuc1H.m7Va2Fuah1K2t2Ab
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.9e0c23ad80fe566a
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.15
-        img: systems/teriock/src/icons/properties/prehensile.webp
-        name: Prehensile
-        system:
-          competence:
-            raw: 0
-          description: >-
-            <p>An item can be used to grasp, hold, or manipulate objects, such
-            as while using @L[Ability:Interact]{Interact}.</p>
-          form: intrinsic
-          identifier: prehensile
-          mundane: true
-        transfer: true
-        type: property
-      - _id: IJM1yhiyKnnwlbXh
-        _key: >-
-          !actors.items.effects!813aea698d40aedf.ExF0PFsr8JhHuc1H.IJM1yhiyKnnwlbXh
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.3d2cc8d952adebec
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.15
-        img: systems/teriock/src/icons/properties/small.webp
-        name: Small
-        system:
-          competence:
-            raw: 0
-          description: >-
-            <p>An item with this property is easily concealed and can often be
-            used in the same hand as a @L[Category:Shields]{shield}.</p>
-          form: intrinsic
-          identifier: small
-          mundane: true
-        transfer: true
-        type: property
-    folder: a8e8026a8376d9d4
-    img: systems/teriock/src/icons/body-parts/hand.webp
-    name: Hand
-    system:
-      _sup: 813aea698d40aedf
-      attackPenalty: '-3'
-      competence:
-        raw: 0
-      damage:
-        base: '1'
-      identifier: hand
-      range:
-        long:
-          unit: melee
-        melee: true
-        ranged: false
-        short:
-          unit: self
-      vitals: false
-    type: body
-  - _id: Ocg6NuzsiUTFhwKH
-    _key: '!actors.items!813aea698d40aedf.Ocg6NuzsiUTFhwKH'
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.079ffd850d9567f9
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.15
-    effects:
-      - _id: TWk5AP5nzZgpXkaM
-        _key: >-
-          !actors.items.effects!813aea698d40aedf.Ocg6NuzsiUTFhwKH.TWk5AP5nzZgpXkaM
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.294cd7a4f1545ed9
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.15
-        img: systems/teriock/src/icons/properties/bashing.webp
-        name: Bashing
-        system:
-          competence:
-            raw: 0
-          description: >-
-            <p>An item with the <b>[[lookup name style=lc]]</b> property is not
-            a weapon, but can still be used to make a @L[Ability:Basic
-            Attack]{Basic Attack}.</p>
-          form: intrinsic
-          identifier: bashing
-          mundane: true
-        transfer: true
-        type: property
-      - _id: IDLUUjkSFtpaiKuJ
-        _key: >-
-          !actors.items.effects!813aea698d40aedf.Ocg6NuzsiUTFhwKH.IDLUUjkSFtpaiKuJ
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.3d2cc8d952adebec
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.15
-        img: systems/teriock/src/icons/properties/small.webp
-        name: Small
-        system:
-          competence:
-            raw: 0
-          description: >-
-            <p>An item with this property is easily concealed and can often be
-            used in the same hand as a @L[Category:Shields]{shield}.</p>
-          form: intrinsic
-          identifier: small
-          mundane: true
-        transfer: true
-        type: property
-    folder: a8e8026a8376d9d4
-    img: systems/teriock/src/icons/body-parts/foot.webp
-    name: Foot
-    system:
-      _sup: 813aea698d40aedf
-      attackPenalty: '-3'
-      competence:
-        raw: 0
-      damage:
-        base: '1'
-      identifier: foot
-      range:
-        long:
-          unit: melee
-        melee: true
-        ranged: false
-        short:
-          unit: self
-      vitals: false
-    type: body
-  - _id: YTV70aqfosYcrL48
-    _key: '!actors.items!813aea698d40aedf.YTV70aqfosYcrL48'
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.c9c371f95c92bc7c
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.15
-    effects:
-      - _id: CmkJGGebZrjvIBwd
-        _key: >-
-          !actors.items.effects!813aea698d40aedf.YTV70aqfosYcrL48.CmkJGGebZrjvIBwd
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.294cd7a4f1545ed9
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.15
-        img: systems/teriock/src/icons/properties/bashing.webp
-        name: Bashing
-        system:
-          competence:
-            raw: 0
-          description: >-
-            <p>An item with the <b>[[lookup name style=lc]]</b> property is not
-            a weapon, but can still be used to make a @L[Ability:Basic
-            Attack]{Basic Attack}.</p>
-          form: intrinsic
-          identifier: bashing
-          mundane: true
-        transfer: true
-        type: property
-      - _id: fq8owR84sFsgLiuj
-        _key: >-
-          !actors.items.effects!813aea698d40aedf.YTV70aqfosYcrL48.fq8owR84sFsgLiuj
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.870df3b7da4ce4b8
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.15
-        img: icons/creatures/abilities/mouth-teeth-long-red.webp
-        name: Biting
-        system:
-          competence:
-            raw: 0
-          description: >-
-            <p>An item with this property can be used to deliver
-            @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
-          form: intrinsic
-          identifier: biting
-          mundane: true
-        transfer: true
-        type: property
-      - _id: 4WFL62wofj7AHBxN
-        _key: >-
-          !actors.items.effects!813aea698d40aedf.YTV70aqfosYcrL48.4WFL62wofj7AHBxN
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.3d2cc8d952adebec
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.15
-        img: systems/teriock/src/icons/properties/small.webp
-        name: Small
-        system:
-          competence:
-            raw: 0
-          description: >-
-            <p>An item with this property is easily concealed and can often be
-            used in the same hand as a @L[Category:Shields]{shield}.</p>
-          form: intrinsic
-          identifier: small
-          mundane: true
-        transfer: true
-        type: property
-    folder: a8e8026a8376d9d4
-    img: icons/creatures/abilities/mouth-teeth-human.webp
-    name: Mouth
-    system:
-      _sup: 813aea698d40aedf
-      attackPenalty: '-3'
-      competence:
-        raw: 0
-      damage:
-        base: '1'
-      fightingStyle: savage
-      identifier: mouth
-      range:
-        long:
-          unit: melee
-        melee: true
-        ranged: false
-        short:
-          unit: self
-      vitals: false
-    type: body
   - _id: 7wGaryt7s2nlLVQn
     _key: '!actors.items!813aea698d40aedf.7wGaryt7s2nlLVQn'
     _stats:
@@ -1850,7 +1666,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     effects:
       - _id: oy1A5zdakXd9Rhxu
         _key: >-
@@ -1860,7 +1676,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/empathic-ray.webp
         name: Empathic Ray
         system:
@@ -1983,7 +1799,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/familiar-bond.webp
         name: Familiar Bond
         system:
@@ -2095,7 +1911,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/oracle.webp
         name: Oracle
         system:
@@ -2174,7 +1990,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/treeform-ball.webp
         name: Treeform Ball
         system:
@@ -2316,24 +2132,313 @@ items:
           disabled: false
           formula: 1d12
     type: rank
-  - _id: gpNlu5bFKawoLtbq
-    _key: '!actors.items!813aea698d40aedf.gpNlu5bFKawoLtbq'
+  - _id: ExF0PFsr8JhHuc1H
+    _key: '!actors.items!813aea698d40aedf.ExF0PFsr8JhHuc1H'
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.58ba95d8757c67c0
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.16
+    effects:
+      - _id: H7Q5z5528FgfgbLp
+        _key: >-
+          !actors.items.effects!813aea698d40aedf.ExF0PFsr8JhHuc1H.H7Q5z5528FgfgbLp
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.294cd7a4f1545ed9
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.16
+        img: systems/teriock/src/icons/properties/bashing.webp
+        name: Bashing
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with the <b>[[lookup name style=lc]]</b> property is not
+            a weapon, but can still be used to make a @L[Ability:Basic
+            Attack]{Basic Attack}.</p>
+          form: intrinsic
+          identifier: bashing
+          mundane: true
+        transfer: true
+        type: property
+      - _id: lKaLyYYTTIEFOLb5
+        _key: >-
+          !actors.items.effects!813aea698d40aedf.ExF0PFsr8JhHuc1H.lKaLyYYTTIEFOLb5
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.417457cfa2643f5b
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.16
+        img: systems/teriock/src/icons/properties/handy.webp
+        name: Handy
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with this property can be used to deliver
+            @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
+          form: intrinsic
+          identifier: handy
+          mundane: true
+        transfer: true
+        type: property
+      - _id: m7Va2Fuah1K2t2Ab
+        _key: >-
+          !actors.items.effects!813aea698d40aedf.ExF0PFsr8JhHuc1H.m7Va2Fuah1K2t2Ab
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.9e0c23ad80fe566a
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.16
+        img: systems/teriock/src/icons/properties/prehensile.webp
+        name: Prehensile
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item can be used to grasp, hold, or manipulate objects, such
+            as while using @L[Ability:Interact]{Interact}.</p>
+          form: intrinsic
+          identifier: prehensile
+          mundane: true
+        transfer: true
+        type: property
+      - _id: IJM1yhiyKnnwlbXh
+        _key: >-
+          !actors.items.effects!813aea698d40aedf.ExF0PFsr8JhHuc1H.IJM1yhiyKnnwlbXh
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.3d2cc8d952adebec
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.16
+        img: systems/teriock/src/icons/properties/small.webp
+        name: Small
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with this property is easily concealed and can often be
+            used in the same hand as a @L[Category:Shields]{shield}.</p>
+          form: intrinsic
+          identifier: small
+          mundane: true
+        transfer: true
+        type: property
+    folder: a8e8026a8376d9d4
+    img: systems/teriock/src/icons/body-parts/hand.webp
+    name: Hand
+    system:
+      _sup: 813aea698d40aedf
+      attackPenalty: '-3'
+      competence:
+        raw: 0
+      damage:
+        base: '1'
+      identifier: hand
+      range:
+        long:
+          unit: melee
+        melee: true
+        ranged: false
+        short:
+          unit: self
+      vitals: false
+    type: body
+  - _id: Ocg6NuzsiUTFhwKH
+    _key: '!actors.items!813aea698d40aedf.Ocg6NuzsiUTFhwKH'
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.079ffd850d9567f9
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.16
+    effects:
+      - _id: TWk5AP5nzZgpXkaM
+        _key: >-
+          !actors.items.effects!813aea698d40aedf.Ocg6NuzsiUTFhwKH.TWk5AP5nzZgpXkaM
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.294cd7a4f1545ed9
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.16
+        img: systems/teriock/src/icons/properties/bashing.webp
+        name: Bashing
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with the <b>[[lookup name style=lc]]</b> property is not
+            a weapon, but can still be used to make a @L[Ability:Basic
+            Attack]{Basic Attack}.</p>
+          form: intrinsic
+          identifier: bashing
+          mundane: true
+        transfer: true
+        type: property
+      - _id: IDLUUjkSFtpaiKuJ
+        _key: >-
+          !actors.items.effects!813aea698d40aedf.Ocg6NuzsiUTFhwKH.IDLUUjkSFtpaiKuJ
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.3d2cc8d952adebec
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.16
+        img: systems/teriock/src/icons/properties/small.webp
+        name: Small
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with this property is easily concealed and can often be
+            used in the same hand as a @L[Category:Shields]{shield}.</p>
+          form: intrinsic
+          identifier: small
+          mundane: true
+        transfer: true
+        type: property
+    folder: a8e8026a8376d9d4
+    img: systems/teriock/src/icons/body-parts/foot.webp
+    name: Foot
+    system:
+      _sup: 813aea698d40aedf
+      attackPenalty: '-3'
+      competence:
+        raw: 0
+      damage:
+        base: '1'
+      identifier: foot
+      range:
+        long:
+          unit: melee
+        melee: true
+        ranged: false
+        short:
+          unit: self
+      vitals: false
+    type: body
+  - _id: YTV70aqfosYcrL48
+    _key: '!actors.items!813aea698d40aedf.YTV70aqfosYcrL48'
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.c9c371f95c92bc7c
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.16
+    effects:
+      - _id: CmkJGGebZrjvIBwd
+        _key: >-
+          !actors.items.effects!813aea698d40aedf.YTV70aqfosYcrL48.CmkJGGebZrjvIBwd
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.294cd7a4f1545ed9
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.16
+        img: systems/teriock/src/icons/properties/bashing.webp
+        name: Bashing
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with the <b>[[lookup name style=lc]]</b> property is not
+            a weapon, but can still be used to make a @L[Ability:Basic
+            Attack]{Basic Attack}.</p>
+          form: intrinsic
+          identifier: bashing
+          mundane: true
+        transfer: true
+        type: property
+      - _id: fq8owR84sFsgLiuj
+        _key: >-
+          !actors.items.effects!813aea698d40aedf.YTV70aqfosYcrL48.fq8owR84sFsgLiuj
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.870df3b7da4ce4b8
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.16
+        img: icons/creatures/abilities/mouth-teeth-long-red.webp
+        name: Biting
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with this property can be used to deliver
+            @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
+          form: intrinsic
+          identifier: biting
+          mundane: true
+        transfer: true
+        type: property
+      - _id: 4WFL62wofj7AHBxN
+        _key: >-
+          !actors.items.effects!813aea698d40aedf.YTV70aqfosYcrL48.4WFL62wofj7AHBxN
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.3d2cc8d952adebec
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.16
+        img: systems/teriock/src/icons/properties/small.webp
+        name: Small
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with this property is easily concealed and can often be
+            used in the same hand as a @L[Category:Shields]{shield}.</p>
+          form: intrinsic
+          identifier: small
+          mundane: true
+        transfer: true
+        type: property
+    folder: a8e8026a8376d9d4
+    img: icons/creatures/abilities/mouth-teeth-human.webp
+    name: Mouth
+    system:
+      _sup: 813aea698d40aedf
+      attackPenalty: '-3'
+      competence:
+        raw: 0
+      damage:
+        base: '1'
+      fightingStyle: savage
+      identifier: mouth
+      range:
+        long:
+          unit: melee
+        melee: true
+        ranged: false
+        short:
+          unit: self
+      vitals: false
+    type: body
+  - _id: 9DEbHBwBGmyFhLMP
+    _key: '!actors.items!813aea698d40aedf.9DEbHBwBGmyFhLMP'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.4a095aaed0254ec3
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     effects:
       - _id: NGCuRUaVtXnxAbRe
         _key: >-
-          !actors.items.effects!813aea698d40aedf.gpNlu5bFKawoLtbq.NGCuRUaVtXnxAbRe
+          !actors.items.effects!813aea698d40aedf.9DEbHBwBGmyFhLMP.NGCuRUaVtXnxAbRe
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.ac35fb736d8bd407
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/arcane-ray.webp
         name: Arcane Ray
         system:
@@ -2410,13 +2515,13 @@ items:
         type: ability
       - _id: aCWLNsvSFjEuLTyl
         _key: >-
-          !actors.items.effects!813aea698d40aedf.gpNlu5bFKawoLtbq.aCWLNsvSFjEuLTyl
+          !actors.items.effects!813aea698d40aedf.9DEbHBwBGmyFhLMP.aCWLNsvSFjEuLTyl
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.30358f2e8d9b3a0a
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/staff-touch.webp
         name: Staff Touch
         system:

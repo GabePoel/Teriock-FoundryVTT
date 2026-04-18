@@ -1,10 +1,4 @@
-import {
-  AbilityMacroAutomation,
-  ChangesAutomation,
-  PropertyMacroAutomation,
-  ProtectionAutomation,
-  StatusAutomation,
-} from "../../../pseudo-documents/automations/_module.mjs";
+import { StatusAutomation } from "../../../pseudo-documents/automations/_module.mjs";
 import { ChildSystemMixin } from "../../mixins/_module.mjs";
 
 const { fields, ActiveEffectTypeDataModel } = foundry.data;
@@ -126,17 +120,11 @@ export default class BaseEffectSystem extends ChildSystemMixin(
   }
 
   /**
-   * Whether this can change.
+   * Whether this can provide qualified changes.
    * @returns {boolean}
    */
   get canChange() {
-    const validTypes = [
-      AbilityMacroAutomation.TYPE,
-      ChangesAutomation.TYPE,
-      PropertyMacroAutomation.TYPE,
-      ProtectionAutomation.TYPE,
-    ];
-    return !!this.automations.contents.find((a) => validTypes.includes(a.type));
+    return this.automations.contents.some((a) => a.metadata.changes);
   }
 
   /** @inheritDoc */
@@ -191,20 +179,9 @@ export default class BaseEffectSystem extends ChildSystemMixin(
    */
   get qualifiedChanges() {
     const changes = [];
-    const changesAutomations =
-      /** @type {ChangesAutomation[]} */ this.activeAutomations.filter(
-        (a) => a.type === ChangesAutomation.TYPE,
-      );
-    changesAutomations.forEach((a) => {
-      changes.push(...a.changes);
-    });
-    const protectionAutomations =
-      /** @type {ProtectionAutomation[]} */ this.activeAutomations.filter(
-        (a) => a.type === ProtectionAutomation.TYPE,
-      );
-    protectionAutomations.forEach((a) => {
-      if (a.protectionChange) changes.push(a.protectionChange);
-    });
+    for (const a of this.activeAutomations.filter((a) => a.metadata.changes)) {
+      changes.push(...a.getChanges());
+    }
     return changes;
   }
 

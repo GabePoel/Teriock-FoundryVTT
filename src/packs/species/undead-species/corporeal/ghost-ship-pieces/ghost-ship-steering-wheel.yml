@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.15
+  systemVersion: 0.12.16
 effects:
   - _id: HcJyFJb0Iz2iexql
     _key: '!items.effects!9eb20816b3972d46.HcJyFJb0Iz2iexql'
@@ -127,7 +127,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/instant-awaken.webp
     name: Instant Awaken
     system:
@@ -190,42 +190,14 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/construct-mind.webp
     name: Construct Mind
     system:
       automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.protections.immunities.statuses
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: add
-              value: frightened
-            - key: system.protections.immunities.statuses
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: add
-              value: frenzied
-            - key: system.protections.immunities.statuses
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: add
-              value: charmed
-            - key: system.protections.immunities.statuses
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: add
-              value: allured
+        2SGEPU635vkgznfV:
+          _id: 2SGEPU635vkgznfV
+          category: statuses
           competencies:
             - 0
             - 1
@@ -234,9 +206,59 @@ effects:
             - 0
             - 1
           heighten:
-            - 1
             - 0
-          type: changes
+            - 1
+          relation: immunities
+          type: protection
+          value: allured
+        RT16m3U0BI3FNkvA:
+          _id: RT16m3U0BI3FNkvA
+          category: statuses
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 0
+            - 1
+          relation: immunities
+          type: protection
+          value: frenzied
+        n7Dd3JcVMBqNFFEU:
+          _id: n7Dd3JcVMBqNFFEU
+          category: statuses
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 0
+            - 1
+          relation: immunities
+          type: protection
+          value: frenzied
+        ug99tkS0qQe8PRXF:
+          _id: ug99tkS0qQe8PRXF
+          category: statuses
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 0
+            - 1
+          relation: immunities
+          type: protection
+          value: charmed
       competence:
         raw: 0
       delivery: self
@@ -282,7 +304,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/constructed-body.webp
     name: Constructed Body
     system:
@@ -372,7 +394,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/gliding.webp
     name: Gliding
     system:
@@ -499,15 +521,112 @@ effects:
   - _id: vQerfSvwLjfapbjJ
     _key: '!items.effects!9eb20816b3972d46.vQerfSvwLjfapbjJ'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.RNCHRJvVyXZPEvoA
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.RyFFAAlAAYdNnAGF
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/offensive-martial-arts.webp
     name: Offensive Martial Arts
     system:
       _sup: vGh4S4JkemR18coR
+      automations:
+        29b275994cf9f5b1:
+          _id: 29b275994cf9f5b1
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: 1d4
+          heighten:
+            - 1
+            - 0
+          impact: damage
+          merge: true
+          type: roll
+        3f7fa7707643426f:
+          _id: 3f7fa7707643426f
+          competencies:
+            - 2
+          formula: 1d8
+          heighten:
+            - 1
+            - 0
+          impact: damage
+          merge: true
+          type: roll
+        5e4d195ed81a10cc:
+          _id: 5e4d195ed81a10cc
+          competencies:
+            - 1
+            - 2
+          formula: 1d6
+          heighten:
+            - 1
+            - 0
+          impact: damage
+          merge: true
+          type: roll
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.damage.base.raw
+              phase: normal
+              priority: 10
+              qualifier: '@prop.handy'
+              target: body
+              type: upgrade
+              value: 1d4
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+        f025905e157ac261:
+          _id: f025905e157ac261
+          changes:
+            - key: system.damage.base.raw
+              phase: normal
+              priority: 10
+              qualifier: '@prop.handy'
+              target: body
+              type: upgrade
+              value: 1d6
+          competencies:
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+        f7da3b5e1992a724:
+          _id: f7da3b5e1992a724
+          changes:
+            - key: system.damage.base.raw
+              phase: normal
+              priority: 10
+              qualifier: '@prop.handy'
+              target: body
+              type: upgrade
+              value: 1d8
+          competencies:
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
       competence:
         raw: 0
       delivery: self
@@ -559,7 +678,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/defensive-martial-arts.webp
     name: Defensive Martial Arts
     system:
@@ -677,7 +796,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: icons/skills/trades/profession-sailing-ship.webp
     name: Master Mariner
     system:
@@ -1026,7 +1145,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/rallying-cry.webp
     name: Rallying Cry
     system:
@@ -1133,21 +1252,14 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/spell-immunity.webp
     name: Spell Immunity
     system:
       automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.protections.immunities.other
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: add
-              value: Spells
+        WCOWPl5PVXo46Bmp:
+          _id: WCOWPl5PVXo46Bmp
+          category: other
           competencies:
             - 0
             - 1
@@ -1156,9 +1268,11 @@ effects:
             - 0
             - 1
           heighten:
-            - 1
             - 0
-          type: changes
+            - 1
+          relation: immunities
+          type: protection
+          value: Spells
       competence:
         raw: 0
       delivery: self

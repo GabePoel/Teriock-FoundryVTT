@@ -30,6 +30,7 @@ export default class ImbuementSystem extends mix(
     return [
       ...super._automationTypes,
       automations.AbilityMacroAutomation,
+      automations.ChangeCompetenceAutomation,
       automations.ChangesAutomation,
       automations.HealAutomation,
       automations.ProtectionAutomation,
@@ -40,10 +41,10 @@ export default class ImbuementSystem extends mix(
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
-      type: "imbuement",
-      usable: true,
       childEffectTypes: ["ability", "fluency", "property", "resource"],
       childItemTypes: [],
+      type: "imbuement",
+      usable: true,
       visibleTypes: ["ability", "fluency", "property", "resource"],
     });
   }

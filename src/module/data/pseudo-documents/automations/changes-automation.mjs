@@ -20,6 +20,13 @@ export default class ChangesAutomation extends CritAutomation {
   }
 
   /** @inheritDoc */
+  static get metadata() {
+    return Object.assign(super.metadata, {
+      changes: true,
+    });
+  }
+
+  /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       changes: new fields.ArrayField(qualifiedChangeField()),
@@ -30,6 +37,11 @@ export default class ChangesAutomation extends CritAutomation {
   static migrateData(data) {
     if (data.changes) for (const change of data.changes) migrateChange(change);
     return super.migrateData(data);
+  }
+
+  /** @inheritDoc */
+  getChanges() {
+    return this.changes;
   }
 
   /** @inheritDoc */

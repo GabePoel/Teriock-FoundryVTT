@@ -80,7 +80,7 @@ export default class InventorySystem extends BaseActorSystem {
                     type: "changes",
                     changes: [
                       {
-                        key: "system.light.dim",
+                        key: "token.light.dim",
                         mode: 5,
                         priority: 150,
                         qualifier: "1",
@@ -89,7 +89,7 @@ export default class InventorySystem extends BaseActorSystem {
                         value: "0",
                       },
                       {
-                        key: "system.light.bright",
+                        key: "token.light.bright",
                         mode: 5,
                         priority: 150,
                         qualifier: "1",

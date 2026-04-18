@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.15
+  systemVersion: 0.12.16
 folder: b8dcf1ebf1b3e669
 img: systems/teriock/src/icons/creatures/banshee.webp
 items:
@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     effects:
       - _id: yhfgwsSb1CiZEpJn
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/battle-cry.webp
         name: Battle Cry
         system:
@@ -73,11 +73,11 @@ items:
         _key: >-
           !actors.items.effects!2422d369680746df.2422d369680746df.aBwWDPNGU2hX35Kt
         _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.AyDa3orgfgOAAjM3
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.EORCpLPDSV6sGlHv
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
         name: Battle Cry Resistance
         system:
@@ -95,16 +95,9 @@ items:
                 - 0
               hex: false
               type: resist
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
-              changes:
-                - key: system.protections.resistances.statuses
-                  phase: normal
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  type: add
-                  value: frightened
+            oJH3v7kvIbVGDlBS:
+              _id: oJH3v7kvIbVGDlBS
+              category: statuses
               competencies:
                 - 0
                 - 1
@@ -113,15 +106,18 @@ items:
                 - 0
                 - 1
               heighten:
-                - 1
                 - 0
-              type: changes
+                - 1
+              relation: resistances
+              type: protection
+              value: frightened
           class: berserker
           competence:
             raw: 0
           delivery: self
           duration:
-            unit: instant
+            raw: '5'
+            unit: minute
           effectTypes:
             - resistance
           endCondition: <p>You die or 1 minute passes without combat.</p>
@@ -163,7 +159,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
         name: Battle Cry Aura
         system:
@@ -267,7 +263,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/cowardly.webp
         name: Cowardly
         system:
@@ -345,7 +341,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/ethereal-shift.webp
         name: Ethereal Shift
         system:
@@ -420,10 +416,27 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/flame-magic-immunity.webp
         name: Flame Magic Immunity
         system:
+          automations:
+            xZIxOJyyEtQRrD73:
+              _id: xZIxOJyyEtQRrD73
+              category: elements
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 0
+                - 1
+              relation: immunities
+              type: protection
+              value: flame
           competence:
             raw: 0
           delivery: self
@@ -472,7 +485,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/full-undead.webp
         name: Full Undead
         system:
@@ -526,36 +539,15 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/undying-durability.webp
         name: Undying Durability
         system:
           _sup: ZEo6876sjQIA3ARP
           automations:
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
-              changes:
-                - key: system.protections.immunities.statuses
-                  phase: normal
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  type: add
-                  value: unconscious
-                - key: system.protections.immunities.statuses
-                  phase: normal
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  type: add
-                  value: suffocating
-                - key: system.protections.immunities.statuses
-                  phase: normal
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  type: add
-                  value: poisoned
+            HaVjAr78BgQGd92W:
+              _id: HaVjAr78BgQGd92W
+              category: statuses
               competencies:
                 - 0
                 - 1
@@ -564,9 +556,43 @@ items:
                 - 0
                 - 1
               heighten:
-                - 1
                 - 0
-              type: changes
+                - 1
+              relation: immunities
+              type: protection
+              value: poisoned
+            OlGtbdaImhaj6OiM:
+              _id: OlGtbdaImhaj6OiM
+              category: statuses
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 0
+                - 1
+              relation: immunities
+              type: protection
+              value: suffocating
+            W3eMyYlHd3WnCnAm:
+              _id: W3eMyYlHd3WnCnAm
+              category: statuses
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 0
+                - 1
+              relation: immunities
+              type: protection
+              value: unconscious
           competence:
             raw: 0
           delivery: self
@@ -620,7 +646,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
         name: Healing Sensitivity
         system:
@@ -674,22 +700,15 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/impure-durability.webp
         name: Impure Durability
         system:
           _sup: ZEo6876sjQIA3ARP
           automations:
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
-              changes:
-                - key: system.protections.immunities.damageTypes
-                  phase: normal
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  type: add
-                  value: Non-magical Non-silver
+            uevhIJEJYaY0sz5X:
+              _id: uevhIJEJYaY0sz5X
+              category: other
               competencies:
                 - 0
                 - 1
@@ -698,9 +717,11 @@ items:
                 - 0
                 - 1
               heighten:
-                - 1
                 - 0
-              type: changes
+                - 1
+              relation: immunities
+              type: protection
+              value: Non-Magical Non-Silver Damage
           competence:
             raw: 0
           delivery: self
@@ -746,29 +767,15 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/undead-mind.webp
         name: Undead Mind
         system:
           _sup: ZEo6876sjQIA3ARP
           automations:
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
-              changes:
-                - key: system.protections.immunities.statuses
-                  phase: normal
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  type: add
-                  value: frightened
-                - key: system.protections.immunities.statuses
-                  phase: normal
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  type: add
-                  value: charmed
+            EEiHRIyCxZhUuw07:
+              _id: EEiHRIyCxZhUuw07
+              category: statuses
               competencies:
                 - 0
                 - 1
@@ -777,9 +784,27 @@ items:
                 - 0
                 - 1
               heighten:
-                - 1
                 - 0
-              type: changes
+                - 1
+              relation: immunities
+              type: protection
+              value: charmed
+            Glnnr440sVehTfZ5:
+              _id: Glnnr440sVehTfZ5
+              category: statuses
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 0
+                - 1
+              relation: immunities
+              type: protection
+              value: frightened
           competence:
             raw: 0
           delivery: self
@@ -824,11 +849,11 @@ items:
         _key: >-
           !actors.items.effects!2422d369680746df.2422d369680746df.lYB9QR3c99nk6cOj
         _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.2rxzRucyitmqyDmQ
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.iVgITml3cqPn1n2F
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/ethereal-senses.webp
         name: Ethereal Senses
         system:
@@ -903,7 +928,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/mana-drain-grasp.webp
         name: Mana Drain Grasp
         system:
@@ -990,7 +1015,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/ghostlike.webp
         name: Ghostlike
         system:
@@ -1036,7 +1061,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/hide.webp
         name: Hide
         system:
@@ -1140,7 +1165,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/incorporeal.webp
         name: Incorporeal
         system:
@@ -1213,7 +1238,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/low-strength.webp
         name: Low Strength
         system:
@@ -1259,7 +1284,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
@@ -1305,7 +1330,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
@@ -1351,7 +1376,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/normal-strength.webp
         name: Normal Strength
         system:
@@ -1397,7 +1422,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/shock-touch.webp
         name: Shock Touch
         system:
@@ -1538,7 +1563,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/stealth.webp
         name: Stealth
         system:
@@ -1602,10 +1627,27 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/storm-magic-immunity.webp
         name: Storm Magic Immunity
         system:
+          automations:
+            F2M0w5nw61kVua0H:
+              _id: F2M0w5nw61kVua0H
+              category: elements
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 0
+                - 1
+              relation: immunities
+              type: protection
+              value: storm
           competence:
             raw: 0
           delivery: self
@@ -1617,6 +1659,7 @@ items:
             unit: unlimited
           effectTypes:
             - immunity
+            - magical
           executionTime:
             base: passive
             slow:
@@ -1654,7 +1697,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/unbound-immunity.webp
         name: Unbound Immunity
         system:
@@ -1726,6 +1769,103 @@ items:
         img: systems/teriock/src/icons/tokens/banshee.webp
         ring: true
     type: species
+  - _id: 78M5VTz2luiw3UxG
+    _key: '!actors.items!2422d369680746df.78M5VTz2luiw3UxG'
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.c9c371f95c92bc7c
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.16
+    effects:
+      - _id: CmkJGGebZrjvIBwd
+        _key: >-
+          !actors.items.effects!2422d369680746df.78M5VTz2luiw3UxG.CmkJGGebZrjvIBwd
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.294cd7a4f1545ed9
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.16
+        img: systems/teriock/src/icons/properties/bashing.webp
+        name: Bashing
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with the <b>[[lookup name style=lc]]</b> property is not
+            a weapon, but can still be used to make a @L[Ability:Basic
+            Attack]{Basic Attack}.</p>
+          form: intrinsic
+          identifier: bashing
+          mundane: true
+        transfer: true
+        type: property
+      - _id: fq8owR84sFsgLiuj
+        _key: >-
+          !actors.items.effects!2422d369680746df.78M5VTz2luiw3UxG.fq8owR84sFsgLiuj
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.870df3b7da4ce4b8
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.16
+        img: icons/creatures/abilities/mouth-teeth-long-red.webp
+        name: Biting
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with this property can be used to deliver
+            @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
+          form: intrinsic
+          identifier: biting
+          mundane: true
+        transfer: true
+        type: property
+      - _id: 4WFL62wofj7AHBxN
+        _key: >-
+          !actors.items.effects!2422d369680746df.78M5VTz2luiw3UxG.4WFL62wofj7AHBxN
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.3d2cc8d952adebec
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.16
+        img: systems/teriock/src/icons/properties/small.webp
+        name: Small
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with this property is easily concealed and can often be
+            used in the same hand as a @L[Category:Shields]{shield}.</p>
+          form: intrinsic
+          identifier: small
+          mundane: true
+        transfer: true
+        type: property
+    folder: b8dcf1ebf1b3e669
+    img: icons/creatures/abilities/mouth-teeth-human.webp
+    name: Mouth
+    system:
+      _sup: 2422d369680746df
+      attackPenalty: '-3'
+      competence:
+        raw: 0
+      damage:
+        base: '1'
+      fightingStyle: savage
+      identifier: mouth
+      range:
+        long:
+          unit: melee
+        melee: true
+        ranged: false
+        short:
+          unit: self
+      vitals: false
+    type: body
   - _id: sfYxeCsdamoCsLBi
     _key: '!actors.items!2422d369680746df.sfYxeCsdamoCsLBi'
     _stats:
@@ -1733,7 +1873,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     effects:
       - _id: HVkT9rIkTVbfdXWn
         _key: >-
@@ -1743,7 +1883,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -1765,7 +1905,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/properties/prehensile.webp
         name: Prehensile
         system:
@@ -1787,7 +1927,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -1815,103 +1955,6 @@ items:
         base: 1d6
       fightingStyle: savage
       identifier: prehensile-sharp-claw
-      range:
-        long:
-          unit: melee
-        melee: true
-        ranged: false
-        short:
-          unit: self
-      vitals: false
-    type: body
-  - _id: 78M5VTz2luiw3UxG
-    _key: '!actors.items!2422d369680746df.78M5VTz2luiw3UxG'
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.c9c371f95c92bc7c
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.15
-    effects:
-      - _id: CmkJGGebZrjvIBwd
-        _key: >-
-          !actors.items.effects!2422d369680746df.78M5VTz2luiw3UxG.CmkJGGebZrjvIBwd
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.294cd7a4f1545ed9
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.15
-        img: systems/teriock/src/icons/properties/bashing.webp
-        name: Bashing
-        system:
-          competence:
-            raw: 0
-          description: >-
-            <p>An item with the <b>[[lookup name style=lc]]</b> property is not
-            a weapon, but can still be used to make a @L[Ability:Basic
-            Attack]{Basic Attack}.</p>
-          form: intrinsic
-          identifier: bashing
-          mundane: true
-        transfer: true
-        type: property
-      - _id: fq8owR84sFsgLiuj
-        _key: >-
-          !actors.items.effects!2422d369680746df.78M5VTz2luiw3UxG.fq8owR84sFsgLiuj
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.870df3b7da4ce4b8
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.15
-        img: icons/creatures/abilities/mouth-teeth-long-red.webp
-        name: Biting
-        system:
-          competence:
-            raw: 0
-          description: >-
-            <p>An item with this property can be used to deliver
-            @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
-          form: intrinsic
-          identifier: biting
-          mundane: true
-        transfer: true
-        type: property
-      - _id: 4WFL62wofj7AHBxN
-        _key: >-
-          !actors.items.effects!2422d369680746df.78M5VTz2luiw3UxG.4WFL62wofj7AHBxN
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.3d2cc8d952adebec
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.15
-        img: systems/teriock/src/icons/properties/small.webp
-        name: Small
-        system:
-          competence:
-            raw: 0
-          description: >-
-            <p>An item with this property is easily concealed and can often be
-            used in the same hand as a @L[Category:Shields]{shield}.</p>
-          form: intrinsic
-          identifier: small
-          mundane: true
-        transfer: true
-        type: property
-    folder: b8dcf1ebf1b3e669
-    img: icons/creatures/abilities/mouth-teeth-human.webp
-    name: Mouth
-    system:
-      _sup: 2422d369680746df
-      attackPenalty: '-3'
-      competence:
-        raw: 0
-      damage:
-        base: '1'
-      fightingStyle: savage
-      identifier: mouth
       range:
         long:
           unit: melee
@@ -1958,6 +2001,6 @@ system:
     number:
       raw: '3'
   wielding:
-    attacker: 78M5VTz2luiw3UxG
+    attacker: sfYxeCsdamoCsLBi
     blocker: sfYxeCsdamoCsLBi
 type: creature

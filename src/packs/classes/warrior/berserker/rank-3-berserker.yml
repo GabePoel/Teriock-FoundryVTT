@@ -117,7 +117,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     flags:
       teriock:
         category: support
@@ -194,7 +194,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     flags:
       teriock:
         category: combat
@@ -214,16 +214,9 @@ effects:
             - 0
           hex: false
           type: resist
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.protections.resistances.other
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: add
-              value: Conjured Spells
+        TvGlbqdqbeSBADzw:
+          _id: TvGlbqdqbeSBADzw
+          category: other
           competencies:
             - 0
             - 1
@@ -232,9 +225,11 @@ effects:
             - 0
             - 1
           heighten:
-            - 1
             - 0
-          type: changes
+            - 1
+          relation: resistances
+          type: protection
+          value: Non-Self Conjured Spells
       class: berserker
       competence:
         raw: 0
@@ -378,11 +373,11 @@ effects:
   - _id: GdB9HOLG829lz7Sl
     _key: '!items.effects!2c16e58cb4fa959b.GdB9HOLG829lz7Sl'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.AyDa3orgfgOAAjM3
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.EORCpLPDSV6sGlHv
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
     name: Battle Cry Resistance
     system:
@@ -400,16 +395,9 @@ effects:
             - 0
           hex: false
           type: resist
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.protections.resistances.statuses
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: add
-              value: frightened
+        oJH3v7kvIbVGDlBS:
+          _id: oJH3v7kvIbVGDlBS
+          category: statuses
           competencies:
             - 0
             - 1
@@ -418,15 +406,18 @@ effects:
             - 0
             - 1
           heighten:
-            - 1
             - 0
-          type: changes
+            - 1
+          relation: resistances
+          type: protection
+          value: frightened
       class: berserker
       competence:
         raw: 0
       delivery: self
       duration:
-        unit: instant
+        raw: '5'
+        unit: minute
       effectTypes:
         - resistance
       endCondition: <p>You die or 1 minute passes without combat.</p>
@@ -467,7 +458,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
     name: Battle Cry Aura
     system:
@@ -563,15 +554,46 @@ effects:
   - _id: MYyqi5yzQae1lDdZ
     _key: '!items.effects!2c16e58cb4fa959b.MYyqi5yzQae1lDdZ'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.893fcvZobPPPIAuu
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.VcgCaSiWMSU15jS8
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/terrify.webp
     name: Terrify
     system:
       _sup: UrlBZBiVT2ktwrD9
+      automations:
+        29b275994cf9f5b1:
+          _id: 29b275994cf9f5b1
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: 1d4[psychic]
+          heighten:
+            - 1
+            - 0
+          impact: damage
+          merge: true
+          type: roll
+        b4960732f0b9ed9f:
+          _id: b4960732f0b9ed9f
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          executor: false
+          heighten:
+            - 1
+            - 0
+          relation: include
+          status: frightened
+          target: false
+          type: status
       class: berserker
       competence:
         raw: 0
@@ -622,7 +644,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/intimidating-presence.webp
     name: Intimidating Presence
     system:

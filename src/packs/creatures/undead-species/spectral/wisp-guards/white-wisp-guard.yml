@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     effects:
       - _id: 2kzdINqe2tnW0rNW
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/animate-dead.webp
         name: Animate Dead
         system:
@@ -101,7 +101,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/attack-resistance.webp
         name: Attack Resistance
         system:
@@ -118,16 +118,9 @@ items:
                 - 0
               hex: false
               type: resist
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
-              changes:
-                - key: system.protections.resistances.other
-                  phase: normal
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  type: add
-                  value: Non-critical Attacks
+            VYVCQh90IYJBSK1s:
+              _id: VYVCQh90IYJBSK1s
+              category: other
               competencies:
                 - 0
                 - 1
@@ -136,9 +129,11 @@ items:
                 - 0
                 - 1
               heighten:
-                - 1
                 - 0
-              type: changes
+                - 1
+              relation: resistances
+              type: protection
+              value: Non-Critical Attacks
           competence:
             raw: 0
           delivery: self
@@ -183,7 +178,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/ethereal-shift.webp
         name: Ethereal Shift
         system:
@@ -258,7 +253,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/full-undead.webp
         name: Full Undead
         system:
@@ -312,36 +307,15 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/undying-durability.webp
         name: Undying Durability
         system:
           _sup: UErtstn5l7Phnr3l
           automations:
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
-              changes:
-                - key: system.protections.immunities.statuses
-                  phase: normal
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  type: add
-                  value: unconscious
-                - key: system.protections.immunities.statuses
-                  phase: normal
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  type: add
-                  value: suffocating
-                - key: system.protections.immunities.statuses
-                  phase: normal
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  type: add
-                  value: poisoned
+            HaVjAr78BgQGd92W:
+              _id: HaVjAr78BgQGd92W
+              category: statuses
               competencies:
                 - 0
                 - 1
@@ -350,9 +324,43 @@ items:
                 - 0
                 - 1
               heighten:
-                - 1
                 - 0
-              type: changes
+                - 1
+              relation: immunities
+              type: protection
+              value: poisoned
+            OlGtbdaImhaj6OiM:
+              _id: OlGtbdaImhaj6OiM
+              category: statuses
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 0
+                - 1
+              relation: immunities
+              type: protection
+              value: suffocating
+            W3eMyYlHd3WnCnAm:
+              _id: W3eMyYlHd3WnCnAm
+              category: statuses
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 0
+                - 1
+              relation: immunities
+              type: protection
+              value: unconscious
           competence:
             raw: 0
           delivery: self
@@ -406,7 +414,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
         name: Healing Sensitivity
         system:
@@ -460,22 +468,15 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/impure-durability.webp
         name: Impure Durability
         system:
           _sup: UErtstn5l7Phnr3l
           automations:
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
-              changes:
-                - key: system.protections.immunities.damageTypes
-                  phase: normal
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  type: add
-                  value: Non-magical Non-silver
+            uevhIJEJYaY0sz5X:
+              _id: uevhIJEJYaY0sz5X
+              category: other
               competencies:
                 - 0
                 - 1
@@ -484,9 +485,11 @@ items:
                 - 0
                 - 1
               heighten:
-                - 1
                 - 0
-              type: changes
+                - 1
+              relation: immunities
+              type: protection
+              value: Non-Magical Non-Silver Damage
           competence:
             raw: 0
           delivery: self
@@ -532,29 +535,15 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/undead-mind.webp
         name: Undead Mind
         system:
           _sup: UErtstn5l7Phnr3l
           automations:
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
-              changes:
-                - key: system.protections.immunities.statuses
-                  phase: normal
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  type: add
-                  value: frightened
-                - key: system.protections.immunities.statuses
-                  phase: normal
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  type: add
-                  value: charmed
+            EEiHRIyCxZhUuw07:
+              _id: EEiHRIyCxZhUuw07
+              category: statuses
               competencies:
                 - 0
                 - 1
@@ -563,9 +552,27 @@ items:
                 - 0
                 - 1
               heighten:
-                - 1
                 - 0
-              type: changes
+                - 1
+              relation: immunities
+              type: protection
+              value: charmed
+            Glnnr440sVehTfZ5:
+              _id: Glnnr440sVehTfZ5
+              category: statuses
+              competencies:
+                - 0
+                - 1
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 0
+                - 1
+              relation: immunities
+              type: protection
+              value: frightened
           competence:
             raw: 0
           delivery: self
@@ -610,11 +617,11 @@ items:
         _key: >-
           !actors.items.effects!d614c092db51c2c8.d614c092db51c2c8.EEN5KBR2CGndlLIT
         _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.2rxzRucyitmqyDmQ
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.iVgITml3cqPn1n2F
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/ethereal-senses.webp
         name: Ethereal Senses
         system:
@@ -689,7 +696,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/mana-drain-grasp.webp
         name: Mana Drain Grasp
         system:
@@ -776,7 +783,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/ghostlike.webp
         name: Ghostlike
         system:
@@ -822,7 +829,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/incorporeal.webp
         name: Incorporeal
         system:
@@ -895,7 +902,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/normal-intelligence.webp
         name: Normal Intelligence
         system:
@@ -941,7 +948,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
@@ -987,7 +994,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
@@ -1033,7 +1040,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/tiny-strength.webp
         name: Tiny Strength
         system:
@@ -1079,7 +1086,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/zombify.webp
         name: Zombify
         system:
@@ -1249,7 +1256,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     effects:
       - _id: 06z0wz68hsmApPL9
         _key: >-
@@ -1259,7 +1266,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/hibernation-shield.webp
         name: Hibernation Shield
         system:
@@ -1323,7 +1330,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         flags:
           teriock:
             dontConsume: false
@@ -1458,7 +1465,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/medicine-ball.webp
         name: Medicine Ball
         system:
@@ -1541,7 +1548,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/resurrect.webp
         name: Resurrect
         system:
@@ -1646,7 +1653,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/hibernation.webp
         name: Hibernation
         system:
@@ -1719,24 +1726,24 @@ items:
           disabled: false
           formula: 1d12
     type: rank
-  - _id: ML4WEEU8qEE6WQg1
-    _key: '!actors.items!d614c092db51c2c8.ML4WEEU8qEE6WQg1'
+  - _id: RRYRbn8QA9ouJcv2
+    _key: '!actors.items!d614c092db51c2c8.RRYRbn8QA9ouJcv2'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.4a095aaed0254ec3
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     effects:
       - _id: NGCuRUaVtXnxAbRe
         _key: >-
-          !actors.items.effects!d614c092db51c2c8.ML4WEEU8qEE6WQg1.NGCuRUaVtXnxAbRe
+          !actors.items.effects!d614c092db51c2c8.RRYRbn8QA9ouJcv2.NGCuRUaVtXnxAbRe
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.ac35fb736d8bd407
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/arcane-ray.webp
         name: Arcane Ray
         system:
@@ -1813,13 +1820,13 @@ items:
         type: ability
       - _id: aCWLNsvSFjEuLTyl
         _key: >-
-          !actors.items.effects!d614c092db51c2c8.ML4WEEU8qEE6WQg1.aCWLNsvSFjEuLTyl
+          !actors.items.effects!d614c092db51c2c8.RRYRbn8QA9ouJcv2.aCWLNsvSFjEuLTyl
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.30358f2e8d9b3a0a
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/staff-touch.webp
         name: Staff Touch
         system:

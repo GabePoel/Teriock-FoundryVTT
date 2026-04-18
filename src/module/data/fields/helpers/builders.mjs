@@ -1,6 +1,6 @@
 import { competenceOptions } from "../../../constants/options/competence-options.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
-import { objectMap, sortObject } from "../../../helpers/utils.mjs";
+import { objectMap } from "../../../helpers/utils.mjs";
 import {
   EnhancedNumberField,
   EnhancedStringField,
@@ -40,7 +40,7 @@ export function combatExpirationSourceTypeField() {
 }
 
 /**
- * Field for method portion of combat expiration.
+ * Field for method of combat expiration.
  * @returns {SchemaField} Timing field.
  */
 export function combatExpirationMethodField() {
@@ -69,7 +69,7 @@ export function combatExpirationMethodField() {
 }
 
 /**
- * Field for timing portion of combat expiration.
+ * Field for timing of combat expiration.
  * @returns {SchemaField}
  */
 export function combatExpirationTimingField() {
@@ -120,19 +120,6 @@ export function changeTypeField() {
  * @returns {SchemaField}
  */
 export function qualifiedChangeField() {
-  const allTypes = {
-    Actor: "TERIOCK.CHANGES.Targets.Actor",
-    Item: "TERIOCK.CHANGES.Targets.Item",
-    ActiveEffect: "TERIOCK.CHANGES.Targets.ActiveEffect",
-    parent: "TERIOCK.CHANGES.Targets.parent",
-  };
-  const subTypes = {
-    armament: "TERIOCK.CHANGES.Targets.armament",
-  };
-  Object.assign(subTypes, TERIOCK.system.documentTypes.actors);
-  Object.assign(subTypes, TERIOCK.system.documentTypes.items);
-  Object.assign(subTypes, TERIOCK.system.documentTypes.effects);
-  Object.assign(allTypes, sortObject(subTypes));
   return new SchemaField({
     key: new EnhancedStringField({
       initial: "",
@@ -156,7 +143,7 @@ export function qualifiedChangeField() {
       label: "TERIOCK.SCHEMA.QualifiedChange.qualifier.label",
     }),
     target: new EnhancedStringField({
-      choices: localizeChoices(allTypes),
+      choices: localizeChoices(TERIOCK.options.change.target),
       initial: "Actor",
       label: "TERIOCK.SCHEMA.QualifiedChange.target.label",
       nullable: false,
@@ -304,9 +291,7 @@ export function blockGaplessField(options = {}) {
     options;
   return new BooleanField({
     initial,
-    label: _loc("TERIOCK.SCHEMA.BlackGapless.label", {
-      name: _loc(child),
-    }),
+    label: _loc("TERIOCK.SCHEMA.BlackGapless.label", { name: _loc(child) }),
     hint: _loc("TERIOCK.SCHEMA.BlackGapless.hint", {
       name: _loc(child).toLocaleLowerCase(),
     }),

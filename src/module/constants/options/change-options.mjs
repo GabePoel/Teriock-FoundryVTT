@@ -1,11 +1,5 @@
 import { preLocalize } from "../../helpers/localization.mjs";
 
-export const targets = {
-  ancestors: "TERIOCK.CHANGES.Targets.ancestors",
-  all: "TERIOCK.CHANGES.Targets.all",
-};
-preLocalize("options.change.targets");
-
 export const phase = {
   proficiency: {
     hint: "TERIOCK.CHANGES.Phase.proficiency.hint",
@@ -29,4 +23,14 @@ export const phase = {
   },
 };
 
+export const target = {
+  Actor: "TERIOCK.CHANGES.Target.Actor",
+  parent: "TERIOCK.CHANGES.Target.parent",
+  ability: "TERIOCK.CHANGES.Target.ability",
+  armament: "TERIOCK.CHANGES.Target.armament",
+  body: "TERIOCK.CHANGES.Target.body",
+  equipment: "TERIOCK.CHANGES.Target.equipment",
+};
+
 preLocalize("options.change.phase", { keys: ["hint", "label"] });
+preLocalize("options.change.target");

@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.15
+  systemVersion: 0.12.16
 folder: f2c29b199c990ab7
 img: systems/teriock/src/icons/creatures/faerie.webp
 items:
@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     effects:
       - _id: ez15OkiMkB1YPk2C
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/attack-resistance.webp
         name: Attack Resistance
         system:
@@ -42,16 +42,9 @@ items:
                 - 0
               hex: false
               type: resist
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
-              changes:
-                - key: system.protections.resistances.other
-                  phase: normal
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  type: add
-                  value: Non-critical Attacks
+            VYVCQh90IYJBSK1s:
+              _id: VYVCQh90IYJBSK1s
+              category: other
               competencies:
                 - 0
                 - 1
@@ -60,9 +53,11 @@ items:
                 - 0
                 - 1
               heighten:
-                - 1
                 - 0
-              type: changes
+                - 1
+              relation: resistances
+              type: protection
+              value: Non-Critical Attacks
           competence:
             raw: 0
           delivery: self
@@ -107,7 +102,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/elusive.webp
         name: Elusive
         system:
@@ -153,21 +148,15 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/fae-elder-sorcery.webp
         name: Fae Elder Sorcery
         system:
           automations:
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
-              changes:
-                - key: system.competence.raw
-                  phase: fluency
-                  priority: 10
-                  qualifier: '@identifier.innate-elder-sorcery'
-                  target: ability
-                  type: upgrade
-                  value: '2'
+            EcZXEU06Mtg8nQ04:
+              _id: EcZXEU06Mtg8nQ04
+              competence:
+                raw: 2
               competencies:
                 - 0
                 - 1
@@ -176,9 +165,10 @@ items:
                 - 0
                 - 1
               heighten:
-                - 1
                 - 0
-              type: changes
+                - 1
+              identifier: ability:innate-elder-sorcery
+              type: changeCompetence
           competence:
             raw: 0
           delivery: self
@@ -232,55 +222,68 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/innate-elder-sorcery.webp
         name: Innate Elder Sorcery
         system:
           _sup: Xt6QGffheY3y2h7I
           automations:
-            f025905e157ac261:
-              _id: f025905e157ac261
-              changes:
-                - key: system.competence.raw
-                  phase: proficiency
-                  priority: 10
-                  qualifier: >-
-                    or(@identifier.elder-sorcery-creation,
-                    @identifier.all-elder-sorcery-words)
-                  target: ability
-                  type: upgrade
-                  value: '1'
+            IcIHebYPkEqIqVWZ:
+              _id: IcIHebYPkEqIqVWZ
+              competence:
+                raw: 1
               competencies:
                 - 1
-                - 2
               crit:
                 - 0
                 - 1
               heighten:
-                - 1
                 - 0
-              type: changes
-            f7da3b5e1992a724:
-              _id: f7da3b5e1992a724
-              changes:
-                - key: system.competence.raw
-                  phase: fluency
-                  priority: 10
-                  qualifier: >-
-                    or(@identifier.elder-sorcery-creation,
-                    @identifier.all-elder-sorcery-words)
-                  target: ability
-                  type: upgrade
-                  value: '2'
+                - 1
+              identifier: ability:all-elder-sorcery-words
+              type: changeCompetence
+            K7UQWKx6i7WyBkLS:
+              _id: K7UQWKx6i7WyBkLS
+              competence:
+                raw: 2
               competencies:
                 - 2
               crit:
                 - 0
                 - 1
               heighten:
-                - 1
                 - 0
-              type: changes
+                - 1
+              identifier: ability:elder-sorcery-creation
+              type: changeCompetence
+            Kkl4bRexmERpCT2s:
+              _id: Kkl4bRexmERpCT2s
+              competence:
+                raw: 2
+              competencies:
+                - 2
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 0
+                - 1
+              identifier: ability:all-elder-sorcery-words
+              type: changeCompetence
+            bgZtShTjbCNE0vu7:
+              _id: bgZtShTjbCNE0vu7
+              competence:
+                raw: 1
+              competencies:
+                - 1
+              crit:
+                - 0
+                - 1
+              heighten:
+                - 0
+                - 1
+              identifier: ability:elder-sorcery-creation
+              type: changeCompetence
           competence:
             raw: 0
           delivery: self
@@ -343,7 +346,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/all-elder-sorcery-words.webp
         name: All Elder Sorcery Words
         system:
@@ -608,11 +611,11 @@ items:
         _key: >-
           !actors.items.effects!64f7abbf3eef4f25.64f7abbf3eef4f25.9qP8JKLsl76jEjvX
         _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.0BxTrblkpcGWwCHe
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.0q5khIx32nw3ihVe
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/elder-sorcery-creation.webp
         name: Elder Sorcery Creation
         system:
@@ -700,7 +703,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/flying.webp
         name: Flying
         system:
@@ -803,7 +806,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/infinite-lifespan.webp
         name: Infinite Lifespan
         system:
@@ -850,7 +853,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/mana-regenerating.webp
         name: Mana Regenerating
         system:
@@ -939,7 +942,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/night-vision.webp
         name: Night Vision
         system:
@@ -1009,7 +1012,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/normal-intelligence.webp
         name: Normal Intelligence
         system:
@@ -1055,7 +1058,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
@@ -1101,7 +1104,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
@@ -1147,7 +1150,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/thin-soul.webp
         name: Thin Soul
         system:
@@ -1215,7 +1218,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/abilities/tiny-strength.webp
         name: Tiny Strength
         system:
@@ -1284,24 +1287,24 @@ items:
         img: systems/teriock/src/icons/tokens/faerie.webp
         ring: true
     type: species
-  - _id: m7RBY0jR1Zyyiyfh
-    _key: '!actors.items!64f7abbf3eef4f25.m7RBY0jR1Zyyiyfh'
+  - _id: 77dQj4CjQ2BEF1mO
+    _key: '!actors.items!64f7abbf3eef4f25.77dQj4CjQ2BEF1mO'
     _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.079ffd850d9567f9
+      compendiumSource: Compendium.teriock.bodyParts.Item.c9c371f95c92bc7c
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     effects:
-      - _id: TWk5AP5nzZgpXkaM
+      - _id: CmkJGGebZrjvIBwd
         _key: >-
-          !actors.items.effects!64f7abbf3eef4f25.m7RBY0jR1Zyyiyfh.TWk5AP5nzZgpXkaM
+          !actors.items.effects!64f7abbf3eef4f25.77dQj4CjQ2BEF1mO.CmkJGGebZrjvIBwd
         _stats:
           compendiumSource: Compendium.teriock.properties.ActiveEffect.294cd7a4f1545ed9
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -1316,15 +1319,37 @@ items:
           mundane: true
         transfer: true
         type: property
-      - _id: IDLUUjkSFtpaiKuJ
+      - _id: fq8owR84sFsgLiuj
         _key: >-
-          !actors.items.effects!64f7abbf3eef4f25.m7RBY0jR1Zyyiyfh.IDLUUjkSFtpaiKuJ
+          !actors.items.effects!64f7abbf3eef4f25.77dQj4CjQ2BEF1mO.fq8owR84sFsgLiuj
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.870df3b7da4ce4b8
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.16
+        img: icons/creatures/abilities/mouth-teeth-long-red.webp
+        name: Biting
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with this property can be used to deliver
+            @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
+          form: intrinsic
+          identifier: biting
+          mundane: true
+        transfer: true
+        type: property
+      - _id: 4WFL62wofj7AHBxN
+        _key: >-
+          !actors.items.effects!64f7abbf3eef4f25.77dQj4CjQ2BEF1mO.4WFL62wofj7AHBxN
         _stats:
           compendiumSource: Compendium.teriock.properties.ActiveEffect.3d2cc8d952adebec
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -1339,8 +1364,8 @@ items:
         transfer: true
         type: property
     folder: f2c29b199c990ab7
-    img: systems/teriock/src/icons/body-parts/foot.webp
-    name: Foot
+    img: icons/creatures/abilities/mouth-teeth-human.webp
+    name: Mouth
     system:
       _sup: 64f7abbf3eef4f25
       attackPenalty: '-3'
@@ -1348,7 +1373,8 @@ items:
         raw: 0
       damage:
         base: '1'
-      identifier: foot
+      fightingStyle: savage
+      identifier: mouth
       range:
         long:
           unit: melee
@@ -1365,7 +1391,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     effects:
       - _id: H7Q5z5528FgfgbLp
         _key: >-
@@ -1375,7 +1401,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -1398,7 +1424,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -1420,7 +1446,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/properties/prehensile.webp
         name: Prehensile
         system:
@@ -1442,7 +1468,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -1476,24 +1502,24 @@ items:
           unit: self
       vitals: false
     type: body
-  - _id: 77dQj4CjQ2BEF1mO
-    _key: '!actors.items!64f7abbf3eef4f25.77dQj4CjQ2BEF1mO'
+  - _id: m7RBY0jR1Zyyiyfh
+    _key: '!actors.items!64f7abbf3eef4f25.m7RBY0jR1Zyyiyfh'
     _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.c9c371f95c92bc7c
+      compendiumSource: Compendium.teriock.bodyParts.Item.079ffd850d9567f9
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     effects:
-      - _id: CmkJGGebZrjvIBwd
+      - _id: TWk5AP5nzZgpXkaM
         _key: >-
-          !actors.items.effects!64f7abbf3eef4f25.77dQj4CjQ2BEF1mO.CmkJGGebZrjvIBwd
+          !actors.items.effects!64f7abbf3eef4f25.m7RBY0jR1Zyyiyfh.TWk5AP5nzZgpXkaM
         _stats:
           compendiumSource: Compendium.teriock.properties.ActiveEffect.294cd7a4f1545ed9
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -1508,37 +1534,15 @@ items:
           mundane: true
         transfer: true
         type: property
-      - _id: fq8owR84sFsgLiuj
+      - _id: IDLUUjkSFtpaiKuJ
         _key: >-
-          !actors.items.effects!64f7abbf3eef4f25.77dQj4CjQ2BEF1mO.fq8owR84sFsgLiuj
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.870df3b7da4ce4b8
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.15
-        img: icons/creatures/abilities/mouth-teeth-long-red.webp
-        name: Biting
-        system:
-          competence:
-            raw: 0
-          description: >-
-            <p>An item with this property can be used to deliver
-            @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
-          form: intrinsic
-          identifier: biting
-          mundane: true
-        transfer: true
-        type: property
-      - _id: 4WFL62wofj7AHBxN
-        _key: >-
-          !actors.items.effects!64f7abbf3eef4f25.77dQj4CjQ2BEF1mO.4WFL62wofj7AHBxN
+          !actors.items.effects!64f7abbf3eef4f25.m7RBY0jR1Zyyiyfh.IDLUUjkSFtpaiKuJ
         _stats:
           compendiumSource: Compendium.teriock.properties.ActiveEffect.3d2cc8d952adebec
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.15
+          systemVersion: 0.12.16
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -1553,8 +1557,8 @@ items:
         transfer: true
         type: property
     folder: f2c29b199c990ab7
-    img: icons/creatures/abilities/mouth-teeth-human.webp
-    name: Mouth
+    img: systems/teriock/src/icons/body-parts/foot.webp
+    name: Foot
     system:
       _sup: 64f7abbf3eef4f25
       attackPenalty: '-3'
@@ -1562,8 +1566,7 @@ items:
         raw: 0
       damage:
         base: '1'
-      fightingStyle: savage
-      identifier: mouth
+      identifier: foot
       range:
         long:
           unit: melee
@@ -1610,6 +1613,6 @@ system:
     number:
       raw: '0.5'
   wielding:
-    attacker: 77dQj4CjQ2BEF1mO
-    blocker: 77dQj4CjQ2BEF1mO
+    attacker: m7RBY0jR1Zyyiyfh
+    blocker: m7RBY0jR1Zyyiyfh
 type: creature

@@ -321,7 +321,7 @@ export function inferIconFromIdentifier(identifier) {
  */
 export function parseIdentifier(identifier) {
   let type = null;
-  if (identifier.includes(":")) {
+  if (identifier && identifier.includes(":")) {
     const parts = identifier.split(":");
     type = parts[0];
     identifier = parts[1];

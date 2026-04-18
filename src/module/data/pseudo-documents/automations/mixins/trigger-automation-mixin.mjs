@@ -67,6 +67,13 @@ export default function TriggerAutomationMixin(Base) {
       }
 
       /** @inheritDoc */
+      static get metadata() {
+        return Object.assign(super.metadata, {
+          trigger: true,
+        });
+      }
+
+      /** @inheritDoc */
       static defineSchema() {
         const schema = Object.assign(super.defineSchema(), {
           trigger: new fields.StringField({

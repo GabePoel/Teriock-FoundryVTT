@@ -71,9 +71,9 @@ export default class AbilitySystem extends mix(
       automations.AbilityMacroAutomation,
       automations.AddDocumentsAutomation,
       automations.AttunementAutomation,
+      automations.ChangeCompetenceAutomation,
       automations.ChangeMovementAutomation,
       automations.ChangesAutomation,
-      automations.TradecraftAutomation,
       automations.CombatExpirationAutomation,
       automations.CommonOutcomesAutomation,
       automations.DurationAutomation,
@@ -88,6 +88,7 @@ export default class AbilitySystem extends mix(
       automations.StatusAutomation,
       automations.TakeAutomation,
       automations.TemplateAutomation,
+      automations.TradecraftAutomation,
       automations.TransformationAutomation,
       automations.UseDocumentsAutomation,
     ];

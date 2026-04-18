@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.15
+  systemVersion: 0.12.16
 effects:
   - _id: LwAI7wn5J5rQMAYM
     _key: '!items.effects!1e43038842a776d7.LwAI7wn5J5rQMAYM'
@@ -57,11 +57,11 @@ effects:
   - _id: FR8XvzZTOGO6Sbmk
     _key: '!items.effects!1e43038842a776d7.FR8XvzZTOGO6Sbmk'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.AyDa3orgfgOAAjM3
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.EORCpLPDSV6sGlHv
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
     name: Battle Cry Resistance
     system:
@@ -79,16 +79,9 @@ effects:
             - 0
           hex: false
           type: resist
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.protections.resistances.statuses
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: add
-              value: frightened
+        oJH3v7kvIbVGDlBS:
+          _id: oJH3v7kvIbVGDlBS
+          category: statuses
           competencies:
             - 0
             - 1
@@ -97,15 +90,18 @@ effects:
             - 0
             - 1
           heighten:
-            - 1
             - 0
-          type: changes
+            - 1
+          relation: resistances
+          type: protection
+          value: frightened
       class: berserker
       competence:
         raw: 0
       delivery: self
       duration:
-        unit: instant
+        raw: '5'
+        unit: minute
       effectTypes:
         - resistance
       endCondition: <p>You die or 1 minute passes without combat.</p>
@@ -146,7 +142,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
     name: Battle Cry Aura
     system:
@@ -407,36 +403,15 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/undying-durability.webp
     name: Undying Durability
     system:
       _sup: dCdVy1TPiNGUEbiv
       automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.protections.immunities.statuses
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: add
-              value: unconscious
-            - key: system.protections.immunities.statuses
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: add
-              value: suffocating
-            - key: system.protections.immunities.statuses
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: add
-              value: poisoned
+        HaVjAr78BgQGd92W:
+          _id: HaVjAr78BgQGd92W
+          category: statuses
           competencies:
             - 0
             - 1
@@ -445,9 +420,43 @@ effects:
             - 0
             - 1
           heighten:
-            - 1
             - 0
-          type: changes
+            - 1
+          relation: immunities
+          type: protection
+          value: poisoned
+        OlGtbdaImhaj6OiM:
+          _id: OlGtbdaImhaj6OiM
+          category: statuses
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 0
+            - 1
+          relation: immunities
+          type: protection
+          value: suffocating
+        W3eMyYlHd3WnCnAm:
+          _id: W3eMyYlHd3WnCnAm
+          category: statuses
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 0
+            - 1
+          relation: immunities
+          type: protection
+          value: unconscious
       competence:
         raw: 0
       delivery: self
@@ -552,22 +561,15 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/impure-durability.webp
     name: Impure Durability
     system:
       _sup: dCdVy1TPiNGUEbiv
       automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.protections.immunities.damageTypes
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: add
-              value: Non-magical Non-silver
+        uevhIJEJYaY0sz5X:
+          _id: uevhIJEJYaY0sz5X
+          category: other
           competencies:
             - 0
             - 1
@@ -576,9 +578,11 @@ effects:
             - 0
             - 1
           heighten:
-            - 1
             - 0
-          type: changes
+            - 1
+          relation: immunities
+          type: protection
+          value: Non-Magical Non-Silver Damage
       competence:
         raw: 0
       delivery: self
@@ -622,29 +626,15 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/undead-mind.webp
     name: Undead Mind
     system:
       _sup: dCdVy1TPiNGUEbiv
       automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.protections.immunities.statuses
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: add
-              value: frightened
-            - key: system.protections.immunities.statuses
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: add
-              value: charmed
+        EEiHRIyCxZhUuw07:
+          _id: EEiHRIyCxZhUuw07
+          category: statuses
           competencies:
             - 0
             - 1
@@ -653,9 +643,27 @@ effects:
             - 0
             - 1
           heighten:
-            - 1
             - 0
-          type: changes
+            - 1
+          relation: immunities
+          type: protection
+          value: charmed
+        Glnnr440sVehTfZ5:
+          _id: Glnnr440sVehTfZ5
+          category: statuses
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 0
+            - 1
+          relation: immunities
+          type: protection
+          value: frightened
       competence:
         raw: 0
       delivery: self
@@ -699,11 +707,11 @@ effects:
   - _id: 1in6ey9R22mpsvDW
     _key: '!items.effects!1e43038842a776d7.1in6ey9R22mpsvDW'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.2rxzRucyitmqyDmQ
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.iVgITml3cqPn1n2F
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/ethereal-senses.webp
     name: Ethereal Senses
     system:
@@ -777,7 +785,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/mana-drain-grasp.webp
     name: Mana Drain Grasp
     system:
@@ -906,7 +914,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/ignite-self.webp
     name: Ignite Self
     system:
@@ -1057,15 +1065,112 @@ effects:
   - _id: ybNElMf4rPbDeFrK
     _key: '!items.effects!1e43038842a776d7.ybNElMf4rPbDeFrK'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.RNCHRJvVyXZPEvoA
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.RyFFAAlAAYdNnAGF
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/offensive-martial-arts.webp
     name: Offensive Martial Arts
     system:
       _sup: nLxwPKAkbe0nhkzU
+      automations:
+        29b275994cf9f5b1:
+          _id: 29b275994cf9f5b1
+          competencies:
+            - 0
+            - 1
+            - 2
+          formula: 1d4
+          heighten:
+            - 1
+            - 0
+          impact: damage
+          merge: true
+          type: roll
+        3f7fa7707643426f:
+          _id: 3f7fa7707643426f
+          competencies:
+            - 2
+          formula: 1d8
+          heighten:
+            - 1
+            - 0
+          impact: damage
+          merge: true
+          type: roll
+        5e4d195ed81a10cc:
+          _id: 5e4d195ed81a10cc
+          competencies:
+            - 1
+            - 2
+          formula: 1d6
+          heighten:
+            - 1
+            - 0
+          impact: damage
+          merge: true
+          type: roll
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.damage.base.raw
+              phase: normal
+              priority: 10
+              qualifier: '@prop.handy'
+              target: body
+              type: upgrade
+              value: 1d4
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+        f025905e157ac261:
+          _id: f025905e157ac261
+          changes:
+            - key: system.damage.base.raw
+              phase: normal
+              priority: 10
+              qualifier: '@prop.handy'
+              target: body
+              type: upgrade
+              value: 1d6
+          competencies:
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
+        f7da3b5e1992a724:
+          _id: f7da3b5e1992a724
+          changes:
+            - key: system.damage.base.raw
+              phase: normal
+              priority: 10
+              qualifier: '@prop.handy'
+              target: body
+              type: upgrade
+              value: 1d8
+          competencies:
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: changes
       competence:
         raw: 0
       delivery: self
@@ -1117,7 +1222,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/defensive-martial-arts.webp
     name: Defensive Martial Arts
     system:
@@ -1370,7 +1475,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/shatter.webp
     name: Shatter
     system:

@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.15
+  systemVersion: 0.12.16
 effects:
   - _id: kYUwT14Txb9wA7UT
     _key: '!items.effects!c489adeae1c683aa.kYUwT14Txb9wA7UT'
@@ -118,7 +118,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/climbing.webp
     name: Climbing
     system:
@@ -218,7 +218,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/leaping.webp
     name: Leaping
     system:
@@ -414,7 +414,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/bestial-transformation.webp
     name: Bestial Transformation
     system:
@@ -530,7 +530,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/charm.webp
     name: Charm
     system:
@@ -605,7 +605,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/dark-vision.webp
     name: Dark Vision
     system:
@@ -721,7 +721,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/duel.webp
     name: Duel
     system:
@@ -965,15 +965,37 @@ effects:
   - _id: 7ivgbUjtNTUsvDRN
     _key: '!items.effects!c489adeae1c683aa.7ivgbUjtNTUsvDRN'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.7OqrJMy9lRcBjrJf
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.ZfmlkOql85fC2ZfP
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/fluent-cast-aura.webp
     name: Fluent Cast Aura
     system:
       _sup: kyMJXzGi5OsmKivc
+      automations:
+        vl75ptJJ2PxGtxvp:
+          _id: vl75ptJJ2PxGtxvp
+          automatic: true
+          competence:
+            raw: 0
+          competencies:
+            - 0
+            - 1
+            - 2
+          expandTables: true
+          heighten:
+            - 0
+            - 1
+          multi: false
+          noHeighten: false
+          overrideCompetence: false
+          qualifier: '0'
+          trigger: execute
+          type: useDocuments
+          uuids:
+            - Compendium.teriock.tables.RollTable.123c3761ef9170e0
       competence:
         raw: 0
       costs:
@@ -1033,7 +1055,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/fluent-cast-ball.webp
     name: Fluent Cast Ball
     system:
@@ -1119,55 +1141,68 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/innate-elder-sorcery.webp
     name: Innate Elder Sorcery
     system:
       _sup: kyMJXzGi5OsmKivc
       automations:
-        f025905e157ac261:
-          _id: f025905e157ac261
-          changes:
-            - key: system.competence.raw
-              phase: proficiency
-              priority: 10
-              qualifier: >-
-                or(@identifier.elder-sorcery-creation,
-                @identifier.all-elder-sorcery-words)
-              target: ability
-              type: upgrade
-              value: '1'
+        IcIHebYPkEqIqVWZ:
+          _id: IcIHebYPkEqIqVWZ
+          competence:
+            raw: 1
           competencies:
             - 1
-            - 2
           crit:
             - 0
             - 1
           heighten:
-            - 1
             - 0
-          type: changes
-        f7da3b5e1992a724:
-          _id: f7da3b5e1992a724
-          changes:
-            - key: system.competence.raw
-              phase: fluency
-              priority: 10
-              qualifier: >-
-                or(@identifier.elder-sorcery-creation,
-                @identifier.all-elder-sorcery-words)
-              target: ability
-              type: upgrade
-              value: '2'
+            - 1
+          identifier: ability:all-elder-sorcery-words
+          type: changeCompetence
+        K7UQWKx6i7WyBkLS:
+          _id: K7UQWKx6i7WyBkLS
+          competence:
+            raw: 2
           competencies:
             - 2
           crit:
             - 0
             - 1
           heighten:
-            - 1
             - 0
-          type: changes
+            - 1
+          identifier: ability:elder-sorcery-creation
+          type: changeCompetence
+        Kkl4bRexmERpCT2s:
+          _id: Kkl4bRexmERpCT2s
+          competence:
+            raw: 2
+          competencies:
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 0
+            - 1
+          identifier: ability:all-elder-sorcery-words
+          type: changeCompetence
+        bgZtShTjbCNE0vu7:
+          _id: bgZtShTjbCNE0vu7
+          competence:
+            raw: 1
+          competencies:
+            - 1
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 0
+            - 1
+          identifier: ability:elder-sorcery-creation
+          type: changeCompetence
       competence:
         raw: 0
       delivery: self
@@ -1491,11 +1526,11 @@ effects:
   - _id: 2WFODrslGLAFD273
     _key: '!items.effects!c489adeae1c683aa.2WFODrslGLAFD273'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.0BxTrblkpcGWwCHe
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.0q5khIx32nw3ihVe
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/elder-sorcery-creation.webp
     name: Elder Sorcery Creation
     system:
@@ -1580,7 +1615,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/fluent-cast-touch.webp
     name: Fluent Cast Touch
     system:
@@ -1666,7 +1701,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/fluent-cast-ritual.webp
     name: Fluent Cast Ritual
     system:
@@ -1752,32 +1787,27 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/rotator-fluency.webp
     name: Rotator Fluency
     system:
       _sup: kyMJXzGi5OsmKivc
       automations:
-        f025905e157ac261:
-          _id: f025905e157ac261
-          changes:
-            - key: system.competence.raw
-              phase: fluency
-              priority: 10
-              qualifier: '@identifier.rotators'
-              target: ability
-              type: upgrade
-              value: '2'
+        8YrTSRjWX3pwAYyv:
+          _id: 8YrTSRjWX3pwAYyv
+          competence:
+            raw: 2
           competencies:
-            - 1
             - 2
+            - 1
           crit:
             - 0
             - 1
           heighten:
-            - 1
             - 0
-          type: changes
+            - 1
+          identifier: ability:rotators
+          type: changeCompetence
       competence:
         raw: 0
       delivery: self
@@ -1827,7 +1857,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/fluent-cast-ray.webp
     name: Fluent Cast Ray
     system:
@@ -1913,7 +1943,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/rotators.webp
     name: Rotators
     system:
@@ -2148,11 +2178,11 @@ effects:
   - _id: xF0jqeaDYKlY6MO9
     _key: '!items.effects!c489adeae1c683aa.xF0jqeaDYKlY6MO9'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.0B7iFJ6L6hYyX6H6
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8aa8167e9f40cbb2
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/improved-strength.webp
     name: Improved Strength
     system:
@@ -2411,11 +2441,11 @@ effects:
   - _id: HfsJgqADMZQPRi51
     _key: '!items.effects!c489adeae1c683aa.HfsJgqADMZQPRi51'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.2rxzRucyitmqyDmQ
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.iVgITml3cqPn1n2F
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/ethereal-senses.webp
     name: Ethereal Senses
     system:
@@ -2489,22 +2519,15 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/magical-durability.webp
     name: Magical Durability
     system:
       _sup: CEGwPwzTNKOxsGkx
       automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.protections.immunities.damageTypes
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: add
-              value: mundane
+        NxGVe5qLdm9laW3Q:
+          _id: NxGVe5qLdm9laW3Q
+          category: damageTypes
           competencies:
             - 0
             - 1
@@ -2513,9 +2536,11 @@ effects:
             - 0
             - 1
           heighten:
-            - 1
             - 0
-          type: changes
+            - 1
+          relation: immunities
+          type: protection
+          value: mundane
       competence:
         raw: 0
       delivery: self
@@ -2559,29 +2584,15 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/undead-mind.webp
     name: Undead Mind
     system:
       _sup: CEGwPwzTNKOxsGkx
       automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.protections.immunities.statuses
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: add
-              value: frightened
-            - key: system.protections.immunities.statuses
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: add
-              value: charmed
+        EEiHRIyCxZhUuw07:
+          _id: EEiHRIyCxZhUuw07
+          category: statuses
           competencies:
             - 0
             - 1
@@ -2590,9 +2601,27 @@ effects:
             - 0
             - 1
           heighten:
-            - 1
             - 0
-          type: changes
+            - 1
+          relation: immunities
+          type: protection
+          value: charmed
+        Glnnr440sVehTfZ5:
+          _id: Glnnr440sVehTfZ5
+          category: statuses
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 0
+            - 1
+          relation: immunities
+          type: protection
+          value: frightened
       competence:
         raw: 0
       delivery: self
@@ -2640,7 +2669,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/mana-drain-touch.webp
     name: Mana Drain Touch
     system:
@@ -2724,36 +2753,15 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/undying-durability.webp
     name: Undying Durability
     system:
       _sup: CEGwPwzTNKOxsGkx
       automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.protections.immunities.statuses
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: add
-              value: unconscious
-            - key: system.protections.immunities.statuses
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: add
-              value: suffocating
-            - key: system.protections.immunities.statuses
-              phase: normal
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              type: add
-              value: poisoned
+        HaVjAr78BgQGd92W:
+          _id: HaVjAr78BgQGd92W
+          category: statuses
           competencies:
             - 0
             - 1
@@ -2762,9 +2770,43 @@ effects:
             - 0
             - 1
           heighten:
-            - 1
             - 0
-          type: changes
+            - 1
+          relation: immunities
+          type: protection
+          value: poisoned
+        OlGtbdaImhaj6OiM:
+          _id: OlGtbdaImhaj6OiM
+          category: statuses
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 0
+            - 1
+          relation: immunities
+          type: protection
+          value: suffocating
+        W3eMyYlHd3WnCnAm:
+          _id: W3eMyYlHd3WnCnAm
+          category: statuses
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 0
+            - 1
+          relation: immunities
+          type: protection
+          value: unconscious
       competence:
         raw: 0
       delivery: self
@@ -2921,7 +2963,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/instant-ethereal.webp
     name: Instant Ethereal
     system:
@@ -3028,15 +3070,31 @@ effects:
   - _id: sDR5KSBWJARHhgkW
     _key: '!items.effects!c489adeae1c683aa.sDR5KSBWJARHhgkW'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.06vxk8u74h60VCqd
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.2mJqBVXyACqBNics
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/dispel-magic.webp
     name: Dispel Magic
     system:
       _sup: uUUonJ1hgTvj3UQi
+      automations:
+        9HDStLTmUKjyfpWC:
+          _id: 9HDStLTmUKjyfpWC
+          angle: '0'
+          competencies:
+            - 0
+            - 1
+            - 2
+          distance: 30 + 10 * @h
+          heighten:
+            - 0
+            - 1
+          movable: false
+          t: none
+          type: template
+          width: '0'
       class: stormMage
       competence:
         raw: 0
@@ -3171,7 +3229,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/interrupt-magic.webp
     name: Interrupt Magic
     system:
@@ -3254,7 +3312,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/natural-unbreachability.webp
     name: Natural Unbreachability
     system:
@@ -3522,7 +3580,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: systems/teriock/src/icons/abilities/poison-strike.webp
     name: Poison Strike
     system:
@@ -3738,7 +3796,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: icons/creatures/webs/web-nest-ball-teal.webp
     name: Spiga Web Ball
     system:
@@ -3809,7 +3867,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: icons/creatures/webs/webthin-blue.webp
     name: Spiga Snare
     system:
@@ -3879,7 +3937,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.16
     img: icons/creatures/webs/web-sparse-pink.webp
     name: Spiga Web Packet
     system:

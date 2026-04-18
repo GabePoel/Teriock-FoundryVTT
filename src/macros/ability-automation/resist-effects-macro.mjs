@@ -34,13 +34,20 @@ const choice = await tm.dialogs.selectDocumentDialog(documents, {
   hint: "Select an effect type to resist.",
 });
 
+const id = "resistEffects000";
+
 if (choice) {
-  const change = {
-    key: "system.protections.resistances.effectTypes",
+  const auto = {
+    _id: id,
+    type: "protection",
+    category: "effectTypes",
+    competencies: [0, 1, 2],
+    crit: [0, 1],
+    heighten: [0, 1],
+    relation: "resistances",
     value: choice.uuid,
-    mode: 2,
-    priority: 10,
   };
-  applyActivation._source.primary.root.data.changes.push(change);
-  applyActivation._source.secondary.root.data.changes.push(change);
+
+  applyActivation._source.primary.root.data.system.automations[id] = auto;
+  applyActivation._source.secondary.root.data.system.automations[id] = auto;
 }

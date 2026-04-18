@@ -151,6 +151,10 @@ export default class PseudoDocument extends EmbeddedDataModel {
     return `${this.fieldPath}.${this.id}`;
   }
 
+  get metadata() {
+    return this.constructor.metadata;
+  }
+
   /**
    * The UUID of this pseudo-document.
    * @returns {UUID<PseudoDocument> | null}

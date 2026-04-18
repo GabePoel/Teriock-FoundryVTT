@@ -217,7 +217,7 @@ export default function ChangeableDocumentMixin(Base) {
       }
 
       /**
-       * Effects that may have changes, cached for the current prepare cycle.
+       * Effects that may have changes, cached for the current phase.
        * @returns {TeriockActiveEffect[]}
        */
       _getCandidateEffects() {
