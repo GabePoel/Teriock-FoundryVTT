@@ -1,5 +1,5 @@
 import { TeriockActor } from "../../../documents/_module.mjs";
-import { transformationOptions } from "../../../constants/options/transformation-options.mjs";
+import { transformationConfig } from "../../../constants/config/transformation-config.mjs";
 import { CompetenceModel } from "../../models/_module.mjs";
 
 export type SpeciesTransformationConfig = {
@@ -18,11 +18,11 @@ export type AutomationTransformationConfig = SpeciesTransformationConfig & {
   /** <schema> Level of transformation */
   level: Teriock.Keys.TransformationLevel | null;
   /** <schema> Additional parameters this transformation should override */
-  override: Set<keyof typeof transformationOptions.override>;
+  override: Set<keyof typeof transformationConfig.override>;
   /** <schema> Stats this transformation should reset */
-  reset: Set<keyof typeof transformationOptions.reset>;
+  reset: Set<keyof typeof transformationConfig.reset>;
   /** <schema> Types of documents this transformation should turn off */
-  suppress: Set<keyof typeof transformationOptions.suppress>;
+  suppress: Set<keyof typeof transformationConfig.suppress>;
 };
 
 export type EffectTransformationConfig = AutomationTransformationConfig & {

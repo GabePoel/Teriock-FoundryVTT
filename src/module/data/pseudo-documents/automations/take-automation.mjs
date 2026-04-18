@@ -35,7 +35,7 @@ export default class TakeAutomation extends DisplayAutomationMixin(
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       impact: new fields.StringField({
-        choices: objectMap(TERIOCK.options.impact, (i) => i.take, {
+        choices: objectMap(TERIOCK.config.impact, (i) => i.take, {
           filter: (c) => !c?.hidden,
           localize: true,
         }),

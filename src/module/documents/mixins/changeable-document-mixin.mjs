@@ -22,7 +22,7 @@ export default function ChangeableDocumentMixin(Base) {
       static buildChangeTree(effects, options = {}) {
         const changeTree =
           /** @type {Teriock.Changes.ChangeTree} */ Object.fromEntries(
-            Object.keys(TERIOCK.options.change.phase).map((time) => [
+            Object.keys(TERIOCK.config.change.phase).map((time) => [
               time,
               Object.fromEntries(
                 ["Actor", "Item", "ActiveEffect"].map((documentName) => {
@@ -68,7 +68,7 @@ export default function ChangeableDocumentMixin(Base) {
               changeTree[time].Item.typed.equipment.push(conditionalChange);
               changeTree[time].Item.typed.body.push(conditionalChange);
             } else {
-              const documentName = TERIOCK.options.document[target]?.doc;
+              const documentName = TERIOCK.config.document[target]?.doc;
               if (documentName) {
                 changeTree[time][documentName].typed[target].push(
                   conditionalChange,

@@ -1,4 +1,4 @@
-const illusionLevels = TERIOCK.options.illusion.level;
+const illusionLevels = TERIOCK.config.illusion.level;
 const chosenIllusionLevel =
   /** @type {Teriock.Keys.IllusionLevel | null} */ await tm.dialogs.selectDialog(
     illusionLevels,

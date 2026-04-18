@@ -8,7 +8,7 @@ import { makeIcon } from "../../../../../helpers/utils.mjs";
  */
 export function archetypeContextMenu(rank) {
   const options = [];
-  for (const [aKey, aData] of Object.entries(TERIOCK.options.rank)) {
+  for (const [aKey, aData] of Object.entries(TERIOCK.config.rank)) {
     const firstClass = Object.keys(aData.classes)[0];
     const option = {
       label: aData.name,
@@ -37,7 +37,7 @@ export function archetypeContextMenu(rank) {
  */
 export function classContextMenu(rank) {
   const options = [];
-  for (const [aKey, aData] of Object.entries(TERIOCK.options.rank)) {
+  for (const [aKey, aData] of Object.entries(TERIOCK.config.rank)) {
     for (const [cKey, cData] of Object.entries(aData.classes)) {
       const option = {
         label: cData.name,

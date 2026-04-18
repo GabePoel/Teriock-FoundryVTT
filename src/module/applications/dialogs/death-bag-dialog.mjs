@@ -144,7 +144,7 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
       const panelParts = {
         bars: [
           {
-            icon: TERIOCK.options.document.stone.icon,
+            icon: TERIOCK.config.document.stone.icon,
             label: _loc("TERIOCK.DIALOGS.DeathBag.PANEL.initialStonesInBag"),
             wrappers: wrappers,
           },

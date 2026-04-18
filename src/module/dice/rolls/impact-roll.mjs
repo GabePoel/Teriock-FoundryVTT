@@ -1,4 +1,4 @@
-import { impactOptions } from "../../constants/options/impact-options.mjs";
+import { impactConfig } from "../../constants/config/impact-config.mjs";
 import { TeriockChatMessage } from "../../documents/_module.mjs";
 import { makeIcon } from "../../helpers/utils.mjs";
 import BaseRoll from "./base-roll.mjs";
@@ -56,7 +56,7 @@ export default class ImpactRoll extends BaseRoll {
   #setImpactFlavor() {
     if (this.hasImpact) {
       this.options.flavor ??= _loc("TERIOCK.ROLLS.Base.name", {
-        value: impactOptions[this.impact]?.label,
+        value: impactConfig[this.impact]?.label,
       });
     }
   }
@@ -91,7 +91,7 @@ export default class ImpactRoll extends BaseRoll {
   /** @inheritDoc */
   _getTotalContextOptions(_options = {}) {
     return [
-      ...Object.values(impactOptions)
+      ...Object.values(impactConfig)
         .filter((option) => !option?.hidden)
         .map((option) => {
           return {

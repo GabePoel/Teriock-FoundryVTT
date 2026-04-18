@@ -1,13 +1,13 @@
 <div class="children-container">
   {{#each document.visibleTypes as |type|}}
-    {{#if (or @root/editable (exists (lookup @root (path @root/TERIOCK.options.document type "getter"))))}}
+    {{#if (or @root/editable (exists (lookup @root (path @root/TERIOCK.config.document type "getter"))))}}
       <div class="ab-main">
-        {{#if (exists (lookup @root (path @root/TERIOCK.options.document type "getter")))}}
+        {{#if (exists (lookup @root (path @root/TERIOCK.config.document type "getter")))}}
           <div
             class="teriock-block-container {{@root.document.flags.teriockDocumentSettings.sheet.blockChildSize}} {{#if
               @root.document.flags.teriockDocumentSettings.sheet.blockChildGapless}}gapless{{/if}}"
           >
-            {{#each (lookup @root (path @root/TERIOCK.options.document type "getter")) as |doc|}}
+            {{#each (lookup @root (path @root/TERIOCK.config.document type "getter")) as |doc|}}
               {{> "teriock/ui/block" (merge doc.embedParts (object
                 relative=@root/document.uuid))}}
             {{/each}}
@@ -15,10 +15,10 @@
         {{/if}}
         {{#if @root/editable}}
           <button class="create{{ucFirst type}}" data-action="create{{ucFirst type}}">
-            {{makeIcon (path @root/TERIOCK.options.document type "icon") "button"}}
+            {{makeIcon (path @root/TERIOCK.config.document type "icon") "button"}}
             {{localize
               "TERIOCK.SHEETS.Common.ACTIONS.addChild"
-              name=(path @root/TERIOCK.options.document type "name")
+              name=(path @root/TERIOCK.config.document type "name")
             }}
           </button>
         {{/if}}

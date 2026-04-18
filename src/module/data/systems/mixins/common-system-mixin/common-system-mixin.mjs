@@ -146,7 +146,7 @@ export default function CommonSystemMixin(Base) {
           openable: true,
           parentId: this.parent.parent?.id,
           struck: this.parent.disabled,
-          subtitle: TERIOCK.options.document[this.parent.type].name,
+          subtitle: TERIOCK.config.document[this.parent.type].name,
           text: this._masterText,
           title: this.parent.fullName,
           uuid: this.parent.uuid,
@@ -347,29 +347,29 @@ export default function CommonSystemMixin(Base) {
           name: this.parent.fullName,
           uuid: this.parent.uuid,
           icon:
-            TERIOCK.options.document[this.metadata.type]?.icon ||
-            TERIOCK.options.document.document.icon,
+            TERIOCK.config.document[this.metadata.type]?.icon ||
+            TERIOCK.config.document.document.icon,
           label:
-            TERIOCK.options.document[this.metadata.type]?.name ||
-            TERIOCK.options.document.document.name,
+            TERIOCK.config.document[this.metadata.type]?.name ||
+            TERIOCK.config.document.document.name,
         };
         const typeMap = (await this.parent.getChildren()).typeMap;
         for (const type of this.metadata.visibleTypes) {
           if (typeMap[type]) {
             let docs = typeMap[type];
-            if (TERIOCK.options.document[type].doc === "ActiveEffect") {
+            if (TERIOCK.config.document[type].doc === "ActiveEffect") {
               docs = docs.filter(
                 (e) =>
                   !foundry.utils.hasProperty(e, "system.revealed") ||
                   e.system.revealed,
               );
             }
-            docs = TERIOCK.options.document[type].sorter(docs);
+            docs = TERIOCK.config.document[type].sorter(docs);
             docs = docs.filter((d) => !d.isEphemeral);
             quickAddAssociation(
               docs,
-              TERIOCK.options.document[type].plural,
-              TERIOCK.options.document[type].icon,
+              TERIOCK.config.document[type].plural,
+              TERIOCK.config.document[type].icon,
               parts.associations,
             );
           }
@@ -417,7 +417,7 @@ export default function CommonSystemMixin(Base) {
           }
           if (notesJournal) {
             const notesCategoryName =
-              TERIOCK.options.document[this.parent.type]?.name ||
+              TERIOCK.config.document[this.parent.type]?.name ||
               _loc("TERIOCK.SYSTEMS.Common.FIELDS.gmNotes.otherCategory");
             notesPage = notesJournal.pages.find(
               (p) =>

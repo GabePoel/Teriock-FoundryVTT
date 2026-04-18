@@ -1,4 +1,4 @@
-import { piercingOptions } from "../../constants/options/piercing-options.mjs";
+import { piercingConfig } from "../../constants/config/piercing-config.mjs";
 import { localizeChoices } from "../../helpers/localization.mjs";
 import EmbeddedDataModel from "./embedded-data-model.mjs";
 
@@ -20,7 +20,7 @@ export default class PiercingModel extends EmbeddedDataModel {
   static defineSchema() {
     return {
       raw: new fields.NumberField({
-        choices: localizeChoices(piercingOptions.levels),
+        choices: localizeChoices(piercingConfig.levels),
         initial: 0,
         max: 2,
         min: 0,
@@ -43,7 +43,7 @@ export default class PiercingModel extends EmbeddedDataModel {
    * @returns {string}
    */
   get label() {
-    return this.value >= 1 ? piercingOptions.levels[this.value] : "";
+    return this.value >= 1 ? piercingConfig.levels[this.value] : "";
   }
 
   /**

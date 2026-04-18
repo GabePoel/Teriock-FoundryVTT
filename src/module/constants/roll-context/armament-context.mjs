@@ -1,6 +1,6 @@
 import { preLocalize } from "../../helpers/localization.mjs";
-import { equipmentOptions } from "../options/equipment-options.mjs";
-import { impactOptions } from "../options/impact-options.mjs";
+import { equipmentConfig } from "../config/equipment-config.mjs";
+import { impactConfig } from "../config/impact-config.mjs";
 import usableContext from "./usable-context.mjs";
 
 const armamentContext = {
@@ -65,7 +65,7 @@ Hooks.once("i18nInit", () => {
       { name: _loc(v) },
     );
   });
-  Object.entries(impactOptions).forEach(([k, v]) => {
+  Object.entries(impactConfig).forEach(([k, v]) => {
     armamentContext[`impact.${k}`] = _loc(
       "TERIOCK.ROLL_CONTEXT.Armament.impact",
       { name: _loc(v.label) },
@@ -82,10 +82,10 @@ Hooks.once("i18nInit", () => {
       name: _loc(v),
     });
   });
-  Object.keys(equipmentOptions.powerLevel).forEach((k) => {
+  Object.keys(equipmentConfig.powerLevel).forEach((k) => {
     armamentContext[`power.${k}`] = _loc(
       "TERIOCK.ROLL_CONTEXT.Armament.power",
-      { name: _loc(equipmentOptions.powerLevel[k].label) },
+      { name: _loc(equipmentConfig.powerLevel[k].label) },
     );
   });
 });

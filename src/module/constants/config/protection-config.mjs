@@ -1,6 +1,6 @@
 import { preLocalize } from "../../helpers/localization.mjs";
 
-export const protectionOptions = {
+export const protectionConfig = {
   categories: {
     abilities: {
       choices: "reference.abilities",
@@ -117,5 +117,5 @@ export const protectionOptions = {
   },
 };
 
-preLocalize("options.protection.categories", { keys: ["label"] });
-preLocalize("options.protection.types", { keys: ["label", "button"] });
+preLocalize("config.protection.categories", { keys: ["label"] });
+preLocalize("config.protection.types", { keys: ["label", "button"] });

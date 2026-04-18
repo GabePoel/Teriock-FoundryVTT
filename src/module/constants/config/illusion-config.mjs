@@ -1,6 +1,6 @@
 import { preLocalize } from "../../helpers/localization.mjs";
 
-export const illusionOptions = {
+export const illusionConfig = {
   level: {
     minor: "TERIOCK.EFFECTS.IllusionLevel.minor",
     full: "TERIOCK.EFFECTS.IllusionLevel.full",
@@ -8,4 +8,4 @@ export const illusionOptions = {
   },
 };
 
-preLocalize("options.illusion.level");
+preLocalize("config.illusion.level");

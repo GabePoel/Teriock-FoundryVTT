@@ -26,10 +26,7 @@ export default async function inCombatExpirationDialog(
         title: _loc("TERIOCK.DIALOGS.InCombatExpiration.title", {
           name,
         }),
-        icon: makeIconClass(
-          TERIOCK.options.document[effect.type].icon,
-          "title",
-        ),
+        icon: makeIconClass(TERIOCK.config.document[effect.type].icon, "title"),
       },
       content: _loc("TERIOCK.DIALOGS.InCombatExpiration.contentConfirm", {
         name,
@@ -83,10 +80,7 @@ export default async function inCombatExpirationDialog(
         title: _loc("TERIOCK.DIALOGS.InCombatExpiration.title", {
           name: effect.name,
         }),
-        icon: makeIconClass(
-          TERIOCK.options.document[effect.type].icon,
-          "title",
-        ),
+        icon: makeIconClass(TERIOCK.config.document[effect.type].icon, "title"),
       },
       content: contentHtml,
       buttons: [

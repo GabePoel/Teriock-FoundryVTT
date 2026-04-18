@@ -1,4 +1,4 @@
-import { characterOptions } from "../../constants/options/character-options.mjs";
+import { config } from "../../constants/_module.mjs";
 import { documentTypes } from "../../constants/system/_module.mjs";
 import { mix } from "../../helpers/construction.mjs";
 import { resolveDocument } from "../../helpers/resolve.mjs";
@@ -57,14 +57,14 @@ export default class TeriockActor extends mix(
    * - [Size](https://wiki.teriock.com/index.php/Core:Size)
    *
    * @param {number} value
-   * @returns {Teriock.Config.SizeConfig}
+   * @returns {Teriock.Config.SizeEntry}
    */
   static sizeConfig(value) {
     const minCategoryMaxSize = Math.min(
-      ...characterOptions.sizes.map((d) => d.max).filter((m) => m >= value),
+      ...config.character.sizes.map((d) => d.max).filter((m) => m >= value),
     );
     return foundry.utils.deepClone(
-      characterOptions.sizes.find((d) => d.max === minCategoryMaxSize),
+      config.character.sizes.find((d) => d.max === minCategoryMaxSize),
     );
   }
 
@@ -535,7 +535,7 @@ export default class TeriockActor extends mix(
       ui.notifications.warn("TERIOCK.SYSTEMS.Macro.EXECUTION.noDocument", {
         format: {
           actor: this.name,
-          type: TERIOCK.options.document[
+          type: TERIOCK.config.document[
             options.type || "document"
           ].name.toLowerCase(),
           name: lookup,

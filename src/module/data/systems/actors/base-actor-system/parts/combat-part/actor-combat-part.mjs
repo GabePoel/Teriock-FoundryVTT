@@ -1,4 +1,4 @@
-import { characterOptions } from "../../../../../../constants/options/character-options.mjs";
+import { config } from "../../../../../../constants/_module.mjs";
 import { prefixObject } from "../../../../../../helpers/utils.mjs";
 import {
   FormulaField,
@@ -45,7 +45,7 @@ export default (Base) => {
             hasReaction: new fields.BooleanField({ initial: true }),
           }),
           initiative: new FormulaField({
-            initial: characterOptions.defaults.initiative,
+            initial: config.character.defaults.initiative,
             deterministic: false,
           }),
           defense: initialSchema({

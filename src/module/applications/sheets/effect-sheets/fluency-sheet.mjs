@@ -1,4 +1,4 @@
-import { documentOptions } from "../../../constants/options/document-options.mjs";
+import { documentConfig } from "../../../constants/config/document-config.mjs";
 import { makeIcon, makeIconClass } from "../../../helpers/utils.mjs";
 import BaseEffectSheet from "./base-effect-sheet.mjs";
 
@@ -18,7 +18,7 @@ export default class FluencySheet extends BaseEffectSheet {
   static DEFAULT_OPTIONS = {
     classes: ["fluency"],
     window: {
-      icon: makeIconClass(documentOptions.fluency.icon, "title"),
+      icon: makeIconClass(documentConfig.fluency.icon, "title"),
     },
   };
 
@@ -28,7 +28,7 @@ export default class FluencySheet extends BaseEffectSheet {
    */
   #fieldContextMenuEntries() {
     const options = [];
-    for (const [fKey, fData] of Object.entries(TERIOCK.options.tradecraft)) {
+    for (const [fKey, fData] of Object.entries(TERIOCK.config.tradecraft)) {
       const option = {
         label: fData.name,
         icon: makeIcon(fData.icon, "contextMenu"),
@@ -53,7 +53,7 @@ export default class FluencySheet extends BaseEffectSheet {
    */
   #tradecraftContextMenuEntries() {
     const options = [];
-    for (const [fKey, fData] of Object.entries(TERIOCK.options.tradecraft)) {
+    for (const [fKey, fData] of Object.entries(TERIOCK.config.tradecraft)) {
       for (const [tcKey, tcData] of Object.entries(fData.tradecrafts)) {
         const option = {
           label: tcData.name,

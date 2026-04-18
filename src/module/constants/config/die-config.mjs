@@ -1,6 +1,6 @@
 import { preLocalize } from "../../helpers/localization.mjs";
 
-export const dieOptions = {
+export const dieConfig = {
   deathBagStoneColor: {
     black: "TERIOCK.TERMS.StoneColor.black",
     blue: "TERIOCK.TERMS.StoneColor.blue",
@@ -93,4 +93,4 @@ export const dieOptions = {
   },
 };
 
-preLocalize("options.die.deathBagStoneColor");
+preLocalize("config.die.deathBagStoneColor");

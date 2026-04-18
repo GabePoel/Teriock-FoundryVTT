@@ -3,10 +3,10 @@ import { docSort, effectSort, rankSort } from "../../helpers/sort.mjs";
 import { icons } from "../display/icons.mjs";
 
 /**
- * Options that describe documents.
- * @type {Record<string, Partial<Teriock.Config.DocumentConfig>>}
+ * Options that describe document types.
+ * @enum {Partial<Teriock.Config.DocumentEntry>}
  */
-export const documentOptions = {
+export const documentConfig = {
   ability: {
     doc: "ActiveEffect",
     getter: "abilities",
@@ -200,4 +200,4 @@ export const documentOptions = {
   },
 };
 
-preLocalize("options.document", { keys: ["name", "plural"] });
+preLocalize("config.document", { keys: ["name", "plural"] });

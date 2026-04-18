@@ -1,4 +1,4 @@
-import { documentOptions } from "../../../../constants/options/document-options.mjs";
+import { documentConfig } from "../../../../constants/config/document-config.mjs";
 import { mix } from "../../../../helpers/construction.mjs";
 import { dotJoin, toTitleCase } from "../../../../helpers/string.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
@@ -85,8 +85,8 @@ export default class ArchetypeSystem extends mix(
   get messageBars() {
     return [
       {
-        icon: documentOptions.rank.icon,
-        label: documentOptions.rank.plural,
+        icon: documentConfig.rank.icon,
+        label: documentConfig.rank.plural,
         wrappers: this.classNames,
       },
     ];

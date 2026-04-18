@@ -1,4 +1,4 @@
-export const indexOptions = {
+export const indexConfig = {
   ability: "abilities",
   body: "bodyParts",
   condition: "conditions",

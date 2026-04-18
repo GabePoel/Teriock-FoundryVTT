@@ -175,7 +175,7 @@ export async function inferChildCompendiumSources(document) {
   await Promise.all(children.map(async (c) => await inferCompendiumSource(c)));
 }
 /**
- * Get the UUID for a rules journal entry page.
+ * Get the UUID for a rule's journal entry page.
  * @param {string} namespace
  * @param {string} pageName
  * @returns {string}

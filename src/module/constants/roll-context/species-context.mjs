@@ -1,5 +1,5 @@
 import { preLocalize } from "../../helpers/localization.mjs";
-import { transformationOptions } from "../options/transformation-options.mjs";
+import { transformationConfig } from "../config/transformation-config.mjs";
 import usableContext from "./usable-context.mjs";
 
 const speciesContext = {
@@ -24,7 +24,7 @@ export default speciesContext;
 
 preLocalize("rollContext.species");
 Hooks.once("i18nInit", () => {
-  Object.entries(transformationOptions.level).forEach(([k, v]) => {
+  Object.entries(transformationConfig.level).forEach(([k, v]) => {
     speciesContext[`transformation.level.${k}`] = _loc(v);
   });
   Object.entries(TERIOCK.reference.traits).forEach(([k, v]) => {

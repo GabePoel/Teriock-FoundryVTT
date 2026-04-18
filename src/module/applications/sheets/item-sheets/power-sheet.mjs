@@ -1,4 +1,4 @@
-import { documentOptions } from "../../../constants/options/document-options.mjs";
+import { documentConfig } from "../../../constants/config/document-config.mjs";
 import { makeIconClass } from "../../../helpers/utils.mjs";
 import BaseItemSheet from "./base-item-sheet.mjs";
 
@@ -15,7 +15,7 @@ export default class PowerSheet extends BaseItemSheet {
   static DEFAULT_OPTIONS = {
     classes: ["power"],
     window: {
-      icon: makeIconClass(documentOptions.power.icon, "title"),
+      icon: makeIconClass(documentConfig.power.icon, "title"),
     },
   };
 
@@ -32,7 +32,7 @@ export default class PowerSheet extends BaseItemSheet {
     if (!this.isEditable) return;
     this._connectBuildContextMenu(
       ".power-box",
-      TERIOCK.options.power.type,
+      TERIOCK.config.power.type,
       "system.type",
       "click",
     );

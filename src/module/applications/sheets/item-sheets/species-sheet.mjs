@@ -1,4 +1,4 @@
-import { documentOptions } from "../../../constants/options/document-options.mjs";
+import { documentConfig } from "../../../constants/config/document-config.mjs";
 import { mix } from "../../../helpers/construction.mjs";
 import { makeIconClass } from "../../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
@@ -29,7 +29,7 @@ export default class SpeciesSheet extends mix(
   static DEFAULT_OPTIONS = {
     classes: ["species"],
     window: {
-      icon: makeIconClass(documentOptions.species.icon, "title"),
+      icon: makeIconClass(documentConfig.species.icon, "title"),
     },
   };
 

@@ -10,13 +10,13 @@
         {{> "teriock/sheets/shared/menu-input" field=systemFields.powerSources value=system.powerSources}}
         {{> "teriock/sheets/shared/menu-input" field=systemFields.elements value=system.elements}}
         {{> "teriock/sheets/shared/menu-input" field=systemFields.effectTypes value=system.effectTypes}}
-        {{#each TERIOCK.options.cost.primary.keys as |value key|}}
+        {{#each TERIOCK.config.cost.primary.keys as |value key|}}
           {{> "teriock/sheets/shared/menu-input"
             field=(path @root/systemFields.costs.fields.primary.fields key "fields.type")
             value=(path @root/system.costs.primary key "type")
           }}
         {{/each}}
-        {{#each TERIOCK.options.cost.components.keys as |value key|}}
+        {{#each TERIOCK.config.cost.components.keys as |value key|}}
           {{> "teriock/sheets/shared/menu-input"
             field=(path @root/systemFields.costs.fields.components.fields key "fields.type")
             value=(path @root/system.costs.components key "type")
@@ -52,7 +52,7 @@
         {{/if}}
 
         {{! Before Overview }}
-        {{#each TERIOCK.options.cost.tweaks as |value key|}}
+        {{#each TERIOCK.config.cost.tweaks as |value key|}}
           {{#if (eq (lookup @root/system.costs.tweaks key) 0)}}
             <div class="tgrid-item">
               <button class="ab-menu-button ab-tweak-{{key}}-button"

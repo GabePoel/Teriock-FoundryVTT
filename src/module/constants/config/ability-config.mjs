@@ -1,6 +1,6 @@
 import { preLocalize } from "../../helpers/localization.mjs";
 
-export const abilityOptions = {
+export const abilityConfig = {
   delivery: {
     armor: "TERIOCK.TERMS.Delivery.armor",
     aura: "TERIOCK.TERMS.Delivery.aura",
@@ -103,17 +103,17 @@ export const abilityOptions = {
   },
 };
 
-preLocalize("options.ability.delivery");
-preLocalize("options.ability.deliveryPackage");
-preLocalize("options.ability.deliveryParent");
-preLocalize("options.ability.duration.unit");
-preLocalize("options.ability.executionTime.active");
-preLocalize("options.ability.executionTime.passive");
-preLocalize("options.ability.executionTime.reactive");
-preLocalize("options.ability.executionTime.slow");
-preLocalize("options.ability.expansion");
-preLocalize("options.ability.featSaveImprovementAmount");
-preLocalize("options.ability.interaction");
-preLocalize("options.ability.maneuver");
-preLocalize("options.ability.targetParent");
-preLocalize("options.ability.targets");
+preLocalize("config.ability.delivery");
+preLocalize("config.ability.deliveryPackage");
+preLocalize("config.ability.deliveryParent");
+preLocalize("config.ability.duration.unit");
+preLocalize("config.ability.executionTime.active");
+preLocalize("config.ability.executionTime.passive");
+preLocalize("config.ability.executionTime.reactive");
+preLocalize("config.ability.executionTime.slow");
+preLocalize("config.ability.expansion");
+preLocalize("config.ability.featSaveImprovementAmount");
+preLocalize("config.ability.interaction");
+preLocalize("config.ability.maneuver");
+preLocalize("config.ability.targetParent");
+preLocalize("config.ability.targets");

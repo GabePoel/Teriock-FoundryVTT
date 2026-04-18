@@ -1,4 +1,4 @@
-import { competenceOptions } from "../../../constants/options/competence-options.mjs";
+import { competenceConfig } from "../../../constants/config/competence-config.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
 import {
@@ -126,7 +126,7 @@ export function qualifiedChangeField() {
       label: "TERIOCK.SCHEMA.QualifiedChange.key.label",
     }),
     phase: new EnhancedStringField({
-      choices: objectMap(TERIOCK.options.change.phase, (p) => p.label, {
+      choices: objectMap(TERIOCK.config.change.phase, (p) => p.label, {
         localize: true,
       }),
       initial: "normal",
@@ -143,7 +143,7 @@ export function qualifiedChangeField() {
       label: "TERIOCK.SCHEMA.QualifiedChange.qualifier.label",
     }),
     target: new EnhancedStringField({
-      choices: localizeChoices(TERIOCK.options.change.target),
+      choices: localizeChoices(TERIOCK.config.change.target),
       initial: "Actor",
       label: "TERIOCK.SCHEMA.QualifiedChange.target.label",
       nullable: false,
@@ -271,7 +271,7 @@ export function blockSizeField(options = {}) {
     options;
   return new StringField({
     initial,
-    choices: TERIOCK.options.display.sizes,
+    choices: TERIOCK.config.display.sizes,
     label: _loc("TERIOCK.SCHEMA.BlockSize.label", { name: _loc(child) }),
     hint: _loc("TERIOCK.SCHEMA.BlockSize.hint", {
       name: _loc(child).toLocaleLowerCase(),
@@ -304,7 +304,7 @@ export function blockGaplessField(options = {}) {
  */
 export function competenceField() {
   return new NumberField({
-    choices: localizeChoices(competenceOptions.levels, { sort: false }),
+    choices: localizeChoices(competenceConfig.levels, { sort: false }),
     hint: _loc("TERIOCK.SCHEMA.Competence.hint"),
     initial: 0,
     label: _loc("TERIOCK.SCHEMA.Competence.label"),

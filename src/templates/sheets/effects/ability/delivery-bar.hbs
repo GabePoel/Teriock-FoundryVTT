@@ -5,7 +5,7 @@
     tooltip=(localize "TERIOCK.TERMS.Common.executionTime")
     action=(ifThen (eq system.maneuver "slow") "updateUnit" "")
     dataset=(object
-      maneuver=(lookup TERIOCK.options.ability.maneuver system.maneuver)
+      maneuver=(lookup TERIOCK.config.ability.maneuver system.maneuver)
       path="system.executionTime.slow"
       icon=TERIOCK.display.icons.ability.execution
     )
@@ -14,7 +14,7 @@
   }}
   {{formBox
     (prefix
-      (lookup TERIOCK.options.ability.delivery system.delivery)
+      (lookup TERIOCK.config.ability.delivery system.delivery)
       (uc system.piercing.label)
     )
     icon=TERIOCK.display.icons.ability.delivery
@@ -31,7 +31,7 @@
         )
         ""
       )
-      (lookup TERIOCK.options.ability.interaction system.interaction)
+      (lookup TERIOCK.config.ability.interaction system.interaction)
     )
     icon=TERIOCK.display.icons.ability.interaction
     classes=(ifThen

@@ -113,7 +113,7 @@ export default class PropertySystem extends mix(
 
   /** @inheritDoc */
   get color() {
-    return TERIOCK.options.effect.form[this.form].color;
+    return TERIOCK.config.effect.form[this.form].color;
   }
 
   /** @inheritDoc */
@@ -142,7 +142,7 @@ export default class PropertySystem extends mix(
   get embedParts() {
     const parts = super.embedParts;
     if (!this.consumable) {
-      parts.subtitle = TERIOCK.options.effect.form[this.form].label;
+      parts.subtitle = TERIOCK.config.effect.form[this.form].label;
     }
     return parts;
   }
@@ -151,10 +151,10 @@ export default class PropertySystem extends mix(
   get messageBars() {
     return [
       {
-        icon: TERIOCK.options.effect.form[this.form].icon,
+        icon: TERIOCK.config.effect.form[this.form].icon,
         label: _loc("TERIOCK.SYSTEMS.BaseEffect.FIELDS.form.label"),
         wrappers: [
-          TERIOCK.options.effect.form[this.form].label,
+          TERIOCK.config.effect.form[this.form].label,
           ...simplifyTags(this._metaphysicsTags),
         ],
       },

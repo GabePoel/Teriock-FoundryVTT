@@ -1,4 +1,4 @@
-import { protectionOptions } from "../../../../../constants/options/protection-options.mjs";
+import { protectionConfig } from "../../../../../constants/config/protection-config.mjs";
 import { getImage } from "../../../../../helpers/path.mjs";
 import { toCamelCase, toId } from "../../../../../helpers/string.mjs"; //noinspection JSClosureCompilerSyntax
 
@@ -25,7 +25,7 @@ export default (Base) =>
      * @param {object} context
      */
     _prepareProtectionButtonContext(context) {
-      context.protectionButtons = Object.values(protectionOptions.types).map(
+      context.protectionButtons = Object.values(protectionConfig.types).map(
         (type) => {
           return {
             tooltip: type.button,
@@ -43,8 +43,8 @@ export default (Base) =>
      */
     _prepareProtectionEntryContext(context) {
       const protectionEntries = [];
-      Object.entries(protectionOptions.types).forEach(([tk, tv]) => {
-        Object.entries(protectionOptions.categories).forEach(([ck, cv]) => {
+      Object.entries(protectionConfig.types).forEach(([tk, tv]) => {
+        Object.entries(protectionConfig.categories).forEach(([ck, cv]) => {
           Array.from(this.document.system.protections[tk][ck]).forEach((s) => {
             const nsId = toId("Keyword", { hash: false });
             const pnId = toId(tv.rule, { hash: false });

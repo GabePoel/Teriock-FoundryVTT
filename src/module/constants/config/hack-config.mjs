@@ -1,10 +1,8 @@
 import { preLocalize } from "../../helpers/localization.mjs";
 import { icons } from "../display/icons.mjs";
 
-/**
- * Hack button definitions.
- */
-export const hackOptions = {
+/** @enum {Teriock.Config.HackEntry} */
+export const hackConfig = {
   arm: {
     icon: icons.hack.arm,
     label: "TERIOCK.EFFECTS.Hacks.arm.apply",
@@ -63,4 +61,4 @@ export const hackOptions = {
   },
 };
 
-preLocalize("options.hack", { keys: ["label", "part", "remove"] });
+preLocalize("config.hack", { keys: ["label", "part", "remove"] });

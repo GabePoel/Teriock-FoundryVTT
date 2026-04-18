@@ -5,7 +5,10 @@ import {
   toCamelCase,
   toKebabCase,
 } from "../../../../helpers/string.mjs";
-import { inferNameFromIdentifier } from "../../../../helpers/utils.mjs";
+import {
+  inferNameFromIdentifier,
+  objectMap,
+} from "../../../../helpers/utils.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import { migrateValueTransform } from "../../../shared/migrations/source-migrations.mjs";
@@ -103,7 +106,7 @@ export default class EquipmentSystem extends mix(
       consumable: new fields.BooleanField({ initial: false }),
       equipmentType: new IdentifierField({ initial: "" }),
       powerLevel: new fields.StringField({
-        choices: TERIOCK.options.equipment.powerLevelShort,
+        choices: objectMap(TERIOCK.config.equipment.powerLevel, (e) => e.label),
         initial: "mundane",
       }),
       price: new fields.NumberField({ initial: 0 }),
@@ -141,7 +144,7 @@ export default class EquipmentSystem extends mix(
     if (!this.identification.read) {
       return TERIOCK.display.colors.grey;
     }
-    return TERIOCK.options.equipment.powerLevel[this.powerLevel].color;
+    return TERIOCK.config.equipment.powerLevel[this.powerLevel].color;
   }
 
   /** @inheritDoc */

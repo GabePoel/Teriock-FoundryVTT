@@ -120,7 +120,7 @@ export default (Base) => {
       static async _onCreateFluency() {
         const tc = await selectTradecraftDialog();
         if (tc) {
-          const f = Object.entries(TERIOCK.options.tradecraft).find(([_k, v]) =>
+          const f = Object.entries(TERIOCK.config.tradecraft).find(([_k, v]) =>
             Object.keys(v.tradecrafts).includes(tc),
           )[0];
           await this.document.createChildDocuments("ActiveEffect", [
@@ -346,11 +346,9 @@ export default (Base) => {
             return true;
           }
         });
-        for (const [type, options] of Object.entries(
-          TERIOCK.options.document,
-        )) {
+        for (const [type, options] of Object.entries(TERIOCK.config.document)) {
           if (options.getter) {
-            context[options["getter"]] = TERIOCK.options.document[type].sorter(
+            context[options["getter"]] = TERIOCK.config.document[type].sorter(
               children.filter((c) => c.type === type),
             );
           }
@@ -364,7 +362,7 @@ export default (Base) => {
 function newDocumentObj(type) {
   return {
     name: _loc("TERIOCK.SHEETS.Common.MENU.Create.document", {
-      type: _loc(`TYPES.${TERIOCK.options.document[type].doc}.${type}`),
+      type: _loc(`TYPES.${TERIOCK.config.document[type].doc}.${type}`),
     }),
     type,
   };

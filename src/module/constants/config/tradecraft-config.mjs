@@ -1,7 +1,7 @@
 import { preLocalize } from "../../helpers/localization.mjs";
 import { icons } from "../display/icons.mjs";
 
-export const tradecraftOptions = {
+export const tradecraftConfig = {
   artisan: {
     name: "TERIOCK.TERMS.Fields.artisan",
     icon: icons.field.artisan,
@@ -154,9 +154,9 @@ export const tradecraftOptions = {
   },
 };
 
-preLocalize("options.tradecraft", { keys: ["name"] });
-preLocalize("options.tradecraft.artisan.tradecrafts", { keys: ["name"] });
-preLocalize("options.tradecraft.mediator.tradecrafts", { keys: ["name"] });
-preLocalize("options.tradecraft.scholar.tradecrafts", { keys: ["name"] });
-preLocalize("options.tradecraft.survivalist.tradecrafts", { keys: ["name"] });
-preLocalize("options.tradecraft.prestige.tradecrafts", { keys: ["name"] });
+preLocalize("config.tradecraft", { keys: ["name"] });
+preLocalize("config.tradecraft.artisan.tradecrafts", { keys: ["name"] });
+preLocalize("config.tradecraft.mediator.tradecrafts", { keys: ["name"] });
+preLocalize("config.tradecraft.scholar.tradecrafts", { keys: ["name"] });
+preLocalize("config.tradecraft.survivalist.tradecrafts", { keys: ["name"] });
+preLocalize("config.tradecraft.prestige.tradecrafts", { keys: ["name"] });

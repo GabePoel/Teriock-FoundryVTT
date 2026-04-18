@@ -1,4 +1,4 @@
-import { hackOptions } from "../../../../../../constants/options/hack-options.mjs";
+import { hackConfig } from "../../../../../../constants/config/hack-config.mjs";
 import { objectMap } from "../../../../../../helpers/utils.mjs";
 import {
   initialBar,
@@ -21,7 +21,7 @@ export default (Base) => {
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           hacks: new initialSchema(
-            objectMap(hackOptions, (conf) => initialBar({ max: conf.max })),
+            objectMap(hackConfig, (conf) => initialBar({ max: conf.max })),
           ),
         });
       }
@@ -48,10 +48,10 @@ export default (Base) => {
       async takeHack(part, amount = 1) {
         await this.parent.hookCall("takeHack", { scope: { part, amount } });
         const value = this.parent.system.hacks[part].value;
-        const max = Math.min(value + amount, hackOptions[part].max);
+        const max = Math.min(value + amount, hackConfig[part].max);
         const ids = [];
         for (let i = value; i < max; i++) {
-          const id = (hackOptions[part]?.statuses ?? [])[i];
+          const id = (hackConfig[part]?.statuses ?? [])[i];
           if (id) ids.push(id);
         }
         await this.parent.applyStatusEffects(ids);
@@ -73,7 +73,7 @@ export default (Base) => {
         const min = Math.max(value - amount, 0);
         const ids = [];
         for (let i = value; i > min; i--) {
-          const id = (hackOptions[part]?.statuses ?? [])[i - 1];
+          const id = (hackConfig[part]?.statuses ?? [])[i - 1];
           if (id) ids.push(id);
         }
         await this.parent.removeStatusEffects(ids);

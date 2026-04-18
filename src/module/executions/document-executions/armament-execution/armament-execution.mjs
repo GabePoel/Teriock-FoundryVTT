@@ -70,7 +70,7 @@ export default class ArmamentExecution extends BaseDocumentExecution {
   get flavor() {
     if (this.impacts.size === 1) {
       return _loc("TERIOCK.ROLLS.Base.name", {
-        value: TERIOCK.options.impact[Array.from(this.impacts)[0]].label,
+        value: TERIOCK.config.impact[Array.from(this.impacts)[0]].label,
       });
     } else {
       return _loc("TERIOCK.ROLLS.Harm.multi");

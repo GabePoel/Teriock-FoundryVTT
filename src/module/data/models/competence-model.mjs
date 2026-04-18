@@ -61,7 +61,7 @@ export default class CompetenceModel extends EmbeddedDataModel {
    * @returns {string}
    */
   get label() {
-    return TERIOCK.options.competence.levels[this.value];
+    return TERIOCK.config.competence.levels[this.value];
   }
 
   /**

@@ -1,4 +1,4 @@
-import { documentOptions } from "../../../constants/options/document-options.mjs";
+import { documentConfig } from "../../../constants/config/document-config.mjs";
 import { mix } from "../../../helpers/construction.mjs";
 import { makeIconClass } from "../../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
@@ -27,7 +27,7 @@ export default class PropertySheet extends mix(
   static DEFAULT_OPTIONS = {
     classes: ["property"],
     window: {
-      icon: makeIconClass(documentOptions.property.icon, "title"),
+      icon: makeIconClass(documentConfig.property.icon, "title"),
     },
   };
 
@@ -44,7 +44,7 @@ export default class PropertySheet extends mix(
     if (!this.isEditable) return;
     this._connectBuildContextMenu(
       ".form-type-box",
-      TERIOCK.options.effect.form,
+      TERIOCK.config.effect.form,
       "system.form",
       "click",
     );

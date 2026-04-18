@@ -32,5 +32,5 @@ export const target = {
   equipment: "TERIOCK.CHANGES.Target.equipment",
 };
 
-preLocalize("options.change.phase", { keys: ["hint", "label"] });
-preLocalize("options.change.target");
+preLocalize("config.change.phase", { keys: ["hint", "label"] });
+preLocalize("config.change.target");

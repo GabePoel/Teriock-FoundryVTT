@@ -1,4 +1,4 @@
-const transformationLevels = TERIOCK.options.transformation.level;
+const transformationLevels = TERIOCK.config.transformation.level;
 const chosenTransformationLevel = await tm.dialogs.selectDialog(
   transformationLevels,
   {

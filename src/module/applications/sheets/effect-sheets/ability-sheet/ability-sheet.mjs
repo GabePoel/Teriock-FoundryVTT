@@ -1,4 +1,4 @@
-import { documentOptions } from "../../../../constants/options/document-options.mjs";
+import { documentConfig } from "../../../../constants/config/document-config.mjs";
 import { mix } from "../../../../helpers/construction.mjs";
 import { elementClass } from "../../../../helpers/html.mjs";
 import { makeIconClass } from "../../../../helpers/utils.mjs";
@@ -34,7 +34,7 @@ export default class AbilitySheet extends mix(
   static DEFAULT_OPTIONS = {
     classes: ["ability"],
     window: {
-      icon: makeIconClass(documentOptions.ability.icon, "title"),
+      icon: makeIconClass(documentConfig.ability.icon, "title"),
     },
   };
 
@@ -60,7 +60,7 @@ export default class AbilitySheet extends mix(
         "system.upgrades.competence.value": 1,
       },
       ...Object.fromEntries(
-        Object.keys(TERIOCK.options.cost.tweaks).map((k) => [
+        Object.keys(TERIOCK.config.cost.tweaks).map((k) => [
           `.ab-tweak-${k}-button`,
           { [`system.costs.tweaks.${k}`]: 1 },
         ]),
@@ -123,11 +123,11 @@ export default class AbilitySheet extends mix(
     const maneuver = this.document.system.maneuver;
     const executionTime = this.document.system.executionTime;
     if (maneuver === "active") {
-      time = TERIOCK.options.ability.executionTime.active[executionTime.base];
+      time = TERIOCK.config.ability.executionTime.active[executionTime.base];
     } else if (maneuver === "reactive") {
-      time = TERIOCK.options.ability.executionTime.reactive[executionTime.base];
+      time = TERIOCK.config.ability.executionTime.reactive[executionTime.base];
     } else if (maneuver === "passive") {
-      time = TERIOCK.options.ability.executionTime.passive.passive;
+      time = TERIOCK.config.ability.executionTime.passive.passive;
     } else {
       time = executionTime.slow.text;
     }

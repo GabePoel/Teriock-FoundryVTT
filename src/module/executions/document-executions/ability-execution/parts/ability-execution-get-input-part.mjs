@@ -122,7 +122,7 @@ export default function AbilityExecutionGetInputPart(Base) {
        * Apply constant adept/inept/gifted modifications to default costs.
        */
       #modifyCosts() {
-        for (const [k, v] of Object.entries(TERIOCK.options.cost.tweaks)) {
+        for (const [k, v] of Object.entries(TERIOCK.config.cost.tweaks)) {
           this.costs[v.primary] +=
             v.multiplier * this.source.system.costs.tweaks[k];
         }
@@ -146,9 +146,7 @@ export default function AbilityExecutionGetInputPart(Base) {
        */
       async _getCostInput() {
         const dialogs = [];
-        for (const [k, v] of Object.entries(
-          TERIOCK.options.cost.primary.keys,
-        )) {
+        for (const [k, v] of Object.entries(TERIOCK.config.cost.primary.keys)) {
           if (this.#shouldShowCostPrompt(k)) {
             dialogs.push(
               createDialogFieldset(
@@ -200,9 +198,7 @@ export default function AbilityExecutionGetInputPart(Base) {
             ok: {
               label: _loc("TERIOCK.SYSTEMS.Ability.DIALOG.VariableCosts.ok"),
               callback: (_event, button) => {
-                for (const k of Object.keys(
-                  TERIOCK.options.cost.primary.keys,
-                )) {
+                for (const k of Object.keys(TERIOCK.config.cost.primary.keys)) {
                   if (this.#shouldShowCostPrompt(k)) {
                     this.costs[k] = Number(
                       button.form.elements.namedItem(k).value,

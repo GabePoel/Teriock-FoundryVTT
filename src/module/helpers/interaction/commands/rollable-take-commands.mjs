@@ -1,5 +1,5 @@
 import { boostDialog } from "../../../applications/dialogs/_module.mjs";
-import { impactOptions } from "../../../constants/options/impact-options.mjs";
+import { impactConfig } from "../../../constants/config/impact-config.mjs";
 import { BaseRoll, HarmRoll } from "../../../dice/rolls/_module.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
 import { cleanDataset } from "../../html.mjs";
@@ -14,7 +14,7 @@ async function abstractTakeOperation(actor, options) {
   options = cleanDataset(options);
   let formula = options.formula || "0";
   const impact = options.impact || "damage";
-  const take = TERIOCK.options.impact[impact];
+  const take = TERIOCK.config.impact[impact];
   if (options.apply) {
     const amount = await BaseRoll.getValue(formula, actor?.getRollData() || {});
     if (options.reverse) await take.reverse(actor, amount);
@@ -24,7 +24,7 @@ async function abstractTakeOperation(actor, options) {
   const rollData = actor?.getRollData() || {};
   if (options.boost) {
     formula = await boostDialog(formula, {
-      type: TERIOCK.options.impact[impact].label,
+      type: TERIOCK.config.impact[impact].label,
       rollData,
     });
   }
@@ -61,7 +61,7 @@ function takeOperationFactory(impact, operation) {
   };
 }
 
-const rollableTakeCommands = Object.entries(impactOptions).map(
+const rollableTakeCommands = Object.entries(impactConfig).map(
   ([impact, config]) => {
     return {
       ...formulaCommand,

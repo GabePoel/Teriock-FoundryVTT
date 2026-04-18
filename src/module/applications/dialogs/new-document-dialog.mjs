@@ -7,7 +7,7 @@ import { TeriockDialog } from "../api/_module.mjs";
  * @returns {Promise<"import" | "create">}
  */
 export default async function newDocumentDialog(type) {
-  const name = TERIOCK.options.document[type].name;
+  const name = TERIOCK.config.document[type].name;
   const typeName = name.toLowerCase();
   return await TeriockDialog.prompt({
     content: _loc("TERIOCK.DIALOGS.NewDocument.content", {

@@ -1,4 +1,4 @@
-import { characterOptions } from "../../../../../../constants/options/character-options.mjs";
+import { config } from "../../../../../../constants/_module.mjs";
 import {
   initialBoolean,
   initialNumber,
@@ -23,7 +23,7 @@ export default (Base) => {
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           presence: initialSchema({
-            max: initialNumber(characterOptions.defaults.maxPresence),
+            max: initialNumber(config.character.defaults.maxPresence),
             min: initialNumber(),
             over: initialBoolean(),
             value: initialNumber(),
@@ -51,7 +51,7 @@ export default (Base) => {
           data[`rank.${c}`] = count;
           data[`rank.${c.slice(0, 3).toLowerCase()}`] = count;
         }
-        for (const a of Object.keys(TERIOCK.options.rank)) {
+        for (const a of Object.keys(TERIOCK.config.rank)) {
           const count = ranks.filter((r) => r.system.archetype === a).length;
           data[`rank.${a}`] = count;
           data[`rank.${a.slice(0, 3).toLowerCase()}`] = count;
@@ -99,7 +99,7 @@ export default (Base) => {
       /** @inheritDoc */
       prepareBaseData() {
         this.presence.max = Math.max(
-          characterOptions.defaults.maxPresence,
+          config.character.defaults.maxPresence,
           Math.floor(1 + (this.scaling.lvl + 1) / 5),
         );
         this.scaling.br = Math.max(
@@ -111,15 +111,15 @@ export default (Base) => {
           : this.scaling.lvl;
         this.scaling.rank = Math.max(0, Math.floor((this.scaling.lvl - 1) / 5));
         this.scaling.p = Math.max(
-          TERIOCK.options.scaling.minP,
+          TERIOCK.config.scaling.minP,
           Math.floor(
-            TERIOCK.options.scaling.minP + 1 + (this.scaling.scale - 7) / 10,
+            TERIOCK.config.scaling.minP + 1 + (this.scaling.scale - 7) / 10,
           ),
         );
         this.scaling.f = Math.max(
-          TERIOCK.options.scaling.minF,
+          TERIOCK.config.scaling.minF,
           Math.floor(
-            TERIOCK.options.scaling.minF + (this.scaling.scale - 2) / 5,
+            TERIOCK.config.scaling.minF + (this.scaling.scale - 2) / 5,
           ),
         );
         super.prepareBaseData();

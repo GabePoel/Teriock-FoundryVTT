@@ -1,4 +1,4 @@
-import type { costOptions } from "../../../../../../constants/options/cost-options.mjs";
+import type { costConfig } from "../../../../../../constants/config/cost-config.mjs";
 
 declare global {
   namespace Teriock.Models {
@@ -16,12 +16,12 @@ declare global {
 }
 
 export type CostComponentValue = {
-  type: keyof typeof costOptions.components.types | null;
+  type: keyof typeof costConfig.components.types | null;
   description: string;
 };
 
 export type CostPrimaryValue = {
-  type: keyof typeof costOptions.primary.types | null;
+  type: keyof typeof costConfig.primary.types | null;
   formula: Teriock.System.FormulaString;
   description: string;
 };

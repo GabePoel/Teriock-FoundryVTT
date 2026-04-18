@@ -1,5 +1,5 @@
 import { preLocalize } from "../../helpers/localization.mjs";
-import { effectOptions } from "../options/effect-options.mjs";
+import { effectConfig } from "../config/effect-config.mjs";
 import usableContext from "./usable-context.mjs";
 
 const propertyContext = {
@@ -15,7 +15,7 @@ export default propertyContext;
 
 preLocalize("rollContext.property");
 Hooks.once("i18nInit", () => {
-  Object.entries(effectOptions.form).forEach(([k, v]) => {
+  Object.entries(effectConfig.form).forEach(([k, v]) => {
     propertyContext[`form.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Common.form", {
       name: _loc(v.label),
     });

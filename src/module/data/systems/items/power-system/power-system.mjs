@@ -1,4 +1,4 @@
-import { powerOptions } from "../../../../constants/options/power-options.mjs";
+import { powerConfig } from "../../../../constants/config/power-config.mjs";
 import { mix } from "../../../../helpers/construction.mjs";
 import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
@@ -45,20 +45,20 @@ export default class PowerSystem extends mix(
       }),
       type: new fields.StringField({
         initial: "other",
-        choices: localizeChoices(objectMap(powerOptions.type, (v) => v.label)),
+        choices: localizeChoices(objectMap(powerConfig.type, (v) => v.label)),
       }),
     });
   }
 
   /** @inheritDoc */
   get color() {
-    return powerOptions.type[this.type].color;
+    return powerConfig.type[this.type].color;
   }
 
   /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
-    parts.text = dotJoin([powerOptions.type[this.type].label, parts.text]);
+    parts.text = dotJoin([powerConfig.type[this.type].label, parts.text]);
     parts.subtitle = _loc("TYPES.Item.power");
     return parts;
   }
@@ -81,10 +81,10 @@ export default class PowerSystem extends mix(
   get messageBars() {
     return [
       {
-        icon: powerOptions.type[this.type].icon,
+        icon: powerConfig.type[this.type].icon,
         label: _loc("TERIOCK.SYSTEMS.Power.FIELDS.type.label"),
         wrappers: [
-          powerOptions.type[this.type].label,
+          powerConfig.type[this.type].label,
           this.maxAv === 0
             ? _loc("TERIOCK.SYSTEMS.Power.PANELS.noArmor")
             : _loc("TERIOCK.SYSTEMS.Power.PANELS.maxAv", {

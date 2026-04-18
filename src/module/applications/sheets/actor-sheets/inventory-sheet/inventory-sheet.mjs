@@ -1,4 +1,4 @@
-import { documentOptions } from "../../../../constants/options/document-options.mjs";
+import { documentConfig } from "../../../../constants/config/document-config.mjs";
 import { makeIconClass } from "../../../../helpers/utils.mjs";
 import BaseActorSheet from "../base-actor-sheet/base-actor-sheet.mjs";
 
@@ -13,7 +13,7 @@ export default class InventorySheet extends BaseActorSheet {
       height: 600,
     },
     window: {
-      icon: makeIconClass(documentOptions.inventory.icon, "title"),
+      icon: makeIconClass(documentConfig.inventory.icon, "title"),
     },
   };
 

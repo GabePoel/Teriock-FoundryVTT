@@ -1,5 +1,5 @@
+import { documentConfig } from "../../../constants/config/document-config.mjs";
 import { icons } from "../../../constants/display/icons.mjs";
-import { documentOptions } from "../../../constants/options/document-options.mjs";
 import { mix } from "../../../helpers/construction.mjs";
 import { makeIconClass } from "../../../helpers/utils.mjs";
 import { BaseApplicationMixin } from "../../shared/mixins/_module.mjs";
@@ -33,7 +33,7 @@ export default class ImbuementSheet extends mix(
   static DEFAULT_OPTIONS = {
     form: { closeOnSubmit: false, submitOnChange: true },
     window: {
-      icon: makeIconClass(documentOptions.consequence.icon, "title"),
+      icon: makeIconClass(documentConfig.consequence.icon, "title"),
     },
   };
 

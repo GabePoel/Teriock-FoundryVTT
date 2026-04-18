@@ -1,4 +1,4 @@
-import { impactOptions } from "../../constants/options/impact-options.mjs";
+import { impactConfig } from "../../constants/config/impact-config.mjs";
 import { RollActivation } from "../../data/pseudo-documents/activations/_module.mjs";
 import { makeIconClass } from "../../helpers/utils.mjs";
 import TeriockStatManager from "./stat-manager.mjs";
@@ -16,7 +16,7 @@ export default class TeriockHealManager extends TeriockStatManager {
       takeHack: this._onTakeUnhack,
     },
     window: {
-      icon: makeIconClass(impactOptions.healing.icon, "title"),
+      icon: makeIconClass(impactConfig.healing.icon, "title"),
       title: "TERIOCK.DIALOGS.Heal.title",
       resizable: false,
     },

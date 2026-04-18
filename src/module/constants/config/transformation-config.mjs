@@ -1,7 +1,7 @@
 import { preLocalize } from "../../helpers/localization.mjs";
-import { currencyOptions } from "./currency-options.mjs";
+import { currencyConfig } from "./currency-config.mjs";
 
-export const transformationOptions = {
+export const transformationConfig = {
   level: {
     minor: "TERIOCK.EFFECTS.TransformationLevel.minor",
     full: "TERIOCK.EFFECTS.TransformationLevel.full",
@@ -21,7 +21,7 @@ export const transformationOptions = {
     gp: {
       initial: true,
       update: Object.fromEntries(
-        Object.keys(currencyOptions).map((k) => [`system.money.${k}`, 0]),
+        Object.keys(currencyConfig).map((k) => [`system.money.${k}`, 0]),
       ),
     },
     hp: {
@@ -77,5 +77,5 @@ export const transformationOptions = {
   },
 };
 
-preLocalize("options.transformation.level");
-preLocalize("options.transformation.override", { key: "label" });
+preLocalize("config.transformation.level");
+preLocalize("config.transformation.override", { key: "label" });

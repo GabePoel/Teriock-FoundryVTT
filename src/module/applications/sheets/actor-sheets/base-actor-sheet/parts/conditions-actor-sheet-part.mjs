@@ -50,7 +50,7 @@ export default (Base) =>
           image: TERIOCK.data.conditions[condition].img,
           name: TERIOCK.data.conditions[condition].name,
           associations: [],
-          icon: TERIOCK.options.document.condition.icon,
+          icon: TERIOCK.config.document.condition.icon,
         };
         /** @type {TeriockTokenDocument[]} */
         const tokenDocs = Array.from(
@@ -62,7 +62,7 @@ export default (Base) =>
           /** @type {Teriock.Messages.MessageAssociation} */
           const association = {
             title: _loc("TERIOCK.SHEETS.Actor.CONDITIONS.Associations.title"),
-            icon: TERIOCK.options.document.creature.icon,
+            icon: TERIOCK.config.document.creature.icon,
             cards: [],
           };
           for (const tokenDoc of tokenDocs) {

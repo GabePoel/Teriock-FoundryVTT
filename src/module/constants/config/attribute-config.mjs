@@ -1,7 +1,7 @@
 import { preLocalize } from "../../helpers/localization.mjs";
 import { icons } from "../display/icons.mjs";
 
-export const attributeOptions = {
+export const attributeConfig = {
   int: {
     icon: icons.attribute.int,
     label: "TERIOCK.TERMS.Attributes.int.label",
@@ -40,7 +40,7 @@ export const attributeOptions = {
   },
 };
 
-preLocalize("options.attribute", {
+preLocalize("config.attribute", {
   keys: ["label", "name", "passive"],
   sort: true,
 });

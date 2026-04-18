@@ -1,8 +1,8 @@
-import { tradecraftOptions } from "../../../constants/options/tradecraft-options.mjs";
+import { tradecraftConfig } from "../../../constants/config/tradecraft-config.mjs";
 import { thresholdCommand } from "./abstract-command.mjs";
 
 const allOptions = {};
-Object.values(tradecraftOptions).forEach((fieldOption) => {
+Object.values(tradecraftConfig).forEach((fieldOption) => {
   Object.assign(allOptions, fieldOption.tradecrafts);
 });
 

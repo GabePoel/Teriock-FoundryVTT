@@ -1,4 +1,4 @@
-import { protectionOptions } from "../../../../../../constants/options/protection-options.mjs";
+import { protectionConfig } from "../../../../../../constants/config/protection-config.mjs";
 import { ThresholdRoll } from "../../../../../../dice/rolls/_module.mjs";
 import {
   ImmunityExecution,
@@ -25,11 +25,11 @@ export default (Base) => {
         return Object.assign(super.defineSchema(), {
           protections: new fields.SchemaField(
             objectMap(
-              protectionOptions.types,
+              protectionConfig.types,
               (type) =>
                 new fields.SchemaField(
                   objectMap(
-                    protectionOptions.categories,
+                    protectionConfig.categories,
                     (category) =>
                       new fields.SetField(new fields.StringField(), {
                         label: category.label,

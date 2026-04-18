@@ -1,4 +1,4 @@
-import { equipmentOptions } from "../../../constants/options/equipment-options.mjs";
+import { equipmentConfig } from "../../../constants/config/equipment-config.mjs";
 import EmbeddedDataModel from "../embedded-data-model.mjs";
 
 const { fields } = foundry.data;
@@ -56,7 +56,7 @@ export default class StorageModel extends EmbeddedDataModel {
     return this.storedEquipment
       .map((e) => e.system.totalWeight)
       .reduce((a, b) => a + b, 0)
-      .toNearest(equipmentOptions.weight.interval);
+      .toNearest(equipmentConfig.weight.interval);
   }
 
   /**

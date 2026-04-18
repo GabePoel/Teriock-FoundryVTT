@@ -15,7 +15,7 @@ export default function abilityContextMenus(ability) {
    * @returns {string | null}
    */
   function findIconByKey(key, iconMap = TERIOCK.display.icons) {
-    const attributeIcon = TERIOCK.options.attribute?.[key]?.icon;
+    const attributeIcon = TERIOCK.config.attribute?.[key]?.icon;
     if (attributeIcon) {
       return attributeIcon;
     }
@@ -56,12 +56,12 @@ export default function abilityContextMenus(ability) {
 
   return {
     active: quickMenu(
-      TERIOCK.options.ability.executionTime.active,
+      TERIOCK.config.ability.executionTime.active,
       "system.executionTime",
     ),
-    delivery: quickMenu(TERIOCK.options.ability.delivery, "system.delivery"),
+    delivery: quickMenu(TERIOCK.config.ability.delivery, "system.delivery"),
     expansion: quickMenu(
-      TERIOCK.options.ability.expansion,
+      TERIOCK.config.ability.expansion,
       "system.expansion.type",
       true,
     ),
@@ -73,13 +73,13 @@ export default function abilityContextMenus(ability) {
       TERIOCK.reference.attributes,
       "system.featSaveAttribute",
     ),
-    form: Object.entries(TERIOCK.options.effect.form).map(([key, value]) => ({
+    form: Object.entries(TERIOCK.config.effect.form).map(([key, value]) => ({
       label: value.label,
       icon: makeIcon(value.icon, TERIOCK.display.iconStyles.contextMenu),
       onClick: async () => await ability.update({ "system.form": key }),
     })),
     interaction: quickMenu(
-      TERIOCK.options.ability.interaction,
+      TERIOCK.config.ability.interaction,
       "system.interaction",
     ),
     maneuver: [
@@ -148,7 +148,7 @@ export default function abilityContextMenus(ability) {
       },
     ),
     reactive: quickMenu(
-      TERIOCK.options.ability.executionTime.reactive,
+      TERIOCK.config.ability.executionTime.reactive,
       "system.executionTime",
     ),
   };

@@ -1,4 +1,4 @@
-import { characterOptions } from "../../../../../../constants/options/character-options.mjs";
+import { config } from "../../../../../../constants/_module.mjs";
 import { objectMap } from "../../../../../../helpers/utils.mjs";
 
 const { fields } = foundry.data;
@@ -32,7 +32,7 @@ export default (Base) => {
           }),
           senses: new fields.SchemaField({
             ...objectMap(
-              characterOptions.senseTypes,
+              config.character.sense,
               (c) => senseField(0, c.label),
               { filter: (c) => !c?.hidden },
             ),

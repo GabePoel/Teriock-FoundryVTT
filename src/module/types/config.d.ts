@@ -1,13 +1,13 @@
 declare global {
   export namespace Teriock.Config {
-    export type HackConfig = {
-      icon: string;
+    export type CurrencyEntry = {
+      abbreviation: string;
       label: string;
-      max: number;
-      remove: string;
+      value: number;
+      weight: number;
     };
 
-    export type DocumentConfig = {
+    export type DocumentEntry = {
       doc: CommonDocumentName | "Card" | "JournalEntryPage";
       getter: string;
       icon: string;
@@ -18,15 +18,30 @@ declare global {
       sorter: (doc: AnyCommonDocument[]) => AnyCommonDocument[];
     };
 
-    export type SizeConfig = {
+    export type HackEntry = {
+      icon: string;
+      label: string;
+      max: number;
+      part: string;
+      remove: string;
+      statuses: string[];
+    };
+
+    export type SizeEntry = {
       /** Maximum size corresponding to this category */
       max: number;
       /** Number of tiles wide this size category is on the battlefield */
       length: number;
       /** ID for this size category */
       category: string;
-      /** Number of feet this size category can reach for melee attacks */
+      /** Number of feet this size category can reach for mêlée attacks */
       reach: number;
+    };
+
+    export type SubtypeEntry = {
+      label: string;
+      icon: string;
+      color: string;
     };
   }
 }

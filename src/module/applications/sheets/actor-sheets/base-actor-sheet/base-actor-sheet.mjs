@@ -1,4 +1,4 @@
-import { documentOptions } from "../../../../constants/options/document-options.mjs";
+import { documentConfig } from "../../../../constants/config/document-config.mjs";
 import { mix } from "../../../../helpers/construction.mjs";
 import { makeIconClass } from "../../../../helpers/utils.mjs";
 import HackStatApplicationMixin from "../../../shared/mixins/hack-stat-application-mixin.mjs";
@@ -46,7 +46,7 @@ export default class BaseActorSheet extends mix(
       height: 600,
     },
     window: {
-      icon: makeIconClass(documentOptions.character.icon, "title"),
+      icon: makeIconClass(documentConfig.character.icon, "title"),
     },
   };
 

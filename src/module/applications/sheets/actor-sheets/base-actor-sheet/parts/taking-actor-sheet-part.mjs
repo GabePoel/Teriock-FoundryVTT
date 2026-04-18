@@ -35,20 +35,20 @@ export default (Base) =>
         const field = new fields.NumberField({
           initial: actor.system[stat].morganti ?? 0,
           label: _loc("TERIOCK.SHEETS.Actor.ACTIONS.ApplyMorganti.label", {
-            effect: TERIOCK.options.impact[type]?.label,
+            effect: TERIOCK.config.impact[type]?.label,
           }),
           min: 0,
           integer: true,
           hint: _loc("TERIOCK.SHEETS.Actor.ACTIONS.ApplyMorganti.hint", {
-            effect: TERIOCK.options.impact[type]?.label?.toLowerCase(),
+            effect: TERIOCK.config.impact[type]?.label?.toLowerCase(),
           }),
         });
         await TeriockDialog.prompt({
           window: {
             title: _loc("TERIOCK.SHEETS.Actor.ACTIONS.ApplyMorganti.title", {
-              effect: TERIOCK.options.impact[type]?.label,
+              effect: TERIOCK.config.impact[type]?.label,
             }),
-            icon: makeIconClass(TERIOCK.options.impact[type].icon, "title"),
+            icon: makeIconClass(TERIOCK.config.impact[type].icon, "title"),
           },
           content: field.toFormGroup({}, { name: type }).outerHTML,
           ok: {
@@ -83,13 +83,13 @@ export default (Base) =>
         min: 0,
         integer: true,
         hint: _loc("TERIOCK.SHEETS.Actor.ACTIONS.TakeRollable.hint", {
-          effect: TERIOCK.options.impact[impact]?.label?.toLowerCase(),
+          effect: TERIOCK.config.impact[impact]?.label?.toLowerCase(),
         }),
       });
       await TeriockDialog.prompt({
         window: {
-          title: TERIOCK.options.impact[impact]?.label,
-          icon: makeIconClass(TERIOCK.options.impact[impact].icon, "title"),
+          title: TERIOCK.config.impact[impact]?.label,
+          icon: makeIconClass(TERIOCK.config.impact[impact].icon, "title"),
         },
         content: field.toFormGroup({}, { name: impact, placeholder: "0" })
           .outerHTML,

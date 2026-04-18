@@ -1,5 +1,5 @@
 import { preLocalize } from "../../helpers/localization.mjs";
-import { powerOptions } from "../options/power-options.mjs";
+import { powerConfig } from "../config/power-config.mjs";
 import usableContext from "./usable-context.mjs";
 
 const powerContext = {
@@ -15,7 +15,7 @@ export default powerContext;
 
 preLocalize("rollContext.power");
 Hooks.once("i18nInit", () => {
-  Object.entries(powerOptions.type).forEach(([k, v]) => {
+  Object.entries(powerConfig.type).forEach(([k, v]) => {
     powerContext[`type.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Power.type", {
       name: _loc(v.label),
     });

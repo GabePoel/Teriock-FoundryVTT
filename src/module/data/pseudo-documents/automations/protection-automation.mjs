@@ -1,5 +1,5 @@
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
-import { protectionOptions } from "../../../constants/options/protection-options.mjs";
+import { protectionConfig } from "../../../constants/config/protection-config.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
 import { CritAutomation } from "./abstract/_module.mjs";
@@ -35,13 +35,13 @@ export default class ProtectionAutomation extends CritAutomation {
     return Object.assign(super.defineSchema(), {
       relation: new fields.StringField({
         choices: localizeChoices(
-          objectMap(protectionOptions.types, (t) => t.label),
+          objectMap(protectionConfig.types, (t) => t.label),
         ),
         initial: "resistances",
       }),
       category: new fields.StringField({
         choices: localizeChoices(
-          objectMap(protectionOptions.categories, (c) => c.label),
+          objectMap(protectionConfig.categories, (c) => c.label),
         ),
         initial: "abilities",
       }),
@@ -59,7 +59,7 @@ export default class ProtectionAutomation extends CritAutomation {
     if (this.category === "other") return {};
     return foundry.utils.getProperty(
       TERIOCK,
-      protectionOptions.categories[this.category]?.choices || {},
+      protectionConfig.categories[this.category]?.choices || {},
     );
   }
 

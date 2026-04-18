@@ -1,4 +1,4 @@
-import { effectOptions } from "../../../../../../constants/options/effect-options.mjs";
+import { effectConfig } from "../../../../../../constants/config/effect-config.mjs";
 import { addFormula } from "../../../../../../helpers/formula.mjs";
 import { initialNumber } from "../../../../../fields/helpers/initializers.mjs";
 
@@ -30,7 +30,7 @@ export default (Base) => {
         const value = this.parent.system.cover;
         const min = Math.max(0, value - amount);
         const ids = [];
-        for (let i = value; i > min; i--) ids.push(effectOptions.cover[i - 1]);
+        for (let i = value; i > min; i--) ids.push(effectConfig.cover[i - 1]);
         await this.parent.removeStatusEffects(ids);
       }
 
@@ -43,7 +43,7 @@ export default (Base) => {
         const value = this.parent.system.cover;
         const max = Math.min(3, value + amount);
         const ids = [];
-        for (let i = value; i < max; i++) ids.push(effectOptions.cover[i]);
+        for (let i = value; i < max; i++) ids.push(effectConfig.cover[i]);
         await this.parent.applyStatusEffects(ids);
       }
 

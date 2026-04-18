@@ -34,7 +34,7 @@ export default class HacksAutomation extends BaseAutomation {
       hacks: new fields.SetField(
         new fields.StringField({
           choices: localizeChoices(
-            objectMap(TERIOCK.options.hack, (h) => h.part),
+            objectMap(TERIOCK.config.hack, (h) => h.part),
           ),
         }),
         {

@@ -1,5 +1,5 @@
 import { conditionDialog } from "../../../../applications/dialogs/select-token-dialog.mjs";
-import { costOptions } from "../../../../constants/options/cost-options.mjs";
+import { costConfig } from "../../../../constants/config/cost-config.mjs";
 import { FormulaField } from "../../../../data/fields/_module.mjs";
 import {
   AddDocumentsAutomation,
@@ -71,7 +71,7 @@ export default function AbilityExecutionChatPart(Base) {
           title: _loc("TERIOCK.SYSTEMS.Ability.PANELS.statusWithRespectTo", {
             status: TERIOCK.reference.conditions[automation.status],
           }),
-          icon: TERIOCK.options.document.creature.icon,
+          icon: TERIOCK.config.document.creature.icon,
           cards: uuids.map((uuid) => this.#generateAssociationCard(uuid)),
         };
         const trackers = uuids.map((uuid) =>
@@ -650,7 +650,7 @@ export default function AbilityExecutionChatPart(Base) {
           this.tags.push(
             _loc("TERIOCK.SYSTEMS.Imbuement.PANELS.spent", {
               amount: this.costs[c],
-              label: costOptions.primary.keys[c]?.abbreviation,
+              label: costConfig.primary.keys[c]?.abbreviation,
             }),
           );
         }

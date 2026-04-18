@@ -6,6 +6,7 @@ import {
   fromIdentifier,
   inferNameFromIdentifier,
   makeIconClass,
+  objectMap,
 } from "../../../helpers/utils.mjs";
 import { TextField } from "../../fields/_module.mjs";
 import EmbeddedDataModel from "../embedded-data-model.mjs";
@@ -30,19 +31,15 @@ export default class IdentificationModel extends EmbeddedDataModel {
         initial: "",
         required: false,
       }),
-      identified: new fields.BooleanField({
-        initial: true,
-      }),
-      name: new fields.StringField({
-        initial: "",
-      }),
+      identified: new fields.BooleanField({ initial: true }),
+      name: new fields.StringField({ initial: "" }),
       notes: new TextField({
         gmOnly: true,
         initial: "",
         required: false,
       }),
       powerLevel: new fields.StringField({
-        choices: TERIOCK.options.equipment.powerLevelShort,
+        choices: objectMap(TERIOCK.config.equipment.powerLevel, (e) => e.label),
         initial: "mundane",
       }),
       read: new fields.BooleanField({ initial: true }),
@@ -171,7 +168,7 @@ export default class IdentificationModel extends EmbeddedDataModel {
   async unidentify() {
     if (this.identified && game.user.isGM) {
       const uncheckedPropertyIdentifiers = [
-        ...TERIOCK.options.equipment.unidentifiedProperties,
+        ...TERIOCK.config.equipment.unidentifiedProperties,
       ];
       if (
         Object.keys(TERIOCK.index.equipment).includes(

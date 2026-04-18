@@ -1,6 +1,6 @@
 import { preLocalize } from "../../helpers/localization.mjs";
 
-export const deliveryOptions = {
+export const deliveryConfig = {
   aura: {
     label: "TERIOCK.TERMS.Delivery.aura",
     template: "circle",
@@ -13,4 +13,4 @@ export const deliveryOptions = {
   },
 };
 
-preLocalize("options.delivery", { keys: ["label"] });
+preLocalize("config.delivery", { keys: ["label"] });

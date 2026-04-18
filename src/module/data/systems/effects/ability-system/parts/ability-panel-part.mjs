@@ -51,10 +51,10 @@ export default (Base) => {
             wrappers: simplifyTags(this._infoTags),
           },
           {
-            icon: TERIOCK.options.effect.form[this.form].icon,
+            icon: TERIOCK.config.effect.form[this.form].icon,
             label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.metaphysics"),
             wrappers: [
-              TERIOCK.options.effect.form[this.form].label || "",
+              TERIOCK.config.effect.form[this.form].label || "",
               ...simplifyTags(this._metaphysicsTags),
             ],
           },

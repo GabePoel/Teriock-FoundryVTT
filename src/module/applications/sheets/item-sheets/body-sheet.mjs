@@ -1,4 +1,4 @@
-import { documentOptions } from "../../../constants/options/document-options.mjs";
+import { documentConfig } from "../../../constants/config/document-config.mjs";
 import { makeIconClass } from "../../../helpers/utils.mjs";
 import ArmamentSheet from "./armament-sheet.mjs";
 
@@ -15,7 +15,7 @@ export default class BodySheet extends ArmamentSheet {
   static DEFAULT_OPTIONS = {
     classes: ["body"],
     window: {
-      icon: makeIconClass(documentOptions.body.icon, "title"),
+      icon: makeIconClass(documentConfig.body.icon, "title"),
     },
   };
 

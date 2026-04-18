@@ -1,4 +1,4 @@
-import { documentOptions } from "../../constants/options/document-options.mjs";
+import { documentConfig } from "../../constants/config/document-config.mjs";
 import { mix } from "../../helpers/construction.mjs";
 import { getImage } from "../../helpers/path.mjs";
 import * as mixins from "../mixins/_module.mjs";
@@ -41,7 +41,7 @@ export default class TeriockJournalEntryPage extends mix(
       ...(await super.getPanelParts()),
       image: this.img,
       icon:
-        documentOptions[this.type]?.icon ||
+        documentConfig[this.type]?.icon ||
         this.getFlag("teriock", "journalIcon") ||
         "book",
       blocks: [

@@ -41,7 +41,7 @@ export default class CommonOutcomesAutomation extends mix(
     return Object.assign(super.defineSchema(), {
       common: new fields.SetField(
         new fields.StringField({
-          choices: TERIOCK.options.consequence.common,
+          choices: TERIOCK.config.consequence.common,
         }),
       ),
     });
@@ -71,7 +71,7 @@ export default class CommonOutcomesAutomation extends mix(
     const actor = scope?.actor ?? this.document.actor;
     if (!actor) return;
     const outcomes = listFormat(
-      this.common.map((c) => TERIOCK.options.consequence.common[c]),
+      this.common.map((c) => TERIOCK.config.consequence.common[c]),
     );
     const shouldApply = await this.getConfirmation({
       content: "TERIOCK.AUTOMATIONS.CommonOutcomes.DIALOG.content",

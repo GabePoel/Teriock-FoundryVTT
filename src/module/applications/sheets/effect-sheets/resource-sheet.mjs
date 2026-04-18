@@ -1,4 +1,4 @@
-import { documentOptions } from "../../../constants/options/document-options.mjs";
+import { documentConfig } from "../../../constants/config/document-config.mjs";
 import { makeIconClass } from "../../../helpers/utils.mjs";
 import BaseEffectSheet from "./base-effect-sheet.mjs";
 
@@ -18,7 +18,7 @@ export default class ResourceSheet extends BaseEffectSheet {
   static DEFAULT_OPTIONS = {
     classes: ["resource"],
     window: {
-      icon: makeIconClass(documentOptions.resource.icon, "title"),
+      icon: makeIconClass(documentConfig.resource.icon, "title"),
     },
   };
 }

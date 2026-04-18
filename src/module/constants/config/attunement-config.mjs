@@ -1,7 +1,7 @@
 import { preLocalize } from "../../helpers/localization.mjs";
 import { icons } from "../display/icons.mjs";
 
-export const attunementOptions = {
+export const attunementConfig = {
   type: {
     effect: {
       icon: icons.document.consequence,
@@ -15,4 +15,4 @@ export const attunementOptions = {
   },
 };
 
-preLocalize("options.attunement.type", { keys: ["label"] });
+preLocalize("config.attunement.type", { keys: ["label"] });

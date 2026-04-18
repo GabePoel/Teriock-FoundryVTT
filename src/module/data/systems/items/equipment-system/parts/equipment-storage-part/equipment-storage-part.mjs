@@ -1,4 +1,4 @@
-import { equipmentOptions } from "../../../../../../constants/options/equipment-options.mjs";
+import { equipmentConfig } from "../../../../../../constants/config/equipment-config.mjs";
 import { StorageModel } from "../../../../../models/_module.mjs";
 
 const { EmbeddedDataField } = foundry.data.fields;
@@ -42,7 +42,7 @@ export default (Base) => {
           (this.consumable ? this.quantity : 1) *
           this.weightMultiplier;
         if (this.storage.enabled) total += this.storage.carriedWeight;
-        return total.toNearest(equipmentOptions.weight.interval);
+        return total.toNearest(equipmentConfig.weight.interval);
       }
 
       /** @inheritDoc */
@@ -116,7 +116,7 @@ export default (Base) => {
       /** @inheritDoc */
       prepareSpecialData() {
         super.prepareSpecialData();
-        this.weight = this.weight.toNearest(equipmentOptions.weight.interval);
+        this.weight = this.weight.toNearest(equipmentConfig.weight.interval);
       }
     }
   );

@@ -90,7 +90,7 @@ export default class FluencySystem extends mix(
     const parts = super.embedParts;
     parts.subtitle = TERIOCK.reference.tradecrafts[this.tradecraft];
     parts.text = dotJoin([
-      TERIOCK.options.tradecraft[this.field].name,
+      TERIOCK.config.tradecraft[this.field].name,
       parts.text,
     ]);
     return parts;
@@ -100,7 +100,7 @@ export default class FluencySystem extends mix(
   get wikiPage() {
     const namespace = this.constructor.metadata.namespace;
     const pageName =
-      TERIOCK.options.tradecraft[this.field].tradecrafts[this.tradecraft].name;
+      TERIOCK.config.tradecraft[this.field].tradecrafts[this.tradecraft].name;
     return `${namespace}:${pageName}`;
   }
 
@@ -161,13 +161,13 @@ export default class FluencySystem extends mix(
       ...(await super.getPanelParts()),
       bars: [
         {
-          icon: TERIOCK.options.tradecraft[this.field].tradecrafts[
+          icon: TERIOCK.config.tradecraft[this.field].tradecrafts[
             this.tradecraft
           ].icon,
           label: _loc("TERIOCK.TERMS.Common.tradecraft"),
           wrappers: [
-            TERIOCK.options.tradecraft[this.field].name,
-            TERIOCK.options.tradecraft[this.field].tradecrafts[this.tradecraft]
+            TERIOCK.config.tradecraft[this.field].name,
+            TERIOCK.config.tradecraft[this.field].tradecrafts[this.tradecraft]
               .name,
           ],
         },

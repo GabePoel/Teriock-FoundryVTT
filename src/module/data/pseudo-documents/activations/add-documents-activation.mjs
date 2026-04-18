@@ -1,7 +1,7 @@
 import { selectDocumentsDialog } from "../../../applications/dialogs/select-document-dialog.mjs";
+import { documentConfig } from "../../../constants/config/document-config.mjs";
+import { effectConfig } from "../../../constants/config/effect-config.mjs";
 import { icons } from "../../../constants/display/icons.mjs";
-import { documentOptions } from "../../../constants/options/document-options.mjs";
-import { effectOptions } from "../../../constants/options/effect-options.mjs";
 import { resolveDocument } from "../../../helpers/resolve.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
 import { BaseActivation } from "./abstract/_module.mjs";
@@ -55,7 +55,7 @@ export default class AddDocumentsActivation extends BaseActivation {
       primary: familyConstructionField(),
       secondary: familyConstructionField(),
       target: new fields.StringField({
-        choices: objectMap(effectOptions.applicationTargets, (o) => o.label, {
+        choices: objectMap(effectConfig.applicationTargets, (e) => e.label, {
           localize: true,
         }),
         initial: "actor",
@@ -171,10 +171,10 @@ export default class AddDocumentsActivation extends BaseActivation {
    * @returns {Promise<AnyChildDocument[]>}
    */
   async safeCreate(parent, docs) {
-    const effectTypes = Object.entries(documentOptions)
+    const effectTypes = Object.entries(documentConfig)
       .filter(([_k, v]) => v.doc === "ActiveEffect")
       .map(([k, _v]) => k);
-    const itemTypes = Object.entries(documentOptions)
+    const itemTypes = Object.entries(documentConfig)
       .filter(([_k, v]) => v.doc === "Item")
       .map(([k, _v]) => k);
     const effectData = docs.filter((d) => effectTypes.includes(d?.type));

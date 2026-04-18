@@ -101,7 +101,7 @@ export default class ChangeQuantityAutomation extends mix(
     const shouldChange = await this.getConfirmation({
       data: { amount: this.formula, name: `@UUID[${consumable.uuid}]` },
       content: "TERIOCK.AUTOMATIONS.ChangeQuantity.DIALOG.content",
-      icon: TERIOCK.options.document[consumable.type]?.icon ?? undefined,
+      icon: TERIOCK.config.document[consumable.type]?.icon ?? undefined,
     });
     if (!shouldChange) return;
     const roll = new BaseRoll(this.formula, this.getRollData(), {

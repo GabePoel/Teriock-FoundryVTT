@@ -85,7 +85,7 @@ export default class TeriockTokenDocument extends mix(
     return [
       {
         label: _loc("TERIOCK.SYSTEMS.Common.MENU.openSource"),
-        icon: makeIcon(TERIOCK.options.document.character.icon, "contextMenu"),
+        icon: makeIcon(TERIOCK.config.document.character.icon, "contextMenu"),
         visible: () => this.actor && this.actor.isViewer,
         onClick: async () => this.actor.sheet.render(true),
       },

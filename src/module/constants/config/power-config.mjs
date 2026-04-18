@@ -2,8 +2,8 @@ import { preLocalize } from "../../helpers/localization.mjs";
 import { colors } from "../display/colors.mjs";
 import { icons } from "../display/icons.mjs";
 
-export const powerOptions = {
-  type: {
+export const powerConfig = {
+  type: /** @enum {Teriock.Config.SubtypeEntry} */ {
     backstory: {
       label: "TERIOCK.TERMS.PowerType.backstory",
       icon: icons.power.backstory,
@@ -62,4 +62,4 @@ export const powerOptions = {
   },
 };
 
-preLocalize("options.power.type", { keys: ["label"] });
+preLocalize("config.power.type", { keys: ["label"] });

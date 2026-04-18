@@ -17,12 +17,12 @@ const command = {
   ...thresholdCommand,
   args: ["attribute"],
   icon: (options) =>
-    TERIOCK.options.attribute[options?.attribute]?.icon || "star",
+    TERIOCK.config.attribute[options?.attribute]?.icon || "star",
   id: "feat",
   label: (options) =>
-    TERIOCK.options.attribute[options?.attribute]?.label
+    TERIOCK.config.attribute[options?.attribute]?.label
       ? _loc("TERIOCK.ROLLS.Feat.name", {
-          value: TERIOCK.options.attribute[options?.attribute]?.label,
+          value: TERIOCK.config.attribute[options?.attribute]?.label,
         })
       : _loc("TERIOCK.ROLLS.Feat.label"),
   primary: use,

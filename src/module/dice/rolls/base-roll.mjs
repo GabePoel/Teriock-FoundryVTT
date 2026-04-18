@@ -246,13 +246,11 @@ export default class BaseRoll extends Roll {
   }
 
   /**
-   * Apply additional options based on damage type. This allows for styled Dice So Nice integration.
+   * Apply additional options based on the damage type. This allows for styled Dice So Nice integration.
    */
   #applyDiceStyles() {
     for (const die of this.dice) {
-      for (const [type, options] of Object.entries(
-        TERIOCK.options.die.styles,
-      )) {
+      for (const [type, options] of Object.entries(TERIOCK.config.die.styles)) {
         if (die.flavor.includes(type)) die.options.appearance = options;
       }
     }

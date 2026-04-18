@@ -137,7 +137,7 @@ export default function CommonDocumentMixin(Base) {
 
         if (
           !data.img &&
-          TERIOCK.options.document[this.type]?.doc === this.documentName
+          TERIOCK.config.document[this.type]?.doc === this.documentName
         ) {
           this.updateSource({
             img: systemPath(`icons/documents/${data.type}.svg`),

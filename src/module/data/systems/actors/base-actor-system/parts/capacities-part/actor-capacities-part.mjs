@@ -1,4 +1,4 @@
-import { equipmentOptions } from "../../../../../../constants/options/equipment-options.mjs";
+import { equipmentConfig } from "../../../../../../constants/config/equipment-config.mjs";
 import { TeriockActor } from "../../../../../../documents/_module.mjs";
 import {
   initialNumber,
@@ -42,7 +42,7 @@ export default (Base) => {
             money: initialNumber(),
             self: new fields.NumberField({
               initial: null,
-              interval: equipmentOptions.weight.interval,
+              interval: equipmentConfig.weight.interval,
               min: 0,
               nullable: true,
             }),
@@ -101,11 +101,11 @@ export default (Base) => {
         this.weight.equipment = equipmentWeight;
         const carried = this.weight.equipment + this.weight.money;
         this.weight.carried = carried.toNearest(
-          equipmentOptions.weight.interval,
+          equipmentConfig.weight.interval,
         );
         const value =
           this.weight.equipment + this.weight.money + this.weight.self;
-        this.weight.value = value.toNearest(equipmentOptions.weight.interval);
+        this.weight.value = value.toNearest(equipmentConfig.weight.interval);
       }
 
       /** @inheritDoc */

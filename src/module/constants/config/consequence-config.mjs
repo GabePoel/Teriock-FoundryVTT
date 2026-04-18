@@ -1,15 +1,6 @@
 import { preLocalize } from "../../helpers/localization.mjs";
 
-export const consequenceOptions = {
-  hacks: {
-    arm: "TERIOCK.STATUSES.Hacks.armHack",
-    leg: "TERIOCK.STATUSES.Hacks.legHack",
-    body: "TERIOCK.STATUSES.Hacks.bodyHack",
-    eye: "TERIOCK.STATUSES.Hacks.eyeHack",
-    ear: "TERIOCK.STATUSES.Hacks.earHack",
-    mouth: "TERIOCK.STATUSES.Hacks.mouthHack",
-    nose: "TERIOCK.STATUSES.Hacks.noseHack",
-  },
+export const consequenceConfig = {
   interaction: {
     attack: {
       hit: "TERIOCK.SYSTEMS.Ability.FIELDS.results.hit.label",
@@ -47,9 +38,8 @@ export const consequenceOptions = {
   },
 };
 
-preLocalize("options.consequence.hacks");
-preLocalize("options.consequence.interaction.attack");
-preLocalize("options.consequence.interaction.feat");
-preLocalize("options.consequence.interaction.manifest");
-preLocalize("options.consequence.interaction.block");
-preLocalize("options.consequence.common");
+preLocalize("config.consequence.interaction.attack");
+preLocalize("config.consequence.interaction.feat");
+preLocalize("config.consequence.interaction.manifest");
+preLocalize("config.consequence.interaction.block");
+preLocalize("config.consequence.common");

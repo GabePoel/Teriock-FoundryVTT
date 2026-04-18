@@ -1,5 +1,5 @@
 import { TeriockTextEditor } from "../applications/ux/_module.mjs";
-import { documentOptions } from "../constants/options/document-options.mjs";
+import { documentConfig } from "../constants/config/document-config.mjs";
 import { getImage } from "./path.mjs";
 
 /**
@@ -29,7 +29,7 @@ export async function attributePanel(attribute) {
  */
 export async function tradecraftPanel(tradecraft) {
   let field;
-  for (const [key, value] of Object.entries(TERIOCK.options.tradecraft)) {
+  for (const [key, value] of Object.entries(TERIOCK.config.tradecraft)) {
     if (Object.keys(value.tradecrafts).includes(tradecraft)) {
       field = key;
     }
@@ -39,9 +39,9 @@ export async function tradecraftPanel(tradecraft) {
     name: TERIOCK.reference.tradecrafts[tradecraft],
     bars: [
       {
-        icon: TERIOCK.options.tradecraft[field].icon,
+        icon: TERIOCK.config.tradecraft[field].icon,
         label: _loc("TERIOCK.SYSTEMS.Fluency.FIELDS.field.label"),
-        wrappers: [TERIOCK.options.tradecraft[field].name],
+        wrappers: [TERIOCK.config.tradecraft[field].name],
       },
     ],
     blocks: [
@@ -50,7 +50,7 @@ export async function tradecraftPanel(tradecraft) {
         text: TERIOCK.content.tradecrafts[tradecraft],
       },
     ],
-    icon: documentOptions.fluency.icon,
+    icon: documentConfig.fluency.icon,
     label: _loc("TERIOCK.TERMS.Common.tradecraft"),
   });
 }
@@ -62,7 +62,7 @@ export async function tradecraftPanel(tradecraft) {
  */
 export async function classPanel(className) {
   let archetype;
-  for (const [key, value] of Object.entries(TERIOCK.options.rank)) {
+  for (const [key, value] of Object.entries(TERIOCK.config.rank)) {
     if (Object.keys(value.classes).includes(className)) archetype = key;
   }
   return await TeriockTextEditor.enrichPanel({
@@ -70,9 +70,9 @@ export async function classPanel(className) {
     name: TERIOCK.reference.classes[className],
     bars: [
       {
-        icon: TERIOCK.options.rank[archetype].icon,
+        icon: TERIOCK.config.rank[archetype].icon,
         label: _loc("TERIOCK.SYSTEMS.Rank.FIELDS.archetype.label"),
-        wrappers: [TERIOCK.options.rank[archetype].name],
+        wrappers: [TERIOCK.config.rank[archetype].name],
       },
     ],
     blocks: [
@@ -81,7 +81,7 @@ export async function classPanel(className) {
         text: TERIOCK.content.classes[className],
       },
     ],
-    icon: documentOptions.rank.icon,
+    icon: documentConfig.rank.icon,
     label: _loc("TERIOCK.SYSTEMS.Rank.PANELS.class"),
   });
 }

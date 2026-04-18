@@ -1,4 +1,4 @@
-import { currencyOptions } from "../../../../../../constants/options/currency-options.mjs";
+import { currencyConfig } from "../../../../../../constants/config/currency-config.mjs";
 import { objectMap } from "../../../../../../helpers/utils.mjs";
 
 const { fields } = foundry.data;
@@ -24,7 +24,7 @@ export default (Base) => {
             label: "Interest Rate",
           }),
           money: new fields.SchemaField({
-            ...objectMap(currencyOptions, (o) => currencyField(o.label)),
+            ...objectMap(currencyConfig, (e) => currencyField(e.label)),
             total: currencyField("Total Money", false),
             debt: currencyField("Debt", false),
           }),
@@ -34,8 +34,8 @@ export default (Base) => {
       /** @inheritDoc */
       getRollData() {
         const rollData = super.getRollData();
-        for (const k of Object.keys(currencyOptions)) {
-          rollData[`money.${currencyOptions[k].abbreviation}`] = this.money[k];
+        for (const k of Object.keys(currencyConfig)) {
+          rollData[`money.${currencyConfig[k].abbreviation}`] = this.money[k];
         }
         rollData[`money.debt`] = this.money.debt;
         rollData[`money`] = this.money.total;
@@ -46,15 +46,15 @@ export default (Base) => {
       prepareDerivedData() {
         super.prepareDerivedData();
         const totalValue =
-          Object.keys(TERIOCK.options.currency).reduce((sum, key) => {
+          Object.keys(TERIOCK.config.currency).reduce((sum, key) => {
             this.money[key] = Math.max(0, this.money[key] || 0);
-            const value = this.money[key] * TERIOCK.options.currency[key].value;
+            const value = this.money[key] * TERIOCK.config.currency[key].value;
             return sum + value;
           }, 0) - this.money.debt;
-        const totalWeight = Object.keys(TERIOCK.options.currency).reduce(
+        const totalWeight = Object.keys(TERIOCK.config.currency).reduce(
           (sum, key) => {
             const weight =
-              (this.money[key] || 0) * TERIOCK.options.currency[key].weight;
+              (this.money[key] || 0) * TERIOCK.config.currency[key].weight;
             return sum + weight;
           },
           0,
@@ -76,12 +76,12 @@ export default (Base) => {
         const currentMoney = { ...this.money };
 
         // Calculate total available wealth in gold value
-        const totalWealth = Object.keys(TERIOCK.options.currency).reduce(
+        const totalWealth = Object.keys(TERIOCK.config.currency).reduce(
           (total, currency) => {
             return (
               total +
               (currentMoney[currency] || 0) *
-                TERIOCK.options.currency[currency].value
+                TERIOCK.config.currency[currency].value
             );
           },
           0,
@@ -97,7 +97,7 @@ export default (Base) => {
         }
 
         // Create an array of currencies sorted by value (highest first)
-        const currencies = Object.entries(TERIOCK.options.currency)
+        const currencies = Object.entries(TERIOCK.config.currency)
           .sort(([, a], [, b]) => b.value - a.value)
           .map(([key, config]) => ({
             key,

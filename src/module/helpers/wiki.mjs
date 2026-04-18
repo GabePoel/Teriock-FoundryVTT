@@ -17,7 +17,7 @@ export function openWikiPage(title) {
  * @returns {Promise<UUID<TeriockDocument>|null>}
  */
 export async function wikiToUuid(namespace, name) {
-  const config = TERIOCK.options.wiki.namespaces[namespace];
+  const config = TERIOCK.config.wiki.namespaces[namespace];
   if (!config) return null;
   const packs = config.packs.map((p) => game.packs.get(p)).filter((_) => _);
   const parentName = config.parentKey === "name" ? name : namespace;

@@ -79,7 +79,7 @@ export default class RankSystem extends mix(
   /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
-    parts.subtitle = TERIOCK.options.rank[this.archetype].name;
+    parts.subtitle = TERIOCK.config.rank[this.archetype].name;
     parts.text =
       parts.text ||
       (this.innate
@@ -111,11 +111,11 @@ export default class RankSystem extends mix(
   get messageBars() {
     return [
       {
-        icon: TERIOCK.options.rank[this.archetype].classes[this.className].icon,
+        icon: TERIOCK.config.rank[this.archetype].classes[this.className].icon,
         label: _loc("TERIOCK.SYSTEMS.Rank.PANELS.class"),
         wrappers: [
-          TERIOCK.options.rank[this.archetype].name,
-          TERIOCK.options.rank[this.archetype].classes[this.className].name,
+          TERIOCK.config.rank[this.archetype].name,
+          TERIOCK.config.rank[this.archetype].classes[this.className].name,
           _loc("TERIOCK.SYSTEMS.Rank.PANELS.rank", {
             value: this.classRank,
           }),
@@ -169,7 +169,7 @@ export default class RankSystem extends mix(
           .map((a) => a.system.identifier)
           .includes(this.archetype)
       ) {
-        const archetypeName = TERIOCK.options.rank[this.archetype].name;
+        const archetypeName = TERIOCK.config.rank[this.archetype].name;
         this.actor._stagedItemCreations.add(
           game.teriock.packs.classes.index.getName(archetypeName).uuid,
         );

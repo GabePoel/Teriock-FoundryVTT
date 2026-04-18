@@ -29,7 +29,7 @@ export default (Base) => {
         return Object.assign(super.defineSchema(), {
           delivery: new fields.StringField({
             initial: "weapon",
-            choices: TERIOCK.options.ability.delivery,
+            choices: TERIOCK.config.ability.delivery,
           }),
           executionTime: new fields.SchemaField({
             base: new fields.StringField({ initial: "a1" }),
@@ -47,16 +47,16 @@ export default (Base) => {
           }),
           interaction: new fields.StringField({
             initial: "attack",
-            choices: TERIOCK.options.ability.interaction,
+            choices: TERIOCK.config.ability.interaction,
           }),
           maneuver: new fields.StringField({
             initial: "active",
-            choices: TERIOCK.options.ability.maneuver,
+            choices: TERIOCK.config.ability.maneuver,
           }),
           range: new EvaluationField({ model: RangeModel }),
           targets: new fields.SetField(
             new fields.StringField({
-              choices: TERIOCK.options.ability.targets,
+              choices: TERIOCK.config.ability.targets,
             }),
             { initial: ["creature"] },
           ),
@@ -123,7 +123,7 @@ export default (Base) => {
         let time;
         if (this.maneuver !== "slow") {
           time =
-            TERIOCK.options.ability.executionTime[this.maneuver][
+            TERIOCK.config.ability.executionTime[this.maneuver][
               this.executionTime.base
             ];
         } else {
@@ -132,11 +132,11 @@ export default (Base) => {
         return [
           time || "",
           this.piercing.label,
-          TERIOCK.options.ability.delivery[this.delivery] || "",
+          TERIOCK.config.ability.delivery[this.delivery] || "",
           this.interaction === "feat"
             ? TERIOCK.reference.attributes[this.featSaveAttribute]
             : "",
-          TERIOCK.options.ability.interaction[this.interaction] || "",
+          TERIOCK.config.ability.interaction[this.interaction] || "",
         ];
       }
 
@@ -150,7 +150,7 @@ export default (Base) => {
               ["detonate", "ripple"].includes(this.expansion.type)
                 ? TERIOCK.reference.attributes[this.expansion.featSaveAttribute]
                 : "",
-              TERIOCK.options.ability.expansion[this.expansion.type] || "",
+              TERIOCK.config.ability.expansion[this.expansion.type] || "",
               this.expansion.range.abbreviation,
               formulaExists(this.expansion.cap)
                 ? _loc("TERIOCK.SYSTEMS.Ability.PANELS.expansionCap", {
@@ -170,7 +170,7 @@ export default (Base) => {
           this.isRanged ? this.range.abbreviation : "",
           ...Array.from(
             this.targets.map(
-              (target) => TERIOCK.options.ability.targets[target],
+              (target) => TERIOCK.config.ability.targets[target],
             ),
           ),
           this.duration.text || "",

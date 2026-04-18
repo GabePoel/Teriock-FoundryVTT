@@ -1,4 +1,4 @@
-import { attunementOptions } from "../../../../constants/options/attunement-options.mjs";
+import { attunementConfig } from "../../../../constants/config/attunement-config.mjs";
 import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
 import { makeIcon, objectMap } from "../../../../helpers/utils.mjs";
@@ -34,7 +34,7 @@ export default class AttunementSystem extends CleanedEffectSystem {
       type: new fields.StringField({
         initial: "effect",
         choices: localizeChoices(
-          objectMap(attunementOptions.type, (v) => v.label),
+          objectMap(attunementConfig.type, (v) => v.label),
         ),
       }),
       target: new fields.DocumentIdField({ nullable: true, initial: null }),
@@ -73,7 +73,7 @@ export default class AttunementSystem extends CleanedEffectSystem {
     parts.subtitle = _loc("TERIOCK.SYSTEMS.Attunement.PANELS.subtitle", {
       tier: this.tier || 0,
     });
-    parts.text = dotJoin([attunementOptions.type[this.type].label, this.usage]);
+    parts.text = dotJoin([attunementConfig.type[this.type].label, this.usage]);
     return parts;
   }
 
@@ -166,7 +166,7 @@ export default class AttunementSystem extends CleanedEffectSystem {
         icon: TERIOCK.display.icons.attunable.tier,
         label: _loc("TERIOCK.SYSTEMS.Attunable.FIELDS.tier.raw.label"),
         wrappers: [
-          attunementOptions.type[this.type].label,
+          attunementConfig.type[this.type].label,
           _loc("TERIOCK.SYSTEMS.Attunable.PANELS.tier", {
             value: this.tier || 0,
           }),
@@ -177,7 +177,7 @@ export default class AttunementSystem extends CleanedEffectSystem {
       parts.associations = [
         {
           title: _loc("TERIOCK.SYSTEMS.Attunement.PANELS.for"),
-          icon: TERIOCK.options.document.attunement.icon,
+          icon: TERIOCK.config.document.attunement.icon,
           cards: [
             {
               name: this.targetDocument.fullName,

@@ -3,39 +3,39 @@ import { getImage } from "../../helpers/path.mjs";
 export default function registerLookupHelpers() {
   Handlebars.registerHelper(
     "className",
-    (arch, name) => TERIOCK.options.rank[arch].classes[name].name,
+    (arch, name) => TERIOCK.config.rank[arch].classes[name].name,
   );
 
   Handlebars.registerHelper(
     "classArchetype",
-    (arch) => TERIOCK.options.rank[arch].name,
+    (arch) => TERIOCK.config.rank[arch].name,
   );
 
   Handlebars.registerHelper(
     "executionTime",
     (maneuver, execTime) =>
-      TERIOCK.options.ability.executionTime[maneuver]?.[execTime] ?? execTime,
+      TERIOCK.config.ability.executionTime[maneuver]?.[execTime] ?? execTime,
   );
 
   Handlebars.registerHelper(
     "tradecraft",
-    (field, name) => TERIOCK.options.tradecraft[field].tradecrafts[name].name,
+    (field, name) => TERIOCK.config.tradecraft[field].tradecrafts[name].name,
   );
 
   Handlebars.registerHelper(
     "field",
-    (field) => TERIOCK.options.tradecraft[field].name,
+    (field) => TERIOCK.config.tradecraft[field].name,
   );
 
   Handlebars.registerHelper(
     "equipmentMarker",
     (item) =>
-      TERIOCK.options.equipment.powerLevel[item.system.powerLevel]?.color,
+      TERIOCK.config.equipment.powerLevel[item.system.powerLevel]?.color,
   );
 
   Handlebars.registerHelper("abilityMarker", (effect) => {
     const type = effect.system.form || effect.system.form;
-    return TERIOCK.options.effect.form[type]?.color;
+    return TERIOCK.config.effect.form[type]?.color;
   });
 
   Handlebars.registerHelper("path", function (obj, ...pathSegments) {

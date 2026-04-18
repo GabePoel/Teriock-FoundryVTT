@@ -1,4 +1,4 @@
-import { impactOptions } from "../../constants/options/impact-options.mjs";
+import { impactConfig } from "../../constants/config/impact-config.mjs";
 import { RollActivation } from "../../data/pseudo-documents/activations/_module.mjs";
 import { makeIconClass } from "../../helpers/utils.mjs";
 import TeriockStatManager from "./stat-manager.mjs";
@@ -15,7 +15,7 @@ export default class TeriockRevitalizeManager extends TeriockStatManager {
       rollStatDie: this._onRollStatDie,
     },
     window: {
-      icon: makeIconClass(impactOptions.revitalizing.icon, "title"),
+      icon: makeIconClass(impactConfig.revitalizing.icon, "title"),
       title: "TERIOCK.DIALOGS.Revitalize.title",
       resizable: false,
     },

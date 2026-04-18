@@ -1,4 +1,4 @@
-import { impactOptions } from "../../constants/options/impact-options.mjs";
+import { impactConfig } from "../../constants/config/impact-config.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
 import { makeIconClass } from "../../helpers/utils.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
@@ -102,7 +102,7 @@ export default async function boostDialog(rollFormula, options = {}) {
       icon: makeIconClass(TERIOCK.display.icons.ui.dice, "title"),
       title: impact
         ? _loc("TERIOCK.DIALOGS.Boost.typeTitle", {
-            type: impactOptions[impact]?.label,
+            type: impactConfig[impact]?.label,
           })
         : _loc("TERIOCK.DIALOGS.Boost.title"),
     },

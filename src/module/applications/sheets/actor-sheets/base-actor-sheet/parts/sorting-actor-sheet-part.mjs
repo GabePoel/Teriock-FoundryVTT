@@ -1,3 +1,5 @@
+import { objectMap } from "../../../../../helpers/utils.mjs";
+
 //noinspection JSClosureCompilerSyntax
 /**
  * @param {typeof BaseActorSheet} Base
@@ -44,28 +46,28 @@ export default (Base) =>
             key: "maneuver",
             name: "settings.abilityFilters.maneuver",
             label: "TERIOCK.SYSTEMS.Ability.FIELDS.maneuver.label",
-            choices: TERIOCK.options.ability.maneuver,
+            choices: TERIOCK.config.ability.maneuver,
             selected: this.settings.abilityFilters.maneuver,
           },
           {
             key: "interaction",
             name: "settings.abilityFilters.interaction",
             label: "TERIOCK.SYSTEMS.Ability.FIELDS.interaction.label",
-            choices: TERIOCK.options.ability.interaction,
+            choices: TERIOCK.config.ability.interaction,
             selected: this.settings.abilityFilters.interaction,
           },
           {
             key: "delivery",
             name: "settings.abilityFilters.delivery",
             label: "TERIOCK.SYSTEMS.Ability.FIELDS.delivery.label",
-            choices: TERIOCK.options.ability.delivery,
+            choices: TERIOCK.config.ability.delivery,
             selected: this.settings.abilityFilters.delivery,
           },
           {
             key: "target",
             name: "settings.abilityFilters.target",
             label: "TERIOCK.SYSTEMS.Ability.FIELDS.targets.label",
-            choices: TERIOCK.options.ability.targets,
+            choices: TERIOCK.config.ability.targets,
             selected: this.settings.abilityFilters.target,
           },
           {
@@ -93,7 +95,7 @@ export default (Base) =>
             key: "piercing",
             name: "settings.abilityFilters.piercing",
             label: "TERIOCK.MODELS.Piercing.FIELDS.raw.label",
-            choices: TERIOCK.options.piercing.levels,
+            choices: TERIOCK.config.piercing.levels,
             selected: this.settings.abilityFilters.piercing,
           },
         ],
@@ -187,7 +189,7 @@ export default (Base) =>
             key: "equipmentClasses",
             name: "settings.equipmentFilters.equipmentClasses",
             label: "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentClasses.label",
-            choices: TERIOCK.options.equipment.equipmentClasses,
+            choices: TERIOCK.reference.equipmentClasses,
             selected: this.settings.equipmentFilters.equipmentClasses,
           },
           {
@@ -217,14 +219,17 @@ export default (Base) =>
             key: "weaponFightingStyles",
             name: "settings.equipmentFilters.weaponFightingStyles",
             label: "TERIOCK.SYSTEMS.Armament.FIELDS.fightingStyle.label",
-            choices: TERIOCK.options.equipment.weaponFightingStyles,
+            choices: TERIOCK.reference.weaponFightingStyles,
             selected: this.settings.equipmentFilters.weaponFightingStyles,
           },
           {
             key: "powerLevel",
             name: "settings.equipmentFilters.powerLevel",
             label: "TERIOCK.SYSTEMS.Equipment.FIELDS.powerLevel.label",
-            choices: TERIOCK.options.equipment.powerLevelShort,
+            choices: objectMap(
+              TERIOCK.config.equipment.powerLevel,
+              (e) => e.label,
+            ),
             selected: this.settings.equipmentFilters.powerLevel,
           },
         ],

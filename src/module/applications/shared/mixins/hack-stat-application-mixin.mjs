@@ -1,4 +1,4 @@
-import { hackOptions } from "../../../constants/options/hack-options.mjs";
+import { hackConfig } from "../../../constants/config/hack-config.mjs";
 
 /**
  * Mixin allowing hacks and spending dice stats.
@@ -147,10 +147,10 @@ export default function HackStatApplicationMixin(Base) {
 async function onTakeHack(actor, event, target) {
   event.stopPropagation();
   const part = target.dataset.part;
-  if (actor.system.hacks[part].value < hackOptions[part].max) {
+  if (actor.system.hacks[part].value < hackConfig[part].max) {
     await actor.system.takeHack(part);
   } else {
-    await actor.system.takeUnhack(part, hackOptions[part].max);
+    await actor.system.takeUnhack(part, hackConfig[part].max);
   }
 }
 
@@ -167,6 +167,6 @@ async function onTakeUnhack(actor, event, target) {
   if (actor.system.hacks[part].value > 0) {
     await actor.system.takeUnhack(part);
   } else {
-    await actor.system.takeHack(part, hackOptions[part].max);
+    await actor.system.takeHack(part, hackConfig[part].max);
   }
 }

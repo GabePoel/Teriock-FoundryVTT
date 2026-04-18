@@ -1,7 +1,7 @@
 import { preLocalize } from "../../helpers/localization.mjs";
 import { icons } from "../display/icons.mjs";
 
-export const costOptions = {
+export const costConfig = {
   components: {
     keys: {
       material: "TERIOCK.COSTS.Components.material",
@@ -78,8 +78,8 @@ export const costOptions = {
   },
 };
 
-preLocalize("options.cost.primary.keys", { keys: ["abbreviation", "label"] });
-preLocalize("options.cost.primary.types");
-preLocalize("options.cost.components.keys");
-preLocalize("options.cost.components.types");
-preLocalize("options.cost.tweaks", { key: "label" });
+preLocalize("config.cost.primary.keys", { keys: ["abbreviation", "label"] });
+preLocalize("config.cost.primary.types");
+preLocalize("config.cost.components.keys");
+preLocalize("config.cost.components.types");
+preLocalize("config.cost.tweaks", { key: "label" });

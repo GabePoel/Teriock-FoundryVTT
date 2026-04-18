@@ -1,5 +1,5 @@
-import { documentOptions } from "../../../constants/options/document-options.mjs";
-import { transformationOptions } from "../../../constants/options/transformation-options.mjs";
+import { documentConfig } from "../../../constants/config/document-config.mjs";
+import { transformationConfig } from "../../../constants/config/transformation-config.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
 import { choiceMap, objectMap } from "../../../helpers/utils.mjs";
 import { CompetenceModel } from "../../models/_module.mjs";
@@ -41,7 +41,7 @@ export function automationTransformationFields() {
   return Object.assign(speciesTransformationFields(), {
     level: new fields.StringField({
       blank: true,
-      choices: TERIOCK.options.transformation.level,
+      choices: TERIOCK.config.transformation.level,
       hint: "TERIOCK.SCHEMA.Transformation.level.hint",
       initial: null,
       label: "TERIOCK.SCHEMA.Transformation.level.label",
@@ -51,13 +51,13 @@ export function automationTransformationFields() {
     override: new fields.SetField(
       new fields.StringField({
         choices: localizeChoices(
-          objectMap(transformationOptions.override, (k) => k.label),
+          objectMap(transformationConfig.override, (k) => k.label),
         ),
       }),
       {
         hint: "TERIOCK.SCHEMA.Transformation.override.hint",
-        initial: Object.keys(transformationOptions.override).filter(
-          (k) => transformationOptions.override[k].initial,
+        initial: Object.keys(transformationConfig.override).filter(
+          (k) => transformationConfig.override[k].initial,
         ),
         label: "TERIOCK.SCHEMA.Transformation.override.label",
       },
@@ -65,14 +65,14 @@ export function automationTransformationFields() {
     reset: new fields.SetField(
       new fields.StringField({
         choices: choiceMap(
-          transformationOptions.reset,
-          (k) => TERIOCK.options.cost.primary.keys[k].label,
+          transformationConfig.reset,
+          (k) => TERIOCK.config.cost.primary.keys[k].label,
         ),
       }),
       {
         hint: "TERIOCK.SCHEMA.Transformation.reset.hint",
-        initial: Object.keys(transformationOptions.reset).filter(
-          (k) => transformationOptions.reset[k].initial,
+        initial: Object.keys(transformationConfig.reset).filter(
+          (k) => transformationConfig.reset[k].initial,
         ),
         label: "TERIOCK.SCHEMA.Transformation.reset.label",
       },
@@ -80,14 +80,14 @@ export function automationTransformationFields() {
     suppress: new fields.SetField(
       new fields.StringField({
         choices: choiceMap(
-          transformationOptions.suppress,
-          (k) => documentOptions[k].name,
+          transformationConfig.suppress,
+          (k) => documentConfig[k].name,
         ),
       }),
       {
         hint: "TERIOCK.SCHEMA.Transformation.suppress.hint",
-        initial: Object.keys(transformationOptions.suppress).filter(
-          (k) => transformationOptions.suppress[k].initial,
+        initial: Object.keys(transformationConfig.suppress).filter(
+          (k) => transformationConfig.suppress[k].initial,
         ),
         label: "TERIOCK.SCHEMA.Transformation.suppress.label",
       },

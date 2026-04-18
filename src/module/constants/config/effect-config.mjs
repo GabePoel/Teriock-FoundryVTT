@@ -2,7 +2,7 @@ import { preLocalize } from "../../helpers/localization.mjs";
 import { colors } from "../display/colors.mjs";
 import { icons } from "../display/icons.mjs";
 
-export const effectOptions = {
+export const effectConfig = {
   applicationTargets: {
     actor: {
       effectType: "consequence",
@@ -14,7 +14,7 @@ export const effectOptions = {
     },
   },
   cover: ["halfCover", "threeQuartersCover", "fullCover"],
-  form: {
+  form: /** @enum {Teriock.Config.SubtypeEntry} */ {
     special: {
       label: "TERIOCK.TERMS.EffectForm.special",
       icon: icons.form.special,
@@ -48,5 +48,5 @@ export const effectOptions = {
   },
 };
 
-preLocalize("options.effect.applicationTargets", { key: "label" });
-preLocalize("options.effect.form", { key: "label" });
+preLocalize("config.effect.applicationTargets", { key: "label" });
+preLocalize("config.effect.form", { key: "label" });

@@ -131,7 +131,7 @@ foundry.helpers.Hooks.once("init", function () {
 
   assign({
     ActiveEffect: {
-      changePhases: constants.options.change.phase,
+      changePhases: constants.config.change.phase,
       changeTypes: {
         boost: setup.changeConfigs.boostConfig,
         typeAdd: setup.changeConfigs.addTypesConfig,
@@ -181,7 +181,7 @@ foundry.helpers.Hooks.once("init", function () {
     Combat: {
       initiative: {
         decimals: 2,
-        formula: TERIOCK.options.character.defaults.initiative,
+        formula: TERIOCK.config.character.defaults.initiative,
       },
       documentClass: documents.TeriockCombat,
     },
@@ -249,7 +249,7 @@ foundry.helpers.Hooks.once("init", function () {
   // Configure Type Icons
   // --------------------
 
-  for (const [k, v] of Object.entries(constants.options.document)) {
+  for (const [k, v] of Object.entries(constants.config.document)) {
     if (v.doc) {
       CONFIG[v.doc].typeIcons[k] = helpers.utils.makeIconClass(v.icon, "title");
     }

@@ -1,5 +1,5 @@
+import { costConfig } from "../constants/config/cost-config.mjs";
 import { iconStyles } from "../constants/display/_module.mjs";
-import { costOptions } from "../constants/options/cost-options.mjs";
 import { BaseRoll } from "../dice/rolls/_module.mjs";
 import { formulaExists } from "./formula.mjs";
 import { localizeChoices } from "./localization.mjs";
@@ -297,7 +297,7 @@ export function inferNameFromIdentifier(identifier) {
   const type = parsed?.type;
   let out = toTitleCase(identifier.replaceAll("-", " "));
   if (!type) return out;
-  const reference = TERIOCK.reference[TERIOCK.options.document[type]?.index];
+  const reference = TERIOCK.reference[TERIOCK.config.document[type]?.index];
   if (reference) out = reference[toCamelCase(identifier)] || out;
   return out;
 }
@@ -308,9 +308,9 @@ export function inferNameFromIdentifier(identifier) {
  * @returns {string}
  */
 export function inferIconFromIdentifier(identifier) {
-  let icon = TERIOCK.options.document.document.icon;
+  let icon = TERIOCK.config.document.document.icon;
   const parsed = parseIdentifier(identifier);
-  if (parsed?.type) icon = TERIOCK.options.document[parsed.type]?.icon ?? icon;
+  if (parsed?.type) icon = TERIOCK.config.document[parsed.type]?.icon ?? icon;
   return icon;
 }
 
@@ -400,7 +400,7 @@ export function fromIdentifierSync(identifier) {
   const parsed = parseIdentifier(identifier);
   if (!parsed?.identifier) return null;
   if (parsed?.type) {
-    const documentName = TERIOCK.options.document[parsed.type]?.doc;
+    const documentName = TERIOCK.config.document[parsed.type]?.doc;
     if (!documentName) return null;
     let collection;
     if (documentName === "Actor") collection = game.actors;
@@ -466,7 +466,7 @@ export async function fromIdentifier(identifier, options = {}) {
     if (["damage", "drain"].includes(parsed.type)) {
       return fromHarmIdentifier(identifier);
     }
-    const documentName = TERIOCK.options.document[parsed.type]?.doc;
+    const documentName = TERIOCK.config.document[parsed.type]?.doc;
     if (!documentName) return null;
     const packs = game.packs.contents
       .filter((p) => p.documentName === documentName)
@@ -485,7 +485,7 @@ export async function fromIdentifier(identifier, options = {}) {
         const mutationFields = [
           "system.improvement",
           "system.limitation",
-          ...Object.keys(costOptions.tweaks).map(
+          ...Object.keys(costConfig.tweaks).map(
             (t) => `system.costs.tweaks.${t}`,
           ),
         ];

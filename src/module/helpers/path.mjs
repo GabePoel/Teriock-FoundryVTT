@@ -1,5 +1,5 @@
 import { default as iconManifest } from "../../icons/icon-manifest.json" with { type: "json" };
-import { indexOptions } from "../constants/options/index-options.mjs";
+import { indexConfig } from "../constants/config/index-config.mjs";
 import { toCamelCase, toKebabCase } from "./string.mjs";
 
 /**
@@ -21,7 +21,7 @@ export function systemPath(path) {
 export function getImage(category, name, fallback) {
   const out = fallback || systemPath("icons/documents/uncertainty.svg");
   let l1 = toCamelCase(category);
-  if (!iconManifest[l1]) l1 = indexOptions[category];
+  if (!iconManifest[l1]) l1 = indexConfig[category];
   if (!iconManifest[l1]) return out;
   return iconManifest[l1][toCamelCase(name)] || out;
 }

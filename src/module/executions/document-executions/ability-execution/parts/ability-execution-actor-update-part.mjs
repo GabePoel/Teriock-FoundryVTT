@@ -1,5 +1,5 @@
-import { costOptions } from "../../../../constants/options/cost-options.mjs";
-import { impactOptions } from "../../../../constants/options/impact-options.mjs";
+import { costConfig } from "../../../../constants/config/cost-config.mjs";
+import { impactConfig } from "../../../../constants/config/impact-config.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { formulaExists } from "../../../../helpers/formula.mjs";
 import { toTitleCase } from "../../../../helpers/string.mjs";
@@ -19,7 +19,7 @@ export default function AbilityExecutionActorUpdatePart(Base) {
        * @returns {string[]}
        */
       get #paidCosts() {
-        return Object.keys(costOptions.primary.keys).filter(
+        return Object.keys(costConfig.primary.keys).filter(
           (c) => this.costs[c] > 0 && !this.options[`no${toTitleCase(c)}`],
         );
       }
@@ -51,7 +51,7 @@ export default function AbilityExecutionActorUpdatePart(Base) {
             this.updates["system.combat.hasReaction"] = false;
           }
           for (const c of this.#paidCosts) {
-            const config = costOptions.primary.keys[c];
+            const config = costConfig.primary.keys[c];
             if (config?.barStat) {
               this.updates[`system.${c}.value`] = Math.max(
                 this.actor.system[c].value +
@@ -71,9 +71,9 @@ export default function AbilityExecutionActorUpdatePart(Base) {
           game.teriock.getSetting("autoPayAbilityCosts")
         ) {
           for (const c of this.#paidCosts) {
-            const config = costOptions.primary.keys[c];
+            const config = costConfig.primary.keys[c];
             if (!config?.barStat) {
-              await impactOptions[config?.impact]?.apply(
+              await impactConfig[config?.impact]?.apply(
                 this.actor,
                 this.costs[c],
               );

@@ -18,13 +18,13 @@
         </div>
         <div class="teriock-block-display-divider" style="margin-bottom: 1rem"></div>
         <div class="tgrid g3" style="padding-inline: 0.5em; row-gap: 0.55rem;">
-          {{#each TERIOCK.options.character.movementTypes as |config key|}}
+          {{#each TERIOCK.config.character.movement as |config key|}}
             <div class="gi2">
               {{{config.label}}}
             </div>
             <div class="tcolored">
               {{path
-                @root/TERIOCK.options.character.speedAdjustments
+                @root/TERIOCK.config.character.speed
                 (lookup @root/system.speedAdjustments key)
                 "label"
               }}
@@ -42,7 +42,7 @@
             <div class="tcenter tsubtle">
               {{localize "TERIOCK.SHEETS.Actor.TABS.Details.sense.range"}}
             </div>
-            {{#each TERIOCK.options.character.senseTypes as |config key|}}
+            {{#each TERIOCK.config.character.sense as |config key|}}
               {{#if (not config.hidden)}}
                 <div class="gi2">
                   {{{config.label}}}

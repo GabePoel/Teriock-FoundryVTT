@@ -339,9 +339,9 @@ export async function selectBodyPartDialog() {
 export async function selectClassDialog() {
   const choices = await Promise.all(
     [
-      ...Object.keys(TERIOCK.options.rank.mage.classes),
-      ...Object.keys(TERIOCK.options.rank.semi.classes),
-      ...Object.keys(TERIOCK.options.rank.warrior.classes),
+      ...Object.keys(TERIOCK.config.rank.mage.classes),
+      ...Object.keys(TERIOCK.config.rank.semi.classes),
+      ...Object.keys(TERIOCK.config.rank.warrior.classes),
     ].map(async (c) => {
       return {
         name: TERIOCK.reference.classes[c],

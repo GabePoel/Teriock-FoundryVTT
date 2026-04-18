@@ -12,7 +12,7 @@ async function use(actor, options = {}) {
  * @type {Teriock.Interaction.CommandEntry}
  */
 const command = {
-  icon: () => TERIOCK.options.document.ability.icon,
+  icon: () => TERIOCK.config.document.ability.icon,
   id: "attack",
   label: "TERIOCK.COMMANDS.Attack.label",
   primary: use,

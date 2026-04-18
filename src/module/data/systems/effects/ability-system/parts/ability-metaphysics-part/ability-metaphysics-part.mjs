@@ -79,7 +79,7 @@ export default (Base) => {
 
       /** @inheritDoc */
       get color() {
-        return TERIOCK.options.effect.form[this.form].color;
+        return TERIOCK.config.effect.form[this.form].color;
       }
 
       /**

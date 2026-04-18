@@ -24,9 +24,9 @@ async function takeUnhack(actor, options = {}) {
  */
 export const hackCommand = {
   args: ["part"],
-  icon: (options) => TERIOCK.options.hack[options?.part || "arm"].icon,
+  icon: (options) => TERIOCK.config.hack[options?.part || "arm"].icon,
   id: "hack",
-  label: (options) => TERIOCK.options.hack[options?.part || "arm"].label,
+  label: (options) => TERIOCK.config.hack[options?.part || "arm"].label,
   primary: takeHack,
   secondary: takeUnhack,
 };
@@ -37,9 +37,9 @@ export const hackCommand = {
  */
 export const unhackCommand = {
   args: ["part"],
-  icon: (options) => TERIOCK.options.hack[options?.part || "arm"].icon,
+  icon: (options) => TERIOCK.config.hack[options?.part || "arm"].icon,
   id: "unhack",
-  label: (options) => TERIOCK.options.hack[options?.part || "arm"].remove,
+  label: (options) => TERIOCK.config.hack[options?.part || "arm"].remove,
   primary: takeUnhack,
   secondary: takeHack,
 };

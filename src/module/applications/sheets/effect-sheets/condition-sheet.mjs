@@ -1,4 +1,4 @@
-import { documentOptions } from "../../../constants/options/document-options.mjs";
+import { documentConfig } from "../../../constants/config/document-config.mjs";
 import { makeIconClass } from "../../../helpers/utils.mjs";
 
 const { ActiveEffectConfig } = foundry.applications.sheets;
@@ -11,7 +11,7 @@ export default class ConditionSheet extends ActiveEffectConfig {
   static DEFAULT_OPTIONS = {
     classes: ["condition"],
     window: {
-      icon: makeIconClass(documentOptions.condition.icon, "title"),
+      icon: makeIconClass(documentConfig.condition.icon, "title"),
     },
   };
 }

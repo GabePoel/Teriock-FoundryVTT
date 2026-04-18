@@ -45,7 +45,7 @@ export default class HpPoolModel extends BaseStatPoolModel {
             title: _loc("TERIOCK.MODELS.BaseStatPool.PANELS.title"),
           },
         ],
-        icon: TERIOCK.options.document.condition.icon,
+        icon: TERIOCK.config.document.condition.icon,
         image: TERIOCK.data.conditions.criticallyWounded.img,
         name: TERIOCK.data.conditions.criticallyWounded.name,
       });

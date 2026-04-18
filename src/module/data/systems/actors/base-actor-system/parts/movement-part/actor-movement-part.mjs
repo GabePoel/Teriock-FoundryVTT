@@ -1,4 +1,4 @@
-import { characterOptions } from "../../../../../../constants/options/character-options.mjs";
+import { config } from "../../../../../../constants/_module.mjs";
 import { objectMap } from "../../../../../../helpers/utils.mjs";
 import { initialNumber } from "../../../../../fields/helpers/initializers.mjs";
 
@@ -21,8 +21,8 @@ export default (Base) => {
         return Object.assign(super.defineSchema(), {
           movementSpeed: initialNumber(30),
           speedAdjustments: new fields.SchemaField(
-            objectMap(characterOptions.movementTypes, (t) =>
-              speedField(t.initial, t.label),
+            objectMap(config.character.movement, (e) =>
+              speedField(e.initial, e.label),
             ),
           ),
         });
@@ -32,7 +32,7 @@ export default (Base) => {
       getRollData() {
         const rollData = super.getRollData();
         rollData["speed"] = this.movementSpeed;
-        for (const [k, v] of Object.entries(characterOptions.movementTypes)) {
+        for (const [k, v] of Object.entries(config.character.movement)) {
           rollData[`speed.${v.abbreviation}`] = this.speedAdjustments[k] || 0;
         }
         return rollData;

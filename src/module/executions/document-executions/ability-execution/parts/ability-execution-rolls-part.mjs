@@ -75,9 +75,9 @@ export default function AbilityExecutionRollsPart(Base) {
                 rollOptions.comparison = "gt";
               }
               if (this.limb) {
-                rollOptions.threshold += TERIOCK.options.target.limb;
+                rollOptions.threshold += TERIOCK.config.target.limb;
               } else if (this.vitals) {
-                rollOptions.threshold += TERIOCK.options.target.vitals;
+                rollOptions.threshold += TERIOCK.config.target.vitals;
               }
             }
             this.rolls.push(

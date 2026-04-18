@@ -1,4 +1,4 @@
-import { documentOptions } from "../../../constants/options/document-options.mjs";
+import { documentConfig } from "../../../constants/config/document-config.mjs";
 import { makeIconClass } from "../../../helpers/utils.mjs";
 import BaseEffectSheet from "./base-effect-sheet.mjs";
 
@@ -14,7 +14,7 @@ export default class AttunementSheet extends BaseEffectSheet {
   static DEFAULT_OPTIONS = {
     classes: ["attunement"],
     window: {
-      icon: makeIconClass(documentOptions.attunement.icon, "title"),
+      icon: makeIconClass(documentConfig.attunement.icon, "title"),
     },
   };
 
@@ -31,7 +31,7 @@ export default class AttunementSheet extends BaseEffectSheet {
     if (!this.isEditable) return;
     this._connectBuildContextMenu(
       ".attunement-box",
-      TERIOCK.options.attunement.type,
+      TERIOCK.config.attunement.type,
       "system.type",
       "click",
     );

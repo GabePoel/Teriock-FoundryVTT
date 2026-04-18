@@ -60,7 +60,7 @@ export default class HarmSystem extends mix(
   get fullName() {
     return _loc("TERIOCK.SYSTEMS.Harm.EMBED.fullName", {
       name: super.fullName,
-      type: TERIOCK.options.impact[this.parent.type]?.label || "",
+      type: TERIOCK.config.impact[this.parent.type]?.label || "",
     });
   }
 

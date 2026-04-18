@@ -94,7 +94,7 @@ export default function ArmamentSystemMixin(Base) {
           }),
           impacts: new fields.SetField(
             new fields.StringField({
-              choices: objectMap(TERIOCK.options.impact, (i) => i.take, {
+              choices: objectMap(TERIOCK.config.impact, (i) => i.take, {
                 filter: (c) => !c?.hidden,
                 localize: true,
               }),

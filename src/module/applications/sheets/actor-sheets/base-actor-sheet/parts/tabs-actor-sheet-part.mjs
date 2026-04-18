@@ -1,5 +1,5 @@
+import { documentConfig } from "../../../../../constants/config/document-config.mjs";
 import { icons } from "../../../../../constants/display/icons.mjs";
-import { documentOptions } from "../../../../../constants/options/document-options.mjs";
 import TeriockTextEditor from "../../../../ux/text-editor.mjs";
 
 //noinspection JSClosureCompilerSyntax,JSUnresolvedReference,JSUnusedGlobalSymbols
@@ -25,37 +25,37 @@ export default (Base) =>
         tabs: [
           {
             id: "tradecrafts",
-            icon: documentOptions.fluency.icon,
+            icon: documentConfig.fluency.icon,
             label: "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.title",
           },
           {
             id: "abilities",
-            icon: documentOptions.ability.icon,
+            icon: documentConfig.ability.icon,
             label: "TERIOCK.SHEETS.Actor.TABS.Abilities.title",
           },
           {
             id: "inventory",
-            icon: documentOptions.inventory.icon,
+            icon: documentConfig.inventory.icon,
             label: "TERIOCK.SHEETS.Actor.TABS.Inventory.title",
           },
           {
             id: "classes",
-            icon: documentOptions.rank.icon,
+            icon: documentConfig.rank.icon,
             label: "TERIOCK.SHEETS.Actor.TABS.Classes.title",
           },
           {
             id: "powers",
-            icon: documentOptions.power.icon,
+            icon: documentConfig.power.icon,
             label: "TERIOCK.SHEETS.Actor.TABS.Powers.title",
           },
           {
             id: "resources",
-            icon: documentOptions.resource.icon,
+            icon: documentConfig.resource.icon,
             label: "TERIOCK.SHEETS.Actor.TABS.Resources.title",
           },
           {
             id: "effects",
-            icon: documentOptions.condition.icon,
+            icon: documentConfig.condition.icon,
             label: "TERIOCK.SHEETS.Actor.TABS.Effects.title",
           },
           {

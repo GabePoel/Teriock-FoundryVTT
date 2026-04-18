@@ -1,4 +1,4 @@
-import { costOptions } from "../../../../../../constants/options/cost-options.mjs";
+import { costConfig } from "../../../../../../constants/config/cost-config.mjs";
 import { localizeChoices } from "../../../../../../helpers/localization.mjs";
 import { objectMap } from "../../../../../../helpers/utils.mjs";
 import { FormulaField, TextField } from "../../../../../fields/_module.mjs";
@@ -32,7 +32,7 @@ export default (Base) => {
         return Object.assign(super.defineSchema(), {
           costs: new fields.SchemaField({
             primary: new fields.SchemaField(
-              objectMap(costOptions.primary.keys, (v) => {
+              objectMap(costConfig.primary.keys, (v) => {
                 const label = _loc("TERIOCK.COSTS.Long.primary", {
                   key: _loc(v.label),
                 });
@@ -41,7 +41,7 @@ export default (Base) => {
                     description: new TextField({ label }),
                     formula: new FormulaField({ label, deterministic: false }),
                     type: new fields.StringField({
-                      choices: localizeChoices(costOptions.primary.types),
+                      choices: localizeChoices(costConfig.primary.types),
                       initial: null,
                       label,
                       nullable: true,
@@ -52,7 +52,7 @@ export default (Base) => {
               }),
             ),
             components: new fields.SchemaField(
-              objectMap(costOptions.components.keys, (v) => {
+              objectMap(costConfig.components.keys, (v) => {
                 const label = _loc("TERIOCK.COSTS.Long.component", {
                   key: _loc(v),
                 });
@@ -60,7 +60,7 @@ export default (Base) => {
                   {
                     description: new TextField({ label }),
                     type: new fields.StringField({
-                      choices: localizeChoices(costOptions.components.types),
+                      choices: localizeChoices(costConfig.components.types),
                       initial: null,
                       label,
                       nullable: true,
@@ -72,7 +72,7 @@ export default (Base) => {
             ),
             tweaks: new fields.SchemaField(
               objectMap(
-                costOptions.tweaks,
+                costConfig.tweaks,
                 (v) =>
                   new fields.NumberField({
                     initial: 0,
@@ -156,7 +156,7 @@ export default (Base) => {
        */
       get _costWrappers() {
         return [
-          ...Object.entries(TERIOCK.options.cost.primary.keys).map(([k, v]) =>
+          ...Object.entries(TERIOCK.config.cost.primary.keys).map(([k, v]) =>
             this.costs.primary[k].type === "formula"
               ? _loc("TERIOCK.SYSTEMS.Ability.PANELS.constant", {
                   value: this.costs.primary[k].formula,
@@ -168,7 +168,7 @@ export default (Base) => {
                   })
                 : "",
           ),
-          ...Object.entries(TERIOCK.options.cost.components.keys).map(
+          ...Object.entries(TERIOCK.config.cost.components.keys).map(
             ([k, v]) => (this.costs.components[k].type ? v : ""),
           ),
         ];

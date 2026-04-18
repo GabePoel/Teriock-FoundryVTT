@@ -123,7 +123,7 @@ export default class SpeciesSystem extends mix(
     if (this.transformationEffect?.system.transformation.level) {
       tags.push({
         label:
-          TERIOCK.options.transformation.level[
+          TERIOCK.config.transformation.level[
             this.transformationEffect.system.transformation.level
           ],
         tooltip: "TERIOCK.SYSTEMS.Species.FIELDS.transformationLevel.label",

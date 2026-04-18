@@ -1,5 +1,5 @@
 import { TeriockActiveEffect } from "../documents/_module.mjs";
-import { phase } from "../constants/options/change-options.mjs";
+import { phase } from "../constants/config/change-config.mjs";
 import { EffectChangeData } from "@common/documents/_types.mjs";
 
 declare global {

@@ -1,6 +1,6 @@
 import { preLocalize } from "../../helpers/localization.mjs";
 import { objectMap } from "../../helpers/utils.mjs";
-import { impactOptions } from "../options/impact-options.mjs";
+import { impactConfig } from "../config/impact-config.mjs";
 
 const triggers = {
   activity: {
@@ -62,7 +62,7 @@ const triggers = {
   },
   impact: {
     label: "TERIOCK.TRIGGERS.Impact.label",
-    choices: objectMap(impactOptions, (c) => c.take, {
+    choices: objectMap(impactConfig, (c) => c.take, {
       filter: (c) => !c?.hidden,
     }),
   },

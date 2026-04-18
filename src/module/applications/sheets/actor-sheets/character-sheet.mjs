@@ -1,4 +1,4 @@
-import { documentOptions } from "../../../constants/options/document-options.mjs";
+import { documentConfig } from "../../../constants/config/document-config.mjs";
 import { makeIconClass } from "../../../helpers/utils.mjs";
 import TeriockPlayableActorSheet from "./base-actor-sheet/playable-actor-sheet.mjs";
 
@@ -11,6 +11,6 @@ export default class CharacterSheet extends TeriockPlayableActorSheet {
     classes: ["character"],
     form: { submitOnChange: true },
     position: { width: 800, height: 600 },
-    window: { icon: makeIconClass(documentOptions.character.icon, "title") },
+    window: { icon: makeIconClass(documentConfig.character.icon, "title") },
   };
 }

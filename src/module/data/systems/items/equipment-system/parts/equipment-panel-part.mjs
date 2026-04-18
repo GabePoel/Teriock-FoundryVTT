@@ -19,10 +19,10 @@ export default (Base) => {
       async getPanelParts() {
         const bars = [
           {
-            icon: TERIOCK.options.equipment.powerLevel[this.powerLevel].icon,
+            icon: TERIOCK.config.equipment.powerLevel[this.powerLevel].icon,
             label: _loc("TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentType.label"),
             wrappers: [
-              TERIOCK.options.equipment.powerLevel[this.powerLevel].label,
+              TERIOCK.config.equipment.powerLevel[this.powerLevel].label,
               inferNameFromIdentifier(this.equipmentType, "equipment"),
               this.range.description,
               ...simplifyTags(this._armamentTags),

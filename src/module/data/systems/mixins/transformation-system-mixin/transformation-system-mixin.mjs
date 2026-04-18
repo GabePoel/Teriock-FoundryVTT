@@ -63,7 +63,7 @@ export default function TransformationSystemMixin(Base) {
         for (const r of this.transformation.reset) {
           Object.assign(
             updateData,
-            TERIOCK.options.transformation.reset[r].update,
+            TERIOCK.config.transformation.reset[r].update,
           );
         }
         return updateData;
@@ -124,7 +124,7 @@ export default function TransformationSystemMixin(Base) {
        */
       #applyToggle(updatesById, collection, id, value) {
         const toggle =
-          TERIOCK.options.transformation.suppress[collection.get(id)?.type]
+          TERIOCK.config.transformation.suppress[collection.get(id)?.type]
             ?.path;
         if (toggle) {
           if (!updatesById[id]) updatesById[id] = { _id: id };
@@ -180,7 +180,7 @@ export default function TransformationSystemMixin(Base) {
           (d) =>
             !foundry.utils.getProperty(
               d,
-              TERIOCK.options.transformation.suppress[d.type]?.path,
+              TERIOCK.config.transformation.suppress[d.type]?.path,
             ) && d.dependee !== this.parent,
         );
       }
@@ -258,10 +258,10 @@ export default function TransformationSystemMixin(Base) {
         const disabledMpDiceItems = [];
         const typeMap = this.actor.children.typeMap;
         for (const t of this.transformation.suppress) {
-          if (TERIOCK.options.document[t].doc === "ActiveEffect") {
+          if (TERIOCK.config.document[t].doc === "ActiveEffect") {
             disabledEffects.push(...this.#enabledFilter(typeMap[t] || []));
           }
-          if (TERIOCK.options.document[t].doc === "Item") {
+          if (TERIOCK.config.document[t].doc === "Item") {
             disabledItems.push(...this.#enabledFilter(typeMap[t] || []));
           }
         }
@@ -280,7 +280,7 @@ export default function TransformationSystemMixin(Base) {
         }
         const preTransform = {};
         for (const r of this.transformation.reset) {
-          const update = TERIOCK.options.transformation.reset[r].update;
+          const update = TERIOCK.config.transformation.reset[r].update;
           for (const k of Object.keys(update)) {
             preTransform[k] = foundry.utils.getProperty(this.actor, k);
           }

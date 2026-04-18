@@ -71,7 +71,7 @@ export function rankSort(ranks) {
  * @returns {TeriockAbility[]}
  */
 export function effectSort(abilities) {
-  const effectFormOrder = Object.keys(TERIOCK.options.effect.form || {});
+  const effectFormOrder = Object.keys(TERIOCK.config.effect.form || {});
   return abilities.sort((a, b) => {
     if (!a.system?.form || !b.system?.form) return a.name.localeCompare(b.name);
     const typeA = a.system?.form || "";

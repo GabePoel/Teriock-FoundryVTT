@@ -23,7 +23,7 @@ export default class TakeActivation extends AutomationActivationFactory(
   get icon() {
     return (
       this.display.icon ||
-      TERIOCK.options.impact[this.impact]?.icon ||
+      TERIOCK.config.impact[this.impact]?.icon ||
       this.constructor.ICON
     );
   }
@@ -32,7 +32,7 @@ export default class TakeActivation extends AutomationActivationFactory(
   get label() {
     return (
       this.display.label ||
-      TERIOCK.options.impact[this.impact]?.take ||
+      TERIOCK.config.impact[this.impact]?.take ||
       this.constructor.LABEL
     );
   }
@@ -40,7 +40,7 @@ export default class TakeActivation extends AutomationActivationFactory(
   /** @inheritDoc */
   async primaryAction() {
     for (const actor of this.actors) {
-      await TERIOCK.options.impact[this.impact].apply(actor, this.amount);
+      await TERIOCK.config.impact[this.impact].apply(actor, this.amount);
       ui.notifications.success(
         "TERIOCK.ACTIVATIONS.Take.NOTIFICATIONS.applied",
         {
@@ -58,7 +58,7 @@ export default class TakeActivation extends AutomationActivationFactory(
   /** @inheritDoc */
   async secondaryAction() {
     for (const actor of this.actors) {
-      await TERIOCK.options.impact[this.impact].reverse(actor, this.amount);
+      await TERIOCK.config.impact[this.impact].reverse(actor, this.amount);
       ui.notifications.success(
         "TERIOCK.ACTIVATIONS.Take.NOTIFICATIONS.reversed",
         {

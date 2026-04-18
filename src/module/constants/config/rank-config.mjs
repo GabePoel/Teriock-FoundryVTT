@@ -1,7 +1,7 @@
 import { preLocalize } from "../../helpers/localization.mjs";
 import { icons } from "../display/icons.mjs";
 
-export const rankOptions = {
+export const rankConfig = {
   mage: {
     classes: {
       flameMage: {
@@ -104,8 +104,8 @@ export const rankOptions = {
   },
 };
 
-preLocalize("options.rank", { keys: ["name"] });
-preLocalize("options.rank.mage.classes", { keys: ["name"] });
-preLocalize("options.rank.semi.classes", { keys: ["name"] });
-preLocalize("options.rank.warrior.classes", { keys: ["name"] });
-preLocalize("options.rank.everyman.classes", { keys: ["name"] });
+preLocalize("config.rank", { keys: ["name"] });
+preLocalize("config.rank.mage.classes", { keys: ["name"] });
+preLocalize("config.rank.semi.classes", { keys: ["name"] });
+preLocalize("config.rank.warrior.classes", { keys: ["name"] });
+preLocalize("config.rank.everyman.classes", { keys: ["name"] });

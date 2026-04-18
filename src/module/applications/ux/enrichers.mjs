@@ -1,7 +1,7 @@
 //noinspection RegExpRedundantEscape
 
+import { wikiConfig } from "../../constants/config/wiki-config.mjs";
 import { icons } from "../../constants/display/icons.mjs";
-import { wikiOptions } from "../../constants/options/wiki-options.mjs";
 import {
   commands,
   getInteractionEntryValue,
@@ -38,7 +38,7 @@ const wikiLinkEnricher = {
     const link = document.createElement("a");
     const address = `https://wiki.teriock.com/index.php/${urlPageName}`;
     const uuid = await wikiToUuid(namespace, name);
-    const icon = wikiOptions.namespaces[namespace]?.icon || icons.ui.wiki;
+    const icon = wikiConfig.namespaces[namespace]?.icon || icons.ui.wiki;
     if (uuid) {
       const parsed = foundry.utils.parseUuid(uuid);
       Object.assign(link.dataset, {

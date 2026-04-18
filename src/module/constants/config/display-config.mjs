@@ -1,6 +1,6 @@
 import { preLocalize } from "../../helpers/localization.mjs";
 
-export const displayOptions = {
+export const displayConfig = {
   sizes: {
     tiny: "TERIOCK.SHEETS.Common.CARD.Sizes.tiny",
     small: "TERIOCK.SHEETS.Common.CARD.Sizes.small",
@@ -31,6 +31,6 @@ export const displayOptions = {
   },
 };
 
-preLocalize("options.display.sizes");
-preLocalize("options.display.abilitySortOrders");
-preLocalize("options.display.equipmentSortOrders");
+preLocalize("config.display.sizes");
+preLocalize("config.display.abilitySortOrders");
+preLocalize("config.display.equipmentSortOrders");

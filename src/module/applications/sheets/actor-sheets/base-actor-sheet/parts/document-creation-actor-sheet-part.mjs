@@ -29,9 +29,9 @@ export default (Base) =>
      */
     #createContextMenuEntry(type) {
       return {
-        icon: makeIconClass(TERIOCK.options.document[type].icon, "contextMenu"),
+        icon: makeIconClass(TERIOCK.config.document[type].icon, "contextMenu"),
         label: _loc("TERIOCK.DIALOGS.NewDocument.title", {
-          name: TERIOCK.options.document[type].name,
+          name: TERIOCK.config.document[type].name,
         }),
         onClick: this.constructor[`_onCreate${ucFirst(type)}`].bind(this),
       };

@@ -1,4 +1,4 @@
-import { documentOptions } from "../../../constants/options/document-options.mjs";
+import { documentConfig } from "../../../constants/config/document-config.mjs";
 import { makeIconClass } from "../../../helpers/utils.mjs";
 import BaseItemSheet from "./base-item-sheet.mjs";
 
@@ -21,7 +21,7 @@ export default class MountSheet extends BaseItemSheet {
       toggleMounted: this.#onToggleMounted,
     },
     window: {
-      icon: makeIconClass(documentOptions.mount.icon, "title"),
+      icon: makeIconClass(documentConfig.mount.icon, "title"),
     },
   };
 

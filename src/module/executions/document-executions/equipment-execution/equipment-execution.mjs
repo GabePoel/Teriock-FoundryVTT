@@ -23,7 +23,7 @@ export default class EquipmentExecution extends ArmamentExecution {
   async _buildSourcePanel() {
     if (this.secret) {
       return {
-        icon: TERIOCK.options.document.equipment.icon,
+        icon: TERIOCK.config.document.equipment.icon,
         name: _loc("TERIOCK.SYSTEMS.Equipment.PANELS.unknown", {
           type: inferNameFromIdentifier(
             `equipment:${this.source.system.equipmentType}`,

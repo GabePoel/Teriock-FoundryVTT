@@ -1,4 +1,4 @@
-import { costOptions } from "../../../../constants/options/cost-options.mjs";
+import { costConfig } from "../../../../constants/config/cost-config.mjs";
 import { AbilityExecution } from "../../../../executions/document-executions/_module.mjs";
 import { mix } from "../../../../helpers/construction.mjs";
 import { AbilitySettingsModel } from "../../../models/settings-models/_module.mjs";
@@ -117,7 +117,7 @@ export default class AbilitySystem extends mix(
   /** @inheritDoc */
   get _nameTags() {
     const tags = [];
-    for (const [k, v] of Object.entries(TERIOCK.options.cost.tweaks)) {
+    for (const [k, v] of Object.entries(TERIOCK.config.cost.tweaks)) {
       if (this.costs.tweaks[k]) {
         tags.push(v.label);
       }
@@ -143,13 +143,13 @@ export default class AbilitySystem extends mix(
         path: "system.elderSorceryIncant",
         visible: this.elderSorcery,
       },
-      ...Object.keys(costOptions.primary.keys).map((k) => {
+      ...Object.keys(costConfig.primary.keys).map((k) => {
         return {
           path: `system.costs.primary.${k}.description`,
           visible: this.costs.primary[k].type === "description",
         };
       }),
-      ...Object.keys(costOptions.components.keys).map((k) => {
+      ...Object.keys(costConfig.components.keys).map((k) => {
         return {
           path: `system.costs.components.${k}.description`,
           visible: this.costs.components[k].type === "description",
@@ -306,7 +306,7 @@ export default class AbilitySystem extends mix(
     const parts = super.embedParts;
     if (!this.consumable) {
       parts.subtitle =
-        TERIOCK.options.ability.executionTime[this.maneuver]?.[
+        TERIOCK.config.ability.executionTime[this.maneuver]?.[
           this.executionTime.base
         ] ?? this.executionTime.slow?.text;
     }
@@ -335,7 +335,7 @@ export default class AbilitySystem extends mix(
    */
   get targetString() {
     return Array.from(this.targets)
-      .map((t) => TERIOCK.options.ability.targets[t])
+      .map((t) => TERIOCK.config.ability.targets[t])
       .sort((a, b) => a.localeCompare(b))
       .join(_loc("TERIOCK.SYSTEMS.Base.EMBED.valueSeparator"));
   }

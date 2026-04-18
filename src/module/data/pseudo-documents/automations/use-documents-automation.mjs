@@ -94,7 +94,7 @@ export default class UseDocumentsAutomation extends mix(
   async #makeExternalActivation(uuid) {
     const doc = await resolveDocument(uuid);
     const title = doc.name;
-    const symbol = TERIOCK.options.document[doc.type]?.icon;
+    const symbol = TERIOCK.config.document[doc.type]?.icon;
     return new UseExternalActivation({
       title,
       symbol,

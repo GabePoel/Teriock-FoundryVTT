@@ -28,7 +28,7 @@ export default (Base) =>
     constructor(...args) {
       super(...args);
       this._sidebarOpen = true;
-      for (const stat of Object.keys(TERIOCK.options.die.stats)) {
+      for (const stat of Object.keys(TERIOCK.config.die.stats)) {
         this[`_${stat}DrawerOpen`] = true;
       }
     }
@@ -141,7 +141,7 @@ export default (Base) =>
     /** @inheritDoc */
     async _prepareContext(options = {}) {
       const context = await super._prepareContext(options);
-      for (const stat of Object.keys(TERIOCK.options.die.stats)) {
+      for (const stat of Object.keys(TERIOCK.config.die.stats)) {
         context[`${stat}DrawerCollapsed`] = !this[`_${stat}DrawerOpen`];
       }
       return Object.assign(context, {

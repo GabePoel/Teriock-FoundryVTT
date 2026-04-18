@@ -23,7 +23,7 @@ export default function WikiSystemMixin(Base) {
        */
       get isOnWiki() {
         const index =
-          TERIOCK.index[TERIOCK.options.document[this.parent.type]["index"]];
+          TERIOCK.index[TERIOCK.config.document[this.parent.type]["index"]];
         if (index) {
           return !!index[
             toCamelCase(

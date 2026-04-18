@@ -1,6 +1,7 @@
 import { preLocalize } from "../../helpers/localization.mjs";
 
-export const currencyOptions = {
+/** @enum {Teriock.Config.CurrencyEntry} */
+export const currencyConfig = {
   copper: {
     abbreviation: "cop",
     label: "TERIOCK.TERMS.Currency.copper",
@@ -69,4 +70,4 @@ export const currencyOptions = {
   },
 };
 
-preLocalize("options.currency", { key: "label" });
+preLocalize("config.currency", { key: "label" });

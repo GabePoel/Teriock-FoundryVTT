@@ -1,5 +1,5 @@
+import { documentConfig } from "../../../constants/config/document-config.mjs";
 import { icons } from "../../../constants/display/icons.mjs";
-import { documentOptions } from "../../../constants/options/document-options.mjs";
 import { makeIconClass } from "../../../helpers/utils.mjs";
 import ImbuementSheet from "./imbuement-sheet.mjs";
 
@@ -13,7 +13,7 @@ export default class ConsequenceSheet extends ImbuementSheet {
   static DEFAULT_OPTIONS = {
     form: { closeOnSubmit: false, submitOnChange: true },
     window: {
-      icon: makeIconClass(documentOptions.consequence.icon, "title"),
+      icon: makeIconClass(documentConfig.consequence.icon, "title"),
     },
   };
 

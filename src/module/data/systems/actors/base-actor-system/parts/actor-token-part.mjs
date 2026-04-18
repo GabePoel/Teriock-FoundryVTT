@@ -37,7 +37,7 @@ export default (Base) => {
       _prepareTokenDetectionModes() {
         if (!this.actor.getSetting("token.autoDetectionModes")) return;
         for (const [sense, config] of Object.entries(
-          TERIOCK.options.character.senseTypes,
+          TERIOCK.config.character.sense,
         )) {
           if (config?.detectionMode) {
             this._tokenChanges.push({
@@ -68,8 +68,7 @@ export default (Base) => {
         let sightColor;
         let visionMode = "basic";
         for (const [k, v] of Object.entries(this.senses)) {
-          const senseVisionMode =
-            TERIOCK.options.character.senseTypes[k]?.visionMode;
+          const senseVisionMode = TERIOCK.config.character.sense[k]?.visionMode;
           if (senseVisionMode && v > maxRange) {
             maxRange = v;
             visionMode = senseVisionMode;
@@ -91,9 +90,7 @@ export default (Base) => {
         }
         range = Math.max(
           ...Object.entries(this.senses)
-            .filter(
-              ([k, _v]) => TERIOCK.options.character.senseTypes[k]?.grantsSight,
-            )
+            .filter(([k, _v]) => TERIOCK.config.character.sense[k]?.grantsSight)
             .map(([_k, v]) => v),
         );
         if (this.actor.getSetting("token.autoVisionModes")) {

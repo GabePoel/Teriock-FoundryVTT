@@ -49,7 +49,7 @@ export default class RollAutomation extends mix(
       }),
       impact: new fields.StringField({
         choices: localizeChoices(
-          objectMap(TERIOCK.options.impact, (i) => i.deal),
+          objectMap(TERIOCK.config.impact, (i) => i.deal),
         ),
       }),
       merge: new fields.BooleanField({ initial: true }),
