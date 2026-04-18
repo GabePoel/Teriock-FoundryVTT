@@ -7,7 +7,7 @@ _stats:
   systemVersion: 0.9.17
 command: |-
   if (actor) {
-    if (actor.system.offense.piercing.value === "ub") {
+    if (actor.system.offense.piercing.value === 2) {
       await actor.update({
         "system.offense.piercing.raw": 0,
       });
@@ -16,7 +16,7 @@ command: |-
         "system.offense.piercing.raw": 2,
       });
     }
-    if (actor.system.offense.piercing.value === "ub") {
+    if (actor.system.offense.piercing.value === 2) {
       ui.notifications.success("TERIOCK.MACROS.ToggleUb.enabled", {
         localize: true,
         format: { name: actor.name },

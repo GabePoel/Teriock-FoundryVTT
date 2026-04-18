@@ -116,7 +116,8 @@ export default class AbilityTemplate extends MeasuredTemplate {
   /**
    * Activate listeners for the template preview
    * @param {CanvasLayer} initialLayer - The initially active CanvasLayer to re-activate after the workflow is complete
-   * @returns {Promise<void>} - A promise that resolves with the final measured template if created.
+   * @returns {Promise<MeasuredTemplateDocument|null>} - A promise that resolves with the final measured template if
+   * created.
    */
   activatePreviewListeners(initialLayer) {
     return new Promise((resolve, reject) => {

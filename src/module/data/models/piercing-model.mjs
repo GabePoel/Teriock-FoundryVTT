@@ -43,7 +43,7 @@ export default class PiercingModel extends EmbeddedDataModel {
    * @returns {string}
    */
   get label() {
-    return piercingOptions.levels[this.value];
+    return this.value >= 1 ? piercingOptions.levels[this.value] : "";
   }
 
   /**

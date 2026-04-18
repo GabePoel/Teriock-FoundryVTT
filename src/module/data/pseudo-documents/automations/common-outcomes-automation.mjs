@@ -1,6 +1,6 @@
 import { mix } from "../../../helpers/construction.mjs";
 import { commands } from "../../../helpers/interaction/_module.mjs";
-import { formatJoin } from "../../../helpers/string.mjs";
+import { listFormat } from "../../../helpers/localization.mjs";
 import * as activations from "../activations/command-activations.mjs";
 import BaseAutomation from "./abstract/base-automation.mjs";
 import {
@@ -70,8 +70,8 @@ export default class CommonOutcomesAutomation extends mix(
   async #applyCommonOutcomes(scope = {}) {
     const actor = scope?.actor ?? this.document.actor;
     if (!actor) return;
-    const outcomes = formatJoin(
-      Array.from(this.common).map((c) => TERIOCK.options.consequence.common[c]),
+    const outcomes = listFormat(
+      this.common.map((c) => TERIOCK.options.consequence.common[c]),
     );
     const shouldApply = await this.getConfirmation({
       content: "TERIOCK.AUTOMATIONS.CommonOutcomes.DIALOG.content",

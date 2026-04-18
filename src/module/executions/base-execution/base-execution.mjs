@@ -174,19 +174,19 @@ export default class BaseExecution {
 
   /**
    * Build activations to attach to this execution's chat message.
-   * @returns {Promise<void>}
+   * @returns {Promise<false|void>}
    */
   async _buildActivations() {}
 
   /**
    * Build panels displayed in this execution's chat message.
-   * @returns {Promise<void>}
+   * @returns {Promise<false|void>}
    */
   async _buildPanels() {}
 
   /**
    * Build rolls used in this execution.
-   * @returns {Promise<void>}
+   * @returns {Promise<false|void>}
    */
   async _buildRolls() {
     if (formulaExists(this.formula)) {
@@ -198,7 +198,7 @@ export default class BaseExecution {
 
   /**
    * Build tags displayed in this execution's chat message.
-   * @returns {Promise<void>}
+   * @returns {Promise<false|void>}
    */
   async _buildTags() {}
 
@@ -206,7 +206,7 @@ export default class BaseExecution {
    * Create a chat message from this execution.
    * @param {object} [options]
    * @param {Teriock.Messages.Mode} [options.mode]
-   * @returns {Promise<void>}
+   * @returns {Promise<false|void>}
    */
   async _createChatMessage(options = {}) {
     const { mode = game.settings.get("core", "messageMode") } = options;
@@ -227,7 +227,7 @@ export default class BaseExecution {
 
   /**
    * Evaluate all rolls.
-   * @returns {Promise<void>}
+   * @returns {Promise<false|void>}
    */
   async _evaluateRolls() {
     const rollPromises = [];
@@ -239,7 +239,7 @@ export default class BaseExecution {
    * Propagate a trigger through the connected actor.
    * @param {Teriock.System.Trigger} trigger
    * @param {Partial<Teriock.System.TriggerScope>} [scope]
-   * @returns {Promise<void|false>}
+   * @returns {Promise<false|void>}
    */
   async _fireActorTrigger(trigger, scope = {}) {
     return await this.actor?.hookCall(trigger, {
@@ -253,7 +253,7 @@ export default class BaseExecution {
    * @param {Partial<Teriock.System.TriggerScope>} [scope]
    * @param {object} [options]
    * @param {BaseAutomation[]} [options.automations]
-   * @returns {Promise<void>}
+   * @returns {Promise<false|void>}
    */
   async _fireAutomationsTrigger(trigger, scope = {}, options = {}) {
     const automations = options.automations ?? this.activeAutomations;
@@ -266,13 +266,13 @@ export default class BaseExecution {
 
   /**
    * Get any user input that is relevant for staging this execution.
-   * @returns {Promise<void>}
+   * @returns {Promise<false|void>}
    */
   async _getInput() {}
 
   /**
    * Improve the formula used in this execution.
-   * @returns {Promise<void>}
+   * @returns {Promise<false|void>}
    */
   async _improveFormula() {
     if (this.competenceImprovesFormula) {
@@ -286,7 +286,7 @@ export default class BaseExecution {
 
   /**
    * The end of the execution.
-   * @returns {Promise<void>}
+   * @returns {Promise<false|void>}
    */
   async _postExecute() {
     await this._fireAutomationsTrigger("execute");
@@ -311,7 +311,7 @@ export default class BaseExecution {
 
   /**
    * Prepare the primary formula used in this execution.
-   * @returns {Promise<void>}
+   * @returns {Promise<false|void>}
    */
   async _prepareFormula() {
     await this._improveFormula();
@@ -319,13 +319,13 @@ export default class BaseExecution {
 
   /**
    * Prepare updates that will be applied to the actor.
-   * @returns {Promise<void>}
+   * @returns {Promise<false|void>}
    */
   async _prepareUpdates() {}
 
   /**
    * Update the actor with any costs or other changes as a result of this execution.
-   * @returns {Promise<void>}
+   * @returns {Promise<false|void>}
    */
   async _updateActor() {
     if (this.actor && Object.keys(this.updates).length > 0) {
@@ -335,22 +335,21 @@ export default class BaseExecution {
 
   /**
    * Asynchronous handling of this execution.
-   * @returns {Promise<void>}
+   * @returns {Promise<false|void>}
    */
   async execute() {
-    await this._getInput();
-    await this._prepareFormula();
-    await this._buildRolls();
-    await this._evaluateRolls();
-    await this._buildPanels();
-    await this._buildActivations();
-    await this._buildTags();
-    const yes = await this._preExecute();
-    if (yes === false) return;
-    await this._createChatMessage();
-    await this._prepareUpdates();
-    await this._updateActor();
-    await this._postExecute();
+    if ((await this._getInput()) === false) return false;
+    if ((await this._prepareFormula()) === false) return false;
+    if ((await this._buildRolls()) === false) return false;
+    if ((await this._evaluateRolls()) === false) return false;
+    if ((await this._buildPanels()) === false) return false;
+    if ((await this._buildActivations()) === false) return false;
+    if ((await this._buildTags()) === false) return false;
+    if ((await this._preExecute()) === false) return false;
+    if ((await this._createChatMessage()) === false) return false;
+    if ((await this._prepareUpdates()) === false) return false;
+    if ((await this._updateActor()) === false) return false;
+    if ((await this._postExecute()) === false) return false;
   }
 
   /**

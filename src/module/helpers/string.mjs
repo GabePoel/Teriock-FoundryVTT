@@ -109,28 +109,6 @@ export function dotJoin(strings) {
 }
 
 /**
- * Join strings with nice formatting.
- * @param {string[]} strings
- * @param {boolean} or
- * @returns {string}
- */
-export function formatJoin(strings, or = false) {
-  if (strings.length === 0) return "";
-  if (strings.length === 1) return strings[0];
-  if (strings.length === 2)
-    return _loc(`TERIOCK.FORMAT.${or ? "or" : "and"}.two`, {
-      start: strings[0],
-      end: strings[1],
-    });
-  const end = strings.pop();
-  const separator = _loc("TERIOCK.FORMAT.separator");
-  return _loc(`TERIOCK.FORMAT.${or ? "or" : "and"}.many`, {
-    start: strings.join(separator),
-    end: end,
-  });
-}
-
-/**
  * Converts a string to an ID.
  * @param {string} str
  * @param {object} [options]
@@ -160,31 +138,6 @@ export function toId(str, options = {}) {
   return camel.slice(0, length) + background.slice(camel.length);
 }
 
-/**
- * Add a suffix to a string if it exists.
- * @param {string|number} base
- * @param {string} suffix
- * @param {string} space
- */
-export function suffix(base, suffix, space = " ") {
-  if (teriock.helpers.formula.formulaExists(base)) {
-    return `${base}${space}${suffix}`;
-  }
-  return "";
-}
-
-/**
- * Add a suffix to a string if it exists.
- * @param {string|number} base
- * @param {string} prefix
- * @param {string} space
- */
-export function prefix(base, prefix, space = " ") {
-  if (teriock.helpers.formula.formulaExists(base)) {
-    return `${prefix}${space}${base}`;
-  }
-  return "";
-}
 /**
  * Remove indentation from code block.
  * @param {string} str

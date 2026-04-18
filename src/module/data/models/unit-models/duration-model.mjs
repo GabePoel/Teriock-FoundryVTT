@@ -1,5 +1,5 @@
 import { triggers } from "../../../constants/system/_module.mjs";
-import { formatJoin } from "../../../helpers/string.mjs";
+import { listFormat } from "../../../helpers/localization.mjs";
 import { formatDynamicSelectOptions } from "../../../helpers/utils.mjs";
 import { conditionRequirementsField } from "../../fields/helpers/builders.mjs";
 import TimeUnitModel from "./time-unit-model.mjs";
@@ -112,10 +112,10 @@ export default class DurationModel extends TimeUnitModel {
     ];
     let triggerPart = _loc(
       "TERIOCK.MODELS.Duration.PREREQUISITES.untilTriggers",
-      { partial: formatJoin(triggers, true) },
+      { partial: listFormat(triggers, { type: "disjunction" }) },
     );
     let conditionsPart = _loc("TERIOCK.MODELS.Duration.PREREQUISITES.ongoing", {
-      partial: formatJoin(conditions, false),
+      partial: listFormat(conditions, { sort: false }),
     });
     if (triggers.length === 0) triggerPart = "";
     if (conditions.length === 0) conditionsPart = "";

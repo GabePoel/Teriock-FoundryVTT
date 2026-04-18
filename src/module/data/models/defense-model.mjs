@@ -1,3 +1,4 @@
+import { toInt } from "../../helpers/string.mjs";
 import { initialNumber } from "../fields/helpers/initializers.mjs";
 import EmbeddedDataModel from "./embedded-data-model.mjs";
 
@@ -19,8 +20,7 @@ export default class DefenseModel extends EmbeddedDataModel {
   /** @inheritDoc */
   static migrateData(source, options, state) {
     if (typeof source.raw === "string") {
-      const n = Number(source.raw);
-      source.raw = isNaN(n) ? 0 : n;
+      source.raw = toInt(source.raw);
     }
     return super.migrateData(source, options, state);
   }

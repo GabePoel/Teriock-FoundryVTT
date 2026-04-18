@@ -131,7 +131,7 @@ export default (Base) => {
         }
         return [
           time || "",
-          this.piercing.value > 0 ? this.piercing.label : "",
+          this.piercing.label,
           TERIOCK.options.ability.delivery[this.delivery] || "",
           this.interaction === "feat"
             ? TERIOCK.reference.attributes[this.featSaveAttribute]

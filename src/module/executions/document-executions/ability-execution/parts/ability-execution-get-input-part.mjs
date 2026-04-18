@@ -245,7 +245,7 @@ export default function AbilityExecutionGetInputPart(Base) {
             this.targets.add(target);
           }
         }
-        if (!this.actor) return;
+        if (!this.actor || !game.scenes.viewed) return;
         const templateAutomation =
           /** @type {TemplateAutomation} */
           this.activeAutomations.find(
@@ -322,8 +322,6 @@ export default function AbilityExecutionGetInputPart(Base) {
           const placed = await template?.drawPreview();
           if (!placed) return;
           const region = placed.parent.regions.get(placed.id);
-          console.log(region);
-          console.log(game.scenes.viewed.tokens.contents);
           for (const t of game.scenes.viewed.tokens.contents.filter(
             (t) =>
               t.hasStatusEffect("ethereal") ===

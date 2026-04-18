@@ -110,6 +110,7 @@
 
     .ab-box-container {
       flex: 1;
+      min-width: 0;
       position: relative;
 
       &:not(:last-child)::after {
@@ -132,8 +133,10 @@
         display: flex;
         flex-direction: row;
         height: calc(100% - 0.5em);
-        justify-content: left;
+        justify-content: center;
         margin: 0.25em;
+        max-height: 100%;
+        min-width: 0;
         padding: 0.25em;
         position: relative;
 
@@ -177,15 +180,24 @@
           @include mixins.centralize;
           cursor: pointer;
           flex-direction: row;
+          max-width: calc(100% - 3em);
+          min-width: 0;
+          overflow: hidden;
           padding-inline: 1.5em;
           text-align: center;
-          text-wrap: nowrap;
-          width: 100%;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+
+          &.ab-text-content {
+            display: block;
+            max-width: unset;
+          }
         }
 
         .ab-split-input {
           :first-child {
             text-align: right;
+
             input {
               text-align: right;
             }
@@ -193,6 +205,7 @@
 
           :last-child {
             text-align: left;
+
             input {
               text-align: left;
             }
@@ -204,8 +217,8 @@
     button {
       height: unset;
       min-height: unset;
-      transition: 50ms;
       padding: 0;
+      transition: 50ms;
 
       &:before {
         color: var(--color-text-subtle);
@@ -233,18 +246,18 @@
 
       &:not(:hover) {
         button {
-          width: 0;
           max-width: 0;
           min-width: 0;
           opacity: 0;
+          width: 0;
         }
       }
 
       &:hover {
         button {
-          width: 0.75em;
           max-width: 0.75em;
           min-width: 0.75em;
+          width: 0.75em;
         }
       }
     }

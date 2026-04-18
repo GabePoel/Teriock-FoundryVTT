@@ -157,7 +157,7 @@ export default function ArmamentSystemMixin(Base) {
           icon: TERIOCK.display.icons.interaction.attack,
           label: _loc("TERIOCK.SYSTEMS.Armament.PANELS.attack"),
           wrappers: [
-            this.piercing.value > 0 ? this.piercing.label : "",
+            this.piercing.label,
             ...this._damageWrappers,
             formulaExists(this.hitBonus)
               ? _loc("TERIOCK.SYSTEMS.Armament.PANELS.hitBonus", {

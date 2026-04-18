@@ -13,11 +13,16 @@ export default function registerFieldHelpers() {
       unselected = "",
       unselectedSecondary = "",
       tooltip = "",
+      overflow = "",
       action = "",
       classes = "",
       dataset = {},
     } = options.hash;
     let content = input;
+    let overflowTooltip = "";
+    if (overflow && overflow.length > 16) {
+      overflowTooltip = `data-tooltip="${overflow}"`;
+    }
     const hasSecondaryContent =
       includeSecondary &&
       (secondary.toString() ? secondary.toString().length > 0 : false);
@@ -74,7 +79,10 @@ export default function registerFieldHelpers() {
             <div class="ab-box-icon" ${styleStr}>
               ${iconStr}
             </div>
-            <div class="ab-box-content ${hasSecondaryContent ? "ab-split-input" : ""}">
+            <div 
+              class="ab-box-content ${overflow ? "ab-text-content" : ""} ${hasSecondaryContent ? "ab-split-input" : ""}"
+              ${overflowTooltip}
+            >
               ${unselectedContent}${content}
             </div>
             ${hasLabel ? labelText : ""}

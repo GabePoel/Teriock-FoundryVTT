@@ -1,4 +1,4 @@
-import { formatJoin } from "../../../../../../helpers/string.mjs";
+import { listFormat } from "../../../../../../helpers/localization.mjs";
 import { TextField } from "../../../../../fields/_module.mjs";
 
 const { fields } = foundry.data;
@@ -90,10 +90,9 @@ export default (Base) => {
         if (this.elements.size === 0) {
           return _loc("TERIOCK.TERMS.Common.celestial");
         }
-        const elements = Array.from(
+        return listFormat(
           this.elements.map((e) => TERIOCK.reference.elements[e]),
-        ).sort((a, b) => a.localeCompare(b));
-        return formatJoin(elements);
+        );
       }
 
       /** @inheritDoc */

@@ -1,20 +1,20 @@
 if (actor) {
-  if (actor.system.offense.piercing.value === "av0") {
+  if (actor.system.offense.piercing.value === 2) {
     await actor.update({
       "system.offense.piercing.raw": 0,
     });
   } else {
     await actor.update({
-      "system.offense.piercing.raw": 1,
+      "system.offense.piercing.raw": 2,
     });
   }
-  if (actor.system.offense.piercing.value === "av0") {
+  if (actor.system.offense.piercing.value === 2) {
     ui.notifications.success("TERIOCK.MACROS.ToggleUb.enabled", {
       localize: true,
       format: { name: actor.name },
     });
   } else {
-    ui.notifications.info("TERIOCK.MACROS.ToggleAv0.disabled", {
+    ui.notifications.info("TERIOCK.MACROS.ToggleUb.disabled", {
       localize: true,
       format: { name: actor.name },
     });

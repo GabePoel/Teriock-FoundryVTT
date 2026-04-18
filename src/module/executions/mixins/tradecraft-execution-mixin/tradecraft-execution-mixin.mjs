@@ -34,7 +34,7 @@ export default function TradecraftExecutionMixin(Base) {
 
       /** @inheritDoc */
       get flavor() {
-        if (this.threshold !== undefined) {
+        if (typeof this.threshold === "number") {
           return _loc("TERIOCK.ROLLS.Tradecraft.thresholded", {
             threshold: this.threshold,
             value: TERIOCK.reference.tradecrafts[this.tradecraft],

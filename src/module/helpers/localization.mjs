@@ -1,5 +1,5 @@
 import { toCamelCase, toKebabCase } from "./string.mjs";
-import { sortObject } from "./utils.mjs";
+import { sortObject } from "./utils.mjs"; // Pre-localization code is blatantly stolen from D&D 5E and then brutally modified.
 
 // Pre-localization code is blatantly stolen from D&D 5E and then brutally modified.
 
@@ -161,4 +161,18 @@ function transformValue(value, transform) {
   if (transform === "cc") return toCamelCase(value);
   if (transform === "kc") return toKebabCase(value);
   return value;
+}
+
+/**
+ *
+ * @param {Iterable<string>} strings
+ * @param {Intl.ListFormatOptions} options
+ * @param {boolean} [options.sort]
+ * @returns {string}
+ */
+export function listFormat(strings, options) {
+  options = { style: "long", type: "conjunction", sort: true, ...options };
+  const arr = Array.from(strings);
+  if (options.sort) arr.sort((a, b) => a.localeCompare(b));
+  return game.i18n.getListFormatter(options).format(arr);
 }

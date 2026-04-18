@@ -117,6 +117,24 @@ export default class AbilitySheet extends mix(
   }
 
   /** @inheritDoc */
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
+    let time;
+    const maneuver = this.document.system.maneuver;
+    const executionTime = this.document.system.executionTime;
+    if (maneuver === "active") {
+      time = TERIOCK.options.ability.executionTime.active[executionTime.base];
+    } else if (maneuver === "reactive") {
+      time = TERIOCK.options.ability.executionTime.reactive[executionTime.base];
+    } else if (maneuver === "passive") {
+      time = TERIOCK.options.ability.executionTime.passive.passive;
+    } else {
+      time = executionTime.slow.text;
+    }
+    return Object.assign(context, { executionTime: time });
+  }
+
+  /** @inheritDoc */
   async _renderFrame(options = {}) {
     const frame = await super._renderFrame(options);
     this.#resetElderSorceryElements();

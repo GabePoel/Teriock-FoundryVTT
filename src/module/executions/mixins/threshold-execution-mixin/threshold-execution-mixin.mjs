@@ -188,7 +188,7 @@ export default function ThresholdExecutionMixin(Base) {
       /** @inheritDoc */
       async _getInput() {
         if (this.showDialog) {
-          await this._showRollDialog();
+          if ((await this._showRollDialog()) === false) return false;
         }
         await super._getInput();
       }
@@ -222,8 +222,7 @@ export default function ThresholdExecutionMixin(Base) {
 
       /**
        * Show a dialog to configure basic roll options.
-       * @returns {Promise<void>}
-       * @private
+       * @returns {Promise<false|void>}
        */
       async _showRollDialog() {
         const rootId = foundry.utils.randomID();
@@ -249,7 +248,7 @@ export default function ThresholdExecutionMixin(Base) {
           hasFields = true;
         }
         if (!hasFields) return;
-        await TeriockDialog.wait({
+        const out = await TeriockDialog.wait({
           buttons: this._dialogButtons.map((b) => {
             return {
               action: b.action,
@@ -274,6 +273,7 @@ export default function ThresholdExecutionMixin(Base) {
               .trim(),
           },
         });
+        if (out === null) return false;
       }
     }
   );

@@ -1,20 +1,6 @@
 <div class="ab-bar">
   {{formBox
-    (ifThen
-      (eq system.maneuver "active")
-      (lookup TERIOCK.options.ability.executionTime.active system.executionTime.base)
-      (ifThen
-        (eq system.maneuver "reactive")
-        (lookup
-          TERIOCK.options.ability.executionTime.reactive system.executionTime.base
-        )
-        (ifThen
-          (eq system.maneuver "passive")
-          (lookup TERIOCK.options.ability.maneuver "passive")
-          system.executionTime.slow.text
-        )
-      )
-    )
+    executionTime
     icon=TERIOCK.display.icons.ability.execution
     tooltip=(localize "TERIOCK.TERMS.Common.executionTime")
     action=(ifThen (eq system.maneuver "slow") "updateUnit" "")
@@ -24,11 +10,12 @@
       icon=TERIOCK.display.icons.ability.execution
     )
     classes=(ifThen editable "execution-box" "")
+    overflow=executionTime
   }}
   {{formBox
     (prefix
       (lookup TERIOCK.options.ability.delivery system.delivery)
-      (uc system.piercing.value)
+      (uc system.piercing.label)
     )
     icon=TERIOCK.display.icons.ability.delivery
     classes=(ifThen editable "delivery-box" "")
