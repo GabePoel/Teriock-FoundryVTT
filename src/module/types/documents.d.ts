@@ -36,6 +36,7 @@ import {
   TeriockUser,
 } from "../documents/_module.mjs";
 import {
+  ArchetypeSheet,
   BodySheet,
   EquipmentSheet,
   MountSheet,
@@ -44,6 +45,7 @@ import {
   SpeciesSheet,
 } from "../applications/sheets/item-sheets/_module.mjs";
 import {
+  ArchetypeSystem,
   BodySystem,
   EquipmentSystem,
   MountSystem,
@@ -61,8 +63,8 @@ import {
   CreatureSystem,
   InventorySystem,
 } from "../data/systems/actors/_module.mjs";
-import type ArchetypeSheet from "../applications/sheets/item-sheets/archetype-sheet.mjs";
-import type ArchetypeSystem from "../data/systems/items/archetype-system/archetype-system.mjs";
+import { HarmSheet } from "../applications/sheets/page-sheets/_module.mjs";
+import { HarmSystem } from "../data/systems/pages/_module.mjs";
 
 // Base Document Classes
 // =====================
@@ -242,6 +244,18 @@ declare global {
     _id: ID<TeriockResource>;
     get id(): ID<TeriockResource>;
     get uuid(): UUID<TeriockResource>;
+  };
+}
+
+// Journal Entry Pages
+declare global {
+  export type TeriockHarm = TeriockJournalEntryPage & {
+    sheet: HarmSheet;
+    system: HarmSystem;
+    type: "damage" | "drain";
+    _id: ID<TeriockHarm>;
+    get id(): ID<TeriockHarm>;
+    get uuid(): UUID<TeriockHarm>;
   };
 }
 

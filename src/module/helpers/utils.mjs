@@ -423,7 +423,7 @@ export function fromIdentifierSync(identifier) {
  * Get a harm type from its identifier. Can only retrieve if the source of the harm type has been registered in the
  * world settings.
  * @param {TypedIdentifier} identifier
- * @returns {Promise<TeriockJournalEntryPage|null>}
+ * @returns {Promise<TeriockHarm|null>}
  */
 export async function fromHarmIdentifier(identifier) {
   const parsed = parseIdentifier(identifier);

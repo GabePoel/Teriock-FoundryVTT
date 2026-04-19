@@ -316,15 +316,19 @@ export default function AbilityExecutionGetInputPart(Base) {
             );
           }
           const placed = await template?.drawPreview();
-          if (!placed) return;
-          const region = placed.parent.regions.get(placed.id);
+          const region = placed?.parent.regions.get(placed?.id);
+          if (!region) return;
+          // Use `testInsideRegion` instead of `region.tokens` because the tokens
+          // are just initialized as an empty set and don't appear to be fully
+          // prepared by the time we need to access them.
+          // TODO: Maybe fix when `placed` is switched to a `RegionDocument`.
           for (const t of game.scenes.viewed.tokens.contents.filter(
             (t) =>
               t.hasStatusEffect("ethereal") ===
                 this.actor.statuses.has("ethereal") &&
               t.testInsideRegion(region),
           )) {
-            this.targets.add(t.object);
+            this.targets.add(t?.object);
           }
         }
       }

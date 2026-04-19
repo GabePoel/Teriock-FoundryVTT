@@ -2,10 +2,11 @@ import { fromHarmIdentifier } from "../../helpers/utils.mjs";
 import ImpactRoll from "./impact-roll.mjs";
 
 export default class HarmRoll extends ImpactRoll {
-  /** @type {TeriockJournalEntryPage[]} */
+  /**
+   * Cached array of harms to reduce async calls.
+   * @type {TeriockHarm[]}
+   */
   _harms;
-
-  await;
 
   /**
    * The types of this harm.
@@ -30,9 +31,10 @@ export default class HarmRoll extends ImpactRoll {
     for (const die of this.dice) {
       for (const [type, harm] of Object.entries(harmMap)) {
         if (die.flavor.includes(type)) {
-          const rollStyleAutomations = harm.system.automations.filter(
-            (a) => a.type === "rollStyle",
-          );
+          const rollStyleAutomations =
+            /** @type {RollStyleAutomation[]} */ harm.system.automations.filter(
+              (a) => a.type === "rollStyle",
+            );
           if (!rollStyleAutomations.length) continue;
           for (const a of rollStyleAutomations) {
             die.options.appearance = foundry.utils.mergeObject(
@@ -69,7 +71,7 @@ export default class HarmRoll extends ImpactRoll {
 
   /**
    * The harms that are invoked by this roll.
-   * @returns {Promise<TeriockJournalEntryPage[]>}
+   * @returns {Promise<TeriockHarm[]>}
    */
   async getHarmArray() {
     if (!["damage", "drain"].includes(this.impact)) return [];
