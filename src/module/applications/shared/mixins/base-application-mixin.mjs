@@ -22,7 +22,7 @@ export default function BaseApplicationMixin(Base) {
     async _onRender(options = {}) {
       await super._onRender(options);
       bindCommonActions(this.element);
-      if (game.teriock.getSetting("developerMode")) {
+      if (game.teriock.getSetting("developerMode") && this.window.header) {
         this.window.header
           .querySelectorAll("[data-action=copyUuid]")
           .forEach((el) => {

@@ -43,7 +43,7 @@ export default class TeriockJournalEntryPage extends mix(
       icon:
         documentConfig[this.type]?.icon ||
         this.getFlag("teriock", "journalIcon") ||
-        "book",
+        TERIOCK.display.icons.document.core,
       blocks: [
         {
           title:

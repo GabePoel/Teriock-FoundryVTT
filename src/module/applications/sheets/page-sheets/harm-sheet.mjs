@@ -1,6 +1,7 @@
 import { TextField } from "../../../data/fields/_module.mjs";
 import { mix } from "../../../helpers/construction.mjs";
 import { bindCommonActions } from "../../shared/_module.mjs";
+import { BaseApplicationMixin } from "../../shared/mixins/_module.mjs";
 import { TeriockTextEditor } from "../../ux/_module.mjs";
 import { ConfigButtonSheetMixin } from "../mixins/button-mixins/_module.mjs";
 import {
@@ -20,13 +21,14 @@ const { JournalEntryPageProseMirrorSheet } =
  */
 export default class HarmSheet extends mix(
   JournalEntryPageProseMirrorSheet,
-  ConnectionCommonSheetPart,
-  AutomationsTabsCommonSheetPart,
+  BaseApplicationMixin,
   AutomationsCommonSheetPart,
-  MenuCommonSheetPart,
-  LockingCommonSheetPart,
+  AutomationsTabsCommonSheetPart,
   ConfigButtonSheetMixin,
+  ConnectionCommonSheetPart,
   DragDropCommonSheetPart,
+  LockingCommonSheetPart,
+  MenuCommonSheetPart,
 ) {
   static DEFAULT_OPTIONS = {
     classes: ["teriock"],
