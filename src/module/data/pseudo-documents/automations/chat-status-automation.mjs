@@ -54,8 +54,10 @@ export default class ChatStatusAutomation extends CritAutomation {
         nullable: false,
       }),
       status: new fields.StringField({
+        blank: true,
         choices: TERIOCK.reference.conditions,
         label: "TERIOCK.TERMS.Common.condition",
+        nullable: true,
       }),
     });
   }

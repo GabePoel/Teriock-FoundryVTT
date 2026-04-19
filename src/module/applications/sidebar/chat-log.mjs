@@ -1,8 +1,40 @@
+import {
+  commands,
+  interpretArguments,
+  parseArguments,
+} from "../../helpers/interaction/_module.mjs";
 import { makeIcon } from "../../helpers/utils.mjs";
 
 const { ChatLog } = foundry.applications.sidebar.tabs;
 
+/** @inheritDoc */
 export default class TeriockChatLog extends ChatLog {
+  /** @inheritDoc */
+  static CHAT_COMMANDS = (() => {
+    const registry = { ...super.CHAT_COMMANDS };
+    for (const [id, command] of Object.entries(commands)) {
+      registry[id] = {
+        rgx: new RegExp(`^(/${id}(?:\\s+)?)([^]*)`, "i"),
+        fn: function (_commandString, match) {
+          const argumentString = match[2] ? match[2].trim() : "";
+          const argumentArray = command.formula
+            ? [["formula", argumentString]]
+            : parseArguments(argumentString);
+          const argumentObject = interpretArguments(argumentArray, command);
+          const actors = game.actors.selected;
+
+          if (actors.length > 0) {
+            actors.map((actor) => command.primary(actor, argumentObject));
+          } else {
+            command.primary(undefined, argumentObject);
+          }
+          return false;
+        },
+      };
+    }
+    return registry;
+  })();
+
   /** @inheritDoc */
   _getEntryContextOptions() {
     return [

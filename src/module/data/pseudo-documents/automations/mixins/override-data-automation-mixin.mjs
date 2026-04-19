@@ -1,3 +1,5 @@
+import { defaultJSONField } from "../../../fields/helpers/builders.mjs";
+
 const { fields } = foundry.data;
 
 export default function OverrideDataAutomationMixin(Base) {
@@ -15,10 +17,11 @@ export default function OverrideDataAutomationMixin(Base) {
         "TERIOCK.AUTOMATIONS.OverrideData",
       ];
 
+      /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           overrideData: new fields.BooleanField({ initial: false }),
-          data: new fields.JSONField(),
+          data: defaultJSONField(),
         });
       }
 

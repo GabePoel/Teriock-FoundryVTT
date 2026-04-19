@@ -121,7 +121,7 @@ export default class UseDocumentsAutomation extends mix(
         noHeighten: this.noHeighten,
         competence: this.overrideCompetence
           ? this.competence.raw
-          : this.document.system.competence.raw,
+          : (this.document?.system?.competence?.raw ?? undefined),
       },
     });
   }

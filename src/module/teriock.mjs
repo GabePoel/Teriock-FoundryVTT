@@ -510,7 +510,7 @@ Hooks.once("i18nInit", () => {
 // Register Hooks
 // ==============
 
-setup.hookManagement.registerHooks();
+setup.hooks.registerHooks();
 
 // Register Handlebars Helpers
 // ===========================

@@ -7,6 +7,7 @@ import {
   AutomationsCommonSheetPart,
   AutomationsTabsCommonSheetPart,
   ConnectionCommonSheetPart,
+  DragDropCommonSheetPart,
   LockingCommonSheetPart,
   MenuCommonSheetPart,
 } from "../mixins/common-sheet-mixin/parts/_module.mjs";
@@ -25,20 +26,13 @@ export default class HarmSheet extends mix(
   MenuCommonSheetPart,
   LockingCommonSheetPart,
   ConfigButtonSheetMixin,
+  DragDropCommonSheetPart,
 ) {
   static DEFAULT_OPTIONS = {
     classes: ["teriock"],
-    window: {
-      resizable: true,
-    },
-    form: {
-      closeOnSubmit: false,
-      submitOnChange: true,
-    },
-    position: {
-      height: 600,
-      width: 560,
-    },
+    window: { resizable: true },
+    form: { closeOnSubmit: false, submitOnChange: true },
+    position: { height: 600, width: 560 },
   };
 
   static EDIT_PARTS = {

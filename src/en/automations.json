@@ -67,6 +67,9 @@
           }
         }
       },
+      "ChangeCompetence": {
+        "LABEL": "Change Competence"
+      },
       "ChangeMovement": {
         "FIELDS": {
           "movementAction": {
@@ -75,6 +78,33 @@
           }
         },
         "LABEL": "Change Movement"
+      },
+      "ChangeQuantity": {
+        "NOTIFICATIONS": {
+          "parentNotConsumable": "The parent document of this automation is not consumable."
+        },
+        "DIALOG": {
+          "content": "Would you like to change the quantity of {name} by {amount}?"
+        },
+        "FIELDS": {
+          "formula": {
+            "hint": "How much to change the consumable's quantity by. Can be positive or negative.",
+            "label": "Formula"
+          },
+          "targetParent": {
+            "hint": "Whether the document providing this automation should be the one that has its quantity changed.",
+            "label": "Target Parent Document"
+          },
+          "trigger": {
+            "hint": "The event that causes the consumable to have its quantity changed.",
+            "label": "Trigger"
+          }
+        },
+        "LABEL": "Change Quantity",
+        "USAGE": {
+          "description": "The quantity of {name} has changed by {amount}.",
+          "roll": "Change Quantity Roll"
+        }
       },
       "Changes": {
         "LABEL": "Changes"
@@ -129,6 +159,20 @@
           }
         }
       },
+      "ConfirmationDialog": {
+        "FIELDS": {
+          "showConfirmationDialog": {
+            "label": "Show Confirmation Dialog"
+          }
+        },
+        "DIALOG": {
+          "title": "{document} {automation} Confirmation",
+          "content": "Would you like to proceed?"
+        },
+        "NOTIFICATIONS": {
+          "noConfirmation": "Running this without a confirmation dialog may cause performance issues or unexpected results."
+        }
+      },
       "Crit": {
         "FIELDS": {
           "crit": {
@@ -139,15 +183,13 @@
           }
         }
       },
-      "Select": {
+      "Display": {
         "FIELDS": {
-          "automatic": {
-            "hint": "If checked and this has only one option, it will be selected automatically without additional prompting.",
-            "label": "Automatic"
-          },
-          "multi": {
-            "hint": "If checked, multiple options can be selected to be used at once.",
-            "label": "Multiple Selection"
+          "display": {
+            "label": {
+              "hint": "Text to display on the button. Leave blank for default text.",
+              "label": "Label"
+            }
           }
         }
       },
@@ -196,16 +238,6 @@
           "noStatDice": {
             "hint": "Whether this only displays the option to heal hacks.",
             "label": "No Stat Dice"
-          }
-        }
-      },
-      "Display": {
-        "FIELDS": {
-          "display": {
-            "label": {
-              "hint": "Text to display on the button. Leave blank for default text.",
-              "label": "Label"
-            }
           }
         }
       },
@@ -269,50 +301,6 @@
         },
         "LABEL": "Protection"
       },
-      "ConfirmationDialog": {
-        "FIELDS": {
-          "showConfirmationDialog": {
-            "label": "Show Confirmation Dialog"
-          }
-        },
-        "DIALOG": {
-          "title": "{document} {automation} Confirmation",
-          "content": "Would you like to proceed?"
-        },
-        "NOTIFICATIONS": {
-          "noConfirmation": "Running this without a confirmation dialog may cause performance issues or unexpected results."
-        }
-      },
-      "ChangeCompetence": {
-        "LABEL": "Change Competence"
-      },
-      "ChangeQuantity": {
-        "NOTIFICATIONS": {
-          "parentNotConsumable": "The parent document of this automation is not consumable."
-        },
-        "DIALOG": {
-          "content": "Would you like to change the quantity of {name} by {amount}?"
-        },
-        "FIELDS": {
-          "formula": {
-            "hint": "How much to change the consumable's quantity by. Can be positive or negative.",
-            "label": "Formula"
-          },
-          "targetParent": {
-            "hint": "Whether the document providing this automation should be the one that has its quantity changed.",
-            "label": "Target Parent Document"
-          },
-          "trigger": {
-            "hint": "The event that causes the consumable to have its quantity changed.",
-            "label": "Trigger"
-          }
-        },
-        "LABEL": "Change Quantity",
-        "USAGE": {
-          "description": "The quantity of {name} has changed by {amount}.",
-          "roll": "Change Quantity Roll"
-        }
-      },
       "Resist": {
         "FIELDS": {
           "hex": {
@@ -342,6 +330,34 @@
           },
           "impact": {
             "label": "Impact"
+          }
+        }
+      },
+      "RollStyle": {
+        "FIELDS": {
+          "sfx": {
+            "label": "Special Effects",
+            "hint": "3D dice of this type will have this special effect applied to them."
+          },
+          "style": {
+            "label": "Style",
+            "hint": "3D dice of this type will have this style applied to them."
+          }
+        },
+        "LABEL": "3D Dice Style",
+        "NOTIFICATIONS": {
+          "DsnRequired": "The \"Dice So Nice!\" module is required for this automation to work."
+        }
+      },
+      "Select": {
+        "FIELDS": {
+          "automatic": {
+            "hint": "If checked and this has only one option, it will be selected automatically without additional prompting.",
+            "label": "Automatic"
+          },
+          "multi": {
+            "hint": "If checked, multiple options can be selected to be used at once.",
+            "label": "Multiple Selection"
           }
         }
       },
@@ -379,15 +395,6 @@
         },
         "LABEL": "Take Numerical Impact"
       },
-      "Tradecraft": {
-        "FIELDS": {
-          "tradecrafts": {
-            "hint": "Tradecrafts that can be selected when this automation executes.",
-            "label": "Tradecrafts"
-          }
-        },
-        "LABEL": "Tradecraft"
-      },
       "Template": {
         "FIELDS": {
           "movable": {
@@ -409,6 +416,15 @@
             "label": "Threshold"
           }
         }
+      },
+      "Tradecraft": {
+        "FIELDS": {
+          "tradecrafts": {
+            "hint": "Tradecrafts that can be selected when this automation executes.",
+            "label": "Tradecrafts"
+          }
+        },
+        "LABEL": "Tradecraft"
       },
       "Transformation": {
         "LABEL": "Transformation"

@@ -22,6 +22,7 @@ export { default as ProtectionAutomation } from "./protection-automation.mjs";
 export { default as ResistAutomation } from "./resist-automation.mjs";
 export { default as RevitalizeAutomation } from "./revitalize-automation.mjs";
 export { default as RollAutomation } from "./roll-automation.mjs";
+export { default as RollStyleAutomation } from "./roll-style-automation.mjs";
 export { default as StatusAutomation } from "./status-automation.mjs";
 export { default as TakeAutomation } from "./take-automation.mjs";
 export { default as TemplateAutomation } from "./template-automation.mjs";

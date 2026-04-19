@@ -2,6 +2,11 @@ import { fromHarmIdentifier } from "../../helpers/utils.mjs";
 import ImpactRoll from "./impact-roll.mjs";
 
 export default class HarmRoll extends ImpactRoll {
+  /** @type {TeriockJournalEntryPage[]} */
+  _harms;
+
+  await;
+
   /**
    * The types of this harm.
    * @returns {Identifier[]}
@@ -13,6 +18,35 @@ export default class HarmRoll extends ImpactRoll {
       flavor.forEach((type) => types.add(type.trim()));
     }
     return Array.from(types);
+  }
+
+  /** @inheritDoc */
+  async _applyDiceStyles() {
+    await super._applyDiceStyles();
+    const harms = await this.getHarmArray();
+    const harmMap = Object.fromEntries(
+      harms.map((h) => [h.system.identifier, h]),
+    );
+    for (const die of this.dice) {
+      for (const [type, harm] of Object.entries(harmMap)) {
+        if (die.flavor.includes(type)) {
+          const rollStyleAutomations = harm.system.automations.filter(
+            (a) => a.type === "rollStyle",
+          );
+          if (!rollStyleAutomations.length) continue;
+          for (const a of rollStyleAutomations) {
+            die.options.appearance = foundry.utils.mergeObject(
+              die.options.appearance ?? {},
+              a.style || {},
+            );
+            die.options.sfx = foundry.utils.mergeObject(
+              die.options.sfx ?? {},
+              a.sfx || {},
+            );
+          }
+        }
+      }
+    }
   }
 
   /** @inheritDoc */
@@ -39,11 +73,13 @@ export default class HarmRoll extends ImpactRoll {
    */
   async getHarmArray() {
     if (!["damage", "drain"].includes(this.impact)) return [];
+    if (this._harms) return this._harms;
     const identifiers = this.harmIdentifiers.map((i) => `${this.impact}:${i}`);
     const harms = await Promise.all(
       identifiers.map((i) => fromHarmIdentifier(i)),
     );
-    return harms.filter((_) => _);
+    this._harms = harms.filter((_) => _);
+    return this._harms;
   }
 
   /** @inheritDoc */

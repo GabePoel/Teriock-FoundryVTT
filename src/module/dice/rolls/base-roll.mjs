@@ -246,17 +246,6 @@ export default class BaseRoll extends Roll {
   }
 
   /**
-   * Apply additional options based on the damage type. This allows for styled Dice So Nice integration.
-   */
-  #applyDiceStyles() {
-    for (const die of this.dice) {
-      for (const [type, options] of Object.entries(TERIOCK.config.die.styles)) {
-        if (die.flavor.includes(type)) die.options.appearance = options;
-      }
-    }
-  }
-
-  /**
    * @param {Teriock.Dice.RawDieTarget} target
    * @returns {Teriock.Dice.DieTarget}
    */
@@ -298,6 +287,17 @@ export default class BaseRoll extends Roll {
       rescale: rescale || target?.rescale,
       tokenUuid: token?.uuid || target.tokenUuid,
     };
+  }
+
+  /**
+   * Apply additional options based on the damage type. This allows for styled Dice So Nice integration.
+   */
+  async _applyDiceStyles() {
+    for (const die of this.dice) {
+      for (const [type, options] of Object.entries(TERIOCK.config.die.styles)) {
+        if (die.flavor.includes(type)) die.options.appearance = options;
+      }
+    }
   }
 
   /**
@@ -455,7 +455,7 @@ export default class BaseRoll extends Roll {
     allowInteractive = true,
     ...options
   } = {}) {
-    this.#applyDiceStyles();
+    await this._applyDiceStyles();
     return super.evaluate({
       minimize,
       maximize,

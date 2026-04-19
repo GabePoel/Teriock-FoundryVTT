@@ -32,7 +32,9 @@ export default class HarmSystem extends mix(
       automations.CommonOutcomesAutomation,
       automations.HacksAutomation,
       automations.RollAutomation,
+      automations.RollStyleAutomation,
       automations.TakeAutomation,
+      automations.UseDocumentsAutomation,
     ];
   }
 

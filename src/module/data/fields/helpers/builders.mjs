@@ -17,6 +17,7 @@ const {
   SetField,
   StringField,
   FilePathField,
+  JSONField,
 } = foundry.data.fields;
 
 /**
@@ -230,6 +231,14 @@ function nullString() {
     nullable: true,
     required: false,
   });
+}
+
+/**
+ * A JSON field with an empty object.
+ * @returns {JSONField}
+ */
+export function defaultJSONField() {
+  return new JSONField({ blank: true, nullable: true, initial: "{}" });
 }
 
 /**
