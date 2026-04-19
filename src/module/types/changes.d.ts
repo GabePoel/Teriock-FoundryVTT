@@ -21,7 +21,7 @@ declare global {
     export type QualifiedChangeData = EffectChangeData & {
       qualifier: string;
       target: Target;
-      time: Phase;
+      phase: Phase;
     };
 
     export type PartialChangeTypeTree<keys extends string> = {

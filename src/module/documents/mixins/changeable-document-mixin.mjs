@@ -22,8 +22,8 @@ export default function ChangeableDocumentMixin(Base) {
       static buildChangeTree(effects, options = {}) {
         const changeTree =
           /** @type {Teriock.Changes.ChangeTree} */ Object.fromEntries(
-            Object.keys(TERIOCK.config.change.phase).map((time) => [
-              time,
+            Object.keys(TERIOCK.config.change.phase).map((phase) => [
+              phase,
               Object.fromEntries(
                 ["Actor", "Item", "ActiveEffect"].map((documentName) => {
                   const typed = options.allChanges
@@ -50,27 +50,27 @@ export default function ChangeableDocumentMixin(Base) {
               type: change?.type,
               value: change?.value,
             };
-            const time = change.time || "normal";
+            const phase = change.phase || "normal";
             const target = change.target || "Actor";
             if (
               !options.allChanges &&
-              (time !== "normal" || !["Actor", "parent"].includes(target))
+              (phase !== "normal" || !["Actor", "parent"].includes(target))
             ) {
               continue;
             }
             if (target === "parent" && effect.parent) {
-              const uuids = changeTree[time][effect.parent.documentName].uuids;
+              const uuids = changeTree[phase][effect.parent.documentName].uuids;
               if (!uuids[effect.parent.uuid]) uuids[effect.parent.uuid] = [];
               uuids[effect.parent.uuid].push(conditionalChange);
             } else if (["Actor", "Item", "ActiveEffect"].includes(target)) {
-              changeTree[time][target].untyped.push(conditionalChange);
+              changeTree[phase][target].untyped.push(conditionalChange);
             } else if (target === "armament") {
-              changeTree[time].Item.typed.equipment.push(conditionalChange);
-              changeTree[time].Item.typed.body.push(conditionalChange);
+              changeTree[phase].Item.typed.equipment.push(conditionalChange);
+              changeTree[phase].Item.typed.body.push(conditionalChange);
             } else {
               const documentName = TERIOCK.config.document[target]?.doc;
               if (documentName) {
-                changeTree[time][documentName].typed[target].push(
+                changeTree[phase][documentName].typed[target].push(
                   conditionalChange,
                 );
               }
@@ -163,11 +163,11 @@ export default function ChangeableDocumentMixin(Base) {
 
       /**
        * Apply changes to this document based on the time the changes should apply
-       * @param {Teriock.Changes.Phase} time
+       * @param {Teriock.Changes.Phase} phase
        */
-      _applyChangesByTime(time) {
+      _applyChangesByPhase(phase) {
         if (!this._canChange) return;
-        const partialTree = this.changeTree[time][this.documentName];
+        const partialTree = this.changeTree[phase][this.documentName];
         const changesToApply = partialTree.uuids[this.uuid] || [];
         if (!this._allChanges) {
           if (this.documentName === "Actor") {
@@ -240,34 +240,19 @@ export default function ChangeableDocumentMixin(Base) {
           rebuildData,
         ]);
         if (this._allChanges) {
-          this._applyChangesByTime(phase);
+          this._applyChangesByPhase(phase);
           if (rebuildTree && this.isTop) this._buildChangeTree();
           if (rebuildData && this.isTop) this._buildChangeReplacementData();
         }
       }
 
       /**
-       * Propagate all the changes that happen after {@link TeriockActor} data is derived.
-       * All document types propagate this after data is derived.
-       * This always runs after {@link _propagatePreDerivationChanges}.
-       */
-      _propagatePostDerivationChanges() {
-        if (this.isTop) {
-          this._propagateChanges("derivation", false, true);
-          this._propagateChanges("completion", false, false);
-        }
-      }
-
-      /**
        * Propagate all the changes that happen before {@link TeriockActor} data is derived.
        * For documents other than actors, these propagate after data is derived.
-       * This always runs before {@link _propagatePostDerivationChanges}.
        */
-      _propagatePreDerivationChanges() {
+      _propagateNormalChanges() {
         if (this.isTop) {
-          this._propagateChanges("proficiency", true, true);
-          this._propagateChanges("fluency", true, true);
-          this._propagateChanges("normal", false, true);
+          this._propagateChanges("normal", false, false);
         }
       }
 

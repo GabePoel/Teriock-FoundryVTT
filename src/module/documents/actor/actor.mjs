@@ -82,6 +82,13 @@ export default class TeriockActor extends mix(
     return true;
   }
 
+  /** @returns {ChangeCompetenceAutomation[]} */
+  get _competenceAutomations() {
+    return this.validEffects.flatMap((e) =>
+      e.system.activeAutomations.filter((a) => a.type === "changeCompetence"),
+    );
+  }
+
   /**
    * Is this actor active?
    * @returns {boolean}
@@ -159,6 +166,16 @@ export default class TeriockActor extends mix(
   }
 
   /**
+   * All modifiable children, visible or otherwise.
+   * @returns {AnyActiveEffect[]}
+   */
+  get modifiableChildren() {
+    return [...this.validEffects, ...this.items.contents].filter(
+      (c) => !c.isEphemeral && !c.isReference,
+    );
+  }
+
+  /**
    * @inheritDoc
    * @returns {AnyActiveEffect[]}
    */
@@ -168,11 +185,8 @@ export default class TeriockActor extends mix(
 
   /** @inheritDoc */
   get visibleChildren() {
-    return [...this.validEffects, ...this.items.contents].filter(
-      (c) =>
-        !c.isEphemeral &&
-        !c.isReference &&
-        (!c.metadata.revealable || c.system.revealed || game.user.isGM),
+    return this.modifiableChildren.filter(
+      (c) => !c.metadata.revealable || c.system.revealed || game.user.isGM,
     );
   }
 
@@ -206,14 +220,35 @@ export default class TeriockActor extends mix(
   }
 
   /** @inheritDoc */
-  _applyChangesByTime(time) {
+  _applyChangesByPhase(phase) {
     if (!this._canChange) return;
     this._qualifiedTokenChanges = [];
-    super._applyChangesByTime(time);
-    if (this.tokenActiveEffectChanges[time]) {
-      this.tokenActiveEffectChanges[time].push(...this._qualifiedTokenChanges);
+    super._applyChangesByPhase(phase);
+    if (this.tokenActiveEffectChanges[phase]) {
+      this.tokenActiveEffectChanges[phase].push(...this._qualifiedTokenChanges);
     } else {
-      this.tokenActiveEffectChanges[time] = this._qualifiedTokenChanges;
+      this.tokenActiveEffectChanges[phase] = this._qualifiedTokenChanges;
+    }
+  }
+
+  /**
+   * Apply all competence automations of a certain value to this actor's children.
+   * @param {Teriock.System.CompetenceLevel} value
+   */
+  _applyCompetenceAutomations(value) {
+    const autos = this.validEffects.flatMap((e) =>
+      e.system.activeAutomations.filter(
+        (a) => a.type === "changeCompetence" && a.competence.value === value,
+      ),
+    );
+    const identifiers = new Set(autos.map((a) => a.identifier));
+    for (const c of this.modifiableChildren) {
+      if (
+        identifiers.has(c.typedIdentifier) &&
+        c.system.competence.raw < value
+      ) {
+        c.system.competence.raw = value;
+      }
     }
   }
 
@@ -389,15 +424,11 @@ export default class TeriockActor extends mix(
   }
 
   /** @inheritDoc */
-  prepareDerivedData() {
-    super.prepareDerivedData();
-    this._propagatePostDerivationChanges();
-  }
-
-  /** @inheritDoc */
   prepareEmbeddedDocuments() {
     super.prepareEmbeddedDocuments();
-    this._propagatePreDerivationChanges();
+    this._applyCompetenceAutomations(1);
+    this._applyCompetenceAutomations(2);
+    this._propagateNormalChanges();
   }
 
   /** @inheritDoc */
