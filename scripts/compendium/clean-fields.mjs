@@ -5,7 +5,7 @@
  * @param {AnyCommonDocument} doc
  */
 export function cleanDocument(doc) {
-  delete doc.sort;
+  if (!["drain", "damage"].includes(doc.type)) delete doc.sort;
   delete doc.ownership;
   if (!doc.folder) delete doc.folder;
   if (doc._stats) {
