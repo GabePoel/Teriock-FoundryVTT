@@ -478,14 +478,8 @@ export default function CommonSystemMixin(Base) {
         } = options;
         if (this.parent._stats.compendiumSource) {
           if (updateDocument) {
-            const updateObject = {};
-            const automations =
-              /** @type {BaseAutomation[]} */ this.automations?.contents;
-            if (automations) {
-              for (const automation of automations) {
-                updateObject[automation.localPath] = _del;
-              }
-              await this.parent.update(updateObject);
+            if (this.automations?.contents.length) {
+              await this.parent.update({ "system.automations": _replace({}) });
             }
             const indexObject = await this.getCompendiumSourceRefreshObject();
             delete indexObject.flags;

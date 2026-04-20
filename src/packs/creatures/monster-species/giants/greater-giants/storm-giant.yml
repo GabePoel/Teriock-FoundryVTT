@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.16
+      systemVersion: 0.12.18
     effects:
       - _id: hmw6RM6yWoGJi7qA
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.16
+          systemVersion: 0.12.18
         img: systems/teriock/src/icons/abilities/crown-of-ice.webp
         name: Crown of Ice
         system:
@@ -118,271 +118,6 @@ items:
             - self
         transfer: true
         type: ability
-      - _id: G9r8uxN09Hh2KY73
-        _key: >-
-          !actors.items.effects!b3c4c812b5357cb3.b3c4c812b5357cb3.G9r8uxN09Hh2KY73
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.4doSo1ScTm6iEC2E
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.16
-        img: systems/teriock/src/icons/abilities/blizzard-aura.webp
-        name: Blizzard Aura
-        system:
-          _sup: hmw6RM6yWoGJi7qA
-          automations:
-            09ed285450c5de7b:
-              _id: 09ed285450c5de7b
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              executor: false
-              heighten:
-                - 1
-                - 0
-              relation: include
-              status: frozen
-              target: false
-              type: status
-            800c70e6560525a8:
-              _id: 800c70e6560525a8
-              competencies:
-                - 0
-                - 1
-                - 2
-              formula: (@h)d4[magic ice]
-              heighten:
-                - 1
-              impact: damage
-              merge: true
-              type: roll
-            d635eb44dba086dd:
-              _id: d635eb44dba086dd
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
-              type: combatExpiration
-              what:
-                roll: 2d4kh1
-                threshold: 4
-                type: rolled
-              when:
-                skip: 0
-                time: start
-                trigger: action
-              who:
-                type: target
-          class: stormMage
-          competence:
-            raw: 0
-          costs:
-            components:
-              somatic:
-                type: tag
-              verbal:
-                type: tag
-            primary:
-              mp:
-                formula: '1'
-                type: formula
-          delivery: aura
-          duration:
-            raw: '1'
-            unit: minute
-          effectTypes:
-            - temporal
-          elements:
-            - storm
-          endCondition: >-
-            <p>At the start of each of the target's actions, they roll [[/roll
-            2d4]]. If either of these dice roll a 4, this effect ends.</p>
-          executionTime:
-            base: a1
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-            [[/damage 1d4[magic ice]]] @L[Core:Damage]{damage}  as well.</p>
-          identifier: blizzard-aura
-          interaction: feat
-          invoked: true
-          maneuver: active
-          mundane: false
-          piercing:
-            raw: 0
-          powerSources:
-            - magical
-          range:
-            raw: '10'
-            unit: ft
-          results:
-            fail: <p>Target is @L[Condition:Frozen]{frozen}.</p>
-          spell: true
-          standard: true
-          targets:
-            - creature
-        transfer: true
-        type: ability
-      - _id: EDsNlcEhwFJ3bh0j
-        _key: >-
-          !actors.items.effects!b3c4c812b5357cb3.b3c4c812b5357cb3.EDsNlcEhwFJ3bh0j
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.4d4cbf6dfd95efca
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.16
-        img: systems/teriock/src/icons/abilities/shock-touch.webp
-        name: Shock Touch
-        system:
-          _sup: hmw6RM6yWoGJi7qA
-          automations:
-            09ed285450c5de7b:
-              _id: 09ed285450c5de7b
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              executor: false
-              heighten:
-                - 1
-                - 0
-              relation: include
-              status: frozen
-              target: false
-              type: status
-            800c70e6560525a8:
-              _id: 800c70e6560525a8
-              competencies:
-                - 0
-                - 1
-                - 2
-              formula: (@h)d4[magic ice]
-              heighten:
-                - 1
-              impact: damage
-              merge: true
-              type: roll
-            d5717000e99ee582:
-              _id: d5717000e99ee582
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 1
-              heighten:
-                - 1
-                - 0
-              type: combatExpiration
-              what:
-                roll: 2d4kh1
-                threshold: 4
-                type: rolled
-              when:
-                skip: 1
-                time: end
-                trigger: action
-              who:
-                type: target
-            d635eb44dba086dd:
-              _id: d635eb44dba086dd
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-              heighten:
-                - 1
-                - 0
-              type: combatExpiration
-              what:
-                roll: 2d4kh1
-                threshold: 4
-                type: rolled
-              when:
-                skip: 0
-                time: end
-                trigger: action
-              who:
-                type: target
-          class: stormMage
-          competence:
-            raw: 0
-          costs:
-            components:
-              somatic:
-                type: tag
-              verbal:
-                type: tag
-          delivery: hand
-          duration:
-            raw: '1'
-            unit: minute
-          effectTypes:
-            - temporal
-          elements:
-            - storm
-          endCondition: >-
-            <p>At the end of each of the target's actions, they roll [[/roll
-            2d4]]. If either of these dice roll a 4, this effect ends.</p>
-          executionTime:
-            base: a1
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-            [[/damage 1d4[magic ice]]] @L[Core:Damage]{damage}  as well.</p>
-          identifier: shock-touch
-          interaction: attack
-          invoked: true
-          maneuver: active
-          mundane: false
-          piercing:
-            raw: 2
-          powerSources:
-            - magical
-          range:
-            unit: contact
-          results:
-            critHit: >-
-              <p>The target automatically fails the first [[/roll 2d4]]
-              roll.</p>
-            hit: <p>Target is @L[Condition:Frozen]{frozen}.</p>
-          spell: true
-          standard: true
-          targets:
-            - creature
-        transfer: true
-        type: ability
       - _id: of4SFfXpqAZglrSA
         _key: >-
           !actors.items.effects!b3c4c812b5357cb3.b3c4c812b5357cb3.of4SFfXpqAZglrSA
@@ -391,7 +126,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.16
+          systemVersion: 0.12.18
         img: systems/teriock/src/icons/abilities/monstrous-strength.webp
         name: Monstrous Strength
         system:
@@ -464,404 +199,6 @@ items:
               value: 5
         transfer: true
         type: ability
-      - _id: rmYnEonCWvqKd3bb
-        _key: >-
-          !actors.items.effects!b3c4c812b5357cb3.b3c4c812b5357cb3.rmYnEonCWvqKd3bb
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.ItRjMpo3XSZAYYQQ
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.16
-        img: systems/teriock/src/icons/abilities/supernatural-strength.webp
-        name: Supernatural Strength
-        system:
-          _sup: of4SFfXpqAZglrSA
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: special
-          identifier: supernatural-strength
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          overview:
-            base: >-
-              <p>You gain @L[Ability:Giant Strength]{Giant Strength} and
-              @L[Ability:Shattering Grip]{Shattering Grip}. In addition, you may
-              @L[Keyword:Deboosted]{deboost} any melee
-              @L[Category:Weapons]{weapon} @L[Category:Attack abilities]{attack}
-              to make it @L[Keyword:AV0]{AV0}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          targets:
-            - self
-          upgrades:
-            score:
-              attribute: str
-              value: 4
-        transfer: true
-        type: ability
-      - _id: yo7uyMMpVPtafL1y
-        _key: >-
-          !actors.items.effects!b3c4c812b5357cb3.b3c4c812b5357cb3.yo7uyMMpVPtafL1y
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.ElgNURrH9OTECkbk
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.16
-        img: systems/teriock/src/icons/abilities/giant-strength.webp
-        name: Giant Strength
-        system:
-          _sup: rmYnEonCWvqKd3bb
-          class: knight
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: giant-strength
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          overview:
-            base: >-
-              <p>You gain @L[Ability:Improved Strength]{Improved Strength} and
-              @L[Ability:Melee Damage Boost]{Melee Damage Boost}. In addition,
-              you are no longer suffer the consequences of
-              @L[Property:Cumbersome]{cumbersome} items.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          skill: true
-          standard: true
-          targets:
-            - self
-          upgrades:
-            score:
-              attribute: str
-              value: 3
-        transfer: true
-        type: ability
-      - _id: 24VHzIQaXDIqh5Q7
-        _key: >-
-          !actors.items.effects!b3c4c812b5357cb3.b3c4c812b5357cb3.24VHzIQaXDIqh5Q7
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.8aa8167e9f40cbb2
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.16
-        img: systems/teriock/src/icons/abilities/improved-strength.webp
-        name: Improved Strength
-        system:
-          _sup: yo7uyMMpVPtafL1y
-          class: knight
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: improved-strength
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          overview:
-            base: >-
-              <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
-              @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          skill: true
-          standard: true
-          targets:
-            - self
-          upgrades:
-            score:
-              attribute: str
-              value: 2
-        transfer: true
-        type: ability
-      - _id: YoFv1mFbz0wjborF
-        _key: >-
-          !actors.items.effects!b3c4c812b5357cb3.b3c4c812b5357cb3.YoFv1mFbz0wjborF
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.07a0880b230cdb14
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.16
-        img: systems/teriock/src/icons/abilities/beastly-strength.webp
-        name: Beastly Strength
-        system:
-          _sup: 24VHzIQaXDIqh5Q7
-          class: knight
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: beastly-strength
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          overview:
-            base: >-
-              <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
-              hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
-              Piercing]{Armor piercing} weapons must still be wielded in two
-              hands to be @L[Keyword:Armor Voiding]{AV0}.</div>
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          skill: true
-          standard: true
-          targets:
-            - self
-          upgrades:
-            score:
-              attribute: str
-              value: 1
-        transfer: true
-        type: ability
-      - _id: pjlh9RCVqdNWeaP6
-        _key: >-
-          !actors.items.effects!b3c4c812b5357cb3.b3c4c812b5357cb3.pjlh9RCVqdNWeaP6
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.54f63d63ae4376a9
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.16
-        img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
-        name: Improved Armor Piercing
-        system:
-          _sup: 24VHzIQaXDIqh5Q7
-          class: knight
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '0'
-            unit: unlimited
-          executionTime:
-            base: passive
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: improved-armor-piercing
-          interaction: manifest
-          maneuver: passive
-          mundane: false
-          overview:
-            base: >-
-              <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
-              piercing}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          skill: true
-          standard: true
-          targets:
-            - self
-        transfer: true
-        type: ability
-      - _id: 3h0ADzT1a5khxTdy
-        _key: >-
-          !actors.items.effects!b3c4c812b5357cb3.b3c4c812b5357cb3.3h0ADzT1a5khxTdy
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.5pnQBaF30VIQrAZO
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.16
-        img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
-        name: Melee Damage Boost
-        system:
-          _sup: yo7uyMMpVPtafL1y
-          class: knight
-          competence:
-            raw: 0
-          delivery: weapon
-          duration:
-            raw: '0'
-            unit: instant
-          effectTypes:
-            - damaging
-          executionTime:
-            base: r0
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: melee-damage-boost
-          interaction: manifest
-          maneuver: reactive
-          mundane: false
-          overview:
-            base: >-
-              <p>You may spend an unused @L[Core:Active Maneuvers]{action} to
-              @L[Keyword:Boosted]{boost} the triggering
-              @L[Core:Damage]{damage}.</p>
-            proficient: >-
-              <p>You may spend an additional unused @L[Core:Active
-              Maneuvers]{action} to @L[Keyword:Boosted]{boost} the triggering
-              @L[Core:Damage]{damage} again.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: contact
-          skill: true
-          standard: true
-          targets:
-            - creature
-          trigger: >-
-            <p>You have hit a creature with a @L[Category:Damaging
-            effects]{damaging} melee @L[Category:Weapon delivery
-            abilities]{weapon} @L[Category:Attack abilities]{attack}.</p>
-        transfer: true
-        type: ability
-      - _id: 9bpcnTi8uHXXCuW7
-        _key: >-
-          !actors.items.effects!b3c4c812b5357cb3.b3c4c812b5357cb3.9bpcnTi8uHXXCuW7
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.DYr6GrWagYhH1EZW
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.16
-        img: systems/teriock/src/icons/abilities/shattering-grip.webp
-        name: Shattering Grip
-        system:
-          _sup: rmYnEonCWvqKd3bb
-          automations:
-            MZ0HXunkUDN7yJiQ:
-              _id: MZ0HXunkUDN7yJiQ
-              common:
-                - shatter
-              competencies:
-                - 0
-                - 1
-                - 2
-              heighten:
-                - 0
-                - 1
-              showConfirmationDialog: true
-              type: common
-          competence:
-            raw: 0
-          costs:
-            primary:
-              mp:
-                formula: '1'
-                type: formula
-          delivery: hand
-          duration:
-            raw: '0'
-            unit: instant
-          effectTypes:
-            - destruction
-          executionTime:
-            base: a2
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: shattering-grip
-          interaction: manifest
-          maneuver: active
-          mundane: false
-          overview:
-            base: <p>Target is @L[Property:Shattered]{shattered}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: contact
-          requirements: <p>You are holding the target.</p>
-          targets:
-            - item
-        transfer: true
-        type: ability
       - _id: Ip6Lr7Rvkkon81EA
         _key: >-
           !actors.items.effects!b3c4c812b5357cb3.b3c4c812b5357cb3.Ip6Lr7Rvkkon81EA
@@ -870,7 +207,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.16
+          systemVersion: 0.12.18
         img: systems/teriock/src/icons/abilities/normal-intelligence.webp
         name: Normal Intelligence
         system:
@@ -916,7 +253,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.16
+          systemVersion: 0.12.18
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
@@ -962,7 +299,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.16
+          systemVersion: 0.12.18
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
@@ -1008,7 +345,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.16
+          systemVersion: 0.12.18
         img: systems/teriock/src/icons/abilities/normal-sneak.webp
         name: Normal Sneak
         system:
@@ -1050,6 +387,7 @@ items:
     img: systems/teriock/src/icons/creatures/storm-giant.webp
     name: Storm Giant
     system:
+      adult: 0
       appearance: >-
         <p>Humanoid, though of great size and build. Skil colors and features
         varying by their natural @L[Category:Mage classes]{mage} type.</p>
@@ -1065,6 +403,7 @@ items:
       innateRanks: >-
         <p>Innately @L[Category:Classes]{rank} 1 @L[Class:Storm Mage]{Storm
         Mage}.</p>
+      lifespan: 0
       size:
         enabled: true
         value: 8
@@ -1088,7 +427,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.16
+      systemVersion: 0.12.18
     effects:
       - _id: CmkJGGebZrjvIBwd
         _key: >-
@@ -1098,7 +437,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.16
+          systemVersion: 0.12.18
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -1121,7 +460,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.16
+          systemVersion: 0.12.18
         img: icons/creatures/abilities/mouth-teeth-long-red.webp
         name: Biting
         system:
@@ -1143,7 +482,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.16
+          systemVersion: 0.12.18
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -1185,7 +524,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.16
+      systemVersion: 0.12.18
     effects:
       - _id: UTE4vX4qQBQ5SaJA
         _key: >-
@@ -1195,7 +534,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.16
+          systemVersion: 0.12.18
         img: systems/teriock/src/icons/abilities/ice-ball.webp
         name: Ice Ball
         system:
@@ -1330,7 +669,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.16
+          systemVersion: 0.12.18
         img: systems/teriock/src/icons/abilities/identify.webp
         name: Identify
         system:
@@ -1410,7 +749,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.16
+          systemVersion: 0.12.18
         img: systems/teriock/src/icons/abilities/illusionary-arts.webp
         name: Illusionary Arts
         system:
@@ -1459,7 +798,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.16
+          systemVersion: 0.12.18
         img: systems/teriock/src/icons/abilities/lightning-ray.webp
         name: Lightning Ray
         system:
@@ -1538,143 +877,6 @@ items:
             - creature
         transfer: true
         type: ability
-      - _id: EJ8QZccY92htOGy8
-        _key: >-
-          !actors.items.effects!b3c4c812b5357cb3.CnBUnhTRYXxq9QcS.EJ8QZccY92htOGy8
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.16e6d790f80ca4e1
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.16
-        img: systems/teriock/src/icons/abilities/detect-illusion.webp
-        name: Detect Illusion
-        system:
-          _sup: XGWcDOE95PgdyWli
-          class: stormMage
-          competence:
-            raw: 0
-          delivery: hand
-          duration:
-            raw: '0'
-            unit: instant
-          effectTypes:
-            - mental
-          elements:
-            - storm
-          executionTime:
-            base: a1
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          identifier: detect-illusion
-          interaction: attack
-          maneuver: active
-          mundane: false
-          overview:
-            proficient: >-
-              <p>You also know what <i>type</i> of
-              @L[Keyword:Illusionary]{illusion} it is (Minor, Full, or Greater)
-              as well as the DC needed to @L[Ability:Disbelieve]{Disbelieve} it.
-              This does not count as "disbelieving" the illusion.</p>
-          piercing:
-            raw: 2
-          powerSources:
-            - magical
-          range:
-            unit: contact
-          results:
-            hit: >-
-              <p>You know if the target is
-              @L[Keyword:Illusionary]{illusionary}.</p>
-          spell: true
-          standard: true
-          targets:
-            - area
-            - creature
-            - item
-        transfer: true
-        type: ability
-      - _id: XZkoTEMwMFC4LB4v
-        _key: >-
-          !actors.items.effects!b3c4c812b5357cb3.CnBUnhTRYXxq9QcS.XZkoTEMwMFC4LB4v
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.6d663fd2b1fa3a13
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.16
-        img: systems/teriock/src/icons/abilities/simple-illusion-creation.webp
-        name: Simple Illusion Creation
-        system:
-          _sup: XGWcDOE95PgdyWli
-          automations:
-            72ce567009179bea:
-              _id: 72ce567009179bea
-              changeType: add
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              duration:
-                raw: '@h * 3600'
-                unit: second
-              heighten:
-                - 1
-              type: duration
-          class: stormMage
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            raw: '1'
-            unit: minute
-          effectTypes:
-            - illusion
-          elements:
-            - storm
-          executionTime:
-            base: a1
-            slow:
-              unit: second
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-            effect increases by 1 hour.</p>
-          identifier: simple-illusion-creation
-          interaction: manifest
-          maneuver: active
-          mundane: false
-          overview:
-            base: >-
-              <p>You create a @L[Keyword:Illusionary]{minor illusion} of a
-              simple object or effect that fits within your hand. As soon as it
-              leaves your hand, the illusion fades.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - magical
-          range:
-            unit: self
-          spell: true
-          standard: true
-          targets:
-            - self
-        transfer: true
-        type: ability
     folder: fb7e9de05218d569
     img: systems/teriock/src/icons/ranks/rank-1-storm-mage.webp
     name: Rank 1 Storm Mage
@@ -1711,7 +913,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.16
+      systemVersion: 0.12.18
     effects:
       - _id: H7Q5z5528FgfgbLp
         _key: >-
@@ -1721,7 +923,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.16
+          systemVersion: 0.12.18
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -1744,7 +946,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.16
+          systemVersion: 0.12.18
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -1766,7 +968,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.16
+          systemVersion: 0.12.18
         img: systems/teriock/src/icons/properties/prehensile.webp
         name: Prehensile
         system:
@@ -1788,7 +990,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.16
+          systemVersion: 0.12.18
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -1829,7 +1031,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.16
+      systemVersion: 0.12.18
     effects:
       - _id: TWk5AP5nzZgpXkaM
         _key: >-
@@ -1839,7 +1041,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.16
+          systemVersion: 0.12.18
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -1862,7 +1064,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.16
+          systemVersion: 0.12.18
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -1896,24 +1098,24 @@ items:
           unit: self
       vitals: false
     type: body
-  - _id: Zs0prL2oPhKze7sX
-    _key: '!actors.items!b3c4c812b5357cb3.Zs0prL2oPhKze7sX'
+  - _id: 1tfNJ9V8pWXKGsfm
+    _key: '!actors.items!b3c4c812b5357cb3.1tfNJ9V8pWXKGsfm'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.4a095aaed0254ec3
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.16
+      systemVersion: 0.12.18
     effects:
       - _id: NGCuRUaVtXnxAbRe
         _key: >-
-          !actors.items.effects!b3c4c812b5357cb3.Zs0prL2oPhKze7sX.NGCuRUaVtXnxAbRe
+          !actors.items.effects!b3c4c812b5357cb3.1tfNJ9V8pWXKGsfm.NGCuRUaVtXnxAbRe
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.ac35fb736d8bd407
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.16
+          systemVersion: 0.12.18
         img: systems/teriock/src/icons/abilities/arcane-ray.webp
         name: Arcane Ray
         system:
@@ -1990,13 +1192,13 @@ items:
         type: ability
       - _id: aCWLNsvSFjEuLTyl
         _key: >-
-          !actors.items.effects!b3c4c812b5357cb3.Zs0prL2oPhKze7sX.aCWLNsvSFjEuLTyl
+          !actors.items.effects!b3c4c812b5357cb3.1tfNJ9V8pWXKGsfm.aCWLNsvSFjEuLTyl
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.30358f2e8d9b3a0a
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.16
+          systemVersion: 0.12.18
         img: systems/teriock/src/icons/abilities/staff-touch.webp
         name: Staff Touch
         system:

@@ -1,0 +1,142 @@
+_id: cbc7cf36268b8f3b
+_key: '!effects!cbc7cf36268b8f3b'
+_stats:
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.12.18
+img: systems/teriock/src/icons/abilities/skeletize.webp
+name: Skeletize
+system:
+  automations:
+    72ce567009179bea:
+      _id: 72ce567009179bea
+      changeType: add
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      duration:
+        raw: '@h * 3600'
+        unit: second
+      heighten:
+        - 1
+      type: duration
+    838ba57012685987:
+      _id: 838ba57012685987
+      changeType: add
+      competencies:
+        - 2
+      crit:
+        - 0
+        - 1
+      duration:
+        raw: '3600'
+        unit: second
+      heighten:
+        - 1
+        - 0
+      type: duration
+    zWSYKjRegTngAP1L:
+      _id: zWSYKjRegTngAP1L
+      automatic: true
+      competence:
+        raw: 0
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      heighten:
+        - 0
+        - 1
+      multi: false
+      override:
+        - art
+      overrideCompetence: true
+      reset:
+        - hp
+        - mp
+      ring: false
+      suppress:
+        - body
+        - fluency
+        - rank
+        - species
+      type: transformation
+      uuids:
+        - Compendium.teriock.creatures.Actor.73c6ad85b7235b4e
+  competence:
+    raw: 0
+  costs:
+    components:
+      somatic:
+        type: tag
+      verbal:
+        type: tag
+    primary:
+      mp:
+        formula: '1'
+        type: formula
+  delivery: hand
+  duration:
+    raw: '1'
+    unit: minute
+  effectTypes:
+    - control
+    - magical
+    - reanimation
+  elements:
+    - necromancy
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    featSaveAttribute: mov
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: special
+  heightened: >-
+    <p>For each additional @L[Core:MP]{MP} spent, the duration of this effect
+    increases by 1 hour.</p>
+  identifier: skeletize
+  interaction: attack
+  invoked: true
+  maneuver: active
+  mundane: false
+  overview:
+    fluent: >-
+      <p>The base duration of this effect is 1 hour and the
+      @L[Creature:Skeleton]{skeleton} is a @L[Core:Minions]{minion} under your
+      command.</p>
+    proficient: <p>[[lookup name]] is @L[Keyword:Warded]{warded}.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - magical
+  range:
+    unit: contact
+  requirements: <p>Target is @L[Condition:Dead]{dead}.</p>
+  results:
+    hit: >-
+      <p>Target is reanimated as a @L[Creature:Skeleton]{skeleton}. It is not
+      under your command, but is hostile to everyone other than you that is not
+      @L[Category:Skeletal undead creatures]{another skeleton}. The
+      @L[Creature:Skeleton]{skeleton} keeps the @L[Core:Size]{SIZE} it had
+      before, but loses all other traits and abilities. If the target was
+      already @L[Category:Skeletal undead creatures]{some kind of skeleton},
+      then it is reanimated as that type.</p>
+  rotator: true
+  spell: true
+  standard: true
+  targets:
+    - creature
+transfer: true
+type: ability

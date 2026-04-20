@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.15
+  systemVersion: 0.12.18
 img: systems/teriock/src/icons/abilities/jumpstart-zombify.webp
 name: Jumpstart Zombify
 system:
@@ -108,7 +108,7 @@ system:
   mundane: false
   overview:
     fluent: <p>The base duration of this effect is 1 hour.</p>
-    proficient: <p>Zombify is @L[Keyword:Warded]{warded}.</p>
+    proficient: <p>[[lookup name]] is @L[Keyword:Warded]{warded}.</p>
   piercing:
     raw: 2
   powerSources:
@@ -120,10 +120,13 @@ system:
     hit: >-
       <p>At the start of the target's next turn, they are reanimated as a
       @L[Creature:Zombie]{zombie}. It is not under your command, but is hostile
-      to everyone but you. The @L[Creature:Zombie]{zombie} keeps the
-      @L[Core:Size]{SIZE} it had before, but loses all other traits and
-      abilities. If the target was already @L[Category:Zombies]{some kind of
-      zombie}, then it is reanimated as that type.</p>
+      to everyone other than you that is not @L[Category:Zombies]{another
+      zombie}. The @L[Creature:Zombie]{zombie} keeps the @L[Core:Size]{SIZE} it
+      had before, but loses all other traits and abilities. If the target was
+      already @L[Category:Zombies]{some kind of zombie}, then it is reanimated
+      as that type.</p>
+  spell: true
+  standard: true
   targets:
     - creature
 transfer: true

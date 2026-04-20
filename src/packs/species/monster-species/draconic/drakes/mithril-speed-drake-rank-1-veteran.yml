@@ -14,7 +14,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.16
+      systemVersion: 0.12.18
     img: systems/teriock/src/icons/abilities/brace.webp
     name: Brace
     system:
@@ -118,10 +118,67 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.18
     img: systems/teriock/src/icons/abilities/improvised-armor-and-shields.webp
     name: Improvised Armor and Shields
     system:
+      automations:
+        DH9D04yber5kvwnW:
+          _id: DH9D04yber5kvwnW
+          attachDocuments: true
+          automatic: true
+          children:
+            data: '{}'
+            enabled: true
+            overrideData: false
+            uuids:
+              - Compendium.teriock.properties.ActiveEffect.3f3a51018a703755
+          competence:
+            raw: 0
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          data: |-
+            {
+              "name": "Improvised {name}"
+            }
+          heighten:
+            - 0
+            - 1
+          multi: true
+          overrideCompetence: false
+          overrideData: true
+          qualifier: '0'
+          separate: true
+          type: addDocuments
+          uuids:
+            - Compendium.teriock.equipment.Folder.ed3267c1d2c3a7f4
+            - Compendium.teriock.equipment.Folder.f596232e51f64ef9
+        FKc997ohmjSZ7IvR:
+          _id: FKc997ohmjSZ7IvR
+          competence:
+            raw: 0
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          data: '{}'
+          heighten:
+            - 0
+            - 1
+          overrideCompetence: false
+          overrideData: false
+          preventEffect: true
+          preventFeat: false
+          preventThreshold: false
+          type: modifyEffect
       class: veteran
       competence:
         raw: 0
@@ -146,14 +203,14 @@ effects:
       overview:
         base: >-
           <p>During a @L[Core:Short Rest]{short rest}, you may scavenge
-          materials and make 1 piece of @L[Category:Armor]{armor} or
-          @L[Category:Shields]{shield}. Any @L[Category:Armor]{armor} you make
-          in this way counts as a number of items equal to the
-          @L[Category:Armor]{armor's} @L[Core:AV]{AV} for the purpose of this
-          ability. Only common @L[Damage:Mundane]{mundane} items can typically
-          be made in this way, but the @L[Core:GM]{GM} may specify if other
-          options are available to you. These items exist for 8 hours before
-          they are no longer functional.</p>
+          materials and make 1 piece of @L[Category:Armor]{armor} or a
+          @L[Category:Shields]{shield}. It is
+          @L[Property:Improvised]{improvised}. Any @L[Category:Armor]{armor} you
+          make in this way counts as a number of items equal to the
+          @L[Category:Armor]{armor's} @L[Core:Armor Class]{AV} for the purpose
+          of this ability. Only common @L[Damage:Mundane]{mundane} items can
+          typically be made in this way, but the @L[Core:Game Master]{GM} may
+          specify if other options are available to you.</p>
         fluent: <p>You can instead make up to @L[Core:Fluency Bonus]{F} items.</p>
         proficient: <p>You can instead make up to @L[Core:Proficiency Bonus]{P} items.</p>
       piercing:
@@ -175,7 +232,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.15
+      systemVersion: 0.12.18
     img: systems/teriock/src/icons/abilities/partner-awaken.webp
     name: Partner Awaken
     system:
@@ -215,132 +272,6 @@ effects:
       range:
         raw: '30'
         unit: ft
-      skill: true
-      standard: true
-      targets:
-        - creature
-    transfer: true
-    type: ability
-  - _id: MenHrbutGNJS7obH
-    _key: '!items.effects!ELWQnINiyDSfk5AG.MenHrbutGNJS7obH'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.GTwa9EG1h2n986ZO
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.16
-    img: systems/teriock/src/icons/abilities/instant-awaken.webp
-    name: Instant Awaken
-    system:
-      _sup: shn8qx3LbBe4ktYg
-      automations:
-        1728b3a84ea27844:
-          _id: 1728b3a84ea27844
-          common:
-            - awaken
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          showConfirmationDialog: true
-          type: common
-      competence:
-        raw: 0
-      delivery: hand
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - awakening
-      executionTime:
-        base: a1
-        slow:
-          unit: second
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: instant-awaken
-      interaction: attack
-      limitation: <p>Only usable on the other participant in the Partner Awaken.</p>
-      maneuver: active
-      mundane: false
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: contact
-      results:
-        hit: <p>Target is @L[Keyword:Awaken]{awakened}.</p>
-      skill: true
-      standard: true
-      targets:
-        - creature
-    transfer: true
-    type: ability
-  - _id: bVBOGTNlZJhonZzB
-    _key: '!items.effects!ELWQnINiyDSfk5AG.bVBOGTNlZJhonZzB'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8d55640ef65f1e81
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.16
-    img: systems/teriock/src/icons/abilities/reactive-awaken.webp
-    name: Reactive Awaken
-    system:
-      _sup: shn8qx3LbBe4ktYg
-      automations:
-        1728b3a84ea27844:
-          _id: 1728b3a84ea27844
-          common:
-            - awaken
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
-          showConfirmationDialog: true
-          type: common
-      competence:
-        raw: 0
-      delivery: hand
-      duration:
-        raw: '0'
-        unit: instant
-      effectTypes:
-        - awakening
-      executionTime:
-        base: r1
-        slow:
-          unit: second
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      identifier: reactive-awaken
-      interaction: attack
-      limitation: <p>Only usable on the other participant in the Partner Awaken.</p>
-      maneuver: reactive
-      mundane: false
-      overview:
-        base: <p>Target is @L[Keyword:Awaken]{awakened}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: contact
       skill: true
       standard: true
       targets:
