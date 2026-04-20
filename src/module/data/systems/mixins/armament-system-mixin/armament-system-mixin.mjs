@@ -326,7 +326,7 @@ export default function ArmamentSystemMixin(Base) {
        */
       get summarizedBlock() {
         return _loc("TERIOCK.SYSTEMS.Armament.PANELS.bv", {
-          value: this.bv.formula,
+          value: this.bv.value,
         });
       }
 
