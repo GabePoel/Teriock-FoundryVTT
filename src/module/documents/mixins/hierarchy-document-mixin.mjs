@@ -1,6 +1,5 @@
 //noinspection JSUnusedGlobalSymbols
 
-import { DependentsRegistry } from "../../helpers/_module.mjs";
 import { resolveCollection, resolveDocument } from "../../helpers/resolve.mjs";
 import { TypeCollection } from "../collections/_module.mjs";
 
@@ -292,11 +291,13 @@ export default function HierarchyDocumentMixin(Base) {
        */
       get dependee() {
         if (this.system._dep) {
-          const uuid = DependentsRegistry.resolveDependentID(
+          const uuid = game.teriock?.dependentsRegistry.resolveDependentID(
             this.system._dep,
             this,
           );
-          if (uuid) return DependentsRegistry.fetchFromUuid(this, uuid);
+          if (uuid) {
+            return game.teriock?.dependentsRegistry.fetchFromUuid(this, uuid);
+          }
         }
         return null;
       }
