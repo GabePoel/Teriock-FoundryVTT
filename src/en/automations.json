@@ -2,10 +2,35 @@
   "TERIOCK": {
     "AUTOMATIONS": {
       "AddDocuments": {
+        "BUTTONS": {
+          "default": "Add Document",
+          "inferred": "Add {name}"
+        },
         "FIELDS": {
           "attachDocuments": {
             "hint": "Added documents will be attached to this effect's consequence instead of added independently.",
             "label": "Attach Documents"
+          },
+          "children": {
+            "data": {
+              "hint": "This data will be applied to each child document added to this.",
+              "label": "Custom Child Data"
+            },
+            "enabled": {
+              "hint": "Add these documents to every other document created by this automation.",
+              "label": "Enable Children"
+            },
+            "overrideData": {
+              "label": "Override Child Data"
+            },
+            "uuids": {
+              "hint": "Documents to create as grandchildren on each created child or other document. They will all be added with no selection or prompt.",
+              "label": "Child Documents"
+            }
+          },
+          "separate": {
+            "hint": "Make this a separate button instead of part of the main effect.",
+            "label": "Separate"
           }
         },
         "LABEL": "Add Documents"
@@ -22,11 +47,11 @@
             },
             "label": "Heightening"
           },
-          "relation": {
-            "label": "Relation"
-          },
           "identifier": {
             "label": "Target Identifier"
+          },
+          "relation": {
+            "label": "Relation"
           }
         },
         "LABEL": "Automation",
@@ -80,9 +105,6 @@
         "LABEL": "Change Movement"
       },
       "ChangeQuantity": {
-        "NOTIFICATIONS": {
-          "parentNotConsumable": "The parent document of this automation is not consumable."
-        },
         "DIALOG": {
           "content": "Would you like to change the quantity of {name} by {amount}?"
         },
@@ -101,6 +123,9 @@
           }
         },
         "LABEL": "Change Quantity",
+        "NOTIFICATIONS": {
+          "parentNotConsumable": "The parent document of this automation is not consumable."
+        },
         "USAGE": {
           "description": "The quantity of {name} has changed by {amount}.",
           "roll": "Change Quantity Roll"
@@ -160,14 +185,14 @@
         }
       },
       "ConfirmationDialog": {
+        "DIALOG": {
+          "content": "Would you like to proceed?",
+          "title": "{document} {automation} Confirmation"
+        },
         "FIELDS": {
           "showConfirmationDialog": {
             "label": "Show Confirmation Dialog"
           }
-        },
-        "DIALOG": {
-          "title": "{document} {automation} Confirmation",
-          "content": "Would you like to proceed?"
         },
         "NOTIFICATIONS": {
           "noConfirmation": "Running this without a confirmation dialog may cause performance issues or unexpected results."
@@ -252,16 +277,16 @@
       "ModifyEffect": {
         "FIELDS": {
           "preventEffect": {
-            "label": "Prevent Effect Button",
-            "hint": "Prohibit the button to apply the effect from being displayed."
+            "hint": "Prohibit the button to apply the effect from being displayed.",
+            "label": "Prevent Effect Button"
           },
           "preventFeat": {
-            "label": "Prevent Feat Activation",
-            "hint": "Prevent the default feat save activation button from being added."
+            "hint": "Prevent the default feat save activation button from being added.",
+            "label": "Prevent Feat Activation"
           },
           "preventThreshold": {
-            "label": "Prevent Threshold",
-            "hint": "For feat abilities, avoid determining a roll total and do not pass a fixed threshold into the generated feat activation."
+            "hint": "For feat abilities, avoid determining a roll total and do not pass a fixed threshold into the generated feat activation.",
+            "label": "Prevent Threshold"
           }
         },
         "LABEL": "Modify Effect"
@@ -279,12 +304,12 @@
       },
       "OverrideData": {
         "FIELDS": {
+          "data": {
+            "label": "Custom Data"
+          },
           "overrideData": {
             "hint": "Check this to add custom data which overrides the documents' normal data.",
             "label": "Override Data"
-          },
-          "data": {
-            "label": "Custom Data"
           }
         }
       },
@@ -324,24 +349,24 @@
             "hint": "The formula to use for the roll.",
             "label": "Formula"
           },
+          "impact": {
+            "label": "Impact"
+          },
           "merge": {
             "hint": "Whether to merge this roll with other valid rolls of the same type that have merging enabled.",
             "label": "Merge"
-          },
-          "impact": {
-            "label": "Impact"
           }
         }
       },
       "RollStyle": {
         "FIELDS": {
           "sfx": {
-            "label": "Special Effects",
-            "hint": "3D dice of this type will have this special effect applied to them."
+            "hint": "3D dice of this type will have this special effect applied to them.",
+            "label": "Special Effects"
           },
           "style": {
-            "label": "Style",
-            "hint": "3D dice of this type will have this style applied to them."
+            "hint": "3D dice of this type will have this style applied to them.",
+            "label": "Style"
           }
         },
         "LABEL": "3D Dice Style",
@@ -469,13 +494,13 @@
             "hint": "Typed identifiers for the documents to be used. Identifiers are kebab-case and have no special characters. They should be of the format {type}:{identifier}.",
             "label": "Local Documents"
           },
-          "qualifier": {
-            "hint": "Include all documents in the actor that meet the qualifier above. If this is non-zero, all documents that are children of of the actor executing this will be considered for selection. If the formula entered above evaluates to a truthy value given that document's roll data, it will be included.",
-            "label": "Qualifier"
-          },
           "noHeighten": {
             "hint": "If checked, abilities this executes cannot be heightened.",
             "label": "No Heightening"
+          },
+          "qualifier": {
+            "hint": "Include all documents in the actor that meet the qualifier above. If this is non-zero, all documents that are children of of the actor executing this will be considered for selection. If the formula entered above evaluates to a truthy value given that document's roll data, it will be included.",
+            "label": "Qualifier"
           }
         },
         "LABEL": "Use Documents"

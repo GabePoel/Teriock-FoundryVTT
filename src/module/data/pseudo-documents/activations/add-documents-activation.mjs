@@ -18,6 +18,7 @@ const { fields } = foundry.data;
  * @typedef FamilyConstruction
  * @property {DocumentConstruction} root
  * @property {DocumentConstruction[]} children
+ * @property {DocumentConstruction[]} grandchildren
  * @property {DocumentConstruction[]} other
  */
 
@@ -25,6 +26,7 @@ const { fields } = foundry.data;
  * @typedef ResolvedFamily
  * @property {object} root
  * @property {object[]} children
+ * @property {object[]} grandchildren
  * @property {object[]} other
  */
 
@@ -87,8 +89,18 @@ export default class AddDocumentsActivation extends BaseActivation {
    * @returns {Promise<Partial<ResolvedFamily>>}
    */
   async constructFamily(famConstruct) {
-    const { root, children = [], other = [] } = famConstruct;
-    const queue = [...(root ? [root] : []), ...children, ...other];
+    const {
+      root,
+      children = [],
+      grandchildren = [],
+      other = [],
+    } = famConstruct;
+    const queue = [
+      ...(root ? [root] : []),
+      ...children,
+      ...grandchildren,
+      ...other,
+    ];
     const results = await Promise.all(
       queue.map((doc) => this.constructDocument(doc)),
     );
@@ -98,10 +110,15 @@ export default class AddDocumentsActivation extends BaseActivation {
     for (const child of childrenData) {
       foundry.utils.deleteProperty(child, "flags.teriock.createdBy");
     }
+    const grandchildrenData = results.slice(
+      pointer,
+      (pointer += grandchildren.length),
+    );
     const otherData = results.slice(pointer);
     return {
       root: rootData,
       children: childrenData,
+      grandchildren: grandchildrenData,
       other: otherData,
     };
   }
@@ -117,12 +134,24 @@ export default class AddDocumentsActivation extends BaseActivation {
       if (rootDocs.length > 0) {
         const root = rootDocs[0];
         if (fam.children && fam.children.length > 0) {
-          await this.safeCreate(root, fam.children);
+          const children = await this.safeCreate(root, fam.children);
+          if (fam.grandchildren && fam.grandchildren.length > 0) {
+            await Promise.all(
+              children.map((child) =>
+                this.safeCreate(child, fam.grandchildren),
+              ),
+            );
+          }
         }
       }
     }
     if (fam.other && fam.other.length > 0) {
-      await this.safeCreate(actor, fam.other);
+      const other = await this.safeCreate(actor, fam.other);
+      if (fam.grandchildren && fam.grandchildren.length > 0) {
+        await Promise.all(
+          other.map((doc) => this.safeCreate(doc, fam.grandchildren)),
+        );
+      }
     }
   }
 
@@ -255,6 +284,7 @@ function familyConstructionField() {
   return new fields.SchemaField({
     root: documentConstructionField(),
     children: new fields.ArrayField(documentConstructionField()),
+    grandchildren: new fields.ArrayField(documentConstructionField()),
     other: new fields.ArrayField(documentConstructionField()),
   });
 }

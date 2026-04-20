@@ -1,7 +1,10 @@
 import { mix } from "../../../helpers/construction.mjs";
+import { defaultJSONField } from "../../fields/helpers/builders.mjs";
+import { AddDocumentsActivation } from "../activations/_module.mjs";
 import { CritAutomation } from "./abstract/_module.mjs";
 import {
   CompetenceAutomationMixin,
+  DisplayAutomationMixin,
   OverrideDataAutomationMixin,
   SelectDocumentsAutomationMixin,
 } from "./mixins/_module.mjs";
@@ -14,12 +17,16 @@ const { fields } = foundry.data;
  * @mixes SelectDocumentsAutomation
  * @mixes CompetenceAutomation
  * @mixes OverrideDataAutomation
+ * @property {boolean} separate
+ * @property {boolean} attachDocuments
+ * @property {{enabled: boolean, data: object, overrideData: boolean, uuids: Set<UUID<AnyChildDocument>>[]}} children
  */
 export default class AddDocumentsAutomation extends mix(
   CritAutomation,
   SelectDocumentsAutomationMixin,
   CompetenceAutomationMixin,
   OverrideDataAutomationMixin,
+  DisplayAutomationMixin,
 ) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
@@ -41,7 +48,37 @@ export default class AddDocumentsAutomation extends mix(
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       attachDocuments: new fields.BooleanField({ initial: true }),
+      separate: new fields.BooleanField({ initial: false }),
+      children: new fields.SchemaField({
+        enabled: new fields.BooleanField({ initial: false }),
+        data: defaultJSONField(),
+        overrideData: new fields.BooleanField({ initial: false }),
+        uuids: new fields.SetField(new fields.DocumentUUIDField()),
+      }),
     });
+  }
+
+  /**
+   * Attachment paths.
+   * @returns {string[]}
+   */
+  get _attachmentPaths() {
+    return ["separate", this.separate ? "display.label" : "attachDocuments"];
+  }
+
+  /**
+   * Children paths.
+   * @returns {string[]}
+   */
+  get _childrenPaths() {
+    const paths = ["children.enabled"];
+    if (this.children.enabled) {
+      paths.push(...["children.uuids", "children.overrideData"]);
+      if (this.children.overrideData) {
+        paths.push("children.data");
+      }
+    }
+    return paths;
   }
 
   /** @inheritDoc */
@@ -49,10 +86,54 @@ export default class AddDocumentsAutomation extends mix(
     return [
       ...this._selectionPaths,
       "hr",
-      "attachDocuments",
+      ...this._attachmentPaths,
       ...this._competencePaths,
       ...super._overrideDataPaths,
+      "hr",
+      ...this._childrenPaths,
     ];
+  }
+
+  /** @inheritDoc */
+  get canCrit() {
+    return !this.separate && super.canCrit;
+  }
+
+  /**
+   * Determine the label for an activation from a construction.
+   * @param {DocumentConstruction} construction
+   */
+  #inferLabel(construction) {
+    let name = _loc("TERIOCK.AUTOMATIONS.AddDocuments.BUTTONS.default");
+    if (foundry.utils.hasProperty(construction, "data.name")) {
+      name = _loc("TERIOCK.AUTOMATIONS.AddDocuments.BUTTONS.inferred", {
+        name: construction.data.name,
+      });
+    }
+    return name;
+  }
+
+  /**
+   * Update the name of the document construction.
+   * @param {DocumentConstruction} construction
+   */
+  #updateConstructionName(construction) {
+    let uuidName;
+    let dataName;
+    let name;
+    if (construction.uuid) {
+      const index = fromUuidSync(construction.uuid);
+      if (index) uuidName = index.name;
+      name = uuidName;
+    }
+    if (foundry.utils.hasProperty(construction, "data.name")) {
+      dataName = construction.data.name;
+      name = dataName;
+    }
+    if (dataName?.includes("{name}")) {
+      name = dataName.replace("{name}", uuidName || "");
+    }
+    if (name) foundry.utils.setProperty(construction, "data.name", name);
   }
 
   /**
@@ -72,8 +153,39 @@ export default class AddDocumentsAutomation extends mix(
       if (this.overrideData && this.data) {
         foundry.utils.mergeObject(data, this.data, { inplace: true });
       }
-      return { uuid, data };
+      const construction = { uuid, data };
+      this.#updateConstructionName(construction);
+      return construction;
     });
+  }
+
+  /** @inheritDoc */
+  async getActivations() {
+    if (!this.separate) return [];
+    const choices = await this.choose();
+    const activations = [];
+    for (const choice of choices) {
+      const activationFamily = { root: choice };
+      if (this.children.enabled) {
+        activationFamily.children = Array.from(this.children.uuids).map(
+          (uuid) => {
+            return {
+              uuid,
+              data: this.children.overrideData ? this.children.data : {},
+            };
+          },
+        );
+      }
+      const activationData = {
+        primary: activationFamily,
+        secondary: activationFamily,
+        display: {
+          label: this.display.label || this.#inferLabel(activationFamily.root),
+        },
+      };
+      activations.push(new AddDocumentsActivation(activationData));
+    }
+    return activations;
   }
 
   /** @inheritDoc */

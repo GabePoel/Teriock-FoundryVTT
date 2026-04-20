@@ -421,16 +421,30 @@ export default function AbilityExecutionChatPart(Base) {
             return { uuid: s.uuid };
           });
           const critConChildren = [...normConChildren];
+          const normGrandchildren = [];
+          const critGrandchildren = [];
           const normImbChildren = [];
           const critImbChildren = [];
           const normDocs = [];
           const critDocs = [];
           const childAutomations =
             /** @type {AddDocumentsAutomation[]} */ this.activeAutomations.filter(
-              (a) => [AddDocumentsAutomation.TYPE].includes(a.type),
+              (a) =>
+                [AddDocumentsAutomation.TYPE].includes(a.type) && !a.separate,
             );
           for (const a of childAutomations) {
             const toAdd = await a.choose({ actor: this.actor });
+            const grandchildren = [];
+            if (a.children.enabled) {
+              const uuids = Array.from(a.children.uuids ?? []);
+              for (const uuid of uuids) {
+                const grandchild = { uuid };
+                if (a.children.overrideData && a.children.data) {
+                  grandchild.data = foundry.utils.deepClone(a.children.data);
+                }
+                grandchildren.push(grandchild);
+              }
+            }
             if (a.crit.has(0)) {
               if (a.attachDocuments) {
                 normConChildren.push(...toAdd);
@@ -438,6 +452,7 @@ export default function AbilityExecutionChatPart(Base) {
               } else {
                 normDocs.push(...toAdd);
               }
+              normGrandchildren.push(...grandchildren);
             }
             if (a.crit.has(1)) {
               if (a.attachDocuments) {
@@ -446,6 +461,7 @@ export default function AbilityExecutionChatPart(Base) {
               } else {
                 critDocs.push(...toAdd);
               }
+              critGrandchildren.push(...grandchildren);
             }
           }
           const transformationAutomations =
@@ -519,11 +535,13 @@ export default function AbilityExecutionChatPart(Base) {
                 },
                 primary: {
                   children: normConChildren,
+                  grandchildren: normGrandchildren,
                   other: normDocs,
                   root: { data: normConData },
                 },
                 secondary: {
                   children: critConChildren,
+                  grandchildren: critGrandchildren,
                   other: critDocs,
                   root: { data: critConData },
                 },
@@ -541,11 +559,13 @@ export default function AbilityExecutionChatPart(Base) {
                 },
                 primary: {
                   children: normImbChildren,
+                  grandchildren: normGrandchildren,
                   other: normDocs,
                   root: { data: normImbData },
                 },
                 secondary: {
                   children: critImbChildren,
+                  grandchildren: critGrandchildren,
                   other: critDocs,
                   root: { data: critImbData },
                 },
