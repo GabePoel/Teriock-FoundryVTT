@@ -8,6 +8,8 @@ const { fields } = foundry.data;
 
 /**
  * @property {Teriock.Keys.Impact} impact
+ * @property {boolean} morganti
+ * @property {boolean} showDialog
  * @property {number | null} amount
  * @mixes DisplayAutomation
  * @extends {BaseAutomation}
@@ -34,13 +36,15 @@ export default class TakeAutomation extends DisplayAutomationMixin(
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
+      amount: new fields.NumberField({ nullable: true }),
       impact: new fields.StringField({
         choices: objectMap(TERIOCK.config.impact, (i) => i.take, {
           filter: (c) => !c?.hidden,
           localize: true,
         }),
       }),
-      amount: new fields.NumberField({ nullable: true }),
+      morganti: new fields.BooleanField({ initial: false }),
+      showDialog: new fields.BooleanField({ initial: false }),
     });
   }
 
@@ -52,17 +56,22 @@ export default class TakeAutomation extends DisplayAutomationMixin(
 
   /** @inheritDoc */
   get _formPaths() {
-    return ["impact", "amount", "display.label"];
+    const paths = ["impact", "amount"];
+    if (TERIOCK.config.impact[this.impact]?.morganti) paths.push("morganti");
+    paths.push(...["hr", "display.label", "showDialog"]);
+    return paths;
   }
 
   /** @inheritDoc */
   async getActivations() {
-    if (this.amount && this.impact && this.impact !== "other") {
+    if (this.impact && this.impact !== "other") {
       return [
         new TakeActivation({
-          impact: this.impact,
           amount: this.amount,
           display: this.display,
+          impact: this.impact,
+          morganti: this.morganti,
+          showDialog: this.showDialog,
         }),
       ];
     }

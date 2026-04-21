@@ -1,3 +1,5 @@
+import { TeriockActor } from "../documents/_module.mjs";
+
 declare global {
   export namespace Teriock.Config {
     export type CurrencyEntry = {
@@ -16,6 +18,22 @@ declare global {
       pack: string;
       plural: string;
       sorter: (doc: AnyCommonDocument[]) => AnyCommonDocument[];
+    };
+
+    export type ImpactEntry = {
+      aliases?: string[];
+      apply: (actor: TeriockActor, amt: number) => Promise<void>;
+      deal: string;
+      icon: string;
+      label: string;
+      morganti?: boolean;
+      reverse: (
+        actor: TeriockActor,
+        amt: number,
+        options: object,
+      ) => Promise<void>;
+      take: string;
+      nullable?: boolean;
     };
 
     export type HackEntry = {

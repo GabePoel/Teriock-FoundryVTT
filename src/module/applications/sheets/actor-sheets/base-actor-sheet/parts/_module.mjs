@@ -11,5 +11,5 @@ export { default as SearchingActorSheetPart } from "./searching-actor-sheet-part
 export { default as SidebarActorSheetPart } from "./sidebar-actor-sheet-part.mjs";
 export { default as SortingActorSheetPart } from "./sorting-actor-sheet-part.mjs";
 export { default as TabsActorSheetPart } from "./tabs-actor-sheet-part.mjs";
-export { default as TakingActorSheetPart } from "./taking-actor-sheet-part.mjs";
+export { default as TakingActorSheetPart } from "./impact-actor-sheet-part.mjs";
 export { default as TradecraftsActorSheetPart } from "./tradecrafts-actor-sheet-part.mjs";

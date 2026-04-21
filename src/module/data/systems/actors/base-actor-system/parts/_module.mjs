@@ -12,7 +12,7 @@ export { default as ActorMoneyPart } from "./money-part/actor-money-part.mjs";
 export { default as ActorMovementPart } from "./movement-part/actor-movement-part.mjs";
 export { default as ActorProtectionsPart } from "./protections-part/actor-protections-part.mjs";
 export { default as ActorRestingPart } from "./actor-resting-part.mjs";
-export { default as ActorRollableTakesPart } from "./actor-rollable-takes-part.mjs";
+export { default as ActorRollableTakesPart } from "./actor-impacts-part.mjs";
 export { default as ActorScalingPart } from "./scaling-part/actor-scaling-part.mjs";
 export { default as ActorSensesPart } from "./senses-part/actor-senses-part.mjs";
 export { default as ActorStatsPart } from "./stats-part/actor-stats-part.mjs";

@@ -134,9 +134,16 @@ export const settings = {
       scope: "user",
       type: Boolean,
     },
+    showImpactDialogs: {
+      default: false,
+      hint: "TERIOCK.SETTINGS.showImpactDialogs.hint",
+      name: "TERIOCK.SETTINGS.showImpactDialogs.name",
+      scope: "client",
+      type: Boolean,
+    },
     showLongRestDialog: {
       default: true,
-      hint: "TERIOCK.SETTINGS.showRollDialogs.hint",
+      hint: "TERIOCK.SETTINGS.showLongRestDialog.hint",
       name: "TERIOCK.SETTINGS.showLongRestDialog.name",
       scope: "user",
       type: Boolean,

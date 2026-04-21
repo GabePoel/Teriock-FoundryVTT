@@ -1,4 +1,7 @@
-import { barClamp } from "../../../../../helpers/utils.mjs";
+import { TeriockDialog } from "../../../../../applications/api/_module.mjs";
+import { barClamp, makeIconClass } from "../../../../../helpers/utils.mjs";
+
+const { fields } = foundry.data;
 
 /**
  * Actor data model mixin that handles rollable takes.
@@ -10,7 +13,7 @@ export default (Base) => {
      * @extends {CommonSystem}
      * @mixin
      */
-    class ActorRollableTakesPart extends Base {
+    class ActorImpactsPart extends Base {
       /**
        * Applies harm to a stat that can have a temporary and morganti value.
        *
@@ -35,6 +38,71 @@ export default (Base) => {
           updateData[`system.${stat}.morganti`] = sp.morganti + amount;
         }
         await this.parent.update(updateData);
+      }
+
+      /**
+       * An interactive dialog to take some impact.
+       * @param {Teriock.Keys.Impact} impact
+       * @param {object} [options]
+       * @param {number|null} [options.amount]
+       * @param {boolean} [options.morganti]
+       * @returns {Promise<void>}
+       */
+      async impactDialog(impact, options = {}) {
+        const entry = TERIOCK.config.impact[impact];
+        if (!entry) return;
+        const initialAmount = options.amount ?? (entry.nullable ? null : 0);
+        const amountField = new fields.NumberField({
+          initial: initialAmount,
+          integer: true,
+          label: _loc("TERIOCK.AUTOMATIONS.Take.FIELDS.amount.label"),
+          min: 0,
+          nullable: !!entry.nullable,
+          placeholder: entry.nullable ? "" : "0",
+        });
+        const initialMorganti = !!options.morganti;
+        const morgantiField = new fields.BooleanField({
+          initial: initialMorganti,
+          label: _loc("TERIOCK.TERMS.DamageTypes.morganti"),
+        });
+        const rootId = foundry.utils.randomID();
+        const content = document.createElement("div");
+        content.append(
+          amountField.toFormGroup(
+            { rootId },
+            { value: initialAmount, name: "amount" },
+          ),
+        );
+        if (entry.morganti) {
+          content.append(
+            morgantiField.toFormGroup(
+              { rootId },
+              { value: initialMorganti, name: "morganti" },
+            ),
+          );
+        }
+        await TeriockDialog.prompt({
+          content,
+          modal: true,
+          ok: {
+            callback: async (_event, button) => {
+              let morganti;
+              const value = button.form.elements.namedItem("amount").value;
+              const amount =
+                typeof value === "string" && value.length > 0
+                  ? Number(value)
+                  : null;
+              if (entry.morganti) {
+                morganti = button.form.elements.namedItem("morganti").value;
+              }
+              await entry.apply(this.parent, amount, { morganti });
+            },
+          },
+          window: {
+            title: entry.take,
+            icon: makeIconClass(entry.icon, "title"),
+          },
+        });
       }
 
       /**
@@ -235,6 +303,7 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       async takeWither(amount) {
+        console.log(amount);
         await this.parent.hookCall("takeWither", { scope: { amount } });
         await this.parent.update({
           "system.lp.value": barClamp(this.lp, amount),

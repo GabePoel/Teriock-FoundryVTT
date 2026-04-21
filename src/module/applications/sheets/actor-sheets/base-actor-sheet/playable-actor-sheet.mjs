@@ -13,7 +13,7 @@ import * as parts from "./parts/_module.mjs";
  * @mixes RollingActorSheetPart
  * @mixes SidebarActorSheetPart
  * @mixes TabsActorSheetPart
- * @mixes TakingActorSheetPart
+ * @mixes ImpactActorSheetPart
  * @mixes TradecraftsActorSheetPart
  * @mixes DocumentCreationActorSheetPart
  */

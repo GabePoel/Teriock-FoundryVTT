@@ -24,7 +24,7 @@ import * as parts from "./parts/_module.mjs";
  * @mixes ActorMovementPart
  * @mixes ActorProtectionsPart
  * @mixes ActorRestingPart
- * @mixes ActorRollableTakesPart
+ * @mixes ActorImpactsPart
  * @mixes ActorScalingPart
  * @mixes ActorSensesPart
  * @mixes ActorStatsPart
