@@ -3,9 +3,9 @@
  * @param {AnyChildDocument} doc
  */
 export default async function previewSheet(doc) {
-  if (doc.isOwner) {
+  if (doc.isViewer) {
     await doc.sheet.render(true);
-  } else {
+  } else if (game.teriock.getSetting("previewSheets")) {
     let root = doc;
     if (doc.documentName === "ActiveEffect") root = doc.parent;
     const rootData = root.toObject(true);
@@ -18,6 +18,10 @@ export default async function previewSheet(doc) {
     } else {
       await rootDoc.sheet.render(true);
     }
+  } else {
+    ui.notifications.error("TERIOCK.DIALOGS.Preview.cantOpen", {
+      localize: true,
+    });
   }
 }
 

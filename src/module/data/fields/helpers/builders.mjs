@@ -168,6 +168,7 @@ export function associationsField() {
       cards: new ArrayField(
         new SchemaField({
           color: new StringField({ nullable: true, required: false }),
+          draggable: new BooleanField(),
           id: new DocumentIdField(),
           img: new FilePathField({ categories: ["IMAGE"] }),
           makeTooltip: new BooleanField({ initial: false, required: false }),

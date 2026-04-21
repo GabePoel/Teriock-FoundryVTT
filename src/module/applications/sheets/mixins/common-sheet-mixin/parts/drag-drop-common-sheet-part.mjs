@@ -22,7 +22,7 @@ export default (Base) => {
       }
 
       /**
-       * Checks if drop is allowed.
+       * Checks if a drop is allowed.
        * @returns {boolean}
        */
       _canDrop() {
@@ -35,6 +35,7 @@ export default (Base) => {
        * @returns {boolean}
        */
       _canDropChild(doc) {
+        if (!this._canDrop) return false;
         const childTypes = new Set([
           ...this.document.metadata.childEffectTypes,
           ...this.document.metadata.childItemTypes,
@@ -121,7 +122,7 @@ export default (Base) => {
         if (doc.inCompendium && !doc._stats.compendiumSource) {
           obj["_stats.compendiumSource"] = uuid;
         }
-        if (!this._canDrop(doc)) return;
+        if (!this._canDropChild(doc)) return;
         const created = await this.document.createChildDocuments(
           doc.documentName,
           [obj],
