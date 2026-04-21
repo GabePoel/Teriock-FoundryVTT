@@ -14,7 +14,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.18
+      systemVersion: 0.12.20
     img: systems/teriock/src/icons/abilities/bodyguard-training.webp
     name: Bodyguard Training
     system:
@@ -62,7 +62,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.18
+      systemVersion: 0.12.20
     img: systems/teriock/src/icons/abilities/fortify-area.webp
     name: Fortify Area
     system:
@@ -158,7 +158,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.18
+      systemVersion: 0.12.20
     img: systems/teriock/src/icons/abilities/tumble.webp
     name: Tumble
     system:
@@ -244,7 +244,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.18
+      systemVersion: 0.12.20
     img: systems/teriock/src/icons/abilities/unbreachability.webp
     name: Unbreachability
     system:
@@ -310,6 +310,178 @@ effects:
       standard: true
       targets:
         - self
+    transfer: true
+    type: ability
+  - _id: ZUW1RKwyd44AVujF
+    _key: '!items.effects!dvyPRx7EM6Ux7sX0.ZUW1RKwyd44AVujF'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.0a310dcb43626a6c
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.20
+    img: systems/teriock/src/icons/abilities/bodyguard-backup.webp
+    name: Bodyguard Backup
+    system:
+      _sup: WPnSLdXPauH6iDwJ
+      automations:
+        28f5387f29e5aae1:
+          _id: 28f5387f29e5aae1
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          macro: Compendium.teriock.execution.Macro.4bd2e8ab01c2430b
+          trigger: executeFeat
+          type: abilityMacro
+      class: veteran
+      competence:
+        raw: 0
+      delivery: weapon
+      duration:
+        raw: '1'
+        unit: minute
+      executionTime:
+        base: r0
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: bodyguard-backup
+      interaction: manifest
+      maneuver: reactive
+      mundane: false
+      overview:
+        base: >-
+          <p>Pick another creature within range. They gain
+          @L[Core:Advantage]{advantage} on the next @L[Core:Movement]{MOV} or
+          @L[Core:Strength]{STR} @L[Core:Feat Interaction]{feat save} they
+          make.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        raw: '5'
+        unit: ft
+      requirements: >-
+        <p>You are not also using @L[Ability:Bodyguard Taunt]{Bodyguard
+        Taunt}.</p>
+      skill: true
+      standard: true
+      targets:
+        - creature
+      trigger: >-
+        <p>You attempt an @L[Core:Attack Interaction]{attack} against another
+        creature.</p>
+    transfer: true
+    type: ability
+  - _id: o1D9Sqg4qjNZg8vC
+    _key: '!items.effects!dvyPRx7EM6Ux7sX0.o1D9Sqg4qjNZg8vC'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.e5f8ee3fe3112156
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.20
+    img: systems/teriock/src/icons/abilities/bodyguard-taunt.webp
+    name: Bodyguard Taunt
+    system:
+      _sup: WPnSLdXPauH6iDwJ
+      automations:
+        6cebaedf0c5c1507:
+          _id: 6cebaedf0c5c1507
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          executor: false
+          heighten:
+            - 1
+            - 0
+          relation: include
+          status: goaded
+          target: true
+          type: status
+        d635eb44dba086dd:
+          _id: d635eb44dba086dd
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          heighten:
+            - 1
+            - 0
+          type: combatExpiration
+          what:
+            roll: 2d4kh1
+            threshold: 4
+            type: forced
+          when:
+            skip: 0
+            time: start
+            trigger: turn
+          who:
+            type: executor
+      class: veteran
+      competence:
+        raw: 0
+      delivery: weapon
+      duration:
+        raw: '5'
+        unit: second
+      executionTime:
+        base: r0
+        slow:
+          unit: second
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      identifier: bodyguard-taunt
+      interaction: manifest
+      maneuver: reactive
+      mundane: false
+      overview:
+        base: >-
+          <p>Pick another creature within range. They are
+          @L[Condition:Goaded]{goaded} until the start of your next
+          @L[Core:Turns]{turn}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        raw: '5'
+        unit: ft
+      requirements: >-
+        <p>You are not also using @L[Ability:Bodyguard Backup]{Bodyguard
+        Backup}.</p>
+      skill: true
+      standard: true
+      targets:
+        - creature
+      trigger: >-
+        <p>You attempt an @L[Core:Attack Interaction]{attack} against another
+        creature.</p>
     transfer: true
     type: ability
 folder: 0b00935e53673daa
