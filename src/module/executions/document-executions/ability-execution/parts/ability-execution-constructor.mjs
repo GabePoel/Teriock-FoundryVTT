@@ -36,7 +36,8 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
     this.usesReaction =
       this.source.system.maneuver === "reactive" &&
       this.source.system.executionTime.base === "r1";
-    this.payCosts = true;
+    this.payCosts =
+      this.actor?.getSetting("automation.payAbilityCosts") ?? true;
     this.targets = new Set();
     if (
       this.isAttack &&
