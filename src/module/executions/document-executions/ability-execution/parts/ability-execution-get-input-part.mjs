@@ -87,6 +87,13 @@ export default function AbilityExecutionGetInputPart(Base) {
             update: (v) => (this.usesReaction = v),
             value: !!this.usesReaction,
           },
+          {
+            field: new fields.BooleanField(),
+            label: "TERIOCK.SYSTEMS.Ability.EXECUTION.payCosts.label",
+            name: "pay-costs",
+            update: (v) => (this.payCosts = v),
+            value: !!this.payCosts,
+          },
         ];
       }
 

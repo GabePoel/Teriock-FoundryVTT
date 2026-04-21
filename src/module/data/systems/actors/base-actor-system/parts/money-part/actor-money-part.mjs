@@ -196,5 +196,7 @@ function currencyField(label, integer = true) {
     integer: integer,
     label: label,
     min: 0,
+    nullable: false,
+    placeholder: "0",
   });
 }
