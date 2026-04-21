@@ -132,11 +132,6 @@ export default function PanelDocumentMixin(Base) {
       /** @returns {Promise<Teriock.Messages.MessagePanel>} */
       async toPanel() {
         let parts = await this.getPanelParts();
-        // If this is part of a preview, it won't have a real UUID.
-        if (this.getFlag("teriock", "previewUuid")) {
-          const doc = await fromUuid(this.getFlag("teriock", "previewUuid"));
-          if (doc) parts = await doc.getPanelParts();
-        }
         return await TeriockTextEditor.enrichPanel(parts, { relativeTo: this });
       }
 

@@ -198,13 +198,6 @@ export const settings = {
       scope: "world",
       type: String,
     },
-    previewSheets: {
-      default: false,
-      hint: "TERIOCK.SETTINGS.previewSheets.hint",
-      name: "TERIOCK.SETTINGS.previewSheets.name",
-      scope: "world",
-      type: Boolean,
-    },
     sortNewPlayerMacros: {
       default: true,
       hint: "TERIOCK.SETTINGS.sortNewPlayerMacros.hint",

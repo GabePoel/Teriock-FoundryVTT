@@ -1,10 +1,6 @@
 import { queryAll } from "../../helpers/html.mjs";
 import { TeriockContextMenu, TeriockTextEditor } from "../ux/_module.mjs";
-import {
-  imageContextMenuOptions,
-  previewSheet,
-  wikiContextMenuOptions,
-} from "./_module.mjs";
+import { imageContextMenuOptions, wikiContextMenuOptions } from "./_module.mjs";
 
 /**
  * Bind common actions to some element.
@@ -133,7 +129,7 @@ export default function bindCommonActions(rootElement) {
           if (!uuid) return;
           const doc = await fromUuid(uuid);
           if (!doc) return;
-          await previewSheet(doc);
+          await doc.sheet.render(true);
         });
       },
     );

@@ -2,7 +2,6 @@ import { icons } from "../../constants/display/icons.mjs";
 import { TeriockChatMessage } from "../../documents/_module.mjs";
 import { dedent } from "../../helpers/string.mjs";
 import { makeIcon } from "../../helpers/utils.mjs";
-import { previewSheet } from "./_module.mjs";
 
 const { ImagePopout } = foundry.applications.apps;
 
@@ -51,9 +50,7 @@ const imageContextMenuOptions = [
       const uuid = target.getAttribute("data-uuid");
       if (uuid) {
         const doc = await fromUuid(uuid);
-        if (doc) {
-          await previewSheet(doc);
-        }
+        if (doc) await doc.sheet.render(true);
       }
     },
     visible: (target) =>
