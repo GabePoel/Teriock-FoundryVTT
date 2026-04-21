@@ -144,7 +144,7 @@ function transformEntry(doc) {
     "pages",
     "results",
   ].forEach((key) => doc[key]?.forEach((d) => transformEntry(d)));
-  removeEmptyValues(doc);
+  if (!doc._key.includes("scene")) removeEmptyValues(doc);
 }
 
 /**
