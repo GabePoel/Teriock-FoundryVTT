@@ -69,6 +69,7 @@ export default (Base) => {
           this.protections.resistances.effectTypes.add("reanimation");
         }
         if (this.parent.statuses.has("terrored")) {
+          this.protections.resistances.effectTypes.add("healing");
           this.protections.resistances.effectTypes.add("revival");
         }
       }
