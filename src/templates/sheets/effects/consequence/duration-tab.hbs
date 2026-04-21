@@ -1,0 +1,73 @@
+<section class="tab{{#if tab.active}} active{{/if}} scrollable" data-group="{{tab.group}}" data-tab="{{tab.id}}">
+  <fieldset>
+    <legend>{{localize "TERIOCK.AUTOMATIONS.CombatExpiration.LABEL"}}</legend>
+    {{formGroup
+      systemFields.expirations.fields.combat.fields.what.fields.type
+      value=system.expirations.combat.what.type
+      rootId=appId
+    }}
+    {{#if (eq system.expirations.combat.what.type "rolled")}}
+      {{formGroup
+        systemFields.expirations.fields.combat.fields.what.fields.roll
+        value=system.expirations.combat.what.roll
+        rootId=appId
+      }}
+      {{formGroup
+        systemFields.expirations.fields.combat.fields.what.fields.threshold
+        value=system.expirations.combat.what.threshold
+        rootId=appId
+      }}
+    {{/if}}
+    {{#if (not (eq system.expirations.combat.what.type "none"))}}
+      {{formGroup
+        systemFields.expirations.fields.combat.fields.when.fields.time
+        value=system.expirations.combat.when.time
+        rootId=appId
+      }}
+      {{formGroup
+        systemFields.expirations.fields.combat.fields.when.fields.trigger
+        value=system.expirations.combat.when.trigger
+        rootId=appId
+      }}
+      {{formGroup
+        systemFields.expirations.fields.combat.fields.when.fields.skip
+        value=system.expirations.combat.when.skip
+        rootId=appId
+      }}
+      {{formGroup
+        systemFields.expirations.fields.combat.fields.who.fields.type
+        value=system.expirations.combat.who.type
+        rootId=appId
+      }}
+      {{#if (eq system.expirations.combat.who.type "executor")}}
+        {{formGroup
+          systemFields.expirations.fields.combat.fields.who.fields.source
+          value=system.expirations.combat.who.source
+          rootId=appId
+        }}
+      {{/if}}
+    {{/if}}
+  </fieldset>
+  <fieldset>
+    <legend>{{localize "TERIOCK.SYSTEMS.Imbuement.LEGENDS.eventExpiration"}}</legend>
+    {{formGroup
+      systemFields.expirations.fields.conditions.fields.present
+      value=system.expirations.conditions.present
+      rootId=appId
+    }}
+    {{formGroup
+      systemFields.expirations.fields.conditions.fields.absent
+      value=system.expirations.conditions.absent
+      rootId=appId
+    }}
+    {{formGroup
+      systemFields.expirations.fields.triggers
+      value=system.expirations.triggers
+      rootId=appId
+      label=(localize "TERIOCK.MODELS.Duration.FIELDS.triggers.label")
+      hint=(localize "TERIOCK.MODELS.Duration.FIELDS.triggers.hint")
+    }}
+  </fieldset>
+  {{> "templates/sheets/active-effect/duration.hbs"}}
+  {{log @root}}
+</section>

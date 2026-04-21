@@ -63,6 +63,7 @@ export default class AddDocumentsAutomation extends mix(
    * @returns {string[]}
    */
   get _attachmentPaths() {
+    if (this.parent.type !== "ability") return ["display.label"];
     return ["separate", this.separate ? "display.label" : "attachDocuments"];
   }
 
@@ -97,6 +98,14 @@ export default class AddDocumentsAutomation extends mix(
   /** @inheritDoc */
   get canCrit() {
     return !this.separate && super.canCrit;
+  }
+
+  /**
+   * Whether this is separate from the ability's main effect.
+   * @returns {boolean}
+   */
+  get hasActivations() {
+    return this.document.type !== "ability" || this.separate;
   }
 
   /**
@@ -161,7 +170,7 @@ export default class AddDocumentsAutomation extends mix(
 
   /** @inheritDoc */
   async getActivations() {
-    if (!this.separate) return [];
+    if (!this.hasActivations) return [];
     const choices = await this.choose();
     const activations = [];
     for (const choice of choices) {

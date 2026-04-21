@@ -311,3 +311,23 @@
     top: 0px;
   }
 }
+
+@mixin strip-edge-margins($depth: 3) {
+  $first-selector: unquote("> *:first-child");
+  $last-selector: unquote("> *:last-child");
+
+  $current-first: $first-selector;
+  $current-last: $last-selector;
+
+  @for $i from 1 through $depth {
+    #{$current-first} {
+      margin-top: 0;
+    }
+    #{$current-last} {
+      margin-bottom: 0;
+    }
+
+    $current-first: $current-first + $first-selector;
+    $current-last: $current-last + $last-selector;
+  }
+}

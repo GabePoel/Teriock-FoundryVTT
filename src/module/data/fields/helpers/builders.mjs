@@ -34,9 +34,9 @@ export function combatExpirationSourceTypeField() {
       },
       { sort: false },
     ),
-    hint: "TERIOCK.SCHEMA.CombatExpiration.who.hint",
+    hint: _loc("TERIOCK.SCHEMA.CombatExpiration.who.hint"),
     initial: "target",
-    label: "TERIOCK.SCHEMA.CombatExpiration.who.label",
+    label: _loc("TERIOCK.SCHEMA.CombatExpiration.who.label"),
   });
 }
 
@@ -76,18 +76,18 @@ export function combatExpirationMethodField() {
 export function combatExpirationTimingField() {
   return new SchemaField({
     skip: new NumberField({
-      hint: "TERIOCK.SCHEMA.CombatExpiration.when.skip.hint",
+      hint: _loc("TERIOCK.SCHEMA.CombatExpiration.when.skip.hint"),
       initial: 0,
-      label: "TERIOCK.SCHEMA.CombatExpiration.when.skip.label",
+      label: _loc("TERIOCK.SCHEMA.CombatExpiration.when.skip.label"),
     }),
     time: new StringField({
       choices: localizeChoices({
         start: "TERIOCK.SCHEMA.CombatExpiration.when.time.choices.start",
         end: "TERIOCK.SCHEMA.CombatExpiration.when.time.choices.end",
       }),
-      hint: "TERIOCK.SCHEMA.CombatExpiration.when.time.hint",
+      hint: _loc("TERIOCK.SCHEMA.CombatExpiration.when.time.hint"),
       initial: "start",
-      label: "TERIOCK.SCHEMA.CombatExpiration.when.time.label",
+      label: _loc("TERIOCK.SCHEMA.CombatExpiration.when.time.label"),
     }),
     trigger: new StringField({
       choices: localizeChoices({
@@ -95,9 +95,9 @@ export function combatExpirationTimingField() {
         combat: "TERIOCK.SCHEMA.CombatExpiration.when.trigger.choices.combat",
         action: "TERIOCK.SCHEMA.CombatExpiration.when.trigger.choices.action",
       }),
-      hint: "TERIOCK.SCHEMA.CombatExpiration.when.trigger.hint",
+      hint: _loc("TERIOCK.SCHEMA.CombatExpiration.when.trigger.hint"),
       initial: "turn",
-      label: "TERIOCK.SCHEMA.CombatExpiration.when.trigger.label",
+      label: _loc("TERIOCK.SCHEMA.CombatExpiration.when.trigger.label"),
     }),
   });
 }

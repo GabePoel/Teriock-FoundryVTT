@@ -32,6 +32,17 @@ export default class TeriockJournalEntryPage extends mix(
   }
 
   /** @inheritDoc */
+  async _buildEmbedHTML(config, options = {}) {
+    const embed = await super._buildEmbedHTML(config, options);
+    if (!embed && ["damage", "drain"].includes(this.type)) {
+      if (["damage", "drain"].includes(this.type)) {
+        return this._embedTextPage(config, options);
+      }
+    }
+    return embed;
+  }
+
+  /** @inheritDoc */
   async getPanelParts() {
     const div = document.createElement("div");
     div.innerHTML = this.text.content;

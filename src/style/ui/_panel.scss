@@ -303,17 +303,15 @@
         display: none;
       }
 
+      :has(+ table) {
+        margin-bottom: 0;
+      }
+
       table {
         display: none;
       }
 
-      > *:first-child {
-        margin-top: 0;
-      }
-
-      > *:last-child {
-        margin-bottom: 0;
-      }
+      @include mixins.strip-edge-margins(3);
 
       img.interaction-routine {
         margin-top: 1em;

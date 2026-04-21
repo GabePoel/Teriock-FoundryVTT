@@ -62,6 +62,17 @@ export default (Base) => {
         return hasProtection;
       }
 
+      /** @inheritDoc */
+      prepareVirtualEffects() {
+        super.prepareVirtualEffects();
+        if (this.parent.statuses.has("hollied")) {
+          this.protections.resistances.effectTypes.add("reanimation");
+        }
+        if (this.parent.statuses.has("terrored")) {
+          this.protections.resistances.effectTypes.add("revival");
+        }
+      }
+
       /**
        * Rolls an immunity save (these always succeed).
        *

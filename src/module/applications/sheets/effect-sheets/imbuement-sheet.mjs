@@ -47,6 +47,11 @@ export default class ImbuementSheet extends mix(
       template: "teriock/sheets/effects/consequence/children-tab",
       scrollable: [""],
     },
+    duration: {
+      template: "teriock/sheets/effects/consequence/duration-tab",
+      templates: ["templates/sheets/active-effect/duration.hbs"],
+      scrollable: [""],
+    },
   };
 
   static TABS = {

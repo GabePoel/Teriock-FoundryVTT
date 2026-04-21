@@ -26,6 +26,7 @@ export default class HarmSystem extends mix(
   /** @inheritDoc */
   static get _automationTypes() {
     return [
+      automations.AddDocumentsAutomation,
       automations.AttunementAutomation,
       automations.ChatMacroAutomation,
       automations.ChatStatusAutomation,

@@ -91,6 +91,11 @@ export default class ImbuementSystem extends mix(
     return tags;
   }
 
+  /** @returns {Teriock.Sheet.DisplayField[]} */
+  get displayFields() {
+    return ["description"];
+  }
+
   /** @inheritDoc */
   get embedParts() {
     return Object.assign(super.embedParts, {
@@ -109,7 +114,7 @@ export default class ImbuementSystem extends mix(
 
   /** @inheritDoc */
   get messageBlocks() {
-    return this.blocks;
+    return [...super.messageBlocks, this.blocks];
   }
 
   /** @inheritDoc */
