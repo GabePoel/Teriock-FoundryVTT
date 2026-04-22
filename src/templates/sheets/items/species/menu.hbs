@@ -1,12 +1,8 @@
 <div class="ab-menu {{#if menuCollapsed}}collapsed{{/if}}">
   <div class="ab-menu-content">
+    {{> "teriock/sheets/shared/display-toggles"}}
     <div class="ab-menu-bar">
-      <div class="tgrid ab-check-grid g3">
-        {{> "teriock/sheets/shared/display-toggles"}}
-      </div>
-    </div>
-    <div class="ab-menu-bar">
-      <div class="tgrid ab-select-grid g2 menu-large-grid">
+      <div class="ttable ab-select-grid menu-large-grid">
         {{> "teriock/sheets/shared/menu-input" field=systemFields.traits value=system.traits}}
         {{> "teriock/sheets/shared/menu-input"
           field=systemFields.transformation.fields.img
@@ -15,7 +11,7 @@
       </div>
     </div>
     <div class="ab-menu-bar">
-      <div class="tgrid ab-button-grid menu-large-grid">
+      <div class="ttable ab-button-grid menu-large-grid">
         {{#if (not (and (exists system.size.min) (exists system.size.max)))}}
           <div class="tgrid-item">
             <button

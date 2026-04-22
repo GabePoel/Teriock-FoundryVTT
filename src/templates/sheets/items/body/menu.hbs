@@ -1,17 +1,13 @@
 <div class="ab-menu {{#if menuCollapsed}}collapsed{{/if}}">
   <div class="ab-menu-content">
+    {{> "teriock/sheets/shared/display-toggles"}}
     <div class="ab-menu-bar">
-      <div class="tgrid g1 ab-check-grid">
-        {{> "teriock/sheets/shared/display-toggles"}}
-      </div>
-    </div>
-    <div class="ab-menu-bar">
-      <div class="tgrid g1">
+      <div class="ttable">
         {{> "teriock/sheets/shared/menu-input" field=systemFields.fightingStyle value=system.fightingStyle}}
       </div>
     </div>
     <div class="ab-menu-bar">
-      <div class="tgrid g3">
+      <div class="ttable">
         {{#if (not (exists system.damage.base))}}
           <div class="tgrid-item">
             <button

@@ -1,18 +1,14 @@
 <div class="ab-menu {{#if menuCollapsed}}collapsed{{/if}}">
   <div class="ab-menu-content">
+    {{> "teriock/sheets/shared/display-toggles"}}
     <div class="ab-menu-bar">
-      <div class="tgrid ab-check-grid g3 menu-small-grid">
-        {{> "teriock/sheets/shared/display-toggles"}}
-      </div>
-    </div>
-    <div class="ab-menu-bar">
-      <div class="tgrid g2 menu-large-grid">
+      <div class="ttable menu-large-grid">
         {{> "teriock/sheets/shared/menu-input" field=systemFields.equipmentClasses value=system.equipmentClasses}}
         {{> "teriock/sheets/shared/menu-input" field=systemFields.fightingStyle value=system.fightingStyle}}
       </div>
     </div>
     <div class="ab-menu-bar">
-      <div class="tgrid g3 menu-large-grid">
+      <div class="ttable menu-large-grid">
         {{#if (not (exists system.damage.base))}}
           <div class="tgrid-item">
             <button
