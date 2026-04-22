@@ -1,13 +1,13 @@
 const { Document } = foundry.abstract;
 
 /**
- * Registry of documents that are dependent on other documents, but don't have an elder/child relationship. Based on
+ * Registry of documents that are dependent on other documents but don't have an elder/child relationship. Based on
  * the implementation in D&D 5E with some Teriock-specific modifications.
  */
 export default class DependentsRegistry {
   /**
-   * Registration of documents that are dependent on some other document, but don't have an elder/child
-   * relationship. The map is keyed by the UUID of the document which has dependents and contains a set of UUIDs for
+   * Registration of documents that are dependent on some other document but don't have an elder/child
+   * relationship. The map is keyed by the UUID of the document, which has dependents and contains a set of UUIDs for
    * that document's dependents. All UUIDs are expected to be world UUIDs or UUIDs of documents with the same
    * ancestor document as the one they are dependent on.
    * @type {Map<any, any>}
@@ -65,7 +65,7 @@ export default class DependentsRegistry {
 
   /**
    * Resolve a document ID into an absolute UUID.
-   * @param {ID<AnyChildDocument>|UUID<AnyChildDocument>} idOrUuid - ID or UUID of document.
+   * @param {ID<AnyChildDocument>|UUID<AnyChildDocument>} idOrUuid - ID or UUID of a document.
    * @param {AnyChildDocument} dependent - Document to track as a dependent.
    * @returns {UUID<AnyChildDocument>}
    */
@@ -84,7 +84,7 @@ export default class DependentsRegistry {
 
   /**
    * Add a dependent document to the registry.
-   * @param {ID<AnyChildDocument>|UUID<AnyChildDocument>} idOrUuid - ID or UUID of document.
+   * @param {ID<AnyChildDocument>|UUID<AnyChildDocument>} idOrUuid - ID or UUID of a document.
    * @param {ChildDocument} dependent - Document to track as a dependent.
    */
   track(idOrUuid, dependent) {
@@ -96,7 +96,7 @@ export default class DependentsRegistry {
 
   /**
    * Remove a dependent document from the registry.
-   * @param {ID<AnyChildDocument>|UUID<AnyChildDocument>} idOrUuid - ID or UUID of document.
+   * @param {ID<AnyChildDocument>|UUID<AnyChildDocument>} idOrUuid - ID or UUID of a document.
    * @param {AnyChildDocument} dependent - Dependent document to stop tracking.
    */
   untrack(idOrUuid, dependent) {

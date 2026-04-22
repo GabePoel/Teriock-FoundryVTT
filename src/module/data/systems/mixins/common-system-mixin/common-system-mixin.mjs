@@ -166,9 +166,9 @@ export default function CommonSystemMixin(Base) {
             const value = foundry.utils.getProperty(this.parent, f.path);
             if (value && !schema.gmOnly) {
               return {
-                title: f.label || schema.label,
-                text: value,
                 classes: f.classes,
+                text: value,
+                title: f.label || schema.label,
               };
             }
           })
@@ -343,15 +343,15 @@ export default function CommonSystemMixin(Base) {
           blocks: this.messageBlocks,
           color: this.color || undefined,
           font: this.font,
-          image: this.parent.img,
-          name: this.parent.fullName,
-          uuid: this.parent.uuid,
           icon:
             TERIOCK.config.document[this.metadata.type]?.icon ||
             TERIOCK.config.document.document.icon,
+          image: this.parent.img,
           label:
             TERIOCK.config.document[this.metadata.type]?.name ||
             TERIOCK.config.document.document.name,
+          name: this.parent.fullName,
+          uuid: this.parent.uuid,
         };
         const typeMap = (await this.parent.getChildren()).typeMap;
         for (const type of this.metadata.visibleTypes) {
@@ -439,10 +439,10 @@ export default function CommonSystemMixin(Base) {
                 "JournalEntryPage",
                 [
                   {
-                    name: this.parent.name,
-                    type: "text",
                     category: notesCategory.id,
+                    name: this.parent.name,
                     text: { content: `<p>@Embed[${this.parent.uuid}]</p>` },
+                    type: "text",
                   },
                 ],
               );

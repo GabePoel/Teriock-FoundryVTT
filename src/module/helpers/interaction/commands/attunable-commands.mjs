@@ -11,9 +11,9 @@ async function takeAttune(actor) {
     (a) => !a.system.isAttuned,
   );
   const chosen = await selectDocumentsDialog(choices, {
-    title: "TERIOCK.SYSTEMS.Attunable.MENU.attune",
     hint: "TERIOCK.COMMANDS.Attune.hint",
     localize: true,
+    title: "TERIOCK.SYSTEMS.Attunable.MENU.attune",
   });
   await Promise.all(chosen.map((a) => a.system.attune()));
 }
@@ -28,9 +28,9 @@ async function takeDeattune(actor) {
     (a) => a.system.isAttuned,
   );
   const chosen = await selectDocumentsDialog(choices, {
-    title: "TERIOCK.SYSTEMS.Attunable.MENU.deattune",
     hint: "TERIOCK.COMMANDS.Deattune.hint",
     localize: true,
+    title: "TERIOCK.SYSTEMS.Attunable.MENU.deattune",
   });
   await Promise.all(chosen.map((a) => a.system.deattune()));
 }

@@ -218,30 +218,30 @@ export default function AttunableSystemMixin(Base) {
         return [
           ...super.getCardContextMenuEntries(doc),
           {
-            label: _loc("TERIOCK.SYSTEMS.Attunable.MENU.attune"),
+            group: "control",
             icon: makeIcon(
               TERIOCK.display.icons.attunable.attune,
               "contextMenu",
             ),
+            label: _loc("TERIOCK.SYSTEMS.Attunable.MENU.attune"),
             onClick: this.attune.bind(this),
             visible:
               !this.isAttuned &&
               this.actor &&
               this.parent._checkValidEditorDocument(doc, { self: false }),
-            group: "control",
           },
           {
-            label: _loc("TERIOCK.SYSTEMS.Attunable.MENU.deattune"),
+            group: "control",
             icon: makeIcon(
               TERIOCK.display.icons.attunable.deattune,
               "contextMenu",
             ),
+            label: _loc("TERIOCK.SYSTEMS.Attunable.MENU.deattune"),
             onClick: this.deattune.bind(this),
             visible:
               this.isAttuned &&
               this.actor &&
               this.parent._checkValidEditorDocument(doc, { self: false }),
-            group: "control",
           },
         ];
       }

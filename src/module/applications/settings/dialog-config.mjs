@@ -7,8 +7,8 @@ export default class DialogConfig extends BaseConfig {
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
     window: {
-      title: "TERIOCK.CONFIGS.Dialog.name",
       icon: makeIconClass(icons.settings.dialog, "title"),
+      title: "TERIOCK.CONFIGS.Dialog.name",
     },
   };
 

@@ -92,9 +92,7 @@ export default (Base) => {
 
       /** @inheritDoc */
       get embedParts() {
-        return Object.assign(super.embedParts, {
-          struck: !this.equipped,
-        });
+        return Object.assign(super.embedParts, { struck: !this.equipped });
       }
 
       /** @inheritDoc */
@@ -119,45 +117,45 @@ export default (Base) => {
         return [
           ...super.getCardContextMenuEntries(doc),
           {
-            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.equip"),
+            group: "control",
             icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
+            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.equip"),
             onClick: this.equip.bind(this),
             visible:
               this.canEquip &&
               this.parent._checkValidEditorDocument(doc, { self: false }),
-            group: "control",
           },
           {
-            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.unequip"),
+            group: "control",
             icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
+            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.unequip"),
             onClick: this.unequip.bind(this),
             visible:
               this.canUnequip &&
               this.parent._checkValidEditorDocument(doc, { self: false }),
-            group: "control",
           },
           {
-            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.glue"),
+            group: "control",
             icon: makeIcon(TERIOCK.display.icons.equipment.glue, "contextMenu"),
+            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.glue"),
             onClick: this.glue.bind(this),
             visible:
               !this.glued &&
               this.actor &&
               this.parent._checkValidEditorDocument(doc, { self: false }),
-            group: "control",
           },
           {
-            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.unglue"),
+            group: "control",
             icon: makeIcon(
               TERIOCK.display.icons.equipment.unglue,
               "contextMenu",
             ),
+            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.unglue"),
             onClick: this.unglue.bind(this),
             visible:
               this.glued &&
               this.actor &&
               this.parent._checkValidEditorDocument(doc, { self: false }),
-            group: "control",
           },
         ];
       }

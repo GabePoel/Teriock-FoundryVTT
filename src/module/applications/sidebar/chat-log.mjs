@@ -40,8 +40,8 @@ export default class TeriockChatLog extends ChatLog {
     return [
       ...super._getEntryContextOptions(),
       {
-        label: "TERIOCK.MESSAGE.Menu.expandAll",
         icon: makeIcon(TERIOCK.display.icons.ui.expand, "contextMenu"),
+        label: "TERIOCK.MESSAGE.Menu.expandAll",
         onClick: (_ev, li) => {
           li.querySelectorAll(".collapsable").forEach((el) => {
             el.classList.toggle("collapsed", false);
@@ -50,8 +50,8 @@ export default class TeriockChatLog extends ChatLog {
         visible: (li) => !!li.querySelector(".collapsable.collapsed"),
       },
       {
-        label: "TERIOCK.MESSAGE.Menu.collapseAll",
         icon: makeIcon(TERIOCK.display.icons.ui.collapse, "contextMenu"),
+        label: "TERIOCK.MESSAGE.Menu.collapseAll",
         onClick: (_ev, li) => {
           li.querySelectorAll(".collapsable").forEach((el) => {
             el.classList.toggle("collapsed", true);

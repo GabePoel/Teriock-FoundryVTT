@@ -200,17 +200,18 @@ export default function ChildSystemMixin(Base) {
         entries.push(
           ...[
             {
-              label: this.useText,
+              group: "usage",
               icon: makeIcon(this.useIcon, "contextMenu"),
+              label: this.useText,
               onClick: async () => {
                 await this.use();
               },
               visible: this.isUsable,
-              group: "usage",
             },
             {
-              label: _loc("TERIOCK.SYSTEMS.Child.MENU.enable"),
+              group: "control",
               icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
+              label: _loc("TERIOCK.SYSTEMS.Child.MENU.enable"),
               onClick: this.parent.enable.bind(this.parent),
               visible:
                 this.parent.parent?.isOwner &&
@@ -218,11 +219,11 @@ export default function ChildSystemMixin(Base) {
                 this.parent.type !== "equipment" &&
                 this.parent.type !== "mount" &&
                 doc !== this.parent,
-              group: "control",
             },
             {
-              label: _loc("TERIOCK.SYSTEMS.Child.MENU.disable"),
+              group: "control",
               icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
+              label: _loc("TERIOCK.SYSTEMS.Child.MENU.disable"),
               onClick: this.parent.disable.bind(this.parent),
               visible:
                 this.parent.parent?.isOwner &&
@@ -231,20 +232,20 @@ export default function ChildSystemMixin(Base) {
                 this.parent.type !== "mount" &&
                 !(this.parent.type === "ability" && this.isVirtual) &&
                 doc !== this.parent,
-              group: "control",
             },
             {
-              label: _loc("TERIOCK.SYSTEMS.Child.MENU.openGmNotes"),
+              group: "open",
               icon: makeIcon(TERIOCK.display.icons.ui.notes, "contextMenu"),
+              label: _loc("TERIOCK.SYSTEMS.Child.MENU.openGmNotes"),
               onClick: async () => {
                 await this.gmNotesOpen();
               },
               visible: game.user.isGM,
-              group: "open",
             },
             {
-              label: _loc("TERIOCK.SYSTEMS.Child.MENU.openImage"),
+              group: "open",
               icon: makeIcon(TERIOCK.display.icons.ui.image, "contextMenu"),
+              label: _loc("TERIOCK.SYSTEMS.Child.MENU.openImage"),
               onClick: async () => {
                 await new ImagePopout({
                   src: this.parent.img,
@@ -252,32 +253,31 @@ export default function ChildSystemMixin(Base) {
                   window: { title: this.parent.fullName },
                 }).render(true);
               },
-              group: "open",
             },
             {
-              label: _loc("TERIOCK.SYSTEMS.Child.MENU.shareImage"),
+              group: "share",
               icon: makeIcon(
                 TERIOCK.display.icons.ui.shareImage,
                 "contextMenu",
               ),
+              label: _loc("TERIOCK.SYSTEMS.Child.MENU.shareImage"),
               onClick: this.parent.chatImage.bind(this.parent),
-              group: "share",
             },
             {
-              label: _loc("TERIOCK.SYSTEMS.Child.MENU.shareWriteup"),
+              group: "share",
               icon: makeIcon(TERIOCK.display.icons.ui.shareText, "contextMenu"),
+              label: _loc("TERIOCK.SYSTEMS.Child.MENU.shareWriteup"),
               onClick: this.parent.toMessage.bind(this.parent),
-              group: "share",
             },
             {
-              label: _loc("TERIOCK.SYSTEMS.Common.MENU.duplicate"),
+              group: "document",
               icon: makeIcon(TERIOCK.display.icons.ui.duplicate, "contextMenu"),
+              label: _loc("TERIOCK.SYSTEMS.Common.MENU.duplicate"),
               onClick: async () => {
                 await this.parent.duplicate();
               },
               visible: () =>
                 this.parent._checkValidEditorDocument(doc, { self: false }),
-              group: "document",
             },
           ],
         );

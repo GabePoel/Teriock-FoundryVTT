@@ -36,11 +36,11 @@ export default async function identifyItemQuery(queryData, { _timeout }) {
     const toReveal = await selectDocumentsDialog(unrevealed, {
       checked: unrevealed.map((r) => r.uuid),
       hint: _loc("TERIOCK.MODELS.Identification.QUERY.Identify.hint"),
-      silent: true,
-      tooltipAsync: false,
       noDocumentsMessage: _loc(
         "TERIOCK.MODELS.Identification.QUERY.Identify.noDocumentsMessage",
       ),
+      silent: true,
+      tooltipAsync: false,
     });
     await item.updateEmbeddedDocuments(
       "ActiveEffect",
@@ -52,6 +52,7 @@ export default async function identifyItemQuery(queryData, { _timeout }) {
       }),
     );
     await item.update({
+      name: item.system.identification.name,
       "system.flaws": item.system.identification.flaws,
       "system.identification.flaws": "",
       "system.identification.identified": true,
@@ -59,7 +60,6 @@ export default async function identifyItemQuery(queryData, { _timeout }) {
       "system.identification.read": true,
       "system.notes": item.system.identification.notes,
       "system.powerLevel": item.system.identification.powerLevel,
-      name: item.system.identification.name,
     });
   }
   return doIdentify;

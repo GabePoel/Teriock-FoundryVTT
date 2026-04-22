@@ -74,10 +74,10 @@ export default function AbilityExecutionGetInputPart(Base) {
           {
             condition: true,
             field: new fields.BooleanField(),
-            value: !!this.warded,
             label: "TERIOCK.SYSTEMS.Attack.FIELDS.warded.label",
             name: "warded",
             update: (v) => (this.warded = v),
+            value: !!this.warded,
           },
           {
             condition: this.source.system.maneuver === "reactive",

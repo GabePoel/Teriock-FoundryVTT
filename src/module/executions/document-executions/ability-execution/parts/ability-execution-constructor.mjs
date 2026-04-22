@@ -302,7 +302,7 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
   }
 
   /**
-   * Replace `@h` with the heighten amount in strings.
+   * Replace `@h` with the heightened amount in strings.
    * @param {string} s
    * @returns {string}
    */

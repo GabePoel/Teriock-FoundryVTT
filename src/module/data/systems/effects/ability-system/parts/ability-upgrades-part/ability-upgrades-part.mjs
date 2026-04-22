@@ -121,11 +121,15 @@ export default (Base) => {
       prepareDerivedData() {
         super.prepareDerivedData();
         if (this.upgrades.score.attribute) {
-          const att = this.upgrades.score.attribute;
-          const minVal = this.upgrades.score.value;
-          this.upgrades.score.text =
-            `This ability sets your @L[Core:${att.toUpperCase()}] score ` +
-            `to a minimum of ${minVal}.`;
+          const attShort = this.upgrades.score.attribute.toUpperCase();
+          const attLabel =
+            TERIOCK.config.attribute[this.upgrades.score.attribute].label;
+          const attribute = ` @L[Core:${attShort}]{${attLabel}}`;
+          const value = this.upgrades.score.value;
+          this.upgrades.score.text = _loc(
+            "TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.score.description",
+            { attribute, value },
+          );
         } else {
           this.upgrades.score.text = "";
         }
@@ -133,18 +137,22 @@ export default (Base) => {
           this.upgrades.competence.attribute = null;
         }
         if (this.upgrades.competence.attribute) {
-          const att = this.upgrades.competence.attribute;
+          const att = this.upgrades.competence.attribute.toUpperCase();
+          const attLabel =
+            TERIOCK.config.attribute[this.upgrades.competence.attribute].label;
+          const attribute = ` @L[Core:${att}]{${attLabel}}`;
           const amount = this.upgrades.competence.value;
-          let amountPage = "Competence";
-          if (amount === 1) {
-            amountPage = "Proficiency";
-          }
-          if (amount === 2) {
-            amountPage = "Fluency";
-          }
-          this.upgrades.competence.text =
-            `This ability gives you @L[Core:${amountPage} Bonus]{${amountPage.toLowerCase()}} in ` +
-            `@L[Core:${att.toUpperCase()}] @L[Core:Feat Interaction]{feat saves}.`;
+          const page = TERIOCK.config.competence.levels[amount].page;
+          const level = TERIOCK.config.competence.levels[amount].label;
+          const upgrade = `@L[Core:${page}]{${level.toLowerCase()}}`;
+          const savesLabel = _loc(
+            "TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.competence.saves",
+          );
+          const saves = `@L[Core:Feat Interaction]{${savesLabel}}`;
+          this.upgrades.competence.text = _loc(
+            "TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.competence.description",
+            { attribute, saves, upgrade },
+          );
         } else {
           this.upgrades.competence.text = "";
         }

@@ -32,10 +32,10 @@ export default async function createHotbarFolderQuery(queryData, { _timeout }) {
     : `${name}'s Macros`;
   if (!macroSubFolder) {
     await TeriockFolder.create({
+      flags: { teriock: { user: id, hotbarFolder: true } },
+      folder: macroFolder,
       name: folderName,
       type: "Macro",
-      folder: macroFolder,
-      flags: { teriock: { user: id, hotbarFolder: true } },
     });
   }
 }

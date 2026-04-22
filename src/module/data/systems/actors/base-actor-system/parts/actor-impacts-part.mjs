@@ -99,8 +99,8 @@ export default (Base) => {
             },
           },
           window: {
-            title: entry.take,
             icon: makeIconClass(entry.icon, "title"),
+            title: entry.take,
           },
         });
       }

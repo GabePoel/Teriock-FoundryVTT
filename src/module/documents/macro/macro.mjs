@@ -45,8 +45,8 @@ export default class TeriockMacro extends mix(
     await game.users.queryGM(
       "teriock.createHotbarFolder",
       {
-        name: game.user.name,
         id: game.user.id,
+        name: game.user.name,
       },
       {
         failPrefix: "TERIOCK.SYSTEMS.Macro.QUERY.createHotbarFolder.failPrefix",
@@ -124,20 +124,18 @@ export default class TeriockMacro extends mix(
     const command = dedent(`
     await Macro.implementation.useDocumentLinked("${doc.uuid}", { event: event })`);
     const macroData = {
-      name: _loc("TERIOCK.SYSTEMS.Child.USAGE.use", {
-        value: doc.name,
-      }),
-      type: "script",
-      img: doc.img,
       command: command,
-      folder: (await this.ensureHotbarFolder())?.id,
       flags: {
         teriock: {
-          user: game.user.id,
-          macroType: "useLinked",
           macroDocumentUuid: doc.uuid,
+          macroType: "useLinked",
+          user: game.user.id,
         },
       },
+      folder: (await this.ensureHotbarFolder())?.id,
+      img: doc.img,
+      name: _loc("TERIOCK.SYSTEMS.Child.USAGE.use", { value: doc.name }),
+      type: "script",
     };
     return this.create(macroData);
   }
@@ -166,11 +164,8 @@ export default class TeriockMacro extends mix(
       if (doc) await doc.system.use({ actor: a, event });
       else {
         ui.notifications.warn("TERIOCK.SYSTEMS.Macro.EXECUTION.noDocument", {
+          format: { actor: a.name, lookup },
           localize: true,
-          format: {
-            actor: a.name,
-            lookup,
-          },
         });
       }
     }
@@ -198,8 +193,8 @@ export default class TeriockMacro extends mix(
   /** @inheritDoc */
   get embedParts() {
     return Object.assign(super.embedParts, {
-      usable: true,
       action: "execute",
+      usable: true,
     });
   }
 

@@ -89,7 +89,7 @@ export default class EvaluationModel extends EmbeddedDataModel {
   }
 
   /**
-   * Derive value of formula internally.
+   * Derive the value of the formula internally.
    * @param {Partial<Teriock.Options.EvaluationOptions>} [options]
    * @returns {number}
    */
@@ -106,9 +106,7 @@ export default class EvaluationModel extends EmbeddedDataModel {
     else needsEval = true;
     if (needsEval) {
       let rollData = options.rollData ?? {};
-      if (needsEval && !options.skipRollData) {
-        rollData = this.getRollData();
-      }
+      if (needsEval && !options.skipRollData) rollData = this.getRollData();
       value = BaseRoll.minValue(formula, rollData);
     }
     if (typeof options.max === "number") value = Math.min(value, options.max);

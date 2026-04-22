@@ -108,9 +108,7 @@ export default async function refreshFromCompendiumDialog(doc) {
       icon: makeIconClass(TERIOCK.display.icons.ui.select, "button"),
       label: _loc("TERIOCK.DIALOGS.RefreshFromCompendium.BUTTONS.refresh"),
     },
-    position: {
-      width: 450,
-    },
+    position: { width: 450 },
     window: {
       icon: makeIconClass("fa-book-atlas", "title"),
       title: _loc("TERIOCK.DIALOGS.RefreshFromCompendium.title", {

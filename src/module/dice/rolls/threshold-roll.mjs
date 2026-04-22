@@ -10,8 +10,8 @@ export default class ThresholdRoll extends BaseRoll {
    */
   static get defaultOptions() {
     return Object.assign(super.defaultOptions, {
-      critSuccessThreshold: 20,
       critFailureThreshold: 1,
+      critSuccessThreshold: 20,
     });
   }
 

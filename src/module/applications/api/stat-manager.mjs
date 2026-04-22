@@ -16,8 +16,8 @@ export default class TeriockStatManager extends HackStatMixin(
    * @type {Partial<ApplicationConfiguration>}
    */
   static DEFAULT_OPTIONS = {
-    classes: ["dialog"],
     actions: { ok: this._onDone },
+    classes: ["dialog"],
     position: { width: 425 },
   };
 
@@ -54,9 +54,7 @@ export default class TeriockStatManager extends HackStatMixin(
   /** @inheritDoc */
   _initializeApplicationOptions(options = {}) {
     const applicationOptions = super._initializeApplicationOptions(options);
-    if (options.title) {
-      applicationOptions.window.title = options.title;
-    }
+    if (options.title) applicationOptions.window.title = options.title;
     return applicationOptions;
   }
 
@@ -85,10 +83,10 @@ export default class TeriockStatManager extends HackStatMixin(
   async _prepareContext(options = {}) {
     const context = await super._prepareContext(options);
     return Object.assign(context, {
-      forHarm: this._forHarm,
-      forHarmField: this._forHarmField,
       consumeStatDice: this._consumeStatDice,
       consumeStatDiceField: this._consumeStatDiceField,
+      forHarm: this._forHarm,
+      forHarmField: this._forHarmField,
     });
   }
 }

@@ -93,11 +93,11 @@ export default function ThresholdExecutionMixin(Base) {
             condition: this.requiresCompetence,
             field: new fields.EmbeddedDataField(CompetenceModel).fields.raw,
             hint: "TERIOCK.DIALOGS.ThresholdExecutionOptions.FIELDS.competence.hint",
-            value: this.competence.raw,
             label:
               "TERIOCK.DIALOGS.ThresholdExecutionOptions.FIELDS.competence.label",
             name: "competence",
             update: (v) => (this.competence.raw = Number(v)),
+            value: this.competence.raw,
           },
           {
             condition: this.hasBonus,
@@ -156,9 +156,9 @@ export default function ThresholdExecutionMixin(Base) {
       /** @inheritDoc */
       get rollOptions() {
         return {
+          comparison: this.comparison,
           flavor: this.flavor,
           threshold: this.threshold,
-          comparison: this.comparison,
         };
       }
 

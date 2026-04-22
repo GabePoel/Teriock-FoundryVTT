@@ -22,8 +22,8 @@ export default (Base) => {
         return Object.assign(super.defineSchema(), {
           curses: initialBar({ max: 3 }),
           rotators: new fields.SchemaField({
-            min: initialNumber(),
             max: new fields.NumberField({ initial: 0, nullable: false }),
+            min: initialNumber(),
             value: initialNumber(),
           }),
         });

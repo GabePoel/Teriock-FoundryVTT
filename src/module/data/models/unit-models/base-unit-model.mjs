@@ -96,9 +96,9 @@ export default class BaseUnitModel extends EvaluationModel {
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       unit: new fields.StringField({
-        required: false,
-        initial: this.choiceEntries[0].id,
         choices: this.choices,
+        initial: this.choiceEntries[0].id,
+        required: false,
       }),
     });
   }
@@ -279,8 +279,8 @@ export default class BaseUnitModel extends EvaluationModel {
         width: 500,
       },
       window: {
-        title: this._updateTitle,
         icon: makeIconClass(this.icon, "title"),
+        title: this._updateTitle,
       },
     });
     dialog.unitModel = this;

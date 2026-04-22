@@ -3,7 +3,7 @@ import { chatImage } from "../../applications/shared/image-context-menu-options.
 import { makeIconClass } from "../../helpers/utils.mjs";
 
 /**
- * Add wiki open button to sheet header.
+ * Add a wiki open button to the sheet header.
  * @param {BaseItemSheet|BaseEffectSheet} application
  * @param {ApplicationHeaderControlsEntry[]} controls
  */
@@ -21,7 +21,7 @@ function addWikiOpenToHeader(application, controls) {
 }
 
 /**
- * Add share image in chat button to image popout header.
+ * Add a button to share image in chat to the header.
  * @param {ImagePopout} application
  * @param {ApplicationHeaderControlsEntry[]} controls
  */

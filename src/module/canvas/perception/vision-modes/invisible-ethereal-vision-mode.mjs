@@ -16,8 +16,6 @@ import TeriockVisionMode from "./base-vision-mode.mjs";
 export default function invisibleEtherealVisionMode() {
   return new TeriockVisionMode(
     {
-      id: "invisibleEthereal",
-      label: "TERIOCK.PERCEPTION.VisionModes.invisibleEthereal",
       canvas: {
         shader: shaders.ColorAdjustmentsSamplerShader,
         uniforms: {
@@ -27,6 +25,8 @@ export default function invisibleEtherealVisionMode() {
           tint: [0, 0, 0],
         },
       },
+      id: "invisibleEthereal",
+      label: "TERIOCK.PERCEPTION.VisionModes.invisibleEthereal",
       lighting: {
         background: {
           visibility: TeriockVisionMode.LIGHTING_VISIBILITY.DISABLED,

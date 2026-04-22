@@ -13,25 +13,20 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
    * @type {Partial<ApplicationConfiguration>}
    */
   static DEFAULT_OPTIONS = {
+    actions: { ok: this._onGetSelected, cancel: this._onCancel },
     classes: ["dynamic-select", "dialog"],
-    actions: {
-      ok: this._onGetSelected,
-      cancel: this._onCancel,
-    },
+    position: { width: 450 },
     window: {
       icon: makeIconClass(icons.ui.select, "title"),
       title: "TERIOCK.DIALOGS.Select.Document.title",
       resizable: true,
     },
-    position: {
-      width: 450,
-    },
   };
 
   static PARTS = {
     all: {
-      template: "teriock/dialogs/select",
       scrollable: [".doc-list-container"],
+      template: "teriock/dialogs/select",
     },
   };
 
@@ -133,14 +128,10 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
    */
   _initSearchFilter() {
     const root = this.element;
-    if (!root) {
-      return;
-    }
+    if (!root) return;
     const input = root.querySelector(".search-input");
     const content = root.querySelector(".doc-select");
-    if (!input || !content) {
-      return;
-    }
+    if (!input || !content) return;
     const searchFilter = new SearchFilter({
       inputSelector: ".search-input",
       contentSelector: ".doc-select",

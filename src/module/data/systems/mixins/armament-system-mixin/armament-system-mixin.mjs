@@ -78,9 +78,7 @@ export default function ArmamentSystemMixin(Base) {
               twoHanded: new FormulaField({ deterministic: false }),
               types: new fields.SetField(new IdentifierField()),
             },
-            {
-              multiChangePaths: ["base", "twoHanded"],
-            },
+            { multiChangePaths: ["base", "twoHanded"] },
           ),
           equipmentClasses: new fields.SetField(
             new fields.StringField({

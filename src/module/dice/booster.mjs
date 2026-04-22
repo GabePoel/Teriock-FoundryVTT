@@ -16,10 +16,10 @@ const { FunctionTerm } = foundry.dice.terms;
 class BoosterTerm extends FunctionTerm {
   static BOOST_ALIASES = {
     b: "boost",
-    db: "deboost",
-    sb: "setboost",
     boost: "boost",
+    db: "deboost",
     deboost: "deboost",
+    sb: "setboost",
     setboost: "setboost",
   };
 
@@ -33,7 +33,7 @@ class BoosterTerm extends FunctionTerm {
 
   /**
    * Boost the roll.
-   * @param {TeriockRoll} roll
+   * @param {BaseRoll} roll
    */
   static _boost(roll) {
     const die = selectWeightedMaxFaceDie(roll.dice);
@@ -43,7 +43,7 @@ class BoosterTerm extends FunctionTerm {
 
   /**
    * Deboost the roll.
-   * @param {TeriockRoll} roll
+   * @param {BaseRoll} roll
    */
   static _deboost(roll) {
     const die = selectWeightedMaxFaceDie(roll.dice);
@@ -53,7 +53,7 @@ class BoosterTerm extends FunctionTerm {
 
   /**
    * Apply some number of boosts or deboosts. Positive for boosts. Negative for deboosts.
-   * @param {TeriockRoll} roll
+   * @param {BaseRoll} roll
    * @param {number} number
    */
   static _setboost(roll, number) {

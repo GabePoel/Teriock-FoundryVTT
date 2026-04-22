@@ -43,10 +43,7 @@ export default class RollAutomation extends mix(
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      formula: new FormulaField({
-        nullable: true,
-        deterministic: false,
-      }),
+      formula: new FormulaField({ deterministic: false, nullable: true }),
       impact: new fields.StringField({
         choices: localizeChoices(
           objectMap(TERIOCK.config.impact, (i) => i.deal),
@@ -91,8 +88,8 @@ export default class RollAutomation extends mix(
     if (!this.document.actor) return;
     const command = commands[this.impact];
     command.primary(this.document.actor, {
-      formula: this.formula,
       boost: true,
+      formula: this.formula,
     });
   }
 }

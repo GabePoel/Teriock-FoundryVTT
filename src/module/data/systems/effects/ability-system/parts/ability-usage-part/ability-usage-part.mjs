@@ -28,8 +28,8 @@ export default (Base) => {
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           delivery: new fields.StringField({
-            initial: "weapon",
             choices: TERIOCK.config.ability.delivery,
+            initial: "weapon",
           }),
           executionTime: new fields.SchemaField({
             base: new fields.StringField({ initial: "a1" }),
@@ -42,16 +42,16 @@ export default (Base) => {
             type: new fields.StringField({ initial: null, nullable: true }),
           }),
           featSaveAttribute: new fields.StringField({
-            initial: "mov",
             choices: TERIOCK.reference.attributes,
+            initial: "mov",
           }),
           interaction: new fields.StringField({
-            initial: "attack",
             choices: TERIOCK.config.ability.interaction,
+            initial: "attack",
           }),
           maneuver: new fields.StringField({
-            initial: "active",
             choices: TERIOCK.config.ability.maneuver,
+            initial: "active",
           }),
           range: new EvaluationField({ model: RangeModel }),
           targets: new fields.SetField(

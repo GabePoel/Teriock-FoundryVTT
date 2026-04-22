@@ -38,6 +38,8 @@ export default class TeriockHotbar extends Hotbar {
   _getContextMenuOptions() {
     const options = super._getContextMenuOptions();
     options.push({
+      icon: makeIcon(TERIOCK.display.icons.ui.openWindow, "contextMenu"),
+      label: "Open Document Sheet",
       onClick: async (li) => {
         const macro = this.#getMacroForSlot(li);
         if (macro.getFlag("teriock", "macroType") === "useGeneral") {
@@ -59,8 +61,6 @@ export default class TeriockHotbar extends Hotbar {
           macro.getFlag("teriock", "macroType"),
         );
       },
-      icon: makeIcon(TERIOCK.display.icons.ui.openWindow, "contextMenu"),
-      label: "Open Document Sheet",
     });
     return options;
   }

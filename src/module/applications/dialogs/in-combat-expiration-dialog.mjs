@@ -22,17 +22,15 @@ export default async function inCombatExpirationDialog(
   if (effect.system.expirations.combat.what.type === "forced" && !forceDialog) {
     const name = effect.system.fullName;
     expire = await TeriockDialog.confirm({
-      window: {
-        title: _loc("TERIOCK.DIALOGS.InCombatExpiration.title", {
-          name,
-        }),
-        icon: makeIconClass(TERIOCK.config.document[effect.type].icon, "title"),
-      },
       content: _loc("TERIOCK.DIALOGS.InCombatExpiration.contentConfirm", {
         name,
       }),
       modal: true,
       rejectClose: false,
+      window: {
+        title: _loc("TERIOCK.DIALOGS.InCombatExpiration.title", { name }),
+        icon: makeIconClass(TERIOCK.config.document[effect.type].icon, "title"),
+      },
     });
     if (expire) {
       await effect.system.expire();
@@ -76,19 +74,9 @@ export default async function inCombatExpirationDialog(
       ),
     );
     await new TeriockDialog({
-      window: {
-        title: _loc("TERIOCK.DIALOGS.InCombatExpiration.title", {
-          name: effect.name,
-        }),
-        icon: makeIconClass(TERIOCK.config.document[effect.type].icon, "title"),
-      },
-      content: contentHtml,
       buttons: [
         {
           action: "roll",
-          label: _loc("TERIOCK.DIALOGS.InCombatExpiration.BUTTONS.roll"),
-          default: true,
-          icon: makeIconClass(TERIOCK.display.icons.ui.dice, "button"),
           callback: async (_event, button) => {
             const expirationRoll = new BaseRoll(
               button.form.elements.namedItem("roll").value,
@@ -97,11 +85,7 @@ export default async function inCombatExpirationDialog(
                 flavor: _loc("TERIOCK.DIALOGS.InCombatExpiration.rollFlavor", {
                   name: effect.name,
                 }),
-                styles: {
-                  dice: {
-                    classes: "condition",
-                  },
-                },
+                styles: { dice: { classes: "condition" } },
                 threshold: Number(
                   button.form.elements.namedItem("threshold").value,
                 ),
@@ -124,16 +108,26 @@ export default async function inCombatExpirationDialog(
               await effect.system.expire();
             }
           },
+          default: true,
+          icon: makeIconClass(TERIOCK.display.icons.ui.dice, "button"),
+          label: _loc("TERIOCK.DIALOGS.InCombatExpiration.BUTTONS.roll"),
         },
         {
           action: "remove",
-          icon: makeIconClass(TERIOCK.display.icons.ui.remove, "button"),
-          label: _loc("TERIOCK.DIALOGS.InCombatExpiration.BUTTONS.remove"),
           callback: async () => {
             await effect.system.expire();
           },
+          icon: makeIconClass(TERIOCK.display.icons.ui.remove, "button"),
+          label: _loc("TERIOCK.DIALOGS.InCombatExpiration.BUTTONS.remove"),
         },
       ],
+      content: contentHtml,
+      window: {
+        title: _loc("TERIOCK.DIALOGS.InCombatExpiration.title", {
+          name: effect.name,
+        }),
+        icon: makeIconClass(TERIOCK.config.document[effect.type].icon, "title"),
+      },
     }).render(true);
   }
 }

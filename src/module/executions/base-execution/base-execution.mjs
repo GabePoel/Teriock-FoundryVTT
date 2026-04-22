@@ -113,9 +113,7 @@ export default class BaseExecution {
    */
   get rollOptions() {
     return foundry.utils.mergeObject(
-      {
-        flavor: this.flavor,
-      },
+      { flavor: this.flavor },
       this._rollOptions,
     );
   }
@@ -371,12 +369,6 @@ export default class BaseExecution {
    * @returns {Teriock.System.TriggerScope}
    */
   getScope(scope = {}) {
-    return Object.assign(
-      {
-        execution: this,
-        actor: this.actor || undefined,
-      },
-      scope,
-    );
+    return Object.assign({ execution: this, actor: this.actor }, scope);
   }
 }

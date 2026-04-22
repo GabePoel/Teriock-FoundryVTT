@@ -95,10 +95,10 @@ export default class ImpactRoll extends BaseRoll {
         .filter((option) => !option?.hidden)
         .map((option) => {
           return {
-            name: option.take,
-            icon: makeIcon(option.icon, "contextMenu"),
             callback: async () =>
               game.actors.selected.forEach((a) => option.apply(a, this.total)),
+            icon: makeIcon(option.icon, "contextMenu"),
+            name: option.take,
           };
         }),
       ...super._getTotalContextOptions(_options),
@@ -110,8 +110,8 @@ export default class ImpactRoll extends BaseRoll {
     if (this.hasImpact) {
       return [
         new teriock.data.pseudoDocuments.activations.TakeActivation({
-          impact: this.impact,
           amount: this.total,
+          impact: this.impact,
         }),
       ];
     }

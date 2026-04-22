@@ -28,9 +28,9 @@ export function combatExpirationSourceTypeField() {
   return new StringField({
     choices: localizeChoices(
       {
-        target: "TERIOCK.SCHEMA.CombatExpiration.who.choices.target",
-        executor: "TERIOCK.SCHEMA.CombatExpiration.who.choices.executor",
         everyone: "TERIOCK.SCHEMA.CombatExpiration.who.choices.everyone",
+        executor: "TERIOCK.SCHEMA.CombatExpiration.who.choices.executor",
+        target: "TERIOCK.SCHEMA.CombatExpiration.who.choices.target",
       },
       { sort: false },
     ),
@@ -82,8 +82,8 @@ export function combatExpirationTimingField() {
     }),
     time: new StringField({
       choices: localizeChoices({
-        start: "TERIOCK.SCHEMA.CombatExpiration.when.time.choices.start",
         end: "TERIOCK.SCHEMA.CombatExpiration.when.time.choices.end",
+        start: "TERIOCK.SCHEMA.CombatExpiration.when.time.choices.start",
       }),
       hint: _loc("TERIOCK.SCHEMA.CombatExpiration.when.time.hint"),
       initial: "start",
@@ -91,9 +91,9 @@ export function combatExpirationTimingField() {
     }),
     trigger: new StringField({
       choices: localizeChoices({
-        turn: "TERIOCK.SCHEMA.CombatExpiration.when.trigger.choices.turn",
-        combat: "TERIOCK.SCHEMA.CombatExpiration.when.trigger.choices.combat",
         action: "TERIOCK.SCHEMA.CombatExpiration.when.trigger.choices.action",
+        combat: "TERIOCK.SCHEMA.CombatExpiration.when.trigger.choices.combat",
+        turn: "TERIOCK.SCHEMA.CombatExpiration.when.trigger.choices.turn",
       }),
       hint: _loc("TERIOCK.SCHEMA.CombatExpiration.when.trigger.hint"),
       initial: "turn",
@@ -314,7 +314,10 @@ export function blockGaplessField(options = {}) {
  */
 export function competenceField() {
   return new NumberField({
-    choices: localizeChoices(competenceConfig.levels, { sort: false }),
+    choices: objectMap(competenceConfig.levels, (l) => l.label, {
+      localize: true,
+      sort: false,
+    }),
     hint: _loc("TERIOCK.SCHEMA.Competence.hint"),
     initial: 0,
     label: _loc("TERIOCK.SCHEMA.Competence.label"),

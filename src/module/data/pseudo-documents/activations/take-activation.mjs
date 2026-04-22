@@ -75,9 +75,9 @@ export default class TakeActivation extends AutomationActivationFactory(
           "TERIOCK.ACTIVATIONS.Take.NOTIFICATIONS.applied",
           {
             format: {
+              actor: actor.fullName,
               amount: this.#amount,
               impact: this.label,
-              actor: actor.fullName,
             },
             localize: true,
           },
@@ -94,9 +94,9 @@ export default class TakeActivation extends AutomationActivationFactory(
         "TERIOCK.ACTIVATIONS.Take.NOTIFICATIONS.reversed",
         {
           format: {
+            actor: actor.fullName,
             amount: this.#amount,
             impact: this.label,
-            actor: actor.fullName,
           },
           localize: true,
         },

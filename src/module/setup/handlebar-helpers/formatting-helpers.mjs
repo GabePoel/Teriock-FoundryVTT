@@ -85,8 +85,8 @@ export default function registerFormattingHelpers() {
 
 function normalizeBarInputs(value, max, temp = 0) {
   return {
-    value: Math.max(0, value ?? 0),
     max: Math.max(0, max ?? 0),
     temp: Math.max(0, temp ?? 0),
+    value: Math.max(0, value ?? 0),
   };
 }

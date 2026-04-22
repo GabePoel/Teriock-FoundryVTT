@@ -7,8 +7,8 @@ export default class GameContentConfig extends BaseConfig {
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
     window: {
-      title: "TERIOCK.CONFIGS.GameContent.name",
       icon: makeIconClass(icons.settings.gameContent, "title"),
+      title: "TERIOCK.CONFIGS.GameContent.name",
     },
   };
 

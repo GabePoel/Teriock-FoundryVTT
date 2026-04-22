@@ -14,22 +14,10 @@ export default class BaseDetectionMode extends DetectionMode {
    *   Teriock.Keys.Condition}>}
    */
   static BLOCKING_STATUSES = {
-    move: {
-      src: ["dead", "frozen"],
-      tgt: ["frozen"],
-    },
-    scent: {
-      src: ["anosmatic", "ethereal"],
-      tgt: ["odorless"],
-    },
-    sight: {
-      src: ["blind"],
-      tgt: ["invisible"],
-    },
-    sound: {
-      src: ["deaf"],
-      tgt: ["silent"],
-    },
+    move: { src: ["dead", "frozen"], tgt: ["frozen"] },
+    scent: { src: ["anosmatic", "ethereal"], tgt: ["odorless"] },
+    sight: { src: ["blind"], tgt: ["invisible"] },
+    sound: { src: ["deaf"], tgt: ["silent"] },
   };
 
   /** @inheritDoc */

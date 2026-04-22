@@ -1,5 +1,5 @@
 /**
- * Checks if a string is in camelCase.
+ * Checks if a string is in `camelCase` format.
  * @param {string} str
  * @returns {boolean}
  */
@@ -8,7 +8,7 @@ export function isCamelCase(str) {
 }
 
 /**
- * Checks if a string is in kebab-case.
+ * Checks if a string is in `kebab-case` format.
  * @param {string} str
  * @returns {boolean}
  */
@@ -17,7 +17,7 @@ export function isKebabCase(str) {
 }
 
 /**
- * Checks if a string is in Title Case.
+ * Checks if a string is in `Title Case` format.
  * @param {string} str
  * @returns {boolean}
  */
@@ -27,7 +27,7 @@ export function isTitleCase(str) {
 }
 
 /**
- * Converts a string to camelCase format.
+ * Converts a string to `camelCase` format.
  * @param {string} str - The string to convert.
  * @returns {string} The camelCase version of the string.
  */
@@ -45,7 +45,7 @@ export function toCamelCase(str) {
 }
 
 /**
- * Converts a string to Title Case format.
+ * Converts a string to `Title Case` format.
  * @param {string} str - The string to convert.
  * @returns {string} The Title Case version of the string.
  */
@@ -56,7 +56,7 @@ export function toTitleCase(str) {
 }
 
 /**
- * Converts a string to kebab-case format.
+ * Converts a string to `kebab-case` format.
  * @param {string} str - The string to convert.
  * @returns {string} The kebab-case version of the string.
  */
@@ -139,7 +139,7 @@ export function toId(str, options = {}) {
 }
 
 /**
- * Remove indentation from code block.
+ * Remove indentation from a code block.
  * @param {string} str
  * @returns {string}
  */

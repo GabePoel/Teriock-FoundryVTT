@@ -9,11 +9,8 @@ export default class TeriockCombatTracker extends CombatTracker {
     const combatant = this.viewed?.combatants.get(combatantId);
     if (!combatant) return;
     if (target.dataset.action === "rollInitiative") {
-      if (event.altKey && !event.shiftKey) {
-        combatant._advantage = true;
-      } else if (event.shiftKey && !event.altKey) {
-        combatant._disadvantage = true;
-      }
+      if (event.altKey && !event.shiftKey) combatant._advantage = true;
+      else if (event.shiftKey && !event.altKey) combatant._disadvantage = true;
     }
     return super._onCombatantControl(event, target);
   }

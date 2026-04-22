@@ -122,8 +122,6 @@ export default class TeriockTokenDocument extends mix(
    */
   prepareDerivedData() {
     super.prepareDerivedData();
-    this.applyActiveEffects("derivation");
-    this.applyActiveEffects("completion");
     if (
       this.hasStatusEffect("ethereal") &&
       this.actor.getSetting("token.autoLighting")
@@ -147,7 +145,5 @@ export default class TeriockTokenDocument extends mix(
     if (this.isLazyDelta) return;
     super.prepareEmbeddedDocuments();
     this.applyActiveEffects("normal");
-    this.applyActiveEffects("proficiency");
-    this.applyActiveEffects("fluency");
   }
 }

@@ -23,9 +23,7 @@ export default class ResistAutomation extends ThresholdAutomation {
   /** @inheritDoc */
   static defineSchema() {
     const schema = Object.assign(super.defineSchema(), {
-      hex: new fields.BooleanField({
-        label: "TERIOCK.TERMS.Common.hexproof",
-      }),
+      hex: new fields.BooleanField({ label: "TERIOCK.TERMS.Common.hexproof" }),
     });
     delete schema.threshold;
     return schema;
@@ -39,12 +37,7 @@ export default class ResistAutomation extends ThresholdAutomation {
   /** @inheritDoc */
   async getActivations() {
     return [
-      new ResistActivation({
-        options: {
-          bonus: this.bonus,
-          hex: this.hex,
-        },
-      }),
+      new ResistActivation({ options: { bonus: this.bonus, hex: this.hex } }),
     ];
   }
 }

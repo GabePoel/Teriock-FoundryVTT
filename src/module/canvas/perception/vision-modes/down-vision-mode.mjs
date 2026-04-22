@@ -13,16 +13,12 @@ import TeriockVisionMode from "./base-vision-mode.mjs";
 export default function downVisionMode() {
   return new TeriockVisionMode(
     {
-      id: "down",
-      label: "TERIOCK.PERCEPTION.VisionModes.down",
       canvas: {
         shader: shaders.ColorAdjustmentsSamplerShader,
-        uniforms: {
-          contrast: 0,
-          saturation: -0.8,
-          exposure: -0.65,
-        },
+        uniforms: { contrast: 0, saturation: -0.8, exposure: -0.65 },
       },
+      id: "down",
+      label: "TERIOCK.PERCEPTION.VisionModes.down",
       lighting: {
         background: {
           visibility: TeriockVisionMode.LIGHTING_VISIBILITY.DISABLED,

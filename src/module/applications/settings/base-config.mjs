@@ -20,20 +20,15 @@ export default class BaseConfig extends TeriockBaseApplication {
 
   /** @override */
   static PARTS = {
-    general: { template: "teriock/settings/base-config" },
     footer: { template: "templates/generic/form-footer.hbs" },
+    general: { template: "teriock/settings/base-config" },
   };
 
   /**
    * Context to display in the settings which this is registered as a menu.
    * @type {{key: string, label: string, hint: string, restricted: boolean}}
    */
-  static SETTINGS_MENU = {
-    key: "",
-    label: "",
-    hint: "",
-    restricted: false,
-  };
+  static SETTINGS_MENU = { key: "", label: "", hint: "", restricted: false };
 
   /**
    * Commit settings changes.

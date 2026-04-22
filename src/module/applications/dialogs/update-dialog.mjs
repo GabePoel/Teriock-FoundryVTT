@@ -22,10 +22,7 @@ export default async function updateDialog(
     const value = foundry.utils.getProperty(doc, `_source.${path}`);
     const formGroup = schema.toFormGroup(
       { rootId: foundry.utils.randomID() },
-      {
-        name: path,
-        value,
-      },
+      { name: path, value },
     );
     content.append(formGroup);
   }
@@ -33,9 +30,6 @@ export default async function updateDialog(
     buttons: [
       {
         action: "update",
-        label: _loc("TERIOCK.DIALOGS.Update.BUTTONS.update"),
-        default: true,
-        icon: makeIconClass(TERIOCK.display.icons.ui.enable, "button"),
         callback: async function (_event, button) {
           const namedElements = /** @type {HTMLInputElement[]} */ Array.from(
             button.form.elements,
@@ -48,16 +42,14 @@ export default async function updateDialog(
           );
           await doc.update(updateData);
         },
+        default: true,
+        icon: makeIconClass(TERIOCK.display.icons.ui.enable, "button"),
+        label: _loc("TERIOCK.DIALOGS.Update.BUTTONS.update"),
       },
     ],
     content: content.outerHTML,
-    position: {
-      width: 500,
-    },
-    window: {
-      title: resolvedTitle,
-      icon: makeIconClass(icon, "title"),
-    },
+    position: { width: 500 },
+    window: { title: resolvedTitle, icon: makeIconClass(icon, "title") },
   });
   await dialog.render(true);
 }

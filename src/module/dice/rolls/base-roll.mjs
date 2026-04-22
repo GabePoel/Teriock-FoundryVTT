@@ -28,7 +28,7 @@ export default class BaseRoll extends Roll {
       options,
     );
 
-    // If we don't do this then the targets will be raw classes instead of JSON parsable objects
+    // If we don't do this, then the targets will be raw classes instead of JSON parsable objects
     this.targets = this.options.targets;
 
     // Ensure roll has an ID that can be referenced in chat messages
@@ -398,9 +398,9 @@ export default class BaseRoll extends Roll {
       [
         new Booster({
           fn: "b",
-          terms: [formula],
-          rolls: [clone],
           result: clone.total,
+          rolls: [clone],
+          terms: [formula],
         }),
       ],
       options,
@@ -438,9 +438,9 @@ export default class BaseRoll extends Roll {
       [
         new Booster({
           fn: "db",
-          terms: [formula],
-          rolls: [clone],
           result: clone.total,
+          rolls: [clone],
+          terms: [formula],
         }),
       ],
       options,

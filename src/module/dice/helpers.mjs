@@ -11,9 +11,7 @@ export function selectWeightedMaxFaceDie(diceTerms) {
   const totalWeight = maxFaceTerms.reduce((sum, term) => sum + term.number, 0);
   let r = Math.random() * totalWeight;
   for (const term of maxFaceTerms) {
-    if (r < term.number) {
-      return term;
-    }
+    if (r < term.number) return term;
     r -= term.number;
   }
   return (

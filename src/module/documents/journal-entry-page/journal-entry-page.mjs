@@ -27,7 +27,7 @@ export default class TeriockJournalEntryPage extends mix(
     return (
       this.system?.img ||
       this.getFlag("teriock", "journalImage") ||
-      getImage("powers", "Learned Elder Sorceries")
+      getImage("powers", "learned-elder-sorceries")
     );
   }
 
@@ -50,19 +50,19 @@ export default class TeriockJournalEntryPage extends mix(
     const html = div.innerHTML;
     return {
       ...(await super.getPanelParts()),
-      image: this.img,
+      blocks: [
+        {
+          text: html,
+          title:
+            this.getFlag("teriock", "journalTitle") ||
+            _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
+        },
+      ],
       icon:
         documentConfig[this.type]?.icon ||
         this.getFlag("teriock", "journalIcon") ||
         TERIOCK.display.icons.document.core,
-      blocks: [
-        {
-          title:
-            this.getFlag("teriock", "journalTitle") ||
-            _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
-          text: html,
-        },
-      ],
+      image: this.img,
     };
   }
 }

@@ -10,7 +10,7 @@ declare global {
       system: BaseEffectSystem;
       type: Teriock.Documents.EffectType;
 
-      get actor(): AnyActor;
+      get actor(): AnyActor | null;
 
       get documentName(): "ActiveEffect";
 

@@ -16,12 +16,12 @@ import TeriockVisionMode from "./base-vision-mode.mjs";
 export default function etherealVisionMode() {
   return new TeriockVisionMode(
     {
-      id: "ethereal",
-      label: "TERIOCK.PERCEPTION.VisionModes.ethereal",
       canvas: {
         shader: shaders.ColorAdjustmentsSamplerShader,
         uniforms: { contrast: 0, saturation: -1, brightness: 0 },
       },
+      id: "ethereal",
+      label: "TERIOCK.PERCEPTION.VisionModes.ethereal",
       lighting: {
         background: {
           postProcessingModes: ["SATURATION"],

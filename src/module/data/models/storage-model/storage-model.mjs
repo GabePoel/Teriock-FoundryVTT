@@ -17,10 +17,7 @@ export default class StorageModel extends EmbeddedDataModel {
   /** @inheritDoc */
   static defineSchema() {
     return {
-      enabled: new fields.BooleanField({
-        initial: false,
-        required: false,
-      }),
+      enabled: new fields.BooleanField({ initial: false, required: false }),
       maxCount: new fields.NumberField({
         initial: null,
         nullable: true,
@@ -31,10 +28,7 @@ export default class StorageModel extends EmbeddedDataModel {
         nullable: true,
         required: false,
       }),
-      weightMultiplier: new fields.NumberField({
-        initial: 1,
-        min: 0,
-      }),
+      weightMultiplier: new fields.NumberField({ initial: 1, min: 0 }),
     };
   }
 

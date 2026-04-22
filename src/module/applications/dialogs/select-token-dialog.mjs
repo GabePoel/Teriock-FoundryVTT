@@ -24,10 +24,10 @@ export async function selectTokensDialog(options = {}) {
     visibleTokenDocuments.push(tokenLayer.documentCollection.get(id));
   }
   const selectedDocuments = await selectDocumentsDialog(visibleTokenDocuments, {
-    title: options.title,
     hint: options.hint,
-    tooltip: false,
     imgKey: "texture.src",
+    title: options.title,
+    tooltip: false,
   });
   return selectedDocuments.map((d) => d.uuid);
 }

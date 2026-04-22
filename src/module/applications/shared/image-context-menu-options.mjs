@@ -12,8 +12,8 @@ const { ImagePopout } = foundry.applications.apps;
  */
 const imageContextMenuOptions = [
   {
-    label: "TERIOCK.SYSTEMS.Child.MENU.openImage",
     icon: makeIcon(icons.ui.image, "contextMenu"),
+    label: "TERIOCK.SYSTEMS.Child.MENU.openImage",
     onClick: async (_ev, target) => {
       await new ImagePopout({
         src: target.getAttribute("src"),
@@ -33,8 +33,8 @@ const imageContextMenuOptions = [
     },
   },
   {
-    label: "TERIOCK.SYSTEMS.Child.MENU.shareImage",
     icon: makeIcon(icons.ui.shareImage, "contextMenu"),
+    label: "TERIOCK.SYSTEMS.Child.MENU.shareImage",
     onClick: async (_ev, target) => {
       await chatImage(target.getAttribute("src"));
     },
@@ -44,8 +44,8 @@ const imageContextMenuOptions = [
     },
   },
   {
-    label: "TERIOCK.SYSTEMS.Child.MENU.openDocument",
     icon: makeIcon(icons.ui.openWindow, "contextMenu"),
+    label: "TERIOCK.SYSTEMS.Child.MENU.openDocument",
     onClick: async (_ev, target) => {
       const uuid = target.getAttribute("data-uuid");
       if (uuid) {

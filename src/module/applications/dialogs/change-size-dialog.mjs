@@ -15,11 +15,6 @@ export default async function changeSizeDialog(actor, species) {
       ` ${species.system.size.value} by default. Would you like to update the actor's size?</p>`;
     content = await TeriockTextEditor.enrichHTML(content);
     const dialog = new TeriockDialog({
-      window: {
-        title: _loc("TERIOCK.DIALOGS.ChangeSize.title"),
-        icon: makeIconClass(TERIOCK.display.icons.ui.confirm, "title"),
-      },
-      modal: true,
       buttons: [
         {
           action: "changeSize",
@@ -39,6 +34,11 @@ export default async function changeSizeDialog(actor, species) {
         },
       ],
       content,
+      modal: true,
+      window: {
+        title: _loc("TERIOCK.DIALOGS.ChangeSize.title"),
+        icon: makeIconClass(TERIOCK.display.icons.ui.confirm, "title"),
+      },
     });
     await dialog.render(true);
   }

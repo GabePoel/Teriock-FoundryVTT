@@ -14,8 +14,6 @@ export default class TeriockDialog extends BaseApplicationMixin(DialogV2) {
    * @type {Partial<ApplicationConfiguration>}
    */
   static DEFAULT_OPTIONS = {
-    window: {
-      icon: makeIconClass(icons.ui.edit, "title"),
-    },
+    window: { icon: makeIconClass(icons.ui.edit, "title") },
   };
 }

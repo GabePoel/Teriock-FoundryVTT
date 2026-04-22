@@ -104,8 +104,6 @@ export function quickAddAssociation(
 ) {
   if (docs.length > 0) {
     const association = {
-      title: title,
-      icon: icon,
       cards: docs.map((d) => {
         return {
           color: d.system.color,
@@ -120,6 +118,8 @@ export function quickAddAssociation(
           uuid: d.uuid,
         };
       }),
+      icon: icon,
+      title: title,
     };
     associations.push(association);
   }

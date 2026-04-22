@@ -40,16 +40,9 @@ export default async function deathBagDialog(actor) {
   }
   contentHTML.append(stonesHTML);
   await new TeriockDialog({
-    window: {
-      icon: makeIconClass(TERIOCK.display.icons.ui.deathBag, "title"),
-      title: _loc("TERIOCK.DIALOGS.DeathBag.title"),
-    },
-    content: contentHTML,
     buttons: [
       {
         action: "makePull",
-        label: _loc("TERIOCK.DIALOGS.DeathBag.BUTTONS.makePull"),
-        default: true,
         callback: async (_event, button) => {
           const stonesFormulas = {};
           for (const color of ["black", "red", "white"]) {
@@ -61,8 +54,15 @@ export default async function deathBagDialog(actor) {
             actor,
           );
         },
+        default: true,
+        label: _loc("TERIOCK.DIALOGS.DeathBag.BUTTONS.makePull"),
       },
     ],
+    content: contentHTML,
+    window: {
+      icon: makeIconClass(TERIOCK.display.icons.ui.deathBag, "title"),
+      title: _loc("TERIOCK.DIALOGS.DeathBag.title"),
+    },
   }).render(true);
 }
 
@@ -182,8 +182,8 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
       );
       const panel = await TeriockTextEditor.enrichPanel(panelParts);
       const chatMessageData = {
-        speaker: TeriockChatMessage.getSpeaker({ actor: actor }),
         content: pullContent,
+        speaker: TeriockChatMessage.getSpeaker({ actor: actor }),
         system: {
           panels: [panel],
           tags: [

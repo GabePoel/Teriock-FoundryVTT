@@ -106,11 +106,11 @@ export default class ConditionSystem extends mix(
   getCardContextMenuEntries(_doc) {
     return [
       {
-        label: this.useText,
+        group: "usage",
         icon: makeIcon(this.useIcon, "contextMenu"),
+        label: this.useText,
         onClick: this.use.bind(this),
         visible: this.parent.isOwner,
-        group: "usage",
       },
     ];
   }

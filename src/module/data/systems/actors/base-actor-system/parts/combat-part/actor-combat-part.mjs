@@ -44,10 +44,6 @@ export default (Base) => {
             }),
             hasReaction: new fields.BooleanField({ initial: true }),
           }),
-          initiative: new FormulaField({
-            initial: config.character.defaults.initiative,
-            deterministic: false,
-          }),
           defense: initialSchema({
             av: initialSchema({
               base: initialNumber(),
@@ -58,6 +54,10 @@ export default (Base) => {
             ac: initialNumber(10),
             bv: initialNumber(),
             cc: initialNumber(10),
+          }),
+          initiative: new FormulaField({
+            initial: config.character.defaults.initiative,
+            deterministic: false,
           }),
           offense: new fields.SchemaField({
             piercing: new fields.EmbeddedDataField(PiercingModel),

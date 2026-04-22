@@ -7,8 +7,8 @@ export default class AlternateRulesConfig extends BaseConfig {
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
     window: {
-      title: "TERIOCK.CONFIGS.AlternateRules.name",
       icon: makeIconClass(icons.settings.alternateRules, "title"),
+      title: "TERIOCK.CONFIGS.AlternateRules.name",
     },
   };
 

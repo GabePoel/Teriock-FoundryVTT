@@ -7,8 +7,8 @@ export default class GameMasterControlsConfig extends BaseConfig {
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
     window: {
-      title: "TERIOCK.CONFIGS.GameMasterControls.name",
       icon: makeIconClass(icons.settings.gameMasterControls, "title"),
+      title: "TERIOCK.CONFIGS.GameMasterControls.name",
     },
   };
 

@@ -1,3 +1,38 @@
+@mixin tgrid-item-base {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+
+  .hint {
+    display: none;
+  }
+
+  label {
+    flex: auto;
+    font-weight: unset;
+    line-height: unset;
+  }
+
+  &.form-group {
+    padding-inline: 0.5em;
+  }
+
+  .three-toggle .three-toggle-bg {
+    margin-top: 0;
+  }
+
+  multi-select {
+    flex-direction: column-reverse;
+    width: 100%;
+  }
+
+  button {
+    overflow: hidden;
+    width: 100%;
+  }
+}
+
 .tgrid {
   display: grid;
   gap: 0.5em;
@@ -5,51 +40,16 @@
 
   @for $i from 1 through 15 {
     &.g#{$i} {
-      grid-template-columns: repeat(#{$i}, 1fr);
+      grid-template-columns: repeat($i, 1fr);
     }
-
     .gi#{$i} {
       grid-column: span $i;
     }
   }
 
   .tgrid-item {
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: right;
-
-    .hint {
-      display: none;
-    }
-
-    label {
-      flex: auto;
-      font-weight: unset;
-      line-height: unset;
-    }
-
-    &.form-group {
-      padding-inline: 0.5em;
-    }
-
-    .three-toggle {
-      .three-toggle-bg {
-        margin-top: 0;
-      }
-    }
-
-    multi-select {
-      flex-direction: column-reverse;
-      width: 100%;
-    }
-
-    button {
-      overflow: hidden;
-      width: 100%;
-    }
+    @include tgrid-item-base;
   }
-
 }
 
 .teriock .ttable {
@@ -58,44 +58,7 @@
   gap: 0.5rem;
 
   .tgrid-item {
-    flex: 1 1 150px;
-
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: right;
-
-    .hint {
-      display: none;
-    }
-
-    label {
-      flex: auto;
-      font-weight: unset;
-      line-height: unset;
-    }
-
-    &.form-group {
-      padding-inline: 0.5em;
-    }
-
-    .three-toggle {
-      .three-toggle-bg {
-        margin-top: 0;
-      }
-    }
-
-    multi-select {
-      flex-direction: column-reverse;
-      width: 100%;
-    }
-
-    button {
-      overflow: hidden;
-      width: 100%;
-    }
+    @include tgrid-item-base;
+    flex: 1 1 125px;
   }
-
 }
-
-

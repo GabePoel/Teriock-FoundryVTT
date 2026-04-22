@@ -60,10 +60,7 @@ export default class FeatExecution extends ThresholdExecutionMixin(
 
   /** @inheritDoc */
   async _buildActivations() {
-    const impactByAttribute = {
-      per: "perceive",
-      snk: "hide",
-    };
+    const impactByAttribute = { per: "perceive", snk: "hide" };
     const impact = impactByAttribute[this.attribute];
     const amount = this.rolls[0]?.total;
     if (impact && Number.isFinite(amount)) {

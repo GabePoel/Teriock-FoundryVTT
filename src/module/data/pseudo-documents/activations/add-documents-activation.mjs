@@ -116,10 +116,10 @@ export default class AddDocumentsActivation extends BaseActivation {
     );
     const otherData = results.slice(pointer);
     return {
-      root: rootData,
       children: childrenData,
       grandchildren: grandchildrenData,
       other: otherData,
+      root: rootData,
     };
   }
 

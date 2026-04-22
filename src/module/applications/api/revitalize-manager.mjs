@@ -11,21 +11,16 @@ export default class TeriockRevitalizeManager extends TeriockStatManager {
    * @type {Partial<ApplicationConfiguration>}
    */
   static DEFAULT_OPTIONS = {
-    actions: {
-      rollStatDie: this._onRollStatDie,
-    },
+    actions: { rollStatDie: this._onRollStatDie },
     window: {
       icon: makeIconClass(impactConfig.revitalizing.icon, "title"),
-      title: "TERIOCK.DIALOGS.Revitalize.title",
       resizable: false,
+      title: "TERIOCK.DIALOGS.Revitalize.title",
     },
   };
 
   static PARTS = {
-    all: {
-      template: "teriock/dialogs/revitalize",
-      scrollable: [""],
-    },
+    all: { template: "teriock/dialogs/revitalize", scrollable: [""] },
   };
 
   /**

@@ -366,6 +366,7 @@ export const icons = {
     qualifier: "ms-mystery",
     quantity: "mdi-abacus",
     remove: "ms-close",
+    reset: "ms-replay",
     save: "ms-save",
     select: "ms-task-alt",
     shareImage: "ms-mms",

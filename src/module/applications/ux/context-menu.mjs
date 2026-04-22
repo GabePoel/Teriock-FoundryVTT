@@ -35,8 +35,8 @@ export default class TeriockContextMenu extends ContextMenu {
   static makeUpdateEntries(document, choices, options) {
     return choices.map((c) => {
       return {
-        label: c.label,
         icon: c.icon,
+        label: c.label,
         onClick: async () => {
           await document.update({
             [c.path || options.path]: c.value,

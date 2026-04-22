@@ -23,9 +23,7 @@ export default function HierarchyDocumentMixin(Base) {
     class HierarchyDocument extends Base {
       /** @inheritDoc */
       static get documentMetadata() {
-        return Object.assign(super.documentMetadata, {
-          hierarchy: true,
-        });
+        return Object.assign(super.documentMetadata, { hierarchy: true });
       }
 
       /**
@@ -213,9 +211,7 @@ export default function HierarchyDocumentMixin(Base) {
        * @returns {TypeCollection}
        */
       static findAllSups(document, collection) {
-        if (!this.findSup(document, collection)) {
-          return new TypeCollection();
-        }
+        if (!this.findSup(document, collection)) return new TypeCollection();
         return new TypeCollection(
           [this.findSup(document, collection)]
             .concat(
@@ -233,9 +229,7 @@ export default function HierarchyDocumentMixin(Base) {
        * @returns {TypeCollection}
        */
       static findSubs(document, collection) {
-        if (!collection) {
-          collection = document.siblingCollection;
-        }
+        if (!collection) collection = document.siblingCollection;
         const subArray = collection.filter(
           (d) => foundry.utils.getProperty(d, "system._sup") === document._id,
         );
@@ -249,9 +243,7 @@ export default function HierarchyDocumentMixin(Base) {
        * @returns {CommonDocument|undefined}
        */
       static findSup(document, collection) {
-        if (!collection) {
-          collection = document.siblingCollection;
-        }
+        if (!collection) collection = document.siblingCollection;
         if (document.system?._sup) {
           return collection?.get(document.system._sup);
         }

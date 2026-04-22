@@ -22,9 +22,9 @@ export default class ConsequenceSystem extends mix(
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
-      type: "consequence",
       childEffectTypes: ["ability", "fluency", "resource"],
       childItemTypes: ["body", "equipment", "power", "rank", "species"],
+      type: "consequence",
       visibleTypes: [
         "ability",
         "body",

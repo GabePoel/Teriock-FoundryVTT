@@ -155,8 +155,8 @@ export default class BaseMessageSystem extends mix(
    */
   async _prepareContext(options = {}) {
     return {
-      system: this,
       isContentVisible: this.document.isContentVisible,
+      system: this,
       ...options,
     };
   }

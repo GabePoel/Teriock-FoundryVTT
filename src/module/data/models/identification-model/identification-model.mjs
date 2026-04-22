@@ -127,11 +127,11 @@ export default class IdentificationModel extends EmbeddedDataModel {
         await game.users.queryGM(
           "teriock.update",
           {
-            uuid: this.parent.parent.uuid,
             data: {
               "system.identification.read": true,
               "system.powerLevel": this.powerLevel,
             },
+            uuid: this.parent.parent.uuid,
           },
           {
             failPrefix:
@@ -147,9 +147,7 @@ export default class IdentificationModel extends EmbeddedDataModel {
         ui.notifications.error(
           "TERIOCK.MODELS.Identification.QUERY.ReadMagic.failure",
           {
-            format: {
-              name: this.parent.parent.fullName,
-            },
+            format: { name: this.parent.parent.fullName },
             localize: true,
           },
         );

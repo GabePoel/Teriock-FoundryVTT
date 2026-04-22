@@ -51,24 +51,24 @@ export default function RevelationSystemMixin(Base) {
         return [
           ...super.getCardContextMenuEntries(doc),
           {
-            label: _loc("TERIOCK.SYSTEMS.Revelation.MENU.reveal"),
+            group: "reveal",
             icon: makeIcon(TERIOCK.display.icons.ui.show, "contextMenu"),
+            label: _loc("TERIOCK.SYSTEMS.Revelation.MENU.reveal"),
             onClick: async () =>
               this.parent.update({
                 "system.revealed": true,
               }),
             visible: !this.revealed && game.user.isGM && doc?.sheet?.isEditable,
-            group: "reveal",
           },
           {
-            label: _loc("TERIOCK.SYSTEMS.Revelation.MENU.unreveal"),
+            group: "reveal",
             icon: makeIcon(TERIOCK.display.icons.ui.hide, "contextMenu"),
+            label: _loc("TERIOCK.SYSTEMS.Revelation.MENU.unreveal"),
             onClick: async () =>
               this.parent.update({
                 "system.revealed": false,
               }),
             visible: this.revealed && game.user.isGM && doc?.sheet?.isEditable,
-            group: "reveal",
           },
         ];
       }

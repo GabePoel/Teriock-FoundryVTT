@@ -19,7 +19,7 @@ export default class TeriockRollTable extends mix(
   mixins.UsableDocumentMixin,
 ) {
   /**
-   * All the documents in this table's results.
+   * All the documents in the results of this table.
    * @return {Promise<TeriockDocument[]>}
    */
   async getAllContents() {
@@ -37,7 +37,7 @@ export default class TeriockRollTable extends mix(
   }
 
   /**
-   * The documents in this table's results.
+   * The documents in the results of this table.
    * @return {Promise<TeriockDocument[]>}
    */
   async getContents() {

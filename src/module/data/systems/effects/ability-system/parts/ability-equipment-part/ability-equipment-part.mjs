@@ -77,6 +77,9 @@ export default (Base) => {
       getCardContextMenuEntries(doc) {
         const entries = super.getCardContextMenuEntries(doc);
         entries.push({
+          group: "control",
+          icon: makeIcon(TERIOCK.display.icons.ability.scroll, "contextMenu"),
+          label: _loc("TERIOCK.SYSTEMS.Ability.EMBED.makeScroll"),
           onClick: async () => {
             const data = await this.toScroll();
             const op = { keepEmbeddedIds: true, renderSheet: true };
@@ -94,9 +97,6 @@ export default (Base) => {
             this.spell &&
             doc !== this.parent &&
             doc.sheet.isEditable,
-          group: "control",
-          icon: makeIcon(TERIOCK.display.icons.ability.scroll, "contextMenu"),
-          label: _loc("TERIOCK.SYSTEMS.Ability.EMBED.makeScroll"),
         });
         return entries;
       }
@@ -152,8 +152,8 @@ export default (Base) => {
             name: this.parent.fullName,
           }),
           system: {
-            identifier: `scroll-of-${this.parent.forcedIdentifier}`,
             consumable: true,
+            identifier: `scroll-of-${this.parent.forcedIdentifier}`,
             onUse: [this.parent.id],
             powerLevel: "enchanted",
             quantity: 1,

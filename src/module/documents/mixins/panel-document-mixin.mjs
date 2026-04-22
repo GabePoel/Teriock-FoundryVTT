@@ -90,11 +90,11 @@ export default function PanelDocumentMixin(Base) {
       /** @returns {Promise<Partial<Teriock.Messages.MessagePanel>>} */
       async getPanelParts() {
         return {
-          name: this.fullName || this.name,
-          image: systemPath("icons/documents/uncertainty.svg"),
-          icon: TERIOCK.display.icons.ui.document,
-          blocks: [],
           bars: [],
+          blocks: [],
+          icon: TERIOCK.display.icons.ui.document,
+          image: systemPath("icons/documents/uncertainty.svg"),
+          name: this.fullName || this.name,
         };
       }
 

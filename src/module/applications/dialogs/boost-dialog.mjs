@@ -23,26 +23,26 @@ export default async function boostDialog(rollFormula, options = {}) {
   } = options;
   let formula = rollFormula;
   const formulaField = new fields.StringField({
+    hint: _loc("TERIOCK.DIALOGS.Boost.FIELDS.formula.hint"),
     initial: rollFormula,
     label: _loc("TERIOCK.DIALOGS.Boost.FIELDS.formula.label"),
-    hint: _loc("TERIOCK.DIALOGS.Boost.FIELDS.formula.hint"),
   });
   const boostsField = new fields.NumberField({
-    min: 0,
+    hint: _loc("TERIOCK.DIALOGS.Boost.FIELDS.boosts.hint"),
     initial: 0,
     label: _loc("TERIOCK.DIALOGS.Boost.FIELDS.boosts.label"),
-    hint: _loc("TERIOCK.DIALOGS.Boost.FIELDS.boosts.hint"),
+    min: 0,
   });
   const deboostsField = new fields.NumberField({
-    min: 0,
+    hint: _loc("TERIOCK.DIALOGS.Boost.FIELDS.deboosts.hint"),
     initial: 0,
     label: _loc("TERIOCK.DIALOGS.Boost.FIELDS.deboosts.label"),
-    hint: _loc("TERIOCK.DIALOGS.Boost.FIELDS.deboosts.hint"),
+    min: 0,
   });
   const critField = new fields.BooleanField({
-    label: _loc("TERIOCK.DIALOGS.Boost.FIELDS.crit.label"),
-    initial: crit,
     hint: _loc("TERIOCK.DIALOGS.Boost.FIELDS.crit.hint"),
+    initial: crit,
+    label: _loc("TERIOCK.DIALOGS.Boost.FIELDS.crit.label"),
   });
   const contentHtml = document.createElement("div");
   contentHtml.append(

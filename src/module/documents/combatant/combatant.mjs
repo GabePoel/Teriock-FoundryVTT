@@ -25,13 +25,13 @@ export default class TeriockCombatant extends mix(
   get embedParts() {
     const parts = super.embedParts;
     return Object.assign(parts, {
+      inactive: this.isDefeated,
+      struck: this.isDefeated,
       text: dotJoin([
         this.isDefeated ? _loc("TERIOCK.SYSTEMS.Combatant.EMBED.defeated") : "",
         this.hidden ? _loc("TERIOCK.SYSTEMS.Combatant.EMBED.hidden") : "",
         parts.text,
       ]),
-      inactive: this.isDefeated,
-      struck: this.isDefeated,
     });
   }
 

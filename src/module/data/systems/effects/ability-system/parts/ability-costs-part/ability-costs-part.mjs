@@ -31,6 +31,25 @@ export default (Base) => {
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           costs: new fields.SchemaField({
+            components: new fields.SchemaField(
+              objectMap(costConfig.components.keys, (v) => {
+                const label = _loc("TERIOCK.COSTS.Long.component", {
+                  key: _loc(v),
+                });
+                return new fields.SchemaField(
+                  {
+                    description: new TextField({ label }),
+                    type: new fields.StringField({
+                      choices: localizeChoices(costConfig.components.types),
+                      initial: null,
+                      label,
+                      nullable: true,
+                    }),
+                  },
+                  { label },
+                );
+              }),
+            ),
             primary: new fields.SchemaField(
               objectMap(costConfig.primary.keys, (v) => {
                 const label = _loc("TERIOCK.COSTS.Long.primary", {
@@ -42,25 +61,6 @@ export default (Base) => {
                     formula: new FormulaField({ label, deterministic: false }),
                     type: new fields.StringField({
                       choices: localizeChoices(costConfig.primary.types),
-                      initial: null,
-                      label,
-                      nullable: true,
-                    }),
-                  },
-                  { label },
-                );
-              }),
-            ),
-            components: new fields.SchemaField(
-              objectMap(costConfig.components.keys, (v) => {
-                const label = _loc("TERIOCK.COSTS.Long.component", {
-                  key: _loc(v),
-                });
-                return new fields.SchemaField(
-                  {
-                    description: new TextField({ label }),
-                    type: new fields.StringField({
-                      choices: localizeChoices(costConfig.components.types),
                       initial: null,
                       label,
                       nullable: true,
@@ -96,8 +96,8 @@ export default (Base) => {
               source.costs[pointCost] = {
                 type: "none",
                 value: {
-                  static: 0,
                   formula: "",
+                  static: 0,
                   variable: "",
                 },
               };
@@ -109,8 +109,8 @@ export default (Base) => {
               source.costs[pointCost] = {
                 type: "variable",
                 value: {
-                  static: 0,
                   formula: "",
+                  static: 0,
                   variable: variableCost || "",
                 },
               };
@@ -119,8 +119,8 @@ export default (Base) => {
               source.costs[pointCost] = {
                 type: "static",
                 value: {
-                  static: Number(source.costs[pointCost]),
                   formula: "",
+                  static: Number(source.costs[pointCost]),
                   variable: "",
                 },
               };
@@ -129,8 +129,8 @@ export default (Base) => {
               source.costs[pointCost] = {
                 type: "static",
                 value: {
-                  static: source.costs[pointCost].value,
                   formula: "",
+                  static: source.costs[pointCost].value,
                   variable: "",
                 },
               };
@@ -139,8 +139,8 @@ export default (Base) => {
               source.costs[pointCost] = {
                 type: "variable",
                 value: {
-                  static: 0,
                   formula: "",
+                  static: 0,
                   variable: String(source.costs[pointCost].value),
                 },
               };

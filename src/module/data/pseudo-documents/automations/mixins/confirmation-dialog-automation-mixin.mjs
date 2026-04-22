@@ -79,8 +79,8 @@ export default function ConfirmationDialogAutomationMixin(Base) {
       async getConfirmation(options = {}, dialog = {}) {
         const data = Object.assign(
           {
-            document: this.document.fullName ?? this.document.name ?? "",
             automation: _loc(this.label) ?? "",
+            document: this.document.fullName ?? this.document.name ?? "",
           },
           options.data ?? {},
         );

@@ -100,17 +100,6 @@ export async function selectDialog(choices, options = {}) {
   );
 
   return await TeriockDialog.prompt({
-    window: {
-      icon: makeIconClass(TERIOCK.display.icons.ui.select, "title"),
-      title,
-    },
-    modal: true,
-    content: selectContentHtml,
-    ok: {
-      default: true,
-      callback: (_event, button) =>
-        button.form.elements.namedItem("selected").value,
-    },
     buttons: [
       {
         action: "other",
@@ -122,20 +111,31 @@ export async function selectDialog(choices, options = {}) {
           }
 
           return await TeriockDialog.prompt({
-            window: {
-              icon: makeIconClass(TERIOCK.display.icons.ui.custom, "title"),
-              title,
-            },
-            modal: true,
             content: otherContentHtml,
+            modal: true,
             ok: {
               callback: (_event, button) =>
                 button.form.elements.namedItem("other").value,
+            },
+            window: {
+              icon: makeIconClass(TERIOCK.display.icons.ui.custom, "title"),
+              title,
             },
           });
         },
       },
     ],
+    content: selectContentHtml,
+    modal: true,
+    ok: {
+      default: true,
+      callback: (_event, button) =>
+        button.form.elements.namedItem("selected").value,
+    },
+    window: {
+      icon: makeIconClass(TERIOCK.display.icons.ui.select, "title"),
+      title,
+    },
   });
 }
 

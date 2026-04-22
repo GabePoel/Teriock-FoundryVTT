@@ -13,16 +13,12 @@ import TeriockVisionMode from "./base-vision-mode.mjs";
 export default function deadVisionMode() {
   return new TeriockVisionMode(
     {
-      id: "dead",
-      label: "TERIOCK.PERCEPTION.VisionModes.dead",
       canvas: {
         shader: shaders.ColorAdjustmentsSamplerShader,
-        uniforms: {
-          contrast: 0,
-          saturation: -0.8,
-          exposure: -0.65,
-        },
+        uniforms: { contrast: 0, saturation: -0.8, exposure: -0.65 },
       },
+      id: "dead",
+      label: "TERIOCK.PERCEPTION.VisionModes.dead",
       lighting: {
         background: {
           visibility: TeriockVisionMode.LIGHTING_VISIBILITY.DISABLED,

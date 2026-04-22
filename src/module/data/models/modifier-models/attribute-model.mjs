@@ -25,19 +25,13 @@ export default class AttributeModel extends BaseModifierModel {
 
   /** @inheritDoc */
   async _use(options) {
-    options = {
-      actor: this.actor,
-      attribute: this.key,
-      ...options,
-    };
+    options = { actor: this.actor, attribute: this.key, ...options };
     await new FeatExecution(options).execute();
   }
 
   /** @inheritDoc */
   getLocalRollData() {
-    return Object.assign(super.getLocalRollData(), {
-      pas: this.passive,
-    });
+    return Object.assign(super.getLocalRollData(), { pas: this.passive });
   }
 
   /** @inheritDoc */

@@ -9,9 +9,9 @@ import { icons } from "../../../constants/display/icons.mjs";
 async function takeShatter(actor) {
   const choices = actor.equipment.filter((e) => !e.system.shattered);
   const chosen = await selectDocumentsDialog(choices, {
-    title: "TERIOCK.SYSTEMS.Equipment.MENU.shatter",
     hint: "TERIOCK.COMMANDS.Shatter.hint",
     localize: true,
+    title: "TERIOCK.SYSTEMS.Equipment.MENU.shatter",
   });
   await Promise.all(chosen.map((e) => e.system.shatter()));
 }
@@ -24,9 +24,9 @@ async function takeShatter(actor) {
 async function takeRepair(actor) {
   const choices = actor.equipment.filter((e) => e.system.shattered);
   const chosen = await selectDocumentsDialog(choices, {
-    title: "TERIOCK.SYSTEMS.Equipment.MENU.repair",
     hint: "TERIOCK.COMMANDS.Repair.hint",
     localize: true,
+    title: "TERIOCK.SYSTEMS.Equipment.MENU.repair",
   });
   await Promise.all(chosen.map((e) => e.system.repair()));
 }
@@ -39,9 +39,9 @@ async function takeRepair(actor) {
 async function takeDestroy(actor) {
   const choices = actor.equipment.filter((e) => !e.system.destroyed);
   const chosen = await selectDocumentsDialog(choices, {
-    title: "TERIOCK.SYSTEMS.Equipment.MENU.destroy",
     hint: "TERIOCK.COMMANDS.Destroy.hint",
     localize: true,
+    title: "TERIOCK.SYSTEMS.Equipment.MENU.destroy",
   });
   await Promise.all(chosen.map((e) => e.system.destroy()));
 }
@@ -54,9 +54,9 @@ async function takeDestroy(actor) {
 async function takeReforge(actor) {
   const choices = actor.equipment.filter((e) => e.system.destroyed);
   const chosen = await selectDocumentsDialog(choices, {
-    title: "TERIOCK.SYSTEMS.Equipment.MENU.reforge",
     hint: "TERIOCK.COMMANDS.Reforge.hint",
     localize: true,
+    title: "TERIOCK.SYSTEMS.Equipment.MENU.reforge",
   });
   await Promise.all(chosen.map((e) => e.system.reforge()));
 }
@@ -69,9 +69,9 @@ async function takeReforge(actor) {
 async function takeGlue(actor) {
   const choices = actor.equipment.filter((e) => !e.system.glued);
   const chosen = await selectDocumentsDialog(choices, {
-    title: "TERIOCK.SYSTEMS.Equipment.MENU.glue",
     hint: "TERIOCK.COMMANDS.Glue.hint",
     localize: true,
+    title: "TERIOCK.SYSTEMS.Equipment.MENU.glue",
   });
   await Promise.all(chosen.map((e) => e.system.glue()));
 }
@@ -84,9 +84,9 @@ async function takeGlue(actor) {
 async function takeUnglue(actor) {
   const choices = actor.equipment.filter((e) => e.system.glued);
   const chosen = await selectDocumentsDialog(choices, {
-    title: "TERIOCK.SYSTEMS.Equipment.MENU.unglue",
     hint: "TERIOCK.COMMANDS.Unglue.hint",
     localize: true,
+    title: "TERIOCK.SYSTEMS.Equipment.MENU.unglue",
   });
   await Promise.all(chosen.map((e) => e.system.unglue()));
 }
@@ -99,9 +99,9 @@ async function takeUnglue(actor) {
 async function takeDampen(actor) {
   const choices = actor.equipment.filter((e) => !e.system.dampened);
   const chosen = await selectDocumentsDialog(choices, {
-    title: "TERIOCK.SYSTEMS.Equipment.MENU.dampen",
     hint: "TERIOCK.COMMANDS.Dampen.hint",
     localize: true,
+    title: "TERIOCK.SYSTEMS.Equipment.MENU.dampen",
   });
   await Promise.all(chosen.map((e) => e.system.dampen()));
 }
@@ -114,9 +114,9 @@ async function takeDampen(actor) {
 async function takeUndampen(actor) {
   const choices = actor.equipment.filter((e) => e.system.dampened);
   const chosen = await selectDocumentsDialog(choices, {
-    title: "TERIOCK.SYSTEMS.Equipment.MENU.undampen",
     hint: "TERIOCK.COMMANDS.Undampen.hint",
     localize: true,
+    title: "TERIOCK.SYSTEMS.Equipment.MENU.undampen",
   });
   await Promise.all(chosen.map((e) => e.system.undampen()));
 }
@@ -131,9 +131,9 @@ async function takeIdentify(actor) {
     (e) => !e.system.identification.identified,
   );
   const chosen = await selectDocumentsDialog(choices, {
-    title: "TERIOCK.SYSTEMS.Equipment.MENU.identify",
     hint: "TERIOCK.COMMANDS.Identify.hint",
     localize: true,
+    title: "TERIOCK.SYSTEMS.Equipment.MENU.identify",
   });
   await Promise.all(chosen.map((e) => e.system.identification.identify()));
 }
@@ -146,9 +146,9 @@ async function takeIdentify(actor) {
 async function takeReadMagic(actor) {
   const choices = actor.equipment.filter((e) => !e.system.identification.read);
   const chosen = await selectDocumentsDialog(choices, {
-    title: "TERIOCK.SYSTEMS.Equipment.MENU.glue",
     hint: "TERIOCK.COMMANDS.Glue.hint",
     localize: true,
+    title: "TERIOCK.SYSTEMS.Equipment.MENU.glue",
   });
   await Promise.all(chosen.map((e) => e.system.identification.readMagic()));
 }

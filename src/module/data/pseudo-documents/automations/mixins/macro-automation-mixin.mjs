@@ -42,9 +42,7 @@ export default function MacroAutomationMixin(Base) {
 
       /** @inheritDoc */
       static get metadata() {
-        return Object.assign(super.metadata, {
-          macro: true,
-        });
+        return Object.assign(super.metadata, { macro: true });
       }
 
       /** @inheritDoc */
@@ -92,8 +90,8 @@ export default function MacroAutomationMixin(Base) {
         const macro = await resolveDocument(this.macro);
         return [
           new MacroActivation({
-            macro: this.macro,
             display: { label: this.display.label || macro?.name || this.label },
+            macro: this.macro,
           }),
         ];
       }

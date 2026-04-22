@@ -75,7 +75,9 @@ export default class MountSystem extends mix(
   get embedParts() {
     const parts = super.embedParts;
     return Object.assign(parts, {
-      subtitle: inferNameFromIdentifier(`mount:${this.mountType}`),
+      subtitle: this.mountType
+        ? inferNameFromIdentifier(`mount:${this.mountType}`)
+        : "",
       text: dotJoin([...this._attunableWrappers, parts.text]),
     });
   }
@@ -94,9 +96,11 @@ export default class MountSystem extends mix(
         label: _loc("TERIOCK.SYSTEMS.Mount.PANELS.load"),
         wrappers: [
           _loc("TERIOCK.SYSTEMS.Attunable.PANELS.tier", {
-            value: this.tier.text,
-          }) || "0",
-          this.mountType,
+            value: this.tier.text || "0",
+          }),
+          this.mountType
+            ? inferNameFromIdentifier(`mount:${this.mountType}`)
+            : "",
         ],
       },
     ];
@@ -107,24 +111,24 @@ export default class MountSystem extends mix(
     return [
       ...super.getCardContextMenuEntries(doc),
       {
-        label: _loc("TERIOCK.SYSTEMS.Mount.MENU.mount"),
+        group: "control",
         icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
+        label: _loc("TERIOCK.SYSTEMS.Mount.MENU.mount"),
         onClick: this.mount.bind(this),
         visible:
           !this.mounted &&
           this.actor &&
           this.parent._checkValidEditorDocument(doc, { self: false }),
-        group: "control",
       },
       {
-        label: _loc("TERIOCK.SYSTEMS.Mount.MENU.unmount"),
+        group: "control",
         icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
+        label: _loc("TERIOCK.SYSTEMS.Mount.MENU.unmount"),
         onClick: this.unmount.bind(this),
         visible:
           this.mounted &&
           this.actor &&
           this.parent._checkValidEditorDocument(doc, { self: false }),
-        group: "control",
       },
     ];
   }

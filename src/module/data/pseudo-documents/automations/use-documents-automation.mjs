@@ -96,16 +96,16 @@ export default class UseDocumentsAutomation extends mix(
     const title = doc.name;
     const symbol = TERIOCK.config.document[doc.type]?.icon;
     return new UseExternalActivation({
-      title,
-      symbol,
       options: {
-        uuid,
         competence: this.overrideCompetence
           ? this.competence.raw
           : this.document.system.competence.raw,
         expandTables: this.expandTables,
         noHeighten: this.noHeighten,
+        uuid,
       },
+      symbol,
+      title,
     });
   }
 
@@ -117,11 +117,11 @@ export default class UseDocumentsAutomation extends mix(
   #makeLocalActivation(identifier) {
     return new UseLocalActivation({
       options: {
-        lookup: identifier,
-        noHeighten: this.noHeighten,
         competence: this.overrideCompetence
           ? this.competence.raw
           : (this.document?.system?.competence?.raw ?? undefined),
+        lookup: identifier,
+        noHeighten: this.noHeighten,
       },
     });
   }

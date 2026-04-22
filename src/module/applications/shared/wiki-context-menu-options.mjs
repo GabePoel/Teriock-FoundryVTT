@@ -4,8 +4,8 @@ import { makeIcon } from "../../helpers/utils.mjs";
 
 const wikiContextMenuOptions = [
   {
-    label: "TERIOCK.SYSTEMS.Common.MENU.viewOnWiki",
     icon: makeIcon(icons.ui.wiki, "contextMenu"),
+    label: "TERIOCK.SYSTEMS.Common.MENU.viewOnWiki",
     onClick: (_ev, target) => {
       const address = target.dataset.wikiAddress;
       if (address) {
@@ -15,8 +15,8 @@ const wikiContextMenuOptions = [
     visible: () => game.teriock.getSetting("systemLinks"),
   },
   {
-    label: "TERIOCK.SYSTEMS.Common.MENU.viewInFoundry",
     icon: makeIcon(icons.ui.openWindow, "contextMenu"),
+    label: "TERIOCK.SYSTEMS.Common.MENU.viewInFoundry",
     onClick: async (_ev, target) => {
       const uuid = target.dataset.uuid;
       if (uuid) {
@@ -35,8 +35,8 @@ const wikiContextMenuOptions = [
     visible: () => !game.teriock.getSetting("systemLinks"),
   },
   {
-    label: "TERIOCK.COMMANDS.Status.toggleUnnamed",
     icon: makeIcon(icons.ui.toggle, "contextMenu"),
+    label: "TERIOCK.COMMANDS.Status.toggleUnnamed",
     onClick: async (_ev, target) => {
       const condition = toCamelCase(
         target.dataset.tooltip.split("Condition: ")[1],
@@ -51,8 +51,8 @@ const wikiContextMenuOptions = [
       game.actors.default,
   },
   {
-    label: "TERIOCK.EFFECTS.Common.bag",
     icon: makeIcon(icons.ui.deathBag, "contextMenu"),
+    label: "TERIOCK.EFFECTS.Common.bag",
     onClick: async () => {
       await game.actors.default.system.deathBagPull();
     },
@@ -61,8 +61,8 @@ const wikiContextMenuOptions = [
       game.actors.default,
   },
   {
-    label: "TERIOCK.EFFECTS.Common.heal",
     icon: makeIcon(icons.effect.heal, "contextMenu"),
+    label: "TERIOCK.EFFECTS.Common.heal",
     onClick: async () => {
       await game.actors.default.system.takeHeal();
     },
@@ -70,8 +70,8 @@ const wikiContextMenuOptions = [
       target.dataset.tooltip === "Core: Healing" && game.actors.default,
   },
   {
-    label: "TERIOCK.EFFECTS.Common.revitalize",
     icon: makeIcon(icons.effect.heal, "contextMenu"),
+    label: "TERIOCK.EFFECTS.Common.revitalize",
     onClick: async () => {
       await game.actors.default.system.takeRevitalize();
     },
@@ -79,8 +79,8 @@ const wikiContextMenuOptions = [
       target.dataset.tooltip === "Core: Revitalizing" && game.actors.default,
   },
   {
-    label: "TERIOCK.EFFECTS.Common.awaken",
     icon: makeIcon(icons.effect.awaken, "contextMenu"),
+    label: "TERIOCK.EFFECTS.Common.awaken",
     onClick: async () => {
       await game.actors.default.system.takeAwaken();
     },
@@ -88,8 +88,8 @@ const wikiContextMenuOptions = [
       target.dataset.tooltip === "Keyword: Awaken" && game.actors.default,
   },
   {
-    label: "TERIOCK.ROLLS.Resist.button",
     icon: makeIcon(icons.effect.resist, "contextMenu"),
+    label: "TERIOCK.ROLLS.Resist.button",
     onClick: async () => {
       await game.actors.default.system.rollResistance();
     },
@@ -99,8 +99,8 @@ const wikiContextMenuOptions = [
       ) && game.actors.default,
   },
   {
-    label: "TERIOCK.COMMANDS.UseAbility.useResist",
     icon: makeIcon(icons.document.ability, "contextMenu"),
+    label: "TERIOCK.COMMANDS.UseAbility.useResist",
     onClick: async () => {
       await game.actors.default.useDocument("ability:resist");
     },
@@ -110,8 +110,8 @@ const wikiContextMenuOptions = [
       ) && game.actors.default,
   },
   {
-    label: "TERIOCK.COMMANDS.UseAbility.useUnnamed",
     icon: makeIcon(icons.document.ability, "contextMenu"),
+    label: "TERIOCK.COMMANDS.UseAbility.useUnnamed",
     onClick: async (_ev, target) => {
       const abilityName = target.dataset.tooltip.split("Ability: ")[1];
       await game.actors.default.useDocument(

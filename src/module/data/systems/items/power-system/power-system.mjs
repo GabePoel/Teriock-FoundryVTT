@@ -115,8 +115,8 @@ export default class PowerSystem extends mix(
     return {
       ...super.getLocalRollData(),
       [`type.${toCamelCase(this.type)}`]: 1,
-      maxAv: this.maxAv,
       av: this.maxAv,
+      maxAv: this.maxAv,
     };
   }
 

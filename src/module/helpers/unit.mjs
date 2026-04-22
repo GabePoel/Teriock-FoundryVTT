@@ -1,5 +1,5 @@
 /**
- * Convert unit name to a consistent standard.
+ * Convert some unit name to a consistent standard.
  * @param {string} unit
  * @returns {string}
  */

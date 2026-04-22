@@ -40,8 +40,6 @@ export default class ImmunityExecution extends BaseExecution {
   /** @inheritDoc */
   async _buildPanels() {
     this.panels.push({
-      image: this.img,
-      name: this.name,
       bars: [
         {
           icon: TERIOCK.display.icons.effect.immune,
@@ -51,12 +49,14 @@ export default class ImmunityExecution extends BaseExecution {
       ],
       blocks: [
         {
-          title: this.name,
           text: TERIOCK.content.keywords[this.rule],
+          title: this.name,
         },
       ],
       icon: TERIOCK.display.icons.effect.protection,
+      image: this.img,
       label: _loc("TERIOCK.TERMS.Common.protection"),
+      name: this.name,
     });
     await TeriockTextEditor.enrichPanels(this.panels);
   }

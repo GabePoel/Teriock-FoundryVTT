@@ -31,17 +31,17 @@ export default class AttunementSystem extends CleanedEffectSystem {
   /** @inheritDoc */
   static defineSchema() {
     return foundry.utils.mergeObject(super.defineSchema(), {
-      type: new fields.StringField({
-        initial: "effect",
-        choices: localizeChoices(
-          objectMap(attunementConfig.type, (v) => v.label),
-        ),
-      }),
-      target: new fields.DocumentIdField({ nullable: true, initial: null }),
       inheritTier: new fields.BooleanField({ initial: true }),
+      target: new fields.DocumentIdField({ nullable: true, initial: null }),
       tier: new fields.NumberField({
         label: "TERIOCK.SYSTEMS.Attunable.FIELDS.tier.raw.label",
         initial: 0,
+      }),
+      type: new fields.StringField({
+        choices: localizeChoices(
+          objectMap(attunementConfig.type, (v) => v.label),
+        ),
+        initial: "effect",
       }),
     });
   }
@@ -140,10 +140,10 @@ export default class AttunementSystem extends CleanedEffectSystem {
     return [
       ...entries,
       {
-        label: _loc("TERIOCK.SYSTEMS.Attunable.MENU.deattune"),
-        icon: makeIcon(TERIOCK.display.icons.attunable.deattune, "contextMenu"),
-        onClick: async () => await this.deattune(),
         group: "attunement",
+        icon: makeIcon(TERIOCK.display.icons.attunable.deattune, "contextMenu"),
+        label: _loc("TERIOCK.SYSTEMS.Attunable.MENU.deattune"),
+        onClick: async () => await this.deattune(),
       },
     ];
   }
@@ -176,18 +176,18 @@ export default class AttunementSystem extends CleanedEffectSystem {
     if (this.targetDocument) {
       parts.associations = [
         {
-          title: _loc("TERIOCK.SYSTEMS.Attunement.PANELS.for"),
-          icon: TERIOCK.config.document.attunement.icon,
           cards: [
             {
-              name: this.targetDocument.fullName,
-              uuid: this.targetDocument.uuid,
-              makeTooltip: true,
-              img: this.targetDocument.img,
               color: this.targetDocument.system.color,
+              img: this.targetDocument.img,
+              makeTooltip: true,
+              name: this.targetDocument.fullName,
               type: this.targetDocument.type,
+              uuid: this.targetDocument.uuid,
             },
           ],
+          icon: TERIOCK.config.document.attunement.icon,
+          title: _loc("TERIOCK.SYSTEMS.Attunement.PANELS.for"),
         },
       ];
     }

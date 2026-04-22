@@ -22,7 +22,6 @@ import { wikiToUuid } from "../../helpers/wiki.mjs";
  * @type {TextEditorEnricherConfig}
  */
 const wikiLinkEnricher = {
-  pattern: /@L\[(.+?)\](?:\{(.+?)\})?/g,
   enricher: async (match) => {
     const pageName = match[1];
     let displayText = match[2];
@@ -72,6 +71,7 @@ const wikiLinkEnricher = {
     link.appendChild(document.createTextNode(linkText));
     return link;
   },
+  pattern: /@L\[(.+?)\](?:\{(.+?)\})?/g,
   replaceParent: false,
 };
 

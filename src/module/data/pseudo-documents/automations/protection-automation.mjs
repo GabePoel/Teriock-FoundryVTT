@@ -33,12 +33,6 @@ export default class ProtectionAutomation extends CritAutomation {
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      relation: new fields.StringField({
-        choices: localizeChoices(
-          objectMap(protectionConfig.types, (t) => t.label),
-        ),
-        initial: "resistances",
-      }),
       category: new fields.StringField({
         choices: localizeChoices(
           objectMap(protectionConfig.categories, (c) => c.label),
@@ -47,6 +41,12 @@ export default class ProtectionAutomation extends CritAutomation {
       }),
       description: new fields.StringField({
         label: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
+      }),
+      relation: new fields.StringField({
+        choices: localizeChoices(
+          objectMap(protectionConfig.types, (t) => t.label),
+        ),
+        initial: "resistances",
       }),
       value: new fields.StringField(),
     });

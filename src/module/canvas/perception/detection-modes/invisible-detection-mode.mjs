@@ -7,9 +7,6 @@ import LightPerception from "./light-detection-mode.mjs";
 export default class InvisibleDetectionMode extends LightPerception {
   /** @inheritDoc */
   static BLOCKING_STATUSES = {
-    sight: {
-      src: ["blind"],
-      tgt: [],
-    },
+    sight: { src: ["blind"], tgt: [] },
   };
 }

@@ -17,8 +17,6 @@ export default class CommonMacroAutomation extends MacroAutomationMixin(
 
   /** @inheritDoc */
   static get _triggerChoices() {
-    return {
-      execution: triggers.execution,
-    };
+    return { execution: triggers.execution };
   }
 }

@@ -25,9 +25,7 @@ export default function ChildDocumentMixin(Base) {
     ) {
       /** @inheritDoc */
       static get documentMetadata() {
-        return Object.assign(super.documentMetadata, {
-          child: true,
-        });
+        return Object.assign(super.documentMetadata, { child: true });
       }
 
       /**

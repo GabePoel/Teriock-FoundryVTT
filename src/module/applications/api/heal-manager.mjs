@@ -23,10 +23,7 @@ export default class TeriockHealManager extends TeriockStatManager {
   };
 
   static PARTS = {
-    all: {
-      template: "teriock/dialogs/heal",
-      scrollable: [""],
-    },
+    all: { scrollable: [""], template: "teriock/dialogs/heal" },
   };
 
   /**

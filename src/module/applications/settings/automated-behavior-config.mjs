@@ -7,16 +7,16 @@ export default class GameContentConfig extends BaseConfig {
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
     window: {
-      title: "TERIOCK.CONFIGS.AutomatedBehavior.name",
       icon: makeIconClass(icons.settings.automatedBehavior, "title"),
+      title: "TERIOCK.CONFIGS.AutomatedBehavior.name",
     },
   };
 
   /** @inheritDoc */
   static PARTS = {
-    general: super.PARTS.general,
     armaments: { template: "teriock/settings/base-config" },
     footer: super.PARTS.footer,
+    general: super.PARTS.general,
   };
 
   /** @inheritDoc */

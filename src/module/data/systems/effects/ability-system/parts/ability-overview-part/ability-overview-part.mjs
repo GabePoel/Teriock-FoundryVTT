@@ -23,8 +23,8 @@ export default (Base) => {
           limitation: new TextField({ initial: "" }),
           overview: new fields.SchemaField({
             base: new TextField({ initial: "" }),
-            proficient: new TextField({ initial: "" }),
             fluent: new TextField({ initial: "" }),
+            proficient: new TextField({ initial: "" }),
           }),
           requirements: new TextField({ initial: "" }),
           trigger: new TextField({ initial: "" }),

@@ -10,20 +10,6 @@ export default async function newDocumentDialog(type) {
   const name = TERIOCK.config.document[type].name;
   const typeName = name.toLowerCase();
   return await TeriockDialog.prompt({
-    content: _loc("TERIOCK.DIALOGS.NewDocument.content", {
-      typeName,
-    }),
-    window: {
-      title: _loc("TERIOCK.DIALOGS.NewDocument.title", { name }),
-      icon: makeIconClass(TERIOCK.display.icons.ui.add, "title"),
-    },
-    modal: true,
-    ok: {
-      label: _loc("TERIOCK.DIALOGS.NewDocument.BUTTONS.import"),
-      default: true,
-      callback: () => "import",
-      icon: makeIconClass(TERIOCK.display.icons.ui.import, "button"),
-    },
     buttons: [
       {
         label: _loc("TERIOCK.DIALOGS.NewDocument.BUTTONS.create"),
@@ -31,5 +17,17 @@ export default async function newDocumentDialog(type) {
         icon: makeIconClass(TERIOCK.display.icons.ui.custom, "button"),
       },
     ],
+    content: _loc("TERIOCK.DIALOGS.NewDocument.content", { typeName }),
+    modal: true,
+    ok: {
+      label: _loc("TERIOCK.DIALOGS.NewDocument.BUTTONS.import"),
+      default: true,
+      callback: () => "import",
+      icon: makeIconClass(TERIOCK.display.icons.ui.import, "button"),
+    },
+    window: {
+      title: _loc("TERIOCK.DIALOGS.NewDocument.title", { name }),
+      icon: makeIconClass(TERIOCK.display.icons.ui.add, "title"),
+    },
   });
 }

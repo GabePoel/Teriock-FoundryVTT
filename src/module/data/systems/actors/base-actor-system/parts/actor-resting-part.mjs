@@ -81,13 +81,13 @@ export default (Base) => {
         if (this.parent.statuses.has("dead")) return;
         if (!game.teriock.getSetting("showLongRestDialog")) return;
         const heal = await TeriockDialog.confirm({
+          content: _loc("TERIOCK.SHEETS.Actor.ACTIONS.TakeLongRest.healText"),
+          modal: true,
+          rejectClose: false,
           window: {
             title: _loc("TERIOCK.SHEETS.Actor.ACTIONS.TakeLongRest.label"),
             icon: makeIconClass(TERIOCK.display.icons.ui.longRest, "title"),
           },
-          content: _loc("TERIOCK.SHEETS.Actor.ACTIONS.TakeLongRest.healText"),
-          modal: true,
-          rejectClose: false,
         });
         if (!heal) return;
         await this.partialReset({

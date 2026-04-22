@@ -66,6 +66,7 @@ export async function selectDocumentsDialog(documents, options = {}) {
     const id = foundry.utils.getProperty(doc, options.idKey);
     idToDoc.set(id, doc);
     context.documents[id] = {
+      checked: options.checked.includes(id),
       img: foundry.utils.getProperty(doc, options.imgKey),
       name: foundry.utils.getProperty(doc, options.nameKey),
       rescale: doc.rescale || false,
@@ -77,7 +78,6 @@ export async function selectDocumentsDialog(documents, options = {}) {
         options.tooltipAsync || options.openable
           ? foundry.utils.getProperty(doc, options.tooltipUUID)
           : undefined,
-      checked: options.checked.includes(id),
     };
     if (options.textKey) {
       context.documents[id].text =

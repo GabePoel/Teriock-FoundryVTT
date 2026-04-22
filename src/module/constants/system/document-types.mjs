@@ -5,6 +5,10 @@ export const documentTypes = {
     character: "TYPES.Actor.character",
     creature: "TYPES.Actor.creature",
   },
+  card: {
+    stone: "TYPES.Card.stone",
+    card: "TYPES.Card.card",
+  },
   effects: {
     ability: "TYPES.ActiveEffect.ability",
     attunement: "TYPES.ActiveEffect.attunement",
@@ -17,8 +21,8 @@ export const documentTypes = {
   },
   items: {
     body: "TYPES.Item.body",
-    mount: "TYPES.Item.mount",
     equipment: "TYPES.Item.equipment",
+    mount: "TYPES.Item.mount",
     power: "TYPES.Item.power",
     rank: "TYPES.Item.rank",
     species: "TYPES.Item.species",
@@ -27,10 +31,6 @@ export const documentTypes = {
   macros: {
     chat: "TYPES.Macro.chat",
     script: "TYPES.Macro.script",
-  },
-  card: {
-    stone: "TYPES.Card.stone",
-    card: "TYPES.Card.card",
   },
 };
 

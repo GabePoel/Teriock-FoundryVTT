@@ -24,9 +24,7 @@ export default function HackStatApplicationMixin(Base) {
         const statDie = this._getStatDie(target);
         let criticallyWounded = this.document.statuses.has("criticallyWounded");
         await statDie.use(this._consumeStatDie ?? true);
-        if (!criticallyWounded) {
-          await this.document.system.takeAwaken();
-        }
+        if (!criticallyWounded) await this.document.system.takeAwaken();
       }
 
       /**
@@ -115,12 +113,7 @@ export default function HackStatApplicationMixin(Base) {
         const morganti = Math.round((stat.morganti / total) * 100);
         const temp = Math.round((stat.temp / total) * 100);
         const lost = 100 - remaining - morganti - temp;
-        return {
-          remaining,
-          lost,
-          temp,
-          morganti,
-        };
+        return { lost, morganti, remaining, temp };
       }
 
       /**

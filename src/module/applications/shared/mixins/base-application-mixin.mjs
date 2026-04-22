@@ -14,9 +14,7 @@ export default function BaseApplicationMixin(Base) {
     /**
      * @type {Partial<ApplicationConfiguration>}
      */
-    static DEFAULT_OPTIONS = {
-      classes: ["teriock"],
-    };
+    static DEFAULT_OPTIONS = { classes: ["teriock"] };
 
     /** @inheritDoc */
     async _onRender(options = {}) {

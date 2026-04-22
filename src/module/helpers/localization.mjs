@@ -54,8 +54,8 @@ const _preLocalizationRegistrations = {};
  * @param {string} configKeyPath - Key path within `TERIOCK` to localize.
  * @param {object} [options={}]
  * @param {string} [options.key] - If each entry in the config enum is an object, localize and sort using this property.
- * @param {string[]} [options.keys=[]]- Array of localization keys. First key listed will be used for sorting if
- * multiple are provided.
+ * @param {string[]} [options.keys=[]]- Array of localization keys. The first key listed will be used for sorting if
+ * multiple is provided.
  * @param {string} [options.prefix] - Add a prefix to the values being localized.
  * @param {string} [options.suffix] - Add a suffix to the values being localized.
  * @param {TransformKey} [options.transform] - Add a transformation to the value before localizing.

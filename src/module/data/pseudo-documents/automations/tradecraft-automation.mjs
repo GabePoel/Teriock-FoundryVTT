@@ -50,9 +50,7 @@ export default class TradecraftAutomation extends mix(
 
   /** @inheritDoc */
   static get _triggerChoices() {
-    return {
-      execution: triggers.execution,
-    };
+    return { execution: triggers.execution };
   }
 
   /** @inheritDoc */
@@ -95,12 +93,12 @@ export default class TradecraftAutomation extends mix(
         (tradecraft) =>
           new TradecraftActivation({
             options: {
-              tradecraft,
               bonus: this.bonus,
-              threshold: this.threshold,
               competence: this.overrideCompetence
                 ? this.competence.raw
                 : this.document.system.competence.raw,
+              threshold: this.threshold,
+              tradecraft,
             },
           }),
       );
@@ -139,10 +137,10 @@ export default class TradecraftAutomation extends mix(
       selected.map((tradecraft) =>
         actor.system.rollTradecraft(tradecraft, {
           bonus: this.bonus,
-          threshold: this.threshold,
           competence: this.overrideCompetence
             ? this.competence.raw
             : this.document.system.competence.raw,
+          threshold: this.threshold,
         }),
       ),
     );

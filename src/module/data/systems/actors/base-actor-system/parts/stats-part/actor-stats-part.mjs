@@ -24,9 +24,9 @@ export default (Base) => {
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           hp: statField({ temp: true, morganti: true }),
+          lp: statField({ max: 100, value: 20 }),
           mp: statField({ temp: true, morganti: true }),
           presence: statField({ max: 1, value: 0 }),
-          lp: statField({ max: 100, value: 20 }),
         });
       }
 
@@ -83,8 +83,8 @@ export default (Base) => {
         const tempMpChange = newMp.temp - this.mp.temp;
         Object.assign(options.teriock, {
           hpChange: realHpChange + tempHpChange,
-          mpChange: realMpChange + tempMpChange,
           lpChange: newWither.value - this.lp.value,
+          mpChange: realMpChange + tempMpChange,
         });
       }
 
@@ -131,11 +131,11 @@ export default (Base) => {
           /** @type {TeriockToken[]} */ this.parent.getActiveTokens();
         const displayedDiff = diff.signedString();
         const displayArgs = {
+          direction: diff > 0 ? 2 : 1,
           fill: color,
           fontSize: 32,
           stroke: 0x000000,
           strokeThickness: 4,
-          direction: diff > 0 ? 2 : 1,
         };
         tokens.forEach((token) => {
           if (!token.visible || token.document.isSecret) return;

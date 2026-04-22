@@ -236,13 +236,13 @@ export default class SpeciesSystem extends mix(
   async deleteThis() {
     if (this.transformationEffect) {
       const proceed = await TeriockDialog.confirm({
+        content: _loc("TERIOCK.SYSTEMS.Species.DIALOG.deleteEffect.content"),
+        modal: true,
+        rejectClose: false,
         window: {
           title: _loc("TERIOCK.SYSTEMS.Species.DIALOG.deleteEffect.title"),
           icon: makeIconClass(TERIOCK.display.icons.effect.transform, "title"),
         },
-        content: _loc("TERIOCK.SYSTEMS.Species.DIALOG.deleteEffect.content"),
-        modal: true,
-        rejectClose: false,
       });
       if (proceed) {
         await this.transformationEffect.delete();
@@ -259,11 +259,11 @@ export default class SpeciesSystem extends mix(
     return [
       ...super.getCardContextMenuEntries(doc),
       {
-        label: _loc("TERIOCK.SYSTEMS.Species.MENU.setPrimaryTransformation"),
+        group: "control",
         icon: makeIcon(TERIOCK.display.icons.effect.transform, "contextMenu"),
+        label: _loc("TERIOCK.SYSTEMS.Species.MENU.setPrimaryTransformation"),
         onClick: this.setPrimaryTransformation.bind(this),
         visible: this.isTransformation && !this.isPrimaryTransformation,
-        group: "control",
       },
     ];
   }
@@ -272,17 +272,17 @@ export default class SpeciesSystem extends mix(
   getLocalRollData() {
     const data = super.getLocalRollData();
     Object.assign(data, {
-      [`transformation.level`]:
-        this.transformationEffect?.system.transformation.level || 0,
-      transformation: Number(this.isTransformation),
-      "transformation.primary": Number(this.isPrimaryTransformation),
+      adult: this.adult,
+      br: this.br,
+      lifespan: this.lifespan,
       size: this.size.enabled ? this.size.value : 0,
+      "size.enabled": Number(this.size.enabled),
       "size.max": this.size.enabled ? this.size.max : 0,
       "size.min": this.size.enabled ? this.size.min : 0,
-      "size.enabled": Number(this.size.enabled),
-      adult: this.adult,
-      lifespan: this.lifespan,
-      br: this.br,
+      transformation: Number(this.isTransformation),
+      [`transformation.level`]:
+        this.transformationEffect?.system.transformation.level || 0,
+      "transformation.primary": Number(this.isPrimaryTransformation),
     });
     for (const trait of this.traits) {
       data[`trait.${toCamelCase(trait)}`] = 1;
@@ -327,22 +327,22 @@ export default class SpeciesSystem extends mix(
       : this.parent.img;
     data = foundry.utils.mergeObject(
       {
-        name: this.parent.name,
-        type: "creature",
         img: this.parent.img,
+        items: [game.items.fromCompendium(this.parent)],
+        name: this.parent.name,
         prototypeToken: {
+          height: TeriockActor.sizeConfig(this.size.value).length,
           name: this.parent.name,
           ring: { enabled: hasTokenImg },
           texture: { src: tokenImg },
           width: TeriockActor.sizeConfig(this.size.value).length,
-          height: TeriockActor.sizeConfig(this.size.value).length,
         },
-        items: [game.items.fromCompendium(this.parent)],
         system: {
           hp: { value: 999999 },
           mp: { value: 999999 },
           size: { number: { saved: this.size.value } },
         },
+        type: "creature",
       },
       data,
     );

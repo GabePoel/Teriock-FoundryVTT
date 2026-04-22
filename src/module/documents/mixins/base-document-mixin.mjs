@@ -198,11 +198,12 @@ export default function BaseDocumentMixin(Base) {
         entries.push(
           ...[
             {
-              label: _loc("TERIOCK.SYSTEMS.Common.MENU.openSource"),
+              group: "open",
               icon: makeIcon(
                 TERIOCK.display.icons.ui.openWindow,
                 "contextMenu",
               ),
+              label: _loc("TERIOCK.SYSTEMS.Common.MENU.openSource"),
               onClick: async () => {
                 const resolved = await resolveDocument(this.master);
                 if (resolved) await resolved.sheet?.render(true);
@@ -210,11 +211,11 @@ export default function BaseDocumentMixin(Base) {
               visible: () =>
                 this.master?.isViewer !== false &&
                 doc?.uuid !== this.master?.uuid,
-              group: "open",
             },
             {
-              label: _loc("TERIOCK.SYSTEMS.Common.MENU.delete"),
+              group: "document",
               icon: makeIcon(TERIOCK.display.icons.ui.delete, "contextMenu"),
+              label: _loc("TERIOCK.SYSTEMS.Common.MENU.delete"),
               onClick: async () => await this.deleteDialog(),
               visible: () =>
                 this._checkValidEditorDocument(doc) ||
@@ -222,7 +223,6 @@ export default function BaseDocumentMixin(Base) {
                   !this.compendium.locked &&
                   !this.parent &&
                   this.sup?.uuid === doc?.uuid),
-              group: "document",
             },
           ],
         );

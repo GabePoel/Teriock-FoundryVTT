@@ -51,8 +51,8 @@ export default function AbilityExecutionRollsPart(Base) {
         if (this.isAttack) {
           const generalRollOptions = {
             flavor: this.flavor,
-            targets: [],
             styles: styles,
+            targets: [],
           };
           if (this.piercing.ub) {
             generalRollOptions.styles.dice.classes += " ub";
@@ -99,8 +99,8 @@ export default function AbilityExecutionRollsPart(Base) {
             new BaseRoll(preventThreshold ? "0" : this.formula, this.rollData, {
               flavor: this.flavor,
               hideRoll: preventThreshold,
-              targets: Array.from(this.targets),
               styles: styles,
+              targets: Array.from(this.targets),
             }),
           );
         } else if (this.isBlock) {

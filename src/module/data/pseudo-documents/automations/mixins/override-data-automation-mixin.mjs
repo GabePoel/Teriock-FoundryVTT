@@ -20,8 +20,8 @@ export default function OverrideDataAutomationMixin(Base) {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          overrideData: new fields.BooleanField({ initial: false }),
           data: defaultJSONField(),
+          overrideData: new fields.BooleanField({ initial: false }),
         });
       }
 

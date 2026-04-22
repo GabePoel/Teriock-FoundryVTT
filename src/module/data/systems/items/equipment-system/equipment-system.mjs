@@ -166,7 +166,9 @@ export default class EquipmentSystem extends mix(
     const parts = super.embedParts;
     return Object.assign(parts, {
       subtitle: !this.consumable
-        ? inferNameFromIdentifier(`equipment:${this.equipmentType}`)
+        ? this.equipmentType
+          ? inferNameFromIdentifier(`equipment:${this.equipmentType}`)
+          : ""
         : parts.subtitle,
       text: dotJoin([
         ...this._attunableWrappers,

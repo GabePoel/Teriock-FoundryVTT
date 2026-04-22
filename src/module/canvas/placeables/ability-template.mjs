@@ -125,8 +125,8 @@ export default class AbilityTemplate extends MeasuredTemplate {
       this.#events = {
         cancel: this._onCancelPlacement.bind(this),
         confirm: this._onConfirmPlacement.bind(this),
-        resolve,
         reject,
+        resolve,
         rotate: this._onRotatePlacement.bind(this),
       };
       if (this.movable) {

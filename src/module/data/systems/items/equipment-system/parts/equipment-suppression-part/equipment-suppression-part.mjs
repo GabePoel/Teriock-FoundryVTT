@@ -130,90 +130,90 @@ export default (Base) => {
         return [
           ...super.getCardContextMenuEntries(doc),
           {
-            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.shatter"),
+            group: "control",
             icon: makeIcon(TERIOCK.display.icons.break.shatter, "contextMenu"),
+            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.shatter"),
             onClick: this.shatter.bind(this),
             visible:
               !this.shattered &&
               this.parent._checkValidEditorDocument(doc, { self: false }),
-            group: "control",
           },
           {
-            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.repair"),
+            group: "control",
             icon: makeIcon(TERIOCK.display.icons.break.repair, "contextMenu"),
+            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.repair"),
             onClick: this.repair.bind(this),
             visible:
               this.shattered &&
               this.parent._checkValidEditorDocument(doc, { self: false }),
-            group: "control",
           },
           {
-            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.destroy"),
+            group: "control",
             icon: makeIcon(TERIOCK.display.icons.break.destroy, "contextMenu"),
+            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.destroy"),
             onClick: this.destroy.bind(this),
             visible:
               !this.destroyed &&
               this.parent._checkValidEditorDocument(doc, { self: false }),
-            group: "control",
           },
           {
-            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.reforge"),
+            group: "control",
             icon: makeIcon(TERIOCK.display.icons.break.reforge, "contextMenu"),
+            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.reforge"),
             onClick: this.reforge.bind(this),
             visible:
               this.destroyed &&
               this.parent._checkValidEditorDocument(doc, { self: false }),
-            group: "control",
           },
           {
-            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.dampen"),
+            group: "control",
             icon: makeIcon(
               TERIOCK.display.icons.equipment.dampen,
               "contextMenu",
             ),
+            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.dampen"),
             onClick: this.dampen.bind(this),
             visible:
               !this.dampened &&
               this.parent._checkValidEditorDocument(doc, { self: false }),
-            group: "control",
           },
           {
-            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.undampen"),
+            group: "control",
             icon: makeIcon(
               TERIOCK.display.icons.equipment.undampen,
               "contextMenu",
             ),
+            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.undampen"),
             onClick: this.undampen.bind(this),
             visible:
               this.dampened &&
               this.parent._checkValidEditorDocument(doc, { self: false }),
-            group: "control",
           },
           {
-            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.stash"),
+            group: "control",
             icon: makeIcon(
               TERIOCK.display.icons.equipment.stash,
               "contextMenu",
             ),
+            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.stash"),
             onClick: this.stash.bind(this),
             visible:
               !this.stashed &&
               this.actor &&
               this.parent._checkValidEditorDocument(doc, { self: false }),
-            group: "control",
           },
           {
-            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.unstash"),
+            group: "control",
             icon: makeIcon(
               TERIOCK.display.icons.equipment.unstash,
               "contextMenu",
             ),
+            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.unstash"),
             onClick: this.unstash.bind(this),
             visible:
               this.stashed &&
               this.actor &&
               this.parent._checkValidEditorDocument(doc, { self: false }),
-            group: "control",
           },
         ];
       }

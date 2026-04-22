@@ -6,6 +6,7 @@ export default class DocumentSettingsSheet extends TeriockDocumentSheet {
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
     form: { closeOnSubmit: false, submitOnChange: true },
+    actions: { resetIdentifier: this.#resetIdentifier },
     position: { width: 650 },
     window: {
       contentClasses: ["standard-form", "teriock-settings"],
@@ -20,6 +21,16 @@ export default class DocumentSettingsSheet extends TeriockDocumentSheet {
       scrollable: [""],
     },
   };
+
+  /**
+   * Reset to the default identifier.
+   * @returns {Promise<void>}
+   */
+  static async #resetIdentifier() {
+    await this.document.update({
+      "system.identifier": this.document.defaultIdentifier,
+    });
+  }
 
   /**
    * Configure a normal field.
@@ -64,6 +75,32 @@ export default class DocumentSettingsSheet extends TeriockDocumentSheet {
   }
 
   /** @inheritDoc */
+  async _onRender(context, options) {
+    await super._onRender(context, options);
+    // TODO: Eventually this identifier button logic should be moved into a custom identifier HTML element.
+    /** @type {HTMLInputElement} */
+    const identifierInput = document.querySelector(
+      'input[name="system.identifier"]',
+    );
+    /** @type {HTMLDivElement} */
+    const formFields = identifierInput.closest(".form-fields");
+    formFields.style.gap = "0.25rem";
+    if (identifierInput) {
+      const button = document.createElement("button");
+      button.className = "icon";
+      button.style.flexBasis = "36px";
+      button.classList.add(
+        ...makeIconClass(TERIOCK.display.icons.ui.reset, "button").split(" "),
+      );
+      button.dataset.tooltip = _loc(
+        "TERIOCK.SHEETS.DocumentSettings.BUTTONS.resetIdentifier",
+      );
+      button.dataset.action = "resetIdentifier";
+      identifierInput.after(button);
+    }
+  }
+
+  /** @inheritDoc */
   async _prepareContext(options = {}) {
     const context = await super._prepareContext(options);
     context.configs = [];
@@ -76,7 +113,9 @@ export default class DocumentSettingsSheet extends TeriockDocumentSheet {
         legend: "TERIOCK.SHEETS.DocumentSettings.FIELDS.sources.legend",
         localize: true,
         fields: [
-          this.#quickNormalField("system.identifier"),
+          this.#quickNormalField("system.identifier", {
+            placeholder: this.document.defaultIdentifier,
+          }),
           this.#quickNormalField("_stats.compendiumSource", {
             hint: "TERIOCK.SHEETS.DocumentSettings.FIELDS.compendiumSource.hint",
             label:

@@ -20,9 +20,9 @@ export default (Base) => {
         return Object.assign(super.defineSchema(), {
           deathBag: new fields.SchemaField({
             pull: new FormulaField({
+              deterministic: false,
               initial: "10",
               nullable: false,
-              deterministic: false,
             }),
             stones: new fields.SchemaField({
               black: stoneField("black", 3),
@@ -65,9 +65,9 @@ export default (Base) => {
  */
 function stoneField(color, initial) {
   return new FormulaField({
-    initial: `${initial}`,
-    nullable: false,
     deterministic: false,
+    initial: `${initial}`,
     label: _loc(`TERIOCK.TERMS.Stones.${color}`),
+    nullable: false,
   });
 }

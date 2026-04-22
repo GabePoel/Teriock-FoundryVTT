@@ -72,9 +72,9 @@ export default class RollActivation extends AutomationActivationFactory(
   async primaryAction() {
     for (const actor of this.actors) {
       await commands[this.impact].primary(actor, {
+        boost: true,
         formula: this.formula,
         type: this.impact,
-        boost: true,
       });
     }
   }
@@ -83,9 +83,9 @@ export default class RollActivation extends AutomationActivationFactory(
   async secondaryAction() {
     for (const actor of this.actors) {
       await commands[this.impact].primary(actor, {
+        boost: true,
         formula: this.formula,
         type: this.impact,
-        boost: true,
       });
     }
   }

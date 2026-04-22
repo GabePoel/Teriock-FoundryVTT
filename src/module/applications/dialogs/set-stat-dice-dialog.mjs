@@ -9,9 +9,9 @@ import { TeriockDialog } from "../api/_module.mjs";
 export default async function setStatDiceDialog(pool) {
   const formulaForm = pool.schema.fields.formula.toFormGroup(
     {
-      rootId: foundry.utils.randomID(),
       hint: _loc("TERIOCK.MODELS.BaseStatPool.FIELDS.formula.hint"),
       label: _loc("TERIOCK.MODELS.BaseStatPool.FIELDS.formula.label"),
+      rootId: foundry.utils.randomID(),
     },
     {
       name: "formula",
@@ -29,10 +29,10 @@ export default async function setStatDiceDialog(pool) {
   const disabledForm = pool.schema.fields.disabled.toFormGroup(
     { rootId: foundry.utils.randomID() },
     {
+      dataset,
+      disabled: !canToggle,
       name: "disabled",
       value: pool.disabled,
-      disabled: !canToggle,
-      dataset,
     },
   );
   const contentElement = document.createElement("div");

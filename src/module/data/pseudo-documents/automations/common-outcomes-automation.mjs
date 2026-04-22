@@ -78,9 +78,7 @@ export default class CommonOutcomesAutomation extends mix(
       data: { outcomes },
     });
     if (!shouldApply) return;
-    for (const c of this.common) {
-      await commands[c].primary(actor);
-    }
+    for (const c of this.common) await commands[c].primary(actor);
   }
 
   /** @inheritDoc */

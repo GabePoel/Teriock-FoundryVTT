@@ -16,9 +16,7 @@ export default (Base) => {
     class ActorCoverPart extends Base {
       /** @inheritDoc */
       static defineSchema() {
-        return Object.assign(super.defineSchema(), {
-          cover: initialNumber(),
-        });
+        return Object.assign(super.defineSchema(), { cover: initialNumber() });
       }
 
       /**
