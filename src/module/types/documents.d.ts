@@ -113,6 +113,12 @@ declare global {
     get id(): ID<TeriockInventory>;
     get uuid(): UUID<TeriockInventory>;
   };
+
+  export interface ActorTypeMap {
+    character: TeriockCharacter;
+    creature: TeriockCreature;
+    inventory: TeriockInventory;
+  }
 }
 
 // Items
@@ -175,6 +181,16 @@ declare global {
     get id(): ID<TeriockMount>;
     get uuid(): UUID<TeriockMount>;
   };
+
+  export interface ItemTypeMap {
+    archetype: TeriockArchetype;
+    body: TeriockBody;
+    equipment: TeriockEquipment;
+    mount: TeriockMount;
+    power: TeriockPower;
+    rank: TeriockRank;
+    species: TeriockSpecies;
+  }
 }
 
 // Effects
@@ -245,6 +261,17 @@ declare global {
     get id(): ID<TeriockResource>;
     get uuid(): UUID<TeriockResource>;
   };
+
+  export interface ActiveEffectTypeMap {
+    ability: TeriockAbility;
+    attunement: TeriockAttunement;
+    condition: TeriockCondition;
+    consequence: TeriockConsequence;
+    fluency: TeriockFluency;
+    imbuement: TeriockImbuement;
+    property: TeriockProperty;
+    resource: TeriockResource;
+  }
 }
 
 // Journal Entry Pages
@@ -263,24 +290,9 @@ declare global {
 // ===============
 
 declare global {
-  export type AnyActiveEffect =
-    | TeriockAbility
-    | TeriockAttunement
-    | TeriockCondition
-    | TeriockConsequence
-    | TeriockFluency
-    | TeriockImbuement
-    | TeriockProperty
-    | TeriockResource;
-  export type AnyItem =
-    | TeriockArchetype
-    | TeriockBody
-    | TeriockEquipment
-    | TeriockPower
-    | TeriockRank
-    | TeriockSpecies
-    | TeriockMount;
-  export type AnyActor = TeriockCharacter | TeriockCreature;
+  export type AnyActiveEffect = ActiveEffectTypeMap[keyof ActiveEffectTypeMap];
+  export type AnyItem = ItemTypeMap[keyof ItemTypeMap];
+  export type AnyActor = ActorTypeMap[keyof ActorTypeMap];
   export type AnyParent = AnyActor | AnyItem;
   export type AnyCommonDocument = AnyActor | AnyItem | AnyActiveEffect;
   export type AnyChildDocument = AnyItem | AnyActiveEffect;

@@ -1,4 +1,3 @@
-import { pureUuid } from "../../../../../helpers/resolve.mjs";
 import { conditionSort } from "../../../../../helpers/sort.mjs";
 import { TeriockTextEditor } from "../../../../ux/_module.mjs";
 
@@ -56,7 +55,7 @@ export default (Base) =>
         const tokenDocs = Array.from(
           this.document.system.conditionInformation[condition]?.trackers,
         )
-          .map((uuid) => fromUuidSync(pureUuid(uuid)))
+          .map((uuid) => fromUuidSync(uuid))
           .filter((t) => t);
         if (tokenDocs.length > 0) {
           /** @type {Teriock.Messages.MessageAssociation} */

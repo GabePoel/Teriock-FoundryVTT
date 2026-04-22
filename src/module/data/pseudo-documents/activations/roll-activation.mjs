@@ -70,6 +70,7 @@ export default class RollActivation extends AutomationActivationFactory(
 
   /** @inheritDoc */
   async primaryAction() {
+    if (!this.checkActors()) return;
     for (const actor of this.actors) {
       await commands[this.impact].primary(actor, {
         boost: true,
@@ -81,6 +82,7 @@ export default class RollActivation extends AutomationActivationFactory(
 
   /** @inheritDoc */
   async secondaryAction() {
+    if (!this.checkActors()) return;
     for (const actor of this.actors) {
       await commands[this.impact].primary(actor, {
         boost: true,

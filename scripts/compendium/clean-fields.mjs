@@ -296,7 +296,7 @@ function cleanAbility(doc) {
 }
 
 /**
- * @param {Record<string, BaseAutomation>} automations
+ * @param {Record<string, Teriock.Automations.Any>} automations
  */
 function cleanAutomations(automations) {
   for (const a of Object.values(automations)) {
@@ -305,7 +305,7 @@ function cleanAutomations(automations) {
 }
 
 /**
- * @param {BaseAutomation} automation
+ * @param {Teriock.Automations.Any} automation
  */
 function cleanAutomation(automation) {
   delete automation.transformation;

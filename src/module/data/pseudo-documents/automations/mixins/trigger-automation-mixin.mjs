@@ -160,9 +160,10 @@ export default function TriggerAutomationMixin(Base) {
        * The activations this generates when used.
        * @param {object} [_options]
        * @param {object} [_options.rollData]
+       * @param {BaseExecution|null} [_options.execution]
        * @returns {BaseActivation[]}
        */
-      async _getActivations(_options = { rollData: {} }) {
+      async _getActivations(_options = { rollData: {}, execution: null }) {
         return [];
       }
 
@@ -218,8 +219,8 @@ export default function TriggerAutomationMixin(Base) {
       }
 
       /** @inheritDoc */
-      async getActivations() {
-        if (this._hasButtons) return this._getActivations();
+      async getActivations(options) {
+        if (this._hasButtons) return this._getActivations(options);
         else return [];
       }
     }

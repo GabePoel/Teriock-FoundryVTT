@@ -1,15 +1,21 @@
 import { CompetenceModel } from "../../data/models/_module.mjs";
+import { AutomatedDataMixin } from "../../data/shared/mixins/_module.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
 import { TeriockChatMessage } from "../../documents/_module.mjs";
-import { AutomationCollection } from "../../documents/collections/_module.mjs";
+import { TypeCollection } from "../../documents/collections/_module.mjs";
 import { addFormula, formulaExists } from "../../helpers/formula.mjs";
 
-export default class BaseExecution {
+class AbstractExecution {}
+
+export default class BaseExecution extends AutomatedDataMixin(
+  AbstractExecution,
+) {
   /**
    * Construct an execution.
    * @param {Teriock.Execution.BaseExecutionOptions} options
    */
   constructor(options = {}) {
+    super();
     this.options = options;
     this._actor = options.actor ?? game.actors.default;
     this._formula = options.formula ?? "";
@@ -19,7 +25,7 @@ export default class BaseExecution {
     options.competence = this.competence.raw;
   }
 
-  /** @type {BaseActivation[]} */
+  /** @type {Teriock.Activations.Any[]} */
   activations = [];
 
   /** @type {CompetenceModel} */
@@ -62,18 +68,18 @@ export default class BaseExecution {
     this._actor = actor;
   }
 
-  /** @type {BaseAutomation[]} */
+  /** @type {Teriock.Automations.Any[]} */
   _automations = [];
 
-  /** @returns {AutomationCollection} */
+  /** @returns {TypeCollection<ID<Teriock.Automations.Any>, Teriock.Automations.Any>} */
   get automations() {
-    return new AutomationCollection(this._automations.map((a) => [a.id, a]));
+    return new TypeCollection(this._automations.map((a) => [a.id, a]));
   }
 
-  /** @param {AutomationCollection | BaseAutomation[]} automations */
+  /** @param {TypeCollection | Teriock.Automations.Any[]} automations */
   set automations(automations) {
     if (Array.isArray(automations)) this._automations = automations;
-    if (automations instanceof AutomationCollection) {
+    if (automations instanceof TypeCollection) {
       this._automations = automations.contents;
     }
   }
@@ -120,7 +126,7 @@ export default class BaseExecution {
 
   /**
    * The automations that are active.
-   * @returns {BaseAutomation[]}
+   * @returns {Teriock.Automations.Any[]}
    */
   get activeAutomations() {
     return this.automations.contents.filter((a) =>
@@ -250,7 +256,7 @@ export default class BaseExecution {
    * @param {Teriock.System.Trigger} trigger
    * @param {Partial<Teriock.System.TriggerScope>} [scope]
    * @param {object} [options]
-   * @param {BaseAutomation[]} [options.automations]
+   * @param {Teriock.Automations.Any[]} [options.automations]
    * @returns {Promise<false|void>}
    */
   async _fireAutomationsTrigger(trigger, scope = {}, options = {}) {

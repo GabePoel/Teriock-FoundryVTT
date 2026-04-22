@@ -1,5 +1,4 @@
 import { icons } from "../../../constants/display/icons.mjs";
-import { pureUuid } from "../../resolve.mjs";
 
 /**
  * @param {TeriockActor} actor
@@ -8,8 +7,11 @@ import { pureUuid } from "../../resolve.mjs";
  */
 async function use(actor, options = {}) {
   let attacker = actor?.system?.wielding.attacker;
-  if (options.attacker) {
-    attacker = await fromUuid(pureUuid(options.attacker));
+  if (options.armament) {
+    const newAttacker = await foundry.utils.fromUuid(options.armament, {
+      relative: actor,
+    });
+    if (newAttacker) attacker = newAttacker;
   }
   if (!attacker) {
     ui.notifications.error("TERIOCK.COMMANDS.StandardDamage.noDefaultWeapon", {

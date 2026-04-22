@@ -1,5 +1,7 @@
 import { objectMap } from "../../../../../../helpers/utils.mjs";
 
+const { fields } = foundry.data;
+
 /**
  * Actor data model that handles automation.
  * @param {typeof BaseActorSystem} Base
@@ -12,15 +14,18 @@ export default (Base) => {
      * @mixin
      */
     class ActorAutomationPart extends Base {
-      /** @inheritDoc */
-      prepareBaseData() {
-        super.prepareBaseData();
-        this.conditionInformation = objectMap(TERIOCK.index.conditions, () => {
-          return {
-            locked: false,
-            reasons: new Set(),
-            trackers: new Set(),
-          };
+      static defineSchema() {
+        return Object.assign(super.defineSchema(), {
+          conditionInformation: new fields.SchemaField(
+            objectMap(TERIOCK.index.conditions, () => {
+              return new fields.SchemaField({
+                locked: new fields.BooleanField(),
+                reasons: new fields.SetField(new fields.StringField()),
+                trackers: new fields.SetField(new fields.DocumentUUIDField()),
+              });
+            }),
+            { persisted: false },
+          ),
         });
       }
 

@@ -63,6 +63,7 @@ export default class TakeActivation extends AutomationActivationFactory(
 
   /** @inheritDoc */
   async primaryAction() {
+    if (!this.checkActors()) return;
     for (const actor of this.actors) {
       if (this.#showDialog) {
         await actor.system.impactDialog(this.impact, {
@@ -88,6 +89,7 @@ export default class TakeActivation extends AutomationActivationFactory(
 
   /** @inheritDoc */
   async secondaryAction() {
+    if (!this.checkActors()) return;
     for (const actor of this.actors) {
       await this.#entry?.reverse(actor, this.#amount);
       ui.notifications.success(

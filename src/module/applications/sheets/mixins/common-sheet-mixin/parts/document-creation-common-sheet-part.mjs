@@ -187,6 +187,7 @@ export default (Base) => {
       /**
        * Adds a new {@link TeriockRank} to the current document.
        * @returns {Promise<void>}
+       * @todo There is 100% a simpler/more generalized version of this that could be made.
        */
       static async _onCreateRank() {
         let rankClass = await selectClassDialog();
@@ -206,7 +207,7 @@ export default (Base) => {
             openable: true,
           });
         const rankNumber = referenceRank.system.classRank;
-        let rank = referenceRank.clone();
+        let rank = /** @type {TeriockRank} */ referenceRank.clone();
         if (rankNumber <= 2) {
           const toCreate = rank.toObject(true);
           toCreate.system = foundry.utils.mergeObject(toCreate.system || {}, {
@@ -286,8 +287,8 @@ export default (Base) => {
           chosenAbility.allSubs.map((a) => allowedAbilityIds.add(a.id));
         }
         for (const ability of abilities) {
-          if (!allowedAbilityIds.has(ability.id)) {
-            abilities.delete(ability.id);
+          if (!allowedAbilityIds.has(ability?.id)) {
+            abilities.delete(ability?.id);
           }
         }
         const toCreate = game.items.fromCompendium(rank);
@@ -347,7 +348,7 @@ export default (Base) => {
           }
         });
         for (const [type, options] of Object.entries(TERIOCK.config.document)) {
-          if (options.getter) {
+          if (options?.getter) {
             context[options["getter"]] = TERIOCK.config.document[type].sorter(
               children.filter((c) => c.type === type),
             );

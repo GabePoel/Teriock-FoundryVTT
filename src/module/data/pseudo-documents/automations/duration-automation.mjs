@@ -6,7 +6,7 @@ import { CritAutomation } from "./abstract/_module.mjs";
 
 /**
  * @property {TimeUnitModel} duration
- * @property {number} mode
+ * @property {string} changeType
  */
 export default class DurationAutomation extends CritAutomation {
   /** @inheritDoc */

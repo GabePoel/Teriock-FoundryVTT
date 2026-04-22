@@ -314,4 +314,24 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
       return s;
     }
   }
+
+  /**
+   * @inheritDoc
+   * @template {Teriock.Automations.Type} T
+   * @param {T} type
+   * @param {object} [options]
+   * @param {boolean} [options.active]
+   * @param {boolean} [options.crit]
+   * @returns {Teriock.Automations.TypeMap[T][]}
+   */
+  getAutomations(type, options = {}) {
+    const autos = super.getAutomations(type, options);
+    if (typeof options.crit === "boolean") {
+      return autos.filter(
+        (a) =>
+          (options.crit && a.crit?.has(1)) || (!options.crit && a.crit?.has(0)),
+      );
+    }
+    return autos;
+  }
 }

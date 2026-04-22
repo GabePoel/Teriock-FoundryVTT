@@ -5,26 +5,6 @@ import { fromIdentifier, parseIdentifier } from "./utils.mjs";
 const { Document } = foundry.abstract;
 
 /**
- * Convert a UUID to a string that can be safely used as a key in some document's system data.
- * @template T
- * @param {UUID<T>} uuid - The UUID to convert.
- * @returns {SafeUUID<T>} The converted safe UUID.
- */
-export function safeUuid(uuid) {
-  return /** @type {SafeUUID<*>} */ (uuid.replace(/\./g, "_"));
-}
-
-/**
- * Convert a UUID to a string that can be safely used as a key in some document's system data.
- * @template T
- * @param {SafeUUID<T>} safeUuid - The safe UUID to convert.
- * @returns {UUID<T>} The original UUID.
- */
-export function pureUuid(safeUuid) {
-  return /** @type {UUID} */ (safeUuid.replace(/_/g, "."));
-}
-
-/**
  * Ensure a document is not an index.
  * @template T
  * @param {Index<T> | UUID<T>} syncDoc
@@ -76,7 +56,7 @@ export async function resolveDocuments(syncDocs, options = {}) {
 
 /**
  * Ensure all documents in a collection are not indexes.
- * @param {IndexCollection} typeCollection
+ * @param {TypeCollection} typeCollection
  * @returns {Promise<TypeCollection>}
  */
 export async function resolveCollection(typeCollection) {
@@ -88,11 +68,11 @@ export async function resolveCollection(typeCollection) {
  * Ensure a document has all the predefined documents named.
  * @param {CommonDocument} document
  * @param {TypedIdentifier[]} identifiers
- * @returns {Promise<ChildDocument[]>}
+ * @returns {Promise<AnyChildDocument[]>}
  */
 export async function ensureChildren(document, identifiers) {
   if (identifiers.length === 0) return [];
-  const typed = (await document.getChildren()).typeMap;
+  const typed = (await document.getChildren()).documentsByType;
   const candidates = await Promise.all(
     identifiers.map(async (identifier) => {
       const parsed = parseIdentifier(identifier);
@@ -119,6 +99,7 @@ export async function ensureChildren(document, identifiers) {
       .map((d) => d?.data);
     childPromises.push(document.createChildDocuments(documentName, data));
   }
+  /** @type {AnyChildDocument[][]} */
   const childArrays = await Promise.all(childPromises);
   const children = [];
   for (const childArray of childArrays) {
@@ -131,7 +112,7 @@ export async function ensureChildren(document, identifiers) {
  * Ensure a document has none of the predefined documents named.
  * @param {CommonDocument} document
  * @param {TypedIdentifier[]} identifiers
- * @returns {Promise<ChildDocument[]>}
+ * @returns {Promise<AnyChildDocument[]>}
  */
 export async function ensureNoChildren(document, identifiers) {
   if (identifiers.length === 0) return [];
@@ -147,6 +128,7 @@ export async function ensureNoChildren(document, identifiers) {
       .map((c) => c.id);
     deletePromises.push(document.deleteChildDocuments(documentName, ids));
   }
+  /** @type {AnyChildDocument[][]} */
   const deletedArrays = await Promise.all(deletePromises);
   const deletedDocs = [];
   for (const deletedArray of deletedArrays) {

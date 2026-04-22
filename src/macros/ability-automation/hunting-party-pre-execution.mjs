@@ -1,10 +1,9 @@
-const baseActivation =
-  /** @type {AddDocumentsActivation} */ scope.execution.activations.find(
-    (a) => a.type === "addDocuments",
-  );
-if (baseActivation) {
-  const flankingData = baseActivation.toObject();
-  const snareData = baseActivation.toObject();
+const refAct = scope.execution.activations.find(
+  (a) => a.type === "addDocuments",
+);
+if (refAct) {
+  const flankingData = refAct.toObject();
+  const snareData = refAct.toObject();
   const flankingSub = scope.ability.abilities.find(
     (s) => s.system?.identifier === "flanking",
   );
@@ -13,19 +12,27 @@ if (baseActivation) {
   );
   if (flankingSub) {
     const children = [{ uuid: flankingSub.uuid }];
-    flankingData.primary.children = children;
-    flankingData.secondary.children = children;
-    flankingData.display.label = _loc("TERIOCK.COMMANDS.Status.applyNamed", {
-      name: flankingSub.name,
-    });
+    foundry.utils.setProperty(flankingData, "primary.children", children);
+    foundry.utils.setProperty(flankingData, "secondary.children", children);
+    foundry.utils.setProperty(
+      flankingData,
+      "display.label",
+      _loc("TERIOCK.COMMANDS.Status.applyNamed", {
+        name: flankingSub.name,
+      }),
+    );
   }
   if (snareSub) {
     const children = [{ uuid: snareSub.uuid }];
-    snareData.primary.children = children;
-    snareData.secondary.children = children;
-    snareData.display.label = _loc("TERIOCK.COMMANDS.Status.applyNamed", {
-      name: snareSub.name,
-    });
+    foundry.utils.setProperty(snareData, "primary.children", children);
+    foundry.utils.setProperty(snareData, "secondary.children", children);
+    foundry.utils.setProperty(
+      snareData,
+      "display.label",
+      _loc("TERIOCK.COMMANDS.Status.applyNamed", {
+        name: snareSub.name,
+      }),
+    );
   }
   const flankingActivation =
     new teriock.data.pseudoDocuments.activations.AddDocumentsActivation(

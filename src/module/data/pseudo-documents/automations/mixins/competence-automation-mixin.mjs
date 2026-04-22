@@ -8,9 +8,9 @@ const { fields } = foundry.data;
 export default function CompetenceAutomationMixin(Base) {
   return (
     /**
+     * @mixin
      * @property {CompetenceModel} competence
      * @property {boolean} overrideCompetence
-     * @mixin
      */
     class CompetenceAutomation extends Base {
       /** @inheritDoc */

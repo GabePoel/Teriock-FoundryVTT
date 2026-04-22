@@ -256,7 +256,7 @@ export default function TransformationSystemMixin(Base) {
         let disabledItems = [];
         const disabledHpDiceItems = [];
         const disabledMpDiceItems = [];
-        const typeMap = this.actor.children.typeMap;
+        const typeMap = this.actor.children.documentsByType;
         for (const t of this.transformation.suppress) {
           if (TERIOCK.config.document[t].doc === "ActiveEffect") {
             disabledEffects.push(...this.#enabledFilter(typeMap[t] || []));

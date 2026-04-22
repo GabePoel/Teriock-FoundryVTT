@@ -76,7 +76,7 @@ declare global {
     };
 
     export type StandardDamageOptions = {
-      attacker?: string;
+      armament?: UUID<TeriockArmament>;
       crit?: boolean;
       twoHanded?: boolean;
     };

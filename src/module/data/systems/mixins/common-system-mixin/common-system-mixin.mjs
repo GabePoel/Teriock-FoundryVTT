@@ -4,6 +4,7 @@ import { quickAddAssociation } from "../../../../helpers/panel.mjs";
 import { fancifyFields } from "../../../../helpers/utils.mjs";
 import {
   AccessDataMixin,
+  AutomatedDataMixin,
   PropagationDataMixin,
 } from "../../../shared/mixins/_module.mjs";
 import {
@@ -24,6 +25,7 @@ export default function CommonSystemMixin(Base) {
      * @mixes PropagationData
      * @mixes AccessData
      * @mixes AutomatableSystem
+     * @mixes AutomatedData
      * @mixin
      */
     class CommonSystem extends mix(
@@ -32,6 +34,7 @@ export default function CommonSystemMixin(Base) {
       PropagationDataMixin,
       AccessDataMixin,
       AutomatableSystemMixin,
+      AutomatedDataMixin,
     ) {
       /** @inheritDoc */
       static LOCALIZATION_PREFIXES = [
@@ -99,18 +102,6 @@ export default function CommonSystemMixin(Base) {
       /** @returns {string} */
       get _masterText() {
         return this.parent.master?.fullName || this.parent.master?.name || "";
-      }
-
-      /** @returns {BaseAutomation[]} */
-      get activeAutomations() {
-        const automations =
-          /** @type {BaseAutomation[]} */ this.automations.contents;
-        return automations.filter((a) => a.active);
-      }
-
-      /** @returns {string|null} */
-      get color() {
-        return null;
       }
 
       /** @returns {Teriock.Sheet.DisplayField[]} */
@@ -353,7 +344,7 @@ export default function CommonSystemMixin(Base) {
           name: this.parent.fullName,
           uuid: this.parent.uuid,
         };
-        const typeMap = (await this.parent.getChildren()).typeMap;
+        const typeMap = (await this.parent.getChildren()).documentsByType;
         for (const type of this.metadata.visibleTypes) {
           if (typeMap[type]) {
             let docs = typeMap[type];
@@ -490,9 +481,9 @@ export default function CommonSystemMixin(Base) {
           const reference = await this.getCompendiumSource();
           if (reference) {
             const srcChildren = await reference.getChildren();
-            const srcChildTypeMap = srcChildren.typeMap;
+            const srcChildTypeMap = srcChildren.documentsByType;
             const dstChildren = await this.parent.getChildren();
-            const dstChildTypeMap = dstChildren.typeMap;
+            const dstChildTypeMap = dstChildren.documentsByType;
             if (createChildren) {
               const createMap = this.#makeChildDeltaMap(
                 srcChildTypeMap,

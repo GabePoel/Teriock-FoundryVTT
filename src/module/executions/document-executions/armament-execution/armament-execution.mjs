@@ -3,7 +3,7 @@ import {
   selectDocumentsDialog,
 } from "../../../applications/dialogs/_module.mjs";
 import { HarmRoll } from "../../../dice/rolls/_module.mjs";
-import { AutomationCollection } from "../../../documents/collections/_module.mjs";
+import { TypeCollection } from "../../../documents/collections/_module.mjs";
 import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
 import BaseDocumentExecution from "../base-document-execution/base-document-execution.mjs";
 
@@ -58,7 +58,7 @@ export default class ArmamentExecution extends BaseDocumentExecution {
     for (const p of this.source.properties) {
       automations.push(...p.system.automations.contents);
     }
-    return new AutomationCollection(automations.map((a) => [a.id, a]));
+    return new TypeCollection(automations.map((a) => [a.id, a]));
   }
 
   /** @inheritDoc */

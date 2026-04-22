@@ -1,4 +1,3 @@
-import { AutomationCollection } from "../../../../documents/collections/_module.mjs";
 import { PseudoCollectionField } from "../../../fields/_module.mjs";
 import { BaseAutomation } from "../../../pseudo-documents/automations/abstract/_module.mjs";
 
@@ -23,7 +22,7 @@ export default function AutomatableSystemMixin(Base) {
 
       /**
        * The types of automations that this system can have.
-       * @returns {Record<string, BaseAutomation>}
+       * @returns {Record<string, Teriock.Automations.Any>}
        */
       static get automationTypes() {
         return Object.fromEntries(
@@ -37,7 +36,6 @@ export default function AutomatableSystemMixin(Base) {
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           automations: new PseudoCollectionField(BaseAutomation, {
-            collection: AutomationCollection,
             types: this.automationTypes,
           }),
         });

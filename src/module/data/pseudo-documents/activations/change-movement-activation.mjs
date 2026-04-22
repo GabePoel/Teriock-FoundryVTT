@@ -40,6 +40,7 @@ export default class ChangeMovementActivation extends AutomationActivationFactor
 
   /** @inheritDoc */
   async primaryAction() {
+    if (!this.checkTokens()) return;
     for (const t of this.tokenDocuments) {
       if (t.movementAction !== this.movementAction) {
         const old = t.movementAction;
@@ -69,6 +70,7 @@ export default class ChangeMovementActivation extends AutomationActivationFactor
 
   /** @inheritDoc */
   async secondaryAction() {
+    if (!this.checkTokens()) return;
     for (const t of this.tokenDocuments) {
       if (
         t.movementAction === this.movementAction &&

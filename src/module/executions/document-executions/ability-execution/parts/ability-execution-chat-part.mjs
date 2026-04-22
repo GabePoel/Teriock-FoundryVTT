@@ -1,17 +1,7 @@
 import { conditionDialog } from "../../../../applications/dialogs/select-token-dialog.mjs";
 import { costConfig } from "../../../../constants/config/cost-config.mjs";
 import { FormulaField } from "../../../../data/fields/_module.mjs";
-import {
-  AddDocumentsAutomation,
-  ChangesAutomation,
-  CombatExpirationAutomation,
-  DurationAutomation,
-  ModifyEffectAutomation,
-  StatusAutomation,
-  TransformationAutomation,
-} from "../../../../data/pseudo-documents/automations/_module.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
-import { safeUuid } from "../../../../helpers/resolve.mjs";
 
 /**
  * @param {typeof AbilityExecutionConstructor} Base
@@ -116,7 +106,7 @@ export default function AbilityExecutionChatPart(Base) {
           phase: "initial",
           priority: 10,
           type: "add",
-          value: safeUuid(uuid),
+          value: uuid,
         };
       }
 
@@ -125,18 +115,9 @@ export default function AbilityExecutionChatPart(Base) {
        * @returns {Promise<void>}
        */
       async #generateConsequenceAssociations() {
-        this.#associationMap = {
-          crit: [],
-          normal: [],
-        };
-        this.#trackerMap = {
-          crit: [],
-          normal: [],
-        };
-        const statusAutomations =
-          /** @type {StatusAutomation[]} */ this.activeAutomations.filter(
-            (a) => a.type === StatusAutomation.TYPE,
-          );
+        this.#associationMap = { crit: [], normal: [] };
+        this.#trackerMap = { crit: [], normal: [] };
+        const statusAutomations = this.getAutomations("status");
         const targetAutomations = statusAutomations.filter((a) => a.target);
         for (const a of targetAutomations) {
           const uuids = await conditionDialog(a.status);
@@ -146,9 +127,7 @@ export default function AbilityExecutionChatPart(Base) {
         for (const a of executorAutomations) {
           const uuid =
             this.actor?.defaultToken?.document?.uuid || this.actor?.uuid;
-          if (uuid) {
-            this.#attachTrackedStatusAutomationUuids(a, [uuid]);
-          }
+          if (uuid) this.#attachTrackedStatusAutomationUuids(a, [uuid]);
         }
       }
 
@@ -157,10 +136,7 @@ export default function AbilityExecutionChatPart(Base) {
        * @returns {Teriock.Keys.Status[]}
        */
       #generateConsequenceStatuses(crit = false) {
-        const statusAutomations = this.#getCritAutomations(
-          StatusAutomation,
-          crit,
-        );
+        const statusAutomations = this.getAutomations("status", { crit });
         return statusAutomations
           .filter((a) => a.relation === "include")
           .map((a) => a.status);
@@ -171,9 +147,9 @@ export default function AbilityExecutionChatPart(Base) {
        * @returns {Promise<Partial<EffectTransformationConfig>>}
        */
       async #generateConsequenceTransformation(crit = false) {
-        const transformationAutomations = this.#getCritAutomations(
-          TransformationAutomation,
-          crit,
+        const transformationAutomations = this.getAutomations(
+          "transformation",
+          { crit },
         );
         const transformation = {
           enabled: !!transformationAutomations.length,
@@ -207,11 +183,11 @@ export default function AbilityExecutionChatPart(Base) {
           CONFIG.ActiveEffect.dataModels.consequence._automationTypes;
         const out = {};
         for (const Cls of types) {
-          const automations = this.#getCritAutomations(Cls, crit);
+          const automations = this.getAutomations(Cls.TYPE, { crit });
           for (const a of automations) {
             const data = a.toObject();
             data._id = foundry.utils.randomID();
-            if (data?.type === ChangesAutomation.TYPE) {
+            if (data?.type === "changes") {
               data?.changes.forEach((c) => {
                 c.value = this._heightenString(c.value);
               });
@@ -229,9 +205,9 @@ export default function AbilityExecutionChatPart(Base) {
       #generateEffectCombatExpiration(crit = false) {
         /** @type {Partial<CombatExpiration>} */
         const combatExpiration = {};
-        const combatExpirationAutomations = this.#getCritAutomations(
-          CombatExpirationAutomation,
-          crit,
+        const combatExpirationAutomations = this.getAutomations(
+          "combatExpiration",
+          { crit },
         );
         combatExpirationAutomations.forEach((a) => {
           Object.assign(
@@ -273,10 +249,7 @@ export default function AbilityExecutionChatPart(Base) {
        * @returns {Promise<number>}
        */
       async #generateEffectDuration(crit = false) {
-        const durationAutomations = this.#getCritAutomations(
-          DurationAutomation,
-          crit,
-        );
+        const durationAutomations = this.getAutomations("duration", { crit });
         let durationFormula = this.source.system.duration.formula;
         const formulaField = new FormulaField({ deterministic: false });
         durationAutomations.forEach((a) => {
@@ -355,21 +328,6 @@ export default function AbilityExecutionChatPart(Base) {
         };
       }
 
-      /**
-       * Get all active automations of a given type.
-       * @template T
-       * @param {typeof T} Cls
-       * @param {boolean} crit
-       * @returns {T[]}
-       */
-      #getCritAutomations(Cls, crit) {
-        return this.activeAutomations.filter(
-          (a) =>
-            a.type === Cls.TYPE &&
-            ((crit && a.crit?.has(1)) || (!crit && a.crit?.has(0))),
-        );
-      }
-
       /** @inheritDoc */
       async _buildActivations() {
         const acts = teriock.data.pseudoDocuments.activations;
@@ -427,11 +385,9 @@ export default function AbilityExecutionChatPart(Base) {
           const critImbChildren = [];
           const normDocs = [];
           const critDocs = [];
-          const childAutomations =
-            /** @type {AddDocumentsAutomation[]} */ this.activeAutomations.filter(
-              (a) =>
-                [AddDocumentsAutomation.TYPE].includes(a.type) && !a.separate,
-            );
+          const childAutomations = this.getAutomations("addDocuments", {
+            active: true,
+          }).filter((a) => !a.separate);
           for (const a of childAutomations) {
             const toAdd = await a.choose({ actor: this.actor });
             const grandchildren = [];
@@ -465,9 +421,7 @@ export default function AbilityExecutionChatPart(Base) {
             }
           }
           const transformationAutomations =
-            /** @type {TransformationAutomation[]} */ this.activeAutomations.filter(
-              (a) => [TransformationAutomation.TYPE].includes(a.type),
-            );
+            this.getAutomations("transformation");
           for (const a of transformationAutomations) {
             const toAdd = await a.choose({ actor: this.actor });
             if (a.crit.has(0)) {
@@ -477,54 +431,50 @@ export default function AbilityExecutionChatPart(Base) {
               critConData.system.transformation.uuids.push(...toAdd);
             }
           }
-          this.#getCritAutomations(ModifyEffectAutomation, false).forEach(
-            (a) => {
-              if (a.overrideCompetence) {
-                foundry.utils.setProperty(
-                  normConData,
-                  "system.competence.raw",
-                  a.competence.value,
-                );
-                foundry.utils.setProperty(
-                  normImbData,
-                  "system.competence.raw",
-                  a.competence.value,
-                );
-              }
-              if (a.overrideData && a.data) {
-                foundry.utils.mergeObject(normConData, a.data, {
-                  inplace: true,
-                });
-                foundry.utils.mergeObject(normImbData, a.data, {
-                  inplace: true,
-                });
-              }
-            },
-          );
-          this.#getCritAutomations(ModifyEffectAutomation, true).forEach(
-            (a) => {
-              if (a.overrideCompetence) {
-                foundry.utils.setProperty(
-                  critConData,
-                  "system.competence.raw",
-                  a.competence.value,
-                );
-                foundry.utils.setProperty(
-                  critImbData,
-                  "system.competence.raw",
-                  a.competence.value,
-                );
-              }
-              if (a.overrideData && a.data) {
-                foundry.utils.mergeObject(critConData, a.data, {
-                  inplace: true,
-                });
-                foundry.utils.mergeObject(critImbData, a.data, {
-                  inplace: true,
-                });
-              }
-            },
-          );
+          this.getAutomations("modifyEffect", { crit: false }).forEach((a) => {
+            if (a?.overrideCompetence) {
+              foundry.utils.setProperty(
+                normConData,
+                "system.competence.raw",
+                a.competence.value,
+              );
+              foundry.utils.setProperty(
+                normImbData,
+                "system.competence.raw",
+                a.competence.value,
+              );
+            }
+            if (a.overrideData && a.data) {
+              foundry.utils.mergeObject(normConData, a.data, {
+                inplace: true,
+              });
+              foundry.utils.mergeObject(normImbData, a.data, {
+                inplace: true,
+              });
+            }
+          });
+          this.getAutomations("modifyEffect", { crit: true }).forEach((a) => {
+            if (a?.overrideCompetence) {
+              foundry.utils.setProperty(
+                critConData,
+                "system.competence.raw",
+                a.competence.value,
+              );
+              foundry.utils.setProperty(
+                critImbData,
+                "system.competence.raw",
+                a.competence.value,
+              );
+            }
+            if (a.overrideData && a.data) {
+              foundry.utils.mergeObject(critConData, a.data, {
+                inplace: true,
+              });
+              foundry.utils.mergeObject(critImbData, a.data, {
+                inplace: true,
+              });
+            }
+          });
           if (this.targetsActor) {
             this.activations.push(
               new acts.AddDocumentsActivation({

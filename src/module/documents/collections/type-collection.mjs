@@ -9,10 +9,11 @@ const { Collection } = foundry.utils;
  */
 export default class TypeCollection extends Collection {
   /**
-   * An object with the children sorted by their type.
+   * This collection's contents grouped by subtype.
    * @returns {Record<Teriock.Documents.CommonType, AnyCommonDocument[]>}
+   * @todo Implement caching like with {@link EmbeddedCollection}.
    */
-  get typeMap() {
+  get documentsByType() {
     const documentTypeMap = {};
     const documentTypes = new Set(this.contents.map((d) => d.type));
     for (const documentType of documentTypes) {
@@ -23,8 +24,3 @@ export default class TypeCollection extends Collection {
     return documentTypeMap;
   }
 }
-
-/**
- * @template T
- * @typedef {TypeCollection<CommonDocument, AnyCommonDocument | Index<AnyCommonDocument>>} IndexCollection
- */

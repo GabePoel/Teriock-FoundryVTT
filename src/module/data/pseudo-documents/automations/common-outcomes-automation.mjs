@@ -82,12 +82,20 @@ export default class CommonOutcomesAutomation extends mix(
   }
 
   /** @inheritDoc */
-  async _getActivations() {
+  async _getActivations(options) {
+    const activationOptions = {};
+    if (foundry.utils.hasProperty(options, "execution.armament.uuid")) {
+      const uuid = foundry.utils.buildRelativeUuid(
+        options.execution.armament,
+        options.execution.actor,
+      );
+      foundry.utils.setProperty(activationOptions, "options.armament", uuid);
+    }
     return Array.from(this.common)
       .filter((_) => _)
       .map((c) => {
         const Act = Object.values(activations).find((A) => A.TYPE === c);
-        if (Act) return new Act();
+        if (Act) return new Act(activationOptions);
       })
       .filter((_) => _);
   }

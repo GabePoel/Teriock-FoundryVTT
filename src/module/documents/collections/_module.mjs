@@ -1,4 +1,3 @@
-export { default as AutomationCollection } from "./automation-collection.mjs";
 export { default as TeriockActors } from "./actors.mjs";
 export { default as TeriockChatMessages } from "./chat-messages.mjs";
 export { default as TeriockFolders } from "./folders.mjs";

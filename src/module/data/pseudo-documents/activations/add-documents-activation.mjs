@@ -157,6 +157,7 @@ export default class AddDocumentsActivation extends BaseActivation {
 
   /** @inheritDoc */
   async primaryAction() {
+    if (!this.checkActors()) return;
     const familyConstruction = this.event?.altKey
       ? this.secondary
       : this.primary;
@@ -223,6 +224,7 @@ export default class AddDocumentsActivation extends BaseActivation {
 
   /** @inheritDoc */
   async secondaryAction() {
+    if (!this.checkActors()) return;
     await Promise.all(
       this.actors.map(async (a) => {
         const children = await a.getChildArray();

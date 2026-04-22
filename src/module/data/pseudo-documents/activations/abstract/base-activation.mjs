@@ -103,6 +103,36 @@ export default class BaseActivation extends TypedPseudoDocument {
   }
 
   /**
+   * Whether this activation has actors.
+   * @returns {boolean}
+   */
+  checkActors() {
+    const pass = this.actors.length > 0;
+    if (!pass) {
+      ui.notifications.error(
+        "TERIOCK.ACTIVATIONS.Base.NOTIFICATIONS.noActors",
+        { localize: true },
+      );
+    }
+    return pass;
+  }
+
+  /**
+   * Whether this activation has tokens.
+   * @returns {boolean}
+   */
+  checkTokens() {
+    const pass = this.tokens.length > 0;
+    if (!pass) {
+      ui.notifications.error(
+        "TERIOCK.ACTIVATIONS.Base.NOTIFICATIONS.noTokens",
+        { localize: true },
+      );
+    }
+    return pass;
+  }
+
+  /**
    * Code that runs when this button is left-clicked.
    * @returns {Promise<void>}
    */
