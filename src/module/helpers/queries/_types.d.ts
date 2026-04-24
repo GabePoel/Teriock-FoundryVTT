@@ -34,7 +34,7 @@ declare global {
       uuid: UUID<TeriockEquipment>;
     };
 
-    export type ResetAttackPenalties = {
+    export type TurnChange = {
       actorUuids: UUID<TeriockActor>[];
     };
 
@@ -49,10 +49,8 @@ declare global {
       operation?: object;
     };
 
-    export type MassUpdate = {
-      documentName: string;
-      updateData: object[];
-      operation?: object;
+    export type MassWrite = {
+      operations: object[];
     };
   }
 }

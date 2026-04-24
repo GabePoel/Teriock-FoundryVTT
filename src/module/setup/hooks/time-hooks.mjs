@@ -1,12 +1,15 @@
 import { ucFirst } from "../../helpers/string.mjs";
-import { massUpdate } from "../../helpers/utils.mjs";
+import {
+  buildWriteOperation,
+  consolidateWriteOperations,
+} from "../../helpers/utils.mjs";
 
 export default function registerTimeManagementHooks() {
   foundry.helpers.Hooks.on(
     "updateWorldTime",
-    (_worldTime, dt, _options, userId) => {
+    async (_worldTime, dt, _options, userId) => {
       if (game.user.id === userId && game.user.isActiveGM) {
-        const updateData = [];
+        const operations = [];
         for (const actor of game.actors.relevant) {
           // Increase debt
           if (actor.system.money.debt > 0 && actor.system.interestRate > 0) {
@@ -14,13 +17,18 @@ export default function registerTimeManagementHooks() {
             const newDebt =
               actor.system.money.debt *
               Math.pow(1 + actor.system.interestRate, daysElapsed);
-            updateData.push({
+            operations.push({
+              action: "update",
+              docData: { "system.money.debt": newDebt.toNearest(0.01) },
               uuid: actor.uuid,
-              "system.money.debt": newDebt.toNearest(0.01),
             });
           }
         }
-        massUpdate("Actor", updateData);
+        const indOps = await Promise.all(
+          operations.map(async (op) => buildWriteOperation(op)),
+        );
+        const conOps = consolidateWriteOperations(indOps.filter((_) => _));
+        await foundry.documents.modifyBatch(conOps);
       }
     },
   );

@@ -98,7 +98,7 @@ export default async function inCombatExpirationDialog(
                 }),
               },
               {
-                rollMode: game.settings.get("core", "rollMode"),
+                messageMode: game.settings.get("core", "messageMode"),
               },
             );
             if (

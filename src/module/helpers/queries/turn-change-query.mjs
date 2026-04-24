@@ -4,7 +4,7 @@ import { buildWriteOperation, consolidateWriteOperations } from "../utils.mjs";
  * Query intended for the GM to handle all turn change operations in a single batched database write.
  * 1. Delete all regions that have the `deleteOnTurnChange` flag set.
  * 2. Reset all actors' attack penalties.
- * @param {Teriock.QueryData.ResetAttackPenalties} queryData
+ * @param {Teriock.QueryData.TurnChange} queryData
  * @param {{_timeout?: number}} timeout
  * @returns {Promise<void>}
  */

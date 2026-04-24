@@ -13,12 +13,11 @@ const { Combat } = foundry.documents;
  */
 export default class TeriockCombat extends BaseDocumentMixin(Combat) {
   /**
-   * The currently acting actor.
+   * The current acting actor.
    * @returns {AnyActor|null}
    */
   get actor() {
-    if (this.combatant) return this.combatant.actor || null;
-    return null;
+    return this.combatant ? this.combatant.actor || null : null;
   }
 
   /**
@@ -37,9 +36,9 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
    * @param {"turn"|"combat"|"action"} trigger - What might trigger this effect to expire.
    * @param {"start"|"end"} time - When this effect might expire.
    * @param {UUID<TeriockActor>|null} actorUuid - UUID of some {@link TeriockActor} to compare against.
-   * @param {object[]} [updates] - Optional array to mutate with additional updates.
+   * @param {object[]} [ops] - Optional array to mutate with additional updates.
    */
-  #checkExpiration(effect, trigger, time, actorUuid, updates = []) {
+  #checkExpiration(effect, trigger, time, actorUuid, ops = []) {
     const expiration = effect.system.expirations.combat;
     if (expiration.what.type === "none") return;
     if (
@@ -55,9 +54,12 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
           uuid: effect.uuid,
         });
       } else if (expiration.when.skip > 0) {
-        updates.push({
+        ops.push({
+          action: "update",
+          docData: {
+            "system.expirations.combat.when.skip": expiration.when.skip - 1,
+          },
           uuid: effect.uuid,
-          "system.expirations.combat.when.skip": expiration.when.skip - 1,
         });
       }
     }
@@ -112,29 +114,25 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
    * @param {"start"|"end"} time
    */
   #tryExpirations(effectActor, timeActor, trigger, time) {
-    const updates = [];
+    const ops = [];
     const mightExpire = [];
     if (effectActor) {
       mightExpire.push(...effectActor.consequences);
       mightExpire.push(...effectActor.imbuements);
     }
     for (const effect of mightExpire) {
-      this.#checkExpiration(effect, trigger, time, timeActor?.uuid, updates);
+      this.#checkExpiration(effect, trigger, time, timeActor?.uuid, ops);
     }
-    if (updates.length > 0) {
-      game.users.queryGM(
-        "teriock.massUpdate",
-        {
-          documentName: "ActiveEffect",
-          updateData: updates,
-        },
-        {
-          failPrefix:
-            "TERIOCK.SYSTEMS.Combat.QUERY.tryAllEffectExpirations.failPrefix",
-          localize: true,
-        },
-      );
-    }
+    if (ops.length === 0) return;
+    game.users.queryGM(
+      "teriock.massWrite",
+      { operations: ops },
+      {
+        failPrefix:
+          "TERIOCK.SYSTEMS.Combat.QUERY.tryAllEffectExpirations.failPrefix",
+        localize: true,
+      },
+    );
   }
 
   /** @inheritDoc */
