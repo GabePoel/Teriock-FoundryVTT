@@ -1,4 +1,7 @@
-import { makeIcon } from "../../../../helpers/utils.mjs";
+import {
+  consolidateWriteOperations,
+  makeIcon,
+} from "../../../../helpers/utils.mjs";
 import { effectTransformationFields } from "../../../fields/helpers/transformation-fields.mjs";
 
 const { fields } = foundry.data;
@@ -26,6 +29,12 @@ export default function TransformationSystemMixin(Base) {
           transformation: new fields.SchemaField(effectTransformationFields()),
         });
       }
+
+      /**
+       * Batched operations waiting to be applied to the database.
+       * @type {DatabaseWriteOperation[]}
+       */
+      #batchedOperations = [];
 
       /**
        * @returns {{
@@ -116,57 +125,143 @@ export default function TransformationSystemMixin(Base) {
       }
 
       /**
-       * Add a document toggle to the update data array.
-       * @param {Record<ID<AnyChildDocument>, object>} updatesById
+       * Pull species data, configure it, and batch it to be added to the actor.
+       * @returns {Promise<void>}
+       */
+      async #addBatchCreateTransformedSpecies() {
+        if (!this.isTransformation || !this.actor) return;
+        const uuids = this.transformation.uuids;
+        const flags = this._buildTransformationFlags();
+        this.parent.updateSource({ flags });
+        let species = /** @type {TeriockSpecies[]} */ await Promise.all(
+          uuids.map((uuid) => fromUuid(uuid)),
+        );
+        species = species.filter((s) => s);
+        if (!species.length) return;
+        const itemData = /** @type {TeriockSpecies[]} */ species.map((s) =>
+          s.toObject(),
+        );
+        itemData.forEach((s) => {
+          s.system._dep = this.parent.id;
+          s.system.transformationLevel = this.transformation.level;
+          s.system.statDice.hp.disabled = !this.transformation.reset.has("hp");
+          s.system.statDice.mp.disabled = !this.transformation.reset.has("mp");
+          s.system.competence.raw = this.transformation.competence.value;
+          if (s.system.size.min && s.system.size.max) {
+            s.system.size.value = Math.clamp(
+              this.actor.system.size.number,
+              s.system.size.min,
+              s.system.size.max,
+            );
+          }
+        });
+        this.#batchedOperations.push({
+          action: "create",
+          parent: this.actor,
+          documentName: "Item",
+          data: itemData,
+        });
+      }
+
+      /**
+       * Batch a toggle update to a document embedded within the actor.
        * @param {DocumentCollection} collection
        * @param {ID<AnyChildDocument>} id
        * @param {boolean} value
        */
-      #applyToggle(updatesById, collection, id, value) {
+      #addBatchToggle(collection, id, value) {
         const toggle =
           TERIOCK.config.transformation.suppress[collection.get(id)?.type]
             ?.path;
-        if (toggle) {
-          if (!updatesById[id]) updatesById[id] = { _id: id };
-          updatesById[id][toggle] = value;
+        if (!toggle) return;
+        this.#addBatchUpdateDocument(collection, id, { [toggle]: value });
+      }
+
+      /**
+       * Batch many update toggles for documents embedded within the actor.
+       * @param value
+       */
+      #addBatchToggleDocuments(value) {
+        if (!this.actor) return;
+        const fm = this.#flagMap;
+        for (const id of fm.disabledItems) {
+          this.#addBatchToggle(this.actor.items, id, value);
+        }
+        for (const id of fm.disabledEffects) {
+          this.#addBatchToggle(this.actor.effects, id, value);
+        }
+        for (const id of fm.disabledHpDiceItems) {
+          this.#addBatchUpdateDocument(this.actor.items, id, {
+            "system.statDice.hp.disabled": value,
+          });
+        }
+        for (const id of fm.disabledMpDiceItems) {
+          this.#addBatchUpdateDocument(this.actor.items, id, {
+            "system.statDice.mp.disabled": value,
+          });
         }
       }
 
       /**
-       * Pull species data, configure it, and att it to the actor.
-       * @returns {Promise<void>}
+       * Batch an update to a document embedded within the actor.
+       * @param {DocumentCollection} collection
+       * @param {ID<AnyChildDocument>} id
+       * @param {object} data
        */
-      async #createTransformedSpecies() {
-        if (this.isTransformation && this.actor) {
-          const uuids = this.transformation.uuids;
-          const flags = this._buildTransformationFlags();
-          this.parent.updateSource({ flags });
-          let species = /** @type {TeriockSpecies[]} */ await Promise.all(
-            uuids.map((uuid) => fromUuid(uuid)),
-          );
-          species = species.filter((s) => s);
-          if (species) {
-            const itemData = /** @type {TeriockSpecies[]} */ species.map((s) =>
-              s.toObject(),
-            );
-            itemData.forEach((s) => {
-              s.system._dep = this.parent.id;
-              s.system.transformationLevel = this.transformation.level;
-              s.system.statDice.hp.disabled =
-                !this.transformation.reset.has("hp");
-              s.system.statDice.mp.disabled =
-                !this.transformation.reset.has("mp");
-              s.system.competence.raw = this.transformation.competence.value;
-              if (s.system.size.min && s.system.size.max) {
-                s.system.size.value = Math.clamp(
-                  this.parent.actor.system.size.number,
-                  s.system.size.min,
-                  s.system.size.max,
-                );
-              }
-            });
-            await this.actor.createEmbeddedDocuments("Item", itemData);
-          }
+      #addBatchUpdateDocument(collection, id, data) {
+        if (!collection.get(id)) return;
+        let operation = this.#batchedOperations.find(
+          (op) =>
+            op.documentName === collection.documentName &&
+            op.action === "update" &&
+            op.ids.includes(id),
+        );
+        if (operation) {
+          if (!operation.updates) operation.updates = [];
+          const update = operation.updates.find((u) => u._id === id);
+          if (update) Object.assign(update, data);
+          else operation.updates.push({ _id: id, ...data });
+        } else {
+          operation = {
+            action: "update",
+            documentName: collection.documentName,
+            ids: [id],
+            updates: [{ _id: id, ...data }],
+            pack: this.actor.pack,
+            parent: this.actor,
+          };
+          this.#batchedOperations.push(operation);
+        }
+      }
+
+      /**
+       * Batch all transformation application updates.
+       */
+      #addBatchUpdatesApplyTransformation() {
+        if (!this.actor) return;
+        this.#addBatchToggleDocuments(true);
+      }
+
+      /**
+       * Batch all transformation removal updates.
+       */
+      #addBatchUpdatesRemoveTransformation() {
+        if (!this.actor) return;
+        this.#addBatchToggleDocuments(false);
+        if (this.transformation.reset.size) {
+          this.#batchedOperations.push({
+            documentName: "Actor",
+            parent: this.actor.parent,
+            action: "update",
+            pack: this.actor.pack,
+            ids: [this.actor.id],
+            updates: [
+              {
+                _id: this.actor.id,
+                ...(this.parent.getFlag("teriock", "preTransform") ?? {}),
+              },
+            ],
+          });
         }
       }
 
@@ -186,65 +281,78 @@ export default function TransformationSystemMixin(Base) {
       }
 
       /**
+       * Apply all batched operations.
+       * @returns {Promise<void>}
+       */
+      async #modifyBatch() {
+        const ops = consolidateWriteOperations(this.#batchedOperations);
+        await foundry.documents.modifyBatch(ops);
+        this.#batchedOperations = [];
+      }
+
+      /**
+       * Apply all database modifications for when this is created.
+       * @returns {Promise<void>}
+       */
+      async #modifyOnCreate() {
+        await this.#addBatchCreateTransformedSpecies();
+        this.#addBatchUpdatesApplyTransformation();
+        this.#batchedOperations.push({
+          action: "update",
+          documentName: "Actor",
+          ids: [this.actor.id],
+          pack: this.actor.pack,
+          parent: this.actor.parent,
+          updates: [
+            {
+              _id: this.actor.id,
+              "flags.teriock.lastTransformation": this.parent.id,
+              "system.transformation.primary": this.parent.id,
+              ...this.#resetUpdateData,
+            },
+          ],
+        });
+        await this.#modifyBatch();
+      }
+
+      /**
+       * Apply all database modifications for when this is deleted.
+       * @returns {Promise<void>}
+       */
+      async #modifyOnDelete() {
+        this.#addBatchUpdatesRemoveTransformation();
+        await this.#modifyBatch();
+      }
+
+      /**
+       * Apply all database modifications for when this is updated.
+       * @returns {Promise<void>}
+       */
+      async #modifyOnUpdate() {
+        if (this.parent.disabled) this.#addBatchUpdatesRemoveTransformation();
+        else {
+          this.#addBatchUpdatesApplyTransformation();
+          if (this.transformation.reset.size) {
+            this.#batchedOperations.push({
+              action: "update",
+              documentName: "Actor",
+              ids: [this.actor.id],
+              pack: this.actor.pack,
+              parent: this.actor.parent,
+              updates: [{ _id: this.actor.id, ...this.#resetUpdateData }],
+            });
+          }
+        }
+        await this.#modifyBatch();
+      }
+
+      /**
        * Map an array of documents to their ids.
        * @param {AnyChildDocument[]} docs
        * @return {ID<AnyChildDocument>[]}
        */
       #toIds(docs) {
         return docs.map((d) => d.id);
-      }
-
-      /**
-       * Toggle all documents that this would force on/off to some state.
-       * @param {boolean} value
-       * @returns {Promise<void>}
-       */
-      async #toggleDocuments(value) {
-        if (!this.actor) return;
-        const fm = this.#flagMap;
-
-        /** @type {Record<ID<AnyItem>, object>} */
-        const itemUpdatesById = {};
-        /** @type {Record<ID<AnyActiveEffect>, object>} */
-        const effectUpdatesById = {};
-        for (const id of fm.disabledItems) {
-          this.#applyToggle(itemUpdatesById, this.actor.items, id, value);
-        }
-        for (const id of fm.disabledEffects) {
-          this.#applyToggle(effectUpdatesById, this.actor.effects, id, value);
-        }
-        for (const id of fm.disabledHpDiceItems) {
-          if (!itemUpdatesById[id]) itemUpdatesById[id] = { _id: id };
-          itemUpdatesById[id]["system.statDice.hp.disabled"] = value;
-        }
-        for (const id of fm.disabledMpDiceItems) {
-          if (!itemUpdatesById[id]) itemUpdatesById[id] = { _id: id };
-          itemUpdatesById[id]["system.statDice.mp.disabled"] = value;
-        }
-        const itemUpdates = Object.values(itemUpdatesById).filter((u) =>
-          this.actor.items.get(u._id),
-        );
-        const effectUpdates = Object.values(effectUpdatesById).filter((u) =>
-          this.actor.effects.get(u._id),
-        );
-        if (itemUpdates.length) {
-          await this.actor.updateEmbeddedDocuments("Item", itemUpdates);
-        }
-        if (effectUpdates.length) {
-          await this.actor.updateEmbeddedDocuments(
-            "ActiveEffect",
-            effectUpdates,
-          );
-        }
-      }
-
-      /**
-       * Apply transformation suppression and stat-dice updates using flags built by {@link _buildTransformationFlags}.
-       * @returns {Promise<void>}
-       */
-      async _applyTransformationUpdates() {
-        if (!this.actor) return;
-        await this.#toggleDocuments(true);
       }
 
       /**
@@ -300,22 +408,12 @@ export default function TransformationSystemMixin(Base) {
       _onCreate(data, options, userId) {
         super._onCreate(data, options, userId);
         if (
-          !this.parent.checkEditor(userId) ||
-          !this.isTransformation ||
-          !this.actor
+          this.parent.checkEditor(userId) &&
+          this.isTransformation &&
+          this.actor
         ) {
-          return;
+          this.#modifyOnCreate();
         }
-        this.#createTransformedSpecies().then(() =>
-          this._applyTransformationUpdates().then(() => {
-            const updateData = {
-              "system.transformation.primary": this.parent.id,
-              "flags.teriock.lastTransformation": this.parent.id,
-              ...this.#resetUpdateData,
-            };
-            this.actor.update(updateData);
-          }),
-        );
       }
 
       /** @inheritDoc */
@@ -326,7 +424,7 @@ export default function TransformationSystemMixin(Base) {
           this.isTransformation &&
           this.actor
         ) {
-          this._removeTransformationUpdates();
+          this.#modifyOnDelete();
         }
       }
 
@@ -334,22 +432,12 @@ export default function TransformationSystemMixin(Base) {
       _onUpdate(changed, options, userId) {
         super._onUpdate(changed, options, userId);
         if (
-          !this.parent.checkEditor(userId) ||
-          !this.isTransformation ||
-          !this.actor
+          this.parent.checkEditor(userId) &&
+          this.isTransformation &&
+          this.actor &&
+          foundry.utils.hasProperty(changed, "disabled")
         ) {
-          return;
-        }
-        if (foundry.utils.hasProperty(changed, "disabled")) {
-          if (this.parent.disabled) {
-            this._removeTransformationUpdates();
-          } else {
-            this._applyTransformationUpdates().then(() => {
-              if (this.transformation.reset.size) {
-                this.actor.update(this.#resetUpdateData);
-              }
-            });
-          }
+          this.#modifyOnUpdate();
         }
       }
 
@@ -379,20 +467,6 @@ export default function TransformationSystemMixin(Base) {
               this.actor.system.mp.value,
             );
           }
-        }
-      }
-
-      /**
-       * Remove transformation suppression and stat-dice updates using flags built by {@link _buildTransformationFlags}.
-       * @returns {Promise<void>}
-       */
-      async _removeTransformationUpdates() {
-        if (!this.actor) return;
-        await this.#toggleDocuments(false);
-        if (this.transformation.reset.size) {
-          await this.actor.update(
-            this.parent.getFlag("teriock", "preTransform") ?? {},
-          );
         }
       }
 

@@ -3,7 +3,7 @@ import fireTriggerQuery from "./fire-trigger-query.mjs";
 import identifyItemQuery from "./identify-item-query.mjs";
 import inCombatExpirationQuery from "./in-combat-expiration-query.mjs";
 import massUpdateQuery from "./mass-update-query.mjs";
-import resetAttackPenalties from "./reset-attack-penalties-query.mjs";
+import turnChangeQuery from "./turn-change-query.mjs";
 import updateQuery from "./update-query.mjs";
 
 const queries = {
@@ -11,9 +11,9 @@ const queries = {
   "teriock.fireTrigger": fireTriggerQuery,
   "teriock.identifyItem": identifyItemQuery,
   "teriock.inCombatExpiration": inCombatExpirationQuery,
-  "teriock.resetAttackPenalties": resetAttackPenalties,
-  "teriock.update": updateQuery,
   "teriock.massUpdate": massUpdateQuery,
+  "teriock.turnChange": turnChangeQuery,
+  "teriock.update": updateQuery,
 };
 
 export default queries;

@@ -237,6 +237,68 @@ export function barClamp(bar, change) {
 }
 
 /**
+ * Builds a single document write operation given its UUID and some document data. Best for simplifying create and
+ * delete operation construction.
+ * @param {DatabaseWriteOperation & { uuid?: UUID<TeriockDocument>, docData?: object}} operation
+ * @returns {DatabaseWriteOperation | null}
+ */
+export async function buildWriteOperation(operation) {
+  if (operation.uuid && ["update", "delete"].includes(operation.action)) {
+    const document = await foundry.utils.fromUuid(operation.uuid);
+    if (!document) return null;
+    if (operation.docData) {
+      const data = [{ ...operation.docData, _id: document.id }];
+      if (operation.action === "update") {
+        operation.updates = data;
+      } else if (operation.action === "create") {
+        operation.data = data;
+      }
+      delete operation.docData;
+    }
+    if (document) {
+      Object.assign(operation, {
+        documentName: document.documentName,
+        ids: [document.id],
+        pack: document.pack,
+        parent: document.parent,
+      });
+    }
+    delete operation.uuid;
+  }
+  return operation;
+}
+
+/**
+ * Consolidate operations so that they are more easily batched.
+ * @param {DatabaseWriteOperation[]} operations
+ * @returns {DatabaseWriteOperation[]}
+ */
+export function consolidateWriteOperations(operations) {
+  const exclusions = ["ids", "_id", "replacements", "data", "updates"];
+  /** @type {DatabaseWriteOperation[]} */
+  const consolidated = [];
+  for (const op of operations) {
+    const opMini = { ...op };
+    for (const exclusion of exclusions) delete opMini[exclusion];
+    const comOp = consolidated.find((co) => {
+      const coMini = { ...co };
+      for (const exclusion of exclusions) delete coMini[exclusion];
+      return foundry.utils.equals(opMini, coMini);
+    });
+    if (comOp) {
+      comOp.ids = [...(comOp.ids ?? []), ...(op?.ids ?? [])];
+      comOp.data = [...(comOp.data ?? []), ...(op?.data ?? [])];
+      comOp.updates = [...(comOp.updates ?? []), ...(op?.updates ?? [])];
+      comOp.replacements = Object.assign(
+        comOp.replacements ?? {},
+        op?.replacements ?? {},
+      );
+    } else consolidated.push(op);
+  }
+  return consolidated;
+}
+
+/**
  * Update many documents with a few database calls as possible.
  * @param {string} documentName
  * @param {(object & { uuid: UUID<TeriockDocument>})[]} updateData

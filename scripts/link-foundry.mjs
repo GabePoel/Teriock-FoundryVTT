@@ -5,7 +5,7 @@ import path from "path";
 
 let command = "";
 let SRC = "";
-const DST = path.join(".", "foundry");
+const DST = path.resolve(".", "foundry");
 const PLATFORM = os.platform();
 const PATHS = ["client", "common", "templates"];
 
