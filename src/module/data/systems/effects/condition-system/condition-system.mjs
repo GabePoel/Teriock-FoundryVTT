@@ -77,6 +77,11 @@ export default class ConditionSystem extends mix(
   }
 
   /** @inheritDoc */
+  get embedParts() {
+    return Object.assign(super.embedParts, { subtitle: "" });
+  }
+
+  /** @inheritDoc */
   get useText() {
     return _loc("TERIOCK.SYSTEMS.Condition.USAGE.use", {
       value: this.parent.name,
