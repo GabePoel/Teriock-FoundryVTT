@@ -6,6 +6,7 @@ import { FormulaField } from "../../fields/_module.mjs";
 import { RegionActivation } from "../activations/_module.mjs";
 import { CritAutomation } from "./abstract/_module.mjs";
 import {
+  DisplayAutomationMixin,
   OverrideDataAutomationMixin,
   SelectDocumentsAutomationMixin,
   TriggerAutomationMixin,
@@ -25,13 +26,14 @@ const { fields } = foundry.data;
  * @property {boolean} attachToToken
  * @property {boolean} deleteOnTurnChange
  * @property {boolean} expandWithToken
- * @property {boolean} updateTargets
+ * @property {boolean} targeting
  */
 export default class RegionAutomation extends mix(
   CritAutomation,
   SelectDocumentsAutomationMixin,
   TriggerAutomationMixin,
   OverrideDataAutomationMixin,
+  DisplayAutomationMixin,
 ) {
   static LOCALIZATION_PREFIXES = [
     ...super.LOCALIZATION_PREFIXES,
@@ -81,22 +83,9 @@ export default class RegionAutomation extends mix(
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       angle: new FormulaField({ deterministic: true, initial: "60" }),
-      attachToToken: new fields.BooleanField({
-        initial: true,
-        label: "TERIOCK.AUTOMATIONS.Region.FIELDS.attachToToken.label",
-      }),
-      deleteOnTurnChange: new fields.BooleanField({
-        initial: true,
-        label: "TERIOCK.AUTOMATIONS.Region.FIELDS.deleteOnTurnChange.label",
-      }),
-      updateTargets: new fields.BooleanField({
-        initial: true,
-        label: "TERIOCK.AUTOMATIONS.Region.FIELDS.updateTargets.label",
-      }),
-      expandWithToken: new fields.BooleanField({
-        initial: true,
-        label: "TERIOCK.AUTOMATIONS.Region.FIELDS.expandWithToken.label",
-      }),
+      attachToToken: new fields.BooleanField({ initial: true }),
+      deleteOnTurnChange: new fields.BooleanField({ initial: true }),
+      expandWithToken: new fields.BooleanField({ initial: true }),
       height: this.#rangeField(),
       innerWidth: new FormulaField({ deterministic: true, initial: "0" }),
       outerWidth: new FormulaField({ deterministic: true, initial: "0" }),
@@ -113,6 +102,7 @@ export default class RegionAutomation extends mix(
           ring: "SHAPE.TYPES.ring.name",
         }),
       }),
+      targeting: new fields.BooleanField({ initial: true }),
       width: this.#rangeField(),
     });
   }
@@ -128,6 +118,7 @@ export default class RegionAutomation extends mix(
       ...this._targetPaths,
       "hr",
       ...this._triggerPaths,
+      ...this._triggerDisplayPaths,
       "hr",
       ...this._selectionPaths,
       "hr",
@@ -156,7 +147,7 @@ export default class RegionAutomation extends mix(
    * @returns {string[]}
    */
   get _targetPaths() {
-    return this.trigger === "executeInput" ? ["updateTargets"] : [];
+    return this.trigger === "executeInput" ? ["targeting"] : [];
   }
 
   /**
@@ -190,6 +181,7 @@ export default class RegionAutomation extends mix(
       new RegionActivation({
         attachToToken: this.attachToToken,
         data: await this.getRegionData(options),
+        display: this.display,
       }),
     ];
   }
@@ -197,7 +189,7 @@ export default class RegionAutomation extends mix(
   /** @inheritDoc */
   async _preFire(scope) {
     const region = await this.placeRegion({ execution: scope.execution });
-    if (scope.trigger === "executeInput" && this.updateTargets) {
+    if (scope.trigger === "executeInput" && this.targeting) {
       if (scope.execution && region.parent === game.scenes.viewed) {
         let released = false;
         for (const t of game.scenes.viewed.tokens.contents.filter(
@@ -227,7 +219,7 @@ export default class RegionAutomation extends mix(
         color: Number(game.user.color),
         displayMeasurements: true,
         flags: { teriock: { deleteOnTurnChange: this.deleteOnTurnChange } },
-        highlightMode: "coverage",
+        highlightMode: this.targeting ? "coverage" : "shapes",
         levels: [canvas.level.id],
         name: _loc("TERIOCK.AUTOMATIONS.Region.DATA.name", {
           name: options.execution?.source.name ?? this.document.name,

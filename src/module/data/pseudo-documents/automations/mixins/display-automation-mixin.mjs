@@ -40,6 +40,14 @@ export default function DisplayAutomationMixin(Base) {
         migrateKey(source, "title", "display.label");
         return super.migrateData(source, options, state);
       }
+
+      /**
+       * Display paths.
+       * @returns {string[]}
+       */
+      get _triggerDisplayPaths() {
+        return this.trigger ? [] : ["display.label"];
+      }
     }
   );
 }

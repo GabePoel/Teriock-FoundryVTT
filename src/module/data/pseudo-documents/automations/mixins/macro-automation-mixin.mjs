@@ -67,9 +67,7 @@ export default function MacroAutomationMixin(Base) {
 
       /** @inheritDoc */
       get _formPaths() {
-        const paths = ["macro", ...super._formPaths];
-        if (!this.trigger) paths.push("display.label");
-        return paths;
+        return ["macro", ...this._triggerDisplayPaths];
       }
 
       /** @inheritDoc */

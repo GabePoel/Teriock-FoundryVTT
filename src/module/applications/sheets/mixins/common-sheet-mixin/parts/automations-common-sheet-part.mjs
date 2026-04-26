@@ -157,17 +157,21 @@ export default (Base) => {
             {
               icon: makeIcon(TERIOCK.display.icons.ui.duplicate),
               label: _loc("TERIOCK.SYSTEMS.Common.MENU.duplicate"),
-              onClick: (_ev, el) => {
+              onClick: async (_ev, el) => {
                 const uuid = el.dataset.uuid;
-                if (uuid) fromUuidSync(uuid)?.duplicate();
+                if (!uuid) return;
+                const auto = await fromUuid(uuid);
+                await auto?.duplicate();
               },
             },
             {
               icon: makeIcon(TERIOCK.display.icons.ui.delete),
               label: _loc("TERIOCK.SYSTEMS.Common.MENU.delete"),
-              onClick: (_ev, el) => {
+              onClick: async (_ev, el) => {
                 const uuid = el.dataset.uuid;
-                if (uuid) fromUuidSync(uuid)?.deleteDialog();
+                if (!uuid) return;
+                const auto = await fromUuid(uuid);
+                await auto?.deleteDialog();
               },
             },
           ],

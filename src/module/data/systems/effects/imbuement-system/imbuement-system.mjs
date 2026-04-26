@@ -35,6 +35,7 @@ export default class ImbuementSystem extends mix(
       automations.HealAutomation,
       automations.ProtectionAutomation,
       automations.RevitalizeAutomation,
+      automations.RollAutomation,
     ];
   }
 

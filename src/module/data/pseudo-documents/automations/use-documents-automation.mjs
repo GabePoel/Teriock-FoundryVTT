@@ -93,8 +93,10 @@ export default class UseDocumentsAutomation extends mix(
    */
   async #makeExternalActivation(uuid) {
     const doc = await resolveDocument(uuid);
-    const title = doc.name;
-    const symbol = TERIOCK.config.document[doc.type]?.icon;
+    const label = _loc("TERIOCK.COMMANDS.UseDocument.useNamed", {
+      name: doc.name || "",
+    });
+    const icon = TERIOCK.config.document[doc.type]?.icon;
     return new UseExternalActivation({
       options: {
         competence: this.overrideCompetence
@@ -103,9 +105,13 @@ export default class UseDocumentsAutomation extends mix(
         expandTables: this.expandTables,
         noHeighten: this.noHeighten,
         uuid,
+        label,
+        icon,
       },
-      symbol,
-      title,
+      display: {
+        label: doc.name,
+        icon: TERIOCK.config.document[doc.type]?.icon,
+      },
     });
   }
 
