@@ -88,7 +88,6 @@ export default class AbilitySystem extends mix(
       automations.RollAutomation,
       automations.StatusAutomation,
       automations.TakeAutomation,
-      automations.TemplateAutomation,
       automations.TradecraftAutomation,
       automations.TransformationAutomation,
       automations.UseDocumentsAutomation,

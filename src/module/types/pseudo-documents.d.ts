@@ -18,13 +18,13 @@ import type {
   ModifyEffectAutomation,
   PropertyMacroAutomation,
   ProtectionAutomation,
+  RegionAutomation,
   ResistAutomation,
   RevitalizeAutomation,
   RollAutomation,
   RollStyleAutomation,
   StatusAutomation,
   TakeAutomation,
-  TemplateAutomation,
   TradecraftAutomation,
   TransformationAutomation,
   UseDocumentsAutomation,
@@ -87,13 +87,13 @@ declare global {
       modifyEffect: ModifyEffectAutomation;
       propertyMacro: PropertyMacroAutomation;
       protection: ProtectionAutomation;
+      region: RegionAutomation;
       resist: ResistAutomation;
       revitalize: RevitalizeAutomation;
       roll: RollAutomation;
       rollStyle: RollStyleAutomation;
       status: StatusAutomation;
       take: TakeAutomation;
-      template: TemplateAutomation;
       tradecraft: TradecraftAutomation;
       transformation: TransformationAutomation;
       useDocuments: UseDocumentsAutomation;
