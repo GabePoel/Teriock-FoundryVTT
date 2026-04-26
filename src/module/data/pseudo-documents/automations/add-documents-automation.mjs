@@ -75,9 +75,7 @@ export default class AddDocumentsAutomation extends mix(
     const paths = ["children.enabled"];
     if (this.children.enabled) {
       paths.push(...["children.uuids", "children.overrideData"]);
-      if (this.children.overrideData) {
-        paths.push("children.data");
-      }
+      if (this.children.overrideData) paths.push("children.data");
     }
     return paths;
   }
@@ -89,7 +87,7 @@ export default class AddDocumentsAutomation extends mix(
       "hr",
       ...this._attachmentPaths,
       ...this._competencePaths,
-      ...super._overrideDataPaths,
+      ...this._overrideDataPaths,
       "hr",
       ...this._childrenPaths,
     ];

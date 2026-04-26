@@ -171,12 +171,7 @@ export default class UseDocumentsAutomation extends mix(
    * @returns {Promise<void>}
    */
   async use(options = {}) {
-    options = Object.assign(
-      {
-        noHeighten: this.noHeighten,
-      },
-      options,
-    );
+    options = Object.assign({ noHeighten: this.noHeighten }, options);
     if (options.actor == null) {
       options.actor = this.actor ?? this.document?.actor ?? null;
     }

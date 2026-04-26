@@ -19,6 +19,7 @@ export { default as HealAutomation } from "./heal-automation.mjs";
 export { default as ModifyEffectAutomation } from "./modify-effect-automation.mjs";
 export { default as PropertyMacroAutomation } from "./property-macro-automation.mjs";
 export { default as ProtectionAutomation } from "./protection-automation.mjs";
+export { default as RegionAutomation } from "./region-automation.mjs";
 export { default as ResistAutomation } from "./resist-automation.mjs";
 export { default as RevitalizeAutomation } from "./revitalize-automation.mjs";
 export { default as RollAutomation } from "./roll-automation.mjs";

@@ -123,6 +123,7 @@ export const icons = {
     power: "ms-person-celebrate",
     property: "ms-orbit",
     rank: "ms-military-tech",
+    region: "ms-texture",
     resource: "ms-tag",
     species: "ms-genetics",
     stone: "ms-circle",
