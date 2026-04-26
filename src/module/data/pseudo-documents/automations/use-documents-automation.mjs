@@ -103,10 +103,10 @@ export default class UseDocumentsAutomation extends mix(
           ? this.competence.raw
           : this.document.system.competence.raw,
         expandTables: this.expandTables,
+        icon,
+        label,
         noHeighten: this.noHeighten,
         uuid,
-        label,
-        icon,
       },
       display: {
         label: doc.name,
