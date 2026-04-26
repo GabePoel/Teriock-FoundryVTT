@@ -40,6 +40,7 @@ export default class BaseAutomation extends PropagationDataMixin(
       changes: false,
       crit: false,
       documentName: "Automation",
+      label: _loc("TERIOCK.AUTOMATIONS.Base.LABEL"),
       macro: false,
       trigger: false,
     });

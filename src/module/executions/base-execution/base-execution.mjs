@@ -300,6 +300,20 @@ export default class BaseExecution extends AutomatedDataMixin(
   }
 
   /**
+   * Handle cleanup after conducting all user input.
+   * @returns {Promise<false|void>}
+   */
+  async _postInput() {
+    await this._fireAutomationsTrigger("executeInput", { awaitFire: true });
+    const results = await Promise.all(
+      this.executionNames.map((n) =>
+        this.fireTrigger(`executeInput${n}`, { awaitFire: true }),
+      ),
+    );
+    if (results.includes(false)) return false;
+  }
+
+  /**
    * The start of the execution.
    * @returns {Promise<void|false>}
    */
@@ -343,6 +357,7 @@ export default class BaseExecution extends AutomatedDataMixin(
    */
   async execute() {
     if ((await this._getInput()) === false) return false;
+    if ((await this._postInput()) === false) return false;
     if ((await this._prepareFormula()) === false) return false;
     if ((await this._buildRolls()) === false) return false;
     if ((await this._evaluateRolls()) === false) return false;

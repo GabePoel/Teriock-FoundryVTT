@@ -1,8 +1,11 @@
 import { BaseAutomation } from "../../../../../data/pseudo-documents/automations/abstract/_module.mjs";
 import { localizeChoices } from "../../../../../helpers/localization.mjs";
-import { objectMap } from "../../../../../helpers/utils.mjs";
+import { makeIcon, objectMap } from "../../../../../helpers/utils.mjs";
 import { selectDialog } from "../../../../dialogs/select-dialog.mjs";
-import { TeriockTextEditor } from "../../../../ux/_module.mjs";
+import {
+  TeriockContextMenu,
+  TeriockTextEditor,
+} from "../../../../ux/_module.mjs";
 
 /**
  * @param {typeof TeriockDocumentSheet} Base
@@ -69,7 +72,7 @@ export default (Base) => {
       static async _onDeleteAutomation(_event, target) {
         const id = target.dataset.id;
         const automation = this.document.system.automations.get(id);
-        await automation.delete();
+        await automation?.deleteDialog();
       }
 
       /**
@@ -141,6 +144,35 @@ export default (Base) => {
           return;
         }
         await BaseAutomation.create(data, { parent: this.document });
+      }
+
+      /** @inheritDoc */
+      async _onRender(context, options) {
+        await super._onRender(context, options);
+        if (!this.isEditable) return;
+        new TeriockContextMenu(
+          this.element,
+          ".teriock-automation-header",
+          [
+            {
+              icon: makeIcon(TERIOCK.display.icons.ui.duplicate),
+              label: _loc("TERIOCK.SYSTEMS.Common.MENU.duplicate"),
+              onClick: (_ev, el) => {
+                const uuid = el.dataset.uuid;
+                if (uuid) fromUuidSync(uuid)?.duplicate();
+              },
+            },
+            {
+              icon: makeIcon(TERIOCK.display.icons.ui.delete),
+              label: _loc("TERIOCK.SYSTEMS.Common.MENU.delete"),
+              onClick: (_ev, el) => {
+                const uuid = el.dataset.uuid;
+                if (uuid) fromUuidSync(uuid)?.deleteDialog();
+              },
+            },
+          ],
+          { eventName: "contextmenu", jQuery: false, fixed: true },
+        );
       }
 
       /** @inheritDoc */

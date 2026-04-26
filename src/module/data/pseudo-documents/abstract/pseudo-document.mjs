@@ -28,6 +28,7 @@ export default class PseudoDocument extends EmbeddedDataModel {
     return {
       documentName: "",
       icon: "",
+      label: "",
       sheetClass: null,
     };
   }
@@ -143,7 +144,7 @@ export default class PseudoDocument extends EmbeddedDataModel {
    * @returns {string}
    */
   get label() {
-    return this.constructor.LABEL;
+    return _loc(this.constructor.LABEL);
   }
 
   /** @inheritDoc */
@@ -171,6 +172,43 @@ export default class PseudoDocument extends EmbeddedDataModel {
   async delete(operation = {}) {
     const updateData = { [this.localPath]: _del };
     return this.document.update(updateData, operation);
+  }
+
+  /**
+   * Delete this pseudo-document with a dialog.
+   * @param {object} [options]
+   * @param {DatabaseDeleteOperation} [operation]
+   * @returns {Promise<*>}
+   */
+  async deleteDialog(options = {}, operation = {}) {
+    let content = options.content;
+    const type = _loc(this.constructor.metadata.label).toLowerCase();
+    if (!content) {
+      const question = _loc("COMMON.AreYouSure");
+      const warning = _loc("SIDEBAR.DeleteWarning", { type });
+      content = `<p><strong>${question}</strong> ${warning}</p>`;
+    }
+    return foundry.applications.api.DialogV2.confirm(
+      foundry.utils.mergeObject(
+        {
+          content,
+          yes: { callback: () => this.delete(operation) },
+          window: {
+            icon: "fa-solid fa-trash",
+            title: `${_loc("DOCUMENT.Delete", { type })}: ${this.name ?? this.label}`,
+          },
+        },
+        options,
+      ),
+    );
+  }
+
+  /**
+   * Duplicate this pseudo-document.
+   * @returns {Promise<void>}
+   */
+  async duplicate() {
+    await this.constructor.create(this.toObject(), { parent: this.document });
   }
 
   /**

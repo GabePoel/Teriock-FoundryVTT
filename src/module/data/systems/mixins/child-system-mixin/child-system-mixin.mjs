@@ -273,9 +273,7 @@ export default function ChildSystemMixin(Base) {
               group: "document",
               icon: makeIcon(TERIOCK.display.icons.ui.duplicate, "contextMenu"),
               label: _loc("TERIOCK.SYSTEMS.Common.MENU.duplicate"),
-              onClick: async () => {
-                await this.parent.duplicate();
-              },
+              onClick: async () => await this.parent.duplicate(),
               visible: () =>
                 this.parent._checkValidEditorDocument(doc, { self: false }),
             },

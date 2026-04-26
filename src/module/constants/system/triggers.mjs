@@ -56,8 +56,9 @@ const triggers = {
   execution: {
     label: "TERIOCK.TRIGGERS.Execution.label",
     choices: {
-      execute: "TERIOCK.TRIGGERS.Execution.choices.execution",
-      preExecute: "TERIOCK.TRIGGERS.Execution.choices.preExecution",
+      execute: "TERIOCK.TRIGGERS.Execution.choices.execute",
+      executeInput: "TERIOCK.TRIGGERS.Execution.choices.executeInput",
+      preExecute: "TERIOCK.TRIGGERS.Execution.choices.preExecute",
     },
   },
   impact: {

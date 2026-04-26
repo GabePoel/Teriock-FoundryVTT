@@ -65,6 +65,19 @@ export default class RegionAutomation extends mix(
     return { execution: triggers.execution };
   }
 
+  /**
+   * Make a field with a range placeholder.
+   * @returns {FormulaField}
+   */
+  static #rangeField() {
+    return new FormulaField({
+      deterministic: true,
+      initial: "",
+      placeholder: _loc("TERIOCK.AUTOMATIONS.Region.DATA.placeholder"),
+    });
+  }
+
+  /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       angle: new FormulaField({ deterministic: true, initial: "60" }),
@@ -84,12 +97,12 @@ export default class RegionAutomation extends mix(
         initial: true,
         label: "TERIOCK.AUTOMATIONS.Region.FIELDS.expandWithToken.label",
       }),
-      height: new FormulaField({ deterministic: true, initial: "10" }),
-      innerWidth: new FormulaField({ deterministic: true, initial: "5" }),
-      outerWidth: new FormulaField({ deterministic: true, initial: "10" }),
-      radius: new FormulaField({ deterministic: true, initial: "10" }),
-      radiusX: new FormulaField({ deterministic: true, initial: "10" }),
-      radiusY: new FormulaField({ deterministic: true, initial: "10" }),
+      height: this.#rangeField(),
+      innerWidth: new FormulaField({ deterministic: true, initial: "0" }),
+      outerWidth: new FormulaField({ deterministic: true, initial: "0" }),
+      radius: this.#rangeField(),
+      radiusX: this.#rangeField(),
+      radiusY: this.#rangeField(),
       regionType: new fields.StringField({
         choices: localizeChoices({
           circle: "SHAPE.TYPES.circle.name",
@@ -100,7 +113,7 @@ export default class RegionAutomation extends mix(
           ring: "SHAPE.TYPES.ring.name",
         }),
       }),
-      width: new FormulaField({ deterministic: true, initial: "10" }),
+      width: this.#rangeField(),
     });
   }
 
@@ -143,7 +156,7 @@ export default class RegionAutomation extends mix(
    * @returns {string[]}
    */
   get _targetPaths() {
-    return this.trigger === "preExecute" ? ["updateTargets"] : [];
+    return this.trigger === "executeInput" ? ["updateTargets"] : [];
   }
 
   /**
@@ -184,7 +197,7 @@ export default class RegionAutomation extends mix(
   /** @inheritDoc */
   async _preFire(scope) {
     const region = await this.placeRegion({ execution: scope.execution });
-    if (scope.trigger === "preExecute" && this.updateTargets) {
+    if (scope.trigger === "executeInput" && this.updateTargets) {
       if (scope.execution && region.parent === game.scenes.viewed) {
         let released = false;
         for (const t of game.scenes.viewed.tokens.contents.filter(
@@ -235,7 +248,7 @@ export default class RegionAutomation extends mix(
         ],
         visibility: CONST.REGION_VISIBILITY.OBSERVER,
       },
-      this.data,
+      this.overrideData ? this.data : {},
     );
     const uuids = await this.choose({ actor: options.execution?.actor });
     if (uuids.length) {

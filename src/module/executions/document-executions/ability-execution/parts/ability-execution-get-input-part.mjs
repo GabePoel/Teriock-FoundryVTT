@@ -1,10 +1,7 @@
 import { TeriockDialog } from "../../../../applications/api/_module.mjs";
-import { placeTemplateDialog } from "../../../../applications/dialogs/_module.mjs";
 import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
-import { AbilityTemplate } from "../../../../canvas/placeables/_module.mjs";
 import { FormulaField } from "../../../../data/fields/_module.mjs";
 import { PiercingModel } from "../../../../data/models/_module.mjs";
-import { TemplateAutomation } from "../../../../data/pseudo-documents/automations/_module.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { createDialogFieldset } from "../../../../helpers/html.mjs";
 import { ucFirst } from "../../../../helpers/string.mjs";
@@ -246,96 +243,6 @@ export default function AbilityExecutionGetInputPart(Base) {
         } else {
           for (const target of game.user.targets) {
             this.targets.add(target);
-          }
-        }
-        if (!this.actor || !game.scenes.viewed) return;
-        const templateAutomation =
-          /** @type {TemplateAutomation} */
-          this.activeAutomations.find(
-            (a) => a.type === TemplateAutomation.TYPE,
-          );
-        const noTemplate =
-          this.flags.noTemplate ||
-          !game.teriock.getSetting("placeTemplateOnAbilityUse") ||
-          templateAutomation?.t === "none" ||
-          !this.actor;
-        const canTemplate = this.source.system.isAoe || !!templateAutomation;
-        if (canTemplate && !noTemplate) {
-          let t = "circle";
-          if (this.source.system.expansion.type === "detonate") t = "circle";
-          if (this.source.system.delivery === "cone") t = "cone";
-          if (this.source.system.delivery === "aura") t = "circle";
-          let templateData = foundry.utils.mergeObject(
-            {
-              t,
-              distance: this.source.system.range.currentValue.toString(),
-              width: this.source.system.range.currentValue.toString(),
-              angle: game.settings
-                .get("teriock", "defaultConeAngle")
-                .toString(),
-              movable: this.source.system.expansion.type === "detonate",
-            },
-            templateAutomation?.templateOptions ?? {},
-          );
-          templateData = await placeTemplateDialog(templateData);
-          if (!templateData) return;
-          const token = this.actor?.defaultToken;
-          let distance = BaseRoll.minValue(
-            templateData.distance,
-            this.rollData,
-          );
-          if (token && !templateData.movable) distance += token.document.radius;
-          const resolvedTemplateData = {
-            name: this.source.name,
-            angle: BaseRoll.minValue(templateData.angle, this.rollData),
-            distance,
-            fillColor: game.user.color,
-            flags: { teriock: { deleteOnTurnChange: true } },
-            t: templateData.t,
-            width: BaseRoll.minValue(templateData.width, this.rollData),
-            x: token?.center.x || 0,
-            y: token?.center.y || 0,
-          };
-          const templateDocument = new CONFIG.MeasuredTemplate.documentClass(
-            resolvedTemplateData,
-            { parent: canvas.scene },
-          );
-          const template = new AbilityTemplate(templateDocument);
-          template.sheets = [
-            this.actor?.sheet,
-            this.source?.sheet,
-            this.source?.elder?.sheet,
-            ...this.source.allSups.contents.map((s) => s.sheet),
-          ];
-          template.sheets = Array.from(
-            new Set(template.sheets.filter((s) => s)),
-          );
-          foundry.helpers.Hooks.callAll(
-            "teriock.createAbilityTemplate",
-            this,
-            template,
-          );
-          template.movable = !!templateData.movable;
-          if (templateData.movable || templateData.t !== "circle") {
-            ui.notifications.info(
-              "TERIOCK.SYSTEMS.Ability.DIALOG.PlaceTemplate.notification",
-              { localize: true },
-            );
-          }
-          const placed = await template?.drawPreview();
-          const region = placed?.parent.regions.get(placed?.id);
-          if (!region) return;
-          // Use `testInsideRegion` instead of `region.tokens` because the tokens
-          // are just initialized as an empty set and don't appear to be fully
-          // prepared by the time we need to access them.
-          // TODO: Maybe fix when `placed` is switched to a `RegionDocument`.
-          for (const t of game.scenes.viewed.tokens.contents.filter(
-            (t) =>
-              t.hasStatusEffect("ethereal") ===
-                this.actor.statuses.has("ethereal") &&
-              t.testInsideRegion(region),
-          )) {
-            this.targets.add(t?.object);
           }
         }
       }

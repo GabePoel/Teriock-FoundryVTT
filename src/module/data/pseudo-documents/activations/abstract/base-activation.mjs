@@ -7,6 +7,13 @@ const { fields } = foundry.data;
  */
 export default class BaseActivation extends TypedPseudoDocument {
   /** @inheritDoc */
+  static get metadata() {
+    return Object.assign(super.metadata, {
+      label: _loc("TERIOCK.ACTIVATIONS.Base.LABEL"),
+    });
+  }
+
+  /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       display: new fields.SchemaField({
