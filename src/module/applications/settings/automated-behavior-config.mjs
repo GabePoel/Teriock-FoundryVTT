@@ -14,9 +14,9 @@ export default class GameContentConfig extends BaseConfig {
 
   /** @inheritDoc */
   static PARTS = {
+    general: super.PARTS.general,
     armaments: { template: "teriock/settings/base-config" },
     footer: super.PARTS.footer,
-    general: super.PARTS.general,
   };
 
   /** @inheritDoc */

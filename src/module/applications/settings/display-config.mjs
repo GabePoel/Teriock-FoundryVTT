@@ -14,11 +14,11 @@ export default class DisplayConfig extends BaseConfig {
 
   /** @inheritDoc */
   static PARTS = {
-    actorSheet: { template: "teriock/settings/base-config" },
-    footer: super.PARTS.footer,
     general: super.PARTS.general,
     panels: { template: "teriock/settings/base-config" },
     tooltips: { template: "teriock/settings/base-config" },
+    actorSheet: { template: "teriock/settings/base-config" },
+    footer: super.PARTS.footer,
   };
 
   /** @inheritDoc */
