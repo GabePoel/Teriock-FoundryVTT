@@ -17,13 +17,6 @@ export default function registerTokenManagementHooks() {
     },
   );
 
-  foundry.helpers.Hooks.on("applyTokenStatusEffect", (token) => {
-    const actor = token.actor;
-    if (actor) {
-      actor.prepareDerivedData();
-    }
-  });
-
   foundry.helpers.Hooks.on(
     "applyTokenStatusEffect",
     /**
@@ -39,7 +32,7 @@ export default function registerTokenManagementHooks() {
       if (activeGM) tokenEditor = Boolean(user.isActiveGM);
       else tokenEditor = token.isOwner;
       if (
-        token.document.actor?.getSetting("token.autoMagic") &&
+        token.document.baseActor?.getSetting("token.autoMagic") &&
         game.modules.get("tokenmagic")?.active &&
         game.teriock.getSetting("autoTokenMagicConditionEffects") &&
         tokenEditor
