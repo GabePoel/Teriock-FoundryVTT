@@ -40,7 +40,7 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
    */
   #checkExpiration(effect, trigger, time, actorUuid, ops = []) {
     const expiration = effect.system.expirations.combat;
-    if (expiration.what.type === "none") return;
+    if (expiration.what.type === "none" || !effect.active) return;
     if (
       expiration.when.trigger === trigger &&
       expiration.when.time === time &&
