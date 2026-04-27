@@ -37,7 +37,11 @@ export default (Base) => {
           }),
           expansion: new fields.SchemaField({
             cap: new FormulaField({ deterministic: false }),
-            featSaveAttribute: new fields.StringField({ initial: "mov" }),
+            featSaveAttribute: new fields.StringField({
+              choices: TERIOCK.reference.attributes,
+              initial: null,
+              nullable: true,
+            }),
             range: new EvaluationField({ model: RangeModel }),
             type: new fields.StringField({ initial: null, nullable: true }),
           }),
@@ -276,7 +280,7 @@ export default (Base) => {
             expansion: this.expansion,
             [`expansion.${this.expansion.type}`]: 1,
             [`expansion.attr.${this.expansion.featSaveAttribute}`]: 1,
-            [`expansion.range`]: this.expansion.range.value,
+            ["expansion.range"]: this.expansion.range.value,
           });
         }
         // Add targets

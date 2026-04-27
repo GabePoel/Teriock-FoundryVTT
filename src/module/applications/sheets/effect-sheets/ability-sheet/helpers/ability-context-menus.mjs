@@ -65,10 +65,18 @@ export default function abilityContextMenus(ability) {
       "system.expansion.type",
       true,
     ),
-    expansionSaveAttribute: quickMenu(
-      TERIOCK.reference.attributes,
-      "system.expansion.featSaveAttribute",
-    ),
+    expansionSaveAttribute: [
+      {
+        label: _loc("TERIOCK.TERMS.Common.none"),
+        icon: makeIcon(TERIOCK.display.icons.ui.remove, "contextMenu"),
+        onClick: async () =>
+          await ability.update({ "system.expansion.featSaveAttribute": null }),
+      },
+      ...quickMenu(
+        TERIOCK.reference.attributes,
+        "system.expansion.featSaveAttribute",
+      ),
+    ],
     featSaveAttribute: quickMenu(
       TERIOCK.reference.attributes,
       "system.featSaveAttribute",

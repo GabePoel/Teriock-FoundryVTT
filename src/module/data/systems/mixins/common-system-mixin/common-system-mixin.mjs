@@ -1,7 +1,7 @@
 import { TeriockJournalEntry } from "../../../../documents/_module.mjs";
 import { mix } from "../../../../helpers/construction.mjs";
 import { quickAddAssociation } from "../../../../helpers/panel.mjs";
-import { fancifyFields } from "../../../../helpers/utils.mjs";
+import { fancifyFields, prefixObject } from "../../../../helpers/utils.mjs";
 import {
   AccessDataMixin,
   AutomatedDataMixin,
@@ -382,8 +382,7 @@ export default function CommonSystemMixin(Base) {
       getSystemRollData() {
         const localRollData = this.getLocalRollData();
         return {
-          [this.parent.documentName]: localRollData,
-          [this.parent.type]: localRollData,
+          ...prefixObject(localRollData, this.parent.type),
         };
       }
 
