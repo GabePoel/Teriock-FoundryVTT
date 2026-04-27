@@ -222,6 +222,7 @@ export default class RegionAutomation extends mix(
   /** @inheritDoc */
   async _preFire(scope) {
     const region = await this.placeRegion({ execution: scope.execution });
+    if (!region) return;
     if (scope.trigger === "executeInput" && this.targeting) {
       if (scope.execution && region.parent === game.scenes.viewed) {
         let releaseOthers = true;

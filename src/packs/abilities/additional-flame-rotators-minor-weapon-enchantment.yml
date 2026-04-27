@@ -11,22 +11,6 @@ name: Minor Weapon Enchantment
 system:
   _sup: 7dbf0f42e843d563
   automations:
-    72ce567009179bea:
-      _id: 72ce567009179bea
-      changeType: add
-      competencies:
-        - 0
-        - 1
-        - 2
-      crit:
-        - 0
-        - 1
-      duration:
-        raw: '@h * 3600'
-        unit: second
-      heighten:
-        - 1
-      type: duration
     FZiTANhHbYeUrxD6:
       _id: FZiTANhHbYeUrxD6
       attachDocuments: true
@@ -37,17 +21,7 @@ system:
         overrideData: false
       competence:
         raw: 0
-      competencies:
-        - 0
-        - 1
-        - 2
-      crit:
-        - 0
-        - 1
       data: '{}'
-      heighten:
-        - 0
-        - 1
       multi: false
       overrideCompetence: false
       overrideData: false
@@ -66,17 +40,7 @@ system:
         overrideData: false
       competence:
         raw: 0
-      competencies:
-        - 0
-        - 1
-        - 2
-      crit:
-        - 0
-        - 1
       data: '{}'
-      heighten:
-        - 0
-        - 1
       multi: false
       overrideCompetence: false
       overrideData: false
@@ -85,6 +49,38 @@ system:
       type: addDocuments
       uuids:
         - Compendium.teriock.properties.ActiveEffect.f35cbf0baf87ac8c
+    WDPfYxMp2lWJxkW4:
+      _id: WDPfYxMp2lWJxkW4
+      attachDocuments: true
+      automatic: false
+      children:
+        data: '{}'
+        enabled: false
+        overrideData: false
+      competence:
+        raw: 0
+      data: |-
+        {
+          "system": {
+            "costs": {
+              "tweaks": {
+                "gifted": 1
+              }
+            },
+            "delivery": "weapon",
+            "grantOnly": true,
+            "invoked": 1,
+            "piercing": {
+              "raw": 1
+            }
+          }
+        }
+      multi: false
+      overrideCompetence: false
+      overrideData: true
+      qualifier: and(@ability, @spell, not(@es), @delivery.ray)
+      separate: false
+      type: addDocuments
     Tu4qrPot571fIQao:
       _id: Tu4qrPot571fIQao
       changes:
@@ -102,59 +98,16 @@ system:
           target: parent
           type: override
           value: enchanted
-      competencies:
-        - 0
-        - 1
-        - 2
-      crit:
-        - 0
-        - 1
-      heighten:
-        - 0
-        - 1
       type: changes
-    WDPfYxMp2lWJxkW4:
-      _id: WDPfYxMp2lWJxkW4
-      attachDocuments: true
-      automatic: false
-      children:
-        data: '{}'
-        enabled: false
-        overrideData: false
-      competence:
-        raw: 0
-      competencies:
-        - 0
-        - 1
-        - 2
-      crit:
-        - 0
-        - 1
-      data: |-
-        {
-          "system": {
-            "costs": {
-              "tweaks": {
-                "gifted": 1
-              }
-            },
-            "delivery": "weapon",
-            "grantOnly": true,
-            "invoked": 1,
-            "piercing": {
-              "raw": 1
-            }
-          }
-        }
+    72ce567009179bea:
+      _id: 72ce567009179bea
+      changeType: add
+      duration:
+        raw: '@h * 3600'
+        unit: second
       heighten:
-        - 0
         - 1
-      multi: false
-      overrideCompetence: false
-      overrideData: true
-      qualifier: and(@ability, @spell, not(@es), @delivery.ray)
-      separate: false
-      type: addDocuments
+      type: duration
   class: flameMage
   competence:
     raw: 0

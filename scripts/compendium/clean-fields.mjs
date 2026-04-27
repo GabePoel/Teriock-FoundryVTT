@@ -299,9 +299,19 @@ function cleanAbility(doc) {
  * @param {Record<string, Teriock.Automations.Any>} automations
  */
 function cleanAutomations(automations) {
-  for (const a of Object.values(automations)) {
-    cleanAutomation(a);
+  const DEPRECATED_TYPES = ["start", "end", "apply", "resist", "useAbilities"];
+  const TYPE_MIGRATIONS = {
+    addExternal: "addDocuments",
+    useExternal: "useDocuments",
+    useLocal: "useDocuments",
+  };
+  for (const [k, v] of Object.entries(automations)) {
+    if (Object.keys(TYPE_MIGRATIONS).includes(v.type)) {
+      v.type = TYPE_MIGRATIONS[v.type];
+    }
+    if (DEPRECATED_TYPES.includes(v.type)) delete automations[k];
   }
+  for (const a of Object.values(automations)) cleanAutomation(a);
 }
 
 /**

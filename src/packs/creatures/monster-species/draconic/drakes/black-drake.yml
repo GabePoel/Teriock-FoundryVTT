@@ -79,37 +79,14 @@ items:
         name: Black Drake Breath
         system:
           automations:
-            29b275994cf9f5b1:
-              _id: 29b275994cf9f5b1
-              competencies:
-                - 0
-                - 1
-                - 2
-              formula: 2d10[magic terror]
-              heighten:
-                - 1
-                - 0
-              impact: damage
-              merge: true
-              type: roll
             7400b41f20d9f100:
               _id: 7400b41f20d9f100
               angle: '@angle.normal'
               attachToToken: true
               automatic: true
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
               data: '{}'
               deleteOnTurnChange: true
               expandWithToken: true
-              heighten:
-                - 0
-                - 1
               innerWidth: '0'
               multi: false
               outerWidth: '0'
@@ -117,12 +94,18 @@ items:
               qualifier: '0'
               regionType: cone
               restriction:
-                enabled: false
+                enabled: true
                 priority: 0
                 type: move
               targeting: true
               trigger: executeInput
               type: region
+            29b275994cf9f5b1:
+              _id: 29b275994cf9f5b1
+              formula: 2d10[magic terror]
+              impact: damage
+              merge: true
+              type: roll
           competence:
             raw: 0
           costs:
@@ -228,13 +211,6 @@ items:
           automations:
             5KN7CIW4kc6fgrgW:
               _id: 5KN7CIW4kc6fgrgW
-              competencies:
-                - 0
-                - 1
-                - 2
-              heighten:
-                - 0
-                - 1
               movementAction: fly
               type: changeMovement
             e789ed5e109ebd1a:
@@ -247,16 +223,6 @@ items:
                   target: Actor
                   type: upgrade
                   value: '2'
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
               type: changes
             f025905e157ac261:
               _id: f025905e157ac261
@@ -271,12 +237,6 @@ items:
               competencies:
                 - 1
                 - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
               type: changes
           class: corsair
           competence:
@@ -392,16 +352,6 @@ items:
                   target: Actor
                   type: upgrade
                   value: '120'
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
               type: changes
           competence:
             raw: 0
@@ -647,31 +597,9 @@ items:
         system:
           _sup: svS8A3v2f1wDHATf
           automations:
-            8f623097f9f2a087:
-              _id: 8f623097f9f2a087
-              bonus: '0'
-              competencies:
-                - 0
-                - 1
-                - 2
-              heighten:
-                - 1
-                - 0
-              hex: false
-              type: resist
             oJH3v7kvIbVGDlBS:
               _id: oJH3v7kvIbVGDlBS
               category: statuses
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 0
-                - 1
               relation: resistances
               type: protection
               value: frightened
@@ -729,66 +657,8 @@ items:
         system:
           _sup: svS8A3v2f1wDHATf
           automations:
-            7400b41f20d9f100:
-              _id: 7400b41f20d9f100
-              angle: '60'
-              attachToToken: true
-              automatic: true
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              data: '{}'
-              deleteOnTurnChange: true
-              expandWithToken: true
-              heighten:
-                - 0
-                - 1
-              innerWidth: '0'
-              multi: false
-              outerWidth: '0'
-              overrideData: false
-              qualifier: '0'
-              regionType: circle
-              restriction:
-                enabled: false
-                priority: 0
-                type: move
-              targeting: true
-              trigger: executeInput
-              type: region
-            b4960732f0b9ed9f:
-              _id: b4960732f0b9ed9f
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              executor: false
-              heighten:
-                - 1
-                - 0
-              relation: include
-              status: frightened
-              target: false
-              type: status
             d635eb44dba086dd:
               _id: d635eb44dba086dd
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
               type: combatExpiration
               what:
                 roll: 2d4kh1
@@ -800,6 +670,34 @@ items:
                 trigger: turn
               who:
                 type: target
+            7400b41f20d9f100:
+              _id: 7400b41f20d9f100
+              angle: '60'
+              attachToToken: true
+              automatic: true
+              data: '{}'
+              deleteOnTurnChange: true
+              expandWithToken: true
+              innerWidth: '0'
+              multi: false
+              outerWidth: '0'
+              overrideData: false
+              qualifier: '0'
+              regionType: circle
+              restriction:
+                enabled: true
+                priority: 0
+                type: sound
+              targeting: true
+              trigger: executeInput
+              type: region
+            b4960732f0b9ed9f:
+              _id: b4960732f0b9ed9f
+              executor: false
+              relation: include
+              status: frightened
+              target: false
+              type: status
           class: berserker
           competence:
             raw: 0
@@ -1071,16 +969,6 @@ items:
                   target: parent
                   type: upgrade
                   value: '1'
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 0
-                - 1
               type: changes
           competence:
             raw: 0
@@ -1141,34 +1029,16 @@ items:
               _id: 1728b3a84ea27844
               common:
                 - bag
-              competencies:
-                - 0
-                - 1
-                - 2
-              heighten:
-                - 1
-                - 0
               showConfirmationDialog: true
               type: common
             3b974a93d7736980:
               _id: 3b974a93d7736980
-              competencies:
-                - 0
-                - 1
-                - 2
               formula: 2d6
-              heighten:
-                - 1
-                - 0
               impact: kill
               merge: true
               type: roll
             71e51b18552837f1:
               _id: 71e51b18552837f1
-              competencies:
-                - 0
-                - 1
-                - 2
               formula: (@h)d6
               heighten:
                 - 1
@@ -1249,16 +1119,6 @@ items:
                   target: Actor
                   type: upgrade
                   value: '120'
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
               type: changes
           class: necromancer
           competence:
@@ -1426,23 +1286,12 @@ items:
           automations:
             29b275994cf9f5b1:
               _id: 29b275994cf9f5b1
-              competencies:
-                - 0
-                - 1
-                - 2
               formula: 1d4[terror magic]
-              heighten:
-                - 1
-                - 0
               impact: damage
               merge: true
               type: roll
             800c70e6560525a8:
               _id: 800c70e6560525a8
-              competencies:
-                - 0
-                - 1
-                - 2
               formula: (@h)d4[magic terror]
               heighten:
                 - 1
@@ -1676,8 +1525,8 @@ items:
           unit: self
       vitals: false
     type: body
-  - _id: jcvSdjiOMdrwmKh9
-    _key: '!actors.items!d0e163385f4b7895.jcvSdjiOMdrwmKh9'
+  - _id: CTIcFgSa4IMH08QH
+    _key: '!actors.items!d0e163385f4b7895.CTIcFgSa4IMH08QH'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.4a095aaed0254ec3
       coreVersion: '14'
@@ -1687,7 +1536,7 @@ items:
     effects:
       - _id: NGCuRUaVtXnxAbRe
         _key: >-
-          !actors.items.effects!d0e163385f4b7895.jcvSdjiOMdrwmKh9.NGCuRUaVtXnxAbRe
+          !actors.items.effects!d0e163385f4b7895.CTIcFgSa4IMH08QH.NGCuRUaVtXnxAbRe
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.ac35fb736d8bd407
           coreVersion: '14'
@@ -1700,23 +1549,12 @@ items:
           automations:
             29b275994cf9f5b1:
               _id: 29b275994cf9f5b1
-              competencies:
-                - 0
-                - 1
-                - 2
               formula: 1d4[magic]
-              heighten:
-                - 1
-                - 0
               impact: damage
               merge: true
               type: roll
             800c70e6560525a8:
               _id: 800c70e6560525a8
-              competencies:
-                - 0
-                - 1
-                - 2
               formula: (@h)d4[magic]
               heighten:
                 - 1
@@ -1770,7 +1608,7 @@ items:
         type: ability
       - _id: aCWLNsvSFjEuLTyl
         _key: >-
-          !actors.items.effects!d0e163385f4b7895.jcvSdjiOMdrwmKh9.aCWLNsvSFjEuLTyl
+          !actors.items.effects!d0e163385f4b7895.CTIcFgSa4IMH08QH.aCWLNsvSFjEuLTyl
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.30358f2e8d9b3a0a
           coreVersion: '14'

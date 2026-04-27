@@ -78,16 +78,6 @@ effects:
               target: Actor
               type: upgrade
               value: '@rank.mag - 1'
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
           type: changes
         f025905e157ac261:
           _id: f025905e157ac261
@@ -102,12 +92,6 @@ effects:
           competencies:
             - 1
             - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
           type: changes
         f7da3b5e1992a724:
           _id: f7da3b5e1992a724
@@ -121,12 +105,6 @@ effects:
               value: 2 * (@rank.mag - 1) + @p
           competencies:
             - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
           type: changes
       class: necromancer
       competence:
@@ -510,17 +488,7 @@ effects:
       automations:
         067cb526e2f9e98f:
           _id: 067cb526e2f9e98f
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
           executor: false
-          heighten:
-            - 1
-            - 0
           relation: include
           status: ethereal
           target: false
@@ -721,13 +689,6 @@ effects:
         72ce567009179bea:
           _id: 72ce567009179bea
           changeType: add
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
           duration:
             raw: '@h * 3600'
             unit: second
@@ -739,31 +700,15 @@ effects:
           changeType: add
           competencies:
             - 2
-          crit:
-            - 0
-            - 1
           duration:
             raw: '3600'
             unit: second
-          heighten:
-            - 1
-            - 0
           type: duration
         ngQVntiCQ8Ruot8n:
           _id: ngQVntiCQ8Ruot8n
           automatic: true
           competence:
             raw: 0
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 0
-            - 1
           multi: false
           override:
             - art
@@ -857,37 +802,24 @@ effects:
     system:
       _sup: GF9CzLYvEuHeIKIm
       automations:
+        72ce567009179bea:
+          _id: 72ce567009179bea
+          changeType: add
+          duration:
+            raw: '@h * 3600'
+            unit: second
+          heighten:
+            - 1
+          type: duration
         6a329470043b61f6:
           _id: 6a329470043b61f6
           changeType: add
           competencies:
             - 1
             - 2
-          crit:
-            - 0
-            - 1
           duration:
             raw: '600'
             unit: second
-          heighten:
-            - 1
-            - 0
-          type: duration
-        72ce567009179bea:
-          _id: 72ce567009179bea
-          changeType: add
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          duration:
-            raw: '@h * 3600'
-            unit: second
-          heighten:
-            - 1
           type: duration
       class: necromancer
       competence:
@@ -958,14 +890,7 @@ effects:
           automatic: true
           competence:
             raw: 0
-          competencies:
-            - 0
-            - 1
-            - 2
           expandTables: false
-          heighten:
-            - 0
-            - 1
           multi: false
           noHeighten: false
           overrideCompetence: false
@@ -1057,16 +982,6 @@ effects:
               target: Actor
               type: override
               value: sunburst
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
           type: changes
       class: necromancer
       competence:
@@ -1128,67 +1043,9 @@ effects:
     system:
       _sup: e0pocPKAruFnvDgW
       automations:
-        800c70e6560525a8:
-          _id: 800c70e6560525a8
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: (@h)d4[magic terror]
-          heighten:
-            - 1
-          impact: damage
-          merge: true
-          type: roll
-        b4960732f0b9ed9f:
-          _id: b4960732f0b9ed9f
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          executor: true
-          heighten:
-            - 1
-            - 0
-          relation: include
-          status: frightened
-          target: false
-          type: status
-        d5717000e99ee582:
-          _id: d5717000e99ee582
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: combatExpiration
-          what:
-            roll: 2d4kh1
-            threshold: 4
-            type: rolled
-          when:
-            skip: 1
-            time: end
-            trigger: turn
-          who:
-            type: target
         d635eb44dba086dd:
           _id: d635eb44dba086dd
-          competencies:
-            - 0
-            - 1
-            - 2
           crit:
-            - 0
-          heighten:
-            - 1
             - 0
           type: combatExpiration
           what:
@@ -1201,6 +1058,36 @@ effects:
             trigger: turn
           who:
             type: target
+        d5717000e99ee582:
+          _id: d5717000e99ee582
+          crit:
+            - 1
+          type: combatExpiration
+          what:
+            roll: 2d4kh1
+            threshold: 4
+            type: rolled
+          when:
+            skip: 1
+            time: end
+            trigger: turn
+          who:
+            type: target
+        800c70e6560525a8:
+          _id: 800c70e6560525a8
+          formula: (@h)d4[magic terror]
+          heighten:
+            - 1
+          impact: damage
+          merge: true
+          type: roll
+        b4960732f0b9ed9f:
+          _id: b4960732f0b9ed9f
+          executor: true
+          relation: include
+          status: frightened
+          target: false
+          type: status
       class: necromancer
       competence:
         raw: 0
@@ -1260,24 +1147,27 @@ effects:
     system:
       _sup: e0pocPKAruFnvDgW
       automations:
+        d635eb44dba086dd:
+          _id: d635eb44dba086dd
+          type: combatExpiration
+          what:
+            roll: 2d4kh1
+            threshold: 4
+            type: rolled
+          when:
+            skip: 0
+            time: end
+            trigger: turn
+          who:
+            type: target
         7400b41f20d9f100:
           _id: 7400b41f20d9f100
           angle: '60'
           attachToToken: true
           automatic: true
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
           data: '{}'
           deleteOnTurnChange: true
           expandWithToken: true
-          heighten:
-            - 0
-            - 1
           innerWidth: '0'
           multi: false
           outerWidth: '0'
@@ -1293,10 +1183,6 @@ effects:
           type: region
         800c70e6560525a8:
           _id: 800c70e6560525a8
-          competencies:
-            - 0
-            - 1
-            - 2
           formula: (@h)d4[magic terror]
           heighten:
             - 1
@@ -1305,44 +1191,11 @@ effects:
           type: roll
         b4960732f0b9ed9f:
           _id: b4960732f0b9ed9f
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
           executor: true
-          heighten:
-            - 1
-            - 0
           relation: include
           status: frightened
           target: false
           type: status
-        d635eb44dba086dd:
-          _id: d635eb44dba086dd
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: combatExpiration
-          what:
-            roll: 2d4kh1
-            threshold: 4
-            type: rolled
-          when:
-            skip: 0
-            time: end
-            trigger: turn
-          who:
-            type: target
       class: necromancer
       competence:
         raw: 0

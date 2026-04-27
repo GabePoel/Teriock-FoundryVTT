@@ -40,16 +40,6 @@ items:
                   target: Actor
                   type: upgrade
                   value: '60'
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
               type: changes
           competence:
             raw: 0
@@ -103,16 +93,6 @@ items:
             NxGVe5qLdm9laW3Q:
               _id: NxGVe5qLdm9laW3Q
               category: damageTypes
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 0
-                - 1
               relation: immunities
               type: protection
               value: mundane
@@ -170,29 +150,15 @@ items:
               common:
                 - revive
                 - bag
-              competencies:
-                - 0
-                - 1
-                - 2
-              heighten:
-                - 1
-                - 0
               showConfirmationDialog: true
               type: common
             7OuG6efyOs2VWpp3:
               _id: 7OuG6efyOs2VWpp3
-              competencies:
-                - 0
-                - 1
-                - 2
               conditions:
                 absent:
                   - frozen
               consumeStatDice: false
               forHarm: false
-              heighten:
-                - 0
-                - 1
               trigger: turnStart
               type: revitalize
           competence:
@@ -445,16 +411,6 @@ items:
             cXSvkQbwFoO3fFtf:
               _id: cXSvkQbwFoO3fFtf
               category: elements
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 0
-                - 1
               relation: hexseals
               type: protection
               value: storm
@@ -627,16 +583,6 @@ items:
             uwOYmc8mNN1jL3We:
               _id: uwOYmc8mNN1jL3We
               category: statuses
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 0
-                - 1
               relation: immunities
               type: protection
               value: unconscious
@@ -834,67 +780,9 @@ items:
         name: Ice Ball
         system:
           automations:
-            09ed285450c5de7b:
-              _id: 09ed285450c5de7b
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              executor: false
-              heighten:
-                - 1
-                - 0
-              relation: include
-              status: frozen
-              target: false
-              type: status
-            800c70e6560525a8:
-              _id: 800c70e6560525a8
-              competencies:
-                - 0
-                - 1
-                - 2
-              formula: (@h)d4[magic ice]
-              heighten:
-                - 1
-              impact: damage
-              merge: true
-              type: roll
-            d5717000e99ee582:
-              _id: d5717000e99ee582
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 1
-              heighten:
-                - 1
-                - 0
-              type: combatExpiration
-              what:
-                roll: 2d4kh1
-                threshold: 4
-                type: rolled
-              when:
-                skip: 1
-                time: start
-                trigger: action
-              who:
-                type: target
             d635eb44dba086dd:
               _id: d635eb44dba086dd
-              competencies:
-                - 0
-                - 1
-                - 2
               crit:
-                - 0
-              heighten:
-                - 1
                 - 0
               type: combatExpiration
               what:
@@ -907,6 +795,36 @@ items:
                 trigger: action
               who:
                 type: target
+            d5717000e99ee582:
+              _id: d5717000e99ee582
+              crit:
+                - 1
+              type: combatExpiration
+              what:
+                roll: 2d4kh1
+                threshold: 4
+                type: rolled
+              when:
+                skip: 1
+                time: start
+                trigger: action
+              who:
+                type: target
+            800c70e6560525a8:
+              _id: 800c70e6560525a8
+              formula: (@h)d4[magic ice]
+              heighten:
+                - 1
+              impact: damage
+              merge: true
+              type: roll
+            09ed285450c5de7b:
+              _id: 09ed285450c5de7b
+              executor: false
+              relation: include
+              status: frozen
+              target: false
+              type: status
           class: stormMage
           competence:
             raw: 0
@@ -973,13 +891,6 @@ items:
               _id: BiyyFVSBKNzcwl30
               common:
                 - identify
-              competencies:
-                - 0
-                - 1
-                - 2
-              heighten:
-                - 0
-                - 1
               showConfirmationDialog: true
               type: common
           class: stormMage
@@ -1100,23 +1011,12 @@ items:
           automations:
             29b275994cf9f5b1:
               _id: 29b275994cf9f5b1
-              competencies:
-                - 0
-                - 1
-                - 2
               formula: 1d6[magic]
-              heighten:
-                - 1
-                - 0
               impact: damage
               merge: true
               type: roll
             800c70e6560525a8:
               _id: 800c70e6560525a8
-              competencies:
-                - 0
-                - 1
-                - 2
               formula: (@h)d6[magic]
               heighten:
                 - 1
@@ -1251,13 +1151,6 @@ items:
             72ce567009179bea:
               _id: 72ce567009179bea
               changeType: add
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
               duration:
                 raw: '@h * 3600'
                 unit: second
@@ -1338,8 +1231,8 @@ items:
           disabled: false
           formula: 1d12
     type: rank
-  - _id: zCU7zFdD5cA6w15l
-    _key: '!actors.items!89d03d5b6dcd5216.zCU7zFdD5cA6w15l'
+  - _id: Sl8XU5eIZjUd5U7c
+    _key: '!actors.items!89d03d5b6dcd5216.Sl8XU5eIZjUd5U7c'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.4a095aaed0254ec3
       coreVersion: '14'
@@ -1349,7 +1242,7 @@ items:
     effects:
       - _id: NGCuRUaVtXnxAbRe
         _key: >-
-          !actors.items.effects!89d03d5b6dcd5216.zCU7zFdD5cA6w15l.NGCuRUaVtXnxAbRe
+          !actors.items.effects!89d03d5b6dcd5216.Sl8XU5eIZjUd5U7c.NGCuRUaVtXnxAbRe
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.ac35fb736d8bd407
           coreVersion: '14'
@@ -1362,23 +1255,12 @@ items:
           automations:
             29b275994cf9f5b1:
               _id: 29b275994cf9f5b1
-              competencies:
-                - 0
-                - 1
-                - 2
               formula: 1d4[magic]
-              heighten:
-                - 1
-                - 0
               impact: damage
               merge: true
               type: roll
             800c70e6560525a8:
               _id: 800c70e6560525a8
-              competencies:
-                - 0
-                - 1
-                - 2
               formula: (@h)d4[magic]
               heighten:
                 - 1
@@ -1432,7 +1314,7 @@ items:
         type: ability
       - _id: aCWLNsvSFjEuLTyl
         _key: >-
-          !actors.items.effects!89d03d5b6dcd5216.zCU7zFdD5cA6w15l.aCWLNsvSFjEuLTyl
+          !actors.items.effects!89d03d5b6dcd5216.Sl8XU5eIZjUd5U7c.aCWLNsvSFjEuLTyl
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.30358f2e8d9b3a0a
           coreVersion: '14'

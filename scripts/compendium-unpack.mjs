@@ -122,6 +122,7 @@ function cleanEntry(doc) {
     doc._stats.lastModifiedBy = BUILDER_NAME;
   }
   sortKeys(doc);
+  if (doc.system?.automations) sortAutomations(doc.system.automations);
 }
 
 /**
@@ -193,4 +194,98 @@ function removeEmptyValues(obj) {
     }
   }
   return obj;
+}
+
+/**
+ * @typedef MinimalAutomationData
+ * @property {string} type
+ * @property {string} _id
+ * @property {(0|1|2)[]} competencies
+ * @property {(0|1)[]} heighten
+ * @property {(0|1)[]} [crit]
+ */
+
+/**
+ * @typedef MinimalAutomationData
+ * @property {string} type
+ * @property {string} _id
+ * @property {(0|1|2)[]} competencies
+ * @property {(0|1)[]} heighten
+ * @property {(0|1)[]} [crit]
+ */
+
+/**
+ * Sorts automations consistently.
+ * @param {Record<string, MinimalAutomationData>} automations
+ * @returns {Record<string, MinimalAutomationData>}
+ */
+function sortAutomations(automations) {
+  const COMPETENCY_MAP = {
+    0: [0, 0, 0],
+    1: [1, 0, 0],
+    2: [1, 1, 0],
+    3: [0, 1, 0],
+    4: [1, 0, 1],
+    5: [1, 1, 1],
+    6: [0, 1, 1],
+    7: [0, 0, 1],
+  };
+
+  const PAIR_MAP = {
+    0: [0, 0],
+    1: [1, 0],
+    2: [1, 1],
+    3: [0, 1],
+  };
+
+  const STRING_MAP = Object.entries(COMPETENCY_MAP).reduce(
+    (acc, [key, arr]) => {
+      acc[arr.join("")] = key;
+      return acc;
+    },
+    {},
+  );
+
+  const PAIR_STRING_MAP = Object.entries(PAIR_MAP).reduce((acc, [key, arr]) => {
+    acc[arr.join("")] = key;
+    return acc;
+  }, {});
+
+  const sortableArray = Object.entries(automations).map(([key, a]) => {
+    a.competencies ??= [0, 1, 2];
+    a.heighten ??= [0, 1];
+
+    const comps = a.competencies || [];
+    const compStr = `${+comps.includes(0)}${+comps.includes(1)}${+comps.includes(2)}`;
+    const compSort = STRING_MAP[compStr] || "0";
+
+    const h = a.heighten || [];
+    const hStr = `${+h.includes(0)}${+h.includes(1)}`;
+    const hSort = PAIR_STRING_MAP[hStr] || "0";
+
+    const c = a.crit || [];
+    const cStr = `${+c.includes(0)}${+c.includes(1)}`;
+    const cSort = PAIR_STRING_MAP[cStr] || "0";
+
+    return {
+      key,
+      data: a,
+      sortKey: a.type + compSort + hSort + cSort + a._id,
+    };
+  });
+
+  sortableArray.sort((a, b) => {
+    if (a.sortKey < b.sortKey) return -1;
+    if (a.sortKey > b.sortKey) return 1;
+    return 0;
+  });
+
+  for (const key of Object.keys(automations)) delete automations[key];
+  for (const item of sortableArray) {
+    if (item.data.competencies.length === 3) delete item.data.competencies;
+    if (item.data.heighten.length === 2) delete item.data.heighten;
+    if (item.data.crit?.length === 2) delete item.data.crit;
+    automations[item.key] = item.data;
+  }
+  return automations;
 }

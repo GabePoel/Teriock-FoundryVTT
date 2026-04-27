@@ -132,12 +132,6 @@ effects:
           competencies:
             - 2
             - 1
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 0
-            - 1
           identifier: ability:flame-elder-sorcery-words
           type: changeCompetence
         qBmh3IhareOUWYkp:
@@ -147,12 +141,6 @@ effects:
           competencies:
             - 2
             - 1
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 0
-            - 1
           identifier: ability:celestial-elder-sorcery-words
           type: changeCompetence
         wtkqvDCHK6EONV6H:
@@ -161,12 +149,6 @@ effects:
             raw: 2
           competencies:
             - 2
-            - 1
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 0
             - 1
           identifier: ability:elder-sorcery-creation
           type: changeCompetence
@@ -318,12 +300,6 @@ effects:
           competencies:
             - 2
             - 1
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 0
-            - 1
           identifier: ability:flame-rotators
           type: changeCompetence
       class: flameMage
@@ -384,14 +360,7 @@ effects:
           automatic: true
           competence:
             raw: 0
-          competencies:
-            - 0
-            - 1
-            - 2
           expandTables: false
-          heighten:
-            - 0
-            - 1
           identifiers:
             - ability:flame-ray
             - ability:fire-ball
@@ -446,22 +415,6 @@ effects:
     system:
       _sup: ki0hegmY9eebSjuZ
       automations:
-        72ce567009179bea:
-          _id: 72ce567009179bea
-          changeType: add
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          duration:
-            raw: '@h * 3600'
-            unit: second
-          heighten:
-            - 1
-          type: duration
         FZiTANhHbYeUrxD6:
           _id: FZiTANhHbYeUrxD6
           attachDocuments: true
@@ -472,17 +425,7 @@ effects:
             overrideData: false
           competence:
             raw: 0
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
           data: '{}'
-          heighten:
-            - 0
-            - 1
           multi: false
           overrideCompetence: false
           overrideData: false
@@ -501,17 +444,7 @@ effects:
             overrideData: false
           competence:
             raw: 0
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
           data: '{}'
-          heighten:
-            - 0
-            - 1
           multi: false
           overrideCompetence: false
           overrideData: false
@@ -520,6 +453,38 @@ effects:
           type: addDocuments
           uuids:
             - Compendium.teriock.properties.ActiveEffect.f35cbf0baf87ac8c
+        WDPfYxMp2lWJxkW4:
+          _id: WDPfYxMp2lWJxkW4
+          attachDocuments: true
+          automatic: false
+          children:
+            data: '{}'
+            enabled: false
+            overrideData: false
+          competence:
+            raw: 0
+          data: |-
+            {
+              "system": {
+                "costs": {
+                  "tweaks": {
+                    "gifted": 1
+                  }
+                },
+                "delivery": "weapon",
+                "grantOnly": true,
+                "invoked": 1,
+                "piercing": {
+                  "raw": 1
+                }
+              }
+            }
+          multi: false
+          overrideCompetence: false
+          overrideData: true
+          qualifier: and(@ability, @spell, not(@es), @delivery.ray)
+          separate: false
+          type: addDocuments
         Tu4qrPot571fIQao:
           _id: Tu4qrPot571fIQao
           changes:
@@ -537,59 +502,16 @@ effects:
               target: parent
               type: override
               value: enchanted
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 0
-            - 1
           type: changes
-        WDPfYxMp2lWJxkW4:
-          _id: WDPfYxMp2lWJxkW4
-          attachDocuments: true
-          automatic: false
-          children:
-            data: '{}'
-            enabled: false
-            overrideData: false
-          competence:
-            raw: 0
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          data: |-
-            {
-              "system": {
-                "costs": {
-                  "tweaks": {
-                    "gifted": 1
-                  }
-                },
-                "delivery": "weapon",
-                "grantOnly": true,
-                "invoked": 1,
-                "piercing": {
-                  "raw": 1
-                }
-              }
-            }
+        72ce567009179bea:
+          _id: 72ce567009179bea
+          changeType: add
+          duration:
+            raw: '@h * 3600'
+            unit: second
           heighten:
-            - 0
             - 1
-          multi: false
-          overrideCompetence: false
-          overrideData: true
-          qualifier: and(@ability, @spell, not(@es), @delivery.ray)
-          separate: false
-          type: addDocuments
+          type: duration
       class: flameMage
       competence:
         raw: 0
@@ -671,45 +593,18 @@ effects:
           _id: 1728b3a84ea27844
           common:
             - bag
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
           showConfirmationDialog: true
           type: common
         3a62dd96319ca135:
           _id: 3a62dd96319ca135
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
           executor: false
-          heighten:
-            - 1
-            - 0
           relation: apply
           status: burned
           target: false
           type: status
         5e9e1d2033fe152a:
           _id: 5e9e1d2033fe152a
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
           executor: false
-          heighten:
-            - 1
-            - 0
           relation: apply
           status: ruined
           target: false

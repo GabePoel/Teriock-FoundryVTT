@@ -11,67 +11,9 @@ name: Fear Touch
 system:
   _sup: wzrmU3WzjMDmYAx8
   automations:
-    800c70e6560525a8:
-      _id: 800c70e6560525a8
-      competencies:
-        - 0
-        - 1
-        - 2
-      formula: (@h)d4[magic terror]
-      heighten:
-        - 1
-      impact: damage
-      merge: true
-      type: roll
-    b4960732f0b9ed9f:
-      _id: b4960732f0b9ed9f
-      competencies:
-        - 0
-        - 1
-        - 2
-      crit:
-        - 0
-        - 1
-      executor: true
-      heighten:
-        - 1
-        - 0
-      relation: include
-      status: frightened
-      target: false
-      type: status
-    d5717000e99ee582:
-      _id: d5717000e99ee582
-      competencies:
-        - 0
-        - 1
-        - 2
-      crit:
-        - 1
-      heighten:
-        - 1
-        - 0
-      type: combatExpiration
-      what:
-        roll: 2d4kh1
-        threshold: 4
-        type: rolled
-      when:
-        skip: 1
-        time: end
-        trigger: turn
-      who:
-        type: target
     d635eb44dba086dd:
       _id: d635eb44dba086dd
-      competencies:
-        - 0
-        - 1
-        - 2
       crit:
-        - 0
-      heighten:
-        - 1
         - 0
       type: combatExpiration
       what:
@@ -84,6 +26,36 @@ system:
         trigger: turn
       who:
         type: target
+    d5717000e99ee582:
+      _id: d5717000e99ee582
+      crit:
+        - 1
+      type: combatExpiration
+      what:
+        roll: 2d4kh1
+        threshold: 4
+        type: rolled
+      when:
+        skip: 1
+        time: end
+        trigger: turn
+      who:
+        type: target
+    800c70e6560525a8:
+      _id: 800c70e6560525a8
+      formula: (@h)d4[magic terror]
+      heighten:
+        - 1
+      impact: damage
+      merge: true
+      type: roll
+    b4960732f0b9ed9f:
+      _id: b4960732f0b9ed9f
+      executor: true
+      relation: include
+      status: frightened
+      target: false
+      type: status
   class: necromancer
   competence:
     raw: 0

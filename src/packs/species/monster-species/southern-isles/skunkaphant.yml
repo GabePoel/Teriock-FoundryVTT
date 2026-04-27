@@ -252,35 +252,8 @@ effects:
     name: Stink Packet
     system:
       automations:
-        18537e76761a45dc:
-          _id: 18537e76761a45dc
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          executor: false
-          heighten:
-            - 1
-            - 0
-          relation: include
-          status: blind
-          target: false
-          type: status
         d635eb44dba086dd:
           _id: d635eb44dba086dd
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
           type: combatExpiration
           what:
             roll: 2d4kh1
@@ -292,6 +265,13 @@ effects:
             trigger: turn
           who:
             type: target
+        18537e76761a45dc:
+          _id: 18537e76761a45dc
+          executor: false
+          relation: include
+          status: blind
+          target: false
+          type: status
       competence:
         raw: 0
       delivery: missile
@@ -349,69 +329,6 @@ effects:
     name: Stink Spray
     system:
       automations:
-        11RCtOPdFaMrgfGn:
-          _id: 11RCtOPdFaMrgfGn
-          category: statuses
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 0
-            - 1
-          relation: immunities
-          type: protection
-          value: odorless
-        7400b41f20d9f100:
-          _id: 7400b41f20d9f100
-          angle: '@angle.normal'
-          attachToToken: true
-          automatic: true
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          data: '{}'
-          deleteOnTurnChange: true
-          expandWithToken: true
-          heighten:
-            - 0
-            - 1
-          innerWidth: '0'
-          multi: false
-          outerWidth: '0'
-          overrideData: false
-          qualifier: '0'
-          regionType: cone
-          restriction:
-            enabled: false
-            priority: 0
-            type: move
-          targeting: true
-          trigger: executeInput
-          type: region
-        IRYnhWSymAtwDWAi:
-          _id: IRYnhWSymAtwDWAi
-          category: statuses
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 0
-            - 1
-          relation: immunities
-          type: protection
-          value: hidden
         e789ed5e109ebd1a:
           _id: e789ed5e109ebd1a
           changes:
@@ -422,17 +339,40 @@ effects:
               target: Actor
               type: downgrade
               value: '-3'
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
           type: changes
+        11RCtOPdFaMrgfGn:
+          _id: 11RCtOPdFaMrgfGn
+          category: statuses
+          relation: immunities
+          type: protection
+          value: odorless
+        IRYnhWSymAtwDWAi:
+          _id: IRYnhWSymAtwDWAi
+          category: statuses
+          relation: immunities
+          type: protection
+          value: hidden
+        7400b41f20d9f100:
+          _id: 7400b41f20d9f100
+          angle: '@angle.normal'
+          attachToToken: true
+          automatic: true
+          data: '{}'
+          deleteOnTurnChange: true
+          expandWithToken: true
+          innerWidth: '0'
+          multi: false
+          outerWidth: '0'
+          overrideData: false
+          qualifier: '0'
+          regionType: cone
+          restriction:
+            enabled: true
+            priority: 0
+            type: move
+          targeting: true
+          trigger: executeInput
+          type: region
       competence:
         raw: 0
       costs:

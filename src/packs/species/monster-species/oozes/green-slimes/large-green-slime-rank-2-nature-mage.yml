@@ -78,16 +78,6 @@ effects:
               target: Actor
               type: upgrade
               value: '@rank.mag - 1'
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
           type: changes
         f025905e157ac261:
           _id: f025905e157ac261
@@ -102,12 +92,6 @@ effects:
           competencies:
             - 1
             - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
           type: changes
         f7da3b5e1992a724:
           _id: f7da3b5e1992a724
@@ -121,12 +105,6 @@ effects:
               value: 2 * (@rank.mag - 1) + @p
           competencies:
             - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
           type: changes
       class: natureMage
       competence:
@@ -511,17 +489,7 @@ effects:
       automations:
         9f08fabc1d2bcac2:
           _id: 9f08fabc1d2bcac2
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
           executor: false
-          heighten:
-            - 1
-            - 0
           relation: include
           status: transformed
           target: false
@@ -531,16 +499,6 @@ effects:
           automatic: true
           competence:
             raw: 0
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 0
-            - 1
           level: full
           multi: false
           override:
@@ -660,16 +618,6 @@ effects:
               target: Actor
               type: override
               value: sunburst
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
           type: changes
       class: natureMage
       competence:
@@ -731,58 +679,27 @@ effects:
     system:
       _sup: 1QrSqcHJNHunodpX
       automations:
-        0b65894b82470568:
-          _id: 0b65894b82470568
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          executor: false
-          heighten:
-            - 1
-            - 0
-          relation: include
-          status: immobilized
-          target: false
-          type: status
-        5812b63d828a0227:
-          _id: 5812b63d828a0227
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          executor: false
-          heighten:
-            - 1
-            - 0
-          relation: include
-          status: grounded
-          target: false
-          type: status
+        d635eb44dba086dd:
+          _id: d635eb44dba086dd
+          type: combatExpiration
+          what:
+            roll: 2d4kh1
+            threshold: 4
+            type: rolled
+          when:
+            skip: 0
+            time: start
+            trigger: turn
+          who:
+            type: target
         7400b41f20d9f100:
           _id: 7400b41f20d9f100
           angle: '60'
           attachToToken: true
           automatic: true
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
           data: '{}'
           deleteOnTurnChange: true
           expandWithToken: true
-          heighten:
-            - 0
-            - 1
           innerWidth: '0'
           multi: false
           outerWidth: '0'
@@ -798,39 +715,26 @@ effects:
           type: region
         800c70e6560525a8:
           _id: 800c70e6560525a8
-          competencies:
-            - 0
-            - 1
-            - 2
           formula: (@h)d4[magic vine]
           heighten:
             - 1
           impact: damage
           merge: true
           type: roll
-        d635eb44dba086dd:
-          _id: d635eb44dba086dd
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: combatExpiration
-          what:
-            roll: 2d4kh1
-            threshold: 4
-            type: rolled
-          when:
-            skip: 0
-            time: start
-            trigger: turn
-          who:
-            type: target
+        0b65894b82470568:
+          _id: 0b65894b82470568
+          executor: false
+          relation: include
+          status: immobilized
+          target: false
+          type: status
+        5812b63d828a0227:
+          _id: 5812b63d828a0227
+          executor: false
+          relation: include
+          status: grounded
+          target: false
+          type: status
       class: natureMage
       competence:
         raw: 0
@@ -895,64 +799,8 @@ effects:
     system:
       _sup: 1QrSqcHJNHunodpX
       automations:
-        0b65894b82470568:
-          _id: 0b65894b82470568
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          executor: false
-          heighten:
-            - 1
-            - 0
-          relation: include
-          status: immobilized
-          target: false
-          type: status
-        5812b63d828a0227:
-          _id: 5812b63d828a0227
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          executor: false
-          heighten:
-            - 1
-            - 0
-          relation: include
-          status: grounded
-          target: false
-          type: status
-        800c70e6560525a8:
-          _id: 800c70e6560525a8
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: (@h)d4[magic vine]
-          heighten:
-            - 1
-          impact: damage
-          merge: true
-          type: roll
         d635eb44dba086dd:
           _id: d635eb44dba086dd
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
           type: combatExpiration
           what:
             roll: 2d4kh1
@@ -964,6 +812,28 @@ effects:
             trigger: turn
           who:
             type: target
+        800c70e6560525a8:
+          _id: 800c70e6560525a8
+          formula: (@h)d4[magic vine]
+          heighten:
+            - 1
+          impact: damage
+          merge: true
+          type: roll
+        0b65894b82470568:
+          _id: 0b65894b82470568
+          executor: false
+          relation: include
+          status: immobilized
+          target: false
+          type: status
+        5812b63d828a0227:
+          _id: 5812b63d828a0227
+          executor: false
+          relation: include
+          status: grounded
+          target: false
+          type: status
       class: natureMage
       competence:
         raw: 0
@@ -1025,16 +895,6 @@ effects:
       automations:
         d635eb44dba086dd:
           _id: d635eb44dba086dd
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
           type: combatExpiration
           what:
             roll: 2d4kh1
@@ -1116,30 +976,16 @@ effects:
           common:
             - revive
             - bag
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 1
-            - 0
           showConfirmationDialog: true
           type: common
         iCn9pFDIGFJWxm6H:
           _id: iCn9pFDIGFJWxm6H
-          competencies:
-            - 0
-            - 1
-            - 2
           conditions:
             absent:
               - burned
               - frozen
           consumeStatDice: false
           forHarm: false
-          heighten:
-            - 0
-            - 1
           noStatDice: false
           trigger: turnStart
           type: heal
@@ -1218,17 +1064,7 @@ effects:
             overrideData: false
           competence:
             raw: 0
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
           data: '{}'
-          heighten:
-            - 0
-            - 1
           multi: false
           overrideCompetence: false
           overrideData: false
@@ -1311,13 +1147,6 @@ effects:
           _id: Ta9OZqqZL2lOaEax
           common:
             - destroy
-          competencies:
-            - 0
-            - 1
-            - 2
-          heighten:
-            - 0
-            - 1
           showConfirmationDialog: true
           type: common
       class: natureMage

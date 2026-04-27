@@ -85,35 +85,8 @@ effects:
     name: Pour Freezing Liquid
     system:
       automations:
-        75b288bc6af27fcf:
-          _id: 75b288bc6af27fcf
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          executor: false
-          heighten:
-            - 1
-            - 0
-          relation: apply
-          status: frozen
-          target: false
-          type: status
         d635eb44dba086dd:
           _id: d635eb44dba086dd
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
           type: combatExpiration
           what:
             roll: 2d4kh1
@@ -125,6 +98,13 @@ effects:
             trigger: action
           who:
             type: target
+        75b288bc6af27fcf:
+          _id: 75b288bc6af27fcf
+          executor: false
+          relation: apply
+          status: frozen
+          target: false
+          type: status
       competence:
         raw: 0
       consumeSource: true
@@ -217,67 +197,9 @@ effects:
     system:
       _sup: iYl1sblFlotOhUBe
       automations:
-        09ed285450c5de7b:
-          _id: 09ed285450c5de7b
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          executor: false
-          heighten:
-            - 1
-            - 0
-          relation: include
-          status: frozen
-          target: false
-          type: status
-        800c70e6560525a8:
-          _id: 800c70e6560525a8
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: (@h)d4[magic ice]
-          heighten:
-            - 1
-          impact: damage
-          merge: true
-          type: roll
-        d5717000e99ee582:
-          _id: d5717000e99ee582
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: combatExpiration
-          what:
-            roll: 2d4kh1
-            threshold: 4
-            type: rolled
-          when:
-            skip: 1
-            time: end
-            trigger: action
-          who:
-            type: target
         d635eb44dba086dd:
           _id: d635eb44dba086dd
-          competencies:
-            - 0
-            - 1
-            - 2
           crit:
-            - 0
-          heighten:
-            - 1
             - 0
           type: combatExpiration
           what:
@@ -290,6 +212,36 @@ effects:
             trigger: action
           who:
             type: target
+        d5717000e99ee582:
+          _id: d5717000e99ee582
+          crit:
+            - 1
+          type: combatExpiration
+          what:
+            roll: 2d4kh1
+            threshold: 4
+            type: rolled
+          when:
+            skip: 1
+            time: end
+            trigger: action
+          who:
+            type: target
+        800c70e6560525a8:
+          _id: 800c70e6560525a8
+          formula: (@h)d4[magic ice]
+          heighten:
+            - 1
+          impact: damage
+          merge: true
+          type: roll
+        09ed285450c5de7b:
+          _id: 09ed285450c5de7b
+          executor: false
+          relation: include
+          status: frozen
+          target: false
+          type: status
       class: stormMage
       competence:
         raw: 0

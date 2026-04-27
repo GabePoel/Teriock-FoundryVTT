@@ -18,42 +18,6 @@ effects:
     name: Bite
     system:
       automations:
-        29b275994cf9f5b1:
-          _id: 29b275994cf9f5b1
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: 1d4
-          heighten:
-            - 1
-            - 0
-          impact: damage
-          merge: true
-          type: roll
-        3f7fa7707643426f:
-          _id: 3f7fa7707643426f
-          competencies:
-            - 2
-          formula: 1d8
-          heighten:
-            - 1
-            - 0
-          impact: damage
-          merge: true
-          type: roll
-        5e4d195ed81a10cc:
-          _id: 5e4d195ed81a10cc
-          competencies:
-            - 1
-            - 2
-          formula: 1d6
-          heighten:
-            - 1
-            - 0
-          impact: damage
-          merge: true
-          type: roll
         e789ed5e109ebd1a:
           _id: e789ed5e109ebd1a
           changes:
@@ -64,16 +28,6 @@ effects:
               target: body
               type: upgrade
               value: 1d4
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
           type: changes
         f025905e157ac261:
           _id: f025905e157ac261
@@ -88,12 +42,6 @@ effects:
           competencies:
             - 1
             - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
           type: changes
         f7da3b5e1992a724:
           _id: f7da3b5e1992a724
@@ -107,13 +55,30 @@ effects:
               value: 1d8
           competencies:
             - 2
-          crit:
-            - 0
-            - 1
-          heighten:
-            - 1
-            - 0
           type: changes
+        29b275994cf9f5b1:
+          _id: 29b275994cf9f5b1
+          formula: 1d4
+          impact: damage
+          merge: true
+          type: roll
+        5e4d195ed81a10cc:
+          _id: 5e4d195ed81a10cc
+          competencies:
+            - 1
+            - 2
+          formula: 1d6
+          impact: damage
+          merge: true
+          type: roll
+        3f7fa7707643426f:
+          _id: 3f7fa7707643426f
+          competencies:
+            - 2
+          formula: 1d8
+          impact: damage
+          merge: true
+          type: roll
       competence:
         raw: 0
       delivery: self
@@ -163,67 +128,9 @@ effects:
     name: Fear Touch
     system:
       automations:
-        800c70e6560525a8:
-          _id: 800c70e6560525a8
-          competencies:
-            - 0
-            - 1
-            - 2
-          formula: (@h)d4[magic terror]
-          heighten:
-            - 1
-          impact: damage
-          merge: true
-          type: roll
-        b4960732f0b9ed9f:
-          _id: b4960732f0b9ed9f
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 0
-            - 1
-          executor: true
-          heighten:
-            - 1
-            - 0
-          relation: include
-          status: frightened
-          target: false
-          type: status
-        d5717000e99ee582:
-          _id: d5717000e99ee582
-          competencies:
-            - 0
-            - 1
-            - 2
-          crit:
-            - 1
-          heighten:
-            - 1
-            - 0
-          type: combatExpiration
-          what:
-            roll: 2d4kh1
-            threshold: 4
-            type: rolled
-          when:
-            skip: 1
-            time: end
-            trigger: turn
-          who:
-            type: target
         d635eb44dba086dd:
           _id: d635eb44dba086dd
-          competencies:
-            - 0
-            - 1
-            - 2
           crit:
-            - 0
-          heighten:
-            - 1
             - 0
           type: combatExpiration
           what:
@@ -236,6 +143,36 @@ effects:
             trigger: turn
           who:
             type: target
+        d5717000e99ee582:
+          _id: d5717000e99ee582
+          crit:
+            - 1
+          type: combatExpiration
+          what:
+            roll: 2d4kh1
+            threshold: 4
+            type: rolled
+          when:
+            skip: 1
+            time: end
+            trigger: turn
+          who:
+            type: target
+        800c70e6560525a8:
+          _id: 800c70e6560525a8
+          formula: (@h)d4[magic terror]
+          heighten:
+            - 1
+          impact: damage
+          merge: true
+          type: roll
+        b4960732f0b9ed9f:
+          _id: b4960732f0b9ed9f
+          executor: true
+          relation: include
+          status: frightened
+          target: false
+          type: status
       class: necromancer
       competence:
         raw: 0

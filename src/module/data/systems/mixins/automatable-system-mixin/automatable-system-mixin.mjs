@@ -42,23 +42,6 @@ export default function AutomatableSystemMixin(Base) {
       }
 
       /** @inheritDoc */
-      static migrateData(source, options, state) {
-        const typeMigrations = {
-          addExternal: "addDocuments",
-          useExternal: "useDocuments",
-          useLocal: "useDocuments",
-        };
-        if (source.automations && typeof source.automations === "object") {
-          for (const automation of Object.values(source.automations)) {
-            if (!automation || typeof automation !== "object") continue;
-            const migratedType = typeMigrations[automation.type];
-            if (migratedType) automation.type = migratedType;
-          }
-        }
-        return super.migrateData(source, options, state);
-      }
-
-      /** @inheritDoc */
       get pseudoCollections() {
         return Object.assign(super.pseudoCollections, {
           Automation: this.automations,

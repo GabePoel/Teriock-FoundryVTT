@@ -127,13 +127,6 @@ items:
           automations:
             5KN7CIW4kc6fgrgW:
               _id: 5KN7CIW4kc6fgrgW
-              competencies:
-                - 0
-                - 1
-                - 2
-              heighten:
-                - 0
-                - 1
               movementAction: fly
               type: changeMovement
             e789ed5e109ebd1a:
@@ -146,16 +139,6 @@ items:
                   target: Actor
                   type: upgrade
                   value: '2'
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
               type: changes
             f025905e157ac261:
               _id: f025905e157ac261
@@ -170,12 +153,6 @@ items:
               competencies:
                 - 1
                 - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
               type: changes
           class: corsair
           competence:
@@ -291,16 +268,6 @@ items:
                   target: Actor
                   type: upgrade
                   value: '120'
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
               type: changes
           competence:
             raw: 0
@@ -491,46 +458,16 @@ items:
               _id: 1728b3a84ea27844
               common:
                 - bag
-              competencies:
-                - 0
-                - 1
-                - 2
-              heighten:
-                - 1
-                - 0
               showConfirmationDialog: true
               type: common
-            29b275994cf9f5b1:
-              _id: 29b275994cf9f5b1
-              competencies:
-                - 0
-                - 1
-                - 2
-              formula: 10[lethal magic]
-              heighten:
-                - 1
-                - 0
-              impact: damage
-              merge: true
-              type: roll
             7400b41f20d9f100:
               _id: 7400b41f20d9f100
               angle: '@angle.normal'
               attachToToken: true
               automatic: true
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
               data: '{}'
               deleteOnTurnChange: true
               expandWithToken: true
-              heighten:
-                - 0
-                - 1
               innerWidth: '0'
               multi: false
               outerWidth: '0'
@@ -538,12 +475,18 @@ items:
               qualifier: '0'
               regionType: cone
               restriction:
-                enabled: false
+                enabled: true
                 priority: 0
                 type: move
               targeting: true
               trigger: executeInput
               type: region
+            29b275994cf9f5b1:
+              _id: 29b275994cf9f5b1
+              formula: 10[lethal magic]
+              impact: damage
+              merge: true
+              type: roll
           competence:
             raw: 0
           costs:
@@ -659,31 +602,9 @@ items:
         system:
           _sup: DdmAqFPcpsRv8o0S
           automations:
-            8f623097f9f2a087:
-              _id: 8f623097f9f2a087
-              bonus: '0'
-              competencies:
-                - 0
-                - 1
-                - 2
-              heighten:
-                - 1
-                - 0
-              hex: false
-              type: resist
             oJH3v7kvIbVGDlBS:
               _id: oJH3v7kvIbVGDlBS
               category: statuses
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 0
-                - 1
               relation: resistances
               type: protection
               value: frightened
@@ -741,66 +662,8 @@ items:
         system:
           _sup: DdmAqFPcpsRv8o0S
           automations:
-            7400b41f20d9f100:
-              _id: 7400b41f20d9f100
-              angle: '60'
-              attachToToken: true
-              automatic: true
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              data: '{}'
-              deleteOnTurnChange: true
-              expandWithToken: true
-              heighten:
-                - 0
-                - 1
-              innerWidth: '0'
-              multi: false
-              outerWidth: '0'
-              overrideData: false
-              qualifier: '0'
-              regionType: circle
-              restriction:
-                enabled: false
-                priority: 0
-                type: move
-              targeting: true
-              trigger: executeInput
-              type: region
-            b4960732f0b9ed9f:
-              _id: b4960732f0b9ed9f
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              executor: false
-              heighten:
-                - 1
-                - 0
-              relation: include
-              status: frightened
-              target: false
-              type: status
             d635eb44dba086dd:
               _id: d635eb44dba086dd
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
               type: combatExpiration
               what:
                 roll: 2d4kh1
@@ -812,6 +675,34 @@ items:
                 trigger: turn
               who:
                 type: target
+            7400b41f20d9f100:
+              _id: 7400b41f20d9f100
+              angle: '60'
+              attachToToken: true
+              automatic: true
+              data: '{}'
+              deleteOnTurnChange: true
+              expandWithToken: true
+              innerWidth: '0'
+              multi: false
+              outerWidth: '0'
+              overrideData: false
+              qualifier: '0'
+              regionType: circle
+              restriction:
+                enabled: true
+                priority: 0
+                type: sound
+              targeting: true
+              trigger: executeInput
+              type: region
+            b4960732f0b9ed9f:
+              _id: b4960732f0b9ed9f
+              executor: false
+              relation: include
+              status: frightened
+              target: false
+              type: status
           class: berserker
           competence:
             raw: 0
@@ -1159,16 +1050,6 @@ items:
                   target: parent
                   type: upgrade
                   value: '1'
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 0
-                - 1
               type: changes
           competence:
             raw: 0
@@ -1285,13 +1166,6 @@ items:
               angle: '60'
               attachToToken: false
               automatic: true
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
               data: |-
                 {
                   "restriction": {
@@ -1303,9 +1177,6 @@ items:
               deleteOnTurnChange: false
               expandWithToken: false
               height: '5'
-              heighten:
-                - 0
-                - 1
               innerWidth: '0'
               multi: false
               outerWidth: '0'
@@ -1426,13 +1297,6 @@ items:
           automations:
             AXwLjBzDx4XcVcAJ:
               _id: AXwLjBzDx4XcVcAJ
-              competencies:
-                - 0
-                - 1
-                - 2
-              heighten:
-                - 0
-                - 1
               movementAction: climb
               type: changeMovement
             e789ed5e109ebd1a:
@@ -1445,16 +1309,6 @@ items:
                   target: Actor
                   type: upgrade
                   value: '2'
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
               type: changes
             f025905e157ac261:
               _id: f025905e157ac261
@@ -1469,12 +1323,6 @@ items:
               competencies:
                 - 1
                 - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
               type: changes
           competence:
             raw: 0
@@ -1527,13 +1375,6 @@ items:
           automations:
             Arm4CqvFyyRVggkV:
               _id: Arm4CqvFyyRVggkV
-              competencies:
-                - 0
-                - 1
-                - 2
-              heighten:
-                - 0
-                - 1
               movementAction: jump
               type: changeMovement
             e789ed5e109ebd1a:
@@ -1553,16 +1394,6 @@ items:
                   target: Actor
                   type: upgrade
                   value: '2'
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
               type: changes
             f025905e157ac261:
               _id: f025905e157ac261
@@ -1584,12 +1415,6 @@ items:
               competencies:
                 - 1
                 - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
               type: changes
           class: assassin
           competence:
@@ -1648,44 +1473,24 @@ items:
         system:
           _sup: HxQ5OA9s2kzlEHO9
           automations:
-            0b0d1426453abb55:
-              _id: 0b0d1426453abb55
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              executor: false
-              heighten:
-                - 1
-                - 0
-              relation: apply
-              status: hidden
-              target: false
-              type: status
             Hd5o6s1SdA8C7IfT:
               _id: Hd5o6s1SdA8C7IfT
               competence:
                 raw: 0
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
               data: '{}'
-              heighten:
-                - 0
-                - 1
               overrideCompetence: false
               overrideData: false
               preventEffect: false
               preventFeat: false
               preventThreshold: true
               type: modifyEffect
+            0b0d1426453abb55:
+              _id: 0b0d1426453abb55
+              executor: false
+              relation: apply
+              status: hidden
+              target: false
+              type: status
           class: thief
           competence:
             raw: 0
@@ -1772,16 +1577,6 @@ items:
                   target: body
                   type: upgrade
                   value: '1'
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
               type: changes
             f025905e157ac261:
               _id: f025905e157ac261
@@ -1796,12 +1591,6 @@ items:
               competencies:
                 - 1
                 - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
               type: changes
             f7da3b5e1992a724:
               _id: f7da3b5e1992a724
@@ -1815,12 +1604,6 @@ items:
                   value: '3'
               competencies:
                 - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
               type: changes
           competence:
             raw: 0
@@ -1881,42 +1664,6 @@ items:
         system:
           _sup: thtFHPE7kvzyAdMF
           automations:
-            29b275994cf9f5b1:
-              _id: 29b275994cf9f5b1
-              competencies:
-                - 0
-                - 1
-                - 2
-              formula: 1d4
-              heighten:
-                - 1
-                - 0
-              impact: damage
-              merge: true
-              type: roll
-            3f7fa7707643426f:
-              _id: 3f7fa7707643426f
-              competencies:
-                - 2
-              formula: 1d8
-              heighten:
-                - 1
-                - 0
-              impact: damage
-              merge: true
-              type: roll
-            5e4d195ed81a10cc:
-              _id: 5e4d195ed81a10cc
-              competencies:
-                - 1
-                - 2
-              formula: 1d6
-              heighten:
-                - 1
-                - 0
-              impact: damage
-              merge: true
-              type: roll
             e789ed5e109ebd1a:
               _id: e789ed5e109ebd1a
               changes:
@@ -1927,16 +1674,6 @@ items:
                   target: body
                   type: upgrade
                   value: 1d4
-              competencies:
-                - 0
-                - 1
-                - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
               type: changes
             f025905e157ac261:
               _id: f025905e157ac261
@@ -1951,12 +1688,6 @@ items:
               competencies:
                 - 1
                 - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
               type: changes
             f7da3b5e1992a724:
               _id: f7da3b5e1992a724
@@ -1970,13 +1701,30 @@ items:
                   value: 1d8
               competencies:
                 - 2
-              crit:
-                - 0
-                - 1
-              heighten:
-                - 1
-                - 0
               type: changes
+            29b275994cf9f5b1:
+              _id: 29b275994cf9f5b1
+              formula: 1d4
+              impact: damage
+              merge: true
+              type: roll
+            5e4d195ed81a10cc:
+              _id: 5e4d195ed81a10cc
+              competencies:
+                - 1
+                - 2
+              formula: 1d6
+              impact: damage
+              merge: true
+              type: roll
+            3f7fa7707643426f:
+              _id: 3f7fa7707643426f
+              competencies:
+                - 2
+              formula: 1d8
+              impact: damage
+              merge: true
+              type: roll
           competence:
             raw: 0
           delivery: self
@@ -2128,8 +1876,8 @@ items:
           unit: self
       vitals: false
     type: body
-  - _id: CklXymkZGJHjOC71
-    _key: '!actors.items!ffab9b92a153acc0.CklXymkZGJHjOC71'
+  - _id: BYCnBMAVlpCg1ZlC
+    _key: '!actors.items!ffab9b92a153acc0.BYCnBMAVlpCg1ZlC'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.57a3f724d5743aa3
       coreVersion: '14'
@@ -2139,7 +1887,7 @@ items:
     effects:
       - _id: 4XNvcPLM4s2CAFYb
         _key: >-
-          !actors.items.effects!ffab9b92a153acc0.CklXymkZGJHjOC71.4XNvcPLM4s2CAFYb
+          !actors.items.effects!ffab9b92a153acc0.BYCnBMAVlpCg1ZlC.4XNvcPLM4s2CAFYb
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.e72cfa283068ef0a
           coreVersion: '14'
