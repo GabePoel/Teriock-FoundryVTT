@@ -112,9 +112,10 @@ export default (Base) => {
       prepareDerivedData() {
         super.prepareDerivedData();
         this.consumeSourceText = this.consumeSource
-          ? _loc("TERIOCK.SYSTEMS.Ability.FIELDS.consumeSourceText.derived", {
-              uuid: this.parent.parent?.uuid,
-            })
+          ? _loc(
+              `TERIOCK.SYSTEMS.Ability.FIELDS.consumeSourceText.${this.parent.parent ? "derived" : "noParent"}`,
+              { uuid: this.parent.parent?.uuid },
+            )
           : "";
         this.grantOnlyText = this.grantOnly
           ? _loc("TERIOCK.SYSTEMS.Ability.FIELDS.grantOnlyText.derived", {
