@@ -63,7 +63,7 @@ export default class AddDocumentsAutomation extends mix(
    * @returns {string[]}
    */
   get _attachmentPaths() {
-    if (this.parent.type !== "ability") return ["display.label"];
+    if (this.document?.type !== "ability") return ["display.label"];
     return ["separate", this.separate ? "display.label" : "attachDocuments"];
   }
 

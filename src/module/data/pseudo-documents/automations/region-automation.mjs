@@ -27,6 +27,7 @@ const { fields } = foundry.data;
  * @property {boolean} deleteOnTurnChange
  * @property {boolean} expandWithToken
  * @property {boolean} targeting
+ * @property {object} restriction
  */
 export default class RegionAutomation extends mix(
   CritAutomation,
@@ -44,7 +45,7 @@ export default class RegionAutomation extends mix(
     "SHAPE.TYPES.emanation",
     "SHAPE.TYPES.rectangle",
     "SHAPE.TYPES.ring",
-    "BEHAVIOR.TYPES.adjustDarknessLevel",
+    "REGION",
   ];
 
   /** @inheritdoc */
@@ -92,6 +93,26 @@ export default class RegionAutomation extends mix(
       radius: this.#rangeField(),
       radiusX: this.#rangeField(),
       radiusY: this.#rangeField(),
+      restriction: new fields.SchemaField({
+        enabled: new fields.BooleanField(),
+        type: new fields.StringField({
+          required: true,
+          choices: Object.fromEntries(
+            CONST.EDGE_RESTRICTION_TYPES.map((t) => [
+              t,
+              _loc(`REGION.RESTRICTION_TYPES.${t}.label`),
+            ]),
+          ),
+          initial: "move",
+        }),
+        priority: new fields.NumberField({
+          required: true,
+          nullable: false,
+          integer: true,
+          initial: 0,
+          min: 0,
+        }),
+      }),
       regionType: new fields.StringField({
         choices: localizeChoices({
           circle: "SHAPE.TYPES.circle.name",
@@ -117,6 +138,8 @@ export default class RegionAutomation extends mix(
       "deleteOnTurnChange",
       ...this._targetPaths,
       "hr",
+      ...this._restrictionPaths,
+      "hr",
       ...this._triggerPaths,
       ...this._triggerDisplayPaths,
       "hr",
@@ -140,6 +163,18 @@ export default class RegionAutomation extends mix(
       return ["radius", "innerWidth", "outerWidth"];
     }
     return [];
+  }
+
+  /**
+   * Restriction paths.
+   * @returns {string[]}
+   */
+  get _restrictionPaths() {
+    const paths = ["restriction.enabled"];
+    if (this.restriction.enabled) {
+      paths.push(...["restriction.type", "restriction.priority"]);
+    }
+    return paths;
   }
 
   /**
@@ -191,16 +226,15 @@ export default class RegionAutomation extends mix(
     const region = await this.placeRegion({ execution: scope.execution });
     if (scope.trigger === "executeInput" && this.targeting) {
       if (scope.execution && region.parent === game.scenes.viewed) {
-        let released = false;
+        let releaseOthers = true;
         for (const t of game.scenes.viewed.tokens.contents.filter(
           (t) =>
             t.hasStatusEffect("ethereal") ===
               !!scope.execution?.actor?.statuses.has("ethereal") &&
             t.testInsideRegion(region),
         )) {
-          scope.execution.targets.add(t?.object);
-          t?.object.setTarget(true, { releaseOthers: !released });
-          released = true;
+          t?.object.setTarget(true, { releaseOthers });
+          releaseOthers = false;
         }
       }
     }
@@ -217,7 +251,7 @@ export default class RegionAutomation extends mix(
       {
         behaviors: [],
         color: Number(game.user.color),
-        displayMeasurements: true,
+        displayMeasurements: false,
         flags: { teriock: { deleteOnTurnChange: this.deleteOnTurnChange } },
         highlightMode: this.targeting ? "coverage" : "shapes",
         levels: [canvas.level.id],
@@ -225,6 +259,7 @@ export default class RegionAutomation extends mix(
           name: options.execution?.source.name ?? this.document.name,
         }),
         ownership: { [game.user.id]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER },
+        restriction: this.restriction,
         shapes: [
           {
             type: this.regionType,

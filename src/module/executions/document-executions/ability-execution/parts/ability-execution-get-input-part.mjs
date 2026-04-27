@@ -226,14 +226,13 @@ export default function AbilityExecutionGetInputPart(Base) {
       async _getInput() {
         await super._getInput();
         await this._getCostInput();
-        await this._getTargetInput();
       }
 
       /**
        * Determine targets and place templates.
        * @return {Promise<void>}
        */
-      async _getTargetInput() {
+      async _getTargets() {
         if (
           this.source.system.targets.size === 1 &&
           this.source.system.targets.has("self") &&
@@ -245,6 +244,13 @@ export default function AbilityExecutionGetInputPart(Base) {
             this.targets.add(target);
           }
         }
+      }
+
+      /** @inheritDoc */
+      async _postInput() {
+        const out = await super._postInput();
+        await this._getTargets();
+        return out;
       }
     }
   );

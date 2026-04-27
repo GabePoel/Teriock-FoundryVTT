@@ -98,6 +98,10 @@ export default class UseDocumentsAutomation extends mix(
     });
     const icon = TERIOCK.config.document[doc.type]?.icon;
     return new UseExternalActivation({
+      display: {
+        label: doc.name,
+        icon: TERIOCK.config.document[doc.type]?.icon,
+      },
       options: {
         competence: this.overrideCompetence
           ? this.competence.raw
@@ -107,10 +111,6 @@ export default class UseDocumentsAutomation extends mix(
         label,
         noHeighten: this.noHeighten,
         uuid,
-      },
-      display: {
-        label: doc.name,
-        icon: TERIOCK.config.document[doc.type]?.icon,
       },
     });
   }

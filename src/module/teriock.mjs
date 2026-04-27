@@ -502,6 +502,9 @@ Hooks.once("i18nInit", () => {
   });
 });
 
+// Activate Dependants Registry
+// ============================
+
 Hooks.once("ready", () => {
   game.teriock.dependentsRegistry.activate();
 });
