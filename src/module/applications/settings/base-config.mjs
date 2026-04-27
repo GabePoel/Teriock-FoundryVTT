@@ -20,8 +20,8 @@ export default class BaseConfig extends TeriockBaseApplication {
 
   /** @override */
   static PARTS = {
-    footer: { template: "templates/generic/form-footer.hbs" },
     general: { template: "teriock/settings/base-config" },
+    footer: { template: "templates/generic/form-footer.hbs" },
   };
 
   /**
