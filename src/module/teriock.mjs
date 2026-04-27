@@ -91,6 +91,7 @@ foundry.helpers.Hooks.once("init", function () {
       actors: applications.sidebar.TeriockActorDirectory,
       chat: applications.sidebar.TeriockChatLog,
       combat: applications.sidebar.TeriockCombatTracker,
+      compendium: applications.sidebar.TeriockCompendiumDirectory,
       hotbar: applications.ui.TeriockHotbar,
       items: applications.sidebar.TeriockItemDirectory,
       notifications: applications.ui.TeriockNotifications,
@@ -502,11 +503,21 @@ Hooks.once("i18nInit", () => {
   });
 });
 
-// Activate Dependants Registry
-// ============================
+// Final Steps
+// ===========
 
 Hooks.once("ready", () => {
+  // Activate Documents Registry
+  // ---------------------------
   game.teriock.dependentsRegistry.activate();
+
+  // Pre-index All Sub-Document Compendium Packs
+  // -------------------------------------------
+  for (const p of game.packs.contents) {
+    if (["Item", "ActiveEffect"].includes(p.documentName)) {
+      p.getIndex();
+    }
+  }
 });
 
 // Register Hooks
