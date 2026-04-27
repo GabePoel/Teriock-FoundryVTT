@@ -39,14 +39,15 @@ export default class TeriockHotbar extends Hotbar {
     const options = super._getContextMenuOptions();
     options.push({
       icon: makeIcon(TERIOCK.display.icons.ui.openWindow, "contextMenu"),
-      label: "Open Document Sheet",
-      onClick: async (li) => {
+      label: _loc("TERIOCK.DIALOGS.HotbarDrop.entry"),
+      onClick: async (ev, li) => {
         const macro = this.#getMacroForSlot(li);
         if (macro.getFlag("teriock", "macroType") === "useGeneral") {
           const actor = game.actors.default;
           const doc = await findBestDocument(
-            actor,
             macro.getFlag("teriock", "macroLookupKey"),
+            actor,
+            { localOnly: false },
           );
           await doc?.sheet.render(true);
         } else {

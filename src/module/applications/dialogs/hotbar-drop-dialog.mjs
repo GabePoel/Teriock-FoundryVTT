@@ -8,42 +8,42 @@ import { TeriockTextEditor } from "../ux/_module.mjs";
  * @returns {Promise<"linked"|"general">} Type of macro to be made.
  */
 export default async function hotbarDropDialog(doc) {
-  let choice = "general";
-  if (doc.actor) {
-    const label = TERIOCK.config.document[doc.type].name.toLowerCase();
-    const context = {
-      actor: `@UUID[${doc.actor.uuid}]`,
-      child: `@UUID[${doc.uuid}]`,
-      label,
-      name: doc.name,
-    };
-    const content = await TeriockTextEditor.enrichHTML(
-      await TeriockTextEditor.renderTemplate(
-        "teriock/dialogs/hotbar-drop",
-        context,
-      ),
-    );
-    choice = await TeriockDialog.prompt({
-      buttons: [
-        {
-          action: "linked",
-          callback: () => "linked",
-          icon: makeIconClass(TERIOCK.display.icons.ui.linked),
-          label: _loc("TERIOCK.DIALOGS.HotbarDrop.BUTTONS.linked"),
-        },
-      ],
-      content: content,
-      modal: true,
-      ok: {
-        callback: () => "general",
-        default: true,
-        label: _loc("TERIOCK.DIALOGS.HotbarDrop.BUTTONS.general"),
+  let choice;
+  const label = TERIOCK.config.document[doc.type].name.toLowerCase();
+  const context = {
+    actor: `@UUID[${doc.actor?.uuid}]`,
+    child: `@UUID[${doc.uuid}]`,
+    label,
+    identifier: doc.lookupKey,
+  };
+  const content = await TeriockTextEditor.enrichHTML(
+    await TeriockTextEditor.renderTemplate(
+      "teriock/dialogs/hotbar-drop",
+      context,
+    ),
+  );
+  choice = await TeriockDialog.prompt({
+    buttons: [
+      {
+        action: "linked",
+        callback: () => "linked",
+        icon: makeIconClass(TERIOCK.display.icons.ui.linked),
+        label: _loc(
+          `TERIOCK.DIALOGS.HotbarDrop.BUTTONS.${doc.actor ? "actor" : "linked"}`,
+        ),
       },
-      window: {
-        icon: makeIconClass(TERIOCK.display.icons.ui.confirm, "title"),
-        title: _loc("TERIOCK.DIALOGS.HotbarDrop.title"),
-      },
-    });
-  }
+    ],
+    content: content,
+    modal: true,
+    ok: {
+      callback: () => "general",
+      default: true,
+      label: _loc("TERIOCK.DIALOGS.HotbarDrop.BUTTONS.general"),
+    },
+    window: {
+      icon: makeIconClass(TERIOCK.display.icons.ui.confirm, "title"),
+      title: _loc("TERIOCK.DIALOGS.HotbarDrop.title"),
+    },
+  });
   return choice;
 }

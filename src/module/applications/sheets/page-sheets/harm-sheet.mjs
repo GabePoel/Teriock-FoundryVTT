@@ -44,6 +44,10 @@ export default class HarmSheet extends mix(
     },
   };
 
+  static VIEW_PARTS = {
+    content: { template: "teriock/sheets/pages/harm-view" },
+  };
+
   /** @inheritDoc */
   _canRender(_options) {
     return true;
@@ -51,6 +55,7 @@ export default class HarmSheet extends mix(
 
   /** @inheritDoc */
   async _onRender(context, options) {
+    console.log(context, options, this.element);
     await super._onRender(context, options);
     bindCommonActions(this.element);
   }

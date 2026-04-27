@@ -1,0 +1,30 @@
+@use "../mixins";
+
+.teriock-harm-header {
+  @include mixins.centralize;
+  display: flex;
+  flex-direction: row;
+  margin-block: 4px;
+  margin-left: 6px;
+
+  .teriock-harm-img {
+    @include mixins.warm-image-container-background;
+    @include mixins.image-border(6px, 0.5, 5px);
+    height: 48px;
+    margin-right: 0.8rem;
+    max-height: 48px;
+    max-width: 48px;
+    min-height: 48px;
+    min-width: 48px;
+    width: 48px;
+
+    img {
+      @include mixins.warm-drop-shadow;
+      @include mixins.image-position;
+    }
+  }
+
+  h1 {
+    width: 100%;
+  }
+}

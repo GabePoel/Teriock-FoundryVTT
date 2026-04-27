@@ -351,7 +351,12 @@ export function parseIdentifier(identifier) {
  * @returns {Promise<AnyCommonDocument|null>}
  */
 export async function findBestDocument(lookup, localDocument, options = {}) {
-  if (typeof localDocument?.getEffectiveChildren !== "function") return null;
+  if (
+    options.localOnly &&
+    typeof localDocument?.getEffectiveChildren !== "function"
+  ) {
+    return null;
+  }
   if (!lookup) return null;
   const doc = await fromIdentifier(lookup, {
     localDocument,

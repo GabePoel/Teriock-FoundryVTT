@@ -58,11 +58,11 @@ export default function AbilityExecutionChatPart(Base) {
       #attachTrackedStatusAutomationUuids(automation, uuids) {
         /** @type {Teriock.Messages.MessageAssociation} */
         const association = {
+          cards: uuids.map((uuid) => this.#generateAssociationCard(uuid)),
+          icon: TERIOCK.config.document.creature.icon,
           title: _loc("TERIOCK.SYSTEMS.Ability.PANELS.statusWithRespectTo", {
             status: TERIOCK.reference.conditions[automation.status],
           }),
-          icon: TERIOCK.config.document.creature.icon,
-          cards: uuids.map((uuid) => this.#generateAssociationCard(uuid)),
         };
         const trackers = uuids.map((uuid) =>
           this.#generateConditionTracker(automation.status, uuid),
@@ -255,12 +255,12 @@ export default function AbilityExecutionChatPart(Base) {
         durationAutomations.forEach((a) => {
           const formula = a.duration.formula;
           const change = {
-            type: a.changeType,
             effect: this.source,
-            value: formula,
+            key: "duration",
             phase: "initial",
             priority: 5,
-            key: "duration",
+            type: a.changeType,
+            value: formula,
           };
           durationFormula = formulaField.applyChange(
             durationFormula,
@@ -528,24 +528,12 @@ export default function AbilityExecutionChatPart(Base) {
         // Add all pre-defined activations
         await super._buildActivations();
 
-        // Add armament to the standard damage activation
-        const sda = this.activations.find(
-          (a) => a.type === acts.StandardDamageActivation.TYPE,
-        );
-        if (sda && this.armament) {
-          foundry.utils.setProperty(
-            sda,
-            "options.attacker",
-            this.armament.uuid,
-          );
-        }
-
         // Replace `@h` with heightening amount in all rolls
         this.activations
           .filter((a) => a.type === acts.RollActivation.TYPE)
           .forEach((a) => {
             a.formula = this._heightenString(a.formula);
-            a._source.formula = this._heightenString(a.formula);
+            a.updateSource({ formula: this._heightenString(a.formula) });
           });
       }
 
