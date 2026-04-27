@@ -202,10 +202,8 @@ export default class RegionAutomation extends mix(
     if (path === "angle") return out;
     out *= canvas.dimensions.distancePixels;
     if (this.expandWithToken && execution && execution.actor?.defaultToken) {
-      out += Math.sqrt(
-        Math.pow(execution.actor.defaultToken.w, 2) +
-          Math.pow(execution.actor.defaultToken.h, 2),
-      );
+      out +=
+        (execution.actor.defaultToken.w + execution.actor.defaultToken.h) / 4;
     }
     return out;
   }

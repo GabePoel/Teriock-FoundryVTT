@@ -4,11 +4,42 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.20
+  systemVersion: 0.12.30
 img: systems/teriock/src/icons/abilities/smash-potion-of-bones.webp
 name: Smash Potion of Bones
 system:
   automations:
+    7400b41f20d9f100:
+      _id: 7400b41f20d9f100
+      angle: '60'
+      attachToToken: false
+      automatic: true
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      data: '{}'
+      deleteOnTurnChange: true
+      expandWithToken: false
+      heighten:
+        - 0
+        - 1
+      innerWidth: '0'
+      multi: false
+      outerWidth: '0'
+      overrideData: false
+      qualifier: '0'
+      radius: '@ability.expansion.range'
+      regionType: circle
+      restriction:
+        enabled: true
+      targeting: true
+      trigger: executeInput
+      type: region
+      updateTargets: true
     CuuVbhvMA8fZPpd9:
       _id: CuuVbhvMA8fZPpd9
       automatic: true
@@ -60,13 +91,14 @@ system:
   competence:
     raw: 0
   consumeSource: true
-  delivery: aura
+  delivery: item
   duration:
     raw: '1'
     unit: minute
   effectTypes:
-    - mental
+    - alchemical
     - illusion
+    - mental
   endCondition: >-
     <p>The @L[Keyword:Illusionary]{illusion} is successfully
     @L[Ability:Disbelieve]{disbelieved}. The target only needs to succeed once,
@@ -76,10 +108,12 @@ system:
     slow:
       unit: second
   expansion:
-    featSaveAttribute: mov
+    featSaveAttribute: int
     range:
-      unit: self
-  featSaveAttribute: int
+      raw: '10'
+      unit: ft
+    type: detonate
+  featSaveAttribute: mov
   form: normal
   identifier: smash-potion-of-bones
   interaction: manifest
@@ -90,7 +124,7 @@ system:
   powerSources:
     - alchemical
   range:
-    raw: '10'
+    raw: '30'
     unit: ft
   requirements: >-
     <p>Use [[lookup name]] by interacting with the
@@ -104,6 +138,7 @@ system:
       other instead of your true forms. This is a @L[Keyword:Illusionary]{minor
       illusion}.</p>
   targets:
+    - area
     - creature
 transfer: true
 type: ability

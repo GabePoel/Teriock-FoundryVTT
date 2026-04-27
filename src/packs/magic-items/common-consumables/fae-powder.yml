@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.20
+      systemVersion: 0.12.30
     img: systems/teriock/src/icons/abilities/apply-fae-powder.webp
     name: Apply Fae Powder
     system:
@@ -201,7 +201,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.20
+      systemVersion: 0.12.30
     img: systems/teriock/src/icons/abilities/smash-fae-powder.webp
     name: Smash Fae Powder
     system:
@@ -218,6 +218,59 @@ effects:
           relation: remove
           status: burned
           type: end
+        CjfXqrFsEafmFigH:
+          _id: CjfXqrFsEafmFigH
+          competence:
+            raw: 0
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          data: '{}'
+          heighten:
+            - 0
+            - 1
+          overrideCompetence: false
+          overrideData: false
+          preventEffect: true
+          preventFeat: false
+          preventThreshold: false
+          type: modifyEffect
+        Iy6PtLsINl0RhSWR:
+          _id: Iy6PtLsINl0RhSWR
+          angle: '60'
+          attachToToken: false
+          automatic: true
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          data: '{}'
+          deleteOnTurnChange: true
+          expandWithToken: false
+          heighten:
+            - 0
+            - 1
+          innerWidth: '0'
+          multi: false
+          outerWidth: '0'
+          overrideData: false
+          qualifier: '0'
+          radius: '@ability.expansion.range'
+          regionType: circle
+          restriction:
+            enabled: true
+            priority: 0
+            type: move
+          targeting: true
+          trigger: executeInput
+          type: region
         dbaecf76cab189d2:
           _id: dbaecf76cab189d2
           competencies:
@@ -238,15 +291,18 @@ effects:
       competence:
         raw: 0
       consumeSource: true
-      delivery: aura
+      delivery: item
       duration:
         raw: '1'
         unit: minute
+      effectTypes:
+        - alchemical
       executionTime: a1
       expansion:
-        featSaveAttribute: mov
         range:
-          unit: self
+          raw: '10'
+          unit: ft
+        type: detonate
       featSaveAttribute: mov
       form: normal
       identifier: smash-fae-powder
@@ -261,7 +317,7 @@ effects:
       powerSources:
         - alchemical
       range:
-        raw: '10'
+        raw: '30'
         unit: ft
       requirements: >-
         <p>Use [[lookup name]] by interacting with the

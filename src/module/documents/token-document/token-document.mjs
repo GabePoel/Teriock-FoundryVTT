@@ -2,7 +2,6 @@
 
 import { icons } from "../../constants/display/icons.mjs";
 import { mix } from "../../helpers/construction.mjs";
-import { convertUnits } from "../../helpers/unit.mjs";
 import { makeIcon } from "../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
 
@@ -49,18 +48,6 @@ export default class TeriockTokenDocument extends mix(
    */
   get imageLive() {
     return this.texture.src;
-  }
-
-  /**
-   * A radius for this token in grid units.
-   * @returns {number}
-   */
-  get radius() {
-    return convertUnits(
-      Math.sqrt(Math.pow(this.width / 2, 2) + Math.pow(this.height / 2, 2)) * 5,
-      "ft",
-      this.parent?.grid.units || "",
-    );
   }
 
   /**

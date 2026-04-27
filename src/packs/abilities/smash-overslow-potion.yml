@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.20
+  systemVersion: 0.12.30
 img: systems/teriock/src/icons/abilities/smash-overslow-potion.webp
 name: Smash Overslow Potion
 system:
@@ -49,13 +49,45 @@ system:
         trigger: turn
       who:
         type: target
+    wKSmYqZxwvkcLLeh:
+      _id: wKSmYqZxwvkcLLeh
+      angle: '60'
+      attachToToken: false
+      automatic: true
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      data: '{}'
+      deleteOnTurnChange: true
+      expandWithToken: false
+      heighten:
+        - 0
+        - 1
+      innerWidth: '0'
+      multi: false
+      outerWidth: '0'
+      overrideData: false
+      qualifier: '0'
+      radius: '@ability.expansion.range'
+      regionType: circle
+      restriction:
+        enabled: true
+      targeting: true
+      trigger: executeInput
+      type: region
   competence:
     raw: 0
   consumeSource: true
-  delivery: aura
+  delivery: item
   duration:
     raw: '1'
     unit: minute
+  effectTypes:
+    - alchemical
   endCondition: >-
     <p>At the start of each of the target's @L[Core:Turn]{turns}, they roll
     [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
@@ -64,13 +96,15 @@ system:
     slow:
       unit: second
   expansion:
-    featSaveAttribute: mov
+    featSaveAttribute: unp
     range:
-      unit: self
-  featSaveAttribute: unp
+      raw: '50'
+      unit: ft
+    type: detonate
+  featSaveAttribute: mov
   form: normal
   identifier: smash-overslow-potion
-  interaction: feat
+  interaction: manifest
   maneuver: active
   mundane: false
   piercing:
@@ -78,7 +112,7 @@ system:
   powerSources:
     - alchemical
   range:
-    raw: '50'
+    raw: '30'
     unit: ft
   requirements: >-
     <p>Use [[lookup name]] by interacting with the
@@ -88,6 +122,7 @@ system:
   results:
     fail: <p>Target becomes @L[Condition:Slowed]{slowed}.</p>
   targets:
+    - area
     - creature
 transfer: true
 type: ability

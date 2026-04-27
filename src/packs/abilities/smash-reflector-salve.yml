@@ -4,10 +4,41 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.20
+  systemVersion: 0.12.30
 img: systems/teriock/src/icons/abilities/smash-reflector-salve.webp
 name: Smash Reflector Salve
 system:
+  automations:
+    8DKh2msdV2BXkOe1:
+      _id: 8DKh2msdV2BXkOe1
+      angle: '60'
+      attachToToken: false
+      automatic: true
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      data: '{}'
+      deleteOnTurnChange: true
+      expandWithToken: false
+      heighten:
+        - 0
+        - 1
+      innerWidth: '0'
+      multi: false
+      outerWidth: '0'
+      overrideData: false
+      qualifier: '0'
+      radius: '@ability.expansion.range'
+      regionType: circle
+      restriction:
+        enabled: true
+      targeting: false
+      trigger: executeInput
+      type: region
   competence:
     raw: 0
   consumeSource: true
@@ -20,9 +51,10 @@ system:
     slow:
       unit: second
   expansion:
-    featSaveAttribute: mov
     range:
-      unit: self
+      raw: '10'
+      unit: ft
+    type: detonate
   featSaveAttribute: mov
   form: normal
   identifier: smash-reflector-salve
@@ -32,9 +64,9 @@ system:
   overview:
     base: >-
       <p>Smash the source of this ability on the ground to make target
-      @L[Category:Spells]{spell} within range @L[Core:Fizzles]{fizzle} as well
-      as any others cast simultaneously within range. Their casters take the
-      spells' effects instead.</p>
+      @L[Category:Spells]{spell} within @L[Core:Expansions]{expansion} range
+      @L[Core:Fizzles]{fizzle} as well as any others cast simultaneously within
+      range. Their casters take the spells' effects instead.</p>
   piercing:
     raw: 0
   powerSources:
@@ -47,6 +79,7 @@ system:
     @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for the
     ability. Target is a @L[Category:Conjured spells]{conjured spell}.</p>
   targets:
+    - area
     - spell
 transfer: true
 type: ability

@@ -130,11 +130,43 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.20
+      systemVersion: 0.12.30
     img: systems/teriock/src/icons/abilities/smash-time-freeze-potion.webp
     name: Smash Time Freeze Potion
     system:
       automations:
+        7400b41f20d9f100:
+          _id: 7400b41f20d9f100
+          angle: '60'
+          attachToToken: false
+          automatic: true
+          competencies:
+            - 0
+            - 1
+            - 2
+          crit:
+            - 0
+            - 1
+          data: '{}'
+          deleteOnTurnChange: true
+          expandWithToken: false
+          heighten:
+            - 0
+            - 1
+          innerWidth: '0'
+          multi: false
+          outerWidth: '0'
+          overrideData: false
+          qualifier: '0'
+          radius: '@ability.expansion.range'
+          regionType: circle
+          restriction:
+            enabled: true
+            priority: 0
+            type: move
+          targeting: true
+          trigger: executeInput
+          type: region
         d635eb44dba086dd:
           _id: d635eb44dba086dd
           competencies:
@@ -161,7 +193,7 @@ effects:
       competence:
         raw: 0
       consumeSource: true
-      delivery: aura
+      delivery: item
       duration:
         raw: '1'
         unit: minute
@@ -170,20 +202,22 @@ effects:
         2d4]]. If either of these dice roll a 4, this effect ends.</p>
       executionTime: a1
       expansion:
-        featSaveAttribute: mov
+        featSaveAttribute: unp
         range:
-          unit: self
-      featSaveAttribute: unp
+          raw: '50'
+          unit: ft
+        type: detonate
+      featSaveAttribute: mov
       form: normal
       identifier: smash-time-freeze-potion
-      interaction: feat
+      interaction: manifest
       maneuver: active
       piercing:
         raw: 0
       powerSources:
         - alchemical
       range:
-        raw: '50'
+        raw: '30'
         unit: ft
       requirements: >-
         <p>Use [[lookup name]] by interacting with the
@@ -193,6 +227,7 @@ effects:
       results:
         fail: <p>Target becomes @L[Condition:Frozen]{frozen}.</p>
       targets:
+        - area
         - creature
     transfer: true
     type: ability
@@ -203,7 +238,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.20
+      systemVersion: 0.12.30
     img: systems/teriock/src/icons/abilities/prethaw.webp
     name: Prethaw
     system:

@@ -4,21 +4,16 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.20
+  systemVersion: 0.12.30
 img: systems/teriock/src/icons/abilities/smash-glow-bulb.webp
 name: Smash Glow Bulb
 system:
   automations:
-    e789ed5e109ebd1a:
-      _id: e789ed5e109ebd1a
-      changes:
-        - key: token.light.dim
-          phase: normal
-          priority: 5
-          qualifier: '1'
-          target: Actor
-          type: upgrade
-          value: '100'
+    b7dNhAhOaKZhPAx6:
+      _id: b7dNhAhOaKZhPAx6
+      angle: '60'
+      attachToToken: false
+      automatic: true
       competencies:
         - 0
         - 1
@@ -26,25 +21,54 @@ system:
       crit:
         - 0
         - 1
+      data: |-
+        {
+          "behaviors": [
+            {
+              "name": "Glow Bulb Area Effect",
+              "system": {
+                "mode": 1,
+                "modifier": 1
+              },
+              "type": "adjustDarknessLevel"
+            }
+          ]
+        }
+      deleteOnTurnChange: false
+      expandWithToken: false
       heighten:
-        - 1
         - 0
-      type: changes
+        - 1
+      innerWidth: '0'
+      multi: false
+      outerWidth: '0'
+      overrideData: true
+      qualifier: '0'
+      radius: '@ability.expansion.range'
+      regionType: circle
+      restriction:
+        enabled: true
+      targeting: false
+      trigger: executeInput
+      type: region
   competence:
     raw: 0
   consumeSource: true
   delivery: item
   duration:
-    raw: '10'
+    raw: '1'
     unit: minute
+  effectTypes:
+    - alchemical
   executionTime:
     base: a1
     slow:
       unit: second
   expansion:
-    featSaveAttribute: mov
     range:
-      unit: self
+      raw: '100'
+      unit: ft
+    type: detonate
   featSaveAttribute: mov
   form: normal
   identifier: smash-glow-bulb
@@ -60,7 +84,8 @@ system:
   powerSources:
     - alchemical
   range:
-    unit: contact
+    raw: '30'
+    unit: ft
   requirements: >-
     <p>Use [[lookup name]] by interacting with the
     @L[Category:Equipment]{equipment} that provides it. That counts as the

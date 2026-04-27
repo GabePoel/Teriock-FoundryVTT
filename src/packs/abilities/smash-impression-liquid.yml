@@ -4,25 +4,57 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.20
+  systemVersion: 0.12.30
 img: systems/teriock/src/icons/abilities/smash-impression-liquid.webp
 name: Smash Impression Liquid
 system:
+  automations:
+    yW44DKj5iTHfrRDF:
+      _id: yW44DKj5iTHfrRDF
+      angle: '60'
+      attachToToken: false
+      automatic: true
+      competencies:
+        - 0
+        - 1
+        - 2
+      crit:
+        - 0
+        - 1
+      data: '{}'
+      deleteOnTurnChange: true
+      expandWithToken: false
+      heighten:
+        - 0
+        - 1
+      innerWidth: '0'
+      multi: false
+      outerWidth: '0'
+      overrideData: false
+      qualifier: '0'
+      radius: '@ability.expansion.range'
+      regionType: circle
+      restriction:
+        enabled: true
+      targeting: false
+      trigger: executeInput
+      type: region
   competence:
     raw: 0
   consumeSource: true
-  delivery: aura
+  delivery: item
   duration:
-    raw: '0'
-    unit: instant
+    raw: '1'
+    unit: minute
   executionTime:
     base: a1
     slow:
       unit: second
   expansion:
-    featSaveAttribute: mov
     range:
-      unit: self
+      raw: '10'
+      unit: ft
+    type: detonate
   featSaveAttribute: mov
   form: normal
   identifier: smash-impression-liquid
@@ -33,13 +65,14 @@ system:
     base: >-
       <p>Smash the source of this ability on the ground to cause an
       @L[Category:Alchemically powered abilities]{alchemical} effect determined
-      by the @L[Core:Game Master]{GM} based on what's within range.</p>
+      by the @L[Core:Game Master]{GM} based on what's within the
+      @L[Core:Expansions]{expansion} range.</p>
   piercing:
     raw: 0
   powerSources:
     - alchemical
   range:
-    raw: '10'
+    raw: '30'
     unit: ft
   requirements: >-
     <p>Use [[lookup name]] by interacting with the
