@@ -29,9 +29,22 @@ export default class RegionActivation extends BaseActivation {
 
   /** @inheritDoc */
   async primaryAction() {
-    await canvas.regions.placeRegion(this.data, {
+    const data = this.data;
+    foundry.utils.setProperty(data, "flags.teriock.createdBy", this.puuid);
+    console.log(data);
+    await canvas.regions.placeRegion(data, {
       allowRotation: true,
       attachToToken: this.attachToToken,
     });
+  }
+
+  /** @inheritDoc */
+  async secondaryAction() {
+    await canvas.scene.deleteEmbeddedDocuments(
+      "Region",
+      canvas.scene.regions.contents
+        .filter((r) => r.getFlag("teriock", "createdBy") === this.puuid)
+        .map((r) => r.id),
+    );
   }
 }
