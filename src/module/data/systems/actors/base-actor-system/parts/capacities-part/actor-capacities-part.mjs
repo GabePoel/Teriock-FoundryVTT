@@ -74,7 +74,7 @@ export default (Base) => {
           65 +
           20 *
             (this.attributes.str.score +
-              Math.max(0, Math.pow(this.size.number - 5, 2)));
+              Math.pow(Math.max(this.size.number - 4, 0), 2));
         this.carryingCapacity = {
           factor,
           heavy: factor * 2,

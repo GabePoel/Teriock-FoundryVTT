@@ -704,28 +704,17 @@ pages:
         Capacity of Size 5 and Larger</caption><tbody><tr><th>Amount in
         Pounds</th><th>Effect Upon Hitting Threshold</th></tr><tr><td>65 + (20 ×
         (@L[Core:Strength]{STR} + (@L[Core:Size]{SIZE} -
-        5)²))</td><td>@L[Condition:Encumbered]{Lightly
+        4)²))</td><td>@L[Condition:Encumbered]{Lightly
         Encumbered}</td></tr><tr><td>130 + (40 × (@L[Core:Strength]{STR} +
-        (@L[Core:Size]{SIZE} - 5)²))</td><td>@L[Condition:Encumbered]{Heavily
+        (@L[Core:Size]{SIZE} - 4)²))</td><td>@L[Condition:Encumbered]{Heavily
         Encumbered}</td></tr><tr><td>195 + (60 × (@L[Core:Strength]{STR} +
-        (@L[Core:Size]{SIZE} - 5)²))</td><td>Cannot carry anything
+        (@L[Core:Size]{SIZE} - 4)²))</td><td>Cannot carry anything
         more</td></tr></tbody></table><p>A creature may also push, drag, or lift
         a weight in pounds up to twice their carrying capacity. While pushing or
         dragging weight in excess of their carrying capacity, the creature's
-        @L[Core:Movement Speed]{movement speed} drops to 5 feet.</p><div
-        class="note design-note"><b>Design Note:</b> I have many spreadsheets of
-        lame algebra to make sure the weight and carrying capacity scaling make
-        physical sense (one has to scale on a power of 2 and the other on a
-        power of 3), fit with our intuitions of strength on the human scale, and
-        also allow creatures to be strong enough to carry their own bodies. It's
-        actually a very limited set of values that works for.</div><div
-        class="note design-note"><b>Design Note:</b> Why use pounds instead of
-        sizes? Because I hate the size abstraction, somehow still have no
-        intuition for how many "sizes" of weight objects are, and it's also
-        simplicity that isn't needed in the way it is for live action <a
-        target="_blank" rel="nofollow noreferrer noopener" class="external text"
-        href="https://www.fanwar.com/">FanWar</a>.</div><p>The amount a creature
-        can carry is shown in the table below.</p><table
+        @L[Core:Movement Speed]{movement speed} drops to 5 feet.The amount a
+        creature can carry without becoming @L[Condition:Encumbered]{encumbered}
+        is shown in the table below.</p><table
         class="wikitable"><caption>Lightly Encumbered Carrying
         Capacity</caption><tbody><tr><th>@L[Core:Size]{SIZE}</th><th>@L[Core:Strength]{STR}
         = -3</th><th>@L[Core:Strength]{STR} = -2</th><th>@L[Core:Strength]{STR}
@@ -742,89 +731,73 @@ pages:
         lb.</td><td>145 lb.</td><td>165 lb.</td></tr><tr><td>4</td><td>5
         lb.</td><td>25 lb.</td><td>45 lb.</td><td>65 lb.</td><td>85
         lb.</td><td>105 lb.</td><td>125 lb.</td><td>145 lb.</td><td>165
-        lb.</td></tr><tr><td>5</td><td>25 lb.</td><td>625 lb.</td><td>2025
-        lb.</td><td>4225 lb.</td><td>7225 lb.</td><td>11025 lb.</td><td>15625
-        lb.</td><td>21025 lb.</td><td>27225 lb.</td></tr><tr><td>6</td><td>625
-        lb.</td><td>2025 lb.</td><td>4225 lb.</td><td>7225 lb.</td><td>11025
-        lb.</td><td>15625 lb.</td><td>21025 lb.</td><td>27225 lb.</td><td>34225
-        lb.</td></tr><tr><td>7</td><td>2025 lb.</td><td>4225 lb.</td><td>7225
-        lb.</td><td>11025 lb.</td><td>15625 lb.</td><td>21025 lb.</td><td>27225
-        lb.</td><td>34225 lb.</td><td>42025 lb.</td></tr><tr><td>8</td><td>4225
-        lb.</td><td>7225 lb.</td><td>11025 lb.</td><td>15625 lb.</td><td>21025
-        lb.</td><td>27225 lb.</td><td>34225 lb.</td><td>42025 lb.</td><td>50625
-        lb.</td></tr><tr><td>9</td><td>7225 lb.</td><td>11025 lb.</td><td>15625
-        lb.</td><td>21025 lb.</td><td>27225 lb.</td><td>34225 lb.</td><td>42025
-        lb.</td><td>50625 lb.</td><td>60025
-        lb.</td></tr><tr><td>10</td><td>11025 lb.</td><td>15625
-        lb.</td><td>21025 lb.</td><td>27225 lb.</td><td>34225 lb.</td><td>42025
-        lb.</td><td>50625 lb.</td><td>60025 lb.</td><td>70225
-        lb.</td></tr><tr><td>11</td><td>15625 lb.</td><td>21025
-        lb.</td><td>27225 lb.</td><td>34225 lb.</td><td>42025 lb.</td><td>50625
-        lb.</td><td>60025 lb.</td><td>70225 lb.</td><td>81225
-        lb.</td></tr><tr><td>12</td><td>21025 lb.</td><td>27225
-        lb.</td><td>34225 lb.</td><td>42025 lb.</td><td>50625 lb.</td><td>60025
-        lb.</td><td>70225 lb.</td><td>81225 lb.</td><td>93025
-        lb.</td></tr><tr><td>13</td><td>27225 lb.</td><td>34225
-        lb.</td><td>42025 lb.</td><td>50625 lb.</td><td>60025 lb.</td><td>70225
-        lb.</td><td>81225 lb.</td><td>93025 lb.</td><td>105625
-        lb.</td></tr><tr><td>14</td><td>34225 lb.</td><td>42025
-        lb.</td><td>50625 lb.</td><td>60025 lb.</td><td>70225 lb.</td><td>81225
-        lb.</td><td>93025 lb.</td><td>105625 lb.</td><td>119025
-        lb.</td></tr><tr><td>15</td><td>42025 lb.</td><td>50625
-        lb.</td><td>60025 lb.</td><td>70225 lb.</td><td>81225 lb.</td><td>93025
-        lb.</td><td>105625 lb.</td><td>119025 lb.</td><td>133225
-        lb.</td></tr><tr><td>16</td><td>50625 lb.</td><td>60025
-        lb.</td><td>70225 lb.</td><td>81225 lb.</td><td>93025 lb.</td><td>105625
-        lb.</td><td>119025 lb.</td><td>133225 lb.</td><td>148225
-        lb.</td></tr><tr><td>17</td><td>60025 lb.</td><td>70225
-        lb.</td><td>81225 lb.</td><td>93025 lb.</td><td>105625
-        lb.</td><td>119025 lb.</td><td>133225 lb.</td><td>148225
-        lb.</td><td>164025 lb.</td></tr><tr><td>18</td><td>70225
-        lb.</td><td>81225 lb.</td><td>93025 lb.</td><td>105625
-        lb.</td><td>119025 lb.</td><td>133225 lb.</td><td>148225
-        lb.</td><td>164025 lb.</td><td>180625
-        lb.</td></tr><tr><td>19</td><td>81225 lb.</td><td>93025
-        lb.</td><td>105625 lb.</td><td>119025 lb.</td><td>133225
-        lb.</td><td>148225 lb.</td><td>164025 lb.</td><td>180625
-        lb.</td><td>198025 lb.</td></tr><tr><td>20</td><td>93025
-        lb.</td><td>105625 lb.</td><td>119025 lb.</td><td>133225
-        lb.</td><td>148225 lb.</td><td>164025 lb.</td><td>180625
-        lb.</td><td>198025 lb.</td><td>216225
-        lb.</td></tr><tr><td>21</td><td>105625 lb.</td><td>119025
-        lb.</td><td>133225 lb.</td><td>148225 lb.</td><td>164025
-        lb.</td><td>180625 lb.</td><td>198025 lb.</td><td>216225
-        lb.</td><td>235225 lb.</td></tr><tr><td>22</td><td>119025
-        lb.</td><td>133225 lb.</td><td>148225 lb.</td><td>164025
-        lb.</td><td>180625 lb.</td><td>198025 lb.</td><td>216225
-        lb.</td><td>235225 lb.</td><td>255025
-        lb.</td></tr><tr><td>23</td><td>133225 lb.</td><td>148225
-        lb.</td><td>164025 lb.</td><td>180625 lb.</td><td>198025
-        lb.</td><td>216225 lb.</td><td>235225 lb.</td><td>255025
-        lb.</td><td>275625 lb.</td></tr><tr><td>24</td><td>148225
-        lb.</td><td>164025 lb.</td><td>180625 lb.</td><td>198025
-        lb.</td><td>216225 lb.</td><td>235225 lb.</td><td>255025
-        lb.</td><td>275625 lb.</td><td>297025
-        lb.</td></tr><tr><td>25</td><td>164025 lb.</td><td>180625
-        lb.</td><td>198025 lb.</td><td>216225 lb.</td><td>235225
-        lb.</td><td>255025 lb.</td><td>275625 lb.</td><td>297025
-        lb.</td><td>319225 lb.</td></tr><tr><td>26</td><td>180625
-        lb.</td><td>198025 lb.</td><td>216225 lb.</td><td>235225
-        lb.</td><td>255025 lb.</td><td>275625 lb.</td><td>297025
-        lb.</td><td>319225 lb.</td><td>342225
-        lb.</td></tr><tr><td>27</td><td>198025 lb.</td><td>216225
-        lb.</td><td>235225 lb.</td><td>255025 lb.</td><td>275625
-        lb.</td><td>297025 lb.</td><td>319225 lb.</td><td>342225
-        lb.</td><td>366025 lb.</td></tr><tr><td>28</td><td>216225
-        lb.</td><td>235225 lb.</td><td>255025 lb.</td><td>275625
-        lb.</td><td>297025 lb.</td><td>319225 lb.</td><td>342225
-        lb.</td><td>366025 lb.</td><td>390625
-        lb.</td></tr><tr><td>29</td><td>235225 lb.</td><td>255025
-        lb.</td><td>275625 lb.</td><td>297025 lb.</td><td>319225
-        lb.</td><td>342225 lb.</td><td>366025 lb.</td><td>390625
-        lb.</td><td>416025 lb.</td></tr><tr><td>30</td><td>255025
-        lb.</td><td>275625 lb.</td><td>297025 lb.</td><td>319225
-        lb.</td><td>342225 lb.</td><td>366025 lb.</td><td>390625
-        lb.</td><td>416025 lb.</td><td>442225
+        lb.</td></tr><tr><td>5</td><td>25 lb.</td><td>45 lb.</td><td>65
+        lb.</td><td>85 lb.</td><td>105 lb.</td><td>125 lb.</td><td>145
+        lb.</td><td>165 lb.</td><td>185 lb.</td></tr><tr><td>6</td><td>85
+        lb.</td><td>105 lb.</td><td>125 lb.</td><td>145 lb.</td><td>165
+        lb.</td><td>185 lb.</td><td>205 lb.</td><td>225 lb.</td><td>245
+        lb.</td></tr><tr><td>7</td><td>185 lb.</td><td>205 lb.</td><td>225
+        lb.</td><td>245 lb.</td><td>265 lb.</td><td>285 lb.</td><td>305
+        lb.</td><td>325 lb.</td><td>345 lb.</td></tr><tr><td>8</td><td>325
+        lb.</td><td>345 lb.</td><td>365 lb.</td><td>385 lb.</td><td>405
+        lb.</td><td>425 lb.</td><td>445 lb.</td><td>465 lb.</td><td>485
+        lb.</td></tr><tr><td>9</td><td>505 lb.</td><td>525 lb.</td><td>545
+        lb.</td><td>565 lb.</td><td>585 lb.</td><td>605 lb.</td><td>625
+        lb.</td><td>645 lb.</td><td>665 lb.</td></tr><tr><td>10</td><td>725
+        lb.</td><td>745 lb.</td><td>765 lb.</td><td>785 lb.</td><td>805
+        lb.</td><td>825 lb.</td><td>845 lb.</td><td>865 lb.</td><td>885
+        lb.</td></tr><tr><td>11</td><td>985 lb.</td><td>1005 lb.</td><td>1025
+        lb.</td><td>1045 lb.</td><td>1065 lb.</td><td>1085 lb.</td><td>1105
+        lb.</td><td>1125 lb.</td><td>1145 lb.</td></tr><tr><td>12</td><td>1285
+        lb.</td><td>1305 lb.</td><td>1325 lb.</td><td>1345 lb.</td><td>1365
+        lb.</td><td>1385 lb.</td><td>1405 lb.</td><td>1425 lb.</td><td>1445
+        lb.</td></tr><tr><td>13</td><td>1625 lb.</td><td>1645 lb.</td><td>1665
+        lb.</td><td>1685 lb.</td><td>1705 lb.</td><td>1725 lb.</td><td>1745
+        lb.</td><td>1765 lb.</td><td>1785 lb.</td></tr><tr><td>14</td><td>2005
+        lb.</td><td>2025 lb.</td><td>2045 lb.</td><td>2065 lb.</td><td>2085
+        lb.</td><td>2105 lb.</td><td>2125 lb.</td><td>2145 lb.</td><td>2165
+        lb.</td></tr><tr><td>15</td><td>2425 lb.</td><td>2445 lb.</td><td>2465
+        lb.</td><td>2485 lb.</td><td>2505 lb.</td><td>2525 lb.</td><td>2545
+        lb.</td><td>2565 lb.</td><td>2585 lb.</td></tr><tr><td>16</td><td>2885
+        lb.</td><td>2905 lb.</td><td>2925 lb.</td><td>2945 lb.</td><td>2965
+        lb.</td><td>2985 lb.</td><td>3005 lb.</td><td>3025 lb.</td><td>3045
+        lb.</td></tr><tr><td>17</td><td>3385 lb.</td><td>3405 lb.</td><td>3425
+        lb.</td><td>3445 lb.</td><td>3465 lb.</td><td>3485 lb.</td><td>3505
+        lb.</td><td>3525 lb.</td><td>3545 lb.</td></tr><tr><td>18</td><td>3925
+        lb.</td><td>3945 lb.</td><td>3965 lb.</td><td>3985 lb.</td><td>4005
+        lb.</td><td>4025 lb.</td><td>4045 lb.</td><td>4065 lb.</td><td>4085
+        lb.</td></tr><tr><td>19</td><td>4505 lb.</td><td>4525 lb.</td><td>4545
+        lb.</td><td>4565 lb.</td><td>4585 lb.</td><td>4605 lb.</td><td>4625
+        lb.</td><td>4645 lb.</td><td>4665 lb.</td></tr><tr><td>20</td><td>5125
+        lb.</td><td>5145 lb.</td><td>5165 lb.</td><td>5185 lb.</td><td>5205
+        lb.</td><td>5225 lb.</td><td>5245 lb.</td><td>5265 lb.</td><td>5285
+        lb.</td></tr><tr><td>21</td><td>5785 lb.</td><td>5805 lb.</td><td>5825
+        lb.</td><td>5845 lb.</td><td>5865 lb.</td><td>5885 lb.</td><td>5905
+        lb.</td><td>5925 lb.</td><td>5945 lb.</td></tr><tr><td>22</td><td>6485
+        lb.</td><td>6505 lb.</td><td>6525 lb.</td><td>6545 lb.</td><td>6565
+        lb.</td><td>6585 lb.</td><td>6605 lb.</td><td>6625 lb.</td><td>6645
+        lb.</td></tr><tr><td>23</td><td>7225 lb.</td><td>7245 lb.</td><td>7265
+        lb.</td><td>7285 lb.</td><td>7305 lb.</td><td>7325 lb.</td><td>7345
+        lb.</td><td>7365 lb.</td><td>7385 lb.</td></tr><tr><td>24</td><td>8005
+        lb.</td><td>8025 lb.</td><td>8045 lb.</td><td>8065 lb.</td><td>8085
+        lb.</td><td>8105 lb.</td><td>8125 lb.</td><td>8145 lb.</td><td>8165
+        lb.</td></tr><tr><td>25</td><td>8825 lb.</td><td>8845 lb.</td><td>8865
+        lb.</td><td>8885 lb.</td><td>8905 lb.</td><td>8925 lb.</td><td>8945
+        lb.</td><td>8965 lb.</td><td>8985 lb.</td></tr><tr><td>26</td><td>9685
+        lb.</td><td>9705 lb.</td><td>9725 lb.</td><td>9745 lb.</td><td>9765
+        lb.</td><td>9785 lb.</td><td>9805 lb.</td><td>9825 lb.</td><td>9845
+        lb.</td></tr><tr><td>27</td><td>10585 lb.</td><td>10605
+        lb.</td><td>10625 lb.</td><td>10645 lb.</td><td>10665 lb.</td><td>10685
+        lb.</td><td>10705 lb.</td><td>10725 lb.</td><td>10745
+        lb.</td></tr><tr><td>28</td><td>11525 lb.</td><td>11545
+        lb.</td><td>11565 lb.</td><td>11585 lb.</td><td>11605 lb.</td><td>11625
+        lb.</td><td>11645 lb.</td><td>11665 lb.</td><td>11685
+        lb.</td></tr><tr><td>29</td><td>12505 lb.</td><td>12525
+        lb.</td><td>12545 lb.</td><td>12565 lb.</td><td>12585 lb.</td><td>12605
+        lb.</td><td>12625 lb.</td><td>12645 lb.</td><td>12665
+        lb.</td></tr><tr><td>30</td><td>13525 lb.</td><td>13545
+        lb.</td><td>13565 lb.</td><td>13585 lb.</td><td>13605 lb.</td><td>13625
+        lb.</td><td>13645 lb.</td><td>13665 lb.</td><td>13685
         lb.</td></tr></tbody></table><h3>Movement (MOV)</h3><p>A creature's
         movement (abbreviated as <b>MOV</b>) is a measure of how quickly it can
         move. By default, a creature's MOV is 0, but there are @L[Category:MOV
@@ -1177,28 +1150,17 @@ pages:
         Capacity of Size 5 and Larger</caption><tbody><tr><th>Amount in
         Pounds</th><th>Effect Upon Hitting Threshold</th></tr><tr><td>65 + (20 ×
         (@L[Core:Strength]{STR} + (@L[Core:Size]{SIZE} -
-        5)²))</td><td>@L[Condition:Encumbered]{Lightly
+        4)²))</td><td>@L[Condition:Encumbered]{Lightly
         Encumbered}</td></tr><tr><td>130 + (40 × (@L[Core:Strength]{STR} +
-        (@L[Core:Size]{SIZE} - 5)²))</td><td>@L[Condition:Encumbered]{Heavily
+        (@L[Core:Size]{SIZE} - 4)²))</td><td>@L[Condition:Encumbered]{Heavily
         Encumbered}</td></tr><tr><td>195 + (60 × (@L[Core:Strength]{STR} +
-        (@L[Core:Size]{SIZE} - 5)²))</td><td>Cannot carry anything
+        (@L[Core:Size]{SIZE} - 4)²))</td><td>Cannot carry anything
         more</td></tr></tbody></table><p>A creature may also push, drag, or lift
         a weight in pounds up to twice their carrying capacity. While pushing or
         dragging weight in excess of their carrying capacity, the creature's
-        @L[Core:Movement Speed]{movement speed} drops to 5 feet.</p><div
-        class="note design-note"><b>Design Note:</b> I have many spreadsheets of
-        lame algebra to make sure the weight and carrying capacity scaling make
-        physical sense (one has to scale on a power of 2 and the other on a
-        power of 3), fit with our intuitions of strength on the human scale, and
-        also allow creatures to be strong enough to carry their own bodies. It's
-        actually a very limited set of values that works for.</div><div
-        class="note design-note"><b>Design Note:</b> Why use pounds instead of
-        sizes? Because I hate the size abstraction, somehow still have no
-        intuition for how many "sizes" of weight objects are, and it's also
-        simplicity that isn't needed in the way it is for live action <a
-        target="_blank" rel="nofollow noreferrer noopener" class="external text"
-        href="https://www.fanwar.com/">FanWar</a>.</div><p>The amount a creature
-        can carry is shown in the table below.</p><table
+        @L[Core:Movement Speed]{movement speed} drops to 5 feet.The amount a
+        creature can carry without becoming @L[Condition:Encumbered]{encumbered}
+        is shown in the table below.</p><table
         class="wikitable"><caption>Lightly Encumbered Carrying
         Capacity</caption><tbody><tr><th>@L[Core:Size]{SIZE}</th><th>@L[Core:Strength]{STR}
         = -3</th><th>@L[Core:Strength]{STR} = -2</th><th>@L[Core:Strength]{STR}
@@ -1215,89 +1177,74 @@ pages:
         lb.</td><td>145 lb.</td><td>165 lb.</td></tr><tr><td>4</td><td>5
         lb.</td><td>25 lb.</td><td>45 lb.</td><td>65 lb.</td><td>85
         lb.</td><td>105 lb.</td><td>125 lb.</td><td>145 lb.</td><td>165
-        lb.</td></tr><tr><td>5</td><td>25 lb.</td><td>625 lb.</td><td>2025
-        lb.</td><td>4225 lb.</td><td>7225 lb.</td><td>11025 lb.</td><td>15625
-        lb.</td><td>21025 lb.</td><td>27225 lb.</td></tr><tr><td>6</td><td>625
-        lb.</td><td>2025 lb.</td><td>4225 lb.</td><td>7225 lb.</td><td>11025
-        lb.</td><td>15625 lb.</td><td>21025 lb.</td><td>27225 lb.</td><td>34225
-        lb.</td></tr><tr><td>7</td><td>2025 lb.</td><td>4225 lb.</td><td>7225
-        lb.</td><td>11025 lb.</td><td>15625 lb.</td><td>21025 lb.</td><td>27225
-        lb.</td><td>34225 lb.</td><td>42025 lb.</td></tr><tr><td>8</td><td>4225
-        lb.</td><td>7225 lb.</td><td>11025 lb.</td><td>15625 lb.</td><td>21025
-        lb.</td><td>27225 lb.</td><td>34225 lb.</td><td>42025 lb.</td><td>50625
-        lb.</td></tr><tr><td>9</td><td>7225 lb.</td><td>11025 lb.</td><td>15625
-        lb.</td><td>21025 lb.</td><td>27225 lb.</td><td>34225 lb.</td><td>42025
-        lb.</td><td>50625 lb.</td><td>60025
-        lb.</td></tr><tr><td>10</td><td>11025 lb.</td><td>15625
-        lb.</td><td>21025 lb.</td><td>27225 lb.</td><td>34225 lb.</td><td>42025
-        lb.</td><td>50625 lb.</td><td>60025 lb.</td><td>70225
-        lb.</td></tr><tr><td>11</td><td>15625 lb.</td><td>21025
-        lb.</td><td>27225 lb.</td><td>34225 lb.</td><td>42025 lb.</td><td>50625
-        lb.</td><td>60025 lb.</td><td>70225 lb.</td><td>81225
-        lb.</td></tr><tr><td>12</td><td>21025 lb.</td><td>27225
-        lb.</td><td>34225 lb.</td><td>42025 lb.</td><td>50625 lb.</td><td>60025
-        lb.</td><td>70225 lb.</td><td>81225 lb.</td><td>93025
-        lb.</td></tr><tr><td>13</td><td>27225 lb.</td><td>34225
-        lb.</td><td>42025 lb.</td><td>50625 lb.</td><td>60025 lb.</td><td>70225
-        lb.</td><td>81225 lb.</td><td>93025 lb.</td><td>105625
-        lb.</td></tr><tr><td>14</td><td>34225 lb.</td><td>42025
-        lb.</td><td>50625 lb.</td><td>60025 lb.</td><td>70225 lb.</td><td>81225
-        lb.</td><td>93025 lb.</td><td>105625 lb.</td><td>119025
-        lb.</td></tr><tr><td>15</td><td>42025 lb.</td><td>50625
-        lb.</td><td>60025 lb.</td><td>70225 lb.</td><td>81225 lb.</td><td>93025
-        lb.</td><td>105625 lb.</td><td>119025 lb.</td><td>133225
-        lb.</td></tr><tr><td>16</td><td>50625 lb.</td><td>60025
-        lb.</td><td>70225 lb.</td><td>81225 lb.</td><td>93025 lb.</td><td>105625
-        lb.</td><td>119025 lb.</td><td>133225 lb.</td><td>148225
-        lb.</td></tr><tr><td>17</td><td>60025 lb.</td><td>70225
-        lb.</td><td>81225 lb.</td><td>93025 lb.</td><td>105625
-        lb.</td><td>119025 lb.</td><td>133225 lb.</td><td>148225
-        lb.</td><td>164025 lb.</td></tr><tr><td>18</td><td>70225
-        lb.</td><td>81225 lb.</td><td>93025 lb.</td><td>105625
-        lb.</td><td>119025 lb.</td><td>133225 lb.</td><td>148225
-        lb.</td><td>164025 lb.</td><td>180625
-        lb.</td></tr><tr><td>19</td><td>81225 lb.</td><td>93025
-        lb.</td><td>105625 lb.</td><td>119025 lb.</td><td>133225
-        lb.</td><td>148225 lb.</td><td>164025 lb.</td><td>180625
-        lb.</td><td>198025 lb.</td></tr><tr><td>20</td><td>93025
-        lb.</td><td>105625 lb.</td><td>119025 lb.</td><td>133225
-        lb.</td><td>148225 lb.</td><td>164025 lb.</td><td>180625
-        lb.</td><td>198025 lb.</td><td>216225
-        lb.</td></tr><tr><td>21</td><td>105625 lb.</td><td>119025
-        lb.</td><td>133225 lb.</td><td>148225 lb.</td><td>164025
-        lb.</td><td>180625 lb.</td><td>198025 lb.</td><td>216225
-        lb.</td><td>235225 lb.</td></tr><tr><td>22</td><td>119025
-        lb.</td><td>133225 lb.</td><td>148225 lb.</td><td>164025
-        lb.</td><td>180625 lb.</td><td>198025 lb.</td><td>216225
-        lb.</td><td>235225 lb.</td><td>255025
-        lb.</td></tr><tr><td>23</td><td>133225 lb.</td><td>148225
-        lb.</td><td>164025 lb.</td><td>180625 lb.</td><td>198025
-        lb.</td><td>216225 lb.</td><td>235225 lb.</td><td>255025
-        lb.</td><td>275625 lb.</td></tr><tr><td>24</td><td>148225
-        lb.</td><td>164025 lb.</td><td>180625 lb.</td><td>198025
-        lb.</td><td>216225 lb.</td><td>235225 lb.</td><td>255025
-        lb.</td><td>275625 lb.</td><td>297025
-        lb.</td></tr><tr><td>25</td><td>164025 lb.</td><td>180625
-        lb.</td><td>198025 lb.</td><td>216225 lb.</td><td>235225
-        lb.</td><td>255025 lb.</td><td>275625 lb.</td><td>297025
-        lb.</td><td>319225 lb.</td></tr><tr><td>26</td><td>180625
-        lb.</td><td>198025 lb.</td><td>216225 lb.</td><td>235225
-        lb.</td><td>255025 lb.</td><td>275625 lb.</td><td>297025
-        lb.</td><td>319225 lb.</td><td>342225
-        lb.</td></tr><tr><td>27</td><td>198025 lb.</td><td>216225
-        lb.</td><td>235225 lb.</td><td>255025 lb.</td><td>275625
-        lb.</td><td>297025 lb.</td><td>319225 lb.</td><td>342225
-        lb.</td><td>366025 lb.</td></tr><tr><td>28</td><td>216225
-        lb.</td><td>235225 lb.</td><td>255025 lb.</td><td>275625
-        lb.</td><td>297025 lb.</td><td>319225 lb.</td><td>342225
-        lb.</td><td>366025 lb.</td><td>390625
-        lb.</td></tr><tr><td>29</td><td>235225 lb.</td><td>255025
-        lb.</td><td>275625 lb.</td><td>297025 lb.</td><td>319225
-        lb.</td><td>342225 lb.</td><td>366025 lb.</td><td>390625
-        lb.</td><td>416025 lb.</td></tr><tr><td>30</td><td>255025
-        lb.</td><td>275625 lb.</td><td>297025 lb.</td><td>319225
-        lb.</td><td>342225 lb.</td><td>366025 lb.</td><td>390625
-        lb.</td><td>416025 lb.</td><td>442225 lb.</td></tr></tbody></table>
+        lb.</td></tr><tr><td>5</td><td>25 lb.</td><td>45 lb.</td><td>65
+        lb.</td><td>85 lb.</td><td>105 lb.</td><td>125 lb.</td><td>145
+        lb.</td><td>165 lb.</td><td>185 lb.</td></tr><tr><td>6</td><td>85
+        lb.</td><td>105 lb.</td><td>125 lb.</td><td>145 lb.</td><td>165
+        lb.</td><td>185 lb.</td><td>205 lb.</td><td>225 lb.</td><td>245
+        lb.</td></tr><tr><td>7</td><td>185 lb.</td><td>205 lb.</td><td>225
+        lb.</td><td>245 lb.</td><td>265 lb.</td><td>285 lb.</td><td>305
+        lb.</td><td>325 lb.</td><td>345 lb.</td></tr><tr><td>8</td><td>325
+        lb.</td><td>345 lb.</td><td>365 lb.</td><td>385 lb.</td><td>405
+        lb.</td><td>425 lb.</td><td>445 lb.</td><td>465 lb.</td><td>485
+        lb.</td></tr><tr><td>9</td><td>505 lb.</td><td>525 lb.</td><td>545
+        lb.</td><td>565 lb.</td><td>585 lb.</td><td>605 lb.</td><td>625
+        lb.</td><td>645 lb.</td><td>665 lb.</td></tr><tr><td>10</td><td>725
+        lb.</td><td>745 lb.</td><td>765 lb.</td><td>785 lb.</td><td>805
+        lb.</td><td>825 lb.</td><td>845 lb.</td><td>865 lb.</td><td>885
+        lb.</td></tr><tr><td>11</td><td>985 lb.</td><td>1005 lb.</td><td>1025
+        lb.</td><td>1045 lb.</td><td>1065 lb.</td><td>1085 lb.</td><td>1105
+        lb.</td><td>1125 lb.</td><td>1145 lb.</td></tr><tr><td>12</td><td>1285
+        lb.</td><td>1305 lb.</td><td>1325 lb.</td><td>1345 lb.</td><td>1365
+        lb.</td><td>1385 lb.</td><td>1405 lb.</td><td>1425 lb.</td><td>1445
+        lb.</td></tr><tr><td>13</td><td>1625 lb.</td><td>1645 lb.</td><td>1665
+        lb.</td><td>1685 lb.</td><td>1705 lb.</td><td>1725 lb.</td><td>1745
+        lb.</td><td>1765 lb.</td><td>1785 lb.</td></tr><tr><td>14</td><td>2005
+        lb.</td><td>2025 lb.</td><td>2045 lb.</td><td>2065 lb.</td><td>2085
+        lb.</td><td>2105 lb.</td><td>2125 lb.</td><td>2145 lb.</td><td>2165
+        lb.</td></tr><tr><td>15</td><td>2425 lb.</td><td>2445 lb.</td><td>2465
+        lb.</td><td>2485 lb.</td><td>2505 lb.</td><td>2525 lb.</td><td>2545
+        lb.</td><td>2565 lb.</td><td>2585 lb.</td></tr><tr><td>16</td><td>2885
+        lb.</td><td>2905 lb.</td><td>2925 lb.</td><td>2945 lb.</td><td>2965
+        lb.</td><td>2985 lb.</td><td>3005 lb.</td><td>3025 lb.</td><td>3045
+        lb.</td></tr><tr><td>17</td><td>3385 lb.</td><td>3405 lb.</td><td>3425
+        lb.</td><td>3445 lb.</td><td>3465 lb.</td><td>3485 lb.</td><td>3505
+        lb.</td><td>3525 lb.</td><td>3545 lb.</td></tr><tr><td>18</td><td>3925
+        lb.</td><td>3945 lb.</td><td>3965 lb.</td><td>3985 lb.</td><td>4005
+        lb.</td><td>4025 lb.</td><td>4045 lb.</td><td>4065 lb.</td><td>4085
+        lb.</td></tr><tr><td>19</td><td>4505 lb.</td><td>4525 lb.</td><td>4545
+        lb.</td><td>4565 lb.</td><td>4585 lb.</td><td>4605 lb.</td><td>4625
+        lb.</td><td>4645 lb.</td><td>4665 lb.</td></tr><tr><td>20</td><td>5125
+        lb.</td><td>5145 lb.</td><td>5165 lb.</td><td>5185 lb.</td><td>5205
+        lb.</td><td>5225 lb.</td><td>5245 lb.</td><td>5265 lb.</td><td>5285
+        lb.</td></tr><tr><td>21</td><td>5785 lb.</td><td>5805 lb.</td><td>5825
+        lb.</td><td>5845 lb.</td><td>5865 lb.</td><td>5885 lb.</td><td>5905
+        lb.</td><td>5925 lb.</td><td>5945 lb.</td></tr><tr><td>22</td><td>6485
+        lb.</td><td>6505 lb.</td><td>6525 lb.</td><td>6545 lb.</td><td>6565
+        lb.</td><td>6585 lb.</td><td>6605 lb.</td><td>6625 lb.</td><td>6645
+        lb.</td></tr><tr><td>23</td><td>7225 lb.</td><td>7245 lb.</td><td>7265
+        lb.</td><td>7285 lb.</td><td>7305 lb.</td><td>7325 lb.</td><td>7345
+        lb.</td><td>7365 lb.</td><td>7385 lb.</td></tr><tr><td>24</td><td>8005
+        lb.</td><td>8025 lb.</td><td>8045 lb.</td><td>8065 lb.</td><td>8085
+        lb.</td><td>8105 lb.</td><td>8125 lb.</td><td>8145 lb.</td><td>8165
+        lb.</td></tr><tr><td>25</td><td>8825 lb.</td><td>8845 lb.</td><td>8865
+        lb.</td><td>8885 lb.</td><td>8905 lb.</td><td>8925 lb.</td><td>8945
+        lb.</td><td>8965 lb.</td><td>8985 lb.</td></tr><tr><td>26</td><td>9685
+        lb.</td><td>9705 lb.</td><td>9725 lb.</td><td>9745 lb.</td><td>9765
+        lb.</td><td>9785 lb.</td><td>9805 lb.</td><td>9825 lb.</td><td>9845
+        lb.</td></tr><tr><td>27</td><td>10585 lb.</td><td>10605
+        lb.</td><td>10625 lb.</td><td>10645 lb.</td><td>10665 lb.</td><td>10685
+        lb.</td><td>10705 lb.</td><td>10725 lb.</td><td>10745
+        lb.</td></tr><tr><td>28</td><td>11525 lb.</td><td>11545
+        lb.</td><td>11565 lb.</td><td>11585 lb.</td><td>11605 lb.</td><td>11625
+        lb.</td><td>11645 lb.</td><td>11665 lb.</td><td>11685
+        lb.</td></tr><tr><td>29</td><td>12505 lb.</td><td>12525
+        lb.</td><td>12545 lb.</td><td>12565 lb.</td><td>12585 lb.</td><td>12605
+        lb.</td><td>12625 lb.</td><td>12645 lb.</td><td>12665
+        lb.</td></tr><tr><td>30</td><td>13525 lb.</td><td>13545
+        lb.</td><td>13565 lb.</td><td>13585 lb.</td><td>13605 lb.</td><td>13625
+        lb.</td><td>13645 lb.</td><td>13665 lb.</td><td>13685
+        lb.</td></tr></tbody></table>
       format: 1
     title:
       level: 1
@@ -3068,7 +3015,7 @@ pages:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.20
+      systemVersion: 0.12.33
     flags:
       teriock:
         journalIcon: ms-neurology
@@ -3966,7 +3913,7 @@ pages:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.20
+      systemVersion: 0.12.33
     flags:
       teriock:
         journalIcon: ms-directions-run
@@ -4258,7 +4205,7 @@ pages:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.20
+      systemVersion: 0.12.33
     flags:
       teriock:
         journalIcon: ms-visibility
@@ -4391,7 +4338,7 @@ pages:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.20
+      systemVersion: 0.12.33
     flags:
       teriock:
         journalIcon: ms-self-improvement
@@ -5167,7 +5114,7 @@ pages:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.20
+      systemVersion: 0.12.33
     flags:
       teriock:
         journalIcon: ms-domino-mask
@@ -5305,7 +5252,7 @@ pages:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.20
+      systemVersion: 0.12.33
     flags:
       teriock:
         journalIcon: ms-exercise
@@ -5363,30 +5310,19 @@ pages:
         Capacity of Size 5 and Larger</caption><tbody><tr><th>Amount in
         Pounds</th><th>Effect Upon Hitting Threshold</th></tr><tr><td>65 + (20 ×
         (<a class="mw-selflink selflink">STR</a> + (@L[Core:Size]{SIZE} -
-        5)²))</td><td>@L[Condition:Encumbered]{Lightly
+        4)²))</td><td>@L[Condition:Encumbered]{Lightly
         Encumbered}</td></tr><tr><td>130 + (40 × (<a class="mw-selflink
         selflink">STR</a> + (@L[Core:Size]{SIZE} -
-        5)²))</td><td>@L[Condition:Encumbered]{Heavily
+        4)²))</td><td>@L[Condition:Encumbered]{Heavily
         Encumbered}</td></tr><tr><td>195 + (60 × (<a class="mw-selflink
-        selflink">STR</a> + (@L[Core:Size]{SIZE} - 5)²))</td><td>Cannot carry
+        selflink">STR</a> + (@L[Core:Size]{SIZE} - 4)²))</td><td>Cannot carry
         anything more</td></tr></tbody></table><p>A creature may also push,
         drag, or lift a weight in pounds up to twice their carrying capacity.
         While pushing or dragging weight in excess of their carrying capacity,
         the creature's @L[Core:Movement Speed]{movement speed} drops to 5
-        feet.</p><div class="note design-note"><b>Design Note:</b> I have many
-        spreadsheets of lame algebra to make sure the weight and carrying
-        capacity scaling make physical sense (one has to scale on a power of 2
-        and the other on a power of 3), fit with our intuitions of strength on
-        the human scale, and also allow creatures to be strong enough to carry
-        their own bodies. It's actually a very limited set of values that works
-        for.</div><div class="note design-note"><b>Design Note:</b> Why use
-        pounds instead of sizes? Because I hate the size abstraction, somehow
-        still have no intuition for how many "sizes" of weight objects are, and
-        it's also simplicity that isn't needed in the way it is for live action
-        <a target="_blank" rel="nofollow noreferrer noopener" class="external
-        text" href="https://www.fanwar.com/">FanWar</a>.</div><p>The amount a
-        creature can carry is shown in the table below.</p><table
-        class="wikitable"><caption>Lightly Encumbered Carrying
+        feet.The amount a creature can carry without becoming
+        @L[Condition:Encumbered]{encumbered} is shown in the table
+        below.</p><table class="wikitable"><caption>Lightly Encumbered Carrying
         Capacity</caption><tbody><tr><th>@L[Core:Size]{SIZE}</th><th><a
         class="mw-selflink selflink">STR</a> = -3</th><th><a class="mw-selflink
         selflink">STR</a> = -2</th><th><a class="mw-selflink selflink">STR</a> =
@@ -5405,88 +5341,73 @@ pages:
         lb.</td></tr><tr><td>4</td><td>5 lb.</td><td>25 lb.</td><td>45
         lb.</td><td>65 lb.</td><td>85 lb.</td><td>105 lb.</td><td>125
         lb.</td><td>145 lb.</td><td>165 lb.</td></tr><tr><td>5</td><td>25
-        lb.</td><td>625 lb.</td><td>2025 lb.</td><td>4225 lb.</td><td>7225
-        lb.</td><td>11025 lb.</td><td>15625 lb.</td><td>21025 lb.</td><td>27225
-        lb.</td></tr><tr><td>6</td><td>625 lb.</td><td>2025 lb.</td><td>4225
-        lb.</td><td>7225 lb.</td><td>11025 lb.</td><td>15625 lb.</td><td>21025
-        lb.</td><td>27225 lb.</td><td>34225 lb.</td></tr><tr><td>7</td><td>2025
-        lb.</td><td>4225 lb.</td><td>7225 lb.</td><td>11025 lb.</td><td>15625
-        lb.</td><td>21025 lb.</td><td>27225 lb.</td><td>34225 lb.</td><td>42025
-        lb.</td></tr><tr><td>8</td><td>4225 lb.</td><td>7225 lb.</td><td>11025
-        lb.</td><td>15625 lb.</td><td>21025 lb.</td><td>27225 lb.</td><td>34225
-        lb.</td><td>42025 lb.</td><td>50625 lb.</td></tr><tr><td>9</td><td>7225
-        lb.</td><td>11025 lb.</td><td>15625 lb.</td><td>21025 lb.</td><td>27225
-        lb.</td><td>34225 lb.</td><td>42025 lb.</td><td>50625 lb.</td><td>60025
-        lb.</td></tr><tr><td>10</td><td>11025 lb.</td><td>15625
-        lb.</td><td>21025 lb.</td><td>27225 lb.</td><td>34225 lb.</td><td>42025
-        lb.</td><td>50625 lb.</td><td>60025 lb.</td><td>70225
-        lb.</td></tr><tr><td>11</td><td>15625 lb.</td><td>21025
-        lb.</td><td>27225 lb.</td><td>34225 lb.</td><td>42025 lb.</td><td>50625
-        lb.</td><td>60025 lb.</td><td>70225 lb.</td><td>81225
-        lb.</td></tr><tr><td>12</td><td>21025 lb.</td><td>27225
-        lb.</td><td>34225 lb.</td><td>42025 lb.</td><td>50625 lb.</td><td>60025
-        lb.</td><td>70225 lb.</td><td>81225 lb.</td><td>93025
-        lb.</td></tr><tr><td>13</td><td>27225 lb.</td><td>34225
-        lb.</td><td>42025 lb.</td><td>50625 lb.</td><td>60025 lb.</td><td>70225
-        lb.</td><td>81225 lb.</td><td>93025 lb.</td><td>105625
-        lb.</td></tr><tr><td>14</td><td>34225 lb.</td><td>42025
-        lb.</td><td>50625 lb.</td><td>60025 lb.</td><td>70225 lb.</td><td>81225
-        lb.</td><td>93025 lb.</td><td>105625 lb.</td><td>119025
-        lb.</td></tr><tr><td>15</td><td>42025 lb.</td><td>50625
-        lb.</td><td>60025 lb.</td><td>70225 lb.</td><td>81225 lb.</td><td>93025
-        lb.</td><td>105625 lb.</td><td>119025 lb.</td><td>133225
-        lb.</td></tr><tr><td>16</td><td>50625 lb.</td><td>60025
-        lb.</td><td>70225 lb.</td><td>81225 lb.</td><td>93025 lb.</td><td>105625
-        lb.</td><td>119025 lb.</td><td>133225 lb.</td><td>148225
-        lb.</td></tr><tr><td>17</td><td>60025 lb.</td><td>70225
-        lb.</td><td>81225 lb.</td><td>93025 lb.</td><td>105625
-        lb.</td><td>119025 lb.</td><td>133225 lb.</td><td>148225
-        lb.</td><td>164025 lb.</td></tr><tr><td>18</td><td>70225
-        lb.</td><td>81225 lb.</td><td>93025 lb.</td><td>105625
-        lb.</td><td>119025 lb.</td><td>133225 lb.</td><td>148225
-        lb.</td><td>164025 lb.</td><td>180625
-        lb.</td></tr><tr><td>19</td><td>81225 lb.</td><td>93025
-        lb.</td><td>105625 lb.</td><td>119025 lb.</td><td>133225
-        lb.</td><td>148225 lb.</td><td>164025 lb.</td><td>180625
-        lb.</td><td>198025 lb.</td></tr><tr><td>20</td><td>93025
-        lb.</td><td>105625 lb.</td><td>119025 lb.</td><td>133225
-        lb.</td><td>148225 lb.</td><td>164025 lb.</td><td>180625
-        lb.</td><td>198025 lb.</td><td>216225
-        lb.</td></tr><tr><td>21</td><td>105625 lb.</td><td>119025
-        lb.</td><td>133225 lb.</td><td>148225 lb.</td><td>164025
-        lb.</td><td>180625 lb.</td><td>198025 lb.</td><td>216225
-        lb.</td><td>235225 lb.</td></tr><tr><td>22</td><td>119025
-        lb.</td><td>133225 lb.</td><td>148225 lb.</td><td>164025
-        lb.</td><td>180625 lb.</td><td>198025 lb.</td><td>216225
-        lb.</td><td>235225 lb.</td><td>255025
-        lb.</td></tr><tr><td>23</td><td>133225 lb.</td><td>148225
-        lb.</td><td>164025 lb.</td><td>180625 lb.</td><td>198025
-        lb.</td><td>216225 lb.</td><td>235225 lb.</td><td>255025
-        lb.</td><td>275625 lb.</td></tr><tr><td>24</td><td>148225
-        lb.</td><td>164025 lb.</td><td>180625 lb.</td><td>198025
-        lb.</td><td>216225 lb.</td><td>235225 lb.</td><td>255025
-        lb.</td><td>275625 lb.</td><td>297025
-        lb.</td></tr><tr><td>25</td><td>164025 lb.</td><td>180625
-        lb.</td><td>198025 lb.</td><td>216225 lb.</td><td>235225
-        lb.</td><td>255025 lb.</td><td>275625 lb.</td><td>297025
-        lb.</td><td>319225 lb.</td></tr><tr><td>26</td><td>180625
-        lb.</td><td>198025 lb.</td><td>216225 lb.</td><td>235225
-        lb.</td><td>255025 lb.</td><td>275625 lb.</td><td>297025
-        lb.</td><td>319225 lb.</td><td>342225
-        lb.</td></tr><tr><td>27</td><td>198025 lb.</td><td>216225
-        lb.</td><td>235225 lb.</td><td>255025 lb.</td><td>275625
-        lb.</td><td>297025 lb.</td><td>319225 lb.</td><td>342225
-        lb.</td><td>366025 lb.</td></tr><tr><td>28</td><td>216225
-        lb.</td><td>235225 lb.</td><td>255025 lb.</td><td>275625
-        lb.</td><td>297025 lb.</td><td>319225 lb.</td><td>342225
-        lb.</td><td>366025 lb.</td><td>390625
-        lb.</td></tr><tr><td>29</td><td>235225 lb.</td><td>255025
-        lb.</td><td>275625 lb.</td><td>297025 lb.</td><td>319225
-        lb.</td><td>342225 lb.</td><td>366025 lb.</td><td>390625
-        lb.</td><td>416025 lb.</td></tr><tr><td>30</td><td>255025
-        lb.</td><td>275625 lb.</td><td>297025 lb.</td><td>319225
-        lb.</td><td>342225 lb.</td><td>366025 lb.</td><td>390625
-        lb.</td><td>416025 lb.</td><td>442225 lb.</td></tr></tbody></table>
+        lb.</td><td>45 lb.</td><td>65 lb.</td><td>85 lb.</td><td>105
+        lb.</td><td>125 lb.</td><td>145 lb.</td><td>165 lb.</td><td>185
+        lb.</td></tr><tr><td>6</td><td>85 lb.</td><td>105 lb.</td><td>125
+        lb.</td><td>145 lb.</td><td>165 lb.</td><td>185 lb.</td><td>205
+        lb.</td><td>225 lb.</td><td>245 lb.</td></tr><tr><td>7</td><td>185
+        lb.</td><td>205 lb.</td><td>225 lb.</td><td>245 lb.</td><td>265
+        lb.</td><td>285 lb.</td><td>305 lb.</td><td>325 lb.</td><td>345
+        lb.</td></tr><tr><td>8</td><td>325 lb.</td><td>345 lb.</td><td>365
+        lb.</td><td>385 lb.</td><td>405 lb.</td><td>425 lb.</td><td>445
+        lb.</td><td>465 lb.</td><td>485 lb.</td></tr><tr><td>9</td><td>505
+        lb.</td><td>525 lb.</td><td>545 lb.</td><td>565 lb.</td><td>585
+        lb.</td><td>605 lb.</td><td>625 lb.</td><td>645 lb.</td><td>665
+        lb.</td></tr><tr><td>10</td><td>725 lb.</td><td>745 lb.</td><td>765
+        lb.</td><td>785 lb.</td><td>805 lb.</td><td>825 lb.</td><td>845
+        lb.</td><td>865 lb.</td><td>885 lb.</td></tr><tr><td>11</td><td>985
+        lb.</td><td>1005 lb.</td><td>1025 lb.</td><td>1045 lb.</td><td>1065
+        lb.</td><td>1085 lb.</td><td>1105 lb.</td><td>1125 lb.</td><td>1145
+        lb.</td></tr><tr><td>12</td><td>1285 lb.</td><td>1305 lb.</td><td>1325
+        lb.</td><td>1345 lb.</td><td>1365 lb.</td><td>1385 lb.</td><td>1405
+        lb.</td><td>1425 lb.</td><td>1445 lb.</td></tr><tr><td>13</td><td>1625
+        lb.</td><td>1645 lb.</td><td>1665 lb.</td><td>1685 lb.</td><td>1705
+        lb.</td><td>1725 lb.</td><td>1745 lb.</td><td>1765 lb.</td><td>1785
+        lb.</td></tr><tr><td>14</td><td>2005 lb.</td><td>2025 lb.</td><td>2045
+        lb.</td><td>2065 lb.</td><td>2085 lb.</td><td>2105 lb.</td><td>2125
+        lb.</td><td>2145 lb.</td><td>2165 lb.</td></tr><tr><td>15</td><td>2425
+        lb.</td><td>2445 lb.</td><td>2465 lb.</td><td>2485 lb.</td><td>2505
+        lb.</td><td>2525 lb.</td><td>2545 lb.</td><td>2565 lb.</td><td>2585
+        lb.</td></tr><tr><td>16</td><td>2885 lb.</td><td>2905 lb.</td><td>2925
+        lb.</td><td>2945 lb.</td><td>2965 lb.</td><td>2985 lb.</td><td>3005
+        lb.</td><td>3025 lb.</td><td>3045 lb.</td></tr><tr><td>17</td><td>3385
+        lb.</td><td>3405 lb.</td><td>3425 lb.</td><td>3445 lb.</td><td>3465
+        lb.</td><td>3485 lb.</td><td>3505 lb.</td><td>3525 lb.</td><td>3545
+        lb.</td></tr><tr><td>18</td><td>3925 lb.</td><td>3945 lb.</td><td>3965
+        lb.</td><td>3985 lb.</td><td>4005 lb.</td><td>4025 lb.</td><td>4045
+        lb.</td><td>4065 lb.</td><td>4085 lb.</td></tr><tr><td>19</td><td>4505
+        lb.</td><td>4525 lb.</td><td>4545 lb.</td><td>4565 lb.</td><td>4585
+        lb.</td><td>4605 lb.</td><td>4625 lb.</td><td>4645 lb.</td><td>4665
+        lb.</td></tr><tr><td>20</td><td>5125 lb.</td><td>5145 lb.</td><td>5165
+        lb.</td><td>5185 lb.</td><td>5205 lb.</td><td>5225 lb.</td><td>5245
+        lb.</td><td>5265 lb.</td><td>5285 lb.</td></tr><tr><td>21</td><td>5785
+        lb.</td><td>5805 lb.</td><td>5825 lb.</td><td>5845 lb.</td><td>5865
+        lb.</td><td>5885 lb.</td><td>5905 lb.</td><td>5925 lb.</td><td>5945
+        lb.</td></tr><tr><td>22</td><td>6485 lb.</td><td>6505 lb.</td><td>6525
+        lb.</td><td>6545 lb.</td><td>6565 lb.</td><td>6585 lb.</td><td>6605
+        lb.</td><td>6625 lb.</td><td>6645 lb.</td></tr><tr><td>23</td><td>7225
+        lb.</td><td>7245 lb.</td><td>7265 lb.</td><td>7285 lb.</td><td>7305
+        lb.</td><td>7325 lb.</td><td>7345 lb.</td><td>7365 lb.</td><td>7385
+        lb.</td></tr><tr><td>24</td><td>8005 lb.</td><td>8025 lb.</td><td>8045
+        lb.</td><td>8065 lb.</td><td>8085 lb.</td><td>8105 lb.</td><td>8125
+        lb.</td><td>8145 lb.</td><td>8165 lb.</td></tr><tr><td>25</td><td>8825
+        lb.</td><td>8845 lb.</td><td>8865 lb.</td><td>8885 lb.</td><td>8905
+        lb.</td><td>8925 lb.</td><td>8945 lb.</td><td>8965 lb.</td><td>8985
+        lb.</td></tr><tr><td>26</td><td>9685 lb.</td><td>9705 lb.</td><td>9725
+        lb.</td><td>9745 lb.</td><td>9765 lb.</td><td>9785 lb.</td><td>9805
+        lb.</td><td>9825 lb.</td><td>9845 lb.</td></tr><tr><td>27</td><td>10585
+        lb.</td><td>10605 lb.</td><td>10625 lb.</td><td>10645 lb.</td><td>10665
+        lb.</td><td>10685 lb.</td><td>10705 lb.</td><td>10725 lb.</td><td>10745
+        lb.</td></tr><tr><td>28</td><td>11525 lb.</td><td>11545
+        lb.</td><td>11565 lb.</td><td>11585 lb.</td><td>11605 lb.</td><td>11625
+        lb.</td><td>11645 lb.</td><td>11665 lb.</td><td>11685
+        lb.</td></tr><tr><td>29</td><td>12505 lb.</td><td>12525
+        lb.</td><td>12545 lb.</td><td>12565 lb.</td><td>12585 lb.</td><td>12605
+        lb.</td><td>12625 lb.</td><td>12645 lb.</td><td>12665
+        lb.</td></tr><tr><td>30</td><td>13525 lb.</td><td>13545
+        lb.</td><td>13565 lb.</td><td>13585 lb.</td><td>13605 lb.</td><td>13625
+        lb.</td><td>13645 lb.</td><td>13665 lb.</td><td>13685
+        lb.</td></tr></tbody></table>
       format: 1
     title:
       level: 1
