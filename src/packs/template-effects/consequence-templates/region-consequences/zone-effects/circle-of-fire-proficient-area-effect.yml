@@ -1,0 +1,80 @@
+_id: qhWaVqOLuShLzWsS
+_key: '!effects!qhWaVqOLuShLzWsS'
+_stats:
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.12.30
+description: >-
+  <p>Take [[/damage 1d4[magic fire]]] at the start and end of each of your
+  @L[Core:Turns]{turns}.</p>
+folder: UygwjuBE3MKG5S6W
+img: systems/teriock/src/icons/abilities/circle-of-fire.webp
+name: Circle of Fire Proficient Area Effect
+showIcon: 0
+system:
+  automations:
+    fP7YaaHyOXov8ruW:
+      _id: fP7YaaHyOXov8ruW
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: 1d4[magic fire]
+      heighten:
+        - 0
+        - 1
+      impact: damage
+      merge: true
+      trigger: turnStart
+      type: roll
+    lO19AFGE5gBGjMGY:
+      _id: lO19AFGE5gBGjMGY
+      competencies:
+        - 0
+        - 1
+        - 2
+      formula: 1d4[magic fire]
+      heighten:
+        - 0
+        - 1
+      impact: damage
+      merge: true
+      trigger: turnEnd
+      type: roll
+  competence:
+    raw: 0
+  critical: false
+  expirations:
+    combat:
+      what:
+        roll: 2d4kh1
+        threshold: 4
+        type: none
+      when:
+        skip: 0
+        time: start
+        trigger: turn
+      who:
+        type: target
+    sustained: false
+  identifier: circle-of-fire-proficient-area-effect
+  transformation:
+    competence:
+      raw: 0
+    enabled: false
+    override:
+      - art
+      - size
+    reset:
+      - gp
+      - hp
+    ring: false
+    suppress:
+      - body
+      - equipment
+      - fluency
+      - rank
+      - species
+transfer: false
+type: consequence
