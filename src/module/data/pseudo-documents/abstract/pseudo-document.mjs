@@ -182,10 +182,12 @@ export default class PseudoDocument extends EmbeddedDataModel {
    */
   async deleteDialog(options = {}, operation = {}) {
     let content = options.content;
-    const type = _loc(this.constructor.metadata.label).toLowerCase();
+    const type = _loc(this.constructor.metadata.label);
     if (!content) {
       const question = _loc("COMMON.AreYouSure");
-      const warning = _loc("SIDEBAR.DeleteWarning", { type });
+      const warning = _loc("SIDEBAR.DeleteWarning", {
+        type: type.toLowerCase(),
+      });
       content = `<p><strong>${question}</strong> ${warning}</p>`;
     }
     return foundry.applications.api.DialogV2.confirm(

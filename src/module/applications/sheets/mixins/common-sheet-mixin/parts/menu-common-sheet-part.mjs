@@ -9,29 +9,23 @@ export default (Base) => {
      * @property {AnyCommonDocument} document
      */
     class MenuCommonSheetPart extends Base {
+      /** @type {Partial<ApplicationConfiguration>} */
+      static DEFAULT_OPTIONS = {
+        actions: { toggleMenu: this._onToggleMenu },
+      };
+
       constructor(...args) {
         super(...args);
         this._menuOpen = false;
       }
 
       /**
-       * Activates the sheet menu functionality.
-       * Sets up menu toggle behavior and initial state.
+       * Toggle whether the menu is open.
+       * @returns {Promise<void>}
+       * @this {MenuCommonSheetPart}
        */
-      _activateMenu() {
-        const menu = this.element.querySelector(".ab-menu");
-        const toggle = this.element.querySelector(".ab-menu-toggle");
-        this._connect(".ab-menu-toggle", "click", () => {
-          this._menuOpen = !this._menuOpen;
-          menu.classList.toggle("collapsed", !this._menuOpen);
-          toggle.classList.toggle("ab-menu-toggle-open", this._menuOpen);
-        });
-      }
-
-      /** @inheritDoc */
-      async _onRender(context, options) {
-        await super._onRender(context, options);
-        this._activateMenu();
+      static async _onToggleMenu() {
+        this.toggleMenu();
       }
 
       /** @inheritDoc */
@@ -44,6 +38,20 @@ export default (Base) => {
           context.canHaveAutomations = true;
         }
         return context;
+      }
+
+      /**
+       * Toggle menu state.
+       * @param {boolean} [state]
+       */
+      toggleMenu(state) {
+        this._menuOpen = state ?? !this._menuOpen;
+        this.element
+          .querySelector(".ab-menu")
+          ?.classList.toggle("collapsed", !this._menuOpen);
+        this.element
+          .querySelector(".ab-menu-toggle")
+          ?.classList.toggle("ab-menu-toggle-open", this._menuOpen);
       }
     }
   );

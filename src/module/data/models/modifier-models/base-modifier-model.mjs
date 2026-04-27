@@ -24,7 +24,7 @@ export default class BaseModifierModel extends mix(
     return {
       ...super.defineSchema(options),
       _key: initialString(),
-      score: new fields.NumberField({ initial: score }),
+      score: new fields.NumberField({ initial: score, nullable: false }),
     };
   }
 

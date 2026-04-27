@@ -38,6 +38,7 @@ export default class ProtectionAutomation extends CritAutomation {
           objectMap(protectionConfig.categories, (c) => c.label),
         ),
         initial: "abilities",
+        required: true,
       }),
       description: new fields.StringField({
         label: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
@@ -47,6 +48,7 @@ export default class ProtectionAutomation extends CritAutomation {
           objectMap(protectionConfig.types, (t) => t.label),
         ),
         initial: "resistances",
+        required: true,
       }),
       value: new fields.StringField(),
     });

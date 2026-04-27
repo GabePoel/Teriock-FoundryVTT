@@ -53,6 +53,7 @@ export default (Base) => {
           choice = await selectDialog(choices, {
             hint: _loc("TERIOCK.DIALOGS.Select.AddAutomation.hint"),
             icon: TERIOCK.display.icons.pseudoDocument.automation,
+            required: true,
             title: _loc("TERIOCK.DIALOGS.Select.AddAutomation.title"),
           });
         }

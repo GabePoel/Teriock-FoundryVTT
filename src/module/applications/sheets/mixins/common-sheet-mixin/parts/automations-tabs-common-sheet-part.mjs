@@ -11,27 +11,12 @@ export default (Base) => {
     class AutomationsTabsCommonSheetPart extends Base {
       /** @type {Partial<ApplicationConfiguration>} */
       static DEFAULT_OPTIONS = {
-        actions: {
-          changeAutomationTab: this._onChangeAutomationTab,
-          toggleAutomations: this._onToggleAutomations,
-        },
+        actions: { toggleAutomations: this._onToggleAutomations },
       };
 
       constructor(...args) {
         super(...args);
-        this._automationTab = "base";
         this._tab = "overview";
-      }
-
-      /**
-       * Switches to a specific impacts tab.
-       * @param {PointerEvent} _event - The event object.
-       * @param {HTMLElement} target - The target element.
-       * @returns {Promise<void>}
-       */
-      static async _onChangeAutomationTab(_event, target) {
-        this._impactTab = target.dataset.tab;
-        await this.render();
       }
 
       /**
@@ -41,6 +26,7 @@ export default (Base) => {
       static async _onToggleAutomations() {
         this._tab = this._tab === "automations" ? "overview" : "automations";
         await this.render();
+        if (typeof this.toggleMenu === "function") this.toggleMenu(false);
       }
 
       /** @inheritDoc */
@@ -57,10 +43,9 @@ export default (Base) => {
 
       /** @inheritDoc */
       async _prepareContext(options = {}) {
-        const context = await super._prepareContext(options);
-        context.automationTab = this._automationTab;
-        context.tab = this._tab;
-        return context;
+        return Object.assign(await super._prepareContext(options), {
+          tab: this._tab,
+        });
       }
     }
   );

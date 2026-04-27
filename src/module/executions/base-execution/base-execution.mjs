@@ -293,10 +293,8 @@ export default class BaseExecution extends AutomatedDataMixin(
    * @returns {Promise<false|void>}
    */
   async _postExecute() {
-    await this._fireAutomationsTrigger("execute");
-    await Promise.all(
-      this.executionNames.map((n) => this.fireTrigger(`execute${n}`)),
-    );
+    this._fireAutomationsTrigger("execute");
+    this.executionNames.map((n) => this.fireTrigger(`execute${n}`));
   }
 
   /**

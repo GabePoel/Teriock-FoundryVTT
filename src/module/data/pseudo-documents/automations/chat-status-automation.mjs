@@ -21,7 +21,7 @@ export default class ChatStatusAutomation extends CritAutomation {
 
   /** @inheritDoc */
   static get LABEL() {
-    return "TERIOCK.TERMS.Common.condition";
+    return "TERIOCK.AUTOMATIONS.ChatStatus.LABEL";
   }
 
   /** @inheritDoc */
@@ -52,12 +52,13 @@ export default class ChatStatusAutomation extends CritAutomation {
         initial: this._relationInitial,
         label: "TERIOCK.AUTOMATIONS.Base.FIELDS.relation.label",
         nullable: false,
+        required: true,
       }),
       status: new fields.StringField({
-        blank: true,
         choices: TERIOCK.reference.conditions,
+        initial: Object.keys(TERIOCK.reference.conditions)[0],
         label: "TERIOCK.TERMS.Common.condition",
-        nullable: true,
+        required: true,
       }),
     });
   }

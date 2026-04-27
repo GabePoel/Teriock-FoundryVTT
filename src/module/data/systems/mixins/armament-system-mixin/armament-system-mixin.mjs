@@ -74,8 +74,16 @@ export default function ArmamentSystemMixin(Base) {
           }),
           damage: new MultiChangeField(
             {
-              base: new FormulaField({ deterministic: false }),
-              twoHanded: new FormulaField({ deterministic: false }),
+              base: new FormulaField({
+                deterministic: false,
+                initial: "0",
+                nullable: false,
+              }),
+              twoHanded: new FormulaField({
+                deterministic: false,
+                initial: "0",
+                nullable: false,
+              }),
               types: new fields.SetField(new IdentifierField()),
             },
             { multiChangePaths: ["base", "twoHanded"] },

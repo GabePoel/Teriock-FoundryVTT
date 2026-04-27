@@ -180,13 +180,13 @@
           @include mixins.centralize;
           cursor: pointer;
           flex-direction: row;
-          max-width: calc(100% - 3em);
           min-width: 0;
           overflow: hidden;
           padding-inline: 1.5em;
           text-align: center;
           text-overflow: ellipsis;
           white-space: nowrap;
+          width: 100%;
 
           &.ab-text-content {
             display: block;
@@ -547,7 +547,14 @@
 @container (max-width: 349px) {
   .ab-header {
     .ab-profile-img {
-      display: none;
+      width: 20px;
+      height: 20px;
+      padding: 0;
+      margin: 0;
+      border-radius: 2px;
+      position: absolute;
+      top: calc(50% - 10px);
+      left: 6px;
     }
 
     .ab-title {

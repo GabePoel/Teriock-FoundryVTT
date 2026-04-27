@@ -32,7 +32,7 @@ export default class RollAutomation extends mix(
 
   /** @inheritDoc */
   static get LABEL() {
-    return "TERIOCK.ROLLS.Take.label";
+    return "TERIOCK.AUTOMATIONS.Roll.LABEL";
   }
 
   /** @inheritDoc */
@@ -48,6 +48,9 @@ export default class RollAutomation extends mix(
         choices: localizeChoices(
           objectMap(TERIOCK.config.impact, (i) => i.deal),
         ),
+        initial: "damage",
+        nullable: false,
+        required: true,
       }),
       merge: new fields.BooleanField({ initial: true }),
     });

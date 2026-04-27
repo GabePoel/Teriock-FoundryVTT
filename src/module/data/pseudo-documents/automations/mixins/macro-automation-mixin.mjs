@@ -67,7 +67,7 @@ export default function MacroAutomationMixin(Base) {
 
       /** @inheritDoc */
       get _formPaths() {
-        return ["macro", ...this._triggerDisplayPaths];
+        return ["macro", ...super._formPaths, ...this._triggerDisplayPaths];
       }
 
       /** @inheritDoc */

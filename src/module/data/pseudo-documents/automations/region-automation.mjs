@@ -93,6 +93,19 @@ export default class RegionAutomation extends mix(
       radius: this.#rangeField(),
       radiusX: this.#rangeField(),
       radiusY: this.#rangeField(),
+      regionType: new fields.StringField({
+        choices: localizeChoices({
+          circle: "SHAPE.TYPES.circle.name",
+          cone: "SHAPE.TYPES.cone.name",
+          ellipse: "SHAPE.TYPES.ellipse.name",
+          emanation: "SHAPE.TYPES.emanation.name",
+          rectangle: "SHAPE.TYPES.rectangle.name",
+          ring: "SHAPE.TYPES.ring.name",
+        }),
+        initial: "circle",
+        nullable: false,
+        required: true,
+      }),
       restriction: new fields.SchemaField({
         enabled: new fields.BooleanField(),
         type: new fields.StringField({
@@ -111,16 +124,6 @@ export default class RegionAutomation extends mix(
           integer: true,
           initial: 0,
           min: 0,
-        }),
-      }),
-      regionType: new fields.StringField({
-        choices: localizeChoices({
-          circle: "SHAPE.TYPES.circle.name",
-          cone: "SHAPE.TYPES.cone.name",
-          ellipse: "SHAPE.TYPES.ellipse.name",
-          emanation: "SHAPE.TYPES.emanation.name",
-          rectangle: "SHAPE.TYPES.rectangle.name",
-          ring: "SHAPE.TYPES.ring.name",
         }),
       }),
       targeting: new fields.BooleanField({ initial: true }),

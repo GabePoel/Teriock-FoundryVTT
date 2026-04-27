@@ -89,14 +89,7 @@ export default class EquipmentSystem extends mix(
       pageNameKey: "system.equipmentType",
       type: "equipment",
       usable: true,
-      visibleTypes: [
-        "ability",
-        "equipment",
-        "fluency",
-        "imbuement",
-        "property",
-        "resource",
-      ],
+      visibleTypes: ["equipment", ...super.metadata.visibleTypes],
     });
   }
 

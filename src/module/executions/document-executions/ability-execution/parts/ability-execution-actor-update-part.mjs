@@ -80,7 +80,7 @@ export default function AbilityExecutionActorUpdatePart(Base) {
             }
           }
           if (Object.keys(this.updates).length > 0) {
-            await this.actor.update(this.updates);
+            this.actor.update(this.updates);
           }
         }
       }

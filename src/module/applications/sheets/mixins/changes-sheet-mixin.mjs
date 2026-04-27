@@ -33,11 +33,12 @@ export default function ChangesSheetMixin(Base) {
           ) || [];
         const newChange = {
           key: "",
-          mode: 0,
+          phase: "normal",
           priority: 0,
           qualifier: "1",
           target: "Actor",
           time: "normal",
+          type: "add",
           value: "",
         };
         changes.push(newChange);

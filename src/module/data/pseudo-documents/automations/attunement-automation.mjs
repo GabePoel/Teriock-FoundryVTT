@@ -13,7 +13,7 @@ export default class AttunementAutomation extends BaseAutomation {
 
   /** @inheritDoc */
   static get LABEL() {
-    return "TYPES.ActiveEffect.attunement";
+    return "TERIOCK.AUTOMATIONS.Attunement.LABEL";
   }
 
   /** @inheritDoc */

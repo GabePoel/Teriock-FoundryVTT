@@ -299,7 +299,7 @@ function cleanAbility(doc) {
  * @param {Record<string, Teriock.Automations.Any>} automations
  */
 function cleanAutomations(automations) {
-  const DEPRECATED_TYPES = ["start", "end", "apply", "resist", "useAbilities"];
+  const DEPRECATED_TYPES = ["start", "end", "apply", "useAbilities"];
   const TYPE_MIGRATIONS = {
     addExternal: "addDocuments",
     useExternal: "useDocuments",

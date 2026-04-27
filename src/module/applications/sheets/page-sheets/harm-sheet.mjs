@@ -55,7 +55,6 @@ export default class HarmSheet extends mix(
 
   /** @inheritDoc */
   async _onRender(context, options) {
-    console.log(context, options, this.element);
     await super._onRender(context, options);
     bindCommonActions(this.element);
   }

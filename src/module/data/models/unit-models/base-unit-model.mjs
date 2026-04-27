@@ -98,7 +98,8 @@ export default class BaseUnitModel extends EvaluationModel {
       unit: new fields.StringField({
         choices: this.choices,
         initial: this.choiceEntries[0].id,
-        required: false,
+        nullable: false,
+        required: true,
       }),
     });
   }

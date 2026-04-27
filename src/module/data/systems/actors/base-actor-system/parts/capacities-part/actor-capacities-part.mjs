@@ -70,7 +70,11 @@ export default (Base) => {
        * Prepare carrying capacity from STR.
        */
       #prepareCarryingCapacity() {
-        const factor = 65 + 20 * this.attributes.str.score;
+        const factor =
+          65 +
+          20 *
+            (this.attributes.str.score +
+              Math.max(0, Math.pow(this.size.number - 5, 2)));
         this.carryingCapacity = {
           factor,
           heavy: factor * 2,

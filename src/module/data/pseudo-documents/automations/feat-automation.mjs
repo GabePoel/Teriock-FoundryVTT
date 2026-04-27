@@ -19,7 +19,9 @@ export default class FeatAutomation extends ThresholdAutomation {
     return Object.assign(super.defineSchema(), {
       attribute: new fields.StringField({
         choices: TERIOCK.reference.attributesFull,
+        initial: "int",
         label: "TERIOCK.TERMS.Common.attribute",
+        required: true,
       }),
     });
   }

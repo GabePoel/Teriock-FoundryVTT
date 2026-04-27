@@ -37,6 +37,7 @@ export function combatExpirationSourceTypeField() {
     hint: _loc("TERIOCK.SCHEMA.CombatExpiration.who.hint"),
     initial: "target",
     label: _loc("TERIOCK.SCHEMA.CombatExpiration.who.label"),
+    required: true,
   });
 }
 
@@ -65,6 +66,7 @@ export function combatExpirationMethodField() {
       hint: _loc("TERIOCK.SCHEMA.CombatExpiration.what.type.hint"),
       initial: "none",
       label: _loc("TERIOCK.SCHEMA.CombatExpiration.what.type.label"),
+      required: true,
     }),
   });
 }
@@ -88,6 +90,7 @@ export function combatExpirationTimingField() {
       hint: _loc("TERIOCK.SCHEMA.CombatExpiration.when.time.hint"),
       initial: "start",
       label: _loc("TERIOCK.SCHEMA.CombatExpiration.when.time.label"),
+      required: true,
     }),
     trigger: new StringField({
       choices: localizeChoices({
@@ -98,6 +101,7 @@ export function combatExpirationTimingField() {
       hint: _loc("TERIOCK.SCHEMA.CombatExpiration.when.trigger.hint"),
       initial: "turn",
       label: _loc("TERIOCK.SCHEMA.CombatExpiration.when.trigger.label"),
+      required: true,
     }),
   });
 }
@@ -113,6 +117,7 @@ export function changeTypeField() {
     }),
     initial: "add",
     label: "TERIOCK.SCHEMA.QualifiedChange.type.label",
+    required: true,
   });
 }
 
@@ -133,6 +138,7 @@ export function qualifiedChangeField() {
       initial: "normal",
       label: "TERIOCK.SCHEMA.QualifiedChange.phase.label",
       nullable: false,
+      required: true,
     }),
     priority: new EnhancedNumberField({
       initial: 20,
@@ -148,6 +154,7 @@ export function qualifiedChangeField() {
       initial: "Actor",
       label: "TERIOCK.SCHEMA.QualifiedChange.target.label",
       nullable: false,
+      required: true,
     }),
     type: changeTypeField(),
     value: new FormulaField({
@@ -383,5 +390,6 @@ export function movementActionField() {
     ),
     initial: "walk",
     nullable: false,
+    required: true,
   });
 }
