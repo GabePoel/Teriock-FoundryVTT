@@ -1,7 +1,7 @@
 /** @enum {ActiveEffectChangeTypeConfig} */
 const changeConfigs = {
   addTypes: {
-    defaultPriority: 20,
+    defaultPriority: 15,
     label: "TERIOCK.EFFECTS.Changes.typeAdd",
   },
   boost: {
@@ -9,11 +9,11 @@ const changeConfigs = {
     label: "TERIOCK.EFFECTS.Changes.boost",
   },
   removeTypes: {
-    defaultPriority: 20,
+    defaultPriority: 15,
     label: "TERIOCK.EFFECTS.Changes.typeRemove",
   },
   setTypes: {
-    defaultPriority: 50,
+    defaultPriority: 45,
     label: "TERIOCK.EFFECTS.Changes.typeSet",
   },
 };

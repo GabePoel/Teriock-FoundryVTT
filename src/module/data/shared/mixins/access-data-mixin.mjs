@@ -62,22 +62,33 @@ export default function AccessDataMixin(Base) {
       }
 
       /**
+       * Make a form group from the specified field path.
+       * @param {string} path
+       * @param {FormGroupConfig} groupConfig
+       * @param {FormInputConfig} inputConfig
+       * @returns {HTMLDivElement}
+       */
+      _makeFormGroup(path, groupConfig = {}, inputConfig = {}) {
+        return this.schema.getField(path).toFormGroup(
+          { rootId: foundry.utils.randomID(), localize: true, ...groupConfig },
+          {
+            context: this._inputContextKey,
+            name: `${this.localPath}.${path}`,
+            value: foundry.utils.getProperty(this, `_source.${path}`),
+            ...inputConfig,
+          },
+        );
+      }
+
+      /**
        * Make form groups from specified field paths.
        * @param {string[]} paths
-       * @returns {HTMLDivElement[]}
+       * @returns {HTMLElement[]}
        */
       _makeFormGroups(paths) {
-        return paths.map((p) => {
-          if (p === "hr") return document.createElement("hr");
-          return this.schema.getField(p).toFormGroup(
-            { rootId: foundry.utils.randomID(), localize: true },
-            {
-              context: this._inputContextKey,
-              name: `${this.localPath}.${p}`,
-              value: foundry.utils.getProperty(this, p),
-            },
-          );
-        });
+        return paths.map((p) =>
+          p === "hr" ? document.createElement("hr") : this._makeFormGroup(p),
+        );
       }
 
       /**

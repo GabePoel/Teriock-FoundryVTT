@@ -15,7 +15,7 @@ const armamentContext = {
   "range.short": "TERIOCK.SYSTEMS.Armament.FIELDS.range.short.raw.label",
   av: "TERIOCK.SYSTEMS.Armament.FIELDS.av.raw.label",
   bv: "TERIOCK.SYSTEMS.Armament.FIELDS.bv.raw.label",
-  dmg: "TERIOCK.SYSTEMS.Armament.FIELDS.damage.base.label",
+  dmg: "TERIOCK.SYSTEMS.Armament.FIELDS.damage.label",
   range: "TERIOCK.SYSTEMS.Armament.FIELDS.range.long.raw.label",
   spellTurning: "TERIOCK.SYSTEMS.Armament.FIELDS.spellTurning.label",
   style: "TERIOCK.SYSTEMS.Equipment.FIELDS.fightingStyle.label",

@@ -1,10 +1,21 @@
 import { TeriockActiveEffect } from "../documents/_module.mjs";
 import { phase } from "../constants/config/change-config.mjs";
 import { EffectChangeData } from "@common/documents/_types.mjs";
+import { changeConfigs } from "../setup/_module.mjs";
 
 declare global {
   namespace Teriock.Changes {
     export type Phase = keyof typeof phase;
+
+    export type Type =
+      | "add"
+      | "custom"
+      | "downgrade"
+      | "multiply"
+      | "override"
+      | "subtract"
+      | "upgrade"
+      | keyof typeof changeConfigs;
 
     export type Target =
       | Teriock.Documents.CommonType

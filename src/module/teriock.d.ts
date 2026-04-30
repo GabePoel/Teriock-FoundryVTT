@@ -15,6 +15,8 @@ declare global {
 
   const __brand: unique symbol;
 
+  const _loc: (stringId: string, data?: object) => string;
+
   /** FoundryVTT UUID */
   type UUID<T = unknown> = string & {
     [__brand]: T;

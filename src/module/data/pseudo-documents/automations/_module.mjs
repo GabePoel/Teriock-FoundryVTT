@@ -9,6 +9,7 @@ export { default as ChangeQuantityAutomation } from "./change-quantity-automatio
 export { default as ChangesAutomation } from "./changes-automation.mjs";
 export { default as ChatMacroAutomation } from "./chat-macro-automation.mjs";
 export { default as ChatStatusAutomation } from "./chat-status-automation.mjs";
+export { default as ChildChangeAutomation } from "./child-change-automation.mjs";
 export { default as CombatExpirationAutomation } from "./combat-expiration-automation.mjs";
 export { default as CommonMacroAutomation } from "./common-macro-automation.mjs";
 export { default as CommonOutcomesAutomation } from "./common-outcomes-automation.mjs";

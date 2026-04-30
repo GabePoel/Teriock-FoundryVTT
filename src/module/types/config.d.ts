@@ -2,6 +2,18 @@ import { TeriockActor } from "../documents/_module.mjs";
 
 declare global {
   export namespace Teriock.Config {
+    export type ChildChangeCategoryEntry = {
+      label: string;
+      types: Teriock.Documents.ChildType[];
+    };
+
+    export type ChildChangePathEntry = {
+      categories: (keyof typeof TERIOCK.config.childChanges.categories)[];
+      forExecution?: boolean;
+      label: string;
+      types?: Teriock.Changes.Type[];
+    };
+
     export type CurrencyEntry = {
       abbreviation: string;
       label: string;

@@ -1,102 +1,39 @@
-import type {
-  AbilityMacroAutomation,
-  AddDocumentsAutomation,
-  AttunementAutomation,
-  ChangeCompetenceAutomation,
-  ChangeMovementAutomation,
-  ChangeQuantityAutomation,
-  ChangesAutomation,
-  ChatMacroAutomation,
-  ChatStatusAutomation,
-  CombatExpirationAutomation,
-  CommonMacroAutomation,
-  CommonOutcomesAutomation,
-  DurationAutomation,
-  FeatAutomation,
-  HacksAutomation,
-  HealAutomation,
-  ModifyEffectAutomation,
-  PropertyMacroAutomation,
-  ProtectionAutomation,
-  RegionAutomation,
-  ResistAutomation,
-  RevitalizeAutomation,
-  RollAutomation,
-  RollStyleAutomation,
-  StatusAutomation,
-  TakeAutomation,
-  TradecraftAutomation,
-  TransformationAutomation,
-  UseDocumentsAutomation,
-} from "../data/pseudo-documents/automations/_module.mjs";
-import type {
-  AddDocumentsActivation,
-  ApplyStatusActivation,
-  AttuneActivation,
-  AwakenActivation,
-  ChangeMovementActivation,
-  DampenActivation,
-  DeathBagActivation,
-  DeattuneActivation,
-  DestroyActivation,
-  FeatActivation,
-  GlueActivation,
-  HealActivation,
-  IdentifyActivation,
-  MacroActivation,
-  ReadMagicActivation,
-  ReforgeActivation,
-  RemoveStatusActivation,
-  RepairActivation,
-  ResistActivation,
-  RevitalizeActivation,
-  ReviveActivation,
-  RollActivation,
-  ShatterActivation,
-  StandardDamageActivation,
-  TakeActivation,
-  TakeHackActivation,
-  TakeUnhackActivation,
-  ToggleStatusActivation,
-  TradecraftActivation,
-  UndampenActivation,
-  UnglueActivation,
-  UseExternalActivation,
-  UseLocalActivation,
-} from "../data/pseudo-documents/activations/_module.mjs";
+import * as automations from "../data/pseudo-documents/automations/_module.mjs";
+import * as activations from "../data/pseudo-documents/activations/_module.mjs";
 
 declare global {
   namespace Teriock.Automations {
     export interface TypeMap {
-      abilityMacro: AbilityMacroAutomation;
-      addDocuments: AddDocumentsAutomation;
-      attunement: AttunementAutomation;
-      changeCompetence: ChangeCompetenceAutomation;
-      changeMovement: ChangeMovementAutomation;
-      changeQuantity: ChangeQuantityAutomation;
-      changes: ChangesAutomation;
-      chatMacro: ChatMacroAutomation;
-      chatStatus: ChatStatusAutomation;
-      combatExpiration: CombatExpirationAutomation;
-      common: CommonOutcomesAutomation;
-      commonMacro: CommonMacroAutomation;
-      duration: DurationAutomation;
-      feat: FeatAutomation;
-      hacks: HacksAutomation;
-      heal: HealAutomation;
-      modifyEffect: ModifyEffectAutomation;
-      propertyMacro: PropertyMacroAutomation;
-      protection: ProtectionAutomation;
-      region: RegionAutomation;
-      resist: ResistAutomation;
-      revitalize: RevitalizeAutomation;
-      roll: RollAutomation;
-      rollStyle: RollStyleAutomation;
-      status: StatusAutomation;
-      take: TakeAutomation;
-      tradecraft: TradecraftAutomation;
-      transformation: TransformationAutomation;
-      useDocuments: UseDocumentsAutomation;
+      abilityMacro: automations.AbilityMacroAutomation;
+      addDocuments: automations.AddDocumentsAutomation;
+      attunement: automations.AttunementAutomation;
+      changeCompetence: automations.ChangeCompetenceAutomation;
+      changeMovement: automations.ChangeMovementAutomation;
+      changeQuantity: automations.ChangeQuantityAutomation;
+      changes: automations.ChangesAutomation;
+      chatMacro: automations.ChatMacroAutomation;
+      chatStatus: automations.ChatStatusAutomation;
+      childChange: automations.ChildChangeAutomation;
+      combatExpiration: automations.CombatExpirationAutomation;
+      common: automations.CommonOutcomesAutomation;
+      commonMacro: automations.CommonMacroAutomation;
+      duration: automations.DurationAutomation;
+      feat: automations.FeatAutomation;
+      hacks: automations.HacksAutomation;
+      heal: automations.HealAutomation;
+      modifyEffect: automations.ModifyEffectAutomation;
+      propertyMacro: automations.PropertyMacroAutomation;
+      protection: automations.ProtectionAutomation;
+      region: automations.RegionAutomation;
+      resist: automations.ResistAutomation;
+      revitalize: automations.RevitalizeAutomation;
+      roll: automations.RollAutomation;
+      rollStyle: automations.RollStyleAutomation;
+      status: automations.StatusAutomation;
+      take: automations.TakeAutomation;
+      tradecraft: automations.TradecraftAutomation;
+      transformation: automations.TransformationAutomation;
+      useDocuments: automations.UseDocumentsAutomation;
     }
 
     export type Type = keyof TypeMap;
@@ -105,39 +42,39 @@ declare global {
 
   namespace Teriock.Activations {
     export interface TypeMap {
-      addDocuments: AddDocumentsActivation;
-      apply: ApplyStatusActivation;
-      attune: AttuneActivation;
-      awaken: AwakenActivation;
-      bag: DeathBagActivation;
-      changeMovement: ChangeMovementActivation;
-      dampen: DampenActivation;
-      deattune: DeattuneActivation;
-      destroy: DestroyActivation;
-      feat: FeatActivation;
-      glue: GlueActivation;
-      hack: TakeHackActivation;
-      heal: HealActivation;
-      identify: IdentifyActivation;
-      macro: MacroActivation;
-      readMagic: ReadMagicActivation;
-      reforge: ReforgeActivation;
-      remove: RemoveStatusActivation;
-      repair: RepairActivation;
-      resist: ResistActivation;
-      revitalize: RevitalizeActivation;
-      revive: ReviveActivation;
-      roll: RollActivation;
-      shatter: ShatterActivation;
-      standardDamage: StandardDamageActivation;
-      take: TakeActivation;
-      toggle: ToggleStatusActivation;
-      tradecraft: TradecraftActivation;
-      undampen: UndampenActivation;
-      unglue: UnglueActivation;
-      unhack: TakeUnhackActivation;
-      "use-external": UseExternalActivation;
-      "use-local": UseLocalActivation;
+      addDocuments: activations.AddDocumentsActivation;
+      apply: activations.ApplyStatusActivation;
+      attune: activations.AttuneActivation;
+      awaken: activations.AwakenActivation;
+      bag: activations.DeathBagActivation;
+      changeMovement: activations.ChangeMovementActivation;
+      dampen: activations.DampenActivation;
+      deattune: activations.DeattuneActivation;
+      destroy: activations.DestroyActivation;
+      feat: activations.FeatActivation;
+      glue: activations.GlueActivation;
+      hack: activations.TakeHackActivation;
+      heal: activations.HealActivation;
+      identify: activations.IdentifyActivation;
+      macro: activations.MacroActivation;
+      readMagic: activations.ReadMagicActivation;
+      reforge: activations.ReforgeActivation;
+      remove: activations.RemoveStatusActivation;
+      repair: activations.RepairActivation;
+      resist: activations.ResistActivation;
+      revitalize: activations.RevitalizeActivation;
+      revive: activations.ReviveActivation;
+      roll: activations.RollActivation;
+      shatter: activations.ShatterActivation;
+      standardDamage: activations.StandardDamageActivation;
+      take: activations.TakeActivation;
+      toggle: activations.ToggleStatusActivation;
+      tradecraft: activations.TradecraftActivation;
+      undampen: activations.UndampenActivation;
+      unglue: activations.UnglueActivation;
+      unhack: activations.TakeUnhackActivation;
+      "use-external": activations.UseExternalActivation;
+      "use-local": activations.UseLocalActivation;
     }
 
     export type Type = keyof TypeMap;

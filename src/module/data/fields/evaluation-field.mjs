@@ -25,6 +25,16 @@ export default class EvaluationField extends EmbeddedDataField {
   _derivationOptions;
 
   /** @inheritDoc */
+  applyChange(value, model, change, options) {
+    if (["string", "number"].includes(typeof change.value)) {
+      const field = this.fields.raw;
+      value.raw = field.applyChange(value.raw, model, change, options);
+      return value;
+    }
+    return super.applyChange(value, model, change, options);
+  }
+
+  /** @inheritDoc */
   initialize(value, model, options = {}) {
     const newOptions = {
       ...options,

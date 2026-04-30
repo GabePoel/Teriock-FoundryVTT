@@ -1,4 +1,3 @@
-import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { protectionConfig } from "../../../constants/config/protection-config.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
@@ -25,9 +24,7 @@ export default class ProtectionAutomation extends CritAutomation {
 
   /** @inheritDoc */
   static get metadata() {
-    return Object.assign(super.metadata, {
-      changes: true,
-    });
+    return Object.assign(super.metadata, { changes: true });
   }
 
   /** @inheritDoc */
@@ -39,9 +36,6 @@ export default class ProtectionAutomation extends CritAutomation {
         ),
         initial: "abilities",
         required: true,
-      }),
-      description: new fields.StringField({
-        label: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
       }),
       relation: new fields.StringField({
         choices: localizeChoices(
@@ -66,6 +60,19 @@ export default class ProtectionAutomation extends CritAutomation {
   }
 
   /** @inheritDoc */
+  get _formPaths() {
+    return ["relation", "category", "value"];
+  }
+
+  /** @inheritDoc */
+  _makeFormGroup(path, groupConfig = {}, inputConfig = {}) {
+    if (this.category !== "other" && path.endsWith("value")) {
+      inputConfig.choices = this._choices;
+    }
+    return super._makeFormGroup(path, groupConfig, inputConfig);
+  }
+
+  /** @inheritDoc */
   getChanges() {
     if (
       !this.value ||
@@ -83,22 +90,5 @@ export default class ProtectionAutomation extends CritAutomation {
         value: this.value,
       },
     ];
-  }
-
-  /** @inheritDoc */
-  async getEditor() {
-    const html = await TeriockTextEditor.renderTemplate(
-      "teriock/sheets/automations/protection-config",
-      {
-        category: this.category,
-        choices: this._choices,
-        value: this.value,
-        fields: this.schema.fields,
-        path: this.localPath,
-        relation: this.relation,
-        uuid: this.uuid,
-      },
-    );
-    return /** @type {HTMLDivElement} */ foundry.utils.parseHTML(html);
   }
 }

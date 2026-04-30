@@ -108,12 +108,15 @@ export default function ArmamentSystemMixin(Base) {
             { initial: ["damage"] },
           ),
           notes: new TextField({ initial: "" }),
-          range: new fields.SchemaField({
-            long: new EvaluationField({ model: RangeModel, label: "Range" }),
-            melee: new fields.BooleanField({ initial: true }),
-            ranged: new fields.BooleanField({ initial: false }),
-            short: new EvaluationField({ model: RangeModel }),
-          }),
+          range: new MultiChangeField(
+            {
+              long: new EvaluationField({ model: RangeModel, label: "Range" }),
+              melee: new fields.BooleanField({ initial: true }),
+              ranged: new fields.BooleanField({ initial: false }),
+              short: new EvaluationField({ model: RangeModel }),
+            },
+            { multiChangePaths: ["long", "short"] },
+          ),
           specialRules: new TextField({ initial: "", persisted: false }),
           spellTurning: new fields.BooleanField({
             initial: false,
@@ -456,15 +459,6 @@ export default function ArmamentSystemMixin(Base) {
         ) {
           this.range.short.unit = this.range.long.unit;
         }
-        this.range.description = this.range.long.abbreviation;
-        if (this.range.long.unitType !== "zero") {
-          const shortDescription =
-            this.range.short.unitType === "finite"
-              ? this.range.short.formula
-              : this.range.short.text;
-          this.range.description =
-            shortDescription + " / " + this.range.description;
-        }
 
         // Fighting Style
         if (this.fightingStyle && this.fightingStyle.length > 0) {
@@ -476,7 +470,18 @@ export default function ArmamentSystemMixin(Base) {
       /** @inheritDoc */
       prepareSpecialData() {
         super.prepareSpecialData();
+
+        // Range
         if (!this.hasAttack) this.range.melee = false;
+        this.range.description = this.range.long.abbreviation;
+        if (this.range.long.unitType !== "zero") {
+          const shortDescription =
+            this.range.short.unitType === "finite"
+              ? this.range.short.formula
+              : this.range.short.text;
+          this.range.description =
+            shortDescription + " / " + this.range.description;
+        }
       }
     }
   );

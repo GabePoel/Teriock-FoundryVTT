@@ -21,9 +21,7 @@ export default class ChangesAutomation extends CritAutomation {
 
   /** @inheritDoc */
   static get metadata() {
-    return Object.assign(super.metadata, {
-      changes: true,
-    });
+    return Object.assign(super.metadata, { changes: true });
   }
 
   /** @inheritDoc */

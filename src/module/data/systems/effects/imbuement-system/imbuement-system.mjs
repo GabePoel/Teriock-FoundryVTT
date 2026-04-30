@@ -32,6 +32,7 @@ export default class ImbuementSystem extends mix(
       automations.AbilityMacroAutomation,
       automations.ChangeCompetenceAutomation,
       automations.ChangesAutomation,
+      automations.ChildChangeAutomation,
       automations.HealAutomation,
       automations.ProtectionAutomation,
       automations.RevitalizeAutomation,

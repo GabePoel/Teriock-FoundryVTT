@@ -18,4 +18,32 @@ export default class EmbeddedDataModel extends AccessDataMixin(DataModel) {
   static defineSchema() {
     return {};
   }
+
+  /**
+   * @inheritDoc
+   * @param {object} options - Constructor options
+   */
+  _initialize(options = {}) {
+    super._initialize(options);
+    this._safePrepareData();
+  }
+
+  /**
+   * Safely prepare data
+   * @internal
+   * @category Document
+   */
+  _safePrepareData() {
+    try {
+      this.prepareData();
+    } catch (err) {
+      console.error(err, this, { parent: this.parent });
+    }
+  }
+
+  /**
+   * Prepare data after initialization or reset.
+   * @category Document
+   */
+  prepareData() {}
 }
