@@ -10,7 +10,7 @@ const { Collection } = foundry.utils;
 export default class TypeCollection extends Collection {
   /**
    * This collection's contents grouped by subtype.
-   * @returns {Record<Teriock.Documents.CommonType, AnyCommonDocument[]>}
+   * @returns {Record<string, *>}
    * @todo Implement caching like with {@link EmbeddedCollection}.
    */
   get documentsByType() {

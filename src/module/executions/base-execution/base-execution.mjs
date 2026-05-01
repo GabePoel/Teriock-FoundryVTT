@@ -12,18 +12,25 @@ export default class BaseExecution extends AutomatedDataMixin(
 ) {
   /**
    * Construct an execution.
-   * @param {Teriock.Execution.BaseExecutionOptions} options
+   * @param {Partial<Teriock.Execution.BaseExecutionOptions>} options
    */
   constructor(options = {}) {
     super();
     this.options = options;
     this._actor = options.actor ?? game.actors.default;
+    this._boosts = options.boosts ?? {};
     this._formula = options.formula ?? "";
     this._rollData = options.rollData ?? {};
     this._rollOptions = options.rollOptions ?? {};
     this._determineCompetence(options);
     options.competence = this.competence.raw;
   }
+
+  /** @type {Record<Teriock.Keys.Impact, Teriock.System.FormulaString>} */
+  _boosts;
+
+  /** @type {Record<Teriock.Keys.Impact, number>} */
+  _boostsResolved;
 
   /** @type {Teriock.Activations.Any[]} */
   activations = [];

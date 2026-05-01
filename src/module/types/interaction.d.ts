@@ -69,6 +69,7 @@ declare global {
       crit?: boolean;
       impact?: Teriock.Keys.Impact;
       reverse?: boolean;
+      boosts?: number;
     };
 
     export type StatusOptions = {

@@ -130,4 +130,49 @@ export default class TeriockItem extends mix(
   *allApplicableEffects() {
     for (const effect of this.effects) yield effect;
   }
+
+  /**
+   * Apply any transformations to the Item data which are caused by ActiveEffects.
+   * @param phase
+   */
+  applyActiveEffects(phase) {
+    const ActiveEffect = foundry.documents.ActiveEffect.implementation;
+    if (!(phase in ActiveEffect.CHANGE_PHASES)) return;
+    /** @type {ActiveEffectChangeData[]} */
+    const changes = [];
+    for (const effect of this.allApplicableEffects()) {
+      if (!effect.active) continue;
+      for (const change of effect.system.itemChanges) {
+        if (change.key === "" || change.phase !== phase) continue;
+        const copy = foundry.utils.deepClone(change);
+        copy.effect = effect;
+        changes.push(copy);
+      }
+    }
+    changes.sort((a, b) => a.priority - b.priority);
+    const overrides = {};
+    const replacementData = this.getRollData();
+    for (const change of changes) {
+      const result = ActiveEffect.applyChange(this, change, {
+        replacementData,
+      });
+      if (foundry.utils.isPlainObject(result)) Object.assign(overrides, result);
+    }
+    foundry.utils.mergeObject(
+      this.overrides,
+      foundry.utils.expandObject(overrides),
+    );
+  }
+
+  /** @inheritDoc */
+  prepareBaseData() {
+    this.overrides = {};
+    super.prepareBaseData();
+  }
+
+  /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    if (this.isTop) this.applyActiveEffects(TERIOCK.config.change.defaultPhase);
+  }
 }

@@ -1,20 +1,38 @@
 const act = scope.execution.activations.find((a) => a.type === "addDocuments");
 const effectObject = act._source.primary.root.data;
 const equipmentClass = await tm.dialogs.selectWeaponClassDialog();
-const changesId = foundry.utils.randomID();
-effectObject.system.automations[changesId] = {
-  type: "changes",
-  _id: changesId,
-  changes: [
-    {
-      key: "system.damage",
-      qualifier: `@class.${equipmentClass}`,
-      target: "armament",
-      value: "1d4[holy]",
-      mode: 2,
-      priority: 10,
-    },
-  ],
+const childChangeId = foundry.utils.randomID();
+const shared = {
+  category: "armament",
+  qualifier: `@class.${equipmentClass}`,
+  type: "childChange",
 };
-act._source.primary.root.data = effectObject;
-act._source.secondary.root.data = effectObject;
+effectObject.system.automations[childChangeId] = {
+  _id: childChangeId,
+  changeType: "add",
+  key: "system.damage",
+  value: "1d4[holy]",
+  ...shared,
+};
+if (scope.execution.competence.fluent) {
+  const av0Id = foundry.utils.randomID();
+  const boostedId = foundry.utils.randomID();
+  effectObject.system.automations[av0Id] = {
+    _id: av0Id,
+    changeType: "upgrade",
+    key: "system.piercing.raw",
+    value: "1",
+    ...shared,
+  };
+  effectObject.system.automations[boostedId] = {
+    _id: boostedId,
+    changeType: "add",
+    key: "system.boosts.damage",
+    value: "1",
+    ...shared,
+  };
+}
+act.updateSource({
+  "primary.root.id": effectObject,
+  "secondary.root.id": effectObject,
+});

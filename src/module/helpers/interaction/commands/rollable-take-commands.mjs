@@ -24,8 +24,9 @@ async function abstractTakeOperation(actor, options) {
   const rollData = actor?.getRollData() || {};
   if (options.boost) {
     formula = await boostDialog(formula, {
-      type: TERIOCK.config.impact[impact].label,
+      boosts: options.boosts,
       rollData,
+      type: TERIOCK.config.impact[impact].label,
     });
   }
   if (!formula) return;

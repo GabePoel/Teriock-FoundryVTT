@@ -1,9 +1,8 @@
 import { abilityConfig } from "./ability-config.mjs";
 import { attributeConfig } from "./attribute-config.mjs";
 import { attunementConfig } from "./attunement-config.mjs";
-import * as change from "./change-config.mjs";
+import { default as change } from "./change-config.mjs";
 import * as character from "./character-config.mjs";
-import { default as childChanges } from "./child-changes-config.mjs";
 import { competenceConfig } from "./competence-config.mjs";
 import { consequenceConfig } from "./consequence-config.mjs";
 import { costConfig } from "./cost-config.mjs";
@@ -34,7 +33,6 @@ const config = {
   attunement: attunementConfig,
   change,
   character,
-  childChanges,
   competence: competenceConfig,
   consequence: consequenceConfig,
   cost: costConfig,

@@ -391,6 +391,7 @@ export default function ArmamentSystemMixin(Base) {
           style: this.fightingStyle,
           [`style.${this.fightingStyle}`]: 1,
           spellTurning: Number(this.spellTurning),
+          vitals: Number(this.vitals),
         });
         for (const type of this.damage.types) {
           data[`dmg.type.${type}`] = 1;

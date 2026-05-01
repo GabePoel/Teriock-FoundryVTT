@@ -5,10 +5,13 @@ import { getRollIcon, objectMap } from "../../../helpers/utils.mjs";
 import RollAutomation from "../automations/roll-automation.mjs";
 import { AutomationActivationFactory } from "./abstract/_module.mjs";
 
+const { fields } = foundry.data;
+
 /**
  * @property {Teriock.Keys.Impact} impact
  * @property {Teriock.System.FormulaString} formula
  * @property {boolean} merge
+ * @property {number} boosts
  */
 export default class RollActivation extends AutomationActivationFactory(
   RollAutomation,
@@ -16,6 +19,13 @@ export default class RollActivation extends AutomationActivationFactory(
   /** @inheritDoc */
   static get ICON() {
     return icons.ui.dice;
+  }
+
+  /** @inheritDoc */
+  static defineSchema() {
+    return Object.assign(super.defineSchema(), {
+      boosts: new fields.NumberField(),
+    });
   }
 
   /**
@@ -74,6 +84,7 @@ export default class RollActivation extends AutomationActivationFactory(
     for (const actor of this.actors) {
       await commands[this.impact].primary(actor, {
         boost: true,
+        boosts: this.boosts,
         formula: this.formula,
         type: this.impact,
       });
@@ -86,6 +97,7 @@ export default class RollActivation extends AutomationActivationFactory(
     for (const actor of this.actors) {
       await commands[this.impact].primary(actor, {
         boost: true,
+        boosts: this.boosts,
         formula: this.formula,
         type: this.impact,
       });

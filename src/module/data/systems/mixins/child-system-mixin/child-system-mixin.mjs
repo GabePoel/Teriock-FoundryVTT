@@ -1,7 +1,12 @@
+import { impactConfig } from "../../../../constants/config/impact-config.mjs";
 import { mix } from "../../../../helpers/construction.mjs";
 import { ucFirst } from "../../../../helpers/string.mjs";
-import { makeIcon } from "../../../../helpers/utils.mjs";
-import { EvaluationField, TextField } from "../../../fields/_module.mjs";
+import { makeIcon, objectMap } from "../../../../helpers/utils.mjs";
+import {
+  EvaluationField,
+  FormulaField,
+  TextField,
+} from "../../../fields/_module.mjs";
 import { ChildSettingsModel } from "../../../models/settings-models/_module.mjs";
 import { UsableDataMixin } from "../../../shared/mixins/_module.mjs";
 import {
@@ -48,6 +53,19 @@ export default function ChildSystemMixin(Base) {
         return Object.assign(super.defineSchema(), {
           font: new fields.StringField({ initial: "" }),
           description: new TextField({ initial: "" }),
+          boosts: new fields.SchemaField(
+            objectMap(
+              impactConfig,
+              (e) =>
+                new FormulaField({
+                  deterministic: false,
+                  initial: "",
+                  label: e.label,
+                }),
+              { filter: (e) => !e.hidden },
+            ),
+            { persisted: false },
+          ),
           qualifiers: new fields.SchemaField({
             ephemeral: new EvaluationField({
               deterministic: true,
@@ -287,7 +305,6 @@ export default function ChildSystemMixin(Base) {
         super.prepareBaseData();
         this.qualifiers.suppressed.evaluate();
         this.qualifiers.ephemeral.evaluate();
-        this.boosts = /** @type {Record<Teriock.Keys.Impact, string>} */ {};
       }
 
       /** @inheritDoc */

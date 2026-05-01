@@ -1,5 +1,6 @@
 import { config } from "../../constants/_module.mjs";
 import { documentTypes } from "../../constants/system/_module.mjs";
+import { BaseRoll } from "../../dice/rolls/_module.mjs";
 import { mix } from "../../helpers/construction.mjs";
 import { resolveDocument } from "../../helpers/resolve.mjs";
 import { findBestDocument } from "../../helpers/utils.mjs";
@@ -68,26 +69,11 @@ export default class TeriockActor extends mix(
     );
   }
 
-  /** @type {Teriock.Changes.QualifiedChangeData[]} */
-  _qualifiedTokenChanges;
-
   /** @type Set<UUID<TeriockItem>> */
   _stagedItemCreations;
 
   /** @type Set<ID<TeriockItem>> */
   _stagedItemDeletions;
-
-  /** @inheritDoc */
-  get _canChange() {
-    return true;
-  }
-
-  /** @returns {ChangeCompetenceAutomation[]} */
-  get _competenceAutomations() {
-    return this.validEffects.flatMap((e) =>
-      e.system.activeAutomations.filter((a) => a.type === "changeCompetence"),
-    );
-  }
 
   /**
    * Is this actor active?
@@ -219,15 +205,79 @@ export default class TeriockActor extends mix(
     }
   }
 
-  /** @inheritDoc */
-  _applyChangesByPhase(phase) {
-    if (!this._canChange) return;
-    this._qualifiedTokenChanges = [];
-    super._applyChangesByPhase(phase);
-    if (this.tokenActiveEffectChanges[phase]) {
-      this.tokenActiveEffectChanges[phase].push(...this._qualifiedTokenChanges);
-    } else {
-      this.tokenActiveEffectChanges[phase] = this._qualifiedTokenChanges;
+  /**
+   * Apply any transformations to child data which are caused by ActiveEffects.
+   * @param {string} phase
+   */
+  _applyActiveEffectsToChildren(phase) {
+    if (
+      !game.teriock.getSetting("nonHierarchicalChanges") ||
+      !this.getSetting("automation.nonHierarchicalChanges")
+    ) {
+      return;
+    }
+    /** @type {Record<string, Teriock.Changes.QualifiedChangeData[]>} */
+    const changeMap = {
+      ability: [],
+      armament: [],
+    };
+    for (const effect of this.allApplicableEffects()) {
+      if (!effect.active) continue;
+      for (const change of effect.system.childChanges) {
+        if (
+          !change.qualifier ||
+          change.qualifier === "0" ||
+          change.key === "" ||
+          change.phase !== phase ||
+          !changeMap[change.target]
+        ) {
+          continue;
+        }
+        const copy = foundry.utils.deepClone(change);
+        copy.effect = effect;
+        changeMap[change.target].push(copy);
+      }
+    }
+    for (const c of Object.values(changeMap)) {
+      c.sort((a, b) => a?.priority - b?.priority);
+    }
+    const data = this.getRollData();
+    this._applyChangesToDocuments(changeMap.ability, this.abilities, data);
+    this._applyChangesToDocuments(changeMap.armament, this.armaments, data);
+  }
+
+  /**
+   * Apply qualified changes to an array of documents.
+   * @param {Teriock.Changes.QualifiedChangeData[]} changes
+   * @param {AnyChildDocument[]} documents
+   * @param {object} replacementData
+   */
+  _applyChangesToDocuments(changes, documents, replacementData) {
+    for (const d of documents) {
+      const overrides = {};
+      let qualifierDataComputed = false;
+      let qualifierData = {};
+      for (const c of changes) {
+        let shouldApply = c.qualifier === "1";
+        if (!shouldApply) {
+          if (!qualifierDataComputed) {
+            qualifierData = d.system.getLocalRollData();
+            qualifierDataComputed = true;
+          }
+          shouldApply = !!BaseRoll.minValue(c.qualifier, qualifierData);
+        }
+        if (shouldApply) {
+          const result = ActiveEffect.applyChange(d, c, { replacementData });
+          if (foundry.utils.isPlainObject(result)) {
+            Object.assign(overrides, result);
+          }
+        }
+      }
+      d.overrides ??= {};
+      foundry.utils.mergeObject(
+        d.overrides,
+        foundry.utils.expandObject(overrides),
+      );
     }
   }
 
@@ -238,7 +288,7 @@ export default class TeriockActor extends mix(
   _applyCompetenceAutomations(value) {
     const autos = this.validEffects.flatMap((e) =>
       e.system.activeAutomations.filter(
-        (a) => a.type === "changeCompetence" && a.competence.value === value,
+        (a) => a?.type === "changeCompetence" && a?.competence.value === value,
       ),
     );
     const identifiers = new Set(autos.map((a) => a.identifier));
@@ -249,16 +299,6 @@ export default class TeriockActor extends mix(
       ) {
         c.system.competence.raw = value;
       }
-    }
-  }
-
-  /** @inheritDoc */
-  _applyIndividualChange(change) {
-    if (change?.key?.startsWith("token.")) {
-      change.key = change.key.slice(6);
-      this._qualifiedTokenChanges.push(change);
-    } else {
-      super._applyIndividualChange(change);
     }
   }
 
@@ -357,6 +397,16 @@ export default class TeriockActor extends mix(
     return [...this.abilities, ...(basicAbilitiesItem?.abilities || [])];
   }
 
+  /** @inheritDoc */
+  applyActiveEffects(phase) {
+    if (phase === "children" && !this._completedActiveEffectPhases.has(phase)) {
+      this._applyActiveEffectsToChildren(phase);
+      this._completedActiveEffectPhases.add(phase);
+    } else {
+      super.applyActiveEffects(phase);
+    }
+  }
+
   /**
    * Add multiple status effects to the actor.
    * @param {string[]} statusIds
@@ -428,7 +478,9 @@ export default class TeriockActor extends mix(
     super.prepareEmbeddedDocuments();
     this._applyCompetenceAutomations(1);
     this._applyCompetenceAutomations(2);
-    this._propagateNormalChanges();
+    this.prepareChangeData();
+    this.applyActiveEffects(TERIOCK.config.change.defaultPhase);
+    this.applyActiveEffects("children");
   }
 
   /** @inheritDoc */
@@ -543,9 +595,9 @@ export default class TeriockActor extends mix(
    * @returns {Promise<void>}
    */
   async removeStatusEffects(statusIds) {
-    const candidates = CONFIG.statusEffects.filter((e) =>
-      statusIds.includes(e.id),
-    );
+    const candidates = statusIds
+      .map((id) => CONFIG.statusEffects[id])
+      .filter((_) => _);
     const toRemove = candidates
       .filter((e) => this.effects.get(e?._id))
       .map((e) => e?._id);

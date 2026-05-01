@@ -107,12 +107,32 @@ export default class ArmamentExecution extends BaseDocumentExecution {
 
   /** @inheritDoc */
   async _getInput() {
+    let boosts = 0;
+    for (const impact of this.impacts) {
+      if (this._hasBoostForImpact(impact)) {
+        const amt = this._boostsResolved[impact];
+        if (amt > boosts) boosts = amt;
+      }
+    }
     if (this.showDialog && formulaExists(this.formula)) {
-      this.formula = await boostDialog(this.formula, { crit: this.crit });
+      this.formula = await boostDialog(this.formula, {
+        crit: this.crit,
+        boosts,
+      });
       if (this.formula === null) return false;
       this.crit = false;
     }
     await super._getInput();
+  }
+
+  /** @inheritDoc */
+  _hasBoostForImpact(impact) {
+    return (
+      super._hasBoostForImpact(impact) ||
+      (this._boostsResolved[impact] &&
+        this.impacts.has(impact) &&
+        formulaExists(this.formula))
+    );
   }
 
   /** @inheritDoc */

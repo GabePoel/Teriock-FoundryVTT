@@ -12,6 +12,7 @@ const { fields } = foundry.data;
  * @param {boolean} [options.crit] - Go critical?
  * @param {string} [options.label] - Custom button label
  * @param {string} [options.type] - The title of the type of roll being made
+ * @param {number} [options.boosts] - The number of boosts to apply
  * @param {object} [options.rollData] - Roll data to use when updating the formula.
  * @returns {Promise<Teriock.System.FormulaString|null>} The roll formula with boost changes applied.
  */
@@ -29,13 +30,13 @@ export default async function boostDialog(rollFormula, options = {}) {
   });
   const boostsField = new fields.NumberField({
     hint: _loc("TERIOCK.DIALOGS.Boost.FIELDS.boosts.hint"),
-    initial: 0,
+    initial: (options.boosts ?? 0) > 0 ? options.boosts : 0,
     label: _loc("TERIOCK.DIALOGS.Boost.FIELDS.boosts.label"),
     min: 0,
   });
   const deboostsField = new fields.NumberField({
     hint: _loc("TERIOCK.DIALOGS.Boost.FIELDS.deboosts.hint"),
-    initial: 0,
+    initial: (options.boosts ?? 0) < 0 ? -options.boosts : 0,
     label: _loc("TERIOCK.DIALOGS.Boost.FIELDS.deboosts.label"),
     min: 0,
   });

@@ -123,7 +123,7 @@ export default function ChildDocumentMixin(Base) {
       /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
-        this._propagateNormalChanges();
+        if (this.isTop) this.prepareChangeData();
       }
 
       /** @inheritDoc */

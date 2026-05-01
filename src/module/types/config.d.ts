@@ -8,8 +8,9 @@ declare global {
     };
 
     export type ChildChangePathEntry = {
-      categories: (keyof typeof TERIOCK.config.childChanges.categories)[];
+      categories: (keyof typeof TERIOCK.config.change.child.categories)[];
       forExecution?: boolean;
+      group: keyof typeof TERIOCK.config.change.child.groups;
       label: string;
       types?: Teriock.Changes.Type[];
     };

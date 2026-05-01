@@ -2,7 +2,7 @@ import { makeIconClass } from "../../helpers/utils.mjs";
 
 export default function registerFieldHelpers() {
   Handlebars.registerHelper("formBox", (input, options) => {
-    const {
+    let {
       secondary = "",
       icon = "info",
       iconColor = "",
@@ -20,6 +20,7 @@ export default function registerFieldHelpers() {
     } = options.hash;
     let content = input;
     let overflowTooltip = "";
+    if (overflow === true) overflow = input;
     if (overflow && overflow.length > 16) {
       overflowTooltip = `data-tooltip="${overflow}"`;
     }

@@ -95,10 +95,10 @@ export default (Base) => {
         if (this.upgrades.score.attribute) {
           changes.push({
             key: `system.attributes.${this.upgrades.score.attribute}.score`,
+            phase: TERIOCK.config.change.defaultPhase,
             priority: 20,
             qualifier: "1",
             target: "Actor",
-            time: "normal",
             type: "upgrade",
             value: `${this.upgrades.score.value}`,
           });
@@ -106,10 +106,10 @@ export default (Base) => {
         if (this.upgrades.competence.attribute) {
           changes.push({
             key: `system.attributes.${this.upgrades.competence.attribute}.competence.raw`,
+            phase: TERIOCK.config.change.defaultPhase,
             priority: 20,
             qualifier: "1",
             target: "Actor",
-            time: "normal",
             type: "upgrade",
             value: `${this.upgrades.competence.value}`,
           });

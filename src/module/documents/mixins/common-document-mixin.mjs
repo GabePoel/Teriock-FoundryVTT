@@ -5,7 +5,6 @@ import { resolveDocuments } from "../../helpers/resolve.mjs";
 import { TeriockActor } from "../_module.mjs";
 import { TypeCollection } from "../collections/_module.mjs";
 import {
-  ChangeableDocumentMixin,
   EmbedCardDocumentMixin,
   PanelDocumentMixin,
   SettingsDocumentMixin,
@@ -21,7 +20,6 @@ export default function CommonDocumentMixin(Base) {
     /**
      * @mixes PropagationData
      * @mixes BaseDocument
-     * @mixes ChangeableDocument
      * @mixes EmbedCardDocument
      * @mixes PanelDocument
      * @mixes SettingsDocument
@@ -30,7 +28,6 @@ export default function CommonDocumentMixin(Base) {
     class CommonDocument extends mix(
       Base,
       PropagationDataMixin,
-      ChangeableDocumentMixin,
       EmbedCardDocumentMixin,
       PanelDocumentMixin,
       SettingsDocumentMixin,

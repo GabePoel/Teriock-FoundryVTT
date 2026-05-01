@@ -132,7 +132,6 @@ foundry.helpers.Hooks.once("init", function () {
 
   assign({
     ActiveEffect: {
-      changePhases: constants.config.change.phase,
       changeTypes: setup.changeConfigs,
       compendiumIndexFields: ["system._sup"],
       dataModels: {
@@ -149,6 +148,7 @@ foundry.helpers.Hooks.once("init", function () {
         resource: data.systems.effects.ResourceSystem,
       },
       documentClass: documents.TeriockActiveEffect,
+      phases: constants.config.change.phase,
     },
     Actor: {
       collection: documents.collections.TeriockActors,

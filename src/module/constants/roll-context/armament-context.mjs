@@ -19,6 +19,7 @@ const armamentContext = {
   range: "TERIOCK.SYSTEMS.Armament.FIELDS.range.long.raw.label",
   spellTurning: "TERIOCK.SYSTEMS.Armament.FIELDS.spellTurning.label",
   style: "TERIOCK.SYSTEMS.Equipment.FIELDS.fightingStyle.label",
+  vitals: "TERIOCK.SYSTEMS.Armament.FIELDS.vitals.label",
 
   dampened: "TERIOCK.SYSTEMS.Equipment.FIELDS.dampened.label",
   destroyed: "TERIOCK.SYSTEMS.Equipment.FIELDS.destroyed.label",

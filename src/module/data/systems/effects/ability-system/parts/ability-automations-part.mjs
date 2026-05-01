@@ -12,7 +12,7 @@ export default (Base) => {
     class AbilityAutomationsPart extends Base {
       /**
        * The automations that are active right now.
-       * @returns {BaseAutomation[]}
+       * @returns {Teriock.Automations.Any[]}
        */
       get activeAutomations() {
         if (this.maneuver !== "passive") return [];

@@ -1,3 +1,4 @@
+import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import BaseExecution from "../../base-execution/base-execution.mjs";
 
 export default class BaseDocumentExecution extends BaseExecution {
@@ -9,6 +10,7 @@ export default class BaseDocumentExecution extends BaseExecution {
     this._source = options.source;
     this._actor = options.actor ?? this.source.actor ?? game.actors.default;
     this._automations = this.source.system.automations.contents || [];
+    this._boosts = options.boosts ?? this.source.system.boosts ?? this._boosts;
   }
 
   /** @type {AnyChildDocument} */
@@ -54,6 +56,31 @@ export default class BaseDocumentExecution extends BaseExecution {
       teriock.data.pseudoDocuments.activations.RollActivation.mergeRolls(
         this.activations,
       );
+    for (const a of this.activations) {
+      if (a.type === "roll" && this._boostsResolved[a.impact]) {
+        const boosts = this._boostsResolved[a.impact];
+        a.updateSource({ boosts: boosts });
+      }
+    }
+  }
+
+  /**
+   * Build tags to remind about boosts applied to this.
+   */
+  _buildBoostTags() {
+    for (const [k, v] of Object.entries(this._boostsResolved)) {
+      if (this._hasBoostForImpact(k)) {
+        this.tags.push(
+          _loc(
+            `TERIOCK.SYSTEMS.Child.EXECUTION.tags.boost${v === 1 ? "" : "s"}`,
+            {
+              formula: v,
+              impact: k,
+            },
+          ),
+        );
+      }
+    }
   }
 
   /** @inheritDoc */
@@ -71,6 +98,11 @@ export default class BaseDocumentExecution extends BaseExecution {
     return this.source.toPanel();
   }
 
+  /** @inheritDoc */
+  async _buildTags() {
+    this._buildBoostTags();
+  }
+
   /**
    * @inheritDoc
    * @param {Teriock.Execution.DocumentExecutionOptions} options
@@ -80,12 +112,37 @@ export default class BaseDocumentExecution extends BaseExecution {
     super._determineCompetence(options);
   }
 
+  /**
+   * Evaluate boosts.
+   * @returns {Promise<void>}
+   */
+  async _evaluateBoosts() {
+    const boostPromises = Object.entries(this._boosts).map(async ([k, v]) => [
+      k,
+      await BaseRoll.getValue(v || "0", this.rollData),
+    ]);
+    this._boostsResolved = Object.fromEntries(await Promise.all(boostPromises));
+  }
+
+  /**
+   * Whether this has boosts for a given impact.
+   * @param {Teriock.Keys.Impact} impact
+   * @returns {boolean}
+   */
+  _hasBoostForImpact(impact) {
+    return (
+      this._boostsResolved[impact] &&
+      this.activations.some((a) => a.type === "roll" && a.impact === impact)
+    );
+  }
+
   /** @inheritDoc */
   async execute() {
     if (!this.source) {
       console.error("Document executions must have a source document.");
       return;
     }
+    await this._evaluateBoosts();
     await super.execute();
   }
 

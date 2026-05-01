@@ -8,6 +8,7 @@ const { fields, ActiveEffectTypeDataModel } = foundry.data;
  * @extends {ActiveEffectTypeDataModel}
  * @extends {Teriock.Models.BaseEffectSystemData}
  * @mixes ChildSystem
+ * @mixes AutomatedData
  */
 export default class BaseEffectSystem extends ChildSystemMixin(
   ActiveEffectTypeDataModel,
@@ -127,6 +128,16 @@ export default class BaseEffectSystem extends ChildSystemMixin(
     return this.automations.contents.some((a) => a.metadata.changes);
   }
 
+  /**
+   * Changes to apply to children.
+   * @returns {Teriock.Changes.QualifiedChangeData[]}
+   */
+  get childChanges() {
+    return this.getAutomations("childChange", { active: true }).flatMap((a) =>
+      a.getChanges(),
+    );
+  }
+
   /** @inheritDoc */
   get displayToggles() {
     return [
@@ -150,6 +161,14 @@ export default class BaseEffectSystem extends ChildSystemMixin(
       }
     }
     return super.isReference;
+  }
+
+  /**
+   * Changes to apply to the parent item.
+   * @returns {Teriock.Changes.QualifiedChangeData[]}
+   */
+  get itemChanges() {
+    return this.qualifiedChanges.flat().filter((c) => c.target === "Item");
   }
 
   /** @inheritDoc */
@@ -218,6 +237,14 @@ export default class BaseEffectSystem extends ChildSystemMixin(
         this.parent.statuses.add(a.status);
       }
     });
+  }
+
+  /** @inheritDoc */
+  prepareChangeData() {
+    super.prepareChangeData();
+    this.changes.push(
+      ...this.qualifiedChanges.filter((c) => c.target === "Actor"),
+    );
   }
 
   /**

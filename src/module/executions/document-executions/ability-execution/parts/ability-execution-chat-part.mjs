@@ -192,6 +192,9 @@ export default function AbilityExecutionChatPart(Base) {
                 c.value = this._heightenString(c.value);
               });
             }
+            if (data?.type === "childChange") {
+              data.value = this._heightenString(data.value);
+            }
             out[data._id] = data;
           }
         }
@@ -612,6 +615,7 @@ export default function AbilityExecutionChatPart(Base) {
             }),
           );
         }
+        this._buildBoostTags();
       }
     }
   );

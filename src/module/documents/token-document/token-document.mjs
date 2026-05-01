@@ -131,6 +131,6 @@ export default class TeriockTokenDocument extends mix(
   prepareEmbeddedDocuments() {
     if (this.isLazyDelta) return;
     super.prepareEmbeddedDocuments();
-    this.applyActiveEffects("normal");
+    this.applyActiveEffects(TERIOCK.config.change.defaultPhase);
   }
 }

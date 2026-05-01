@@ -122,7 +122,7 @@ export function changeTypeField() {
 }
 
 /**
- * Field that represents an expanded change.
+ * Field that represents a qualified change.
  * @returns {SchemaField}
  */
 export function qualifiedChangeField() {
@@ -131,23 +131,9 @@ export function qualifiedChangeField() {
       initial: "",
       label: "TERIOCK.SCHEMA.QualifiedChange.key.label",
     }),
-    phase: new EnhancedStringField({
-      choices: objectMap(TERIOCK.config.change.phase, (p) => p.label, {
-        localize: true,
-      }),
-      initial: "normal",
-      label: "TERIOCK.SCHEMA.QualifiedChange.phase.label",
-      nullable: false,
-      required: true,
-    }),
     priority: new EnhancedNumberField({
       initial: 20,
       label: "TERIOCK.SCHEMA.QualifiedChange.priority.label",
-    }),
-    qualifier: new FormulaField({
-      deterministic: true,
-      initial: "1",
-      label: "TERIOCK.SCHEMA.QualifiedChange.qualifier.label",
     }),
     target: new EnhancedStringField({
       choices: localizeChoices(TERIOCK.config.change.target),

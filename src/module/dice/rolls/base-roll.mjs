@@ -66,8 +66,13 @@ export default class BaseRoll extends Roll {
    */
   static async getValue(formula, data, options = {}) {
     const roll = new BaseRoll(formula, data, options);
-    await roll.evaluate({ allowStrings: true });
-    return roll.total;
+    try {
+      await roll.evaluate({ allowStrings: true });
+      return roll.total;
+    } catch (err) {
+      console.log("Roll was unable to evaluate", err);
+      return 0;
+    }
   }
 
   /**
@@ -78,8 +83,12 @@ export default class BaseRoll extends Roll {
    * @returns {number}
    */
   static maxValue(formula, data = {}, options = {}) {
-    const maxRoll = new BaseRoll(formula + " + 0", data, options);
-    return maxRoll.evaluateSync({ allowStrings: true, maximize: true }).total;
+    const roll = new BaseRoll(formula + " + 0", data, options);
+    return roll.evaluateSync({
+      allowStrings: true,
+      maximize: true,
+      strict: false,
+    }).total;
   }
 
   /**
@@ -103,8 +112,12 @@ export default class BaseRoll extends Roll {
    * @returns {number}
    */
   static minValue(formula, data = {}, options = {}) {
-    const minRoll = new BaseRoll(formula + " + 0", data, options);
-    return minRoll.evaluateSync({ allowStrings: true, minimize: true }).total;
+    const roll = new BaseRoll(formula + " + 0", data, options);
+    return roll.evaluateSync({
+      allowStrings: true,
+      minimize: true,
+      strict: false,
+    }).total;
   }
 
   /**

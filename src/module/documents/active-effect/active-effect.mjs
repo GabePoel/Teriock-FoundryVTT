@@ -40,11 +40,6 @@ export default class TeriockActiveEffect extends mix(
     return super.migrateData(source, options, state);
   }
 
-  /** @inheritDoc */
-  get _canChange() {
-    return this.active && super._canChange;
-  }
-
   /**
    * Checks if this effect is supposed to activate on the use of its parent {@link TeriockItem}.
    * @returns {boolean}

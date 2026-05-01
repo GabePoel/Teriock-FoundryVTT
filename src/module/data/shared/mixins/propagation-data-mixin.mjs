@@ -100,6 +100,13 @@ export default function PropagationDataMixin(Base) {
       }
 
       /**
+       * Data preparation that sets up qualified changes to be added as normal changes.
+       */
+      prepareChangeData() {
+        this._propagateOperation("prepareChangeData", false);
+      }
+
+      /**
        * Data preparation that happens after `prepareDerivedData()`. This allows {@link ChildDocument} documents to
        * apply changes from the parent {@link TeriockActor} and should be primarily used for that purpose.
        * {@link TeriockActor}s are the only documents that call this directly. In all other cases, it is only called
