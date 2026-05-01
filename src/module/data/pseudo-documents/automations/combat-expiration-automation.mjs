@@ -7,6 +7,7 @@ const { fields } = foundry.data;
  * @property {CombatExpirationIndividual} who
  * @property {CombatExpirationMethod} what
  * @property {CombatExpirationTiming} when
+ * @todo Merge with {@link CombatExpirationAutomation}.
  */
 export default class CombatExpirationAutomation extends CritAutomation {
   /** @inheritDoc */

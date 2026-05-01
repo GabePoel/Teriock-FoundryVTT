@@ -9,6 +9,7 @@ import { CritAutomation } from "./abstract/_module.mjs";
 const { fields } = foundry.data;
 
 export default class ChildChangeAutomation extends CritAutomation {
+  /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
     ...super.LOCALIZATION_PREFIXES,
     "TERIOCK.AUTOMATIONS.ChildChange",

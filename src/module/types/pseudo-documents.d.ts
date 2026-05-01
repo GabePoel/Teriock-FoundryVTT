@@ -18,6 +18,7 @@ declare global {
       common: automations.CommonOutcomesAutomation;
       commonMacro: automations.CommonMacroAutomation;
       duration: automations.DurationAutomation;
+      eventExpiration: automations.EventExpirationAutomation;
       feat: automations.FeatAutomation;
       hacks: automations.HacksAutomation;
       heal: automations.HealAutomation;

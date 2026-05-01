@@ -283,6 +283,31 @@ export default function AbilityExecutionChatPart(Base) {
       }
 
       /**
+       * Generate all effect expirations.
+       * @param {boolean} crit
+       * @returns {object}
+       */
+      #generateEffectExpirations(crit = false) {
+        const expirations = {
+          combat: this.#generateEffectCombatExpiration(crit),
+          conditions: {
+            absent: Array.from(this.source.system.duration.conditions.absent),
+            present: Array.from(this.source.system.duration.conditions.present),
+          },
+          description: this.source.system.endCondition,
+          sustained: this.source.system.sustained,
+          triggers: Array.from(this.source.system.duration.triggers),
+        };
+        const autos = this.getAutomations("eventExpiration", {
+          crit,
+        });
+        autos.forEach((a) => {
+          Object.assign(expirations, a.getExpirationData());
+        });
+        return expirations;
+      }
+
+      /**
        * Generate the JSON serializable data for an imbuement.
        * @param {boolean} crit
        * @returns {Promise<object>}
@@ -309,20 +334,7 @@ export default function AbilityExecutionChatPart(Base) {
             competence: { raw: this.competence.value },
             critical: crit,
             deleteOnExpire: true,
-            expirations: {
-              combat: this.#generateEffectCombatExpiration(crit),
-              conditions: {
-                absent: Array.from(
-                  this.source.system.duration.conditions.absent,
-                ),
-                present: Array.from(
-                  this.source.system.duration.conditions.present,
-                ),
-              },
-              description: this.source.system.endCondition,
-              sustained: this.source.system.sustained,
-              triggers: Array.from(this.source.system.duration.triggers),
-            },
+            expirations: this.#generateEffectExpirations(crit),
             heightened: this.heightened,
             identifier: this.source.forcedIdentifier + "-effect",
             source: this.source.uuid,

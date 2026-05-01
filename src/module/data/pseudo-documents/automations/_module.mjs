@@ -14,6 +14,7 @@ export { default as CombatExpirationAutomation } from "./combat-expiration-autom
 export { default as CommonMacroAutomation } from "./common-macro-automation.mjs";
 export { default as CommonOutcomesAutomation } from "./common-outcomes-automation.mjs";
 export { default as DurationAutomation } from "./duration-automation.mjs";
+export { default as EventExpirationAutomation } from "./event-expiration-automation.mjs";
 export { default as FeatAutomation } from "./feat-automation.mjs";
 export { default as HacksAutomation } from "./hacks-automation.mjs";
 export { default as HealAutomation } from "./heal-automation.mjs";

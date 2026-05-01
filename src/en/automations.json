@@ -158,8 +158,36 @@
         },
         "LABEL": "Conditions"
       },
+      "ChildChange": {
+        "CHOICES": {
+          "impact": "{impact} Boosts"
+        },
+        "FIELDS": {
+          "target": {
+            "label": "Target",
+            "hint": "Which documents this change applies to."
+          },
+          "changeType": {
+            "label": "Change Type"
+          },
+          "key": {
+            "label": "Key"
+          },
+          "priority": {
+            "label": "Priority"
+          },
+          "qualifier": {
+            "hint": "Applies to all documents in the actor that meet the qualifier above.",
+            "label": "Qualifier"
+          },
+          "value": {
+            "label": "Value"
+          }
+        },
+        "LABEL": "Change Children"
+      },
       "CombatExpiration": {
-        "LABEL": "Combat Expiration",
+        "LABEL": "Expiration in Combat",
         "NOTIFICATIONS": {
           "passive": "The effect this is automating is passive and cannot expire in combat."
         }
@@ -234,6 +262,35 @@
           }
         },
         "LABEL": "Duration"
+      },
+      "EventExpiration": {
+        "LABEL": "Expiration Event",
+        "FIELDS": {
+          "conditions": {
+            "absent": {
+              "hint": "What conditions must be absent for this effect to be active?",
+              "label": "Absent Conditions"
+            },
+            "present": {
+              "hint": "What conditions must be present for this effect to be active?",
+              "label": "Present Conditions"
+            }
+          },
+          "triggers": {
+            "hint": "Triggers that cause this effect to expire.",
+            "label": "Triggers"
+          },
+          "override": {
+            "conditions": {
+              "label": "Override Conditions",
+              "hint": "If checked this will override the default condition expirations from the ability's duration."
+            },
+            "triggers": {
+              "label": "Override Triggers",
+              "hint": "If checked this will override the default trigger expirations from the ability's duration."
+            }
+          }
+        }
       },
       "ExternalDocuments": {
         "FIELDS": {
@@ -515,34 +572,6 @@
           }
         },
         "LABEL": "Use Named Abilities"
-      },
-      "ChildChange": {
-        "CHOICES": {
-          "impact": "{impact} Boosts"
-        },
-        "FIELDS": {
-          "target": {
-            "label": "Target",
-            "hint": "Which documents this change applies to."
-          },
-          "changeType": {
-            "label": "Change Type"
-          },
-          "key": {
-            "label": "Key"
-          },
-          "priority": {
-            "label": "Priority"
-          },
-          "qualifier": {
-            "hint": "Applies to all documents in the actor that meet the qualifier above.",
-            "label": "Qualifier"
-          },
-          "value": {
-            "label": "Value"
-          }
-        },
-        "LABEL": "Change Children"
       },
       "UseDocuments": {
         "FIELDS": {

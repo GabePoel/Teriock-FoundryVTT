@@ -67,9 +67,7 @@ export default class DurationModel extends TimeUnitModel {
       conditions: conditionRequirementsField(),
       description: new fields.StringField(),
       triggers: new fields.SetField(
-        new fields.StringField({
-          choices: this._triggerChoices,
-        }),
+        new fields.StringField({ choices: this._triggerChoices }),
       ),
     });
   }
@@ -100,6 +98,7 @@ export default class DurationModel extends TimeUnitModel {
     ];
     const conditions = [
       ...this.conditions.present.map((c) => TERIOCK.reference.conditions[c]),
+      // TODO: Localize the "Not" replacements.
       ...this.conditions.absent.map((c) =>
         game.i18n
           .format("TERIOCK.MODELS.Duration.PREREQUISITES.notStatus", {
