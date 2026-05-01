@@ -24,11 +24,11 @@ declare global {
     };
 
     export type DocumentEntry = {
-      doc: CommonDocumentName | "Card" | "JournalEntryPage";
+      documentName: CommonDocumentName | "Card" | "JournalEntryPage";
       getter: string;
       icon: string;
       index: string;
-      name: string;
+      label: string;
       pack: string;
       plural: string;
       sorter: (doc: AnyCommonDocument[]) => AnyCommonDocument[];

@@ -137,7 +137,7 @@ export default function CommonSystemMixin(Base) {
           openable: true,
           parentId: this.parent.parent?.id,
           struck: this.parent.disabled,
-          subtitle: TERIOCK.config.document[this.parent.type].name,
+          subtitle: TERIOCK.config.document[this.parent.type].label,
           text: this._masterText,
           title: this.parent.fullName,
           uuid: this.parent.uuid,
@@ -339,8 +339,8 @@ export default function CommonSystemMixin(Base) {
             TERIOCK.config.document.document.icon,
           image: this.parent.img,
           label:
-            TERIOCK.config.document[this.metadata.type]?.name ||
-            TERIOCK.config.document.document.name,
+            TERIOCK.config.document[this.metadata.type]?.label ||
+            TERIOCK.config.document.document.label,
           name: this.parent.fullName,
           uuid: this.parent.uuid,
         };
@@ -348,7 +348,7 @@ export default function CommonSystemMixin(Base) {
         for (const type of this.metadata.visibleTypes) {
           if (typeMap[type]) {
             let docs = typeMap[type];
-            if (TERIOCK.config.document[type].doc === "ActiveEffect") {
+            if (TERIOCK.config.document[type].documentName === "ActiveEffect") {
               docs = docs.filter(
                 (e) =>
                   !foundry.utils.hasProperty(e, "system.revealed") ||
@@ -407,7 +407,7 @@ export default function CommonSystemMixin(Base) {
           }
           if (notesJournal) {
             const notesCategoryName =
-              TERIOCK.config.document[this.parent.type]?.name ||
+              TERIOCK.config.document[this.parent.type]?.label ||
               _loc("TERIOCK.SYSTEMS.Common.FIELDS.gmNotes.otherCategory");
             notesPage = notesJournal.pages.find(
               (p) =>

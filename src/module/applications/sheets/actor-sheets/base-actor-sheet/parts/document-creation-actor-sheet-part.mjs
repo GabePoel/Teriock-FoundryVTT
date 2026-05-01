@@ -31,7 +31,7 @@ export default (Base) =>
       return {
         icon: makeIconClass(TERIOCK.config.document[type].icon, "contextMenu"),
         label: _loc("TERIOCK.DIALOGS.NewDocument.title", {
-          name: TERIOCK.config.document[type].name,
+          name: TERIOCK.config.document[type].label,
         }),
         onClick: this.constructor[`_onCreate${ucFirst(type)}`].bind(this),
       };

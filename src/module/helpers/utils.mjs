@@ -417,7 +417,7 @@ export function fromIdentifierSync(identifier) {
   const parsed = parseIdentifier(identifier);
   if (!parsed?.identifier) return null;
   if (parsed?.type) {
-    const documentName = TERIOCK.config.document[parsed.type]?.doc;
+    const documentName = TERIOCK.config.document[parsed.type]?.documentName;
     if (!documentName) return null;
     let collection;
     if (documentName === "Actor") collection = game.actors;
@@ -483,7 +483,7 @@ export async function fromIdentifier(identifier, options = {}) {
     if (["damage", "drain"].includes(parsed.type)) {
       return fromHarmIdentifier(identifier);
     }
-    const documentName = TERIOCK.config.document[parsed.type]?.doc;
+    const documentName = TERIOCK.config.document[parsed.type]?.documentName;
     if (!documentName) return null;
     const packs = game.packs.contents
       .filter((p) => p.documentName === documentName)

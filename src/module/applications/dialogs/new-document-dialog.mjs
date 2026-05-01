@@ -7,8 +7,8 @@ import { TeriockDialog } from "../api/_module.mjs";
  * @returns {Promise<"import" | "create">}
  */
 export default async function newDocumentDialog(type) {
-  const name = TERIOCK.config.document[type].name;
-  const typeName = name.toLowerCase();
+  const label = TERIOCK.config.document[type].label;
+  const typeName = label.toLowerCase();
   return await TeriockDialog.prompt({
     buttons: [
       {
@@ -26,7 +26,7 @@ export default async function newDocumentDialog(type) {
       icon: makeIconClass(TERIOCK.display.icons.ui.import, "button"),
     },
     window: {
-      title: _loc("TERIOCK.DIALOGS.NewDocument.title", { name }),
+      title: _loc("TERIOCK.DIALOGS.NewDocument.title", { name: label }),
       icon: makeIconClass(TERIOCK.display.icons.ui.add, "title"),
     },
   });

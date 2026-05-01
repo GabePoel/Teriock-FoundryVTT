@@ -72,9 +72,9 @@ export default actorContext;
 preLocalize("rollContext.actor");
 Hooks.once("i18nInit", () => {
   Object.entries(documentConfig)
-    .filter(([_k, v]) => v.doc === "Actor")
+    .filter(([_k, v]) => v.documentName === "Actor")
     .forEach(([k, v]) => {
-      actorContext[k] = _loc(v.name);
+      actorContext[k] = _loc(v?.label);
     });
   Object.entries(attributeConfig).forEach(([k, v]) => {
     const name = _loc(v.label);

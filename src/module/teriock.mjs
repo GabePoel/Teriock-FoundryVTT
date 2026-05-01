@@ -246,8 +246,11 @@ foundry.helpers.Hooks.once("init", function () {
   // --------------------
 
   for (const [k, v] of Object.entries(constants.config.document)) {
-    if (v.doc) {
-      CONFIG[v.doc].typeIcons[k] = helpers.utils.makeIconClass(v.icon, "title");
+    if (v?.documentName) {
+      CONFIG[v.documentName].typeIcons[k] = helpers.utils.makeIconClass(
+        v.icon,
+        "title",
+      );
     }
   }
 

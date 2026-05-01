@@ -202,10 +202,10 @@ export default class AddDocumentsActivation extends BaseActivation {
    */
   async safeCreate(parent, docs) {
     const effectTypes = Object.entries(documentConfig)
-      .filter(([_k, v]) => v.doc === "ActiveEffect")
+      .filter(([_k, v]) => v.documentName === "ActiveEffect")
       .map(([k, _v]) => k);
     const itemTypes = Object.entries(documentConfig)
-      .filter(([_k, v]) => v.doc === "Item")
+      .filter(([_k, v]) => v.documentName === "Item")
       .map(([k, _v]) => k);
     const effectData = docs.filter((d) => effectTypes.includes(d?.type));
     const itemData = docs.filter((d) => itemTypes.includes(d?.type));

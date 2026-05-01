@@ -363,7 +363,7 @@ export default (Base) => {
 function newDocumentObj(type) {
   return {
     name: _loc("TERIOCK.SHEETS.Common.MENU.Create.document", {
-      type: _loc(`TYPES.${TERIOCK.config.document[type].doc}.${type}`),
+      type: _loc(`TYPES.${TERIOCK.config.document[type].documentName}.${type}`),
     }),
     type,
   };

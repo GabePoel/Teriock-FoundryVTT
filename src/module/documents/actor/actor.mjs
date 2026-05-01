@@ -635,7 +635,7 @@ export default class TeriockActor extends mix(
           actor: this.name,
           type: TERIOCK.config.document[
             options.type || "document"
-          ].name.toLowerCase(),
+          ].label.toLowerCase(),
           name: lookup,
         },
         localize: true,

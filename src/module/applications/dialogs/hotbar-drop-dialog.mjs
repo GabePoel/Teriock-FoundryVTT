@@ -9,7 +9,7 @@ import { TeriockTextEditor } from "../ux/_module.mjs";
  */
 export default async function hotbarDropDialog(doc) {
   let choice;
-  const label = TERIOCK.config.document[doc.type].name.toLowerCase();
+  const label = TERIOCK.config.document[doc.type].label.toLowerCase();
   const context = {
     actor: `@UUID[${doc.actor?.uuid}]`,
     child: `@UUID[${doc.uuid}]`,

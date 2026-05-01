@@ -81,7 +81,7 @@ export function automationTransformationFields() {
       new fields.StringField({
         choices: choiceMap(
           transformationConfig.suppress,
-          (k) => documentConfig[k].name,
+          (k) => documentConfig[k].label,
         ),
       }),
       {
