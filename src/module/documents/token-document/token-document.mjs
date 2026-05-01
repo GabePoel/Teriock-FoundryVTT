@@ -63,8 +63,10 @@ export default class TeriockTokenDocument extends mix(
     super._prepareDetectionModes();
     const basicMode = this.detectionModes.basicSight;
     if (basicMode) basicMode.enabled = false;
-    this.detectionModes.lightPerception.enabled = true;
-    this.detectionModes.lightPerception.range = Infinity;
+    if (this.detectionModes?.lightPerception) {
+      this.detectionModes.lightPerception.enabled = true;
+      this.detectionModes.lightPerception.range = Infinity;
+    }
   }
 
   /** @inheritDoc */
