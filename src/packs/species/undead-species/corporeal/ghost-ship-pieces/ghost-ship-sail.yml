@@ -641,34 +641,40 @@ effects:
       automations:
         d635eb44dba086dd:
           _id: d635eb44dba086dd
+          combat:
+            what:
+              roll: 2d4kh1
+              threshold: 4
+              type: rolled
+            when:
+              skip: 0
+              time: end
+              trigger: turn
+            who:
+              type: target
           crit:
             - 0
-          type: combatExpiration
-          what:
-            roll: 2d4kh1
-            threshold: 4
-            type: rolled
-          when:
-            skip: 0
-            time: end
-            trigger: turn
-          who:
-            type: target
+          override:
+            combat: true
+          type: expiration
         d5717000e99ee582:
           _id: d5717000e99ee582
+          combat:
+            what:
+              roll: 2d4kh1
+              threshold: 4
+              type: rolled
+            when:
+              skip: 1
+              time: end
+              trigger: turn
+            who:
+              type: target
           crit:
             - 1
-          type: combatExpiration
-          what:
-            roll: 2d4kh1
-            threshold: 4
-            type: rolled
-          when:
-            skip: 1
-            time: end
-            trigger: turn
-          who:
-            type: target
+          override:
+            combat: true
+          type: expiration
         5d57231066693cee:
           _id: 5d57231066693cee
           executor: false
@@ -882,17 +888,20 @@ effects:
       automations:
         d635eb44dba086dd:
           _id: d635eb44dba086dd
-          type: combatExpiration
-          what:
-            roll: 2d4kh1
-            threshold: 4
-            type: rolled
-          when:
-            skip: 0
-            time: start
-            trigger: turn
-          who:
-            type: executor
+          combat:
+            what:
+              roll: 2d4kh1
+              threshold: 4
+              type: rolled
+            when:
+              skip: 0
+              time: start
+              trigger: turn
+            who:
+              type: executor
+          override:
+            combat: true
+          type: expiration
       class: veteran
       competence:
         raw: 0

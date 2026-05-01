@@ -14,11 +14,10 @@ declare global {
       chatMacro: automations.ChatMacroAutomation;
       chatStatus: automations.ChatStatusAutomation;
       childChange: automations.ChildChangeAutomation;
-      combatExpiration: automations.CombatExpirationAutomation;
       common: automations.CommonOutcomesAutomation;
       commonMacro: automations.CommonMacroAutomation;
       duration: automations.DurationAutomation;
-      eventExpiration: automations.EventExpirationAutomation;
+      expiration: automations.ExpirationAutomation;
       feat: automations.FeatAutomation;
       hacks: automations.HacksAutomation;
       heal: automations.HealAutomation;

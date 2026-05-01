@@ -186,12 +186,6 @@
         },
         "LABEL": "Change Children"
       },
-      "CombatExpiration": {
-        "LABEL": "Expiration in Combat",
-        "NOTIFICATIONS": {
-          "passive": "The effect this is automating is passive and cannot expire in combat."
-        }
-      },
       "CommonOutcomes": {
         "DIALOG": {
           "content": "Would you like to take the following common outcomes?<br />{outcomes}"
@@ -263,8 +257,7 @@
         },
         "LABEL": "Duration"
       },
-      "EventExpiration": {
-        "LABEL": "Expiration Event",
+      "Expiration": {
         "FIELDS": {
           "conditions": {
             "absent": {
@@ -281,15 +274,23 @@
             "label": "Triggers"
           },
           "override": {
+            "combat": {
+              "hint": "If checked this will apply combat expirations.",
+              "label": "Combat Expirations"
+            },
             "conditions": {
-              "label": "Override Conditions",
-              "hint": "If checked this will override the default condition expirations from the ability's duration."
+              "hint": "If checked this will override the default condition expirations from the ability's duration.",
+              "label": "Condition Expirations"
             },
             "triggers": {
-              "label": "Override Triggers",
-              "hint": "If checked this will override the default trigger expirations from the ability's duration."
+              "hint": "If checked this will override the default trigger expirations from the ability's duration.",
+              "label": "Trigger Expirations"
             }
           }
+        },
+        "LABEL": "Expiration Event",
+        "NOTIFICATIONS": {
+          "passive": "The ability this is automating is passive and cannot have expirations."
         }
       },
       "ExternalDocuments": {

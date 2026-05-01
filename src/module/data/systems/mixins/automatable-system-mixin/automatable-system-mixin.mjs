@@ -1,5 +1,9 @@
 import { PseudoCollectionField } from "../../../fields/_module.mjs";
 import { BaseAutomation } from "../../../pseudo-documents/automations/abstract/_module.mjs";
+import {
+  migrateKey,
+  migrateValue,
+} from "../../../shared/migrations/source-migrations.mjs";
 
 /**
  * @param {typeof BaseSystem} Base
@@ -14,7 +18,7 @@ export default function AutomatableSystemMixin(Base) {
     class AutomatableSystem extends Base {
       /**
        * Array of the types of automations that this system can have.
-       * @returns {(typeof BaseAutomation)[]}
+       * @returns {(typeof Teriock.Automations.Any)[]}
        */
       static get _automationTypes() {
         return [];
@@ -39,6 +43,22 @@ export default function AutomatableSystemMixin(Base) {
             types: this.automationTypes,
           }),
         });
+      }
+
+      /** @inheritDoc */
+      static migrateData(source, options, state) {
+        if (foundry.utils.hasProperty(source, "automations")) {
+          for (const a of Object.values(source.automations)) {
+            if (foundry.utils.getProperty(a, "type") === "combatExpiration") {
+              migrateValue(a, "type", "combatExpiration", "expiration");
+              foundry.utils.setProperty(a, "override.combat", true);
+              migrateKey(a, "who", "combat.who");
+              migrateKey(a, "what", "combat.what");
+              migrateKey(a, "when", "combat.when");
+            }
+          }
+        }
+        return super.migrateData(source, options, state);
       }
 
       /** @inheritDoc */

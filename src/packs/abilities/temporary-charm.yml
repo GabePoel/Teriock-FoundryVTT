@@ -11,17 +11,20 @@ system:
   automations:
     d635eb44dba086dd:
       _id: d635eb44dba086dd
-      type: combatExpiration
-      what:
-        roll: 2d4kh1
-        threshold: 4
-        type: rolled
-      when:
-        skip: 0
-        time: end
-        trigger: turn
-      who:
-        type: target
+      combat:
+        what:
+          roll: 2d4kh1
+          threshold: 4
+          type: rolled
+        when:
+          skip: 0
+          time: end
+          trigger: turn
+        who:
+          type: target
+      override:
+        combat: true
+      type: expiration
     f004b5e5538cefe9:
       _id: f004b5e5538cefe9
       executor: false

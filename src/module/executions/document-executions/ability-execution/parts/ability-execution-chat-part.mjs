@@ -202,31 +202,6 @@ export default function AbilityExecutionChatPart(Base) {
       }
 
       /**
-       * @param {boolean} crit
-       * @returns {Partial<CombatExpiration>}
-       */
-      #generateEffectCombatExpiration(crit = false) {
-        /** @type {Partial<CombatExpiration>} */
-        const combatExpiration = {};
-        const combatExpirationAutomations = this.getAutomations(
-          "combatExpiration",
-          { crit },
-        );
-        combatExpirationAutomations.forEach((a) => {
-          Object.assign(
-            combatExpiration,
-            foundry.utils.deepClone({
-              what: a.what,
-              when: a.when,
-              who: a.who,
-            }),
-          );
-          combatExpiration.who.source = this.actor?.uuid;
-        });
-        return combatExpiration;
-      }
-
-      /**
        * Generate the JSON serializable data for a consequence.
        * @param {boolean} crit
        * @returns {Promise<object>}
@@ -289,7 +264,6 @@ export default function AbilityExecutionChatPart(Base) {
        */
       #generateEffectExpirations(crit = false) {
         const expirations = {
-          combat: this.#generateEffectCombatExpiration(crit),
           conditions: {
             absent: Array.from(this.source.system.duration.conditions.absent),
             present: Array.from(this.source.system.duration.conditions.present),
@@ -298,11 +272,14 @@ export default function AbilityExecutionChatPart(Base) {
           sustained: this.source.system.sustained,
           triggers: Array.from(this.source.system.duration.triggers),
         };
-        const autos = this.getAutomations("eventExpiration", {
+        const autos = this.getAutomations("expiration", {
           crit,
         });
         autos.forEach((a) => {
-          Object.assign(expirations, a.getExpirationData());
+          Object.assign(
+            expirations,
+            a.getExpirationData({ actor: this.actor }),
+          );
         });
         return expirations;
       }

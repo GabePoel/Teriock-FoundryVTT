@@ -1033,17 +1033,20 @@ items:
           automations:
             d635eb44dba086dd:
               _id: d635eb44dba086dd
-              type: combatExpiration
-              what:
-                roll: 2d4kh1
-                threshold: 4
-                type: rolled
-              when:
-                skip: 0
-                time: start
-                trigger: turn
-              who:
-                type: executor
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 0
+                  time: start
+                  trigger: turn
+                who:
+                  type: executor
+              override:
+                combat: true
+              type: expiration
           class: veteran
           competence:
             raw: 0
@@ -1167,17 +1170,20 @@ items:
           automations:
             d635eb44dba086dd:
               _id: d635eb44dba086dd
-              type: combatExpiration
-              what:
-                roll: 2d4kh1
-                threshold: 4
-                type: forced
-              when:
-                skip: 0
-                time: start
-                trigger: turn
-              who:
-                type: executor
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: forced
+                when:
+                  skip: 0
+                  time: start
+                  trigger: turn
+                who:
+                  type: executor
+              override:
+                combat: true
+              type: expiration
             6cebaedf0c5c1507:
               _id: 6cebaedf0c5c1507
               executor: false
@@ -1505,34 +1511,40 @@ items:
           automations:
             d635eb44dba086dd:
               _id: d635eb44dba086dd
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 0
+                  time: start
+                  trigger: action
+                who:
+                  type: target
               crit:
                 - 0
-              type: combatExpiration
-              what:
-                roll: 2d4kh1
-                threshold: 4
-                type: rolled
-              when:
-                skip: 0
-                time: start
-                trigger: action
-              who:
-                type: target
+              override:
+                combat: true
+              type: expiration
             d5717000e99ee582:
               _id: d5717000e99ee582
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 1
+                  time: start
+                  trigger: action
+                who:
+                  type: target
               crit:
                 - 1
-              type: combatExpiration
-              what:
-                roll: 2d4kh1
-                threshold: 4
-                type: rolled
-              when:
-                skip: 1
-                time: start
-                trigger: action
-              who:
-                type: target
+              override:
+                combat: true
+              type: expiration
             800c70e6560525a8:
               _id: 800c70e6560525a8
               formula: (@h)d4[magic ice]

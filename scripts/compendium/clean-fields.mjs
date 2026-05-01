@@ -319,6 +319,22 @@ function cleanAutomations(automations) {
  */
 function cleanAutomation(automation) {
   delete automation.transformation;
+  if (automation.type === "combatExpiration") {
+    automation.type = "expiration";
+    automation.combat = {
+      what: automation.what,
+      when: automation.when,
+      who: automation.who,
+    };
+    automation.override = Object.assign(automation.override ?? {}, {
+      combat: true,
+    });
+  }
+  if (automation.type === "expiration") {
+    delete automation.what;
+    delete automation.when;
+    delete automation.who;
+  }
 }
 
 /**
