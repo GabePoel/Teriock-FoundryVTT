@@ -2,13 +2,14 @@ import { TeriockActor } from "../documents/_module.mjs";
 
 declare global {
   export namespace Teriock.Config {
-    export type ChildChangeCategoryEntry = {
+    export type ChildChangeTargetEntry = {
       label: string;
+      /** The child document subtypes that this applies to. */
       types: Teriock.Documents.ChildType[];
     };
 
     export type ChildChangePathEntry = {
-      categories: (keyof typeof TERIOCK.config.change.child.categories)[];
+      targets: (keyof typeof TERIOCK.config.change.child.targets)[];
       forExecution?: boolean;
       group: keyof typeof TERIOCK.config.change.child.groups;
       label: string;

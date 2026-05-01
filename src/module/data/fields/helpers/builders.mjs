@@ -136,7 +136,7 @@ export function qualifiedChangeField() {
       label: "TERIOCK.SCHEMA.QualifiedChange.priority.label",
     }),
     target: new EnhancedStringField({
-      choices: localizeChoices(TERIOCK.config.change.target),
+      choices: localizeChoices(TERIOCK.config.change.parent.targets),
       initial: "Actor",
       label: "TERIOCK.SCHEMA.QualifiedChange.target.label",
       nullable: false,

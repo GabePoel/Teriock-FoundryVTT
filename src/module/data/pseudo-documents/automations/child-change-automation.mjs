@@ -3,6 +3,7 @@ import {
   objectMap,
 } from "../../../helpers/utils.mjs";
 import { FormulaField } from "../../fields/_module.mjs";
+import { migrateKey } from "../../shared/migrations/source-migrations.mjs";
 import { CritAutomation } from "./abstract/_module.mjs";
 
 const { fields } = foundry.data;
@@ -25,12 +26,10 @@ export default class ChildChangeAutomation extends CritAutomation {
 
   /** @inheritDoc */
   static defineSchema() {
-    const initialCategory = Object.keys(
-      TERIOCK.config.change.child.categories,
-    )[0];
+    const initialTarget = Object.keys(TERIOCK.config.change.child.targets)[0];
     const pathEntries = Object.entries(TERIOCK.config.change.child.paths);
     const initialPathEntry = pathEntries.find(([_k, v]) =>
-      v.categories.includes(initialCategory),
+      v.targets.includes(initialTarget),
     );
     const initialKey = initialPathEntry[0];
     const changeTypes = TERIOCK.config.change.child.paths[initialKey].types ?? [
@@ -38,13 +37,13 @@ export default class ChildChangeAutomation extends CritAutomation {
     ];
     const initialChangeType = changeTypes[0];
     return Object.assign(super.defineSchema(), {
-      category: new fields.StringField({
+      target: new fields.StringField({
         choices: objectMap(
-          TERIOCK.config.change.child.categories,
+          TERIOCK.config.change.child.targets,
           (e) => e.label,
           { localize: true },
         ),
-        initial: initialCategory,
+        initial: initialTarget,
         required: true,
       }),
       changeType: new fields.StringField({
@@ -65,6 +64,12 @@ export default class ChildChangeAutomation extends CritAutomation {
       qualifier: new FormulaField({ initial: "0" }),
       value: new FormulaField({ deterministic: false, initial: "" }),
     });
+  }
+
+  /** @inheritDoc */
+  static migrateData(source, options, state) {
+    migrateKey(source, "category", "target");
+    return super.migrateData(source, options, state);
   }
 
   /** @returns {Record<string, string>} */
@@ -91,13 +96,13 @@ export default class ChildChangeAutomation extends CritAutomation {
 
   /** @inheritDoc */
   get _formPaths() {
-    return ["category", "qualifier", "key", "changeType", "value", "priority"];
+    return ["target", "qualifier", "key", "changeType", "value", "priority"];
   }
 
   /** @returns {Record<string, string>} */
   get _keyChoices() {
     return objectMap(TERIOCK.config.change.child.paths, (e) => e.label, {
-      filter: (e) => e.categories.includes(this.category),
+      filter: (e) => e.targets.includes(this.target),
     });
   }
 
@@ -109,7 +114,7 @@ export default class ChildChangeAutomation extends CritAutomation {
     const groups = {};
     const pathEntries = Object.entries(
       TERIOCK.config.change.child.paths,
-    ).filter(([_k, v]) => v.categories.includes(this.category));
+    ).filter(([_k, v]) => v.targets.includes(this.target));
     for (const [k, v] of pathEntries) {
       if (!groups[v.group]) {
         groups[v.group] = {
@@ -131,7 +136,7 @@ export default class ChildChangeAutomation extends CritAutomation {
   /** @inheritDoc */
   _makeFormGroup(path, groupConfig = {}, inputConfig = {}) {
     if (path.endsWith("key")) inputConfig.choices = this._processedKeyChoices;
-    if (path.endsWith("qualifier")) inputConfig.context = this.category;
+    if (path.endsWith("qualifier")) inputConfig.context = this.target;
     if (path.endsWith("value")) inputConfig.context = "actor";
     if (path.endsWith("changeType")) {
       inputConfig.choices = this._changeTypeChoices;
@@ -150,7 +155,7 @@ export default class ChildChangeAutomation extends CritAutomation {
         phase: "children",
         priority: this.priority ?? this._defaultPriority,
         qualifier: this.qualifier,
-        target: this.category,
+        target: this.target,
         type: this.changeType,
         value: this.value,
       },

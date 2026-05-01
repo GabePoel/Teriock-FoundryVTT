@@ -207,7 +207,8 @@ export default class TeriockActor extends mix(
 
   /**
    * Apply any transformations to child data which are caused by ActiveEffects.
-   * @param {string} phase
+   * @param {Teriock.Changes.Phase} phase
+   * @internal
    */
   _applyActiveEffectsToChildren(phase) {
     if (
@@ -247,10 +248,20 @@ export default class TeriockActor extends mix(
   }
 
   /**
+   * Apply any transformations to item data which are causde by ActiveEffects.
+   * @param {Teriock.Changes.Phase} phase
+   * @internal
+   */
+  _applyActiveEffectsToItems(phase) {
+    for (const item of this.items) item.applyActiveEffects(phase);
+  }
+
+  /**
    * Apply qualified changes to an array of documents.
    * @param {Teriock.Changes.QualifiedChangeData[]} changes
    * @param {AnyChildDocument[]} documents
    * @param {object} replacementData
+   * @internal
    */
   _applyChangesToDocuments(changes, documents, replacementData) {
     for (const d of documents) {
@@ -399,11 +410,15 @@ export default class TeriockActor extends mix(
 
   /** @inheritDoc */
   applyActiveEffects(phase) {
-    if (phase === "children" && !this._completedActiveEffectPhases.has(phase)) {
+    const apply = !this._completedActiveEffectPhases.has(phase);
+    if (TERIOCK.config.change.phase[phase]?.applyToChildren && apply) {
       this._applyActiveEffectsToChildren(phase);
       this._completedActiveEffectPhases.add(phase);
     } else {
       super.applyActiveEffects(phase);
+    }
+    if (TERIOCK.config.change.phase[phase]?.applyToItems && apply) {
+      this._applyActiveEffectsToItems(phase);
     }
   }
 

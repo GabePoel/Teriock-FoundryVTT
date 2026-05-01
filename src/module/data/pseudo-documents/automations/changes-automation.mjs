@@ -43,7 +43,7 @@ export default class ChangesAutomation extends CritAutomation {
   /** @inheritDoc */
   getChanges() {
     return this.changes.map((c) => {
-      return { ...c, phase: "normal" };
+      return { ...c, phase: TERIOCK.config.change.defaultPhase };
     });
   }
 

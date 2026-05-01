@@ -16,8 +16,8 @@ const typeSubsets = {
   simple: simpleTypes,
 };
 
-/** @enum {Teriock.Config.ChildChangeCategoryEntry} */
-const categories = {
+/** @enum {Teriock.Config.ChildChangeTargetEntry} */
+const childTargets = {
   armament: {
     label: "TERIOCK.CHANGES.Target.armament",
     types: ["body", "equipment"],
@@ -39,88 +39,88 @@ const groups = {
 /** @type {Record<string, Teriock.Config.ChildChangePathEntry>} */
 const paths = {
   "system.attackPenalty": {
-    categories: ["ability", "armament"],
     forExecution: true,
     group: "offense",
     label: "TERIOCK.SYSTEMS.Attack.FIELDS.attackPenalty.label",
+    targets: ["ability", "armament"],
     types: typeSubsets.formula,
   },
   "system.av.bonus": {
-    categories: ["armament"],
     group: "defense",
     label: "TERIOCK.SYSTEMS.Armament.FIELDS.av.raw.label",
+    targets: ["armament"],
     types: typeSubsets.simple,
   },
   "system.bv.bonus": {
-    categories: ["armament"],
     group: "defense",
     label: "TERIOCK.SYSTEMS.Armament.FIELDS.bv.raw.label",
+    targets: ["armament"],
     types: typeSubsets.simple,
   },
   "system.costs.tweaks.adept": {
-    categories: ["ability"],
     group: "costs",
     label: "TERIOCK.COSTS.Tweaks.adept",
+    targets: ["ability"],
     types: typeSubsets.numerical,
   },
   "system.costs.tweaks.inept": {
-    categories: ["ability"],
     group: "costs",
     label: "TERIOCK.COSTS.Tweaks.inept",
+    targets: ["ability"],
     types: typeSubsets.numerical,
   },
   "system.damage": {
-    categories: ["armament"],
-    group: "damage",
     forExecution: true,
+    group: "damage",
     label: "TERIOCK.SYSTEMS.Armament.FIELDS.damage.alt",
+    targets: ["armament"],
     types: typeSubsets.harm,
   },
   "system.damage.base": {
-    categories: ["armament"],
-    group: "damage",
     forExecution: true,
+    group: "damage",
     label: "TERIOCK.SYSTEMS.Armament.FIELDS.damage.base.label",
+    targets: ["armament"],
     types: typeSubsets.harm,
   },
   "system.damage.twoHanded": {
-    categories: ["armament"],
-    group: "damage",
     forExecution: true,
+    group: "damage",
     label: "TERIOCK.SYSTEMS.Armament.FIELDS.damage.twoHanded.label",
+    targets: ["armament"],
     types: typeSubsets.harm,
   },
   "system.hitBonus": {
-    categories: ["ability", "armament"],
-    group: "offense",
     forExecution: true,
+    group: "offense",
     label: "TERIOCK.SYSTEMS.Attack.FIELDS.hitBonus.label",
+    targets: ["ability", "armament"],
     types: typeSubsets.formula,
   },
   "system.piercing.raw": {
-    categories: ["ability", "armament"],
-    group: "offense",
     forExecution: true,
+    group: "offense",
     label: "TERIOCK.MODELS.Piercing.FIELDS.raw.label",
+    targets: ["ability", "armament"],
     types: typeSubsets.simple,
   },
   "system.warded": {
-    categories: ["ability", "armament"],
     forExecution: true,
     group: "offense",
     label: "TERIOCK.SYSTEMS.Attack.FIELDS.warded.label",
+    targets: ["ability", "armament"],
     types: typeSubsets.boolean,
   },
   "system.spellTurning": {
-    categories: ["armament"],
     group: "defense",
     label: "TERIOCK.SYSTEMS.Armament.FIELDS.spellTurning.label",
+    targets: ["armament"],
     types: typeSubsets.boolean,
   },
   "system.vitals": {
-    categories: ["armament"],
     group: "offense",
     label: "TERIOCK.SYSTEMS.Armament.FIELDS.vitals.label",
+    targets: ["armament"],
     types: typeSubsets.boolean,
   },
   ...Object.fromEntries(
@@ -130,10 +130,10 @@ const paths = {
         return [
           `system.boosts.${k}`,
           {
-            categories: ["ability", "armament"],
             forExecution: true,
             group: "boosts",
             label: v.label,
+            targets: ["ability", "armament"],
             types: typeSubsets.formula,
           },
         ];
@@ -141,31 +141,35 @@ const paths = {
   ),
 };
 
-const child = { categories, paths, typeSubsets, groups };
+const child = { targets: childTargets, paths, typeSubsets, groups };
 
 const phase = {
-  normal: {
-    default: true,
-    hint: "TERIOCK.CHANGES.Phase.normal.hint",
-    label: "TERIOCK.CHANGES.Phase.normal.label",
-  },
   children: {
+    applyToChildren: true,
     hint: "TERIOCK.CHANGES.Phase.children.hint",
     label: "TERIOCK.CHANGES.Phase.children.label",
   },
+  derived: {
+    applyToItems: true,
+    default: true,
+    hint: "TERIOCK.CHANGES.Phase.derived.hint",
+    label: "TERIOCK.CHANGES.Phase.derived.label",
+  },
 };
 
-const target = {
+const parentTargets = {
   Actor: "TERIOCK.CHANGES.Target.Actor",
   Item: "TERIOCK.CHANGES.Target.Item",
 };
 
+const parent = { targets: parentTargets };
+
 const defaultPhase = Object.entries(phase).find(([_k, v]) => v.default)[0];
 
-export default { child, phase, target, defaultPhase };
+export default { child, phase, parent, defaultPhase };
 
 preLocalize("config.change.child.groups");
 preLocalize("config.change.child.categories", { key: "label", sort: true });
 preLocalize("config.change.child.paths", { key: "label", sort: true });
+preLocalize("config.change.parent.target");
 preLocalize("config.change.phase", { keys: ["hint", "label"] });
-preLocalize("config.change.target");
