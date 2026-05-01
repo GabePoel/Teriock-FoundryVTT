@@ -4,11 +4,27 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.20
+  systemVersion: 0.12.35
 img: systems/teriock/src/icons/abilities/final-fury.webp
 name: Final Fury
 system:
   automations:
+    Axozk1FdcJFFmu6r:
+      _id: Axozk1FdcJFFmu6r
+      category: armament
+      changeType: add
+      key: system.boosts.damage
+      qualifier: '@prop.weapon'
+      type: childChange
+      value: '1'
+    XAFvURmf8rUSddkm:
+      _id: XAFvURmf8rUSddkm
+      category: armament
+      changeType: upgrade
+      key: system.piercing.raw
+      qualifier: '@prop.weapon'
+      type: childChange
+      value: '2'
     5e9e1d2033fe152a:
       _id: 5e9e1d2033fe152a
       executor: false
@@ -22,23 +38,22 @@ system:
   delivery: self
   duration:
     conditions:
-      absent:
-        - down
+      present:
+        - defyingDeath
     raw: '0'
     unit: unlimited
   executionTime:
-    base: passive
+    base: r0
     slow:
       unit: second
   expansion:
-    featSaveAttribute: mov
     range:
       unit: self
   featSaveAttribute: mov
   form: normal
   identifier: final-fury
   interaction: manifest
-  maneuver: passive
+  maneuver: reactive
   mundane: false
   overview:
     base: >-
@@ -58,5 +73,6 @@ system:
   standard: true
   targets:
     - self
+  trigger: <p>You start @L[Condition:Defying Death]{defying death}.</p>
 transfer: true
 type: ability

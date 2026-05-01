@@ -4,29 +4,27 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.20
+  systemVersion: 0.12.35
 img: systems/teriock/src/icons/abilities/monstrous-strength.webp
 name: Monstrous Strength
 system:
   automations:
-    e789ed5e109ebd1a:
-      _id: e789ed5e109ebd1a
-      changes:
-        - key: system.damage
-          phase: normal
-          priority: 100
-          qualifier: and(@dmg, @range.melee)
-          target: armament
-          type: boost
-          value: '1'
-        - key: system.piercing.raw
-          phase: normal
-          priority: 10
-          qualifier: '@range.melee'
-          target: armament
-          type: add
-          value: '1'
-      type: changes
+    dZdzGQfm90BHxkCn:
+      _id: dZdzGQfm90BHxkCn
+      category: armament
+      changeType: add
+      key: system.boosts.damage
+      qualifier: and(@dmg, @range.melee)
+      type: childChange
+      value: '1'
+    r4QAYN9B2RLw1glP:
+      _id: r4QAYN9B2RLw1glP
+      category: armament
+      changeType: upgrade
+      key: system.piercing.raw
+      qualifier: '@range.melee'
+      type: childChange
+      value: '1'
   competence:
     raw: 0
   delivery: self
@@ -38,7 +36,6 @@ system:
     slow:
       unit: second
   expansion:
-    featSaveAttribute: mov
     range:
       unit: self
   featSaveAttribute: mov

@@ -14,7 +14,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.20
+      systemVersion: 0.12.36
     img: systems/teriock/src/icons/abilities/bodyguard-training.webp
     name: Bodyguard Training
     system:
@@ -30,7 +30,6 @@ effects:
         slow:
           unit: second
       expansion:
-        featSaveAttribute: mov
         range:
           unit: self
       featSaveAttribute: mov
@@ -62,7 +61,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.30
+      systemVersion: 0.12.36
     img: systems/teriock/src/icons/abilities/fortify-area.webp
     name: Fortify Area
     system:
@@ -123,7 +122,6 @@ effects:
         slow:
           unit: shortRest
       expansion:
-        featSaveAttribute: mov
         range:
           unit: self
       featSaveAttribute: mov
@@ -135,7 +133,8 @@ effects:
       overview:
         base: >-
           <p>You may spend a @L[Core:Short Rest]{short rest} building defensive
-          fortifications around the area you are resting in. You and your allies
+          fortifications around the area you are resting in. The area must not
+          be greater than 30 feet wide in any direction. You and your allies
           that are in this are when @L[Core:Combat]{combat} begins gain
           [[/gainTempHp 1d10]] @L[Core:Temporary Hit Points]{temporary HP} for
           the duration of that @L[Core:Combat]{combat}. This area counts as
@@ -166,7 +165,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.30
+      systemVersion: 0.12.36
     img: systems/teriock/src/icons/abilities/tumble.webp
     name: Tumble
     system:
@@ -201,7 +200,6 @@ effects:
         slow:
           unit: second
       expansion:
-        featSaveAttribute: mov
         range:
           unit: self
       featSaveAttribute: mov
@@ -242,29 +240,19 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.30
+      systemVersion: 0.12.36
     img: systems/teriock/src/icons/abilities/unbreachability.webp
     name: Unbreachability
     system:
       automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.av.bonus
-              phase: normal
-              priority: 10
-              qualifier: '@av'
-              target: equipment
-              type: upgrade
-              value: '1'
-            - key: system.props
-              phase: normal
-              priority: 10
-              qualifier: '@av'
-              target: body
-              type: add
-              value: unbreachable
-          type: changes
+        JSQ4VFQaY3W9x3gL:
+          _id: JSQ4VFQaY3W9x3gL
+          category: armament
+          changeType: upgrade
+          key: system.av.bonus
+          qualifier: and(@equipment, @class.armor)
+          type: childChange
+          value: '1'
       class: veteran
       competence:
         raw: 0
@@ -277,7 +265,6 @@ effects:
         slow:
           unit: second
       expansion:
-        featSaveAttribute: mov
         range:
           unit: self
       featSaveAttribute: mov
@@ -307,7 +294,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.30
+      systemVersion: 0.12.36
     img: systems/teriock/src/icons/abilities/bodyguard-taunt.webp
     name: Bodyguard Taunt
     system:
@@ -345,7 +332,6 @@ effects:
         slow:
           unit: second
       expansion:
-        featSaveAttribute: mov
         range:
           unit: self
       featSaveAttribute: mov
@@ -385,7 +371,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.30
+      systemVersion: 0.12.36
     img: systems/teriock/src/icons/abilities/bodyguard-backup.webp
     name: Bodyguard Backup
     system:
@@ -408,7 +394,6 @@ effects:
         slow:
           unit: second
       expansion:
-        featSaveAttribute: mov
         range:
           unit: self
       featSaveAttribute: mov

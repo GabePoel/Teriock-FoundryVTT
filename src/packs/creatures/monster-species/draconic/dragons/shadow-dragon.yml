@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.30
+      systemVersion: 0.12.36
     effects:
       - _id: ogOMeMBS4kSnaCUM
         _key: >-
@@ -25,22 +25,19 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/assassin-adept.webp
         name: Assassin Adept
         system:
           automations:
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
-              changes:
-                - key: system.costs.tweaks.adept
-                  phase: normal
-                  priority: 10
-                  qualifier: '@class.assassin'
-                  target: ability
-                  type: upgrade
-                  value: '1'
-              type: changes
+            BNR3VemuccDUWGLh:
+              _id: BNR3VemuccDUWGLh
+              category: ability
+              changeType: add
+              key: system.costs.tweaks.adept
+              qualifier: '@class.assassin'
+              type: childChange
+              value: '1'
           competence:
             raw: 0
           delivery: self
@@ -52,7 +49,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -84,7 +80,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/dragon-elder-sorcery.webp
         name: Dragon Elder Sorcery
         system:
@@ -118,7 +114,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -171,7 +166,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/dragon-sight.webp
         name: Dragon Sight
         system:
@@ -188,7 +183,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -223,7 +217,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/extreme-intelligence.webp
         name: Extreme Intelligence
         system:
@@ -238,7 +232,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -269,7 +262,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/flying.webp
         name: Flying
         system:
@@ -282,9 +275,7 @@ items:
               _id: e789ed5e109ebd1a
               changes:
                 - key: system.speedAdjustments.fly
-                  phase: normal
                   priority: 10
-                  qualifier: '1'
                   target: Actor
                   type: upgrade
                   value: '2'
@@ -293,9 +284,7 @@ items:
               _id: f025905e157ac261
               changes:
                 - key: system.speedAdjustments.fly
-                  phase: normal
                   priority: 10
-                  qualifier: '1'
                   target: Actor
                   type: upgrade
                   value: '3'
@@ -317,7 +306,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -349,7 +337,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/improved-healing-factor.webp
         name: Improved Healing Factor
         system:
@@ -383,7 +371,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -418,7 +405,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/improved-revitalizing-factor.webp
         name: Improved Revitalizing Factor
         system:
@@ -450,7 +437,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -484,7 +470,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/lumbering.webp
         name: Lumbering
         system:
@@ -499,7 +485,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -530,29 +515,27 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/monstrous-strength.webp
         name: Monstrous Strength
         system:
           automations:
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
-              changes:
-                - key: system.damage
-                  phase: normal
-                  priority: 100
-                  qualifier: and(@dmg, @range.melee)
-                  target: armament
-                  type: boost
-                  value: '1'
-                - key: system.piercing.raw
-                  phase: normal
-                  priority: 10
-                  qualifier: '@range.melee'
-                  target: armament
-                  type: add
-                  value: '1'
-              type: changes
+            dZdzGQfm90BHxkCn:
+              _id: dZdzGQfm90BHxkCn
+              category: armament
+              changeType: add
+              key: system.boosts.damage
+              qualifier: and(@dmg, @range.melee)
+              type: childChange
+              value: '1'
+            r4QAYN9B2RLw1glP:
+              _id: r4QAYN9B2RLw1glP
+              category: armament
+              changeType: upgrade
+              key: system.piercing.raw
+              qualifier: '@range.melee'
+              type: childChange
+              value: '1'
           competence:
             raw: 0
           delivery: self
@@ -564,7 +547,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -601,7 +583,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/night-vision.webp
         name: Night Vision
         system:
@@ -610,9 +592,7 @@ items:
               _id: e789ed5e109ebd1a
               changes:
                 - key: system.senses.dark
-                  phase: normal
                   priority: 10
-                  qualifier: '1'
                   target: Actor
                   type: upgrade
                   value: '120'
@@ -630,7 +610,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -661,7 +640,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/shadow-dragon-breath.webp
         name: Shadow Dragon Breath
         system:
@@ -726,7 +705,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -767,7 +745,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/shattering-armor.webp
         name: Shattering Armor
         system:
@@ -791,7 +769,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -830,7 +807,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/speed.webp
         name: Speed
         system:
@@ -845,7 +822,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -876,22 +852,19 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/battle-roar.webp
         name: Battle Roar
         system:
           automations:
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
-              changes:
-                - key: system.costs.tweaks.adept
-                  phase: normal
-                  priority: 10
-                  qualifier: '@identifier.battle-cry-aura'
-                  target: ability
-                  type: add
-                  value: '1'
-              type: changes
+            insnA3UruLUet7RD:
+              _id: insnA3UruLUet7RD
+              category: ability
+              changeType: add
+              key: system.costs.tweaks.adept
+              qualifier: '@identifier.battle-cry-aura'
+              type: childChange
+              value: '1'
           competence:
             raw: 0
           delivery: self
@@ -903,7 +876,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -935,23 +907,20 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/elder-sorcery-adept.webp
         name: Elder Sorcery Adept
         system:
           _sup: qBB1sEzAvsda2B6e
           automations:
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
-              changes:
-                - key: system.costs.tweaks.adept
-                  phase: normal
-                  priority: 10
-                  qualifier: '@es'
-                  target: ability
-                  type: upgrade
-                  value: '1'
-              type: changes
+            9sdpZGNc8gLdN1vm:
+              _id: 9sdpZGNc8gLdN1vm
+              category: ability
+              changeType: add
+              key: system.costs.tweaks.adept
+              qualifier: '@es'
+              type: childChange
+              value: '1'
           competence:
             raw: 0
           delivery: self
@@ -963,7 +932,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -994,7 +962,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/innate-elder-sorcery.webp
         name: Innate Elder Sorcery
         system:
@@ -1043,7 +1011,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -1094,7 +1061,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/all-elder-sorcery-words.webp
         name: All Elder Sorcery Words
         system:
@@ -1117,7 +1084,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -1363,7 +1329,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/elder-sorcery-creation.webp
         name: Elder Sorcery Creation
         system:
@@ -1399,7 +1365,6 @@ items:
             slow:
               unit: longRest
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -1451,7 +1416,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/instant-identify-sight.webp
         name: Instant Identify Sight
         system:
@@ -1479,7 +1444,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -1518,7 +1482,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/true-sight.webp
         name: True Sight
         system:
@@ -1528,9 +1492,7 @@ items:
               _id: e789ed5e109ebd1a
               changes:
                 - key: system.senses.truth
-                  phase: normal
                   priority: 10
-                  qualifier: '1'
                   target: Actor
                   type: upgrade
                   value: '120'
@@ -1548,7 +1510,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -1588,7 +1549,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/ethereal-senses.webp
         name: Ethereal Senses
         system:
@@ -1598,9 +1559,7 @@ items:
               _id: e789ed5e109ebd1a
               changes:
                 - key: system.senses.ethereal
-                  phase: normal
                   priority: 10
-                  qualifier: '1'
                   target: Actor
                   type: upgrade
                   value: '120'
@@ -1620,7 +1579,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -1653,7 +1611,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/scouting.webp
         name: Scouting
         system:
@@ -1672,7 +1630,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -1712,7 +1669,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/supernatural-strength.webp
         name: Supernatural Strength
         system:
@@ -1728,7 +1685,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -1766,7 +1722,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/giant-strength.webp
         name: Giant Strength
         system:
@@ -1783,7 +1739,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -1822,7 +1777,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/improved-strength.webp
         name: Improved Strength
         system:
@@ -1839,7 +1794,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -1876,7 +1830,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/beastly-strength.webp
         name: Beastly Strength
         system:
@@ -1893,7 +1847,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -1932,7 +1885,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
         name: Improved Armor Piercing
         system:
@@ -1949,7 +1902,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -1982,7 +1934,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
         name: Melee Damage Boost
         system:
@@ -2001,7 +1953,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -2043,7 +1994,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/shattering-grip.webp
         name: Shattering Grip
         system:
@@ -2073,7 +2024,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -2103,7 +2053,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         flags:
           teriockDocumentSettings:
             execution:
@@ -2132,7 +2082,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -2168,7 +2117,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
         name: Battle Cry Resistance
         system:
@@ -2180,6 +2129,11 @@ items:
               relation: resistances
               type: protection
               value: frightened
+            8f623097f9f2a087:
+              _id: 8f623097f9f2a087
+              bonus: '0'
+              hex: false
+              type: resist
           class: berserker
           competence:
             raw: 0
@@ -2195,7 +2149,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -2228,7 +2181,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
         name: Battle Cry Aura
         system:
@@ -2297,7 +2250,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: int
@@ -2333,7 +2285,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/battle-roar-aura.webp
         name: Battle Roar Aura
         system:
@@ -2401,7 +2353,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: int
@@ -2473,7 +2424,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.30
+      systemVersion: 0.12.36
     effects:
       - _id: buGEAqu0swjYEVQZ
         _key: >-
@@ -2483,7 +2434,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -2505,7 +2456,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/properties/prehensile.webp
         name: Prehensile
         system:
@@ -2527,7 +2478,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/properties/unblockable.webp
         name: Unblockable
         system:
@@ -2536,10 +2487,8 @@ items:
               _id: parameterChanges
               changes:
                 - key: system.piercing.raw
-                  phase: normal
                   priority: 10
-                  qualifier: '1'
-                  target: parent
+                  target: Item
                   type: upgrade
                   value: '2'
               type: changes
@@ -2559,7 +2508,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -2585,6 +2534,7 @@ items:
         raw: 0
       damage:
         base: 1d12
+        twoHanded: '0'
       fightingStyle: savage
       identifier: prehensile-savage-claw
       range:
@@ -2603,7 +2553,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.30
+      systemVersion: 0.12.36
     effects:
       - _id: 2CPWQZowBcI7kkZV
         _key: >-
@@ -2613,7 +2563,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         flags:
           teriock:
             category: support
@@ -2633,7 +2583,6 @@ items:
             slow:
               unit: shortRest
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -2669,7 +2618,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         flags:
           teriock:
             category: combat
@@ -2689,7 +2638,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -2762,7 +2710,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.30
+      systemVersion: 0.12.36
     effects:
       - _id: 3jZPi7VXyvPT6qYL
         _key: >-
@@ -2772,7 +2720,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/careful-planning.webp
         name: Careful Planning
         system:
@@ -2783,6 +2731,11 @@ items:
               relation: resistances
               type: protection
               value: Being Surprised (Inside Towns)
+            8f623097f9f2a087:
+              _id: 8f623097f9f2a087
+              bonus: '0'
+              hex: false
+              type: resist
           class: assassin
           competence:
             raw: 0
@@ -2797,7 +2750,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -2840,7 +2792,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/slay.webp
         name: Slay
         system:
@@ -2877,7 +2829,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -2918,7 +2869,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/weapons-mastery.webp
         name: Weapons Mastery
         system:
@@ -2940,7 +2891,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -2986,7 +2936,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/reactive-hide.webp
         name: Reactive Hide
         system:
@@ -3011,7 +2961,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -3074,7 +3023,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.30
+      systemVersion: 0.12.36
     effects:
       - _id: ywrkfZq03GguZtw1
         _key: >-
@@ -3084,7 +3033,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: icons/creatures/abilities/mouth-teeth-long-red.webp
         name: Biting
         system:
@@ -3106,7 +3055,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/properties/unblockable.webp
         name: Unblockable
         system:
@@ -3115,10 +3064,8 @@ items:
               _id: parameterChanges
               changes:
                 - key: system.piercing.raw
-                  phase: normal
                   priority: 10
-                  qualifier: '1'
-                  target: parent
+                  target: Item
                   type: upgrade
                   value: '2'
               type: changes
@@ -3138,7 +3085,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -3164,6 +3111,7 @@ items:
         raw: 0
       damage:
         base: 1d12
+        twoHanded: '0'
       fightingStyle: savage
       identifier: devouring-maw
       range:
@@ -3182,7 +3130,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.30
+      systemVersion: 0.12.36
     effects:
       - _id: pD4bPqJz3rVj2AE7
         _key: >-
@@ -3192,7 +3140,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/acrobatics.webp
         name: Acrobatics
         system:
@@ -3210,7 +3158,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -3247,7 +3194,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/hitman.webp
         name: Hitman
         system:
@@ -3293,7 +3240,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -3330,7 +3276,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/martial-arts.webp
         name: Martial Arts
         system:
@@ -3346,7 +3292,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -3380,7 +3325,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/climbing.webp
         name: Climbing
         system:
@@ -3394,9 +3339,7 @@ items:
               _id: e789ed5e109ebd1a
               changes:
                 - key: system.speedAdjustments.climb
-                  phase: normal
                   priority: 10
-                  qualifier: '1'
                   target: Actor
                   type: upgrade
                   value: '2'
@@ -3405,9 +3348,7 @@ items:
               _id: f025905e157ac261
               changes:
                 - key: system.speedAdjustments.climb
-                  phase: normal
                   priority: 10
-                  qualifier: '1'
                   target: Actor
                   type: upgrade
                   value: '3'
@@ -3428,7 +3369,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -3458,7 +3398,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/leaping.webp
         name: Leaping
         system:
@@ -3472,16 +3412,12 @@ items:
               _id: e789ed5e109ebd1a
               changes:
                 - key: system.speedAdjustments.leapVertical
-                  phase: normal
                   priority: 10
-                  qualifier: '1'
                   target: Actor
                   type: upgrade
                   value: '1'
                 - key: system.speedAdjustments.leapHorizontal
-                  phase: normal
                   priority: 10
-                  qualifier: '1'
                   target: Actor
                   type: upgrade
                   value: '2'
@@ -3490,16 +3426,12 @@ items:
               _id: f025905e157ac261
               changes:
                 - key: system.speedAdjustments.leapVertical
-                  phase: normal
                   priority: 10
-                  qualifier: '1'
                   target: Actor
                   type: upgrade
                   value: '2'
                 - key: system.speedAdjustments.leapHorizontal
-                  phase: normal
                   priority: 10
-                  qualifier: '1'
                   target: Actor
                   type: upgrade
                   value: '3'
@@ -3521,7 +3453,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -3558,7 +3489,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/hide.webp
         name: Hide
         system:
@@ -3594,7 +3525,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: snk
@@ -3652,50 +3582,42 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/defensive-martial-arts.webp
         name: Defensive Martial Arts
         system:
           _sup: thtFHPE7kvzyAdMF
           automations:
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
-              changes:
-                - key: system.bv.raw
-                  phase: normal
-                  priority: 10
-                  qualifier: '@prop.handy'
-                  target: body
-                  type: upgrade
-                  value: '1'
-              type: changes
-            f025905e157ac261:
-              _id: f025905e157ac261
-              changes:
-                - key: system.bv.raw
-                  phase: normal
-                  priority: 10
-                  qualifier: '@prop.handy'
-                  target: body
-                  type: upgrade
-                  value: '2'
+            F9NLbFodo8GgQLdh:
+              _id: F9NLbFodo8GgQLdh
+              category: armament
+              changeType: upgrade
+              competencies:
+                - 0
+              key: system.bv.bonus
+              qualifier: '@prop.handy'
+              type: childChange
+              value: '1'
+            iijE8Q6bC3GKvrTX:
+              _id: iijE8Q6bC3GKvrTX
+              category: armament
+              changeType: upgrade
               competencies:
                 - 1
-                - 2
-              type: changes
-            f7da3b5e1992a724:
-              _id: f7da3b5e1992a724
-              changes:
-                - key: system.bv.raw
-                  phase: normal
-                  priority: 10
-                  qualifier: '@prop.handy'
-                  target: body
-                  type: upgrade
-                  value: '3'
+              key: system.bv.bonus
+              qualifier: '@prop.handy'
+              type: childChange
+              value: '2'
+            pI8dAIbbmiCqE5n9:
+              _id: pI8dAIbbmiCqE5n9
+              category: armament
+              changeType: upgrade
               competencies:
                 - 2
-              type: changes
+              key: system.bv.bonus
+              qualifier: '@prop.handy'
+              type: childChange
+              value: '3'
           competence:
             raw: 0
           delivery: self
@@ -3707,7 +3629,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -3725,8 +3646,7 @@ items:
               (although they cannot be @L[Property:Shattered]{shattered} or
               @L[Property:Destroyed]{destroyed}). You may @L[Core:Block
               Interaction]{block} with them and their @L[Core:Block Value]{BV}
-              is +1.</p><div class="note"><b>Note:</b> This does not make your
-              hands @L[Property:Blocking]{blocking}.</div>
+              is +1.</p>
             fluent: <p>The @L[Core:Block Interaction]{BV} is now +3.</p>
             proficient: <p>The @L[Core:Block Interaction]{BV} is now +2.</p>
           piercing:
@@ -3749,50 +3669,45 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/offensive-martial-arts.webp
         name: Offensive Martial Arts
         system:
           _sup: thtFHPE7kvzyAdMF
           automations:
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
-              changes:
-                - key: system.damage.base.raw
-                  phase: normal
-                  priority: 10
-                  qualifier: '@prop.handy'
-                  target: body
-                  type: upgrade
-                  value: 1d4
-              type: changes
-            f025905e157ac261:
-              _id: f025905e157ac261
-              changes:
-                - key: system.damage.base.raw
-                  phase: normal
-                  priority: 10
-                  qualifier: '@prop.handy'
-                  target: body
-                  type: upgrade
-                  value: 1d6
+            xX7Z0MBjQuUVHdLg:
+              _id: xX7Z0MBjQuUVHdLg
+              category: armament
+              changeType: upgrade
+              competencies:
+                - 0
+              key: system.damage
+              priority: 10
+              qualifier: '@prop.handy'
+              type: childChange
+              value: 1d4
+            IlASfQucE28oO7eo:
+              _id: IlASfQucE28oO7eo
+              category: armament
+              changeType: upgrade
               competencies:
                 - 1
-                - 2
-              type: changes
-            f7da3b5e1992a724:
-              _id: f7da3b5e1992a724
-              changes:
-                - key: system.damage.base.raw
-                  phase: normal
-                  priority: 10
-                  qualifier: '@prop.handy'
-                  target: body
-                  type: upgrade
-                  value: 1d8
+              key: system.damage
+              priority: 10
+              qualifier: '@prop.handy'
+              type: childChange
+              value: 1d6
+            LNqxuNUNDqEtcbmb:
+              _id: LNqxuNUNDqEtcbmb
+              category: armament
+              changeType: upgrade
               competencies:
                 - 2
-              type: changes
+              key: system.damage
+              priority: 10
+              qualifier: '@prop.handy'
+              type: childChange
+              value: 1d8
             29b275994cf9f5b1:
               _id: 29b275994cf9f5b1
               formula: 1d4
@@ -3827,7 +3742,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -3900,7 +3814,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.30
+      systemVersion: 0.12.36
     effects:
       - _id: GuY5Z5Ne7TFP7tx6
         _key: >-
@@ -3910,7 +3824,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         flags:
           teriock:
             category: support
@@ -3923,9 +3837,7 @@ items:
               _id: e789ed5e109ebd1a
               changes:
                 - key: system.tradecrafts.innkeeper.score
-                  phase: normal
                   priority: 10
-                  qualifier: '1'
                   target: Actor
                   type: upgrade
                   value: '2'
@@ -3942,7 +3854,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -3984,7 +3895,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         flags:
           teriock:
             category: combat
@@ -4006,7 +3917,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -4044,7 +3954,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/active-bow-out.webp
         name: Active Bow Out
         system:
@@ -4071,7 +3981,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -4140,7 +4049,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.30
+      systemVersion: 0.12.36
     effects:
       - _id: EhvdlFzRoc0PdUuV
         _key: >-
@@ -4150,7 +4059,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/properties/dragon-scale.webp
         name: Dragon Scale
         system:
@@ -4159,10 +4068,8 @@ items:
               _id: parameterChanges
               changes:
                 - key: system.av.bonus
-                  phase: normal
                   priority: 10
-                  qualifier: '@av'
-                  target: parent
+                  target: Item
                   type: upgrade
                   value: '2'
               type: changes
@@ -4188,6 +4095,7 @@ items:
         raw: 0
       damage:
         base: '0'
+        twoHanded: '0'
       identifier: reinforced-dragon-scales
       range:
         long:
@@ -4205,7 +4113,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.30
+      systemVersion: 0.12.36
     effects:
       - _id: aY2uxfG131SHjtk7
         _key: >-
@@ -4215,7 +4123,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         flags:
           teriock:
             category: support
@@ -4240,7 +4148,6 @@ items:
             slow:
               unit: shortRest
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -4278,7 +4185,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         flags:
           teriock:
             category: combat
@@ -4323,7 +4230,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -4354,7 +4260,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/poison-strike.webp
         name: Poison Strike
         system:
@@ -4405,7 +4311,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -4445,7 +4350,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/poison-item.webp
         name: Poison Item
         system:
@@ -4494,7 +4399,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -4571,7 +4475,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.30
+      systemVersion: 0.12.36
     effects:
       - _id: TWk5AP5nzZgpXkaM
         _key: >-
@@ -4581,7 +4485,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -4604,7 +4508,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -4628,6 +4532,7 @@ items:
         raw: 0
       damage:
         base: '1'
+        twoHanded: '0'
       identifier: foot
       range:
         long:
@@ -4638,24 +4543,24 @@ items:
           unit: self
       vitals: false
     type: body
-  - _id: x9fRjBzjUsa9gdWd
-    _key: '!actors.items!e575cc2833903bfc.x9fRjBzjUsa9gdWd'
+  - _id: v2ojWxL1ZhVIX2bt
+    _key: '!actors.items!e575cc2833903bfc.v2ojWxL1ZhVIX2bt'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.57a3f724d5743aa3
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.30
+      systemVersion: 0.12.36
     effects:
       - _id: 4XNvcPLM4s2CAFYb
         _key: >-
-          !actors.items.effects!e575cc2833903bfc.x9fRjBzjUsa9gdWd.4XNvcPLM4s2CAFYb
+          !actors.items.effects!e575cc2833903bfc.v2ojWxL1ZhVIX2bt.4XNvcPLM4s2CAFYb
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.e72cfa283068ef0a
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/semi-techniques.webp
         name: Semi Techniques
         system:
@@ -4670,7 +4575,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov

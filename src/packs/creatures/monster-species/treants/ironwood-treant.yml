@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.30
+      systemVersion: 0.12.36
     effects:
       - _id: LIIdUrc5blFyp2QM
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/dark-vision.webp
         name: Dark Vision
         system:
@@ -34,9 +34,7 @@ items:
               _id: e789ed5e109ebd1a
               changes:
                 - key: system.senses.dark
-                  phase: normal
                   priority: 10
-                  qualifier: '1'
                   target: Actor
                   type: upgrade
                   value: '60'
@@ -54,7 +52,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -85,7 +82,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/improved-healing-factor.webp
         name: Improved Healing Factor
         system:
@@ -119,7 +116,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -153,7 +149,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/low-intelligence.webp
         name: Low Intelligence
         system:
@@ -168,7 +164,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -199,29 +194,27 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/monstrous-strength.webp
         name: Monstrous Strength
         system:
           automations:
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
-              changes:
-                - key: system.damage
-                  phase: normal
-                  priority: 100
-                  qualifier: and(@dmg, @range.melee)
-                  target: armament
-                  type: boost
-                  value: '1'
-                - key: system.piercing.raw
-                  phase: normal
-                  priority: 10
-                  qualifier: '@range.melee'
-                  target: armament
-                  type: add
-                  value: '1'
-              type: changes
+            dZdzGQfm90BHxkCn:
+              _id: dZdzGQfm90BHxkCn
+              category: armament
+              changeType: add
+              key: system.boosts.damage
+              qualifier: and(@dmg, @range.melee)
+              type: childChange
+              value: '1'
+            r4QAYN9B2RLw1glP:
+              _id: r4QAYN9B2RLw1glP
+              category: armament
+              changeType: upgrade
+              key: system.piercing.raw
+              qualifier: '@range.melee'
+              type: childChange
+              value: '1'
           competence:
             raw: 0
           delivery: self
@@ -233,7 +226,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -270,29 +262,19 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/natural-unbreachability.webp
         name: Natural Unbreachability
         system:
           automations:
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
-              changes:
-                - key: system.av.bonus
-                  phase: normal
-                  priority: 10
-                  qualifier: '@av'
-                  target: body
-                  type: upgrade
-                  value: '1'
-                - key: system.props
-                  phase: normal
-                  priority: 10
-                  qualifier: '@av'
-                  target: body
-                  type: add
-                  value: unbreachable
-              type: changes
+            sgVY1ePMa9tYFypk:
+              _id: sgVY1ePMa9tYFypk
+              category: armament
+              changeType: upgrade
+              key: system.av.bonus
+              qualifier: and(@body, @av)
+              type: childChange
+              value: '1'
           class: veteran
           competence:
             raw: 0
@@ -305,7 +287,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -338,7 +319,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
@@ -353,7 +334,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -384,7 +364,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
@@ -399,7 +379,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -430,7 +409,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/normal-sneak.webp
         name: Normal Sneak
         system:
@@ -445,7 +424,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -476,7 +454,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/partial-hands.webp
         name: Partial Hands
         system:
@@ -491,7 +469,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -522,7 +499,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/treeform-self.webp
         name: Treeform Self
         system:
@@ -574,7 +551,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -607,7 +583,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/supernatural-strength.webp
         name: Supernatural Strength
         system:
@@ -623,7 +599,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -661,7 +636,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/giant-strength.webp
         name: Giant Strength
         system:
@@ -678,7 +653,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -717,7 +691,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/improved-strength.webp
         name: Improved Strength
         system:
@@ -734,7 +708,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -771,7 +744,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/beastly-strength.webp
         name: Beastly Strength
         system:
@@ -788,7 +761,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -827,7 +799,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
         name: Improved Armor Piercing
         system:
@@ -844,7 +816,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -877,7 +848,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
         name: Melee Damage Boost
         system:
@@ -896,7 +867,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -938,7 +908,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/abilities/shattering-grip.webp
         name: Shattering Grip
         system:
@@ -968,7 +938,6 @@ items:
             slow:
               unit: second
           expansion:
-            featSaveAttribute: mov
             range:
               unit: self
           featSaveAttribute: mov
@@ -1035,7 +1004,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.30
+      systemVersion: 0.12.36
     effects:
       - _id: H7Q5z5528FgfgbLp
         _key: >-
@@ -1045,7 +1014,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -1068,7 +1037,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -1090,7 +1059,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/properties/prehensile.webp
         name: Prehensile
         system:
@@ -1112,7 +1081,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -1136,6 +1105,7 @@ items:
         raw: 0
       damage:
         base: '1'
+        twoHanded: '0'
       identifier: hand
       range:
         long:
@@ -1153,7 +1123,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.30
+      systemVersion: 0.12.36
     effects:
       - _id: TWk5AP5nzZgpXkaM
         _key: >-
@@ -1163,7 +1133,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -1186,7 +1156,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -1210,6 +1180,7 @@ items:
         raw: 0
       damage:
         base: '1'
+        twoHanded: '0'
       identifier: foot
       range:
         long:
@@ -1227,7 +1198,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.30
+      systemVersion: 0.12.36
     effects:
       - _id: vgYp2OlY2QgragN9
         _key: >-
@@ -1237,7 +1208,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -1259,7 +1230,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -1285,6 +1256,7 @@ items:
         raw: 0
       damage:
         base: 1d6
+        twoHanded: '0'
       fightingStyle: savage
       identifier: sharp-claw
       range:
@@ -1303,7 +1275,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.30
+      systemVersion: 0.12.36
     folder: 615ff873d830ae70
     img: systems/teriock/src/icons/body-parts/reinforced-bark.webp
     name: Reinforced Bark
@@ -1316,6 +1288,7 @@ items:
         raw: 0
       damage:
         base: '0'
+        twoHanded: '0'
       identifier: reinforced-bark
       range:
         long:
@@ -1333,7 +1306,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.30
+      systemVersion: 0.12.36
     effects:
       - _id: P2NBun61bqKdYpZP
         _key: >-
@@ -1343,7 +1316,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/properties/entangling.webp
         name: Entangling
         system:
@@ -1366,7 +1339,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -1388,7 +1361,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.30
+          systemVersion: 0.12.36
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -1414,6 +1387,7 @@ items:
         raw: 0
       damage:
         base: 1d6
+        twoHanded: '0'
       fightingStyle: wraparound
       identifier: grasping-vine
       range:

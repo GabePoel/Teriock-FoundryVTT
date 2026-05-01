@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.20
+      systemVersion: 0.12.36
     flags:
       teriock:
         category: support
@@ -30,7 +30,6 @@ effects:
         unit: unlimited
       executionTime: passive
       expansion:
-        featSaveAttribute: mov
         range:
           unit: self
       featSaveAttribute: mov
@@ -80,7 +79,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.30
+      systemVersion: 0.12.36
     flags:
       teriock:
         category: combat
@@ -117,7 +116,6 @@ effects:
         unit: instant
       executionTime: a1
       expansion:
-        featSaveAttribute: mov
         range:
           unit: self
       featSaveAttribute: mov
@@ -157,7 +155,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.30
+      systemVersion: 0.12.36
     flags:
       teriock:
         category: combat
@@ -165,6 +163,22 @@ effects:
     name: Final Fury
     system:
       automations:
+        Axozk1FdcJFFmu6r:
+          _id: Axozk1FdcJFFmu6r
+          category: armament
+          changeType: add
+          key: system.boosts.damage
+          qualifier: '@prop.weapon'
+          type: childChange
+          value: '1'
+        XAFvURmf8rUSddkm:
+          _id: XAFvURmf8rUSddkm
+          category: armament
+          changeType: upgrade
+          key: system.piercing.raw
+          qualifier: '@prop.weapon'
+          type: childChange
+          value: '2'
         5e9e1d2033fe152a:
           _id: 5e9e1d2033fe152a
           executor: false
@@ -178,20 +192,20 @@ effects:
       delivery: self
       duration:
         conditions:
-          absent:
-            - down
+          present:
+            - defyingDeath
         raw: '0'
         unit: unlimited
-      executionTime: passive
+      executionTime:
+        base: r0
       expansion:
-        featSaveAttribute: mov
         range:
           unit: self
       featSaveAttribute: mov
       form: normal
       identifier: final-fury
       interaction: manifest
-      maneuver: passive
+      maneuver: reactive
       overview:
         base: >-
           <p>While @L[Condition:Defying Death]{defying death}, your
@@ -210,6 +224,7 @@ effects:
       standard: true
       targets:
         - self
+      trigger: <p>You start @L[Condition:Defying Death]{defying death}.</p>
     transfer: true
     type: ability
   - _id: BpqCFcyosxmNw45i
@@ -219,7 +234,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.20
+      systemVersion: 0.12.36
     flags:
       teriock:
         category: support
@@ -235,7 +250,6 @@ effects:
         unit: unlimited
       executionTime: 10 Minutes
       expansion:
-        featSaveAttribute: mov
         range:
           unit: self
       featSaveAttribute: mov
@@ -281,7 +295,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.20
+      systemVersion: 0.12.36
     flags:
       teriock:
         category: support
@@ -300,7 +314,6 @@ effects:
         unit: unlimited
       executionTime: passive
       expansion:
-        featSaveAttribute: mov
         range:
           unit: self
       featSaveAttribute: mov
@@ -332,7 +345,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.30
+      systemVersion: 0.12.36
     flags:
       teriock:
         category: combat
@@ -376,7 +389,6 @@ effects:
       endCondition: <p>Your next @L[Core:Turns]{turn} ends.</p>
       executionTime: r1
       expansion:
-        featSaveAttribute: mov
         range:
           unit: self
       featSaveAttribute: mov

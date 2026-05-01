@@ -4,33 +4,26 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.20
+  systemVersion: 0.12.36
 img: systems/teriock/src/icons/abilities/spell-turning-items.webp
 name: Spell Turning Items
 system:
   automations:
-    e789ed5e109ebd1a:
-      _id: e789ed5e109ebd1a
-      changes:
-        - key: system.props
-          phase: normal
-          priority: 10
-          qualifier: >-
-            or(@class.objects, @class.knickknacks, @class.tools,
-            @class.containers, @class.clothing)
-          target: equipment
-          type: add
-          value: spellTurning
-        - key: system.spellTurning
-          phase: normal
-          priority: 10
-          qualifier: >-
-            or(@class.objects, @class.knickknacks, @class.tools,
-            @class.containers, @class.clothing)
-          target: equipment
-          type: override
-          value: 'true'
-      type: changes
+    JHHBRzxelVJVucCa:
+      _id: JHHBRzxelVJVucCa
+      category: armament
+      changeType: upgrade
+      key: system.spellTurning
+      qualifier: >-
+        or(@class.objects, @class.knickknacks, @class.tools, @class.containers,
+        @class.clothing)
+      type: childChange
+      value: 'true'
+    8f623097f9f2a087:
+      _id: 8f623097f9f2a087
+      bonus: '0'
+      hex: false
+      type: resist
   competence:
     raw: 0
   delivery: self
@@ -44,7 +37,6 @@ system:
     slow:
       unit: second
   expansion:
-    featSaveAttribute: mov
     range:
       unit: self
   featSaveAttribute: mov

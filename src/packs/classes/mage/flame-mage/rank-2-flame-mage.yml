@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.20
+      systemVersion: 0.12.36
     img: systems/teriock/src/icons/abilities/flame-elder-sorcery.webp
     name: Flame Elder Sorcery
     system:
@@ -26,7 +26,6 @@ effects:
         unit: unlimited
       executionTime: passive
       expansion:
-        featSaveAttribute: mov
         range:
           unit: self
       featSaveAttribute: mov
@@ -58,7 +57,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.30
+      systemVersion: 0.12.36
     img: systems/teriock/src/icons/abilities/flame-rotators.webp
     name: Flame Rotators
     system:
@@ -67,9 +66,7 @@ effects:
           _id: e789ed5e109ebd1a
           changes:
             - key: system.rotators.max
-              phase: normal
               priority: 10
-              qualifier: '1'
               target: Actor
               type: upgrade
               value: '@rank.mag - 1'
@@ -78,9 +75,7 @@ effects:
           _id: f025905e157ac261
           changes:
             - key: system.rotators.max
-              phase: normal
               priority: 10
-              qualifier: '1'
               target: Actor
               type: upgrade
               value: 2 * (@rank.mag - 1)
@@ -92,9 +87,7 @@ effects:
           _id: f7da3b5e1992a724
           changes:
             - key: system.{{{key}}}
-              phase: normal
               priority: 10
-              qualifier: '1'
               target: Actor
               type: upgrade
               value: 2 * (@rank.mag - 1) + @p
@@ -110,7 +103,6 @@ effects:
         unit: unlimited
       executionTime: passive
       expansion:
-        featSaveAttribute: mov
         range:
           unit: self
       featSaveAttribute: mov
@@ -163,7 +155,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.20
+      systemVersion: 0.12.36
     img: systems/teriock/src/icons/abilities/celestial-elder-sorcery-words.webp
     name: Celestial Elder Sorcery Words
     system:
@@ -180,7 +172,6 @@ effects:
         slow:
           unit: second
       expansion:
-        featSaveAttribute: mov
         range:
           unit: self
       featSaveAttribute: mov
@@ -302,7 +293,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.20
+      systemVersion: 0.12.36
     img: systems/teriock/src/icons/abilities/elder-sorcery-creation.webp
     name: Elder Sorcery Creation
     system:
@@ -338,7 +329,6 @@ effects:
         slow:
           unit: longRest
       expansion:
-        featSaveAttribute: mov
         range:
           unit: self
       featSaveAttribute: mov
@@ -387,7 +377,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.20
+      systemVersion: 0.12.36
     img: systems/teriock/src/icons/abilities/flame-elder-sorcery-words.webp
     name: Flame Elder Sorcery Words
     system:
@@ -407,7 +397,6 @@ effects:
         slow:
           unit: second
       expansion:
-        featSaveAttribute: mov
         range:
           unit: self
       featSaveAttribute: mov
@@ -469,7 +458,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.20
+      systemVersion: 0.12.36
     img: systems/teriock/src/icons/abilities/rupture-mark.webp
     name: Rupture Mark
     system:
@@ -498,7 +487,6 @@ effects:
         slow:
           unit: second
       expansion:
-        featSaveAttribute: mov
         range:
           unit: self
       featSaveAttribute: mov
@@ -532,29 +520,31 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.30
+      systemVersion: 0.12.36
     img: systems/teriock/src/icons/abilities/control-and-resist-fire.webp
     name: Control and Resist Fire
     system:
       _sup: cirogt3aILQXokIv
       automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.damage
-              phase: normal
-              priority: 30
-              qualifier: '@dmg'
-              target: armament
-              type: add
-              value: 1d4[fire magic]
-          type: changes
+        xcIT6RMeLEKOON09:
+          _id: xcIT6RMeLEKOON09
+          category: armament
+          changeType: add
+          key: system.damage
+          qualifier: '@dmg'
+          type: childChange
+          value: 1d4[fire magic]
         al3xVPNELugSBHWw:
           _id: al3xVPNELugSBHWw
           category: damageTypes
           relation: resistances
           type: protection
           value: fire
+        8f623097f9f2a087:
+          _id: 8f623097f9f2a087
+          bonus: '0'
+          hex: false
+          type: resist
         29b275994cf9f5b1:
           _id: 29b275994cf9f5b1
           formula: 1d4[fire magic]
@@ -587,7 +577,6 @@ effects:
         slow:
           unit: second
       expansion:
-        featSaveAttribute: mov
         range:
           unit: self
       featSaveAttribute: mov
@@ -623,7 +612,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.30
+      systemVersion: 0.12.36
     img: systems/teriock/src/icons/abilities/bellows.webp
     name: Bellows
     system:
@@ -634,30 +623,14 @@ effects:
           macro: Compendium.teriock.execution.Macro.cd1820f5e1a2f6fd
           trigger: executeSpell
           type: abilityMacro
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.boosts.damage
-              phase: normal
-              priority: 10
-              qualifier: '@spell'
-              target: ability
-              type: add
-              value: '1'
-          type: changes
-        e789ee5e109ebecd:
-          _id: e789ee5e109ebecd
-          changes:
-            - key: system.boosts.damage
-              phase: normal
-              priority: 10
-              qualifier: '@spell'
-              target: ability
-              type: add
-              value: '@h'
-          heighten:
-            - 1
-          type: changes
+        Y4tkQwce00WMBG20:
+          _id: Y4tkQwce00WMBG20
+          category: ability
+          changeType: add
+          key: system.boosts.damage
+          qualifier: '@spell'
+          type: childChange
+          value: 1 + @h
       class: flameMage
       competence:
         raw: 0
@@ -682,7 +655,6 @@ effects:
         slow:
           unit: second
       expansion:
-        featSaveAttribute: mov
         range:
           unit: self
       featSaveAttribute: mov
@@ -721,7 +693,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.20
+      systemVersion: 0.12.36
     img: systems/teriock/src/icons/abilities/melting-grasp.webp
     name: Melting Grasp
     system:
@@ -750,7 +722,6 @@ effects:
         slow:
           unit: second
       expansion:
-        featSaveAttribute: mov
         range:
           unit: self
       featSaveAttribute: mov
@@ -782,7 +753,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.30
+      systemVersion: 0.12.36
     img: systems/teriock/src/icons/abilities/crown-of-flame.webp
     name: Crown of Flame
     system:
@@ -792,23 +763,17 @@ effects:
           _id: e789ed5e109ebd1a
           changes:
             - key: token.light.dim
-              phase: normal
               priority: 3
-              qualifier: '1'
               target: Actor
               type: upgrade
               value: '0.01'
             - key: token.light.color
-              phase: normal
               priority: 3
-              qualifier: '1'
               target: Actor
               type: override
               value: '#E01B24'
             - key: token.light.animation.type
-              phase: normal
               priority: 3
-              qualifier: '1'
               target: Actor
               type: override
               value: sunburst
@@ -837,7 +802,6 @@ effects:
         slow:
           unit: second
       expansion:
-        featSaveAttribute: mov
         range:
           unit: self
       featSaveAttribute: mov
@@ -873,7 +837,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.30
+      systemVersion: 0.12.36
     img: systems/teriock/src/icons/abilities/burning-touch.webp
     name: Burning Touch
     system:
@@ -915,7 +879,6 @@ effects:
         slow:
           unit: second
       expansion:
-        featSaveAttribute: mov
         range:
           unit: self
       featSaveAttribute: mov
@@ -954,7 +917,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.30
+      systemVersion: 0.12.36
     img: systems/teriock/src/icons/abilities/inferno-aura.webp
     name: Inferno Aura
     system:
@@ -1021,7 +984,6 @@ effects:
         slow:
           unit: second
       expansion:
-        featSaveAttribute: mov
         range:
           unit: self
       featSaveAttribute: mov

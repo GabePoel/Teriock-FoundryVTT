@@ -4,22 +4,19 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.20
+  systemVersion: 0.12.36
 img: systems/teriock/src/icons/abilities/vine-body.webp
 name: Vine Body
 system:
   automations:
-    e789ed5e109ebd1a:
-      _id: e789ed5e109ebd1a
-      changes:
-        - key: system.damage
-          phase: normal
-          priority: 30
-          qualifier: '@dmg'
-          target: body
-          type: add
-          value: 1d4[vine magic]
-      type: changes
+    WT8nDv2jwIldjtKB:
+      _id: WT8nDv2jwIldjtKB
+      category: armament
+      changeType: add
+      key: system.damage
+      qualifier: and(@body, @dmg)
+      type: childChange
+      value: 1d4[vine magic]
     29b275994cf9f5b1:
       _id: 29b275994cf9f5b1
       formula: 1d4[vine magic]
@@ -37,7 +34,6 @@ system:
     slow:
       unit: second
   expansion:
-    featSaveAttribute: mov
     range:
       unit: self
   featSaveAttribute: mov

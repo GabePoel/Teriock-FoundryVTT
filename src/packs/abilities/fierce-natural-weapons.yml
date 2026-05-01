@@ -4,43 +4,28 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.20
+  systemVersion: 0.12.36
 img: systems/teriock/src/icons/abilities/fierce-natural-weapons.webp
 name: Fierce Natural Weapons
 system:
   automations:
-    e789ed5e109ebd1a:
-      _id: e789ed5e109ebd1a
-      changes:
-        - key: system.damage.base.raw
-          phase: normal
-          priority: 10
-          qualifier: '@prop.weapon'
-          target: body
-          type: upgrade
-          value: 1d12
-        - key: system.damage.base.raw
-          phase: normal
-          priority: 10
-          qualifier: '@prop.bashing'
-          target: body
-          type: upgrade
-          value: 1d12
-        - key: system.piercing.raw
-          phase: normal
-          priority: 10
-          qualifier: '@prop.weapon'
-          target: body
-          type: upgrade
-          value: '2'
-        - key: system.piercing.raw
-          phase: normal
-          priority: 10
-          qualifier: '@prop.bashing'
-          target: body
-          type: upgrade
-          value: '2'
-      type: changes
+    XCWde1Lx0ehpzRKh:
+      _id: XCWde1Lx0ehpzRKh
+      category: armament
+      changeType: upgrade
+      key: system.piercing.raw
+      qualifier: and(@body, or(@prop.weapon, @prop.bashing))
+      type: childChange
+      value: '1'
+    jX959N9txu8neIUV:
+      _id: jX959N9txu8neIUV
+      category: armament
+      changeType: upgrade
+      key: system.damage
+      priority: 10
+      qualifier: and(@body, or(@prop.weapon, @prop.bashing))
+      type: childChange
+      value: 1d12
     29b275994cf9f5b1:
       _id: 29b275994cf9f5b1
       formula: 1d12
@@ -58,7 +43,6 @@ system:
     slow:
       unit: second
   expansion:
-    featSaveAttribute: mov
     range:
       unit: self
   featSaveAttribute: mov

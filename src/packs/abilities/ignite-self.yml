@@ -4,27 +4,25 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.20
+  systemVersion: 0.12.36
 img: systems/teriock/src/icons/abilities/ignite-self.webp
 name: Ignite Self
 system:
   automations:
-    e789ed5e109ebd1a:
-      _id: e789ed5e109ebd1a
-      changes:
-        - key: system.damage.base.raw
-          phase: normal
-          priority: 30
-          qualifier: '@dmg'
-          target: equipment
-          type: add
-          value: 1d4[fire]
-      type: changes
+    3lQebubTXmBzorqW:
+      _id: 3lQebubTXmBzorqW
+      category: armament
+      changeType: add
+      key: system.damage
+      qualifier: '@dmg'
+      type: childChange
+      value: 1d4[fire]
     29b275994cf9f5b1:
       _id: 29b275994cf9f5b1
       formula: 1d4[fire]
       impact: damage
       merge: true
+      trigger: turnStart
       type: roll
     b48fe6066c4cf8f1:
       _id: b48fe6066c4cf8f1
@@ -46,7 +44,6 @@ system:
     slow:
       unit: second
   expansion:
-    featSaveAttribute: mov
     range:
       unit: self
   featSaveAttribute: mov

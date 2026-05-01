@@ -79,7 +79,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.30
+      systemVersion: 0.12.36
     img: systems/teriock/src/icons/abilities/fire-ball.webp
     name: Fire Ball
     system:
@@ -111,7 +111,6 @@ effects:
         - flame
       executionTime: a1
       expansion:
-        featSaveAttribute: mov
         range:
           unit: self
       featSaveAttribute: mov
@@ -152,7 +151,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.30
+      systemVersion: 0.12.36
     img: systems/teriock/src/icons/abilities/ice-ball.webp
     name: Ice Ball
     system:
@@ -218,7 +217,6 @@ effects:
         2d4]]. If either of these dice roll a 4, this effect ends.</p>
       executionTime: a1
       expansion:
-        featSaveAttribute: mov
         range:
           unit: self
       featSaveAttribute: mov
@@ -255,29 +253,24 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.30
+      systemVersion: 0.12.36
     img: systems/teriock/src/icons/abilities/spell-turning-weapons.webp
     name: Spell Turning Weapons
     system:
       automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.props
-              phase: normal
-              priority: 10
-              qualifier: '@prop.weapon'
-              target: equipment
-              type: add
-              value: spellTurning
-            - key: system.spellTurning
-              phase: normal
-              priority: 10
-              qualifier: '@prop.weapon'
-              target: equipment
-              type: override
-              value: 'true'
-          type: changes
+        BQohDqBprjA3UVR3:
+          _id: BQohDqBprjA3UVR3
+          category: armament
+          changeType: upgrade
+          key: system.spellTurning
+          qualifier: '@prop.weapon'
+          type: childChange
+          value: 'true'
+        8f623097f9f2a087:
+          _id: 8f623097f9f2a087
+          bonus: '0'
+          hex: false
+          type: resist
       class: ranger
       competence:
         raw: 0
@@ -289,7 +282,6 @@ effects:
         - resistance
       executionTime: passive
       expansion:
-        featSaveAttribute: mov
         range:
           unit: self
       featSaveAttribute: mov

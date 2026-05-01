@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.30
+      systemVersion: 0.12.36
     img: systems/teriock/src/icons/abilities/might-strike.webp
     name: Might Strike
     system:
@@ -53,7 +53,6 @@ effects:
         unit: unlimited
       executionTime: 10 Minutes
       expansion:
-        featSaveAttribute: mov
         range:
           unit: self
       featSaveAttribute: mov
@@ -78,6 +77,10 @@ effects:
           Domain</caption><tbody><tr><th>Domain</th><th><a class="mw-selflink
           selflink">Might Strike</a> Damage
           Type</th></tr><tr><td>Celestial</td><td>@L[Damage:Silver]{Silver}</td></tr><tr><td>Crafting</td><td>@L[Damage:Fire]{Fire}</td></tr><tr><td>Death</td><td>@L[Damage:Terror]{Terror}</td></tr><tr><td>Destruction</td><td>@L[Damage:Fire]{Fire}</td></tr><tr><td>Fortune</td><td>@L[Damage:Ice]{Ice}</td></tr><tr><td>Healing</td><td>@L[Damage:Terror]{Terror}</td></tr><tr><td>Hearth</td><td>@L[Damage:Fire]{Fire}</td></tr><tr><td>Knowledge</td><td>@L[Damage:Psychic]{Psychic}</td></tr><tr><td>Nature</td><td>@L[Damage:Vine]{Vine}</td></tr><tr><td>Spirit</td><td>@L[Damage:Spiritual]{Spiritual}</td></tr><tr><td>Trickster</td><td>@L[Damage:Vine]{Vine}</td></tr><tr><td>Value</td><td>@L[Damage:Financial]{Financial}</td></tr><tr><td>Weather</td><td>@L[Damage:Ice]{Ice}</td></tr></tbody></table>
+        fluent: >-
+          <p>This also makes attacks with the chosen @L[Category:Weapon
+          classes]{weapon class} @L[Property:AV0]{AV0} and
+          @L[Keyword:Boosted]{boosted}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -118,29 +121,24 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.30
+      systemVersion: 0.12.36
     img: systems/teriock/src/icons/abilities/spell-turning-shields.webp
     name: Spell Turning Shields
     system:
       automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: system.props
-              phase: normal
-              priority: 10
-              qualifier: '@class.shields'
-              target: equipment
-              type: add
-              value: spellTurning
-            - key: system.spellTurning
-              phase: normal
-              priority: 10
-              qualifier: '@class.shields'
-              target: equipment
-              type: override
-              value: 'true'
-          type: changes
+        rQSMybAzb9Aw6w5O:
+          _id: rQSMybAzb9Aw6w5O
+          category: armament
+          changeType: upgrade
+          key: system.spellTurning
+          qualifier: '@class.shields'
+          type: childChange
+          value: 'true'
+        8f623097f9f2a087:
+          _id: 8f623097f9f2a087
+          bonus: '0'
+          hex: false
+          type: resist
       class: paladin
       competence:
         raw: 0
@@ -152,7 +150,6 @@ effects:
         - resistance
       executionTime: passive
       expansion:
-        featSaveAttribute: mov
         range:
           unit: self
       featSaveAttribute: mov
