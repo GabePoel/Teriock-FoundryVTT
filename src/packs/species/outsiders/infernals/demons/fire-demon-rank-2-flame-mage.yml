@@ -62,7 +62,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.36
+      systemVersion: 0.12.37
     img: systems/teriock/src/icons/abilities/flame-rotators.webp
     name: Flame Rotators
     system:
@@ -529,7 +529,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.36
+      systemVersion: 0.12.37
     img: systems/teriock/src/icons/abilities/control-and-resist-fire.webp
     name: Control and Resist Fire
     system:
@@ -537,10 +537,10 @@ effects:
       automations:
         xcIT6RMeLEKOON09:
           _id: xcIT6RMeLEKOON09
-          category: armament
           changeType: add
           key: system.damage
           qualifier: '@dmg'
+          target: armament
           type: childChange
           value: 1d4[fire magic]
         al3xVPNELugSBHWw:
@@ -621,7 +621,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.36
+      systemVersion: 0.12.37
     img: systems/teriock/src/icons/abilities/bellows.webp
     name: Bellows
     system:
@@ -634,10 +634,10 @@ effects:
           type: abilityMacro
         Y4tkQwce00WMBG20:
           _id: Y4tkQwce00WMBG20
-          category: ability
           changeType: add
           key: system.boosts.damage
           qualifier: '@spell'
+          target: ability
           type: childChange
           value: 1 + @h
       class: flameMage
@@ -762,7 +762,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.36
+      systemVersion: 0.12.37
     img: systems/teriock/src/icons/abilities/crown-of-flame.webp
     name: Crown of Flame
     system:
@@ -846,7 +846,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.36
+      systemVersion: 0.12.37
     img: systems/teriock/src/icons/abilities/burning-touch.webp
     name: Burning Touch
     system:
@@ -926,7 +926,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.36
+      systemVersion: 0.12.37
     img: systems/teriock/src/icons/abilities/inferno-aura.webp
     name: Inferno Aura
     system:
@@ -939,13 +939,14 @@ effects:
           automatic: true
           data: '{}'
           deleteOnTurnChange: true
+          excludeToken: true
           expandWithToken: true
           innerWidth: '0'
           multi: false
           outerWidth: '0'
           overrideData: false
           qualifier: '0'
-          regionType: circle
+          regionType: emanation
           restriction:
             enabled: false
             priority: 0
