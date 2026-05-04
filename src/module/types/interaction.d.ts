@@ -102,9 +102,9 @@ declare global {
         uuid?: UUID<ChildDocument>;
       };
 
-    export type ButtonCustomization = {
-      icon?: string;
-      label?: string;
+    export type TakeHarmOptions = {
+      /** Make the non-temporary impact morganti */
+      morganti?: boolean;
     };
   }
 }

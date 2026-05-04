@@ -439,23 +439,13 @@ export default class TeriockActor extends mix(
    * Prepare condition information now that all virtual statuses have been applied.
    */
   cleanConditionInformation() {
-    if (
-      this.system.conditionInformation.hacked.reasons.has(
-        _loc("TERIOCK.STATUSES.Hacks.armHack2"),
-      )
-    ) {
-      this.system.conditionInformation.hacked.reasons.delete(
-        _loc("TERIOCK.STATUSES.Hacks.armHack1"),
-      );
-    }
-    if (
-      this.system.conditionInformation.hacked.reasons.has(
-        _loc("TERIOCK.STATUSES.Hacks.legHack2"),
-      )
-    ) {
-      this.system.conditionInformation.hacked.reasons.delete(
-        _loc("TERIOCK.STATUSES.Hacks.legHack1"),
-      );
+    for (const part of ["arm", "leg"]) {
+      const str = `TERIOCK.STATUSES.Hacks.${part}Hack`;
+      if (
+        this.system.conditionInformation.hacked.reasons.has(_loc(`${str}2`))
+      ) {
+        this.system.conditionInformation.hacked.reasons.delete(_loc(`${str}1`));
+      }
     }
     for (const info of Object.values(this.system.conditionInformation)) {
       if (info.reasons.size > 0) info.locked = true;
@@ -474,7 +464,7 @@ export default class TeriockActor extends mix(
 
   /** @inheritDoc */
   async getTokenDocument(data = {}, options = {}) {
-    data.shape ??= 0;
+    if (game.canvas.scene.grid.type === 0) data.shape ??= 0;
     return super.getTokenDocument(data, options);
   }
 

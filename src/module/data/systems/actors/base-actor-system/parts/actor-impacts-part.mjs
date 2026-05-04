@@ -22,8 +22,7 @@ export default (Base) => {
        *
        * @param {number} amount
        * @param {Teriock.Keys.DieStat} stat - The stat to apply the harm to.
-       * @param {object} [options]
-       * @param {boolean} [options.morganti] - Make the non-temporary harm morganti.
+       * @param {Teriock.Interaction.TakeHarmOptions} [options]
        * @returns {Promise<void>}
        */
       async #takeHarm(amount, stat, options = {}) {
@@ -93,7 +92,7 @@ export default (Base) => {
                   ? Number(value)
                   : null;
               if (entry.morganti) {
-                morganti = button.form.elements.namedItem("morganti").value;
+                morganti = button.form.elements.namedItem("morganti")?.checked;
               }
               await entry.apply(this.parent, amount, { morganti });
             },
@@ -113,8 +112,7 @@ export default (Base) => {
        * - [Morganti Damage](https://wiki.teriock.com/index.php/Damage:Morganti)
        *
        * @param {number} amount - The amount of damage to apply.
-       * @param {object} [options]
-       * @param {boolean} [options.morganti] - Make the non-temporary damage morganti.
+       * @param {Teriock.Interaction.TakeHarmOptions} [options]
        * @returns {Promise<void>}
        */
       async takeDamage(amount, options = {}) {
@@ -130,8 +128,7 @@ export default (Base) => {
        * - [Morganti Drain](https://wiki.teriock.com/index.php/Damage:Morganti)
        *
        * @param {number} amount - The amount of drain to apply.
-       * @param {object} [options]
-       * @param {boolean} [options.morganti] - Make the non-temporary drain morganti.
+       * @param {Teriock.Interaction.TakeHarmOptions} [options]
        * @returns {Promise<void>}
        */
       async takeDrain(amount, options = {}) {
