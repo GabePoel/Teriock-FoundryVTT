@@ -1,8 +1,8 @@
 import { preLocalize } from "../../helpers/localization.mjs";
 import { objectMap } from "../../helpers/utils.mjs";
-import { impactConfig } from "../config/impact-config.mjs";
+import { impactConfig } from "./impact-config.mjs";
 
-const triggers = {
+const triggerConfig = {
   activity: {
     label: "TERIOCK.TRIGGERS.Activity.label",
     choices: {
@@ -94,16 +94,16 @@ const triggers = {
   },
 };
 
-preLocalize("system.triggers", { keys: ["label"] });
-preLocalize("system.triggers.activity.choices");
-preLocalize("system.triggers.attunable.choices");
-preLocalize("system.triggers.combat.choices");
-preLocalize("system.triggers.consequence.choices");
-preLocalize("system.triggers.equipment.choices");
-preLocalize("system.triggers.execution.choices");
-preLocalize("system.triggers.impact.choices");
-preLocalize("system.triggers.mount.choices");
-preLocalize("system.triggers.protection.choices");
-preLocalize("system.triggers.time.choices");
+preLocalize("config.trigger", { keys: ["label"] });
+preLocalize("config.trigger.activity.choices");
+preLocalize("config.trigger.attunable.choices");
+preLocalize("config.trigger.combat.choices");
+preLocalize("config.trigger.consequence.choices");
+preLocalize("config.trigger.equipment.choices");
+preLocalize("config.trigger.execution.choices");
+preLocalize("config.trigger.impact.choices");
+preLocalize("config.trigger.mount.choices");
+preLocalize("config.trigger.protection.choices");
+preLocalize("config.trigger.time.choices");
 
-export default triggers;
+export default triggerConfig;

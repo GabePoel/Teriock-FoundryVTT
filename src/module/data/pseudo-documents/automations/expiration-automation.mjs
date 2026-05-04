@@ -1,4 +1,3 @@
-import { triggers } from "../../../constants/system/_module.mjs";
 import { formatDynamicSelectOptions } from "../../../helpers/utils.mjs";
 import * as builders from "../../fields/helpers/builders.mjs";
 import { conditionRequirementsField } from "../../fields/helpers/builders.mjs";
@@ -36,12 +35,12 @@ export default class ExpirationAutomation extends CritAutomation {
   static get _triggerChoices() {
     return formatDynamicSelectOptions(
       {
-        activity: triggers.activity,
-        combat: triggers.combat,
-        consequence: triggers.consequence,
-        execution: triggers.execution,
-        impact: triggers.impact,
-        time: triggers.time,
+        activity: TERIOCK.config.trigger.activity,
+        combat: TERIOCK.config.trigger.combat,
+        consequence: TERIOCK.config.trigger.consequence,
+        execution: TERIOCK.config.trigger.execution,
+        impact: TERIOCK.config.trigger.impact,
+        time: TERIOCK.config.trigger.time,
       },
       { localize: true },
     );

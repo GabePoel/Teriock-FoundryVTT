@@ -39,7 +39,6 @@ export default (Base) => {
         const childTypes = new Set([
           ...this.document.metadata.childEffectTypes,
           ...this.document.metadata.childItemTypes,
-          ...this.document.metadata.childMacroTypes,
         ]);
         return (
           this.document.isOwner &&

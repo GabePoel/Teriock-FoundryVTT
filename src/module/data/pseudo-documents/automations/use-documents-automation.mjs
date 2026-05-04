@@ -1,4 +1,3 @@
-import { triggers } from "../../../constants/system/_module.mjs";
 import { mix } from "../../../helpers/construction.mjs";
 import { resolveDocument } from "../../../helpers/resolve.mjs";
 import {
@@ -52,7 +51,7 @@ export default class UseDocumentsAutomation extends mix(
   /** @inheritDoc */
   static get _triggerChoices() {
     return {
-      execution: triggers.execution,
+      execution: TERIOCK.config.trigger.execution,
     };
   }
 

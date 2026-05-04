@@ -1,4 +1,4 @@
-import { triggers } from "../constants/system/_module.mjs";
+import { default as tc } from "../constants/config/trigger-config.mjs";
 import type BaseExecution from "../executions/base-execution/base-execution.mjs";
 import {
   AbilityExecution,
@@ -14,6 +14,8 @@ declare global {
        * database call. May cause odd results.
        */
       allowDuplicateSubs?: boolean;
+      /** Forward this to a GM query which handles the creation instead of the local client. */
+      asGM?: boolean;
       /**
        * Since {@link HierarchyDocument._preCreateOperation} manipulates the default `keepId` value in creation
        * operations, subsequent operations using the same operation object can get messed up. This allows us to
@@ -26,16 +28,16 @@ declare global {
       keepSubIds?: boolean;
     };
 
-    export type ActivityTrigger = keyof typeof triggers.activity.choices;
-    export type AttunableTrigger = keyof typeof triggers.attunable.choices;
-    export type CombatTrigger = keyof typeof triggers.combat.choices;
-    export type ConsequenceTrigger = keyof typeof triggers.consequence.choices;
-    export type EquipmentTrigger = keyof typeof triggers.equipment.choices;
-    export type ExecutionTrigger = keyof typeof triggers.execution.choices;
-    export type ImpactTrigger = keyof typeof triggers.impact.choices;
-    export type MountTrigger = keyof typeof triggers.mount.choices;
-    export type ProtectionTrigger = keyof typeof triggers.protection.choices;
-    export type TimeTrigger = keyof typeof triggers.time.choices;
+    export type ActivityTrigger = keyof typeof tc.activity.choices;
+    export type AttunableTrigger = keyof typeof tc.attunable.choices;
+    export type CombatTrigger = keyof typeof tc.combat.choices;
+    export type ConsequenceTrigger = keyof typeof tc.consequence.choices;
+    export type EquipmentTrigger = keyof typeof tc.equipment.choices;
+    export type ExecutionTrigger = keyof typeof tc.execution.choices;
+    export type ImpactTrigger = keyof typeof tc.impact.choices;
+    export type MountTrigger = keyof typeof tc.mount.choices;
+    export type ProtectionTrigger = keyof typeof tc.protection.choices;
+    export type TimeTrigger = keyof typeof tc.time.choices;
     export type Trigger =
       | ActivityTrigger
       | AttunableTrigger

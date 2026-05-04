@@ -33,7 +33,7 @@ export default function registerTimeManagementHooks() {
     },
   );
 
-  for (const trigger of Object.keys(TERIOCK.system.triggers.time.choices)) {
+  for (const trigger of Object.keys(TERIOCK.config.trigger.time.choices)) {
     foundry.helpers.Hooks.on(`teriock.force${ucFirst(trigger)}`, async () => {
       for (const actor of game.actors.visible) {
         if (game.user.id === actor.defaultUser.id) {

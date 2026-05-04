@@ -220,6 +220,9 @@ foundry.helpers.Hooks.once("init", function () {
       documentClass: documents.TeriockMacro,
       collection: documents.collections.TeriockMacros,
     },
+    Region: {
+      documentClass: documents.TeriockRegionDocument,
+    },
     RollTable: {
       documentClass: documents.TeriockRollTable,
       collection: documents.collections.TeriockRollTables,

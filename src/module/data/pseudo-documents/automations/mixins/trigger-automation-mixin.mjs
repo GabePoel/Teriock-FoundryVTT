@@ -1,4 +1,3 @@
-import { triggers } from "../../../../constants/system/_module.mjs";
 import { formatDynamicSelectOptions } from "../../../../helpers/utils.mjs";
 import { conditionRequirementsField } from "../../../fields/helpers/builders.mjs";
 import { migrateValue } from "../../../shared/migrations/source-migrations.mjs";
@@ -57,13 +56,13 @@ export default function TriggerAutomationMixin(Base) {
        */
       static get _triggerChoices() {
         return {
-          activity: triggers.activity,
-          combat: triggers.combat,
-          consequence: triggers.consequence,
-          execution: triggers.execution,
-          impact: triggers.impact,
-          protection: triggers.protection,
-          time: triggers.time,
+          activity: TERIOCK.config.trigger.activity,
+          combat: TERIOCK.config.trigger.combat,
+          consequence: TERIOCK.config.trigger.consequence,
+          execution: TERIOCK.config.trigger.execution,
+          impact: TERIOCK.config.trigger.impact,
+          protection: TERIOCK.config.trigger.protection,
+          time: TERIOCK.config.trigger.time,
         };
       }
 
@@ -172,7 +171,9 @@ export default function TriggerAutomationMixin(Base) {
        * @return {boolean}
        */
       _isActiveTrigger(trigger) {
-        return Object.keys(triggers.execution.choices).includes(trigger);
+        return Object.keys(TERIOCK.config.trigger.execution.choices).includes(
+          trigger,
+        );
       }
 
       /**

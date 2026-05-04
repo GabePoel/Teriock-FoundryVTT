@@ -30,6 +30,29 @@ export default function BaseDocumentMixin(Base) {
       }
 
       /**
+       * @param {object[]} data
+       * @param {Partial<Omit<DatabaseCreateOperation, "data"> & { asGM: boolean }>} operation
+       * @inheritDoc
+       */
+      static async createDocuments(data = [], operation = {}) {
+        if (operation.asGM) {
+          delete operation.asGM;
+          if (operation.parent) {
+            operation.parentUuid = operation.parent.uuid;
+            delete operation.parent;
+          }
+          const docs = await game.users.queryGM("teriock.createDocuments", {
+            data,
+            documentName: this.implementation.documentName,
+            operation,
+          });
+          // If no GM is signed in, the query won't give us an array. Make a null array instead.
+          if (!docs) return data.map((_d) => null);
+          return Promise.all(docs.map((d) => fromUuid(d)));
+        } else return super.createDocuments(data, operation);
+      }
+
+      /**
        * Prefix to use in {@link _benchmarkStart} and {@link _benchmarkEnd}.
        * @returns {string}
        */

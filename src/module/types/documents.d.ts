@@ -31,6 +31,7 @@ import {
   TeriockJournalEntryCategory,
   TeriockJournalEntryPage,
   TeriockMacro,
+  TeriockRegionDocument,
   TeriockScene,
   TeriockTokenDocument,
   TeriockUser,
@@ -70,16 +71,17 @@ import { HarmSystem } from "../data/systems/pages/_module.mjs";
 // =====================
 
 declare global {
+  const TeriockActiveEffect: TeriockActiveEffect;
   const TeriockActor: TeriockActor;
   const TeriockChatMessage: TeriockChatMessage;
   const TeriockCombat: TeriockCombat;
-  const TeriockActiveEffect: TeriockActiveEffect;
   const TeriockFolder: TeriockFolder;
   const TeriockItem: TeriockItem;
   const TeriockJournalEntry: TeriockJournalEntry;
   const TeriockJournalEntryCategory: TeriockJournalEntryCategory;
   const TeriockJournalEntryPage: TeriockJournalEntryPage;
   const TeriockMacro: TeriockMacro;
+  const TeriockRegionDocument: TeriockRegionDocument;
   const TeriockScene: TeriockScene;
   const TeriockTokenDocument: TeriockTokenDocument;
   const TeriockUser: TeriockUser;

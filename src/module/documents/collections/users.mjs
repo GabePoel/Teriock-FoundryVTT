@@ -21,10 +21,10 @@ export default class TeriockUsers extends BaseWorldCollectionMixin(Users) {
    * Helper function to send a query to the active GM if there is one.
    * @param {Teriock.QueryData.QueryName} queryName
    * @param {object} queryData
-   * @param {Teriock.QueryData.QueryOptions} [queryOptions]
+   * @param {Partial<Teriock.QueryData.QueryOptions>} [queryOptions]
    * @returns {Promise<any>}
    */
-  async queryGM(queryName, queryData, queryOptions) {
+  async queryGM(queryName, queryData, queryOptions = {}) {
     let {
       notifyFailure = true,
       failPrefix = _loc("TERIOCK.SYSTEMS.User.QUERY.failPrefix"),

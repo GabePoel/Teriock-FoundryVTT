@@ -1,4 +1,3 @@
-import { documentTypes } from "../../constants/system/document-types.mjs";
 import {
   migrateUuid,
   migrateValueTransform,
@@ -30,7 +29,7 @@ export default class TeriockActiveEffect extends mix(
   /** @inheritDoc */
   static get documentMetadata() {
     return Object.assign(super.documentMetadata, {
-      types: Object.keys(documentTypes.effects),
+      types: Object.keys(CONFIG.ActiveEffect.dataModels),
     });
   }
 

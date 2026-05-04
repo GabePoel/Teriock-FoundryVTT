@@ -28,9 +28,7 @@ export default async function hotbarDropDialog(doc) {
         action: "linked",
         callback: () => "linked",
         icon: makeIconClass(TERIOCK.display.icons.ui.linked),
-        label: _loc(
-          `TERIOCK.DIALOGS.HotbarDrop.BUTTONS.${doc.actor ? "actor" : "linked"}`,
-        ),
+        label: _loc(`TERIOCK.DIALOGS.HotbarDrop.BUTTONS.linked`),
       },
     ],
     content: content,

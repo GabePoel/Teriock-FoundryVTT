@@ -1,4 +1,3 @@
-import { documentTypes } from "../../constants/system/document-types.mjs";
 import { mix } from "../../helpers/construction.mjs";
 import * as mixins from "../mixins/_module.mjs";
 
@@ -27,7 +26,7 @@ export default class TeriockItem extends mix(
   /** @inheritDoc */
   static get documentMetadata() {
     return Object.assign(super.documentMetadata, {
-      types: Object.keys(documentTypes.items),
+      types: Object.keys(CONFIG.Item.dataModels),
     });
   }
 

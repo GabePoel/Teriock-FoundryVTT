@@ -17,12 +17,12 @@ declare global {
 
   const _loc: (stringId: string, data?: object) => string;
 
-  /** FoundryVTT UUID */
+  /** Foundry VTT UUID */
   type UUID<T = unknown> = string & {
     [__brand]: T;
   };
 
-  /** FoundryVTT ID */
+  /** Foundry VTT ID */
   type ID<T = unknown> = string & {
     [__brand]: T;
   };

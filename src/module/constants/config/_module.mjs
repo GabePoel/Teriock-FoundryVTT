@@ -25,6 +25,7 @@ import { scalingConfig } from "./scaling-config.mjs";
 import { targetConfig } from "./target-config.mjs";
 import { tradecraftConfig } from "./tradecraft-config.mjs";
 import { transformationConfig } from "./transformation-config.mjs";
+import { default as trigger } from "./trigger-config.mjs";
 import { wikiConfig } from "./wiki-config.mjs";
 
 const config = {
@@ -55,6 +56,7 @@ const config = {
   target: targetConfig,
   tradecraft: tradecraftConfig,
   transformation: transformationConfig,
+  trigger,
   wiki: wikiConfig,
 };
 

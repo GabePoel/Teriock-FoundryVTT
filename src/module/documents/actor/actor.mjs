@@ -1,5 +1,4 @@
 import { config } from "../../constants/_module.mjs";
-import { documentTypes } from "../../constants/system/_module.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
 import { mix } from "../../helpers/construction.mjs";
 import { resolveDocument } from "../../helpers/resolve.mjs";
@@ -31,7 +30,7 @@ export default class TeriockActor extends mix(
   /** @inheritDoc */
   static get documentMetadata() {
     return Object.assign(super.documentMetadata, {
-      types: Object.keys(documentTypes.actors),
+      types: Object.keys(CONFIG.Actor.dataModels),
     });
   }
 
@@ -471,6 +470,12 @@ export default class TeriockActor extends mix(
     const abilities = await this.allAbilities();
     children.push(...abilities);
     return children;
+  }
+
+  /** @inheritDoc */
+  async getTokenDocument(data = {}, options = {}) {
+    data.shape ??= 0;
+    return super.getTokenDocument(data, options);
   }
 
   /**

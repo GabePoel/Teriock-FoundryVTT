@@ -4,7 +4,7 @@ import { icons } from "../display/icons.mjs";
 
 /**
  * Options that describe document types.
- * @enum {Partial<Teriock.Config.DocumentEntry>}
+ * @satisfies {Record<string, Partial<Teriock.Config.DocumentEntry>>}
  */
 export const documentConfig = {
   ability: {

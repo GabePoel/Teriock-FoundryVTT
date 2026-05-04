@@ -2,7 +2,6 @@ import {
   selectTradecraftDialog,
   selectTradecraftsDialog,
 } from "../../../applications/dialogs/_module.mjs";
-import { triggers } from "../../../constants/system/_module.mjs";
 import { mix } from "../../../helpers/construction.mjs";
 import { migrateKey } from "../../shared/migrations/source-migrations.mjs";
 import { TradecraftActivation } from "../activations/command-activations.mjs";
@@ -50,7 +49,7 @@ export default class TradecraftAutomation extends mix(
 
   /** @inheritDoc */
   static get _triggerChoices() {
-    return { execution: triggers.execution };
+    return { execution: TERIOCK.config.trigger.execution };
   }
 
   /** @inheritDoc */

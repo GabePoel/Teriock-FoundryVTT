@@ -27,15 +27,24 @@ export default class RegionActivation extends BaseActivation {
     });
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @returns {Promise<TeriockRegionDocument>}
+   */
   async primaryAction() {
     const data = this.data;
     foundry.utils.setProperty(data, "flags.teriock.createdBy", this.puuid);
-    console.log(data);
-    await canvas.regions.placeRegion(data, {
+    const toMinimize = Array.from(
+      foundry.applications.instances.values(),
+    ).filter((a) => a.hasFrame && !a.minimized);
+    await Promise.all((toMinimize || []).map((s) => s?.minimize()));
+    const region = await canvas.regions.placeRegion(data, {
       allowRotation: true,
       attachToToken: this.attachToToken,
+      createOptions: { asGM: true },
     });
+    await Promise.all((toMinimize || []).map((s) => s?.maximize()));
+    return region;
   }
 
   /** @inheritDoc */

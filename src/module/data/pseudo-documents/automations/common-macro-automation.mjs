@@ -1,4 +1,3 @@
-import { triggers } from "../../../constants/system/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 import { MacroAutomationMixin } from "./mixins/_module.mjs";
 
@@ -17,6 +16,6 @@ export default class CommonMacroAutomation extends MacroAutomationMixin(
 
   /** @inheritDoc */
   static get _triggerChoices() {
-    return { execution: triggers.execution };
+    return { execution: TERIOCK.config.trigger.execution };
   }
 }

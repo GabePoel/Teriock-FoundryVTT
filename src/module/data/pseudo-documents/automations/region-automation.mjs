@@ -1,4 +1,3 @@
-import { triggers } from "../../../constants/system/_module.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { mix } from "../../../helpers/construction.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
@@ -25,6 +24,7 @@ const { fields } = foundry.data;
  * @property {Teriock.System.FormulaString} width
  * @property {boolean} attachToToken
  * @property {boolean} deleteOnTurnChange
+ * @property {boolean} excludeToken
  * @property {boolean} expandWithToken
  * @property {boolean} targeting
  * @property {object} restriction
@@ -65,7 +65,7 @@ export default class RegionAutomation extends mix(
 
   /** @inheritDoc */
   static get _triggerChoices() {
-    return { execution: triggers.execution };
+    return { execution: TERIOCK.config.trigger.execution };
   }
 
   /**
@@ -86,6 +86,7 @@ export default class RegionAutomation extends mix(
       angle: new FormulaField({ deterministic: true, initial: "60" }),
       attachToToken: new fields.BooleanField({ initial: true }),
       deleteOnTurnChange: new fields.BooleanField({ initial: true }),
+      excludeToken: new fields.BooleanField({ initial: true }),
       expandWithToken: new fields.BooleanField({ initial: true }),
       height: this.#rangeField(),
       innerWidth: new FormulaField({ deterministic: true, initial: "0" }),
@@ -136,8 +137,7 @@ export default class RegionAutomation extends mix(
     return [
       "regionType",
       ...this._regionTypePaths,
-      "attachToToken",
-      "expandWithToken",
+      ...this._tokenPaths,
       "deleteOnTurnChange",
       ...this._targetPaths,
       "hr",
@@ -189,6 +189,17 @@ export default class RegionAutomation extends mix(
   }
 
   /**
+   * Token exclusion paths.
+   * @returns {string[]}
+   */
+  get _tokenPaths() {
+    return [
+      "attachToToken",
+      this.regionType === "emanation" ? "excludeToken" : "expandWithToken",
+    ];
+  }
+
+  /**
    * Get the numeric value of some region shape path.
    * @param {string} path
    * @param {object} rollData
@@ -204,11 +215,48 @@ export default class RegionAutomation extends mix(
     }
     if (path === "angle") return out;
     out *= canvas.dimensions.distancePixels;
-    if (this.expandWithToken && execution && execution.actor?.defaultToken) {
+    if (
+      this.expandWithToken &&
+      this.regionType !== "emanation" &&
+      execution &&
+      execution.actor?.defaultToken
+    ) {
       out +=
         (execution.actor.defaultToken.w + execution.actor.defaultToken.h) / 4;
     }
     return out;
+  }
+
+  /**
+   * Get the shape data for this automation's region.
+   * @param {{rollData?: object, execution?: BaseExecution}} [options]
+   * @returns {object}
+   */
+  #getRegionShapeData(options) {
+    const rollData = options.execution?.rollData ?? options.rollData ?? {};
+    const data = {
+      type: this.regionType,
+      x: 0,
+      y: 0,
+      ...Object.fromEntries(
+        this._regionTypePaths.map((p) => [
+          p,
+          this.#evaluate(p, rollData, options.execution),
+        ]),
+      ),
+    };
+    if (this.regionType === "emanation") {
+      data.base = {
+        height: 1,
+        shape: 0,
+        hole: this.excludeToken && this.attachToToken,
+        type: "token",
+        width: 1,
+        x: 0,
+        y: 0,
+      };
+    }
+    return [data];
   }
 
   /** @inheritDoc */
@@ -248,7 +296,6 @@ export default class RegionAutomation extends mix(
    * @returns {Promise<object>}
    */
   async getRegionData(options = { rollData: {}, execution: null }) {
-    const rollData = options.execution?.rollData ?? options.rollData ?? {};
     const data = Object.assign(
       {
         behaviors: [],
@@ -262,19 +309,7 @@ export default class RegionAutomation extends mix(
         }),
         ownership: { [game.user.id]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER },
         restriction: this.restriction,
-        shapes: [
-          {
-            type: this.regionType,
-            x: 0,
-            y: 0,
-            ...Object.fromEntries(
-              this._regionTypePaths.map((p) => [
-                p,
-                this.#evaluate(p, rollData, options.execution),
-              ]),
-            ),
-          },
-        ],
+        shapes: this.#getRegionShapeData(options),
         visibility: CONST.REGION_VISIBILITY.OBSERVER,
       },
       this.overrideData ? this.data : {},
@@ -295,24 +330,10 @@ export default class RegionAutomation extends mix(
    * @param {object} [options]
    * @param {object} [options.rollData]
    * @param {BaseExecution|null} [options.execution]
-   * @returns {Promise<RegionDocument>}
+   * @returns {Promise<TeriockRegionDocument>}
    */
   async placeRegion(options = { rollData: {}, execution: null }) {
-    const data = await this.getRegionData(options);
-    const sheets = [
-      options.execution?.actor?.sheet,
-      options.execution?.source?.sheet,
-      options.execution?.source?.elder?.sheet,
-      ...(options.execution?.source?.allSups.contents ?? []).map(
-        (s) => s.sheet,
-      ),
-    ].filter((_) => _);
-    await Promise.all((sheets || []).map((s) => s?.minimize()));
-    const region = await canvas.regions.placeRegion(data, {
-      allowRotation: true,
-      attachToToken: this.attachToToken,
-    });
-    await Promise.all((sheets || []).map((s) => s?.maximize()));
-    return region;
+    const activations = await this._getActivations(options);
+    return activations[0]?.primaryAction();
   }
 }

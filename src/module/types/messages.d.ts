@@ -40,10 +40,7 @@ declare global {
       pack?: string;
       rescale?: boolean;
       tooltip?: string;
-      type:
-        | Teriock.Documents.ActorType
-        | Teriock.Documents.ItemType
-        | Teriock.Documents.EffectType;
+      type: Teriock.Documents.ChildType;
       uuid?: UUID<CommonDocument>;
     };
 

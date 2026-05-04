@@ -1,3 +1,4 @@
+import type { DatabaseCreateOperation } from "@common/abstract/_types.mjs";
 import {
   TeriockActiveEffect,
   TeriockActor,
@@ -18,6 +19,12 @@ declare global {
       failReason?: string;
       localize?: boolean;
       format?: Record<string, string>;
+    };
+
+    export type CreateDocuments = {
+      data: object;
+      documentName: string;
+      operation: Partial<Omit<DatabaseCreateOperation, "data">>;
     };
 
     export type InCombatExpiration = {

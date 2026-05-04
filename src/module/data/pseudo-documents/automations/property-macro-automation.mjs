@@ -1,4 +1,3 @@
-import { triggers } from "../../../constants/system/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 import { MacroAutomationMixin } from "./mixins/_module.mjs";
 
@@ -19,8 +18,8 @@ export default class PropertyMacroAutomation extends MacroAutomationMixin(
   static get _triggerChoices() {
     return {
       ...super._triggerChoices,
-      attunable: triggers.attunable,
-      equipment: triggers.equipment,
+      attunable: TERIOCK.config.trigger.attunable,
+      equipment: TERIOCK.config.trigger.equipment,
     };
   }
 }

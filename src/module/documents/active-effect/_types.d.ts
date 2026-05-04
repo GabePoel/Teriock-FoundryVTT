@@ -8,7 +8,7 @@ declare global {
       parent: AnyParent;
       sheet: BaseEffectSheet;
       system: BaseEffectSystem;
-      type: Teriock.Documents.EffectType;
+      type: Teriock.Documents.ActiveEffectType;
 
       get actor(): AnyActor | null;
 

@@ -15,10 +15,12 @@ import "./scene/_types";
 import "./table-result/_types";
 import "./token-document/_types";
 import "./user/_types";
-import { documentTypes } from "../constants/system/document-types.mjs";
+import { documentConfig } from "../constants/config/document-config.mjs";
 
 declare global {
   namespace Teriock.Documents {
+    type DocumentConfig = typeof documentConfig;
+
     export type IndexCategoryKey = keyof typeof TERIOCK.index;
 
     export type IndexCompendiumKey =
@@ -32,23 +34,27 @@ declare global {
       | "properties"
       | "species";
 
-    export type ActorType = keyof typeof documentTypes.actors;
-    export type ItemType = keyof typeof documentTypes.items;
-    export type EffectType = keyof typeof documentTypes.effects;
-    export type MacroType = keyof typeof documentTypes.macros;
+    type ExtractKeysByDocName<T extends string> = {
+      [K in keyof DocumentConfig]: DocumentConfig[K] extends { documentName: T }
+        ? K
+        : never;
+    }[keyof DocumentConfig];
+
+    export type ActorType = ExtractKeysByDocName<"Actor">;
+    export type ItemType = ExtractKeysByDocName<"Item">;
+    export type ActiveEffectType = ExtractKeysByDocName<"ActiveEffect">;
+    export type CardType = ExtractKeysByDocName<"Card">;
     export type ChildType =
       | Teriock.Documents.ItemType
-      | Teriock.Documents.EffectType;
+      | Teriock.Documents.ActiveEffectType;
     export type CommonType =
       | Teriock.Documents.ChildType
       | Teriock.Documents.ActorType;
-    export type CardType = keyof typeof documentTypes.card;
 
     export type ModelMetadata = {
       armament: boolean;
-      childEffectTypes: Teriock.Documents.EffectType[];
+      childEffectTypes: Teriock.Documents.ActiveEffectType[];
       childItemTypes: Teriock.Documents.ItemType[];
-      childMacroTypes: Teriock.Documents.MacroType[];
       consumable: boolean;
       hierarchy: boolean;
       indexCategoryKey?: IndexCategoryKey;

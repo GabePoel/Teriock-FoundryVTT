@@ -343,9 +343,7 @@ export default (Base) => {
             return (
               foundry.utils.getProperty(c, "system.revealed") || game.user.isGM
             );
-          } else {
-            return true;
-          }
+          } else return true;
         });
         for (const [type, options] of Object.entries(TERIOCK.config.document)) {
           if (options?.getter) {
@@ -360,10 +358,14 @@ export default (Base) => {
   );
 };
 
+/**
+ * @param {Teriock.Documents.ChildType} type
+ * @returns {{name: string, type: Teriock.Documents.ChildType}}
+ */
 function newDocumentObj(type) {
   return {
     name: _loc("TERIOCK.SHEETS.Common.MENU.Create.document", {
-      type: _loc(`TYPES.${TERIOCK.config.document[type].documentName}.${type}`),
+      type: TERIOCK.config.document[type]?.label,
     }),
     type,
   };
