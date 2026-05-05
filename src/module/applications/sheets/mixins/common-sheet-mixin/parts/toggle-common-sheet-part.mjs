@@ -11,9 +11,7 @@ export default (Base) => {
     class ToggleCommonSheetPart extends Base {
       /** @type {Partial<ApplicationConfiguration>} */
       static DEFAULT_OPTIONS = {
-        actions: {
-          sheetToggle: this._onSheetToggle,
-        },
+        actions: { sheetToggle: this._onSheetToggle },
       };
 
       /**

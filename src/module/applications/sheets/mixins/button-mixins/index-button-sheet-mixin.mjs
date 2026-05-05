@@ -12,9 +12,7 @@ export default function IndexButtonSheetMixin(Base) {
   return class IndexButtonSheet extends Base {
     /** @type {Partial<ApplicationConfiguration>} */
     static DEFAULT_OPTIONS = /** @type {Partial<ApplicationConfiguration>} */ {
-      actions: {
-        refreshFromCompendium: this._onRefreshFromCompendium,
-      },
+      actions: { refreshFromCompendium: this._onRefreshFromCompendium },
       window: {
         controls: [
           {

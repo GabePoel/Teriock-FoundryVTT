@@ -11,9 +11,7 @@ export default (Base) => {
     class StatDiceCommonSheetPart extends Base {
       /** @type {Partial<ApplicationConfiguration>} */
       static DEFAULT_OPTIONS = {
-        actions: {
-          setStatDice: this._onSetStatDice,
-        },
+        actions: { setStatDice: this._onSetStatDice },
       };
 
       /**

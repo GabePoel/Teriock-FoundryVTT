@@ -13,9 +13,7 @@ export default function ConfigButtonSheetMixin(Base) {
   return class ConfigButtonSheet extends Base {
     /** @type {Partial<ApplicationConfiguration>} */
     static DEFAULT_OPTIONS = /** @type {Partial<ApplicationConfiguration>} */ {
-      actions: {
-        openDocumentSettings: this._onOpenDocumentSettings,
-      },
+      actions: { openDocumentSettings: this._onOpenDocumentSettings },
       window: {
         controls: [
           {

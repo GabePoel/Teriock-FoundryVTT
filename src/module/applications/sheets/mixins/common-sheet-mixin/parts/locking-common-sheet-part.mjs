@@ -12,9 +12,7 @@ export default (Base) => {
     class LockingCommonSheetPart extends Base {
       /** @type {Partial<ApplicationConfiguration>} */
       static DEFAULT_OPTIONS = {
-        actions: {
-          toggleLockThis: this._onToggleLockThis,
-        },
+        actions: { toggleLockThis: this._onToggleLockThis },
       };
 
       constructor(...args) {

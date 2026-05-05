@@ -28,9 +28,7 @@ export default class SpeciesSheet extends mix(
    */
   static DEFAULT_OPTIONS = {
     classes: ["species"],
-    window: {
-      icon: makeIconClass(documentConfig.species.icon, "title"),
-    },
+    window: { icon: makeIconClass(documentConfig.species.icon, "title") },
   };
 
   /** @inheritDoc */

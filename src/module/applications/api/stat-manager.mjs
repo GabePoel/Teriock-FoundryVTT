@@ -1,5 +1,5 @@
 import { HackStatMixin } from "../shared/mixins/_module.mjs";
-import { TeriockDocumentSheet } from "../sheets/utility-sheets/_module.mjs";
+import { DocumentDialogSheet } from "../sheets/utility-sheets/_module.mjs";
 
 // noinspection JSClosureCompilerSyntax
 /**
@@ -9,7 +9,7 @@ import { TeriockDocumentSheet } from "../sheets/utility-sheets/_module.mjs";
  * @property {boolean} _forHarm
  */
 export default class TeriockStatManager extends HackStatMixin(
-  TeriockDocumentSheet,
+  DocumentDialogSheet,
 ) {
   /**
    * @inheritDoc

@@ -142,9 +142,7 @@ async function onTakeHack(actor, event, target) {
   const part = target.dataset.part;
   if (actor.system.hacks[part].value < hackConfig[part].max) {
     await actor.system.takeHack(part);
-  } else {
-    await actor.system.takeUnhack(part, hackConfig[part].max);
-  }
+  } else await actor.system.takeUnhack(part, hackConfig[part].max);
 }
 
 /**
@@ -157,9 +155,6 @@ async function onTakeHack(actor, event, target) {
 async function onTakeUnhack(actor, event, target) {
   event.stopPropagation();
   const part = target.dataset.part;
-  if (actor.system.hacks[part].value > 0) {
-    await actor.system.takeUnhack(part);
-  } else {
-    await actor.system.takeHack(part, hackConfig[part].max);
-  }
+  if (actor.system.hacks[part].value > 0) await actor.system.takeUnhack(part);
+  else await actor.system.takeHack(part, hackConfig[part].max);
 }

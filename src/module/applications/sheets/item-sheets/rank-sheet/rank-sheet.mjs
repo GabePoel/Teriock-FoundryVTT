@@ -32,12 +32,8 @@ export default class RankSheet extends mix(
    */
   static DEFAULT_OPTIONS = {
     classes: ["rank"],
-    window: {
-      icon: makeIconClass(documentConfig.rank.icon, "title"),
-    },
-    actions: {
-      toggleInnate: this.#onToggleInnate,
-    },
+    window: { icon: makeIconClass(documentConfig.rank.icon, "title") },
+    actions: { toggleInnate: this.#onToggleInnate },
   };
 
   /**

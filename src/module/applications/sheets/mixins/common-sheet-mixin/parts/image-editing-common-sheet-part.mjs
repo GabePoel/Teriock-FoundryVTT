@@ -11,9 +11,7 @@ export default (Base) => {
     class ImageEditingCommonSheetPart extends Base {
       /** @type {Partial<ApplicationConfiguration>} */
       static DEFAULT_OPTIONS = {
-        actions: {
-          editImage: this._onEditImage,
-        },
+        actions: { editImage: this._onEditImage },
       };
 
       /**

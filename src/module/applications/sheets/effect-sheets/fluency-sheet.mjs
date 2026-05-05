@@ -17,9 +17,7 @@ export default class FluencySheet extends BaseEffectSheet {
    */
   static DEFAULT_OPTIONS = {
     classes: ["fluency"],
-    window: {
-      icon: makeIconClass(documentConfig.fluency.icon, "title"),
-    },
+    window: { icon: makeIconClass(documentConfig.fluency.icon, "title") },
   };
 
   /**

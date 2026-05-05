@@ -17,8 +17,6 @@ export default class ResourceSheet extends BaseEffectSheet {
    */
   static DEFAULT_OPTIONS = {
     classes: ["resource"],
-    window: {
-      icon: makeIconClass(documentConfig.resource.icon, "title"),
-    },
+    window: { icon: makeIconClass(documentConfig.resource.icon, "title") },
   };
 }

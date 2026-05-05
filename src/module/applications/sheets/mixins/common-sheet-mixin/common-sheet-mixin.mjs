@@ -45,17 +45,9 @@ export default function CommonSheetMixin(Base) {
       /** @type {Partial<ApplicationConfiguration>} */
       static DEFAULT_OPTIONS =
         /** @type {Partial<ApplicationConfiguration>} */ {
-          form: {
-            closeOnSubmit: false,
-            submitOnChange: true,
-          },
-          position: {
-            height: 600,
-            width: 560,
-          },
-          window: {
-            resizable: true,
-          },
+          form: { closeOnSubmit: false, submitOnChange: true },
+          position: { height: 600, width: 560 },
+          window: { resizable: true },
         };
 
       /**

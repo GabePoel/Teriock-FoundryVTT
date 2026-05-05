@@ -156,8 +156,8 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
   }
 
   /** @inheritDoc */
-  async _onRender(options = {}) {
-    await super._onRender(options);
+  async _onRender(context, options = {}) {
+    await super._onRender(context, options);
     this._initSearchFilter();
     this._initClickLoader();
   }

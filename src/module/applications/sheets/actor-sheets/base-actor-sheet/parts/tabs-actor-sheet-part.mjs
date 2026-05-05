@@ -14,9 +14,7 @@ export default (Base) =>
   class TabsActorSheetPart extends Base {
     /** @type {Partial<ApplicationConfiguration>} */
     static DEFAULT_OPTIONS = {
-      actions: {
-        changeTab: this._onChangeTab,
-      },
+      actions: { changeTab: this._onChangeTab },
     };
 
     /** @type {Record<string, Partial<ApplicationTabsConfiguration>>} */

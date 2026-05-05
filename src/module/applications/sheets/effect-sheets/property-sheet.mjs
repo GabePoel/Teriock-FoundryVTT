@@ -26,9 +26,7 @@ export default class PropertySheet extends mix(
    */
   static DEFAULT_OPTIONS = {
     classes: ["property"],
-    window: {
-      icon: makeIconClass(documentConfig.property.icon, "title"),
-    },
+    window: { icon: makeIconClass(documentConfig.property.icon, "title") },
   };
 
   /** @inheritDoc */

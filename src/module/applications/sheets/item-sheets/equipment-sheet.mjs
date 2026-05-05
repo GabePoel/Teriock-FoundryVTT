@@ -36,9 +36,7 @@ export default class EquipmentSheet extends mix(
       toggleGlued: this.#onToggleGlued,
       toggleShattered: this.#onToggleShattered,
     },
-    window: {
-      icon: makeIconClass(documentConfig.equipment.icon, "title"),
-    },
+    window: { icon: makeIconClass(documentConfig.equipment.icon, "title") },
   };
 
   /** @inheritDoc */

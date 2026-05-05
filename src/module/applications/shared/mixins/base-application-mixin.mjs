@@ -11,14 +11,12 @@ export default function BaseApplicationMixin(Base) {
    * @extends {ApplicationV2}
    */
   class BaseApplication extends Base {
-    /**
-     * @type {Partial<ApplicationConfiguration>}
-     */
+    /** @type {Partial<ApplicationConfiguration>}*/
     static DEFAULT_OPTIONS = { classes: ["teriock"] };
 
     /** @inheritDoc */
-    async _onRender(options = {}) {
-      await super._onRender(options);
+    async _onRender(context, options = {}) {
+      await super._onRender(context, options);
       bindCommonActions(this.element);
       if (game.teriock.getSetting("developerMode") && this.window.header) {
         this.window.header

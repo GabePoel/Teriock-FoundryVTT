@@ -24,9 +24,7 @@ export default class BaseItemSheet extends mix(
    */
   static DEFAULT_OPTIONS = {
     classes: ["unpadded"],
-    actions: {
-      toggleOnUseDoc: this._onToggleOnUseDoc,
-    },
+    actions: { toggleOnUseDoc: this._onToggleOnUseDoc },
   };
 
   /**

@@ -33,9 +33,7 @@ export default class AbilitySheet extends mix(
    */
   static DEFAULT_OPTIONS = {
     classes: ["ability"],
-    window: {
-      icon: makeIconClass(documentConfig.ability.icon, "title"),
-    },
+    window: { icon: makeIconClass(documentConfig.ability.icon, "title") },
   };
 
   /** @inheritDoc */
