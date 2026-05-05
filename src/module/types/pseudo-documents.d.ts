@@ -30,6 +30,7 @@ declare global {
       roll: automations.RollAutomation;
       rollStyle: automations.RollStyleAutomation;
       status: automations.StatusAutomation;
+      summon: automations.SummonAutomation;
       take: automations.TakeAutomation;
       tradecraft: automations.TradecraftAutomation;
       transformation: automations.TransformationAutomation;
@@ -67,6 +68,7 @@ declare global {
       roll: activations.RollActivation;
       shatter: activations.ShatterActivation;
       standardDamage: activations.StandardDamageActivation;
+      summon: activations.SummonActivation;
       take: activations.TakeActivation;
       toggle: activations.ToggleStatusActivation;
       tradecraft: activations.TradecraftActivation;

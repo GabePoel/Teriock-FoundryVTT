@@ -82,10 +82,7 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
    * @param {TeriockActor} actor
    */
   #regainReaction(actor) {
-    actor?.defaultUser?.query("teriock.update", {
-      uuid: actor.uuid,
-      data: { "system.combat.hasReaction": true },
-    });
+    actor.update({ "system.combat.hasReaction": true }, { asGM: true });
   }
 
   /**

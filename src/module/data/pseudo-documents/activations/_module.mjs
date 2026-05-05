@@ -5,4 +5,5 @@ export { default as ChangeMovementActivation } from "./change-movement-activatio
 export { default as MacroActivation } from "./macro-activation.mjs";
 export { default as RegionActivation } from "./region-activation.mjs";
 export { default as RollActivation } from "./roll-activation.mjs";
+export { default as SummonActivation } from "./summon-activation.mjs";
 export { default as TakeActivation } from "./take-activation.mjs";

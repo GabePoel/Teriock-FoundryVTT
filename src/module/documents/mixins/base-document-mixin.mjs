@@ -53,6 +53,52 @@ export default function BaseDocumentMixin(Base) {
       }
 
       /**
+       * @param {string[]} ids
+       * @param {Partial<Omit<DatabaseDeleteOperation, "ids"> & { asGM: boolean }>} operation
+       * @inheritDoc
+       */
+      static async deleteDocuments(ids = [], operation = {}) {
+        if (operation.asGM) {
+          delete operation.asGM;
+          if (operation.parent) {
+            operation.parentUuid = operation.parent.uuid;
+            delete operation.parent;
+          }
+          const docs = await game.users.queryGM("teriock.deleteDocuments", {
+            ids,
+            documentName: this.implementation.documentName,
+            operation,
+          });
+          // If no GM is signed in, the query won't give us an array. Make a null array instead.
+          if (!docs) return ids.map((_d) => null);
+          return docs;
+        } else return super.deleteDocuments(ids, operation);
+      }
+
+      /**
+       * @param {object[]} updates
+       * @param {Partial<Omit<DatabaseUpdateOperation, "updates"> & { asGM: boolean }>} operation
+       * @inheritDoc
+       */
+      static async updateDocuments(updates = [], operation = {}) {
+        if (operation.asGM) {
+          delete operation.asGM;
+          if (operation.parent) {
+            operation.parentUuid = operation.parent.uuid;
+            delete operation.parent;
+          }
+          const docs = await game.users.queryGM("teriock.updateDocuments", {
+            updates,
+            documentName: this.implementation.documentName,
+            operation,
+          });
+          // If no GM is signed in, the query won't give us an array. Make a null array instead.
+          if (!docs) return updates.map((_d) => null);
+          return Promise.all(docs.map((d) => fromUuid(d)));
+        } else return super.updateDocuments(updates, operation);
+      }
+
+      /**
        * Prefix to use in {@link _benchmarkStart} and {@link _benchmarkEnd}.
        * @returns {string}
        */

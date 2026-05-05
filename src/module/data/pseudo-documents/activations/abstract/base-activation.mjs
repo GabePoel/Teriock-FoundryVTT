@@ -110,6 +110,14 @@ export default class BaseActivation extends TypedPseudoDocument {
   }
 
   /**
+   * Whether this activation should be visible to current user.
+   * @returns {boolean}
+   */
+  get visible() {
+    return true;
+  }
+
+  /**
    * Whether this activation has actors.
    * @returns {boolean}
    */

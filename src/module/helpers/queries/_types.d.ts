@@ -1,4 +1,8 @@
-import type { DatabaseCreateOperation } from "@common/abstract/_types.mjs";
+import type {
+  DatabaseCreateOperation,
+  DatabaseDeleteOperation,
+  DatabaseUpdateOperation,
+} from "@common/abstract/_types.mjs";
 import {
   TeriockActiveEffect,
   TeriockActor,
@@ -25,6 +29,18 @@ declare global {
       data: object;
       documentName: string;
       operation: Partial<Omit<DatabaseCreateOperation, "data">>;
+    };
+
+    export type UpdateDocuments = {
+      updates: object[];
+      documentName: string;
+      operation: Partial<Omit<DatabaseUpdateOperation, "updates">>;
+    };
+
+    export type DeleteDocuments = {
+      ids: string[];
+      documentName: string;
+      operation: Partial<Omit<DatabaseDeleteOperation, "ids">>;
     };
 
     export type InCombatExpiration = {

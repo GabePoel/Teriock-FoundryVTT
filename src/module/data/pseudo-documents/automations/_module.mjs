@@ -26,6 +26,7 @@ export { default as RevitalizeAutomation } from "./revitalize-automation.mjs";
 export { default as RollAutomation } from "./roll-automation.mjs";
 export { default as RollStyleAutomation } from "./roll-style-automation.mjs";
 export { default as StatusAutomation } from "./status-automation.mjs";
+export { default as SummonAutomation } from "./summon-automation.mjs";
 export { default as TakeAutomation } from "./take-automation.mjs";
 export { default as TradecraftAutomation } from "./tradecraft-automation.mjs";
 export { default as TransformationAutomation } from "./transformation-automation.mjs";

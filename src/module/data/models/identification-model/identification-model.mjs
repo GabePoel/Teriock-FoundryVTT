@@ -124,20 +124,12 @@ export default class IdentificationModel extends EmbeddedDataModel {
         },
       });
       if (doReadMagic) {
-        await game.users.queryGM(
-          "teriock.update",
+        await this.document.update(
           {
-            data: {
-              "system.identification.read": true,
-              "system.powerLevel": this.powerLevel,
-            },
-            uuid: this.parent.parent.uuid,
+            "system.identification.read": true,
+            "system.powerLevel": this.powerLevel,
           },
-          {
-            failPrefix:
-              "TERIOCK.MODELS.Identification.QUERY.ReadMagic.failPrefix",
-            localize: true,
-          },
+          { asGM: true },
         );
         ui.notifications.success(
           "TERIOCK.MODELS.Identification.QUERY.ReadMagic.success",

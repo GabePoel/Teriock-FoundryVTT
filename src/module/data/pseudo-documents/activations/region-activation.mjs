@@ -26,6 +26,14 @@ export default class RegionActivation extends BaseActivation {
     });
   }
 
+  /** @inheritDoc */
+  get visible() {
+    return (
+      game.user.hasPermission("REGION_CREATE") &&
+      game.user.hasPermission("QUERY_USER")
+    );
+  }
+
   /**
    * @inheritDoc
    * @returns {Promise<TeriockRegionDocument>}
@@ -33,7 +41,7 @@ export default class RegionActivation extends BaseActivation {
   async primaryAction() {
     const data = foundry.utils.mergeObject(this.data, {
       ownership: { [game.user.id]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER },
-      flags: { teriock: { createdBy: this.puuid } },
+      flags: { teriock: { createdBy: this.puuid, placedBy: game.user.id } },
     });
     data.color ??= game.user.color;
     const toMinimize = Array.from(
@@ -55,7 +63,11 @@ export default class RegionActivation extends BaseActivation {
       "Region",
       canvas.scene.regions.contents
         .filter(
-          (r) => r.getFlag("teriock", "createdBy") === this.puuid && r.isOwner,
+          (r) =>
+            r.getFlag("teriock", "createdBy") === this.puuid &&
+            (r.getFlag("teriock", "placedBy") === this.user.id ||
+              game.user.isGM) &&
+            r.isOwner,
         )
         .map((r) => r.id),
     );

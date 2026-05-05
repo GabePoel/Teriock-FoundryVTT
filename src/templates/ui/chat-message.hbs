@@ -49,7 +49,7 @@
       {{{message.content}}}
     </div>
   </div>
-  {{#if (and isContentVisible (or (exists system.tags) (exists system.activations.contents)))}}
+  {{#if (and isContentVisible (or (exists system.tags) (exists activations)))}}
     <footer>
       {{#if (exists system.tags)}}
         <div class="message-tags">
@@ -58,7 +58,7 @@
           {{/each}}
         </div>
       {{/if}}
-      {{#if (exists system.activations.contents)}}
+      {{#if (exists activations)}}
         <div class="message-activations">
           {{#each system.activations as |activation|}}
             <button
