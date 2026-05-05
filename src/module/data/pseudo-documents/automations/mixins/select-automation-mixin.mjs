@@ -8,6 +8,7 @@ export default function SelectAutomationMixin(Base) {
   return (
     /**
      * @extends {BaseAutomation}
+     * @property {boolean} all
      * @property {boolean} automatic
      * @property {boolean} multi
      * @mixin
@@ -22,6 +23,7 @@ export default function SelectAutomationMixin(Base) {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
+          all: new fields.BooleanField({ initial: false }),
           automatic: new fields.BooleanField({ initial: true }),
           multi: new fields.BooleanField(),
         });
@@ -32,7 +34,10 @@ export default function SelectAutomationMixin(Base) {
        * @returns {string[]}
        */
       get _selectionOptionPaths() {
-        return ["multi", "automatic"];
+        const paths = ["multi"];
+        if (this.multi) paths.push("all");
+        if (!this.multi || !this.all) paths.push("automatic");
+        return paths;
       }
     }
   );

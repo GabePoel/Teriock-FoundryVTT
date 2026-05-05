@@ -115,7 +115,7 @@ export function dotJoin(strings) {
  * @param {boolean} [options.hash]
  * @param {number} [options.length]
  * @param {string} [options.background]
- * @returns {string}
+ * @returns {ID<*>}
  */
 export function toId(str, options = {}) {
   const {

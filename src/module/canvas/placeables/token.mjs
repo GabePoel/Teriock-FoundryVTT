@@ -33,10 +33,12 @@ export default class TeriockToken extends Token {
       overlayImg = "icons/svg/skull.svg";
     }
     if (overlayImg) promises.push(this._drawOverlay(overlayImg));
-    await Promise.allSettled(promises);
-    this.effects.sortChildren();
-    this.effects.renderable = true;
-    this.renderFlags.set({ refreshEffects: true });
+    if (promises.length > 0) {
+      await Promise.allSettled(promises);
+      this.effects.sortChildren();
+      this.effects.renderable = true;
+      this.renderFlags.set({ refreshEffects: true });
+    }
   }
 
   /** @inheritDoc */

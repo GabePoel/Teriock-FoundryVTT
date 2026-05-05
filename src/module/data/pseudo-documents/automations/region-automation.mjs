@@ -299,7 +299,6 @@ export default class RegionAutomation extends mix(
     const data = Object.assign(
       {
         behaviors: [],
-        color: Number(game.user.color),
         displayMeasurements: false,
         flags: { teriock: { deleteOnTurnChange: this.deleteOnTurnChange } },
         highlightMode: this.targeting ? "coverage" : "shapes",
@@ -307,7 +306,7 @@ export default class RegionAutomation extends mix(
         name: _loc("TERIOCK.AUTOMATIONS.Region.DATA.name", {
           name: options.execution?.source.name ?? this.document.name,
         }),
-        ownership: { [game.user.id]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER },
+        ownership: { default: CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER },
         restriction: this.restriction,
         shapes: this.#getRegionShapeData(options),
         visibility: CONST.REGION_VISIBILITY.OBSERVER,

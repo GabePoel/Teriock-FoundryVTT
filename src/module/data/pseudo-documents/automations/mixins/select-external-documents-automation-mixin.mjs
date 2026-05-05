@@ -78,6 +78,7 @@ export default function SelectExternalDocumentsAutomationMixin(Base) {
         const choices = await this.getDocuments(options);
         if (choices.length === 0) return [];
         if (this.automatic && choices.length === 1) return choices;
+        if (this.multi && this.all) return choices;
         return await selectDocumentsDialog(choices, {
           multi: this.multi,
           title: this.document.fullName || this.document.name,

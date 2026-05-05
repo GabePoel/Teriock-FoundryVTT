@@ -1,4 +1,3 @@
-import { icons } from "../../../constants/display/icons.mjs";
 import { BaseActivation } from "./abstract/_module.mjs";
 
 const { fields } = foundry.data;
@@ -6,7 +5,7 @@ const { fields } = foundry.data;
 export default class RegionActivation extends BaseActivation {
   /** @inheritDoc */
   static get ICON() {
-    return icons.document.region;
+    return TERIOCK.display.icons.document.region;
   }
 
   /** @inheritDoc */
@@ -32,8 +31,11 @@ export default class RegionActivation extends BaseActivation {
    * @returns {Promise<TeriockRegionDocument>}
    */
   async primaryAction() {
-    const data = this.data;
-    foundry.utils.setProperty(data, "flags.teriock.createdBy", this.puuid);
+    const data = foundry.utils.mergeObject(this.data, {
+      ownership: { [game.user.id]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER },
+      flags: { teriock: { createdBy: this.puuid } },
+    });
+    data.color ??= game.user.color;
     const toMinimize = Array.from(
       foundry.applications.instances.values(),
     ).filter((a) => a.hasFrame && !a.minimized);
@@ -52,7 +54,9 @@ export default class RegionActivation extends BaseActivation {
     await canvas.scene.deleteEmbeddedDocuments(
       "Region",
       canvas.scene.regions.contents
-        .filter((r) => r.getFlag("teriock", "createdBy") === this.puuid)
+        .filter(
+          (r) => r.getFlag("teriock", "createdBy") === this.puuid && r.isOwner,
+        )
         .map((r) => r.id),
     );
   }
