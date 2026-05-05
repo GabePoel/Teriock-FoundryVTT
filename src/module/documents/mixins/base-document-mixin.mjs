@@ -30,23 +30,30 @@ export default function BaseDocumentMixin(Base) {
       }
 
       /**
+       * Mutate an operation that's being conducted as the GM.
+       * @param {DatabaseWriteOperation & Teriock.System._Operation} operation
+       */
+      static _cleanGMOperation(operation) {
+        delete operation.asGM;
+        if (operation.parent) {
+          operation.parentUuid = operation.parent.uuid;
+          delete operation.parent;
+        }
+      }
+
+      /**
        * @param {object[]} data
-       * @param {Partial<Omit<DatabaseCreateOperation, "data"> & { asGM: boolean }>} operation
+       * @param {Partial<Omit<DatabaseCreateOperation, "data"> & Teriock.System._CreateOperation>} operation
        * @inheritDoc
        */
       static async createDocuments(data = [], operation = {}) {
-        if (operation.asGM) {
-          delete operation.asGM;
-          if (operation.parent) {
-            operation.parentUuid = operation.parent.uuid;
-            delete operation.parent;
-          }
+        if (operation.asGM && !game.user.isGM) {
+          this._cleanGMOperation(operation);
           const docs = await game.users.queryGM("teriock.createDocuments", {
             data,
-            documentName: this.implementation.documentName,
+            documentName: this.documentName,
             operation,
           });
-          // If no GM is signed in, the query won't give us an array. Make a null array instead.
           if (!docs) return data.map((_d) => null);
           return Promise.all(docs.map((d) => fromUuid(d)));
         } else return super.createDocuments(data, operation);
@@ -54,22 +61,17 @@ export default function BaseDocumentMixin(Base) {
 
       /**
        * @param {string[]} ids
-       * @param {Partial<Omit<DatabaseDeleteOperation, "ids"> & { asGM: boolean }>} operation
+       * @param {Partial<Omit<DatabaseDeleteOperation, "ids"> & Teriock.System._Operation>} operation
        * @inheritDoc
        */
       static async deleteDocuments(ids = [], operation = {}) {
-        if (operation.asGM) {
-          delete operation.asGM;
-          if (operation.parent) {
-            operation.parentUuid = operation.parent.uuid;
-            delete operation.parent;
-          }
+        if (operation.asGM && !game.user.isGM) {
+          this._cleanGMOperation(operation);
           const docs = await game.users.queryGM("teriock.deleteDocuments", {
             ids,
-            documentName: this.implementation.documentName,
+            documentName: this.documentName,
             operation,
           });
-          // If no GM is signed in, the query won't give us an array. Make a null array instead.
           if (!docs) return ids.map((_d) => null);
           return docs;
         } else return super.deleteDocuments(ids, operation);
@@ -77,22 +79,17 @@ export default function BaseDocumentMixin(Base) {
 
       /**
        * @param {object[]} updates
-       * @param {Partial<Omit<DatabaseUpdateOperation, "updates"> & { asGM: boolean }>} operation
+       * @param {Partial<Omit<DatabaseUpdateOperation, "updates"> & Teriock.System._Operation>} operation
        * @inheritDoc
        */
       static async updateDocuments(updates = [], operation = {}) {
-        if (operation.asGM) {
-          delete operation.asGM;
-          if (operation.parent) {
-            operation.parentUuid = operation.parent.uuid;
-            delete operation.parent;
-          }
+        if (operation.asGM && !game.user.isGM) {
+          this._cleanGMOperation(operation);
           const docs = await game.users.queryGM("teriock.updateDocuments", {
             updates,
-            documentName: this.implementation.documentName,
+            documentName: this.documentName,
             operation,
           });
-          // If no GM is signed in, the query won't give us an array. Make a null array instead.
           if (!docs) return updates.map((_d) => null);
           return Promise.all(docs.map((d) => fromUuid(d)));
         } else return super.updateDocuments(updates, operation);
@@ -193,8 +190,7 @@ export default function BaseDocumentMixin(Base) {
       get typedIdentifier() {
         const type = this.type;
         const identifier = this.system?.identifier;
-        if (!type || !identifier) return null;
-        return `${type}:${identifier}`;
+        return !!type && !!identifier ? `${type}:${identifier}` : null;
       }
 
       /**
@@ -312,13 +308,9 @@ export default function BaseDocumentMixin(Base) {
        * @returns {DataField}
        */
       getSchema(path) {
-        let schema;
-        if (path.startsWith("system")) {
-          schema = this.system.schema.getField(path.replace("system.", ""));
-        } else {
-          schema = this.schema.getField(path);
-        }
-        return schema;
+        return path.startsWith("system")
+          ? this.system.schema.getField(path.replace("system.", ""))
+          : this.schema.getField(path);
       }
     }
   );

@@ -8,14 +8,17 @@ import { BaseAutomation } from "../data/pseudo-documents/automations/abstract/_m
 
 declare global {
   export namespace Teriock.System {
+    export type _Operation = {
+      /** Forward this to a GM query which handles the operation instead of the local client. */
+      asGM?: boolean;
+    };
+
     export type _CreateOperation = {
       /**
        * Allows subs that would be created by other documents to also be created as their own documents in the same
        * database call. May cause odd results.
        */
       allowDuplicateSubs?: boolean;
-      /** Forward this to a GM query which handles the creation instead of the local client. */
-      asGM?: boolean;
       /**
        * Since {@link HierarchyDocument._preCreateOperation} manipulates the default `keepId` value in creation
        * operations, subsequent operations using the same operation object can get messed up. This allows us to
@@ -26,7 +29,7 @@ declare global {
       isKeepIdCached?: boolean;
       /** Force even subs to keep their `_id`. May cause `_id` collisions. */
       keepSubIds?: boolean;
-    };
+    } & _Operation;
 
     export type ActivityTrigger = keyof typeof tc.activity.choices;
     export type AttunableTrigger = keyof typeof tc.attunable.choices;

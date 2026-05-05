@@ -65,8 +65,7 @@ export default class RegionActivation extends BaseActivation {
         .filter(
           (r) =>
             r.getFlag("teriock", "createdBy") === this.puuid &&
-            (r.getFlag("teriock", "placedBy") === this.user.id ||
-              game.user.isGM) &&
+            r.getFlag("teriock", "placedBy") === this.user.id &&
             r.isOwner,
         )
         .map((r) => r.id),

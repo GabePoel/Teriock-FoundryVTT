@@ -158,7 +158,7 @@ export default function CommonDocumentMixin(Base) {
        * Delete multiple child Document instances descendant from a Document using provided string ids.
        * @param {ChildDocumentName} embeddedName
        * @param {ID<AnyCommonDocument>[]} ids
-       * @param {DatabaseDeleteOperation} operation
+       * @param {DatabaseDeleteOperation & Teriock.System._Operation} operation
        * @returns {Promise<AnyCommonDocument[]>}
        */
       async deleteChildDocuments(embeddedName, ids = [], operation = {}) {

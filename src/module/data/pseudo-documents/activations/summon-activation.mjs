@@ -1,3 +1,4 @@
+import { TeriockActor, TeriockFolder } from "../../../documents/_module.mjs";
 import { resolveDocument } from "../../../helpers/resolve.mjs";
 import { toId } from "../../../helpers/string.mjs";
 import { BaseActivation } from "./abstract/_module.mjs";
@@ -37,7 +38,7 @@ export default class SummonActivation extends BaseActivation {
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       uuids: new fields.SetField(
-        new fields.DocumentUUIDField({ type: "Actor" }),
+        new fields.DocumentUUIDField({ nullable: false, type: "Actor" }),
       ),
     });
   }
@@ -63,6 +64,10 @@ export default class SummonActivation extends BaseActivation {
     );
   }
 
+  /**
+   * Update existing summons that are needed but the current user doesn't have ownership over.
+   * @returns {Promise<void>}
+   */
   async #claimOwnership() {
     const toUpdate = [];
     for (const n of this.#nodes) {
@@ -77,12 +82,15 @@ export default class SummonActivation extends BaseActivation {
         n.state = "ready";
       }
     }
-    await Actor.implementation.updateDocuments(toUpdate, { asGM: true });
+    await TeriockActor.updateDocuments(toUpdate, { asGM: true });
   }
 
-  /** @returns {Promise<TeriockFolder>} */
+  /**
+   * Ensure that the summons folder exists.
+   * @returns {Promise<TeriockFolder>}
+   */
   async #createSummonsFolder() {
-    return Folder.implementation.create(
+    return TeriockFolder.create(
       {
         _id: this.#summonsFolderId,
         name: _loc("TERIOCK.ACTIVATIONS.Summon.FOLDER"),
@@ -121,6 +129,7 @@ export default class SummonActivation extends BaseActivation {
   }
 
   /**
+   * Find all summons for a given actor from its UUID.
    * @param {UUID<TeriockActor>} uuid
    * @returns {TeriockActor[]}
    */
@@ -133,6 +142,10 @@ export default class SummonActivation extends BaseActivation {
     );
   }
 
+  /**
+   * Import all summons for actors in compendiums.
+   * @returns {Promise<void>}
+   */
   async #import() {
     const toCreate = [];
     const packNodes = this.#nodes.filter((n) => n.state === "packed");
@@ -151,16 +164,17 @@ export default class SummonActivation extends BaseActivation {
         toCreate.push(data);
       }
     }
-    const created = await Actor.implementation.createDocuments(toCreate, {
-      asGM: true,
-    });
+    const actors = await TeriockActor.createDocuments(toCreate, { asGM: true });
     for (let i = 0; i < packNodes.length; i++) {
-      packNodes[i].actor = created[i];
+      packNodes[i].actor = actors[i];
       packNodes[i].state = "ready";
     }
   }
 
-  /** @returns {Promise<TeriockActor[]>} */
+  /**
+   * Prepare all relevant actors for token placement.
+   * @returns {Promise<TeriockActor[]>}
+   */
   async #prepareActors() {
     this.#nodes = [];
     const srcPromises = [];
@@ -189,8 +203,11 @@ export default class SummonActivation extends BaseActivation {
     return actors;
   }
 
-  /** @returns {Promise<TeriockTokenDocument[]>} */
-  async placeTokens() {
+  /**
+   * Place all the tokens on the canvas.
+   * @returns {Promise<TeriockTokenDocument[]>}
+   */
+  async #placeTokens() {
     const actors = await this.#prepareActors();
     const tokenDocuments = await Promise.all(
       actors.map((a) => a.getTokenDocument()),
@@ -201,7 +218,9 @@ export default class SummonActivation extends BaseActivation {
         flags: { teriock: { createdBy: this.puuid, placedBy: game.user.id } },
       }),
     );
-    return await canvas.tokens.placeTokens(tokenData);
+    return await canvas.tokens.placeTokens(tokenData, {
+      createOptions: { asGM: true },
+    });
   }
 
   /**
@@ -213,7 +232,7 @@ export default class SummonActivation extends BaseActivation {
       foundry.applications.instances.values(),
     ).filter((a) => a.hasFrame && !a.minimized);
     await Promise.all((toMinimize || []).map((s) => s?.minimize()));
-    const tokens = await this.placeTokens();
+    const tokens = await this.#placeTokens();
     await Promise.all((toMinimize || []).map((s) => s?.maximize()));
     return tokens;
   }
@@ -226,8 +245,7 @@ export default class SummonActivation extends BaseActivation {
         .filter(
           (t) =>
             t.getFlag("teriock", "createdBy") === this.puuid &&
-            (t.getFlag("teriock", "placedBy") === game.user.id ||
-              game.user.isGM) &&
+            t.getFlag("teriock", "placedBy") === game.user.id &&
             t.isOwner,
         )
         .map((t) => t.id),

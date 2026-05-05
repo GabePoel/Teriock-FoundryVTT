@@ -47,7 +47,7 @@ export default class TeriockItem extends mix(
   /**
    * @inheritDoc
    * @param {TeriockItem[]} documents
-   * @param {DatabaseDeleteOperation} operation
+   * @param {DatabaseDeleteOperation & Teriock.System._Operation} operation
    * @param {TeriockUser} user
    * @returns {Promise<void>}
    */
@@ -75,7 +75,7 @@ export default class TeriockItem extends mix(
   /**
    * @inheritDoc
    * @param {TeriockItem[]} documents
-   * @param {DatabaseDeleteOperation} operation
+   * @param {DatabaseDeleteOperation & Teriock.System._Operation} operation
    * @param {TeriockUser} user
    * @returns {Promise<boolean|void>}
    */

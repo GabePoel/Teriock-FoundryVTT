@@ -111,12 +111,8 @@ export default function HierarchyDocumentMixin(Base) {
                 clone.updateSource({ "system._sup": idMap[clone.system._sup] });
               }
               toCreate.push(...clones);
-            } else if (create) {
-              toCreate.push(doc);
-            }
-          } else {
-            toCreate.push(doc);
-          }
+            } else if (create) toCreate.push(doc);
+          } else toCreate.push(doc);
         }
         documents.length = 0;
         documents.push(...toCreate);
@@ -125,7 +121,7 @@ export default function HierarchyDocumentMixin(Base) {
       /**
        * @inheritDoc
        * @param {CommonDocument[]} documents
-       * @param {DatabaseDeleteOperation} operation
+       * @param {DatabaseDeleteOperation & Teriock.System._Operation} operation
        * @param {TeriockUser} user
        * @returns {Promise<boolean|void>}
        */
@@ -141,7 +137,7 @@ export default function HierarchyDocumentMixin(Base) {
       /**
        * @inheritDoc
        * @param {CommonDocument[]} documents
-       * @param {DatabaseUpdateOperation} operation
+       * @param {DatabaseUpdateOperation & Teriock.System._Operation} operation
        * @param {TeriockUser} user
        * @returns {Promise<boolean|void>}
        */
