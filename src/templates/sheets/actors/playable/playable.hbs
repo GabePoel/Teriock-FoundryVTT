@@ -1,5 +1,8 @@
 <div class="{{cssClass}} {{#if hideInactive}}hide-inactive{{/if}} character-window
 {{#if (not floatingTabs)}}no-floating-tabs{{/if}}">
+  <div class="character-tabber-background floating">
+    {{> "teriock/sheets/actors/playable/parts/tabs"}}
+  </div>
   <div class="character-page">
     {{> "teriock/sheets/actors/playable/parts/sidebar"}}
     <div class="character-sidebar-tabber-container sidebar-collapser {{#if (not sidebarOpen)}}collapsed{{/if}}">
@@ -12,7 +15,7 @@
     <div class="character-tab-content">
       {{> (concat "teriock/sheets/actors/playable/tabs/" activeTab "-tab")}}
     </div>
-    <div class="character-tabber-background">
+    <div class="character-tabber-background non-floating">
       {{> "teriock/sheets/actors/playable/parts/tabs"}}
     </div>
   </div>
