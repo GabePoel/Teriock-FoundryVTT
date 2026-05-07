@@ -289,7 +289,7 @@ export default class BaseRoll extends Roll {
       name = actor.name;
     }
     if (token) {
-      img = token.imageLive;
+      img = token.img;
       rescale = token.rescale;
       name = token.name;
     }

@@ -39,7 +39,7 @@ export default class TeriockChatMessage extends BaseDocumentMixin(ChatMessage) {
    */
   get speakerImg() {
     const token = this.speakerToken;
-    if (token) return token.imageLive;
+    if (token) return token.img;
     const actor = this.speakerActor;
     if (actor) return actor.img;
     if (this.system.avatar) return this.system.avatar;
@@ -64,6 +64,11 @@ export default class TeriockChatMessage extends BaseDocumentMixin(ChatMessage) {
     if (!this.isContentVisible) for (const r of this.rolls) r.hideRoll = false;
     const context = await this.system._prepareContext(options);
     const element = await super.renderHTML(context);
+    // Connect this chat message as a relative document
+    /** @see {EmbedCardDocument.onEmbed} */
+    element.querySelectorAll(".teriock-block[data-uuid]").forEach((el) => {
+      el.dataset.relative = this.uuid;
+    });
     await this.system._onRender(context, { element, ...options });
     return element;
   }

@@ -262,7 +262,7 @@ export const icons = {
     gameMasterControls: "mdi-crown",
   },
   species: {
-    adult: "ms-accessibility-new",
+    adult: "ms-account-child-invert",
     br: "ms-rubric",
     lifespan: "ms-elderly",
     maxSize: "ms-vertical-align-top",

@@ -56,19 +56,19 @@ export default class ImbuementSheet extends mix(
 
   static TABS = {
     sheet: {
+      initial: super.TABS.sheet.initial,
+      labelPrefix: super.TABS.sheet.labelPrefix,
       tabs: [
         ...super.TABS.sheet.tabs,
         {
-          id: "automations",
           icon: makeIconClass(icons.pseudoDocument.automation, "solid"),
+          id: "automations",
         },
         {
-          id: "children",
           icon: makeIconClass(icons.ui.document, "solid"),
+          id: "children",
         },
       ],
-      initial: super.TABS.sheet.initial,
-      labelPrefix: super.TABS.sheet.labelPrefix,
     },
   };
 

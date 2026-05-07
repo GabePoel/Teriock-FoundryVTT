@@ -86,7 +86,7 @@ export default function AbilityExecutionChatPart(Base) {
         const doc = fromUuidSync(uuid);
         return {
           name: doc.name,
-          img: doc.imageLive || doc.img,
+          img: doc.img || doc.img,
           uuid,
           rescale: doc.rescale,
           id: doc.id,

@@ -80,8 +80,12 @@ export default function EmbedCardDocumentMixin(Base) {
       /** @inheritDoc */
       onEmbed(element) {
         bindCommonActions(element);
-        const relativeUuid = element.dataset.relative;
-        if (relativeUuid) {
+        const proceed =
+          element.classList.contains("teriock-block") ||
+          !!element.querySelector(`.teriock-block[data-uuid="${this.uuid}"]`);
+        if (proceed) {
+          const relativeUuid =
+            element.querySelector("[data-relative]")?.dataset.relative;
           fromUuid(relativeUuid).then((relative) => {
             for (const [type, callback] of Object.entries({
               click: "primary",
@@ -103,6 +107,11 @@ export default function EmbedCardDocumentMixin(Base) {
                   }
                   if (relative?.parent && relative.parent.sheet?.isVisible) {
                     await relative.parent.sheet.render();
+                  }
+                  // Special handling for updating chat messages since they don't use sheets.
+                  /** @see {TeriockChatMessage.renderHTML} */
+                  if (relative?.documentName === "ChatMessage") {
+                    await ui.chat.updateMessage(relative);
                   }
                 }
               });

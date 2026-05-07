@@ -40,7 +40,7 @@
 
 @mixin teriock-block-base {
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: var(--color-block-display-background);
   border: var(--teriock-block-outer-border-width) solid
     var(--color-block-container-border);
   border-radius: var(--teriock-block-border-radius);
@@ -339,11 +339,24 @@
     --teriock-block-image-margin-left: 6px;
     --teriock-block-outer-border-width: 0;
     border-top-width: 0;
-    box-shadow:
-      var(--teriock-block-container-box-shadow),
-      inset 0 0 0 1px var(--color-block-container-border);
+    //box-shadow: var(--teriock-block-container-box-shadow),
+    //inset 0 0 0 1px var(--color-block-container-border);
     gap: 0;
     overflow: hidden;
+    position: relative;
+    &::after {
+      box-shadow:
+        var(--teriock-block-container-box-shadow),
+        inset 0 0 0 1px var(--color-block-container-border);
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      border-radius: var(--teriock-block-outer-border-radius);
+      pointer-events: none;
+    }
   }
 
   .teriock-block {

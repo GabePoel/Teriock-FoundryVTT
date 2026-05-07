@@ -22,18 +22,10 @@ export default class TeriockTokenDocument extends mix(
   mixins.BaseDocumentMixin,
   mixins.EmbedCardDocumentMixin,
 ) {
-  /**
-   * Center of this token.
-   * @returns {Point}
-   */
-  get center() {
-    return { x: this.x + this.sizeX / 2, y: this.y + this.sizeY / 2 };
-  }
-
   /** @inheritDoc */
   get embedParts() {
     const parts = Object.assign(super.embedParts, {
-      img: this.imageLive,
+      img: this.img,
       icon: icons.document.token,
     });
     if (this.actor && this.actor.fullName !== parts.title) {
@@ -46,7 +38,7 @@ export default class TeriockTokenDocument extends mix(
    * The image that should be used to represent this token.
    * @returns {string}
    */
-  get imageLive() {
+  get img() {
     return this.texture.src;
   }
 
