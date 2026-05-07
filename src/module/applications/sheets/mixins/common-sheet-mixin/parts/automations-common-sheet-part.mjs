@@ -73,7 +73,7 @@ export default (Base) => {
       static async _onDeleteAutomation(_event, target) {
         const id = target.dataset.id;
         const automation = this.document.system.automations.get(id);
-        await automation?.deleteDialog();
+        await automation?.deleteDialog({ modal: true });
       }
 
       /**
@@ -172,7 +172,7 @@ export default (Base) => {
                 const uuid = el.dataset.uuid;
                 if (!uuid) return;
                 const auto = await fromUuid(uuid);
-                await auto?.deleteDialog();
+                await auto?.deleteDialog({ modal: true });
               },
             },
           ],

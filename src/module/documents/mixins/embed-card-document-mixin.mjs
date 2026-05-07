@@ -85,6 +85,7 @@ export default function EmbedCardDocumentMixin(Base) {
           !!element.querySelector(`.teriock-block[data-uuid="${this.uuid}"]`);
         if (proceed) {
           const relativeUuid =
+            element.dataset.relative ??
             element.querySelector("[data-relative]")?.dataset.relative;
           fromUuid(relativeUuid).then((relative) => {
             for (const [type, callback] of Object.entries({
