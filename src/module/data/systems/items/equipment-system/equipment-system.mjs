@@ -203,7 +203,7 @@ export default class EquipmentSystem extends mix(
 
   /**
    * @inheritDoc
-   * @param {Teriock.Execution.EquipmentExecutionOptions} options
+   * @param {Partial<Teriock.Execution.EquipmentExecutionOptions>} options
    */
   async _use(options = {}) {
     if (game.teriock.getSetting("rollAttackOnArmamentUse")) {

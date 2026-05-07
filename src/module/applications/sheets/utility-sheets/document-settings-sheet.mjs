@@ -32,6 +32,11 @@ export default class DocumentSettingsSheet extends DocumentDialogSheet {
     });
   }
 
+  /** @inheritDoc */
+  get _titlePrefix() {
+    return "TERIOCK.SYSTEMS.Common.MENU.configureDocument";
+  }
+
   /**
    * Configure a normal field.
    * @param {string} path

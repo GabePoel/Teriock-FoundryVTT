@@ -58,4 +58,9 @@ export default class TeriockRevitalizeManager extends TeriockStatManager {
       await super._onRollStatDie(event, target);
     }
   }
+
+  /** @inheritDoc */
+  get _titlePrefix() {
+    return "TERIOCK.EFFECTS.Common.revitalize";
+  }
 }

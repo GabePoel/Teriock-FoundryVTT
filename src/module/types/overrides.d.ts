@@ -50,8 +50,16 @@ declare global {
     notifications: TeriockNotifications;
   };
 
-  function fromUuidSync<T>(uuid: UUID<T>): T | undefined;
-  function fromUuid<T>(uuid: UUID<T>): Promise<T> | undefined;
+  type FromUuidOptions = {
+    relative: TeriockDocument;
+    invalid: boolean;
+  };
+
+  function fromUuidSync<T>(uuid: UUID<T>, [options]: FromUuidOptions): T | null;
+  function fromUuid<T>(
+    uuid: UUID<T>,
+    [options]: FromUuidOptions,
+  ): Promise<T> | null;
 }
 
 export {};

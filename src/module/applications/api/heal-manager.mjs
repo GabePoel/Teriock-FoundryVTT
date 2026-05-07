@@ -73,9 +73,14 @@ export default class TeriockHealManager extends TeriockStatManager {
   }
 
   /** @inheritDoc */
+  get _titlePrefix() {
+    return "TERIOCK.EFFECTS.Common.heal";
+  }
+
+  /** @inheritDoc */
   async _prepareContext(options = {}) {
-    const context = await super._prepareContext(options);
-    context.noDice = this._noDice;
-    return context;
+    return Object.assign(await super._prepareContext(options), {
+      noDice: this._noDice,
+    });
   }
 }

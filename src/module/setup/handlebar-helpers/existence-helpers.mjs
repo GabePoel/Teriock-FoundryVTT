@@ -2,6 +2,7 @@ export default function registerExistenceHelpers() {
   Handlebars.registerHelper("exists", (val) => {
     if (Array.isArray(val)) return val.length > 0;
     if (val === undefined || val === null) return false;
+    if (typeof val === "object") return Object.keys(val).length > 0;
     if (typeof val === "string") {
       return !(val.trim() === "" || val === "0" || val === "+0");
     }

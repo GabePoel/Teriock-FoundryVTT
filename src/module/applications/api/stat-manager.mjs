@@ -1,9 +1,8 @@
 import { HackStatMixin } from "../shared/mixins/_module.mjs";
 import { DocumentDialogSheet } from "../sheets/utility-sheets/_module.mjs";
 
-// noinspection JSClosureCompilerSyntax
 /**
- * @extends {TeriockDocumentSheet}
+ * @extends {DocumentDialogSheet}
  * @mixes HackStatApplication
  * @property {boolean} _consumeStatDice
  * @property {boolean} _forHarm
@@ -81,8 +80,7 @@ export default class TeriockStatManager extends HackStatMixin(
 
   /** @inheritDoc */
   async _prepareContext(options = {}) {
-    const context = await super._prepareContext(options);
-    return Object.assign(context, {
+    return Object.assign(await super._prepareContext(options), {
       consumeStatDice: this._consumeStatDice,
       consumeStatDiceField: this._consumeStatDiceField,
       forHarm: this._forHarm,

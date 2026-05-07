@@ -49,7 +49,8 @@ declare global {
       | Teriock.Documents.ActiveEffectType;
     export type CommonType =
       | Teriock.Documents.ChildType
-      | Teriock.Documents.ActorType;
+      | Teriock.Documents.ActorType
+      | "base";
 
     export type ModelMetadata = {
       armament: boolean;

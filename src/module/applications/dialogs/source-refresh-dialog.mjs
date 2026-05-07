@@ -34,22 +34,6 @@ export default class SourceRefreshDialog extends DocumentDialogSheet {
     },
   };
 
-  constructor(...args) {
-    super(...args);
-    if (!localized) {
-      foundry.helpers.Localization.localizeDataModel(RefreshOptions);
-      localized = true;
-    }
-    this.refreshOptions = new RefreshOptions();
-    this.selected = null;
-  }
-
-  /** @type {RefreshOptions} */
-  refreshOptions;
-
-  /** @type {UUID<AnyCommonDocument>|null} */
-  selected;
-
   static PARTS = {
     select: {
       scrollable: [".doc-list-container"],
@@ -59,42 +43,14 @@ export default class SourceRefreshDialog extends DocumentDialogSheet {
     footer: { template: "templates/generic/form-footer.hbs" },
   };
 
-  /** @inheritDoc */
-  async _preparePartContext(partId, context, options) {
-    context = await super._preparePartContext(partId, context, options);
-    const fields = Object.values(this.refreshOptions.schema.fields);
-    switch (partId) {
-      case "options":
-        context.fields = fields.map((f) => {
-          return { field: f };
-        });
-        break;
+  constructor(...args) {
+    super(...args);
+    if (!localized) {
+      foundry.helpers.Localization.localizeDataModel(RefreshOptions);
+      localized = true;
     }
-    return context;
-  }
-
-  /** @inheritDoc */
-  async _onRender(context, options) {
-    await super._onRender(context, options);
-    this.element.querySelectorAll("input[type='checkbox']").forEach((el) => {
-      el.addEventListener("change", () => {
-        const name = el.getAttribute("name");
-        this.refreshOptions[name] = el.checked;
-      });
-    });
-    this.element.querySelectorAll("input[type='radio']").forEach((el) => {
-      el.addEventListener("change", () => {
-        if (el.checked) this.selected = el.value;
-      });
-    });
-    this.element
-      .querySelectorAll(".teriock-block-searchbar")
-      .forEach((el) => el.remove());
-    this.element.querySelectorAll(".dynamic-select .form-group").forEach(
-      /** @param {HTMLElement} el */ (el) => {
-        el.style.setProperty("--fade", "0");
-      },
-    );
+    this.refreshOptions = new RefreshOptions();
+    this.selected = null;
   }
 
   /**
@@ -106,6 +62,56 @@ export default class SourceRefreshDialog extends DocumentDialogSheet {
     const source = await fromUuid(this.selected);
     await this.close();
     await this.document.system.refreshFromSource(source, this.refreshOptions);
+  }
+
+  /** @type {RefreshOptions} */
+  refreshOptions;
+
+  /** @type {UUID<AnyCommonDocument>|null} */
+  selected;
+
+  /** @inheritDoc */
+  get _titlePrefix() {
+    return "TERIOCK.SYSTEMS.Common.MENU.sourceRefresh";
+  }
+
+  /** @inheritDoc */
+  async _onRender(context, options) {
+    await super._onRender(context, options);
+    // Remove search since this shouldn't ever have enough documents to warrant it
+    this.element
+      .querySelectorAll(".teriock-block-searchbar")
+      .forEach((el) => el.remove());
+    this.element.querySelectorAll(".dynamic-select .form-group").forEach(
+      /** @param {HTMLElement} el */ (el) => {
+        el.style.setProperty("--fade", "0");
+      },
+    );
+    // Listen for updates from the available refresh source documents
+    this.element.querySelectorAll("input[type='radio']").forEach((el) => {
+      el.addEventListener("change", () => {
+        if (el?.checked) this.selected = el.value;
+      });
+    });
+    // Listen for refresh option updates
+    this.element.querySelectorAll("input[type='checkbox']").forEach((el) => {
+      el.addEventListener("change", () => {
+        const name = el.getAttribute("name");
+        this.refreshOptions[name] = el?.checked;
+      });
+    });
+    // Listen for double clicks to open refresh sources
+    /** @see {TeriockDocumentSelector._initClickLoader} */
+    this.element.querySelectorAll("[data-uuid]").forEach(
+      /** @param {HTMLElement} el */ (el) => {
+        el.addEventListener("dblclick", async (ev) => {
+          const target = /** @type {HTMLElement} */ ev.currentTarget;
+          const uuid = target.dataset.uuid;
+          const doc = /** @type {ChildDocument} */ await fromUuid(uuid);
+          await doc.sheet.render(true);
+        });
+      },
+    );
   }
 
   /** @inheritDoc */
@@ -140,5 +146,19 @@ export default class SourceRefreshDialog extends DocumentDialogSheet {
       tooltip: true,
       tooltipAsync: true,
     });
+  }
+
+  /** @inheritDoc */
+  async _preparePartContext(partId, context, options) {
+    context = await super._preparePartContext(partId, context, options);
+    const fields = Object.values(this.refreshOptions.schema.fields);
+    switch (partId) {
+      case "options":
+        context.fields = fields.map((f) => {
+          return { field: f };
+        });
+        break;
+    }
+    return context;
   }
 }

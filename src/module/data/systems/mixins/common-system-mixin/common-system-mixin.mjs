@@ -114,6 +114,39 @@ export default function CommonSystemMixin(Base) {
         return this.parent.master?.fullName || this.parent.master?.name || "";
       }
 
+      /**
+       * An array of unresolved promises that resolve to documents this could refresh from.
+       * @returns {Promise<RefreshSourceNode>[]}
+       */
+      get _refreshPromises() {
+        const promises = [];
+        if (this.parent._stats.compendiumSource) {
+          promises.push(
+            this._formatRefreshPromise(
+              fromUuid(this.parent._stats.compendiumSource),
+              "TERIOCK.SHEETS.DocumentSettings.FIELDS.compendiumSource.label",
+            ),
+          );
+        }
+        if (this.parent._stats.duplicateSource) {
+          promises.push(
+            this._formatRefreshPromise(
+              fromUuid(this.parent._stats.duplicateSource),
+              "TERIOCK.SHEETS.DocumentSettings.FIELDS.duplicateSource.label",
+            ),
+          );
+        }
+        if (this.parent.typedIdentifier) {
+          promises.push(
+            this._formatRefreshPromise(
+              fromIdentifier(this.parent.typedIdentifier),
+              "TERIOCK.SYSTEMS.Rules.FIELDS.identifier.label",
+            ),
+          );
+        }
+        return promises;
+      }
+
       /** @returns {Teriock.Sheet.DisplayField[]} */
       get displayFields() {
         return ["system.description"];
@@ -269,17 +302,6 @@ export default function CommonSystemMixin(Base) {
         }
       }
 
-      /** @inheritDoc */
-      async _propagateOperation(methodName, isAsync = false, args = []) {
-        for (const automation of this.automations.contents) {
-          if (typeof automation[methodName] === "function") {
-            if (isAsync) await automation[methodName](...args);
-            else automation[methodName](...args);
-          }
-        }
-        await super._propagateOperation(methodName, isAsync, args);
-      }
-
       /**
        * Format a refresh promise properly.
        * @param {Promise<AnyCommonDocument|null>} document
@@ -293,64 +315,15 @@ export default function CommonSystemMixin(Base) {
         };
       }
 
-      /**
-       * An array of unresolved promises that resolve to documents this could refresh from.
-       * @returns {Promise<RefreshSourceNode>[]}
-       */
-      get _refreshPromises() {
-        const promises = [];
-        if (this.parent._stats.compendiumSource) {
-          promises.push(
-            this._formatRefreshPromise(
-              fromUuid(this.parent._stats.compendiumSource),
-              "TERIOCK.SHEETS.DocumentSettings.FIELDS.compendiumSource.label",
-            ),
-          );
+      /** @inheritDoc */
+      async _propagateOperation(methodName, isAsync = false, args = []) {
+        for (const automation of this.automations.contents) {
+          if (typeof automation[methodName] === "function") {
+            if (isAsync) await automation[methodName](...args);
+            else automation[methodName](...args);
+          }
         }
-        if (this.parent._stats.duplicateSource) {
-          promises.push(
-            this._formatRefreshPromise(
-              fromUuid(this.parent._stats.duplicateSource),
-              "TERIOCK.SHEETS.DocumentSettings.FIELDS.duplicateSource.label",
-            ),
-          );
-        }
-        if (this.parent.typedIdentifier) {
-          promises.push(
-            this._formatRefreshPromise(
-              fromIdentifier(this.parent.typedIdentifier),
-              "TERIOCK.SYSTEMS.Rules.FIELDS.identifier.label",
-            ),
-          );
-        }
-        return promises;
-      }
-
-      /**
-       * Get an array of documents which can be used to refresh this from.
-       * @returns {Promise<RefreshSourceNode[]>}
-       */
-      async getRefreshSources() {
-        const resolvedNodes = await Promise.all(this._refreshPromises);
-        return resolvedNodes.filter(
-          (n) =>
-            n.document &&
-            n.document.isViewer &&
-            n.document.uuid !== this.parent.uuid,
-        );
-      }
-
-      /**
-       * Get a refresh object from a document with the same type as this one.
-       * @param {AnyCommonDocument} document
-       * @returns {object}
-       */
-      toRefreshObject(document) {
-        const obj = document?.toObject(true) ?? {};
-        for (const p of this.metadata.preservedProperties || []) {
-          foundry.utils.deleteProperty(obj, p);
-        }
-        return obj;
+        await super._propagateOperation(methodName, isAsync, args);
       }
 
       /**
@@ -361,8 +334,7 @@ export default function CommonSystemMixin(Base) {
         for (const [docName, children] of Object.entries(updateMap)) {
           const updateArray = await Promise.all(
             children.dst.map(async (d) => {
-              const nodes = await d.system.getRefreshSources();
-              const refreshDocument = nodes[0]?.document;
+              const refreshDocument = await fromUuid(d._stats.compendiumSource);
               const obj = refreshDocument
                 ? d.system.toRefreshObject(refreshDocument)
                 : {};
@@ -443,6 +415,20 @@ export default function CommonSystemMixin(Base) {
         return parts;
       }
 
+      /**
+       * Get an array of documents which can be used to refresh this from.
+       * @returns {Promise<RefreshSourceNode[]>}
+       */
+      async getRefreshSources() {
+        const resolvedNodes = await Promise.all(this._refreshPromises);
+        return resolvedNodes.filter(
+          (n) =>
+            n.document &&
+            n.document.isViewer &&
+            n.document.uuid !== this.parent.uuid,
+        );
+      }
+
       /** @inheritDoc */
       getRollData() {
         let rollData = {};
@@ -487,7 +473,7 @@ export default function CommonSystemMixin(Base) {
             notesPage = notesJournal.pages.find(
               (p) =>
                 p.name === this.parent.name &&
-                notesJournal.categories.get(p.category)?.name ===
+                notesJournal?.categories.get(p.category)?.name ===
                   notesCategoryName,
             );
             if (!notesPage) {
@@ -586,8 +572,7 @@ export default function CommonSystemMixin(Base) {
         }
         if (recursive) {
           for (const child of await this.parent.getChildArray()) {
-            const childSource =
-              (await child.system.getRefreshSources())[0]?.document || null;
+            const childSource = await fromUuid(child._stats.compendiumSource);
             await child.system.refreshFromSource(childSource, {
               deleteChildren,
               createChildren,
@@ -597,6 +582,19 @@ export default function CommonSystemMixin(Base) {
             });
           }
         }
+      }
+
+      /**
+       * Get a refresh object from a document with the same type as this one.
+       * @param {AnyCommonDocument} document
+       * @returns {object}
+       */
+      toRefreshObject(document) {
+        const obj = document?.toObject(true) ?? {};
+        for (const p of this.metadata.preservedProperties || []) {
+          foundry.utils.deleteProperty(obj, p);
+        }
+        return obj;
       }
     }
   );
