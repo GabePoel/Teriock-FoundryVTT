@@ -1,7 +1,11 @@
 import { TeriockJournalEntry } from "../../../../documents/_module.mjs";
 import { mix } from "../../../../helpers/construction.mjs";
 import { quickAddAssociation } from "../../../../helpers/panel.mjs";
-import { fancifyFields, prefixObject } from "../../../../helpers/utils.mjs";
+import {
+  fancifyFields,
+  fromIdentifier,
+  prefixObject,
+} from "../../../../helpers/utils.mjs";
 import {
   AccessDataMixin,
   AutomatedDataMixin,
@@ -13,6 +17,12 @@ import {
 } from "../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
+
+/**
+ * @typedef RefreshSourceNode
+ * @property {AnyCommonDocument|null} document
+ * @property {string} label
+ */
 
 /**
  * @param {typeof TypeDataModel} Base
@@ -217,9 +227,16 @@ export default function CommonSystemMixin(Base) {
             ...dstDocs.map((d) => d.documentName),
           ]);
           for (const docName of docNames) {
+            const existing = childMap[docName] || { src: [], dst: [] };
             childMap[docName] = {
-              src: srcDocs.filter((s) => s.documentName === docName),
-              dst: dstDocs.filter((d) => d.documentName === docName),
+              src: [
+                ...existing.src,
+                ...srcDocs.filter((s) => s.documentName === docName),
+              ],
+              dst: [
+                ...existing.dst,
+                ...dstDocs.filter((d) => d.documentName === docName),
+              ],
             };
           }
         }
@@ -264,6 +281,79 @@ export default function CommonSystemMixin(Base) {
       }
 
       /**
+       * Format a refresh promise properly.
+       * @param {Promise<AnyCommonDocument|null>} document
+       * @param {string} label
+       * @returns {Promise<RefreshSourceNode>}
+       */
+      async _formatRefreshPromise(document, label) {
+        return {
+          document: await document,
+          label: _loc(label),
+        };
+      }
+
+      /**
+       * An array of unresolved promises that resolve to documents this could refresh from.
+       * @returns {Promise<RefreshSourceNode>[]}
+       */
+      get _refreshPromises() {
+        const promises = [];
+        if (this.parent._stats.compendiumSource) {
+          promises.push(
+            this._formatRefreshPromise(
+              fromUuid(this.parent._stats.compendiumSource),
+              "TERIOCK.SHEETS.DocumentSettings.FIELDS.compendiumSource.label",
+            ),
+          );
+        }
+        if (this.parent._stats.duplicateSource) {
+          promises.push(
+            this._formatRefreshPromise(
+              fromUuid(this.parent._stats.duplicateSource),
+              "TERIOCK.SHEETS.DocumentSettings.FIELDS.duplicateSource.label",
+            ),
+          );
+        }
+        if (this.parent.typedIdentifier) {
+          promises.push(
+            this._formatRefreshPromise(
+              fromIdentifier(this.parent.typedIdentifier),
+              "TERIOCK.SYSTEMS.Rules.FIELDS.identifier.label",
+            ),
+          );
+        }
+        return promises;
+      }
+
+      /**
+       * Get an array of documents which can be used to refresh this from.
+       * @returns {Promise<RefreshSourceNode[]>}
+       */
+      async getRefreshSources() {
+        const resolvedNodes = await Promise.all(this._refreshPromises);
+        return resolvedNodes.filter(
+          (n) =>
+            n.document &&
+            n.document.isViewer &&
+            n.document.uuid !== this.parent.uuid,
+        );
+      }
+
+      /**
+       * Get a refresh object from a document with the same type as this one.
+       * @param {AnyCommonDocument} document
+       * @returns {object}
+       */
+      toRefreshObject(document) {
+        const obj = document?.toObject(true) ?? {};
+        for (const p of this.metadata.preservedProperties || []) {
+          foundry.utils.deleteProperty(obj, p);
+        }
+        return obj;
+      }
+
+      /**
        * @param {ChildDeltaMap} updateMap
        * @returns {Promise<void>}
        */
@@ -271,7 +361,11 @@ export default function CommonSystemMixin(Base) {
         for (const [docName, children] of Object.entries(updateMap)) {
           const updateArray = await Promise.all(
             children.dst.map(async (d) => {
-              const obj = await d.system.getCompendiumSourceRefreshObject();
+              const nodes = await d.system.getRefreshSources();
+              const refreshDocument = nodes[0]?.document;
+              const obj = refreshDocument
+                ? d.system.toRefreshObject(refreshDocument)
+                : {};
               obj._id = d.id;
               return obj;
             }),
@@ -286,25 +380,6 @@ export default function CommonSystemMixin(Base) {
        */
       getCardContextMenuEntries(_doc) {
         return [];
-      }
-
-      /** @returns {Promise<CommonDocument|null>} */
-      async getCompendiumSource() {
-        const reference = await fromUuid(this.parent._stats.compendiumSource);
-        return reference || null;
-      }
-
-      /** @returns {Promise<object>} */
-      async getCompendiumSourceRefreshObject() {
-        const reference = await this.getCompendiumSource();
-        if (reference) {
-          const object = reference.toObject(true);
-          for (const property of this.metadata.preservedProperties || []) {
-            foundry.utils.deleteProperty(object, property);
-          }
-          return object;
-        }
-        return {};
       }
 
       /** @inheritDoc */
@@ -450,6 +525,7 @@ export default function CommonSystemMixin(Base) {
       }
 
       /**
+       * @param {AnyCommonDocument} document
        * @param {object} [options]
        * @param {boolean} [options.deleteChildren]
        * @param {boolean} [options.createChildren]
@@ -458,7 +534,7 @@ export default function CommonSystemMixin(Base) {
        * @param {boolean} [options.recursive]
        * @returns {Promise<void>}
        */
-      async refreshFromCompendiumSource(options = {}) {
+      async refreshFromSource(document, options = {}) {
         const {
           deleteChildren = true,
           createChildren = true,
@@ -466,20 +542,19 @@ export default function CommonSystemMixin(Base) {
           updateDocument = true,
           recursive = true,
         } = options;
-        if (this.parent._stats.compendiumSource) {
+        if (document) {
           if (updateDocument) {
             if (this.automations?.contents.length) {
               await this.parent.update({ "system.automations": _replace({}) });
             }
-            const indexObject = await this.getCompendiumSourceRefreshObject();
+            const indexObject = this.toRefreshObject(document);
             delete indexObject.flags;
             delete indexObject.system?._ref;
             delete indexObject.system?._sup;
             await this.parent.update(indexObject);
           }
-          const reference = await this.getCompendiumSource();
-          if (reference) {
-            const srcChildren = await reference.getChildren();
+          if (createChildren || deleteChildren || updateChildren) {
+            const srcChildren = await document.getChildren();
             const srcChildTypeMap = srcChildren.documentsByType;
             const dstChildren = await this.parent.getChildren();
             const dstChildTypeMap = dstChildren.documentsByType;
@@ -511,7 +586,9 @@ export default function CommonSystemMixin(Base) {
         }
         if (recursive) {
           for (const child of await this.parent.getChildArray()) {
-            await child.system.refreshFromCompendiumSource({
+            const childSource =
+              (await child.system.getRefreshSources())[0]?.document || null;
+            await child.system.refreshFromSource(childSource, {
               deleteChildren,
               createChildren,
               updateChildren,

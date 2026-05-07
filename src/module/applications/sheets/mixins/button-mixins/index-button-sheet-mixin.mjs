@@ -1,5 +1,6 @@
+import { icons } from "../../../../constants/display/icons.mjs";
 import { makeIconClass } from "../../../../helpers/utils.mjs";
-import { refreshFromCompendiumDialog } from "../../../dialogs/_module.mjs";
+import { SourceRefreshDialog } from "../../../dialogs/_module.mjs";
 
 /**
  * @param {typeof TeriockDocumentSheet} Base
@@ -12,13 +13,13 @@ export default function IndexButtonSheetMixin(Base) {
   return class IndexButtonSheet extends Base {
     /** @type {Partial<ApplicationConfiguration>} */
     static DEFAULT_OPTIONS = /** @type {Partial<ApplicationConfiguration>} */ {
-      actions: { refreshFromCompendium: this._onRefreshFromCompendium },
+      actions: { sourceRefresh: this._onSourceRefresh },
       window: {
         controls: [
           {
-            action: "refreshFromCompendium",
-            icon: makeIconClass("fa-book-atlas", "contextMenu"),
-            label: "TERIOCK.SYSTEMS.Common.MENU.compendiumRefresh",
+            action: "sourceRefresh",
+            icon: makeIconClass(icons.ui.sourceRefresh, "contextMenu"),
+            label: "TERIOCK.SYSTEMS.Common.MENU.sourceRefresh",
             ownership: "OWNER",
           },
         ],
@@ -29,8 +30,9 @@ export default function IndexButtonSheetMixin(Base) {
      * Refresh this document from the index.
      * @returns {Promise<void>}
      */
-    static async _onRefreshFromCompendium() {
-      await refreshFromCompendiumDialog(this.document);
+    static async _onSourceRefresh() {
+      const dialog = new SourceRefreshDialog({ document: this.document });
+      await dialog.render(true);
     }
   };
 }

@@ -370,8 +370,8 @@ export default class AbilitySystem extends mix(
   }
 
   /** @inheritDoc */
-  async getCompendiumSourceRefreshObject() {
-    const obj = await super.getCompendiumSourceRefreshObject();
+  toRefreshObject(document) {
+    const obj = super.toRefreshObject(document);
     if (!["normal", "special", "flaw"].includes(this.form)) {
       foundry.utils.deleteProperty(obj, "system.form");
     }

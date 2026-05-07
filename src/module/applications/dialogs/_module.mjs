@@ -10,7 +10,7 @@ export { default as healDialog } from "./heal-dialog.mjs";
 export { default as hotbarDropDialog } from "./hotbar-drop-dialog.mjs";
 export { default as inCombatExpirationDialog } from "./in-combat-expiration-dialog.mjs";
 export { default as newDocumentDialog } from "./new-document-dialog.mjs";
-export { default as refreshFromCompendiumDialog } from "./refresh-from-compendium-dialog.mjs";
 export { default as revitalizeDialog } from "./revitalize-dialog.mjs";
 export { default as setStatDiceDialog } from "./set-stat-dice-dialog.mjs";
 export { default as updateDialog } from "./update-dialog.mjs";
+export { default as SourceRefreshDialog } from "./source-refresh-dialog.mjs";

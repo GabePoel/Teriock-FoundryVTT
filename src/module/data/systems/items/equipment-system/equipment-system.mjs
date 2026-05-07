@@ -6,6 +6,7 @@ import {
   toKebabCase,
 } from "../../../../helpers/string.mjs";
 import {
+  fromIdentifier,
   inferNameFromIdentifier,
   objectMap,
 } from "../../../../helpers/utils.mjs";
@@ -184,6 +185,20 @@ export default class EquipmentSystem extends mix(
     if (yes === false) return false;
 
     if (this.parent.isEmbedded) this.updateSource({ equipped: true });
+  }
+
+  /** @inheritDoc */
+  get _refreshPromises() {
+    const promises = super._refreshPromises;
+    if (this.equipmentType) {
+      promises.push(
+        this._formatRefreshPromise(
+          fromIdentifier(`equipment:${this.equipmentType}`),
+          "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentType.label",
+        ),
+      );
+    }
+    return promises;
   }
 
   /**

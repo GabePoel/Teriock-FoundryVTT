@@ -2,6 +2,7 @@ import { icons } from "../../../../constants/display/icons.mjs";
 import { mix } from "../../../../helpers/construction.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
 import {
+  fromIdentifier,
   inferNameFromIdentifier,
   makeIcon,
 } from "../../../../helpers/utils.mjs";
@@ -140,6 +141,20 @@ export default class MountSystem extends mix(
       mounted: Number(this.mounted),
       [`type.${toCamelCase(this.mountType)}`]: 1,
     };
+  }
+
+  /** @inheritDoc */
+  get _refreshPromises() {
+    const promises = super._refreshPromises;
+    if (this.mountType) {
+      promises.push(
+        this._formatRefreshPromise(
+          fromIdentifier(`mount:${this.mountType}`),
+          "TERIOCK.SYSTEMS.Mount.FIELDS.mountType.label",
+        ),
+      );
+    }
+    return promises;
   }
 
   /**

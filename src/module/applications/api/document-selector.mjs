@@ -14,7 +14,7 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
    */
   static DEFAULT_OPTIONS = {
     actions: { ok: this._onGetSelected, cancel: this._onCancel },
-    classes: ["dynamic-select", "dialog"],
+    classes: ["dynamic-select", "dialog", "standard-form"],
     position: { width: 450 },
     window: {
       icon: makeIconClass(icons.ui.select, "title"),
@@ -28,6 +28,7 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
       scrollable: [".doc-list-container"],
       template: "teriock/dialogs/select",
     },
+    footer: { template: "templates/generic/form-footer.hbs" },
   };
 
   /**
@@ -53,9 +54,7 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
     this.openable = openable;
     if (options.title) {
       this.config = foundry.utils.mergeObject(this.options || {}, {
-        window: {
-          title: options.title,
-        },
+        window: { title: options.title },
       });
     }
     this._resolve = null;
@@ -86,9 +85,7 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
       ).map((el) => el.name);
     } else {
       const radio = root.querySelector('input[name="choice"]:checked');
-      if (radio) {
-        ids = [radio.value];
-      }
+      if (radio) ids = [radio.value];
     }
     this._finish(ids);
     await this.close();
@@ -164,15 +161,21 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
 
   /** @inheritDoc */
   async _prepareContext(options = {}) {
-    const context = await super._prepareContext(options);
-    Object.assign(context, {
+    return Object.assign(await super._prepareContext(options), {
+      buttons: [
+        {
+          action: "ok",
+          icon: makeIconClass(TERIOCK.display.icons.ui.done, "button"),
+          label: "COMMON.Confirm",
+          type: "submit",
+        },
+      ],
       documents: this.docs,
       hint: this.hint,
       multi: this.multi,
       tooltip: this.tooltip,
       tooltipAsync: this.tooltipAsync,
     });
-    return context;
   }
 
   /**

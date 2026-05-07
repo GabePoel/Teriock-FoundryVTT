@@ -18,16 +18,18 @@ await tm.utils.progressBar(
             const identifier = doc.defaultIdentifier;
             await doc.update({ "system.identifier": identifier });
           }
-          if (typeof doc?.system?.refreshFromCompendiumSource === "function") {
+          if (typeof doc?.system?.refreshFromSource === "function") {
             const options = {};
             if (p.collection === "teriock.magicItems") {
               options.deleteChildren = false;
               options.recursive = false;
             }
-            await doc?.system.refreshFromCompendiumSource(options);
+            const docSource = await fromUuid(doc?._stats.compendiumSource);
+            await doc?.system.refreshFromSource(docSource, options);
             if (p.collection === "teriock.magicItems") {
               for (const child of (await doc?.getChildArray()) || []) {
-                await child.system.refreshFromCompendiumSource();
+                const source = await fromUuid(child._stats.compendiumSource);
+                await child.system.refreshFromSource(source);
               }
             }
           }

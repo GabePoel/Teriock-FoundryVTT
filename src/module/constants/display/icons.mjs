@@ -375,6 +375,7 @@ export const icons = {
     shortRest: "ms-hr-resting",
     show: "ms-visibility",
     sort: "ms-sort",
+    sourceRefresh: "fa-book-atlas",
     tabLeft: "ms-keyboard-double-arrow-left",
     tabRight: "ms-double-arrow",
     time: "ms-nest-clock-farsight-analog",

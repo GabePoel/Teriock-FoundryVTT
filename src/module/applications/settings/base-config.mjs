@@ -53,9 +53,9 @@ export default class BaseConfig extends TeriockBaseApplication {
       });
       if (prior === (updated?._source?.value ?? updated)) continue;
       requiresClientReload ||=
-        setting.scope !== "world" && setting.requiresReload;
+        setting.scope !== "world" && setting?.requiresReload;
       requiresWorldReload ||=
-        setting.scope === "world" && setting.requiresReload;
+        setting.scope === "world" && setting?.requiresReload;
     }
     if (requiresClientReload || requiresWorldReload) {
       return SettingsConfig.reloadConfirm({ world: requiresWorldReload });
