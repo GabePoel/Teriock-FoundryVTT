@@ -330,18 +330,18 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.37
+      systemVersion: 0.12.46
     img: systems/teriock/src/icons/abilities/zombie-empowerment.webp
     name: Zombie Empowerment
     system:
       automations:
         7400b41f20d9f100:
           _id: 7400b41f20d9f100
+          all: false
           angle: '60'
           attachToToken: true
           automatic: true
-          data: '{}'
-          deleteOnTurnChange: true
+          deleteOnTurnChange: false
           excludeToken: true
           expandWithToken: true
           innerWidth: '0'
@@ -349,14 +349,17 @@ effects:
           outerWidth: '0'
           overrideData: false
           qualifier: '0'
-          regionType: circle
+          regionType: emanation
           restriction:
             enabled: false
             priority: 0
             type: move
-          targeting: true
-          trigger: executeInput
+          targeting: false
+          trigger: execute
           type: region
+          uuids:
+            - Compendium.teriock.templateEffects.ActiveEffect.DtIH8eQZRht4Mw4u
+          visibility: 0
       competence:
         raw: 0
       delivery: aura
@@ -366,6 +369,8 @@ effects:
             - down
         raw: '0'
         unit: unlimited
+      effectTypes:
+        - magical
       elements:
         - necromancy
       executionTime:
@@ -454,7 +459,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.37
+      systemVersion: 0.12.46
     img: systems/teriock/src/icons/abilities/undead-mind.webp
     name: Undead Mind
     system:
@@ -518,7 +523,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.37
+      systemVersion: 0.12.46
     img: systems/teriock/src/icons/abilities/magical-durability.webp
     name: Magical Durability
     system:
@@ -572,7 +577,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.37
+      systemVersion: 0.12.46
     img: systems/teriock/src/icons/abilities/ethereal-senses.webp
     name: Ethereal Senses
     system:
@@ -633,7 +638,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.37
+      systemVersion: 0.12.46
     img: systems/teriock/src/icons/abilities/mana-drain-touch.webp
     name: Mana Drain Touch
     system:
@@ -702,7 +707,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.37
+      systemVersion: 0.12.46
     img: systems/teriock/src/icons/abilities/undying-durability.webp
     name: Undying Durability
     system:
@@ -767,121 +772,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
-    type: ability
-  - _id: ccGQr1h6Ux2Zxo7d
-    _key: '!items.effects!1d9d0c02914b9f49.ccGQr1h6Ux2Zxo7d'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.24a2a3db4a940311
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.37
-    img: systems/teriock/src/icons/abilities/zombify.webp
-    name: Zombify
-    system:
-      _sup: j9Wi8jzP79wewvpS
-      automations:
-        72ce567009179bea:
-          _id: 72ce567009179bea
-          changeType: add
-          duration:
-            raw: '@h * 3600'
-            unit: second
-          heighten:
-            - 1
-          type: duration
-        838ba57012685987:
-          _id: 838ba57012685987
-          changeType: add
-          competencies:
-            - 2
-          duration:
-            raw: '3600'
-            unit: second
-          type: duration
-        ngQVntiCQ8Ruot8n:
-          _id: ngQVntiCQ8Ruot8n
-          automatic: true
-          competence:
-            raw: 0
-          multi: false
-          override:
-            - art
-          overrideCompetence: true
-          reset:
-            - hp
-            - mp
-          ring: false
-          suppress:
-            - body
-            - fluency
-            - rank
-            - species
-          type: transformation
-          uuids:
-            - Compendium.teriock.species.Item.b3708edf8c3c5c9f
-      class: necromancer
-      competence:
-        raw: 0
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-      delivery: hand
-      duration:
-        raw: '1'
-        unit: minute
-      effectTypes:
-        - control
-        - reanimation
-      elements:
-        - necromancy
-      executionTime:
-        base: a1
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 1 hour.</p>
-      identifier: zombify
-      interaction: attack
-      invoked: true
-      maneuver: active
-      mundane: false
-      overview:
-        fluent: >-
-          <p>The base duration of this effect is 1 hour and the
-          @L[Creature:Zombie]{zombie} is a @L[Core:Minions]{minion} under your
-          command.</p>
-        proficient: <p>[[lookup name]] is @L[Keyword:Warded]{warded}.</p>
-      piercing:
-        raw: 2
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      requirements: <p>Target is @L[Condition:Dead]{dead}.</p>
-      results:
-        hit: >-
-          <p>Target is reanimated as a @L[Creature:Zombie]{zombie}. It is not
-          under your command, but is hostile to everyone other than you that is
-          not @L[Category:Zombies]{another zombie}. The
-          @L[Creature:Zombie]{zombie} keeps the @L[Core:Size]{SIZE} it had
-          before, but loses all other traits and abilities. If the target was
-          already @L[Category:Zombies]{some kind of zombie}, then it is
-          reanimated as that type.</p>
-      spell: true
-      standard: true
-      targets:
-        - creature
     transfer: true
     type: ability
 folder: 249fb1db4a91e504

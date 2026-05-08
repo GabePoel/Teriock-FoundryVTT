@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.36
+  systemVersion: 0.12.46
 img: systems/teriock/src/icons/abilities/triumphant-goblin-awaken.webp
 name: Triumphant Goblin Awaken
 system:
@@ -19,7 +19,6 @@ system:
       angle: '60'
       attachToToken: true
       automatic: true
-      data: '{}'
       deleteOnTurnChange: true
       expandWithToken: true
       innerWidth: '0'
@@ -27,7 +26,10 @@ system:
       outerWidth: '0'
       overrideData: false
       qualifier: '0'
-      regionType: circle
+      regionType: emanation
+      restriction:
+        enabled: false
+      targeting: true
       trigger: executeInput
       type: region
       updateTargets: true
@@ -39,6 +41,7 @@ system:
     unit: instant
   effectTypes:
     - awakening
+    - magical
   executionTime:
     base: r0
     slow:
@@ -52,6 +55,8 @@ system:
   interaction: manifest
   maneuver: reactive
   mundane: false
+  overview:
+    base: <p>Target is @L[Keyword:Awaken]{awakened}.</p>
   piercing:
     raw: 0
   powerSources:
@@ -60,8 +65,6 @@ system:
     raw: '100'
     unit: ft
   requirements: <p>Target is a @L[Category:Goblins]{goblin}.</p>
-  results:
-    hit: <p>Target is @L[Keyword:Awaken]{awakened}.</p>
   targets:
     - creature
   trigger: <p>@L[Condition:Down]{Dropping} an opponent.</p>

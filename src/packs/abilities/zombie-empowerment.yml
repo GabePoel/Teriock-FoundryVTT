@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.36
+  systemVersion: 0.12.46
 img: systems/teriock/src/icons/abilities/zombie-empowerment.webp
 name: Zombie Empowerment
 system:
@@ -14,18 +14,24 @@ system:
       angle: '60'
       attachToToken: true
       automatic: true
-      data: '{}'
-      deleteOnTurnChange: true
+      deleteOnTurnChange: false
+      excludeToken: true
       expandWithToken: true
       innerWidth: '0'
       multi: false
       outerWidth: '0'
       overrideData: false
       qualifier: '0'
-      regionType: circle
-      trigger: executeInput
+      regionType: emanation
+      restriction:
+        enabled: false
+      targeting: false
+      trigger: execute
       type: region
       updateTargets: true
+      uuids:
+        - Compendium.teriock.templateEffects.ActiveEffect.DtIH8eQZRht4Mw4u
+      visibility: 0
   competence:
     raw: 0
   delivery: aura
@@ -35,6 +41,8 @@ system:
         - down
     raw: '0'
     unit: unlimited
+  effectTypes:
+    - magical
   elements:
     - necromancy
   executionTime:

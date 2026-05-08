@@ -310,6 +310,23 @@ function cleanAutomations(automations) {
       v.type = TYPE_MIGRATIONS[v.type];
     }
     if (DEPRECATED_TYPES.includes(v.type)) delete automations[k];
+    if (v.type === "addDocuments") {
+      if (!v?.children?.enabled) delete v.children;
+    }
+    if (["addDocuments", "modifyEffect", "region"].includes(v.type)) {
+      if (!v?.overrideData) delete v.data;
+    }
+    if (
+      [
+        "addDocuments",
+        "modifyEffect",
+        "tradecraft",
+        "transformation",
+        "useDocuments",
+      ].includes(v.type)
+    ) {
+      if (!v?.overrideCompetence) delete v.competence;
+    }
   }
   for (const a of Object.values(automations)) cleanAutomation(a);
 }

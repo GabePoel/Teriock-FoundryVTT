@@ -184,6 +184,7 @@ function removeEmptyValues(obj) {
   } else {
     for (const key in obj) {
       if (obj[key] === "") delete obj[key];
+      if (obj[key] === "{}") delete obj[key];
       else if (obj[key] === null) delete obj[key];
       else if (Array.isArray(obj[key]) && obj[key].length === 0) {
         delete obj[key];
