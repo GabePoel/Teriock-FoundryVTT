@@ -6,11 +6,8 @@ import { icons } from "../../../constants/display/icons.mjs";
  * @returns {Teriock.Interaction.SimpleCommandFunction<Teriock.Interaction.StatusOptions>}
  */
 function fnFactory(operation) {
-  return async function statusCommandFunction(actor, options) {
-    if (!game.actors.check(actor)) return;
-    const status = options.status;
-    if (!status) return;
-    await operation(actor, status);
+  return async function statusCommandFunction(a, o) {
+    if (game.actors.check(a) && o?.status) await operation(a, o.status);
   };
 }
 
