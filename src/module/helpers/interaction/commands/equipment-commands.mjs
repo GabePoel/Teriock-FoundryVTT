@@ -2,166 +2,106 @@ import { selectDocumentsDialog } from "../../../applications/dialogs/select-docu
 import { icons } from "../../../constants/display/icons.mjs";
 
 /**
- * @see {EquipmentSuppressionPart.shatter}
- * @param {TeriockActor} actor
- * @returns {Promise<void>}
+ * Build an equipment command function.
+ * @param {((equipment: TeriockEquipment) => boolean)} filter
+ * @param {((equipment: TeriockEquipment) => Promise<*>)} onSelect
+ * @param {string} hint
+ * @param {string} title
+ * @returns {(actor: TeriockActor) => Promise<void>}
  */
-async function takeShatter(actor) {
-  if (!game.actors.check(actor)) return;
-  const choices = actor.equipment.filter((e) => !e.system.shattered);
-  const chosen = await selectDocumentsDialog(choices, {
-    hint: "TERIOCK.COMMANDS.Shatter.hint",
-    localize: true,
-    title: "TERIOCK.SYSTEMS.Equipment.MENU.shatter",
-  });
-  await Promise.all(chosen.map((e) => e.system.shatter()));
+function equipmentCommandFunctionFactory(filter, onSelect, hint, title) {
+  return async function equipmentCommandFunction(actor) {
+    if (!game.actors.check(actor)) return;
+    const choices = actor.equipment.filter(filter);
+    const chosen = await selectDocumentsDialog(choices, {
+      hint,
+      localize: true,
+      noDocumentsMessage: "TERIOCK.DIALOGS.Common.ERRORS.noRelevantItems",
+      title,
+    });
+    await Promise.all(chosen.map((e) => onSelect(e)));
+  };
 }
 
-/**
- * @see {EquipmentSuppressionPart.repair}
- * @param {TeriockActor} actor
- * @returns {Promise<void>}
- */
-async function takeRepair(actor) {
-  if (!game.actors.check(actor)) return;
-  const choices = actor.equipment.filter((e) => e.system.shattered);
-  const chosen = await selectDocumentsDialog(choices, {
-    hint: "TERIOCK.COMMANDS.Repair.hint",
-    localize: true,
-    title: "TERIOCK.SYSTEMS.Equipment.MENU.repair",
-  });
-  await Promise.all(chosen.map((e) => e.system.repair()));
-}
+/** @see {EquipmentSuppressionPart.shatter} */
+const takeShatter = equipmentCommandFunctionFactory(
+  (e) => !e.system.shattered,
+  (e) => e.system.shatter(),
+  "TERIOCK.COMMANDS.Shatter.hint",
+  "TERIOCK.SYSTEMS.Equipment.MENU.shatter",
+);
 
-/**
- * @see {EquipmentSuppressionPart.destroy}
- * @param {TeriockActor} actor
- * @returns {Promise<void>}
- */
-async function takeDestroy(actor) {
-  if (!game.actors.check(actor)) return;
-  const choices = actor.equipment.filter((e) => !e.system.destroyed);
-  const chosen = await selectDocumentsDialog(choices, {
-    hint: "TERIOCK.COMMANDS.Destroy.hint",
-    localize: true,
-    title: "TERIOCK.SYSTEMS.Equipment.MENU.destroy",
-  });
-  await Promise.all(chosen.map((e) => e.system.destroy()));
-}
+/** @see {EquipmentSuppressionPart.repair} */
+const takeRepair = equipmentCommandFunctionFactory(
+  (e) => e.system.shattered,
+  (e) => e.system.repair(),
+  "TERIOCK.COMMANDS.Repair.hint",
+  "TERIOCK.SYSTEMS.Equipment.MENU.repair",
+);
 
-/**
- * @see {EquipmentSuppressionPart.reforge}
- * @param {TeriockActor} actor
- * @returns {Promise<void>}
- */
-async function takeReforge(actor) {
-  if (!game.actors.check(actor)) return;
-  const choices = actor.equipment.filter((e) => e.system.destroyed);
-  const chosen = await selectDocumentsDialog(choices, {
-    hint: "TERIOCK.COMMANDS.Reforge.hint",
-    localize: true,
-    title: "TERIOCK.SYSTEMS.Equipment.MENU.reforge",
-  });
-  await Promise.all(chosen.map((e) => e.system.reforge()));
-}
+/** @see {EquipmentSuppressionPart.destroy} */
+const takeDestroy = equipmentCommandFunctionFactory(
+  (e) => !e.system.destroyed,
+  (e) => e.system.destroy(),
+  "TERIOCK.COMMANDS.Destroy.hint",
+  "TERIOCK.SYSTEMS.Equipment.MENU.destroy",
+);
 
-/**
- * @see {EquipmentWieldingPart.glue}
- * @param {TeriockActor} actor
- * @returns {Promise<void>}
- */
-async function takeGlue(actor) {
-  if (!game.actors.check(actor)) return;
-  const choices = actor.equipment.filter((e) => !e.system.glued);
-  const chosen = await selectDocumentsDialog(choices, {
-    hint: "TERIOCK.COMMANDS.Glue.hint",
-    localize: true,
-    title: "TERIOCK.SYSTEMS.Equipment.MENU.glue",
-  });
-  await Promise.all(chosen.map((e) => e.system.glue()));
-}
+/** @see {EquipmentSuppressionPart.reforge} */
+const takeReforge = equipmentCommandFunctionFactory(
+  (e) => e.system.destroyed,
+  (e) => e.system.reforge(),
+  "TERIOCK.COMMANDS.Reforge.hint",
+  "TERIOCK.SYSTEMS.Equipment.MENU.reforge",
+);
 
-/**
- * @see {EquipmentWieldingPart.unglue}
- * @param {TeriockActor} actor
- * @returns {Promise<void>}
- */
-async function takeUnglue(actor) {
-  if (!game.actors.check(actor)) return;
-  const choices = actor.equipment.filter((e) => e.system.glued);
-  const chosen = await selectDocumentsDialog(choices, {
-    hint: "TERIOCK.COMMANDS.Unglue.hint",
-    localize: true,
-    title: "TERIOCK.SYSTEMS.Equipment.MENU.unglue",
-  });
-  await Promise.all(chosen.map((e) => e.system.unglue()));
-}
+/** @see {EquipmentWieldingPart.glue} */
+const takeGlue = equipmentCommandFunctionFactory(
+  (e) => !e.system.glued,
+  (e) => e.system.glue(),
+  "TERIOCK.COMMANDS.Glue.hint",
+  "TERIOCK.SYSTEMS.Equipment.MENU.glue",
+);
 
-/**
- * @see {EquipmentSuppressionPart.dampen}
- * @param {TeriockActor} actor
- * @returns {Promise<void>}
- */
-async function takeDampen(actor) {
-  if (!game.actors.check(actor)) return;
-  const choices = actor.equipment.filter((e) => !e.system.dampened);
-  const chosen = await selectDocumentsDialog(choices, {
-    hint: "TERIOCK.COMMANDS.Dampen.hint",
-    localize: true,
-    title: "TERIOCK.SYSTEMS.Equipment.MENU.dampen",
-  });
-  await Promise.all(chosen.map((e) => e.system.dampen()));
-}
+/** @see {EquipmentWieldingPart.unglue} */
+const takeUnglue = equipmentCommandFunctionFactory(
+  (e) => e.system.glued,
+  (e) => e.system.unglue(),
+  "TERIOCK.COMMANDS.Unglue.hint",
+  "TERIOCK.SYSTEMS.Equipment.MENU.unglue",
+);
 
-/**
- * @see {EquipmentSuppressionPart.undampen}
- * @param {TeriockActor} actor
- * @returns {Promise<void>}
- */
-async function takeUndampen(actor) {
-  if (!game.actors.check(actor)) return;
-  const choices = actor.equipment.filter((e) => e.system.dampened);
-  const chosen = await selectDocumentsDialog(choices, {
-    hint: "TERIOCK.COMMANDS.Undampen.hint",
-    localize: true,
-    title: "TERIOCK.SYSTEMS.Equipment.MENU.undampen",
-  });
-  await Promise.all(chosen.map((e) => e.system.undampen()));
-}
+/** @see {EquipmentSuppressionPart.dampen} */
+const takeDampen = equipmentCommandFunctionFactory(
+  (e) => !e.system.dampened,
+  (e) => e.system.dampen(),
+  "TERIOCK.COMMANDS.Dampen.hint",
+  "TERIOCK.SYSTEMS.Equipment.MENU.dampen",
+);
 
-/**
- * @see {IdentificationModel.identify}
- * @param {TeriockActor} actor
- * @returns {Promise<void>}
- */
-async function takeIdentify(actor) {
-  if (!game.actors.check(actor)) return;
-  const choices = actor.equipment.filter(
-    (e) => !e.system.identification.identified,
-  );
-  const chosen = await selectDocumentsDialog(choices, {
-    hint: "TERIOCK.COMMANDS.Identify.hint",
-    localize: true,
-    title: "TERIOCK.SYSTEMS.Equipment.MENU.identify",
-  });
-  await Promise.all(chosen.map((e) => e.system.identification.identify()));
-}
+/** @see {EquipmentSuppressionPart.undampen} */
+const takeUndampen = equipmentCommandFunctionFactory(
+  (e) => e.system.dampened,
+  (e) => e.system.undampen(),
+  "TERIOCK.COMMANDS.Undampen.hint",
+  "TERIOCK.SYSTEMS.Equipment.MENU.undampen",
+);
 
-/**
- * @see {IdentificationModel.readMagic}
- * @param {TeriockActor} actor
- * @returns {Promise<void>}
- */
-async function takeReadMagic(actor) {
-  if (!game.actors.check(actor)) return;
-  const choices = actor.equipment.filter((e) => !e.system.identification.read);
-  const chosen = await selectDocumentsDialog(choices, {
-    hint: "TERIOCK.COMMANDS.Glue.hint",
-    localize: true,
-    title: "TERIOCK.SYSTEMS.Equipment.MENU.glue",
-  });
-  await Promise.all(chosen.map((e) => e.system.identification.readMagic()));
-}
+/** @see {IdentificationModel.identify} */
+const takeIdentify = equipmentCommandFunctionFactory(
+  (e) => !e.system.identification.identified,
+  (e) => e.system.identification.identify(),
+  "TERIOCK.COMMANDS.Identify.hint",
+  "TERIOCK.SYSTEMS.Equipment.MENU.identify",
+);
+
+/** @see {IdentificationModel.readMagic} */
+const takeReadMagic = equipmentCommandFunctionFactory(
+  (e) => !e.system.identification.read,
+  (e) => e.system.identification.readMagic(),
+  "TERIOCK.COMMANDS.Glue.hint",
+  "TERIOCK.SYSTEMS.Equipment.MENU.glue",
+);
 
 /**
  * Shatter command

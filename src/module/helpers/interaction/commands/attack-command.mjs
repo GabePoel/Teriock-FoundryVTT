@@ -1,11 +1,8 @@
-/**
- * @param {TeriockActor} actor
- * @param {Teriock.Interaction.UseLocalOptions} options
- * @returns {Promise<void>}
- */
-async function use(actor, options = {}) {
-  await actor.useDocument("basic-attack", { ...options, type: "ability" });
-}
+import { simpleCommandFunctionFactory } from "./abstract-command.mjs";
+
+const use = simpleCommandFunctionFactory((a, o) =>
+  a.useDocument("basic-attack", { ...o, type: "ability" }),
+);
 
 /**
  * Attack command

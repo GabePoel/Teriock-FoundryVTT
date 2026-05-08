@@ -1,19 +1,18 @@
 import { tradecraftConfig } from "../../../constants/config/tradecraft-config.mjs";
-import { thresholdCommand } from "./abstract-command.mjs";
+import {
+  simpleCommandFunctionFactory,
+  thresholdCommand,
+} from "./abstract-command.mjs";
 
 const allOptions = {};
 Object.values(tradecraftConfig).forEach((fieldOption) => {
   Object.assign(allOptions, fieldOption.tradecrafts);
 });
 
-/**
- * @param {TeriockActor} actor
- * @param {Teriock.Interaction.TradecraftOptions} options
- */
-async function use(actor, options = {}) {
-  const tradecraft = options.tradecraft || "artist";
-  await actor.system.rollTradecraft(tradecraft, options);
-}
+/** @type {Teriock.Interaction.SimpleCommandFunction<Teriock.Interaction.TradecraftOptions>} */
+const use = simpleCommandFunctionFactory((a, o) =>
+  a.system.rollTradecraft(o.tradecraft ?? "artist", o),
+);
 
 /**
  * Tradecraft command

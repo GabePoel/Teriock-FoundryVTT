@@ -8,17 +8,18 @@ import { formulaCommand } from "./abstract-command.mjs";
 /**
  * An abstract primary take function.
  * @param {TeriockActor} actor
- * @param {Teriock.Interaction.TakeOptions} options
+ * @param {Teriock.Interaction.ImpactOptions} options
  */
-async function abstractTakeOperation(actor, options) {
+async function abstractImpactCommandOperation(actor, options) {
   options = cleanDataset(options);
   let formula = options.formula || "0";
   const impact = options.impact || "damage";
-  const take = TERIOCK.config.impact[impact];
+  const config = TERIOCK.config.impact[impact];
   if (options.apply) {
+    if (!game.actors.check(actor)) return;
     const amount = await BaseRoll.getValue(formula, actor?.getRollData() || {});
-    if (options.reverse) await take.reverse(actor, amount);
-    else await take.apply(actor, amount);
+    if (options.reverse) await config.reverse(actor, amount);
+    else await config.apply(actor, amount);
     return;
   }
   const rollData = actor?.getRollData() || {};
@@ -41,12 +42,12 @@ async function abstractTakeOperation(actor, options) {
 }
 
 /**
- * Build a take function.
+ * Build an impact function.
  * @param {Teriock.Keys.Impact} impact
  * @param {"primary" | "secondary"} operation
- * @returns {function(actor: TeriockActor, options: Teriock.Interaction.TakeOptions): Promise<void>}
+ * @returns {Teriock.Interaction.SimpleCommandFunction<Teriock.Interaction.ImpactOptions>}
  */
-function takeOperationFactory(impact, operation) {
+function impactCommandFunctionFactory(impact, operation) {
   return async function (actor, options) {
     options.impact = impact;
     delete options.boost;
@@ -58,23 +59,21 @@ function takeOperationFactory(impact, operation) {
       options.boost = !game.teriock.getSetting("showRollDialogs");
       options.reverse = true;
     }
-    return abstractTakeOperation(actor, options);
+    return abstractImpactCommandOperation(actor, options);
   };
 }
 
-const rollableTakeCommands = Object.entries(impactConfig).map(
-  ([impact, config]) => {
-    return {
-      ...formulaCommand,
-      aliases: config?.aliases || [],
-      id: impact,
-      label: (options) => options.formula,
-      tooltip: (options) => (options.apply ? config.take : config.deal),
-      icon: config.icon,
-      primary: takeOperationFactory(impact, "primary"),
-      secondary: takeOperationFactory(impact, "secondary"),
-    };
-  },
-);
+const impactCommands = Object.entries(impactConfig).map(([impact, config]) => {
+  return {
+    ...formulaCommand,
+    aliases: config?.aliases || [],
+    id: impact,
+    label: (options) => options.formula,
+    tooltip: (options) => (options.apply ? config.take : config.deal),
+    icon: config.icon,
+    primary: impactCommandFunctionFactory(impact, "primary"),
+    secondary: impactCommandFunctionFactory(impact, "secondary"),
+  };
+});
 
-export default rollableTakeCommands;
+export default impactCommands;

@@ -1,12 +1,5 @@
 import { icons } from "../../../constants/display/icons.mjs";
-
-/**
- * @param {TeriockActor} actor
- * @returns {Promise<void>}
- */
-async function primary(actor) {
-  await actor.system.takeAwaken();
-}
+import { simpleCommandFunctionFactory } from "./abstract-command.mjs";
 
 /**
  * Awaken command
@@ -16,7 +9,7 @@ const command = {
   icon: icons.effect.awaken,
   id: "awaken",
   label: "TERIOCK.EFFECTS.Common.awaken",
-  primary,
+  primary: simpleCommandFunctionFactory((a) => a.system.takeAwaken()),
 };
 
 export default command;

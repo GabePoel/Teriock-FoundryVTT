@@ -7,12 +7,14 @@ import { icons } from "../../../constants/display/icons.mjs";
  * @returns {Promise<void>}
  */
 async function takeAttune(actor) {
+  if (!game.actors.check(actor)) return;
   const choices = [...actor.equipment, ...actor.mounts].filter(
     (a) => !a.system.isAttuned,
   );
   const chosen = await selectDocumentsDialog(choices, {
     hint: "TERIOCK.COMMANDS.Attune.hint",
     localize: true,
+    noDocumentsMessage: "TERIOCK.DIALOGS.Common.ERRORS.noRelevantItems",
     title: "TERIOCK.SYSTEMS.Attunable.MENU.attune",
   });
   await Promise.all(chosen.map((a) => a.system.attune()));
@@ -24,12 +26,14 @@ async function takeAttune(actor) {
  * @returns {Promise<void>}
  */
 async function takeDeattune(actor) {
+  if (!game.actors.check(actor)) return;
   const choices = [...actor.equipment, ...actor.mounts].filter(
     (a) => a.system.isAttuned,
   );
   const chosen = await selectDocumentsDialog(choices, {
     hint: "TERIOCK.COMMANDS.Deattune.hint",
     localize: true,
+    noDocumentsMessage: "TERIOCK.DIALOGS.Common.ERRORS.noRelevantItems",
     title: "TERIOCK.SYSTEMS.Attunable.MENU.deattune",
   });
   await Promise.all(chosen.map((a) => a.system.deattune()));

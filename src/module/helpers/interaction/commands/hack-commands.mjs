@@ -1,22 +1,14 @@
-/**
- * @param {TeriockActor} actor
- * @param {Teriock.Interaction.HackOptions} options
- * @returns {Promise<void>}
- */
-async function takeHack(actor, options = {}) {
-  const part = options.part || "arm";
-  await actor.system.takeHack(part);
-}
+import { simpleCommandFunctionFactory } from "./abstract-command.mjs";
 
-/**
- * @param {TeriockActor} actor
- * @param {Teriock.Interaction.HackOptions} options
- * @returns {Promise<void>}
- */
-async function takeUnhack(actor, options = {}) {
-  const part = options.part || "arm";
-  await actor.system.takeUnhack(part);
-}
+/** @type {Teriock.Interaction.SimpleCommandFunction<Teriock.Interaction.HackOptions>} */
+const takeHack = simpleCommandFunctionFactory((a, o) =>
+  a.system.takeHack(o.part ?? "arm"),
+);
+
+/** @type {Teriock.Interaction.SimpleCommandFunction<Teriock.Interaction.HackOptions>} */
+const takeUnhack = simpleCommandFunctionFactory((a, o) =>
+  a.system.takeUnhack(o.part ?? "arm"),
+);
 
 /**
  * Hack command

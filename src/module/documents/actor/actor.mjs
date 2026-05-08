@@ -616,7 +616,7 @@ export default class TeriockActor extends mix(
 
   /**
    * Use a specified document.
-   * @param {string} lookup - The identifier or ame of the document to use. Identifiers are preferred.
+   * @param {string} lookup - The identifier or name of the document to use. Identifiers are preferred.
    * @param {Teriock.Execution.DocumentExecutionOptions & { type?: Teriock.Documents.ChildType }} [options] - Options
    * for finding and using the document.
    * @return {Promise<void>}

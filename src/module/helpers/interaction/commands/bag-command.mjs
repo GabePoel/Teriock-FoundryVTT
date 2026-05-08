@@ -1,12 +1,5 @@
 import { icons } from "../../../constants/display/icons.mjs";
-
-/**
- * @param {TeriockActor} actor
- * @returns {Promise<void>}
- */
-async function primary(actor) {
-  await actor.system.deathBagPull();
-}
+import { simpleCommandFunctionFactory } from "./abstract-command.mjs";
 
 /**
  * Bag command
@@ -16,7 +9,7 @@ const command = {
   icon: icons.ui.deathBag,
   id: "bag",
   label: "TERIOCK.EFFECTS.Common.bag",
-  primary,
+  primary: simpleCommandFunctionFactory((a) => a.system.deathBagPull()),
 };
 
 export default command;

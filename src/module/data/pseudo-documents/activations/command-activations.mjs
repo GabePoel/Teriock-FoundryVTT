@@ -20,7 +20,7 @@ import featCommand from "../../../helpers/interaction/commands/feat-command.mjs"
 import {
   hackCommand,
   unhackCommand,
-} from "../../../helpers/interaction/commands/hack-command.mjs";
+} from "../../../helpers/interaction/commands/hack-commands.mjs";
 import healCommand from "../../../helpers/interaction/commands/heal-command.mjs";
 import resistCommand from "../../../helpers/interaction/commands/resist-command.mjs";
 import revitalizeCommand from "../../../helpers/interaction/commands/revitalize-command.mjs";

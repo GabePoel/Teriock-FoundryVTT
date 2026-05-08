@@ -15,12 +15,12 @@ import {
   unglueCommand,
 } from "./equipment-commands.mjs";
 import featCommand from "./feat-command.mjs";
-import { hackCommand, unhackCommand } from "./hack-command.mjs";
+import { hackCommand, unhackCommand } from "./hack-commands.mjs";
 import healCommand from "./heal-command.mjs";
+import impactCommands from "./impact-commands.mjs";
 import resistCommand from "./resist-command.mjs";
 import revitalizeCommand from "./revitalize-command.mjs";
 import reviveCommand from "./revive-command.mjs";
-import rollableTakeCommands from "./rollable-take-commands.mjs";
 import standardDamageCommand from "./standard-damage-command.mjs";
 import {
   applyStatusCommand,
@@ -31,7 +31,7 @@ import tradecraftCommand from "./tradecraft-command.mjs";
 import { useExternalCommand, useLocalCommand } from "./use-commands.mjs";
 
 const commandArray = [
-  ...rollableTakeCommands,
+  ...impactCommands,
   applyStatusCommand,
   attackCommand,
   attuneCommand,

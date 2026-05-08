@@ -1,10 +1,7 @@
 import { TeriockActor } from "../documents/_module.mjs";
-import { impactConfig } from "../constants/config/impact-config.mjs";
 
 declare global {
   namespace Teriock.Interaction {
-    export type TakeKey = keyof typeof impactConfig;
-
     export type InteractionEntry = {
       icon: string | ((options: object) => string);
       label: string | ((options: object) => string);
@@ -17,6 +14,7 @@ declare global {
       aliases?: string[];
       alt?: string;
       args?: string[];
+      ctrl?: string;
       flags?: Record<string, string>;
       formula?: boolean;
       id: string;
@@ -47,6 +45,11 @@ declare global {
       threshold?: number;
     };
 
+    export type SimpleCommandFunction<O> = (
+      actor: TeriockActor,
+      options: O,
+    ) => Promise<void>;
+
     export type TradecraftOptions = ThresholdOptions & {
       tradecraft?: Teriock.Keys.Tradecraft;
     };
@@ -63,7 +66,7 @@ declare global {
       formula?: string;
     };
 
-    export type TakeOptions = FormulaOptions & {
+    export type ImpactOptions = FormulaOptions & {
       apply?: boolean;
       boost?: boolean;
       crit?: boolean;

@@ -1,14 +1,11 @@
 import { icons } from "../../../constants/display/icons.mjs";
-import { thresholdCommand } from "./abstract-command.mjs";
+import {
+  simpleCommandFunctionFactory,
+  thresholdCommand,
+} from "./abstract-command.mjs";
 
-/**
- * @param {TeriockActor} actor
- * @param {Teriock.Interaction.ResistOptions} options
- * @returns {Promise<void>}
- */
-async function use(actor, options = {}) {
-  await actor.system.rollResistance(options);
-}
+/** @type {Teriock.Interaction.SimpleCommandFunction<Teriock.Interaction.ResistOptions>} */
+const use = simpleCommandFunctionFactory((a, o) => a.system.rollResistance(o));
 
 /**
  * Resist command

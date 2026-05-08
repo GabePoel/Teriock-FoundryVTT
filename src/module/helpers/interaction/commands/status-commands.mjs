@@ -1,37 +1,26 @@
 import { icons } from "../../../constants/display/icons.mjs";
 
 /**
- * @param {TeriockActor} actor
- * @param {Teriock.Interaction.StatusOptions} options
- * @returns {Promise<void>}
+ * Make a status command function.
+ * @param {(actor: TeriockActor, status: Teriock.Keys.Status) => Promise<*>} operation
+ * @returns {Teriock.Interaction.SimpleCommandFunction<Teriock.Interaction.StatusOptions>}
  */
-async function apply(actor, options = {}) {
-  const status = options.status;
-  if (!status) return;
-  await actor.toggleStatusEffect(status, { active: true });
+function statusCommandFunctionFactory(operation) {
+  return async function statusCommandFunction(actor, options) {
+    if (!game.actors.check(actor)) return;
+    const status = options.status;
+    if (!status) return;
+    await operation(actor, status);
+  };
 }
 
-/**
- * @param {TeriockActor} actor
- * @param {Teriock.Interaction.StatusOptions} options
- * @returns {Promise<void>}
- */
-async function remove(actor, options = {}) {
-  const status = options.status;
-  if (!status) return;
-  await actor.system.removeCondition(status);
-}
-
-/**
- * @param {TeriockActor} actor
- * @param {Teriock.Interaction.StatusOptions} options
- * @returns {Promise<void>}
- */
-async function toggle(actor, options = {}) {
-  const status = options.status;
-  if (!status) return;
-  await actor.toggleStatusEffect(status);
-}
+const apply = statusCommandFunctionFactory((a, s) =>
+  a.toggleStatusEffect(s, { active: true }),
+);
+const remove = statusCommandFunctionFactory((a, s) =>
+  a.system.removeCondition(s),
+);
+const toggle = statusCommandFunctionFactory((a, s) => a.toggleStatusEffect(s));
 
 /**
  * Apply status command
