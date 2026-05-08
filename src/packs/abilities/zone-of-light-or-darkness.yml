@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.36
+  systemVersion: 0.12.44
 img: systems/teriock/src/icons/abilities/zone-of-light-or-darkness.webp
 name: Zone of Light or Darkness
 system:
@@ -101,6 +101,8 @@ system:
   duration:
     raw: '8'
     unit: hour
+  effectTypes:
+    - immunity
   elements:
     - nature
   executionTime:
@@ -125,11 +127,17 @@ system:
       <p>You enchant an area no larger than 30 feet in any direction. As you
       enchant this area, you must choose whether it is a zone of "light" or
       "darkness".</p><dl><dt>Light</dt><dd>The zone is fully illuminated with
-      magical light. Creatures cannot be @L[Condition:Hidden]{hidden} within the
-      zone and no shadows are cast. Creatures cannot be
-      @L[Condition:Blind]{blind} within the zone.</dd><dt>Darkness</dt><dd>The
-      zone is filled with magical darkness. All creatures within the zone are
-      @L[Condition:Blind]{blinded} and cannot see anything.</dd></dl>
+      magical light. Within the zone, creatures are @L[Keyword:Immunity]{immune}
+      to being @L[Condition:Hidden]{hidden}, cease being
+      @L[Condition:Hidden]{hidden} if they already were, and no shadows are
+      cast. Creatures are also @L[Keyword:Immunity]{immune} be becoming
+      @L[Condition:Blind]{blind} within the zone although this does not clear
+      ongoing @L[Condition:Blind]{blindness} effects unless they were caused by
+      darkness. Zones of light are the only cases where [[lookup name]] that
+      counts as an @L[Category:Immunity effects]{immunity
+      effect}.</dd><dt>Darkness</dt><dd>The zone is filled with magical
+      darkness. All creatures within the zone are @L[Condition:Blind]{blinded}
+      and cannot see anything.</dd></dl>
   piercing:
     raw: 0
   powerSources:

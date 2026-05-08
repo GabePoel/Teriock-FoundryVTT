@@ -122,14 +122,7 @@ export default class BaseActivation extends TypedPseudoDocument {
    * @returns {boolean}
    */
   checkActors() {
-    const pass = this.actors.length > 0;
-    if (!pass) {
-      ui.notifications.error(
-        "TERIOCK.ACTIVATIONS.Base.NOTIFICATIONS.noActors",
-        { localize: true },
-      );
-    }
-    return pass;
+    return game.teriock.checkActors(this.actors);
   }
 
   /**
@@ -137,14 +130,7 @@ export default class BaseActivation extends TypedPseudoDocument {
    * @returns {boolean}
    */
   checkTokens() {
-    const pass = this.tokens.length > 0;
-    if (!pass) {
-      ui.notifications.error(
-        "TERIOCK.ACTIVATIONS.Base.NOTIFICATIONS.noTokens",
-        { localize: true },
-      );
-    }
-    return pass;
+    return game.teriock.checkTokens(this.tokens);
   }
 
   /**

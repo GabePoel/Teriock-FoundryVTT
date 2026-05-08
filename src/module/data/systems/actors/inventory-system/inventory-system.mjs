@@ -81,20 +81,20 @@ export default class InventorySystem extends BaseActorSystem {
                     changes: [
                       {
                         key: "token.light.dim",
-                        mode: 5,
                         priority: 150,
                         qualifier: "1",
                         target: "Actor",
-                        time: "normal",
+                        time: TERIOCK.config.change.defaultPhase,
+                        type: "override",
                         value: "0",
                       },
                       {
                         key: "token.light.bright",
-                        mode: 5,
                         priority: 150,
                         qualifier: "1",
                         target: "Actor",
-                        time: "normal",
+                        time: TERIOCK.config.change.defaultPhase,
+                        type: "override",
                         value: "0",
                       },
                     ],
@@ -105,8 +105,11 @@ export default class InventorySystem extends BaseActorSystem {
           ],
           flags: {
             teriockDocumentSettings: {
-              nonHierarchicalChanges: false,
-              payAbilityCosts: false,
+              automation: {
+                nonHierarchicalChanges: false,
+                payAbilityCosts: false,
+                wound: false,
+              },
             },
           },
           prototypeToken: { actorLink: true, displayBars: 0 },

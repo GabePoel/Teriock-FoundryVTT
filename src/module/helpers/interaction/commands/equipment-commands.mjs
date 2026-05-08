@@ -7,6 +7,7 @@ import { icons } from "../../../constants/display/icons.mjs";
  * @returns {Promise<void>}
  */
 async function takeShatter(actor) {
+  if (!game.actors.check(actor)) return;
   const choices = actor.equipment.filter((e) => !e.system.shattered);
   const chosen = await selectDocumentsDialog(choices, {
     hint: "TERIOCK.COMMANDS.Shatter.hint",
@@ -22,6 +23,7 @@ async function takeShatter(actor) {
  * @returns {Promise<void>}
  */
 async function takeRepair(actor) {
+  if (!game.actors.check(actor)) return;
   const choices = actor.equipment.filter((e) => e.system.shattered);
   const chosen = await selectDocumentsDialog(choices, {
     hint: "TERIOCK.COMMANDS.Repair.hint",
@@ -37,6 +39,7 @@ async function takeRepair(actor) {
  * @returns {Promise<void>}
  */
 async function takeDestroy(actor) {
+  if (!game.actors.check(actor)) return;
   const choices = actor.equipment.filter((e) => !e.system.destroyed);
   const chosen = await selectDocumentsDialog(choices, {
     hint: "TERIOCK.COMMANDS.Destroy.hint",
@@ -52,6 +55,7 @@ async function takeDestroy(actor) {
  * @returns {Promise<void>}
  */
 async function takeReforge(actor) {
+  if (!game.actors.check(actor)) return;
   const choices = actor.equipment.filter((e) => e.system.destroyed);
   const chosen = await selectDocumentsDialog(choices, {
     hint: "TERIOCK.COMMANDS.Reforge.hint",
@@ -67,6 +71,7 @@ async function takeReforge(actor) {
  * @returns {Promise<void>}
  */
 async function takeGlue(actor) {
+  if (!game.actors.check(actor)) return;
   const choices = actor.equipment.filter((e) => !e.system.glued);
   const chosen = await selectDocumentsDialog(choices, {
     hint: "TERIOCK.COMMANDS.Glue.hint",
@@ -82,6 +87,7 @@ async function takeGlue(actor) {
  * @returns {Promise<void>}
  */
 async function takeUnglue(actor) {
+  if (!game.actors.check(actor)) return;
   const choices = actor.equipment.filter((e) => e.system.glued);
   const chosen = await selectDocumentsDialog(choices, {
     hint: "TERIOCK.COMMANDS.Unglue.hint",
@@ -97,6 +103,7 @@ async function takeUnglue(actor) {
  * @returns {Promise<void>}
  */
 async function takeDampen(actor) {
+  if (!game.actors.check(actor)) return;
   const choices = actor.equipment.filter((e) => !e.system.dampened);
   const chosen = await selectDocumentsDialog(choices, {
     hint: "TERIOCK.COMMANDS.Dampen.hint",
@@ -112,6 +119,7 @@ async function takeDampen(actor) {
  * @returns {Promise<void>}
  */
 async function takeUndampen(actor) {
+  if (!game.actors.check(actor)) return;
   const choices = actor.equipment.filter((e) => e.system.dampened);
   const chosen = await selectDocumentsDialog(choices, {
     hint: "TERIOCK.COMMANDS.Undampen.hint",
@@ -127,6 +135,7 @@ async function takeUndampen(actor) {
  * @returns {Promise<void>}
  */
 async function takeIdentify(actor) {
+  if (!game.actors.check(actor)) return;
   const choices = actor.equipment.filter(
     (e) => !e.system.identification.identified,
   );
@@ -144,6 +153,7 @@ async function takeIdentify(actor) {
  * @returns {Promise<void>}
  */
 async function takeReadMagic(actor) {
+  if (!game.actors.check(actor)) return;
   const choices = actor.equipment.filter((e) => !e.system.identification.read);
   const chosen = await selectDocumentsDialog(choices, {
     hint: "TERIOCK.COMMANDS.Glue.hint",

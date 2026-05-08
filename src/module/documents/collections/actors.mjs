@@ -22,9 +22,7 @@ export default class TeriockActors extends BaseWorldCollectionMixin(Actors) {
     if (!actor) actor = this.get(speaker.actor);
     if (!actor) actor = game.user.character;
     if (!actor) {
-      actor = game.canvas?.tokens?.controlled.find(
-        /** @param {TeriockToken} t */ (t) => t.actor,
-      )?.actor;
+      actor = game.canvas?.tokens?.controlled.find((t) => t.actor)?.actor;
     }
     if (!actor) actor = ui?.activeWindow?.document?.actor;
     return actor ?? null;
@@ -66,5 +64,14 @@ export default class TeriockActors extends BaseWorldCollectionMixin(Actors) {
     return game.scenes.viewed.tokens
       .filter((token) => token.actor)
       .map((token) => token.actor);
+  }
+
+  /**
+   * Convenient alias for {@link TeriockManager.checkActors}.
+   * @param {Teriock.System.Existable<TeriockActor>} actors
+   * @returns {boolean}
+   */
+  check(actors) {
+    return game.teriock.checkActors(actors);
   }
 }

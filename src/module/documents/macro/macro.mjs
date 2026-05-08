@@ -154,11 +154,7 @@ export default class TeriockMacro extends mix(
     const tokens = /** @type {TeriockToken[]} */ game.canvas.tokens.controlled;
     const actors = tokens.map((t) => t.actor).filter((_) => _);
     if (actors.length === 0 && options.actor) actors.push(actor);
-    if (actors.length === 0) {
-      ui.notifications.warn("TERIOCK.DIALOGS.Common.ERRORS.noActor", {
-        localize: true,
-      });
-    }
+    game.actors.check(actors);
     for (const a of actors) {
       const doc = await findBestDocument(lookup, a);
       if (doc) await doc.system.use({ actor: a, event });

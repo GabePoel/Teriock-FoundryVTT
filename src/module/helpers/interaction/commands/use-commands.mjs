@@ -13,12 +13,7 @@ import { thresholdCommand } from "./abstract-command.mjs";
  * @returns {void|false}
  */
 function preUse(actor, options = {}) {
-  if (!actor) {
-    ui.notifications.error("TERIOCK.DIALOGS.Common.ERRORS.noActor", {
-      localize: true,
-    });
-    return false;
-  }
+  if (!game.actors.check(actor)) return false;
   if (["number", "string"].includes(typeof options.competence)) {
     options.proficient = Number(options.competence) >= 1;
     options.fluent = Number(options.competence) >= 2;

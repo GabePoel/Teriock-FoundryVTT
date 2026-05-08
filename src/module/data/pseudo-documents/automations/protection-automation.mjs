@@ -82,7 +82,7 @@ export default class ProtectionAutomation extends CritAutomation {
     return [
       {
         key: `system.protections.${this.relation}.${this.category}`,
-        phase: "normal",
+        phase: TERIOCK.config.change.defaultPhase,
         priority: 5,
         qualifier: "1",
         target: "Actor",

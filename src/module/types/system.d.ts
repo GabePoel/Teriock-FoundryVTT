@@ -127,5 +127,10 @@ declare global {
       /** Whether to expand tables while resolving. */
       expandTables?: boolean;
     };
+
+    /**
+     * Generic type corresponding to something that may or may not exist.
+     */
+    export type Existable<T> = T | T[] | Set<T> | null | undefined;
   }
 }

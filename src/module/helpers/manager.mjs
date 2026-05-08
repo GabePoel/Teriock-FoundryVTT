@@ -17,6 +17,41 @@ export default class TeriockManager {
   packs = new TeriockPacks();
 
   /**
+   * Check if what's provided exists or is an empty array or set.
+   * @param {Teriock.System.Existable<*>} existable
+   * @param {string} [message]
+   * @param {string} [type]
+   * @param {object} [options]
+   * @returns {boolean}
+   */
+  #check(existable, message, type = "warning", options = { localize: true }) {
+    let valid = true;
+    if (!existable) valid = false;
+    if (Array.isArray(existable) && !existable.length) valid = false;
+    if (existable instanceof Set && existable.size === 0) valid = false;
+    if (message && !valid) ui.notifications.notify(message, type, options);
+    return valid;
+  }
+
+  /**
+   * Check if there's actors and give a warning if not.
+   * @param {Teriock.System.Existable<TeriockActor>} actors
+   * @returns {boolean}
+   */
+  checkActors(actors) {
+    return this.#check(actors, "TERIOCK.DIALOGS.Common.ERRORS.noActor");
+  }
+
+  /**
+   * Check if there's tokens and give a warning if not.
+   * @param {Teriock.System.Existable<TeriockToken|TeriockTokenDocument>} tokens
+   * @returns {boolean}
+   */
+  checkTokens(tokens) {
+    return this.#check(tokens, "TERIOCK.DIALOGS.Common.ERRORS.noToken");
+  }
+
+  /**
    * Get the value of some Teriock setting.
    * @param {Teriock.Keys.Setting} setting
    * @return {*|Setting}
