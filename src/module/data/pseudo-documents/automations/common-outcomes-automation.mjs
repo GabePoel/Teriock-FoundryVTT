@@ -95,7 +95,7 @@ export default class CommonOutcomesAutomation extends mix(
       .filter((_) => _)
       .map((c) => {
         const Act = Object.values(activations).find((A) => A.TYPE === c);
-        if (Act) return new Act(activationOptions);
+        if (Act) return new Act(foundry.utils.deepClone(activationOptions));
       })
       .filter((_) => _);
   }

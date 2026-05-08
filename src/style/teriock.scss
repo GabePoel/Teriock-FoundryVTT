@@ -156,3 +156,8 @@ dl:not(:first-child) {
     }
   }
 }
+
+// Override core Foundry bug where ordered lists with more than 100 items get padding added to them.
+ol.plain:has(> li:nth-of-type(100)) {
+  padding: 0;
+}

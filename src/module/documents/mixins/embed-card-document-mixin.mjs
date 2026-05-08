@@ -71,8 +71,6 @@ export default function EmbedCardDocumentMixin(Base) {
             "teriock/ui/block",
             embedContext,
           );
-          config.caption = false;
-          config.cite = false;
           return foundry.utils.parseHTML(html);
         }
       }
@@ -80,10 +78,19 @@ export default function EmbedCardDocumentMixin(Base) {
       /** @inheritDoc */
       onEmbed(element) {
         bindCommonActions(element);
-        const proceed =
+        const isEmbedded = element.tagName === "DOCUMENT-EMBED";
+        // Mutate block image to remove signs that this could be usable
+        if (isEmbedded) {
+          const blockImage = element.querySelector(".teriock-block-image");
+          if (blockImage) {
+            blockImage.removeAttribute("data-tooltip");
+            blockImage.classList.remove("usable");
+          }
+        }
+        const addCallbacks =
           element.classList.contains("teriock-block") ||
           !!element.querySelector(`.teriock-block[data-uuid="${this.uuid}"]`);
-        if (proceed) {
+        if (addCallbacks) {
           const relativeUuid =
             element.dataset.relative ??
             element.querySelector("[data-relative]")?.dataset.relative;
@@ -92,6 +99,7 @@ export default function EmbedCardDocumentMixin(Base) {
               click: "primary",
               contextmenu: "secondary",
             })) {
+              // The only callback that always gets added is `openDoc`
               element.addEventListener(type, async (ev) => {
                 const target = /** @type {HTMLElement} */ ev.target;
                 const el =
@@ -99,32 +107,22 @@ export default function EmbedCardDocumentMixin(Base) {
                 if (el) {
                   const action = el.dataset.action;
                   const fn = this.embedActions[action][callback];
-                  if (!fn) return;
+                  if (!fn || (isEmbedded && action !== "openDoc")) return;
                   ev.stopImmediatePropagation();
                   ev.preventDefault();
                   await fn(ev, relative);
-                  if (relative && relative.sheet?.isVisible) {
-                    await relative.sheet.render();
-                  }
-                  if (relative?.parent && relative.parent.sheet?.isVisible) {
-                    await relative.parent.sheet.render();
-                  }
-                  // Special handling for updating chat messages since they don't use sheets.
-                  /** @see {TeriockChatMessage.renderHTML} */
-                  if (relative?.documentName === "ChatMessage") {
-                    await ui.chat.updateMessage(relative);
-                  }
                 }
               });
             }
+            // Only add context menu entries if this is actually in a document and not just an embedded HTML element
+            if (isEmbedded) return;
             const menuEntries = this.getCardContextMenuEntries(relative);
-            if (menuEntries) {
-              new TeriockContextMenu(element, ".teriock-block", menuEntries, {
-                eventName: "contextmenu",
-                jQuery: false,
-                fixed: true,
-              });
-            }
+            if (!menuEntries) return;
+            new TeriockContextMenu(element, ".teriock-block", menuEntries, {
+              eventName: "contextmenu",
+              jQuery: false,
+              fixed: true,
+            });
           });
         }
         super.onEmbed(element);

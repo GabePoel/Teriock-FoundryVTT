@@ -221,9 +221,7 @@ export default function ChildSystemMixin(Base) {
               group: "usage",
               icon: makeIcon(this.useIcon, "contextMenu"),
               label: this.useText,
-              onClick: async () => {
-                await this.use();
-              },
+              onClick: async () => await this.use(),
               visible: this.isUsable,
             },
             {
@@ -232,7 +230,7 @@ export default function ChildSystemMixin(Base) {
               label: _loc("TERIOCK.SYSTEMS.Child.MENU.enable"),
               onClick: this.parent.enable.bind(this.parent),
               visible:
-                this.parent.parent?.isOwner &&
+                this.parent.isOwner &&
                 this.parent.disabled &&
                 this.parent.type !== "equipment" &&
                 this.parent.type !== "mount" &&
@@ -244,7 +242,7 @@ export default function ChildSystemMixin(Base) {
               label: _loc("TERIOCK.SYSTEMS.Child.MENU.disable"),
               onClick: this.parent.disable.bind(this.parent),
               visible:
-                this.parent.parent?.isOwner &&
+                this.parent.isOwner &&
                 !this.parent.disabled &&
                 this.parent.type !== "equipment" &&
                 this.parent.type !== "mount" &&
