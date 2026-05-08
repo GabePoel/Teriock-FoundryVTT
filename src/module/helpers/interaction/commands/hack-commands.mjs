@@ -1,14 +1,16 @@
-import { simpleCommandFunctionFactory } from "./abstract-command.mjs";
+/**
+ * Make a hack command function.
+ * @param {(actor: TeriockActor, part: Teriock.Keys.HackableBodyPart) => Promise<*>} operation
+ * @returns {Teriock.Interaction.SimpleCommandFunction<Teriock.Interaction.HackOptions>}
+ */
+function fnFactory(operation) {
+  return async function hackCommandFunction(a, o) {
+    if (game.actors.check(a) && o?.part) await operation(a, o.part);
+  };
+}
 
-/** @type {Teriock.Interaction.SimpleCommandFunction<Teriock.Interaction.HackOptions>} */
-const takeHack = simpleCommandFunctionFactory((a, o) =>
-  a.system.takeHack(o.part ?? "arm"),
-);
-
-/** @type {Teriock.Interaction.SimpleCommandFunction<Teriock.Interaction.HackOptions>} */
-const takeUnhack = simpleCommandFunctionFactory((a, o) =>
-  a.system.takeUnhack(o.part ?? "arm"),
-);
+const takeHack = fnFactory((a, p) => a.system.takeHack(p));
+const takeUnhack = fnFactory((a, p) => a.system.takeUnhack(p));
 
 /**
  * Hack command
