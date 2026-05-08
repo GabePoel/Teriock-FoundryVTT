@@ -27,7 +27,8 @@ const { fields } = foundry.data;
  * @property {boolean} excludeToken
  * @property {boolean} expandWithToken
  * @property {boolean} targeting
- * @property {object} restriction
+ * @property {number} visibility
+ * @property {{enabled: boolean, type: string, priority: number}} restriction
  */
 export default class RegionAutomation extends mix(
   CritAutomation,
@@ -128,6 +129,16 @@ export default class RegionAutomation extends mix(
         }),
       }),
       targeting: new fields.BooleanField({ initial: true }),
+      visibility: new fields.NumberField({
+        choices: Object.fromEntries(
+          Object.entries(CONST.REGION_VISIBILITY).map(([k, v]) => [
+            v,
+            _loc(`REGION.VISIBILITY.${k}.label`),
+          ]),
+        ),
+        initial: CONST.REGION_VISIBILITY.ALWAYS,
+        required: true,
+      }),
       width: this.#rangeField(),
     });
   }
@@ -142,6 +153,7 @@ export default class RegionAutomation extends mix(
       ...this._targetPaths,
       "hr",
       ...this._restrictionPaths,
+      "visibility",
       "hr",
       ...this._triggerPaths,
       ...this._triggerDisplayPaths,
@@ -309,7 +321,7 @@ export default class RegionAutomation extends mix(
         ownership: { default: CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER },
         restriction: this.restriction,
         shapes: this.#getRegionShapeData(options),
-        visibility: CONST.REGION_VISIBILITY.OBSERVER,
+        visibility: this.visibility,
       },
       this.overrideData ? this.data : {},
     );
