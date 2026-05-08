@@ -5,7 +5,7 @@ import { icons } from "../../../constants/display/icons.mjs";
  * @param {(actor: TeriockActor, status: Teriock.Keys.Status) => Promise<*>} operation
  * @returns {Teriock.Interaction.SimpleCommandFunction<Teriock.Interaction.StatusOptions>}
  */
-function statusCommandFunctionFactory(operation) {
+function fnFactory(operation) {
   return async function statusCommandFunction(actor, options) {
     if (!game.actors.check(actor)) return;
     const status = options.status;
@@ -14,13 +14,9 @@ function statusCommandFunctionFactory(operation) {
   };
 }
 
-const apply = statusCommandFunctionFactory((a, s) =>
-  a.toggleStatusEffect(s, { active: true }),
-);
-const remove = statusCommandFunctionFactory((a, s) =>
-  a.system.removeCondition(s),
-);
-const toggle = statusCommandFunctionFactory((a, s) => a.toggleStatusEffect(s));
+const apply = fnFactory((a, s) => a.toggleStatusEffect(s, { active: true }));
+const remove = fnFactory((a, s) => a.system.removeCondition(s));
+const toggle = fnFactory((a, s) => a.toggleStatusEffect(s));
 
 /**
  * Apply status command
