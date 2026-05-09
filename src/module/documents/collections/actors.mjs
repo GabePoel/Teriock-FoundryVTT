@@ -61,9 +61,11 @@ export default class TeriockActors extends BaseWorldCollectionMixin(Actors) {
    * @returns {TeriockActor[]}
    */
   get visible() {
-    return game.scenes.viewed.tokens
-      .filter((token) => token.actor)
-      .map((token) => token.actor);
+    return (
+      game.scenes.viewed?.tokens
+        .filter((token) => token.actor)
+        .map((token) => token.actor) ?? []
+    );
   }
 
   /**

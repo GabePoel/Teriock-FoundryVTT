@@ -289,7 +289,7 @@ export default class RegionAutomation extends mix(
     if (scope.trigger === "executeInput" && this.targeting) {
       if (scope.execution && region.parent === game.scenes.viewed) {
         let releaseOthers = true;
-        for (const t of game.scenes.viewed.tokens.contents.filter(
+        for (const t of (game.scenes.viewed?.tokens.contents ?? []).filter(
           (t) =>
             t.hasStatusEffect("ethereal") ===
               !!scope.execution?.actor?.statuses.has("ethereal") &&

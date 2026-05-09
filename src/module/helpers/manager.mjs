@@ -43,6 +43,22 @@ export default class TeriockManager {
   }
 
   /**
+   * Check if there's an active scene and give a warning if not.
+   * @returns {boolean}
+   */
+  checkScene() {
+    const valid = !!canvas.scene;
+    if (!valid) {
+      ui.notifications.notify(
+        "TERIOCK.DIALOGS.Common.ERRORS.noScene",
+        "warning",
+        { localize: true },
+      );
+    }
+    return valid;
+  }
+
+  /**
    * Check if there's tokens and give a warning if not.
    * @param {Teriock.System.Existable<TeriockToken|TeriockTokenDocument>} tokens
    * @returns {boolean}

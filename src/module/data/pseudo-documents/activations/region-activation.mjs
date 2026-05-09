@@ -36,9 +36,10 @@ export default class RegionActivation extends BaseActivation {
 
   /**
    * @inheritDoc
-   * @returns {Promise<TeriockRegionDocument>}
+   * @returns {Promise<TeriockRegionDocument|null>}
    */
   async primaryAction() {
+    if (!game.teriock.checkScene()) return null;
     const data = foundry.utils.mergeObject(this.data, {
       ownership: { [game.user.id]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER },
       flags: { teriock: { createdBy: this.puuid, placedBy: game.user.id } },
@@ -59,6 +60,7 @@ export default class RegionActivation extends BaseActivation {
 
   /** @inheritDoc */
   async secondaryAction() {
+    if (!game.teriock.checkScene()) return;
     await canvas.scene.deleteEmbeddedDocuments(
       "Region",
       canvas.scene.regions.contents
