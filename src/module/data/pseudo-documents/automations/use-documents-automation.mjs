@@ -159,7 +159,8 @@ export default class UseDocumentsAutomation extends mix(
       event: scope.execution?.options?.event,
       competence: this.overrideCompetence
         ? this.competence.raw
-        : this.document.system.competence.raw,
+        : (scope.execution?.competence?.raw ??
+          this.document.system.competence.raw),
     });
   }
 

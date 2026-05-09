@@ -227,12 +227,23 @@ export default function ThresholdExecutionMixin(Base) {
       async _showRollDialog() {
         const rootId = foundry.utils.randomID();
         const content = document.createElement("div");
-        let hasFields = false;
         content.classList.add("teriock-form-container");
+        let hasFields = false;
+        const mainContainer = document.createElement("div");
+        mainContainer.classList.add("teriock-form-container");
+        const smallContainer = document.createElement("div");
+        smallContainer.classList.add("ttable");
+        smallContainer.style.rowGap = "0.75rem";
+        smallContainer.style.columnGap = "1.5rem";
+        let hasSmallFields = false;
         for (const f of this._dialogFields) {
           if (typeof f.condition === "boolean" && !f.condition) continue;
           if (typeof f.condition == "function" && !f.condition()) continue;
-          const groupConfig = { label: _loc(f.label), rootId };
+          const groupConfig = {
+            classes: ["tgrid-item"],
+            label: _loc(f.label),
+            rootId,
+          };
           if (f.hint) groupConfig.hint = _loc(f.hint);
           const inputConfig = {
             id: `${rootId}-${f.name}`,
@@ -244,9 +255,18 @@ export default function ThresholdExecutionMixin(Base) {
             rootId,
             value: f.value,
           };
-          content.append(f.field.toFormGroup(groupConfig, inputConfig));
+          let container = mainContainer;
+          const formGroup = f.field.toFormGroup(groupConfig, inputConfig);
+          if (f.small) {
+            container = smallContainer;
+            formGroup.style.flex = "1 1 100px";
+            hasSmallFields = true;
+          }
+          container.append(formGroup);
           hasFields = true;
         }
+        content.append(mainContainer);
+        if (hasSmallFields) content.append(smallContainer);
         if (!hasFields) return;
         const out = await TeriockDialog.wait({
           buttons: this._dialogButtons.map((b) => {

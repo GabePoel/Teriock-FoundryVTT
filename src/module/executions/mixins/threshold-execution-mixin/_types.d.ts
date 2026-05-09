@@ -16,6 +16,7 @@ declare global {
       min?: number;
       name: string;
       placeholder?: string | number;
+      small: boolean;
       update: (value: string | number | boolean) => void;
       value: string | number | boolean;
     };
