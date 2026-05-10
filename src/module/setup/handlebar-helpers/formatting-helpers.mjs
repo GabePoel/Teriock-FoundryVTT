@@ -1,15 +1,9 @@
 import {
-  getRollIcon,
   inferNameFromIdentifier,
   makeIconClass,
 } from "../../helpers/utils.mjs";
 
 export default function registerFormattingHelpers() {
-  Handlebars.registerHelper("firstDie", (str) => {
-    if (typeof str !== "string") str = "";
-    return getRollIcon(str);
-  });
-
   Handlebars.registerHelper("modifierIconClass", (modifier) => {
     if (modifier.competence.fluent) {
       return makeIconClass(TERIOCK.display.icons.ui.filled2, "solid");
@@ -20,32 +14,6 @@ export default function registerFormattingHelpers() {
     return makeIconClass(TERIOCK.display.icons.ui.filled0, "light");
   });
 
-  Handlebars.registerHelper("elements", (elements) => {
-    elements = Array.from(elements);
-    let out = _loc("TERIOCK.TERMS.Common.celestial");
-    if (elements && elements.length > 0) {
-      out = elements
-        .map((e) => e.charAt(0).toUpperCase() + e.slice(1))
-        .join(
-          elements.length > 2
-            ? ", "
-            : elements.length === 2
-              ? ` ${_loc("TERIOCK.SYSTEMS.Ability.FIELDS.elderSorcery.elementJoin")} `
-              : "",
-        );
-      if (elements.length > 1) {
-        const lastComma = out.lastIndexOf(", ");
-        if (lastComma !== -1) {
-          out =
-            out.substring(0, lastComma) +
-            ` ${_loc("TERIOCK.SYSTEMS.Ability.FIELDS.elderSorcery.elementJoin")}` +
-            out.substring(lastComma + 1);
-        }
-      }
-    }
-    return out;
-  });
-
   Handlebars.registerHelper("hackFill", (part) => {
     const min = part?.min || 0;
     const max = part?.max || 0;
@@ -54,8 +22,6 @@ export default function registerFormattingHelpers() {
     else if (value === max) return "mic fa-faint";
     return "mic fa-intermediate";
   });
-
-  Handlebars.registerHelper("frac", (value, max) => (value / max) * 100);
 
   Handlebars.registerHelper("barLeft", (value, max, temp = 0) => {
     const { value: v, max: m, temp: t } = normalizeBarInputs(value, max, temp);

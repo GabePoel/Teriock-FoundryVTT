@@ -17,16 +17,7 @@ export default function registerUiHelpers() {
     const { name, disabled, id } = options.hash;
     let value;
     if (name && typeof name === "string") {
-      const keys = name.split(".");
-      value = options.data.root;
-      for (const key of keys) {
-        if (value && typeof value === "object" && key in value) {
-          value = value[key];
-        } else {
-          value = undefined;
-          break;
-        }
-      }
+      value = foundry.utils.getProperty(options.data.root, name);
     }
     const attrs = [
       id ? `id="${id}"` : "",
