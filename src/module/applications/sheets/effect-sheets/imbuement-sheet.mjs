@@ -2,8 +2,8 @@ import { documentConfig } from "../../../constants/config/document-config.mjs";
 import { icons } from "../../../constants/display/icons.mjs";
 import { mix } from "../../../helpers/construction.mjs";
 import { makeIconClass } from "../../../helpers/utils.mjs";
-import { BaseApplicationMixin } from "../../shared/mixins/_module.mjs";
 import {
+  BaseSheetMixin,
   ChangesSheetMixin,
   ConfigButtonSheetMixin,
 } from "../mixins/_module.mjs";
@@ -11,6 +11,7 @@ import {
   AutomationsCommonSheetPart,
   DocumentCreationCommonSheetPart,
   DragDropCommonSheetPart,
+  LockingCommonSheetPart,
 } from "../mixins/common-sheet-mixin/parts/_module.mjs";
 
 const { ActiveEffectConfig } = foundry.applications.sheets;
@@ -23,12 +24,13 @@ const { ActiveEffectConfig } = foundry.applications.sheets;
  */
 export default class ImbuementSheet extends mix(
   ActiveEffectConfig,
-  BaseApplicationMixin,
+  BaseSheetMixin,
   ConfigButtonSheetMixin,
   ChangesSheetMixin,
   AutomationsCommonSheetPart,
   DocumentCreationCommonSheetPart,
   DragDropCommonSheetPart,
+  LockingCommonSheetPart,
 ) {
   static DEFAULT_OPTIONS = {
     form: { closeOnSubmit: false, submitOnChange: true },
@@ -72,6 +74,11 @@ export default class ImbuementSheet extends mix(
     },
   };
 
+  constructor(...args) {
+    super(...args);
+    this._locked = false;
+  }
+
   /** @inheritDoc */
   get _canDropAutomations() {
     return true;
@@ -81,15 +88,5 @@ export default class ImbuementSheet extends mix(
   async _onRender(context, options) {
     await super._onRender(context, options);
     this.element.querySelector("footer")?.remove();
-  }
-
-  /** @inheritDoc */
-  async _prepareContext(options = {}) {
-    const context = await super._prepareContext(options);
-    Object.assign(context, {
-      system: this.document.system,
-      systemFields: this.document.system.schema.fields,
-    });
-    return context;
   }
 }

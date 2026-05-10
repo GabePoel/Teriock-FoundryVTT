@@ -83,7 +83,10 @@ export default function AttunableSystemMixin(Base) {
             tooltip: this.isAttuned
               ? _loc("TERIOCK.SYSTEMS.Attunement.USAGE.attuned")
               : _loc("TERIOCK.SYSTEMS.Attunement.USAGE.deattuned"),
-            visible: this.parent.isOwner,
+            visible:
+              this.parent.isOwner &&
+              this.actor &&
+              this.actor.type !== "inventory",
           },
           ...super.embedIcons,
         ];

@@ -70,7 +70,10 @@ export default (Base) => {
             tooltip: this.glued
               ? _loc("TERIOCK.SYSTEMS.Equipment.EMBED.glued")
               : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unglued"),
-            visible: this.parent.isOwner,
+            visible:
+              this.parent.isOwner &&
+              this.actor &&
+              this.actor.type !== "inventory",
           },
           ...super.embedIcons.filter(
             (i) => !i.action?.toLowerCase().includes("disabled"),

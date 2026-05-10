@@ -172,7 +172,7 @@ export default function CommonSystemMixin(Base) {
         return {
           color: this.color,
           draggable: true,
-          icons: this.embedIcons,
+          icons: this.embedIcons.filter((i) => this.#checkEmbedIcon(i)),
           id: this.parent.id,
           img: this.parent.img,
           inactive: !this.parent.active,
@@ -222,6 +222,16 @@ export default function CommonSystemMixin(Base) {
       /** @returns {Teriock.Documents.CommonType[]} */
       get visibleTypes() {
         return this.metadata.visibleTypes;
+      }
+
+      /**
+       * Check if an embed icon is visible.
+       * @param {Teriock.EmbedData.EmbedIcon} icon
+       */
+      #checkEmbedIcon(icon) {
+        if (typeof icon.visible === "function") return icon.visible();
+        if (typeof icon.visible === "boolean") return icon.visible;
+        return true;
       }
 
       /**

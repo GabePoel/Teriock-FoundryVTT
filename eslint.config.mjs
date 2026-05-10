@@ -80,6 +80,10 @@ const globalTeriock = {
   tm: "readonly",
 };
 
+const globalModule = {
+  TokenMagic: "readonly",
+};
+
 export default defineConfig([
   {
     extends: ["js/recommended"],
@@ -91,6 +95,7 @@ export default defineConfig([
         ...globalHelpers,
         ...globalClient,
         ...globalTeriock,
+        ...globalModule,
       },
     },
     plugins: { js },
