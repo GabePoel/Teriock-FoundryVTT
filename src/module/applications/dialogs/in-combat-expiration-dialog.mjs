@@ -122,11 +122,12 @@ export default async function inCombatExpirationDialog(
         },
       ],
       content: contentHtml,
+      position: { width: 550 },
       window: {
+        icon: makeIconClass(TERIOCK.config.document[effect.type].icon, "title"),
         title: _loc("TERIOCK.DIALOGS.InCombatExpiration.title", {
           name: effect.name,
         }),
-        icon: makeIconClass(TERIOCK.config.document[effect.type].icon, "title"),
       },
     }).render(true);
   }
