@@ -52,36 +52,28 @@ foundry.helpers.Hooks.once("init", function () {
   // ========================
 
   Object.assign(CONFIG.specialStatusEffects, {
-    BURNED: "burned",
-    CHARMED: "charmed",
+    DEAD: "dead",
     DEFEATED: "down",
     ETHEREAL: "ethereal",
-    FRENZIED: "frenzied",
-    FROZEN: "frozen",
     HIDDEN: "hidden",
-    HOLLIED: "hollied",
-    ILLUSION_TRANSFORMED: "illusionTransformed",
-    LIGHTED: "lighted",
-    MELEE_DODGING: "meleeDodging",
-    MISSILE_DODGING: "missileDodging",
-    POISONED: "poisoned",
-    RUINED: "ruined",
-    SNARED: "snared",
-    TERRORED: "terrored",
-    TRANSFORMED: "transformed",
-    ...Object.fromEntries(
-      Object.values(TERIOCK.data.hacks).map((h) => [h.id.toUpperCase(), h.id]),
-    ),
   });
-  CONFIG.statusEffects.length = 0;
-  CONFIG.statusEffects.push(
-    ...Object.values(TERIOCK.data.conditions),
-    ...Object.values(TERIOCK.data.hacks),
-    ...Object.values(TERIOCK.data.cover),
-  );
-  CONFIG.statusEffects.sort((a, b) => {
-    return a.id.localeCompare(b.id);
-  });
+  if (game.modules.get("tokenmagic")?.active) {
+    Object.assign(
+      CONFIG.specialStatusEffects,
+      Object.fromEntries(
+        Object.keys(constants.display.tokenMagic).map((v) => [
+          helpers.string.toKebabCase(v).toUpperCase().replaceAll("-", "_"),
+          v,
+        ]),
+      ),
+    );
+  }
+  for (const k of Object.keys(CONFIG.statusEffects)) {
+    delete CONFIG.statusEffects[k];
+  }
+  Object.assign(CONFIG.statusEffects, TERIOCK.data.conditions);
+  Object.assign(CONFIG.statusEffects, TERIOCK.data.cover);
+  Object.assign(CONFIG.statusEffects, TERIOCK.data.hacks);
 
   // Configure UI Components
   // =======================
@@ -526,12 +518,8 @@ Hooks.once("ready", () => {
   }
 });
 
-// Register Hooks
-// ==============
+// Register Hook Listeners and Handlebars Helpers
+// ==============================================
 
-setup.hooks.registerHooks();
-
-// Register Handlebars Helpers
-// ===========================
-
-setup.handlebarHelpers.registerHandlebarsHelpers();
+setup.registerHookListeners();
+setup.registerHandlebarsHelpers();

@@ -29,9 +29,7 @@ export default class EvaluationModel extends EmbeddedDataModel {
    * @returns {{raw: FormulaField}}
    */
   static defineSchema(options = {}) {
-    return {
-      raw: new FormulaField(options),
-    };
+    return { raw: new FormulaField(options) };
   }
 
   /** @type {Teriock.Fields.FormulaDerivationOptions} */

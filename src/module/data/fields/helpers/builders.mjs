@@ -1,9 +1,11 @@
 import { competenceConfig } from "../../../constants/config/competence-config.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
+import { DefenseModel } from "../../models/_module.mjs";
 import {
   EnhancedNumberField,
   EnhancedStringField,
+  EvaluationField,
   FormulaField,
 } from "../_module.mjs";
 
@@ -377,5 +379,34 @@ export function movementActionField() {
     initial: "walk",
     nullable: false,
     required: true,
+  });
+}
+
+/**
+ * Field for a rollable formula.
+ * @param {StringFieldOptions & Teriock.Fields._FormulaFieldOptions} options
+ * @returns {FormulaField}
+ */
+export function rollableFormulaField(options = {}) {
+  return new FormulaField({
+    initial: "0",
+    deterministic: false,
+    nullable: false,
+    ...options,
+  });
+}
+
+/**
+ * Field for a defense.
+ * @param {StringFieldOptions & Teriock.Fields._EvaluationFieldOptions} [options]
+ * @returns {EvaluationField}
+ */
+export function defenseField(options = {}) {
+  return new EvaluationField({
+    deterministic: true,
+    floor: true,
+    min: 0,
+    model: DefenseModel,
+    ...options,
   });
 }

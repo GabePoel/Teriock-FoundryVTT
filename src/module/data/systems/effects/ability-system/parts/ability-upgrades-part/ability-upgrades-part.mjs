@@ -1,8 +1,8 @@
-import { TextField } from "../../../../../fields/_module.mjs";
 import {
   attributeField,
   competenceField,
 } from "../../../../../fields/helpers/builders.mjs";
+import { initialText } from "../../../../../fields/helpers/initializers.mjs";
 
 const { fields } = foundry.data;
 
@@ -24,20 +24,12 @@ export default (Base) => {
           upgrades: new fields.SchemaField({
             competence: new fields.SchemaField({
               attribute: attributeField(),
-              text: new TextField({
-                initial: "",
-                persisted: false,
-                required: false,
-              }),
+              text: initialText(),
               value: competenceField(),
             }),
             score: new fields.SchemaField({
-              attribute: attributeField(),
-              text: new TextField({
-                initial: "",
-                persisted: false,
-                required: false,
-              }),
+              attribute: attributeField({ unp: false }),
+              text: initialText(),
               value: new fields.NumberField({
                 initial: 0,
                 max: 5,
@@ -100,7 +92,7 @@ export default (Base) => {
             qualifier: "1",
             target: "Actor",
             type: "upgrade",
-            value: `${this.upgrades.score.value}`,
+            value: this.upgrades.score.value.toString(),
           });
         }
         if (this.upgrades.competence.attribute) {
@@ -111,7 +103,7 @@ export default (Base) => {
             qualifier: "1",
             target: "Actor",
             type: "upgrade",
-            value: `${this.upgrades.competence.value}`,
+            value: this.upgrades.competence.value.toString(),
           });
         }
         return changes;

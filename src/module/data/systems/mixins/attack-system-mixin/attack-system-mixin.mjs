@@ -29,10 +29,7 @@ export default function AttackSystemMixin(Base) {
           }),
           hitBonus: new FormulaField({ deterministic: false }),
           piercing: new fields.EmbeddedDataField(PiercingModel),
-          warded: new fields.BooleanField({
-            initial: false,
-            nullable: false,
-          }),
+          warded: new fields.BooleanField(),
         });
       }
 

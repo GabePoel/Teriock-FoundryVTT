@@ -12,8 +12,7 @@ export default function BaseSheetMixin(Base) {
   class BaseSheet extends BaseApplicationMixin(Base) {
     /** @inheritDoc */
     async _prepareContext(options = {}) {
-      const context = await super._prepareContext(options);
-      Object.assign(context, {
+      return Object.assign(await super._prepareContext(options), {
         editable: this.isEditable,
         fields: this.document?.schema.fields,
         flags: this.document.flags,
@@ -28,7 +27,6 @@ export default function BaseSheetMixin(Base) {
         systemFields: this.document.system?.schema.fields,
         uuid: this.document.uuid,
       });
-      return context;
     }
   }
   return BaseSheet;

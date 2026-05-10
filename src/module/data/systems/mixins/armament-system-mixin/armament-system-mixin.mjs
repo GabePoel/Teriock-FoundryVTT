@@ -7,12 +7,16 @@ import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
 import { makeIcon, objectMap } from "../../../../helpers/utils.mjs";
 import {
   EvaluationField,
-  FormulaField,
   IdentifierField,
   MultiChangeField,
   TextField,
 } from "../../../fields/_module.mjs";
-import { DefenseModel, RangeModel } from "../../../models/_module.mjs";
+import {
+  defenseField,
+  rollableFormulaField,
+} from "../../../fields/helpers/builders.mjs";
+import { initialText } from "../../../fields/helpers/initializers.mjs";
+import { RangeModel } from "../../../models/_module.mjs";
 import { migrateKey } from "../../../shared/migrations/source-migrations.mjs";
 import { AttackSystemMixin } from "../_module.mjs";
 
@@ -60,30 +64,12 @@ export default function ArmamentSystemMixin(Base) {
       /** @inheritDoc */
       static defineSchema() {
         return foundry.utils.mergeObject(super.defineSchema(), {
-          av: new EvaluationField({
-            deterministic: true,
-            floor: true,
-            min: 0,
-            model: DefenseModel,
-          }),
-          bv: new EvaluationField({
-            deterministic: true,
-            floor: true,
-            min: 0,
-            model: DefenseModel,
-          }),
+          av: defenseField(),
+          bv: defenseField(),
           damage: new MultiChangeField(
             {
-              base: new FormulaField({
-                deterministic: false,
-                initial: "0",
-                nullable: false,
-              }),
-              twoHanded: new FormulaField({
-                deterministic: false,
-                initial: "0",
-                nullable: false,
-              }),
+              base: rollableFormulaField(),
+              twoHanded: rollableFormulaField(),
               types: new fields.SetField(new IdentifierField()),
             },
             { multiChangePaths: ["base", "twoHanded"] },
@@ -117,12 +103,9 @@ export default function ArmamentSystemMixin(Base) {
             },
             { multiChangePaths: ["long", "short"] },
           ),
-          specialRules: new TextField({ initial: "", persisted: false }),
-          spellTurning: new fields.BooleanField({
-            initial: false,
-            nullable: false,
-          }),
-          vitals: new fields.BooleanField({ initial: false, nullable: false }),
+          specialRules: initialText(),
+          spellTurning: new fields.BooleanField(),
+          vitals: new fields.BooleanField(),
         });
       }
 

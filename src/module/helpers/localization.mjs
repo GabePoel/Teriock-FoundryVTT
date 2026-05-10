@@ -1,5 +1,5 @@
 import { toCamelCase, toKebabCase } from "./string.mjs";
-import { sortObject } from "./utils.mjs"; // Pre-localization code is blatantly stolen from D&D 5E and then brutally modified.
+import { sortObject } from "./utils.mjs";
 
 // Pre-localization code is blatantly stolen from D&D 5E and then brutally modified.
 
@@ -93,12 +93,9 @@ export function performPreLocalization(config) {
         sortObjectEntries(target, settings.keys[0]),
       );
   }
-
-  // Localize & sort status effects
-  CONFIG.statusEffects.forEach((s) => (s.name = _loc(s.name)));
-  CONFIG.statusEffects.sort((lhs, rhs) =>
-    lhs?.name.localeCompare(rhs?.name, game.i18n.lang),
-  );
+  Object.values(CONFIG.statusEffects).forEach((e) => {
+    e.name = _loc(e.name);
+  });
 }
 
 /**

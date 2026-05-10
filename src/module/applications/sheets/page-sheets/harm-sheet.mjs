@@ -61,8 +61,7 @@ export default class HarmSheet extends mix(
 
   /** @inheritDoc */
   async _prepareContext(options) {
-    const context = await super._prepareContext(options);
-    return Object.assign(context, {
+    return Object.assign(await super._prepareContext(options), {
       TERIOCK,
       canHaveAutomations: true,
       img: this.document.system.img,

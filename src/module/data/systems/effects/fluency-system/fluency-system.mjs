@@ -3,7 +3,7 @@ import { FluencyExecution } from "../../../../executions/document-executions/_mo
 import { mix } from "../../../../helpers/construction.mjs";
 import { getImage } from "../../../../helpers/path.mjs";
 import { dotJoin } from "../../../../helpers/string.mjs";
-import { TextField } from "../../../fields/_module.mjs";
+import { initialText } from "../../../fields/helpers/initializers.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
 import { CommonMacroAutomation } from "../../../pseudo-documents/automations/_module.mjs";
 import * as shared from "../../../shared/mixins/_module.mjs";
@@ -64,10 +64,8 @@ export default class FluencySystem extends mix(
         initial: "artist",
         label: "TERIOCK.TERMS.Common.tradecraft",
       }),
-      tradecraftDescription: new TextField({
-        initial: "",
+      tradecraftDescription: initialText({
         label: "TERIOCK.TERMS.Common.tradecraft",
-        persisted: false,
       }),
     });
   }

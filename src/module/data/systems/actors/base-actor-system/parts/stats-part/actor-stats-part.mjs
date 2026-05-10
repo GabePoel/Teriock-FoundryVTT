@@ -296,11 +296,7 @@ function statField(options = {}) {
     }),
   };
   if (options.temp) {
-    schema.temp = new fields.NumberField({
-      initial: 0,
-      integer: true,
-      min: 0,
-    });
+    schema.temp = new fields.NumberField({ initial: 0, integer: true, min: 0 });
     schema.poolLimit = initialNumber();
   }
   if (options.morganti) {

@@ -1,4 +1,5 @@
 import { FormulaField } from "../../../fields/_module.mjs";
+import { rollableFormulaField } from "../../../fields/helpers/builders.mjs";
 import BaseAutomation from "./base-automation.mjs";
 
 export default class ThresholdAutomation extends BaseAutomation {
@@ -11,7 +12,7 @@ export default class ThresholdAutomation extends BaseAutomation {
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      bonus: new FormulaField({ initial: "0" }),
+      bonus: rollableFormulaField(),
       threshold: new FormulaField({ initial: null, nullable: true }),
     });
   }
