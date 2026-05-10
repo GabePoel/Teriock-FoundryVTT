@@ -71,9 +71,11 @@ foundry.helpers.Hooks.once("init", function () {
   for (const k of Object.keys(CONFIG.statusEffects)) {
     delete CONFIG.statusEffects[k];
   }
-  Object.assign(CONFIG.statusEffects, TERIOCK.data.conditions);
-  Object.assign(CONFIG.statusEffects, TERIOCK.data.cover);
-  Object.assign(CONFIG.statusEffects, TERIOCK.data.hacks);
+  Object.assign(CONFIG.statusEffects, {
+    ...TERIOCK.data.conditions,
+    ...TERIOCK.data.cover,
+    ...TERIOCK.data.hacks,
+  });
 
   // Configure UI Components
   // =======================
@@ -100,7 +102,7 @@ foundry.helpers.Hooks.once("init", function () {
   // ================
 
   for (const key of Object.keys(CONFIG.Canvas.detectionModes)) {
-    const id = CONFIG.Canvas.detectionModes[key].id;
+    const id = CONFIG.Canvas.detectionModes[key]?.id;
     if (!["basicSight", "lightPerception"].includes(id)) {
       delete CONFIG.Canvas.detectionModes[key];
     }
@@ -512,9 +514,7 @@ Hooks.once("ready", () => {
   // Pre-index All Sub-Document Compendium Packs
   // -------------------------------------------
   for (const p of game.packs.contents) {
-    if (["Item", "ActiveEffect"].includes(p.documentName)) {
-      p.getIndex();
-    }
+    if (["Item", "ActiveEffect"].includes(p.documentName)) p.getIndex();
   }
 });
 
