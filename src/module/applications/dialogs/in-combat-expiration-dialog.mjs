@@ -26,15 +26,14 @@ export default async function inCombatExpirationDialog(
         name,
       }),
       modal: true,
+      position: { width: 550 },
       rejectClose: false,
       window: {
         title: _loc("TERIOCK.DIALOGS.InCombatExpiration.title", { name }),
         icon: makeIconClass(TERIOCK.config.document[effect.type].icon, "title"),
       },
     });
-    if (expire) {
-      await effect.system.expire();
-    }
+    if (expire) await effect.system.expire();
   } else if (
     effect.system.expirations.combat.what.type === "rolled" ||
     forceDialog
@@ -114,9 +113,7 @@ export default async function inCombatExpirationDialog(
         },
         {
           action: "remove",
-          callback: async () => {
-            await effect.system.expire();
-          },
+          callback: async () => await effect.system.expire(),
           icon: makeIconClass(TERIOCK.display.icons.ui.remove, "button"),
           label: _loc("TERIOCK.DIALOGS.InCombatExpiration.BUTTONS.remove"),
         },
