@@ -51,7 +51,7 @@ function fireTimeTriggerFactory(trigger) {
   };
 }
 
-const HOOK_ENTRIES = [
+const timeHookEntries = [
   ["updateWorldTime", increaseDebt],
   ...Object.keys(triggerConfig.time.choices).map((t) => [
     `teriock.force${ucFirst(t)}`,
@@ -59,8 +59,4 @@ const HOOK_ENTRIES = [
   ]),
 ];
 
-export default function registerTimeManagementHooks() {
-  HOOK_ENTRIES.forEach(([hook, handler]) =>
-    foundry.helpers.Hooks.on(hook, handler),
-  );
-}
+export default timeHookEntries;

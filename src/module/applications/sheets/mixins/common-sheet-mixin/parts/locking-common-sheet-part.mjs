@@ -2,7 +2,7 @@
  * @param {typeof TeriockDocumentSheet} Base
  */
 export default (Base) => {
-  //noinspection JSAccessibilityCheck
+  //noinspection JSAccessibilityCheck,JSClosureCompilerSyntax
   return (
     /**
      * @extends {TeriockDocumentSheet}
@@ -57,9 +57,7 @@ export default (Base) => {
         const toggleButton = this.window.header?.querySelector(
           "[data-action='toggleLockThis']",
         );
-        if (toggleButton) {
-          this.#setToggleLockButtonAttributes(toggleButton);
-        }
+        if (toggleButton) this.#setToggleLockButtonAttributes(toggleButton);
       }
 
       /** @inheritDoc */

@@ -56,7 +56,7 @@ export default function CommonDocumentMixin(Base) {
 
       /**
        * Array containing all children or their indexes.
-       * @returns {ChildDocument[]}
+       * @returns {AnyChildDocument[]}
        */
       get childArray() {
         return [
@@ -98,7 +98,7 @@ export default function CommonDocumentMixin(Base) {
 
       /**
        * Array containing all visible children.
-       * @returns {ChildDocument[]}
+       * @returns {AnyChildDocument[]}
        */
       get visibleChildren() {
         return this.childArray

@@ -319,10 +319,7 @@ export default function CommonSystemMixin(Base) {
        * @returns {Promise<RefreshSourceNode>}
        */
       async _formatRefreshPromise(document, label) {
-        return {
-          document: await document,
-          label: _loc(label),
-        };
+        return { document: await document, label: _loc(label) };
       }
 
       /** @inheritDoc */
@@ -452,9 +449,7 @@ export default function CommonSystemMixin(Base) {
       /** @returns {object} */
       getSystemRollData() {
         const localRollData = this.getLocalRollData();
-        return {
-          ...prefixObject(localRollData, this.parent.type),
-        };
+        return { ...prefixObject(localRollData, this.parent.type) };
       }
 
       /** @returns {Promise<void>} */

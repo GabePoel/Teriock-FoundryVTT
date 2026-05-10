@@ -58,34 +58,19 @@ export default class BaseActorSheet extends mix(
   /**
    * Cycle the value of a three-way switch either forwards or backwards.
    * @param {HTMLButtonElement} toggleSwitch
-   * @param {boolean} forward
+   * @param {number} change
    */
-  #cycleToggleSwitch(toggleSwitch, forward = true) {
+  #cycleToggleSwitch(toggleSwitch, change = 1) {
     const name = toggleSwitch.getAttribute("data-name");
-    if (!name) {
-      return;
-    }
-    const path = name.split(".").slice(1);
-    let obj = this.settings;
-    for (let i = 0; i < path.length - 1; i++) {
-      obj = obj[path[i]];
-    }
-    const key = path[path.length - 1];
-    const val = obj[key];
-    if (forward) {
-      obj[key] = ((val + 2) % 3) - 1;
-    } else {
-      obj[key] = ((val + 3) % 3) - 1;
-    }
+    if (!name) return;
+    const val = foundry.utils.getProperty(this, name);
+    foundry.utils.setProperty(this, name, ((val + 1 + change) % 3) - 1);
   }
 
   /** @inheritDoc */
   _canDropChild(doc) {
-    if (doc.type === "ability") {
-      return false;
-    } else {
-      return super._canDropChild(doc);
-    }
+    if (doc.type === "ability") return false;
+    else return super._canDropChild(doc);
   }
 
   /** @inheritDoc */
@@ -98,23 +83,21 @@ export default class BaseActorSheet extends mix(
     toggleSwitches.forEach((el) => {
       // Left-click: forward cycle
       el.addEventListener("click", async () => {
-        this.#cycleToggleSwitch(el, true);
+        this.#cycleToggleSwitch(el, 1);
         await this.render();
       });
       // Right-click: reverse cycle
       el.addEventListener("contextmenu", async () => {
-        this.#cycleToggleSwitch(el, false);
+        this.#cycleToggleSwitch(el, 2);
         await this.render();
       });
-
       // Support right-click on associated labels
-      const id = el.id;
-      if (!id) return;
-      const label = this.element.querySelector(`label[for="${id}"]`);
+      if (!el.id) return;
+      const label = this.element.querySelector(`label[for="${el.id}"]`);
       if (!label) return;
       label.addEventListener("contextmenu", async (event) => {
         event.preventDefault();
-        this.#cycleToggleSwitch(el, false);
+        this.#cycleToggleSwitch(el, 2);
         await this.render();
       });
     });
@@ -142,8 +125,8 @@ export default class BaseActorSheet extends mix(
    * @param {object} context
    */
   _prepareDisplayContext(context) {
-    context.editable = this.isEditable;
     context.actor = this.actor;
+    context.editable = this.isEditable;
     context.settings = this.settings;
   }
 }

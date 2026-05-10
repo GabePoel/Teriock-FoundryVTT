@@ -6,18 +6,15 @@
  * @param {boolean} active
  * @returns {Promise<void>}
  * @see {applyTokenStatusEffect}
+ * @todo Remove release restriction once token magic is ready for V14.
  */
 async function applyTokenMagicFilters(token, statusId, active) {
-  const activeGM = game.users.activeGM;
-  let tokenEditor;
-  const user = game.user;
-  if (activeGM) tokenEditor = Boolean(user.isActiveGM);
-  else tokenEditor = token.isOwner;
   if (
+    game.release.generation === 13 &&
     token.document.baseActor?.getSetting("token.autoMagic") &&
     game.modules.get("tokenmagic")?.active &&
     game.teriock.getSetting("autoTokenMagicConditionEffects") &&
-    tokenEditor
+    token.isOwner
   ) {
     if (Object.keys(TERIOCK.display.tokenMagic).includes(statusId)) {
       const params = TERIOCK.display.tokenMagic[statusId];
@@ -41,13 +38,9 @@ async function fireMovementTrigger(document, _movement, _operation, user) {
   }
 }
 
-const HOOK_ENTRIES = [
+const tokenHookEntries = [
   ["applyTokenStatusEffect", applyTokenMagicFilters],
   ["moveToken", fireMovementTrigger],
 ];
 
-export default function registerTokenManagementHooks() {
-  HOOK_ENTRIES.forEach(([hook, handler]) =>
-    foundry.helpers.Hooks.on(hook, handler),
-  );
-}
+export default tokenHookEntries;

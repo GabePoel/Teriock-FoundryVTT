@@ -4,20 +4,19 @@ import { makeIconClass } from "../../helpers/utils.mjs";
 
 /**
  * Add the entries from {@link BaseDocument.getCardContextMenuEntries} to sheet header.
- * @param {DocumentSheetV2} application
+ * @param {DocumentSheetV2 & { document: TeriockDocument }} application
  * @param {ApplicationHeaderControlsEntry[]} controls
  * @see {getHeaderControlsApplicationV2}
  */
 function addCardContextMenuEntriesToHeader(application, controls) {
-  if (typeof application.document?.getCardContextMenuEntries !== "function") {
-    return;
-  }
-  const entries = application.document.getCardContextMenuEntries(
-    application.document,
-  );
+  const document = application.document;
+  if (typeof document.getCardContextMenuEntries !== "function") return;
+  const entries = document.getCardContextMenuEntries(document);
   const groups = {};
   const ungrouped = [];
   const sorted = [];
+  // TODO: Fully commit to either grouped or ungrouped
+  // We sort entries by group, but this isn't really necessary since we sort alphabetically anyway
   entries.forEach((entry) => {
     if (entry.group && !groups[entry.group]) groups[entry.group] = [];
     if (entry.group) groups[entry.group].push(entry);
@@ -41,12 +40,13 @@ function addCardContextMenuEntriesToHeader(application, controls) {
 
 /**
  * Adds a right-click option to the close button in all applications.
- * @param {ApplicationV2} application
+ * @param {ApplicationV2|DocumentSheetV2} application
  * @see {renderApplicationV2}
  */
 function addDeveloperModeLoggingListener(application) {
-  if (!game.teriock.getSetting("developerMode") || !application.window.header)
+  if (!game.teriock.getSetting("developerMode") || !application.window.header) {
     return;
+  }
   application.window.header
     .querySelectorAll("[data-action=close]")
     .forEach((el) => {
@@ -101,7 +101,7 @@ function addIdentifierClipboardListener(application) {
 
 /**
  * Add a button to share image in chat to the header.
- * @param {ImagePopout} application
+ * @param {ImagePopout & {options: ApplicationConfiguration & ImagePopoutConfiguration}} application
  * @param {ApplicationHeaderControlsEntry[]} controls
  * @see {getHeaderControlsApplicationV2}
  */
@@ -161,7 +161,7 @@ function sortControls(_application, controls) {
   });
 }
 
-const HOOK_ENTRIES = [
+const applicationHookEntries = [
   ["getHeaderControlsBaseApplication", sortControls],
   ["getHeaderControlsDocumentSheetV2", addCardContextMenuEntriesToHeader],
   ["getHeaderControlsImagePopout", addShareImageToHeader],
@@ -172,8 +172,4 @@ const HOOK_ENTRIES = [
   ["renderRollTableSheet", bindCommonActionsToElement],
 ];
 
-export default function registerSheetManagementHooks() {
-  HOOK_ENTRIES.forEach(([hook, handler]) =>
-    foundry.helpers.Hooks.on(hook, handler),
-  );
-}
+export default applicationHookEntries;
