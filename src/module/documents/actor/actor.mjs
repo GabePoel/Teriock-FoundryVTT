@@ -168,13 +168,6 @@ export default class TeriockActor extends mix(
     return Array.from(this.allApplicableEffects());
   }
 
-  /** @inheritDoc */
-  get visibleChildren() {
-    return this.modifiableChildren.filter(
-      (c) => !c.metadata.revealable || c.system.revealed || game.user.isGM,
-    );
-  }
-
   /**
    * Helper method to add a virtual status.
    * @param {Teriock.Keys.Condition} condition
@@ -310,13 +303,6 @@ export default class TeriockActor extends mix(
         c.system.competence.raw = value;
       }
     }
-  }
-
-  /** @inheritDoc */
-  _getByType(type) {
-    if (TERIOCK.config.document[type]?.documentName === "Item") {
-      return (this.itemTypes[type] ?? []).filter((i) => !i.isEphemeral);
-    } else return super._getByType(type);
   }
 
   /**
@@ -473,6 +459,13 @@ export default class TeriockActor extends mix(
   async getTokenDocument(data = {}, options = {}) {
     if (game.canvas.scene.grid.type === 0) data.shape ??= 0;
     return super.getTokenDocument(data, options);
+  }
+
+  /** @inheritDoc */
+  makeVisibleChildrenArray() {
+    return this.modifiableChildren.filter(
+      (c) => !c.metadata.revealable || c.system.revealed || game.user.isGM,
+    );
   }
 
   /**

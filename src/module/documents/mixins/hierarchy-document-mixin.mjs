@@ -347,26 +347,20 @@ export default function HierarchyDocumentMixin(Base) {
       /**
        * Render the sheet of the dependee.
        */
-      #renderDependeeSheet() {
-        if (this.dependee?.isViewer) {
-          this.dependee?.sheet.render({ force: false });
-        }
-      }
-
-      /**
-       * Render sheets of documents which have control over this.
-       */
-      #renderSheets() {
-        this.#renderSupSheets();
-        this.#renderDependeeSheet();
+      #reloadDependee() {
+        const doc = this.dependee;
+        if (!doc) return;
+        doc.resetChildMaps();
+        if (doc.isViewer) doc?.sheet.render({ force: false });
       }
 
       /**
        * Render the sheets of all the sups.
        */
-      #renderSupSheets() {
+      #reloadSups() {
         this.getAllSups().then((result) => {
           result.forEach((doc) => {
+            doc.resetChildMaps();
             if (doc.isViewer) doc.sheet.render({ force: false });
           });
         });
@@ -375,6 +369,14 @@ export default function HierarchyDocumentMixin(Base) {
             if (app.rendered) app.render();
           });
         }
+      }
+
+      /**
+       * Render sheets of documents which have control over this.
+       */
+      #renderSheets() {
+        this.#reloadSups();
+        this.#reloadDependee();
       }
 
       /** @inheritDoc */

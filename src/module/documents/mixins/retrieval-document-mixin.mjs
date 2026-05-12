@@ -17,7 +17,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockAbility[]}
        */
       get abilities() {
-        return this._getByType("ability");
+        return this.visibleChildrenByType["ability"] ?? [];
       }
 
       /**
@@ -25,7 +25,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockArchetype[]}
        */
       get archetypes() {
-        return this._getByType("archetype");
+        return this.visibleChildrenByType["archetype"] ?? [];
       }
 
       /**
@@ -33,7 +33,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockAttunement[]}
        */
       get attunements() {
-        return this._getByType("attunement");
+        return this.visibleChildrenByType["attunement"] ?? [];
       }
 
       /**
@@ -41,7 +41,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockBody[]}
        */
       get bodyParts() {
-        return this._getByType("body");
+        return this.visibleChildrenByType["body"] ?? [];
       }
 
       /**
@@ -49,7 +49,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockCondition[]}
        */
       get conditions() {
-        return this._getByType("condition");
+        return this.visibleChildrenByType["condition"] ?? [];
       }
 
       /**
@@ -57,7 +57,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockConsequence[]}
        */
       get consequences() {
-        return this._getByType("consequence");
+        return this.visibleChildrenByType["consequence"] ?? [];
       }
 
       /**
@@ -65,7 +65,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockEquipment[]}
        */
       get equipment() {
-        return this._getByType("equipment");
+        return this.visibleChildrenByType["equipment"] ?? [];
       }
 
       /**
@@ -73,7 +73,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockFluency[]}
        */
       get fluencies() {
-        return this._getByType("fluency");
+        return this.visibleChildrenByType["fluency"] ?? [];
       }
 
       /**
@@ -81,7 +81,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockImbuement[]}
        */
       get imbuements() {
-        return this._getByType("imbuement");
+        return this.visibleChildrenByType["imbuement"] ?? [];
       }
 
       /**
@@ -89,7 +89,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockMount[]}
        */
       get mounts() {
-        return this._getByType("mount");
+        return this.visibleChildrenByType["mount"] ?? [];
       }
 
       /**
@@ -97,7 +97,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockPower[]}
        */
       get powers() {
-        return this._getByType("power");
+        return this.visibleChildrenByType["power"] ?? [];
       }
 
       /**
@@ -105,7 +105,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockProperty[]}
        */
       get properties() {
-        return this._getByType("property");
+        return this.visibleChildrenByType["property"] ?? [];
       }
 
       /**
@@ -113,7 +113,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockRank[]}
        */
       get ranks() {
-        return this._getByType("rank");
+        return this.visibleChildrenByType["rank"] ?? [];
       }
 
       /**
@@ -121,7 +121,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockResource[]}
        */
       get resources() {
-        return this._getByType("resource");
+        return this.visibleChildrenByType["resource"] ?? [];
       }
 
       /**
@@ -129,18 +129,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockSpecies[]}
        */
       get species() {
-        return this._getByType("species");
-      }
-
-      /**
-       * Get all the visible children of a certain type. Use this instead of calling {@link visibleChildren} directly to
-       * minimize the number of times full collections are looped over. This utilizes `documentsByType` to lazily
-       * recompute relevant document arrays once per data preparation cycle.
-       * @param {Teriock.Documents.ChildType} type
-       * @returns {AnyChildDocument[]}
-       */
-      _getByType(type) {
-        return this.visibleChildren.filter((c) => c.type === type);
+        return this.visibleChildrenByType["species"] ?? [];
       }
 
       /**
