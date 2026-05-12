@@ -1,8 +1,6 @@
 declare global {
   namespace Teriock.Models {
     export type ActorCapacitiesPartData = {
-      /** <base> Attunements - IDs of attuned equipment */
-      attunements: Set<ID<TeriockEquipment>>;
       carryingCapacity: {
         factor: number;
         heavy: number;

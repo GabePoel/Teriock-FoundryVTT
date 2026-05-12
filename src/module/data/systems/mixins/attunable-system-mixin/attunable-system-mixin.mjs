@@ -72,12 +72,11 @@ export default function AttunableSystemMixin(Base) {
        * @returns {TeriockAttunement|null} The attunement data or null if not attuned.
        */
       get attunement() {
-        if (this.parent.actor) {
-          return this.parent.actor.attunements.find(
-            (effect) => effect.system.target === this.parent._id,
-          );
-        }
-        return null;
+        return (
+          this.actor?.attunements.find(
+            (a) => a.system.target?.uuid === this.parent.uuid,
+          ) ?? null
+        );
       }
 
       /** @inheritDoc */
@@ -114,10 +113,7 @@ export default function AttunableSystemMixin(Base) {
        * @returns {boolean} True if the item is attuned, false otherwise.
        */
       get isAttuned() {
-        if (this.parent.actor) {
-          return this.parent.actor.system.attunements.has(this.parent._id);
-        }
-        return false;
+        return !!this.attunement;
       }
 
       /** @inheritDoc */

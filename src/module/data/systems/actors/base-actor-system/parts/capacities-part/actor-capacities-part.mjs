@@ -137,9 +137,6 @@ export default (Base) => {
       /** @inheritDoc */
       prepareBaseData() {
         super.prepareBaseData();
-        this.attunements = new Set(
-          this.parent.attunements.map((a) => a.system.target),
-        );
         this.#prepareCarryingCapacity();
       }
 

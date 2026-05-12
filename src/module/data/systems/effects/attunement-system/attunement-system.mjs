@@ -2,6 +2,7 @@ import { attunementConfig } from "../../../../constants/config/attunement-config
 import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
 import { makeIcon, objectMap } from "../../../../helpers/utils.mjs";
+import { LocalDocumentField } from "../../../fields/_module.mjs";
 import CleanedEffectSystem from "../cleaned-effect-system.mjs";
 
 const { fields } = foundry.data;
@@ -32,7 +33,7 @@ export default class AttunementSystem extends CleanedEffectSystem {
   static defineSchema() {
     return foundry.utils.mergeObject(super.defineSchema(), {
       inheritTier: new fields.BooleanField({ initial: true }),
-      target: new fields.DocumentIdField({ nullable: true, initial: null }),
+      target: new LocalDocumentField(foundry.documents.BaseItem),
       tier: new fields.NumberField({
         label: "TERIOCK.SYSTEMS.Attunable.FIELDS.tier.raw.label",
         initial: 0,
@@ -48,7 +49,7 @@ export default class AttunementSystem extends CleanedEffectSystem {
 
   /** @inheritDoc */
   get color() {
-    return this.targetDocument
+    return this.target
       ? TERIOCK.display.colors.green
       : TERIOCK.display.colors.orange;
   }
@@ -83,27 +84,19 @@ export default class AttunementSystem extends CleanedEffectSystem {
   }
 
   /**
-   * Gets the target document for this attunement.
-   * @returns {TeriockEquipment|TeriockMount|null} The target document or null if not found.
-   */
-  get targetDocument() {
-    return this.actor?.items.get(this.target);
-  }
-
-  /**
    * Gets the usage status of the attunement target.
    * @returns {string} The usage status.
    */
   get usage() {
-    if (this.targetDocument) {
-      if (this.targetDocument.type === "equipment") {
-        if (this.targetDocument.system.equipped) {
+    if (this.target) {
+      if (this.target.type === "equipment") {
+        if (this.target.system.equipped) {
           return _loc("TERIOCK.SYSTEMS.Equipment.EMBED.equipped");
         } else {
           return _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unequipped");
         }
-      } else if (this.targetDocument.type === "mount") {
-        if (this.targetDocument.system.mounted) {
+      } else if (this.target.type === "mount") {
+        if (this.target.system.mounted) {
           return _loc("TERIOCK.SYSTEMS.Mount.EMBED.mounted");
         } else {
           return _loc("TERIOCK.SYSTEMS.Mount.EMBED.unmounted");
@@ -111,7 +104,7 @@ export default class AttunementSystem extends CleanedEffectSystem {
       } else {
         return _loc("TERIOCK.SYSTEMS.Attunement.USAGE.attuned");
       }
-    } else if (this.target) {
+    } else if (this._source.target) {
       return _loc("TERIOCK.SYSTEMS.Attunement.USAGE.missing");
     } else {
       return "";
@@ -154,7 +147,7 @@ export default class AttunementSystem extends CleanedEffectSystem {
       ...super.getLocalRollData(),
       [`type.${toCamelCase(this.type)}`]: 1,
       tier: this.tier,
-      target: this.targetDocument ? 1 : 0,
+      target: this.target ? 1 : 0,
     };
   }
 
@@ -173,17 +166,17 @@ export default class AttunementSystem extends CleanedEffectSystem {
         ],
       },
     ];
-    if (this.targetDocument) {
+    if (this.target) {
       parts.associations = [
         {
           cards: [
             {
-              color: this.targetDocument.system.color,
-              img: this.targetDocument.img,
+              color: this.target.system.color,
+              img: this.target.img,
               makeTooltip: true,
-              name: this.targetDocument.fullName,
-              type: this.targetDocument.type,
-              uuid: this.targetDocument.uuid,
+              name: this.target.fullName,
+              type: this.target.type,
+              uuid: this.target.uuid,
             },
           ],
           icon: TERIOCK.config.document.attunement.icon,
@@ -196,8 +189,8 @@ export default class AttunementSystem extends CleanedEffectSystem {
 
   /** @inheritDoc */
   prepareDerivedData() {
-    if (this.inheritTier && this.targetDocument) {
-      this.tier = this.targetDocument.system.tier.currentValue;
+    if (this.inheritTier && this.target) {
+      this.tier = this.target.system.tier.currentValue;
     }
     this.changes.push({
       key: "system.presence.value",

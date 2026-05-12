@@ -312,6 +312,13 @@ export default class TeriockActor extends mix(
     }
   }
 
+  /** @inheritDoc */
+  _getByType(type) {
+    if (TERIOCK.config.document[type]?.documentName === "Item") {
+      return (this.itemTypes[type] ?? []).filter((i) => !i.isEphemeral);
+    } else return super._getByType(type);
+  }
+
   /**
    * @inheritDoc
    * @param {ActorData} data

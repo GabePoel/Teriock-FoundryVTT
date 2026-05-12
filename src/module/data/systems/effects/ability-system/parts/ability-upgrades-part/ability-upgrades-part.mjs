@@ -113,11 +113,7 @@ export default (Base) => {
       prepareDerivedData() {
         super.prepareDerivedData();
         if (this.upgrades.score.attribute) {
-          const attPage =
-            TERIOCK.config.attribute[this.upgrades.competence.attribute].page;
-          const attLabel =
-            TERIOCK.config.attribute[this.upgrades.score.attribute].label;
-          const attribute = ` @L[Core:${attPage}]{${attLabel}}`;
+          const attribute = attributeLink(this.upgrades.competence.attribute);
           const value = this.upgrades.score.value;
           this.upgrades.score.text = _loc(
             "TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.score.description",
@@ -130,11 +126,7 @@ export default (Base) => {
           this.upgrades.competence.attribute = null;
         }
         if (this.upgrades.competence.attribute) {
-          const attPage =
-            TERIOCK.config.attribute[this.upgrades.competence.attribute].page;
-          const attLabel =
-            TERIOCK.config.attribute[this.upgrades.competence.attribute].label;
-          const attribute = ` @L[Core:${attPage}]{${attLabel}}`;
+          const attribute = attributeLink(this.upgrades.competence.attribute);
           const amount = this.upgrades.competence.value;
           const page = TERIOCK.config.competence.levels[amount].page;
           const level = TERIOCK.config.competence.levels[amount].label;
@@ -154,3 +146,15 @@ export default (Base) => {
     }
   );
 };
+
+/**
+ * Build an attribute link.
+ * @param {Teriock.Keys.Attribute} attribute
+ * @returns {string}
+ */
+function attributeLink(attribute) {
+  if (!TERIOCK.config.attribute[attribute]) return "";
+  const page = TERIOCK.config.attribute[attribute].page;
+  const label = TERIOCK.config.attribute[attribute].label;
+  return `@L[Core:${page}]{${label}}`;
+}
