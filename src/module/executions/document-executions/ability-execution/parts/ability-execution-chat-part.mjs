@@ -293,6 +293,7 @@ export default function AbilityExecutionChatPart(Base) {
         return {
           changes: [],
           duration: {
+            expiry: null,
             seconds: await this.#generateEffectDuration(crit),
           },
           img: this.source.img,
