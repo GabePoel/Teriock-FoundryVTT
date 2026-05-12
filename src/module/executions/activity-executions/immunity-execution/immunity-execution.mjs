@@ -1,5 +1,6 @@
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { getImage } from "../../../helpers/path.mjs";
+import { ruleUuid } from "../../../helpers/resolve.mjs";
 import BaseExecution from "../../base-execution/base-execution.mjs";
 
 export default class ImmunityExecution extends BaseExecution {
@@ -22,6 +23,15 @@ export default class ImmunityExecution extends BaseExecution {
         : getImage("effect-types", "Immunity"));
     this.rule = this.hex ? "hexseal" : "immunity";
     this.LABEL = "Immunity";
+  }
+
+  /** @inheritDoc */
+  get chatData() {
+    return foundry.utils.mergeObject(super.chatData, {
+      system: {
+        _src: ruleUuid("Keyword", this.hex ? "Hexseal" : "Immunity"),
+      },
+    });
   }
 
   /** @inheritDoc */

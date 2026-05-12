@@ -9,6 +9,7 @@ import { makeIconClass } from "../../helpers/utils.mjs";
  * @see {getHeaderControlsApplicationV2}
  */
 function addCardContextMenuEntriesToHeader(application, controls) {
+  if (!application.window.header) return;
   const document = application.document;
   if (typeof document.getCardContextMenuEntries !== "function") return;
   const entries = document.getCardContextMenuEntries(document);
@@ -74,6 +75,7 @@ function addDeveloperModeLoggingListener(application) {
  * @see {renderApplicationV2}
  */
 function addIdentifierClipboardListener(application) {
+  if (!application.window.header) return;
   const type = _loc("TERIOCK.TERMS.Common.identifier").toLowerCase();
   const label = _loc(application.document.constructor.metadata.label);
   application.window.header
@@ -106,6 +108,7 @@ function addIdentifierClipboardListener(application) {
  * @see {getHeaderControlsApplicationV2}
  */
 function addShareImageToHeader(application, controls) {
+  if (!application.window.header) return;
   controls.push({
     action: "shareImageInChat",
     icon: makeIconClass(TERIOCK.display.icons.ui.shareImage, "contextMenu"),
@@ -121,6 +124,7 @@ function addShareImageToHeader(application, controls) {
  * @see {getHeaderControlsApplicationV2}
  */
 function addWikiOpenToHeader(application, controls) {
+  if (!application.window.header) return;
   if (
     application.document.metadata?.wiki &&
     application.document.system["isOnWiki"]

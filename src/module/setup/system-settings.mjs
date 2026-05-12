@@ -185,7 +185,7 @@ export const settings = {
       type: String,
     },
     openChatDocuments: {
-      default: true,
+      default: false,
       hint: "TERIOCK.SETTINGS.openChatDocuments.hint",
       name: "TERIOCK.SETTINGS.openChatDocuments.name",
       scope: "world",

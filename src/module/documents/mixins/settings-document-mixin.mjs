@@ -1,5 +1,8 @@
 /**
  * @param {typeof TeriockDocument} Base
+ * @todo Since we no longer have settings on token documents, the settings can be moved into the normal system
+ * schema. We should do that. This can happen in conjunction with a general config file and a way of accessing
+ * document behavior settings that more cleanly integrates with game settings.
  */
 export default function SettingsDocumentMixin(Base) {
   return (

@@ -13,8 +13,6 @@ declare global {
       content: string;
       /** <schema> Panels to render */
       panels: Teriock.Messages.MessagePanel[];
-      /** <schema> Document that the message is sourced from */
-      source: UUID<CommonDocument>;
       /** <schema> Strings to be wrapped as tags at the bottom of the message */
       tags: string[];
     };

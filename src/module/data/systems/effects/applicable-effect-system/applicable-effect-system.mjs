@@ -53,7 +53,6 @@ export default class ApplicableEffectSystem extends mix(
   /** @inheritDoc */
   static defineSchema() {
     return foundry.utils.mergeObject(super.defineSchema(), {
-      _src: new fields.DocumentUUIDField({ initial: null, nullable: true }),
       blocks: builders.blocksField(),
       critical: new fields.BooleanField(),
       expirations: new fields.SchemaField({

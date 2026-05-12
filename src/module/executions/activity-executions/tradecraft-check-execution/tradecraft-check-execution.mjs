@@ -1,4 +1,5 @@
 import { tradecraftPanel } from "../../../helpers/panel.mjs";
+import { ruleUuid } from "../../../helpers/resolve.mjs";
 import BaseExecution from "../../base-execution/base-execution.mjs";
 import { TradecraftExecutionMixin } from "../../mixins/_module.mjs";
 
@@ -18,6 +19,18 @@ export default class TradecraftCheckExecution extends TradecraftExecutionMixin(
   ) {
     super(options);
     this._tradecraft = options.tradecraft;
+  }
+
+  /** @inheritDoc */
+  get chatData() {
+    return foundry.utils.mergeObject(super.chatData, {
+      system: {
+        _src: ruleUuid(
+          "Tradecraft",
+          TERIOCK.index.tradecrafts[this.tradecraft],
+        ),
+      },
+    });
   }
 
   /** @inheritDoc */

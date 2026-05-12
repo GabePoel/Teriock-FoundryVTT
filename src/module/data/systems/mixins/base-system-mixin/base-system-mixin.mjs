@@ -1,3 +1,5 @@
+const { fields } = foundry.data;
+
 /**
  * @param {typeof TypeDataModel} Base
  */
@@ -5,6 +7,7 @@ export default function BaseSystemMixin(Base) {
   return (
     /**
      * @extends {TypeDataModel}
+     * @extends {Teriock.Models.BaseSystemData}
      * @mixin
      */
     class BaseSystem extends Base {
@@ -13,7 +16,9 @@ export default function BaseSystemMixin(Base) {
 
       /** @inheritDoc */
       static defineSchema() {
-        return {};
+        return {
+          _src: new fields.DocumentUUIDField({ initial: null, nullable: true }),
+        };
       }
 
       /** @returns {string} */

@@ -59,6 +59,36 @@ export default class TeriockChatLog extends ChatLog {
         },
         visible: (li) => !!li.querySelector(".collapsable:not(.collapsed)"),
       },
+      {
+        icon: makeIcon(TERIOCK.display.icons.ui.openWindow, "contextMenu"),
+        label: "TERIOCK.SYSTEMS.Common.MENU.openSource",
+        visible: (li) => {
+          const message = game.messages.get(li.dataset.messageId);
+          const src = message.system._src;
+          if (!src) return false;
+          let doc;
+          if (!src.startsWith("Compendium")) doc = fromUuidSync(src);
+          else {
+            const parsed = foundry.utils.parseUuid(src);
+            if (parsed.embedded.length === 0) doc = fromUuidSync(src);
+            if (parsed.collection.visible) return true;
+          }
+          if (!doc) return false;
+          return (
+            game.user.isGM ||
+            game.teriock.getSetting("openChatDocuments") ||
+            doc.isViewer
+          );
+        },
+        onClick: async (_ev, li) => {
+          const message = game.messages.get(li.dataset.messageId);
+          const doc = await fromUuid(message.system._src);
+          if (!doc) return;
+          if (doc.documentName === "JournalEntryPage") {
+            await doc.parent.sheet.render({ force: true, pageId: doc.id });
+          } else await doc.sheet?.render({ force: true, mode: "view" });
+        },
+      },
     ];
   }
 

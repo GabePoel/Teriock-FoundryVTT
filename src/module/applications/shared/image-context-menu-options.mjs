@@ -43,21 +43,6 @@ const imageContextMenuOptions = [
       return src && src.length > 0 && target.getAttribute("data-shareable");
     },
   },
-  {
-    icon: makeIcon(icons.ui.openWindow, "contextMenu"),
-    label: "TERIOCK.SYSTEMS.Child.MENU.openDocument",
-    onClick: async (_ev, target) => {
-      const uuid = target.getAttribute("data-uuid");
-      if (uuid) {
-        const doc = await fromUuid(uuid);
-        if (doc) await doc.sheet.render(true);
-      }
-    },
-    visible: (target) =>
-      target.getAttribute("data-openable-document") &&
-      target.getAttribute("data-uuid") &&
-      (game.user.isGM || game.teriock.getSetting("openChatDocuments")),
-  },
 ];
 export default imageContextMenuOptions;
 

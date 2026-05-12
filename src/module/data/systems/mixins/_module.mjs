@@ -4,7 +4,7 @@ export { default as ArmamentSystemMixin } from "./armament-system-mixin/armament
 export { default as AttackSystemMixin } from "./attack-system-mixin/attack-system-mixin.mjs";
 export { default as AttunableSystemMixin } from "./attunable-system-mixin/attunable-system-mixin.mjs";
 export { default as AutomatableSystemMixin } from "./automatable-system-mixin/automatable-system-mixin.mjs";
-export { default as BaseSystemMixin } from "./base-system-mixin.mjs";
+export { default as BaseSystemMixin } from "./base-system-mixin/base-system-mixin.mjs";
 export { default as ChildSystemMixin } from "./child-system-mixin/child-system-mixin.mjs";
 export { default as CommonSystemMixin } from "./common-system-mixin/common-system-mixin.mjs";
 export { default as CompetenceDisplaySystemMixin } from "./competence-display-system-mixin.mjs";
