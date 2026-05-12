@@ -307,6 +307,7 @@ export default function AbilityExecutionChatPart(Base) {
               game.teriock.getSetting("trackSustainedConsequences")
                 ? this.source.uuid
                 : undefined,
+            _src: this.source.uuid,
             automations: this.#generateEffectAutomations(crit),
             blocks: (await this.source.system.getPanelParts()).blocks,
             competence: { raw: this.competence.value },
@@ -315,7 +316,6 @@ export default function AbilityExecutionChatPart(Base) {
             expirations: this.#generateEffectExpirations(crit),
             heightened: this.heightened,
             identifier: this.source.forcedIdentifier + "-effect",
-            source: this.source.uuid,
           },
           type: "imbuement",
         };

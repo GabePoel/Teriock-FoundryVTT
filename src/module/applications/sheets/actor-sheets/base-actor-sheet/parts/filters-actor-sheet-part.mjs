@@ -18,9 +18,7 @@ export default (Base) =>
      */
     _getFilteredAbilities(abilities = []) {
       const filters = this.settings.abilityFilters || {};
-      if (!abilities || !Array.isArray(abilities) || abilities.length === 0) {
-        return [];
-      }
+      if (!abilities || !Array.isArray(abilities)) return [];
       return abilities.filter(
         (a) =>
           !a.isReference &&
@@ -67,9 +65,7 @@ export default (Base) =>
      */
     _getFilteredEquipment(equipment = []) {
       const filters = this.settings.equipmentFilters || {};
-      if (!equipment || !Array.isArray(equipment) || equipment.length === 0) {
-        return [];
-      }
+      if (!equipment || !Array.isArray(equipment)) return [];
       return equipment.filter(
         (e) =>
           (!filters.properties || hasProperty(e, filters.properties)) &&
@@ -105,16 +101,7 @@ export default (Base) =>
         el.addEventListener("change", async (e) => {
           /** @type {HTMLSelectElement} */
           const filterSelect = e.target;
-          const name = filterSelect.name;
-          if (!name) {
-            return;
-          }
-          const path = name.split(".").slice(1);
-          let obj = this.settings;
-          for (let i = 0; i < path.length - 1; i++) {
-            obj = obj[path[i]];
-          }
-          obj[path[path.length - 1]] = e.target.value;
+          foundry.utils.setProperty(this, filterSelect.name, e.target.value);
           await this.render();
         });
       });

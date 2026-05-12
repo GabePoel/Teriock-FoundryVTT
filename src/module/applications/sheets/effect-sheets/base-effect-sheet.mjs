@@ -24,9 +24,9 @@ export default class BaseEffectSheet extends mix(
    * @type {Partial<ApplicationConfiguration>}
    */
   static DEFAULT_OPTIONS = {
+    actions: { toggleDisabledThis: this._onToggledDisabledThis },
     classes: ["unpadded", "effect"],
     window: { icon: makeIconClass(documentConfig.effect.icon, "title") },
-    actions: { toggleDisabledThis: this._onToggledDisabledThis },
   };
 
   /**

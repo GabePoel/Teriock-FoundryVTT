@@ -1,6 +1,6 @@
 import { mix } from "../../../../helpers/construction.mjs";
 import * as mixins from "../../mixins/_module.mjs";
-import ApplicableSystem from "../applicable-system/applicable-system.mjs";
+import ApplicableEffectSystem from "../applicable-effect-system/applicable-effect-system.mjs";
 
 /**
  * Effect-specific effect data model.
@@ -9,7 +9,7 @@ import ApplicableSystem from "../applicable-system/applicable-system.mjs";
  * @mixes GrantedSystem
  */
 export default class ImbuementSystem extends mix(
-  ApplicableSystem,
+  ApplicableEffectSystem,
   mixins.GrantedSystemMixin,
 ) {
   /** @inheritDoc */

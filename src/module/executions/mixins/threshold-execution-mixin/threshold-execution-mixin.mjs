@@ -259,7 +259,6 @@ export default function ThresholdExecutionMixin(Base) {
           const formGroup = f.field.toFormGroup(groupConfig, inputConfig);
           if (f.small) {
             container = smallContainer;
-            formGroup.style.flex = "1 1 100px";
             hasSmallFields = true;
           }
           container.append(formGroup);
@@ -285,6 +284,7 @@ export default function ThresholdExecutionMixin(Base) {
           modal: true,
           position: { width: 550 },
           window: {
+            contentClasses: ["wide-toggles"],
             icon: makeIconClass(this.icon, "title"),
             title: game.i18n
               .format("TERIOCK.DIALOGS.ThresholdExecutionOptions.title", {

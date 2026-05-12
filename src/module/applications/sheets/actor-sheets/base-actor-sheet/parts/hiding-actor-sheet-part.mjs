@@ -9,9 +9,7 @@ export default (Base) =>
    */
   class HidingActorSheetPart extends Base {
     static DEFAULT_OPTIONS = {
-      actions: {
-        toggleHideThis: this._onToggleHideThis,
-      },
+      actions: { toggleHideThis: this._onToggleHideThis },
     };
 
     constructor(...args) {
@@ -54,16 +52,14 @@ export default (Base) =>
       const toggleButton = this.window.header.querySelector(
         "[data-action='toggleHideThis']",
       );
-      if (toggleButton) {
-        this.#setToggleHideButtonAttributes(toggleButton);
-      }
+      if (toggleButton) this.#setToggleHideButtonAttributes(toggleButton);
     }
 
     /** @inheritDoc */
     async _prepareContext(options = {}) {
-      const context = await super._prepareContext(options);
-      context.hideInactive = this._hideInactive;
-      return context;
+      return Object.assign(await super._prepareContext(options), {
+        hideInactive: this._hideInactive,
+      });
     }
 
     /** @inheritDoc */

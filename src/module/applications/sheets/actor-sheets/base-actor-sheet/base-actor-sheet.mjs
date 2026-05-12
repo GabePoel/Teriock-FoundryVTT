@@ -23,6 +23,7 @@ const { HandlebarsApplicationMixin } = foundry.applications.api;
  * @mixes SortingActorSheetPart
  * @property {TeriockActor} actor
  * @property {TeriockActor} document
+ * @property {Teriock.Sheet.BaseActorSheetSettings} settings
  */
 export default class BaseActorSheet extends mix(
   ActorSheetV2,

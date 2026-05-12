@@ -13,9 +13,9 @@ const { fields } = foundry.data;
 /**
  * Effect-specific effect data model.
  * @extends {BaseEffectSystem}
- * @extends {Teriock.Models.ApplicableSystemData}
+ * @extends {Teriock.Models.ApplicableEffectSystemData}
  */
-export default class ApplicableSystem extends mix(
+export default class ApplicableEffectSystem extends mix(
   BaseEffectSystem,
   ThresholdDataMixin,
 ) {
@@ -53,8 +53,9 @@ export default class ApplicableSystem extends mix(
   /** @inheritDoc */
   static defineSchema() {
     return foundry.utils.mergeObject(super.defineSchema(), {
+      _src: new fields.DocumentUUIDField({ initial: null, nullable: true }),
       blocks: builders.blocksField(),
-      critical: new fields.BooleanField({ initial: false }),
+      critical: new fields.BooleanField(),
       expirations: new fields.SchemaField({
         combat: new fields.SchemaField({
           who: new fields.SchemaField({
@@ -69,17 +70,12 @@ export default class ApplicableSystem extends mix(
         }),
         conditions: conditionRequirementsField(),
         description: new fields.StringField(),
-        sustained: new fields.BooleanField({ initial: false }),
+        sustained: new fields.BooleanField(),
         triggers: new fields.SetField(
           new fields.StringField({ choices: DurationModel._triggerChoices }),
         ),
       }),
       heightened: new fields.NumberField(),
-      source: new fields.StringField({
-        initial: "",
-        nullable: true,
-      }),
-      sourceDescription: new fields.HTMLField(),
     });
   }
 

@@ -272,20 +272,26 @@ foundry.helpers.Hooks.once("init", function () {
     {
       cls: applications.sheets.actor.CharacterSheet,
       doc: documents.TeriockActor,
-      label: "TYPES.Actor.actor",
-      types: ["character", "creature"],
+      label: "TYPES.Actor.character",
+      types: ["character"],
     },
     {
       cls: applications.sheets.actor.CreatureSheet,
       doc: documents.TeriockActor,
-      label: "TYPES.Actor.actor",
-      types: ["inventory"],
-      makeDefault: false,
+      label: "TYPES.Actor.creature",
+      types: ["creature"],
     },
     {
       cls: applications.sheets.actor.InventorySheet,
       doc: documents.TeriockActor,
       label: "TYPES.Actor.inventory",
+      types: ["inventory"],
+    },
+    {
+      cls: applications.sheets.actor.PlayableActorSheet,
+      doc: documents.TeriockActor,
+      label: "TYPES.Actor.actor",
+      makeDefault: false,
       types: ["inventory"],
     },
     // Items

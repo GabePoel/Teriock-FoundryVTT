@@ -2,14 +2,14 @@
 const threeToggleInitial = 0;
 
 /**
- * @type {BaseActorSheetSettings}
+ * @returns {Teriock.Sheet.BaseActorSheetSettings}
  */
 export default function defaultSheetSettings() {
   return {
     abilityFilters: {
       basic: game.teriock.getSetting("hideBasicAbilitiesByDefault") ? -1 : 0,
       delivery: null,
-      effects: null,
+      effectTypes: null,
       element: null,
       expansion: threeToggleInitial,
       gp: threeToggleInitial,
@@ -36,8 +36,7 @@ export default function defaultSheetSettings() {
     abilitySortAscending: true,
     abilitySortOption: "name",
     avatarImagePath: "img",
-    conditionExpansions:
-      /** @type {Record<Teriock.Keys.Condition, boolean>} */ {},
+    conditionExpansions: {},
     equipmentFilters: {
       consumable: threeToggleInitial,
       equipmentClasses: null,

@@ -2,15 +2,14 @@ import {
   CombatExpirationMethod,
   CombatExpirationSourceType,
   CombatExpirationTiming,
-} from "../../../fields/helpers/_types";
-import {
-  TeriockActiveEffect,
-  TeriockActor,
-} from "../../../../documents/_module.mjs";
+} from "../../../fields/helpers/_types.js";
+import { TeriockActor } from "../../../../documents/_module.mjs";
 
 declare global {
   namespace Teriock.Models {
-    export type ApplicableSystemData = {
+    export type ApplicableEffectSystemData = {
+      /** <schema> UUID of the document this is sourced from */
+      _src: UUID<TeriockAbility> | null;
       /** <schema> Blocks representing the source */
       blocks: Teriock.Messages.MessageBlock[];
       /** <schema> If this was the result of an effect that went critical */
@@ -47,12 +46,6 @@ declare global {
       };
       /** <schema> How much the source was heightened */
       heightened: number;
-      /** <schema> {@link TeriockActiveEffect} that's the source of this effect */
-      source: UUID<TeriockActiveEffect>;
-      /** <schema> Source description */
-      sourceDescription: string;
-
-      get parent(): TeriockImbuement;
     };
   }
 }

@@ -123,11 +123,11 @@ export default (Base) =>
 
     /**
      * Toggles a condition.
-     * @param {PointerEvent} event - The event object.
+     * @param {PointerEvent} _event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>}
      */
-    static async #onToggleCondition(event, target) {
+    static async #onToggleCondition(_event, target) {
       const conditionKey = target.dataset.condition;
       await this.document.toggleStatusEffect(conditionKey);
     }

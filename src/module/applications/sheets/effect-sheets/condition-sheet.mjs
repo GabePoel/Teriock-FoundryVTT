@@ -10,8 +10,6 @@ const { ActiveEffectConfig } = foundry.applications.sheets;
 export default class ConditionSheet extends ActiveEffectConfig {
   static DEFAULT_OPTIONS = {
     classes: ["condition"],
-    window: {
-      icon: makeIconClass(documentConfig.condition.icon, "title"),
-    },
+    window: { icon: makeIconClass(documentConfig.condition.icon, "title") },
   };
 }

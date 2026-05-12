@@ -1,7 +1,7 @@
 import { mix } from "../../../../helpers/construction.mjs";
 import { associationsField } from "../../../fields/helpers/builders.mjs";
 import * as mixins from "../../mixins/_module.mjs";
-import ApplicableSystem from "../applicable-system/applicable-system.mjs";
+import ApplicableEffectSystem from "../applicable-effect-system/applicable-effect-system.mjs";
 
 /**
  * Effect-specific effect data model.
@@ -10,7 +10,7 @@ import ApplicableSystem from "../applicable-system/applicable-system.mjs";
  * @mixes TransformationSystem
  */
 export default class ConsequenceSystem extends mix(
-  ApplicableSystem,
+  ApplicableEffectSystem,
   mixins.TransformationSystemMixin,
 ) {
   /** @inheritDoc */

@@ -13,9 +13,7 @@ export default class AttunementSheet extends BaseEffectSheet {
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
     classes: ["attunement"],
-    window: {
-      icon: makeIconClass(documentConfig.attunement.icon, "title"),
-    },
+    window: { icon: makeIconClass(documentConfig.attunement.icon, "title") },
   };
 
   /** @inheritDoc */

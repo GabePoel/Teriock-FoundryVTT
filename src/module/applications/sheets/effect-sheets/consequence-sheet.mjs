@@ -1,7 +1,7 @@
 import { documentConfig } from "../../../constants/config/document-config.mjs";
 import { icons } from "../../../constants/display/icons.mjs";
 import { makeIconClass } from "../../../helpers/utils.mjs";
-import ImbuementSheet from "./imbuement-sheet.mjs";
+import ApplicableEffectSheet from "./applicable-effect-sheet.mjs";
 
 /**
  * {@link TeriockConsequence} sheet.
@@ -9,14 +9,14 @@ import ImbuementSheet from "./imbuement-sheet.mjs";
  * @extends {ActiveEffectConfig}
  * @mixes AutomationsCommonSheetPart
  */
-export default class ConsequenceSheet extends ImbuementSheet {
+export default class ConsequenceSheet extends ApplicableEffectSheet {
+  /** @inheritDoc */
   static DEFAULT_OPTIONS = {
     form: { closeOnSubmit: false, submitOnChange: true },
-    window: {
-      icon: makeIconClass(documentConfig.consequence.icon, "title"),
-    },
+    window: { icon: makeIconClass(documentConfig.consequence.icon, "title") },
   };
 
+  /** @inheritDoc */
   static PARTS = {
     ...super.PARTS,
     transformation: {
@@ -25,6 +25,7 @@ export default class ConsequenceSheet extends ImbuementSheet {
     },
   };
 
+  /** @inheritDoc */
   static TABS = {
     sheet: {
       tabs: [

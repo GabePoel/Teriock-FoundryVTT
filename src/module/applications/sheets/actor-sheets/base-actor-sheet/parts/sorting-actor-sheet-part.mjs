@@ -7,6 +7,7 @@ import { objectMap } from "../../../../../helpers/utils.mjs";
 export default (Base) =>
   /**
    * @extends {BaseActorSheet}
+   * @property {Teriock.Sheet.BaseActorSheetSettings} settings
    * @mixin
    */
   class SortingActorSheetPart extends Base {

@@ -23,16 +23,11 @@ export default (Base) =>
         .forEach(
           /** @param {HTMLInputElement} input */ (input) => {
             const searchKey = input.dataset.searchKey;
-            if (!searchKey) {
-              return;
-            }
-
+            if (!searchKey) return;
             const resultsContainer = this.element.querySelector(
               `.teriock-block-results[data-search-key="${searchKey}"]`,
             );
-            if (!resultsContainer) {
-              return;
-            }
+            if (!resultsContainer) return;
             const initial = this._searchStrings[searchKey] || "";
             const searchFilter = new SearchFilter({
               inputSelector: `.teriock-block-search[data-search-key="${searchKey}"]`,
@@ -62,8 +57,8 @@ export default (Base) =>
 
     /** @inheritDoc */
     async _prepareContext(options = {}) {
-      const context = await super._prepareContext(options);
-      context.searchStrings = foundry.utils.deepClone(this._searchStrings);
-      return context;
+      return Object.assign(await super._prepareContext(options), {
+        searchStrings: foundry.utils.deepClone(this._searchStrings),
+      });
     }
   };

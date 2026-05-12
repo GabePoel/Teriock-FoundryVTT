@@ -5,6 +5,7 @@
 export default (Base) =>
   /**
    * @extends {BaseActorSheet}
+   * @property {Teriock.Sheet.BaseActorSheetSettings} settings
    * @mixin
    */
   class AvatarImageActorSheetPart extends Base {
