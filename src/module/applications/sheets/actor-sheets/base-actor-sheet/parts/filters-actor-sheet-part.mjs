@@ -31,9 +31,15 @@ export default (Base) =>
           binaryFilter(filters.sustained, a.system.sustained) &&
           binaryFilter(filters.heightened, a.system.heightened) &&
           binaryFilter(filters.expansion, a.system.expansion.type) &&
-          binaryFilter(filters.verbal, a.system.costs.components.verbal) &&
-          binaryFilter(filters.somatic, a.system.costs.components.somatic) &&
-          binaryFilter(filters.material, a.system.costs.components.material) &&
+          binaryFilter(filters.verbal, a.system.costs.components.verbal.type) &&
+          binaryFilter(
+            filters.somatic,
+            a.system.costs.components.somatic.type,
+          ) &&
+          binaryFilter(
+            filters.material,
+            a.system.costs.components.material.type,
+          ) &&
           binaryFilter(filters.invoked, a.system.invoked) &&
           binaryFilter(filters.hp, a.system.costs.primary.hp.type) &&
           binaryFilter(filters.mp, a.system.costs.primary.mp.type) &&
