@@ -30,6 +30,11 @@ export default class BaseMessageSystem extends mix(
     );
   }
 
+  /** @inheritDoc */
+  static get documentName() {
+    return "ChatMessage";
+  }
+
   /**
    * @inheritDoc
    * @returns {Record<string, DataField>}

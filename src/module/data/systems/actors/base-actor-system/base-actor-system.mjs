@@ -69,6 +69,11 @@ export default class BaseActorSystem extends mix(
   ];
 
   /** @inheritDoc */
+  static get documentName() {
+    return "Actor";
+  }
+
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       childEffectTypes: [

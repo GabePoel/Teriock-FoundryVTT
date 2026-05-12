@@ -119,9 +119,7 @@ export default (Base) => {
             "TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.score.description",
             { attribute, value },
           );
-        } else {
-          this.upgrades.score.text = "";
-        }
+        } else this.upgrades.score.text = "";
         if (this.upgrades.competence.value === 0) {
           this.upgrades.competence.attribute = null;
         }
@@ -139,9 +137,7 @@ export default (Base) => {
             "TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.competence.description",
             { attribute, saves, upgrade },
           );
-        } else {
-          this.upgrades.competence.text = "";
-        }
+        } else this.upgrades.competence.text = "";
       }
     }
   );

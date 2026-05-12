@@ -29,6 +29,11 @@ export default class BaseEffectSystem extends ChildSystemMixin(
   ];
 
   /** @inheritDoc */
+  static get documentName() {
+    return "ActiveEffect";
+  }
+
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       modifies: "Actor",

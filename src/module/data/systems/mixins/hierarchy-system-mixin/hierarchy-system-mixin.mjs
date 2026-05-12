@@ -37,15 +37,16 @@ export default function HierarchySystemMixin(Base) {
             blank: true,
             nullable: true,
             required: false,
+            type: this.documentName,
           }),
         });
       }
 
       /** @inheritDoc */
       toObject(source = true) {
-        const out = super.toObject(source);
-        out._ref = this.parent.uuid;
-        return out;
+        return Object.assign(super.toObject(source), {
+          _ref: this.parent.uuid,
+        });
       }
     }
   );

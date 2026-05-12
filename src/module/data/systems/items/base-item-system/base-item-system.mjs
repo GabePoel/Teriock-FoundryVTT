@@ -26,6 +26,11 @@ export default class BaseItemSystem extends ChildSystemMixin(TypeDataModel) {
   ];
 
   /** @inheritDoc */
+  static get documentName() {
+    return "Item";
+  }
+
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       childEffectTypes: ["ability", "fluency", "resource"],
