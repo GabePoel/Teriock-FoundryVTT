@@ -22,30 +22,7 @@ export default class BaseItemSheet extends mix(
    * @inheritDoc
    * @type {Partial<ApplicationConfiguration>}
    */
-  static DEFAULT_OPTIONS = {
-    classes: ["unpadded"],
-    actions: { toggleOnUseDoc: this._onToggleOnUseDoc },
-  };
-
-  /**
-   * Marks the {@link TeriockActiveEffect} as being "on use" or not.
-   * @param {PointerEvent} _event - The event object.
-   * @param {HTMLElement} target - The target element.
-   * @returns {Promise<void>}
-   */
-  static async _onToggleOnUseDoc(_event, target) {
-    if (!this.isEditable) {
-      ui.notifications.warn("TERIOCK.SHEETS.Item.ACTIONS.OnUse.notEditable", {
-        localize: true,
-      });
-      return;
-    }
-    const id = target.dataset.id;
-    const onUseSet = new Set(this.document.system.onUse);
-    if (onUseSet.has(id)) onUseSet.delete(id);
-    else onUseSet.add(id);
-    await this.document.update({ "system.onUse": Array.from(onUseSet) });
-  }
+  static DEFAULT_OPTIONS = { classes: ["unpadded"] };
 
   /** @inheritDoc */
   async _prepareContext(options = {}) {

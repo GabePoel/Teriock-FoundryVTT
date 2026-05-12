@@ -72,7 +72,7 @@ export default (Base) => {
           tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.elderSorcery.label");
         }
         if (this.mundane) {
-          tags.push("TERIOCK.SYSTEMS.Adjustable.FIELDS.mundane.label");
+          tags.push("TERIOCK.SYSTEMS.BaseEffect.FIELDS.mundane.label");
         }
         return tags;
       }

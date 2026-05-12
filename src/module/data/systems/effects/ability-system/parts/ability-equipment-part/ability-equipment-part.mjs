@@ -2,7 +2,7 @@ import { TeriockItem } from "../../../../../../documents/_module.mjs";
 import { getImage } from "../../../../../../helpers/path.mjs";
 import { toTitleCase } from "../../../../../../helpers/string.mjs";
 import { fromIdentifier, makeIcon } from "../../../../../../helpers/utils.mjs";
-import { TextField } from "../../../../../fields/_module.mjs";
+import { initialText } from "../../../../../fields/helpers/initializers.mjs";
 
 const { fields } = foundry.data;
 
@@ -21,16 +21,19 @@ export default (Base) => {
       /** @inheritDoc */
       static PRESERVED_PROPERTIES = [
         "system.grantOnly",
+        "system.grantUse",
         ...super.PRESERVED_PROPERTIES,
       ];
 
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          consumeSource: new fields.BooleanField({ initial: false }),
-          consumeSourceText: new TextField({ initial: "" }),
-          grantOnly: new fields.BooleanField({ initial: false }),
-          grantOnlyText: new TextField({ initial: "" }),
+          consumeSource: new fields.BooleanField(),
+          consumeSourceText: initialText(),
+          grantOnly: new fields.BooleanField(),
+          grantOnlyText: initialText(),
+          grantUse: new fields.BooleanField(),
+          grantUseText: initialText(),
         });
       }
 
@@ -38,38 +41,40 @@ export default (Base) => {
        * On use icon (when ability is granted by equipment and can be toggled to activate only on use).
        * @returns {Teriock.EmbedData.EmbedIcon}
        */
-      get onUseIcon() {
+      get grantUseIcon() {
         return {
-          action: "toggleOnUseDoc",
-          icon: this.parent.isOnUse
+          action: "toggleGrantUseDoc",
+          icon: this.grantUse
             ? TERIOCK.display.icons.ability.onUse
             : TERIOCK.display.icons.ability.notOnUse,
-          onClick: async () => {
-            const onUseSet = this.parent.parent?.system.onUse;
-            if (onUseSet.has(this.parent.id)) {
-              onUseSet.delete(this.parent.id);
-            } else {
-              onUseSet.add(this.parent.id);
+          onClick: async (_ev, doc) => {
+            if (doc === this.parent.parent) {
+              await this.parent.update({ "system.grantUse": !this.grantUse });
             }
-            await this.parent.parent.update({
-              "system.onUse": Array.from(onUseSet),
-            });
           },
-          tooltip: this.parent.isOnUse
+          tooltip: this.grantUse
             ? _loc("TERIOCK.SYSTEMS.Ability.USAGE.onlyOnUse")
             : _loc("TERIOCK.SYSTEMS.Ability.USAGE.alwaysActive"),
-          visible: this.parent.isOwner,
+          visible: this.parent.isOwner && this.isArmamentChild,
         };
+      }
+
+      /**
+       * Whether this is on an armament.
+       * @returns {boolean}
+       */
+      get isArmamentChild() {
+        return ["equipment", "body"].includes(this.parent.elder?.type);
+      }
+
+      /** @inheritDoc */
+      get isReference() {
+        return this.grantUse || super.isReference;
       }
 
       /** @inheritDoc */
       get tagIcon() {
-        if (
-          ["body", "equipment"].includes(this.parent.elder?.type) &&
-          this.parent.isOnUse
-        ) {
-          return this.onUseIcon;
-        }
+        if (this.isArmamentChild && this.grantUse) return this.grantUseIcon;
         return super.tagIcon;
       }
 
@@ -88,9 +93,7 @@ export default (Base) => {
               doc?.actor?.uuid === this.actor?.uuid
             ) {
               await this.actor.createEmbeddedDocuments("Item", [data], op);
-            } else {
-              TeriockItem.create(data, op);
-            }
+            } else TeriockItem.create(data, op);
           },
           visible:
             this.parent.parent?.isOwner &&
@@ -105,6 +108,7 @@ export default (Base) => {
       getLocalRollData() {
         return Object.assign(super.getLocalRollData(), {
           grantOnly: Number(this.grantOnly),
+          grantUse: Number(this.grantUse),
         });
       }
 
@@ -117,11 +121,18 @@ export default (Base) => {
               { uuid: this.parent.parent?.uuid },
             )
           : "";
-        this.grantOnlyText = this.grantOnly
-          ? _loc("TERIOCK.SYSTEMS.Ability.FIELDS.grantOnlyText.derived", {
-              uuid: this.parent.parent?.uuid,
-            })
-          : "";
+        this.grantOnlyText =
+          this.isArmamentChild && this.grantOnly
+            ? _loc("TERIOCK.SYSTEMS.Ability.FIELDS.grantOnlyText.derived", {
+                uuid: this.parent.parent?.uuid,
+              })
+            : "";
+        this.grantUseText =
+          this.isArmamentChild && this.grantUse
+            ? _loc("TERIOCK.SYSTEMS.Ability.FIELDS.grantUseText.derived", {
+                uuid: this.parent.parent?.uuid,
+              })
+            : "";
       }
 
       /**
@@ -155,7 +166,6 @@ export default (Base) => {
           system: {
             consumable: true,
             identifier: `scroll-of-${this.parent.forcedIdentifier}`,
-            onUse: [this.parent.id],
             powerLevel: "enchanted",
             quantity: 1,
           },
@@ -163,7 +173,11 @@ export default (Base) => {
         if (img) out.img = img;
         out = foundry.utils.mergeObject(out, data);
         if (!out.effects) out.effects = [];
-        out.effects.push(this.parent.toObject(true));
+        out.effects.push(
+          foundry.utils.mergeObject(this.parent.toObject(true), {
+            system: { grantUse: true },
+          }),
+        );
         return out;
       }
     }

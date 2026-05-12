@@ -88,5 +88,12 @@ export default class ImbuementSheet extends mix(
   async _onRender(context, options) {
     await super._onRender(context, options);
     this.element.querySelector("footer")?.remove();
+    if (this.document.system._formPaths.length) {
+      const disabledGroup = this.element.querySelector(
+        ".form-group:has(.form-fields input[name='disabled'])",
+      );
+      const editorForms = await this.document.system._getEditorForms();
+      disabledGroup.after(editorForms);
+    }
   }
 }

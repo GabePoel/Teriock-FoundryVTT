@@ -43,9 +43,7 @@ export default function ConsumableSystemMixin(Base) {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          consumable: new fields.BooleanField({
-            initial: true,
-          }),
+          consumable: new fields.BooleanField({ initial: true }),
           consumptionAmount: new fields.NumberField({
             initial: 1,
             integer: true,

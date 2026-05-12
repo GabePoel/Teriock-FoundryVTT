@@ -3,8 +3,8 @@ import { EvaluationModel } from "../../../models/_module.mjs";
 declare global {
   namespace Teriock.Models {
     export type AttunableSystemData = {
-      /** <schema> If this is equipment, it may be identified */
-      reference?: UUID<TeriockEquipment>;
+      /** <schema> If this requires attunement */
+      needsAttunement: boolean;
       /** <schema> Presence Tier */
       tier: EvaluationModel;
     };

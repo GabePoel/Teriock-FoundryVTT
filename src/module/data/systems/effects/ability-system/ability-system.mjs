@@ -207,6 +207,11 @@ export default class AbilitySystem extends mix(
         {
           classes: TERIOCK.display.panel.classes.derived,
           editable: false,
+          path: "system.grantUseText",
+        },
+        {
+          classes: TERIOCK.display.panel.classes.derived,
+          editable: false,
           path: "system.consumeSourceText",
         },
         {
@@ -267,6 +272,7 @@ export default class AbilitySystem extends mix(
       "system.consumable",
       "system.consumeSource",
       "system.grantOnly",
+      "system.grantUse",
       "system.warded",
       "system.mundane",
       ...super.displayToggles,
@@ -291,15 +297,10 @@ export default class AbilitySystem extends mix(
         visible: this.basic,
       });
     }
-    if (
-      ["body", "equipment"].includes(this.parent.elder?.type) &&
-      !this.parent.isOnUse
-    ) {
-      icons.unshift(this.onUseIcon);
+    if (this.isArmamentChild && !this.grantUse) {
+      icons.unshift(this.grantUseIcon);
     }
-    if (this.tagIcon) {
-      icons.unshift(this.tagIcon);
-    }
+    if (this.tagIcon) icons.unshift(this.tagIcon);
     return icons;
   }
 
@@ -370,15 +371,6 @@ export default class AbilitySystem extends mix(
   }
 
   /** @inheritDoc */
-  toRefreshObject(document) {
-    const obj = super.toRefreshObject(document);
-    if (!["normal", "special", "flaw"].includes(this.form)) {
-      foundry.utils.deleteProperty(obj, "system.form");
-    }
-    return obj;
-  }
-
-  /** @inheritDoc */
   getRollData() {
     const rollData = super.getRollData();
     Object.assign(rollData, {
@@ -404,5 +396,14 @@ export default class AbilitySystem extends mix(
       });
     }
     return rollData;
+  }
+
+  /** @inheritDoc */
+  toRefreshObject(document) {
+    const obj = super.toRefreshObject(document);
+    if (!["normal", "special", "flaw"].includes(this.form)) {
+      foundry.utils.deleteProperty(obj, "system.form");
+    }
+    return obj;
   }
 }

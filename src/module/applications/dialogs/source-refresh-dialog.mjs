@@ -15,6 +15,7 @@ class RefreshOptions extends DataModel {
       deleteChildren: new BooleanField({ initial: false }),
       createChildren: new BooleanField({ initial: true }),
       updateChildren: new BooleanField({ initial: true }),
+      fullOverride: new BooleanField({ initial: false }),
       recursive: new BooleanField({ initial: true }),
     };
   }

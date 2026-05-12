@@ -301,6 +301,14 @@ export default function ArmamentSystemMixin(Base) {
       }
 
       /**
+       * The abilities that activate on use.
+       * @returns {TeriockAbility[]}
+       */
+      get onUseAbilities() {
+        return this.parent.abilities.filter((a) => a.system.grantUse);
+      }
+
+      /**
        * Summary of attack stats.
        * @returns {string}
        */
@@ -376,15 +384,9 @@ export default function ArmamentSystemMixin(Base) {
           spellTurning: Number(this.spellTurning),
           vitals: Number(this.vitals),
         });
-        for (const type of this.damage.types) {
-          data[`dmg.type.${type}`] = 1;
-        }
-        for (const p of this.props || new Set()) {
-          data[`prop.${p}`] = 1;
-        }
-        for (const impact of this.impacts) {
-          data[`impact.${impact}`] = 1;
-        }
+        for (const type of this.damage.types) data[`dmg.type.${type}`] = 1;
+        for (const p of this.props || new Set()) data[`prop.${p}`] = 1;
+        for (const impact of this.impacts) data[`impact.${impact}`] = 1;
         for (const equipmentClass of this.equipmentClasses) {
           data[`class.${equipmentClass}`] = 1;
         }

@@ -46,6 +46,21 @@ export default function CommonSystemMixin(Base) {
       AutomatableSystemMixin,
       AutomatedDataMixin,
     ) {
+      /** @type {string[]} */
+      static DEFAULT_PRESERVED_PROPERTIES = [
+        "_id",
+        "_stats",
+        "flags",
+        "folder",
+        "origin",
+        "ownership",
+        "sort",
+        "system._dep",
+        "system._ref",
+        "system._sup",
+        "type",
+      ];
+
       /** @inheritDoc */
       static LOCALIZATION_PREFIXES = [
         ...super.LOCALIZATION_PREFIXES,
@@ -54,14 +69,8 @@ export default function CommonSystemMixin(Base) {
 
       /** @type {string[]} */
       static PRESERVED_PROPERTIES = [
-        "_id",
-        "_stats",
-        "flags",
-        "folder",
-        "origin",
-        "ownership",
-        "sort",
-        "type",
+        ...this.DEFAULT_PRESERVED_PROPERTIES,
+        "system.identifier",
       ];
 
       /** @returns {Teriock.Documents.ModelMetadata} */
@@ -248,23 +257,23 @@ export default function CommonSystemMixin(Base) {
         ])) {
           const srcChildren = srcTypeMap[type] || [];
           const dstChildren = dstTypeMap[type] || [];
-          const srcNames = srcChildren.map((s) => s.name);
-          const dstNames = dstChildren.map((d) => d.name);
-          let names = [];
+          const srcKeys = srcChildren.map((s) => s.lookupKey);
+          const dstKeys = dstChildren.map((d) => d.lookupKey);
+          let keys = [];
           if (mapType === "union") {
-            names = Array.from(new Set([...srcNames, ...dstNames]));
+            keys = Array.from(new Set([...srcKeys, ...dstKeys]));
           } else if (mapType === "intersect") {
-            names = srcNames.filter((s) => dstNames.includes(s));
+            keys = srcKeys.filter((s) => dstKeys.includes(s));
           } else {
-            const srcDiffNames = srcNames.filter((s) => !dstNames.includes(s));
-            const dstDiffNames = dstNames.filter((d) => !srcNames.includes(d));
-            const diffNames = [...srcNames, ...dstNames];
-            if (mapType === "diffSrc") names = srcDiffNames;
-            else if (mapType === "diffDst") names = dstDiffNames;
-            else if (mapType === "diff") names = diffNames;
+            const srcDiffKeys = srcKeys.filter((s) => !dstKeys.includes(s));
+            const dstDiffKeys = dstKeys.filter((d) => !srcKeys.includes(d));
+            const diffKeys = [...srcKeys, ...dstKeys];
+            if (mapType === "diffSrc") keys = srcDiffKeys;
+            else if (mapType === "diffDst") keys = dstDiffKeys;
+            else if (mapType === "diff") keys = diffKeys;
           }
-          const srcDocs = srcChildren.filter((s) => names.includes(s.name));
-          const dstDocs = dstChildren.filter((d) => names.includes(d.name));
+          const srcDocs = srcChildren.filter((s) => keys.includes(s.lookupKey));
+          const dstDocs = dstChildren.filter((d) => keys.includes(d.lookupKey));
           const docNames = new Set([
             ...srcDocs.map((s) => s.documentName),
             ...dstDocs.map((d) => d.documentName),
@@ -517,12 +526,7 @@ export default function CommonSystemMixin(Base) {
 
       /**
        * @param {AnyCommonDocument} document
-       * @param {object} [options]
-       * @param {boolean} [options.deleteChildren]
-       * @param {boolean} [options.createChildren]
-       * @param {boolean} [options.updateChildren]
-       * @param {boolean} [options.updateDocument]
-       * @param {boolean} [options.recursive]
+       * @param {Partial<Teriock.System.RefreshOptions>} [options]
        * @returns {Promise<void>}
        */
       async refreshFromSource(document, options = {}) {
@@ -531,6 +535,7 @@ export default function CommonSystemMixin(Base) {
           createChildren = true,
           updateChildren = true,
           updateDocument = true,
+          fullOverride = false,
           recursive = true,
         } = options;
         if (document) {
@@ -538,16 +543,32 @@ export default function CommonSystemMixin(Base) {
             if (this.automations?.contents.length) {
               await this.parent.update({ "system.automations": _replace({}) });
             }
-            const indexObject = this.toRefreshObject(document);
-            delete indexObject.flags;
-            delete indexObject.system?._ref;
-            delete indexObject.system?._sup;
-            await this.parent.update(indexObject);
+            const updateObject = this.toRefreshObject(document, options);
+            if (fullOverride) {
+              updateObject.effects = _replace(updateObject.effects);
+              updateObject.items = _replace(updateObject.items);
+            }
+            delete updateObject.flags;
+            await this.parent.update(updateObject);
           }
           if (createChildren || deleteChildren || updateChildren) {
             const srcChildren = await document.getChildren();
+            if (fullOverride) {
+              for (const id of srcChildren.keys()) {
+                if (srcChildren.get(id)?.sup?.uuid !== document.uuid) {
+                  srcChildren.delete(id);
+                }
+              }
+            }
             const srcChildTypeMap = srcChildren.documentsByType;
             const dstChildren = await this.parent.getChildren();
+            if (fullOverride) {
+              for (const id of dstChildren.keys()) {
+                if (dstChildren.get(id)?.sup?.uuid !== this.parent.uuid) {
+                  dstChildren.delete(id);
+                }
+              }
+            }
             const dstChildTypeMap = dstChildren.documentsByType;
             if (createChildren) {
               const createMap = this.#makeChildDeltaMap(
@@ -576,7 +597,9 @@ export default function CommonSystemMixin(Base) {
           }
         }
         if (recursive) {
-          for (const child of await this.parent.getChildArray()) {
+          for (const child of fullOverride
+            ? await this.parent.getSubs()
+            : await this.parent.getChildArray()) {
             const childSource = await fromUuid(child._stats.compendiumSource);
             await child.system.refreshFromSource(childSource, {
               deleteChildren,
@@ -592,11 +615,15 @@ export default function CommonSystemMixin(Base) {
       /**
        * Get a refresh object from a document with the same type as this one.
        * @param {AnyCommonDocument} document
+       * @param {Partial<Teriock.System.RefreshOptions>} [options]
        * @returns {object}
        */
-      toRefreshObject(document) {
+      toRefreshObject(document, options = {}) {
         const obj = document?.toObject(true) ?? {};
-        for (const p of this.metadata.preservedProperties || []) {
+        const preservedProperties = options.fullOverride
+          ? this.constructor.DEFAULT_PRESERVED_PROPERTIES
+          : this.metadata.preservedProperties;
+        for (const p of preservedProperties || []) {
           foundry.utils.deleteProperty(obj, p);
         }
         return obj;

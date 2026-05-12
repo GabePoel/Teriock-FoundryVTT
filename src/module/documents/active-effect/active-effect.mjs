@@ -3,7 +3,6 @@ import {
   migrateValueTransform,
 } from "../../data/shared/migrations/source-migrations.mjs";
 import { mix } from "../../helpers/construction.mjs";
-import TeriockItem from "../item/item.mjs";
 import * as mixins from "../mixins/_module.mjs";
 
 const { ActiveEffect } = foundry.documents;
@@ -40,22 +39,11 @@ export default class TeriockActiveEffect extends mix(
   }
 
   /**
-   * Checks if this effect is supposed to activate on the use of its parent {@link TeriockItem}.
-   * @returns {boolean}
-   */
-  get isOnUse() {
-    if (this.parent instanceof TeriockItem) {
-      return this.parent.system.onUse.has(this.id);
-    }
-    return false;
-  }
-
-  /**
    * Whether this effect is a reference and not "real".
    * @returns {boolean}
    */
   get isReference() {
-    return this.isOnUse || this.system.isReference;
+    return this.system.isReference;
   }
 
   /**

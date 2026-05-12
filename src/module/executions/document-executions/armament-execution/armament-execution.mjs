@@ -137,10 +137,7 @@ export default class ArmamentExecution extends BaseDocumentExecution {
 
   /** @inheritDoc */
   async _postExecute() {
-    const onUseIds = Array.from(this.source.system.onUse);
-    const onUseAbilities = /** @type {TeriockAbility[]} */ onUseIds
-      .map((id) => this.source.effects.get(id))
-      .filter((a) => a);
+    const onUseAbilities = this.source.system.onUseAbilities;
     if (onUseAbilities.length > 0) {
       const usedAbilities = await selectDocumentsDialog(onUseAbilities, {
         hint: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.onUse.hint", {
@@ -158,7 +155,7 @@ export default class ArmamentExecution extends BaseDocumentExecution {
             await this.source.setFlag("teriock", "dontConsume", true);
           }
         }
-        await ability.use();
+        await ability.use({ ...this.options, armament: this.source });
       }
     }
     await super._postExecute();

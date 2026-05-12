@@ -39,7 +39,8 @@ export default class BaseEffectSystem extends ChildSystemMixin(
   static defineSchema() {
     return Object.assign(ActiveEffectTypeDataModel.defineSchema(), {
       ...super.defineSchema(),
-      deleteOnExpire: new fields.BooleanField({ initial: false }),
+      deleteOnExpire: new fields.BooleanField(),
+      mundane: new fields.BooleanField(),
     });
   }
 
@@ -60,8 +61,11 @@ export default class BaseEffectSystem extends ChildSystemMixin(
    */
   get _isSuppressedDeattuned() {
     return !!(
+      this.actor &&
       (this.parent.parent?.type === "equipment" ||
         this.parent.parent?.type === "mount") &&
+      this.parent.parent.system.needsAttunement &&
+      !this.mundane &&
       !this.parent.parent.system.isAttuned
     );
   }

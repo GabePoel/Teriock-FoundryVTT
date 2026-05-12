@@ -184,7 +184,7 @@ export async function selectConditionDialog() {
  */
 export async function selectPropertyDialog() {
   return await resolveDocument(
-    await selectDocumentDialog(noSup(game.teriock.packs.properties), {
+    await selectDocumentDialog(await noSup(game.teriock.packs.properties), {
       hint: _loc("TERIOCK.DIALOGS.Select.Property.hint"),
       title: _loc("TERIOCK.DIALOGS.Select.Property.title"),
       tooltipAsync: true,

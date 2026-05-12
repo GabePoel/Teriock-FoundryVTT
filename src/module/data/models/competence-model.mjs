@@ -10,9 +10,7 @@ import EmbeddedDataModel from "./embedded-data-model.mjs";
 export default class CompetenceModel extends EmbeddedDataModel {
   /** @inheritDoc */
   static defineSchema() {
-    return {
-      raw: competenceField(),
-    };
+    return { raw: competenceField() };
   }
 
   /**

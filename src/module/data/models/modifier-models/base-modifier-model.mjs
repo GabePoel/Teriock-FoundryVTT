@@ -20,12 +20,14 @@ export default class BaseModifierModel extends mix(
 ) {
   /** @inheritDoc */
   static defineSchema(options = {}) {
-    const { score = 0 } = options;
-    return {
-      ...super.defineSchema(options),
+    return Object.assign(super.defineSchema(options), {
       _key: initialString(),
-      score: new fields.NumberField({ initial: score, nullable: false }),
-    };
+      score: new fields.NumberField({
+        initial: options.score ?? 0,
+        integer: true,
+        nullable: false,
+      }),
+    });
   }
 
   /** @inheritDoc */

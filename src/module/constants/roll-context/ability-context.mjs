@@ -20,6 +20,7 @@ const abilityContext = {
   sustained: "TERIOCK.SYSTEMS.Ability.FIELDS.sustained.label",
   revealed: "TERIOCK.SYSTEMS.Revelation.FIELDS.revealed.label",
   grantOnly: "TERIOCK.SYSTEMS.Ability.FIELDS.grantOnly.label",
+  grantUse: "TERIOCK.SYSTEMS.Ability.FIELDS.grantUse.label",
 
   ap: "TERIOCK.SYSTEMS.Attack.FIELDS.attackPenalty.label",
   hit: "TERIOCK.SYSTEMS.Attack.FIELDS.hitBonus.label",

@@ -132,5 +132,15 @@ declare global {
      * Generic type corresponding to something that may or may not exist.
      */
     export type Existable<T> = T | T[] | Set<T> | null | undefined;
+
+    /** Options on how to refresh documents. */
+    export type RefreshOptions = {
+      deleteChildren: boolean;
+      createChildren: boolean;
+      updateChildren: boolean;
+      updateDocument: boolean;
+      fullOverride: boolean;
+      recursive: boolean;
+    };
   }
 }

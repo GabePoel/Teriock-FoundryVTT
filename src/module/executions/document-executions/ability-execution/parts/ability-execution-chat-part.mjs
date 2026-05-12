@@ -584,11 +584,11 @@ export default function AbilityExecutionChatPart(Base) {
         if (this.heightened > 0) {
           if (this.heightened === 1) {
             this.tags.push(
-              _loc("TERIOCK.SYSTEMS.Imbuement.PANELS.heightenedSingle"),
+              _loc("TERIOCK.SYSTEMS.Applicable.PANELS.heightenedSingle"),
             );
           } else {
             this.tags.push(
-              _loc("TERIOCK.SYSTEMS.Imbuement.PANELS.heightenedPlural", {
+              _loc("TERIOCK.SYSTEMS.Applicable.PANELS.heightenedPlural", {
                 value: this.heightened,
               }),
             );
@@ -598,7 +598,7 @@ export default function AbilityExecutionChatPart(Base) {
           (c) => this.costs[c] > 0,
         )) {
           this.tags.push(
-            _loc("TERIOCK.SYSTEMS.Imbuement.PANELS.spent", {
+            _loc("TERIOCK.SYSTEMS.Applicable.PANELS.spent", {
               amount: this.costs[c],
               label: costConfig.primary.keys[c]?.abbreviation,
             }),

@@ -2,6 +2,8 @@ import { formulaExists } from "../../../../helpers/formula.mjs";
 import { makeIcon } from "../../../../helpers/utils.mjs";
 import { EvaluationField } from "../../../fields/_module.mjs";
 
+const { fields } = foundry.data;
+
 /**
  * @param {typeof BaseItemSystem} Base
  */
@@ -20,8 +22,16 @@ export default function AttunableSystemMixin(Base) {
       ];
 
       /** @inheritDoc */
+      static PRESERVED_PROPERTIES = [
+        "system.needsAttunement",
+        "system.tier",
+        ...super.PRESERVED_PROPERTIES,
+      ];
+
+      /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
+          needsAttunement: new fields.BooleanField({ initial: true }),
           tier: new EvaluationField({ deterministic: true, min: 0 }),
         });
       }
@@ -31,14 +41,16 @@ export default function AttunableSystemMixin(Base) {
        * @returns {Teriock.Sheet.DisplayTag[]}
        */
       get _attunableTags() {
-        if (this.isAttuned)
-          return [
-            {
-              label: "TERIOCK.SYSTEMS.Attunement.USAGE.attuned",
-              tooltip: "TYPES.ActiveEffect.attunement",
-            },
-          ];
-        return [];
+        const key = this.needsAttunement.toString();
+        const tags = [
+          { label: `TERIOCK.SYSTEMS.Attunable.FIELDS.needsAttunement.${key}` },
+        ];
+        if (this.isAttuned) {
+          tags.push({ label: "TERIOCK.SYSTEMS.Attunement.USAGE.attuned" });
+        }
+        return tags.map((t) => {
+          return { label: t.label, tooltip: "TYPES.ActiveEffect.attunement" };
+        });
       }
 
       /**
@@ -66,6 +78,11 @@ export default function AttunableSystemMixin(Base) {
           );
         }
         return null;
+      }
+
+      /** @inheritDoc */
+      get displayToggles() {
+        return ["system.needsAttunement", ...super.displayToggles];
       }
 
       /** @inheritDoc */
@@ -150,14 +167,6 @@ export default function AttunableSystemMixin(Base) {
           ],
         };
         if (this.parent.actor && (await this.canAttune())) {
-          if (this.reference && !this.identified) {
-            const ref = await fromUuid(this.reference);
-            if (ref) {
-              await this.parent.update({
-                "system.tier.raw": ref.system.tier.raw,
-              });
-            }
-          }
           attunement = await this.parent.actor.createEmbeddedDocuments(
             "ActiveEffect",
             [attunementData],
@@ -166,6 +175,7 @@ export default function AttunableSystemMixin(Base) {
             "TERIOCK.SYSTEMS.Attunable.USAGE.Attune.success",
             { format: { name: this.parent.fullName }, localize: true },
           );
+          await this.parent.sheet?.render();
         } else {
           ui.notifications.error(
             "TERIOCK.SYSTEMS.Attunable.USAGE.Attune.notEnoughPresence",
@@ -183,10 +193,6 @@ export default function AttunableSystemMixin(Base) {
       async canAttune() {
         if (this.parent.actor) {
           let tierDerived = this.tier.value;
-          if (this.reference && !this.identified) {
-            const ref = await fromUuid(this.reference);
-            tierDerived = ref.system.tier.value;
-          }
           const unp =
             this.parent.actor.system.presence.max -
             this.parent.actor.system.presence.value;
@@ -213,6 +219,7 @@ export default function AttunableSystemMixin(Base) {
             "TERIOCK.SYSTEMS.Attunable.USAGE.Deattune.success",
             { format: { name: this.parent.fullName }, localize: true },
           );
+          await this.parent.sheet?.render();
         }
       }
 

@@ -41,8 +41,7 @@ export default class ConsequenceSheet extends ImbuementSheet {
 
   /** @inheritDoc */
   async _prepareContext(options = {}) {
-    const context = await super._prepareContext(options);
-    Object.assign(context, {
+    return Object.assign(await super._prepareContext(options), {
       transformation: ["enabled", "level", "img", "ring"].map((p) => {
         return {
           field: this.document.system.schema.getField(`transformation.${p}`),
@@ -52,6 +51,5 @@ export default class ConsequenceSheet extends ImbuementSheet {
         };
       }),
     });
-    return context;
   }
 }

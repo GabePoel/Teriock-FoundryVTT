@@ -32,7 +32,7 @@ declare global {
       range: {
         /** <schema> Long range (this is the default range) */
         long: RangeModel;
-        /** <schema> Is the armament melee? */
+        /** <schema> Is the armament mêlée? */
         melee: boolean;
         /** <schema> Is the armament ranged? */
         ranged: boolean;

@@ -37,11 +37,8 @@ export default class BaseItemSystem extends ChildSystemMixin(TypeDataModel) {
   /** @inheritDoc */
   static defineSchema() {
     return foundry.utils.mergeObject(super.defineSchema(), {
-      disabled: new fields.BooleanField({
-        initial: false,
-      }),
+      disabled: new fields.BooleanField(),
       flaws: new TextField({ initial: "" }),
-      onUse: new fields.SetField(new fields.DocumentIdField()),
     });
   }
 

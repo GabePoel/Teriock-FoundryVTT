@@ -44,17 +44,12 @@ export default function AdjustableSystemMixin(Base) {
           }),
           improvement: new TextField({ initial: "" }),
           limitation: new TextField({ initial: "" }),
-          mundane: new fields.BooleanField({ initial: false }),
         });
       }
 
       /** @inheritDoc */
       get _isSuppressedDeattuned() {
-        return (
-          !this.mundane &&
-          this.form !== "intrinsic" &&
-          super._isSuppressedDeattuned
-        );
+        return this.form !== "intrinsic" && super._isSuppressedDeattuned;
       }
 
       /** @inheritDoc */

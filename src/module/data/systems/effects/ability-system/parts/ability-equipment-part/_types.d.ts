@@ -9,6 +9,10 @@ declare global {
       grantOnly: boolean;
       /** <derived> Text describing this being granted. */
       grantOnlyText: string;
+      /** <schema> Can this only be used when its parent is used */
+      grantUse: boolean;
+      /** <derived> Text describing that this is used when its parent is used. */
+      grantUseText: string;
     };
   }
 }

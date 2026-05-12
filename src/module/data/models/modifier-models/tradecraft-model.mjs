@@ -6,11 +6,14 @@ const { fields } = foundry.data;
 export default class TradecraftModel extends BaseModifierModel {
   /** @inheritDoc */
   static defineSchema(options = {}) {
-    const { score = 0 } = options;
-    return {
-      ...super.defineSchema(options),
-      score: new fields.NumberField({ initial: score, min: 0, max: 3 }),
-    };
+    return Object.assign(super.defineSchema(options), {
+      score: new fields.NumberField({
+        initial: options.score ?? 0,
+        integer: true,
+        max: 3,
+        min: 0,
+      }),
+    });
   }
 
   /** @inheritDoc */

@@ -20,6 +20,7 @@ const { fields } = foundry.data;
  * @extends {Teriock.Models.PropertySystemData}
  * @mixes AdjustableSystem
  * @mixes ConsumableSystem
+ * @mixes GrantedSystem
  * @mixes RevelationSystem
  * @mixes WikiSystem
  */
@@ -27,8 +28,9 @@ export default class PropertySystem extends mix(
   CleanedEffectSystem,
   mixins.AdjustableSystemMixin,
   mixins.ConsumableSystemMixin,
-  mixins.WikiSystemMixin,
+  mixins.GrantedSystemMixin,
   mixins.RevelationSystemMixin,
+  mixins.WikiSystemMixin,
 ) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
@@ -68,10 +70,7 @@ export default class PropertySystem extends mix(
 
   /** @inheritDoc */
   static defineSchema() {
-    return foundry.utils.mergeObject(super.defineSchema(), {
-      applyIfDampened: new fields.BooleanField({ initial: false }),
-      applyIfShattered: new fields.BooleanField({ initial: false }),
-      applyIfUnequipped: new fields.BooleanField({ initial: true }),
+    return Object.assign(super.defineSchema(), {
       consumable: new fields.BooleanField({ initial: false }),
       damageType: new IdentifierField({ initial: "" }),
       extraDamage: new FormulaField({ deterministic: false }),
@@ -84,21 +83,6 @@ export default class PropertySystem extends mix(
     return super.migrateData(source, options, state);
   }
 
-  /** @inheritDoc */
-  get _isSuppressedDampened() {
-    return !this.applyIfDampened && super._isSuppressedDampened;
-  }
-
-  /** @inheritDoc */
-  get _isSuppressedShattered() {
-    return !this.applyIfShattered && super._isSuppressedShattered;
-  }
-
-  /** @inheritDoc */
-  get _isSuppressedUnequipped() {
-    return !this.applyIfUnequipped && super._isSuppressedUnequipped;
-  }
-
   /**
    * Metaphysics tags.
    * @returns {Teriock.Sheet.DisplayTag[]}
@@ -106,7 +90,7 @@ export default class PropertySystem extends mix(
   get _metaphysicsTags() {
     const tags = [];
     if (this.mundane) {
-      tags.push("TERIOCK.SYSTEMS.Adjustable.FIELDS.mundane.label");
+      tags.push("TERIOCK.SYSTEMS.BaseEffect.FIELDS.mundane.label");
     }
     return tags;
   }

@@ -43,6 +43,24 @@ export default class TeriockManager {
   }
 
   /**
+   * Check if a sheet or document is editable and give a warning if not.
+   * @param {ApplicationV2|TeriockDocument} obj
+   * @returns {boolean}
+   */
+  checkEditable(obj) {
+    const sheet = obj instanceof foundry.abstract.Document ? obj.sheet : obj;
+    const valid = !!sheet.isEditable;
+    if (!valid) {
+      ui.notifications.notify(
+        "TERIOCK.DIALOGS.Common.ERRORS.notEditable",
+        "warning",
+        { localize: true },
+      );
+    }
+    return valid;
+  }
+
+  /**
    * Check if there's an active scene and give a warning if not.
    * @returns {boolean}
    */
