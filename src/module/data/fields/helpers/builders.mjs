@@ -333,12 +333,12 @@ export function competenceField() {
 export function attributeField(options = { unp: false, nullable: true }) {
   return new StringField({
     choices: options.unp
-      ? TERIOCK.reference.statAttributes
-      : TERIOCK.reference.attributes,
+      ? TERIOCK.reference.attributes
+      : TERIOCK.reference.statAttributes,
     hint: _loc("TERIOCK.SCHEMA.Attribute.hint"),
     initial: options.nullable ? null : "int",
     label: _loc("TERIOCK.SCHEMA.Attribute.label"),
-    nullable: options.nullable,
+    nullable: options.nullable ?? true,
     required: false,
   });
 }

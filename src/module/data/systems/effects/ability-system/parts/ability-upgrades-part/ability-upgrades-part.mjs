@@ -23,12 +23,12 @@ export default (Base) => {
         return Object.assign(super.defineSchema(), {
           upgrades: new fields.SchemaField({
             competence: new fields.SchemaField({
-              attribute: attributeField(),
+              attribute: attributeField({ unp: true, nullable: true }),
               text: initialText(),
               value: competenceField(),
             }),
             score: new fields.SchemaField({
-              attribute: attributeField({ unp: false }),
+              attribute: attributeField({ unp: false, nullable: true }),
               text: initialText(),
               value: new fields.NumberField({
                 initial: 0,
@@ -113,10 +113,11 @@ export default (Base) => {
       prepareDerivedData() {
         super.prepareDerivedData();
         if (this.upgrades.score.attribute) {
-          const attShort = this.upgrades.score.attribute.toUpperCase();
+          const attPage =
+            TERIOCK.config.attribute[this.upgrades.competence.attribute].page;
           const attLabel =
             TERIOCK.config.attribute[this.upgrades.score.attribute].label;
-          const attribute = ` @L[Core:${attShort}]{${attLabel}}`;
+          const attribute = ` @L[Core:${attPage}]{${attLabel}}`;
           const value = this.upgrades.score.value;
           this.upgrades.score.text = _loc(
             "TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.score.description",
@@ -129,10 +130,11 @@ export default (Base) => {
           this.upgrades.competence.attribute = null;
         }
         if (this.upgrades.competence.attribute) {
-          const att = this.upgrades.competence.attribute.toUpperCase();
+          const attPage =
+            TERIOCK.config.attribute[this.upgrades.competence.attribute].page;
           const attLabel =
             TERIOCK.config.attribute[this.upgrades.competence.attribute].label;
-          const attribute = ` @L[Core:${att}]{${attLabel}}`;
+          const attribute = ` @L[Core:${attPage}]{${attLabel}}`;
           const amount = this.upgrades.competence.value;
           const page = TERIOCK.config.competence.levels[amount].page;
           const level = TERIOCK.config.competence.levels[amount].label;
