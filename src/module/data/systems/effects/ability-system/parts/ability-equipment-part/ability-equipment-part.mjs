@@ -164,8 +164,10 @@ export default (Base) => {
             name: this.parent.fullName,
           }),
           system: {
+            _src: this.parent.uuid,
             consumable: true,
             identifier: `scroll-of-${this.parent.forcedIdentifier}`,
+            needsAttunement: false,
             powerLevel: "enchanted",
             quantity: 1,
           },

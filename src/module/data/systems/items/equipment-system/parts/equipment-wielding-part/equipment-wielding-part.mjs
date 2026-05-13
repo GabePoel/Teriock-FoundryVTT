@@ -185,6 +185,15 @@ export default (Base) => {
       }
 
       /** @inheritDoc */
+      prepareBaseData() {
+        super.prepareBaseData();
+        if (!this.actor) {
+          this.equipped = true;
+          this.stashed = false;
+        }
+      }
+
+      /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
         if (this.consumable && this.quantity === 0) this.equipped = false;
@@ -210,9 +219,7 @@ export default (Base) => {
           scope: { equipment: this.parent },
         });
         await ensureNoChildren(this.parent, "property:glued");
-        if (this.glued) {
-          await this.parent.update({ "system.glued": false });
-        }
+        if (this.glued) await this.parent.update({ "system.glued": false });
       }
     }
   );

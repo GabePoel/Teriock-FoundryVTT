@@ -84,7 +84,10 @@ export default class CommonOutcomesAutomation extends mix(
   /** @inheritDoc */
   async _getActivations(options) {
     const activationOptions = {};
-    if (foundry.utils.hasProperty(options, "execution.armament.uuid")) {
+    if (
+      foundry.utils.hasProperty(options, "execution.armament.uuid") &&
+      foundry.utils.hasProperty(options, "execution.actor.uuid")
+    ) {
       const uuid = foundry.utils.buildRelativeUuid(
         options.execution.armament,
         options.execution.actor,
