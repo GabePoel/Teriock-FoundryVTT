@@ -213,9 +213,7 @@ export default function TriggerAutomationMixin(Base) {
       /** @inheritDoc */
       async _preFireTrigger(trigger, scope) {
         await super._preFireTrigger(trigger, scope);
-        if (this.canFire(trigger)) {
-          await this._preFire(scope);
-        }
+        if (this.canFire(trigger)) await this._preFire(scope);
       }
 
       /**
@@ -236,6 +234,13 @@ export default function TriggerAutomationMixin(Base) {
       async getActivations(options) {
         if (this._hasButtons) return this._getActivations(options);
         else return [];
+      }
+
+      /** @inheritDoc */
+      prepareData() {
+        if (this.document.documentName === "JournalEntryPage") {
+          this.trigger = null;
+        }
       }
     }
   );
