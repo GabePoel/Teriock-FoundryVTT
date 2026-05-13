@@ -104,7 +104,7 @@ export default class UseDocumentsAutomation extends mix(
       options: {
         competence: this.overrideCompetence
           ? this.competence.raw
-          : this.document.system.competence.raw,
+          : this.document?.system?.competence?.raw,
         expandTables: this.expandTables,
         icon,
         label,

@@ -12,6 +12,10 @@ export const effectConfig = {
       effectType: "imbuement",
       label: "TERIOCK.CHANGES.Targets.armament",
     },
+    item: {
+      effectType: "imbuement",
+      label: "TERIOCK.CHANGES.Targets.items",
+    },
   },
   cover: ["halfCover", "threeQuartersCover", "fullCover"],
   form: /** @enum {Teriock.Config.SubtypeEntry} */ {

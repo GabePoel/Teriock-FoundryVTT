@@ -173,9 +173,13 @@ export default class AddDocumentsActivation extends BaseActivation {
               format: { name: a.name },
             },
           );
-        }
-        if (this.target === "armament") {
-          const choices = a.armaments;
+        } else {
+          let choices = [];
+          if (this.target === "armament") choices = a.armaments;
+          if (this.target === "item")
+            choices = a.visibleChildren.filter(
+              (c) => c.documentName === "Item",
+            );
           const chosen = await selectDocumentsDialog(choices);
           await Promise.all(
             chosen.map((c) => {
@@ -231,6 +235,11 @@ export default class AddDocumentsActivation extends BaseActivation {
         if (this.target === "armament") {
           for (const armament of a.armaments) {
             children.push(...armament.childArray);
+          }
+        }
+        if (this.target === "item") {
+          for (const item of a.items.contents) {
+            children.push(...item.childArray);
           }
         }
         const toDelete = children.filter(

@@ -95,7 +95,7 @@ export default class TradecraftAutomation extends mix(
               bonus: this.bonus,
               competence: this.overrideCompetence
                 ? this.competence.raw
-                : this.document.system.competence.raw,
+                : this.document?.system?.competence?.raw,
               threshold: this.threshold,
               tradecraft,
             },

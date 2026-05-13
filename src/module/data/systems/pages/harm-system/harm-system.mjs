@@ -28,13 +28,21 @@ export default class HarmSystem extends mix(
     return [
       automations.AddDocumentsAutomation,
       automations.AttunementAutomation,
+      automations.ChangeMovementAutomation,
       automations.ChatMacroAutomation,
       automations.ChatStatusAutomation,
       automations.CommonOutcomesAutomation,
+      automations.FeatAutomation,
       automations.HacksAutomation,
+      automations.HealAutomation,
+      automations.RegionAutomation,
+      automations.ResistAutomation,
+      automations.RevitalizeAutomation,
       automations.RollAutomation,
       automations.RollStyleAutomation,
+      automations.SummonAutomation,
       automations.TakeAutomation,
+      automations.TradecraftAutomation,
       automations.UseDocumentsAutomation,
     ];
   }

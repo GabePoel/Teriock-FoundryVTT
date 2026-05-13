@@ -184,11 +184,11 @@ export default class AddDocumentsAutomation extends mix(
         );
       }
       const activationData = {
-        primary: activationFamily,
-        secondary: activationFamily,
         display: {
           label: this.display.label || this.#inferLabel(activationFamily.root),
         },
+        primary: activationFamily,
+        secondary: activationFamily,
       };
       activations.push(new AddDocumentsActivation(activationData));
     }

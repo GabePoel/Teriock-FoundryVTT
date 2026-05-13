@@ -72,6 +72,12 @@ export default class TeriockRollTable extends mix(
         sound: roll ? CONFIG.sounds.dice : null,
         speaker: TeriockChatMessage.getSpeaker(),
         system: {
+          activations:
+            teriock.data.pseudoDocuments.abstract.PseudoDocument.toCollectionObject(
+              (
+                await Promise.all(results.map((r) => r.getActivations()))
+              ).flat(),
+            ),
           avatar: TeriockChatMessage.getSpeakerActor(
             TeriockChatMessage.getSpeaker(),
           )?.img,

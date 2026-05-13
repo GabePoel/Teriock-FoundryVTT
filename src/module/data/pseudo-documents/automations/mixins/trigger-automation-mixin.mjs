@@ -138,7 +138,9 @@ export default function TriggerAutomationMixin(Base) {
        * @return {boolean}
        */
       get _hasButtons() {
-        return !this.trigger;
+        return (
+          !this.trigger || this.document.documentName === "JournalEntryPage"
+        );
       }
 
       /**
@@ -174,6 +176,17 @@ export default function TriggerAutomationMixin(Base) {
         return Object.keys(TERIOCK.config.trigger.execution.choices).includes(
           trigger,
         );
+      }
+
+      /** @inheritDoc */
+      _makeFormGroup(path, groupConfig = {}, inputConfig = {}) {
+        if (
+          this._triggerPaths.includes(path) &&
+          this.document.documentName === "JournalEntryPage"
+        ) {
+          inputConfig.disabled = true;
+        }
+        return super._makeFormGroup(path, groupConfig, inputConfig);
       }
 
       /**
