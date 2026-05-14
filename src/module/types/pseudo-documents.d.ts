@@ -22,6 +22,7 @@ declare global {
       hacks: automations.HacksAutomation;
       heal: automations.HealAutomation;
       modifyEffect: automations.ModifyEffectAutomation;
+      move: automations.MoveAutomation;
       propertyMacro: automations.PropertyMacroAutomation;
       protection: automations.ProtectionAutomation;
       region: automations.RegionAutomation;
@@ -58,6 +59,7 @@ declare global {
       heal: activations.HealActivation;
       identify: activations.IdentifyActivation;
       macro: activations.MacroActivation;
+      move: activations.MoveActivation;
       readMagic: activations.ReadMagicActivation;
       reforge: activations.ReforgeActivation;
       remove: activations.RemoveStatusActivation;

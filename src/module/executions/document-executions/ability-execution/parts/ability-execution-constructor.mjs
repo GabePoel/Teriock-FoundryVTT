@@ -29,7 +29,14 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
     this.vitals = this.#resolveVitals(options, sys);
     this.limb = this.#resolveLimb(options, sys);
     this.incurredAttackPenalty = this.#resolveAttackPenalty(options);
-    this.executor = this.actor?.defaultToken ?? null;
+    // Try and find a specific token that this is being executed by
+    /** @type {TeriockToken[]} */
+    const selectedTokens = game.canvas?.tokens.controlled ?? [];
+    for (const t of selectedTokens) {
+      if (t.actor?.uuid === this.actor.uuid) this.executor = t;
+    }
+    // Fall back to default token
+    this.executor ??= this.actor?.defaultToken ?? null;
     this.existingAttackPenalty = Number(
       this.actor?.system.combat.attackPenalty,
     );

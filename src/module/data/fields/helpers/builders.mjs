@@ -360,9 +360,10 @@ export function conditionRequirementsField() {
 
 /**
  * Field for a movement action.
+ * @param {StringFieldOptions} [options]
  * @returns {StringField}
  */
-export function movementActionField() {
+export function movementActionField(options = {}) {
   return new StringField({
     choices: localizeChoices(
       objectMap(
@@ -379,6 +380,7 @@ export function movementActionField() {
     initial: "walk",
     nullable: false,
     required: true,
+    ...options,
   });
 }
 

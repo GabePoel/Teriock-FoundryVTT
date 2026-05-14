@@ -358,6 +358,7 @@ export const icons = {
     maximum: "ms-all-inclusive",
     menuClose: "ms-keyboard-arrow-up",
     menuOpen: "ms-keyboard-arrow-down",
+    move: "ms-move-location",
     notes: "ms-book-5",
     numerical: "ms-tag",
     off: "ms-close",

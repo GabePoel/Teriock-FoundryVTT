@@ -45,8 +45,16 @@ export default function DisplayAutomationMixin(Base) {
        * Display paths.
        * @returns {string[]}
        */
+      get _displayPaths() {
+        return ["display.label"];
+      }
+
+      /**
+       * Display paths if there's no trigger.
+       * @returns {string[]}
+       */
       get _triggerDisplayPaths() {
-        return this.trigger ? [] : ["display.label"];
+        return this.trigger ? [] : this._displayPaths;
       }
     }
   );
