@@ -1,5 +1,12 @@
+const packIds = scope?.packIds ?? [];
+let packs = [];
+if (packIds.length) {
+  packs = packIds.map((p) => game.packs.get(p));
+} else {
+  packs = await tm.dialogs.selectCompendiumsDialog();
+}
 await tm.utils.progressBar(
-  await tm.dialogs.selectCompendiumsDialog(),
+  packs,
   _loc("TERIOCK.DIALOGS.RefreshCompendium.messageUnnamed"),
   /** @param {CompendiumCollection<TeriockDocument>} p */ async (p) => {
     if (!p.locked) {

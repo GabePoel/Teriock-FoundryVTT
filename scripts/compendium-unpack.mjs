@@ -271,7 +271,7 @@ function sortAutomations(automations) {
     return {
       key,
       data: a,
-      sortKey: a.type + compSort + hSort + cSort + a._id,
+      sortKey: a.type + compSort + hSort + cSort,
     };
   });
 
