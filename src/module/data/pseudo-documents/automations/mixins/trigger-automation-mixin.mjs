@@ -139,7 +139,7 @@ export default function TriggerAutomationMixin(Base) {
        */
       get _hasButtons() {
         return (
-          !this.trigger || this.document.documentName === "JournalEntryPage"
+          !this.trigger || this.document?.documentName === "JournalEntryPage"
         );
       }
 
@@ -182,7 +182,7 @@ export default function TriggerAutomationMixin(Base) {
       _makeFormGroup(path, groupConfig = {}, inputConfig = {}) {
         if (
           this._triggerPaths.includes(path) &&
-          this.document.documentName === "JournalEntryPage"
+          this.document?.documentName === "JournalEntryPage"
         ) {
           inputConfig.disabled = true;
         }
@@ -198,9 +198,7 @@ export default function TriggerAutomationMixin(Base) {
       /** @inheritDoc */
       _onFireTrigger(trigger, scope) {
         super._onFireTrigger(trigger, scope);
-        if (this.canFire(trigger)) {
-          this._onFire(scope);
-        }
+        if (this.canFire(trigger)) this._onFire(scope);
       }
 
       /**
@@ -238,7 +236,7 @@ export default function TriggerAutomationMixin(Base) {
 
       /** @inheritDoc */
       prepareData() {
-        if (this.document.documentName === "JournalEntryPage") {
+        if (this.document?.documentName === "JournalEntryPage") {
           this.trigger = null;
         }
       }

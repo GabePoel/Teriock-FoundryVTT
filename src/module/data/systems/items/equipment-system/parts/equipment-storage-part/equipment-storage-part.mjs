@@ -89,8 +89,7 @@ export default (Base) => {
 
       /** @inheritDoc */
       getLocalRollData() {
-        const data = super.getLocalRollData();
-        Object.assign(data, {
+        return Object.assign(super.getLocalRollData(), {
           storage: Number(this.storage.enabled),
           "storage.count": this.storage.carriedCount,
           "storage.count.max": this.storage.maxCount,
@@ -101,13 +100,12 @@ export default (Base) => {
           "storage.weight.over": Number(this.storage.isOverWeightCapacity),
           weight: this.totalWeight,
         });
-        return data;
       }
 
       /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
-        if (this.stashed) {
+        if (this.stashed || this.parent.elder?.type === "species") {
           this.weight = 0;
           this.storage.weightMultiplier = 0;
         }
