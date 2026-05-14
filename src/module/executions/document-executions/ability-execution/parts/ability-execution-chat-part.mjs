@@ -117,7 +117,9 @@ export default function AbilityExecutionChatPart(Base) {
       async #generateConsequenceAssociations() {
         this.#associationMap = { crit: [], normal: [] };
         this.#trackerMap = { crit: [], normal: [] };
-        const statusAutomations = this.getAutomations("status");
+        const statusAutomations = this.getAutomations("status", {
+          active: true,
+        });
         const targetAutomations = statusAutomations.filter((a) => a.target);
         for (const a of targetAutomations) {
           const uuids = await conditionDialog(a.status);
@@ -136,7 +138,10 @@ export default function AbilityExecutionChatPart(Base) {
        * @returns {Teriock.Keys.Status[]}
        */
       #generateConsequenceStatuses(crit = false) {
-        const statusAutomations = this.getAutomations("status", { crit });
+        const statusAutomations = this.getAutomations("status", {
+          active: true,
+          crit,
+        });
         return statusAutomations
           .filter((a) => a.relation === "include")
           .map((a) => a.status);
@@ -149,7 +154,7 @@ export default function AbilityExecutionChatPart(Base) {
       async #generateConsequenceTransformation(crit = false) {
         const transformationAutomations = this.getAutomations(
           "transformation",
-          { crit },
+          { active: true, crit },
         );
         const transformation = {
           enabled: !!transformationAutomations.length,
@@ -183,7 +188,10 @@ export default function AbilityExecutionChatPart(Base) {
           CONFIG.ActiveEffect.dataModels.consequence._automationTypes;
         const out = {};
         for (const Cls of types) {
-          const automations = this.getAutomations(Cls.TYPE, { crit });
+          const automations = this.getAutomations(Cls.TYPE, {
+            active: true,
+            crit,
+          });
           for (const a of automations) {
             const data = a.toObject();
             data._id = foundry.utils.randomID();
@@ -227,7 +235,10 @@ export default function AbilityExecutionChatPart(Base) {
        * @returns {Promise<number>}
        */
       async #generateEffectDuration(crit = false) {
-        const durationAutomations = this.getAutomations("duration", { crit });
+        const durationAutomations = this.getAutomations("duration", {
+          active: true,
+          crit,
+        });
         let durationFormula = this.source.system.duration.formula;
         const formulaField = new FormulaField({ deterministic: false });
         durationAutomations.forEach((a) => {
@@ -273,6 +284,7 @@ export default function AbilityExecutionChatPart(Base) {
           triggers: Array.from(this.source.system.duration.triggers),
         };
         const autos = this.getAutomations("expiration", {
+          active: true,
           crit,
         });
         autos.forEach((a) => {
@@ -413,8 +425,10 @@ export default function AbilityExecutionChatPart(Base) {
               critGrandchildren.push(...grandchildren);
             }
           }
-          const transformationAutomations =
-            this.getAutomations("transformation");
+          const transformationAutomations = this.getAutomations(
+            "transformation",
+            { active: true },
+          );
           for (const a of transformationAutomations) {
             const toAdd = await a.choose({ actor: this.actor });
             if (a.crit.has(0)) {
@@ -424,7 +438,10 @@ export default function AbilityExecutionChatPart(Base) {
               critConData.system.transformation.uuids.push(...toAdd);
             }
           }
-          this.getAutomations("modifyEffect", { crit: false }).forEach((a) => {
+          this.getAutomations("modifyEffect", {
+            active: true,
+            crit: false,
+          }).forEach((a) => {
             if (a?.overrideCompetence) {
               foundry.utils.setProperty(
                 normConData,
@@ -446,7 +463,10 @@ export default function AbilityExecutionChatPart(Base) {
               });
             }
           });
-          this.getAutomations("modifyEffect", { crit: true }).forEach((a) => {
+          this.getAutomations("modifyEffect", {
+            active: true,
+            crit: true,
+          }).forEach((a) => {
             if (a?.overrideCompetence) {
               foundry.utils.setProperty(
                 critConData,

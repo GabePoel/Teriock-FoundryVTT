@@ -70,8 +70,13 @@ export default class BaseActorSheet extends mix(
 
   /** @inheritDoc */
   _canDropChild(doc) {
-    if (doc.type === "ability") return false;
-    else return super._canDropChild(doc);
+    if (doc.type === "ability") {
+      ui.notifications.error(
+        "TERIOCK.SHEETS.Actor.NOTIFICATIONS.cantDropAbility",
+        { localize: true },
+      );
+      return false;
+    } else return super._canDropChild(doc);
   }
 
   /** @inheritDoc */

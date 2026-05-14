@@ -24,7 +24,7 @@ export default class TeriockManager {
    * @param {object} [options]
    * @returns {boolean}
    */
-  #check(existable, message, type = "warning", options = { localize: true }) {
+  #check(existable, message, type = "error", options = { localize: true }) {
     let valid = true;
     if (!existable) valid = false;
     if (Array.isArray(existable) && !existable.length) valid = false;
@@ -53,7 +53,7 @@ export default class TeriockManager {
     if (!valid) {
       ui.notifications.notify(
         "TERIOCK.DIALOGS.Common.ERRORS.notEditable",
-        "warning",
+        "error",
         { localize: true },
       );
     }
@@ -69,7 +69,7 @@ export default class TeriockManager {
     if (!valid) {
       ui.notifications.notify(
         "TERIOCK.DIALOGS.Common.ERRORS.noScene",
-        "warning",
+        "error",
         { localize: true },
       );
     }
