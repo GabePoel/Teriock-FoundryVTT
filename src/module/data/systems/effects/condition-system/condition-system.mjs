@@ -89,6 +89,22 @@ export default class ConditionSystem extends mix(
   }
 
   /** @inheritDoc */
+  async _preCreate(data, options, user) {
+    const yes = await super._preCreate(data, options, user);
+    if (yes === false) return false;
+
+    if (data.disabled === true) return false;
+  }
+
+  /** @inheritDoc */
+  async _preUpdate(changes, options, user) {
+    const yes = await super._preUpdate(changes, options, user);
+    if (yes === false) return false;
+
+    if (changes.disabled === true) return false;
+  }
+
+  /** @inheritDoc */
   async _use(_options = {}) {
     if (this.parent.id.includes("dead") && this.parent.actor) {
       await this.parent.actor.system.deathBagPull();
@@ -127,5 +143,11 @@ export default class ConditionSystem extends mix(
    */
   async inCombatExpiration(forceDialog = false) {
     await inCombatExpirationDialog(this.parent, forceDialog);
+  }
+
+  /** @inheritDoc */
+  prepareBaseData() {
+    super.prepareBaseData();
+    this.parent.disabled = false;
   }
 }

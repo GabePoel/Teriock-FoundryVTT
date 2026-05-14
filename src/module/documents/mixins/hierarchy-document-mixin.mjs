@@ -14,6 +14,7 @@ export default function HierarchyDocumentMixin(Base) {
     /**
      * @extends CommonDocument
      * @mixin
+     * @property {string} documentName
      * @property {HierarchySystem} system
      * @property {(data: Object, context: DocumentConstructionContext & DocumentCloneOptions) =>
      *  Promise<HierarchyDocument>} clone
@@ -154,20 +155,33 @@ export default function HierarchyDocumentMixin(Base) {
           if (folderUpdate) {
             const subIds = doc.allSubs.contents.map((s) => s._id);
             for (const subId of subIds) {
-              const supUpdate = operation.updates.find(
+              const subUpdate = operation.updates.find(
                 (update) => update._id === subId,
               );
-              if (!supUpdate) {
+              if (!subUpdate) {
                 operation.updates.push({
                   _id: subId,
                   folder: folderUpdate.folder,
                 });
               } else {
-                supUpdate.folder = folderUpdate.folder;
+                subUpdate.folder = folderUpdate.folder;
               }
             }
           }
         }
+      }
+
+      /**
+       * Check if there is a circular dependencies between a sup and sub.
+       * @param {HierarchyDocument} sup
+       * @param {HierarchyDocument} sub
+       */
+      static async checkIfCyclic(sup, sub) {
+        if (sup?.documentName !== sub?.documentName) return false;
+        if (sup?.id === sub?.id) return true;
+        if (typeof sup.getAllSups === "function") {
+          return (await sup.getAllSups()).has(sub.id);
+        } else return false;
       }
 
       /**
@@ -177,6 +191,13 @@ export default function HierarchyDocumentMixin(Base) {
        * @returns {Promise<void>}
        */
       static async createDocuments(data = [], operation = {}) {
+        // Pre-clean documents so they always have their `_ref` UUID available
+        for (let i = 0; i < data.length; i++) {
+          const doc = data[i];
+          if (doc instanceof foundry.abstract.Document) {
+            data[i] = doc.toObject(true);
+          }
+        }
         if (operation.isKeepIdCached) operation.keepId = operation.cachedKeepId;
         delete operation.isKeepIdCached;
         delete operation.cachedKeepId;
@@ -240,9 +261,17 @@ export default function HierarchyDocumentMixin(Base) {
        */
       static findSup(document, collection) {
         if (!collection) collection = document.siblingCollection;
-        if (document.system?._sup) {
-          return collection?.get(document.system._sup);
-        }
+        if (document.system?._sup) return collection?.get(document.system._sup);
+      }
+
+      /**
+       * Validate if a relationship between a sup and sub is allowed.
+       * @param {HierarchyDocument} sup
+       * @param {HierarchyDocument} sub
+       * @returns {Promise<boolean>}
+       */
+      static async validateRelationship(sup, sub) {
+        return !(await this.checkIfCyclic(sup, sub));
       }
 
       /**
@@ -350,8 +379,8 @@ export default function HierarchyDocumentMixin(Base) {
       #reloadDependee() {
         const doc = this.dependee;
         if (!doc) return;
-        doc.resetChildMaps();
-        if (doc.isViewer) doc?.sheet.render({ force: false });
+        if (typeof doc.resetChildMaps === "function") doc.resetChildMaps();
+        if (doc.isViewer) doc?.sheet?.render({ force: false });
       }
 
       /**
@@ -360,8 +389,8 @@ export default function HierarchyDocumentMixin(Base) {
       #reloadSups() {
         this.getAllSups().then((result) => {
           result.forEach((doc) => {
-            doc.resetChildMaps();
-            if (doc.isViewer) doc.sheet.render({ force: false });
+            if (typeof doc.resetChildMaps === "function") doc.resetChildMaps();
+            if (doc.isViewer) doc.sheet?.render({ force: false });
           });
         });
         if (this.collection.name === "CompendiumCollection") {
@@ -394,6 +423,12 @@ export default function HierarchyDocumentMixin(Base) {
         if (this.system._dep && this.uuid) {
           game.teriock.dependentsRegistry.untrack(this.system._dep, this);
         }
+        // If this is deleted as part of a folder it might not call the appropriate operation and descendents need
+        // to be deleted separately. This sucks but IDK a better solution.
+        this.constructor.deleteDocuments(
+          this.allSubs.contents.map((s) => s._id),
+          { parent: this.parent, pack: this.compendium?.collection },
+        );
         this.#renderSheets();
       }
 
@@ -404,10 +439,33 @@ export default function HierarchyDocumentMixin(Base) {
       }
 
       /** @inheritDoc */
+      async _preCreate(data, options, user) {
+        const yes = await super._preCreate(data, options, user);
+        if (yes === false) return false;
+
+        const elder = await this.getElder();
+        const valid = await this.constructor.validateRelationship(elder, this);
+        if (!valid) return false;
+      }
+
+      /** @inheritDoc */
+      async _preUpdate(changes, options, user) {
+        const yes = await super._preUpdate(changes, options, user);
+        if (yes === false) return false;
+
+        const _sup = foundry.utils.getProperty(changes, "system._sup");
+        if (_sup) {
+          const collection = this.siblingCollection;
+          const sup = await resolveDocument(collection?.get(_sup));
+          const valid = await this.constructor.validateRelationship(sup, this);
+          if (!valid) return false;
+        }
+      }
+
+      /** @inheritDoc */
       checkAncestor(doc) {
-        if (doc?.uuid === this.uuid) {
-          return true;
-        } else {
+        if (doc?.uuid === this.uuid) return true;
+        else {
           return this.elder?.checkAncestor
             ? this.elder?.checkAncestor(doc) || false
             : false;

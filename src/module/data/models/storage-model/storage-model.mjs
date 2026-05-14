@@ -37,8 +37,9 @@ export default class StorageModel extends EmbeddedDataModel {
    * @returns {number}
    */
   get carriedCount() {
+    // Async stored equipment is assumed to have a quantity of 1
     return this.storedEquipment
-      .map((e) => (e.system?.consumable ? e.system?.quantity : 1) || 1)
+      .map((e) => (e.system?.consumable ? (e.system?.quantity ?? 1) : 1) || 1)
       .reduce((a, b) => a + b, 0);
   }
 
@@ -47,8 +48,9 @@ export default class StorageModel extends EmbeddedDataModel {
    * @returns {number}
    */
   get carriedWeight() {
+    // Async stored equipment is assumed to have a weight of 0
     return this.storedEquipment
-      .map((e) => e.system.totalWeight)
+      .map((e) => e.system?.totalWeight ?? 0)
       .reduce((a, b) => a + b, 0)
       .toNearest(equipmentConfig.weight.interval);
   }

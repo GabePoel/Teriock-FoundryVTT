@@ -1,4 +1,5 @@
 import { equipmentConfig } from "../../../../../../constants/config/equipment-config.mjs";
+import { resolveDocument } from "../../../../../../helpers/resolve.mjs";
 import { StorageModel } from "../../../../../models/_module.mjs";
 
 const { EmbeddedDataField } = foundry.data.fields;
@@ -58,7 +59,7 @@ export default (Base) => {
        */
       get weightMultiplier() {
         if (this.parent.elder?.type === "equipment") {
-          return this.parent.elder.system.storage.weightMultiplier;
+          return this.parent.elder?.system?.storage?.weightMultiplier ?? 1;
         }
         return 1;
       }
@@ -84,6 +85,21 @@ export default (Base) => {
         const elder = await this.parent.getElder();
         if (elder?.type === "equipment" && !elder.system.storage.enabled) {
           return false;
+        }
+      }
+
+      /** @inheritDoc */
+      async _preUpdate(changes, options, user) {
+        const yes = await super._preUpdate(changes, options, user);
+        if (yes === false) return false;
+
+        const _sup = foundry.utils.getProperty(changes, "system._sup");
+        if (_sup) {
+          const collection = this.siblingCollection;
+          const sup = await resolveDocument(collection?.get(_sup));
+          if (sup?.type === "equipment" && !sup.system.storage.enabled) {
+            return false;
+          }
         }
       }
 

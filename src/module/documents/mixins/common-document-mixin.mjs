@@ -40,6 +40,26 @@ export default function CommonDocumentMixin(Base) {
         });
       }
 
+      /**
+       * Validate whether a document supports a certain child type.
+       * @param {AnyCommonDocument} parent
+       * @param {AnyChildDocument} child
+       * @returns {boolean}
+       */
+      static validateChildType(parent, child) {
+        if (
+          !parent?.metadata?.childItemTypes ||
+          !parent?.metadata?.childEffectTypes
+        ) {
+          return true;
+        }
+        const childTypes = new Set([
+          ...parent.metadata.childEffectTypes,
+          ...parent.metadata.childItemTypes,
+        ]);
+        return childTypes.has(child?.type);
+      }
+
       /** @inheritDoc */
       get SettingsFlagsDataModel() {
         return this.system.SettingsFlagsDataModel;

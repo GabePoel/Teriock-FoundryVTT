@@ -28,6 +28,12 @@ export default function ChildDocumentMixin(Base) {
         return Object.assign(super.documentMetadata, { child: true });
       }
 
+      /** @inheritDoc */
+      static async validateRelationship(sup, sub) {
+        if (!this.validateChildType(sup, sub)) return false;
+        return super.validateRelationship(sup, sub);
+      }
+
       /**
        * Treat this document as if it doesn't exist.
        * @returns {boolean}

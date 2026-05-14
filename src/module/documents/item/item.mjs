@@ -110,17 +110,6 @@ export default class TeriockItem extends mix(
     return this.effects.contents;
   }
 
-  /** @inheritDoc */
-  async _preCreate(data, options, user) {
-    const yes = await super._preCreate(data, options, user);
-    if (yes === false) return false;
-
-    const elder = await this.getElder();
-    if (elder && !elder.metadata.childItemTypes.includes(this.type)) {
-      return false;
-    }
-  }
-
   /**
    * @inheritDoc
    * @yields {TeriockActiveEffect}

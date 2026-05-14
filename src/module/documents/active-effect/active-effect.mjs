@@ -57,17 +57,6 @@ export default class TeriockActiveEffect extends mix(
   }
 
   /** @inheritDoc */
-  async _preCreate(data, options, user) {
-    const yes = await super._preCreate(data, options, user);
-    if (yes === false) return false;
-
-    const elder = await this.getElder();
-    if (elder && !elder.metadata.childEffectTypes.includes(this.type)) {
-      return false;
-    }
-  }
-
-  /** @inheritDoc */
   async createChildDocuments(embeddedName, data = [], operation = {}) {
     if (embeddedName === "Item") {
       return this.createDependentDocuments(embeddedName, data, operation);

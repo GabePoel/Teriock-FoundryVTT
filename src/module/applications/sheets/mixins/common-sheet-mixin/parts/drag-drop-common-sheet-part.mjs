@@ -1,3 +1,4 @@
+import { ucFirst } from "../../../../../helpers/string.mjs";
 import { TeriockTextEditor } from "../../../../ux/_module.mjs";
 
 const DragDrop = foundry.applications.ux.DragDrop.implementation;
@@ -35,18 +36,21 @@ export default (Base) => {
        * @returns {boolean}
        */
       _canDropChild(doc) {
-        if (!this._canDrop) return false;
-        const childTypes = new Set([
-          ...this.document.metadata.childEffectTypes,
-          ...this.document.metadata.childItemTypes,
-        ]);
-        return (
-          this.document.isOwner &&
-          doc &&
-          doc.parent !== this.document &&
-          doc !== this.document &&
-          childTypes.has(doc.type)
-        );
+        if (!game.teriock.checkEditable(this)) return false;
+        const children = TERIOCK.config.document[doc?.type]?.plural ?? "";
+        const parents =
+          TERIOCK.config.document[this.document?.type]?.plural ?? "";
+        if (!this.document.constructor.validateChildType(this.document, doc)) {
+          ui.notifications.error(
+            "TERIOCK.SHEETS.Common.NOTIFICATIONS.cantDropType",
+            {
+              format: { children: ucFirst(children), parents },
+              localize: true,
+            },
+          );
+          return false;
+        }
+        return !!doc && doc.parent !== this.document && doc !== this.document;
       }
 
       /**

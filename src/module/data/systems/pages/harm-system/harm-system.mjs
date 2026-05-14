@@ -47,11 +47,6 @@ export default class HarmSystem extends mix(
     ];
   }
 
-  /** @inheritDoc */
-  static get documentName() {
-    return "JournalEntryPage";
-  }
-
   /**
    * Metadata.
    * @return {{pseudos: {Automation: string}}}

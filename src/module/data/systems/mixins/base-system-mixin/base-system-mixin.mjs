@@ -14,11 +14,6 @@ export default function BaseSystemMixin(Base) {
       /** @inheritDoc */
       static LOCALIZATION_PREFIXES = [];
 
-      /** The document name of the corresponding document type. */
-      static get documentName() {
-        return "";
-      }
-
       /** @inheritDoc */
       static defineSchema() {
         return {

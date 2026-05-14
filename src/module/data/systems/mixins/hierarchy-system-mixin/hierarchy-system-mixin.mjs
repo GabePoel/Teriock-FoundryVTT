@@ -37,7 +37,6 @@ export default function HierarchySystemMixin(Base) {
             blank: true,
             nullable: true,
             required: false,
-            type: this.documentName,
           }),
         });
       }
