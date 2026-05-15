@@ -172,38 +172,6 @@ export default class SummonActivation extends BaseActivation {
   }
 
   /**
-   * Prepare all relevant actors for token placement.
-   * @returns {Promise<TeriockActor[]>}
-   */
-  async #prepareActors() {
-    this.#nodes = [];
-    const srcPromises = [];
-    for (const uuid of Array.from(this.uuids)) {
-      if (!uuid.startsWith("Compendium")) srcPromises.push(uuid);
-      else {
-        const summon = this.#findBestSummon(uuid);
-        if (summon) srcPromises.push(summon);
-        else srcPromises.push(resolveDocument(uuid));
-      }
-    }
-    const srcActors = (await Promise.all(srcPromises)).filter((_) => _);
-    const needsSummonFolder =
-      srcActors.some((a) => a?.inCompendium) && !this.#summonsFolder;
-    if (needsSummonFolder) await this.#createSummonsFolder();
-    this.#nodes = srcActors.map((a) => {
-      return { actor: a, state: "unknown" };
-    });
-    this.#determineActorStates();
-    await this.#claimOwnership();
-    await this.#import();
-    const actors = this.#nodes
-      .filter((n) => n.state === "ready" && n.actor?.isOwner)
-      .map((n) => n.actor);
-    this.#nodes = [];
-    return actors;
-  }
-
-  /**
    * Place all the tokens on the canvas.
    * @returns {Promise<TeriockTokenDocument[]>}
    */
@@ -221,6 +189,38 @@ export default class SummonActivation extends BaseActivation {
     return await canvas.tokens.placeTokens(tokenData, {
       createOptions: { asGM: true },
     });
+  }
+
+  /**
+   * Prepare all relevant actors for token placement.
+   * @returns {Promise<TeriockActor[]>}
+   */
+  async #prepareActors() {
+    this.#nodes = [];
+    const srcPromises = [];
+    for (const uuid of Array.from(this.uuids)) {
+      if (!uuid.startsWith("Compendium")) srcPromises.push(uuid);
+      else {
+        const summon = this.#findBestSummon(uuid);
+        if (summon) srcPromises.push(summon);
+        else srcPromises.push(resolveDocument(uuid));
+      }
+    }
+    const srcActors = (await Promise.all(srcPromises)).filter(Boolean);
+    const needsSummonFolder =
+      srcActors.some((a) => a?.inCompendium) && !this.#summonsFolder;
+    if (needsSummonFolder) await this.#createSummonsFolder();
+    this.#nodes = srcActors.map((a) => {
+      return { actor: a, state: "unknown" };
+    });
+    this.#determineActorStates();
+    await this.#claimOwnership();
+    await this.#import();
+    const actors = this.#nodes
+      .filter((n) => n.state === "ready" && n.actor?.isOwner)
+      .map((n) => n.actor);
+    this.#nodes = [];
+    return actors;
   }
 
   /**

@@ -9,7 +9,7 @@ function cleanBars(bars) {
   const newBars = [];
   for (const bar of bars) {
     const newBar = { icon: bar?.icon, label: bar?.label };
-    const newWrappers = (bar?.wrappers || []).filter((_) => _);
+    const newWrappers = (bar?.wrappers || []).filter(Boolean);
     if (newWrappers.length > 0) newBar.wrappers = newWrappers;
     if (newBar.wrappers) newBars.push(newBar);
   }

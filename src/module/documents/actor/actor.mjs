@@ -607,7 +607,7 @@ export default class TeriockActor extends mix(
   async removeStatusEffects(statusIds) {
     const candidates = statusIds
       .map((id) => CONFIG.statusEffects[id])
-      .filter((_) => _);
+      .filter(Boolean);
     const toRemove = candidates
       .filter((e) => this.effects.get(e?._id))
       .map((e) => e?._id);

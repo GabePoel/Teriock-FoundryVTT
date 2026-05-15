@@ -80,7 +80,7 @@ export default class HarmRoll extends ImpactRoll {
     const harms = await Promise.all(
       identifiers.map((i) => fromHarmIdentifier(i)),
     );
-    this._harms = harms.filter((_) => _);
+    this._harms = harms.filter(Boolean);
     return this._harms;
   }
 

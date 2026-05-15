@@ -51,7 +51,7 @@ export default class TeriockActors extends BaseWorldCollectionMixin(Actors) {
   get selected() {
     const controlled = game.canvas.tokens.controlled
       .map((t) => t?.actor)
-      .filter((_) => _);
+      .filter(Boolean);
     if (controlled.length) return controlled;
     return this.default ? [this.default] : [];
   }

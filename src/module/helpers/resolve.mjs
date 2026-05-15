@@ -48,10 +48,8 @@ export async function resolveDocuments(syncDocs, options = {}) {
   if (options.expandTables) {
     const toAdd = await Promise.all(tables.map((d) => d.getAllContents()));
     for (const arr of toAdd) out.push(...arr);
-  } else {
-    out.push(...tables);
-  }
-  return out.filter((_) => _);
+  } else out.push(...tables);
+  return out.filter(Boolean);
 }
 
 /**
@@ -88,7 +86,7 @@ export async function ensureChildren(document, identifiers) {
       return { documentName: doc.documentName, data: obj };
     }),
   );
-  const filtered = candidates.filter((_) => _);
+  const filtered = candidates.filter(Boolean);
   const documentNames = new Set(
     Object.values(filtered).map((v) => v?.documentName),
   );
@@ -103,7 +101,7 @@ export async function ensureChildren(document, identifiers) {
   const childArrays = await Promise.all(childPromises);
   const children = [];
   for (const childArray of childArrays) {
-    children.push(...childArray.filter((_) => _));
+    children.push(...childArray.filter(Boolean));
   }
   return children;
 }
@@ -132,7 +130,7 @@ export async function ensureNoChildren(document, identifiers) {
   const deletedArrays = await Promise.all(deletePromises);
   const deletedDocs = [];
   for (const deletedArray of deletedArrays) {
-    deletedDocs.push(...deletedArray.filter((_) => _));
+    deletedDocs.push(...deletedArray.filter(Boolean));
   }
   return deletedDocs;
 }
@@ -153,7 +151,7 @@ export async function inferCompendiumSource(document) {
  * @returns {Promise<void>}
  */
 export async function inferChildCompendiumSources(document) {
-  const children = (await document.getChildArray()).map((_) => _);
+  const children = (await document.getChildArray()).map(Boolean);
   await Promise.all(children.map(async (c) => await inferCompendiumSource(c)));
 }
 /**

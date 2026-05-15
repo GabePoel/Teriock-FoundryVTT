@@ -18,7 +18,7 @@ export default async function turnChangeQuery(queryData, { _timeout }) {
       }),
     ),
   );
-  const conOps = consolidateWriteOperations(indOps.filter((_) => _));
+  const conOps = consolidateWriteOperations(indOps.filter(Boolean));
   await foundry.documents.modifyBatch([
     {
       action: "delete",

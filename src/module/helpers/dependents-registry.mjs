@@ -60,7 +60,7 @@ export default class DependentsRegistry {
     doc = doc instanceof Document ? doc : foundry.utils.fromUuidSync(doc);
     return Array.from(this.#dependents.get(doc?.uuid) ?? [])
       .map((uuid) => this.fetchFromUuid(doc, uuid))
-      .filter((_) => _);
+      .filter(Boolean);
   }
 
   /**

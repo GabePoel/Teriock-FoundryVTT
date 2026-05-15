@@ -38,15 +38,13 @@ export default class CharacterSystem extends BaseActorSystem {
         )
         .map((identifier) => fromIdentifier(identifier)),
     );
-    const itemData = items
-      .filter((_) => _)
-      .map((item) => {
-        const obj = item?.toObject(true);
-        if (item?.inCompendium) {
-          foundry.utils.setProperty(item, "_stats.compendiumSource", item.uuid);
-        }
-        return obj;
-      });
+    const itemData = items.filter(Boolean).map((item) => {
+      const obj = item?.toObject(true);
+      if (item?.inCompendium) {
+        foundry.utils.setProperty(item, "_stats.compendiumSource", item.uuid);
+      }
+      return obj;
+    });
 
     // Add Essential Items
     this.parent.updateSource(

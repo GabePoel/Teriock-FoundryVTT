@@ -46,7 +46,7 @@ export default class TeriockRollTable extends mix(
         .filter((r) => r.type === "document")
         .map((r) => foundry.utils.fromUuid(r.documentUuid)),
     );
-    return out.filter((_) => _);
+    return out.filter(Boolean);
   }
 
   /**

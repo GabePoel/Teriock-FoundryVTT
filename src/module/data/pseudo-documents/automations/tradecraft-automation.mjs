@@ -87,7 +87,7 @@ export default class TradecraftAutomation extends mix(
   /** @inheritDoc */
   async _getActivations() {
     return Array.from(this.tradecrafts)
-      .filter((_) => _)
+      .filter(Boolean)
       .map(
         (tradecraft) =>
           new TradecraftActivation({

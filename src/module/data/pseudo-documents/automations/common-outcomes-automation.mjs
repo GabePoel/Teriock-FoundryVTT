@@ -95,12 +95,12 @@ export default class CommonOutcomesAutomation extends mix(
       foundry.utils.setProperty(activationOptions, "options.armament", uuid);
     }
     return Array.from(this.common)
-      .filter((_) => _)
+      .filter(Boolean)
       .map((c) => {
         const Act = Object.values(activations).find((A) => A.TYPE === c);
         if (Act) return new Act(foundry.utils.deepClone(activationOptions));
       })
-      .filter((_) => _);
+      .filter(Boolean);
   }
 
   /** @inheritDoc */

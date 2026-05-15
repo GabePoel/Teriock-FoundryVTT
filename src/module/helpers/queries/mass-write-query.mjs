@@ -10,6 +10,6 @@ export default async function massWriteQuery(queryData, { _timeout }) {
   const indOps = await Promise.all(
     queryData.operations.map(async (op) => buildWriteOperation(op)),
   );
-  const conOps = consolidateWriteOperations(indOps.filter((_) => _));
+  const conOps = consolidateWriteOperations(indOps.filter(Boolean));
   await foundry.documents.modifyBatch(conOps);
 }

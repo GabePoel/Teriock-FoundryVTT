@@ -136,7 +136,7 @@ function getTermTypes(term) {
       .toLowerCase()
       .split(" ")
       .map((type) => type.trim())
-      .filter((_) => _),
+      .filter(Boolean),
   );
 }
 
@@ -145,9 +145,7 @@ function getTermTypes(term) {
  * @param {Set<string>} types
  */
 function setTermTypes(term, types) {
-  term.options.flavor = Array.from(types)
-    .filter((_) => _)
-    .join(" ");
+  term.options.flavor = Array.from(types).filter(Boolean).join(" ");
 }
 
 /**

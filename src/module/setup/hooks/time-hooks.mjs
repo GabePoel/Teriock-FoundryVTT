@@ -32,7 +32,7 @@ async function increaseDebt(_worldTime, dt, _options, userId) {
   const indOps = await Promise.all(
     operations.map(async (op) => buildWriteOperation(op)),
   );
-  const conOps = consolidateWriteOperations(indOps.filter((_) => _));
+  const conOps = consolidateWriteOperations(indOps.filter(Boolean));
   await foundry.documents.modifyBatch(conOps);
 }
 
