@@ -1,3 +1,7 @@
+import {
+  selectDocumentDialog,
+  selectDocumentsDialog,
+} from "../../applications/dialogs/select-document-dialog.mjs";
 import { mix } from "../../helpers/construction.mjs";
 import { makeIcon } from "../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
@@ -11,6 +15,7 @@ const { User } = foundry.documents;
  * @extends {ClientDocument}
  * @mixes BaseDocument
  * @implements {Teriock.Documents.UserInterface}
+ * @property {Readonly<Set<TeriockToken>>} targets
  */
 export default class TeriockUser extends mix(
   User,
@@ -19,10 +24,19 @@ export default class TeriockUser extends mix(
 ) {
   /** @inheritDoc */
   get embedParts() {
-    const parts = super.embedParts;
-    parts.img = this.avatar;
+    const parts = Object.assign(super.embedParts, { img: this.avatar });
     if (this.character) parts.subtitle = this.character.fullName;
     return parts;
+  }
+
+  /**
+   * The tokens this user can currently see.
+   * @returns {Set<TeriockToken>}
+   */
+  get visibleTokens() {
+    return new Set(
+      game.canvas?.tokens.placeables.filter((t) => t.isVisible) ?? [],
+    );
   }
 
   /** @inheritDoc */
@@ -36,5 +50,80 @@ export default class TeriockUser extends mix(
       },
       ...super.getCardContextMenuEntries(doc),
     ];
+  }
+
+  /**
+   * Select one targeted token document.
+   * @param {Teriock.SelectOptions.DocumentSelect} options
+   * @returns {Promise<TeriockTokenDocument|null>}
+   */
+  async selectTargetedToken(options = {}) {
+    return selectDocumentDialog(
+      Array.from(this.targets).map((t) => t.document),
+      {
+        hint: "TERIOCK.SYSTEMS.User.DIALOGS.SelectTargetedToken.hint",
+        imgKey: "texture.src",
+        silent: true,
+        title: "TERIOCK.SYSTEMS.User.DIALOGS.SelectTargetedToken.title",
+        tooltip: false,
+        ...options,
+      },
+    );
+  }
+
+  /**
+   * Select any number of targeted token documents.
+   * @param {Teriock.SelectOptions.DocumentsSelect} options
+   * @returns {Promise<TeriockTokenDocument[]>}
+   */
+  async selectTargetedTokens(options = {}) {
+    return selectDocumentsDialog(
+      Array.from(this.targets).map((t) => t.document),
+      {
+        hint: "TERIOCK.SYSTEMS.User.DIALOGS.SelectTargetedTokens.hint",
+        imgKey: "texture.src",
+        silent: true,
+        title: "TERIOCK.SYSTEMS.User.DIALOGS.SelectTargetedTokens.title",
+        tooltip: false,
+        ...options,
+      },
+    );
+  }
+
+  /**
+   * Select one visible token document.
+   * @param {Teriock.SelectOptions.DocumentSelect} options
+   */
+  async selectVisibleToken(options = {}) {
+    return selectDocumentDialog(
+      Array.from(this.visibleTokens).map((t) => t.document),
+      {
+        hint: "TERIOCK.SYSTEMS.User.DIALOGS.SelectVisibleToken.hint",
+        imgKey: "texture.src",
+        silent: true,
+        title: "TERIOCK.SYSTEMS.User.DIALOGS.SelectVisibleToken.title",
+        tooltip: false,
+        ...options,
+      },
+    );
+  }
+
+  /**
+   * Select any number of the visible token documents.
+   * @param {Teriock.SelectOptions.DocumentsSelect} options
+   * @returns {Promise<TeriockTokenDocument[]>}
+   */
+  async selectVisibleTokens(options = {}) {
+    return selectDocumentsDialog(
+      Array.from(this.visibleTokens).map((t) => t.document),
+      {
+        hint: "TERIOCK.SYSTEMS.User.DIALOGS.SelectVisibleTokens.hint",
+        imgKey: "texture.src",
+        silent: true,
+        title: "TERIOCK.SYSTEMS.User.DIALOGS.SelectVisibleTokens.title",
+        tooltip: false,
+        ...options,
+      },
+    );
   }
 }

@@ -30,6 +30,7 @@ export default class ChatStatusAutomation extends CritAutomation {
   }
 
   /**
+   * The available relation options.
    * @type {Record<string, string>}
    */
   static get _relationChoices() {
@@ -40,6 +41,10 @@ export default class ChatStatusAutomation extends CritAutomation {
     });
   }
 
+  /**
+   * The initial relation option.
+   * @returns {string}
+   */
   static get _relationInitial() {
     return "apply";
   }

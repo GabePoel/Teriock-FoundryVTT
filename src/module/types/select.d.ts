@@ -13,6 +13,8 @@ declare global {
       nameKey?: string;
       /** Whether document sheets can be opened on double click */
       openable?: boolean;
+      /** Whether to suppress warnings if there's no documents to select from. */
+      silent?: boolean;
       /** Path to some extra text to display for each document */
       textKey?: string;
       /** Title for the dialog */
@@ -28,6 +30,8 @@ declare global {
     };
 
     export type DocumentSelect = Teriock.SelectOptions.BaseDocumentSelect & {
+      /** Automatically select the only option if exactly one is provided? */
+      auto?: boolean;
       /** Which document is checked? */
       checked?: string;
     };
@@ -39,8 +43,6 @@ declare global {
       multi?: boolean;
       /** A custom message to show if there's no documents to select from. */
       noDocumentsMessage?: string;
-      /** Whether to suppress warnings if there's no documents to select from. */
-      silent?: boolean;
     };
 
     export type SelectDocument = {

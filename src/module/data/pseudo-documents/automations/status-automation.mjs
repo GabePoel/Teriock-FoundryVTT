@@ -4,8 +4,9 @@ const { fields } = foundry.data;
 
 /**
  * @property {"apply"|"remove"|"toggle"|"include"} relation
- * @property {boolean} target
  * @property {boolean} executor
+ * @property {boolean} multi
+ * @property {boolean} target
  */
 export default class StatusAutomation extends ChatStatusAutomation {
   /** @inheritDoc */
@@ -19,6 +20,7 @@ export default class StatusAutomation extends ChatStatusAutomation {
     return "status";
   }
 
+  /** @inheritDoc */
   static get _relationChoices() {
     return {
       ...super._relationChoices,
@@ -28,6 +30,7 @@ export default class StatusAutomation extends ChatStatusAutomation {
     };
   }
 
+  /** @inheritDoc */
   static get _relationInitial() {
     return "include";
   }
@@ -36,6 +39,7 @@ export default class StatusAutomation extends ChatStatusAutomation {
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       executor: new fields.BooleanField(),
+      multi: new fields.BooleanField(),
       target: new fields.BooleanField(),
     });
   }
@@ -43,8 +47,33 @@ export default class StatusAutomation extends ChatStatusAutomation {
   /** @inheritDoc */
   get _formPaths() {
     const paths = super._formPaths;
-    if (this.relation === "include" && !this.isPassive)
-      paths.push(...["target", "executor"]);
+    if (this.relation === "include" && !this.isPassive) {
+      paths.push(...["hr", "executor", "target"]);
+      if (this.target) paths.push("multi");
+    }
     return paths;
+  }
+
+  /**
+   * Select visible tokens to associate this status with.
+   * @param {Teriock.SelectOptions.DocumentsSelect} options
+   * @returns {Promise<TeriockTokenDocument[]>}
+   */
+  async selectVisibleTokens(options = {}) {
+    return game.user.selectVisibleTokens({
+      hint: _loc(
+        "TERIOCK.AUTOMATIONS.Status.DIALOGS.SelectVisibleTokens.hint",
+        {
+          effect:
+            this.document?.name ||
+            _loc(
+              "TERIOCK.AUTOMATIONS.Status.DIALOGS.SelectVisibleTokens.effect",
+            ),
+          status: TERIOCK.reference.conditions[this.status],
+        },
+      ),
+      multi: this.multi,
+      ...options,
+    });
   }
 }

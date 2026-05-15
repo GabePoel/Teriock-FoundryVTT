@@ -9,27 +9,25 @@ import { TeriockTextEditor } from "../ux/_module.mjs";
  * @returns {Promise<T[]>}
  */
 export async function selectDocumentsDialog(documents, options = {}) {
-  options = foundry.utils.mergeObject(
-    {
-      checked: [],
-      hint: "",
-      idKey: "uuid",
-      imgKey: "img",
-      multi: true,
-      nameKey: "name",
-      noDocumentsMessage: _loc("TERIOCK.DIALOGS.SelectDocument.noOptions"),
-      openable: false,
-      silent: false,
-      textKey: null,
-      title: _loc("TERIOCK.DIALOGS.SelectDocument.defaults.title"),
-      tooltip: true,
-      tooltipAsync: false,
-      tooltipKey: null,
-      tooltipUUID: "uuid",
-      localize: false,
-    },
-    options,
-  );
+  options = {
+    checked: [],
+    hint: "",
+    idKey: "uuid",
+    imgKey: "img",
+    multi: true,
+    nameKey: "name",
+    noDocumentsMessage: _loc("TERIOCK.DIALOGS.SelectDocument.noOptions"),
+    openable: false,
+    silent: false,
+    textKey: null,
+    title: _loc("TERIOCK.DIALOGS.SelectDocument.defaults.title"),
+    tooltip: true,
+    tooltipAsync: false,
+    tooltipKey: null,
+    tooltipUUID: "uuid",
+    localize: true,
+    ...options,
+  };
 
   if (options.localize) {
     options.noDocumentsMessage = _loc(options.noDocumentsMessage);
@@ -110,11 +108,8 @@ export async function selectDocumentsDialog(documents, options = {}) {
   });
 
   const selected = await sheet.select();
-  if (selected) {
-    return selected.map((id) => idToDoc.get(id)).filter(Boolean);
-  } else {
-    return [];
-  }
+  if (selected) return selected.map((id) => idToDoc.get(id)).filter(Boolean);
+  else return [];
 }
 
 /**
@@ -125,6 +120,8 @@ export async function selectDocumentsDialog(documents, options = {}) {
  * @returns {Promise<T|null>}
  */
 export async function selectDocumentDialog(documents, options = {}) {
+  if ((options.auto ?? true) && documents.length === 1) return documents[0];
+  if (options.silent && !documents.length) return null;
   const selected = await selectDocumentsDialog(documents, {
     ...options,
     multi: false,

@@ -1,4 +1,3 @@
-import { conditionDialog } from "../../../../applications/dialogs/select-token-dialog.mjs";
 import { costConfig } from "../../../../constants/config/cost-config.mjs";
 import { FormulaField } from "../../../../data/fields/_module.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
@@ -122,7 +121,7 @@ export default function AbilityExecutionChatPart(Base) {
         });
         const targetAutomations = statusAutomations.filter((a) => a.target);
         for (const a of targetAutomations) {
-          const uuids = await conditionDialog(a.status);
+          const uuids = (await a.selectVisibleTokens()).map((t) => t.uuid);
           this.#attachTrackedStatusAutomationUuids(a, uuids);
         }
         const executorAutomations = statusAutomations.filter((a) => a.executor);

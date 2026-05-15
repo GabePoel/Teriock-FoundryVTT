@@ -6,6 +6,7 @@ const { Ray } = foundry.canvas.geometry;
 
 /**
  * @property {UUID<TeriockTokenDocument>} token
+ * @property {boolean} originBarrier
  * @property {boolean} randomDirection
  * @property {number|null} x
  * @property {number|null} y
@@ -37,6 +38,7 @@ export default class MoveActivation extends BaseActivation {
         initial: null,
         required: false,
       }),
+      originBarrier: new fields.BooleanField(),
       randomDirection: new fields.BooleanField(),
       token: new fields.DocumentUUIDField({
         type: "Token",
@@ -124,14 +126,14 @@ export default class MoveActivation extends BaseActivation {
         );
       } else {
         const currentRay = Ray.fromArrays([origin.x, origin.y], [t.x, t.y]);
-        ray = Ray.towardsPoint(
-          { x: t.x, y: t.y },
-          origin,
-          Math.min(
+        let fullDistance = -distance * scene.dimensions.distancePixels;
+        if (this.originBarrier) {
+          fullDistance = Math.min(
+            fullDistance,
             currentRay.distance - 5 * scene.dimensions.distancePixels,
-            -distance * scene.dimensions.distancePixels,
-          ),
-        );
+          );
+        }
+        ray = Ray.towardsPoint({ x: t.x, y: t.y }, origin, fullDistance);
       }
       if (!ray) continue;
       instructions[t.id] = {
