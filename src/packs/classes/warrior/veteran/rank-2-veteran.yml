@@ -56,7 +56,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.52
+      systemVersion: 0.12.53
     img: systems/teriock/src/icons/abilities/fortify-area.webp
     name: Fortify Area
     system:
@@ -158,7 +158,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.52
+      systemVersion: 0.12.53
     img: systems/teriock/src/icons/abilities/tumble.webp
     name: Tumble
     system:
@@ -181,13 +181,39 @@ effects:
             conditions: false
             triggers: false
           type: expiration
+        KZJ2N3W1O5Hm0Y4a:
+          _id: KZJ2N3W1O5Hm0Y4a
+          display:
+            label: Move Randomly
+          distance: '5'
+          movementAction: walk
+          origin: random
+          originBarrier: true
+          type: move
+        LGh4yKXRJOFrgnM2:
+          _id: LGh4yKXRJOFrgnM2
+          display:
+            label: Move Back
+          distance: '5'
+          movementAction: walk
+          origin: target
+          originBarrier: true
+          type: move
+        AW2QK35iCBSYIP88:
+          _id: AW2QK35iCBSYIP88
+          executor: false
+          multi: false
+          relation: include
+          status: snared
+          target: false
+          type: status
       class: veteran
       competence:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
-        unit: instant
+        raw: '1'
+        unit: minute
       effectTypes:
         - movement
       endCondition: >-
@@ -204,16 +230,14 @@ effects:
       maneuver: reactive
       overview:
         base: >-
-          <p>You take only half the triggering @L[Core:Damage]{damage}.</p><div
-          class="note"><b>Note:</b> You must be able to @L[Core:Movement
-          Speed]{move} to use [[lookup name]]. This means you cannot use it
-          while @L[Condition:Snared]{snared}.</div><div
-          class="note"><b>Note:</b> The @L[Core:Damage]{damage} is rounded
-          <i>down</i>. If there are multiple independent @L[Category:Damage
-          types]{types of damage} then they are halved independently. If you
-          were originally dealt 15 @L[Damage:Fire]{fire damage} and 3
-          @L[Damage:Holy]{holy damage} then you would only take 7
-          @L[Damage:Fire]{fire damage} and 1 @L[Damage:Holy]{holy damage}.</div>
+          <p>You are moved 5 feet in the direction opposite the source of the
+          damage and become @L[Condition:Snared]{snared}. If there is no
+          direction associated with the source of the @L[Core:Damage]{damage},
+          you move in a random direction instead. This movement does not count
+          as a trigger for @L[Ability:Opportunity Attack]{Opportunity Attack}.
+          If this all completes without interruption, you take only half the
+          triggering @L[Core:Damage]{damage}. If the @L[Core:Damage]{damage} has
+          multiple types, each type is rounded down independently.</p>
       piercing:
         raw: 0
       powerSources:
@@ -234,7 +258,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.52
+      systemVersion: 0.12.53
     img: systems/teriock/src/icons/abilities/unbreachability.webp
     name: Unbreachability
     system:
@@ -284,7 +308,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.52
+      systemVersion: 0.12.53
     img: systems/teriock/src/icons/abilities/bodyguard-backup.webp
     name: Bodyguard Backup
     system:
@@ -347,7 +371,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.52
+      systemVersion: 0.12.53
     img: systems/teriock/src/icons/abilities/bodyguard-taunt.webp
     name: Bodyguard Taunt
     system:
@@ -374,6 +398,7 @@ effects:
         6cebaedf0c5c1507:
           _id: 6cebaedf0c5c1507
           executor: false
+          multi: false
           relation: include
           status: goaded
           target: true

@@ -53,7 +53,7 @@ export default class MoveActivation extends BaseActivation {
   /** @inheritDoc */
   get label() {
     return (
-      this.distance.label ||
+      this.display.label ||
       _loc("TERIOCK.ACTIVATIONS.Move.BUTTON", { distance: this.distance }) ||
       this.constructor.LABEL
     );

@@ -47,6 +47,20 @@
               size="sheet.blockInventorySize"
             }}
           </div>
+          <div class="teriock-block-display character-notes-content">
+            <prose-mirror
+              name="system.notes"
+              value="{{system.notes}}"
+              toggled="true"
+              editable="editable"
+            >
+              {{#if (exists enrichedNotes)}}
+                {{{enrichedNotes}}}
+              {{else}}
+                {{localize "TERIOCK.SHEETS.Actor.TABS.Details.notes.placeholder"}}
+              {{/if}}
+            </prose-mirror>
+          </div>
         </div>
       </div>
     </div>

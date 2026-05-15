@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.52
+      systemVersion: 0.12.53
     img: systems/teriock/src/icons/abilities/advanced-hearing.webp
     name: Advanced Hearing
     system:
@@ -179,16 +179,30 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.36
+      systemVersion: 0.12.53
     img: systems/teriock/src/icons/abilities/endurance.webp
     name: Endurance
     system:
+      automations:
+        kvb8ljHV9pTRbujl:
+          _id: kvb8ljHV9pTRbujl
+          category: statuses
+          relation: resistances
+          type: protection
+          value: suffocating
+        8f623097f9f2a087:
+          _id: 8f623097f9f2a087
+          bonus: '0'
+          hex: false
+          type: resist
       competence:
         raw: 0
       delivery: self
       duration:
         raw: '0'
         unit: unlimited
+      effectTypes:
+        - resistance
       executionTime:
         base: passive
         slow:
@@ -204,10 +218,11 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>Harsh conditions or long exertions do not easily tire you. You have
-          @L[Core:Advantage]{advantage} on all saves or checks made to against
-          exhaustion, running out of breath, starvation, thirst, heat, and
-          cold.</p>
+          <p>Harsh conditions or long exertions do not easily tire you. You
+          @L[Keyword:Resistance]{resist} @L[Condition:Suffocating]{suffocation}
+          and have @L[Core:Advantage]{advantage} on all saves or checks made
+          against exhaustion, running out of breath, starvation, thirst, heat,
+          and cold.</p>
       piercing:
         raw: 0
       powerSources:
@@ -494,7 +509,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.52
+      systemVersion: 0.12.53
     img: systems/teriock/src/icons/abilities/trample.webp
     name: Trample
     system:
